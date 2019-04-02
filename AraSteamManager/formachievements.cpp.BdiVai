@@ -1,0 +1,79 @@
+#include "formachievements.h"
+#include "ui_formachievements.h"
+
+FormAchievements::FormAchievements(QString keys, int languages, QString ids, QString appids, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::FormAchievements)
+{
+    ui->setupUi(this);
+    key=keys;
+    language=languages;
+    id=ids;
+    appid=appids;
+
+    QEventLoop loop;
+
+    QNetworkAccessManager manager;
+
+    QNetworkReply &replyNumberOfCurrentPlayers = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    JsonDocNumberOfCurrentPlayers = QJsonDocument::fromJson(replyNumberOfCurrentPlayers.readAll());
+
+    QNetworkReply &replyGlobalAchievementPercentagesForApp = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+    //QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    JsonDocGlobalAchievementPercentagesForApp = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
+    QNetworkReply &replyNumberOfCurrentPlayers = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+    //QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    JsonDocNumberOfCurrentPlayers = QJsonDocument::fromJson(replyNumberOfCurrentPlayers.readAll());
+    JsonDocPlayerAchievements =
+    QNetworkReply &replyNumberOfCurrentPlayers = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+    //QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    JsonDocNumberOfCurrentPlayers = QJsonDocument::fromJson(replyNumberOfCurrentPlayers.readAll());
+    JsonDocSchemaForGame =
+    //{"appid":218620,
+    //"name":"PAYDAY 2",
+    //"playtime_2weeks":329,
+    //"playtime_forever":45501,
+    //"img_icon_url":"a6abc0d0c1e79c0b5b0f5c8ab81ce9076a542414",
+    //"img_logo_url":"4467a70648f49a6b309b41b81b4531f9a20ed99d",
+    //"has_community_visible_stats":true}
+    QJsonArray JsonArayGames=JsonDocAchievements.object().value("response").toObject().value("games").toArray();
+    ui->FormAchievementsTableWidgetAchievements->setColumnCount(6);
+
+    switch (language) {
+    case 1:{
+        ui->FormAchievementsButtonReturn->setText("Return");
+        ui->FormAchievementsButtonCompare->setText("Compare with friends");
+        ui->FormAchievementsLabelGameLogo->setText("");
+        ui->FormAchievementsGroupBoxFilter->setTitle("Filter");
+        ui->FormAchievementsLineEditNameAchievements->setPlaceholderText("Achievement name");
+        break;
+    }
+    case 5:{
+        ui->FormAchievementsButtonReturn->setText("Вернуться");
+        ui->FormAchievementsButtonCompare->setText("Сравнить с друзьями");
+        ui->FormAchievementsLabelGameLogo->setText("");
+        ui->FormAchievementsGroupBoxFilter->setTitle("Фильтр");
+        ui->FormAchievementsLineEditNameAchievements->setPlaceholderText("Название достижения");
+    }
+    }
+
+}
+
+FormAchievements::~FormAchievements()
+{
+    delete ui;
+}
+
+void FormAchievements::closeEvent(QCloseEvent *){
+    on_FormAchievementsButtonReturn_clicked();
+}
+
+void FormAchievements::on_FormAchievementsButtonReturn_clicked(){
+    emit return_to_games();
+    delete this;
+}

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormAchievements</class>
+ <widget class="QWidget" name="FormAchievements">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>734</width>
+    <height>567</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="5" column="0" colspan="6">
+    <widget class="QTableWidget" name="FormAchievementsTableWidgetAchievements"/>
+   </item>
+   <item row="1" column="0" rowspan="2" colspan="6">
+    <widget class="QGroupBox" name="FormAchievementsGroupBoxFilter">
+     <property name="title">
+      <string>Filter</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="2">
+       <widget class="QRadioButton" name="FormAchievementsRadioButtonAll">
+        <property name="text">
+         <string>All</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="FormAchievementsButtonChangeCategory">
+        <property name="text">
+         <string>Change category</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QCheckBox" name="FormAchievementsCheckBoxFavorites">
+        <property name="text">
+         <string>Only favorites</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="FormAchievementsButtonFindAchievement">
+        <property name="text">
+         <string>Find</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLineEdit" name="FormAchievementsLineEditNameAchievements"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QRadioButton" name="FormAchievementsRadioButtonReached">
+        <property name="text">
+         <string>Reached</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QRadioButton" name="FormAchievementsRadioButtonNotReached">
+        <property name="text">
+         <string>Not reached</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" rowspan="4">
+       <widget class="QScrollArea" name="FormAchievementsScrollAreaCategories">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>494</width>
+           <height>71</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="FormAchievementsButtonAddCategory">
+        <property name="text">
+         <string>Add category</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="FormAchievementsLabelTotalPersent">
+        <property name="text">
+         <string>TotalPersent</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="FormAchievementsLabelGameOnline">
+     <property name="text">
+      <string>GameOnline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="FormAchievementsButtonCompare">
+     <property name="text">
+      <string>Compare with friends</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="FormAchievementsLabelGameLogo">
+     <property name="text">
+      <string>GameLogo</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="5">
+    <widget class="QPushButton" name="FormAchievementsButtonReturn">
+     <property name="text">
+      <string>Return</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="FormAchievementsLabelGameName">
+     <property name="text">
+      <string>GameName</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
