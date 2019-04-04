@@ -10,7 +10,6 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     language=languages;
     id=ids;
     appid=appids;
-
     QEventLoop loop;
     QNetworkAccessManager manager;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -64,6 +63,27 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     }
     }
     ui->FormAchievementsLabelGameName->setText(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("gameName").toString());
+    QNetworkReply &gamereply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id)));
+    loop.exec();
+    QJsonDocument JsonDocGame = QJsonDocument::fromJson(gamereply.readAll());
+    //{"appid":218620,
+    //"name":"PAYDAY 2",
+    //"playtime_2weeks":329,
+    //"playtime_forever":45501,
+    //"img_icon_url":"a6abc0d0c1e79c0b5b0f5c8ab81ce9076a542414",
+    //"img_logo_url":"4467a70648f49a6b309b41b81b4531f9a20ed99d",
+    //"has_community_visible_stats":true}
+    int k=0;
+    for (;k<JsonDocGame.object().value("response").toObject().value("games").toArray().size();k++) {
+        if(JsonDocGame.object().value("response").toObject().value("games").toArray().at(k).toObject().value("appid").toString()==appid)
+            break;
+    }
+    QNetworkReply &logoreply = *manager.get(QNetworkRequest(QString("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonDocGame.object().value("response").toObject().value("games").toArray().at(k).toObject().value("appid").toInt())+"/"+JsonDocGame.object().value("response").toObject().value("games").toArray().at(k).toObject().value("img_icon_url").toString())+".jpg"));
+    loop.exec();
+    QPixmap pixmap;
+    pixmap.loadFromData(logoreply.readAll());
+    ui->FormAchievementsLabelGameLogo->setPixmap(pixmap);
+
     int total=0;
     switch (language) {
     case 1:{

@@ -266,6 +266,8 @@ release/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QMessageBox \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qdialog.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QPixmap \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QImage \
 		../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QLabel \
@@ -275,9 +277,13 @@ release/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qpushbutton.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/formachievements.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItem \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItemModel \
 		release/moc_predefs.h \
 		D:/Qt/5.12.1/mingw73_64/bin/moc.exe
-	D:\Qt\5.12.1\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/All/AraSteamManager/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.12.1/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/All/AraSteamManager/AraSteamManager/AraSteamManager -ID:/Qt/5.12.1/mingw73_64/include -ID:/Qt/5.12.1/mingw73_64/include/QtWidgets -ID:/Qt/5.12.1/mingw73_64/include/QtGui -ID:/Qt/5.12.1/mingw73_64/include/QtANGLE -ID:/Qt/5.12.1/mingw73_64/include/QtNetwork -ID:/Qt/5.12.1/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\mainwindow.h -o release\moc_mainwindow.cpp
+	D:\Qt\5.12.1\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/123/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.12.1/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/123/AraSteamManager/AraSteamManager -ID:/Qt/5.12.1/mingw73_64/include -ID:/Qt/5.12.1/mingw73_64/include/QtWidgets -ID:/Qt/5.12.1/mingw73_64/include/QtGui -ID:/Qt/5.12.1/mingw73_64/include/QtANGLE -ID:/Qt/5.12.1/mingw73_64/include/QtNetwork -ID:/Qt/5.12.1/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\mainwindow.h -o release\moc_mainwindow.cpp
 
 release/moc_formgames.cpp: ../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
@@ -427,9 +433,13 @@ release/moc_formgames.cpp: ../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtGui/qicon.h \
 		../AraSteamManager/formachievements.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItem \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItemModel \
 		release/moc_predefs.h \
 		D:/Qt/5.12.1/mingw73_64/bin/moc.exe
-	D:\Qt\5.12.1\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/All/AraSteamManager/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.12.1/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/All/AraSteamManager/AraSteamManager/AraSteamManager -ID:/Qt/5.12.1/mingw73_64/include -ID:/Qt/5.12.1/mingw73_64/include/QtWidgets -ID:/Qt/5.12.1/mingw73_64/include/QtGui -ID:/Qt/5.12.1/mingw73_64/include/QtANGLE -ID:/Qt/5.12.1/mingw73_64/include/QtNetwork -ID:/Qt/5.12.1/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\formgames.h -o release\moc_formgames.cpp
+	D:\Qt\5.12.1\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/123/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.12.1/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/123/AraSteamManager/AraSteamManager -ID:/Qt/5.12.1/mingw73_64/include -ID:/Qt/5.12.1/mingw73_64/include/QtWidgets -ID:/Qt/5.12.1/mingw73_64/include/QtGui -ID:/Qt/5.12.1/mingw73_64/include/QtANGLE -ID:/Qt/5.12.1/mingw73_64/include/QtNetwork -ID:/Qt/5.12.1/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\formgames.h -o release\moc_formgames.cpp
 
 release/moc_formachievements.cpp: ../AraSteamManager/formachievements.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
@@ -571,9 +581,14 @@ release/moc_formachievements.cpp: ../AraSteamManager/formachievements.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/qjsonobject.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/QJsonArray \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/qjsonarray.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItem \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qicon.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItemModel \
 		release/moc_predefs.h \
 		D:/Qt/5.12.1/mingw73_64/bin/moc.exe
-	D:\Qt\5.12.1\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/All/AraSteamManager/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.12.1/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/All/AraSteamManager/AraSteamManager/AraSteamManager -ID:/Qt/5.12.1/mingw73_64/include -ID:/Qt/5.12.1/mingw73_64/include/QtWidgets -ID:/Qt/5.12.1/mingw73_64/include/QtGui -ID:/Qt/5.12.1/mingw73_64/include/QtANGLE -ID:/Qt/5.12.1/mingw73_64/include/QtNetwork -ID:/Qt/5.12.1/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\formachievements.h -o release\moc_formachievements.cpp
+	D:\Qt\5.12.1\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/123/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.12.1/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/123/AraSteamManager/AraSteamManager -ID:/Qt/5.12.1/mingw73_64/include -ID:/Qt/5.12.1/mingw73_64/include/QtWidgets -ID:/Qt/5.12.1/mingw73_64/include/QtGui -ID:/Qt/5.12.1/mingw73_64/include/QtANGLE -ID:/Qt/5.12.1/mingw73_64/include/QtNetwork -ID:/Qt/5.12.1/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\formachievements.h -o release\moc_formachievements.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -755,6 +770,8 @@ release/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QMessageBox \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qdialog.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QPixmap \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QImage \
 		../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QLabel \
@@ -764,6 +781,10 @@ release/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qpushbutton.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/formachievements.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItem \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItemModel \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QApplication \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qapplication.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/qcoreapplication.h \
@@ -924,6 +945,8 @@ release/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainw
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QMessageBox \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qdialog.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QPixmap \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QImage \
 		../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QLabel \
@@ -933,6 +956,10 @@ release/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainw
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qpushbutton.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/formachievements.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItem \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItemModel \
 		ui_mainwindow.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QApplication \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qapplication.h \
@@ -1112,6 +1139,10 @@ release/formgames.o: ../AraSteamManager/formgames.cpp ../AraSteamManager/formgam
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtGui/qicon.h \
 		../AraSteamManager/formachievements.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItem \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItemModel \
 		ui_formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QApplication \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qapplication.h \
@@ -1129,7 +1160,6 @@ release/formgames.o: ../AraSteamManager/formgames.cpp ../AraSteamManager/formgam
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qheaderview.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractitemview.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
-		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/qitemselectionmodel.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qstyleoption.h \
@@ -1293,6 +1323,11 @@ release/formachievements.o: ../AraSteamManager/formachievements.cpp ../AraSteamM
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/qjsonobject.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/QJsonArray \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/qjsonarray.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItem \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qstandarditemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/qicon.h \
+		D:/Qt/5.12.1/mingw73_64/include/QtGui/QStandardItemModel \
 		ui_formachievements.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QApplication \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qapplication.h \
@@ -1304,7 +1339,6 @@ release/formachievements.o: ../AraSteamManager/formachievements.cpp ../AraSteamM
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QCheckBox \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qcheckbox.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		D:/Qt/5.12.1/mingw73_64/include/QtGui/qicon.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QGridLayout \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qgridlayout.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qlayout.h \
@@ -1317,7 +1351,6 @@ release/formachievements.o: ../AraSteamManager/formachievements.cpp ../AraSteamM
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qheaderview.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractitemview.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
-		D:/Qt/5.12.1/mingw73_64/include/QtCore/qabstractitemmodel.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtCore/qitemselectionmodel.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qstyleoption.h \

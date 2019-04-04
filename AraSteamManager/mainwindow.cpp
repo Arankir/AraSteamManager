@@ -117,8 +117,8 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked()
     loop.exec();
     QByteArray Data = reply.readAll();
     QJsonDocument document = QJsonDocument::fromJson(Data);
+    qDebug() << document;
     QNetworkReply &gamesreply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id)));
-    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
     loop.exec();
     QByteArray Datagames = gamesreply.readAll();
     //{"appid":218620,
@@ -130,7 +130,6 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked()
     //"has_community_visible_stats":true}
     QJsonDocument documentgames = QJsonDocument::fromJson(Datagames);
     QNetworkReply &friendsreply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend")));
-    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
     loop.exec();
     QByteArray Datafriends = friendsreply.readAll();
     //{"steamid":"76561197972251526",

@@ -132,3 +132,11 @@ void FormGames::FavoritesClicked(){
 void FormGames::on_return(){
     this->setEnabled(true);
 }
+
+void FormGames::on_FormGamesLineEditGame_textChanged(const QString){
+    for (int i=0;i<ui->FormGamesTableWidgetGames->rowCount();i++) {
+        if(ui->FormGamesTableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->FormGamesLineEditGame->text().toUpper(),0)>-1)
+            ui->FormGamesTableWidgetGames->setRowHidden(i,false); else
+            ui->FormGamesTableWidgetGames->setRowHidden(i,true);
+    }
+}
