@@ -28,17 +28,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     formgames.cpp \
-    formachievements.cpp
+    formachievements.cpp \
+    formnewcategory.cpp
 
 HEADERS += \
         mainwindow.h \
     formgames.h \
-    formachievements.h
+    formachievements.h \
+    formnewcategory.h
 
 FORMS += \
         mainwindow.ui \
     formgames.ui \
-    formachievements.ui
+    formachievements.ui \
+    formnewcategory.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

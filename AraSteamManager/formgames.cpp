@@ -117,12 +117,10 @@ void FormGames::on_FormGamesButtonReturn_clicked()
 
 void FormGames::AchievementsClicked(){
     QPushButton *btn = (QPushButton*) sender();
-    if(true){
         achievementsform = new FormAchievements(key,language,id,btn->objectName().mid(27,btn->objectName().length()));
         connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(on_return()));
         achievementsform->show();
         this->setEnabled(false);
-    }
 }
 
 void FormGames::FavoritesClicked(){
@@ -139,4 +137,8 @@ void FormGames::on_FormGamesLineEditGame_textChanged(const QString){
             ui->FormGamesTableWidgetGames->setRowHidden(i,false); else
             ui->FormGamesTableWidgetGames->setRowHidden(i,true);
     }
+}
+
+void FormGames::on_FormGamesButtonFind_clicked(){
+    on_FormGamesLineEditGame_textChanged(ui->FormGamesLineEditGame->text());
 }

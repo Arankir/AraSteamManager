@@ -10,6 +10,7 @@
 #include <QJsonArray>
 #include <QStandardItem>
 #include <QStandardItemModel>
+#include <formnewcategory.h>
 
 namespace Ui {
 class FormAchievements;
@@ -22,6 +23,7 @@ class FormAchievements : public QWidget
 public:
     explicit FormAchievements(QString, int, QString, QString, QWidget *parent = nullptr);
     ~FormAchievements();
+    FormNewCategory *newcategoryform;
 
 signals:
     void return_to_games();
@@ -30,6 +32,9 @@ private slots:
     void closeEvent(QCloseEvent *);
     void on_FormAchievementsButtonReturn_clicked();
     void FavoritesClicked();
+
+    void on_FormAchievementsButtonAddCategory_clicked();
+    void on_return();
 
 private:
     Ui::FormAchievements *ui;

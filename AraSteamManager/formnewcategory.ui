@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormNewCategory</class>
+ <widget class="QWidget" name="FormNewCategory">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>941</width>
+    <height>605</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QLabel" name="FormAddCategoryLabelParameterValue">
+     <property name="text">
+      <string>ParameterValue</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QLineEdit" name="FormAddCategoryLineEditNameCategory">
+     <property name="placeholderText">
+      <string>None</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="5">
+    <widget class="QTableWidget" name="FormAddCategoryTableWidgetAchievements"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="FormAddCategoryLabelNameCategory">
+     <property name="text">
+      <string>Name Category</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4" rowspan="3">
+    <widget class="QScrollArea" name="FormAddCategoryScrollAreaValuae">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>610</width>
+        <height>75</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="FormAddCategoryLineEditNameValue"/>
+   </item>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="FormAddCategoryButtonAddParameterValue">
+     <property name="text">
+      <string>Add parameter value</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QLabel" name="FormAddCategoryLabelGame">
+     <property name="text">
+      <string>Game</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QPushButton" name="FormAddCategoryButtonCancel">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="3">
+    <widget class="QPushButton" name="FormAddCategoryButtonAddCategory">
+     <property name="text">
+      <string>Add category</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

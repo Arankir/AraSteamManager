@@ -41,6 +41,8 @@ private slots:
 
     void on_FormGamesLineEditGame_textChanged(const QString);
 
+    void on_FormGamesButtonFind_clicked();
+
 private:
     Ui::FormGames *ui;
     QString id;

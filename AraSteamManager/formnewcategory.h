@@ -1,0 +1,44 @@
+#ifndef FORMNEWCATEGORY_H
+#define FORMNEWCATEGORY_H
+
+#include <QWidget>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QStandardItem>
+#include <QStandardItemModel>
+#include <QCheckBox>
+#include <QMessageBox>
+
+namespace Ui {
+class FormNewCategory;
+}
+
+class FormNewCategory : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit FormNewCategory(QString id, QString key, int language, QString, QWidget *parent = nullptr);
+    ~FormNewCategory();
+
+private slots:
+    void on_FormAddCategoryButtonAddParameterValue_clicked();
+
+private:
+    Ui::FormNewCategory *ui;
+    QString id;
+    QString key;
+    int language;
+    QString appid;
+    QVector <QPair<QString, QVector<QCheckBox*>>> variants;
+    QJsonDocument JsonDocNumberOfCurrentPlayers;
+    QJsonDocument JsonDocGlobalAchievementPercentagesForApp;
+    QJsonDocument JsonDocPlayerAchievements;
+    QJsonDocument JsonDocSchemaForGame;
+};
+
+#endif // FORMNEWCATEGORY_H

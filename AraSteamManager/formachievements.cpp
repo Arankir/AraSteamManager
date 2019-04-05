@@ -205,3 +205,15 @@ void FormAchievements::on_FormAchievementsButtonReturn_clicked(){
 void FormAchievements::FavoritesClicked(){
 
 }
+
+void FormAchievements::on_FormAchievementsButtonAddCategory_clicked()
+{
+    newcategoryform = new FormNewCategory(id,key,language,appid);
+    connect(newcategoryform,SIGNAL(return_to_games()),this,SLOT(on_return()));
+    newcategoryform->show();
+    this->setEnabled(false);
+}
+
+void FormAchievements::on_return(){
+    this->setEnabled(true);
+}
