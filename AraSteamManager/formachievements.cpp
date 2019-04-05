@@ -96,9 +96,6 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
                 }
                 QNetworkReply &imagereply = *manager.get(QNetworkRequest(QString(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString())));
                 loop.exec();
-                QImage img;
-                    img.loadFromData(imagereply.readAll());
-                    qDebug() <<img;
                 QPixmap pixmap;
                 pixmap.loadFromData(imagereply.readAll());
                 QLabel *label = new QLabel("");
@@ -173,13 +170,13 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
                 connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
                 button1->setObjectName("FormGamesButtonFavorites"+appid+"%"+JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname").toString());
                 ui->FormAchievementsTableWidgetAchievements->setCellWidget(row,5,button1);
-                ui->FormAchievementsTableWidgetAchievements->setRowHeight(row,64);
             }
             }
         double percent= 1.0*total/JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().size()*100;
         ui->FormAchievementsLabelTotalPersent->setText("Общий процент = "+QString::number(percent)+"%");
     }
     }
+    ui->FormAchievementsTableWidgetAchievements->setRowHeight(ui->FormAchievementsTableWidgetAchievements->rowCount(),64);
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(0,65);
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(1,100);
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(2,315);

@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->FormProfileLabelProfileUrl->setText("");
     ui->FormProfileLabelRealName->setText("");
     ui->FormProfileButtonGames->setVisible(false);
-    ui->FormProfileButtonBadges->setVisible(false);
     ui->FormProfileButtonFriends->setVisible(false);
     ui->FormProfileButtonFavorites->setVisible(false);
     ui->FormProfileButtonSetProfile->setVisible(false);
@@ -24,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     case 1:{
         ui->FormProfileButtonFindProfile->setText("Find");
         ui->FormProfileLineEditIdProfile->setPlaceholderText("Insert SteamId");
-        ui->FormProfileButtonBadges->setText("Badges");
         ui->FormProfileButtonFavorites->setText("Favorites");
         ui->FormProfileButtonSetProfile->setText("Set as my profile");
         ui->FormProfileButtonStatistics->setText("Statistics");
@@ -34,13 +32,13 @@ MainWindow::MainWindow(QWidget *parent) :
     case 5:{
         ui->FormProfileButtonFindProfile->setText("Найти");
         ui->FormProfileLineEditIdProfile->setPlaceholderText("Введите SteamId");
-        ui->FormProfileButtonBadges->setText("Значки");
         ui->FormProfileButtonFavorites->setText("Избранное");
         ui->FormProfileButtonSetProfile->setText("Установить как мой профиль");
         ui->FormProfileButtonStatistics->setText("Статистика");
         ui->FormProfileButtonSettings->setText("Настройки");
     }
     }
+    int Theme=1;
     QFile file("Files/Settings.txt");
     if(QFile::exists("Files/Settings.txt"))
     {
@@ -70,30 +68,44 @@ MainWindow::MainWindow(QWidget *parent) :
                         ui->FormProfileButtonFindProfile->click();
                     }
                 }
+                if(FileLine.indexOf("Theme=",0)!=-1){
+                        Theme=FileLine.mid(FileLine.indexOf("Theme=",0)+6,FileLine.length()).toInt();
+                    }
             }
+            file.close();
         }
     }
-    file.close();
-    //темная тема
-    // Создаём палитру для тёмной темы оформления
+    switch(Theme){
+    case 1:{
     QPalette darkPalette;
-    // Настраиваем палитру для цветовых ролей элементов интерфейса
     darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),QColor(42, 130, 218),Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-//    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
-//    darkPalette.setColor(QPalette::WindowText, Qt::white);
-//    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
-//    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-//    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
-//    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
-//    darkPalette.setColor(QPalette::Text, Qt::white);
-//    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
-//    darkPalette.setColor(QPalette::ButtonText, Qt::white);
-//    darkPalette.setColor(QPalette::BrightText, Qt::red);
-//    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
-//    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-//    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-    // Устанавливаем данную палитру
+    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),QColor(42, 130, 218),Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+    darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),QColor(42, 130, 218),Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
     qApp->setPalette(darkPalette);
+    break;
+    }
+    case 2:{
+        // Создаём палитру для тёмной темы оформления
+
+        // Настраиваем палитру для цветовых ролей элементов интерфейса
+    //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
+    //    darkPalette.setColor(QPalette::WindowText, Qt::white);
+    //    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
+    //    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+    //    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
+    //    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
+    //    darkPalette.setColor(QPalette::Text, Qt::white);
+    //    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
+    //    darkPalette.setColor(QPalette::ButtonText, Qt::white);
+    //    darkPalette.setColor(QPalette::BrightText, Qt::red);
+    //    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
+    //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+    //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+        // Устанавливаем данную палитру
+    break;
+    }
+    }
+
 }
 
 MainWindow::~MainWindow()
@@ -115,27 +127,15 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked()
     QEventLoop loop;  //Ждем ответ от сервера.
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
     loop.exec();
-    QByteArray Data = reply.readAll();
-    QJsonDocument document = QJsonDocument::fromJson(Data);
+    QJsonDocument document = QJsonDocument::fromJson( reply.readAll());
     qDebug() << document;
-    QNetworkReply &gamesreply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id)));
+    QNetworkReply &gamesreply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&format=json&steamid="+id)));
     loop.exec();
-    QByteArray Datagames = gamesreply.readAll();
-    //{"appid":218620,
-    //"name":"PAYDAY 2",
-    //"playtime_2weeks":329,
-    //"playtime_forever":45501,
-    //"img_icon_url":"a6abc0d0c1e79c0b5b0f5c8ab81ce9076a542414",
-    //"img_logo_url":"4467a70648f49a6b309b41b81b4531f9a20ed99d",
-    //"has_community_visible_stats":true}
-    QJsonDocument documentgames = QJsonDocument::fromJson(Datagames);
+    QJsonDocument documentgames = QJsonDocument::fromJson(gamesreply.readAll());
+    qDebug() << documentgames;
     QNetworkReply &friendsreply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend")));
     loop.exec();
-    QByteArray Datafriends = friendsreply.readAll();
-    //{"steamid":"76561197972251526",
-    //"relationship":"friend",
-    //"friend_since":1490256413}
-    QJsonDocument documentfriends = QJsonDocument::fromJson(Datafriends);
+    QJsonDocument documentfriends = QJsonDocument::fromJson(friendsreply.readAll());
     ui->FormProfileLabelPersonaName->setText(document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString());
     ui->FormProfileLabelProfileUrl->setText(document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("profileurl").toString());
     QDateTime date;
@@ -220,24 +220,21 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked()
     }
     }
 
-    QNetworkAccessManager imagemanager;
-    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(QString(document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString())));
-    QEventLoop imageloop;  //Ждем ответ от сервера.
-    QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-    imageloop.exec();
-
-    QByteArray ba=imagereply.readAll();
-    QImage img;
-        img.loadFromData(ba);
-        img.save("images/profiles/"+id+".png", "PNG");
-
+    if(!QFile::exists("images/profiles/"+document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString().mid(72,document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
+        QNetworkAccessManager imagemanager;
+        QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString()));
+        QEventLoop imageloop;  //Ждем ответ от сервера.
+        QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+        imageloop.exec();
+        QImage img;
+            img.loadFromData(imagereply.readAll());
+            img.save("images/profiles/"+document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString().mid(72,document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
+    }
     QPixmap pixmap;
-    pixmap.load("images/profiles/"+id+".png", "PNG");
+    pixmap.load("images/profiles/"+document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString().mid(72,document.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
     //pixmap=QPixmap::fromImage(img);
-
     ui->FormProfileAvatar->setPixmap(pixmap);
     ui->FormProfileButtonGames->setVisible(true);
-    ui->FormProfileButtonBadges->setVisible(true);
     ui->FormProfileButtonFriends->setVisible(true);
     ui->FormProfileButtonFavorites->setVisible(true);
     ui->FormProfileButtonSetProfile->setVisible(true);
@@ -287,7 +284,7 @@ void MainWindow::on_FormProfileButtonSetProfile_clicked()
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
     {
-    file.open(QIODevice::ReadOnly);
+    file.open(QIODevice::WriteOnly);
             //деволтные данные
     file.close();
     }

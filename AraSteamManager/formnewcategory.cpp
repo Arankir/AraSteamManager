@@ -24,7 +24,7 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
     //{"apiname":"hot_wheels",
     //"achieved":1,
     //"unlocktime":1445190378}
-                                                                   ui->FormAddCategoryTableWidgetAchievements->setColumnCount(6);//ЗАМЕНИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ui->FormAddCategoryTableWidgetAchievements->setColumnCount(9);
     switch (language) {
     case 1:{
         ui->FormAddCategoryButtonCancel->setText("Cancel");
@@ -48,6 +48,7 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
         QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=russian")));
         loop.exec();
         JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
+        qDebug() << "rus";
         //{"name":"hot_wheels",
         //"defaultvalue":0,
         //"displayName":"В полымя",
@@ -73,95 +74,41 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
         if(JsonDocGame.object().value("response").toObject().value("games").toArray().at(k).toObject().value("appid").toString()==appid)
             break;
     }
-    switch (language) {
-    case 1:{
-        for(int i=0;i<JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();i++){
-            if(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("percent")!=0){
-                int j=0;
-                for(;j<JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().size();j++){
-                    if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname")==JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("name"))
-                        break;
-                }
-                QNetworkReply &imagereply = *manager.get(QNetworkRequest(QString(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString())));
-                loop.exec();
-                QImage img;
-                    img.loadFromData(imagereply.readAll());
-                    qDebug() <<img;
-                QPixmap pixmap;
-                pixmap.loadFromData(imagereply.readAll());
-                QLabel *label = new QLabel("");
-                label->setPixmap(pixmap);
-                int row = ui->FormAddCategoryTableWidgetAchievements->rowCount();
-                ui->FormAddCategoryTableWidgetAchievements->insertRow(row);
-                ui->FormAddCategoryTableWidgetAchievements->setCellWidget(row,0,label);
-                QTableWidgetItem *item2 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("displayName").toString());
-                ui->FormAddCategoryTableWidgetAchievements->setItem(row,1,item2);
-                QTableWidgetItem *item3 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("description").toString());
-                ui->FormAddCategoryTableWidgetAchievements->setItem(row,2,item3);
-                QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("percent").toDouble())+"%");
-                ui->FormAddCategoryTableWidgetAchievements->setItem(row,3,item4);
-                if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("achieved").toInt()==1){
-                    QDateTime date;
-                    date.setDate(QDate::fromString("1970-01-01","yyyy-MM-dd"));
-                    date=date.addSecs(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("unlocktime").toInt());
-                    QTableWidgetItem *item5 = new QTableWidgetItem("Reached "+date.toString("yyyy-MM-dd"));
-                    ui->FormAddCategoryTableWidgetAchievements->setItem(row,4,item5);
-                } else {
-                    QTableWidgetItem *item5 = new QTableWidgetItem("Not reached");
-                    ui->FormAddCategoryTableWidgetAchievements->setItem(row,4,item5);
-                }
-                QPushButton *button1 = new QPushButton;
-                button1->setText("Favorite");
-                connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-                button1->setObjectName("FormGamesButtonFavorites"+appid+"%"+JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname").toString());
-                ui->FormAddCategoryTableWidgetAchievements->setCellWidget(row,5,button1);
+    for(int i=0;i<JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();i++){
+        if(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("percent")!=0){
+            int j=0;
+            for(;j<JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().size();j++){
+                if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname")==JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("name"))
+                    break;
             }
+            QNetworkReply &imagereply = *manager.get(QNetworkRequest(QString(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString())));
+            loop.exec();
+            QPixmap pixmap;
+            pixmap.loadFromData(imagereply.readAll());
+            QLabel *label = new QLabel("");
+            label->setPixmap(pixmap);
+            int row = ui->FormAddCategoryTableWidgetAchievements->rowCount();
+            ui->FormAddCategoryTableWidgetAchievements->insertRow(row);
+            ui->FormAddCategoryTableWidgetAchievements->setCellWidget(row,0,label);
+            QTableWidgetItem *item1 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("displayName").toString());
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,1,item1);
+            QTableWidgetItem *item2 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("description").toString());
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,2,item2);
+            QTableWidgetItem *item3 = new QTableWidgetItem(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("name").toString());
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,3,item3);
+            QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("percent").toDouble()));
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,4,item4);
+            QTableWidgetItem *item5 = new QTableWidgetItem(QString::number(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("achieved").toInt()));
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,5,item5);
+            QTableWidgetItem *item6 = new QTableWidgetItem(QString::number(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("unlocktime").toInt()));
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,6,item6);
+            QTableWidgetItem *item7 = new QTableWidgetItem(QString::number(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("hidden").toInt()));
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,7,item7);
+            QTableWidgetItem *item8 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString());
+            ui->FormAddCategoryTableWidgetAchievements->setItem(row,8,item8);
             }
-        break;
-    }
-    case 5:{
-        for(int i=0;i<JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();i++){
-            if(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("percent")!=0){
-                int j=0;
-                for(;j<JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().size();j++){
-                    if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname")==JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("name"))
-                        break;
-                }
-                QNetworkReply &imagereply = *manager.get(QNetworkRequest(QString(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString())));
-                loop.exec();
-                QPixmap pixmap;
-                pixmap.loadFromData(imagereply.readAll());
-                QLabel *label = new QLabel("");
-                label->setPixmap(pixmap);
-                int row = ui->FormAddCategoryTableWidgetAchievements->rowCount();
-                ui->FormAddCategoryTableWidgetAchievements->insertRow(row);
-                ui->FormAddCategoryTableWidgetAchievements->setCellWidget(row,0,label);
-                QTableWidgetItem *item2 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("displayName").toString());
-                ui->FormAddCategoryTableWidgetAchievements->setItem(row,1,item2);
-                QTableWidgetItem *item3 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("description").toString());
-                ui->FormAddCategoryTableWidgetAchievements->setItem(row,2,item3);
-                QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("percent").toDouble())+"%");
-                ui->FormAddCategoryTableWidgetAchievements->setItem(row,3,item4);
-                if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("achieved").toInt()==1){
-                    QDateTime date;
-                    date.setDate(QDate::fromString("1970-01-01","yyyy-MM-dd"));
-                    date=date.addSecs(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("unlocktime").toInt());
-                    QTableWidgetItem *item5 = new QTableWidgetItem("Получено "+date.toString("yyyy-MM-dd"));
-                    ui->FormAddCategoryTableWidgetAchievements->setItem(row,4,item5);
-                } else {
-                    QTableWidgetItem *item5 = new QTableWidgetItem("Не получено");
-                    ui->FormAddCategoryTableWidgetAchievements->setItem(row,4,item5);
-                }
-                QPushButton *button1 = new QPushButton;
-                button1->setText("Избранное");
-                connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-                button1->setObjectName("FormGamesButtonFavorites"+appid+"%"+JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname").toString());
-                ui->FormAddCategoryTableWidgetAchievements->setCellWidget(row,5,button1);
-                ui->FormAddCategoryTableWidgetAchievements->setRowHeight(row,64);
-            }
-            }
-    }
-    }
+        }
+    ui->FormAddCategoryTableWidgetAchievements->setRowHeight(ui->FormAddCategoryTableWidgetAchievements->rowCount(),64);
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(0,65);
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(1,100);
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(2,315);

@@ -23,6 +23,30 @@
       <string>Filter</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLineEdit" name="FormAchievementsLineEditNameAchievements"/>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="FormAchievementsButtonChangeCategory">
+        <property name="text">
+         <string>Change category</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QRadioButton" name="FormAchievementsRadioButtonNotReached">
+        <property name="text">
+         <string>Not reached</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="FormAchievementsButtonAddCategory">
+        <property name="text">
+         <string>Add category</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="2">
        <widget class="QRadioButton" name="FormAchievementsRadioButtonAll">
         <property name="text">
@@ -33,41 +57,10 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QPushButton" name="FormAchievementsButtonChangeCategory">
-        <property name="text">
-         <string>Change category</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="QCheckBox" name="FormAchievementsCheckBoxFavorites">
-        <property name="text">
-         <string>Only favorites</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="FormAchievementsButtonFindAchievement">
         <property name="text">
          <string>Find</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLineEdit" name="FormAchievementsLineEditNameAchievements"/>
-      </item>
-      <item row="1" column="2">
-       <widget class="QRadioButton" name="FormAchievementsRadioButtonReached">
-        <property name="text">
-         <string>Reached</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QRadioButton" name="FormAchievementsRadioButtonNotReached">
-        <property name="text">
-         <string>Not reached</string>
         </property>
        </widget>
       </item>
@@ -88,10 +81,17 @@
         </widget>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="FormAchievementsButtonAddCategory">
+      <item row="4" column="2">
+       <widget class="QCheckBox" name="FormAchievementsCheckBoxFavorites">
         <property name="text">
-         <string>Add category</string>
+         <string>Only favorites</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QRadioButton" name="FormAchievementsRadioButtonReached">
+        <property name="text">
+         <string>Reached</string>
         </property>
        </widget>
       </item>

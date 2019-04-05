@@ -32,16 +32,16 @@ public:
     QTableWidget *FormAchievementsTableWidgetAchievements;
     QGroupBox *FormAchievementsGroupBoxFilter;
     QGridLayout *gridLayout;
-    QRadioButton *FormAchievementsRadioButtonAll;
-    QPushButton *FormAchievementsButtonChangeCategory;
-    QCheckBox *FormAchievementsCheckBoxFavorites;
-    QPushButton *FormAchievementsButtonFindAchievement;
     QLineEdit *FormAchievementsLineEditNameAchievements;
-    QRadioButton *FormAchievementsRadioButtonReached;
+    QPushButton *FormAchievementsButtonChangeCategory;
     QRadioButton *FormAchievementsRadioButtonNotReached;
+    QPushButton *FormAchievementsButtonAddCategory;
+    QRadioButton *FormAchievementsRadioButtonAll;
+    QPushButton *FormAchievementsButtonFindAchievement;
     QScrollArea *FormAchievementsScrollAreaCategories;
     QWidget *scrollAreaWidgetContents;
-    QPushButton *FormAchievementsButtonAddCategory;
+    QCheckBox *FormAchievementsCheckBoxFavorites;
+    QRadioButton *FormAchievementsRadioButtonReached;
     QLabel *FormAchievementsLabelTotalPersent;
     QLabel *FormAchievementsLabelGameOnline;
     QPushButton *FormAchievementsButtonCompare;
@@ -65,41 +65,36 @@ public:
         FormAchievementsGroupBoxFilter->setObjectName(QString::fromUtf8("FormAchievementsGroupBoxFilter"));
         gridLayout = new QGridLayout(FormAchievementsGroupBoxFilter);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        FormAchievementsRadioButtonAll = new QRadioButton(FormAchievementsGroupBoxFilter);
-        FormAchievementsRadioButtonAll->setObjectName(QString::fromUtf8("FormAchievementsRadioButtonAll"));
-        FormAchievementsRadioButtonAll->setChecked(true);
+        FormAchievementsLineEditNameAchievements = new QLineEdit(FormAchievementsGroupBoxFilter);
+        FormAchievementsLineEditNameAchievements->setObjectName(QString::fromUtf8("FormAchievementsLineEditNameAchievements"));
 
-        gridLayout->addWidget(FormAchievementsRadioButtonAll, 0, 2, 1, 1);
+        gridLayout->addWidget(FormAchievementsLineEditNameAchievements, 0, 0, 1, 1);
 
         FormAchievementsButtonChangeCategory = new QPushButton(FormAchievementsGroupBoxFilter);
         FormAchievementsButtonChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonChangeCategory"));
 
         gridLayout->addWidget(FormAchievementsButtonChangeCategory, 4, 1, 1, 1);
 
-        FormAchievementsCheckBoxFavorites = new QCheckBox(FormAchievementsGroupBoxFilter);
-        FormAchievementsCheckBoxFavorites->setObjectName(QString::fromUtf8("FormAchievementsCheckBoxFavorites"));
+        FormAchievementsRadioButtonNotReached = new QRadioButton(FormAchievementsGroupBoxFilter);
+        FormAchievementsRadioButtonNotReached->setObjectName(QString::fromUtf8("FormAchievementsRadioButtonNotReached"));
 
-        gridLayout->addWidget(FormAchievementsCheckBoxFavorites, 4, 2, 1, 1);
+        gridLayout->addWidget(FormAchievementsRadioButtonNotReached, 2, 2, 1, 1);
+
+        FormAchievementsButtonAddCategory = new QPushButton(FormAchievementsGroupBoxFilter);
+        FormAchievementsButtonAddCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAddCategory"));
+
+        gridLayout->addWidget(FormAchievementsButtonAddCategory, 2, 1, 1, 1);
+
+        FormAchievementsRadioButtonAll = new QRadioButton(FormAchievementsGroupBoxFilter);
+        FormAchievementsRadioButtonAll->setObjectName(QString::fromUtf8("FormAchievementsRadioButtonAll"));
+        FormAchievementsRadioButtonAll->setChecked(true);
+
+        gridLayout->addWidget(FormAchievementsRadioButtonAll, 0, 2, 1, 1);
 
         FormAchievementsButtonFindAchievement = new QPushButton(FormAchievementsGroupBoxFilter);
         FormAchievementsButtonFindAchievement->setObjectName(QString::fromUtf8("FormAchievementsButtonFindAchievement"));
 
         gridLayout->addWidget(FormAchievementsButtonFindAchievement, 0, 1, 1, 1);
-
-        FormAchievementsLineEditNameAchievements = new QLineEdit(FormAchievementsGroupBoxFilter);
-        FormAchievementsLineEditNameAchievements->setObjectName(QString::fromUtf8("FormAchievementsLineEditNameAchievements"));
-
-        gridLayout->addWidget(FormAchievementsLineEditNameAchievements, 0, 0, 1, 1);
-
-        FormAchievementsRadioButtonReached = new QRadioButton(FormAchievementsGroupBoxFilter);
-        FormAchievementsRadioButtonReached->setObjectName(QString::fromUtf8("FormAchievementsRadioButtonReached"));
-
-        gridLayout->addWidget(FormAchievementsRadioButtonReached, 1, 2, 1, 1);
-
-        FormAchievementsRadioButtonNotReached = new QRadioButton(FormAchievementsGroupBoxFilter);
-        FormAchievementsRadioButtonNotReached->setObjectName(QString::fromUtf8("FormAchievementsRadioButtonNotReached"));
-
-        gridLayout->addWidget(FormAchievementsRadioButtonNotReached, 2, 2, 1, 1);
 
         FormAchievementsScrollAreaCategories = new QScrollArea(FormAchievementsGroupBoxFilter);
         FormAchievementsScrollAreaCategories->setObjectName(QString::fromUtf8("FormAchievementsScrollAreaCategories"));
@@ -111,10 +106,15 @@ public:
 
         gridLayout->addWidget(FormAchievementsScrollAreaCategories, 1, 0, 4, 1);
 
-        FormAchievementsButtonAddCategory = new QPushButton(FormAchievementsGroupBoxFilter);
-        FormAchievementsButtonAddCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAddCategory"));
+        FormAchievementsCheckBoxFavorites = new QCheckBox(FormAchievementsGroupBoxFilter);
+        FormAchievementsCheckBoxFavorites->setObjectName(QString::fromUtf8("FormAchievementsCheckBoxFavorites"));
 
-        gridLayout->addWidget(FormAchievementsButtonAddCategory, 2, 1, 1, 1);
+        gridLayout->addWidget(FormAchievementsCheckBoxFavorites, 4, 2, 1, 1);
+
+        FormAchievementsRadioButtonReached = new QRadioButton(FormAchievementsGroupBoxFilter);
+        FormAchievementsRadioButtonReached->setObjectName(QString::fromUtf8("FormAchievementsRadioButtonReached"));
+
+        gridLayout->addWidget(FormAchievementsRadioButtonReached, 1, 2, 1, 1);
 
         FormAchievementsLabelTotalPersent = new QLabel(FormAchievementsGroupBoxFilter);
         FormAchievementsLabelTotalPersent->setObjectName(QString::fromUtf8("FormAchievementsLabelTotalPersent"));
@@ -159,13 +159,13 @@ public:
     {
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "Form", nullptr));
         FormAchievementsGroupBoxFilter->setTitle(QApplication::translate("FormAchievements", "Filter", nullptr));
-        FormAchievementsRadioButtonAll->setText(QApplication::translate("FormAchievements", "All", nullptr));
         FormAchievementsButtonChangeCategory->setText(QApplication::translate("FormAchievements", "Change category", nullptr));
-        FormAchievementsCheckBoxFavorites->setText(QApplication::translate("FormAchievements", "Only favorites", nullptr));
-        FormAchievementsButtonFindAchievement->setText(QApplication::translate("FormAchievements", "Find", nullptr));
-        FormAchievementsRadioButtonReached->setText(QApplication::translate("FormAchievements", "Reached", nullptr));
         FormAchievementsRadioButtonNotReached->setText(QApplication::translate("FormAchievements", "Not reached", nullptr));
         FormAchievementsButtonAddCategory->setText(QApplication::translate("FormAchievements", "Add category", nullptr));
+        FormAchievementsRadioButtonAll->setText(QApplication::translate("FormAchievements", "All", nullptr));
+        FormAchievementsButtonFindAchievement->setText(QApplication::translate("FormAchievements", "Find", nullptr));
+        FormAchievementsCheckBoxFavorites->setText(QApplication::translate("FormAchievements", "Only favorites", nullptr));
+        FormAchievementsRadioButtonReached->setText(QApplication::translate("FormAchievements", "Reached", nullptr));
         FormAchievementsLabelTotalPersent->setText(QApplication::translate("FormAchievements", "TotalPersent", nullptr));
         FormAchievementsLabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
         FormAchievementsButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
