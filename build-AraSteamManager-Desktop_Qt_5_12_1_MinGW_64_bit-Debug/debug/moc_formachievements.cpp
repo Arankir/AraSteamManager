@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    QByteArrayData data[9];
-    char stringdata0[170];
+    QByteArrayData data[12];
+    char stringdata0[307];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,7 +39,10 @@ QT_MOC_LITERAL(4, 45, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(5, 58, 39), // "on_FormAchievementsButtonRetu..."
 QT_MOC_LITERAL(6, 98, 16), // "FavoritesClicked"
 QT_MOC_LITERAL(7, 115, 44), // "on_FormAchievementsButtonAddC..."
-QT_MOC_LITERAL(8, 160, 9) // "on_return"
+QT_MOC_LITERAL(8, 160, 9), // "on_return"
+QT_MOC_LITERAL(9, 170, 41), // "on_FormAchievementsRadioButto..."
+QT_MOC_LITERAL(10, 212, 45), // "on_FormAchievementsRadioButto..."
+QT_MOC_LITERAL(11, 258, 48) // "on_FormAchievementsRadioButto..."
 
     },
     "FormAchievements\0return_to_games\0\0"
@@ -47,7 +50,9 @@ QT_MOC_LITERAL(8, 160, 9) // "on_return"
     "on_FormAchievementsButtonReturn_clicked\0"
     "FavoritesClicked\0"
     "on_FormAchievementsButtonAddCategory_clicked\0"
-    "on_return"
+    "on_return\0on_FormAchievementsRadioButtonAll_clicked\0"
+    "on_FormAchievementsRadioButtonReached_clicked\0"
+    "on_FormAchievementsRadioButtonNotReached_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,7 +62,7 @@ static const uint qt_meta_data_FormAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,20 +70,26 @@ static const uint qt_meta_data_FormAchievements[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x06 /* Public */,
+       1,    0,   59,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   45,    2, 0x08 /* Private */,
-       5,    0,   48,    2, 0x08 /* Private */,
-       6,    0,   49,    2, 0x08 /* Private */,
-       7,    0,   50,    2, 0x08 /* Private */,
-       8,    0,   51,    2, 0x08 /* Private */,
+       3,    1,   60,    2, 0x08 /* Private */,
+       5,    0,   63,    2, 0x08 /* Private */,
+       6,    0,   64,    2, 0x08 /* Private */,
+       7,    0,   65,    2, 0x08 /* Private */,
+       8,    0,   66,    2, 0x08 /* Private */,
+       9,    0,   67,    2, 0x08 /* Private */,
+      10,    0,   68,    2, 0x08 /* Private */,
+      11,    0,   69,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 4,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -99,6 +110,9 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 3: _t->FavoritesClicked(); break;
         case 4: _t->on_FormAchievementsButtonAddCategory_clicked(); break;
         case 5: _t->on_return(); break;
+        case 6: _t->on_FormAchievementsRadioButtonAll_clicked(); break;
+        case 7: _t->on_FormAchievementsRadioButtonReached_clicked(); break;
+        case 8: _t->on_FormAchievementsRadioButtonNotReached_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -142,13 +156,13 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 9;
     }
     return _id;
 }

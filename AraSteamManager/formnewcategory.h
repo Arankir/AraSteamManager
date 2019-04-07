@@ -25,8 +25,14 @@ public:
     explicit FormNewCategory(QString id, QString key, int language, QString, QWidget *parent = nullptr);
     ~FormNewCategory();
 
+signals:
+    void return_to_achievements();
+
 private slots:
+    void closeEvent(QCloseEvent *);
     void on_FormAddCategoryButtonAddParameterValue_clicked();
+
+    void on_FormAddCategoryButtonCancel_clicked();
 
 private:
     Ui::FormNewCategory *ui;

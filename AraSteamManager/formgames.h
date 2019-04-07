@@ -22,6 +22,7 @@ class FormGames : public QWidget
 
 public:
     explicit FormGames(QString id, QString key, int language, QWidget *parent = nullptr);
+    void on_FormCreate_language(QString LabelLogo, QString GamePlaceholder, QString ButtonFind, QString ButtonReturn, QString HH0, QString HH1, QString HH2, QString HH3, QJsonArray Games, QString buttonAchievements);
     ~FormGames();
     FormAchievements *achievementsform;
 

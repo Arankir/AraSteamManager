@@ -33,6 +33,15 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
         ui->FormAddCategoryLineEditNameCategory->setPlaceholderText("None");
         ui->FormAddCategoryLabelParameterValue->setText("Name of value");
         ui->FormAddCategoryButtonAddParameterValue->setText("Add value");
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem("Title"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem("Description"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem("Name"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem("In the world"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem("Received"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem("Time received"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(7,new QTableWidgetItem("Hidden"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(8,new QTableWidgetItem("Icon url"));
         QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=english")));
         loop.exec();
         JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
@@ -45,10 +54,18 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
         ui->FormAddCategoryLineEditNameCategory->setPlaceholderText("Не выбрано");
         ui->FormAddCategoryLabelParameterValue->setText("Название значения");
         ui->FormAddCategoryButtonAddParameterValue->setText("Добавить значение");
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem("Название"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem("Описание"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem("Имя"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem("Получено по миру"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem("Получено"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem("Время получения"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(7,new QTableWidgetItem("Скрыто"));
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(8,new QTableWidgetItem("URL иконки"));
         QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=russian")));
         loop.exec();
         JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
-        qDebug() << "rus";
         //{"name":"hot_wheels",
         //"defaultvalue":0,
         //"displayName":"В полымя",
@@ -106,15 +123,19 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
             ui->FormAddCategoryTableWidgetAchievements->setItem(row,7,item7);
             QTableWidgetItem *item8 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString());
             ui->FormAddCategoryTableWidgetAchievements->setItem(row,8,item8);
+            ui->FormAddCategoryTableWidgetAchievements->setRowHeight(row,64);
             }
         }
-    ui->FormAddCategoryTableWidgetAchievements->setRowHeight(ui->FormAddCategoryTableWidgetAchievements->rowCount(),64);
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(0,65);
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(1,100);
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(2,315);
     ui->FormAddCategoryTableWidgetAchievements->resizeColumnToContents(3);
-    ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(4,70);
-    ui->FormAddCategoryTableWidgetAchievements->resizeColumnToContents(5);
+    ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(4,true);
+    ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(5,true);
+    ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(6,true);
+    ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(7,true);
+    ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(8,true);
+    ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(9,true);
 }
 
 FormNewCategory::~FormNewCategory()
@@ -122,17 +143,20 @@ FormNewCategory::~FormNewCategory()
     delete ui;
 }
 
+void FormNewCategory::closeEvent(QCloseEvent *){
+    on_FormAddCategoryButtonCancel_clicked();
+}
+
 void FormNewCategory::on_FormAddCategoryButtonAddParameterValue_clicked(){
     //QVector <QPair<QString, QVector<QPair <int,QCheckBox*>>>> variants;
-    if(ui->FormAddCategoryLineEditNameValue->text()!=""){
+    if(ui->FormAddCategoryLineEditNameValue->text()!="")/*и проверить что такого значения нет*/{
         QVector<QCheckBox*> valuebool(ui->FormAddCategoryTableWidgetAchievements->rowCount());
         QPair<QString, QVector<QCheckBox*>> value;
         value.first=ui->FormAddCategoryLineEditNameValue->text();
         value.second=valuebool;
         variants.append(value);
-        //добавить справа значение
         ui->FormAddCategoryTableWidgetAchievements->setColumnCount(ui->FormAddCategoryTableWidgetAchievements->columnCount()+1);
-        //название нового столбца
+        ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(ui->FormAddCategoryTableWidgetAchievements->columnCount()-1,new QTableWidgetItem(ui->FormAddCategoryLineEditNameValue->text()));
         for (int i=0;i<ui->FormAddCategoryTableWidgetAchievements->rowCount();i++){
             QCheckBox *chb = new QCheckBox;
             chb->setObjectName(ui->FormAddCategoryLineEditNameValue->text()+"_number_"+QString::number(i));
@@ -150,4 +174,9 @@ void FormNewCategory::on_FormAddCategoryButtonAddParameterValue_clicked(){
         case 5:
             QMessageBox::warning(this,"Ошибка","Название значения пустое!");
         }
+}
+
+void FormNewCategory::on_FormAddCategoryButtonCancel_clicked(){
+    emit return_to_achievements();
+    delete this;
 }

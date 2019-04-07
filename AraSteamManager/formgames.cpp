@@ -27,81 +27,66 @@ FormGames::FormGames(QString ids, QString keys, int languages, QWidget *parent) 
     ui->FormGamesTableWidgetGames->setColumnCount(4);
     switch(language){
     case 1:{
-        ui->FormGamesLabelLogo->setText("");
-        ui->FormGamesLineEditGame->setPlaceholderText("Find game");
-        ui->FormGamesButtonFind->setText("Find");
-        ui->FormGamesButtonReturn->setText("Return");
-        for(int i=0;i<JsonArayGames.size();i++){
-            QNetworkAccessManager imagemanager;
-            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(QString("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"/"+JsonArayGames[i].toObject().value("img_icon_url").toString())+".jpg"));
-            QEventLoop imageloop;  //Ждем ответ от сервера.
-            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-            imageloop.exec();
-            QPixmap pixmap;
-            pixmap.loadFromData(imagereply.readAll());
-            QIcon icon = QIcon(pixmap);
-            int row = ui->FormGamesTableWidgetGames->rowCount();
-            ui->FormGamesTableWidgetGames->insertRow(row);
-            QTableWidgetItem *item1 = new QTableWidgetItem;
-            item1->setIcon(icon);
-            ui->FormGamesTableWidgetGames->setItem(row,0,item1);
-            QTableWidgetItem *item2 = new QTableWidgetItem(JsonArayGames[i].toObject().value("name").toString());
-            ui->FormGamesTableWidgetGames->setItem(row,1,item2);
-            QPushButton *button1 = new QPushButton;
-            QPushButton *button2 = new QPushButton;
-            button1->setText("Achievements");
-            button2->setText("Favorite");
-            connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
-            connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-            button1->setObjectName("FormGamesButtonAchievements"+QString::number(JsonArayGames[i].toObject().value("appid").toInt()));
-            ui->FormGamesTableWidgetGames->setCellWidget(row,2,button1);
-            button2->setObjectName("FormGamesButtonFavorites"+QString::number(JsonArayGames[i].toObject().value("appid").toInt()));
-            ui->FormGamesTableWidgetGames->setCellWidget(row,3,button2);
-            }
+        on_FormCreate_language("","Find game","Find","Return","","Title game","Achievements","Favorites",JsonArayGames,"Achievements");
         break;
-    }
+        }
     case 5:{
-        ui->FormGamesLabelLogo->setText("");
-        ui->FormGamesLineEditGame->setPlaceholderText("Найти игру");
-        ui->FormGamesButtonFind->setText("Найти");
-        ui->FormGamesButtonReturn->setText("Вернуться");
-        for(int i=0;i<JsonArayGames.size();i++){
-            QNetworkAccessManager imagemanager;
-            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(QString("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"/"+JsonArayGames[i].toObject().value("img_icon_url").toString())+".jpg"));
-            QEventLoop imageloop;  //Ждем ответ от сервера.
-            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-            imageloop.exec();
-            QPixmap pixmap;
-            pixmap.loadFromData(imagereply.readAll());
-            QIcon icon = QIcon(pixmap);
-            int row = ui->FormGamesTableWidgetGames->rowCount();
-            ui->FormGamesTableWidgetGames->insertRow(row);
-            QTableWidgetItem *item1 = new QTableWidgetItem;
-            item1->setIcon(icon);
-            ui->FormGamesTableWidgetGames->setItem(row,0,item1);
-            QTableWidgetItem *item2 = new QTableWidgetItem(JsonArayGames[i].toObject().value("name").toString());
-            ui->FormGamesTableWidgetGames->setItem(row,1,item2);
-            QPushButton *button1 = new QPushButton;
-            QPushButton *button2 = new QPushButton;
-            button1->setText("Достижения");
-            button2->setText("Избранное");
-            connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
-            connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-            button1->setObjectName("FormGamesButtonAchievements"+QString::number(JsonArayGames[i].toObject().value("appid").toInt()));
-            ui->FormGamesTableWidgetGames->setCellWidget(row,2,button1);
-            button2->setObjectName("FormGamesButtonFavorites"+QString::number(JsonArayGames[i].toObject().value("appid").toInt()));
-            ui->FormGamesTableWidgetGames->setCellWidget(row,3,button2);
-            }
+        on_FormCreate_language("","Найти игру","Найти","Вернуться","","Название игры","Достижения","Избранное",JsonArayGames,"Достижения");
+        }
     }
-    }
-
-
     ui->FormGamesTableWidgetGames->resizeColumnsToContents();
     //http://media.steampowered.com/steamcommunity/public/images/apps/{appid}/{hash}.jpg
+    ui->FormGamesLineEditGame->setFocus();
 }
 
-FormGames::~FormGames()
-{
+void FormGames::on_FormCreate_language(QString LabelLogo, QString GamePlaceholder, QString ButtonFind, QString ButtonReturn, QString HH0, QString HH1, QString HH2, QString HH3, QJsonArray Games, QString buttonAchievements){
+    ui->FormGamesLabelLogo->setText(LabelLogo);
+    ui->FormGamesLineEditGame->setPlaceholderText(GamePlaceholder);
+    ui->FormGamesButtonFind->setText(ButtonFind);
+    ui->FormGamesButtonReturn->setText(ButtonReturn);
+    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(HH0));
+    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(HH1));
+    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(HH2));
+    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(HH3));
+    for(int i=0;i<Games.size();i++){
+        QPixmap pixmap;
+        if(!QFile::exists("images/icon_games/"+Games[i].toObject().value("img_icon_url").toString()+".png")){
+            QNetworkAccessManager imagemanager;
+            QEventLoop imageloop;  //Ждем ответ от сервера.
+            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(Games[i].toObject().value("appid").toInt())+"/"+Games[i].toObject().value("img_icon_url").toString()+".jpg"));
+            imageloop.exec();
+            QImage img;
+            img.loadFromData(imagereply.readAll());
+            img.save("images/icon_games/"+Games[i].toObject().value("img_icon_url").toString()+".png", "PNG");
+            pixmap=QPixmap::fromImage(img);
+        } else {
+            pixmap.load("images/icon_games/"+Games[i].toObject().value("img_icon_url").toString()+".png", "PNG");
+            }
+        QIcon icon = QIcon(pixmap);
+        int row = ui->FormGamesTableWidgetGames->rowCount();
+        ui->FormGamesTableWidgetGames->insertRow(row);
+        QTableWidgetItem *item1 = new QTableWidgetItem;
+        item1->setIcon(icon);
+        ui->FormGamesTableWidgetGames->setItem(row,0,item1);
+        QTableWidgetItem *item2 = new QTableWidgetItem(Games[i].toObject().value("name").toString());
+        ui->FormGamesTableWidgetGames->setItem(row,1,item2);
+        QPushButton *button1 = new QPushButton;
+        QPushButton *button2 = new QPushButton;
+        button1->setText(buttonAchievements);
+        button2->setText("«");
+        QFont font("Wingdings");
+        button2->setFont(font);
+        connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
+        connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+        button1->setObjectName("FormGamesButtonAchievements"+QString::number(Games[i].toObject().value("appid").toInt())+"&"+Games[i].toObject().value("img_logo_url").toString());
+        ui->FormGamesTableWidgetGames->setCellWidget(row,2,button1);
+        button2->setObjectName("FormGamesButtonFavorites"+QString::number(Games[i].toObject().value("appid").toInt()));
+        ui->FormGamesTableWidgetGames->setCellWidget(row,3,button2);
+        }
+}
+
+FormGames::~FormGames(){
     delete ui;
 }
 
@@ -109,15 +94,15 @@ void FormGames::closeEvent(QCloseEvent *){
     on_FormGamesButtonReturn_clicked();
 }
 
-void FormGames::on_FormGamesButtonReturn_clicked()
-{
+void FormGames::on_FormGamesButtonReturn_clicked(){
     emit return_to_profile();
     delete this;
 }
 
 void FormGames::AchievementsClicked(){
     QPushButton *btn = (QPushButton*) sender();
-        achievementsform = new FormAchievements(key,language,id,btn->objectName().mid(27,btn->objectName().length()));
+    qDebug() <<btn->objectName()<< btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27)<<btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length());
+        achievementsform = new FormAchievements(key,language,id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()));
         connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(on_return()));
         achievementsform->show();
         this->setEnabled(false);

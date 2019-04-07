@@ -11,6 +11,7 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <formnewcategory.h>
+#include <QDir>
 
 namespace Ui {
 class FormAchievements;
@@ -21,7 +22,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString, int, QString, QString, QWidget *parent = nullptr);
+    explicit FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameName, QWidget *parent = nullptr);
     ~FormAchievements();
     FormNewCategory *newcategoryform;
 
@@ -35,6 +36,12 @@ private slots:
 
     void on_FormAchievementsButtonAddCategory_clicked();
     void on_return();
+
+    void on_FormAchievementsRadioButtonAll_clicked();
+
+    void on_FormAchievementsRadioButtonReached_clicked();
+
+    void on_FormAchievementsRadioButtonNotReached_clicked();
 
 private:
     Ui::FormAchievements *ui;
