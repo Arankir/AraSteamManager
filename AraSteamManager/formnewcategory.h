@@ -14,6 +14,7 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QDir>
+#include <QComboBox>
 
 namespace Ui {
 class FormNewCategory;
@@ -37,6 +38,8 @@ private slots:
     void on_FormAddCategoryButtonCancel_clicked();
 
     void on_FormAddCategoryButtonAddCategory_clicked();
+
+    void on_FormAddCategoryLineEditFind_textChanged(const QString &arg1);
 
 private:
     Ui::FormNewCategory *ui;

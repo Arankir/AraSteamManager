@@ -36,7 +36,7 @@ private slots:
     void closeEvent(QCloseEvent *);
     void on_FormAchievementsButtonReturn_clicked();
     void FavoritesClicked();
-
+    void UpdateHiddenRows();
     void on_FormAchievementsButtonAddCategory_clicked();
     void on_return();
 
@@ -45,6 +45,8 @@ private slots:
     void on_FormAchievementsRadioButtonReached_clicked();
 
     void on_FormAchievementsRadioButtonNotReached_clicked();
+
+    void on_FormAchievementsLineEditNameAchievements_textChanged(const QString &arg1);
 
 private:
     Ui::FormAchievements *ui;
@@ -56,6 +58,8 @@ private:
     QJsonDocument JsonDocGlobalAchievementPercentagesForApp;
     QJsonDocument JsonDocPlayerAchievements;
     QJsonDocument JsonDocSchemaForGame;
+    bool **filter;
+    int colfilter=3;
 };
 
 #endif // FORMACHIEVEMENTS_H

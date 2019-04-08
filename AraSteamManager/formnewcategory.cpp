@@ -200,25 +200,13 @@ void FormNewCategory::on_FormAddCategoryButtonAddCategory_clicked(){
                 QJsonArray groups;
                 QJsonObject group;
                 group["name"]=ui->FormAddCategoryLineEditNameCategory->text();
-//                group["language"]=language;
                 QJsonArray values;
                 QJsonObject val;
-//                values.append("none");
                 for (int i=9;i<ui->FormAddCategoryTableWidgetAchievements->columnCount();i++){
                     values.append(ui->FormAddCategoryTableWidgetAchievements->horizontalHeaderItem(i)->text());
                     QJsonArray valn;
                     for (int j=0;j<ui->FormAddCategoryTableWidgetAchievements->rowCount();j++) {
                         if(ui->FormAddCategoryTableWidgetAchievements->item(j,i)->checkState()){
-//                            QJsonObject valna;
-//                            valna["name"]=ui->FormAddCategoryTableWidgetAchievements->item(j,3)->text();
-//                            valna["index"]=j;
-//                            valna["percent"]=ui->FormAddCategoryTableWidgetAchievements->item(j,4)->text();
-//                            valna["achieved"]=ui->FormAddCategoryTableWidgetAchievements->item(j,5)->text();
-//                            valna["date"]=ui->FormAddCategoryTableWidgetAchievements->item(j,6)->text();
-//                            valna["displayName"]=ui->FormAddCategoryTableWidgetAchievements->item(j,1)->text();
-//                            valna["hidden"]=ui->FormAddCategoryTableWidgetAchievements->item(j,7)->text();
-//                            valna["description"]=ui->FormAddCategoryTableWidgetAchievements->item(j,2)->text();
-//                            valna["icon"]=ui->FormAddCategoryTableWidgetAchievements->item(j,8)->text();
                             valn.append(ui->FormAddCategoryTableWidgetAchievements->item(j,3)->text());
                         }
                     group[ui->FormAddCategoryTableWidgetAchievements->horizontalHeaderItem(i)->text()]=valn;
@@ -228,6 +216,15 @@ void FormNewCategory::on_FormAddCategoryButtonAddCategory_clicked(){
                 category.setObject(group);
                 Category.write(category.toJson());
                 Category.close();
+                switch(language){
+                case 1:{
+                    QMessageBox::information(this,"Successful","New Category has been added!");
+                    break;
+                    }
+                case 5:
+                    QMessageBox::information(this,"Успешно","Категория была добавлена!");
+                }
+                on_FormAddCategoryButtonCancel_clicked();
             }
         } else
             switch(language){
@@ -247,4 +244,11 @@ void FormNewCategory::on_FormAddCategoryButtonAddCategory_clicked(){
         case 5:
             QMessageBox::warning(this,"Ошибка","Название категории пустое!");
         }
+}
+
+void FormNewCategory::on_FormAddCategoryLineEditFind_textChanged(const QString &){
+    for (int i=0;i<ui->FormAddCategoryTableWidgetAchievements->rowCount();i++)
+        if((ui->FormAddCategoryTableWidgetAchievements->item(i,1)->text().toUpper().indexOf(ui->FormAddCategoryLineEditFind->text().toUpper())>-1)||(ui->FormAddCategoryTableWidgetAchievements->item(i,2)->text().toUpper().indexOf(ui->FormAddCategoryLineEditFind->text().toUpper())>-1))
+            ui->FormAddCategoryTableWidgetAchievements->setRowHidden(i,false); else
+            ui->FormAddCategoryTableWidgetAchievements->setRowHidden(i,true);
 }

@@ -29,7 +29,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     //{"apiname":"hot_wheels",
     //"achieved":1,
     //"unlocktime":1445190378}
-    ui->FormAchievementsTableWidgetAchievements->setColumnCount(7);
+    ui->FormAchievementsTableWidgetAchievements->setColumnCount(8);
     QString Reached="";
     QString NotReached="";
     QString TotalPercent="";
@@ -153,7 +153,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
                     total++;
                 } else {
                     item5 = new QTableWidgetItem(NotReached);
-                }
+                    }
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,4,item5);
                 QPushButton *button1 = new QPushButton;
                 button1->setText("«");
@@ -179,6 +179,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     ui->FormAchievementsTableWidgetAchievements->resizeColumnToContents(5);
     ui->FormAchievementsTableWidgetAchievements->resizeRowsToContents();
 
+    filter = new bool*[ui->FormAchievementsTableWidgetAchievements->rowCount()];
     QDir categories("Files/Categories/"+appid);
     if(categories.exists()){
         categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -198,17 +199,25 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
             cb->setObjectName("Category"+QString::number(i));
             connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
             layout->addWidget(cb);
-            ui->FormAchievementsTableWidgetAchievements->insertColumn(ui->FormAchievementsTableWidgetAchievements->columnCount());
-            ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(ui->FormAchievementsTableWidgetAchievements->columnCount()-1,new QTableWidgetItem(cat.object().value("name").toString()));
-            for (int j=0;j<ui->FormAchievementsTableWidgetAchievements->rowCount();j++) {
-                QTableWidgetItem *item = new QTableWidgetItem("true");
-                ui->FormAchievementsTableWidgetAchievements->setItem(j,ui->FormAchievementsTableWidgetAchievements->columnCount()-1,item);
-            }
-            ui->FormAchievementsTableWidgetAchievements->setColumnHidden(ui->FormAchievementsTableWidgetAchievements->columnCount()-1,true);
             category.close();
             }
         widget->setLayout(layout);
         ui->FormAchievementsScrollAreaCategories->setWidget(widget);
+        for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
+            filter[i]=new bool[list.size()+3];
+            for (int j=0;j<list.size()+3;j++) {
+                filter[i][j]=true;
+                }
+            colfilter=list.size()+3;
+            }
+        } else {
+        for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
+            filter[i]=new bool[3];
+            for (int j=0;j<3;j++) {
+                filter[i][j]=true;
+                }
+            colfilter=3;
+            }
         }
 }
 
@@ -225,38 +234,24 @@ void FormAchievements::on_ComboBoxCategory_Change(int index){
         QJsonArray selecteditem = cat.object().value(cb->itemText(index)).toArray();
         if(index!=0)
             for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
-                QString item = "false";
+                filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = false;
                 for (int j=0;j<selecteditem.size();j++) {
                     if(ui->FormAchievementsTableWidgetAchievements->item(i,6)->text()==selecteditem[j].toString()){
-                        item = "true";
+                        filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = true;
                         break;
                         };
-                }
-                ui->FormAchievementsTableWidgetAchievements->item(i,7+cb->objectName().mid(8,cb->objectName().length()).toInt())->setText(item);
+                    }
             } else {
             for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
-                ui->FormAchievementsTableWidgetAchievements->item(i,7+cb->objectName().mid(8,cb->objectName().length()).toInt())->setText("true");
-            }
-            }
-        category.close();
-        for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
-            bool accept=true;
-            for (int j=7;j<ui->FormAchievementsTableWidgetAchievements->columnCount();j++) {
-                if(ui->FormAchievementsTableWidgetAchievements->item(i,j)->text()=="false"){
-                    accept=false;
-                    break;
+                filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()]=true;
                 }
             }
-            if(accept){
-                ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,false);
-            } else
-                ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,true);
-        }
-        }
+        category.close();
+        UpdateHiddenRows();
+    }
 }
 
-FormAchievements::~FormAchievements()
-{
+FormAchievements::~FormAchievements(){
     delete ui;
 }
 
@@ -273,8 +268,23 @@ void FormAchievements::FavoritesClicked(){
 
 }
 
-void FormAchievements::on_FormAchievementsButtonAddCategory_clicked()
-{
+void FormAchievements::UpdateHiddenRows(){
+    for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
+        bool accept=true;
+        for (int j=0;j<colfilter;j++) {
+            if(filter[i][j]==false){
+                accept=false;
+                break;
+                }
+            }
+        if(accept){
+            ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,false);
+            } else
+            ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,true);
+        }
+}
+
+void FormAchievements::on_FormAchievementsButtonAddCategory_clicked(){
     newcategoryform = new FormNewCategory(id,key,language,appid);
     connect(newcategoryform,SIGNAL(return_to_achievements()),this,SLOT(on_return()));
     newcategoryform->show();
@@ -286,20 +296,31 @@ void FormAchievements::on_return(){
 }
 
 void FormAchievements::on_FormAchievementsRadioButtonAll_clicked(){
-    for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++)
-        ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,false);
+    for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++){
+        filter[i][1]=true;}
+    UpdateHiddenRows();
 }
 
 void FormAchievements::on_FormAchievementsRadioButtonReached_clicked(){
     for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++)
-        if(ui->FormAchievementsTableWidgetAchievements->item(i,4)->text().indexOf(".")>-1)
-            ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,false); else
-            ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,true);
+        if(ui->FormAchievementsTableWidgetAchievements->item(i,4)->text().indexOf(".")>-1){
+            filter[i][1]=true;} else{
+            filter[i][1]=false;}
+    UpdateHiddenRows();
 }
 
 void FormAchievements::on_FormAchievementsRadioButtonNotReached_clicked(){
     for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++)
-        if(ui->FormAchievementsTableWidgetAchievements->item(i,4)->text().indexOf(".")>-1)
-            ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,true); else
-            ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,false);
+        if(ui->FormAchievementsTableWidgetAchievements->item(i,4)->text().indexOf(".")>-1){
+            filter[i][1]=false;} else{
+            filter[i][1]=true;}
+    UpdateHiddenRows();
+}
+
+void FormAchievements::on_FormAchievementsLineEditNameAchievements_textChanged(const QString&){
+    for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++)
+        if((ui->FormAchievementsTableWidgetAchievements->item(i,1)->text().toLower().indexOf(ui->FormAchievementsLineEditNameAchievements->text().toLower())>-1)||(ui->FormAchievementsTableWidgetAchievements->item(i,2)->text().toLower().indexOf(ui->FormAchievementsLineEditNameAchievements->text().toLower())>-1))
+            filter[i][0]=true; else
+            filter[i][0]=false;
+    UpdateHiddenRows();
 }
