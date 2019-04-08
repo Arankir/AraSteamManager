@@ -1,7 +1,7 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, int languages, QWidget *parent) :
+FormGames::FormGames(QString ids, QString keys, int languages, QJsonDocument Games, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormGames)
 {
@@ -11,11 +11,9 @@ FormGames::FormGames(QString ids, QString keys, int languages, QWidget *parent) 
     language=languages;
 
     QNetworkAccessManager manager;
-    QNetworkReply &gamesreply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id)));
     QEventLoop loop;  //Ждем ответ от сервера.
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    loop.exec();
-    JsonDocGames = QJsonDocument::fromJson(gamesreply.readAll());
+    JsonDocGames = Games;
     //{"appid":218620,
     //"name":"PAYDAY 2",
     //"playtime_2weeks":329,

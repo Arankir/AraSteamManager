@@ -114,7 +114,7 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
     DocPlayerSummaries = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll());
     if(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().size()>0){
         id=ids;
-        QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&format=json&steamid="+id));
+        QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
         loop.exec();
         DocOwnedGames = QJsonDocument::fromJson(ReplyOwnedGames.readAll());
         QNetworkReply &ReplyFriendList = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
@@ -285,7 +285,7 @@ void MainWindow::on_FormProfileButtonSetProfile_clicked(){
 }
 
 void MainWindow::on_FormProfileButtonGames_clicked(){
-    gamesform = new FormGames(id,key,language);
+    gamesform = new FormGames(id,key,language,DocOwnedGames);
     connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
     gamesform->show();
     this->setEnabled(false);

@@ -12,6 +12,8 @@
 #include <QStandardItemModel>
 #include <QCheckBox>
 #include <QMessageBox>
+#include <QFile>
+#include <QDir>
 
 namespace Ui {
 class FormNewCategory;
@@ -33,6 +35,8 @@ private slots:
     void on_FormAddCategoryButtonAddParameterValue_clicked();
 
     void on_FormAddCategoryButtonCancel_clicked();
+
+    void on_FormAddCategoryButtonAddCategory_clicked();
 
 private:
     Ui::FormNewCategory *ui;

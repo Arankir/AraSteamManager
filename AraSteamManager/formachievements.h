@@ -12,6 +12,8 @@
 #include <QStandardItemModel>
 #include <formnewcategory.h>
 #include <QDir>
+#include <QComboBox>
+#include <QHBoxLayout>
 
 namespace Ui {
 class FormAchievements;
@@ -30,6 +32,7 @@ signals:
     void return_to_games();
 
 private slots:
+    void on_ComboBoxCategory_Change(int index);
     void closeEvent(QCloseEvent *);
     void on_FormAchievementsButtonReturn_clicked();
     void FavoritesClicked();

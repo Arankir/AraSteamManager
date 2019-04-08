@@ -1,10 +1,7 @@
 #include "formnewcategory.h"
 #include "ui_formnewcategory.h"
 
-FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QString appids, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormNewCategory)
-{
+FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QString appids, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormNewCategory){
     ui->setupUi(this);
     id=ids;
     key=keys;
@@ -13,12 +10,12 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
     QEventLoop loop;
     QNetworkAccessManager manager;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    QNetworkReply &replyGlobalAchievementPercentagesForApp = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+appid)));
+    QNetworkReply &replyGlobalAchievementPercentagesForApp = *manager.get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+appid));
     loop.exec();
     JsonDocGlobalAchievementPercentagesForApp = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
     //{"name": "no_one_cared_who_i_was",
     //"percent": 85}
-    QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+    QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id));
     loop.exec();
     JsonDocPlayerAchievements = QJsonDocument::fromJson(replyPlayerAchievements.readAll());
     //{"apiname":"hot_wheels",
@@ -42,11 +39,11 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
         ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem("Time received"));
         ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(7,new QTableWidgetItem("Hidden"));
         ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(8,new QTableWidgetItem("Icon url"));
-        QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=english")));
+        QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=english"));
         loop.exec();
         JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
         break;
-    }
+        }
     case 5:{
         ui->FormAddCategoryButtonCancel->setText("Отмена");
         ui->FormAddCategoryButtonAddCategory->setText("Добавить категорию");
@@ -63,7 +60,7 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
         ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem("Время получения"));
         ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(7,new QTableWidgetItem("Скрыто"));
         ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(8,new QTableWidgetItem("URL иконки"));
-        QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=russian")));
+        QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=russian"));
         loop.exec();
         JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
         //{"name":"hot_wheels",
@@ -73,10 +70,10 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
         //"description":"Выполняя первый день контракта \"Сторожевые псы\", не дайте полицейским убить водителя пикапа.",
         //"icon":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/218620/f6ed9cd6ec9750bcd36193c74e6f16104f6c1267.jpg",
         //"icongray":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/218620/c336adacd88a21a6010c9b5596192322aecaf265.jpg"}
-    }
+        }
     }
     ui->FormAddCategoryLabelGame->setText(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("gameName").toString());
-    QNetworkReply &gamereply = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id)));
+    QNetworkReply &gamereply = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
     loop.exec();
     QJsonDocument JsonDocGame = QJsonDocument::fromJson(gamereply.readAll());
     //{"appid":218620,
@@ -130,6 +127,7 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(1,100);
     ui->FormAddCategoryTableWidgetAchievements->setColumnWidth(2,315);
     ui->FormAddCategoryTableWidgetAchievements->resizeColumnToContents(3);
+    ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(3,true);
     ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(4,true);
     ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(5,true);
     ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(6,true);
@@ -138,8 +136,7 @@ FormNewCategory::FormNewCategory(QString ids, QString keys, int languages, QStri
     ui->FormAddCategoryTableWidgetAchievements->setColumnHidden(9,true);
 }
 
-FormNewCategory::~FormNewCategory()
-{
+FormNewCategory::~FormNewCategory(){
     delete ui;
 }
 
@@ -149,7 +146,14 @@ void FormNewCategory::closeEvent(QCloseEvent *){
 
 void FormNewCategory::on_FormAddCategoryButtonAddParameterValue_clicked(){
     //QVector <QPair<QString, QVector<QPair <int,QCheckBox*>>>> variants;
-    if(ui->FormAddCategoryLineEditNameValue->text()!="")/*и проверить что такого значения нет*/{
+    bool accept=true;
+    if(ui->FormAddCategoryTableWidgetAchievements->columnCount()>9)
+        for (int i=9;i<ui->FormAddCategoryTableWidgetAchievements->columnCount();i++){
+            if(ui->FormAddCategoryTableWidgetAchievements->horizontalHeaderItem(i)->text()==ui->FormAddCategoryLineEditNameValue->text()){
+               accept=false;
+            }
+        }
+    if((ui->FormAddCategoryLineEditNameValue->text()!="")&&(accept)){
         QVector<QCheckBox*> valuebool(ui->FormAddCategoryTableWidgetAchievements->rowCount());
         QPair<QString, QVector<QCheckBox*>> value;
         value.first=ui->FormAddCategoryLineEditNameValue->text();
@@ -158,25 +162,89 @@ void FormNewCategory::on_FormAddCategoryButtonAddParameterValue_clicked(){
         ui->FormAddCategoryTableWidgetAchievements->setColumnCount(ui->FormAddCategoryTableWidgetAchievements->columnCount()+1);
         ui->FormAddCategoryTableWidgetAchievements->setHorizontalHeaderItem(ui->FormAddCategoryTableWidgetAchievements->columnCount()-1,new QTableWidgetItem(ui->FormAddCategoryLineEditNameValue->text()));
         for (int i=0;i<ui->FormAddCategoryTableWidgetAchievements->rowCount();i++){
-            QCheckBox *chb = new QCheckBox;
-            chb->setObjectName(ui->FormAddCategoryLineEditNameValue->text()+"_number_"+QString::number(i));
-            chb->setText("Add");
-            ui->FormAddCategoryTableWidgetAchievements->setCellWidget(i,ui->FormAddCategoryTableWidgetAchievements->columnCount()-1,chb);
+            QTableWidgetItem* pItem(new QTableWidgetItem(tr("Add")));
+            pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
+            pItem->setCheckState(Qt::Unchecked);
+            ui->FormAddCategoryTableWidgetAchievements->setItem(i,ui->FormAddCategoryTableWidgetAchievements->columnCount()-1, pItem);
+//            QCheckBox *chb = new QCheckBox("Add");
+//            chb->setObjectName(ui->FormAddCategoryLineEditNameValue->text()+"_number_"+QString::number(i));
+//            ui->FormAddCategoryTableWidgetAchievements->setCellWidget(i,ui->FormAddCategoryTableWidgetAchievements->columnCount()-1,chb);
             //connect(chb,SIGNAL(stateChanged(int)),this,SLOT(chbCook3Change(int)));
-            value.second[i]=chb;
+//            value.second[i]=chb;
         }
     } else
         switch(language){
         case 1:{
-            QMessageBox::warning(this,"Warning","Title of value is empty!");
+            QMessageBox::warning(this,"Warning","Title of value is empty or such value already exists!");
             break;
             }
         case 5:
-            QMessageBox::warning(this,"Ошибка","Название значения пустое!");
+            QMessageBox::warning(this,"Ошибка","Название значения пустое или такое значение уже существует!");
         }
 }
 
 void FormNewCategory::on_FormAddCategoryButtonCancel_clicked(){
     emit return_to_achievements();
     delete this;
+}
+
+void FormNewCategory::on_FormAddCategoryButtonAddCategory_clicked(){
+    if(!QDir("Files/Categories/"+appid).exists()){
+        QDir().mkdir("Files/Categories/"+appid);
+    }
+    if(ui->FormAddCategoryLineEditNameCategory->text()!=""){
+        QFile Category("Files/Categories/"+appid+"/"+ui->FormAddCategoryLineEditNameCategory->text()+".json");
+        if(!QFile::exists("Files/Categories/"+appid+"/"+ui->FormAddCategoryLineEditNameCategory->text()+".json")){
+            if(Category.open(QIODevice::WriteOnly)){
+                QJsonDocument category;
+                QJsonArray groups;
+                QJsonObject group;
+                group["name"]=ui->FormAddCategoryLineEditNameCategory->text();
+//                group["language"]=language;
+                QJsonArray values;
+                QJsonObject val;
+//                values.append("none");
+                for (int i=9;i<ui->FormAddCategoryTableWidgetAchievements->columnCount();i++){
+                    values.append(ui->FormAddCategoryTableWidgetAchievements->horizontalHeaderItem(i)->text());
+                    QJsonArray valn;
+                    for (int j=0;j<ui->FormAddCategoryTableWidgetAchievements->rowCount();j++) {
+                        if(ui->FormAddCategoryTableWidgetAchievements->item(j,i)->checkState()){
+//                            QJsonObject valna;
+//                            valna["name"]=ui->FormAddCategoryTableWidgetAchievements->item(j,3)->text();
+//                            valna["index"]=j;
+//                            valna["percent"]=ui->FormAddCategoryTableWidgetAchievements->item(j,4)->text();
+//                            valna["achieved"]=ui->FormAddCategoryTableWidgetAchievements->item(j,5)->text();
+//                            valna["date"]=ui->FormAddCategoryTableWidgetAchievements->item(j,6)->text();
+//                            valna["displayName"]=ui->FormAddCategoryTableWidgetAchievements->item(j,1)->text();
+//                            valna["hidden"]=ui->FormAddCategoryTableWidgetAchievements->item(j,7)->text();
+//                            valna["description"]=ui->FormAddCategoryTableWidgetAchievements->item(j,2)->text();
+//                            valna["icon"]=ui->FormAddCategoryTableWidgetAchievements->item(j,8)->text();
+                            valn.append(ui->FormAddCategoryTableWidgetAchievements->item(j,3)->text());
+                        }
+                    group[ui->FormAddCategoryTableWidgetAchievements->horizontalHeaderItem(i)->text()]=valn;
+                    }
+                }
+                group["values"]=values;
+                category.setObject(group);
+                Category.write(category.toJson());
+                Category.close();
+            }
+        } else
+            switch(language){
+            case 1:{
+                QMessageBox::warning(this,"Warning","Category with this name already exist!");
+                break;
+                }
+            case 5:
+                QMessageBox::warning(this,"Ошибка","Такая категория уже есть!");
+            }
+    } else
+        switch(language){
+        case 1:{
+            QMessageBox::warning(this,"Warning","Category name is empty!");
+            break;
+            }
+        case 5:
+            QMessageBox::warning(this,"Ошибка","Название категории пустое!");
+        }
 }
