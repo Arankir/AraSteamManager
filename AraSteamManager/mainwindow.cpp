@@ -197,7 +197,6 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
                 QMessageBox::warning(this,"Ошибка","Профиль не существует!");
                 break;
                 }
-                QMessageBox::warning(this,"Error","Profile not exist!");
             }
         }
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));

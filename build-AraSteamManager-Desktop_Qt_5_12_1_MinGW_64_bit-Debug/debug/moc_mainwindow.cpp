@@ -32,27 +32,27 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 39), // "on_FormProfileButtonFindProfi..."
-QT_MOC_LITERAL(2, 51, 0), // ""
-QT_MOC_LITERAL(3, 52, 23), // "on_FindAccount_language"
-QT_MOC_LITERAL(4, 76, 13), // "LabelRealName"
-QT_MOC_LITERAL(5, 90, 8), // "RealName"
-QT_MOC_LITERAL(6, 99, 16), // "LabelTimeCreated"
-QT_MOC_LITERAL(7, 116, 11), // "TimeCreated"
-QT_MOC_LITERAL(8, 128, 11), // "ButtonGames"
-QT_MOC_LITERAL(9, 140, 5), // "Games"
-QT_MOC_LITERAL(10, 146, 13), // "ButtonFriends"
-QT_MOC_LITERAL(11, 160, 7), // "Friends"
-QT_MOC_LITERAL(12, 168, 12), // "personastate"
-QT_MOC_LITERAL(13, 181, 3), // "PS0"
-QT_MOC_LITERAL(14, 185, 3), // "PS1"
-QT_MOC_LITERAL(15, 189, 3), // "PS2"
-QT_MOC_LITERAL(16, 193, 3), // "PS3"
-QT_MOC_LITERAL(17, 197, 3), // "PS4"
-QT_MOC_LITERAL(18, 201, 3), // "PS5"
-QT_MOC_LITERAL(19, 205, 3), // "PS6"
-QT_MOC_LITERAL(20, 209, 19), // "LabelLocCountryCode"
-QT_MOC_LITERAL(21, 229, 14), // "LocCountryCode"
+QT_MOC_LITERAL(1, 11, 23), // "on_FindAccount_language"
+QT_MOC_LITERAL(2, 35, 0), // ""
+QT_MOC_LITERAL(3, 36, 13), // "LabelRealName"
+QT_MOC_LITERAL(4, 50, 8), // "RealName"
+QT_MOC_LITERAL(5, 59, 16), // "LabelTimeCreated"
+QT_MOC_LITERAL(6, 76, 11), // "TimeCreated"
+QT_MOC_LITERAL(7, 88, 11), // "ButtonGames"
+QT_MOC_LITERAL(8, 100, 5), // "Games"
+QT_MOC_LITERAL(9, 106, 13), // "ButtonFriends"
+QT_MOC_LITERAL(10, 120, 7), // "Friends"
+QT_MOC_LITERAL(11, 128, 12), // "personastate"
+QT_MOC_LITERAL(12, 141, 3), // "PS0"
+QT_MOC_LITERAL(13, 145, 3), // "PS1"
+QT_MOC_LITERAL(14, 149, 3), // "PS2"
+QT_MOC_LITERAL(15, 153, 3), // "PS3"
+QT_MOC_LITERAL(16, 157, 3), // "PS4"
+QT_MOC_LITERAL(17, 161, 3), // "PS5"
+QT_MOC_LITERAL(18, 165, 3), // "PS6"
+QT_MOC_LITERAL(19, 169, 19), // "LabelLocCountryCode"
+QT_MOC_LITERAL(20, 189, 14), // "LocCountryCode"
+QT_MOC_LITERAL(21, 204, 39), // "on_FormProfileButtonFindProfi..."
 QT_MOC_LITERAL(22, 244, 38), // "on_FormProfileButtonSetProfil..."
 QT_MOC_LITERAL(23, 283, 33), // "on_FormProfileButtonGames_cli..."
 QT_MOC_LITERAL(24, 317, 9), // "on_return"
@@ -60,12 +60,13 @@ QT_MOC_LITERAL(25, 327, 10), // "closeEvent"
 QT_MOC_LITERAL(26, 338, 12) // "QCloseEvent*"
 
     },
-    "MainWindow\0on_FormProfileButtonFindProfile_clicked\0"
-    "\0on_FindAccount_language\0LabelRealName\0"
-    "RealName\0LabelTimeCreated\0TimeCreated\0"
-    "ButtonGames\0Games\0ButtonFriends\0Friends\0"
-    "personastate\0PS0\0PS1\0PS2\0PS3\0PS4\0PS5\0"
-    "PS6\0LabelLocCountryCode\0LocCountryCode\0"
+    "MainWindow\0on_FindAccount_language\0\0"
+    "LabelRealName\0RealName\0LabelTimeCreated\0"
+    "TimeCreated\0ButtonGames\0Games\0"
+    "ButtonFriends\0Friends\0personastate\0"
+    "PS0\0PS1\0PS2\0PS3\0PS4\0PS5\0PS6\0"
+    "LabelLocCountryCode\0LocCountryCode\0"
+    "on_FormProfileButtonFindProfile_clicked\0"
     "on_FormProfileButtonSetProfile_clicked\0"
     "on_FormProfileButtonGames_clicked\0"
     "on_return\0closeEvent\0QCloseEvent*"
@@ -86,16 +87,16 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x08 /* Private */,
-       3,   18,   45,    2, 0x08 /* Private */,
+       1,   18,   44,    2, 0x08 /* Private */,
+      21,    0,   81,    2, 0x08 /* Private */,
       22,    0,   82,    2, 0x08 /* Private */,
       23,    0,   83,    2, 0x08 /* Private */,
       24,    0,   84,    2, 0x08 /* Private */,
       25,    1,   85,    2, 0x08 /* Private */,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QDateTime, QMetaType::QString, QMetaType::Int, QMetaType::QString, QMetaType::Int, QMetaType::Int, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QDateTime, QMetaType::QString, QMetaType::Int, QMetaType::QString, QMetaType::Int, QMetaType::Int, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,   21,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -110,8 +111,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_FormProfileButtonFindProfile_clicked(); break;
-        case 1: _t->on_FindAccount_language((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QDateTime(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7])),(*reinterpret_cast< int(*)>(_a[8])),(*reinterpret_cast< int(*)>(_a[9])),(*reinterpret_cast< QString(*)>(_a[10])),(*reinterpret_cast< QString(*)>(_a[11])),(*reinterpret_cast< QString(*)>(_a[12])),(*reinterpret_cast< QString(*)>(_a[13])),(*reinterpret_cast< QString(*)>(_a[14])),(*reinterpret_cast< QString(*)>(_a[15])),(*reinterpret_cast< QString(*)>(_a[16])),(*reinterpret_cast< QString(*)>(_a[17])),(*reinterpret_cast< QString(*)>(_a[18]))); break;
+        case 0: _t->on_FindAccount_language((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< QDateTime(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7])),(*reinterpret_cast< int(*)>(_a[8])),(*reinterpret_cast< int(*)>(_a[9])),(*reinterpret_cast< QString(*)>(_a[10])),(*reinterpret_cast< QString(*)>(_a[11])),(*reinterpret_cast< QString(*)>(_a[12])),(*reinterpret_cast< QString(*)>(_a[13])),(*reinterpret_cast< QString(*)>(_a[14])),(*reinterpret_cast< QString(*)>(_a[15])),(*reinterpret_cast< QString(*)>(_a[16])),(*reinterpret_cast< QString(*)>(_a[17])),(*reinterpret_cast< QString(*)>(_a[18]))); break;
+        case 1: _t->on_FormProfileButtonFindProfile_clicked(); break;
         case 2: _t->on_FormProfileButtonSetProfile_clicked(); break;
         case 3: _t->on_FormProfileButtonGames_clicked(); break;
         case 4: _t->on_return(); break;

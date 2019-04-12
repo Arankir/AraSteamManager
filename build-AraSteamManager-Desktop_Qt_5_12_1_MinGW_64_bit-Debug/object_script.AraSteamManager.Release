@@ -1,0 +1,11 @@
+release/main.o
+release/mainwindow.o
+release/formgames.o
+release/formachievements.o
+release/formnewcategory.o
+release/formchangecategory.o
+release/moc_mainwindow.o
+release/moc_formgames.o
+release/moc_formachievements.o
+release/moc_formnewcategory.o
+release/moc_formchangecategory.o

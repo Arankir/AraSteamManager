@@ -1,0 +1,11 @@
+debug/main.o
+debug/mainwindow.o
+debug/formgames.o
+debug/formachievements.o
+debug/formnewcategory.o
+debug/formchangecategory.o
+debug/moc_mainwindow.o
+debug/moc_formgames.o
+debug/moc_formachievements.o
+debug/moc_formnewcategory.o
+debug/moc_formchangecategory.o

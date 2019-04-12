@@ -10,10 +10,11 @@
 #include <QJsonArray>
 #include <QStandardItem>
 #include <QStandardItemModel>
-#include <formnewcategory.h>
 #include <QDir>
 #include <QComboBox>
 #include <QHBoxLayout>
+#include <QMessageBox>
+#include <QFormLayout>
 
 namespace Ui {
 class FormAchievements;
@@ -26,7 +27,6 @@ class FormAchievements : public QWidget
 public:
     explicit FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameName, QWidget *parent = nullptr);
     ~FormAchievements();
-    FormNewCategory *newcategoryform;
 
 signals:
     void return_to_games();
@@ -48,6 +48,17 @@ private slots:
 
     void on_FormAchievementsLineEditNameAchievements_textChanged(const QString &arg1);
 
+    void on_FormAchievementsButtonChangeCategory_clicked();
+
+    void on_FormAchievementsButtonCancelNewCategory_clicked();
+
+    void on_FormAchievementsButtonCancelChangeCategory_clicked();
+
+    void on_FormAchievementsButtonAddValueNewCategory_clicked();
+    void on_buttonNewCategoryDeleteValues_clicked();
+
+    void on_FormAchievementsButtonAccessNewCategory_clicked();
+
 private:
     Ui::FormAchievements *ui;
     QString key;
@@ -60,6 +71,7 @@ private:
     QJsonDocument JsonDocSchemaForGame;
     bool **filter;
     int colfilter=3;
+    QFormLayout *newcategoryvalueslayout;
 };
 
 #endif // FORMACHIEVEMENTS_H

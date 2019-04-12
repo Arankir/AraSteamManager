@@ -13,18 +13,75 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <item row="6" column="0" colspan="9">
-    <widget class="QTableWidget" name="FormAchievementsTableWidgetAchievements"/>
-   </item>
-   <item row="0" column="8">
-    <widget class="QPushButton" name="FormAchievementsButtonReturn">
-     <property name="text">
-      <string>Return</string>
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="4" column="0" colspan="5">
+    <widget class="QGroupBox" name="FormAchievementsGroupBoxChangeCategory">
+     <property name="title">
+      <string>Change category</string>
      </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="3" rowspan="3">
+       <widget class="QScrollArea" name="FormAchievementsScrollAreaValuesChangeCategory">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_3">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>233</width>
+           <height>68</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="2" column="4">
+       <widget class="QPushButton" name="FormAchievementsButtonAccessChangeCategory">
+        <property name="text">
+         <string>Access</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QComboBox" name="FormAchievementsComboBoxCategoriesChangeCategory"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="FormAchievementsButtonAddValueChangeCategory">
+        <property name="text">
+         <string>Add Value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QPushButton" name="FormAchievementsButtonCancelChangeCategory">
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLineEdit" name="FormAchievementsLineEditTitleValueChangeCategory">
+        <property name="placeholderText">
+         <string>Title of value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="FormAchievementsButtonDeleteCategory">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QLineEdit" name="FormAchievementsLineEditTitleCategoryChangeCategory"/>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="2" column="0" rowspan="2" colspan="9">
+   <item row="2" column="0" colspan="5">
     <widget class="QGroupBox" name="FormAchievementsGroupBoxFilter">
      <property name="title">
       <string>Filter</string>
@@ -112,11 +169,65 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="8">
-    <widget class="QPushButton" name="FormAchievementsButtonCompare">
-     <property name="text">
-      <string>Compare with friends</string>
+   <item row="3" column="0" colspan="5">
+    <widget class="QGroupBox" name="FormAchievementsGroupBoxAddCategory">
+     <property name="title">
+      <string>New category</string>
      </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0" colspan="2">
+       <widget class="QLineEdit" name="FormAchievementsLineEditTitleNewCategory">
+        <property name="placeholderText">
+         <string>Title of category</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" rowspan="3">
+       <widget class="QScrollArea" name="FormAchievementsScrollAreaValues">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>276</width>
+           <height>68</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="FormAchievementsButtonCancelNewCategory">
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QPushButton" name="FormAchievementsButtonAccessNewCategory">
+        <property name="text">
+         <string>Access</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLineEdit" name="FormAchievementsLineEditTitleValueNewCategory">
+        <property name="placeholderText">
+         <string>Title of value</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="FormAchievementsButtonAddValueNewCategory">
+        <property name="text">
+         <string>Add Value</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item row="1" column="1">
@@ -128,6 +239,23 @@
      </property>
      <property name="text">
       <string>GameOnline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="5">
+    <widget class="QTableWidget" name="FormAchievementsTableWidgetAchievements"/>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="FormAchievementsButtonReturn">
+     <property name="text">
+      <string>Return</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <widget class="QPushButton" name="FormAchievementsButtonCompare">
+     <property name="text">
+      <string>Compare with friends</string>
      </property>
     </widget>
    </item>

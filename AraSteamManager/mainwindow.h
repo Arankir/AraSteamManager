@@ -31,9 +31,9 @@ public:
     FormGames *gamesform;
 
 private slots:
-    void on_FormProfileButtonFindProfile_clicked();
     void on_FindAccount_language(QString LabelRealName, QString RealName, QString LabelTimeCreated, QDateTime TimeCreated, QString ButtonGames, int Games, QString ButtonFriends, int Friends, int personastate, QString PS0, QString PS1, QString PS2, QString PS3, QString PS4, QString PS5, QString PS6, QString LabelLocCountryCode, QString LocCountryCode);
 
+    void on_FormProfileButtonFindProfile_clicked();
     void on_FormProfileButtonSetProfile_clicked();
 
     void on_FormProfileButtonGames_clicked();
