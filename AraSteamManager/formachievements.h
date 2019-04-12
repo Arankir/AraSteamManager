@@ -56,8 +56,15 @@ private slots:
 
     void on_FormAchievementsButtonAddValueNewCategory_clicked();
     void on_buttonNewCategoryDeleteValues_clicked();
+    void on_buttonChangeCategoryDeleteValues_clicked();
 
     void on_FormAchievementsButtonAccessNewCategory_clicked();
+
+    void on_FormAchievementsComboBoxCategoriesChangeCategory_activated(int index);
+
+    void on_FormAchievementsButtonAddValueChangeCategory_clicked();
+
+    void on_FormAchievementsButtonAccessChangeCategory_clicked();
 
 private:
     Ui::FormAchievements *ui;
@@ -72,6 +79,7 @@ private:
     bool **filter;
     int colfilter=3;
     QFormLayout *newcategoryvalueslayout;
+    QFormLayout *changecategoryvalueslayout;
 };
 
 #endif // FORMACHIEVEMENTS_H
