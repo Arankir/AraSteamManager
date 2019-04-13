@@ -66,6 +66,8 @@ private slots:
 
     void on_FormAchievementsButtonAccessChangeCategory_clicked();
 
+    void on_FormAchievementsButtonDeleteCategory_clicked();
+
 private:
     Ui::FormAchievements *ui;
     QString key;

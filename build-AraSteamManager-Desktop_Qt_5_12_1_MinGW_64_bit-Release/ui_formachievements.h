@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
@@ -28,9 +29,18 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievements
 {
 public:
-    QGridLayout *gridLayout_2;
-    QTableWidget *FormAchievementsTableWidgetAchievements;
-    QPushButton *FormAchievementsButtonReturn;
+    QGridLayout *gridLayout_4;
+    QGroupBox *FormAchievementsGroupBoxChangeCategory;
+    QGridLayout *gridLayout_3;
+    QScrollArea *FormAchievementsScrollAreaValuesChangeCategory;
+    QWidget *scrollAreaWidgetContents_3;
+    QPushButton *FormAchievementsButtonAccessChangeCategory;
+    QComboBox *FormAchievementsComboBoxCategoriesChangeCategory;
+    QPushButton *FormAchievementsButtonAddValueChangeCategory;
+    QPushButton *FormAchievementsButtonCancelChangeCategory;
+    QLineEdit *FormAchievementsLineEditTitleValueChangeCategory;
+    QPushButton *FormAchievementsButtonDeleteCategory;
+    QLineEdit *FormAchievementsLineEditTitleCategoryChangeCategory;
     QGroupBox *FormAchievementsGroupBoxFilter;
     QGridLayout *gridLayout;
     QLineEdit *FormAchievementsLineEditNameAchievements;
@@ -44,8 +54,19 @@ public:
     QCheckBox *FormAchievementsCheckBoxFavorites;
     QRadioButton *FormAchievementsRadioButtonReached;
     QLabel *FormAchievementsLabelTotalPersent;
-    QPushButton *FormAchievementsButtonCompare;
+    QGroupBox *FormAchievementsGroupBoxAddCategory;
+    QGridLayout *gridLayout_2;
+    QLineEdit *FormAchievementsLineEditTitleNewCategory;
+    QScrollArea *FormAchievementsScrollAreaValues;
+    QWidget *scrollAreaWidgetContents_2;
+    QPushButton *FormAchievementsButtonCancelNewCategory;
+    QPushButton *FormAchievementsButtonAccessNewCategory;
+    QLineEdit *FormAchievementsLineEditTitleValueNewCategory;
+    QPushButton *FormAchievementsButtonAddValueNewCategory;
     QLabel *FormAchievementsLabelGameOnline;
+    QTableWidget *FormAchievementsTableWidgetAchievements;
+    QPushButton *FormAchievementsButtonReturn;
+    QPushButton *FormAchievementsButtonCompare;
     QLabel *FormAchievementsLabelGameLogo;
 
     void setupUi(QWidget *FormAchievements)
@@ -53,17 +74,59 @@ public:
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
         FormAchievements->resize(777, 772);
-        gridLayout_2 = new QGridLayout(FormAchievements);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        FormAchievementsTableWidgetAchievements = new QTableWidget(FormAchievements);
-        FormAchievementsTableWidgetAchievements->setObjectName(QString::fromUtf8("FormAchievementsTableWidgetAchievements"));
+        gridLayout_4 = new QGridLayout(FormAchievements);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        FormAchievementsGroupBoxChangeCategory = new QGroupBox(FormAchievements);
+        FormAchievementsGroupBoxChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsGroupBoxChangeCategory"));
+        gridLayout_3 = new QGridLayout(FormAchievementsGroupBoxChangeCategory);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        FormAchievementsScrollAreaValuesChangeCategory = new QScrollArea(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsScrollAreaValuesChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsScrollAreaValuesChangeCategory"));
+        FormAchievementsScrollAreaValuesChangeCategory->setWidgetResizable(true);
+        scrollAreaWidgetContents_3 = new QWidget();
+        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 233, 68));
+        FormAchievementsScrollAreaValuesChangeCategory->setWidget(scrollAreaWidgetContents_3);
 
-        gridLayout_2->addWidget(FormAchievementsTableWidgetAchievements, 6, 0, 1, 9);
+        gridLayout_3->addWidget(FormAchievementsScrollAreaValuesChangeCategory, 0, 3, 3, 1);
 
-        FormAchievementsButtonReturn = new QPushButton(FormAchievements);
-        FormAchievementsButtonReturn->setObjectName(QString::fromUtf8("FormAchievementsButtonReturn"));
+        FormAchievementsButtonAccessChangeCategory = new QPushButton(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsButtonAccessChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAccessChangeCategory"));
 
-        gridLayout_2->addWidget(FormAchievementsButtonReturn, 0, 8, 1, 1);
+        gridLayout_3->addWidget(FormAchievementsButtonAccessChangeCategory, 2, 4, 1, 1);
+
+        FormAchievementsComboBoxCategoriesChangeCategory = new QComboBox(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsComboBoxCategoriesChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsComboBoxCategoriesChangeCategory"));
+
+        gridLayout_3->addWidget(FormAchievementsComboBoxCategoriesChangeCategory, 0, 0, 1, 1);
+
+        FormAchievementsButtonAddValueChangeCategory = new QPushButton(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsButtonAddValueChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAddValueChangeCategory"));
+
+        gridLayout_3->addWidget(FormAchievementsButtonAddValueChangeCategory, 2, 1, 1, 1);
+
+        FormAchievementsButtonCancelChangeCategory = new QPushButton(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsButtonCancelChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonCancelChangeCategory"));
+
+        gridLayout_3->addWidget(FormAchievementsButtonCancelChangeCategory, 0, 4, 1, 1);
+
+        FormAchievementsLineEditTitleValueChangeCategory = new QLineEdit(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsLineEditTitleValueChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsLineEditTitleValueChangeCategory"));
+
+        gridLayout_3->addWidget(FormAchievementsLineEditTitleValueChangeCategory, 2, 0, 1, 1);
+
+        FormAchievementsButtonDeleteCategory = new QPushButton(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsButtonDeleteCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonDeleteCategory"));
+
+        gridLayout_3->addWidget(FormAchievementsButtonDeleteCategory, 2, 2, 1, 1);
+
+        FormAchievementsLineEditTitleCategoryChangeCategory = new QLineEdit(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsLineEditTitleCategoryChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsLineEditTitleCategoryChangeCategory"));
+
+        gridLayout_3->addWidget(FormAchievementsLineEditTitleCategoryChangeCategory, 0, 1, 1, 2);
+
+
+        gridLayout_4->addWidget(FormAchievementsGroupBoxChangeCategory, 4, 0, 1, 5);
 
         FormAchievementsGroupBoxFilter = new QGroupBox(FormAchievements);
         FormAchievementsGroupBoxFilter->setObjectName(QString::fromUtf8("FormAchievementsGroupBoxFilter"));
@@ -126,12 +189,49 @@ public:
         gridLayout->addWidget(FormAchievementsLabelTotalPersent, 1, 1, 1, 1);
 
 
-        gridLayout_2->addWidget(FormAchievementsGroupBoxFilter, 2, 0, 2, 9);
+        gridLayout_4->addWidget(FormAchievementsGroupBoxFilter, 2, 0, 1, 5);
 
-        FormAchievementsButtonCompare = new QPushButton(FormAchievements);
-        FormAchievementsButtonCompare->setObjectName(QString::fromUtf8("FormAchievementsButtonCompare"));
+        FormAchievementsGroupBoxAddCategory = new QGroupBox(FormAchievements);
+        FormAchievementsGroupBoxAddCategory->setObjectName(QString::fromUtf8("FormAchievementsGroupBoxAddCategory"));
+        gridLayout_2 = new QGridLayout(FormAchievementsGroupBoxAddCategory);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        FormAchievementsLineEditTitleNewCategory = new QLineEdit(FormAchievementsGroupBoxAddCategory);
+        FormAchievementsLineEditTitleNewCategory->setObjectName(QString::fromUtf8("FormAchievementsLineEditTitleNewCategory"));
 
-        gridLayout_2->addWidget(FormAchievementsButtonCompare, 1, 8, 1, 1);
+        gridLayout_2->addWidget(FormAchievementsLineEditTitleNewCategory, 0, 0, 1, 2);
+
+        FormAchievementsScrollAreaValues = new QScrollArea(FormAchievementsGroupBoxAddCategory);
+        FormAchievementsScrollAreaValues->setObjectName(QString::fromUtf8("FormAchievementsScrollAreaValues"));
+        FormAchievementsScrollAreaValues->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 276, 68));
+        FormAchievementsScrollAreaValues->setWidget(scrollAreaWidgetContents_2);
+
+        gridLayout_2->addWidget(FormAchievementsScrollAreaValues, 0, 2, 3, 1);
+
+        FormAchievementsButtonCancelNewCategory = new QPushButton(FormAchievementsGroupBoxAddCategory);
+        FormAchievementsButtonCancelNewCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonCancelNewCategory"));
+
+        gridLayout_2->addWidget(FormAchievementsButtonCancelNewCategory, 0, 3, 1, 1);
+
+        FormAchievementsButtonAccessNewCategory = new QPushButton(FormAchievementsGroupBoxAddCategory);
+        FormAchievementsButtonAccessNewCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAccessNewCategory"));
+
+        gridLayout_2->addWidget(FormAchievementsButtonAccessNewCategory, 2, 3, 1, 1);
+
+        FormAchievementsLineEditTitleValueNewCategory = new QLineEdit(FormAchievementsGroupBoxAddCategory);
+        FormAchievementsLineEditTitleValueNewCategory->setObjectName(QString::fromUtf8("FormAchievementsLineEditTitleValueNewCategory"));
+
+        gridLayout_2->addWidget(FormAchievementsLineEditTitleValueNewCategory, 2, 0, 1, 1);
+
+        FormAchievementsButtonAddValueNewCategory = new QPushButton(FormAchievementsGroupBoxAddCategory);
+        FormAchievementsButtonAddValueNewCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAddValueNewCategory"));
+
+        gridLayout_2->addWidget(FormAchievementsButtonAddValueNewCategory, 2, 1, 1, 1);
+
+
+        gridLayout_4->addWidget(FormAchievementsGroupBoxAddCategory, 3, 0, 1, 5);
 
         FormAchievementsLabelGameOnline = new QLabel(FormAchievements);
         FormAchievementsLabelGameOnline->setObjectName(QString::fromUtf8("FormAchievementsLabelGameOnline"));
@@ -139,12 +239,27 @@ public:
         font.setPointSize(14);
         FormAchievementsLabelGameOnline->setFont(font);
 
-        gridLayout_2->addWidget(FormAchievementsLabelGameOnline, 1, 1, 1, 1);
+        gridLayout_4->addWidget(FormAchievementsLabelGameOnline, 1, 1, 1, 1);
+
+        FormAchievementsTableWidgetAchievements = new QTableWidget(FormAchievements);
+        FormAchievementsTableWidgetAchievements->setObjectName(QString::fromUtf8("FormAchievementsTableWidgetAchievements"));
+
+        gridLayout_4->addWidget(FormAchievementsTableWidgetAchievements, 5, 0, 1, 5);
+
+        FormAchievementsButtonReturn = new QPushButton(FormAchievements);
+        FormAchievementsButtonReturn->setObjectName(QString::fromUtf8("FormAchievementsButtonReturn"));
+
+        gridLayout_4->addWidget(FormAchievementsButtonReturn, 0, 4, 1, 1);
+
+        FormAchievementsButtonCompare = new QPushButton(FormAchievements);
+        FormAchievementsButtonCompare->setObjectName(QString::fromUtf8("FormAchievementsButtonCompare"));
+
+        gridLayout_4->addWidget(FormAchievementsButtonCompare, 1, 4, 1, 1);
 
         FormAchievementsLabelGameLogo = new QLabel(FormAchievements);
         FormAchievementsLabelGameLogo->setObjectName(QString::fromUtf8("FormAchievementsLabelGameLogo"));
 
-        gridLayout_2->addWidget(FormAchievementsLabelGameLogo, 0, 0, 2, 1);
+        gridLayout_4->addWidget(FormAchievementsLabelGameLogo, 0, 0, 2, 1);
 
 
         retranslateUi(FormAchievements);
@@ -155,7 +270,12 @@ public:
     void retranslateUi(QWidget *FormAchievements)
     {
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "Form", nullptr));
-        FormAchievementsButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
+        FormAchievementsGroupBoxChangeCategory->setTitle(QApplication::translate("FormAchievements", "Change category", nullptr));
+        FormAchievementsButtonAccessChangeCategory->setText(QApplication::translate("FormAchievements", "Access", nullptr));
+        FormAchievementsButtonAddValueChangeCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
+        FormAchievementsButtonCancelChangeCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
+        FormAchievementsLineEditTitleValueChangeCategory->setPlaceholderText(QApplication::translate("FormAchievements", "Title of value", nullptr));
+        FormAchievementsButtonDeleteCategory->setText(QApplication::translate("FormAchievements", "Delete", nullptr));
         FormAchievementsGroupBoxFilter->setTitle(QApplication::translate("FormAchievements", "Filter", nullptr));
         FormAchievementsButtonChangeCategory->setText(QApplication::translate("FormAchievements", "Change category", nullptr));
         FormAchievementsRadioButtonNotReached->setText(QApplication::translate("FormAchievements", "Not reached", nullptr));
@@ -165,8 +285,15 @@ public:
         FormAchievementsCheckBoxFavorites->setText(QApplication::translate("FormAchievements", "Only favorites", nullptr));
         FormAchievementsRadioButtonReached->setText(QApplication::translate("FormAchievements", "Reached", nullptr));
         FormAchievementsLabelTotalPersent->setText(QApplication::translate("FormAchievements", "TotalPersent", nullptr));
-        FormAchievementsButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
+        FormAchievementsGroupBoxAddCategory->setTitle(QApplication::translate("FormAchievements", "New category", nullptr));
+        FormAchievementsLineEditTitleNewCategory->setPlaceholderText(QApplication::translate("FormAchievements", "Title of category", nullptr));
+        FormAchievementsButtonCancelNewCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
+        FormAchievementsButtonAccessNewCategory->setText(QApplication::translate("FormAchievements", "Access", nullptr));
+        FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText(QApplication::translate("FormAchievements", "Title of value", nullptr));
+        FormAchievementsButtonAddValueNewCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
         FormAchievementsLabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
+        FormAchievementsButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
+        FormAchievementsButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
         FormAchievementsLabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
     } // retranslateUi
 

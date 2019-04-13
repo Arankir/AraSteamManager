@@ -389,6 +389,9 @@ void FormAchievements::on_FormAchievementsButtonCancelChangeCategory_clicked(){
     ui->FormAchievementsGroupBoxChangeCategory->setVisible(false);
     ui->FormAchievementsButtonAddCategory->setEnabled(true);
     ui->FormAchievementsButtonChangeCategory->setEnabled(true);
+    ui->FormAchievementsComboBoxCategoriesChangeCategory->setCurrentIndex(0);
+    ui->FormAchievementsLineEditTitleCategoryChangeCategory->setText("");
+    ui->FormAchievementsLineEditTitleCategoryChangeCategory->setEnabled(false);
 }
 
 void FormAchievements::on_FormAchievementsButtonAddValueNewCategory_clicked(){
@@ -479,6 +482,9 @@ void FormAchievements::on_FormAchievementsButtonAccessNewCategory_clicked(){
                     categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
                     categories.setSorting(QDir::Name);
                     QFileInfoList list = categories.entryInfoList();
+                    for (int i=0;i<list.size();i++) {
+                        ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
+                    }
                     QHBoxLayout *layout = new QHBoxLayout;
                     QWidget *widget = new QWidget;
                     for (int i = 0; i < list.size(); ++i){
@@ -510,7 +516,6 @@ void FormAchievements::on_FormAchievementsButtonAccessNewCategory_clicked(){
                     delete filter;
                     filter = new bool*[ui->FormAchievementsTableWidgetAchievements->rowCount()];
                     filter = New;
-                    qDebug() << filter[ui->FormAchievementsTableWidgetAchievements->rowCount()-1][list.size()+2];
                     }
                 switch(language){
                 case 1:{
@@ -682,7 +687,7 @@ void FormAchievements::on_FormAchievementsButtonAccessChangeCategory_clicked(){
                     categories.setSorting(QDir::Name);
                     QFileInfoList list = categories.entryInfoList();
                     for (int i=0;i<list.size();i++) {
-                        ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(0);
+                        ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
                     }
                     QHBoxLayout *layout = new QHBoxLayout;
                     QWidget *widget = new QWidget;
@@ -740,5 +745,65 @@ void FormAchievements::on_FormAchievementsButtonAccessChangeCategory_clicked(){
             }
         case 5:
             QMessageBox::warning(this,"Ошибка","Название категории пустое!");
+        }
+}
+
+void FormAchievements::on_FormAchievementsButtonDeleteCategory_clicked(){
+    QDir categories("Files/Categories/"+appid);
+    delete ui->FormAchievementsScrollAreaCategories->layout();
+    if(categories.exists()){
+        if(ui->FormAchievementsComboBoxCategoriesChangeCategory->currentIndex()!=0)
+            if(QFile("Files/Categories/"+appid+"/"+ui->FormAchievementsComboBoxCategoriesChangeCategory->currentText()+".json").exists()){
+                QFile("Files/Categories/"+appid+"/"+ui->FormAchievementsComboBoxCategoriesChangeCategory->currentText()+".json").remove();
+            }
+        categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+        categories.setSorting(QDir::Name);
+        QFileInfoList list = categories.entryInfoList();
+        for (int i=0;i<=list.size();i++) {
+            ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
+        }
+        QHBoxLayout *layout = new QHBoxLayout;
+        QWidget *widget = new QWidget;
+        for (int i = 0; i < list.size(); ++i){
+            QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
+            category.open(QFile::ReadOnly);
+            QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
+            QComboBox *cb = new QComboBox;
+            cb->addItem(cat.object().value("name").toString());
+            for (int j=0;j<cat.object().value("values").toArray().size();j++) {
+                cb->addItem(cat.object().value("values").toArray().at(j).toString());
+            }
+            cb->setObjectName("Category"+QString::number(i));
+            connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
+            layout->addWidget(cb);
+            ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(cat.object().value("name").toString());
+            category.close();
+            }
+        widget->setLayout(layout);
+        ui->FormAchievementsScrollAreaCategories->setWidget(widget);
+
+        bool **New = new bool*[ui->FormAchievementsTableWidgetAchievements->rowCount()];
+        for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
+            New[i]=new bool[list.size()+3];
+            for (int j=0;j<list.size()+3;j++) {
+                New[i][j]=true;
+                }
+            }
+        colfilter=list.size()+3;
+        delete filter;
+        filter = new bool*[ui->FormAchievementsTableWidgetAchievements->rowCount()];
+        filter = New;
+        ui->FormAchievementsLineEditNameAchievements->setText("");
+        ui->FormAchievementsRadioButtonAll->setChecked(true);
+        ui->FormAchievementsCheckBoxFavorites->setChecked(false);
+        switch(language){
+        case 1:{
+            QMessageBox::information(this,"Successful","Category has been deleted!");
+            break;
+            }
+        case 5:
+            QMessageBox::information(this,"Успешно","Категория была удалена!");
+        }
+        on_FormAchievementsButtonCancelChangeCategory_clicked();
         }
 }
