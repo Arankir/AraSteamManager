@@ -135,6 +135,17 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     if(!QDir("images/achievements/"+appid).exists()){
         QDir().mkdir("images/achievements/"+appid);
     }
+    if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("success").toBool()==false){
+        ui->FormAchievementsTableWidgetAchievements->insertRow(0);
+        QTableWidgetItem *item1 = new QTableWidgetItem("Error");
+        ui->FormAchievementsTableWidgetAchievements->setItem(0,1,item1);
+        QTableWidgetItem *item2 = new QTableWidgetItem(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("error").toString());
+        ui->FormAchievementsTableWidgetAchievements->setItem(0,2,item2);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(3,true);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(4,true);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(5,true);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(6,true);
+    } else
     for(int i=0;i<JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();i++){
         if(JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("percent")!=0){
             int j=0;
@@ -213,7 +224,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
         categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         categories.setSorting(QDir::Name);
         QFileInfoList list = categories.entryInfoList();
-        QHBoxLayout *layout = new QHBoxLayout;
+        QVBoxLayout *layout = new QVBoxLayout;
         QWidget *widget = new QWidget;
         for (int i = 0; i < list.size(); ++i){
             QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
