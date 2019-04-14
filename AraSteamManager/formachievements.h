@@ -13,6 +13,7 @@
 #include <QDir>
 #include <QComboBox>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QMessageBox>
 #include <QFormLayout>
 
