@@ -112,6 +112,28 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
     QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+ids));
     loop.exec();
     DocPlayerSummaries = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll());
+    //{"response":
+    //{"players":
+    //[{"steamid":"76561198065018572",
+    //"communityvisibilitystate":3, (1 - the profile is not visible to you, 3 - the profile is "Public")
+    //"profilestate":1,
+    //"personaname":"Yuno",
+    //"lastlogoff":1555174765,
+    //"commentpermission":1,
+    //"profileurl":"https://steamcommunity.com/id/Arankir/",
+    //"avatar":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c.jpg",
+    //"avatarmedium":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_medium.jpg",
+    //"avatarfull":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_full.jpg",
+    //"personastate":1,
+    //"primaryclanid":"103582791434380590",
+    //"timecreated":1339187696,
+    //"personastateflags":0,
+    //"gameextrainfo":"Realm of the Mad God",
+    //"gameid":"200210",
+    //"loccountrycode":"JP",
+    //"locstatecode":"40",
+    //"loccityid":26111}]}}
+
     if(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().size()>0){
         id=ids;
         QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
@@ -132,13 +154,13 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         case 1:{
             Error="Error";
             ErrorDescription="Error opening file!";
-            on_FindAccount_language("Real name",Account.value("realname").toString(),"Account created",date,"Games",DocOwnedGames.object().value("response").toObject().value("game_count").toInt(),"Friends",DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size(),Account.value("personastate").toInt(),"Offline","Online","Busy","Away","Snooze","Looking to trade","Looking to play","Language",Account.value("loccountrycode").toString());
+            on_FindAccount_language("Real name",Account.value("realname").toString(),"Account created",date,"Games",DocOwnedGames.object().value("response").toObject().value("game_count").toInt(),"Friends",DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size(),Account.value("personastate").toInt(),"In game","Last logoff","Online","Busy","Away","Snooze","Looking to trade","Looking to play","Language",Account.value("loccountrycode").toString());
             break;
             }
         case 5:{
             Error="Ошибка";
             ErrorDescription="Ошибка при открытии файла!";
-            on_FindAccount_language("Настоящее имя",Account.value("realname").toString(),"Аккаунт создан",date,"Игры",DocOwnedGames.object().value("response").toObject().value("game_count").toInt(),"Друзья",DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size(),Account.value("personastate").toInt(),"Не в сети","В сети","Не беспокоить","Нет на месте","Спит","Ожидает обмена","Хочет поиграть","Язык",Account.value("loccountrycode").toString());
+            on_FindAccount_language("Настоящее имя",Account.value("realname").toString(),"Аккаунт создан",date,"Игры",DocOwnedGames.object().value("response").toObject().value("game_count").toInt(),"Друзья",DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size(),Account.value("personastate").toInt(),"В игре","Был в сети","В сети","Не беспокоить","Нет на месте","Спит","Ожидает обмена","Хочет поиграть","Язык",Account.value("loccountrycode").toString());
             break;
             }
         }
@@ -164,20 +186,27 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
             } else
                 QMessageBox::warning(this,Error,ErrorDescription);
             }
+//        QPixmap pixmap;
+//        if(!QFile::exists("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
+//            QNetworkAccessManager imagemanager;
+//            QEventLoop imageloop;  //Ждем ответ от сервера.
+//            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+//            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Account.value("avatar").toString()));
+//            imageloop.exec();
+//            QImage img;
+//            img.loadFromData(imagereply.readAll());
+//            img.save("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
+//            pixmap=QPixmap::fromImage(img);
+//        } else {
+//            pixmap.load("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
+//            }
+        QNetworkAccessManager imagemanager;
+        QEventLoop imageloop;  //Ждем ответ от сервера.
+        QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+        QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Account.value("avatar").toString()));
+        imageloop.exec();
         QPixmap pixmap;
-        if(!QFile::exists("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
-            QNetworkAccessManager imagemanager;
-            QEventLoop imageloop;  //Ждем ответ от сервера.
-            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Account.value("avatar").toString()));
-            imageloop.exec();
-            QImage img;
-            img.loadFromData(imagereply.readAll());
-            img.save("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
-            pixmap=QPixmap::fromImage(img);
-        } else {
-            pixmap.load("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
-            }
+        pixmap.loadFromData(imagereply.readAll());
         ui->FormProfileAvatar->setPixmap(pixmap);
         ui->FormProfileButtonGames->setVisible(true);
         ui->FormProfileButtonFriends->setVisible(true);
@@ -202,41 +231,47 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
 
-void MainWindow::on_FindAccount_language(QString LabelRealName, QString RealName, QString LabelTimeCreated, QDateTime TimeCreated, QString ButtonGames, int Games, QString ButtonFriends, int Friends, int personastate, QString PS0, QString PS1, QString PS2, QString PS3, QString PS4, QString PS5, QString PS6, QString LabelLocCountryCode, QString LocCountryCode){
+void MainWindow::on_FindAccount_language(QString LabelRealName, QString RealName, QString LabelTimeCreated, QDateTime TimeCreated, QString ButtonGames, int Games, QString ButtonFriends, int Friends, int personastate, QString InGame, QString PS0, QString PS1, QString PS2, QString PS3, QString PS4, QString PS5, QString PS6, QString LabelLocCountryCode, QString LocCountryCode){
     ui->FormProfileLabelRealName->setText(LabelRealName+": "+RealName);
     ui->FormProfileLabelTimeCreated->setText(LabelTimeCreated+" "+TimeCreated.toString("yyyy.MM.dd"));
     ui->FormProfileButtonGames->setText(ButtonGames+"("+QString::number(Games)+")");
     ui->FormProfileButtonFriends->setText(ButtonFriends+"("+QString::number(Friends)+")");
-    switch (personastate) {
-    case 0:{
-            ui->FormProfileLabelPersonaState->setText(PS0);
-            break;
-    }
-    case 1:{
-            ui->FormProfileLabelPersonaState->setText(PS1);
-            break;
-    }
-    case 2:{
-            ui->FormProfileLabelPersonaState->setText(PS2);
-            break;
-    }
-    case 3:{
-            ui->FormProfileLabelPersonaState->setText(PS3);
-            break;
-    }
-    case 4:{
-            ui->FormProfileLabelPersonaState->setText(PS4);
-            break;
-    }
-    case 5:{
-            ui->FormProfileLabelPersonaState->setText(PS5);
-            break;
-    }
-    case 6:{
-            ui->FormProfileLabelPersonaState->setText(PS6);
-            break;
-    }
-    }
+    if(!DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString().isEmpty()){
+        ui->FormProfileLabelPersonaState->setText(InGame+":\n"+DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString());
+    } else
+        switch (personastate) {
+        case 0:{
+            QDateTime date;
+            date.setDate(QDate::fromString("1970.01.01","yyyy.MM.dd"));
+            date=date.addSecs(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("lastlogoff").toInt());
+                ui->FormProfileLabelPersonaState->setText(PS0+":\n"+date.toString("yyyy.MM.dd\nhh:mm:ss"));
+                break;
+        }
+        case 1:{
+                ui->FormProfileLabelPersonaState->setText(PS1);
+                break;
+        }
+        case 2:{
+                ui->FormProfileLabelPersonaState->setText(PS2);
+                break;
+        }
+        case 3:{
+                ui->FormProfileLabelPersonaState->setText(PS3);
+                break;
+        }
+        case 4:{
+                ui->FormProfileLabelPersonaState->setText(PS4);
+                break;
+        }
+        case 5:{
+                ui->FormProfileLabelPersonaState->setText(PS5);
+                break;
+        }
+        case 6:{
+                ui->FormProfileLabelPersonaState->setText(PS6);
+                break;
+        }
+        }
     ui->FormProfileLabelLocCountryCode->setText(LabelLocCountryCode+": "+LocCountryCode);
 }
 
@@ -284,6 +319,8 @@ void MainWindow::on_FormProfileButtonSetProfile_clicked(){
 }
 
 void MainWindow::on_FormProfileButtonGames_clicked(){
+    qDebug() <<ui->FormProfileAvatar->width() <<ui->FormProfileLabelPersonaName->x()<<ui->FormProfileLabelPersonaName->width() <<ui->FormProfileLabelRealName->width()<<ui->FormProfileLabelPersonaName->text()<< ui->FormProfileAvatar->pixmap();
+
     gamesform = new FormGames(id,key,language,DocOwnedGames);
     connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
     gamesform->show();
