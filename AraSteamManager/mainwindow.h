@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QProgressBar>
 
 #include <QImage>
 
@@ -31,8 +32,6 @@ public:
     FormGames *gamesform;
 
 private slots:
-    void on_FindAccount_language(QString LabelRealName, QString RealName, QString LabelTimeCreated, QDateTime TimeCreated, QString ButtonGames, int Games, QString ButtonFriends, int Friends, int personastate, QString InGame, QString PS0, QString PS1, QString PS2, QString PS3, QString PS4, QString PS5, QString PS6, QString LabelLocCountryCode, QString LocCountryCode);
-
     void on_FormProfileButtonFindProfile_clicked();
     void on_FormProfileButtonSetProfile_clicked();
 
@@ -47,10 +46,13 @@ private:
     QString key="3826BF60403D15613B4B0381DAB7A7BD";
     int language=1;
     int Theme=1;
+    int SaveImages=0;
     QString id;
     QJsonDocument DocPlayerSummaries;
     QJsonDocument DocOwnedGames;
     QJsonDocument DocFriendList;
+    QStringList SLLanguage;
+    QProgressBar *pb;
 };
 
 #endif // MAINWINDOW_H

@@ -21,8 +21,7 @@ class FormGames : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormGames(QString id, QString key, int language, QJsonDocument Games, QWidget *parent = nullptr);
-    void on_FormCreate_language(QString LabelLogo, QString GamePlaceholder, QString ButtonFind, QString ButtonReturn, QString HH0, QString HH1, QString HH2, QString HH3, QJsonArray Games, QString buttonAchievements);
+    explicit FormGames(QString id, QString key, int language, QJsonDocument Games, int SaveImages, QWidget *parent = nullptr);
     ~FormGames();
     FormAchievements *achievementsform;
 
@@ -50,6 +49,8 @@ private:
     QString key;
     int language;
     QJsonDocument JsonDocGames;
+    QStringList SLLanguage;
+    int SaveImages;
 };
 
 #endif // FORMGAMES_H

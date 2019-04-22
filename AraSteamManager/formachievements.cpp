@@ -1,7 +1,7 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameLogo, QWidget *parent) :
+FormAchievements::FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameLogo, int SaveImages, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormAchievements)
 {
@@ -10,6 +10,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     language=languages;
     id=ids;
     appid=appids;
+    QFile FileLanguage;
     QNetworkAccessManager manager;
     QEventLoop loop;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);

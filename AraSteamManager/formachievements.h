@@ -26,7 +26,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameName, QWidget *parent = nullptr);
+    explicit FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameName, int SaveImages, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -83,6 +83,8 @@ private:
     int colfilter=3;
     QFormLayout *newcategoryvalueslayout;
     QFormLayout *changecategoryvalueslayout;
+    QStringList SLLanguage;
+    int SaveImages;
 };
 
 #endif // FORMACHIEVEMENTS_H
