@@ -26,7 +26,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameName, int SaveImages, QWidget *parent = nullptr);
+    explicit FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameName, QJsonDocument JsonDocGlobalAchievement,int SaveImages, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:

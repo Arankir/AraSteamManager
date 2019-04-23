@@ -145,9 +145,7 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         QJsonObject Account=DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject();
         ui->FormProfileLabelPersonaName->setText(Account.value("personaname").toString());
         ui->FormProfileLabelProfileUrl->setText(Account.value("profileurl").toString());
-        QDateTime date;
-        date.setDate(QDate::fromString("1970.01.01","yyyy.MM.dd"));
-        date=date.addSecs(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("timecreated").toInt());
+        QDateTime date=QDateTime::fromSecsSinceEpoch(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("timecreated").toInt(),Qt::LocalTime);
         ui->FormProfileLabelRealName->setText(SLLanguage[8]+": "+Account.value("realname").toString());
         ui->FormProfileLabelTimeCreated->setText(SLLanguage[9]+" "+date.toString("yyyy.MM.dd"));
         ui->FormProfileButtonGames->setText(SLLanguage[10]+"("+QString::number(DocOwnedGames.object().value("response").toObject().value("game_count").toInt())+")");
@@ -157,9 +155,7 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         } else
             switch (Account.value("personastate").toInt()) {
             case 0:{
-                QDateTime date;
-                date.setDate(QDate::fromString("1970.01.01","yyyy.MM.dd"));
-                date=date.addSecs(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("lastlogoff").toInt());
+                QDateTime date=QDateTime::fromSecsSinceEpoch(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("lastlogoff").toInt(),Qt::LocalTime);
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[13]+":\n"+date.toString("yyyy.MM.dd\nhh:mm:ss"));
                     break;
             }

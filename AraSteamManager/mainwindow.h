@@ -12,7 +12,6 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QPixmap>
-#include <QProgressBar>
 
 #include <QImage>
 
@@ -52,7 +51,6 @@ private:
     QJsonDocument DocOwnedGames;
     QJsonDocument DocFriendList;
     QStringList SLLanguage;
-    QProgressBar *pb;
 };
 
 #endif // MAINWINDOW_H

@@ -1,7 +1,7 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameLogo, int SaveImages, QWidget *parent) :
+FormAchievements::FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameLogo, QJsonDocument JsonDocGlobalAchievement,int SaveImage, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormAchievements)
 {
@@ -10,7 +10,25 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     language=languages;
     id=ids;
     appid=appids;
+    SaveImages=SaveImage;
+    JsonDocGlobalAchievementPercentagesForApp = JsonDocGlobalAchievement;
+    //{"name": "no_one_cared_who_i_was",
+    //"percent": 85}
     QFile FileLanguage;
+    switch(language){
+    case 1:{
+        FileLanguage.setFileName("Files/Languages/ENG/achievements.txt");
+        break;
+        }
+    case 5:{
+        FileLanguage.setFileName("Files/Languages/RU/achievements.txt");
+        }
+    }
+    if(FileLanguage.open(QIODevice::ReadOnly)){
+        while(!FileLanguage.atEnd()){
+            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
+        }
+    }
     QNetworkAccessManager manager;
     QEventLoop loop;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -19,11 +37,6 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     JsonDocNumberOfCurrentPlayers = QJsonDocument::fromJson(replyNumberOfCurrentPlayers.readAll());
     //{"player_count":9023,
     //"result":1}
-    QNetworkReply &replyGlobalAchievementPercentagesForApp = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+appid)));
-    loop.exec();
-    JsonDocGlobalAchievementPercentagesForApp = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
-    //{"name": "no_one_cared_who_i_was",
-    //"percent": 85}
     QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
     loop.exec();
     JsonDocPlayerAchievements = QJsonDocument::fromJson(replyPlayerAchievements.readAll());
@@ -31,101 +44,42 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     //"achieved":1,
     //"unlocktime":1445190378}
     ui->FormAchievementsTableWidgetAchievements->setColumnCount(7);
-    QString Reached="";
-    QString NotReached="";
-    QString TotalPercent="";
-    switch (language) {
-    case 1:{
-        ui->FormAchievementsButtonReturn->setText("Return");
-        ui->FormAchievementsButtonCompare->setText("Compare with friends");
-        ui->FormAchievementsLabelGameLogo->setText("");
-        ui->FormAchievementsRadioButtonAll->setText("All achievements");
-        ui->FormAchievementsRadioButtonReached->setText("Reached achievements");
-        ui->FormAchievementsRadioButtonNotReached->setText("Not reached achievements");
-        ui->FormAchievementsButtonAddCategory->setText("Add category");
-        ui->FormAchievementsButtonChangeCategory->setText("Change categories");
-        ui->FormAchievementsCheckBoxFavorites->setText("Only Favorites");
-        ui->FormAchievementsButtonFindAchievement->setText("Find");
-        ui->FormAchievementsGroupBoxFilter->setTitle("Filter");
-        ui->FormAchievementsLineEditNameAchievements->setPlaceholderText("Achievement name");
-        ui->FormAchievementsGroupBoxAddCategory->setTitle("Add category");
-        ui->FormAchievementsButtonAddValueNewCategory->setText("Add value");
-        ui->FormAchievementsButtonCancelNewCategory->setText("Cancel");
-        ui->FormAchievementsButtonAccessNewCategory->setText("Access");
-        ui->FormAchievementsLineEditTitleNewCategory->setPlaceholderText("Text of category");
-        ui->FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText("Text of value");
-        ui->FormAchievementsGroupBoxChangeCategory->setTitle("Change category");
-        ui->FormAchievementsButtonAddValueChangeCategory->setText("Add value");
-        ui->FormAchievementsButtonCancelChangeCategory->setText("Cancel");
-        ui->FormAchievementsButtonAccessChangeCategory->setText("Access");
-        ui->FormAchievementsButtonDeleteCategory->setText("Delete");
-        ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem("Category not selected");
-        ui->FormAchievementsLineEditTitleCategoryChangeCategory->setPlaceholderText("Text of category");
-        ui->FormAchievementsLineEditTitleValueChangeCategory->setPlaceholderText("Text of value");
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem("Title"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem("Description"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem("In the world"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem("Received"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem("Favorites"));
-        Reached="Reached";
-        NotReached="Not reached";
-        TotalPercent="Total percent";
-        QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=english")));
-        loop.exec();
-        JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
-        ui->FormAchievementsLabelGameOnline->setText("Now in game: "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
-        break;
-    }
-    case 5:{
-        ui->FormAchievementsButtonReturn->setText("Вернуться");
-        ui->FormAchievementsButtonCompare->setText("Сравнить с друзьями");
-        ui->FormAchievementsLabelGameLogo->setText("");
-        ui->FormAchievementsRadioButtonAll->setText("Все достижения");
-        ui->FormAchievementsRadioButtonReached->setText("Полученные достижения");
-        ui->FormAchievementsRadioButtonNotReached->setText("Не полученные достижения");
-        ui->FormAchievementsButtonAddCategory->setText("Добавить категорию");
-        ui->FormAchievementsButtonChangeCategory->setText("Изменить категории");
-        ui->FormAchievementsCheckBoxFavorites->setText("Только избранное");
-        ui->FormAchievementsButtonFindAchievement->setText("Найти");
-        ui->FormAchievementsGroupBoxFilter->setTitle("Фильтр");
-        ui->FormAchievementsLineEditNameAchievements->setPlaceholderText("Название достижения");
-        ui->FormAchievementsGroupBoxAddCategory->setTitle("Добавить категорию");
-        ui->FormAchievementsButtonAddValueNewCategory->setText("Добавить значение");
-        ui->FormAchievementsButtonCancelNewCategory->setText("Отмена");
-        ui->FormAchievementsButtonAccessNewCategory->setText("Применить");
-        ui->FormAchievementsLineEditTitleNewCategory->setPlaceholderText("Название категории");
-        ui->FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText("Название значения");
-        ui->FormAchievementsGroupBoxChangeCategory->setTitle("Изменить категорию");
-        ui->FormAchievementsButtonAddValueChangeCategory->setText("Добавить значение");
-        ui->FormAchievementsButtonCancelChangeCategory->setText("Отмена");
-        ui->FormAchievementsButtonAccessChangeCategory->setText("Применить");
-        ui->FormAchievementsButtonDeleteCategory->setText("Удалить");
-        ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem("Категория не выбрана");
-        ui->FormAchievementsLineEditTitleCategoryChangeCategory->setPlaceholderText("Название категории");
-        ui->FormAchievementsLineEditTitleValueChangeCategory->setPlaceholderText("Название значения");
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem("Название"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem("Описание"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem("По миру"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem("Получено"));
-        ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem("Избранное"));
-        Reached="Получено";
-        NotReached="Не получено";
-        TotalPercent="Общий процент";
-        QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=russian")));
-        loop.exec();
-        JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
-        ui->FormAchievementsLabelGameOnline->setText("Сейчас в сети: "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
-        //{"name":"hot_wheels",
-        //"defaultvalue":0,
-        //"displayName":"В полымя",
-        //"hidden":0,
-        //"description":"Выполняя первый день контракта \"Сторожевые псы\", не дайте полицейским убить водителя пикапа.",
-        //"icon":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/218620/f6ed9cd6ec9750bcd36193c74e6f16104f6c1267.jpg",
-        //"icongray":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/218620/c336adacd88a21a6010c9b5596192322aecaf265.jpg"}
-        }
-    }
+    ui->FormAchievementsButtonReturn->setText(SLLanguage[0]);
+    ui->FormAchievementsButtonCompare->setText(SLLanguage[1]);
+    ui->FormAchievementsLabelGameLogo->setText("");
+    ui->FormAchievementsRadioButtonAll->setText(SLLanguage[2]);
+    ui->FormAchievementsRadioButtonReached->setText(SLLanguage[3]);
+    ui->FormAchievementsRadioButtonNotReached->setText(SLLanguage[4]);
+    ui->FormAchievementsButtonAddCategory->setText(SLLanguage[5]);
+    ui->FormAchievementsButtonChangeCategory->setText(SLLanguage[6]);
+    ui->FormAchievementsCheckBoxFavorites->setText(SLLanguage[7]);
+    ui->FormAchievementsButtonFindAchievement->setText(SLLanguage[8]);
+    ui->FormAchievementsGroupBoxFilter->setTitle(SLLanguage[9]);
+    ui->FormAchievementsLineEditNameAchievements->setPlaceholderText(SLLanguage[10]);
+    ui->FormAchievementsGroupBoxAddCategory->setTitle(SLLanguage[5]);
+    ui->FormAchievementsButtonAddValueNewCategory->setText(SLLanguage[11]);
+    ui->FormAchievementsButtonCancelNewCategory->setText(SLLanguage[12]);
+    ui->FormAchievementsButtonAccessNewCategory->setText(SLLanguage[13]);
+    ui->FormAchievementsLineEditTitleNewCategory->setPlaceholderText(SLLanguage[14]);
+    ui->FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText(SLLanguage[15]);
+    ui->FormAchievementsGroupBoxChangeCategory->setTitle(SLLanguage[16]);
+    ui->FormAchievementsButtonAddValueChangeCategory->setText(SLLanguage[11]);
+    ui->FormAchievementsButtonCancelChangeCategory->setText(SLLanguage[12]);
+    ui->FormAchievementsButtonAccessChangeCategory->setText(SLLanguage[13]);
+    ui->FormAchievementsButtonDeleteCategory->setText(SLLanguage[17]);
+    ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(SLLanguage[18]);
+    ui->FormAchievementsLineEditTitleCategoryChangeCategory->setPlaceholderText(SLLanguage[14]);
+    ui->FormAchievementsLineEditTitleValueChangeCategory->setPlaceholderText(SLLanguage[15]);
+    ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+    ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[19]));
+    ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[20]));
+    ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem(SLLanguage[21]));
+    ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem(SLLanguage[23]));
+    ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(SLLanguage[22]));
+    QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l="+SLLanguage[26])));
+    loop.exec();
+    JsonDocSchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll());
+    ui->FormAchievementsLabelGameOnline->setText(SLLanguage[27]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
     QNetworkReply &logoreply = *manager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+appid+"/"+GameLogo+".jpg"));
     loop.exec();
     QPixmap pixmap;
@@ -158,28 +112,35 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
                     }
             }
             if(accept){
-//                QPixmap pixmap;
-//                QString AchievementIcon=JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().mid(66,JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().length());
-//                if(!QFile::exists("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
-//                    QNetworkAccessManager imagemanager;
-//                    QEventLoop imageloop;  //Ждем ответ от сервера.
-//                    QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-//                    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
-//                    imageloop.exec();
-//                    QImage img;
-//                    img.loadFromData(imagereply.readAll());
-//                    img.save("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
-//                    pixmap=QPixmap::fromImage(img);
-//                } else {
-//                    pixmap.load("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
-//                    }
-                QNetworkAccessManager imagemanager;
-                QEventLoop imageloop;  //Ждем ответ от сервера.
-                QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
-                imageloop.exec();
                 QPixmap pixmap;
-                pixmap.loadFromData(imagereply.readAll());
+                switch (SaveImages) {
+                case 0:{
+                    QNetworkAccessManager imagemanager;
+                    QEventLoop imageloop;  //Ждем ответ от сервера.
+                    QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+                    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
+                    imageloop.exec();
+                    pixmap.loadFromData(imagereply.readAll());
+                    break;
+                }
+                case 1:{
+                    QString AchievementIcon=JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().mid(66,JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().length());
+                    if(!QFile::exists("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
+                        QNetworkAccessManager imagemanager;
+                        QEventLoop imageloop;  //Ждем ответ от сервера.
+                        QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+                        QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
+                        imageloop.exec();
+                        QImage img;
+                        img.loadFromData(imagereply.readAll());
+                        img.save("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
+                        pixmap=QPixmap::fromImage(img);
+                    } else {
+                        pixmap.load("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
+                        }
+                    break;
+                }
+                }
                 QLabel *label = new QLabel;
                 label->setPixmap(pixmap);
                 int row = ui->FormAchievementsTableWidgetAchievements->rowCount();
@@ -193,13 +154,11 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,3,item4);
                 QTableWidgetItem *item5;
                 if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("achieved").toInt()==1){
-                    QDateTime date;
-                    date.setDate(QDate::fromString("1970.01.01","yyyy.MM.dd"));
-                    date=date.addSecs(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("unlocktime").toInt());
-                    item5 = new QTableWidgetItem(Reached+" "+date.toString("yyyy.MM.dd"));
+                    QDateTime date=QDateTime::fromSecsSinceEpoch(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("unlocktime").toInt(),Qt::LocalTime);
+                    item5 = new QTableWidgetItem(SLLanguage[23]+" "+date.toString("yyyy.MM.dd hh:mm"));
                     total++;
                 } else {
-                    item5 = new QTableWidgetItem(NotReached);
+                    item5 = new QTableWidgetItem(SLLanguage[24]);
                     }
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,4,item5);
                 QPushButton *button1 = new QPushButton;
@@ -217,7 +176,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
         }
         }
     double percent= 1.0*total/(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().size()-dectotal)*100;
-    ui->FormAchievementsLabelTotalPersent->setText(TotalPercent+" = "+QString::number(percent)+"%");
+    ui->FormAchievementsLabelTotalPersent->setText(SLLanguage[25]+" = "+QString::number(percent)+"%");
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(0,65);
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(1,100);
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(2,315);
@@ -384,10 +343,6 @@ void FormAchievements::on_FormAchievementsLineEditNameAchievements_textChanged(c
 }
 
 void FormAchievements::on_FormAchievementsButtonChangeCategory_clicked(){
-//    changecategoryform = new FormChangeCategory(id,key,language,appid);
-//    connect(changecategoryform,SIGNAL(return_to_achievements()),this,SLOT(on_return()));
-//    changecategoryform->show();
-//    this->setEnabled(false);
     ui->FormAchievementsButtonAddCategory->setEnabled(false);
     ui->FormAchievementsButtonChangeCategory->setEnabled(false);
     ui->FormAchievementsGroupBoxChangeCategory->setVisible(true);
@@ -443,14 +398,7 @@ void FormAchievements::on_FormAchievementsButtonAddValueNewCategory_clicked(){
         ui->FormAchievementsLineEditTitleValueNewCategory->setText("");
         ui->FormAchievementsLineEditTitleValueNewCategory->setFocus();
     } else
-        switch(language){
-        case 1:{
-            QMessageBox::warning(this,"Warning","Title of value is empty or such value already exists!");
-            break;
-            }
-        case 5:
-            QMessageBox::warning(this,"Ошибка","Название значения пустое или такое значение уже существует!");
-        }
+        QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
 }
 
 void FormAchievements::on_buttonNewCategoryDeleteValues_clicked(){
@@ -536,34 +484,13 @@ void FormAchievements::on_FormAchievementsButtonAccessNewCategory_clicked(){
                     filter = new bool*[ui->FormAchievementsTableWidgetAchievements->rowCount()];
                     filter = New;
                     }
-                switch(language){
-                case 1:{
-                    QMessageBox::information(this,"Successful","New Category has been added!");
-                    break;
-                    }
-                case 5:
-                    QMessageBox::information(this,"Успешно","Категория была добавлена!");
-                }
+                    QMessageBox::information(this,SLLanguage[30],SLLanguage[31]);
                 on_FormAchievementsButtonCancelNewCategory_clicked();
             }
         } else
-            switch(language){
-            case 1:{
-                QMessageBox::warning(this,"Warning","Category with this name already exist!");
-                break;
-                }
-            case 5:
-                QMessageBox::warning(this,"Ошибка","Такая категория уже есть!");
-            }
+            QMessageBox::warning(this,SLLanguage[28],SLLanguage[32]);
     } else
-        switch(language){
-        case 1:{
-            QMessageBox::warning(this,"Warning","Category name is empty!");
-            break;
-            }
-        case 5:
-            QMessageBox::warning(this,"Ошибка","Название категории пустое!");
-        }
+        QMessageBox::warning(this,SLLanguage[28],SLLanguage[33]);
 }
 
 void FormAchievements::on_FormAchievementsComboBoxCategoriesChangeCategory_activated(int index){
@@ -654,14 +581,7 @@ void FormAchievements::on_FormAchievementsButtonAddValueChangeCategory_clicked()
         ui->FormAchievementsLineEditTitleValueChangeCategory->setText("");
         ui->FormAchievementsLineEditTitleValueChangeCategory->setFocus();
     } else
-        switch(language){
-        case 1:{
-            QMessageBox::warning(this,"Warning","Title of value is empty or such value already exists!");
-            break;
-            }
-        case 5:
-            QMessageBox::warning(this,"Ошибка","Название значения пустое или такое значение уже существует!");
-        }
+        QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
 }
 
 void FormAchievements::on_FormAchievementsButtonAccessChangeCategory_clicked(){
@@ -737,34 +657,13 @@ void FormAchievements::on_FormAchievementsButtonAccessChangeCategory_clicked(){
                     ui->FormAchievementsRadioButtonAll->setChecked(true);
                     ui->FormAchievementsCheckBoxFavorites->setChecked(false);
                     }
-                switch(language){
-                case 1:{
-                    QMessageBox::information(this,"Successful","New Category has been changed!");
-                    break;
-                    }
-                case 5:
-                    QMessageBox::information(this,"Успешно","Категория была изменена!");
-                }
+                    QMessageBox::information(this,SLLanguage[30],SLLanguage[34]);
                 on_FormAchievementsButtonCancelChangeCategory_clicked();
             }
         } else
-            switch(language){
-            case 1:{
-                QMessageBox::warning(this,"Warning","Category with this name already exist!");
-                break;
-                }
-            case 5:
-                QMessageBox::warning(this,"Ошибка","Такая категория уже есть!");
-            }
+            QMessageBox::warning(this,SLLanguage[28],SLLanguage[32]);
     } else
-        switch(language){
-        case 1:{
-            QMessageBox::warning(this,"Warning","Category name is empty!");
-            break;
-            }
-        case 5:
-            QMessageBox::warning(this,"Ошибка","Название категории пустое!");
-        }
+        QMessageBox::warning(this,SLLanguage[28],SLLanguage[33]);
 }
 
 void FormAchievements::on_FormAchievementsButtonDeleteCategory_clicked(){
@@ -815,14 +714,7 @@ void FormAchievements::on_FormAchievementsButtonDeleteCategory_clicked(){
         ui->FormAchievementsLineEditNameAchievements->setText("");
         ui->FormAchievementsRadioButtonAll->setChecked(true);
         ui->FormAchievementsCheckBoxFavorites->setChecked(false);
-        switch(language){
-        case 1:{
-            QMessageBox::information(this,"Successful","Category has been deleted!");
-            break;
-            }
-        case 5:
-            QMessageBox::information(this,"Успешно","Категория была удалена!");
-        }
+        QMessageBox::information(this,SLLanguage[30],SLLanguage[35]);
         on_FormAchievementsButtonCancelChangeCategory_clicked();
         }
 }

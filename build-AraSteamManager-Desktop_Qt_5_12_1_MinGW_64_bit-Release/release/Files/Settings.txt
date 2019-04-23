@@ -1,3 +1,4 @@
 Language=5
 Theme=1
+SaveImages=1
 MyProfile=76561198065018572
