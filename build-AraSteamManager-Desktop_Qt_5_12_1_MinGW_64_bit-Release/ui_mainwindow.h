@@ -185,7 +185,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
         FormProfileLabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));
         FormProfileAvatar->setText(QApplication::translate("MainWindow", "Avatar", nullptr));
         FormProfileButtonFavorites->setText(QApplication::translate("MainWindow", "Favorites", nullptr));

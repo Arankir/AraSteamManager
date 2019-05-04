@@ -254,7 +254,7 @@ void MainWindow::on_FormProfileButtonSetProfile_clicked(){
     if(!QFile::exists("Files/Settings.txt"))
     {
     file.open(QIODevice::WriteOnly);
-            //деволтные данные
+            //дефолтные данные
     file.close();
     }
     if (!file.open(QIODevice::ReadOnly))
@@ -296,4 +296,11 @@ void MainWindow::on_return(){
 
 void MainWindow::closeEvent(QCloseEvent *){
     //delete this;
+}
+
+void MainWindow::on_FormProfileButtonFriends_clicked(){
+    friendsform = new FormFriends(id,key,language,DocFriendList);
+    connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
+    friendsform->show();
+    this->setVisible(false);
 }

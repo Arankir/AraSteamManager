@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>SteamAchievementsStatistic</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(49, 49, 49);</string>

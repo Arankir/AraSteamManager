@@ -118,7 +118,7 @@ public:
 
     void retranslateUi(QWidget *FormFriends)
     {
-        FormFriends->setWindowTitle(QApplication::translate("FormFriends", "Form", nullptr));
+        FormFriends->setWindowTitle(QApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
         label->setText(QApplication::translate("FormFriends", "TextLabel", nullptr));
         pushButton->setText(QApplication::translate("FormFriends", "PushButton", nullptr));
         groupBox->setTitle(QApplication::translate("FormFriends", "GroupBox", nullptr));

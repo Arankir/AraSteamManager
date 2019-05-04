@@ -85,7 +85,7 @@ public:
 
     void retranslateUi(QWidget *FormGames)
     {
-        FormGames->setWindowTitle(QApplication::translate("FormGames", "Form", nullptr));
+        FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
         FormGamesButtonReturn->setText(QApplication::translate("FormGames", "Return", nullptr));
         FormGamesLabelLogo->setText(QApplication::translate("FormGames", "Logo", nullptr));
         FormGamesButtonFind->setText(QApplication::translate("FormGames", "Find", nullptr));

@@ -106,7 +106,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
             int j=0;
             bool accept=false;
             for(;j<JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().size();j++){
-                if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname")==JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("name")){
+                if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray().at(j).toObject().value("apiname").toString()==JsonDocGlobalAchievementPercentagesForApp.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject().value("name").toString()){
                     accept=true;
                     break;
                     }
@@ -452,7 +452,7 @@ void FormAchievements::on_FormAchievementsButtonAccessNewCategory_clicked(){
                     for (int i=0;i<list.size();i++) {
                         ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
                     }
-                    QHBoxLayout *layout = new QHBoxLayout;
+                    QVBoxLayout *layout = new QVBoxLayout;
                     QWidget *widget = new QWidget;
                     for (int i = 0; i < list.size(); ++i){
                         QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
@@ -628,7 +628,7 @@ void FormAchievements::on_FormAchievementsButtonAccessChangeCategory_clicked(){
                     for (int i=0;i<list.size();i++) {
                         ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
                     }
-                    QHBoxLayout *layout = new QHBoxLayout;
+                    QVBoxLayout *layout = new QVBoxLayout;
                     QWidget *widget = new QWidget;
                     for (int i = 0; i < list.size(); ++i){
                         QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
@@ -680,7 +680,7 @@ void FormAchievements::on_FormAchievementsButtonDeleteCategory_clicked(){
         for (int i=0;i<=list.size();i++) {
             ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
         }
-        QHBoxLayout *layout = new QHBoxLayout;
+        QVBoxLayout *layout = new QVBoxLayout;
         QWidget *widget = new QWidget;
         for (int i = 0; i < list.size(); ++i){
             QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());

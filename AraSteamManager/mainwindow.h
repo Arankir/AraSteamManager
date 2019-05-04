@@ -16,6 +16,7 @@
 #include <QImage>
 
 #include <formgames.h>
+#include <formfriends.h>
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     FormGames *gamesform;
+    FormFriends *friendsform;
 
 private slots:
     void on_FormProfileButtonFindProfile_clicked();
@@ -39,6 +41,8 @@ private slots:
     void on_return();
 
     void closeEvent(QCloseEvent *);
+
+    void on_FormProfileButtonFriends_clicked();
 
 private:
     Ui::MainWindow *ui;
