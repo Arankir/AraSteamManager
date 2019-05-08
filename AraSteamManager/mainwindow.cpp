@@ -299,7 +299,7 @@ void MainWindow::closeEvent(QCloseEvent *){
 }
 
 void MainWindow::on_FormProfileButtonFriends_clicked(){
-    friendsform = new FormFriends(id,key,language,DocFriendList);
+    friendsform = new FormFriends(id,key,language,DocFriendList,SaveImages);
     connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
     friendsform->show();
     this->setVisible(false);

@@ -494,7 +494,6 @@ void FormAchievements::on_FormAchievementsButtonAccessNewCategory_clicked(){
 }
 
 void FormAchievements::on_FormAchievementsComboBoxCategoriesChangeCategory_activated(int index){
-    QComboBox *cb = (QComboBox*) sender();
     QDir categories("Files/Categories/"+appid);
     if(categories.exists()){
         ui->FormAchievementsTableWidgetAchievements->setColumnCount(7);

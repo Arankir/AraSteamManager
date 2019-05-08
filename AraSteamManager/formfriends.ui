@@ -15,9 +15,9 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="FormFriendsLLogo">
      <property name="text">
-      <string>TextLabel</string>
+      <string>Logo</string>
      </property>
     </widget>
    </item>
@@ -35,35 +35,35 @@
     </spacer>
    </item>
    <item row="0" column="2">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="FormFriendsBReturn">
      <property name="text">
-      <string>PushButton</string>
+      <string>Return</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0" colspan="3">
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="FormFriendsGBFilter">
      <property name="title">
-      <string>GroupBox</string>
+      <string>Filter</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="1" column="0">
-       <widget class="QComboBox" name="comboBox"/>
+       <widget class="QComboBox" name="FormFriendsCBStatus"/>
       </item>
       <item row="0" column="0" colspan="2">
        <widget class="QLineEdit" name="lineEdit"/>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="FormFriendsBFind">
         <property name="text">
-         <string>PushButton</string>
+         <string>Find</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QCheckBox" name="checkBox">
+       <widget class="QCheckBox" name="FormFriendsChBOpenProfile">
         <property name="text">
-         <string>CheckBox</string>
+         <string>Open profile</string>
         </property>
        </widget>
       </item>
@@ -71,7 +71,7 @@
     </widget>
    </item>
    <item row="6" column="0" colspan="3">
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QTableWidget" name="FormFriendsTWFriends">
      <property name="columnCount">
       <number>7</number>
      </property>
