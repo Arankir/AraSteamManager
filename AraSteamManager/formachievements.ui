@@ -146,9 +146,9 @@
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="QPushButton" name="FormAchievementsButtonAccessNewCategory">
+          <widget class="QPushButton" name="FormAchievementsButtonAcceptNewCategory">
            <property name="text">
-            <string>Access</string>
+            <string>Accept</string>
            </property>
           </widget>
          </item>

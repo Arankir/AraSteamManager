@@ -10,6 +10,7 @@
 #include <QJsonObject>
 #include <QFile>
 #include <QStandardItem>
+#include <imagerequest.h>
 
 namespace Ui {
 class FormFriends;
@@ -27,6 +28,7 @@ signals:
     void return_to_profile();
 
 private slots:
+    void OnResultImage(int i, QString Save, ImageRequest *imgr);
     void closeEvent(QCloseEvent *event);
 
     void on_FormFriendsBReturn_clicked();

@@ -1,10 +1,7 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, int languages, QJsonDocument Games, int SaveImage, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormGames)
-{
+FormGames::FormGames(QString ids, QString keys, int languages, QJsonDocument Games, int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     id=ids;
     key=keys;
@@ -49,49 +46,33 @@ FormGames::FormGames(QString ids, QString keys, int languages, QJsonDocument Gam
     for(int i=0;i<JsonArayGames.size();i++){
         int row = ui->FormGamesTableWidgetGames->rowCount();
         ui->FormGamesTableWidgetGames->insertRow(row);
-        switch (SaveImages) {
-        case 0:{
-//            QNetworkAccessManager imagemanager;
-//            QEventLoop imageloop;  //Ждем ответ от сервера.
-//            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-//            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".jpg"));
-//            imageloop.exec();
-//            pixmap.loadFromData(imagereply.readAll());
-            ImageRequest *image = new ImageRequest(row,"");
-            connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-            image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".jpg");
-
-            break;
-        }
-        case 1:{
-            if(!QFile::exists("images/icon_games/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".png")){
-                if(JsonArayGames[i].toObject().value("img_icon_url").toString()!=""){
-//                    QNetworkAccessManager imagemanager;
-//                    QEventLoop imageloop;  //Ждем ответ от сервера.
-//                    QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-//                    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".jpg"));
-//                    imageloop.exec();
-//                    QImage img;
-//                    img.loadFromData(imagereply.readAll());
-//                    img.save("images/icon_games/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".png", "PNG");
-//                    pixmap=QPixmap::fromImage(img);
-
-                    ImageRequest *image = new ImageRequest(row,JsonArayGames[i].toObject().value("img_icon_url").toString());
-                    connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-                    image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".jpg");
-
+        if(!QFile::exists("images/icon_games/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".png")){
+            if(JsonArayGames[i].toObject().value("img_icon_url").toString()!=""){
+                ImageRequest *image;
+                switch (SaveImages) {
+                    case 0:{
+                        image = new ImageRequest(row,"");
+                        break;
+                        }
+                    case 1:{
+                        image = new ImageRequest(row,JsonArayGames[i].toObject().value("img_icon_url").toString());
+                        break;
+                        }
+                    default:{
+                        image = new ImageRequest(row,"");
+                        break;
+                        }
+                    }
+                connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+                image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".jpg");
                 }
             } else {
-                QPixmap pixmap;
-                pixmap.load("images/icon_games/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".png", "PNG");
-                QIcon icon = QIcon(pixmap);
-                QTableWidgetItem *item1 = new QTableWidgetItem;
-                item1->setIcon(icon);
-                ui->FormGamesTableWidgetGames->setItem(row,0,item1);
-                }
-            break;
-        }
-        }
+            QPixmap pixmap;
+            pixmap.load("images/icon_games/"+JsonArayGames[i].toObject().value("img_icon_url").toString()+".png", "PNG");
+            QLabel *label = new QLabel;
+            label->setPixmap(pixmap);
+            ui->FormGamesTableWidgetGames->setCellWidget(row,0,label);
+            }
         QTableWidgetItem *item2 = new QTableWidgetItem(JsonArayGames[i].toObject().value("name").toString());
         ui->FormGamesTableWidgetGames->setItem(row,1,item2);
         QPushButton *button1 = new QPushButton;
@@ -108,41 +89,41 @@ FormGames::FormGames(QString ids, QString keys, int languages, QJsonDocument Gam
         ui->FormGamesTableWidgetGames->setCellWidget(row,2,button1);
         button2->setObjectName("FormGamesButtonFavorites"+QString::number(JsonArayGames[i].toObject().value("appid").toInt()));
         ui->FormGamesTableWidgetGames->setCellWidget(row,3,button2);
+        ui->FormGamesTableWidgetGames->setRowHeight(i,33);
         }
     ui->FormGamesTableWidgetGames->resizeColumnsToContents();
-    ui->FormGamesTableWidgetGames->setColumnWidth(0,32);
+    ui->FormGamesTableWidgetGames->setColumnWidth(0,33);
     //http://media.steampowered.com/steamcommunity/public/images/apps/{appid}/{hash}.jpg
     ui->FormGamesLineEditGame->setFocus();
-}
-
-void FormGames::OnResultImage(int i, QString Save, ImageRequest *imgr){
-    QPixmap pixmap;
-    pixmap.loadFromData(imgr->GetAnswer());
-    QLabel *label = new QLabel;
-    label->setPixmap(pixmap);
-    if(!Save.isEmpty()){
-        pixmap.save("images/icon_games/"+Save+".png", "PNG");
-    }
-    ui->FormGamesTableWidgetGames->setCellWidget(i,0,label);
-    ui->FormGamesTableWidgetGames->resizeRowToContents(i);
-    imgr->deleteLater();
 }
 
 FormGames::~FormGames(){
     delete ui;
 }
-
 void FormGames::closeEvent(QCloseEvent *){
     on_FormGamesButtonReturn_clicked();
 }
-
+void FormGames::on_return(){
+    this->setVisible(true);
+}
 void FormGames::on_FormGamesButtonReturn_clicked(){
     emit return_to_profile();
     delete this;
 }
 
+void FormGames::on_FormGamesLineEditGame_textChanged(const QString){
+    for (int i=0;i<ui->FormGamesTableWidgetGames->rowCount();i++) {
+        if(ui->FormGamesTableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->FormGamesLineEditGame->text().toUpper(),0)>-1)
+            ui->FormGamesTableWidgetGames->setRowHidden(i,false); else
+            ui->FormGamesTableWidgetGames->setRowHidden(i,true);
+    }
+}
+void FormGames::on_FormGamesButtonFind_clicked(){
+    on_FormGamesLineEditGame_textChanged(ui->FormGamesLineEditGame->text());
+}
+
 void FormGames::AchievementsClicked(){
-    QPushButton *btn = (QPushButton*) sender();
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
     QNetworkAccessManager manager;
     QEventLoop loop;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -164,18 +145,14 @@ void FormGames::FavoritesClicked(){
 
 }
 
-void FormGames::on_return(){
-    this->setVisible(true);
-}
-
-void FormGames::on_FormGamesLineEditGame_textChanged(const QString){
-    for (int i=0;i<ui->FormGamesTableWidgetGames->rowCount();i++) {
-        if(ui->FormGamesTableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->FormGamesLineEditGame->text().toUpper(),0)>-1)
-            ui->FormGamesTableWidgetGames->setRowHidden(i,false); else
-            ui->FormGamesTableWidgetGames->setRowHidden(i,true);
+void FormGames::OnResultImage(int i, QString Save, ImageRequest *imgr){
+    QPixmap pixmap;
+    pixmap.loadFromData(imgr->GetAnswer());
+    QLabel *label = new QLabel;
+    label->setPixmap(pixmap);
+    if(!Save.isEmpty()){
+        pixmap.save("images/icon_games/"+Save+".png", "PNG");
     }
-}
-
-void FormGames::on_FormGamesButtonFind_clicked(){
-    on_FormGamesLineEditGame_textChanged(ui->FormGamesLineEditGame->text());
+    ui->FormGamesTableWidgetGames->setCellWidget(i,0,label);
+    imgr->deleteLater();
 }

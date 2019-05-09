@@ -1,9 +1,7 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument DocFriendss, int SaveImagess, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormFriends)
+FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument DocFriendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends)
 {
     ui->setupUi(this);
     id=ids;
@@ -79,36 +77,27 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
         //"locstatecode":"40",
         //"loccityid":26111}
         ui->FormFriendsTWFriends->insertRow(i);
-        QPixmap pixmap;
         switch (SaveImages) {
         case 0:{
-            QNetworkAccessManager imagemanager;
-            QEventLoop imageloop;  //Ждем ответ от сервера.
-            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Account.value("avatar").toString()));
-            imageloop.exec();
-            pixmap.loadFromData(imagereply.readAll());
+            ImageRequest *image = new ImageRequest(i,"");
+            connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+            image->Get(Account.value("avatar").toString());
             break;
         }
         case 1:{
             if(!QFile::exists("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
-                QNetworkAccessManager imagemanager;
-                QEventLoop imageloop;  //Ждем ответ от сервера.
-                QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Account.value("avatar").toString()));
-                imageloop.exec();
-                QImage img;
-                img.loadFromData(imagereply.readAll());
-                img.save("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
-                pixmap=QPixmap::fromImage(img);
+                ImageRequest *image = new ImageRequest(i,Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72));
+                connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+                image->Get(Account.value("avatar").toString());
             } else {
+                QPixmap pixmap;
                 pixmap.load("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
+                QLabel *lb = new QLabel();
+                lb->setPixmap(pixmap);
+                ui->FormFriendsTWFriends->setCellWidget(i,0,lb);
                 }
         }
         }
-        QLabel *lb = new QLabel();
-        lb->setPixmap(pixmap);
-        ui->FormFriendsTWFriends->setCellWidget(i,0,lb);
         QTableWidgetItem *item2 = new QTableWidgetItem(Account.value("personaname").toString());
         ui->FormFriendsTWFriends->setItem(i,1,item2);
         QDateTime date;
@@ -177,13 +166,26 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
     }
     ui->FormFriendsTWFriends->setColumnHidden(5,true);
     ui->FormFriendsTWFriends->resizeColumnsToContents();
+    ui->FormFriendsTWFriends->setColumnWidth(0,33);
+}
+
+void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
+    QPixmap pixmap;
+    pixmap.loadFromData(imgr->GetAnswer());
+    QLabel *label = new QLabel;
+    label->setPixmap(pixmap);
+    if(!Save.isEmpty()){
+        pixmap.save("images/profiles/"+Save+".png", "PNG");
+    }
+    ui->FormFriendsTWFriends->setCellWidget(i,0,label);
+    ui->FormFriendsTWFriends->resizeRowToContents(i);
+    imgr->deleteLater();
 }
 
 FormFriends::~FormFriends()
 {
     delete ui;
 }
-
 void FormFriends::closeEvent(QCloseEvent *){
     on_FormFriendsBReturn_clicked();
 }

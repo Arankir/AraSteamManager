@@ -61,7 +61,7 @@ private slots:
     void on_buttonNewCategoryDeleteValues_clicked();
     void on_buttonChangeCategoryDeleteValues_clicked();
 
-    void on_FormAchievementsButtonAccessNewCategory_clicked();
+    void on_FormAchievementsButtonAcceptNewCategory_clicked();
 
     void on_FormAchievementsComboBoxCategoriesChangeCategory_activated(int index);
 
@@ -71,6 +71,8 @@ private slots:
 
     void on_FormAchievementsButtonDeleteCategory_clicked();
 
+    void on_FormAchievementsButtonFindAchievement_clicked();
+
 private:
     Ui::FormAchievements *ui;
     QString key;
@@ -78,9 +80,9 @@ private:
     int language;
     QString appid;
     QJsonDocument JsonDocNumberOfCurrentPlayers;
-    QJsonDocument JsonDocGlobalAchievementPercentagesForApp;
+    QJsonArray JsonArrayGlobalAchievements;
     QJsonDocument JsonDocPlayerAchievements;
-    QJsonDocument JsonDocSchemaForGame;
+    QJsonArray JsonArraySchemaForGame;
     bool **filter;
     int colfilter=3;
     QFormLayout *newcategoryvalueslayout;
