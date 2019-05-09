@@ -112,40 +112,52 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
                     }
             }
             if(accept){
-                QPixmap pixmap;
+                int row = ui->FormAchievementsTableWidgetAchievements->rowCount();
+                ui->FormAchievementsTableWidgetAchievements->insertRow(row);
                 switch (SaveImages) {
                 case 0:{
-                    QNetworkAccessManager imagemanager;
-                    QEventLoop imageloop;  //Ждем ответ от сервера.
-                    QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
-                    imageloop.exec();
-                    pixmap.loadFromData(imagereply.readAll());
+//                    QNetworkAccessManager imagemanager;
+//                    QEventLoop imageloop;  //Ждем ответ от сервера.
+//                    QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+//                    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
+//                    imageloop.exec();
+//                    pixmap.loadFromData(imagereply.readAll());
+                    ImageRequest *image = new ImageRequest(row,"");
+                    connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+                    image->Get(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString());
+
+//                    QNetworkAccessManager *imagemanager;
+//                    connect(imagemanager,&QNetworkAccessManager::finished,this,SLOT(OnResultImage));
+//                    imagemanager->get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
+//                    imagemanager->deleteLater();
                     break;
                 }
                 case 1:{
                     QString AchievementIcon=JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().mid(66,JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().length());
                     if(!QFile::exists("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
-                        QNetworkAccessManager imagemanager;
-                        QEventLoop imageloop;  //Ждем ответ от сервера.
-                        QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                        QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
-                        imageloop.exec();
-                        QImage img;
-                        img.loadFromData(imagereply.readAll());
-                        img.save("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
-                        pixmap=QPixmap::fromImage(img);
+//                        QNetworkAccessManager imagemanager;
+//                        QEventLoop imageloop;  //Ждем ответ от сервера.
+//                        QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+//                        QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString()));
+//                        imageloop.exec();
+//                        QImage img;
+//                        img.loadFromData(imagereply.readAll());
+                        ImageRequest *image = new ImageRequest(row,JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().mid(66,JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString().length()));
+                        connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+                        image->Get(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("icon").toString());
+
+//                        img.save("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
+//                        pixmap=QPixmap::fromImage(img);
                     } else {
+                        QPixmap pixmap;
                         pixmap.load("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
+                        QLabel *label = new QLabel;
+                        label->setPixmap(pixmap);
+                        ui->FormAchievementsTableWidgetAchievements->setCellWidget(row,0,label);
                         }
                     break;
                 }
                 }
-                QLabel *label = new QLabel;
-                label->setPixmap(pixmap);
-                int row = ui->FormAchievementsTableWidgetAchievements->rowCount();
-                ui->FormAchievementsTableWidgetAchievements->insertRow(row);
-                ui->FormAchievementsTableWidgetAchievements->setCellWidget(row,0,label);
                 QTableWidgetItem *item2 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("displayName").toString());
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,1,item2);
                 QTableWidgetItem *item3 = new QTableWidgetItem(JsonDocSchemaForGame.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(j).toObject().value("description").toString());
@@ -237,6 +249,19 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     widget2->setLayout(changecategoryvalueslayout);
     ui->FormAchievementsScrollAreaValuesChangeCategory->setWidget(widget2);
     ui->FormAchievementsLineEditTitleCategoryChangeCategory->setEnabled(false);
+}
+
+void FormAchievements::OnResultImage(int i, QString Save, ImageRequest *imgr){
+    QPixmap pixmap;
+    pixmap.loadFromData(imgr->GetAnswer());
+    QLabel *label = new QLabel;
+    label->setPixmap(pixmap);
+    if(!Save.isEmpty()){
+        pixmap.save("images/achievements/"+appid+"/"+Save.mid(Save.indexOf("/",1)+1,Save.length()-1).remove(".jpg")+".png", "PNG");
+    }
+    ui->FormAchievementsTableWidgetAchievements->setCellWidget(i,0,label);
+    ui->FormAchievementsTableWidgetAchievements->resizeRowToContents(i);
+    imgr->deleteLater();
 }
 
 void FormAchievements::on_ComboBoxCategory_Change(int index){

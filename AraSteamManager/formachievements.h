@@ -16,6 +16,7 @@
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include <QFormLayout>
+#include <imagerequest.h>
 
 namespace Ui {
 class FormAchievements;
@@ -33,6 +34,7 @@ signals:
     void return_to_games();
 
 private slots:
+    void OnResultImage(int i, QString Save, ImageRequest *imgr);
     void on_ComboBoxCategory_Change(int index);
     void closeEvent(QCloseEvent *);
     void on_FormAchievementsButtonReturn_clicked();

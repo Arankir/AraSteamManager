@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    imagerequest.cpp \
         main.cpp \
         mainwindow.cpp \
     formgames.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     formfriends.cpp
 
 HEADERS += \
+    imagerequest.h \
         mainwindow.h \
     formgames.h \
     formachievements.h \

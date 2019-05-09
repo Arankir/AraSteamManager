@@ -29,6 +29,7 @@ signals:
     void return_to_profile();
 
 private slots:
+    void OnResultImage(int i, QString Save, ImageRequest *imgr);
     void closeEvent(QCloseEvent *event);
 
     void on_FormGamesButtonReturn_clicked();
