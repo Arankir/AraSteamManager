@@ -1,8 +1,7 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument DocFriendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends)
-{
+FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument DocFriendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     id=ids;
     key=keys;
@@ -36,6 +35,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(SLLanguage[18]));
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(""));
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(SLLanguage[7]));
+    ui->FormFriendsTWFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(SLLanguage[19]));
     ui->FormFriendsCBStatus->addItem(SLLanguage[6]);
     ui->FormFriendsCBStatus->addItem(SLLanguage[8]);
     ui->FormFriendsCBStatus->addItem(SLLanguage[9]);
@@ -116,34 +116,42 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
         QTableWidgetItem *item4 = new QTableWidgetItem;
         if(!Account.value("gameextrainfo").toString().isEmpty()){
             item4->setText(SLLanguage[8]);
+            item4->setTextColor(Qt::darkGreen);
         } else
             switch (Account.value("personastate").toInt()) {
             case 0:{
                     item4->setText(SLLanguage[9]);
+                    item4->setTextColor(Qt::gray);
                     break;
             }
             case 1:{
                     item4->setText(SLLanguage[10]);
+                    item4->setTextColor(Qt::blue);
                     break;
             }
             case 2:{
                     item4->setText(SLLanguage[11]);
+                    item4->setTextColor(Qt::darkBlue);
                     break;
             }
             case 3:{
                     item4->setText(SLLanguage[12]);
+                    item4->setTextColor(Qt::darkBlue);
                     break;
             }
             case 4:{
                     item4->setText(SLLanguage[13]);
+                    item4->setTextColor(Qt::darkCyan);
                     break;
             }
             case 5:{
                     item4->setText(SLLanguage[14]);
+                    item4->setTextColor(Qt::darkMagenta);
                     break;
             }
             case 6:{
                     item4->setText(SLLanguage[15]);
+                    item4->setTextColor(Qt::darkMagenta);
                     break;
             }
             }
@@ -152,10 +160,18 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
         switch(Account.value("communityvisibilitystate").toInt()){
         case 1:{
             item5->setText(SLLanguage[17]);
+            item5->setTextColor(Qt::red);
+            break;
+        }
+        case 2:{
+            item5->setText(SLLanguage[17]);
+            item5->setTextColor(Qt::red);
             break;
         }
         case 3:{
             item5->setText(SLLanguage[16]);
+            item5->setTextColor(Qt::green);
+            break;
         }
         }
         qDebug() <<Account.value("steamid")<<Account.value("communityvisibilitystate");
@@ -165,12 +181,28 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
         QPushButton *button1 = new QPushButton;
         button1->setText(SLLanguage[7]);
         button1->setMinimumSize(QSize(25,25));
+        button1->setObjectName("btn"+Account.value("steamid").toString());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         ui->FormFriendsTWFriends->setCellWidget(i,6,button1);
+        QPushButton *button2 = new QPushButton;
+        button2->setText("«");
+        button2->setFont(QFont("Wingdings",18));
+        connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+        button2->setMinimumSize(QSize(25,25));
+        button2->setObjectName("btnf"+Account.value("steamid").toString());
+        ui->FormFriendsTWFriends->setCellWidget(i,7,button2);
     }
     ui->FormFriendsTWFriends->setColumnHidden(5,true);
     ui->FormFriendsTWFriends->resizeColumnsToContents();
     ui->FormFriendsTWFriends->setColumnWidth(0,33);
+
+    filter = new bool*[ui->FormFriendsTWFriends->rowCount()];
+    for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++) {
+        filter[i]=new bool[3];
+        for (int j=0;j<3;j++) {
+            filter[i][j]=true;
+            }
+        }
 }
 
 FormFriends::~FormFriends()
@@ -199,5 +231,62 @@ void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
 }
 
 void FormFriends::GoToProfileClicked(){
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    emit go_to_profile(btn->objectName().mid(3,btn->objectName().length()));
+    on_FormFriendsBReturn_clicked();
+}
+void FormFriends::FavoritesClicked(){
 
+}
+
+void FormFriends::on_FormFriendsChBOpenProfile_stateChanged(int arg1){
+    if(arg1==2){
+        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
+            if(ui->FormFriendsTWFriends->item(i,4)->text().indexOf(SLLanguage[16])>-1)
+                filter[i][2]=true; else
+                filter[i][2]=false;
+        UpdateHiddenRows();
+        } else {
+        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
+            filter[i][2]=true;
+        UpdateHiddenRows();
+        }
+}
+void FormFriends::on_FormFriendsCBStatus_activated(int index){
+    if(index!=0){
+        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
+            if(ui->FormFriendsCBStatus->currentText()==ui->FormFriendsTWFriends->item(i,3)->text())
+                filter[i][1]=true; else
+                filter[i][1]=false;
+        UpdateHiddenRows();
+        } else {
+        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
+            filter[i][1]=true;
+        UpdateHiddenRows();
+        }
+}
+void FormFriends::on_FormFriendsLineEditName_textChanged(const QString &){
+    for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
+        if(ui->FormFriendsTWFriends->item(i,1)->text().toLower().indexOf(ui->FormFriendsLineEditName->text().toLower())>-1)
+            filter[i][0]=true; else
+            filter[i][0]=false;
+    UpdateHiddenRows();
+}
+void FormFriends::on_FormFriendsBFind_clicked(){
+    on_FormFriendsLineEditName_textChanged(ui->FormFriendsLineEditName->text());
+}
+void FormFriends::UpdateHiddenRows(){
+    for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++) {
+        bool accept=true;
+        for (int j=0;j<3;j++) {
+            if(filter[i][j]==false){
+                accept=false;
+                break;
+                }
+            }
+        if(accept){
+            ui->FormFriendsTWFriends->setRowHidden(i,false);
+            } else
+            ui->FormFriendsTWFriends->setRowHidden(i,true);
+        }
 }

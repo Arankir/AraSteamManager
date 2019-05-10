@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>758</width>
+    <width>825</width>
     <height>536</height>
    </rect>
   </property>
@@ -51,7 +51,7 @@
        <widget class="QComboBox" name="FormFriendsCBStatus"/>
       </item>
       <item row="0" column="0" colspan="2">
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="FormFriendsLineEditName"/>
       </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="FormFriendsBFind">
@@ -73,7 +73,7 @@
    <item row="6" column="0" colspan="3">
     <widget class="QTableWidget" name="FormFriendsTWFriends">
      <property name="columnCount">
-      <number>7</number>
+      <number>8</number>
      </property>
      <column>
       <property name="text">
@@ -108,6 +108,11 @@
      <column>
       <property name="text">
        <string>Перейти на профиль</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Избранное</string>
       </property>
      </column>
     </widget>

@@ -35,7 +35,7 @@ public:
     QGroupBox *FormFriendsGBFilter;
     QGridLayout *gridLayout_2;
     QComboBox *FormFriendsCBStatus;
-    QLineEdit *lineEdit;
+    QLineEdit *FormFriendsLineEditName;
     QPushButton *FormFriendsBFind;
     QCheckBox *FormFriendsChBOpenProfile;
     QTableWidget *FormFriendsTWFriends;
@@ -44,7 +44,7 @@ public:
     {
         if (FormFriends->objectName().isEmpty())
             FormFriends->setObjectName(QString::fromUtf8("FormFriends"));
-        FormFriends->resize(758, 536);
+        FormFriends->resize(825, 536);
         gridLayout_3 = new QGridLayout(FormFriends);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         FormFriendsLLogo = new QLabel(FormFriends);
@@ -70,10 +70,10 @@ public:
 
         gridLayout_2->addWidget(FormFriendsCBStatus, 1, 0, 1, 1);
 
-        lineEdit = new QLineEdit(FormFriendsGBFilter);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        FormFriendsLineEditName = new QLineEdit(FormFriendsGBFilter);
+        FormFriendsLineEditName->setObjectName(QString::fromUtf8("FormFriendsLineEditName"));
 
-        gridLayout_2->addWidget(lineEdit, 0, 0, 1, 2);
+        gridLayout_2->addWidget(FormFriendsLineEditName, 0, 0, 1, 2);
 
         FormFriendsBFind = new QPushButton(FormFriendsGBFilter);
         FormFriendsBFind->setObjectName(QString::fromUtf8("FormFriendsBFind"));
@@ -89,8 +89,8 @@ public:
         gridLayout_3->addWidget(FormFriendsGBFilter, 5, 0, 1, 3);
 
         FormFriendsTWFriends = new QTableWidget(FormFriends);
-        if (FormFriendsTWFriends->columnCount() < 7)
-            FormFriendsTWFriends->setColumnCount(7);
+        if (FormFriendsTWFriends->columnCount() < 8)
+            FormFriendsTWFriends->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
         FormFriendsTWFriends->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
@@ -105,8 +105,10 @@ public:
         FormFriendsTWFriends->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
         FormFriendsTWFriends->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        FormFriendsTWFriends->setHorizontalHeaderItem(7, __qtablewidgetitem7);
         FormFriendsTWFriends->setObjectName(QString::fromUtf8("FormFriendsTWFriends"));
-        FormFriendsTWFriends->setColumnCount(7);
+        FormFriendsTWFriends->setColumnCount(8);
 
         gridLayout_3->addWidget(FormFriendsTWFriends, 6, 0, 1, 3);
 
@@ -138,6 +140,8 @@ public:
         ___qtablewidgetitem5->setText(QApplication::translate("FormFriends", "\320\260\320\271\320\264\320\270", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = FormFriendsTWFriends->horizontalHeaderItem(6);
         ___qtablewidgetitem6->setText(QApplication::translate("FormFriends", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\275\320\260 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = FormFriendsTWFriends->horizontalHeaderItem(7);
+        ___qtablewidgetitem7->setText(QApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
     } // retranslateUi
 
 };

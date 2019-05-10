@@ -39,6 +39,7 @@ private slots:
     void on_FormProfileButtonGames_clicked();
 
     void on_return();
+    void on_go_to_profile(QString id);
 
     void closeEvent(QCloseEvent *);
 

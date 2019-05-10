@@ -293,6 +293,10 @@ void MainWindow::on_FormProfileButtonGames_clicked(){
 void MainWindow::on_return(){
     this->setVisible(true);
 }
+void MainWindow::on_go_to_profile(QString id){
+    ui->FormProfileLineEditIdProfile->setText(id);
+    ui->FormProfileButtonFindProfile->click();
+}
 
 void MainWindow::closeEvent(QCloseEvent *){
     //delete this;
@@ -301,6 +305,7 @@ void MainWindow::closeEvent(QCloseEvent *){
 void MainWindow::on_FormProfileButtonFriends_clicked(){
     friendsform = new FormFriends(id,key,language,DocFriendList,SaveImages);
     connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
+    connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));
     friendsform->show();
     this->setVisible(false);
 }
