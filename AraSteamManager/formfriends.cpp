@@ -77,27 +77,31 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
         //"locstatecode":"40",
         //"loccityid":26111}
         ui->FormFriendsTWFriends->insertRow(i);
-        switch (SaveImages) {
-        case 0:{
-            ImageRequest *image = new ImageRequest(i,"");
+        if(!QFile::exists("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
+            ImageRequest *image;
+            switch (SaveImages) {
+                case 0:{
+                    image = new ImageRequest(i,"");
+                    break;
+                    }
+                case 1:{
+                    image = new ImageRequest(i,Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72));
+                    break;
+                    }
+                default:{
+                    image = new ImageRequest(i,"");
+                    break;
+                    }
+            }
             connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
             image->Get(Account.value("avatar").toString());
-            break;
-        }
-        case 1:{
-            if(!QFile::exists("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
-                ImageRequest *image = new ImageRequest(i,Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72));
-                connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-                image->Get(Account.value("avatar").toString());
             } else {
-                QPixmap pixmap;
-                pixmap.load("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
-                QLabel *lb = new QLabel();
-                lb->setPixmap(pixmap);
-                ui->FormFriendsTWFriends->setCellWidget(i,0,lb);
-                }
-        }
-        }
+            QPixmap pixmap;
+            pixmap.load("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
+            QLabel *lb = new QLabel();
+            lb->setPixmap(pixmap);
+            ui->FormFriendsTWFriends->setCellWidget(i,0,lb);
+            }
         QTableWidgetItem *item2 = new QTableWidgetItem(Account.value("personaname").toString());
         ui->FormFriendsTWFriends->setItem(i,1,item2);
         QDateTime date;
@@ -169,6 +173,18 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
     ui->FormFriendsTWFriends->setColumnWidth(0,33);
 }
 
+FormFriends::~FormFriends()
+{
+    delete ui;
+}
+void FormFriends::closeEvent(QCloseEvent *){
+    on_FormFriendsBReturn_clicked();
+}
+void FormFriends::on_FormFriendsBReturn_clicked(){
+    emit return_to_profile();
+    delete this;
+}
+
 void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
@@ -180,18 +196,6 @@ void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
     ui->FormFriendsTWFriends->setCellWidget(i,0,label);
     ui->FormFriendsTWFriends->resizeRowToContents(i);
     imgr->deleteLater();
-}
-
-FormFriends::~FormFriends()
-{
-    delete ui;
-}
-void FormFriends::closeEvent(QCloseEvent *){
-    on_FormFriendsBReturn_clicked();
-}
-void FormFriends::on_FormFriendsBReturn_clicked(){
-    emit return_to_profile();
-    delete this;
 }
 
 void FormFriends::GoToProfileClicked(){

@@ -87,7 +87,7 @@ QT_MOC_LITERAL(33, 1020, 48) // "on_FormAchievementsButtonFind..."
     "on_FormAchievementsButtonAcceptNewCategory_clicked\0"
     "on_FormAchievementsComboBoxCategoriesChangeCategory_activated\0"
     "on_FormAchievementsButtonAddValueChangeCategory_clicked\0"
-    "on_FormAchievementsButtonAccessChangeCategory_clicked\0"
+    "on_FormAchievementsButtonAcceptChangeCategory_clicked\0"
     "on_FormAchievementsButtonDeleteCategory_clicked\0"
     "on_FormAchievementsButtonFindAchievement_clicked"
 };
@@ -195,7 +195,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 19: _t->on_FormAchievementsButtonAcceptNewCategory_clicked(); break;
         case 20: _t->on_FormAchievementsComboBoxCategoriesChangeCategory_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 21: _t->on_FormAchievementsButtonAddValueChangeCategory_clicked(); break;
-        case 22: _t->on_FormAchievementsButtonAccessChangeCategory_clicked(); break;
+        case 22: _t->on_FormAchievementsButtonAcceptChangeCategory_clicked(); break;
         case 23: _t->on_FormAchievementsButtonDeleteCategory_clicked(); break;
         case 24: _t->on_FormAchievementsButtonFindAchievement_clicked(); break;
         default: ;

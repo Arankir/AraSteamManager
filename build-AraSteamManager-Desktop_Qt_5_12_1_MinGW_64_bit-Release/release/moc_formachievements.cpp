@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    QByteArrayData data[33];
-    char stringdata0[1020];
+    QByteArrayData data[34];
+    char stringdata0[1069];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -63,7 +63,8 @@ QT_MOC_LITERAL(28, 749, 50), // "on_FormAchievementsButtonAcce..."
 QT_MOC_LITERAL(29, 800, 61), // "on_FormAchievementsComboBoxCa..."
 QT_MOC_LITERAL(30, 862, 55), // "on_FormAchievementsButtonAddV..."
 QT_MOC_LITERAL(31, 918, 53), // "on_FormAchievementsButtonAcce..."
-QT_MOC_LITERAL(32, 972, 47) // "on_FormAchievementsButtonDele..."
+QT_MOC_LITERAL(32, 972, 47), // "on_FormAchievementsButtonDele..."
+QT_MOC_LITERAL(33, 1020, 48) // "on_FormAchievementsButtonFind..."
 
     },
     "FormAchievements\0return_to_games\0\0"
@@ -83,11 +84,12 @@ QT_MOC_LITERAL(32, 972, 47) // "on_FormAchievementsButtonDele..."
     "on_FormAchievementsButtonAddValueNewCategory_clicked\0"
     "on_buttonNewCategoryDeleteValues_clicked\0"
     "on_buttonChangeCategoryDeleteValues_clicked\0"
-    "on_FormAchievementsButtonAccessNewCategory_clicked\0"
+    "on_FormAchievementsButtonAcceptNewCategory_clicked\0"
     "on_FormAchievementsComboBoxCategoriesChangeCategory_activated\0"
     "on_FormAchievementsButtonAddValueChangeCategory_clicked\0"
-    "on_FormAchievementsButtonAccessChangeCategory_clicked\0"
-    "on_FormAchievementsButtonDeleteCategory_clicked"
+    "on_FormAchievementsButtonAcceptChangeCategory_clicked\0"
+    "on_FormAchievementsButtonDeleteCategory_clicked\0"
+    "on_FormAchievementsButtonFindAchievement_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -97,7 +99,7 @@ static const uint qt_meta_data_FormAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -105,32 +107,33 @@ static const uint qt_meta_data_FormAchievements[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  134,    2, 0x06 /* Public */,
+       1,    0,  139,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    3,  135,    2, 0x08 /* Private */,
-       8,    1,  142,    2, 0x08 /* Private */,
-      10,    1,  145,    2, 0x08 /* Private */,
-      12,    0,  148,    2, 0x08 /* Private */,
-      13,    0,  149,    2, 0x08 /* Private */,
-      14,    0,  150,    2, 0x08 /* Private */,
-      15,    0,  151,    2, 0x08 /* Private */,
-      16,    0,  152,    2, 0x08 /* Private */,
-      17,    0,  153,    2, 0x08 /* Private */,
-      18,    0,  154,    2, 0x08 /* Private */,
-      19,    0,  155,    2, 0x08 /* Private */,
-      20,    1,  156,    2, 0x08 /* Private */,
-      22,    0,  159,    2, 0x08 /* Private */,
-      23,    0,  160,    2, 0x08 /* Private */,
-      24,    0,  161,    2, 0x08 /* Private */,
-      25,    0,  162,    2, 0x08 /* Private */,
-      26,    0,  163,    2, 0x08 /* Private */,
-      27,    0,  164,    2, 0x08 /* Private */,
-      28,    0,  165,    2, 0x08 /* Private */,
-      29,    1,  166,    2, 0x08 /* Private */,
-      30,    0,  169,    2, 0x08 /* Private */,
-      31,    0,  170,    2, 0x08 /* Private */,
-      32,    0,  171,    2, 0x08 /* Private */,
+       3,    3,  140,    2, 0x08 /* Private */,
+       8,    1,  147,    2, 0x08 /* Private */,
+      10,    1,  150,    2, 0x08 /* Private */,
+      12,    0,  153,    2, 0x08 /* Private */,
+      13,    0,  154,    2, 0x08 /* Private */,
+      14,    0,  155,    2, 0x08 /* Private */,
+      15,    0,  156,    2, 0x08 /* Private */,
+      16,    0,  157,    2, 0x08 /* Private */,
+      17,    0,  158,    2, 0x08 /* Private */,
+      18,    0,  159,    2, 0x08 /* Private */,
+      19,    0,  160,    2, 0x08 /* Private */,
+      20,    1,  161,    2, 0x08 /* Private */,
+      22,    0,  164,    2, 0x08 /* Private */,
+      23,    0,  165,    2, 0x08 /* Private */,
+      24,    0,  166,    2, 0x08 /* Private */,
+      25,    0,  167,    2, 0x08 /* Private */,
+      26,    0,  168,    2, 0x08 /* Private */,
+      27,    0,  169,    2, 0x08 /* Private */,
+      28,    0,  170,    2, 0x08 /* Private */,
+      29,    1,  171,    2, 0x08 /* Private */,
+      30,    0,  174,    2, 0x08 /* Private */,
+      31,    0,  175,    2, 0x08 /* Private */,
+      32,    0,  176,    2, 0x08 /* Private */,
+      33,    0,  177,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -156,6 +159,7 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -188,11 +192,12 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 16: _t->on_FormAchievementsButtonAddValueNewCategory_clicked(); break;
         case 17: _t->on_buttonNewCategoryDeleteValues_clicked(); break;
         case 18: _t->on_buttonChangeCategoryDeleteValues_clicked(); break;
-        case 19: _t->on_FormAchievementsButtonAccessNewCategory_clicked(); break;
+        case 19: _t->on_FormAchievementsButtonAcceptNewCategory_clicked(); break;
         case 20: _t->on_FormAchievementsComboBoxCategoriesChangeCategory_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 21: _t->on_FormAchievementsButtonAddValueChangeCategory_clicked(); break;
-        case 22: _t->on_FormAchievementsButtonAccessChangeCategory_clicked(); break;
+        case 22: _t->on_FormAchievementsButtonAcceptChangeCategory_clicked(); break;
         case 23: _t->on_FormAchievementsButtonDeleteCategory_clicked(); break;
+        case 24: _t->on_FormAchievementsButtonFindAchievement_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -247,13 +252,13 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 25;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 25;
     }
     return _id;
 }

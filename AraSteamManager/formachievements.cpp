@@ -63,7 +63,7 @@ FormAchievements::FormAchievements(QString keys, int languages, QString ids, QSt
     ui->FormAchievementsGroupBoxChangeCategory->setTitle(SLLanguage[16]);
     ui->FormAchievementsButtonAddValueChangeCategory->setText(SLLanguage[11]);
     ui->FormAchievementsButtonCancelChangeCategory->setText(SLLanguage[12]);
-    ui->FormAchievementsButtonAccessChangeCategory->setText(SLLanguage[13]);
+    ui->FormAchievementsButtonAcceptChangeCategory->setText(SLLanguage[13]);
     ui->FormAchievementsButtonDeleteCategory->setText(SLLanguage[17]);
     ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(SLLanguage[18]);
     ui->FormAchievementsLineEditTitleCategoryChangeCategory->setPlaceholderText(SLLanguage[14]);
@@ -575,7 +575,7 @@ void FormAchievements::on_FormAchievementsButtonAddValueChangeCategory_clicked()
     } else
         QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
 }
-void FormAchievements::on_FormAchievementsButtonAccessChangeCategory_clicked(){
+void FormAchievements::on_FormAchievementsButtonAcceptChangeCategory_clicked(){
     if(!QDir("Files/Categories/"+appid).exists()){
         QDir().mkdir("Files/Categories/"+appid);
     }

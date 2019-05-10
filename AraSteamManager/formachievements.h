@@ -67,7 +67,7 @@ private slots:
 
     void on_FormAchievementsButtonAddValueChangeCategory_clicked();
 
-    void on_FormAchievementsButtonAccessChangeCategory_clicked();
+    void on_FormAchievementsButtonAcceptChangeCategory_clicked();
 
     void on_FormAchievementsButtonDeleteCategory_clicked();
 

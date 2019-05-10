@@ -240,7 +240,7 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         ui->FormProfileButtonFavorites->setVisible(true);
         ui->FormProfileButtonSetProfile->setVisible(true);
         ui->FormProfileButtonStatistics->setVisible(true);
-        if(Account.value("communityvisibilitystate").toInt()==3){
+        if(Account.value("communityvisibilitystate").toInt()!=3){
             //профиль скрыт
         }
         } else {

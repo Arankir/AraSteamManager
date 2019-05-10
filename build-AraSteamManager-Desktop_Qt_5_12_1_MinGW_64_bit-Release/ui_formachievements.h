@@ -49,14 +49,14 @@ public:
     QScrollArea *FormAchievementsScrollAreaValues;
     QWidget *scrollAreaWidgetContents_2;
     QPushButton *FormAchievementsButtonCancelNewCategory;
-    QPushButton *FormAchievementsButtonAccessNewCategory;
+    QPushButton *FormAchievementsButtonAcceptNewCategory;
     QLineEdit *FormAchievementsLineEditTitleValueNewCategory;
     QPushButton *FormAchievementsButtonAddValueNewCategory;
     QGroupBox *FormAchievementsGroupBoxChangeCategory;
     QGridLayout *gridLayout_3;
     QScrollArea *FormAchievementsScrollAreaValuesChangeCategory;
     QWidget *scrollAreaWidgetContents_3;
-    QPushButton *FormAchievementsButtonAccessChangeCategory;
+    QPushButton *FormAchievementsButtonAcceptChangeCategory;
     QComboBox *FormAchievementsComboBoxCategoriesChangeCategory;
     QPushButton *FormAchievementsButtonAddValueChangeCategory;
     QPushButton *FormAchievementsButtonCancelChangeCategory;
@@ -162,10 +162,10 @@ public:
 
         gridLayout_2->addWidget(FormAchievementsButtonCancelNewCategory, 0, 3, 1, 1);
 
-        FormAchievementsButtonAccessNewCategory = new QPushButton(FormAchievementsGroupBoxAddCategory);
-        FormAchievementsButtonAccessNewCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAccessNewCategory"));
+        FormAchievementsButtonAcceptNewCategory = new QPushButton(FormAchievementsGroupBoxAddCategory);
+        FormAchievementsButtonAcceptNewCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAcceptNewCategory"));
 
-        gridLayout_2->addWidget(FormAchievementsButtonAccessNewCategory, 2, 3, 1, 1);
+        gridLayout_2->addWidget(FormAchievementsButtonAcceptNewCategory, 2, 3, 1, 1);
 
         FormAchievementsLineEditTitleValueNewCategory = new QLineEdit(FormAchievementsGroupBoxAddCategory);
         FormAchievementsLineEditTitleValueNewCategory->setObjectName(QString::fromUtf8("FormAchievementsLineEditTitleValueNewCategory"));
@@ -194,10 +194,10 @@ public:
 
         gridLayout_3->addWidget(FormAchievementsScrollAreaValuesChangeCategory, 0, 3, 3, 1);
 
-        FormAchievementsButtonAccessChangeCategory = new QPushButton(FormAchievementsGroupBoxChangeCategory);
-        FormAchievementsButtonAccessChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAccessChangeCategory"));
+        FormAchievementsButtonAcceptChangeCategory = new QPushButton(FormAchievementsGroupBoxChangeCategory);
+        FormAchievementsButtonAcceptChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsButtonAcceptChangeCategory"));
 
-        gridLayout_3->addWidget(FormAchievementsButtonAccessChangeCategory, 2, 4, 1, 1);
+        gridLayout_3->addWidget(FormAchievementsButtonAcceptChangeCategory, 2, 4, 1, 1);
 
         FormAchievementsComboBoxCategoriesChangeCategory = new QComboBox(FormAchievementsGroupBoxChangeCategory);
         FormAchievementsComboBoxCategoriesChangeCategory->setObjectName(QString::fromUtf8("FormAchievementsComboBoxCategoriesChangeCategory"));
@@ -292,11 +292,11 @@ public:
         FormAchievementsGroupBoxAddCategory->setTitle(QApplication::translate("FormAchievements", "New category", nullptr));
         FormAchievementsLineEditTitleNewCategory->setPlaceholderText(QApplication::translate("FormAchievements", "Title of category", nullptr));
         FormAchievementsButtonCancelNewCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
-        FormAchievementsButtonAccessNewCategory->setText(QApplication::translate("FormAchievements", "Access", nullptr));
+        FormAchievementsButtonAcceptNewCategory->setText(QApplication::translate("FormAchievements", "Accept", nullptr));
         FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText(QApplication::translate("FormAchievements", "Title of value", nullptr));
         FormAchievementsButtonAddValueNewCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
         FormAchievementsGroupBoxChangeCategory->setTitle(QApplication::translate("FormAchievements", "Change category", nullptr));
-        FormAchievementsButtonAccessChangeCategory->setText(QApplication::translate("FormAchievements", "Access", nullptr));
+        FormAchievementsButtonAcceptChangeCategory->setText(QApplication::translate("FormAchievements", "Accept", nullptr));
         FormAchievementsButtonAddValueChangeCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
         FormAchievementsButtonCancelChangeCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
         FormAchievementsLineEditTitleValueChangeCategory->setPlaceholderText(QApplication::translate("FormAchievements", "Title of value", nullptr));
