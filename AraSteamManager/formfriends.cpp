@@ -1,13 +1,14 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument DocFriendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, QJsonDocument DocFriendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     id=ids;
     key=keys;
     language=languages;
     DocFriends=DocFriendss;
     SaveImages=SaveImagess;
+    Theme=Themes;
     QFile FileLanguage;
     switch(language){
     case 1:{
@@ -116,32 +117,32 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, QJsonDocument
         QTableWidgetItem *item4 = new QTableWidgetItem;
         if(!Account.value("gameextrainfo").toString().isEmpty()){
             item4->setText(SLLanguage[8]);
-            item4->setTextColor(Qt::darkGreen);
+            item4->setTextColor(QColor("#89b753"));
         } else
             switch (Account.value("personastate").toInt()) {
             case 0:{
                     item4->setText(SLLanguage[9]);
-                    item4->setTextColor(Qt::gray);
+                    item4->setTextColor(QColor("#4c4d4f"));
                     break;
             }
             case 1:{
                     item4->setText(SLLanguage[10]);
-                    item4->setTextColor(Qt::blue);
+                    item4->setTextColor(QColor("#57cbde"));
                     break;
             }
             case 2:{
                     item4->setText(SLLanguage[11]);
-                    item4->setTextColor(Qt::darkBlue);
+                    item4->setTextColor(QColor("#815560"));
                     break;
             }
             case 3:{
                     item4->setText(SLLanguage[12]);
-                    item4->setTextColor(Qt::darkBlue);
+                    item4->setTextColor(QColor("#46788e"));
                     break;
             }
             case 4:{
                     item4->setText(SLLanguage[13]);
-                    item4->setTextColor(Qt::darkCyan);
+                    item4->setTextColor(QColor("#46788e"));
                     break;
             }
             case 5:{

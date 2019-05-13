@@ -21,7 +21,7 @@ class FormFriends : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormFriends(QString ids, QString keys, int languages, QJsonDocument DocFriends, int SaveImagess, QWidget *parent = nullptr);
+    explicit FormFriends(QString ids, QString keys, int languages, int Theme, QJsonDocument DocFriends, int SaveImagess, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
@@ -47,7 +47,8 @@ private:
     Ui::FormFriends *ui;
     QString id;
     QString key;
-    int language=0;
+    int language;
+    int Theme;
     QJsonDocument DocFriends;
     QStringList SLLanguage;
     int SaveImages;

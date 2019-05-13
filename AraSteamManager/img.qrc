@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Release/images/program/cog.png</file>
+    </qresource>
+</RCC>

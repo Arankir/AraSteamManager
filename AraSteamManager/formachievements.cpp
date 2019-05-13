@@ -1,13 +1,14 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString keys, int languages, QString ids, QString appids, QString GameLogo, QJsonDocument JsonDocGlobalAchievement,int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
+FormAchievements::FormAchievements(QString keys, int languages, int Themes, QString ids, QString appids, QString GameLogo, QJsonDocument JsonDocGlobalAchievement,int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
     ui->setupUi(this);
     key=keys;
     language=languages;
     id=ids;
     appid=appids;
     SaveImages=SaveImage;
+    Theme=Themes;
     JsonArrayGlobalAchievements = JsonDocGlobalAchievement.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray();
     //{"name": "no_one_cared_who_i_was",
     //"percent": 85}

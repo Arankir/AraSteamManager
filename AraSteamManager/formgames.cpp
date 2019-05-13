@@ -1,12 +1,13 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, int languages, QJsonDocument Games, int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJsonDocument Games, int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     id=ids;
     key=keys;
     language=languages;
     SaveImages=SaveImage;
+    Theme=Themes;
     QFile FileLanguage;
     switch(language){
     case 1:{
@@ -133,7 +134,7 @@ void FormGames::AchievementsClicked(){
     if(JsonDocGlobalAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
         QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
     } else{
-        achievementsform = new FormAchievements(key,language,id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()),JsonDocGlobalAchievements,SaveImages);
+        achievementsform = new FormAchievements(key,language,Theme,id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()),JsonDocGlobalAchievements,SaveImages);
         connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(on_return()));
         achievementsform->show();
         this->setVisible(false);

@@ -21,7 +21,7 @@ class FormGames : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormGames(QString id, QString key, int language, QJsonDocument Games, int SaveImages, QWidget *parent = nullptr);
+    explicit FormGames(QString id, QString key, int language, int Theme, QJsonDocument Games, int SaveImages, QWidget *parent = nullptr);
     ~FormGames();
     FormAchievements *achievementsform;
 
@@ -49,6 +49,7 @@ private:
     QString id;
     QString key;
     int language;
+    int Theme;
     QJsonDocument JsonDocGames;
     QStringList SLLanguage;
     int SaveImages;

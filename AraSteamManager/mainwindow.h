@@ -45,6 +45,8 @@ private slots:
 
     void on_FormProfileButtonFriends_clicked();
 
+    void on_FormProfileButtonExit_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString key="3826BF60403D15613B4B0381DAB7A7BD";

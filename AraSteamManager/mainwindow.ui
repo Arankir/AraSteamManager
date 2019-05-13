@@ -18,27 +18,18 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0" colspan="7">
-     <widget class="QLabel" name="FormProfileLabelProfileUrl">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
+    <item row="13" column="0">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(0, 102, 255);</string>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
       </property>
-      <property name="text">
-       <string>ProfileUrl</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="FormProfileAvatar">
-      <property name="text">
-       <string>Avatar</string>
-      </property>
-     </widget>
+     </spacer>
     </item>
     <item row="9" column="0" colspan="2">
      <widget class="QPushButton" name="FormProfileButtonFavorites">
@@ -47,7 +38,20 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="9">
+    <item row="2" column="3" colspan="8">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0" colspan="11">
      <widget class="QLineEdit" name="FormProfileLineEditIdProfile">
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
@@ -55,29 +59,24 @@ color: rgb(26, 26, 26);</string>
       </property>
      </widget>
     </item>
-    <item row="12" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonSetProfile">
-      <property name="text">
-       <string>Set as my profile</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="9" colspan="2">
+    <item row="0" column="10">
      <widget class="QPushButton" name="FormProfileButtonSettings">
       <property name="text">
        <string>Settings</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="1" colspan="2">
-     <widget class="QLabel" name="FormProfileLabelPersonaName">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
+    <item row="8" column="0" colspan="2">
+     <widget class="QPushButton" name="FormProfileButtonFriends">
       <property name="text">
-       <string>PersonaName</string>
+       <string>Friends</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0" colspan="2">
+     <widget class="QPushButton" name="FormProfileButtonStatistics">
+      <property name="text">
+       <string>Statistics</string>
       </property>
      </widget>
     </item>
@@ -93,6 +92,20 @@ color: rgb(26, 26, 26);</string>
       </property>
      </widget>
     </item>
+    <item row="1" column="11" colspan="2">
+     <widget class="QPushButton" name="FormProfileButtonFindProfile">
+      <property name="text">
+       <string>Find</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0" colspan="2">
+     <widget class="QPushButton" name="FormProfileButtonGames">
+      <property name="text">
+       <string>Games</string>
+      </property>
+     </widget>
+    </item>
     <item row="6" column="0" colspan="6">
      <widget class="QLabel" name="FormProfileLabelLocCountryCode">
       <property name="font">
@@ -105,30 +118,56 @@ color: rgb(26, 26, 26);</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="7">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="0" colspan="8">
-     <widget class="QLabel" name="FormProfileLabelLogo">
+    <item row="0" column="11" colspan="2">
+     <widget class="QPushButton" name="FormProfileButtonExit">
       <property name="text">
-       <string>Logo</string>
+       <string>Exit</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="9" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonFindProfile">
+    <item row="2" column="11" colspan="2">
+     <widget class="QLabel" name="FormProfileLabelPersonaState">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Find</string>
+       <string>PersonaState</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="FormProfileAvatar">
+      <property name="text">
+       <string>Avatar</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="7">
+     <widget class="QLabel" name="FormProfileLabelProfileUrl">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(0, 102, 255);</string>
+      </property>
+      <property name="text">
+       <string>ProfileUrl</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="2">
+     <widget class="QLabel" name="FormProfileLabelPersonaName">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>PersonaName</string>
       </property>
      </widget>
     </item>
@@ -144,51 +183,19 @@ color: rgb(26, 26, 26);</string>
       </property>
      </widget>
     </item>
-    <item row="7" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonGames">
+    <item row="12" column="0" colspan="2">
+     <widget class="QPushButton" name="FormProfileButtonSetProfile">
       <property name="text">
-       <string>Games</string>
+       <string>Set as my profile</string>
       </property>
      </widget>
     </item>
-    <item row="8" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonFriends">
+    <item row="0" column="0" colspan="10">
+     <widget class="QLabel" name="FormProfileLabelLogo">
       <property name="text">
-       <string>Friends</string>
+       <string>Logo</string>
       </property>
      </widget>
-    </item>
-    <item row="2" column="8" colspan="3">
-     <widget class="QLabel" name="FormProfileLabelPersonaState">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>PersonaState</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonStatistics">
-      <property name="text">
-       <string>Statistics</string>
-      </property>
-     </widget>
-    </item>
-    <item row="13" column="0">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
     </item>
    </layout>
   </widget>
@@ -210,7 +217,7 @@ color: rgb(26, 26, 26);</string>
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
