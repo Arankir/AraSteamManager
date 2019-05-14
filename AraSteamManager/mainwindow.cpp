@@ -67,15 +67,15 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     //        ui->FormProfileLabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //        ui->FormProfileLabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    //ui->FormProfileButtonSettings->setText(SLLanguage[5]);
+    ui->FormProfileButtonSettings->setText(SLLanguage[5]);
 //    QPixmap pixmap("images/program/cog4.png","PNG");
 //    QIcon ButtonIcon(pixmap);
     //ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
-    ui->FormProfileButtonSettings->setIconSize(QSize(13,13));
-    ui->FormProfileButtonSettings->setText("");
-    QPixmap pixmap2("images/program/statistic_white.png","PNG");
-    QIcon ButtonIcon2(pixmap2);
-    ui->FormProfileButtonStatistics->setIcon(ButtonIcon2);
+//    ui->FormProfileButtonSettings->setIconSize(QSize(13,13));
+//    ui->FormProfileButtonSettings->setText("");
+//    QPixmap pixmap2("images/program/statistic_white.png","PNG");
+//    QIcon ButtonIcon2(pixmap2);
+//    ui->FormProfileButtonStatistics->setIcon(ButtonIcon2);
     //ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
     //ui->FormProfileButtonStatistics->setIconSize(QSize(13,13));
     ui->FormProfileButtonExit->setText(SLLanguage[23]);
@@ -94,7 +94,6 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         ui->FormProfileButtonExit->setIcon(QIcon("images/program/exit_white.png"));
         ui->FormProfileButtonFriends->setIcon(QIcon("images/program/friends_white.png"));
         ui->FormProfileButtonGames->setIcon(QIcon("images/program/games_white.png"));
-        //ui->FormProfileButtonSettings->setIcon(ButtonIcon);
         break;
         }
     case 2:{
@@ -168,7 +167,17 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         DocFriendList = QJsonDocument::fromJson(ReplyFriendList.readAll());
         QJsonObject Account=DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject();
         ui->FormProfileLabelPersonaName->setText(Account.value("personaname").toString());
-        ui->FormProfileLabelProfileUrl->setText(Account.value("profileurl").toString());
+        switch(Theme){
+        case 1:{
+            ui->FormProfileLabelProfileUrl->setTextFormat(Qt::RichText);
+            ui->FormProfileLabelProfileUrl->setText("<img src=\"images/program/link_white.png\" width=\"12\" height=\"12\">"+Account.value("profileurl").toString());
+            //ui->FormProfileLabelProfileUrl->setText(Account.value("profileurl").toString());
+            break;
+            }
+        case 2:{
+            break;
+            }
+        }
         QDateTime date=QDateTime::fromSecsSinceEpoch(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("timecreated").toInt(),Qt::LocalTime);
         ui->FormProfileLabelRealName->setText(SLLanguage[8]+": "+Account.value("realname").toString());
         ui->FormProfileLabelTimeCreated->setText(SLLanguage[9]+" "+date.toString("yyyy.MM.dd"));
@@ -258,6 +267,9 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
                 }
         }
         }
+//        ui->FormProfileAvatar->setTextFormat(Qt::RichText);
+//        ui->FormProfileAvatar->setText("<img src=\"images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png\">"+Account.value("personaname").toString());
+//        QFile("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png").remove();
         ui->FormProfileAvatar->setPixmap(pixmap);
         ui->FormProfileButtonGames->setVisible(true);
         ui->FormProfileButtonFriends->setVisible(true);

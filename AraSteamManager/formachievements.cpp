@@ -27,6 +27,30 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
             SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
         }
     }
+    QIcon favorites;
+    switch(Theme){
+    case 1:{
+        ui->FormAchievementsButtonReturn->setIcon(QIcon("images/program/back_white.png"));
+        ui->FormAchievementsButtonCompare->setIcon(QIcon("images/program/compare_white.png"));
+        //ui->FormAchievementsGroupBoxFilter->setIcon(QIcon("images/program/back_white.png"));
+        //ui->FormAchievementsGroupBoxFilter->setTitle("<img src=\"images/program/back_white.png\">Hello!");
+        ui->FormAchievementsButtonAddCategory->setIcon(QIcon("images/program/create.png"));
+        ui->FormAchievementsButtonChangeCategory->setIcon(QIcon("images/program/change_white.png"));
+        ui->FormAchievementsButtonDeleteCategory->setIcon(QIcon("images/program/delete.png"));
+        ui->FormAchievementsButtonFindAchievement->setIcon(QIcon("images/program/find_white.png"));
+        ui->FormAchievementsButtonAcceptNewCategory->setIcon(QIcon("images/program/apply.png"));
+        ui->FormAchievementsButtonCancelNewCategory->setIcon(QIcon("images/program/cancel.png"));
+        ui->FormAchievementsButtonAddValueNewCategory->setIcon(QIcon("images/program/create.png"));
+        ui->FormAchievementsButtonAcceptChangeCategory->setIcon(QIcon("images/program/apply.png"));
+        ui->FormAchievementsButtonCancelChangeCategory->setIcon(QIcon("images/program/cancel.png"));
+        ui->FormAchievementsButtonAddValueChangeCategory->setIcon(QIcon("images/program/create.png"));
+        favorites.addFile("images/program/favorites_white.png");
+        break;
+        }
+    case 2:{
+        break;
+        }
+    }
     QNetworkAccessManager manager;
     QEventLoop loop;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -43,9 +67,9 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     //"achieved":1,
     //"unlocktime":1445190378}
     ui->FormAchievementsTableWidgetAchievements->setColumnCount(7);
-    ui->FormAchievementsButtonReturn->setText(SLLanguage[0]);
-    ui->FormAchievementsButtonCompare->setText(SLLanguage[1]);
-    ui->FormAchievementsLabelGameLogo->setText("");
+    ui->FormAchievementsButtonReturn->setText(" "+SLLanguage[0]);
+    ui->FormAchievementsButtonCompare->setText(" "+SLLanguage[1]);
+    ui->FormAchievementsLabelGameLogo->setText("(WIP)");
     ui->FormAchievementsRadioButtonAll->setText(SLLanguage[2]);
     ui->FormAchievementsRadioButtonReached->setText(SLLanguage[3]);
     ui->FormAchievementsRadioButtonNotReached->setText(SLLanguage[4]);
@@ -57,13 +81,13 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     ui->FormAchievementsLineEditNameAchievements->setPlaceholderText(SLLanguage[10]);
     ui->FormAchievementsGroupBoxAddCategory->setTitle(SLLanguage[5]);
     ui->FormAchievementsButtonAddValueNewCategory->setText(SLLanguage[11]);
-    ui->FormAchievementsButtonCancelNewCategory->setText(SLLanguage[12]);
+    ui->FormAchievementsButtonCancelNewCategory->setText(" "+SLLanguage[12]);
     ui->FormAchievementsButtonAcceptNewCategory->setText(SLLanguage[13]);
     ui->FormAchievementsLineEditTitleNewCategory->setPlaceholderText(SLLanguage[14]);
     ui->FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText(SLLanguage[15]);
     ui->FormAchievementsGroupBoxChangeCategory->setTitle(SLLanguage[16]);
     ui->FormAchievementsButtonAddValueChangeCategory->setText(SLLanguage[11]);
-    ui->FormAchievementsButtonCancelChangeCategory->setText(SLLanguage[12]);
+    ui->FormAchievementsButtonCancelChangeCategory->setText(" "+SLLanguage[12]);
     ui->FormAchievementsButtonAcceptChangeCategory->setText(SLLanguage[13]);
     ui->FormAchievementsButtonDeleteCategory->setText(SLLanguage[17]);
     ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(SLLanguage[18]);
@@ -155,9 +179,7 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
                     }
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,4,item5);
                 QPushButton *button1 = new QPushButton;
-                button1->setText("«");
-                QFont font("Wingdings",24);
-                button1->setFont(font);
+                button1->setIcon(favorites);
                 connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
                 button1->setObjectName("FormGamesButtonFavorites"+appid+"&"+JsonArrayPlayerAchievements[j].toObject().value("apiname").toString());
                 ui->FormAchievementsTableWidgetAchievements->setCellWidget(row,5,button1);
@@ -391,7 +413,7 @@ void FormAchievements::on_FormAchievementsButtonAddValueNewCategory_clicked(){
         }
         QPushButton *btn = new QPushButton;
         btn->setObjectName("btnNewCategoryDeleteValue"+QString::number(newcategoryvalueslayout->rowCount()));
-        btn->setText("x");
+        btn->setIcon(QIcon("images/program/delete.png"));
         connect(btn,SIGNAL(clicked()),this,SLOT(on_buttonNewCategoryDeleteValues_clicked()));
         newcategoryvalueslayout->addRow(ui->FormAchievementsLineEditTitleValueNewCategory->text(),btn);
         ui->FormAchievementsLineEditTitleValueNewCategory->setText("");
@@ -508,7 +530,7 @@ void FormAchievements::on_FormAchievementsComboBoxCategoriesChangeCategory_activ
             for (int i=0;i<categor.object().value("values").toArray().size();i++) {
                 QPushButton *btn = new QPushButton;
                 btn->setObjectName("btnChangeCategoryDeleteValue"+QString::number(changecategoryvalueslayout->rowCount()));
-                btn->setText("x");
+                btn->setIcon(QIcon("images/program/delete.png"));
                 connect(btn,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryDeleteValues_clicked()));
                 changecategoryvalueslayout->addRow(categor.object().value("values").toArray().at(i).toString(),btn);
                 ui->FormAchievementsTableWidgetAchievements->insertColumn(ui->FormAchievementsTableWidgetAchievements->columnCount());
@@ -568,7 +590,7 @@ void FormAchievements::on_FormAchievementsButtonAddValueChangeCategory_clicked()
         }
         QPushButton *btn = new QPushButton;
         btn->setObjectName("btnChangeCategoryDeleteValue"+QString::number(changecategoryvalueslayout->rowCount()));
-        btn->setText("x");
+        btn->setIcon(QIcon("images/program/delete.png"));
         connect(btn,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryDeleteValues_clicked()));
         changecategoryvalueslayout->addRow(ui->FormAchievementsLineEditTitleValueChangeCategory->text(),btn);
         ui->FormAchievementsLineEditTitleValueChangeCategory->setText("");

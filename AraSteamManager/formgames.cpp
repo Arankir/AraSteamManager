@@ -23,6 +23,18 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
             SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
         }
     }
+    QIcon favorites;
+    switch(Theme){
+    case 1:{
+        ui->FormGamesButtonFind->setIcon(QIcon("images/program/find_white.png"));
+        ui->FormGamesButtonReturn->setIcon(QIcon("images/program/back_white.png"));
+        favorites.addFile("images/program/favorites_white.png");
+        break;
+        }
+    case 2:{
+        break;
+        }
+    }
     QNetworkAccessManager manager;
     QEventLoop loop;  //Ждем ответ от сервера.
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -39,7 +51,7 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
     ui->FormGamesLabelLogo->setText("");
     ui->FormGamesLineEditGame->setPlaceholderText(SLLanguage[0]);
     ui->FormGamesButtonFind->setText(SLLanguage[1]);
-    ui->FormGamesButtonReturn->setText(SLLanguage[2]);
+    ui->FormGamesButtonReturn->setText(" "+SLLanguage[2]);
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[3]));
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[4]));
@@ -80,10 +92,8 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
         QPushButton *button2 = new QPushButton;
         button1->setText(SLLanguage[4]);
         button1->setMinimumSize(QSize(25,25));
-        button2->setText("«");
-        QFont font("Wingdings");
+        button2->setIcon(favorites);
         button2->setMinimumSize(QSize(25,25));
-        button2->setFont(font);
         connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button1->setObjectName("FormGamesButtonAchievements"+QString::number(JsonArayGames[i].toObject().value("appid").toInt())+"&"+JsonArayGames[i].toObject().value("img_logo_url").toString());

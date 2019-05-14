@@ -24,9 +24,21 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
             SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
         }
     }
+    QIcon favorites;
+    switch(Theme){
+    case 1:{
+        ui->FormFriendsBReturn->setIcon(QIcon("images/program/back_white.png"));
+        ui->FormFriendsBFind->setIcon(QIcon("images/program/find_white.png"));
+        favorites.addFile("images/program/favorites_white.png");
+        break;
+        }
+    case 2:{
+        break;
+        }
+    }
     ui->FormFriendsLLogo->setText("");
     ui->FormFriendsGBFilter->setTitle(SLLanguage[0]);
-    ui->FormFriendsBReturn->setText(SLLanguage[1]);
+    ui->FormFriendsBReturn->setText(" "+SLLanguage[1]);
     ui->FormFriendsBFind->setText(SLLanguage[2]);
     ui->FormFriendsChBOpenProfile->setText(SLLanguage[3]);
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
@@ -186,8 +198,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         ui->FormFriendsTWFriends->setCellWidget(i,6,button1);
         QPushButton *button2 = new QPushButton;
-        button2->setText("«");
-        button2->setFont(QFont("Wingdings",18));
+        button2->setIcon(favorites);
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button2->setMinimumSize(QSize(25,25));
         button2->setObjectName("btnf"+Account.value("steamid").toString());

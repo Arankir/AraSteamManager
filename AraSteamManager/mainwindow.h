@@ -13,7 +13,7 @@
 #include <QMessageBox>
 #include <QPixmap>
 
-#include <QImage>
+//#include <QImage>
 
 #include <formgames.h>
 #include <formfriends.h>
