@@ -254,6 +254,7 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     widget2->setLayout(changecategoryvalueslayout);
     ui->FormAchievementsScrollAreaValuesChangeCategory->setWidget(widget2);
     ui->FormAchievementsLineEditTitleCategoryChangeCategory->setEnabled(false);
+    ui->FormAchievementsLineEditNameAchievements->setFocus();
 }
 
 FormAchievements::~FormAchievements(){

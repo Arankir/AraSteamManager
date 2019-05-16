@@ -429,7 +429,6 @@ debug/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qdialog.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtGui/QPixmap \
-		D:/Qt/5.12.1/mingw73_64/include/QtGui/QImage \
 		../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QLabel \
@@ -1337,7 +1336,6 @@ debug/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qdialog.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtGui/QPixmap \
-		D:/Qt/5.12.1/mingw73_64/include/QtGui/QImage \
 		../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QLabel \
@@ -1539,7 +1537,6 @@ debug/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainwin
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qmessagebox.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/qdialog.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtGui/QPixmap \
-		D:/Qt/5.12.1/mingw73_64/include/QtGui/QImage \
 		../AraSteamManager/formgames.h \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QWidget \
 		D:/Qt/5.12.1/mingw73_64/include/QtWidgets/QLabel \

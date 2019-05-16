@@ -19,3 +19,4 @@ Private
 Profile
 Favorite
 Favorites
+Find friend

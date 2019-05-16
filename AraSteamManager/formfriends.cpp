@@ -43,6 +43,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
     ui->FormFriendsBFind->setText("  "+SLLanguage[2]);
     ui->FormFriendsChBOpenProfile->setText(SLLanguage[3]);
     ui->FormFriendsChBFavorites->setText(SLLanguage[20]);
+    ui->FormFriendsLineEditName->setPlaceholderText(SLLanguage[21]);
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[5]));
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[4]));
@@ -70,8 +71,21 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
     QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest(Querry));
     loop.exec();
     QJsonArray Accounts = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll()).object().value("response").toObject().value("players").toArray();
+    QVector<QJsonObject> abc;
+    for (int i=0;i<Accounts.size();i++) {
+        abc.append(Accounts[i].toObject());
+    }
+    for (int i=0; i < abc.size()-1; i++) {
+        for (int j=0; j < abc.size()-i-1; j++) {
+            if (abc[j].value("personaname").toString() > abc[j+1].value("personaname").toString()) {
+                QJsonObject temp = abc[j];
+                abc[j] = abc[j+1];
+                abc[j+1] = temp;
+            }
+        }
+    }
     for (int i=0;i<DocFriends.object().value("friendslist").toObject().value("friends").toArray().size();i++) {
-        QJsonObject Account = Accounts[i].toObject();
+        QJsonObject Account = abc[i];
         //{"steamid":"76561198065018572",
         //"communityvisibilitystate":3, (1 - the profile is not visible to you, 3 - the profile is "Public")
         //"profilestate":1,
@@ -189,7 +203,6 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
             break;
         }
         }
-        qDebug() <<Account.value("steamid")<<Account.value("communityvisibilitystate");
         ui->FormFriendsTWFriends->setItem(i,4,item5);
         QTableWidgetItem *item6 = new QTableWidgetItem(Account.value("steamid").toString());
         ui->FormFriendsTWFriends->setItem(i,5,item6);
@@ -217,6 +230,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
             filter[i][j]=true;
             }
         }
+    ui->FormFriendsLineEditName->setFocus();
 }
 
 FormFriends::~FormFriends()

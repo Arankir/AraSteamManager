@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->FormProfileLabelLocCountryCode->setText("");
     ui->FormProfileLabelProfileUrl->setText("");
     ui->FormProfileLabelRealName->setText("");
+    ui->FormProfileLabellvl->setText("");
+    ui->FormProfileLabelBans->setText("");
     ui->FormProfileButtonGames->setVisible(false);
     ui->FormProfileButtonFriends->setVisible(false);
     ui->FormProfileButtonFavorites->setVisible(false);
@@ -169,9 +171,23 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
     //"loccountrycode":"JP",
     //"locstatecode":"40",
     //"loccityid":26111}]}}
-    qDebug() <<DocPlayerSummaries.object().value("response");
     if(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().size()>0){
         id=ids;
+        QNetworkReply &Replylevels = *manager.get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+key+"&steamid="+id));
+        loop.exec();
+        QJsonDocument Doclvl = QJsonDocument::fromJson(Replylevels.readAll());
+        //{"response":{"player_level":67}}
+        QNetworkReply &Replybans = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
+        loop.exec();
+        QJsonDocument Docban = QJsonDocument::fromJson(Replybans.readAll());
+        //{"players":[{
+        //"SteamId":"76561198065018572",
+        //"CommunityBanned":false,
+        //"VACBanned":false,
+        //"NumberOfVACBans":0,
+        //"DaysSinceLastBan":0,
+        //"NumberOfGameBans":0,
+        //"EconomyBan":"none"}]}
         QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
         loop.exec();
         DocOwnedGames = QJsonDocument::fromJson(ReplyOwnedGames.readAll());
@@ -192,6 +208,12 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         QDateTime date=QDateTime::fromSecsSinceEpoch(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("timecreated").toInt(),Qt::LocalTime);
         ui->FormProfileLabelRealName->setText(SLLanguage[8]+": "+Account.value("realname").toString());
         ui->FormProfileLabelTimeCreated->setText(SLLanguage[9]+" "+date.toString("yyyy.MM.dd"));
+        ui->FormProfileLabellvl->setText(SLLanguage[25]+": "+QString::number(Doclvl.object().value("response").toObject().value("player_level").toInt()));
+        if(Docban.object().value("players").toArray().at(0).toObject().value("VACBanned").toBool()){
+            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("NumberOfVACBans").toInt())+SLLanguage[27]+"\n"+SLLanguage[29]+" "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("DaysSinceLastBan").toInt())+" "+SLLanguage[30]);
+        } else {
+            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+SLLanguage[28]);
+        }
         ui->FormProfileButtonGames->setText(SLLanguage[10]+"("+QString::number(DocOwnedGames.object().value("response").toObject().value("game_count").toInt())+")");
         ui->FormProfileButtonFriends->setText(SLLanguage[11]+"("+QString::number(DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size())+")");
         if(!DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString().isEmpty()){
@@ -253,7 +275,11 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
                             ui->FormProfileButtonGoToMyProfile->setEnabled(false);
                         } else {
                             ui->FormProfileButtonSetProfile->setEnabled(true);
-                            ui->FormProfileButtonGoToMyProfile->setEnabled(true);
+                            if(FileLine.indexOf("MyProfile=none",0)>-1){
+                                ui->FormProfileButtonGoToMyProfile->setEnabled(false);
+                            } else {
+                                ui->FormProfileButtonGoToMyProfile->setEnabled(true);
+                            }
                         }
                     }
                 }
@@ -331,11 +357,6 @@ void MainWindow::on_FormProfileButtonSetProfile_clicked(){
         ui->FormProfileButtonSetProfile->setEnabled(false);
     }
 }
-void MainWindow::on_FormProfileButtonExit_clicked(){
-    close();
-}
-
-
 void MainWindow::on_FormProfileButtonGoToMyProfile_clicked(){
     if(QFile::exists("Files/Settings.txt")){
         QFile settings("Files/Settings.txt");
@@ -356,4 +377,7 @@ void MainWindow::on_FormProfileButtonGoToMyProfile_clicked(){
             settings.close();
         } else
             QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
+}
+void MainWindow::on_FormProfileButtonExit_clicked(){
+    close();
 }
