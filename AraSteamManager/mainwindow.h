@@ -33,19 +33,16 @@ public:
     FormFriends *friendsform;
 
 private slots:
-    void on_FormProfileButtonFindProfile_clicked();
-    void on_FormProfileButtonSetProfile_clicked();
-
-    void on_FormProfileButtonGames_clicked();
-
     void on_return();
     void on_go_to_profile(QString id);
 
-    void closeEvent(QCloseEvent *);
-
+    void on_FormProfileButtonFindProfile_clicked();
+    void on_FormProfileButtonGames_clicked();
     void on_FormProfileButtonFriends_clicked();
-
+    void on_FormProfileButtonSetProfile_clicked();
     void on_FormProfileButtonExit_clicked();
+
+    void on_FormProfileButtonGoToMyProfile_clicked();
 
 private:
     Ui::MainWindow *ui;

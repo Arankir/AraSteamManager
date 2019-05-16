@@ -32,8 +32,9 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     case 1:{
         ui->FormAchievementsButtonReturn->setIcon(QIcon("images/program/back_white.png"));
         ui->FormAchievementsButtonCompare->setIcon(QIcon("images/program/compare_white.png"));
-        //ui->FormAchievementsGroupBoxFilter->setIcon(QIcon("images/program/back_white.png"));
-        //ui->FormAchievementsGroupBoxFilter->setTitle("<img src=\"images/program/back_white.png\">Hello!");
+        //ui->FormAchievementsGroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/program/filter_white.png)}");
+        //ui->FormAchievementsGroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+        ui->FormAchievementsGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
         ui->FormAchievementsButtonAddCategory->setIcon(QIcon("images/program/create.png"));
         ui->FormAchievementsButtonChangeCategory->setIcon(QIcon("images/program/change_white.png"));
         ui->FormAchievementsButtonDeleteCategory->setIcon(QIcon("images/program/delete.png"));
@@ -77,15 +78,15 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     ui->FormAchievementsButtonChangeCategory->setText(SLLanguage[6]);
     ui->FormAchievementsCheckBoxFavorites->setText(SLLanguage[7]);
     ui->FormAchievementsButtonFindAchievement->setText(SLLanguage[8]);
-    ui->FormAchievementsGroupBoxFilter->setTitle(SLLanguage[9]);
+    ui->FormAchievementsGroupBoxFilter->setTitle("      "+SLLanguage[9]);
     ui->FormAchievementsLineEditNameAchievements->setPlaceholderText(SLLanguage[10]);
-    ui->FormAchievementsGroupBoxAddCategory->setTitle(SLLanguage[5]);
+    ui->FormAchievementsGroupBoxAddCategory->setTitle("      "+SLLanguage[5]);
     ui->FormAchievementsButtonAddValueNewCategory->setText(SLLanguage[11]);
     ui->FormAchievementsButtonCancelNewCategory->setText(" "+SLLanguage[12]);
     ui->FormAchievementsButtonAcceptNewCategory->setText(SLLanguage[13]);
     ui->FormAchievementsLineEditTitleNewCategory->setPlaceholderText(SLLanguage[14]);
     ui->FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText(SLLanguage[15]);
-    ui->FormAchievementsGroupBoxChangeCategory->setTitle(SLLanguage[16]);
+    ui->FormAchievementsGroupBoxChangeCategory->setTitle("      "+SLLanguage[16]);
     ui->FormAchievementsButtonAddValueChangeCategory->setText(SLLanguage[11]);
     ui->FormAchievementsButtonCancelChangeCategory->setText(" "+SLLanguage[12]);
     ui->FormAchievementsButtonAcceptChangeCategory->setText(SLLanguage[13]);
@@ -123,6 +124,7 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
         ui->FormAchievementsTableWidgetAchievements->setColumnHidden(4,true);
         ui->FormAchievementsTableWidgetAchievements->setColumnHidden(5,true);
         ui->FormAchievementsTableWidgetAchievements->setColumnHidden(6,true);
+        ui->FormAchievementsGroupBoxFilter->setEnabled(false);
     } else
     for(int i=0;i<JsonArrayGlobalAchievements.size();i++){
         if(JsonArrayGlobalAchievements[i].toObject().value("percent")!=0){

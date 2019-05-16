@@ -48,9 +48,9 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
     //"has_community_visible_stats":true}
     QJsonArray JsonArayGames=JsonDocGames.object().value("response").toObject().value("games").toArray();
     ui->FormGamesTableWidgetGames->setColumnCount(4);
-    ui->FormGamesLabelLogo->setText("");
+    ui->FormGamesLabelLogo->setText("(WIP)");
     ui->FormGamesLineEditGame->setPlaceholderText(SLLanguage[0]);
-    ui->FormGamesButtonFind->setText(SLLanguage[1]);
+    ui->FormGamesButtonFind->setText(" "+SLLanguage[1]);
     ui->FormGamesButtonReturn->setText(" "+SLLanguage[2]);
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[3]));

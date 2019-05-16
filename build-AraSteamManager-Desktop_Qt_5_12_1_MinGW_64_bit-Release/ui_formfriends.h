@@ -35,9 +35,10 @@ public:
     QGroupBox *FormFriendsGBFilter;
     QGridLayout *gridLayout_2;
     QComboBox *FormFriendsCBStatus;
-    QLineEdit *FormFriendsLineEditName;
     QPushButton *FormFriendsBFind;
     QCheckBox *FormFriendsChBOpenProfile;
+    QCheckBox *FormFriendsChBFavorites;
+    QLineEdit *FormFriendsLineEditName;
     QTableWidget *FormFriendsTWFriends;
 
     void setupUi(QWidget *FormFriends)
@@ -70,20 +71,25 @@ public:
 
         gridLayout_2->addWidget(FormFriendsCBStatus, 1, 0, 1, 1);
 
-        FormFriendsLineEditName = new QLineEdit(FormFriendsGBFilter);
-        FormFriendsLineEditName->setObjectName(QString::fromUtf8("FormFriendsLineEditName"));
-
-        gridLayout_2->addWidget(FormFriendsLineEditName, 0, 0, 1, 2);
-
         FormFriendsBFind = new QPushButton(FormFriendsGBFilter);
         FormFriendsBFind->setObjectName(QString::fromUtf8("FormFriendsBFind"));
 
-        gridLayout_2->addWidget(FormFriendsBFind, 0, 2, 1, 1);
+        gridLayout_2->addWidget(FormFriendsBFind, 0, 3, 1, 1);
 
         FormFriendsChBOpenProfile = new QCheckBox(FormFriendsGBFilter);
         FormFriendsChBOpenProfile->setObjectName(QString::fromUtf8("FormFriendsChBOpenProfile"));
 
         gridLayout_2->addWidget(FormFriendsChBOpenProfile, 1, 1, 1, 1);
+
+        FormFriendsChBFavorites = new QCheckBox(FormFriendsGBFilter);
+        FormFriendsChBFavorites->setObjectName(QString::fromUtf8("FormFriendsChBFavorites"));
+
+        gridLayout_2->addWidget(FormFriendsChBFavorites, 1, 2, 1, 1);
+
+        FormFriendsLineEditName = new QLineEdit(FormFriendsGBFilter);
+        FormFriendsLineEditName->setObjectName(QString::fromUtf8("FormFriendsLineEditName"));
+
+        gridLayout_2->addWidget(FormFriendsLineEditName, 0, 0, 1, 3);
 
 
         gridLayout_3->addWidget(FormFriendsGBFilter, 5, 0, 1, 3);
@@ -126,6 +132,7 @@ public:
         FormFriendsGBFilter->setTitle(QApplication::translate("FormFriends", "Filter", nullptr));
         FormFriendsBFind->setText(QApplication::translate("FormFriends", "Find", nullptr));
         FormFriendsChBOpenProfile->setText(QApplication::translate("FormFriends", "Open profile", nullptr));
+        FormFriendsChBFavorites->setText(QApplication::translate("FormFriends", "Favorites", nullptr));
         QTableWidgetItem *___qtablewidgetitem = FormFriendsTWFriends->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("FormFriends", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = FormFriendsTWFriends->horizontalHeaderItem(1);

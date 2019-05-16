@@ -29,6 +29,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
     case 1:{
         ui->FormFriendsBReturn->setIcon(QIcon("images/program/back_white.png"));
         ui->FormFriendsBFind->setIcon(QIcon("images/program/find_white.png"));
+        ui->FormFriendsGBFilter->setStyleSheet("QGroupBox::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
         favorites.addFile("images/program/favorites_white.png");
         break;
         }
@@ -36,11 +37,12 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
         break;
         }
     }
-    ui->FormFriendsLLogo->setText("");
-    ui->FormFriendsGBFilter->setTitle(SLLanguage[0]);
+    ui->FormFriendsLLogo->setText("(WIP)");
+    ui->FormFriendsGBFilter->setTitle("      "+SLLanguage[0]);
     ui->FormFriendsBReturn->setText(" "+SLLanguage[1]);
-    ui->FormFriendsBFind->setText(SLLanguage[2]);
+    ui->FormFriendsBFind->setText("  "+SLLanguage[2]);
     ui->FormFriendsChBOpenProfile->setText(SLLanguage[3]);
+    ui->FormFriendsChBFavorites->setText(SLLanguage[20]);
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[5]));
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[4]));
@@ -193,6 +195,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
         ui->FormFriendsTWFriends->setItem(i,5,item6);
         QPushButton *button1 = new QPushButton;
         button1->setText(SLLanguage[7]);
+        button1->setIcon(QIcon("images/program/go_to_white.png"));
         button1->setMinimumSize(QSize(25,25));
         button1->setObjectName("btn"+Account.value("steamid").toString());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
@@ -200,7 +203,6 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
         QPushButton *button2 = new QPushButton;
         button2->setIcon(favorites);
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-        button2->setMinimumSize(QSize(25,25));
         button2->setObjectName("btnf"+Account.value("steamid").toString());
         ui->FormFriendsTWFriends->setCellWidget(i,7,button2);
     }
@@ -210,8 +212,8 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
 
     filter = new bool*[ui->FormFriendsTWFriends->rowCount()];
     for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++) {
-        filter[i]=new bool[3];
-        for (int j=0;j<3;j++) {
+        filter[i]=new bool[4];
+        for (int j=0;j<4;j++) {
             filter[i][j]=true;
             }
         }
@@ -290,7 +292,7 @@ void FormFriends::on_FormFriendsBFind_clicked(){
 void FormFriends::UpdateHiddenRows(){
     for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++) {
         bool accept=true;
-        for (int j=0;j<3;j++) {
+        for (int j=0;j<4;j++) {
             if(filter[i][j]==false){
                 accept=false;
                 break;

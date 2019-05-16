@@ -22,3 +22,4 @@ Language
 Profile not exist!
 Loaded
 Exit
+Go to my profile

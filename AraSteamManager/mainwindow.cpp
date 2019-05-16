@@ -4,8 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
     ui->FormProfileAvatar->setText("");
-    ui->FormProfileLabelLogo->setText("");
-    ui->FormProfileLabelPersonaName->setText("");
+    ui->FormProfileLabelLogo->setText("(WIP)");
     ui->FormProfileLabelTimeCreated->setText("");
     ui->FormProfileLabelPersonaState->setText("");
     ui->FormProfileLabelLocCountryCode->setText("");
@@ -16,9 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->FormProfileButtonFavorites->setVisible(false);
     ui->FormProfileButtonSetProfile->setVisible(false);
     ui->FormProfileButtonStatistics->setVisible(false);
-    QFile FileLanguage;
     if(QFile::exists("Files/Settings.txt")){
         QFile settings("Files/Settings.txt");
+        QFile FileLanguage;
         if (settings.open(QIODevice::ReadOnly)){
             QStringList setting;
             while(!settings.atEnd()){
@@ -58,27 +57,26 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             settings.close();
             }
         }
-    ui->FormProfileButtonFindProfile->setText(SLLanguage[0]);
+    ui->FormProfileButtonFindProfile->setText(" "+SLLanguage[0]);
     ui->FormProfileLineEditIdProfile->setPlaceholderText(SLLanguage[1]);
     ui->FormProfileButtonFavorites->setText(SLLanguage[2]);
     ui->FormProfileButtonSetProfile->setText(SLLanguage[3]);
     ui->FormProfileButtonStatistics->setText(SLLanguage[4]);
-
+    ui->FormProfileButtonSettings->setText(SLLanguage[5]);
+    ui->FormProfileButtonExit->setText(SLLanguage[23]);
+    ui->FormProfileButtonGoToMyProfile->setText(SLLanguage[24]);
     //        ui->FormProfileLabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //        ui->FormProfileLabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    ui->FormProfileButtonSettings->setText(SLLanguage[5]);
 //    QPixmap pixmap("images/program/cog4.png","PNG");
 //    QIcon ButtonIcon(pixmap);
-    //ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
+//    ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
 //    ui->FormProfileButtonSettings->setIconSize(QSize(13,13));
 //    ui->FormProfileButtonSettings->setText("");
 //    QPixmap pixmap2("images/program/statistic_white.png","PNG");
 //    QIcon ButtonIcon2(pixmap2);
 //    ui->FormProfileButtonStatistics->setIcon(ButtonIcon2);
-    //ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
-    //ui->FormProfileButtonStatistics->setIconSize(QSize(13,13));
-    ui->FormProfileButtonExit->setText(SLLanguage[23]);
+//    ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
+//    ui->FormProfileButtonStatistics->setIconSize(QSize(13,13));
     switch(Theme){
     case 1:{
         QPalette darkPalette;
@@ -88,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         qApp->setPalette(darkPalette);
         ui->FormProfileButtonFindProfile->setIcon(QIcon("images/program/find_white.png"));
         ui->FormProfileButtonFavorites->setIcon(QIcon("images/program/favorites_white.png"));
-        ui->FormProfileButtonSetProfile->setIcon(QIcon("images/program/profile_white.png"));
+        //ui->FormProfileButtonfile->setIcon(QIcon("images/program/profile_white.png"));
         ui->FormProfileButtonStatistics->setIcon(QIcon("images/program/statistic_white.png"));
         ui->FormProfileButtonSettings->setIcon(QIcon("images/program/settings_white.png"));
         ui->FormProfileButtonExit->setIcon(QIcon("images/program/exit_white.png"));
@@ -120,16 +118,30 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 MainWindow::~MainWindow(){
     delete ui;
 }
+void MainWindow::on_return(){
+    this->setVisible(true);
+}
+void MainWindow::on_go_to_profile(QString id){
+    ui->FormProfileLineEditIdProfile->setText(id);
+    ui->FormProfileButtonFindProfile->click();
+}
 
 void MainWindow::on_FormProfileButtonFindProfile_clicked(){
     QString ids;
-    if(ui->FormProfileLineEditIdProfile->text().indexOf("profiles/",0)>-1){
-        if(ui->FormProfileLineEditIdProfile->text().mid(ui->FormProfileLineEditIdProfile->text().indexOf("profiles/",0)+9,20).indexOf("/",1)>1){
-            ids=ui->FormProfileLineEditIdProfile->text().mid(ui->FormProfileLineEditIdProfile->text().indexOf("profiles/",0)+9,ui->FormProfileLineEditIdProfile->text().mid(ui->FormProfileLineEditIdProfile->text().indexOf("profiles/",0)+9,20).indexOf("/",1));
-        } else
-            ids=ui->FormProfileLineEditIdProfile->text().mid(ui->FormProfileLineEditIdProfile->text().indexOf("profiles/",0)+9,20).remove('\r');
+    if(ui->FormProfileLineEditIdProfile->text().indexOf("steamcommunity.com/profiles/",0)>-1){
+        ids=ui->FormProfileLineEditIdProfile->text().remove("steamcommunity.com/profiles/").remove("https://").remove('\r').remove("/");
     } else
-        ids=ui->FormProfileLineEditIdProfile->text().remove('\r');
+        if(ui->FormProfileLineEditIdProfile->text().indexOf("steamcommunity.com/id/",0)>-1){
+            QString vanity=ui->FormProfileLineEditIdProfile->text().remove("https://steamcommunity.com/id/").remove("https://").remove('\r').remove("/");
+            QNetworkAccessManager manager;
+            QEventLoop loop;  //Ждем ответ от сервера.
+            QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+            QNetworkReply &Reply = *manager.get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+key+"&vanityurl="+vanity+"&url_type=1"));
+            loop.exec();
+            QJsonDocument Doc = QJsonDocument::fromJson(Reply.readAll());
+            ids=Doc.object().value("response").toObject().value("steamid").toString();
+        } else
+            ids=ui->FormProfileLineEditIdProfile->text().remove('\r');
     QNetworkAccessManager manager;
     QEventLoop loop;  //Ждем ответ от сервера.
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -157,6 +169,7 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
     //"loccountrycode":"JP",
     //"locstatecode":"40",
     //"loccityid":26111}]}}
+    qDebug() <<DocPlayerSummaries.object().value("response");
     if(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().size()>0){
         id=ids;
         QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
@@ -166,12 +179,10 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         loop.exec();
         DocFriendList = QJsonDocument::fromJson(ReplyFriendList.readAll());
         QJsonObject Account=DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject();
-        ui->FormProfileLabelPersonaName->setText(Account.value("personaname").toString());
         switch(Theme){
         case 1:{
             ui->FormProfileLabelProfileUrl->setTextFormat(Qt::RichText);
-            ui->FormProfileLabelProfileUrl->setText("<img src=\"images/program/link_white.png\" width=\"12\" height=\"12\">"+Account.value("profileurl").toString());
-            //ui->FormProfileLabelProfileUrl->setText(Account.value("profileurl").toString());
+            ui->FormProfileLabelProfileUrl->setText("<img src=\"images/program/link_white.png\" width=\"15\" height=\"15\">"+Account.value("profileurl").toString());
             break;
             }
         case 2:{
@@ -185,35 +196,43 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         ui->FormProfileButtonFriends->setText(SLLanguage[11]+"("+QString::number(DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size())+")");
         if(!DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString().isEmpty()){
             ui->FormProfileLabelPersonaState->setText(SLLanguage[12]+":\n"+DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString());
+            ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
         } else
             switch (Account.value("personastate").toInt()) {
             case 0:{
                 QDateTime date=QDateTime::fromSecsSinceEpoch(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("lastlogoff").toInt(),Qt::LocalTime);
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[13]+":\n"+date.toString("yyyy.MM.dd\nhh:mm:ss"));
+                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                     break;
             }
             case 1:{
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[14]);
+                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
                     break;
             }
             case 2:{
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[15]);
+                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
                     break;
             }
             case 3:{
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[16]);
+                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 4:{
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[17]);
+                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 5:{
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[18]);
+                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             case 6:{
                     ui->FormProfileLabelPersonaState->setText(SLLanguage[19]);
+                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             }
@@ -229,10 +248,12 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
                     else
                         FileText="";
                     if(FileLine.indexOf("MyProfile=",0)!=-1){
-                        if(FileLine.mid(FileLine.indexOf("MyProfile=",0)+10,FileLine.length())==ui->FormProfileLineEditIdProfile->text()){
+                        if(FileLine.mid(FileLine.indexOf("MyProfile=",0)+10,FileLine.length())==ids){
                             ui->FormProfileButtonSetProfile->setEnabled(false);
+                            ui->FormProfileButtonGoToMyProfile->setEnabled(false);
                         } else {
                             ui->FormProfileButtonSetProfile->setEnabled(true);
+                            ui->FormProfileButtonGoToMyProfile->setEnabled(true);
                         }
                     }
                 }
@@ -240,19 +261,6 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
             } else
                 QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
             }
-        QPixmap pixmap;
-        switch (SaveImages) {
-        case 0:{
-            QNetworkAccessManager imagemanager;
-            QEventLoop imageloop;  //Ждем ответ от сервера.
-            QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-            QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Account.value("avatar").toString()));
-            imageloop.exec();
-            pixmap.loadFromData(imagereply.readAll());
-            break;
-        }
-        case 1:{
-            if(!QFile::exists("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
                 QNetworkAccessManager imagemanager;
                 QEventLoop imageloop;  //Ждем ответ от сервера.
                 QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
@@ -260,17 +268,10 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
                 imageloop.exec();
                 QImage img;
                 img.loadFromData(imagereply.readAll());
-                img.save("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
-                pixmap=QPixmap::fromImage(img);
-            } else {
-                pixmap.load("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
-                }
-        }
-        }
-//        ui->FormProfileAvatar->setTextFormat(Qt::RichText);
-//        ui->FormProfileAvatar->setText("<img src=\"images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png\">"+Account.value("personaname").toString());
-//        QFile("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png").remove();
-        ui->FormProfileAvatar->setPixmap(pixmap);
+                img.save("images/profiles/main.png", "PNG");
+        ui->FormProfileAvatar->setTextFormat(Qt::RichText);
+        ui->FormProfileAvatar->setText("<img src=\"images/profiles/main.png\"> "+Account.value("personaname").toString());
+        ui->FormProfileAvatar->setFont(QFont("MS Shell Dlg 2",14));
         ui->FormProfileButtonGames->setVisible(true);
         ui->FormProfileButtonFriends->setVisible(true);
         ui->FormProfileButtonFavorites->setVisible(true);
@@ -284,7 +285,19 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         }
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
-
+void MainWindow::on_FormProfileButtonGames_clicked(){
+    gamesform = new FormGames(id,key,language,Theme,DocOwnedGames,SaveImages);
+    connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
+    gamesform->show();
+    //this->setVisible(false);
+}
+void MainWindow::on_FormProfileButtonFriends_clicked(){
+    friendsform = new FormFriends(id,key,language,Theme,DocFriendList,SaveImages);
+    connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
+    connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));
+    friendsform->show();
+    this->setVisible(false);
+}
 void MainWindow::on_FormProfileButtonSetProfile_clicked(){
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -318,34 +331,29 @@ void MainWindow::on_FormProfileButtonSetProfile_clicked(){
         ui->FormProfileButtonSetProfile->setEnabled(false);
     }
 }
-
-void MainWindow::on_FormProfileButtonGames_clicked(){
-    gamesform = new FormGames(id,key,language,Theme,DocOwnedGames,SaveImages);
-    connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
-    gamesform->show();
-    this->setVisible(false);
-}
-
-void MainWindow::on_return(){
-    this->setVisible(true);
-}
-void MainWindow::on_go_to_profile(QString id){
-    ui->FormProfileLineEditIdProfile->setText(id);
-    ui->FormProfileButtonFindProfile->click();
-}
-
-void MainWindow::closeEvent(QCloseEvent *){
-    //delete this;
-}
-
-void MainWindow::on_FormProfileButtonFriends_clicked(){
-    friendsform = new FormFriends(id,key,language,Theme,DocFriendList,SaveImages);
-    connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
-    connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));
-    friendsform->show();
-    this->setVisible(false);
-}
-
 void MainWindow::on_FormProfileButtonExit_clicked(){
     close();
+}
+
+
+void MainWindow::on_FormProfileButtonGoToMyProfile_clicked(){
+    if(QFile::exists("Files/Settings.txt")){
+        QFile settings("Files/Settings.txt");
+        if (settings.open(QIODevice::ReadOnly)){
+            QString FileText=QString::fromLocal8Bit(settings.readAll());
+            while (FileText.length()) {
+                QString FileLine=FileText.mid(0,FileText.indexOf("\r\n",0));
+                if(FileText.indexOf("\r\n",0)!=-1)
+                    FileText=FileText.mid(FileText.indexOf("\r\n",0)+2,FileText.length()-FileText.indexOf("\r\n",0));
+                else
+                    FileText="";
+                if(FileLine.indexOf("MyProfile=",0)!=-1){
+                    ui->FormProfileLineEditIdProfile->setText(FileLine.mid(FileLine.indexOf("MyProfile=",0)+10,FileLine.length()));
+                    ui->FormProfileButtonFindProfile->click();
+                    }
+                }
+            }
+            settings.close();
+        } else
+            QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
 }
