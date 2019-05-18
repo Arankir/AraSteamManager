@@ -30,7 +30,6 @@ public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QLabel *FormProfileLabelLogo;
-    QLabel *FormProfileLabelProfileUrl;
     QSpacerItem *verticalSpacer;
     QPushButton *FormProfileButtonFriends;
     QPushButton *FormProfileButtonStatistics;
@@ -42,7 +41,6 @@ public:
     QPushButton *FormProfileButtonFavorites;
     QPushButton *FormProfileButtonSettings;
     QSpacerItem *horizontalSpacer;
-    QLabel *FormProfileLabelPersonaState;
     QLineEdit *FormProfileLineEditIdProfile;
     QPushButton *FormProfileButtonGames;
     QPushButton *FormProfileButtonGoToMyProfile;
@@ -50,6 +48,8 @@ public:
     QLabel *FormProfileLabellvl;
     QLabel *FormProfileLabelLocCountryCode;
     QLabel *FormProfileLabelTimeCreated;
+    QLabel *FormProfileLabelProfileUrl;
+    QLabel *FormProfileLabelPersonaState;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -58,8 +58,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(545, 416);
-        MainWindow->setStyleSheet(QString::fromUtf8("background-color: rgb(49, 49, 49);"));
+        MainWindow->resize(545, 425);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -70,15 +69,6 @@ public:
         FormProfileLabelLogo->setObjectName(QString::fromUtf8("FormProfileLabelLogo"));
 
         gridLayout->addWidget(FormProfileLabelLogo, 0, 0, 1, 1);
-
-        FormProfileLabelProfileUrl = new QLabel(centralWidget);
-        FormProfileLabelProfileUrl->setObjectName(QString::fromUtf8("FormProfileLabelProfileUrl"));
-        QFont font;
-        font.setPointSize(10);
-        FormProfileLabelProfileUrl->setFont(font);
-        FormProfileLabelProfileUrl->setStyleSheet(QString::fromUtf8("color: rgb(0, 102, 255);"));
-
-        gridLayout->addWidget(FormProfileLabelProfileUrl, 3, 0, 1, 6);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -101,12 +91,15 @@ public:
 
         FormProfileLabelRealName = new QLabel(centralWidget);
         FormProfileLabelRealName->setObjectName(QString::fromUtf8("FormProfileLabelRealName"));
+        QFont font;
+        font.setPointSize(10);
         FormProfileLabelRealName->setFont(font);
 
         gridLayout->addWidget(FormProfileLabelRealName, 5, 0, 1, 4);
 
         FormProfileButtonFindProfile = new QPushButton(centralWidget);
         FormProfileButtonFindProfile->setObjectName(QString::fromUtf8("FormProfileButtonFindProfile"));
+        FormProfileButtonFindProfile->setEnabled(true);
 
         gridLayout->addWidget(FormProfileButtonFindProfile, 1, 5, 1, 1);
 
@@ -134,12 +127,6 @@ public:
 
         gridLayout->addItem(horizontalSpacer, 2, 3, 1, 2);
 
-        FormProfileLabelPersonaState = new QLabel(centralWidget);
-        FormProfileLabelPersonaState->setObjectName(QString::fromUtf8("FormProfileLabelPersonaState"));
-        FormProfileLabelPersonaState->setFont(font);
-
-        gridLayout->addWidget(FormProfileLabelPersonaState, 2, 5, 1, 1);
-
         FormProfileLineEditIdProfile = new QLineEdit(centralWidget);
         FormProfileLineEditIdProfile->setObjectName(QString::fromUtf8("FormProfileLineEditIdProfile"));
         FormProfileLineEditIdProfile->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
@@ -149,6 +136,7 @@ public:
 
         FormProfileButtonGames = new QPushButton(centralWidget);
         FormProfileButtonGames->setObjectName(QString::fromUtf8("FormProfileButtonGames"));
+        FormProfileButtonGames->setEnabled(true);
 
         gridLayout->addWidget(FormProfileButtonGames, 10, 0, 1, 2);
 
@@ -182,6 +170,21 @@ public:
 
         gridLayout->addWidget(FormProfileLabelTimeCreated, 7, 0, 1, 3);
 
+        FormProfileLabelProfileUrl = new QLabel(centralWidget);
+        FormProfileLabelProfileUrl->setObjectName(QString::fromUtf8("FormProfileLabelProfileUrl"));
+        FormProfileLabelProfileUrl->setFont(font);
+        FormProfileLabelProfileUrl->setStyleSheet(QString::fromUtf8("color: rgb(0, 102, 255);"));
+
+        gridLayout->addWidget(FormProfileLabelProfileUrl, 3, 0, 1, 5);
+
+        FormProfileLabelPersonaState = new QLabel(centralWidget);
+        FormProfileLabelPersonaState->setObjectName(QString::fromUtf8("FormProfileLabelPersonaState"));
+        FormProfileLabelPersonaState->setMaximumSize(QSize(100, 16777215));
+        FormProfileLabelPersonaState->setFont(font);
+        FormProfileLabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        gridLayout->addWidget(FormProfileLabelPersonaState, 2, 5, 7, 1);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -204,7 +207,6 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
         FormProfileLabelLogo->setText(QApplication::translate("MainWindow", "Logo", nullptr));
-        FormProfileLabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));
         FormProfileButtonFriends->setText(QApplication::translate("MainWindow", "Friends", nullptr));
         FormProfileButtonStatistics->setText(QApplication::translate("MainWindow", "Statistics", nullptr));
         FormProfileButtonExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
@@ -214,13 +216,14 @@ public:
         FormProfileButtonSetProfile->setText(QApplication::translate("MainWindow", "Set as my profile", nullptr));
         FormProfileButtonFavorites->setText(QApplication::translate("MainWindow", "Favorites", nullptr));
         FormProfileButtonSettings->setText(QApplication::translate("MainWindow", "Settings", nullptr));
-        FormProfileLabelPersonaState->setText(QApplication::translate("MainWindow", "PersonaState", nullptr));
         FormProfileButtonGames->setText(QApplication::translate("MainWindow", "Games", nullptr));
         FormProfileButtonGoToMyProfile->setText(QApplication::translate("MainWindow", "Go to my profile", nullptr));
         FormProfileLabelBans->setText(QApplication::translate("MainWindow", "Bans", nullptr));
         FormProfileLabellvl->setText(QApplication::translate("MainWindow", "lvl", nullptr));
         FormProfileLabelLocCountryCode->setText(QApplication::translate("MainWindow", "CountryCode", nullptr));
         FormProfileLabelTimeCreated->setText(QApplication::translate("MainWindow", "TimeCreated", nullptr));
+        FormProfileLabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));
+        FormProfileLabelPersonaState->setText(QApplication::translate("MainWindow", "PersonaState", nullptr));
     } // retranslateUi
 
 };

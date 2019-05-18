@@ -9,6 +9,7 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
     SaveImages=SaveImage;
     Theme=Themes;
     QFile FileLanguage;
+    ui->FormGamesTableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     switch(language){
     case 1:{
         FileLanguage.setFileName("Files/Languages/ENG/games.txt");
@@ -32,6 +33,9 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
         break;
         }
     case 2:{
+        ui->FormGamesButtonFind->setIcon(QIcon("images/program/find_black.png"));
+        ui->FormGamesButtonReturn->setIcon(QIcon("images/program/back_black.png"));
+        favorites.addFile("images/program/favorites_black.png");
         break;
         }
     }
@@ -114,6 +118,9 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
         button2->setObjectName("FormGamesButtonFavorites"+QString::number(abc[i].value("appid").toInt()));
         ui->FormGamesTableWidgetGames->setCellWidget(row,3,button2);
         ui->FormGamesTableWidgetGames->setRowHeight(i,33);
+        ImageRequest *Achievements = new ImageRequest(row,"FormGamesButtonAchievements"+QString::number(abc[i].value("appid").toInt())+"&"+abc[i].value("img_logo_url").toString());
+        connect(Achievements,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultAchievements(int, QString, ImageRequest *)));
+        Achievements->Get("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(abc[i].value("appid").toInt()));
         }
     ui->FormGamesTableWidgetGames->resizeColumnsToContents();
     ui->FormGamesTableWidgetGames->setColumnWidth(0,33);
@@ -178,5 +185,13 @@ void FormGames::OnResultImage(int i, QString Save, ImageRequest *imgr){
         pixmap.save("images/icon_games/"+Save+".png", "PNG");
     }
     ui->FormGamesTableWidgetGames->setCellWidget(i,0,label);
+    imgr->deleteLater();
+}
+
+void FormGames::OnResultAchievements(int i, QString, ImageRequest *imgr){
+    QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
+    if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
+        static_cast<QPushButton*>(ui->FormGamesTableWidgetGames->cellWidget(i,2))->setEnabled(false);
+    }
     imgr->deleteLater();
 }

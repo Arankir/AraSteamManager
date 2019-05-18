@@ -73,6 +73,8 @@ private slots:
 
     void on_FormAchievementsButtonFindAchievement_clicked();
 
+    void on_FormAchievementsButtonUpdate_clicked();
+
 private:
     Ui::FormAchievements *ui;
     QString key;

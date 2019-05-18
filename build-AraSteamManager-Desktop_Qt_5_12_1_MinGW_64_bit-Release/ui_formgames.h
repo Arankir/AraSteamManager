@@ -71,6 +71,7 @@ public:
 
         FormGamesButtonFind = new QPushButton(FormGames);
         FormGamesButtonFind->setObjectName(QString::fromUtf8("FormGamesButtonFind"));
+        FormGamesButtonFind->setEnabled(true);
         FormGamesButtonFind->setFont(font1);
 
         gridLayout->addWidget(FormGamesButtonFind, 1, 1, 1, 1);

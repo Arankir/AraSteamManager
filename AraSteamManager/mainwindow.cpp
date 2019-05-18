@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->FormProfileLabelRealName->setText("");
     ui->FormProfileLabellvl->setText("");
     ui->FormProfileLabelBans->setText("");
+    ui->FormProfileLabelPersonaState->setWordWrap(true);
     ui->FormProfileButtonGames->setVisible(false);
     ui->FormProfileButtonFriends->setVisible(false);
     ui->FormProfileButtonFavorites->setVisible(false);
@@ -61,19 +62,14 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         }
     ui->FormProfileButtonFindProfile->setText(" "+SLLanguage[0]);
     ui->FormProfileLineEditIdProfile->setPlaceholderText(SLLanguage[1]);
-    ui->FormProfileButtonFavorites->setText(SLLanguage[2]);
+    ui->FormProfileButtonFavorites->setText(" "+SLLanguage[2]);
     ui->FormProfileButtonSetProfile->setText(SLLanguage[3]);
-    ui->FormProfileButtonStatistics->setText(SLLanguage[4]);
+    ui->FormProfileButtonStatistics->setText(" "+SLLanguage[4]);
     ui->FormProfileButtonSettings->setText(SLLanguage[5]);
-    ui->FormProfileButtonExit->setText(SLLanguage[23]);
+    ui->FormProfileButtonExit->setText(" "+SLLanguage[23]);
     ui->FormProfileButtonGoToMyProfile->setText(SLLanguage[24]);
     //        ui->FormProfileLabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //        ui->FormProfileLabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//    QPixmap pixmap("images/program/cog4.png","PNG");
-//    QIcon ButtonIcon(pixmap);
-//    ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
-//    ui->FormProfileButtonSettings->setIconSize(QSize(13,13));
-//    ui->FormProfileButtonSettings->setText("");
 //    QPixmap pixmap2("images/program/statistic_white.png","PNG");
 //    QIcon ButtonIcon2(pixmap2);
 //    ui->FormProfileButtonStatistics->setIcon(ButtonIcon2);
@@ -85,10 +81,10 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),QColor(42, 130, 218),Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
         darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),QColor(42, 130, 218),Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
         darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),QColor(42, 130, 218),Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+        darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(49, 49, 49),QColor(42, 130, 218),Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
         qApp->setPalette(darkPalette);
         ui->FormProfileButtonFindProfile->setIcon(QIcon("images/program/find_white.png"));
         ui->FormProfileButtonFavorites->setIcon(QIcon("images/program/favorites_white.png"));
-        //ui->FormProfileButtonfile->setIcon(QIcon("images/program/profile_white.png"));
         ui->FormProfileButtonStatistics->setIcon(QIcon("images/program/statistic_white.png"));
         ui->FormProfileButtonSettings->setIcon(QIcon("images/program/settings_white.png"));
         ui->FormProfileButtonExit->setIcon(QIcon("images/program/exit_white.png"));
@@ -97,6 +93,13 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         break;
         }
     case 2:{
+        ui->FormProfileButtonFindProfile->setIcon(QIcon("images/program/find_black.png"));
+        ui->FormProfileButtonFavorites->setIcon(QIcon("images/program/favorites_black.png"));
+        ui->FormProfileButtonStatistics->setIcon(QIcon("images/program/statistic_black.png"));
+        ui->FormProfileButtonSettings->setIcon(QIcon("images/program/settings_black.png"));
+        ui->FormProfileButtonExit->setIcon(QIcon("images/program/exit_black.png"));
+        ui->FormProfileButtonFriends->setIcon(QIcon("images/program/friends_black.png"));
+        ui->FormProfileButtonGames->setIcon(QIcon("images/program/games_black.png"));
         // Настраиваем палитру для цветовых ролей элементов интерфейса
         //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
         //    darkPalette.setColor(QPalette::WindowText, Qt::white);
@@ -112,6 +115,9 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
         //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
         // Устанавливаем данную палитру
+            // Для возврата к светлой палитре достаточно
+            // будет установить стандартную палитру из темы оформления
+            //qApp->setPalette(style()->standardPalette());
         break;
         }
     }
@@ -202,6 +208,8 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
             break;
             }
         case 2:{
+            ui->FormProfileLabelProfileUrl->setTextFormat(Qt::RichText);
+            ui->FormProfileLabelProfileUrl->setText("<img src=\"images/program/link_black.png\" width=\"15\" height=\"15\">"+Account.value("profileurl").toString());
             break;
             }
         }
@@ -210,12 +218,12 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         ui->FormProfileLabelTimeCreated->setText(SLLanguage[9]+" "+date.toString("yyyy.MM.dd"));
         ui->FormProfileLabellvl->setText(SLLanguage[25]+": "+QString::number(Doclvl.object().value("response").toObject().value("player_level").toInt()));
         if(Docban.object().value("players").toArray().at(0).toObject().value("VACBanned").toBool()){
-            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("NumberOfVACBans").toInt())+SLLanguage[27]+"\n"+SLLanguage[29]+" "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("DaysSinceLastBan").toInt())+" "+SLLanguage[30]);
+            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("NumberOfVACBans").toInt())+"\n"+SLLanguage[28]+" "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("DaysSinceLastBan").toInt())+" "+SLLanguage[29]);
         } else {
-            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+SLLanguage[28]);
+            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+SLLanguage[27]);
         }
-        ui->FormProfileButtonGames->setText(SLLanguage[10]+"("+QString::number(DocOwnedGames.object().value("response").toObject().value("game_count").toInt())+")");
-        ui->FormProfileButtonFriends->setText(SLLanguage[11]+"("+QString::number(DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size())+")");
+        ui->FormProfileButtonGames->setText(" "+SLLanguage[10]+"("+QString::number(DocOwnedGames.object().value("response").toObject().value("game_count").toInt())+")");
+        ui->FormProfileButtonFriends->setText(" "+SLLanguage[11]+"("+QString::number(DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size())+")");
         if(!DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString().isEmpty()){
             ui->FormProfileLabelPersonaState->setText(SLLanguage[12]+":\n"+DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString());
             ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
@@ -315,9 +323,10 @@ void MainWindow::on_FormProfileButtonGames_clicked(){
     gamesform = new FormGames(id,key,language,Theme,DocOwnedGames,SaveImages);
     connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
     gamesform->show();
-    //this->setVisible(false);
+    this->setVisible(false);
 }
 void MainWindow::on_FormProfileButtonFriends_clicked(){
+    qDebug() << ui->FormProfileButtonFriends->palette();
     friendsform = new FormFriends(id,key,language,Theme,DocFriendList,SaveImages);
     connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
     connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));

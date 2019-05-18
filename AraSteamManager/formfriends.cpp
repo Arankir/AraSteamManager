@@ -34,6 +34,10 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
         break;
         }
     case 2:{
+        ui->FormFriendsBReturn->setIcon(QIcon("images/program/back_black.png"));
+        ui->FormFriendsBFind->setIcon(QIcon("images/program/find_black.png"));
+        ui->FormFriendsGBFilter->setStyleSheet("QGroupBox::title {image:url(images/program/filter_black.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+        favorites.addFile("images/program/favorites_black.png");
         break;
         }
     }
@@ -208,7 +212,16 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
         ui->FormFriendsTWFriends->setItem(i,5,item6);
         QPushButton *button1 = new QPushButton;
         button1->setText(SLLanguage[7]);
-        button1->setIcon(QIcon("images/program/go_to_white.png"));
+        switch (Theme) {
+        case 1:{
+            button1->setIcon(QIcon("images/program/go_to_white.png"));
+            break;
+        }
+        case 2:{
+            button1->setIcon(QIcon("images/program/go_to_black.png"));
+            break;
+        }
+        }
         button1->setMinimumSize(QSize(25,25));
         button1->setObjectName("btn"+Account.value("steamid").toString());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));

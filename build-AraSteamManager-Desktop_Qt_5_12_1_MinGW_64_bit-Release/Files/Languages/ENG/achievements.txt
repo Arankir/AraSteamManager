@@ -34,3 +34,4 @@ Category with this name already exist!
 Category name is empty!
 New Category has been changed!
 Category has been deleted!
+Update

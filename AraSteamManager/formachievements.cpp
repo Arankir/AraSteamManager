@@ -49,6 +49,20 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
         break;
         }
     case 2:{
+        ui->FormAchievementsButtonReturn->setIcon(QIcon("images/program/back_black.png"));
+        ui->FormAchievementsButtonCompare->setIcon(QIcon("images/program/compare_black.png"));
+        ui->FormAchievementsGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_black.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+        ui->FormAchievementsButtonAddCategory->setIcon(QIcon("images/program/create.png"));
+        ui->FormAchievementsButtonChangeCategory->setIcon(QIcon("images/program/change_black.png"));
+        ui->FormAchievementsButtonDeleteCategory->setIcon(QIcon("images/program/delete.png"));
+        ui->FormAchievementsButtonFindAchievement->setIcon(QIcon("images/program/find_black.png"));
+        ui->FormAchievementsButtonAcceptNewCategory->setIcon(QIcon("images/program/apply.png"));
+        ui->FormAchievementsButtonCancelNewCategory->setIcon(QIcon("images/program/cancel.png"));
+        ui->FormAchievementsButtonAddValueNewCategory->setIcon(QIcon("images/program/create.png"));
+        ui->FormAchievementsButtonAcceptChangeCategory->setIcon(QIcon("images/program/apply.png"));
+        ui->FormAchievementsButtonCancelChangeCategory->setIcon(QIcon("images/program/cancel.png"));
+        ui->FormAchievementsButtonAddValueChangeCategory->setIcon(QIcon("images/program/create.png"));
+        favorites.addFile("images/program/favorites_black.png");
         break;
         }
     }
@@ -80,13 +94,13 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     ui->FormAchievementsButtonFindAchievement->setText(SLLanguage[8]);
     ui->FormAchievementsGroupBoxFilter->setTitle("      "+SLLanguage[9]);
     ui->FormAchievementsLineEditNameAchievements->setPlaceholderText(SLLanguage[10]);
-    ui->FormAchievementsGroupBoxAddCategory->setTitle("      "+SLLanguage[5]);
+    ui->FormAchievementsGroupBoxAddCategory->setTitle(SLLanguage[5]);
     ui->FormAchievementsButtonAddValueNewCategory->setText(SLLanguage[11]);
     ui->FormAchievementsButtonCancelNewCategory->setText(" "+SLLanguage[12]);
     ui->FormAchievementsButtonAcceptNewCategory->setText(SLLanguage[13]);
     ui->FormAchievementsLineEditTitleNewCategory->setPlaceholderText(SLLanguage[14]);
     ui->FormAchievementsLineEditTitleValueNewCategory->setPlaceholderText(SLLanguage[15]);
-    ui->FormAchievementsGroupBoxChangeCategory->setTitle("      "+SLLanguage[16]);
+    ui->FormAchievementsGroupBoxChangeCategory->setTitle(SLLanguage[16]);
     ui->FormAchievementsButtonAddValueChangeCategory->setText(SLLanguage[11]);
     ui->FormAchievementsButtonCancelChangeCategory->setText(" "+SLLanguage[12]);
     ui->FormAchievementsButtonAcceptChangeCategory->setText(SLLanguage[13]);
@@ -94,6 +108,7 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(SLLanguage[18]);
     ui->FormAchievementsLineEditTitleCategoryChangeCategory->setPlaceholderText(SLLanguage[14]);
     ui->FormAchievementsLineEditTitleValueChangeCategory->setPlaceholderText(SLLanguage[15]);
+    ui->FormAchievementsButtonUpdate->setText(SLLanguage[36]);
     ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[19]));
     ui->FormAchievementsTableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[20]));
@@ -320,6 +335,63 @@ void FormAchievements::UpdateHiddenRows(){
             } else
             ui->FormAchievementsTableWidgetAchievements->setRowHidden(i,true);
         }
+}
+void FormAchievements::on_FormAchievementsButtonUpdate_clicked(){
+    QNetworkAccessManager manager;
+    QEventLoop loop;
+    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+    loop.exec();
+    JsonDocPlayerAchievements = QJsonDocument::fromJson(replyPlayerAchievements.readAll());
+    QJsonArray JsonArrayPlayerAchievements = JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray();
+    QNetworkReply &replyNumber = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+key+"&appid="+appid)));
+    loop.exec();
+    QJsonDocument DocNumber = QJsonDocument::fromJson(replyNumber.readAll());
+    ui->FormAchievementsLabelGameOnline->setText(SLLanguage[27]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
+    int total=0;
+    int dectotal=0;
+    if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("success").toBool()==false){
+        ui->FormAchievementsTableWidgetAchievements->insertRow(0);
+        QTableWidgetItem *item1 = new QTableWidgetItem("Error");
+        ui->FormAchievementsTableWidgetAchievements->setItem(0,1,item1);
+        QTableWidgetItem *item2 = new QTableWidgetItem(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("error").toString());
+        ui->FormAchievementsTableWidgetAchievements->setItem(0,2,item2);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(3,true);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(4,true);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(5,true);
+        ui->FormAchievementsTableWidgetAchievements->setColumnHidden(6,true);
+        ui->FormAchievementsGroupBoxFilter->setEnabled(false);
+    } else
+    for(int i=0;i<JsonArrayGlobalAchievements.size();i++){
+        if(JsonArrayGlobalAchievements[i].toObject().value("percent")!=0){
+            int j=0;
+            bool accept=false;
+            for(;j<JsonArrayPlayerAchievements.size();j++){
+                if(JsonArrayPlayerAchievements[j].toObject().value("apiname").toString()==JsonArrayGlobalAchievements[i].toObject().value("name").toString()){
+                    accept=true;
+                    break;
+                    }
+            }
+            if(accept){
+                QModelIndex api = ui->FormAchievementsTableWidgetAchievements->model()->index(i-dectotal,6);
+                QTableWidgetItem *itemd;
+                if(JsonArrayPlayerAchievements[j].toObject().value("achieved").toInt()==1){
+                    QDateTime date=QDateTime::fromSecsSinceEpoch(JsonArrayPlayerAchievements[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
+                    itemd = new QTableWidgetItem(SLLanguage[23]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                    total++;
+                    } else {
+                    itemd = new QTableWidgetItem(SLLanguage[24]);
+                    }
+                if((JsonArrayPlayerAchievements[j].toObject().value("apiname").toString()!=api.data())||(itemd->text()!=ui->FormAchievementsTableWidgetAchievements->item(i-dectotal,4)->text())){
+                    delete ui->FormAchievementsTableWidgetAchievements->item(i-dectotal,4);
+                    ui->FormAchievementsTableWidgetAchievements->setItem(i-dectotal,4,itemd);
+                    }
+            } else dectotal+=1;
+        }
+        }
+    double percent= 1.0*total/(JsonArrayPlayerAchievements.size()-dectotal)*100;
+    ui->FormAchievementsLabelTotalPersent->setText(SLLanguage[25]+" = "+QString::number(percent)+"%");
+    //QMessageBox::information(this,"","");
 }
 
 void FormAchievements::OnResultImage(int i, QString Save, ImageRequest *imgr){

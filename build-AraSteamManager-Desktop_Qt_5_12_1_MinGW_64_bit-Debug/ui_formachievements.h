@@ -68,6 +68,7 @@ public:
     QScrollArea *FormAchievementsScrollAreaCategories;
     QWidget *scrollAreaWidgetContents;
     QPushButton *FormAchievementsButtonFindAchievement;
+    QPushButton *FormAchievementsButtonUpdate;
     QPushButton *FormAchievementsButtonCompare;
     QLabel *FormAchievementsLabelGameOnline;
 
@@ -248,7 +249,7 @@ public:
         FormAchievementsScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 537, 96));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 537, 98));
         FormAchievementsScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(FormAchievementsScrollAreaCategories, 1, 0, 5, 1);
@@ -258,6 +259,11 @@ public:
         FormAchievementsButtonFindAchievement->setEnabled(true);
 
         gridLayout->addWidget(FormAchievementsButtonFindAchievement, 8, 2, 1, 1);
+
+        FormAchievementsButtonUpdate = new QPushButton(FormAchievementsGroupBoxFilter);
+        FormAchievementsButtonUpdate->setObjectName(QString::fromUtf8("FormAchievementsButtonUpdate"));
+
+        gridLayout->addWidget(FormAchievementsButtonUpdate, 4, 1, 1, 1);
 
 
         gridLayout_4->addWidget(FormAchievementsGroupBoxFilter, 3, 0, 1, 6);
@@ -311,6 +317,7 @@ public:
         FormAchievementsButtonChangeCategory->setText(QApplication::translate("FormAchievements", "Change category", nullptr));
         FormAchievementsRadioButtonNotReached->setText(QApplication::translate("FormAchievements", "Not reached", nullptr));
         FormAchievementsButtonFindAchievement->setText(QApplication::translate("FormAchievements", "Find", nullptr));
+        FormAchievementsButtonUpdate->setText(QApplication::translate("FormAchievements", "Update", nullptr));
         FormAchievementsButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
         FormAchievementsLabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
     } // retranslateUi
