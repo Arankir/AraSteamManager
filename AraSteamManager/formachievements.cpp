@@ -223,20 +223,20 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
         categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
         categories.setSorting(QDir::Name);
         QFileInfoList list = categories.entryInfoList();
-        QVBoxLayout *layout = new QVBoxLayout;
+        QFormLayout *layout = new QFormLayout;
         QWidget *widget = new QWidget;
         for (int i = 0; i < list.size(); ++i){
             QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
             category.open(QFile::ReadOnly);
             QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
             QComboBox *cb = new QComboBox;
-            cb->addItem(cat.object().value("name").toString());
+            cb->addItem(SLLanguage[37]);
             for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                 cb->addItem(cat.object().value("values").toArray().at(j).toString());
             }
             cb->setObjectName("Category"+QString::number(i));
             connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
-            layout->addWidget(cb);
+            layout->addRow(new QLabel(cat.object().value("name").toString()),cb);
             ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(cat.object().value("name").toString());
             category.close();
             }
@@ -546,20 +546,20 @@ void FormAchievements::on_FormAchievementsButtonAcceptNewCategory_clicked(){
                     for (int i=0;i<list.size();i++) {
                         ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
                     }
-                    QVBoxLayout *layout = new QVBoxLayout;
+                    QFormLayout *layout = new QFormLayout;
                     QWidget *widget = new QWidget;
                     for (int i = 0; i < list.size(); ++i){
                         QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
                         category.open(QFile::ReadOnly);
                         QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
                         QComboBox *cb = new QComboBox;
-                        cb->addItem(cat.object().value("name").toString());
+                        cb->addItem(SLLanguage[37]);
                         for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                             cb->addItem(cat.object().value("values").toArray().at(j).toString());
                         }
                         cb->setObjectName("Category"+QString::number(i));
                         connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
-                        layout->addWidget(cb);
+                        layout->addRow(new QLabel(cat.object().value("name").toString()),cb);
                         ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(cat.object().value("name").toString());
                         category.close();
                         }
@@ -706,8 +706,8 @@ void FormAchievements::on_FormAchievementsButtonAcceptChangeCategory_clicked(){
                 category.setObject(group);
                 Category.write(category.toJson());
                 Category.close();
-                ui->FormAchievementsLineEditTitleValueChangeCategory->setText("");
-                ui->FormAchievementsLineEditTitleValueChangeCategory->setEnabled(false);
+                ui->FormAchievementsLineEditTitleCategoryChangeCategory->setText("");
+                ui->FormAchievementsLineEditTitleCategoryChangeCategory->setEnabled(false);
                 delete ui->FormAchievementsScrollAreaCategories->layout();
                 QDir categories("Files/Categories/"+appid);
                 if(categories.exists()){
@@ -717,20 +717,20 @@ void FormAchievements::on_FormAchievementsButtonAcceptChangeCategory_clicked(){
                     for (int i=0;i<list.size();i++) {
                         ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
                     }
-                    QVBoxLayout *layout = new QVBoxLayout;
+                    QFormLayout *layout = new QFormLayout;
                     QWidget *widget = new QWidget;
                     for (int i = 0; i < list.size(); ++i){
                         QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
                         category.open(QFile::ReadOnly);
                         QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
                         QComboBox *cb = new QComboBox;
-                        cb->addItem(cat.object().value("name").toString());
+                        cb->addItem(SLLanguage[37]);
                         for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                             cb->addItem(cat.object().value("values").toArray().at(j).toString());
                         }
                         cb->setObjectName("Category"+QString::number(i));
                         connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
-                        layout->addWidget(cb);
+                        layout->addRow(new QLabel(cat.object().value("name").toString()),cb);
                         ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(cat.object().value("name").toString());
                         category.close();
                         }
@@ -768,20 +768,20 @@ void FormAchievements::on_FormAchievementsButtonDeleteCategory_clicked(){
         for (int i=0;i<=list.size();i++) {
             ui->FormAchievementsComboBoxCategoriesChangeCategory->removeItem(1);
         }
-        QVBoxLayout *layout = new QVBoxLayout;
+        QFormLayout *layout = new QFormLayout;
         QWidget *widget = new QWidget;
         for (int i = 0; i < list.size(); ++i){
             QFile category("Files/Categories/"+appid+"/"+list.at(i).fileName());
             category.open(QFile::ReadOnly);
             QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
             QComboBox *cb = new QComboBox;
-            cb->addItem(cat.object().value("name").toString());
+            cb->addItem(SLLanguage[37]);
             for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                 cb->addItem(cat.object().value("values").toArray().at(j).toString());
             }
             cb->setObjectName("Category"+QString::number(i));
             connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
-            layout->addWidget(cb);
+            layout->addRow(new QLabel(cat.object().value("name").toString()),cb);
             ui->FormAchievementsComboBoxCategoriesChangeCategory->addItem(cat.object().value("name").toString());
             category.close();
             }
