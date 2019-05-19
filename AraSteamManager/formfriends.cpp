@@ -9,6 +9,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
     DocFriends=DocFriendss;
     SaveImages=SaveImagess;
     Theme=Themes;
+    ui->FormFriendsTWFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QFile FileLanguage;
     switch(language){
     case 1:{

@@ -75,6 +75,14 @@ private slots:
 
     void on_FormAchievementsButtonUpdate_clicked();
 
+    void EditLineEditChangeCategoryValue();
+    void on_buttonChangeCategoryUpValues_clicked();
+    void on_buttonChangeCategoryDownValues_clicked();
+
+    void EditLineEditNewCategoryValue();
+    void on_buttonNewCategoryUpValues_clicked();
+    void on_buttonNewCategoryDownValues_clicked();
+
 private:
     Ui::FormAchievements *ui;
     QString key;
@@ -92,6 +100,7 @@ private:
     QFormLayout *changecategoryvalueslayout;
     QStringList SLLanguage;
     int SaveImages;
+
 };
 
 #endif // FORMACHIEVEMENTS_H

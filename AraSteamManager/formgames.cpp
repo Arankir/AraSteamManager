@@ -8,8 +8,8 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
     language=languages;
     SaveImages=SaveImage;
     Theme=Themes;
-    QFile FileLanguage;
     ui->FormGamesTableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    QFile FileLanguage;
     switch(language){
     case 1:{
         FileLanguage.setFileName("Files/Languages/ENG/games.txt");

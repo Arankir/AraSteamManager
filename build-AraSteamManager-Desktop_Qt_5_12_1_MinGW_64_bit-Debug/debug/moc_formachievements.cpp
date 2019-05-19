@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    QByteArrayData data[35];
-    char stringdata0[1109];
+    QByteArrayData data[41];
+    char stringdata0[1328];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -65,7 +65,13 @@ QT_MOC_LITERAL(30, 862, 55), // "on_FormAchievementsButtonAddV..."
 QT_MOC_LITERAL(31, 918, 53), // "on_FormAchievementsButtonAcce..."
 QT_MOC_LITERAL(32, 972, 47), // "on_FormAchievementsButtonDele..."
 QT_MOC_LITERAL(33, 1020, 48), // "on_FormAchievementsButtonFind..."
-QT_MOC_LITERAL(34, 1069, 39) // "on_FormAchievementsButtonUpda..."
+QT_MOC_LITERAL(34, 1069, 39), // "on_FormAchievementsButtonUpda..."
+QT_MOC_LITERAL(35, 1109, 31), // "EditLineEditChangeCategoryValue"
+QT_MOC_LITERAL(36, 1141, 39), // "on_buttonChangeCategoryUpValu..."
+QT_MOC_LITERAL(37, 1181, 41), // "on_buttonChangeCategoryDownVa..."
+QT_MOC_LITERAL(38, 1223, 28), // "EditLineEditNewCategoryValue"
+QT_MOC_LITERAL(39, 1252, 36), // "on_buttonNewCategoryUpValues_..."
+QT_MOC_LITERAL(40, 1289, 38) // "on_buttonNewCategoryDownValue..."
 
     },
     "FormAchievements\0return_to_games\0\0"
@@ -91,7 +97,13 @@ QT_MOC_LITERAL(34, 1069, 39) // "on_FormAchievementsButtonUpda..."
     "on_FormAchievementsButtonAcceptChangeCategory_clicked\0"
     "on_FormAchievementsButtonDeleteCategory_clicked\0"
     "on_FormAchievementsButtonFindAchievement_clicked\0"
-    "on_FormAchievementsButtonUpdate_clicked"
+    "on_FormAchievementsButtonUpdate_clicked\0"
+    "EditLineEditChangeCategoryValue\0"
+    "on_buttonChangeCategoryUpValues_clicked\0"
+    "on_buttonChangeCategoryDownValues_clicked\0"
+    "EditLineEditNewCategoryValue\0"
+    "on_buttonNewCategoryUpValues_clicked\0"
+    "on_buttonNewCategoryDownValues_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -101,7 +113,7 @@ static const uint qt_meta_data_FormAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      26,   14, // methods
+      32,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -109,34 +121,40 @@ static const uint qt_meta_data_FormAchievements[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  144,    2, 0x06 /* Public */,
+       1,    0,  174,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    3,  145,    2, 0x08 /* Private */,
-       8,    1,  152,    2, 0x08 /* Private */,
-      10,    1,  155,    2, 0x08 /* Private */,
-      12,    0,  158,    2, 0x08 /* Private */,
-      13,    0,  159,    2, 0x08 /* Private */,
-      14,    0,  160,    2, 0x08 /* Private */,
-      15,    0,  161,    2, 0x08 /* Private */,
-      16,    0,  162,    2, 0x08 /* Private */,
-      17,    0,  163,    2, 0x08 /* Private */,
-      18,    0,  164,    2, 0x08 /* Private */,
-      19,    0,  165,    2, 0x08 /* Private */,
-      20,    1,  166,    2, 0x08 /* Private */,
-      22,    0,  169,    2, 0x08 /* Private */,
-      23,    0,  170,    2, 0x08 /* Private */,
-      24,    0,  171,    2, 0x08 /* Private */,
-      25,    0,  172,    2, 0x08 /* Private */,
-      26,    0,  173,    2, 0x08 /* Private */,
-      27,    0,  174,    2, 0x08 /* Private */,
-      28,    0,  175,    2, 0x08 /* Private */,
-      29,    1,  176,    2, 0x08 /* Private */,
-      30,    0,  179,    2, 0x08 /* Private */,
-      31,    0,  180,    2, 0x08 /* Private */,
-      32,    0,  181,    2, 0x08 /* Private */,
-      33,    0,  182,    2, 0x08 /* Private */,
-      34,    0,  183,    2, 0x08 /* Private */,
+       3,    3,  175,    2, 0x08 /* Private */,
+       8,    1,  182,    2, 0x08 /* Private */,
+      10,    1,  185,    2, 0x08 /* Private */,
+      12,    0,  188,    2, 0x08 /* Private */,
+      13,    0,  189,    2, 0x08 /* Private */,
+      14,    0,  190,    2, 0x08 /* Private */,
+      15,    0,  191,    2, 0x08 /* Private */,
+      16,    0,  192,    2, 0x08 /* Private */,
+      17,    0,  193,    2, 0x08 /* Private */,
+      18,    0,  194,    2, 0x08 /* Private */,
+      19,    0,  195,    2, 0x08 /* Private */,
+      20,    1,  196,    2, 0x08 /* Private */,
+      22,    0,  199,    2, 0x08 /* Private */,
+      23,    0,  200,    2, 0x08 /* Private */,
+      24,    0,  201,    2, 0x08 /* Private */,
+      25,    0,  202,    2, 0x08 /* Private */,
+      26,    0,  203,    2, 0x08 /* Private */,
+      27,    0,  204,    2, 0x08 /* Private */,
+      28,    0,  205,    2, 0x08 /* Private */,
+      29,    1,  206,    2, 0x08 /* Private */,
+      30,    0,  209,    2, 0x08 /* Private */,
+      31,    0,  210,    2, 0x08 /* Private */,
+      32,    0,  211,    2, 0x08 /* Private */,
+      33,    0,  212,    2, 0x08 /* Private */,
+      34,    0,  213,    2, 0x08 /* Private */,
+      35,    0,  214,    2, 0x08 /* Private */,
+      36,    0,  215,    2, 0x08 /* Private */,
+      37,    0,  216,    2, 0x08 /* Private */,
+      38,    0,  217,    2, 0x08 /* Private */,
+      39,    0,  218,    2, 0x08 /* Private */,
+      40,    0,  219,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -162,6 +180,12 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -203,6 +227,12 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 23: _t->on_FormAchievementsButtonDeleteCategory_clicked(); break;
         case 24: _t->on_FormAchievementsButtonFindAchievement_clicked(); break;
         case 25: _t->on_FormAchievementsButtonUpdate_clicked(); break;
+        case 26: _t->EditLineEditChangeCategoryValue(); break;
+        case 27: _t->on_buttonChangeCategoryUpValues_clicked(); break;
+        case 28: _t->on_buttonChangeCategoryDownValues_clicked(); break;
+        case 29: _t->EditLineEditNewCategoryValue(); break;
+        case 30: _t->on_buttonNewCategoryUpValues_clicked(); break;
+        case 31: _t->on_buttonNewCategoryDownValues_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -257,13 +287,13 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 26)
+        if (_id < 32)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 32;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 26)
+        if (_id < 32)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 32;
     }
     return _id;
 }

@@ -14,15 +14,34 @@
    <string>SteamAchievementsStatistic</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
+   <item row="2" column="1">
+    <widget class="QLabel" name="FormAchievementsLabelGameOnline">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>GameOnline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="6">
+    <widget class="QTableWidget" name="FormAchievementsTableWidgetAchievements"/>
+   </item>
+   <item row="1" column="5">
+    <widget class="QPushButton" name="FormAchievementsButtonCompare">
+     <property name="text">
+      <string>Compare with friends</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="5">
     <widget class="QPushButton" name="FormAchievementsButtonReturn">
      <property name="text">
       <string>Return</string>
      </property>
     </widget>
-   </item>
-   <item row="6" column="0" colspan="6">
-    <widget class="QTableWidget" name="FormAchievementsTableWidgetAchievements"/>
    </item>
    <item row="0" column="0" rowspan="3">
     <widget class="QGroupBox" name="groupBox">
@@ -74,77 +93,6 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0" colspan="3">
-       <widget class="QGroupBox" name="FormAchievementsGroupBoxChangeCategory">
-        <property name="title">
-         <string>Change category</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="3" rowspan="3">
-          <widget class="QScrollArea" name="FormAchievementsScrollAreaValuesChangeCategory">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_3">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>221</width>
-              <height>68</height>
-             </rect>
-            </property>
-           </widget>
-          </widget>
-         </item>
-         <item row="2" column="4">
-          <widget class="QPushButton" name="FormAchievementsButtonAcceptChangeCategory">
-           <property name="text">
-            <string>Accept</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QComboBox" name="FormAchievementsComboBoxCategoriesChangeCategory">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QPushButton" name="FormAchievementsButtonAddValueChangeCategory">
-           <property name="text">
-            <string>Add Value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="4">
-          <widget class="QPushButton" name="FormAchievementsButtonCancelChangeCategory">
-           <property name="text">
-            <string>Cancel</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLineEdit" name="FormAchievementsLineEditTitleValueChangeCategory">
-           <property name="placeholderText">
-            <string>Title of value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QPushButton" name="FormAchievementsButtonDeleteCategory">
-           <property name="text">
-            <string>Delete</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1" colspan="2">
-          <widget class="QLineEdit" name="FormAchievementsLineEditTitleCategoryChangeCategory"/>
-         </item>
-        </layout>
-       </widget>
-      </item>
       <item row="6" column="0" colspan="3">
        <widget class="QGroupBox" name="FormAchievementsGroupBoxAddCategory">
         <property name="title">
@@ -168,7 +116,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>264</width>
+              <width>509</width>
               <height>68</height>
              </rect>
             </property>
@@ -189,14 +137,7 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QLineEdit" name="FormAchievementsLineEditTitleValueNewCategory">
-           <property name="placeholderText">
-            <string>Title of value</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
+         <item row="2" column="0" colspan="2">
           <widget class="QPushButton" name="FormAchievementsButtonAddValueNewCategory">
            <property name="text">
             <string>Add Value</string>
@@ -288,26 +229,71 @@
         </property>
        </widget>
       </item>
+      <item row="7" column="0" colspan="3">
+       <widget class="QGroupBox" name="FormAchievementsGroupBoxChangeCategory">
+        <property name="title">
+         <string>Change category</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="0" colspan="2">
+          <widget class="QLineEdit" name="FormAchievementsLineEditTitleCategoryChangeCategory"/>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QComboBox" name="FormAchievementsComboBoxCategoriesChangeCategory">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QPushButton" name="FormAchievementsButtonDeleteCategory">
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QPushButton" name="FormAchievementsButtonAddValueChangeCategory">
+           <property name="text">
+            <string>Add Value</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QPushButton" name="FormAchievementsButtonAcceptChangeCategory">
+           <property name="text">
+            <string>Accept</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QPushButton" name="FormAchievementsButtonCancelChangeCategory">
+           <property name="text">
+            <string>Cancel</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2" rowspan="3" colspan="3">
+          <widget class="QScrollArea" name="FormAchievementsScrollAreaValuesChangeCategory">
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents_3">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>348</width>
+              <height>75</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
      </layout>
-    </widget>
-   </item>
-   <item row="1" column="5">
-    <widget class="QPushButton" name="FormAchievementsButtonCompare">
-     <property name="text">
-      <string>Compare with friends</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="FormAchievementsLabelGameOnline">
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>GameOnline</string>
-     </property>
     </widget>
    </item>
   </layout>
