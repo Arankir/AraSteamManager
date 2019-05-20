@@ -2,7 +2,7 @@
     "1": [
         "Totally meant that",
         "Spot of DIY",
-        "Big Hitter"
+        "Home Improved"
     ],
     "2": [
         "Home Improved",
@@ -18,15 +18,12 @@
     "5": [
         "Vibranium"
     ],
-    "7": [
-    ],
     "name": "12",
     "values": [
-        "5",
         "1",
         "2",
         "3",
-        "7",
+        "5",
         "4"
     ]
 }

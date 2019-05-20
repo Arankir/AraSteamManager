@@ -36,18 +36,17 @@ signals:
 private slots:
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
     void on_ComboBoxCategory_Change(int index);
+    void on_CheckBoxCategory_Change(int ind);
     void closeEvent(QCloseEvent *);
+    void on_return();
     void on_FormAchievementsButtonReturn_clicked();
-    void FavoritesClicked();
     void UpdateHiddenRows();
     void on_FormAchievementsButtonAddCategory_clicked();
-    void on_return();
 
     void on_FormAchievementsRadioButtonAll_clicked();
-
     void on_FormAchievementsRadioButtonReached_clicked();
-
     void on_FormAchievementsRadioButtonNotReached_clicked();
+    void FavoritesClicked();
 
     void on_FormAchievementsLineEditNameAchievements_textChanged(const QString &arg1);
 
@@ -82,6 +81,14 @@ private slots:
     void EditLineEditNewCategoryValue();
     void on_buttonNewCategoryUpValues_clicked();
     void on_buttonNewCategoryDownValues_clicked();
+
+    void on_FormAchievementsCheckBoxNewCategoryOneValue_stateChanged(int arg1);
+    void on_FormAchievementsCheckBoxChangeCategoryOneValue_stateChanged(int arg1);
+
+    void on_Change_Title_NewCategory_OneValue();
+    void on_Change_Title_ChangeCategory_OneValue();
+
+    void ShowCategories();
 
 private:
     Ui::FormAchievements *ui;
