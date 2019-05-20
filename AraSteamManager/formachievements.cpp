@@ -1085,6 +1085,17 @@ void FormAchievements::ShowCategories(){
         ui->FormAchievementsScrollAreaCategories->setWidget(widget1);
         ui->FormAchievementsScrollAreaCheckCategories->setWidget(widget2);
 
+        if(layout1->rowCount()==0){
+            ui->FormAchievementsScrollAreaCategories->hide();
+        } else {
+            ui->FormAchievementsScrollAreaCategories->show();
+        }
+        if(layout2->rowCount()==0){
+            ui->FormAchievementsScrollAreaCheckCategories->hide();
+        } else {
+            ui->FormAchievementsScrollAreaCheckCategories->show();
+        }
+
         bool **New = new bool*[ui->FormAchievementsTableWidgetAchievements->rowCount()];
         for (int i=0;i<ui->FormAchievementsTableWidgetAchievements->rowCount();i++) {
             New[i]=new bool[list.size()+3];
