@@ -637,7 +637,18 @@ void FormAchievements::on_buttonNewCategoryDeleteValues_clicked(){
     newcategoryvalueslayout->removeRow(i);
     i++;
     while(i<newcategoryvalueslayout->rowCount()+1){
-        findChild<QPushButton*>("btnNewCategoryDeleteValue"+QString::number(i))->setObjectName("btnNewCategoryDeleteValue"+QString::number(i-1));
+        QPushButton * butn = findChild<QPushButton*>("btnNewCategoryDeleteValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnNewCategoryDeleteValue"+QString::number(i-1));
+        QLineEdit* lied = findChild<QLineEdit*>("liedNewCategoryValue"+QString::number(i));
+        if(lied)
+            lied->setObjectName("liedNewCategoryValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnNewCategoryUpValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnNewCategoryUpValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnNewCategoryDownValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnNewCategoryDownValue"+QString::number(i-1));
         i++;
     }
 }
@@ -963,10 +974,18 @@ void FormAchievements::on_buttonChangeCategoryDeleteValues_clicked(){
     changecategoryvalueslayout->removeRow(i);
     i++;
     while(i<changecategoryvalueslayout->rowCount()+1){
-        findChild<QPushButton*>("btnChangeCategoryDeleteValue"+QString::number(i))->setObjectName("btnChangeCategoryDeleteValue"+QString::number(i-1));
-        findChild<QPushButton*>("liedChangeCategoryValue"+QString::number(i))->setObjectName("liedChangeCategoryValue"+QString::number(i-1));
-        findChild<QPushButton*>("btnChangeCategoryUpValue"+QString::number(i))->setObjectName("btnChangeCategoryUpValue"+QString::number(i-1));
-        findChild<QPushButton*>("btnChangeCategoryDownValue"+QString::number(i))->setObjectName("btnChangeCategoryDownValue"+QString::number(i-1));
+        QPushButton * butn = findChild<QPushButton*>("btnChangeCategoryDeleteValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnChangeCategoryDeleteValue"+QString::number(i-1));
+        QLineEdit* lied = findChild<QLineEdit*>("liedChangeCategoryValue"+QString::number(i));
+        if(lied)
+            lied->setObjectName("liedChangeCategoryValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnChangeCategoryUpValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnChangeCategoryUpValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnChangeCategoryDownValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnChangeCategoryDownValue"+QString::number(i-1));
         i++;
     }
 }
