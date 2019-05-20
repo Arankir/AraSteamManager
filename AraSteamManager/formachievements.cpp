@@ -867,16 +867,6 @@ void FormAchievements::on_FormAchievementsButtonAcceptChangeCategory_clicked(){
                         }
                 } else {
                     for (int i=7;i<ui->FormAchievementsTableWidgetAchievements->columnCount();i++){
-                        values.append(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text());
-                        QJsonArray valn;
-                        for (int j=0;j<ui->FormAchievementsTableWidgetAchievements->rowCount();j++) {
-                            if(ui->FormAchievementsTableWidgetAchievements->item(j,i)->checkState()){
-                                valn.append(ui->FormAchievementsTableWidgetAchievements->item(j,6)->text());
-                            }
-                        group[ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()]=valn;
-                        }
-                    }
-                    for (int i=7;i<ui->FormAchievementsTableWidgetAchievements->columnCount();i++){
                         if(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()==""){
                             QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
                             return;
