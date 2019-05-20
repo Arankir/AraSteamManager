@@ -533,6 +533,7 @@ void FormAchievements::on_FormAchievementsButtonAcceptNewCategory_clicked(){
                     if(newcategoryvalueslayout->rowCount()>0){
                         QMessageBox::StandardButton btn=QMessageBox::question(this,SLLanguage[39],SLLanguage[40].mid(0,SLLanguage[40].indexOf("\\n")-1)+"\n"+SLLanguage[40].mid(SLLanguage[40].indexOf("\\n")+2,SLLanguage[40].length()-SLLanguage[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
                         if(btn==QMessageBox::No){
+                            qDebug()<<0;
                             return;
                         }
                     }
@@ -547,12 +548,18 @@ void FormAchievements::on_FormAchievementsButtonAcceptNewCategory_clicked(){
                     } else {
                     for (int i=7;i<ui->FormAchievementsTableWidgetAchievements->columnCount();i++){
                         if(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()==""){
+                            Category.close();
+                            Category.remove();
                             QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
+                            qDebug()<<1<<i;
                             return;
                             }
                         for (int j=7;j<i;j++){
                             if(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()==ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(j)->text()){
+                                Category.close();
+                                Category.remove();
                                 QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
+                                qDebug()<<2<<i<<j;
                                 return;
                                 }
                             }
@@ -844,66 +851,68 @@ void FormAchievements::on_FormAchievementsButtonAcceptChangeCategory_clicked(){
         }
         QFile Category("Files/Categories/"+appid+"/"+ui->FormAchievementsLineEditTitleCategoryChangeCategory->text()+".json");
         if((!QFile::exists("Files/Categories/"+appid+"/"+ui->FormAchievementsLineEditTitleCategoryChangeCategory->text()+".json"))||(ui->FormAchievementsLineEditTitleCategoryChangeCategory->text()==ui->FormAchievementsComboBoxCategoriesChangeCategory->currentText())){
-            if(Category.open(QIODevice::WriteOnly)){
-                QJsonDocument category;
-                QJsonArray groups;
-                QJsonObject group;
-                group["name"]=ui->FormAchievementsLineEditTitleCategoryChangeCategory->text();
-                QJsonArray values;
-                if(ui->FormAchievementsCheckBoxChangeCategoryOneValue->isChecked()){
-                    if(changecategoryvalueslayout->rowCount()>0){
-                        QMessageBox::StandardButton btn=QMessageBox::question(this,SLLanguage[39],SLLanguage[40].mid(0,SLLanguage[40].indexOf("\\n")-1)+"\n"+SLLanguage[40].mid(SLLanguage[40].indexOf("\\n")+2,SLLanguage[40].length()-SLLanguage[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
-                        if(btn==QMessageBox::No){
-                            return;
-                        }
+            QJsonDocument category;
+            QJsonArray groups;
+            QJsonObject group;
+            group["name"]=ui->FormAchievementsLineEditTitleCategoryChangeCategory->text();
+            QJsonArray values;
+            if(ui->FormAchievementsCheckBoxChangeCategoryOneValue->isChecked()){
+                if(changecategoryvalueslayout->rowCount()>0){
+                    QMessageBox::StandardButton btn=QMessageBox::question(this,SLLanguage[39],SLLanguage[40].mid(0,SLLanguage[40].indexOf("\\n")-1)+"\n"+SLLanguage[40].mid(SLLanguage[40].indexOf("\\n")+2,SLLanguage[40].length()-SLLanguage[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
+                    if(btn==QMessageBox::No){
+                        return;
                     }
-                    values.append(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(ui->FormAchievementsTableWidgetAchievements->columnCount()-1)->text());
-                    QJsonArray valn;
-                    for (int j=0;j<ui->FormAchievementsTableWidgetAchievements->rowCount();j++){
-                        if(ui->FormAchievementsTableWidgetAchievements->item(j,ui->FormAchievementsTableWidgetAchievements->columnCount()-1)->checkState()){
-                            valn.append(ui->FormAchievementsTableWidgetAchievements->item(j,6)->text());
-                            }
-                        group[ui->FormAchievementsLineEditTitleCategoryChangeCategory->text()]=valn;
+                }
+                Category.open(QIODevice::WriteOnly);
+                values.append(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(ui->FormAchievementsTableWidgetAchievements->columnCount()-1)->text());
+                QJsonArray valn;
+                for (int j=0;j<ui->FormAchievementsTableWidgetAchievements->rowCount();j++){
+                    if(ui->FormAchievementsTableWidgetAchievements->item(j,ui->FormAchievementsTableWidgetAchievements->columnCount()-1)->checkState()){
+                        valn.append(ui->FormAchievementsTableWidgetAchievements->item(j,6)->text());
                         }
-                } else {
-                    for (int i=7;i<ui->FormAchievementsTableWidgetAchievements->columnCount();i++){
-                        if(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()==""){
+                    group[ui->FormAchievementsLineEditTitleCategoryChangeCategory->text()]=valn;
+                    }
+            } else {
+                for (int i=7;i<ui->FormAchievementsTableWidgetAchievements->columnCount();i++){
+                    if(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()==""){
+                        Category.close();
+                        QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
+                        return;
+                        }
+                    for (int j=7;j<i;j++) {
+                        if(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()==ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(j)->text()){
+                            Category.close();
                             QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
                             return;
                             }
-                        for (int j=7;j<i;j++) {
-                            if(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()==ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(j)->text()){
-                                QMessageBox::warning(this,SLLanguage[28],SLLanguage[29]);
-                                return;
-                                }
-                            }
-                        }
-                    for (int i=7;i<ui->FormAchievementsTableWidgetAchievements->columnCount();i++){
-                        values.append(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text());
-                        QJsonArray valn;
-                        for (int j=0;j<ui->FormAchievementsTableWidgetAchievements->rowCount();j++) {
-                            if(ui->FormAchievementsTableWidgetAchievements->item(j,i)->checkState()){
-                                valn.append(ui->FormAchievementsTableWidgetAchievements->item(j,6)->text());
-                                }
-                            group[ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()]=valn;
-                            }
                         }
                     }
-                group["values"]=values;
-                category.setObject(group);
-                Category.write(category.toJson());
-                Category.close();
-                ui->FormAchievementsLineEditTitleCategoryChangeCategory->setText("");
-                ui->FormAchievementsLineEditTitleCategoryChangeCategory->setEnabled(false);
-                delete ui->FormAchievementsScrollAreaCategories->layout();
-                delete ui->FormAchievementsScrollAreaCheckCategories->layout();
-                ShowCategories();
-                ui->FormAchievementsLineEditNameAchievements->setText("");
-                ui->FormAchievementsRadioButtonAll->setChecked(true);
-                ui->FormAchievementsCheckBoxFavorites->setChecked(false);
-                QMessageBox::information(this,SLLanguage[30],SLLanguage[34]);
-                on_FormAchievementsButtonCancelChangeCategory_clicked();
+                Category.open(QIODevice::WriteOnly);
+                for (int i=7;i<ui->FormAchievementsTableWidgetAchievements->columnCount();i++){
+                    values.append(ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text());
+                    QJsonArray valn;
+                    for (int j=0;j<ui->FormAchievementsTableWidgetAchievements->rowCount();j++) {
+                        if(ui->FormAchievementsTableWidgetAchievements->item(j,i)->checkState()){
+                            valn.append(ui->FormAchievementsTableWidgetAchievements->item(j,6)->text());
+                            }
+                        group[ui->FormAchievementsTableWidgetAchievements->horizontalHeaderItem(i)->text()]=valn;
+                        }
+                    }
                 }
+            group["values"]=values;
+            category.setObject(group);
+            Category.write(category.toJson());
+            Category.close();
+            ui->FormAchievementsLineEditTitleCategoryChangeCategory->setText("");
+            ui->FormAchievementsLineEditTitleCategoryChangeCategory->setEnabled(false);
+            delete ui->FormAchievementsScrollAreaCategories->layout();
+            delete ui->FormAchievementsScrollAreaCheckCategories->layout();
+            ShowCategories();
+            ui->FormAchievementsLineEditNameAchievements->setText("");
+            ui->FormAchievementsRadioButtonAll->setChecked(true);
+            ui->FormAchievementsCheckBoxFavorites->setChecked(false);
+            QMessageBox::information(this,SLLanguage[30],SLLanguage[34]);
+            on_FormAchievementsButtonCancelChangeCategory_clicked();
             } else
                 QMessageBox::warning(this,SLLanguage[28],SLLanguage[32]);
         } else
