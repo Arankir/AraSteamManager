@@ -161,10 +161,9 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
                 ui->FormCompareTableWidget->setItem(row,4,item5);
                 QTableWidgetItem *item6 = new QTableWidgetItem(JAPA[j].toObject().value("apiname").toString());
                 ui->FormCompareTableWidget->setItem(row,5,item6);
-                ui->FormCompareTableWidget->setColumnHidden(5,true);
                 JAPA.removeAt(j);
                 JASFG.removeAt(j);
-                ui->FormCompareTableWidget->setVerticalHeaderItem(row,new QTableWidgetItem(QString::number(row-dectotal-1)));
+                ui->FormCompareTableWidget->setVerticalHeaderItem(row,new QTableWidgetItem(QString::number(row-1)));
             } else dectotal+=1;
         }
     double percent= 1.0*total/(JsonArrayPlayerAchievements.size()-dectotal)*100;
@@ -174,6 +173,7 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     ui->FormCompareTableWidget->setColumnWidth(2,315);
     ui->FormCompareTableWidget->resizeColumnToContents(3);
     ui->FormCompareTableWidget->setColumnWidth(4,80);
+    ui->FormCompareTableWidget->setColumnHidden(5,true);
     ui->FormCompareTableWidget->resizeRowsToContents();
 
     QDir categories("Files/Categories/"+appid);
