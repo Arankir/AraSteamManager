@@ -1,9 +1,11 @@
+release/formcompare.o
 release/imagerequest.o
 release/main.o
 release/mainwindow.o
 release/formgames.o
 release/formachievements.o
 release/formfriends.o
+release/moc_formcompare.o
 release/moc_imagerequest.o
 release/moc_mainwindow.o
 release/moc_formgames.o

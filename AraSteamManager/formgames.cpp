@@ -163,7 +163,7 @@ void FormGames::AchievementsClicked(){
     QJsonDocument JsonDocGlobalAchievements = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
     if(JsonDocGlobalAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
         QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
-    } else{
+    } else {
         achievementsform = new FormAchievements(key,language,Theme,id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()),JsonDocGlobalAchievements,SaveImages);
         connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(on_return()));
         achievementsform->show();

@@ -21,6 +21,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
@@ -31,12 +32,6 @@ class Ui_FormAchievements
 public:
     QGridLayout *gridLayout_4;
     QLabel *FormAchievementsLabelGameOnline;
-    QTableWidget *FormAchievementsTableWidgetAchievements;
-    QPushButton *FormAchievementsButtonCompare;
-    QPushButton *FormAchievementsButtonReturn;
-    QGroupBox *groupBox;
-    QGridLayout *gridLayout_5;
-    QLabel *FormAchievementsLabelGameLogo;
     QGroupBox *FormAchievementsGroupBoxFilter;
     QGridLayout *gridLayout;
     QRadioButton *FormAchievementsRadioButtonAll;
@@ -73,6 +68,13 @@ public:
     QRadioButton *FormAchievementsRadioButtonNotReached;
     QPushButton *FormAchievementsButtonUpdate;
     QCheckBox *FormAchievementsCheckBoxFavorites;
+    QPushButton *FormAchievementsButtonReturn;
+    QTableWidget *FormAchievementsTableWidgetAchievements;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_5;
+    QLabel *FormAchievementsLabelGameLogo;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *FormAchievementsButtonCompare;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -88,36 +90,6 @@ public:
         FormAchievementsLabelGameOnline->setFont(font);
 
         gridLayout_4->addWidget(FormAchievementsLabelGameOnline, 2, 1, 1, 1);
-
-        FormAchievementsTableWidgetAchievements = new QTableWidget(FormAchievements);
-        FormAchievementsTableWidgetAchievements->setObjectName(QString::fromUtf8("FormAchievementsTableWidgetAchievements"));
-
-        gridLayout_4->addWidget(FormAchievementsTableWidgetAchievements, 6, 0, 1, 6);
-
-        FormAchievementsButtonCompare = new QPushButton(FormAchievements);
-        FormAchievementsButtonCompare->setObjectName(QString::fromUtf8("FormAchievementsButtonCompare"));
-
-        gridLayout_4->addWidget(FormAchievementsButtonCompare, 1, 5, 1, 1);
-
-        FormAchievementsButtonReturn = new QPushButton(FormAchievements);
-        FormAchievementsButtonReturn->setObjectName(QString::fromUtf8("FormAchievementsButtonReturn"));
-
-        gridLayout_4->addWidget(FormAchievementsButtonReturn, 0, 5, 1, 1);
-
-        groupBox = new QGroupBox(FormAchievements);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        gridLayout_5 = new QGridLayout(groupBox);
-        gridLayout_5->setSpacing(1);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        gridLayout_5->setSizeConstraint(QLayout::SetMinimumSize);
-        gridLayout_5->setContentsMargins(1, 1, 1, 1);
-        FormAchievementsLabelGameLogo = new QLabel(groupBox);
-        FormAchievementsLabelGameLogo->setObjectName(QString::fromUtf8("FormAchievementsLabelGameLogo"));
-
-        gridLayout_5->addWidget(FormAchievementsLabelGameLogo, 0, 0, 1, 1);
-
-
-        gridLayout_4->addWidget(groupBox, 0, 0, 3, 1);
 
         FormAchievementsGroupBoxFilter = new QGroupBox(FormAchievements);
         FormAchievementsGroupBoxFilter->setObjectName(QString::fromUtf8("FormAchievementsGroupBoxFilter"));
@@ -291,7 +263,41 @@ public:
         gridLayout->addWidget(FormAchievementsCheckBoxFavorites, 3, 3, 1, 1);
 
 
-        gridLayout_4->addWidget(FormAchievementsGroupBoxFilter, 3, 0, 1, 6);
+        gridLayout_4->addWidget(FormAchievementsGroupBoxFilter, 3, 0, 1, 3);
+
+        FormAchievementsButtonReturn = new QPushButton(FormAchievements);
+        FormAchievementsButtonReturn->setObjectName(QString::fromUtf8("FormAchievementsButtonReturn"));
+
+        gridLayout_4->addWidget(FormAchievementsButtonReturn, 0, 2, 1, 1);
+
+        FormAchievementsTableWidgetAchievements = new QTableWidget(FormAchievements);
+        FormAchievementsTableWidgetAchievements->setObjectName(QString::fromUtf8("FormAchievementsTableWidgetAchievements"));
+
+        gridLayout_4->addWidget(FormAchievementsTableWidgetAchievements, 6, 0, 1, 3);
+
+        groupBox = new QGroupBox(FormAchievements);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        gridLayout_5 = new QGridLayout(groupBox);
+        gridLayout_5->setSpacing(1);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setSizeConstraint(QLayout::SetMinimumSize);
+        gridLayout_5->setContentsMargins(1, 1, 1, 1);
+        FormAchievementsLabelGameLogo = new QLabel(groupBox);
+        FormAchievementsLabelGameLogo->setObjectName(QString::fromUtf8("FormAchievementsLabelGameLogo"));
+
+        gridLayout_5->addWidget(FormAchievementsLabelGameLogo, 0, 0, 1, 1);
+
+
+        gridLayout_4->addWidget(groupBox, 0, 0, 3, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_4->addItem(horizontalSpacer_2, 1, 1, 1, 1);
+
+        FormAchievementsButtonCompare = new QPushButton(FormAchievements);
+        FormAchievementsButtonCompare->setObjectName(QString::fromUtf8("FormAchievementsButtonCompare"));
+
+        gridLayout_4->addWidget(FormAchievementsButtonCompare, 1, 2, 1, 1);
 
 
         retranslateUi(FormAchievements);
@@ -303,10 +309,6 @@ public:
     {
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
         FormAchievementsLabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
-        FormAchievementsButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
-        FormAchievementsButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
-        groupBox->setTitle(QString());
-        FormAchievementsLabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         FormAchievementsGroupBoxFilter->setAccessibleName(QApplication::translate("FormAchievements", "Filter", nullptr));
 #endif // QT_NO_ACCESSIBILITY
@@ -332,6 +334,10 @@ public:
         FormAchievementsRadioButtonNotReached->setText(QApplication::translate("FormAchievements", "Not reached", nullptr));
         FormAchievementsButtonUpdate->setText(QApplication::translate("FormAchievements", "Update", nullptr));
         FormAchievementsCheckBoxFavorites->setText(QApplication::translate("FormAchievements", "Only favorites", nullptr));
+        FormAchievementsButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
+        groupBox->setTitle(QString());
+        FormAchievementsLabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
+        FormAchievementsButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
     } // retranslateUi
 
 };

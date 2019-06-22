@@ -12,11 +12,10 @@
 #include <QStandardItemModel>
 #include <QDir>
 #include <QComboBox>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
 #include <QMessageBox>
 #include <QFormLayout>
 #include <imagerequest.h>
+#include <formcompare.h>
 
 namespace Ui {
 class FormAchievements;
@@ -29,6 +28,7 @@ class FormAchievements : public QWidget
 public:
     explicit FormAchievements(QString keys, int languages, int Theme, QString ids, QString appids, QString GameName, QJsonDocument JsonDocGlobalAchievement,int SaveImages, QWidget *parent = nullptr);
     ~FormAchievements();
+    FormCompare *compareform;
 
 signals:
     void return_to_games();
@@ -90,6 +90,8 @@ private slots:
 
     void ShowCategories();
 
+    void on_FormAchievementsButtonCompare_clicked();
+
 private:
     Ui::FormAchievements *ui;
     QString key;
@@ -107,7 +109,6 @@ private:
     QFormLayout *changecategoryvalueslayout;
     QStringList SLLanguage;
     int SaveImages;
-
 };
 
 #endif // FORMACHIEVEMENTS_H
