@@ -272,6 +272,7 @@ public:
 
         FormAchievementsTableWidgetAchievements = new QTableWidget(FormAchievements);
         FormAchievementsTableWidgetAchievements->setObjectName(QString::fromUtf8("FormAchievementsTableWidgetAchievements"));
+        FormAchievementsTableWidgetAchievements->setSortingEnabled(true);
 
         gridLayout_4->addWidget(FormAchievementsTableWidgetAchievements, 6, 0, 1, 3);
 

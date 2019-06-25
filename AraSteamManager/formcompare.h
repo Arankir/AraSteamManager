@@ -53,7 +53,7 @@ private slots:
 
     void on_FormCompareCheckBoxSCTotalPercent_stateChanged(int arg1);
 
-    void on_CheckBoxFriend_Click(QTableWidgetItem* item);
+    void on_CheckBoxFriend_Click(int,int);
 
     void on_FormCompareButtonReturn_clicked();
 

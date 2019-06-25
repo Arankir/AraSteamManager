@@ -101,6 +101,7 @@ public:
         FormCompareTableWidgetFriends->setObjectName(QString::fromUtf8("FormCompareTableWidgetFriends"));
         FormCompareTableWidgetFriends->setMaximumSize(QSize(16777215, 100));
         FormCompareTableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        FormCompareTableWidgetFriends->setShowGrid(false);
 
         gridLayout_3->addWidget(FormCompareTableWidgetFriends, 2, 0, 1, 3);
 

@@ -92,9 +92,18 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     ui->FormCompareTableWidget->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[12]));
     ui->FormCompareTableWidget->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[13]));
     ui->FormCompareTableWidget->setHorizontalHeaderItem(3,new QTableWidgetItem(SLLanguage[14]));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(4,new QTableWidgetItem(SLLanguage[15]));
+    QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+ids));
+    loop.exec();
+    QJsonDocument DocPlayerSummaries = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll());
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(4,new QTableWidgetItem(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString()/*SLLanguage[15]*/));
     ui->FormCompareTableWidget->setHorizontalHeaderItem(5,new QTableWidgetItem(/**/));
-
+    QNetworkReply &imagereply = *manager.get(QNetworkRequest(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString()));
+    loop.exec();
+    QPixmap pix;
+    pix.loadFromData(imagereply.readAll());
+    QLabel* myava = new QLabel;
+    myava->setPixmap(pix);
+    ui->FormCompareTableWidget->setCellWidget(0,4,myava);
     QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=russian"+SLLanguage[17])));
     loop.exec();
     JsonArraySchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll()).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray();
@@ -244,9 +253,9 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
         Querry+=","+DocFriendList.object().value("friendslist").toObject().value("friends").toArray().at(i).toObject().value("steamid").toString();
     }
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest(Querry));
+    QNetworkReply &ReplyPlayersSummaries = *manager.get(QNetworkRequest(Querry));
     loop.exec();
-    QJsonArray Accounts = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll()).object().value("response").toObject().value("players").toArray();
+    QJsonArray Accounts = QJsonDocument::fromJson(ReplyPlayersSummaries.readAll()).object().value("response").toObject().value("players").toArray();
     QVector<QJsonObject> abc;
     for (int i=0;i<Accounts.size();i++) {
         abc.append(Accounts[i].toObject());
@@ -288,11 +297,11 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
         QTableWidgetItem* pItem(new QTableWidgetItem(tr("")));
         pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
         pItem->setCheckState(Qt::Unchecked);
-        connect(ui->FormCompareTableWidgetFriends,SIGNAL(itemChanged(QTableWidgetItem * item)),this,SLOT(on_CheckBoxFriend_Click(QTableWidgetItem * item)));
         ui->FormCompareTableWidgetFriends->setItem(1,i,pItem);
         QTableWidgetItem *item2 = new QTableWidgetItem(Friends.first[i].GetSteamid());
         ui->FormCompareTableWidgetFriends->setItem(2,i,item2);
     }
+    connect(ui->FormCompareTableWidgetFriends,SIGNAL(cellChanged(int,int)),this,SLOT(on_CheckBoxFriend_Click(int,int)));
     ui->FormCompareTableWidgetFriends->setRowHidden(2,true);
     ui->FormCompareTableWidgetFriends->resizeColumnsToContents();
 
@@ -464,8 +473,88 @@ void FormCompare::on_FormCompareCheckBoxSCTotalPercent_stateChanged(int arg1){
     }
 }
 
-void FormCompare::on_CheckBoxFriend_Click(QTableWidgetItem * item){
-    qDebug()<<item->row();
+void FormCompare::on_CheckBoxFriend_Click(int row, int column){
+    qDebug()<<row<<column;
+    if(row==1){
+        Profile sProfile;
+        if(ui->FormCompareCheckBoxAllFriends->isChecked()){
+            bool accept=true;
+            for (int i=0;i<Friends.first.size();i++) {
+                if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(2,column)->text()){
+                    accept=false;
+                    sProfile=Friends.first[i];
+                    break;
+                }
+            }
+            if(accept){
+                for (int i=0;i<Friends.second.size();i++) {
+                    if(Friends.second[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(2,column)->text()){
+                        sProfile=Friends.second[i];
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (int i=0;i<Friends.first.size();i++) {
+                if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(2,column)->text()){
+                    sProfile=Friends.first[i];
+                    break;
+                }
+            }
+        }
+        if(ui->FormCompareTableWidgetFriends->item(row,column)->checkState()==Qt::Checked){
+            ui->FormCompareTableWidget->insertColumn(ui->FormCompareTableWidget->columnCount());
+            ui->FormCompareTableWidget->setHorizontalHeaderItem(ui->FormCompareTableWidget->columnCount()-1,new QTableWidgetItem(sProfile.GetName()));
+            QLabel* ava = new QLabel;
+            ava->setPixmap(sProfile.GetAvatar());
+            ui->FormCompareTableWidget->setCellWidget(0,ui->FormCompareTableWidget->columnCount()-1,ava);
+            QNetworkAccessManager manager;
+            QEventLoop loop;
+            QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+            QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+sProfile.GetSteamid())));
+            loop.exec();
+            QJsonArray JAPA = QJsonDocument::fromJson(replyPlayerAchievements.readAll()).object().value("playerstats").toObject().value("achievements").toArray();
+            int totalr=0;
+            int totalnr=0;
+            for(int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+                qDebug()<<i;
+                int j=0;
+                bool accept=false;
+                for(;j<JAPA.size();j++){
+                    if(JAPA[j].toObject().value("apiname").toString()==ui->FormCompareTableWidget->item(i,5)->text()){
+                        accept=true;
+                        break;
+                        }
+                }
+                if(accept){
+                    QTableWidgetItem *item5;
+                    if(JAPA[j].toObject().value("achieved").toInt()==1){
+                        QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
+                        item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                        totalr++;
+                        } else {
+                        item5 = new QTableWidgetItem(SLLanguage[16]);
+                        totalnr++;
+                        }
+                    ui->FormCompareTableWidget->setItem(i,ui->FormCompareTableWidget->columnCount()-1,item5);
+                    //JAPA.removeAt(j);
+                }
+                }
+            double percent= 100.0*totalr/(totalr+totalnr);
+            if((totalr==0)&&(totalnr==0))
+                ui->FormCompareTableWidget->setCellWidget(1,ui->FormCompareTableWidget->columnCount()-1, new QLabel(" profile is not public"));
+            else
+                ui->FormCompareTableWidget->setCellWidget(1,ui->FormCompareTableWidget->columnCount()-1, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
+            ui->FormCompareTableWidget->setColumnWidth(ui->FormCompareTableWidget->columnCount()-1,80);
+        } else {
+            for (int i=5;i<ui->FormCompareTableWidget->columnCount();i++) {
+                if(ui->FormCompareTableWidget->horizontalHeaderItem(i)->text()==sProfile.GetName()){
+                    ui->FormCompareTableWidget->removeColumn(i);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void FormCompare::on_FormCompareButtonReturn_clicked(){

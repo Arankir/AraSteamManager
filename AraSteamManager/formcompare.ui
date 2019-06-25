@@ -74,6 +74,9 @@
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
       <item row="0" column="3" colspan="2">
