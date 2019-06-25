@@ -284,7 +284,11 @@
     </widget>
    </item>
    <item row="6" column="0" colspan="3">
-    <widget class="QTableWidget" name="FormAchievementsTableWidgetAchievements"/>
+    <widget class="QTableWidget" name="FormAchievementsTableWidgetAchievements">
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item row="0" column="0" rowspan="3">
     <widget class="QGroupBox" name="groupBox">

@@ -12,9 +12,6 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QPixmap>
-
-//#include <QImage>
-
 #include <formgames.h>
 #include <formfriends.h>
 

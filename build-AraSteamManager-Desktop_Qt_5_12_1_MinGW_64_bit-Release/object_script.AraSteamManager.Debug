@@ -5,6 +5,7 @@ debug/mainwindow.o
 debug/formgames.o
 debug/formachievements.o
 debug/formfriends.o
+debug/profile.o
 debug/moc_formcompare.o
 debug/moc_imagerequest.o
 debug/moc_mainwindow.o

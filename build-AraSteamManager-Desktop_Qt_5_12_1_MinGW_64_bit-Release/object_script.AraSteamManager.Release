@@ -5,6 +5,7 @@ release/mainwindow.o
 release/formgames.o
 release/formachievements.o
 release/formfriends.o
+release/profile.o
 release/moc_formcompare.o
 release/moc_imagerequest.o
 release/moc_mainwindow.o

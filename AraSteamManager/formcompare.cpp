@@ -98,8 +98,8 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l=russian"+SLLanguage[17])));
     loop.exec();
     JsonArraySchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll()).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray();
-    int total=0;
-    int dectotal=0;
+    int totalr=0;
+    int totalnr=0;
     if(!QDir("images/achievements/"+appid).exists()){
         QDir().mkdir("images/achievements/"+appid);
     }
@@ -154,9 +154,10 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
                 if(JAPA[j].toObject().value("achieved").toInt()==1){
                     QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
                     item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
-                    total++;
+                    totalr++;
                     } else {
                     item5 = new QTableWidgetItem(SLLanguage[16]);
+                    totalnr++;
                     }
                 ui->FormCompareTableWidget->setItem(row,4,item5);
                 QTableWidgetItem *item6 = new QTableWidgetItem(JAPA[j].toObject().value("apiname").toString());
@@ -164,10 +165,10 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
                 JAPA.removeAt(j);
                 JASFG.removeAt(j);
                 ui->FormCompareTableWidget->setVerticalHeaderItem(row,new QTableWidgetItem(QString::number(row-1)));
-            } else dectotal+=1;
+            }
         }
-    double percent= 1.0*total/(JsonArrayPlayerAchievements.size()-dectotal)*100;
-    ui->FormCompareTableWidget->setCellWidget(1,4, new QLabel(QString::number(percent)+"%"));
+    double percent= 100.0*totalr/(totalr+totalnr);
+    ui->FormCompareTableWidget->setCellWidget(1,4, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
     ui->FormCompareTableWidget->setColumnWidth(0,65);
     ui->FormCompareTableWidget->setColumnWidth(1,100);
     ui->FormCompareTableWidget->setColumnWidth(2,315);
@@ -223,16 +224,78 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
             ui->FormCompareScrollAreaCategoriesCheckBox->show();
         }
     }
-        bool **New = new bool*[ui->FormCompareTableWidget->rowCount()];
-        for (int i=0;i<ui->FormCompareTableWidget->rowCount();i++) {
-            New[i]=new bool[list.size()+3];
-            for (int j=0;j<list.size()+3;j++) {
-                New[i][j]=true;
-                }
+    bool **New = new bool*[ui->FormCompareTableWidget->rowCount()];
+    for (int i=0;i<ui->FormCompareTableWidget->rowCount();i++) {
+        New[i]=new bool[list.size()+3];
+        for (int j=0;j<list.size()+3;j++) {
+            New[i][j]=true;
             }
-        colfilter=list.size()+3;
-        filter = new bool*[ui->FormCompareTableWidget->rowCount()];
-        filter = New;
+        }
+    colfilter=list.size()+3;
+    filter = new bool*[ui->FormCompareTableWidget->rowCount()];
+    filter = New;
+
+    //вывод друзей
+    QNetworkReply &ReplyFriendList = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
+    loop.exec();
+    QJsonDocument DocFriendList = QJsonDocument::fromJson(ReplyFriendList.readAll());
+    QString Querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+DocFriendList.object().value("friendslist").toObject().value("friends").toArray().at(0).toObject().value("steamid").toString();
+    for (int i=1;i<DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size();i++) {
+        Querry+=","+DocFriendList.object().value("friendslist").toObject().value("friends").toArray().at(i).toObject().value("steamid").toString();
+    }
+    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest(Querry));
+    loop.exec();
+    QJsonArray Accounts = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll()).object().value("response").toObject().value("players").toArray();
+    QVector<QJsonObject> abc;
+    for (int i=0;i<Accounts.size();i++) {
+        abc.append(Accounts[i].toObject());
+    }
+    for (int i=0; i < abc.size()-1; i++) {
+        for (int j=0; j < abc.size()-i-1; j++) {
+            if (abc[j].value("personaname").toString() > abc[j+1].value("personaname").toString()) {
+                QJsonObject temp = abc[j];
+                abc[j] = abc[j+1];
+                abc[j+1] = temp;
+            }
+        }
+    }
+    for (int i=0;i<abc.size();i++) {
+        Profile a(abc[i]);
+        QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+a.GetSteamid()));
+        loop.exec();
+        QJsonDocument DocOwnedGames = QJsonDocument::fromJson(ReplyOwnedGames.readAll());
+        QJsonArray Games = DocOwnedGames.object().value("response").toObject().value("games").toArray();
+        bool apply=false;
+        for (int i=0;i<Games.size();i++) {
+            if(Games[i].toObject().value("appid").toInt()==appid.toInt()){
+                apply=true;
+                break;
+            }
+        }
+        if(apply)
+            Friends.first.push_back(a);
+        else
+            Friends.second.push_back(a);
+    }
+
+    ui->FormCompareTableWidgetFriends->setRowCount(3);
+    ui->FormCompareTableWidgetFriends->setColumnCount(Friends.first.size());
+    for (int i=0;i<Friends.first.size();i++) {
+        QLabel *ava = new QLabel;
+        ava->setPixmap(Friends.first[i].GetAvatar());
+        ui->FormCompareTableWidgetFriends->setCellWidget(0,i,ava);
+        QTableWidgetItem* pItem(new QTableWidgetItem(tr("")));
+        pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
+        pItem->setCheckState(Qt::Unchecked);
+        connect(ui->FormCompareTableWidgetFriends,SIGNAL(itemChanged(QTableWidgetItem * item)),this,SLOT(on_CheckBoxFriend_Click(QTableWidgetItem * item)));
+        ui->FormCompareTableWidgetFriends->setItem(1,i,pItem);
+        QTableWidgetItem *item2 = new QTableWidgetItem(Friends.first[i].GetSteamid());
+        ui->FormCompareTableWidgetFriends->setItem(2,i,item2);
+    }
+    ui->FormCompareTableWidgetFriends->setRowHidden(2,true);
+    ui->FormCompareTableWidgetFriends->resizeColumnsToContents();
+
     ui->FormCompareLineEditFind->setFocus();
 }
 
@@ -399,6 +462,10 @@ void FormCompare::on_FormCompareCheckBoxSCTotalPercent_stateChanged(int arg1){
         break;
     }
     }
+}
+
+void FormCompare::on_CheckBoxFriend_Click(QTableWidgetItem * item){
+    qDebug()<<item->row();
 }
 
 void FormCompare::on_FormCompareButtonReturn_clicked(){

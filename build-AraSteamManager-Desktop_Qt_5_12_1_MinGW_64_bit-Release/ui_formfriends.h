@@ -114,6 +114,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         FormFriendsTWFriends->setHorizontalHeaderItem(7, __qtablewidgetitem7);
         FormFriendsTWFriends->setObjectName(QString::fromUtf8("FormFriendsTWFriends"));
+        FormFriendsTWFriends->setSortingEnabled(true);
         FormFriendsTWFriends->setColumnCount(8);
 
         gridLayout_3->addWidget(FormFriendsTWFriends, 6, 0, 1, 3);

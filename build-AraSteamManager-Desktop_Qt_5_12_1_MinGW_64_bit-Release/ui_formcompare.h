@@ -36,7 +36,7 @@ public:
     QGroupBox *FormCompareGroupBoxFilter;
     QGridLayout *gridLayout_3;
     QPushButton *FormCompareButtonFind;
-    QTableWidget *tableWidget;
+    QTableWidget *FormCompareTableWidgetFriends;
     QGroupBox *FormCompareGroupBoxFriendsA;
     QGridLayout *gridLayout_2;
     QRadioButton *FormCompareRadioButtonFriendsAll;
@@ -97,11 +97,12 @@ public:
 
         gridLayout_3->addWidget(FormCompareButtonFind, 3, 4, 1, 1);
 
-        tableWidget = new QTableWidget(FormCompareGroupBoxFilter);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setMaximumSize(QSize(16777215, 100));
+        FormCompareTableWidgetFriends = new QTableWidget(FormCompareGroupBoxFilter);
+        FormCompareTableWidgetFriends->setObjectName(QString::fromUtf8("FormCompareTableWidgetFriends"));
+        FormCompareTableWidgetFriends->setMaximumSize(QSize(16777215, 100));
+        FormCompareTableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-        gridLayout_3->addWidget(tableWidget, 2, 0, 1, 3);
+        gridLayout_3->addWidget(FormCompareTableWidgetFriends, 2, 0, 1, 3);
 
         FormCompareGroupBoxFriendsA = new QGroupBox(FormCompareGroupBoxFilter);
         FormCompareGroupBoxFriendsA->setObjectName(QString::fromUtf8("FormCompareGroupBoxFriendsA"));

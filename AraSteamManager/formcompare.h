@@ -15,6 +15,8 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <imagerequest.h>
+#include <profile.h>
+#include <QTableWidgetItem>
 
 namespace Ui {
 class FormCompare;
@@ -51,6 +53,8 @@ private slots:
 
     void on_FormCompareCheckBoxSCTotalPercent_stateChanged(int arg1);
 
+    void on_CheckBoxFriend_Click(QTableWidgetItem* item);
+
     void on_FormCompareButtonReturn_clicked();
 
 private:
@@ -70,6 +74,7 @@ private:
     QFormLayout *changecategoryvalueslayout;
     QStringList SLLanguage;
     int SaveImages;
+    QPair <QVector<Profile>,QVector<Profile>> Friends;
 };
 
 #endif // FORMCOMPARE_H

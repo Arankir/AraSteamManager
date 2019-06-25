@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCompare_t {
-    QByteArrayData data[24];
-    char stringdata0[534];
+    QByteArrayData data[27];
+    char stringdata0[581];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -54,7 +54,10 @@ QT_MOC_LITERAL(19, 352, 4), // "arg1"
 QT_MOC_LITERAL(20, 357, 42), // "on_FormCompareCheckBoxSCTitle..."
 QT_MOC_LITERAL(21, 400, 48), // "on_FormCompareCheckBoxSCDescr..."
 QT_MOC_LITERAL(22, 449, 49), // "on_FormCompareCheckBoxSCTotal..."
-QT_MOC_LITERAL(23, 499, 34) // "on_FormCompareButtonReturn_cl..."
+QT_MOC_LITERAL(23, 499, 23), // "on_CheckBoxFriend_Click"
+QT_MOC_LITERAL(24, 523, 17), // "QTableWidgetItem*"
+QT_MOC_LITERAL(25, 541, 4), // "item"
+QT_MOC_LITERAL(26, 546, 34) // "on_FormCompareButtonReturn_cl..."
 
     },
     "FormCompare\0return_to_achievements\0\0"
@@ -69,7 +72,8 @@ QT_MOC_LITERAL(23, 499, 34) // "on_FormCompareButtonReturn_cl..."
     "arg1\0on_FormCompareCheckBoxSCTitle_stateChanged\0"
     "on_FormCompareCheckBoxSCDescription_stateChanged\0"
     "on_FormCompareCheckBoxSCTotalPercent_stateChanged\0"
-    "on_FormCompareButtonReturn_clicked"
+    "on_CheckBoxFriend_Click\0QTableWidgetItem*\0"
+    "item\0on_FormCompareButtonReturn_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -79,7 +83,7 @@ static const uint qt_meta_data_FormCompare[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -87,22 +91,23 @@ static const uint qt_meta_data_FormCompare[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   84,    2, 0x06 /* Public */,
+       1,    0,   89,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   85,    2, 0x08 /* Private */,
-       5,    3,   88,    2, 0x08 /* Private */,
-      10,    0,   95,    2, 0x08 /* Private */,
-      11,    0,   96,    2, 0x08 /* Private */,
-      12,    0,   97,    2, 0x08 /* Private */,
-      13,    0,   98,    2, 0x08 /* Private */,
-      14,    1,   99,    2, 0x08 /* Private */,
-      16,    1,  102,    2, 0x08 /* Private */,
-      18,    1,  105,    2, 0x08 /* Private */,
-      20,    1,  108,    2, 0x08 /* Private */,
-      21,    1,  111,    2, 0x08 /* Private */,
-      22,    1,  114,    2, 0x08 /* Private */,
-      23,    0,  117,    2, 0x08 /* Private */,
+       3,    1,   90,    2, 0x08 /* Private */,
+       5,    3,   93,    2, 0x08 /* Private */,
+      10,    0,  100,    2, 0x08 /* Private */,
+      11,    0,  101,    2, 0x08 /* Private */,
+      12,    0,  102,    2, 0x08 /* Private */,
+      13,    0,  103,    2, 0x08 /* Private */,
+      14,    1,  104,    2, 0x08 /* Private */,
+      16,    1,  107,    2, 0x08 /* Private */,
+      18,    1,  110,    2, 0x08 /* Private */,
+      20,    1,  113,    2, 0x08 /* Private */,
+      21,    1,  116,    2, 0x08 /* Private */,
+      22,    1,  119,    2, 0x08 /* Private */,
+      23,    1,  122,    2, 0x08 /* Private */,
+      26,    0,  125,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -120,6 +125,7 @@ static const uint qt_meta_data_FormCompare[] = {
     QMetaType::Void, QMetaType::Int,   19,
     QMetaType::Void, QMetaType::Int,   19,
     QMetaType::Void, QMetaType::Int,   19,
+    QMetaType::Void, 0x80000000 | 24,   25,
     QMetaType::Void,
 
        0        // eod
@@ -144,7 +150,8 @@ void FormCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 10: _t->on_FormCompareCheckBoxSCTitle_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 11: _t->on_FormCompareCheckBoxSCDescription_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 12: _t->on_FormCompareCheckBoxSCTotalPercent_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->on_FormCompareButtonReturn_clicked(); break;
+        case 13: _t->on_CheckBoxFriend_Click((*reinterpret_cast< QTableWidgetItem*(*)>(_a[1]))); break;
+        case 14: _t->on_FormCompareButtonReturn_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -199,13 +206,13 @@ int FormCompare::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

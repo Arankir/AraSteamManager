@@ -127,8 +127,8 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     QPixmap pixmap;
     pixmap.loadFromData(logoreply.readAll());
     ui->FormAchievementsLabelGameLogo->setPixmap(pixmap);
-    int total=0;
-    int dectotal=0;
+    int totalr=0;
+    int totalnr=0;
     if(!QDir("images/achievements/"+appid).exists()){
         QDir().mkdir("images/achievements/"+appid);
     }
@@ -196,9 +196,10 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
                 if(JAPA[j].toObject().value("achieved").toInt()==1){
                     QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
                     item5 = new QTableWidgetItem(SLLanguage[23]+" "+date.toString("yyyy.MM.dd hh:mm"));
-                    total++;
+                    totalr++;
                     } else {
                     item5 = new QTableWidgetItem(SLLanguage[24]);
+                    totalnr++;
                     }
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,4,item5);
                 QPushButton *button1 = new QPushButton;
@@ -211,10 +212,10 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
                 ui->FormAchievementsTableWidgetAchievements->setColumnHidden(6,true);
                 JAPA.removeAt(j);
                 JASFG.removeAt(j);
-            } else dectotal+=1;
+            }
         }
-    double percent= 1.0*total/(JsonArrayPlayerAchievements.size()-dectotal)*100;
-    ui->FormAchievementsLabelTotalPersent->setText(SLLanguage[25]+" = "+QString::number(percent)+"%");
+    double percent= 100.0*totalr/(totalr+totalnr);
+    ui->FormAchievementsLabelTotalPersent->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+" = "+QString::number(percent)+"%");
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(0,65);
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(1,100);
     ui->FormAchievementsTableWidgetAchievements->setColumnWidth(2,315);
@@ -462,7 +463,6 @@ void FormAchievements::on_FormAchievementsButtonUpdate_clicked(){
     ui->FormAchievementsLabelGameOnline->setText(SLLanguage[27]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
     int totalr=0;
     int totalnr=0;
-    int dectotal=0;
     if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("success").toBool()==false){
         ui->FormAchievementsTableWidgetAchievements->insertRow(0);
         QTableWidgetItem *item1 = new QTableWidgetItem("Error");
@@ -486,7 +486,7 @@ void FormAchievements::on_FormAchievementsButtonUpdate_clicked(){
                     }
             }
             if(accept){
-                QModelIndex api = ui->FormAchievementsTableWidgetAchievements->model()->index(i-dectotal,6);
+                QModelIndex api = ui->FormAchievementsTableWidgetAchievements->model()->index(i,6);
                 QTableWidgetItem *itemd;
                 if(JsonArrayPlayerAchievements[j].toObject().value("achieved").toInt()==1){
                     QDateTime date=QDateTime::fromSecsSinceEpoch(JsonArrayPlayerAchievements[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
@@ -496,15 +496,18 @@ void FormAchievements::on_FormAchievementsButtonUpdate_clicked(){
                     totalnr++;
                     itemd = new QTableWidgetItem(SLLanguage[24]);
                     }
-                if((JsonArrayPlayerAchievements[j].toObject().value("apiname").toString()!=api.data())||(itemd->text()!=ui->FormAchievementsTableWidgetAchievements->item(i-dectotal,4)->text())){
-                    delete ui->FormAchievementsTableWidgetAchievements->item(i-dectotal,4);
-                    ui->FormAchievementsTableWidgetAchievements->setItem(i-dectotal,4,itemd);
+                if((JsonArrayPlayerAchievements[j].toObject().value("apiname").toString()!=api.data())||(itemd->text()!=ui->FormAchievementsTableWidgetAchievements->item(i,4)->text())){
+                    delete ui->FormAchievementsTableWidgetAchievements->item(i,4);
+                    ui->FormAchievementsTableWidgetAchievements->setItem(i,4,itemd);
                     }
-            } else dectotal++;
+            } else {
+                JsonArrayGlobalAchievements.removeAt(i);
+                i--;
+            }
         }
         }
-    double percent= 1.0*totalr/(totalr+totalnr)*100;
-    ui->FormAchievementsLabelTotalPersent->setText(SLLanguage[25]+" = "+QString::number(percent)+"%");
+    double percent= 100.0*totalr/(totalr+totalnr);
+    ui->FormAchievementsLabelTotalPersent->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+" = "+QString::number(percent)+"%");
     if (ui->FormAchievementsRadioButtonReached->isChecked()){
         on_FormAchievementsRadioButtonReached_clicked();
     } else

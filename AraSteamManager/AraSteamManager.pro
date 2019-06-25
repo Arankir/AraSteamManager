@@ -31,7 +31,8 @@ SOURCES += \
         mainwindow.cpp \
     formgames.cpp \
     formachievements.cpp \
-    formfriends.cpp
+    formfriends.cpp \
+    profile.cpp
 
 HEADERS += \
     formcompare.h \
@@ -39,7 +40,8 @@ HEADERS += \
         mainwindow.h \
     formgames.h \
     formachievements.h \
-    formfriends.h
+    formfriends.h \
+    profile.h
 
 FORMS += \
     formcompare.ui \
