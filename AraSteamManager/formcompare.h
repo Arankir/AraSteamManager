@@ -15,8 +15,9 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <imagerequest.h>
-#include <profile.h>
+#include <profile2.h>
 #include <QTableWidgetItem>
+#include <QRadioButton>
 
 namespace Ui {
 class FormCompare;
@@ -56,6 +57,13 @@ private slots:
     void on_CheckBoxFriend_Click(int,int);
 
     void on_FormCompareButtonReturn_clicked();
+
+    void on_FormComparCheckBoxShowFilter_stateChanged(int arg1);
+
+    void on_RadioButtonFriendAll_Click();
+    void on_RadioButtonFriendReached_Click();
+    void on_RadioButtonFriendNotReached_Click();
+
 
 private:
     Ui::FormCompare *ui;

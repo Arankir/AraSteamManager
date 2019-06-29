@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1031</width>
-    <height>733</height>
+    <height>818</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,32 +21,46 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="4">
-    <widget class="QPushButton" name="FormCompareButtonReturn">
-     <property name="text">
-      <string>Return</string>
+   <item row="0" column="0" rowspan="3" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
      </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMinimumSize</enum>
+      </property>
+      <property name="leftMargin">
+       <number>1</number>
+      </property>
+      <property name="topMargin">
+       <number>1</number>
+      </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
+      <property name="bottomMargin">
+       <number>1</number>
+      </property>
+      <property name="spacing">
+       <number>1</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="FormCompareLabelLogo">
+        <property name="text">
+         <string>Logo</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
-   </item>
-   <item row="0" column="2">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item row="3" column="0" colspan="5">
     <widget class="QGroupBox" name="FormCompareGroupBoxFilter">
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>270</height>
+       <height>380</height>
       </size>
      </property>
      <property name="accessibleName">
@@ -56,90 +70,31 @@
       <string>Filter</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="3" column="4">
+      <item row="4" column="5">
        <widget class="QPushButton" name="FormCompareButtonFind">
         <property name="text">
          <string>Find</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0" colspan="3">
-       <widget class="QTableWidget" name="FormCompareTableWidgetFriends">
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
-        </property>
-        <property name="showGrid">
-         <bool>false</bool>
+      <item row="0" column="5">
+       <widget class="QCheckBox" name="FormCompareCheckBoxFavorites">
+        <property name="text">
+         <string>Favorites</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="3" colspan="2">
-       <widget class="QGroupBox" name="FormCompareGroupBoxFriendsA">
-        <property name="title">
-         <string>Friends Achievements</string>
+      <item row="4" column="0" colspan="5">
+       <widget class="QLineEdit" name="FormCompareLineEditFind"/>
+      </item>
+      <item row="1" column="5">
+       <widget class="QCheckBox" name="FormCompareCheckBoxAllFriends">
+        <property name="text">
+         <string>All friends</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <property name="topMargin">
-          <number>1</number>
-         </property>
-         <property name="bottomMargin">
-          <number>1</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QRadioButton" name="FormCompareRadioButtonFriendsAll">
-           <property name="text">
-            <string>All</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QRadioButton" name="FormCompareRadioButtonFriendsReached">
-           <property name="text">
-            <string>Reached</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QRadioButton" name="FormCompareRadioButtonFriendsNotReached">
-           <property name="text">
-            <string>Not reached</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="FormCompareCheckBoxAllFriends">
-           <property name="text">
-            <string>All friends</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QScrollArea" name="FormCompareScrollAreaCategoriesComboBox">
-        <property name="widgetResizable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents_2">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>360</width>
-           <height>96</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item row="2" column="3" colspan="2">
+      <item row="0" column="2" rowspan="3" colspan="3">
        <widget class="QGroupBox" name="FormCompareGroupBoxShowedColumns">
         <property name="title">
          <string>Showed columns</string>
@@ -194,7 +149,7 @@
         </layout>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="0" column="1" rowspan="3">
        <widget class="QScrollArea" name="FormCompareScrollAreaCategoriesCheckBox">
         <property name="widgetResizable">
          <bool>true</bool>
@@ -204,98 +159,61 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>360</width>
-           <height>96</height>
+           <width>387</width>
+           <height>117</height>
           </rect>
          </property>
         </widget>
        </widget>
       </item>
-      <item row="3" column="0" colspan="4">
-       <widget class="QLineEdit" name="FormCompareLineEditFind"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QGroupBox" name="FormCompareGroupBoxMyA">
-        <property name="title">
-         <string>My Achievements</string>
+      <item row="0" column="0" rowspan="3">
+       <widget class="QScrollArea" name="FormCompareScrollAreaCategoriesComboBox">
+        <property name="widgetResizable">
+         <bool>true</bool>
         </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <property name="topMargin">
-          <number>1</number>
+        <widget class="QWidget" name="scrollAreaWidgetContents_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>387</width>
+           <height>117</height>
+          </rect>
          </property>
-         <property name="bottomMargin">
-          <number>1</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QRadioButton" name="FormCompareRadioButtonMyAll">
-           <property name="text">
-            <string>All</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QRadioButton" name="FormCompareRadioButtonMyReached">
-           <property name="text">
-            <string>Reached</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QRadioButton" name="FormCompareRadioButtonMyNotReached">
-           <property name="text">
-            <string>Not reached</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QCheckBox" name="FormCompareCheckBoxFavorites">
-           <property name="text">
-            <string>Favorites</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="6">
+       <widget class="QTableWidget" name="FormCompareTableWidgetFriends">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="4" column="0" colspan="5">
-    <widget class="QTableWidget" name="FormCompareTableWidget"/>
-   </item>
-   <item row="0" column="0" rowspan="3" colspan="2">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string/>
+   <item row="0" column="2">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMinimumSize</enum>
-      </property>
-      <property name="leftMargin">
-       <number>1</number>
-      </property>
-      <property name="topMargin">
-       <number>1</number>
-      </property>
-      <property name="rightMargin">
-       <number>1</number>
-      </property>
-      <property name="bottomMargin">
-       <number>1</number>
-      </property>
-      <property name="spacing">
-       <number>1</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="FormCompareLabelLogo">
-        <property name="text">
-         <string>Logo</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item row="2" column="2">
     <widget class="QLabel" name="FormCompareLabelPlayerCount">
@@ -308,6 +226,26 @@
       <string>PlayerCount</string>
      </property>
     </widget>
+   </item>
+   <item row="2" column="4">
+    <widget class="QCheckBox" name="FormComparCheckBoxShowFilter">
+     <property name="text">
+      <string>Show Filter</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="FormCompareButtonReturn">
+     <property name="text">
+      <string>Return</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" rowspan="2" colspan="5">
+    <widget class="QTableWidget" name="FormCompareTableWidget"/>
    </item>
   </layout>
  </widget>

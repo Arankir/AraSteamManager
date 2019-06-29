@@ -9,14 +9,15 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QTextCodec>
-#include <QEventLoop>
+#include <QTcpSocket>
 
-class Profile
+class Profile : public QObject
 {
+    Q_OBJECT
 public:
-    Profile(QString steamid, QPixmap Avatar, int visibility, QString Name, int timecreated, QString inGame, QString Gameid);
-    Profile(QJsonObject info);
-    Profile();
+    explicit Profile(QString steamid, QPixmap Avatar, int visibility, QString Name, int timecreated, QString inGame, QString Gameid, QObject *parent = nullptr);
+    explicit Profile(QJsonObject info, QObject *parent = nullptr);
+    explicit Profile(QObject *parent = nullptr);
     ~Profile();
     QString GetSteamid();
     QPixmap GetAvatar();
@@ -26,6 +27,8 @@ public:
     QString GetInGame();
     QString GetGameId();
 
+signals:
+
 private:
     QString steamid;
     QPixmap Avatar;
@@ -34,6 +37,11 @@ private:
     int timecreated;
     QString inGame;
     QString Gameid;
+    QNetworkAccessManager* manager;
+
+
+public slots:
+    void OnResultGet(QNetworkReply *reply);
 };
 
 #endif // PROFILE_H

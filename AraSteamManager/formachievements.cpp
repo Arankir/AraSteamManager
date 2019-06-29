@@ -46,6 +46,9 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
         ui->FormAchievementsButtonAcceptChangeCategory->setIcon(QIcon("images/program/apply.png"));
         ui->FormAchievementsButtonCancelChangeCategory->setIcon(QIcon("images/program/cancel.png"));
         ui->FormAchievementsButtonAddValueChangeCategory->setIcon(QIcon("images/program/create.png"));
+        ui->FormAchievementsRadioButtonAll->setIcon(QIcon("images/program/all_white.png"));
+        ui->FormAchievementsRadioButtonReached->setIcon(QIcon("images/program/reached_white.png"));
+        ui->FormAchievementsRadioButtonNotReached->setIcon(QIcon("images/program/notreached_white.png"));
         favorites.addFile("images/program/favorites_white.png");
         break;
         }
@@ -63,6 +66,9 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
         ui->FormAchievementsButtonAcceptChangeCategory->setIcon(QIcon("images/program/apply.png"));
         ui->FormAchievementsButtonCancelChangeCategory->setIcon(QIcon("images/program/cancel.png"));
         ui->FormAchievementsButtonAddValueChangeCategory->setIcon(QIcon("images/program/create.png"));
+        ui->FormAchievementsRadioButtonAll->setIcon(QIcon("images/program/all_black.png"));
+        ui->FormAchievementsRadioButtonReached->setIcon(QIcon("images/program/reached_black.png"));
+        ui->FormAchievementsRadioButtonNotReached->setIcon(QIcon("images/program/notreached_black.png"));
         favorites.addFile("images/program/favorites_black.png");
         break;
         }
