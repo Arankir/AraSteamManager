@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCompare_t {
-    QByteArrayData data[29];
-    char stringdata0[704];
+    QByteArrayData data[30];
+    char stringdata0[750];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -59,7 +59,8 @@ QT_MOC_LITERAL(24, 523, 34), // "on_FormCompareButtonReturn_cl..."
 QT_MOC_LITERAL(25, 558, 44), // "on_FormComparCheckBoxShowFilt..."
 QT_MOC_LITERAL(26, 603, 29), // "on_RadioButtonFriendAll_Click"
 QT_MOC_LITERAL(27, 633, 33), // "on_RadioButtonFriendReached_C..."
-QT_MOC_LITERAL(28, 667, 36) // "on_RadioButtonFriendNotReache..."
+QT_MOC_LITERAL(28, 667, 36), // "on_RadioButtonFriendNotReache..."
+QT_MOC_LITERAL(29, 704, 45) // "on_FormCompareCheckBoxAllFrie..."
 
     },
     "FormCompare\0return_to_achievements\0\0"
@@ -79,7 +80,8 @@ QT_MOC_LITERAL(28, 667, 36) // "on_RadioButtonFriendNotReache..."
     "on_FormComparCheckBoxShowFilter_stateChanged\0"
     "on_RadioButtonFriendAll_Click\0"
     "on_RadioButtonFriendReached_Click\0"
-    "on_RadioButtonFriendNotReached_Click"
+    "on_RadioButtonFriendNotReached_Click\0"
+    "on_FormCompareCheckBoxAllFriends_stateChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -89,7 +91,7 @@ static const uint qt_meta_data_FormCompare[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      19,   14, // methods
+      20,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -97,27 +99,28 @@ static const uint qt_meta_data_FormCompare[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  109,    2, 0x06 /* Public */,
+       1,    0,  114,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,  110,    2, 0x08 /* Private */,
-       5,    3,  113,    2, 0x08 /* Private */,
-      10,    0,  120,    2, 0x08 /* Private */,
-      11,    0,  121,    2, 0x08 /* Private */,
-      12,    0,  122,    2, 0x08 /* Private */,
-      13,    0,  123,    2, 0x08 /* Private */,
-      14,    1,  124,    2, 0x08 /* Private */,
-      16,    1,  127,    2, 0x08 /* Private */,
-      18,    1,  130,    2, 0x08 /* Private */,
-      20,    1,  133,    2, 0x08 /* Private */,
-      21,    1,  136,    2, 0x08 /* Private */,
-      22,    1,  139,    2, 0x08 /* Private */,
-      23,    2,  142,    2, 0x08 /* Private */,
-      24,    0,  147,    2, 0x08 /* Private */,
-      25,    1,  148,    2, 0x08 /* Private */,
-      26,    0,  151,    2, 0x08 /* Private */,
-      27,    0,  152,    2, 0x08 /* Private */,
-      28,    0,  153,    2, 0x08 /* Private */,
+       3,    1,  115,    2, 0x08 /* Private */,
+       5,    3,  118,    2, 0x08 /* Private */,
+      10,    0,  125,    2, 0x08 /* Private */,
+      11,    0,  126,    2, 0x08 /* Private */,
+      12,    0,  127,    2, 0x08 /* Private */,
+      13,    0,  128,    2, 0x08 /* Private */,
+      14,    1,  129,    2, 0x08 /* Private */,
+      16,    1,  132,    2, 0x08 /* Private */,
+      18,    1,  135,    2, 0x08 /* Private */,
+      20,    1,  138,    2, 0x08 /* Private */,
+      21,    1,  141,    2, 0x08 /* Private */,
+      22,    1,  144,    2, 0x08 /* Private */,
+      23,    2,  147,    2, 0x08 /* Private */,
+      24,    0,  152,    2, 0x08 /* Private */,
+      25,    1,  153,    2, 0x08 /* Private */,
+      26,    0,  156,    2, 0x08 /* Private */,
+      27,    0,  157,    2, 0x08 /* Private */,
+      28,    0,  158,    2, 0x08 /* Private */,
+      29,    1,  159,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -141,6 +144,7 @@ static const uint qt_meta_data_FormCompare[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   19,
 
        0        // eod
 };
@@ -170,6 +174,7 @@ void FormCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 16: _t->on_RadioButtonFriendAll_Click(); break;
         case 17: _t->on_RadioButtonFriendReached_Click(); break;
         case 18: _t->on_RadioButtonFriendNotReached_Click(); break;
+        case 19: _t->on_FormCompareCheckBoxAllFriends_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -224,13 +229,13 @@ int FormCompare::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 19)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 20;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 19)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 20;
     }
     return _id;
 }

@@ -64,6 +64,15 @@ private slots:
     void on_RadioButtonFriendReached_Click();
     void on_RadioButtonFriendNotReached_Click();
 
+    void on_FormCompareCheckBoxAllFriends_stateChanged(int arg1);
+
+    void on_FormCompareRadioButtonFriendsAll_clicked();
+    void on_FormCompareRadioButtonFriendsReached_clicked();
+    void on_FormCompareRadioButtonFriendsNotReached_clicked();
+
+    void on_FormCompareButtonFind_clicked();
+
+    void on_FormCompareLineEditFind_textChanged(const QString &arg1);
 
 private:
     Ui::FormCompare *ui;

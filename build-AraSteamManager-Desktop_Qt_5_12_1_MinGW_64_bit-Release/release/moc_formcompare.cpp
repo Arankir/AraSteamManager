@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCompare_t {
-    QByteArrayData data[25];
-    char stringdata0[558];
+    QByteArrayData data[35];
+    char stringdata0[965];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -55,7 +55,17 @@ QT_MOC_LITERAL(20, 357, 42), // "on_FormCompareCheckBoxSCTitle..."
 QT_MOC_LITERAL(21, 400, 48), // "on_FormCompareCheckBoxSCDescr..."
 QT_MOC_LITERAL(22, 449, 49), // "on_FormCompareCheckBoxSCTotal..."
 QT_MOC_LITERAL(23, 499, 23), // "on_CheckBoxFriend_Click"
-QT_MOC_LITERAL(24, 523, 34) // "on_FormCompareButtonReturn_cl..."
+QT_MOC_LITERAL(24, 523, 34), // "on_FormCompareButtonReturn_cl..."
+QT_MOC_LITERAL(25, 558, 44), // "on_FormComparCheckBoxShowFilt..."
+QT_MOC_LITERAL(26, 603, 29), // "on_RadioButtonFriendAll_Click"
+QT_MOC_LITERAL(27, 633, 33), // "on_RadioButtonFriendReached_C..."
+QT_MOC_LITERAL(28, 667, 36), // "on_RadioButtonFriendNotReache..."
+QT_MOC_LITERAL(29, 704, 45), // "on_FormCompareCheckBoxAllFrie..."
+QT_MOC_LITERAL(30, 750, 43), // "on_FormCompareRadioButtonFrie..."
+QT_MOC_LITERAL(31, 794, 47), // "on_FormCompareRadioButtonFrie..."
+QT_MOC_LITERAL(32, 842, 50), // "on_FormCompareRadioButtonFrie..."
+QT_MOC_LITERAL(33, 893, 32), // "on_FormCompareButtonFind_clicked"
+QT_MOC_LITERAL(34, 926, 38) // "on_FormCompareLineEditFind_te..."
 
     },
     "FormCompare\0return_to_achievements\0\0"
@@ -71,7 +81,17 @@ QT_MOC_LITERAL(24, 523, 34) // "on_FormCompareButtonReturn_cl..."
     "on_FormCompareCheckBoxSCDescription_stateChanged\0"
     "on_FormCompareCheckBoxSCTotalPercent_stateChanged\0"
     "on_CheckBoxFriend_Click\0"
-    "on_FormCompareButtonReturn_clicked"
+    "on_FormCompareButtonReturn_clicked\0"
+    "on_FormComparCheckBoxShowFilter_stateChanged\0"
+    "on_RadioButtonFriendAll_Click\0"
+    "on_RadioButtonFriendReached_Click\0"
+    "on_RadioButtonFriendNotReached_Click\0"
+    "on_FormCompareCheckBoxAllFriends_stateChanged\0"
+    "on_FormCompareRadioButtonFriendsAll_clicked\0"
+    "on_FormCompareRadioButtonFriendsReached_clicked\0"
+    "on_FormCompareRadioButtonFriendsNotReached_clicked\0"
+    "on_FormCompareButtonFind_clicked\0"
+    "on_FormCompareLineEditFind_textChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,7 +101,7 @@ static const uint qt_meta_data_FormCompare[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -89,23 +109,33 @@ static const uint qt_meta_data_FormCompare[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   89,    2, 0x06 /* Public */,
+       1,    0,  139,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   90,    2, 0x08 /* Private */,
-       5,    3,   93,    2, 0x08 /* Private */,
-      10,    0,  100,    2, 0x08 /* Private */,
-      11,    0,  101,    2, 0x08 /* Private */,
-      12,    0,  102,    2, 0x08 /* Private */,
-      13,    0,  103,    2, 0x08 /* Private */,
-      14,    1,  104,    2, 0x08 /* Private */,
-      16,    1,  107,    2, 0x08 /* Private */,
-      18,    1,  110,    2, 0x08 /* Private */,
-      20,    1,  113,    2, 0x08 /* Private */,
-      21,    1,  116,    2, 0x08 /* Private */,
-      22,    1,  119,    2, 0x08 /* Private */,
-      23,    2,  122,    2, 0x08 /* Private */,
-      24,    0,  127,    2, 0x08 /* Private */,
+       3,    1,  140,    2, 0x08 /* Private */,
+       5,    3,  143,    2, 0x08 /* Private */,
+      10,    0,  150,    2, 0x08 /* Private */,
+      11,    0,  151,    2, 0x08 /* Private */,
+      12,    0,  152,    2, 0x08 /* Private */,
+      13,    0,  153,    2, 0x08 /* Private */,
+      14,    1,  154,    2, 0x08 /* Private */,
+      16,    1,  157,    2, 0x08 /* Private */,
+      18,    1,  160,    2, 0x08 /* Private */,
+      20,    1,  163,    2, 0x08 /* Private */,
+      21,    1,  166,    2, 0x08 /* Private */,
+      22,    1,  169,    2, 0x08 /* Private */,
+      23,    2,  172,    2, 0x08 /* Private */,
+      24,    0,  177,    2, 0x08 /* Private */,
+      25,    1,  178,    2, 0x08 /* Private */,
+      26,    0,  181,    2, 0x08 /* Private */,
+      27,    0,  182,    2, 0x08 /* Private */,
+      28,    0,  183,    2, 0x08 /* Private */,
+      29,    1,  184,    2, 0x08 /* Private */,
+      30,    0,  187,    2, 0x08 /* Private */,
+      31,    0,  188,    2, 0x08 /* Private */,
+      32,    0,  189,    2, 0x08 /* Private */,
+      33,    0,  190,    2, 0x08 /* Private */,
+      34,    1,  191,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -125,6 +155,16 @@ static const uint qt_meta_data_FormCompare[] = {
     QMetaType::Void, QMetaType::Int,   19,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   19,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   19,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   19,
 
        0        // eod
 };
@@ -150,6 +190,16 @@ void FormCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 12: _t->on_FormCompareCheckBoxSCTotalPercent_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->on_CheckBoxFriend_Click((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 14: _t->on_FormCompareButtonReturn_clicked(); break;
+        case 15: _t->on_FormComparCheckBoxShowFilter_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 16: _t->on_RadioButtonFriendAll_Click(); break;
+        case 17: _t->on_RadioButtonFriendReached_Click(); break;
+        case 18: _t->on_RadioButtonFriendNotReached_Click(); break;
+        case 19: _t->on_FormCompareCheckBoxAllFriends_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->on_FormCompareRadioButtonFriendsAll_clicked(); break;
+        case 21: _t->on_FormCompareRadioButtonFriendsReached_clicked(); break;
+        case 22: _t->on_FormCompareRadioButtonFriendsNotReached_clicked(); break;
+        case 23: _t->on_FormCompareButtonFind_clicked(); break;
+        case 24: _t->on_FormCompareLineEditFind_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -204,13 +254,13 @@ int FormCompare::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 25;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 25;
     }
     return _id;
 }
