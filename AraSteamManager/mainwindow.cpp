@@ -127,8 +127,15 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 MainWindow::~MainWindow(){
     delete ui;
 }
-void MainWindow::on_return(){
+void MainWindow::on_return(FormGames* a){
     this->setVisible(true);
+    windowchildcount--;
+    a->deleteLater();
+}
+void MainWindow::on_return(FormFriends* a){
+    this->setVisible(true);
+    windowchildcount--;
+    a->deleteLater();
 }
 void MainWindow::on_go_to_profile(QString id){
     ui->FormProfileLineEditIdProfile->setText(id);
@@ -321,18 +328,23 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
 void MainWindow::on_FormProfileButtonGames_clicked(){
-    gamesform = new FormGames(id,key,language,Theme,DocOwnedGames,SaveImages);
-    connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
-    gamesform->show();
-    this->setVisible(false);
+    if(windowchildcount==0){
+        windowchildcount++;
+        gamesform = new FormGames(id,key,language,Theme,DocOwnedGames,SaveImages);
+        connect(gamesform,SIGNAL(return_to_profile(FormGames*)),this,SLOT(on_return(FormGames*)));
+        gamesform->show();
+        this->setVisible(false);
+    }
 }
 void MainWindow::on_FormProfileButtonFriends_clicked(){
-    qDebug() << ui->FormProfileButtonFriends->palette();
-    friendsform = new FormFriends(id,key,language,Theme,DocFriendList,SaveImages);
-    connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(on_return()));
-    connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));
-    friendsform->show();
-    this->setVisible(false);
+    if(windowchildcount==0){
+        windowchildcount++;
+        friendsform = new FormFriends(id,key,language,Theme,DocFriendList,SaveImages);
+        connect(friendsform,SIGNAL(return_to_profile(FormFriends*)),this,SLOT(on_return(FormFriends*)));
+        connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));
+        friendsform->show();
+        this->setVisible(false);
+    }
 }
 void MainWindow::on_FormProfileButtonSetProfile_clicked(){
     QFile file("Files/Settings.txt");

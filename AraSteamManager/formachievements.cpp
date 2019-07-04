@@ -193,10 +193,13 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
                     ui->FormAchievementsTableWidgetAchievements->setCellWidget(row,0,label);
                     }
                 QTableWidgetItem *item2 = new QTableWidgetItem(JASFG[j].toObject().value("displayName").toString());
+                item2->setTextAlignment(Qt::AlignCenter);
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,1,item2);
                 QTableWidgetItem *item3 = new QTableWidgetItem(JASFG[j].toObject().value("description").toString());
+                item3->setTextAlignment(Qt::AlignCenter);
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,2,item3);
                 QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(JsonArrayGlobalAchievements[i].toObject().value("percent").toDouble())+"%");
+                item4->setTextAlignment(Qt::AlignCenter);
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,3,item4);
                 QTableWidgetItem *item5;
                 if(JAPA[j].toObject().value("achieved").toInt()==1){
@@ -207,6 +210,7 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
                     item5 = new QTableWidgetItem(SLLanguage[24]);
                     totalnr++;
                     }
+                item5->setTextAlignment(Qt::AlignCenter);
                 ui->FormAchievementsTableWidgetAchievements->setItem(row,4,item5);
                 QPushButton *button1 = new QPushButton;
                 button1->setIcon(favorites);
@@ -250,14 +254,17 @@ FormAchievements::~FormAchievements(){
     delete ui;
 }
 void FormAchievements::closeEvent(QCloseEvent *){
-    on_FormAchievementsButtonReturn_clicked();
+    emit return_to_games(this);
+    //delete this;
 }
-void FormAchievements::on_return(){
+void FormAchievements::on_return(FormCompare* a){
+    windowchildcount--;
     this->setVisible(true);
+    a->deleteLater();
 }
 void FormAchievements::on_FormAchievementsButtonReturn_clicked(){
-    emit return_to_games();
-    delete this;
+    emit return_to_games(this);
+    //delete this;
 }
 
 void FormAchievements::FavoritesClicked(){
@@ -1140,8 +1147,11 @@ void FormAchievements::on_buttonChangeCategoryDeleteValues_clicked(){
 }
 
 void FormAchievements::on_FormAchievementsButtonCompare_clicked(){
-    compareform = new FormCompare(key,language,Theme,id,appid,*ui->FormAchievementsLabelGameLogo->pixmap(),JsonArrayGlobalAchievements,SaveImages);
-    connect(compareform,SIGNAL(return_to_achievements()),this,SLOT(on_return()));
-    compareform->show();
-    this->setVisible(false);
+    if(windowchildcount==0){
+        windowchildcount++;
+        compareform = new FormCompare(key,language,Theme,id,appid,*ui->FormAchievementsLabelGameLogo->pixmap(),JsonArrayGlobalAchievements,SaveImages);
+        connect(compareform,SIGNAL(return_to_achievements(FormCompare*)),this,SLOT(on_return(FormCompare*)));
+        compareform->show();
+        this->setVisible(false);
+    }
 }

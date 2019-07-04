@@ -26,7 +26,7 @@ public:
     FormAchievements *achievementsform;
 
 signals:
-    void return_to_profile();
+    void return_to_profile(FormGames*);
 
 private slots:
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
@@ -39,7 +39,7 @@ private slots:
 
     void FavoritesClicked();
 
-    void on_return();
+    void on_return(FormAchievements*);
 
     void on_FormGamesLineEditGame_textChanged(const QString);
 
@@ -51,6 +51,7 @@ private:
     QString key;
     int language;
     int Theme;
+    int windowchildcount=0;
     QJsonDocument JsonDocGames;
     QStringList SLLanguage;
     int SaveImages;

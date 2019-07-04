@@ -14,6 +14,7 @@
 #include <QPixmap>
 #include <formgames.h>
 #include <formfriends.h>
+#include <QFile>
 
 namespace Ui {
 class MainWindow;
@@ -30,7 +31,8 @@ public:
     FormFriends *friendsform;
 
 private slots:
-    void on_return();
+    void on_return(FormGames *);
+    void on_return(FormFriends *);
     void on_go_to_profile(QString id);
 
     void on_FormProfileButtonFindProfile_clicked();
@@ -47,6 +49,7 @@ private:
     int language=1;
     int Theme=1;
     int SaveImages=0;
+    int windowchildcount=0;
     QString id;
     QJsonDocument DocPlayerSummaries;
     QJsonDocument DocOwnedGames;

@@ -134,12 +134,14 @@ FormGames::~FormGames(){
 void FormGames::closeEvent(QCloseEvent *){
     on_FormGamesButtonReturn_clicked();
 }
-void FormGames::on_return(){
+void FormGames::on_return(FormAchievements* a){
+    windowchildcount--;
     this->setVisible(true);
+    a->deleteLater();
 }
 void FormGames::on_FormGamesButtonReturn_clicked(){
-    emit return_to_profile();
-    delete this;
+    emit return_to_profile(this);
+    //delete this;
 }
 
 void FormGames::on_FormGamesLineEditGame_textChanged(const QString){
@@ -154,22 +156,25 @@ void FormGames::on_FormGamesButtonFind_clicked(){
 }
 
 void FormGames::AchievementsClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    QNetworkAccessManager manager;
-    QEventLoop loop;
-    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    QNetworkReply &replyGlobalAchievementPercentagesForApp = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27))));
-    loop.exec();
-    QJsonDocument JsonDocGlobalAchievements = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
-    if(JsonDocGlobalAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
-        QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
-    } else {
-        achievementsform = new FormAchievements(key,language,Theme,id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()),JsonDocGlobalAchievements,SaveImages);
-        connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(on_return()));
-        achievementsform->show();
-        this->setVisible(false);
+    if(windowchildcount==0){
+        windowchildcount++;
+        QPushButton *btn = qobject_cast<QPushButton*>(sender());
+        QNetworkAccessManager manager;
+        QEventLoop loop;
+        QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        QNetworkReply &replyGlobalAchievementPercentagesForApp = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27))));
+        loop.exec();
+        QJsonDocument JsonDocGlobalAchievements = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
+        if(JsonDocGlobalAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
+            windowchildcount--;
+            QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
+        } else {
+            achievementsform = new FormAchievements(key,language,Theme,id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()),JsonDocGlobalAchievements,SaveImages);
+            connect(achievementsform,SIGNAL(return_to_games(FormAchievements*)),this,SLOT(on_return(FormAchievements*)));
+            achievementsform->show();
+            this->setVisible(false);
+        }
     }
-
 }
 
 void FormGames::FavoritesClicked(){

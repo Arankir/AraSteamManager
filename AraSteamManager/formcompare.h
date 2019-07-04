@@ -15,7 +15,7 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <imagerequest.h>
-#include <profile2.h>
+#include <profile.h>
 #include <QTableWidgetItem>
 #include <QRadioButton>
 
@@ -32,7 +32,7 @@ public:
     ~FormCompare();
 
 signals:
-    void return_to_achievements();
+    void return_to_achievements(FormCompare*);
 
 private slots:
     void closeEvent(QCloseEvent *);
@@ -80,6 +80,7 @@ private:
     QString id;
     int language;
     int Theme;
+    int windowchildcount=0;
     QString appid;
     QJsonDocument JsonDocNumberOfCurrentPlayers;
     QJsonArray JsonArrayGlobalAchievements;

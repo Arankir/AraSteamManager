@@ -31,14 +31,14 @@ public:
     FormCompare *compareform;
 
 signals:
-    void return_to_games();
+    void return_to_games(FormAchievements*);
 
 private slots:
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);
     void closeEvent(QCloseEvent *);
-    void on_return();
+    void on_return(FormCompare*);
     void on_FormAchievementsButtonReturn_clicked();
     void UpdateHiddenRows();
     void on_FormAchievementsButtonAddCategory_clicked();
@@ -98,6 +98,7 @@ private:
     QString id;
     int language;
     int Theme;
+    int windowchildcount=0;
     QString appid;
     QJsonDocument JsonDocNumberOfCurrentPlayers;
     QJsonArray JsonArrayGlobalAchievements;

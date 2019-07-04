@@ -252,11 +252,12 @@ FormFriends::~FormFriends()
     delete ui;
 }
 void FormFriends::closeEvent(QCloseEvent *){
-    on_FormFriendsBReturn_clicked();
+    emit return_to_profile(this);
+    //delete this;
 }
 void FormFriends::on_FormFriendsBReturn_clicked(){
-    emit return_to_profile();
-    delete this;
+    emit return_to_profile(this);
+    //delete this;
 }
 
 void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
@@ -273,9 +274,12 @@ void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
 }
 
 void FormFriends::GoToProfileClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    emit go_to_profile(btn->objectName().mid(3,btn->objectName().length()));
-    on_FormFriendsBReturn_clicked();
+    if(windowchildcount==0){
+        windowchildcount++;
+        QPushButton *btn = qobject_cast<QPushButton*>(sender());
+        emit go_to_profile(btn->objectName().mid(3,btn->objectName().length()));
+        on_FormFriendsBReturn_clicked();
+    }
 }
 void FormFriends::FavoritesClicked(){
 

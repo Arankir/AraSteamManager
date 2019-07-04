@@ -185,6 +185,12 @@
       </item>
       <item row="3" column="0" colspan="6">
        <widget class="QTableWidget" name="FormCompareTableWidgetFriends">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>180</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
@@ -195,7 +201,7 @@
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
         <property name="showGrid">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -245,7 +251,11 @@
     </widget>
    </item>
    <item row="4" column="0" rowspan="2" colspan="5">
-    <widget class="QTableWidget" name="FormCompareTableWidget"/>
+    <widget class="QTableWidget" name="FormCompareTableWidget">
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

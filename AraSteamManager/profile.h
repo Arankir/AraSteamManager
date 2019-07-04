@@ -1,5 +1,5 @@
-#ifndef PROFILE_H
-#define PROFILE_H
+#ifndef PROFILE2_H
+#define PROFILE2_H
 
 #include <QMainWindow>
 #include <QNetworkAccessManager>
@@ -10,15 +10,18 @@
 #include <QJsonArray>
 #include <QTextCodec>
 #include <QTcpSocket>
+#include <QEventLoop>
 
 class Profile : public QObject
 {
     Q_OBJECT
 public:
-    explicit Profile(QString steamid, QPixmap Avatar, int visibility, QString Name, int timecreated, QString inGame, QString Gameid, QObject *parent = nullptr);
     explicit Profile(QJsonObject info, QObject *parent = nullptr);
-    explicit Profile(QObject *parent = nullptr);
+    Profile();
+    Profile(const Profile&);
+    Profile& operator=(const Profile&);
     ~Profile();
+    void PostData(QJsonObject info);
     QString GetSteamid();
     QPixmap GetAvatar();
     int GetVisibility();
@@ -37,11 +40,10 @@ private:
     int timecreated;
     QString inGame;
     QString Gameid;
-    QNetworkAccessManager* manager;
 
 
 public slots:
-    void OnResultGet(QNetworkReply *reply);
+
 };
 
-#endif // PROFILE_H
+#endif // PROFILE2_H

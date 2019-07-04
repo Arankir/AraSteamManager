@@ -25,7 +25,7 @@ public:
     ~FormFriends();
 
 signals:
-    void return_to_profile();
+    void return_to_profile(FormFriends*);
     void go_to_profile(QString id);
 
 private slots:
@@ -49,6 +49,7 @@ private:
     QString key;
     int language;
     int Theme;
+    int windowchildcount=0;
     QJsonDocument DocFriends;
     QStringList SLLanguage;
     int SaveImages;

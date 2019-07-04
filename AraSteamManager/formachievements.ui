@@ -250,6 +250,9 @@
         <property name="text">
          <string>TotalPersent</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </item>
       <item row="2" column="3">
