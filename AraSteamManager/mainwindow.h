@@ -15,6 +15,7 @@
 #include <formgames.h>
 #include <formfriends.h>
 #include <QFile>
+#include <QKeyEvent>
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,8 @@ private slots:
     void on_return(FormGames *);
     void on_return(FormFriends *);
     void on_go_to_profile(QString id);
+
+    void keyPressEvent(QKeyEvent *event);
 
     void on_FormProfileButtonFindProfile_clicked();
     void on_FormProfileButtonGames_clicked();

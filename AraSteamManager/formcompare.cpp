@@ -95,6 +95,7 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     ui->FormCompareCheckBoxSCTotalPercent->setText(SLLanguage[14]);
     ui->FormCompareLabelPlayerCount->setText(SLLanguage[18]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
     ui->FormCompareButtonUpdate->setText(SLLanguage[19]);
+    ui->FormComparCheckBoxShowFilter->setText(SLLanguage[24]);
     ui->FormCompareTableWidget->setColumnCount(6);
     ui->FormCompareTableWidget->insertRow(0);
     ui->FormCompareTableWidget->insertRow(1);
@@ -929,4 +930,123 @@ void FormCompare::on_FormCompareLineEditFind_textChanged(const QString&){
             filter[i][0]=true; else
             filter[i][0]=false;
     UpdateHiddenRows();
+}
+
+void FormCompare::on_FormCompareButtonUpdate_clicked(){
+    QNetworkAccessManager manager;
+    QEventLoop loop;
+    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+    loop.exec();
+    JsonDocPlayerAchievements = QJsonDocument::fromJson(replyPlayerAchievements.readAll());
+    QJsonArray JsonArrayPlayerAchievements = JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray();
+    if(JsonArrayPlayerAchievements.size()>1){
+        int totalr=0;
+        int totalnr=0;
+        for(int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+            int j=0;
+            bool accept=false;
+            for(;j<JsonArrayPlayerAchievements.size();j++){
+                if(JsonArrayPlayerAchievements[j].toObject().value("apiname").toString()==ui->FormCompareTableWidget->item(i,5)->text()){
+                    accept=true;
+                    break;
+                    }
+            }
+            if(accept){
+                QTableWidgetItem *item5;
+                if(JsonArrayPlayerAchievements[j].toObject().value("achieved").toInt()==1){
+                    QDateTime date=QDateTime::fromSecsSinceEpoch(JsonArrayPlayerAchievements[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
+                    item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                    totalr++;
+                    } else {
+                    item5 = new QTableWidgetItem(SLLanguage[16]);
+                    totalnr++;
+                    }
+                item5->setTextAlignment(Qt::AlignCenter);
+                delete ui->FormCompareTableWidget->item(i,4);
+                ui->FormCompareTableWidget->setItem(i,4,item5);
+                //JAPA.removeAt(j);
+            }
+            }
+        double percent= 100.0*totalr/(totalr+totalnr);
+        if((totalr==0)&&(totalnr==0))
+            ui->FormCompareTableWidget->setCellWidget(1,4, new QLabel("profile is \nnot public"));
+        else {
+            ui->FormCompareTableWidget->setCellWidget(1,4, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
+        }
+    }
+
+    for (int ii=2;ii<ui->FormCompareTableWidgetFriends->columnCount();ii++){
+        if(ui->FormCompareTableWidgetFriends->item(1,ii)->checkState()==Qt::Checked){
+            Profile sProfile;
+            if(ui->FormCompareCheckBoxAllFriends->isChecked()){
+                bool accept=true;
+                for (int i=0;i<Friends.first.size();i++) {
+                    if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,ii)->text()){
+                        accept=false;
+                        sProfile=Friends.first[i];
+                        break;
+                    }
+                }
+                if(accept){
+                    for (int i=0;i<Friends.second.size();i++) {
+                        if(Friends.second[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,ii)->text()){
+                            sProfile=Friends.second[i];
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (int i=0;i<Friends.first.size();i++) {
+                    if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,ii)->text()){
+                        sProfile=Friends.first[i];
+                        break;
+                    }
+                }
+            }
+            int col=0;
+            for (int j=5;j<ui->FormCompareTableWidget->columnCount();j++) {
+                if(ui->FormCompareTableWidget->horizontalHeaderItem(j)->text()==sProfile.GetName()){
+                    col=j;
+                    break;
+                }
+            }
+            QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+sProfile.GetSteamid())));
+            loop.exec();
+            QJsonArray JAPA = QJsonDocument::fromJson(replyPlayerAchievements.readAll()).object().value("playerstats").toObject().value("achievements").toArray();
+            int totalr=0;
+            int totalnr=0;
+            for(int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+                int j=0;
+                bool accept=false;
+                for(;j<JAPA.size();j++){
+                    if(JAPA[j].toObject().value("apiname").toString()==ui->FormCompareTableWidget->item(i,5)->text()){
+                        accept=true;
+                        break;
+                        }
+                }
+                if(accept){
+                    QTableWidgetItem *item5;
+                    if(JAPA[j].toObject().value("achieved").toInt()==1){
+                        QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
+                        item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                        totalr++;
+                        } else {
+                        item5 = new QTableWidgetItem(SLLanguage[16]);
+                        totalnr++;
+                        }
+                    item5->setTextAlignment(Qt::AlignCenter);
+                    delete ui->FormCompareTableWidget->item(i,col);
+                    ui->FormCompareTableWidget->setItem(i,col,item5);
+                    //JAPA.removeAt(j);
+                }
+                }
+            double percent= 100.0*totalr/(totalr+totalnr);
+            if((totalr==0)&&(totalnr==0))
+                ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel("profile is \nnot public"));
+            else {
+                ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
+            }
+        }
+    }
 }

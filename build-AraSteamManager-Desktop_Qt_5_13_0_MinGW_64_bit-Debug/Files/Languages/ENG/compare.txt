@@ -21,4 +21,5 @@ Update
 Not selected
 Error
 Successful
-Внимание
+Warning
+Show filter

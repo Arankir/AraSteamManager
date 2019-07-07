@@ -74,6 +74,8 @@ private slots:
 
     void on_FormCompareLineEditFind_textChanged(const QString &arg1);
 
+    void on_FormCompareButtonUpdate_clicked();
+
 private:
     Ui::FormCompare *ui;
     QString key;

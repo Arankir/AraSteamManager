@@ -124,6 +124,12 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     }
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
+    if( event->key() == 16777220)
+        on_FormProfileButtonFindProfile_clicked();
+}
+
 MainWindow::~MainWindow(){
     delete ui;
 }

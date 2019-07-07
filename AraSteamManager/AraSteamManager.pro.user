@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.9.2, 2019-07-01T20:53:04. -->
+<!-- Written by QtCreator 4.9.2, 2019-07-07T14:03:08. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -317,7 +317,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default"></value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/Arankir/Desktop/123/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_13_0_MinGW_64_bit-Release</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
