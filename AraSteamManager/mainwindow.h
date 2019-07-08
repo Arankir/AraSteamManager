@@ -16,6 +16,7 @@
 #include <formfriends.h>
 #include <QFile>
 #include <QKeyEvent>
+#include <formstatistic.h>
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,7 @@ public:
     ~MainWindow();
     FormGames *gamesform;
     FormFriends *friendsform;
+    FormStatistic *statisticform;
 
 private slots:
     void on_return(FormGames *);
@@ -45,6 +47,8 @@ private slots:
     void on_FormProfileButtonExit_clicked();
 
     void on_FormProfileButtonGoToMyProfile_clicked();
+
+    void on_FormProfileButtonStatistics_clicked();
 
 private:
     Ui::MainWindow *ui;

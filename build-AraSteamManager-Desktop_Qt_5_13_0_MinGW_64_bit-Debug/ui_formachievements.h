@@ -244,6 +244,7 @@ public:
 
         FormAchievementsLabelTotalPersent = new QLabel(FormAchievementsGroupBoxFilter);
         FormAchievementsLabelTotalPersent->setObjectName(QString::fromUtf8("FormAchievementsLabelTotalPersent"));
+        FormAchievementsLabelTotalPersent->setAlignment(Qt::AlignCenter);
 
         gridLayout->addWidget(FormAchievementsLabelTotalPersent, 2, 2, 1, 1);
 

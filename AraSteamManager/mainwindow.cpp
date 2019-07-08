@@ -409,3 +409,13 @@ void MainWindow::on_FormProfileButtonGoToMyProfile_clicked(){
 void MainWindow::on_FormProfileButtonExit_clicked(){
     close();
 }
+
+void MainWindow::on_FormProfileButtonStatistics_clicked(){
+    if(windowchildcount==0){
+        windowchildcount++;
+        statisticform = new FormStatistic(/*id,key,language,Theme,DocOwnedGames,SaveImages*/);
+        connect(statisticform,SIGNAL(return_to_profile(FormGames*)),this,SLOT(on_return(FormGames*)));
+        statisticform->show();
+        this->setVisible(false);
+    }
+}

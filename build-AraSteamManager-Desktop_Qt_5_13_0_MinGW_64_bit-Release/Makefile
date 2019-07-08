@@ -250,6 +250,7 @@ Makefile: ../AraSteamManager/AraSteamManager.pro D:/Qt/5.13.0/mingw73_64/mkspecs
 		D:/Qt/5.13.0/mingw73_64/mkspecs/features/yacc.prf \
 		D:/Qt/5.13.0/mingw73_64/mkspecs/features/lex.prf \
 		../AraSteamManager/AraSteamManager.pro \
+		D:/Qt/5.13.0/mingw73_64/lib/Qt5PrintSupport.prl \
 		D:/Qt/5.13.0/mingw73_64/lib/Qt5Widgets.prl \
 		D:/Qt/5.13.0/mingw73_64/lib/Qt5Gui.prl \
 		D:/Qt/5.13.0/mingw73_64/lib/Qt5Network.prl \
@@ -443,6 +444,7 @@ D:/Qt/5.13.0/mingw73_64/mkspecs/features/exceptions.prf:
 D:/Qt/5.13.0/mingw73_64/mkspecs/features/yacc.prf:
 D:/Qt/5.13.0/mingw73_64/mkspecs/features/lex.prf:
 ../AraSteamManager/AraSteamManager.pro:
+D:/Qt/5.13.0/mingw73_64/lib/Qt5PrintSupport.prl:
 D:/Qt/5.13.0/mingw73_64/lib/Qt5Widgets.prl:
 D:/Qt/5.13.0/mingw73_64/lib/Qt5Gui.prl:
 D:/Qt/5.13.0/mingw73_64/lib/Qt5Network.prl:

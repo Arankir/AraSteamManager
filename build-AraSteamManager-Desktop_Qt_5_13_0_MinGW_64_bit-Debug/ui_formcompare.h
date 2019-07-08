@@ -162,9 +162,10 @@ public:
 
         FormCompareTableWidgetFriends = new QTableWidget(FormCompareGroupBoxFilter);
         FormCompareTableWidgetFriends->setObjectName(QString::fromUtf8("FormCompareTableWidgetFriends"));
+        FormCompareTableWidgetFriends->setMinimumSize(QSize(0, 180));
         FormCompareTableWidgetFriends->setMaximumSize(QSize(16777215, 330));
         FormCompareTableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        FormCompareTableWidgetFriends->setShowGrid(false);
+        FormCompareTableWidgetFriends->setShowGrid(true);
 
         gridLayout_3->addWidget(FormCompareTableWidgetFriends, 3, 0, 1, 6);
 
@@ -196,6 +197,7 @@ public:
 
         FormCompareTableWidget = new QTableWidget(FormCompare);
         FormCompareTableWidget->setObjectName(QString::fromUtf8("FormCompareTableWidget"));
+        FormCompareTableWidget->setLayoutDirection(Qt::LeftToRight);
 
         gridLayout_4->addWidget(FormCompareTableWidget, 4, 0, 2, 5);
 

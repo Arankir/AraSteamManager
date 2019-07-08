@@ -10,7 +10,7 @@
 #include <QJsonObject>
 #include <QFile>
 #include <QStandardItem>
-#include <imagerequest.h>
+#include <class/imagerequest.h>
 
 namespace Ui {
 class FormFriends;

@@ -14,7 +14,7 @@
 #include <QComboBox>
 #include <QMessageBox>
 #include <QFormLayout>
-#include <imagerequest.h>
+#include <class/imagerequest.h>
 #include <formcompare.h>
 
 namespace Ui {

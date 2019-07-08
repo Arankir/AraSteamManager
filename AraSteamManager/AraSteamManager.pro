@@ -6,7 +6,7 @@
 
 QT       += core gui network
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = AraSteamManager
 TEMPLATE = app
@@ -25,26 +25,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    class/imagerequest.cpp \
+    class/profile.cpp \
     formcompare.cpp \
-    imagerequest.cpp \
+    formstatistic.cpp \
         main.cpp \
         mainwindow.cpp \
     formgames.cpp \
     formachievements.cpp \
     formfriends.cpp \
-    profile.cpp
+    qcustomplot.cpp
 
 HEADERS += \
+    class/imagerequest.h \
+    class/profile.h \
     formcompare.h \
-    imagerequest.h \
+    formstatistic.h \
         mainwindow.h \
     formgames.h \
     formachievements.h \
     formfriends.h \
-    profile.h
+    qcustomplot.h
 
 FORMS += \
     formcompare.ui \
+    formstatistic.ui \
         mainwindow.ui \
     formgames.ui \
     formachievements.ui \

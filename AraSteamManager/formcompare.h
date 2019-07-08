@@ -14,8 +14,8 @@
 #include <QComboBox>
 #include <QMessageBox>
 #include <QFormLayout>
-#include <imagerequest.h>
-#include <profile.h>
+#include <class/imagerequest.h>
+#include <class/profile.h>
 #include <QTableWidgetItem>
 #include <QRadioButton>
 
