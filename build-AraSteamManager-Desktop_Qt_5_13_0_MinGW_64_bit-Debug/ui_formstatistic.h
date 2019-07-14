@@ -14,7 +14,10 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
+#include "qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -22,88 +25,98 @@ class Ui_FormStatistic
 {
 public:
     QGridLayout *gridLayout;
-    QLabel *label;
-    QPushButton *pushButton;
-    QLabel *label_2;
-    QLabel *label_3;
-    QLabel *label_4;
-    QLabel *label_5;
-    QLabel *label_6;
-    QLabel *label_7;
-    QLabel *label_8;
-    QWidget *widget;
-    QWidget *widget_2;
-    QWidget *widget_3;
+    QPushButton *FormStatisticButtonReturn;
+    QLabel *FormStatisticLabelName;
+    QSpacerItem *horizontalSpacer;
+    QLabel *FormStatisticLabelAveragePercentage;
+    QLabel *FormStatisticLabelHundredPercentage;
+    QCustomPlot *FormStatisticCustomPlotGames;
+    QScrollArea *FormStatisticScrollAreaCustomPlots;
+    QWidget *scrollAreaWidgetContents;
+    QGridLayout *gridLayout_2;
+    QCustomPlot *FormStatisticCustomPlotYears;
+    QCustomPlot *FormStatisticCustomPlotDays;
+    QCustomPlot *FormStatisticCustomPlotMonths;
+    QCustomPlot *FormStatisticCustomPlotHours;
+    QLabel *FormStatisticLabelLogo;
 
     void setupUi(QWidget *FormStatistic)
     {
         if (FormStatistic->objectName().isEmpty())
             FormStatistic->setObjectName(QString::fromUtf8("FormStatistic"));
-        FormStatistic->resize(936, 1033);
+        FormStatistic->resize(936, 810);
         gridLayout = new QGridLayout(FormStatistic);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label = new QLabel(FormStatistic);
-        label->setObjectName(QString::fromUtf8("label"));
+        FormStatisticButtonReturn = new QPushButton(FormStatistic);
+        FormStatisticButtonReturn->setObjectName(QString::fromUtf8("FormStatisticButtonReturn"));
 
-        gridLayout->addWidget(label, 0, 0, 1, 4);
+        gridLayout->addWidget(FormStatisticButtonReturn, 0, 2, 1, 1);
 
-        pushButton = new QPushButton(FormStatistic);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        FormStatisticLabelName = new QLabel(FormStatistic);
+        FormStatisticLabelName->setObjectName(QString::fromUtf8("FormStatisticLabelName"));
 
-        gridLayout->addWidget(pushButton, 0, 4, 1, 1);
+        gridLayout->addWidget(FormStatisticLabelName, 1, 0, 1, 1);
 
-        label_2 = new QLabel(FormStatistic);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout->addWidget(label_2, 1, 0, 1, 1);
+        gridLayout->addItem(horizontalSpacer, 1, 1, 1, 1);
 
-        label_3 = new QLabel(FormStatistic);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        FormStatisticLabelAveragePercentage = new QLabel(FormStatistic);
+        FormStatisticLabelAveragePercentage->setObjectName(QString::fromUtf8("FormStatisticLabelAveragePercentage"));
 
-        gridLayout->addWidget(label_3, 2, 0, 1, 1);
+        gridLayout->addWidget(FormStatisticLabelAveragePercentage, 2, 0, 1, 1);
 
-        label_4 = new QLabel(FormStatistic);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        FormStatisticLabelHundredPercentage = new QLabel(FormStatistic);
+        FormStatisticLabelHundredPercentage->setObjectName(QString::fromUtf8("FormStatisticLabelHundredPercentage"));
 
-        gridLayout->addWidget(label_4, 2, 1, 1, 1);
+        gridLayout->addWidget(FormStatisticLabelHundredPercentage, 3, 0, 1, 1);
 
-        label_5 = new QLabel(FormStatistic);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        FormStatisticCustomPlotGames = new QCustomPlot(FormStatistic);
+        FormStatisticCustomPlotGames->setObjectName(QString::fromUtf8("FormStatisticCustomPlotGames"));
+        FormStatisticCustomPlotGames->setMinimumSize(QSize(0, 100));
 
-        gridLayout->addWidget(label_5, 2, 2, 1, 1);
+        gridLayout->addWidget(FormStatisticCustomPlotGames, 4, 0, 1, 3);
 
-        label_6 = new QLabel(FormStatistic);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        FormStatisticScrollAreaCustomPlots = new QScrollArea(FormStatistic);
+        FormStatisticScrollAreaCustomPlots->setObjectName(QString::fromUtf8("FormStatisticScrollAreaCustomPlots"));
+        FormStatisticScrollAreaCustomPlots->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 902, 1236));
+        gridLayout_2 = new QGridLayout(scrollAreaWidgetContents);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        FormStatisticCustomPlotYears = new QCustomPlot(scrollAreaWidgetContents);
+        FormStatisticCustomPlotYears->setObjectName(QString::fromUtf8("FormStatisticCustomPlotYears"));
+        FormStatisticCustomPlotYears->setMinimumSize(QSize(0, 300));
 
-        gridLayout->addWidget(label_6, 2, 3, 1, 1);
+        gridLayout_2->addWidget(FormStatisticCustomPlotYears, 4, 0, 1, 1);
 
-        label_7 = new QLabel(FormStatistic);
-        label_7->setObjectName(QString::fromUtf8("label_7"));
+        FormStatisticCustomPlotDays = new QCustomPlot(scrollAreaWidgetContents);
+        FormStatisticCustomPlotDays->setObjectName(QString::fromUtf8("FormStatisticCustomPlotDays"));
+        FormStatisticCustomPlotDays->setMinimumSize(QSize(0, 300));
 
-        gridLayout->addWidget(label_7, 3, 0, 1, 1);
+        gridLayout_2->addWidget(FormStatisticCustomPlotDays, 1, 0, 1, 1);
 
-        label_8 = new QLabel(FormStatistic);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        FormStatisticCustomPlotMonths = new QCustomPlot(scrollAreaWidgetContents);
+        FormStatisticCustomPlotMonths->setObjectName(QString::fromUtf8("FormStatisticCustomPlotMonths"));
+        FormStatisticCustomPlotMonths->setMinimumSize(QSize(0, 300));
 
-        gridLayout->addWidget(label_8, 4, 0, 1, 1);
+        gridLayout_2->addWidget(FormStatisticCustomPlotMonths, 3, 0, 1, 1);
 
-        widget = new QWidget(FormStatistic);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setMinimumSize(QSize(0, 300));
+        FormStatisticCustomPlotHours = new QCustomPlot(scrollAreaWidgetContents);
+        FormStatisticCustomPlotHours->setObjectName(QString::fromUtf8("FormStatisticCustomPlotHours"));
+        FormStatisticCustomPlotHours->setMinimumSize(QSize(0, 300));
 
-        gridLayout->addWidget(widget, 5, 0, 1, 4);
+        gridLayout_2->addWidget(FormStatisticCustomPlotHours, 0, 0, 1, 1);
 
-        widget_2 = new QWidget(FormStatistic);
-        widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        widget_2->setMinimumSize(QSize(0, 300));
+        FormStatisticScrollAreaCustomPlots->setWidget(scrollAreaWidgetContents);
 
-        gridLayout->addWidget(widget_2, 6, 0, 1, 4);
+        gridLayout->addWidget(FormStatisticScrollAreaCustomPlots, 5, 0, 1, 3);
 
-        widget_3 = new QWidget(FormStatistic);
-        widget_3->setObjectName(QString::fromUtf8("widget_3"));
-        widget_3->setMinimumSize(QSize(0, 300));
+        FormStatisticLabelLogo = new QLabel(FormStatistic);
+        FormStatisticLabelLogo->setObjectName(QString::fromUtf8("FormStatisticLabelLogo"));
 
-        gridLayout->addWidget(widget_3, 7, 0, 1, 4);
+        gridLayout->addWidget(FormStatisticLabelLogo, 0, 0, 1, 2);
 
 
         retranslateUi(FormStatistic);
@@ -114,15 +127,11 @@ public:
     void retranslateUi(QWidget *FormStatistic)
     {
         FormStatistic->setWindowTitle(QCoreApplication::translate("FormStatistic", "Form", nullptr));
-        label->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
-        pushButton->setText(QCoreApplication::translate("FormStatistic", "PushButton", nullptr));
-        label_2->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
-        label_3->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
-        label_4->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
-        label_5->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
-        label_6->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
-        label_7->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
-        label_8->setText(QCoreApplication::translate("FormStatistic", "TextLabel", nullptr));
+        FormStatisticButtonReturn->setText(QCoreApplication::translate("FormStatistic", "Return", nullptr));
+        FormStatisticLabelName->setText(QCoreApplication::translate("FormStatistic", "Name", nullptr));
+        FormStatisticLabelAveragePercentage->setText(QCoreApplication::translate("FormStatistic", "AveragePercentage", nullptr));
+        FormStatisticLabelHundredPercentage->setText(QCoreApplication::translate("FormStatistic", "HundredPercentage", nullptr));
+        FormStatisticLabelLogo->setText(QCoreApplication::translate("FormStatistic", "(WIP)", nullptr));
     } // retranslateUi
 
 };

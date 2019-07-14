@@ -1,6 +1,5 @@
 release/imagerequest.o
 release/profile.o
-release/qcustomplot.o
 release/formcompare.o
 release/formstatistic.o
 release/main.o
@@ -11,10 +10,10 @@ release/formfriends.o
 release/qcustomplot.o
 release/moc_imagerequest.o
 release/moc_profile.o
-release/moc_qcustomplot.o
 release/moc_formcompare.o
 release/moc_formstatistic.o
 release/moc_mainwindow.o
 release/moc_formgames.o
 release/moc_formachievements.o
 release/moc_formfriends.o
+release/moc_qcustomplot.o
