@@ -126,3 +126,12 @@ FormStatistic::~FormStatistic()
 {
     delete ui;
 }
+
+void FormStatistic::closeEvent(QCloseEvent *){
+    emit return_to_profile(this);
+    //delete this;
+}
+void FormStatistic::on_FormStatisticButtonReturn_clicked(){
+    emit return_to_profile(this);
+//delete this;
+}

@@ -59,6 +59,8 @@ private slots:
     void on_FormAchievementsButtonAddValueNewCategory_clicked();
     void on_buttonNewCategoryDeleteValues_clicked();
     void on_buttonChangeCategoryDeleteValues_clicked();
+    void on_buttonNewCategorySelectValues_clicked();
+    void on_buttonNewCategoryUnSelectValues_clicked();
 
     void on_FormAchievementsButtonAcceptNewCategory_clicked();
 
@@ -77,6 +79,8 @@ private slots:
     void EditLineEditChangeCategoryValue();
     void on_buttonChangeCategoryUpValues_clicked();
     void on_buttonChangeCategoryDownValues_clicked();
+    void on_buttonChangeCategorySelectValues_clicked();
+    void on_buttonChangeCategoryUnSelectValues_clicked();
 
     void EditLineEditNewCategoryValue();
     void on_buttonNewCategoryUpValues_clicked();

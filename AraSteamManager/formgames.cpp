@@ -21,7 +21,7 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
     }
     if(FileLanguage.open(QIODevice::ReadOnly)){
         while(!FileLanguage.atEnd()){
-            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
+            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
         }
     }
     QIcon favorites;

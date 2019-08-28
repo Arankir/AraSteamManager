@@ -1,0 +1,30 @@
+Find
+Insert SteamId
+Favorites
+Set as my profile
+Statistics
+Settings
+Error
+Error opening file!
+Real name
+Account created
+Games
+Friends
+In game
+Last logoff
+Online
+Busy
+Away
+Snooze
+Looking to trade
+Looking to play
+Language
+Profile not exist!
+Loaded
+Exit
+Go to my profile
+Lvl
+VAC bans
+None
+Last
+days ago

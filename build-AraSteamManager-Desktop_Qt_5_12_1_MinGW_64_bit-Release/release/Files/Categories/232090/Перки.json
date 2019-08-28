@@ -1,0 +1,125 @@
+{
+    "name": "Перки",
+    "values": [
+        "Коммандос",
+        "Боец поддержки",
+        "Стрелок",
+        "Подрывник",
+        "Берсеркер",
+        "Меткий стрелок",
+        "Спецназовец",
+        "Медик",
+        "Поджигатель",
+        "Выживальщик"
+    ],
+    "Берсеркер": [
+        "Achievement_65",
+        "Achievement_30",
+        "Achievement_31",
+        "Achievement_66",
+        "Achievement_32",
+        "Achievement_33",
+        "Achievement_67",
+        "Achievement_34",
+        "Achievement_68"
+    ],
+    "Боец поддержки": [
+        "Achievement_45",
+        "Achievement_77",
+        "Achievement_46",
+        "Achievement_78",
+        "Achievement_47",
+        "Achievement_48",
+        "Achievement_79",
+        "Achievement_49",
+        "Achievement_80"
+    ],
+    "Выживальщик": [
+        "Achievement_164",
+        "Achievement_169",
+        "Achievement_165",
+        "Achievement_170",
+        "Achievement_166",
+        "Achievement_167",
+        "Achievement_168",
+        "Achievement_171",
+        "Achievement_172"
+    ],
+    "Коммандос": [
+        "Achievement_40",
+        "Achievement_73",
+        "Achievement_41",
+        "Achievement_74",
+        "Achievement_42",
+        "Achievement_43",
+        "Achievement_75",
+        "Achievement_44",
+        "Achievement_76"
+    ],
+    "Медик": [
+        "Achievement_35",
+        "Achievement_69",
+        "Achievement_36",
+        "Achievement_70",
+        "Achievement_37",
+        "Achievement_38",
+        "Achievement_71",
+        "Achievement_39",
+        "Achievement_72"
+    ],
+    "Меткий стрелок": [
+        "Achievement_110",
+        "Achievement_115",
+        "Achievement_111",
+        "Achievement_116",
+        "Achievement_112",
+        "Achievement_113",
+        "Achievement_117",
+        "Achievement_118",
+        "Achievement_114"
+    ],
+    "Поджигатель": [
+        "Achievement_50",
+        "Achievement_81",
+        "Achievement_51",
+        "Achievement_82",
+        "Achievement_52",
+        "Achievement_53",
+        "Achievement_83",
+        "Achievement_84",
+        "Achievement_54"
+    ],
+    "Подрывник": [
+        "Achievement_55",
+        "Achievement_85",
+        "Achievement_56",
+        "Achievement_86",
+        "Achievement_57",
+        "Achievement_58",
+        "Achievement_87",
+        "Achievement_88",
+        "Achievement_59"
+    ],
+    "Спецназовец": [
+        "Achievement_155",
+        "Achievement_160",
+        "Achievement_156",
+        "Achievement_161",
+        "Achievement_157",
+        "Achievement_158",
+        "Achievement_162",
+        "Achievement_159",
+        "Achievement_163"
+    ],
+    "Стрелок": [
+        "Achievement_60",
+        "Achievement_89",
+        "Achievement_61",
+        "Achievement_90",
+        "Achievement_62",
+        "Achievement_63",
+        "Achievement_91",
+        "Achievement_64",
+        "Achievement_92"
+    ]
+}

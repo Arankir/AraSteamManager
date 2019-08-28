@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         }
                         if(FileLanguage.open(QIODevice::ReadOnly)){
                             while(!FileLanguage.atEnd()){
-                                SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
+                                SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
                             }
                         }
                         }
@@ -139,6 +139,11 @@ void MainWindow::on_return(FormGames* a){
     a->deleteLater();
 }
 void MainWindow::on_return(FormFriends* a){
+    this->setVisible(true);
+    windowchildcount--;
+    a->deleteLater();
+}
+void MainWindow::on_return(FormStatistic* a){
     this->setVisible(true);
     windowchildcount--;
     a->deleteLater();
@@ -414,7 +419,7 @@ void MainWindow::on_FormProfileButtonStatistics_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
         statisticform = new FormStatistic(/*id,key,language,Theme,DocOwnedGames,SaveImages*/);
-        connect(statisticform,SIGNAL(return_to_profile(FormGames*)),this,SLOT(on_return(FormGames*)));
+        connect(statisticform,SIGNAL(return_to_profile(FormStatistic*)),this,SLOT(on_return(FormStatistic*)));
         statisticform->show();
         this->setVisible(false);
     }
