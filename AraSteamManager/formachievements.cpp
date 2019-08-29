@@ -529,7 +529,6 @@ void FormAchievements::on_FormAchievementsButtonUpdate_clicked(){
         }
 }
 
-
 void FormAchievements::on_FormAchievementsButtonCancelNewCategory_clicked(){
     ui->FormAchievementsTableWidgetAchievements->setColumnCount(7);
     ui->FormAchievementsGroupBoxAddCategory->setVisible(false);
@@ -566,10 +565,14 @@ void FormAchievements::on_FormAchievementsButtonAddValueNewCategory_clicked(){
         QLineEdit *val = new QLineEdit();
         QPushButton *up = new QPushButton();
         QPushButton *down = new QPushButton();
+        QPushButton *select = new QPushButton();
+        QPushButton *unselect = new QPushButton();
         btn->setObjectName("btnNewCategoryDeleteValue"+QString::number(newcategoryvalueslayout->rowCount()));
         val->setObjectName("liedNewCategoryValue"+QString::number(newcategoryvalueslayout->rowCount()));
         up->setObjectName("btnNewCategoryUpValue"+QString::number(newcategoryvalueslayout->rowCount()));
         down->setObjectName("btnNewCategoryDownValue"+QString::number(newcategoryvalueslayout->rowCount()));
+        select->setObjectName("btnNewCategorySelectValue"+QString::number(newcategoryvalueslayout->rowCount()));
+        unselect->setObjectName("btnNewCategoryUnSelectValue"+QString::number(newcategoryvalueslayout->rowCount()));
         int row = newcategoryvalueslayout->rowCount();
         if(row==0){
             up->setEnabled(false);
@@ -578,6 +581,8 @@ void FormAchievements::on_FormAchievementsButtonAddValueNewCategory_clicked(){
         }
         down->setEnabled(false);
         btn->setIcon(QIcon("images/program/delete.png"));
+        //select->setIcon();
+        //unselect->setIcon();
         switch (Theme) {
         case 1:{
             up->setIcon(QIcon("images/program/up_white.png"));
@@ -594,9 +599,13 @@ void FormAchievements::on_FormAchievementsButtonAddValueNewCategory_clicked(){
         connect(val,SIGNAL(editingFinished()),this,SLOT(EditLineEditNewCategoryValue()));
         connect(up,SIGNAL(clicked()),this,SLOT(on_buttonNewCategoryUpValues_clicked()));
         connect(down,SIGNAL(clicked()),this,SLOT(on_buttonNewCategoryDownValues_clicked()));
+        connect(select,SIGNAL(clicked()),this,SLOT(on_buttonNewCategorySelectValues_clicked()));
+        connect(unselect,SIGNAL(clicked()),this,SLOT(on_buttonNewCategoryUnSelectValues_clicked()));
         bl->addWidget(val);
         bl->addWidget(up);
         bl->addWidget(down);
+        bl->addWidget(select);
+        bl->addWidget(unselect);
         bl->addWidget(btn);
         bl->setMargin(0);
         QWidget *Wbl = new QWidget;
@@ -779,8 +788,36 @@ void FormAchievements::on_buttonNewCategoryDeleteValues_clicked(){
         butn = findChild<QPushButton*>("btnNewCategoryDownValue"+QString::number(i));
         if(butn)
             butn->setObjectName("btnNewCategoryDownValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnNewCategorySelectValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnNewCategorySelectValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnNewCategoryUnSelectValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnNewCategoryUnSelectValue"+QString::number(i-1));
         i++;
     }
+}
+void FormAchievements::on_buttonNewCategorySelectValues_clicked(){
+    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    int j=btn->objectName().mid(25,btn->objectName().length()-25).toInt();
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(1);
+    QList<QTableWidgetItem *> rows = ui->FormAchievementsTableWidgetAchievements->selectedItems();
+    qDebug()<<rows.size();
+    for (int i=0;i<rows.size();i++) {
+        ui->FormAchievementsTableWidgetAchievements->item(rows.at(i)->row(),7+j)->setCheckState(Qt::Checked);
+    }
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(0);
+}
+void FormAchievements::on_buttonNewCategoryUnSelectValues_clicked(){
+    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    int j=btn->objectName().mid(27,btn->objectName().length()-27).toInt();
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(1);
+    QList<QTableWidgetItem *> rows = ui->FormAchievementsTableWidgetAchievements->selectedItems();
+    qDebug()<<rows.size();
+    for (int i=0;i<rows.size();i++) {
+        ui->FormAchievementsTableWidgetAchievements->item(rows.at(i)->row(),7+j)->setCheckState(Qt::Unchecked);
+    }
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(0);
 }
 
 void FormAchievements::on_FormAchievementsComboBoxCategoriesChangeCategory_activated(int index){
@@ -805,13 +842,19 @@ void FormAchievements::on_FormAchievementsComboBoxCategoriesChangeCategory_activ
                 QLineEdit *val = new QLineEdit(categor.object().value("values").toArray().at(i).toString());
                 QPushButton *up = new QPushButton();
                 QPushButton *down = new QPushButton();
+                QPushButton *select = new QPushButton();
+                QPushButton *unselect = new QPushButton();
                 btn->setObjectName("btnChangeCategoryDeleteValue"+QString::number(changecategoryvalueslayout->rowCount()));
                 val->setObjectName("liedChangeCategoryValue"+QString::number(changecategoryvalueslayout->rowCount()));
                 up->setObjectName("btnChangeCategoryUpValue"+QString::number(changecategoryvalueslayout->rowCount()));
                 down->setObjectName("btnChangeCategoryDownValue"+QString::number(changecategoryvalueslayout->rowCount()));
+                select->setObjectName("btnChangeCategorySelectValue"+QString::number(changecategoryvalueslayout->rowCount()));
+                unselect->setObjectName("btnChangeCategoryUnSelectValue"+QString::number(changecategoryvalueslayout->rowCount()));
                 if(i==0) up->setEnabled(false);
                 if(i==categor.object().value("values").toArray().size()-1) down->setEnabled(false);
                 btn->setIcon(QIcon("images/program/delete.png"));
+                //select->setIcon();
+                //unselect->setIcon();
                 switch (Theme) {
                 case 1:{
                     up->setIcon(QIcon("images/program/up_white.png"));
@@ -828,10 +871,14 @@ void FormAchievements::on_FormAchievementsComboBoxCategoriesChangeCategory_activ
                 connect(val,SIGNAL(editingFinished()),this,SLOT(EditLineEditChangeCategoryValue()));
                 connect(up,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryUpValues_clicked()));
                 connect(down,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryDownValues_clicked()));
+                connect(select,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategorySelectValues_clicked()));
+                connect(unselect,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryUnSelectValues_clicked()));
                 //changecategoryvalueslayout->addRow(categor.object().value("values").toArray().at(i).toString(),btn);
                 bl->addWidget(val);
                 bl->addWidget(up);
                 bl->addWidget(down);
+                bl->addWidget(select);
+                bl->addWidget(unselect);
                 bl->addWidget(btn);
                 bl->setMargin(0);
                 QWidget *Wbl = new QWidget;
@@ -889,10 +936,14 @@ void FormAchievements::on_FormAchievementsButtonAddValueChangeCategory_clicked()
         QLineEdit *val = new QLineEdit();
         QPushButton *up = new QPushButton();
         QPushButton *down = new QPushButton();
+        QPushButton *select = new QPushButton();
+        QPushButton *unselect = new QPushButton();
         btn->setObjectName("btnChangeCategoryDeleteValue"+QString::number(changecategoryvalueslayout->rowCount()));
         val->setObjectName("liedChangeCategoryValue"+QString::number(changecategoryvalueslayout->rowCount()));
         up->setObjectName("btnChangeCategoryUpValue"+QString::number(changecategoryvalueslayout->rowCount()));
         down->setObjectName("btnChangeCategoryDownValue"+QString::number(changecategoryvalueslayout->rowCount()));
+        select->setObjectName("btnChangeCategorySelectValue"+QString::number(changecategoryvalueslayout->rowCount()));
+        unselect->setObjectName("btnChangeCategoryUnSelectValue"+QString::number(changecategoryvalueslayout->rowCount()));
         int row = changecategoryvalueslayout->rowCount();
         if(row==0){
             up->setEnabled(false);
@@ -901,6 +952,8 @@ void FormAchievements::on_FormAchievementsButtonAddValueChangeCategory_clicked()
         }
         down->setEnabled(false);
         btn->setIcon(QIcon("images/program/delete.png"));
+        //select->setIcon();
+        //unselect->setIcon();
         switch (Theme) {
         case 1:{
             up->setIcon(QIcon("images/program/up_white.png"));
@@ -917,9 +970,13 @@ void FormAchievements::on_FormAchievementsButtonAddValueChangeCategory_clicked()
         connect(val,SIGNAL(editingFinished()),this,SLOT(EditLineEditChangeCategoryValue()));
         connect(up,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryUpValues_clicked()));
         connect(down,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryDownValues_clicked()));
+        connect(select,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategorySelectValues_clicked()));
+        connect(unselect,SIGNAL(clicked()),this,SLOT(on_buttonChangeCategoryUnSelectValues_clicked()));
         bl->addWidget(val);
         bl->addWidget(up);
         bl->addWidget(down);
+        bl->addWidget(select);
+        bl->addWidget(unselect);
         bl->addWidget(btn);
         bl->setMargin(0);
         QWidget *Wbl = new QWidget;
@@ -1142,8 +1199,36 @@ void FormAchievements::on_buttonChangeCategoryDeleteValues_clicked(){
         butn = findChild<QPushButton*>("btnChangeCategoryDownValue"+QString::number(i));
         if(butn)
             butn->setObjectName("btnChangeCategoryDownValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnChangeCategorySelectValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnChangeCategorySelectValue"+QString::number(i-1));
+        butn = findChild<QPushButton*>("btnChangeCategoryUnSelectValue"+QString::number(i));
+        if(butn)
+            butn->setObjectName("btnChangeCategoryUnSelectValue"+QString::number(i-1));
         i++;
     }
+}
+void FormAchievements::on_buttonChangeCategorySelectValues_clicked(){
+    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    int j=btn->objectName().mid(28,btn->objectName().length()-28).toInt();
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(1);
+    QList<QTableWidgetItem *> rows = ui->FormAchievementsTableWidgetAchievements->selectedItems();
+    qDebug()<<rows.size();
+    for (int i=0;i<rows.size();i++) {
+        ui->FormAchievementsTableWidgetAchievements->item(rows.at(i)->row(),7+j)->setCheckState(Qt::Checked);
+    }
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(0);
+}
+void FormAchievements::on_buttonChangeCategoryUnSelectValues_clicked(){
+    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    int j=btn->objectName().mid(30,btn->objectName().length()-30).toInt();
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(1);
+    QList<QTableWidgetItem *> rows = ui->FormAchievementsTableWidgetAchievements->selectedItems();
+    qDebug()<<rows.size();
+    for (int i=0;i<rows.size();i++) {
+        ui->FormAchievementsTableWidgetAchievements->item(rows.at(i)->row(),7+j)->setCheckState(Qt::Unchecked);
+    }
+    ui->FormAchievementsTableWidgetAchievements->selectColumn(0);
 }
 
 void FormAchievements::on_FormAchievementsButtonCompare_clicked(){

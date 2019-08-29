@@ -25,23 +25,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    class/imagerequest.cpp \
+    class/profile.cpp \
     formcompare.cpp \
-    imagerequest.cpp \
         main.cpp \
         mainwindow.cpp \
     formgames.cpp \
     formachievements.cpp \
-    formfriends.cpp \
-    profile.cpp
+    formfriends.cpp
 
 HEADERS += \
+    class/imagerequest.h \
+    class/profile.h \
     formcompare.h \
-    imagerequest.h \
         mainwindow.h \
     formgames.h \
     formachievements.h \
-    formfriends.h \
-    profile.h
+    formfriends.h
 
 FORMS += \
     formcompare.ui \
