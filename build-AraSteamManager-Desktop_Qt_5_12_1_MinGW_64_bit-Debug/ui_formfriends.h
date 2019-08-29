@@ -38,6 +38,7 @@ public:
     QPushButton *FormFriendsBFind;
     QCheckBox *FormFriendsChBOpenProfile;
     QCheckBox *FormFriendsChBFavorites;
+    QSpacerItem *horizontalSpacer_2;
     QLineEdit *FormFriendsLineEditName;
     QTableWidget *FormFriendsTWFriends;
 
@@ -74,7 +75,7 @@ public:
         FormFriendsBFind = new QPushButton(FormFriendsGBFilter);
         FormFriendsBFind->setObjectName(QString::fromUtf8("FormFriendsBFind"));
 
-        gridLayout_2->addWidget(FormFriendsBFind, 0, 3, 1, 1);
+        gridLayout_2->addWidget(FormFriendsBFind, 0, 4, 1, 1);
 
         FormFriendsChBOpenProfile = new QCheckBox(FormFriendsGBFilter);
         FormFriendsChBOpenProfile->setObjectName(QString::fromUtf8("FormFriendsChBOpenProfile"));
@@ -86,10 +87,14 @@ public:
 
         gridLayout_2->addWidget(FormFriendsChBFavorites, 1, 2, 1, 1);
 
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_2, 1, 3, 1, 1);
+
         FormFriendsLineEditName = new QLineEdit(FormFriendsGBFilter);
         FormFriendsLineEditName->setObjectName(QString::fromUtf8("FormFriendsLineEditName"));
 
-        gridLayout_2->addWidget(FormFriendsLineEditName, 0, 0, 1, 3);
+        gridLayout_2->addWidget(FormFriendsLineEditName, 0, 0, 1, 4);
 
 
         gridLayout_3->addWidget(FormFriendsGBFilter, 5, 0, 1, 3);

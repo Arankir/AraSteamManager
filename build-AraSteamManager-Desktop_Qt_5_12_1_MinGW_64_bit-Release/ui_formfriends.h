@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formfriends.ui'
 **
-** Created by: Qt User Interface Compiler version 5.13.0
+** Created by: Qt User Interface Compiler version 5.12.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -38,6 +38,7 @@ public:
     QPushButton *FormFriendsBFind;
     QCheckBox *FormFriendsChBOpenProfile;
     QCheckBox *FormFriendsChBFavorites;
+    QSpacerItem *horizontalSpacer_2;
     QLineEdit *FormFriendsLineEditName;
     QTableWidget *FormFriendsTWFriends;
 
@@ -74,7 +75,7 @@ public:
         FormFriendsBFind = new QPushButton(FormFriendsGBFilter);
         FormFriendsBFind->setObjectName(QString::fromUtf8("FormFriendsBFind"));
 
-        gridLayout_2->addWidget(FormFriendsBFind, 0, 3, 1, 1);
+        gridLayout_2->addWidget(FormFriendsBFind, 0, 4, 1, 1);
 
         FormFriendsChBOpenProfile = new QCheckBox(FormFriendsGBFilter);
         FormFriendsChBOpenProfile->setObjectName(QString::fromUtf8("FormFriendsChBOpenProfile"));
@@ -86,10 +87,14 @@ public:
 
         gridLayout_2->addWidget(FormFriendsChBFavorites, 1, 2, 1, 1);
 
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer_2, 1, 3, 1, 1);
+
         FormFriendsLineEditName = new QLineEdit(FormFriendsGBFilter);
         FormFriendsLineEditName->setObjectName(QString::fromUtf8("FormFriendsLineEditName"));
 
-        gridLayout_2->addWidget(FormFriendsLineEditName, 0, 0, 1, 3);
+        gridLayout_2->addWidget(FormFriendsLineEditName, 0, 0, 1, 4);
 
 
         gridLayout_3->addWidget(FormFriendsGBFilter, 5, 0, 1, 3);
@@ -127,29 +132,29 @@ public:
 
     void retranslateUi(QWidget *FormFriends)
     {
-        FormFriends->setWindowTitle(QCoreApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
-        FormFriendsLLogo->setText(QCoreApplication::translate("FormFriends", "Logo", nullptr));
-        FormFriendsBReturn->setText(QCoreApplication::translate("FormFriends", "Return", nullptr));
-        FormFriendsGBFilter->setTitle(QCoreApplication::translate("FormFriends", "Filter", nullptr));
-        FormFriendsBFind->setText(QCoreApplication::translate("FormFriends", "Find", nullptr));
-        FormFriendsChBOpenProfile->setText(QCoreApplication::translate("FormFriends", "Open profile", nullptr));
-        FormFriendsChBFavorites->setText(QCoreApplication::translate("FormFriends", "Favorites", nullptr));
+        FormFriends->setWindowTitle(QApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
+        FormFriendsLLogo->setText(QApplication::translate("FormFriends", "Logo", nullptr));
+        FormFriendsBReturn->setText(QApplication::translate("FormFriends", "Return", nullptr));
+        FormFriendsGBFilter->setTitle(QApplication::translate("FormFriends", "Filter", nullptr));
+        FormFriendsBFind->setText(QApplication::translate("FormFriends", "Find", nullptr));
+        FormFriendsChBOpenProfile->setText(QApplication::translate("FormFriends", "Open profile", nullptr));
+        FormFriendsChBFavorites->setText(QApplication::translate("FormFriends", "Favorites", nullptr));
         QTableWidgetItem *___qtablewidgetitem = FormFriendsTWFriends->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QCoreApplication::translate("FormFriends", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));
+        ___qtablewidgetitem->setText(QApplication::translate("FormFriends", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = FormFriendsTWFriends->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QCoreApplication::translate("FormFriends", "\320\235\320\276\320\262\321\213\320\271 \321\201\321\202\320\276\320\273\320\261\320\265\321\206", nullptr));
+        ___qtablewidgetitem1->setText(QApplication::translate("FormFriends", "\320\235\320\276\320\262\321\213\320\271 \321\201\321\202\320\276\320\273\320\261\320\265\321\206", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = FormFriendsTWFriends->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QCoreApplication::translate("FormFriends", "\320\230\320\274\321\217", nullptr));
+        ___qtablewidgetitem2->setText(QApplication::translate("FormFriends", "\320\230\320\274\321\217", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = FormFriendsTWFriends->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QCoreApplication::translate("FormFriends", "\320\241\321\202\320\260\321\202\321\203\321\201", nullptr));
+        ___qtablewidgetitem3->setText(QApplication::translate("FormFriends", "\320\241\321\202\320\260\321\202\321\203\321\201", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = FormFriendsTWFriends->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QCoreApplication::translate("FormFriends", "\320\237\321\200\320\270\320\262\320\260\321\202\320\275\320\276\321\201\321\202\321\214", nullptr));
+        ___qtablewidgetitem4->setText(QApplication::translate("FormFriends", "\320\237\321\200\320\270\320\262\320\260\321\202\320\275\320\276\321\201\321\202\321\214", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = FormFriendsTWFriends->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("FormFriends", "\320\260\320\271\320\264\320\270", nullptr));
+        ___qtablewidgetitem5->setText(QApplication::translate("FormFriends", "\320\260\320\271\320\264\320\270", nullptr));
         QTableWidgetItem *___qtablewidgetitem6 = FormFriendsTWFriends->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QCoreApplication::translate("FormFriends", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\275\320\260 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
+        ___qtablewidgetitem6->setText(QApplication::translate("FormFriends", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\275\320\260 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         QTableWidgetItem *___qtablewidgetitem7 = FormFriendsTWFriends->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QCoreApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
+        ___qtablewidgetitem7->setText(QApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
     } // retranslateUi
 
 };

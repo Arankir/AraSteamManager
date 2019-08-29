@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         if (settings.open(QIODevice::ReadOnly)){
             QStringList setting;
             while(!settings.atEnd()){
-                setting << QString::fromLocal8Bit(settings.readLine()).remove("\r\n");
+                setting << QString::fromLocal8Bit(settings.readLine()).remove("\r\n").remove("\n");
             }
             while (!setting.isEmpty()) {
                 QString sett=setting.takeAt(0);
@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         }
                         if(FileLanguage.open(QIODevice::ReadOnly)){
                             while(!FileLanguage.atEnd()){
-                                SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
+                                SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
                             }
                         }
                         }

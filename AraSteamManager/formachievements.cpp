@@ -25,7 +25,7 @@ FormAchievements::FormAchievements(QString keys, int languages, int Themes, QStr
     }
     if(FileLanguage.open(QIODevice::ReadOnly)){
         while(!FileLanguage.atEnd()){
-            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n");
+            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
         }
     }
     QIcon favorites;
