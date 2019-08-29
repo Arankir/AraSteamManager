@@ -21,11 +21,29 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="FormStatisticLabelName">
+   <item row="2" column="0">
+    <widget class="QLabel" name="FormStatisticLabelAveragePercentage">
      <property name="text">
-      <string>Name</string>
+      <string>AveragePercentage</string>
      </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="3">
+    <widget class="QScrollArea" name="FormStatisticScrollAreaCustomPlots">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>916</width>
+        <height>699</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2"/>
+     </widget>
     </widget>
    </item>
    <item row="1" column="1">
@@ -41,10 +59,17 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="FormStatisticLabelAveragePercentage">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="FormStatisticLabelLogo">
      <property name="text">
-      <string>AveragePercentage</string>
+      <string>(WIP)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="FormStatisticLabelName">
+     <property name="text">
+      <string>Name</string>
      </property>
     </widget>
    </item>
@@ -55,92 +80,8 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="3">
-    <widget class="QCustomPlot" name="FormStatisticCustomPlotGames" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>100</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="3">
-    <widget class="QScrollArea" name="FormStatisticScrollAreaCustomPlots">
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>902</width>
-        <height>1236</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="4" column="0">
-        <widget class="QCustomPlot" name="FormStatisticCustomPlotYears" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>300</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QCustomPlot" name="FormStatisticCustomPlotDays" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>300</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QCustomPlot" name="FormStatisticCustomPlotMonths" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>300</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QCustomPlot" name="FormStatisticCustomPlotHours" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>300</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="FormStatisticLabelLogo">
-     <property name="text">
-      <string>(WIP)</string>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QCustomPlot</class>
-   <extends>QWidget</extends>
-   <header>qcustomplot.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -7,7 +7,6 @@ debug/mainwindow.o
 debug/formgames.o
 debug/formachievements.o
 debug/formfriends.o
-debug/qcustomplot.o
 debug/moc_imagerequest.o
 debug/moc_profile.o
 debug/moc_formcompare.o
@@ -16,4 +15,3 @@ debug/moc_mainwindow.o
 debug/moc_formgames.o
 debug/moc_formachievements.o
 debug/moc_formfriends.o
-debug/moc_qcustomplot.o

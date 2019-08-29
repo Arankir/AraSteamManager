@@ -6,7 +6,7 @@ FormStatistic::FormStatistic(QWidget *parent) :
     ui(new Ui::FormStatistic)
 {
     ui->setupUi(this);
-    int Theme=1;
+   /* int Theme=1;
     switch (Theme) {
     case 1:{
         ui->FormStatisticCustomPlotGames->setBackground(QBrush(QColor(53, 53, 53)));
@@ -119,7 +119,7 @@ FormStatistic::FormStatistic(QWidget *parent) :
     ui->FormStatisticCustomPlotMonths->xAxis->setTickLength(1);
     ui->FormStatisticCustomPlotMonths->xAxis->setSubTicks(false);
     ui->FormStatisticCustomPlotMonths->yAxis->setTickLength(1);
-    ui->FormStatisticCustomPlotMonths->yAxis->setSubTicks(false);
+    ui->FormStatisticCustomPlotMonths->yAxis->setSubTicks(false);*/
 }
 
 FormStatistic::~FormStatistic()

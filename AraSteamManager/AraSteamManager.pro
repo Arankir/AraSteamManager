@@ -6,7 +6,7 @@
 
 QT       += core gui network
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AraSteamManager
 TEMPLATE = app
@@ -33,8 +33,7 @@ SOURCES += \
         mainwindow.cpp \
     formgames.cpp \
     formachievements.cpp \
-    formfriends.cpp \
-    qcustomplot.cpp
+    formfriends.cpp
 
 HEADERS += \
     class/imagerequest.h \
@@ -44,8 +43,7 @@ HEADERS += \
         mainwindow.h \
     formgames.h \
     formachievements.h \
-    formfriends.h \
-    qcustomplot.h
+    formfriends.h
 
 FORMS += \
     formcompare.ui \
