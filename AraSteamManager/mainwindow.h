@@ -16,6 +16,11 @@
 #include <formfriends.h>
 #include <QFile>
 #include <QKeyEvent>
+#include <class/steamapiprofile.h>
+#include <class/steamapibans.h>
+#include <class/steamapilevels.h>
+#include <class/steamapigames.h>
+#include <class/steamapifriends.h>
 
 namespace Ui {
 class MainWindow;
@@ -38,13 +43,13 @@ private slots:
 
     void keyPressEvent(QKeyEvent *event);
 
-    void on_FormProfileButtonFindProfile_clicked();
-    void on_FormProfileButtonGames_clicked();
-    void on_FormProfileButtonFriends_clicked();
-    void on_FormProfileButtonSetProfile_clicked();
-    void on_FormProfileButtonExit_clicked();
+    void on_ButtonFindProfile_clicked();
+    void on_ButtonGames_clicked();
+    void on_ButtonFriends_clicked();
+    void on_ButtonSetProfile_clicked();
+    void on_ButtonExit_clicked();
 
-    void on_FormProfileButtonGoToMyProfile_clicked();
+    void on_ButtonGoToMyProfile_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -54,10 +59,12 @@ private:
     int SaveImages=0;
     int windowchildcount=0;
     QString id;
-    QJsonDocument DocPlayerSummaries;
     QJsonDocument DocOwnedGames;
     QJsonDocument DocFriendList;
     QStringList SLLanguage;
+    SteamAPIProfile Profile;
+    SteamAPIGames Games;
+    SteamAPIFriends Friends;
 };
 
 #endif // MAINWINDOW_H

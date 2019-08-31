@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QLabel" name="FormProfileLabelLogo">
+     <widget class="QLabel" name="LabelLogo">
       <property name="text">
        <string>Logo</string>
       </property>
@@ -36,28 +36,28 @@
      </spacer>
     </item>
     <item row="11" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonFriends">
+     <widget class="QPushButton" name="ButtonFriends">
       <property name="text">
        <string>Friends</string>
       </property>
      </widget>
     </item>
     <item row="13" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonStatistics">
+     <widget class="QPushButton" name="ButtonStatistics">
       <property name="text">
        <string>Statistics</string>
       </property>
      </widget>
     </item>
     <item row="0" column="5">
-     <widget class="QPushButton" name="FormProfileButtonExit">
+     <widget class="QPushButton" name="ButtonExit">
       <property name="text">
        <string>Exit</string>
       </property>
      </widget>
     </item>
     <item row="5" column="0" colspan="4">
-     <widget class="QLabel" name="FormProfileLabelRealName">
+     <widget class="QLabel" name="LabelRealName">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -69,7 +69,7 @@
      </widget>
     </item>
     <item row="1" column="5">
-     <widget class="QPushButton" name="FormProfileButtonFindProfile">
+     <widget class="QPushButton" name="ButtonFindProfile">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -79,28 +79,28 @@
      </widget>
     </item>
     <item row="2" column="0" colspan="3">
-     <widget class="QLabel" name="FormProfileAvatar">
+     <widget class="QLabel" name="LabelAvatar">
       <property name="text">
        <string>Avatar</string>
       </property>
      </widget>
     </item>
     <item row="14" column="0">
-     <widget class="QPushButton" name="FormProfileButtonSetProfile">
+     <widget class="QPushButton" name="ButtonSetProfile">
       <property name="text">
        <string>Set as my profile</string>
       </property>
      </widget>
     </item>
     <item row="12" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonFavorites">
+     <widget class="QPushButton" name="ButtonFavorites">
       <property name="text">
        <string>Favorites</string>
       </property>
      </widget>
     </item>
     <item row="0" column="4">
-     <widget class="QPushButton" name="FormProfileButtonSettings">
+     <widget class="QPushButton" name="ButtonSettings">
       <property name="text">
        <string>Settings</string>
       </property>
@@ -120,7 +120,7 @@
      </spacer>
     </item>
     <item row="1" column="0" colspan="5">
-     <widget class="QLineEdit" name="FormProfileLineEditIdProfile">
+     <widget class="QLineEdit" name="LineEditIdProfile">
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(26, 26, 26);</string>
@@ -128,7 +128,7 @@ color: rgb(26, 26, 26);</string>
      </widget>
     </item>
     <item row="10" column="0" colspan="2">
-     <widget class="QPushButton" name="FormProfileButtonGames">
+     <widget class="QPushButton" name="ButtonGames">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -138,14 +138,14 @@ color: rgb(26, 26, 26);</string>
      </widget>
     </item>
     <item row="14" column="1">
-     <widget class="QPushButton" name="FormProfileButtonGoToMyProfile">
+     <widget class="QPushButton" name="ButtonGoToMyProfile">
       <property name="text">
        <string>Go to my profile</string>
       </property>
      </widget>
     </item>
     <item row="6" column="0" colspan="3">
-     <widget class="QLabel" name="FormProfileLabelBans">
+     <widget class="QLabel" name="LabelBans">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -160,7 +160,7 @@ color: rgb(26, 26, 26);</string>
      </widget>
     </item>
     <item row="4" column="0" colspan="3">
-     <widget class="QLabel" name="FormProfileLabellvl">
+     <widget class="QLabel" name="Labellvl">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -172,7 +172,7 @@ color: rgb(26, 26, 26);</string>
      </widget>
     </item>
     <item row="8" column="0" colspan="3">
-     <widget class="QLabel" name="FormProfileLabelLocCountryCode">
+     <widget class="QLabel" name="LabelLocCountryCode">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -184,7 +184,7 @@ color: rgb(26, 26, 26);</string>
      </widget>
     </item>
     <item row="7" column="0" colspan="3">
-     <widget class="QLabel" name="FormProfileLabelTimeCreated">
+     <widget class="QLabel" name="LabelTimeCreated">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -196,7 +196,7 @@ color: rgb(26, 26, 26);</string>
      </widget>
     </item>
     <item row="3" column="0" colspan="5">
-     <widget class="QLabel" name="FormProfileLabelProfileUrl">
+     <widget class="QLabel" name="LabelProfileUrl">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -211,7 +211,7 @@ color: rgb(26, 26, 26);</string>
      </widget>
     </item>
     <item row="2" column="5" rowspan="7">
-     <widget class="QLabel" name="FormProfileLabelPersonaState">
+     <widget class="QLabel" name="LabelPersonaState">
       <property name="maximumSize">
        <size>
         <width>100</width>

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[16];
-    char stringdata0[321];
+    char stringdata0[255];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,23 +41,22 @@ QT_MOC_LITERAL(6, 63, 2), // "id"
 QT_MOC_LITERAL(7, 66, 13), // "keyPressEvent"
 QT_MOC_LITERAL(8, 80, 10), // "QKeyEvent*"
 QT_MOC_LITERAL(9, 91, 5), // "event"
-QT_MOC_LITERAL(10, 97, 39), // "on_FormProfileButtonFindProfi..."
-QT_MOC_LITERAL(11, 137, 33), // "on_FormProfileButtonGames_cli..."
-QT_MOC_LITERAL(12, 171, 35), // "on_FormProfileButtonFriends_c..."
-QT_MOC_LITERAL(13, 207, 38), // "on_FormProfileButtonSetProfil..."
-QT_MOC_LITERAL(14, 246, 32), // "on_FormProfileButtonExit_clicked"
-QT_MOC_LITERAL(15, 279, 41) // "on_FormProfileButtonGoToMyPro..."
+QT_MOC_LITERAL(10, 97, 28), // "on_ButtonFindProfile_clicked"
+QT_MOC_LITERAL(11, 126, 22), // "on_ButtonGames_clicked"
+QT_MOC_LITERAL(12, 149, 24), // "on_ButtonFriends_clicked"
+QT_MOC_LITERAL(13, 174, 27), // "on_ButtonSetProfile_clicked"
+QT_MOC_LITERAL(14, 202, 21), // "on_ButtonExit_clicked"
+QT_MOC_LITERAL(15, 224, 30) // "on_ButtonGoToMyProfile_clicked"
 
     },
     "MainWindow\0on_return\0\0FormGames*\0"
     "FormFriends*\0on_go_to_profile\0id\0"
     "keyPressEvent\0QKeyEvent*\0event\0"
-    "on_FormProfileButtonFindProfile_clicked\0"
-    "on_FormProfileButtonGames_clicked\0"
-    "on_FormProfileButtonFriends_clicked\0"
-    "on_FormProfileButtonSetProfile_clicked\0"
-    "on_FormProfileButtonExit_clicked\0"
-    "on_FormProfileButtonGoToMyProfile_clicked"
+    "on_ButtonFindProfile_clicked\0"
+    "on_ButtonGames_clicked\0on_ButtonFriends_clicked\0"
+    "on_ButtonSetProfile_clicked\0"
+    "on_ButtonExit_clicked\0"
+    "on_ButtonGoToMyProfile_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -111,12 +110,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->on_return((*reinterpret_cast< FormFriends*(*)>(_a[1]))); break;
         case 2: _t->on_go_to_profile((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
-        case 4: _t->on_FormProfileButtonFindProfile_clicked(); break;
-        case 5: _t->on_FormProfileButtonGames_clicked(); break;
-        case 6: _t->on_FormProfileButtonFriends_clicked(); break;
-        case 7: _t->on_FormProfileButtonSetProfile_clicked(); break;
-        case 8: _t->on_FormProfileButtonExit_clicked(); break;
-        case 9: _t->on_FormProfileButtonGoToMyProfile_clicked(); break;
+        case 4: _t->on_ButtonFindProfile_clicked(); break;
+        case 5: _t->on_ButtonGames_clicked(); break;
+        case 6: _t->on_ButtonFriends_clicked(); break;
+        case 7: _t->on_ButtonSetProfile_clicked(); break;
+        case 8: _t->on_ButtonExit_clicked(); break;
+        case 9: _t->on_ButtonGoToMyProfile_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

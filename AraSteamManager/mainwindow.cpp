@@ -3,21 +3,21 @@
 
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
-    ui->FormProfileAvatar->setText("");
-    ui->FormProfileLabelLogo->setText("(WIP)");
-    ui->FormProfileLabelTimeCreated->setText("");
-    ui->FormProfileLabelPersonaState->setText("");
-    ui->FormProfileLabelLocCountryCode->setText("");
-    ui->FormProfileLabelProfileUrl->setText("");
-    ui->FormProfileLabelRealName->setText("");
-    ui->FormProfileLabellvl->setText("");
-    ui->FormProfileLabelBans->setText("");
-    ui->FormProfileLabelPersonaState->setWordWrap(true);
-    ui->FormProfileButtonGames->setVisible(false);
-    ui->FormProfileButtonFriends->setVisible(false);
-    ui->FormProfileButtonFavorites->setVisible(false);
-    ui->FormProfileButtonSetProfile->setVisible(false);
-    ui->FormProfileButtonStatistics->setVisible(false);
+    ui->LabelAvatar->setText("");
+    ui->LabelLogo->setText("(WIP)");
+    ui->LabelTimeCreated->setText("");
+    ui->LabelPersonaState->setText("");
+    ui->LabelLocCountryCode->setText("");
+    ui->LabelProfileUrl->setText("");
+    ui->LabelRealName->setText("");
+    ui->Labellvl->setText("");
+    ui->LabelBans->setText("");
+    ui->LabelPersonaState->setWordWrap(true);
+    ui->ButtonGames->setVisible(false);
+    ui->ButtonFriends->setVisible(false);
+    ui->ButtonFavorites->setVisible(false);
+    ui->ButtonSetProfile->setVisible(false);
+    ui->ButtonStatistics->setVisible(false);
     if(QFile::exists("Files/Settings.txt")){
         QFile settings("Files/Settings.txt");
         QFile FileLanguage;
@@ -30,8 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                 QString sett=setting.takeAt(0);
                 if(sett.indexOf("MyProfile=",0)!=-1){
                     if(sett.indexOf("MyProfile=none",0)==-1){
-                        ui->FormProfileLineEditIdProfile->setText(sett.mid(sett.indexOf("MyProfile=",0)+10,sett.length()));
-                        ui->FormProfileButtonFindProfile->click();
+                        ui->LineEditIdProfile->setText(sett.mid(sett.indexOf("MyProfile=",0)+10,sett.length()));
+                        ui->ButtonFindProfile->click();
                         }
                     }
                 if(sett.indexOf("Theme=",0)!=-1){
@@ -60,21 +60,21 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             settings.close();
             }
         }
-    ui->FormProfileButtonFindProfile->setText(" "+SLLanguage[0]);
-    ui->FormProfileLineEditIdProfile->setPlaceholderText(SLLanguage[1]);
-    ui->FormProfileButtonFavorites->setText(" "+SLLanguage[2]);
-    ui->FormProfileButtonSetProfile->setText(SLLanguage[3]);
-    ui->FormProfileButtonStatistics->setText(" "+SLLanguage[4]);
-    ui->FormProfileButtonSettings->setText(SLLanguage[5]);
-    ui->FormProfileButtonExit->setText(" "+SLLanguage[23]);
-    ui->FormProfileButtonGoToMyProfile->setText(SLLanguage[24]);
-    //        ui->FormProfileLabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //        ui->FormProfileLabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ui->ButtonFindProfile->setText(" "+SLLanguage[0]);
+    ui->LineEditIdProfile->setPlaceholderText(SLLanguage[1]);
+    ui->ButtonFavorites->setText(" "+SLLanguage[2]);
+    ui->ButtonSetProfile->setText(SLLanguage[3]);
+    ui->ButtonStatistics->setText(" "+SLLanguage[4]);
+    ui->ButtonSettings->setText(SLLanguage[5]);
+    ui->ButtonExit->setText(" "+SLLanguage[23]);
+    ui->ButtonGoToMyProfile->setText(SLLanguage[24]);
+    //        ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //        ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //    QPixmap pixmap2("images/program/statistic_white.png","PNG");
 //    QIcon ButtonIcon2(pixmap2);
-//    ui->FormProfileButtonStatistics->setIcon(ButtonIcon2);
-//    ui->FormProfileButtonSettings->setIconSize(pixmap.rect().size());
-//    ui->FormProfileButtonStatistics->setIconSize(QSize(13,13));
+//    ui->ButtonStatistics->setIcon(ButtonIcon2);
+//    ui->ButtonSettings->setIconSize(pixmap.rect().size());
+//    ui->ButtonStatistics->setIconSize(QSize(13,13));
     switch(Theme){
     case 1:{
         QPalette darkPalette;
@@ -84,23 +84,23 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(53, 53, 53),QColor(42, 130, 218),Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
         //                        тип               ,???      ,???               ,???                 ,???      ,???     ,цвет текста на кнопке,???  ,поле сзади,???
         qApp->setPalette(darkPalette);
-        ui->FormProfileButtonFindProfile->setIcon(QIcon("images/program/find_white.png"));
-        ui->FormProfileButtonFavorites->setIcon(QIcon("images/program/favorites_white.png"));
-        ui->FormProfileButtonStatistics->setIcon(QIcon("images/program/statistic_white.png"));
-        ui->FormProfileButtonSettings->setIcon(QIcon("images/program/settings_white.png"));
-        ui->FormProfileButtonExit->setIcon(QIcon("images/program/exit_white.png"));
-        ui->FormProfileButtonFriends->setIcon(QIcon("images/program/friends_white.png"));
-        ui->FormProfileButtonGames->setIcon(QIcon("images/program/games_white.png"));
+        ui->ButtonFindProfile->setIcon(QIcon("images/program/find_white.png"));
+        ui->ButtonFavorites->setIcon(QIcon("images/program/favorites_white.png"));
+        ui->ButtonStatistics->setIcon(QIcon("images/program/statistic_white.png"));
+        ui->ButtonSettings->setIcon(QIcon("images/program/settings_white.png"));
+        ui->ButtonExit->setIcon(QIcon("images/program/exit_white.png"));
+        ui->ButtonFriends->setIcon(QIcon("images/program/friends_white.png"));
+        ui->ButtonGames->setIcon(QIcon("images/program/games_white.png"));
         break;
         }
     case 2:{
-        ui->FormProfileButtonFindProfile->setIcon(QIcon("images/program/find_black.png"));
-        ui->FormProfileButtonFavorites->setIcon(QIcon("images/program/favorites_black.png"));
-        ui->FormProfileButtonStatistics->setIcon(QIcon("images/program/statistic_black.png"));
-        ui->FormProfileButtonSettings->setIcon(QIcon("images/program/settings_black.png"));
-        ui->FormProfileButtonExit->setIcon(QIcon("images/program/exit_black.png"));
-        ui->FormProfileButtonFriends->setIcon(QIcon("images/program/friends_black.png"));
-        ui->FormProfileButtonGames->setIcon(QIcon("images/program/games_black.png"));
+        ui->ButtonFindProfile->setIcon(QIcon("images/program/find_black.png"));
+        ui->ButtonFavorites->setIcon(QIcon("images/program/favorites_black.png"));
+        ui->ButtonStatistics->setIcon(QIcon("images/program/statistic_black.png"));
+        ui->ButtonSettings->setIcon(QIcon("images/program/settings_black.png"));
+        ui->ButtonExit->setIcon(QIcon("images/program/exit_black.png"));
+        ui->ButtonFriends->setIcon(QIcon("images/program/friends_black.png"));
+        ui->ButtonGames->setIcon(QIcon("images/program/games_black.png"));
         // Настраиваем палитру для цветовых ролей элементов интерфейса
         //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
         //    darkPalette.setColor(QPalette::WindowText, Qt::white);
@@ -127,7 +127,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 void MainWindow::keyPressEvent(QKeyEvent *event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
     if( event->key() == 16777220)
-        on_FormProfileButtonFindProfile_clicked();
+        on_ButtonFindProfile_clicked();
 }
 
 MainWindow::~MainWindow(){
@@ -144,143 +144,116 @@ void MainWindow::on_return(FormFriends* a){
     a->deleteLater();
 }
 void MainWindow::on_go_to_profile(QString id){
-    ui->FormProfileLineEditIdProfile->setText(id);
-    ui->FormProfileButtonFindProfile->click();
+    ui->LineEditIdProfile->setText(id);
+    ui->ButtonFindProfile->click();
 }
 
-void MainWindow::on_FormProfileButtonFindProfile_clicked(){
-    QString ids;
-    if(ui->FormProfileLineEditIdProfile->text().indexOf("steamcommunity.com/profiles/",0)>-1){
-        ids=ui->FormProfileLineEditIdProfile->text().remove("steamcommunity.com/profiles/").remove("https://").remove('\r').remove("/");
-    } else
-        if(ui->FormProfileLineEditIdProfile->text().indexOf("steamcommunity.com/id/",0)>-1){
-            QString vanity=ui->FormProfileLineEditIdProfile->text().remove("https://steamcommunity.com/id/").remove("https://").remove('\r').remove("/");
-            QNetworkAccessManager manager;
-            QEventLoop loop;  //Ждем ответ от сервера.
-            QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-            QNetworkReply &Reply = *manager.get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+key+"&vanityurl="+vanity+"&url_type=1"));
-            loop.exec();
-            QJsonDocument Doc = QJsonDocument::fromJson(Reply.readAll());
-            ids=Doc.object().value("response").toObject().value("steamid").toString();
-        } else
-            ids=ui->FormProfileLineEditIdProfile->text().remove('\r');
-    QNetworkAccessManager manager;
-    QEventLoop loop;  //Ждем ответ от сервера.
-    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+ids));
-    loop.exec();
-    DocPlayerSummaries = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll());
-    //{"response":
-    //{"players":
-    //[{"steamid":"76561198065018572",
-    //"communityvisibilitystate":3, (1 - the profile is not visible to you, 3 - the profile is "Public")
-    //"profilestate":1,
-    //"personaname":"Yuno",
-    //"lastlogoff":1555174765,
-    //"commentpermission":1,
-    //"profileurl":"https://steamcommunity.com/id/Arankir/",
-    //"avatar":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c.jpg",
-    //"avatarmedium":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_medium.jpg",
-    //"avatarfull":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_full.jpg",
-    //"personastate":1,
-    //"primaryclanid":"103582791434380590",
-    //"timecreated":1339187696,
-    //"personastateflags":0,
-    //"gameextrainfo":"Realm of the Mad God",
-    //"gameid":"200210",
-    //"loccountrycode":"JP",
-    //"locstatecode":"40",
-    //"loccityid":26111}]}}
-    if(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().size()>0){
+void MainWindow::on_ButtonFindProfile_clicked(){
+    QEventLoop loopp;
+    QObject::connect(&Profile, SIGNAL(finished()), &loopp, SLOT(quit()));
+    QString ids=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove("/").remove('\r');
+    if(ui->LineEditIdProfile->text().indexOf("id",0)>-1){
+        ids=ui->LineEditIdProfile->text().remove("id");
+        Profile.Set(key,ids,"vanity");
+        } else {
+            if(ui->LineEditIdProfile->text().indexOf("profiles",0)>-1)
+                ids=ui->LineEditIdProfile->text().remove("profiles");
+            Profile.Set(key,ids,"url");
+            }
+    loopp.exec();
+    if(Profile.GetStatus()=="success"){
         id=ids;
-        QNetworkReply &Replylevels = *manager.get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+key+"&steamid="+id));
-        loop.exec();
-        QJsonDocument Doclvl = QJsonDocument::fromJson(Replylevels.readAll());
-        //{"response":{"player_level":67}}
-        QNetworkReply &Replybans = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
-        loop.exec();
-        QJsonDocument Docban = QJsonDocument::fromJson(Replybans.readAll());
-        //{"players":[{
-        //"SteamId":"76561198065018572",
-        //"CommunityBanned":false,
-        //"VACBanned":false,
-        //"NumberOfVACBans":0,
-        //"DaysSinceLastBan":0,
-        //"NumberOfGameBans":0,
-        //"EconomyBan":"none"}]}
-        QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
-        loop.exec();
-        DocOwnedGames = QJsonDocument::fromJson(ReplyOwnedGames.readAll());
-        QNetworkReply &ReplyFriendList = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
-        loop.exec();
-        DocFriendList = QJsonDocument::fromJson(ReplyFriendList.readAll());
-        QJsonObject Account=DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject();
+        SteamAPIBans Bans(key,id);
+        QObject::connect(&Bans, SIGNAL(finished()), &loopp, SLOT(quit()));
+        loopp.exec();
+        SteamAPILevels Levels(key,id);
+        QObject::connect(&Levels, SIGNAL(finished()), &loopp, SLOT(quit()));
+        loopp.exec();
+        Games.Set(key,id,true,true);
+        QObject::connect(&Games, SIGNAL(finished()), &loopp, SLOT(quit()));
+        loopp.exec();
+        Friends.Set(key,id);
+        QObject::connect(&Friends, SIGNAL(finished()), &loopp, SLOT(quit()));
+        loopp.exec();
+        QNetworkAccessManager manager;
+        QEventLoop loop;  //Ждем ответ от сервера.
+        QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+            QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
+            loop.exec();
+            DocOwnedGames = QJsonDocument::fromJson(ReplyOwnedGames.readAll());
+            QNetworkReply &ReplyFriendList = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
+            loop.exec();
+            DocFriendList = QJsonDocument::fromJson(ReplyFriendList.readAll());
         switch(Theme){
         case 1:{
-            ui->FormProfileLabelProfileUrl->setTextFormat(Qt::RichText);
-            ui->FormProfileLabelProfileUrl->setText("<img src=\"images/program/link_white.png\" width=\"15\" height=\"15\">"+Account.value("profileurl").toString());
+            ui->LabelProfileUrl->setTextFormat(Qt::RichText);
+            ui->LabelProfileUrl->setText("<img src=\"images/program/link_white.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
             break;
             }
         case 2:{
-            ui->FormProfileLabelProfileUrl->setTextFormat(Qt::RichText);
-            ui->FormProfileLabelProfileUrl->setText("<img src=\"images/program/link_black.png\" width=\"15\" height=\"15\">"+Account.value("profileurl").toString());
+            ui->LabelProfileUrl->setTextFormat(Qt::RichText);
+            ui->LabelProfileUrl->setText("<img src=\"images/program/link_black.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
             break;
             }
         }
-        QDateTime date=QDateTime::fromSecsSinceEpoch(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("timecreated").toInt(),Qt::LocalTime);
-        ui->FormProfileLabelRealName->setText(SLLanguage[8]+": "+Account.value("realname").toString());
-        ui->FormProfileLabelTimeCreated->setText(SLLanguage[9]+" "+date.toString("yyyy.MM.dd"));
-        ui->FormProfileLabellvl->setText(SLLanguage[25]+": "+QString::number(Doclvl.object().value("response").toObject().value("player_level").toInt()));
-        if(Docban.object().value("players").toArray().at(0).toObject().value("VACBanned").toBool()){
-            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("NumberOfVACBans").toInt())+"\n"+SLLanguage[28]+" "+QString::number(Docban.object().value("players").toArray().at(0).toObject().value("DaysSinceLastBan").toInt())+" "+SLLanguage[29]);
+        ui->LabelRealName->setText(SLLanguage[8]+": "+Profile.GetRealname());
+        ui->LabelTimeCreated->setText(SLLanguage[9]+" "+Profile.GetTimecreated().toString("yyyy.MM.dd"));
+        ui->Labellvl->setText(SLLanguage[25]+": "+QString::number(Levels.GetPlayer_level()));
+        if(Bans.GetVACBanned()){
+            ui->LabelBans->setText(SLLanguage[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"\n"+SLLanguage[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+SLLanguage[29]);
         } else {
-            ui->FormProfileLabelBans->setText(SLLanguage[26]+": "+SLLanguage[27]);
+            ui->LabelBans->setText(SLLanguage[26]+": "+SLLanguage[27]);
         }
-        ui->FormProfileButtonGames->setText(" "+SLLanguage[10]+"("+QString::number(DocOwnedGames.object().value("response").toObject().value("game_count").toInt())+")");
-        ui->FormProfileButtonFriends->setText(" "+SLLanguage[11]+"("+QString::number(DocFriendList.object().value("friendslist").toObject().value("friends").toArray().size())+")");
-        if(!DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString().isEmpty()){
-            ui->FormProfileLabelPersonaState->setText(SLLanguage[12]+":\n"+DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("gameextrainfo").toString());
-            ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
+        if(Games.GetStatus()=="success")
+            ui->ButtonGames->setText(" "+SLLanguage[10]+"("+QString::number(Games.GetGamesCount())+")");
+        else
+            ui->ButtonGames->setText(" "+SLLanguage[10]+"(error)");
+        if(Friends.GetStatus()=="success")
+            ui->ButtonFriends->setText(" "+SLLanguage[11]+"("+QString::number(Friends.GetFriendsCount())+")");
+        else
+            ui->ButtonFriends->setText(" "+SLLanguage[11]+"(error)");
+        if(!Profile.GetGameextrainfo().isEmpty()){
+            ui->LabelPersonaState->setText(SLLanguage[12]+":\n"+Profile.GetGameextrainfo());
+            ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
         } else
-            switch (Account.value("personastate").toInt()) {
+            switch (Profile.GetPersonastate()) {
             case 0:{
-                QDateTime date=QDateTime::fromSecsSinceEpoch(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("lastlogoff").toInt(),Qt::LocalTime);
-                    ui->FormProfileLabelPersonaState->setText(SLLanguage[13]+":\n"+date.toString("yyyy.MM.dd\nhh:mm:ss"));
-                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
+                    ui->LabelPersonaState->setText(SLLanguage[13]+":\n"+Profile.GetLastlogoff().toString("yyyy.MM.dd\nhh:mm:ss"));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                     break;
             }
             case 1:{
-                    ui->FormProfileLabelPersonaState->setText(SLLanguage[14]);
-                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
+                    ui->LabelPersonaState->setText(SLLanguage[14]);
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
                     break;
             }
             case 2:{
-                    ui->FormProfileLabelPersonaState->setText(SLLanguage[15]);
-                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
+                    ui->LabelPersonaState->setText(SLLanguage[15]);
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
                     break;
             }
             case 3:{
-                    ui->FormProfileLabelPersonaState->setText(SLLanguage[16]);
-                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
+                    ui->LabelPersonaState->setText(SLLanguage[16]);
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 4:{
-                    ui->FormProfileLabelPersonaState->setText(SLLanguage[17]);
-                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
+                    ui->LabelPersonaState->setText(SLLanguage[17]);
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 5:{
-                    ui->FormProfileLabelPersonaState->setText(SLLanguage[18]);
-                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
+                    ui->LabelPersonaState->setText(SLLanguage[18]);
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             case 6:{
-                    ui->FormProfileLabelPersonaState->setText(SLLanguage[19]);
-                    ui->FormProfileLabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
+                    ui->LabelPersonaState->setText(SLLanguage[19]);
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             }
-        ui->FormProfileLabelLocCountryCode->setText(SLLanguage[20]+": "+Account.value("loccountrycode").toString());
+        ui->LabelLocCountryCode->setText(SLLanguage[20]+": "+Profile.GetLoccountrycode());
         if(QFile::exists("Files/Settings.txt")){
             QFile settings("Files/Settings.txt");
             if (settings.open(QIODevice::ReadOnly)){
@@ -293,14 +266,14 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
                         FileText="";
                     if(FileLine.indexOf("MyProfile=",0)!=-1){
                         if(FileLine.mid(FileLine.indexOf("MyProfile=",0)+10,FileLine.length())==ids){
-                            ui->FormProfileButtonSetProfile->setEnabled(false);
-                            ui->FormProfileButtonGoToMyProfile->setEnabled(false);
+                            ui->ButtonSetProfile->setEnabled(false);
+                            ui->ButtonGoToMyProfile->setEnabled(false);
                         } else {
-                            ui->FormProfileButtonSetProfile->setEnabled(true);
+                            ui->ButtonSetProfile->setEnabled(true);
                             if(FileLine.indexOf("MyProfile=none",0)>-1){
-                                ui->FormProfileButtonGoToMyProfile->setEnabled(false);
+                                ui->ButtonGoToMyProfile->setEnabled(false);
                             } else {
-                                ui->FormProfileButtonGoToMyProfile->setEnabled(true);
+                                ui->ButtonGoToMyProfile->setEnabled(true);
                             }
                         }
                     }
@@ -312,20 +285,20 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
                 QNetworkAccessManager imagemanager;
                 QEventLoop imageloop;  //Ждем ответ от сервера.
                 QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Account.value("avatar").toString()));
+                QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Profile.GetAvatar()));
                 imageloop.exec();
                 QImage img;
                 img.loadFromData(imagereply.readAll());
                 img.save("images/profiles/main.png", "PNG");
-        ui->FormProfileAvatar->setTextFormat(Qt::RichText);
-        ui->FormProfileAvatar->setText("<img src=\"images/profiles/main.png\"> "+Account.value("personaname").toString());
-        ui->FormProfileAvatar->setFont(QFont("MS Shell Dlg 2",14));
-        ui->FormProfileButtonGames->setVisible(true);
-        ui->FormProfileButtonFriends->setVisible(true);
-        ui->FormProfileButtonFavorites->setVisible(true);
-        ui->FormProfileButtonSetProfile->setVisible(true);
-        ui->FormProfileButtonStatistics->setVisible(true);
-        if(Account.value("communityvisibilitystate").toInt()!=3){
+        ui->LabelAvatar->setTextFormat(Qt::RichText);
+        ui->LabelAvatar->setText("<img src=\"images/profiles/main.png\"> "+Profile.GetPersonaname());
+        ui->LabelAvatar->setFont(QFont("MS Shell Dlg 2",14));
+        ui->ButtonGames->setVisible(true);
+        ui->ButtonFriends->setVisible(true);
+        ui->ButtonFavorites->setVisible(true);
+        ui->ButtonSetProfile->setVisible(true);
+        ui->ButtonStatistics->setVisible(true);
+        if(Profile.GetCommunityvisibilitystate()!=3){
             //профиль скрыт
         }
         } else {
@@ -333,7 +306,7 @@ void MainWindow::on_FormProfileButtonFindProfile_clicked(){
         }
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
-void MainWindow::on_FormProfileButtonGames_clicked(){
+void MainWindow::on_ButtonGames_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
         gamesform = new FormGames(id,key,language,Theme,DocOwnedGames,SaveImages);
@@ -342,17 +315,17 @@ void MainWindow::on_FormProfileButtonGames_clicked(){
         this->setVisible(false);
     }
 }
-void MainWindow::on_FormProfileButtonFriends_clicked(){
+void MainWindow::on_ButtonFriends_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
-        friendsform = new FormFriends(id,key,language,Theme,DocFriendList,SaveImages);
+        friendsform = new FormFriends(id,key,language,Theme,Friends,SaveImages);
         connect(friendsform,SIGNAL(return_to_profile(FormFriends*)),this,SLOT(on_return(FormFriends*)));
         connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));
         friendsform->show();
         this->setVisible(false);
     }
 }
-void MainWindow::on_FormProfileButtonSetProfile_clicked(){
+void MainWindow::on_ButtonSetProfile_clicked(){
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
     {
@@ -382,10 +355,10 @@ void MainWindow::on_FormProfileButtonSetProfile_clicked(){
             }
         }
         file.close();
-        ui->FormProfileButtonSetProfile->setEnabled(false);
+        ui->ButtonSetProfile->setEnabled(false);
     }
 }
-void MainWindow::on_FormProfileButtonGoToMyProfile_clicked(){
+void MainWindow::on_ButtonGoToMyProfile_clicked(){
     if(QFile::exists("Files/Settings.txt")){
         QFile settings("Files/Settings.txt");
         if (settings.open(QIODevice::ReadOnly)){
@@ -397,8 +370,8 @@ void MainWindow::on_FormProfileButtonGoToMyProfile_clicked(){
                 else
                     FileText="";
                 if(FileLine.indexOf("MyProfile=",0)!=-1){
-                    ui->FormProfileLineEditIdProfile->setText(FileLine.mid(FileLine.indexOf("MyProfile=",0)+10,FileLine.length()));
-                    ui->FormProfileButtonFindProfile->click();
+                    ui->LineEditIdProfile->setText(FileLine.mid(FileLine.indexOf("MyProfile=",0)+10,FileLine.length()));
+                    ui->ButtonFindProfile->click();
                     }
                 }
             }
@@ -406,6 +379,6 @@ void MainWindow::on_FormProfileButtonGoToMyProfile_clicked(){
         } else
             QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
 }
-void MainWindow::on_FormProfileButtonExit_clicked(){
+void MainWindow::on_ButtonExit_clicked(){
     close();
 }

@@ -1,12 +1,12 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, QJsonDocument DocFriendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, SteamAPIFriends Friendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     id=ids;
     key=keys;
     language=languages;
-    DocFriends=DocFriendss;
+    Friends=Friendss;
     SaveImages=SaveImagess;
     Theme=Themes;
     ui->FormFriendsTWFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -66,52 +66,19 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
     ui->FormFriendsCBStatus->addItem(SLLanguage[13]);
     ui->FormFriendsCBStatus->addItem(SLLanguage[14]);
     ui->FormFriendsCBStatus->addItem(SLLanguage[15]);
-    QString Querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+DocFriends.object().value("friendslist").toObject().value("friends").toArray().at(0).toObject().value("steamid").toString();
-    for (int i=1;i<DocFriends.object().value("friendslist").toObject().value("friends").toArray().size();i++) {
-        Querry+=","+DocFriends.object().value("friendslist").toObject().value("friends").toArray().at(i).toObject().value("steamid").toString();
-    }
-    QNetworkAccessManager manager;
-    QEventLoop loop;  //Ждем ответ от сервера.
-    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest(Querry));
-    loop.exec();
-    QJsonArray Accounts = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll()).object().value("response").toObject().value("players").toArray();
-    QVector<QJsonObject> abc;
-    for (int i=0;i<Accounts.size();i++) {
-        abc.append(Accounts[i].toObject());
-    }
-    for (int i=0; i < abc.size()-1; i++) {
-        for (int j=0; j < abc.size()-i-1; j++) {
-            if (abc[j].value("personaname").toString() > abc[j+1].value("personaname").toString()) {
-                QJsonObject temp = abc[j];
-                abc[j] = abc[j+1];
-                abc[j+1] = temp;
+    QVector<SteamAPIProfile> Profiles = Friends.GetProfiles();
+    for (int i=0; i < Profiles.size()-1; i++) {
+        for (int j=0; j < Profiles.size()-i-1; j++) {
+            if (Profiles[j].GetPersonaname() > Profiles[j+1].GetPersonaname()) {
+                SteamAPIProfile temp = Profiles[j];
+                Profiles[j] = Profiles[j+1];
+                Profiles[j+1] = temp;
             }
         }
     }
-    for (int i=0;i<DocFriends.object().value("friendslist").toObject().value("friends").toArray().size();i++) {
-        QJsonObject Account = abc[i];
-        //{"steamid":"76561198065018572",
-        //"communityvisibilitystate":3, (1 - the profile is not visible to you, 3 - the profile is "Public")
-        //"profilestate":1,
-        //"personaname":"Yuno",
-        //"lastlogoff":1555174765,
-        //"commentpermission":1,
-        //"profileurl":"https://steamcommunity.com/id/Arankir/",
-        //"avatar":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c.jpg",
-        //"avatarmedium":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_medium.jpg",
-        //"avatarfull":"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_full.jpg",
-        //"personastate":1,
-        //"primaryclanid":"103582791434380590",
-        //"timecreated":1339187696,
-        //"personastateflags":0,
-        //"gameextrainfo":"Realm of the Mad God",
-        //"gameid":"200210",
-        //"loccountrycode":"JP",
-        //"locstatecode":"40",
-        //"loccityid":26111}
+    for (int i=0;i<Friends.GetFriendsCount();i++) {
         ui->FormFriendsTWFriends->insertRow(i);
-        if(!QFile::exists("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png")){
+        if(!QFile::exists("images/profiles/"+Profiles[i].GetAvatar().mid(72,Profiles[i].GetAvatar().indexOf(".jpg",0)-72)+".png")){
             ImageRequest *image;
             switch (SaveImages) {
                 case 0:{
@@ -119,7 +86,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
                     break;
                     }
                 case 1:{
-                    image = new ImageRequest(i,Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72));
+                    image = new ImageRequest(i,Profiles[i].GetAvatar().mid(72,Profiles[i].GetAvatar().indexOf(".jpg",0)-72));
                     break;
                     }
                 default:{
@@ -128,31 +95,31 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
                     }
             }
             connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-            image->Get(Account.value("avatar").toString());
+            image->Get(Profiles[i].GetAvatar());
             } else {
             QPixmap pixmap;
-            pixmap.load("images/profiles/"+Account.value("avatar").toString().mid(72,Account.value("avatar").toString().indexOf(".jpg",0)-72)+".png", "PNG");
+            pixmap.load("images/profiles/"+Profiles[i].GetAvatar().mid(72,Profiles[i].GetAvatar().indexOf(".jpg",0)-72)+".png", "PNG");
             QLabel *lb = new QLabel();
             lb->setPixmap(pixmap);
             ui->FormFriendsTWFriends->setCellWidget(i,0,lb);
             }
-        QTableWidgetItem *item2 = new QTableWidgetItem(Account.value("personaname").toString());
+        QTableWidgetItem *item2 = new QTableWidgetItem(Profiles[i].GetPersonaname());
         ui->FormFriendsTWFriends->setItem(i,1,item2);
         QDateTime date;
         for (int j=0;;j++) {
-            if(Account.value("steamid").toString()==DocFriends.object().value("friendslist").toObject().value("friends").toArray().at(j).toObject().value("steamid").toString()){
-                date=QDateTime::fromSecsSinceEpoch(DocFriends.object().value("friendslist").toObject().value("friends").toArray().at(j).toObject().value("friend_since").toInt(),Qt::LocalTime);
+            if(Profiles[i].GetSteamid()==Friends.GetSteamid(j)){
+                date=Friends.GetFriend_since(j);
                 break;
             }
         }
         QTableWidgetItem *item3 = new QTableWidgetItem(date.toString("yyyy.MM.dd hh:mm:ss"));
         ui->FormFriendsTWFriends->setItem(i,2,item3);
         QTableWidgetItem *item4 = new QTableWidgetItem;
-        if(!Account.value("gameextrainfo").toString().isEmpty()){
+        if(!Profiles[i].GetGameextrainfo().isEmpty()){
             item4->setText(SLLanguage[8]);
             item4->setTextColor(QColor("#89b753"));
         } else
-            switch (Account.value("personastate").toInt()) {
+            switch (Profiles[i].GetPersonastate()){
             case 0:{
                     item4->setText(SLLanguage[9]);
                     item4->setTextColor(QColor("#4c4d4f"));
@@ -191,7 +158,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
             }
         ui->FormFriendsTWFriends->setItem(i,3,item4);
         QTableWidgetItem *item5 = new QTableWidgetItem;
-        switch(Account.value("communityvisibilitystate").toInt()){
+        switch(Profiles[i].GetCommunityvisibilitystate()){
         case 1:{
             item5->setText(SLLanguage[17]);
             item5->setTextColor(Qt::red);
@@ -207,9 +174,14 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
             item5->setTextColor(Qt::green);
             break;
         }
+        case 8:{
+            item5->setText(SLLanguage[17]);
+            item5->setTextColor(Qt::red);
+            break;
+        }
         }
         ui->FormFriendsTWFriends->setItem(i,4,item5);
-        QTableWidgetItem *item6 = new QTableWidgetItem(Account.value("steamid").toString());
+        QTableWidgetItem *item6 = new QTableWidgetItem(Profiles[i].GetSteamid());
         ui->FormFriendsTWFriends->setItem(i,5,item6);
         QPushButton *button1 = new QPushButton;
         button1->setText(SLLanguage[7]);
@@ -224,13 +196,13 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, Q
         }
         }
         button1->setMinimumSize(QSize(25,25));
-        button1->setObjectName("btn"+Account.value("steamid").toString());
+        button1->setObjectName("btn"+Profiles[i].GetSteamid());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         ui->FormFriendsTWFriends->setCellWidget(i,6,button1);
         QPushButton *button2 = new QPushButton;
         button2->setIcon(favorites);
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-        button2->setObjectName("btnf"+Account.value("steamid").toString());
+        button2->setObjectName("btnf"+Profiles[i].GetSteamid());
         ui->FormFriendsTWFriends->setCellWidget(i,7,button2);
     }
     ui->FormFriendsTWFriends->setColumnHidden(5,true);

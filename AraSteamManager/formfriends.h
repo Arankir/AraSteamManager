@@ -10,7 +10,8 @@
 #include <QJsonObject>
 #include <QFile>
 #include <QStandardItem>
-#include <class\imagerequest.h>
+#include <class/imagerequest.h>
+#include <class/steamapifriends.h>
 
 namespace Ui {
 class FormFriends;
@@ -21,7 +22,7 @@ class FormFriends : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormFriends(QString ids, QString keys, int languages, int Theme, QJsonDocument DocFriends, int SaveImagess, QWidget *parent = nullptr);
+    explicit FormFriends(QString ids, QString keys, int languages, int Theme, SteamAPIFriends Friends, int SaveImagess, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
@@ -50,6 +51,7 @@ private:
     int language;
     int Theme;
     int windowchildcount=0;
+    SteamAPIFriends Friends;
     QJsonDocument DocFriends;
     QStringList SLLanguage;
     int SaveImages;

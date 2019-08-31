@@ -1,5 +1,12 @@
 debug/imagerequest.o
 debug/profile.o
+debug/steamapibans.o
+debug/steamapifriend.o
+debug/steamapifriends.o
+debug/steamapigame.o
+debug/steamapigames.o
+debug/steamapilevels.o
+debug/steamapiprofile.o
 debug/formcompare.o
 debug/main.o
 debug/mainwindow.o
@@ -8,6 +15,13 @@ debug/formachievements.o
 debug/formfriends.o
 debug/moc_imagerequest.o
 debug/moc_profile.o
+debug/moc_steamapibans.o
+debug/moc_steamapifriend.o
+debug/moc_steamapifriends.o
+debug/moc_steamapigame.o
+debug/moc_steamapigames.o
+debug/moc_steamapilevels.o
+debug/moc_steamapiprofile.o
 debug/moc_formcompare.o
 debug/moc_mainwindow.o
 debug/moc_formgames.o

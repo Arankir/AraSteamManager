@@ -27,6 +27,13 @@ CONFIG += c++11
 SOURCES += \
     class/imagerequest.cpp \
     class/profile.cpp \
+    class/steamapibans.cpp \
+    class/steamapifriend.cpp \
+    class/steamapifriends.cpp \
+    class/steamapigame.cpp \
+    class/steamapigames.cpp \
+    class/steamapilevels.cpp \
+    class/steamapiprofile.cpp \
     formcompare.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -37,6 +44,13 @@ SOURCES += \
 HEADERS += \
     class/imagerequest.h \
     class/profile.h \
+    class/steamapibans.h \
+    class/steamapifriend.h \
+    class/steamapifriends.h \
+    class/steamapigame.h \
+    class/steamapigames.h \
+    class/steamapilevels.h \
+    class/steamapiprofile.h \
     formcompare.h \
         mainwindow.h \
     formgames.h \

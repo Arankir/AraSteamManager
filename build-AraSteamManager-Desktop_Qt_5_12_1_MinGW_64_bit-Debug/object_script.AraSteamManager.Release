@@ -1,5 +1,12 @@
 release/imagerequest.o
 release/profile.o
+release/steamapibans.o
+release/steamapifriend.o
+release/steamapifriends.o
+release/steamapigame.o
+release/steamapigames.o
+release/steamapilevels.o
+release/steamapiprofile.o
 release/formcompare.o
 release/main.o
 release/mainwindow.o
@@ -8,6 +15,13 @@ release/formachievements.o
 release/formfriends.o
 release/moc_imagerequest.o
 release/moc_profile.o
+release/moc_steamapibans.o
+release/moc_steamapifriend.o
+release/moc_steamapifriends.o
+release/moc_steamapigame.o
+release/moc_steamapigames.o
+release/moc_steamapilevels.o
+release/moc_steamapiprofile.o
 release/moc_formcompare.o
 release/moc_mainwindow.o
 release/moc_formgames.o
