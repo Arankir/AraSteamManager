@@ -27,6 +27,11 @@ CONFIG += c++11
 SOURCES += \
     class/imagerequest.cpp \
     class/profile.cpp \
+    class/steamapiachievementglobal.cpp \
+    class/steamapiachievementplayer.cpp \
+    class/steamapiachievements.cpp \
+    class/steamapiachievementsglobal.cpp \
+    class/steamapiachievementsplayer.cpp \
     class/steamapibans.cpp \
     class/steamapifriend.cpp \
     class/steamapifriends.cpp \
@@ -44,6 +49,11 @@ SOURCES += \
 HEADERS += \
     class/imagerequest.h \
     class/profile.h \
+    class/steamapiachievementglobal.h \
+    class/steamapiachievementplayer.h \
+    class/steamapiachievements.h \
+    class/steamapiachievementsglobal.h \
+    class/steamapiachievementsplayer.h \
     class/steamapibans.h \
     class/steamapifriend.h \
     class/steamapifriends.h \

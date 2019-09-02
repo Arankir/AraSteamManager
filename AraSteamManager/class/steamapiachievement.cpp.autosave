@@ -1,0 +1,37 @@
+#include "steamapiachievement.h"
+
+SteamAPIAchievement::SteamAPIAchievement(QJsonObject ObjAchievement, QObject *parent) : QObject(parent){
+    Set(ObjAchievement);
+}
+SteamAPIAchievement::SteamAPIAchievement(){
+
+}
+
+void SteamAPIAchievement::Set(QJsonObject ObjAchievement){
+    apiname=ObjAchievement.value("apiname").toString();
+    achieved=ObjAchievement.value("achieved").toInt();
+    unlocktime=QDateTime::fromSecsSinceEpoch(ObjAchievement.value("unlocktime").toInt(),Qt::LocalTime);
+}
+
+QString SteamAPIAchievement::GetApiname(){
+    return apiname;
+}
+int SteamAPIAchievement::GetAchieved(){
+    return achieved;
+}
+QDateTime SteamAPIAchievement::GetUnlocktime(){
+    return unlocktime;
+}
+
+SteamAPIAchievement::SteamAPIAchievement( const SteamAPIAchievement & a){
+    apiname=a.apiname;
+    achieved=a.achieved;
+    unlocktime=a.unlocktime;
+}
+
+SteamAPIAchievement & SteamAPIAchievement::operator=(const SteamAPIAchievement & Achievements) {
+    apiname=Achievements.apiname;
+    achieved=Achievements.achieved;
+    unlocktime=Achievements.unlocktime;
+    return *this;
+}

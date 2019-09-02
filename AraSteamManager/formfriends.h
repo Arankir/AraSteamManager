@@ -2,12 +2,6 @@
 #define FORMFRIENDS_H
 
 #include <QWidget>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
 #include <QFile>
 #include <QStandardItem>
 #include <class/imagerequest.h>

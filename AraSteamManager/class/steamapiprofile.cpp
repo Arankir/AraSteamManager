@@ -10,6 +10,11 @@ SteamAPIProfile::SteamAPIProfile(QJsonDocument DocSummaries){
     Set(DocSummaries);
 }
 
+SteamAPIProfile::SteamAPIProfile(QJsonDocument DocSummaries, int index){
+    manager = new QNetworkAccessManager();
+    Set(DocSummaries,index);
+}
+
 SteamAPIProfile::SteamAPIProfile(){
     manager = new QNetworkAccessManager();
 }
@@ -35,6 +40,7 @@ void SteamAPIProfile::Set(QString key, QString id, QString type){
     }
 }
 void SteamAPIProfile::Set(QJsonDocument DocSummaries){
+    Clear();
     if(DocSummaries.object().value("response").toObject().value("players").toArray().size()>0){
         QJsonObject Account=DocSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject();
         steamid=Account.value("steamid").toString();
@@ -228,4 +234,28 @@ SteamAPIProfile & SteamAPIProfile::operator=(const SteamAPIProfile & profile){
     status=profile.status;
     manager = new QNetworkAccessManager;
     return *this;
+}
+
+void SteamAPIProfile::Clear(){
+    steamid="";
+    communityvisibilitystate=0;
+    profilestate=0;
+    personaname="";
+    lastlogoff=QDateTime::fromSecsSinceEpoch(0);
+    commentpermission=0;
+    profileurl="";
+    avatar="";
+    avatarmedium="";
+    avatarfull="";
+    personastate=0;
+    primaryclanid="";
+    timecreated=QDateTime::fromSecsSinceEpoch(0);
+    personastateflags=0;
+    gameextrainfo="";
+    gameid="";
+    loccountrycode="";
+    locstatecode="";
+    loccityid=0;
+    realname="";
+    status="none";
 }

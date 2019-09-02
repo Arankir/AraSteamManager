@@ -28,6 +28,7 @@ this->id=id;
 manager->get(QNetworkRequest(request));
 }
 void SteamAPIGames::Set(QJsonDocument DocGames){
+    Clear();
     if(DocGames.object().value("response").toObject().value("games").toArray().size()>0){
         count=DocGames.object().value("response").toObject().value("game_count").toInt();
         for (int i=0;i<count;i++) {
@@ -85,4 +86,44 @@ int SteamAPIGames::GetGamesCount(){
 
 void SteamAPIGames::Update(){
     Set(key,id,free_games,game_info);
+}
+
+void SteamAPIGames::Sort(){
+    for (int i=0; i < count-1; i++) {
+        for (int j=0; j < count-i-1; j++) {
+            if (games[j].GetName() > games[j+1].GetName()) {
+                SteamAPIGame temp = games[j];
+                games[j] = games[j+1];
+                games[j+1] = temp;
+            }
+        }
+    }
+}
+
+SteamAPIGames::SteamAPIGames( const SteamAPIGames & a){
+    games=a.games;
+    status=a.status;
+    id=a.id;
+    key=a.key;
+    free_games=a.free_games;
+    game_info=a.game_info;
+    count=a.count;
+    manager = new QNetworkAccessManager;
+}
+
+SteamAPIGames & SteamAPIGames::operator=(const SteamAPIGames & profile){
+    delete manager;
+    games=profile.games;
+    status=profile.status;
+    id=profile.id;
+    key=profile.key;
+    free_games=profile.free_games;
+    game_info=profile.game_info;
+    count=profile.count;
+    manager = new QNetworkAccessManager;
+    return *this;
+}
+
+void SteamAPIGames::Clear(){
+    games.clear();
 }

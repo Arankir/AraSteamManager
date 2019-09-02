@@ -2,13 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QTextCodec>
 #include <QFile>
 #include <QMessageBox>
 #include <QPixmap>
@@ -60,7 +53,6 @@ private:
     int windowchildcount=0;
     QString id;
     QJsonDocument DocOwnedGames;
-    QJsonDocument DocFriendList;
     QStringList SLLanguage;
     SteamAPIProfile Profile;
     SteamAPIGames Games;

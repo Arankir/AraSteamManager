@@ -1,0 +1,33 @@
+#ifndef STEAMAPIACHIEVEMENT_H
+#define STEAMAPIACHIEVEMENT_H
+
+#include <QMainWindow>
+#include <QObject>
+#include <QDateTime>
+#include <QJsonObject>
+#include <QTextCodec>
+
+class SteamAPIAchievement : public QObject
+{
+    Q_OBJECT
+public:
+    explicit SteamAPIAchievement(QJsonObject ObjAchievement, QObject *parent = nullptr);
+    SteamAPIAchievement();
+    void Set(QJsonObject ObjAchievement);
+    QString GetApiname();
+    QString GetRelationship();
+    QDateTime GetFriend_since();
+    SteamAPIAchievement(const SteamAPIAchievement &);
+    SteamAPIAchievement & operator=(const SteamAPIAchievement & achievement);
+
+signals:
+
+public slots:
+
+private:
+    QString apiname="";
+    int achieved=0;
+    QDateTime unlocktime=QDateTime::fromSecsSinceEpoch(0,Qt::LocalTime);
+};
+
+#endif // STEAMAPIACHIEVEMENT_H

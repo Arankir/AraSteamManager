@@ -18,6 +18,7 @@ class SteamAPIProfile : public QObject
 public:
     explicit SteamAPIProfile(QString key, QString id, QString type, QObject *parent = nullptr);
     SteamAPIProfile(QJsonDocument DocSummaries);
+    SteamAPIProfile(QJsonDocument DocSummaries, int index);
     SteamAPIProfile();
     ~SteamAPIProfile();
     void Set(QString key, QString id, QString type);
@@ -47,6 +48,7 @@ public:
     void Update();
     SteamAPIProfile( const SteamAPIProfile & a);
     SteamAPIProfile & operator=(const SteamAPIProfile & profile);
+    void Clear();
 
 signals:
     void finished(SteamAPIProfile*);

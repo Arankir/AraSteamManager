@@ -181,9 +181,6 @@ void MainWindow::on_ButtonFindProfile_clicked(){
             QNetworkReply &ReplyOwnedGames = *manager.get(QNetworkRequest("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key+"&include_played_free_games=1&include_appinfo=1&format=json&steamid="+id));
             loop.exec();
             DocOwnedGames = QJsonDocument::fromJson(ReplyOwnedGames.readAll());
-            QNetworkReply &ReplyFriendList = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
-            loop.exec();
-            DocFriendList = QJsonDocument::fromJson(ReplyFriendList.readAll());
         switch(Theme){
         case 1:{
             ui->LabelProfileUrl->setTextFormat(Qt::RichText);
@@ -309,7 +306,7 @@ void MainWindow::on_ButtonFindProfile_clicked(){
 void MainWindow::on_ButtonGames_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
-        gamesform = new FormGames(id,key,language,Theme,DocOwnedGames,SaveImages);
+        gamesform = new FormGames(id,key,language,Theme,Games,SaveImages);
         connect(gamesform,SIGNAL(return_to_profile(FormGames*)),this,SLOT(on_return(FormGames*)));
         gamesform->show();
         this->setVisible(false);

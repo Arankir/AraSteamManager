@@ -1,5 +1,10 @@
 release/imagerequest.o
 release/profile.o
+release/steamapiachievementglobal.o
+release/steamapiachievementplayer.o
+release/steamapiachievements.o
+release/steamapiachievementsglobal.o
+release/steamapiachievementsplayer.o
 release/steamapibans.o
 release/steamapifriend.o
 release/steamapifriends.o
@@ -15,6 +20,11 @@ release/formachievements.o
 release/formfriends.o
 release/moc_imagerequest.o
 release/moc_profile.o
+release/moc_steamapiachievementglobal.o
+release/moc_steamapiachievementplayer.o
+release/moc_steamapiachievements.o
+release/moc_steamapiachievementsglobal.o
+release/moc_steamapiachievementsplayer.o
 release/moc_steamapibans.o
 release/moc_steamapifriend.o
 release/moc_steamapifriends.o

@@ -2,15 +2,10 @@
 #define FORMGAMES_H
 
 #include <QWidget>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
 #include <QLabel>
 #include <QPushButton>
 #include <formachievements.h>
+#include <class/steamapigames.h>
 
 namespace Ui {
 class FormGames;
@@ -21,7 +16,7 @@ class FormGames : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormGames(QString id, QString key, int language, int Theme, QJsonDocument Games, int SaveImages, QWidget *parent = nullptr);
+    explicit FormGames(QString id, QString key, int language, int Theme, SteamAPIGames Games, int SaveImages, QWidget *parent = nullptr);
     ~FormGames();
     FormAchievements *achievementsform;
 
@@ -52,7 +47,7 @@ private:
     int language;
     int Theme;
     int windowchildcount=0;
-    QJsonDocument JsonDocGames;
+    SteamAPIGames Games;
     QStringList SLLanguage;
     int SaveImages;
 };

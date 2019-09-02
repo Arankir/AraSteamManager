@@ -1,13 +1,15 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJsonDocument Games, int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString ids, QString keys, int languages, int Themes, SteamAPIGames Gamess, int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     id=ids;
     key=keys;
     language=languages;
     SaveImages=SaveImage;
     Theme=Themes;
+    Games=Gamess;
+    Games.Sort();
     ui->FormGamesTableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QFile FileLanguage;
     switch(language){
@@ -39,31 +41,6 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
         break;
         }
     }
-    QNetworkAccessManager manager;
-    QEventLoop loop;  //Ждем ответ от сервера.
-    QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    JsonDocGames = Games;
-    //{"appid":218620,
-    //"name":"PAYDAY 2",
-    //"playtime_2weeks":329,
-    //"playtime_forever":45501,
-    //"img_icon_url":"a6abc0d0c1e79c0b5b0f5c8ab81ce9076a542414",
-    //"img_logo_url":"4467a70648f49a6b309b41b81b4531f9a20ed99d",
-    //"has_community_visible_stats":true}
-    QJsonArray JsonArayGames=JsonDocGames.object().value("response").toObject().value("games").toArray();
-    QVector<QJsonObject> abc;
-    for (int i=0;i<JsonArayGames.size();i++) {
-        abc.append(JsonArayGames[i].toObject());
-    }
-    for (int i=0; i < abc.size()-1; i++) {
-        for (int j=0; j < abc.size()-i-1; j++) {
-            if (abc[j].value("name").toString() > abc[j+1].value("name").toString()) {
-                QJsonObject temp = abc[j];
-                abc[j] = abc[j+1];
-                abc[j+1] = temp;
-            }
-        }
-    }
     ui->FormGamesTableWidgetGames->setColumnCount(4);
     ui->FormGamesLabelLogo->setText("(WIP)");
     ui->FormGamesLineEditGame->setPlaceholderText(SLLanguage[0]);
@@ -73,11 +50,11 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[3]));
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[4]));
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(SLLanguage[5]));
-    for(int i=0;i<abc.size();i++){
+    for(int i=0;i<Games.GetGamesCount();i++){
         int row = ui->FormGamesTableWidgetGames->rowCount();
         ui->FormGamesTableWidgetGames->insertRow(row);
-        if(!QFile::exists("images/icon_games/"+abc[i].value("img_icon_url").toString()+".png")){
-            if(abc[i].value("img_icon_url").toString()!=""){
+        if(!QFile::exists("images/icon_games/"+Games.GetImg_icon_url(i)+".png")){
+            if(Games.GetImg_icon_url(i)!=""){
                 ImageRequest *image;
                 switch (SaveImages) {
                     case 0:{
@@ -85,7 +62,7 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
                         break;
                         }
                     case 1:{
-                        image = new ImageRequest(row,abc[i].value("img_icon_url").toString());
+                        image = new ImageRequest(row,Games.GetImg_icon_url(i));
                         break;
                         }
                     default:{
@@ -94,16 +71,16 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
                         }
                     }
                 connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-                image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(abc[i].value("appid").toInt())+"/"+abc[i].value("img_icon_url").toString()+".jpg");
+                image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(Games.GetAppid(i))+"/"+Games.GetImg_icon_url(i)+".jpg");
                 }
             } else {
             QPixmap pixmap;
-            pixmap.load("images/icon_games/"+abc[i].value("img_icon_url").toString()+".png", "PNG");
+            pixmap.load("images/icon_games/"+Games.GetImg_icon_url(i)+".png", "PNG");
             QLabel *label = new QLabel;
             label->setPixmap(pixmap);
             ui->FormGamesTableWidgetGames->setCellWidget(row,0,label);
             }
-        QTableWidgetItem *item2 = new QTableWidgetItem(abc[i].value("name").toString());
+        QTableWidgetItem *item2 = new QTableWidgetItem(Games.GetName(i));
         ui->FormGamesTableWidgetGames->setItem(row,1,item2);
         QPushButton *button1 = new QPushButton;
         QPushButton *button2 = new QPushButton;
@@ -113,14 +90,14 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, QJson
         button2->setMinimumSize(QSize(25,25));
         connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-        button1->setObjectName("FormGamesButtonAchievements"+QString::number(abc[i].value("appid").toInt())+"&"+abc[i].value("img_logo_url").toString());
+        button1->setObjectName("FormGamesButtonAchievements"+QString::number(Games.GetAppid(i))+"&"+Games.GetImg_logo_url(i));
         ui->FormGamesTableWidgetGames->setCellWidget(row,2,button1);
-        button2->setObjectName("FormGamesButtonFavorites"+QString::number(abc[i].value("appid").toInt()));
+        button2->setObjectName("FormGamesButtonFavorites"+QString::number(Games.GetAppid(i)));
         ui->FormGamesTableWidgetGames->setCellWidget(row,3,button2);
         ui->FormGamesTableWidgetGames->setRowHeight(i,33);
-        ImageRequest *Achievements = new ImageRequest(row,"FormGamesButtonAchievements"+QString::number(abc[i].value("appid").toInt())+"&"+abc[i].value("img_logo_url").toString());
+        ImageRequest *Achievements = new ImageRequest(row,"FormGamesButtonAchievements"+QString::number(Games.GetAppid(i))+"&"+Games.GetImg_logo_url(i));
         connect(Achievements,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultAchievements(int, QString, ImageRequest *)));
-        Achievements->Get("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(abc[i].value("appid").toInt()));
+        Achievements->Get("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(Games.GetAppid(i)));
         }
     ui->FormGamesTableWidgetGames->resizeColumnsToContents();
     ui->FormGamesTableWidgetGames->setColumnWidth(0,33);

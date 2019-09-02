@@ -34,6 +34,7 @@ public:
     void Update();
     SteamAPIFriends(const SteamAPIFriends &);
     SteamAPIFriends & operator=(const SteamAPIFriends & friends);
+    void Clear();
 
 signals:
     void finished(SteamAPIFriends*);

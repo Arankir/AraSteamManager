@@ -32,6 +32,10 @@ public:
     QString GetStatus();
     int GetGamesCount();
     void Update();
+    void Sort();
+    SteamAPIGames( const SteamAPIGames & a);
+    SteamAPIGames & operator=(const SteamAPIGames & profile);
+    void Clear();
 
 signals:
     void finished(SteamAPIGames*);
