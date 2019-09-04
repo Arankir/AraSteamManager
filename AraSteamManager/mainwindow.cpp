@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->ButtonFavorites->setVisible(false);
     ui->ButtonSetProfile->setVisible(false);
     ui->ButtonStatistics->setVisible(false);
+    ui->ButtonGoToMyProfile->setVisible(false);
     ui->ButtonFindProfile->setText(" "+Words[0]);
     ui->LineEditIdProfile->setPlaceholderText(Words[1]);
     ui->ButtonFavorites->setText(" "+Words[2]);
@@ -39,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 //    ui->ButtonStatistics->setIcon(ButtonIcon2);
 //    ui->ButtonSettings->setIconSize(pixmap.rect().size());
 //    ui->ButtonStatistics->setIconSize(QSize(13,13));
-    QString theme;
     switch(Setting.GetTheme()){
     case 1:{
         QPalette darkPalette;
@@ -141,17 +141,9 @@ void MainWindow::GoToProfile(QString id, QString type){
         QNetworkAccessManager manager;
         QEventLoop loop;  //Ждем ответ от сервера.
         QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        ui->LabelProfileUrl->setTextFormat(Qt::RichText);
-        switch(Setting.GetTheme()){
-        case 1:{
-            ui->LabelProfileUrl->setText("<img src=\":/white/program/white/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
-            break;
-            }
-        case 2:{
-            ui->LabelProfileUrl->setText("<img src=\":/black/program/black/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
-            break;
-            }
-        }
+        //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
+        //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
+        ui->LabelProfileUrl->setText(Profile.GetProfileurl());
         ui->LabelRealName->setText(Words[8]+": "+Profile.GetRealname());
         ui->LabelTimeCreated->setText(Words[9]+" "+Profile.GetTimecreated().toString("yyyy.MM.dd"));
         ui->Labellvl->setText(Words[25]+": "+QString::number(Levels.GetPlayer_level()));

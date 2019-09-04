@@ -56,6 +56,7 @@ private:
     SteamAPIGames Games;
     SteamAPIFriends Friends;
     Settings Setting;
+    QString theme="white";
 };
 
 #endif // MAINWINDOW_H

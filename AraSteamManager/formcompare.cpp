@@ -5,18 +5,37 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     QWidget(parent),
     ui(new Ui::FormCompare){
     ui->setupUi(this);
+    Language lan;
+    Words=lan.GetLanguage("compare",Setting.GetLanguage());
     key=keys;
     id=ids;
     appid=appids;
+    ui->FormCompareCheckBoxFavorites->setText(Words[6]);
+    ui->FormCompareCheckBoxAllFriends->setText(Words[7]);
+    ui->FormCompareButtonFind->setText(" "+Words[8]);
+    ui->FormCompareGroupBoxFilter->setTitle("      "+Words[9]);
+    ui->FormCompareGroupBoxShowedColumns->setTitle(Words[10]);
+    ui->FormCompareCheckBoxSCIcons->setText(Words[11]);
+    ui->FormCompareCheckBoxSCTitle->setText(Words[12]);
+    ui->FormCompareCheckBoxSCDescription->setText(Words[13]);
+    ui->FormCompareCheckBoxSCTotalPercent->setText(Words[14]);
+    ui->FormCompareLabelPlayerCount->setText(Words[18]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
+    ui->FormCompareButtonUpdate->setText(Words[19]);
+    ui->FormComparCheckBoxShowFilter->setText(Words[24]);
+    ui->FormCompareTableWidget->setColumnCount(6);
+    ui->FormCompareTableWidget->insertRow(0);
+    ui->FormCompareTableWidget->insertRow(1);
+    ui->FormCompareTableWidget->setVerticalHeaderItem(0,new QTableWidgetItem(""));
+    ui->FormCompareTableWidget->setVerticalHeaderItem(1,new QTableWidgetItem("%"));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[12]));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[13]));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[14]));
     ui->FormCompareLabelLogo->setPixmap(GameLogo);
     JsonArrayGlobalAchievements = JsonArrayGlobalAchievement;
     //{"name": "no_one_cared_who_i_was",
     //"percent": 85}
     ui->FormCompareTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    if(Setting.GetStatus()=="success"){
-        Language lan;
-        Words=lan.GetLanguage("compare",Setting.GetLanguage());
-    }
 //    QIcon favorites;
 //    switch(Theme){
 //    case 1:{
@@ -70,27 +89,6 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     //ui->FormCompareRadioButtonFriendsAll->setText(Words[3]);
     //ui->FormCompareRadioButtonFriendsReached->setText(Words[4]);
     //ui->FormCompareRadioButtonFriendsNotReached->setText(Words[5]);
-    ui->FormCompareCheckBoxFavorites->setText(Words[6]);
-    ui->FormCompareCheckBoxAllFriends->setText(Words[7]);
-    ui->FormCompareButtonFind->setText(" "+Words[8]);
-    ui->FormCompareGroupBoxFilter->setTitle("      "+Words[9]);
-    ui->FormCompareGroupBoxShowedColumns->setTitle(Words[10]);
-    ui->FormCompareCheckBoxSCIcons->setText(Words[11]);
-    ui->FormCompareCheckBoxSCTitle->setText(Words[12]);
-    ui->FormCompareCheckBoxSCDescription->setText(Words[13]);
-    ui->FormCompareCheckBoxSCTotalPercent->setText(Words[14]);
-    ui->FormCompareLabelPlayerCount->setText(Words[18]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
-    ui->FormCompareButtonUpdate->setText(Words[19]);
-    ui->FormComparCheckBoxShowFilter->setText(Words[24]);
-    ui->FormCompareTableWidget->setColumnCount(6);
-    ui->FormCompareTableWidget->insertRow(0);
-    ui->FormCompareTableWidget->insertRow(1);
-    ui->FormCompareTableWidget->setVerticalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormCompareTableWidget->setVerticalHeaderItem(1,new QTableWidgetItem("%"));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[12]));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[13]));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[14]));
     QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+ids));
     loop.exec();
     QJsonDocument DocPlayerSummaries = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll());
@@ -341,34 +339,17 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     lay2->addWidget(pbFriendsNotReached);
     lay2->setMargin(1);
     wd2->setLayout(lay2);
-    switch (Setting.GetTheme()) {
-    case 1:{
-        ui->FormCompareGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-        ui->FormCompareButtonFind->setIcon(QIcon("images/program/find_white.png"));
-        ui->FormCompareButtonReturn->setIcon(QIcon("images/program/back_white.png"));
-        All->setPixmap(QPixmap("images/program/friends_white.png"));
-        rbMyAll->setIcon(QIcon("images/program/all_white.png"));
-        rbMyReached->setIcon(QIcon("images/program/reached_white.png"));
-        rbMyNotReached->setIcon(QIcon("images/program/notreached_white.png"));
-        pbFriendsAll->setIcon(QIcon("images/program/all_white.png"));
-        pbFriendsReached->setIcon(QIcon("images/program/reached_white.png"));
-        pbFriendsNotReached->setIcon(QIcon("images/program/notreached_white.png"));
-        break;
-        }
-    case 2:{
-        ui->FormCompareGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_black.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-        ui->FormCompareButtonFind->setIcon(QIcon("images/program/find_black.png"));
-        ui->FormCompareButtonReturn->setIcon(QIcon("images/program/back_black.png"));
-        All->setPixmap(QPixmap("images/program/friends_black.png"));
-        rbMyAll->setIcon(QIcon("images/program/all_black.png"));
-        rbMyReached->setIcon(QIcon("images/program/reached_black.png"));
-        rbMyNotReached->setIcon(QIcon("images/program/notreached_black.png"));
-        pbFriendsAll->setIcon(QIcon("images/program/all_black.png"));
-        pbFriendsReached->setIcon(QIcon("images/program/reached_black.png"));
-        pbFriendsNotReached->setIcon(QIcon("images/program/notreached_black.png"));
-        break;
-    }
-    }
+    ui->FormCompareGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->FormCompareButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
+    ui->FormCompareButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    ui->FormCompareButtonUpdate->setIcon(QIcon(":/"+theme+"/program/"+theme+"/update.png"));
+    All->setPixmap(QPixmap(":/"+theme+"/program/"+theme+"/friends.png"));
+    rbMyAll->setIcon(QIcon(":/"+theme+"/program/"+theme+"/all.png"));
+    rbMyReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
+    rbMyNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
+    pbFriendsAll->setIcon(QIcon(":/"+theme+"/program/"+theme+"/all.png"));
+    pbFriendsReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
+    pbFriendsNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
     All->setScaledContents(true);
     All->setFixedSize(32,32);
     ui->FormCompareTableWidgetFriends->setCellWidget(2,0,wd1);
@@ -669,20 +650,9 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 lay->addWidget(rbNotReached);
                 lay->setMargin(1);
                 wd->setLayout(lay);
-                switch (Setting.GetTheme()) {
-                case 1:{
-                    rbAll->setIcon(QIcon("images/program/all_white.png"));
-                    rbReached->setIcon(QIcon("images/program/reached_white.png"));
-                    rbNotReached->setIcon(QIcon("images/program/notreached_white.png"));
-                    break;
-                    }
-                case 2:{
-                    rbAll->setIcon(QIcon("images/program/all_black.png"));
-                    rbReached->setIcon(QIcon("images/program/reached_black.png"));
-                    rbNotReached->setIcon(QIcon("images/program/notreached_black.png"));
-                    break;
-                }
-                }
+                rbAll->setIcon(QIcon(":/"+theme+"/program/"+theme+"/all.png"));
+                rbReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
+                rbNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
                 ui->FormCompareTableWidgetFriends->setCellWidget(2,column,wd);
                 ui->FormCompareTableWidgetFriends->resizeRowsToContents();
                 ui->FormCompareTableWidgetFriends->resizeColumnsToContents();

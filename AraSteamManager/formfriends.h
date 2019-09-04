@@ -44,10 +44,11 @@ private:
     Ui::FormFriends *ui;
     QString id;
     QString key;
-    Settings Setting;
     int windowchildcount=0;
     SteamAPIFriends Friends;
     QStringList Words;
+    Settings Setting;
+    QString theme="white";
     bool **filter;
 };
 

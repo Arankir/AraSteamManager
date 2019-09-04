@@ -16,6 +16,8 @@
 #include <QFormLayout>
 #include <class\imagerequest.h>
 #include <formcompare.h>
+#include <class/settings.h>
+#include <class/language.h>
 
 namespace Ui {
 class FormAchievements;
@@ -26,7 +28,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, int languages, int Theme, QString ids, QString appids, QString GameName, QJsonDocument JsonDocGlobalAchievement,int SaveImages, QWidget *parent = nullptr);
+    explicit FormAchievements(QString keys, QString ids, QString appids, QString GameName, QJsonDocument JsonDocGlobalAchievement, QWidget *parent = nullptr);
     ~FormAchievements();
     FormCompare *compareform;
 
@@ -100,8 +102,6 @@ private:
     Ui::FormAchievements *ui;
     QString key;
     QString id;
-    int language;
-    int Theme;
     int windowchildcount=0;
     QString appid;
     QJsonDocument JsonDocNumberOfCurrentPlayers;
@@ -112,8 +112,9 @@ private:
     int colfilter=3;
     QFormLayout *newcategoryvalueslayout;
     QFormLayout *changecategoryvalueslayout;
-    QStringList SLLanguage;
-    int SaveImages;
+    QStringList Words;
+    Settings Setting;
+    QString theme="white";
 };
 
 #endif // FORMACHIEVEMENTS_H

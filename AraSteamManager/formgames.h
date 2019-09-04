@@ -50,6 +50,7 @@ private:
     SteamAPIGames Games;
     QStringList Words;
     Settings Setting;
+    QString theme="white";
 };
 
 #endif // FORMGAMES_H

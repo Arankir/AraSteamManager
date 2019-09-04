@@ -3,55 +3,49 @@
 
 FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
+    Language lan;
+    Words=lan.GetLanguage("friends",Setting.GetLanguage());
     id=ids;
     key=keys;
     Friends=Friendss;
-    ui->FormFriendsTWFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    if(Setting.GetStatus()=="success"){
-        Language lan;
-        Words=lan.GetLanguage("friends",Setting.GetLanguage());
-    }
-    QIcon favorites;
+    ui->LabelLogo->setText("(WIP)");
+    ui->GroupBoxFilter->setTitle("      "+Words[0]);
+    ui->ButtonReturn->setText(" "+Words[1]);
+    ui->ButtonFind->setText("  "+Words[2]);
+    ui->CheckBoxOpenProfile->setText(Words[3]);
+    ui->CheckBoxFavorites->setText(Words[20]);
+    ui->LineEditName->setPlaceholderText(Words[21]);
+    ui->TableWidgetFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[5]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[6]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[18]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[7]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(Words[19]));
+    ui->ComboBoxStatus->addItem(Words[6]);
+    ui->ComboBoxStatus->addItem(Words[8]);
+    ui->ComboBoxStatus->addItem(Words[9]);
+    ui->ComboBoxStatus->addItem(Words[10]);
+    ui->ComboBoxStatus->addItem(Words[11]);
+    ui->ComboBoxStatus->addItem(Words[12]);
+    ui->ComboBoxStatus->addItem(Words[13]);
+    ui->ComboBoxStatus->addItem(Words[14]);
+    ui->ComboBoxStatus->addItem(Words[15]);
+    ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     switch(Setting.GetTheme()){
     case 1:{
-        ui->FormFriendsBReturn->setIcon(QIcon("images/program/back_white.png"));
-        ui->FormFriendsBFind->setIcon(QIcon("images/program/find_white.png"));
-        ui->FormFriendsGBFilter->setStyleSheet("QGroupBox::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-        favorites.addFile("images/program/favorites_white.png");
+        theme="white";
         break;
         }
     case 2:{
-        ui->FormFriendsBReturn->setIcon(QIcon("images/program/back_black.png"));
-        ui->FormFriendsBFind->setIcon(QIcon("images/program/find_black.png"));
-        ui->FormFriendsGBFilter->setStyleSheet("QGroupBox::title {image:url(images/program/filter_black.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-        favorites.addFile("images/program/favorites_black.png");
+        theme="black";
         break;
         }
     }
-    ui->FormFriendsLLogo->setText("(WIP)");
-    ui->FormFriendsGBFilter->setTitle("      "+Words[0]);
-    ui->FormFriendsBReturn->setText(" "+Words[1]);
-    ui->FormFriendsBFind->setText("  "+Words[2]);
-    ui->FormFriendsChBOpenProfile->setText(Words[3]);
-    ui->FormFriendsChBFavorites->setText(Words[20]);
-    ui->FormFriendsLineEditName->setPlaceholderText(Words[21]);
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[5]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[6]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[18]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(""));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[7]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(Words[19]));
-    ui->FormFriendsCBStatus->addItem(Words[6]);
-    ui->FormFriendsCBStatus->addItem(Words[8]);
-    ui->FormFriendsCBStatus->addItem(Words[9]);
-    ui->FormFriendsCBStatus->addItem(Words[10]);
-    ui->FormFriendsCBStatus->addItem(Words[11]);
-    ui->FormFriendsCBStatus->addItem(Words[12]);
-    ui->FormFriendsCBStatus->addItem(Words[13]);
-    ui->FormFriendsCBStatus->addItem(Words[14]);
-    ui->FormFriendsCBStatus->addItem(Words[15]);
+    ui->FormFriendsBReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    ui->FormFriendsBFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
+    ui->FormFriendsGBFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     QVector<SteamAPIProfile> Profiles = Friends.GetProfiles();
     for (int i=0; i < Profiles.size()-1; i++) {
         for (int j=0; j < Profiles.size()-i-1; j++) {
@@ -64,7 +58,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
     }
     for (int i=0;i<Friends.GetFriendsCount();i++) {
         ui->FormFriendsTWFriends->insertRow(i);
-        if(!QFile::exists("images/profiles/"+Profiles[i].GetAvatar().mid(72,Profiles[i].GetAvatar().indexOf(".jpg",0)-72)+".png")){
+        if(!QFile::exists("images/profiles/"+Profiles[i].GetAvatar().mid(72,20).remove(".jpg")+".png")){
             ImageRequest *image;
             switch (Setting.GetSaveimages()) {
                 case 0:{
@@ -72,7 +66,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
                     break;
                     }
                 case 1:{
-                    image = new ImageRequest(i,Profiles[i].GetAvatar().mid(72,Profiles[i].GetAvatar().indexOf(".jpg",0)-72));
+                    image = new ImageRequest(i,Profiles[i].GetAvatar().mid(72,20).remove(".jpg"));
                     break;
                     }
                 default:{
@@ -84,7 +78,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
             image->Get(Profiles[i].GetAvatar());
             } else {
             QPixmap pixmap;
-            pixmap.load("images/profiles/"+Profiles[i].GetAvatar().mid(72,Profiles[i].GetAvatar().indexOf(".jpg",0)-72)+".png", "PNG");
+            pixmap.load("images/profiles/"+Profiles[i].GetAvatar().mid(72,20).remove(".jpg")+".png", "PNG");
             QLabel *lb = new QLabel();
             lb->setPixmap(pixmap);
             ui->FormFriendsTWFriends->setCellWidget(i,0,lb);
@@ -171,22 +165,13 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
         ui->FormFriendsTWFriends->setItem(i,5,item6);
         QPushButton *button1 = new QPushButton;
         button1->setText(Words[7]);
-        switch (Setting.GetTheme()) {
-        case 1:{
-            button1->setIcon(QIcon("images/program/go_to_white.png"));
-            break;
-        }
-        case 2:{
-            button1->setIcon(QIcon("images/program/go_to_black.png"));
-            break;
-        }
-        }
+        button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
         button1->setMinimumSize(QSize(25,25));
         button1->setObjectName("btn"+Profiles[i].GetSteamid());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         ui->FormFriendsTWFriends->setCellWidget(i,6,button1);
         QPushButton *button2 = new QPushButton;
-        button2->setIcon(favorites);
+        button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button2->setObjectName("btnf"+Profiles[i].GetSteamid());
         ui->FormFriendsTWFriends->setCellWidget(i,7,button2);
@@ -256,10 +241,10 @@ void FormFriends::on_FormFriendsChBOpenProfile_stateChanged(int arg1){
         UpdateHiddenRows();
         }
 }
-void FormFriends::on_FormFriendsCBStatus_activated(int index){
+void FormFriends::on_ComboBoxStatus_activated(int index){
     if(index!=0){
         for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
-            if(ui->FormFriendsCBStatus->currentText()==ui->FormFriendsTWFriends->item(i,3)->text())
+            if(ui->ComboBoxStatus->currentText()==ui->FormFriendsTWFriends->item(i,3)->text())
                 filter[i][1]=true; else
                 filter[i][1]=false;
         UpdateHiddenRows();

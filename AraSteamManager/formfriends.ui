@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
-    <widget class="QLabel" name="FormFriendsLLogo">
+    <widget class="QLabel" name="LabelLogo">
      <property name="text">
       <string>Logo</string>
      </property>
@@ -35,37 +35,37 @@
     </spacer>
    </item>
    <item row="0" column="2">
-    <widget class="QPushButton" name="FormFriendsBReturn">
+    <widget class="QPushButton" name="ButtonReturn">
      <property name="text">
       <string>Return</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0" colspan="3">
-    <widget class="QGroupBox" name="FormFriendsGBFilter">
+    <widget class="QGroupBox" name="GroupBoxFilter">
      <property name="title">
       <string>Filter</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="1" column="0">
-       <widget class="QComboBox" name="FormFriendsCBStatus"/>
+       <widget class="QComboBox" name="ComboBoxStatus"/>
       </item>
       <item row="0" column="4">
-       <widget class="QPushButton" name="FormFriendsBFind">
+       <widget class="QPushButton" name="ButtonFind">
         <property name="text">
          <string>Find</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QCheckBox" name="FormFriendsChBOpenProfile">
+       <widget class="QCheckBox" name="CheckBoxOpenProfile">
         <property name="text">
          <string>Open profile</string>
         </property>
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QCheckBox" name="FormFriendsChBFavorites">
+       <widget class="QCheckBox" name="CheckBoxFavorites">
         <property name="text">
          <string>Favorites</string>
         </property>
@@ -85,13 +85,13 @@
        </spacer>
       </item>
       <item row="0" column="0" colspan="4">
-       <widget class="QLineEdit" name="FormFriendsLineEditName"/>
+       <widget class="QLineEdit" name="LineEditName"/>
       </item>
      </layout>
     </widget>
    </item>
    <item row="6" column="0" colspan="3">
-    <widget class="QTableWidget" name="FormFriendsTWFriends">
+    <widget class="QTableWidget" name="TableWidgetFriends">
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>

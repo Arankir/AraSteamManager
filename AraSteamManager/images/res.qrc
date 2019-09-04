@@ -1,7 +1,4 @@
 <RCC>
-    <qresource prefix="/profiles">
-        <file>profiles/main.png</file>
-    </qresource>
     <qresource prefix="/black">
         <file>program/black/all.png</file>
         <file>program/black/back.png</file>
@@ -23,6 +20,7 @@
         <file>program/black/settings.png</file>
         <file>program/black/statistic.png</file>
         <file>program/black/up.png</file>
+        <file>program/black/update.png</file>
     </qresource>
     <qresource prefix="/white">
         <file>program/white/all.png</file>
@@ -45,6 +43,7 @@
         <file>program/white/settings.png</file>
         <file>program/white/statistic.png</file>
         <file>program/white/up.png</file>
+        <file>program/white/update.png</file>
     </qresource>
     <qresource prefix="/program">
         <file>program/apply.png</file>

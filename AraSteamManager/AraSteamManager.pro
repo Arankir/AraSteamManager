@@ -29,6 +29,7 @@ SOURCES += \
     class/language.cpp \
     class/profile.cpp \
     class/settings.cpp \
+    class/steamapiachievement.cpp \
     class/steamapiachievementglobal.cpp \
     class/steamapiachievementplayer.cpp \
     class/steamapiachievements.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     class/language.h \
     class/profile.h \
     class/settings.h \
+    class/steamapiachievement.h \
     class/steamapiachievementglobal.h \
     class/steamapiachievementplayer.h \
     class/steamapiachievements.h \

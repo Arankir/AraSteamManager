@@ -95,6 +95,7 @@ private:
     QStringList Words;
     QPair <QVector<Profile>,QVector<Profile>> Friends;
     Settings Setting;
+    QString theme="white";
 };
 
 #endif // FORMCOMPARE_H
