@@ -1,32 +1,18 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, SteamAPIFriends Friendss, int SaveImagess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     id=ids;
     key=keys;
-    language=languages;
     Friends=Friendss;
-    SaveImages=SaveImagess;
-    Theme=Themes;
     ui->FormFriendsTWFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    QFile FileLanguage;
-    switch(language){
-    case 1:{
-        FileLanguage.setFileName("Files/Languages/ENG/friends.txt");
-        break;
-        }
-    case 5:{
-        FileLanguage.setFileName("Files/Languages/RU/friends.txt");
-        }
-    }
-    if(FileLanguage.open(QIODevice::ReadOnly)){
-        while(!FileLanguage.atEnd()){
-            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
-        }
+    if(Setting.GetStatus()=="success"){
+        Language lan;
+        Words=lan.GetLanguage("friends",Setting.GetLanguage());
     }
     QIcon favorites;
-    switch(Theme){
+    switch(Setting.GetTheme()){
     case 1:{
         ui->FormFriendsBReturn->setIcon(QIcon("images/program/back_white.png"));
         ui->FormFriendsBFind->setIcon(QIcon("images/program/find_white.png"));
@@ -43,29 +29,29 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, S
         }
     }
     ui->FormFriendsLLogo->setText("(WIP)");
-    ui->FormFriendsGBFilter->setTitle("      "+SLLanguage[0]);
-    ui->FormFriendsBReturn->setText(" "+SLLanguage[1]);
-    ui->FormFriendsBFind->setText("  "+SLLanguage[2]);
-    ui->FormFriendsChBOpenProfile->setText(SLLanguage[3]);
-    ui->FormFriendsChBFavorites->setText(SLLanguage[20]);
-    ui->FormFriendsLineEditName->setPlaceholderText(SLLanguage[21]);
+    ui->FormFriendsGBFilter->setTitle("      "+Words[0]);
+    ui->FormFriendsBReturn->setText(" "+Words[1]);
+    ui->FormFriendsBFind->setText("  "+Words[2]);
+    ui->FormFriendsChBOpenProfile->setText(Words[3]);
+    ui->FormFriendsChBFavorites->setText(Words[20]);
+    ui->FormFriendsLineEditName->setPlaceholderText(Words[21]);
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[5]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[4]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(SLLanguage[6]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(SLLanguage[18]));
+    ui->FormFriendsTWFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[5]));
+    ui->FormFriendsTWFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
+    ui->FormFriendsTWFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[6]));
+    ui->FormFriendsTWFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[18]));
     ui->FormFriendsTWFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(""));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(SLLanguage[7]));
-    ui->FormFriendsTWFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(SLLanguage[19]));
-    ui->FormFriendsCBStatus->addItem(SLLanguage[6]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[8]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[9]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[10]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[11]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[12]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[13]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[14]);
-    ui->FormFriendsCBStatus->addItem(SLLanguage[15]);
+    ui->FormFriendsTWFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[7]));
+    ui->FormFriendsTWFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(Words[19]));
+    ui->FormFriendsCBStatus->addItem(Words[6]);
+    ui->FormFriendsCBStatus->addItem(Words[8]);
+    ui->FormFriendsCBStatus->addItem(Words[9]);
+    ui->FormFriendsCBStatus->addItem(Words[10]);
+    ui->FormFriendsCBStatus->addItem(Words[11]);
+    ui->FormFriendsCBStatus->addItem(Words[12]);
+    ui->FormFriendsCBStatus->addItem(Words[13]);
+    ui->FormFriendsCBStatus->addItem(Words[14]);
+    ui->FormFriendsCBStatus->addItem(Words[15]);
     QVector<SteamAPIProfile> Profiles = Friends.GetProfiles();
     for (int i=0; i < Profiles.size()-1; i++) {
         for (int j=0; j < Profiles.size()-i-1; j++) {
@@ -80,7 +66,7 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, S
         ui->FormFriendsTWFriends->insertRow(i);
         if(!QFile::exists("images/profiles/"+Profiles[i].GetAvatar().mid(72,Profiles[i].GetAvatar().indexOf(".jpg",0)-72)+".png")){
             ImageRequest *image;
-            switch (SaveImages) {
+            switch (Setting.GetSaveimages()) {
                 case 0:{
                     image = new ImageRequest(i,"");
                     break;
@@ -116,42 +102,42 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, S
         ui->FormFriendsTWFriends->setItem(i,2,item3);
         QTableWidgetItem *item4 = new QTableWidgetItem;
         if(!Profiles[i].GetGameextrainfo().isEmpty()){
-            item4->setText(SLLanguage[8]);
+            item4->setText(Words[8]);
             item4->setTextColor(QColor("#89b753"));
         } else
             switch (Profiles[i].GetPersonastate()){
             case 0:{
-                    item4->setText(SLLanguage[9]);
+                    item4->setText(Words[9]);
                     item4->setTextColor(QColor("#4c4d4f"));
                     break;
             }
             case 1:{
-                    item4->setText(SLLanguage[10]);
+                    item4->setText(Words[10]);
                     item4->setTextColor(QColor("#57cbde"));
                     break;
             }
             case 2:{
-                    item4->setText(SLLanguage[11]);
+                    item4->setText(Words[11]);
                     item4->setTextColor(QColor("#815560"));
                     break;
             }
             case 3:{
-                    item4->setText(SLLanguage[12]);
+                    item4->setText(Words[12]);
                     item4->setTextColor(QColor("#46788e"));
                     break;
             }
             case 4:{
-                    item4->setText(SLLanguage[13]);
+                    item4->setText(Words[13]);
                     item4->setTextColor(QColor("#46788e"));
                     break;
             }
             case 5:{
-                    item4->setText(SLLanguage[14]);
+                    item4->setText(Words[14]);
                     item4->setTextColor(Qt::darkMagenta);
                     break;
             }
             case 6:{
-                    item4->setText(SLLanguage[15]);
+                    item4->setText(Words[15]);
                     item4->setTextColor(Qt::darkMagenta);
                     break;
             }
@@ -160,22 +146,22 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, S
         QTableWidgetItem *item5 = new QTableWidgetItem;
         switch(Profiles[i].GetCommunityvisibilitystate()){
         case 1:{
-            item5->setText(SLLanguage[17]);
+            item5->setText(Words[17]);
             item5->setTextColor(Qt::red);
             break;
         }
         case 2:{
-            item5->setText(SLLanguage[17]);
+            item5->setText(Words[17]);
             item5->setTextColor(Qt::red);
             break;
         }
         case 3:{
-            item5->setText(SLLanguage[16]);
+            item5->setText(Words[16]);
             item5->setTextColor(Qt::green);
             break;
         }
         case 8:{
-            item5->setText(SLLanguage[17]);
+            item5->setText(Words[17]);
             item5->setTextColor(Qt::red);
             break;
         }
@@ -184,8 +170,8 @@ FormFriends::FormFriends(QString ids, QString keys, int languages, int Themes, S
         QTableWidgetItem *item6 = new QTableWidgetItem(Profiles[i].GetSteamid());
         ui->FormFriendsTWFriends->setItem(i,5,item6);
         QPushButton *button1 = new QPushButton;
-        button1->setText(SLLanguage[7]);
-        switch (Theme) {
+        button1->setText(Words[7]);
+        switch (Setting.GetTheme()) {
         case 1:{
             button1->setIcon(QIcon("images/program/go_to_white.png"));
             break;
@@ -260,7 +246,7 @@ void FormFriends::FavoritesClicked(){
 void FormFriends::on_FormFriendsChBOpenProfile_stateChanged(int arg1){
     if(arg1==2){
         for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
-            if(ui->FormFriendsTWFriends->item(i,4)->text().indexOf(SLLanguage[16])>-1)
+            if(ui->FormFriendsTWFriends->item(i,4)->text().indexOf(Words[16])>-1)
                 filter[i][2]=true; else
                 filter[i][2]=false;
         UpdateHiddenRows();

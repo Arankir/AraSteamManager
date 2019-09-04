@@ -6,6 +6,8 @@
 #include <QPushButton>
 #include <formachievements.h>
 #include <class/steamapigames.h>
+#include <class/settings.h>
+#include <class/language.h>
 
 namespace Ui {
 class FormGames;
@@ -16,7 +18,7 @@ class FormGames : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormGames(QString id, QString key, int language, int Theme, SteamAPIGames Games, int SaveImages, QWidget *parent = nullptr);
+    explicit FormGames(QString id, QString key, SteamAPIGames Games, QWidget *parent = nullptr);
     ~FormGames();
     FormAchievements *achievementsform;
 
@@ -44,12 +46,10 @@ private:
     Ui::FormGames *ui;
     QString id;
     QString key;
-    int language;
-    int Theme;
     int windowchildcount=0;
     SteamAPIGames Games;
-    QStringList SLLanguage;
-    int SaveImages;
+    QStringList Words;
+    Settings Setting;
 };
 
 #endif // FORMGAMES_H

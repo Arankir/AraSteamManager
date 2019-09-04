@@ -14,6 +14,8 @@
 #include <class/steamapilevels.h>
 #include <class/steamapigames.h>
 #include <class/steamapifriends.h>
+#include <class/settings.h>
+#include <class/language.h>
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +38,7 @@ private slots:
 
     void keyPressEvent(QKeyEvent *event);
 
+    void GoToProfile(QString id, QString type);
     void on_ButtonFindProfile_clicked();
     void on_ButtonGames_clicked();
     void on_ButtonFriends_clicked();
@@ -47,16 +50,12 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QString key="3826BF60403D15613B4B0381DAB7A7BD";
-    int language=1;
-    int Theme=1;
-    int SaveImages=0;
     int windowchildcount=0;
-    QString id;
-    QJsonDocument DocOwnedGames;
-    QStringList SLLanguage;
+    QStringList Words;
     SteamAPIProfile Profile;
     SteamAPIGames Games;
     SteamAPIFriends Friends;
+    Settings Setting;
 };
 
 #endif // MAINWINDOW_H

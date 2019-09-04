@@ -1,5 +1,7 @@
 debug/imagerequest.o
+debug/language.o
 debug/profile.o
+debug/settings.o
 debug/steamapiachievementglobal.o
 debug/steamapiachievementplayer.o
 debug/steamapiachievements.o
@@ -18,8 +20,11 @@ debug/mainwindow.o
 debug/formgames.o
 debug/formachievements.o
 debug/formfriends.o
+debug/qrc_res.o
 debug/moc_imagerequest.o
+debug/moc_language.o
 debug/moc_profile.o
+debug/moc_settings.o
 debug/moc_steamapiachievementglobal.o
 debug/moc_steamapiachievementplayer.o
 debug/moc_steamapiachievements.o

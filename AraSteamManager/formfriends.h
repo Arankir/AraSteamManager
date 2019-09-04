@@ -6,6 +6,8 @@
 #include <QStandardItem>
 #include <class/imagerequest.h>
 #include <class/steamapifriends.h>
+#include <class/settings.h>
+#include <class/language.h>
 
 namespace Ui {
 class FormFriends;
@@ -16,7 +18,7 @@ class FormFriends : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormFriends(QString ids, QString keys, int languages, int Theme, SteamAPIFriends Friends, int SaveImagess, QWidget *parent = nullptr);
+    explicit FormFriends(QString id, QString key, SteamAPIFriends Friends, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
@@ -42,13 +44,10 @@ private:
     Ui::FormFriends *ui;
     QString id;
     QString key;
-    int language;
-    int Theme;
+    Settings Setting;
     int windowchildcount=0;
     SteamAPIFriends Friends;
-    QJsonDocument DocFriends;
-    QStringList SLLanguage;
-    int SaveImages;
+    QStringList Words;
     bool **filter;
 };
 

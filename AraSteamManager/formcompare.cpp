@@ -1,35 +1,21 @@
 #include "formcompare.h"
 #include "ui_formcompare.h"
 
-FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, QString appids, QPixmap GameLogo, QJsonArray JsonArrayGlobalAchievement,int SaveImage, QWidget *parent) :
+FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap GameLogo, QJsonArray JsonArrayGlobalAchievement, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormCompare){
     ui->setupUi(this);
     key=keys;
-    language=languages;
     id=ids;
     appid=appids;
-    SaveImages=SaveImage;
-    Theme=Themes;
     ui->FormCompareLabelLogo->setPixmap(GameLogo);
     JsonArrayGlobalAchievements = JsonArrayGlobalAchievement;
     //{"name": "no_one_cared_who_i_was",
     //"percent": 85}
     ui->FormCompareTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    QFile FileLanguage;
-    switch(language){
-    case 1:{
-        FileLanguage.setFileName("Files/Languages/ENG/compare.txt");
-        break;
-        }
-    case 5:{
-        FileLanguage.setFileName("Files/Languages/RU/compare.txt");
-        }
-    }
-    if(FileLanguage.open(QIODevice::ReadOnly)){
-        while(!FileLanguage.atEnd()){
-            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
-        }
+    if(Setting.GetStatus()=="success"){
+        Language lan;
+        Words=lan.GetLanguage("compare",Setting.GetLanguage());
     }
 //    QIcon favorites;
 //    switch(Theme){
@@ -75,40 +61,40 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     //{"apiname":"hot_wheels",
     //"achieved":1,
     //"unlocktime":1445190378}
-    ui->FormCompareButtonReturn->setText(" "+SLLanguage[0]);
-    //ui->FormCompareGroupBoxMyA->setTitle(SLLanguage[1]);
-    //ui->FormCompareGroupBoxFriendsA->setTitle(SLLanguage[2]);
-    //ui->FormCompareRadioButtonMyAll->setText(SLLanguage[3]);
-    //ui->FormCompareRadioButtonMyReached->setText(SLLanguage[4]);
-    //ui->FormCompareRadioButtonMyNotReached->setText(SLLanguage[5]);
-    //ui->FormCompareRadioButtonFriendsAll->setText(SLLanguage[3]);
-    //ui->FormCompareRadioButtonFriendsReached->setText(SLLanguage[4]);
-    //ui->FormCompareRadioButtonFriendsNotReached->setText(SLLanguage[5]);
-    ui->FormCompareCheckBoxFavorites->setText(SLLanguage[6]);
-    ui->FormCompareCheckBoxAllFriends->setText(SLLanguage[7]);
-    ui->FormCompareButtonFind->setText(" "+SLLanguage[8]);
-    ui->FormCompareGroupBoxFilter->setTitle("      "+SLLanguage[9]);
-    ui->FormCompareGroupBoxShowedColumns->setTitle(SLLanguage[10]);
-    ui->FormCompareCheckBoxSCIcons->setText(SLLanguage[11]);
-    ui->FormCompareCheckBoxSCTitle->setText(SLLanguage[12]);
-    ui->FormCompareCheckBoxSCDescription->setText(SLLanguage[13]);
-    ui->FormCompareCheckBoxSCTotalPercent->setText(SLLanguage[14]);
-    ui->FormCompareLabelPlayerCount->setText(SLLanguage[18]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
-    ui->FormCompareButtonUpdate->setText(SLLanguage[19]);
-    ui->FormComparCheckBoxShowFilter->setText(SLLanguage[24]);
+    ui->FormCompareButtonReturn->setText(" "+Words[0]);
+    //ui->FormCompareGroupBoxMyA->setTitle(Words[1]);
+    //ui->FormCompareGroupBoxFriendsA->setTitle(Words[2]);
+    //ui->FormCompareRadioButtonMyAll->setText(Words[3]);
+    //ui->FormCompareRadioButtonMyReached->setText(Words[4]);
+    //ui->FormCompareRadioButtonMyNotReached->setText(Words[5]);
+    //ui->FormCompareRadioButtonFriendsAll->setText(Words[3]);
+    //ui->FormCompareRadioButtonFriendsReached->setText(Words[4]);
+    //ui->FormCompareRadioButtonFriendsNotReached->setText(Words[5]);
+    ui->FormCompareCheckBoxFavorites->setText(Words[6]);
+    ui->FormCompareCheckBoxAllFriends->setText(Words[7]);
+    ui->FormCompareButtonFind->setText(" "+Words[8]);
+    ui->FormCompareGroupBoxFilter->setTitle("      "+Words[9]);
+    ui->FormCompareGroupBoxShowedColumns->setTitle(Words[10]);
+    ui->FormCompareCheckBoxSCIcons->setText(Words[11]);
+    ui->FormCompareCheckBoxSCTitle->setText(Words[12]);
+    ui->FormCompareCheckBoxSCDescription->setText(Words[13]);
+    ui->FormCompareCheckBoxSCTotalPercent->setText(Words[14]);
+    ui->FormCompareLabelPlayerCount->setText(Words[18]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
+    ui->FormCompareButtonUpdate->setText(Words[19]);
+    ui->FormComparCheckBoxShowFilter->setText(Words[24]);
     ui->FormCompareTableWidget->setColumnCount(6);
     ui->FormCompareTableWidget->insertRow(0);
     ui->FormCompareTableWidget->insertRow(1);
     ui->FormCompareTableWidget->setVerticalHeaderItem(0,new QTableWidgetItem(""));
     ui->FormCompareTableWidget->setVerticalHeaderItem(1,new QTableWidgetItem("%"));
     ui->FormCompareTableWidget->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[12]));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[13]));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(3,new QTableWidgetItem(SLLanguage[14]));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[12]));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[13]));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[14]));
     QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+ids));
     loop.exec();
     QJsonDocument DocPlayerSummaries = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll());
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(4,new QTableWidgetItem(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString()/*SLLanguage[15]*/));
+    ui->FormCompareTableWidget->setHorizontalHeaderItem(4,new QTableWidgetItem(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString()/*Words[15]*/));
     ui->FormCompareTableWidget->setHorizontalHeaderItem(5,new QTableWidgetItem(/**/));
     QNetworkReply &imagereply = *manager.get(QNetworkRequest(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString()));
     loop.exec();
@@ -118,7 +104,7 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     myava->setPixmap(pix);
     myava->setAlignment(Qt::AlignCenter);
     ui->FormCompareTableWidget->setCellWidget(0,4,myava);
-    QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l="+SLLanguage[17])));
+    QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l="+Words[17])));
     loop.exec();
     JsonArraySchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll()).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray();
     int totalr=0;
@@ -144,7 +130,7 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
                 QString AchievementIcon=JASFG[j].toObject().value("icon").toString().mid(66,JASFG[j].toObject().value("icon").toString().length());
                 if(!QFile::exists("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
                     ImageRequest *image;
-                    switch (SaveImages) {
+                    switch (Setting.GetSaveimages()) {
                         case 0:{
                             image = new ImageRequest(row,"");
                             break;
@@ -179,10 +165,10 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
                 QTableWidgetItem *item5;
                 if(JAPA[j].toObject().value("achieved").toInt()==1){
                     QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
-                    item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                    item5 = new QTableWidgetItem(Words[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
                     totalr++;
                     } else {
-                    item5 = new QTableWidgetItem(SLLanguage[16]);
+                    item5 = new QTableWidgetItem(Words[16]);
                     totalnr++;
                     }
                 item5->setTextAlignment(Qt::AlignCenter);
@@ -225,7 +211,7 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
                 layout2->addRow(chb);
             } else {
                 QComboBox *cb = new QComboBox;
-                cb->addItem(SLLanguage[20]);
+                cb->addItem(Words[20]);
                 for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                     cb->addItem(cat.object().value("values").toArray().at(j).toString());
                 }
@@ -313,9 +299,9 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     Me->setAlignment(Qt::AlignCenter);
     Me->setToolTip(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString());
     ui->FormCompareTableWidgetFriends->setCellWidget(0,0,Me);
-    QRadioButton *rbMyAll = new QRadioButton(/*SLLanguage[]*/);
-    QRadioButton *rbMyReached = new QRadioButton(/*SLLanguage[]*/);
-    QRadioButton *rbMyNotReached = new QRadioButton(/*SLLanguage[]*/);
+    QRadioButton *rbMyAll = new QRadioButton(/*Words[]*/);
+    QRadioButton *rbMyReached = new QRadioButton(/*Words[]*/);
+    QRadioButton *rbMyNotReached = new QRadioButton(/*Words[]*/);
     rbMyAll->setObjectName("RBMyAll");
     rbMyReached->setObjectName("RBMyReached");
     rbMyNotReached->setObjectName("RBMyNotReached");
@@ -334,11 +320,11 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     lay1->setAlignment(Qt::AlignCenter);
     wd1->setLayout(lay1);
     QLabel* All = new QLabel("All");
-    All->setToolTip(SLLanguage[2]);
+    All->setToolTip(Words[2]);
     ui->FormCompareTableWidgetFriends->setCellWidget(0,1,All);
-    QPushButton *pbFriendsAll = new QPushButton(/*SLLanguage[]*/);
-    QPushButton *pbFriendsReached = new QPushButton(/*SLLanguage[]*/);
-    QPushButton *pbFriendsNotReached = new QPushButton(/*SLLanguage[]*/);
+    QPushButton *pbFriendsAll = new QPushButton(/*Words[]*/);
+    QPushButton *pbFriendsReached = new QPushButton(/*Words[]*/);
+    QPushButton *pbFriendsNotReached = new QPushButton(/*Words[]*/);
     pbFriendsAll->setObjectName("PBFriendsAll");
     pbFriendsReached->setObjectName("PBFriendsReached");
     pbFriendsNotReached->setObjectName("PBFriendsNotReached");
@@ -355,7 +341,7 @@ FormCompare::FormCompare(QString keys, int languages, int Themes, QString ids, Q
     lay2->addWidget(pbFriendsNotReached);
     lay2->setMargin(1);
     wd2->setLayout(lay2);
-    switch (Theme) {
+    switch (Setting.GetTheme()) {
     case 1:{
         ui->FormCompareGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
         ui->FormCompareButtonFind->setIcon(QIcon("images/program/find_white.png"));
@@ -648,10 +634,10 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                     QTableWidgetItem *item5;
                     if(JAPA[j].toObject().value("achieved").toInt()==1){
                         QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
-                        item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                        item5 = new QTableWidgetItem(Words[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
                         totalr++;
                         } else {
-                        item5 = new QTableWidgetItem(SLLanguage[16]);
+                        item5 = new QTableWidgetItem(Words[16]);
                         totalnr++;
                         }
                     item5->setTextAlignment(Qt::AlignCenter);
@@ -664,9 +650,9 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel("profile is \nnot public"));
             else {
                 ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
-                QRadioButton *rbAll = new QRadioButton(/*SLLanguage[]*/);
-                QRadioButton *rbReached = new QRadioButton(/*SLLanguage[]*/);
-                QRadioButton *rbNotReached = new QRadioButton(/*SLLanguage[]*/);
+                QRadioButton *rbAll = new QRadioButton(/*Words[]*/);
+                QRadioButton *rbReached = new QRadioButton(/*Words[]*/);
+                QRadioButton *rbNotReached = new QRadioButton(/*Words[]*/);
                 rbAll->setObjectName("RB"+QString::number(column)+"All");
                 rbReached->setObjectName("RB"+QString::number(column)+"Reached");
                 rbNotReached->setObjectName("RB"+QString::number(column)+"NotReached");
@@ -683,7 +669,7 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 lay->addWidget(rbNotReached);
                 lay->setMargin(1);
                 wd->setLayout(lay);
-                switch (Theme) {
+                switch (Setting.GetTheme()) {
                 case 1:{
                     rbAll->setIcon(QIcon("images/program/all_white.png"));
                     rbReached->setIcon(QIcon("images/program/reached_white.png"));
@@ -956,10 +942,10 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
                 QTableWidgetItem *item5;
                 if(JsonArrayPlayerAchievements[j].toObject().value("achieved").toInt()==1){
                     QDateTime date=QDateTime::fromSecsSinceEpoch(JsonArrayPlayerAchievements[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
-                    item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                    item5 = new QTableWidgetItem(Words[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
                     totalr++;
                     } else {
-                    item5 = new QTableWidgetItem(SLLanguage[16]);
+                    item5 = new QTableWidgetItem(Words[16]);
                     totalnr++;
                     }
                 item5->setTextAlignment(Qt::AlignCenter);
@@ -1029,10 +1015,10 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
                     QTableWidgetItem *item5;
                     if(JAPA[j].toObject().value("achieved").toInt()==1){
                         QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
-                        item5 = new QTableWidgetItem(SLLanguage[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                        item5 = new QTableWidgetItem(Words[15]+" "+date.toString("yyyy.MM.dd hh:mm"));
                         totalr++;
                         } else {
-                        item5 = new QTableWidgetItem(SLLanguage[16]);
+                        item5 = new QTableWidgetItem(Words[16]);
                         totalnr++;
                         }
                     item5->setTextAlignment(Qt::AlignCenter);

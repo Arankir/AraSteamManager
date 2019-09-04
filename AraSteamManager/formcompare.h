@@ -18,6 +18,8 @@
 #include <class\profile.h>
 #include <QTableWidgetItem>
 #include <QRadioButton>
+#include <class/settings.h>
+#include <class/language.h>
 
 namespace Ui {
 class FormCompare;
@@ -28,7 +30,7 @@ class FormCompare : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormCompare(QString keys, int languages, int Themes, QString ids, QString appids, QPixmap GameLogo, QJsonArray JsonArrayGlobalAchievement,int SaveImage, QWidget *parent = nullptr);
+    explicit FormCompare(QString keys, QString ids, QString appids, QPixmap GameLogo, QJsonArray JsonArrayGlobalAchievement, QWidget *parent = nullptr);
     ~FormCompare();
 
 signals:
@@ -80,8 +82,6 @@ private:
     Ui::FormCompare *ui;
     QString key;
     QString id;
-    int language;
-    int Theme;
     int windowchildcount=0;
     QString appid;
     QJsonDocument JsonDocNumberOfCurrentPlayers;
@@ -92,9 +92,9 @@ private:
     int colfilter=3;
     QFormLayout *newcategoryvalueslayout;
     QFormLayout *changecategoryvalueslayout;
-    QStringList SLLanguage;
-    int SaveImages;
+    QStringList Words;
     QPair <QVector<Profile>,QVector<Profile>> Friends;
+    Settings Setting;
 };
 
 #endif // FORMCOMPARE_H

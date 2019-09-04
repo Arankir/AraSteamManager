@@ -1234,7 +1234,7 @@ void FormAchievements::on_buttonChangeCategoryUnSelectValues_clicked(){
 void FormAchievements::on_FormAchievementsButtonCompare_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
-        compareform = new FormCompare(key,language,Theme,id,appid,*ui->FormAchievementsLabelGameLogo->pixmap(),JsonArrayGlobalAchievements,SaveImages);
+        compareform = new FormCompare(key,id,appid,*ui->FormAchievementsLabelGameLogo->pixmap(),JsonArrayGlobalAchievements);
         connect(compareform,SIGNAL(return_to_achievements(FormCompare*)),this,SLOT(on_return(FormCompare*)));
         compareform->show();
         this->setVisible(false);

@@ -26,7 +26,9 @@ CONFIG += c++11
 
 SOURCES += \
     class/imagerequest.cpp \
+    class/language.cpp \
     class/profile.cpp \
+    class/settings.cpp \
     class/steamapiachievementglobal.cpp \
     class/steamapiachievementplayer.cpp \
     class/steamapiachievements.cpp \
@@ -48,7 +50,9 @@ SOURCES += \
 
 HEADERS += \
     class/imagerequest.h \
+    class/language.h \
     class/profile.h \
+    class/settings.h \
     class/steamapiachievementglobal.h \
     class/steamapiachievementplayer.h \
     class/steamapiachievements.h \
@@ -79,4 +83,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES +=
+RESOURCES += \
+    images/res.qrc

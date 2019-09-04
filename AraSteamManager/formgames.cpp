@@ -1,33 +1,19 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, int languages, int Themes, SteamAPIGames Gamess, int SaveImage, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     id=ids;
     key=keys;
-    language=languages;
-    SaveImages=SaveImage;
-    Theme=Themes;
     Games=Gamess;
     Games.Sort();
     ui->FormGamesTableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    QFile FileLanguage;
-    switch(language){
-    case 1:{
-        FileLanguage.setFileName("Files/Languages/ENG/games.txt");
-        break;
-        }
-    case 5:{
-        FileLanguage.setFileName("Files/Languages/RU/games.txt");
-        }
-    }
-    if(FileLanguage.open(QIODevice::ReadOnly)){
-        while(!FileLanguage.atEnd()){
-            SLLanguage << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
-        }
+    if(Setting.GetStatus()=="success"){
+        Language lan;
+        Words=lan.GetLanguage("games",Setting.GetLanguage());
     }
     QIcon favorites;
-    switch(Theme){
+    switch(Setting.GetTheme()){
     case 1:{
         ui->FormGamesButtonFind->setIcon(QIcon("images/program/find_white.png"));
         ui->FormGamesButtonReturn->setIcon(QIcon("images/program/back_white.png"));
@@ -43,20 +29,20 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, Steam
     }
     ui->FormGamesTableWidgetGames->setColumnCount(4);
     ui->FormGamesLabelLogo->setText("(WIP)");
-    ui->FormGamesLineEditGame->setPlaceholderText(SLLanguage[0]);
-    ui->FormGamesButtonFind->setText(" "+SLLanguage[1]);
-    ui->FormGamesButtonReturn->setText(" "+SLLanguage[2]);
+    ui->FormGamesLineEditGame->setPlaceholderText(Words[0]);
+    ui->FormGamesButtonFind->setText(" "+Words[1]);
+    ui->FormGamesButtonReturn->setText(" "+Words[2]);
     ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(SLLanguage[3]));
-    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(SLLanguage[4]));
-    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(SLLanguage[5]));
+    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[3]));
+    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
+    ui->FormGamesTableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[5]));
     for(int i=0;i<Games.GetGamesCount();i++){
         int row = ui->FormGamesTableWidgetGames->rowCount();
         ui->FormGamesTableWidgetGames->insertRow(row);
         if(!QFile::exists("images/icon_games/"+Games.GetImg_icon_url(i)+".png")){
             if(Games.GetImg_icon_url(i)!=""){
                 ImageRequest *image;
-                switch (SaveImages) {
+                switch (Setting.GetSaveimages()) {
                     case 0:{
                         image = new ImageRequest(row,"");
                         break;
@@ -84,7 +70,7 @@ FormGames::FormGames(QString ids, QString keys, int languages, int Themes, Steam
         ui->FormGamesTableWidgetGames->setItem(row,1,item2);
         QPushButton *button1 = new QPushButton;
         QPushButton *button2 = new QPushButton;
-        button1->setText(SLLanguage[4]);
+        button1->setText(Words[4]);
         button1->setMinimumSize(QSize(25,25));
         button2->setIcon(favorites);
         button2->setMinimumSize(QSize(25,25));
@@ -144,9 +130,9 @@ void FormGames::AchievementsClicked(){
         QJsonDocument JsonDocGlobalAchievements = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
         if(JsonDocGlobalAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
             windowchildcount--;
-            QMessageBox::warning(this,SLLanguage[6],SLLanguage[7]);
+            QMessageBox::warning(this,Words[6],Words[7]);
         } else {
-            achievementsform = new FormAchievements(key,language,Theme,id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()),JsonDocGlobalAchievements,SaveImages);
+            achievementsform = new FormAchievements(key,Setting.GetLanguage(),Setting.GetTheme(),id,btn->objectName().mid(27,btn->objectName().indexOf("&",27)-27),btn->objectName().mid(btn->objectName().indexOf("&",27)+1,btn->objectName().length()),JsonDocGlobalAchievements,Setting.GetSaveimages());
             connect(achievementsform,SIGNAL(return_to_games(FormAchievements*)),this,SLOT(on_return(FormAchievements*)));
             achievementsform->show();
             this->setVisible(false);
