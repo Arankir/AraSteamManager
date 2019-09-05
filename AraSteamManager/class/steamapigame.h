@@ -13,13 +13,13 @@ public:
     explicit SteamAPIGame(QJsonObject ObjGame, QObject *parent = nullptr);
     SteamAPIGame();
     void Set(QJsonObject ObjGame);
-    int GetAppid();
-    QString GetName();
-    int GetPlaytime_2weeks();
-    int GetPlaytime_forever();
-    QString GetImg_icon_url();
-    QString GetImg_logo_url();
-    bool GetHas_community_visible_stats();
+    int GetAppid() {return appid;}
+    QString GetName() {return name;}
+    int GetPlaytime_2weeks() {return playtime_2weeks;}
+    int GetPlaytime_forever() {return playtime_forever;}
+    QString GetImg_icon_url() {return img_icon_url;}
+    QString GetImg_logo_url() {return img_logo_url;}
+    bool GetHas_community_visible_stats() {return has_community_visible_stats;}
     SteamAPIGame(const SteamAPIGame &);
     SteamAPIGame & operator=(const SteamAPIGame & game);
 

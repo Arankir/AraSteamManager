@@ -47,34 +47,12 @@ void SteamAPIAchievementsPlayer::Load(QNetworkReply* Reply){
     emit finished();
 }
 
-SteamAPIAchievementPlayer SteamAPIAchievementsPlayer::GetAchievementInfo(int index){
-    return achievements[index];
-}
-QString SteamAPIAchievementsPlayer::GetApiname(int index){
-    return achievements[index].GetApiname();
-}
-int SteamAPIAchievementsPlayer::GetAchieved(int index){
-    return achievements[index].GetAchieved();
-}
-QDateTime SteamAPIAchievementsPlayer::GetUnlocktime(int index){
-    return achievements[index].GetUnlocktime();
-}
-QString SteamAPIAchievementsPlayer::GetAppid(){
-    return appid;
-}
-QString SteamAPIAchievementsPlayer::GetGamename(){
-    return gamename;
-}
-QString SteamAPIAchievementsPlayer::GetStatus(){
-    return status;
-}
-
-int SteamAPIAchievementsPlayer::GetAchievementsCount(){
-    return count;
-}
-
 void SteamAPIAchievementsPlayer::Update(){
     Set(key,appid,id);
+}
+void SteamAPIAchievementsPlayer::Clear(){
+    achievements.clear();
+    count=0;
 }
 
 SteamAPIAchievementsPlayer::SteamAPIAchievementsPlayer( const SteamAPIAchievementsPlayer & achievementss){
@@ -87,7 +65,6 @@ SteamAPIAchievementsPlayer::SteamAPIAchievementsPlayer( const SteamAPIAchievemen
     status=achievementss.status;
     manager = new QNetworkAccessManager;
 }
-
 SteamAPIAchievementsPlayer & SteamAPIAchievementsPlayer::operator=(const SteamAPIAchievementsPlayer & achievementss) {
     delete manager;
     achievements=achievementss.achievements;
@@ -99,9 +76,4 @@ SteamAPIAchievementsPlayer & SteamAPIAchievementsPlayer::operator=(const SteamAP
     status=achievementss.status;
     manager = new QNetworkAccessManager;
     return *this;
-}
-
-void SteamAPIAchievementsPlayer::Clear(){
-    achievements.clear();
-    count=0;
 }

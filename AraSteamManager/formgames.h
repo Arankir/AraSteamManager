@@ -7,6 +7,7 @@
 #include <formachievements.h>
 #include <class/steamapigames.h>
 #include <class/settings.h>
+#include <class/steamapiachievements.h>
 
 namespace Ui {
 class FormGames;

@@ -18,17 +18,17 @@ class Profile : public QObject
 public:
     explicit Profile(QJsonObject info, QObject *parent = nullptr);
     Profile();
-    Profile(const Profile&);
-    Profile& operator=(const Profile&);
     ~Profile();
-    void PostData(QJsonObject info);
-    QString GetSteamid();
-    QPixmap GetAvatar();
-    int GetVisibility();
-    QString GetName();
-    int GetTimeCreated();
-    QString GetInGame();
-    QString GetGameId();
+    void Set(QJsonObject info);
+    QString GetSteamid() {return steamid;}
+    QPixmap GetAvatar() {return Avatar;}
+    int GetVisibility() {return visibility;}
+    QString GetName() {return Name;}
+    int GetTimeCreated() {return timecreated;}
+    QString GetInGame() {return inGame;}
+    QString GetGameId() {return Gameid;}
+    Profile & operator=(const Profile &);
+    Profile(const Profile&);
 
 signals:
 

@@ -1,17 +1,18 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QString GameLogo, QJsonDocument JsonDocGlobalAchievement, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
+FormAchievements::FormAchievements(QString keys, QString ids, SteamAPIGame games, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
     ui->setupUi(this);
     Words=Setting.GetWords("achievements");
     key=keys;
     id=ids;
-    appid=appids;
-    JsonArrayGlobalAchievements = JsonDocGlobalAchievement.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray();
+    //appid=appids;
+    game=games;
+    achievements.Set(key,QString::number(game.GetAppid()),id,Words[26]);
+    //JsonArrayGlobalAchievements = JsonDocGlobalAchievement.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray();
     //{"name": "no_one_cared_who_i_was",
     //"percent": 85}
     ui->TableWidgetAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
     switch(Setting.GetTheme()){
     case 1:{
         theme="white";
@@ -22,6 +23,7 @@ FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QS
         break;
         }
     }
+    //qDebug()<<achievements.GetStatusGlobal()<<achievements.GetStatusPlayer()<<achievements.GetStatusPercent()<<achievements.GetAppid()<<achievements.GetGamename()<<achievements.GetAchievementsCount();
     ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonCompare->setIcon(QIcon(":/"+theme+"/program/"+theme+"/compare.png"));
     //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/program/filter_white.png)}");
@@ -45,11 +47,13 @@ FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QS
     QEventLoop loop;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
     QNetworkReply &replyNumberOfCurrentPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+key+"&appid="+appid)));
+
     loop.exec();
     //{"player_count":9023,
     //"result":1}
     JsonDocNumberOfCurrentPlayers = QJsonDocument::fromJson(replyNumberOfCurrentPlayers.readAll());
     QNetworkReply &replyPlayerAchievements = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+key+"&appid="+appid+"&steamid="+id)));
+
     loop.exec();
     JsonDocPlayerAchievements = QJsonDocument::fromJson(replyPlayerAchievements.readAll());
     QJsonArray JsonArrayPlayerAchievements = JsonDocPlayerAchievements.object().value("playerstats").toObject().value("achievements").toArray();
@@ -96,19 +100,20 @@ FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QS
     loop.exec();
     JsonArraySchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll()).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray();
     ui->LabelGameOnline->setText(Words[27]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
-    QNetworkReply &logoreply = *manager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+appid+"/"+GameLogo+".jpg"));
-    loop.exec();
-    QPixmap pixmap;
-    pixmap.loadFromData(logoreply.readAll());
-    ui->LabelGameLogo->setPixmap(pixmap);
+    //QNetworkReply &logoreply = *manager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+appid+"/"+GameLogo+".jpg"));
+
+    //loop.exec();
+    //QPixmap pixmap;
+    //pixmap.loadFromData(logoreply.readAll());
+    //ui->LabelGameLogo->setPixmap(pixmap);
     int totalr=0;
     int totalnr=0;
     if(!QDir("images/achievements/"+appid).exists()){
         QDir().mkdir("images/achievements/"+appid);
     }
-    QJsonArray JAPA = JsonArrayPlayerAchievements;
-    QJsonArray JASFG = JsonArraySchemaForGame;
-    if(JsonDocPlayerAchievements.object().value("playerstats").toObject().value("success").toBool()==false){
+    //QJsonArray JAPA = JsonArrayPlayerAchievements;
+    //QJsonArray JASFG = JsonArraySchemaForGame;
+    if(/*JsonDocPlayerAchievements.object().value("playerstats").toObject().value("success").toBool()==false*/!(achievements.GetStatusGlobal()=="success"&&achievements.GetStatusPlayer()=="success"&&achievements.GetStatusPercent()=="success")){
         ui->TableWidgetAchievements->insertRow(0);
         QTableWidgetItem *item1 = new QTableWidgetItem("Error");
         ui->TableWidgetAchievements->setItem(0,1,item1);
@@ -121,21 +126,21 @@ FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QS
         ui->GroupBoxFilter->setEnabled(false);
         ui->ButtonCompare->setEnabled(false);
     } else
-    for(int i=0;i<JsonArrayGlobalAchievements.size();i++){
+    for(int i=0;i<achievements.GetAchievementsCount();i++){
         qDebug()<<i;
-            int j=0;
-            bool accept=false;
-            for(;j<JAPA.size();j++){
-                if(JAPA[j].toObject().value("apiname").toString()==JsonArrayGlobalAchievements[i].toObject().value("name").toString()){
-                    accept=true;
-                    break;
-                    }
-            }
-            if(accept){
+            //int j=0;
+            //bool accept=false;
+            //for(;j<JAPA.size();j++){
+            //    if(JAPA[j].toObject().value("apiname").toString()==JsonArrayGlobalAchievements[i].toObject().value("name").toString()){
+            //        accept=true;
+            //        break;
+            //        }
+            //}
+            if((achievements.GetStatusGlobal()=="success")&&(achievements.GetStatusPlayer()=="success")&&(achievements.GetStatusPercent()=="success")){
                 int row = ui->TableWidgetAchievements->rowCount();
                 ui->TableWidgetAchievements->insertRow(row);
-                QString AchievementIcon=JASFG[j].toObject().value("icon").toString().mid(66,JASFG[j].toObject().value("icon").toString().length());
-                if(!QFile::exists("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
+                QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
+                if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
                     ImageRequest *image;
                     switch (Setting.GetSaveimages()) {
                         case 0:{
@@ -143,7 +148,7 @@ FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QS
                             break;
                             }
                         case 1:{
-                            image = new ImageRequest(row,JASFG[j].toObject().value("icon").toString().mid(66,JASFG[j].toObject().value("icon").toString().length()));
+                            image = new ImageRequest(row,AchievementIcon);
                             break;
                             }
                         default:{
@@ -152,27 +157,26 @@ FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QS
                             }
                         }
                     connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-                    image->Get(JASFG[j].toObject().value("icon").toString());
+                    image->Get(achievements.GetIcon(i));
                     } else {
                     QPixmap pixmap;
-                    pixmap.load("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
+                    pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
                     QLabel *label = new QLabel;
                     label->setPixmap(pixmap);
                     ui->TableWidgetAchievements->setCellWidget(row,0,label);
                     }
-                QTableWidgetItem *item2 = new QTableWidgetItem(JASFG[j].toObject().value("displayName").toString());
+                QTableWidgetItem *item2 = new QTableWidgetItem(achievements.GetDisplayname(i));
                 item2->setTextAlignment(Qt::AlignCenter);
                 ui->TableWidgetAchievements->setItem(row,1,item2);
-                QTableWidgetItem *item3 = new QTableWidgetItem(JASFG[j].toObject().value("description").toString());
+                QTableWidgetItem *item3 = new QTableWidgetItem(achievements.GetDescription(i));
                 item3->setTextAlignment(Qt::AlignCenter);
                 ui->TableWidgetAchievements->setItem(row,2,item3);
-                QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(JsonArrayGlobalAchievements[i].toObject().value("percent").toDouble())+"%");
+                QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(achievements.GetPercent(i))+"%");
                 item4->setTextAlignment(Qt::AlignCenter);
                 ui->TableWidgetAchievements->setItem(row,3,item4);
                 QTableWidgetItem *item5;
-                if(JAPA[j].toObject().value("achieved").toInt()==1){
-                    QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
-                    item5 = new QTableWidgetItem(Words[23]+" "+date.toString("yyyy.MM.dd hh:mm"));
+                if(achievements.GetAchieved(i)==1){
+                    item5 = new QTableWidgetItem(Words[23]+" "+achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"));
                     totalr++;
                     } else {
                     item5 = new QTableWidgetItem(Words[24]);
@@ -183,13 +187,13 @@ FormAchievements::FormAchievements(QString keys, QString ids, QString appids, QS
                 QPushButton *button1 = new QPushButton;
                 button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
                 connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-                button1->setObjectName("FormGamesButtonFavorites"+appid+"&"+JAPA[j].toObject().value("apiname").toString());
+                button1->setObjectName("FormGamesButtonFavorites"+appid+"&"+achievements.GetApiname(i));
                 ui->TableWidgetAchievements->setCellWidget(row,5,button1);
-                QTableWidgetItem *item6 = new QTableWidgetItem(JAPA[j].toObject().value("apiname").toString());
+                QTableWidgetItem *item6 = new QTableWidgetItem(achievements.GetApiname(i));
                 ui->TableWidgetAchievements->setItem(row,6,item6);
                 ui->TableWidgetAchievements->setColumnHidden(6,true);
-                JAPA.removeAt(j);
-                JASFG.removeAt(j);
+                //JAPA.removeAt(j);
+                //JASFG.removeAt(j);
             }
         }
     double percent= 100.0*totalr/(totalr+totalnr);

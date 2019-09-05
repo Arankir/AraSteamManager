@@ -24,27 +24,27 @@ public:
     void Set(QString key, QString id, QString type);
     void Set(QJsonDocument DocSummaries);
     void Set(QJsonDocument DocSummaries,int index);
-    QString GetSteamid();
-    int GetCommunityvisibilitystate();
-    int GetProfilestate();
-    QString GetPersonaname();
-    QDateTime GetLastlogoff();
-    int GetCommentpermission();
-    QString GetProfileurl();
-    QString GetAvatar();
-    QString GetAvatarmedium();
-    QString GetAvatarfull();
-    int GetPersonastate();
-    QString GetPrimaryclanid();
-    QDateTime GetTimecreated();
-    int GetPersonastateflags();
-    QString GetGameextrainfo();
-    QString GetGameid();
-    QString GetLoccountrycode();
-    QString GetLocstatecode();
-    int GetLoccityid();
-    QString GetRealname();
-    QString GetStatus();
+    QString GetSteamid() {return steamid;}
+    int GetCommunityvisibilitystate() {return communityvisibilitystate;}
+    int GetProfilestate() {return profilestate;}
+    QString GetPersonaname() {return personaname;}
+    QDateTime GetLastlogoff() {return lastlogoff;}
+    int GetCommentpermission() {return commentpermission;}
+    QString GetProfileurl() {return profileurl;}
+    QString GetAvatar() {return avatar;}
+    QString GetAvatarmedium() {return avatarmedium;}
+    QString GetAvatarfull() {return avatarfull;}
+    int GetPersonastate() {return personastate;}
+    QString GetPrimaryclanid() {return primaryclanid;}
+    QDateTime GetTimecreated() {return timecreated;}
+    int GetPersonastateflags() {return personastateflags;}
+    QString GetGameextrainfo() {return gameextrainfo;}
+    QString GetGameid() {return gameid;}
+    QString GetLoccountrycode() {return loccountrycode;}
+    QString GetLocstatecode() {return locstatecode;}
+    int GetLoccityid() {return loccityid;}
+    QString GetRealname() {return realname;}
+    QString GetStatus() {return status;}
     void Update();
     SteamAPIProfile( const SteamAPIProfile & a);
     SteamAPIProfile & operator=(const SteamAPIProfile & profile);

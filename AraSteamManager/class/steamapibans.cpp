@@ -4,17 +4,14 @@ SteamAPIBans::SteamAPIBans(QString key, QString id, QObject *parent) : QObject(p
     manager = new QNetworkAccessManager();
     Set(key, id);
 }
-
 SteamAPIBans::SteamAPIBans(QJsonDocument DocBans){
     manager = new QNetworkAccessManager();
     Set(DocBans);
 }
-
 SteamAPIBans::SteamAPIBans(){
     manager = new QNetworkAccessManager();
     status="null";
 }
-
 SteamAPIBans::~SteamAPIBans(){
     delete manager;
 }
@@ -48,31 +45,6 @@ void SteamAPIBans::Load(QNetworkReply *Reply){
     Set(DocBans);
     emit finished(this);
     emit finished();
-}
-
-QString SteamAPIBans::GetSteamid(){
-    return steamid;
-}
-bool SteamAPIBans::GetCommunityBanned(){
-    return CommunityBanned;
-}
-bool SteamAPIBans::GetVACBanned(){
-    return VACBanned;
-}
-int SteamAPIBans::GetNumberOfVACBans(){
-    return NumberOfVACBans;
-}
-int SteamAPIBans::GetDaysSinceLastBan(){
-    return DaysSinceLastBan;
-}
-int SteamAPIBans::GetNumberOfGameBans(){
-    return NumberOfGameBans;
-}
-QString SteamAPIBans::GetEconomyBan(){
-    return EconomyBan;
-}
-QString SteamAPIBans::GetStatus(){
-    return status;
 }
 
 void SteamAPIBans::Update(){

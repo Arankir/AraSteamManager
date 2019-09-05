@@ -30,9 +30,11 @@ SOURCES += \
     class/settings.cpp \
     class/steamapiachievement.cpp \
     class/steamapiachievementglobal.cpp \
+    class/steamapiachievementpercentage.cpp \
     class/steamapiachievementplayer.cpp \
     class/steamapiachievements.cpp \
     class/steamapiachievementsglobal.cpp \
+    class/steamapiachievementspercentage.cpp \
     class/steamapiachievementsplayer.cpp \
     class/steamapibans.cpp \
     class/steamapifriend.cpp \
@@ -54,9 +56,11 @@ HEADERS += \
     class/settings.h \
     class/steamapiachievement.h \
     class/steamapiachievementglobal.h \
+    class/steamapiachievementpercentage.h \
     class/steamapiachievementplayer.h \
     class/steamapiachievements.h \
     class/steamapiachievementsglobal.h \
+    class/steamapiachievementspercentage.h \
     class/steamapiachievementsplayer.h \
     class/steamapibans.h \
     class/steamapifriend.h \

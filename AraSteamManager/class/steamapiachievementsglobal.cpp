@@ -24,17 +24,18 @@ manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSch
 }
 void SteamAPIAchievementsGlobal::Set(QJsonDocument DocAchievements){
     Clear();
-    if(DocAchievements.object().value("game").toObject().value("availibleGameStats").toObject().value("achievements").toArray().size()>0&&DocAchievements.object().value("game").toObject().value("gameVersion").toString()!=gameversion){
+    if(DocAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0&&DocAchievements.object().value("game").toObject().value("gameVersion").toString()!=gameversion){
         gamename=DocAchievements.object().value("game").toObject().value("gameName").toString();
         gameversion=DocAchievements.object().value("game").toObject().value("gameVersion").toString();
-        count=DocAchievements.object().value("game").toObject().value("availibleGameStats").toObject().value("achievements").toArray().size();
+        count=DocAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();
         for (int i=0;i<count;i++) {
             achievements.push_back(SteamAPIAchievementGlobal(DocAchievements.object().value("game").toObject().value("availibleGameStats").toObject().value("achievements").toArray().at(i).toObject()));
         }
         status="success";
+
     }
     else {
-        status="error: profile is not exist";
+        status="error: game is not exist";
     }
 }
 
@@ -47,49 +48,12 @@ void SteamAPIAchievementsGlobal::Load(QNetworkReply* Reply){
     emit finished();
 }
 
-SteamAPIAchievementGlobal SteamAPIAchievementsGlobal::GetAchievementInfo(int index){
-    return achievements[index];
-}
-QString SteamAPIAchievementsGlobal::GetApiname(int index){
-    return achievements[index].GetApiname();
-}
-int SteamAPIAchievementsGlobal::GetDefaultvalue(int index){
-    return achievements[index].GetDefaultvalue();
-}
-QString SteamAPIAchievementsGlobal::GetDisplayname(int index){
-    return achievements[index].GetDisplayname();
-}
-int SteamAPIAchievementsGlobal::GetHidden(int index){
-    return achievements[index].GetHidden();
-}
-QString SteamAPIAchievementsGlobal::GetDescription(int index){
-    return achievements[index].GetDescription();
-}
-QString SteamAPIAchievementsGlobal::GetIcon(int index){
-    return achievements[index].GetIcon();
-}
-QString SteamAPIAchievementsGlobal::GetIcongray(int index){
-    return achievements[index].GetIcongray();
-}
-QString SteamAPIAchievementsGlobal::GetAppid(){
-    return appid;
-}
-QString SteamAPIAchievementsGlobal::GetGamename(){
-    return gamename;
-}
-QString SteamAPIAchievementsGlobal::GetGameversion(){
-    return gameversion;
-}
-QString SteamAPIAchievementsGlobal::GetStatus(){
-    return status;
-}
-
-int SteamAPIAchievementsGlobal::GetAchievementsCount(){
-    return count;
-}
-
 void SteamAPIAchievementsGlobal::Update(){
     Set(key,appid,language);
+}
+void SteamAPIAchievementsGlobal::Clear(){
+    achievements.clear();
+    count=0;
 }
 
 SteamAPIAchievementsGlobal::SteamAPIAchievementsGlobal( const SteamAPIAchievementsGlobal & achievementss){
@@ -103,7 +67,6 @@ SteamAPIAchievementsGlobal::SteamAPIAchievementsGlobal( const SteamAPIAchievemen
     status=achievementss.status;
     manager = new QNetworkAccessManager;
 }
-
 SteamAPIAchievementsGlobal & SteamAPIAchievementsGlobal::operator=(const SteamAPIAchievementsGlobal & achievementss) {
     delete manager;
     achievements=achievementss.achievements;
@@ -116,9 +79,4 @@ SteamAPIAchievementsGlobal & SteamAPIAchievementsGlobal::operator=(const SteamAP
     status=achievementss.status;
     manager = new QNetworkAccessManager;
     return *this;
-}
-
-void SteamAPIAchievementsGlobal::Clear(){
-    achievements.clear();
-    count=0;
 }

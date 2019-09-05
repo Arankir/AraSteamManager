@@ -44,33 +44,8 @@ void SteamAPIFriends::Load(QNetworkReply* Reply){
     emit finished();
 }
 
-SteamAPIFriend SteamAPIFriends::GetFriendInfo(int index){
-    return friends[index];
-}
-QString SteamAPIFriends::GetSteamid(int index){
-    return friends[index].GetSteamid();
-}
-QString SteamAPIFriends::GetRelationship(int index){
-    return friends[index].GetRelationship();
-}
-QDateTime SteamAPIFriends::GetFriend_since(int index){
-    return friends[index].GetFriend_since();
-}
-QString SteamAPIFriends::GetStatus(){
-    return status;
-}
-
-int SteamAPIFriends::GetFriendsCount(){
-    return count;
-}
-
 SteamAPIProfile SteamAPIFriends::GetProfileFriend(int index){
-    QEventLoop loop;
-    SteamAPIProfile Profile;
-    connect(&Profile, SIGNAL(finished()), &loop, SLOT(quit()));
-    Profile.Set(key,GetSteamid(index),"url");
-    loop.exec();
-    disconnect(&Profile, SIGNAL(finished()), &loop, SLOT(quit()));
+    SteamAPIProfile Profile(key,GetSteamid(index),"url");
     return Profile;
 }
 QVector<SteamAPIProfile> SteamAPIFriends::GetProfiles(){

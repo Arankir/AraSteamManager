@@ -1,7 +1,6 @@
 #include "settings.h"
 
-Settings::Settings(QObject *parent) : QObject(parent)
-{
+Settings::Settings(QObject *parent) : QObject(parent){
     if(QFile::exists("Files/Settings.txt")){
         QFile settings("Files/Settings.txt");
         if (settings.open(QIODevice::ReadOnly)){
@@ -32,21 +31,6 @@ Settings::Settings(QObject *parent) : QObject(parent)
         status="error: file not found";
 }
 
-QString Settings::GetMyProfile(){
-    return MyProfile;
-}
-int Settings::GetLanguage(){
-    return language;
-}
-int Settings::GetTheme(){
-    return theme;
-}
-int Settings::GetSaveimages(){
-    return SaveImages;
-}
-QString Settings::GetStatus(){
-    return status;
-}
 QStringList Settings::GetWords(QString form){
     QString lan;
     switch (language) {
@@ -98,7 +82,6 @@ bool Settings::SetMyProfile(QString MyProfiles){
         return true;
     }
 }
-
 bool Settings::SetLanguage(int Language){
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -121,7 +104,6 @@ bool Settings::SetLanguage(int Language){
         return true;
     }
 }
-
 bool Settings::SetTheme(int Theme){
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -144,7 +126,6 @@ bool Settings::SetTheme(int Theme){
         return true;
     }
 }
-
 bool Settings::SetSaveimage(int SaveImage){
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -167,7 +148,6 @@ bool Settings::SetSaveimage(int SaveImage){
         return true;
     }
 }
-
 void Settings::SetDefault(){
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))

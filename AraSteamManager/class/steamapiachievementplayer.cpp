@@ -13,22 +13,12 @@ void SteamAPIAchievementPlayer::Set(QJsonObject ObjAchievement){
     unlocktime=QDateTime::fromSecsSinceEpoch(ObjAchievement.value("unlocktime").toInt(),Qt::LocalTime);
 }
 
-QString SteamAPIAchievementPlayer::GetApiname(){
-    return apiname;
-}
-int SteamAPIAchievementPlayer::GetAchieved(){
-    return achieved;
-}
-QDateTime SteamAPIAchievementPlayer::GetUnlocktime(){
-    return unlocktime;
-}
 
 SteamAPIAchievementPlayer::SteamAPIAchievementPlayer( const SteamAPIAchievementPlayer & a){
     apiname=a.apiname;
     achieved=a.achieved;
     unlocktime=a.unlocktime;
 }
-
 SteamAPIAchievementPlayer & SteamAPIAchievementPlayer::operator=(const SteamAPIAchievementPlayer & Achievements) {
     apiname=Achievements.apiname;
     achieved=Achievements.achieved;

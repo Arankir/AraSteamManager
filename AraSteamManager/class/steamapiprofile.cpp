@@ -4,21 +4,17 @@ SteamAPIProfile::SteamAPIProfile(QString key, QString id, QString type, QObject 
     manager = new QNetworkAccessManager();
     Set(key, id, type);
 }
-
 SteamAPIProfile::SteamAPIProfile(QJsonDocument DocSummaries){
     manager = new QNetworkAccessManager();
     Set(DocSummaries);
 }
-
 SteamAPIProfile::SteamAPIProfile(QJsonDocument DocSummaries, int index){
     manager = new QNetworkAccessManager();
     Set(DocSummaries,index);
 }
-
 SteamAPIProfile::SteamAPIProfile(){
     manager = new QNetworkAccessManager();
 }
-
 SteamAPIProfile::~SteamAPIProfile(){
     delete manager;
 }
@@ -106,7 +102,6 @@ void SteamAPIProfile::LoadVanity(QNetworkReply *Reply){
     QString id=Doc.object().value("response").toObject().value("steamid").toString();
     manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+id));
 }
-
 void SteamAPIProfile::LoadURL(QNetworkReply *Reply){
     QJsonDocument DocSummaries = QJsonDocument::fromJson(Reply->readAll());
     disconnect(manager,&QNetworkAccessManager::finished,this,&SteamAPIProfile::LoadURL);
@@ -116,72 +111,31 @@ void SteamAPIProfile::LoadURL(QNetworkReply *Reply){
     emit finished();
 }
 
-QString SteamAPIProfile::GetSteamid(){
-    return steamid;
-}
-int SteamAPIProfile::GetCommunityvisibilitystate(){
-    return communityvisibilitystate;
-}
-int SteamAPIProfile::GetProfilestate(){
-    return profilestate;
-}
-QString SteamAPIProfile::GetPersonaname(){
-    return personaname;
-}
-QDateTime SteamAPIProfile::GetLastlogoff(){
-    return lastlogoff;
-}
-int SteamAPIProfile::GetCommentpermission(){
-    return commentpermission;
-}
-QString SteamAPIProfile::GetProfileurl(){
-    return profileurl;
-}
-QString SteamAPIProfile::GetAvatar(){
-    return avatar;
-}
-QString SteamAPIProfile::GetAvatarmedium(){
-    return avatarmedium;
-}
-QString SteamAPIProfile::GetAvatarfull(){
-    return avatarfull;
-}
-int SteamAPIProfile::GetPersonastate(){
-    return personastate;
-}
-QString SteamAPIProfile::GetPrimaryclanid(){
-    return primaryclanid;
-}
-QDateTime SteamAPIProfile::GetTimecreated(){
-    return timecreated;
-}
-int SteamAPIProfile::GetPersonastateflags(){
-    return personastateflags;
-}
-QString SteamAPIProfile::GetGameextrainfo(){
-    return gameextrainfo;
-}
-QString SteamAPIProfile::GetGameid(){
-    return gameid;
-}
-QString SteamAPIProfile::GetLoccountrycode(){
-    return loccountrycode;
-}
-QString SteamAPIProfile::GetLocstatecode(){
-    return locstatecode;
-}
-int SteamAPIProfile::GetLoccityid(){
-    return loccityid;
-}
-QString SteamAPIProfile::GetRealname(){
-    return realname;
-}
-QString SteamAPIProfile::GetStatus(){
-    return status;
-}
-
 void SteamAPIProfile::Update(){
     Set(key, steamid, "url");
+}
+void SteamAPIProfile::Clear(){
+    steamid="";
+    communityvisibilitystate=0;
+    profilestate=0;
+    personaname="";
+    lastlogoff=QDateTime::fromSecsSinceEpoch(0);
+    commentpermission=0;
+    profileurl="";
+    avatar="";
+    avatarmedium="";
+    avatarfull="";
+    personastate=0;
+    primaryclanid="";
+    timecreated=QDateTime::fromSecsSinceEpoch(0);
+    personastateflags=0;
+    gameextrainfo="";
+    gameid="";
+    loccountrycode="";
+    locstatecode="";
+    loccityid=0;
+    realname="";
+    status="none";
 }
 
 SteamAPIProfile::SteamAPIProfile( const SteamAPIProfile & a){
@@ -208,7 +162,6 @@ SteamAPIProfile::SteamAPIProfile( const SteamAPIProfile & a){
     status=a.status;
     manager = new QNetworkAccessManager;
 }
-
 SteamAPIProfile & SteamAPIProfile::operator=(const SteamAPIProfile & profile){
     delete manager;
     steamid=profile.steamid;
@@ -236,26 +189,3 @@ SteamAPIProfile & SteamAPIProfile::operator=(const SteamAPIProfile & profile){
     return *this;
 }
 
-void SteamAPIProfile::Clear(){
-    steamid="";
-    communityvisibilitystate=0;
-    profilestate=0;
-    personaname="";
-    lastlogoff=QDateTime::fromSecsSinceEpoch(0);
-    commentpermission=0;
-    profileurl="";
-    avatar="";
-    avatarmedium="";
-    avatarfull="";
-    personastate=0;
-    primaryclanid="";
-    timecreated=QDateTime::fromSecsSinceEpoch(0);
-    personastateflags=0;
-    gameextrainfo="";
-    gameid="";
-    loccountrycode="";
-    locstatecode="";
-    loccityid=0;
-    realname="";
-    status="none";
-}

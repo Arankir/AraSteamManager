@@ -70,9 +70,9 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         button2->setMinimumSize(QSize(25,25));
         connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-        button1->setObjectName("ButtonAchievements"+QString::number(Games.GetAppid(i))+"&"+Games.GetImg_logo_url(i));
+        button1->setObjectName("ButtonAchievements"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(row,2,button1);
-        button2->setObjectName("ButtonFavorites"+QString::number(Games.GetAppid(i)));
+        button2->setObjectName("ButtonFavorites"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(row,3,button2);
         ui->TableWidgetGames->setRowHeight(i,33);
         ImageRequest *Achievements = new ImageRequest(row,"ButtonAchievements"+QString::number(Games.GetAppid(i))+"&"+Games.GetImg_logo_url(i));
@@ -116,17 +116,16 @@ void FormGames::AchievementsClicked(){
     if(windowchildcount==0){
         windowchildcount++;
         QPushButton *btn = qobject_cast<QPushButton*>(sender());
-        QNetworkAccessManager manager;
+        int index=btn->objectName().mid(18,4).toInt();
         QEventLoop loop;
-        QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        QNetworkReply &replyGlobalAchievementPercentagesForApp = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+btn->objectName().mid(18,btn->objectName().indexOf("&",18)-18))));
+        SteamAPIAchievementsPercentage Percentage(key,QString::number(Games.GetAppid(index)));
+        connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         loop.exec();
-        QJsonDocument JsonDocGlobalAchievements = QJsonDocument::fromJson(replyGlobalAchievementPercentagesForApp.readAll());
-        if(JsonDocGlobalAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
+        if(Percentage.GetAchievementsCount()==0){
             windowchildcount--;
             QMessageBox::warning(this,Words[6],Words[7]);
         } else {
-            achievementsform = new FormAchievements(key,id,btn->objectName().mid(18,btn->objectName().indexOf("&",18)-18),btn->objectName().mid(btn->objectName().indexOf("&",18)+1,btn->objectName().length()),JsonDocGlobalAchievements);
+            achievementsform = new FormAchievements(key,id,Games.GetGameInfo(index));
             connect(achievementsform,SIGNAL(return_to_games(FormAchievements*)),this,SLOT(on_return(FormAchievements*)));
             achievementsform->show();
             this->setVisible(false);

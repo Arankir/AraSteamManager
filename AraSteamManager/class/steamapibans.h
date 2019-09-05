@@ -23,14 +23,14 @@ public:
     ~SteamAPIBans();
     void Set(QString key, QString id);
     void Set(QJsonDocument DocBans);
-    QString GetSteamid();
-    bool GetCommunityBanned();
-    bool GetVACBanned();
-    int GetNumberOfVACBans();
-    int GetDaysSinceLastBan();
-    int GetNumberOfGameBans();
-    QString GetEconomyBan();
-    QString GetStatus();
+    QString GetSteamid() {return steamid;}
+    bool GetCommunityBanned() {return CommunityBanned;}
+    bool GetVACBanned() {return VACBanned;}
+    int GetNumberOfVACBans() {return NumberOfVACBans;}
+    int GetDaysSinceLastBan() {return DaysSinceLastBan;}
+    int GetNumberOfGameBans() {return NumberOfGameBans;}
+    QString GetEconomyBan() {return EconomyBan;}
+    QString GetStatus() {return status;}
     void Update();
 
 signals:

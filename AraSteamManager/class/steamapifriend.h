@@ -14,9 +14,9 @@ public:
     explicit SteamAPIFriend(QJsonObject ObjFriend, QObject *parent = nullptr);
     SteamAPIFriend();
     void Set(QJsonObject ObjFriend);
-    QString GetSteamid();
-    QString GetRelationship();
-    QDateTime GetFriend_since();
+    QString GetSteamid() {return steamid;}
+    QString GetRelationship() {return relationship;}
+    QDateTime GetFriend_since() {return friend_since;}
     SteamAPIFriend(const SteamAPIFriend &);
     SteamAPIFriend & operator=(const SteamAPIFriend & friends);
 

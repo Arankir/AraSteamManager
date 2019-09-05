@@ -10,6 +10,7 @@
 #include <QJsonArray>
 #include <QTextCodec>
 #include <QTcpSocket>
+#include <QEventLoop>
 #include <QObject>
 
 class SteamAPILevels : public QObject
@@ -22,8 +23,8 @@ public:
     ~SteamAPILevels();
     void Set(QString key, QString id);
     void Set(QJsonDocument DocLevel);
-    int GetPlayer_level();
-    QString GetStatus();
+    int GetPlayer_level() {return player_level;}
+    QString GetStatus() {return status;}
     void Update();
 
 signals:
@@ -31,7 +32,7 @@ signals:
     void finished();
 
 public slots:
-    void Load(QNetworkReply *Reply);
+    //void Load(QNetworkReply *Reply);
 
 private:
     QNetworkAccessManager *manager;

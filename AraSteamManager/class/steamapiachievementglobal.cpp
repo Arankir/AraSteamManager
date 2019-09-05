@@ -17,28 +17,6 @@ void SteamAPIAchievementGlobal::Set(QJsonObject ObjAchievement){
     icongray=ObjAchievement.value("icongray").toString();
 }
 
-QString SteamAPIAchievementGlobal::GetApiname(){
-    return apiname;
-}
-int SteamAPIAchievementGlobal::GetDefaultvalue(){
-    return defaultvalue;
-}
-QString SteamAPIAchievementGlobal::GetDisplayname(){
-    return displayname;
-}
-int SteamAPIAchievementGlobal::GetHidden(){
-    return hidden;
-}
-QString SteamAPIAchievementGlobal::GetDescription(){
-    return description;
-}
-QString SteamAPIAchievementGlobal::GetIcon(){
-    return icon;
-}
-QString SteamAPIAchievementGlobal::GetIcongray(){
-    return icongray;
-}
-
 SteamAPIAchievementGlobal::SteamAPIAchievementGlobal( const SteamAPIAchievementGlobal & achievementss){
     apiname=achievementss.apiname;
     defaultvalue=achievementss.defaultvalue;
@@ -48,7 +26,6 @@ SteamAPIAchievementGlobal::SteamAPIAchievementGlobal( const SteamAPIAchievementG
     icon=achievementss.icon;
     icongray=achievementss.icongray;
 }
-
 SteamAPIAchievementGlobal & SteamAPIAchievementGlobal::operator=(const SteamAPIAchievementGlobal & achievementss) {
     apiname=achievementss.apiname;
     defaultvalue=achievementss.defaultvalue;

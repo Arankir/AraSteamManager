@@ -14,9 +14,9 @@ public:
     explicit SteamAPIAchievementPlayer(QJsonObject ObjAchievement, QObject *parent = nullptr);
     SteamAPIAchievementPlayer();
     void Set(QJsonObject ObjAchievement);
-    QString GetApiname();
-    int GetAchieved();
-    QDateTime GetUnlocktime();
+    QString GetApiname() {return apiname;}
+    int GetAchieved() {return achieved;}
+    QDateTime GetUnlocktime() {return unlocktime;}
     SteamAPIAchievementPlayer(const SteamAPIAchievementPlayer &);
     SteamAPIAchievementPlayer & operator=(const SteamAPIAchievementPlayer & achievement);
 

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
     QByteArrayData data[20];
-    char stringdata0[297];
+    char stringdata0[270];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,23 +44,23 @@ QT_MOC_LITERAL(9, 80, 20), // "OnResultAchievements"
 QT_MOC_LITERAL(10, 101, 10), // "closeEvent"
 QT_MOC_LITERAL(11, 112, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(12, 125, 5), // "event"
-QT_MOC_LITERAL(13, 131, 32), // "on_FormGamesButtonReturn_clicked"
-QT_MOC_LITERAL(14, 164, 19), // "AchievementsClicked"
-QT_MOC_LITERAL(15, 184, 16), // "FavoritesClicked"
-QT_MOC_LITERAL(16, 201, 9), // "on_return"
-QT_MOC_LITERAL(17, 211, 17), // "FormAchievements*"
-QT_MOC_LITERAL(18, 229, 36), // "on_FormGamesLineEditGame_text..."
-QT_MOC_LITERAL(19, 266, 30) // "on_FormGamesButtonFind_clicked"
+QT_MOC_LITERAL(13, 131, 23), // "on_ButtonReturn_clicked"
+QT_MOC_LITERAL(14, 155, 19), // "AchievementsClicked"
+QT_MOC_LITERAL(15, 175, 16), // "FavoritesClicked"
+QT_MOC_LITERAL(16, 192, 9), // "on_return"
+QT_MOC_LITERAL(17, 202, 17), // "FormAchievements*"
+QT_MOC_LITERAL(18, 220, 27), // "on_LineEditGame_textChanged"
+QT_MOC_LITERAL(19, 248, 21) // "on_ButtonFind_clicked"
 
     },
     "FormGames\0return_to_profile\0\0FormGames*\0"
     "OnResultImage\0i\0Save\0ImageRequest*\0"
     "imgr\0OnResultAchievements\0closeEvent\0"
-    "QCloseEvent*\0event\0on_FormGamesButtonReturn_clicked\0"
+    "QCloseEvent*\0event\0on_ButtonReturn_clicked\0"
     "AchievementsClicked\0FavoritesClicked\0"
     "on_return\0FormAchievements*\0"
-    "on_FormGamesLineEditGame_textChanged\0"
-    "on_FormGamesButtonFind_clicked"
+    "on_LineEditGame_textChanged\0"
+    "on_ButtonFind_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -118,12 +118,12 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1: _t->OnResultImage((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< ImageRequest*(*)>(_a[3]))); break;
         case 2: _t->OnResultAchievements((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< ImageRequest*(*)>(_a[3]))); break;
         case 3: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 4: _t->on_FormGamesButtonReturn_clicked(); break;
+        case 4: _t->on_ButtonReturn_clicked(); break;
         case 5: _t->AchievementsClicked(); break;
         case 6: _t->FavoritesClicked(); break;
         case 7: _t->on_return((*reinterpret_cast< FormAchievements*(*)>(_a[1]))); break;
-        case 8: _t->on_FormGamesLineEditGame_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 9: _t->on_FormGamesButtonFind_clicked(); break;
+        case 8: _t->on_LineEditGame_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 9: _t->on_ButtonFind_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

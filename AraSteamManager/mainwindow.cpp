@@ -129,8 +129,8 @@ void MainWindow::GoToProfile(QString id, QString type){
         QObject::connect(&Bans, SIGNAL(finished()), &loopp, SLOT(quit()));
         loopp.exec();
         SteamAPILevels Levels(key,Profile.GetSteamid());
-        QObject::connect(&Levels, SIGNAL(finished()), &loopp, SLOT(quit()));
-        loopp.exec();
+        //QObject::connect(&Levels, SIGNAL(finished()), &loopp, SLOT(quit()));
+        //loopp.exec();
         Games.Set(key,Profile.GetSteamid(),true,true);
         QObject::connect(&Games, SIGNAL(finished()), &loopp, SLOT(quit()));
         loopp.exec();

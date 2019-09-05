@@ -4,26 +4,29 @@ SteamAPILevels::SteamAPILevels(QString key, QString id, QObject *parent) : QObje
     manager = new QNetworkAccessManager();
     Set(key, id);
 }
-
 SteamAPILevels::SteamAPILevels(QJsonDocument DocBans){
     manager = new QNetworkAccessManager();
     Set(DocBans);
 }
-
 SteamAPILevels::SteamAPILevels(){
     manager = new QNetworkAccessManager();
     status="null";
 }
-
 SteamAPILevels::~SteamAPILevels(){
     delete manager;
 }
 
 void SteamAPILevels::Set(QString key, QString id){
-    connect(manager,&QNetworkAccessManager::finished,this,&SteamAPILevels::Load);
+    QEventLoop loop;
+    connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
     this->key=key;
     this->steamid=id;
-    manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+key+"&steamid="+id));
+    QNetworkReply& Reply = *manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+key+"&steamid="+id));
+    loop.exec();
+    QJsonDocument DocLvls = QJsonDocument::fromJson(Reply.readAll());
+    Set(DocLvls);
+    emit finished(this);
+    emit finished();
 }
 void SteamAPILevels::Set(QJsonDocument DocLvls){
     if(DocLvls.object().value("response").toObject().value("player_level").toInt()>0){
@@ -33,22 +36,6 @@ void SteamAPILevels::Set(QJsonDocument DocLvls){
     else {
         status="error: profile is not exist";
     }
-}
-
-void SteamAPILevels::Load(QNetworkReply *Reply){
-    disconnect(manager,&QNetworkAccessManager::finished,this,&SteamAPILevels::Load);
-    QJsonDocument DocLvls = QJsonDocument::fromJson(Reply->readAll());
-    Reply->deleteLater();
-    Set(DocLvls);
-    emit finished(this);
-    emit finished();
-}
-
-int SteamAPILevels::GetPlayer_level(){
-    return player_level;
-}
-QString SteamAPILevels::GetStatus(){
-    return status;
 }
 
 void SteamAPILevels::Update(){

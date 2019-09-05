@@ -21,21 +21,21 @@ public:
     ~SteamAPIGames();
     void Set(QString key, QString id, bool free_games, bool game_info);
     void Set(QJsonDocument DocGames);
-    SteamAPIGame GetGameInfo(int index);
-    int GetAppid(int index);
-    QString GetName(int index);
-    int GetPlaytime_2weeks(int index);
-    int GetPlaytime_forever(int index);
-    QString GetImg_icon_url(int index);
-    QString GetImg_logo_url(int index);
-    bool GetHas_community_visible_stats(int index);
-    QString GetStatus();
-    int GetGamesCount();
+    SteamAPIGame GetGameInfo(int index) {return games[index];}
+    int GetAppid(int index) {return games[index].GetAppid();}
+    QString GetName(int index) {return games[index].GetName();}
+    int GetPlaytime_2weeks(int index) {return games[index].GetPlaytime_2weeks();}
+    int GetPlaytime_forever(int index) {return games[index].GetPlaytime_forever();}
+    QString GetImg_icon_url(int index) {return games[index].GetImg_icon_url();}
+    QString GetImg_logo_url(int index) {return games[index].GetImg_logo_url();}
+    bool GetHas_community_visible_stats(int index) {return games[index].GetHas_community_visible_stats();}
+    QString GetStatus() {return status;}
+    int GetGamesCount() {return count;}
     void Update();
+    void Clear();
     void Sort();
     SteamAPIGames( const SteamAPIGames & a);
     SteamAPIGames & operator=(const SteamAPIGames & profile);
-    void Clear();
 
 signals:
     void finished(SteamAPIGames*);

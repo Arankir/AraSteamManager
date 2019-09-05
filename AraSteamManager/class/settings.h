@@ -11,17 +11,17 @@ class Settings : public QObject
     Q_OBJECT
 public:
     explicit Settings(QObject *parent = nullptr);
-    QString GetMyProfile();
-    int GetLanguage();
-    int GetTheme();
-    int GetSaveimages();
-    QString GetStatus();
-    QStringList GetWords(QString form);
     bool SetMyProfile(QString MyProfiles);
     bool SetLanguage(int Language);
     bool SetTheme(int Theme);
     bool SetSaveimage(int SaveImage);
     void SetDefault();
+    QString GetMyProfile() {return MyProfile;}
+    int GetLanguage() {return language;}
+    int GetTheme() {return theme;}
+    int GetSaveimages() {return SaveImages;}
+    QString GetStatus() {return status;}
+    QStringList GetWords(QString form);
 
 signals:
 

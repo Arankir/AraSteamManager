@@ -23,23 +23,23 @@ public:
     ~SteamAPIAchievementsGlobal();
     void Set(QString key, QString appid, QString language);
     void Set(QJsonDocument DocAchievements);
-    SteamAPIAchievementGlobal GetAchievementInfo(int index);
-    QString GetApiname(int index);
-    int GetDefaultvalue(int index);
-    QString GetDisplayname(int index);
-    int GetHidden(int index);
-    QString GetDescription(int index);
-    QString GetIcon(int index);
-    QString GetIcongray(int index);
-    QString GetAppid();
-    QString GetStatus();
-    QString GetGamename();
-    QString GetGameversion();
-    int GetAchievementsCount();
+    SteamAPIAchievementGlobal GetAchievementInfo(int index) {return achievements[index];}
+    QString GetApiname(int index) {return achievements[index].GetApiname();}
+    int GetDefaultvalue(int index) {return achievements[index].GetDefaultvalue();}
+    QString GetDisplayname(int index) {return achievements[index].GetDisplayname();}
+    int GetHidden(int index) {return achievements[index].GetHidden();}
+    QString GetDescription(int index) {return achievements[index].GetDescription();}
+    QString GetIcon(int index) {return achievements[index].GetIcon();}
+    QString GetIcongray(int index) {return achievements[index].GetIcongray();}
+    QString GetAppid() {return appid;}
+    QString GetStatus() {return status;}
+    QString GetGamename() {return gamename;}
+    QString GetGameversion() {return gameversion;}
+    int GetAchievementsCount() {return count;}
     void Update();
+    void Clear();
     SteamAPIAchievementsGlobal(const SteamAPIAchievementsGlobal &);
     SteamAPIAchievementsGlobal & operator=(const SteamAPIAchievementsGlobal & friends);
-    void Clear();
 
 signals:
     void finished(SteamAPIAchievementsGlobal*);

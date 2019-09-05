@@ -23,18 +23,18 @@ public:
     ~SteamAPIAchievementsPlayer();
     void Set(QString key, QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
-    SteamAPIAchievementPlayer GetAchievementInfo(int index);
-    QString GetApiname(int index);
-    int GetAchieved(int index);
-    QDateTime GetUnlocktime(int index);
-    QString GetAppid();
-    QString GetStatus();
-    QString GetGamename();
-    int GetAchievementsCount();
+    SteamAPIAchievementPlayer GetAchievementInfo(int index) {return achievements[index];}
+    QString GetApiname(int index) {return achievements[index].GetApiname();}
+    int GetAchieved(int index) {return achievements[index].GetAchieved();}
+    QDateTime GetUnlocktime(int index) {return achievements[index].GetUnlocktime();}
+    QString GetAppid() {return appid;}
+    QString GetStatus() {return status;}
+    QString GetGamename() {return gamename;}
+    int GetAchievementsCount() {return count;}
     void Update();
+    void Clear();
     SteamAPIAchievementsPlayer(const SteamAPIAchievementsPlayer &);
     SteamAPIAchievementsPlayer & operator=(const SteamAPIAchievementsPlayer & friends);
-    void Clear();
 
 signals:
     void finished(SteamAPIAchievementsPlayer*);

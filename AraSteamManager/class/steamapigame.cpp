@@ -17,28 +17,6 @@ void SteamAPIGame::Set(QJsonObject ObjGame){
     has_community_visible_stats=ObjGame.value("has_community_visible_stats").toBool();
 }
 
-int SteamAPIGame::GetAppid(){
-    return appid;
-}
-QString SteamAPIGame::GetName(){
-    return name;
-}
-int SteamAPIGame::GetPlaytime_2weeks(){
-    return playtime_2weeks;
-}
-int SteamAPIGame::GetPlaytime_forever(){
-    return playtime_forever;
-}
-QString SteamAPIGame::GetImg_icon_url(){
-    return img_icon_url;
-}
-QString SteamAPIGame::GetImg_logo_url(){
-    return img_logo_url;
-}
-bool SteamAPIGame::GetHas_community_visible_stats(){
-    return has_community_visible_stats;
-}
-
 SteamAPIGame::SteamAPIGame( const SteamAPIGame & a){
     appid=a.appid;
     name=a.name;
@@ -48,7 +26,6 @@ SteamAPIGame::SteamAPIGame( const SteamAPIGame & a){
     img_logo_url=a.img_logo_url;
     has_community_visible_stats=a.has_community_visible_stats;
 }
-
 SteamAPIGame & SteamAPIGame::operator=(const SteamAPIGame & game) {
     appid=game.appid;
     name=game.name;
