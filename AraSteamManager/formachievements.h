@@ -17,7 +17,6 @@
 #include <class\imagerequest.h>
 #include <formcompare.h>
 #include <class/settings.h>
-#include <class/language.h>
 
 namespace Ui {
 class FormAchievements;
@@ -41,42 +40,42 @@ private slots:
     void on_CheckBoxCategory_Change(int ind);
     void closeEvent(QCloseEvent *);
     void on_return(FormCompare*);
-    void on_FormAchievementsButtonReturn_clicked();
+    void on_ButtonReturn_clicked();
     void UpdateHiddenRows();
-    void on_FormAchievementsButtonAddCategory_clicked();
+    void on_ButtonAddCategory_clicked();
 
-    void on_FormAchievementsRadioButtonAll_clicked();
-    void on_FormAchievementsRadioButtonReached_clicked();
-    void on_FormAchievementsRadioButtonNotReached_clicked();
+    void on_RadioButtonAll_clicked();
+    void on_RadioButtonReached_clicked();
+    void on_RadioButtonNotReached_clicked();
     void FavoritesClicked();
 
-    void on_FormAchievementsLineEditNameAchievements_textChanged(const QString &arg1);
+    void on_LineEditNameAchievements_textChanged(const QString &arg1);
 
-    void on_FormAchievementsButtonChangeCategory_clicked();
+    void on_ButtonChangeCategory_clicked();
 
-    void on_FormAchievementsButtonCancelNewCategory_clicked();
+    void on_ButtonCancelNewCategory_clicked();
 
-    void on_FormAchievementsButtonCancelChangeCategory_clicked();
+    void on_ButtonCancelChangeCategory_clicked();
 
-    void on_FormAchievementsButtonAddValueNewCategory_clicked();
+    void on_ButtonAddValueNewCategory_clicked();
     void on_buttonNewCategoryDeleteValues_clicked();
     void on_buttonChangeCategoryDeleteValues_clicked();
     void on_buttonNewCategorySelectValues_clicked();
     void on_buttonNewCategoryUnSelectValues_clicked();
 
-    void on_FormAchievementsButtonAcceptNewCategory_clicked();
+    void on_ButtonAcceptNewCategory_clicked();
 
-    void on_FormAchievementsComboBoxCategoriesChangeCategory_activated(int index);
+    void on_ComboBoxCategoriesChangeCategory_activated(int index);
 
-    void on_FormAchievementsButtonAddValueChangeCategory_clicked();
+    void on_ButtonAddValueChangeCategory_clicked();
 
-    void on_FormAchievementsButtonAcceptChangeCategory_clicked();
+    void on_ButtonAcceptChangeCategory_clicked();
 
-    void on_FormAchievementsButtonDeleteCategory_clicked();
+    void on_ButtonDeleteCategory_clicked();
 
-    void on_FormAchievementsButtonFindAchievement_clicked();
+    void on_ButtonFindAchievement_clicked();
 
-    void on_FormAchievementsButtonUpdate_clicked();
+    void on_ButtonUpdate_clicked();
 
     void EditLineEditChangeCategoryValue();
     void on_buttonChangeCategoryUpValues_clicked();
@@ -88,15 +87,15 @@ private slots:
     void on_buttonNewCategoryUpValues_clicked();
     void on_buttonNewCategoryDownValues_clicked();
 
-    void on_FormAchievementsCheckBoxNewCategoryOneValue_stateChanged(int arg1);
-    void on_FormAchievementsCheckBoxChangeCategoryOneValue_stateChanged(int arg1);
+    void on_CheckBoxNewCategoryOneValue_stateChanged(int arg1);
+    void on_CheckBoxChangeCategoryOneValue_stateChanged(int arg1);
 
     void on_Change_Title_NewCategory_OneValue();
     void on_Change_Title_ChangeCategory_OneValue();
 
     void ShowCategories();
 
-    void on_FormAchievementsButtonCompare_clicked();
+    void on_ButtonCompare_clicked();
 
 private:
     Ui::FormAchievements *ui;

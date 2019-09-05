@@ -19,7 +19,6 @@
 #include <QTableWidgetItem>
 #include <QRadioButton>
 #include <class/settings.h>
-#include <class/language.h>
 
 namespace Ui {
 class FormCompare;
@@ -41,42 +40,42 @@ private slots:
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
     void UpdateHiddenRows();
 
-    void on_FormCompareRadioButtonMyAll_clicked();
-    void on_FormCompareRadioButtonMyReached_clicked();
-    void on_FormCompareRadioButtonMyNotReached_clicked();
+    void on_RadioButtonMyAll_clicked();
+    void on_RadioButtonMyReached_clicked();
+    void on_RadioButtonMyNotReached_clicked();
 
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);
 
-    void on_FormCompareCheckBoxSCIcons_stateChanged(int arg1);
+    void on_CheckBoxSCIcons_stateChanged(int arg1);
 
-    void on_FormCompareCheckBoxSCTitle_stateChanged(int arg1);
+    void on_CheckBoxSCTitle_stateChanged(int arg1);
 
-    void on_FormCompareCheckBoxSCDescription_stateChanged(int arg1);
+    void on_CheckBoxSCDescription_stateChanged(int arg1);
 
-    void on_FormCompareCheckBoxSCTotalPercent_stateChanged(int arg1);
+    void on_CheckBoxSCTotalPercent_stateChanged(int arg1);
 
     void on_CheckBoxFriend_Click(int,int);
 
-    void on_FormCompareButtonReturn_clicked();
+    void on_ButtonReturn_clicked();
 
-    void on_FormComparCheckBoxShowFilter_stateChanged(int arg1);
+    void on_CheckBoxShowFilter_stateChanged(int arg1);
 
     void on_RadioButtonFriendAll_Click();
     void on_RadioButtonFriendReached_Click();
     void on_RadioButtonFriendNotReached_Click();
 
-    void on_FormCompareCheckBoxAllFriends_stateChanged(int arg1);
+    void on_CheckBoxAllFriends_stateChanged(int arg1);
 
-    void on_FormCompareRadioButtonFriendsAll_clicked();
-    void on_FormCompareRadioButtonFriendsReached_clicked();
-    void on_FormCompareRadioButtonFriendsNotReached_clicked();
+    void on_RadioButtonFriendsAll_clicked();
+    void on_RadioButtonFriendsReached_clicked();
+    void on_RadioButtonFriendsNotReached_clicked();
 
-    void on_FormCompareButtonFind_clicked();
+    void on_ButtonFind_clicked();
 
-    void on_FormCompareLineEditFind_textChanged(const QString &arg1);
+    void on_LineEditFind_textChanged(const QString &arg1);
 
-    void on_FormCompareButtonUpdate_clicked();
+    void on_ButtonUpdate_clicked();
 
 private:
     Ui::FormCompare *ui;

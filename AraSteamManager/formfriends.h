@@ -7,7 +7,6 @@
 #include <class/imagerequest.h>
 #include <class/steamapifriends.h>
 #include <class/settings.h>
-#include <class/language.h>
 
 namespace Ui {
 class FormFriends;
@@ -27,7 +26,7 @@ signals:
 
 private slots:
     void closeEvent(QCloseEvent *event);
-    void on_FormFriendsBReturn_clicked();
+    void on_ButtonReturn_clicked();
 
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
 
@@ -35,10 +34,10 @@ private slots:
     void FavoritesClicked();
 
     void UpdateHiddenRows();
-    void on_FormFriendsChBOpenProfile_stateChanged(int arg1);
-    void on_FormFriendsLineEditName_textChanged(const QString &arg1);
-    void on_FormFriendsBFind_clicked();
-    void on_FormFriendsCBStatus_activated(int index);
+    void on_CheckBoxOpenProfile_stateChanged(int arg1);
+    void on_LineEditName_textChanged(const QString &arg1);
+    void on_ButtonFind_clicked();
+    void on_ComboBoxStatus_activated(int index);
 
 private:
     Ui::FormFriends *ui;

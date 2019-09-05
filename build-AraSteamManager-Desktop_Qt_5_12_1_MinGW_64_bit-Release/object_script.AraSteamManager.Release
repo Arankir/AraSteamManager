@@ -1,5 +1,4 @@
 release/imagerequest.o
-release/language.o
 release/profile.o
 release/settings.o
 release/steamapiachievement.o
@@ -23,7 +22,6 @@ release/formachievements.o
 release/formfriends.o
 release/qrc_res.o
 release/moc_imagerequest.o
-release/moc_language.o
 release/moc_profile.o
 release/moc_settings.o
 release/moc_steamapiachievement.o

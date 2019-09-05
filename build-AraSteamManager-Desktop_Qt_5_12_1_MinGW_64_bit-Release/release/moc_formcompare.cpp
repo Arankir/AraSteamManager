@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCompare_t {
     QByteArrayData data[37];
-    char stringdata0[1013];
+    char stringdata0[838];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,59 +43,56 @@ QT_MOC_LITERAL(8, 89, 4), // "Save"
 QT_MOC_LITERAL(9, 94, 13), // "ImageRequest*"
 QT_MOC_LITERAL(10, 108, 4), // "imgr"
 QT_MOC_LITERAL(11, 113, 16), // "UpdateHiddenRows"
-QT_MOC_LITERAL(12, 130, 38), // "on_FormCompareRadioButtonMyAl..."
-QT_MOC_LITERAL(13, 169, 42), // "on_FormCompareRadioButtonMyRe..."
-QT_MOC_LITERAL(14, 212, 45), // "on_FormCompareRadioButtonMyNo..."
-QT_MOC_LITERAL(15, 258, 26), // "on_ComboBoxCategory_Change"
-QT_MOC_LITERAL(16, 285, 5), // "index"
-QT_MOC_LITERAL(17, 291, 26), // "on_CheckBoxCategory_Change"
-QT_MOC_LITERAL(18, 318, 3), // "ind"
-QT_MOC_LITERAL(19, 322, 42), // "on_FormCompareCheckBoxSCIcons..."
-QT_MOC_LITERAL(20, 365, 4), // "arg1"
-QT_MOC_LITERAL(21, 370, 42), // "on_FormCompareCheckBoxSCTitle..."
-QT_MOC_LITERAL(22, 413, 48), // "on_FormCompareCheckBoxSCDescr..."
-QT_MOC_LITERAL(23, 462, 49), // "on_FormCompareCheckBoxSCTotal..."
-QT_MOC_LITERAL(24, 512, 23), // "on_CheckBoxFriend_Click"
-QT_MOC_LITERAL(25, 536, 34), // "on_FormCompareButtonReturn_cl..."
-QT_MOC_LITERAL(26, 571, 44), // "on_FormComparCheckBoxShowFilt..."
-QT_MOC_LITERAL(27, 616, 29), // "on_RadioButtonFriendAll_Click"
-QT_MOC_LITERAL(28, 646, 33), // "on_RadioButtonFriendReached_C..."
-QT_MOC_LITERAL(29, 680, 36), // "on_RadioButtonFriendNotReache..."
-QT_MOC_LITERAL(30, 717, 45), // "on_FormCompareCheckBoxAllFrie..."
-QT_MOC_LITERAL(31, 763, 43), // "on_FormCompareRadioButtonFrie..."
-QT_MOC_LITERAL(32, 807, 47), // "on_FormCompareRadioButtonFrie..."
-QT_MOC_LITERAL(33, 855, 50), // "on_FormCompareRadioButtonFrie..."
-QT_MOC_LITERAL(34, 906, 32), // "on_FormCompareButtonFind_clicked"
-QT_MOC_LITERAL(35, 939, 38), // "on_FormCompareLineEditFind_te..."
-QT_MOC_LITERAL(36, 978, 34) // "on_FormCompareButtonUpdate_cl..."
+QT_MOC_LITERAL(12, 130, 27), // "on_RadioButtonMyAll_clicked"
+QT_MOC_LITERAL(13, 158, 31), // "on_RadioButtonMyReached_clicked"
+QT_MOC_LITERAL(14, 190, 34), // "on_RadioButtonMyNotReached_cl..."
+QT_MOC_LITERAL(15, 225, 26), // "on_ComboBoxCategory_Change"
+QT_MOC_LITERAL(16, 252, 5), // "index"
+QT_MOC_LITERAL(17, 258, 26), // "on_CheckBoxCategory_Change"
+QT_MOC_LITERAL(18, 285, 3), // "ind"
+QT_MOC_LITERAL(19, 289, 31), // "on_CheckBoxSCIcons_stateChanged"
+QT_MOC_LITERAL(20, 321, 4), // "arg1"
+QT_MOC_LITERAL(21, 326, 31), // "on_CheckBoxSCTitle_stateChanged"
+QT_MOC_LITERAL(22, 358, 37), // "on_CheckBoxSCDescription_stat..."
+QT_MOC_LITERAL(23, 396, 38), // "on_CheckBoxSCTotalPercent_sta..."
+QT_MOC_LITERAL(24, 435, 23), // "on_CheckBoxFriend_Click"
+QT_MOC_LITERAL(25, 459, 23), // "on_ButtonReturn_clicked"
+QT_MOC_LITERAL(26, 483, 34), // "on_CheckBoxShowFilter_stateCh..."
+QT_MOC_LITERAL(27, 518, 29), // "on_RadioButtonFriendAll_Click"
+QT_MOC_LITERAL(28, 548, 33), // "on_RadioButtonFriendReached_C..."
+QT_MOC_LITERAL(29, 582, 36), // "on_RadioButtonFriendNotReache..."
+QT_MOC_LITERAL(30, 619, 34), // "on_CheckBoxAllFriends_stateCh..."
+QT_MOC_LITERAL(31, 654, 32), // "on_RadioButtonFriendsAll_clicked"
+QT_MOC_LITERAL(32, 687, 36), // "on_RadioButtonFriendsReached_..."
+QT_MOC_LITERAL(33, 724, 39), // "on_RadioButtonFriendsNotReach..."
+QT_MOC_LITERAL(34, 764, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(35, 786, 27), // "on_LineEditFind_textChanged"
+QT_MOC_LITERAL(36, 814, 23) // "on_ButtonUpdate_clicked"
 
     },
     "FormCompare\0return_to_achievements\0\0"
     "FormCompare*\0closeEvent\0QCloseEvent*\0"
     "OnResultImage\0i\0Save\0ImageRequest*\0"
-    "imgr\0UpdateHiddenRows\0"
-    "on_FormCompareRadioButtonMyAll_clicked\0"
-    "on_FormCompareRadioButtonMyReached_clicked\0"
-    "on_FormCompareRadioButtonMyNotReached_clicked\0"
+    "imgr\0UpdateHiddenRows\0on_RadioButtonMyAll_clicked\0"
+    "on_RadioButtonMyReached_clicked\0"
+    "on_RadioButtonMyNotReached_clicked\0"
     "on_ComboBoxCategory_Change\0index\0"
     "on_CheckBoxCategory_Change\0ind\0"
-    "on_FormCompareCheckBoxSCIcons_stateChanged\0"
-    "arg1\0on_FormCompareCheckBoxSCTitle_stateChanged\0"
-    "on_FormCompareCheckBoxSCDescription_stateChanged\0"
-    "on_FormCompareCheckBoxSCTotalPercent_stateChanged\0"
-    "on_CheckBoxFriend_Click\0"
-    "on_FormCompareButtonReturn_clicked\0"
-    "on_FormComparCheckBoxShowFilter_stateChanged\0"
+    "on_CheckBoxSCIcons_stateChanged\0arg1\0"
+    "on_CheckBoxSCTitle_stateChanged\0"
+    "on_CheckBoxSCDescription_stateChanged\0"
+    "on_CheckBoxSCTotalPercent_stateChanged\0"
+    "on_CheckBoxFriend_Click\0on_ButtonReturn_clicked\0"
+    "on_CheckBoxShowFilter_stateChanged\0"
     "on_RadioButtonFriendAll_Click\0"
     "on_RadioButtonFriendReached_Click\0"
     "on_RadioButtonFriendNotReached_Click\0"
-    "on_FormCompareCheckBoxAllFriends_stateChanged\0"
-    "on_FormCompareRadioButtonFriendsAll_clicked\0"
-    "on_FormCompareRadioButtonFriendsReached_clicked\0"
-    "on_FormCompareRadioButtonFriendsNotReached_clicked\0"
-    "on_FormCompareButtonFind_clicked\0"
-    "on_FormCompareLineEditFind_textChanged\0"
-    "on_FormCompareButtonUpdate_clicked"
+    "on_CheckBoxAllFriends_stateChanged\0"
+    "on_RadioButtonFriendsAll_clicked\0"
+    "on_RadioButtonFriendsReached_clicked\0"
+    "on_RadioButtonFriendsNotReached_clicked\0"
+    "on_ButtonFind_clicked\0on_LineEditFind_textChanged\0"
+    "on_ButtonUpdate_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -185,28 +182,28 @@ void FormCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 2: _t->OnResultImage((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< ImageRequest*(*)>(_a[3]))); break;
         case 3: _t->UpdateHiddenRows(); break;
-        case 4: _t->on_FormCompareRadioButtonMyAll_clicked(); break;
-        case 5: _t->on_FormCompareRadioButtonMyReached_clicked(); break;
-        case 6: _t->on_FormCompareRadioButtonMyNotReached_clicked(); break;
+        case 4: _t->on_RadioButtonMyAll_clicked(); break;
+        case 5: _t->on_RadioButtonMyReached_clicked(); break;
+        case 6: _t->on_RadioButtonMyNotReached_clicked(); break;
         case 7: _t->on_ComboBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 8: _t->on_CheckBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 9: _t->on_FormCompareCheckBoxSCIcons_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->on_FormCompareCheckBoxSCTitle_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->on_FormCompareCheckBoxSCDescription_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->on_FormCompareCheckBoxSCTotalPercent_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->on_CheckBoxSCIcons_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->on_CheckBoxSCTitle_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->on_CheckBoxSCDescription_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->on_CheckBoxSCTotalPercent_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->on_CheckBoxFriend_Click((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 14: _t->on_FormCompareButtonReturn_clicked(); break;
-        case 15: _t->on_FormComparCheckBoxShowFilter_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_ButtonReturn_clicked(); break;
+        case 15: _t->on_CheckBoxShowFilter_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 16: _t->on_RadioButtonFriendAll_Click(); break;
         case 17: _t->on_RadioButtonFriendReached_Click(); break;
         case 18: _t->on_RadioButtonFriendNotReached_Click(); break;
-        case 19: _t->on_FormCompareCheckBoxAllFriends_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 20: _t->on_FormCompareRadioButtonFriendsAll_clicked(); break;
-        case 21: _t->on_FormCompareRadioButtonFriendsReached_clicked(); break;
-        case 22: _t->on_FormCompareRadioButtonFriendsNotReached_clicked(); break;
-        case 23: _t->on_FormCompareButtonFind_clicked(); break;
-        case 24: _t->on_FormCompareLineEditFind_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 25: _t->on_FormCompareButtonUpdate_clicked(); break;
+        case 19: _t->on_CheckBoxAllFriends_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->on_RadioButtonFriendsAll_clicked(); break;
+        case 21: _t->on_RadioButtonFriendsReached_clicked(); break;
+        case 22: _t->on_RadioButtonFriendsNotReached_clicked(); break;
+        case 23: _t->on_ButtonFind_clicked(); break;
+        case 24: _t->on_LineEditFind_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 25: _t->on_ButtonUpdate_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

@@ -133,4 +133,5 @@ SteamAPIFriends & SteamAPIFriends::operator=(const SteamAPIFriends & friendss) {
 
 void SteamAPIFriends::Clear(){
     friends.clear();
+    count=0;
 }

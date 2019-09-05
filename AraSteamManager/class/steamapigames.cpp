@@ -126,4 +126,5 @@ SteamAPIGames & SteamAPIGames::operator=(const SteamAPIGames & profile){
 
 void SteamAPIGames::Clear(){
     games.clear();
+    count=0;
 }

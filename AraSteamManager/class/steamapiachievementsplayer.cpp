@@ -103,4 +103,5 @@ SteamAPIAchievementsPlayer & SteamAPIAchievementsPlayer::operator=(const SteamAP
 
 void SteamAPIAchievementsPlayer::Clear(){
     achievements.clear();
+    count=0;
 }

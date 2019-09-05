@@ -35,21 +35,45 @@ Settings::Settings(QObject *parent) : QObject(parent)
 QString Settings::GetMyProfile(){
     return MyProfile;
 }
-
 int Settings::GetLanguage(){
     return language;
 }
-
 int Settings::GetTheme(){
     return theme;
 }
-
 int Settings::GetSaveimages(){
     return SaveImages;
 }
-
 QString Settings::GetStatus(){
     return status;
+}
+QStringList Settings::GetWords(QString form){
+    QString lan;
+    switch (language) {
+    case 1:{
+        lan="ENG";
+        break;
+        }
+    case 5:{
+        lan="RU";
+        break;
+        }
+    default:{
+        lan="ENG";
+    }
+    }
+    QStringList Language;
+    QFile FileLanguage;
+    FileLanguage.setFileName("Files/Languages/"+lan+"/"+form+".txt");
+    if(FileLanguage.open(QIODevice::ReadOnly)){
+        while(!FileLanguage.atEnd()){
+            Language << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
+        }
+    } else
+        for(int i=0;i<200;i++){
+            Language << "";
+        }
+    return Language;
 }
 
 bool Settings::SetMyProfile(QString MyProfiles){

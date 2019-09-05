@@ -120,4 +120,5 @@ SteamAPIAchievementsGlobal & SteamAPIAchievementsGlobal::operator=(const SteamAP
 
 void SteamAPIAchievementsGlobal::Clear(){
     achievements.clear();
+    count=0;
 }

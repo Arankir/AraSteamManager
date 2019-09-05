@@ -16,6 +16,7 @@ public:
     int GetTheme();
     int GetSaveimages();
     QString GetStatus();
+    QStringList GetWords(QString form);
     bool SetMyProfile(QString MyProfiles);
     bool SetLanguage(int Language);
     bool SetTheme(int Theme);

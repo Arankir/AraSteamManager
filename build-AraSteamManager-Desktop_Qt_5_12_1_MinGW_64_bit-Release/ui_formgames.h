@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formgames.ui'
 **
-** Created by: Qt User Interface Compiler version 5.13.0
+** Created by: Qt User Interface Compiler version 5.12.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -25,11 +25,11 @@ class Ui_FormGames
 {
 public:
     QGridLayout *gridLayout;
-    QTableWidget *FormGamesTableWidgetGames;
-    QPushButton *FormGamesButtonReturn;
-    QLabel *FormGamesLabelLogo;
-    QLineEdit *FormGamesLineEditGame;
-    QPushButton *FormGamesButtonFind;
+    QTableWidget *TableWidgetGames;
+    QPushButton *ButtonReturn;
+    QLabel *LabelLogo;
+    QLineEdit *LineEditGame;
+    QPushButton *ButtonFind;
 
     void setupUi(QWidget *FormGames)
     {
@@ -41,43 +41,43 @@ public:
         FormGames->setFont(font);
         gridLayout = new QGridLayout(FormGames);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        FormGamesTableWidgetGames = new QTableWidget(FormGames);
-        if (FormGamesTableWidgetGames->columnCount() < 4)
-            FormGamesTableWidgetGames->setColumnCount(4);
-        FormGamesTableWidgetGames->setObjectName(QString::fromUtf8("FormGamesTableWidgetGames"));
-        FormGamesTableWidgetGames->setColumnCount(4);
+        TableWidgetGames = new QTableWidget(FormGames);
+        if (TableWidgetGames->columnCount() < 4)
+            TableWidgetGames->setColumnCount(4);
+        TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
+        TableWidgetGames->setColumnCount(4);
 
-        gridLayout->addWidget(FormGamesTableWidgetGames, 2, 0, 1, 2);
+        gridLayout->addWidget(TableWidgetGames, 2, 0, 1, 2);
 
-        FormGamesButtonReturn = new QPushButton(FormGames);
-        FormGamesButtonReturn->setObjectName(QString::fromUtf8("FormGamesButtonReturn"));
+        ButtonReturn = new QPushButton(FormGames);
+        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
         QFont font1;
         font1.setPointSize(8);
-        FormGamesButtonReturn->setFont(font1);
+        ButtonReturn->setFont(font1);
 
-        gridLayout->addWidget(FormGamesButtonReturn, 0, 1, 1, 1);
+        gridLayout->addWidget(ButtonReturn, 0, 1, 1, 1);
 
-        FormGamesLabelLogo = new QLabel(FormGames);
-        FormGamesLabelLogo->setObjectName(QString::fromUtf8("FormGamesLabelLogo"));
-        FormGamesLabelLogo->setFont(font);
+        LabelLogo = new QLabel(FormGames);
+        LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
+        LabelLogo->setFont(font);
 
-        gridLayout->addWidget(FormGamesLabelLogo, 0, 0, 1, 1);
+        gridLayout->addWidget(LabelLogo, 0, 0, 1, 1);
 
-        FormGamesLineEditGame = new QLineEdit(FormGames);
-        FormGamesLineEditGame->setObjectName(QString::fromUtf8("FormGamesLineEditGame"));
-        FormGamesLineEditGame->setFont(font);
+        LineEditGame = new QLineEdit(FormGames);
+        LineEditGame->setObjectName(QString::fromUtf8("LineEditGame"));
+        LineEditGame->setFont(font);
 
-        gridLayout->addWidget(FormGamesLineEditGame, 1, 0, 1, 1);
+        gridLayout->addWidget(LineEditGame, 1, 0, 1, 1);
 
-        FormGamesButtonFind = new QPushButton(FormGames);
-        FormGamesButtonFind->setObjectName(QString::fromUtf8("FormGamesButtonFind"));
-        FormGamesButtonFind->setEnabled(true);
-        FormGamesButtonFind->setFont(font1);
+        ButtonFind = new QPushButton(FormGames);
+        ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
+        ButtonFind->setEnabled(true);
+        ButtonFind->setFont(font1);
 
-        gridLayout->addWidget(FormGamesButtonFind, 1, 1, 1, 1);
+        gridLayout->addWidget(ButtonFind, 1, 1, 1, 1);
 
-        QWidget::setTabOrder(FormGamesLineEditGame, FormGamesButtonFind);
-        QWidget::setTabOrder(FormGamesButtonFind, FormGamesButtonReturn);
+        QWidget::setTabOrder(LineEditGame, ButtonFind);
+        QWidget::setTabOrder(ButtonFind, ButtonReturn);
 
         retranslateUi(FormGames);
 
@@ -86,10 +86,10 @@ public:
 
     void retranslateUi(QWidget *FormGames)
     {
-        FormGames->setWindowTitle(QCoreApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        FormGamesButtonReturn->setText(QCoreApplication::translate("FormGames", "Return", nullptr));
-        FormGamesLabelLogo->setText(QCoreApplication::translate("FormGames", "Logo", nullptr));
-        FormGamesButtonFind->setText(QCoreApplication::translate("FormGames", "Find", nullptr));
+        FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
+        ButtonReturn->setText(QApplication::translate("FormGames", "Return", nullptr));
+        LabelLogo->setText(QApplication::translate("FormGames", "Logo", nullptr));
+        ButtonFind->setText(QApplication::translate("FormGames", "Find", nullptr));
     } // retranslateUi
 
 };

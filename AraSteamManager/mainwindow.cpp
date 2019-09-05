@@ -3,8 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
-    Language lan;
-    Words=lan.GetLanguage("mainwindow",Setting.GetLanguage());
+    Words=Setting.GetWords("mainwindow");
     ui->LabelAvatar->setText("");
     ui->LabelLogo->setText("(WIP)");
     ui->LabelTimeCreated->setText("");
@@ -231,6 +230,7 @@ void MainWindow::GoToProfile(QString id, QString type){
         ui->ButtonFavorites->setVisible(true);
         ui->ButtonSetProfile->setVisible(true);
         ui->ButtonStatistics->setVisible(true);
+        ui->ButtonGoToMyProfile->setVisible(true);
         if(Profile.GetCommunityvisibilitystate()!=3){
             //профиль скрыт
         }

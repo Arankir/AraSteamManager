@@ -3,8 +3,7 @@
 
 FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
-    Language lan;
-    Words=lan.GetLanguage("friends",Setting.GetLanguage());
+    Words=Setting.GetWords("friends");
     id=ids;
     key=keys;
     Friends=Friendss;
@@ -43,9 +42,9 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
         break;
         }
     }
-    ui->FormFriendsBReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
-    ui->FormFriendsBFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    ui->FormFriendsGBFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     QVector<SteamAPIProfile> Profiles = Friends.GetProfiles();
     for (int i=0; i < Profiles.size()-1; i++) {
         for (int j=0; j < Profiles.size()-i-1; j++) {
@@ -57,7 +56,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
         }
     }
     for (int i=0;i<Friends.GetFriendsCount();i++) {
-        ui->FormFriendsTWFriends->insertRow(i);
+        ui->TableWidgetFriends->insertRow(i);
         if(!QFile::exists("images/profiles/"+Profiles[i].GetAvatar().mid(72,20).remove(".jpg")+".png")){
             ImageRequest *image;
             switch (Setting.GetSaveimages()) {
@@ -81,10 +80,10 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
             pixmap.load("images/profiles/"+Profiles[i].GetAvatar().mid(72,20).remove(".jpg")+".png", "PNG");
             QLabel *lb = new QLabel();
             lb->setPixmap(pixmap);
-            ui->FormFriendsTWFriends->setCellWidget(i,0,lb);
+            ui->TableWidgetFriends->setCellWidget(i,0,lb);
             }
         QTableWidgetItem *item2 = new QTableWidgetItem(Profiles[i].GetPersonaname());
-        ui->FormFriendsTWFriends->setItem(i,1,item2);
+        ui->TableWidgetFriends->setItem(i,1,item2);
         QDateTime date;
         for (int j=0;;j++) {
             if(Profiles[i].GetSteamid()==Friends.GetSteamid(j)){
@@ -93,7 +92,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
             }
         }
         QTableWidgetItem *item3 = new QTableWidgetItem(date.toString("yyyy.MM.dd hh:mm:ss"));
-        ui->FormFriendsTWFriends->setItem(i,2,item3);
+        ui->TableWidgetFriends->setItem(i,2,item3);
         QTableWidgetItem *item4 = new QTableWidgetItem;
         if(!Profiles[i].GetGameextrainfo().isEmpty()){
             item4->setText(Words[8]);
@@ -136,7 +135,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
                     break;
             }
             }
-        ui->FormFriendsTWFriends->setItem(i,3,item4);
+        ui->TableWidgetFriends->setItem(i,3,item4);
         QTableWidgetItem *item5 = new QTableWidgetItem;
         switch(Profiles[i].GetCommunityvisibilitystate()){
         case 1:{
@@ -160,34 +159,34 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
             break;
         }
         }
-        ui->FormFriendsTWFriends->setItem(i,4,item5);
+        ui->TableWidgetFriends->setItem(i,4,item5);
         QTableWidgetItem *item6 = new QTableWidgetItem(Profiles[i].GetSteamid());
-        ui->FormFriendsTWFriends->setItem(i,5,item6);
+        ui->TableWidgetFriends->setItem(i,5,item6);
         QPushButton *button1 = new QPushButton;
         button1->setText(Words[7]);
         button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
         button1->setMinimumSize(QSize(25,25));
         button1->setObjectName("btn"+Profiles[i].GetSteamid());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
-        ui->FormFriendsTWFriends->setCellWidget(i,6,button1);
+        ui->TableWidgetFriends->setCellWidget(i,6,button1);
         QPushButton *button2 = new QPushButton;
         button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button2->setObjectName("btnf"+Profiles[i].GetSteamid());
-        ui->FormFriendsTWFriends->setCellWidget(i,7,button2);
+        ui->TableWidgetFriends->setCellWidget(i,7,button2);
     }
-    ui->FormFriendsTWFriends->setColumnHidden(5,true);
-    ui->FormFriendsTWFriends->resizeColumnsToContents();
-    ui->FormFriendsTWFriends->setColumnWidth(0,33);
+    ui->TableWidgetFriends->setColumnHidden(5,true);
+    ui->TableWidgetFriends->resizeColumnsToContents();
+    ui->TableWidgetFriends->setColumnWidth(0,33);
 
-    filter = new bool*[ui->FormFriendsTWFriends->rowCount()];
-    for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++) {
+    filter = new bool*[ui->TableWidgetFriends->rowCount()];
+    for (int i=0;i<ui->TableWidgetFriends->rowCount();i++) {
         filter[i]=new bool[4];
         for (int j=0;j<4;j++) {
             filter[i][j]=true;
             }
         }
-    ui->FormFriendsLineEditName->setFocus();
+    ui->LineEditName->setFocus();
 }
 
 FormFriends::~FormFriends()
@@ -198,7 +197,7 @@ void FormFriends::closeEvent(QCloseEvent *){
     emit return_to_profile(this);
     //delete this;
 }
-void FormFriends::on_FormFriendsBReturn_clicked(){
+void FormFriends::on_ButtonReturn_clicked(){
     emit return_to_profile(this);
     //delete this;
 }
@@ -211,8 +210,8 @@ void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
     if(!Save.isEmpty()){
         pixmap.save("images/profiles/"+Save+".png", "PNG");
     }
-    ui->FormFriendsTWFriends->setCellWidget(i,0,label);
-    ui->FormFriendsTWFriends->resizeRowToContents(i);
+    ui->TableWidgetFriends->setCellWidget(i,0,label);
+    ui->TableWidgetFriends->resizeRowToContents(i);
     imgr->deleteLater();
 }
 
@@ -221,51 +220,51 @@ void FormFriends::GoToProfileClicked(){
         windowchildcount++;
         QPushButton *btn = qobject_cast<QPushButton*>(sender());
         emit go_to_profile(btn->objectName().mid(3,btn->objectName().length()));
-        on_FormFriendsBReturn_clicked();
+        on_ButtonReturn_clicked();
     }
 }
 void FormFriends::FavoritesClicked(){
 
 }
 
-void FormFriends::on_FormFriendsChBOpenProfile_stateChanged(int arg1){
+void FormFriends::on_CheckBoxOpenProfile_stateChanged(int arg1){
     if(arg1==2){
-        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
-            if(ui->FormFriendsTWFriends->item(i,4)->text().indexOf(Words[16])>-1)
+        for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
+            if(ui->TableWidgetFriends->item(i,4)->text().indexOf(Words[16])>-1)
                 filter[i][2]=true; else
                 filter[i][2]=false;
         UpdateHiddenRows();
         } else {
-        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
+        for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
             filter[i][2]=true;
         UpdateHiddenRows();
         }
 }
 void FormFriends::on_ComboBoxStatus_activated(int index){
     if(index!=0){
-        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
-            if(ui->ComboBoxStatus->currentText()==ui->FormFriendsTWFriends->item(i,3)->text())
+        for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
+            if(ui->ComboBoxStatus->currentText()==ui->TableWidgetFriends->item(i,3)->text())
                 filter[i][1]=true; else
                 filter[i][1]=false;
         UpdateHiddenRows();
         } else {
-        for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
+        for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
             filter[i][1]=true;
         UpdateHiddenRows();
         }
 }
-void FormFriends::on_FormFriendsLineEditName_textChanged(const QString &){
-    for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++)
-        if(ui->FormFriendsTWFriends->item(i,1)->text().toLower().indexOf(ui->FormFriendsLineEditName->text().toLower())>-1)
+void FormFriends::on_LineEditName_textChanged(const QString &){
+    for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
+        if(ui->TableWidgetFriends->item(i,1)->text().toLower().indexOf(ui->LineEditName->text().toLower())>-1)
             filter[i][0]=true; else
             filter[i][0]=false;
     UpdateHiddenRows();
 }
-void FormFriends::on_FormFriendsBFind_clicked(){
-    on_FormFriendsLineEditName_textChanged(ui->FormFriendsLineEditName->text());
+void FormFriends::on_ButtonFind_clicked(){
+    on_LineEditName_textChanged(ui->LineEditName->text());
 }
 void FormFriends::UpdateHiddenRows(){
-    for (int i=0;i<ui->FormFriendsTWFriends->rowCount();i++) {
+    for (int i=0;i<ui->TableWidgetFriends->rowCount();i++) {
         bool accept=true;
         for (int j=0;j<4;j++) {
             if(filter[i][j]==false){
@@ -274,8 +273,8 @@ void FormFriends::UpdateHiddenRows(){
                 }
             }
         if(accept){
-            ui->FormFriendsTWFriends->setRowHidden(i,false);
+            ui->TableWidgetFriends->setRowHidden(i,false);
             } else
-            ui->FormFriendsTWFriends->setRowHidden(i,true);
+            ui->TableWidgetFriends->setRowHidden(i,true);
         }
 }

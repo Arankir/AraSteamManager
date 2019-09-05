@@ -5,62 +5,61 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     QWidget(parent),
     ui(new Ui::FormCompare){
     ui->setupUi(this);
-    Language lan;
-    Words=lan.GetLanguage("compare",Setting.GetLanguage());
+    Words=Setting.GetWords("compare");
     key=keys;
     id=ids;
     appid=appids;
-    ui->FormCompareCheckBoxFavorites->setText(Words[6]);
-    ui->FormCompareCheckBoxAllFriends->setText(Words[7]);
-    ui->FormCompareButtonFind->setText(" "+Words[8]);
-    ui->FormCompareGroupBoxFilter->setTitle("      "+Words[9]);
-    ui->FormCompareGroupBoxShowedColumns->setTitle(Words[10]);
-    ui->FormCompareCheckBoxSCIcons->setText(Words[11]);
-    ui->FormCompareCheckBoxSCTitle->setText(Words[12]);
-    ui->FormCompareCheckBoxSCDescription->setText(Words[13]);
-    ui->FormCompareCheckBoxSCTotalPercent->setText(Words[14]);
-    ui->FormCompareLabelPlayerCount->setText(Words[18]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
-    ui->FormCompareButtonUpdate->setText(Words[19]);
-    ui->FormComparCheckBoxShowFilter->setText(Words[24]);
-    ui->FormCompareTableWidget->setColumnCount(6);
-    ui->FormCompareTableWidget->insertRow(0);
-    ui->FormCompareTableWidget->insertRow(1);
-    ui->FormCompareTableWidget->setVerticalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormCompareTableWidget->setVerticalHeaderItem(1,new QTableWidgetItem("%"));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[12]));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[13]));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[14]));
-    ui->FormCompareLabelLogo->setPixmap(GameLogo);
+    ui->CheckBoxFavorites->setText(Words[6]);
+    ui->CheckBoxAllFriends->setText(Words[7]);
+    ui->ButtonFind->setText(" "+Words[8]);
+    ui->GroupBoxFilter->setTitle("      "+Words[9]);
+    ui->GroupBoxShowedColumns->setTitle(Words[10]);
+    ui->CheckBoxSCIcons->setText(Words[11]);
+    ui->CheckBoxSCTitle->setText(Words[12]);
+    ui->CheckBoxSCDescription->setText(Words[13]);
+    ui->CheckBoxSCTotalPercent->setText(Words[14]);
+    ui->LabelPlayerCount->setText(Words[18]+": "+QString::number(JsonDocNumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble()));
+    ui->ButtonUpdate->setText(Words[19]);
+    ui->CheckBoxShowFilter->setText(Words[24]);
+    ui->TableWidget->setColumnCount(6);
+    ui->TableWidget->insertRow(0);
+    ui->TableWidget->insertRow(1);
+    ui->TableWidget->setVerticalHeaderItem(0,new QTableWidgetItem(""));
+    ui->TableWidget->setVerticalHeaderItem(1,new QTableWidgetItem("%"));
+    ui->TableWidget->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+    ui->TableWidget->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[12]));
+    ui->TableWidget->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[13]));
+    ui->TableWidget->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[14]));
+    ui->LabelLogo->setPixmap(GameLogo);
     JsonArrayGlobalAchievements = JsonArrayGlobalAchievement;
     //{"name": "no_one_cared_who_i_was",
     //"percent": 85}
-    ui->FormCompareTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 //    QIcon favorites;
 //    switch(Theme){
 //    case 1:{
-//        ui->FormCompareGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-//        ui->FormCompareButtonFind->setIcon(QIcon("images/program/find_white.png"));
-//        ui->FormCompareButtonReturn->setIcon(QIcon("images/program/back_white.png"));
-//        ui->FormCompareRadioButtonMyAll->setIcon(QIcon("images/program/all_white.png"));
-//        ui->FormCompareRadioButtonMyReached->setIcon(QIcon("images/program/reached_white.png"));
-//        ui->FormCompareRadioButtonMyNotReached->setIcon(QIcon("images/program/notreached_white.png"));
-//        ui->FormCompareRadioButtonFriendsAll->setIcon(QIcon("images/program/all_white.png"));
-//        ui->FormCompareRadioButtonFriendsReached->setIcon(QIcon("images/program/reached_white.png"));
-//        ui->FormCompareRadioButtonFriendsNotReached->setIcon(QIcon("images/program/notreached_white.png"));
+//        ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+//        ui->ButtonFind->setIcon(QIcon("images/program/find_white.png"));
+//        ui->ButtonReturn->setIcon(QIcon("images/program/back_white.png"));
+//        ui->RadioButtonMyAll->setIcon(QIcon("images/program/all_white.png"));
+//        ui->RadioButtonMyReached->setIcon(QIcon("images/program/reached_white.png"));
+//        ui->RadioButtonMyNotReached->setIcon(QIcon("images/program/notreached_white.png"));
+//        ui->RadioButtonFriendsAll->setIcon(QIcon("images/program/all_white.png"));
+//        ui->RadioButtonFriendsReached->setIcon(QIcon("images/program/reached_white.png"));
+//        ui->RadioButtonFriendsNotReached->setIcon(QIcon("images/program/notreached_white.png"));
 ////        favorites.addFile("images/program/favorites_white.png");
 //        break;
 //        }
 //    case 2:{
-//        ui->FormCompareGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_black.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-//        ui->FormCompareButtonFind->setIcon(QIcon("images/program/find_black.png"));
-//        ui->FormCompareButtonReturn->setIcon(QIcon("images/program/back_black.png"));
-//        ui->FormCompareRadioButtonMyAll->setIcon(QIcon("images/program/all_black.png"));
-//        ui->FormCompareRadioButtonMyReached->setIcon(QIcon("images/program/reached_black.png"));
-//        ui->FormCompareRadioButtonMyNotReached->setIcon(QIcon("images/program/notreached_black.png"));
-//        ui->FormCompareRadioButtonFriendsAll->setIcon(QIcon("images/program/all_black.png"));
-//        ui->FormCompareRadioButtonFriendsReached->setIcon(QIcon("images/program/reached_black.png"));
-//        ui->FormCompareRadioButtonFriendsNotReached->setIcon(QIcon("images/program/notreached_black.png"));
+//        ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(images/program/filter_black.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+//        ui->ButtonFind->setIcon(QIcon("images/program/find_black.png"));
+//        ui->ButtonReturn->setIcon(QIcon("images/program/back_black.png"));
+//        ui->RadioButtonMyAll->setIcon(QIcon("images/program/all_black.png"));
+//        ui->RadioButtonMyReached->setIcon(QIcon("images/program/reached_black.png"));
+//        ui->RadioButtonMyNotReached->setIcon(QIcon("images/program/notreached_black.png"));
+//        ui->RadioButtonFriendsAll->setIcon(QIcon("images/program/all_black.png"));
+//        ui->RadioButtonFriendsReached->setIcon(QIcon("images/program/reached_black.png"));
+//        ui->RadioButtonFriendsNotReached->setIcon(QIcon("images/program/notreached_black.png"));
 ////        favorites.addFile("images/program/favorites_black.png");
 //        break;
 //        }
@@ -80,20 +79,20 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     //{"apiname":"hot_wheels",
     //"achieved":1,
     //"unlocktime":1445190378}
-    ui->FormCompareButtonReturn->setText(" "+Words[0]);
-    //ui->FormCompareGroupBoxMyA->setTitle(Words[1]);
-    //ui->FormCompareGroupBoxFriendsA->setTitle(Words[2]);
-    //ui->FormCompareRadioButtonMyAll->setText(Words[3]);
-    //ui->FormCompareRadioButtonMyReached->setText(Words[4]);
-    //ui->FormCompareRadioButtonMyNotReached->setText(Words[5]);
-    //ui->FormCompareRadioButtonFriendsAll->setText(Words[3]);
-    //ui->FormCompareRadioButtonFriendsReached->setText(Words[4]);
-    //ui->FormCompareRadioButtonFriendsNotReached->setText(Words[5]);
+    ui->ButtonReturn->setText(" "+Words[0]);
+    //ui->GroupBoxMyA->setTitle(Words[1]);
+    //ui->GroupBoxFriendsA->setTitle(Words[2]);
+    //ui->RadioButtonMyAll->setText(Words[3]);
+    //ui->RadioButtonMyReached->setText(Words[4]);
+    //ui->RadioButtonMyNotReached->setText(Words[5]);
+    //ui->RadioButtonFriendsAll->setText(Words[3]);
+    //ui->RadioButtonFriendsReached->setText(Words[4]);
+    //ui->RadioButtonFriendsNotReached->setText(Words[5]);
     QNetworkReply &ReplyPlayerSummaries = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+ids));
     loop.exec();
     QJsonDocument DocPlayerSummaries = QJsonDocument::fromJson(ReplyPlayerSummaries.readAll());
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(4,new QTableWidgetItem(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString()/*Words[15]*/));
-    ui->FormCompareTableWidget->setHorizontalHeaderItem(5,new QTableWidgetItem(/**/));
+    ui->TableWidget->setHorizontalHeaderItem(4,new QTableWidgetItem(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString()/*Words[15]*/));
+    ui->TableWidget->setHorizontalHeaderItem(5,new QTableWidgetItem(/**/));
     QNetworkReply &imagereply = *manager.get(QNetworkRequest(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("avatar").toString()));
     loop.exec();
     QPixmap pix;
@@ -101,7 +100,7 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     QLabel* myava = new QLabel;
     myava->setPixmap(pix);
     myava->setAlignment(Qt::AlignCenter);
-    ui->FormCompareTableWidget->setCellWidget(0,4,myava);
+    ui->TableWidget->setCellWidget(0,4,myava);
     QNetworkReply &replySchemaForGame = *manager.get(QNetworkRequest(QString("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l="+Words[17])));
     loop.exec();
     JsonArraySchemaForGame = QJsonDocument::fromJson(replySchemaForGame.readAll()).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray();
@@ -123,8 +122,8 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
                     }
             }
             if(accept){
-                int row = ui->FormCompareTableWidget->rowCount();
-                ui->FormCompareTableWidget->insertRow(row);
+                int row = ui->TableWidget->rowCount();
+                ui->TableWidget->insertRow(row);
                 QString AchievementIcon=JASFG[j].toObject().value("icon").toString().mid(66,JASFG[j].toObject().value("icon").toString().length());
                 if(!QFile::exists("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
                     ImageRequest *image;
@@ -149,17 +148,17 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
                     pixmap.load("images/achievements/"+appid+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
                     QLabel *label = new QLabel;
                     label->setPixmap(pixmap);
-                    ui->FormCompareTableWidget->setCellWidget(row,0,label);
+                    ui->TableWidget->setCellWidget(row,0,label);
                     }
                 QTableWidgetItem *item2 = new QTableWidgetItem(JASFG[j].toObject().value("displayName").toString());
                 item2->setTextAlignment(Qt::AlignCenter);
-                ui->FormCompareTableWidget->setItem(row,1,item2);
+                ui->TableWidget->setItem(row,1,item2);
                 QTableWidgetItem *item3 = new QTableWidgetItem(JASFG[j].toObject().value("description").toString());
                 item3->setTextAlignment(Qt::AlignCenter);
-                ui->FormCompareTableWidget->setItem(row,2,item3);
+                ui->TableWidget->setItem(row,2,item3);
                 QTableWidgetItem *item4 = new QTableWidgetItem(QString::number(JsonArrayGlobalAchievements[i].toObject().value("percent").toDouble())+"%");
                 item4->setTextAlignment(Qt::AlignCenter);
-                ui->FormCompareTableWidget->setItem(row,3,item4);
+                ui->TableWidget->setItem(row,3,item4);
                 QTableWidgetItem *item5;
                 if(JAPA[j].toObject().value("achieved").toInt()==1){
                     QDateTime date=QDateTime::fromSecsSinceEpoch(JAPA[j].toObject().value("unlocktime").toInt(),Qt::LocalTime);
@@ -170,23 +169,23 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
                     totalnr++;
                     }
                 item5->setTextAlignment(Qt::AlignCenter);
-                ui->FormCompareTableWidget->setItem(row,4,item5);
+                ui->TableWidget->setItem(row,4,item5);
                 QTableWidgetItem *item6 = new QTableWidgetItem(JAPA[j].toObject().value("apiname").toString());
-                ui->FormCompareTableWidget->setItem(row,5,item6);
+                ui->TableWidget->setItem(row,5,item6);
                 JAPA.removeAt(j);
                 JASFG.removeAt(j);
-                ui->FormCompareTableWidget->setVerticalHeaderItem(row,new QTableWidgetItem(QString::number(row-1)));
+                ui->TableWidget->setVerticalHeaderItem(row,new QTableWidgetItem(QString::number(row-1)));
             }
         }
     double percent= 100.0*totalr/(totalr+totalnr);
-    ui->FormCompareTableWidget->setCellWidget(1,4, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
-    ui->FormCompareTableWidget->setColumnWidth(0,65);
-    ui->FormCompareTableWidget->setColumnWidth(1,100);
-    ui->FormCompareTableWidget->setColumnWidth(2,315);
-    ui->FormCompareTableWidget->resizeColumnToContents(3);
-    ui->FormCompareTableWidget->setColumnWidth(4,80);
-    ui->FormCompareTableWidget->setColumnHidden(5,true);
-    ui->FormCompareTableWidget->resizeRowsToContents();
+    ui->TableWidget->setCellWidget(1,4, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
+    ui->TableWidget->setColumnWidth(0,65);
+    ui->TableWidget->setColumnWidth(1,100);
+    ui->TableWidget->setColumnWidth(2,315);
+    ui->TableWidget->resizeColumnToContents(3);
+    ui->TableWidget->setColumnWidth(4,80);
+    ui->TableWidget->setColumnHidden(5,true);
+    ui->TableWidget->resizeRowsToContents();
 
     QDir categories("Files/Categories/"+appid);
     categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -221,29 +220,29 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
             }
         widget1->setLayout(layout1);
         widget2->setLayout(layout2);
-        ui->FormCompareScrollAreaCategoriesComboBox->setWidget(widget1);
-        ui->FormCompareScrollAreaCategoriesCheckBox->setWidget(widget2);
+        ui->ScrollAreaCategoriesComboBox->setWidget(widget1);
+        ui->ScrollAreaCategoriesCheckBox->setWidget(widget2);
 
         if(layout1->rowCount()==0){
-            ui->FormCompareScrollAreaCategoriesComboBox->hide();
+            ui->ScrollAreaCategoriesComboBox->hide();
         } else {
-            ui->FormCompareScrollAreaCategoriesComboBox->show();
+            ui->ScrollAreaCategoriesComboBox->show();
         }
         if(layout2->rowCount()==0){
-            ui->FormCompareScrollAreaCategoriesCheckBox->hide();
+            ui->ScrollAreaCategoriesCheckBox->hide();
         } else {
-            ui->FormCompareScrollAreaCategoriesCheckBox->show();
+            ui->ScrollAreaCategoriesCheckBox->show();
         }
     }
-    bool **New = new bool*[ui->FormCompareTableWidget->rowCount()];
-    for (int i=0;i<ui->FormCompareTableWidget->rowCount();i++) {
+    bool **New = new bool*[ui->TableWidget->rowCount()];
+    for (int i=0;i<ui->TableWidget->rowCount();i++) {
         New[i]=new bool[list.size()+3];
         for (int j=0;j<list.size()+3;j++) {
             New[i][j]=true;
             }
         }
     colfilter=list.size()+3;
-    filter = new bool*[ui->FormCompareTableWidget->rowCount()];
+    filter = new bool*[ui->TableWidget->rowCount()];
     filter = New;
 
     QNetworkReply &ReplyFriendList = *manager.get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
@@ -289,23 +288,23 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
             Friends.second.push_back(a);
     }
 
-    ui->FormCompareTableWidgetFriends->setRowCount(4);
-    ui->FormCompareTableWidgetFriends->setColumnCount(Friends.first.size()+Friends.second.size()+2);
+    ui->TableWidgetFriends->setRowCount(4);
+    ui->TableWidgetFriends->setColumnCount(Friends.first.size()+Friends.second.size()+2);
 
     QLabel* Me = new QLabel;
     Me->setPixmap(pix);
     Me->setAlignment(Qt::AlignCenter);
     Me->setToolTip(DocPlayerSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject().value("personaname").toString());
-    ui->FormCompareTableWidgetFriends->setCellWidget(0,0,Me);
+    ui->TableWidgetFriends->setCellWidget(0,0,Me);
     QRadioButton *rbMyAll = new QRadioButton(/*Words[]*/);
     QRadioButton *rbMyReached = new QRadioButton(/*Words[]*/);
     QRadioButton *rbMyNotReached = new QRadioButton(/*Words[]*/);
     rbMyAll->setObjectName("RBMyAll");
     rbMyReached->setObjectName("RBMyReached");
     rbMyNotReached->setObjectName("RBMyNotReached");
-    connect(rbMyAll,SIGNAL(clicked()),this,SLOT(on_FormCompareRadioButtonMyAll_clicked()));
-    connect(rbMyReached,SIGNAL(clicked()),this,SLOT(on_FormCompareRadioButtonMyReached_clicked()));
-    connect(rbMyNotReached,SIGNAL(clicked()),this,SLOT(on_FormCompareRadioButtonMyNotReached_clicked()));
+    connect(rbMyAll,SIGNAL(clicked()),this,SLOT(on_RadioButtonMyAll_clicked()));
+    connect(rbMyReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonMyReached_clicked()));
+    connect(rbMyNotReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonMyNotReached_clicked()));
     rbMyAll->setChecked(true);
     QWidget* wd1 = new QWidget;
     QVBoxLayout* lay1 = new QVBoxLayout;
@@ -319,16 +318,16 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     wd1->setLayout(lay1);
     QLabel* All = new QLabel("All");
     All->setToolTip(Words[2]);
-    ui->FormCompareTableWidgetFriends->setCellWidget(0,1,All);
+    ui->TableWidgetFriends->setCellWidget(0,1,All);
     QPushButton *pbFriendsAll = new QPushButton(/*Words[]*/);
     QPushButton *pbFriendsReached = new QPushButton(/*Words[]*/);
     QPushButton *pbFriendsNotReached = new QPushButton(/*Words[]*/);
     pbFriendsAll->setObjectName("PBFriendsAll");
     pbFriendsReached->setObjectName("PBFriendsReached");
     pbFriendsNotReached->setObjectName("PBFriendsNotReached");
-    connect(pbFriendsAll,SIGNAL(clicked()),this,SLOT(on_FormCompareRadioButtonFriendsAll_clicked()));
-    connect(pbFriendsReached,SIGNAL(clicked()),this,SLOT(on_FormCompareRadioButtonFriendsReached_clicked()));
-    connect(pbFriendsNotReached,SIGNAL(clicked()),this,SLOT(on_FormCompareRadioButtonFriendsNotReached_clicked()));
+    connect(pbFriendsAll,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendsAll_clicked()));
+    connect(pbFriendsReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendsReached_clicked()));
+    connect(pbFriendsNotReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendsNotReached_clicked()));
     pbFriendsAll->setChecked(true);
     QWidget* wd2 = new QWidget;
     QVBoxLayout* lay2 = new QVBoxLayout;
@@ -339,10 +338,10 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     lay2->addWidget(pbFriendsNotReached);
     lay2->setMargin(1);
     wd2->setLayout(lay2);
-    ui->FormCompareGroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    ui->FormCompareButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    ui->FormCompareButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
-    ui->FormCompareButtonUpdate->setIcon(QIcon(":/"+theme+"/program/"+theme+"/update.png"));
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
+    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    ui->ButtonUpdate->setIcon(QIcon(":/"+theme+"/program/"+theme+"/update.png"));
     All->setPixmap(QPixmap(":/"+theme+"/program/"+theme+"/friends.png"));
     rbMyAll->setIcon(QIcon(":/"+theme+"/program/"+theme+"/all.png"));
     rbMyReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
@@ -352,45 +351,45 @@ FormCompare::FormCompare(QString keys, QString ids, QString appids, QPixmap Game
     pbFriendsNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
     All->setScaledContents(true);
     All->setFixedSize(32,32);
-    ui->FormCompareTableWidgetFriends->setCellWidget(2,0,wd1);
-    ui->FormCompareTableWidgetFriends->setCellWidget(2,1,wd2);
-    ui->FormCompareTableWidgetFriends->resizeRowsToContents();
+    ui->TableWidgetFriends->setCellWidget(2,0,wd1);
+    ui->TableWidgetFriends->setCellWidget(2,1,wd2);
+    ui->TableWidgetFriends->resizeRowsToContents();
 
     for (int i=0;i<Friends.first.size();i++) {
         QLabel *ava = new QLabel;
         ava->setPixmap(Friends.first[i].GetAvatar());
         ava->setToolTip(Friends.first[i].GetName());
         ava->setAlignment(Qt::AlignCenter);
-        ui->FormCompareTableWidgetFriends->setCellWidget(0,i+2,ava);
+        ui->TableWidgetFriends->setCellWidget(0,i+2,ava);
         QTableWidgetItem* pItem(new QTableWidgetItem(tr("")));
         pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
         pItem->setCheckState(Qt::Unchecked);
         pItem->setTextAlignment(Qt::AlignCenter);
-        ui->FormCompareTableWidgetFriends->setItem(1,i+2,pItem);
+        ui->TableWidgetFriends->setItem(1,i+2,pItem);
         QTableWidgetItem *item2 = new QTableWidgetItem(Friends.first[i].GetSteamid());
-        ui->FormCompareTableWidgetFriends->setItem(3,i+2,item2);
+        ui->TableWidgetFriends->setItem(3,i+2,item2);
     }
     for (int i=0;i<Friends.second.size();i++) {
         QLabel *ava = new QLabel;
         ava->setPixmap(Friends.second[i].GetAvatar());
         ava->setToolTip(Friends.second[i].GetName());
         ava->setAlignment(Qt::AlignCenter);
-        ui->FormCompareTableWidgetFriends->setCellWidget(0,Friends.first.size()+i+2,ava);
+        ui->TableWidgetFriends->setCellWidget(0,Friends.first.size()+i+2,ava);
         QTableWidgetItem* pItem(new QTableWidgetItem(tr("")));
         pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
         pItem->setCheckState(Qt::Unchecked);
         pItem->setTextAlignment(Qt::AlignCenter);
-        ui->FormCompareTableWidgetFriends->setItem(1,Friends.first.size()+i+2,pItem);
+        ui->TableWidgetFriends->setItem(1,Friends.first.size()+i+2,pItem);
         QTableWidgetItem *item2 = new QTableWidgetItem(Friends.second[i].GetSteamid());
-        ui->FormCompareTableWidgetFriends->setItem(3,Friends.first.size()+i+2,item2);
-        ui->FormCompareTableWidgetFriends->resizeColumnToContents(Friends.first.size()+i+2);
-        ui->FormCompareTableWidgetFriends->setColumnHidden(Friends.first.size()+i+2,true);
+        ui->TableWidgetFriends->setItem(3,Friends.first.size()+i+2,item2);
+        ui->TableWidgetFriends->resizeColumnToContents(Friends.first.size()+i+2);
+        ui->TableWidgetFriends->setColumnHidden(Friends.first.size()+i+2,true);
     }
-    connect(ui->FormCompareTableWidgetFriends,SIGNAL(cellChanged(int,int)),this,SLOT(on_CheckBoxFriend_Click(int,int)));
-    ui->FormCompareTableWidgetFriends->setRowHidden(3,true);
-    ui->FormCompareTableWidgetFriends->resizeColumnsToContents();
+    connect(ui->TableWidgetFriends,SIGNAL(cellChanged(int,int)),this,SLOT(on_CheckBoxFriend_Click(int,int)));
+    ui->TableWidgetFriends->setRowHidden(3,true);
+    ui->TableWidgetFriends->resizeColumnsToContents();
 
-    ui->FormCompareLineEditFind->setFocus();
+    ui->LineEditFind->setFocus();
 }
 
 void FormCompare::OnResultImage(int i, QString Save, ImageRequest *imgr){
@@ -401,13 +400,13 @@ void FormCompare::OnResultImage(int i, QString Save, ImageRequest *imgr){
     if(!Save.isEmpty()){
         pixmap.save("images/achievements/"+appid+"/"+Save.mid(Save.indexOf("/",1)+1,Save.length()-1).remove(".jpg")+".png", "PNG");
     }
-    ui->FormCompareTableWidget->setCellWidget(i,0,label);
-    ui->FormCompareTableWidget->resizeRowToContents(i);
+    ui->TableWidget->setCellWidget(i,0,label);
+    ui->TableWidget->resizeRowToContents(i);
     imgr->deleteLater();
 }
 
 void FormCompare::UpdateHiddenRows(){
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++) {
+    for (int i=2;i<ui->TableWidget->rowCount();i++) {
         bool accept=true;
         for (int j=0;j<colfilter;j++) {
             if(filter[i][j]==false){
@@ -416,9 +415,9 @@ void FormCompare::UpdateHiddenRows(){
                 }
             }
         if(accept){
-            ui->FormCompareTableWidget->setRowHidden(i,false);
+            ui->TableWidget->setRowHidden(i,false);
             } else
-            ui->FormCompareTableWidget->setRowHidden(i,true);
+            ui->TableWidget->setRowHidden(i,true);
         }
 }
 
@@ -427,24 +426,24 @@ FormCompare::~FormCompare()
     delete ui;
 }
 
-void FormCompare::on_FormCompareRadioButtonMyAll_clicked()
+void FormCompare::on_RadioButtonMyAll_clicked()
 {
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+    for (int i=2;i<ui->TableWidget->rowCount();i++){
         filter[i][1]=true;}
     UpdateHiddenRows();
 }
-void FormCompare::on_FormCompareRadioButtonMyReached_clicked()
+void FormCompare::on_RadioButtonMyReached_clicked()
 {
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++)
-        if(ui->FormCompareTableWidget->item(i,4)->text().indexOf(".")>-1){
+    for (int i=2;i<ui->TableWidget->rowCount();i++)
+        if(ui->TableWidget->item(i,4)->text().indexOf(".")>-1){
             filter[i][1]=true;} else{
             filter[i][1]=false;}
     UpdateHiddenRows();
 }
-void FormCompare::on_FormCompareRadioButtonMyNotReached_clicked()
+void FormCompare::on_RadioButtonMyNotReached_clicked()
 {
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++)
-        if(ui->FormCompareTableWidget->item(i,4)->text().indexOf(".")>-1){
+    for (int i=2;i<ui->TableWidget->rowCount();i++)
+        if(ui->TableWidget->item(i,4)->text().indexOf(".")>-1){
             filter[i][1]=false;} else{
             filter[i][1]=true;}
     UpdateHiddenRows();
@@ -462,16 +461,16 @@ void FormCompare::on_ComboBoxCategory_Change(int index){
         QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
         QJsonArray selecteditem = cat.object().value(cb->itemText(index)).toArray();
         if(index!=0)
-            for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++) {
+            for (int i=2;i<ui->TableWidget->rowCount();i++) {
                 filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = false;
                 for (int j=0;j<selecteditem.size();j++) {
-                    if(ui->FormCompareTableWidget->item(i,5)->text()==selecteditem[j].toString()){
+                    if(ui->TableWidget->item(i,5)->text()==selecteditem[j].toString()){
                         filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = true;
                         break;
                         };
                     }
             } else {
-            for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++) {
+            for (int i=2;i<ui->TableWidget->rowCount();i++) {
                 filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()]=true;
                 }
             }
@@ -491,16 +490,16 @@ void FormCompare::on_CheckBoxCategory_Change(int ind){
         QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
         QJsonArray selecteditem = cat.object().value(cat.object().value("values").toArray().at(0).toString()).toArray();
         if(ind!=0)
-            for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++) {
+            for (int i=2;i<ui->TableWidget->rowCount();i++) {
                 filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = false;
                 for (int j=0;j<selecteditem.size();j++) {
-                    if(ui->FormCompareTableWidget->item(i,5)->text()==selecteditem[j].toString()){
+                    if(ui->TableWidget->item(i,5)->text()==selecteditem[j].toString()){
                         filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = true;
                         break;
                         };
                     }
             } else {
-            for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++) {
+            for (int i=2;i<ui->TableWidget->rowCount();i++) {
                 filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()]=true;
                 }
             }
@@ -509,50 +508,50 @@ void FormCompare::on_CheckBoxCategory_Change(int ind){
     }
 }
 
-void FormCompare::on_FormCompareCheckBoxSCIcons_stateChanged(int arg1){
+void FormCompare::on_CheckBoxSCIcons_stateChanged(int arg1){
     switch(arg1){
     case 0:{
-        ui->FormCompareTableWidget->setColumnHidden(0,true);
+        ui->TableWidget->setColumnHidden(0,true);
         break;
     }
     case 2:{
-        ui->FormCompareTableWidget->setColumnHidden(0,false);
+        ui->TableWidget->setColumnHidden(0,false);
         break;
     }
     }
 }
-void FormCompare::on_FormCompareCheckBoxSCTitle_stateChanged(int arg1){
+void FormCompare::on_CheckBoxSCTitle_stateChanged(int arg1){
     switch(arg1){
     case 0:{
-        ui->FormCompareTableWidget->setColumnHidden(1,true);
+        ui->TableWidget->setColumnHidden(1,true);
         break;
     }
     case 2:{
-        ui->FormCompareTableWidget->setColumnHidden(1,false);
+        ui->TableWidget->setColumnHidden(1,false);
         break;
     }
     }
 }
-void FormCompare::on_FormCompareCheckBoxSCDescription_stateChanged(int arg1){
+void FormCompare::on_CheckBoxSCDescription_stateChanged(int arg1){
     switch(arg1){
     case 0:{
-        ui->FormCompareTableWidget->setColumnHidden(2,true);
+        ui->TableWidget->setColumnHidden(2,true);
         break;
     }
     case 2:{
-        ui->FormCompareTableWidget->setColumnHidden(2,false);
+        ui->TableWidget->setColumnHidden(2,false);
         break;
     }
     }
 }
-void FormCompare::on_FormCompareCheckBoxSCTotalPercent_stateChanged(int arg1){
+void FormCompare::on_CheckBoxSCTotalPercent_stateChanged(int arg1){
     switch(arg1){
     case 0:{
-        ui->FormCompareTableWidget->setColumnHidden(3,true);
+        ui->TableWidget->setColumnHidden(3,true);
         break;
     }
     case 2:{
-        ui->FormCompareTableWidget->setColumnHidden(3,false);
+        ui->TableWidget->setColumnHidden(3,false);
         break;
     }
     }
@@ -561,11 +560,11 @@ void FormCompare::on_FormCompareCheckBoxSCTotalPercent_stateChanged(int arg1){
 void FormCompare::on_CheckBoxFriend_Click(int row, int column){
     if((row==1)&&(column>1)){
         Profile sProfile;
-        int col=ui->FormCompareTableWidget->columnCount();
-        if(ui->FormCompareCheckBoxAllFriends->isChecked()){
+        int col=ui->TableWidget->columnCount();
+        if(ui->CheckBoxAllFriends->isChecked()){
             bool accept=true;
             for (int i=0;i<Friends.first.size();i++) {
-                if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,column)->text()){
+                if(Friends.first[i].GetSteamid()==ui->TableWidgetFriends->item(3,column)->text()){
                     accept=false;
                     sProfile=Friends.first[i];
                     break;
@@ -573,7 +572,7 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
             }
             if(accept){
                 for (int i=0;i<Friends.second.size();i++) {
-                    if(Friends.second[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,column)->text()){
+                    if(Friends.second[i].GetSteamid()==ui->TableWidgetFriends->item(3,column)->text()){
                         sProfile=Friends.second[i];
                         break;
                     }
@@ -581,19 +580,19 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
             }
         } else {
             for (int i=0;i<Friends.first.size();i++) {
-                if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,column)->text()){
+                if(Friends.first[i].GetSteamid()==ui->TableWidgetFriends->item(3,column)->text()){
                     sProfile=Friends.first[i];
                     break;
                 }
             }
         }
-        if(ui->FormCompareTableWidgetFriends->item(row,column)->checkState()==Qt::Checked){
-            ui->FormCompareTableWidget->insertColumn(col);
-            ui->FormCompareTableWidget->setHorizontalHeaderItem(col,new QTableWidgetItem(sProfile.GetName()));
+        if(ui->TableWidgetFriends->item(row,column)->checkState()==Qt::Checked){
+            ui->TableWidget->insertColumn(col);
+            ui->TableWidget->setHorizontalHeaderItem(col,new QTableWidgetItem(sProfile.GetName()));
             QLabel* ava = new QLabel;
             ava->setPixmap(sProfile.GetAvatar());
             ava->setAlignment(Qt::AlignCenter);
-            ui->FormCompareTableWidget->setCellWidget(0,col,ava);
+            ui->TableWidget->setCellWidget(0,col,ava);
             QNetworkAccessManager manager;
             QEventLoop loop;
             QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -602,11 +601,11 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
             QJsonArray JAPA = QJsonDocument::fromJson(replyPlayerAchievements.readAll()).object().value("playerstats").toObject().value("achievements").toArray();
             int totalr=0;
             int totalnr=0;
-            for(int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+            for(int i=2;i<ui->TableWidget->rowCount();i++){
                 int j=0;
                 bool accept=false;
                 for(;j<JAPA.size();j++){
-                    if(JAPA[j].toObject().value("apiname").toString()==ui->FormCompareTableWidget->item(i,5)->text()){
+                    if(JAPA[j].toObject().value("apiname").toString()==ui->TableWidget->item(i,5)->text()){
                         accept=true;
                         break;
                         }
@@ -622,15 +621,15 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                         totalnr++;
                         }
                     item5->setTextAlignment(Qt::AlignCenter);
-                    ui->FormCompareTableWidget->setItem(i,col,item5);
+                    ui->TableWidget->setItem(i,col,item5);
                     //JAPA.removeAt(j);
                 }
                 }
             double percent= 100.0*totalr/(totalr+totalnr);
             if((totalr==0)&&(totalnr==0))
-                ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel("profile is \nnot public"));
+                ui->TableWidget->setCellWidget(1,col, new QLabel("profile is \nnot public"));
             else {
-                ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
+                ui->TableWidget->setCellWidget(1,col, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
                 QRadioButton *rbAll = new QRadioButton(/*Words[]*/);
                 QRadioButton *rbReached = new QRadioButton(/*Words[]*/);
                 QRadioButton *rbNotReached = new QRadioButton(/*Words[]*/);
@@ -653,13 +652,13 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 rbAll->setIcon(QIcon(":/"+theme+"/program/"+theme+"/all.png"));
                 rbReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
                 rbNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
-                ui->FormCompareTableWidgetFriends->setCellWidget(2,column,wd);
-                ui->FormCompareTableWidgetFriends->resizeRowsToContents();
-                ui->FormCompareTableWidgetFriends->resizeColumnsToContents();
+                ui->TableWidgetFriends->setCellWidget(2,column,wd);
+                ui->TableWidgetFriends->resizeRowsToContents();
+                ui->TableWidgetFriends->resizeColumnsToContents();
             }
-            bool **New = new bool*[ui->FormCompareTableWidget->rowCount()];
+            bool **New = new bool*[ui->TableWidget->rowCount()];
             colfilter++;
-            for (int i=0;i<ui->FormCompareTableWidget->rowCount();i++) {
+            for (int i=0;i<ui->TableWidget->rowCount();i++) {
                 New[i]=new bool[colfilter];
                 for (int j=0;j<colfilter;j++) {
                     if(j!=colfilter-1)
@@ -669,16 +668,16 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                     }
                 }
             delete filter;
-            filter = new bool*[ui->FormCompareTableWidget->rowCount()];
+            filter = new bool*[ui->TableWidget->rowCount()];
             filter = New;
 
-            ui->FormCompareTableWidget->setColumnWidth(col,80);
+            ui->TableWidget->setColumnWidth(col,80);
         } else {
             int coll=0;
-            for (int i=6;i<ui->FormCompareTableWidget->columnCount();i++) {
-                if(ui->FormCompareTableWidget->horizontalHeaderItem(i)->text()==sProfile.GetName()){
+            for (int i=6;i<ui->TableWidget->columnCount();i++) {
+                if(ui->TableWidget->horizontalHeaderItem(i)->text()==sProfile.GetName()){
                     coll=i;
-                    ui->FormCompareTableWidget->removeColumn(i);
+                    ui->TableWidget->removeColumn(i);
                     break;
                 }
             }
@@ -690,15 +689,15 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 delete findChild<QRadioButton*>("RB"+QString::number(column)+"Reached");
                 delete findChild<QRadioButton*>("RB"+QString::number(column)+"NotReached");
                 delete findChild<QVBoxLayout*>("Lay"+QString::number(column));
-                ui->FormCompareTableWidgetFriends->removeCellWidget(2,column);
+                ui->TableWidgetFriends->removeCellWidget(2,column);
                 delete findChild<QWidget*>("WD"+QString::number(column));
-                ui->FormCompareTableWidgetFriends->resizeRowsToContents();
-                ui->FormCompareTableWidgetFriends->resizeColumnsToContents();
+                ui->TableWidgetFriends->resizeRowsToContents();
+                ui->TableWidgetFriends->resizeColumnsToContents();
             }
-            int filtercol=colfilter-(ui->FormCompareTableWidget->columnCount()-coll);
-            bool **New = new bool*[ui->FormCompareTableWidget->rowCount()];
+            int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
+            bool **New = new bool*[ui->TableWidget->rowCount()];
             colfilter--;
-            for (int i=0;i<ui->FormCompareTableWidget->rowCount();i++) {
+            for (int i=0;i<ui->TableWidget->rowCount();i++) {
                 New[i]=new bool[colfilter];
                 int jt=0;
                 for (int j=0;j<colfilter;j++,jt++) {
@@ -708,7 +707,7 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 }
             }
             delete filter;
-            filter = new bool*[ui->FormCompareTableWidget->rowCount()];
+            filter = new bool*[ui->TableWidget->rowCount()];
             filter = New;
             UpdateHiddenRows();
         }
@@ -718,33 +717,33 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
 void FormCompare::on_RadioButtonFriendAll_Click(){
     QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
     int col=(rb->objectName().mid(2,rb->objectName().indexOf("All")-2)).toInt();
-    QString Name=dynamic_cast<QLabel*>(ui->FormCompareTableWidgetFriends->cellWidget(0,col))->toolTip();
+    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0,col))->toolTip();
     int coll=0;
-    for (int i=6;i<ui->FormCompareTableWidget->columnCount();i++) {
-        if(ui->FormCompareTableWidget->horizontalHeaderItem(i)->text()==Name){
+    for (int i=6;i<ui->TableWidget->columnCount();i++) {
+        if(ui->TableWidget->horizontalHeaderItem(i)->text()==Name){
             coll=i;
             break;
         }
     }
-    int filtercol=colfilter-(ui->FormCompareTableWidget->columnCount()-coll);
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+    int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
+    for (int i=2;i<ui->TableWidget->rowCount();i++){
         filter[i][filtercol]=true;}
     UpdateHiddenRows();
 }
 void FormCompare::on_RadioButtonFriendReached_Click(){
     QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
     int col=(rb->objectName().mid(2,rb->objectName().indexOf("Reached")-2)).toInt();
-    QString Name=dynamic_cast<QLabel*>(ui->FormCompareTableWidgetFriends->cellWidget(0,col))->toolTip();
+    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0,col))->toolTip();
     int coll=0;
-    for (int i=6;i<ui->FormCompareTableWidget->columnCount();i++) {
-        if(ui->FormCompareTableWidget->horizontalHeaderItem(i)->text()==Name){
+    for (int i=6;i<ui->TableWidget->columnCount();i++) {
+        if(ui->TableWidget->horizontalHeaderItem(i)->text()==Name){
             coll=i;
             break;
         }
     }
-    int filtercol=colfilter-(ui->FormCompareTableWidget->columnCount()-coll);
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++)
-        if(ui->FormCompareTableWidget->item(i,coll)->text().indexOf(".")>-1){
+    int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
+    for (int i=2;i<ui->TableWidget->rowCount();i++)
+        if(ui->TableWidget->item(i,coll)->text().indexOf(".")>-1){
             filter[i][filtercol]=true;} else{
             filter[i][filtercol]=false;}
     UpdateHiddenRows();
@@ -752,24 +751,24 @@ void FormCompare::on_RadioButtonFriendReached_Click(){
 void FormCompare::on_RadioButtonFriendNotReached_Click(){
     QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
     int col=(rb->objectName().mid(2,rb->objectName().indexOf("NotReached")-2)).toInt();
-    QString Name=dynamic_cast<QLabel*>(ui->FormCompareTableWidgetFriends->cellWidget(0,col))->toolTip();
+    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0,col))->toolTip();
     int coll=0;
-    for (int i=6;i<ui->FormCompareTableWidget->columnCount();i++) {
-        if(ui->FormCompareTableWidget->horizontalHeaderItem(i)->text()==Name){
+    for (int i=6;i<ui->TableWidget->columnCount();i++) {
+        if(ui->TableWidget->horizontalHeaderItem(i)->text()==Name){
             coll=i;
             break;
         }
     }
-    int filtercol=colfilter-(ui->FormCompareTableWidget->columnCount()-coll);
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++)
-        if(ui->FormCompareTableWidget->item(i,coll)->text().indexOf(".")>-1){
+    int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
+    for (int i=2;i<ui->TableWidget->rowCount();i++)
+        if(ui->TableWidget->item(i,coll)->text().indexOf(".")>-1){
             filter[i][filtercol]=false;} else{
             filter[i][filtercol]=true;}
     UpdateHiddenRows();
 }
 
-void FormCompare::on_FormCompareRadioButtonFriendsAll_clicked(){
-    for (int i=2;i<ui->FormCompareTableWidgetFriends->columnCount();i++) {
+void FormCompare::on_RadioButtonFriendsAll_clicked(){
+    for (int i=2;i<ui->TableWidgetFriends->columnCount();i++) {
         QString Name="RB"+QString::number(i)+"All";
         if(findChild<QRadioButton*>(Name)){
             findChild<QRadioButton*>(Name)->setChecked(true);
@@ -777,8 +776,8 @@ void FormCompare::on_FormCompareRadioButtonFriendsAll_clicked(){
         }
     }
 }
-void FormCompare::on_FormCompareRadioButtonFriendsReached_clicked(){
-    for (int i=2;i<ui->FormCompareTableWidgetFriends->columnCount();i++) {
+void FormCompare::on_RadioButtonFriendsReached_clicked(){
+    for (int i=2;i<ui->TableWidgetFriends->columnCount();i++) {
         QString Name="RB"+QString::number(i)+"Reached";
         if(findChild<QRadioButton*>(Name)){
             findChild<QRadioButton*>(Name)->setChecked(true);
@@ -786,8 +785,8 @@ void FormCompare::on_FormCompareRadioButtonFriendsReached_clicked(){
         }
     }
 }
-void FormCompare::on_FormCompareRadioButtonFriendsNotReached_clicked(){
-    for (int i=2;i<ui->FormCompareTableWidgetFriends->columnCount();i++) {
+void FormCompare::on_RadioButtonFriendsNotReached_clicked(){
+    for (int i=2;i<ui->TableWidgetFriends->columnCount();i++) {
         QString Name="RB"+QString::number(i)+"NotReached";
         if(findChild<QRadioButton*>(Name)){
             findChild<QRadioButton*>(Name)->setChecked(true);
@@ -796,39 +795,39 @@ void FormCompare::on_FormCompareRadioButtonFriendsNotReached_clicked(){
     }
 }
 
-void FormCompare::on_FormCompareButtonReturn_clicked(){
+void FormCompare::on_ButtonReturn_clicked(){
     emit return_to_achievements(this);
     //delete this;
 }
 
 void FormCompare::closeEvent(QCloseEvent *){
-    on_FormCompareButtonReturn_clicked();
+    on_ButtonReturn_clicked();
 }
 
-void FormCompare::on_FormComparCheckBoxShowFilter_stateChanged(int arg1){
+void FormCompare::on_CheckBoxShowFilter_stateChanged(int arg1){
     switch (arg1) {
     case 0:{
-        ui->FormCompareGroupBoxFilter->setHidden(true);
+        ui->GroupBoxFilter->setHidden(true);
         break;
     }
     case 2:{
-        ui->FormCompareGroupBoxFilter->setHidden(false);
+        ui->GroupBoxFilter->setHidden(false);
         break;
     }
     }
 }
 
-void FormCompare::on_FormCompareCheckBoxAllFriends_stateChanged(int arg1){
+void FormCompare::on_CheckBoxAllFriends_stateChanged(int arg1){
     switch (arg1) {
     case 0:{
         for (int i=0;i<Friends.second.size();i++) {
-            if(ui->FormCompareTableWidgetFriends->item(1,Friends.first.size()+2+i)->checkState()==Qt::Checked){
+            if(ui->TableWidgetFriends->item(1,Friends.first.size()+2+i)->checkState()==Qt::Checked){
                 int coll=0;
-                ui->FormCompareTableWidgetFriends->item(1,Friends.first.size()+2+i)->setCheckState(Qt::Unchecked);
-                for (int j=6;j<ui->FormCompareTableWidget->columnCount();j++) {
-                    if(ui->FormCompareTableWidget->horizontalHeaderItem(j)->text()==Friends.second[i].GetName()){
+                ui->TableWidgetFriends->item(1,Friends.first.size()+2+i)->setCheckState(Qt::Unchecked);
+                for (int j=6;j<ui->TableWidget->columnCount();j++) {
+                    if(ui->TableWidget->horizontalHeaderItem(j)->text()==Friends.second[i].GetName()){
                         coll=i;
-                        ui->FormCompareTableWidget->removeColumn(j);
+                        ui->TableWidget->removeColumn(j);
                         break;
                     }
                 }
@@ -840,15 +839,15 @@ void FormCompare::on_FormCompareCheckBoxAllFriends_stateChanged(int arg1){
                     delete findChild<QRadioButton*>("RB"+QString::number(Friends.first.size()+2+i)+"Reached");
                     delete findChild<QRadioButton*>("RB"+QString::number(Friends.first.size()+2+i)+"NotReached");
                     delete findChild<QVBoxLayout*>("Lay"+QString::number(Friends.first.size()+2+i));
-                    ui->FormCompareTableWidgetFriends->removeCellWidget(2,Friends.first.size()+2+i);
+                    ui->TableWidgetFriends->removeCellWidget(2,Friends.first.size()+2+i);
                     delete findChild<QWidget*>("WD"+QString::number(Friends.first.size()+2+i));
-                    ui->FormCompareTableWidgetFriends->resizeRowsToContents();
-                    ui->FormCompareTableWidgetFriends->resizeColumnsToContents();
+                    ui->TableWidgetFriends->resizeRowsToContents();
+                    ui->TableWidgetFriends->resizeColumnsToContents();
                 }
-                int filtercol=colfilter-(ui->FormCompareTableWidget->columnCount()-coll);
-                bool **New = new bool*[ui->FormCompareTableWidget->rowCount()];
+                int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
+                bool **New = new bool*[ui->TableWidget->rowCount()];
                 colfilter--;
-                for (int i=0;i<ui->FormCompareTableWidget->rowCount();i++) {
+                for (int i=0;i<ui->TableWidget->rowCount();i++) {
                     New[i]=new bool[colfilter];
                     int jt=0;
                     for (int j=0;j<colfilter;j++,jt++) {
@@ -858,37 +857,37 @@ void FormCompare::on_FormCompareCheckBoxAllFriends_stateChanged(int arg1){
                     }
                 }
                 delete filter;
-                filter = new bool*[ui->FormCompareTableWidget->rowCount()];
+                filter = new bool*[ui->TableWidget->rowCount()];
                 filter = New;
                 UpdateHiddenRows();
             }
-            ui->FormCompareTableWidgetFriends->setColumnHidden(Friends.first.size()+2+i,true);
+            ui->TableWidgetFriends->setColumnHidden(Friends.first.size()+2+i,true);
         }
         break;
     }
     case 2:{
         for (int i=0;i<Friends.second.size();i++) {
-            ui->FormCompareTableWidgetFriends->setColumnHidden(Friends.first.size()+2+i,false);
+            ui->TableWidgetFriends->setColumnHidden(Friends.first.size()+2+i,false);
         }
-        ui->FormCompareTableWidgetFriends->resizeColumnsToContents();
+        ui->TableWidgetFriends->resizeColumnsToContents();
         break;
     }
     }
 }
 
-void FormCompare::on_FormCompareButtonFind_clicked(){
-    on_FormCompareLineEditFind_textChanged(ui->FormCompareLineEditFind->text());
+void FormCompare::on_ButtonFind_clicked(){
+    on_LineEditFind_textChanged(ui->LineEditFind->text());
 }
 
-void FormCompare::on_FormCompareLineEditFind_textChanged(const QString&){
-    for (int i=2;i<ui->FormCompareTableWidget->rowCount();i++)
-        if((ui->FormCompareTableWidget->item(i,1)->text().toLower().indexOf(ui->FormCompareLineEditFind->text().toLower())>-1)||(ui->FormCompareTableWidget->item(i,2)->text().toLower().indexOf(ui->FormCompareLineEditFind->text().toLower())>-1))
+void FormCompare::on_LineEditFind_textChanged(const QString&){
+    for (int i=2;i<ui->TableWidget->rowCount();i++)
+        if((ui->TableWidget->item(i,1)->text().toLower().indexOf(ui->LineEditFind->text().toLower())>-1)||(ui->TableWidget->item(i,2)->text().toLower().indexOf(ui->LineEditFind->text().toLower())>-1))
             filter[i][0]=true; else
             filter[i][0]=false;
     UpdateHiddenRows();
 }
 
-void FormCompare::on_FormCompareButtonUpdate_clicked(){
+void FormCompare::on_ButtonUpdate_clicked(){
     QNetworkAccessManager manager;
     QEventLoop loop;
     QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -899,11 +898,11 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
     if(JsonArrayPlayerAchievements.size()>1){
         int totalr=0;
         int totalnr=0;
-        for(int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+        for(int i=2;i<ui->TableWidget->rowCount();i++){
             int j=0;
             bool accept=false;
             for(;j<JsonArrayPlayerAchievements.size();j++){
-                if(JsonArrayPlayerAchievements[j].toObject().value("apiname").toString()==ui->FormCompareTableWidget->item(i,5)->text()){
+                if(JsonArrayPlayerAchievements[j].toObject().value("apiname").toString()==ui->TableWidget->item(i,5)->text()){
                     accept=true;
                     break;
                     }
@@ -919,26 +918,26 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
                     totalnr++;
                     }
                 item5->setTextAlignment(Qt::AlignCenter);
-                delete ui->FormCompareTableWidget->item(i,4);
-                ui->FormCompareTableWidget->setItem(i,4,item5);
+                delete ui->TableWidget->item(i,4);
+                ui->TableWidget->setItem(i,4,item5);
                 //JAPA.removeAt(j);
             }
             }
         double percent= 100.0*totalr/(totalr+totalnr);
         if((totalr==0)&&(totalnr==0))
-            ui->FormCompareTableWidget->setCellWidget(1,4, new QLabel("profile is \nnot public"));
+            ui->TableWidget->setCellWidget(1,4, new QLabel("profile is \nnot public"));
         else {
-            ui->FormCompareTableWidget->setCellWidget(1,4, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
+            ui->TableWidget->setCellWidget(1,4, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
         }
     }
 
-    for (int ii=2;ii<ui->FormCompareTableWidgetFriends->columnCount();ii++){
-        if(ui->FormCompareTableWidgetFriends->item(1,ii)->checkState()==Qt::Checked){
+    for (int ii=2;ii<ui->TableWidgetFriends->columnCount();ii++){
+        if(ui->TableWidgetFriends->item(1,ii)->checkState()==Qt::Checked){
             Profile sProfile;
-            if(ui->FormCompareCheckBoxAllFriends->isChecked()){
+            if(ui->CheckBoxAllFriends->isChecked()){
                 bool accept=true;
                 for (int i=0;i<Friends.first.size();i++) {
-                    if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,ii)->text()){
+                    if(Friends.first[i].GetSteamid()==ui->TableWidgetFriends->item(3,ii)->text()){
                         accept=false;
                         sProfile=Friends.first[i];
                         break;
@@ -946,7 +945,7 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
                 }
                 if(accept){
                     for (int i=0;i<Friends.second.size();i++) {
-                        if(Friends.second[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,ii)->text()){
+                        if(Friends.second[i].GetSteamid()==ui->TableWidgetFriends->item(3,ii)->text()){
                             sProfile=Friends.second[i];
                             break;
                         }
@@ -954,15 +953,15 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
                 }
             } else {
                 for (int i=0;i<Friends.first.size();i++) {
-                    if(Friends.first[i].GetSteamid()==ui->FormCompareTableWidgetFriends->item(3,ii)->text()){
+                    if(Friends.first[i].GetSteamid()==ui->TableWidgetFriends->item(3,ii)->text()){
                         sProfile=Friends.first[i];
                         break;
                     }
                 }
             }
             int col=0;
-            for (int j=5;j<ui->FormCompareTableWidget->columnCount();j++) {
-                if(ui->FormCompareTableWidget->horizontalHeaderItem(j)->text()==sProfile.GetName()){
+            for (int j=5;j<ui->TableWidget->columnCount();j++) {
+                if(ui->TableWidget->horizontalHeaderItem(j)->text()==sProfile.GetName()){
                     col=j;
                     break;
                 }
@@ -972,11 +971,11 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
             QJsonArray JAPA = QJsonDocument::fromJson(replyPlayerAchievements.readAll()).object().value("playerstats").toObject().value("achievements").toArray();
             int totalr=0;
             int totalnr=0;
-            for(int i=2;i<ui->FormCompareTableWidget->rowCount();i++){
+            for(int i=2;i<ui->TableWidget->rowCount();i++){
                 int j=0;
                 bool accept=false;
                 for(;j<JAPA.size();j++){
-                    if(JAPA[j].toObject().value("apiname").toString()==ui->FormCompareTableWidget->item(i,5)->text()){
+                    if(JAPA[j].toObject().value("apiname").toString()==ui->TableWidget->item(i,5)->text()){
                         accept=true;
                         break;
                         }
@@ -992,16 +991,16 @@ void FormCompare::on_FormCompareButtonUpdate_clicked(){
                         totalnr++;
                         }
                     item5->setTextAlignment(Qt::AlignCenter);
-                    delete ui->FormCompareTableWidget->item(i,col);
-                    ui->FormCompareTableWidget->setItem(i,col,item5);
+                    delete ui->TableWidget->item(i,col);
+                    ui->TableWidget->setItem(i,col,item5);
                     //JAPA.removeAt(j);
                 }
                 }
             double percent= 100.0*totalr/(totalr+totalnr);
             if((totalr==0)&&(totalnr==0))
-                ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel("profile is \nnot public"));
+                ui->TableWidget->setCellWidget(1,col, new QLabel("profile is \nnot public"));
             else {
-                ui->FormCompareTableWidget->setCellWidget(1,col, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
+                ui->TableWidget->setCellWidget(1,col, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(percent)+"%"));
             }
         }
     }

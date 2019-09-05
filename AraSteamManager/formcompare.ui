@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
    <item row="1" column="4">
-    <widget class="QPushButton" name="FormCompareButtonUpdate">
+    <widget class="QPushButton" name="ButtonUpdate">
      <property name="text">
       <string>Update</string>
      </property>
@@ -46,7 +46,7 @@
        <number>1</number>
       </property>
       <item row="0" column="0">
-       <widget class="QLabel" name="FormCompareLabelLogo">
+       <widget class="QLabel" name="LabelLogo">
         <property name="text">
          <string>Logo</string>
         </property>
@@ -56,7 +56,7 @@
     </widget>
    </item>
    <item row="3" column="0" colspan="5">
-    <widget class="QGroupBox" name="FormCompareGroupBoxFilter">
+    <widget class="QGroupBox" name="GroupBoxFilter">
      <property name="maximumSize">
       <size>
        <width>16777215</width>
@@ -71,31 +71,31 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="4" column="5">
-       <widget class="QPushButton" name="FormCompareButtonFind">
+       <widget class="QPushButton" name="ButtonFind">
         <property name="text">
          <string>Find</string>
         </property>
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QCheckBox" name="FormCompareCheckBoxFavorites">
+       <widget class="QCheckBox" name="CheckBoxFavorites">
         <property name="text">
          <string>Favorites</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0" colspan="5">
-       <widget class="QLineEdit" name="FormCompareLineEditFind"/>
+       <widget class="QLineEdit" name="LineEditFind"/>
       </item>
       <item row="1" column="5">
-       <widget class="QCheckBox" name="FormCompareCheckBoxAllFriends">
+       <widget class="QCheckBox" name="CheckBoxAllFriends">
         <property name="text">
          <string>All friends</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2" rowspan="3" colspan="3">
-       <widget class="QGroupBox" name="FormCompareGroupBoxShowedColumns">
+       <widget class="QGroupBox" name="GroupBoxShowedColumns">
         <property name="title">
          <string>Showed columns</string>
         </property>
@@ -107,7 +107,7 @@
           <number>1</number>
          </property>
          <item row="0" column="0">
-          <widget class="QCheckBox" name="FormCompareCheckBoxSCIcons">
+          <widget class="QCheckBox" name="CheckBoxSCIcons">
            <property name="text">
             <string>Icon</string>
            </property>
@@ -117,7 +117,7 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QCheckBox" name="FormCompareCheckBoxSCTitle">
+          <widget class="QCheckBox" name="CheckBoxSCTitle">
            <property name="text">
             <string>Title</string>
            </property>
@@ -127,7 +127,7 @@
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QCheckBox" name="FormCompareCheckBoxSCDescription">
+          <widget class="QCheckBox" name="CheckBoxSCDescription">
            <property name="text">
             <string>Description</string>
            </property>
@@ -137,7 +137,7 @@
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QCheckBox" name="FormCompareCheckBoxSCTotalPercent">
+          <widget class="QCheckBox" name="CheckBoxSCTotalPercent">
            <property name="text">
             <string>Total percent</string>
            </property>
@@ -150,7 +150,7 @@
        </widget>
       </item>
       <item row="0" column="1" rowspan="3">
-       <widget class="QScrollArea" name="FormCompareScrollAreaCategoriesCheckBox">
+       <widget class="QScrollArea" name="ScrollAreaCategoriesCheckBox">
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
@@ -167,7 +167,7 @@
        </widget>
       </item>
       <item row="0" column="0" rowspan="3">
-       <widget class="QScrollArea" name="FormCompareScrollAreaCategoriesComboBox">
+       <widget class="QScrollArea" name="ScrollAreaCategoriesComboBox">
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
@@ -184,7 +184,7 @@
        </widget>
       </item>
       <item row="3" column="0" colspan="6">
-       <widget class="QTableWidget" name="FormCompareTableWidgetFriends">
+       <widget class="QTableWidget" name="TableWidgetFriends">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -222,7 +222,7 @@
     </spacer>
    </item>
    <item row="2" column="2">
-    <widget class="QLabel" name="FormCompareLabelPlayerCount">
+    <widget class="QLabel" name="LabelPlayerCount">
      <property name="font">
       <font>
        <pointsize>14</pointsize>
@@ -234,7 +234,7 @@
     </widget>
    </item>
    <item row="2" column="4">
-    <widget class="QCheckBox" name="FormComparCheckBoxShowFilter">
+    <widget class="QCheckBox" name="CheckBoxShowFilter">
      <property name="text">
       <string>Show Filter</string>
      </property>
@@ -244,14 +244,14 @@
     </widget>
    </item>
    <item row="0" column="4">
-    <widget class="QPushButton" name="FormCompareButtonReturn">
+    <widget class="QPushButton" name="ButtonReturn">
      <property name="text">
       <string>Return</string>
      </property>
     </widget>
    </item>
    <item row="4" column="0" rowspan="2" colspan="5">
-    <widget class="QTableWidget" name="FormCompareTableWidget">
+    <widget class="QTableWidget" name="TableWidget">
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>

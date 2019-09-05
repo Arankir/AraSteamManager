@@ -7,7 +7,6 @@
 #include <formachievements.h>
 #include <class/steamapigames.h>
 #include <class/settings.h>
-#include <class/language.h>
 
 namespace Ui {
 class FormGames;
@@ -30,7 +29,7 @@ private slots:
     void OnResultAchievements(int, QString, ImageRequest *);
     void closeEvent(QCloseEvent *event);
 
-    void on_FormGamesButtonReturn_clicked();
+    void on_ButtonReturn_clicked();
 
     void AchievementsClicked();
 
@@ -38,9 +37,9 @@ private slots:
 
     void on_return(FormAchievements*);
 
-    void on_FormGamesLineEditGame_textChanged(const QString);
+    void on_LineEditGame_textChanged(const QString);
 
-    void on_FormGamesButtonFind_clicked();
+    void on_ButtonFind_clicked();
 
 private:
     Ui::FormGames *ui;

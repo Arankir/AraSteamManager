@@ -1,5 +1,4 @@
 debug/imagerequest.o
-debug/language.o
 debug/profile.o
 debug/settings.o
 debug/steamapiachievement.o
@@ -23,7 +22,6 @@ debug/formachievements.o
 debug/formfriends.o
 debug/qrc_res.o
 debug/moc_imagerequest.o
-debug/moc_language.o
 debug/moc_profile.o
 debug/moc_settings.o
 debug/moc_steamapiachievement.o

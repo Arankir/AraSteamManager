@@ -26,7 +26,6 @@ CONFIG += c++11
 
 SOURCES += \
     class/imagerequest.cpp \
-    class/language.cpp \
     class/profile.cpp \
     class/settings.cpp \
     class/steamapiachievement.cpp \
@@ -51,7 +50,6 @@ SOURCES += \
 
 HEADERS += \
     class/imagerequest.h \
-    class/language.h \
     class/profile.h \
     class/settings.h \
     class/steamapiachievement.h \

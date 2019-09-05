@@ -15,7 +15,6 @@
 #include <class/steamapigames.h>
 #include <class/steamapifriends.h>
 #include <class/settings.h>
-#include <class/language.h>
 
 namespace Ui {
 class MainWindow;
