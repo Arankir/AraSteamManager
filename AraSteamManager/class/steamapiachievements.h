@@ -36,13 +36,13 @@ public:
     int GetHidden(int index) {return achievements[index].GetHidden();}
     QString GetDescription(int index) {return achievements[index].GetDescription();}
     QString GetIcon(int index) {return achievements[index].GetIcon();}
-    QString GetIcongray(int index) {return  achievements[index].GetIcongray();}
+    QString GetIcongray(int index) {return achievements[index].GetIcongray();}
     int GetAchieved(int index) {return achievements[index].GetAchieved();}
     QDateTime GetUnlocktime(int index) {return achievements[index].GetUnlocktime();}
     double GetPercent(int index) {return achievements[index].GetPercent();}
     QString GetStatusGlobal() {return statusglobal;}
     QString GetStatusPlayer() {return statusplayer;}
-    QString GetStatusPercent() {return  statuspercent;}
+    QString GetStatusPercent() {return statuspercent;}
     QString GetAppid() {return appid;}
     QString GetGamename() {return gamename;}
     QString GetGameversion() {return gameversion;}

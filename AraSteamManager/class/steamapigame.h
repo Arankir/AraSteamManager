@@ -2,7 +2,13 @@
 #define STEAMAPIGAME_H
 
 #include <QMainWindow>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonArray>
 #include <QJsonObject>
+#include <QEventLoop>
 #include <QTextCodec>
 #include <QObject>
 
@@ -20,6 +26,7 @@ public:
     QString GetImg_icon_url() {return img_icon_url;}
     QString GetImg_logo_url() {return img_logo_url;}
     bool GetHas_community_visible_stats() {return has_community_visible_stats;}
+    QString GetNumberPlayers(QString key, bool hardreload);
     SteamAPIGame(const SteamAPIGame &);
     SteamAPIGame & operator=(const SteamAPIGame & game);
 
@@ -34,6 +41,7 @@ private:
     int playtime_forever=0;
     QString img_icon_url="";
     QString img_logo_url="";
+    QString numberplayers="";
     bool has_community_visible_stats=false;
 };
 

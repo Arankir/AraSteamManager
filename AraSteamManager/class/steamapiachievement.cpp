@@ -17,8 +17,10 @@ void SteamAPIAchievement::Set(SteamAPIAchievementGlobal Global, SteamAPIAchievem
     icongray=Global.GetIcongray();
     achieved=Player.GetAchieved();
     unlocktime=Player.GetUnlocktime();
+    percent=Percent.GetPercent();
     statusglobal="success";
     statusplayer="success";
+    statuspercent="success";
 }
 
 void SteamAPIAchievement::SetGlobal(SteamAPIAchievementGlobal Global){
@@ -62,8 +64,10 @@ SteamAPIAchievement::SteamAPIAchievement(const SteamAPIAchievement & achievement
     icongray=achievement.icongray;
     achieved=achievement.achieved;
     unlocktime=achievement.unlocktime;
+    percent=achievement.percent;
     statusglobal=achievement.statusglobal;
     statusplayer=achievement.statusplayer;
+    statuspercent=achievement.statuspercent;
 }
 SteamAPIAchievement & SteamAPIAchievement::operator=(const SteamAPIAchievement & achievement){
     apiname=achievement.apiname;
@@ -75,7 +79,9 @@ SteamAPIAchievement & SteamAPIAchievement::operator=(const SteamAPIAchievement &
     icongray=achievement.icongray;
     achieved=achievement.achieved;
     unlocktime=achievement.unlocktime;
+    percent=achievement.percent;
     statusglobal=achievement.statusglobal;
     statusplayer=achievement.statusplayer;
+    statuspercent=achievement.statuspercent;
     return *this;
 }

@@ -121,6 +121,7 @@ void FormGames::AchievementsClicked(){
         SteamAPIAchievementsPercentage Percentage(key,QString::number(Games.GetAppid(index)));
         connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         loop.exec();
+        qDebug()<<Percentage.GetStatus()<<Percentage.GetAchievementsCount()<<QString::number(Games.GetAppid(index));
         if(Percentage.GetAchievementsCount()==0){
             windowchildcount--;
             QMessageBox::warning(this,Words[6],Words[7]);

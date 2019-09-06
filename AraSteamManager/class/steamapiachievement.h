@@ -9,6 +9,7 @@
 #include <class/steamapiachievementglobal.h>
 #include <class/steamapiachievementplayer.h>
 #include <class/steamapiachievementpercentage.h>
+#include <QDebug>
 
 class SteamAPIAchievement : public QObject
 {

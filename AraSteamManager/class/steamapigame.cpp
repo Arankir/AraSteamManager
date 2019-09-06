@@ -17,6 +17,21 @@ void SteamAPIGame::Set(QJsonObject ObjGame){
     has_community_visible_stats=ObjGame.value("has_community_visible_stats").toBool();
 }
 
+QString SteamAPIGame::GetNumberPlayers(QString key, bool hardreload){
+    if(numberplayers==""||hardreload){
+        QNetworkAccessManager manager;
+        QEventLoop loop;
+        QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        QNetworkReply &replyNumberOfCurrentPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+key+"&appid="+QString::number(appid))));
+        loop.exec();
+        QJsonDocument NumberOfCurrentPlayers = QJsonDocument::fromJson(replyNumberOfCurrentPlayers.readAll());
+        numberplayers=QString::number(NumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble());
+    }
+    return numberplayers;
+    //{"player_count":9023,
+    //"result":1}
+}
+
 SteamAPIGame::SteamAPIGame( const SteamAPIGame & a){
     appid=a.appid;
     name=a.name;

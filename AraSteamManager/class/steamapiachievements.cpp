@@ -28,7 +28,6 @@ void SteamAPIAchievements::Set(QString key, QString appid, QString id, QString l
     SteamAPIAchievementsPercentage Percent(key,appid);
     connect(&Percent,SIGNAL(finished()),&loop,SLOT(quit()));
     loop.exec();
-    qDebug()<<Global.GetStatus()<<Player.GetStatus()<<Percent.GetStatus();
     Set(Global,Player,Percent);
 }
 void SteamAPIAchievements::Set(SteamAPIAchievementsGlobal Global, SteamAPIAchievementsPlayer Player, SteamAPIAchievementsPercentage Percent){
@@ -39,7 +38,7 @@ void SteamAPIAchievements::Set(SteamAPIAchievementsGlobal Global, SteamAPIAchiev
 void SteamAPIAchievements::Set(SteamAPIAchievementsPlayer Player){
     if(count>0){
         for (int i=0;i<count;i++) {
-            for (int j=Player.GetAchievementsCount();j++;) {
+            for (int j=0;j<Player.GetAchievementsCount();j++) {
                 if(achievements[i].GetApiname()==Player.GetApiname(j)){
                     achievements[i].SetPlayer(Player.GetAchievementInfo(j));
                     break;
@@ -59,7 +58,8 @@ void SteamAPIAchievements::Set(SteamAPIAchievementsPlayer Player){
 void SteamAPIAchievements::Set(SteamAPIAchievementsGlobal Global){
     if(count>0){
         for (int i=0;i<count;i++) {
-            for (int j=Global.GetAchievementsCount();j++;) {
+            for (int j=0;j<Global.GetAchievementsCount();j++) {
+                //qDebug()<<achievements[i].GetApiname()<<Global.GetApiname(j);
                 if(achievements[i].GetApiname()==Global.GetApiname(j)){
                     achievements[i].SetGlobal(Global.GetAchievementInfo(j));
                     break;
@@ -74,12 +74,14 @@ void SteamAPIAchievements::Set(SteamAPIAchievementsGlobal Global){
         }
         count=Global.GetAchievementsCount();
     }
+    gamename=Global.GetGamename();
+    gameversion=Global.GetGameversion();
     statusglobal="success";
 }
 void SteamAPIAchievements::Set(SteamAPIAchievementsPercentage Percent){
     if(count>0){
         for (int i=0;i<count;i++) {
-            for (int j=Percent.GetAchievementsCount();j++;) {
+            for (int j=0;j<Percent.GetAchievementsCount();j++) {
                 if(achievements[i].GetApiname()==Percent.GetApiname(j)){
                     achievements[i].SetPercent(Percent.GetAchievementInfo(j));
                     break;
@@ -108,7 +110,7 @@ void SteamAPIAchievements::Clear(){
 void SteamAPIAchievements::Sort(){
     for (int i=0; i < count-1; i++) {
         for (int j=0; j < count-i-1; j++) {
-            if (achievements[j].GetPercent() > achievements[j+1].GetPercent()){
+            if (achievements[j].GetPercent() < achievements[j+1].GetPercent()){
                 SteamAPIAchievement temp = achievements[j];
                 achievements[j] = achievements[j+1];
                 achievements[j+1] = temp;

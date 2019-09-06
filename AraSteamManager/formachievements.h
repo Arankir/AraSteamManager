@@ -44,6 +44,7 @@ private slots:
     void on_return(FormCompare*);
     void on_ButtonReturn_clicked();
     void UpdateHiddenRows();
+    void PullTableWidget();
     void on_ButtonAddCategory_clicked();
 
     void on_RadioButtonAll_clicked();
@@ -104,7 +105,6 @@ private:
     QString key;
     QString id;
     int windowchildcount=0;
-    QString appid;
     QJsonDocument JsonDocNumberOfCurrentPlayers;
     QJsonArray JsonArrayGlobalAchievements;
     QJsonDocument JsonDocPlayerAchievements;

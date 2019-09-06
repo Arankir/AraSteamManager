@@ -2,11 +2,6 @@
 #define STEAMAPIGAMES_H
 
 #include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonArray>
 #include <QTcpSocket>
 #include <QObject>
 #include <class/steamapigame.h>

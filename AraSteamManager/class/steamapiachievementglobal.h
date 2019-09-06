@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QJsonObject>
 #include <QTextCodec>
+#include <QDebug>
 
 class SteamAPIAchievementGlobal : public QObject
 {

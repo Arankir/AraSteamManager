@@ -24,15 +24,14 @@ manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSch
 }
 void SteamAPIAchievementsGlobal::Set(QJsonDocument DocAchievements){
     Clear();
-    if(DocAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0&&DocAchievements.object().value("game").toObject().value("gameVersion").toString()!=gameversion){
+    if(DocAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0){
         gamename=DocAchievements.object().value("game").toObject().value("gameName").toString();
         gameversion=DocAchievements.object().value("game").toObject().value("gameVersion").toString();
         count=DocAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();
         for (int i=0;i<count;i++) {
-            achievements.push_back(SteamAPIAchievementGlobal(DocAchievements.object().value("game").toObject().value("availibleGameStats").toObject().value("achievements").toArray().at(i).toObject()));
+            achievements.push_back(SteamAPIAchievementGlobal(DocAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(i).toObject()));
         }
         status="success";
-
     }
     else {
         status="error: game is not exist";
