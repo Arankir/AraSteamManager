@@ -100,15 +100,17 @@ private slots:
 
     void on_ButtonCompare_clicked();
 
+    void AddValueCategory(QString Type, QFormLayout* layout);
+    void UpValueCategory(QString Type, int i);
+    void DownValueCategory(QString Type, int i, QFormLayout* layout);
+    void DeleteValuesCategory(QString Type, int i, QFormLayout* layout);
+    void SelectValueCategory(int j,Qt::CheckState);
+
 private:
     Ui::FormAchievements *ui;
     QString key;
     QString id;
     int windowchildcount=0;
-    QJsonDocument JsonDocNumberOfCurrentPlayers;
-    QJsonArray JsonArrayGlobalAchievements;
-    QJsonDocument JsonDocPlayerAchievements;
-    QJsonArray JsonArraySchemaForGame;
     SteamAPIGame game;
     SteamAPIAchievements achievements;
     bool **filter;

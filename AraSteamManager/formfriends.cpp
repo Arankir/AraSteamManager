@@ -212,7 +212,7 @@ void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
     }
     ui->TableWidgetFriends->setCellWidget(i,0,label);
     ui->TableWidgetFriends->resizeRowToContents(i);
-    imgr->deleteLater();
+    delete imgr;
 }
 
 void FormFriends::GoToProfileClicked(){

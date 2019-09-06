@@ -96,7 +96,7 @@ static const uint qt_meta_data_FormGames[] = {
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::QString, 0x80000000 | 7,    5,    6,    8,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString, 0x80000000 | 7,    2,    2,    2,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString, 0x80000000 | 7,    5,    2,    8,
     QMetaType::Void, 0x80000000 | 11,   12,
     QMetaType::Void,
     QMetaType::Void,

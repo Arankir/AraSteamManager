@@ -402,7 +402,7 @@ void FormCompare::OnResultImage(int i, QString Save, ImageRequest *imgr){
     }
     ui->TableWidget->setCellWidget(i,0,label);
     ui->TableWidget->resizeRowToContents(i);
-    imgr->deleteLater();
+    delete imgr;
 }
 
 void FormCompare::UpdateHiddenRows(){

@@ -147,7 +147,7 @@ void FormGames::OnResultImage(int i, QString Save, ImageRequest *imgr){
         pixmap.save("images/icon_games/"+Save+".png", "PNG");
     }
     ui->TableWidgetGames->setCellWidget(i,0,label);
-    imgr->deleteLater();
+    delete imgr;
 }
 
 void FormGames::OnResultAchievements(int i, QString, ImageRequest *imgr){
@@ -155,5 +155,5 @@ void FormGames::OnResultAchievements(int i, QString, ImageRequest *imgr){
     if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
         static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,2))->setEnabled(false);
     }
-    imgr->deleteLater();
+    delete imgr;
 }

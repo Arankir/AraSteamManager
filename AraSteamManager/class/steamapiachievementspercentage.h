@@ -26,6 +26,7 @@ public:
     SteamAPIAchievementPercentage GetAchievementInfo(int index) {return achievements[index];}
     QString GetApiname(int index) {return achievements[index].GetApiname();}
     double GetPercent(int index) {return achievements[index].GetPercent();}
+    QString GetAppid() {return appid;}
     int GetAchievementsCount() {return count;}
     QString GetStatus() {return status;}
     void Update();

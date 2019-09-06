@@ -27,7 +27,7 @@ signals:
 
 private slots:
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
-    void OnResultAchievements(int, QString, ImageRequest *);
+    void OnResultAchievements(int i, QString, ImageRequest *imgr);
     void closeEvent(QCloseEvent *event);
 
     void on_ButtonReturn_clicked();
