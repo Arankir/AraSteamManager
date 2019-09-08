@@ -839,7 +839,7 @@ void FormAchievements::AddValueCategory(QString Type, QFormLayout* layout){
     if(row==0){
         up->setEnabled(false);
     } else {
-        findChild<QPushButton*>("btnNewCategoryDownValue"+QString::number(row-1))->setEnabled(true);
+        findChild<QPushButton*>("btn"+Type+"CategoryDownValue"+QString::number(row-1))->setEnabled(true);
     }
     down->setEnabled(false);
     btn->setIcon(QIcon(":/program/program/delete.png"));
