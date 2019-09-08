@@ -19,6 +19,10 @@
 #include <QTableWidgetItem>
 #include <QRadioButton>
 #include <class/settings.h>
+#include <class/steamapigames.h>
+#include <class/steamapiachievements.h>
+#include <class/steamapifriends.h>
+#include <class/steamapiprofile.h>
 
 namespace Ui {
 class FormCompare;
@@ -29,11 +33,11 @@ class FormCompare : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormCompare(QString keys, QString ids, QString appids, QPixmap GameLogo, QJsonArray JsonArrayGlobalAchievement, QWidget *parent = nullptr);
+    explicit FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap GameLogo, SteamAPIAchievements achievements, QWidget *parent = nullptr);
     ~FormCompare();
 
 signals:
-    void return_to_achievements(FormCompare*);
+    void return_to_achievements();
 
 private slots:
     void closeEvent(QCloseEvent *);
@@ -77,22 +81,25 @@ private slots:
 
     void on_ButtonUpdate_clicked();
 
+    bool ProfileIsPublic(SteamAPIAchievements achievement, int col);
+    SteamAPIProfile FindProfile(int ii);
+    void OnResultAvatar(int i, QString, ImageRequest* img);
+
 private:
     Ui::FormCompare *ui;
     QString key;
     QString id;
     int windowchildcount=0;
-    QString appid;
-    QJsonDocument JsonDocNumberOfCurrentPlayers;
-    QJsonArray JsonArrayGlobalAchievements;
-    QJsonDocument JsonDocPlayerAchievements;
-    QJsonArray JsonArraySchemaForGame;
     bool **filter;
     int colfilter=3;
     QFormLayout *newcategoryvalueslayout;
     QFormLayout *changecategoryvalueslayout;
     QStringList Words;
-    QPair <QVector<Profile>,QVector<Profile>> Friends;
+    SteamAPIGame game;
+    QVector<QPair<SteamAPIProfile,int>> friends;
+    int type1=0;
+    int type2=0;
+    SteamAPIAchievements achievements;
     Settings Setting;
     QString theme="white";
 };

@@ -77,9 +77,10 @@ FormAchievements::FormAchievements(QString keys, QString ids, SteamAPIGame games
     ui->LabelGameOnline->setText(Words[27]+": "+game.GetNumberPlayers(key,false));
         QNetworkAccessManager manager;
         QEventLoop loop;
-        QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
         QNetworkReply &logoreply = *manager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(game.GetAppid())+"/"+game.GetImg_logo_url()+".jpg"));
         loop.exec();
+        disconnect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
     QPixmap pixmap;
         pixmap.loadFromData(logoreply.readAll());
     ui->LabelGameLogo->setPixmap(pixmap);
@@ -108,16 +109,16 @@ FormAchievements::~FormAchievements(){
     delete ui;
 }
 void FormAchievements::closeEvent(QCloseEvent *){
-    emit return_to_games(this);
+    emit return_to_games();
     //delete this;
 }
-void FormAchievements::on_return(FormCompare* a){
+void FormAchievements::returnfromcompare(){
     windowchildcount--;
     this->setVisible(true);
-    a->deleteLater();
+    delete compareform;
 }
 void FormAchievements::on_ButtonReturn_clicked(){
-    emit return_to_games(this);
+    emit return_to_games();
     //delete this;
 }
 
@@ -221,16 +222,17 @@ void FormAchievements::on_RadioButtonAll_clicked(){
 }
 void FormAchievements::on_RadioButtonReached_clicked(){
     for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++)
-        filter[i][1]=ui->TableWidgetAchievements->item(i,4)->text().indexOf(".")>-1?true:false;
+        filter[i][1]=ui->TableWidgetAchievements->item(i,5)->text().indexOf(".")>-1?true:false;
     UpdateHiddenRows();
 }
 void FormAchievements::on_RadioButtonNotReached_clicked(){
     for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++)
-        filter[i][1]=ui->TableWidgetAchievements->item(i,4)->text().indexOf(".")>-1?false:true;
+        filter[i][1]=ui->TableWidgetAchievements->item(i,5)->text().indexOf(".")>-1?false:true;
     UpdateHiddenRows();
 }
 
 void FormAchievements::OnResultImage(int i, QString Save, ImageRequest *imgr){
+    disconnect(imgr,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
@@ -240,7 +242,7 @@ void FormAchievements::OnResultImage(int i, QString Save, ImageRequest *imgr){
     }
     ui->TableWidgetAchievements->setCellWidget(i,1,label);
     ui->TableWidgetAchievements->resizeRowToContents(i);
-    delete imgr;
+    imgr->deleteLater();
 }
 void FormAchievements::ShowCategories(){
     QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
@@ -804,9 +806,9 @@ void FormAchievements::on_buttonChangeCategoryUnSelectValues_clicked(){
 void FormAchievements::on_ButtonCompare_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
-        //compareform = new FormCompare(key,id,QString::number(game.GetAppid()),*ui->LabelGameLogo->pixmap(),JsonArrayGlobalAchievements);
-        //connect(compareform,SIGNAL(return_to_achievements(FormCompare*)),this,SLOT(on_return(FormCompare*)));
-        //compareform->show();
+        compareform = new FormCompare(key,id,game,*ui->LabelGameLogo->pixmap(),achievements);
+        connect(compareform,SIGNAL(return_to_achievements()),this,SLOT(returnfromcompare()));
+        compareform->show();
         this->setVisible(false);
     }
 }

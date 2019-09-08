@@ -35,7 +35,7 @@ public:
     {
         if (FormGames->objectName().isEmpty())
             FormGames->setObjectName(QString::fromUtf8("FormGames"));
-        FormGames->resize(588, 577);
+        FormGames->resize(552, 577);
         QFont font;
         font.setPointSize(10);
         FormGames->setFont(font);

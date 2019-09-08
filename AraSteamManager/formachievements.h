@@ -34,14 +34,14 @@ public:
     FormCompare *compareform;
 
 signals:
-    void return_to_games(FormAchievements*);
+    void return_to_games();
 
 private slots:
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);
     void closeEvent(QCloseEvent *);
-    void on_return(FormCompare*);
+    void returnfromcompare();
     void on_ButtonReturn_clicked();
     void UpdateHiddenRows();
     void PullTableWidget();

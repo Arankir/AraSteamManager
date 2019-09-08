@@ -21,8 +21,8 @@ public:
     ~FormFriends();
 
 signals:
-    void return_to_profile(FormFriends*);
-    void go_to_profile(QString id);
+    void return_to_profile();
+    void go_to_profile(QString id, QString type);
 
 private slots:
     void closeEvent(QCloseEvent *event);

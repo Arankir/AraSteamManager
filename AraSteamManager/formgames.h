@@ -23,7 +23,7 @@ public:
     FormAchievements *achievementsform;
 
 signals:
-    void return_to_profile(FormGames*);
+    void return_to_profile();
 
 private slots:
     void OnResultImage(int i, QString Save, ImageRequest *imgr);
@@ -36,7 +36,7 @@ private slots:
 
     void FavoritesClicked();
 
-    void on_return(FormAchievements*);
+    void returnfromachievements();
 
     void on_LineEditGame_textChanged(const QString);
 

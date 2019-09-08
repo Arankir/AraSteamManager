@@ -92,19 +92,18 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 MainWindow::~MainWindow(){
     delete ui;
 }
-void MainWindow::on_return(FormGames* a){
+void MainWindow::returnfromgames(){
     this->setVisible(true);
+    disconnect(gamesform,SIGNAL(return_to_profile()),this,SLOT(returnfromgames()));
     windowchildcount--;
-    a->deleteLater();
+    delete gamesform;
 }
-void MainWindow::on_return(FormFriends* a){
+void MainWindow::returnfromfriends(){
     this->setVisible(true);
+    disconnect(friendsform,SIGNAL(return_to_profile()),this,SLOT(returnfromfriends()));
+    disconnect(friendsform,SIGNAL(go_to_profile(QString,QString)),this,SLOT(GoToProfile(QString,QString)));
     windowchildcount--;
-    a->deleteLater();
-}
-void MainWindow::on_go_to_profile(QString id){
-    ui->LineEditIdProfile->setText(id);
-    ui->ButtonFindProfile->click();
+    delete friendsform;
 }
 
 void MainWindow::on_ButtonFindProfile_clicked(){
@@ -121,44 +120,36 @@ void MainWindow::on_ButtonFindProfile_clicked(){
 }
 void MainWindow::GoToProfile(QString id, QString type){
     QEventLoop loopp;
-    QObject::connect(&Profile, SIGNAL(finished()), &loopp, SLOT(quit()));
-    Profile.Set(key,id,type);
+    SteamAPIProfile Profiles(key,id,type);
+    connect(&Profiles, SIGNAL(finished()), &loopp, SLOT(quit()));
     loopp.exec();
-    if(Profile.GetStatus()=="success"){
+    disconnect(&Profiles, SIGNAL(finished()), &loopp, SLOT(quit()));
+    if(Profiles.GetStatus()=="success"){
+        Profile=Profiles;
+        Games.Clear();
+        Friends.Clear();
         SteamAPIBans Bans(key,Profile.GetSteamid());
-        QObject::connect(&Bans, SIGNAL(finished()), &loopp, SLOT(quit()));
+        connect(&Bans, SIGNAL(finished()), &loopp, SLOT(quit()));
         loopp.exec();
+        disconnect(&Bans, SIGNAL(finished()), &loopp, SLOT(quit()));
         SteamAPILevels Levels(key,Profile.GetSteamid());
-        //QObject::connect(&Levels, SIGNAL(finished()), &loopp, SLOT(quit()));
-        //loopp.exec();
         Games.Set(key,Profile.GetSteamid(),true,true);
-        QObject::connect(&Games, SIGNAL(finished()), &loopp, SLOT(quit()));
+        connect(&Games, SIGNAL(finished()), &loopp, SLOT(quit()));
         loopp.exec();
+        disconnect(&Games, SIGNAL(finished()), &loopp, SLOT(quit()));
         Friends.Set(key,Profile.GetSteamid());
-        QObject::connect(&Friends, SIGNAL(finished()), &loopp, SLOT(quit()));
+        connect(&Friends, SIGNAL(finished()), &loopp, SLOT(quit()));
         loopp.exec();
-        QNetworkAccessManager manager;
-        QEventLoop loop;  //Ждем ответ от сервера.
-        QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        disconnect(&Friends, SIGNAL(finished()), &loopp, SLOT(quit()));
         //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
         //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
         ui->LabelProfileUrl->setText(Profile.GetProfileurl());
         ui->LabelRealName->setText(Words[8]+": "+Profile.GetRealname());
         ui->LabelTimeCreated->setText(Words[9]+" "+Profile.GetTimecreated().toString("yyyy.MM.dd"));
         ui->Labellvl->setText(Words[25]+": "+QString::number(Levels.GetPlayer_level()));
-        if(Bans.GetVACBanned()){
-            ui->LabelBans->setText(Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"\n"+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]);
-        } else {
-            ui->LabelBans->setText(Words[26]+": "+Words[27]);
-        }
-        if(Games.GetStatus()=="success")
-            ui->ButtonGames->setText(" "+Words[10]+"("+QString::number(Games.GetGamesCount())+")");
-        else
-            ui->ButtonGames->setText(" "+Words[10]+" (error)");
-        if(Friends.GetStatus()=="success")
-            ui->ButtonFriends->setText(" "+Words[11]+"("+QString::number(Friends.GetFriendsCount())+")");
-        else
-            ui->ButtonFriends->setText(" "+Words[11]+" (error)");
+        ui->LabelBans->setText(Bans.GetVACBanned()?Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"\n"+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]:Words[26]+": "+Words[27]);
+        ui->ButtonGames->setText(Games.GetStatus()=="success"?" "+Words[10]+"("+QString::number(Games.GetGamesCount())+")":" "+Words[10]+" (error)");
+        ui->ButtonFriends->setText(Friends.GetStatus()=="success"?" "+Words[11]+"("+QString::number(Friends.GetFriendsCount())+")":" "+Words[11]+" (error)");
         if(!Profile.GetGameextrainfo().isEmpty()){
             ui->LabelPersonaState->setText(Words[12]+":\n"+Profile.GetGameextrainfo());
             ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
@@ -207,18 +198,15 @@ void MainWindow::GoToProfile(QString id, QString type){
                 ui->ButtonGoToMyProfile->setEnabled(false);
             } else {
                 ui->ButtonSetProfile->setEnabled(true);
-                if(Setting.GetMyProfile()=="none"){
-                    ui->ButtonGoToMyProfile->setEnabled(false);
-                } else {
-                    ui->ButtonGoToMyProfile->setEnabled(true);
-                }
+                ui->ButtonGoToMyProfile->setEnabled(Setting.GetMyProfile()=="none"?false:true);
             }
         }
                 QNetworkAccessManager imagemanager;
                 QEventLoop imageloop;  //Ждем ответ от сервера.
-                QObject::connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+                connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
                 QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Profile.GetAvatar()));
                 imageloop.exec();
+                disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
                 QImage img;
                 img.loadFromData(imagereply.readAll());
                 img.save("images/profiles/main.png", "PNG");
@@ -235,14 +223,14 @@ void MainWindow::GoToProfile(QString id, QString type){
             //профиль скрыт
         }
         } else {
-                QMessageBox::warning(this,Words[6],Words[21]);
+            QMessageBox::warning(this,Words[6],Words[21]);
         }
 }
 void MainWindow::on_ButtonGames_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
         gamesform = new FormGames(Profile.GetSteamid(),key,Games);
-        connect(gamesform,SIGNAL(return_to_profile(FormGames*)),this,SLOT(on_return(FormGames*)));
+        connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(returnfromgames()));
         gamesform->show();
         this->setVisible(false);
     }
@@ -251,8 +239,8 @@ void MainWindow::on_ButtonFriends_clicked(){
     if(windowchildcount==0){
         windowchildcount++;
         friendsform = new FormFriends(Profile.GetSteamid(),key,Friends);
-        connect(friendsform,SIGNAL(return_to_profile(FormFriends*)),this,SLOT(on_return(FormFriends*)));
-        connect(friendsform,SIGNAL(go_to_profile(QString)),this,SLOT(on_go_to_profile(QString)));
+        connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(returnfromfriends()));
+        connect(friendsform,SIGNAL(go_to_profile(QString,QString)),this,SLOT(GoToProfile(QString,QString)));
         friendsform->show();
         this->setVisible(false);
     }

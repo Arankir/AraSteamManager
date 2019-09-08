@@ -31,9 +31,8 @@ public:
     FormFriends *friendsform;
 
 private slots:
-    void on_return(FormGames *);
-    void on_return(FormFriends *);
-    void on_go_to_profile(QString id);
+    void returnfromgames();
+    void returnfromfriends();
 
     void keyPressEvent(QKeyEvent *event);
 

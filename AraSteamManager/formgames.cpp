@@ -81,6 +81,9 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         }
     ui->TableWidgetGames->resizeColumnsToContents();
     ui->TableWidgetGames->setColumnWidth(0,33);
+    ui->TableWidgetGames->setColumnWidth(1,300);
+    //ui->TableWidgetGames->resizeRowsToContents();
+    //this->setMinimumSize(33+ui->TableWidgetGames->columnWidth(1)+ui->TableWidgetGames->columnWidth(2)+ui->TableWidgetGames->columnWidth(3)+11+ui->TableWidgetGames->verticalHeader()->width(),577);
     //http://media.steampowered.com/steamcommunity/public/images/apps/{appid}/{hash}.jpg
     ui->LineEditGame->setFocus();
 }
@@ -91,21 +94,20 @@ FormGames::~FormGames(){
 void FormGames::closeEvent(QCloseEvent *){
     on_ButtonReturn_clicked();
 }
-void FormGames::on_return(FormAchievements* a){
+void FormGames::returnfromachievements(){
     windowchildcount--;
+    disconnect(achievementsform,SIGNAL(return_to_games()),this,SLOT(returnfromachievements()));
     this->setVisible(true);
-    a->deleteLater();
+    delete achievementsform;
 }
 void FormGames::on_ButtonReturn_clicked(){
-    emit return_to_profile(this);
+    emit return_to_profile();
     //delete this;
 }
 
 void FormGames::on_LineEditGame_textChanged(const QString){
     for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
-        if(ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->LineEditGame->text().toUpper(),0)>-1)
-            ui->TableWidgetGames->setRowHidden(i,false); else
-            ui->TableWidgetGames->setRowHidden(i,true);
+        ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->LineEditGame->text().toUpper(),0)>-1?false:true);
     }
 }
 void FormGames::on_ButtonFind_clicked(){
@@ -121,13 +123,14 @@ void FormGames::AchievementsClicked(){
         SteamAPIAchievementsPercentage Percentage(key,QString::number(Games.GetAppid(index)));
         connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         loop.exec();
+        disconnect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         qDebug()<<Percentage.GetStatus()<<Percentage.GetAchievementsCount()<<QString::number(Games.GetAppid(index));
         if(Percentage.GetAchievementsCount()==0){
             windowchildcount--;
             QMessageBox::warning(this,Words[6],Words[7]);
         } else {
             achievementsform = new FormAchievements(key,id,Games.GetGameInfo(index));
-            connect(achievementsform,SIGNAL(return_to_games(FormAchievements*)),this,SLOT(on_return(FormAchievements*)));
+            connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(returnfromachievements()));
             achievementsform->show();
             this->setVisible(false);
         }
@@ -139,6 +142,7 @@ void FormGames::FavoritesClicked(){
 }
 
 void FormGames::OnResultImage(int i, QString Save, ImageRequest *imgr){
+    disconnect(imgr,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
@@ -147,13 +151,14 @@ void FormGames::OnResultImage(int i, QString Save, ImageRequest *imgr){
         pixmap.save("images/icon_games/"+Save+".png", "PNG");
     }
     ui->TableWidgetGames->setCellWidget(i,0,label);
-    delete imgr;
+    imgr->deleteLater();
 }
 
 void FormGames::OnResultAchievements(int i, QString, ImageRequest *imgr){
+    disconnect(imgr,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultAchievements(int, QString, ImageRequest *)));
     QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
     if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
         static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,2))->setEnabled(false);
     }
-    delete imgr;
+    imgr->deleteLater();
 }
