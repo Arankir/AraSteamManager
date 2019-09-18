@@ -1,8 +1,0 @@
-Find game
-Find
-Return
-Title game
-Achievements
-Favorites
-Error
-In this game no achievements

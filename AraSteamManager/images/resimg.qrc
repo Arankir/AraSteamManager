@@ -1,0 +1,54 @@
+<RCC>
+    <qresource prefix="/black">
+        <file>program/black/all.png</file>
+        <file>program/black/back.png</file>
+        <file>program/black/cancel.png</file>
+        <file>program/black/change.png</file>
+        <file>program/black/compare.png</file>
+        <file>program/black/down.png</file>
+        <file>program/black/exit.png</file>
+        <file>program/black/favorites.png</file>
+        <file>program/black/filter.png</file>
+        <file>program/black/find.png</file>
+        <file>program/black/friends.png</file>
+        <file>program/black/games.png</file>
+        <file>program/black/go_to.png</file>
+        <file>program/black/link.png</file>
+        <file>program/black/notreached.png</file>
+        <file>program/black/profile.png</file>
+        <file>program/black/reached.png</file>
+        <file>program/black/settings.png</file>
+        <file>program/black/statistic.png</file>
+        <file>program/black/up.png</file>
+        <file>program/black/update.png</file>
+    </qresource>
+    <qresource prefix="/white">
+        <file>program/white/all.png</file>
+        <file>program/white/back.png</file>
+        <file>program/white/cancel.png</file>
+        <file>program/white/change.png</file>
+        <file>program/white/compare.png</file>
+        <file>program/white/down.png</file>
+        <file>program/white/exit.png</file>
+        <file>program/white/favorites.png</file>
+        <file>program/white/filter.png</file>
+        <file>program/white/find.png</file>
+        <file>program/white/friends.png</file>
+        <file>program/white/games.png</file>
+        <file>program/white/go_to.png</file>
+        <file>program/white/link.png</file>
+        <file>program/white/notreached.png</file>
+        <file>program/white/profile.png</file>
+        <file>program/white/reached.png</file>
+        <file>program/white/settings.png</file>
+        <file>program/white/statistic.png</file>
+        <file>program/white/up.png</file>
+        <file>program/white/update.png</file>
+    </qresource>
+    <qresource prefix="/program">
+        <file>program/apply.png</file>
+        <file>program/cancel.png</file>
+        <file>program/create.png</file>
+        <file>program/delete.png</file>
+    </qresource>
+</RCC>

@@ -48,7 +48,7 @@ QStringList Settings::GetWords(QString form){
     }
     QStringList Language;
     QFile FileLanguage;
-    FileLanguage.setFileName("Files/Languages/"+lan+"/"+form+".txt");
+    FileLanguage.setFileName(":/"+lan+"/"+lan+"/"+form+".txt");
     if(FileLanguage.open(QIODevice::ReadOnly)){
         while(!FileLanguage.atEnd()){
             Language << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");

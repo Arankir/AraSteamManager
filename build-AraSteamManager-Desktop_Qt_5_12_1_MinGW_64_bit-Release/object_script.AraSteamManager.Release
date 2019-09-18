@@ -22,7 +22,8 @@ release/mainwindow.o
 release/formgames.o
 release/formachievements.o
 release/formfriends.o
-release/qrc_res.o
+release/qrc_resimg.o
+release/qrc_restext.o
 release/moc_imagerequest.o
 release/moc_profile.o
 release/moc_settings.o

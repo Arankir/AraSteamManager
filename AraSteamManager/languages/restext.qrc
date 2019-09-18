@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/ENG">
+        <file>ENG/achievements.txt</file>
+        <file>ENG/compare.txt</file>
+        <file>ENG/friends.txt</file>
+        <file>ENG/games.txt</file>
+        <file>ENG/mainwindow.txt</file>
+    </qresource>
+    <qresource prefix="/RU">
+        <file>RU/achievements.txt</file>
+        <file>RU/compare.txt</file>
+        <file>RU/friends.txt</file>
+        <file>RU/games.txt</file>
+        <file>RU/mainwindow.txt</file>
+    </qresource>
+</RCC>

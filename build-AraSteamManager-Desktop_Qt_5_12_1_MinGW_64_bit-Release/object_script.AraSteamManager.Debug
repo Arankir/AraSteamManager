@@ -22,7 +22,8 @@ debug/mainwindow.o
 debug/formgames.o
 debug/formachievements.o
 debug/formfriends.o
-debug/qrc_res.o
+debug/qrc_resimg.o
+debug/qrc_restext.o
 debug/moc_imagerequest.o
 debug/moc_profile.o
 debug/moc_settings.o
