@@ -10,25 +10,24 @@ class SteamAPIGames : public QObject
 {
     Q_OBJECT
 public:
-    explicit SteamAPIGames(QString key, QString id, bool free_games, bool game_info, QObject *parent = nullptr);
+    explicit SteamAPIGames(QString key, QString id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
     SteamAPIGames(QJsonDocument DocGames);
     SteamAPIGames();
     ~SteamAPIGames();
-    void Set(QString key, QString id, bool free_games, bool game_info);
+    void Set(QString key, QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
-    SteamAPIGame GetGameInfo(int index) {return games[index];}
-    int GetAppid(int index) {return games[index].GetAppid();}
-    QString GetName(int index) {return games[index].GetName();}
-    int GetPlaytime_2weeks(int index) {return games[index].GetPlaytime_2weeks();}
-    int GetPlaytime_forever(int index) {return games[index].GetPlaytime_forever();}
-    QString GetImg_icon_url(int index) {return games[index].GetImg_icon_url();}
-    QString GetImg_logo_url(int index) {return games[index].GetImg_logo_url();}
-    bool GetHas_community_visible_stats(int index) {return games[index].GetHas_community_visible_stats();}
+    SteamAPIGame GetGame(int index) {return SteamAPIGame(games[index].toObject());}
+    int GetAppid(int index) {return games[index].toObject().value("appid").toInt();}
+    QString GetName(int index) {return games[index].toObject().value("name").toString();}
+    int GetPlaytime_2weeks(int index) {return games[index].toObject().value("playtime_2weeks").toInt();}
+    int GetPlaytime_forever(int index) {return games[index].toObject().value("playtime_forever").toInt();}
+    QString GetImg_icon_url(int index) {return games[index].toObject().value("img_icon_url").toString();}
+    QString GetImg_logo_url(int index) {return games[index].toObject().value("img_logo_url").toString();}
+    bool GetHas_community_visible_stats(int index) {return games[index].toObject().value("has_community_visible_stats").toBool();}
     QString GetStatus() {return status;}
-    int GetGamesCount() {return count;}
-    void Update();
+    int GetCount() {return games.size();}
+    void Update(bool parallel);
     void Clear();
-    void Sort();
     SteamAPIGames( const SteamAPIGames & a);
     SteamAPIGames & operator=(const SteamAPIGames & profile);
 
@@ -41,13 +40,12 @@ public slots:
 
 private:
     QNetworkAccessManager *manager;
-    QVector<SteamAPIGame> games;
+    QJsonArray games;
     QString status="none";
     QString id;
     QString key;
     bool free_games=false;
     bool game_info=false;
-    int count;
 };
 
 //{"appid":218620,

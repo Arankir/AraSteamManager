@@ -17,21 +17,21 @@ class SteamAPIBans : public QObject
 {
     Q_OBJECT
 public:
-    explicit SteamAPIBans(QString key, QString id, QObject *parent = nullptr);
+    explicit SteamAPIBans(QString key, QString id, bool parallel, QObject *parent = nullptr);
     SteamAPIBans(QJsonDocument DocBans);
     SteamAPIBans();
     ~SteamAPIBans();
-    void Set(QString key, QString id);
+    void Set(QString key, QString id, bool parallel);
     void Set(QJsonDocument DocBans);
-    QString GetSteamid() {return steamid;}
-    bool GetCommunityBanned() {return CommunityBanned;}
-    bool GetVACBanned() {return VACBanned;}
-    int GetNumberOfVACBans() {return NumberOfVACBans;}
-    int GetDaysSinceLastBan() {return DaysSinceLastBan;}
-    int GetNumberOfGameBans() {return NumberOfGameBans;}
-    QString GetEconomyBan() {return EconomyBan;}
+    QString GetSteamid(int index=0) {return bans[index].toObject().value("steamid").toString();}
+    bool GetCommunityBanned(int index=0) {return bans[index].toObject().value("CommunityBanned").toBool();}
+    bool GetVACBanned(int index=0) {return bans[index].toObject().value("VACBanned").toBool();}
+    int GetNumberOfVACBans(int index=0) {return bans[index].toObject().value("NumberOfVACBans").toInt();}
+    int GetDaysSinceLastBan(int index=0) {return bans[index].toObject().value("DaysSinceLastBan").toInt();}
+    int GetNumberOfGameBans(int index=0) {return bans[index].toObject().value("NumberOfGameBans").toInt();}
+    QString GetEconomyBan(int index=0) {return bans[index].toObject().value("EconomyBan").toString();}
     QString GetStatus() {return status;}
-    void Update();
+    void Update(bool parallel);
 
 signals:
     void finished(SteamAPIBans*);
@@ -42,14 +42,9 @@ public slots:
 
 private:
     QNetworkAccessManager *manager;
-    QString steamid;//"76561198065018572"
-    bool CommunityBanned=false;//false
-    bool VACBanned=false;//false
-    int NumberOfVACBans=0;//0
-    int DaysSinceLastBan=0;//0
-    int NumberOfGameBans=0;//0
-    QString EconomyBan="none";//"none"
+    QJsonArray bans;
     QString status;
     QString key;
+    QString id;
 };
 #endif // STEAMAPIBANS_H

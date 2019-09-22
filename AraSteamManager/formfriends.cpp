@@ -45,19 +45,23 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
     ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    QVector<SteamAPIProfile> Profiles = Friends.GetProfiles();
-    for (int i=0; i < Profiles.size()-1; i++) {
-        for (int j=0; j < Profiles.size()-i-1; j++) {
-            if (Profiles[j].GetPersonaname() > Profiles[j+1].GetPersonaname()) {
-                SteamAPIProfile temp = Profiles[j];
-                Profiles[j] = Profiles[j+1];
-                Profiles[j+1] = temp;
+    SteamAPIProfile Profiles = Friends.GetProfiles();
+    QVector<SteamAPIProfile> Profiless;
+    for (int i=0;i<Profiles.GetCount();i++) {
+        Profiless.push_back(Profiles.GetProfile(i));
+    }
+    for (int i=0; i < Profiless.size()-1; i++) {
+        for (int j=0; j < Profiless.size()-i-1; j++) {
+            if (Profiless[j].GetPersonaname() > Profiless[j+1].GetPersonaname()) {
+                SteamAPIProfile temp = Profiless[j];
+                Profiless[j] = Profiless[j+1];
+                Profiless[j+1] = temp;
             }
         }
     }
-    for (int i=0;i<Friends.GetFriendsCount();i++) {
+    for (int i=0;i<Friends.GetCount();i++) {
         ui->TableWidgetFriends->insertRow(i);
-        if(!QFile::exists("images/profiles/"+Profiles[i].GetAvatar().mid(72,20).remove(".jpg")+".png")){
+        if(!QFile::exists("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png")){
             ImageRequest *image;
             switch (Setting.GetSaveimages()) {
                 case 0:{
@@ -65,7 +69,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
                     break;
                     }
                 case 1:{
-                    image = new ImageRequest(i,Profiles[i].GetAvatar().mid(72,20).remove(".jpg"));
+                    image = new ImageRequest(i,Profiless[i].GetAvatar().mid(72,20).remove(".jpg"));
                     break;
                     }
                 default:{
@@ -74,28 +78,28 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
                     }
             }
             connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-            image->Get(Profiles[i].GetAvatar());
+            image->Get(Profiless[i].GetAvatar());
             } else {
             QPixmap pixmap;
-            pixmap.load("images/profiles/"+Profiles[i].GetAvatar().mid(72,20).remove(".jpg")+".png", "PNG");
+            pixmap.load("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png", "PNG");
             QLabel *lb = new QLabel();
             lb->setPixmap(pixmap);
             ui->TableWidgetFriends->setCellWidget(i,0,lb);
             }
-        ui->TableWidgetFriends->setItem(i,1,new QTableWidgetItem(Profiles[i].GetPersonaname()));
+        ui->TableWidgetFriends->setItem(i,1,new QTableWidgetItem(Profiless[i].GetPersonaname()));
         int j;
         for (j=0;;j++) {
-            if(Profiles[i].GetSteamid()==Friends.GetSteamid(j)){
+            if(Profiless[i].GetSteamid()==Friends.GetSteamid(j)){
                 break;
             }
         }
         ui->TableWidgetFriends->setItem(i,2,new QTableWidgetItem(Friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
         QTableWidgetItem *item4 = new QTableWidgetItem;
-        if(!Profiles[i].GetGameextrainfo().isEmpty()){
+        if(!Profiless[i].GetGameextrainfo().isEmpty()){
             item4->setText(Words[8]);
             item4->setTextColor(QColor("#89b753"));
         } else
-            switch (Profiles[i].GetPersonastate()){
+            switch (Profiless[i].GetPersonastate()){
             case 0:{
                     item4->setText(Words[9]);
                     item4->setTextColor(QColor("#4c4d4f"));
@@ -134,7 +138,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
             }
         ui->TableWidgetFriends->setItem(i,3,item4);
         QTableWidgetItem *item5 = new QTableWidgetItem;
-        switch(Profiles[i].GetCommunityvisibilitystate()){
+        switch(Profiless[i].GetCommunityvisibilitystate()){
         case 1:{
             item5->setText(Words[17]);
             item5->setTextColor(Qt::red);
@@ -157,17 +161,17 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
         }
         }
         ui->TableWidgetFriends->setItem(i,4,item5);
-        ui->TableWidgetFriends->setItem(i,5,new QTableWidgetItem(Profiles[i].GetSteamid()));
+        ui->TableWidgetFriends->setItem(i,5,new QTableWidgetItem(Profiless[i].GetSteamid()));
         QPushButton *button1 = new QPushButton(Words[7]);
         button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
         button1->setMinimumSize(QSize(25,25));
-        button1->setObjectName("btn"+Profiles[i].GetSteamid());
+        button1->setObjectName("btn"+Profiless[i].GetSteamid());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         ui->TableWidgetFriends->setCellWidget(i,6,button1);
         QPushButton *button2 = new QPushButton;
         button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-        button2->setObjectName("btnf"+Profiles[i].GetSteamid());
+        button2->setObjectName("btnf"+Profiless[i].GetSteamid());
         ui->TableWidgetFriends->setCellWidget(i,7,button2);
     }
     ui->TableWidgetFriends->setColumnHidden(5,true);

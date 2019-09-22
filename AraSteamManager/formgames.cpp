@@ -6,8 +6,19 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
     Words=Setting.GetWords("games");
     id=ids;
     key=keys;
-    Games=Gamess;
-    Games.Sort();
+    SteamAPIGames Games=Gamess;
+    for (int i=0;i<Games.GetCount();i++) {
+        games.push_back(Games.GetGame(i));
+    }
+    for (int i=0; i < games.size()-1; i++) {
+        for (int j=0; j < games.size()-i-1; j++) {
+            if (games[j].GetName() > games[j+1].GetName()) {
+                SteamAPIGame temp = games[j];
+                games[j] = games[j+1];
+                games[j+1] = temp;
+            }
+        }
+    }
     ui->TableWidgetGames->setColumnCount(4);
     ui->LabelLogo->setText("(WIP)");
     ui->LineEditGame->setPlaceholderText(Words[0]);
@@ -30,11 +41,11 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
     }
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
-    for(int i=0;i<Games.GetGamesCount();i++){
+    for(int i=0;i<games.size();i++){
         int row = ui->TableWidgetGames->rowCount();
         ui->TableWidgetGames->insertRow(row);
-        if(!QFile::exists("images/icon_games/"+Games.GetImg_icon_url(i)+".png")){
-            if(Games.GetImg_icon_url(i)!=""){
+        if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".png")){
+            if(games[i].GetImg_icon_url()!=""){
                 ImageRequest *image;
                 switch (Setting.GetSaveimages()) {
                     case 0:{
@@ -42,7 +53,7 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
                         break;
                         }
                     case 1:{
-                        image = new ImageRequest(row,Games.GetImg_icon_url(i));
+                        image = new ImageRequest(row,games[i].GetImg_icon_url());
                         break;
                         }
                     default:{
@@ -51,16 +62,16 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
                         }
                     }
                 connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-                image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(Games.GetAppid(i))+"/"+Games.GetImg_icon_url(i)+".jpg");
+                image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg");
                 }
             } else {
             QPixmap pixmap;
-            pixmap.load("images/icon_games/"+Games.GetImg_icon_url(i)+".png", "PNG");
+            pixmap.load("images/icon_games/"+games[i].GetImg_icon_url()+".png", "PNG");
             QLabel *label = new QLabel;
             label->setPixmap(pixmap);
             ui->TableWidgetGames->setCellWidget(row,0,label);
             }
-        QTableWidgetItem *item2 = new QTableWidgetItem(Games.GetName(i));
+        QTableWidgetItem *item2 = new QTableWidgetItem(games[i].GetName());
         ui->TableWidgetGames->setItem(row,1,item2);
         QPushButton *button1 = new QPushButton;
         QPushButton *button2 = new QPushButton;
@@ -75,9 +86,9 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         button2->setObjectName("ButtonFavorites"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(row,3,button2);
         ui->TableWidgetGames->setRowHeight(i,33);
-        ImageRequest *Achievements = new ImageRequest(row,"ButtonAchievements"+QString::number(Games.GetAppid(i))+"&"+Games.GetImg_logo_url(i));
+        ImageRequest *Achievements = new ImageRequest(row,"ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
         connect(Achievements,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultAchievements(int, QString, ImageRequest *)));
-        Achievements->Get("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(Games.GetAppid(i)));
+        Achievements->Get("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(games[i].GetAppid()));
         }
     ui->TableWidgetGames->resizeColumnsToContents();
     ui->TableWidgetGames->setColumnWidth(0,33);
@@ -120,16 +131,16 @@ void FormGames::AchievementsClicked(){
         QPushButton *btn = qobject_cast<QPushButton*>(sender());
         int index=btn->objectName().mid(18,4).toInt();
         QEventLoop loop;
-        SteamAPIAchievementsPercentage Percentage(key,QString::number(Games.GetAppid(index)));
+        SteamAPIAchievementsPercentage Percentage(key,QString::number(games[index].GetAppid()));
         connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         loop.exec();
         disconnect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
-        qDebug()<<Percentage.GetStatus()<<Percentage.GetAchievementsCount()<<QString::number(Games.GetAppid(index));
+        qDebug()<<Percentage.GetStatus()<<Percentage.GetAchievementsCount()<<QString::number(games[index].GetAppid());
         if(Percentage.GetAchievementsCount()==0){
             windowchildcount--;
             QMessageBox::warning(this,Words[6],Words[7]);
         } else {
-            achievementsform = new FormAchievements(key,id,Games.GetGameInfo(index));
+            achievementsform = new FormAchievements(key,id,games[index]);
             connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(returnfromachievements()));
             achievementsform->show();
             this->setVisible(false);

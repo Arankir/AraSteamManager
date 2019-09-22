@@ -1,8 +1,8 @@
 #include "steamapibans.h"
 
-SteamAPIBans::SteamAPIBans(QString key, QString id, QObject *parent) : QObject(parent){
+SteamAPIBans::SteamAPIBans(QString key, QString id, bool parallel, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
-    Set(key, id);
+    Set(key, id, parallel);
 }
 SteamAPIBans::SteamAPIBans(QJsonDocument DocBans){
     manager = new QNetworkAccessManager();
@@ -16,21 +16,27 @@ SteamAPIBans::~SteamAPIBans(){
     delete manager;
 }
 
-void SteamAPIBans::Set(QString key, QString id){
-    connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIBans::Load);
+void SteamAPIBans::Set(QString key, QString id, bool parallel){
     this->key=key;
-    manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
+    this->id=id;
+    if(parallel){
+        connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIBans::Load);
+        manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
+    } else {
+        QEventLoop loop;
+        connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        QNetworkReply *reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
+        loop.exec();
+        disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        Set(QJsonDocument::fromJson(reply->readAll()));
+        delete reply;
+        emit finished(this);
+        emit finished();
+    }
 }
 void SteamAPIBans::Set(QJsonDocument DocBans){
     if(DocBans.object().value("response").toObject().value("players").toArray().size()>0){
-        QJsonObject Bans=DocBans.object().value("players").toArray().at(0).toObject();
-        steamid=Bans.value("steamid").toString();
-        CommunityBanned=Bans.value("CommunityBanned").toBool();
-        VACBanned=Bans.value("VACBanned").toBool();
-        NumberOfVACBans=Bans.value("NumberOfVACBans").toInt();
-        DaysSinceLastBan=Bans.value("DaysSinceLastBan").toInt();
-        NumberOfGameBans=Bans.value("NumberOfGameBans").toInt();
-        EconomyBan=Bans.value("EconomyBan").toString();
+        bans=DocBans.object().value("response").toObject().value("players").toArray();
         status="success";
     }
     else {
@@ -47,6 +53,6 @@ void SteamAPIBans::Load(QNetworkReply *Reply){
     emit finished();
 }
 
-void SteamAPIBans::Update(){
-    Set(key, steamid);
+void SteamAPIBans::Update(bool parallel){
+    Set(key, id, parallel);
 }

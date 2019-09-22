@@ -119,28 +119,15 @@ void MainWindow::on_ButtonFindProfile_clicked(){
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
 void MainWindow::GoToProfile(QString id, QString type){
-    QEventLoop loopp;
-    SteamAPIProfile Profiles(key,id,type);
-    connect(&Profiles, SIGNAL(finished()), &loopp, SLOT(quit()));
-    loopp.exec();
-    disconnect(&Profiles, SIGNAL(finished()), &loopp, SLOT(quit()));
+    SteamAPIProfile Profiles(key,id,false,type);
     if(Profiles.GetStatus()=="success"){
         Profile=Profiles;
         Games.Clear();
         Friends.Clear();
-        SteamAPIBans Bans(key,Profile.GetSteamid());
-        connect(&Bans, SIGNAL(finished()), &loopp, SLOT(quit()));
-        loopp.exec();
-        disconnect(&Bans, SIGNAL(finished()), &loopp, SLOT(quit()));
+        SteamAPIBans Bans(key,Profile.GetSteamid(),false);
         SteamAPILevels Levels(key,Profile.GetSteamid());
-        Games.Set(key,Profile.GetSteamid(),true,true);
-        connect(&Games, SIGNAL(finished()), &loopp, SLOT(quit()));
-        loopp.exec();
-        disconnect(&Games, SIGNAL(finished()), &loopp, SLOT(quit()));
-        Friends.Set(key,Profile.GetSteamid());
-        connect(&Friends, SIGNAL(finished()), &loopp, SLOT(quit()));
-        loopp.exec();
-        disconnect(&Friends, SIGNAL(finished()), &loopp, SLOT(quit()));
+        Games.Set(key,Profile.GetSteamid(),true,true,false);
+        Friends.Set(key,Profile.GetSteamid(),false);
         //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
         //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
         ui->LabelProfileUrl->setText(Profile.GetProfileurl());
@@ -148,8 +135,8 @@ void MainWindow::GoToProfile(QString id, QString type){
         ui->LabelTimeCreated->setText(Words[9]+" "+Profile.GetTimecreated().toString("yyyy.MM.dd"));
         ui->Labellvl->setText(Words[25]+": "+QString::number(Levels.GetPlayer_level()));
         ui->LabelBans->setText(Bans.GetVACBanned()?Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"\n"+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]:Words[26]+": "+Words[27]);
-        ui->ButtonGames->setText(Games.GetStatus()=="success"?" "+Words[10]+"("+QString::number(Games.GetGamesCount())+")":" "+Words[10]+" (error)");
-        ui->ButtonFriends->setText(Friends.GetStatus()=="success"?" "+Words[11]+"("+QString::number(Friends.GetFriendsCount())+")":" "+Words[11]+" (error)");
+        ui->ButtonGames->setText(Games.GetStatus()=="success"?" "+Words[10]+"("+QString::number(Games.GetCount())+")":" "+Words[10]+" (error)");
+        ui->ButtonFriends->setText(Friends.GetStatus()=="success"?" "+Words[11]+"("+QString::number(Friends.GetCount())+")":" "+Words[11]+" (error)");
         if(!Profile.GetGameextrainfo().isEmpty()){
             ui->LabelPersonaState->setText(Words[12]+":\n"+Profile.GetGameextrainfo());
             ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");

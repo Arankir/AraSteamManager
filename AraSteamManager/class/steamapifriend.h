@@ -14,9 +14,9 @@ public:
     explicit SteamAPIFriend(QJsonObject ObjFriend, QObject *parent = nullptr);
     SteamAPIFriend();
     void Set(QJsonObject ObjFriend);
-    QString GetSteamid() {return steamid;}
-    QString GetRelationship() {return relationship;}
-    QDateTime GetFriend_since() {return friend_since;}
+    QString GetSteamid() {return friendd.value("steamid").toString();}
+    QString GetRelationship() {return friendd.value("relationship").toString();}
+    QDateTime GetFriend_since() {return QDateTime::fromSecsSinceEpoch(friendd.value("friend_since").toInt(),Qt::LocalTime);}
     SteamAPIFriend(const SteamAPIFriend &);
     SteamAPIFriend & operator=(const SteamAPIFriend & friends);
 
@@ -25,9 +25,7 @@ signals:
 public slots:
 
 private:
-    QString steamid="";
-    QString relationship="";
-    QDateTime friend_since=QDateTime::fromSecsSinceEpoch(0,Qt::LocalTime);
+    QJsonObject friendd;
 };
 
 #endif // STEAMAPIFRIEND_H

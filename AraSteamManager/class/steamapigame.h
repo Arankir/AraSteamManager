@@ -19,13 +19,13 @@ public:
     explicit SteamAPIGame(QJsonObject ObjGame, QObject *parent = nullptr);
     SteamAPIGame();
     void Set(QJsonObject ObjGame);
-    int GetAppid() {return appid;}
-    QString GetName() {return name;}
-    int GetPlaytime_2weeks() {return playtime_2weeks;}
-    int GetPlaytime_forever() {return playtime_forever;}
-    QString GetImg_icon_url() {return img_icon_url;}
-    QString GetImg_logo_url() {return img_logo_url;}
-    bool GetHas_community_visible_stats() {return has_community_visible_stats;}
+    int GetAppid() {return game.value("appid").toInt();}
+    QString GetName() {return game.value("name").toString();}
+    int GetPlaytime_2weeks() {return game.value("playtime_2weeks").toInt();}
+    int GetPlaytime_forever() {return game.value("playtime_forever").toInt();}
+    QString GetImg_icon_url() {return game.value("img_icon_url").toString();}
+    QString GetImg_logo_url() {return game.value("img_logo_url").toString();}
+    bool GetHas_community_visible_stats() {return game.value("has_community_visible_stats").toBool();}
     QString GetNumberPlayers(QString key, bool hardreload);
     SteamAPIGame(const SteamAPIGame &);
     SteamAPIGame & operator=(const SteamAPIGame & game);
@@ -35,14 +35,8 @@ signals:
 public slots:
 
 private:
-    int appid=0;
-    QString name="";
-    int playtime_2weeks=0;
-    int playtime_forever=0;
-    QString img_icon_url="";
-    QString img_logo_url="";
+    QJsonObject game;
     QString numberplayers="";
-    bool has_community_visible_stats=false;
 };
 
 //{"appid":218620,

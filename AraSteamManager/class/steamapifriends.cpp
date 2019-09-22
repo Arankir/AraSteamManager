@@ -1,8 +1,8 @@
 #include "steamapifriends.h"
 
-SteamAPIFriends::SteamAPIFriends(QString key, QString id, QObject *parent) : QObject(parent){
+SteamAPIFriends::SteamAPIFriends(QString key, QString id, bool parallel, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
-    Set(key, id);
+    Set(key, id, parallel);
 }
 SteamAPIFriends::SteamAPIFriends(QJsonDocument DocFriends){
     manager = new QNetworkAccessManager();
@@ -15,19 +15,28 @@ SteamAPIFriends::~SteamAPIFriends(){
     delete manager;
 }
 
-void SteamAPIFriends::Set(QString key, QString id){
-connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIFriends::Load);
-this->key=key;
-this->id=id;
-manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
+void SteamAPIFriends::Set(QString key, QString id, bool parallel){
+    this->key=key;
+    this->id=id;
+    if(parallel){
+        manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
+        connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIFriends::Load);
+    } else {
+        QNetworkReply *reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
+        QEventLoop loop;
+        connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        loop.exec();
+        disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        Set(QJsonDocument::fromJson(reply->readAll()));
+        delete reply;
+        emit finished(this);
+        emit finished();
+    }
 }
 void SteamAPIFriends::Set(QJsonDocument DocFriends){
     Clear();
     if(DocFriends.object().value("friendslist").toObject().value("friends").toArray().size()>0){
-        count=DocFriends.object().value("friendslist").toObject().value("friends").toArray().size();
-        for (int i=0;i<count;i++) {
-            friends.push_back(SteamAPIFriend(DocFriends.object().value("friendslist").toObject().value("friends").toArray().at(i).toObject()));
-        }
+        friends=DocFriends.object().value("friendslist").toObject().value("friends").toArray();
         status="success";
     }
     else {
@@ -44,46 +53,25 @@ void SteamAPIFriends::Load(QNetworkReply* Reply){
     emit finished();
 }
 
-SteamAPIProfile SteamAPIFriends::GetProfileFriend(int index){
-    SteamAPIProfile Profile(key,GetSteamid(index),"url");
-    return Profile;
-}
-QVector<SteamAPIProfile> SteamAPIFriends::GetProfiles(){
-    QVector<SteamAPIProfile> Profiles;
-    int countnow=0;
+SteamAPIProfile SteamAPIFriends::GetProfiles(){
     QEventLoop loop;
     QNetworkAccessManager profmanager;
     qDebug()<<friends.size();
     connect(&profmanager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-    while(countnow!=count){
-        QString Querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+friends[countnow++].GetSteamid();
-        if(count-countnow>99){
-            for (int i=countnow;i<countnow+99;i++) {
-                Querry+=","+friends[i].GetSteamid();
-            }
-            countnow+=99;
-            }
-        else {
-            for (int i=countnow;i<count;i++) {
-                Querry+=","+friends[i].GetSteamid();
-            }
-            countnow=count;
-            }
-        qDebug()<<Querry;
-        QNetworkReply &Reply = *profmanager.get(QNetworkRequest(Querry));
-        loop.exec();
-        QJsonDocument DocFriends = QJsonDocument::fromJson(Reply.readAll());
-        for (int i=0;i<DocFriends.object().value("response").toObject().value("players").toArray().size();i++) {
-            SteamAPIProfile Profile(DocFriends,i);
-            qDebug()<<Profile.GetPersonaname();
-            Profiles.push_back(Profile);
-        }
+    QString Querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+friends[0].toObject().value("steamid").toString();
+    for (int i=1;i<friends.size();i++) {
+        Querry+=","+friends[i].toObject().value("steamid").toString();
     }
-    return Profiles;
+    qDebug()<<Querry;
+    QNetworkReply &Reply = *profmanager.get(QNetworkRequest(Querry));
+    loop.exec();
+    QJsonDocument DocFriends = QJsonDocument::fromJson(Reply.readAll());
+    SteamAPIProfile Profile(DocFriends);
+    return Profile;
 }
 
-void SteamAPIFriends::Update(){
-    Set(key,id);
+void SteamAPIFriends::Update(bool parallel){
+    Set(key,id,parallel);
 }
 
 SteamAPIFriends::SteamAPIFriends( const SteamAPIFriends & a){
@@ -91,7 +79,6 @@ SteamAPIFriends::SteamAPIFriends( const SteamAPIFriends & a){
     status=a.status;
     id=a.id;
     key=a.key;
-    count=a.count;
     manager = new QNetworkAccessManager;
 }
 
@@ -101,12 +88,10 @@ SteamAPIFriends & SteamAPIFriends::operator=(const SteamAPIFriends & friendss) {
     status=friendss.status;
     id=friendss.id;
     key=friendss.key;
-    count=friendss.count;
     manager = new QNetworkAccessManager;
     return *this;
 }
 
 void SteamAPIFriends::Clear(){
-    friends.clear();
-    count=0;
+    friends=QJsonArray();
 }

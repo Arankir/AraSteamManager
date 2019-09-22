@@ -17,21 +17,20 @@ class SteamAPIFriends : public QObject
 {
     Q_OBJECT
 public:
-    explicit SteamAPIFriends(QString key, QString id, QObject *parent = nullptr);
+    explicit SteamAPIFriends(QString key, QString id, bool parallel, QObject *parent = nullptr);
     SteamAPIFriends(QJsonDocument DocFriends);
     SteamAPIFriends();
     ~SteamAPIFriends();
-    void Set(QString key, QString id);
+    void Set(QString key, QString id, bool parallel);
     void Set(QJsonDocument DocFriends);
-    SteamAPIFriend GetFriendInfo(int index) {return friends[index];}
-    QString GetSteamid(int index) {return friends[index].GetSteamid();}
-    QString GetRelationship(int index) {return friends[index].GetRelationship();}
-    QDateTime GetFriend_since(int index) {return friends[index].GetFriend_since();}
+    SteamAPIFriend GetFriend(int index) {return SteamAPIFriend(friends[index].toObject());}
+    QString GetSteamid(int index) {return friends[index].toObject().value("steamid").toString();}
+    QString GetRelationship(int index) {return friends[index].toObject().value("relationship").toString();}
+    QDateTime GetFriend_since(int index) {return QDateTime::fromSecsSinceEpoch(friends[index].toObject().value("friend_since").toInt(),Qt::LocalTime);}
     QString GetStatus() {return status;}
-    int GetFriendsCount() {return count;}
-    SteamAPIProfile GetProfileFriend(int index);
-    QVector<SteamAPIProfile> GetProfiles();
-    void Update();
+    int GetCount() {return friends.size();}
+    SteamAPIProfile GetProfiles();
+    void Update(bool parallel);
     void Clear();
     SteamAPIFriends(const SteamAPIFriends &);
     SteamAPIFriends & operator=(const SteamAPIFriends & friends);
@@ -45,11 +44,10 @@ public slots:
 
 private:
     QNetworkAccessManager *manager;
-    QVector<SteamAPIFriend> friends;
     QString status="none";
     QString id;
     QString key;
-    int count;
+    QJsonArray friends;
 };
 
 #endif // STEAMAPIFRIENDS_H

@@ -1,16 +1,16 @@
 #include "steamapiprofile.h"
 
-SteamAPIProfile::SteamAPIProfile(QString key, QString id, QString type, QObject *parent) : QObject(parent){
+SteamAPIProfile::SteamAPIProfile(QString key, QString id, bool parallel, QString type, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
-    Set(key, id, type);
+    Set(key, id, parallel, type);
 }
 SteamAPIProfile::SteamAPIProfile(QJsonDocument DocSummaries){
     manager = new QNetworkAccessManager();
     Set(DocSummaries);
 }
-SteamAPIProfile::SteamAPIProfile(QJsonDocument DocSummaries, int index){
+SteamAPIProfile::SteamAPIProfile(QJsonObject ObjSummaries){
     manager = new QNetworkAccessManager();
-    Set(DocSummaries,index);
+    Set(ObjSummaries);
 }
 SteamAPIProfile::SteamAPIProfile(){
     manager = new QNetworkAccessManager();
@@ -19,15 +19,43 @@ SteamAPIProfile::~SteamAPIProfile(){
     delete manager;
 }
 
-void SteamAPIProfile::Set(QString key, QString id, QString type){
+void SteamAPIProfile::Set(QString key, QString id, bool parallel, QString type){
+    this->key=key;
+    this->id=id;
     if(type=="vanity"){
-        connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIProfile::LoadVanity);
-        this->key=key;
-        manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+key+"&vanityurl="+id+"&url_type=1"));
+        if(parallel){
+            connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIProfile::LoadVanity);
+            manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+key+"&vanityurl="+id+"&url_type=1"));
+        } else {
+            QNetworkReply *reply = manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+key+"&vanityurl="+id+"&url_type=1"));
+            QEventLoop loop;
+            connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+            loop.exec();
+            QString id=QJsonDocument::fromJson(reply->readAll()).object().value("response").toObject().value("steamid").toString();
+            reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+id));
+            loop.exec();
+            disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+            Set(QJsonDocument::fromJson(reply->readAll()));
+            delete reply;
+            emit finished(this);
+            emit finished();
+        }
     } else {
         if(type=="url"){
-            connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIProfile::LoadURL);
-            manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+id));
+            if(parallel){
+                connect(manager,&QNetworkAccessManager::finished,this,&SteamAPIProfile::LoadURL);
+                manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+id));
+            } else {
+                QEventLoop loop;
+                connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+                QNetworkReply *reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+id));
+                loop.exec();
+                disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+                Set(QJsonDocument::fromJson(reply->readAll()));
+                delete reply;
+                emit finished(this);
+                emit finished();
+            }
         } else {
             status="error: unknown type";
             emit finished(this);
@@ -38,61 +66,17 @@ void SteamAPIProfile::Set(QString key, QString id, QString type){
 void SteamAPIProfile::Set(QJsonDocument DocSummaries){
     Clear();
     if(DocSummaries.object().value("response").toObject().value("players").toArray().size()>0){
-        QJsonObject Account=DocSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject();
-        steamid=Account.value("steamid").toString();
-        communityvisibilitystate=Account.value("communityvisibilitystate").toInt();
-        profilestate=Account.value("profilestate").toInt();
-        personaname=Account.value("personaname").toString();
-        lastlogoff=QDateTime::fromSecsSinceEpoch(Account.value("lastlogoff").toInt(),Qt::LocalTime);
-        commentpermission=Account.value("commentpermission").toInt();
-        profileurl=Account.value("profileurl").toString();
-        avatar=Account.value("avatar").toString();
-        avatarmedium=Account.value("avatarmedium").toString();
-        avatarfull=Account.value("avatarfull").toString();
-        personastate=Account.value("personastate").toInt();
-        primaryclanid=Account.value("primaryclanid").toString();
-        timecreated=QDateTime::fromSecsSinceEpoch(Account.value("timecreated").toInt(),Qt::LocalTime);
-        personastateflags=Account.value("personastateflags").toInt();
-        gameextrainfo=Account.value("gameextrainfo").toString();
-        gameid=Account.value("gameid").toString();
-        loccountrycode=Account.value("loccountrycode").toString();
-        locstatecode=Account.value("locstatecode").toString();
-        loccityid=Account.value("loccityid").toInt();
-        realname=Account.value("realname").toString();
+        profile=DocSummaries.object().value("response").toObject().value("players").toArray();
         status="success";
     }
     else {
         status="error: profile is not exist";
     }
 }
-void SteamAPIProfile::Set(QJsonDocument DocSummaries,int index){
-    if(DocSummaries.object().value("response").toObject().value("players").toArray().size()>0){
-        QJsonObject Account=DocSummaries.object().value("response").toObject().value("players").toArray().at(index).toObject();
-        steamid=Account.value("steamid").toString();
-        communityvisibilitystate=Account.value("communityvisibilitystate").toInt();
-        profilestate=Account.value("profilestate").toInt();
-        personaname=Account.value("personaname").toString();
-        lastlogoff=QDateTime::fromSecsSinceEpoch(Account.value("lastlogoff").toInt(),Qt::LocalTime);
-        commentpermission=Account.value("commentpermission").toInt();
-        profileurl=Account.value("profileurl").toString();
-        avatar=Account.value("avatar").toString();
-        avatarmedium=Account.value("avatarmedium").toString();
-        avatarfull=Account.value("avatarfull").toString();
-        personastate=Account.value("personastate").toInt();
-        primaryclanid=Account.value("primaryclanid").toString();
-        timecreated=QDateTime::fromSecsSinceEpoch(Account.value("timecreated").toInt(),Qt::LocalTime);
-        personastateflags=Account.value("personastateflags").toInt();
-        gameextrainfo=Account.value("gameextrainfo").toString();
-        gameid=Account.value("gameid").toString();
-        loccountrycode=Account.value("loccountrycode").toString();
-        locstatecode=Account.value("locstatecode").toString();
-        loccityid=Account.value("loccityid").toInt();
-        realname=Account.value("realname").toString();
-        status="success";
-    }
-    else {
-        status="error: profile is not exist";
-    }
+void SteamAPIProfile::Set(QJsonObject ObjSummaries){
+    Clear();
+    profile.push_back(ObjSummaries);
+    status="success";
 }
 
 void SteamAPIProfile::LoadVanity(QNetworkReply *Reply){
@@ -111,80 +95,27 @@ void SteamAPIProfile::LoadURL(QNetworkReply *Reply){
     emit finished();
 }
 
-void SteamAPIProfile::Update(){
-    Set(key, steamid, "url");
+void SteamAPIProfile::Update(bool parallel){
+    Set(key, id, parallel, "url");
 }
 void SteamAPIProfile::Clear(){
-    steamid="";
-    communityvisibilitystate=0;
-    profilestate=0;
-    personaname="";
-    lastlogoff=QDateTime::fromSecsSinceEpoch(0);
-    commentpermission=0;
-    profileurl="";
-    avatar="";
-    avatarmedium="";
-    avatarfull="";
-    personastate=0;
-    primaryclanid="";
-    timecreated=QDateTime::fromSecsSinceEpoch(0);
-    personastateflags=0;
-    gameextrainfo="";
-    gameid="";
-    loccountrycode="";
-    locstatecode="";
-    loccityid=0;
-    realname="";
+    profile=QJsonArray();
     status="none";
 }
 
 SteamAPIProfile::SteamAPIProfile( const SteamAPIProfile & a){
-    steamid=a.steamid;
-    communityvisibilitystate=a.communityvisibilitystate;
-    profilestate=a.profilestate;
-    personaname=a.personaname;
-    lastlogoff=a.lastlogoff;
-    commentpermission=a.commentpermission;
-    profileurl=a.profileurl;
-    avatar=a.avatar;
-    avatarmedium=a.avatarmedium;
-    avatarfull=a.avatarfull;
-    personastate=a.personastate;
-    primaryclanid=a.primaryclanid;
-    timecreated=a.timecreated;
-    personastateflags=a.personastateflags;
-    gameextrainfo=a.gameextrainfo;
-    gameid=a.gameid;
-    loccountrycode=a.loccountrycode;
-    locstatecode=a.locstatecode;
-    loccityid=a.loccityid;
-    realname=a.realname;
+    profile=a.profile;
+    key=a.key;
+    id=a.id;
     status=a.status;
     manager = new QNetworkAccessManager;
 }
-SteamAPIProfile & SteamAPIProfile::operator=(const SteamAPIProfile & profile){
+SteamAPIProfile & SteamAPIProfile::operator=(const SteamAPIProfile & profil){
     delete manager;
-    steamid=profile.steamid;
-    communityvisibilitystate=profile.communityvisibilitystate;
-    profilestate=profile.profilestate;
-    personaname=profile.personaname;
-    lastlogoff=profile.lastlogoff;
-    commentpermission=profile.commentpermission;
-    profileurl=profile.profileurl;
-    avatar=profile.avatar;
-    avatarmedium=profile.avatarmedium;
-    avatarfull=profile.avatarfull;
-    personastate=profile.personastate;
-    primaryclanid=profile.primaryclanid;
-    timecreated=profile.timecreated;
-    personastateflags=profile.personastateflags;
-    gameextrainfo=profile.gameextrainfo;
-    gameid=profile.gameid;
-    loccountrycode=profile.loccountrycode;
-    locstatecode=profile.locstatecode;
-    loccityid=profile.loccityid;
-    realname=profile.realname;
-    status=profile.status;
+    profile=profil.profile;
+    key=profil.key;
+    id=profil.id;
+    status=profil.status;
     manager = new QNetworkAccessManager;
     return *this;
 }

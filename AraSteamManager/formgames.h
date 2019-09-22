@@ -47,7 +47,7 @@ private:
     QString id;
     QString key;
     int windowchildcount=0;
-    SteamAPIGames Games;
+    QVector<SteamAPIGame> games;
     QStringList Words;
     Settings Setting;
     QString theme="white";

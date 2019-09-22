@@ -72,10 +72,7 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
     QNetworkAccessManager manager;
     QEventLoop loop;
     connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    SteamAPIProfile Profile(key,id,"url");
-    connect(&Profile, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-    disconnect(&Profile, SIGNAL(finished()), &loop, SLOT(quit()));
+    SteamAPIProfile Profile(key,id,false,"url");
     ui->TableWidget->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()/*Words[15]*/));
     QNetworkReply &imagereply = *manager.get(QNetworkRequest(Profile.GetAvatar()));
     loop.exec();
@@ -197,11 +194,12 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
     colfilter=list.size()+3;
     filter = new bool*[ui->TableWidget->rowCount()];
     filter = New;
-    SteamAPIFriends frien(key,id);
-    connect(&frien, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-    disconnect(&frien, SIGNAL(finished()), &loop, SLOT(quit()));
-    QVector<SteamAPIProfile> Profiles = frien.GetProfiles();
+    SteamAPIFriends frien(key,id,false);
+    SteamAPIProfile Profiless =frien.GetProfiles();
+    QVector<SteamAPIProfile> Profiles;
+    for (int i=0;i<Profiless.GetCount();i++) {
+        Profiles.push_back(Profiless.GetProfile(i));
+    }
     for (int i=0; i < Profiles.size()-1; i++) {
         for (int j=0; j < Profiles.size()-i-1; j++) {
             if (Profiles[j].GetPersonaname() > Profiles[j+1].GetPersonaname()) {
@@ -213,12 +211,9 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
     }
     for (int i=0;i<Profiles.size();i++) {
         SteamAPIGames Games;
-        Games.Set(key,Profiles[i].GetSteamid(),true,true);
-        connect(&Games, SIGNAL(finished()), &loop, SLOT(quit()));
-        loop.exec();
-        disconnect(&Games, SIGNAL(finished()), &loop, SLOT(quit()));
+        Games.Set(key,Profiles[i].GetSteamid(),true,true,false);
         bool apply=false;
-        for (int i=0;i<Games.GetGamesCount();i++) {
+        for (int i=0;i<Games.GetCount();i++) {
             if(Games.GetAppid(i)==games.GetAppid()){
                 apply=true;
                 break;

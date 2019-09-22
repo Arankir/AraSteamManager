@@ -10,42 +10,45 @@
 #include <QJsonArray>
 #include <QTextCodec>
 #include <QTcpSocket>
+#include <QEventLoop>
 #include <QObject>
 
 class SteamAPIProfile : public QObject
 {
     Q_OBJECT
 public:
-    explicit SteamAPIProfile(QString key, QString id, QString type, QObject *parent = nullptr);
+    explicit SteamAPIProfile(QString key, QString id, bool parallel, QString type, QObject *parent = nullptr);
     SteamAPIProfile(QJsonDocument DocSummaries);
-    SteamAPIProfile(QJsonDocument DocSummaries, int index);
+    SteamAPIProfile(QJsonObject ObjSummaries);
     SteamAPIProfile();
     ~SteamAPIProfile();
-    void Set(QString key, QString id, QString type);
+    void Set(QString key, QString id, bool parallel, QString type);
     void Set(QJsonDocument DocSummaries);
-    void Set(QJsonDocument DocSummaries,int index);
-    QString GetSteamid() {return steamid;}
-    int GetCommunityvisibilitystate() {return communityvisibilitystate;}
-    int GetProfilestate() {return profilestate;}
-    QString GetPersonaname() {return personaname;}
-    QDateTime GetLastlogoff() {return lastlogoff;}
-    int GetCommentpermission() {return commentpermission;}
-    QString GetProfileurl() {return profileurl;}
-    QString GetAvatar() {return avatar;}
-    QString GetAvatarmedium() {return avatarmedium;}
-    QString GetAvatarfull() {return avatarfull;}
-    int GetPersonastate() {return personastate;}
-    QString GetPrimaryclanid() {return primaryclanid;}
-    QDateTime GetTimecreated() {return timecreated;}
-    int GetPersonastateflags() {return personastateflags;}
-    QString GetGameextrainfo() {return gameextrainfo;}
-    QString GetGameid() {return gameid;}
-    QString GetLoccountrycode() {return loccountrycode;}
-    QString GetLocstatecode() {return locstatecode;}
-    int GetLoccityid() {return loccityid;}
-    QString GetRealname() {return realname;}
+    void Set(QJsonObject ObjSummaries);
+    QString GetSteamid(int index=0) {return profile[index].toObject().value("steamid").toString();}
+    int GetCommunityvisibilitystate(int index=0) {return profile[index].toObject().value("communityvisibilitystate").toInt();}
+    int GetProfilestate(int index=0) {return profile[index].toObject().value("profilestate").toInt();}
+    QString GetPersonaname(int index=0) {return profile[index].toObject().value("personaname").toString();}
+    QDateTime GetLastlogoff(int index=0) {return QDateTime::fromSecsSinceEpoch(profile[index].toObject().value("lastlogoff").toInt(),Qt::LocalTime);}
+    int GetCommentpermission(int index=0) {return profile[index].toObject().value("commentpermission").toInt();}
+    QString GetProfileurl(int index=0) {return profile[index].toObject().value("profileurl").toString();}
+    QString GetAvatar(int index=0) {return profile[index].toObject().value("avatar").toString();}
+    QString GetAvatarmedium(int index=0) {return profile[index].toObject().value("avatarmedium").toString();}
+    QString GetAvatarfull(int index=0) {return profile[index].toObject().value("avatarfull").toString();}
+    int GetPersonastate(int index=0) {return profile[index].toObject().value("personastate").toInt();}
+    QString GetPrimaryclanid(int index=0) {return profile[index].toObject().value("primaryclanid").toString();}
+    QDateTime GetTimecreated(int index=0) {return QDateTime::fromSecsSinceEpoch(profile[index].toObject().value("timecreated").toInt(),Qt::LocalTime);}
+    int GetPersonastateflags(int index=0) {return profile[index].toObject().value("personastateflags").toInt();}
+    QString GetGameextrainfo(int index=0) {return profile[index].toObject().value("gameextrainfo").toString();}
+    QString GetGameid(int index=0) {return profile[index].toObject().value("gameid").toString();}
+    QString GetLoccountrycode(int index=0) {return profile[index].toObject().value("loccountrycode").toString();}
+    QString GetLocstatecode(int index=0) {return profile[index].toObject().value("locstatecode").toString();}
+    int GetLoccityid(int index=0) {return profile[index].toObject().value("loccityid").toInt();}
+    QString GetRealname(int index=0) {return profile[index].toObject().value("realname").toString();}
+    SteamAPIProfile GetProfile(int index) {return profile[index].toObject();}
     QString GetStatus() {return status;}
-    void Update();
+    int GetCount() {return profile.size();}
+    void Update(bool parallel);
     SteamAPIProfile( const SteamAPIProfile & a);
     SteamAPIProfile & operator=(const SteamAPIProfile & profile);
     void Clear();
@@ -60,28 +63,10 @@ public slots:
 
 private:
     QNetworkAccessManager *manager;
-    QString steamid="";//"76561198065018572"
-    int communityvisibilitystate=0;//3, (1 - the profile is not visible to you, 3 - the profile is "Public")
-    int profilestate=0;//1
-    QString personaname="";//"Yuno"
-    QDateTime lastlogoff=QDateTime::fromSecsSinceEpoch(0);//1555174765
-    int commentpermission=0;//1
-    QString profileurl="";//"https://steamcommunity.com/id/Arankir/"
-    QString avatar="";//"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c.jpg"
-    QString avatarmedium="";//"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_medium.jpg"
-    QString avatarfull="";//"https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ce/ce1d088d99e7244b9e5297430b9af304d2c5f93c_full.jpg"
-    int personastate=0;//1
-    QString primaryclanid="";//"103582791434380590"
-    QDateTime timecreated=QDateTime::fromSecsSinceEpoch(0);//1339187696
-    int personastateflags=0;//0
-    QString gameextrainfo="";//"Realm of the Mad God"
-    QString gameid="";//"200210"
-    QString loccountrycode="";//"JP"
-    QString locstatecode="";//"40"
-    int loccityid=0;//26111
-    QString realname="";
+    QJsonArray profile;
     QString status="null";
     QString key="";
+    QString id="";
 };
 
 #endif // STEAMAPIPROFILE_H
