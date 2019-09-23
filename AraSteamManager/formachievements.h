@@ -17,8 +17,8 @@
 #include <class\imagerequest.h>
 #include <formcompare.h>
 #include <class/settings.h>
-#include <class/steamapigame.h>
-#include <class/steamapiachievements.h>
+#include <class/steamapi/steamapigame.h>
+#include <class/steamapi/steamapiachievements.h>
 
 namespace Ui {
 class FormAchievements;

@@ -28,20 +28,50 @@ SOURCES += \
     class/imagerequest.cpp \
     class/profile.cpp \
     class/settings.cpp \
+    class/steamapi/steamapiachievement.cpp \
+    class/steamapi/steamapiachievementglobal.cpp \
+    class/steamapi/steamapiachievementpercentage.cpp \
+    class/steamapi/steamapiachievementplayer.cpp \
+    class/steamapi/steamapiachievements.cpp \
+    class/steamapi/steamapiachievementsglobal.cpp \
+    class/steamapi/steamapiachievementspercentage.cpp \
+    class/steamapi/steamapiachievementsplayer.cpp \
+    class/steamapi/steamapibans.cpp \
+    class/steamapi/steamapifriend.cpp \
+    class/steamapi/steamapifriends.cpp \
+    class/steamapi/steamapigame.cpp \
+    class/steamapi/steamapigames.cpp \
+    class/steamapi/steamapilevels.cpp \
+    class/steamapi/steamapiprofile.cpp \
+    class/steamapiachievement.cpp \
     class/steamapiachievement.cpp \
     class/steamapiachievementglobal.cpp \
+    class/steamapiachievementglobal.cpp \
+    class/steamapiachievementpercentage.cpp \
     class/steamapiachievementpercentage.cpp \
     class/steamapiachievementplayer.cpp \
+    class/steamapiachievementplayer.cpp \
+    class/steamapiachievements.cpp \
     class/steamapiachievements.cpp \
     class/steamapiachievementsglobal.cpp \
+    class/steamapiachievementsglobal.cpp \
+    class/steamapiachievementspercentage.cpp \
     class/steamapiachievementspercentage.cpp \
     class/steamapiachievementsplayer.cpp \
+    class/steamapiachievementsplayer.cpp \
+    class/steamapibans.cpp \
     class/steamapibans.cpp \
     class/steamapifriend.cpp \
+    class/steamapifriend.cpp \
+    class/steamapifriends.cpp \
     class/steamapifriends.cpp \
     class/steamapigame.cpp \
+    class/steamapigame.cpp \
+    class/steamapigames.cpp \
     class/steamapigames.cpp \
     class/steamapilevels.cpp \
+    class/steamapilevels.cpp \
+    class/steamapiprofile.cpp \
     class/steamapiprofile.cpp \
     formcompare.cpp \
         main.cpp \
@@ -54,21 +84,21 @@ HEADERS += \
     class/imagerequest.h \
     class/profile.h \
     class/settings.h \
-    class/steamapiachievement.h \
-    class/steamapiachievementglobal.h \
-    class/steamapiachievementpercentage.h \
-    class/steamapiachievementplayer.h \
-    class/steamapiachievements.h \
-    class/steamapiachievementsglobal.h \
-    class/steamapiachievementspercentage.h \
-    class/steamapiachievementsplayer.h \
-    class/steamapibans.h \
-    class/steamapifriend.h \
-    class/steamapifriends.h \
-    class/steamapigame.h \
-    class/steamapigames.h \
-    class/steamapilevels.h \
-    class/steamapiprofile.h \
+    class/steamapi/steamapiachievement.h \
+    class/steamapi/steamapiachievementglobal.h \
+    class/steamapi/steamapiachievementpercentage.h \
+    class/steamapi/steamapiachievementplayer.h \
+    class/steamapi/steamapiachievements.h \
+    class/steamapi/steamapiachievementsglobal.h \
+    class/steamapi/steamapiachievementspercentage.h \
+    class/steamapi/steamapiachievementsplayer.h \
+    class/steamapi/steamapibans.h \
+    class/steamapi/steamapifriend.h \
+    class/steamapi/steamapifriends.h \
+    class/steamapi/steamapigame.h \
+    class/steamapi/steamapigames.h \
+    class/steamapi/steamapilevels.h \
+    class/steamapi/steamapiprofile.h \
     formcompare.h \
         mainwindow.h \
     formgames.h \

@@ -5,9 +5,9 @@
 #include <QLabel>
 #include <QPushButton>
 #include <formachievements.h>
-#include <class/steamapigames.h>
+#include <class/steamapi/steamapigames.h>
 #include <class/settings.h>
-#include <class/steamapiachievements.h>
+#include <class/steamapi/steamapiachievements.h>
 
 namespace Ui {
 class FormGames;
@@ -26,8 +26,8 @@ signals:
     void return_to_profile();
 
 private slots:
-    void OnResultImage(int i, QString Save, ImageRequest *imgr);
-    void OnResultAchievements(int i, QString, ImageRequest *imgr);
+    void OnResultImage(ImageRequest *imgr);
+    void OnResultAchievements(ImageRequest *imgr);
     void closeEvent(QCloseEvent *event);
 
     void on_ButtonReturn_clicked();

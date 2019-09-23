@@ -19,10 +19,10 @@
 #include <QTableWidgetItem>
 #include <QRadioButton>
 #include <class/settings.h>
-#include <class/steamapigames.h>
-#include <class/steamapiachievements.h>
-#include <class/steamapifriends.h>
-#include <class/steamapiprofile.h>
+#include <class/steamapi/steamapigames.h>
+#include <class/steamapi/steamapiachievements.h>
+#include <class/steamapi/steamapifriends.h>
+#include <class/steamapi/steamapiprofile.h>
 
 namespace Ui {
 class FormCompare;

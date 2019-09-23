@@ -9,11 +9,11 @@
 #include <formfriends.h>
 #include <QFile>
 #include <QKeyEvent>
-#include <class/steamapiprofile.h>
-#include <class/steamapibans.h>
-#include <class/steamapilevels.h>
-#include <class/steamapigames.h>
-#include <class/steamapifriends.h>
+#include <class/steamapi/steamapiprofile.h>
+#include <class/steamapi/steamapibans.h>
+#include <class/steamapi/steamapilevels.h>
+#include <class/steamapi/steamapigames.h>
+#include <class/steamapi/steamapifriends.h>
 #include <class/settings.h>
 
 namespace Ui {

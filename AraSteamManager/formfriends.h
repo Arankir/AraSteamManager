@@ -5,7 +5,7 @@
 #include <QFile>
 #include <QStandardItem>
 #include <class/imagerequest.h>
-#include <class/steamapifriends.h>
+#include <class/steamapi/steamapifriends.h>
 #include <class/settings.h>
 
 namespace Ui {

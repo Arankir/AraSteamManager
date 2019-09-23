@@ -46,23 +46,22 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         ui->TableWidgetGames->insertRow(row);
         if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".png")){
             if(games[i].GetImg_icon_url()!=""){
-                ImageRequest *image;
+                ImageRequest *image = new ImageRequest();
                 switch (Setting.GetSaveimages()) {
                     case 0:{
-                        image = new ImageRequest(row,"");
+                        image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row);
                         break;
                         }
                     case 1:{
-                        image = new ImageRequest(row,games[i].GetImg_icon_url());
+                        image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url(),true);
                         break;
                         }
                     default:{
-                        image = new ImageRequest(row,"");
+                        image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row);
                         break;
                         }
                     }
-                connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-                image->Get("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg");
+                connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
                 }
             } else {
             QPixmap pixmap;
@@ -87,7 +86,7 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         ui->TableWidgetGames->setCellWidget(row,3,button2);
         ui->TableWidgetGames->setRowHeight(i,33);
         ImageRequest *Achievements = new ImageRequest(row,"ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
-        connect(Achievements,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultAchievements(int, QString, ImageRequest *)));
+        connect(Achievements,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultAchievements(ImageRequest *)));
         Achievements->Get("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(games[i].GetAppid()));
         }
     ui->TableWidgetGames->resizeColumnsToContents();
@@ -152,24 +151,21 @@ void FormGames::FavoritesClicked(){
 
 }
 
-void FormGames::OnResultImage(int i, QString Save, ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+void FormGames::OnResultImage(ImageRequest *imgr){
+    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    if(!Save.isEmpty()){
-        pixmap.save("images/icon_games/"+Save+".png", "PNG");
-    }
-    ui->TableWidgetGames->setCellWidget(i,0,label);
+    ui->TableWidgetGames->setCellWidget(imgr->GetColumn(),0,label);
     imgr->deleteLater();
 }
 
-void FormGames::OnResultAchievements(int i, QString, ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultAchievements(int, QString, ImageRequest *)));
+void FormGames::OnResultAchievements(ImageRequest *imgr){
+    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultAchievements(ImageRequest *)));
     QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
     if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
-        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,2))->setEnabled(false);
+        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(imgr->GetColumn(),2))->setEnabled(false);
     }
     imgr->deleteLater();
 }
