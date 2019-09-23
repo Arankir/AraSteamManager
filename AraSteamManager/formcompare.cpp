@@ -95,23 +95,8 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
                 ui->TableWidget->setItem(row,0,new QTableWidgetItem(achievements.GetApiname(i)));
                 QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
                 if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
-                    ImageRequest *image;
-                    switch (Setting.GetSaveimages()) {
-                        case 0:{
-                            image = new ImageRequest(row,"");
-                            break;
-                            }
-                        case 1:{
-                            image = new ImageRequest(row,AchievementIcon);
-                            break;
-                            }
-                        default:{
-                            image = new ImageRequest(row,"");
-                            break;
-                            }
-                        }
-                    connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-                    image->Get(achievements.GetIcon(i));
+                    ImageRequest *image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg"),true);
+                    connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
                     } else {
                     QPixmap pixmap;
                     pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
@@ -338,17 +323,14 @@ void FormCompare::OnResultAvatar(int i, QString, ImageRequest* img){
 //    ui->TableWidgetFriends->setCellWidget(0,i+2,ava);
 }
 
-void FormCompare::OnResultImage(int i, QString Save, ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+void FormCompare::OnResultImage(ImageRequest *imgr){
+    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    if(!Save.isEmpty()){
-        pixmap.save("images/achievements/"+QString::number(game.GetAppid())+"/"+Save.mid(Save.indexOf("/",1)+1,Save.length()-1).remove(".jpg")+".png", "PNG");
-    }
-    ui->TableWidget->setCellWidget(i,1,label);
-    ui->TableWidget->resizeRowToContents(i);
+    ui->TableWidget->setCellWidget(imgr->GetRow(),1,label);
+    ui->TableWidget->resizeRowToContents(imgr->GetRow());
     imgr->deleteLater();
 }
 

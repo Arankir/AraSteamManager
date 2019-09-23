@@ -46,21 +46,7 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         ui->TableWidgetGames->insertRow(row);
         if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".png")){
             if(games[i].GetImg_icon_url()!=""){
-                ImageRequest *image = new ImageRequest();
-                switch (Setting.GetSaveimages()) {
-                    case 0:{
-                        image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row);
-                        break;
-                        }
-                    case 1:{
-                        image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url(),true);
-                        break;
-                        }
-                    default:{
-                        image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row);
-                        break;
-                        }
-                    }
+                ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url(),true);
                 connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
                 }
             } else {
@@ -85,9 +71,9 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         button2->setObjectName("ButtonFavorites"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(row,3,button2);
         ui->TableWidgetGames->setRowHeight(i,33);
-        ImageRequest *Achievements = new ImageRequest(row,"ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
+        ImageRequest *Achievements = new ImageRequest;
         connect(Achievements,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultAchievements(ImageRequest *)));
-        Achievements->Get("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(games[i].GetAppid()));
+        Achievements->LoadImage("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+"&gameid="+QString::number(games[i].GetAppid()),row,"ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
         }
     ui->TableWidgetGames->resizeColumnsToContents();
     ui->TableWidgetGames->setColumnWidth(0,33);
@@ -157,7 +143,7 @@ void FormGames::OnResultImage(ImageRequest *imgr){
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetGames->setCellWidget(imgr->GetColumn(),0,label);
+    ui->TableWidgetGames->setCellWidget(imgr->GetRow(),0,label);
     imgr->deleteLater();
 }
 
@@ -165,7 +151,7 @@ void FormGames::OnResultAchievements(ImageRequest *imgr){
     disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultAchievements(ImageRequest *)));
     QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
     if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
-        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(imgr->GetColumn(),2))->setEnabled(false);
+        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(imgr->GetRow(),2))->setEnabled(false);
     }
     imgr->deleteLater();
 }

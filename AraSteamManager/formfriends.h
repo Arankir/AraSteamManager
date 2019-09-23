@@ -28,7 +28,7 @@ private slots:
     void closeEvent(QCloseEvent *event);
     void on_ButtonReturn_clicked();
 
-    void OnResultImage(int i, QString Save, ImageRequest *imgr);
+    void OnResultImage(ImageRequest *imgr);
 
     void GoToProfileClicked();
     void FavoritesClicked();

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCompare_t {
-    QByteArrayData data[45];
-    char stringdata0[928];
+    QByteArrayData data[44];
+    char stringdata0[923];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,50 +37,49 @@ QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 10), // "closeEvent"
 QT_MOC_LITERAL(4, 47, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(5, 60, 13), // "OnResultImage"
-QT_MOC_LITERAL(6, 74, 1), // "i"
-QT_MOC_LITERAL(7, 76, 4), // "Save"
-QT_MOC_LITERAL(8, 81, 13), // "ImageRequest*"
-QT_MOC_LITERAL(9, 95, 4), // "imgr"
-QT_MOC_LITERAL(10, 100, 16), // "UpdateHiddenRows"
-QT_MOC_LITERAL(11, 117, 27), // "on_RadioButtonMyAll_clicked"
-QT_MOC_LITERAL(12, 145, 31), // "on_RadioButtonMyReached_clicked"
-QT_MOC_LITERAL(13, 177, 34), // "on_RadioButtonMyNotReached_cl..."
-QT_MOC_LITERAL(14, 212, 26), // "on_ComboBoxCategory_Change"
-QT_MOC_LITERAL(15, 239, 5), // "index"
-QT_MOC_LITERAL(16, 245, 26), // "on_CheckBoxCategory_Change"
-QT_MOC_LITERAL(17, 272, 3), // "ind"
-QT_MOC_LITERAL(18, 276, 31), // "on_CheckBoxSCIcons_stateChanged"
-QT_MOC_LITERAL(19, 308, 4), // "arg1"
-QT_MOC_LITERAL(20, 313, 31), // "on_CheckBoxSCTitle_stateChanged"
-QT_MOC_LITERAL(21, 345, 37), // "on_CheckBoxSCDescription_stat..."
-QT_MOC_LITERAL(22, 383, 38), // "on_CheckBoxSCTotalPercent_sta..."
-QT_MOC_LITERAL(23, 422, 23), // "on_CheckBoxFriend_Click"
-QT_MOC_LITERAL(24, 446, 23), // "on_ButtonReturn_clicked"
-QT_MOC_LITERAL(25, 470, 34), // "on_CheckBoxShowFilter_stateCh..."
-QT_MOC_LITERAL(26, 505, 29), // "on_RadioButtonFriendAll_Click"
-QT_MOC_LITERAL(27, 535, 33), // "on_RadioButtonFriendReached_C..."
-QT_MOC_LITERAL(28, 569, 36), // "on_RadioButtonFriendNotReache..."
-QT_MOC_LITERAL(29, 606, 34), // "on_CheckBoxAllFriends_stateCh..."
-QT_MOC_LITERAL(30, 641, 32), // "on_RadioButtonFriendsAll_clicked"
-QT_MOC_LITERAL(31, 674, 36), // "on_RadioButtonFriendsReached_..."
-QT_MOC_LITERAL(32, 711, 39), // "on_RadioButtonFriendsNotReach..."
-QT_MOC_LITERAL(33, 751, 21), // "on_ButtonFind_clicked"
-QT_MOC_LITERAL(34, 773, 27), // "on_LineEditFind_textChanged"
-QT_MOC_LITERAL(35, 801, 23), // "on_ButtonUpdate_clicked"
-QT_MOC_LITERAL(36, 825, 15), // "ProfileIsPublic"
-QT_MOC_LITERAL(37, 841, 20), // "SteamAPIAchievements"
-QT_MOC_LITERAL(38, 862, 11), // "achievement"
-QT_MOC_LITERAL(39, 874, 3), // "col"
-QT_MOC_LITERAL(40, 878, 11), // "FindProfile"
-QT_MOC_LITERAL(41, 890, 15), // "SteamAPIProfile"
-QT_MOC_LITERAL(42, 906, 2), // "ii"
-QT_MOC_LITERAL(43, 909, 14), // "OnResultAvatar"
-QT_MOC_LITERAL(44, 924, 3) // "img"
+QT_MOC_LITERAL(6, 74, 13), // "ImageRequest*"
+QT_MOC_LITERAL(7, 88, 4), // "imgr"
+QT_MOC_LITERAL(8, 93, 16), // "UpdateHiddenRows"
+QT_MOC_LITERAL(9, 110, 27), // "on_RadioButtonMyAll_clicked"
+QT_MOC_LITERAL(10, 138, 31), // "on_RadioButtonMyReached_clicked"
+QT_MOC_LITERAL(11, 170, 34), // "on_RadioButtonMyNotReached_cl..."
+QT_MOC_LITERAL(12, 205, 26), // "on_ComboBoxCategory_Change"
+QT_MOC_LITERAL(13, 232, 5), // "index"
+QT_MOC_LITERAL(14, 238, 26), // "on_CheckBoxCategory_Change"
+QT_MOC_LITERAL(15, 265, 3), // "ind"
+QT_MOC_LITERAL(16, 269, 31), // "on_CheckBoxSCIcons_stateChanged"
+QT_MOC_LITERAL(17, 301, 4), // "arg1"
+QT_MOC_LITERAL(18, 306, 31), // "on_CheckBoxSCTitle_stateChanged"
+QT_MOC_LITERAL(19, 338, 37), // "on_CheckBoxSCDescription_stat..."
+QT_MOC_LITERAL(20, 376, 38), // "on_CheckBoxSCTotalPercent_sta..."
+QT_MOC_LITERAL(21, 415, 23), // "on_CheckBoxFriend_Click"
+QT_MOC_LITERAL(22, 439, 23), // "on_ButtonReturn_clicked"
+QT_MOC_LITERAL(23, 463, 34), // "on_CheckBoxShowFilter_stateCh..."
+QT_MOC_LITERAL(24, 498, 29), // "on_RadioButtonFriendAll_Click"
+QT_MOC_LITERAL(25, 528, 33), // "on_RadioButtonFriendReached_C..."
+QT_MOC_LITERAL(26, 562, 36), // "on_RadioButtonFriendNotReache..."
+QT_MOC_LITERAL(27, 599, 34), // "on_CheckBoxAllFriends_stateCh..."
+QT_MOC_LITERAL(28, 634, 32), // "on_RadioButtonFriendsAll_clicked"
+QT_MOC_LITERAL(29, 667, 36), // "on_RadioButtonFriendsReached_..."
+QT_MOC_LITERAL(30, 704, 39), // "on_RadioButtonFriendsNotReach..."
+QT_MOC_LITERAL(31, 744, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(32, 766, 27), // "on_LineEditFind_textChanged"
+QT_MOC_LITERAL(33, 794, 23), // "on_ButtonUpdate_clicked"
+QT_MOC_LITERAL(34, 818, 15), // "ProfileIsPublic"
+QT_MOC_LITERAL(35, 834, 20), // "SteamAPIAchievements"
+QT_MOC_LITERAL(36, 855, 11), // "achievement"
+QT_MOC_LITERAL(37, 867, 3), // "col"
+QT_MOC_LITERAL(38, 871, 11), // "FindProfile"
+QT_MOC_LITERAL(39, 883, 15), // "SteamAPIProfile"
+QT_MOC_LITERAL(40, 899, 2), // "ii"
+QT_MOC_LITERAL(41, 902, 14), // "OnResultAvatar"
+QT_MOC_LITERAL(42, 917, 1), // "i"
+QT_MOC_LITERAL(43, 919, 3) // "img"
 
     },
     "FormCompare\0return_to_achievements\0\0"
     "closeEvent\0QCloseEvent*\0OnResultImage\0"
-    "i\0Save\0ImageRequest*\0imgr\0UpdateHiddenRows\0"
+    "ImageRequest*\0imgr\0UpdateHiddenRows\0"
     "on_RadioButtonMyAll_clicked\0"
     "on_RadioButtonMyReached_clicked\0"
     "on_RadioButtonMyNotReached_clicked\0"
@@ -103,7 +102,7 @@ QT_MOC_LITERAL(44, 924, 3) // "img"
     "on_ButtonUpdate_clicked\0ProfileIsPublic\0"
     "SteamAPIAchievements\0achievement\0col\0"
     "FindProfile\0SteamAPIProfile\0ii\0"
-    "OnResultAvatar\0img"
+    "OnResultAvatar\0i\0img"
 };
 #undef QT_MOC_LITERAL
 
@@ -125,66 +124,66 @@ static const uint qt_meta_data_FormCompare[] = {
 
  // slots: name, argc, parameters, tag, flags
        3,    1,  160,    2, 0x08 /* Private */,
-       5,    3,  163,    2, 0x08 /* Private */,
-      10,    0,  170,    2, 0x08 /* Private */,
-      11,    0,  171,    2, 0x08 /* Private */,
-      12,    0,  172,    2, 0x08 /* Private */,
-      13,    0,  173,    2, 0x08 /* Private */,
-      14,    1,  174,    2, 0x08 /* Private */,
-      16,    1,  177,    2, 0x08 /* Private */,
-      18,    1,  180,    2, 0x08 /* Private */,
-      20,    1,  183,    2, 0x08 /* Private */,
-      21,    1,  186,    2, 0x08 /* Private */,
-      22,    1,  189,    2, 0x08 /* Private */,
-      23,    2,  192,    2, 0x08 /* Private */,
+       5,    1,  163,    2, 0x08 /* Private */,
+       8,    0,  166,    2, 0x08 /* Private */,
+       9,    0,  167,    2, 0x08 /* Private */,
+      10,    0,  168,    2, 0x08 /* Private */,
+      11,    0,  169,    2, 0x08 /* Private */,
+      12,    1,  170,    2, 0x08 /* Private */,
+      14,    1,  173,    2, 0x08 /* Private */,
+      16,    1,  176,    2, 0x08 /* Private */,
+      18,    1,  179,    2, 0x08 /* Private */,
+      19,    1,  182,    2, 0x08 /* Private */,
+      20,    1,  185,    2, 0x08 /* Private */,
+      21,    2,  188,    2, 0x08 /* Private */,
+      22,    0,  193,    2, 0x08 /* Private */,
+      23,    1,  194,    2, 0x08 /* Private */,
       24,    0,  197,    2, 0x08 /* Private */,
-      25,    1,  198,    2, 0x08 /* Private */,
-      26,    0,  201,    2, 0x08 /* Private */,
-      27,    0,  202,    2, 0x08 /* Private */,
+      25,    0,  198,    2, 0x08 /* Private */,
+      26,    0,  199,    2, 0x08 /* Private */,
+      27,    1,  200,    2, 0x08 /* Private */,
       28,    0,  203,    2, 0x08 /* Private */,
-      29,    1,  204,    2, 0x08 /* Private */,
-      30,    0,  207,    2, 0x08 /* Private */,
-      31,    0,  208,    2, 0x08 /* Private */,
-      32,    0,  209,    2, 0x08 /* Private */,
+      29,    0,  204,    2, 0x08 /* Private */,
+      30,    0,  205,    2, 0x08 /* Private */,
+      31,    0,  206,    2, 0x08 /* Private */,
+      32,    1,  207,    2, 0x08 /* Private */,
       33,    0,  210,    2, 0x08 /* Private */,
-      34,    1,  211,    2, 0x08 /* Private */,
-      35,    0,  214,    2, 0x08 /* Private */,
-      36,    2,  215,    2, 0x08 /* Private */,
-      40,    1,  220,    2, 0x08 /* Private */,
-      43,    3,  223,    2, 0x08 /* Private */,
+      34,    2,  211,    2, 0x08 /* Private */,
+      38,    1,  216,    2, 0x08 /* Private */,
+      41,    3,  219,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 4,    2,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString, 0x80000000 | 8,    6,    7,    9,
+    QMetaType::Void, 0x80000000 | 6,    7,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   13,
     QMetaType::Void, QMetaType::Int,   15,
     QMetaType::Void, QMetaType::Int,   17,
-    QMetaType::Void, QMetaType::Int,   19,
-    QMetaType::Void, QMetaType::Int,   19,
-    QMetaType::Void, QMetaType::Int,   19,
-    QMetaType::Void, QMetaType::Int,   19,
+    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::Int,   17,
+    QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   19,
+    QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   19,
+    QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   19,
+    QMetaType::Void, QMetaType::QString,   17,
     QMetaType::Void,
-    QMetaType::Bool, 0x80000000 | 37, QMetaType::Int,   38,   39,
-    0x80000000 | 41, QMetaType::Int,   42,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString, 0x80000000 | 8,    6,    2,   44,
+    QMetaType::Bool, 0x80000000 | 35, QMetaType::Int,   36,   37,
+    0x80000000 | 39, QMetaType::Int,   40,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString, 0x80000000 | 6,   42,    2,   43,
 
        0        // eod
 };
@@ -197,7 +196,7 @@ void FormCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->return_to_achievements(); break;
         case 1: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 2: _t->OnResultImage((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< ImageRequest*(*)>(_a[3]))); break;
+        case 2: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
         case 3: _t->UpdateHiddenRows(); break;
         case 4: _t->on_RadioButtonMyAll_clicked(); break;
         case 5: _t->on_RadioButtonMyReached_clicked(); break;
@@ -234,7 +233,7 @@ void FormCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 2:
+            case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< ImageRequest* >(); break;
             }
             break;

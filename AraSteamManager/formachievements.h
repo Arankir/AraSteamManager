@@ -37,7 +37,7 @@ signals:
     void return_to_games();
 
 private slots:
-    void OnResultImage(int i, QString Save, ImageRequest *imgr);
+    void OnResultImage(ImageRequest *imgr);
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);
     void closeEvent(QCloseEvent *);

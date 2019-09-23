@@ -1,10 +1,26 @@
 #include "imagerequest.h"
 
-ImageRequest::ImageRequest(int is , QString Saves, QObject *parent) : QObject(parent){
+ImageRequest::ImageRequest(QString url, int row, QString save, bool autosave, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     QByteArray answer="";
-    i=is;
-    Save=Saves;
+    Url=url;
+    i=row;
+    Save=save;
+    Autosave=autosave;
+    switch (Setting.GetSaveimages()) {
+        case 0:{
+            LoadImage(url,row);
+            break;
+            }
+        case 1:{
+            LoadImage(url,row,save,autosave);
+            break;
+            }
+        default:{
+            LoadImage(url,row);
+            break;
+            }
+        }
 }
 
 ImageRequest::ImageRequest(){
@@ -34,15 +50,16 @@ void ImageRequest::OnResultGet(QNetworkReply *reply){
         answer=reply->readAll();
         if(Autosave){
             QString savenow=Save;
-            QString path="images/";
+            QString path="";
             while(savenow.length()>0){
                 if(savenow.indexOf("/",0)>-1){
                     QString dir=savenow.mid(0,savenow.indexOf("/",0));
                     savenow=savenow.mid(savenow.indexOf("/",0)+1, savenow.length());
+                    qDebug()<< dir<<savenow;
                     if(!QDir(path+dir).exists()){
                         QDir().mkdir(path+dir);
                     }
-                    path+=dir;
+                    path+=dir+"/";
                 } else {
                     savenow="";
                 }

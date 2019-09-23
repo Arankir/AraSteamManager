@@ -43,36 +43,6 @@ SOURCES += \
     class/steamapi/steamapigames.cpp \
     class/steamapi/steamapilevels.cpp \
     class/steamapi/steamapiprofile.cpp \
-    class/steamapiachievement.cpp \
-    class/steamapiachievement.cpp \
-    class/steamapiachievementglobal.cpp \
-    class/steamapiachievementglobal.cpp \
-    class/steamapiachievementpercentage.cpp \
-    class/steamapiachievementpercentage.cpp \
-    class/steamapiachievementplayer.cpp \
-    class/steamapiachievementplayer.cpp \
-    class/steamapiachievements.cpp \
-    class/steamapiachievements.cpp \
-    class/steamapiachievementsglobal.cpp \
-    class/steamapiachievementsglobal.cpp \
-    class/steamapiachievementspercentage.cpp \
-    class/steamapiachievementspercentage.cpp \
-    class/steamapiachievementsplayer.cpp \
-    class/steamapiachievementsplayer.cpp \
-    class/steamapibans.cpp \
-    class/steamapibans.cpp \
-    class/steamapifriend.cpp \
-    class/steamapifriend.cpp \
-    class/steamapifriends.cpp \
-    class/steamapifriends.cpp \
-    class/steamapigame.cpp \
-    class/steamapigame.cpp \
-    class/steamapigames.cpp \
-    class/steamapigames.cpp \
-    class/steamapilevels.cpp \
-    class/steamapilevels.cpp \
-    class/steamapiprofile.cpp \
-    class/steamapiprofile.cpp \
     formcompare.cpp \
         main.cpp \
         mainwindow.cpp \

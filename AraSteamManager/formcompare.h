@@ -41,7 +41,7 @@ signals:
 
 private slots:
     void closeEvent(QCloseEvent *);
-    void OnResultImage(int i, QString Save, ImageRequest *imgr);
+    void OnResultImage(ImageRequest *imgr);
     void UpdateHiddenRows();
 
     void on_RadioButtonMyAll_clicked();

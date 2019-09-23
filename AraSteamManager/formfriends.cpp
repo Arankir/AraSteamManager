@@ -62,23 +62,8 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
     for (int i=0;i<Friends.GetCount();i++) {
         ui->TableWidgetFriends->insertRow(i);
         if(!QFile::exists("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png")){
-            ImageRequest *image;
-            switch (Setting.GetSaveimages()) {
-                case 0:{
-                    image = new ImageRequest(i,"");
-                    break;
-                    }
-                case 1:{
-                    image = new ImageRequest(i,Profiless[i].GetAvatar().mid(72,20).remove(".jpg"));
-                    break;
-                    }
-                default:{
-                    image = new ImageRequest(i,"");
-                    break;
-                    }
-            }
-            connect(image,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
-            image->Get(Profiless[i].GetAvatar());
+            ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg"),true);
+            connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
             } else {
             QPixmap pixmap;
             pixmap.load("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png", "PNG");
@@ -200,17 +185,14 @@ void FormFriends::on_ButtonReturn_clicked(){
     //delete this;
 }
 
-void FormFriends::OnResultImage(int i, QString Save, ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(int, QString, ImageRequest *)),this,SLOT(OnResultImage(int, QString, ImageRequest *)));
+void FormFriends::OnResultImage(ImageRequest *imgr){
+    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    if(!Save.isEmpty()){
-        pixmap.save("images/profiles/"+Save+".png", "PNG");
-    }
-    ui->TableWidgetFriends->setCellWidget(i,0,label);
-    ui->TableWidgetFriends->resizeRowToContents(i);
+    ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
+    ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
     imgr->deleteLater();
 }
 
