@@ -45,9 +45,15 @@ private:
     QString key;
     int windowchildcount=0;
     SteamAPIFriends Friends;
+    QVector<SteamAPIProfile> Profiless;
     QStringList Words;
     Settings Setting;
     QString theme="white";
+
+    ImageRequest *requests[1000];
+    int numrequests=0;
+    int numnow=0;
+
     bool **filter;
 };
 

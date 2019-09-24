@@ -62,8 +62,12 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
     for (int i=0;i<Friends.GetCount();i++) {
         ui->TableWidgetFriends->insertRow(i);
         if(!QFile::exists("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png")){
-            ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg"),true);
-            connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+            if(numrequests<1000){
+                ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg"),true);
+                connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+                requests[numrequests++] = image;
+                numnow++;
+            }
             } else {
             QPixmap pixmap;
             pixmap.load("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png", "PNG");
@@ -158,6 +162,7 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button2->setObjectName("btnf"+Profiless[i].GetSteamid());
         ui->TableWidgetFriends->setCellWidget(i,7,button2);
+        ui->TableWidgetFriends->setRowHeight(i,33);//resizeRow(imgr->GetRow());
     }
     ui->TableWidgetFriends->setColumnHidden(5,true);
     ui->TableWidgetFriends->resizeColumnsToContents();
@@ -174,6 +179,9 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
 }
 
 FormFriends::~FormFriends(){
+    //for (int i=0;i<=numrequests;i++) {
+    //    delete requests[numrequests];
+    //}
     delete ui;
 }
 void FormFriends::closeEvent(QCloseEvent *){
@@ -186,14 +194,18 @@ void FormFriends::on_ButtonReturn_clicked(){
 }
 
 void FormFriends::OnResultImage(ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
-    ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
-    imgr->deleteLater();
+    //ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
+    if(numnow<Friends.GetCount()){
+        imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20).remove(".jpg"),true);
+        numnow++;
+    } else
+        disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+    //imgr->deleteLater();
 }
 
 void FormFriends::GoToProfileClicked(){

@@ -51,6 +51,10 @@ private:
     QStringList Words;
     Settings Setting;
     QString theme="white";
+
+    ImageRequest *requests[1000];
+    int numrequests=0;
+    int numnow=0;
 };
 
 #endif // FORMGAMES_H

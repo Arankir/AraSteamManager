@@ -385,7 +385,7 @@ void FormCompare::on_ComboBoxCategory_Change(int index){
                     if(ui->TableWidget->item(i,0)->text()==selecteditem[j].toString()){
                         filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = true;
                         break;
-                        };
+                        }
                     }
             } else {
             for (int i=2;i<ui->TableWidget->rowCount();i++) {
@@ -414,7 +414,7 @@ void FormCompare::on_CheckBoxCategory_Change(int ind){
                     if(ui->TableWidget->item(i,0)->text()==selecteditem[j].toString()){
                         filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = true;
                         break;
-                        };
+                        }
                     }
             } else {
             for (int i=2;i<ui->TableWidget->rowCount();i++) {

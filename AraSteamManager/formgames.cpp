@@ -45,10 +45,15 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
         int row = ui->TableWidgetGames->rowCount();
         ui->TableWidgetGames->insertRow(row);
         if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".png")){
-            if(games[i].GetImg_icon_url()!=""){
-                ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url(),true);
-                connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
-                }
+            if(numrequests<1000){
+                if(games[i].GetImg_icon_url()!=""){
+                    ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url(),true);
+                    connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+                    requests[numrequests] = image;
+                    numrequests++;
+                    }
+                numnow++;
+            }
             } else {
             QPixmap pixmap;
             pixmap.load("images/icon_games/"+games[i].GetImg_icon_url()+".png", "PNG");
@@ -138,13 +143,20 @@ void FormGames::FavoritesClicked(){
 }
 
 void FormGames::OnResultImage(ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetGames->setCellWidget(imgr->GetRow(),0,label);
-    imgr->deleteLater();
+    //imgr->deleteLater();
+    if(numnow<games.size()){
+        while (games[numnow].GetImg_icon_url()=="") {
+            numnow++;
+        }
+        imgr->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",imgr->GetRow(),"images/icon_games/"+games[numnow].GetImg_icon_url(),true);
+        numnow++;
+    } else
+        disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
 }
 
 void FormGames::OnResultAchievements(ImageRequest *imgr){
