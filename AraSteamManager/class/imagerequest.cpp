@@ -66,7 +66,7 @@ void ImageRequest::OnResultGet(QNetworkReply *reply){
             }
             QPixmap pixmap;
             pixmap.loadFromData(answer);
-            pixmap.save(Save+".png", "PNG");
+            pixmap.save(Save);
         }
     }
     emit onReady(this);

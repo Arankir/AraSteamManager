@@ -19,10 +19,10 @@
 #include <QTableWidgetItem>
 #include <QRadioButton>
 #include <class/settings.h>
-#include <class/steamapi/steamapigames.h>
-#include <class/steamapi/steamapiachievements.h>
-#include <class/steamapi/steamapifriends.h>
-#include <class/steamapi/steamapiprofile.h>
+#include <class/steamapi/Sgames.h>
+#include <class/steamapi/Sachievements.h>
+#include <class/steamapi/Sfriends.h>
+#include <class/steamapi/Sprofile.h>
 
 namespace Ui {
 class FormCompare;
@@ -33,7 +33,7 @@ class FormCompare : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap GameLogo, SteamAPIAchievements achievements, QWidget *parent = nullptr);
+    explicit FormCompare(QString keys, QString ids, SGame games, QPixmap GameLogo, SAchievements achievements, QWidget *parent = nullptr);
     ~FormCompare();
 
 signals:
@@ -81,8 +81,8 @@ private slots:
 
     void on_ButtonUpdate_clicked();
 
-    bool ProfileIsPublic(SteamAPIAchievements achievement, int col);
-    SteamAPIProfile FindProfile(int ii);
+    bool ProfileIsPublic(SAchievements achievement, int col);
+    SProfile FindProfile(int ii);
     void OnResultAvatar(int i, QString, ImageRequest* img);
 
 private:
@@ -95,11 +95,11 @@ private:
     QFormLayout *newcategoryvalueslayout;
     QFormLayout *changecategoryvalueslayout;
     QStringList Words;
-    SteamAPIGame game;
-    QVector<QPair<SteamAPIProfile,int>> friends;
+    SGame game;
+    QVector<QPair<SProfile,int>> friends;
     int type1=0;
     int type2=0;
-    SteamAPIAchievements achievements;
+    SAchievements achievements;
     Settings Setting;
     QString theme="white";
 };

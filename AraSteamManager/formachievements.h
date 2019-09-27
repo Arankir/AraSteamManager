@@ -17,8 +17,8 @@
 #include <class\imagerequest.h>
 #include <formcompare.h>
 #include <class/settings.h>
-#include <class/steamapi/steamapigame.h>
-#include <class/steamapi/steamapiachievements.h>
+#include <class/steamapi/Sgame.h>
+#include <class/steamapi/Sachievements.h>
 
 namespace Ui {
 class FormAchievements;
@@ -29,7 +29,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, QString ids, SteamAPIGame game, QWidget *parent = nullptr);
+    explicit FormAchievements(QString keys, QString ids, SGame game, QWidget *parent = nullptr);
     ~FormAchievements();
     FormCompare *compareform;
 
@@ -111,8 +111,8 @@ private:
     QString key;
     QString id;
     int windowchildcount=0;
-    SteamAPIGame game;
-    SteamAPIAchievements achievements;
+    SGame game;
+    SAchievements achievements;
     bool **filter;
     int colfilter=3;
     QFormLayout *newcategoryvalueslayout;

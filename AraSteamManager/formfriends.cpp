@@ -1,7 +1,7 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     Words=Setting.GetWords("friends");
     id=ids;
@@ -42,18 +42,18 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
         break;
         }
     }
-    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
-    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    SteamAPIProfile Profiles = Friends.GetProfiles();
-    QVector<SteamAPIProfile> Profiless;
+    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.jpg"));
+    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.jpg"));
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.jpg) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    SProfile Profiles = Friends.GetProfiles();
+    QVector<SProfile> Profiless;
     for (int i=0;i<Profiles.GetCount();i++) {
         Profiless.push_back(Profiles.GetProfile(i));
     }
     for (int i=0; i < Profiless.size()-1; i++) {
         for (int j=0; j < Profiless.size()-i-1; j++) {
             if (Profiless[j].GetPersonaname() > Profiless[j+1].GetPersonaname()) {
-                SteamAPIProfile temp = Profiless[j];
+                SProfile temp = Profiless[j];
                 Profiless[j] = Profiless[j+1];
                 Profiless[j+1] = temp;
             }
@@ -61,16 +61,17 @@ FormFriends::FormFriends(QString ids, QString keys, SteamAPIFriends Friendss, QW
     }
     for (int i=0;i<Friends.GetCount();i++) {
         ui->TableWidgetFriends->insertRow(i);
-        if(!QFile::exists("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png")){
+        qDebug()<<i;
+        if(!QFile::exists("images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg")){
             if(numrequests<1000){
-                ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg"),true);
+                ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg",true);
                 connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
                 requests[numrequests++] = image;
                 numnow++;
             }
             } else {
             QPixmap pixmap;
-            pixmap.load("images/profiles/"+Profiless[i].GetAvatar().mid(72,20).remove(".jpg")+".png", "PNG");
+            pixmap.load("images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg");
             QLabel *lb = new QLabel();
             lb->setPixmap(pixmap);
             ui->TableWidgetFriends->setCellWidget(i,0,lb);
@@ -200,8 +201,8 @@ void FormFriends::OnResultImage(ImageRequest *imgr){
     label->setPixmap(pixmap);
     ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
     //ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
-    if(numnow<Friends.GetCount()){
-        imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20).remove(".jpg"),true);
+    if(numrequests==1000&&numnow<Friends.GetCount()){
+        imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20)+".jpg",true);
         numnow++;
     } else
         disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));

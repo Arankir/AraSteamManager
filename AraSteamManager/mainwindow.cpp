@@ -20,14 +20,15 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->ButtonSetProfile->setVisible(false);
     ui->ButtonStatistics->setVisible(false);
     ui->ButtonGoToMyProfile->setVisible(false);
+    ui->ScrollAreaForm->setVisible(false);
     ui->ButtonFindProfile->setText(" "+Words[0]);
     ui->LineEditIdProfile->setPlaceholderText(Words[1]);
-    ui->ButtonFavorites->setText(" "+Words[2]);
-    ui->ButtonSetProfile->setText(Words[3]);
-    ui->ButtonStatistics->setText(" "+Words[4]);
-    ui->ButtonSettings->setText(Words[5]);
-    ui->ButtonExit->setText(" "+Words[23]);
-    ui->ButtonGoToMyProfile->setText(Words[24]);
+    ui->ButtonSettings->setText(Words[2]);
+    ui->ButtonExit->setText(" "+Words[3]);
+    ui->ButtonStatistics->setText(" "+Words[6]);
+    ui->ButtonFavorites->setText(" "+Words[7]);
+    ui->ButtonSetProfile->setText(Words[8]);
+    ui->ButtonGoToMyProfile->setText(Words[9]);
     if(Setting.GetStatus()=="success"){
         if(Setting.GetMyProfile()!="none")
             GoToProfile(Setting.GetMyProfile(),"url");
@@ -119,66 +120,87 @@ void MainWindow::on_ButtonFindProfile_clicked(){
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
 void MainWindow::GoToProfile(QString id, QString type){
-    SteamAPIProfile Profiles(key,id,false,type);
+    SProfile Profiles(key,id,false,type);
     if(Profiles.GetStatus()=="success"){
         Profile=Profiles;
         Games.Clear();
         Friends.Clear();
-        SteamAPIBans Bans(key,Profile.GetSteamid(),false);
-        SteamAPILevels Levels(key,Profile.GetSteamid());
+        SBans Bans(key,Profile.GetSteamid(),false);
+        SLevels Levels(key,Profile.GetSteamid());
         Games.Set(key,Profile.GetSteamid(),true,true,false);
         Friends.Set(key,Profile.GetSteamid(),false);
         //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
         //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
-        ui->LabelProfileUrl->setText(Profile.GetProfileurl());
-        ui->LabelRealName->setText(Words[8]+": "+Profile.GetRealname());
-        ui->LabelTimeCreated->setText(Words[9]+" "+Profile.GetTimecreated().toString("yyyy.MM.dd"));
-        ui->Labellvl->setText(Words[25]+": "+QString::number(Levels.GetPlayer_level()));
-        ui->LabelBans->setText(Bans.GetVACBanned()?Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"\n"+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]:Words[26]+": "+Words[27]);
-        ui->ButtonGames->setText(Games.GetStatus()=="success"?" "+Words[10]+"("+QString::number(Games.GetCount())+")":" "+Words[10]+" (error)");
-        ui->ButtonFriends->setText(Friends.GetStatus()=="success"?" "+Words[11]+"("+QString::number(Friends.GetCount())+")":" "+Words[11]+" (error)");
-        if(!Profile.GetGameextrainfo().isEmpty()){
-            ui->LabelPersonaState->setText(Words[12]+":\n"+Profile.GetGameextrainfo());
+        ui->ButtonGames->setText(Games.GetStatus()=="success"?" "+Words[4]+"("+QString::number(Games.GetCount())+")":" "+Words[4]+" (error)");
+        ui->ButtonFriends->setText(Friends.GetStatus()=="success"?" "+Words[5]+"("+QString::number(Friends.GetCount())+")":" "+Words[5]+" (error)");if(!Profile.GetGameextrainfo().isEmpty()){
+            ui->LabelPersonaState->setText(Words[10]+":"+Profile.GetGameextrainfo());
             ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
         } else
             switch (Profile.GetPersonastate()) {
             case 0:{
-                    ui->LabelPersonaState->setText(Words[13]+":\n"+Profile.GetLastlogoff().toString("yyyy.MM.dd\nhh:mm:ss"));
+                    ui->LabelPersonaState->setText(Words[11]+": "+Profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss"));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                     break;
             }
             case 1:{
-                    ui->LabelPersonaState->setText(Words[14]);
+                    ui->LabelPersonaState->setText(Words[12]);
                     ui->LabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
                     break;
             }
             case 2:{
-                    ui->LabelPersonaState->setText(Words[15]);
+                    ui->LabelPersonaState->setText(Words[13]);
                     ui->LabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
                     break;
             }
             case 3:{
-                    ui->LabelPersonaState->setText(Words[16]);
+                    ui->LabelPersonaState->setText(Words[14]);
                     ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 4:{
-                    ui->LabelPersonaState->setText(Words[17]);
+                    ui->LabelPersonaState->setText(Words[15]);
                     ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 5:{
-                    ui->LabelPersonaState->setText(Words[18]);
+                    ui->LabelPersonaState->setText(Words[16]);
                     ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             case 6:{
-                    ui->LabelPersonaState->setText(Words[19]);
+                    ui->LabelPersonaState->setText(Words[17]);
                     ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             }
-        ui->LabelLocCountryCode->setText(Words[20]+": "+Profile.GetLoccountrycode());
+        ui->LabelProfileUrl->setText(Profile.GetProfileurl());
+        ui->Labellvl->setText(Words[18]+": "+QString::number(Levels.GetPlayer_level()));
+        ui->LabelRealName->setText(Words[19]+": "+Profile.GetRealname());
+        ui->LabelTimeCreated->setText(Words[20]+" "+Profile.GetTimecreated().toString("yyyy.MM.dd"));
+        ui->LabelLocCountryCode->setText(Words[21]+": "+Profile.GetLoccountrycode());
+        switch (Profile.GetCommunityvisibilitystate()) {
+            case 1:{
+                ui->LabelProfileVisibility->setText(Words[22]);
+                ui->LabelProfileVisibility->setStyleSheet("color:red");
+                break;
+            }
+            case 3:{
+                ui->LabelProfileVisibility->setText(Words[23]);
+                ui->LabelProfileVisibility->setStyleSheet("color:green");
+                break;
+            }
+            case 8:{
+                ui->LabelProfileVisibility->setText(Words[24]);
+                ui->LabelProfileVisibility->setStyleSheet("color:yellow");
+                break;
+            }
+            default:{
+                ui->LabelProfileVisibility->setText(Words[25]);
+                ui->LabelProfileVisibility->setStyleSheet("color:white");
+            }
+            }
+        ui->LabelBans->setText(Bans.GetVACBanned()?Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"\n"+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]:Words[26]+": "+Words[27]);
+
         if(Setting.GetStatus()=="success"){
             if(Setting.GetMyProfile()==Profile.GetSteamid()){
                 ui->ButtonSetProfile->setEnabled(false);
@@ -191,26 +213,26 @@ void MainWindow::GoToProfile(QString id, QString type){
                 QNetworkAccessManager imagemanager;
                 QEventLoop imageloop;  //Ждем ответ от сервера.
                 connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Profile.GetAvatar()));
+                QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Profile.GetAvatarmedium()));
                 imageloop.exec();
                 disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                QImage img;
+                QPixmap img;
                 img.loadFromData(imagereply.readAll());
-                img.save("images/profiles/main.png", "PNG");
-        ui->LabelAvatar->setTextFormat(Qt::RichText);
-        ui->LabelAvatar->setText("<img src=\"images/profiles/main.png\"> "+Profile.GetPersonaname());
-        ui->LabelAvatar->setFont(QFont("MS Shell Dlg 2",14));
+                ui->LabelAvatar->setPixmap(img);
+                ui->LabelNick->setText(Profile.GetPersonaname());
+                //img.save("images/profiles/main.png", "PNG");
+        //ui->LabelAvatar->setTextFormat(Qt::RichText);
+        //ui->LabelAvatar->setText("<img src=\"images/profiles/main.png\"> "+Profile.GetPersonaname());
+        //ui->LabelNick->setFont(QFont("MS Shell Dlg 2",14));
         ui->ButtonGames->setVisible(true);
         ui->ButtonFriends->setVisible(true);
         ui->ButtonFavorites->setVisible(true);
         ui->ButtonSetProfile->setVisible(true);
         ui->ButtonStatistics->setVisible(true);
         ui->ButtonGoToMyProfile->setVisible(true);
-        if(Profile.GetCommunityvisibilitystate()!=3){
-            //профиль скрыт
-        }
+
         } else {
-            QMessageBox::warning(this,Words[6],Words[21]);
+            QMessageBox::warning(this,Words[30],Words[32]);
         }
 }
 void MainWindow::on_ButtonGames_clicked(){
@@ -218,8 +240,13 @@ void MainWindow::on_ButtonGames_clicked(){
         windowchildcount++;
         gamesform = new FormGames(Profile.GetSteamid(),key,Games);
         connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(returnfromgames()));
-        gamesform->show();
-        this->setVisible(false);
+        //QFormLayout *lay = new QFormLayout;
+        //lay->addWidget(gamesform);
+        //ui->ScrollAreaForm->setLayout(lay);
+        ui->ScrollAreaForm->setWidget(gamesform);
+        ui->ScrollAreaForm->setVisible(true);
+        //gamesform->show();
+        //this->setVisible(false);
     }
 }
 void MainWindow::on_ButtonFriends_clicked(){
@@ -228,8 +255,12 @@ void MainWindow::on_ButtonFriends_clicked(){
         friendsform = new FormFriends(Profile.GetSteamid(),key,Friends);
         connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(returnfromfriends()));
         connect(friendsform,SIGNAL(go_to_profile(QString,QString)),this,SLOT(GoToProfile(QString,QString)));
-        friendsform->show();
-        this->setVisible(false);
+        //QFormLayout *lay = new QFormLayout;
+        //lay->addWidget(friendsform);
+        ui->ScrollAreaForm->setWidget(friendsform);//setLayout(lay);
+        ui->ScrollAreaForm->setVisible(true);
+        //friendsform->show();
+        //this->setVisible(false);
     }
 }
 void MainWindow::on_ButtonSetProfile_clicked(){
@@ -240,7 +271,7 @@ void MainWindow::on_ButtonGoToMyProfile_clicked(){
     if(Setting.GetStatus()=="success"){
         GoToProfile(Setting.GetMyProfile(),"url");
     } else {
-        QMessageBox::warning(this,Words[6],Words[7]);
+        QMessageBox::warning(this,Words[30],Words[32]);
     }
 }
 void MainWindow::on_ButtonExit_clicked(){

@@ -5,7 +5,7 @@
 #include <QFile>
 #include <QStandardItem>
 #include <class/imagerequest.h>
-#include <class/steamapi/steamapifriends.h>
+#include <class/steamapi/Sfriends.h>
 #include <class/settings.h>
 
 namespace Ui {
@@ -17,7 +17,7 @@ class FormFriends : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormFriends(QString id, QString key, SteamAPIFriends Friends, QWidget *parent = nullptr);
+    explicit FormFriends(QString id, QString key, SFriends Friends, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
@@ -44,8 +44,8 @@ private:
     QString id;
     QString key;
     int windowchildcount=0;
-    SteamAPIFriends Friends;
-    QVector<SteamAPIProfile> Profiless;
+    SFriends Friends;
+    QVector<SProfile> Profiless;
     QStringList Words;
     Settings Setting;
     QString theme="white";

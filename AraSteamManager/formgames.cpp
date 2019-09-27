@@ -1,19 +1,19 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     Words=Setting.GetWords("games");
     id=ids;
     key=keys;
-    SteamAPIGames Games=Gamess;
+    SGames Games=Gamess;
     for (int i=0;i<Games.GetCount();i++) {
         games.push_back(Games.GetGame(i));
     }
     for (int i=0; i < games.size()-1; i++) {
         for (int j=0; j < games.size()-i-1; j++) {
             if (games[j].GetName() > games[j+1].GetName()) {
-                SteamAPIGame temp = games[j];
+                SGame temp = games[j];
                 games[j] = games[j+1];
                 games[j+1] = temp;
             }
@@ -44,10 +44,10 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
     for(int i=0;i<games.size();i++){
         int row = ui->TableWidgetGames->rowCount();
         ui->TableWidgetGames->insertRow(row);
-        if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".png")){
+        if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".jpg")){
             if(numrequests<1000){
                 if(games[i].GetImg_icon_url()!=""){
-                    ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url(),true);
+                    ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url()+".jpg",true);
                     connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
                     requests[numrequests] = image;
                     numrequests++;
@@ -56,25 +56,26 @@ FormGames::FormGames(QString ids, QString keys, SteamAPIGames Gamess, QWidget *p
             }
             } else {
             QPixmap pixmap;
-            pixmap.load("images/icon_games/"+games[i].GetImg_icon_url()+".png", "PNG");
+            pixmap.load("images/icon_games/"+games[i].GetImg_icon_url()+".jpg");
             QLabel *label = new QLabel;
             label->setPixmap(pixmap);
             ui->TableWidgetGames->setCellWidget(row,0,label);
             }
-        QTableWidgetItem *item2 = new QTableWidgetItem(games[i].GetName());
-        ui->TableWidgetGames->setItem(row,1,item2);
-        QPushButton *button1 = new QPushButton;
-        QPushButton *button2 = new QPushButton;
-        button1->setText(Words[4]);
+        ui->TableWidgetGames->setItem(row,1,new QTableWidgetItem(games[i].GetName()));
+
+        QPushButton *button1 = new QPushButton(Words[4]);
         button1->setMinimumSize(QSize(25,25));
-        button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
-        button2->setMinimumSize(QSize(25,25));
         connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
-        connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button1->setObjectName("ButtonAchievements"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(row,2,button1);
+
+        QPushButton *button2 = new QPushButton;
+        button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
+        button2->setMinimumSize(QSize(25,25));
+        connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button2->setObjectName("ButtonFavorites"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(row,3,button2);
+
         ui->TableWidgetGames->setRowHeight(i,33);
         ImageRequest *Achievements = new ImageRequest;
         connect(Achievements,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultAchievements(ImageRequest *)));
@@ -121,7 +122,7 @@ void FormGames::AchievementsClicked(){
         QPushButton *btn = qobject_cast<QPushButton*>(sender());
         int index=btn->objectName().mid(18,4).toInt();
         QEventLoop loop;
-        SteamAPIAchievementsPercentage Percentage(key,QString::number(games[index].GetAppid()));
+        SAchievementsPercentage Percentage(key,QString::number(games[index].GetAppid()));
         connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         loop.exec();
         disconnect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
@@ -150,10 +151,10 @@ void FormGames::OnResultImage(ImageRequest *imgr){
     ui->TableWidgetGames->setCellWidget(imgr->GetRow(),0,label);
     //imgr->deleteLater();
     if(numnow<games.size()){
-        while (games[numnow].GetImg_icon_url()=="") {
+        while (QFile::exists("images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg")||games[numnow].GetImg_icon_url()=="") {
             numnow++;
         }
-        imgr->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",imgr->GetRow(),"images/icon_games/"+games[numnow].GetImg_icon_url(),true);
+        imgr->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",imgr->GetRow(),"images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg",true);
         numnow++;
     } else
         disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));

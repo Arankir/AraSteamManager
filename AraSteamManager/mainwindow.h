@@ -9,11 +9,11 @@
 #include <formfriends.h>
 #include <QFile>
 #include <QKeyEvent>
-#include <class/steamapi/steamapiprofile.h>
-#include <class/steamapi/steamapibans.h>
-#include <class/steamapi/steamapilevels.h>
-#include <class/steamapi/steamapigames.h>
-#include <class/steamapi/steamapifriends.h>
+#include <class/steamapi/Sprofile.h>
+#include <class/steamapi/Sbans.h>
+#include <class/steamapi/Slevels.h>
+#include <class/steamapi/Sgames.h>
+#include <class/steamapi/Sfriends.h>
 #include <class/settings.h>
 
 namespace Ui {
@@ -50,9 +50,9 @@ private:
     QString key="3826BF60403D15613B4B0381DAB7A7BD";
     int windowchildcount=0;
     QStringList Words;
-    SteamAPIProfile Profile;
-    SteamAPIGames Games;
-    SteamAPIFriends Friends;
+    SProfile Profile;
+    SGames Games;
+    SFriends Friends;
     Settings Setting;
     QString theme="white";
 };

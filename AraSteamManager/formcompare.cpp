@@ -1,7 +1,7 @@
 #include "formcompare.h"
 #include "ui_formcompare.h"
 
-FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap GameLogo, SteamAPIAchievements achievementss, QWidget *parent) : QWidget(parent), ui(new Ui::FormCompare){
+FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLogo, SAchievements achievementss, QWidget *parent) : QWidget(parent), ui(new Ui::FormCompare){
     ui->setupUi(this);
     Words=Setting.GetWords("compare");
     key=keys;
@@ -72,7 +72,7 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
     QNetworkAccessManager manager;
     QEventLoop loop;
     connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    SteamAPIProfile Profile(key,id,false,"url");
+    SProfile Profile(key,id,false,"url");
     ui->TableWidget->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()/*Words[15]*/));
     QNetworkReply &imagereply = *manager.get(QNetworkRequest(Profile.GetAvatar()));
     loop.exec();
@@ -84,9 +84,8 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
     ui->TableWidget->setCellWidget(0,5,myava);
     int totalr=0;
     int totalnr=0;
-    if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists()){
+    if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists())
         QDir().mkdir("images/achievements/"+QString::number(game.GetAppid()));
-    }
     for(int i=0;i<achievements.GetAchievementsCount();i++){
         qDebug()<<i;
             if(achievements.GetDisplayname(i)!=""){
@@ -94,12 +93,12 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
                 ui->TableWidget->insertRow(row);
                 ui->TableWidget->setItem(row,0,new QTableWidgetItem(achievements.GetApiname(i)));
                 QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
-                if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
-                    ImageRequest *image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg"),true);
+                if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1))){
+                    ImageRequest *image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1),true);
                     connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
                     } else {
                     QPixmap pixmap;
-                    pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
+                    pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1));
                     QLabel *label = new QLabel;
                     label->setPixmap(pixmap);
                     ui->TableWidget->setCellWidget(row,1,label);
@@ -179,23 +178,23 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
     colfilter=list.size()+3;
     filter = new bool*[ui->TableWidget->rowCount()];
     filter = New;
-    SteamAPIFriends frien(key,id,false);
-    SteamAPIProfile Profiless =frien.GetProfiles();
-    QVector<SteamAPIProfile> Profiles;
+    SFriends frien(key,id,false);
+    SProfile Profiless =frien.GetProfiles();
+    QVector<SProfile> Profiles;
     for (int i=0;i<Profiless.GetCount();i++) {
         Profiles.push_back(Profiless.GetProfile(i));
     }
     for (int i=0; i < Profiles.size()-1; i++) {
         for (int j=0; j < Profiles.size()-i-1; j++) {
             if (Profiles[j].GetPersonaname() > Profiles[j+1].GetPersonaname()) {
-                SteamAPIProfile temp = Profiles[j];
+                SProfile temp = Profiles[j];
                 Profiles[j] = Profiles[j+1];
                 Profiles[j+1] = temp;
             }
         }
     }
     for (int i=0;i<Profiles.size();i++) {
-        SteamAPIGames Games;
+        SGames Games;
         Games.Set(key,Profiles[i].GetSteamid(),true,true,false);
         bool apply=false;
         for (int i=0;i<Games.GetCount();i++) {
@@ -204,7 +203,7 @@ FormCompare::FormCompare(QString keys, QString ids, SteamAPIGame games, QPixmap 
                 break;
             }
         }
-        QPair<SteamAPIProfile,int> deb;
+        QPair<SProfile,int> deb;
         deb.first=Profiles[i];
         if(apply){
             deb.second=1;
@@ -442,7 +441,7 @@ void FormCompare::on_CheckBoxSCTotalPercent_stateChanged(int arg1){
 void FormCompare::on_CheckBoxFriend_Click(int row, int column){
     if((row==1)&&(column>1)){
         int col=ui->TableWidget->columnCount();
-        SteamAPIProfile sProfile=friends[column-2].first;
+        SProfile sProfile=friends[column-2].first;
         qDebug()<<sProfile.GetPersonaname();
         if(ui->TableWidgetFriends->item(row,column)->checkState()==Qt::Checked){
             ui->TableWidget->insertColumn(col);
@@ -460,11 +459,11 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
             ava->setToolTip(friends[column-2].first.GetPersonaname());
             ava->setAlignment(Qt::AlignCenter);
             ui->TableWidget->setCellWidget(0,col,ava);
-            SteamAPIAchievementsPlayer Pla(key,QString::number(game.GetAppid()),sProfile.GetSteamid());
+            SAchievementsPlayer Pla(key,QString::number(game.GetAppid()),sProfile.GetSteamid());
             connect(&Pla,SIGNAL(finished()), &loop, SLOT(quit()));
             loop.exec();
             disconnect(&Pla,SIGNAL(finished()), &loop, SLOT(quit()));
-            SteamAPIAchievements Ach;
+            SAchievements Ach;
             Ach.Set(Pla);
             if(ProfileIsPublic(Ach,col)){
                 QRadioButton *rbAll = new QRadioButton(/*Words[]*/);
@@ -710,7 +709,7 @@ void FormCompare::on_LineEditFind_textChanged(const QString&){
     UpdateHiddenRows();
 }
 
-bool FormCompare::ProfileIsPublic(SteamAPIAchievements achievement, int col){
+bool FormCompare::ProfileIsPublic(SAchievements achievement, int col){
     int totalr=0;
     int totalnr=0;
     for(int i=2;i<ui->TableWidget->rowCount();i++){
@@ -744,12 +743,12 @@ bool FormCompare::ProfileIsPublic(SteamAPIAchievements achievement, int col){
     }
 }
 
-SteamAPIProfile FormCompare::FindProfile(int ii){
+SProfile FormCompare::FindProfile(int ii){
     for (int i=0;i<friends.size();i++)
         if(friends[i].first.GetSteamid()==ui->TableWidgetFriends->item(3,ii)->text())
             return friends[i].first;
+    return SProfile();
 }
-
 void FormCompare::on_ButtonUpdate_clicked(){
     achievements.Update();
     if(achievements.GetAchievementsCount()>1){
@@ -757,7 +756,7 @@ void FormCompare::on_ButtonUpdate_clicked(){
     }
     for (int ii=2;ii<ui->TableWidgetFriends->columnCount();ii++){
         if(ui->TableWidgetFriends->item(1,ii)->checkState()==Qt::Checked){
-            SteamAPIProfile sProfile=friends[ii-2].first;
+            SProfile sProfile=friends[ii-2].first;
             int col=0;
             for (int j=5;j<ui->TableWidget->columnCount();j++) {
                 if(ui->TableWidget->horizontalHeaderItem(j)->text()==sProfile.GetPersonaname()){
@@ -765,8 +764,8 @@ void FormCompare::on_ButtonUpdate_clicked(){
                     break;
                 }
             }
-            SteamAPIAchievementsPlayer Pla(key,QString::number(game.GetAppid()),sProfile.GetSteamid());
-            SteamAPIAchievements Ach;
+            SAchievementsPlayer Pla(key,QString::number(game.GetAppid()),sProfile.GetSteamid());
+            SAchievements Ach;
             Ach.Set(Pla);
             ProfileIsPublic(Ach,col);
         }

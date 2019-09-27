@@ -5,9 +5,9 @@
 #include <QLabel>
 #include <QPushButton>
 #include <formachievements.h>
-#include <class/steamapi/steamapigames.h>
+#include <class/steamapi/Sgames.h>
 #include <class/settings.h>
-#include <class/steamapi/steamapiachievements.h>
+#include <class/steamapi/Sachievements.h>
 
 namespace Ui {
 class FormGames;
@@ -18,7 +18,7 @@ class FormGames : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormGames(QString id, QString key, SteamAPIGames Games, QWidget *parent = nullptr);
+    explicit FormGames(QString id, QString key, SGames Games, QWidget *parent = nullptr);
     ~FormGames();
     FormAchievements *achievementsform;
 
@@ -47,7 +47,7 @@ private:
     QString id;
     QString key;
     int windowchildcount=0;
-    QVector<SteamAPIGame> games;
+    QVector<SGame> games;
     QStringList Words;
     Settings Setting;
     QString theme="white";

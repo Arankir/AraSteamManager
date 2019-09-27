@@ -28,21 +28,21 @@ SOURCES += \
     class/imagerequest.cpp \
     class/profile.cpp \
     class/settings.cpp \
-    class/steamapi/steamapiachievement.cpp \
-    class/steamapi/steamapiachievementglobal.cpp \
-    class/steamapi/steamapiachievementpercentage.cpp \
-    class/steamapi/steamapiachievementplayer.cpp \
-    class/steamapi/steamapiachievements.cpp \
-    class/steamapi/steamapiachievementsglobal.cpp \
-    class/steamapi/steamapiachievementspercentage.cpp \
-    class/steamapi/steamapiachievementsplayer.cpp \
-    class/steamapi/steamapibans.cpp \
-    class/steamapi/steamapifriend.cpp \
-    class/steamapi/steamapifriends.cpp \
-    class/steamapi/steamapigame.cpp \
-    class/steamapi/steamapigames.cpp \
-    class/steamapi/steamapilevels.cpp \
-    class/steamapi/steamapiprofile.cpp \
+    class/steamapi/Sachievement.cpp \
+    class/steamapi/Sachievementglobal.cpp \
+    class/steamapi/Sachievementpercentage.cpp \
+    class/steamapi/Sachievementplayer.cpp \
+    class/steamapi/Sachievements.cpp \
+    class/steamapi/Sachievementsglobal.cpp \
+    class/steamapi/Sachievementspercentage.cpp \
+    class/steamapi/Sachievementsplayer.cpp \
+    class/steamapi/Sbans.cpp \
+    class/steamapi/Sfriend.cpp \
+    class/steamapi/Sfriends.cpp \
+    class/steamapi/Sgame.cpp \
+    class/steamapi/Sgames.cpp \
+    class/steamapi/Slevels.cpp \
+    class/steamapi/Sprofile.cpp \
     formcompare.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -54,21 +54,21 @@ HEADERS += \
     class/imagerequest.h \
     class/profile.h \
     class/settings.h \
-    class/steamapi/steamapiachievement.h \
-    class/steamapi/steamapiachievementglobal.h \
-    class/steamapi/steamapiachievementpercentage.h \
-    class/steamapi/steamapiachievementplayer.h \
-    class/steamapi/steamapiachievements.h \
-    class/steamapi/steamapiachievementsglobal.h \
-    class/steamapi/steamapiachievementspercentage.h \
-    class/steamapi/steamapiachievementsplayer.h \
-    class/steamapi/steamapibans.h \
-    class/steamapi/steamapifriend.h \
-    class/steamapi/steamapifriends.h \
-    class/steamapi/steamapigame.h \
-    class/steamapi/steamapigames.h \
-    class/steamapi/steamapilevels.h \
-    class/steamapi/steamapiprofile.h \
+    class/steamapi/Sachievement.h \
+    class/steamapi/Sachievementglobal.h \
+    class/steamapi/Sachievementpercentage.h \
+    class/steamapi/Sachievementplayer.h \
+    class/steamapi/Sachievements.h \
+    class/steamapi/Sachievementsglobal.h \
+    class/steamapi/Sachievementspercentage.h \
+    class/steamapi/Sachievementsplayer.h \
+    class/steamapi/Sbans.h \
+    class/steamapi/Sfriend.h \
+    class/steamapi/Sfriends.h \
+    class/steamapi/Sgame.h \
+    class/steamapi/Sgames.h \
+    class/steamapi/Slevels.h \
+    class/steamapi/Sprofile.h \
     formcompare.h \
         mainwindow.h \
     formgames.h \

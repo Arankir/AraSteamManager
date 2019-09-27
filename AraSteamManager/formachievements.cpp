@@ -1,7 +1,7 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString keys, QString ids, SteamAPIGame games, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
+FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
     ui->setupUi(this);
     Words=Setting.GetWords("achievements");
     key=keys;
@@ -84,9 +84,8 @@ FormAchievements::FormAchievements(QString keys, QString ids, SteamAPIGame games
     QPixmap pixmap;
         pixmap.loadFromData(logoreply.readAll());
     ui->LabelGameLogo->setPixmap(pixmap);
-    if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists()){
+    if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists())
         QDir().mkdir("images/achievements/"+QString::number(game.GetAppid()));
-    }
     qDebug()<<achievements.GetStatusGlobal()<<achievements.GetStatusPlayer()<<achievements.GetStatusPercent();
     PullTableWidget();
     filter = new bool*[ui->TableWidgetAchievements->rowCount()];
@@ -145,12 +144,12 @@ void FormAchievements::PullTableWidget(){
             ui->TableWidgetAchievements->insertRow(row);
             ui->TableWidgetAchievements->setItem(row,0,new QTableWidgetItem(achievements.GetApiname(i)));
             QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
-            if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png")){
-                ImageRequest *image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg"),true);
+            if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1))){
+                ImageRequest *image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1),true);
                 connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
                 } else {
                 QPixmap pixmap;
-                pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1).remove(".jpg")+".png", "PNG");
+                pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1));
                 QLabel *label = new QLabel;
                 label->setPixmap(pixmap);
                 ui->TableWidgetAchievements->setCellWidget(row,1,label);
@@ -313,7 +312,7 @@ void FormAchievements::on_ComboBoxCategory_Change(int index){
                     if(ui->TableWidgetAchievements->item(i,0)->text()==selecteditem[j].toString()){
                         filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = true;
                         break;
-                        };
+                        }
                     }
             } else {
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
@@ -342,7 +341,7 @@ void FormAchievements::on_CheckBoxCategory_Change(int ind){
                     if(ui->TableWidgetAchievements->item(i,0)->text()==selecteditem[j].toString()){
                         filter[i][3+cb->objectName().mid(8,cb->objectName().length()).toInt()] = true;
                         break;
-                        };
+                        }
                     }
             } else {
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
@@ -861,7 +860,7 @@ void FormAchievements::AddValueCategory(QString Type, QFormLayout* layout){
 }
 void FormAchievements::UpValueCategory(QString Type, int i){
     if(i==0){
-        QMessageBox::warning(this,"","Ашипка");
+        QMessageBox::warning(this,"","Невозможно переместить значение");
     } else {
         for (int j=0;j<ui->TableWidgetAchievements->rowCount();j++) {
             Qt::CheckState pItem1 = ui->TableWidgetAchievements->item(j,7+i)->checkState();
@@ -878,7 +877,7 @@ void FormAchievements::UpValueCategory(QString Type, int i){
 }
 void FormAchievements::DownValueCategory(QString Type, int i, QFormLayout* layout){
     if(i==layout->rowCount()){
-        QMessageBox::warning(this,"","Ашипка");
+        QMessageBox::warning(this,"","Невозможно переместить значение");
     } else {
         for (int j=0;j<ui->TableWidgetAchievements->rowCount();j++) {
             Qt::CheckState pItem1 = ui->TableWidgetAchievements->item(j,7+i)->checkState();
