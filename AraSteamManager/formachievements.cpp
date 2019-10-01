@@ -105,6 +105,9 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
 }
 
 FormAchievements::~FormAchievements(){
+    delete filter;
+    delete newcategoryvalueslayout;
+    delete changecategoryvalueslayout;
     delete ui;
 }
 void FormAchievements::closeEvent(QCloseEvent *){

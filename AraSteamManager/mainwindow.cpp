@@ -92,6 +92,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
 MainWindow::~MainWindow(){
     delete ui;
+    if(gamesform)
+        delete gamesform;
+    if(friendsform)
+        delete friendsform;
 }
 void MainWindow::returnfromgames(){
     this->setVisible(true);

@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    class/categoryvalue.cpp \
     class/imagerequest.cpp \
     class/profile.cpp \
     class/settings.cpp \
@@ -48,9 +49,11 @@ SOURCES += \
         mainwindow.cpp \
     formgames.cpp \
     formachievements.cpp \
-    formfriends.cpp
+    formfriends.cpp \
+    subform/formaddcategory.cpp
 
 HEADERS += \
+    class/categoryvalue.h \
     class/imagerequest.h \
     class/profile.h \
     class/settings.h \
@@ -73,14 +76,16 @@ HEADERS += \
         mainwindow.h \
     formgames.h \
     formachievements.h \
-    formfriends.h
+    formfriends.h \
+    subform/formaddcategory.h
 
 FORMS += \
     formcompare.ui \
         mainwindow.ui \
     formgames.ui \
     formachievements.ui \
-    formfriends.ui
+    formfriends.ui \
+    subform/formaddcategory.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

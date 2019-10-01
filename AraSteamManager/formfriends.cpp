@@ -183,6 +183,8 @@ FormFriends::~FormFriends(){
     //for (int i=0;i<=numrequests;i++) {
     //    delete requests[numrequests];
     //}
+    //delete requests[1000];
+    delete filter;
     delete ui;
 }
 void FormFriends::closeEvent(QCloseEvent *){
