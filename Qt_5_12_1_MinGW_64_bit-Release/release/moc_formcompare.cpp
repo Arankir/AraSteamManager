@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCompare_t {
     QByteArrayData data[44];
-    char stringdata0[923];
+    char stringdata0[909];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -66,15 +66,15 @@ QT_MOC_LITERAL(31, 744, 21), // "on_ButtonFind_clicked"
 QT_MOC_LITERAL(32, 766, 27), // "on_LineEditFind_textChanged"
 QT_MOC_LITERAL(33, 794, 23), // "on_ButtonUpdate_clicked"
 QT_MOC_LITERAL(34, 818, 15), // "ProfileIsPublic"
-QT_MOC_LITERAL(35, 834, 20), // "SteamAPIAchievements"
-QT_MOC_LITERAL(36, 855, 11), // "achievement"
-QT_MOC_LITERAL(37, 867, 3), // "col"
-QT_MOC_LITERAL(38, 871, 11), // "FindProfile"
-QT_MOC_LITERAL(39, 883, 15), // "SteamAPIProfile"
-QT_MOC_LITERAL(40, 899, 2), // "ii"
-QT_MOC_LITERAL(41, 902, 14), // "OnResultAvatar"
-QT_MOC_LITERAL(42, 917, 1), // "i"
-QT_MOC_LITERAL(43, 919, 3) // "img"
+QT_MOC_LITERAL(35, 834, 13), // "SAchievements"
+QT_MOC_LITERAL(36, 848, 11), // "achievement"
+QT_MOC_LITERAL(37, 860, 3), // "col"
+QT_MOC_LITERAL(38, 864, 11), // "FindProfile"
+QT_MOC_LITERAL(39, 876, 8), // "SProfile"
+QT_MOC_LITERAL(40, 885, 2), // "ii"
+QT_MOC_LITERAL(41, 888, 14), // "OnResultAvatar"
+QT_MOC_LITERAL(42, 903, 1), // "i"
+QT_MOC_LITERAL(43, 905, 3) // "img"
 
     },
     "FormCompare\0return_to_achievements\0\0"
@@ -100,9 +100,8 @@ QT_MOC_LITERAL(43, 919, 3) // "img"
     "on_RadioButtonFriendsNotReached_clicked\0"
     "on_ButtonFind_clicked\0on_LineEditFind_textChanged\0"
     "on_ButtonUpdate_clicked\0ProfileIsPublic\0"
-    "SteamAPIAchievements\0achievement\0col\0"
-    "FindProfile\0SteamAPIProfile\0ii\0"
-    "OnResultAvatar\0i\0img"
+    "SAchievements\0achievement\0col\0FindProfile\0"
+    "SProfile\0ii\0OnResultAvatar\0i\0img"
 };
 #undef QT_MOC_LITERAL
 
@@ -220,10 +219,10 @@ void FormCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 23: _t->on_ButtonFind_clicked(); break;
         case 24: _t->on_LineEditFind_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 25: _t->on_ButtonUpdate_clicked(); break;
-        case 26: { bool _r = _t->ProfileIsPublic((*reinterpret_cast< SteamAPIAchievements(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+        case 26: { bool _r = _t->ProfileIsPublic((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 27: { SteamAPIProfile _r = _t->FindProfile((*reinterpret_cast< int(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< SteamAPIProfile*>(_a[0]) = std::move(_r); }  break;
+        case 27: { SProfile _r = _t->FindProfile((*reinterpret_cast< int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
         case 28: _t->OnResultAvatar((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< ImageRequest*(*)>(_a[3]))); break;
         default: ;
         }
