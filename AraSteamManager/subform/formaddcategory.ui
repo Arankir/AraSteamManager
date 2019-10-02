@@ -14,6 +14,24 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1" rowspan="3">
+    <widget class="QScrollArea" name="ScrollAreaValues">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="ScrollAreaLayout">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>438</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout"/>
+     </widget>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLineEdit" name="LineEditTitle">
      <property name="maximumSize">
@@ -24,24 +42,6 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1" rowspan="3">
-    <widget class="QScrollArea" name="ScrollAreaValues">
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>438</width>
-        <height>81</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2"/>
-     </widget>
-    </widget>
-   </item>
    <item row="0" column="2">
     <widget class="QPushButton" name="ButtonCancel">
      <property name="text">
@@ -50,23 +50,6 @@
      <property name="icon">
       <iconset resource="../images/resimg.qrc">
        <normaloff>:/program/program/cancel.png</normaloff>:/program/program/cancel.png</iconset>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QCheckBox" name="CheckBoxNoValue">
-     <property name="text">
-      <string>CheckBox</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QCheckBox" name="CheckBoxSelectAll">
-     <property name="text">
-      <string>SelectAll</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -84,6 +67,23 @@
      <property name="icon">
       <iconset resource="../images/resimg.qrc">
        <normaloff>:/program/program/create.png</normaloff>:/program/program/create.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="CheckBoxNoValue">
+     <property name="text">
+      <string>CheckBox</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QCheckBox" name="CheckBoxSelectAll">
+     <property name="text">
+      <string>SelectAll</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

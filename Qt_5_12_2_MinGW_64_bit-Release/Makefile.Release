@@ -4159,6 +4159,24 @@ release/moc_formaddcategory.cpp: ../AraSteamManager/subform/formaddcategory.h \
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/QFile \
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/QTextStream \
+		../AraSteamManager/class/categoryvalue.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QGridLayout \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qlayout.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QLineEdit \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextcursor.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextformat.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qpen.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QCheckBox \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qcheckbox.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QPushButton \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qpushbutton.h \
 		release/moc_predefs.h \
 		C:/Qt/5.12.2/mingw73_64/bin/moc.exe
 	C:\Qt\5.12.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Programm/Statistic/AraSteamManager/Qt_5_12_2_MinGW_64_bit-Release/release/moc_predefs.h -IC:/Qt/5.12.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Programm/Statistic/AraSteamManager/AraSteamManager -IC:/Qt/5.12.2/mingw73_64/include -IC:/Qt/5.12.2/mingw73_64/include/QtWidgets -IC:/Qt/5.12.2/mingw73_64/include/QtGui -IC:/Qt/5.12.2/mingw73_64/include/QtANGLE -IC:/Qt/5.12.2/mingw73_64/include/QtNetwork -IC:/Qt/5.12.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\subform\formaddcategory.h -o release\moc_formaddcategory.cpp
@@ -8227,6 +8245,24 @@ release/formaddcategory.o: ../AraSteamManager/subform/formaddcategory.cpp ../Ara
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/QFile \
 		C:/Qt/5.12.2/mingw73_64/include/QtCore/QTextStream \
+		../AraSteamManager/class/categoryvalue.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QGridLayout \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qlayout.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QLineEdit \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextcursor.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextformat.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qpen.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtGui/qtextoption.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QCheckBox \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qcheckbox.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/QPushButton \
+		C:/Qt/5.12.2/mingw73_64/include/QtWidgets/qpushbutton.h \
 		ui_formaddcategory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formaddcategory.o ..\AraSteamManager\subform\formaddcategory.cpp
 

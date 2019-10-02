@@ -19,6 +19,7 @@
 #include <class/settings.h>
 #include <class/steamapi/Sgame.h>
 #include <class/steamapi/Sachievements.h>
+#include <subform/formaddcategory.h>
 
 namespace Ui {
 class FormAchievements;

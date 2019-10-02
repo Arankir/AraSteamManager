@@ -33,13 +33,13 @@ CategoryValue::CategoryValue(int positions)
     //Select->setIcon();
     //UnSelect->setIcon();
     Delete->setIcon(QIcon(":/program/program/delete.png"));
-    CategoryValue::addWidget(ValueName,0,0,4,0);
-    CategoryValue::addWidget(Visible,0,5);
-    CategoryValue::addWidget(Up,0,6);
-    CategoryValue::addWidget(Down,0,7);
-    CategoryValue::addWidget(Select,0,8);
-    CategoryValue::addWidget(UnSelect,0,9);
-    CategoryValue::addWidget(Delete,0,10);
+    CategoryValue::addWidget(ValueName);
+    CategoryValue::addWidget(Visible);
+    CategoryValue::addWidget(Up);
+    CategoryValue::addWidget(Down);
+    CategoryValue::addWidget(Select);
+    CategoryValue::addWidget(UnSelect);
+    CategoryValue::addWidget(Delete);
     connect(ValueName,&QLineEdit::editingFinished,this,&CategoryValue::OnChangeValue);
     connect(Visible,&QCheckBox::clicked,this,&CategoryValue::OnChangeVisibility);
     connect(Up,&QPushButton::clicked,this,&CategoryValue::OnChangePosition);
@@ -52,16 +52,20 @@ CategoryValue::CategoryValue(int positions)
 void CategoryValue::OnChangePosition(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     if(btn->objectName()=="Up")
-        emit positionchange(position-1);
+        emit positionchange(position, position-1);
     else if(btn->objectName()=="Down")
-        emit positionchange(position+1);
+        emit positionchange(position, position+1);
     delete btn;
 }
 
 void CategoryValue::OnChangeSelect(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    emit selectchange(btn->objectName()=="Select"?true:false);
+    emit selectchange(position, btn->objectName()=="Select"?true:false);
     delete btn;
+}
+
+void CategoryValue::SetSelect(bool select){
+    Select->setChecked(select);
 }
 
 CategoryValue::~CategoryValue(){
@@ -79,4 +83,30 @@ CategoryValue::~CategoryValue(){
     delete Select;
     delete UnSelect;
     delete Delete;
+}
+
+CategoryValue::CategoryValue(const CategoryValue & a){
+    ValueName=a.ValueName;
+    Visible=a.Visible;
+    Up=a.Up;
+    Down=a.Down;
+    Select=a.Select;
+    UnSelect=a.UnSelect;
+    Delete=a.Delete;
+    position=a.position;
+    Words=a.Words;
+    theme=a.theme;
+}
+CategoryValue & CategoryValue::operator=(const CategoryValue & a){
+    ValueName=a.ValueName;
+    Visible=a.Visible;
+    Up=a.Up;
+    Down=a.Down;
+    Select=a.Select;
+    UnSelect=a.UnSelect;
+    Delete=a.Delete;
+    position=a.position;
+    Words=a.Words;
+    theme=a.theme;
+    return *this;
 }

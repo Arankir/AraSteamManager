@@ -42,8 +42,8 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
         break;
         }
     }
-    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.jpg"));
-    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.jpg"));
+    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.jpg) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     SProfile Profiles = Friends.GetProfiles();
     QVector<SProfile> Profiless;

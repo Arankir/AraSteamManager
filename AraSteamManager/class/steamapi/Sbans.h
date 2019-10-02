@@ -25,7 +25,7 @@ public:
     void Set(QJsonDocument DocBans);
     QString GetSteamid(int index=0) {return bans[index].toObject().value("steamid").toString();}
     bool GetCommunityBanned(int index=0) {return bans[index].toObject().value("CommunityBanned").toBool();}
-    bool GetVACBanned(int index=0) {return bans[index].toObject().value("VACBanned").toBool();}
+    bool GetVACBanned(int index=0) {qDebug()<<bans; return bans[index].toObject().value("VACBanned").toBool();}
     int GetNumberOfVACBans(int index=0) {return bans[index].toObject().value("NumberOfVACBans").toInt();}
     int GetDaysSinceLastBan(int index=0) {return bans[index].toObject().value("DaysSinceLastBan").toInt();}
     int GetNumberOfGameBans(int index=0) {return bans[index].toObject().value("NumberOfGameBans").toInt();}

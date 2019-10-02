@@ -92,6 +92,7 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
     ShowCategories();
     ui->GroupBoxAddCategory->setVisible(false);
     ui->GroupBoxChangeCategory->setVisible(false);
+    ui->GroupBoxCategories->setVisible(false);
     QWidget *widget1 = new QWidget;
     newcategoryvalueslayout = new QFormLayout;
     widget1->setLayout(newcategoryvalueslayout);
@@ -106,8 +107,8 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
 
 FormAchievements::~FormAchievements(){
     delete filter;
-    delete newcategoryvalueslayout;
-    delete changecategoryvalueslayout;
+    //delete newcategoryvalueslayout;
+    //delete changecategoryvalueslayout;
     delete ui;
 }
 void FormAchievements::closeEvent(QCloseEvent *){
@@ -358,7 +359,12 @@ void FormAchievements::on_CheckBoxCategory_Change(int ind){
 void FormAchievements::on_ButtonAddCategory_clicked(){
     ui->ButtonAddCategory->setEnabled(false);
     ui->ButtonChangeCategory->setEnabled(false);
-    ui->GroupBoxAddCategory->setVisible(true);
+    //ui->GroupBoxAddCategory->setVisible(true);
+    FormAddCategory *AddCategory = new FormAddCategory(QString::number(game.GetAppid()));
+    QGridLayout *lay = new QGridLayout;
+    lay->addWidget(AddCategory);
+    ui->GroupBoxCategories->setLayout(lay);
+    ui->GroupBoxCategories->setVisible(true);
 }
 void FormAchievements::on_ButtonChangeCategory_clicked(){
     ui->ButtonAddCategory->setEnabled(false);

@@ -91,8 +91,8 @@ FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) 
 }
 
 FormGames::~FormGames(){
-    if(achievementsform)
-        delete achievementsform;
+    //if(achievementsform)
+    //    delete achievementsform;
     //delete all ukazateli
     //delete requests[1000];
     delete ui;

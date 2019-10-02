@@ -347,6 +347,13 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="0" colspan="3">
+    <widget class="QGroupBox" name="GroupBoxCategories">
+     <property name="title">
+      <string>Categories</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
