@@ -35,26 +35,6 @@
       <string>Filter</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="3">
-       <widget class="QRadioButton" name="RadioButtonAll">
-        <property name="text">
-         <string>All</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="3">
-       <widget class="QPushButton" name="ButtonFindAchievement">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Find</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="ButtonAddCategory">
         <property name="text">
@@ -62,52 +42,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="ButtonChangeCategory">
+      <item row="2" column="2">
+       <widget class="QLabel" name="LabelTotalPersent">
         <property name="text">
-         <string>Change category</string>
+         <string>TotalPersent</string>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QRadioButton" name="RadioButtonReached">
-        <property name="text">
-         <string>Reached</string>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="1" rowspan="6">
-       <widget class="QScrollArea" name="ScrollAreaCheckCategories">
-        <property name="widgetResizable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents_4">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>294</width>
-           <height>98</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item row="0" column="0" rowspan="6">
-       <widget class="QScrollArea" name="ScrollAreaCategories">
-        <property name="widgetResizable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="scrollAreaWidgetContents">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>295</width>
-           <height>98</height>
-          </rect>
-         </property>
-        </widget>
        </widget>
       </item>
       <item row="6" column="0" colspan="4">
@@ -169,6 +111,98 @@
           </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="ButtonChangeCategory">
+        <property name="text">
+         <string>Change category</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QRadioButton" name="RadioButtonReached">
+        <property name="text">
+         <string>Reached</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0" colspan="3">
+       <widget class="QLineEdit" name="LineEditNameAchievements"/>
+      </item>
+      <item row="0" column="3">
+       <widget class="QRadioButton" name="RadioButtonAll">
+        <property name="text">
+         <string>All</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="6">
+       <widget class="QScrollArea" name="ScrollAreaCategories">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>295</width>
+           <height>98</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QRadioButton" name="RadioButtonNotReached">
+        <property name="text">
+         <string>Not reached</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QPushButton" name="ButtonUpdate">
+        <property name="text">
+         <string>Update</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QCheckBox" name="CheckBoxFavorites">
+        <property name="text">
+         <string>Only favorites</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" rowspan="6">
+       <widget class="QScrollArea" name="ScrollAreaCheckCategories">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>294</width>
+           <height>98</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="9" column="3">
+       <widget class="QPushButton" name="ButtonFindAchievement">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Find</string>
+        </property>
        </widget>
       </item>
       <item row="7" column="0" colspan="4">
@@ -242,37 +276,10 @@
         </layout>
        </widget>
       </item>
-      <item row="8" column="0" colspan="3">
-       <widget class="QLineEdit" name="LineEditNameAchievements"/>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="LabelTotalPersent">
-        <property name="text">
-         <string>TotalPersent</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3">
-       <widget class="QRadioButton" name="RadioButtonNotReached">
-        <property name="text">
-         <string>Not reached</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QPushButton" name="ButtonUpdate">
-        <property name="text">
-         <string>Update</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QCheckBox" name="CheckBoxFavorites">
-        <property name="text">
-         <string>Only favorites</string>
+      <item row="8" column="0" colspan="4">
+       <widget class="QGroupBox" name="GroupBoxCategories">
+        <property name="title">
+         <string>Categories</string>
         </property>
        </widget>
       </item>
@@ -344,13 +351,6 @@
     <widget class="QPushButton" name="ButtonCompare">
      <property name="text">
       <string>Compare with friends</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="3">
-    <widget class="QGroupBox" name="GroupBoxCategories">
-     <property name="title">
-      <string>Categories</string>
      </property>
     </widget>
    </item>

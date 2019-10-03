@@ -1,7 +1,6 @@
 #include "categoryvalue.h"
 
-CategoryValue::CategoryValue(int positions)
-{
+CategoryValue::CategoryValue(int positions){
     position=positions;
     //Words=Setting.GetWords("categoryvalue");
     switch(Setting.GetTheme()){
@@ -14,6 +13,8 @@ CategoryValue::CategoryValue(int positions)
         break;
         }
     }
+    setContentsMargins(9,1,9,1);
+    Number = new QLabel(QString::number(position+1));
     ValueName = new QLineEdit;
     Visible = new QCheckBox;
     Up = new QPushButton;
@@ -30,9 +31,10 @@ CategoryValue::CategoryValue(int positions)
     Delete->setObjectName("Delete");
     Up->setIcon(QIcon(":/"+theme+"/program/"+theme+"/up.png"));
     Down->setIcon(QIcon(":/"+theme+"/program/"+theme+"/down.png"));
-    //Select->setIcon();
-    //UnSelect->setIcon();
+    Select->setIcon(QIcon(":/"+theme+"/program/"+theme+"/check_visible.png"));
+    UnSelect->setIcon(QIcon(":/"+theme+"/program/"+theme+"/uncheck_visible.png"));
     Delete->setIcon(QIcon(":/program/program/delete.png"));
+    CategoryValue::addWidget(Number);
     CategoryValue::addWidget(ValueName);
     CategoryValue::addWidget(Visible);
     CategoryValue::addWidget(Up);
@@ -47,6 +49,7 @@ CategoryValue::CategoryValue(int positions)
     connect(Select,&QPushButton::clicked,this,&CategoryValue::OnChangeSelect);
     connect(UnSelect,&QPushButton::clicked,this,&CategoryValue::OnChangeSelect);
     connect(Delete,&QPushButton::clicked,this,&CategoryValue::OnDeleting);
+    Visible->setChecked(true);
 }
 
 void CategoryValue::OnChangePosition(){
@@ -55,13 +58,11 @@ void CategoryValue::OnChangePosition(){
         emit positionchange(position, position-1);
     else if(btn->objectName()=="Down")
         emit positionchange(position, position+1);
-    delete btn;
 }
 
 void CategoryValue::OnChangeSelect(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     emit selectchange(position, btn->objectName()=="Select"?true:false);
-    delete btn;
 }
 
 void CategoryValue::SetSelect(bool select){
@@ -76,6 +77,7 @@ CategoryValue::~CategoryValue(){
     disconnect(Select,&QPushButton::clicked,this,&CategoryValue::OnChangeSelect);
     disconnect(UnSelect,&QPushButton::clicked,this,&CategoryValue::OnChangeSelect);
     disconnect(Delete,&QPushButton::clicked,this,&CategoryValue::OnDeleting);
+    delete Number;
     delete ValueName;
     delete Visible;
     delete Up;

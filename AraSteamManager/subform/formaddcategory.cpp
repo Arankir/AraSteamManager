@@ -11,23 +11,29 @@ FormAddCategory::FormAddCategory(QString games, QWidget *parent) :    QWidget(pa
     ui->ButtonCancel->setText(Words[3]);
     ui->CheckBoxSelectAll->setText(Words[4]);
     ui->ButtonAccept->setText(Words[5]);
+    QWidget *widget1 = new QWidget;
+    lay = new QFormLayout;
+    lay->setContentsMargins(9,1,9,1);
+    widget1->setLayout(lay);
+    ui->ScrollAreaValues->setWidget(widget1);
 }
 
 FormAddCategory::~FormAddCategory(){
+    delete lay;
     delete ui;
 }
 
 void FormAddCategory::on_ButtonAddValue_clicked(){
-    CategoryValue val(count++);
+    CategoryValue *val = new CategoryValue(count++);
     Values.push_back(val);
     QWidget *wid = new QWidget;
-    wid->setLayout(&val);
-    qobject_cast<QFormLayout*>(ui->ScrollAreaLayout)->addRow(wid);
-    connect(&val,&CategoryValue::positionchange,this,&FormAddCategory::ChangePosition);
-    connect(&val,&CategoryValue::valuechange,this,&FormAddCategory::ChangeValue);
-    connect(&val,&CategoryValue::visiblechange,this,&FormAddCategory::ChangeVisibility);
-    connect(&val,&CategoryValue::selectchange,this,&FormAddCategory::ChangeSelect);
-    connect(&val,&CategoryValue::deleting,this,&FormAddCategory::DeleteValue);
+    wid->setLayout(val);
+    lay->addRow(wid);
+    connect(val,&CategoryValue::positionchange,this,&FormAddCategory::ChangePosition);
+    connect(val,&CategoryValue::valuechange,this,&FormAddCategory::ChangeValue);
+    connect(val,&CategoryValue::visiblechange,this,&FormAddCategory::ChangeVisibility);
+    connect(val,&CategoryValue::selectchange,this,&FormAddCategory::ChangeSelect);
+    connect(val,&CategoryValue::deleting,this,&FormAddCategory::DeleteValue);
     emit addvalue(count);
 }
 void FormAddCategory::on_ButtonAccept_clicked(){
@@ -54,7 +60,7 @@ void FormAddCategory::on_ButtonCancel_clicked(){
 }
 void FormAddCategory::on_CheckBoxSelectAll_stateChanged(int arg1){
     for (int i=0;i<count;i++) {
-        Values[i].SetSelect(arg1==2?true:false);
+        Values[i]->SetSelect(arg1==2?true:false);
     }
 }
 void FormAddCategory::on_CheckBoxNoValue_stateChanged(int arg1){
@@ -79,11 +85,24 @@ QString FormAddCategory::GetTitle(){
 }
 
 void FormAddCategory::ChangePosition(int pos, int posnew){
-    CategoryValue temp= Values[pos];
-    Values[pos]=Values[posnew];
-    Values[posnew]=temp;
-    emit positionchange(pos,posnew);
-
+    if(posnew>=0&&posnew<=count){
+        CategoryValue *temp= Values[pos];
+        Values[pos]=Values[posnew];
+        Values[posnew]=temp;
+        delete temp;
+        qDebug()<<lay->rowCount();
+        while(lay->rowCount()>0)
+            lay->removeRow(0);
+        qDebug()<<lay->rowCount();
+        for (int i=0;i<count;i++) {
+            QWidget *wid = new QWidget;
+            wid->setLayout(Values[i]);
+            lay->addRow(wid);
+            qDebug()<<i;
+        }
+        qDebug()<<lay->rowCount();
+        emit positionchange(pos,posnew);
+    }
 }
 void FormAddCategory::ChangeValue(int pos, QString value){
     emit valuechange(pos,value);
@@ -92,7 +111,7 @@ void FormAddCategory::ChangeValue(int pos, QString value){
 void FormAddCategory::ChangeVisibility(int pos, bool visible){
     bool accept=true;
     for (int i=0;i<count;i++) {
-        if(!Values[i].GetVisible())
+        if(!Values[i]->GetVisible())
             accept=false;
     }
     if(accept)
@@ -109,7 +128,7 @@ void FormAddCategory::ChangeSelect(int pos, bool select){
 void FormAddCategory::DeleteValue(int pos){
     Values.takeAt(pos);
     for (int i=pos;i<count;i++) {
-        Values[i].SetPosition(i);
+        Values[i]->SetPosition(i);
     }
     count--;
     emit deleting(pos);

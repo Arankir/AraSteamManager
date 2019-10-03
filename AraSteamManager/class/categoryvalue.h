@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QCheckBox>
 #include <QPushButton>
+#include <QLabel>
 #include <class/settings.h>
 
 class CategoryValue : public QHBoxLayout
@@ -18,7 +19,7 @@ public:
     QString GetValueName() {return ValueName->text();}
     int GetPosition() {return position;}
     bool GetVisible() {return Visible->isChecked();}
-    void SetPosition(int pos) {position=pos;}
+    void SetPosition(int pos) {position=pos; Number->setText(QString::number(position+1));}
     void SetSelect(bool select);
     ~CategoryValue();
     CategoryValue(const CategoryValue &);
@@ -39,6 +40,7 @@ private slots:
     void OnDeleting() {emit deleting(position);}
 
 private:
+    QLabel *Number;
     QLineEdit *ValueName;
     QCheckBox *Visible;
     QPushButton *Up;

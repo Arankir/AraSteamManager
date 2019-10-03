@@ -6,6 +6,8 @@
 #include <class/categoryvalue.h>
 #include <QDir>
 #include <QMessageBox>
+#include <QDebug>
+#include <QFormLayout>
 
 namespace Ui {
 class FormAddCategory;
@@ -51,8 +53,9 @@ private:
     QStringList Words;
     Settings Setting;
     QString theme="white";
-    QVector<CategoryValue> Values;
+    QVector<CategoryValue*> Values;
     int count=0;
+    QFormLayout *lay;
 };
 
 #endif // FORMADDCATEGORY_H

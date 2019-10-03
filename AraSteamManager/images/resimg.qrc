@@ -21,6 +21,8 @@
         <file>program/black/statistic.png</file>
         <file>program/black/up.png</file>
         <file>program/black/update.png</file>
+        <file>program/black/check_visible.png</file>
+        <file>program/black/uncheck_visible.png</file>
     </qresource>
     <qresource prefix="/white">
         <file>program/white/all.png</file>
@@ -44,6 +46,8 @@
         <file>program/white/statistic.png</file>
         <file>program/white/up.png</file>
         <file>program/white/update.png</file>
+        <file>program/white/check_visible.png</file>
+        <file>program/white/uncheck_visible.png</file>
     </qresource>
     <qresource prefix="/program">
         <file>program/apply.png</file>
