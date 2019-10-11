@@ -102,6 +102,10 @@ private:
     SAchievements achievements;
     Settings Setting;
     QString theme="white";
+
+    QVector<ImageRequest*> request;
+    int numrequests=0;
+    int numnow=0;
 };
 
 #endif // FORMCOMPARE_H

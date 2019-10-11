@@ -52,7 +52,7 @@ private:
     Settings Setting;
     QString theme="white";
 
-    ImageRequest *requests[1000];
+    QVector<ImageRequest*> request;
     int numrequests=0;
     int numnow=0;
 };

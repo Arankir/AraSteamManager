@@ -389,7 +389,7 @@ void FormAchievements::on_ButtonAcceptNewCategory_clicked(){
         if(!QFile::exists("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->LineEditTitleNewCategory->text()+".json")){
             if(Category.open(QIODevice::WriteOnly)){
                 QJsonDocument category;
-                QJsonArray groups;
+                //QJsonArray groups;
                 QJsonObject group;
                 group["name"]=ui->LineEditTitleNewCategory->text();
                 QJsonArray values;

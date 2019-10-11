@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->ButtonStatistics->setVisible(false);
     ui->ButtonGoToMyProfile->setVisible(false);
     ui->ScrollAreaForm->setVisible(false);
+    ui->ScrollAreaProfileInfo->setVisible(false);
     ui->ButtonFindProfile->setText(" "+Words[0]);
     ui->LineEditIdProfile->setPlaceholderText(Words[1]);
     ui->ButtonSettings->setText(Words[2]);
@@ -219,6 +220,7 @@ void MainWindow::GoToProfile(QString id, QString type){
                 QPixmap img;
                 img.loadFromData(imagereply.readAll());
                 ui->LabelAvatar->setPixmap(img);
+                qDebug()<<img;
                 ui->LabelNick->setText(Profile.GetPersonaname());
                 //img.save("images/profiles/main.png", "PNG");
         //ui->LabelAvatar->setTextFormat(Qt::RichText);
@@ -230,7 +232,7 @@ void MainWindow::GoToProfile(QString id, QString type){
         ui->ButtonSetProfile->setVisible(true);
         ui->ButtonStatistics->setVisible(true);
         ui->ButtonGoToMyProfile->setVisible(true);
-
+        ui->ScrollAreaProfileInfo->setVisible(true);
         } else {
             QMessageBox::warning(this,Words[30],Words[32]);
         }

@@ -2,7 +2,8 @@
 
 ImageRequest::ImageRequest(QString url, int row, QString save, bool autosave, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
-    QByteArray answer="";
+    connect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
+    answer="";
     Url=url;
     i=row;
     Save=save;
@@ -30,7 +31,6 @@ ImageRequest::ImageRequest(){
 
 void ImageRequest::Get(QString str){
     QUrl url(str);
-    connect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
     QNetworkRequest request;
     request.setUrl(url);
     manager->get(request);
@@ -40,12 +40,10 @@ void ImageRequest::LoadImage(QString url, int column, QString save, bool autosav
     i=column;
     Save=save;
     Autosave=autosave;
-    connect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
     manager->get(QNetworkRequest(QUrl(url)));
 }
 
 void ImageRequest::OnResultGet(QNetworkReply *reply){
-    disconnect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
     if(!reply->error()){
         answer=reply->readAll();
         if(Autosave){
@@ -73,5 +71,6 @@ void ImageRequest::OnResultGet(QNetworkReply *reply){
 }
 
 ImageRequest::~ImageRequest(){
+    disconnect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
     delete manager;
 }

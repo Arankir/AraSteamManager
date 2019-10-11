@@ -45,11 +45,11 @@ FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) 
         int row = ui->TableWidgetGames->rowCount();
         ui->TableWidgetGames->insertRow(row);
         if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".jpg")){
-            if(numrequests<1000){
+            if(numrequests<500){
                 if(games[i].GetImg_icon_url()!=""){
                     ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,"images/icon_games/"+games[i].GetImg_icon_url()+".jpg",true);
                     connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
-                    requests[numrequests] = image;
+                    request.append(image);
                     numrequests++;
                     }
                 numnow++;
@@ -91,6 +91,11 @@ FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) 
 }
 
 FormGames::~FormGames(){
+    qDebug()<<numrequests;
+    if(numrequests)
+        for (int i=0;i<=numrequests;i++) {
+            delete request[numrequests];
+        }
     delete ui;
 }
 void FormGames::closeEvent(QCloseEvent *){
@@ -150,7 +155,7 @@ void FormGames::OnResultImage(ImageRequest *imgr){
     label->setPixmap(pixmap);
     ui->TableWidgetGames->setCellWidget(imgr->GetRow(),0,label);
     //imgr->deleteLater();
-    if(numnow<games.size()){
+    if(numrequests==500&&numnow<games.size()){
         while (QFile::exists("images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg")||games[numnow].GetImg_icon_url()=="") {
             numnow++;
         }

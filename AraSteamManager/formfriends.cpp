@@ -63,10 +63,11 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
         ui->TableWidgetFriends->insertRow(i);
         qDebug()<<i;
         if(!QFile::exists("images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg")){
-            if(numrequests<1000){
+            if(numrequests<500){
                 ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg",true);
                 connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
-                requests[numrequests++] = image;
+                request.append(image);
+                numrequests++;
                 numnow++;
             }
             } else {
@@ -180,9 +181,11 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
 }
 
 FormFriends::~FormFriends(){
-    //for (int i=0;i<=numrequests;i++) {
-    //    delete requests[numrequests];
-    //}
+    qDebug()<<numrequests;
+    if(numrequests)
+        for (int i=0;i<=numrequests;i++) {
+            delete request[numrequests];
+        }
     delete ui;
 }
 void FormFriends::closeEvent(QCloseEvent *){
@@ -201,7 +204,7 @@ void FormFriends::OnResultImage(ImageRequest *imgr){
     label->setPixmap(pixmap);
     ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
     //ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
-    if(numrequests==1000&&numnow<Friends.GetCount()){
+    if(numrequests==500&&numnow<Friends.GetCount()){
         imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20)+".jpg",true);
         numnow++;
     } else
