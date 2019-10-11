@@ -116,10 +116,6 @@ private slots:
     void DeleteValuesCategory(QString Type, int i, QFormLayout* layout);
     void SelectValueCategory(int j,Qt::CheckState);
 
-    void on_LineEditTitleNewCategory_textChanged(const QString &arg1);
-
-    void on_LineEditTitleNewCategory_textEdited(const QString &arg1);
-
 private:
     Ui::FormAchievements *ui;
     QString key;

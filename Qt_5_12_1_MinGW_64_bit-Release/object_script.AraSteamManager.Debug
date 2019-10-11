@@ -1,3 +1,4 @@
+debug/categoryvalue.o
 debug/imagerequest.o
 debug/profile.o
 debug/settings.o
@@ -22,8 +23,10 @@ debug/mainwindow.o
 debug/formgames.o
 debug/formachievements.o
 debug/formfriends.o
+debug/formaddcategory.o
 debug/qrc_resimg.o
 debug/qrc_restext.o
+debug/moc_categoryvalue.o
 debug/moc_imagerequest.o
 debug/moc_profile.o
 debug/moc_settings.o
@@ -47,3 +50,4 @@ debug/moc_mainwindow.o
 debug/moc_formgames.o
 debug/moc_formachievements.o
 debug/moc_formfriends.o
+debug/moc_formaddcategory.o
