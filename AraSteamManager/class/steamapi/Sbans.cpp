@@ -35,8 +35,8 @@ void SBans::Set(QString key, QString id, bool parallel){
     }
 }
 void SBans::Set(QJsonDocument DocBans){
-    if(DocBans.object().value("response").toObject().value("players").toArray().size()>0){
-        bans=DocBans.object().value("response").toObject().value("players").toArray();
+    if(DocBans.object().value("players").toArray().size()>0){
+        bans=DocBans.object().value("players").toArray();
         status="success";
     }
     else {

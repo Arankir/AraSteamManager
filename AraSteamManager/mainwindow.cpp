@@ -21,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->ButtonStatistics->setVisible(false);
     ui->ButtonGoToMyProfile->setVisible(false);
     ui->ScrollAreaForm->setVisible(false);
+    ui->LabelNick->setVisible(false);
+    ui->line->setVisible(false);
+    ui->LabelProfileVisibility->setVisible(false);
     ui->ScrollAreaProfileInfo->setVisible(false);
     ui->ButtonFindProfile->setText(" "+Words[0]);
     ui->LineEditIdProfile->setPlaceholderText(Words[1]);
@@ -87,12 +90,16 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
-    if( event->key() == 16777220)
+    if(event->key() == 16777220)
         on_ButtonFindProfile_clicked();
 }
 
 MainWindow::~MainWindow(){
     delete ui;
+    if(gamesform)
+        delete gamesform;
+    if(friendsform)
+        delete friendsform;
 }
 void MainWindow::returnfromgames(){
     this->setVisible(true);
@@ -232,6 +239,9 @@ void MainWindow::GoToProfile(QString id, QString type){
         ui->ButtonSetProfile->setVisible(true);
         ui->ButtonStatistics->setVisible(true);
         ui->ButtonGoToMyProfile->setVisible(true);
+        ui->LabelNick->setVisible(true);
+        ui->line->setVisible(true);
+        ui->LabelProfileVisibility->setVisible(true);
         ui->ScrollAreaProfileInfo->setVisible(true);
         } else {
             QMessageBox::warning(this,Words[30],Words[32]);

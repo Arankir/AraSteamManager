@@ -75,6 +75,7 @@ public:
     QLabel *LabelGameLogo;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *ButtonCompare;
+    QGroupBox *GroupBoxCategories;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -301,6 +302,11 @@ public:
 
         gridLayout_4->addWidget(ButtonCompare, 1, 2, 1, 1);
 
+        GroupBoxCategories = new QGroupBox(FormAchievements);
+        GroupBoxCategories->setObjectName(QString::fromUtf8("GroupBoxCategories"));
+
+        gridLayout_4->addWidget(GroupBoxCategories, 4, 0, 1, 3);
+
 
         retranslateUi(FormAchievements);
 
@@ -340,6 +346,7 @@ public:
         groupBox->setTitle(QString());
         LabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
         ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
+        GroupBoxCategories->setTitle(QApplication::translate("FormAchievements", "Categories", nullptr));
     } // retranslateUi
 
 };

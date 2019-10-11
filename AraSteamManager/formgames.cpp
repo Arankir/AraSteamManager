@@ -96,6 +96,9 @@ FormGames::~FormGames(){
         for (int i=0;i<=numrequests;i++) {
             delete request[numrequests];
         }
+    //if(achievementsform)
+    //    delete achievementsform;
+    //delete all ukazateli
     delete ui;
 }
 void FormGames::closeEvent(QCloseEvent *){

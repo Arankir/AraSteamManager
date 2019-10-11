@@ -19,6 +19,7 @@
 #include <class/settings.h>
 #include <class/steamapi/Sgame.h>
 #include <class/steamapi/Sachievements.h>
+#include <subform/formaddcategory.h>
 
 namespace Ui {
 class FormAchievements;
@@ -100,11 +101,24 @@ private slots:
 
     void on_ButtonCompare_clicked();
 
+    void CategoryAddValue(int pos);
+    void CategoryValueChange(int pos, QString str);
+    void CategoryVisibleChange(int pos, bool visible);
+    void CategoryPositionChange(int pos, int posnew);
+    void CategorySelectChange(int pos, bool select);
+    void CategoryDeleteValue(int pos);
+    void CategoryAccept();
+    void CategoryCancel();
+    void CategoryNoValue(bool novalue);
     void AddValueCategory(QString Type, QFormLayout* layout);
     void UpValueCategory(QString Type, int i);
     void DownValueCategory(QString Type, int i, QFormLayout* layout);
     void DeleteValuesCategory(QString Type, int i, QFormLayout* layout);
     void SelectValueCategory(int j,Qt::CheckState);
+
+    void on_LineEditTitleNewCategory_textChanged(const QString &arg1);
+
+    void on_LineEditTitleNewCategory_textEdited(const QString &arg1);
 
 private:
     Ui::FormAchievements *ui;

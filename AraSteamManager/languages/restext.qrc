@@ -5,6 +5,7 @@
         <file>ENG/friends.txt</file>
         <file>ENG/games.txt</file>
         <file>ENG/mainwindow.txt</file>
+        <file>ENG/addcategory.txt</file>
     </qresource>
     <qresource prefix="/RU">
         <file>RU/achievements.txt</file>
@@ -12,5 +13,6 @@
         <file>RU/friends.txt</file>
         <file>RU/games.txt</file>
         <file>RU/mainwindow.txt</file>
+        <file>RU/addcategory.txt</file>
     </qresource>
 </RCC>

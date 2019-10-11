@@ -1,0 +1,6 @@
+Category title
+No values
+Add value
+Cancel
+Visible all
+Accept

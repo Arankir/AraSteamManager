@@ -347,6 +347,9 @@ void FormCompare::UpdateHiddenRows(){
 }
 
 FormCompare::~FormCompare(){
+    delete filter;
+    //delete newcategoryvalueslayout;
+    //delete changecategoryvalueslayout;
     delete ui;
 }
 
