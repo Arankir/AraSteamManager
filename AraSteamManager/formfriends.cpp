@@ -218,7 +218,7 @@ void FormFriends::GoToProfileClicked(){
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         windowchildcount++;
         QPushButton *btn = qobject_cast<QPushButton*>(sender());
-        emit go_to_profile(btn->objectName().mid(3,btn->objectName().length()),"url");
+        emit go_to_profile(btn->objectName().mid(3,btn->objectName().length()),"url",true);
         on_ButtonReturn_clicked();
     }
 }

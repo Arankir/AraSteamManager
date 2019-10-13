@@ -36,7 +36,7 @@ private slots:
 
     void keyPressEvent(QKeyEvent *event);
 
-    void GoToProfile(QString id, QString type);
+    void GoToProfile(QString id, QString type, bool UpdateBuffer);
     void on_ButtonFindProfile_clicked();
     void on_ButtonGames_clicked();
     void on_ButtonFriends_clicked();
@@ -44,6 +44,10 @@ private slots:
     void on_ButtonExit_clicked();
 
     void on_ButtonGoToMyProfile_clicked();
+
+    void on_ButtonBack_clicked();
+
+    void on_ButtonNext_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -55,6 +59,9 @@ private:
     SFriends Friends;
     Settings Setting;
     QString theme="white";
+
+    QVector<QString> BufferProfiles;
+    int CurrentBufferProfile=0;
 };
 
 #endif // MAINWINDOW_H

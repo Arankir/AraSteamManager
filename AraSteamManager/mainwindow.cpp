@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->ButtonGoToMyProfile->setText(Words[9]);
     if(Setting.GetStatus()=="success"){
         if(Setting.GetMyProfile()!="none")
-            GoToProfile(Setting.GetMyProfile(),"url");
+            GoToProfile(Setting.GetMyProfile(),"url",true);
     }
     //        ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //        ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -96,10 +96,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
 MainWindow::~MainWindow(){
     delete ui;
-    if(gamesform)
-        delete gamesform;
-    if(friendsform)
-        delete friendsform;
+    //if(gamesform)
+    //    delete gamesform;
+    //if(friendsform)
+    //    delete friendsform;
 }
 void MainWindow::returnfromgames(){
     this->setVisible(true);
@@ -110,7 +110,7 @@ void MainWindow::returnfromgames(){
 void MainWindow::returnfromfriends(){
     this->setVisible(true);
     disconnect(friendsform,SIGNAL(return_to_profile()),this,SLOT(returnfromfriends()));
-    disconnect(friendsform,SIGNAL(go_to_profile(QString,QString)),this,SLOT(GoToProfile(QString,QString)));
+    disconnect(friendsform,SIGNAL(go_to_profile(QString,QString,bool)),this,SLOT(GoToProfile(QString,QString,bool)));
     windowchildcount--;
     delete friendsform;
 }
@@ -119,17 +119,26 @@ void MainWindow::on_ButtonFindProfile_clicked(){
     QString id=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove("/").remove('\r');
     if(ui->LineEditIdProfile->text().indexOf("id",0)>-1){
         id=ui->LineEditIdProfile->text().remove("id");
-        GoToProfile(id,"vanity");
+        GoToProfile(id,"vanity",true);
         } else {
             if(ui->LineEditIdProfile->text().indexOf("profiles",0)>-1)
                 id=ui->LineEditIdProfile->text().remove("profiles");
-            GoToProfile(id,"url");
+            GoToProfile(id,"url",true);
             }
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
-void MainWindow::GoToProfile(QString id, QString type){
+void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
     SProfile Profiles(key,id,false,type);
     if(Profiles.GetStatus()=="success"){
+        qDebug()<<BufferProfiles.size()<<BufferProfiles<<CurrentBufferProfile;
+        if(UpdateBuffer){
+            if(CurrentBufferProfile!=BufferProfiles.size())
+                while(BufferProfiles.size()!=CurrentBufferProfile)
+                    BufferProfiles.takeAt(CurrentBufferProfile);
+            BufferProfiles.append(id);
+            CurrentBufferProfile=BufferProfiles.size();
+        }
+        qDebug()<<BufferProfiles.size()<<BufferProfiles<<CurrentBufferProfile;
         Profile=Profiles;
         Games.Clear();
         Friends.Clear();
@@ -266,7 +275,7 @@ void MainWindow::on_ButtonFriends_clicked(){
         windowchildcount++;
         friendsform = new FormFriends(Profile.GetSteamid(),key,Friends);
         connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(returnfromfriends()));
-        connect(friendsform,SIGNAL(go_to_profile(QString,QString)),this,SLOT(GoToProfile(QString,QString)));
+        connect(friendsform,SIGNAL(go_to_profile(QString,QString,bool)),this,SLOT(GoToProfile(QString,QString,bool)));
         //QFormLayout *lay = new QFormLayout;
         //lay->addWidget(friendsform);
         ui->ScrollAreaForm->setWidget(friendsform);//setLayout(lay);
@@ -281,11 +290,21 @@ void MainWindow::on_ButtonSetProfile_clicked(){
 }
 void MainWindow::on_ButtonGoToMyProfile_clicked(){
     if(Setting.GetStatus()=="success"){
-        GoToProfile(Setting.GetMyProfile(),"url");
+        GoToProfile(Setting.GetMyProfile(),"url",true);
     } else {
         QMessageBox::warning(this,Words[30],Words[32]);
     }
 }
 void MainWindow::on_ButtonExit_clicked(){
     close();
+}
+
+void MainWindow::on_ButtonBack_clicked(){
+    if(CurrentBufferProfile>1)
+        GoToProfile(BufferProfiles[--CurrentBufferProfile-1],"url",false);
+}
+
+void MainWindow::on_ButtonNext_clicked(){
+    if(CurrentBufferProfile<BufferProfiles.size())
+        GoToProfile(BufferProfiles[++CurrentBufferProfile-1],"url",false);
 }

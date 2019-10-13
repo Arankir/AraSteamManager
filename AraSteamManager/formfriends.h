@@ -22,7 +22,7 @@ public:
 
 signals:
     void return_to_profile();
-    void go_to_profile(QString id, QString type);
+    void go_to_profile(QString id, QString type, bool UpdateBuffer);
 
 private slots:
     void closeEvent(QCloseEvent *event);

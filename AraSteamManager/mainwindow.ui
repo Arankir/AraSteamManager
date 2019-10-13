@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>587</width>
+    <width>659</width>
     <height>555</height>
    </rect>
   </property>
@@ -15,48 +15,7 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="3">
-     <widget class="QPushButton" name="ButtonStatistics">
-      <property name="text">
-       <string>Statistics</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="8" colspan="2">
-     <widget class="QPushButton" name="ButtonExit">
-      <property name="text">
-       <string>Exit</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="5">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="3" column="7" colspan="3">
-     <widget class="QPushButton" name="ButtonGoToMyProfile">
-      <property name="text">
-       <string>Go to my profile</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="6" colspan="2">
-     <widget class="QPushButton" name="ButtonSettings">
-      <property name="text">
-       <string>Settings</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="10">
+    <item row="5" column="0" colspan="10">
      <widget class="QScrollArea" name="ScrollAreaForm">
       <property name="widgetResizable">
        <bool>true</bool>
@@ -66,59 +25,17 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>560</width>
-         <height>234</height>
+         <width>632</width>
+         <height>198</height>
         </rect>
        </property>
       </widget>
      </widget>
     </item>
-    <item row="1" column="0" colspan="8">
-     <widget class="QLineEdit" name="LineEditIdProfile">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(26, 26, 26);</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QPushButton" name="ButtonFriends">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="ButtonBack">
       <property name="text">
-       <string>Friends</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3" colspan="2">
-     <widget class="QPushButton" name="ButtonSetProfile">
-      <property name="text">
-       <string>Set as my profile</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="8" colspan="2">
-     <widget class="QPushButton" name="ButtonFindProfile">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>Find</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="ButtonGames">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>Games</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QPushButton" name="ButtonFavorites">
-      <property name="text">
-       <string>Favorites</string>
+       <string>Back</string>
       </property>
      </widget>
     </item>
@@ -129,32 +46,22 @@ color: rgb(26, 26, 26);</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="10">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>1</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="0" colspan="10">
+    <item row="3" column="0" colspan="10">
      <widget class="QScrollArea" name="ScrollAreaProfileInfo">
       <property name="minimumSize">
        <size>
         <width>0</width>
-        <height>154</height>
+        <height>190</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>154</height>
+        <height>190</height>
        </size>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
       <property name="widgetResizable">
        <bool>true</bool>
@@ -164,24 +71,12 @@ color: rgb(26, 26, 26);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>560</width>
-         <height>152</height>
+         <width>632</width>
+         <height>188</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="7" column="0" colspan="3">
-         <widget class="QLabel" name="LabelTimeCreated">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>TimeCreated</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="4">
+        <item row="8" column="4" colspan="2">
          <widget class="QLabel" name="LabelBans">
           <property name="font">
            <font>
@@ -196,71 +91,10 @@ color: rgb(26, 26, 26);</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="4">
-         <widget class="QLabel" name="LabelRealName">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
+        <item row="9" column="2" colspan="3">
+         <widget class="QPushButton" name="ButtonFriends">
           <property name="text">
-           <string>RealName</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="4">
-         <widget class="QLabel" name="LabelLocCountryCode">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>CountryCode</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0" colspan="3">
-         <widget class="QLabel" name="Labellvl">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>lvl</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="3" rowspan="3">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="8" column="0" colspan="3">
-         <widget class="QLabel" name="LabelProfileVisibility">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Visibility</string>
+           <string>Friends</string>
           </property>
          </widget>
         </item>
@@ -277,23 +111,56 @@ color: rgb(26, 26, 26);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1" colspan="2">
-         <widget class="QLabel" name="LabelNick">
-          <property name="font">
-           <font>
-            <family>Mongolian Baiti</family>
-            <pointsize>14</pointsize>
-           </font>
+        <item row="1" column="7" colspan="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="styleSheet">
-           <string notr="true">color:rgb(0, 170, 0)</string>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
           </property>
-          <property name="text">
-           <string>NickName</string>
+         </spacer>
+        </item>
+        <item row="6" column="3" rowspan="3">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
          </widget>
         </item>
-        <item row="3" column="1" colspan="4">
+        <item row="9" column="5">
+         <widget class="QPushButton" name="ButtonFavorites">
+          <property name="text">
+           <string>Favorites</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0" colspan="2">
+         <widget class="QPushButton" name="ButtonGames">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="text">
+           <string>Games</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0" colspan="3">
+         <widget class="QLabel" name="LabelProfileVisibility">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Visibility</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1" colspan="5">
          <widget class="QLabel" name="LabelProfileUrl">
           <property name="maximumSize">
            <size>
@@ -314,7 +181,66 @@ color: rgb(26, 26, 26);</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1" colspan="4">
+        <item row="7" column="0" colspan="3">
+         <widget class="QLabel" name="LabelTimeCreated">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>TimeCreated</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="3">
+         <widget class="QLabel" name="Labellvl">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>lvl</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="6">
+         <widget class="QPushButton" name="ButtonStatistics">
+          <property name="text">
+           <string>Statistics</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="QLabel" name="LabelNick">
+          <property name="font">
+           <font>
+            <family>Mongolian Baiti</family>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color:rgb(0, 170, 0)</string>
+          </property>
+          <property name="text">
+           <string>NickName</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="4" colspan="2">
+         <widget class="QLabel" name="LabelLocCountryCode">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>CountryCode</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="5">
          <widget class="QLabel" name="LabelPersonaState">
           <property name="maximumSize">
            <size>
@@ -335,9 +261,126 @@ color: rgb(26, 26, 26);</string>
           </property>
          </widget>
         </item>
+        <item row="9" column="8">
+         <widget class="QPushButton" name="ButtonGoToMyProfile">
+          <property name="text">
+           <string>Go to my profile</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="4" colspan="2">
+         <widget class="QLabel" name="LabelRealName">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>RealName</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="7">
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </widget>
      </widget>
+    </item>
+    <item row="0" column="8" colspan="2">
+     <widget class="QPushButton" name="ButtonExit">
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="8">
+     <widget class="QLineEdit" name="LineEditIdProfile">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(26, 26, 26);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="8" colspan="2">
+     <widget class="QPushButton" name="ButtonFindProfile">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>Find</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="10">
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>1</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="ButtonSettings">
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="ButtonNext">
+      <property name="text">
+       <string>Next</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="7" colspan="3">
+     <widget class="QPushButton" name="ButtonSetProfile">
+      <property name="text">
+       <string>Set as my profile</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3" colspan="5">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="6">
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
@@ -346,7 +389,7 @@ color: rgb(26, 26, 26);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>587</width>
+     <width>659</width>
      <height>20</height>
     </rect>
    </property>
