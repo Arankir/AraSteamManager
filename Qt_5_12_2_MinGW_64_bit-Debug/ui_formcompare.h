@@ -14,6 +14,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -21,6 +22,7 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,32 +30,36 @@ QT_BEGIN_NAMESPACE
 class Ui_FormCompare
 {
 public:
-    QGridLayout *gridLayout_4;
+    QVBoxLayout *verticalLayout_4;
+    QGridLayout *gridLayout;
+    QSpacerItem *horizontalSpacer;
     QPushButton *ButtonUpdate;
+    QPushButton *ButtonReturn;
+    QCheckBox *CheckBoxShowFilter;
+    QLabel *LabelPlayerCount;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *LabelLogo;
     QGroupBox *GroupBoxFilter;
-    QGridLayout *gridLayout_3;
-    QPushButton *ButtonFind;
-    QCheckBox *CheckBoxFavorites;
-    QLineEdit *LineEditFind;
-    QCheckBox *CheckBoxAllFriends;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout;
+    QScrollArea *ScrollAreaCategoriesComboBox;
+    QWidget *scrollAreaWidgetContents_2;
+    QScrollArea *ScrollAreaCategoriesCheckBox;
+    QWidget *scrollAreaWidgetContents_3;
     QGroupBox *GroupBoxShowedColumns;
-    QGridLayout *gridLayout_6;
+    QVBoxLayout *verticalLayout;
     QCheckBox *CheckBoxSCIcons;
     QCheckBox *CheckBoxSCTitle;
     QCheckBox *CheckBoxSCDescription;
     QCheckBox *CheckBoxSCTotalPercent;
-    QScrollArea *ScrollAreaCategoriesCheckBox;
-    QWidget *scrollAreaWidgetContents_3;
-    QScrollArea *ScrollAreaCategoriesComboBox;
-    QWidget *scrollAreaWidgetContents_2;
+    QVBoxLayout *verticalLayout_2;
+    QCheckBox *CheckBoxFavorites;
+    QCheckBox *CheckBoxAllFriends;
     QTableWidget *TableWidgetFriends;
-    QSpacerItem *horizontalSpacer;
-    QLabel *LabelPlayerCount;
-    QCheckBox *CheckBoxShowFilter;
-    QPushButton *ButtonReturn;
+    QHBoxLayout *horizontalLayout_2;
+    QLineEdit *LineEditFind;
+    QPushButton *ButtonFind;
     QTableWidget *TableWidget;
 
     void setupUi(QWidget *FormCompare)
@@ -61,12 +67,37 @@ public:
         if (FormCompare->objectName().isEmpty())
             FormCompare->setObjectName(QString::fromUtf8("FormCompare"));
         FormCompare->resize(1031, 818);
-        gridLayout_4 = new QGridLayout(FormCompare);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        verticalLayout_4 = new QVBoxLayout(FormCompare);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        horizontalSpacer = new QSpacerItem(881, 18, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer, 0, 2, 1, 1);
+
         ButtonUpdate = new QPushButton(FormCompare);
         ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
 
-        gridLayout_4->addWidget(ButtonUpdate, 1, 4, 1, 1);
+        gridLayout->addWidget(ButtonUpdate, 1, 3, 1, 1);
+
+        ButtonReturn = new QPushButton(FormCompare);
+        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
+
+        gridLayout->addWidget(ButtonReturn, 0, 3, 1, 1);
+
+        CheckBoxShowFilter = new QCheckBox(FormCompare);
+        CheckBoxShowFilter->setObjectName(QString::fromUtf8("CheckBoxShowFilter"));
+        CheckBoxShowFilter->setChecked(true);
+
+        gridLayout->addWidget(CheckBoxShowFilter, 2, 3, 1, 1);
+
+        LabelPlayerCount = new QLabel(FormCompare);
+        LabelPlayerCount->setObjectName(QString::fromUtf8("LabelPlayerCount"));
+        QFont font;
+        font.setPointSize(14);
+        LabelPlayerCount->setFont(font);
+
+        gridLayout->addWidget(LabelPlayerCount, 2, 1, 1, 1);
 
         groupBox = new QGroupBox(FormCompare);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -81,125 +112,129 @@ public:
         gridLayout_5->addWidget(LabelLogo, 0, 0, 1, 1);
 
 
-        gridLayout_4->addWidget(groupBox, 0, 0, 3, 2);
+        gridLayout->addWidget(groupBox, 0, 0, 3, 1);
+
+
+        verticalLayout_4->addLayout(gridLayout);
 
         GroupBoxFilter = new QGroupBox(FormCompare);
         GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
         GroupBoxFilter->setMaximumSize(QSize(16777215, 380));
-        gridLayout_3 = new QGridLayout(GroupBoxFilter);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        ButtonFind = new QPushButton(GroupBoxFilter);
-        ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
+        verticalLayout_3 = new QVBoxLayout(GroupBoxFilter);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        ScrollAreaCategoriesComboBox = new QScrollArea(GroupBoxFilter);
+        ScrollAreaCategoriesComboBox->setObjectName(QString::fromUtf8("ScrollAreaCategoriesComboBox"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ScrollAreaCategoriesComboBox->sizePolicy().hasHeightForWidth());
+        ScrollAreaCategoriesComboBox->setSizePolicy(sizePolicy);
+        ScrollAreaCategoriesComboBox->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 389, 117));
+        ScrollAreaCategoriesComboBox->setWidget(scrollAreaWidgetContents_2);
 
-        gridLayout_3->addWidget(ButtonFind, 4, 5, 1, 1);
+        horizontalLayout->addWidget(ScrollAreaCategoriesComboBox);
 
-        CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
-        CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
+        ScrollAreaCategoriesCheckBox = new QScrollArea(GroupBoxFilter);
+        ScrollAreaCategoriesCheckBox->setObjectName(QString::fromUtf8("ScrollAreaCategoriesCheckBox"));
+        sizePolicy.setHeightForWidth(ScrollAreaCategoriesCheckBox->sizePolicy().hasHeightForWidth());
+        ScrollAreaCategoriesCheckBox->setSizePolicy(sizePolicy);
+        ScrollAreaCategoriesCheckBox->setWidgetResizable(true);
+        scrollAreaWidgetContents_3 = new QWidget();
+        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 389, 117));
+        ScrollAreaCategoriesCheckBox->setWidget(scrollAreaWidgetContents_3);
 
-        gridLayout_3->addWidget(CheckBoxFavorites, 0, 5, 1, 1);
-
-        LineEditFind = new QLineEdit(GroupBoxFilter);
-        LineEditFind->setObjectName(QString::fromUtf8("LineEditFind"));
-
-        gridLayout_3->addWidget(LineEditFind, 4, 0, 1, 5);
-
-        CheckBoxAllFriends = new QCheckBox(GroupBoxFilter);
-        CheckBoxAllFriends->setObjectName(QString::fromUtf8("CheckBoxAllFriends"));
-
-        gridLayout_3->addWidget(CheckBoxAllFriends, 1, 5, 1, 1);
+        horizontalLayout->addWidget(ScrollAreaCategoriesCheckBox);
 
         GroupBoxShowedColumns = new QGroupBox(GroupBoxFilter);
         GroupBoxShowedColumns->setObjectName(QString::fromUtf8("GroupBoxShowedColumns"));
-        gridLayout_6 = new QGridLayout(GroupBoxShowedColumns);
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        gridLayout_6->setContentsMargins(-1, 1, -1, 1);
+        verticalLayout = new QVBoxLayout(GroupBoxShowedColumns);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(-1, 1, -1, 1);
         CheckBoxSCIcons = new QCheckBox(GroupBoxShowedColumns);
         CheckBoxSCIcons->setObjectName(QString::fromUtf8("CheckBoxSCIcons"));
         CheckBoxSCIcons->setChecked(true);
 
-        gridLayout_6->addWidget(CheckBoxSCIcons, 0, 0, 1, 1);
+        verticalLayout->addWidget(CheckBoxSCIcons);
 
         CheckBoxSCTitle = new QCheckBox(GroupBoxShowedColumns);
         CheckBoxSCTitle->setObjectName(QString::fromUtf8("CheckBoxSCTitle"));
         CheckBoxSCTitle->setChecked(true);
 
-        gridLayout_6->addWidget(CheckBoxSCTitle, 1, 0, 1, 1);
+        verticalLayout->addWidget(CheckBoxSCTitle);
 
         CheckBoxSCDescription = new QCheckBox(GroupBoxShowedColumns);
         CheckBoxSCDescription->setObjectName(QString::fromUtf8("CheckBoxSCDescription"));
         CheckBoxSCDescription->setChecked(true);
 
-        gridLayout_6->addWidget(CheckBoxSCDescription, 2, 0, 1, 1);
+        verticalLayout->addWidget(CheckBoxSCDescription);
 
         CheckBoxSCTotalPercent = new QCheckBox(GroupBoxShowedColumns);
         CheckBoxSCTotalPercent->setObjectName(QString::fromUtf8("CheckBoxSCTotalPercent"));
         CheckBoxSCTotalPercent->setChecked(true);
 
-        gridLayout_6->addWidget(CheckBoxSCTotalPercent, 3, 0, 1, 1);
+        verticalLayout->addWidget(CheckBoxSCTotalPercent);
 
 
-        gridLayout_3->addWidget(GroupBoxShowedColumns, 0, 2, 3, 3);
+        horizontalLayout->addWidget(GroupBoxShowedColumns);
 
-        ScrollAreaCategoriesCheckBox = new QScrollArea(GroupBoxFilter);
-        ScrollAreaCategoriesCheckBox->setObjectName(QString::fromUtf8("ScrollAreaCategoriesCheckBox"));
-        ScrollAreaCategoriesCheckBox->setWidgetResizable(true);
-        scrollAreaWidgetContents_3 = new QWidget();
-        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 387, 117));
-        ScrollAreaCategoriesCheckBox->setWidget(scrollAreaWidgetContents_3);
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
+        CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
 
-        gridLayout_3->addWidget(ScrollAreaCategoriesCheckBox, 0, 1, 3, 1);
+        verticalLayout_2->addWidget(CheckBoxFavorites);
 
-        ScrollAreaCategoriesComboBox = new QScrollArea(GroupBoxFilter);
-        ScrollAreaCategoriesComboBox->setObjectName(QString::fromUtf8("ScrollAreaCategoriesComboBox"));
-        ScrollAreaCategoriesComboBox->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 387, 117));
-        ScrollAreaCategoriesComboBox->setWidget(scrollAreaWidgetContents_2);
+        CheckBoxAllFriends = new QCheckBox(GroupBoxFilter);
+        CheckBoxAllFriends->setObjectName(QString::fromUtf8("CheckBoxAllFriends"));
 
-        gridLayout_3->addWidget(ScrollAreaCategoriesComboBox, 0, 0, 3, 1);
+        verticalLayout_2->addWidget(CheckBoxAllFriends);
+
+
+        horizontalLayout->addLayout(verticalLayout_2);
+
+
+        verticalLayout_3->addLayout(horizontalLayout);
 
         TableWidgetFriends = new QTableWidget(GroupBoxFilter);
         TableWidgetFriends->setObjectName(QString::fromUtf8("TableWidgetFriends"));
+        sizePolicy.setHeightForWidth(TableWidgetFriends->sizePolicy().hasHeightForWidth());
+        TableWidgetFriends->setSizePolicy(sizePolicy);
         TableWidgetFriends->setMinimumSize(QSize(0, 180));
         TableWidgetFriends->setMaximumSize(QSize(16777215, 330));
         TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
         TableWidgetFriends->setShowGrid(true);
 
-        gridLayout_3->addWidget(TableWidgetFriends, 3, 0, 1, 6);
+        verticalLayout_3->addWidget(TableWidgetFriends);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        LineEditFind = new QLineEdit(GroupBoxFilter);
+        LineEditFind->setObjectName(QString::fromUtf8("LineEditFind"));
+
+        horizontalLayout_2->addWidget(LineEditFind);
+
+        ButtonFind = new QPushButton(GroupBoxFilter);
+        ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
+
+        horizontalLayout_2->addWidget(ButtonFind);
 
 
-        gridLayout_4->addWidget(GroupBoxFilter, 3, 0, 1, 5);
+        verticalLayout_3->addLayout(horizontalLayout_2);
 
-        horizontalSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_4->addItem(horizontalSpacer, 0, 2, 1, 1);
-
-        LabelPlayerCount = new QLabel(FormCompare);
-        LabelPlayerCount->setObjectName(QString::fromUtf8("LabelPlayerCount"));
-        QFont font;
-        font.setPointSize(14);
-        LabelPlayerCount->setFont(font);
-
-        gridLayout_4->addWidget(LabelPlayerCount, 2, 2, 1, 1);
-
-        CheckBoxShowFilter = new QCheckBox(FormCompare);
-        CheckBoxShowFilter->setObjectName(QString::fromUtf8("CheckBoxShowFilter"));
-        CheckBoxShowFilter->setChecked(true);
-
-        gridLayout_4->addWidget(CheckBoxShowFilter, 2, 4, 1, 1);
-
-        ButtonReturn = new QPushButton(FormCompare);
-        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
-
-        gridLayout_4->addWidget(ButtonReturn, 0, 4, 1, 1);
+        verticalLayout_4->addWidget(GroupBoxFilter);
 
         TableWidget = new QTableWidget(FormCompare);
         TableWidget->setObjectName(QString::fromUtf8("TableWidget"));
         TableWidget->setLayoutDirection(Qt::LeftToRight);
 
-        gridLayout_4->addWidget(TableWidget, 4, 0, 2, 5);
+        verticalLayout_4->addWidget(TableWidget);
 
 
         retranslateUi(FormCompare);
@@ -211,23 +246,23 @@ public:
     {
         FormCompare->setWindowTitle(QApplication::translate("FormCompare", "Form", nullptr));
         ButtonUpdate->setText(QApplication::translate("FormCompare", "Update", nullptr));
+        ButtonReturn->setText(QApplication::translate("FormCompare", "Return", nullptr));
+        CheckBoxShowFilter->setText(QApplication::translate("FormCompare", "Show Filter", nullptr));
+        LabelPlayerCount->setText(QApplication::translate("FormCompare", "PlayerCount", nullptr));
         groupBox->setTitle(QString());
         LabelLogo->setText(QApplication::translate("FormCompare", "Logo", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         GroupBoxFilter->setAccessibleName(QApplication::translate("FormCompare", "Filter", nullptr));
 #endif // QT_NO_ACCESSIBILITY
         GroupBoxFilter->setTitle(QApplication::translate("FormCompare", "Filter", nullptr));
-        ButtonFind->setText(QApplication::translate("FormCompare", "Find", nullptr));
-        CheckBoxFavorites->setText(QApplication::translate("FormCompare", "Favorites", nullptr));
-        CheckBoxAllFriends->setText(QApplication::translate("FormCompare", "All friends", nullptr));
         GroupBoxShowedColumns->setTitle(QApplication::translate("FormCompare", "Showed columns", nullptr));
         CheckBoxSCIcons->setText(QApplication::translate("FormCompare", "Icon", nullptr));
         CheckBoxSCTitle->setText(QApplication::translate("FormCompare", "Title", nullptr));
         CheckBoxSCDescription->setText(QApplication::translate("FormCompare", "Description", nullptr));
         CheckBoxSCTotalPercent->setText(QApplication::translate("FormCompare", "Total percent", nullptr));
-        LabelPlayerCount->setText(QApplication::translate("FormCompare", "PlayerCount", nullptr));
-        CheckBoxShowFilter->setText(QApplication::translate("FormCompare", "Show Filter", nullptr));
-        ButtonReturn->setText(QApplication::translate("FormCompare", "Return", nullptr));
+        CheckBoxFavorites->setText(QApplication::translate("FormCompare", "Favorites", nullptr));
+        CheckBoxAllFriends->setText(QApplication::translate("FormCompare", "All friends", nullptr));
+        ButtonFind->setText(QApplication::translate("FormCompare", "Find", nullptr));
     } // retranslateUi
 
 };

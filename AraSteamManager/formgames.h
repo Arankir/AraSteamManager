@@ -8,6 +8,7 @@
 #include <class/steamapi/Sgames.h>
 #include <class/settings.h>
 #include <class/steamapi/Sachievements.h>
+#include <class/Threads/threading.h>
 
 namespace Ui {
 class FormGames;
@@ -25,10 +26,15 @@ public:
 signals:
     void return_to_profile();
 
+public slots:
+    void ProgressLoading(int,int);
+    void ImageSet(QPixmap pix, int row);
+
 private slots:
     void OnResultImage(ImageRequest *imgr);
     void OnResultAchievements(ImageRequest *imgr);
     void closeEvent(QCloseEvent *event);
+    void InitComponents();
 
     void on_ButtonReturn_clicked();
 
@@ -51,6 +57,8 @@ private:
     QStringList Words;
     Settings Setting;
     QString theme="white";
+    QIcon Achievement;
+    QIcon Favorite;
 
     QVector<ImageRequest*> request;
     int numrequests=0;

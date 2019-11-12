@@ -13,7 +13,6 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
-#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
@@ -28,7 +27,6 @@ public:
     QGridLayout *gridLayout;
     QScrollArea *ScrollAreaValues;
     QWidget *ScrollAreaLayout;
-    QFormLayout *formLayout;
     QLineEdit *LineEditTitle;
     QPushButton *ButtonCancel;
     QPushButton *ButtonAddValue;
@@ -49,8 +47,6 @@ public:
         ScrollAreaLayout = new QWidget();
         ScrollAreaLayout->setObjectName(QString::fromUtf8("ScrollAreaLayout"));
         ScrollAreaLayout->setGeometry(QRect(0, 0, 438, 81));
-        formLayout = new QFormLayout(ScrollAreaLayout);
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
         ScrollAreaValues->setWidget(ScrollAreaLayout);
 
         gridLayout->addWidget(ScrollAreaValues, 0, 1, 3, 1);

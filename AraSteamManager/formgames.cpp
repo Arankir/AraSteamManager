@@ -10,25 +10,6 @@ FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) 
     for (int i=0;i<Games.GetCount();i++) {
         games.push_back(Games.GetGame(i));
     }
-    for (int i=0; i < games.size()-1; i++) {
-        for (int j=0; j < games.size()-i-1; j++) {
-            if (games[j].GetName() > games[j+1].GetName()) {
-                SGame temp = games[j];
-                games[j] = games[j+1];
-                games[j+1] = temp;
-            }
-        }
-    }
-    ui->TableWidgetGames->setColumnCount(4);
-    ui->LabelLogo->setText("(WIP)");
-    ui->LineEditGame->setPlaceholderText(Words[0]);
-    ui->ButtonFind->setText(" "+Words[1]);
-    ui->ButtonReturn->setText(" "+Words[2]);
-    ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->TableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[3]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[5]));
-    ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     switch(Setting.GetTheme()){
     case 1:{
         theme="white";
@@ -39,9 +20,11 @@ FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) 
         break;
         }
     }
-    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
-    for(int i=0;i<games.size();i++){
+    InitComponents();
+    Threading th(this);
+    th.AddThreadGames(ui->TableWidgetGames,games,key,Favorite,Words[4]);
+    //connect(&th,SIGNAL(finished),this,SLOT(FinishTrain));
+    /*for(int i=0;i<games.size();i++){
         int row = ui->TableWidgetGames->rowCount();
         ui->TableWidgetGames->insertRow(row);
         if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".jpg")){
@@ -70,7 +53,7 @@ FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) 
         ui->TableWidgetGames->setCellWidget(row,2,button1);
 
         QPushButton *button2 = new QPushButton;
-        button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
+        button2->setIcon(Favorite);
         button2->setMinimumSize(QSize(25,25));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button2->setObjectName("ButtonFavorites"+QString::number(i));
@@ -87,7 +70,57 @@ FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) 
     //ui->TableWidgetGames->resizeRowsToContents();
     //this->setMinimumSize(33+ui->TableWidgetGames->columnWidth(1)+ui->TableWidgetGames->columnWidth(2)+ui->TableWidgetGames->columnWidth(3)+11+ui->TableWidgetGames->verticalHeader()->width(),577);
     //http://media.steampowered.com/steamcommunity/public/images/apps/{appid}/{hash}.jpg
-    ui->LineEditGame->setFocus();
+    */
+    //ui->LineEditGame->setFocus();
+}
+
+void FormGames::InitComponents(){
+    for (int i=0; i < games.size()-1; i++) {
+        for (int j=0; j < games.size()-i-1; j++) {
+            if (games[j].GetName() > games[j+1].GetName()) {
+                SGame temp = games[j];
+                games[j] = games[j+1];
+                games[j+1] = temp;
+            }
+        }
+    }
+    ui->TableWidgetGames->setColumnCount(4);
+    ui->LabelLogo->setText("(WIP)");
+    ui->LineEditGame->setPlaceholderText(Words[0]);
+    ui->ButtonFind->setText(" "+Words[1]);
+    ui->ButtonReturn->setText(" "+Words[2]);
+    ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+    ui->TableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[3]));
+    ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
+    ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[5]));
+    ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
+    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    //Achievement = ;
+    Favorite = QIcon(":/"+theme+"/program/"+theme+"/favorites.png");
+}
+
+void FormGames::ProgressLoading(int p,int row){
+    //Отобразить
+    QPushButton *button1 = new QPushButton(Words[4]);
+    button1->setMinimumSize(QSize(25,25));
+    connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
+    button1->setObjectName("ButtonAchievements"+QString::number(p));
+    ui->TableWidgetGames->setCellWidget(row,2,button1);
+
+    QPushButton *button2 = new QPushButton;
+    button2->setIcon(Favorite);
+    button2->setMinimumSize(QSize(25,25));
+    connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+    button2->setObjectName("ButtonFavorites"+QString::number(p));
+    ui->TableWidgetGames->setCellWidget(row,3,button2);
+
+}
+
+void FormGames::ImageSet(QPixmap pixmap, int row){
+    QLabel *label = new QLabel;
+    label->setPixmap(pixmap);
+    ui->TableWidgetGames->setCellWidget(row,0,label);
 }
 
 FormGames::~FormGames(){

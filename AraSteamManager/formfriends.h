@@ -26,6 +26,7 @@ signals:
 
 private slots:
     void closeEvent(QCloseEvent *event);
+    void InitComponents();
     void on_ButtonReturn_clicked();
 
     void OnResultImage(ImageRequest *imgr);

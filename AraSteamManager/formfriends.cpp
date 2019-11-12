@@ -7,31 +7,11 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
     id=ids;
     key=keys;
     Friends=Friendss;
-    ui->LabelLogo->setText("(WIP)");
-    ui->GroupBoxFilter->setTitle("      "+Words[0]);
-    ui->ButtonReturn->setText(" "+Words[1]);
-    ui->ButtonFind->setText("  "+Words[2]);
-    ui->CheckBoxOpenProfile->setText(Words[3]);
-    ui->CheckBoxFavorites->setText(Words[20]);
-    ui->LineEditName->setPlaceholderText(Words[21]);
-    ui->TableWidgetFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[5]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[6]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[18]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[7]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(Words[19]));
-    ui->ComboBoxStatus->addItem(Words[6]);
-    ui->ComboBoxStatus->addItem(Words[8]);
-    ui->ComboBoxStatus->addItem(Words[9]);
-    ui->ComboBoxStatus->addItem(Words[10]);
-    ui->ComboBoxStatus->addItem(Words[11]);
-    ui->ComboBoxStatus->addItem(Words[12]);
-    ui->ComboBoxStatus->addItem(Words[13]);
-    ui->ComboBoxStatus->addItem(Words[14]);
-    ui->ComboBoxStatus->addItem(Words[15]);
-    ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    SProfile Profiles = Friends.GetProfiles();
+    QVector<SProfile> Profiless;
+    for (int i=0;i<Profiles.GetCount();i++) {
+        Profiless.push_back(Profiles.GetProfile(i));
+    }
     switch(Setting.GetTheme()){
     case 1:{
         theme="white";
@@ -42,23 +22,7 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
         break;
         }
     }
-    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
-    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.jpg) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    SProfile Profiles = Friends.GetProfiles();
-    QVector<SProfile> Profiless;
-    for (int i=0;i<Profiles.GetCount();i++) {
-        Profiless.push_back(Profiles.GetProfile(i));
-    }
-    for (int i=0; i < Profiless.size()-1; i++) {
-        for (int j=0; j < Profiless.size()-i-1; j++) {
-            if (Profiless[j].GetPersonaname() > Profiless[j+1].GetPersonaname()) {
-                SProfile temp = Profiless[j];
-                Profiless[j] = Profiless[j+1];
-                Profiless[j+1] = temp;
-            }
-        }
-    }
+    InitComponents();
     for (int i=0;i<Friends.GetCount();i++) {
         ui->TableWidgetFriends->insertRow(i);
         qDebug()<<i;
@@ -178,6 +142,46 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
             }
         }
     ui->LineEditName->setFocus();
+}
+
+void FormFriends::InitComponents(){
+    ui->LabelLogo->setText("(WIP)");
+    ui->GroupBoxFilter->setTitle("      "+Words[0]);
+    ui->ButtonReturn->setText(" "+Words[1]);
+    ui->ButtonFind->setText("  "+Words[2]);
+    ui->CheckBoxOpenProfile->setText(Words[3]);
+    ui->CheckBoxFavorites->setText(Words[20]);
+    ui->LineEditName->setPlaceholderText(Words[21]);
+    ui->TableWidgetFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[5]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[6]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[18]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[7]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(Words[19]));
+    ui->ComboBoxStatus->addItem(Words[6]);
+    ui->ComboBoxStatus->addItem(Words[8]);
+    ui->ComboBoxStatus->addItem(Words[9]);
+    ui->ComboBoxStatus->addItem(Words[10]);
+    ui->ComboBoxStatus->addItem(Words[11]);
+    ui->ComboBoxStatus->addItem(Words[12]);
+    ui->ComboBoxStatus->addItem(Words[13]);
+    ui->ComboBoxStatus->addItem(Words[14]);
+    ui->ComboBoxStatus->addItem(Words[15]);
+    ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.jpg) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    for (int i=0; i < Profiless.size()-1; i++) {
+        for (int j=0; j < Profiless.size()-i-1; j++) {
+            if (Profiless[j].GetPersonaname() > Profiless[j+1].GetPersonaname()) {
+                SProfile temp = Profiless[j];
+                Profiless[j] = Profiless[j+1];
+                Profiless[j+1] = temp;
+            }
+        }
+    }
 }
 
 FormFriends::~FormFriends(){

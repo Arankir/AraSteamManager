@@ -13,8 +13,10 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -23,6 +25,7 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,253 +33,92 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievements
 {
 public:
-    QGridLayout *gridLayout_4;
-    QLabel *LabelGameOnline;
-    QGroupBox *GroupBoxFilter;
+    QVBoxLayout *verticalLayout_7;
     QGridLayout *gridLayout;
-    QRadioButton *RadioButtonAll;
-    QPushButton *ButtonFindAchievement;
-    QPushButton *ButtonAddCategory;
-    QPushButton *ButtonChangeCategory;
-    QRadioButton *RadioButtonReached;
-    QScrollArea *ScrollAreaCheckCategories;
-    QWidget *scrollAreaWidgetContents_4;
-    QScrollArea *ScrollAreaCategories;
-    QWidget *scrollAreaWidgetContents;
-    QGroupBox *GroupBoxAddCategory;
-    QGridLayout *gridLayout_2;
-    QLineEdit *LineEditTitleNewCategory;
-    QScrollArea *ScrollAreaValues;
-    QWidget *scrollAreaWidgetContents_2;
-    QPushButton *ButtonCancelNewCategory;
-    QPushButton *ButtonAcceptNewCategory;
-    QPushButton *ButtonAddValueNewCategory;
-    QCheckBox *CheckBoxNewCategoryOneValue;
-    QGroupBox *GroupBoxChangeCategory;
-    QGridLayout *gridLayout_3;
-    QLineEdit *LineEditTitleCategoryChangeCategory;
-    QComboBox *ComboBoxCategoriesChangeCategory;
-    QPushButton *ButtonDeleteCategory;
-    QPushButton *ButtonAddValueChangeCategory;
-    QPushButton *ButtonAcceptChangeCategory;
-    QPushButton *ButtonCancelChangeCategory;
-    QScrollArea *ScrollAreaValuesChangeCategory;
-    QWidget *scrollAreaWidgetContents_3;
-    QCheckBox *CheckBoxChangeCategoryOneValue;
-    QLineEdit *LineEditNameAchievements;
-    QLabel *LabelTotalPersent;
-    QRadioButton *RadioButtonNotReached;
-    QPushButton *ButtonUpdate;
-    QCheckBox *CheckBoxFavorites;
     QPushButton *ButtonReturn;
-    QTableWidget *TableWidgetAchievements;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *ButtonCompare;
+    QLabel *LabelGameOnline;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *LabelGameLogo;
-    QSpacerItem *horizontalSpacer_2;
-    QPushButton *ButtonCompare;
+    QGroupBox *GroupBoxFilter;
+    QVBoxLayout *verticalLayout_6;
+    QHBoxLayout *horizontalLayout_4;
+    QScrollArea *ScrollAreaCategories;
+    QWidget *scrollAreaWidgetContents;
+    QScrollArea *ScrollAreaCheckCategories;
+    QWidget *scrollAreaWidgetContents_4;
+    QVBoxLayout *verticalLayout_4;
+    QPushButton *ButtonAddCategory;
+    QPushButton *ButtonChangeCategory;
+    QLabel *LabelTotalPersent;
+    QPushButton *ButtonUpdate;
+    QVBoxLayout *verticalLayout_5;
+    QRadioButton *RadioButtonAll;
+    QRadioButton *RadioButtonReached;
+    QRadioButton *RadioButtonNotReached;
+    QCheckBox *CheckBoxFavorites;
+    QGroupBox *GroupBoxAddCategory;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
+    QLineEdit *LineEditTitleNewCategory;
+    QCheckBox *CheckBoxNewCategoryOneValue;
+    QPushButton *ButtonAddValueNewCategory;
+    QScrollArea *ScrollAreaValues;
+    QWidget *scrollAreaWidgetContents_2;
+    QVBoxLayout *verticalLayout_2;
+    QPushButton *ButtonCancelNewCategory;
+    QPushButton *ButtonAcceptNewCategory;
+    QGroupBox *GroupBoxChangeCategory;
+    QHBoxLayout *horizontalLayout_2;
+    QFormLayout *formLayout;
+    QPushButton *ButtonAddValueChangeCategory;
+    QCheckBox *CheckBoxChangeCategoryOneValue;
+    QLineEdit *LineEditTitleCategoryChangeCategory;
+    QComboBox *ComboBoxCategoriesChangeCategory;
+    QScrollArea *ScrollAreaValuesChangeCategory;
+    QWidget *scrollAreaWidgetContents_3;
+    QVBoxLayout *verticalLayout_3;
+    QPushButton *ButtonCancelChangeCategory;
+    QPushButton *ButtonDeleteCategory;
+    QPushButton *ButtonAcceptChangeCategory;
     QGroupBox *GroupBoxCategories;
+    QHBoxLayout *horizontalLayout_3;
+    QLineEdit *LineEditNameAchievements;
+    QPushButton *ButtonFindAchievement;
+    QTableWidget *TableWidgetAchievements;
 
     void setupUi(QWidget *FormAchievements)
     {
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
         FormAchievements->resize(837, 838);
-        gridLayout_4 = new QGridLayout(FormAchievements);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        verticalLayout_7 = new QVBoxLayout(FormAchievements);
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        ButtonReturn = new QPushButton(FormAchievements);
+        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
+
+        gridLayout->addWidget(ButtonReturn, 0, 2, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(636, 18, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_2, 1, 1, 1, 1);
+
+        ButtonCompare = new QPushButton(FormAchievements);
+        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
+
+        gridLayout->addWidget(ButtonCompare, 1, 2, 1, 1);
+
         LabelGameOnline = new QLabel(FormAchievements);
         LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
         QFont font;
         font.setPointSize(14);
         LabelGameOnline->setFont(font);
 
-        gridLayout_4->addWidget(LabelGameOnline, 2, 1, 1, 1);
-
-        GroupBoxFilter = new QGroupBox(FormAchievements);
-        GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
-        gridLayout = new QGridLayout(GroupBoxFilter);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        RadioButtonAll = new QRadioButton(GroupBoxFilter);
-        RadioButtonAll->setObjectName(QString::fromUtf8("RadioButtonAll"));
-        RadioButtonAll->setChecked(true);
-
-        gridLayout->addWidget(RadioButtonAll, 0, 3, 1, 1);
-
-        ButtonFindAchievement = new QPushButton(GroupBoxFilter);
-        ButtonFindAchievement->setObjectName(QString::fromUtf8("ButtonFindAchievement"));
-        ButtonFindAchievement->setEnabled(true);
-
-        gridLayout->addWidget(ButtonFindAchievement, 8, 3, 1, 1);
-
-        ButtonAddCategory = new QPushButton(GroupBoxFilter);
-        ButtonAddCategory->setObjectName(QString::fromUtf8("ButtonAddCategory"));
-
-        gridLayout->addWidget(ButtonAddCategory, 0, 2, 1, 1);
-
-        ButtonChangeCategory = new QPushButton(GroupBoxFilter);
-        ButtonChangeCategory->setObjectName(QString::fromUtf8("ButtonChangeCategory"));
-
-        gridLayout->addWidget(ButtonChangeCategory, 1, 2, 1, 1);
-
-        RadioButtonReached = new QRadioButton(GroupBoxFilter);
-        RadioButtonReached->setObjectName(QString::fromUtf8("RadioButtonReached"));
-
-        gridLayout->addWidget(RadioButtonReached, 1, 3, 1, 1);
-
-        ScrollAreaCheckCategories = new QScrollArea(GroupBoxFilter);
-        ScrollAreaCheckCategories->setObjectName(QString::fromUtf8("ScrollAreaCheckCategories"));
-        ScrollAreaCheckCategories->setWidgetResizable(true);
-        scrollAreaWidgetContents_4 = new QWidget();
-        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 294, 98));
-        ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
-
-        gridLayout->addWidget(ScrollAreaCheckCategories, 0, 1, 6, 1);
-
-        ScrollAreaCategories = new QScrollArea(GroupBoxFilter);
-        ScrollAreaCategories->setObjectName(QString::fromUtf8("ScrollAreaCategories"));
-        ScrollAreaCategories->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 295, 98));
-        ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
-
-        gridLayout->addWidget(ScrollAreaCategories, 0, 0, 6, 1);
-
-        GroupBoxAddCategory = new QGroupBox(GroupBoxFilter);
-        GroupBoxAddCategory->setObjectName(QString::fromUtf8("GroupBoxAddCategory"));
-        gridLayout_2 = new QGridLayout(GroupBoxAddCategory);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        LineEditTitleNewCategory = new QLineEdit(GroupBoxAddCategory);
-        LineEditTitleNewCategory->setObjectName(QString::fromUtf8("LineEditTitleNewCategory"));
-
-        gridLayout_2->addWidget(LineEditTitleNewCategory, 0, 0, 1, 2);
-
-        ScrollAreaValues = new QScrollArea(GroupBoxAddCategory);
-        ScrollAreaValues->setObjectName(QString::fromUtf8("ScrollAreaValues"));
-        ScrollAreaValues->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 569, 72));
-        ScrollAreaValues->setWidget(scrollAreaWidgetContents_2);
-
-        gridLayout_2->addWidget(ScrollAreaValues, 0, 2, 3, 1);
-
-        ButtonCancelNewCategory = new QPushButton(GroupBoxAddCategory);
-        ButtonCancelNewCategory->setObjectName(QString::fromUtf8("ButtonCancelNewCategory"));
-
-        gridLayout_2->addWidget(ButtonCancelNewCategory, 0, 3, 1, 1);
-
-        ButtonAcceptNewCategory = new QPushButton(GroupBoxAddCategory);
-        ButtonAcceptNewCategory->setObjectName(QString::fromUtf8("ButtonAcceptNewCategory"));
-
-        gridLayout_2->addWidget(ButtonAcceptNewCategory, 2, 3, 1, 1);
-
-        ButtonAddValueNewCategory = new QPushButton(GroupBoxAddCategory);
-        ButtonAddValueNewCategory->setObjectName(QString::fromUtf8("ButtonAddValueNewCategory"));
-
-        gridLayout_2->addWidget(ButtonAddValueNewCategory, 2, 0, 1, 2);
-
-        CheckBoxNewCategoryOneValue = new QCheckBox(GroupBoxAddCategory);
-        CheckBoxNewCategoryOneValue->setObjectName(QString::fromUtf8("CheckBoxNewCategoryOneValue"));
-
-        gridLayout_2->addWidget(CheckBoxNewCategoryOneValue, 1, 0, 1, 2);
-
-
-        gridLayout->addWidget(GroupBoxAddCategory, 6, 0, 1, 4);
-
-        GroupBoxChangeCategory = new QGroupBox(GroupBoxFilter);
-        GroupBoxChangeCategory->setObjectName(QString::fromUtf8("GroupBoxChangeCategory"));
-        gridLayout_3 = new QGridLayout(GroupBoxChangeCategory);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        LineEditTitleCategoryChangeCategory = new QLineEdit(GroupBoxChangeCategory);
-        LineEditTitleCategoryChangeCategory->setObjectName(QString::fromUtf8("LineEditTitleCategoryChangeCategory"));
-
-        gridLayout_3->addWidget(LineEditTitleCategoryChangeCategory, 1, 0, 1, 2);
-
-        ComboBoxCategoriesChangeCategory = new QComboBox(GroupBoxChangeCategory);
-        ComboBoxCategoriesChangeCategory->setObjectName(QString::fromUtf8("ComboBoxCategoriesChangeCategory"));
-        ComboBoxCategoriesChangeCategory->setStyleSheet(QString::fromUtf8(""));
-
-        gridLayout_3->addWidget(ComboBoxCategoriesChangeCategory, 0, 0, 1, 2);
-
-        ButtonDeleteCategory = new QPushButton(GroupBoxChangeCategory);
-        ButtonDeleteCategory->setObjectName(QString::fromUtf8("ButtonDeleteCategory"));
-
-        gridLayout_3->addWidget(ButtonDeleteCategory, 1, 5, 1, 1);
-
-        ButtonAddValueChangeCategory = new QPushButton(GroupBoxChangeCategory);
-        ButtonAddValueChangeCategory->setObjectName(QString::fromUtf8("ButtonAddValueChangeCategory"));
-
-        gridLayout_3->addWidget(ButtonAddValueChangeCategory, 2, 0, 1, 1);
-
-        ButtonAcceptChangeCategory = new QPushButton(GroupBoxChangeCategory);
-        ButtonAcceptChangeCategory->setObjectName(QString::fromUtf8("ButtonAcceptChangeCategory"));
-
-        gridLayout_3->addWidget(ButtonAcceptChangeCategory, 2, 5, 1, 1);
-
-        ButtonCancelChangeCategory = new QPushButton(GroupBoxChangeCategory);
-        ButtonCancelChangeCategory->setObjectName(QString::fromUtf8("ButtonCancelChangeCategory"));
-
-        gridLayout_3->addWidget(ButtonCancelChangeCategory, 0, 5, 1, 1);
-
-        ScrollAreaValuesChangeCategory = new QScrollArea(GroupBoxChangeCategory);
-        ScrollAreaValuesChangeCategory->setObjectName(QString::fromUtf8("ScrollAreaValuesChangeCategory"));
-        ScrollAreaValuesChangeCategory->setWidgetResizable(true);
-        scrollAreaWidgetContents_3 = new QWidget();
-        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 375, 75));
-        ScrollAreaValuesChangeCategory->setWidget(scrollAreaWidgetContents_3);
-
-        gridLayout_3->addWidget(ScrollAreaValuesChangeCategory, 0, 2, 3, 3);
-
-        CheckBoxChangeCategoryOneValue = new QCheckBox(GroupBoxChangeCategory);
-        CheckBoxChangeCategoryOneValue->setObjectName(QString::fromUtf8("CheckBoxChangeCategoryOneValue"));
-
-        gridLayout_3->addWidget(CheckBoxChangeCategoryOneValue, 2, 1, 1, 1);
-
-
-        gridLayout->addWidget(GroupBoxChangeCategory, 7, 0, 1, 4);
-
-        LineEditNameAchievements = new QLineEdit(GroupBoxFilter);
-        LineEditNameAchievements->setObjectName(QString::fromUtf8("LineEditNameAchievements"));
-
-        gridLayout->addWidget(LineEditNameAchievements, 8, 0, 1, 3);
-
-        LabelTotalPersent = new QLabel(GroupBoxFilter);
-        LabelTotalPersent->setObjectName(QString::fromUtf8("LabelTotalPersent"));
-        LabelTotalPersent->setAlignment(Qt::AlignCenter);
-
-        gridLayout->addWidget(LabelTotalPersent, 2, 2, 1, 1);
-
-        RadioButtonNotReached = new QRadioButton(GroupBoxFilter);
-        RadioButtonNotReached->setObjectName(QString::fromUtf8("RadioButtonNotReached"));
-
-        gridLayout->addWidget(RadioButtonNotReached, 2, 3, 1, 1);
-
-        ButtonUpdate = new QPushButton(GroupBoxFilter);
-        ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
-
-        gridLayout->addWidget(ButtonUpdate, 3, 2, 1, 1);
-
-        CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
-        CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
-
-        gridLayout->addWidget(CheckBoxFavorites, 3, 3, 1, 1);
-
-
-        gridLayout_4->addWidget(GroupBoxFilter, 3, 0, 1, 3);
-
-        ButtonReturn = new QPushButton(FormAchievements);
-        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
-
-        gridLayout_4->addWidget(ButtonReturn, 0, 2, 1, 1);
-
-        TableWidgetAchievements = new QTableWidget(FormAchievements);
-        TableWidgetAchievements->setObjectName(QString::fromUtf8("TableWidgetAchievements"));
-        TableWidgetAchievements->setSortingEnabled(true);
-
-        gridLayout_4->addWidget(TableWidgetAchievements, 6, 0, 1, 3);
+        gridLayout->addWidget(LabelGameOnline, 2, 1, 1, 1);
 
         groupBox = new QGroupBox(FormAchievements);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -291,21 +133,262 @@ public:
         gridLayout_5->addWidget(LabelGameLogo, 0, 0, 1, 1);
 
 
-        gridLayout_4->addWidget(groupBox, 0, 0, 3, 1);
+        gridLayout->addWidget(groupBox, 0, 0, 3, 1);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_4->addItem(horizontalSpacer_2, 1, 1, 1, 1);
+        verticalLayout_7->addLayout(gridLayout);
 
-        ButtonCompare = new QPushButton(FormAchievements);
-        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
+        GroupBoxFilter = new QGroupBox(FormAchievements);
+        GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(GroupBoxFilter->sizePolicy().hasHeightForWidth());
+        GroupBoxFilter->setSizePolicy(sizePolicy);
+        verticalLayout_6 = new QVBoxLayout(GroupBoxFilter);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        ScrollAreaCategories = new QScrollArea(GroupBoxFilter);
+        ScrollAreaCategories->setObjectName(QString::fromUtf8("ScrollAreaCategories"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(ScrollAreaCategories->sizePolicy().hasHeightForWidth());
+        ScrollAreaCategories->setSizePolicy(sizePolicy1);
+        ScrollAreaCategories->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 292, 94));
+        ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
-        gridLayout_4->addWidget(ButtonCompare, 1, 2, 1, 1);
+        horizontalLayout_4->addWidget(ScrollAreaCategories);
 
-        GroupBoxCategories = new QGroupBox(FormAchievements);
+        ScrollAreaCheckCategories = new QScrollArea(GroupBoxFilter);
+        ScrollAreaCheckCategories->setObjectName(QString::fromUtf8("ScrollAreaCheckCategories"));
+        sizePolicy1.setHeightForWidth(ScrollAreaCheckCategories->sizePolicy().hasHeightForWidth());
+        ScrollAreaCheckCategories->setSizePolicy(sizePolicy1);
+        ScrollAreaCheckCategories->setWidgetResizable(true);
+        scrollAreaWidgetContents_4 = new QWidget();
+        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 291, 94));
+        ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
+
+        horizontalLayout_4->addWidget(ScrollAreaCheckCategories);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        ButtonAddCategory = new QPushButton(GroupBoxFilter);
+        ButtonAddCategory->setObjectName(QString::fromUtf8("ButtonAddCategory"));
+
+        verticalLayout_4->addWidget(ButtonAddCategory);
+
+        ButtonChangeCategory = new QPushButton(GroupBoxFilter);
+        ButtonChangeCategory->setObjectName(QString::fromUtf8("ButtonChangeCategory"));
+
+        verticalLayout_4->addWidget(ButtonChangeCategory);
+
+        LabelTotalPersent = new QLabel(GroupBoxFilter);
+        LabelTotalPersent->setObjectName(QString::fromUtf8("LabelTotalPersent"));
+        LabelTotalPersent->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_4->addWidget(LabelTotalPersent);
+
+        ButtonUpdate = new QPushButton(GroupBoxFilter);
+        ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
+
+        verticalLayout_4->addWidget(ButtonUpdate);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_4);
+
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        RadioButtonAll = new QRadioButton(GroupBoxFilter);
+        RadioButtonAll->setObjectName(QString::fromUtf8("RadioButtonAll"));
+        RadioButtonAll->setChecked(true);
+
+        verticalLayout_5->addWidget(RadioButtonAll);
+
+        RadioButtonReached = new QRadioButton(GroupBoxFilter);
+        RadioButtonReached->setObjectName(QString::fromUtf8("RadioButtonReached"));
+
+        verticalLayout_5->addWidget(RadioButtonReached);
+
+        RadioButtonNotReached = new QRadioButton(GroupBoxFilter);
+        RadioButtonNotReached->setObjectName(QString::fromUtf8("RadioButtonNotReached"));
+
+        verticalLayout_5->addWidget(RadioButtonNotReached);
+
+        CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
+        CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
+
+        verticalLayout_5->addWidget(CheckBoxFavorites);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_5);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_4);
+
+        GroupBoxAddCategory = new QGroupBox(GroupBoxFilter);
+        GroupBoxAddCategory->setObjectName(QString::fromUtf8("GroupBoxAddCategory"));
+        horizontalLayout = new QHBoxLayout(GroupBoxAddCategory);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(1, 1, 1, 1);
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetMinimumSize);
+        LineEditTitleNewCategory = new QLineEdit(GroupBoxAddCategory);
+        LineEditTitleNewCategory->setObjectName(QString::fromUtf8("LineEditTitleNewCategory"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(LineEditTitleNewCategory->sizePolicy().hasHeightForWidth());
+        LineEditTitleNewCategory->setSizePolicy(sizePolicy2);
+
+        verticalLayout->addWidget(LineEditTitleNewCategory);
+
+        CheckBoxNewCategoryOneValue = new QCheckBox(GroupBoxAddCategory);
+        CheckBoxNewCategoryOneValue->setObjectName(QString::fromUtf8("CheckBoxNewCategoryOneValue"));
+
+        verticalLayout->addWidget(CheckBoxNewCategoryOneValue);
+
+        ButtonAddValueNewCategory = new QPushButton(GroupBoxAddCategory);
+        ButtonAddValueNewCategory->setObjectName(QString::fromUtf8("ButtonAddValueNewCategory"));
+
+        verticalLayout->addWidget(ButtonAddValueNewCategory);
+
+
+        horizontalLayout->addLayout(verticalLayout);
+
+        ScrollAreaValues = new QScrollArea(GroupBoxAddCategory);
+        ScrollAreaValues->setObjectName(QString::fromUtf8("ScrollAreaValues"));
+        sizePolicy1.setHeightForWidth(ScrollAreaValues->sizePolicy().hasHeightForWidth());
+        ScrollAreaValues->setSizePolicy(sizePolicy1);
+        ScrollAreaValues->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 581, 74));
+        ScrollAreaValues->setWidget(scrollAreaWidgetContents_2);
+
+        horizontalLayout->addWidget(ScrollAreaValues);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        ButtonCancelNewCategory = new QPushButton(GroupBoxAddCategory);
+        ButtonCancelNewCategory->setObjectName(QString::fromUtf8("ButtonCancelNewCategory"));
+
+        verticalLayout_2->addWidget(ButtonCancelNewCategory);
+
+        ButtonAcceptNewCategory = new QPushButton(GroupBoxAddCategory);
+        ButtonAcceptNewCategory->setObjectName(QString::fromUtf8("ButtonAcceptNewCategory"));
+
+        verticalLayout_2->addWidget(ButtonAcceptNewCategory);
+
+
+        horizontalLayout->addLayout(verticalLayout_2);
+
+
+        verticalLayout_6->addWidget(GroupBoxAddCategory);
+
+        GroupBoxChangeCategory = new QGroupBox(GroupBoxFilter);
+        GroupBoxChangeCategory->setObjectName(QString::fromUtf8("GroupBoxChangeCategory"));
+        horizontalLayout_2 = new QHBoxLayout(GroupBoxChangeCategory);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(1, 1, 1, 1);
+        formLayout = new QFormLayout();
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        ButtonAddValueChangeCategory = new QPushButton(GroupBoxChangeCategory);
+        ButtonAddValueChangeCategory->setObjectName(QString::fromUtf8("ButtonAddValueChangeCategory"));
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, ButtonAddValueChangeCategory);
+
+        CheckBoxChangeCategoryOneValue = new QCheckBox(GroupBoxChangeCategory);
+        CheckBoxChangeCategoryOneValue->setObjectName(QString::fromUtf8("CheckBoxChangeCategoryOneValue"));
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, CheckBoxChangeCategoryOneValue);
+
+        LineEditTitleCategoryChangeCategory = new QLineEdit(GroupBoxChangeCategory);
+        LineEditTitleCategoryChangeCategory->setObjectName(QString::fromUtf8("LineEditTitleCategoryChangeCategory"));
+        sizePolicy2.setHeightForWidth(LineEditTitleCategoryChangeCategory->sizePolicy().hasHeightForWidth());
+        LineEditTitleCategoryChangeCategory->setSizePolicy(sizePolicy2);
+
+        formLayout->setWidget(1, QFormLayout::SpanningRole, LineEditTitleCategoryChangeCategory);
+
+        ComboBoxCategoriesChangeCategory = new QComboBox(GroupBoxChangeCategory);
+        ComboBoxCategoriesChangeCategory->setObjectName(QString::fromUtf8("ComboBoxCategoriesChangeCategory"));
+        ComboBoxCategoriesChangeCategory->setStyleSheet(QString::fromUtf8(""));
+
+        formLayout->setWidget(0, QFormLayout::SpanningRole, ComboBoxCategoriesChangeCategory);
+
+
+        horizontalLayout_2->addLayout(formLayout);
+
+        ScrollAreaValuesChangeCategory = new QScrollArea(GroupBoxChangeCategory);
+        ScrollAreaValuesChangeCategory->setObjectName(QString::fromUtf8("ScrollAreaValuesChangeCategory"));
+        sizePolicy1.setHeightForWidth(ScrollAreaValuesChangeCategory->sizePolicy().hasHeightForWidth());
+        ScrollAreaValuesChangeCategory->setSizePolicy(sizePolicy1);
+        ScrollAreaValuesChangeCategory->setWidgetResizable(true);
+        scrollAreaWidgetContents_3 = new QWidget();
+        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 532, 77));
+        ScrollAreaValuesChangeCategory->setWidget(scrollAreaWidgetContents_3);
+
+        horizontalLayout_2->addWidget(ScrollAreaValuesChangeCategory);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        ButtonCancelChangeCategory = new QPushButton(GroupBoxChangeCategory);
+        ButtonCancelChangeCategory->setObjectName(QString::fromUtf8("ButtonCancelChangeCategory"));
+
+        verticalLayout_3->addWidget(ButtonCancelChangeCategory);
+
+        ButtonDeleteCategory = new QPushButton(GroupBoxChangeCategory);
+        ButtonDeleteCategory->setObjectName(QString::fromUtf8("ButtonDeleteCategory"));
+
+        verticalLayout_3->addWidget(ButtonDeleteCategory);
+
+        ButtonAcceptChangeCategory = new QPushButton(GroupBoxChangeCategory);
+        ButtonAcceptChangeCategory->setObjectName(QString::fromUtf8("ButtonAcceptChangeCategory"));
+
+        verticalLayout_3->addWidget(ButtonAcceptChangeCategory);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_3);
+
+
+        verticalLayout_6->addWidget(GroupBoxChangeCategory);
+
+        GroupBoxCategories = new QGroupBox(GroupBoxFilter);
         GroupBoxCategories->setObjectName(QString::fromUtf8("GroupBoxCategories"));
 
-        gridLayout_4->addWidget(GroupBoxCategories, 4, 0, 1, 3);
+        verticalLayout_6->addWidget(GroupBoxCategories);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        LineEditNameAchievements = new QLineEdit(GroupBoxFilter);
+        LineEditNameAchievements->setObjectName(QString::fromUtf8("LineEditNameAchievements"));
+
+        horizontalLayout_3->addWidget(LineEditNameAchievements);
+
+        ButtonFindAchievement = new QPushButton(GroupBoxFilter);
+        ButtonFindAchievement->setObjectName(QString::fromUtf8("ButtonFindAchievement"));
+        ButtonFindAchievement->setEnabled(true);
+
+        horizontalLayout_3->addWidget(ButtonFindAchievement);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_3);
+
+
+        verticalLayout_7->addWidget(GroupBoxFilter);
+
+        TableWidgetAchievements = new QTableWidget(FormAchievements);
+        TableWidgetAchievements->setObjectName(QString::fromUtf8("TableWidgetAchievements"));
+        TableWidgetAchievements->setSortingEnabled(true);
+
+        verticalLayout_7->addWidget(TableWidgetAchievements);
 
 
         retranslateUi(FormAchievements);
@@ -316,37 +399,37 @@ public:
     void retranslateUi(QWidget *FormAchievements)
     {
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
+        ButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
+        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
         LabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
+        groupBox->setTitle(QString());
+        LabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         GroupBoxFilter->setAccessibleName(QApplication::translate("FormAchievements", "Filter", nullptr));
 #endif // QT_NO_ACCESSIBILITY
         GroupBoxFilter->setTitle(QApplication::translate("FormAchievements", "Filter", nullptr));
-        RadioButtonAll->setText(QApplication::translate("FormAchievements", "All", nullptr));
-        ButtonFindAchievement->setText(QApplication::translate("FormAchievements", "Find", nullptr));
         ButtonAddCategory->setText(QApplication::translate("FormAchievements", "Add category", nullptr));
         ButtonChangeCategory->setText(QApplication::translate("FormAchievements", "Change category", nullptr));
+        LabelTotalPersent->setText(QApplication::translate("FormAchievements", "TotalPersent", nullptr));
+        ButtonUpdate->setText(QApplication::translate("FormAchievements", "Update", nullptr));
+        RadioButtonAll->setText(QApplication::translate("FormAchievements", "All", nullptr));
         RadioButtonReached->setText(QApplication::translate("FormAchievements", "Reached", nullptr));
+        RadioButtonNotReached->setText(QApplication::translate("FormAchievements", "Not reached", nullptr));
+        CheckBoxFavorites->setText(QApplication::translate("FormAchievements", "Only favorites", nullptr));
         GroupBoxAddCategory->setTitle(QApplication::translate("FormAchievements", "New category", nullptr));
         LineEditTitleNewCategory->setPlaceholderText(QApplication::translate("FormAchievements", "Title of category", nullptr));
+        CheckBoxNewCategoryOneValue->setText(QApplication::translate("FormAchievements", "OneValue", nullptr));
+        ButtonAddValueNewCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
         ButtonCancelNewCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
         ButtonAcceptNewCategory->setText(QApplication::translate("FormAchievements", "Accept", nullptr));
-        ButtonAddValueNewCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
-        CheckBoxNewCategoryOneValue->setText(QApplication::translate("FormAchievements", "OneValue", nullptr));
         GroupBoxChangeCategory->setTitle(QApplication::translate("FormAchievements", "Change category", nullptr));
-        ButtonDeleteCategory->setText(QApplication::translate("FormAchievements", "Delete", nullptr));
         ButtonAddValueChangeCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
-        ButtonAcceptChangeCategory->setText(QApplication::translate("FormAchievements", "Accept", nullptr));
-        ButtonCancelChangeCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
         CheckBoxChangeCategoryOneValue->setText(QApplication::translate("FormAchievements", "OneValue", nullptr));
-        LabelTotalPersent->setText(QApplication::translate("FormAchievements", "TotalPersent", nullptr));
-        RadioButtonNotReached->setText(QApplication::translate("FormAchievements", "Not reached", nullptr));
-        ButtonUpdate->setText(QApplication::translate("FormAchievements", "Update", nullptr));
-        CheckBoxFavorites->setText(QApplication::translate("FormAchievements", "Only favorites", nullptr));
-        ButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
-        groupBox->setTitle(QString());
-        LabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
-        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
+        ButtonCancelChangeCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
+        ButtonDeleteCategory->setText(QApplication::translate("FormAchievements", "Delete", nullptr));
+        ButtonAcceptChangeCategory->setText(QApplication::translate("FormAchievements", "Accept", nullptr));
         GroupBoxCategories->setTitle(QApplication::translate("FormAchievements", "Categories", nullptr));
+        ButtonFindAchievement->setText(QApplication::translate("FormAchievements", "Find", nullptr));
     } // retranslateUi
 
 };

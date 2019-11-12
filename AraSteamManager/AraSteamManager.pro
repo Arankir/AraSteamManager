@@ -25,6 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    class/Threads/threadachievements.cpp \
+    class/Threads/threadcompare.cpp \
+    class/Threads/threadfriends.cpp \
+    class/Threads/threadgames.cpp \
+    class/Threads/threading.cpp \
     class/categoryvalue.cpp \
     class/imagerequest.cpp \
     class/profile.cpp \
@@ -53,6 +58,11 @@ SOURCES += \
     subform/formaddcategory.cpp
 
 HEADERS += \
+    class/Threads/threadachievements.h \
+    class/Threads/threadcompare.h \
+    class/Threads/threadfriends.h \
+    class/Threads/threadgames.h \
+    class/Threads/threading.h \
     class/categoryvalue.h \
     class/imagerequest.h \
     class/profile.h \

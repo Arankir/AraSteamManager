@@ -37,6 +37,7 @@ private slots:
     void keyPressEvent(QKeyEvent *event);
 
     void GoToProfile(QString id, QString type, bool UpdateBuffer);
+    void InitComponents();
     void on_ButtonFindProfile_clicked();
     void on_ButtonGames_clicked();
     void on_ButtonFriends_clicked();

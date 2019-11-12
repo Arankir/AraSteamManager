@@ -13,14 +13,15 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -28,18 +29,21 @@ QT_BEGIN_NAMESPACE
 class Ui_FormFriends
 {
 public:
-    QGridLayout *gridLayout_3;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout;
     QLabel *LabelLogo;
     QSpacerItem *horizontalSpacer;
     QPushButton *ButtonReturn;
     QGroupBox *GroupBoxFilter;
-    QGridLayout *gridLayout_2;
-    QComboBox *ComboBoxStatus;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
+    QLineEdit *LineEditName;
     QPushButton *ButtonFind;
+    QHBoxLayout *horizontalLayout_3;
+    QComboBox *ComboBoxStatus;
     QCheckBox *CheckBoxOpenProfile;
     QCheckBox *CheckBoxFavorites;
     QSpacerItem *horizontalSpacer_2;
-    QLineEdit *LineEditName;
     QTableWidget *TableWidgetFriends;
 
     void setupUi(QWidget *FormFriends)
@@ -47,57 +51,72 @@ public:
         if (FormFriends->objectName().isEmpty())
             FormFriends->setObjectName(QString::fromUtf8("FormFriends"));
         FormFriends->resize(825, 536);
-        gridLayout_3 = new QGridLayout(FormFriends);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        verticalLayout_2 = new QVBoxLayout(FormFriends);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         LabelLogo = new QLabel(FormFriends);
         LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
 
-        gridLayout_3->addWidget(LabelLogo, 0, 0, 1, 1);
+        horizontalLayout->addWidget(LabelLogo);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_3->addItem(horizontalSpacer, 0, 1, 1, 1);
+        horizontalLayout->addItem(horizontalSpacer);
 
         ButtonReturn = new QPushButton(FormFriends);
         ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
 
-        gridLayout_3->addWidget(ButtonReturn, 0, 2, 1, 1);
+        horizontalLayout->addWidget(ButtonReturn);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
 
         GroupBoxFilter = new QGroupBox(FormFriends);
         GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
-        gridLayout_2 = new QGridLayout(GroupBoxFilter);
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        ComboBoxStatus = new QComboBox(GroupBoxFilter);
-        ComboBoxStatus->setObjectName(QString::fromUtf8("ComboBoxStatus"));
+        verticalLayout = new QVBoxLayout(GroupBoxFilter);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        LineEditName = new QLineEdit(GroupBoxFilter);
+        LineEditName->setObjectName(QString::fromUtf8("LineEditName"));
 
-        gridLayout_2->addWidget(ComboBoxStatus, 1, 0, 1, 1);
+        horizontalLayout_2->addWidget(LineEditName);
 
         ButtonFind = new QPushButton(GroupBoxFilter);
         ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
 
-        gridLayout_2->addWidget(ButtonFind, 0, 4, 1, 1);
+        horizontalLayout_2->addWidget(ButtonFind);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        ComboBoxStatus = new QComboBox(GroupBoxFilter);
+        ComboBoxStatus->setObjectName(QString::fromUtf8("ComboBoxStatus"));
+
+        horizontalLayout_3->addWidget(ComboBoxStatus);
 
         CheckBoxOpenProfile = new QCheckBox(GroupBoxFilter);
         CheckBoxOpenProfile->setObjectName(QString::fromUtf8("CheckBoxOpenProfile"));
 
-        gridLayout_2->addWidget(CheckBoxOpenProfile, 1, 1, 1, 1);
+        horizontalLayout_3->addWidget(CheckBoxOpenProfile);
 
         CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
         CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
 
-        gridLayout_2->addWidget(CheckBoxFavorites, 1, 2, 1, 1);
+        horizontalLayout_3->addWidget(CheckBoxFavorites);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer_2, 1, 3, 1, 1);
-
-        LineEditName = new QLineEdit(GroupBoxFilter);
-        LineEditName->setObjectName(QString::fromUtf8("LineEditName"));
-
-        gridLayout_2->addWidget(LineEditName, 0, 0, 1, 4);
+        horizontalLayout_3->addItem(horizontalSpacer_2);
 
 
-        gridLayout_3->addWidget(GroupBoxFilter, 5, 0, 1, 3);
+        verticalLayout->addLayout(horizontalLayout_3);
+
+
+        verticalLayout_2->addWidget(GroupBoxFilter);
 
         TableWidgetFriends = new QTableWidget(FormFriends);
         if (TableWidgetFriends->columnCount() < 8)
@@ -122,7 +141,7 @@ public:
         TableWidgetFriends->setSortingEnabled(true);
         TableWidgetFriends->setColumnCount(8);
 
-        gridLayout_3->addWidget(TableWidgetFriends, 6, 0, 1, 3);
+        verticalLayout_2->addWidget(TableWidgetFriends);
 
 
         retranslateUi(FormFriends);

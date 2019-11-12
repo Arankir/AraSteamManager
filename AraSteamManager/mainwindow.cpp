@@ -4,46 +4,6 @@
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
     Words=Setting.GetWords("mainwindow");
-    ui->LabelAvatar->setText("");
-    ui->LabelLogo->setText("(WIP)");
-    ui->LabelTimeCreated->setText("");
-    ui->LabelPersonaState->setText("");
-    ui->LabelLocCountryCode->setText("");
-    ui->LabelProfileUrl->setText("");
-    ui->LabelRealName->setText("");
-    ui->Labellvl->setText("");
-    ui->LabelBans->setText("");
-    ui->LabelPersonaState->setWordWrap(true);
-    ui->ButtonGames->setVisible(false);
-    ui->ButtonFriends->setVisible(false);
-    ui->ButtonFavorites->setVisible(false);
-    ui->ButtonSetProfile->setVisible(false);
-    ui->ButtonStatistics->setVisible(false);
-    ui->ButtonGoToMyProfile->setVisible(false);
-    ui->ScrollAreaForm->setVisible(false);
-    ui->LabelNick->setVisible(false);
-    ui->line->setVisible(false);
-    ui->LabelProfileVisibility->setVisible(false);
-    ui->ScrollAreaProfileInfo->setVisible(false);
-    ui->ButtonFindProfile->setText(" "+Words[0]);
-    ui->LineEditIdProfile->setPlaceholderText(Words[1]);
-    ui->ButtonSettings->setText(Words[2]);
-    ui->ButtonExit->setText(" "+Words[3]);
-    ui->ButtonStatistics->setText(" "+Words[6]);
-    ui->ButtonFavorites->setText(" "+Words[7]);
-    ui->ButtonSetProfile->setText(Words[8]);
-    ui->ButtonGoToMyProfile->setText(Words[9]);
-    if(Setting.GetStatus()=="success"){
-        if(Setting.GetMyProfile()!="none")
-            GoToProfile(Setting.GetMyProfile(),"url",true);
-    }
-    //        ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //        ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//    QPixmap pixmap2("images/program/statistic_white.png","PNG");
-//    QIcon ButtonIcon2(pixmap2);
-//    ui->ButtonStatistics->setIcon(ButtonIcon2);
-//    ui->ButtonSettings->setIconSize(pixmap.rect().size());
-//    ui->ButtonStatistics->setIconSize(QSize(13,13));
     switch(Setting.GetTheme()){
     case 1:{
         QPalette darkPalette;
@@ -79,6 +39,43 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         break;
         }
     }
+    InitComponents();
+    if(Setting.GetStatus()=="success"){
+        if(Setting.GetMyProfile()!="none")
+            GoToProfile(Setting.GetMyProfile(),"url",true);
+    }
+}
+
+void MainWindow::InitComponents(){
+    ui->LabelAvatar->setText("");
+    ui->LabelLogo->setText("(WIP)");
+    ui->LabelTimeCreated->setText("");
+    ui->LabelPersonaState->setText("");
+    ui->LabelLocCountryCode->setText("");
+    ui->LabelProfileUrl->setText("");
+    ui->LabelRealName->setText("");
+    ui->Labellvl->setText("");
+    ui->LabelBans->setText("");
+    ui->LabelPersonaState->setWordWrap(true);
+    ui->ButtonGames->setVisible(false);
+    ui->ButtonFriends->setVisible(false);
+    ui->ButtonFavorites->setVisible(false);
+    ui->ButtonSetProfile->setVisible(false);
+    ui->ButtonStatistics->setVisible(false);
+    ui->ButtonGoToMyProfile->setVisible(false);
+    ui->ScrollAreaForm->setVisible(false);
+    ui->LabelNick->setVisible(false);
+    ui->line->setVisible(false);
+    ui->LabelProfileVisibility->setVisible(false);
+    ui->ScrollAreaProfileInfo->setVisible(false);
+    ui->ButtonFindProfile->setText(" "+Words[0]);
+    ui->LineEditIdProfile->setPlaceholderText(Words[1]);
+    ui->ButtonSettings->setText(Words[2]);
+    ui->ButtonExit->setText(" "+Words[3]);
+    ui->ButtonStatistics->setText(" "+Words[6]);
+    ui->ButtonFavorites->setText(" "+Words[7]);
+    ui->ButtonSetProfile->setText(Words[8]);
+    ui->ButtonGoToMyProfile->setText(Words[9]);
     ui->ButtonFindProfile->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->ButtonFavorites->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
     ui->ButtonStatistics->setIcon(QIcon(":/"+theme+"/program/"+theme+"/statistic.png"));
@@ -86,6 +83,13 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->ButtonExit->setIcon(QIcon(":/"+theme+"/program/"+theme+"/exit.png"));
     ui->ButtonFriends->setIcon(QIcon(":/"+theme+"/program/"+theme+"/friends.png"));
     ui->ButtonGames->setIcon(QIcon(":/"+theme+"/program/"+theme+"/games.png"));
+    //        ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //        ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //    QPixmap pixmap2("images/program/statistic_white.png","PNG");
+    //    QIcon ButtonIcon2(pixmap2);
+    //    ui->ButtonStatistics->setIcon(ButtonIcon2);
+    //    ui->ButtonSettings->setIconSize(pixmap.rect().size());
+    //    ui->ButtonStatistics->setIconSize(QSize(13,13));
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
