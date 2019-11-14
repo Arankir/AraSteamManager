@@ -1,6 +1,6 @@
 #include "Sachievementpercentage.h"
 
-SAchievementPercentage::SAchievementPercentage(QJsonObject ObjAchievement, QObject *parent) : QObject(parent){
+SAchievementPercentage::SAchievementPercentage(QJsonObject ObjAchievement, QObject* parent) : QObject(parent){
     Set(ObjAchievement);
 }
 SAchievementPercentage::SAchievementPercentage(){
@@ -19,5 +19,5 @@ SAchievementPercentage::SAchievementPercentage(const SAchievementPercentage & ac
 SAchievementPercentage & SAchievementPercentage::operator=(const SAchievementPercentage & achievement){
     apiname=achievement.apiname;
     percent=achievement.percent;
-    return *this;
+    return* this;
 }

@@ -1,6 +1,6 @@
 #include "imagerequest.h"
 
-ImageRequest::ImageRequest(QString url, int row, QString save, bool autosave, QObject *parent) : QObject(parent){
+ImageRequest::ImageRequest(QString url, int row, QString save, bool autosave, QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     connect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
     answer="";
@@ -43,7 +43,7 @@ void ImageRequest::LoadImage(QString url, int column, QString save, bool autosav
     manager->get(QNetworkRequest(QUrl(url)));
 }
 
-void ImageRequest::OnResultGet(QNetworkReply *reply){
+void ImageRequest::OnResultGet(QNetworkReply* reply){
     if(!reply->error()){
         answer=reply->readAll();
         if(Autosave){

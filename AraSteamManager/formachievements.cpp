@@ -1,7 +1,7 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
+FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidget* parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
     ui->setupUi(this);
     Words=Setting.GetWords("achievements");
     key=keys;
@@ -93,11 +93,11 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
     ui->GroupBoxAddCategory->setVisible(false);
     ui->GroupBoxChangeCategory->setVisible(false);
     ui->GroupBoxCategories->setVisible(false);
-    QWidget *widget1 = new QWidget;
+    QWidget* widget1 = new QWidget;
     newcategoryvalueslayout = new QFormLayout;
     widget1->setLayout(newcategoryvalueslayout);
     ui->ScrollAreaValues->setWidget(widget1);
-    QWidget *widget2 = new QWidget;
+    QWidget* widget2 = new QWidget;
     changecategoryvalueslayout = new QFormLayout;
     widget2->setLayout(changecategoryvalueslayout);
     ui->ScrollAreaValuesChangeCategory->setWidget(widget2);
@@ -111,7 +111,7 @@ FormAchievements::~FormAchievements(){
     //delete changecategoryvalueslayout;
     delete ui;
 }
-void FormAchievements::closeEvent(QCloseEvent *){
+void FormAchievements::closeEvent(QCloseEvent*){
     emit return_to_games();
     //delete this;
 }
@@ -131,7 +131,7 @@ void FormAchievements::PullTableWidget(){
     ui->TableWidgetAchievements->setRowCount(0);
     if(!(achievements.GetStatusGlobal()=="success"&&achievements.GetStatusPlayer()=="success"&&achievements.GetStatusPercent()=="success")){
         ui->TableWidgetAchievements->insertRow(0);
-        QTableWidgetItem *item1 = new QTableWidgetItem("Error");
+        QTableWidgetItem* item1 = new QTableWidgetItem("Error");
         ui->TableWidgetAchievements->setItem(0,1,item1);
         ui->TableWidgetAchievements->setColumnHidden(2,true);
         ui->TableWidgetAchievements->setColumnHidden(3,true);
@@ -149,12 +149,12 @@ void FormAchievements::PullTableWidget(){
             ui->TableWidgetAchievements->setItem(row,0,new QTableWidgetItem(achievements.GetApiname(i)));
             QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
             if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1))){
-                ImageRequest *image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1),true);
-                connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+                ImageRequest* image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1),true);
+                connect(image,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
                 } else {
                 QPixmap pixmap;
                 pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1));
-                QLabel *label = new QLabel;
+                QLabel* label = new QLabel;
                 label->setPixmap(pixmap);
                 ui->TableWidgetAchievements->setCellWidget(row,1,label);
                 }
@@ -168,7 +168,7 @@ void FormAchievements::PullTableWidget(){
                 ui->TableWidgetAchievements->setItem(row,5,new QTableWidgetItem(Words[24]));
                 totalnr++;
                 }
-            QPushButton *button1 = new QPushButton;
+            QPushButton* button1 = new QPushButton;
             button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
             connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
             button1->setObjectName("ButtonFavorites&"+achievements.GetApiname(i));
@@ -219,11 +219,11 @@ void FormAchievements::on_RadioButtonNotReached_clicked(){
     UpdateHiddenRows();
 }
 
-void FormAchievements::OnResultImage(ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+void FormAchievements::OnResultImage(ImageRequest* imgr){
+    disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
-    QLabel *label = new QLabel;
+    QLabel* label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetAchievements->setCellWidget(imgr->GetRow(),1,label);
     ui->TableWidgetAchievements->resizeRowToContents(imgr->GetRow());
@@ -238,22 +238,22 @@ void FormAchievements::ShowCategories(){
         while(ui->ComboBoxCategoriesChangeCategory->count()>1){
             ui->ComboBoxCategoriesChangeCategory->removeItem(1);
         }
-        QFormLayout *layout1 = new QFormLayout;
-        QFormLayout *layout2 = new QFormLayout;
-        QWidget *widget1 = new QWidget;
-        QWidget *widget2 = new QWidget;
+        QFormLayout* layout1 = new QFormLayout;
+        QFormLayout* layout2 = new QFormLayout;
+        QWidget* widget1 = new QWidget;
+        QWidget* widget2 = new QWidget;
         for (int i = 0; i < list.size(); ++i){
             QFile category("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(i).fileName());
             category.open(QFile::ReadOnly);
             QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
             if(cat.object().value("values").toArray().size()==1){
-                QCheckBox *chb = new QCheckBox;
+                QCheckBox* chb = new QCheckBox;
                 chb->setText(cat.object().value("name").toString());
                 chb->setObjectName("Category"+QString::number(i));
                 connect(chb,SIGNAL(stateChanged(int)),this,SLOT(on_CheckBoxCategory_Change(int)));
                 layout2->addRow(chb);
             } else {
-                QComboBox *cb = new QComboBox;
+                QComboBox* cb = new QComboBox;
                 cb->addItem(Words[37]);
                 for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                     cb->addItem(cat.object().value("values").toArray().at(j).toString());
@@ -273,7 +273,7 @@ void FormAchievements::ShowCategories(){
         ui->ScrollAreaCategories->setHidden((layout1->rowCount()==0)?true:false);
         ui->ScrollAreaCheckCategories->setHidden((layout2->rowCount()==0)?true:false);
     }
-        bool **New = new bool*[ui->TableWidgetAchievements->rowCount()];
+        bool** New = new bool*[ui->TableWidgetAchievements->rowCount()];
         for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
             New[i]=new bool[list.size()+3];
             for (int j=0;j<list.size()+3;j++) {
@@ -299,7 +299,7 @@ void FormAchievements::UpdateHiddenRows(){
 }
 
 void FormAchievements::on_ComboBoxCategory_Change(int index){
-    QComboBox *cb = qobject_cast<QComboBox*>(sender());
+    QComboBox* cb = qobject_cast<QComboBox*>(sender());
     QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
     if(categories.exists()){
         categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -328,7 +328,7 @@ void FormAchievements::on_ComboBoxCategory_Change(int index){
     }
 }
 void FormAchievements::on_CheckBoxCategory_Change(int ind){
-    QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
+    QCheckBox* cb = qobject_cast<QCheckBox*>(sender());
     QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
     if(categories.exists()){
         categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -360,8 +360,8 @@ void FormAchievements::on_ButtonAddCategory_clicked(){
     ui->ButtonAddCategory->setEnabled(false);
     ui->ButtonChangeCategory->setEnabled(false);
     //ui->GroupBoxAddCategory->setVisible(true);
-    FormAddCategory *AddCategory = new FormAddCategory(QString::number(game.GetAppid()));
-    QGridLayout *lay = new QGridLayout;
+    FormAddCategory* AddCategory = new FormAddCategory(QString::number(game.GetAppid()));
+    QGridLayout* lay = new QGridLayout;
     lay->addWidget(AddCategory);
     ui->GroupBoxCategories->setLayout(lay);
     ui->GroupBoxCategories->setVisible(true);
@@ -508,33 +508,33 @@ void FormAchievements::on_Change_Title_NewCategory_OneValue(){
 }
 
 void FormAchievements::EditLineEditNewCategoryValue(){
-    QLineEdit *lied =qobject_cast<QLineEdit*>(sender());
+    QLineEdit* lied =qobject_cast<QLineEdit*>(sender());
     int i=lied->objectName().mid(20,lied->objectName().length()-20).toInt();
     ui->TableWidgetAchievements->horizontalHeaderItem(7+i)->setText(lied->text());
 }
 void FormAchievements::on_buttonNewCategoryUpValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int i=btn->objectName().mid(21,btn->objectName().length()-21).toInt();
     UpValueCategory("New",i);
 }
 void FormAchievements::on_buttonNewCategoryDownValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int i=btn->objectName().mid(23,btn->objectName().length()-23).toInt();
     UpValueCategory("New",i+1);
 }
 void FormAchievements::on_buttonNewCategoryDeleteValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int i=btn->objectName().mid(25,btn->objectName().length()-25).toInt();
     delete btn;
     DeleteValuesCategory("New",i,newcategoryvalueslayout);
 }
 void FormAchievements::on_buttonNewCategorySelectValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int j=btn->objectName().mid(25,btn->objectName().length()-25).toInt();
     SelectValueCategory(j,Qt::Checked);
 }
 void FormAchievements::on_buttonNewCategoryUnSelectValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int j=btn->objectName().mid(27,btn->objectName().length()-27).toInt();
     SelectValueCategory(j,Qt::Unchecked);
 }
@@ -556,13 +556,13 @@ void FormAchievements::on_ComboBoxCategoriesChangeCategory_activated(int index){
             QJsonDocument categor=QJsonDocument().fromJson(category.readAll());
             ui->LineEditTitleCategoryChangeCategory->setEnabled(true);
             for (int i=0;i<categor.object().value("values").toArray().size();i++) {
-                QHBoxLayout *bl = new QHBoxLayout;
-                QPushButton *btn = new QPushButton;
-                QLineEdit *val = new QLineEdit(categor.object().value("values").toArray().at(i).toString());
-                QPushButton *up = new QPushButton();
-                QPushButton *down = new QPushButton();
-                QPushButton *select = new QPushButton();
-                QPushButton *unselect = new QPushButton();
+                QHBoxLayout* bl = new QHBoxLayout;
+                QPushButton* btn = new QPushButton;
+                QLineEdit* val = new QLineEdit(categor.object().value("values").toArray().at(i).toString());
+                QPushButton* up = new QPushButton();
+                QPushButton* down = new QPushButton();
+                QPushButton* select = new QPushButton();
+                QPushButton* unselect = new QPushButton();
                 btn->setObjectName("btnChangeCategoryDeleteValue"+QString::number(changecategoryvalueslayout->rowCount()));
                 val->setObjectName("liedChangeCategoryValue"+QString::number(changecategoryvalueslayout->rowCount()));
                 up->setObjectName("btnChangeCategoryUpValue"+QString::number(changecategoryvalueslayout->rowCount()));
@@ -590,7 +590,7 @@ void FormAchievements::on_ComboBoxCategoriesChangeCategory_activated(int index){
                 bl->addWidget(unselect);
                 bl->addWidget(btn);
                 bl->setMargin(0);
-                QWidget *Wbl = new QWidget;
+                QWidget* Wbl = new QWidget;
                 Wbl->setLayout(bl);
 //                changecategoryvalueslayout->addWidget(val,i,0);
 //                changecategoryvalueslayout->addWidget(up,i,1);
@@ -771,33 +771,33 @@ void FormAchievements::on_Change_Title_ChangeCategory_OneValue(){
 }
 
 void FormAchievements::EditLineEditChangeCategoryValue(){
-    QLineEdit *lied =qobject_cast<QLineEdit*>(sender());
+    QLineEdit* lied =qobject_cast<QLineEdit*>(sender());
     int i=lied->objectName().mid(23,lied->objectName().length()-23).toInt();
     ui->TableWidgetAchievements->horizontalHeaderItem(7+i)->setText(lied->text());
 }
 void FormAchievements::on_buttonChangeCategoryUpValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int i=btn->objectName().mid(24,btn->objectName().length()-24).toInt();
     UpValueCategory("Change",i);
 }
 void FormAchievements::on_buttonChangeCategoryDownValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int i=btn->objectName().mid(26,btn->objectName().length()-26).toInt();
     UpValueCategory("Change",i+1);
 }
 void FormAchievements::on_buttonChangeCategoryDeleteValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int i=btn->objectName().mid(28,btn->objectName().length()-28).toInt();
     delete btn;
     DeleteValuesCategory("Change",i,changecategoryvalueslayout);
 }
 void FormAchievements::on_buttonChangeCategorySelectValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int j=btn->objectName().mid(28,btn->objectName().length()-28).toInt();
     SelectValueCategory(j,Qt::Checked);
 }
 void FormAchievements::on_buttonChangeCategoryUnSelectValues_clicked(){
-    QPushButton *btn =qobject_cast<QPushButton*>(sender());
+    QPushButton* btn =qobject_cast<QPushButton*>(sender());
     int j=btn->objectName().mid(30,btn->objectName().length()-30).toInt();
     SelectValueCategory(j,Qt::Unchecked);
 }
@@ -844,7 +844,7 @@ void FormAchievements::CategoryPositionChange(int pos, int posnew){
 }
 void FormAchievements::CategorySelectChange(int pos, bool select){
     ui->TableWidgetAchievements->selectColumn(2);
-    QList<QTableWidgetItem *> rows = ui->TableWidgetAchievements->selectedItems();
+    QList<QTableWidgetItem*> rows = ui->TableWidgetAchievements->selectedItems();
     qDebug()<<rows.size();
     for (int i=0;i<rows.size();i++) {
         ui->TableWidgetAchievements->item(rows.at(i)->row(),7+pos)->setCheckState(select?Qt::Checked:Qt::Unchecked);
@@ -856,7 +856,7 @@ void FormAchievements::CategoryDeleteValue(int pos){
 }
 void FormAchievements::CategoryAccept(){
     QString title="";
-    QWidget *Form = ui->GroupBoxCategories->layout()->takeAt(0)->widget();
+    QWidget* Form = ui->GroupBoxCategories->layout()->takeAt(0)->widget();
     if(QString(Form->metaObject()->className())=="FormAddCategory"){
         title=dynamic_cast<FormAddCategory*>(Form)->GetTitle();
     }
@@ -959,13 +959,13 @@ void FormAchievements::AddValueCategory(QString Type, QFormLayout* layout){
         pItem->setCheckState(Qt::Unchecked);
         ui->TableWidgetAchievements->setItem(i,ui->TableWidgetAchievements->columnCount()-1, pItem);
         }
-    QHBoxLayout *bl = new QHBoxLayout;
-    QPushButton *btn = new QPushButton;
-    QLineEdit *val = new QLineEdit();
-    QPushButton *up = new QPushButton();
-    QPushButton *down = new QPushButton();
-    QPushButton *select = new QPushButton();
-    QPushButton *unselect = new QPushButton();
+    QHBoxLayout* bl = new QHBoxLayout;
+    QPushButton* btn = new QPushButton;
+    QLineEdit* val = new QLineEdit();
+    QPushButton* up = new QPushButton();
+    QPushButton* down = new QPushButton();
+    QPushButton* select = new QPushButton();
+    QPushButton* unselect = new QPushButton();
     int row = layout->rowCount();
     btn->setObjectName("btn"+Type+"CategoryDeleteValue"+QString::number(row));
     val->setObjectName("lied"+Type+"CategoryValue"+QString::number(row));
@@ -1008,7 +1008,7 @@ void FormAchievements::AddValueCategory(QString Type, QFormLayout* layout){
     bl->addWidget(unselect);
     bl->addWidget(btn);
     bl->setMargin(0);
-    QWidget *Wbl = new QWidget;
+    QWidget* Wbl = new QWidget;
     Wbl->setLayout(bl);
     layout->addRow(Wbl);
 //    } else
@@ -1057,7 +1057,7 @@ void FormAchievements::DeleteValuesCategory(QString Type, int i, QFormLayout* la
     //утечка данных (надо удалить еще 2 кнопки, лайнэдит, лейаут и виджет
     layout->removeRow(i++);
     while(i<layout->rowCount()+1){
-        QPushButton * butn = findChild<QPushButton*>("btn"+Type+"CategoryDeleteValue"+QString::number(i));
+        QPushButton* butn = findChild<QPushButton*>("btn"+Type+"CategoryDeleteValue"+QString::number(i));
         if(butn)
             butn->setObjectName("btn"+Type+"CategoryDeleteValue"+QString::number(i-1));
         QLineEdit* lied = findChild<QLineEdit*>("lied"+Type+"CategoryValue"+QString::number(i));
@@ -1080,7 +1080,7 @@ void FormAchievements::DeleteValuesCategory(QString Type, int i, QFormLayout* la
 }
 void FormAchievements::SelectValueCategory(int j,Qt::CheckState CS){
     ui->TableWidgetAchievements->selectColumn(2);
-    QList<QTableWidgetItem *> rows = ui->TableWidgetAchievements->selectedItems();
+    QList<QTableWidgetItem*> rows = ui->TableWidgetAchievements->selectedItems();
     qDebug()<<rows.size();
     for (int i=0;i<rows.size();i++) {
         ui->TableWidgetAchievements->item(rows.at(i)->row(),7+j)->setCheckState(CS);

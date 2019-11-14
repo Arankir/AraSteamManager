@@ -18,6 +18,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
@@ -71,6 +72,7 @@ public:
     QPushButton *ButtonStatistics;
     QSpacerItem *horizontalSpacer_4;
     QPushButton *ButtonGoToMyProfile;
+    QProgressBar *FormProgressBar;
     QHBoxLayout *horizontalLayout_5;
     QScrollArea *ScrollAreaForm;
     QWidget *FormsWidget;
@@ -310,6 +312,12 @@ public:
 
         verticalLayout->addWidget(ScrollAreaProfileInfo);
 
+        FormProgressBar = new QProgressBar(centralWidget);
+        FormProgressBar->setObjectName(QString::fromUtf8("FormProgressBar"));
+        FormProgressBar->setValue(0);
+
+        verticalLayout->addWidget(FormProgressBar);
+
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
@@ -318,7 +326,7 @@ public:
         ScrollAreaForm->setWidgetResizable(true);
         FormsWidget = new QWidget();
         FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 618, 190));
+        FormsWidget->setGeometry(QRect(0, 0, 618, 163));
         ScrollAreaForm->setWidget(FormsWidget);
 
         horizontalLayout_5->addWidget(ScrollAreaForm);
@@ -337,7 +345,6 @@ public:
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        mainToolBar->setMovable(true);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -373,6 +380,7 @@ public:
         ButtonFavorites->setText(QApplication::translate("MainWindow", "Favorites", nullptr));
         ButtonStatistics->setText(QApplication::translate("MainWindow", "Statistics", nullptr));
         ButtonGoToMyProfile->setText(QApplication::translate("MainWindow", "Go to my profile", nullptr));
+        FormProgressBar->setFormat(QApplication::translate("MainWindow", "%v/%m", nullptr));
     } // retranslateUi
 
 };

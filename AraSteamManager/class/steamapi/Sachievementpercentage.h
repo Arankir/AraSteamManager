@@ -10,7 +10,7 @@ class SAchievementPercentage : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementPercentage(QJsonObject ObjAchievement, QObject *parent = nullptr);
+    explicit SAchievementPercentage(QJsonObject ObjAchievement, QObject* parent = nullptr);
     SAchievementPercentage();
     void Set(QJsonObject ObjAchievement);
     QString GetApiname() {return apiname;}

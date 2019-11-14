@@ -1,6 +1,6 @@
 #include "settings.h"
 
-Settings::Settings(QObject *parent) : QObject(parent){
+Settings::Settings(QObject* parent) : QObject(parent){
     if(QFile::exists("Files/Settings.txt")){
         QFile settings("Files/Settings.txt");
         if (settings.open(QIODevice::ReadOnly)){

@@ -1,6 +1,6 @@
 #include "threadachievements.h"
 
-ThreadAchievements::ThreadAchievements(QObject *parent) : QObject(parent)
+ThreadAchievements::ThreadAchievements(QObject* parent) : QObject(parent)
 {
 
 }
@@ -13,6 +13,6 @@ int ThreadAchievements::Fill(){
 
 }
 
-void ThreadAchievements::OnResultImage(ImageRequest *imgr){
+void ThreadAchievements::OnResultImage(ImageRequest* imgr){
 
 }

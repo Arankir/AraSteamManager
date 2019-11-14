@@ -1,7 +1,7 @@
 #include "formaddcategory.h"
 #include "ui_formaddcategory.h"
 
-FormAddCategory::FormAddCategory(QString games, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAddCategory){
+FormAddCategory::FormAddCategory(QString games, QWidget* parent) :    QWidget(parent),    ui(new Ui::FormAddCategory){
     ui->setupUi(this);
     game=games;
     Words=Setting.GetWords("addcategory");
@@ -11,7 +11,7 @@ FormAddCategory::FormAddCategory(QString games, QWidget *parent) :    QWidget(pa
     ui->ButtonCancel->setText(Words[3]);
     ui->CheckBoxSelectAll->setText(Words[4]);
     ui->ButtonAccept->setText(Words[5]);
-    QWidget *widget1 = new QWidget;
+    QWidget* widget1 = new QWidget;
     lay = new QFormLayout;
     lay->setContentsMargins(9,1,9,1);
     widget1->setLayout(lay);
@@ -24,9 +24,9 @@ FormAddCategory::~FormAddCategory(){
 }
 
 void FormAddCategory::on_ButtonAddValue_clicked(){
-    CategoryValue *val = new CategoryValue(count++);
+    CategoryValue* val = new CategoryValue(count++);
     Values.push_back(val);
-    QWidget *wid = new QWidget;
+    QWidget* wid = new QWidget;
     wid->setLayout(val);
     lay->addRow(wid);
     connect(val,&CategoryValue::positionchange,this,&FormAddCategory::ChangePosition);
@@ -86,7 +86,7 @@ QString FormAddCategory::GetTitle(){
 
 void FormAddCategory::ChangePosition(int pos, int posnew){
     if(posnew>=0&&posnew<=count){
-        CategoryValue *temp= Values[pos];
+        CategoryValue* temp = Values[pos];
         Values[pos]=Values[posnew];
         Values[posnew]=temp;
         delete temp;
@@ -95,7 +95,7 @@ void FormAddCategory::ChangePosition(int pos, int posnew){
             lay->removeRow(0);
         qDebug()<<lay->rowCount();
         for (int i=0;i<count;i++) {
-            QWidget *wid = new QWidget;
+            QWidget* wid = new QWidget;
             wid->setLayout(Values[i]);
             lay->addRow(wid);
             qDebug()<<i;

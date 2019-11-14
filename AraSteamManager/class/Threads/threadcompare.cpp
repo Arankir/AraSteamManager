@@ -1,6 +1,6 @@
 #include "threadcompare.h"
 
-ThreadCompare::ThreadCompare(QObject *parent) : QObject(parent)
+ThreadCompare::ThreadCompare(QObject* parent) : QObject(parent)
 {
 
 }
@@ -13,6 +13,6 @@ int ThreadCompare::Fill(){
 
 }
 
-void ThreadCompare::OnResultImage(ImageRequest *imgr){
+void ThreadCompare::OnResultImage(ImageRequest* imgr){
 
 }

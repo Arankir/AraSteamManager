@@ -11,7 +11,7 @@ class SAchievementGlobal : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementGlobal(QJsonObject ObjAchievement, QObject *parent = nullptr);
+    explicit SAchievementGlobal(QJsonObject ObjAchievement, QObject* parent = nullptr);
     SAchievementGlobal();
     void Set(QJsonObject ObjAchievement);
     QString GetApiname() {return apiname;}

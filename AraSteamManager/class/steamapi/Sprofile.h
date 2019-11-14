@@ -17,7 +17,7 @@ class SProfile : public QObject
 {
     Q_OBJECT
 public:
-    explicit SProfile(QString key, QString id, bool parallel, QString type, QObject *parent = nullptr);
+    explicit SProfile(QString key, QString id, bool parallel, QString type, QObject* parent = nullptr);
     SProfile(QJsonDocument DocSummaries);
     SProfile(QJsonObject ObjSummaries);
     SProfile();
@@ -58,11 +58,11 @@ signals:
     void finished();
 
 public slots:
-    void LoadURL(QNetworkReply *Reply);
-    void LoadVanity(QNetworkReply *Reply);
+    void LoadURL(QNetworkReply* Reply);
+    void LoadVanity(QNetworkReply* Reply);
 
 private:
-    QNetworkAccessManager *manager;
+    QNetworkAccessManager* manager;
     QJsonArray profile;
     QString status="null";
     QString key="";

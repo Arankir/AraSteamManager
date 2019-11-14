@@ -8,14 +8,14 @@ class ThreadCompare : public QObject
 {
     Q_OBJECT
 public:
-    explicit ThreadCompare(QObject *parent = nullptr);
+    explicit ThreadCompare(QObject* parent = nullptr);
 
 signals:
 
 public slots:
     int Fill();
     void Set();
-    void OnResultImage(ImageRequest *imgr);
+    void OnResultImage(ImageRequest* imgr);
 };
 
 #endif // THREADCOMPARE_H

@@ -17,7 +17,7 @@ class SAchievementsPercentage : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsPercentage(QString key, QString appid, QObject *parent = nullptr);
+    explicit SAchievementsPercentage(QString key, QString appid, QObject* parent = nullptr);
     SAchievementsPercentage(QJsonDocument DocAchievements);
     SAchievementsPercentage();
     ~SAchievementsPercentage();
@@ -39,10 +39,10 @@ signals:
     void finished();
 
 public slots:
-    void Load(QNetworkReply *Reply);
+    void Load(QNetworkReply* Reply);
 
 private:
-    QNetworkAccessManager *manager;
+    QNetworkAccessManager* manager;
     QVector<SAchievementPercentage> achievements;
     QString status="none";
     QString appid="";

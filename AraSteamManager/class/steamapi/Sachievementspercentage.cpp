@@ -1,6 +1,6 @@
 #include "Sachievementspercentage.h"
 
-SAchievementsPercentage::SAchievementsPercentage(QString key, QString appid, QObject *parent) : QObject(parent){
+SAchievementsPercentage::SAchievementsPercentage(QString key, QString appid, QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, appid);
 }
@@ -68,5 +68,5 @@ SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievements
     count=achievementss.count;
     status=achievementss.status;
     manager = new QNetworkAccessManager;
-    return *this;
+    return* this;
 }

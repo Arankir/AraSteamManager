@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriends_t {
-    QByteArrayData data[24];
-    char stringdata0[346];
+    QByteArrayData data[29];
+    char stringdata0[384];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,25 +42,31 @@ QT_MOC_LITERAL(7, 66, 10), // "closeEvent"
 QT_MOC_LITERAL(8, 77, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(9, 90, 5), // "event"
 QT_MOC_LITERAL(10, 96, 14), // "InitComponents"
-QT_MOC_LITERAL(11, 111, 23), // "on_ButtonReturn_clicked"
-QT_MOC_LITERAL(12, 135, 13), // "OnResultImage"
-QT_MOC_LITERAL(13, 149, 13), // "ImageRequest*"
-QT_MOC_LITERAL(14, 163, 4), // "imgr"
-QT_MOC_LITERAL(15, 168, 18), // "GoToProfileClicked"
-QT_MOC_LITERAL(16, 187, 16), // "FavoritesClicked"
-QT_MOC_LITERAL(17, 204, 16), // "UpdateHiddenRows"
-QT_MOC_LITERAL(18, 221, 35), // "on_CheckBoxOpenProfile_stateC..."
-QT_MOC_LITERAL(19, 257, 4), // "arg1"
-QT_MOC_LITERAL(20, 262, 27), // "on_LineEditName_textChanged"
-QT_MOC_LITERAL(21, 290, 21), // "on_ButtonFind_clicked"
-QT_MOC_LITERAL(22, 312, 27), // "on_ComboBoxStatus_activated"
-QT_MOC_LITERAL(23, 340, 5) // "index"
+QT_MOC_LITERAL(11, 111, 15), // "ProgressLoading"
+QT_MOC_LITERAL(12, 127, 1), // "p"
+QT_MOC_LITERAL(13, 129, 3), // "row"
+QT_MOC_LITERAL(14, 133, 8), // "ImageSet"
+QT_MOC_LITERAL(15, 142, 6), // "pixmap"
+QT_MOC_LITERAL(16, 149, 23), // "on_ButtonReturn_clicked"
+QT_MOC_LITERAL(17, 173, 13), // "OnResultImage"
+QT_MOC_LITERAL(18, 187, 13), // "ImageRequest*"
+QT_MOC_LITERAL(19, 201, 4), // "imgr"
+QT_MOC_LITERAL(20, 206, 18), // "GoToProfileClicked"
+QT_MOC_LITERAL(21, 225, 16), // "FavoritesClicked"
+QT_MOC_LITERAL(22, 242, 16), // "UpdateHiddenRows"
+QT_MOC_LITERAL(23, 259, 35), // "on_CheckBoxOpenProfile_stateC..."
+QT_MOC_LITERAL(24, 295, 4), // "arg1"
+QT_MOC_LITERAL(25, 300, 27), // "on_LineEditName_textChanged"
+QT_MOC_LITERAL(26, 328, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(27, 350, 27), // "on_ComboBoxStatus_activated"
+QT_MOC_LITERAL(28, 378, 5) // "index"
 
     },
     "FormFriends\0return_to_profile\0\0"
     "go_to_profile\0id\0type\0UpdateBuffer\0"
     "closeEvent\0QCloseEvent*\0event\0"
-    "InitComponents\0on_ButtonReturn_clicked\0"
+    "InitComponents\0ProgressLoading\0p\0row\0"
+    "ImageSet\0pixmap\0on_ButtonReturn_clicked\0"
     "OnResultImage\0ImageRequest*\0imgr\0"
     "GoToProfileClicked\0FavoritesClicked\0"
     "UpdateHiddenRows\0on_CheckBoxOpenProfile_stateChanged\0"
@@ -76,7 +82,7 @@ static const uint qt_meta_data_FormFriends[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -84,21 +90,23 @@ static const uint qt_meta_data_FormFriends[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   79,    2, 0x06 /* Public */,
-       3,    3,   80,    2, 0x06 /* Public */,
+       1,    0,   89,    2, 0x06 /* Public */,
+       3,    3,   90,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    1,   87,    2, 0x08 /* Private */,
-      10,    0,   90,    2, 0x08 /* Private */,
-      11,    0,   91,    2, 0x08 /* Private */,
-      12,    1,   92,    2, 0x08 /* Private */,
-      15,    0,   95,    2, 0x08 /* Private */,
-      16,    0,   96,    2, 0x08 /* Private */,
-      17,    0,   97,    2, 0x08 /* Private */,
-      18,    1,   98,    2, 0x08 /* Private */,
-      20,    1,  101,    2, 0x08 /* Private */,
-      21,    0,  104,    2, 0x08 /* Private */,
-      22,    1,  105,    2, 0x08 /* Private */,
+       7,    1,   97,    2, 0x08 /* Private */,
+      10,    0,  100,    2, 0x08 /* Private */,
+      11,    2,  101,    2, 0x08 /* Private */,
+      14,    2,  106,    2, 0x08 /* Private */,
+      16,    0,  111,    2, 0x08 /* Private */,
+      17,    1,  112,    2, 0x08 /* Private */,
+      20,    0,  115,    2, 0x08 /* Private */,
+      21,    0,  116,    2, 0x08 /* Private */,
+      22,    0,  117,    2, 0x08 /* Private */,
+      23,    1,  118,    2, 0x08 /* Private */,
+      25,    1,  121,    2, 0x08 /* Private */,
+      26,    0,  124,    2, 0x08 /* Private */,
+      27,    1,  125,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -107,15 +115,17 @@ static const uint qt_meta_data_FormFriends[] = {
  // slots: parameters
     QMetaType::Void, 0x80000000 | 8,    9,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   12,   13,
+    QMetaType::Void, QMetaType::QPixmap, QMetaType::Int,   15,   13,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 13,   14,
+    QMetaType::Void, 0x80000000 | 18,   19,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   19,
-    QMetaType::Void, QMetaType::QString,   19,
+    QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void, QMetaType::QString,   24,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   23,
+    QMetaType::Void, QMetaType::Int,   28,
 
        0        // eod
 };
@@ -130,21 +140,23 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->go_to_profile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
         case 2: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 3: _t->InitComponents(); break;
-        case 4: _t->on_ButtonReturn_clicked(); break;
-        case 5: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
-        case 6: _t->GoToProfileClicked(); break;
-        case 7: _t->FavoritesClicked(); break;
-        case 8: _t->UpdateHiddenRows(); break;
-        case 9: _t->on_CheckBoxOpenProfile_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 10: _t->on_LineEditName_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 11: _t->on_ButtonFind_clicked(); break;
-        case 12: _t->on_ComboBoxStatus_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->ImageSet((*reinterpret_cast< QPixmap(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 6: _t->on_ButtonReturn_clicked(); break;
+        case 7: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 8: _t->GoToProfileClicked(); break;
+        case 9: _t->FavoritesClicked(); break;
+        case 10: _t->UpdateHiddenRows(); break;
+        case 11: _t->on_CheckBoxOpenProfile_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->on_LineEditName_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 13: _t->on_ButtonFind_clicked(); break;
+        case 14: _t->on_ComboBoxStatus_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 5:
+        case 7:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -200,13 +212,13 @@ int FormFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 15;
     }
     return _id;
 }

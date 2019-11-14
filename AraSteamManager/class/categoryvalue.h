@@ -40,14 +40,14 @@ private slots:
     void OnDeleting() {emit deleting(position);}
 
 private:
-    QLabel *Number;
-    QLineEdit *ValueName;
-    QCheckBox *Visible;
-    QPushButton *Up;
-    QPushButton *Down;
-    QPushButton *Select;
-    QPushButton *UnSelect;
-    QPushButton *Delete;
+    QLabel* Number;
+    QLineEdit* ValueName;
+    QCheckBox* Visible;
+    QPushButton* Up;
+    QPushButton* Down;
+    QPushButton* Select;
+    QPushButton* UnSelect;
+    QPushButton* Delete;
     int position=0;
     QStringList Words;
     Settings Setting;

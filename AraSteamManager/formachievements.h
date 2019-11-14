@@ -30,18 +30,18 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, QString ids, SGame game, QWidget *parent = nullptr);
+    explicit FormAchievements(QString keys, QString ids, SGame game, QWidget* parent = nullptr);
     ~FormAchievements();
-    FormCompare *compareform;
+    FormCompare* compareform;
 
 signals:
     void return_to_games();
 
 private slots:
-    void OnResultImage(ImageRequest *imgr);
+    void OnResultImage(ImageRequest* imgr);
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);
-    void closeEvent(QCloseEvent *);
+    void closeEvent(QCloseEvent*);
     void returnfromcompare();
     void on_ButtonReturn_clicked();
     void UpdateHiddenRows();
@@ -117,16 +117,16 @@ private slots:
     void SelectValueCategory(int j,Qt::CheckState);
 
 private:
-    Ui::FormAchievements *ui;
+    Ui::FormAchievements* ui;
     QString key;
     QString id;
     int windowchildcount=0;
     SGame game;
     SAchievements achievements;
-    bool **filter;
+    bool** filter;
     int colfilter=3;
-    QFormLayout *newcategoryvalueslayout;
-    QFormLayout *changecategoryvalueslayout;
+    QFormLayout* newcategoryvalueslayout;
+    QFormLayout* changecategoryvalueslayout;
     QStringList Words;
     Settings Setting;
     QString theme="white";

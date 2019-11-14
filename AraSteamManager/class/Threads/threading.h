@@ -12,15 +12,15 @@ class Threading : public QObject
 {
     Q_OBJECT
 public:
-    explicit Threading(QObject *parent = nullptr);
+    explicit Threading(QObject* parent = nullptr);
 
 signals:
 
 public slots:
-    int AddThreadGames(QTableWidget *TableWidgetGames, QVector<SGame> games, QString key, QIcon Favorite, QString AchievementsLocalisation);
+    int AddThreadGames(QTableWidget* TableWidgetGames, QVector<SGame> games, QString key, QIcon Favorite, QString AchievementsLocalisation);
     int AddThreadAchievements();
     int AddThreadCompare();
-    int AddThreadFriends();
+    int AddThreadFriends(QTableWidget* TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss,QStringList Words);
 };
 
 #endif // THREADING_H

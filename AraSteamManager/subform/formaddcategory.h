@@ -18,7 +18,7 @@ class FormAddCategory : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAddCategory(QString game, QWidget *parent = nullptr);
+    explicit FormAddCategory(QString game, QWidget* parent = nullptr);
     ~FormAddCategory();
     int GetCount() {return count;}
     QString GetTitle();
@@ -48,14 +48,14 @@ private slots:
     void on_CheckBoxNoValue_stateChanged(int arg1);
 
 private:
-    Ui::FormAddCategory *ui;
+    Ui::FormAddCategory* ui;
     QString game;
     QStringList Words;
     Settings Setting;
     QString theme="white";
     QVector<CategoryValue*> Values;
     int count=0;
-    QFormLayout *lay;
+    QFormLayout* lay;
 };
 
 #endif // FORMADDCATEGORY_H

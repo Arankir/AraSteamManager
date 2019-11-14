@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <class/imagerequest.h>
-#include <QLabel>
 #include <QTableWidget>
 #include <class/steamapi/Sgame.h>
 #include <QPushButton>
@@ -12,7 +11,7 @@ class ThreadGames : public QObject
 {
     Q_OBJECT
 public:
-    explicit ThreadGames(QObject *parent = nullptr);
+    explicit ThreadGames(QObject* parent = nullptr);
 
 signals:
     void finished();
@@ -21,18 +20,18 @@ signals:
 
 public slots:
     int Fill();
-    void Set(QTableWidget *TableWidgetGames, QVector<SGame> games, QString key, QIcon Favorite, QString AchievementsLocalisation);
-    void OnResultImage(ImageRequest *imgr);
-    void OnResultAchievements(ImageRequest *imgr);
+    void Set(QTableWidget* TableWidgetGames, QVector<SGame> games, QString key, QIcon Favorite, QString AchievementsLocalisation);
+    void OnResultImage(ImageRequest* imgr);
+    void OnResultAchievements(ImageRequest* imgr);
 
-public:
+private:
     int numrequests;
     int numnow;
     QIcon Favorite;
     QString AchievementsLocalisation;
     QString key;
     QVector<SGame> games;
-    QTableWidget *TableWidgetGames;
+    QTableWidget* TableWidgetGames;
     QVector<ImageRequest*> request;
 };
 

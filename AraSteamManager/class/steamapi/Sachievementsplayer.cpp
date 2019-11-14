@@ -1,6 +1,6 @@
 #include "Sachievementsplayer.h"
 
-SAchievementsPlayer::SAchievementsPlayer(QString key, QString appid, QString id, QObject *parent) : QObject(parent){
+SAchievementsPlayer::SAchievementsPlayer(QString key, QString appid, QString id, QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, appid, id);
 }
@@ -75,5 +75,5 @@ SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer &
     gamename=achievementss.gamename;
     status=achievementss.status;
     manager = new QNetworkAccessManager;
-    return *this;
+    return* this;
 }

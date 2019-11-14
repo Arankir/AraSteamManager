@@ -1,6 +1,6 @@
 #include "Sbans.h"
 
-SBans::SBans(QString key, QString id, bool parallel, QObject *parent) : QObject(parent){
+SBans::SBans(QString key, QString id, bool parallel, QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, id, parallel);
 }
@@ -25,7 +25,7 @@ void SBans::Set(QString key, QString id, bool parallel){
     } else {
         QEventLoop loop;
         connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
+        QNetworkReply* reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
         loop.exec();
         disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
@@ -44,7 +44,7 @@ void SBans::Set(QJsonDocument DocBans){
     }
 }
 
-void SBans::Load(QNetworkReply *Reply){
+void SBans::Load(QNetworkReply* Reply){
     disconnect(manager,&QNetworkAccessManager::finished,this,&SBans::Load);
     QJsonDocument DocBans = QJsonDocument::fromJson(Reply->readAll());
     Reply->deleteLater();

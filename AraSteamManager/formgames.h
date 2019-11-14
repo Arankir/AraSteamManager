@@ -19,9 +19,9 @@ class FormGames : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormGames(QString id, QString key, SGames Games, QWidget *parent = nullptr);
+    explicit FormGames(QString id, QString key, SGames Games, QWidget* parent = nullptr);
     ~FormGames();
-    FormAchievements *achievementsform;
+    FormAchievements* achievementsform;
 
 signals:
     void return_to_profile();
@@ -31,9 +31,9 @@ public slots:
     void ImageSet(QPixmap pix, int row);
 
 private slots:
-    void OnResultImage(ImageRequest *imgr);
-    void OnResultAchievements(ImageRequest *imgr);
-    void closeEvent(QCloseEvent *event);
+    void OnResultImage(ImageRequest* imgr);
+    void OnResultAchievements(ImageRequest* imgr);
+    void closeEvent(QCloseEvent* event);
     void InitComponents();
 
     void on_ButtonReturn_clicked();
@@ -49,7 +49,7 @@ private slots:
     void on_ButtonFind_clicked();
 
 private:
-    Ui::FormGames *ui;
+    Ui::FormGames* ui;
     QString id;
     QString key;
     int windowchildcount=0;

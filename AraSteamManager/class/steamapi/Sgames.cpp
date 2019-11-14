@@ -1,6 +1,6 @@
 #include "Sgames.h"
 
-SGames::SGames(QString key, QString id, bool free_games, bool game_info, bool parallel, QObject *parent) : QObject(parent){
+SGames::SGames(QString key, QString id, bool free_games, bool game_info, bool parallel, QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, id, free_games, game_info, parallel);
 }
@@ -30,7 +30,7 @@ void SGames::Set(QString key, QString id, bool free_games, bool game_info, bool 
     } else {
         QEventLoop loop;
         connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = manager->get(QNetworkRequest(request));
+        QNetworkReply* reply = manager->get(QNetworkRequest(request));
         loop.exec();
         disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
@@ -84,5 +84,5 @@ SGames & SGames::operator=(const SGames & profile){
     free_games=profile.free_games;
     game_info=profile.game_info;
     manager = new QNetworkAccessManager;
-    return *this;
+    return* this;
 }

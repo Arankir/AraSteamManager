@@ -6,6 +6,7 @@
 #include <QStandardItem>
 #include <class/imagerequest.h>
 #include <class/steamapi/Sfriends.h>
+#include <class/Threads/threading.h>
 #include <class/settings.h>
 
 namespace Ui {
@@ -17,7 +18,7 @@ class FormFriends : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormFriends(QString id, QString key, SFriends Friends, QWidget *parent = nullptr);
+    explicit FormFriends(QString id, QString key, SFriends Friends, QWidget* parent = nullptr);
     ~FormFriends();
 
 signals:
@@ -25,11 +26,14 @@ signals:
     void go_to_profile(QString id, QString type, bool UpdateBuffer);
 
 private slots:
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent* event);
     void InitComponents();
+    void ProgressLoading(int p,int row);
+    void ImageSet(QPixmap pixmap, int row);
+
     void on_ButtonReturn_clicked();
 
-    void OnResultImage(ImageRequest *imgr);
+    void OnResultImage(ImageRequest* imgr);
 
     void GoToProfileClicked();
     void FavoritesClicked();
@@ -41,7 +45,7 @@ private slots:
     void on_ComboBoxStatus_activated(int index);
 
 private:
-    Ui::FormFriends *ui;
+    Ui::FormFriends* ui;
     QString id;
     QString key;
     int windowchildcount=0;
@@ -55,7 +59,7 @@ private:
     int numrequests=0;
     int numnow=0;
 
-    bool **filter;
+    bool** filter;
 };
 
 #endif // FORMFRIENDS_H

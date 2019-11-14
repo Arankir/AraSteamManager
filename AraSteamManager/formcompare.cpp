@@ -1,7 +1,7 @@
 #include "formcompare.h"
 #include "ui_formcompare.h"
 
-FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLogo, SAchievements achievementss, QWidget *parent) : QWidget(parent), ui(new Ui::FormCompare){
+FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLogo, SAchievements achievementss, QWidget* parent) : QWidget(parent), ui(new Ui::FormCompare){
     ui->setupUi(this);
     Words=Setting.GetWords("compare");
     key=keys;
@@ -94,12 +94,12 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
                 ui->TableWidget->setItem(row,0,new QTableWidgetItem(achievements.GetApiname(i)));
                 QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
                 if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1))){
-                    ImageRequest *image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1),true);
-                    connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+                    ImageRequest* image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1),true);
+                    connect(image,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
                     } else {
                     QPixmap pixmap;
                     pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1));
-                    QLabel *label = new QLabel;
+                    QLabel* label = new QLabel;
                     label->setPixmap(pixmap);
                     ui->TableWidget->setCellWidget(row,1,label);
                     }
@@ -134,22 +134,22 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
     categories.setSorting(QDir::Name);
     QFileInfoList list = categories.entryInfoList();
     if(categories.exists()){
-        QFormLayout *layout1 = new QFormLayout;
-        QFormLayout *layout2 = new QFormLayout;
-        QWidget *widget1 = new QWidget;
-        QWidget *widget2 = new QWidget;
+        QFormLayout* layout1 = new QFormLayout;
+        QFormLayout* layout2 = new QFormLayout;
+        QWidget* widget1 = new QWidget;
+        QWidget* widget2 = new QWidget;
         for (int i = 0; i < list.size(); ++i){
             QFile category("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(i).fileName());
             category.open(QFile::ReadOnly);
             QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
             if(cat.object().value("values").toArray().size()==1){
-                QCheckBox *chb = new QCheckBox;
+                QCheckBox* chb = new QCheckBox;
                 chb->setText(cat.object().value("name").toString());
                 chb->setObjectName("Category"+QString::number(i));
                 connect(chb,SIGNAL(stateChanged(int)),this,SLOT(on_CheckBoxCategory_Change(int)));
                 layout2->addRow(chb);
             } else {
-                QComboBox *cb = new QComboBox;
+                QComboBox* cb = new QComboBox;
                 cb->addItem(Words[20]);
                 for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                     cb->addItem(cat.object().value("values").toArray().at(j).toString());
@@ -168,7 +168,7 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
         ui->ScrollAreaCategoriesComboBox->setHidden(layout1->rowCount()==0?true:false);
         ui->ScrollAreaCategoriesCheckBox->setHidden(layout2->rowCount()==0?true:false);
     }
-    bool **New = new bool*[ui->TableWidget->rowCount()];
+    bool** New = new bool*[ui->TableWidget->rowCount()];
     for (int i=0;i<ui->TableWidget->rowCount();i++) {
         New[i]=new bool[list.size()+3];
         for (int j=0;j<list.size()+3;j++) {
@@ -222,9 +222,9 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
     Me->setAlignment(Qt::AlignCenter);
     Me->setToolTip(Profile.GetPersonaname());
     ui->TableWidgetFriends->setCellWidget(0,0,Me);
-    QRadioButton *rbMyAll = new QRadioButton(/*Words[]*/);
-    QRadioButton *rbMyReached = new QRadioButton(/*Words[]*/);
-    QRadioButton *rbMyNotReached = new QRadioButton(/*Words[]*/);
+    QRadioButton* rbMyAll = new QRadioButton(/*Words[]*/);
+    QRadioButton* rbMyReached = new QRadioButton(/*Words[]*/);
+    QRadioButton* rbMyNotReached = new QRadioButton(/*Words[]*/);
     rbMyAll->setObjectName("RBMyAll");
     rbMyReached->setObjectName("RBMyReached");
     rbMyNotReached->setObjectName("RBMyNotReached");
@@ -245,9 +245,9 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
     QLabel* All = new QLabel("All");
     All->setToolTip(Words[2]);
     ui->TableWidgetFriends->setCellWidget(0,1,All);
-    QPushButton *pbFriendsAll = new QPushButton(/*Words[]*/);
-    QPushButton *pbFriendsReached = new QPushButton(/*Words[]*/);
-    QPushButton *pbFriendsNotReached = new QPushButton(/*Words[]*/);
+    QPushButton* pbFriendsAll = new QPushButton(/*Words[]*/);
+    QPushButton* pbFriendsReached = new QPushButton(/*Words[]*/);
+    QPushButton* pbFriendsNotReached = new QPushButton(/*Words[]*/);
     pbFriendsAll->setObjectName("PBFriendsAll");
     pbFriendsReached->setObjectName("PBFriendsReached");
     pbFriendsNotReached->setObjectName("PBFriendsNotReached");
@@ -285,7 +285,7 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
         loop.exec();
         QPixmap pix;
         pix.loadFromData(imagereply.readAll());
-        QLabel *ava = new QLabel;
+        QLabel* ava = new QLabel;
         ava->setPixmap(pix);
         ava->setToolTip(friends[i].first.GetPersonaname());
         ava->setAlignment(Qt::AlignCenter);
@@ -309,7 +309,7 @@ void FormCompare::OnResultAvatar(int i, QString, ImageRequest* img){
 //    qDebug()<<i;
 //    QPixmap pixmap;
 //    pixmap.loadFromData(img->GetAnswer());
-//    QLabel *ava = new QLabel;
+//    QLabel* ava = new QLabel;
 //    ava->setPixmap(pixmap);
 //    if(i>=Friends.first.size()){
 //        ava->setPixmap(Friends.first[i].GetAvatar());
@@ -322,11 +322,11 @@ void FormCompare::OnResultAvatar(int i, QString, ImageRequest* img){
 //    ui->TableWidgetFriends->setCellWidget(0,i+2,ava);
 }
 
-void FormCompare::OnResultImage(ImageRequest *imgr){
-    disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+void FormCompare::OnResultImage(ImageRequest* imgr){
+    disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
-    QLabel *label = new QLabel;
+    QLabel* label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidget->setCellWidget(imgr->GetRow(),1,label);
     ui->TableWidget->resizeRowToContents(imgr->GetRow());
@@ -370,7 +370,7 @@ void FormCompare::on_RadioButtonMyNotReached_clicked(){
 }
 
 void FormCompare::on_ComboBoxCategory_Change(int index){
-    QComboBox *cb = qobject_cast<QComboBox*>(sender());
+    QComboBox* cb = qobject_cast<QComboBox*>(sender());
     QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
     if(categories.exists()){
         categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -399,7 +399,7 @@ void FormCompare::on_ComboBoxCategory_Change(int index){
     }
 }
 void FormCompare::on_CheckBoxCategory_Change(int ind){
-    QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
+    QCheckBox* cb = qobject_cast<QCheckBox*>(sender());
     QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
     if(categories.exists()){
         categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -457,7 +457,7 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
             disconnect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
             QPixmap pix;
             pix.loadFromData(imagereply.readAll());
-            QLabel *ava = new QLabel;
+            QLabel* ava = new QLabel;
             ava->setPixmap(pix);
             ava->setToolTip(friends[column-2].first.GetPersonaname());
             ava->setAlignment(Qt::AlignCenter);
@@ -469,9 +469,9 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
             SAchievements Ach;
             Ach.Set(Pla);
             if(ProfileIsPublic(Ach,col)){
-                QRadioButton *rbAll = new QRadioButton(/*Words[]*/);
-                QRadioButton *rbReached = new QRadioButton(/*Words[]*/);
-                QRadioButton *rbNotReached = new QRadioButton(/*Words[]*/);
+                QRadioButton* rbAll = new QRadioButton(/*Words[]*/);
+                QRadioButton* rbReached = new QRadioButton(/*Words[]*/);
+                QRadioButton* rbNotReached = new QRadioButton(/*Words[]*/);
                 rbAll->setObjectName("RB"+QString::number(column)+"All");
                 rbReached->setObjectName("RB"+QString::number(column)+"Reached");
                 rbNotReached->setObjectName("RB"+QString::number(column)+"NotReached");
@@ -495,7 +495,7 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 ui->TableWidgetFriends->resizeRowsToContents();
                 ui->TableWidgetFriends->resizeColumnsToContents();
             }
-            bool **New = new bool*[ui->TableWidget->rowCount()];
+            bool** New = new bool*[ui->TableWidget->rowCount()];
             colfilter++;
             for (int i=0;i<ui->TableWidget->rowCount();i++) {
                 New[i]=new bool[colfilter];
@@ -530,7 +530,7 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 ui->TableWidgetFriends->resizeColumnsToContents();
             }
             int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
-            bool **New = new bool*[ui->TableWidget->rowCount()];
+            bool** New = new bool*[ui->TableWidget->rowCount()];
             colfilter--;
             for (int i=0;i<ui->TableWidget->rowCount();i++) {
                 New[i]=new bool[colfilter];
@@ -550,7 +550,7 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
 }
 
 void FormCompare::on_RadioButtonFriendAll_Click(){
-    QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
+    QRadioButton* rb = qobject_cast<QRadioButton*>(sender());
     int col=(rb->objectName().mid(2,rb->objectName().indexOf("All")-2)).toInt();
     QString Name=dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0,col))->toolTip();
     int coll=0;
@@ -566,7 +566,7 @@ void FormCompare::on_RadioButtonFriendAll_Click(){
     UpdateHiddenRows();
 }
 void FormCompare::on_RadioButtonFriendReached_Click(){
-    QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
+    QRadioButton* rb = qobject_cast<QRadioButton*>(sender());
     int col=(rb->objectName().mid(2,rb->objectName().indexOf("Reached")-2)).toInt();
     QString Name=dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0,col))->toolTip();
     int coll=0;
@@ -582,7 +582,7 @@ void FormCompare::on_RadioButtonFriendReached_Click(){
     UpdateHiddenRows();
 }
 void FormCompare::on_RadioButtonFriendNotReached_Click(){
-    QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
+    QRadioButton* rb = qobject_cast<QRadioButton*>(sender());
     int col=(rb->objectName().mid(2,rb->objectName().indexOf("NotReached")-2)).toInt();
     QString Name=dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0,col))->toolTip();
     int coll=0;
@@ -631,7 +631,7 @@ void FormCompare::on_ButtonReturn_clicked(){
     //delete this;
 }
 
-void FormCompare::closeEvent(QCloseEvent *){
+void FormCompare::closeEvent(QCloseEvent*){
     on_ButtonReturn_clicked();
 }
 
@@ -673,7 +673,7 @@ void FormCompare::on_CheckBoxAllFriends_stateChanged(int arg1){
 //                        ui->TableWidgetFriends->resizeColumnsToContents();
 //                    }
 //                    int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
-//                    bool **New = new bool*[ui->TableWidget->rowCount()];
+//                    bool** New = new bool*[ui->TableWidget->rowCount()];
 //                    colfilter--;
 //                    for (int i=0;i<ui->TableWidget->rowCount();i++) {
 //                        New[i]=new bool[colfilter];
@@ -725,7 +725,7 @@ bool FormCompare::ProfileIsPublic(SAchievements achievement, int col){
                 }
         }
         if(accept){
-            QTableWidgetItem *item5;
+            QTableWidgetItem* item5;
             if(achievement.GetAchieved(j)==1){
                 item5 = new QTableWidgetItem(Words[15]+" "+achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm"));
                 totalr++;

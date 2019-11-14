@@ -1,6 +1,6 @@
 #include "Sachievement.h"
 
-SAchievement::SAchievement(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent, QObject *parent) : QObject(parent){
+SAchievement::SAchievement(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent, QObject* parent) : QObject(parent){
     Set(Global,Player,Percent);
 }
 SAchievement::SAchievement(){
@@ -83,5 +83,5 @@ SAchievement & SAchievement::operator=(const SAchievement & achievement){
     statusglobal=achievement.statusglobal;
     statusplayer=achievement.statusplayer;
     statuspercent=achievement.statuspercent;
-    return *this;
+    return* this;
 }

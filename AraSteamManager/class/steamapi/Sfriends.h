@@ -17,7 +17,7 @@ class SFriends : public QObject
 {
     Q_OBJECT
 public:
-    explicit SFriends(QString key, QString id, bool parallel, QObject *parent = nullptr);
+    explicit SFriends(QString key, QString id, bool parallel, QObject* parent = nullptr);
     SFriends(QJsonDocument DocFriends);
     SFriends();
     ~SFriends();
@@ -40,10 +40,10 @@ signals:
     void finished();
 
 public slots:
-    void Load(QNetworkReply *Reply);
+    void Load(QNetworkReply* Reply);
 
 private:
-    QNetworkAccessManager *manager;
+    QNetworkAccessManager* manager;
     QString status="none";
     QString id;
     QString key;

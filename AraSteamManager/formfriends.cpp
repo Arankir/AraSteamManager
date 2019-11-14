@@ -1,14 +1,13 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget* parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     Words=Setting.GetWords("friends");
     id=ids;
     key=keys;
     Friends=Friendss;
     SProfile Profiles = Friends.GetProfiles();
-    QVector<SProfile> Profiless;
     for (int i=0;i<Profiles.GetCount();i++) {
         Profiless.push_back(Profiles.GetProfile(i));
     }
@@ -23,13 +22,15 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
         }
     }
     InitComponents();
-    for (int i=0;i<Friends.GetCount();i++) {
+    Threading LoadTable(this);
+    LoadTable.AddThreadFriends(ui->TableWidgetFriends,Profiless,Friends,Words);
+    /*for (int i=0;i<Friends.GetCount();i++) {
         ui->TableWidgetFriends->insertRow(i);
         qDebug()<<i;
         if(!QFile::exists("images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg")){
             if(numrequests<500){
-                ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg",true);
-                connect(image,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
+                ImageRequest* image = new ImageRequest(Profiless[i].GetAvatar(),i,"images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg",true);
+                connect(image,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
                 request.append(image);
                 numrequests++;
                 numnow++;
@@ -37,7 +38,7 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
             } else {
             QPixmap pixmap;
             pixmap.load("images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg");
-            QLabel *lb = new QLabel();
+            QLabel* lb = new QLabel();
             lb->setPixmap(pixmap);
             ui->TableWidgetFriends->setCellWidget(i,0,lb);
             }
@@ -49,7 +50,7 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
             }
         }
         ui->TableWidgetFriends->setItem(i,2,new QTableWidgetItem(Friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
-        QTableWidgetItem *item4 = new QTableWidgetItem;
+        QTableWidgetItem* item4 = new QTableWidgetItem;
         if(!Profiless[i].GetGameextrainfo().isEmpty()){
             item4->setText(Words[8]);
             item4->setTextColor(QColor("#89b753"));
@@ -92,7 +93,7 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
             }
             }
         ui->TableWidgetFriends->setItem(i,3,item4);
-        QTableWidgetItem *item5 = new QTableWidgetItem;
+        QTableWidgetItem* item5 = new QTableWidgetItem;
         switch(Profiless[i].GetCommunityvisibilitystate()){
         case 1:{
             item5->setText(Words[17]);
@@ -117,13 +118,13 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
         }
         ui->TableWidgetFriends->setItem(i,4,item5);
         ui->TableWidgetFriends->setItem(i,5,new QTableWidgetItem(Profiless[i].GetSteamid()));
-        QPushButton *button1 = new QPushButton(Words[7]);
+        QPushButton* button1 = new QPushButton(Words[7]);
         button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
         button1->setMinimumSize(QSize(25,25));
         button1->setObjectName("btn"+Profiless[i].GetSteamid());
         connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         ui->TableWidgetFriends->setCellWidget(i,6,button1);
-        QPushButton *button2 = new QPushButton;
+        QPushButton* button2 = new QPushButton;
         button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
         connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
         button2->setObjectName("btnf"+Profiless[i].GetSteamid());
@@ -133,15 +134,8 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
     ui->TableWidgetFriends->setColumnHidden(5,true);
     ui->TableWidgetFriends->resizeColumnsToContents();
     ui->TableWidgetFriends->setColumnWidth(0,33);
-
-    filter = new bool*[ui->TableWidgetFriends->rowCount()];
-    for (int i=0;i<ui->TableWidgetFriends->rowCount();i++) {
-        filter[i]=new bool[4];
-        for (int j=0;j<4;j++) {
-            filter[i][j]=true;
-            }
-        }
-    ui->LineEditName->setFocus();
+    */
+    //ui->LineEditName->setFocus();
 }
 
 void FormFriends::InitComponents(){
@@ -182,6 +176,35 @@ void FormFriends::InitComponents(){
             }
         }
     }
+    filter = new bool*[Friends.GetCount()];
+    for (int i=0;i<Friends.GetCount();i++) {
+        filter[i]=new bool[4];
+        for (int j=0;j<4;j++) {
+            filter[i][j]=true;
+            }
+        }
+}
+void FormFriends::ProgressLoading(int p,int row){
+    //Отобразить
+    QPushButton* button1 = new QPushButton(Words[7]);
+    button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
+    button1->setMinimumSize(QSize(25,25));
+    button1->setObjectName("btn"+Profiless[p].GetSteamid());
+    connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
+    ui->TableWidgetFriends->setCellWidget(row,6,button1);
+
+    QPushButton* button2 = new QPushButton;
+    button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
+    connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+    button2->setObjectName("btnf"+Profiless[p].GetSteamid());
+    ui->TableWidgetFriends->setCellWidget(row,7,button2);
+    ui->TableWidgetFriends->setRowHeight(row,33);
+}
+
+void FormFriends::ImageSet(QPixmap pixmap, int row){
+    QLabel* label = new QLabel;
+    label->setPixmap(pixmap);
+    ui->TableWidgetFriends->setCellWidget(row,0,label);
 }
 
 FormFriends::~FormFriends(){
@@ -193,7 +216,7 @@ FormFriends::~FormFriends(){
     delete filter;
     delete ui;
 }
-void FormFriends::closeEvent(QCloseEvent *){
+void FormFriends::closeEvent(QCloseEvent*){
     emit return_to_profile();
     //delete this;
 }
@@ -202,10 +225,10 @@ void FormFriends::on_ButtonReturn_clicked(){
     //delete this;
 }
 
-void FormFriends::OnResultImage(ImageRequest *imgr){
-    QPixmap pixmap;
+void FormFriends::OnResultImage(ImageRequest* imgr){
+    /*QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
-    QLabel *label = new QLabel;
+    QLabel* label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
     //ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
@@ -213,15 +236,15 @@ void FormFriends::OnResultImage(ImageRequest *imgr){
         imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20)+".jpg",true);
         numnow++;
     } else
-        disconnect(imgr,SIGNAL(onReady(ImageRequest *)),this,SLOT(OnResultImage(ImageRequest *)));
-    //imgr->deleteLater();
+        disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
+    //imgr->deleteLater();*/
 }
 
 void FormFriends::GoToProfileClicked(){
     if(windowchildcount==0){
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         windowchildcount++;
-        QPushButton *btn = qobject_cast<QPushButton*>(sender());
+        QPushButton* btn = qobject_cast<QPushButton*>(sender());
         emit go_to_profile(btn->objectName().mid(3,btn->objectName().length()),"url",true);
         on_ButtonReturn_clicked();
     }

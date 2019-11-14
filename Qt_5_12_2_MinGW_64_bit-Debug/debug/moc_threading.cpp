@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Threading_t {
-    QByteArrayData data[13];
-    char stringdata0[172];
+    QByteArrayData data[19];
+    char stringdata0[242];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,14 +44,22 @@ QT_MOC_LITERAL(8, 82, 8), // "Favorite"
 QT_MOC_LITERAL(9, 91, 24), // "AchievementsLocalisation"
 QT_MOC_LITERAL(10, 116, 21), // "AddThreadAchievements"
 QT_MOC_LITERAL(11, 138, 16), // "AddThreadCompare"
-QT_MOC_LITERAL(12, 155, 16) // "AddThreadFriends"
+QT_MOC_LITERAL(12, 155, 16), // "AddThreadFriends"
+QT_MOC_LITERAL(13, 172, 18), // "TableWidgetFriends"
+QT_MOC_LITERAL(14, 191, 17), // "QVector<SProfile>"
+QT_MOC_LITERAL(15, 209, 8), // "Profiles"
+QT_MOC_LITERAL(16, 218, 8), // "SFriends"
+QT_MOC_LITERAL(17, 227, 8), // "Friendss"
+QT_MOC_LITERAL(18, 236, 5) // "Words"
 
     },
     "Threading\0AddThreadGames\0\0QTableWidget*\0"
     "TableWidgetGames\0QVector<SGame>\0games\0"
     "key\0Favorite\0AchievementsLocalisation\0"
     "AddThreadAchievements\0AddThreadCompare\0"
-    "AddThreadFriends"
+    "AddThreadFriends\0TableWidgetFriends\0"
+    "QVector<SProfile>\0Profiles\0SFriends\0"
+    "Friendss\0Words"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,13 +80,13 @@ static const uint qt_meta_data_Threading[] = {
        1,    5,   34,    2, 0x0a /* Public */,
       10,    0,   45,    2, 0x0a /* Public */,
       11,    0,   46,    2, 0x0a /* Public */,
-      12,    0,   47,    2, 0x0a /* Public */,
+      12,    4,   47,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Int, 0x80000000 | 3, 0x80000000 | 5, QMetaType::QString, QMetaType::QIcon, QMetaType::QString,    4,    6,    7,    8,    9,
     QMetaType::Int,
     QMetaType::Int,
-    QMetaType::Int,
+    QMetaType::Int, 0x80000000 | 3, 0x80000000 | 14, 0x80000000 | 16, QMetaType::QStringList,   13,   15,   17,   18,
 
        0        // eod
 };
@@ -95,7 +103,7 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 2: { int _r = _t->AddThreadCompare();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: { int _r = _t->AddThreadFriends();
+        case 3: { int _r = _t->AddThreadFriends((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SProfile>(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3])),(*reinterpret_cast< QStringList(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -103,6 +111,13 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
         case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QTableWidget* >(); break;
+            }
+            break;
+        case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:

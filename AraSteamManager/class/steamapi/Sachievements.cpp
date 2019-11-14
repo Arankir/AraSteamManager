@@ -1,6 +1,6 @@
 #include "Sachievements.h"
 
-SAchievements::SAchievements(QString key, QString appid, QString id, QString language, QObject *parent) : QObject(parent){
+SAchievements::SAchievements(QString key, QString appid, QString id, QString language, QObject* parent) : QObject(parent){
   Set(key, appid, id, language);
 }
 SAchievements::SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent){
@@ -142,5 +142,5 @@ SAchievements & SAchievements::operator=(const SAchievements & achievement){
     gamename=achievement.gamename;
     gameversion=achievement.gameversion;
     count=achievement.count;
-    return *this;
+    return* this;
 }

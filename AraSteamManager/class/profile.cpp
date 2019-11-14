@@ -1,6 +1,6 @@
 #include "profile.h"
 
-Profile::Profile(QJsonObject info, QObject *parent) : QObject(parent){
+Profile::Profile(QJsonObject info, QObject* parent) : QObject(parent){
     Set(info);
 }
 Profile::Profile(){
@@ -42,5 +42,5 @@ Profile& Profile::operator=(const Profile& pro){
     this->timecreated=pro.timecreated;
     this->inGame=pro.inGame;
     this->Gameid=pro.Gameid;
-    return *this;
+    return* this;
 }

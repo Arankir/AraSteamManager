@@ -1,6 +1,6 @@
 #include "Sfriends.h"
 
-SFriends::SFriends(QString key, QString id, bool parallel, QObject *parent) : QObject(parent){
+SFriends::SFriends(QString key, QString id, bool parallel, QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, id, parallel);
 }
@@ -22,7 +22,7 @@ void SFriends::Set(QString key, QString id, bool parallel){
         manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
         connect(manager,&QNetworkAccessManager::finished,this,&SFriends::Load);
     } else {
-        QNetworkReply *reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
+        QNetworkReply* reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+key+"&steamid="+id+"&relationship=friend"));
         QEventLoop loop;
         connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         loop.exec();
@@ -90,7 +90,7 @@ SFriends & SFriends::operator=(const SFriends & friendss) {
     id=friendss.id;
     key=friendss.key;
     manager = new QNetworkAccessManager;
-    return *this;
+    return* this;
 }
 
 void SFriends::Clear(){

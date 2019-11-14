@@ -1,6 +1,6 @@
 #include "Sfriend.h"
 
-SFriend::SFriend(QJsonObject ObjFriend, QObject *parent) : QObject(parent){
+SFriend::SFriend(QJsonObject ObjFriend, QObject* parent) : QObject(parent){
     Set(ObjFriend);
 }
 SFriend::SFriend(){
@@ -16,5 +16,5 @@ SFriend::SFriend( const SFriend & a){
 }
 SFriend & SFriend::operator=(const SFriend & friends) {
     friendd=friends.friendd;
-    return *this;
+    return* this;
 }

@@ -33,15 +33,15 @@ class FormCompare : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormCompare(QString keys, QString ids, SGame games, QPixmap GameLogo, SAchievements achievements, QWidget *parent = nullptr);
+    explicit FormCompare(QString keys, QString ids, SGame games, QPixmap GameLogo, SAchievements achievements, QWidget* parent = nullptr);
     ~FormCompare();
 
 signals:
     void return_to_achievements();
 
 private slots:
-    void closeEvent(QCloseEvent *);
-    void OnResultImage(ImageRequest *imgr);
+    void closeEvent(QCloseEvent* );
+    void OnResultImage(ImageRequest* imgr);
     void UpdateHiddenRows();
 
     void on_RadioButtonMyAll_clicked();
@@ -86,14 +86,14 @@ private slots:
     void OnResultAvatar(int i, QString, ImageRequest* img);
 
 private:
-    Ui::FormCompare *ui;
+    Ui::FormCompare* ui;
     QString key;
     QString id;
     int windowchildcount=0;
-    bool **filter;
+    bool** filter;
     int colfilter=3;
-    QFormLayout *newcategoryvalueslayout;
-    QFormLayout *changecategoryvalueslayout;
+    QFormLayout* newcategoryvalueslayout;
+    QFormLayout* changecategoryvalueslayout;
     QStringList Words;
     SGame game;
     QVector<QPair<SProfile,int>> friends;

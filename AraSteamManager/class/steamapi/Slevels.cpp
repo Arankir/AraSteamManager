@@ -1,6 +1,6 @@
 #include "Slevels.h"
 
-SLevels::SLevels(QString key, QString id, QObject *parent) : QObject(parent){
+SLevels::SLevels(QString key, QString id, QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, id);
 }
