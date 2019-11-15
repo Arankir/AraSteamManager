@@ -11,7 +11,6 @@ int Threading::AddThreadGames(QTableWidget* TableWidgetGames, QVector<SGame> gam
     Games->moveToThread(thread);
     Games->Set(TableWidgetGames,games,key,Favorite,AchievementsLocalisation);
     connect(thread,SIGNAL(started()),Games,SLOT(Fill()));
-    //connect(tr,SIGNAL(Err(double)),this,SLOT(Finish(double)));
     connect(Games,SIGNAL(finished()),thread,SLOT(quit()));
     connect(Games,SIGNAL(finished()),Games,SLOT(deleteLater()));
     connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
@@ -29,7 +28,6 @@ int Threading::AddThreadFriends(QTableWidget* TableWidgetFriends,QVector<SProfil
     Friends->moveToThread(thread);
     Friends->Set(TableWidgetFriends,Profiles,Friendss,Words);
     connect(thread,SIGNAL(started()),Friends,SLOT(Fill()));
-    //connect(tr,SIGNAL(Err(double)),this,SLOT(Finish(double)));
     connect(Friends,SIGNAL(finished()),thread,SLOT(quit()));
     connect(Friends,SIGNAL(finished()),Friends,SLOT(deleteLater()));
     connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));

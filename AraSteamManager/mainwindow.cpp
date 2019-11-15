@@ -94,7 +94,6 @@ void MainWindow::InitComponents(){
 }
 
 void MainWindow::ProgressLoading(int p,int){
-    qDebug()<<p;
     ui->FormProgressBar->setValue(p);
 }
 

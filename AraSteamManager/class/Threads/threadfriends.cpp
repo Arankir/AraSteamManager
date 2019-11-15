@@ -17,18 +17,18 @@ int ThreadFriends::Fill(){
         int row = TableWidgetFriends->rowCount();
         TableWidgetFriends->insertRow(i);
         //qDebug()<<i;
-        if(!QFile::exists("images/profiles/"+Profiles[i].GetAvatar().mid(72,20)+".jpg")){
+        QString path = "images/profiles/"+Profiles[i].GetAvatar().mid(72,20)+".jpg";
+        if(!QFile::exists(path)){
             if(numrequests<500){
-                qDebug()<<Profiles[i].GetAvatar()<<row<<"images/profiles/"+Profiles[i].GetAvatar().mid(72,20)+".jpg";
-                ImageRequest* image = new ImageRequest(Profiles[i].GetAvatar(),row,"images/profiles/"+Profiles[i].GetAvatar().mid(72,20)+".jpg",true);
-                connect(image,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
+                ImageRequest* image = new ImageRequest(Profiles[i].GetAvatar(),row,path,true);
+                connect(image,&ImageRequest::onReady,this,&ThreadFriends::OnResultImage);
                 request.append(image);
                 numrequests++;
                 numnow++;
                 }
             } else {
             QPixmap pixmap;
-            pixmap.load("images/profiles/"+Profiles[i].GetAvatar().mid(72,20)+".jpg");
+            pixmap.load(path);
             emit setimage(pixmap,row);
             }
         TableWidgetFriends->setItem(i,1,new QTableWidgetItem(Profiles[i].GetPersonaname()));
@@ -117,10 +117,10 @@ int ThreadFriends::Fill(){
 }
 
 void ThreadFriends::OnResultImage(ImageRequest* imgr){
+    qDebug()<<1<<imgr->GetRow();
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     emit setimage(pixmap,imgr->GetRow());
-    qDebug()<<1<<imgr->GetRow();
     //ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
     if(numrequests==500&&numnow<Friends.GetCount()){
         imgr->LoadImage(Profiles[numnow].GetAvatar(),numnow,"images/profiles/"+Profiles[numnow].GetAvatar().mid(72,20)+".jpg",true);

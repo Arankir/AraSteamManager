@@ -14,35 +14,36 @@ void ThreadGames::Set(QTableWidget* TableWidgetGames, QVector<SGame> games, QStr
 }
 
 int ThreadGames::Fill(){
+    images=achievements=games.size();
+    TableWidgetGames->setRowCount(games.count());
     for(int i=0;i<games.size();i++){
-        int row = TableWidgetGames->rowCount();
-        TableWidgetGames->insertRow(row);
-        if(!QFile::exists("images/icon_games/"+games[i].GetImg_icon_url()+".jpg")){
+        QString path = "images/icon_games/"+games[i].GetImg_icon_url()+".jpg";
+        if(!QFile::exists(path)){
             if(numrequests<500){
                 if(games[i].GetImg_icon_url()!=""){
                     ImageRequest* image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                                           QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",row,
-                                                           "images/icon_games/"+games[i].GetImg_icon_url()+".jpg",true);
-                    connect(image,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
+                                                           QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",i,path,true);
+                    connect(image,&ImageRequest::onReady,this,&ThreadGames::OnResultImage);
                     request.append(image);
                     numrequests++;
-                    }
+                    } else
+                    images--;
                 numnow++;
             }
             } else {
             QPixmap pixmap;
-            pixmap.load("images/icon_games/"+games[i].GetImg_icon_url()+".jpg");
-            emit setimage(pixmap,row);
+            pixmap.load(path);
+            emit setimage(pixmap,i);
             }
-        TableWidgetGames->setItem(row,1,new QTableWidgetItem(games[i].GetName()));
+        TableWidgetGames->setItem(i,1,new QTableWidgetItem(games[i].GetName()));
 
         TableWidgetGames->setRowHeight(i,33);
-        ImageRequest* Achievements = new ImageRequest;
-        connect(Achievements,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultAchievements(ImageRequest*)));
+        ImageRequest* Achievements = new ImageRequest();
+        connect(Achievements,&ImageRequest::onReady,this,&ThreadGames::OnResultAchievements);
         Achievements->LoadImage("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+
-                                "&gameid="+QString::number(games[i].GetAppid()),row,
+                                "&gameid="+QString::number(games[i].GetAppid()),i,
                                 "ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
-        emit progress(i,row);
+        emit progress(i,i);
         }
     TableWidgetGames->resizeColumnsToContents();
     TableWidgetGames->setColumnWidth(0,33);
@@ -55,6 +56,7 @@ int ThreadGames::Fill(){
 }
 
 void ThreadGames::OnResultImage(ImageRequest* imgr){
+    qDebug()<<images<<achievements;
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     emit setimage(pixmap,imgr->GetRow());
@@ -67,9 +69,11 @@ void ThreadGames::OnResultImage(ImageRequest* imgr){
         numnow++;
     } else
         disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
+    images--;
 }
 
 void ThreadGames::OnResultAchievements(ImageRequest* imgr){
+    qDebug()<<images<<achievements;
     disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultAchievements(ImageRequest*)));
     QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
     qDebug()<<doc;
@@ -77,5 +81,6 @@ void ThreadGames::OnResultAchievements(ImageRequest* imgr){
         static_cast<QPushButton*>(TableWidgetGames->cellWidget(imgr->GetRow(),2))->setEnabled(false);
     }
     imgr->deleteLater();
+    achievements--;
 }
 

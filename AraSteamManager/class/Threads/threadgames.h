@@ -2,9 +2,9 @@
 #define THREADGAMES_H
 
 #include <QObject>
-#include <class/imagerequest.h>
 #include <QTableWidget>
 #include <class/steamapi/Sgame.h>
+#include <class/imagerequest.h>
 #include <QPushButton>
 
 class ThreadGames : public QObject
@@ -33,6 +33,8 @@ private:
     QVector<SGame> games;
     QTableWidget* TableWidgetGames;
     QVector<ImageRequest*> request;
+    int images;
+    int achievements;
 };
 
 #endif // THREADGAMES_H

@@ -17,7 +17,7 @@ class ImageRequest : public QObject
 {
     Q_OBJECT
 public:
-    explicit ImageRequest(QString url, int row, QString save, bool autosave, QObject* parent = nullptr);
+    explicit ImageRequest(QString url, int column=-1, QString save="", bool autosave=false, QObject* parent = nullptr);
     ImageRequest();
     ~ImageRequest();
     void LoadImage(QString url, int column=-1, QString save="", bool autosave=false);

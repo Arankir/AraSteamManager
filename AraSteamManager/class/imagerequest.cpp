@@ -26,7 +26,8 @@ ImageRequest::ImageRequest(QString url, int row, QString save, bool autosave, QO
 
 ImageRequest::ImageRequest(){
     manager = new QNetworkAccessManager();
-    QByteArray answer="";
+    connect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
+    answer="";
 }
 
 void ImageRequest::Get(QString str){
@@ -37,6 +38,7 @@ void ImageRequest::Get(QString str){
 }
 
 void ImageRequest::LoadImage(QString url, int column, QString save, bool autosave){
+    Url=url;
     i=column;
     Save=save;
     Autosave=autosave;
@@ -44,6 +46,7 @@ void ImageRequest::LoadImage(QString url, int column, QString save, bool autosav
 }
 
 void ImageRequest::OnResultGet(QNetworkReply* reply){
+    qDebug()<<"com"<<1<<reply->error();
     if(!reply->error()){
         answer=reply->readAll();
         if(Autosave){
