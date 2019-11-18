@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow(QWidget* parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
+    qRegisterMetaType<QVector<int>>("QVector<int>");
     Words=Setting.GetWords("mainwindow");
     switch(Setting.GetTheme()){
     case 1:{

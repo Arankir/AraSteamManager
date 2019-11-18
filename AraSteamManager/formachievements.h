@@ -20,6 +20,7 @@
 #include <class/steamapi/Sgame.h>
 #include <class/steamapi/Sachievements.h>
 #include <subform/formaddcategory.h>
+#include <class/Threads/threading.h>
 
 namespace Ui {
 class FormAchievements;
@@ -38,6 +39,10 @@ signals:
     void return_to_games();
 
 private slots:
+    void InitComponents();
+    void ProgressLoading(int p,int row);
+    void ImageSet(QPixmap pixmap, int row);
+
     void OnResultImage(ImageRequest* imgr);
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);

@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <class/steamapi/Sgame.h>
 #include <class/imagerequest.h>
+#include <QEventLoop>
 #include <QPushButton>
 
 class ThreadGames : public QObject
@@ -16,25 +17,14 @@ public:
 signals:
     void finished();
     void progress(int p, int row);
-    void setimage(QPixmap, int row);
 
 public slots:
     int Fill();
-    void Set(QTableWidget* TableWidgetGames, QVector<SGame> games, QString key, QIcon Favorite, QString AchievementsLocalisation);
-    void OnResultImage(ImageRequest* imgr);
-    void OnResultAchievements(ImageRequest* imgr);
+    void Set(QTableWidget* TableWidgetGames, QVector<SGame> games);
 
 private:
-    int numrequests;
-    int numnow;
-    QIcon Favorite;
-    QString AchievementsLocalisation;
-    QString key;
     QVector<SGame> games;
     QTableWidget* TableWidgetGames;
-    QVector<ImageRequest*> request;
-    int images;
-    int achievements;
 };
 
 #endif // THREADGAMES_H

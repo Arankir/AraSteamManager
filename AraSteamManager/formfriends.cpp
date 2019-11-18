@@ -22,8 +22,6 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget* 
         }
     }
     InitComponents();
-    Threading LoadTable(this);
-    LoadTable.AddThreadFriends(ui->TableWidgetFriends,Profiless,Friends,Words);
     /*for (int i=0;i<Friends.GetCount();i++) {
         ui->TableWidgetFriends->insertRow(i);
         qDebug()<<i;
@@ -164,6 +162,7 @@ void FormFriends::InitComponents(){
     ui->ComboBoxStatus->addItem(Words[14]);
     ui->ComboBoxStatus->addItem(Words[15]);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableWidgetFriends->setRowCount(Friends.GetCount());
     ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.jpg) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
@@ -183,6 +182,8 @@ void FormFriends::InitComponents(){
             filter[i][j]=true;
             }
         }
+    Threading LoadTable(this);
+    LoadTable.AddThreadFriends(ui->TableWidgetFriends,Profiless,Friends,Words);
 }
 void FormFriends::ProgressLoading(int p,int row){
     //Отобразить
@@ -201,18 +202,34 @@ void FormFriends::ProgressLoading(int p,int row){
     ui->TableWidgetFriends->setRowHeight(row,33);
 }
 
-void FormFriends::ImageSet(QPixmap pixmap, int row){
-    QLabel* label = new QLabel;
-    label->setPixmap(pixmap);
-    ui->TableWidgetFriends->setCellWidget(row,0,label);
+void FormFriends::OnFinish(){
+    for (int i=0;i<Friends.GetCount();i++) {
+        //qDebug()<<i;
+        QString path = "images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg";
+        if(!QFile::exists(path)){
+            if(numrequests<500){
+                ImageRequest* image = new ImageRequest(Profiless[i].GetAvatar(),i,path,true);
+                connect(image,&ImageRequest::onReady,this,&FormFriends::OnResultImage);
+                request.append(image);
+                numrequests++;
+                numnow++;
+                }
+            } else {
+                QPixmap pixmap;
+                pixmap.load(path);
+                QLabel* label = new QLabel;
+                label->setPixmap(pixmap);
+                ui->TableWidgetFriends->setCellWidget(i,0,label);
+            }
+        }
 }
 
 FormFriends::~FormFriends(){
-    qDebug()<<numrequests;
-    if(numrequests)
-        for (int i=0;i<=numrequests;i++) {
-            delete request[numrequests];
-        }
+    //qDebug()<<numrequests;
+    //if(numrequests)
+    //    for (int i=0;i<=numrequests;i++) {
+    //        delete request[numrequests];
+    //    }
     delete filter;
     delete ui;
 }
@@ -226,7 +243,7 @@ void FormFriends::on_ButtonReturn_clicked(){
 }
 
 void FormFriends::OnResultImage(ImageRequest* imgr){
-    /*QPixmap pixmap;
+    QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel* label = new QLabel;
     label->setPixmap(pixmap);
@@ -236,8 +253,8 @@ void FormFriends::OnResultImage(ImageRequest* imgr){
         imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20)+".jpg",true);
         numnow++;
     } else
-        disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
-    //imgr->deleteLater();*/
+        disconnect(imgr,&ImageRequest::onReady,this,&FormFriends::OnResultImage);
+    //imgr->deleteLater();
 }
 
 void FormFriends::GoToProfileClicked(){

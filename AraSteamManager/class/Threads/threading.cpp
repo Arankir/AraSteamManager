@@ -5,19 +5,19 @@ Threading::Threading(QObject* parent) : QObject(parent)
 
 }
 
-int Threading::AddThreadGames(QTableWidget* TableWidgetGames, QVector<SGame> games, QString key, QIcon Favorite, QString AchievementsLocalisation){
+int Threading::AddThreadGames(QTableWidget* TableWidgetGames, QVector<SGame> games){
     ThreadGames* Games = new ThreadGames;
     QThread* thread = new QThread;
     Games->moveToThread(thread);
-    Games->Set(TableWidgetGames,games,key,Favorite,AchievementsLocalisation);
+    Games->Set(TableWidgetGames,games);
     connect(thread,SIGNAL(started()),Games,SLOT(Fill()));
     connect(Games,SIGNAL(finished()),thread,SLOT(quit()));
     connect(Games,SIGNAL(finished()),Games,SLOT(deleteLater()));
     connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
     connect(Games,SIGNAL(progress(int,int)),this->parent()->parent(),SLOT(ProgressLoading(int,int)));
     connect(Games,SIGNAL(progress(int,int)),this->parent(),SLOT(ProgressLoading(int,int)));
-    connect(Games,SIGNAL(setimage(QPixmap,int)),this->parent(),SLOT(ImageSet(QPixmap,int)));
     connect(Games,SIGNAL(finished()),this->parent()->parent(),SLOT(ShowGames()));
+    connect(Games,SIGNAL(finished()),this->parent(),SLOT(OnFinish()));
     thread->start();
     return 1;
 }
@@ -33,16 +33,30 @@ int Threading::AddThreadFriends(QTableWidget* TableWidgetFriends,QVector<SProfil
     connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
     connect(Friends,SIGNAL(progress(int,int)),this->parent()->parent(),SLOT(ProgressLoading(int,int)));
     connect(Friends,SIGNAL(progress(int,int)),this->parent(),SLOT(ProgressLoading(int,int)));
-    connect(Friends,SIGNAL(setimage(QPixmap,int)),this->parent(),SLOT(ImageSet(QPixmap,int)));
     connect(Friends,SIGNAL(finished()),this->parent()->parent(),SLOT(ShowFriends()));
+    connect(Friends,SIGNAL(finished()),this->parent(),SLOT(OnFinish()));
+    thread->start();
+    return 1;
+}
+
+int Threading::AddThreadAchievements(QString GameAppID, SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements){
+    ThreadAchievements* Achievements = new ThreadAchievements;
+    QThread* thread = new QThread;
+    Achievements->moveToThread(thread);
+    Achievements->Set(GameAppID, achievements, Words, LabelTotalPersent, TableWidgetAchievements);
+    connect(thread,SIGNAL(started()),Achievements,SLOT(Fill()));
+    connect(Achievements,SIGNAL(finished()),thread,SLOT(quit()));
+    connect(Achievements,SIGNAL(finished()),Achievements,SLOT(deleteLater()));
+    connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
+    connect(Achievements,SIGNAL(progress(int,int)),this->parent()->parent(),SLOT(ProgressLoading(int,int)));
+    connect(Achievements,SIGNAL(progress(int,int)),this->parent(),SLOT(ProgressLoading(int,int)));
+    connect(Achievements,SIGNAL(setimage(QPixmap,int)),this->parent(),SLOT(ImageSet(QPixmap,int)));
+    //connect(Achievements,SIGNAL(finished()),this->parent()->parent(),SLOT(ShowAchievements()));
     thread->start();
     return 1;
 }
 
 int Threading::AddThreadCompare(){
-    return 1;
-}
 
-int Threading::AddThreadAchievements(){
     return 1;
 }

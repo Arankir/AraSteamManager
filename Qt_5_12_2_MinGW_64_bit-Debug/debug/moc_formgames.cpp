@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
-    QByteArrayData data[21];
-    char stringdata0[295];
+    QByteArrayData data[19];
+    char stringdata0[287];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,32 +35,30 @@ QT_MOC_LITERAL(0, 0, 9), // "FormGames"
 QT_MOC_LITERAL(1, 10, 17), // "return_to_profile"
 QT_MOC_LITERAL(2, 28, 0), // ""
 QT_MOC_LITERAL(3, 29, 15), // "ProgressLoading"
-QT_MOC_LITERAL(4, 45, 8), // "ImageSet"
-QT_MOC_LITERAL(5, 54, 3), // "pix"
-QT_MOC_LITERAL(6, 58, 3), // "row"
-QT_MOC_LITERAL(7, 62, 13), // "OnResultImage"
-QT_MOC_LITERAL(8, 76, 13), // "ImageRequest*"
-QT_MOC_LITERAL(9, 90, 4), // "imgr"
-QT_MOC_LITERAL(10, 95, 20), // "OnResultAchievements"
-QT_MOC_LITERAL(11, 116, 10), // "closeEvent"
-QT_MOC_LITERAL(12, 127, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(13, 140, 5), // "event"
-QT_MOC_LITERAL(14, 146, 14), // "InitComponents"
-QT_MOC_LITERAL(15, 161, 23), // "on_ButtonReturn_clicked"
-QT_MOC_LITERAL(16, 185, 19), // "AchievementsClicked"
-QT_MOC_LITERAL(17, 205, 16), // "FavoritesClicked"
-QT_MOC_LITERAL(18, 222, 22), // "returnfromachievements"
-QT_MOC_LITERAL(19, 245, 27), // "on_LineEditGame_textChanged"
-QT_MOC_LITERAL(20, 273, 21) // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(4, 45, 8), // "OnFinish"
+QT_MOC_LITERAL(5, 54, 14), // "InitComponents"
+QT_MOC_LITERAL(6, 69, 13), // "OnResultImage"
+QT_MOC_LITERAL(7, 83, 13), // "ImageRequest*"
+QT_MOC_LITERAL(8, 97, 4), // "imgr"
+QT_MOC_LITERAL(9, 102, 20), // "OnResultAchievements"
+QT_MOC_LITERAL(10, 123, 10), // "closeEvent"
+QT_MOC_LITERAL(11, 134, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(12, 147, 5), // "event"
+QT_MOC_LITERAL(13, 153, 23), // "on_ButtonReturn_clicked"
+QT_MOC_LITERAL(14, 177, 19), // "AchievementsClicked"
+QT_MOC_LITERAL(15, 197, 16), // "FavoritesClicked"
+QT_MOC_LITERAL(16, 214, 22), // "returnfromachievements"
+QT_MOC_LITERAL(17, 237, 27), // "on_LineEditGame_textChanged"
+QT_MOC_LITERAL(18, 265, 21) // "on_ButtonFind_clicked"
 
     },
     "FormGames\0return_to_profile\0\0"
-    "ProgressLoading\0ImageSet\0pix\0row\0"
+    "ProgressLoading\0OnFinish\0InitComponents\0"
     "OnResultImage\0ImageRequest*\0imgr\0"
     "OnResultAchievements\0closeEvent\0"
-    "QCloseEvent*\0event\0InitComponents\0"
-    "on_ButtonReturn_clicked\0AchievementsClicked\0"
-    "FavoritesClicked\0returnfromachievements\0"
+    "QCloseEvent*\0event\0on_ButtonReturn_clicked\0"
+    "AchievementsClicked\0FavoritesClicked\0"
+    "returnfromachievements\0"
     "on_LineEditGame_textChanged\0"
     "on_ButtonFind_clicked"
 };
@@ -84,28 +82,28 @@ static const uint qt_meta_data_FormGames[] = {
 
  // slots: name, argc, parameters, tag, flags
        3,    2,   80,    2, 0x0a /* Public */,
-       4,    2,   85,    2, 0x0a /* Public */,
-       7,    1,   90,    2, 0x08 /* Private */,
+       4,    0,   85,    2, 0x0a /* Public */,
+       5,    0,   86,    2, 0x08 /* Private */,
+       6,    1,   87,    2, 0x08 /* Private */,
+       9,    1,   90,    2, 0x08 /* Private */,
       10,    1,   93,    2, 0x08 /* Private */,
-      11,    1,   96,    2, 0x08 /* Private */,
-      14,    0,   99,    2, 0x08 /* Private */,
-      15,    0,  100,    2, 0x08 /* Private */,
-      16,    0,  101,    2, 0x08 /* Private */,
-      17,    0,  102,    2, 0x08 /* Private */,
+      13,    0,   96,    2, 0x08 /* Private */,
+      14,    0,   97,    2, 0x08 /* Private */,
+      15,    0,   98,    2, 0x08 /* Private */,
+      16,    0,   99,    2, 0x08 /* Private */,
+      17,    1,  100,    2, 0x08 /* Private */,
       18,    0,  103,    2, 0x08 /* Private */,
-      19,    1,  104,    2, 0x08 /* Private */,
-      20,    0,  107,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
-    QMetaType::Void, QMetaType::QPixmap, QMetaType::Int,    5,    6,
-    QMetaType::Void, 0x80000000 | 8,    9,
-    QMetaType::Void, 0x80000000 | 8,    9,
-    QMetaType::Void, 0x80000000 | 12,   13,
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 11,   12,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -124,11 +122,11 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->return_to_profile(); break;
         case 1: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: _t->ImageSet((*reinterpret_cast< QPixmap(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 3: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
-        case 4: _t->OnResultAchievements((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
-        case 5: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 6: _t->InitComponents(); break;
+        case 2: _t->OnFinish(); break;
+        case 3: _t->InitComponents(); break;
+        case 4: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 5: _t->OnResultAchievements((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 6: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 7: _t->on_ButtonReturn_clicked(); break;
         case 8: _t->AchievementsClicked(); break;
         case 9: _t->FavoritesClicked(); break;
@@ -140,14 +138,14 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 3:
+        case 4:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< ImageRequest* >(); break;
             }
             break;
-        case 4:
+        case 5:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:

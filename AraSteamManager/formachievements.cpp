@@ -8,7 +8,6 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
     id=ids;
     game=games;
     achievements.Set(key,QString::number(game.GetAppid()),id,Words[26]);
-    ui->TableWidgetAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     switch(Setting.GetTheme()){
     case 1:{
         theme="white";
@@ -19,6 +18,12 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
         break;
         }
     }
+    InitComponents();
+    //ui->LineEditNameAchievements->setFocus();
+}
+
+void FormAchievements::InitComponents(){
+    ui->TableWidgetAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonCompare->setIcon(QIcon(":/"+theme+"/program/"+theme+"/compare.png"));
     //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/program/filter_white.png)}");
@@ -75,19 +80,17 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
     ui->TableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Words[23]));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[22]));
     ui->LabelGameOnline->setText(Words[27]+": "+game.GetNumberPlayers(key,false));
-        QNetworkAccessManager manager;
-        QEventLoop loop;
-        connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        QNetworkReply &logoreply = *manager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(game.GetAppid())+"/"+game.GetImg_logo_url()+".jpg"));
-        loop.exec();
-        disconnect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    QPixmap pixmap;
-        pixmap.loadFromData(logoreply.readAll());
-    ui->LabelGameLogo->setPixmap(pixmap);
     if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists())
         QDir().mkdir("images/achievements/"+QString::number(game.GetAppid()));
-    qDebug()<<achievements.GetStatusGlobal()<<achievements.GetStatusPlayer()<<achievements.GetStatusPercent();
-    PullTableWidget();
+    QNetworkAccessManager manager;
+    QEventLoop loop;
+    connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    QNetworkReply &logoreply = *manager.get(QNetworkRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(game.GetAppid())+"/"+game.GetImg_logo_url()+".jpg"));
+    loop.exec();
+    disconnect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+    QPixmap pixmap;
+    pixmap.loadFromData(logoreply.readAll());
+    ui->LabelGameLogo->setPixmap(pixmap);
     filter = new bool*[ui->TableWidgetAchievements->rowCount()];
     ShowCategories();
     ui->GroupBoxAddCategory->setVisible(false);
@@ -102,7 +105,24 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidg
     widget2->setLayout(changecategoryvalueslayout);
     ui->ScrollAreaValuesChangeCategory->setWidget(widget2);
     ui->LineEditTitleCategoryChangeCategory->setEnabled(false);
-    ui->LineEditNameAchievements->setFocus();
+    qDebug()<<achievements.GetStatusGlobal()<<achievements.GetStatusPlayer()<<achievements.GetStatusPercent();
+    PullTableWidget();
+}
+
+void FormAchievements::ProgressLoading(int p,int row){
+    qDebug()<<p;
+    QPushButton* button1 = new QPushButton;
+    button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
+    connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+    button1->setObjectName("ButtonFavorites&"+achievements.GetApiname(p));
+    ui->TableWidgetAchievements->setCellWidget(row,6,button1);
+}
+
+void FormAchievements::ImageSet(QPixmap pixmap, int row){
+    QLabel* label = new QLabel;
+    label->setPixmap(pixmap);
+    ui->TableWidgetAchievements->setCellWidget(row,1,label);
+    ui->TableWidgetAchievements->resizeRowToContents(row);
 }
 
 FormAchievements::~FormAchievements(){
@@ -126,8 +146,8 @@ void FormAchievements::on_ButtonReturn_clicked(){
 }
 
 void FormAchievements::PullTableWidget(){
-    int totalr=0;
-    int totalnr=0;
+    //int totalr=0;
+    //int totalnr=0;
     ui->TableWidgetAchievements->setRowCount(0);
     if(!(achievements.GetStatusGlobal()=="success"&&achievements.GetStatusPlayer()=="success"&&achievements.GetStatusPercent()=="success")){
         ui->TableWidgetAchievements->insertRow(0);
@@ -140,7 +160,11 @@ void FormAchievements::PullTableWidget(){
         ui->TableWidgetAchievements->setColumnHidden(6,true);
         ui->GroupBoxFilter->setEnabled(false);
         ui->ButtonCompare->setEnabled(false);
-    } else
+    } else{
+        Threading LoadTable(this);
+        LoadTable.AddThreadAchievements(QString::number(game.GetAppid()),achievements,Words,ui->LabelTotalPersent,ui->TableWidgetAchievements);
+    }
+    /*
     for(int i=0;i<achievements.GetAchievementsCount();i++){
         qDebug()<<i;
         if(achievements.GetDisplayname(i)!=""){
@@ -188,6 +212,7 @@ void FormAchievements::PullTableWidget(){
     ui->TableWidgetAchievements->setColumnWidth(5,80);
     ui->TableWidgetAchievements->setColumnWidth(6,50);
     ui->TableWidgetAchievements->resizeRowsToContents();
+    */
 }
 
 void FormAchievements::FavoritesClicked(){

@@ -28,13 +28,13 @@ signals:
 
 public slots:
     void ProgressLoading(int,int);
-    void ImageSet(QPixmap pix, int row);
+    void OnFinish();
 
 private slots:
+    void InitComponents();
     void OnResultImage(ImageRequest* imgr);
     void OnResultAchievements(ImageRequest* imgr);
     void closeEvent(QCloseEvent* event);
-    void InitComponents();
 
     void on_ButtonReturn_clicked();
 

@@ -25,11 +25,13 @@ signals:
     void return_to_profile();
     void go_to_profile(QString id, QString type, bool UpdateBuffer);
 
-private slots:
-    void closeEvent(QCloseEvent* event);
-    void InitComponents();
+public slots:
     void ProgressLoading(int p,int row);
-    void ImageSet(QPixmap pixmap, int row);
+    void OnFinish();
+
+private slots:
+    void InitComponents();
+    void closeEvent(QCloseEvent* event);
 
     void on_ButtonReturn_clicked();
 

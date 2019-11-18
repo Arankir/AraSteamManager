@@ -1,8 +1,7 @@
 #include "threadfriends.h"
 
 ThreadFriends::ThreadFriends(QObject* parent) : QObject(parent){
-    numrequests=0;
-    numnow=0;
+
 }
 
 void ThreadFriends::Set(QTableWidget* TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends,QStringList Words){
@@ -14,23 +13,6 @@ void ThreadFriends::Set(QTableWidget* TableWidgetFriends,QVector<SProfile> Profi
 
 int ThreadFriends::Fill(){
     for (int i=0;i<Friends.GetCount();i++) {
-        int row = TableWidgetFriends->rowCount();
-        TableWidgetFriends->insertRow(i);
-        //qDebug()<<i;
-        QString path = "images/profiles/"+Profiles[i].GetAvatar().mid(72,20)+".jpg";
-        if(!QFile::exists(path)){
-            if(numrequests<500){
-                ImageRequest* image = new ImageRequest(Profiles[i].GetAvatar(),row,path,true);
-                connect(image,&ImageRequest::onReady,this,&ThreadFriends::OnResultImage);
-                request.append(image);
-                numrequests++;
-                numnow++;
-                }
-            } else {
-            QPixmap pixmap;
-            pixmap.load(path);
-            emit setimage(pixmap,row);
-            }
         TableWidgetFriends->setItem(i,1,new QTableWidgetItem(Profiles[i].GetPersonaname()));
         int j;
         for (j=0;;j++) {
@@ -107,7 +89,7 @@ int ThreadFriends::Fill(){
         }
         TableWidgetFriends->setItem(i,4,item5);
         TableWidgetFriends->setItem(i,5,new QTableWidgetItem(Profiles[i].GetSteamid()));
-        emit progress(i,row);
+        emit progress(i,i);
     }
     TableWidgetFriends->setColumnHidden(5,true);
     TableWidgetFriends->resizeColumnsToContents();
@@ -116,16 +98,3 @@ int ThreadFriends::Fill(){
     return 1;
 }
 
-void ThreadFriends::OnResultImage(ImageRequest* imgr){
-    qDebug()<<1<<imgr->GetRow();
-    QPixmap pixmap;
-    pixmap.loadFromData(imgr->GetAnswer());
-    emit setimage(pixmap,imgr->GetRow());
-    //ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
-    if(numrequests==500&&numnow<Friends.GetCount()){
-        imgr->LoadImage(Profiles[numnow].GetAvatar(),numnow,"images/profiles/"+Profiles[numnow].GetAvatar().mid(72,20)+".jpg",true);
-        numnow++;
-    } else
-        disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
-    //imgr->deleteLater();
-}
