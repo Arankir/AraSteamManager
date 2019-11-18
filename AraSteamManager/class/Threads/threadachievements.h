@@ -16,19 +16,12 @@ public:
 signals:
     void finished();
     void progress(int p, int row);
-    void setimage(QPixmap, int row);
 
 public slots:
     int Fill();
-    void Set(QString GameAppID, SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements);
-    void OnResultImage(ImageRequest* imgr);
+    void Set(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements);
 
 private:
-    int numrequests;
-    int numnow;
-    QVector<ImageRequest*> request;
-
-    QString GameAppID;
     SAchievements achievements;
     QStringList Words;
     QLabel* LabelTotalPersent;

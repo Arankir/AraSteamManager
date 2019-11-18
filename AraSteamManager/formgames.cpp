@@ -165,11 +165,10 @@ FormGames::~FormGames(){
 void FormGames::closeEvent(QCloseEvent*){
     on_ButtonReturn_clicked();
 }
-void FormGames::returnfromachievements(){
-    windowchildcount--;
-    disconnect(achievementsform,SIGNAL(return_to_games()),this,SLOT(returnfromachievements()));
-    this->setVisible(true);
-    delete achievementsform;
+void FormGames::returnfromachievements(int num){
+    //windowchildcount--;
+    disconnect(achievementsforms[num],&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
+    delete achievementsforms[num];
 }
 void FormGames::on_ButtonReturn_clicked(){
     emit return_to_profile();
@@ -186,8 +185,8 @@ void FormGames::on_ButtonFind_clicked(){
 }
 
 void FormGames::AchievementsClicked(){
-    if(windowchildcount==0){
-        windowchildcount++;
+    //if(windowchildcount==0){
+        //windowchildcount++;
         QPushButton* btn = qobject_cast<QPushButton*>(sender());
         int index=btn->objectName().mid(18,4).toInt();
         QEventLoop loop;
@@ -197,15 +196,16 @@ void FormGames::AchievementsClicked(){
         disconnect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         qDebug()<<Percentage.GetStatus()<<Percentage.GetAchievementsCount()<<QString::number(games[index].GetAppid());
         if(Percentage.GetAchievementsCount()==0){
-            windowchildcount--;
+            //windowchildcount--;
             QMessageBox::warning(this,Words[6],Words[7]);
         } else {
-            achievementsform = new FormAchievements(key,id,games[index]);
-            connect(achievementsform,SIGNAL(return_to_games()),this,SLOT(returnfromachievements()));
-            achievementsform->show();
-            this->setVisible(false);
+            FormAchievements* fa = new FormAchievements(key,id,games[index],windowchildcount++);
+            achievementsforms.append(fa);
+            connect(fa,&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
+            fa->show();
+            //this->setVisible(false);
         }
-    }
+    //}
 }
 
 void FormGames::FavoritesClicked(){

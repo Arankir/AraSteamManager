@@ -13,15 +13,18 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,41 +33,50 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QGridLayout *gridLayout;
-    QScrollArea *ScrollAreaForm;
-    QWidget *FormsWidget;
-    QPushButton *ButtonBack;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_3;
     QLabel *LabelLogo;
-    QScrollArea *ScrollAreaProfileInfo;
-    QWidget *scrollAreaWidgetContents;
-    QGridLayout *gridLayout_2;
-    QLabel *LabelBans;
-    QPushButton *ButtonFriends;
-    QLabel *LabelAvatar;
-    QSpacerItem *horizontalSpacer;
-    QFrame *line;
-    QPushButton *ButtonFavorites;
-    QPushButton *ButtonGames;
-    QLabel *LabelProfileVisibility;
-    QLabel *LabelProfileUrl;
-    QLabel *LabelTimeCreated;
-    QLabel *Labellvl;
-    QPushButton *ButtonStatistics;
-    QLabel *LabelNick;
-    QLabel *LabelLocCountryCode;
-    QLabel *LabelPersonaState;
-    QPushButton *ButtonGoToMyProfile;
-    QLabel *LabelRealName;
-    QSpacerItem *horizontalSpacer_4;
+    QSpacerItem *horizontalSpacer_2;
     QPushButton *ButtonExit;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *ButtonBack;
+    QPushButton *ButtonNext;
+    QPushButton *ButtonSettings;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *ButtonSetProfile;
+    QHBoxLayout *horizontalLayout_4;
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
+    QScrollArea *ScrollAreaProfileInfo;
+    QWidget *scrollAreaWidgetContents;
+    QVBoxLayout *verticalLayout_2;
+    QGridLayout *gridLayout_2;
+    QLabel *LabelNick;
+    QSpacerItem *horizontalSpacer;
+    QLabel *LabelPersonaState;
+    QLabel *LabelProfileUrl;
+    QLabel *LabelAvatar;
+    QGridLayout *gridLayout_3;
+    QLabel *Labellvl;
+    QFrame *line;
+    QLabel *LabelRealName;
+    QSpacerItem *horizontalSpacer_5;
+    QLabel *LabelTimeCreated;
+    QLabel *LabelLocCountryCode;
+    QLabel *LabelProfileVisibility;
+    QLabel *LabelBans;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *ButtonGames;
+    QPushButton *ButtonFriends;
+    QPushButton *ButtonFavorites;
+    QPushButton *ButtonStatistics;
+    QSpacerItem *horizontalSpacer_4;
+    QPushButton *ButtonGoToMyProfile;
+    QProgressBar *FormProgressBar;
+    QHBoxLayout *horizontalLayout_5;
+    QScrollArea *ScrollAreaForm;
+    QWidget *FormsWidget;
     QSpacerItem *verticalSpacer;
-    QPushButton *ButtonSettings;
-    QPushButton *ButtonNext;
-    QPushButton *ButtonSetProfile;
-    QSpacerItem *horizontalSpacer_2;
-    QSpacerItem *horizontalSpacer_3;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -76,29 +88,78 @@ public:
         MainWindow->resize(659, 555);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        ScrollAreaForm = new QScrollArea(centralWidget);
-        ScrollAreaForm->setObjectName(QString::fromUtf8("ScrollAreaForm"));
-        ScrollAreaForm->setWidgetResizable(true);
-        FormsWidget = new QWidget();
-        FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 632, 198));
-        ScrollAreaForm->setWidget(FormsWidget);
-
-        gridLayout->addWidget(ScrollAreaForm, 5, 0, 1, 10);
-
-        ButtonBack = new QPushButton(centralWidget);
-        ButtonBack->setObjectName(QString::fromUtf8("ButtonBack"));
-
-        gridLayout->addWidget(ButtonBack, 1, 0, 1, 1);
-
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         LabelLogo = new QLabel(centralWidget);
         LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
 
-        gridLayout->addWidget(LabelLogo, 0, 0, 1, 3);
+        horizontalLayout_3->addWidget(LabelLogo);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_2);
+
+        ButtonExit = new QPushButton(centralWidget);
+        ButtonExit->setObjectName(QString::fromUtf8("ButtonExit"));
+
+        horizontalLayout_3->addWidget(ButtonExit);
+
+
+        verticalLayout->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        ButtonBack = new QPushButton(centralWidget);
+        ButtonBack->setObjectName(QString::fromUtf8("ButtonBack"));
+
+        horizontalLayout_2->addWidget(ButtonBack);
+
+        ButtonNext = new QPushButton(centralWidget);
+        ButtonNext->setObjectName(QString::fromUtf8("ButtonNext"));
+
+        horizontalLayout_2->addWidget(ButtonNext);
+
+        ButtonSettings = new QPushButton(centralWidget);
+        ButtonSettings->setObjectName(QString::fromUtf8("ButtonSettings"));
+
+        horizontalLayout_2->addWidget(ButtonSettings);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_3);
+
+        ButtonSetProfile = new QPushButton(centralWidget);
+        ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
+
+        horizontalLayout_2->addWidget(ButtonSetProfile);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        LineEditIdProfile = new QLineEdit(centralWidget);
+        LineEditIdProfile->setObjectName(QString::fromUtf8("LineEditIdProfile"));
+        LineEditIdProfile->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(26, 26, 26);"));
+
+        horizontalLayout_4->addWidget(LineEditIdProfile);
+
+        ButtonFindProfile = new QPushButton(centralWidget);
+        ButtonFindProfile->setObjectName(QString::fromUtf8("ButtonFindProfile"));
+        ButtonFindProfile->setEnabled(true);
+
+        horizontalLayout_4->addWidget(ButtonFindProfile);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
 
         ScrollAreaProfileInfo = new QScrollArea(centralWidget);
         ScrollAreaProfileInfo->setObjectName(QString::fromUtf8("ScrollAreaProfileInfo"));
@@ -108,171 +169,173 @@ public:
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 632, 188));
-        gridLayout_2 = new QGridLayout(scrollAreaWidgetContents);
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 639, 188));
+        verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(6);
-        gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        LabelBans = new QLabel(scrollAreaWidgetContents);
-        LabelBans->setObjectName(QString::fromUtf8("LabelBans"));
+        LabelNick = new QLabel(scrollAreaWidgetContents);
+        LabelNick->setObjectName(QString::fromUtf8("LabelNick"));
         QFont font;
-        font.setPointSize(10);
-        LabelBans->setFont(font);
-        LabelBans->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);"));
+        font.setFamily(QString::fromUtf8("Mongolian Baiti"));
+        font.setPointSize(14);
+        LabelNick->setFont(font);
+        LabelNick->setStyleSheet(QString::fromUtf8("color:rgb(0, 170, 0)"));
 
-        gridLayout_2->addWidget(LabelBans, 8, 4, 1, 2);
+        gridLayout_2->addWidget(LabelNick, 0, 1, 1, 1);
 
-        ButtonFriends = new QPushButton(scrollAreaWidgetContents);
-        ButtonFriends->setObjectName(QString::fromUtf8("ButtonFriends"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addWidget(ButtonFriends, 9, 2, 1, 3);
+        gridLayout_2->addItem(horizontalSpacer, 0, 2, 1, 1);
+
+        LabelPersonaState = new QLabel(scrollAreaWidgetContents);
+        LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
+        LabelPersonaState->setMaximumSize(QSize(16777215, 16));
+        QFont font1;
+        font1.setPointSize(10);
+        LabelPersonaState->setFont(font1);
+        LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        gridLayout_2->addWidget(LabelPersonaState, 1, 1, 1, 1);
+
+        LabelProfileUrl = new QLabel(scrollAreaWidgetContents);
+        LabelProfileUrl->setObjectName(QString::fromUtf8("LabelProfileUrl"));
+        LabelProfileUrl->setMaximumSize(QSize(16777215, 16));
+        LabelProfileUrl->setFont(font1);
+        LabelProfileUrl->setStyleSheet(QString::fromUtf8("color: rgb(0, 102, 255);"));
+
+        gridLayout_2->addWidget(LabelProfileUrl, 2, 1, 1, 1);
 
         LabelAvatar = new QLabel(scrollAreaWidgetContents);
         LabelAvatar->setObjectName(QString::fromUtf8("LabelAvatar"));
         LabelAvatar->setMaximumSize(QSize(64, 64));
 
-        gridLayout_2->addWidget(LabelAvatar, 1, 0, 3, 1);
+        gridLayout_2->addWidget(LabelAvatar, 0, 0, 3, 1);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer, 1, 7, 1, 2);
+        verticalLayout_2->addLayout(gridLayout_2);
+
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        Labellvl = new QLabel(scrollAreaWidgetContents);
+        Labellvl->setObjectName(QString::fromUtf8("Labellvl"));
+        Labellvl->setFont(font1);
+
+        gridLayout_3->addWidget(Labellvl, 0, 0, 1, 1);
 
         line = new QFrame(scrollAreaWidgetContents);
         line->setObjectName(QString::fromUtf8("line"));
         line->setFrameShape(QFrame::VLine);
         line->setFrameShadow(QFrame::Sunken);
 
-        gridLayout_2->addWidget(line, 6, 3, 3, 1);
+        gridLayout_3->addWidget(line, 0, 1, 3, 1);
 
-        ButtonFavorites = new QPushButton(scrollAreaWidgetContents);
-        ButtonFavorites->setObjectName(QString::fromUtf8("ButtonFavorites"));
+        LabelRealName = new QLabel(scrollAreaWidgetContents);
+        LabelRealName->setObjectName(QString::fromUtf8("LabelRealName"));
+        LabelRealName->setFont(font1);
 
-        gridLayout_2->addWidget(ButtonFavorites, 9, 5, 1, 1);
+        gridLayout_3->addWidget(LabelRealName, 0, 2, 1, 1);
 
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer_5, 0, 3, 2, 1);
+
+        LabelTimeCreated = new QLabel(scrollAreaWidgetContents);
+        LabelTimeCreated->setObjectName(QString::fromUtf8("LabelTimeCreated"));
+        LabelTimeCreated->setFont(font1);
+
+        gridLayout_3->addWidget(LabelTimeCreated, 1, 0, 1, 1);
+
+        LabelLocCountryCode = new QLabel(scrollAreaWidgetContents);
+        LabelLocCountryCode->setObjectName(QString::fromUtf8("LabelLocCountryCode"));
+        LabelLocCountryCode->setFont(font1);
+
+        gridLayout_3->addWidget(LabelLocCountryCode, 1, 2, 1, 1);
+
+        LabelProfileVisibility = new QLabel(scrollAreaWidgetContents);
+        LabelProfileVisibility->setObjectName(QString::fromUtf8("LabelProfileVisibility"));
+        LabelProfileVisibility->setFont(font1);
+
+        gridLayout_3->addWidget(LabelProfileVisibility, 2, 0, 1, 1);
+
+        LabelBans = new QLabel(scrollAreaWidgetContents);
+        LabelBans->setObjectName(QString::fromUtf8("LabelBans"));
+        LabelBans->setFont(font1);
+
+        gridLayout_3->addWidget(LabelBans, 2, 2, 1, 1);
+
+
+        verticalLayout_2->addLayout(gridLayout_3);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         ButtonGames = new QPushButton(scrollAreaWidgetContents);
         ButtonGames->setObjectName(QString::fromUtf8("ButtonGames"));
         ButtonGames->setEnabled(true);
 
-        gridLayout_2->addWidget(ButtonGames, 9, 0, 1, 2);
+        horizontalLayout->addWidget(ButtonGames);
 
-        LabelProfileVisibility = new QLabel(scrollAreaWidgetContents);
-        LabelProfileVisibility->setObjectName(QString::fromUtf8("LabelProfileVisibility"));
-        LabelProfileVisibility->setFont(font);
+        ButtonFriends = new QPushButton(scrollAreaWidgetContents);
+        ButtonFriends->setObjectName(QString::fromUtf8("ButtonFriends"));
 
-        gridLayout_2->addWidget(LabelProfileVisibility, 8, 0, 1, 3);
+        horizontalLayout->addWidget(ButtonFriends);
 
-        LabelProfileUrl = new QLabel(scrollAreaWidgetContents);
-        LabelProfileUrl->setObjectName(QString::fromUtf8("LabelProfileUrl"));
-        LabelProfileUrl->setMaximumSize(QSize(16777215, 16));
-        LabelProfileUrl->setFont(font);
-        LabelProfileUrl->setStyleSheet(QString::fromUtf8("color: rgb(0, 102, 255);"));
+        ButtonFavorites = new QPushButton(scrollAreaWidgetContents);
+        ButtonFavorites->setObjectName(QString::fromUtf8("ButtonFavorites"));
 
-        gridLayout_2->addWidget(LabelProfileUrl, 3, 1, 1, 5);
-
-        LabelTimeCreated = new QLabel(scrollAreaWidgetContents);
-        LabelTimeCreated->setObjectName(QString::fromUtf8("LabelTimeCreated"));
-        LabelTimeCreated->setFont(font);
-
-        gridLayout_2->addWidget(LabelTimeCreated, 7, 0, 1, 3);
-
-        Labellvl = new QLabel(scrollAreaWidgetContents);
-        Labellvl->setObjectName(QString::fromUtf8("Labellvl"));
-        Labellvl->setFont(font);
-
-        gridLayout_2->addWidget(Labellvl, 6, 0, 1, 3);
+        horizontalLayout->addWidget(ButtonFavorites);
 
         ButtonStatistics = new QPushButton(scrollAreaWidgetContents);
         ButtonStatistics->setObjectName(QString::fromUtf8("ButtonStatistics"));
 
-        gridLayout_2->addWidget(ButtonStatistics, 9, 6, 1, 1);
+        horizontalLayout->addWidget(ButtonStatistics);
 
-        LabelNick = new QLabel(scrollAreaWidgetContents);
-        LabelNick->setObjectName(QString::fromUtf8("LabelNick"));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Mongolian Baiti"));
-        font1.setPointSize(14);
-        LabelNick->setFont(font1);
-        LabelNick->setStyleSheet(QString::fromUtf8("color:rgb(0, 170, 0)"));
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout_2->addWidget(LabelNick, 1, 1, 1, 2);
-
-        LabelLocCountryCode = new QLabel(scrollAreaWidgetContents);
-        LabelLocCountryCode->setObjectName(QString::fromUtf8("LabelLocCountryCode"));
-        LabelLocCountryCode->setFont(font);
-
-        gridLayout_2->addWidget(LabelLocCountryCode, 7, 4, 1, 2);
-
-        LabelPersonaState = new QLabel(scrollAreaWidgetContents);
-        LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
-        LabelPersonaState->setMaximumSize(QSize(16777215, 16));
-        LabelPersonaState->setFont(font);
-        LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-
-        gridLayout_2->addWidget(LabelPersonaState, 2, 1, 1, 5);
+        horizontalLayout->addItem(horizontalSpacer_4);
 
         ButtonGoToMyProfile = new QPushButton(scrollAreaWidgetContents);
         ButtonGoToMyProfile->setObjectName(QString::fromUtf8("ButtonGoToMyProfile"));
 
-        gridLayout_2->addWidget(ButtonGoToMyProfile, 9, 8, 1, 1);
+        horizontalLayout->addWidget(ButtonGoToMyProfile);
 
-        LabelRealName = new QLabel(scrollAreaWidgetContents);
-        LabelRealName->setObjectName(QString::fromUtf8("LabelRealName"));
-        LabelRealName->setFont(font);
 
-        gridLayout_2->addWidget(LabelRealName, 6, 4, 1, 2);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer_4, 9, 7, 1, 1);
+        verticalLayout_2->addLayout(horizontalLayout);
 
         ScrollAreaProfileInfo->setWidget(scrollAreaWidgetContents);
 
-        gridLayout->addWidget(ScrollAreaProfileInfo, 3, 0, 1, 10);
+        verticalLayout->addWidget(ScrollAreaProfileInfo);
 
-        ButtonExit = new QPushButton(centralWidget);
-        ButtonExit->setObjectName(QString::fromUtf8("ButtonExit"));
+        FormProgressBar = new QProgressBar(centralWidget);
+        FormProgressBar->setObjectName(QString::fromUtf8("FormProgressBar"));
+        FormProgressBar->setValue(0);
 
-        gridLayout->addWidget(ButtonExit, 0, 8, 1, 2);
+        verticalLayout->addWidget(FormProgressBar);
 
-        LineEditIdProfile = new QLineEdit(centralWidget);
-        LineEditIdProfile->setObjectName(QString::fromUtf8("LineEditIdProfile"));
-        LineEditIdProfile->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
-"color: rgb(26, 26, 26);"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        ScrollAreaForm = new QScrollArea(centralWidget);
+        ScrollAreaForm->setObjectName(QString::fromUtf8("ScrollAreaForm"));
+        ScrollAreaForm->setWidgetResizable(true);
+        FormsWidget = new QWidget();
+        FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
+        FormsWidget->setGeometry(QRect(0, 0, 618, 163));
+        ScrollAreaForm->setWidget(FormsWidget);
 
-        gridLayout->addWidget(LineEditIdProfile, 2, 0, 1, 8);
+        horizontalLayout_5->addWidget(ScrollAreaForm);
 
-        ButtonFindProfile = new QPushButton(centralWidget);
-        ButtonFindProfile->setObjectName(QString::fromUtf8("ButtonFindProfile"));
-        ButtonFindProfile->setEnabled(true);
+        verticalSpacer = new QSpacerItem(13, 37, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout->addWidget(ButtonFindProfile, 2, 8, 1, 2);
+        horizontalLayout_5->addItem(verticalSpacer);
 
-        verticalSpacer = new QSpacerItem(1, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout->addItem(verticalSpacer, 5, 10, 1, 1);
-
-        ButtonSettings = new QPushButton(centralWidget);
-        ButtonSettings->setObjectName(QString::fromUtf8("ButtonSettings"));
-
-        gridLayout->addWidget(ButtonSettings, 1, 2, 1, 1);
-
-        ButtonNext = new QPushButton(centralWidget);
-        ButtonNext->setObjectName(QString::fromUtf8("ButtonNext"));
-
-        gridLayout->addWidget(ButtonNext, 1, 1, 1, 1);
-
-        ButtonSetProfile = new QPushButton(centralWidget);
-        ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
-
-        gridLayout->addWidget(ButtonSetProfile, 1, 7, 1, 3);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_2, 0, 3, 1, 5);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_3, 1, 6, 1, 1);
+        verticalLayout->addLayout(horizontalLayout_5);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -281,7 +344,6 @@ public:
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        mainToolBar->setMovable(true);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -295,28 +357,29 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
-        ButtonBack->setText(QApplication::translate("MainWindow", "Back", nullptr));
         LabelLogo->setText(QApplication::translate("MainWindow", "Logo", nullptr));
-        LabelBans->setText(QApplication::translate("MainWindow", "Bans", nullptr));
-        ButtonFriends->setText(QApplication::translate("MainWindow", "Friends", nullptr));
-        LabelAvatar->setText(QApplication::translate("MainWindow", "Avatar", nullptr));
-        ButtonFavorites->setText(QApplication::translate("MainWindow", "Favorites", nullptr));
-        ButtonGames->setText(QApplication::translate("MainWindow", "Games", nullptr));
-        LabelProfileVisibility->setText(QApplication::translate("MainWindow", "Visibility", nullptr));
-        LabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));
-        LabelTimeCreated->setText(QApplication::translate("MainWindow", "TimeCreated", nullptr));
-        Labellvl->setText(QApplication::translate("MainWindow", "lvl", nullptr));
-        ButtonStatistics->setText(QApplication::translate("MainWindow", "Statistics", nullptr));
-        LabelNick->setText(QApplication::translate("MainWindow", "NickName", nullptr));
-        LabelLocCountryCode->setText(QApplication::translate("MainWindow", "CountryCode", nullptr));
-        LabelPersonaState->setText(QApplication::translate("MainWindow", "PersonaState", nullptr));
-        ButtonGoToMyProfile->setText(QApplication::translate("MainWindow", "Go to my profile", nullptr));
-        LabelRealName->setText(QApplication::translate("MainWindow", "RealName", nullptr));
         ButtonExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
-        ButtonFindProfile->setText(QApplication::translate("MainWindow", "Find", nullptr));
-        ButtonSettings->setText(QApplication::translate("MainWindow", "Settings", nullptr));
+        ButtonBack->setText(QApplication::translate("MainWindow", "Back", nullptr));
         ButtonNext->setText(QApplication::translate("MainWindow", "Next", nullptr));
+        ButtonSettings->setText(QApplication::translate("MainWindow", "Settings", nullptr));
         ButtonSetProfile->setText(QApplication::translate("MainWindow", "Set as my profile", nullptr));
+        ButtonFindProfile->setText(QApplication::translate("MainWindow", "Find", nullptr));
+        LabelNick->setText(QApplication::translate("MainWindow", "NickName", nullptr));
+        LabelPersonaState->setText(QApplication::translate("MainWindow", "PersonaState", nullptr));
+        LabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));
+        LabelAvatar->setText(QApplication::translate("MainWindow", "Avatar", nullptr));
+        Labellvl->setText(QApplication::translate("MainWindow", "lvl", nullptr));
+        LabelRealName->setText(QApplication::translate("MainWindow", "RealName", nullptr));
+        LabelTimeCreated->setText(QApplication::translate("MainWindow", "TimeCreated", nullptr));
+        LabelLocCountryCode->setText(QApplication::translate("MainWindow", "CountryCode", nullptr));
+        LabelProfileVisibility->setText(QApplication::translate("MainWindow", "Visibility", nullptr));
+        LabelBans->setText(QApplication::translate("MainWindow", "Bans", nullptr));
+        ButtonGames->setText(QApplication::translate("MainWindow", "Games", nullptr));
+        ButtonFriends->setText(QApplication::translate("MainWindow", "Friends", nullptr));
+        ButtonFavorites->setText(QApplication::translate("MainWindow", "Favorites", nullptr));
+        ButtonStatistics->setText(QApplication::translate("MainWindow", "Statistics", nullptr));
+        ButtonGoToMyProfile->setText(QApplication::translate("MainWindow", "Go to my profile", nullptr));
+        FormProgressBar->setFormat(QApplication::translate("MainWindow", "%v/%m", nullptr));
     } // retranslateUi
 
 };

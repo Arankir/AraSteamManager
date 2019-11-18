@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTableWidget>
+#include <QStandardItemModel>
 #include <class/steamapi/Sfriends.h>
 #include <class/imagerequest.h>
 

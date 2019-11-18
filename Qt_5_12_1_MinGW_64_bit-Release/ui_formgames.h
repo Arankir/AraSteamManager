@@ -11,12 +11,14 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,12 +26,15 @@ QT_BEGIN_NAMESPACE
 class Ui_FormGames
 {
 public:
-    QGridLayout *gridLayout;
-    QTableWidget *TableWidgetGames;
-    QPushButton *ButtonReturn;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
     QLabel *LabelLogo;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *ButtonReturn;
+    QHBoxLayout *horizontalLayout;
     QLineEdit *LineEditGame;
     QPushButton *ButtonFind;
+    QTableWidget *TableWidgetGames;
 
     void setupUi(QWidget *FormGames)
     {
@@ -39,15 +44,19 @@ public:
         QFont font;
         font.setPointSize(10);
         FormGames->setFont(font);
-        gridLayout = new QGridLayout(FormGames);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        TableWidgetGames = new QTableWidget(FormGames);
-        if (TableWidgetGames->columnCount() < 4)
-            TableWidgetGames->setColumnCount(4);
-        TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
-        TableWidgetGames->setColumnCount(4);
+        verticalLayout = new QVBoxLayout(FormGames);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        LabelLogo = new QLabel(FormGames);
+        LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
+        LabelLogo->setFont(font);
 
-        gridLayout->addWidget(TableWidgetGames, 2, 0, 1, 2);
+        horizontalLayout_2->addWidget(LabelLogo);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
 
         ButtonReturn = new QPushButton(FormGames);
         ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
@@ -55,26 +64,36 @@ public:
         font1.setPointSize(8);
         ButtonReturn->setFont(font1);
 
-        gridLayout->addWidget(ButtonReturn, 0, 1, 1, 1);
+        horizontalLayout_2->addWidget(ButtonReturn);
 
-        LabelLogo = new QLabel(FormGames);
-        LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
-        LabelLogo->setFont(font);
 
-        gridLayout->addWidget(LabelLogo, 0, 0, 1, 1);
+        verticalLayout->addLayout(horizontalLayout_2);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         LineEditGame = new QLineEdit(FormGames);
         LineEditGame->setObjectName(QString::fromUtf8("LineEditGame"));
         LineEditGame->setFont(font);
 
-        gridLayout->addWidget(LineEditGame, 1, 0, 1, 1);
+        horizontalLayout->addWidget(LineEditGame);
 
         ButtonFind = new QPushButton(FormGames);
         ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
         ButtonFind->setEnabled(true);
         ButtonFind->setFont(font1);
 
-        gridLayout->addWidget(ButtonFind, 1, 1, 1, 1);
+        horizontalLayout->addWidget(ButtonFind);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        TableWidgetGames = new QTableWidget(FormGames);
+        if (TableWidgetGames->columnCount() < 4)
+            TableWidgetGames->setColumnCount(4);
+        TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
+        TableWidgetGames->setColumnCount(4);
+
+        verticalLayout->addWidget(TableWidgetGames);
 
         QWidget::setTabOrder(LineEditGame, ButtonFind);
         QWidget::setTabOrder(ButtonFind, ButtonReturn);
@@ -87,8 +106,8 @@ public:
     void retranslateUi(QWidget *FormGames)
     {
         FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        ButtonReturn->setText(QApplication::translate("FormGames", "Return", nullptr));
         LabelLogo->setText(QApplication::translate("FormGames", "Logo", nullptr));
+        ButtonReturn->setText(QApplication::translate("FormGames", "Return", nullptr));
         ButtonFind->setText(QApplication::translate("FormGames", "Find", nullptr));
     } // retranslateUi
 

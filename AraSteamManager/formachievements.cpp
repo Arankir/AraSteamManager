@@ -1,12 +1,13 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString keys, QString ids, SGame games, QWidget* parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
+FormAchievements::FormAchievements(QString keys, QString ids, SGame games, int num, QWidget* parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
     ui->setupUi(this);
     Words=Setting.GetWords("achievements");
     key=keys;
     id=ids;
     game=games;
+    unicnum=num;
     achievements.Set(key,QString::number(game.GetAppid()),id,Words[26]);
     switch(Setting.GetTheme()){
     case 1:{
@@ -80,6 +81,7 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Words[23]));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[22]));
     ui->LabelGameOnline->setText(Words[27]+": "+game.GetNumberPlayers(key,false));
+    ui->LabelGameTitle->setText(game.GetName());
     if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists())
         QDir().mkdir("images/achievements/"+QString::number(game.GetAppid()));
     QNetworkAccessManager manager;
@@ -105,50 +107,20 @@ void FormAchievements::InitComponents(){
     widget2->setLayout(changecategoryvalueslayout);
     ui->ScrollAreaValuesChangeCategory->setWidget(widget2);
     ui->LineEditTitleCategoryChangeCategory->setEnabled(false);
+    ui->TableWidgetAchievements->setColumnHidden(0,true);
+    ui->TableWidgetAchievements->setColumnWidth(1,65);
+    ui->TableWidgetAchievements->setColumnWidth(2,100);
+    ui->TableWidgetAchievements->setColumnWidth(3,315);
+    ui->TableWidgetAchievements->setColumnWidth(5,80);
+    ui->TableWidgetAchievements->setColumnWidth(6,50);
     qDebug()<<achievements.GetStatusGlobal()<<achievements.GetStatusPlayer()<<achievements.GetStatusPercent();
     PullTableWidget();
-}
-
-void FormAchievements::ProgressLoading(int p,int row){
-    qDebug()<<p;
-    QPushButton* button1 = new QPushButton;
-    button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
-    connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
-    button1->setObjectName("ButtonFavorites&"+achievements.GetApiname(p));
-    ui->TableWidgetAchievements->setCellWidget(row,6,button1);
-}
-
-void FormAchievements::ImageSet(QPixmap pixmap, int row){
-    QLabel* label = new QLabel;
-    label->setPixmap(pixmap);
-    ui->TableWidgetAchievements->setCellWidget(row,1,label);
-    ui->TableWidgetAchievements->resizeRowToContents(row);
-}
-
-FormAchievements::~FormAchievements(){
-    delete filter;
-    //delete newcategoryvalueslayout;
-    //delete changecategoryvalueslayout;
-    delete ui;
-}
-void FormAchievements::closeEvent(QCloseEvent*){
-    emit return_to_games();
-    //delete this;
-}
-void FormAchievements::returnfromcompare(){
-    windowchildcount--;
-    this->setVisible(true);
-    delete compareform;
-}
-void FormAchievements::on_ButtonReturn_clicked(){
-    emit return_to_games();
-    //delete this;
 }
 
 void FormAchievements::PullTableWidget(){
     //int totalr=0;
     //int totalnr=0;
-    ui->TableWidgetAchievements->setRowCount(0);
+    ui->TableWidgetAchievements->setRowCount(achievements.GetAchievementsCount());
     if(!(achievements.GetStatusGlobal()=="success"&&achievements.GetStatusPlayer()=="success"&&achievements.GetStatusPercent()=="success")){
         ui->TableWidgetAchievements->insertRow(0);
         QTableWidgetItem* item1 = new QTableWidgetItem("Error");
@@ -162,7 +134,7 @@ void FormAchievements::PullTableWidget(){
         ui->ButtonCompare->setEnabled(false);
     } else{
         Threading LoadTable(this);
-        LoadTable.AddThreadAchievements(QString::number(game.GetAppid()),achievements,Words,ui->LabelTotalPersent,ui->TableWidgetAchievements);
+        LoadTable.AddThreadAchievements(achievements,Words,ui->LabelTotalPersent,ui->TableWidgetAchievements);
     }
     /*
     for(int i=0;i<achievements.GetAchievementsCount();i++){
@@ -215,6 +187,71 @@ void FormAchievements::PullTableWidget(){
     */
 }
 
+void FormAchievements::OnFinish(){
+    int j=0;
+    for (int i=0;i<achievements.GetAchievementsCount();i++) {
+        if(achievements.GetDisplayname(i)!=""){
+            QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
+            QString path="images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1);
+            if(!QFile::exists(path)){
+                ImageRequest* image = new ImageRequest(achievements.GetIcon(i),j,path,true);
+                connect(image,&ImageRequest::onReady,this,&FormAchievements::OnResultImage);
+            } else {
+                QPixmap pixmap;
+                pixmap.load(path);
+                QLabel* label = new QLabel;
+                label->setPixmap(pixmap);
+                ui->TableWidgetAchievements->setCellWidget(j,1,label);
+                ui->TableWidgetAchievements->resizeRowToContents(j);
+            }
+            j++;
+        } else {
+            ui->TableWidgetAchievements->removeRow(ui->TableWidgetAchievements->rowCount()-1);
+        }
+        }
+}
+
+void FormAchievements::OnResultImage(ImageRequest* imgr){
+    qDebug()<<imgr->GetRow()<<1;
+    disconnect(imgr,&ImageRequest::onReady,this,&FormAchievements::OnResultImage);
+    QPixmap pixmap;
+    pixmap.loadFromData(imgr->GetAnswer());
+    QLabel* label = new QLabel;
+    label->setPixmap(pixmap);
+    ui->TableWidgetAchievements->setCellWidget(imgr->GetRow(),1,label);
+    ui->TableWidgetAchievements->resizeRowToContents(imgr->GetRow());
+    imgr->deleteLater();
+}
+
+void FormAchievements::ProgressLoading(int p,int row){
+    qDebug()<<p;
+    QPushButton* button1 = new QPushButton;
+    button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
+    connect(button1,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+    button1->setObjectName("ButtonFavorites&"+achievements.GetApiname(p));
+    ui->TableWidgetAchievements->setCellWidget(row,6,button1);
+}
+
+FormAchievements::~FormAchievements(){
+    delete filter;
+    //delete newcategoryvalueslayout;
+    //delete changecategoryvalueslayout;
+    delete ui;
+}
+void FormAchievements::closeEvent(QCloseEvent*){
+    emit return_to_games(unicnum);
+    //delete this;
+}
+void FormAchievements::returnfromcompare(){
+    windowchildcount--;
+    this->setVisible(true);
+    delete compareform;
+}
+void FormAchievements::on_ButtonReturn_clicked(){
+    emit return_to_games(unicnum);
+    //delete this;
+}
+
 void FormAchievements::FavoritesClicked(){
 
 }
@@ -244,16 +281,6 @@ void FormAchievements::on_RadioButtonNotReached_clicked(){
     UpdateHiddenRows();
 }
 
-void FormAchievements::OnResultImage(ImageRequest* imgr){
-    disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
-    QPixmap pixmap;
-    pixmap.loadFromData(imgr->GetAnswer());
-    QLabel* label = new QLabel;
-    label->setPixmap(pixmap);
-    ui->TableWidgetAchievements->setCellWidget(imgr->GetRow(),1,label);
-    ui->TableWidgetAchievements->resizeRowToContents(imgr->GetRow());
-    imgr->deleteLater();
-}
 void FormAchievements::ShowCategories(){
     QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
     categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);

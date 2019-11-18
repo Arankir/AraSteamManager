@@ -235,7 +235,13 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
                 ui->LabelProfileVisibility->setStyleSheet("color:white");
             }
             }
-        ui->LabelBans->setText(Bans.GetVACBanned()?Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"\n"+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]:Words[26]+": "+Words[27]);
+        if(Bans.GetVACBanned()){
+            ui->LabelBans->setText(Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"| "+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]);
+            ui->LabelBans->setStyleSheet("color:red");
+        } else {
+            ui->LabelBans->setText(Words[26]+": "+Words[27]);
+            ui->LabelBans->setStyleSheet("color:green");
+        }
 
         if(Setting.GetStatus()=="success"){
             if(Setting.GetMyProfile()==Profile.GetSteamid()){

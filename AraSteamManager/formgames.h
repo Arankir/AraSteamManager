@@ -21,7 +21,7 @@ class FormGames : public QWidget
 public:
     explicit FormGames(QString id, QString key, SGames Games, QWidget* parent = nullptr);
     ~FormGames();
-    FormAchievements* achievementsform;
+    QVector<FormAchievements*> achievementsforms;
 
 signals:
     void return_to_profile();
@@ -29,6 +29,7 @@ signals:
 public slots:
     void ProgressLoading(int,int);
     void OnFinish();
+    void returnfromachievements(int num);
 
 private slots:
     void InitComponents();
@@ -41,8 +42,6 @@ private slots:
     void AchievementsClicked();
 
     void FavoritesClicked();
-
-    void returnfromachievements();
 
     void on_LineEditGame_textChanged(const QString);
 

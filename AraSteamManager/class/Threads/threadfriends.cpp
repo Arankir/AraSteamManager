@@ -13,14 +13,12 @@ void ThreadFriends::Set(QTableWidget* TableWidgetFriends,QVector<SProfile> Profi
 
 int ThreadFriends::Fill(){
     for (int i=0;i<Friends.GetCount();i++) {
-        TableWidgetFriends->setItem(i,1,new QTableWidgetItem(Profiles[i].GetPersonaname()));
         int j;
         for (j=0;;j++) {
             if(Profiles[i].GetSteamid()==Friends.GetSteamid(j)){
                 break;
             }
         }
-        TableWidgetFriends->setItem(i,2,new QTableWidgetItem(Friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
         QTableWidgetItem* item4 = new QTableWidgetItem;
         if(!Profiles[i].GetGameextrainfo().isEmpty()){
             item4->setText(Words[8]);
@@ -63,7 +61,6 @@ int ThreadFriends::Fill(){
                     break;
             }
             }
-        TableWidgetFriends->setItem(i,3,item4);
         QTableWidgetItem* item5 = new QTableWidgetItem;
         switch(Profiles[i].GetCommunityvisibilitystate()){
         case 1:{
@@ -87,13 +84,14 @@ int ThreadFriends::Fill(){
             break;
         }
         }
+        TableWidgetFriends->setItem(i,1,new QTableWidgetItem(Profiles[i].GetPersonaname()));
+        TableWidgetFriends->setItem(i,2,new QTableWidgetItem(Friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
+        TableWidgetFriends->setItem(i,3,item4);
         TableWidgetFriends->setItem(i,4,item5);
         TableWidgetFriends->setItem(i,5,new QTableWidgetItem(Profiles[i].GetSteamid()));
         emit progress(i,i);
     }
-    TableWidgetFriends->setColumnHidden(5,true);
     TableWidgetFriends->resizeColumnsToContents();
-    TableWidgetFriends->setColumnWidth(0,33);
     emit finished();
     return 1;
 }

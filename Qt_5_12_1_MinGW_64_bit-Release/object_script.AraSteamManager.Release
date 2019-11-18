@@ -1,3 +1,8 @@
+release/threadachievements.o
+release/threadcompare.o
+release/threadfriends.o
+release/threadgames.o
+release/threading.o
 release/categoryvalue.o
 release/imagerequest.o
 release/profile.o
@@ -26,6 +31,11 @@ release/formfriends.o
 release/formaddcategory.o
 release/qrc_resimg.o
 release/qrc_restext.o
+release/moc_threadachievements.o
+release/moc_threadcompare.o
+release/moc_threadfriends.o
+release/moc_threadgames.o
+release/moc_threading.o
 release/moc_categoryvalue.o
 release/moc_imagerequest.o
 release/moc_profile.o

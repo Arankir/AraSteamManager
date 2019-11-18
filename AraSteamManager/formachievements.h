@@ -31,17 +31,19 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, QString ids, SGame game, QWidget* parent = nullptr);
+    explicit FormAchievements(QString keys, QString ids, SGame game, int num, QWidget* parent = nullptr);
     ~FormAchievements();
     FormCompare* compareform;
 
 signals:
-    void return_to_games();
+    void return_to_games(int num);
+
+public slots:
+    void ProgressLoading(int p,int row);
+    void OnFinish();
 
 private slots:
     void InitComponents();
-    void ProgressLoading(int p,int row);
-    void ImageSet(QPixmap pixmap, int row);
 
     void OnResultImage(ImageRequest* imgr);
     void on_ComboBoxCategory_Change(int index);
@@ -135,6 +137,7 @@ private:
     QStringList Words;
     Settings Setting;
     QString theme="white";
+    int unicnum;
 
     QVector<ImageRequest*> request;
     int numrequests=0;
