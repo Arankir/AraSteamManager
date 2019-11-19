@@ -262,9 +262,6 @@
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
-        <property name="showGrid">
-         <bool>true</bool>
-        </property>
        </widget>
       </item>
       <item>

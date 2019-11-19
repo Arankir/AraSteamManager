@@ -64,6 +64,7 @@ private:
     Ui::MainWindow* ui;
     QString key="3826BF60403D15613B4B0381DAB7A7BD";
     int windowchildcount=0;
+    int windowchild=0;
     QStringList Words;
     SProfile Profile;
     SGames Games;

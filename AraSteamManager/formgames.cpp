@@ -83,17 +83,17 @@ void FormGames::InitComponents(){
         }
     }
     ui->TableWidgetGames->setColumnCount(4);
-    ui->LabelLogo->setText("(WIP)");
+    //ui->LabelLogo->setText("(WIP)");
     ui->LineEditGame->setPlaceholderText(Words[0]);
     ui->ButtonFind->setText(" "+Words[1]);
-    ui->ButtonReturn->setText(" "+Words[2]);
+    //ui->ButtonReturn->setText(" "+Words[2]);
     ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[3]));
     ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
     ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[5]));
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     //Achievement = ;
     Favorite = QIcon(":/"+theme+"/program/"+theme+"/favorites.png");
     ui->TableWidgetGames->setRowCount(games.count());
@@ -110,14 +110,14 @@ void FormGames::ProgressLoading(int p,int row){
     //Отобразить
     QPushButton* button1 = new QPushButton(Words[4]);
     button1->setMinimumSize(QSize(25,25));
-    connect(button1,SIGNAL(pressed()),this,SLOT(AchievementsClicked()));
+    connect(button1,&QPushButton::pressed,this,&FormGames::AchievementsClicked);
     button1->setObjectName("ButtonAchievements"+QString::number(p));
     ui->TableWidgetGames->setCellWidget(row,2,button1);
 
     QPushButton* button2 = new QPushButton;
     button2->setIcon(Favorite);
     button2->setMinimumSize(QSize(25,25));
-    connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+    connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
     button2->setObjectName("ButtonFavorites"+QString::number(p));
     ui->TableWidgetGames->setCellWidget(row,3,button2);
 }
@@ -168,7 +168,7 @@ void FormGames::closeEvent(QCloseEvent*){
 void FormGames::returnfromachievements(int num){
     //windowchildcount--;
     disconnect(achievementsforms[num],&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
-    delete achievementsforms[num];
+    //delete achievementsforms[num];
 }
 void FormGames::on_ButtonReturn_clicked(){
     emit return_to_profile();
@@ -194,7 +194,7 @@ void FormGames::AchievementsClicked(){
         connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
         loop.exec();
         disconnect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
-        qDebug()<<Percentage.GetStatus()<<Percentage.GetAchievementsCount()<<QString::number(games[index].GetAppid());
+        qDebug()<<Percentage.GetStatus()<<Percentage.GetAchievementsCount()<<QString::number(games[index].GetAppid())<<windowchildcount;
         if(Percentage.GetAchievementsCount()==0){
             //windowchildcount--;
             QMessageBox::warning(this,Words[6],Words[7]);
@@ -226,11 +226,11 @@ void FormGames::OnResultImage(ImageRequest* imgr){
         imgr->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",imgr->GetRow(),"images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg",true);
         numnow++;
     } else
-        disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
+        disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultImage);
 }
 
 void FormGames::OnResultAchievements(ImageRequest* imgr){
-    disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultAchievements(ImageRequest*)));
+    disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultAchievements);
     QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
     if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
         static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(imgr->GetRow(),2))->setEnabled(false);

@@ -23,6 +23,8 @@
         <file>program/black/update.png</file>
         <file>program/black/check_visible.png</file>
         <file>program/black/uncheck_visible.png</file>
+        <file>program/black/left.png</file>
+        <file>program/black/right.png</file>
     </qresource>
     <qresource prefix="/white">
         <file>program/white/all.png</file>
@@ -48,6 +50,8 @@
         <file>program/white/update.png</file>
         <file>program/white/check_visible.png</file>
         <file>program/white/uncheck_visible.png</file>
+        <file>program/white/left.png</file>
+        <file>program/white/right.png</file>
     </qresource>
     <qresource prefix="/program">
         <file>program/apply.png</file>

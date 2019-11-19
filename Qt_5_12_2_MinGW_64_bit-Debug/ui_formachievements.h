@@ -33,15 +33,17 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievements
 {
 public:
+    QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout_7;
     QGridLayout *gridLayout;
-    QPushButton *ButtonReturn;
-    QSpacerItem *horizontalSpacer_2;
-    QPushButton *ButtonCompare;
-    QLabel *LabelGameOnline;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *LabelGameLogo;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *ButtonReturn;
+    QLabel *LabelGameOnline;
+    QLabel *LabelGameTitle;
+    QPushButton *ButtonCompare;
     QGroupBox *GroupBoxFilter;
     QVBoxLayout *verticalLayout_6;
     QHBoxLayout *horizontalLayout_4;
@@ -94,32 +96,12 @@ public:
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
         FormAchievements->resize(837, 838);
-        verticalLayout_7 = new QVBoxLayout(FormAchievements);
+        horizontalLayout_5 = new QHBoxLayout(FormAchievements);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        verticalLayout_7 = new QVBoxLayout();
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        ButtonReturn = new QPushButton(FormAchievements);
-        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
-
-        gridLayout->addWidget(ButtonReturn, 0, 2, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(636, 18, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_2, 1, 1, 1, 1);
-
-        ButtonCompare = new QPushButton(FormAchievements);
-        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
-
-        gridLayout->addWidget(ButtonCompare, 1, 2, 1, 1);
-
-        LabelGameOnline = new QLabel(FormAchievements);
-        LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
-        QFont font;
-        font.setPointSize(14);
-        LabelGameOnline->setFont(font);
-
-        gridLayout->addWidget(LabelGameOnline, 2, 1, 1, 1);
-
         groupBox = new QGroupBox(FormAchievements);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         gridLayout_5 = new QGridLayout(groupBox);
@@ -134,6 +116,34 @@ public:
 
 
         gridLayout->addWidget(groupBox, 0, 0, 3, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(636, 18, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_2, 1, 2, 1, 1);
+
+        ButtonReturn = new QPushButton(FormAchievements);
+        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
+
+        gridLayout->addWidget(ButtonReturn, 0, 4, 1, 1);
+
+        LabelGameOnline = new QLabel(FormAchievements);
+        LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
+        QFont font;
+        font.setPointSize(14);
+        LabelGameOnline->setFont(font);
+
+        gridLayout->addWidget(LabelGameOnline, 2, 1, 1, 2);
+
+        LabelGameTitle = new QLabel(FormAchievements);
+        LabelGameTitle->setObjectName(QString::fromUtf8("LabelGameTitle"));
+        LabelGameTitle->setFont(font);
+
+        gridLayout->addWidget(LabelGameTitle, 1, 1, 1, 1);
+
+        ButtonCompare = new QPushButton(FormAchievements);
+        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
+
+        gridLayout->addWidget(ButtonCompare, 1, 3, 1, 2);
 
 
         verticalLayout_7->addLayout(gridLayout);
@@ -159,7 +169,7 @@ public:
         ScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 292, 94));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 291, 94));
         ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout_4->addWidget(ScrollAreaCategories);
@@ -171,7 +181,7 @@ public:
         ScrollAreaCheckCategories->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 291, 94));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 290, 94));
         ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
 
         horizontalLayout_4->addWidget(ScrollAreaCheckCategories);
@@ -269,7 +279,7 @@ public:
         ScrollAreaValues->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 581, 74));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 579, 74));
         ScrollAreaValues->setWidget(scrollAreaWidgetContents_2);
 
         horizontalLayout->addWidget(ScrollAreaValues);
@@ -332,7 +342,7 @@ public:
         ScrollAreaValuesChangeCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 532, 77));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 530, 77));
         ScrollAreaValuesChangeCategory->setWidget(scrollAreaWidgetContents_3);
 
         horizontalLayout_2->addWidget(ScrollAreaValuesChangeCategory);
@@ -391,6 +401,9 @@ public:
         verticalLayout_7->addWidget(TableWidgetAchievements);
 
 
+        horizontalLayout_5->addLayout(verticalLayout_7);
+
+
         retranslateUi(FormAchievements);
 
         QMetaObject::connectSlotsByName(FormAchievements);
@@ -399,11 +412,12 @@ public:
     void retranslateUi(QWidget *FormAchievements)
     {
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
-        ButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
-        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
-        LabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
         groupBox->setTitle(QString());
         LabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
+        ButtonReturn->setText(QApplication::translate("FormAchievements", "Return", nullptr));
+        LabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
+        LabelGameTitle->setText(QApplication::translate("FormAchievements", "GameTitle", nullptr));
+        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         GroupBoxFilter->setAccessibleName(QApplication::translate("FormAchievements", "Filter", nullptr));
 #endif // QT_NO_ACCESSIBILITY

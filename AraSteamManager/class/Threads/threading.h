@@ -18,7 +18,7 @@ signals:
 
 public slots:
     int AddThreadGames(QTableWidget* TableWidgetGames, QVector<SGame> games);
-    int AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements);
+    int AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, int num);
     int AddThreadCompare();
     int AddThreadFriends(QTableWidget* TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss,QStringList Words);
 };

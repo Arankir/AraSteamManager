@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
     QByteArrayData data[84];
-    char stringdata0[1882];
+    char stringdata0[1879];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,94 +34,94 @@ static const qt_meta_stringdata_FormAchievements_t qt_meta_stringdata_FormAchiev
 QT_MOC_LITERAL(0, 0, 16), // "FormAchievements"
 QT_MOC_LITERAL(1, 17, 15), // "return_to_games"
 QT_MOC_LITERAL(2, 33, 0), // ""
-QT_MOC_LITERAL(3, 34, 14), // "InitComponents"
-QT_MOC_LITERAL(4, 49, 15), // "ProgressLoading"
-QT_MOC_LITERAL(5, 65, 1), // "p"
-QT_MOC_LITERAL(6, 67, 3), // "row"
-QT_MOC_LITERAL(7, 71, 8), // "ImageSet"
-QT_MOC_LITERAL(8, 80, 6), // "pixmap"
-QT_MOC_LITERAL(9, 87, 13), // "OnResultImage"
-QT_MOC_LITERAL(10, 101, 13), // "ImageRequest*"
-QT_MOC_LITERAL(11, 115, 4), // "imgr"
-QT_MOC_LITERAL(12, 120, 26), // "on_ComboBoxCategory_Change"
-QT_MOC_LITERAL(13, 147, 5), // "index"
-QT_MOC_LITERAL(14, 153, 26), // "on_CheckBoxCategory_Change"
-QT_MOC_LITERAL(15, 180, 3), // "ind"
-QT_MOC_LITERAL(16, 184, 10), // "closeEvent"
-QT_MOC_LITERAL(17, 195, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(18, 208, 17), // "returnfromcompare"
-QT_MOC_LITERAL(19, 226, 23), // "on_ButtonReturn_clicked"
-QT_MOC_LITERAL(20, 250, 16), // "UpdateHiddenRows"
-QT_MOC_LITERAL(21, 267, 15), // "PullTableWidget"
-QT_MOC_LITERAL(22, 283, 28), // "on_ButtonAddCategory_clicked"
-QT_MOC_LITERAL(23, 312, 25), // "on_RadioButtonAll_clicked"
-QT_MOC_LITERAL(24, 338, 29), // "on_RadioButtonReached_clicked"
-QT_MOC_LITERAL(25, 368, 32), // "on_RadioButtonNotReached_clicked"
-QT_MOC_LITERAL(26, 401, 16), // "FavoritesClicked"
-QT_MOC_LITERAL(27, 418, 39), // "on_LineEditNameAchievements_t..."
-QT_MOC_LITERAL(28, 458, 4), // "arg1"
-QT_MOC_LITERAL(29, 463, 31), // "on_ButtonChangeCategory_clicked"
-QT_MOC_LITERAL(30, 495, 34), // "on_ButtonCancelNewCategory_cl..."
-QT_MOC_LITERAL(31, 530, 37), // "on_ButtonCancelChangeCategory..."
-QT_MOC_LITERAL(32, 568, 36), // "on_ButtonAddValueNewCategory_..."
-QT_MOC_LITERAL(33, 605, 40), // "on_buttonNewCategoryDeleteVal..."
-QT_MOC_LITERAL(34, 646, 43), // "on_buttonChangeCategoryDelete..."
-QT_MOC_LITERAL(35, 690, 40), // "on_buttonNewCategorySelectVal..."
-QT_MOC_LITERAL(36, 731, 42), // "on_buttonNewCategoryUnSelectV..."
-QT_MOC_LITERAL(37, 774, 34), // "on_ButtonAcceptNewCategory_cl..."
-QT_MOC_LITERAL(38, 809, 45), // "on_ComboBoxCategoriesChangeCa..."
-QT_MOC_LITERAL(39, 855, 39), // "on_ButtonAddValueChangeCatego..."
-QT_MOC_LITERAL(40, 895, 37), // "on_ButtonAcceptChangeCategory..."
-QT_MOC_LITERAL(41, 933, 31), // "on_ButtonDeleteCategory_clicked"
-QT_MOC_LITERAL(42, 965, 32), // "on_ButtonFindAchievement_clicked"
-QT_MOC_LITERAL(43, 998, 23), // "on_ButtonUpdate_clicked"
-QT_MOC_LITERAL(44, 1022, 31), // "EditLineEditChangeCategoryValue"
-QT_MOC_LITERAL(45, 1054, 39), // "on_buttonChangeCategoryUpValu..."
-QT_MOC_LITERAL(46, 1094, 41), // "on_buttonChangeCategoryDownVa..."
-QT_MOC_LITERAL(47, 1136, 43), // "on_buttonChangeCategorySelect..."
-QT_MOC_LITERAL(48, 1180, 45), // "on_buttonChangeCategoryUnSele..."
-QT_MOC_LITERAL(49, 1226, 28), // "EditLineEditNewCategoryValue"
-QT_MOC_LITERAL(50, 1255, 36), // "on_buttonNewCategoryUpValues_..."
-QT_MOC_LITERAL(51, 1292, 38), // "on_buttonNewCategoryDownValue..."
-QT_MOC_LITERAL(52, 1331, 43), // "on_CheckBoxNewCategoryOneValu..."
-QT_MOC_LITERAL(53, 1375, 46), // "on_CheckBoxChangeCategoryOneV..."
-QT_MOC_LITERAL(54, 1422, 36), // "on_Change_Title_NewCategory_O..."
-QT_MOC_LITERAL(55, 1459, 39), // "on_Change_Title_ChangeCategor..."
-QT_MOC_LITERAL(56, 1499, 14), // "ShowCategories"
-QT_MOC_LITERAL(57, 1514, 24), // "on_ButtonCompare_clicked"
-QT_MOC_LITERAL(58, 1539, 16), // "CategoryAddValue"
-QT_MOC_LITERAL(59, 1556, 3), // "pos"
-QT_MOC_LITERAL(60, 1560, 19), // "CategoryValueChange"
-QT_MOC_LITERAL(61, 1580, 3), // "str"
-QT_MOC_LITERAL(62, 1584, 21), // "CategoryVisibleChange"
-QT_MOC_LITERAL(63, 1606, 7), // "visible"
-QT_MOC_LITERAL(64, 1614, 22), // "CategoryPositionChange"
-QT_MOC_LITERAL(65, 1637, 6), // "posnew"
-QT_MOC_LITERAL(66, 1644, 20), // "CategorySelectChange"
-QT_MOC_LITERAL(67, 1665, 6), // "select"
-QT_MOC_LITERAL(68, 1672, 19), // "CategoryDeleteValue"
-QT_MOC_LITERAL(69, 1692, 14), // "CategoryAccept"
-QT_MOC_LITERAL(70, 1707, 14), // "CategoryCancel"
-QT_MOC_LITERAL(71, 1722, 15), // "CategoryNoValue"
-QT_MOC_LITERAL(72, 1738, 7), // "novalue"
-QT_MOC_LITERAL(73, 1746, 16), // "AddValueCategory"
-QT_MOC_LITERAL(74, 1763, 4), // "Type"
-QT_MOC_LITERAL(75, 1768, 12), // "QFormLayout*"
-QT_MOC_LITERAL(76, 1781, 6), // "layout"
-QT_MOC_LITERAL(77, 1788, 15), // "UpValueCategory"
-QT_MOC_LITERAL(78, 1804, 1), // "i"
-QT_MOC_LITERAL(79, 1806, 17), // "DownValueCategory"
-QT_MOC_LITERAL(80, 1824, 20), // "DeleteValuesCategory"
-QT_MOC_LITERAL(81, 1845, 19), // "SelectValueCategory"
-QT_MOC_LITERAL(82, 1865, 1), // "j"
-QT_MOC_LITERAL(83, 1867, 14) // "Qt::CheckState"
+QT_MOC_LITERAL(3, 34, 3), // "num"
+QT_MOC_LITERAL(4, 38, 15), // "ProgressLoading"
+QT_MOC_LITERAL(5, 54, 1), // "p"
+QT_MOC_LITERAL(6, 56, 3), // "row"
+QT_MOC_LITERAL(7, 60, 8), // "OnFinish"
+QT_MOC_LITERAL(8, 69, 14), // "InitComponents"
+QT_MOC_LITERAL(9, 84, 13), // "OnResultImage"
+QT_MOC_LITERAL(10, 98, 13), // "ImageRequest*"
+QT_MOC_LITERAL(11, 112, 4), // "imgr"
+QT_MOC_LITERAL(12, 117, 26), // "on_ComboBoxCategory_Change"
+QT_MOC_LITERAL(13, 144, 5), // "index"
+QT_MOC_LITERAL(14, 150, 26), // "on_CheckBoxCategory_Change"
+QT_MOC_LITERAL(15, 177, 3), // "ind"
+QT_MOC_LITERAL(16, 181, 10), // "closeEvent"
+QT_MOC_LITERAL(17, 192, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(18, 205, 17), // "returnfromcompare"
+QT_MOC_LITERAL(19, 223, 23), // "on_ButtonReturn_clicked"
+QT_MOC_LITERAL(20, 247, 16), // "UpdateHiddenRows"
+QT_MOC_LITERAL(21, 264, 15), // "PullTableWidget"
+QT_MOC_LITERAL(22, 280, 28), // "on_ButtonAddCategory_clicked"
+QT_MOC_LITERAL(23, 309, 25), // "on_RadioButtonAll_clicked"
+QT_MOC_LITERAL(24, 335, 29), // "on_RadioButtonReached_clicked"
+QT_MOC_LITERAL(25, 365, 32), // "on_RadioButtonNotReached_clicked"
+QT_MOC_LITERAL(26, 398, 16), // "FavoritesClicked"
+QT_MOC_LITERAL(27, 415, 39), // "on_LineEditNameAchievements_t..."
+QT_MOC_LITERAL(28, 455, 4), // "arg1"
+QT_MOC_LITERAL(29, 460, 31), // "on_ButtonChangeCategory_clicked"
+QT_MOC_LITERAL(30, 492, 34), // "on_ButtonCancelNewCategory_cl..."
+QT_MOC_LITERAL(31, 527, 37), // "on_ButtonCancelChangeCategory..."
+QT_MOC_LITERAL(32, 565, 36), // "on_ButtonAddValueNewCategory_..."
+QT_MOC_LITERAL(33, 602, 40), // "on_buttonNewCategoryDeleteVal..."
+QT_MOC_LITERAL(34, 643, 43), // "on_buttonChangeCategoryDelete..."
+QT_MOC_LITERAL(35, 687, 40), // "on_buttonNewCategorySelectVal..."
+QT_MOC_LITERAL(36, 728, 42), // "on_buttonNewCategoryUnSelectV..."
+QT_MOC_LITERAL(37, 771, 34), // "on_ButtonAcceptNewCategory_cl..."
+QT_MOC_LITERAL(38, 806, 45), // "on_ComboBoxCategoriesChangeCa..."
+QT_MOC_LITERAL(39, 852, 39), // "on_ButtonAddValueChangeCatego..."
+QT_MOC_LITERAL(40, 892, 37), // "on_ButtonAcceptChangeCategory..."
+QT_MOC_LITERAL(41, 930, 31), // "on_ButtonDeleteCategory_clicked"
+QT_MOC_LITERAL(42, 962, 32), // "on_ButtonFindAchievement_clicked"
+QT_MOC_LITERAL(43, 995, 23), // "on_ButtonUpdate_clicked"
+QT_MOC_LITERAL(44, 1019, 31), // "EditLineEditChangeCategoryValue"
+QT_MOC_LITERAL(45, 1051, 39), // "on_buttonChangeCategoryUpValu..."
+QT_MOC_LITERAL(46, 1091, 41), // "on_buttonChangeCategoryDownVa..."
+QT_MOC_LITERAL(47, 1133, 43), // "on_buttonChangeCategorySelect..."
+QT_MOC_LITERAL(48, 1177, 45), // "on_buttonChangeCategoryUnSele..."
+QT_MOC_LITERAL(49, 1223, 28), // "EditLineEditNewCategoryValue"
+QT_MOC_LITERAL(50, 1252, 36), // "on_buttonNewCategoryUpValues_..."
+QT_MOC_LITERAL(51, 1289, 38), // "on_buttonNewCategoryDownValue..."
+QT_MOC_LITERAL(52, 1328, 43), // "on_CheckBoxNewCategoryOneValu..."
+QT_MOC_LITERAL(53, 1372, 46), // "on_CheckBoxChangeCategoryOneV..."
+QT_MOC_LITERAL(54, 1419, 36), // "on_Change_Title_NewCategory_O..."
+QT_MOC_LITERAL(55, 1456, 39), // "on_Change_Title_ChangeCategor..."
+QT_MOC_LITERAL(56, 1496, 14), // "ShowCategories"
+QT_MOC_LITERAL(57, 1511, 24), // "on_ButtonCompare_clicked"
+QT_MOC_LITERAL(58, 1536, 16), // "CategoryAddValue"
+QT_MOC_LITERAL(59, 1553, 3), // "pos"
+QT_MOC_LITERAL(60, 1557, 19), // "CategoryValueChange"
+QT_MOC_LITERAL(61, 1577, 3), // "str"
+QT_MOC_LITERAL(62, 1581, 21), // "CategoryVisibleChange"
+QT_MOC_LITERAL(63, 1603, 7), // "visible"
+QT_MOC_LITERAL(64, 1611, 22), // "CategoryPositionChange"
+QT_MOC_LITERAL(65, 1634, 6), // "posnew"
+QT_MOC_LITERAL(66, 1641, 20), // "CategorySelectChange"
+QT_MOC_LITERAL(67, 1662, 6), // "select"
+QT_MOC_LITERAL(68, 1669, 19), // "CategoryDeleteValue"
+QT_MOC_LITERAL(69, 1689, 14), // "CategoryAccept"
+QT_MOC_LITERAL(70, 1704, 14), // "CategoryCancel"
+QT_MOC_LITERAL(71, 1719, 15), // "CategoryNoValue"
+QT_MOC_LITERAL(72, 1735, 7), // "novalue"
+QT_MOC_LITERAL(73, 1743, 16), // "AddValueCategory"
+QT_MOC_LITERAL(74, 1760, 4), // "Type"
+QT_MOC_LITERAL(75, 1765, 12), // "QFormLayout*"
+QT_MOC_LITERAL(76, 1778, 6), // "layout"
+QT_MOC_LITERAL(77, 1785, 15), // "UpValueCategory"
+QT_MOC_LITERAL(78, 1801, 1), // "i"
+QT_MOC_LITERAL(79, 1803, 17), // "DownValueCategory"
+QT_MOC_LITERAL(80, 1821, 20), // "DeleteValuesCategory"
+QT_MOC_LITERAL(81, 1842, 19), // "SelectValueCategory"
+QT_MOC_LITERAL(82, 1862, 1), // "j"
+QT_MOC_LITERAL(83, 1864, 14) // "Qt::CheckState"
 
     },
-    "FormAchievements\0return_to_games\0\0"
-    "InitComponents\0ProgressLoading\0p\0row\0"
-    "ImageSet\0pixmap\0OnResultImage\0"
-    "ImageRequest*\0imgr\0on_ComboBoxCategory_Change\0"
-    "index\0on_CheckBoxCategory_Change\0ind\0"
+    "FormAchievements\0return_to_games\0\0num\0"
+    "ProgressLoading\0p\0row\0OnFinish\0"
+    "InitComponents\0OnResultImage\0ImageRequest*\0"
+    "imgr\0on_ComboBoxCategory_Change\0index\0"
+    "on_CheckBoxCategory_Change\0ind\0"
     "closeEvent\0QCloseEvent*\0returnfromcompare\0"
     "on_ButtonReturn_clicked\0UpdateHiddenRows\0"
     "PullTableWidget\0on_ButtonAddCategory_clicked\0"
@@ -185,77 +185,77 @@ static const uint qt_meta_data_FormAchievements[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  319,    2, 0x06 /* Public */,
+       1,    1,  319,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,  320,    2, 0x08 /* Private */,
-       4,    2,  321,    2, 0x08 /* Private */,
-       7,    2,  326,    2, 0x08 /* Private */,
-       9,    1,  331,    2, 0x08 /* Private */,
-      12,    1,  334,    2, 0x08 /* Private */,
-      14,    1,  337,    2, 0x08 /* Private */,
-      16,    1,  340,    2, 0x08 /* Private */,
-      18,    0,  343,    2, 0x08 /* Private */,
-      19,    0,  344,    2, 0x08 /* Private */,
-      20,    0,  345,    2, 0x08 /* Private */,
-      21,    0,  346,    2, 0x08 /* Private */,
-      22,    0,  347,    2, 0x08 /* Private */,
-      23,    0,  348,    2, 0x08 /* Private */,
-      24,    0,  349,    2, 0x08 /* Private */,
-      25,    0,  350,    2, 0x08 /* Private */,
-      26,    0,  351,    2, 0x08 /* Private */,
-      27,    1,  352,    2, 0x08 /* Private */,
-      29,    0,  355,    2, 0x08 /* Private */,
-      30,    0,  356,    2, 0x08 /* Private */,
-      31,    0,  357,    2, 0x08 /* Private */,
-      32,    0,  358,    2, 0x08 /* Private */,
-      33,    0,  359,    2, 0x08 /* Private */,
-      34,    0,  360,    2, 0x08 /* Private */,
-      35,    0,  361,    2, 0x08 /* Private */,
-      36,    0,  362,    2, 0x08 /* Private */,
-      37,    0,  363,    2, 0x08 /* Private */,
-      38,    1,  364,    2, 0x08 /* Private */,
-      39,    0,  367,    2, 0x08 /* Private */,
-      40,    0,  368,    2, 0x08 /* Private */,
-      41,    0,  369,    2, 0x08 /* Private */,
-      42,    0,  370,    2, 0x08 /* Private */,
-      43,    0,  371,    2, 0x08 /* Private */,
-      44,    0,  372,    2, 0x08 /* Private */,
-      45,    0,  373,    2, 0x08 /* Private */,
-      46,    0,  374,    2, 0x08 /* Private */,
-      47,    0,  375,    2, 0x08 /* Private */,
-      48,    0,  376,    2, 0x08 /* Private */,
-      49,    0,  377,    2, 0x08 /* Private */,
-      50,    0,  378,    2, 0x08 /* Private */,
-      51,    0,  379,    2, 0x08 /* Private */,
-      52,    1,  380,    2, 0x08 /* Private */,
-      53,    1,  383,    2, 0x08 /* Private */,
-      54,    0,  386,    2, 0x08 /* Private */,
-      55,    0,  387,    2, 0x08 /* Private */,
-      56,    0,  388,    2, 0x08 /* Private */,
-      57,    0,  389,    2, 0x08 /* Private */,
-      58,    1,  390,    2, 0x08 /* Private */,
-      60,    2,  393,    2, 0x08 /* Private */,
-      62,    2,  398,    2, 0x08 /* Private */,
-      64,    2,  403,    2, 0x08 /* Private */,
-      66,    2,  408,    2, 0x08 /* Private */,
-      68,    1,  413,    2, 0x08 /* Private */,
-      69,    0,  416,    2, 0x08 /* Private */,
-      70,    0,  417,    2, 0x08 /* Private */,
-      71,    1,  418,    2, 0x08 /* Private */,
-      73,    2,  421,    2, 0x08 /* Private */,
-      77,    2,  426,    2, 0x08 /* Private */,
-      79,    3,  431,    2, 0x08 /* Private */,
-      80,    3,  438,    2, 0x08 /* Private */,
-      81,    2,  445,    2, 0x08 /* Private */,
+       4,    2,  322,    2, 0x0a /* Public */,
+       7,    0,  327,    2, 0x0a /* Public */,
+       8,    0,  328,    2, 0x08 /* Private */,
+       9,    1,  329,    2, 0x08 /* Private */,
+      12,    1,  332,    2, 0x08 /* Private */,
+      14,    1,  335,    2, 0x08 /* Private */,
+      16,    1,  338,    2, 0x08 /* Private */,
+      18,    0,  341,    2, 0x08 /* Private */,
+      19,    0,  342,    2, 0x08 /* Private */,
+      20,    0,  343,    2, 0x08 /* Private */,
+      21,    0,  344,    2, 0x08 /* Private */,
+      22,    0,  345,    2, 0x08 /* Private */,
+      23,    0,  346,    2, 0x08 /* Private */,
+      24,    0,  347,    2, 0x08 /* Private */,
+      25,    0,  348,    2, 0x08 /* Private */,
+      26,    0,  349,    2, 0x08 /* Private */,
+      27,    1,  350,    2, 0x08 /* Private */,
+      29,    0,  353,    2, 0x08 /* Private */,
+      30,    0,  354,    2, 0x08 /* Private */,
+      31,    0,  355,    2, 0x08 /* Private */,
+      32,    0,  356,    2, 0x08 /* Private */,
+      33,    0,  357,    2, 0x08 /* Private */,
+      34,    0,  358,    2, 0x08 /* Private */,
+      35,    0,  359,    2, 0x08 /* Private */,
+      36,    0,  360,    2, 0x08 /* Private */,
+      37,    0,  361,    2, 0x08 /* Private */,
+      38,    1,  362,    2, 0x08 /* Private */,
+      39,    0,  365,    2, 0x08 /* Private */,
+      40,    0,  366,    2, 0x08 /* Private */,
+      41,    0,  367,    2, 0x08 /* Private */,
+      42,    0,  368,    2, 0x08 /* Private */,
+      43,    0,  369,    2, 0x08 /* Private */,
+      44,    0,  370,    2, 0x08 /* Private */,
+      45,    0,  371,    2, 0x08 /* Private */,
+      46,    0,  372,    2, 0x08 /* Private */,
+      47,    0,  373,    2, 0x08 /* Private */,
+      48,    0,  374,    2, 0x08 /* Private */,
+      49,    0,  375,    2, 0x08 /* Private */,
+      50,    0,  376,    2, 0x08 /* Private */,
+      51,    0,  377,    2, 0x08 /* Private */,
+      52,    1,  378,    2, 0x08 /* Private */,
+      53,    1,  381,    2, 0x08 /* Private */,
+      54,    0,  384,    2, 0x08 /* Private */,
+      55,    0,  385,    2, 0x08 /* Private */,
+      56,    0,  386,    2, 0x08 /* Private */,
+      57,    0,  387,    2, 0x08 /* Private */,
+      58,    1,  388,    2, 0x08 /* Private */,
+      60,    2,  391,    2, 0x08 /* Private */,
+      62,    2,  396,    2, 0x08 /* Private */,
+      64,    2,  401,    2, 0x08 /* Private */,
+      66,    2,  406,    2, 0x08 /* Private */,
+      68,    1,  411,    2, 0x08 /* Private */,
+      69,    0,  414,    2, 0x08 /* Private */,
+      70,    0,  415,    2, 0x08 /* Private */,
+      71,    1,  416,    2, 0x08 /* Private */,
+      73,    2,  419,    2, 0x08 /* Private */,
+      77,    2,  424,    2, 0x08 /* Private */,
+      79,    3,  429,    2, 0x08 /* Private */,
+      80,    3,  436,    2, 0x08 /* Private */,
+      81,    2,  443,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    3,
 
  // slots: parameters
-    QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    5,    6,
-    QMetaType::Void, QMetaType::QPixmap, QMetaType::Int,    8,    6,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void, 0x80000000 | 10,   11,
     QMetaType::Void, QMetaType::Int,   13,
     QMetaType::Void, QMetaType::Int,   15,
@@ -323,10 +323,10 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<FormAchievements *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->return_to_games(); break;
-        case 1: _t->InitComponents(); break;
-        case 2: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 3: _t->ImageSet((*reinterpret_cast< QPixmap(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 0: _t->return_to_games((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 2: _t->OnFinish(); break;
+        case 3: _t->InitComponents(); break;
         case 4: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
         case 5: _t->on_ComboBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->on_CheckBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -421,7 +421,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FormAchievements::*)();
+            using _t = void (FormAchievements::*)(int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormAchievements::return_to_games)) {
                 *result = 0;
                 return;
@@ -471,9 +471,10 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormAchievements::return_to_games()
+void FormAchievements::return_to_games(int _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

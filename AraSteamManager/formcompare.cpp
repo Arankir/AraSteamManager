@@ -95,7 +95,7 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
                 QString AchievementIcon=achievements.GetIcon(i).mid(66,achievements.GetIcon(i).length());
                 if(!QFile::exists("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1))){
                     ImageRequest* image = new ImageRequest(achievements.GetIcon(i),row,"images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1),true);
-                    connect(image,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
+                    connect(image,&ImageRequest::onReady,this,&FormCompare::OnResultImage);
                     } else {
                     QPixmap pixmap;
                     pixmap.load("images/achievements/"+QString::number(game.GetAppid())+"/"+AchievementIcon.mid(AchievementIcon.indexOf("/",1)+1,AchievementIcon.length()-1));
@@ -146,7 +146,7 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
                 QCheckBox* chb = new QCheckBox;
                 chb->setText(cat.object().value("name").toString());
                 chb->setObjectName("Category"+QString::number(i));
-                connect(chb,SIGNAL(stateChanged(int)),this,SLOT(on_CheckBoxCategory_Change(int)));
+                connect(chb,&QCheckBox::stateChanged,this,&FormCompare::on_CheckBoxCategory_Change);
                 layout2->addRow(chb);
             } else {
                 QComboBox* cb = new QComboBox;
@@ -228,9 +228,9 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
     rbMyAll->setObjectName("RBMyAll");
     rbMyReached->setObjectName("RBMyReached");
     rbMyNotReached->setObjectName("RBMyNotReached");
-    connect(rbMyAll,SIGNAL(clicked()),this,SLOT(on_RadioButtonMyAll_clicked()));
-    connect(rbMyReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonMyReached_clicked()));
-    connect(rbMyNotReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonMyNotReached_clicked()));
+    connect(rbMyAll,&QRadioButton::clicked,this,&FormCompare::on_RadioButtonMyAll_clicked);
+    connect(rbMyReached,&QRadioButton::clicked,this,&FormCompare::on_RadioButtonMyReached_clicked);
+    connect(rbMyNotReached,&QRadioButton::clicked,this,&FormCompare::on_RadioButtonMyNotReached_clicked);
     rbMyAll->setChecked(true);
     QWidget* wd1 = new QWidget;
     QVBoxLayout* lay1 = new QVBoxLayout;
@@ -251,9 +251,9 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
     pbFriendsAll->setObjectName("PBFriendsAll");
     pbFriendsReached->setObjectName("PBFriendsReached");
     pbFriendsNotReached->setObjectName("PBFriendsNotReached");
-    connect(pbFriendsAll,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendsAll_clicked()));
-    connect(pbFriendsReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendsReached_clicked()));
-    connect(pbFriendsNotReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendsNotReached_clicked()));
+    connect(pbFriendsAll,&QPushButton::clicked,this,&FormCompare::on_RadioButtonFriendsAll_clicked);
+    connect(pbFriendsReached,&QPushButton::clicked,this,&FormCompare::on_RadioButtonFriendsReached_clicked);
+    connect(pbFriendsNotReached,&QPushButton::clicked,this,&FormCompare::on_RadioButtonFriendsNotReached_clicked);
     pbFriendsAll->setChecked(true);
     QWidget* wd2 = new QWidget;
     QVBoxLayout* lay2 = new QVBoxLayout;
@@ -299,7 +299,7 @@ FormCompare::FormCompare(QString keys, QString ids, SGame games, QPixmap GameLog
         ui->TableWidgetFriends->setColumnHidden(i+2,friends[i].second==2?true:false);
     }
     disconnect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    connect(ui->TableWidgetFriends,SIGNAL(cellChanged(int,int)),this,SLOT(on_CheckBoxFriend_Click(int,int)));
+    connect(ui->TableWidgetFriends,&QTableWidget::cellChanged,this,&FormCompare::on_CheckBoxFriend_Click);
     ui->TableWidgetFriends->setRowHidden(3,true);
     ui->TableWidgetFriends->resizeColumnsToContents();
     ui->LineEditFind->setFocus();
@@ -323,7 +323,7 @@ void FormCompare::OnResultAvatar(int i, QString, ImageRequest* img){
 }
 
 void FormCompare::OnResultImage(ImageRequest* imgr){
-    disconnect(imgr,SIGNAL(onReady(ImageRequest*)),this,SLOT(OnResultImage(ImageRequest*)));
+    disconnect(imgr,&ImageRequest::onReady,this,&FormCompare::OnResultImage);
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel* label = new QLabel;
@@ -475,9 +475,9 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 rbAll->setObjectName("RB"+QString::number(column)+"All");
                 rbReached->setObjectName("RB"+QString::number(column)+"Reached");
                 rbNotReached->setObjectName("RB"+QString::number(column)+"NotReached");
-                connect(rbAll,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendAll_Click()));
-                connect(rbReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendReached_Click()));
-                connect(rbNotReached,SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendNotReached_Click()));
+                connect(rbAll,&QRadioButton::clicked,this,&FormCompare::on_RadioButtonFriendAll_Click);
+                connect(rbReached,&QRadioButton::clicked,this,&FormCompare::on_RadioButtonFriendReached_Click);
+                connect(rbNotReached,&QRadioButton::clicked,this,&FormCompare::on_RadioButtonFriendNotReached_Click);
                 rbAll->setChecked(true);
                 QWidget* wd = new QWidget;
                 QVBoxLayout* lay = new QVBoxLayout;
@@ -517,9 +517,9 @@ void FormCompare::on_CheckBoxFriend_Click(int row, int column){
                 }
             }
             if(findChild<QRadioButton*>("RB"+QString::number(column)+"All")){
-                disconnect(findChild<QRadioButton*>("RB"+QString::number(column)+"All"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendAll_Click()));
-                disconnect(findChild<QRadioButton*>("RB"+QString::number(column)+"Reached"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendReached_Click()));
-                disconnect(findChild<QRadioButton*>("RB"+QString::number(column)+"NotReached"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendNotReached_Click()));
+                disconnect(findChild<QRadioButton*>("RB"+QString::number(column)+"All"),&QRadioButton::clicked,this,&FormCompare::on_RadioButtonFriendAll_Click);
+                disconnect(findChild<QRadioButton*>("RB"+QString::number(column)+"Reached"),&QRadioButton::clicked,this,&FormCompare::on_RadioButtonFriendReached_Click);
+                disconnect(findChild<QRadioButton*>("RB"+QString::number(column)+"NotReached"),&QRadioButton::clicked,this,&FormCompare::on_RadioButtonFriendNotReached_Click);
                 delete findChild<QRadioButton*>("RB"+QString::number(column)+"All");
                 delete findChild<QRadioButton*>("RB"+QString::number(column)+"Reached");
                 delete findChild<QRadioButton*>("RB"+QString::number(column)+"NotReached");

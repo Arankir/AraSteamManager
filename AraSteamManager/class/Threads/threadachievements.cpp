@@ -4,17 +4,18 @@ ThreadAchievements::ThreadAchievements(QObject* parent) : QObject(parent){
 
 }
 
-void ThreadAchievements::Set(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements){
+void ThreadAchievements::Set(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, int num){
     this->achievements=achievements;
     this->Words=Words;
     this->LabelTotalPersent=LabelTotalPersent;
     this->TableWidgetAchievements=TableWidgetAchievements;
+    this->num=num;
 }
 
 int ThreadAchievements::Fill(){
     int totalr=0;
     int totalnr=0;
-    int j=0;
+    int j=num;
     for(int i=0;i<achievements.GetAchievementsCount();i++){
         if(achievements.GetDisplayname(i)!=""){
             TableWidgetAchievements->setItem(j,0,new QTableWidgetItem(achievements.GetApiname(i)));
@@ -36,7 +37,10 @@ int ThreadAchievements::Fill(){
             j++;
         }
     }
-    LabelTotalPersent->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+" = "+QString::number(100.0*totalr/(totalr+totalnr))+"%");
+    if(num!=2)
+        LabelTotalPersent->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+" = "+QString::number(100.0*totalr/(totalr+totalnr))+"%");
+    else
+        LabelTotalPersent->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n"+QString::number(100.0*totalr/(totalr+totalnr))+"%");
     TableWidgetAchievements->resizeColumnToContents(4);
     TableWidgetAchievements->resizeRowsToContents();
     emit finished();

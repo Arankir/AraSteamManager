@@ -63,17 +63,32 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="3">
+     <item row="0" column="5">
       <widget class="QPushButton" name="ButtonReturn">
        <property name="text">
         <string>Return</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
-      <widget class="QPushButton" name="ButtonCompare">
+     <item row="2" column="1" colspan="2">
+      <widget class="QLabel" name="LabelGameOnline">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
        <property name="text">
-        <string>Compare with friends</string>
+        <string>GameOnline</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="4" colspan="2">
+      <widget class="QCheckBox" name="CheckBoxShowFilter">
+       <property name="text">
+        <string>Show Filter</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -89,15 +104,10 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1" colspan="2">
-      <widget class="QLabel" name="LabelGameOnline">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
+     <item row="1" column="3" colspan="3">
+      <widget class="QPushButton" name="ButtonCompare">
        <property name="text">
-        <string>GameOnline</string>
+        <string>Compare with friends</string>
        </property>
       </widget>
      </item>
@@ -117,7 +127,7 @@
      <property name="title">
       <string>Filter</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
+     <layout class="QVBoxLayout" name="verticalLayout_8">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
@@ -136,8 +146,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>292</width>
-             <height>94</height>
+             <width>195</width>
+             <height>102</height>
             </rect>
            </property>
           </widget>
@@ -159,8 +169,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>291</width>
-             <height>94</height>
+             <width>194</width>
+             <height>102</height>
             </rect>
            </property>
           </widget>
@@ -231,6 +241,88 @@
            <widget class="QCheckBox" name="CheckBoxFavorites">
             <property name="text">
              <string>Only favorites</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="GroupBoxCompareShowedColumns">
+          <property name="title">
+           <string>Showed columns</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <property name="spacing">
+            <number>1</number>
+           </property>
+           <property name="leftMargin">
+            <number>1</number>
+           </property>
+           <property name="topMargin">
+            <number>1</number>
+           </property>
+           <property name="rightMargin">
+            <number>1</number>
+           </property>
+           <property name="bottomMargin">
+            <number>1</number>
+           </property>
+           <item>
+            <widget class="QCheckBox" name="CheckBoxCompareIcon">
+             <property name="text">
+              <string>Icon</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBoxCompareTitle">
+             <property name="text">
+              <string>Title</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBoxCompareDescription">
+             <property name="text">
+              <string>Description</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CheckBoxCompareTotalPercent">
+             <property name="text">
+              <string>Total percent</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QCheckBox" name="CheckBoxCompareFavorites">
+            <property name="text">
+             <string>Favorites</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="CheckBoxCompareAllFriends">
+            <property name="text">
+             <string>All friends</string>
             </property>
            </widget>
           </item>
@@ -446,6 +538,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QTableWidget" name="TableWidgetCompareFriends">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLineEdit" name="LineEditNameAchievements"/>
@@ -466,11 +568,18 @@
     </widget>
    </item>
    <item>
-    <widget class="QTableWidget" name="TableWidgetAchievements">
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QTableWidget" name="TableWidgetAchievements">
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="TableWidgetCompareAchievements"/>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

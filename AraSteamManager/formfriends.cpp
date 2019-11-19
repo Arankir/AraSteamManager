@@ -137,9 +137,9 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget* 
 }
 
 void FormFriends::InitComponents(){
-    ui->LabelLogo->setText("(WIP)");
+    //ui->LabelLogo->setText("(WIP)");
     ui->GroupBoxFilter->setTitle("      "+Words[0]);
-    ui->ButtonReturn->setText(" "+Words[1]);
+    //ui->ButtonReturn->setText(" "+Words[1]);
     ui->ButtonFind->setText("  "+Words[2]);
     ui->CheckBoxOpenProfile->setText(Words[3]);
     ui->CheckBoxFavorites->setText(Words[20]);
@@ -163,7 +163,7 @@ void FormFriends::InitComponents(){
     ui->ComboBoxStatus->addItem(Words[15]);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setRowCount(Friends.GetCount());
-    ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.jpg) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     ui->TableWidgetFriends->setColumnHidden(5,true);
@@ -193,12 +193,12 @@ void FormFriends::ProgressLoading(int p,int row){
     button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
     button1->setObjectName("btn"+Profiless[p].GetSteamid());
-    connect(button1,SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
+    connect(button1,&QPushButton::pressed,this,&FormFriends::GoToProfileClicked);
     ui->TableWidgetFriends->setCellWidget(row,6,button1);
 
     QPushButton* button2 = new QPushButton;
     button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
-    connect(button2,SIGNAL(pressed()),this,SLOT(FavoritesClicked()));
+    connect(button2,&QPushButton::pressed,this,&FormFriends::FavoritesClicked);
     button2->setObjectName("btnf"+Profiless[p].GetSteamid());
     ui->TableWidgetFriends->setCellWidget(row,7,button2);
     ui->TableWidgetFriends->setRowHeight(row,33);

@@ -39,11 +39,11 @@ int Threading::AddThreadFriends(QTableWidget* TableWidgetFriends,QVector<SProfil
     return 1;
 }
 
-int Threading::AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements){
+int Threading::AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, int num){
     ThreadAchievements* Achievements = new ThreadAchievements;
     QThread* thread = new QThread;
     Achievements->moveToThread(thread);
-    Achievements->Set(achievements, Words, LabelTotalPersent, TableWidgetAchievements);
+    Achievements->Set(achievements, Words, LabelTotalPersent, TableWidgetAchievements, num);
     connect(thread,SIGNAL(started()),Achievements,SLOT(Fill()));
     connect(Achievements,SIGNAL(finished()),thread,SLOT(quit()));
     connect(Achievements,SIGNAL(finished()),Achievements,SLOT(deleteLater()));

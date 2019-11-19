@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget* parent) :    QMainWindow(parent),    ui(new Ui::
         darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
         darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
         darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-        darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
-        //                        тип               ,???      ,???               ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
+        darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
+        //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
         qApp->setPalette(darkPalette);
         theme="white";
         break;
@@ -64,7 +64,7 @@ void MainWindow::InitComponents(){
     ui->ButtonSetProfile->setVisible(false);
     ui->ButtonStatistics->setVisible(false);
     ui->ButtonGoToMyProfile->setVisible(false);
-    ui->ScrollAreaForm->setVisible(false);
+    //ui->ScrollAreaForm->setVisible(false);
     ui->LabelNick->setVisible(false);
     ui->line->setVisible(false);
     ui->LabelProfileVisibility->setVisible(false);
@@ -72,7 +72,7 @@ void MainWindow::InitComponents(){
     ui->FormProgressBar->setVisible(false);
     ui->ButtonFindProfile->setText(" "+Words[0]);
     ui->LineEditIdProfile->setPlaceholderText(Words[1]);
-    ui->ButtonSettings->setText(Words[2]);
+    ui->ButtonSettings->setText(/*Words[2]*/"");
     ui->ButtonExit->setText(" "+Words[3]);
     ui->ButtonStatistics->setText(" "+Words[6]);
     ui->ButtonFavorites->setText(" "+Words[7]);
@@ -85,6 +85,12 @@ void MainWindow::InitComponents(){
     ui->ButtonExit->setIcon(QIcon(":/"+theme+"/program/"+theme+"/exit.png"));
     ui->ButtonFriends->setIcon(QIcon(":/"+theme+"/program/"+theme+"/friends.png"));
     ui->ButtonGames->setIcon(QIcon(":/"+theme+"/program/"+theme+"/games.png"));
+    ui->ButtonBack->setIcon(QIcon(":/"+theme+"/program/"+theme+"/left.png"));
+    ui->ButtonNext->setIcon(QIcon(":/"+theme+"/program/"+theme+"/right.png"));
+    ui->ButtonBack->setText("");
+    ui->ButtonNext->setText("");
+    ui->ButtonBack->setEnabled(false);
+    ui->ButtonNext->setEnabled(false);
     //        ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //        ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //    QPixmap pixmap2("images/program/statistic_white.png","PNG");
@@ -122,16 +128,18 @@ MainWindow::~MainWindow(){
 }
 void MainWindow::returnfromgames(){
     this->setVisible(true);
-    disconnect(gamesform,SIGNAL(return_to_profile()),this,SLOT(returnfromgames()));
+    disconnect(gamesform,&FormGames::return_to_profile,this,&MainWindow::returnfromgames);
     windowchildcount--;
     delete gamesform;
+    windowchild=0;
 }
 void MainWindow::returnfromfriends(){
     this->setVisible(true);
-    disconnect(friendsform,SIGNAL(return_to_profile()),this,SLOT(returnfromfriends()));
-    disconnect(friendsform,SIGNAL(go_to_profile(QString,QString,bool)),this,SLOT(GoToProfile(QString,QString,bool)));
+    disconnect(friendsform,&FormFriends::return_to_profile,this,&MainWindow::returnfromfriends);
+    disconnect(friendsform,&FormFriends::go_to_profile,this,&MainWindow::GoToProfile);
     windowchildcount--;
     delete friendsform;
+    windowchild=0;
 }
 
 void MainWindow::on_ButtonFindProfile_clicked(){
@@ -149,6 +157,10 @@ void MainWindow::on_ButtonFindProfile_clicked(){
 void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
     SProfile Profiles(key,id,false,type);
     if(Profiles.GetStatus()=="success"){
+        if(windowchild==2)
+            returnfromfriends();
+        if(windowchild==1)
+            returnfromgames();
         qDebug()<<BufferProfiles.size()<<BufferProfiles<<CurrentBufferProfile;
         if(UpdateBuffer){
             if(CurrentBufferProfile!=BufferProfiles.size())
@@ -157,6 +169,14 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
             BufferProfiles.append(id);
             CurrentBufferProfile=BufferProfiles.size();
         }
+        if(CurrentBufferProfile==BufferProfiles.size())
+            ui->ButtonNext->setEnabled(false);
+        else
+            ui->ButtonNext->setEnabled(true);
+        if(CurrentBufferProfile<2)
+            ui->ButtonBack->setEnabled(false);
+        else
+            ui->ButtonBack->setEnabled(true);
         qDebug()<<BufferProfiles.size()<<BufferProfiles<<CurrentBufferProfile;
         Profile=Profiles;
         Games.Clear();
@@ -252,18 +272,18 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
                 ui->ButtonGoToMyProfile->setEnabled(Setting.GetMyProfile()=="none"?false:true);
             }
         }
-                QNetworkAccessManager imagemanager;
-                QEventLoop imageloop;  //Ждем ответ от сервера.
-                connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Profile.GetAvatarmedium()));
-                imageloop.exec();
-                disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-                QPixmap img;
-                img.loadFromData(imagereply.readAll());
-                ui->LabelAvatar->setPixmap(img);
-                qDebug()<<img;
-                ui->LabelNick->setText(Profile.GetPersonaname());
-                //img.save("images/profiles/main.png", "PNG");
+        QNetworkAccessManager imagemanager;
+        QEventLoop imageloop;  //Ждем ответ от сервера.
+        connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+        QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Profile.GetAvatarmedium()));
+        imageloop.exec();
+        disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
+        QPixmap img;
+        img.loadFromData(imagereply.readAll());
+        ui->LabelAvatar->setPixmap(img);
+        qDebug()<<img;
+        ui->LabelNick->setText(Profile.GetPersonaname());
+        //img.save("images/profiles/main.png", "PNG");
         //ui->LabelAvatar->setTextFormat(Qt::RichText);
         //ui->LabelAvatar->setText("<img src=\"images/profiles/main.png\"> "+Profile.GetPersonaname());
         //ui->LabelNick->setFont(QFont("MS Shell Dlg 2",14));
@@ -282,36 +302,48 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
         }
 }
 void MainWindow::on_ButtonGames_clicked(){
-    if(windowchildcount==0){
-        windowchildcount++;
-        ui->FormProgressBar->setMaximum(Games.GetCount());
-        gamesform = new FormGames(Profile.GetSteamid(),key,Games,this);
-        connect(gamesform,SIGNAL(return_to_profile()),this,SLOT(returnfromgames()));
-        //QFormLayout* lay = new QFormLayout;
-        //lay->addWidget(gamesform);
-        //ui->ScrollAreaForm->setLayout(lay);
-        ui->ScrollAreaForm->setWidget(gamesform);
-        ui->ScrollAreaForm->setVisible(true);
-        ui->FormProgressBar->setVisible(true);
-        gamesform->setVisible(false);
-        //this->setVisible(false);
+    if(windowchild==2){
+        returnfromfriends();
+    }
+    if(windowchild!=1){
+        windowchild=1;
+        //if(windowchildcount==0){
+            //windowchildcount++;
+            ui->FormProgressBar->setMaximum(Games.GetCount());
+            gamesform = new FormGames(Profile.GetSteamid(),key,Games,this);
+            connect(gamesform,&FormGames::return_to_profile,this,&MainWindow::returnfromgames);
+            //QFormLayout* lay = new QFormLayout;
+            //lay->addWidget(gamesform);
+            //ui->ScrollAreaForm->setLayout(lay);
+            ui->ScrollAreaForm->setWidget(gamesform);
+            //ui->ScrollAreaForm->setVisible(true);
+            ui->FormProgressBar->setVisible(true);
+            gamesform->setVisible(false);
+            //this->setVisible(false);
+        //}
     }
 }
 void MainWindow::on_ButtonFriends_clicked(){
-    if(windowchildcount==0){
-        windowchildcount++;
-        ui->FormProgressBar->setMaximum(Friends.GetCount());
-        friendsform = new FormFriends(Profile.GetSteamid(),key,Friends,this);
-        connect(friendsform,SIGNAL(return_to_profile()),this,SLOT(returnfromfriends()));
-        connect(friendsform,SIGNAL(go_to_profile(QString,QString,bool)),this,SLOT(GoToProfile(QString,QString,bool)));
-        //QFormLayout* lay = new QFormLayout;
-        //lay->addWidget(friendsform);
-        ui->ScrollAreaForm->setWidget(friendsform);//setLayout(lay);
-        ui->ScrollAreaForm->setVisible(true);
-        ui->FormProgressBar->setVisible(true);
-        friendsform->setVisible(false);
-        //friendsform->show();
-        //this->setVisible(false);
+    if(windowchild==1){
+        returnfromgames();
+    }
+    if(windowchild!=2){
+        windowchild=2;
+        //if(windowchildcount==0){
+            //windowchildcount++;
+            ui->FormProgressBar->setMaximum(Friends.GetCount());
+            friendsform = new FormFriends(Profile.GetSteamid(),key,Friends,this);
+            connect(friendsform,&FormFriends::return_to_profile,this,&MainWindow::returnfromfriends);
+            connect(friendsform,&FormFriends::go_to_profile,this,&MainWindow::GoToProfile);
+            //QFormLayout* lay = new QFormLayout;
+            //lay->addWidget(friendsform);
+            ui->ScrollAreaForm->setWidget(friendsform);//setLayout(lay);
+            //ui->ScrollAreaForm->setVisible(true);
+            ui->FormProgressBar->setVisible(true);
+            friendsform->setVisible(false);
+            //friendsform->show();
+            //this->setVisible(false);
+        //}
     }
 }
 void MainWindow::on_ButtonFavorites_clicked(){
@@ -345,6 +377,3 @@ void MainWindow::on_ButtonNext_clicked(){
     if(CurrentBufferProfile<BufferProfiles.size())
         GoToProfile(BufferProfiles[++CurrentBufferProfile-1],"url",false);
 }
-
-
-

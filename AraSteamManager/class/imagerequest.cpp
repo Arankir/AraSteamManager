@@ -46,7 +46,6 @@ void ImageRequest::LoadImage(QString url, int column, QString save, bool autosav
 }
 
 void ImageRequest::OnResultGet(QNetworkReply* reply){
-    qDebug()<<"com"<<1<<reply->error();
     if(!reply->error()){
         answer=reply->readAll();
         if(Autosave){
