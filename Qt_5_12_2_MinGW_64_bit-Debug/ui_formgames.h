@@ -39,7 +39,9 @@ public:
         font.setPointSize(10);
         FormGames->setFont(font);
         verticalLayout = new QVBoxLayout(FormGames);
+        verticalLayout->setSpacing(1);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(1, 1, 1, 1);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         LineEditGame = new QLineEdit(FormGames);

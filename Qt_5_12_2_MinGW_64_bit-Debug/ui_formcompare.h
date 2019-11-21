@@ -208,7 +208,6 @@ public:
         TableWidgetFriends->setMinimumSize(QSize(0, 180));
         TableWidgetFriends->setMaximumSize(QSize(16777215, 330));
         TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        TableWidgetFriends->setShowGrid(true);
 
         verticalLayout_3->addWidget(TableWidgetFriends);
 

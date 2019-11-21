@@ -14,6 +14,7 @@
 #include <QComboBox>
 #include <QMessageBox>
 #include <QFormLayout>
+#include <QButtonGroup>
 #include <class\imagerequest.h>
 #include <formcompare.h>
 #include <class/settings.h>
@@ -46,6 +47,8 @@ private slots:
     void InitComponents();
 
     void OnResultImage(ImageRequest* imgr);
+    void SwitchSimpleCompare(int sc);
+    void LoadingCompare();
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);
     void closeEvent(QCloseEvent*);
@@ -123,6 +126,22 @@ private slots:
     void DeleteValuesCategory(QString Type, int i, QFormLayout* layout);
     void SelectValueCategory(int j,Qt::CheckState);
 
+    void on_CheckBoxCompareIcon_stateChanged(int arg1);
+
+    void on_CheckBoxCompareTitle_stateChanged(int arg1);
+
+    void on_CheckBoxCompareDescription_stateChanged(int arg1);
+
+    void on_CheckBoxCompareTotalPercent_stateChanged(int arg1);
+
+    void on_CheckBoxShowFilter_stateChanged(int arg1);
+
+    void on_RadioButtonCompareFriendsAll_clicked();
+    void on_RadioButtonCompareFriendsReached_clicked();
+    void on_RadioButtonCompareFriendsNotReached_clicked();
+
+    void on_TableWidgetCompareFriends_cellChanged(int row, int column);
+
 private:
     Ui::FormAchievements* ui;
     QString key;
@@ -142,6 +161,12 @@ private:
     QVector<ImageRequest*> request;
     int numrequests=0;
     int numnow=0;
+
+    int simpleCompare=1;
+    int loadCompare=0;
+    int type1=0;
+    int type2=0;
+    QVector<QPair<SProfile,int>> friends;
 };
 
 #endif // FORMACHIEVEMENTS_H

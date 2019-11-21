@@ -128,15 +128,14 @@ MainWindow::~MainWindow(){
 }
 void MainWindow::returnfromgames(){
     this->setVisible(true);
-    disconnect(gamesform,&FormGames::return_to_profile,this,&MainWindow::returnfromgames);
+    disconnect(gamesform);
     windowchildcount--;
     delete gamesform;
     windowchild=0;
 }
 void MainWindow::returnfromfriends(){
     this->setVisible(true);
-    disconnect(friendsform,&FormFriends::return_to_profile,this,&MainWindow::returnfromfriends);
-    disconnect(friendsform,&FormFriends::go_to_profile,this,&MainWindow::GoToProfile);
+    disconnect(friendsform);
     windowchildcount--;
     delete friendsform;
     windowchild=0;
@@ -280,8 +279,8 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
         disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
         QPixmap img;
         img.loadFromData(imagereply.readAll());
-        ui->LabelAvatar->setPixmap(img);
         qDebug()<<img;
+        ui->LabelAvatar->setPixmap(img);
         ui->LabelNick->setText(Profile.GetPersonaname());
         //img.save("images/profiles/main.png", "PNG");
         //ui->LabelAvatar->setTextFormat(Qt::RichText);

@@ -37,11 +37,11 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QLabel *LabelLogo;
     QSpacerItem *horizontalSpacer_2;
+    QPushButton *ButtonSettings;
     QPushButton *ButtonExit;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *ButtonBack;
     QPushButton *ButtonNext;
-    QPushButton *ButtonSettings;
     QSpacerItem *horizontalSpacer_3;
     QPushButton *ButtonSetProfile;
     QHBoxLayout *horizontalLayout_4;
@@ -89,9 +89,10 @@ public:
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(3);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(3, 3, 3, 3);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -103,6 +104,11 @@ public:
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_2);
+
+        ButtonSettings = new QPushButton(centralWidget);
+        ButtonSettings->setObjectName(QString::fromUtf8("ButtonSettings"));
+
+        horizontalLayout_3->addWidget(ButtonSettings);
 
         ButtonExit = new QPushButton(centralWidget);
         ButtonExit->setObjectName(QString::fromUtf8("ButtonExit"));
@@ -124,11 +130,6 @@ public:
         ButtonNext->setObjectName(QString::fromUtf8("ButtonNext"));
 
         horizontalLayout_2->addWidget(ButtonNext);
-
-        ButtonSettings = new QPushButton(centralWidget);
-        ButtonSettings->setObjectName(QString::fromUtf8("ButtonSettings"));
-
-        horizontalLayout_2->addWidget(ButtonSettings);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -173,19 +174,21 @@ public:
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 639, 181));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 651, 181));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
-        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setSpacing(3);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(3, 3, 3, 15);
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(6);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setVerticalSpacing(3);
         LabelNick = new QLabel(scrollAreaWidgetContents);
         LabelNick->setObjectName(QString::fromUtf8("LabelNick"));
         QFont font;
         font.setFamily(QString::fromUtf8("Mongolian Baiti"));
-        font.setPointSize(14);
+        font.setPointSize(16);
         LabelNick->setFont(font);
         LabelNick->setStyleSheet(QString::fromUtf8("color:rgb(0, 170, 0)"));
 
@@ -308,7 +311,7 @@ public:
 
         horizontalLayout->addWidget(ButtonStatistics);
 
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_4 = new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_4);
 
@@ -338,7 +341,7 @@ public:
         ScrollAreaForm->setWidgetResizable(true);
         FormsWidget = new QWidget();
         FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 637, 254));
+        FormsWidget->setGeometry(QRect(0, 0, 649, 281));
         ScrollAreaForm->setWidget(FormsWidget);
 
         horizontalLayout_5->addWidget(ScrollAreaForm);
@@ -367,10 +370,10 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
         LabelLogo->setText(QApplication::translate("MainWindow", "Logo", nullptr));
+        ButtonSettings->setText(QApplication::translate("MainWindow", "Settings", nullptr));
         ButtonExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
         ButtonBack->setText(QApplication::translate("MainWindow", "Back", nullptr));
         ButtonNext->setText(QApplication::translate("MainWindow", "Next", nullptr));
-        ButtonSettings->setText(QApplication::translate("MainWindow", "Settings", nullptr));
         ButtonSetProfile->setText(QApplication::translate("MainWindow", "Set as my profile", nullptr));
         ButtonFindProfile->setText(QApplication::translate("MainWindow", "Find", nullptr));
         LabelNick->setText(QApplication::translate("MainWindow", "NickName", nullptr));
