@@ -561,6 +561,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QProgressBar" name="ProgressBarFriendsLoad">
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="format">
+         <string>%v/%m</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLineEdit" name="LineEditNameAchievements"/>

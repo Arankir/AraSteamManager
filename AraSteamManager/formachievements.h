@@ -56,6 +56,7 @@ private slots:
     void on_ButtonReturn_clicked();
     void UpdateHiddenRows();
     void PullTableWidget();
+    bool ProfileIsPublic(SAchievements achievement, int col);
     void on_ButtonAddCategory_clicked();
 
     void on_RadioButtonAll_clicked();
@@ -126,6 +127,10 @@ private slots:
     void DeleteValuesCategory(QString Type, int i, QFormLayout* layout);
     void SelectValueCategory(int j,Qt::CheckState);
 
+    void on_RadioButtonFriendAll_Click();
+    void on_RadioButtonFriendReached_Click();
+    void on_RadioButtonFriendNotReached_Click();
+
     void on_CheckBoxCompareIcon_stateChanged(int arg1);
 
     void on_CheckBoxCompareTitle_stateChanged(int arg1);
@@ -140,7 +145,9 @@ private slots:
     void on_RadioButtonCompareFriendsReached_clicked();
     void on_RadioButtonCompareFriendsNotReached_clicked();
 
-    void on_TableWidgetCompareFriends_cellChanged(int row, int column);
+    void on_TableWidgetCompareFriendsCellChanged(int row, int column);
+
+    void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
 private:
     Ui::FormAchievements* ui;
@@ -149,8 +156,10 @@ private:
     int windowchildcount=0;
     SGame game;
     SAchievements achievements;
-    bool** filter;
-    int colfilter=3;
+    bool** filterAchievements;
+    bool** filterCompare;
+    int colfilterAchievements=3;
+    int colfilterCompare=3;
     QFormLayout* newcategoryvalueslayout;
     QFormLayout* changecategoryvalueslayout;
     QStringList Words;

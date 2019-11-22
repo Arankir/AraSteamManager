@@ -33,17 +33,16 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievements
 {
 public:
-    QVBoxLayout *verticalLayout_7;
+    QVBoxLayout *verticalLayout_6;
     QGridLayout *gridLayout;
+    QPushButton *ButtonCompare;
+    QCheckBox *CheckBoxShowFilter;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *LabelGameLogo;
-    QPushButton *ButtonCompare;
-    QLabel *LabelGameOnline;
-    QCheckBox *CheckBoxShowFilter;
     QLabel *LabelGameTitle;
-    QSpacerItem *horizontalSpacer_2;
     QSpacerItem *horizontalSpacer_3;
+    QLabel *LabelGameOnline;
     QGroupBox *GroupBoxFilter;
     QVBoxLayout *verticalLayout_8;
     QHBoxLayout *horizontalLayout_4;
@@ -106,12 +105,28 @@ public:
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
         FormAchievements->resize(837, 838);
-        verticalLayout_7 = new QVBoxLayout(FormAchievements);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        verticalLayout_6 = new QVBoxLayout(FormAchievements);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        ButtonCompare = new QPushButton(FormAchievements);
+        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
+
+        gridLayout->addWidget(ButtonCompare, 0, 3, 1, 2);
+
+        CheckBoxShowFilter = new QCheckBox(FormAchievements);
+        CheckBoxShowFilter->setObjectName(QString::fromUtf8("CheckBoxShowFilter"));
+        CheckBoxShowFilter->setChecked(true);
+
+        gridLayout->addWidget(CheckBoxShowFilter, 1, 4, 1, 1);
+
         groupBox = new QGroupBox(FormAchievements);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy);
         gridLayout_5 = new QGridLayout(groupBox);
         gridLayout_5->setSpacing(1);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
@@ -119,60 +134,55 @@ public:
         gridLayout_5->setContentsMargins(1, 1, 1, 1);
         LabelGameLogo = new QLabel(groupBox);
         LabelGameLogo->setObjectName(QString::fromUtf8("LabelGameLogo"));
+        sizePolicy.setHeightForWidth(LabelGameLogo->sizePolicy().hasHeightForWidth());
+        LabelGameLogo->setSizePolicy(sizePolicy);
 
         gridLayout_5->addWidget(LabelGameLogo, 0, 0, 1, 1);
 
 
         gridLayout->addWidget(groupBox, 0, 0, 3, 1);
 
-        ButtonCompare = new QPushButton(FormAchievements);
-        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
-
-        gridLayout->addWidget(ButtonCompare, 0, 3, 1, 3);
-
-        LabelGameOnline = new QLabel(FormAchievements);
-        LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(LabelGameOnline->sizePolicy().hasHeightForWidth());
-        LabelGameOnline->setSizePolicy(sizePolicy);
-        QFont font;
-        font.setPointSize(14);
-        LabelGameOnline->setFont(font);
-
-        gridLayout->addWidget(LabelGameOnline, 2, 1, 1, 3);
-
-        CheckBoxShowFilter = new QCheckBox(FormAchievements);
-        CheckBoxShowFilter->setObjectName(QString::fromUtf8("CheckBoxShowFilter"));
-        CheckBoxShowFilter->setChecked(true);
-
-        gridLayout->addWidget(CheckBoxShowFilter, 2, 4, 1, 2);
-
         LabelGameTitle = new QLabel(FormAchievements);
         LabelGameTitle->setObjectName(QString::fromUtf8("LabelGameTitle"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(LabelGameTitle->sizePolicy().hasHeightForWidth());
+        LabelGameTitle->setSizePolicy(sizePolicy1);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Lucida Bright"));
+        font.setPointSize(16);
+        font.setBold(false);
+        font.setItalic(true);
+        font.setWeight(50);
         LabelGameTitle->setFont(font);
 
         gridLayout->addWidget(LabelGameTitle, 1, 1, 1, 1);
-
-        horizontalSpacer_2 = new QSpacerItem(636, 18, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_2, 1, 2, 1, 1);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout->addItem(horizontalSpacer_3, 0, 1, 1, 2);
 
+        LabelGameOnline = new QLabel(FormAchievements);
+        LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
+        sizePolicy.setHeightForWidth(LabelGameOnline->sizePolicy().hasHeightForWidth());
+        LabelGameOnline->setSizePolicy(sizePolicy);
+        QFont font1;
+        font1.setPointSize(10);
+        LabelGameOnline->setFont(font1);
 
-        verticalLayout_7->addLayout(gridLayout);
+        gridLayout->addWidget(LabelGameOnline, 2, 1, 1, 4);
+
+
+        verticalLayout_6->addLayout(gridLayout);
 
         GroupBoxFilter = new QGroupBox(FormAchievements);
         GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(GroupBoxFilter->sizePolicy().hasHeightForWidth());
-        GroupBoxFilter->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(GroupBoxFilter->sizePolicy().hasHeightForWidth());
+        GroupBoxFilter->setSizePolicy(sizePolicy2);
         verticalLayout_8 = new QVBoxLayout(GroupBoxFilter);
         verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
         horizontalLayout_4 = new QHBoxLayout();
@@ -180,11 +190,11 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         ScrollAreaCategories = new QScrollArea(GroupBoxFilter);
         ScrollAreaCategories->setObjectName(QString::fromUtf8("ScrollAreaCategories"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(ScrollAreaCategories->sizePolicy().hasHeightForWidth());
-        ScrollAreaCategories->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(ScrollAreaCategories->sizePolicy().hasHeightForWidth());
+        ScrollAreaCategories->setSizePolicy(sizePolicy3);
         ScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
@@ -195,8 +205,8 @@ public:
 
         ScrollAreaCheckCategories = new QScrollArea(GroupBoxFilter);
         ScrollAreaCheckCategories->setObjectName(QString::fromUtf8("ScrollAreaCheckCategories"));
-        sizePolicy2.setHeightForWidth(ScrollAreaCheckCategories->sizePolicy().hasHeightForWidth());
-        ScrollAreaCheckCategories->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(ScrollAreaCheckCategories->sizePolicy().hasHeightForWidth());
+        ScrollAreaCheckCategories->setSizePolicy(sizePolicy3);
         ScrollAreaCheckCategories->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
@@ -308,11 +318,11 @@ public:
         verticalLayout->setSizeConstraint(QLayout::SetMinimumSize);
         LineEditTitleNewCategory = new QLineEdit(GroupBoxAddCategory);
         LineEditTitleNewCategory->setObjectName(QString::fromUtf8("LineEditTitleNewCategory"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(LineEditTitleNewCategory->sizePolicy().hasHeightForWidth());
-        LineEditTitleNewCategory->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(LineEditTitleNewCategory->sizePolicy().hasHeightForWidth());
+        LineEditTitleNewCategory->setSizePolicy(sizePolicy4);
 
         verticalLayout->addWidget(LineEditTitleNewCategory);
 
@@ -331,8 +341,8 @@ public:
 
         ScrollAreaValues = new QScrollArea(GroupBoxAddCategory);
         ScrollAreaValues->setObjectName(QString::fromUtf8("ScrollAreaValues"));
-        sizePolicy2.setHeightForWidth(ScrollAreaValues->sizePolicy().hasHeightForWidth());
-        ScrollAreaValues->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(ScrollAreaValues->sizePolicy().hasHeightForWidth());
+        ScrollAreaValues->setSizePolicy(sizePolicy3);
         ScrollAreaValues->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
@@ -378,8 +388,8 @@ public:
 
         LineEditTitleCategoryChangeCategory = new QLineEdit(GroupBoxChangeCategory);
         LineEditTitleCategoryChangeCategory->setObjectName(QString::fromUtf8("LineEditTitleCategoryChangeCategory"));
-        sizePolicy3.setHeightForWidth(LineEditTitleCategoryChangeCategory->sizePolicy().hasHeightForWidth());
-        LineEditTitleCategoryChangeCategory->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(LineEditTitleCategoryChangeCategory->sizePolicy().hasHeightForWidth());
+        LineEditTitleCategoryChangeCategory->setSizePolicy(sizePolicy4);
 
         formLayout->setWidget(1, QFormLayout::SpanningRole, LineEditTitleCategoryChangeCategory);
 
@@ -394,8 +404,8 @@ public:
 
         ScrollAreaValuesChangeCategory = new QScrollArea(GroupBoxChangeCategory);
         ScrollAreaValuesChangeCategory->setObjectName(QString::fromUtf8("ScrollAreaValuesChangeCategory"));
-        sizePolicy2.setHeightForWidth(ScrollAreaValuesChangeCategory->sizePolicy().hasHeightForWidth());
-        ScrollAreaValuesChangeCategory->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(ScrollAreaValuesChangeCategory->sizePolicy().hasHeightForWidth());
+        ScrollAreaValuesChangeCategory->setSizePolicy(sizePolicy3);
         ScrollAreaValuesChangeCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
@@ -434,11 +444,11 @@ public:
 
         TableWidgetCompareFriends = new QTableWidget(GroupBoxFilter);
         TableWidgetCompareFriends->setObjectName(QString::fromUtf8("TableWidgetCompareFriends"));
-        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(TableWidgetCompareFriends->sizePolicy().hasHeightForWidth());
-        TableWidgetCompareFriends->setSizePolicy(sizePolicy4);
+        QSizePolicy sizePolicy5(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(TableWidgetCompareFriends->sizePolicy().hasHeightForWidth());
+        TableWidgetCompareFriends->setSizePolicy(sizePolicy5);
 
         verticalLayout_8->addWidget(TableWidgetCompareFriends);
 
@@ -459,7 +469,7 @@ public:
         verticalLayout_8->addLayout(horizontalLayout_3);
 
 
-        verticalLayout_7->addWidget(GroupBoxFilter);
+        verticalLayout_6->addWidget(GroupBoxFilter);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
@@ -475,7 +485,7 @@ public:
         horizontalLayout_5->addWidget(TableWidgetCompareAchievements);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_5);
+        verticalLayout_6->addLayout(horizontalLayout_5);
 
 
         retranslateUi(FormAchievements);
@@ -486,12 +496,12 @@ public:
     void retranslateUi(QWidget *FormAchievements)
     {
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
+        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
+        CheckBoxShowFilter->setText(QApplication::translate("FormAchievements", "Show Filter", nullptr));
         groupBox->setTitle(QString());
         LabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
-        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
-        LabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
-        CheckBoxShowFilter->setText(QApplication::translate("FormAchievements", "Show Filter", nullptr));
         LabelGameTitle->setText(QApplication::translate("FormAchievements", "GameTitle", nullptr));
+        LabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         GroupBoxFilter->setAccessibleName(QApplication::translate("FormAchievements", "Filter", nullptr));
 #endif // QT_NO_ACCESSIBILITY
