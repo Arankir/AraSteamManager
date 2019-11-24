@@ -19,7 +19,7 @@ signals:
 
 public slots:
     int Fill();
-    void Set(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, int num);
+    void Set(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, QLabel* LabelTotalPersentCompare, QTableWidget* TableWidgetCompareAchievements);
 
 private:
     int num;
@@ -27,6 +27,8 @@ private:
     QStringList Words;
     QLabel* LabelTotalPersent;
     QTableWidget* TableWidgetAchievements;
+    QLabel* LabelTotalPersentCompare;
+    QTableWidget* TableWidgetCompareAchievements;
 };
 
 #endif // THREADACHIEVEMENTS_H

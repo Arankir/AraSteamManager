@@ -16,7 +16,6 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -30,12 +29,8 @@ class Ui_FormFriends
 {
 public:
     QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout;
-    QLabel *LabelLogo;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *ButtonReturn;
     QGroupBox *GroupBoxFilter;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *_2;
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *LineEditName;
     QPushButton *ButtonFind;
@@ -52,30 +47,13 @@ public:
             FormFriends->setObjectName(QString::fromUtf8("FormFriends"));
         FormFriends->resize(825, 536);
         verticalLayout_2 = new QVBoxLayout(FormFriends);
+        verticalLayout_2->setSpacing(1);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        LabelLogo = new QLabel(FormFriends);
-        LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
-
-        horizontalLayout->addWidget(LabelLogo);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
-        ButtonReturn = new QPushButton(FormFriends);
-        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
-
-        horizontalLayout->addWidget(ButtonReturn);
-
-
-        verticalLayout_2->addLayout(horizontalLayout);
-
+        verticalLayout_2->setContentsMargins(1, 1, 1, 1);
         GroupBoxFilter = new QGroupBox(FormFriends);
         GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
-        verticalLayout = new QVBoxLayout(GroupBoxFilter);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        _2 = new QVBoxLayout(GroupBoxFilter);
+        _2->setObjectName(QString::fromUtf8("_2"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         LineEditName = new QLineEdit(GroupBoxFilter);
@@ -89,7 +67,7 @@ public:
         horizontalLayout_2->addWidget(ButtonFind);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        _2->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -113,7 +91,7 @@ public:
         horizontalLayout_3->addItem(horizontalSpacer_2);
 
 
-        verticalLayout->addLayout(horizontalLayout_3);
+        _2->addLayout(horizontalLayout_3);
 
 
         verticalLayout_2->addWidget(GroupBoxFilter);
@@ -152,8 +130,6 @@ public:
     void retranslateUi(QWidget *FormFriends)
     {
         FormFriends->setWindowTitle(QApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
-        LabelLogo->setText(QApplication::translate("FormFriends", "Logo", nullptr));
-        ButtonReturn->setText(QApplication::translate("FormFriends", "Return", nullptr));
         GroupBoxFilter->setTitle(QApplication::translate("FormFriends", "Filter", nullptr));
         ButtonFind->setText(QApplication::translate("FormFriends", "Find", nullptr));
         CheckBoxOpenProfile->setText(QApplication::translate("FormFriends", "Open profile", nullptr));

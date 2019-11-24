@@ -229,11 +229,9 @@ void FormAchievements::PullTableWidget(){
         ui->ButtonCompare->setEnabled(false);
     } else{
         Threading LoadTable(this);
-        LoadTable.AddThreadAchievements(achievements,Words,ui->LabelTotalPersent,ui->TableWidgetAchievements,0);
         QLabel* lbl = new QLabel;
         ui->TableWidgetCompareAchievements->setCellWidget(1,5, lbl);
-
-        LoadTable.AddThreadAchievements(achievements,Words,lbl,ui->TableWidgetCompareAchievements,2);
+        LoadTable.AddThreadAchievements(achievements,Words,ui->LabelTotalPersent,ui->TableWidgetAchievements,lbl,ui->TableWidgetCompareAchievements);
     }
     /*
     for(int i=0;i<achievements.GetAchievementsCount();i++){
@@ -313,10 +311,15 @@ void FormAchievements::OnFinish(){
                 label->setPixmap(pixmap);
                 ui->TableWidgetAchievements->setCellWidget(j,1,label);
                 ui->TableWidgetAchievements->resizeRowToContents(j);
+                QLabel* label2 = new QLabel;
+                label2->setPixmap(pixmap);
+                ui->TableWidgetCompareAchievements->setCellWidget(j+2,1,label2);
+                ui->TableWidgetCompareAchievements->resizeRowToContents(j);
             }
             j++;
         } else {
             ui->TableWidgetAchievements->removeRow(ui->TableWidgetAchievements->rowCount()-1);
+            ui->TableWidgetCompareAchievements->removeRow(ui->TableWidgetCompareAchievements->rowCount()-1);
         }
         }
 }

@@ -53,6 +53,7 @@ QStringList Settings::GetWords(QString form){
         while(!FileLanguage.atEnd()){
             Language << QString::fromLocal8Bit(FileLanguage.readLine()).remove("\r\n").remove("\n");
         }
+        FileLanguage.close();
     } else
         for(int i=0;i<200;i++){
             Language << "";
@@ -71,13 +72,14 @@ bool Settings::SetMyProfile(QString MyProfiles){
         status="error: file is already open";
         return false;
     } else {
+        file.close();
         MyProfile=MyProfiles;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
-        writeStream << "Language="+QString::number(language)<<'\r'<<'\n';
-        writeStream << "Theme="+QString::number(theme)<<'\r'<<'\n';
-        writeStream << "SaveImages="+QString::number(SaveImages)<<'\r'<<'\n';
-        writeStream << "Language="+MyProfile<<'\r'<<'\n';
+        writeStream << "Language="+QString::number(language)<<"\n";
+        writeStream << "Theme="+QString::number(theme)<<"\n";
+        writeStream << "SaveImages="+QString::number(SaveImages)<<"\n";
+        writeStream << "MyProfile="+MyProfile;
         file.close();
         return true;
     }
@@ -93,13 +95,14 @@ bool Settings::SetLanguage(int Language){
         status="error: file is already open";
         return false;
     } else {
+        file.close();
         language=Language;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
-        writeStream << "Language="+QString::number(language)<<'\r'<<'\n';
-        writeStream << "Theme="+QString::number(theme)<<'\r'<<'\n';
-        writeStream << "SaveImages="+QString::number(SaveImages)<<'\r'<<'\n';
-        writeStream << "Language="+MyProfile<<'\r'<<'\n';
+        writeStream << "Language="+QString::number(language)<<'\n';
+        writeStream << "Theme="+QString::number(theme)<<'\n';
+        writeStream << "SaveImages="+QString::number(SaveImages)<<'\n';
+        writeStream << "MyProfile="+MyProfile;
         file.close();
         return true;
     }
@@ -115,13 +118,14 @@ bool Settings::SetTheme(int Theme){
         status="error: file is already open";
         return false;
     } else {
+        file.close();
         theme=Theme;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
-        writeStream << "Language="+QString::number(language)<<'\r'<<'\n';
-        writeStream << "Theme="+QString::number(theme)<<'\r'<<'\n';
-        writeStream << "SaveImages="+QString::number(SaveImages)<<'\r'<<'\n';
-        writeStream << "Language="+MyProfile<<'\r'<<'\n';
+        writeStream << "Language="+QString::number(language)<<'\n';
+        writeStream << "Theme="+QString::number(theme)<<'\n';
+        writeStream << "SaveImages="+QString::number(SaveImages)<<'\n';
+        writeStream << "MyProfile="+MyProfile;
         file.close();
         return true;
     }
@@ -137,13 +141,14 @@ bool Settings::SetSaveimage(int SaveImage){
         status="error: file is already open";
         return false;
     } else {
+        file.close();
         SaveImages=SaveImage;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
-        writeStream << "Language="+QString::number(language)<<'\r'<<'\n';
-        writeStream << "Theme="+QString::number(theme)<<'\r'<<'\n';
-        writeStream << "SaveImages="+QString::number(SaveImages)<<'\r'<<'\n';
-        writeStream << "Language="+MyProfile<<'\r'<<'\n';
+        writeStream << "Language="+QString::number(language)<<'\n';
+        writeStream << "Theme="+QString::number(theme)<<'\n';
+        writeStream << "SaveImages="+QString::number(SaveImages)<<'\n';
+        writeStream << "MyProfile="+MyProfile;
         file.close();
         return true;
     }

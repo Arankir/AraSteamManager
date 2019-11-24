@@ -360,8 +360,10 @@ void MainWindow::on_ButtonGoToMyProfile_clicked(){
 }
 
 void MainWindow::on_ButtonSetProfile_clicked(){
-    if(Setting.SetMyProfile(Profile.GetSteamid()))
+    if(Setting.SetMyProfile(Profile.GetSteamid())){
         ui->ButtonSetProfile->setEnabled(false);
+        ui->ButtonGoToMyProfile->setEnabled(false);
+    }
 }
 void MainWindow::on_ButtonExit_clicked(){
     close();
