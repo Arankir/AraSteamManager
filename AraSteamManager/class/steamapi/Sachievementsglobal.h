@@ -23,6 +23,7 @@ public:
     ~SAchievementsGlobal();
     void Set(QString key, QString appid, QString language);
     void Set(QJsonDocument DocAchievements);
+    void Delete(int index) { achievements.remove(index); count--;}
     SAchievementGlobal GetAchievementInfo(int index) {return achievements[index];}
     QString GetApiname(int index) {return achievements[index].GetApiname();}
     int GetDefaultvalue(int index) {return achievements[index].GetDefaultvalue();}
@@ -42,7 +43,7 @@ public:
     SAchievementsGlobal & operator=(const SAchievementsGlobal & friends);
 
 signals:
-    void finished(SAchievementsGlobal*);
+    void finished(SAchievementsGlobal);
     void finished();
 
 public slots:

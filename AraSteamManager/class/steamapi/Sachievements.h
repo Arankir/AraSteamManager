@@ -26,23 +26,22 @@ public:
     ~SAchievements();
     void Set(QString key, QString appid, QString id, QString language);
     void Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
-    void Set(SAchievementsPlayer Player);
-    void Set(SAchievementsGlobal Global);
-    void Set(SAchievementsPercentage Percent);
-    SAchievement GetAchievementInfo(int index) {return achievements[index];}
-    QString GetApiname(int index) {return achievements[index].GetApiname();}
-    int GetDefaultvalue(int index) {return achievements[index].GetDefaultvalue();}
-    QString GetDisplayname(int index) {return achievements[index].GetDisplayname();}
-    int GetHidden(int index) {return achievements[index].GetHidden();}
-    QString GetDescription(int index) {return achievements[index].GetDescription();}
-    QString GetIcon(int index) {return achievements[index].GetIcon();}
-    QString GetIcongray(int index) {return achievements[index].GetIcongray();}
-    int GetAchieved(int index) {return achievements[index].GetAchieved();}
-    QDateTime GetUnlocktime(int index) {return achievements[index].GetUnlocktime();}
-    double GetPercent(int index) {return achievements[index].GetPercent();}
+    void SetFinish();
+    SAchievement GetAchievementInfo(int index) {return Finish[index];}
+    QString GetApiname(int index) {return Finish[index].GetApiname();}
+    int GetDefaultvalue(int index) {return Finish[index].GetDefaultvalue();}
+    QString GetDisplayname(int index) {return Finish[index].GetDisplayname();}
+    int GetHidden(int index) {return Finish[index].GetHidden();}
+    QString GetDescription(int index) {return Finish[index].GetDescription();}
+    QString GetIcon(int index) {return Finish[index].GetIcon();}
+    QString GetIcongray(int index) {return Finish[index].GetIcongray();}
+    int GetAchieved(int index) {return Finish[index].GetAchieved();}
+    QDateTime GetUnlocktime(int index) {return Finish[index].GetUnlocktime();}
+    double GetPercent(int index) {return Finish[index].GetPercent();}
     QString GetStatusGlobal() {return statusglobal;}
     QString GetStatusPlayer() {return statusplayer;}
     QString GetStatusPercent() {return statuspercent;}
+    QString GetStatusFinish() {return statusfinish;}
     QString GetAppid() {return appid;}
     QString GetGamename() {return gamename;}
     QString GetGameversion() {return gameversion;}
@@ -58,13 +57,19 @@ signals:
     void finished();
 
 public slots:
-    //void Load(QNetworkReply* Reply);
+    void Set(SAchievementsPlayer Player);
+    void Set(SAchievementsGlobal Global);
+    void Set(SAchievementsPercentage Percent);
 
 private:
-    QVector<SAchievement> achievements;
+    SAchievementsGlobal Global;
+    SAchievementsPlayer Player;
+    SAchievementsPercentage Percent;
+    QVector<SAchievement> Finish;
     QString statusglobal="none";
     QString statusplayer="none";
     QString statuspercent="none";
+    QString statusfinish="none";
     QString id="";
     QString appid="";
     QString key="";

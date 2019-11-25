@@ -40,7 +40,8 @@ void SAchievementsPercentage::Load(QNetworkReply* Reply){
     QJsonDocument DocAchievements = QJsonDocument::fromJson(Reply->readAll());
     Reply->deleteLater();
     Set(DocAchievements);
-    emit finished(this);
+    qDebug()<<"Percent";
+    emit finished(*this);
     emit finished();
 }
 

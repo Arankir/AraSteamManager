@@ -18,17 +18,12 @@ void SAchievements::Set(QString key, QString appid, QString id, QString language
     this->appid=appid;
     this->id=id;
     this->language=language;
-    QEventLoop loop;
-    SAchievementsGlobal Global(key,appid,language);
-    connect(&Global,SIGNAL(finished()),&loop,SLOT(quit()));
-    loop.exec();
-    SAchievementsPlayer Player(key,appid,id);
-    connect(&Player,SIGNAL(finished()),&loop,SLOT(quit()));
-    loop.exec();
-    SAchievementsPercentage Percent(key,appid);
-    connect(&Percent,SIGNAL(finished()),&loop,SLOT(quit()));
-    loop.exec();
-    Set(Global,Player,Percent);
+    SAchievementsGlobal *Global = new SAchievementsGlobal(key,appid,language);
+    connect(Global,SIGNAL(finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
+    SAchievementsPlayer *Player = new SAchievementsPlayer(key,appid,id);
+    connect(Player,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(key,appid);
+    connect(Percent,SIGNAL(finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
 void SAchievements::Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent){
     Set(Percent);
@@ -36,7 +31,13 @@ void SAchievements::Set(SAchievementsGlobal Global, SAchievementsPlayer Player, 
     Set(Player);
 }
 void SAchievements::Set(SAchievementsPlayer Player){
-    if(count>0){
+    qDebug()<<"Player w";
+    this->Player=Player;
+    statusplayer="success";
+    if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
+        SetFinish();
+    }
+    /*if(count>0){
         for (int i=0;i<count;i++) {
             for (int j=0;j<Player.GetAchievementsCount();j++) {
                 if(achievements[i].GetApiname()==Player.GetApiname(j)){
@@ -52,11 +53,16 @@ void SAchievements::Set(SAchievementsPlayer Player){
             achievements.push_back(ach);
         }
         count=Player.GetAchievementsCount();
-    }
-    statusplayer="success";
+    }*/
 }
 void SAchievements::Set(SAchievementsGlobal Global){
-    if(count>0){
+    qDebug()<<"Global w";
+    this->Global=Global;
+    statusglobal="success";
+    if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
+        SetFinish();
+    }
+    /*if(count>0){
         for (int i=0;i<count;i++) {
             for (int j=0;j<Global.GetAchievementsCount();j++) {
                 //qDebug()<<achievements[i].GetApiname()<<Global.GetApiname(j);
@@ -76,10 +82,16 @@ void SAchievements::Set(SAchievementsGlobal Global){
     }
     gamename=Global.GetGamename();
     gameversion=Global.GetGameversion();
-    statusglobal="success";
+    statusglobal="success";*/
 }
 void SAchievements::Set(SAchievementsPercentage Percent){
-    if(count>0){
+    qDebug()<<"Percent w";
+    this->Percent=Percent;
+    statuspercent="success";
+    if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
+        SetFinish();
+    }
+    /*if(count>0){
         for (int i=0;i<count;i++) {
             for (int j=0;j<Percent.GetAchievementsCount();j++) {
                 if(achievements[i].GetApiname()==Percent.GetApiname(j)){
@@ -97,32 +109,59 @@ void SAchievements::Set(SAchievementsPercentage Percent){
         count=Percent.GetAchievementsCount();
         Sort();
     }
-    statuspercent="success";
+    statuspercent="success";*/
+}
+void SAchievements::SetFinish(){
+    Clear();
+    for(int i=0;i<Percent.GetAchievementsCount();i++){
+        for(int j=0;j<Player.GetAchievementsCount();j++){
+            if(Percent.GetApiname(i)==Global.GetApiname(j)){
+                SAchievement achievement;
+                achievement.SetPercent(Percent.GetAchievementInfo(i));
+                achievement.SetPlayer(Player.GetAchievementInfo(j));
+                achievement.SetGlobal(Global.GetAchievementInfo(j));
+                //удалить из Player и Percent
+                qDebug()<<i<<Percent.GetApiname(i)<<Global.GetApiname(j)<<Player.GetApiname(j);
+                Player.Delete(j);
+                Global.Delete(j);
+                Finish.push_back(achievement);
+                break;
+            }
+        }
+    }
+    count=Finish.size();
+    statusfinish="success";
+    emit finished();
 }
 
 void SAchievements::Update(){
     Set(key,appid,id,language);
 }
 void SAchievements::Clear(){
-    achievements.clear();
+    Finish.clear();
     count=0;
 }
 void SAchievements::Sort(){
     for (int i=0; i < count-1; i++) {
         for (int j=0; j < count-i-1; j++) {
-            if (achievements[j].GetPercent() < achievements[j+1].GetPercent()){
-                SAchievement temp = achievements[j];
-                achievements[j] = achievements[j+1];
-                achievements[j+1] = temp;
+            if (Finish[j].GetPercent() < Finish[j+1].GetPercent()){
+                SAchievement temp = Finish[j];
+                Finish[j] = Finish[j+1];
+                Finish[j+1] = temp;
             }
         }
     }
 }
 
 SAchievements::SAchievements(const SAchievements & achievement){
-    achievements=achievement.achievements;
+    Finish=achievement.Finish;
+    Global=achievement.Global;
+    Player=achievement.Player;
+    Percent=achievement.Percent;
     statusglobal=achievement.statusglobal;
     statusplayer=achievement.statusplayer;
+    statuspercent=achievement.statuspercent;
+    statusfinish=achievement.statusfinish;
     id=achievement.id;
     appid=achievement.appid;
     key=achievement.key;
@@ -132,9 +171,14 @@ SAchievements::SAchievements(const SAchievements & achievement){
     count=achievement.count;
 }
 SAchievements & SAchievements::operator=(const SAchievements & achievement){
-    achievements=achievement.achievements;
+    Finish=achievement.Finish;
+    Global=achievement.Global;
+    Player=achievement.Player;
+    Percent=achievement.Percent;
     statusglobal=achievement.statusglobal;
     statusplayer=achievement.statusplayer;
+    statuspercent=achievement.statuspercent;
+    statusfinish=achievement.statusfinish;
     id=achievement.id;
     appid=achievement.appid;
     key=achievement.key;

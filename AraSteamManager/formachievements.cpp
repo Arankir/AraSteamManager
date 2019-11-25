@@ -8,7 +8,6 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, int n
     id=ids;
     game=games;
     unicnum=num;
-    achievements.Set(key,QString::number(game.GetAppid()),id,Words[26]);
     switch(Setting.GetTheme()){
     case 1:{
         theme="white";
@@ -208,15 +207,17 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetCompareAchievements->setColumnWidth(3,315);
     ui->TableWidgetCompareAchievements->resizeColumnToContents(4);
     ui->TableWidgetCompareAchievements->setColumnWidth(5,80);
-    qDebug()<<achievements.GetStatusGlobal()<<achievements.GetStatusPlayer()<<achievements.GetStatusPercent();
-    PullTableWidget();
+    connect(&achievements,SIGNAL(finished()),this,SLOT(PullTableWidget()));
+    achievements.Set(key,QString::number(game.GetAppid()),id,Words[26]);
+    qDebug()<<achievements.GetStatusFinish();
+    //PullTableWidget();
 }
 void FormAchievements::PullTableWidget(){
     //int totalr=0;
     //int totalnr=0;
     ui->TableWidgetAchievements->setRowCount(achievements.GetAchievementsCount());
     ui->TableWidgetCompareAchievements->setRowCount(achievements.GetAchievementsCount()+2);
-    if(!(achievements.GetStatusGlobal()=="success"&&achievements.GetStatusPlayer()=="success"&&achievements.GetStatusPercent()=="success")){
+    if(!(achievements.GetStatusFinish()=="success")){
         ui->TableWidgetAchievements->insertRow(0);
         QTableWidgetItem* item1 = new QTableWidgetItem("Error");
         ui->TableWidgetAchievements->setItem(0,1,item1);

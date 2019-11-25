@@ -23,6 +23,7 @@ public:
     ~SAchievementsPercentage();
     void Set(QString key, QString appid);
     void Set(QJsonDocument DocAchievements);
+    void Delete(int index) { achievements.remove(index); count--;}
     SAchievementPercentage GetAchievementInfo(int index) {return achievements[index];}
     QString GetApiname(int index) {return achievements[index].GetApiname();}
     double GetPercent(int index) {return achievements[index].GetPercent();}
@@ -35,7 +36,7 @@ public:
     SAchievementsPercentage & operator=(const SAchievementsPercentage & friends);
 
 signals:
-    void finished(SAchievementsPercentage*);
+    void finished(SAchievementsPercentage);
     void finished();
 
 public slots:

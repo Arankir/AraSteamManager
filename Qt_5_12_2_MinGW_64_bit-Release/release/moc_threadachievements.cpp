@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadAchievements_t {
-    QByteArrayData data[16];
-    char stringdata0[154];
+    QByteArrayData data[17];
+    char stringdata0[206];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,14 +46,16 @@ QT_MOC_LITERAL(11, 86, 7), // "QLabel*"
 QT_MOC_LITERAL(12, 94, 17), // "LabelTotalPersent"
 QT_MOC_LITERAL(13, 112, 13), // "QTableWidget*"
 QT_MOC_LITERAL(14, 126, 23), // "TableWidgetAchievements"
-QT_MOC_LITERAL(15, 150, 3) // "num"
+QT_MOC_LITERAL(15, 150, 24), // "LabelTotalPersentCompare"
+QT_MOC_LITERAL(16, 175, 30) // "TableWidgetCompareAchievements"
 
     },
     "ThreadAchievements\0finished\0\0progress\0"
     "p\0row\0Fill\0Set\0SAchievements\0achievements\0"
     "Words\0QLabel*\0LabelTotalPersent\0"
     "QTableWidget*\0TableWidgetAchievements\0"
-    "num"
+    "LabelTotalPersentCompare\0"
+    "TableWidgetCompareAchievements"
 };
 #undef QT_MOC_LITERAL
 
@@ -76,7 +78,7 @@ static const uint qt_meta_data_ThreadAchievements[] = {
 
  // slots: name, argc, parameters, tag, flags
        6,    0,   40,    2, 0x0a /* Public */,
-       7,    5,   41,    2, 0x0a /* Public */,
+       7,    6,   41,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -84,7 +86,7 @@ static const uint qt_meta_data_ThreadAchievements[] = {
 
  // slots: parameters
     QMetaType::Int,
-    QMetaType::Void, 0x80000000 | 8, QMetaType::QStringList, 0x80000000 | 11, 0x80000000 | 13, QMetaType::Int,    9,   10,   12,   14,   15,
+    QMetaType::Void, 0x80000000 | 8, QMetaType::QStringList, 0x80000000 | 11, 0x80000000 | 13, 0x80000000 | 11, 0x80000000 | 13,    9,   10,   12,   14,   15,   16,
 
        0        // eod
 };
@@ -99,7 +101,7 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 1: _t->progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->Set((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QStringList(*)>(_a[2])),(*reinterpret_cast< QLabel*(*)>(_a[3])),(*reinterpret_cast< QTableWidget*(*)>(_a[4])),(*reinterpret_cast< int(*)>(_a[5]))); break;
+        case 3: _t->Set((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QStringList(*)>(_a[2])),(*reinterpret_cast< QLabel*(*)>(_a[3])),(*reinterpret_cast< QTableWidget*(*)>(_a[4])),(*reinterpret_cast< QLabel*(*)>(_a[5])),(*reinterpret_cast< QTableWidget*(*)>(_a[6]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -108,8 +110,10 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 4:
             case 2:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QLabel* >(); break;
+            case 5:
             case 3:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QTableWidget* >(); break;
             }

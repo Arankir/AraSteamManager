@@ -23,6 +23,7 @@ public:
     ~SAchievementsPlayer();
     void Set(QString key, QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
+    void Delete(int index) { achievements.remove(index); count--;}
     SAchievementPlayer GetAchievementInfo(int index) {return achievements[index];}
     QString GetApiname(int index) {return achievements[index].GetApiname();}
     int GetAchieved(int index) {return achievements[index].GetAchieved();}
@@ -37,7 +38,7 @@ public:
     SAchievementsPlayer & operator=(const SAchievementsPlayer & friends);
 
 signals:
-    void finished(SAchievementsPlayer*);
+    void finished(SAchievementsPlayer);
     void finished();
 
 public slots:

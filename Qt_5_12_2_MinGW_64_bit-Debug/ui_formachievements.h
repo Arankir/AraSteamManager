@@ -20,6 +20,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QScrollArea>
@@ -93,6 +94,7 @@ public:
     QPushButton *ButtonAcceptChangeCategory;
     QGroupBox *GroupBoxCategories;
     QTableWidget *TableWidgetCompareFriends;
+    QProgressBar *ProgressBarFriendsLoad;
     QHBoxLayout *horizontalLayout_3;
     QLineEdit *LineEditNameAchievements;
     QPushButton *ButtonFindAchievement;
@@ -452,6 +454,12 @@ public:
 
         verticalLayout_8->addWidget(TableWidgetCompareFriends);
 
+        ProgressBarFriendsLoad = new QProgressBar(GroupBoxFilter);
+        ProgressBarFriendsLoad->setObjectName(QString::fromUtf8("ProgressBarFriendsLoad"));
+        ProgressBarFriendsLoad->setValue(0);
+
+        verticalLayout_8->addWidget(ProgressBarFriendsLoad);
+
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         LineEditNameAchievements = new QLineEdit(GroupBoxFilter);
@@ -533,6 +541,7 @@ public:
         ButtonDeleteCategory->setText(QApplication::translate("FormAchievements", "Delete", nullptr));
         ButtonAcceptChangeCategory->setText(QApplication::translate("FormAchievements", "Accept", nullptr));
         GroupBoxCategories->setTitle(QApplication::translate("FormAchievements", "Categories", nullptr));
+        ProgressBarFriendsLoad->setFormat(QApplication::translate("FormAchievements", "%v/%m", nullptr));
         ButtonFindAchievement->setText(QApplication::translate("FormAchievements", "Find", nullptr));
     } // retranslateUi
 
