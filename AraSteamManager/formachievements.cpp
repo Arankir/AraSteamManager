@@ -47,8 +47,6 @@ void FormAchievements::InitComponents(){
     ui->RadioButtonReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
     ui->RadioButtonNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
     ui->ButtonUpdate->setIcon(QIcon(":/"+theme+"/program/"+theme+"/update.png"));
-    ui->TableWidgetAchievements->setColumnCount(7);
-    ui->TableWidgetCompareAchievements->setColumnCount(7);
     //ui->ButtonReturn->setText(" "+Words[0]);
     ui->ButtonCompare->setText(" "+Words[1]);
     ui->LabelGameLogo->setText("");
@@ -78,6 +76,8 @@ void FormAchievements::InitComponents(){
     ui->ButtonUpdate->setText(Words[36]);
     ui->CheckBoxNewCategoryOneValue->setText(Words[38]);
     ui->CheckBoxChangeCategoryOneValue->setText(Words[38]);
+    ui->TableWidgetAchievements->setColumnCount(7);
+    ui->TableWidgetCompareAchievements->setColumnCount(7);
     ui->TableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem(""));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[19]));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[20]));
@@ -216,6 +216,8 @@ void FormAchievements::PullTableWidget(){
     //int totalr=0;
     //int totalnr=0;
     ui->TableWidgetAchievements->setRowCount(achievements.GetAchievementsCount());
+    for(int i=0;i<achievements.GetAchievementsCount();i++)
+        ui->TableWidgetAchievements->setRowHeight(i,65);
     ui->TableWidgetCompareAchievements->setRowCount(achievements.GetAchievementsCount()+2);
     if(!(achievements.GetStatusFinish()=="success")){
         ui->TableWidgetAchievements->insertRow(0);
