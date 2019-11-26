@@ -57,7 +57,6 @@ int ThreadAchievements::Fill(){
     LabelTotalPersent->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+" = "+QString::number(100.0*totalr/(totalr+totalnr))+"%");
     LabelTotalPersentCompare->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n"+QString::number(100.0*totalr/(totalr+totalnr))+"%");
     TableWidgetAchievements->resizeColumnToContents(4);
-    TableWidgetAchievements->resizeRowsToContents();
     emit finished();
     return 1;
 }

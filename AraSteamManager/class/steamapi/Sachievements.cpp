@@ -113,17 +113,20 @@ void SAchievements::Set(SAchievementsPercentage Percent){
 }
 void SAchievements::SetFinish(){
     Clear();
-    for(int i=0;i<Percent.GetAchievementsCount();i++){
-        for(int j=0;j<Player.GetAchievementsCount();j++){
-            if(Percent.GetApiname(i)==Global.GetApiname(j)){
+    SAchievementsGlobal Glo = Global;
+    SAchievementsPlayer Pla = Player;
+    SAchievementsPercentage Per = Percent;
+    for(int i=0;i<Per.GetAchievementsCount();i++){
+        for(int j=0;j<Pla.GetAchievementsCount();j++){
+            if(Per.GetApiname(i)==Pla.GetApiname(j)){
                 SAchievement achievement;
-                achievement.SetPercent(Percent.GetAchievementInfo(i));
-                achievement.SetPlayer(Player.GetAchievementInfo(j));
-                achievement.SetGlobal(Global.GetAchievementInfo(j));
+                achievement.SetPercent(Per.GetAchievementInfo(i));
+                achievement.SetPlayer(Pla.GetAchievementInfo(j));
+                achievement.SetGlobal(Glo.GetAchievementInfo(j));
                 //удалить из Player и Percent
-                qDebug()<<i<<Percent.GetApiname(i)<<Global.GetApiname(j)<<Player.GetApiname(j);
-                Player.Delete(j);
-                Global.Delete(j);
+                qDebug()<<i<<Per.GetApiname(i)<<Glo.GetApiname(j)<<Pla.GetApiname(j);
+                Pla.Delete(j);
+                Glo.Delete(j);
                 Finish.push_back(achievement);
                 break;
             }

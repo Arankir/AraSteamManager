@@ -295,6 +295,7 @@ void FormAchievements::ProgressLoading(int p,int row){
     ui->TableWidgetAchievements->setCellWidget(row,6,button1);
 }
 void FormAchievements::OnFinish(){
+    ui->TableWidgetAchievements->resizeRowsToContents();
     int j=0;
     filterAchievements = new bool*[ui->TableWidgetAchievements->rowCount()];
     filterCompare = new bool*[ui->TableWidgetCompareAchievements->rowCount()];
@@ -332,11 +333,11 @@ void FormAchievements::OnResultImage(ImageRequest* imgr){
     pixmap.loadFromData(imgr->GetAnswer());
     QLabel* label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetAchievements->setCellWidget(imgr->GetRow(),1,label);
-    ui->TableWidgetAchievements->resizeRowToContents(imgr->GetRow());
     QLabel* label2 = new QLabel;
     label2->setPixmap(pixmap);
+    ui->TableWidgetAchievements->setCellWidget(imgr->GetRow(),1,label);
     ui->TableWidgetCompareAchievements->setCellWidget(imgr->GetRow()+2,1,label2);
+    ui->TableWidgetAchievements->resizeRowToContents(imgr->GetRow());
     ui->TableWidgetCompareAchievements->resizeRowToContents(imgr->GetRow()+2);
     imgr->deleteLater();
 }
@@ -592,7 +593,7 @@ void FormAchievements::on_TableWidgetCompareFriendsCellChanged(int row, int colu
             connect(&Pla,SIGNAL(finished()), &loop, SLOT(quit()));
             loop.exec();
             disconnect(&Pla,SIGNAL(finished()), &loop, SLOT(quit()));
-            SAchievements Ach;
+            SAchievements Ach=achievements;
             Ach.Set(Pla);
             if(ProfileIsPublic(Ach,col)){
                 QRadioButton* rbAll = new QRadioButton(/*Words[]*/);
@@ -845,6 +846,7 @@ bool FormAchievements::ProfileIsPublic(SAchievements achievement, int col){
         int j=0;
         bool accept=false;
         for(;j<achievement.GetAchievementsCount();j++){
+            qDebug()<<achievement.GetApiname(j)<<ui->TableWidgetCompareAchievements->item(i,0)->text();
             if(achievement.GetApiname(j)==ui->TableWidgetCompareAchievements->item(i,0)->text()){
                 accept=true;
                 break;
