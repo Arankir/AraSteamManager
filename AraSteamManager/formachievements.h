@@ -42,12 +42,12 @@ signals:
 public slots:
     void ProgressLoading(int p,int row);
     void OnFinish();
+    void SwitchSimpleCompare(int sc);
 
 private slots:
     void InitComponents();
 
     void OnResultImage(ImageRequest* imgr);
-    void SwitchSimpleCompare(int sc);
     void LoadingCompare();
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);
@@ -149,6 +149,9 @@ private slots:
 
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
+    void LoadFriend(SGames* Games);
+    void FinishLoadFriends();
+
 private:
     Ui::FormAchievements* ui;
     QString key;
@@ -175,6 +178,8 @@ private:
     int loadCompare=0;
     int type1=0;
     int type2=0;
+    int friendsCount=0;
+    QVector<SProfile> Profiles;
     QVector<QPair<SProfile,int>> friends;
 };
 

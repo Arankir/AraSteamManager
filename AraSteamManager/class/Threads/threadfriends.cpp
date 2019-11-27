@@ -91,7 +91,6 @@ int ThreadFriends::Fill(){
         TableWidgetFriends->setItem(i,5,new QTableWidgetItem(Profiles[i].GetSteamid()));
         emit progress(i,i);
     }
-    TableWidgetFriends->resizeColumnsToContents();
     emit finished();
     return 1;
 }

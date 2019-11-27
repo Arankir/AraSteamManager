@@ -124,7 +124,6 @@ void SAchievements::SetFinish(){
                 achievement.SetPlayer(Pla.GetAchievementInfo(j));
                 achievement.SetGlobal(Glo.GetAchievementInfo(j));
                 //удалить из Player и Percent
-                qDebug()<<i<<Per.GetApiname(i)<<Glo.GetApiname(j)<<Pla.GetApiname(j);
                 Pla.Delete(j);
                 Glo.Delete(j);
                 Finish.push_back(achievement);

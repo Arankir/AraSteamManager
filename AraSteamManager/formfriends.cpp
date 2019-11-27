@@ -205,6 +205,7 @@ void FormFriends::ProgressLoading(int p,int row){
 }
 
 void FormFriends::OnFinish(){
+    ui->TableWidgetFriends->resizeColumnsToContents();
     for (int i=0;i<Friends.GetCount();i++) {
         //qDebug()<<i;
         QString path = "images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg";

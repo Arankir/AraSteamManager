@@ -26,7 +26,6 @@ CONFIG += c++11
 
 SOURCES += \
     class/Threads/threadachievements.cpp \
-    class/Threads/threadcompare.cpp \
     class/Threads/threadfriends.cpp \
     class/Threads/threadgames.cpp \
     class/Threads/threading.cpp \
@@ -49,7 +48,6 @@ SOURCES += \
     class/steamapi/Sgames.cpp \
     class/steamapi/Slevels.cpp \
     class/steamapi/Sprofile.cpp \
-    formcompare.cpp \
         main.cpp \
         mainwindow.cpp \
     formgames.cpp \
@@ -59,7 +57,6 @@ SOURCES += \
 
 HEADERS += \
     class/Threads/threadachievements.h \
-    class/Threads/threadcompare.h \
     class/Threads/threadfriends.h \
     class/Threads/threadgames.h \
     class/Threads/threading.h \
@@ -82,7 +79,6 @@ HEADERS += \
     class/steamapi/Sgames.h \
     class/steamapi/Slevels.h \
     class/steamapi/Sprofile.h \
-    formcompare.h \
         mainwindow.h \
     formgames.h \
     formachievements.h \
@@ -90,7 +86,6 @@ HEADERS += \
     subform/formaddcategory.h
 
 FORMS += \
-    formcompare.ui \
         mainwindow.ui \
     formgames.ui \
     formachievements.ui \

@@ -106,7 +106,7 @@ public:
     {
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
-        FormAchievements->resize(837, 838);
+        FormAchievements->resize(837, 849);
         verticalLayout_6 = new QVBoxLayout(FormAchievements);
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         gridLayout = new QGridLayout();

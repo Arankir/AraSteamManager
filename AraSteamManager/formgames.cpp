@@ -123,6 +123,7 @@ void FormGames::ProgressLoading(int p,int row){
 }
 
 void FormGames::OnFinish(){
+    ui->TableWidgetGames->resizeColumnsToContents();
     for(int i=0;i<games.size();i++){
         QString path = "images/icon_games/"+games[i].GetImg_icon_url()+".jpg";
         if(!QFile::exists(path)){

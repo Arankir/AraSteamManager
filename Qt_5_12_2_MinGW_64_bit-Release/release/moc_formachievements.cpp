@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    QByteArrayData data[105];
-    char stringdata0[2479];
+    QByteArrayData data[109];
+    char stringdata0[2522];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,12 +39,12 @@ QT_MOC_LITERAL(4, 38, 15), // "ProgressLoading"
 QT_MOC_LITERAL(5, 54, 1), // "p"
 QT_MOC_LITERAL(6, 56, 3), // "row"
 QT_MOC_LITERAL(7, 60, 8), // "OnFinish"
-QT_MOC_LITERAL(8, 69, 14), // "InitComponents"
-QT_MOC_LITERAL(9, 84, 13), // "OnResultImage"
-QT_MOC_LITERAL(10, 98, 13), // "ImageRequest*"
-QT_MOC_LITERAL(11, 112, 4), // "imgr"
-QT_MOC_LITERAL(12, 117, 19), // "SwitchSimpleCompare"
-QT_MOC_LITERAL(13, 137, 2), // "sc"
+QT_MOC_LITERAL(8, 69, 19), // "SwitchSimpleCompare"
+QT_MOC_LITERAL(9, 89, 2), // "sc"
+QT_MOC_LITERAL(10, 92, 14), // "InitComponents"
+QT_MOC_LITERAL(11, 107, 13), // "OnResultImage"
+QT_MOC_LITERAL(12, 121, 13), // "ImageRequest*"
+QT_MOC_LITERAL(13, 135, 4), // "imgr"
 QT_MOC_LITERAL(14, 140, 14), // "LoadingCompare"
 QT_MOC_LITERAL(15, 155, 26), // "on_ComboBoxCategory_Change"
 QT_MOC_LITERAL(16, 182, 5), // "index"
@@ -135,15 +135,19 @@ QT_MOC_LITERAL(100, 2299, 43), // "on_RadioButtonCompareFriendsR..."
 QT_MOC_LITERAL(101, 2343, 46), // "on_RadioButtonCompareFriendsN..."
 QT_MOC_LITERAL(102, 2390, 39), // "on_TableWidgetCompareFriendsC..."
 QT_MOC_LITERAL(103, 2430, 6), // "column"
-QT_MOC_LITERAL(104, 2437, 41) // "on_CheckBoxCompareAllFriends_..."
+QT_MOC_LITERAL(104, 2437, 41), // "on_CheckBoxCompareAllFriends_..."
+QT_MOC_LITERAL(105, 2479, 10), // "LoadFriend"
+QT_MOC_LITERAL(106, 2490, 7), // "SGames*"
+QT_MOC_LITERAL(107, 2498, 5), // "Games"
+QT_MOC_LITERAL(108, 2504, 17) // "FinishLoadFriends"
 
     },
     "FormAchievements\0return_to_games\0\0num\0"
     "ProgressLoading\0p\0row\0OnFinish\0"
-    "InitComponents\0OnResultImage\0ImageRequest*\0"
-    "imgr\0SwitchSimpleCompare\0sc\0LoadingCompare\0"
-    "on_ComboBoxCategory_Change\0index\0"
-    "on_CheckBoxCategory_Change\0ind\0"
+    "SwitchSimpleCompare\0sc\0InitComponents\0"
+    "OnResultImage\0ImageRequest*\0imgr\0"
+    "LoadingCompare\0on_ComboBoxCategory_Change\0"
+    "index\0on_CheckBoxCategory_Change\0ind\0"
     "closeEvent\0QCloseEvent*\0returnfromcompare\0"
     "on_ButtonReturn_clicked\0UpdateHiddenRows\0"
     "PullTableWidget\0ProfileIsPublic\0"
@@ -203,7 +207,8 @@ QT_MOC_LITERAL(104, 2437, 41) // "on_CheckBoxCompareAllFriends_..."
     "on_RadioButtonCompareFriendsReached_clicked\0"
     "on_RadioButtonCompareFriendsNotReached_clicked\0"
     "on_TableWidgetCompareFriendsCellChanged\0"
-    "column\0on_CheckBoxCompareAllFriends_stateChanged"
+    "column\0on_CheckBoxCompareAllFriends_stateChanged\0"
+    "LoadFriend\0SGames*\0Games\0FinishLoadFriends"
 };
 #undef QT_MOC_LITERAL
 
@@ -213,7 +218,7 @@ static const uint qt_meta_data_FormAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      77,   14, // methods
+      79,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -221,85 +226,87 @@ static const uint qt_meta_data_FormAchievements[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  399,    2, 0x06 /* Public */,
+       1,    1,  409,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    2,  402,    2, 0x0a /* Public */,
-       7,    0,  407,    2, 0x0a /* Public */,
-       8,    0,  408,    2, 0x08 /* Private */,
-       9,    1,  409,    2, 0x08 /* Private */,
-      12,    1,  412,    2, 0x08 /* Private */,
-      14,    0,  415,    2, 0x08 /* Private */,
-      15,    1,  416,    2, 0x08 /* Private */,
-      17,    1,  419,    2, 0x08 /* Private */,
-      19,    1,  422,    2, 0x08 /* Private */,
-      21,    0,  425,    2, 0x08 /* Private */,
-      22,    0,  426,    2, 0x08 /* Private */,
-      23,    0,  427,    2, 0x08 /* Private */,
-      24,    0,  428,    2, 0x08 /* Private */,
-      25,    2,  429,    2, 0x08 /* Private */,
-      29,    0,  434,    2, 0x08 /* Private */,
-      30,    0,  435,    2, 0x08 /* Private */,
-      31,    0,  436,    2, 0x08 /* Private */,
-      32,    0,  437,    2, 0x08 /* Private */,
-      33,    0,  438,    2, 0x08 /* Private */,
-      34,    1,  439,    2, 0x08 /* Private */,
-      36,    0,  442,    2, 0x08 /* Private */,
-      37,    0,  443,    2, 0x08 /* Private */,
-      38,    0,  444,    2, 0x08 /* Private */,
-      39,    0,  445,    2, 0x08 /* Private */,
-      40,    0,  446,    2, 0x08 /* Private */,
-      41,    0,  447,    2, 0x08 /* Private */,
-      42,    0,  448,    2, 0x08 /* Private */,
-      43,    0,  449,    2, 0x08 /* Private */,
-      44,    0,  450,    2, 0x08 /* Private */,
-      45,    1,  451,    2, 0x08 /* Private */,
-      46,    0,  454,    2, 0x08 /* Private */,
-      47,    0,  455,    2, 0x08 /* Private */,
-      48,    0,  456,    2, 0x08 /* Private */,
-      49,    0,  457,    2, 0x08 /* Private */,
-      50,    0,  458,    2, 0x08 /* Private */,
-      51,    0,  459,    2, 0x08 /* Private */,
-      52,    0,  460,    2, 0x08 /* Private */,
-      53,    0,  461,    2, 0x08 /* Private */,
-      54,    0,  462,    2, 0x08 /* Private */,
-      55,    0,  463,    2, 0x08 /* Private */,
-      56,    0,  464,    2, 0x08 /* Private */,
-      57,    0,  465,    2, 0x08 /* Private */,
-      58,    0,  466,    2, 0x08 /* Private */,
-      59,    1,  467,    2, 0x08 /* Private */,
-      60,    1,  470,    2, 0x08 /* Private */,
-      61,    0,  473,    2, 0x08 /* Private */,
-      62,    0,  474,    2, 0x08 /* Private */,
-      63,    0,  475,    2, 0x08 /* Private */,
-      64,    0,  476,    2, 0x08 /* Private */,
-      65,    1,  477,    2, 0x08 /* Private */,
-      67,    2,  480,    2, 0x08 /* Private */,
-      69,    2,  485,    2, 0x08 /* Private */,
-      71,    2,  490,    2, 0x08 /* Private */,
-      73,    2,  495,    2, 0x08 /* Private */,
-      75,    1,  500,    2, 0x08 /* Private */,
-      76,    0,  503,    2, 0x08 /* Private */,
-      77,    0,  504,    2, 0x08 /* Private */,
-      78,    1,  505,    2, 0x08 /* Private */,
-      80,    2,  508,    2, 0x08 /* Private */,
-      84,    2,  513,    2, 0x08 /* Private */,
-      86,    3,  518,    2, 0x08 /* Private */,
-      87,    3,  525,    2, 0x08 /* Private */,
-      88,    2,  532,    2, 0x08 /* Private */,
-      91,    0,  537,    2, 0x08 /* Private */,
-      92,    0,  538,    2, 0x08 /* Private */,
-      93,    0,  539,    2, 0x08 /* Private */,
-      94,    1,  540,    2, 0x08 /* Private */,
-      95,    1,  543,    2, 0x08 /* Private */,
-      96,    1,  546,    2, 0x08 /* Private */,
-      97,    1,  549,    2, 0x08 /* Private */,
-      98,    1,  552,    2, 0x08 /* Private */,
-      99,    0,  555,    2, 0x08 /* Private */,
-     100,    0,  556,    2, 0x08 /* Private */,
-     101,    0,  557,    2, 0x08 /* Private */,
-     102,    2,  558,    2, 0x08 /* Private */,
-     104,    1,  563,    2, 0x08 /* Private */,
+       4,    2,  412,    2, 0x0a /* Public */,
+       7,    0,  417,    2, 0x0a /* Public */,
+       8,    1,  418,    2, 0x0a /* Public */,
+      10,    0,  421,    2, 0x08 /* Private */,
+      11,    1,  422,    2, 0x08 /* Private */,
+      14,    0,  425,    2, 0x08 /* Private */,
+      15,    1,  426,    2, 0x08 /* Private */,
+      17,    1,  429,    2, 0x08 /* Private */,
+      19,    1,  432,    2, 0x08 /* Private */,
+      21,    0,  435,    2, 0x08 /* Private */,
+      22,    0,  436,    2, 0x08 /* Private */,
+      23,    0,  437,    2, 0x08 /* Private */,
+      24,    0,  438,    2, 0x08 /* Private */,
+      25,    2,  439,    2, 0x08 /* Private */,
+      29,    0,  444,    2, 0x08 /* Private */,
+      30,    0,  445,    2, 0x08 /* Private */,
+      31,    0,  446,    2, 0x08 /* Private */,
+      32,    0,  447,    2, 0x08 /* Private */,
+      33,    0,  448,    2, 0x08 /* Private */,
+      34,    1,  449,    2, 0x08 /* Private */,
+      36,    0,  452,    2, 0x08 /* Private */,
+      37,    0,  453,    2, 0x08 /* Private */,
+      38,    0,  454,    2, 0x08 /* Private */,
+      39,    0,  455,    2, 0x08 /* Private */,
+      40,    0,  456,    2, 0x08 /* Private */,
+      41,    0,  457,    2, 0x08 /* Private */,
+      42,    0,  458,    2, 0x08 /* Private */,
+      43,    0,  459,    2, 0x08 /* Private */,
+      44,    0,  460,    2, 0x08 /* Private */,
+      45,    1,  461,    2, 0x08 /* Private */,
+      46,    0,  464,    2, 0x08 /* Private */,
+      47,    0,  465,    2, 0x08 /* Private */,
+      48,    0,  466,    2, 0x08 /* Private */,
+      49,    0,  467,    2, 0x08 /* Private */,
+      50,    0,  468,    2, 0x08 /* Private */,
+      51,    0,  469,    2, 0x08 /* Private */,
+      52,    0,  470,    2, 0x08 /* Private */,
+      53,    0,  471,    2, 0x08 /* Private */,
+      54,    0,  472,    2, 0x08 /* Private */,
+      55,    0,  473,    2, 0x08 /* Private */,
+      56,    0,  474,    2, 0x08 /* Private */,
+      57,    0,  475,    2, 0x08 /* Private */,
+      58,    0,  476,    2, 0x08 /* Private */,
+      59,    1,  477,    2, 0x08 /* Private */,
+      60,    1,  480,    2, 0x08 /* Private */,
+      61,    0,  483,    2, 0x08 /* Private */,
+      62,    0,  484,    2, 0x08 /* Private */,
+      63,    0,  485,    2, 0x08 /* Private */,
+      64,    0,  486,    2, 0x08 /* Private */,
+      65,    1,  487,    2, 0x08 /* Private */,
+      67,    2,  490,    2, 0x08 /* Private */,
+      69,    2,  495,    2, 0x08 /* Private */,
+      71,    2,  500,    2, 0x08 /* Private */,
+      73,    2,  505,    2, 0x08 /* Private */,
+      75,    1,  510,    2, 0x08 /* Private */,
+      76,    0,  513,    2, 0x08 /* Private */,
+      77,    0,  514,    2, 0x08 /* Private */,
+      78,    1,  515,    2, 0x08 /* Private */,
+      80,    2,  518,    2, 0x08 /* Private */,
+      84,    2,  523,    2, 0x08 /* Private */,
+      86,    3,  528,    2, 0x08 /* Private */,
+      87,    3,  535,    2, 0x08 /* Private */,
+      88,    2,  542,    2, 0x08 /* Private */,
+      91,    0,  547,    2, 0x08 /* Private */,
+      92,    0,  548,    2, 0x08 /* Private */,
+      93,    0,  549,    2, 0x08 /* Private */,
+      94,    1,  550,    2, 0x08 /* Private */,
+      95,    1,  553,    2, 0x08 /* Private */,
+      96,    1,  556,    2, 0x08 /* Private */,
+      97,    1,  559,    2, 0x08 /* Private */,
+      98,    1,  562,    2, 0x08 /* Private */,
+      99,    0,  565,    2, 0x08 /* Private */,
+     100,    0,  566,    2, 0x08 /* Private */,
+     101,    0,  567,    2, 0x08 /* Private */,
+     102,    2,  568,    2, 0x08 /* Private */,
+     104,    1,  573,    2, 0x08 /* Private */,
+     105,    1,  576,    2, 0x08 /* Private */,
+     108,    0,  579,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -307,9 +314,9 @@ static const uint qt_meta_data_FormAchievements[] = {
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    5,    6,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 10,   11,
-    QMetaType::Void, QMetaType::Int,   13,
+    QMetaType::Void, 0x80000000 | 12,   13,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void, QMetaType::Int,   18,
@@ -381,6 +388,8 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,  103,
     QMetaType::Void, QMetaType::Int,   35,
+    QMetaType::Void, 0x80000000 | 106,  107,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -394,9 +403,9 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 0: _t->return_to_games((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->OnFinish(); break;
-        case 3: _t->InitComponents(); break;
-        case 4: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
-        case 5: _t->SwitchSimpleCompare((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->SwitchSimpleCompare((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->InitComponents(); break;
+        case 5: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
         case 6: _t->LoadingCompare(); break;
         case 7: _t->on_ComboBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 8: _t->on_CheckBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -469,12 +478,14 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 74: _t->on_RadioButtonCompareFriendsNotReached_clicked(); break;
         case 75: _t->on_TableWidgetCompareFriendsCellChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 76: _t->on_CheckBoxCompareAllFriends_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 77: _t->LoadFriend((*reinterpret_cast< SGames*(*)>(_a[1]))); break;
+        case 78: _t->FinishLoadFriends(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 4:
+        case 5:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -500,6 +511,13 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 2:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QFormLayout* >(); break;
+            }
+            break;
+        case 77:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SGames* >(); break;
             }
             break;
         }
@@ -544,13 +562,13 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 77)
+        if (_id < 79)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 77;
+        _id -= 79;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 77)
+        if (_id < 79)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 77;
+        _id -= 79;
     }
     return _id;
 }

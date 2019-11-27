@@ -16,6 +16,7 @@ public:
     ~SGames();
     void Set(QString key, QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
+    void SetIndex(int i) {ind=i;}
     SGame GetGame(int index) {return SGame(games[index].toObject());}
     int GetAppid(int index) {return games[index].toObject().value("appid").toInt();}
     QString GetName(int index) {return games[index].toObject().value("name").toString();}
@@ -24,6 +25,8 @@ public:
     QString GetImg_icon_url(int index) {return games[index].toObject().value("img_icon_url").toString();}
     QString GetImg_logo_url(int index) {return games[index].toObject().value("img_logo_url").toString();}
     bool GetHas_community_visible_stats(int index) {return games[index].toObject().value("has_community_visible_stats").toBool();}
+    QString GetID() {return id;}
+    int GetIndex() {return ind;}
     QString GetStatus() {return status;}
     int GetCount() {return games.size();}
     void Update(bool parallel);
@@ -44,6 +47,7 @@ private:
     QString status="none";
     QString id;
     QString key;
+    int ind=-1;
     bool free_games=false;
     bool game_info=false;
 };
