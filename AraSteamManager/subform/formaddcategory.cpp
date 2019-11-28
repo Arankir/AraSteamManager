@@ -26,7 +26,7 @@ FormAddCategory::~FormAddCategory(){
 
 void FormAddCategory::on_ButtonAddValue_clicked(){
     CategoryValue* val = new CategoryValue(count++);
-    Values.push_back(val);
+    Values.append(val);
     QWidget* wid = new QWidget;
     wid->setLayout(val);
     lay->addRow(wid);
@@ -59,9 +59,6 @@ void FormAddCategory::on_ButtonAccept_clicked(){
 void FormAddCategory::on_ButtonCancel_clicked(){
     emit cancel();
 }
-void FormAddCategory::on_CheckBoxSelectAll_stateChanged(int arg1){
-
-}
 void FormAddCategory::on_CheckBoxNoValue_stateChanged(int arg1){
     switch (arg1) {
     case 0:{
@@ -84,14 +81,12 @@ QString FormAddCategory::GetTitle(){
 }
 
 void FormAddCategory::ChangePosition(int pos, int posnew){
-    if(posnew>=0&&posnew<=count){
-        CategoryValue* temp = Values[pos];
-        Values[pos]=Values[posnew];
-        Values[posnew]=temp;
-        delete temp;
-        while(lay->rowCount()>0)
-            lay->removeRow(0);
+    if(posnew>=0&&posnew<count){
+        Values[pos]->SetPosition(posnew);
+        std::swap(Values[pos],Values[posnew]);
+
         for (int i=0;i<count;i++) {
+            lay->takeAt(0);
             QWidget* wid = new QWidget;
             wid->setLayout(Values[i]);
             lay->addRow(wid);

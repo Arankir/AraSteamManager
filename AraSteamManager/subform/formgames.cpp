@@ -51,6 +51,18 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setRowCount(games.count());
     for (int i=0;i<games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
+        QPushButton* button1 = new QPushButton(Words[4]);
+        button1->setMinimumSize(QSize(25,25));
+        connect(button1,&QPushButton::pressed,this,&FormGames::AchievementsClicked);
+        button1->setObjectName("ButtonAchievements"+QString::number(i));
+        ui->TableWidgetGames->setCellWidget(i,2,button1);
+
+        QPushButton* button2 = new QPushButton;
+        button2->setIcon(Favorite);
+        button2->setMinimumSize(QSize(25,25));
+        connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
+        button2->setObjectName("ButtonFavorites"+QString::number(i));
+        ui->TableWidgetGames->setCellWidget(i,3,button2);
     }
     ui->TableWidgetGames->setColumnWidth(0,33);
     ui->TableWidgetGames->setColumnWidth(1,300);
@@ -58,18 +70,7 @@ void FormGames::InitComponents(){
     LoadTable.AddThreadGames(ui->TableWidgetGames,games);
 }
 void FormGames::ProgressLoading(int p,int row){
-    QPushButton* button1 = new QPushButton(Words[4]);
-    button1->setMinimumSize(QSize(25,25));
-    connect(button1,&QPushButton::pressed,this,&FormGames::AchievementsClicked);
-    button1->setObjectName("ButtonAchievements"+QString::number(p));
-    ui->TableWidgetGames->setCellWidget(row,2,button1);
 
-    QPushButton* button2 = new QPushButton;
-    button2->setIcon(Favorite);
-    button2->setMinimumSize(QSize(25,25));
-    connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
-    button2->setObjectName("ButtonFavorites"+QString::number(p));
-    ui->TableWidgetGames->setCellWidget(row,3,button2);
 }
 void FormGames::OnFinish(){
     ui->TableWidgetGames->resizeColumnsToContents();

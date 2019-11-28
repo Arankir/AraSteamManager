@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAddCategory_t {
     QByteArrayData data[27];
-    char stringdata0[357];
+    char stringdata0[352];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -55,9 +55,9 @@ QT_MOC_LITERAL(20, 200, 11), // "DeleteValue"
 QT_MOC_LITERAL(21, 212, 25), // "on_ButtonAddValue_clicked"
 QT_MOC_LITERAL(22, 238, 23), // "on_ButtonAccept_clicked"
 QT_MOC_LITERAL(23, 262, 23), // "on_ButtonCancel_clicked"
-QT_MOC_LITERAL(24, 286, 33), // "on_CheckBoxSelectAll_stateCha..."
-QT_MOC_LITERAL(25, 320, 4), // "arg1"
-QT_MOC_LITERAL(26, 325, 31) // "on_CheckBoxNoValue_stateChanged"
+QT_MOC_LITERAL(24, 286, 28), // "on_CheckBoxSelectAll_clicked"
+QT_MOC_LITERAL(25, 315, 31), // "on_CheckBoxNoValue_stateChanged"
+QT_MOC_LITERAL(26, 347, 4) // "arg1"
 
     },
     "FormAddCategory\0valuechange\0\0pos\0value\0"
@@ -68,8 +68,8 @@ QT_MOC_LITERAL(26, 325, 31) // "on_CheckBoxNoValue_stateChanged"
     "ChangeSelect\0DeleteValue\0"
     "on_ButtonAddValue_clicked\0"
     "on_ButtonAccept_clicked\0on_ButtonCancel_clicked\0"
-    "on_CheckBoxSelectAll_stateChanged\0"
-    "arg1\0on_CheckBoxNoValue_stateChanged"
+    "on_CheckBoxSelectAll_clicked\0"
+    "on_CheckBoxNoValue_stateChanged\0arg1"
 };
 #undef QT_MOC_LITERAL
 
@@ -106,8 +106,8 @@ static const uint qt_meta_data_FormAddCategory[] = {
       21,    0,  163,    2, 0x08 /* Private */,
       22,    0,  164,    2, 0x08 /* Private */,
       23,    0,  165,    2, 0x08 /* Private */,
-      24,    1,  166,    2, 0x08 /* Private */,
-      26,    1,  169,    2, 0x08 /* Private */,
+      24,    0,  166,    2, 0x08 /* Private */,
+      25,    1,  167,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::QString,    3,    4,
@@ -129,8 +129,8 @@ static const uint qt_meta_data_FormAddCategory[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   25,
-    QMetaType::Void, QMetaType::Int,   25,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   26,
 
        0        // eod
 };
@@ -158,7 +158,7 @@ void FormAddCategory::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 14: _t->on_ButtonAddValue_clicked(); break;
         case 15: _t->on_ButtonAccept_clicked(); break;
         case 16: _t->on_ButtonCancel_clicked(); break;
-        case 17: _t->on_CheckBoxSelectAll_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->on_CheckBoxSelectAll_clicked(); break;
         case 18: _t->on_CheckBoxNoValue_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }

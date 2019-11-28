@@ -44,10 +44,9 @@ private slots:
     void on_ButtonAddValue_clicked();
     void on_ButtonAccept_clicked();
     void on_ButtonCancel_clicked();
-    void on_CheckBoxSelectAll_stateChanged(int arg1);
+    void on_CheckBoxSelectAll_clicked();
     void on_CheckBoxNoValue_stateChanged(int arg1);
 
-    void on_CheckBoxSelectAll_clicked();
 
 private:
     Ui::FormAddCategory* ui;

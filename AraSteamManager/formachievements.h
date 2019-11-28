@@ -19,6 +19,7 @@
 #include <class/settings.h>
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
+#include <subform/formcategoryvalue.h>
 #include <subform/formaddcategory.h>
 #include <class/Threads/threading.h>
 
@@ -150,6 +151,24 @@ private slots:
     void LoadFriend(SGames* Games);
     void FinishLoadFriends();
 
+    void on_ComboBoxCategoriesCategory_currentIndexChanged(int index);
+
+    void on_LineEditTitleCategoryChangeCategory_editingFinished();
+
+    void on_ButtonAddValueCategory_clicked();
+
+    void on_CheckBoxCategoryOneValue_stateChanged(int arg1);
+
+    void on_ButtonCancelCategory_clicked();
+
+    void on_ButtonDeleteCategory_2_clicked();
+
+    void on_ButtonAcceptCategory_clicked();
+
+    void on_ComboBoxCategoriesCategory_activated(int index);
+
+    void on_ChangeTitleCategory_OneValue();
+
 private:
     Ui::FormAchievements* ui;
     QString key;
@@ -163,6 +182,7 @@ private:
     int colfilterCompare=3;
     QFormLayout* newcategoryvalueslayout;
     QFormLayout* changecategoryvalueslayout;
+    QFormLayout* categoryvalueslayout;
     QStringList Words;
     Settings Setting;
     QString theme="white";
@@ -179,6 +199,9 @@ private:
     int friendsCount=0;
     QVector<SProfile> Profiles;
     QVector<QPair<SProfile,int>> friends;
+
+    int typecategory=0;
+    QVector<FormCategoryValue*> Values;
 };
 
 #endif // FORMACHIEVEMENTS_H

@@ -52,6 +52,7 @@ SOURCES += \
         mainwindow.cpp \
     formachievements.cpp \
     subform/formaddcategory.cpp \
+    subform/formcategoryvalue.cpp \
     subform/formfriends.cpp \
     subform/formgames.cpp
 
@@ -82,6 +83,7 @@ HEADERS += \
         mainwindow.h \
     formachievements.h \
     subform/formaddcategory.h \
+    subform/formcategoryvalue.h \
     subform/formfriends.h \
     subform/formgames.h
 
@@ -89,6 +91,7 @@ FORMS += \
         mainwindow.ui \
     formachievements.ui \
     subform/formaddcategory.ui \
+    subform/formcategoryvalue.ui \
     subform/formfriends.ui \
     subform/formgames.ui
 
