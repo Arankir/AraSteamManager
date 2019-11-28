@@ -66,7 +66,7 @@ void CategoryValue::OnChangeSelect(){
 }
 
 void CategoryValue::SetSelect(bool select){
-    Select->setChecked(select);
+    Visible->setChecked(select);
 }
 
 CategoryValue::~CategoryValue(){

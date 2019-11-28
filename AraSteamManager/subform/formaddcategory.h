@@ -47,6 +47,8 @@ private slots:
     void on_CheckBoxSelectAll_stateChanged(int arg1);
     void on_CheckBoxNoValue_stateChanged(int arg1);
 
+    void on_CheckBoxSelectAll_clicked();
+
 private:
     Ui::FormAddCategory* ui;
     QString game;

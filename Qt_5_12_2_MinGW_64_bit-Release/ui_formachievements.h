@@ -34,15 +34,19 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievements
 {
 public:
-    QVBoxLayout *verticalLayout_6;
-    QGridLayout *gridLayout;
-    QPushButton *ButtonCompare;
-    QCheckBox *CheckBoxShowFilter;
+    QVBoxLayout *verticalLayout_7;
+    QHBoxLayout *horizontalLayout_8;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *LabelGameLogo;
-    QLabel *LabelGameTitle;
+    QVBoxLayout *verticalLayout_6;
+    QHBoxLayout *horizontalLayout_6;
     QSpacerItem *horizontalSpacer_3;
+    QPushButton *ButtonCompare;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *LabelGameTitle;
+    QSpacerItem *horizontalSpacer;
+    QCheckBox *CheckBoxShowFilter;
     QLabel *LabelGameOnline;
     QGroupBox *GroupBoxFilter;
     QVBoxLayout *verticalLayout_8;
@@ -107,21 +111,10 @@ public:
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
         FormAchievements->resize(837, 849);
-        verticalLayout_6 = new QVBoxLayout(FormAchievements);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        ButtonCompare = new QPushButton(FormAchievements);
-        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
-
-        gridLayout->addWidget(ButtonCompare, 0, 3, 1, 2);
-
-        CheckBoxShowFilter = new QCheckBox(FormAchievements);
-        CheckBoxShowFilter->setObjectName(QString::fromUtf8("CheckBoxShowFilter"));
-        CheckBoxShowFilter->setChecked(true);
-
-        gridLayout->addWidget(CheckBoxShowFilter, 1, 4, 1, 1);
-
+        verticalLayout_7 = new QVBoxLayout(FormAchievements);
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         groupBox = new QGroupBox(FormAchievements);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
@@ -142,8 +135,26 @@ public:
         gridLayout_5->addWidget(LabelGameLogo, 0, 0, 1, 1);
 
 
-        gridLayout->addWidget(groupBox, 0, 0, 3, 1);
+        horizontalLayout_8->addWidget(groupBox);
 
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_6->addItem(horizontalSpacer_3);
+
+        ButtonCompare = new QPushButton(FormAchievements);
+        ButtonCompare->setObjectName(QString::fromUtf8("ButtonCompare"));
+
+        horizontalLayout_6->addWidget(ButtonCompare);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_6);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
         LabelGameTitle = new QLabel(FormAchievements);
         LabelGameTitle->setObjectName(QString::fromUtf8("LabelGameTitle"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -159,11 +170,20 @@ public:
         font.setWeight(50);
         LabelGameTitle->setFont(font);
 
-        gridLayout->addWidget(LabelGameTitle, 1, 1, 1, 1);
+        horizontalLayout_7->addWidget(LabelGameTitle);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        gridLayout->addItem(horizontalSpacer_3, 0, 1, 1, 2);
+        horizontalLayout_7->addItem(horizontalSpacer);
+
+        CheckBoxShowFilter = new QCheckBox(FormAchievements);
+        CheckBoxShowFilter->setObjectName(QString::fromUtf8("CheckBoxShowFilter"));
+        CheckBoxShowFilter->setChecked(true);
+
+        horizontalLayout_7->addWidget(CheckBoxShowFilter);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_7);
 
         LabelGameOnline = new QLabel(FormAchievements);
         LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
@@ -173,10 +193,13 @@ public:
         font1.setPointSize(10);
         LabelGameOnline->setFont(font1);
 
-        gridLayout->addWidget(LabelGameOnline, 2, 1, 1, 4);
+        verticalLayout_6->addWidget(LabelGameOnline);
 
 
-        verticalLayout_6->addLayout(gridLayout);
+        horizontalLayout_8->addLayout(verticalLayout_6);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_8);
 
         GroupBoxFilter = new QGroupBox(FormAchievements);
         GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
@@ -441,6 +464,8 @@ public:
 
         GroupBoxCategories = new QGroupBox(GroupBoxFilter);
         GroupBoxCategories->setObjectName(QString::fromUtf8("GroupBoxCategories"));
+        sizePolicy2.setHeightForWidth(GroupBoxCategories->sizePolicy().hasHeightForWidth());
+        GroupBoxCategories->setSizePolicy(sizePolicy2);
 
         verticalLayout_8->addWidget(GroupBoxCategories);
 
@@ -477,7 +502,7 @@ public:
         verticalLayout_8->addLayout(horizontalLayout_3);
 
 
-        verticalLayout_6->addWidget(GroupBoxFilter);
+        verticalLayout_7->addWidget(GroupBoxFilter);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
@@ -493,7 +518,7 @@ public:
         horizontalLayout_5->addWidget(TableWidgetCompareAchievements);
 
 
-        verticalLayout_6->addLayout(horizontalLayout_5);
+        verticalLayout_7->addLayout(horizontalLayout_5);
 
 
         retranslateUi(FormAchievements);
@@ -504,11 +529,11 @@ public:
     void retranslateUi(QWidget *FormAchievements)
     {
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
-        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
-        CheckBoxShowFilter->setText(QApplication::translate("FormAchievements", "Show Filter", nullptr));
         groupBox->setTitle(QString());
         LabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
+        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
         LabelGameTitle->setText(QApplication::translate("FormAchievements", "GameTitle", nullptr));
+        CheckBoxShowFilter->setText(QApplication::translate("FormAchievements", "Show Filter", nullptr));
         LabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         GroupBoxFilter->setAccessibleName(QApplication::translate("FormAchievements", "Filter", nullptr));

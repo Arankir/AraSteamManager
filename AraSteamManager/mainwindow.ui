@@ -15,21 +15,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>3</number>
-    </property>
-    <property name="leftMargin">
-     <number>3</number>
-    </property>
-    <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
-     <number>3</number>
-    </property>
-    <property name="bottomMargin">
-     <number>3</number>
-    </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
@@ -69,7 +54,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QPushButton" name="ButtonBack">
         <property name="text">
@@ -84,30 +69,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="ButtonSetProfile">
-        <property name="text">
-         <string>Set as my profile</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
        <widget class="QLineEdit" name="LineEditIdProfile">
         <property name="styleSheet">
@@ -125,6 +86,30 @@ color: rgb(26, 26, 26);</string>
          <string>Find</string>
         </property>
        </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="ButtonSetProfile">
+        <property name="text">
+         <string>Set as my profile</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -153,8 +138,8 @@ color: rgb(26, 26, 26);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>651</width>
-         <height>181</height>
+         <width>639</width>
+         <height>150</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -454,8 +439,8 @@ color: rgb(26, 26, 26);</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>649</width>
-           <height>281</height>
+           <width>637</width>
+           <height>285</height>
           </rect>
          </property>
         </widget>

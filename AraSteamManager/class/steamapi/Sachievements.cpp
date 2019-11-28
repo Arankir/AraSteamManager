@@ -31,85 +31,28 @@ void SAchievements::Set(SAchievementsGlobal Global, SAchievementsPlayer Player, 
     Set(Player);
 }
 void SAchievements::Set(SAchievementsPlayer Player){
-    qDebug()<<"Player w";
+    qDebug()<<"Player set";
     this->Player=Player;
     statusplayer="success";
     if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
         SetFinish();
     }
-    /*if(count>0){
-        for (int i=0;i<count;i++) {
-            for (int j=0;j<Player.GetAchievementsCount();j++) {
-                if(achievements[i].GetApiname()==Player.GetApiname(j)){
-                    achievements[i].SetPlayer(Player.GetAchievementInfo(j));
-                    break;
-                }
-            }
-        }
-    } else {
-        for (int i=0;i<Player.GetAchievementsCount();i++) {
-            SAchievement ach;
-            ach.SetPlayer(Player.GetAchievementInfo(i));
-            achievements.push_back(ach);
-        }
-        count=Player.GetAchievementsCount();
-    }*/
 }
 void SAchievements::Set(SAchievementsGlobal Global){
-    qDebug()<<"Global w";
+    qDebug()<<"Global set";
     this->Global=Global;
     statusglobal="success";
     if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
         SetFinish();
     }
-    /*if(count>0){
-        for (int i=0;i<count;i++) {
-            for (int j=0;j<Global.GetAchievementsCount();j++) {
-                //qDebug()<<achievements[i].GetApiname()<<Global.GetApiname(j);
-                if(achievements[i].GetApiname()==Global.GetApiname(j)){
-                    achievements[i].SetGlobal(Global.GetAchievementInfo(j));
-                    break;
-                }
-            }
-        }
-    } else {
-        for (int i=0;i<Global.GetAchievementsCount();i++) {
-            SAchievement ach;
-            ach.SetGlobal(Global.GetAchievementInfo(i));
-            achievements.push_back(ach);
-        }
-        count=Global.GetAchievementsCount();
-    }
-    gamename=Global.GetGamename();
-    gameversion=Global.GetGameversion();
-    statusglobal="success";*/
 }
 void SAchievements::Set(SAchievementsPercentage Percent){
-    qDebug()<<"Percent w";
+    qDebug()<<"Percent set";
     this->Percent=Percent;
     statuspercent="success";
     if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
         SetFinish();
     }
-    /*if(count>0){
-        for (int i=0;i<count;i++) {
-            for (int j=0;j<Percent.GetAchievementsCount();j++) {
-                if(achievements[i].GetApiname()==Percent.GetApiname(j)){
-                    achievements[i].SetPercent(Percent.GetAchievementInfo(j));
-                    break;
-                }
-            }
-        }
-    } else {
-        for (int i=0;i<Percent.GetAchievementsCount();i++) {
-            SAchievement ach;
-            ach.SetPercent(Percent.GetAchievementInfo(i));
-            achievements.push_back(ach);
-        }
-        count=Percent.GetAchievementsCount();
-        Sort();
-    }
-    statuspercent="success";*/
 }
 void SAchievements::SetFinish(){
     Clear();
@@ -123,7 +66,6 @@ void SAchievements::SetFinish(){
                 achievement.SetPercent(Per.GetAchievementInfo(i));
                 achievement.SetPlayer(Pla.GetAchievementInfo(j));
                 achievement.SetGlobal(Glo.GetAchievementInfo(j));
-                //удалить из Player и Percent
                 Pla.Delete(j);
                 Glo.Delete(j);
                 Finish.push_back(achievement);

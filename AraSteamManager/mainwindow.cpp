@@ -47,9 +47,10 @@ MainWindow::MainWindow(QWidget* parent) :    QMainWindow(parent),    ui(new Ui::
     }
 }
 
+#define Init {
 void MainWindow::InitComponents(){
     ui->LabelAvatar->setText("");
-    ui->LabelLogo->setText("(WIP)");
+    ui->LabelLogo->setPixmap(QPixmap(":/program/program/logo.png"));
     ui->LabelTimeCreated->setText("");
     ui->LabelPersonaState->setText("");
     ui->LabelLocCountryCode->setText("");
@@ -99,11 +100,12 @@ void MainWindow::InitComponents(){
     //    ui->ButtonSettings->setIconSize(pixmap.rect().size());
     //    ui->ButtonStatistics->setIconSize(QSize(13,13));
 }
-
 void MainWindow::ProgressLoading(int p,int){
     ui->FormProgressBar->setValue(p);
 }
+#define InitEnd }
 
+#define System {
 void MainWindow::ShowGames(){
     ui->FormProgressBar->setVisible(false);
     gamesform->setVisible(true);
@@ -112,13 +114,11 @@ void MainWindow::ShowFriends(){
     ui->FormProgressBar->setVisible(false);
     friendsform->setVisible(true);
 }
-
 void MainWindow::keyPressEvent(QKeyEvent* event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
     if(event->key() == 16777220)
         on_ButtonFindProfile_clicked();
 }
-
 MainWindow::~MainWindow(){
     delete ui;
     //if(gamesform)
@@ -140,7 +140,9 @@ void MainWindow::returnfromfriends(){
     delete friendsform;
     windowchild=0;
 }
+#define SystemEnd }
 
+#define Functions {
 void MainWindow::on_ButtonFindProfile_clicked(){
     QString id=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove("/").remove('\r');
     if(ui->LineEditIdProfile->text().indexOf("id",0)>-1){
@@ -160,7 +162,6 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
             returnfromfriends();
         if(windowchild==1)
             returnfromgames();
-        qDebug()<<BufferProfiles.size()<<BufferProfiles<<CurrentBufferProfile;
         if(UpdateBuffer){
             if(CurrentBufferProfile!=BufferProfiles.size())
                 while(BufferProfiles.size()!=CurrentBufferProfile)
@@ -176,7 +177,7 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
             ui->ButtonBack->setEnabled(false);
         else
             ui->ButtonBack->setEnabled(true);
-        qDebug()<<BufferProfiles.size()<<BufferProfiles<<CurrentBufferProfile;
+        qDebug()<<"Буфер профилей"<<BufferProfiles<<CurrentBufferProfile<<"/"<<BufferProfiles.size();
         Profile=Profiles;
         Games.Clear();
         Friends.Clear();
@@ -279,7 +280,6 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
         disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
         QPixmap img;
         img.loadFromData(imagereply.readAll());
-        qDebug()<<img;
         ui->LabelAvatar->setPixmap(img);
         ui->LabelNick->setText(Profile.GetPersonaname());
         //img.save("images/profiles/main.png", "PNG");
@@ -306,20 +306,12 @@ void MainWindow::on_ButtonGames_clicked(){
     }
     if(windowchild!=1){
         windowchild=1;
-        //if(windowchildcount==0){
-            //windowchildcount++;
-            ui->FormProgressBar->setMaximum(Games.GetCount());
-            gamesform = new FormGames(Profile.GetSteamid(),key,Games,this);
-            connect(gamesform,&FormGames::return_to_profile,this,&MainWindow::returnfromgames);
-            //QFormLayout* lay = new QFormLayout;
-            //lay->addWidget(gamesform);
-            //ui->ScrollAreaForm->setLayout(lay);
-            ui->ScrollAreaForm->setWidget(gamesform);
-            //ui->ScrollAreaForm->setVisible(true);
-            ui->FormProgressBar->setVisible(true);
-            gamesform->setVisible(false);
-            //this->setVisible(false);
-        //}
+        ui->FormProgressBar->setMaximum(Games.GetCount());
+        gamesform = new FormGames(Profile.GetSteamid(),key,Games,this);
+        connect(gamesform,&FormGames::return_to_profile,this,&MainWindow::returnfromgames);
+        ui->ScrollAreaForm->setWidget(gamesform);
+        ui->FormProgressBar->setVisible(true);
+        gamesform->setVisible(false);
     }
 }
 void MainWindow::on_ButtonFriends_clicked(){
@@ -328,21 +320,13 @@ void MainWindow::on_ButtonFriends_clicked(){
     }
     if(windowchild!=2){
         windowchild=2;
-        //if(windowchildcount==0){
-            //windowchildcount++;
-            ui->FormProgressBar->setMaximum(Friends.GetCount());
-            friendsform = new FormFriends(Profile.GetSteamid(),key,Friends,this);
-            connect(friendsform,&FormFriends::return_to_profile,this,&MainWindow::returnfromfriends);
-            connect(friendsform,&FormFriends::go_to_profile,this,&MainWindow::GoToProfile);
-            //QFormLayout* lay = new QFormLayout;
-            //lay->addWidget(friendsform);
-            ui->ScrollAreaForm->setWidget(friendsform);//setLayout(lay);
-            //ui->ScrollAreaForm->setVisible(true);
-            ui->FormProgressBar->setVisible(true);
-            friendsform->setVisible(false);
-            //friendsform->show();
-            //this->setVisible(false);
-        //}
+        ui->FormProgressBar->setMaximum(Friends.GetCount());
+        friendsform = new FormFriends(Profile.GetSteamid(),key,Friends,this);
+        connect(friendsform,&FormFriends::return_to_profile,this,&MainWindow::returnfromfriends);
+        connect(friendsform,&FormFriends::go_to_profile,this,&MainWindow::GoToProfile);
+        ui->ScrollAreaForm->setWidget(friendsform);
+        ui->FormProgressBar->setVisible(true);
+        friendsform->setVisible(false);
     }
 }
 void MainWindow::on_ButtonFavorites_clicked(){
@@ -358,7 +342,6 @@ void MainWindow::on_ButtonGoToMyProfile_clicked(){
         QMessageBox::warning(this,Words[30],Words[32]);
     }
 }
-
 void MainWindow::on_ButtonSetProfile_clicked(){
     if(Setting.SetMyProfile(Profile.GetSteamid())){
         ui->ButtonSetProfile->setEnabled(false);
@@ -368,13 +351,12 @@ void MainWindow::on_ButtonSetProfile_clicked(){
 void MainWindow::on_ButtonExit_clicked(){
     close();
 }
-
 void MainWindow::on_ButtonBack_clicked(){
     if(CurrentBufferProfile>1)
         GoToProfile(BufferProfiles[--CurrentBufferProfile-1],"url",false);
 }
-
 void MainWindow::on_ButtonNext_clicked(){
     if(CurrentBufferProfile<BufferProfiles.size())
         GoToProfile(BufferProfiles[++CurrentBufferProfile-1],"url",false);
 }
+#define FunctionsEnd }

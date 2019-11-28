@@ -50,10 +50,10 @@ SOURCES += \
     class/steamapi/Sprofile.cpp \
         main.cpp \
         mainwindow.cpp \
-    formgames.cpp \
     formachievements.cpp \
-    formfriends.cpp \
-    subform/formaddcategory.cpp
+    subform/formaddcategory.cpp \
+    subform/formfriends.cpp \
+    subform/formgames.cpp
 
 HEADERS += \
     class/Threads/threadachievements.h \
@@ -80,17 +80,17 @@ HEADERS += \
     class/steamapi/Slevels.h \
     class/steamapi/Sprofile.h \
         mainwindow.h \
-    formgames.h \
     formachievements.h \
-    formfriends.h \
-    subform/formaddcategory.h
+    subform/formaddcategory.h \
+    subform/formfriends.h \
+    subform/formgames.h
 
 FORMS += \
         mainwindow.ui \
-    formgames.ui \
     formachievements.ui \
-    formfriends.ui \
-    subform/formaddcategory.ui
+    subform/formaddcategory.ui \
+    subform/formfriends.ui \
+    subform/formgames.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

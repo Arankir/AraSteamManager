@@ -39,12 +39,12 @@ QT_MOC_LITERAL(4, 38, 15), // "ProgressLoading"
 QT_MOC_LITERAL(5, 54, 1), // "p"
 QT_MOC_LITERAL(6, 56, 3), // "row"
 QT_MOC_LITERAL(7, 60, 8), // "OnFinish"
-QT_MOC_LITERAL(8, 69, 19), // "SwitchSimpleCompare"
-QT_MOC_LITERAL(9, 89, 2), // "sc"
-QT_MOC_LITERAL(10, 92, 14), // "InitComponents"
-QT_MOC_LITERAL(11, 107, 13), // "OnResultImage"
-QT_MOC_LITERAL(12, 121, 13), // "ImageRequest*"
-QT_MOC_LITERAL(13, 135, 4), // "imgr"
+QT_MOC_LITERAL(8, 69, 14), // "InitComponents"
+QT_MOC_LITERAL(9, 84, 13), // "OnResultImage"
+QT_MOC_LITERAL(10, 98, 13), // "ImageRequest*"
+QT_MOC_LITERAL(11, 112, 4), // "imgr"
+QT_MOC_LITERAL(12, 117, 19), // "SwitchSimpleCompare"
+QT_MOC_LITERAL(13, 137, 2), // "sc"
 QT_MOC_LITERAL(14, 140, 14), // "LoadingCompare"
 QT_MOC_LITERAL(15, 155, 26), // "on_ComboBoxCategory_Change"
 QT_MOC_LITERAL(16, 182, 5), // "index"
@@ -144,10 +144,10 @@ QT_MOC_LITERAL(108, 2504, 17) // "FinishLoadFriends"
     },
     "FormAchievements\0return_to_games\0\0num\0"
     "ProgressLoading\0p\0row\0OnFinish\0"
-    "SwitchSimpleCompare\0sc\0InitComponents\0"
-    "OnResultImage\0ImageRequest*\0imgr\0"
-    "LoadingCompare\0on_ComboBoxCategory_Change\0"
-    "index\0on_CheckBoxCategory_Change\0ind\0"
+    "InitComponents\0OnResultImage\0ImageRequest*\0"
+    "imgr\0SwitchSimpleCompare\0sc\0LoadingCompare\0"
+    "on_ComboBoxCategory_Change\0index\0"
+    "on_CheckBoxCategory_Change\0ind\0"
     "closeEvent\0QCloseEvent*\0returnfromcompare\0"
     "on_ButtonReturn_clicked\0UpdateHiddenRows\0"
     "PullTableWidget\0ProfileIsPublic\0"
@@ -231,9 +231,9 @@ static const uint qt_meta_data_FormAchievements[] = {
  // slots: name, argc, parameters, tag, flags
        4,    2,  412,    2, 0x0a /* Public */,
        7,    0,  417,    2, 0x0a /* Public */,
-       8,    1,  418,    2, 0x0a /* Public */,
-      10,    0,  421,    2, 0x08 /* Private */,
-      11,    1,  422,    2, 0x08 /* Private */,
+       8,    0,  418,    2, 0x08 /* Private */,
+       9,    1,  419,    2, 0x08 /* Private */,
+      12,    1,  422,    2, 0x08 /* Private */,
       14,    0,  425,    2, 0x08 /* Private */,
       15,    1,  426,    2, 0x08 /* Private */,
       17,    1,  429,    2, 0x08 /* Private */,
@@ -314,9 +314,9 @@ static const uint qt_meta_data_FormAchievements[] = {
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    5,    6,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 12,   13,
+    QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void, QMetaType::Int,   13,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void, QMetaType::Int,   18,
@@ -403,9 +403,9 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 0: _t->return_to_games((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->OnFinish(); break;
-        case 3: _t->SwitchSimpleCompare((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->InitComponents(); break;
-        case 5: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 3: _t->InitComponents(); break;
+        case 4: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 5: _t->SwitchSimpleCompare((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->LoadingCompare(); break;
         case 7: _t->on_ComboBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 8: _t->on_CheckBoxCategory_Change((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -485,7 +485,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 5:
+        case 4:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:

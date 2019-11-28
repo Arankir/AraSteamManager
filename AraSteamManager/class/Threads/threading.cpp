@@ -48,15 +48,9 @@ int Threading::AddThreadAchievements(SAchievements achievements, QStringList Wor
     connect(Achievements,SIGNAL(finished()),thread,SLOT(quit()));
     connect(Achievements,SIGNAL(finished()),Achievements,SLOT(deleteLater()));
     connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
-    //connect(Achievements,SIGNAL(progress(int,int)),this->parent()->parent(),SLOT(ProgressLoading(int,int)));
     connect(Achievements,SIGNAL(progress(int,int)),this->parent(),SLOT(ProgressLoading(int,int)));
-    //connect(Achievements,SIGNAL(finished()),this->parent()->parent(),SLOT(ShowAchievements()));
     connect(Achievements,SIGNAL(finished()),this->parent(),SLOT(OnFinish()));
     thread->start();
     return 1;
 }
 
-int Threading::AddThreadCompare(){
-
-    return 1;
-}

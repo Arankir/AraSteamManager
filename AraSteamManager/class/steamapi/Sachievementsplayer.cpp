@@ -43,7 +43,7 @@ void SAchievementsPlayer::Load(QNetworkReply* Reply){
     QJsonDocument DocAchievements = QJsonDocument::fromJson(Reply->readAll());
     Reply->deleteLater();
     Set(DocAchievements);
-    qDebug()<<"Player";
+    qDebug()<<"Player load";
     emit finished(*this);
     emit finished();
 }

@@ -13,7 +13,8 @@ FormAddCategory::FormAddCategory(QString games, QWidget* parent) :    QWidget(pa
     ui->ButtonAccept->setText(Words[5]);
     QWidget* widget1 = new QWidget;
     lay = new QFormLayout;
-    lay->setContentsMargins(9,1,9,1);
+    lay->setContentsMargins(3,1,3,1);
+    lay->setSpacing(1);
     widget1->setLayout(lay);
     ui->ScrollAreaValues->setWidget(widget1);
 }
@@ -59,9 +60,7 @@ void FormAddCategory::on_ButtonCancel_clicked(){
     emit cancel();
 }
 void FormAddCategory::on_CheckBoxSelectAll_stateChanged(int arg1){
-    for (int i=0;i<count;i++) {
-        Values[i]->SetSelect(arg1==2?true:false);
-    }
+
 }
 void FormAddCategory::on_CheckBoxNoValue_stateChanged(int arg1){
     switch (arg1) {
@@ -90,17 +89,13 @@ void FormAddCategory::ChangePosition(int pos, int posnew){
         Values[pos]=Values[posnew];
         Values[posnew]=temp;
         delete temp;
-        qDebug()<<lay->rowCount();
         while(lay->rowCount()>0)
             lay->removeRow(0);
-        qDebug()<<lay->rowCount();
         for (int i=0;i<count;i++) {
             QWidget* wid = new QWidget;
             wid->setLayout(Values[i]);
             lay->addRow(wid);
-            qDebug()<<i;
         }
-        qDebug()<<lay->rowCount();
         emit positionchange(pos,posnew);
     }
 }
@@ -132,4 +127,10 @@ void FormAddCategory::DeleteValue(int pos){
     }
     count--;
     emit deleting(pos);
+}
+
+void FormAddCategory::on_CheckBoxSelectAll_clicked(){
+    for (int i=0;i<count;i++) {
+        Values[i]->SetSelect(ui->CheckBoxSelectAll->isChecked());
+    }
 }

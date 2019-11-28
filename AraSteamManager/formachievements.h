@@ -16,9 +16,8 @@
 #include <QFormLayout>
 #include <QButtonGroup>
 #include <class\imagerequest.h>
-#include <formcompare.h>
 #include <class/settings.h>
-#include <class/steamapi/Sgame.h>
+#include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
 #include <subform/formaddcategory.h>
 #include <class/Threads/threading.h>
@@ -34,7 +33,6 @@ class FormAchievements : public QWidget
 public:
     explicit FormAchievements(QString keys, QString ids, SGame game, int num, QWidget* parent = nullptr);
     ~FormAchievements();
-    FormCompare* compareform;
 
 signals:
     void return_to_games(int num);
@@ -42,12 +40,12 @@ signals:
 public slots:
     void ProgressLoading(int p,int row);
     void OnFinish();
-    void SwitchSimpleCompare(int sc);
 
 private slots:
     void InitComponents();
 
     void OnResultImage(ImageRequest* imgr);
+    void SwitchSimpleCompare(int sc);
     void LoadingCompare();
     void on_ComboBoxCategory_Change(int index);
     void on_CheckBoxCategory_Change(int ind);

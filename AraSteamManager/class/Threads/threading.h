@@ -5,7 +5,6 @@
 #include <QThread>
 #include <class/Threads/threadgames.h>
 #include <class/Threads/threadachievements.h>
-#include <class/Threads/threadcompare.h>
 #include <class/Threads/threadfriends.h>
 
 class Threading : public QObject
@@ -19,7 +18,6 @@ signals:
 public slots:
     int AddThreadGames(QTableWidget* TableWidgetGames, QVector<SGame> games);
     int AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, QLabel* LabelTotalPersentCompare, QTableWidget* TableWidgetCompareAchievements);
-    int AddThreadCompare();
     int AddThreadFriends(QTableWidget* TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss,QStringList Words);
 };
 

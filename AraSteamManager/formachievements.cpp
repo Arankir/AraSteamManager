@@ -76,6 +76,13 @@ void FormAchievements::InitComponents(){
     ui->ButtonUpdate->setText(Words[36]);
     ui->CheckBoxNewCategoryOneValue->setText(Words[38]);
     ui->CheckBoxChangeCategoryOneValue->setText(Words[38]);
+    ui->GroupBoxCompareShowedColumns->setTitle(Words[42]);
+    ui->CheckBoxCompareIcon->setText(Words[43]);
+    ui->CheckBoxCompareTitle->setText(Words[44]);
+    ui->CheckBoxCompareDescription->setText(Words[45]);
+    ui->CheckBoxCompareTotalPercent->setText(Words[46]);
+    ui->CheckBoxCompareAllFriends->setText(Words[47]);
+    ui->CheckBoxShowFilter->setText(Words[49]);
     ui->TableWidgetAchievements->setColumnCount(7);
     ui->TableWidgetCompareAchievements->setColumnCount(7);
     ui->TableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem(""));
@@ -118,7 +125,7 @@ void FormAchievements::InitComponents(){
     myava2->setToolTip(Profile.GetPersonaname());
     ui->TableWidgetCompareFriends->setCellWidget(0,0,myava2);
     QLabel* All = new QLabel("All");
-    All->setToolTip(Words[2]);
+    All->setToolTip(Words[48]);
     All->setPixmap(QPixmap(":/"+theme+"/program/"+theme+"/friends.png"));
     All->setScaledContents(true);
     All->setFixedSize(32,32);
@@ -291,6 +298,7 @@ void FormAchievements::OnResultImage(ImageRequest* imgr){
     imgr->deleteLater();
 }
 #define InitEnd }
+
 #define SimpleCompare {
 void FormAchievements::SwitchSimpleCompare(int sc){
     switch (sc) {
@@ -301,7 +309,7 @@ void FormAchievements::SwitchSimpleCompare(int sc){
         ui->ButtonChangeCategory->setEnabled(true);
         ui->TableWidgetCompareFriends->setVisible(false);
         ui->TableWidgetCompareAchievements->setVisible(false);
-        ui->ButtonCompare->setText("Сравнить");//bpvtybnm
+        ui->ButtonCompare->setText(Words[50]);
         ui->RadioButtonAll->setVisible(true);
         ui->RadioButtonReached->setVisible(true);
         ui->RadioButtonNotReached->setVisible(true);
@@ -314,7 +322,7 @@ void FormAchievements::SwitchSimpleCompare(int sc){
         ui->RadioButtonReached->setVisible(false);
         ui->RadioButtonNotReached->setVisible(false);
         ui->TableWidgetAchievements->setVisible(false);
-        ui->ButtonCompare->setText("Только мои");//bpvtybnm
+        ui->ButtonCompare->setText(Words[51]);
         ui->CheckBoxCompareAllFriends->setVisible(true);
         ui->TableWidgetCompareFriends->setVisible(true);
         ui->ButtonAddCategory->setEnabled(false);
@@ -619,7 +627,7 @@ void FormAchievements::on_TableWidgetCompareFriendsCellChanged(int row, int colu
                 ui->TableWidgetCompareFriends->resizeRowsToContents();
                 ui->TableWidgetCompareFriends->resizeColumnsToContents();
             }
-            int filtercol=colfilterCompare-(ui->TableWidgetCompareAchievements->columnCount()-coll);
+            int filtercol=colfilterCompare-(ui->TableWidgetCompareAchievements->columnCount()-coll+1);
             bool** New = new bool*[ui->TableWidgetCompareAchievements->rowCount()];
             colfilterCompare--;
             for (int i=0;i<ui->TableWidgetCompareAchievements->rowCount();i++) {
@@ -648,47 +656,47 @@ void FormAchievements::on_CheckBoxCompareAllFriends_stateChanged(int arg1){
         }
         break;
     }
-//                if(ui->TableWidgetFriends->item(1,2+i)->checkState()==Qt::Checked){
-//                    int coll=0;
-//                    ui->TableWidgetFriends->item(1,2+i)->setCheckState(Qt::Unchecked);
-//                    for (int j=6;j<ui->TableWidget->columnCount();j++) {
-//                        if(ui->TableWidget->horizontalHeaderItem(j)->text()==friends[i].first.GetPersonaname()&&friends[i].second==2){
-//                            coll=i;
-//                            ui->TableWidget->removeColumn(j);
-//                            break;
-//                        }
-//                    }
-//                    if(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"All")){
-//                        disconnect(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"All"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendAll_Click()));
-//                        disconnect(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"Reached"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendReached_Click()));
-//                        disconnect(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"NotReached"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendNotReached_Click()));
-//                        delete findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"All");
-//                        delete findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"Reached");
-//                        delete findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"NotReached");
-//                        delete findChild<QVBoxLayout*>("Lay"+QString::number(type1+2+i));
-//                        ui->TableWidgetFriends->removeCellWidget(2,type1+2+i);
-//                        delete findChild<QWidget*>("WD"+QString::number(type1+2+i));
-//                        ui->TableWidgetFriends->resizeRowsToContents();
-//                        ui->TableWidgetFriends->resizeColumnsToContents();
-//                    }
-//                    int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
-//                    bool** New = new bool*[ui->TableWidget->rowCount()];
-//                    colfilter--;
-//                    for (int i=0;i<ui->TableWidget->rowCount();i++) {
-//                        New[i]=new bool[colfilter];
-//                        int jt=0;
-//                        for (int j=0;j<colfilter;j++,jt++) {
-//                            if(j==filtercol)
-//                                jt++;
-//                            New[i][j]=filter[i][jt];
-//                        }
-//                    }
-//                    delete filter;
-//                    filter = new bool*[ui->TableWidget->rowCount()];
-//                    filter = New;
-//                    UpdateHiddenRows();
-//                }
-//                ui->TableWidgetFriends->setColumnHidden(type1+2+i,true);
+    /*            if(ui->TableWidgetFriends->item(1,2+i)->checkState()==Qt::Checked){
+                    int coll=0;
+                    ui->TableWidgetFriends->item(1,2+i)->setCheckState(Qt::Unchecked);
+                    for (int j=6;j<ui->TableWidget->columnCount();j++) {
+                        if(ui->TableWidget->horizontalHeaderItem(j)->text()==friends[i].first.GetPersonaname()&&friends[i].second==2){
+                            coll=i;
+                            ui->TableWidget->removeColumn(j);
+                            break;
+                        }
+                    }
+                    if(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"All")){
+                        disconnect(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"All"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendAll_Click()));
+                        disconnect(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"Reached"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendReached_Click()));
+                        disconnect(findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"NotReached"),SIGNAL(clicked()),this,SLOT(on_RadioButtonFriendNotReached_Click()));
+                        delete findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"All");
+                        delete findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"Reached");
+                        delete findChild<QRadioButton*>("RB"+QString::number(type1+2+i)+"NotReached");
+                        delete findChild<QVBoxLayout*>("Lay"+QString::number(type1+2+i));
+                        ui->TableWidgetFriends->removeCellWidget(2,type1+2+i);
+                        delete findChild<QWidget*>("WD"+QString::number(type1+2+i));
+                        ui->TableWidgetFriends->resizeRowsToContents();
+                        ui->TableWidgetFriends->resizeColumnsToContents();
+                    }
+                    int filtercol=colfilter-(ui->TableWidget->columnCount()-coll);
+                    bool** New = new bool*[ui->TableWidget->rowCount()];
+                    colfilter--;
+                    for (int i=0;i<ui->TableWidget->rowCount();i++) {
+                        New[i]=new bool[colfilter];
+                        int jt=0;
+                        for (int j=0;j<colfilter;j++,jt++) {
+                            if(j==filtercol)
+                                jt++;
+                            New[i][j]=filter[i][jt];
+                        }
+                    }
+                    delete filter;
+                    filter = new bool*[ui->TableWidget->rowCount()];
+                    filter = New;
+                    UpdateHiddenRows();
+                }
+                ui->TableWidgetFriends->setColumnHidden(type1+2+i,true);*/
     case 2:{
         for (int i=0;i<friends.size();i++) {
             if(friends[i].second==2){
@@ -701,6 +709,7 @@ void FormAchievements::on_CheckBoxCompareAllFriends_stateChanged(int arg1){
     }
 }
 #define SimpleCompareEnd }
+
 #define System {
 FormAchievements::~FormAchievements(){
     delete filterAchievements;
@@ -836,6 +845,7 @@ bool FormAchievements::ProfileIsPublic(SAchievements achievement, int col){
     }
 }
 #define SystemEnd }
+
 #define Filter {
 void FormAchievements::on_LineEditNameAchievements_textChanged(const QString&){
     for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++){
@@ -855,6 +865,8 @@ void FormAchievements::on_ButtonAddCategory_clicked(){
     FormAddCategory* AddCategory = new FormAddCategory(QString::number(game.GetAppid()));
     QGridLayout* lay = new QGridLayout;
     lay->addWidget(AddCategory);
+    lay->setSpacing(0);
+    lay->setContentsMargins(1,1,1,1);
     ui->GroupBoxCategories->setLayout(lay);
     ui->GroupBoxCategories->setVisible(true);
     connect(AddCategory,&FormAddCategory::addvalue,this,&FormAchievements::CategoryAddValue);
@@ -1000,7 +1012,6 @@ void FormAchievements::on_ButtonAcceptNewCategory_clicked(){
                     if(newcategoryvalueslayout->rowCount()>0){
                         QMessageBox::StandardButton btn=QMessageBox::question(this,Words[39],Words[40].mid(0,Words[40].indexOf("\\n")-1)+"\n"+Words[40].mid(Words[40].indexOf("\\n")+2,Words[40].length()-Words[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
                         if(btn==QMessageBox::No){
-                            qDebug()<<0;
                             return;
                         }
                     }
@@ -1018,7 +1029,6 @@ void FormAchievements::on_ButtonAcceptNewCategory_clicked(){
                             Category.close();
                             Category.remove();
                             QMessageBox::warning(this,Words[28],Words[29]);
-                            qDebug()<<1<<i;
                             return;
                             }
                         for (int j=7;j<i;j++){
@@ -1026,7 +1036,6 @@ void FormAchievements::on_ButtonAcceptNewCategory_clicked(){
                                 Category.close();
                                 Category.remove();
                                 QMessageBox::warning(this,Words[28],Words[29]);
-                                qDebug()<<2<<i<<j;
                                 return;
                                 }
                             }
@@ -1425,7 +1434,6 @@ void FormAchievements::CategoryPositionChange(int pos, int posnew){
 void FormAchievements::CategorySelectChange(int pos, bool select){
     ui->TableWidgetAchievements->selectColumn(2);
     QList<QTableWidgetItem*> rows = ui->TableWidgetAchievements->selectedItems();
-    qDebug()<<rows.size();
     for (int i=0;i<rows.size();i++) {
         ui->TableWidgetAchievements->item(rows.at(i)->row(),7+pos)->setCheckState(select?Qt::Checked:Qt::Unchecked);
     }
@@ -1451,7 +1459,6 @@ void FormAchievements::CategoryAccept(){
             if(newcategoryvalueslayout->rowCount()>0){
                 QMessageBox::StandardButton btn=QMessageBox::question(this,Words[39],Words[40].mid(0,Words[40].indexOf("\\n")-1)+"\n"+Words[40].mid(Words[40].indexOf("\\n")+2,Words[40].length()-Words[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
                 if(btn==QMessageBox::No){
-                    qDebug()<<0;
                     return;
                 }
             }
@@ -1469,7 +1476,6 @@ void FormAchievements::CategoryAccept(){
                     Category.close();
                     Category.remove();
                     QMessageBox::warning(this,Words[28],Words[29]);
-                    qDebug()<<1<<i;
                     return;
                     }
                 for (int j=7;j<i;j++){
@@ -1477,7 +1483,6 @@ void FormAchievements::CategoryAccept(){
                         Category.close();
                         Category.remove();
                         QMessageBox::warning(this,Words[28],Words[29]);
-                        qDebug()<<2<<i<<j;
                         return;
                         }
                     }
@@ -1662,7 +1667,6 @@ void FormAchievements::DeleteValuesCategory(QString Type, int i, QFormLayout* la
 void FormAchievements::SelectValueCategory(int j,Qt::CheckState CS){
     ui->TableWidgetAchievements->selectColumn(2);
     QList<QTableWidgetItem*> rows = ui->TableWidgetAchievements->selectedItems();
-    qDebug()<<rows.size();
     for (int i=0;i<rows.size();i++) {
         ui->TableWidgetAchievements->item(rows.at(i)->row(),7+j)->setCheckState(CS);
     }
@@ -1674,7 +1678,7 @@ void FormAchievements::SelectValueCategory(int j,Qt::CheckState CS){
 void FormAchievements::returnfromcompare(){
     windowchildcount--;
     this->setVisible(true);
-    delete compareform;
+    //delete compareform;
 }
 void FormAchievements::on_ButtonReturn_clicked(){
     emit return_to_games(unicnum);

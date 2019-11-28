@@ -58,5 +58,6 @@
         <file>program/cancel.png</file>
         <file>program/create.png</file>
         <file>program/delete.png</file>
+        <file>program/logo.png</file>
     </qresource>
 </RCC>

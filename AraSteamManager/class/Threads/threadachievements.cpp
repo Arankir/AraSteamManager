@@ -19,7 +19,6 @@ int ThreadAchievements::Fill(){
     int j=0;
     for(int i=0;i<achievements.GetAchievementsCount();i++){
         if(achievements.GetDisplayname(i)!=""){
-            qDebug()<<achievements.GetApiname(i)<<achievements.GetDisplayname(i)<<i;
             TableWidgetAchievements->setItem(j,0,new QTableWidgetItem(achievements.GetApiname(i)));
             TableWidgetAchievements->setItem(j,2,new QTableWidgetItem(achievements.GetDisplayname(i)));
             TableWidgetAchievements->setItem(j,3,new QTableWidgetItem(achievements.GetDescription(i)));

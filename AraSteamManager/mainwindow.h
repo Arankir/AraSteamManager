@@ -5,10 +5,10 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QPixmap>
-#include <formgames.h>
-#include <formfriends.h>
 #include <QFile>
 #include <QKeyEvent>
+#include <subform/formgames.h>
+#include <subform/formfriends.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sbans.h>
 #include <class/steamapi/Slevels.h>

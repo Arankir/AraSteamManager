@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAddCategory_t {
-    QByteArrayData data[27];
-    char stringdata0[357];
+    QByteArrayData data[28];
+    char stringdata0[386];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -57,7 +57,8 @@ QT_MOC_LITERAL(22, 238, 23), // "on_ButtonAccept_clicked"
 QT_MOC_LITERAL(23, 262, 23), // "on_ButtonCancel_clicked"
 QT_MOC_LITERAL(24, 286, 33), // "on_CheckBoxSelectAll_stateCha..."
 QT_MOC_LITERAL(25, 320, 4), // "arg1"
-QT_MOC_LITERAL(26, 325, 31) // "on_CheckBoxNoValue_stateChanged"
+QT_MOC_LITERAL(26, 325, 31), // "on_CheckBoxNoValue_stateChanged"
+QT_MOC_LITERAL(27, 357, 28) // "on_CheckBoxSelectAll_clicked"
 
     },
     "FormAddCategory\0valuechange\0\0pos\0value\0"
@@ -69,7 +70,8 @@ QT_MOC_LITERAL(26, 325, 31) // "on_CheckBoxNoValue_stateChanged"
     "on_ButtonAddValue_clicked\0"
     "on_ButtonAccept_clicked\0on_ButtonCancel_clicked\0"
     "on_CheckBoxSelectAll_stateChanged\0"
-    "arg1\0on_CheckBoxNoValue_stateChanged"
+    "arg1\0on_CheckBoxNoValue_stateChanged\0"
+    "on_CheckBoxSelectAll_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -79,7 +81,7 @@ static const uint qt_meta_data_FormAddCategory[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      19,   14, // methods
+      20,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -87,27 +89,28 @@ static const uint qt_meta_data_FormAddCategory[] = {
        9,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,  109,    2, 0x06 /* Public */,
-       5,    2,  114,    2, 0x06 /* Public */,
-       7,    2,  119,    2, 0x06 /* Public */,
-       9,    2,  124,    2, 0x06 /* Public */,
-      11,    1,  129,    2, 0x06 /* Public */,
-      12,    0,  132,    2, 0x06 /* Public */,
-      13,    0,  133,    2, 0x06 /* Public */,
-      14,    1,  134,    2, 0x06 /* Public */,
-      15,    1,  137,    2, 0x06 /* Public */,
+       1,    2,  114,    2, 0x06 /* Public */,
+       5,    2,  119,    2, 0x06 /* Public */,
+       7,    2,  124,    2, 0x06 /* Public */,
+       9,    2,  129,    2, 0x06 /* Public */,
+      11,    1,  134,    2, 0x06 /* Public */,
+      12,    0,  137,    2, 0x06 /* Public */,
+      13,    0,  138,    2, 0x06 /* Public */,
+      14,    1,  139,    2, 0x06 /* Public */,
+      15,    1,  142,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      16,    2,  140,    2, 0x08 /* Private */,
-      17,    2,  145,    2, 0x08 /* Private */,
-      18,    2,  150,    2, 0x08 /* Private */,
-      19,    2,  155,    2, 0x08 /* Private */,
-      20,    1,  160,    2, 0x08 /* Private */,
-      21,    0,  163,    2, 0x08 /* Private */,
-      22,    0,  164,    2, 0x08 /* Private */,
-      23,    0,  165,    2, 0x08 /* Private */,
-      24,    1,  166,    2, 0x08 /* Private */,
-      26,    1,  169,    2, 0x08 /* Private */,
+      16,    2,  145,    2, 0x08 /* Private */,
+      17,    2,  150,    2, 0x08 /* Private */,
+      18,    2,  155,    2, 0x08 /* Private */,
+      19,    2,  160,    2, 0x08 /* Private */,
+      20,    1,  165,    2, 0x08 /* Private */,
+      21,    0,  168,    2, 0x08 /* Private */,
+      22,    0,  169,    2, 0x08 /* Private */,
+      23,    0,  170,    2, 0x08 /* Private */,
+      24,    1,  171,    2, 0x08 /* Private */,
+      26,    1,  174,    2, 0x08 /* Private */,
+      27,    0,  177,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::QString,    3,    4,
@@ -131,6 +134,7 @@ static const uint qt_meta_data_FormAddCategory[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   25,
     QMetaType::Void, QMetaType::Int,   25,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -160,6 +164,7 @@ void FormAddCategory::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 16: _t->on_ButtonCancel_clicked(); break;
         case 17: _t->on_CheckBoxSelectAll_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 18: _t->on_CheckBoxNoValue_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 19: _t->on_CheckBoxSelectAll_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -259,13 +264,13 @@ int FormAddCategory::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 19)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 20;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 19)
+        if (_id < 20)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 19;
+        _id -= 20;
     }
     return _id;
 }
