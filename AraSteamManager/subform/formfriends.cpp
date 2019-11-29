@@ -113,13 +113,13 @@ void FormFriends::OnResultImage(ImageRequest *imgr){
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
-    //ui->TableWidgetFriends->resizeRowToContents(imgr->GetRow());
     if(numrequests==500&&numnow<Friends.GetCount()){
         imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20)+".jpg",true);
         numnow++;
-    } else
+    } else {
         disconnect(imgr,&ImageRequest::onReady,this,&FormFriends::OnResultImage);
-    //imgr->deleteLater();
+        imgr->deleteLater();
+    }
 }
 #define InitEnd }
 

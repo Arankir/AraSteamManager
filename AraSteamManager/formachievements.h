@@ -152,8 +152,6 @@ private slots:
     void LoadFriend(SGames *Games);
     void FinishLoadFriends();
 
-    void on_LineEditTitleCategoryChangeCategory_editingFinished();
-
     void on_ButtonAddValueCategory_clicked();
 
     void on_CheckBoxCategoryOneValue_stateChanged(int arg1);
@@ -167,8 +165,6 @@ private slots:
     void on_ComboBoxCategoriesCategory_activated(int index);
 
     void on_ChangeTitleCategory_OneValue();
-
-    void on_LineEditNameAchievements_editingFinished();
 
 private:
     Ui::FormAchievements *ui;

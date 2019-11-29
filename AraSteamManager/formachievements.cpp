@@ -234,8 +234,7 @@ void FormAchievements::PullTableWidget(){
     ui->TableWidgetCompareAchievements->setRowCount(achievements.GetAchievementsCount()+2);
     if(!(achievements.GetStatusFinish()=="success")){
         ui->TableWidgetAchievements->insertRow(0);
-        QTableWidgetItem *item1 = new QTableWidgetItem("Error");
-        ui->TableWidgetAchievements->setItem(0,1,item1);
+        ui->TableWidgetAchievements->setItem(0,1,new QTableWidgetItem("Error"));
         ui->TableWidgetAchievements->setColumnHidden(2,true);
         ui->TableWidgetAchievements->setColumnHidden(3,true);
         ui->TableWidgetAchievements->setColumnHidden(4,true);
@@ -1648,11 +1647,8 @@ void FormAchievements::on_ButtonReturn_clicked(){
     emit return_to_games(unicnum);
     //delete this;
 }
-void FormAchievements::on_LineEditTitleCategoryChangeCategory_editingFinished(){
 
-}
-
-void FormAchievements::on_ButtonAddValueCategory_clicked(){
+void FormAchievements::on_ButtonAddValueCategory_clicked(){//Почти готово
     if((typecategory==1)||(typecategory==2)){
         ui->TableWidgetAchievements->setColumnCount(ui->TableWidgetAchievements->columnCount()+1);
         ui->TableWidgetAchievements->setHorizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1,new QTableWidgetItem());
@@ -1691,91 +1687,51 @@ void FormAchievements::on_ButtonAddValueCategory_clicked(){
     }
 }
 
-void FormAchievements::on_CheckBoxCategoryOneValue_stateChanged(int arg1){
-    if(typecategory==1){
+void FormAchievements::on_CheckBoxCategoryOneValue_stateChanged(int arg1){//Почти готово
+    if(typecategory==1||typecategory==2){
         switch (arg1) {
         case 0:{
-            ui->ButtonAddValueNewCategory->setEnabled(true);
-            ui->ScrollAreaValues->setEnabled(true);
+            ui->ButtonAddValueCategory->setEnabled(true);
+            ui->ScrollAreaValuesCategory->setEnabled(true);
             for (int i=0;i<ui->TableWidgetAchievements->columnCount()-7;i++) {
                 ui->TableWidgetAchievements->setColumnHidden(7+i,false);
             }
             ui->TableWidgetAchievements->setColumnCount(ui->TableWidgetAchievements->columnCount()-1);
-            disconnect(ui->LineEditTitleNewCategory,&QLineEdit::editingFinished,this,&FormAchievements::on_Change_Title_NewCategory_OneValue);
+            //Переписать дисконнект на работающий
+            //disconnect(ui->LineEditTitleNewCategory,&QLineEdit::editingFinished,this,&FormAchievements::on_Change_Title_NewCategory_OneValue);
             break;
             }
         case 2:{
-            ui->ButtonAddValueNewCategory->setEnabled(false);
-            ui->ScrollAreaValues->setEnabled(false);
+            ui->ButtonAddValueCategory->setEnabled(false);
+            ui->ScrollAreaValuesCategory->setEnabled(false);
             for (int i=0;i<ui->TableWidgetAchievements->columnCount()-7;i++) {
                 ui->TableWidgetAchievements->setColumnHidden(7+i,true);
             }
             ui->TableWidgetAchievements->setColumnCount(ui->TableWidgetAchievements->columnCount()+1);
-            ui->TableWidgetAchievements->setHorizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1,new QTableWidgetItem(ui->LineEditTitleNewCategory->text()));
+            ui->TableWidgetAchievements->setHorizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1,new QTableWidgetItem(ui->LineEditTitleCategory->text()));
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++){
                 QTableWidgetItem *pItem(new QTableWidgetItem(tr("Add")));
                 pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
                 pItem->setCheckState(Qt::Unchecked);
                 ui->TableWidgetAchievements->setItem(i,ui->TableWidgetAchievements->columnCount()-1, pItem);
             }
-            connect(ui->LineEditTitleNewCategory,&QLineEdit::editingFinished,this,&FormAchievements::on_Change_Title_NewCategory_OneValue);
-            break;
-            }
-        }
-    } else if(typecategory==2){
-        switch (arg1) {
-        case 0:{
-            ui->ButtonAddValueChangeCategory->setEnabled(true);
-            ui->ScrollAreaValuesChangeCategory->setEnabled(true);
-            for (int i=0;i<ui->TableWidgetAchievements->columnCount()-7;i++) {
-                ui->TableWidgetAchievements->setColumnHidden(7+i,false);
-            }
-            ui->TableWidgetAchievements->setColumnCount(ui->TableWidgetAchievements->columnCount()-1);
-            disconnect(ui->LineEditTitleCategoryChangeCategory,&QLineEdit::editingFinished,this,&FormAchievements::on_Change_Title_ChangeCategory_OneValue);
-            break;
-            }
-        case 2:{
-            ui->ButtonAddValueChangeCategory->setEnabled(false);
-            ui->ScrollAreaValuesChangeCategory->setEnabled(false);
-            for (int i=0;i<ui->TableWidgetAchievements->columnCount()-7;i++) {
-                ui->TableWidgetAchievements->setColumnHidden(7+i,true);
-            }
-            ui->TableWidgetAchievements->setColumnCount(ui->TableWidgetAchievements->columnCount()+1);
-            ui->TableWidgetAchievements->setHorizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1,new QTableWidgetItem(ui->LineEditTitleCategoryChangeCategory->text()));
-            for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++){
-                QTableWidgetItem *pItem(new QTableWidgetItem(tr("Add")));
-                pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
-                pItem->setCheckState(Qt::Unchecked);
-                ui->TableWidgetAchievements->setItem(i,ui->TableWidgetAchievements->columnCount()-1, pItem);
-            }
-            connect(ui->LineEditTitleCategoryChangeCategory,&QLineEdit::editingFinished,this,&FormAchievements::on_Change_Title_ChangeCategory_OneValue);
+            //Переписать коннект на работающий
+            //connect(ui->LineEditTitleNewCategory,&QLineEdit::editingFinished,this,&FormAchievements::on_Change_Title_NewCategory_OneValue);
             break;
             }
         }
     }
 }
 
-void FormAchievements::on_ButtonCancelCategory_clicked(){
-    if(typecategory==1){
+void FormAchievements::on_ButtonCancelCategory_clicked(){//Готово
+    if(typecategory==1||typecategory==2){
         ui->TableWidgetAchievements->setColumnCount(7);
-        ui->GroupBoxAddCategory->setVisible(false);
+        ui->GroupBoxCategories->setVisible(false);
         ui->ButtonAddCategory->setEnabled(true);
-        ui->ButtonCompare->setEnabled(true);
         ui->ButtonChangeCategory->setEnabled(true);
-        while (!newcategoryvalueslayout->isEmpty()) {
-            newcategoryvalueslayout->removeRow(0);
-        }
-    } else if(typecategory==2){
-        ui->TableWidgetAchievements->setColumnCount(7);
-        ui->GroupBoxChangeCategory->setVisible(false);
-        ui->ButtonAddCategory->setEnabled(true);
         ui->ButtonCompare->setEnabled(true);
-        ui->ButtonChangeCategory->setEnabled(true);
-        ui->ComboBoxCategoriesChangeCategory->setCurrentIndex(0);
-        ui->LineEditTitleCategoryChangeCategory->setText("");
-        ui->LineEditTitleCategoryChangeCategory->setEnabled(false);
-        while(!changecategoryvalueslayout->isEmpty()){
-            changecategoryvalueslayout->removeRow(0);
+        while (!categoryvalueslayout->isEmpty()) {
+            categoryvalueslayout->removeRow(0);
         }
     }
 }
@@ -1789,22 +1745,29 @@ void FormAchievements::on_ButtonDeleteCategory_2_clicked(){
     }
 }
 
-void FormAchievements::on_ButtonAcceptCategory_clicked(){
-    if(typecategory==1){
+void FormAchievements::on_ButtonAcceptCategory_clicked(){//Готово
+    if(typecategory==1||typecategory==2){
         if(!QDir("Files/Categories/"+QString::number(game.GetAppid())).exists()){
             QDir().mkdir("Files/Categories/"+QString::number(game.GetAppid()));
         }
-        if(ui->LineEditTitleNewCategory->text()!=""){
-            QFile Category("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->LineEditTitleNewCategory->text()+".json");
-            if(!QFile::exists("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->LineEditTitleNewCategory->text()+".json")){
+        if(ui->LineEditTitleCategory->text()!=""){
+            if(typecategory==2){
+                if(ui->LineEditTitleCategory->text()!=ui->ComboBoxCategoriesCategory->currentText()){
+                    if(QFile::exists("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->ComboBoxCategoriesCategory->currentText()+".json")){
+                        QFile("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->ComboBoxCategoriesCategory->currentText()+".json").remove();
+                    }
+                }
+            }
+            QFile Category("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->LineEditTitleCategory->text()+".json");
+            if((!QFile::exists("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->LineEditTitleCategory->text()+".json"))||((typecategory==2)&&ui->LineEditTitleCategory->text()==ui->ComboBoxCategoriesCategory->currentText())){
                 if(Category.open(QIODevice::WriteOnly)){
                     QJsonDocument category;
-                    //QJsonArray groups;
+                    QJsonArray groups;
                     QJsonObject group;
-                    group["name"]=ui->LineEditTitleNewCategory->text();
+                    group["name"]=ui->LineEditTitleCategory->text();
                     QJsonArray values;
-                    if(ui->CheckBoxNewCategoryOneValue->isChecked()){
-                        if(newcategoryvalueslayout->rowCount()>0){
+                    if(ui->CheckBoxCategoryOneValue->isChecked()){
+                        if(categoryvalueslayout->rowCount()>0){
                             QMessageBox::StandardButton btn=QMessageBox::question(this,Words[39],Words[40].mid(0,Words[40].indexOf("\\n")-1)+"\n"+Words[40].mid(Words[40].indexOf("\\n")+2,Words[40].length()-Words[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
                             if(btn==QMessageBox::No){
                                 return;
@@ -1816,20 +1779,22 @@ void FormAchievements::on_ButtonAcceptCategory_clicked(){
                             if(ui->TableWidgetAchievements->item(j,ui->TableWidgetAchievements->columnCount()-1)->checkState()){
                                 valn.append(ui->TableWidgetAchievements->item(j,0)->text());
                                 }
-                            group[ui->LineEditTitleNewCategory->text()]=valn;
+                            group[ui->LineEditTitleCategory->text()]=valn;
                             }
                         } else {
                         for (int i=7;i<ui->TableWidgetAchievements->columnCount();i++){
                             if(ui->TableWidgetAchievements->horizontalHeaderItem(i)->text()==""){
                                 Category.close();
-                                Category.remove();
+                                if(typecategory==1)
+                                    Category.remove();
                                 QMessageBox::warning(this,Words[28],Words[29]);
                                 return;
                                 }
                             for (int j=7;j<i;j++){
                                 if(ui->TableWidgetAchievements->horizontalHeaderItem(i)->text()==ui->TableWidgetAchievements->horizontalHeaderItem(j)->text()){
                                     Category.close();
-                                    Category.remove();
+                                    if(typecategory==1)
+                                        Category.remove();
                                     QMessageBox::warning(this,Words[28],Words[29]);
                                     return;
                                     }
@@ -1850,105 +1815,32 @@ void FormAchievements::on_ButtonAcceptCategory_clicked(){
                     category.setObject(group);
                     Category.write(category.toJson());
                     Category.close();
+                    ui->LineEditTitleCategory->setText("");
+                    ui->LineEditTitleCategory->setEnabled(false);
                     delete ui->ScrollAreaCategories->layout();
                     delete ui->ScrollAreaCheckCategories->layout();
                     ShowCategories();
-                    QMessageBox::information(this,Words[30],Words[31]);
-                    on_ButtonCancelNewCategory_clicked();
+                    ui->LineEditNameAchievements->setText("");
+                    ui->RadioButtonAll->setChecked(true);
+                    ui->CheckBoxFavorites->setChecked(false);
+                    QMessageBox::information(this,Words[30],typecategory==1?Words[31]:Words[34]);
+                    on_ButtonCancelCategory_clicked();
                 } else
                     QMessageBox::warning(this,Words[28],Words[32]);
             }
         } else
             QMessageBox::warning(this,Words[28],Words[33]);
-    } else if(typecategory==2){
-        if(!QDir("Files/Categories/"+QString::number(game.GetAppid())).exists()){
-            QDir().mkdir("Files/Categories/"+QString::number(game.GetAppid()));
-        }
-        if(ui->LineEditTitleCategoryChangeCategory->text()!=""){
-            if(ui->LineEditTitleCategoryChangeCategory->text()!=ui->ComboBoxCategoriesChangeCategory->currentText()){
-                if(QFile::exists("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->ComboBoxCategoriesChangeCategory->currentText()+".json")){
-                    QFile("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->ComboBoxCategoriesChangeCategory->currentText()+".json").remove();
-                }
-            }
-            QFile Category("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->LineEditTitleCategoryChangeCategory->text()+".json");
-            if((!QFile::exists("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->LineEditTitleCategoryChangeCategory->text()+".json"))||(ui->LineEditTitleCategoryChangeCategory->text()==ui->ComboBoxCategoriesChangeCategory->currentText())){
-                QJsonDocument category;
-                QJsonArray groups;
-                QJsonObject group;
-                group["name"]=ui->LineEditTitleCategoryChangeCategory->text();
-                QJsonArray values;
-                if(ui->CheckBoxChangeCategoryOneValue->isChecked()){
-                    if(changecategoryvalueslayout->rowCount()>0){
-                        QMessageBox::StandardButton btn=QMessageBox::question(this,Words[39],Words[40].mid(0,Words[40].indexOf("\\n")-1)+"\n"+Words[40].mid(Words[40].indexOf("\\n")+2,Words[40].length()-Words[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
-                        if(btn==QMessageBox::No){
-                            return;
-                        }
-                    }
-                    Category.open(QIODevice::WriteOnly);
-                    values.append(ui->TableWidgetAchievements->horizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1)->text());
-                    QJsonArray valn;
-                    for (int j=0;j<ui->TableWidgetAchievements->rowCount();j++){
-                        if(ui->TableWidgetAchievements->item(j,ui->TableWidgetAchievements->columnCount()-1)->checkState()){
-                            valn.append(ui->TableWidgetAchievements->item(j,0)->text());
-                            }
-                        group[ui->LineEditTitleCategoryChangeCategory->text()]=valn;
-                        }
-                } else {
-                    for (int i=7;i<ui->TableWidgetAchievements->columnCount();i++){
-                        if(ui->TableWidgetAchievements->horizontalHeaderItem(i)->text()==""){
-                            Category.close();
-                            QMessageBox::warning(this,Words[28],Words[29]);
-                            return;
-                            }
-                        for (int j=7;j<i;j++) {
-                            if(ui->TableWidgetAchievements->horizontalHeaderItem(i)->text()==ui->TableWidgetAchievements->horizontalHeaderItem(j)->text()){
-                                Category.close();
-                                QMessageBox::warning(this,Words[28],Words[29]);
-                                return;
-                                }
-                            }
-                        }
-                    Category.open(QIODevice::WriteOnly);
-                    for (int i=7;i<ui->TableWidgetAchievements->columnCount();i++){
-                        values.append(ui->TableWidgetAchievements->horizontalHeaderItem(i)->text());
-                        QJsonArray valn;
-                        for (int j=0;j<ui->TableWidgetAchievements->rowCount();j++) {
-                            if(ui->TableWidgetAchievements->item(j,i)->checkState()){
-                                valn.append(ui->TableWidgetAchievements->item(j,0)->text());
-                                }
-                            group[ui->TableWidgetAchievements->horizontalHeaderItem(i)->text()]=valn;
-                            }
-                        }
-                    }
-                group["values"]=values;
-                category.setObject(group);
-                Category.write(category.toJson());
-                Category.close();
-                ui->LineEditTitleCategoryChangeCategory->setText("");
-                ui->LineEditTitleCategoryChangeCategory->setEnabled(false);
-                delete ui->ScrollAreaCategories->layout();
-                delete ui->ScrollAreaCheckCategories->layout();
-                ShowCategories();
-                ui->LineEditNameAchievements->setText("");
-                ui->RadioButtonAll->setChecked(true);
-                ui->CheckBoxFavorites->setChecked(false);
-                QMessageBox::information(this,Words[30],Words[34]);
-                on_ButtonCancelChangeCategory_clicked();
-                } else
-                    QMessageBox::warning(this,Words[28],Words[32]);
-            } else
-                QMessageBox::warning(this,Words[28],Words[33]);
     }
 }
 
-void FormAchievements::on_ComboBoxCategoriesCategory_activated(int index){
+void FormAchievements::on_ComboBoxCategoriesCategory_activated(int index){//Вроде почти готово
     if(typecategory==2){
         QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
         if(categories.exists()){
             ui->TableWidgetAchievements->setColumnCount(7);
-            ui->LineEditTitleCategoryChangeCategory->setText(ui->ComboBoxCategoriesChangeCategory->itemText(index));
-            while(!changecategoryvalueslayout->isEmpty()){
-                changecategoryvalueslayout->removeRow(0);
+            ui->LineEditTitleCategory->setText(ui->ComboBoxCategoriesCategory->itemText(index));
+            while(!categoryvalueslayout->isEmpty()){
+                categoryvalueslayout->removeRow(0);
             }
             categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
             categories.setSorting(QDir::Name);
@@ -1957,49 +1849,34 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int index){
                 QFile category("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(index-1).fileName());
                 category.open(QFile::ReadOnly);
                 QJsonDocument categor=QJsonDocument().fromJson(category.readAll());
-                ui->LineEditTitleCategoryChangeCategory->setEnabled(true);
+                ui->LineEditTitleCategory->setEnabled(true);
                 for (int i=0;i<categor.object().value("values").toArray().size();i++) {
-                    QHBoxLayout *bl = new QHBoxLayout;
-                    QPushButton *btn = new QPushButton;
-                    QLineEdit *val = new QLineEdit(categor.object().value("values").toArray().at(i).toString());
-                    QPushButton *up = new QPushButton();
-                    QPushButton *down = new QPushButton();
-                    QPushButton *select = new QPushButton();
-                    QPushButton *unselect = new QPushButton();
-                    btn->setObjectName("btnChangeCategoryDeleteValue"+QString::number(changecategoryvalueslayout->rowCount()));
-                    val->setObjectName("liedChangeCategoryValue"+QString::number(changecategoryvalueslayout->rowCount()));
-                    up->setObjectName("btnChangeCategoryUpValue"+QString::number(changecategoryvalueslayout->rowCount()));
-                    down->setObjectName("btnChangeCategoryDownValue"+QString::number(changecategoryvalueslayout->rowCount()));
-                    select->setObjectName("btnChangeCategorySelectValue"+QString::number(changecategoryvalueslayout->rowCount()));
-                    unselect->setObjectName("btnChangeCategoryUnSelectValue"+QString::number(changecategoryvalueslayout->rowCount()));
-                    if(i==0) up->setEnabled(false);
-                    if(i==categor.object().value("values").toArray().size()-1) down->setEnabled(false);
-                    btn->setIcon(QIcon(":/program/program/delete.png"));
-                    //select->setIcon();
-                    //unselect->setIcon();
-                    up->setIcon(QIcon(":/"+theme+"/program/"+theme+"/up.png"));
-                    down->setIcon(QIcon(":/"+theme+"/program/"+theme+"/down.png"));
-                    connect(btn,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryDeleteValues_clicked);
-                    connect(val,&QLineEdit::editingFinished,this,&FormAchievements::EditLineEditChangeCategoryValue);
-                    connect(up,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryUpValues_clicked);
-                    connect(down,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryDownValues_clicked);
-                    connect(select,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategorySelectValues_clicked);
-                    connect(unselect,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryUnSelectValues_clicked);
-                    //changecategoryvalueslayout->addRow(categor.object().value("values").toArray().at(i).toString(),btn);
-                    bl->addWidget(val);
-                    bl->addWidget(up);
-                    bl->addWidget(down);
-                    bl->addWidget(select);
-                    bl->addWidget(unselect);
-                    bl->addWidget(btn);
-                    bl->setMargin(0);
-                    QWidget *Wbl = new QWidget;
-                    Wbl->setLayout(bl);
-    //                changecategoryvalueslayout->addWidget(val,i,0);
-    //                changecategoryvalueslayout->addWidget(up,i,1);
-    //                changecategoryvalueslayout->addWidget(down,i,2);
-    //                changecategoryvalueslayout->addWidget(btn,i,3);
-                    changecategoryvalueslayout->addRow(Wbl);
+                    int row = categoryvalueslayout->rowCount();
+                    FormCategoryValue *Value = new FormCategoryValue(row);
+                    Values.append(Value);
+                    switch (row) {
+                    case 0:{
+                        Value->setFirstLast(-2);
+                        break;
+                    }
+                    case 1:{
+                        Values[row-1]->setFirstLast(-1);
+                        Value->setFirstLast(1);
+                        break;
+                    }
+                    default:{
+                        Values[row-1]->setFirstLast(0);
+                        Value->setFirstLast(1);
+                    }
+                    }
+                    //connect(btn,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryDeleteValues_clicked);
+                    //connect(val,&QLineEdit::editingFinished,this,&FormAchievements::EditLineEditChangeCategoryValue);
+                    //connect(up,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryUpValues_clicked);
+                    //connect(down,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryDownValues_clicked);
+                    //connect(select,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategorySelectValues_clicked);
+                    //connect(unselect,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryUnSelectValues_clicked);
+
+                    categoryvalueslayout->addRow(Value);
                     ui->TableWidgetAchievements->insertColumn(ui->TableWidgetAchievements->columnCount());
                     ui->TableWidgetAchievements->setHorizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1,new QTableWidgetItem(categor.object().value("values").toArray().at(i).toString()));
                     for (int j=0;j<ui->TableWidgetAchievements->rowCount();j++) {
@@ -2018,17 +1895,13 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int index){
                 }
                 category.close();
             } else {
-                ui->LineEditTitleCategoryChangeCategory->setEnabled(false);
+                ui->LineEditTitleCategory->setEnabled(false);
             }
         }
     }
 }
 
-void FormAchievements::on_ChangeTitleCategory_OneValue(){
+void FormAchievements::on_ChangeTitleCategory_OneValue(){//Готово
     if(ui->CheckBoxCategoryOneValue->isChecked())
-        ui->TableWidgetAchievements->horizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1)->setText(ui->LineEditTitleCategoryChangeCategory->text());
-}
-
-void FormAchievements::on_LineEditNameAchievements_editingFinished(){
-
+        ui->TableWidgetAchievements->horizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1)->setText(ui->LineEditTitleCategory->text());
 }

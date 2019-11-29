@@ -100,7 +100,7 @@ public:
     QHBoxLayout *horizontalLayout_9;
     QFormLayout *formLayout_2;
     QComboBox *ComboBoxCategoriesCategory;
-    QLineEdit *LineEditTitleCategoryCategory;
+    QLineEdit *LineEditTitleCategory;
     QPushButton *ButtonAddValueCategory;
     QCheckBox *CheckBoxCategoryOneValue;
     QScrollArea *ScrollAreaValuesCategory;
@@ -123,7 +123,7 @@ public:
     {
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
-        FormAchievements->resize(837, 849);
+        FormAchievements->resize(837, 968);
         verticalLayout_7 = new QVBoxLayout(FormAchievements);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         horizontalLayout_8 = new QHBoxLayout();
@@ -236,7 +236,7 @@ public:
         ScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 241, 109));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 241, 119));
         ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout_4->addWidget(ScrollAreaCategories);
@@ -248,7 +248,7 @@ public:
         ScrollAreaCheckCategories->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 240, 109));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 240, 119));
         ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
 
         horizontalLayout_4->addWidget(ScrollAreaCheckCategories);
@@ -489,12 +489,12 @@ public:
 
         formLayout_2->setWidget(0, QFormLayout::SpanningRole, ComboBoxCategoriesCategory);
 
-        LineEditTitleCategoryCategory = new QLineEdit(GroupBoxCategories);
-        LineEditTitleCategoryCategory->setObjectName(QString::fromUtf8("LineEditTitleCategoryCategory"));
-        sizePolicy4.setHeightForWidth(LineEditTitleCategoryCategory->sizePolicy().hasHeightForWidth());
-        LineEditTitleCategoryCategory->setSizePolicy(sizePolicy4);
+        LineEditTitleCategory = new QLineEdit(GroupBoxCategories);
+        LineEditTitleCategory->setObjectName(QString::fromUtf8("LineEditTitleCategory"));
+        sizePolicy4.setHeightForWidth(LineEditTitleCategory->sizePolicy().hasHeightForWidth());
+        LineEditTitleCategory->setSizePolicy(sizePolicy4);
 
-        formLayout_2->setWidget(1, QFormLayout::SpanningRole, LineEditTitleCategoryCategory);
+        formLayout_2->setWidget(1, QFormLayout::SpanningRole, LineEditTitleCategory);
 
         ButtonAddValueCategory = new QPushButton(GroupBoxCategories);
         ButtonAddValueCategory->setObjectName(QString::fromUtf8("ButtonAddValueCategory"));
@@ -516,7 +516,7 @@ public:
         ScrollAreaValuesCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 516, 70));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 516, 100));
         ScrollAreaValuesCategory->setWidget(scrollAreaWidgetContents_5);
 
         horizontalLayout_9->addWidget(ScrollAreaValuesCategory);

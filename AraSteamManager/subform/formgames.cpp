@@ -107,7 +107,6 @@ void FormGames::OnResultImage(ImageRequest *imgr){
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetGames->setCellWidget(imgr->GetRow(),0,label);
-    //imgr->deleteLater();
     if(numrequests==500&&numnow<games.size()){
         while (QFile::exists("images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg")||games[numnow].GetImg_icon_url()=="") {
             numnow++;
@@ -116,8 +115,10 @@ void FormGames::OnResultImage(ImageRequest *imgr){
                         QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",numnow,
                         "images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg",true);
         numnow++;
-    } else
+    } else {
         disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultImage);
+        imgr->deleteLater();
+    }
 }
 void FormGames::OnResultAchievements(ImageRequest *imgr){
     disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultAchievements);

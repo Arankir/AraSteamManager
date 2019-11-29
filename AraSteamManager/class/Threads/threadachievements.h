@@ -12,6 +12,7 @@ class ThreadAchievements : public QObject
     Q_OBJECT
 public:
     explicit ThreadAchievements(QObject *parent = nullptr);
+    ~ThreadAchievements() {qDebug()<<"Thread deleted";}
 
 signals:
     void finished();
