@@ -10,7 +10,7 @@ class Settings : public QObject
 {
     Q_OBJECT
 public:
-    explicit Settings(QObject* parent = nullptr);
+    explicit Settings(QObject *parent = nullptr);
     bool SetMyProfile(QString MyProfiles);
     bool SetLanguage(int Language);
     bool SetTheme(int Theme);

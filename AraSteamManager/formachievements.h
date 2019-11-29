@@ -15,10 +15,11 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <QButtonGroup>
-#include <class\imagerequest.h>
+#include <class/imagerequest.h>
 #include <class/settings.h>
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
+#include <class/filter.h>
 #include <subform/formcategoryvalue.h>
 #include <subform/formaddcategory.h>
 #include <class/Threads/threading.h>
@@ -32,7 +33,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, QString ids, SGame game, int num, QWidget* parent = nullptr);
+    explicit FormAchievements(QString keys, QString ids, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -45,7 +46,7 @@ public slots:
 private slots:
     void InitComponents();
 
-    void OnResultImage(ImageRequest* imgr);
+    void OnResultImage(ImageRequest *imgr);
     void SwitchSimpleCompare(int sc);
     void LoadingCompare();
     void on_ComboBoxCategory_Change(int index);
@@ -120,10 +121,10 @@ private slots:
     void CategoryAccept();
     void CategoryCancel();
     void CategoryNoValue(bool novalue);
-    void AddValueCategory(QString Type, QFormLayout* layout);
+    void AddValueCategory(QString Type, QFormLayout *layout);
     void UpValueCategory(QString Type, int i);
-    void DownValueCategory(QString Type, int i, QFormLayout* layout);
-    void DeleteValuesCategory(QString Type, int i, QFormLayout* layout);
+    void DownValueCategory(QString Type, int i, QFormLayout *layout);
+    void DeleteValuesCategory(QString Type, int i, QFormLayout *layout);
     void SelectValueCategory(int j,Qt::CheckState);
 
     void on_RadioButtonFriendAll_Click();
@@ -148,7 +149,7 @@ private slots:
 
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
-    void LoadFriend(SGames* Games);
+    void LoadFriend(SGames *Games);
     void FinishLoadFriends();
 
     void on_ComboBoxCategoriesCategory_currentIndexChanged(int index);
@@ -169,20 +170,20 @@ private slots:
 
     void on_ChangeTitleCategory_OneValue();
 
+    void on_LineEditNameAchievements_editingFinished();
+
 private:
-    Ui::FormAchievements* ui;
+    Ui::FormAchievements *ui;
     QString key;
     QString id;
     int windowchildcount=0;
     SGame game;
     SAchievements achievements;
-    bool** filterAchievements;
-    bool** filterCompare;
-    int colfilterAchievements=3;
-    int colfilterCompare=3;
-    QFormLayout* newcategoryvalueslayout;
-    QFormLayout* changecategoryvalueslayout;
-    QFormLayout* categoryvalueslayout;
+    Filter FAchievements;
+    Filter FCompare;
+    QFormLayout *newcategoryvalueslayout;
+    QFormLayout *changecategoryvalueslayout;
+    QFormLayout *categoryvalueslayout;
     QStringList Words;
     Settings Setting;
     QString theme="white";

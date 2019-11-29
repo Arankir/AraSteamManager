@@ -25,10 +25,10 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget* parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    FormGames* gamesform;
-    FormFriends* friendsform;
+    FormGames *gamesform;
+    FormFriends *friendsform;
 
 public slots:
     void ProgressLoading(int,int);
@@ -37,7 +37,7 @@ private slots:
     void returnfromgames();
     void returnfromfriends();
 
-    void keyPressEvent(QKeyEvent* event);
+    void keyPressEvent(QKeyEvent *event);
 
     void ShowGames();
     void ShowFriends();
@@ -61,7 +61,7 @@ private slots:
     void on_ButtonStatistics_clicked();
 
 private:
-    Ui::MainWindow* ui;
+    Ui::MainWindow *ui;
     QString key="3826BF60403D15613B4B0381DAB7A7BD";
     int windowchildcount=0;
     int windowchild=0;

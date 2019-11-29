@@ -16,7 +16,7 @@ class SGame : public QObject
 {
     Q_OBJECT
 public:
-    explicit SGame(QJsonObject ObjGame, QObject* parent = nullptr);
+    explicit SGame(QJsonObject ObjGame, QObject *parent = nullptr);
     SGame();
     void Set(QJsonObject ObjGame);
     int GetAppid() {return game.value("appid").toInt();}

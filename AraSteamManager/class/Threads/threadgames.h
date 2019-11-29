@@ -12,7 +12,7 @@ class ThreadGames : public QObject
 {
     Q_OBJECT
 public:
-    explicit ThreadGames(QObject* parent = nullptr);
+    explicit ThreadGames(QObject *parent = nullptr);
 
 signals:
     void finished();
@@ -20,11 +20,11 @@ signals:
 
 public slots:
     int Fill();
-    void Set(QTableWidget* TableWidgetGames, QVector<SGame> games);
+    void Set(QTableWidget *TableWidgetGames, QVector<SGame> games);
 
 private:
     QVector<SGame> games;
-    QTableWidget* TableWidgetGames;
+    QTableWidget *TableWidgetGames;
 };
 
 #endif // THREADGAMES_H

@@ -30,6 +30,7 @@ SOURCES += \
     class/Threads/threadgames.cpp \
     class/Threads/threading.cpp \
     class/categoryvalue.cpp \
+    class/filter.cpp \
     class/imagerequest.cpp \
     class/profile.cpp \
     class/settings.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     class/Threads/threadgames.h \
     class/Threads/threading.h \
     class/categoryvalue.h \
+    class/filter.h \
     class/imagerequest.h \
     class/profile.h \
     class/settings.h \

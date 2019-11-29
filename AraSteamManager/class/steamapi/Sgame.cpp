@@ -1,6 +1,6 @@
 #include "Sgame.h"
 
-SGame::SGame(QJsonObject ObjGame, QObject* parent) : QObject(parent){
+SGame::SGame(QJsonObject ObjGame, QObject *parent) : QObject(parent){
     Set(ObjGame);
 }
 SGame::SGame(){
@@ -33,5 +33,5 @@ SGame::SGame( const SGame & a){
 SGame & SGame::operator=(const SGame & a) {
     game=a.game;
     numberplayers=a.numberplayers;
-    return* this;
+    return *this;
 }

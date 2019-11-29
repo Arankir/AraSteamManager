@@ -17,7 +17,7 @@ class SLevels : public QObject
 {
     Q_OBJECT
 public:
-    explicit SLevels(QString key, QString id, QObject* parent = nullptr);
+    explicit SLevels(QString key, QString id, QObject *parent = nullptr);
     SLevels(QJsonDocument DocLevels);
     SLevels();
     ~SLevels();
@@ -32,10 +32,10 @@ signals:
     void finished();
 
 public slots:
-    //void Load(QNetworkReply* Reply);
+    //void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager* manager;
+    QNetworkAccessManager *manager;
     QString steamid;//"76561198065018572"
     int player_level=0;
     QString status;

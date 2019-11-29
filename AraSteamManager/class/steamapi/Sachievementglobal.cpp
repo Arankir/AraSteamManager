@@ -1,6 +1,6 @@
 #include "Sachievementglobal.h"
 
-SAchievementGlobal::SAchievementGlobal(QJsonObject ObjAchievement, QObject* parent) : QObject(parent){
+SAchievementGlobal::SAchievementGlobal(QJsonObject ObjAchievement, QObject *parent) : QObject(parent){
     Set(ObjAchievement);
 }
 SAchievementGlobal::SAchievementGlobal(){
@@ -34,5 +34,5 @@ SAchievementGlobal & SAchievementGlobal::operator=(const SAchievementGlobal & ac
     description=achievementss.description;
     icon=achievementss.icon;
     icongray=achievementss.icongray;
-    return* this;
+    return *this;
 }

@@ -8,6 +8,7 @@
 #include <class/steamapi/Sfriends.h>
 #include <class/Threads/threading.h>
 #include <class/settings.h>
+#include <class/filter.h>
 
 namespace Ui {
 class FormFriends;
@@ -18,7 +19,7 @@ class FormFriends : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormFriends(QString id, QString key, SFriends Friends, QWidget* parent = nullptr);
+    explicit FormFriends(QString id, QString key, SFriends Friends, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
@@ -31,11 +32,11 @@ public slots:
 
 private slots:
     void InitComponents();
-    void closeEvent(QCloseEvent* event);
+    void closeEvent(QCloseEvent *event);
 
     void on_ButtonReturn_clicked();
 
-    void OnResultImage(ImageRequest* imgr);
+    void OnResultImage(ImageRequest *imgr);
 
     void GoToProfileClicked();
     void FavoritesClicked();
@@ -47,7 +48,7 @@ private slots:
     void on_ComboBoxStatus_activated(int index);
 
 private:
-    Ui::FormFriends* ui;
+    Ui::FormFriends *ui;
     QString id;
     QString key;
     int windowchildcount=0;
@@ -61,7 +62,7 @@ private:
     int numrequests=0;
     int numnow=0;
 
-    bool** filter;
+    Filter filter;
 };
 
 #endif // FORMFRIENDS_H

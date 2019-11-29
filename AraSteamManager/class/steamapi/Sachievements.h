@@ -20,7 +20,7 @@ class SAchievements : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievements(QString key, QString appid, QString id, QString language, QObject* parent = nullptr);
+    explicit SAchievements(QString key, QString appid, QString id, QString language, QObject *parent = nullptr);
     SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
     SAchievements();
     ~SAchievements();

@@ -17,7 +17,7 @@ class SAchievementsGlobal : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsGlobal(QString key, QString appid, QString id, QObject* parent = nullptr);
+    explicit SAchievementsGlobal(QString key, QString appid, QString id, QObject *parent = nullptr);
     SAchievementsGlobal(QJsonDocument DocAchievements);
     SAchievementsGlobal();
     ~SAchievementsGlobal();
@@ -47,10 +47,10 @@ signals:
     void finished();
 
 public slots:
-    void Load(QNetworkReply* Reply);
+    void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager* manager;
+    QNetworkAccessManager *manager;
     QVector<SAchievementGlobal> achievements;
     QString status="none";
     QString language="english";

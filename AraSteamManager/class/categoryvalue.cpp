@@ -53,7 +53,7 @@ CategoryValue::CategoryValue(int positions){
 }
 
 void CategoryValue::OnChangePosition(){
-    QPushButton* btn = qobject_cast<QPushButton*>(sender());
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
     if(btn->objectName()=="Up")
         emit positionchange(position, position-1);
     else if(btn->objectName()=="Down")
@@ -61,7 +61,7 @@ void CategoryValue::OnChangePosition(){
 }
 
 void CategoryValue::OnChangeSelect(){
-    QPushButton* btn = qobject_cast<QPushButton*>(sender());
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
     emit selectchange(position, btn->objectName()=="Select"?true:false);
 }
 
@@ -110,5 +110,5 @@ CategoryValue & CategoryValue::operator=(const CategoryValue & a){
     position=a.position;
     Words=a.Words;
     theme=a.theme;
-    return* this;
+    return *this;
 }

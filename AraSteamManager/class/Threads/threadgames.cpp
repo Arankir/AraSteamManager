@@ -1,10 +1,10 @@
 #include "threadgames.h"
 
-ThreadGames::ThreadGames(QObject* parent) : QObject(parent){
+ThreadGames::ThreadGames(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadGames::Set(QTableWidget* TableWidgetGames, QVector<SGame> games){
+void ThreadGames::Set(QTableWidget *TableWidgetGames, QVector<SGame> games){
     this->games=games;
     this->TableWidgetGames=TableWidgetGames;
 }

@@ -1,6 +1,6 @@
-#include "SAchievementPlayer.h"
+#include "Sachievementplayer.h"
 
-SAchievementPlayer::SAchievementPlayer(QJsonObject ObjAchievement, QObject* parent) : QObject(parent){
+SAchievementPlayer::SAchievementPlayer(QJsonObject ObjAchievement, QObject *parent) : QObject(parent){
     Set(ObjAchievement);
 }
 SAchievementPlayer::SAchievementPlayer(){
@@ -23,5 +23,5 @@ SAchievementPlayer & SAchievementPlayer::operator=(const SAchievementPlayer & Ac
     apiname=Achievements.apiname;
     achieved=Achievements.achieved;
     unlocktime=Achievements.unlocktime;
-    return* this;
+    return *this;
 }

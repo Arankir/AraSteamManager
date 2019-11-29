@@ -15,7 +15,7 @@ class SAchievement : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievement(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent, QObject* parent = nullptr);
+    explicit SAchievement(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent, QObject *parent = nullptr);
     SAchievement();
     void Set(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent);
     void SetGlobal(SAchievementGlobal Global);

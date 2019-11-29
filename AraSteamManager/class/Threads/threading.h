@@ -11,14 +11,14 @@ class Threading : public QObject
 {
     Q_OBJECT
 public:
-    explicit Threading(QObject* parent = nullptr);
+    explicit Threading(QObject *parent = nullptr);
 
 signals:
 
 public slots:
-    int AddThreadGames(QTableWidget* TableWidgetGames, QVector<SGame> games);
-    int AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, QLabel* LabelTotalPersentCompare, QTableWidget* TableWidgetCompareAchievements);
-    int AddThreadFriends(QTableWidget* TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss,QStringList Words);
+    int AddThreadGames(QTableWidget *TableWidgetGames, QVector<SGame> games);
+    int AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
+    int AddThreadFriends(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss,QStringList Words);
 };
 
 #endif // THREADING_H

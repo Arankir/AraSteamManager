@@ -16,7 +16,7 @@ class Profile : public QObject
 {
     Q_OBJECT
 public:
-    explicit Profile(QJsonObject info, QObject* parent = nullptr);
+    explicit Profile(QJsonObject info, QObject *parent = nullptr);
     Profile();
     ~Profile();
     void Set(QJsonObject info);

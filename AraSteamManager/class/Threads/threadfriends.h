@@ -11,7 +11,7 @@ class ThreadFriends : public QObject
 {
     Q_OBJECT
 public:
-    explicit ThreadFriends(QObject* parent = nullptr);
+    explicit ThreadFriends(QObject *parent = nullptr);
 
 signals:
     void finished();
@@ -19,13 +19,13 @@ signals:
 
 public slots:
     int Fill();
-    void Set(QTableWidget* TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends,QStringList Words);
+    void Set(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends,QStringList Words);
 
 private:
     SFriends Friends;
     QVector<SProfile> Profiles;
     QStringList Words;
-    QTableWidget* TableWidgetFriends;
+    QTableWidget *TableWidgetFriends;
 };
 
 #endif // THREADFRIENDS_H

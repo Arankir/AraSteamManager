@@ -11,7 +11,7 @@ class SAchievementPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementPlayer(QJsonObject ObjAchievement, QObject* parent = nullptr);
+    explicit SAchievementPlayer(QJsonObject ObjAchievement, QObject *parent = nullptr);
     SAchievementPlayer();
     void Set(QJsonObject ObjAchievement);
     QString GetApiname() {return apiname;}

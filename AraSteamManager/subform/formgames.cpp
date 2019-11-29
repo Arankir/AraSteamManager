@@ -1,7 +1,7 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget* parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     Words=Setting.GetWords("games");
     id=ids;
@@ -51,13 +51,13 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setRowCount(games.count());
     for (int i=0;i<games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
-        QPushButton* button1 = new QPushButton(Words[4]);
+        QPushButton *button1 = new QPushButton(Words[4]);
         button1->setMinimumSize(QSize(25,25));
         connect(button1,&QPushButton::pressed,this,&FormGames::AchievementsClicked);
         button1->setObjectName("ButtonAchievements"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(i,2,button1);
 
-        QPushButton* button2 = new QPushButton;
+        QPushButton *button2 = new QPushButton;
         button2->setIcon(Favorite);
         button2->setMinimumSize(QSize(25,25));
         connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
@@ -79,7 +79,7 @@ void FormGames::OnFinish(){
         if(!QFile::exists(path)){
             if(numrequests<500){
                 if(games[i].GetImg_icon_url()!=""){
-                    ImageRequest* image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+
+                    ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+
                                                            QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",i,path,true);
                     connect(image,&ImageRequest::onReady,this,&FormGames::OnResultImage);
                     request.append(image);
@@ -90,21 +90,21 @@ void FormGames::OnFinish(){
             } else {
             QPixmap pixmap;
             pixmap.load(path);
-            QLabel* label = new QLabel;
+            QLabel *label = new QLabel;
             label->setPixmap(pixmap);
             ui->TableWidgetGames->setCellWidget(i,0,label);
             }
-        ImageRequest* Achievements = new ImageRequest();
+        ImageRequest *Achievements = new ImageRequest();
         connect(Achievements,&ImageRequest::onReady,this,&FormGames::OnResultAchievements);
         Achievements->LoadImage("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+
                                 "&gameid="+QString::number(games[i].GetAppid()),i,
                                 "ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
         }
 }
-void FormGames::OnResultImage(ImageRequest* imgr){
+void FormGames::OnResultImage(ImageRequest *imgr){
     QPixmap pixmap;
     pixmap.loadFromData(imgr->GetAnswer());
-    QLabel* label = new QLabel;
+    QLabel *label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetGames->setCellWidget(imgr->GetRow(),0,label);
     //imgr->deleteLater();
@@ -112,12 +112,14 @@ void FormGames::OnResultImage(ImageRequest* imgr){
         while (QFile::exists("images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg")||games[numnow].GetImg_icon_url()=="") {
             numnow++;
         }
-        imgr->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",imgr->GetRow(),"images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg",true);
+        imgr->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+
+                        QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",numnow,
+                        "images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg",true);
         numnow++;
     } else
         disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultImage);
 }
-void FormGames::OnResultAchievements(ImageRequest* imgr){
+void FormGames::OnResultAchievements(ImageRequest *imgr){
     disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultAchievements);
     QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
     if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
@@ -129,7 +131,7 @@ void FormGames::OnResultAchievements(ImageRequest* imgr){
 
 #define System {
 FormGames::~FormGames(){
-    qDebug()<<numrequests;
+    qDebug()<<numrequests<<"запросов на картинки";
     //if(numrequests)
     //    for (int i=0;i<=numrequests;i++) {
     //        delete request[numrequests];
@@ -140,7 +142,8 @@ FormGames::~FormGames(){
     delete ui;
 }
 void FormGames::closeEvent(QCloseEvent*){
-    on_ButtonReturn_clicked();
+    emit return_to_profile();
+    //delete this;
 }
 void FormGames::returnfromachievements(int num){
     //windowchildcount--;
@@ -162,7 +165,7 @@ void FormGames::on_ButtonFind_clicked(){
 
 #define Functions {
 void FormGames::AchievementsClicked(){
-    QPushButton* btn = qobject_cast<QPushButton*>(sender());
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int index=btn->objectName().mid(18,4).toInt();
     QEventLoop loop;
     SAchievementsPercentage Percentage(key,QString::number(games[index].GetAppid()));
@@ -172,7 +175,7 @@ void FormGames::AchievementsClicked(){
     if(Percentage.GetAchievementsCount()==0){
         QMessageBox::warning(this,Words[6],Words[7]);
     } else {
-        FormAchievements* fa = new FormAchievements(key,id,games[index],windowchildcount++);
+        FormAchievements *fa = new FormAchievements(key,id,games[index],windowchildcount++);
         achievementsforms.append(fa);
         connect(fa,&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
         fa->show();
@@ -182,8 +185,3 @@ void FormGames::FavoritesClicked(){
 
 }
 #define FunctionsEnd }
-
-void FormGames::on_ButtonReturn_clicked(){
-    emit return_to_profile();
-    //delete this;
-}

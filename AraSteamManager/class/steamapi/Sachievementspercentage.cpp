@@ -1,6 +1,6 @@
 #include "Sachievementspercentage.h"
 
-SAchievementsPercentage::SAchievementsPercentage(QString key, QString appid, QObject* parent) : QObject(parent){
+SAchievementsPercentage::SAchievementsPercentage(QString key, QString appid, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, appid);
 }
@@ -35,7 +35,7 @@ void SAchievementsPercentage::Set(QJsonDocument DocAchievements){
     }
 }
 
-void SAchievementsPercentage::Load(QNetworkReply* Reply){
+void SAchievementsPercentage::Load(QNetworkReply *Reply){
     disconnect(manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
     QJsonDocument DocAchievements = QJsonDocument::fromJson(Reply->readAll());
     Reply->deleteLater();
@@ -69,5 +69,5 @@ SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievements
     count=achievementss.count;
     status=achievementss.status;
     manager = new QNetworkAccessManager;
-    return* this;
+    return *this;
 }

@@ -17,7 +17,7 @@ class ImageRequest : public QObject
 {
     Q_OBJECT
 public:
-    explicit ImageRequest(QString url, int column=-1, QString save="", bool autosave=false, QObject* parent = nullptr);
+    explicit ImageRequest(QString url, int column=-1, QString save="", bool autosave=false, QObject *parent = nullptr);
     ImageRequest();
     ~ImageRequest();
     void LoadImage(QString url, int column=-1, QString save="", bool autosave=false);
@@ -27,10 +27,10 @@ public:
     int GetRow() {return i;}
 
 signals:
-    void onReady(ImageRequest* imgr);
+    void onReady(ImageRequest *imgr);
 
 private:
-    QNetworkAccessManager* manager;
+    QNetworkAccessManager *manager;
     QByteArray answer;
     QString Url;
     int i;
@@ -39,7 +39,7 @@ private:
     Settings Setting;
 
 public slots:
-    void OnResultGet(QNetworkReply* reply);
+    void OnResultGet(QNetworkReply *reply);
 };
 
 #endif // IMAGEREQUEST_H

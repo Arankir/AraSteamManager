@@ -17,7 +17,7 @@ class SBans : public QObject
 {
     Q_OBJECT
 public:
-    explicit SBans(QString key, QString id, bool parallel, QObject* parent = nullptr);
+    explicit SBans(QString key, QString id, bool parallel, QObject *parent = nullptr);
     SBans(QJsonDocument DocBans);
     SBans();
     ~SBans();
@@ -38,10 +38,10 @@ signals:
     void finished();
 
 public slots:
-    void Load(QNetworkReply* Reply);
+    void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager* manager;
+    QNetworkAccessManager *manager;
     QJsonArray bans;
     QString status;
     QString key;

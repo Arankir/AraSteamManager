@@ -17,7 +17,7 @@ class SAchievementsPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsPlayer(QString key, QString appid, QString id, QObject* parent = nullptr);
+    explicit SAchievementsPlayer(QString key, QString appid, QString id, QObject *parent = nullptr);
     SAchievementsPlayer(QJsonDocument DocAchievements);
     SAchievementsPlayer();
     ~SAchievementsPlayer();
@@ -42,10 +42,10 @@ signals:
     void finished();
 
 public slots:
-    void Load(QNetworkReply* Reply);
+    void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager* manager;
+    QNetworkAccessManager *manager;
     QVector<SAchievementPlayer> achievements;
     QString status="none";
     QString id="";

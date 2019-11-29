@@ -10,7 +10,7 @@ class SGames : public QObject
 {
     Q_OBJECT
 public:
-    explicit SGames(QString key, QString id, bool free_games, bool game_info, bool parallel, QObject* parent = nullptr);
+    explicit SGames(QString key, QString id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
     SGames(QJsonDocument DocGames);
     SGames();
     ~SGames();
@@ -39,10 +39,10 @@ signals:
     void finished();
 
 public slots:
-    void Load(QNetworkReply* Reply);
+    void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager* manager;
+    QNetworkAccessManager *manager;
     QJsonArray games;
     QString status="none";
     QString id;

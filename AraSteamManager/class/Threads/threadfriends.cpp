@@ -1,10 +1,10 @@
 #include "threadfriends.h"
 
-ThreadFriends::ThreadFriends(QObject* parent) : QObject(parent){
+ThreadFriends::ThreadFriends(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadFriends::Set(QTableWidget* TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends,QStringList Words){
+void ThreadFriends::Set(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends,QStringList Words){
     this->TableWidgetFriends=TableWidgetFriends;
     this->Profiles=Profiles;
     this->Friends=Friends;
@@ -19,7 +19,7 @@ int ThreadFriends::Fill(){
                 break;
             }
         }
-        QTableWidgetItem* item4 = new QTableWidgetItem;
+        QTableWidgetItem *item4 = new QTableWidgetItem;
         if(!Profiles[i].GetGameextrainfo().isEmpty()){
             item4->setText(Words[8]);
             item4->setTextColor(QColor("#89b753"));
@@ -61,7 +61,7 @@ int ThreadFriends::Fill(){
                     break;
             }
             }
-        QTableWidgetItem* item5 = new QTableWidgetItem;
+        QTableWidgetItem *item5 = new QTableWidgetItem;
         switch(Profiles[i].GetCommunityvisibilitystate()){
         case 1:{
             item5->setText(Words[17]);

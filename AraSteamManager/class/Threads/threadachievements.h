@@ -11,7 +11,7 @@ class ThreadAchievements : public QObject
 {
     Q_OBJECT
 public:
-    explicit ThreadAchievements(QObject* parent = nullptr);
+    explicit ThreadAchievements(QObject *parent = nullptr);
 
 signals:
     void finished();
@@ -19,16 +19,16 @@ signals:
 
 public slots:
     int Fill();
-    void Set(SAchievements achievements, QStringList Words, QLabel* LabelTotalPersent, QTableWidget* TableWidgetAchievements, QLabel* LabelTotalPersentCompare, QTableWidget* TableWidgetCompareAchievements);
+    void Set(SAchievements achievements, QStringList Words, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
 
 private:
     int num;
     SAchievements achievements;
     QStringList Words;
-    QLabel* LabelTotalPersent;
-    QTableWidget* TableWidgetAchievements;
-    QLabel* LabelTotalPersentCompare;
-    QTableWidget* TableWidgetCompareAchievements;
+    QLabel *LabelTotalPersent;
+    QTableWidget *TableWidgetAchievements;
+    QLabel *LabelTotalPersentCompare;
+    QTableWidget *TableWidgetCompareAchievements;
 };
 
 #endif // THREADACHIEVEMENTS_H

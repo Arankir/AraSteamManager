@@ -1,6 +1,6 @@
 #include "Sachievementsglobal.h"
 
-SAchievementsGlobal::SAchievementsGlobal(QString key, QString appid, QString language, QObject* parent) : QObject(parent){
+SAchievementsGlobal::SAchievementsGlobal(QString key, QString appid, QString language, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, appid, language);
 }
@@ -38,7 +38,7 @@ void SAchievementsGlobal::Set(QJsonDocument DocAchievements){
     }
 }
 
-void SAchievementsGlobal::Load(QNetworkReply* Reply){
+void SAchievementsGlobal::Load(QNetworkReply *Reply){
     disconnect(manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
     QJsonDocument DocAchievements = QJsonDocument::fromJson(Reply->readAll());
     Reply->deleteLater();
@@ -78,5 +78,5 @@ SAchievementsGlobal & SAchievementsGlobal::operator=(const SAchievementsGlobal &
     gameversion=achievementss.gameversion;
     status=achievementss.status;
     manager = new QNetworkAccessManager;
-    return* this;
+    return *this;
 }

@@ -1,6 +1,6 @@
 #include "Sachievementsplayer.h"
 
-SAchievementsPlayer::SAchievementsPlayer(QString key, QString appid, QString id, QObject* parent) : QObject(parent){
+SAchievementsPlayer::SAchievementsPlayer(QString key, QString appid, QString id, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     Set(key, appid, id);
 }
@@ -38,7 +38,7 @@ void SAchievementsPlayer::Set(QJsonDocument DocAchievements){
     }
 }
 
-void SAchievementsPlayer::Load(QNetworkReply* Reply){
+void SAchievementsPlayer::Load(QNetworkReply *Reply){
     disconnect(manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
     QJsonDocument DocAchievements = QJsonDocument::fromJson(Reply->readAll());
     Reply->deleteLater();
@@ -76,5 +76,5 @@ SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer &
     gamename=achievementss.gamename;
     status=achievementss.status;
     manager = new QNetworkAccessManager;
-    return* this;
+    return *this;
 }

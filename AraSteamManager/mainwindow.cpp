@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget* parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
+MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
     qRegisterMetaType<QVector<int>>("QVector<int>");
     Words=Setting.GetWords("mainwindow");
@@ -114,7 +114,7 @@ void MainWindow::ShowFriends(){
     ui->FormProgressBar->setVisible(false);
     friendsform->setVisible(true);
 }
-void MainWindow::keyPressEvent(QKeyEvent* event){
+void MainWindow::keyPressEvent(QKeyEvent *event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
     if(event->key() == 16777220)
         on_ButtonFindProfile_clicked();
