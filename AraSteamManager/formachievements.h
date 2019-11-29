@@ -152,8 +152,6 @@ private slots:
     void LoadFriend(SGames *Games);
     void FinishLoadFriends();
 
-    void on_ComboBoxCategoriesCategory_currentIndexChanged(int index);
-
     void on_LineEditTitleCategoryChangeCategory_editingFinished();
 
     void on_ButtonAddValueCategory_clicked();

@@ -1648,9 +1648,6 @@ void FormAchievements::on_ButtonReturn_clicked(){
     emit return_to_games(unicnum);
     //delete this;
 }
-void FormAchievements::on_ComboBoxCategoriesCategory_currentIndexChanged(int index){
-
-}
 void FormAchievements::on_LineEditTitleCategoryChangeCategory_editingFinished(){
 
 }
@@ -2032,7 +2029,6 @@ void FormAchievements::on_ChangeTitleCategory_OneValue(){
         ui->TableWidgetAchievements->horizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1)->setText(ui->LineEditTitleCategoryChangeCategory->text());
 }
 
-void FormAchievements::on_LineEditNameAchievements_editingFinished()
-{
+void FormAchievements::on_LineEditNameAchievements_editingFinished(){
 
 }
