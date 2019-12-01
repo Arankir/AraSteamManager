@@ -11,12 +11,12 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,12 +24,11 @@ QT_BEGIN_NAMESPACE
 class Ui_FormGames
 {
 public:
-    QGridLayout *gridLayout;
-    QTableWidget *TableWidgetGames;
-    QPushButton *ButtonReturn;
-    QLabel *LabelLogo;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
     QLineEdit *LineEditGame;
     QPushButton *ButtonFind;
+    QTableWidget *TableWidgetGames;
 
     void setupUi(QWidget *FormGames)
     {
@@ -39,45 +38,39 @@ public:
         QFont font;
         font.setPointSize(10);
         FormGames->setFont(font);
-        gridLayout = new QGridLayout(FormGames);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        verticalLayout = new QVBoxLayout(FormGames);
+        verticalLayout->setSpacing(1);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(1, 1, 1, 1);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        LineEditGame = new QLineEdit(FormGames);
+        LineEditGame->setObjectName(QString::fromUtf8("LineEditGame"));
+        LineEditGame->setFont(font);
+
+        horizontalLayout->addWidget(LineEditGame);
+
+        ButtonFind = new QPushButton(FormGames);
+        ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
+        ButtonFind->setEnabled(true);
+        QFont font1;
+        font1.setPointSize(8);
+        ButtonFind->setFont(font1);
+
+        horizontalLayout->addWidget(ButtonFind);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         TableWidgetGames = new QTableWidget(FormGames);
         if (TableWidgetGames->columnCount() < 4)
             TableWidgetGames->setColumnCount(4);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
         TableWidgetGames->setColumnCount(4);
 
-        gridLayout->addWidget(TableWidgetGames, 2, 0, 1, 2);
-
-        ButtonReturn = new QPushButton(FormGames);
-        ButtonReturn->setObjectName(QString::fromUtf8("ButtonReturn"));
-        QFont font1;
-        font1.setPointSize(8);
-        ButtonReturn->setFont(font1);
-
-        gridLayout->addWidget(ButtonReturn, 0, 1, 1, 1);
-
-        LabelLogo = new QLabel(FormGames);
-        LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
-        LabelLogo->setFont(font);
-
-        gridLayout->addWidget(LabelLogo, 0, 0, 1, 1);
-
-        LineEditGame = new QLineEdit(FormGames);
-        LineEditGame->setObjectName(QString::fromUtf8("LineEditGame"));
-        LineEditGame->setFont(font);
-
-        gridLayout->addWidget(LineEditGame, 1, 0, 1, 1);
-
-        ButtonFind = new QPushButton(FormGames);
-        ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
-        ButtonFind->setEnabled(true);
-        ButtonFind->setFont(font1);
-
-        gridLayout->addWidget(ButtonFind, 1, 1, 1, 1);
+        verticalLayout->addWidget(TableWidgetGames);
 
         QWidget::setTabOrder(LineEditGame, ButtonFind);
-        QWidget::setTabOrder(ButtonFind, ButtonReturn);
 
         retranslateUi(FormGames);
 
@@ -87,8 +80,6 @@ public:
     void retranslateUi(QWidget *FormGames)
     {
         FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        ButtonReturn->setText(QApplication::translate("FormGames", "Return", nullptr));
-        LabelLogo->setText(QApplication::translate("FormGames", "Logo", nullptr));
         ButtonFind->setText(QApplication::translate("FormGames", "Find", nullptr));
     } // retranslateUi
 

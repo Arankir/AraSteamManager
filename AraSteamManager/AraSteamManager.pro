@@ -29,7 +29,6 @@ SOURCES += \
     class/Threads/threadfriends.cpp \
     class/Threads/threadgames.cpp \
     class/Threads/threading.cpp \
-    class/categoryvalue.cpp \
     class/filter.cpp \
     class/imagerequest.cpp \
     class/profile.cpp \
@@ -52,7 +51,6 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     formachievements.cpp \
-    subform/formaddcategory.cpp \
     subform/formcategoryvalue.cpp \
     subform/formfriends.cpp \
     subform/formgames.cpp
@@ -62,7 +60,6 @@ HEADERS += \
     class/Threads/threadfriends.h \
     class/Threads/threadgames.h \
     class/Threads/threading.h \
-    class/categoryvalue.h \
     class/filter.h \
     class/imagerequest.h \
     class/profile.h \
@@ -84,7 +81,6 @@ HEADERS += \
     class/steamapi/Sprofile.h \
         mainwindow.h \
     formachievements.h \
-    subform/formaddcategory.h \
     subform/formcategoryvalue.h \
     subform/formfriends.h \
     subform/formgames.h
@@ -92,7 +88,6 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     formachievements.ui \
-    subform/formaddcategory.ui \
     subform/formcategoryvalue.ui \
     subform/formfriends.ui \
     subform/formgames.ui

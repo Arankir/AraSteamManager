@@ -38,8 +38,8 @@ private slots:
     void closeEvent(QCloseEvent *event);
 
     void AchievementsClicked();
-
     void FavoritesClicked();
+    void HideClicked();
 
     void on_LineEditGame_textChanged(const QString);
 
@@ -52,10 +52,9 @@ private:
     int windowchildcount=0;
     QVector<SGame> games;
     QStringList Words;
+    QStringList Hide;
     Settings Setting;
     QString theme="white";
-    QIcon Achievement;
-    QIcon Favorite;
 
     QVector<ImageRequest*> request;
     int numrequests=0;

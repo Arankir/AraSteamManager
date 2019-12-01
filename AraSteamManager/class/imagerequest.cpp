@@ -55,7 +55,7 @@ void ImageRequest::OnResultGet(QNetworkReply *reply){
                 if(savenow.indexOf("/",0)>-1){
                     QString dir=savenow.mid(0,savenow.indexOf("/",0));
                     savenow=savenow.mid(savenow.indexOf("/",0)+1, savenow.length());
-                    qDebug()<<"Сохранить картинку в "<< dir<<savenow;
+                    qDebug()<<"Сохранить картинку в "<< dir+"/"+savenow;
                     if(!QDir(path+dir).exists()){
                         QDir().mkdir(path+dir);
                     }

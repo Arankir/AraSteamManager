@@ -13,10 +13,11 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
-#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,13 +25,15 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAddCategory
 {
 public:
-    QGridLayout *gridLayout;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_2;
+    QLineEdit *LineEditTitle;
+    QCheckBox *CheckBoxNoValue;
+    QPushButton *ButtonAddValue;
     QScrollArea *ScrollAreaValues;
     QWidget *ScrollAreaLayout;
-    QLineEdit *LineEditTitle;
+    QVBoxLayout *verticalLayout;
     QPushButton *ButtonCancel;
-    QPushButton *ButtonAddValue;
-    QCheckBox *CheckBoxNoValue;
     QCheckBox *CheckBoxSelectAll;
     QPushButton *ButtonAccept;
 
@@ -38,52 +41,73 @@ public:
     {
         if (FormAddCategory->objectName().isEmpty())
             FormAddCategory->setObjectName(QString::fromUtf8("FormAddCategory"));
-        FormAddCategory->resize(700, 108);
-        gridLayout = new QGridLayout(FormAddCategory);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        ScrollAreaValues = new QScrollArea(FormAddCategory);
-        ScrollAreaValues->setObjectName(QString::fromUtf8("ScrollAreaValues"));
-        ScrollAreaValues->setWidgetResizable(true);
-        ScrollAreaLayout = new QWidget();
-        ScrollAreaLayout->setObjectName(QString::fromUtf8("ScrollAreaLayout"));
-        ScrollAreaLayout->setGeometry(QRect(0, 0, 438, 81));
-        ScrollAreaValues->setWidget(ScrollAreaLayout);
-
-        gridLayout->addWidget(ScrollAreaValues, 0, 1, 3, 1);
-
+        FormAddCategory->resize(700, 103);
+        horizontalLayout = new QHBoxLayout(FormAddCategory);
+        horizontalLayout->setSpacing(3);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(1, 1, 1, 1);
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(3);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         LineEditTitle = new QLineEdit(FormAddCategory);
         LineEditTitle->setObjectName(QString::fromUtf8("LineEditTitle"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(LineEditTitle->sizePolicy().hasHeightForWidth());
+        LineEditTitle->setSizePolicy(sizePolicy);
         LineEditTitle->setMaximumSize(QSize(150, 16777215));
 
-        gridLayout->addWidget(LineEditTitle, 0, 0, 1, 1);
-
-        ButtonCancel = new QPushButton(FormAddCategory);
-        ButtonCancel->setObjectName(QString::fromUtf8("ButtonCancel"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/program/program/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
-        ButtonCancel->setIcon(icon);
-
-        gridLayout->addWidget(ButtonCancel, 0, 2, 1, 1);
-
-        ButtonAddValue = new QPushButton(FormAddCategory);
-        ButtonAddValue->setObjectName(QString::fromUtf8("ButtonAddValue"));
-        ButtonAddValue->setMaximumSize(QSize(150, 16777215));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/program/program/create.png"), QSize(), QIcon::Normal, QIcon::Off);
-        ButtonAddValue->setIcon(icon1);
-
-        gridLayout->addWidget(ButtonAddValue, 2, 0, 1, 1);
+        verticalLayout_2->addWidget(LineEditTitle);
 
         CheckBoxNoValue = new QCheckBox(FormAddCategory);
         CheckBoxNoValue->setObjectName(QString::fromUtf8("CheckBoxNoValue"));
 
-        gridLayout->addWidget(CheckBoxNoValue, 1, 0, 1, 1);
+        verticalLayout_2->addWidget(CheckBoxNoValue);
+
+        ButtonAddValue = new QPushButton(FormAddCategory);
+        ButtonAddValue->setObjectName(QString::fromUtf8("ButtonAddValue"));
+        ButtonAddValue->setMaximumSize(QSize(150, 16777215));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/program/program/create.png"), QSize(), QIcon::Normal, QIcon::Off);
+        ButtonAddValue->setIcon(icon);
+
+        verticalLayout_2->addWidget(ButtonAddValue);
+
+
+        horizontalLayout->addLayout(verticalLayout_2);
+
+        ScrollAreaValues = new QScrollArea(FormAddCategory);
+        ScrollAreaValues->setObjectName(QString::fromUtf8("ScrollAreaValues"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(ScrollAreaValues->sizePolicy().hasHeightForWidth());
+        ScrollAreaValues->setSizePolicy(sizePolicy1);
+        ScrollAreaValues->setWidgetResizable(true);
+        ScrollAreaLayout = new QWidget();
+        ScrollAreaLayout->setObjectName(QString::fromUtf8("ScrollAreaLayout"));
+        ScrollAreaLayout->setGeometry(QRect(0, 0, 498, 99));
+        ScrollAreaValues->setWidget(ScrollAreaLayout);
+
+        horizontalLayout->addWidget(ScrollAreaValues);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(3);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        ButtonCancel = new QPushButton(FormAddCategory);
+        ButtonCancel->setObjectName(QString::fromUtf8("ButtonCancel"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/program/program/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
+        ButtonCancel->setIcon(icon1);
+
+        verticalLayout->addWidget(ButtonCancel);
 
         CheckBoxSelectAll = new QCheckBox(FormAddCategory);
         CheckBoxSelectAll->setObjectName(QString::fromUtf8("CheckBoxSelectAll"));
         CheckBoxSelectAll->setChecked(true);
 
-        gridLayout->addWidget(CheckBoxSelectAll, 1, 2, 1, 1);
+        verticalLayout->addWidget(CheckBoxSelectAll);
 
         ButtonAccept = new QPushButton(FormAddCategory);
         ButtonAccept->setObjectName(QString::fromUtf8("ButtonAccept"));
@@ -91,7 +115,10 @@ public:
         icon2.addFile(QString::fromUtf8(":/program/program/apply.png"), QSize(), QIcon::Normal, QIcon::Off);
         ButtonAccept->setIcon(icon2);
 
-        gridLayout->addWidget(ButtonAccept, 2, 2, 1, 1);
+        verticalLayout->addWidget(ButtonAccept);
+
+
+        horizontalLayout->addLayout(verticalLayout);
 
 
         retranslateUi(FormAddCategory);
@@ -102,9 +129,9 @@ public:
     void retranslateUi(QWidget *FormAddCategory)
     {
         FormAddCategory->setWindowTitle(QApplication::translate("FormAddCategory", "Form", nullptr));
-        ButtonCancel->setText(QApplication::translate("FormAddCategory", "Cancel", nullptr));
-        ButtonAddValue->setText(QApplication::translate("FormAddCategory", "AddValue", nullptr));
         CheckBoxNoValue->setText(QApplication::translate("FormAddCategory", "CheckBox", nullptr));
+        ButtonAddValue->setText(QApplication::translate("FormAddCategory", "AddValue", nullptr));
+        ButtonCancel->setText(QApplication::translate("FormAddCategory", "Cancel", nullptr));
         CheckBoxSelectAll->setText(QApplication::translate("FormAddCategory", "SelectAll", nullptr));
         ButtonAccept->setText(QApplication::translate("FormAddCategory", "Accept", nullptr));
     } // retranslateUi

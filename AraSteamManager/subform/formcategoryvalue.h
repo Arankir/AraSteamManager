@@ -17,6 +17,7 @@ public:
     ~FormCategoryValue();
     void setVisibl(bool visible);
     void setPosition(int pos);
+    void setTitle(QString);
     void setFirstLast(int firstlast);
     int getPosition() {return position;}
     QString getTitle();

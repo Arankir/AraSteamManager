@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Threading_t {
-    QByteArrayData data[21];
-    char stringdata0[281];
+    QByteArrayData data[22];
+    char stringdata0[320];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,20 +46,23 @@ QT_MOC_LITERAL(10, 127, 5), // "Words"
 QT_MOC_LITERAL(11, 133, 7), // "QLabel*"
 QT_MOC_LITERAL(12, 141, 17), // "LabelTotalPersent"
 QT_MOC_LITERAL(13, 159, 23), // "TableWidgetAchievements"
-QT_MOC_LITERAL(14, 183, 16), // "AddThreadCompare"
-QT_MOC_LITERAL(15, 200, 16), // "AddThreadFriends"
-QT_MOC_LITERAL(16, 217, 18), // "TableWidgetFriends"
-QT_MOC_LITERAL(17, 236, 17), // "QVector<SProfile>"
-QT_MOC_LITERAL(18, 254, 8), // "Profiles"
-QT_MOC_LITERAL(19, 263, 8), // "SFriends"
-QT_MOC_LITERAL(20, 272, 8) // "Friendss"
+QT_MOC_LITERAL(14, 183, 24), // "LabelTotalPersentCompare"
+QT_MOC_LITERAL(15, 208, 30), // "TableWidgetCompareAchievements"
+QT_MOC_LITERAL(16, 239, 16), // "AddThreadFriends"
+QT_MOC_LITERAL(17, 256, 18), // "TableWidgetFriends"
+QT_MOC_LITERAL(18, 275, 17), // "QVector<SProfile>"
+QT_MOC_LITERAL(19, 293, 8), // "Profiles"
+QT_MOC_LITERAL(20, 302, 8), // "SFriends"
+QT_MOC_LITERAL(21, 311, 8) // "Friendss"
 
     },
     "Threading\0AddThreadGames\0\0QTableWidget*\0"
     "TableWidgetGames\0QVector<SGame>\0games\0"
     "AddThreadAchievements\0SAchievements\0"
     "achievements\0Words\0QLabel*\0LabelTotalPersent\0"
-    "TableWidgetAchievements\0AddThreadCompare\0"
+    "TableWidgetAchievements\0"
+    "LabelTotalPersentCompare\0"
+    "TableWidgetCompareAchievements\0"
     "AddThreadFriends\0TableWidgetFriends\0"
     "QVector<SProfile>\0Profiles\0SFriends\0"
     "Friendss"
@@ -72,7 +75,7 @@ static const uint qt_meta_data_Threading[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,16 +83,14 @@ static const uint qt_meta_data_Threading[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    2,   34,    2, 0x0a /* Public */,
-       7,    4,   39,    2, 0x0a /* Public */,
-      14,    0,   48,    2, 0x0a /* Public */,
-      15,    4,   49,    2, 0x0a /* Public */,
+       1,    2,   29,    2, 0x0a /* Public */,
+       7,    6,   34,    2, 0x0a /* Public */,
+      16,    4,   47,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Int, 0x80000000 | 3, 0x80000000 | 5,    4,    6,
-    QMetaType::Int, 0x80000000 | 8, QMetaType::QStringList, 0x80000000 | 11, 0x80000000 | 3,    9,   10,   12,   13,
-    QMetaType::Int,
-    QMetaType::Int, 0x80000000 | 3, 0x80000000 | 17, 0x80000000 | 19, QMetaType::QStringList,   16,   18,   20,   10,
+    QMetaType::Int, 0x80000000 | 8, QMetaType::QStringList, 0x80000000 | 11, 0x80000000 | 3, 0x80000000 | 11, 0x80000000 | 3,    9,   10,   12,   13,   14,   15,
+    QMetaType::Int, 0x80000000 | 3, 0x80000000 | 18, 0x80000000 | 20, QMetaType::QStringList,   17,   19,   21,   10,
 
        0        // eod
 };
@@ -102,11 +103,9 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: { int _r = _t->AddThreadGames((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SGame>(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 1: { int _r = _t->AddThreadAchievements((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QStringList(*)>(_a[2])),(*reinterpret_cast< QLabel*(*)>(_a[3])),(*reinterpret_cast< QTableWidget*(*)>(_a[4])));
+        case 1: { int _r = _t->AddThreadAchievements((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QStringList(*)>(_a[2])),(*reinterpret_cast< QLabel*(*)>(_a[3])),(*reinterpret_cast< QTableWidget*(*)>(_a[4])),(*reinterpret_cast< QLabel*(*)>(_a[5])),(*reinterpret_cast< QTableWidget*(*)>(_a[6])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 2: { int _r = _t->AddThreadCompare();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: { int _r = _t->AddThreadFriends((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SProfile>(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3])),(*reinterpret_cast< QStringList(*)>(_a[4])));
+        case 2: { int _r = _t->AddThreadFriends((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SProfile>(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3])),(*reinterpret_cast< QStringList(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -123,13 +122,15 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 4:
             case 2:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QLabel* >(); break;
+            case 5:
             case 3:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QTableWidget* >(); break;
             }
             break;
-        case 3:
+        case 2:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -169,13 +170,13 @@ int Threading::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 3;
     }
     return _id;
 }

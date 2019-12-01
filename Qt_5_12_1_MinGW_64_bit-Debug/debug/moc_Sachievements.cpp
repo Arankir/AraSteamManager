@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SAchievements_t {
-    QByteArrayData data[4];
-    char stringdata0[39];
+    QByteArrayData data[11];
+    char stringdata0[129];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,10 +34,20 @@ static const qt_meta_stringdata_SAchievements_t qt_meta_stringdata_SAchievements
 QT_MOC_LITERAL(0, 0, 13), // "SAchievements"
 QT_MOC_LITERAL(1, 14, 8), // "finished"
 QT_MOC_LITERAL(2, 23, 0), // ""
-QT_MOC_LITERAL(3, 24, 14) // "SAchievements*"
+QT_MOC_LITERAL(3, 24, 14), // "SAchievements*"
+QT_MOC_LITERAL(4, 39, 3), // "Set"
+QT_MOC_LITERAL(5, 43, 19), // "SAchievementsPlayer"
+QT_MOC_LITERAL(6, 63, 6), // "Player"
+QT_MOC_LITERAL(7, 70, 19), // "SAchievementsGlobal"
+QT_MOC_LITERAL(8, 90, 6), // "Global"
+QT_MOC_LITERAL(9, 97, 23), // "SAchievementsPercentage"
+QT_MOC_LITERAL(10, 121, 7) // "Percent"
 
     },
-    "SAchievements\0finished\0\0SAchievements*"
+    "SAchievements\0finished\0\0SAchievements*\0"
+    "Set\0SAchievementsPlayer\0Player\0"
+    "SAchievementsGlobal\0Global\0"
+    "SAchievementsPercentage\0Percent"
 };
 #undef QT_MOC_LITERAL
 
@@ -47,7 +57,7 @@ static const uint qt_meta_data_SAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -55,12 +65,22 @@ static const uint qt_meta_data_SAchievements[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x06 /* Public */,
-       1,    0,   27,    2, 0x06 /* Public */,
+       1,    1,   39,    2, 0x06 /* Public */,
+       1,    0,   42,    2, 0x06 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags
+       4,    1,   43,    2, 0x0a /* Public */,
+       4,    1,   46,    2, 0x0a /* Public */,
+       4,    1,   49,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void,
+
+ // slots: parameters
+    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 9,   10,
 
        0        // eod
 };
@@ -73,6 +93,9 @@ void SAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->finished((*reinterpret_cast< SAchievements*(*)>(_a[1]))); break;
         case 1: _t->finished(); break;
+        case 2: _t->Set((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
+        case 3: _t->Set((*reinterpret_cast< SAchievementsGlobal(*)>(_a[1]))); break;
+        case 4: _t->Set((*reinterpret_cast< SAchievementsPercentage(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -134,13 +157,13 @@ int SAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 5;
     }
     return _id;
 }

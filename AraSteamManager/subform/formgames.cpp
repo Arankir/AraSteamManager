@@ -39,15 +39,18 @@ void FormGames::InitComponents(){
     ui->LineEditGame->setPlaceholderText(Words[0]);
     ui->ButtonFind->setText(" "+Words[1]);
     //ui->ButtonReturn->setText(" "+Words[2]);
+    ui->TableWidgetGames->setColumnCount(5);
     ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[3]));
     ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
     ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[5]));
+    ui->TableWidgetGames->setHorizontalHeaderItem(4,new QTableWidgetItem("Скрыть"));
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     //Achievement = ;
-    Favorite = QIcon(":/"+theme+"/program/"+theme+"/favorites.png");
+    QIcon Favorite = QIcon(":/"+theme+"/program/"+theme+"/favorites.png");
+    QIcon Hide = QIcon(":/"+theme+"/program/"+theme+"/hide.png");
     ui->TableWidgetGames->setRowCount(games.count());
     for (int i=0;i<games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
@@ -63,6 +66,13 @@ void FormGames::InitComponents(){
         connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
         button2->setObjectName("ButtonFavorites"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(i,3,button2);
+
+        QPushButton *button3 = new QPushButton;
+        button3->setIcon(Hide);
+        button3->setMinimumSize(QSize(25,25));
+        connect(button3,&QPushButton::pressed,this,&FormGames::HideClicked);
+        button3->setObjectName("ButtonHide"+QString::number(i));
+        ui->TableWidgetGames->setCellWidget(i,4,button3);
     }
     ui->TableWidgetGames->setColumnWidth(0,33);
     ui->TableWidgetGames->setColumnWidth(1,300);
@@ -74,6 +84,24 @@ void FormGames::ProgressLoading(int p,int row){
 }
 void FormGames::OnFinish(){
     ui->TableWidgetGames->resizeColumnsToContents();
+    QFile FileHide1;
+    FileHide1.setFileName("Files/Hide/"+id+".txt");
+    if(FileHide1.open(QIODevice::ReadOnly)){
+        while(!FileHide1.atEnd()){
+            Hide << QString::fromLocal8Bit(FileHide1.readLine()).remove("\r\n").remove("\n");
+        }
+        FileHide1.close();
+    }
+    QFile FileHide2;
+    FileHide2.setFileName("Files/Hide/All.txt");
+    if(FileHide2.open(QIODevice::ReadOnly)){
+        while(!FileHide2.atEnd()){
+            Hide << QString::fromLocal8Bit(FileHide2.readLine()).remove("\r\n").remove("\n");
+        }
+        FileHide2.close();
+    }
+    QStringList hide=Hide;
+
     for(int i=0;i<games.size();i++){
         QString path = "images/icon_games/"+games[i].GetImg_icon_url()+".jpg";
         if(!QFile::exists(path)){
@@ -99,6 +127,13 @@ void FormGames::OnFinish(){
         Achievements->LoadImage("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+
                                 "&gameid="+QString::number(games[i].GetAppid()),i,
                                 "ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
+        for (int j=0;j<hide.size();j++) {
+            if(hide[j].toInt()==games[i].GetAppid()){
+                ui->TableWidgetGames->setRowHidden(i,true);
+                hide.removeAt(j);
+                break;
+            }
+            }
         }
 }
 void FormGames::OnResultImage(ImageRequest *imgr){
@@ -156,7 +191,15 @@ void FormGames::returnfromachievements(int num){
 #define Filter {
 void FormGames::on_LineEditGame_textChanged(const QString){
     for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
-        ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->LineEditGame->text().toUpper(),0)>-1?false:true);
+            ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->LineEditGame->text().toUpper(),0)>-1?false:true);
+            QStringList hide=Hide;
+            for (int j=0;j<hide.size();j++) {
+                if(hide[j].toInt()==games[i].GetAppid()){
+                    ui->TableWidgetGames->setRowHidden(i,true);
+                    hide.removeAt(j);
+                    break;
+                }
+                }
     }
 }
 void FormGames::on_ButtonFind_clicked(){
@@ -167,7 +210,7 @@ void FormGames::on_ButtonFind_clicked(){
 #define Functions {
 void FormGames::AchievementsClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(18,4).toInt();
+    int index=btn->objectName().mid(18,6).toInt();
     QEventLoop loop;
     SAchievementsPercentage Percentage(key,QString::number(games[index].GetAppid()));
     connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
@@ -184,5 +227,46 @@ void FormGames::AchievementsClicked(){
 }
 void FormGames::FavoritesClicked(){
 
+}
+void FormGames::HideClicked(){
+    QMessageBox messageBox(QMessageBox::Question,
+                           tr("Внимание!"),
+                           tr("Вы уверены, что хотите скрыть эту игру?"));
+    QAbstractButton *btnProfile = messageBox.addButton(tr("Да, но только для этого аккаунта"),QMessageBox::YesRole);
+    QAbstractButton *btnAll = messageBox.addButton(tr("Да, для всех аккаунтов"),QMessageBox::YesRole);
+    messageBox.addButton(tr("Отмена"),QMessageBox::NoRole);
+    messageBox.exec();
+    QString Save="";
+    if(messageBox.clickedButton()==btnProfile){
+         qDebug()<<"Нажали профиль";
+         Save="Files/Hide/"+id+".txt";
+    } else if(messageBox.clickedButton()==btnAll){
+         qDebug()<<"Нажали все";
+         Save="Files/Hide/All.txt";
+    } else return;
+
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    int index=btn->objectName().mid(10,6).toInt();
+    QString savenow=Save;
+    QString path="";
+    while(savenow.length()>0){
+        if(savenow.indexOf("/",0)>-1){
+            QString dir=savenow.mid(0,savenow.indexOf("/",0));
+            savenow=savenow.mid(savenow.indexOf("/",0)+1, savenow.length());
+            if(!QDir(path+dir).exists()){
+                QDir().mkdir(path+dir);
+            }
+            path+=dir+"/";
+        } else {
+            savenow="";
+        }
+    }
+    QFile hide(Save);
+    hide.open(QIODevice::Append | QIODevice::Text);
+    QTextStream writeStream(&hide);
+    writeStream <<games[index].GetAppid()<<"\n";
+    hide.close();
+    ui->TableWidgetGames->setRowHidden(index,true);
+    ui->TableWidgetGames->setCurrentCell(index+1,4);
 }
 #define FunctionsEnd }

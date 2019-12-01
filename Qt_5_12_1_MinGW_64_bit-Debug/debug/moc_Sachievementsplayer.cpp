@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SAchievementsPlayer_t {
-    QByteArrayData data[7];
-    char stringdata0[77];
+    QByteArrayData data[6];
+    char stringdata0[56];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,15 +34,13 @@ static const qt_meta_stringdata_SAchievementsPlayer_t qt_meta_stringdata_SAchiev
 QT_MOC_LITERAL(0, 0, 19), // "SAchievementsPlayer"
 QT_MOC_LITERAL(1, 20, 8), // "finished"
 QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 20), // "SAchievementsPlayer*"
-QT_MOC_LITERAL(4, 51, 4), // "Load"
-QT_MOC_LITERAL(5, 56, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 71, 5) // "Reply"
+QT_MOC_LITERAL(3, 30, 4), // "Load"
+QT_MOC_LITERAL(4, 35, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(5, 50, 5) // "Reply"
 
     },
-    "SAchievementsPlayer\0finished\0\0"
-    "SAchievementsPlayer*\0Load\0QNetworkReply*\0"
-    "Reply"
+    "SAchievementsPlayer\0finished\0\0Load\0"
+    "QNetworkReply*\0Reply"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,14 +62,14 @@ static const uint qt_meta_data_SAchievementsPlayer[] = {
        1,    0,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   33,    2, 0x0a /* Public */,
+       3,    1,   33,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    2,
+    QMetaType::Void, 0x80000000 | 0,    2,
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, 0x80000000 | 4,    5,
 
        0        // eod
 };
@@ -82,7 +80,7 @@ void SAchievementsPlayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         auto *_t = static_cast<SAchievementsPlayer *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< SAchievementsPlayer*(*)>(_a[1]))); break;
+        case 0: _t->finished((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
         case 1: _t->finished(); break;
         case 2: _t->Load((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
@@ -90,13 +88,6 @@ void SAchievementsPlayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 0:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SAchievementsPlayer* >(); break;
-            }
-            break;
         case 2:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
@@ -108,7 +99,7 @@ void SAchievementsPlayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (SAchievementsPlayer::*)(SAchievementsPlayer * );
+            using _t = void (SAchievementsPlayer::*)(SAchievementsPlayer );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievementsPlayer::finished)) {
                 *result = 0;
                 return;
@@ -165,7 +156,7 @@ int SAchievementsPlayer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SAchievementsPlayer::finished(SAchievementsPlayer * _t1)
+void SAchievementsPlayer::finished(SAchievementsPlayer _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

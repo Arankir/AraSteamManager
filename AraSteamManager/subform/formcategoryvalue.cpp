@@ -14,7 +14,7 @@ FormCategoryValue::FormCategoryValue(int pos, QWidget *parent) : QWidget(parent)
         break;
         }
     }
-    ui->LabelPosition->setText(QString::number(position));
+    ui->LabelPosition->setText(QString::number(position+1));
     ui->ButtonUp->setIcon(QIcon(":/"+theme+"/program/"+theme+"/up.png"));
     ui->ButtonDown->setIcon(QIcon(":/"+theme+"/program/"+theme+"/down.png"));
     ui->ButtonSelect->setIcon(QIcon(":/"+theme+"/program/"+theme+"/check_visible.png"));
@@ -64,11 +64,15 @@ void FormCategoryValue::setFirstLast(int firstlast){
 }
 void FormCategoryValue::setPosition(int pos){
     position=pos;
-    ui->LabelPosition->setText(QString::number(position));
+    ui->LabelPosition->setText(QString::number(position+1));
 }
 QString FormCategoryValue::getTitle(){
     return ui->LineEditTitle->text();
 }
 bool FormCategoryValue::getVisible(){
     return ui->CheckBoxVisible->isChecked();
+}
+
+void FormCategoryValue::setTitle(QString title){
+    ui->LineEditTitle->setText(title);
 }
