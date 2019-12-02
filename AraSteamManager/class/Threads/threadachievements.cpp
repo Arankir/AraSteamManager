@@ -24,7 +24,7 @@ int ThreadAchievements::Fill(){
             TableWidgetAchievements->setItem(j,3,new QTableWidgetItem(achievements.GetDescription(i)));
             TableWidgetAchievements->setItem(j,4,new QTableWidgetItem(achievements.GetPercent(i)<10?"0"+QString::number(achievements.GetPercent(i))+"%":QString::number(achievements.GetPercent(i))+"%"));
             if(achievements.GetAchieved(i)==1){
-                TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(Words[23]+" "+achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm")));
+                TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(Words[23].arg(achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
                 totalr++;
                 } else {
                 TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(Words[24]));
@@ -39,7 +39,7 @@ int ThreadAchievements::Fill(){
             TableWidgetCompareAchievements->setItem(j+2,3,new QTableWidgetItem(achievements.GetDescription(i)));
             TableWidgetCompareAchievements->setItem(j+2,4,new QTableWidgetItem(achievements.GetPercent(i)<10?"0"+QString::number(achievements.GetPercent(i))+"%":QString::number(achievements.GetPercent(i))+"%"));
             if(achievements.GetAchieved(i)==1){
-                TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(Words[23]+" "+achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm")));
+                TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(Words[23].arg(achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
                 } else {
                 TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(Words[24]));
                 }
@@ -51,8 +51,8 @@ int ThreadAchievements::Fill(){
             j++;
         }
     }
-    LabelTotalPersent->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+" = "+QString::number(100.0*totalr/(totalr+totalnr))+"%");
-    LabelTotalPersentCompare->setText(QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n"+QString::number(100.0*totalr/(totalr+totalnr))+"%");
+    LabelTotalPersent->setText(QString("%1/%2 = %3%").arg(QString::number(totalr)).arg(QString::number(totalr+totalnr)).arg(QString::number(100.0*totalr/(totalr+totalnr))));
+    LabelTotalPersentCompare->setText(QString("%1/%2\n%3%").arg(QString::number(totalr)).arg(QString::number(totalr+totalnr)).arg(QString::number(100.0*totalr/(totalr+totalnr))));
     emit finished();
     return 1;
 }

@@ -126,14 +126,11 @@ private:
     QString key;
     QString id;
     SGame game;
+    int unicnum;
     SAchievements achievements;
-    Filter FAchievements;
-    Filter FCompare;
-    QFormLayout *categoryvalueslayout;
     QStringList Words;
     Settings Setting;
     QString theme="white";
-    int unicnum;
 
     QVector<ImageRequest*> request;
     int numrequests=0;
@@ -147,8 +144,11 @@ private:
     QVector<SProfile> Profiles;
     QVector<QPair<SProfile,int>> friends;
 
+    QFormLayout *categoryvalueslayout;
     int typecategory=0;
     QVector<FormCategoryValue*> Values;
+    Filter FAchievements;
+    Filter FCompare;
 };
 
 #endif // FORMACHIEVEMENTS_H

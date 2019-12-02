@@ -39,14 +39,14 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QPushButton *ButtonSettings;
     QPushButton *ButtonExit;
-    QHBoxLayout *horizontalLayout_2;
+    QHBoxLayout *horizontalLayout_4;
     QPushButton *ButtonBack;
     QPushButton *ButtonNext;
-    QSpacerItem *horizontalSpacer_3;
-    QPushButton *ButtonSetProfile;
-    QHBoxLayout *horizontalLayout_4;
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *ButtonSetProfile;
+    QSpacerItem *horizontalSpacer_3;
     QScrollArea *ScrollAreaProfileInfo;
     QWidget *scrollAreaWidgetContents;
     QVBoxLayout *verticalLayout_2;
@@ -89,10 +89,9 @@ public:
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(3);
+        verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(3, 3, 3, 3);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -118,34 +117,19 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         ButtonBack = new QPushButton(centralWidget);
         ButtonBack->setObjectName(QString::fromUtf8("ButtonBack"));
 
-        horizontalLayout_2->addWidget(ButtonBack);
+        horizontalLayout_4->addWidget(ButtonBack);
 
         ButtonNext = new QPushButton(centralWidget);
         ButtonNext->setObjectName(QString::fromUtf8("ButtonNext"));
 
-        horizontalLayout_2->addWidget(ButtonNext);
+        horizontalLayout_4->addWidget(ButtonNext);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_3);
-
-        ButtonSetProfile = new QPushButton(centralWidget);
-        ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
-
-        horizontalLayout_2->addWidget(ButtonSetProfile);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         LineEditIdProfile = new QLineEdit(centralWidget);
         LineEditIdProfile->setObjectName(QString::fromUtf8("LineEditIdProfile"));
         LineEditIdProfile->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
@@ -162,6 +146,21 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        ButtonSetProfile = new QPushButton(centralWidget);
+        ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
+
+        horizontalLayout_2->addWidget(ButtonSetProfile);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_3);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
         ScrollAreaProfileInfo = new QScrollArea(centralWidget);
         ScrollAreaProfileInfo->setObjectName(QString::fromUtf8("ScrollAreaProfileInfo"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -174,7 +173,7 @@ public:
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 651, 181));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 639, 150));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setSpacing(3);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -341,7 +340,7 @@ public:
         ScrollAreaForm->setWidgetResizable(true);
         FormsWidget = new QWidget();
         FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 649, 281));
+        FormsWidget->setGeometry(QRect(0, 0, 637, 285));
         ScrollAreaForm->setWidget(FormsWidget);
 
         horizontalLayout_5->addWidget(ScrollAreaForm);
@@ -374,8 +373,8 @@ public:
         ButtonExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
         ButtonBack->setText(QApplication::translate("MainWindow", "Back", nullptr));
         ButtonNext->setText(QApplication::translate("MainWindow", "Next", nullptr));
-        ButtonSetProfile->setText(QApplication::translate("MainWindow", "Set as my profile", nullptr));
         ButtonFindProfile->setText(QApplication::translate("MainWindow", "Find", nullptr));
+        ButtonSetProfile->setText(QApplication::translate("MainWindow", "Set as my profile", nullptr));
         LabelNick->setText(QApplication::translate("MainWindow", "NickName", nullptr));
         LabelAvatar->setText(QApplication::translate("MainWindow", "Avatar", nullptr));
         LabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));

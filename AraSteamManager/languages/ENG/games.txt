@@ -6,3 +6,8 @@ Achievements
 Favorites
 Error
 In this game no achievements
+Внимание!
+Вы уверены, что хотите скрыть эту игру?
+Да, но только для этого аккаунта
+Да, для всех аккаунтов
+Отмена

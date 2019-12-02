@@ -187,14 +187,15 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
         Friends.Set(key,Profile.GetSteamid(),false);
         //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
         //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
-        ui->ButtonGames->setText(Games.GetStatus()=="success"?" "+Words[4]+"("+QString::number(Games.GetCount())+")":" "+Words[4]+" (error)");
-        ui->ButtonFriends->setText(Friends.GetStatus()=="success"?" "+Words[5]+"("+QString::number(Friends.GetCount())+")":" "+Words[5]+" (error)");if(!Profile.GetGameextrainfo().isEmpty()){
-            ui->LabelPersonaState->setText(Words[10]+":"+Profile.GetGameextrainfo());
+        ui->ButtonGames->setText(" "+Words[4].arg(Games.GetStatus()=="success"?QString::number(Games.GetCount()):"error"));
+        ui->ButtonFriends->setText(" "+Words[5].arg(Friends.GetStatus()=="success"?QString::number(Friends.GetCount()):"error"));
+        if(!Profile.GetGameextrainfo().isEmpty()){
+            ui->LabelPersonaState->setText(Words[10].arg(Profile.GetGameextrainfo()));
             ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
         } else
             switch (Profile.GetPersonastate()) {
             case 0:{
-                    ui->LabelPersonaState->setText(Words[11]+": "+Profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss"));
+                    ui->LabelPersonaState->setText(Words[11].arg(Profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                     break;
             }
@@ -230,10 +231,10 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
             }
             }
         ui->LabelProfileUrl->setText(Profile.GetProfileurl());
-        ui->Labellvl->setText(Words[18]+": "+QString::number(Levels.GetPlayer_level()));
-        ui->LabelRealName->setText(Words[19]+": "+Profile.GetRealname());
-        ui->LabelTimeCreated->setText(Words[20]+" "+Profile.GetTimecreated().toString("yyyy.MM.dd"));
-        ui->LabelLocCountryCode->setText(Words[21]+": "+Profile.GetLoccountrycode());
+        ui->Labellvl->setText(Words[18].arg(QString::number(Levels.GetPlayer_level())));
+        ui->LabelRealName->setText(Words[19].arg(Profile.GetRealname()));
+        ui->LabelTimeCreated->setText(Words[20].arg(Profile.GetTimecreated().toString("yyyy.MM.dd")));
+        ui->LabelLocCountryCode->setText(Words[21].arg(Profile.GetLoccountrycode()));
         switch (Profile.GetCommunityvisibilitystate()) {
             case 1:{
                 ui->LabelProfileVisibility->setText(Words[22]);
@@ -256,10 +257,10 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
             }
             }
         if(Bans.GetVACBanned()){
-            ui->LabelBans->setText(Words[26]+": "+QString::number(Bans.GetNumberOfVACBans())+"| "+Words[28]+" "+QString::number(Bans.GetDaysSinceLastBan())+" "+Words[29]);
+            ui->LabelBans->setText(Words[26].arg(QString::number(Bans.GetNumberOfVACBans())).arg(QString::number(Bans.GetDaysSinceLastBan())));
             ui->LabelBans->setStyleSheet("color:red");
         } else {
-            ui->LabelBans->setText(Words[26]+": "+Words[27]);
+            ui->LabelBans->setText(Words[27]);
             ui->LabelBans->setStyleSheet("color:green");
         }
 
@@ -297,7 +298,7 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
         ui->LabelProfileVisibility->setVisible(true);
         ui->ScrollAreaProfileInfo->setVisible(true);
         } else {
-            QMessageBox::warning(this,Words[30],Words[32]);
+            QMessageBox::warning(this,Words[28],Words[30]);
         }
 }
 void MainWindow::on_ButtonGames_clicked(){
@@ -339,7 +340,7 @@ void MainWindow::on_ButtonGoToMyProfile_clicked(){
     if(Setting.GetStatus()=="success"){
         GoToProfile(Setting.GetMyProfile(),"url",true);
     } else {
-        QMessageBox::warning(this,Words[30],Words[32]);
+        QMessageBox::warning(this,Words[28],Words[30]);
     }
 }
 void MainWindow::on_ButtonSetProfile_clicked(){

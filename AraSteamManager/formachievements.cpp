@@ -45,7 +45,7 @@ void FormAchievements::InitComponents(){
     ui->RadioButtonNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
     ui->ButtonUpdate->setIcon(QIcon(":/"+theme+"/program/"+theme+"/update.png"));
     //ui->ButtonReturn->setText(" "+Words[0]);
-    ui->ButtonCompare->setText(" "+Words[1]);
+    ui->ButtonCompare->setText(" "+Words[50]);
     ui->LabelGameLogo->setText("");
     ui->RadioButtonAll->setText(Words[2]);
     ui->RadioButtonReached->setText(Words[3]);
@@ -80,9 +80,9 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[19]));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[20]));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[21]));
-    ui->TableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Words[23]));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Words[1]));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[22]));
-    ui->LabelGameOnline->setText(Words[27]+": "+game.GetNumberPlayers(key,false));
+    ui->LabelGameOnline->setText(Words[27].arg(game.GetNumberPlayers(key,false)));
     ui->LabelGameTitle->setText(game.GetName());
     if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists())
         QDir().mkdir("images/achievements/"+QString::number(game.GetAppid()));
@@ -679,9 +679,7 @@ void FormAchievements::on_CheckBoxCompareAllFriends_stateChanged(int arg1){
 
 #define System {
 FormAchievements::~FormAchievements(){
-    //delete newcategoryvalueslayout;
-    //delete changecategoryvalueslayout;
-    //delete categoryvalueslayout;
+    delete categoryvalueslayout;
     delete ui;
 }
 void FormAchievements::closeEvent(QCloseEvent*){
@@ -757,7 +755,7 @@ bool FormAchievements::ProfileIsPublic(SAchievements achievement, int col){
         if(accept){
             QTableWidgetItem *item5;
             if(achievement.GetAchieved(j)==1){
-                item5 = new QTableWidgetItem(Words[23]+" "+achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm"));
+                item5 = new QTableWidgetItem(Words[23].arg(achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm")));
                 totalr++;
                 } else {
                 item5 = new QTableWidgetItem(Words[24]);
@@ -771,7 +769,7 @@ bool FormAchievements::ProfileIsPublic(SAchievements achievement, int col){
         ui->TableWidgetCompareAchievements->setCellWidget(1,col, new QLabel("profile is \nnot public"));
         return false;
         } else {
-        ui->TableWidgetCompareAchievements->setCellWidget(1,col, new QLabel(" "+QString::number(totalr)+"/"+QString::number(totalr+totalnr)+"\n "+QString::number(100.0*totalr/(totalr+totalnr))+"%"));
+        ui->TableWidgetCompareAchievements->setCellWidget(1,col, new QLabel(QString(" %1/%2\n%3%").arg(QString::number(totalr)).arg(QString::number(totalr+totalnr)).arg(QString::number(100.0*totalr/(totalr+totalnr)))));
         return true;
     }
 }
@@ -972,6 +970,9 @@ void FormAchievements::on_ButtonCancelCategory_clicked(){//Готово
         }
         ui->LineEditTitleCategory->setText("");
         typecategory=0;
+        for (int i=0;i<Values.size();i++) {
+            Values.remove(i);
+        }
         Values.clear();
     }
 }

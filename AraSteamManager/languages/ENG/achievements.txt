@@ -1,5 +1,5 @@
 Return
-Compare with friends
+Reached
 All achievements
 Reached achievements
 Not reached achievements
@@ -21,11 +21,11 @@ Title
 Description
 In the world
 Favorites
-Reached
+Reached %1
 Not reached
 Total percent
 english
-Now in game
+Now in game :%1
 Error
 Title of value is empty or such value already exists!
 Successful

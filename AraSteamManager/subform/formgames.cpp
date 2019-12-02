@@ -230,18 +230,16 @@ void FormGames::FavoritesClicked(){
 }
 void FormGames::HideClicked(){
     QMessageBox messageBox(QMessageBox::Question,
-                           tr("Внимание!"),
-                           tr("Вы уверены, что хотите скрыть эту игру?"));
-    QAbstractButton *btnProfile = messageBox.addButton(tr("Да, но только для этого аккаунта"),QMessageBox::YesRole);
-    QAbstractButton *btnAll = messageBox.addButton(tr("Да, для всех аккаунтов"),QMessageBox::YesRole);
-    messageBox.addButton(tr("Отмена"),QMessageBox::NoRole);
+                           Words[8],
+                           Words[9]);
+    QAbstractButton *btnProfile = messageBox.addButton(Words[10],QMessageBox::YesRole);
+    QAbstractButton *btnAll = messageBox.addButton(Words[11],QMessageBox::YesRole);
+    messageBox.addButton(Words[12],QMessageBox::NoRole);
     messageBox.exec();
     QString Save="";
     if(messageBox.clickedButton()==btnProfile){
-         qDebug()<<"Нажали профиль";
          Save="Files/Hide/"+id+".txt";
     } else if(messageBox.clickedButton()==btnAll){
-         qDebug()<<"Нажали все";
          Save="Files/Hide/All.txt";
     } else return;
 
