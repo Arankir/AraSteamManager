@@ -64,6 +64,7 @@ SAchievementsPlayer::SAchievementsPlayer( const SAchievementsPlayer & achievemen
     count=achievementss.count;
     gamename=achievementss.gamename;
     status=achievementss.status;
+    index=achievementss.index;
     manager = new QNetworkAccessManager;
 }
 SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer & achievementss) {
@@ -75,6 +76,7 @@ SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer &
     count=achievementss.count;
     gamename=achievementss.gamename;
     status=achievementss.status;
+    index=achievementss.index;
     manager = new QNetworkAccessManager;
     return *this;
 }

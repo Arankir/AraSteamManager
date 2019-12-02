@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
+#include <QProgressBar>
 #include <formachievements.h>
 #include <class/steamapi/Sgames.h>
 #include <class/settings.h>
@@ -34,7 +35,7 @@ public slots:
 private slots:
     void InitComponents();
     void OnResultImage(ImageRequest *imgr);
-    void OnResultAchievements(ImageRequest *imgr);
+    void OnResultAchievements(SAchievementsPlayer ach);
     void closeEvent(QCloseEvent *event);
 
     void AchievementsClicked();

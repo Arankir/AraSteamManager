@@ -19,11 +19,13 @@ class SProfile : public QObject
 public:
     explicit SProfile(QString key, QString id, bool parallel, QString type, QObject *parent = nullptr);
     SProfile(QJsonDocument DocSummaries);
+    SProfile(QJsonArray ArrSummaries);
     SProfile(QJsonObject ObjSummaries);
     SProfile();
     ~SProfile();
     void Set(QString key, QString id, bool parallel, QString type);
     void Set(QJsonDocument DocSummaries);
+    void Set(QJsonArray ArrSummaries);
     void Set(QJsonObject ObjSummaries);
     QString GetSteamid(int index=0) {return profile[index].toObject().value("steamid").toString();}
     int GetCommunityvisibilitystate(int index=0) {return profile[index].toObject().value("communityvisibilitystate").toInt();}

@@ -9,6 +9,7 @@
 #include <QKeyEvent>
 #include <subform/formgames.h>
 #include <subform/formfriends.h>
+#include <subform/formfavorites.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sbans.h>
 #include <class/steamapi/Slevels.h>
@@ -29,6 +30,7 @@ public:
     ~MainWindow();
     FormGames *gamesform;
     FormFriends *friendsform;
+    FormFavorites *favoritesform;
 
 public slots:
     void ProgressLoading(int,int);
@@ -36,6 +38,7 @@ public slots:
 private slots:
     void returnfromgames();
     void returnfromfriends();
+    void returnfromfavorites();
 
     void keyPressEvent(QKeyEvent *event);
 

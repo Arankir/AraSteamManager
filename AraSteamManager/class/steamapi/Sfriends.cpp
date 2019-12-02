@@ -57,15 +57,28 @@ SProfile SFriends::GetProfiles(){
     QEventLoop loop;
     QNetworkAccessManager profmanager;
     connect(&profmanager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-    QString Querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+friends[0].toObject().value("steamid").toString();
-    for (int i=1;i<friends.size();i++) {
-        Querry+=", "+friends[i].toObject().value("steamid").toString();
+    int size=0;
+    QJsonArray arr;
+    SProfile Profile;
+    while(size<friends.size()){
+        QString Querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+key+"&steamids="+friends[size++].toObject().value("steamid").toString();
+        if(size+99>friends.size()){
+            for (;size<friends.size();) {
+                Querry+=", "+friends[size++].toObject().value("steamid").toString();
+            }
+        } else {
+            for (int i=0;i<99;i++) {
+                Querry+=", "+friends[size++].toObject().value("steamid").toString();
+            }
+        }
+        qDebug()<<"Запрос= "<<Querry;
+        QNetworkReply &Reply = *profmanager.get(QNetworkRequest(Querry));
+        loop.exec();
+        QJsonDocument DocFriends = QJsonDocument::fromJson(Reply.readAll());
+        for(int i=0;i<DocFriends.object().value("response").toObject().value("players").toArray().size();i++)
+            arr.append(DocFriends.object().value("response").toObject().value("players").toArray().at(i).toObject());
     }
-    qDebug()<<"Запрос= "<<Querry;
-    QNetworkReply &Reply = *profmanager.get(QNetworkRequest(Querry));
-    loop.exec();
-    QJsonDocument DocFriends = QJsonDocument::fromJson(Reply.readAll());
-    SProfile Profile(DocFriends);
+    Profile.Set(arr);
     qDebug()<<"Друзей"<<Profile.GetCount();
     return Profile;
 }

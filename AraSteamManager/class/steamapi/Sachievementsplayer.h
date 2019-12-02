@@ -23,6 +23,7 @@ public:
     ~SAchievementsPlayer();
     void Set(QString key, QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
+    void SetIndex(int i) {index=i;}
     void Delete(int index) { achievements.remove(index); count--;}
     SAchievementPlayer GetAchievementInfo(int index) {return achievements[index];}
     QString GetApiname(int index) {return achievements[index].GetApiname();}
@@ -32,6 +33,7 @@ public:
     QString GetStatus() {return status;}
     QString GetGamename() {return gamename;}
     int GetAchievementsCount() {return count;}
+    int GetIndex() {return index;}
     void Update();
     void Clear();
     SAchievementsPlayer(const SAchievementsPlayer &);
@@ -53,6 +55,7 @@ private:
     QString key="";
     QString gamename="";
     int count=0;
+    int index=0;
 };
 
 #endif // SACHIEVEMENTSPLAYER_H

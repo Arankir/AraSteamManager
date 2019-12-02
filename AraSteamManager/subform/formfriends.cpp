@@ -51,6 +51,8 @@ void FormFriends::InitComponents(){
     ui->ComboBoxStatus->addItem(Words[14]);
     ui->ComboBoxStatus->addItem(Words[15]);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableWidgetFriends->setAlternatingRowColors(true);
+    ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetFriends->setRowCount(Friends.GetCount());
     //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));

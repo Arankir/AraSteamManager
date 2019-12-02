@@ -34,7 +34,7 @@ public:
     {
         if (FormGames->objectName().isEmpty())
             FormGames->setObjectName(QString::fromUtf8("FormGames"));
-        FormGames->resize(552, 577);
+        FormGames->resize(603, 577);
         QFont font;
         font.setPointSize(10);
         FormGames->setFont(font);
@@ -63,10 +63,7 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         TableWidgetGames = new QTableWidget(FormGames);
-        if (TableWidgetGames->columnCount() < 4)
-            TableWidgetGames->setColumnCount(4);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
-        TableWidgetGames->setColumnCount(4);
 
         verticalLayout->addWidget(TableWidgetGames);
 

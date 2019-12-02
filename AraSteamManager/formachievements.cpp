@@ -27,6 +27,12 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetCompareAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetCompareFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableWidgetAchievements->setAlternatingRowColors(true);
+    ui->TableWidgetAchievements->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->TableWidgetCompareAchievements->setAlternatingRowColors(true);
+    ui->TableWidgetCompareAchievements->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->TableWidgetCompareFriends->setAlternatingRowColors(true);
+    ui->TableWidgetCompareFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetCompareFriends->setMinimumSize(0,180);
     //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonCompare->setIcon(QIcon(":/"+theme+"/program/"+theme+"/compare.png"));
@@ -268,6 +274,7 @@ void FormAchievements::OnFinish(){
             ui->TableWidgetAchievements->removeRow(ui->TableWidgetAchievements->rowCount()-1);
             ui->TableWidgetCompareAchievements->removeRow(ui->TableWidgetCompareAchievements->rowCount()-1);
         }
+
         }
 }
 void FormAchievements::OnResultImage(ImageRequest *imgr){

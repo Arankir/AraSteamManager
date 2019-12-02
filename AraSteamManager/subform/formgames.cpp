@@ -39,13 +39,17 @@ void FormGames::InitComponents(){
     ui->LineEditGame->setPlaceholderText(Words[0]);
     ui->ButtonFind->setText(" "+Words[1]);
     //ui->ButtonReturn->setText(" "+Words[2]);
-    ui->TableWidgetGames->setColumnCount(5);
+    ui->TableWidgetGames->setColumnCount(6);
     ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[3]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[5]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(4,new QTableWidgetItem("Скрыть"));
+    ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[13]));
+    ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[4]));
+    ui->TableWidgetGames->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[5]));
+    ui->TableWidgetGames->setHorizontalHeaderItem(5,new QTableWidgetItem("Скрыть"));
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableWidgetGames->setAlternatingRowColors(true);
+    ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->TableWidgetGames->setSortingEnabled(true);
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     //Achievement = ;
@@ -58,21 +62,21 @@ void FormGames::InitComponents(){
         button1->setMinimumSize(QSize(25,25));
         connect(button1,&QPushButton::pressed,this,&FormGames::AchievementsClicked);
         button1->setObjectName("ButtonAchievements"+QString::number(i));
-        ui->TableWidgetGames->setCellWidget(i,2,button1);
+        ui->TableWidgetGames->setCellWidget(i,3,button1);
 
         QPushButton *button2 = new QPushButton;
         button2->setIcon(Favorite);
         button2->setMinimumSize(QSize(25,25));
         connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
         button2->setObjectName("ButtonFavorites"+QString::number(i));
-        ui->TableWidgetGames->setCellWidget(i,3,button2);
+        ui->TableWidgetGames->setCellWidget(i,4,button2);
 
         QPushButton *button3 = new QPushButton;
         button3->setIcon(Hide);
         button3->setMinimumSize(QSize(25,25));
         connect(button3,&QPushButton::pressed,this,&FormGames::HideClicked);
         button3->setObjectName("ButtonHide"+QString::number(i));
-        ui->TableWidgetGames->setCellWidget(i,4,button3);
+        ui->TableWidgetGames->setCellWidget(i,5,button3);
     }
     ui->TableWidgetGames->setColumnWidth(0,33);
     ui->TableWidgetGames->setColumnWidth(1,300);
@@ -122,11 +126,9 @@ void FormGames::OnFinish(){
             label->setPixmap(pixmap);
             ui->TableWidgetGames->setCellWidget(i,0,label);
             }
-        ImageRequest *Achievements = new ImageRequest();
-        connect(Achievements,&ImageRequest::onReady,this,&FormGames::OnResultAchievements);
-        Achievements->LoadImage("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+key+
-                                "&gameid="+QString::number(games[i].GetAppid()),i,
-                                "ButtonAchievements"+QString::number(games[i].GetAppid())+"&"+games[i].GetImg_logo_url());
+        SAchievementsPlayer *pl = new SAchievementsPlayer(key,QString::number(games[i].GetAppid()),id);
+        pl->SetIndex(i);
+        connect(pl,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         for (int j=0;j<hide.size();j++) {
             if(hide[j].toInt()==games[i].GetAppid()){
                 ui->TableWidgetGames->setRowHidden(i,true);
@@ -155,13 +157,26 @@ void FormGames::OnResultImage(ImageRequest *imgr){
         imgr->deleteLater();
     }
 }
-void FormGames::OnResultAchievements(ImageRequest *imgr){
-    disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultAchievements);
-    QJsonDocument doc = QJsonDocument::fromJson(imgr->GetAnswer());
-    if(doc.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(0).isNull()){
-        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(imgr->GetRow(),2))->setEnabled(false);
+void FormGames::OnResultAchievements(SAchievementsPlayer ach){
+    disconnect(&ach,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
+    QProgressBar *pb = new QProgressBar;
+    pb->setMaximum(ach.GetAchievementsCount());
+    pb->setMinimumSize(QSize(25,25));
+    if(ach.GetAchievementsCount()>0){
+        int val=0;
+        for (int i=0;i<ach.GetAchievementsCount();i++) {
+            if(ach.GetAchieved(i)==1)
+                val++;
+        }
+        pb->setValue(val);
+    } else {
+        pb->setValue(0);
+        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(ach.GetIndex(),3))->setEnabled(false);
     }
-    imgr->deleteLater();
+    ui->TableWidgetGames->setCellWidget(ach.GetIndex(),2,pb);
+    ui->TableWidgetGames->setItem(ach.GetIndex(),2,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
+    ach.GetAchievementsCount();
+    //ach->deleteLater();
 }
 #define InitEnd }
 

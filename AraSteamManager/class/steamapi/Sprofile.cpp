@@ -8,6 +8,10 @@ SProfile::SProfile(QJsonDocument DocSummaries){
     manager = new QNetworkAccessManager();
     Set(DocSummaries);
 }
+SProfile::SProfile(QJsonArray ArrSummaries){
+    manager = new QNetworkAccessManager();
+    Set(ArrSummaries);
+}
 SProfile::SProfile(QJsonObject ObjSummaries){
     manager = new QNetworkAccessManager();
     Set(ObjSummaries);
@@ -66,7 +70,8 @@ void SProfile::Set(QString key, QString id, bool parallel, QString type){
 void SProfile::Set(QJsonDocument DocSummaries){
     Clear();
     if(DocSummaries.object().value("response").toObject().value("players").toArray().size()>0){
-        profile=DocSummaries.object().value("response").toObject().value("players").toArray();
+        for(int i=0;i<DocSummaries.object().value("response").toObject().value("players").toArray().size();i++)
+            profile.push_back(DocSummaries.object().value("response").toObject().value("players").toArray().at(i).toObject());
         status="success";
     }
     else {
@@ -76,6 +81,11 @@ void SProfile::Set(QJsonDocument DocSummaries){
 void SProfile::Set(QJsonObject ObjSummaries){
     Clear();
     profile.push_back(ObjSummaries);
+    status="success";
+}
+void SProfile::Set(QJsonArray ArrSummaries){
+    Clear();
+    profile=ArrSummaries;
     status="success";
 }
 

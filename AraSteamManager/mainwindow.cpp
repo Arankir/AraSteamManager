@@ -140,6 +140,13 @@ void MainWindow::returnfromfriends(){
     delete friendsform;
     windowchild=0;
 }
+void MainWindow::returnfromfavorites(){
+    this->setVisible(true);
+    disconnect(favoritesform);
+    windowchildcount--;
+    delete favoritesform;
+    windowchild=0;
+}
 #define SystemEnd }
 
 #define Functions {
@@ -305,6 +312,9 @@ void MainWindow::on_ButtonGames_clicked(){
     if(windowchild==2){
         returnfromfriends();
     }
+    if(windowchild==3){
+        returnfromfavorites();
+    }
     if(windowchild!=1){
         windowchild=1;
         ui->FormProgressBar->setMaximum(Games.GetCount());
@@ -319,6 +329,9 @@ void MainWindow::on_ButtonFriends_clicked(){
     if(windowchild==1){
         returnfromgames();
     }
+    if(windowchild==3){
+        returnfromfavorites();
+    }
     if(windowchild!=2){
         windowchild=2;
         ui->FormProgressBar->setMaximum(Friends.GetCount());
@@ -331,7 +344,21 @@ void MainWindow::on_ButtonFriends_clicked(){
     }
 }
 void MainWindow::on_ButtonFavorites_clicked(){
-
+    if(windowchild==1){
+        returnfromgames();
+    }
+    if(windowchild==2){
+        returnfromfriends();
+    }
+    if(windowchild!=3){
+        windowchild=3;
+        //ui->FormProgressBar->setMaximum(Friends.GetCount());
+        favoritesform = new FormFavorites();
+        //connect(favoritesform,&FormFavorites::return_to_profile,this,&MainWindow::returnfromfavorites);
+        ui->ScrollAreaForm->setWidget(favoritesform);
+        //ui->FormProgressBar->setVisible(true);
+        //favoritesform->setVisible(false);
+    }
 }
 void MainWindow::on_ButtonStatistics_clicked(){
 

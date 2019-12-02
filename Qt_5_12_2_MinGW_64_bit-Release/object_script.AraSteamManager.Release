@@ -2,7 +2,6 @@ release/threadachievements.o
 release/threadfriends.o
 release/threadgames.o
 release/threading.o
-release/categoryvalue.o
 release/filter.o
 release/imagerequest.o
 release/profile.o
@@ -25,8 +24,8 @@ release/Sprofile.o
 release/main.o
 release/mainwindow.o
 release/formachievements.o
-release/formaddcategory.o
 release/formcategoryvalue.o
+release/formfavorites.o
 release/formfriends.o
 release/formgames.o
 release/qrc_resimg.o
@@ -35,7 +34,6 @@ release/moc_threadachievements.o
 release/moc_threadfriends.o
 release/moc_threadgames.o
 release/moc_threading.o
-release/moc_categoryvalue.o
 release/moc_filter.o
 release/moc_imagerequest.o
 release/moc_profile.o
@@ -57,7 +55,7 @@ release/moc_Slevels.o
 release/moc_Sprofile.o
 release/moc_mainwindow.o
 release/moc_formachievements.o
-release/moc_formaddcategory.o
 release/moc_formcategoryvalue.o
+release/moc_formfavorites.o
 release/moc_formfriends.o
 release/moc_formgames.o
