@@ -4,9 +4,8 @@ ThreadAchievements::ThreadAchievements(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadAchievements::Set(SAchievements achievements, QStringList Words, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements){
+void ThreadAchievements::Set(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements){
     this->achievements=achievements;
-    this->Words=Words;
     this->LabelTotalPersent=LabelTotalPersent;
     this->TableWidgetAchievements=TableWidgetAchievements;
     this->LabelTotalPersentCompare=LabelTotalPersentCompare;
@@ -28,12 +27,12 @@ int ThreadAchievements::Fill(){
             TableWidgetAchievements->setItem(j,4,new QTableWidgetItem(achievements.GetPercent(i)<10?"0"+QString::number(achievements.GetPercent(i))+"%":QString::number(achievements.GetPercent(i))+"%"));
             TableWidgetCompareAchievements->setItem(j+2,4,new QTableWidgetItem(achievements.GetPercent(i)<10?"0"+QString::number(achievements.GetPercent(i))+"%":QString::number(achievements.GetPercent(i))+"%"));
             if(achievements.GetAchieved(i)==1){
-                TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(Words[23].arg(achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
-                TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(Words[23].arg(achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
+                TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(tr("Получено %1").arg(achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
+                TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(tr("Получено %1").arg(achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
                 totalr++;
                 } else {
-                TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(Words[24]));
-                TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(Words[24]));
+                TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(tr("Не получено")));
+                TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(tr("Не получено")));
                 totalnr++;
                 }
             TableWidgetAchievements->item(j,2)->setTextAlignment(Qt::AlignCenter);

@@ -19,12 +19,11 @@ signals:
 
 public slots:
     int Fill();
-    void Set(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends,QStringList Words);
+    void Set(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends);
 
 private:
     SFriends Friends;
     QVector<SProfile> Profiles;
-    QStringList Words;
     QTableWidget *TableWidgetFriends;
 };
 

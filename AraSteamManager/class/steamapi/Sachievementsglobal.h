@@ -17,11 +17,11 @@ class SAchievementsGlobal : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsGlobal(QString key, QString appid, QString id, QObject *parent = nullptr);
+    explicit SAchievementsGlobal(QString key, QString appid, QObject *parent = nullptr);
     SAchievementsGlobal(QJsonDocument DocAchievements);
     SAchievementsGlobal();
     ~SAchievementsGlobal();
-    void Set(QString key, QString appid, QString language);
+    void Set(QString key, QString appid);
     void Set(QJsonDocument DocAchievements);
     void Delete(int index) { achievements.remove(index); count--;}
     SAchievementGlobal GetAchievementInfo(int index) {return achievements[index];}
@@ -53,7 +53,6 @@ private:
     QNetworkAccessManager *manager;
     QVector<SAchievementGlobal> achievements;
     QString status="none";
-    QString language="english";
     QString appid="";
     QString key="";
     QString gamename="";

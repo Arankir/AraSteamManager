@@ -43,7 +43,6 @@ signals:
 
 private:
     Ui::FormCategoryValue *ui;
-    QStringList Words;
     Settings Setting;
     QString theme="white";
     int position=0;

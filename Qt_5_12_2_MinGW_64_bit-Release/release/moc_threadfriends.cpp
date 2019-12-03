@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadFriends_t {
-    QByteArrayData data[15];
-    char stringdata0[131];
+    QByteArrayData data[14];
+    char stringdata0[125];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,14 +45,13 @@ QT_MOC_LITERAL(9, 62, 18), // "TableWidgetFriends"
 QT_MOC_LITERAL(10, 81, 17), // "QVector<SProfile>"
 QT_MOC_LITERAL(11, 99, 8), // "Profiles"
 QT_MOC_LITERAL(12, 108, 8), // "SFriends"
-QT_MOC_LITERAL(13, 117, 7), // "Friends"
-QT_MOC_LITERAL(14, 125, 5) // "Words"
+QT_MOC_LITERAL(13, 117, 7) // "Friends"
 
     },
     "ThreadFriends\0finished\0\0progress\0p\0"
     "row\0Fill\0Set\0QTableWidget*\0"
     "TableWidgetFriends\0QVector<SProfile>\0"
-    "Profiles\0SFriends\0Friends\0Words"
+    "Profiles\0SFriends\0Friends"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,7 +74,7 @@ static const uint qt_meta_data_ThreadFriends[] = {
 
  // slots: name, argc, parameters, tag, flags
        6,    0,   40,    2, 0x0a /* Public */,
-       7,    4,   41,    2, 0x0a /* Public */,
+       7,    3,   41,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -83,7 +82,7 @@ static const uint qt_meta_data_ThreadFriends[] = {
 
  // slots: parameters
     QMetaType::Int,
-    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 10, 0x80000000 | 12, QMetaType::QStringList,    9,   11,   13,   14,
+    QMetaType::Void, 0x80000000 | 8, 0x80000000 | 10, 0x80000000 | 12,    9,   11,   13,
 
        0        // eod
 };
@@ -98,7 +97,7 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 1: _t->progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->Set((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SProfile>(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3])),(*reinterpret_cast< QStringList(*)>(_a[4]))); break;
+        case 3: _t->Set((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SProfile>(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

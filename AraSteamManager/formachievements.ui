@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>837</width>
-    <height>753</height>
+    <height>755</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -82,7 +82,7 @@
          <item>
           <widget class="QPushButton" name="ButtonCompare">
            <property name="text">
-            <string>Compare with friends</string>
+            <string> Сравнить с друзьями</string>
            </property>
           </widget>
          </item>
@@ -128,7 +128,7 @@
          <item>
           <widget class="QCheckBox" name="CheckBoxShowFilter">
            <property name="text">
-            <string>Show Filter</string>
+            <string>Показать фильтр</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -171,7 +171,7 @@
       <string>Filter</string>
      </property>
      <property name="title">
-      <string>Filter</string>
+      <string>      Фильтр</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
@@ -192,7 +192,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>235</width>
+             <width>177</width>
              <height>121</height>
             </rect>
            </property>
@@ -215,7 +215,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>234</width>
+             <width>177</width>
              <height>121</height>
             </rect>
            </property>
@@ -227,14 +227,14 @@
           <item>
            <widget class="QPushButton" name="ButtonAddCategory">
             <property name="text">
-             <string>Add category</string>
+             <string>Добавить категорию</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="ButtonChangeCategory">
             <property name="text">
-             <string>Change category</string>
+             <string>Изменить категории</string>
             </property>
            </widget>
           </item>
@@ -251,7 +251,7 @@
           <item>
            <widget class="QPushButton" name="ButtonUpdate">
             <property name="text">
-             <string>Update</string>
+             <string>Обновить</string>
             </property>
            </widget>
           </item>
@@ -260,7 +260,7 @@
         <item>
          <widget class="QGroupBox" name="GroupBoxCompareShowedColumns">
           <property name="title">
-           <string>Showed columns</string>
+           <string>Видимые столбцы</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <property name="spacing">
@@ -281,7 +281,7 @@
            <item>
             <widget class="QCheckBox" name="CheckBoxCompareIcon">
              <property name="text">
-              <string>Icon</string>
+              <string>Иконка</string>
              </property>
              <property name="checked">
               <bool>true</bool>
@@ -291,7 +291,7 @@
            <item>
             <widget class="QCheckBox" name="CheckBoxCompareTitle">
              <property name="text">
-              <string>Title</string>
+              <string>Название</string>
              </property>
              <property name="checked">
               <bool>true</bool>
@@ -301,7 +301,7 @@
            <item>
             <widget class="QCheckBox" name="CheckBoxCompareDescription">
              <property name="text">
-              <string>Description</string>
+              <string>Описание</string>
              </property>
              <property name="checked">
               <bool>true</bool>
@@ -311,7 +311,7 @@
            <item>
             <widget class="QCheckBox" name="CheckBoxCompareTotalPercent">
              <property name="text">
-              <string>Total percent</string>
+              <string>По миру</string>
              </property>
              <property name="checked">
               <bool>true</bool>
@@ -328,7 +328,7 @@
             <item>
              <widget class="QRadioButton" name="RadioButtonAll">
               <property name="text">
-               <string>All</string>
+               <string>Все достижения</string>
               </property>
               <property name="checked">
                <bool>true</bool>
@@ -338,14 +338,14 @@
             <item>
              <widget class="QRadioButton" name="RadioButtonReached">
               <property name="text">
-               <string>Reached</string>
+               <string>Полученные достижения</string>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QRadioButton" name="RadioButtonNotReached">
               <property name="text">
-               <string>Not reached</string>
+               <string>Не полученные достижения</string>
               </property>
              </widget>
             </item>
@@ -354,14 +354,14 @@
           <item>
            <widget class="QCheckBox" name="CheckBoxFavorites">
             <property name="text">
-             <string>Only favorites</string>
+             <string>Только избранное</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="CheckBoxCompareAllFriends">
             <property name="text">
-             <string>All friends</string>
+             <string>Все друзья</string>
             </property>
            </widget>
           </item>
@@ -394,6 +394,11 @@
              <property name="styleSheet">
               <string notr="true"/>
              </property>
+             <item>
+              <property name="text">
+               <string>Категория не выбрана</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item>
@@ -403,6 +408,9 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="placeholderText">
+              <string>Название категории</string>
              </property>
             </widget>
            </item>
@@ -415,14 +423,14 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>OneValue</string>
+              <string>Без значений</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ButtonAddValueCategory">
              <property name="text">
-              <string>Add Value</string>
+              <string>Добавить значение</string>
              </property>
             </widget>
            </item>
@@ -444,7 +452,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>565</width>
+              <width>534</width>
               <height>102</height>
              </rect>
             </property>
@@ -456,21 +464,21 @@
            <item>
             <widget class="QPushButton" name="ButtonCancelCategory">
              <property name="text">
-              <string>Cancel</string>
+              <string>Отмена</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ButtonDeleteCategory">
              <property name="text">
-              <string>Delete</string>
+              <string>Удалить категорию</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QCheckBox" name="CheckBoxCategoryVisibleAll">
              <property name="text">
-              <string>Visible All</string>
+              <string>Показать всё</string>
              </property>
              <property name="checked">
               <bool>true</bool>
@@ -480,7 +488,7 @@
            <item>
             <widget class="QPushButton" name="ButtonAcceptCategory">
              <property name="text">
-              <string>Accept</string>
+              <string>Применить</string>
              </property>
             </widget>
            </item>
@@ -512,7 +520,11 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLineEdit" name="LineEditNameAchievements"/>
+         <widget class="QLineEdit" name="LineEditNameAchievements">
+          <property name="placeholderText">
+           <string>Достижение</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="ButtonFindAchievement">
@@ -520,7 +532,7 @@
            <bool>true</bool>
           </property>
           <property name="text">
-           <string>Find</string>
+           <string>Найти</string>
           </property>
          </widget>
         </item>

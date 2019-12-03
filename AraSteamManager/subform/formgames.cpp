@@ -3,7 +3,6 @@
 
 FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
-    Words=Setting.GetWords("games");
     id=ids;
     key=keys;
     SGames Games=Gamess;
@@ -36,16 +35,13 @@ void FormGames::InitComponents(){
         }
     }
     ui->TableWidgetGames->setColumnCount(4);
-    ui->LineEditGame->setPlaceholderText(Words[0]);
-    ui->ButtonFind->setText(" "+Words[1]);
-    //ui->ButtonReturn->setText(" "+Words[2]);
     ui->TableWidgetGames->setColumnCount(6);
     ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->TableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[3]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[13]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[4]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[5]));
-    ui->TableWidgetGames->setHorizontalHeaderItem(5,new QTableWidgetItem("Скрыть"));
+    ui->TableWidgetGames->setHorizontalHeaderItem(1,new QTableWidgetItem(tr("Название игры")));
+    ui->TableWidgetGames->setHorizontalHeaderItem(2,new QTableWidgetItem(tr("Прогресс")));
+    ui->TableWidgetGames->setHorizontalHeaderItem(3,new QTableWidgetItem(tr("Достижения")));
+    ui->TableWidgetGames->setHorizontalHeaderItem(4,new QTableWidgetItem(tr("Избранное")));
+    ui->TableWidgetGames->setHorizontalHeaderItem(5,new QTableWidgetItem(tr("Скрыть")));
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
@@ -58,7 +54,7 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setRowCount(games.count());
     for (int i=0;i<games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
-        QPushButton *button1 = new QPushButton(Words[4]);
+        QPushButton *button1 = new QPushButton(tr("Достижения"));
         button1->setMinimumSize(QSize(25,25));
         connect(button1,&QPushButton::pressed,this,&FormGames::AchievementsClicked);
         button1->setObjectName("ButtonAchievements"+QString::number(i));
@@ -132,6 +128,7 @@ void FormGames::OnFinish(){
         for (int j=0;j<hide.size();j++) {
             if(hide[j].toInt()==games[i].GetAppid()){
                 ui->TableWidgetGames->setRowHidden(i,true);
+                ui->TableWidgetGames->item(i,1)->setTextColor(Qt::red);
                 hide.removeAt(j);
                 break;
             }
@@ -232,7 +229,7 @@ void FormGames::AchievementsClicked(){
     loop.exec();
     disconnect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
     if(Percentage.GetAchievementsCount()==0){
-        QMessageBox::warning(this,Words[6],Words[7]);
+        QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
     } else {
         FormAchievements *fa = new FormAchievements(key,id,games[index],windowchildcount++);
         achievementsforms.append(fa);
@@ -245,11 +242,11 @@ void FormGames::FavoritesClicked(){
 }
 void FormGames::HideClicked(){
     QMessageBox messageBox(QMessageBox::Question,
-                           Words[8],
-                           Words[9]);
-    QAbstractButton *btnProfile = messageBox.addButton(Words[10],QMessageBox::YesRole);
-    QAbstractButton *btnAll = messageBox.addButton(Words[11],QMessageBox::YesRole);
-    messageBox.addButton(Words[12],QMessageBox::NoRole);
+                           tr("Внимание!"),
+                           tr("Вы уверены, что хотите скрыть эту игру?"));
+    QAbstractButton *btnProfile = messageBox.addButton(tr("Да, но только для этого аккаунта"),QMessageBox::YesRole);
+    QAbstractButton *btnAll = messageBox.addButton(tr("Да, для всех аккаунтов"),QMessageBox::YesRole);
+    messageBox.addButton(tr("Отмена"),QMessageBox::NoRole);
     messageBox.exec();
     QString Save="";
     if(messageBox.clickedButton()==btnProfile){
@@ -279,6 +276,7 @@ void FormGames::HideClicked(){
     QTextStream writeStream(&hide);
     writeStream <<games[index].GetAppid()<<"\n";
     hide.close();
+    ui->TableWidgetGames->item(index,1)->setTextColor(Qt::red);
     ui->TableWidgetGames->setRowHidden(index,true);
     ui->TableWidgetGames->setCurrentCell(index+1,4);
 }

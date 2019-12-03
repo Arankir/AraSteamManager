@@ -4,7 +4,6 @@
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
     qRegisterMetaType<QVector<int>>("QVector<int>");
-    Words=Setting.GetWords("mainwindow");
     switch(Setting.GetTheme()){
     case 1:{
         QPalette darkPalette;
@@ -40,6 +39,23 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         break;
         }
     }
+    QTranslator lang;
+    switch(Setting.GetLanguage()){
+    case 1:{
+        lang.load(":/AraSteamManager_en.qm");
+        //qApp->installTranslator(&lang);
+        break;
+    }
+    case 5:{
+        lang.load(":/AraSteamManager_ru.qm");
+        //a->installTranslator(&lang);
+        break;
+    }
+    default:{
+        lang.load(":/AraSteamManager_en.qm");
+        //qApp->installTranslator(&lang);
+    }
+    }
     InitComponents();
     if(Setting.GetStatus()=="success"){
         if(Setting.GetMyProfile()!="none")
@@ -71,14 +87,6 @@ void MainWindow::InitComponents(){
     ui->LabelProfileVisibility->setVisible(false);
     ui->ScrollAreaProfileInfo->setVisible(false);
     ui->FormProgressBar->setVisible(false);
-    ui->ButtonFindProfile->setText(" "+Words[0]);
-    ui->LineEditIdProfile->setPlaceholderText(Words[1]);
-    ui->ButtonSettings->setText(/*Words[2]*/"");
-    ui->ButtonExit->setText(" "+Words[3]);
-    ui->ButtonStatistics->setText(" "+Words[6]);
-    ui->ButtonFavorites->setText(" "+Words[7]);
-    ui->ButtonSetProfile->setText(Words[8]);
-    ui->ButtonGoToMyProfile->setText(Words[9]);
     ui->ButtonFindProfile->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->ButtonFavorites->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
     ui->ButtonStatistics->setIcon(QIcon(":/"+theme+"/program/"+theme+"/statistic.png"));
@@ -119,6 +127,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     if(event->key() == 16777220)
         on_ButtonFindProfile_clicked();
 }
+void MainWindow::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+    //    ui->retranslateUi(this);
+    }
+}
 MainWindow::~MainWindow(){
     delete ui;
     //if(gamesform)
@@ -145,6 +158,20 @@ void MainWindow::returnfromfavorites(){
     disconnect(favoritesform);
     windowchildcount--;
     delete favoritesform;
+    windowchild=0;
+}
+void MainWindow::returnfromstatistics(){
+    this->setVisible(true);
+    disconnect(statisticsform);
+    windowchildcount--;
+    delete statisticsform;
+    windowchild=0;
+}
+void MainWindow::returnfromsettings(){
+    this->setVisible(true);
+    disconnect(settingsform);
+    windowchildcount--;
+    delete settingsform;
     windowchild=0;
 }
 #define SystemEnd }
@@ -194,80 +221,80 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
         Friends.Set(key,Profile.GetSteamid(),false);
         //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
         //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
-        ui->ButtonGames->setText(" "+Words[4].arg(Games.GetStatus()=="success"?QString::number(Games.GetCount()):"error"));
-        ui->ButtonFriends->setText(" "+Words[5].arg(Friends.GetStatus()=="success"?QString::number(Friends.GetCount()):"error"));
+        ui->ButtonGames->setText(tr(" Игры (%1)").arg(Games.GetStatus()=="success"?QString::number(Games.GetCount()):"error"));
+        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(Friends.GetStatus()=="success"?QString::number(Friends.GetCount()):"error"));
         if(!Profile.GetGameextrainfo().isEmpty()){
-            ui->LabelPersonaState->setText(Words[10].arg(Profile.GetGameextrainfo()));
+            ui->LabelPersonaState->setText(tr("В игре %1").arg(Profile.GetGameextrainfo()));
             ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
         } else
             switch (Profile.GetPersonastate()) {
             case 0:{
-                    ui->LabelPersonaState->setText(Words[11].arg(Profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
+                    ui->LabelPersonaState->setText(tr("Был в сети %1").arg(Profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                     break;
             }
             case 1:{
-                    ui->LabelPersonaState->setText(Words[12]);
+                    ui->LabelPersonaState->setText(tr("В сети"));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
                     break;
             }
             case 2:{
-                    ui->LabelPersonaState->setText(Words[13]);
+                    ui->LabelPersonaState->setText(tr("Не беспокоить"));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
                     break;
             }
             case 3:{
-                    ui->LabelPersonaState->setText(Words[14]);
+                    ui->LabelPersonaState->setText(tr("Нет на месте"));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 4:{
-                    ui->LabelPersonaState->setText(Words[15]);
+                    ui->LabelPersonaState->setText(tr("Спит"));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                     break;
             }
             case 5:{
-                    ui->LabelPersonaState->setText(Words[16]);
+                    ui->LabelPersonaState->setText(tr("Ожидает обмена"));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             case 6:{
-                    ui->LabelPersonaState->setText(Words[17]);
+                    ui->LabelPersonaState->setText(tr("Хочет поиграть"));
                     ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                     break;
             }
             }
         ui->LabelProfileUrl->setText(Profile.GetProfileurl());
-        ui->Labellvl->setText(Words[18].arg(QString::number(Levels.GetPlayer_level())));
-        ui->LabelRealName->setText(Words[19].arg(Profile.GetRealname()));
-        ui->LabelTimeCreated->setText(Words[20].arg(Profile.GetTimecreated().toString("yyyy.MM.dd")));
-        ui->LabelLocCountryCode->setText(Words[21].arg(Profile.GetLoccountrycode()));
+        ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(Levels.GetPlayer_level())));
+        ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(Profile.GetRealname()));
+        ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(Profile.GetTimecreated().toString("yyyy.MM.dd")));
+        ui->LabelLocCountryCode->setText(tr("Язык: %1").arg(Profile.GetLoccountrycode()));
         switch (Profile.GetCommunityvisibilitystate()) {
             case 1:{
-                ui->LabelProfileVisibility->setText(Words[22]);
+                ui->LabelProfileVisibility->setText(tr("Скрытый"));
                 ui->LabelProfileVisibility->setStyleSheet("color:red");
                 break;
             }
             case 3:{
-                ui->LabelProfileVisibility->setText(Words[23]);
+                ui->LabelProfileVisibility->setText(tr("Публичный"));
                 ui->LabelProfileVisibility->setStyleSheet("color:green");
                 break;
             }
             case 8:{
-                ui->LabelProfileVisibility->setText(Words[24]);
+                ui->LabelProfileVisibility->setText(tr("Для друзей"));
                 ui->LabelProfileVisibility->setStyleSheet("color:yellow");
                 break;
             }
             default:{
-                ui->LabelProfileVisibility->setText(Words[25]);
+                ui->LabelProfileVisibility->setText(tr("Неизвестно"));
                 ui->LabelProfileVisibility->setStyleSheet("color:white");
             }
             }
         if(Bans.GetVACBanned()){
-            ui->LabelBans->setText(Words[26].arg(QString::number(Bans.GetNumberOfVACBans())).arg(QString::number(Bans.GetDaysSinceLastBan())));
+            ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(Bans.GetNumberOfVACBans())).arg(QString::number(Bans.GetDaysSinceLastBan())));
             ui->LabelBans->setStyleSheet("color:red");
         } else {
-            ui->LabelBans->setText(Words[27]);
+            ui->LabelBans->setText(tr("VAC баны: Отсутствуют"));
             ui->LabelBans->setStyleSheet("color:green");
         }
 
@@ -305,7 +332,7 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
         ui->LabelProfileVisibility->setVisible(true);
         ui->ScrollAreaProfileInfo->setVisible(true);
         } else {
-            QMessageBox::warning(this,Words[28],Words[30]);
+            QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
         }
 }
 void MainWindow::on_ButtonGames_clicked(){
@@ -314,6 +341,12 @@ void MainWindow::on_ButtonGames_clicked(){
     }
     if(windowchild==3){
         returnfromfavorites();
+    }
+    if(windowchild==4){
+        returnfromstatistics();
+    }
+    if(windowchild==5){
+        returnfromsettings();
     }
     if(windowchild!=1){
         windowchild=1;
@@ -331,6 +364,12 @@ void MainWindow::on_ButtonFriends_clicked(){
     }
     if(windowchild==3){
         returnfromfavorites();
+    }
+    if(windowchild==4){
+        returnfromstatistics();
+    }
+    if(windowchild==5){
+        returnfromsettings();
     }
     if(windowchild!=2){
         windowchild=2;
@@ -350,6 +389,12 @@ void MainWindow::on_ButtonFavorites_clicked(){
     if(windowchild==2){
         returnfromfriends();
     }
+    if(windowchild==4){
+        returnfromstatistics();
+    }
+    if(windowchild==5){
+        returnfromsettings();
+    }
     if(windowchild!=3){
         windowchild=3;
         //ui->FormProgressBar->setMaximum(Friends.GetCount());
@@ -361,13 +406,56 @@ void MainWindow::on_ButtonFavorites_clicked(){
     }
 }
 void MainWindow::on_ButtonStatistics_clicked(){
-
+    if(windowchild==1){
+        returnfromgames();
+    }
+    if(windowchild==2){
+        returnfromfriends();
+    }
+    if(windowchild==3){
+        returnfromfavorites();
+    }
+    if(windowchild==5){
+        returnfromsettings();
+    }
+    if(windowchild!=4){
+        windowchild=4;
+        //ui->FormProgressBar->setMaximum(Friends.GetCount());
+        statisticsform = new FormStatistics();
+        //connect(favoritesform,&FormFavorites::return_to_profile,this,&MainWindow::returnfromfavorites);
+        ui->ScrollAreaForm->setWidget(statisticsform);
+        //ui->FormProgressBar->setVisible(true);
+        //favoritesform->setVisible(false);
+    }
+}
+void MainWindow::on_ButtonSettings_clicked(){
+    if(windowchild==1){
+        returnfromgames();
+    }
+    if(windowchild==2){
+        returnfromfriends();
+    }
+    if(windowchild==3){
+        returnfromfavorites();
+    }
+    if(windowchild==4){
+        returnfromstatistics();
+    }
+    if(windowchild!=5){
+        windowchild=5;
+        //ui->FormProgressBar->setMaximum(Friends.GetCount());
+        settingsform = new FormSettings();
+        //connect(favoritesform,&FormFavorites::return_to_profile,this,&MainWindow::returnfromfavorites);
+        ui->ScrollAreaForm->setWidget(settingsform);
+        //ui->FormProgressBar->setVisible(true);
+        //favoritesform->setVisible(false);
+    }
 }
 void MainWindow::on_ButtonGoToMyProfile_clicked(){
     if(Setting.GetStatus()=="success"){
         GoToProfile(Setting.GetMyProfile(),"url",true);
     } else {
-        QMessageBox::warning(this,Words[28],Words[30]);
+        QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
     }
 }
 void MainWindow::on_ButtonSetProfile_clicked(){
@@ -388,3 +476,4 @@ void MainWindow::on_ButtonNext_clicked(){
         GoToProfile(BufferProfiles[++CurrentBufferProfile-1],"url",false);
 }
 #define FunctionsEnd }
+

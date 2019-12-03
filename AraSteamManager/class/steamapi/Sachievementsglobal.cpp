@@ -1,8 +1,8 @@
 #include "Sachievementsglobal.h"
 
-SAchievementsGlobal::SAchievementsGlobal(QString key, QString appid, QString language, QObject *parent) : QObject(parent){
+SAchievementsGlobal::SAchievementsGlobal(QString key, QString appid, QObject *parent) : QObject(parent){
     manager = new QNetworkAccessManager();
-    Set(key, appid, language);
+    Set(key, appid);
 }
 SAchievementsGlobal::SAchievementsGlobal(QJsonDocument DocAchievements){
     manager = new QNetworkAccessManager();
@@ -15,12 +15,11 @@ SAchievementsGlobal::~SAchievementsGlobal(){
     delete manager;
 }
 
-void SAchievementsGlobal::Set(QString key, QString appid, QString language){
+void SAchievementsGlobal::Set(QString key, QString appid){
 connect(manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
 this->key=key;
 this->appid=appid;
-this->language=language;
-manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l="+language));
+manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+key+"&appid="+appid+"&l="+tr("russian")));
 }
 void SAchievementsGlobal::Set(QJsonDocument DocAchievements){
     Clear();
@@ -49,7 +48,7 @@ void SAchievementsGlobal::Load(QNetworkReply *Reply){
 }
 
 void SAchievementsGlobal::Update(){
-    Set(key,appid,language);
+    Set(key,appid);
 }
 void SAchievementsGlobal::Clear(){
     achievements.clear();
@@ -59,7 +58,6 @@ void SAchievementsGlobal::Clear(){
 SAchievementsGlobal::SAchievementsGlobal( const SAchievementsGlobal & achievementss){
     achievements=achievementss.achievements;
     appid=achievementss.appid;
-    language=achievementss.language;
     key=achievementss.key;
     count=achievementss.count;
     gamename=achievementss.gamename;
@@ -71,7 +69,6 @@ SAchievementsGlobal & SAchievementsGlobal::operator=(const SAchievementsGlobal &
     delete manager;
     achievements=achievementss.achievements;
     appid=achievementss.appid;
-    language=achievementss.language;
     key=achievementss.key;
     count=achievementss.count;
     gamename=achievementss.gamename;

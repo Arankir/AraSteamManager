@@ -128,7 +128,6 @@ private:
     SGame game;
     int unicnum;
     SAchievements achievements;
-    QStringList Words;
     Settings Setting;
     QString theme="white";
 

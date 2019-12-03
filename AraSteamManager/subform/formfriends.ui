@@ -32,18 +32,22 @@
    <item>
     <widget class="QGroupBox" name="GroupBoxFilter">
      <property name="title">
-      <string>Filter</string>
+      <string>      Фильтр</string>
      </property>
      <layout class="QVBoxLayout" name="_2">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLineEdit" name="LineEditName"/>
+         <widget class="QLineEdit" name="LineEditName">
+          <property name="placeholderText">
+           <string>Найти друга</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="ButtonFind">
           <property name="text">
-           <string>Find</string>
+           <string>  Поиск</string>
           </property>
          </widget>
         </item>
@@ -57,14 +61,14 @@
         <item>
          <widget class="QCheckBox" name="CheckBoxOpenProfile">
           <property name="text">
-           <string>Open profile</string>
+           <string>Публичный профиль</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="CheckBoxFavorites">
           <property name="text">
-           <string>Favorites</string>
+           <string>Избранные</string>
           </property>
          </widget>
         </item>

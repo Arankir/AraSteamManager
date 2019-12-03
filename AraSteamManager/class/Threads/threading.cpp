@@ -22,11 +22,11 @@ int Threading::AddThreadGames(QTableWidget *TableWidgetGames, QVector<SGame> gam
     return 1;
 }
 
-int Threading::AddThreadFriends(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss,QStringList Words){
+int Threading::AddThreadFriends(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss){
     ThreadFriends *Friends = new ThreadFriends;
     QThread *thread = new QThread;
     Friends->moveToThread(thread);
-    Friends->Set(TableWidgetFriends,Profiles,Friendss,Words);
+    Friends->Set(TableWidgetFriends,Profiles,Friendss);
     connect(thread,SIGNAL(started()),Friends,SLOT(Fill()));
     connect(Friends,SIGNAL(finished()),thread,SLOT(quit()));
     connect(Friends,SIGNAL(finished()),Friends,SLOT(deleteLater()));
@@ -39,11 +39,11 @@ int Threading::AddThreadFriends(QTableWidget *TableWidgetFriends,QVector<SProfil
     return 1;
 }
 
-int Threading::AddThreadAchievements(SAchievements achievements, QStringList Words, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements){
+int Threading::AddThreadAchievements(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements){
     ThreadAchievements *Achievements = new ThreadAchievements;
     QThread *thread = new QThread;
     Achievements->moveToThread(thread);
-    Achievements->Set(achievements, Words, LabelTotalPersent, TableWidgetAchievements, LabelTotalPersentCompare, TableWidgetCompareAchievements);
+    Achievements->Set(achievements, LabelTotalPersent, TableWidgetAchievements, LabelTotalPersentCompare, TableWidgetCompareAchievements);
     connect(thread,SIGNAL(started()),Achievements,SLOT(Fill()));
     connect(Achievements,SIGNAL(finished()),thread,SLOT(quit()));
     connect(Achievements,SIGNAL(finished()),Achievements,SLOT(deleteLater()));

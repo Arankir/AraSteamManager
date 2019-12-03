@@ -3,7 +3,6 @@
 
 FormAchievements::FormAchievements(QString keys, QString ids, SGame games, int num, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
     ui->setupUi(this);
-    Words=Setting.GetWords("achievements");
     key=keys;
     id=ids;
     game=games;
@@ -50,45 +49,15 @@ void FormAchievements::InitComponents(){
     ui->RadioButtonReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
     ui->RadioButtonNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
     ui->ButtonUpdate->setIcon(QIcon(":/"+theme+"/program/"+theme+"/update.png"));
-    //ui->ButtonReturn->setText(" "+Words[0]);
-    ui->ButtonCompare->setText(" "+Words[50]);
-    ui->LabelGameLogo->setText("");
-    ui->RadioButtonAll->setText(Words[2]);
-    ui->RadioButtonReached->setText(Words[3]);
-    ui->RadioButtonNotReached->setText(Words[4]);
-    ui->ButtonAddCategory->setText(Words[5]);
-    ui->ButtonChangeCategory->setText(Words[6]);
-    ui->CheckBoxFavorites->setText(Words[7]);
-    ui->ButtonFindAchievement->setText(Words[8]);
-    ui->GroupBoxFilter->setTitle("      "+Words[9]);
-    ui->LineEditNameAchievements->setPlaceholderText(Words[10]);
-    ui->LineEditTitleCategory->setPlaceholderText(Words[14]);
-    ui->ButtonAddValueCategory->setText(Words[11]);
-    ui->ButtonCancelCategory->setText(" "+Words[12]);
-    ui->ButtonAcceptCategory->setText(Words[13]);
-    ui->LineEditTitleCategory->setPlaceholderText(Words[14]);
-    //ui->LineEditTitleValueNewCategory->setPlaceholderText(Words[15]);
-    ui->ButtonDeleteCategory->setText(Words[17]);
-    ui->ComboBoxCategoriesCategory->addItem(Words[18]);
-    //ui->LineEditTitleValueChangeCategory->setPlaceholderText(Words[15]);
-    ui->ButtonUpdate->setText(Words[36]);
-    ui->CheckBoxCategoryOneValue->setText(Words[38]);
-    ui->GroupBoxCompareShowedColumns->setTitle(Words[42]);
-    ui->CheckBoxCompareIcon->setText(Words[43]);
-    ui->CheckBoxCompareTitle->setText(Words[44]);
-    ui->CheckBoxCompareDescription->setText(Words[45]);
-    ui->CheckBoxCompareTotalPercent->setText(Words[46]);
-    ui->CheckBoxCompareAllFriends->setText(Words[47]);
-    ui->CheckBoxShowFilter->setText(Words[49]);
     ui->TableWidgetAchievements->setColumnCount(7);
     ui->TableWidgetCompareAchievements->setColumnCount(7);
     ui->TableWidgetAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem(""));
-    ui->TableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[19]));
-    ui->TableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[20]));
-    ui->TableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[21]));
-    ui->TableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Words[1]));
-    ui->TableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[22]));
-    ui->LabelGameOnline->setText(Words[27].arg(game.GetNumberPlayers(key,false)));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(tr("Название")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem(tr("Описание")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem(tr("По миру")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(tr("Получено")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem(tr("Избранное")));
+    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(game.GetNumberPlayers(key,false)));
     ui->LabelGameTitle->setText(game.GetName());
     if(!QDir("images/achievements/"+QString::number(game.GetAppid())).exists())
         QDir().mkdir("images/achievements/"+QString::number(game.GetAppid()));
@@ -102,7 +71,7 @@ void FormAchievements::InitComponents(){
     pixmap.loadFromData(logoreply.readAll());
     ui->LabelGameLogo->setPixmap(pixmap);
     SProfile Profile(key,id,false,"url");
-    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()/*Words[15]*/));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()));
     QNetworkReply &imagereply = *manager.get(QNetworkRequest(Profile.GetAvatar()));
     loop.exec();
     QPixmap pix;
@@ -122,14 +91,14 @@ void FormAchievements::InitComponents(){
     myava2->setToolTip(Profile.GetPersonaname());
     ui->TableWidgetCompareFriends->setCellWidget(0,0,myava2);
     QLabel *All = new QLabel("All");
-    All->setToolTip(Words[48]);
+    All->setToolTip(tr("Достижения друзей"));
     All->setPixmap(QPixmap(":/"+theme+"/program/"+theme+"/friends.png"));
     All->setScaledContents(true);
     All->setFixedSize(32,32);
     ui->TableWidgetCompareFriends->setCellWidget(0,1,All);
-    QRadioButton *rbMyAll = new QRadioButton(/*Words[]*/);
-    QRadioButton *rbMyReached = new QRadioButton(/*Words[]*/);
-    QRadioButton *rbMyNotReached = new QRadioButton(/*Words[]*/);
+    QRadioButton *rbMyAll = new QRadioButton();
+    QRadioButton *rbMyReached = new QRadioButton();
+    QRadioButton *rbMyNotReached = new QRadioButton();
     rbMyAll->setObjectName("RBMyAll");
     rbMyReached->setObjectName("RBMyReached");
     rbMyNotReached->setObjectName("RBMyNotReached");
@@ -154,9 +123,9 @@ void FormAchievements::InitComponents(){
     QVBoxLayout *lay2 = new QVBoxLayout;
     wd2->setObjectName("WDFriends");
     lay2->setObjectName("LayFriends");
-    QPushButton *pbFriendsAll = new QPushButton(/*Words[]*/);
-    QPushButton *pbFriendsReached = new QPushButton(/*Words[]*/);
-    QPushButton *pbFriendsNotReached = new QPushButton(/*Words[]*/);
+    QPushButton *pbFriendsAll = new QPushButton();
+    QPushButton *pbFriendsReached = new QPushButton();
+    QPushButton *pbFriendsNotReached = new QPushButton();
     pbFriendsAll->setObjectName("PBFriendsAll");
     pbFriendsReached->setObjectName("PBFriendsReached");
     pbFriendsNotReached->setObjectName("PBFriendsNotReached");
@@ -184,9 +153,9 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetCompareAchievements->setVerticalHeaderItem(0,new QTableWidgetItem(""));
     ui->TableWidgetCompareAchievements->setVerticalHeaderItem(1,new QTableWidgetItem("%"));
     ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(1,new QTableWidgetItem(""));
-    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[19]));
-    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[20]));
-    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[21]));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(2,new QTableWidgetItem(tr("Название")));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(3,new QTableWidgetItem(tr("Описание")));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem(tr("По миру")));
 
     QWidget *widget3 = new QWidget;
     categoryvalueslayout = new QFormLayout;
@@ -208,7 +177,7 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetCompareAchievements->resizeColumnToContents(4);
     ui->TableWidgetCompareAchievements->setColumnWidth(5,80);
     connect(&achievements,SIGNAL(finished()),this,SLOT(PullTableWidget()));
-    achievements.Set(key,QString::number(game.GetAppid()),id,Words[26]);
+    achievements.Set(key,QString::number(game.GetAppid()),id);
     qDebug()<<"FinishStatus="<<achievements.GetStatusFinish();
     //PullTableWidget();
 }
@@ -231,7 +200,7 @@ void FormAchievements::PullTableWidget(){
         Threading LoadTable(this);
         QLabel *lbl = new QLabel;
         ui->TableWidgetCompareAchievements->setCellWidget(1,5, lbl);
-        LoadTable.AddThreadAchievements(achievements,Words,ui->LabelTotalPersent,ui->TableWidgetAchievements,lbl,ui->TableWidgetCompareAchievements);
+        LoadTable.AddThreadAchievements(achievements,ui->LabelTotalPersent,ui->TableWidgetAchievements,lbl,ui->TableWidgetCompareAchievements);
     }
 }
 void FormAchievements::ProgressLoading(int p,int row){
@@ -303,7 +272,7 @@ void FormAchievements::SwitchSimpleCompare(int sc){
         ui->ButtonChangeCategory->setEnabled(true);
         ui->TableWidgetCompareFriends->setVisible(false);
         ui->TableWidgetCompareAchievements->setVisible(false);
-        ui->ButtonCompare->setText(Words[50]);
+        ui->ButtonCompare->setText(tr("Сравнить с друзьями"));
         ui->RadioButtonAll->setVisible(true);
         ui->RadioButtonReached->setVisible(true);
         ui->RadioButtonNotReached->setVisible(true);
@@ -316,7 +285,7 @@ void FormAchievements::SwitchSimpleCompare(int sc){
         ui->RadioButtonReached->setVisible(false);
         ui->RadioButtonNotReached->setVisible(false);
         ui->TableWidgetAchievements->setVisible(false);
-        ui->ButtonCompare->setText(Words[51]);
+        ui->ButtonCompare->setText(tr("Обратно"));
         ui->CheckBoxCompareAllFriends->setVisible(true);
         ui->TableWidgetCompareFriends->setVisible(true);
         ui->ButtonAddCategory->setEnabled(false);
@@ -335,7 +304,7 @@ void FormAchievements::SwitchSimpleCompare(int sc){
 void FormAchievements::LoadingCompare(){
     loadCompare++;
     SProfile Profile(key,id,false,"url");
-    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()/*Words[15]*/));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()));
 
     QNetworkAccessManager manager;
     QEventLoop loop;
@@ -564,9 +533,9 @@ void FormAchievements::on_TableWidgetCompareFriendsCellChanged(int row, int colu
             SAchievements Ach=achievements;
             Ach.Set(Pla);
             if(ProfileIsPublic(Ach,col)){
-                QRadioButton *rbAll = new QRadioButton(/*Words[]*/);
-                QRadioButton *rbReached = new QRadioButton(/*Words[]*/);
-                QRadioButton *rbNotReached = new QRadioButton(/*Words[]*/);
+                QRadioButton *rbAll = new QRadioButton();
+                QRadioButton *rbReached = new QRadioButton();
+                QRadioButton *rbNotReached = new QRadioButton();
                 rbAll->setObjectName("RB"+QString::number(column)+"All");
                 rbReached->setObjectName("RB"+QString::number(column)+"Reached");
                 rbNotReached->setObjectName("RB"+QString::number(column)+"NotReached");
@@ -718,7 +687,7 @@ void FormAchievements::ShowCategories(){
                 layout2->addRow(chb);
             } else {
                 QComboBox *cb = new QComboBox;
-                cb->addItem(Words[37]);
+                cb->addItem(tr("Не выбрано"));
                 for (int j=0;j<cat.object().value("values").toArray().size();j++) {
                     cb->addItem(cat.object().value("values").toArray().at(j).toString());
                 }
@@ -762,10 +731,10 @@ bool FormAchievements::ProfileIsPublic(SAchievements achievement, int col){
         if(accept){
             QTableWidgetItem *item5;
             if(achievement.GetAchieved(j)==1){
-                item5 = new QTableWidgetItem(Words[23].arg(achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm")));
+                item5 = new QTableWidgetItem(tr("Получено %1").arg(achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm")));
                 totalr++;
                 } else {
-                item5 = new QTableWidgetItem(Words[24]);
+                item5 = new QTableWidgetItem(tr("Не получено"));
                 totalnr++;
                 }
             item5->setTextAlignment(Qt::AlignCenter);
@@ -804,7 +773,7 @@ void FormAchievements::on_ButtonAddCategory_clicked(){
         ui->ButtonDeleteCategory->setVisible(false);
         ui->LineEditTitleCategory->setEnabled(true);
 
-        ui->GroupBoxCategories->setTitle(Words[5]);
+        ui->GroupBoxCategories->setTitle(tr("Добавить категорию"));
         ui->GroupBoxCategories->setVisible(true);
     }
 }
@@ -819,14 +788,14 @@ void FormAchievements::on_ButtonChangeCategory_clicked(){
         ui->ButtonDeleteCategory->setVisible(true);
         ui->LineEditTitleCategory->setEnabled(false);
 
-        ui->GroupBoxCategories->setTitle(Words[16]);
+        ui->GroupBoxCategories->setTitle(tr("Изменить категорию"));
         ui->GroupBoxCategories->setVisible(true);
     }
 }
 void FormAchievements::on_ButtonUpdate_clicked(){
     achievements.Update();
     PullTableWidget();
-    ui->LabelGameOnline->setText(Words[27]+": "+game.GetNumberPlayers(key,true));
+    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(game.GetNumberPlayers(key,true)));
 }
 void FormAchievements::FavoritesClicked(){
 
@@ -1006,7 +975,7 @@ void FormAchievements::on_ButtonAcceptCategory_clicked(){//Готово
                     QJsonArray values;
                     if(ui->CheckBoxCategoryOneValue->isChecked()){
                         if(categoryvalueslayout->rowCount()>0){
-                            QMessageBox::StandardButton btn=QMessageBox::question(this,Words[39],Words[40].mid(0,Words[40].indexOf("\\n")-1)+"\n"+Words[40].mid(Words[40].indexOf("\\n")+2,Words[40].length()-Words[40].indexOf("\n")-2),QMessageBox::Yes|QMessageBox::No);
+                            QMessageBox::StandardButton btn=QMessageBox::question(this,tr("Внимание"),tr("Вы уверены, что хотите создать категорию без значений?\nВсе настроенные значения будут потеряны"),QMessageBox::Yes|QMessageBox::No);
                             if(btn==QMessageBox::No){
                                 return;
                             }
@@ -1025,7 +994,7 @@ void FormAchievements::on_ButtonAcceptCategory_clicked(){//Готово
                                 Category.close();
                                 if(typecategory==1)
                                     Category.remove();
-                                QMessageBox::warning(this,Words[28],Words[29]);
+                                QMessageBox::warning(this,tr("Ошибка"),tr("Название значения пустое или повторяется!"));
                                 return;
                                 }
                             for (int j=7;j<i;j++){
@@ -1033,7 +1002,7 @@ void FormAchievements::on_ButtonAcceptCategory_clicked(){//Готово
                                     Category.close();
                                     if(typecategory==1)
                                         Category.remove();
-                                    QMessageBox::warning(this,Words[28],Words[29]);
+                                    QMessageBox::warning(this,tr("Ошибка"),tr("Название значения пустое или повторяется!"));
                                     return;
                                     }
                                 }
@@ -1061,18 +1030,18 @@ void FormAchievements::on_ButtonAcceptCategory_clicked(){//Готово
                     ui->LineEditNameAchievements->setText("");
                     ui->RadioButtonAll->setChecked(true);
                     ui->CheckBoxFavorites->setChecked(false);
-                    QMessageBox::information(this,Words[30],typecategory==1?Words[31]:Words[34]);
+                    QMessageBox::information(this,tr("Успешно"),tr("Категория была %1!").arg(typecategory==1?tr("добавлена"):tr("изменена")));
                     on_ButtonCancelCategory_clicked();
                 } else
-                    QMessageBox::warning(this,Words[28],Words[32]);
+                    QMessageBox::warning(this,tr("Ошибка"),tr("Такая категория уже есть!"));
             }
         } else
-            QMessageBox::warning(this,Words[28],Words[33]);
+            QMessageBox::warning(this,tr("Ошибка"),tr("Название категории пустое!"));
     }
 }
 void FormAchievements::on_ButtonDeleteCategory_clicked(){//Готово
     if(typecategory==2){
-        QMessageBox::StandardButton btn=QMessageBox::question(this,Words[39],Words[41],QMessageBox::Yes|QMessageBox::No);
+        QMessageBox::StandardButton btn=QMessageBox::question(this,tr("Внимание"),tr("Вы уверены, что хотите удалить категорию?"),QMessageBox::Yes|QMessageBox::No);
         if(btn==QMessageBox::No){
             return;
         }
@@ -1088,7 +1057,7 @@ void FormAchievements::on_ButtonDeleteCategory_clicked(){//Готово
                 ui->LineEditNameAchievements->setText("");
                 ui->RadioButtonAll->setChecked(true);
                 ui->CheckBoxFavorites->setChecked(false);
-                QMessageBox::information(this,Words[30],Words[35]);
+                QMessageBox::information(this,tr("Успешно"),tr("Категория была удалена!"));
                 on_ButtonCancelCategory_clicked();
                 }
             }

@@ -77,7 +77,8 @@ public:
     void retranslateUi(QWidget *FormGames)
     {
         FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        ButtonFind->setText(QApplication::translate("FormGames", "Find", nullptr));
+        LineEditGame->setPlaceholderText(QApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
+        ButtonFind->setText(QApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
     } // retranslateUi
 
 };

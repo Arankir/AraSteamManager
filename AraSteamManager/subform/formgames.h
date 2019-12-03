@@ -52,7 +52,6 @@ private:
     QString key;
     int windowchildcount=0;
     QVector<SGame> games;
-    QStringList Words;
     QStringList Hide;
     Settings Setting;
     QString theme="white";

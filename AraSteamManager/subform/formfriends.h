@@ -54,7 +54,6 @@ private:
     int windowchildcount=0;
     SFriends Friends;
     QVector<SProfile> Profiless;
-    QStringList Words;
     Settings Setting;
     QString theme="white";
 

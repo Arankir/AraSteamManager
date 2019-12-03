@@ -7,9 +7,13 @@
 #include <QPixmap>
 #include <QFile>
 #include <QKeyEvent>
+#include <QTranslator>
+#include <QLibraryInfo>
 #include <subform/formgames.h>
 #include <subform/formfriends.h>
 #include <subform/formfavorites.h>
+#include <subform/formstatistics.h>
+#include <subform/formsettings.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sbans.h>
 #include <class/steamapi/Slevels.h>
@@ -27,10 +31,12 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
     FormGames *gamesform;
     FormFriends *friendsform;
     FormFavorites *favoritesform;
+    FormStatistics *statisticsform;
+    FormSettings *settingsform;
 
 public slots:
     void ProgressLoading(int,int);
@@ -39,8 +45,11 @@ private slots:
     void returnfromgames();
     void returnfromfriends();
     void returnfromfavorites();
+    void returnfromstatistics();
+    void returnfromsettings();
 
-    void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event) override;
+    void changeEvent(QEvent *event) override;
 
     void ShowGames();
     void ShowFriends();
@@ -63,12 +72,13 @@ private slots:
 
     void on_ButtonStatistics_clicked();
 
+    void on_ButtonSettings_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString key="3826BF60403D15613B4B0381DAB7A7BD";
     int windowchildcount=0;
     int windowchild=0;
-    QStringList Words;
     SProfile Profile;
     SGames Games;
     SFriends Friends;

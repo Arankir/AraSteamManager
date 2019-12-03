@@ -3,7 +3,6 @@
 
 FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
-    Words=Setting.GetWords("friends");
     id=ids;
     key=keys;
     Friends=Friendss;
@@ -27,29 +26,15 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
 
 #define Init {
 void FormFriends::InitComponents(){
-    ui->GroupBoxFilter->setTitle("      "+Words[0]);
-    //ui->ButtonReturn->setText(" "+Words[1]);
-    ui->ButtonFind->setText("  "+Words[2]);
-    ui->CheckBoxOpenProfile->setText(Words[3]);
-    ui->CheckBoxFavorites->setText(Words[20]);
-    ui->LineEditName->setPlaceholderText(Words[21]);
     ui->TableWidgetFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(Words[5]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(Words[4]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(Words[6]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(Words[18]));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(tr("Ник")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(tr("Добавлен")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(tr("Статус")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(tr("Профиль")));
     ui->TableWidgetFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(Words[7]));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(Words[19]));
-    ui->ComboBoxStatus->addItem(Words[6]);
-    ui->ComboBoxStatus->addItem(Words[8]);
-    ui->ComboBoxStatus->addItem(Words[9]);
-    ui->ComboBoxStatus->addItem(Words[10]);
-    ui->ComboBoxStatus->addItem(Words[11]);
-    ui->ComboBoxStatus->addItem(Words[12]);
-    ui->ComboBoxStatus->addItem(Words[13]);
-    ui->ComboBoxStatus->addItem(Words[14]);
-    ui->ComboBoxStatus->addItem(Words[15]);
+    ui->TableWidgetFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(tr("На профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(7,new QTableWidgetItem(tr("Избранное")));
+    ui->ComboBoxStatus->addItems(QStringList()<<tr("Статус")<<tr("В игре")<<tr("Не в сети")<<tr("В сети")<<tr("Не беспокоить")<<tr("Нет на месте")<<tr("Спит")<<tr("Ожидает обмена")<<tr("Хочет поиграть"));
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
@@ -71,10 +56,10 @@ void FormFriends::InitComponents(){
     filter.SetRow(Friends.GetCount());
     filter.SetCol(4);
     Threading LoadTable(this);
-    LoadTable.AddThreadFriends(ui->TableWidgetFriends,Profiless,Friends,Words);
+    LoadTable.AddThreadFriends(ui->TableWidgetFriends,Profiless,Friends);
 }
 void FormFriends::ProgressLoading(int p,int row){
-    QPushButton *button1 = new QPushButton(Words[7]);
+    QPushButton *button1 = new QPushButton(tr("На профиль"));
     button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
     button1->setObjectName("btn"+Profiless[p].GetSteamid());
@@ -148,7 +133,7 @@ void FormFriends::on_ButtonReturn_clicked(){
 void FormFriends::on_CheckBoxOpenProfile_stateChanged(int arg1){
     if(arg1==2){
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-            filter.SetData(i,2,ui->TableWidgetFriends->item(i,4)->text().indexOf(Words[16])>-1);
+            filter.SetData(i,2,ui->TableWidgetFriends->item(i,4)->text().indexOf(tr("Публичный"))>-1);
         } else {
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
             filter.SetData(i,2,true);

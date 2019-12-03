@@ -369,12 +369,13 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
         LabelLogo->setText(QApplication::translate("MainWindow", "Logo", nullptr));
-        ButtonSettings->setText(QApplication::translate("MainWindow", "Settings", nullptr));
-        ButtonExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
+        ButtonSettings->setText(QString());
+        ButtonExit->setText(QApplication::translate("MainWindow", " \320\222\321\213\321\205\320\276\320\264", nullptr));
         ButtonBack->setText(QApplication::translate("MainWindow", "Back", nullptr));
         ButtonNext->setText(QApplication::translate("MainWindow", "Next", nullptr));
-        ButtonFindProfile->setText(QApplication::translate("MainWindow", "Find", nullptr));
-        ButtonSetProfile->setText(QApplication::translate("MainWindow", "Set as my profile", nullptr));
+        LineEditIdProfile->setPlaceholderText(QApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
+        ButtonFindProfile->setText(QApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
+        ButtonSetProfile->setText(QApplication::translate("MainWindow", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         LabelNick->setText(QApplication::translate("MainWindow", "NickName", nullptr));
         LabelAvatar->setText(QApplication::translate("MainWindow", "Avatar", nullptr));
         LabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));
@@ -387,9 +388,9 @@ public:
         LabelBans->setText(QApplication::translate("MainWindow", "Bans", nullptr));
         ButtonGames->setText(QApplication::translate("MainWindow", "Games", nullptr));
         ButtonFriends->setText(QApplication::translate("MainWindow", "Friends", nullptr));
-        ButtonFavorites->setText(QApplication::translate("MainWindow", "Favorites", nullptr));
-        ButtonStatistics->setText(QApplication::translate("MainWindow", "Statistics", nullptr));
-        ButtonGoToMyProfile->setText(QApplication::translate("MainWindow", "Go to my profile", nullptr));
+        ButtonFavorites->setText(QApplication::translate("MainWindow", " \320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260", nullptr));
+        ButtonStatistics->setText(QApplication::translate("MainWindow", " \320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
+        ButtonGoToMyProfile->setText(QApplication::translate("MainWindow", "\320\235\320\260 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         FormProgressBar->setFormat(QApplication::translate("MainWindow", "%v/%m", nullptr));
     } // retranslateUi
 

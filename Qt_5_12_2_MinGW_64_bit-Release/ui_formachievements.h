@@ -99,7 +99,7 @@ public:
     {
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
-        FormAchievements->resize(837, 753);
+        FormAchievements->resize(837, 755);
         verticalLayout_7 = new QVBoxLayout(FormAchievements);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         horizontalLayout_8 = new QHBoxLayout();
@@ -211,7 +211,7 @@ public:
         ScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 235, 121));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 177, 121));
         ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout->addWidget(ScrollAreaCategories);
@@ -223,7 +223,7 @@ public:
         ScrollAreaCheckCategories->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 234, 121));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 177, 121));
         ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
 
         horizontalLayout->addWidget(ScrollAreaCheckCategories);
@@ -335,6 +335,7 @@ public:
         verticalLayout_11 = new QVBoxLayout();
         verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
         ComboBoxCategoriesCategory = new QComboBox(GroupBoxCategories);
+        ComboBoxCategoriesCategory->addItem(QString());
         ComboBoxCategoriesCategory->setObjectName(QString::fromUtf8("ComboBoxCategoriesCategory"));
         QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy4.setHorizontalStretch(0);
@@ -374,7 +375,7 @@ public:
         ScrollAreaValuesCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 565, 102));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 534, 102));
         ScrollAreaValuesCategory->setWidget(scrollAreaWidgetContents_5);
 
         horizontalLayout_9->addWidget(ScrollAreaValuesCategory);
@@ -470,37 +471,41 @@ public:
         FormAchievements->setWindowTitle(QApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
         groupBox->setTitle(QString());
         LabelGameLogo->setText(QApplication::translate("FormAchievements", "GameLogo", nullptr));
-        ButtonCompare->setText(QApplication::translate("FormAchievements", "Compare with friends", nullptr));
+        ButtonCompare->setText(QApplication::translate("FormAchievements", " \320\241\321\200\320\260\320\262\320\275\320\270\321\202\321\214 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270", nullptr));
         LabelGameTitle->setText(QApplication::translate("FormAchievements", "GameTitle", nullptr));
-        CheckBoxShowFilter->setText(QApplication::translate("FormAchievements", "Show Filter", nullptr));
+        CheckBoxShowFilter->setText(QApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \321\204\320\270\320\273\321\214\321\202\321\200", nullptr));
         LabelGameOnline->setText(QApplication::translate("FormAchievements", "GameOnline", nullptr));
 #ifndef QT_NO_ACCESSIBILITY
         GroupBoxFilter->setAccessibleName(QApplication::translate("FormAchievements", "Filter", nullptr));
 #endif // QT_NO_ACCESSIBILITY
-        GroupBoxFilter->setTitle(QApplication::translate("FormAchievements", "Filter", nullptr));
-        ButtonAddCategory->setText(QApplication::translate("FormAchievements", "Add category", nullptr));
-        ButtonChangeCategory->setText(QApplication::translate("FormAchievements", "Change category", nullptr));
+        GroupBoxFilter->setTitle(QApplication::translate("FormAchievements", "      \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
+        ButtonAddCategory->setText(QApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\216", nullptr));
+        ButtonChangeCategory->setText(QApplication::translate("FormAchievements", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         LabelTotalPersent->setText(QApplication::translate("FormAchievements", "TotalPersent", nullptr));
-        ButtonUpdate->setText(QApplication::translate("FormAchievements", "Update", nullptr));
-        GroupBoxCompareShowedColumns->setTitle(QApplication::translate("FormAchievements", "Showed columns", nullptr));
-        CheckBoxCompareIcon->setText(QApplication::translate("FormAchievements", "Icon", nullptr));
-        CheckBoxCompareTitle->setText(QApplication::translate("FormAchievements", "Title", nullptr));
-        CheckBoxCompareDescription->setText(QApplication::translate("FormAchievements", "Description", nullptr));
-        CheckBoxCompareTotalPercent->setText(QApplication::translate("FormAchievements", "Total percent", nullptr));
-        RadioButtonAll->setText(QApplication::translate("FormAchievements", "All", nullptr));
-        RadioButtonReached->setText(QApplication::translate("FormAchievements", "Reached", nullptr));
-        RadioButtonNotReached->setText(QApplication::translate("FormAchievements", "Not reached", nullptr));
-        CheckBoxFavorites->setText(QApplication::translate("FormAchievements", "Only favorites", nullptr));
-        CheckBoxCompareAllFriends->setText(QApplication::translate("FormAchievements", "All friends", nullptr));
+        ButtonUpdate->setText(QApplication::translate("FormAchievements", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214", nullptr));
+        GroupBoxCompareShowedColumns->setTitle(QApplication::translate("FormAchievements", "\320\222\320\270\320\264\320\270\320\274\321\213\320\265 \321\201\321\202\320\276\320\273\320\261\321\206\321\213", nullptr));
+        CheckBoxCompareIcon->setText(QApplication::translate("FormAchievements", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));
+        CheckBoxCompareTitle->setText(QApplication::translate("FormAchievements", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265", nullptr));
+        CheckBoxCompareDescription->setText(QApplication::translate("FormAchievements", "\320\236\320\277\320\270\321\201\320\260\320\275\320\270\320\265", nullptr));
+        CheckBoxCompareTotalPercent->setText(QApplication::translate("FormAchievements", "\320\237\320\276 \320\274\320\270\321\200\321\203", nullptr));
+        RadioButtonAll->setText(QApplication::translate("FormAchievements", "\320\222\321\201\320\265 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217", nullptr));
+        RadioButtonReached->setText(QApplication::translate("FormAchievements", "\320\237\320\276\320\273\321\203\321\207\320\265\320\275\320\275\321\213\320\265 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217", nullptr));
+        RadioButtonNotReached->setText(QApplication::translate("FormAchievements", "\320\235\320\265 \320\277\320\276\320\273\321\203\321\207\320\265\320\275\320\275\321\213\320\265 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217", nullptr));
+        CheckBoxFavorites->setText(QApplication::translate("FormAchievements", "\320\242\320\276\320\273\321\214\320\272\320\276 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
+        CheckBoxCompareAllFriends->setText(QApplication::translate("FormAchievements", "\320\222\321\201\320\265 \320\264\321\200\321\203\320\267\321\214\321\217", nullptr));
         GroupBoxCategories->setTitle(QApplication::translate("FormAchievements", "Categories", nullptr));
-        CheckBoxCategoryOneValue->setText(QApplication::translate("FormAchievements", "OneValue", nullptr));
-        ButtonAddValueCategory->setText(QApplication::translate("FormAchievements", "Add Value", nullptr));
-        ButtonCancelCategory->setText(QApplication::translate("FormAchievements", "Cancel", nullptr));
-        ButtonDeleteCategory->setText(QApplication::translate("FormAchievements", "Delete", nullptr));
-        CheckBoxCategoryVisibleAll->setText(QApplication::translate("FormAchievements", "Visible All", nullptr));
-        ButtonAcceptCategory->setText(QApplication::translate("FormAchievements", "Accept", nullptr));
+        ComboBoxCategoriesCategory->setItemText(0, QApplication::translate("FormAchievements", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217 \320\275\320\265 \320\262\321\213\320\261\321\200\320\260\320\275\320\260", nullptr));
+
+        LineEditTitleCategory->setPlaceholderText(QApplication::translate("FormAchievements", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
+        CheckBoxCategoryOneValue->setText(QApplication::translate("FormAchievements", "\320\221\320\265\320\267 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\271", nullptr));
+        ButtonAddValueCategory->setText(QApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265", nullptr));
+        ButtonCancelCategory->setText(QApplication::translate("FormAchievements", "\320\236\321\202\320\274\320\265\320\275\320\260", nullptr));
+        ButtonDeleteCategory->setText(QApplication::translate("FormAchievements", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\216", nullptr));
+        CheckBoxCategoryVisibleAll->setText(QApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\262\321\201\321\221", nullptr));
+        ButtonAcceptCategory->setText(QApplication::translate("FormAchievements", "\320\237\321\200\320\270\320\274\320\265\320\275\320\270\321\202\321\214", nullptr));
         ProgressBarFriendsLoad->setFormat(QApplication::translate("FormAchievements", "%v/%m", nullptr));
-        ButtonFindAchievement->setText(QApplication::translate("FormAchievements", "Find", nullptr));
+        LineEditNameAchievements->setPlaceholderText(QApplication::translate("FormAchievements", "\320\224\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\265", nullptr));
+        ButtonFindAchievement->setText(QApplication::translate("FormAchievements", "\320\235\320\260\320\271\321\202\320\270", nullptr));
     } // retranslateUi
 
 };

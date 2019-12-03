@@ -40,14 +40,14 @@
       <item>
        <widget class="QPushButton" name="ButtonSettings">
         <property name="text">
-         <string>Settings</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="ButtonExit">
         <property name="text">
-         <string>Exit</string>
+         <string> Выход</string>
         </property>
        </widget>
       </item>
@@ -75,6 +75,9 @@
          <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(26, 26, 26);</string>
         </property>
+        <property name="placeholderText">
+         <string>Введите Steamid</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -83,7 +86,7 @@ color: rgb(26, 26, 26);</string>
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>Find</string>
+         <string> Найти</string>
         </property>
        </widget>
       </item>
@@ -94,7 +97,7 @@ color: rgb(26, 26, 26);</string>
       <item>
        <widget class="QPushButton" name="ButtonSetProfile">
         <property name="text">
-         <string>Set as my profile</string>
+         <string>Это мой профиль</string>
         </property>
        </widget>
       </item>
@@ -380,14 +383,14 @@ color: rgb(26, 26, 26);</string>
           <item>
            <widget class="QPushButton" name="ButtonFavorites">
             <property name="text">
-             <string>Favorites</string>
+             <string> Статистика</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="ButtonStatistics">
             <property name="text">
-             <string>Statistics</string>
+             <string> Избранное</string>
             </property>
            </widget>
           </item>
@@ -407,7 +410,7 @@ color: rgb(26, 26, 26);</string>
           <item>
            <widget class="QPushButton" name="ButtonGoToMyProfile">
             <property name="text">
-             <string>Go to my profile</string>
+             <string>На мой профиль</string>
             </property>
            </widget>
           </item>

@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AraSteamManager
 TEMPLATE = app
-
+TRANSLATIONS += AraSteamManager_en.ts AraSteamManager_ru.ts
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -54,7 +54,9 @@ SOURCES += \
     subform/formcategoryvalue.cpp \
     subform/formfavorites.cpp \
     subform/formfriends.cpp \
-    subform/formgames.cpp
+    subform/formgames.cpp \
+    subform/formsettings.cpp \
+    subform/formstatistics.cpp
 
 HEADERS += \
     class/Threads/threadachievements.h \
@@ -85,7 +87,9 @@ HEADERS += \
     subform/formcategoryvalue.h \
     subform/formfavorites.h \
     subform/formfriends.h \
-    subform/formgames.h
+    subform/formgames.h \
+    subform/formsettings.h \
+    subform/formstatistics.h
 
 FORMS += \
         mainwindow.ui \
@@ -93,7 +97,9 @@ FORMS += \
     subform/formcategoryvalue.ui \
     subform/formfavorites.ui \
     subform/formfriends.ui \
-    subform/formgames.ui
+    subform/formgames.ui \
+    subform/formsettings.ui \
+    subform/formstatistics.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -102,6 +108,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     images/resimg.qrc \
-    languages/restext.qrc
+    languages/lang.qrc
 
 DISTFILES +=

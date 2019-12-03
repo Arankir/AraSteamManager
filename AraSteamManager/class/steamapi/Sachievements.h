@@ -20,11 +20,11 @@ class SAchievements : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievements(QString key, QString appid, QString id, QString language, QObject *parent = nullptr);
+    explicit SAchievements(QString key, QString appid, QString id, QObject *parent = nullptr);
     SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
     SAchievements();
     ~SAchievements();
-    void Set(QString key, QString appid, QString id, QString language);
+    void Set(QString key, QString appid, QString id);
     void Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
     void SetFinish();
     SAchievement GetAchievementInfo(int index) {return Finish[index];}
@@ -73,7 +73,6 @@ private:
     QString id="";
     QString appid="";
     QString key="";
-    QString language="";
     QString gamename="";
     QString gameversion="";
     int count=0;

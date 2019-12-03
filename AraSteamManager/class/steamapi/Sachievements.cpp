@@ -1,7 +1,7 @@
 #include "Sachievements.h"
 
-SAchievements::SAchievements(QString key, QString appid, QString id, QString language, QObject *parent) : QObject(parent){
-  Set(key, appid, id, language);
+SAchievements::SAchievements(QString key, QString appid, QString id, QObject *parent) : QObject(parent){
+  Set(key, appid, id);
 }
 SAchievements::SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent){
     Set(Global, Player, Percent);
@@ -13,12 +13,11 @@ SAchievements::~SAchievements(){
 
 }
 
-void SAchievements::Set(QString key, QString appid, QString id, QString language){
+void SAchievements::Set(QString key, QString appid, QString id){
     this->key=key;
     this->appid=appid;
     this->id=id;
-    this->language=language;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(key,appid,language);
+    SAchievementsGlobal *Global = new SAchievementsGlobal(key,appid);
     connect(Global,SIGNAL(finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
     SAchievementsPlayer *Player = new SAchievementsPlayer(key,appid,id);
     connect(Player,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
@@ -79,7 +78,7 @@ void SAchievements::SetFinish(){
 }
 
 void SAchievements::Update(){
-    Set(key,appid,id,language);
+    Set(key,appid,id);
 }
 void SAchievements::Clear(){
     Finish.clear();
@@ -109,7 +108,6 @@ SAchievements::SAchievements(const SAchievements & achievement){
     id=achievement.id;
     appid=achievement.appid;
     key=achievement.key;
-    language=achievement.language;
     gamename=achievement.gamename;
     gameversion=achievement.gameversion;
     count=achievement.count;
@@ -126,7 +124,6 @@ SAchievements & SAchievements::operator=(const SAchievements & achievement){
     id=achievement.id;
     appid=achievement.appid;
     key=achievement.key;
-    language=achievement.language;
     gamename=achievement.gamename;
     gameversion=achievement.gameversion;
     count=achievement.count;

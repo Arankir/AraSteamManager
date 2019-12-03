@@ -20,12 +20,11 @@ signals:
 
 public slots:
     int Fill();
-    void Set(SAchievements achievements, QStringList Words, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
+    void Set(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
 
 private:
     int num;
     SAchievements achievements;
-    QStringList Words;
     QLabel *LabelTotalPersent;
     QTableWidget *TableWidgetAchievements;
     QLabel *LabelTotalPersentCompare;
