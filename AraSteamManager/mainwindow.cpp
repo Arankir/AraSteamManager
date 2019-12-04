@@ -178,13 +178,13 @@ void MainWindow::returnfromsettings(){
 
 #define Functions {
 void MainWindow::on_ButtonFindProfile_clicked(){
-    QString id=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove("/").remove('\r');
+    QString id=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove('\r');
     if(ui->LineEditIdProfile->text().indexOf("id",0)>-1){
-        id=ui->LineEditIdProfile->text().remove("id");
+        id=id.remove("id/").remove("/");
         GoToProfile(id,"vanity",true);
         } else {
             if(ui->LineEditIdProfile->text().indexOf("profiles",0)>-1)
-                id=ui->LineEditIdProfile->text().remove("profiles");
+                id=id.remove("profiles/").remove("/");
             GoToProfile(id,"url",true);
             }
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
@@ -200,7 +200,7 @@ void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){
             if(CurrentBufferProfile!=BufferProfiles.size())
                 while(BufferProfiles.size()!=CurrentBufferProfile)
                     BufferProfiles.takeAt(CurrentBufferProfile);
-            BufferProfiles.append(id);
+            BufferProfiles.append(Profiles.GetSteamid());
             CurrentBufferProfile=BufferProfiles.size();
         }
         if(CurrentBufferProfile==BufferProfiles.size())

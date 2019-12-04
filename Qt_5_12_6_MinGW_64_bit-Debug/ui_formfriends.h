@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formfriends.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.12.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -130,10 +130,11 @@ public:
     void retranslateUi(QWidget *FormFriends)
     {
         FormFriends->setWindowTitle(QApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
-        GroupBoxFilter->setTitle(QApplication::translate("FormFriends", "Filter", nullptr));
-        ButtonFind->setText(QApplication::translate("FormFriends", "Find", nullptr));
-        CheckBoxOpenProfile->setText(QApplication::translate("FormFriends", "Open profile", nullptr));
-        CheckBoxFavorites->setText(QApplication::translate("FormFriends", "Favorites", nullptr));
+        GroupBoxFilter->setTitle(QApplication::translate("FormFriends", "      \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
+        LineEditName->setPlaceholderText(QApplication::translate("FormFriends", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
+        ButtonFind->setText(QApplication::translate("FormFriends", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
+        CheckBoxOpenProfile->setText(QApplication::translate("FormFriends", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
+        CheckBoxFavorites->setText(QApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
         QTableWidgetItem *___qtablewidgetitem = TableWidgetFriends->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("FormFriends", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = TableWidgetFriends->horizontalHeaderItem(1);

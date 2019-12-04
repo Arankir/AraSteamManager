@@ -15,29 +15,29 @@ class CategoriesGame : public QObject
 public:
     explicit CategoriesGame(SGame game, QObject *parent = nullptr);
     CategoriesGame() {}
+    CategoriesGame & operator=(const CategoriesGame &);
+    CategoriesGame(const CategoriesGame&);
 
 signals:
 
 public slots:
     QList<QString> GetTitles();
-    int GetCountValues() {return countValues;}
-    int GetCountNoValues() {return countNoValues;}
     QString GetTitle(int index);
     int GetIsNoValues(int index);
-    QJsonArray GetValues(int index);
-    QJsonArray GetNoValues(int index);
-    QList<QString> GetAchievementsName(int category, int value);
+    QList<QString> GetValues(int category, int value);
+    QJsonArray GetValues(int value);
+    QList<QString> GetNoValues(int category);
     QString GetGame();
+    int GetCounts() {return categories.value("Categories").toArray().size();}
     int GetGameID();
     void DeleteCategory(int index);
+    void ChangeCategory(int category, QJsonObject newCategory);
     void Set(SGame game);
     void Save();
 
 private:
-    QJsonDocument categories;
+    QJsonObject categories;
     SGame game;
-    int countValues;
-    int countNoValues;
 };
 
 #endif // CATEGORIESGAME_H

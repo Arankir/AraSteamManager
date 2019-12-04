@@ -129,7 +129,7 @@ private:
     SGame game;
     int unicnum;
     SAchievements achievements;
-    CategoriesGame categories;
+    CategoriesGame categoriesGame;
     Settings Setting;
     QString theme="white";
 

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formgames.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.12.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -34,7 +34,7 @@ public:
     {
         if (FormGames->objectName().isEmpty())
             FormGames->setObjectName(QString::fromUtf8("FormGames"));
-        FormGames->resize(552, 577);
+        FormGames->resize(603, 577);
         QFont font;
         font.setPointSize(10);
         FormGames->setFont(font);
@@ -63,10 +63,7 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         TableWidgetGames = new QTableWidget(FormGames);
-        if (TableWidgetGames->columnCount() < 4)
-            TableWidgetGames->setColumnCount(4);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
-        TableWidgetGames->setColumnCount(4);
 
         verticalLayout->addWidget(TableWidgetGames);
 
@@ -80,7 +77,8 @@ public:
     void retranslateUi(QWidget *FormGames)
     {
         FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        ButtonFind->setText(QApplication::translate("FormGames", "Find", nullptr));
+        LineEditGame->setPlaceholderText(QApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
+        ButtonFind->setText(QApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
     } // retranslateUi
 
 };
