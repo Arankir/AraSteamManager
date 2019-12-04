@@ -73,6 +73,9 @@ void FormGames::InitComponents(){
         connect(button3,&QPushButton::pressed,this,&FormGames::HideClicked);
         button3->setObjectName("ButtonHide"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(i,5,button3);
+
+        QProgressBar *pb = new QProgressBar;
+        ui->TableWidgetGames->setCellWidget(i,2,pb);
     }
     ui->TableWidgetGames->setColumnWidth(0,33);
     ui->TableWidgetGames->setColumnWidth(1,300);
@@ -156,7 +159,7 @@ void FormGames::OnResultImage(ImageRequest *imgr){
 }
 void FormGames::OnResultAchievements(SAchievementsPlayer ach){
     disconnect(&ach,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
-    QProgressBar *pb = new QProgressBar;
+    QProgressBar *pb = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(ach.GetIndex(),2));
     pb->setMaximum(ach.GetAchievementsCount());
     pb->setMinimumSize(QSize(25,25));
     if(ach.GetAchievementsCount()>0){
@@ -170,7 +173,6 @@ void FormGames::OnResultAchievements(SAchievementsPlayer ach){
         pb->setValue(0);
         static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(ach.GetIndex(),3))->setEnabled(false);
     }
-    ui->TableWidgetGames->setCellWidget(ach.GetIndex(),2,pb);
     ui->TableWidgetGames->setItem(ach.GetIndex(),2,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
     ach.GetAchievementsCount();
     //ach->deleteLater();
