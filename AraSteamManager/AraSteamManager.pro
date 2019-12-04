@@ -29,6 +29,7 @@ SOURCES += \
     class/Threads/threadfriends.cpp \
     class/Threads/threadgames.cpp \
     class/Threads/threading.cpp \
+    class/categoriesgame.cpp \
     class/filter.cpp \
     class/imagerequest.cpp \
     class/profile.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     class/Threads/threadfriends.h \
     class/Threads/threadgames.h \
     class/Threads/threading.h \
+    class/categoriesgame.h \
     class/filter.h \
     class/imagerequest.h \
     class/profile.h \

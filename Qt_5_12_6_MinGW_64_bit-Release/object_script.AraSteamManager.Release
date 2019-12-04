@@ -2,6 +2,7 @@ release/threadachievements.o
 release/threadfriends.o
 release/threadgames.o
 release/threading.o
+release/categoriesgame.o
 release/filter.o
 release/imagerequest.o
 release/profile.o
@@ -36,6 +37,7 @@ release/moc_threadachievements.o
 release/moc_threadfriends.o
 release/moc_threadgames.o
 release/moc_threading.o
+release/moc_categoriesgame.o
 release/moc_filter.o
 release/moc_imagerequest.o
 release/moc_profile.o

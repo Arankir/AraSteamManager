@@ -249,13 +249,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>Преобразовать</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="ButtonUpdate">
             <property name="text">
              <string>Обновить</string>

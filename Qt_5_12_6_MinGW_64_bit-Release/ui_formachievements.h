@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formachievements.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.12.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -375,7 +375,7 @@ public:
         ScrollAreaValuesCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 534, 102));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 497, 102));
         ScrollAreaValuesCategory->setWidget(scrollAreaWidgetContents_5);
 
         horizontalLayout_9->addWidget(ScrollAreaValuesCategory);

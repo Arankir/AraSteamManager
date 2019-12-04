@@ -33,6 +33,7 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetCompareFriends->setAlternatingRowColors(true);
     ui->TableWidgetCompareFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetCompareFriends->setMinimumSize(0,180);
+    categories.Set(game);
     //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonCompare->setIcon(QIcon(":/"+theme+"/program/"+theme+"/compare.png"));
     //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/program/filter_white.png)}");
@@ -663,11 +664,9 @@ void FormAchievements::closeEvent(QCloseEvent*){
     this->deleteLater();
 }
 void FormAchievements::ShowCategories(){
-    QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
-    categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    categories.setSorting(QDir::Name);
-    QFileInfoList list = categories.entryInfoList();
-    if(categories.exists()){
+    categories.Set(game);
+    QList<QString> list = categories.GetTitles();
+    if(list.size()>0){
         while(ui->ComboBoxCategoriesCategory->count()>1){
             ui->ComboBoxCategoriesCategory->removeItem(1);
         }
@@ -676,27 +675,24 @@ void FormAchievements::ShowCategories(){
         QWidget *widget1 = new QWidget;
         QWidget *widget2 = new QWidget;
         for (int i = 0; i < list.size(); ++i){
-            QFile category("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(i).fileName());
-            category.open(QFile::ReadOnly);
-            QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
-            if(cat.object().value("values").toArray().size()==1){
+            if(categories.GetIsNoValues(i)==1){
                 QCheckBox *chb = new QCheckBox;
-                chb->setText(cat.object().value("name").toString());
+                chb->setText(categories.GetTitle(i));
                 chb->setObjectName("Category"+QString::number(i));
                 connect(chb,&QCheckBox::stateChanged,this,&FormAchievements::on_CheckBoxCategory_Change);
                 layout2->addRow(chb);
             } else {
                 QComboBox *cb = new QComboBox;
                 cb->addItem(tr("Не выбрано"));
-                for (int j=0;j<cat.object().value("values").toArray().size();j++) {
-                    cb->addItem(cat.object().value("values").toArray().at(j).toString());
+                QJsonArray values=categories.GetValues(i);
+                for (int j=0;j<values.size();j++) {
+                    cb->addItem(values.at(j).toObject().value("Title").toString());
                 }
                 cb->setObjectName("Category"+QString::number(i));
                 connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
-                layout1->addRow(new QLabel(cat.object().value("name").toString()),cb);
+                layout1->addRow(new QLabel(categories.GetTitle(i)),cb);
             }
-            ui->ComboBoxCategoriesCategory->addItem(cat.object().value("name").toString());
-            category.close();
+            ui->ComboBoxCategoriesCategory->addItem(categories.GetTitle(i));
             }
         widget1->setLayout(layout1);
         widget2->setLayout(layout2);
@@ -808,67 +804,55 @@ void FormAchievements::on_CheckBoxShowFilter_stateChanged(int arg1){
 }
 void FormAchievements::on_ComboBoxCategory_Change(int index){
     QComboBox *cb = qobject_cast<QComboBox*>(sender());
-    QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
-    if(categories.exists()){
-        categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-        categories.setSorting(QDir::Name);
-        QFileInfoList list = categories.entryInfoList();
+    if(categories.GetCountValues()>0){
+        QList<QString> list = categories.GetTitles();
         int ind = cb->objectName().mid(8,cb->objectName().length()).toInt();
-        QFile category("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(ind).fileName());
-        category.open(QFile::ReadOnly);
-        QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
-        QJsonArray selecteditem = cat.object().value(cb->itemText(index)).toArray();
-        if(index!=0)
+        if(index!=0){
+            QList<QString> achievementsName = categories.GetAchievementsName(ind,index);
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
                 FAchievements.SetData(i,3+ind,false);
                 FCompare.SetData(i+2,3+ind,false);
-                for (int j=0;j<selecteditem.size();j++) {
-                    if(ui->TableWidgetAchievements->item(i,0)->text()==selecteditem[j].toString()){
+                for (int j=0;j<achievementsName.size();j++) {
+                    if(ui->TableWidgetAchievements->item(i,0)->text()==achievementsName[j]){
                         FAchievements.SetData(i,3+ind,true);
                         FCompare.SetData(i+2,3+ind,true);
                         break;
                         }
                     }
-            } else {
+            }
+        } else {
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
                 FAchievements.SetData(i,3+ind,true);
                 FCompare.SetData(i+2,3+ind,true);
                 }
-            }
-        category.close();
+        }
         UpdateHiddenRows();
     }
 }
 void FormAchievements::on_CheckBoxCategory_Change(int index){
     QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
-    QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
-    if(categories.exists()){
-        categories.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-        categories.setSorting(QDir::Name);
-        QFileInfoList list = categories.entryInfoList();
+    if(categories.GetCountNoValues()>0){
+        QList<QString> list = categories.GetTitles();
         int ind = cb->objectName().mid(8,cb->objectName().length()).toInt();
-        QFile category("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(ind).fileName());
-        category.open(QFile::ReadOnly);
-        QJsonDocument cat=QJsonDocument().fromJson(category.readAll());
-        QJsonArray selecteditem = cat.object().value(cat.object().value("values").toArray().at(0).toString()).toArray();
-        if(index!=0)
+        if(index!=0){
+            QJsonArray achievementsName = categories.GetNoValues(ind);
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
                 FAchievements.SetData(i,3+ind,false);
                 FCompare.SetData(i+2,3+ind,false);
-                for (int j=0;j<selecteditem.size();j++) {
-                    if(ui->TableWidgetAchievements->item(i,0)->text()==selecteditem[j].toString()){
+                for (int j=0;j<achievementsName.size();j++) {
+                    if(ui->TableWidgetAchievements->item(i,0)->text()==achievementsName[j].toString()){
                         FAchievements.SetData(i,3+ind,true);
                         FCompare.SetData(i+2,3+ind,true);
                         break;
                         }
                     }
-            } else {
+            }
+        } else {
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
                 FAchievements.SetData(i,3+ind,true);
                 FCompare.SetData(i+2,3+ind,true);
                 }
-            }
-        category.close();
+        }
         UpdateHiddenRows();
     }
 }
@@ -919,18 +903,11 @@ void FormAchievements::on_ButtonAddValueCategory_clicked(){//Готово
             Value->setFirstLast(1);
         }
         }
-//        void valuechange(int pos, QString value);
-//        void visiblechange(int pos, bool visible);
-//        void positionchange(int pos, int posnew);
-//        void selectchange(int pos, bool select);
-//        void deleting(int pos);
-            connect(Value,&FormCategoryValue::valuechange,this,&FormAchievements::on_FormCategoryValueChange);
-            connect(Value,&FormCategoryValue::visiblechange,this,&FormAchievements::on_FormCategoryVisibleChange);
-            connect(Value,&FormCategoryValue::positionchange,this,&FormAchievements::on_FormCategoryPositionChange);
-            connect(Value,&FormCategoryValue::selectchange,this,&FormAchievements::on_FormCategorySelectChange);
-            connect(Value,&FormCategoryValue::deleting,this,&FormAchievements::on_FormCategoryDeleting);
-            //connect(&Value,&FormCategoryValue::clicked,this,&FormAchievements::on_buttonNewCategoryUnSelectValues_clicked);
-
+        connect(Value,&FormCategoryValue::valuechange,this,&FormAchievements::on_FormCategoryValueChange);
+        connect(Value,&FormCategoryValue::visiblechange,this,&FormAchievements::on_FormCategoryVisibleChange);
+        connect(Value,&FormCategoryValue::positionchange,this,&FormAchievements::on_FormCategoryPositionChange);
+        connect(Value,&FormCategoryValue::selectchange,this,&FormAchievements::on_FormCategorySelectChange);
+        connect(Value,&FormCategoryValue::deleting,this,&FormAchievements::on_FormCategoryDeleting);
         categoryvalueslayout->addRow(Value);
     }
 }
@@ -1045,22 +1022,17 @@ void FormAchievements::on_ButtonDeleteCategory_clicked(){//Готово
         if(btn==QMessageBox::No){
             return;
         }
-        QDir categories("Files/Categories/"+QString::number(game.GetAppid()));
         delete ui->ScrollAreaCategories->layout();
         delete ui->ScrollAreaCheckCategories->layout();
-            if(categories.exists()){
-                if(ui->ComboBoxCategoriesCategory->currentIndex()!=0){
-                if(QFile("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->ComboBoxCategoriesCategory->currentText()+".json").exists()){
-                    QFile("Files/Categories/"+QString::number(game.GetAppid())+"/"+ui->ComboBoxCategoriesCategory->currentText()+".json").remove();
-                    }
-                ShowCategories();
-                ui->LineEditNameAchievements->setText("");
-                ui->RadioButtonAll->setChecked(true);
-                ui->CheckBoxFavorites->setChecked(false);
-                QMessageBox::information(this,tr("Успешно"),tr("Категория была удалена!"));
-                on_ButtonCancelCategory_clicked();
-                }
-            }
+        if(ui->ComboBoxCategoriesCategory->currentIndex()!=0){
+        categories.DeleteCategory(ui->ComboBoxCategoriesCategory->currentIndex()-1);
+        ShowCategories();
+        ui->LineEditNameAchievements->setText("");
+        ui->RadioButtonAll->setChecked(true);
+        ui->CheckBoxFavorites->setChecked(false);
+        QMessageBox::information(this,tr("Успешно"),tr("Категория была удалена!"));
+        on_ButtonCancelCategory_clicked();
+        }
     }
 }
 void FormAchievements::on_CheckBoxCategoryOneValue_stateChanged(int arg1){//Готово
@@ -1141,12 +1113,6 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int index){//Вр
                     connect(Value,&FormCategoryValue::positionchange,this,&FormAchievements::on_FormCategoryPositionChange);
                     connect(Value,&FormCategoryValue::selectchange,this,&FormAchievements::on_FormCategorySelectChange);
                     connect(Value,&FormCategoryValue::deleting,this,&FormAchievements::on_FormCategoryDeleting);
-                    //connect(btn,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryDeleteValues_clicked);
-                    //connect(val,&QLineEdit::editingFinished,this,&FormAchievements::EditLineEditChangeCategoryValue);
-                    //connect(up,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryUpValues_clicked);
-                    //connect(down,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryDownValues_clicked);
-                    //connect(select,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategorySelectValues_clicked);
-                    //connect(unselect,&QPushButton::clicked,this,&FormAchievements::on_buttonChangeCategoryUnSelectValues_clicked);
 
                     categoryvalueslayout->addRow(Value);
                     ui->TableWidgetAchievements->insertColumn(ui->TableWidgetAchievements->columnCount());
@@ -1266,64 +1232,4 @@ void FormAchievements::on_FormCategoryDeleting(int pos){//Готово
 void FormAchievements::on_ButtonReturn_clicked(){
     emit return_to_games(unicnum);
     //delete this;
-}
-
-void FormAchievements::on_pushButton_clicked(){
-    QDir categoriesOld("Files/Categories/"+QString::number(game.GetAppid()));
-    categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
-    categoriesOld.setSorting(QDir::Name);
-
-    QJsonDocument categoriesGameNew;
-    QJsonObject finalNew;
-    QJsonArray categoriesNew;
-    finalNew["Game"]=game.GetName();
-    finalNew["GameID"]=game.GetAppid();
-    if(categoriesOld.exists()){
-        QFileInfoList list = categoriesOld.entryInfoList();
-        for (int i=0;i<list.size();++i){
-            QFile fileCategoryOld("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(i).fileName());
-            fileCategoryOld.open(QFile::ReadOnly);
-            QJsonDocument categoryOld=QJsonDocument().fromJson(fileCategoryOld.readAll());
-
-            QJsonObject categoryNew;
-            categoryNew["Title"]=categoryOld.object().value("name").toString();
-            QJsonArray ValuesNew;
-            QJsonArray NoValuesNew;
-
-            if(categoryOld.object().value("values").toArray().size()==1){
-                categoryNew["IsNoValues"]=1;
-                for (int j=0;j<categoryOld.object().value(categoryOld.object().value("name").toString()).toArray().size();j++) {
-                    QJsonObject achievementNew;
-                    achievementNew["name"]=categoryOld.object().value(categoryOld.object().value("name").toString()).toArray().at(j).toString();
-                    achievementNew["index"]=0;
-                    NoValuesNew.append(achievementNew);
-                }
-            } else {
-                categoryNew["IsNoValues"]=0;
-                for (int i=0;i<categoryOld.object().value("values").toArray().size();i++) {
-                    QJsonObject valueNew;
-                    valueNew["Title"]=categoryOld.object().value("values").toArray().at(i).toString();
-                    QJsonArray achievementsNew;
-                    for (int j=0;j<categoryOld.object().value(categoryOld.object().value("values").toArray().at(i).toString()).toArray().size();j++) {
-                        QJsonObject achievementNew;
-                        achievementNew["name"]=categoryOld.object().value(categoryOld.object().value("values").toArray().at(i).toString()).toArray().at(j).toString();
-                        achievementNew["index"]=0;
-                        achievementsNew.append(achievementNew);
-                    }
-                    valueNew["Achievements"]=achievementsNew;
-                    ValuesNew.append(valueNew);
-                }
-            }
-            fileCategoryOld.close();
-            categoryNew["Values"]=ValuesNew;
-            categoryNew["NoValues"]=NoValuesNew;
-            categoriesNew.append(categoryNew);
-            }
-    }
-    finalNew["Categories"]=categoriesNew;
-    categoriesGameNew.setObject(finalNew);
-    QFile fileCategoryNew("Files/Categories/"+QString::number(game.GetAppid())+".json");
-    fileCategoryNew.open(QFile::WriteOnly);
-    fileCategoryNew.write(categoriesGameNew.toJson());
-    fileCategoryNew.close();
 }

@@ -20,8 +20,9 @@
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
 #include <class/filter.h>
-#include <subform/formcategoryvalue.h>
+#include <class/categoriesgame.h>
 #include <class/Threads/threading.h>
+#include <subform/formcategoryvalue.h>
 
 namespace Ui {
 class FormAchievements;
@@ -121,8 +122,6 @@ private slots:
 
     void on_CheckBoxCategoryVisibleAll_clicked();
 
-    void on_pushButton_clicked();
-
 private:
     Ui::FormAchievements *ui;
     QString key;
@@ -130,6 +129,7 @@ private:
     SGame game;
     int unicnum;
     SAchievements achievements;
+    CategoriesGame categories;
     Settings Setting;
     QString theme="white";
 

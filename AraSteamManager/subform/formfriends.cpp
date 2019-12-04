@@ -41,7 +41,7 @@ void FormFriends::InitComponents(){
     ui->TableWidgetFriends->setRowCount(Friends.GetCount());
     //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.jpg) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     ui->TableWidgetFriends->setColumnHidden(5,true);
     ui->TableWidgetFriends->setColumnWidth(0,33);
     for (int i=0; i < Profiless.size()-1; i++) {
