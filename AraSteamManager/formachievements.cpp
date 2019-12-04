@@ -1267,3 +1267,63 @@ void FormAchievements::on_ButtonReturn_clicked(){
     emit return_to_games(unicnum);
     //delete this;
 }
+
+void FormAchievements::on_pushButton_clicked(){
+    QDir categoriesOld("Files/Categories/"+QString::number(game.GetAppid()));
+    categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    categoriesOld.setSorting(QDir::Name);
+
+    QJsonDocument categoriesGameNew;
+    QJsonObject finalNew;
+    QJsonArray categoriesNew;
+    finalNew["Game"]=game.GetName();
+    finalNew["GameID"]=game.GetAppid();
+    if(categoriesOld.exists()){
+        QFileInfoList list = categoriesOld.entryInfoList();
+        for (int i=0;i<list.size();++i){
+            QFile fileCategoryOld("Files/Categories/"+QString::number(game.GetAppid())+"/"+list.at(i).fileName());
+            fileCategoryOld.open(QFile::ReadOnly);
+            QJsonDocument categoryOld=QJsonDocument().fromJson(fileCategoryOld.readAll());
+
+            QJsonObject categoryNew;
+            categoryNew["Title"]=categoryOld.object().value("name").toString();
+            QJsonArray ValuesNew;
+            QJsonArray NoValuesNew;
+
+            if(categoryOld.object().value("values").toArray().size()==1){
+                categoryNew["IsNoValues"]=1;
+                for (int j=0;j<categoryOld.object().value(categoryOld.object().value("name").toString()).toArray().size();j++) {
+                    QJsonObject achievementNew;
+                    achievementNew["name"]=categoryOld.object().value(categoryOld.object().value("name").toString()).toArray().at(j).toString();
+                    achievementNew["index"]=0;
+                    NoValuesNew.append(achievementNew);
+                }
+            } else {
+                categoryNew["IsNoValues"]=0;
+                for (int i=0;i<categoryOld.object().value("values").toArray().size();i++) {
+                    QJsonObject valueNew;
+                    valueNew["Title"]=categoryOld.object().value("values").toArray().at(i).toString();
+                    QJsonArray achievementsNew;
+                    for (int j=0;j<categoryOld.object().value(categoryOld.object().value("values").toArray().at(i).toString()).toArray().size();j++) {
+                        QJsonObject achievementNew;
+                        achievementNew["name"]=categoryOld.object().value(categoryOld.object().value("values").toArray().at(i).toString()).toArray().at(j).toString();
+                        achievementNew["index"]=0;
+                        achievementsNew.append(achievementNew);
+                    }
+                    valueNew["Achievements"]=achievementsNew;
+                    ValuesNew.append(valueNew);
+                }
+            }
+            fileCategoryOld.close();
+            categoryNew["Values"]=ValuesNew;
+            categoryNew["NoValues"]=NoValuesNew;
+            categoriesNew.append(categoryNew);
+            }
+    }
+    finalNew["Categories"]=categoriesNew;
+    categoriesGameNew.setObject(finalNew);
+    QFile fileCategoryNew("Files/Categories/"+QString::number(game.GetAppid())+".json");
+    fileCategoryNew.open(QFile::WriteOnly);
+    fileCategoryNew.write(categoriesGameNew.toJson());
+    fileCategoryNew.close();
+}

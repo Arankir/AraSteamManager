@@ -58,6 +58,7 @@ public:
     QPushButton *ButtonAddCategory;
     QPushButton *ButtonChangeCategory;
     QLabel *LabelTotalPersent;
+    QPushButton *pushButton;
     QPushButton *ButtonUpdate;
     QGroupBox *GroupBoxCompareShowedColumns;
     QVBoxLayout *verticalLayout_9;
@@ -246,6 +247,11 @@ public:
 
         verticalLayout_4->addWidget(LabelTotalPersent);
 
+        pushButton = new QPushButton(GroupBoxFilter);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        verticalLayout_4->addWidget(pushButton);
+
         ButtonUpdate = new QPushButton(GroupBoxFilter);
         ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
 
@@ -375,7 +381,7 @@ public:
         ScrollAreaValuesCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 534, 102));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 497, 102));
         ScrollAreaValuesCategory->setWidget(scrollAreaWidgetContents_5);
 
         horizontalLayout_9->addWidget(ScrollAreaValuesCategory);
@@ -482,6 +488,7 @@ public:
         ButtonAddCategory->setText(QApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\216", nullptr));
         ButtonChangeCategory->setText(QApplication::translate("FormAchievements", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         LabelTotalPersent->setText(QApplication::translate("FormAchievements", "TotalPersent", nullptr));
+        pushButton->setText(QApplication::translate("FormAchievements", "\320\237\321\200\320\265\320\276\320\261\321\200\320\260\320\267\320\276\320\262\320\260\321\202\321\214", nullptr));
         ButtonUpdate->setText(QApplication::translate("FormAchievements", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214", nullptr));
         GroupBoxCompareShowedColumns->setTitle(QApplication::translate("FormAchievements", "\320\222\320\270\320\264\320\270\320\274\321\213\320\265 \321\201\321\202\320\276\320\273\320\261\321\206\321\213", nullptr));
         CheckBoxCompareIcon->setText(QApplication::translate("FormAchievements", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));

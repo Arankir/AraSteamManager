@@ -121,6 +121,8 @@ private slots:
 
     void on_CheckBoxCategoryVisibleAll_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::FormAchievements *ui;
     QString key;

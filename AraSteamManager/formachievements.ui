@@ -249,6 +249,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Преобразовать</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="ButtonUpdate">
             <property name="text">
              <string>Обновить</string>
@@ -452,7 +459,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>534</width>
+              <width>497</width>
               <height>102</height>
              </rect>
             </property>
