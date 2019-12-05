@@ -11,7 +11,7 @@ Settings::Settings(QObject *parent) : QObject(parent){
             while (!setting.isEmpty()) {
                 QString sett=setting.takeAt(0);
                 if(sett.indexOf("MyProfile=",0)!=-1){
-                    MyProfile=sett.mid(sett.indexOf("MyProfile=",0)+10,sett.length());
+                    myProfile=sett.mid(sett.indexOf("MyProfile=",0)+10,sett.length());
                     }
                 if(sett.indexOf("Theme=",0)!=-1){
                     theme=sett.mid(sett.indexOf("Theme=",0)+6,sett.length()).toInt();
@@ -21,6 +21,9 @@ Settings::Settings(QObject *parent) : QObject(parent){
                     }
                 if(sett.indexOf("SaveImages=",0)!=-1){
                     SaveImages=sett.mid(sett.indexOf("SaveImages=",0)+11,sett.length()).toInt();
+                    }
+                if(sett.indexOf("VisibleHiddenGames=",0)!=-1){
+                    visibleHiddenGames=sett.mid(sett.indexOf("VisibleHiddenGames=",0)+19,sett.length()).toInt();
                     }
                 }
             status="success";
@@ -73,13 +76,14 @@ bool Settings::SetMyProfile(QString MyProfiles){
         return false;
     } else {
         file.close();
-        MyProfile=MyProfiles;
+        myProfile=MyProfiles;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
         writeStream << "Language="+QString::number(language)<<"\n";
         writeStream << "Theme="+QString::number(theme)<<"\n";
         writeStream << "SaveImages="+QString::number(SaveImages)<<"\n";
-        writeStream << "MyProfile="+MyProfile;
+        writeStream << "MyProfile="+myProfile<<"\n";
+        writeStream << "VisibleHiddenGames="+QString::number(visibleHiddenGames);
         file.close();
         return true;
     }
@@ -102,7 +106,8 @@ bool Settings::SetLanguage(int Language){
         writeStream << "Language="+QString::number(language)<<'\n';
         writeStream << "Theme="+QString::number(theme)<<'\n';
         writeStream << "SaveImages="+QString::number(SaveImages)<<'\n';
-        writeStream << "MyProfile="+MyProfile;
+        writeStream << "MyProfile="+myProfile<<"\n";
+        writeStream << "VisibleHiddenGames="+QString::number(visibleHiddenGames);
         file.close();
         return true;
     }
@@ -125,7 +130,8 @@ bool Settings::SetTheme(int Theme){
         writeStream << "Language="+QString::number(language)<<'\n';
         writeStream << "Theme="+QString::number(theme)<<'\n';
         writeStream << "SaveImages="+QString::number(SaveImages)<<'\n';
-        writeStream << "MyProfile="+MyProfile;
+        writeStream << "MyProfile="+myProfile<<"\n";
+        writeStream << "VisibleHiddenGames="+QString::number(visibleHiddenGames);
         file.close();
         return true;
     }
@@ -148,7 +154,32 @@ bool Settings::SetSaveimage(int SaveImage){
         writeStream << "Language="+QString::number(language)<<'\n';
         writeStream << "Theme="+QString::number(theme)<<'\n';
         writeStream << "SaveImages="+QString::number(SaveImages)<<'\n';
-        writeStream << "MyProfile="+MyProfile;
+        writeStream << "MyProfile="+myProfile<<"\n";
+        writeStream << "VisibleHiddenGames="+QString::number(visibleHiddenGames);
+        file.close();
+        return true;
+    }
+}
+bool Settings::SetVisibleHiddenGames(int VisibleHiddenGames){
+    QFile file("Files/Settings.txt");
+    if(!QFile::exists("Files/Settings.txt"))
+    {
+    SetDefault();
+    }
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        status="error: file is already open";
+        return false;
+    } else {
+        file.close();
+        visibleHiddenGames=VisibleHiddenGames;
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
+        QTextStream writeStream(&file);
+        writeStream << "Language="+QString::number(language)<<'\n';
+        writeStream << "Theme="+QString::number(theme)<<'\n';
+        writeStream << "SaveImages="+QString::number(SaveImages)<<'\n';
+        writeStream << "MyProfile="+myProfile<<"\n";
+        writeStream << "VisibleHiddenGames="+QString::number(visibleHiddenGames);
         file.close();
         return true;
     }

@@ -381,14 +381,14 @@ color: rgb(26, 26, 26);</string>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="ButtonFavorites">
+           <widget class="QPushButton" name="ButtonStatistics">
             <property name="text">
              <string> Статистика</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="ButtonStatistics">
+           <widget class="QPushButton" name="ButtonFavorites">
             <property name="text">
              <string> Избранное</string>
             </property>

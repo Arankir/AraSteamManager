@@ -112,8 +112,6 @@ private slots:
 
     void on_ComboBoxCategoriesCategory_activated(int index);
 
-    void on_ChangeTitleCategory_OneValue();
-
     void on_FormCategoryValueChange(int pos, QString value);
     void on_FormCategoryVisibleChange(int pos, bool visible);
     void on_FormCategoryPositionChange(int pos, int newpos);
@@ -121,6 +119,10 @@ private slots:
     void on_FormCategoryDeleting(int pos);
 
     void on_CheckBoxCategoryVisibleAll_clicked();
+
+    void on_ButtonDeleteAllCategories_clicked();
+
+    void on_LineEditTitleCategory_textChanged(const QString &arg1);
 
 private:
     Ui::FormAchievements *ui;

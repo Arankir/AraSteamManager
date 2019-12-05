@@ -126,6 +126,16 @@ void CategoriesGame::DeleteCategory(int index){
     Save();
 }
 
+void CategoriesGame::DeleteAll(){
+    QJsonObject obj;
+    obj["Game"]=categories["Game"];
+    obj["GameID"]=categories["GameID"];
+    QJsonArray arr;
+    obj["Categories"]=arr;
+    categories=obj;
+    Save();
+}
+
 void CategoriesGame::ChangeCategory(int category, QJsonObject newCategory){
     QJsonObject obj;
     obj["Game"]=categories["Game"];

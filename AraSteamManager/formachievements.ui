@@ -192,7 +192,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>177</width>
+             <width>172</width>
              <height>121</height>
             </rect>
            </property>
@@ -215,7 +215,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>177</width>
+             <width>171</width>
              <height>121</height>
             </rect>
            </property>
@@ -235,6 +235,13 @@
            <widget class="QPushButton" name="ButtonChangeCategory">
             <property name="text">
              <string>Изменить категории</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ButtonDeleteAllCategories">
+            <property name="text">
+             <string>Удалить все категории</string>
             </property>
            </widget>
           </item>

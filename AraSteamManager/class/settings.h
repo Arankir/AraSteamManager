@@ -15,12 +15,14 @@ public:
     bool SetLanguage(int Language);
     bool SetTheme(int Theme);
     bool SetSaveimage(int SaveImage);
+    bool SetVisibleHiddenGames(int VisibleHiddenGames);
     void SetDefault();
-    QString GetMyProfile() {return MyProfile;}
+    QString GetMyProfile() {return myProfile;}
     int GetLanguage() {return language;}
     int GetTheme() {return theme;}
     int GetSaveimages() {return SaveImages;}
     QString GetStatus() {return status;}
+    int GetVisibleHiddenGames() {return visibleHiddenGames;}
     QStringList GetWords(QString form);
 
 signals:
@@ -28,10 +30,11 @@ signals:
 public slots:
 
 private:
-    QString MyProfile="";
+    QString myProfile="";
     int language=1;
     int theme=1;
     int SaveImages=0;
+    int visibleHiddenGames=0;
     QString status="none";
 };
 

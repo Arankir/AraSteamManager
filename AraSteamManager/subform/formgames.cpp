@@ -132,6 +132,7 @@ void FormGames::OnFinish(){
             if(hide[j].toInt()==games[i].GetAppid()){
                 ui->TableWidgetGames->setRowHidden(i,true);
                 ui->TableWidgetGames->item(i,1)->setTextColor(Qt::red);
+                static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,5))->setEnabled(false);
                 hide.removeAt(j);
                 break;
             }
@@ -203,17 +204,23 @@ void FormGames::returnfromachievements(int num){
 #define SystemEnd }
 
 #define Filter {
-void FormGames::on_LineEditGame_textChanged(const QString){
-    for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
-            ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(ui->LineEditGame->text().toUpper(),0)>-1?false:true);
-            QStringList hide=Hide;
-            for (int j=0;j<hide.size();j++) {
-                if(hide[j].toInt()==games[i].GetAppid()){
-                    ui->TableWidgetGames->setRowHidden(i,true);
-                    hide.removeAt(j);
-                    break;
-                }
-                }
+void FormGames::on_LineEditGame_textChanged(const QString arg){
+    if(Setting.GetVisibleHiddenGames()==1&&arg!=""){
+        for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
+                ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)>-1?false:true);
+        }
+    } else {
+        for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
+                ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)>-1?false:true);
+                QStringList hide=Hide;
+                for (int j=0;j<hide.size();j++) {
+                    if(hide[j].toInt()==games[i].GetAppid()){
+                        ui->TableWidgetGames->setRowHidden(i,true);
+                        hide.removeAt(j);
+                        break;
+                    }
+                    }
+        }
     }
 }
 void FormGames::on_ButtonFind_clicked(){
@@ -281,5 +288,6 @@ void FormGames::HideClicked(){
     ui->TableWidgetGames->item(index,1)->setTextColor(Qt::red);
     ui->TableWidgetGames->setRowHidden(index,true);
     ui->TableWidgetGames->setCurrentCell(index+1,4);
+    btn->setEnabled(false);
 }
 #define FunctionsEnd }

@@ -31,6 +31,7 @@ public slots:
     int GetCounts() {return categories.value("Categories").toArray().size();}
     int GetGameID();
     void DeleteCategory(int index);
+    void DeleteAll();
     void ChangeCategory(int category, QJsonObject newCategory);
     void Set(SGame game);
     void Save();

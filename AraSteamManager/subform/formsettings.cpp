@@ -27,7 +27,30 @@ void FormSettings::InitComponents(){
     default:{
     }
     }
-    qDebug()<<Setting.GetLanguage();
+    switch (Setting.GetVisibleHiddenGames()) {
+    case 0:{
+        ui->CheckBoxVisibleHiddenGames->setChecked(false);
+        break;
+    }
+    case 1:{
+        ui->CheckBoxVisibleHiddenGames->setChecked(true);
+        break;
+    }
+    default:{
+    }
+    }
+    switch (Setting.GetTheme()) {
+    case 1:{
+        ui->RadioButtonDarkTheme->setChecked(true);
+        break;
+    }
+    case 2:{
+        ui->RadioButtonLightTheme->setChecked(true);
+        break;
+    }
+    default:{
+    }
+    }
 }
 
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
@@ -38,4 +61,27 @@ void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
 void FormSettings::on_RadioButtonLanguageRussian_clicked(){
     Setting.SetLanguage(5);
     QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::on_CheckBoxVisibleHiddenGames_stateChanged(int arg1){
+    switch (arg1) {
+    case 0:{
+        Setting.SetVisibleHiddenGames(0);
+        break;
+    }
+    case 2:{
+        Setting.SetVisibleHiddenGames(1);
+        break;
+    }
+    }
+}
+
+void FormSettings::on_RadioButtonDarkTheme_clicked(){
+    Setting.SetTheme(1);
+    QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::on_RadioButtonLightTheme_clicked(){
+    Setting.SetTheme(2);
+    QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
