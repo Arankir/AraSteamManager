@@ -39,23 +39,23 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         break;
         }
     }
-    QTranslator lang;
-    switch(Setting.GetLanguage()){
-    case 1:{
-        lang.load(":/AraSteamManager_en.qm");
-        //qApp->installTranslator(&lang);
-        break;
-    }
-    case 5:{
-        lang.load(":/AraSteamManager_ru.qm");
-        //a->installTranslator(&lang);
-        break;
-    }
-    default:{
-        lang.load(":/AraSteamManager_en.qm");
-        //qApp->installTranslator(&lang);
-    }
-    }
+//    QTranslator lang;
+//    switch(Setting.GetLanguage()){
+//    case 1:{
+//        lang.load(":/AraSteamManager_en.qm");
+//        //qApp->installTranslator(&lang);
+//        break;
+//    }
+//    case 5:{
+//        lang.load(":/AraSteamManager_ru.qm");
+//        //a->installTranslator(&lang);
+//        break;
+//    }
+//    default:{
+//        lang.load(":/AraSteamManager_en.qm");
+//        //qApp->installTranslator(&lang);
+//    }
+//    }
     InitComponents();
     if(Setting.GetStatus()=="success"){
         if(Setting.GetMyProfile()!="none")
@@ -140,35 +140,30 @@ MainWindow::~MainWindow(){
     //    delete friendsform;
 }
 void MainWindow::returnfromgames(){
-    this->setVisible(true);
     disconnect(gamesform);
     windowchildcount--;
     delete gamesform;
     windowchild=0;
 }
 void MainWindow::returnfromfriends(){
-    this->setVisible(true);
     disconnect(friendsform);
     windowchildcount--;
     delete friendsform;
     windowchild=0;
 }
 void MainWindow::returnfromfavorites(){
-    this->setVisible(true);
     disconnect(favoritesform);
     windowchildcount--;
     delete favoritesform;
     windowchild=0;
 }
 void MainWindow::returnfromstatistics(){
-    this->setVisible(true);
     disconnect(statisticsform);
     windowchildcount--;
     delete statisticsform;
     windowchild=0;
 }
 void MainWindow::returnfromsettings(){
-    this->setVisible(true);
     disconnect(settingsform);
     windowchildcount--;
     delete settingsform;

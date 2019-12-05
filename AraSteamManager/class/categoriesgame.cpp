@@ -30,7 +30,7 @@ QList<QString> CategoriesGame::GetValues(int category, int value){
 QList<QString> CategoriesGame::GetNoValues(int category){
     QList<QString> list;
     for(int i=0;i<categories.value("Categories").toArray().at(category).toObject().value("NoValues").toArray().size();i++){
-        list.append(categories.value("Categories").toArray().at(category).toObject().value("Values").toArray().at(i).toString());
+        list.append(categories.value("Categories").toArray().at(category).toObject().value("NoValues").toArray().at(i).toString());
     }
     return list;
 }
@@ -114,19 +114,41 @@ void CategoriesGame::Save(){
 }
 
 void CategoriesGame::DeleteCategory(int index){
-    qDebug()<<categories;
-    categories.value("Categories").toArray().removeAt(index);
-    qDebug()<<categories;
+    QJsonObject obj;
+    obj["Game"]=categories["Game"];
+    obj["GameID"]=categories["GameID"];
+    QJsonArray arr;
+    for(int i=0;i<categories.value("Categories").toArray().size();i++)
+        if(i!=index)
+            arr.append(categories.value("Categories").toArray().at(i));
+    obj["Categories"]=arr;
+    categories=obj;
     Save();
 }
 
 void CategoriesGame::ChangeCategory(int category, QJsonObject newCategory){
-    qDebug()<<categories<<categories.size();
-    if(category==categories.size())
-        categories.value("Categories").toArray().append(newCategory);
-    else
-        categories.value("Categories").toArray().at(category).toObject()=newCategory;
-    qDebug()<<categories<<categories.size();
+    QJsonObject obj;
+    obj["Game"]=categories["Game"];
+    obj["GameID"]=categories["GameID"];
+    QJsonArray arr;
+    if(category==categories.value("Categories").toArray().size()){
+        for(int i=0;i<categories.value("Categories").toArray().size();i++)
+                arr.append(categories.value("Categories").toArray().at(i));
+        arr.append(newCategory);
+    } else {
+        for(int i=0;i<categories.value("Categories").toArray().size();i++)
+            if(i!=category)
+                arr.append(categories.value("Categories").toArray().at(i));
+            else
+                arr.append(newCategory);
+    }
+    obj["Categories"]=arr;
+    categories=obj;
+//    if(category==categories.value("Categories").toArray().size())
+//        categories.value("Categories").toArray().append(newCategory);
+//    else
+//        categories.value("Categories").toArray().at(category).toObject()=newCategory;
+    Save();
 }
 
 CategoriesGame::CategoriesGame(const CategoriesGame& a){
