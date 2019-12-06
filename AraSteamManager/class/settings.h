@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QFile>
+#include <QDir>
 #include <QTextStream>
 
 class Settings : public QObject

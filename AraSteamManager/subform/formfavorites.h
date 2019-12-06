@@ -18,6 +18,9 @@ public:
 signals:
     void return_to_profile();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::FormFavorites *ui;
 };

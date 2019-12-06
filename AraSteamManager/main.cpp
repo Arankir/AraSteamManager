@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     qApp->setStyle(QStyleFactory::create("Fusion"));
+    qRegisterMetaType<QVector<int>>("QVector<int>");
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
     QTranslator lang;
     Settings Setting;

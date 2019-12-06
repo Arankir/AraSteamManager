@@ -700,6 +700,8 @@ void FormAchievements::ShowCategories(){
 
     ui->ScrollAreaCategories->setHidden((layout1->rowCount()==0));
     ui->ScrollAreaCheckCategories->setHidden((layout2->rowCount()==0));
+    ui->ButtonChangeCategory->setEnabled(list.size()!=0);
+
     FAchievements.SetCol(list.size()+3);
     FCompare.SetCol(list.size()+3+ui->TableWidgetCompareAchievements->columnCount()-7);
 }
@@ -767,6 +769,7 @@ void FormAchievements::on_ButtonAddCategory_clicked(){
         ui->ComboBoxCategoriesCategory->setVisible(false);
         ui->ButtonDeleteCategory->setVisible(false);
         ui->LineEditTitleCategory->setEnabled(true);
+        ui->ButtonAddValueCategory->setEnabled(true);
 
         ui->GroupBoxCategories->setTitle(tr("Добавить категорию"));
         ui->GroupBoxCategories->setVisible(true);
@@ -792,6 +795,7 @@ void FormAchievements::on_ButtonChangeCategory_clicked(){
         ui->ComboBoxCategoriesCategory->setVisible(true);
         ui->ButtonDeleteCategory->setVisible(true);
         ui->LineEditTitleCategory->setEnabled(false);
+        ui->ButtonAddValueCategory->setEnabled(false);
 
         ui->GroupBoxCategories->setTitle(tr("Изменить категорию"));
         ui->GroupBoxCategories->setVisible(true);
@@ -1091,6 +1095,7 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int index){//Вр
             }
             ui->TableWidgetAchievements->setColumnCount(7);
             if(index!=0){
+                ui->ButtonAddValueCategory->setEnabled(true);
                 ui->TableWidgetAchievements->setColumnCount(8);
                 ui->LineEditTitleCategory->setEnabled(true);
                 QList<QString> noValues = categoriesGame.GetNoValues(index-1);
@@ -1166,7 +1171,9 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int index){//Вр
                     ui->TableWidgetAchievements->setColumnHidden(8+i,false);
                 }
             }
-        }
+        } else {
+                ui->ButtonAddValueCategory->setEnabled(false);
+            }
         }
     }
 }
@@ -1209,50 +1216,39 @@ void FormAchievements::on_FormCategoryPositionChange(int pos, int posnew){//Го
         for (int i=0;i<Values.size();i++) {
             categoryvalueslayout->addRow(Values[i]);
             Values[i]->setPosition(i);
-            if(Values.size()!=1){
-                if(i!=Values.size()-1){
-                    if(i!=0){
-                        Values[i]->setFirstLast(0);
-                    } else {
-                        Values[i]->setFirstLast(-1);
-                    }
-                } else {
-                    Values[i]->setFirstLast(1);
-                }
-            } else {
+            if(Values.size()==1){
                 Values[i]->setFirstLast(-2);
+            } else if(Values.size()-1==i) {
+                Values[i]->setFirstLast(1);
+            } else if(i==0) {
+                Values[i]->setFirstLast(-1);
+            } else {
+                Values[i]->setFirstLast(0);
             }
         }
     }
 }
 void FormAchievements::on_FormCategorySelectChange(int pos, bool select){//Готово
-    ui->TableWidgetAchievements->selectColumn(2);
-    QList<QTableWidgetItem*> rows = ui->TableWidgetAchievements->selectedItems();
-    for (int i=0;i<rows.size();i++) {
-        ui->TableWidgetAchievements->item(rows.at(i)->row(),8+pos)->setCheckState(select?Qt::Checked:Qt::Unchecked);
+    for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
+        if(!ui->TableWidgetAchievements->isRowHidden(i))
+            ui->TableWidgetAchievements->item(i,8+pos)->setCheckState(select?Qt::Checked:Qt::Unchecked);
     }
-    ui->TableWidgetAchievements->selectColumn(0);
 }
 void FormAchievements::on_FormCategoryDeleting(int pos){//Готово
+    qDebug()<<pos;
     ui->TableWidgetAchievements->removeColumn(8+pos);
     categoryvalueslayout->removeRow(pos);
     Values.remove(pos);
-    if(pos==1)
-        pos--;
-    for (int i=pos;i<Values.size();i++) {
+    for (int i=0;i<Values.size();i++) {
         Values[i]->setPosition(i);
-        if(Values.size()!=1){
-            if(i!=Values.size()-1){
-                if(i!=0){
-                    Values[i]->setFirstLast(0);
-                } else {
-                    Values[i]->setFirstLast(-1);
-                }
-            } else {
-                Values[i]->setFirstLast(1);
-            }
-        } else {
+        if(Values.size()==1){
             Values[i]->setFirstLast(-2);
+        } else if(Values.size()-1==i) {
+            Values[i]->setFirstLast(1);
+        } else if(i==0) {
+            Values[i]->setFirstLast(-1);
+        } else {
+            Values[i]->setFirstLast(0);
         }
     }
 }

@@ -1,6 +1,20 @@
 #include "settings.h"
 
 Settings::Settings(QObject *parent) : QObject(parent){
+    QString savenow="Files/Settings.txt";
+    QString path="";
+    while(savenow.length()>0){
+        if(savenow.indexOf("/",0)>-1){
+            QString dir=savenow.mid(0,savenow.indexOf("/",0));
+            savenow=savenow.mid(savenow.indexOf("/",0)+1, savenow.length());
+            if(!QDir(path+dir).exists()){
+                QDir().mkdir(path+dir);
+            }
+            path+=dir+"/";
+        } else {
+            savenow="";
+        }
+    }
     if(QFile::exists("Files/Settings.txt")){
         QFile settings("Files/Settings.txt");
         if (settings.open(QIODevice::ReadOnly)){
