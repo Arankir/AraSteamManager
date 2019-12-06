@@ -1209,18 +1209,14 @@ void FormAchievements::on_FormCategoryPositionChange(int pos, int posnew){//Го
         for (int i=0;i<Values.size();i++) {
             categoryvalueslayout->addRow(Values[i]);
             Values[i]->setPosition(i);
-            if(Values.size()!=1){
-                if(i!=Values.size()-1){
-                    if(i!=0){
-                        Values[i]->setFirstLast(0);
-                    } else {
-                        Values[i]->setFirstLast(-1);
-                    }
-                } else {
-                    Values[i]->setFirstLast(1);
-                }
-            } else {
+            if(Values.size()==1){
                 Values[i]->setFirstLast(-2);
+            } else if(Values.size()-1==i) {
+                Values[i]->setFirstLast(1);
+            } else if(i==0) {
+                Values[i]->setFirstLast(-1);
+            } else {
+                Values[i]->setFirstLast(0);
             }
         }
     }
@@ -1237,22 +1233,16 @@ void FormAchievements::on_FormCategoryDeleting(int pos){//Готово
     ui->TableWidgetAchievements->removeColumn(8+pos);
     categoryvalueslayout->removeRow(pos);
     Values.remove(pos);
-    if(pos==1)
-        pos--;
-    for (int i=pos;i<Values.size();i++) {
+    for (int i=0;i<Values.size();i++) {
         Values[i]->setPosition(i);
-        if(Values.size()!=1){
-            if(i!=Values.size()-1){
-                if(i!=0){
-                    Values[i]->setFirstLast(0);
-                } else {
-                    Values[i]->setFirstLast(-1);
-                }
-            } else {
-                Values[i]->setFirstLast(1);
-            }
-        } else {
+        if(Values.size()==1){
             Values[i]->setFirstLast(-2);
+        } else if(Values.size()-1==i) {
+            Values[i]->setFirstLast(1);
+        } else if(i==0) {
+            Values[i]->setFirstLast(-1);
+        } else {
+            Values[i]->setFirstLast(0);
         }
     }
 }

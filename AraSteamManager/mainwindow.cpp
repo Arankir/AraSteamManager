@@ -3,7 +3,6 @@
 
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
-    qRegisterMetaType<QVector<int>>("QVector<int>");
     switch(Setting.GetTheme()){
     case 1:{
         QPalette darkPalette;
