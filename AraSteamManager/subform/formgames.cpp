@@ -250,6 +250,7 @@ void FormGames::FavoritesClicked(){
 
 }
 void FormGames::HideClicked(){
+    QString Save="";
     QMessageBox messageBox(QMessageBox::Question,
                            tr("Внимание!"),
                            tr("Вы уверены, что хотите скрыть эту игру?"));
@@ -257,7 +258,6 @@ void FormGames::HideClicked(){
     QAbstractButton *btnAll = messageBox.addButton(tr("Да, для всех аккаунтов"),QMessageBox::YesRole);
     messageBox.addButton(tr("Отмена"),QMessageBox::NoRole);
     messageBox.exec();
-    QString Save="";
     if(messageBox.clickedButton()==btnProfile){
          Save="Files/Hide/"+id+".txt";
     } else if(messageBox.clickedButton()==btnAll){
@@ -265,7 +265,7 @@ void FormGames::HideClicked(){
     } else return;
 
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(10,6).toInt();
+    int gamei=btn->objectName().mid(10,6).toInt();
     QString savenow=Save;
     QString path="";
     while(savenow.length()>0){
@@ -283,11 +283,16 @@ void FormGames::HideClicked(){
     QFile hide(Save);
     hide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&hide);
-    writeStream <<games[index].GetAppid()<<"\n";
+    writeStream <<games[gamei].GetAppid()<<"\n";
     hide.close();
-    ui->TableWidgetGames->item(index,1)->setTextColor(Qt::red);
-    ui->TableWidgetGames->setRowHidden(index,true);
-    ui->TableWidgetGames->setCurrentCell(index+1,4);
+    for (int i=0;i<games.size();i++) {
+        if(games[gamei].GetName()==ui->TableWidgetGames->item(i,1)->text()){
+            ui->TableWidgetGames->item(i,1)->setTextColor(Qt::red);
+            ui->TableWidgetGames->setRowHidden(i,true);
+            ui->TableWidgetGames->setCurrentCell(i+1,4);
+            break;
+        }
+    }
     btn->setEnabled(false);
 }
 #define FunctionsEnd }

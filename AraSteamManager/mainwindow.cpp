@@ -415,7 +415,7 @@ void MainWindow::on_ButtonStatistics_clicked(){
     if(windowchild!=4){
         windowchild=4;
         //ui->FormProgressBar->setMaximum(Friends.GetCount());
-        statisticsform = new FormStatistics();
+        statisticsform = new FormStatistics(key,Profile.GetSteamid(),Games);
         //connect(favoritesform,&FormFavorites::return_to_profile,this,&MainWindow::returnfromfavorites);
         ui->ScrollAreaForm->setWidget(statisticsform);
         //ui->FormProgressBar->setVisible(true);
