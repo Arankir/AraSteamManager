@@ -1,0 +1,11 @@
+{
+Type:"Games"
+Values:[
+	{
+	id: 000000
+	name: PAYDAY 2
+	icon: url.jpg 
+	}
+	...
+	]
+}

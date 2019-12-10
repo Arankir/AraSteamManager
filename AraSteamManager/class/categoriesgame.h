@@ -7,6 +7,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <class/settings.h>
 #include <class/steamapi/Sgame.h>
 
 class CategoriesGame : public QObject
@@ -38,6 +39,7 @@ public slots:
 
 private:
     QJsonObject categories;
+    Settings Setting;
     SGame game;
 };
 

@@ -34,6 +34,7 @@ void FormGames::InitComponents(){
             }
         }
     }
+    favorites.SetPath("Files/Favorites/Games.json","Games");
     ui->TableWidgetGames->setColumnCount(4);
     ui->TableWidgetGames->setColumnCount(6);
     ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
@@ -61,6 +62,7 @@ void FormGames::InitComponents(){
         ui->TableWidgetGames->setCellWidget(i,3,button1);
 
         QPushButton *button2 = new QPushButton;
+        //проверка всего на избранное
         button2->setIcon(Favorite);
         button2->setMinimumSize(QSize(25,25));
         connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
@@ -247,7 +249,18 @@ void FormGames::AchievementsClicked(){
     }
 }
 void FormGames::FavoritesClicked(){
-
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    int index=btn->objectName().mid(15,6).toInt();
+    QJsonObject newValue;
+    newValue["id"]=QString::number(games[index].GetAppid());
+    newValue["name"]=games[index].GetName();
+    newValue["icon"]=games[index].GetImg_icon_url();
+    if(favorites.AddValue(newValue,true)){
+        //Категория добавилась
+    } else {
+        //Категория уже есть (удалилась)
+    }
+    //Поменять картинку
 }
 void FormGames::HideClicked(){
     QString Save="";
@@ -266,20 +279,7 @@ void FormGames::HideClicked(){
 
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int gamei=btn->objectName().mid(10,6).toInt();
-    QString savenow=Save;
-    QString path="";
-    while(savenow.length()>0){
-        if(savenow.indexOf("/",0)>-1){
-            QString dir=savenow.mid(0,savenow.indexOf("/",0));
-            savenow=savenow.mid(savenow.indexOf("/",0)+1, savenow.length());
-            if(!QDir(path+dir).exists()){
-                QDir().mkdir(path+dir);
-            }
-            path+=dir+"/";
-        } else {
-            savenow="";
-        }
-    }
+    Setting.CreateFile(Save);
     QFile hide(Save);
     hide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&hide);

@@ -23,6 +23,7 @@ FormAchievements::FormAchievements(QString keys, QString ids, SGame games, int n
 
 #define Init {
 void FormAchievements::InitComponents(){
+    favorites.SetPath("Files/Favorites/Achievements.json","Achievements");
     ui->TableWidgetAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetCompareAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetCompareFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -205,7 +206,7 @@ void FormAchievements::PullTableWidget(){
     }
 }
 void FormAchievements::ProgressLoading(int p,int row){
-    qDebug()<<"ProgressLoading..."<<p;
+    qDebug()<<"Loading..."<<p;
     QPushButton *button1 = new QPushButton;
     button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
     connect(button1,&QPushButton::pressed,this,&FormAchievements::FavoritesClicked);
@@ -807,7 +808,19 @@ void FormAchievements::on_ButtonUpdate_clicked(){
     ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(game.GetNumberPlayers(key,true)));
 }
 void FormAchievements::FavoritesClicked(){
-
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    int index=btn->objectName().mid(16,40).toInt();
+    QJsonObject newValue;
+    //id icon title description world
+    //newValue["id"]=QString::number(games[index].GetAppid());
+    //newValue["name"]=games[index].GetName();
+    //newValue["icon"]=games[index].GetImg_icon_url();
+    if(favorites.AddValue(newValue,true)){
+        //Категория добавилась
+    } else {
+        //Категория уже есть (удалилась)
+    }
+    //Поменять картинку
 }
 void FormAchievements::on_ButtonCompare_clicked(){
     SwitchSimpleCompare(simpleCompare);

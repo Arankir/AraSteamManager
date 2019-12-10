@@ -176,11 +176,11 @@ void MainWindow::on_ButtonFindProfile_clicked(){
     if(ui->LineEditIdProfile->text().indexOf("id",0)>-1){
         id=id.remove("id/").remove("/");
         GoToProfile(id,"vanity",true);
-        } else {
-            if(ui->LineEditIdProfile->text().indexOf("profiles",0)>-1)
-                id=id.remove("profiles/").remove("/");
-            GoToProfile(id,"url",true);
-            }
+    } else {
+        if(ui->LineEditIdProfile->text().indexOf("profiles",0)>-1)
+            id=id.remove("profiles/").remove("/");
+        GoToProfile(id,"url",true);
+        }
     //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 }
 void MainWindow::GoToProfile(QString id, QString type, bool UpdateBuffer){

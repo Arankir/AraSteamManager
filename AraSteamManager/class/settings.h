@@ -25,6 +25,7 @@ public:
     QString GetStatus() {return status;}
     int GetVisibleHiddenGames() {return visibleHiddenGames;}
     QStringList GetWords(QString form);
+    bool CreateFile(QString path);
 
 signals:
 

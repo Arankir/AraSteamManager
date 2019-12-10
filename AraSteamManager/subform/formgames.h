@@ -6,8 +6,9 @@
 #include <QPushButton>
 #include <QProgressBar>
 #include <formachievements.h>
-#include <class/steamapi/Sgames.h>
 #include <class/settings.h>
+#include <class/favorites.h>
+#include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
 #include <class/Threads/threading.h>
 
@@ -52,6 +53,7 @@ private:
     QString key;
     int windowchildcount=0;
     QVector<SGame> games;
+    Favorites favorites;
     QStringList Hide;
     Settings Setting;
     QString theme="white";

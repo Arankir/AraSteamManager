@@ -30,9 +30,9 @@ SOURCES += \
     class/Threads/threadgames.cpp \
     class/Threads/threading.cpp \
     class/categoriesgame.cpp \
+    class/favorites.cpp \
     class/filter.cpp \
     class/imagerequest.cpp \
-    class/profile.cpp \
     class/settings.cpp \
     class/steamapi/Sachievement.cpp \
     class/steamapi/Sachievementglobal.cpp \
@@ -65,9 +65,9 @@ HEADERS += \
     class/Threads/threadgames.h \
     class/Threads/threading.h \
     class/categoriesgame.h \
+    class/favorites.h \
     class/filter.h \
     class/imagerequest.h \
-    class/profile.h \
     class/settings.h \
     class/steamapi/Sachievement.h \
     class/steamapi/Sachievementglobal.h \

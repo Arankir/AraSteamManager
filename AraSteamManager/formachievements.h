@@ -20,6 +20,7 @@
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
 #include <class/filter.h>
+#include <class/favorites.h>
 #include <class/categoriesgame.h>
 #include <class/Threads/threading.h>
 #include <subform/formcategoryvalue.h>
@@ -134,6 +135,7 @@ private:
     CategoriesGame categoriesGame;
     Settings Setting;
     QString theme="white";
+    Favorites favorites;
 
     QVector<ImageRequest*> request;
     int numrequests=0;

@@ -26,6 +26,7 @@ FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *
 
 #define Init {
 void FormFriends::InitComponents(){
+    favorites.SetPath("Files/Favorites/Friends.json","Friends");
     ui->TableWidgetFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
     ui->TableWidgetFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(tr("Ник")));
     ui->TableWidgetFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(tr("Добавлен")));
@@ -175,7 +176,20 @@ void FormFriends::GoToProfileClicked(){
     }
 }
 void FormFriends::FavoritesClicked(){
-
+    QPushButton *btn = qobject_cast<QPushButton*>(sender());
+    int index=btn->objectName().mid(4,30).toInt();
+    QJsonObject newValue;
+    newValue["id"]=Profiless[index].GetSteamid();
+    newValue["name"]=Profiless[index].GetPersonaname();
+    newValue["icon"]=Profiless[index].GetAvatar();
+    newValue["added"]=Friends.GetFriend_since(index).toString("yyyy.MM.dd hh:mm:ss");
+    newValue["privacy"]=Profiless[index].GetCommunityvisibilitystate();
+    if(favorites.AddValue(newValue,true)){
+        //Категория добавилась
+    } else {
+        //Категория уже есть (удалилась)
+    }
+    //Поменять картинку
 }
 #define FunctionsEnd }
 

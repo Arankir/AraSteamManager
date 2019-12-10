@@ -8,6 +8,7 @@
 #include <class/steamapi/Sfriends.h>
 #include <class/Threads/threading.h>
 #include <class/settings.h>
+#include <class/favorites.h>
 #include <class/filter.h>
 
 namespace Ui {
@@ -56,6 +57,7 @@ private:
     QVector<SProfile> Profiless;
     Settings Setting;
     QString theme="white";
+    Favorites favorites;
 
     QVector<ImageRequest*> request;
     int numrequests=0;

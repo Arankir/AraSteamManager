@@ -105,20 +105,7 @@ void CategoriesGame::Set(SGame game){
 
 
 void CategoriesGame::Save(){
-    QString savenow="Files/Categories/";
-    QString path="";
-    while(savenow.length()>0){
-        if(savenow.indexOf("/",0)>-1){
-            QString dir=savenow.mid(0,savenow.indexOf("/",0));
-            savenow=savenow.mid(savenow.indexOf("/",0)+1, savenow.length());
-            if(!QDir(path+dir).exists()){
-                QDir().mkdir(path+dir);
-            }
-            path+=dir+"/";
-        } else {
-            savenow="";
-        }
-    }
+    Setting.CreateFile("Files/Categories/");
     QFile fileCategoryNew("Files/Categories/"+QString::number(game.GetAppid())+".json");
     fileCategoryNew.open(QFile::WriteOnly);
     QJsonDocument doc;
