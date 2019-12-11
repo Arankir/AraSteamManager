@@ -210,7 +210,7 @@ void FormAchievements::ProgressLoading(int p,int row){
     QPushButton *button1 = new QPushButton;
     button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
     connect(button1,&QPushButton::pressed,this,&FormAchievements::FavoritesClicked);
-    button1->setObjectName("ButtonFavorites&"+achievements.GetApiname(p));
+    button1->setObjectName("ButtonFavorites&"+QString::number(row));
     ui->TableWidgetAchievements->setCellWidget(row,6,button1);
 }
 void FormAchievements::OnFinish(){
@@ -809,13 +809,16 @@ void FormAchievements::on_ButtonUpdate_clicked(){
 }
 void FormAchievements::FavoritesClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(16,40).toInt();
+    int index=btn->objectName().mid(16).toInt();
+    QJsonObject gameO;
     QJsonObject newValue;
-    //id icon title description world
-    //newValue["id"]=QString::number(games[index].GetAppid());
-    //newValue["name"]=games[index].GetName();
-    //newValue["icon"]=games[index].GetImg_icon_url();
-    if(favorites.AddValue(newValue,true)){
+    gameO["id"]=game.GetAppid();
+    gameO["name"]=game.GetName();
+    newValue["id"]=achievements.GetApiname(index);
+    newValue["title"]=achievements.GetDisplayname(index);
+    newValue["description"]=achievements.GetDescription(index);
+
+    if(favorites.AddValue(gameO,newValue,true)){
         //Категория добавилась
     } else {
         //Категория уже есть (удалилась)
@@ -1272,4 +1275,35 @@ void FormAchievements::on_FormCategoryDeleting(int pos){//Готово
 void FormAchievements::on_ButtonReturn_clicked(){
     emit return_to_games(unicnum);
     //delete this;
+}
+
+void FormAchievements::on_CheckBoxFavorites_stateChanged(int arg1){
+    switch (arg1) {
+    case 0:{
+        for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++){
+            FAchievements.SetData(i,2,true);
+            FCompare.SetData(i+2,2,true);
+        }
+        break;
+    }
+    case 2:{
+        QJsonObject gameO;
+        gameO["id"]=game.GetAppid();
+        gameO["name"]=game.GetName();
+        QJsonArray val=favorites.GetValues(gameO);
+        for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++){
+            bool accept=false;
+            for (int j=0;j<val.size();j++) {
+                if(val[j].toObject().value("id").toString()==achievements.GetApiname(i)){
+                    accept=true;
+                    break;
+                }
+            }
+            FAchievements.SetData(i,2,accept);
+            FCompare.SetData(i+2,2,accept);
+        }
+        break;
+    }
+    }
+    UpdateHiddenRows();
 }

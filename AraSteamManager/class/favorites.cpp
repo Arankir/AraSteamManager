@@ -103,7 +103,7 @@ void Favorites::RemoveValue(QJsonArray newValue){
     favorites=obj;
     Save();
 }
-bool Favorites::AddValue(QString game, QJsonObject newValue, bool deleteIfExist){
+bool Favorites::AddValue(QJsonObject game, QJsonObject newValue, bool deleteIfExist){
     Setting.CreateFile(path);
     QJsonObject obj;
     obj["Type"]=favorites["Type"];
@@ -111,7 +111,7 @@ bool Favorites::AddValue(QString game, QJsonObject newValue, bool deleteIfExist)
     int indGame=-1;
     //Узнаем индекс нужной игры
     for(int i=0;i<favorites.value("Values").toArray().size();i++){
-        if(favorites.value("Values").toArray().at(i).toObject().value("game").toString()==game){
+        if(favorites.value("Values").toArray().at(i).toObject().value("game").toObject()==game){
             indGame=i;
             break;
         }
@@ -148,14 +148,14 @@ bool Favorites::AddValue(QString game, QJsonObject newValue, bool deleteIfExist)
     Save();
     return true;
 }
-bool Favorites::RemoveValue(QString game, QJsonObject newValue){
+bool Favorites::RemoveValue(QJsonObject game, QJsonObject newValue){
     Setting.CreateFile(path);
     QJsonObject obj;
     obj["Type"]=favorites["Type"];
     QJsonArray arr;
     int indGame=-1;
     for(int i=0;i<favorites.value("Values").toArray().size();i++){
-        if(favorites.value("Values").toArray().at(i).toObject().value("game").toString()==game){
+        if(favorites.value("Values").toArray().at(i).toObject().value("game").toObject()==game){
             indGame=i;
             break;
         }
@@ -170,7 +170,10 @@ bool Favorites::RemoveValue(QString game, QJsonObject newValue){
         if(favorites.value("Values").toArray().at(indGame).toObject().value("Values").toArray().at(i).toObject()!=newValue)
             arr2.append(favorites.value("Values").toArray().at(indGame).toObject().value("Values").toArray().at(i));
         }
-    arr2.append(newValue);
+    if(arr2.size()==0){
+        RemoveGame(game);
+        return false;
+    }
     obj2["Values"]=arr2;
     //копируем все игры, заменив старую версию игры на новую
     for(int i=0;i<favorites.value("Values").toArray().size();i++){
@@ -184,26 +187,26 @@ bool Favorites::RemoveValue(QString game, QJsonObject newValue){
     Save();
     return true;
 }
-void Favorites::RemoveGame(QString game){
+void Favorites::RemoveGame(QJsonObject game){
     Setting.CreateFile(path);
     QJsonObject obj;
     obj["Type"]=favorites["Type"];
     QJsonArray arr;
     for(int i=0;i<favorites.value("Values").toArray().size();i++){
-        if(favorites.value("Values").toArray().at(i).toObject().value("game")!=game)
+        if(favorites.value("Values").toArray().at(i).toObject().value("game").toObject()!=game)
             arr.append(favorites.value("Values").toArray().at(i));
     }
     obj["Values"]=arr;
     favorites=obj;
     Save();
 }
-int Favorites::AddGame(QString game){
+int Favorites::AddGame(QJsonObject game){
     Setting.CreateFile(path);
     QJsonObject obj;
     obj["Type"]=favorites["Type"];
     QJsonArray arr;
     for(int i=0;i<favorites.value("Values").toArray().size();i++){
-        if(favorites.value("Values").toArray().at(i).toObject().value("game")!=game)
+        if(favorites.value("Values").toArray().at(i).toObject().value("game").toObject()!=game)
             arr.append(favorites.value("Values").toArray().at(i));
         else
             return i;
@@ -223,6 +226,12 @@ QString Favorites::GetType(){
 }
 QJsonArray Favorites::GetValues(){
     return favorites.value("Values").toArray();
+}
+QJsonArray Favorites::GetValues(QJsonObject game){
+    for(int i=0;i<favorites.value("Values").toArray().size();i++)
+        if(favorites.value("Values").toArray().at(i).toObject().value("game").toObject()==game)
+            return favorites.value("Values").toArray().at(i).toObject().value("Values").toArray();
+    return QJsonArray();
 }
 
 void Favorites::Save(){

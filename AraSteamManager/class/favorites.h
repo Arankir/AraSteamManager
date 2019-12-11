@@ -25,12 +25,13 @@ public slots:
     void RemoveValue(QJsonObject newValue);
     bool AddValue(QJsonArray newValue, bool deleteIfExist);
     void RemoveValue(QJsonArray newValue);
-    bool AddValue(QString game, QJsonObject newValue, bool deleteIfExist);
-    bool RemoveValue(QString game, QJsonObject newValue);
-    void RemoveGame(QString game);
-    int AddGame(QString game);
+    bool AddValue(QJsonObject game, QJsonObject newValue, bool deleteIfExist);
+    bool RemoveValue(QJsonObject game, QJsonObject newValue);
+    void RemoveGame(QJsonObject game);
+    int AddGame(QJsonObject game);
     QString GetType();
     QJsonArray GetValues();
+    QJsonArray GetValues(QJsonObject game);
 
 private slots:
     void Save();

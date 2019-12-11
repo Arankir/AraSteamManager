@@ -125,6 +125,8 @@ private slots:
 
     void on_LineEditTitleCategory_textChanged(const QString &arg1);
 
+    void on_CheckBoxFavorites_stateChanged(int arg1);
+
 private:
     Ui::FormAchievements *ui;
     QString key;

@@ -48,6 +48,8 @@ private slots:
     void on_ButtonFind_clicked();
     void on_ComboBoxStatus_activated(int index);
 
+    void on_CheckBoxFavorites_stateChanged(int arg1);
+
 private:
     Ui::FormFriends *ui;
     QString id;

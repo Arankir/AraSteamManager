@@ -250,11 +250,10 @@ void FormGames::AchievementsClicked(){
 }
 void FormGames::FavoritesClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(15,6).toInt();
+    int index=btn->objectName().mid(15).toInt();
     QJsonObject newValue;
     newValue["id"]=QString::number(games[index].GetAppid());
     newValue["name"]=games[index].GetName();
-    newValue["icon"]=games[index].GetImg_icon_url();
     if(favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {

@@ -70,7 +70,7 @@ void FormFriends::ProgressLoading(int p,int row){
     QPushButton *button2 = new QPushButton;
     button2->setIcon(QIcon(":/"+theme+"/program/"+theme+"/favorites.png"));
     connect(button2,&QPushButton::pressed,this,&FormFriends::FavoritesClicked);
-    button2->setObjectName("btnf"+Profiless[p].GetSteamid());
+    button2->setObjectName("btnf"+QString::number(row));
     ui->TableWidgetFriends->setCellWidget(row,7,button2);
     ui->TableWidgetFriends->setRowHeight(row,33);
 }
@@ -163,6 +163,30 @@ void FormFriends::UpdateHiddenRows(){
     for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
         ui->TableWidgetFriends->setRowHidden(i,!filter.GetData(i));
 }
+void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
+    switch (arg1) {
+    case 0:{
+        for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
+            filter.SetData(i,3,true);
+        break;
+    }
+    case 2:{
+        QJsonArray val=favorites.GetValues();
+        for (int i=0;i<ui->TableWidgetFriends->rowCount();i++){
+            bool accept=false;
+            for (int j=0;j<val.size();j++) {
+                if(val[j].toObject().value("id").toString()==Profiless[i].GetSteamid()){
+                    accept=true;
+                    break;
+                }
+            }
+            filter.SetData(i,3,accept);
+        }
+        break;
+    }
+    }
+    UpdateHiddenRows();
+}
 #define FilterEnd }
 
 #define Functions {
@@ -177,13 +201,11 @@ void FormFriends::GoToProfileClicked(){
 }
 void FormFriends::FavoritesClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(4,30).toInt();
+    int index=btn->objectName().mid(4).toInt();
     QJsonObject newValue;
     newValue["id"]=Profiless[index].GetSteamid();
     newValue["name"]=Profiless[index].GetPersonaname();
-    newValue["icon"]=Profiless[index].GetAvatar();
     newValue["added"]=Friends.GetFriend_since(index).toString("yyyy.MM.dd hh:mm:ss");
-    newValue["privacy"]=Profiless[index].GetCommunityvisibilitystate();
     if(favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {
@@ -192,4 +214,3 @@ void FormFriends::FavoritesClicked(){
     //Поменять картинку
 }
 #define FunctionsEnd }
-
