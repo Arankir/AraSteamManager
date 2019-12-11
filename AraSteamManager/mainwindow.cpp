@@ -392,7 +392,7 @@ void MainWindow::on_ButtonFavorites_clicked(){
     if(windowchild!=3){
         windowchild=3;
         //ui->FormProgressBar->setMaximum(Friends.GetCount());
-        favoritesform = new FormFavorites();
+        favoritesform = new FormFavorites(key,this);
         //connect(favoritesform,&FormFavorites::return_to_profile,this,&MainWindow::returnfromfavorites);
         ui->ScrollAreaForm->setWidget(favoritesform);
         //ui->FormProgressBar->setVisible(true);

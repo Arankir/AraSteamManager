@@ -2,6 +2,7 @@
 #define FORMSTATISTICS_H
 
 #include <QWidget>
+#include <QPair>
 #include <class/steamapi/Sgames.h>
 #include <class/settings.h>
 #include <class/steamapi/Sachievements.h>
@@ -26,6 +27,14 @@ private:
     Ui::FormStatistics *ui;
     QString key;
     QString id;
+    int numof[3];
+    QVector<QPair<QString,QString>> complete;
+    QVector<QPair<QString,QString>> started;
+    QVector<QPair<QString,QString>> notStarted;
+    double *averagePercent;
+    int nownum;
+    int summcolumn;
+    int colgames;
     SGames games;
     int times[24];
     int months[12];

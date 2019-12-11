@@ -12,11 +12,15 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -28,9 +32,22 @@ public:
     QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
     QWidget *tab;
-    QRadioButton *radioButton;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *LineEditGamesFind;
+    QPushButton *ButtonGamesFind;
+    QTableWidget *TableWidgetGames;
     QWidget *tab_2;
-    QCheckBox *checkBox;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_2;
+    QLineEdit *LineEditFriendsFind;
+    QPushButton *ButtonFriendsFind;
+    QHBoxLayout *horizontalLayout_3;
+    QComboBox *ComboBoxFriendsStatus;
+    QCheckBox *CheckBoxFriendsOpenProfile;
+    QCheckBox *CheckBoxFriendsFavorites;
+    QSpacerItem *horizontalSpacer_2;
+    QTableWidget *TableWidgetFriends;
     QWidget *tab_3;
     QPushButton *pushButton;
     QLineEdit *lineEdit;
@@ -48,7 +65,7 @@ public:
     {
         if (FormFavorites->objectName().isEmpty())
             FormFavorites->setObjectName(QString::fromUtf8("FormFavorites"));
-        FormFavorites->resize(639, 662);
+        FormFavorites->resize(635, 662);
         verticalLayout = new QVBoxLayout(FormFavorites);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -57,15 +74,83 @@ public:
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
-        radioButton = new QRadioButton(tab);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setGeometry(QRect(10, 10, 84, 19));
+        verticalLayout_2 = new QVBoxLayout(tab);
+        verticalLayout_2->setSpacing(1);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        LineEditGamesFind = new QLineEdit(tab);
+        LineEditGamesFind->setObjectName(QString::fromUtf8("LineEditGamesFind"));
+
+        horizontalLayout->addWidget(LineEditGamesFind);
+
+        ButtonGamesFind = new QPushButton(tab);
+        ButtonGamesFind->setObjectName(QString::fromUtf8("ButtonGamesFind"));
+
+        horizontalLayout->addWidget(ButtonGamesFind);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
+
+        TableWidgetGames = new QTableWidget(tab);
+        TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
+
+        verticalLayout_2->addWidget(TableWidgetGames);
+
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
-        checkBox = new QCheckBox(tab_2);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        checkBox->setGeometry(QRect(10, 10, 72, 19));
+        verticalLayout_3 = new QVBoxLayout(tab_2);
+        verticalLayout_3->setSpacing(1);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(3);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        LineEditFriendsFind = new QLineEdit(tab_2);
+        LineEditFriendsFind->setObjectName(QString::fromUtf8("LineEditFriendsFind"));
+
+        horizontalLayout_2->addWidget(LineEditFriendsFind);
+
+        ButtonFriendsFind = new QPushButton(tab_2);
+        ButtonFriendsFind->setObjectName(QString::fromUtf8("ButtonFriendsFind"));
+
+        horizontalLayout_2->addWidget(ButtonFriendsFind);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_2);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        ComboBoxFriendsStatus = new QComboBox(tab_2);
+        ComboBoxFriendsStatus->setObjectName(QString::fromUtf8("ComboBoxFriendsStatus"));
+
+        horizontalLayout_3->addWidget(ComboBoxFriendsStatus);
+
+        CheckBoxFriendsOpenProfile = new QCheckBox(tab_2);
+        CheckBoxFriendsOpenProfile->setObjectName(QString::fromUtf8("CheckBoxFriendsOpenProfile"));
+
+        horizontalLayout_3->addWidget(CheckBoxFriendsOpenProfile);
+
+        CheckBoxFriendsFavorites = new QCheckBox(tab_2);
+        CheckBoxFriendsFavorites->setObjectName(QString::fromUtf8("CheckBoxFriendsFavorites"));
+
+        horizontalLayout_3->addWidget(CheckBoxFriendsFavorites);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_2);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_3);
+
+        TableWidgetFriends = new QTableWidget(tab_2);
+        TableWidgetFriends->setObjectName(QString::fromUtf8("TableWidgetFriends"));
+
+        verticalLayout_3->addWidget(TableWidgetFriends);
+
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
@@ -77,7 +162,7 @@ public:
         lineEdit->setGeometry(QRect(10, 10, 113, 21));
         label = new QLabel(tab_3);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(170, 90, 91, 16));
+        label->setGeometry(QRect(170, 90, 151, 16));
         label_2 = new QLabel(tab_3);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(10, 180, 611, 371));
@@ -126,13 +211,16 @@ public:
     void retranslateUi(QWidget *FormFavorites)
     {
         FormFavorites->setWindowTitle(QApplication::translate("FormFavorites", "Form", nullptr));
-        radioButton->setText(QApplication::translate("FormFavorites", "RadioButton", nullptr));
+        ButtonGamesFind->setText(QApplication::translate("FormFavorites", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("FormFavorites", "Games", nullptr));
-        checkBox->setText(QApplication::translate("FormFavorites", "CheckBox", nullptr));
+        LineEditFriendsFind->setPlaceholderText(QApplication::translate("FormFavorites", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
+        ButtonFriendsFind->setText(QApplication::translate("FormFavorites", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
+        CheckBoxFriendsOpenProfile->setText(QApplication::translate("FormFavorites", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
+        CheckBoxFriendsFavorites->setText(QApplication::translate("FormFavorites", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("FormFavorites", "Friends", nullptr));
         pushButton->setText(QApplication::translate("FormFavorites", "\320\226\320\274\320\270", nullptr));
         lineEdit->setText(QApplication::translate("FormFavorites", "0,0,0", nullptr));
-        label->setText(QApplication::translate("FormFavorites", "\320\257 \320\272\320\276\321\200\320\276\321\202\320\272\320\270\320\271 \321\202\320\265\320\272\321\201\321\202", nullptr));
+        label->setText(QApplication::translate("FormFavorites", "\320\237\320\276\321\202\320\276\320\274 \320\264\320\276\320\261\320\260\320\262\320\273\321\216 \321\201\321\216\320\264\320\260 \320\260\321\207\320\270\320\262\320\272\320\270", nullptr));
         label_2->setText(QApplication::translate("FormFavorites", "\320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201"
                         "\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272"
                         "\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265"

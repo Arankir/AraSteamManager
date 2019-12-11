@@ -15,6 +15,30 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="LabelAveragePercent">
+     <property name="text">
+      <string>Средний процент: </string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="LabelSummColumn">
+     <property name="text">
+      <string>Всего достижений:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="LabelNumOf">
+     <property name="text">
+      <string>Таких то столько:</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="label">
      <property name="text">
       <string>Часы</string>
