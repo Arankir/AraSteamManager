@@ -24,6 +24,15 @@ void SAchievements::Set(QString key, QString appid, QString id){
     SAchievementsPercentage *Percent = new SAchievementsPercentage(key,appid);
     connect(Percent,SIGNAL(finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
+void SAchievements::DoSet(QString key, QString appid, QString id){
+    this->key=key;
+    this->appid=appid;
+    this->id=id;
+    SAchievementsGlobal *Global = new SAchievementsGlobal(key,appid);
+    connect(Global,SIGNAL(finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(key,appid);
+    connect(Percent,SIGNAL(finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
+}
 void SAchievements::Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent){
     Set(Percent);
     Set(Global);

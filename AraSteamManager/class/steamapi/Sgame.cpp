@@ -22,8 +22,6 @@ QString SGame::GetNumberPlayers(QString key, bool hardreload){
         numberplayers=QString::number(NumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble());
     }
     return numberplayers;
-    //{"player_count":9023,
-    //"result":1}
 }
 
 SGame::SGame( const SGame & a){

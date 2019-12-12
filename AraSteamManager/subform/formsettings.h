@@ -33,7 +33,7 @@ private slots:
 
 private:
     Ui::FormSettings *ui;
-    Settings Setting;
+    Settings setting;
 };
 
 #endif // FORMSETTINGS_H

@@ -34,7 +34,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, QString ids, SGame game, int num, QWidget *parent = nullptr);
+    explicit FormAchievements(QString keys, SAchievementsPlayer pl, QString ids, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -135,7 +135,7 @@ private:
     int unicnum;
     SAchievements achievements;
     CategoriesGame categoriesGame;
-    Settings Setting;
+    Settings setting;
     QString theme="white";
     Favorites favorites;
 
@@ -148,14 +148,14 @@ private:
     int type1=0;
     int type2=0;
     int friendsCount=0;
-    QVector<SProfile> Profiles;
+    QVector<SProfile> profiles;
     QVector<QPair<SProfile,int>> friends;
 
     QFormLayout *categoryvalueslayout;
     int typecategory=0;
-    QVector<FormCategoryValue*> Values;
-    Filter FAchievements;
-    Filter FCompare;
+    QVector<FormCategoryValue*> values;
+    Filter fAchievements;
+    Filter fCompare;
 };
 
 #endif // FORMACHIEVEMENTS_H

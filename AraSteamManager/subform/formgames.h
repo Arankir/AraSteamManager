@@ -53,9 +53,10 @@ private:
     QString key;
     int windowchildcount=0;
     QVector<SGame> games;
+    SAchievementsPlayer *achievements;
     Favorites favorites;
-    QStringList Hide;
-    Settings Setting;
+    QStringList hide;
+    Settings setting;
     QString theme="white";
 
     QVector<ImageRequest*> request;

@@ -55,9 +55,9 @@ private:
     QString id;
     QString key;
     int windowchildcount=0;
-    SFriends Friends;
-    QVector<SProfile> Profiless;
-    Settings Setting;
+    SFriends friends;
+    QVector<SProfile> profiless;
+    Settings setting;
     QString theme="white";
     Favorites favorites;
 

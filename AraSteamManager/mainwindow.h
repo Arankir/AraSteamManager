@@ -74,19 +74,21 @@ private slots:
 
     void on_ButtonSettings_clicked();
 
+    void ReturnFromForms();
+
 private:
     Ui::MainWindow *ui;
     QString key="3826BF60403D15613B4B0381DAB7A7BD";
     int windowchildcount=0;
     int windowchild=0;
-    SProfile Profile;
-    SGames Games;
-    SFriends Friends;
-    Settings Setting;
+    SProfile profile;
+    SGames games;
+    SFriends friends;
+    Settings setting;
     QString theme="white";
 
-    QVector<QString> BufferProfiles;
-    int CurrentBufferProfile=0;
+    QVector<QString> bufferProfiles;
+    int currentBufferProfile=0;
 };
 
 #endif // MAINWINDOW_H

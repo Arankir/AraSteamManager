@@ -38,8 +38,8 @@ void FormFavorites::InitComponents(){
     ui->TableWidgetFriends->setColumnHidden(4,true);
     ui->TableWidgetFriends->setColumnWidth(0,33);
     ui->TableWidgetFriends->setRowCount(friendsJ.size());
-    for (int i=0;i<friendsJ.size();i++) {
-        SProfile *Profiles = new SProfile(key,friendsJ[i].toObject().value("id").toString(),true,"url");
+    foreach (QJsonValue frien, friendsJ) {
+        SProfile *Profiles = new SProfile(key,frien.toObject().value("id").toString(),true,"url");
         connect(Profiles,SIGNAL(finished(SProfile*)),this,SLOT(FriendLoad(SProfile*)));
     }
     for (int i=0;i<achievementsJ.size();i++) {

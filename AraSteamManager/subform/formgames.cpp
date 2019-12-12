@@ -1,15 +1,15 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, SGames Gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString ids, QString keys, SGames gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     id=ids;
     key=keys;
-    SGames Games=Gamess;
-    for (int i=0;i<Games.GetCount();i++) {
-        games.push_back(Games.GetGame(i));
+    SGames game=gamess;
+    for (int i=0;i<game.GetCount();i++) {
+        games.push_back(game.GetGame(i));
     }
-    switch(Setting.GetTheme()){
+    switch(setting.GetTheme()){
     case 1:{
         theme="white";
         break;
@@ -48,10 +48,9 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
-    //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
-    //Achievement = ;
-    QIcon Favorite = QIcon(":/"+theme+"/program/"+theme+"/favorites.png");
-    QIcon Hide = QIcon(":/"+theme+"/program/"+theme+"/hide.png");
+    //iAchievement = ;
+    QIcon iFavorite = QIcon(":/"+theme+"/program/"+theme+"/favorites.png");
+    QIcon iHide = QIcon(":/"+theme+"/program/"+theme+"/hide.png");
     ui->TableWidgetGames->setRowCount(games.count());
     for (int i=0;i<games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
@@ -63,14 +62,14 @@ void FormGames::InitComponents(){
 
         QPushButton *button2 = new QPushButton;
         //проверка всего на избранное
-        button2->setIcon(Favorite);
+        button2->setIcon(iFavorite);
         button2->setMinimumSize(QSize(25,25));
         connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
         button2->setObjectName("ButtonFavorites"+QString::number(i));
         ui->TableWidgetGames->setCellWidget(i,4,button2);
 
         QPushButton *button3 = new QPushButton;
-        button3->setIcon(Hide);
+        button3->setIcon(iHide);
         button3->setMinimumSize(QSize(25,25));
         connect(button3,&QPushButton::pressed,this,&FormGames::HideClicked);
         button3->setObjectName("ButtonHide"+QString::number(i));
@@ -89,24 +88,24 @@ void FormGames::ProgressLoading(int p,int row){
 }
 void FormGames::OnFinish(){
     ui->TableWidgetGames->resizeColumnsToContents();
-    QFile FileHide1;
-    FileHide1.setFileName("Files/Hide/"+id+".txt");
-    if(FileHide1.open(QIODevice::ReadOnly)){
-        while(!FileHide1.atEnd()){
-            Hide << QString::fromLocal8Bit(FileHide1.readLine()).remove("\r\n").remove("\n");
+    QFile fileHide1;
+    fileHide1.setFileName("Files/Hide/"+id+".txt");
+    if(fileHide1.open(QIODevice::ReadOnly)){
+        while(!fileHide1.atEnd()){
+            hide << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
         }
-        FileHide1.close();
+        fileHide1.close();
     }
-    QFile FileHide2;
-    FileHide2.setFileName("Files/Hide/All.txt");
-    if(FileHide2.open(QIODevice::ReadOnly)){
-        while(!FileHide2.atEnd()){
-            Hide << QString::fromLocal8Bit(FileHide2.readLine()).remove("\r\n").remove("\n");
+    QFile fileHide2;
+    fileHide2.setFileName("Files/Hide/All.txt");
+    if(fileHide2.open(QIODevice::ReadOnly)){
+        while(!fileHide2.atEnd()){
+            hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
         }
-        FileHide2.close();
+        fileHide2.close();
     }
-    QStringList hide=Hide;
-
+    QStringList hides=hide;
+    achievements = new SAchievementsPlayer[games.size()];
     for(int i=0;i<games.size();i++){
         QString path = "images/icon_games/"+games[i].GetImg_icon_url()+".jpg";
         if(!QFile::exists(path)){
@@ -130,12 +129,12 @@ void FormGames::OnFinish(){
         SAchievementsPlayer *pl = new SAchievementsPlayer(key,QString::number(games[i].GetAppid()),id);
         pl->SetIndex(i);
         connect(pl,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
-        for (int j=0;j<hide.size();j++) {
-            if(hide[j].toInt()==games[i].GetAppid()){
+        for (int j=0;j<hides.size();j++) {
+            if(hides[j].toInt()==games[i].GetAppid()){
                 ui->TableWidgetGames->setRowHidden(i,true);
                 ui->TableWidgetGames->item(i,1)->setTextColor(Qt::red);
                 static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,5))->setEnabled(false);
-                hide.removeAt(j);
+                hides.removeAt(j);
                 break;
             }
             }
@@ -177,7 +176,7 @@ void FormGames::OnResultAchievements(SAchievementsPlayer ach){
         static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(ach.GetIndex(),3))->setEnabled(false);
     }
     ui->TableWidgetGames->setItem(ach.GetIndex(),2,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
-    ach.GetAchievementsCount();
+    achievements[ach.GetIndex()]=ach;
     //ach->deleteLater();
 }
 #define InitEnd }
@@ -185,13 +184,10 @@ void FormGames::OnResultAchievements(SAchievementsPlayer ach){
 #define System {
 FormGames::~FormGames(){
     qDebug()<<numrequests<<"запросов на картинки";
-    //if(numrequests)
-    //    for (int i=0;i<=numrequests;i++) {
-    //        delete request[numrequests];
-    //    }
-    //if(achievementsform)
-    //    delete achievementsform;
-    //delete all ukazateli
+    delete [] achievements;
+    //for (int i=0;i<=numrequests;i++) {
+    //    delete request[numrequests];
+    //}
     delete ui;
 }
 void FormGames::closeEvent(QCloseEvent*){
@@ -199,7 +195,6 @@ void FormGames::closeEvent(QCloseEvent*){
     //delete this;
 }
 void FormGames::returnfromachievements(int num){
-    //windowchildcount--;
     disconnect(achievementsforms[num],&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
     //delete achievementsforms[num];
 }
@@ -207,18 +202,18 @@ void FormGames::returnfromachievements(int num){
 
 #define Filter {
 void FormGames::on_LineEditGame_textChanged(const QString arg){
-    if(Setting.GetVisibleHiddenGames()==1&&arg!=""){
+    if(setting.GetVisibleHiddenGames()==1&&arg!=""){
         for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
                 ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)>-1?false:true);
         }
     } else {
         for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
                 ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)>-1?false:true);
-                QStringList hide=Hide;
-                for (int j=0;j<hide.size();j++) {
-                    if(hide[j].toInt()==games[i].GetAppid()){
+                QStringList hides=hide;
+                for (int j=0;j<hides.size();j++) {
+                    if(hides[j].toInt()==games[i].GetAppid()){
                         ui->TableWidgetGames->setRowHidden(i,true);
-                        hide.removeAt(j);
+                        hides.removeAt(j);
                         break;
                     }
                     }
@@ -242,7 +237,7 @@ void FormGames::AchievementsClicked(){
     if(Percentage.GetAchievementsCount()==0){
         QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
     } else {
-        FormAchievements *fa = new FormAchievements(key,id,games[index],windowchildcount++);
+        FormAchievements *fa = new FormAchievements(key,achievements[index],id,games[index],windowchildcount++);
         achievementsforms.append(fa);
         connect(fa,&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
         fa->show();
@@ -278,7 +273,7 @@ void FormGames::HideClicked(){
 
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int gamei=btn->objectName().mid(10,6).toInt();
-    Setting.CreateFile(Save);
+    setting.CreateFile(Save);
     QFile hide(Save);
     hide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&hide);

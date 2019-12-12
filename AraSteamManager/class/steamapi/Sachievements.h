@@ -24,6 +24,7 @@ public:
     SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
     SAchievements();
     ~SAchievements();
+    void DoSet(QString key, QString appid, QString id);
     void Set(QString key, QString appid, QString id);
     void Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
     void SetFinish();

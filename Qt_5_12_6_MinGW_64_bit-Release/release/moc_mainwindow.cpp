@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[31];
-    char stringdata0[526];
+    QByteArrayData data[32];
+    char stringdata0[542];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,7 +61,8 @@ QT_MOC_LITERAL(26, 401, 21), // "on_ButtonBack_clicked"
 QT_MOC_LITERAL(27, 423, 21), // "on_ButtonNext_clicked"
 QT_MOC_LITERAL(28, 445, 26), // "on_ButtonFavorites_clicked"
 QT_MOC_LITERAL(29, 472, 27), // "on_ButtonStatistics_clicked"
-QT_MOC_LITERAL(30, 500, 25) // "on_ButtonSettings_clicked"
+QT_MOC_LITERAL(30, 500, 25), // "on_ButtonSettings_clicked"
+QT_MOC_LITERAL(31, 526, 15) // "ReturnFromForms"
 
     },
     "MainWindow\0ProgressLoading\0\0returnfromgames\0"
@@ -78,7 +79,7 @@ QT_MOC_LITERAL(30, 500, 25) // "on_ButtonSettings_clicked"
     "on_ButtonBack_clicked\0on_ButtonNext_clicked\0"
     "on_ButtonFavorites_clicked\0"
     "on_ButtonStatistics_clicked\0"
-    "on_ButtonSettings_clicked"
+    "on_ButtonSettings_clicked\0ReturnFromForms"
 };
 #undef QT_MOC_LITERAL
 
@@ -88,7 +89,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      23,   14, // methods
+      24,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -96,29 +97,30 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    2,  129,    2, 0x0a /* Public */,
-       3,    0,  134,    2, 0x08 /* Private */,
-       4,    0,  135,    2, 0x08 /* Private */,
-       5,    0,  136,    2, 0x08 /* Private */,
-       6,    0,  137,    2, 0x08 /* Private */,
-       7,    0,  138,    2, 0x08 /* Private */,
-       8,    1,  139,    2, 0x08 /* Private */,
-      11,    1,  142,    2, 0x08 /* Private */,
-      13,    0,  145,    2, 0x08 /* Private */,
-      14,    0,  146,    2, 0x08 /* Private */,
-      15,    3,  147,    2, 0x08 /* Private */,
-      19,    0,  154,    2, 0x08 /* Private */,
-      20,    0,  155,    2, 0x08 /* Private */,
-      21,    0,  156,    2, 0x08 /* Private */,
-      22,    0,  157,    2, 0x08 /* Private */,
-      23,    0,  158,    2, 0x08 /* Private */,
-      24,    0,  159,    2, 0x08 /* Private */,
-      25,    0,  160,    2, 0x08 /* Private */,
-      26,    0,  161,    2, 0x08 /* Private */,
-      27,    0,  162,    2, 0x08 /* Private */,
-      28,    0,  163,    2, 0x08 /* Private */,
-      29,    0,  164,    2, 0x08 /* Private */,
-      30,    0,  165,    2, 0x08 /* Private */,
+       1,    2,  134,    2, 0x0a /* Public */,
+       3,    0,  139,    2, 0x08 /* Private */,
+       4,    0,  140,    2, 0x08 /* Private */,
+       5,    0,  141,    2, 0x08 /* Private */,
+       6,    0,  142,    2, 0x08 /* Private */,
+       7,    0,  143,    2, 0x08 /* Private */,
+       8,    1,  144,    2, 0x08 /* Private */,
+      11,    1,  147,    2, 0x08 /* Private */,
+      13,    0,  150,    2, 0x08 /* Private */,
+      14,    0,  151,    2, 0x08 /* Private */,
+      15,    3,  152,    2, 0x08 /* Private */,
+      19,    0,  159,    2, 0x08 /* Private */,
+      20,    0,  160,    2, 0x08 /* Private */,
+      21,    0,  161,    2, 0x08 /* Private */,
+      22,    0,  162,    2, 0x08 /* Private */,
+      23,    0,  163,    2, 0x08 /* Private */,
+      24,    0,  164,    2, 0x08 /* Private */,
+      25,    0,  165,    2, 0x08 /* Private */,
+      26,    0,  166,    2, 0x08 /* Private */,
+      27,    0,  167,    2, 0x08 /* Private */,
+      28,    0,  168,    2, 0x08 /* Private */,
+      29,    0,  169,    2, 0x08 /* Private */,
+      30,    0,  170,    2, 0x08 /* Private */,
+      31,    0,  171,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
@@ -132,6 +134,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Bool,   16,   17,   18,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -177,6 +180,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 20: _t->on_ButtonFavorites_clicked(); break;
         case 21: _t->on_ButtonStatistics_clicked(); break;
         case 22: _t->on_ButtonSettings_clicked(); break;
+        case 23: _t->ReturnFromForms(); break;
         default: ;
         }
     }
@@ -211,13 +215,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 23)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 23;
+        _id -= 24;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 23)
+        if (_id < 24)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 23;
+        _id -= 24;
     }
     return _id;
 }

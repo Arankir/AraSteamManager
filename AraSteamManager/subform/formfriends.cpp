@@ -1,16 +1,16 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString ids, QString keys, SFriends Friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString ids, QString keys, SFriends friendss, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     id=ids;
     key=keys;
-    Friends=Friendss;
-    SProfile Profiles = Friends.GetProfiles();
-    for (int i=0;i<Profiles.GetCount();i++) {
-        Profiless.push_back(Profiles.GetProfile(i));
+    friends=friendss;
+    SProfile profiles = friends.GetProfiles();
+    for(int i=0;i<profiles.GetCount();i++) {
+        profiless.push_back(profiles.GetProfile(i));
     }
-    switch(Setting.GetTheme()){
+    switch(setting.GetTheme()){
     case 1:{
         theme="white";
         break;
@@ -39,31 +39,30 @@ void FormFriends::InitComponents(){
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->TableWidgetFriends->setRowCount(Friends.GetCount());
-    //ui->ButtonReturn->setIcon(QIcon(":/"+theme+"/program/"+theme+"/back.png"));
+    ui->TableWidgetFriends->setRowCount(friends.GetCount());
     ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+theme+"/program/"+theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     ui->TableWidgetFriends->setColumnHidden(5,true);
     ui->TableWidgetFriends->setColumnWidth(0,33);
-    for (int i=0; i < Profiless.size()-1; i++) {
-        for (int j=0; j < Profiless.size()-i-1; j++) {
-            if (Profiless[j].GetPersonaname() > Profiless[j+1].GetPersonaname()) {
-                SProfile temp = Profiless[j];
-                Profiless[j] = Profiless[j+1];
-                Profiless[j+1] = temp;
+    for (int i=0; i < profiless.size()-1; i++) {
+        for (int j=0; j < profiless.size()-i-1; j++) {
+            if (profiless[j].GetPersonaname() > profiless[j+1].GetPersonaname()) {
+                SProfile temp = profiless[j];
+                profiless[j] = profiless[j+1];
+                profiless[j+1] = temp;
             }
         }
     }
-    filter.SetRow(Friends.GetCount());
+    filter.SetRow(friends.GetCount());
     filter.SetCol(4);
     Threading LoadTable(this);
-    LoadTable.AddThreadFriends(ui->TableWidgetFriends,Profiless,Friends);
+    LoadTable.AddThreadFriends(ui->TableWidgetFriends,profiless,friends);
 }
 void FormFriends::ProgressLoading(int p,int row){
     QPushButton *button1 = new QPushButton(tr("На профиль"));
     button1->setIcon(QIcon(":/"+theme+"/program/"+theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
-    button1->setObjectName("btn"+Profiless[p].GetSteamid());
+    button1->setObjectName("btn"+profiless[p].GetSteamid());
     connect(button1,&QPushButton::pressed,this,&FormFriends::GoToProfileClicked);
     ui->TableWidgetFriends->setCellWidget(row,6,button1);
 
@@ -76,11 +75,11 @@ void FormFriends::ProgressLoading(int p,int row){
 }
 void FormFriends::OnFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
-    for (int i=0;i<Friends.GetCount();i++) {
-        QString path = "images/profiles/"+Profiless[i].GetAvatar().mid(72,20)+".jpg";
+    for (int i=0;i<friends.GetCount();i++) {
+        QString path = "images/profiles/"+profiless[i].GetAvatar().mid(72,20)+".jpg";
         if(!QFile::exists(path)){
             if(numrequests<500){
-                ImageRequest *image = new ImageRequest(Profiless[i].GetAvatar(),i,path,true);
+                ImageRequest *image = new ImageRequest(profiless[i].GetAvatar(),i,path,true);
                 connect(image,&ImageRequest::onReady,this,&FormFriends::OnResultImage);
                 request.append(image);
                 numrequests++;
@@ -101,8 +100,8 @@ void FormFriends::OnResultImage(ImageRequest *imgr){
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
     ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
-    if(numrequests==500&&numnow<Friends.GetCount()){
-        imgr->LoadImage(Profiless[numnow].GetAvatar(),numnow,"images/profiles/"+Profiless[numnow].GetAvatar().mid(72,20)+".jpg",true);
+    if(numrequests==500&&numnow<friends.GetCount()){
+        imgr->LoadImage(profiless[numnow].GetAvatar(),numnow,"images/profiles/"+profiless[numnow].GetAvatar().mid(72,20)+".jpg",true);
         numnow++;
     } else {
         disconnect(imgr,&ImageRequest::onReady,this,&FormFriends::OnResultImage);
@@ -113,11 +112,9 @@ void FormFriends::OnResultImage(ImageRequest *imgr){
 
 #define System {
 FormFriends::~FormFriends(){
-    //qDebug()<<numrequests;
-    //if(numrequests)
-    //    for (int i=0;i<=numrequests;i++) {
-    //        delete request[numrequests];
-    //    }
+    for (int i=0;i<=numrequests;i++) {
+        //request[numrequests];
+    }
     delete ui;
 }
 void FormFriends::closeEvent(QCloseEvent*){
@@ -175,7 +172,7 @@ void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++){
             bool accept=false;
             for (int j=0;j<val.size();j++) {
-                if(val[j].toObject().value("id").toString()==Profiless[i].GetSteamid()){
+                if(val[j].toObject().value("id").toString()==profiless[i].GetSteamid()){
                     accept=true;
                     break;
                 }
@@ -203,9 +200,9 @@ void FormFriends::FavoritesClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int index=btn->objectName().mid(4).toInt();
     QJsonObject newValue;
-    newValue["id"]=Profiless[index].GetSteamid();
-    newValue["name"]=Profiless[index].GetPersonaname();
-    newValue["added"]=Friends.GetFriend_since(index).toString("yyyy.MM.dd hh:mm:ss");
+    newValue["id"]=profiless[index].GetSteamid();
+    newValue["name"]=profiless[index].GetPersonaname();
+    newValue["added"]=friends.GetFriend_since(index).toString("yyyy.MM.dd hh:mm:ss");
     if(favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {
