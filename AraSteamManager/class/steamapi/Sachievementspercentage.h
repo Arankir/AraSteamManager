@@ -23,32 +23,32 @@ public:
     ~SAchievementsPercentage();
     void Set(QString key, QString appid);
     void Set(QJsonDocument DocAchievements);
-    void Delete(int index) { achievements.remove(index); count--;}
-    SAchievementPercentage GetAchievementInfo(int index) {return achievements[index];}
-    QString GetApiname(int index) {return achievements[index].GetApiname();}
-    double GetPercent(int index) {return achievements[index].GetPercent();}
-    QString GetAppid() {return appid;}
-    int GetAchievementsCount() {return count;}
-    QString GetStatus() {return status;}
+    void Delete(int index) { _achievements.remove(index); _count--;}
+    SAchievementPercentage GetAchievement(int index) {return _achievements[index];}
+    QString GetApiname(int index) {return _achievements[index].GetApiname();}
+    double GetPercent(int index) {return _achievements[index].GetPercent();}
+    QString GetAppid() {return _appid;}
+    int GetCount() {return _count;}
+    QString GetStatus() {return _status;}
     void Update();
     void Clear();
     SAchievementsPercentage(const SAchievementsPercentage &);
     SAchievementsPercentage & operator=(const SAchievementsPercentage & friends);
 
 signals:
-    void finished(SAchievementsPercentage);
-    void finished();
+    void s_finished(SAchievementsPercentage);
+    void s_finished();
 
 public slots:
     void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager *manager;
-    QVector<SAchievementPercentage> achievements;
-    QString status="none";
-    QString appid="";
-    QString key="";
-    int count=0;
+    QNetworkAccessManager *_manager;
+    QVector<SAchievementPercentage> _achievements;
+    QString _status="none";
+    QString _appid="";
+    QString _key="";
+    int _count=0;
 };
 
 #endif // SACHIEVEMENTSPERCENTAGE_H

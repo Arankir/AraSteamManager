@@ -28,23 +28,23 @@ public slots:
     void OnResultImage(ImageRequest*);
 
 signals:
-    void return_to_profile();
+    void s_return_to_profile();
 
 private slots:
     void on_pushButton_clicked();
 
 private:
     Ui::FormFavorites *ui;
-    QString key;
-    Favorites games;
-    Favorites friends;
-    Favorites achievements;
+    QString _key;
+    Favorites _games;
+    Favorites _friends;
+    Favorites _achievements;
+    Filter _filter;
 
-    QVector<ImageRequest*> request;
-    int numrequests=0;
-    int numnow=0;
+    QVector<ImageRequest*> _request;
+    int _numRequests=0;
+    int _numNow=0;
 
-    Filter filter;
 };
 
 #endif // FORMFAVORITES_H

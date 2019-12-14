@@ -1,80 +1,91 @@
 #include "filter.h"
 
-Filter::Filter(int row, int col, QObject *parent) : QObject(parent){
-    Resize(row,col);
+Filter::Filter(int ARow, int ACol, QObject *parent) : QObject(parent){
+    if(ARow>0)
+        _row=ARow;
+    if(ACol>0)
+        _col=ACol;
+    if(_row>0&&_col>0){
+        for(int i=0;i<_row;i++){
+            QVector<bool> subFilter;
+            for(int j=0;j<_col;j++){
+                subFilter.append(true);
+            }
+            _filter.append(subFilter);
+        }
+    }
 }
 Filter::~Filter(){
-    for(int i=0;i<row;i++)
-        delete [] filter[i];
-    delete [] filter;
+
 }
 
-void Filter::SetRow(int row){
-    Resize(row, col);
-}
-void Filter::SetCol(int col){
-    Resize(row, col);
-}
-void Filter::SetData(int row, int col, bool data){
-    if(row<this->row&&col<this->col)
-        filter[row][col]=data;
-}
-void Filter::DeleteCol(int col){
-    if(col<this->col){
-        for(int i=col;i<col-1;i++){
-            for(int j=0;j<row;j++){
-                filter[j][i]=filter[j][i+1];
+void Filter::SetRow(int ARow){
+    if(ARow>_row){
+        for(int i=_row;i<ARow;i++){
+            QVector<bool> subFilter;
+            for(int j=0;j<_col;j++){
+                subFilter.append(true);
             }
+            _filter.append(subFilter);
         }
-        Resize(row,col);
+        _row=ARow;
+    } else if(ARow<_row){
+        for(int i=_row;i<ARow;i++){
+            while(_filter.size()>ARow)
+                _filter.takeAt(ARow);
+        }
+        _row=ARow;
     }
 }
-bool Filter::GetData(int row, int col){
-    if(row<this->row&&col<this->col){
-        return filter[row][col];
+void Filter::SetCol(int ACol){
+    if(ACol>_col){
+        for(int i=_col;i<ACol;i++){
+            for(int j=0;j<_row;j++){
+                _filter[j].append(true);
+            }
+        }
+        _col=ACol;
+    } else if(ACol<_col){
+        for(int i=_col;i<ACol;i++){
+            for(int j=0;j<_row;j++){
+                _filter[j].takeAt(_col);
+            }
+        }
+        _col=ACol;
+    }
+}
+void Filter::SetData(int ARow, int ACol, bool AData){
+    if(ARow<_row&&ACol<_col)
+        _filter[ARow][ACol]=AData;
+}
+
+bool Filter::GetData(int ARow, int ACol){
+    if(ARow<_row&&ACol<_col){
+        return _filter[ARow][ACol];
     }
     return false;
 }
-bool Filter::GetData(int row){
-    if(row<this->row){
-        bool answer = true;
-        for(int i=0;i<col;i++){
-            if(!filter[row][i]){
-                answer=false;
-                break;
-            }
-        }
-        return answer;
+bool Filter::GetData(int ARow){
+    if(ARow<_row){
+        return _filter[ARow].indexOf(false)==-1;
     }
     return false;
 }
-void Filter::Resize(int row, int col){
-    if((col==this->col&&row==this->row)){
-        return;
-    } else {
-        if(!(col==0||row==0)){
-            bool **NewA = new bool*[row];
-            for(int i=0;i<row;i++) {
-                NewA[i]=new bool[col];
-                for(int j=0;j<col;j++) {
-                    if(i<this->row&&j<this->col)
-                        NewA[i][j]=filter[i][j];
-                    else
-                        NewA[i][j]=true;
-                    }
-                }
-            if(this->row>0&&this->col>0){
-                for(int i=0;i<this->row;i++){
-                    delete [] filter[i];
-                }
-                delete [] filter;
-            }
-            this->col=col;
-            this->row=row;
-            filter = NewA;
-        } else {
-            this->col=col;
-            this->row=row;
+
+void Filter::AddCol(int AColNum){
+    if(AColNum<_col+1){
+        for(int i=0;i<_row;i++){
+            _filter[AColNum].append(true);
         }
+        _col++;
     }
 }
+void Filter::RemoveCol(int AColNum){
+    if(AColNum<_col+1){
+        for(int i=0;i<_row;i++){
+            _filter.takeAt(AColNum);
+        }
+        _col--;
+    }
+}
+

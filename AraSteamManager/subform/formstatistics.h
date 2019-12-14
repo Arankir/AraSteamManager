@@ -24,6 +24,7 @@ public slots:
     void OnResultAchievements(SAchievementsPlayer ach);
 
 private:
+    //Переименовать потом
     Ui::FormStatistics *ui;
     QString key;
     QString id;

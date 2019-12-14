@@ -69,8 +69,8 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *ButtonGames;
     QPushButton *ButtonFriends;
-    QPushButton *ButtonFavorites;
     QPushButton *ButtonStatistics;
+    QPushButton *ButtonFavorites;
     QSpacerItem *horizontalSpacer_4;
     QPushButton *ButtonGoToMyProfile;
     QProgressBar *FormProgressBar;
@@ -300,15 +300,15 @@ public:
 
         horizontalLayout->addWidget(ButtonFriends);
 
-        ButtonFavorites = new QPushButton(scrollAreaWidgetContents);
-        ButtonFavorites->setObjectName(QString::fromUtf8("ButtonFavorites"));
-
-        horizontalLayout->addWidget(ButtonFavorites);
-
         ButtonStatistics = new QPushButton(scrollAreaWidgetContents);
         ButtonStatistics->setObjectName(QString::fromUtf8("ButtonStatistics"));
 
         horizontalLayout->addWidget(ButtonStatistics);
+
+        ButtonFavorites = new QPushButton(scrollAreaWidgetContents);
+        ButtonFavorites->setObjectName(QString::fromUtf8("ButtonFavorites"));
+
+        horizontalLayout->addWidget(ButtonFavorites);
 
         horizontalSpacer_4 = new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -388,8 +388,8 @@ public:
         LabelBans->setText(QApplication::translate("MainWindow", "Bans", nullptr));
         ButtonGames->setText(QApplication::translate("MainWindow", "Games", nullptr));
         ButtonFriends->setText(QApplication::translate("MainWindow", "Friends", nullptr));
-        ButtonFavorites->setText(QApplication::translate("MainWindow", " \320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260", nullptr));
-        ButtonStatistics->setText(QApplication::translate("MainWindow", " \320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
+        ButtonStatistics->setText(QApplication::translate("MainWindow", " \320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260", nullptr));
+        ButtonFavorites->setText(QApplication::translate("MainWindow", " \320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         ButtonGoToMyProfile->setText(QApplication::translate("MainWindow", "\320\235\320\260 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         FormProgressBar->setFormat(QApplication::translate("MainWindow", "%v/%m", nullptr));
     } // retranslateUi

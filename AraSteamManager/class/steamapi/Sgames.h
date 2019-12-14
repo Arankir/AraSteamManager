@@ -16,40 +16,40 @@ public:
     ~SGames();
     void Set(QString key, QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
-    void SetIndex(int i) {ind=i;}
-    SGame GetGame(int index) {return SGame(games[index].toObject());}
-    int GetAppid(int index) {return games[index].toObject().value("appid").toInt();}
-    QString GetName(int index) {return games[index].toObject().value("name").toString();}
-    int GetPlaytime_2weeks(int index) {return games[index].toObject().value("playtime_2weeks").toInt();}
-    int GetPlaytime_forever(int index) {return games[index].toObject().value("playtime_forever").toInt();}
-    QString GetImg_icon_url(int index) {return games[index].toObject().value("img_icon_url").toString();}
-    QString GetImg_logo_url(int index) {return games[index].toObject().value("img_logo_url").toString();}
-    bool GetHas_community_visible_stats(int index) {return games[index].toObject().value("has_community_visible_stats").toBool();}
-    QString GetID() {return id;}
-    int GetIndex() {return ind;}
-    QString GetStatus() {return status;}
-    int GetCount() {return games.size();}
+    void SetIndex(int AIndex) {_index=AIndex;}
+    SGame GetGame(int index) {return SGame(_games[index].toObject());}
+    int GetAppid(int index) {return _games[index].toObject().value("appid").toInt();}
+    QString GetName(int index) {return _games[index].toObject().value("name").toString();}
+    int GetPlaytime_2weeks(int index) {return _games[index].toObject().value("playtime_2weeks").toInt();}
+    int GetPlaytime_forever(int index) {return _games[index].toObject().value("playtime_forever").toInt();}
+    QString GetImg_icon_url(int index) {return _games[index].toObject().value("img_icon_url").toString();}
+    QString GetImg_logo_url(int index) {return _games[index].toObject().value("img_logo_url").toString();}
+    bool GetHas_community_visible_stats(int index) {return _games[index].toObject().value("has_community_visible_stats").toBool();}
+    QString GetID() {return _id;}
+    int GetIndex() {return _index;}
+    QString GetStatus() {return _status;}
+    int GetCount() {return _games.size();}
     void Update(bool parallel);
     void Clear();
     SGames( const SGames & a);
     SGames & operator=(const SGames & profile);
 
 signals:
-    void finished(SGames*);
-    void finished();
+    void s_finished(SGames*);
+    void s_finished();
 
 public slots:
     void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager *manager;
-    QJsonArray games;
-    QString status="none";
-    QString id;
-    QString key;
-    int ind=-1;
-    bool free_games=false;
-    bool game_info=false;
+    QNetworkAccessManager *_manager;
+    QJsonArray _games;
+    QString _status="none";
+    QString _id;
+    QString _key;
+    int _index=-1;
+    bool _free_games=false;
+    bool _game_info=false;
 };
 
 //{"appid":218620,

@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ImageRequest_t {
     QByteArrayData data[8];
-    char stringdata0[74];
+    char stringdata0[77];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,16 +32,16 @@ struct qt_meta_stringdata_ImageRequest_t {
 static const qt_meta_stringdata_ImageRequest_t qt_meta_stringdata_ImageRequest = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "ImageRequest"
-QT_MOC_LITERAL(1, 13, 7), // "onReady"
-QT_MOC_LITERAL(2, 21, 0), // ""
-QT_MOC_LITERAL(3, 22, 13), // "ImageRequest*"
-QT_MOC_LITERAL(4, 36, 4), // "imgr"
-QT_MOC_LITERAL(5, 41, 11), // "OnResultGet"
-QT_MOC_LITERAL(6, 53, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(7, 68, 5) // "reply"
+QT_MOC_LITERAL(1, 13, 10), // "s_finished"
+QT_MOC_LITERAL(2, 24, 0), // ""
+QT_MOC_LITERAL(3, 25, 13), // "ImageRequest*"
+QT_MOC_LITERAL(4, 39, 4), // "imgr"
+QT_MOC_LITERAL(5, 44, 11), // "OnResultGet"
+QT_MOC_LITERAL(6, 56, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(7, 71, 5) // "reply"
 
     },
-    "ImageRequest\0onReady\0\0ImageRequest*\0"
+    "ImageRequest\0s_finished\0\0ImageRequest*\0"
     "imgr\0OnResultGet\0QNetworkReply*\0reply"
 };
 #undef QT_MOC_LITERAL
@@ -80,7 +80,7 @@ void ImageRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<ImageRequest *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->onReady((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 0: _t->s_finished((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
         case 1: _t->OnResultGet((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
@@ -106,7 +106,7 @@ void ImageRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (ImageRequest::*)(ImageRequest * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ImageRequest::onReady)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ImageRequest::s_finished)) {
                 *result = 0;
                 return;
             }
@@ -155,7 +155,7 @@ int ImageRequest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ImageRequest::onReady(ImageRequest * _t1)
+void ImageRequest::s_finished(ImageRequest * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

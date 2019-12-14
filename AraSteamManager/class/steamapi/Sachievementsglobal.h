@@ -23,41 +23,41 @@ public:
     ~SAchievementsGlobal();
     void Set(QString key, QString appid);
     void Set(QJsonDocument DocAchievements);
-    void Delete(int index) { achievements.remove(index); count--;}
-    SAchievementGlobal GetAchievementInfo(int index) {return achievements[index];}
-    QString GetApiname(int index) {return achievements[index].GetApiname();}
-    int GetDefaultvalue(int index) {return achievements[index].GetDefaultvalue();}
-    QString GetDisplayname(int index) {return achievements[index].GetDisplayname();}
-    int GetHidden(int index) {return achievements[index].GetHidden();}
-    QString GetDescription(int index) {return achievements[index].GetDescription();}
-    QString GetIcon(int index) {return achievements[index].GetIcon();}
-    QString GetIcongray(int index) {return achievements[index].GetIcongray();}
-    QString GetAppid() {return appid;}
-    QString GetStatus() {return status;}
-    QString GetGamename() {return gamename;}
-    QString GetGameversion() {return gameversion;}
-    int GetAchievementsCount() {return count;}
+    void Delete(int index) { _achievements.remove(index); _count--;}
+    SAchievementGlobal GetAchievement(int index) {return _achievements[index];}
+    QString GetApiname(int index) {return _achievements[index].GetApiname();}
+    int GetDefaultvalue(int index) {return _achievements[index].GetDefaultvalue();}
+    QString GetDisplayname(int index) {return _achievements[index].GetDisplayname();}
+    int GetHidden(int index) {return _achievements[index].GetHidden();}
+    QString GetDescription(int index) {return _achievements[index].GetDescription();}
+    QString GetIcon(int index) {return _achievements[index].GetIcon();}
+    QString GetIcongray(int index) {return _achievements[index].GetIcongray();}
+    QString GetAppid() {return _appid;}
+    QString GetStatus() {return _status;}
+    QString GetGamename() {return _gameName;}
+    QString GetGameversion() {return _gameVersion;}
+    int GetCount() {return _count;}
     void Update();
     void Clear();
     SAchievementsGlobal(const SAchievementsGlobal &);
     SAchievementsGlobal & operator=(const SAchievementsGlobal & friends);
 
 signals:
-    void finished(SAchievementsGlobal);
-    void finished();
+    void s_finished(SAchievementsGlobal);
+    void s_finished();
 
 public slots:
     void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager *manager;
-    QVector<SAchievementGlobal> achievements;
-    QString status="none";
-    QString appid="";
-    QString key="";
-    QString gamename="";
-    QString gameversion="";
-    int count=0;
+    QNetworkAccessManager *_manager;
+    QVector<SAchievementGlobal> _achievements;
+    QString _status="none";
+    QString _appid="";
+    QString _key="";
+    QString _gameName="";
+    QString _gameVersion="";
+    int _count=0;
 };
 
 #endif // SACHIEVEMENTSGLOBAL_H

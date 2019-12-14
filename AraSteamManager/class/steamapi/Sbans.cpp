@@ -1,58 +1,79 @@
 #include "Sbans.h"
 
-SBans::SBans(QString key, QString id, bool parallel, QObject *parent) : QObject(parent){
-    manager = new QNetworkAccessManager();
-    Set(key, id, parallel);
-}
-SBans::SBans(QJsonDocument DocBans){
-    manager = new QNetworkAccessManager();
-    Set(DocBans);
-}
-SBans::SBans(){
-    manager = new QNetworkAccessManager();
-    status="null";
-}
-SBans::~SBans(){
-    delete manager;
-}
-
-void SBans::Set(QString key, QString id, bool parallel){
-    this->key=key;
-    this->id=id;
-    if(parallel){
-        connect(manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-        manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
+SBans::SBans(QString AKey, QString AID, bool AParallel, QObject *parent) : QObject(parent){
+    _manager = new QNetworkAccessManager();
+    _key=AKey;
+    _id=AID;
+    if(AParallel){
+        connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
     } else {
         QEventLoop loop;
-        connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+key+"&steamids="+id));
+        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
         loop.exec();
-        disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
         delete reply;
-        emit finished(this);
-        emit finished();
+        emit s_finished(this);
+        emit s_finished();
     }
 }
-void SBans::Set(QJsonDocument DocBans){
-    if(DocBans.object().value("players").toArray().size()>0){
-        bans=DocBans.object().value("players").toArray();
-        status="success";
+SBans::SBans(QJsonDocument ABans){
+    _manager = new QNetworkAccessManager();
+    if(ABans.object().value("players").toArray().size()>0){
+        _bans=ABans.object().value("players").toArray();
+        _status="success";
     }
     else {
-        status="error: profile is not exist";
+        _status="error: profile is not exist";
+    }
+}
+SBans::SBans(){
+    _manager = new QNetworkAccessManager();
+    _status="null";
+}
+SBans::~SBans(){
+    delete _manager;
+}
+
+void SBans::Set(QString AKey, QString AID, bool AParallel){
+    _key=AKey;
+    _id=AID;
+    if(AParallel){
+        connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
+    } else {
+        QEventLoop loop;
+        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
+        loop.exec();
+        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        Set(QJsonDocument::fromJson(reply->readAll()));
+        delete reply;
+        emit s_finished(this);
+        emit s_finished();
+    }
+}
+void SBans::Set(QJsonDocument ABans){
+    if(ABans.object().value("players").toArray().size()>0){
+        _bans=ABans.object().value("players").toArray();
+        _status="success";
+    }
+    else {
+        _status="error: profile is not exist";
     }
 }
 
-void SBans::Load(QNetworkReply *Reply){
-    disconnect(manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-    QJsonDocument DocBans = QJsonDocument::fromJson(Reply->readAll());
-    Reply->deleteLater();
-    Set(DocBans);
-    emit finished(this);
-    emit finished();
+void SBans::Load(QNetworkReply *AReply){
+    disconnect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
+    QJsonDocument localBans = QJsonDocument::fromJson(AReply->readAll());
+    AReply->deleteLater();
+    Set(localBans);
+    emit s_finished(this);
+    emit s_finished();
 }
 
-void SBans::Update(bool parallel){
-    Set(key, id, parallel);
+void SBans::Update(bool AParallel){
+    Set(_key, _id, AParallel);
 }

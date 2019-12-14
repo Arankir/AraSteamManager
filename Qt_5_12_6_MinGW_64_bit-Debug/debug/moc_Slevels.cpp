@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SLevels_t {
     QByteArrayData data[4];
-    char stringdata0[27];
+    char stringdata0[29];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,12 @@ struct qt_meta_stringdata_SLevels_t {
 static const qt_meta_stringdata_SLevels_t qt_meta_stringdata_SLevels = {
     {
 QT_MOC_LITERAL(0, 0, 7), // "SLevels"
-QT_MOC_LITERAL(1, 8, 8), // "finished"
-QT_MOC_LITERAL(2, 17, 0), // ""
-QT_MOC_LITERAL(3, 18, 8) // "SLevels*"
+QT_MOC_LITERAL(1, 8, 10), // "s_finished"
+QT_MOC_LITERAL(2, 19, 0), // ""
+QT_MOC_LITERAL(3, 20, 8) // "SLevels*"
 
     },
-    "SLevels\0finished\0\0SLevels*"
+    "SLevels\0s_finished\0\0SLevels*"
 };
 #undef QT_MOC_LITERAL
 
@@ -71,8 +71,8 @@ void SLevels::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         auto *_t = static_cast<SLevels *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< SLevels*(*)>(_a[1]))); break;
-        case 1: _t->finished(); break;
+        case 0: _t->s_finished((*reinterpret_cast< SLevels*(*)>(_a[1]))); break;
+        case 1: _t->s_finished(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -90,14 +90,14 @@ void SLevels::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SLevels::*)(SLevels * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SLevels::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SLevels::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SLevels::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SLevels::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SLevels::s_finished)) {
                 *result = 1;
                 return;
             }
@@ -146,14 +146,14 @@ int SLevels::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SLevels::finished(SLevels * _t1)
+void SLevels::s_finished(SLevels * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void SLevels::finished()
+void SLevels::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

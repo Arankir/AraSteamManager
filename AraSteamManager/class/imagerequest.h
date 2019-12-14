@@ -22,21 +22,21 @@ public:
     ~ImageRequest();
     void LoadImage(QString url, int column=-1, QString save="", bool autosave=false);
     void Get(QString str);
-    QByteArray GetAnswer() {return answer;}
-    QString GetSave() {return Save;}
-    int GetRow() {return i;}
+    QByteArray GetAnswer() {return _answer;}
+    QString GetSave() {return _save;}
+    int GetRow() {return _row;}
 
 signals:
-    void onReady(ImageRequest *imgr);
+    void s_finished(ImageRequest *imgr);
 
 private:
-    QNetworkAccessManager *manager;
-    QByteArray answer;
-    QString Url;
-    int i;
-    QString Save;
-    bool Autosave;
-    Settings Setting;
+    QNetworkAccessManager *_manager;
+    QByteArray _answer;
+    QString _url;
+    int _row;
+    QString _save;
+    bool _autosave;
+    Settings _setting;
 
 public slots:
     void OnResultGet(QNetworkReply *reply);

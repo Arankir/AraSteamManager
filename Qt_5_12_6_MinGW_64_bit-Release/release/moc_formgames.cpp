@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
     QByteArrayData data[22];
-    char stringdata0[303];
+    char stringdata0[305];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,32 +32,32 @@ struct qt_meta_stringdata_FormGames_t {
 static const qt_meta_stringdata_FormGames_t qt_meta_stringdata_FormGames = {
     {
 QT_MOC_LITERAL(0, 0, 9), // "FormGames"
-QT_MOC_LITERAL(1, 10, 17), // "return_to_profile"
-QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 15), // "ProgressLoading"
-QT_MOC_LITERAL(4, 45, 8), // "OnFinish"
-QT_MOC_LITERAL(5, 54, 22), // "returnfromachievements"
-QT_MOC_LITERAL(6, 77, 3), // "num"
-QT_MOC_LITERAL(7, 81, 14), // "InitComponents"
-QT_MOC_LITERAL(8, 96, 13), // "OnResultImage"
-QT_MOC_LITERAL(9, 110, 13), // "ImageRequest*"
-QT_MOC_LITERAL(10, 124, 4), // "imgr"
-QT_MOC_LITERAL(11, 129, 20), // "OnResultAchievements"
-QT_MOC_LITERAL(12, 150, 19), // "SAchievementsPlayer"
-QT_MOC_LITERAL(13, 170, 3), // "ach"
-QT_MOC_LITERAL(14, 174, 10), // "closeEvent"
-QT_MOC_LITERAL(15, 185, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(16, 198, 5), // "event"
-QT_MOC_LITERAL(17, 204, 19), // "AchievementsClicked"
-QT_MOC_LITERAL(18, 224, 16), // "FavoritesClicked"
-QT_MOC_LITERAL(19, 241, 11), // "HideClicked"
-QT_MOC_LITERAL(20, 253, 27), // "on_LineEditGame_textChanged"
-QT_MOC_LITERAL(21, 281, 21) // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(1, 10, 19), // "s_return_to_profile"
+QT_MOC_LITERAL(2, 30, 0), // ""
+QT_MOC_LITERAL(3, 31, 15), // "ProgressLoading"
+QT_MOC_LITERAL(4, 47, 8), // "OnFinish"
+QT_MOC_LITERAL(5, 56, 22), // "ReturnFromAchievements"
+QT_MOC_LITERAL(6, 79, 3), // "num"
+QT_MOC_LITERAL(7, 83, 14), // "InitComponents"
+QT_MOC_LITERAL(8, 98, 13), // "OnResultImage"
+QT_MOC_LITERAL(9, 112, 13), // "ImageRequest*"
+QT_MOC_LITERAL(10, 126, 4), // "imgr"
+QT_MOC_LITERAL(11, 131, 20), // "OnResultAchievements"
+QT_MOC_LITERAL(12, 152, 19), // "SAchievementsPlayer"
+QT_MOC_LITERAL(13, 172, 3), // "ach"
+QT_MOC_LITERAL(14, 176, 10), // "closeEvent"
+QT_MOC_LITERAL(15, 187, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(16, 200, 5), // "event"
+QT_MOC_LITERAL(17, 206, 19), // "AchievementsClicked"
+QT_MOC_LITERAL(18, 226, 16), // "FavoritesClicked"
+QT_MOC_LITERAL(19, 243, 11), // "HideClicked"
+QT_MOC_LITERAL(20, 255, 27), // "on_LineEditGame_textChanged"
+QT_MOC_LITERAL(21, 283, 21) // "on_ButtonFind_clicked"
 
     },
-    "FormGames\0return_to_profile\0\0"
+    "FormGames\0s_return_to_profile\0\0"
     "ProgressLoading\0OnFinish\0"
-    "returnfromachievements\0num\0InitComponents\0"
+    "ReturnFromAchievements\0num\0InitComponents\0"
     "OnResultImage\0ImageRequest*\0imgr\0"
     "OnResultAchievements\0SAchievementsPlayer\0"
     "ach\0closeEvent\0QCloseEvent*\0event\0"
@@ -123,10 +123,10 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<FormGames *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->return_to_profile(); break;
+        case 0: _t->s_return_to_profile(); break;
         case 1: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->OnFinish(); break;
-        case 3: _t->returnfromachievements((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->ReturnFromAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->InitComponents(); break;
         case 5: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
         case 6: _t->OnResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
@@ -153,7 +153,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (FormGames::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormGames::return_to_profile)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormGames::s_return_to_profile)) {
                 *result = 0;
                 return;
             }
@@ -202,7 +202,7 @@ int FormGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormGames::return_to_profile()
+void FormGames::s_return_to_profile()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

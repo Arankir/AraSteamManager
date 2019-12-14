@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Sachievementspercentage.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.6)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'Sachievementspercentage.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.1. It"
+#error "This file was generated using the moc from 5.12.6. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SAchievementsPercentage_t {
     QByteArrayData data[6];
-    char stringdata0[60];
+    char stringdata0[62];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,14 +32,14 @@ struct qt_meta_stringdata_SAchievementsPercentage_t {
 static const qt_meta_stringdata_SAchievementsPercentage_t qt_meta_stringdata_SAchievementsPercentage = {
     {
 QT_MOC_LITERAL(0, 0, 23), // "SAchievementsPercentage"
-QT_MOC_LITERAL(1, 24, 8), // "finished"
-QT_MOC_LITERAL(2, 33, 0), // ""
-QT_MOC_LITERAL(3, 34, 4), // "Load"
-QT_MOC_LITERAL(4, 39, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(5, 54, 5) // "Reply"
+QT_MOC_LITERAL(1, 24, 10), // "s_finished"
+QT_MOC_LITERAL(2, 35, 0), // ""
+QT_MOC_LITERAL(3, 36, 4), // "Load"
+QT_MOC_LITERAL(4, 41, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(5, 56, 5) // "Reply"
 
     },
-    "SAchievementsPercentage\0finished\0\0"
+    "SAchievementsPercentage\0s_finished\0\0"
     "Load\0QNetworkReply*\0Reply"
 };
 #undef QT_MOC_LITERAL
@@ -80,8 +80,8 @@ void SAchievementsPercentage::qt_static_metacall(QObject *_o, QMetaObject::Call 
         auto *_t = static_cast<SAchievementsPercentage *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< SAchievementsPercentage(*)>(_a[1]))); break;
-        case 1: _t->finished(); break;
+        case 0: _t->s_finished((*reinterpret_cast< SAchievementsPercentage(*)>(_a[1]))); break;
+        case 1: _t->s_finished(); break;
         case 2: _t->Load((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
@@ -100,14 +100,14 @@ void SAchievementsPercentage::qt_static_metacall(QObject *_o, QMetaObject::Call 
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SAchievementsPercentage::*)(SAchievementsPercentage );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievementsPercentage::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievementsPercentage::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SAchievementsPercentage::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievementsPercentage::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievementsPercentage::s_finished)) {
                 *result = 1;
                 return;
             }
@@ -156,14 +156,14 @@ int SAchievementsPercentage::qt_metacall(QMetaObject::Call _c, int _id, void **_
 }
 
 // SIGNAL 0
-void SAchievementsPercentage::finished(SAchievementsPercentage _t1)
+void SAchievementsPercentage::s_finished(SAchievementsPercentage _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void SAchievementsPercentage::finished()
+void SAchievementsPercentage::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

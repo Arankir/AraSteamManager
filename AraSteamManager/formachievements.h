@@ -38,7 +38,7 @@ public:
     ~FormAchievements();
 
 signals:
-    void return_to_games(int num);
+    void s_return_to_games(int num);
 
 public slots:
     void ProgressLoading(int p,int row);
@@ -50,19 +50,21 @@ private slots:
     void OnResultImage(ImageRequest *imgr);
     void SwitchSimpleCompare(int sc);
     void LoadingCompare();
-    void on_ComboBoxCategory_Change(int index);
-    void on_CheckBoxCategory_Change(int ind);
     void closeEvent(QCloseEvent*);
-    void on_ButtonReturn_clicked();
     void UpdateHiddenRows();
     void PullTableWidget();
     bool ProfileIsPublic(SAchievements achievement, int col);
+    void LoadFriend(SGames *Games);
+    void FinishLoadFriends();
+    void FavoritesClicked();
+    void ShowCategories();
+    void on_ComboBoxCategory_Change(int index);
+    void on_CheckBoxCategory_Change(int ind);
     void on_ButtonAddCategory_clicked();
 
     void on_RadioButtonAll_clicked();
     void on_RadioButtonReached_clicked();
     void on_RadioButtonNotReached_clicked();
-    void FavoritesClicked();
 
     void on_LineEditNameAchievements_textChanged(const QString &arg1);
 
@@ -71,8 +73,6 @@ private slots:
     void on_ButtonFindAchievement_clicked();
 
     void on_ButtonUpdate_clicked();
-
-    void ShowCategories();
 
     void on_ButtonCompare_clicked();
 
@@ -97,9 +97,6 @@ private slots:
     void on_TableWidgetCompareFriendsCellChanged(int row, int column);
 
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
-
-    void LoadFriend(SGames *Games);
-    void FinishLoadFriends();
 
     void on_ButtonAddValueCategory_clicked();
 
@@ -126,36 +123,42 @@ private slots:
     void on_LineEditTitleCategory_textChanged(const QString &arg1);
 
     void on_CheckBoxFavorites_stateChanged(int arg1);
+    void on_ButtonReturn_clicked();
 
 private:
     Ui::FormAchievements *ui;
-    QString key;
-    QString id;
-    SGame game;
-    int unicnum;
-    SAchievements achievements;
-    CategoriesGame categoriesGame;
-    Settings setting;
-    QString theme="white";
-    Favorites favorites;
+    QString _key;
+    QString _id;
+    SGame _game;
+    int _unicNum;
+    SAchievements _achievements;
+    CategoriesGame _categoriesGame;
+    Settings _setting;
+    QString _theme="white";
+    Favorites _favorites;
 
-    QVector<ImageRequest*> request;
-    int numrequests=0;
-    int numnow=0;
+    QVector<ImageRequest*> _request;
+    int _numRequests=0;
+    int _numNow=0;
 
-    int simpleCompare=1;
-    int loadCompare=0;
-    int type1=0;
-    int type2=0;
-    int friendsCount=0;
-    QVector<SProfile> profiles;
-    QVector<QPair<SProfile,int>> friends;
+    int _simpleCompare=1;
+    int _loadCompare=0;
+    int _type1=0;
+    int _type2=0;
+    int _friendsCount=0;
+    QVector<SProfile> _profiles;
+    QVector<QPair<SProfile,int>> _friends;
 
-    QFormLayout *categoryvalueslayout;
-    int typecategory=0;
-    QVector<FormCategoryValue*> values;
-    Filter fAchievements;
-    Filter fCompare;
+    QFormLayout *_categoryValuesLayout;
+    int _typeCategory=0;
+    QVector<FormCategoryValue*> _values;
+    Filter _fAchievements;
+    Filter _fCompare;
+
+    const int c_filterName = 0;
+    const int c_filterFavorite = 2;
+    const int c_filterEndConstValues = 3;
+    const int c_columnNoValueCategory = 7;
 };
 
 #endif // FORMACHIEVEMENTS_H

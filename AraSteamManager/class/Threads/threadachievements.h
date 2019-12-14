@@ -15,8 +15,8 @@ public:
     ~ThreadAchievements() {qDebug()<<"Thread deleted";}
 
 signals:
-    void finished();
-    void progress(int p, int row);
+    void s_finished();
+    void s_progress(int p, int row);
 
 public slots:
     int Fill();
@@ -24,11 +24,11 @@ public slots:
 
 private:
     int num;
-    SAchievements achievements;
-    QLabel *LabelTotalPersent;
-    QTableWidget *TableWidgetAchievements;
-    QLabel *LabelTotalPersentCompare;
-    QTableWidget *TableWidgetCompareAchievements;
+    SAchievements _achievements;
+    QLabel *_LabelTotalPersent;
+    QTableWidget *_TableWidgetAchievements;
+    QLabel *_LabelTotalPersentCompare;
+    QTableWidget *_TableWidgetCompareAchievements;
 };
 
 #endif // THREADACHIEVEMENTS_H

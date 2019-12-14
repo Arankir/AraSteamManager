@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SBans_t {
     QByteArrayData data[7];
-    char stringdata0[49];
+    char stringdata0[51];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,16 +32,16 @@ struct qt_meta_stringdata_SBans_t {
 static const qt_meta_stringdata_SBans_t qt_meta_stringdata_SBans = {
     {
 QT_MOC_LITERAL(0, 0, 5), // "SBans"
-QT_MOC_LITERAL(1, 6, 8), // "finished"
-QT_MOC_LITERAL(2, 15, 0), // ""
-QT_MOC_LITERAL(3, 16, 6), // "SBans*"
-QT_MOC_LITERAL(4, 23, 4), // "Load"
-QT_MOC_LITERAL(5, 28, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 43, 5) // "Reply"
+QT_MOC_LITERAL(1, 6, 10), // "s_finished"
+QT_MOC_LITERAL(2, 17, 0), // ""
+QT_MOC_LITERAL(3, 18, 6), // "SBans*"
+QT_MOC_LITERAL(4, 25, 4), // "Load"
+QT_MOC_LITERAL(5, 30, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(6, 45, 5) // "Reply"
 
     },
-    "SBans\0finished\0\0SBans*\0Load\0QNetworkReply*\0"
-    "Reply"
+    "SBans\0s_finished\0\0SBans*\0Load\0"
+    "QNetworkReply*\0Reply"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,8 +81,8 @@ void SBans::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         auto *_t = static_cast<SBans *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< SBans*(*)>(_a[1]))); break;
-        case 1: _t->finished(); break;
+        case 0: _t->s_finished((*reinterpret_cast< SBans*(*)>(_a[1]))); break;
+        case 1: _t->s_finished(); break;
         case 2: _t->Load((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
@@ -108,14 +108,14 @@ void SBans::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SBans::*)(SBans * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SBans::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SBans::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SBans::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SBans::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SBans::s_finished)) {
                 *result = 1;
                 return;
             }
@@ -164,14 +164,14 @@ int SBans::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SBans::finished(SBans * _t1)
+void SBans::s_finished(SBans * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void SBans::finished()
+void SBans::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

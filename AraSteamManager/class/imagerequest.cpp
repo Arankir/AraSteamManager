@@ -1,64 +1,64 @@
 #include "imagerequest.h"
 
-ImageRequest::ImageRequest(QString url, int row, QString save, bool autosave, QObject *parent) : QObject(parent){
-    manager = new QNetworkAccessManager();
-    connect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
-    answer="";
-    Url=url;
-    i=row;
-    Save=save;
-    Autosave=autosave;
-    switch (Setting.GetSaveimages()) {
+ImageRequest::ImageRequest(QString AUrl, int ARow, QString ASave, bool AAutoSave, QObject *parent) : QObject(parent){
+    _manager = new QNetworkAccessManager();
+    connect(_manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
+    _answer="";
+    _url=AUrl;
+    _row=ARow;
+    _save=ASave;
+    _autosave=AAutoSave;
+    switch (_setting.GetSaveimages()) {
         case 0:{
-            LoadImage(url,row);
+            LoadImage(AUrl,ARow);
             break;
             }
         case 1:{
-            LoadImage(url,row,save,autosave);
+            LoadImage(AUrl,ARow,ASave,AAutoSave);
             break;
             }
         default:{
-            LoadImage(url,row);
+            LoadImage(AUrl,ARow);
             break;
             }
         }
 }
 
 ImageRequest::ImageRequest(){
-    manager = new QNetworkAccessManager();
-    connect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
-    answer="";
+    _manager = new QNetworkAccessManager();
+    connect(_manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
+    _answer="";
 }
 
-void ImageRequest::Get(QString str){
-    QUrl url(str);
+void ImageRequest::Get(QString AUrl){
+    QUrl url(AUrl);
     QNetworkRequest request;
     request.setUrl(url);
-    manager->get(request);
+    _manager->get(request);
 }
 
-void ImageRequest::LoadImage(QString url, int column, QString save, bool autosave){
-    Url=url;
-    i=column;
-    Save=save;
-    Autosave=autosave;
-    manager->get(QNetworkRequest(QUrl(url)));
+void ImageRequest::LoadImage(QString AUrl, int ARow, QString ASave, bool AAutoSave){
+    _url=AUrl;
+    _row=ARow;
+    _save=ASave;
+    _autosave=AAutoSave;
+    _manager->get(QNetworkRequest(QUrl(AUrl)));
 }
 
-void ImageRequest::OnResultGet(QNetworkReply *reply){
-    if(!reply->error()){
-        answer=reply->readAll();
-        if(Autosave){
-            Setting.CreateFile(Save);
+void ImageRequest::OnResultGet(QNetworkReply *AReply){
+    if(!AReply->error()){
+        _answer=AReply->readAll();
+        if(_autosave){
+            _setting.CreateFile(_save);
             QPixmap pixmap;
-            pixmap.loadFromData(answer);
-            pixmap.save(Save);
+            pixmap.loadFromData(_answer);
+            pixmap.save(_save);
         }
     }
-    emit onReady(this);
+    emit s_finished(this);
 }
 
 ImageRequest::~ImageRequest(){
-    disconnect(manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
-    delete manager;
+    disconnect(_manager,&QNetworkAccessManager::finished,this,&ImageRequest::OnResultGet);
+    delete _manager;
 }

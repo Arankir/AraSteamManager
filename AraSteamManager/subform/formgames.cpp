@@ -1,21 +1,19 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString ids, QString keys, SGames gamess, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString AID, QString AKey, SGames AGames, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
-    id=ids;
-    key=keys;
-    SGames game=gamess;
-    for (int i=0;i<game.GetCount();i++) {
-        games.push_back(game.GetGame(i));
-    }
-    switch(setting.GetTheme()){
+    _id=AID;
+    _key=AKey;
+    SGames game=AGames;
+    for (int i=0;i<game.GetCount();_games.push_back(game.GetGame(i++)));
+    switch(_setting.GetTheme()){
     case 1:{
-        theme="white";
+        _theme="white";
         break;
         }
     case 2:{
-        theme="black";
+        _theme="black";
         break;
         }
     }
@@ -25,16 +23,16 @@ FormGames::FormGames(QString ids, QString keys, SGames gamess, QWidget *parent) 
 
 #define Init {
 void FormGames::InitComponents(){
-    for (int i=0; i < games.size()-1; i++) {
-        for (int j=0; j < games.size()-i-1; j++) {
-            if (games[j].GetName() > games[j+1].GetName()) {
-                SGame temp = games[j];
-                games[j] = games[j+1];
-                games[j+1] = temp;
+    for (int i=0; i < _games.size()-1; i++) {
+        for (int j=0; j < _games.size()-i-1; j++) {
+            if (_games[j].GetName() > _games[j+1].GetName()) {
+                SGame temp = _games[j];
+                _games[j] = _games[j+1];
+                _games[j+1] = temp;
             }
         }
     }
-    favorites.SetPath("Files/Favorites/Games.json","Games");
+    _favorites.SetPath("Files/Favorites/Games.json","Games");
     ui->TableWidgetGames->setColumnCount(4);
     ui->TableWidgetGames->setColumnCount(6);
     ui->TableWidgetGames->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
@@ -47,12 +45,12 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetGames->setSortingEnabled(true);
-    ui->ButtonFind->setIcon(QIcon(":/"+theme+"/program/"+theme+"/find.png"));
+    ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
     //iAchievement = ;
-    QIcon iFavorite = QIcon(":/"+theme+"/program/"+theme+"/favorites.png");
-    QIcon iHide = QIcon(":/"+theme+"/program/"+theme+"/hide.png");
-    ui->TableWidgetGames->setRowCount(games.count());
-    for (int i=0;i<games.count();i++) {
+    QIcon iFavorite = QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png");
+    QIcon iHide = QIcon(":/"+_theme+"/program/"+_theme+"/hide.png");
+    ui->TableWidgetGames->setRowCount(_games.count());
+    for (int i=0;i<_games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
         QPushButton *button1 = new QPushButton(tr("Достижения"));
         button1->setMinimumSize(QSize(25,25));
@@ -81,7 +79,7 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setColumnWidth(0,33);
     ui->TableWidgetGames->setColumnWidth(1,300);
     Threading LoadTable(this);
-    LoadTable.AddThreadGames(ui->TableWidgetGames,games);
+    LoadTable.AddThreadGames(ui->TableWidgetGames,_games);
 }
 void FormGames::ProgressLoading(int p,int row){
 
@@ -89,10 +87,10 @@ void FormGames::ProgressLoading(int p,int row){
 void FormGames::OnFinish(){
     ui->TableWidgetGames->resizeColumnsToContents();
     QFile fileHide1;
-    fileHide1.setFileName("Files/Hide/"+id+".txt");
+    fileHide1.setFileName("Files/Hide/"+_id+".txt");
     if(fileHide1.open(QIODevice::ReadOnly)){
         while(!fileHide1.atEnd()){
-            hide << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
+            _hide << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
         }
         fileHide1.close();
     }
@@ -100,24 +98,24 @@ void FormGames::OnFinish(){
     fileHide2.setFileName("Files/Hide/All.txt");
     if(fileHide2.open(QIODevice::ReadOnly)){
         while(!fileHide2.atEnd()){
-            hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
+            _hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
         }
         fileHide2.close();
     }
-    QStringList hides=hide;
-    achievements = new SAchievementsPlayer[games.size()];
-    for(int i=0;i<games.size();i++){
-        QString path = "images/icon_games/"+games[i].GetImg_icon_url()+".jpg";
+    QStringList hideList=_hide;
+    _achievements = new SAchievementsPlayer[_games.size()];
+    for(int i=0;i<_games.size();i++){
+        QString path = "images/icon_games/"+_games[i].GetImg_icon_url()+".jpg";
         if(!QFile::exists(path)){
-            if(numrequests<500){
-                if(games[i].GetImg_icon_url()!=""){
+            if(_numRequests<500){
+                if(_games[i].GetImg_icon_url()!=""){
                     ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                                           QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",i,path,true);
-                    connect(image,&ImageRequest::onReady,this,&FormGames::OnResultImage);
-                    request.append(image);
-                    numrequests++;
+                                                           QString::number(_games[i].GetAppid())+"/"+_games[i].GetImg_icon_url()+".jpg",i,path,true);
+                    connect(image,&ImageRequest::s_finished,this,&FormGames::OnResultImage);
+                    _request.append(image);
+                    _numRequests++;
                     }
-                numnow++;
+                _numNow++;
             }
             } else {
             QPixmap pixmap;
@@ -126,94 +124,94 @@ void FormGames::OnFinish(){
             label->setPixmap(pixmap);
             ui->TableWidgetGames->setCellWidget(i,0,label);
             }
-        SAchievementsPlayer *pl = new SAchievementsPlayer(key,QString::number(games[i].GetAppid()),id);
+        SAchievementsPlayer *pl = new SAchievementsPlayer(_key,QString::number(_games[i].GetAppid()),_id);
         pl->SetIndex(i);
-        connect(pl,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
-        for (int j=0;j<hides.size();j++) {
-            if(hides[j].toInt()==games[i].GetAppid()){
+        connect(pl,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
+        for (int j=0;j<hideList.size();j++) {
+            if(hideList[j].toInt()==_games[i].GetAppid()){
                 ui->TableWidgetGames->setRowHidden(i,true);
                 ui->TableWidgetGames->item(i,1)->setTextColor(Qt::red);
                 static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,5))->setEnabled(false);
-                hides.removeAt(j);
+                hideList.removeAt(j);
                 break;
             }
             }
         }
 }
-void FormGames::OnResultImage(ImageRequest *imgr){
+void FormGames::OnResultImage(ImageRequest *AImage){
     QPixmap pixmap;
-    pixmap.loadFromData(imgr->GetAnswer());
+    pixmap.loadFromData(AImage->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetGames->setCellWidget(imgr->GetRow(),0,label);
-    if(numrequests==500&&numnow<games.size()){
-        while (QFile::exists("images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg")||games[numnow].GetImg_icon_url()=="") {
-            numnow++;
+    ui->TableWidgetGames->setCellWidget(AImage->GetRow(),0,label);
+    if(_numRequests==500&&_numNow<_games.size()){
+        while (QFile::exists("images/icon_games/"+_games[_numNow].GetImg_icon_url()+".jpg")||_games[_numNow].GetImg_icon_url()=="") {
+            _numNow++;
         }
-        imgr->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                        QString::number(games[numnow].GetAppid())+"/"+games[numnow].GetImg_icon_url()+".jpg",numnow,
-                        "images/icon_games/"+games[numnow].GetImg_icon_url()+".jpg",true);
-        numnow++;
+        AImage->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+
+                        QString::number(_games[_numNow].GetAppid())+"/"+_games[_numNow].GetImg_icon_url()+".jpg",_numNow,
+                        "images/icon_games/"+_games[_numNow].GetImg_icon_url()+".jpg",true);
+        _numNow++;
     } else {
-        disconnect(imgr,&ImageRequest::onReady,this,&FormGames::OnResultImage);
-        imgr->deleteLater();
+        disconnect(AImage,&ImageRequest::s_finished,this,&FormGames::OnResultImage);
+        AImage->deleteLater();
     }
 }
-void FormGames::OnResultAchievements(SAchievementsPlayer ach){
-    disconnect(&ach,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
-    QProgressBar *pb = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(ach.GetIndex(),2));
-    pb->setMaximum(ach.GetAchievementsCount());
+void FormGames::OnResultAchievements(SAchievementsPlayer AAchievements){
+    disconnect(&AAchievements,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
+    QProgressBar *pb = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(AAchievements.GetIndex(),2));
+    pb->setMaximum(AAchievements.GetCount());
     pb->setMinimumSize(QSize(25,25));
-    if(ach.GetAchievementsCount()>0){
+    if(AAchievements.GetCount()>0){
         int val=0;
-        for (int i=0;i<ach.GetAchievementsCount();i++) {
-            if(ach.GetAchieved(i)==1)
+        for (int i=0;i<AAchievements.GetCount();i++) {
+            if(AAchievements.GetAchieved(i)==1)
                 val++;
         }
         pb->setValue(val);
     } else {
         pb->setValue(0);
-        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(ach.GetIndex(),3))->setEnabled(false);
+        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(AAchievements.GetIndex(),3))->setEnabled(false);
     }
-    ui->TableWidgetGames->setItem(ach.GetIndex(),2,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
-    achievements[ach.GetIndex()]=ach;
+    ui->TableWidgetGames->setItem(AAchievements.GetIndex(),2,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
+    _achievements[AAchievements.GetIndex()]=AAchievements;
     //ach->deleteLater();
 }
 #define InitEnd }
 
 #define System {
 FormGames::~FormGames(){
-    qDebug()<<numrequests<<"запросов на картинки";
-    delete [] achievements;
+    qDebug()<<_numRequests<<"запросов на картинки";
+    delete [] _achievements;
     //for (int i=0;i<=numrequests;i++) {
     //    delete request[numrequests];
     //}
     delete ui;
 }
 void FormGames::closeEvent(QCloseEvent*){
-    emit return_to_profile();
+    emit s_return_to_profile();
     //delete this;
 }
-void FormGames::returnfromachievements(int num){
-    disconnect(achievementsforms[num],&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
+void FormGames::ReturnFromAchievements(int ANum){
+    disconnect(achievementsforms[ANum],&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
     //delete achievementsforms[num];
 }
 #define SystemEnd }
 
 #define Filter {
 void FormGames::on_LineEditGame_textChanged(const QString arg){
-    if(setting.GetVisibleHiddenGames()==1&&arg!=""){
+    if(_setting.GetVisibleHiddenGames()==1&&arg!=""){
         for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
-                ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)>-1?false:true);
+                ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)==-1);
         }
     } else {
         for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
-                ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)>-1?false:true);
-                QStringList hides=hide;
-                for (int j=0;j<hides.size();j++) {
-                    if(hides[j].toInt()==games[i].GetAppid()){
+                ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,1)->text().toUpper().indexOf(arg.toUpper(),0)==-1);
+                QStringList hideList=_hide;
+                for (int j=0;j<hideList.size();j++) {
+                    if(hideList[j].toInt()==_games[i].GetAppid()){
                         ui->TableWidgetGames->setRowHidden(i,true);
-                        hides.removeAt(j);
+                        hideList.removeAt(j);
                         break;
                     }
                     }
@@ -230,16 +228,16 @@ void FormGames::AchievementsClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int index=btn->objectName().mid(18,6).toInt();
     QEventLoop loop;
-    SAchievementsPercentage Percentage(key,QString::number(games[index].GetAppid()));
-    connect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
+    SAchievementsPercentage Percentage(_key,QString::number(_games[index].GetAppid()));
+    connect(&Percentage, SIGNAL(s_finished()), &loop, SLOT(quit()));
     loop.exec();
-    disconnect(&Percentage, SIGNAL(finished()), &loop, SLOT(quit()));
-    if(Percentage.GetAchievementsCount()==0){
+    disconnect(&Percentage, SIGNAL(s_finished()), &loop, SLOT(quit()));
+    if(Percentage.GetCount()==0){
         QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
     } else {
-        FormAchievements *fa = new FormAchievements(key,achievements[index],id,games[index],windowchildcount++);
+        FormAchievements *fa = new FormAchievements(_key,_achievements[index],_id,_games[index],_windowChildCount++);
         achievementsforms.append(fa);
-        connect(fa,&FormAchievements::return_to_games,this,&FormGames::returnfromachievements);
+        connect(fa,&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
         fa->show();
     }
 }
@@ -247,9 +245,9 @@ void FormGames::FavoritesClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int index=btn->objectName().mid(15).toInt();
     QJsonObject newValue;
-    newValue["id"]=QString::number(games[index].GetAppid());
-    newValue["name"]=games[index].GetName();
-    if(favorites.AddValue(newValue,true)){
+    newValue["id"]=QString::number(_games[index].GetAppid());
+    newValue["name"]=_games[index].GetName();
+    if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {
         //Категория уже есть (удалилась)
@@ -257,7 +255,7 @@ void FormGames::FavoritesClicked(){
     //Поменять картинку
 }
 void FormGames::HideClicked(){
-    QString Save="";
+    QString save="";
     QMessageBox messageBox(QMessageBox::Question,
                            tr("Внимание!"),
                            tr("Вы уверены, что хотите скрыть эту игру?"));
@@ -266,21 +264,21 @@ void FormGames::HideClicked(){
     messageBox.addButton(tr("Отмена"),QMessageBox::NoRole);
     messageBox.exec();
     if(messageBox.clickedButton()==btnProfile){
-         Save="Files/Hide/"+id+".txt";
+         save="Files/Hide/"+_id+".txt";
     } else if(messageBox.clickedButton()==btnAll){
-         Save="Files/Hide/All.txt";
+         save="Files/Hide/All.txt";
     } else return;
 
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int gamei=btn->objectName().mid(10,6).toInt();
-    setting.CreateFile(Save);
-    QFile hide(Save);
+    _setting.CreateFile(save);
+    QFile hide(save);
     hide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&hide);
-    writeStream <<games[gamei].GetAppid()<<"\n";
+    writeStream <<_games[gamei].GetAppid()<<"\n";
     hide.close();
-    for (int i=0;i<games.size();i++) {
-        if(games[gamei].GetName()==ui->TableWidgetGames->item(i,1)->text()){
+    for (int i=0;i<_games.size();i++) {
+        if(_games[gamei].GetName()==ui->TableWidgetGames->item(i,1)->text()){
             ui->TableWidgetGames->item(i,1)->setTextColor(Qt::red);
             ui->TableWidgetGames->setRowHidden(i,true);
             ui->TableWidgetGames->setCurrentCell(i+1,4);

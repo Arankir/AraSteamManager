@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoryValue_t {
     QByteArrayData data[20];
-    char stringdata0[296];
+    char stringdata0[306];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,32 +32,32 @@ struct qt_meta_stringdata_FormCategoryValue_t {
 static const qt_meta_stringdata_FormCategoryValue_t qt_meta_stringdata_FormCategoryValue = {
     {
 QT_MOC_LITERAL(0, 0, 17), // "FormCategoryValue"
-QT_MOC_LITERAL(1, 18, 11), // "valuechange"
-QT_MOC_LITERAL(2, 30, 0), // ""
-QT_MOC_LITERAL(3, 31, 3), // "pos"
-QT_MOC_LITERAL(4, 35, 5), // "value"
-QT_MOC_LITERAL(5, 41, 13), // "visiblechange"
-QT_MOC_LITERAL(6, 55, 7), // "visible"
-QT_MOC_LITERAL(7, 63, 14), // "positionchange"
-QT_MOC_LITERAL(8, 78, 6), // "posnew"
-QT_MOC_LITERAL(9, 85, 12), // "selectchange"
-QT_MOC_LITERAL(10, 98, 6), // "select"
-QT_MOC_LITERAL(11, 105, 8), // "deleting"
-QT_MOC_LITERAL(12, 114, 31), // "on_CheckBoxVisible_stateChanged"
-QT_MOC_LITERAL(13, 146, 4), // "arg1"
-QT_MOC_LITERAL(14, 151, 19), // "on_ButtonUp_clicked"
-QT_MOC_LITERAL(15, 171, 21), // "on_ButtonDown_clicked"
-QT_MOC_LITERAL(16, 193, 23), // "on_ButtonSelect_clicked"
-QT_MOC_LITERAL(17, 217, 25), // "on_ButtonUnSelect_clicked"
-QT_MOC_LITERAL(18, 243, 23), // "on_ButtonDelete_clicked"
-QT_MOC_LITERAL(19, 267, 28) // "on_LineEditTitle_textChanged"
+QT_MOC_LITERAL(1, 18, 13), // "s_valuechange"
+QT_MOC_LITERAL(2, 32, 0), // ""
+QT_MOC_LITERAL(3, 33, 3), // "pos"
+QT_MOC_LITERAL(4, 37, 5), // "value"
+QT_MOC_LITERAL(5, 43, 15), // "s_visiblechange"
+QT_MOC_LITERAL(6, 59, 7), // "visible"
+QT_MOC_LITERAL(7, 67, 16), // "s_positionchange"
+QT_MOC_LITERAL(8, 84, 6), // "posnew"
+QT_MOC_LITERAL(9, 91, 14), // "s_selectchange"
+QT_MOC_LITERAL(10, 106, 6), // "select"
+QT_MOC_LITERAL(11, 113, 10), // "s_deleting"
+QT_MOC_LITERAL(12, 124, 31), // "on_CheckBoxVisible_stateChanged"
+QT_MOC_LITERAL(13, 156, 4), // "arg1"
+QT_MOC_LITERAL(14, 161, 19), // "on_ButtonUp_clicked"
+QT_MOC_LITERAL(15, 181, 21), // "on_ButtonDown_clicked"
+QT_MOC_LITERAL(16, 203, 23), // "on_ButtonSelect_clicked"
+QT_MOC_LITERAL(17, 227, 25), // "on_ButtonUnSelect_clicked"
+QT_MOC_LITERAL(18, 253, 23), // "on_ButtonDelete_clicked"
+QT_MOC_LITERAL(19, 277, 28) // "on_LineEditTitle_textChanged"
 
     },
-    "FormCategoryValue\0valuechange\0\0pos\0"
-    "value\0visiblechange\0visible\0positionchange\0"
-    "posnew\0selectchange\0select\0deleting\0"
-    "on_CheckBoxVisible_stateChanged\0arg1\0"
-    "on_ButtonUp_clicked\0on_ButtonDown_clicked\0"
+    "FormCategoryValue\0s_valuechange\0\0pos\0"
+    "value\0s_visiblechange\0visible\0"
+    "s_positionchange\0posnew\0s_selectchange\0"
+    "select\0s_deleting\0on_CheckBoxVisible_stateChanged\0"
+    "arg1\0on_ButtonUp_clicked\0on_ButtonDown_clicked\0"
     "on_ButtonSelect_clicked\0"
     "on_ButtonUnSelect_clicked\0"
     "on_ButtonDelete_clicked\0"
@@ -119,11 +119,11 @@ void FormCategoryValue::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         auto *_t = static_cast<FormCategoryValue *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->valuechange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 1: _t->visiblechange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 2: _t->positionchange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 3: _t->selectchange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 4: _t->deleting((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 0: _t->s_valuechange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 1: _t->s_visiblechange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 2: _t->s_positionchange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 3: _t->s_selectchange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 4: _t->s_deleting((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->on_CheckBoxVisible_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->on_ButtonUp_clicked(); break;
         case 7: _t->on_ButtonDown_clicked(); break;
@@ -137,35 +137,35 @@ void FormCategoryValue::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (FormCategoryValue::*)(int , QString );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::valuechange)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::s_valuechange)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (FormCategoryValue::*)(int , bool );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::visiblechange)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::s_visiblechange)) {
                 *result = 1;
                 return;
             }
         }
         {
             using _t = void (FormCategoryValue::*)(int , int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::positionchange)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::s_positionchange)) {
                 *result = 2;
                 return;
             }
         }
         {
             using _t = void (FormCategoryValue::*)(int , bool );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::selectchange)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::s_selectchange)) {
                 *result = 3;
                 return;
             }
         }
         {
             using _t = void (FormCategoryValue::*)(int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::deleting)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue::s_deleting)) {
                 *result = 4;
                 return;
             }
@@ -214,35 +214,35 @@ int FormCategoryValue::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormCategoryValue::valuechange(int _t1, QString _t2)
+void FormCategoryValue::s_valuechange(int _t1, QString _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void FormCategoryValue::visiblechange(int _t1, bool _t2)
+void FormCategoryValue::s_visiblechange(int _t1, bool _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void FormCategoryValue::positionchange(int _t1, int _t2)
+void FormCategoryValue::s_positionchange(int _t1, int _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3
-void FormCategoryValue::selectchange(int _t1, bool _t2)
+void FormCategoryValue::s_selectchange(int _t1, bool _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);
 }
 
 // SIGNAL 4
-void FormCategoryValue::deleting(int _t1)
+void FormCategoryValue::s_deleting(int _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 4, _a);

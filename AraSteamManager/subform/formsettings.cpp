@@ -15,7 +15,7 @@ FormSettings::~FormSettings()
 }
 
 void FormSettings::InitComponents(){
-    switch (setting.GetLanguage()) {
+    switch (_setting.GetLanguage()) {
     case 1:{
         ui->RadioButtonLanguageEnglish->setChecked(true);
         break;
@@ -27,7 +27,7 @@ void FormSettings::InitComponents(){
     default:{
     }
     }
-    switch (setting.GetVisibleHiddenGames()) {
+    switch (_setting.GetVisibleHiddenGames()) {
     case 0:{
         ui->CheckBoxVisibleHiddenGames->setChecked(false);
         break;
@@ -39,7 +39,7 @@ void FormSettings::InitComponents(){
     default:{
     }
     }
-    switch (setting.GetTheme()) {
+    switch (_setting.GetTheme()) {
     case 1:{
         ui->RadioButtonDarkTheme->setChecked(true);
         break;
@@ -63,34 +63,34 @@ void FormSettings::InitComponents(){
 }
 
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
-    setting.SetLanguage(1);
+    _setting.SetLanguage(1);
     QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_RadioButtonLanguageRussian_clicked(){
-    setting.SetLanguage(5);
+    _setting.SetLanguage(5);
     QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_CheckBoxVisibleHiddenGames_stateChanged(int arg1){
     switch (arg1) {
     case 0:{
-        setting.SetVisibleHiddenGames(0);
+        _setting.SetVisibleHiddenGames(0);
         break;
     }
     case 2:{
-        setting.SetVisibleHiddenGames(1);
+        _setting.SetVisibleHiddenGames(1);
         break;
     }
     }
 }
 
 void FormSettings::on_RadioButtonDarkTheme_clicked(){
-    setting.SetTheme(1);
+    _setting.SetTheme(1);
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_RadioButtonLightTheme_clicked(){
-    setting.SetTheme(2);
+    _setting.SetTheme(2);
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }

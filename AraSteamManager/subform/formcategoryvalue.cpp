@@ -3,22 +3,22 @@
 
 FormCategoryValue::FormCategoryValue(int pos, QWidget *parent) : QWidget(parent), ui(new Ui::FormCategoryValue){
     ui->setupUi(this);
-    position=pos;
-    switch(Setting.GetTheme()){
+    _position=pos;
+    switch(_setting.GetTheme()){
     case 1:{
-        theme="white";
+        _theme="white";
         break;
         }
     case 2:{
-        theme="black";
+        _theme="black";
         break;
         }
     }
-    ui->LabelPosition->setText(QString::number(position+1));
-    ui->ButtonUp->setIcon(QIcon(":/"+theme+"/program/"+theme+"/up.png"));
-    ui->ButtonDown->setIcon(QIcon(":/"+theme+"/program/"+theme+"/down.png"));
-    ui->ButtonSelect->setIcon(QIcon(":/"+theme+"/program/"+theme+"/check_visible.png"));
-    ui->ButtonUnSelect->setIcon(QIcon(":/"+theme+"/program/"+theme+"/uncheck_visible.png"));
+    ui->LabelPosition->setText(QString::number(_position+1));
+    ui->ButtonUp->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/up.png"));
+    ui->ButtonDown->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/down.png"));
+    ui->ButtonSelect->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/check_visible.png"));
+    ui->ButtonUnSelect->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/uncheck_visible.png"));
     ui->ButtonDelete->setIcon(QIcon(":/program/program/delete.png"));
 }
 
@@ -27,52 +27,46 @@ FormCategoryValue::~FormCategoryValue(){
 }
 
 void FormCategoryValue::on_CheckBoxVisible_stateChanged(int arg1){
-    emit visiblechange(position, arg1==2?true:false);
+    emit s_visiblechange(_position, arg1==2);
 }
-
 void FormCategoryValue::on_ButtonUp_clicked(){
-    emit positionchange(position, position-1);
+    emit s_positionchange(_position, _position-1);
 }
-
 void FormCategoryValue::on_ButtonDown_clicked(){
-    emit positionchange(position, position+1);
+    emit s_positionchange(_position, _position+1);
 }
-
 void FormCategoryValue::on_ButtonSelect_clicked(){
-    emit selectchange(position, true);
+    emit s_selectchange(_position, true);
 }
-
 void FormCategoryValue::on_ButtonUnSelect_clicked(){
-    emit selectchange(position, false);
+    emit s_selectchange(_position, false);
 }
-
 void FormCategoryValue::on_ButtonDelete_clicked(){
-    emit deleting(position);
+    emit s_deleting(_position);
 }
-
 void FormCategoryValue::on_LineEditTitle_textChanged(const QString &arg1){
-    emit valuechange(position, arg1);
+    emit s_valuechange(_position, arg1);
 }
 
-void FormCategoryValue::setVisibl(bool visible){
-    ui->CheckBoxVisible->setChecked(visible);
+void FormCategoryValue::SetVisible(bool AVisible){
+    ui->CheckBoxVisible->setChecked(AVisible);
 }
-void FormCategoryValue::setFirstLast(int firstlast){
-    isfirstlast=firstlast;
-    ui->ButtonUp->setEnabled((isfirstlast==-2)||(isfirstlast==-1)?false:true);
-    ui->ButtonDown->setEnabled((isfirstlast==-2)||(isfirstlast==1)?false:true);
+void FormCategoryValue::SetFirstLast(int AFirstLast){
+    _isFirstLast=AFirstLast;
+    ui->ButtonUp->setEnabled((_isFirstLast==-2)||(_isFirstLast==-1)?false:true);
+    ui->ButtonDown->setEnabled((_isFirstLast==-2)||(_isFirstLast==1)?false:true);
 }
-void FormCategoryValue::setPosition(int pos){
-    position=pos;
-    ui->LabelPosition->setText(QString::number(position+1));
+void FormCategoryValue::SetPosition(int APos){
+    _position=APos;
+    ui->LabelPosition->setText(QString::number(_position+1));
 }
-QString FormCategoryValue::getTitle(){
+void FormCategoryValue::SetTitle(QString title){
+    ui->LineEditTitle->setText(title);
+}
+QString FormCategoryValue::GetTitle(){
     return ui->LineEditTitle->text();
 }
-bool FormCategoryValue::getVisible(){
+bool FormCategoryValue::GetVisible(){
     return ui->CheckBoxVisible->isChecked();
 }
 
-void FormCategoryValue::setTitle(QString title){
-    ui->LineEditTitle->setText(title);
-}

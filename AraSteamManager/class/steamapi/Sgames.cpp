@@ -1,88 +1,115 @@
 #include "Sgames.h"
 
-SGames::SGames(QString key, QString id, bool free_games, bool game_info, bool parallel, QObject *parent) : QObject(parent){
-    manager = new QNetworkAccessManager();
-    Set(key, id, free_games, game_info, parallel);
-}
-SGames::SGames(QJsonDocument DocGames){
-    manager = new QNetworkAccessManager();
-    Set(DocGames);
-}
-SGames::SGames(){
-    manager = new QNetworkAccessManager();
-}
-SGames::~SGames(){
-    delete manager;
-}
-
-void SGames::Set(QString key, QString id, bool free_games, bool game_info, bool parallel){
-    this->key=key;
-    this->id=id;
-    QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+key;
-    if(free_games)
+SGames::SGames(QString AKey, QString AID, bool AFree_games, bool AGame_info, bool AParallel, QObject *parent) : QObject(parent){
+    _manager = new QNetworkAccessManager();
+    _key=AKey;
+    _id=AID;
+    QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+AKey;
+    if(AFree_games)
         request+="&include_played_free_games=1";
-    if(game_info)
+    if(AGame_info)
         request+="&include_appinfo=1";
-    request+="&format=json&steamid="+id;
-    if(parallel){
-        connect(manager,&QNetworkAccessManager::finished,this,&SGames::Load);
-        manager->get(QNetworkRequest(request));
+    request+="&format=json&steamid="+AID;
+    if(AParallel){
+        connect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
+        _manager->get(QNetworkRequest(request));
     } else {
         QEventLoop loop;
-        connect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = manager->get(QNetworkRequest(request));
+        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        QNetworkReply *reply = _manager->get(QNetworkRequest(request));
         loop.exec();
-        disconnect(manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
         delete reply;
-        emit finished(this);
-        emit finished();
+        emit s_finished(this);
+        emit s_finished();
     }
 }
-void SGames::Set(QJsonDocument DocGames){
-    Clear();
-    if(DocGames.object().value("response").toObject().value("games").toArray().size()>0){
-        games=DocGames.object().value("response").toObject().value("games").toArray();
-        status="success";
+SGames::SGames(QJsonDocument AGames){
+    _manager = new QNetworkAccessManager();
+    if(AGames.object().value("response").toObject().value("games").toArray().size()>0){
+        _games=AGames.object().value("response").toObject().value("games").toArray();
+        _status="success";
     }
     else {
-        status="error: profile is not exist";
+        _status="error: profile is not exist";
+    }
+}
+SGames::SGames(){
+    _manager = new QNetworkAccessManager();
+}
+SGames::~SGames(){
+    delete _manager;
+}
+
+void SGames::Set(QString AKey, QString AID, bool AFree_games, bool AGame_info, bool AParallel){
+    _key=AKey;
+    _id=AID;
+    QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+AKey;
+    if(AFree_games)
+        request+="&include_played_free_games=1";
+    if(AGame_info)
+        request+="&include_appinfo=1";
+    request+="&format=json&steamid="+AID;
+    if(AParallel){
+        connect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
+        _manager->get(QNetworkRequest(request));
+    } else {
+        QEventLoop loop;
+        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        QNetworkReply *reply = _manager->get(QNetworkRequest(request));
+        loop.exec();
+        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        Set(QJsonDocument::fromJson(reply->readAll()));
+        delete reply;
+        emit s_finished(this);
+        emit s_finished();
+    }
+}
+void SGames::Set(QJsonDocument AGames){
+    Clear();
+    if(AGames.object().value("response").toObject().value("games").toArray().size()>0){
+        _games=AGames.object().value("response").toObject().value("games").toArray();
+        _status="success";
+    }
+    else {
+        _status="error: profile is not exist";
     }
 }
 
 void SGames::Load(QNetworkReply *Reply){
-    disconnect(manager,&QNetworkAccessManager::finished,this,&SGames::Load);
-    QJsonDocument DocGames = QJsonDocument::fromJson(Reply->readAll());
+    disconnect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
+    QJsonDocument localGames = QJsonDocument::fromJson(Reply->readAll());
     Reply->deleteLater();
-    Set(DocGames);
-    emit finished(this);
-    emit finished();
+    Set(localGames);
+    emit s_finished(this);
+    emit s_finished();
 }
 
 void SGames::Update(bool parallel){
-    Set(key,id,free_games,game_info, parallel);
+    Set(_key,_id,_free_games,_game_info, parallel);
 }
 void SGames::Clear(){
-    games=QJsonArray();
+    _games=QJsonArray();
 }
 
-SGames::SGames( const SGames & a){
-    games=a.games;
-    status=a.status;
-    id=a.id;
-    key=a.key;
-    free_games=a.free_games;
-    game_info=a.game_info;
-    manager = new QNetworkAccessManager;
+SGames::SGames( const SGames & ANewGames){
+    _games=ANewGames._games;
+    _status=ANewGames._status;
+    _id=ANewGames._id;
+    _key=ANewGames._key;
+    _free_games=ANewGames._free_games;
+    _game_info=ANewGames._game_info;
+    _manager = new QNetworkAccessManager;
 }
-SGames & SGames::operator=(const SGames & profile){
-    delete manager;
-    games=profile.games;
-    status=profile.status;
-    id=profile.id;
-    key=profile.key;
-    free_games=profile.free_games;
-    game_info=profile.game_info;
-    manager = new QNetworkAccessManager;
+SGames & SGames::operator=(const SGames & ANewGames){
+    delete _manager;
+    _games=ANewGames._games;
+    _status=ANewGames._status;
+    _id=ANewGames._id;
+    _key=ANewGames._key;
+    _free_games=ANewGames._free_games;
+    _game_info=ANewGames._game_info;
+    _manager = new QNetworkAccessManager;
     return *this;
 }

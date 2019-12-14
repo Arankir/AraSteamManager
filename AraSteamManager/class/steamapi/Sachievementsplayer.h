@@ -23,39 +23,39 @@ public:
     ~SAchievementsPlayer();
     void Set(QString key, QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
-    void SetIndex(int i) {index=i;}
-    void Delete(int index) { achievements.remove(index); count--;}
-    SAchievementPlayer GetAchievementInfo(int index) {return achievements[index];}
-    QString GetApiname(int index) {return achievements[index].GetApiname();}
-    int GetAchieved(int index) {return achievements[index].GetAchieved();}
-    QDateTime GetUnlocktime(int index) {return achievements[index].GetUnlocktime();}
-    QString GetAppid() {return appid;}
-    QString GetStatus() {return status;}
-    QString GetGamename() {return gamename;}
-    int GetAchievementsCount() {return count;}
-    int GetIndex() {return index;}
+    void SetIndex(int ANewIndex) {_index=ANewIndex;}
+    void Delete(int AIndex) { _achievements.remove(AIndex); _count--;}
+    SAchievementPlayer GetAchievement(int index) {return _achievements[index];}
+    QString GetApiname(int index) {return _achievements[index].GetApiname();}
+    int GetAchieved(int index) {return _achievements[index].GetAchieved();}
+    QDateTime GetUnlocktime(int index) {return _achievements[index].GetUnlocktime();}
+    QString GetAppid() {return _appid;}
+    QString GetStatus() {return _status;}
+    QString GetGamename() {return _gameName;}
+    int GetCount() {return _count;}
+    int GetIndex() {return _index;}
     void Update();
     void Clear();
     SAchievementsPlayer(const SAchievementsPlayer &);
     SAchievementsPlayer & operator=(const SAchievementsPlayer & friends);
 
 signals:
-    void finished(SAchievementsPlayer);
-    void finished();
+    void s_finished(SAchievementsPlayer);
+    void s_finished();
 
 public slots:
     void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager *manager;
-    QVector<SAchievementPlayer> achievements;
-    QString status="none";
-    QString id="";
-    QString appid="";
-    QString key="";
-    QString gamename="";
-    int count=0;
-    int index=0;
+    QNetworkAccessManager *_manager;
+    QVector<SAchievementPlayer> _achievements;
+    QString _status="none";
+    QString _id="";
+    QString _appid="";
+    QString _key="";
+    QString _gameName="";
+    int _count=0;
+    int _index=0;
 };
 
 #endif // SACHIEVEMENTSPLAYER_H

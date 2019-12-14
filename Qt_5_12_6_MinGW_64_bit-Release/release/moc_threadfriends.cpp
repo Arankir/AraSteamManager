@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadFriends_t {
     QByteArrayData data[14];
-    char stringdata0[125];
+    char stringdata0[129];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,23 +33,23 @@ struct qt_meta_stringdata_ThreadFriends_t {
 static const qt_meta_stringdata_ThreadFriends_t qt_meta_stringdata_ThreadFriends = {
     {
 QT_MOC_LITERAL(0, 0, 13), // "ThreadFriends"
-QT_MOC_LITERAL(1, 14, 8), // "finished"
-QT_MOC_LITERAL(2, 23, 0), // ""
-QT_MOC_LITERAL(3, 24, 8), // "progress"
-QT_MOC_LITERAL(4, 33, 1), // "p"
-QT_MOC_LITERAL(5, 35, 3), // "row"
-QT_MOC_LITERAL(6, 39, 4), // "Fill"
-QT_MOC_LITERAL(7, 44, 3), // "Set"
-QT_MOC_LITERAL(8, 48, 13), // "QTableWidget*"
-QT_MOC_LITERAL(9, 62, 18), // "TableWidgetFriends"
-QT_MOC_LITERAL(10, 81, 17), // "QVector<SProfile>"
-QT_MOC_LITERAL(11, 99, 8), // "Profiles"
-QT_MOC_LITERAL(12, 108, 8), // "SFriends"
-QT_MOC_LITERAL(13, 117, 7) // "Friends"
+QT_MOC_LITERAL(1, 14, 10), // "s_finished"
+QT_MOC_LITERAL(2, 25, 0), // ""
+QT_MOC_LITERAL(3, 26, 10), // "s_progress"
+QT_MOC_LITERAL(4, 37, 1), // "p"
+QT_MOC_LITERAL(5, 39, 3), // "row"
+QT_MOC_LITERAL(6, 43, 4), // "Fill"
+QT_MOC_LITERAL(7, 48, 3), // "Set"
+QT_MOC_LITERAL(8, 52, 13), // "QTableWidget*"
+QT_MOC_LITERAL(9, 66, 18), // "TableWidgetFriends"
+QT_MOC_LITERAL(10, 85, 17), // "QVector<SProfile>"
+QT_MOC_LITERAL(11, 103, 8), // "Profiles"
+QT_MOC_LITERAL(12, 112, 8), // "SFriends"
+QT_MOC_LITERAL(13, 121, 7) // "Friends"
 
     },
-    "ThreadFriends\0finished\0\0progress\0p\0"
-    "row\0Fill\0Set\0QTableWidget*\0"
+    "ThreadFriends\0s_finished\0\0s_progress\0"
+    "p\0row\0Fill\0Set\0QTableWidget*\0"
     "TableWidgetFriends\0QVector<SProfile>\0"
     "Profiles\0SFriends\0Friends"
 };
@@ -93,8 +93,8 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<ThreadFriends *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished(); break;
-        case 1: _t->progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 0: _t->s_finished(); break;
+        case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 3: _t->Set((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SProfile>(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3]))); break;
@@ -115,14 +115,14 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (ThreadFriends::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadFriends::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadFriends::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (ThreadFriends::*)(int , int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadFriends::progress)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadFriends::s_progress)) {
                 *result = 1;
                 return;
             }
@@ -171,13 +171,13 @@ int ThreadFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ThreadFriends::finished()
+void ThreadFriends::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void ThreadFriends::progress(int _t1, int _t2)
+void ThreadFriends::s_progress(int _t1, int _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

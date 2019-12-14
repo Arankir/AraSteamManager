@@ -37,9 +37,9 @@ private slots:
     void Save();
 
 private:
-    Settings Setting;
-    QString path;
-    QJsonObject favorites;
+    Settings _setting;
+    QString _path;
+    QJsonObject _favorites;
 };
 
 #endif // FAVORITES_H

@@ -29,7 +29,7 @@ public slots:
     QJsonArray GetValues(int value);
     QList<QString> GetNoValues(int category);
     QString GetGame();
-    int GetCounts() {return categories.value("Categories").toArray().size();}
+    int GetCounts() {return _categories.value("Categories").toArray().size();}
     int GetGameID();
     void DeleteCategory(int index);
     void DeleteAll();
@@ -38,9 +38,9 @@ public slots:
     void Save();
 
 private:
-    QJsonObject categories;
-    Settings Setting;
-    SGame game;
+    QJsonObject _categories;
+    Settings _setting;
+    SGame _game;
 };
 
 #endif // CATEGORIESGAME_H

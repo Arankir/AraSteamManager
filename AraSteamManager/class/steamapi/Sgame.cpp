@@ -1,35 +1,35 @@
 #include "Sgame.h"
 
-SGame::SGame(QJsonObject ObjGame, QObject *parent) : QObject(parent){
-    Set(ObjGame);
+SGame::SGame(QJsonObject AGame, QObject *parent) : QObject(parent){
+    _game=AGame;
 }
 SGame::SGame(){
 
 }
 
-void SGame::Set(QJsonObject ObjGame){
-    game=ObjGame;
+void SGame::Set(QJsonObject AGame){
+    _game=AGame;
 }
 
-QString SGame::GetNumberPlayers(QString key, bool hardreload){
-    if(numberplayers==""||hardreload){
+QString SGame::GetNumberPlayers(QString AKey, bool AHardReload){
+    if(_numberPlayers==""||AHardReload){
         QNetworkAccessManager manager;
         QEventLoop loop;
         QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        QNetworkReply &replyNumberOfCurrentPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+key+"&appid="+QString::number(game.value("appid").toInt()))));
+        QNetworkReply &replyNumberOfCurrentPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+AKey+"&appid="+QString::number(_game.value("appid").toInt()))));
         loop.exec();
         QJsonDocument NumberOfCurrentPlayers = QJsonDocument::fromJson(replyNumberOfCurrentPlayers.readAll());
-        numberplayers=QString::number(NumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble());
+        _numberPlayers=QString::number(NumberOfCurrentPlayers.object().value("response").toObject().value("player_count").toDouble());
     }
-    return numberplayers;
+    return _numberPlayers;
 }
 
 SGame::SGame( const SGame & a){
-    game=a.game;
-    numberplayers=a.numberplayers;
+    _game=a._game;
+    _numberPlayers=a._numberPlayers;
 }
 SGame & SGame::operator=(const SGame & a) {
-    game=a.game;
-    numberplayers=a.numberplayers;
+    _game=a._game;
+    _numberPlayers=a._numberPlayers;
     return *this;
 }

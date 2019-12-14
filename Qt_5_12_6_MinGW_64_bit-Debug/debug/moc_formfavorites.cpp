@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFavorites_t {
-    QByteArrayData data[3];
-    char stringdata0[33];
+    QByteArrayData data[9];
+    char stringdata0[121];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,11 +32,20 @@ struct qt_meta_stringdata_FormFavorites_t {
 static const qt_meta_stringdata_FormFavorites_t qt_meta_stringdata_FormFavorites = {
     {
 QT_MOC_LITERAL(0, 0, 13), // "FormFavorites"
-QT_MOC_LITERAL(1, 14, 17), // "return_to_profile"
-QT_MOC_LITERAL(2, 32, 0) // ""
+QT_MOC_LITERAL(1, 14, 19), // "s_return_to_profile"
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 14), // "InitComponents"
+QT_MOC_LITERAL(4, 50, 10), // "FriendLoad"
+QT_MOC_LITERAL(5, 61, 9), // "SProfile*"
+QT_MOC_LITERAL(6, 71, 13), // "OnResultImage"
+QT_MOC_LITERAL(7, 85, 13), // "ImageRequest*"
+QT_MOC_LITERAL(8, 99, 21) // "on_pushButton_clicked"
 
     },
-    "FormFavorites\0return_to_profile\0"
+    "FormFavorites\0s_return_to_profile\0\0"
+    "InitComponents\0FriendLoad\0SProfile*\0"
+    "OnResultImage\0ImageRequest*\0"
+    "on_pushButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -46,7 +55,7 @@ static const uint qt_meta_data_FormFavorites[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -54,9 +63,21 @@ static const uint qt_meta_data_FormFavorites[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags
+       3,    0,   40,    2, 0x0a /* Public */,
+       4,    1,   41,    2, 0x0a /* Public */,
+       6,    1,   44,    2, 0x0a /* Public */,
+       8,    0,   47,    2, 0x08 /* Private */,
 
  // signals: parameters
+    QMetaType::Void,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 5,    2,
+    QMetaType::Void, 0x80000000 | 7,    2,
     QMetaType::Void,
 
        0        // eod
@@ -68,20 +89,41 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<FormFavorites *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->return_to_profile(); break;
+        case 0: _t->s_return_to_profile(); break;
+        case 1: _t->InitComponents(); break;
+        case 2: _t->FriendLoad((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
+        case 3: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 4: _t->on_pushButton_clicked(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 2:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfile* >(); break;
+            }
+            break;
+        case 3:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< ImageRequest* >(); break;
+            }
+            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (FormFavorites::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormFavorites::return_to_profile)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormFavorites::s_return_to_profile)) {
                 *result = 0;
                 return;
             }
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormFavorites::staticMetaObject = { {
@@ -113,19 +155,19 @@ int FormFavorites::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        if (_id < 5)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 5;
     }
     return _id;
 }
 
 // SIGNAL 0
-void FormFavorites::return_to_profile()
+void FormFavorites::s_return_to_profile()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }

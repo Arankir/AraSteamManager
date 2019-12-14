@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Sfriends.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.6)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'Sfriends.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.1. It"
+#error "This file was generated using the moc from 5.12.6. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SFriends_t {
     QByteArrayData data[7];
-    char stringdata0[55];
+    char stringdata0[57];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,15 +32,15 @@ struct qt_meta_stringdata_SFriends_t {
 static const qt_meta_stringdata_SFriends_t qt_meta_stringdata_SFriends = {
     {
 QT_MOC_LITERAL(0, 0, 8), // "SFriends"
-QT_MOC_LITERAL(1, 9, 8), // "finished"
-QT_MOC_LITERAL(2, 18, 0), // ""
-QT_MOC_LITERAL(3, 19, 9), // "SFriends*"
-QT_MOC_LITERAL(4, 29, 4), // "Load"
-QT_MOC_LITERAL(5, 34, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 49, 5) // "Reply"
+QT_MOC_LITERAL(1, 9, 10), // "s_finished"
+QT_MOC_LITERAL(2, 20, 0), // ""
+QT_MOC_LITERAL(3, 21, 9), // "SFriends*"
+QT_MOC_LITERAL(4, 31, 4), // "Load"
+QT_MOC_LITERAL(5, 36, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(6, 51, 5) // "Reply"
 
     },
-    "SFriends\0finished\0\0SFriends*\0Load\0"
+    "SFriends\0s_finished\0\0SFriends*\0Load\0"
     "QNetworkReply*\0Reply"
 };
 #undef QT_MOC_LITERAL
@@ -81,8 +81,8 @@ void SFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         auto *_t = static_cast<SFriends *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< SFriends*(*)>(_a[1]))); break;
-        case 1: _t->finished(); break;
+        case 0: _t->s_finished((*reinterpret_cast< SFriends*(*)>(_a[1]))); break;
+        case 1: _t->s_finished(); break;
         case 2: _t->Load((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
@@ -108,14 +108,14 @@ void SFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SFriends::*)(SFriends * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SFriends::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SFriends::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SFriends::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SFriends::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SFriends::s_finished)) {
                 *result = 1;
                 return;
             }
@@ -164,14 +164,14 @@ int SFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SFriends::finished(SFriends * _t1)
+void SFriends::s_finished(SFriends * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void SFriends::finished()
+void SFriends::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

@@ -14,9 +14,9 @@ public:
     explicit SFriend(QJsonObject ObjFriend, QObject *parent = nullptr);
     SFriend();
     void Set(QJsonObject ObjFriend);
-    QString GetSteamid() {return friendd.value("steamid").toString();}
-    QString GetRelationship() {return friendd.value("relationship").toString();}
-    QDateTime GetFriend_since() {return QDateTime::fromSecsSinceEpoch(friendd.value("friend_since").toInt(),Qt::LocalTime);}
+    QString GetSteamid() {return _friend.value("steamid").toString();}
+    QString GetRelationship() {return _friend.value("relationship").toString();}
+    QDateTime GetFriend_since() {return QDateTime::fromSecsSinceEpoch(_friend.value("friend_since").toInt(),Qt::LocalTime);}
     SFriend(const SFriend &);
     SFriend & operator=(const SFriend & friends);
 
@@ -25,7 +25,7 @@ signals:
 public slots:
 
 private:
-    QJsonObject friendd;
+    QJsonObject _friend;
 };
 
 #endif // SFRIEND_H

@@ -4,17 +4,17 @@ ThreadGames::ThreadGames(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadGames::Set(QTableWidget *TableWidgetGames, QVector<SGame> games){
-    this->games=games;
-    this->TableWidgetGames=TableWidgetGames;
+void ThreadGames::Set(QTableWidget *ATableWidgetGames, QVector<SGame> AGames){
+    _games=AGames;
+    _TableWidgetGames=ATableWidgetGames;
 }
 
 int ThreadGames::Fill(){
-    for(int i=0;i<games.size();i++){
-        TableWidgetGames->setItem(i,1,new QTableWidgetItem(games[i].GetName()));
-        emit progress(i,i);
+    for(int i=0;i<_games.size();i++){
+        _TableWidgetGames->setItem(i,1,new QTableWidgetItem(_games[i].GetName()));
+        emit s_progress(i,i);
         }
-    emit finished();
+    emit s_finished();
     return 1;
 }
 

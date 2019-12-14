@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadAchievements_t {
     QByteArrayData data[16];
-    char stringdata0[200];
+    char stringdata0[204];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,27 +32,27 @@ struct qt_meta_stringdata_ThreadAchievements_t {
 static const qt_meta_stringdata_ThreadAchievements_t qt_meta_stringdata_ThreadAchievements = {
     {
 QT_MOC_LITERAL(0, 0, 18), // "ThreadAchievements"
-QT_MOC_LITERAL(1, 19, 8), // "finished"
-QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 8), // "progress"
-QT_MOC_LITERAL(4, 38, 1), // "p"
-QT_MOC_LITERAL(5, 40, 3), // "row"
-QT_MOC_LITERAL(6, 44, 4), // "Fill"
-QT_MOC_LITERAL(7, 49, 3), // "Set"
-QT_MOC_LITERAL(8, 53, 13), // "SAchievements"
-QT_MOC_LITERAL(9, 67, 12), // "achievements"
-QT_MOC_LITERAL(10, 80, 7), // "QLabel*"
-QT_MOC_LITERAL(11, 88, 17), // "LabelTotalPersent"
-QT_MOC_LITERAL(12, 106, 13), // "QTableWidget*"
-QT_MOC_LITERAL(13, 120, 23), // "TableWidgetAchievements"
-QT_MOC_LITERAL(14, 144, 24), // "LabelTotalPersentCompare"
-QT_MOC_LITERAL(15, 169, 30) // "TableWidgetCompareAchievements"
+QT_MOC_LITERAL(1, 19, 10), // "s_finished"
+QT_MOC_LITERAL(2, 30, 0), // ""
+QT_MOC_LITERAL(3, 31, 10), // "s_progress"
+QT_MOC_LITERAL(4, 42, 1), // "p"
+QT_MOC_LITERAL(5, 44, 3), // "row"
+QT_MOC_LITERAL(6, 48, 4), // "Fill"
+QT_MOC_LITERAL(7, 53, 3), // "Set"
+QT_MOC_LITERAL(8, 57, 13), // "SAchievements"
+QT_MOC_LITERAL(9, 71, 12), // "achievements"
+QT_MOC_LITERAL(10, 84, 7), // "QLabel*"
+QT_MOC_LITERAL(11, 92, 17), // "LabelTotalPersent"
+QT_MOC_LITERAL(12, 110, 13), // "QTableWidget*"
+QT_MOC_LITERAL(13, 124, 23), // "TableWidgetAchievements"
+QT_MOC_LITERAL(14, 148, 24), // "LabelTotalPersentCompare"
+QT_MOC_LITERAL(15, 173, 30) // "TableWidgetCompareAchievements"
 
     },
-    "ThreadAchievements\0finished\0\0progress\0"
-    "p\0row\0Fill\0Set\0SAchievements\0achievements\0"
-    "QLabel*\0LabelTotalPersent\0QTableWidget*\0"
-    "TableWidgetAchievements\0"
+    "ThreadAchievements\0s_finished\0\0"
+    "s_progress\0p\0row\0Fill\0Set\0SAchievements\0"
+    "achievements\0QLabel*\0LabelTotalPersent\0"
+    "QTableWidget*\0TableWidgetAchievements\0"
     "LabelTotalPersentCompare\0"
     "TableWidgetCompareAchievements"
 };
@@ -96,8 +96,8 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<ThreadAchievements *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished(); break;
-        case 1: _t->progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 0: _t->s_finished(); break;
+        case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 3: _t->Set((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QLabel*(*)>(_a[2])),(*reinterpret_cast< QTableWidget*(*)>(_a[3])),(*reinterpret_cast< QLabel*(*)>(_a[4])),(*reinterpret_cast< QTableWidget*(*)>(_a[5]))); break;
@@ -122,14 +122,14 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (ThreadAchievements::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadAchievements::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadAchievements::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (ThreadAchievements::*)(int , int );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadAchievements::progress)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadAchievements::s_progress)) {
                 *result = 1;
                 return;
             }
@@ -178,13 +178,13 @@ int ThreadAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ThreadAchievements::finished()
+void ThreadAchievements::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 
 // SIGNAL 1
-void ThreadAchievements::progress(int _t1, int _t2)
+void ThreadAchievements::s_progress(int _t1, int _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

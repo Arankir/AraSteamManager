@@ -15,16 +15,16 @@ public:
     explicit ThreadGames(QObject *parent = nullptr);
 
 signals:
-    void finished();
-    void progress(int p, int row);
+    void s_finished();
+    void s_progress(int p, int row);
 
 public slots:
     int Fill();
     void Set(QTableWidget *TableWidgetGames, QVector<SGame> games);
 
 private:
-    QVector<SGame> games;
-    QTableWidget *TableWidgetGames;
+    QVector<SGame> _games;
+    QTableWidget *_TableWidgetGames;
 };
 
 #endif // THREADGAMES_H

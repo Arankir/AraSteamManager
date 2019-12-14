@@ -1,10 +1,44 @@
 #include "Sachievements.h"
 
-SAchievements::SAchievements(QString key, QString appid, QString id, QObject *parent) : QObject(parent){
-  Set(key, appid, id);
+SAchievements::SAchievements(QString AKey, QString AAppid, QString AID, QObject *parent) : QObject(parent){
+    _key=AKey;
+    _appid=AAppid;
+    _id=AID;
+    SAchievementsGlobal *Global = new SAchievementsGlobal(AKey,AAppid);
+    connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
+    SAchievementsPlayer *Player = new SAchievementsPlayer(AKey,AAppid,AID);
+    connect(Player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(AKey,AAppid);
+    connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-SAchievements::SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent){
-    Set(Global, Player, Percent);
+SAchievements::SAchievements(SAchievementsGlobal AGlobal, SAchievementsPlayer APlayer, SAchievementsPercentage APercent){
+    qDebug()<<"Set All Achievements data";
+    _percent=APercent;
+    _statusPercent="success";
+    _global=AGlobal;
+    _statusGlobal="success";
+    _player=APlayer;
+    _statusPlayer="success";
+    SAchievementsGlobal localGlobal = _global;
+    SAchievementsPlayer localPlayer = _player;
+    SAchievementsPercentage localPercent = _percent;
+    for(int i=0;i<localPercent.GetCount();i++){
+        for(int j=0;j<localPlayer.GetCount();j++){
+            if(localPercent.GetApiname(i)==localPlayer.GetApiname(j)){
+                SAchievement achievement;
+                achievement.SetPercent(localPercent.GetAchievement(i));
+                achievement.SetPlayer(localPlayer.GetAchievement(j));
+                achievement.SetGlobal(localGlobal.GetAchievement(j));
+                localPlayer.Delete(j);
+                localGlobal.Delete(j);
+                _finish.push_back(achievement);
+                break;
+            }
+        }
+    }
+    _count=_finish.size();
+    _statusFinish="success";
+    emit s_finished();
 }
 SAchievements::SAchievements(){
 
@@ -13,128 +47,128 @@ SAchievements::~SAchievements(){
 
 }
 
-void SAchievements::Set(QString key, QString appid, QString id){
-    this->key=key;
-    this->appid=appid;
-    this->id=id;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(key,appid);
-    connect(Global,SIGNAL(finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPlayer *Player = new SAchievementsPlayer(key,appid,id);
-    connect(Player,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(key,appid);
-    connect(Percent,SIGNAL(finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
+void SAchievements::Set(QString AKey, QString AAppid, QString AID){
+    _key=AKey;
+    _appid=AAppid;
+    _id=AID;
+    SAchievementsGlobal *Global = new SAchievementsGlobal(AKey,AAppid);
+    connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
+    SAchievementsPlayer *Player = new SAchievementsPlayer(AKey,AAppid,AID);
+    connect(Player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(AKey,AAppid);
+    connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-void SAchievements::DoSet(QString key, QString appid, QString id){
-    this->key=key;
-    this->appid=appid;
-    this->id=id;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(key,appid);
-    connect(Global,SIGNAL(finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(key,appid);
-    connect(Percent,SIGNAL(finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
+void SAchievements::DoSet(QString AKey, QString AAppid, QString AID){
+    _key=AKey;
+    _appid=AAppid;
+    _id=AID;
+    SAchievementsGlobal *Global = new SAchievementsGlobal(AKey,AAppid);
+    connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(AKey,AAppid);
+    connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-void SAchievements::Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent){
-    Set(Percent);
-    Set(Global);
-    Set(Player);
+void SAchievements::Set(SAchievementsGlobal AGlobal, SAchievementsPlayer APlayer, SAchievementsPercentage APercent){
+    Set(APercent);
+    Set(AGlobal);
+    Set(APlayer);
 }
-void SAchievements::Set(SAchievementsPlayer Player){
+void SAchievements::Set(SAchievementsPlayer APlayer){
     qDebug()<<"Player set";
-    this->Player=Player;
-    statusplayer="success";
-    if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
+    _player=APlayer;
+    _statusPlayer="success";
+    if(_statusGlobal=="success"&&_statusPlayer=="success"&&_statusPercent=="success"){
         SetFinish();
     }
 }
-void SAchievements::Set(SAchievementsGlobal Global){
+void SAchievements::Set(SAchievementsGlobal AGlobal){
     qDebug()<<"Global set";
-    this->Global=Global;
-    statusglobal="success";
-    if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
+    _global=AGlobal;
+    _statusGlobal="success";
+    if(_statusGlobal=="success"&&_statusPlayer=="success"&&_statusPercent=="success"){
         SetFinish();
     }
 }
-void SAchievements::Set(SAchievementsPercentage Percent){
+void SAchievements::Set(SAchievementsPercentage APercent){
     qDebug()<<"Percent set";
-    this->Percent=Percent;
-    statuspercent="success";
-    if(statusglobal=="success"&&statusplayer=="success"&&statuspercent=="success"){
+    _percent=APercent;
+    _statusPercent="success";
+    if(_statusGlobal=="success"&&_statusPlayer=="success"&&_statusPercent=="success"){
         SetFinish();
     }
 }
 void SAchievements::SetFinish(){
     Clear();
-    SAchievementsGlobal Glo = Global;
-    SAchievementsPlayer Pla = Player;
-    SAchievementsPercentage Per = Percent;
-    for(int i=0;i<Per.GetAchievementsCount();i++){
-        for(int j=0;j<Pla.GetAchievementsCount();j++){
-            if(Per.GetApiname(i)==Pla.GetApiname(j)){
+    SAchievementsGlobal localGlobal = _global;
+    SAchievementsPlayer localPlayer = _player;
+    SAchievementsPercentage localPercent = _percent;
+    for(int i=0;i<localPercent.GetCount();i++){
+        for(int j=0;j<localPlayer.GetCount();j++){
+            if(localPercent.GetApiname(i)==localPlayer.GetApiname(j)){
                 SAchievement achievement;
-                achievement.SetPercent(Per.GetAchievementInfo(i));
-                achievement.SetPlayer(Pla.GetAchievementInfo(j));
-                achievement.SetGlobal(Glo.GetAchievementInfo(j));
-                Pla.Delete(j);
-                Glo.Delete(j);
-                Finish.push_back(achievement);
+                achievement.SetPercent(localPercent.GetAchievement(i));
+                achievement.SetPlayer(localPlayer.GetAchievement(j));
+                achievement.SetGlobal(localGlobal.GetAchievement(j));
+                localPlayer.Delete(j);
+                localGlobal.Delete(j);
+                _finish.push_back(achievement);
                 break;
             }
         }
     }
-    count=Finish.size();
-    statusfinish="success";
-    emit finished();
+    _count=_finish.size();
+    _statusFinish="success";
+    emit s_finished();
 }
 
 void SAchievements::Update(){
-    Set(key,appid,id);
+    Set(_key,_appid,_id);
 }
 void SAchievements::Clear(){
-    Finish.clear();
-    count=0;
+    _finish.clear();
+    _count=0;
 }
 void SAchievements::Sort(){
-    for (int i=0; i < count-1; i++) {
-        for (int j=0; j < count-i-1; j++) {
-            if (Finish[j].GetPercent() < Finish[j+1].GetPercent()){
-                SAchievement temp = Finish[j];
-                Finish[j] = Finish[j+1];
-                Finish[j+1] = temp;
+    for (int i=0; i < _count-1; i++) {
+        for (int j=0; j < _count-i-1; j++) {
+            if (_finish[j].GetPercent() < _finish[j+1].GetPercent()){
+                SAchievement temp = _finish[j];
+                _finish[j] = _finish[j+1];
+                _finish[j+1] = temp;
             }
         }
     }
 }
 
-SAchievements::SAchievements(const SAchievements & achievement){
-    Finish=achievement.Finish;
-    Global=achievement.Global;
-    Player=achievement.Player;
-    Percent=achievement.Percent;
-    statusglobal=achievement.statusglobal;
-    statusplayer=achievement.statusplayer;
-    statuspercent=achievement.statuspercent;
-    statusfinish=achievement.statusfinish;
-    id=achievement.id;
-    appid=achievement.appid;
-    key=achievement.key;
-    gamename=achievement.gamename;
-    gameversion=achievement.gameversion;
-    count=achievement.count;
+SAchievements::SAchievements(const SAchievements & ANewAchievements){
+    _finish=ANewAchievements._finish;
+    _global=ANewAchievements._global;
+    _player=ANewAchievements._player;
+    _percent=ANewAchievements._percent;
+    _statusGlobal=ANewAchievements._statusGlobal;
+    _statusPlayer=ANewAchievements._statusPlayer;
+    _statusPercent=ANewAchievements._statusPercent;
+    _statusFinish=ANewAchievements._statusFinish;
+    _id=ANewAchievements._id;
+    _appid=ANewAchievements._appid;
+    _key=ANewAchievements._key;
+    _gameName=ANewAchievements._gameName;
+    _gameVersion=ANewAchievements._gameVersion;
+    _count=ANewAchievements._count;
 }
-SAchievements & SAchievements::operator=(const SAchievements & achievement){
-    Finish=achievement.Finish;
-    Global=achievement.Global;
-    Player=achievement.Player;
-    Percent=achievement.Percent;
-    statusglobal=achievement.statusglobal;
-    statusplayer=achievement.statusplayer;
-    statuspercent=achievement.statuspercent;
-    statusfinish=achievement.statusfinish;
-    id=achievement.id;
-    appid=achievement.appid;
-    key=achievement.key;
-    gamename=achievement.gamename;
-    gameversion=achievement.gameversion;
-    count=achievement.count;
+SAchievements & SAchievements::operator=(const SAchievements & ANewAchievements){
+    _finish=ANewAchievements._finish;
+    _global=ANewAchievements._global;
+    _player=ANewAchievements._player;
+    _percent=ANewAchievements._percent;
+    _statusGlobal=ANewAchievements._statusGlobal;
+    _statusPlayer=ANewAchievements._statusPlayer;
+    _statusPercent=ANewAchievements._statusPercent;
+    _statusFinish=ANewAchievements._statusFinish;
+    _id=ANewAchievements._id;
+    _appid=ANewAchievements._appid;
+    _key=ANewAchievements._key;
+    _gameName=ANewAchievements._gameName;
+    _gameVersion=ANewAchievements._gameVersion;
+    _count=ANewAchievements._count;
     return *this;
 }

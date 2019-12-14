@@ -26,12 +26,12 @@ public:
     QVector<FormAchievements*> achievementsforms;
 
 signals:
-    void return_to_profile();
+    void s_return_to_profile();
 
 public slots:
     void ProgressLoading(int,int);
     void OnFinish();
-    void returnfromachievements(int num);
+    void ReturnFromAchievements(int num);
 
 private slots:
     void InitComponents();
@@ -49,19 +49,19 @@ private slots:
 
 private:
     Ui::FormGames *ui;
-    QString id;
-    QString key;
-    int windowchildcount=0;
-    QVector<SGame> games;
-    SAchievementsPlayer *achievements;
-    Favorites favorites;
-    QStringList hide;
-    Settings setting;
-    QString theme="white";
+    QString _id;
+    QString _key;
+    int _windowChildCount=0;
+    QVector<SGame> _games;
+    SAchievementsPlayer *_achievements;
+    Favorites _favorites;
+    QStringList _hide;
+    Settings _setting;
+    QString _theme="white";
 
-    QVector<ImageRequest*> request;
-    int numrequests=0;
-    int numnow=0;
+    QVector<ImageRequest*> _request;
+    int _numRequests=0;
+    int _numNow=0;
 };
 
 #endif // FORMGAMES_H

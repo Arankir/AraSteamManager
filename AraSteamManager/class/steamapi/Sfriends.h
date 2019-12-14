@@ -23,12 +23,12 @@ public:
     ~SFriends();
     void Set(QString key, QString id, bool parallel);
     void Set(QJsonDocument DocFriends);
-    SFriend GetFriend(int index) {return SFriend(friends[index].toObject());}
-    QString GetSteamid(int index) {return friends[index].toObject().value("steamid").toString();}
-    QString GetRelationship(int index) {return friends[index].toObject().value("relationship").toString();}
-    QDateTime GetFriend_since(int index) {return QDateTime::fromSecsSinceEpoch(friends[index].toObject().value("friend_since").toInt(),Qt::LocalTime);}
-    QString GetStatus() {return status;}
-    int GetCount() {return friends.size();}
+    SFriend GetFriend(int index) {return SFriend(_friends[index].toObject());}
+    QString GetSteamid(int index) {return _friends[index].toObject().value("steamid").toString();}
+    QString GetRelationship(int index) {return _friends[index].toObject().value("relationship").toString();}
+    QDateTime GetFriend_since(int index) {return QDateTime::fromSecsSinceEpoch(_friends[index].toObject().value("friend_since").toInt(),Qt::LocalTime);}
+    QString GetStatus() {return _status;}
+    int GetCount() {return _friends.size();}
     SProfile GetProfiles();
     void Update(bool parallel);
     void Clear();
@@ -36,18 +36,18 @@ public:
     SFriends & operator=(const SFriends & friends);
 
 signals:
-    void finished(SFriends*);
-    void finished();
+    void s_finished(SFriends*);
+    void s_finished();
 
 public slots:
     void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager *manager;
-    QString status="none";
-    QString id;
-    QString key;
-    QJsonArray friends;
+    QNetworkAccessManager *_manager;
+    QString _status="none";
+    QString _id;
+    QString _key;
+    QJsonArray _friends;
 };
 
 #endif // SFRIENDS_H

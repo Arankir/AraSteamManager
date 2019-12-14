@@ -23,23 +23,23 @@ public:
     ~SLevels();
     void Set(QString key, QString id);
     void Set(QJsonDocument DocLevel);
-    int GetPlayer_level() {return player_level;}
-    QString GetStatus() {return status;}
+    int GetLevel() {return _player_level;}
+    QString GetStatus() {return _status;}
     void Update();
 
 signals:
-    void finished(SLevels*);
-    void finished();
+    void s_finished(SLevels*);
+    void s_finished();
 
 public slots:
     //void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager *manager;
-    QString steamid;//"76561198065018572"
-    int player_level=0;
-    QString status;
-    QString key;
+    QNetworkAccessManager *_manager;
+    QString _steamid;//"76561198065018572"
+    int _player_level=0;
+    QString _status;
+    QString _key;
 };
 
 #endif // SLEVELS_H

@@ -24,8 +24,8 @@ public:
     ~FormFriends();
 
 signals:
-    void return_to_profile();
-    void go_to_profile(QString id, QString type, bool UpdateBuffer);
+    void s_return_to_profile();
+    void s_go_to_profile(QString id, QString type, bool UpdateBuffer);
 
 public slots:
     void ProgressLoading(int p,int row);
@@ -52,20 +52,24 @@ private slots:
 
 private:
     Ui::FormFriends *ui;
-    QString id;
-    QString key;
-    int windowchildcount=0;
-    SFriends friends;
-    QVector<SProfile> profiless;
-    Settings setting;
-    QString theme="white";
-    Favorites favorites;
+    QString _id;
+    QString _key;
+    int _windowChildCount=0;
+    SFriends _friends;
+    QVector<SProfile> _profiles;
+    Settings _setting;
+    QString _theme="white";
+    Favorites _favorites;
+    Filter _filter;
 
-    QVector<ImageRequest*> request;
-    int numrequests=0;
-    int numnow=0;
+    QVector<ImageRequest*> _request;
+    int _numRequests=0;
+    int _numNow=0;
 
-    Filter filter;
+    const int c_filterName=0;
+    const int c_filterStatus=1;
+    const int c_filterPublic=2;
+    const int c_filterFavorites=3;
 };
 
 #endif // FORMFRIENDS_H

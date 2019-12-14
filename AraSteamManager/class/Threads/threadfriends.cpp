@@ -4,26 +4,26 @@ ThreadFriends::ThreadFriends(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadFriends::Set(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends){
-    this->TableWidgetFriends=TableWidgetFriends;
-    this->Profiles=Profiles;
-    this->Friends=Friends;
+void ThreadFriends::Set(QTableWidget *ATableWidgetFriends,QVector<SProfile> AProfiles,SFriends AFriends){
+    _TableWidgetFriends=ATableWidgetFriends;
+    _profiles=AProfiles;
+    _friends=AFriends;
 }
 
 int ThreadFriends::Fill(){
-    for (int i=0;i<Friends.GetCount();i++) {
+    for (int i=0;i<_friends.GetCount();i++) {
         int j;
         for (j=0;;j++) {
-            if(Profiles[i].GetSteamid()==Friends.GetSteamid(j)){
+            if(_profiles[i].GetSteamid()==_friends.GetSteamid(j)){
                 break;
             }
         }
         QTableWidgetItem *item4 = new QTableWidgetItem;
-        if(!Profiles[i].GetGameextrainfo().isEmpty()){
+        if(!_profiles[i].GetGameextrainfo().isEmpty()){
             item4->setText(tr("В игре"));
             item4->setTextColor(QColor("#89b753"));
         } else
-            switch (Profiles[i].GetPersonastate()){
+            switch (_profiles[i].GetPersonastate()){
             case 0:{
                     item4->setText(tr("Не в сети"));
                     item4->setTextColor(QColor("#4c4d4f"));
@@ -61,7 +61,7 @@ int ThreadFriends::Fill(){
             }
             }
         QTableWidgetItem *item5 = new QTableWidgetItem;
-        switch(Profiles[i].GetCommunityvisibilitystate()){
+        switch(_profiles[i].GetCommunityvisibilitystate()){
         case 1:{
             item5->setText(tr("Скрытый"));
             item5->setTextColor(Qt::red);
@@ -83,14 +83,14 @@ int ThreadFriends::Fill(){
             break;
         }
         }
-        TableWidgetFriends->setItem(i,1,new QTableWidgetItem(Profiles[i].GetPersonaname()));
-        TableWidgetFriends->setItem(i,2,new QTableWidgetItem(Friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
-        TableWidgetFriends->setItem(i,3,item4);
-        TableWidgetFriends->setItem(i,4,item5);
-        TableWidgetFriends->setItem(i,5,new QTableWidgetItem(Profiles[i].GetSteamid()));
-        emit progress(i,i);
+        _TableWidgetFriends->setItem(i,1,new QTableWidgetItem(_profiles[i].GetPersonaname()));
+        _TableWidgetFriends->setItem(i,2,new QTableWidgetItem(_friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
+        _TableWidgetFriends->setItem(i,3,item4);
+        _TableWidgetFriends->setItem(i,4,item5);
+        _TableWidgetFriends->setItem(i,5,new QTableWidgetItem(_profiles[i].GetSteamid()));
+        emit s_progress(i,i);
     }
-    emit finished();
+    emit s_finished();
     return 1;
 }
 

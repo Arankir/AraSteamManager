@@ -32,30 +32,30 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
-    FormGames *gamesform;
-    FormFriends *friendsform;
-    FormFavorites *favoritesform;
-    FormStatistics *statisticsform;
-    FormSettings *settingsform;
+    FormGames *_gamesForm;
+    FormFriends *_friendsForm;
+    FormFavorites *_favoritesForm;
+    FormStatistics *_statisticsForm;
+    FormSettings *_settingsForm;
 
 public slots:
     void ProgressLoading(int,int);
 
 private slots:
-    void returnfromgames();
-    void returnfromfriends();
-    void returnfromfavorites();
-    void returnfromstatistics();
-    void returnfromsettings();
-
     void keyPressEvent(QKeyEvent *event) override;
     void changeEvent(QEvent *event) override;
+    void ReturnFromForms();
+    void ReturnFromGames();
+    void ReturnFromFriends();
+    void ReturnFromFavorites();
+    void ReturnFromStatistics();
+    void ReturnFromSettings();
 
     void ShowGames();
     void ShowFriends();
-
     void GoToProfile(QString id, QString type, bool UpdateBuffer);
     void InitComponents();
+
     void on_ButtonFindProfile_clicked();
     void on_ButtonGames_clicked();
     void on_ButtonFriends_clicked();
@@ -74,21 +74,20 @@ private slots:
 
     void on_ButtonSettings_clicked();
 
-    void ReturnFromForms();
 
 private:
     Ui::MainWindow *ui;
-    QString key="3826BF60403D15613B4B0381DAB7A7BD";
-    int windowchildcount=0;
-    int windowchild=0;
-    SProfile profile;
-    SGames games;
-    SFriends friends;
-    Settings setting;
-    QString theme="white";
+    QString _key="3826BF60403D15613B4B0381DAB7A7BD";
+    int _windowChildCount=0;
+    int _windowChild=0;
+    SProfile _profile;
+    SGames _games;
+    SFriends _friends;
+    Settings _setting;
+    QString _theme="white";
 
-    QVector<QString> bufferProfiles;
-    int currentBufferProfile=0;
+    QVector<QString> _bufferProfiles;
+    int _currentBufferProfile=0;
 };
 
 #endif // MAINWINDOW_H

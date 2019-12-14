@@ -15,13 +15,13 @@ class FormCategoryValue : public QWidget
 public:
     explicit FormCategoryValue(int position, QWidget *parent = nullptr);
     ~FormCategoryValue();
-    void setVisibl(bool visible);
-    void setPosition(int pos);
-    void setTitle(QString);
-    void setFirstLast(int firstlast);
-    int getPosition() {return position;}
-    QString getTitle();
-    bool getVisible();
+    void SetVisible(bool visible);
+    void SetPosition(int pos);
+    void SetTitle(QString);
+    void SetFirstLast(int firstlast);
+    int GetPosition() {return _position;}
+    QString GetTitle();
+    bool GetVisible();
 
 
 private slots:
@@ -35,18 +35,18 @@ private slots:
     void on_LineEditTitle_textChanged(const QString &arg1);
 
 signals:
-    void valuechange(int pos, QString value);
-    void visiblechange(int pos, bool visible);
-    void positionchange(int pos, int posnew);
-    void selectchange(int pos, bool select);
-    void deleting(int pos);
+    void s_valuechange(int pos, QString value);
+    void s_visiblechange(int pos, bool visible);
+    void s_positionchange(int pos, int posnew);
+    void s_selectchange(int pos, bool select);
+    void s_deleting(int pos);
 
 private:
     Ui::FormCategoryValue *ui;
-    Settings Setting;
-    QString theme="white";
-    int position=0;
-    int isfirstlast=0;
+    Settings _setting;
+    QString _theme="white";
+    int _position=0;
+    int _isFirstLast=0;
 };
 
 #endif // FORMCATEGORYVALUE_H

@@ -13,8 +13,8 @@ public:
     explicit SAchievementPercentage(QJsonObject ObjAchievement, QObject *parent = nullptr);
     SAchievementPercentage();
     void Set(QJsonObject ObjAchievement);
-    QString GetApiname() {return apiname;}
-    double GetPercent() {return percent;}
+    QString GetApiname() {return _apiName;}
+    double GetPercent() {return _percent;}
     SAchievementPercentage(const SAchievementPercentage & achievement);
     SAchievementPercentage & operator=(const SAchievementPercentage & achievement);
 
@@ -23,8 +23,8 @@ signals:
 public slots:
 
 private:
-    QString apiname="";
-    double percent=0.0;
+    QString _apiName="";
+    double _percent=0.0;
 };
 
 #endif // SACHIEVEMENTPERCENTAGE_H

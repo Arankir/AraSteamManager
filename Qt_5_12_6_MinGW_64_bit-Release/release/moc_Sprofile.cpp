@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Sprofile.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.1)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.6)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -12,7 +12,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'Sprofile.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.12.1. It"
+#error "This file was generated using the moc from 5.12.6. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SProfile_t {
     QByteArrayData data[8];
-    char stringdata0[69];
+    char stringdata0[71];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,16 +32,16 @@ struct qt_meta_stringdata_SProfile_t {
 static const qt_meta_stringdata_SProfile_t qt_meta_stringdata_SProfile = {
     {
 QT_MOC_LITERAL(0, 0, 8), // "SProfile"
-QT_MOC_LITERAL(1, 9, 8), // "finished"
-QT_MOC_LITERAL(2, 18, 0), // ""
-QT_MOC_LITERAL(3, 19, 9), // "SProfile*"
-QT_MOC_LITERAL(4, 29, 7), // "LoadURL"
-QT_MOC_LITERAL(5, 37, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 52, 5), // "Reply"
-QT_MOC_LITERAL(7, 58, 10) // "LoadVanity"
+QT_MOC_LITERAL(1, 9, 10), // "s_finished"
+QT_MOC_LITERAL(2, 20, 0), // ""
+QT_MOC_LITERAL(3, 21, 9), // "SProfile*"
+QT_MOC_LITERAL(4, 31, 7), // "LoadURL"
+QT_MOC_LITERAL(5, 39, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(6, 54, 5), // "Reply"
+QT_MOC_LITERAL(7, 60, 10) // "LoadVanity"
 
     },
-    "SProfile\0finished\0\0SProfile*\0LoadURL\0"
+    "SProfile\0s_finished\0\0SProfile*\0LoadURL\0"
     "QNetworkReply*\0Reply\0LoadVanity"
 };
 #undef QT_MOC_LITERAL
@@ -84,8 +84,8 @@ void SProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         auto *_t = static_cast<SProfile *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
-        case 1: _t->finished(); break;
+        case 0: _t->s_finished((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
+        case 1: _t->s_finished(); break;
         case 2: _t->LoadURL((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         case 3: _t->LoadVanity((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
@@ -119,14 +119,14 @@ void SProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SProfile::*)(SProfile * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SProfile::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SProfile::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SProfile::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SProfile::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SProfile::s_finished)) {
                 *result = 1;
                 return;
             }
@@ -175,14 +175,14 @@ int SProfile::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SProfile::finished(SProfile * _t1)
+void SProfile::s_finished(SProfile * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void SProfile::finished()
+void SProfile::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

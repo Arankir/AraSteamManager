@@ -17,7 +17,7 @@ FormStatistics::FormStatistics(QString key, QString id, SGames games, QWidget *p
     colgames=0;
     for(int i=0;i<games.GetCount();i++){
         SAchievementsPlayer *pl = new SAchievementsPlayer(key,QString::number(games.GetAppid(i)),id);
-        connect(pl,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
+        connect(pl,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         averagePercent[i]=0.0;
         }
     for (int i=0;i<24;i++) {
@@ -31,13 +31,13 @@ FormStatistics::FormStatistics(QString key, QString id, SGames games, QWidget *p
 }
 
 void FormStatistics::OnResultAchievements(SAchievementsPlayer ach){
-    disconnect(&ach,SIGNAL(finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
-    if(ach.GetAchievementsCount()>0){
+    disconnect(&ach,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
+    if(ach.GetCount()>0){
         colgames++;
         int colr=0;
         int colnr=0;
-        summcolumn+=ach.GetAchievementsCount();
-        for (int i=0;i<ach.GetAchievementsCount();i++) {
+        summcolumn+=ach.GetCount();
+        for (int i=0;i<ach.GetCount();i++) {
             //помещаем данные в массивы
             if(ach.GetAchieved(i)==1){
                 QDateTime dateTime = ach.GetUnlocktime(i);

@@ -14,17 +14,17 @@ public:
     explicit ThreadFriends(QObject *parent = nullptr);
 
 signals:
-    void finished();
-    void progress(int p, int row);
+    void s_finished();
+    void s_progress(int p, int row);
 
 public slots:
     int Fill();
     void Set(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends);
 
 private:
-    SFriends Friends;
-    QVector<SProfile> Profiles;
-    QTableWidget *TableWidgetFriends;
+    SFriends _friends;
+    QVector<SProfile> _profiles;
+    QTableWidget *_TableWidgetFriends;
 };
 
 #endif // THREADFRIENDS_H

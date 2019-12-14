@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SAchievements_t {
     QByteArrayData data[11];
-    char stringdata0[129];
+    char stringdata0[131];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,19 +32,19 @@ struct qt_meta_stringdata_SAchievements_t {
 static const qt_meta_stringdata_SAchievements_t qt_meta_stringdata_SAchievements = {
     {
 QT_MOC_LITERAL(0, 0, 13), // "SAchievements"
-QT_MOC_LITERAL(1, 14, 8), // "finished"
-QT_MOC_LITERAL(2, 23, 0), // ""
-QT_MOC_LITERAL(3, 24, 14), // "SAchievements*"
-QT_MOC_LITERAL(4, 39, 3), // "Set"
-QT_MOC_LITERAL(5, 43, 19), // "SAchievementsPlayer"
-QT_MOC_LITERAL(6, 63, 6), // "Player"
-QT_MOC_LITERAL(7, 70, 19), // "SAchievementsGlobal"
-QT_MOC_LITERAL(8, 90, 6), // "Global"
-QT_MOC_LITERAL(9, 97, 23), // "SAchievementsPercentage"
-QT_MOC_LITERAL(10, 121, 7) // "Percent"
+QT_MOC_LITERAL(1, 14, 10), // "s_finished"
+QT_MOC_LITERAL(2, 25, 0), // ""
+QT_MOC_LITERAL(3, 26, 14), // "SAchievements*"
+QT_MOC_LITERAL(4, 41, 3), // "Set"
+QT_MOC_LITERAL(5, 45, 19), // "SAchievementsPlayer"
+QT_MOC_LITERAL(6, 65, 6), // "Player"
+QT_MOC_LITERAL(7, 72, 19), // "SAchievementsGlobal"
+QT_MOC_LITERAL(8, 92, 6), // "Global"
+QT_MOC_LITERAL(9, 99, 23), // "SAchievementsPercentage"
+QT_MOC_LITERAL(10, 123, 7) // "Percent"
 
     },
-    "SAchievements\0finished\0\0SAchievements*\0"
+    "SAchievements\0s_finished\0\0SAchievements*\0"
     "Set\0SAchievementsPlayer\0Player\0"
     "SAchievementsGlobal\0Global\0"
     "SAchievementsPercentage\0Percent"
@@ -91,8 +91,8 @@ void SAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<SAchievements *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->finished((*reinterpret_cast< SAchievements*(*)>(_a[1]))); break;
-        case 1: _t->finished(); break;
+        case 0: _t->s_finished((*reinterpret_cast< SAchievements*(*)>(_a[1]))); break;
+        case 1: _t->s_finished(); break;
         case 2: _t->Set((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
         case 3: _t->Set((*reinterpret_cast< SAchievementsGlobal(*)>(_a[1]))); break;
         case 4: _t->Set((*reinterpret_cast< SAchievementsPercentage(*)>(_a[1]))); break;
@@ -113,14 +113,14 @@ void SAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (SAchievements::*)(SAchievements * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievements::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievements::s_finished)) {
                 *result = 0;
                 return;
             }
         }
         {
             using _t = void (SAchievements::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievements::finished)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SAchievements::s_finished)) {
                 *result = 1;
                 return;
             }
@@ -169,14 +169,14 @@ int SAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void SAchievements::finished(SAchievements * _t1)
+void SAchievements::s_finished(SAchievements * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void SAchievements::finished()
+void SAchievements::s_finished()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

@@ -1,11 +1,9 @@
 #include "formfavorites.h"
 #include "ui_formfavorites.h"
 
-FormFavorites::FormFavorites(QString key, QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites){
+FormFavorites::FormFavorites(QString AKey, QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites){
     ui->setupUi(this);
-    this->key=key;
-    numrequests=0;
-    numnow=0;
+    _key=AKey;
     InitComponents();
 }
 
@@ -14,12 +12,12 @@ FormFavorites::~FormFavorites(){
 }
 
 void FormFavorites::InitComponents(){
-    games.SetPath("Files/Favorites/Games.json","Games");
-    friends.SetPath("Files/Favorites/Friends.json","Friends");
-    achievements.SetPath("Files/Favorites/Achievements.json","Achievements");
-    QJsonArray gamesJ=games.GetValues();
-    QJsonArray friendsJ=friends.GetValues();
-    QJsonArray achievementsJ=achievements.GetValues();
+    _games.SetPath("Files/Favorites/Games.json","Games");
+    _friends.SetPath("Files/Favorites/Friends.json","Friends");
+    _achievements.SetPath("Files/Favorites/Achievements.json","Achievements");
+    QJsonArray gamesJ=_games.GetValues();
+    QJsonArray friendsJ=_friends.GetValues();
+    QJsonArray achievementsJ=_achievements.GetValues();
     //сделать отдельным потоком
     for (int i=0;i<gamesJ.size();i++) {
         //
@@ -39,37 +37,37 @@ void FormFavorites::InitComponents(){
     ui->TableWidgetFriends->setColumnWidth(0,33);
     ui->TableWidgetFriends->setRowCount(friendsJ.size());
     foreach (QJsonValue frien, friendsJ) {
-        SProfile *Profiles = new SProfile(key,frien.toObject().value("id").toString(),true,"url");
-        connect(Profiles,SIGNAL(finished(SProfile*)),this,SLOT(FriendLoad(SProfile*)));
+        SProfile *Profiles = new SProfile(_key,frien.toObject().value("id").toString(),true,"url");
+        connect(Profiles,SIGNAL(s_finished(SProfile*)),this,SLOT(FriendLoad(SProfile*)));
     }
     for (int i=0;i<achievementsJ.size();i++) {
         //
     }
 }
 
-void FormFavorites::FriendLoad(SProfile *pro){
-    QString path = "images/profiles/"+pro->GetAvatar().mid(72,20)+".jpg";
+void FormFavorites::FriendLoad(SProfile *AProfile){
+    QString path = "images/profiles/"+AProfile->GetAvatar().mid(72,20)+".jpg";
     if(!QFile::exists(path)){
-        if(numrequests<500){
-            ImageRequest *image = new ImageRequest(pro->GetAvatar(),numrequests,path,true);
-            connect(image,&ImageRequest::onReady,this,&FormFavorites::OnResultImage);
-            request.append(image);
+        if(_numRequests<500){
+            ImageRequest *image = new ImageRequest(AProfile->GetAvatar(),_numRequests,path,true);
+            connect(image,&ImageRequest::s_finished,this,&FormFavorites::OnResultImage);
+            _request.append(image);
             //numrequests++;
-            numnow++;
+            _numNow++;
             }
         } else {
             QPixmap pixmap;
             pixmap.load(path);
             QLabel *label = new QLabel;
             label->setPixmap(pixmap);
-            ui->TableWidgetFriends->setCellWidget(numrequests,0,label);
+            ui->TableWidgetFriends->setCellWidget(_numRequests,0,label);
         }
     QTableWidgetItem *item4 = new QTableWidgetItem;
-    if(!pro->GetGameextrainfo().isEmpty()){
+    if(!AProfile->GetGameextrainfo().isEmpty()){
         item4->setText(tr("В игре"));
         item4->setTextColor(QColor("#89b753"));
     } else
-        switch (pro->GetPersonastate()){
+        switch (AProfile->GetPersonastate()){
         case 0:{
                 item4->setText(tr("Не в сети"));
                 item4->setTextColor(QColor("#4c4d4f"));
@@ -107,7 +105,7 @@ void FormFavorites::FriendLoad(SProfile *pro){
         }
         }
     QTableWidgetItem *item5 = new QTableWidgetItem;
-    switch(pro->GetCommunityvisibilitystate()){
+    switch(AProfile->GetCommunityvisibilitystate()){
     case 1:{
         item5->setText(tr("Скрытый"));
         item5->setTextColor(Qt::red);
@@ -129,21 +127,21 @@ void FormFavorites::FriendLoad(SProfile *pro){
         break;
     }
     }
-    ui->TableWidgetFriends->setItem(numrequests,1,new QTableWidgetItem(pro->GetPersonaname()));
-    ui->TableWidgetFriends->setItem(numrequests,2,item4);
-    ui->TableWidgetFriends->setItem(numrequests,3,item5);
-    ui->TableWidgetFriends->setItem(numrequests,4,new QTableWidgetItem(pro->GetSteamid()));
-    numrequests++;
+    ui->TableWidgetFriends->setItem(_numRequests,1,new QTableWidgetItem(AProfile->GetPersonaname()));
+    ui->TableWidgetFriends->setItem(_numRequests,2,item4);
+    ui->TableWidgetFriends->setItem(_numRequests,3,item5);
+    ui->TableWidgetFriends->setItem(_numRequests,4,new QTableWidgetItem(AProfile->GetSteamid()));
+    _numRequests++;
 }
 
-void FormFavorites::OnResultImage(ImageRequest* imgr){
+void FormFavorites::OnResultImage(ImageRequest* AImage){
     QPixmap pixmap;
-    pixmap.loadFromData(imgr->GetAnswer());
+    pixmap.loadFromData(AImage->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetFriends->setCellWidget(imgr->GetRow(),0,label);
-    disconnect(imgr,&ImageRequest::onReady,this,&FormFavorites::OnResultImage);
-    imgr->deleteLater();
+    ui->TableWidgetFriends->setCellWidget(AImage->GetRow(),0,label);
+    disconnect(AImage,&ImageRequest::s_finished,this,&FormFavorites::OnResultImage);
+    AImage->deleteLater();
 }
 
 void FormFavorites::on_pushButton_clicked(){

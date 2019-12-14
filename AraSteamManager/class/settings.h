@@ -18,13 +18,12 @@ public:
     bool SetSaveimage(int SaveImage);
     bool SetVisibleHiddenGames(int VisibleHiddenGames);
     void SetDefault();
-    QString GetMyProfile() {return myProfile;}
-    int GetLanguage() {return language;}
-    int GetTheme() {return theme;}
-    int GetSaveimages() {return SaveImages;}
-    QString GetStatus() {return status;}
-    int GetVisibleHiddenGames() {return visibleHiddenGames;}
-    QStringList GetWords(QString form);
+    QString GetMyProfile() {return _myProfile;}
+    int GetLanguage() {return _language;}
+    int GetTheme() {return _theme;}
+    int GetSaveimages() {return _saveImages;}
+    QString GetStatus() {return _status;}
+    int GetVisibleHiddenGames() {return _visibleHiddenGames;}
     bool CreateFile(QString path);
 
 signals:
@@ -32,12 +31,12 @@ signals:
 public slots:
 
 private:
-    QString myProfile="";
-    int language=1;
-    int theme=1;
-    int SaveImages=0;
-    int visibleHiddenGames=0;
-    QString status="none";
+    QString _myProfile="";
+    int _language=1;
+    int _theme=1;
+    int _saveImages=0;
+    int _visibleHiddenGames=0;
+    QString _status="none";
 };
 
 #endif // SETTINGS_H

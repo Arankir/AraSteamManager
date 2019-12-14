@@ -23,28 +23,28 @@ public:
     ~SBans();
     void Set(QString key, QString id, bool parallel);
     void Set(QJsonDocument DocBans);
-    QString GetSteamid(int index=0) {return bans[index].toObject().value("steamid").toString();}
-    bool GetCommunityBanned(int index=0) {return bans[index].toObject().value("CommunityBanned").toBool();}
-    bool GetVACBanned(int index=0) {return bans[index].toObject().value("VACBanned").toBool();}
-    int GetNumberOfVACBans(int index=0) {return bans[index].toObject().value("NumberOfVACBans").toInt();}
-    int GetDaysSinceLastBan(int index=0) {return bans[index].toObject().value("DaysSinceLastBan").toInt();}
-    int GetNumberOfGameBans(int index=0) {return bans[index].toObject().value("NumberOfGameBans").toInt();}
-    QString GetEconomyBan(int index=0) {return bans[index].toObject().value("EconomyBan").toString();}
-    QString GetStatus() {return status;}
+    QString GetSteamid(int index=0) {return _bans[index].toObject().value("steamid").toString();}
+    bool GetCommunityBanned(int index=0) {return _bans[index].toObject().value("CommunityBanned").toBool();}
+    bool GetVACBanned(int index=0) {return _bans[index].toObject().value("VACBanned").toBool();}
+    int GetNumberOfVACBans(int index=0) {return _bans[index].toObject().value("NumberOfVACBans").toInt();}
+    int GetDaysSinceLastBan(int index=0) {return _bans[index].toObject().value("DaysSinceLastBan").toInt();}
+    int GetNumberOfGameBans(int index=0) {return _bans[index].toObject().value("NumberOfGameBans").toInt();}
+    QString GetEconomyBan(int index=0) {return _bans[index].toObject().value("EconomyBan").toString();}
+    QString GetStatus() {return _status;}
     void Update(bool parallel);
 
 signals:
-    void finished(SBans*);
-    void finished();
+    void s_finished(SBans*);
+    void s_finished();
 
 public slots:
     void Load(QNetworkReply *Reply);
 
 private:
-    QNetworkAccessManager *manager;
-    QJsonArray bans;
-    QString status;
-    QString key;
-    QString id;
+    QNetworkAccessManager *_manager;
+    QJsonArray _bans;
+    QString _status;
+    QString _key;
+    QString _id;
 };
 #endif // SBANS_H
