@@ -24,6 +24,7 @@ public:
     int GetSaveimages() {return _saveImages;}
     QString GetStatus() {return _status;}
     int GetVisibleHiddenGames() {return _visibleHiddenGames;}
+    QString GetKey() {return _key;}
     bool CreateFile(QString path);
 
 signals:
@@ -37,6 +38,7 @@ private:
     int _saveImages=0;
     int _visibleHiddenGames=0;
     QString _status="none";
+    QString _key="3826BF60403D15613B4B0381DAB7A7BD";
 };
 
 #endif // SETTINGS_H

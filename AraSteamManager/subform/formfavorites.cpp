@@ -1,9 +1,8 @@
 #include "formfavorites.h"
 #include "ui_formfavorites.h"
 
-FormFavorites::FormFavorites(QString AKey, QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites){
+FormFavorites::FormFavorites(QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites){
     ui->setupUi(this);
-    _key=AKey;
     InitComponents();
 }
 
@@ -37,7 +36,7 @@ void FormFavorites::InitComponents(){
     ui->TableWidgetFriends->setColumnWidth(0,33);
     ui->TableWidgetFriends->setRowCount(friendsJ.size());
     foreach (QJsonValue frien, friendsJ) {
-        SProfile *Profiles = new SProfile(_key,frien.toObject().value("id").toString(),true,"url");
+        SProfile *Profiles = new SProfile(frien.toObject().value("id").toString(),true,"url");
         connect(Profiles,SIGNAL(s_finished(SProfile*)),this,SLOT(FriendLoad(SProfile*)));
     }
     for (int i=0;i<achievementsJ.size();i++) {

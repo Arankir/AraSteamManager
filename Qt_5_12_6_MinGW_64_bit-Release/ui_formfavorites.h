@@ -45,7 +45,6 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QComboBox *ComboBoxFriendsStatus;
     QCheckBox *CheckBoxFriendsOpenProfile;
-    QCheckBox *CheckBoxFriendsFavorites;
     QSpacerItem *horizontalSpacer_2;
     QTableWidget *TableWidgetFriends;
     QWidget *tab_3;
@@ -134,11 +133,6 @@ public:
 
         horizontalLayout_3->addWidget(CheckBoxFriendsOpenProfile);
 
-        CheckBoxFriendsFavorites = new QCheckBox(tab_2);
-        CheckBoxFriendsFavorites->setObjectName(QString::fromUtf8("CheckBoxFriendsFavorites"));
-
-        horizontalLayout_3->addWidget(CheckBoxFriendsFavorites);
-
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_2);
@@ -202,7 +196,7 @@ public:
 
         retranslateUi(FormFavorites);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(FormFavorites);
@@ -216,7 +210,6 @@ public:
         LineEditFriendsFind->setPlaceholderText(QApplication::translate("FormFavorites", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
         ButtonFriendsFind->setText(QApplication::translate("FormFavorites", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
         CheckBoxFriendsOpenProfile->setText(QApplication::translate("FormFavorites", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        CheckBoxFriendsFavorites->setText(QApplication::translate("FormFavorites", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("FormFavorites", "Friends", nullptr));
         pushButton->setText(QApplication::translate("FormFavorites", "\320\226\320\274\320\270", nullptr));
         lineEdit->setText(QApplication::translate("FormFavorites", "0,0,0", nullptr));

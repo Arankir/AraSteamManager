@@ -1,15 +1,13 @@
 #include "filter.h"
 
 Filter::Filter(int ARow, int ACol, QObject *parent) : QObject(parent){
-    if(ARow>0)
-        _row=ARow;
-    if(ACol>0)
-        _col=ACol;
+    _row=ARow>0?ARow:0;
+    _col=ACol>0?ACol:0;
     if(_row>0&&_col>0){
         for(int i=0;i<_row;i++){
-            QVector<bool> subFilter;
+            QVector<bool> subFilter(_col);
             for(int j=0;j<_col;j++){
-                subFilter.append(true);
+                subFilter[j]=true;
             }
             _filter.append(subFilter);
         }

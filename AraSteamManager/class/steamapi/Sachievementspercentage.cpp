@@ -1,11 +1,10 @@
 #include "Sachievementspercentage.h"
 
-SAchievementsPercentage::SAchievementsPercentage(QString AKey, QString AAppid, QObject *parent) : QObject(parent){
+SAchievementsPercentage::SAchievementsPercentage(QString AAppid, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    _key=AKey;
     _appid=AAppid;
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+AKey+"&gameid="+AAppid));
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+AAppid));
 }
 SAchievementsPercentage::SAchievementsPercentage(QJsonDocument AAchievements){
     _manager = new QNetworkAccessManager();
@@ -26,11 +25,10 @@ SAchievementsPercentage::~SAchievementsPercentage(){
     delete _manager;
 }
 
-void SAchievementsPercentage::Set(QString AKey, QString AAppid){
+void SAchievementsPercentage::Set(QString AAppid){
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    _key=AKey;
     _appid=AAppid;
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+AKey+"&gameid="+AAppid));
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+AAppid));
 }
 void SAchievementsPercentage::Set(QJsonDocument AAchievements){
     Clear();
@@ -56,7 +54,7 @@ void SAchievementsPercentage::Load(QNetworkReply *AReply){
 }
 
 void SAchievementsPercentage::Update(){
-    Set(_key,_appid);
+    Set(_appid);
 }
 void SAchievementsPercentage::Clear(){
     _achievements.clear();
@@ -66,7 +64,6 @@ void SAchievementsPercentage::Clear(){
 SAchievementsPercentage::SAchievementsPercentage( const SAchievementsPercentage & ANewAchievements){
     _achievements=ANewAchievements._achievements;
     _appid=ANewAchievements._appid;
-    _key=ANewAchievements._key;
     _count=ANewAchievements._count;
     _status=ANewAchievements._status;
     _manager = new QNetworkAccessManager;
@@ -75,7 +72,6 @@ SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievements
     delete _manager;
     _achievements=ANewAchievements._achievements;
     _appid=ANewAchievements._appid;
-    _key=ANewAchievements._key;
     _count=ANewAchievements._count;
     _status=ANewAchievements._status;
     _manager = new QNetworkAccessManager;

@@ -1,11 +1,10 @@
 #include "Sachievementsglobal.h"
 
-SAchievementsGlobal::SAchievementsGlobal(QString AKey, QString AAppid, QObject *parent) : QObject(parent){
+SAchievementsGlobal::SAchievementsGlobal(QString AAppid, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    _key=AKey;
     _appid=AAppid;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+AKey+"&appid="+AAppid+"&l="+tr("russian")));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+AAppid+"&l="+tr("russian")));
 }
 SAchievementsGlobal::SAchievementsGlobal(QJsonDocument AAchievements){
     _manager = new QNetworkAccessManager();
@@ -28,11 +27,10 @@ SAchievementsGlobal::~SAchievementsGlobal(){
     delete _manager;
 }
 
-void SAchievementsGlobal::Set(QString AKey, QString AAppid){
+void SAchievementsGlobal::Set(QString AAppid){
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    _key=AKey;
     _appid=AAppid;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+AKey+"&appid="+AAppid+"&l="+tr("russian")));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+AAppid+"&l="+tr("russian")));
 }
 void SAchievementsGlobal::Set(QJsonDocument AAchievements){
     Clear();
@@ -60,7 +58,7 @@ void SAchievementsGlobal::Load(QNetworkReply *AReply){
 }
 
 void SAchievementsGlobal::Update(){
-    Set(_key,_appid);
+    Set(_appid);
 }
 void SAchievementsGlobal::Clear(){
     _achievements.clear();
@@ -70,7 +68,6 @@ void SAchievementsGlobal::Clear(){
 SAchievementsGlobal::SAchievementsGlobal( const SAchievementsGlobal & ANewAchievements){
     _achievements=ANewAchievements._achievements;
     _appid=ANewAchievements._appid;
-    _key=ANewAchievements._key;
     _count=ANewAchievements._count;
     _gameName=ANewAchievements._gameName;
     _gameVersion=ANewAchievements._gameVersion;
@@ -81,7 +78,6 @@ SAchievementsGlobal & SAchievementsGlobal::operator=(const SAchievementsGlobal &
     delete _manager;
     _achievements=ANewAchievements._achievements;
     _appid=ANewAchievements._appid;
-    _key=ANewAchievements._key;
     _count=ANewAchievements._count;
     _gameName=ANewAchievements._gameName;
     _gameVersion=ANewAchievements._gameVersion;

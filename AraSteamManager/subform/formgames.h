@@ -21,7 +21,7 @@ class FormGames : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormGames(QString id, QString key, SGames Games, QWidget *parent = nullptr);
+    explicit FormGames(QString id, SGames Games, QWidget *parent = nullptr);
     ~FormGames();
     QVector<FormAchievements*> achievementsforms;
 
@@ -50,7 +50,6 @@ private slots:
 private:
     Ui::FormGames *ui;
     QString _id;
-    QString _key;
     int _windowChildCount=0;
     QVector<SGame> _games;
     SAchievementsPlayer *_achievements;

@@ -11,17 +11,18 @@
 #include <QObject>
 #include <QEventLoop>
 #include <class/steamapi/Sachievementplayer.h>
+#include <class/settings.h>
 #include <QObject>
 
 class SAchievementsPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsPlayer(QString key, QString appid, QString id, QObject *parent = nullptr);
+    explicit SAchievementsPlayer(QString appid, QString id, QObject *parent = nullptr);
     SAchievementsPlayer(QJsonDocument DocAchievements);
     SAchievementsPlayer();
     ~SAchievementsPlayer();
-    void Set(QString key, QString appid, QString id);
+    void Set(QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
     void SetIndex(int ANewIndex) {_index=ANewIndex;}
     void Delete(int AIndex) { _achievements.remove(AIndex); _count--;}
@@ -48,11 +49,11 @@ public slots:
 
 private:
     QNetworkAccessManager *_manager;
+    Settings _setting;
     QVector<SAchievementPlayer> _achievements;
     QString _status="none";
     QString _id="";
     QString _appid="";
-    QString _key="";
     QString _gameName="";
     int _count=0;
     int _index=0;

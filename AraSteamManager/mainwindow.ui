@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
+    <width>880</width>
     <height>639</height>
    </rect>
   </property>
@@ -141,7 +141,7 @@ color: rgb(26, 26, 26);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>710</width>
+         <width>860</width>
          <height>150</height>
         </rect>
        </property>
@@ -442,7 +442,7 @@ color: rgb(26, 26, 26);</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>708</width>
+           <width>858</width>
            <height>285</height>
           </rect>
          </property>
@@ -458,7 +458,7 @@ color: rgb(26, 26, 26);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>730</width>
+     <width>880</width>
      <height>20</height>
     </rect>
    </property>

@@ -5,16 +5,17 @@
 #include <QTcpSocket>
 #include <QObject>
 #include <class/steamapi/Sgame.h>
+#include <class/settings.h>
 
 class SGames : public QObject
 {
     Q_OBJECT
 public:
-    explicit SGames(QString key, QString id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
+    explicit SGames(QString id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
     SGames(QJsonDocument DocGames);
     SGames();
     ~SGames();
-    void Set(QString key, QString id, bool free_games, bool game_info, bool parallel);
+    void Set(QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
     void SetIndex(int AIndex) {_index=AIndex;}
     SGame GetGame(int index) {return SGame(_games[index].toObject());}
@@ -43,10 +44,10 @@ public slots:
 
 private:
     QNetworkAccessManager *_manager;
+    Settings _setting;
     QJsonArray _games;
     QString _status="none";
     QString _id;
-    QString _key;
     int _index=-1;
     bool _free_games=false;
     bool _game_info=false;

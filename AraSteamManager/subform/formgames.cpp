@@ -1,10 +1,9 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString AID, QString AKey, SGames AGames, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString AID, SGames AGames, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     _id=AID;
-    _key=AKey;
     SGames game=AGames;
     for (int i=0;i<game.GetCount();_games.push_back(game.GetGame(i++)));
     switch(_setting.GetTheme()){
@@ -124,7 +123,7 @@ void FormGames::OnFinish(){
             label->setPixmap(pixmap);
             ui->TableWidgetGames->setCellWidget(i,0,label);
             }
-        SAchievementsPlayer *pl = new SAchievementsPlayer(_key,QString::number(_games[i].GetAppid()),_id);
+        SAchievementsPlayer *pl = new SAchievementsPlayer(QString::number(_games[i].GetAppid()),_id);
         pl->SetIndex(i);
         connect(pl,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         for (int j=0;j<hideList.size();j++) {
@@ -228,14 +227,14 @@ void FormGames::AchievementsClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());
     int index=btn->objectName().mid(18,6).toInt();
     QEventLoop loop;
-    SAchievementsPercentage Percentage(_key,QString::number(_games[index].GetAppid()));
+    SAchievementsPercentage Percentage(QString::number(_games[index].GetAppid()));
     connect(&Percentage, SIGNAL(s_finished()), &loop, SLOT(quit()));
     loop.exec();
     disconnect(&Percentage, SIGNAL(s_finished()), &loop, SLOT(quit()));
     if(Percentage.GetCount()==0){
         QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
     } else {
-        FormAchievements *fa = new FormAchievements(_key,_achievements[index],_id,_games[index],_windowChildCount++);
+        FormAchievements *fa = new FormAchievements(_achievements[index],_id,_games[index],_windowChildCount++);
         achievementsforms.append(fa);
         connect(fa,&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
         fa->show();

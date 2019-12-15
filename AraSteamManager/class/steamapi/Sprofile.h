@@ -11,19 +11,20 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
+#include <class/settings.h>
 #include <QObject>
 
 class SProfile : public QObject
 {
     Q_OBJECT
 public:
-    explicit SProfile(QString key, QString id, bool parallel, QString type, QObject *parent = nullptr);
+    explicit SProfile(QString id, bool parallel, QString type, QObject *parent = nullptr);
     SProfile(QJsonDocument DocSummaries);
     SProfile(QJsonArray ArrSummaries);
     SProfile(QJsonObject ObjSummaries);
     SProfile();
     ~SProfile();
-    void Set(QString key, QString id, bool parallel, QString type);
+    void Set(QString id, bool parallel, QString type);
     void Set(QJsonDocument DocSummaries);
     void Set(QJsonArray ArrSummaries);
     void Set(QJsonObject ObjSummaries);
@@ -65,9 +66,9 @@ public slots:
 
 private:
     QNetworkAccessManager *_manager;
+    Settings _setting;
     QJsonArray _profile;
     QString _status="null";
-    QString _key="";
     QString _id="";
 };
 

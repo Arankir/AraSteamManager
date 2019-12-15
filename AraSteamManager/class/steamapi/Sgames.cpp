@@ -1,10 +1,9 @@
 #include "Sgames.h"
 
-SGames::SGames(QString AKey, QString AID, bool AFree_games, bool AGame_info, bool AParallel, QObject *parent) : QObject(parent){
+SGames::SGames(QString AID, bool AFree_games, bool AGame_info, bool AParallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
-    _key=AKey;
     _id=AID;
-    QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+AKey;
+    QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+_setting.GetKey();
     if(AFree_games)
         request+="&include_played_free_games=1";
     if(AGame_info)
@@ -42,10 +41,9 @@ SGames::~SGames(){
     delete _manager;
 }
 
-void SGames::Set(QString AKey, QString AID, bool AFree_games, bool AGame_info, bool AParallel){
-    _key=AKey;
+void SGames::Set(QString AID, bool AFree_games, bool AGame_info, bool AParallel){
     _id=AID;
-    QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+AKey;
+    QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+_setting.GetKey();
     if(AFree_games)
         request+="&include_played_free_games=1";
     if(AGame_info)
@@ -87,7 +85,7 @@ void SGames::Load(QNetworkReply *Reply){
 }
 
 void SGames::Update(bool parallel){
-    Set(_key,_id,_free_games,_game_info, parallel);
+    Set(_id,_free_games,_game_info, parallel);
 }
 void SGames::Clear(){
     _games=QJsonArray();
@@ -97,7 +95,6 @@ SGames::SGames( const SGames & ANewGames){
     _games=ANewGames._games;
     _status=ANewGames._status;
     _id=ANewGames._id;
-    _key=ANewGames._key;
     _free_games=ANewGames._free_games;
     _game_info=ANewGames._game_info;
     _manager = new QNetworkAccessManager;
@@ -107,7 +104,6 @@ SGames & SGames::operator=(const SGames & ANewGames){
     _games=ANewGames._games;
     _status=ANewGames._status;
     _id=ANewGames._id;
-    _key=ANewGames._key;
     _free_games=ANewGames._free_games;
     _game_info=ANewGames._game_info;
     _manager = new QNetworkAccessManager;

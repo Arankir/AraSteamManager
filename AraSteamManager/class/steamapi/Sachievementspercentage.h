@@ -11,17 +11,18 @@
 #include <QObject>
 #include <QEventLoop>
 #include <class/steamapi/Sachievementpercentage.h>
+#include <class/settings.h>
 #include <QObject>
 
 class SAchievementsPercentage : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsPercentage(QString key, QString appid, QObject *parent = nullptr);
+    explicit SAchievementsPercentage(QString appid, QObject *parent = nullptr);
     SAchievementsPercentage(QJsonDocument DocAchievements);
     SAchievementsPercentage();
     ~SAchievementsPercentage();
-    void Set(QString key, QString appid);
+    void Set(QString appid);
     void Set(QJsonDocument DocAchievements);
     void Delete(int index) { _achievements.remove(index); _count--;}
     SAchievementPercentage GetAchievement(int index) {return _achievements[index];}
@@ -44,10 +45,10 @@ public slots:
 
 private:
     QNetworkAccessManager *_manager;
+    Settings _setting;
     QVector<SAchievementPercentage> _achievements;
     QString _status="none";
     QString _appid="";
-    QString _key="";
     int _count=0;
 };
 

@@ -1,14 +1,13 @@
 #include "Sachievements.h"
 
-SAchievements::SAchievements(QString AKey, QString AAppid, QString AID, QObject *parent) : QObject(parent){
-    _key=AKey;
+SAchievements::SAchievements(QString AAppid, QString AID, QObject *parent) : QObject(parent){
     _appid=AAppid;
     _id=AID;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(AKey,AAppid);
+    SAchievementsGlobal *Global = new SAchievementsGlobal(AAppid);
     connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPlayer *Player = new SAchievementsPlayer(AKey,AAppid,AID);
+    SAchievementsPlayer *Player = new SAchievementsPlayer(AAppid,AID);
     connect(Player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(AKey,AAppid);
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(AAppid);
     connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
 SAchievements::SAchievements(SAchievementsGlobal AGlobal, SAchievementsPlayer APlayer, SAchievementsPercentage APercent){
@@ -47,24 +46,22 @@ SAchievements::~SAchievements(){
 
 }
 
-void SAchievements::Set(QString AKey, QString AAppid, QString AID){
-    _key=AKey;
+void SAchievements::Set(QString AAppid, QString AID){
     _appid=AAppid;
     _id=AID;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(AKey,AAppid);
+    SAchievementsGlobal *Global = new SAchievementsGlobal(AAppid);
     connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPlayer *Player = new SAchievementsPlayer(AKey,AAppid,AID);
+    SAchievementsPlayer *Player = new SAchievementsPlayer(AAppid,AID);
     connect(Player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(AKey,AAppid);
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(AAppid);
     connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-void SAchievements::DoSet(QString AKey, QString AAppid, QString AID){
-    _key=AKey;
+void SAchievements::DoSet(QString AAppid, QString AID){
     _appid=AAppid;
     _id=AID;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(AKey,AAppid);
+    SAchievementsGlobal *Global = new SAchievementsGlobal(AAppid);
     connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(AKey,AAppid);
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(AAppid);
     connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
 void SAchievements::Set(SAchievementsGlobal AGlobal, SAchievementsPlayer APlayer, SAchievementsPercentage APercent){
@@ -121,7 +118,7 @@ void SAchievements::SetFinish(){
 }
 
 void SAchievements::Update(){
-    Set(_key,_appid,_id);
+    Set(_appid,_id);
 }
 void SAchievements::Clear(){
     _finish.clear();
@@ -150,7 +147,6 @@ SAchievements::SAchievements(const SAchievements & ANewAchievements){
     _statusFinish=ANewAchievements._statusFinish;
     _id=ANewAchievements._id;
     _appid=ANewAchievements._appid;
-    _key=ANewAchievements._key;
     _gameName=ANewAchievements._gameName;
     _gameVersion=ANewAchievements._gameVersion;
     _count=ANewAchievements._count;
@@ -166,7 +162,6 @@ SAchievements & SAchievements::operator=(const SAchievements & ANewAchievements)
     _statusFinish=ANewAchievements._statusFinish;
     _id=ANewAchievements._id;
     _appid=ANewAchievements._appid;
-    _key=ANewAchievements._key;
     _gameName=ANewAchievements._gameName;
     _gameVersion=ANewAchievements._gameVersion;
     _count=ANewAchievements._count;

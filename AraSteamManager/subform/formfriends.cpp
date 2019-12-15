@@ -1,10 +1,9 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString AID, QString AKey, SFriends AFriends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString AID, SFriends AFriends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
     _id=AID;
-    _key=AKey;
     _friends=AFriends;
     SProfile profiles = _friends.GetProfiles();
     for(int i=0;i<profiles.GetCount();_profiles.push_back(profiles.GetProfile(i++)));
@@ -190,7 +189,7 @@ void FormFriends::GoToProfileClicked(){
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         _windowChildCount++;
         QPushButton *btn = qobject_cast<QPushButton*>(sender());
-        emit s_go_to_profile(btn->objectName().mid(3,btn->objectName().length()),"url",true);
+        emit s_go_to_profile(btn->objectName().mid(3,btn->objectName().length()),"url");
         emit s_return_to_profile();
     }
 }

@@ -1,12 +1,11 @@
 #include "Sachievementsplayer.h"
 
-SAchievementsPlayer::SAchievementsPlayer(QString AKey, QString AAppid, QString AID, QObject *parent) : QObject(parent){
+SAchievementsPlayer::SAchievementsPlayer(QString AAppid, QString AID, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
-    _key=AKey;
     _appid=AAppid;
     _id=AID;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+AKey+"&appid="+AAppid+"&steamid="+AID));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+_setting.GetKey()+"&appid="+AAppid+"&steamid="+AID));
 }
 SAchievementsPlayer::SAchievementsPlayer(QJsonDocument AAchievements){
     _manager = new QNetworkAccessManager();
@@ -29,12 +28,11 @@ SAchievementsPlayer::~SAchievementsPlayer(){
     delete _manager;
 }
 
-void SAchievementsPlayer::Set(QString AKey, QString AAppid, QString AID){
+void SAchievementsPlayer::Set(QString AAppid, QString AID){
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
-    _key=AKey;
     _appid=AAppid;
     _id=AID;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+AKey+"&appid="+AAppid+"&steamid="+AID));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+_setting.GetKey()+"&appid="+AAppid+"&steamid="+AID));
 }
 void SAchievementsPlayer::Set(QJsonDocument AAchievements){
     Clear();
@@ -62,7 +60,7 @@ void SAchievementsPlayer::Load(QNetworkReply *AReply){
 }
 
 void SAchievementsPlayer::Update(){
-    Set(_key,_appid,_id);
+    Set(_appid,_id);
 }
 void SAchievementsPlayer::Clear(){
     _achievements.clear();
@@ -73,7 +71,6 @@ SAchievementsPlayer::SAchievementsPlayer( const SAchievementsPlayer & ANewAchiev
     _achievements=ANewAchievements._achievements;
     _appid=ANewAchievements._appid;
     _id=ANewAchievements._id;
-    _key=ANewAchievements._key;
     _count=ANewAchievements._count;
     _gameName=ANewAchievements._gameName;
     _status=ANewAchievements._status;
@@ -85,7 +82,6 @@ SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer &
     _achievements=ANewAchievements._achievements;
     _appid=ANewAchievements._appid;
     _id=ANewAchievements._id;
-    _key=ANewAchievements._key;
     _count=ANewAchievements._count;
     _gameName=ANewAchievements._gameName;
     _status=ANewAchievements._status;

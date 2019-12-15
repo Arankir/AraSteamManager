@@ -51,10 +51,11 @@ private slots:
     void ReturnFromStatistics();
     void ReturnFromSettings();
 
+    void InitComponents();
     void ShowGames();
     void ShowFriends();
-    void GoToProfile(QString id, QString type, bool UpdateBuffer);
-    void InitComponents();
+    void GoToProfile(QString id, QString type);
+    void ProfileToUi(SProfile AProfile);
 
     void on_ButtonFindProfile_clicked();
     void on_ButtonGames_clicked();
@@ -77,7 +78,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QString _key="3826BF60403D15613B4B0381DAB7A7BD";
     int _windowChildCount=0;
     int _windowChild=0;
     SProfile _profile;
@@ -86,7 +86,7 @@ private:
     Settings _setting;
     QString _theme="white";
 
-    QVector<QString> _bufferProfiles;
+    QVector<SProfile> _bufferProfiles;
     int _currentBufferProfile=0;
 };
 

@@ -20,12 +20,12 @@ class FormFriends : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormFriends(QString id, QString key, SFriends Friends, QWidget *parent = nullptr);
+    explicit FormFriends(QString id, SFriends Friends, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
     void s_return_to_profile();
-    void s_go_to_profile(QString id, QString type, bool UpdateBuffer);
+    void s_go_to_profile(QString id, QString type);
 
 public slots:
     void ProgressLoading(int p,int row);
@@ -53,7 +53,6 @@ private slots:
 private:
     Ui::FormFriends *ui;
     QString _id;
-    QString _key;
     int _windowChildCount=0;
     SFriends _friends;
     QVector<SProfile> _profiles;

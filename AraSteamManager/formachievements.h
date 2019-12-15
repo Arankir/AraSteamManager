@@ -34,7 +34,7 @@ class FormAchievements : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormAchievements(QString keys, SAchievementsPlayer pl, QString ids, SGame game, int num, QWidget *parent = nullptr);
+    explicit FormAchievements(SAchievementsPlayer pl, QString ids, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -127,7 +127,6 @@ private slots:
 
 private:
     Ui::FormAchievements *ui;
-    QString _key;
     QString _id;
     SGame _game;
     int _unicNum;

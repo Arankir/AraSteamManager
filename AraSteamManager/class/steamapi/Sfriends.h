@@ -12,16 +12,17 @@
 #include <QEventLoop>
 #include <class/steamapi/Sfriend.h>
 #include <class/steamapi/Sprofile.h>
+#include <class/settings.h>
 
 class SFriends : public QObject
 {
     Q_OBJECT
 public:
-    explicit SFriends(QString key, QString id, bool parallel, QObject *parent = nullptr);
+    explicit SFriends(QString id, bool parallel, QObject *parent = nullptr);
     SFriends(QJsonDocument DocFriends);
     SFriends();
     ~SFriends();
-    void Set(QString key, QString id, bool parallel);
+    void Set(QString id, bool parallel);
     void Set(QJsonDocument DocFriends);
     SFriend GetFriend(int index) {return SFriend(_friends[index].toObject());}
     QString GetSteamid(int index) {return _friends[index].toObject().value("steamid").toString();}
@@ -44,9 +45,9 @@ public slots:
 
 private:
     QNetworkAccessManager *_manager;
+    Settings _setting;
     QString _status="none";
     QString _id;
-    QString _key;
     QJsonArray _friends;
 };
 

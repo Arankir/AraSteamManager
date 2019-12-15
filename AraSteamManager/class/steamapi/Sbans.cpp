@@ -1,16 +1,15 @@
 #include "Sbans.h"
 
-SBans::SBans(QString AKey, QString AID, bool AParallel, QObject *parent) : QObject(parent){
+SBans::SBans(QString AID, bool AParallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
-    _key=AKey;
     _id=AID;
     if(AParallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+AID));
     } else {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+AID));
         loop.exec();
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
@@ -37,16 +36,15 @@ SBans::~SBans(){
     delete _manager;
 }
 
-void SBans::Set(QString AKey, QString AID, bool AParallel){
-    _key=AKey;
+void SBans::Set(QString AID, bool AParallel){
     _id=AID;
     if(AParallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+AID));
     } else {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+AKey+"&steamids="+AID));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+AID));
         loop.exec();
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
@@ -75,5 +73,5 @@ void SBans::Load(QNetworkReply *AReply){
 }
 
 void SBans::Update(bool AParallel){
-    Set(_key, _id, AParallel);
+    Set(_id, AParallel);
 }

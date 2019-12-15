@@ -7,6 +7,7 @@
 #include <class/settings.h>
 #include <class/steamapi/Sachievements.h>
 #include <class/steamapi/Sfriends.h>
+#include <class/settings.h>
 
 namespace Ui {
 class FormStatistics;
@@ -17,7 +18,7 @@ class FormStatistics : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormStatistics(QString key, QString id, SGames games, QWidget *parent = nullptr);
+    explicit FormStatistics(QString id, SGames games, QWidget *parent = nullptr);
     ~FormStatistics();
 
 public slots:
@@ -26,7 +27,7 @@ public slots:
 private:
     //Переименовать потом
     Ui::FormStatistics *ui;
-    QString key;
+    Settings _setting;
     QString id;
     int numof[3];
     QVector<QPair<QString,QString>> complete;

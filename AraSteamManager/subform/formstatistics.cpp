@@ -1,12 +1,11 @@
 #include "formstatistics.h"
 #include "ui_formstatistics.h"
 
-FormStatistics::FormStatistics(QString key, QString id, SGames games, QWidget *parent) :
+FormStatistics::FormStatistics(QString id, SGames games, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormStatistics){
     ui->setupUi(this);
     this->games=games;
-    this->key=key;
     this->id=id;
     numof[0]=0;
     numof[1]=0;
@@ -16,7 +15,7 @@ FormStatistics::FormStatistics(QString key, QString id, SGames games, QWidget *p
     summcolumn=0;
     colgames=0;
     for(int i=0;i<games.GetCount();i++){
-        SAchievementsPlayer *pl = new SAchievementsPlayer(key,QString::number(games.GetAppid(i)),id);
+        SAchievementsPlayer *pl = new SAchievementsPlayer(QString::number(games.GetAppid(i)),id);
         connect(pl,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         averagePercent[i]=0.0;
         }

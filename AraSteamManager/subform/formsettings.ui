@@ -90,8 +90,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>495</width>
-               <height>238</height>
+               <width>481</width>
+               <height>217</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout">
@@ -126,6 +126,10 @@
                 </property>
                 <property name="text">
                  <string>Текст</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../images/resimg.qrc">
+                  <normaloff>:/white/program/white/back.png</normaloff>:/white/program/white/back.png</iconset>
                 </property>
                </widget>
               </item>
@@ -248,8 +252,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>495</width>
-               <height>238</height>
+               <width>481</width>
+               <height>217</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
@@ -287,6 +291,10 @@
                 </property>
                 <property name="text">
                  <string>Текст</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../images/resimg.qrc">
+                  <normaloff>:/white/program/white/back.png</normaloff>:/white/program/white/back.png</iconset>
                 </property>
                </widget>
               </item>
@@ -454,8 +462,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>495</width>
-               <height>238</height>
+               <width>481</width>
+               <height>217</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_2">
@@ -490,6 +498,10 @@
                 </property>
                 <property name="text">
                  <string>Текст</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../images/resimg.qrc">
+                  <normaloff>:/black/program/black/back.png</normaloff>:/black/program/black/back.png</iconset>
                 </property>
                </widget>
               </item>
@@ -613,7 +625,7 @@
                <x>0</x>
                <y>0</y>
                <width>495</width>
-               <height>238</height>
+               <height>215</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_5">
@@ -651,6 +663,10 @@
                 </property>
                 <property name="text">
                  <string>Текст</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../images/resimg.qrc">
+                  <normaloff>:/black/program/black/back.png</normaloff>:/black/program/black/back.png</iconset>
                 </property>
                </widget>
               </item>
@@ -810,7 +826,7 @@
       <attribute name="title">
        <string>Прочие настройки</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>780</x>
@@ -983,7 +999,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1051,6 +1067,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../images/resimg.qrc"/>
+ </resources>
  <connections/>
 </ui>

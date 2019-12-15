@@ -11,17 +11,18 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
+#include <class/settings.h>
 #include <QObject>
 
 class SLevels : public QObject
 {
     Q_OBJECT
 public:
-    explicit SLevels(QString key, QString id, QObject *parent = nullptr);
+    explicit SLevels(QString id, QObject *parent = nullptr);
     SLevels(QJsonDocument DocLevels);
     SLevels();
     ~SLevels();
-    void Set(QString key, QString id);
+    void Set(QString id);
     void Set(QJsonDocument DocLevel);
     int GetLevel() {return _player_level;}
     QString GetStatus() {return _status;}
@@ -36,10 +37,10 @@ public slots:
 
 private:
     QNetworkAccessManager *_manager;
+    Settings _setting;
     QString _steamid;//"76561198065018572"
     int _player_level=0;
     QString _status;
-    QString _key;
 };
 
 #endif // SLEVELS_H

@@ -1,9 +1,8 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(QString AKey, SAchievementsPlayer APlayer, QString AID, SGame AGame, int AUnicNum, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
+FormAchievements::FormAchievements(SAchievementsPlayer APlayer, QString AID, SGame AGame, int AUnicNum, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
     ui->setupUi(this);
-    _key=AKey;
     _id=AID;
     _game=AGame;
     _unicNum=AUnicNum;
@@ -59,7 +58,7 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetAchievements->setHorizontalHeaderItem(4,new QTableWidgetItem(tr("По миру")));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(tr("Получено")));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(6,new QTableWidgetItem(tr("Избранное")));
-    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(_key,false)));
+    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(_setting.GetKey(),false)));
     ui->LabelGameTitle->setText(_game.GetName());
     if(!QDir("images/achievements/"+QString::number(_game.GetAppid())).exists())
         QDir().mkdir("images/achievements/"+QString::number(_game.GetAppid()));
@@ -72,7 +71,7 @@ void FormAchievements::InitComponents(){
     QPixmap pixmap;
     pixmap.loadFromData(logoreply.readAll());
     ui->LabelGameLogo->setPixmap(pixmap);
-    SProfile Profile(_key,_id,false,"url");
+    SProfile Profile(_id,false,"url");
     ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()));
     QNetworkReply &imagereply = *manager.get(QNetworkRequest(Profile.GetAvatar()));
     loop.exec();
@@ -180,7 +179,7 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetCompareAchievements->setColumnWidth(5,80);
     ui->GroupBoxFilter->setEnabled(false);
     connect(&_achievements,SIGNAL(s_finished()),this,SLOT(PullTableWidget()));
-    _achievements.DoSet(_key,QString::number(_game.GetAppid()),_id);
+    _achievements.DoSet(QString::number(_game.GetAppid()),_id);
     qDebug()<<"FinishStatus="<<_achievements.GetStatusFinish();
 }
 void FormAchievements::PullTableWidget(){
@@ -223,34 +222,37 @@ void FormAchievements::OnFinish(){
     int j=0;
     ui->TableWidgetCompareAchievements->resizeRowsToContents();
     for (int i=0;i<_achievements.GetCount();i++) {
-        if(_achievements.GetDisplayname(i)!=""){
             QString achievementIcon=_achievements.GetIcon(i).mid(66,_achievements.GetIcon(i).length());
             QString path="images/achievements/"+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
-            if(!QFile::exists(path)){
-                ImageRequest *image = new ImageRequest(_achievements.GetIcon(i),j,path,true);
-                connect(image,&ImageRequest::s_finished,this,&FormAchievements::OnResultImage);
+            if(_achievements.GetDisplayname(i)!=""){
+                if(!QFile::exists(path)){
+                    if(_numRequests<500){
+                            ImageRequest *image = new ImageRequest(_achievements.GetIcon(i),j,path,true);
+                            connect(image,&ImageRequest::s_finished,this,&FormAchievements::OnResultImage);
+                            _request.append(image);
+                            _numRequests++;
+                            }
+                        _numNow++;
+                    }  else {
+                    QPixmap pixmap;
+                    pixmap.load(path);
+                    QLabel *label = new QLabel;
+                    label->setPixmap(pixmap);
+                    ui->TableWidgetAchievements->setCellWidget(j,1,label);
+                    ui->TableWidgetAchievements->resizeRowToContents(j);
+                    QLabel *label2 = new QLabel;
+                    label2->setPixmap(pixmap);
+                    ui->TableWidgetCompareAchievements->setCellWidget(j+2,1,label2);
+                    ui->TableWidgetCompareAchievements->resizeRowToContents(j);
+                }
+                j++;
             } else {
-                QPixmap pixmap;
-                pixmap.load(path);
-                QLabel *label = new QLabel;
-                label->setPixmap(pixmap);
-                ui->TableWidgetAchievements->setCellWidget(j,1,label);
-                ui->TableWidgetAchievements->resizeRowToContents(j);
-                QLabel *label2 = new QLabel;
-                label2->setPixmap(pixmap);
-                ui->TableWidgetCompareAchievements->setCellWidget(j+2,1,label2);
-                ui->TableWidgetCompareAchievements->resizeRowToContents(j);
+                ui->TableWidgetAchievements->removeRow(ui->TableWidgetAchievements->rowCount()-1);
+                ui->TableWidgetCompareAchievements->removeRow(ui->TableWidgetCompareAchievements->rowCount()-1);
             }
-            j++;
-        } else {
-            ui->TableWidgetAchievements->removeRow(ui->TableWidgetAchievements->rowCount()-1);
-            ui->TableWidgetCompareAchievements->removeRow(ui->TableWidgetCompareAchievements->rowCount()-1);
-        }
-
         }
 }
 void FormAchievements::OnResultImage(ImageRequest *AImage){
-    disconnect(AImage,&ImageRequest::s_finished,this,&FormAchievements::OnResultImage);
     QPixmap pixmap;
     pixmap.loadFromData(AImage->GetAnswer());
     QLabel *label = new QLabel;
@@ -261,7 +263,18 @@ void FormAchievements::OnResultImage(ImageRequest *AImage){
     ui->TableWidgetCompareAchievements->setCellWidget(AImage->GetRow()+2,1,label2);
     ui->TableWidgetAchievements->resizeRowToContents(AImage->GetRow());
     ui->TableWidgetCompareAchievements->resizeRowToContents(AImage->GetRow()+2);
-    AImage->deleteLater();
+    if(_numRequests==500&&_numNow<_achievements.GetCount()){
+        QString achievementIcon=_achievements.GetIcon(_numNow).mid(66,_achievements.GetIcon(_numNow).length());
+        QString path="images/achievements/"+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
+        while (QFile::exists(path)) {
+            _numNow++;
+        }
+        AImage->LoadImage(_achievements.GetIcon(_numNow),_numNow,path,true);
+        _numNow++;
+    } else {
+        disconnect(AImage,&ImageRequest::s_finished,this,&FormAchievements::OnResultImage);
+        AImage->deleteLater();
+    }
 }
 #define InitEnd }
 
@@ -308,7 +321,7 @@ void FormAchievements::SwitchSimpleCompare(int ASimpleCompare){
 }
 void FormAchievements::LoadingCompare(){
     _loadCompare++;
-    SProfile Profile(_key,_id,false,"url");
+    SProfile Profile(_id,false,"url");
     ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()));
 
     QNetworkAccessManager manager;
@@ -330,7 +343,7 @@ void FormAchievements::LoadingCompare(){
     ui->TableWidgetCompareFriends->setCellWidget(0,0,myava2);
 
 
-    SFriends frien(_key,_id,false);
+    SFriends frien(_id,false);
     SProfile profiless = frien.GetProfiles();
     _friendsCount=profiless.GetCount();
     ui->TableWidgetCompareFriends->setColumnCount(_friendsCount+2);
@@ -354,7 +367,7 @@ void FormAchievements::LoadingCompare(){
     for (int i=0;i<_friendsCount;i++) {
         SGames *Games = new SGames;
         Games->SetIndex(i);
-        Games->Set(_key,_profiles[i].GetSteamid(),true,true,true);
+        Games->Set(_profiles[i].GetSteamid(),true,true,true);
         connect(Games,SIGNAL(s_finished(SGames*)),this,SLOT(LoadFriend(SGames*)));
     }
 
@@ -531,7 +544,7 @@ void FormAchievements::on_TableWidgetCompareFriendsCellChanged(int ARow, int ACo
             ava->setToolTip(_friends[AColumn-2].first.GetPersonaname());
             ava->setAlignment(Qt::AlignCenter);
             ui->TableWidgetCompareAchievements->setCellWidget(0,col,ava);
-            SAchievementsPlayer pla(_key,QString::number(_game.GetAppid()),sProfile.GetSteamid());
+            SAchievementsPlayer pla(QString::number(_game.GetAppid()),sProfile.GetSteamid());
             connect(&pla,SIGNAL(s_finished()), &loop, SLOT(quit()));
             loop.exec();
             disconnect(&pla,SIGNAL(s_finished()), &loop, SLOT(quit()));
@@ -768,7 +781,7 @@ void FormAchievements::on_ButtonChangeCategory_clicked(){
 void FormAchievements::on_ButtonUpdate_clicked(){
     _achievements.Update();
     PullTableWidget();
-    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(_key,true)));
+    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(_setting.GetKey(),true)));
 }
 void FormAchievements::FavoritesClicked(){
     QPushButton *btn = qobject_cast<QPushButton*>(sender());

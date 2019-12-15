@@ -11,17 +11,18 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
+#include <class/settings.h>
 #include <QObject>
 
 class SBans : public QObject
 {
     Q_OBJECT
 public:
-    explicit SBans(QString key, QString id, bool parallel, QObject *parent = nullptr);
+    explicit SBans(QString id, bool parallel, QObject *parent = nullptr);
     SBans(QJsonDocument DocBans);
     SBans();
     ~SBans();
-    void Set(QString key, QString id, bool parallel);
+    void Set(QString id, bool parallel);
     void Set(QJsonDocument DocBans);
     QString GetSteamid(int index=0) {return _bans[index].toObject().value("steamid").toString();}
     bool GetCommunityBanned(int index=0) {return _bans[index].toObject().value("CommunityBanned").toBool();}
@@ -42,9 +43,9 @@ public slots:
 
 private:
     QNetworkAccessManager *_manager;
+    Settings _setting;
     QJsonArray _bans;
     QString _status;
-    QString _key;
     QString _id;
 };
 #endif // SBANS_H
