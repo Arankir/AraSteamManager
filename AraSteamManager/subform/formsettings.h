@@ -4,7 +4,10 @@
 #include <QWidget>
 #include <QMessageBox>
 #include <QDebug>
+#include <QVBoxLayout>
+#include <QPair>
 #include <class/settings.h>
+#include <class/steamapi/Sprofile.h>
 
 namespace Ui {
 class FormSettings;
@@ -31,9 +34,13 @@ private slots:
 
     void on_RadioButtonLightTheme_clicked();
 
+    void RadiobuttonHiddenGamesClicked();
+
 private:
     Ui::FormSettings *ui;
     Settings _setting;
+    QVector<QPair<QString,QList<QString>>> _hiddenGames;
 };
+
 
 #endif // FORMSETTINGS_H

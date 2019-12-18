@@ -519,7 +519,7 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         layoutWidget = new QWidget(tab_2);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(780, 10, 243, 190));
+        layoutWidget->setGeometry(QRect(540, 10, 243, 190));
         verticalLayout_6 = new QVBoxLayout(layoutWidget);
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         verticalLayout_6->setContentsMargins(0, 0, 0, 0);
@@ -616,13 +616,13 @@ public:
         label_10->setWordWrap(true);
         layoutWidget1 = new QWidget(tab_2);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(10, 100, 761, 451));
+        layoutWidget1->setGeometry(QRect(10, 100, 521, 451));
         horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         ScrollAreaProfilesHideGames = new QScrollArea(layoutWidget1);
         ScrollAreaProfilesHideGames->setObjectName(QString::fromUtf8("ScrollAreaProfilesHideGames"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(ScrollAreaProfilesHideGames->sizePolicy().hasHeightForWidth());
@@ -670,7 +670,7 @@ public:
 
         retranslateUi(FormSettings);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(FormSettings);

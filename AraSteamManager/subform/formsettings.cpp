@@ -60,6 +60,57 @@ void FormSettings::InitComponents(){
     //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
     ui->GroupBoxDarkTheme->setPalette(darkPalette);
     ui->GroupBoxWhiteTheme->setPalette(style()->standardPalette());
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    QDir dirHiddenGames("Files/Hide");
+    dirHiddenGames.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    dirHiddenGames.setSorting(QDir::Name);
+    if(dirHiddenGames.exists()){
+        QPair<QString,QList<QString>> pair;
+        pair.first="All.txt";
+        pair.second=QList<QString>();
+        if(QFile("Files/Hide/All.txt").exists()){
+            QRadioButton *allHidden = new QRadioButton;
+            connect(allHidden,SIGNAL(clicked()),this,SLOT(RadiobuttonHiddenGamesClicked()));
+            allHidden->setObjectName("HiddenGames0");
+            allHidden->setText(tr("Все профили"));
+            layout->addWidget(allHidden);
+            QFile fileHide1("Files/Hide/All.txt");
+            if(fileHide1.open(QIODevice::ReadOnly)){
+                while(!fileHide1.atEnd()){
+                    pair.second << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
+                }
+                fileHide1.close();
+            }
+        }
+        _hiddenGames.append(pair);
+
+        QFileInfoList list = dirHiddenGames.entryInfoList();
+        for (int i=0;i<list.size();++i){
+            if(list.at(i).fileName()!="All.txt"){
+                QFile fileHide("Files/Hide/"+list.at(i).fileName());
+                fileHide.open(QFile::ReadOnly);
+                SProfile profile(list.at(i).fileName().remove(".txt"),false,"url");
+                QList<QString> hide;
+                QRadioButton *profileHidden = new QRadioButton;
+                profileHidden->setObjectName("HiddenGames"+QString::number(i+1));
+                profileHidden->setText(profile.GetPersonaname());
+                layout->addWidget(profileHidden);
+                QFile fileHide2("Files/Hide/"+list.at(i).fileName());
+                if(fileHide2.open(QIODevice::ReadOnly)){
+                    while(!fileHide2.atEnd()){
+                        hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
+                    }
+                    fileHide2.close();
+                }
+                QPair<QString,QList<QString>> pair;
+                pair.first=list.at(i).fileName();
+                pair.second=hide;
+                _hiddenGames.append(pair);
+            }
+            }
+    }
+    ui->ScrollAreaProfilesHideGames->setLayout(layout);
 }
 
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
@@ -93,4 +144,8 @@ void FormSettings::on_RadioButtonDarkTheme_clicked(){
 void FormSettings::on_RadioButtonLightTheme_clicked(){
     _setting.SetTheme(2);
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::RadiobuttonHiddenGamesClicked(){
+
 }

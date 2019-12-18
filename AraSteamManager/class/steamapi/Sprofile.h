@@ -28,6 +28,7 @@ public:
     void Set(QJsonDocument DocSummaries);
     void Set(QJsonArray ArrSummaries);
     void Set(QJsonObject ObjSummaries);
+    void SetUnicIndex(int AUnicIndex) {_unicIndex=AUnicIndex;}
     QString GetSteamid(int index=0) {return _profile[index].toObject().value("steamid").toString();}
     int GetCommunityvisibilitystate(int index=0) {return _profile[index].toObject().value("communityvisibilitystate").toInt();}
     int GetProfilestate(int index=0) {return _profile[index].toObject().value("profilestate").toInt();}
@@ -50,6 +51,7 @@ public:
     QString GetRealname(int index=0) {return _profile[index].toObject().value("realname").toString();}
     SProfile GetProfile(int index) {return _profile[index].toObject();}
     QString GetStatus() {return _status;}
+    int GetUnicIndex() {return _unicIndex;}
     int GetCount() {return _profile.size();}
     void Update(bool parallel);
     SProfile( const SProfile & a);
@@ -70,6 +72,7 @@ private:
     QJsonArray _profile;
     QString _status="null";
     QString _id="";
+    int _unicIndex=-1;
 };
 
 #endif // SPROFILE_H

@@ -195,38 +195,6 @@ Qt_5_12_1_MinGW_64_bit-Release/release/threadcompare.o
 
 Qt_5_12_1_MinGW_64_bit-Release/release/threadfriends.o
 
-AraSteamManager/class/imagerequest.cpp.autosave
-
-AraSteamManager/class/steamapi/Sachievements.cpp.autosave
-
-AraSteamManager/class/steamapi/Sachievementsglobal.cpp.autosave
-
-AraSteamManager/class/steamapi/Sachievementspercentage.cpp.autosave
-
-AraSteamManager/class/steamapi/Sachievementsplayer.cpp.autosave
-
-AraSteamManager/class/steamapi/Sfriends.cpp.autosave
-
-AraSteamManager/class/Threads/threadachievements.cpp.autosave
-
-AraSteamManager/class/Threads/threadgames.cpp.autosave
-
-AraSteamManager/class/Threads/threading.cpp.autosave
-
-AraSteamManager/class/Threads/threading.h.autosave
-
-AraSteamManager/formachievements.cpp.autosave
-
-AraSteamManager/formachievements.h.autosave
-
-AraSteamManager/formachievements.ui.autosave
-
-AraSteamManager/mainwindow.cpp.autosave
-
-AraSteamManager/mainwindow.ui.autosave
-
-AraSteamManager/subform/formaddcategory.cpp.autosave
-
 Qt_5_12_2_MinGW_64_bit-Release/release/categoryvalue.o
 
 Qt_5_12_2_MinGW_64_bit-Release/release/formachievements.o
@@ -277,16 +245,8 @@ Qt_5_12_2_MinGW_64_bit-Release/release/threading.o
 
 Qt_5_12_2_MinGW_64_bit-Release/images/icon_games/
 
-AraSteamManager/formachievements.h
-
 Qt_5_12_6_MinGW_64_bit-Release/images/achievements/
 
 Qt_5_12_6_MinGW_64_bit-Release/images/icon_games/
 
 Qt_5_12_6_MinGW_64_bit-Release/images/profiles/
-
-AraSteamManager/subform/formfriends.cpp.autosave
-
-AraSteamManager/subform/formgames.cpp.autosave
-
-AraSteamManager/class/steamapi/Sgame.cpp.autosave

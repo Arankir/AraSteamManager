@@ -32,7 +32,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -829,7 +829,7 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>780</x>
+         <x>540</x>
          <y>10</y>
          <width>243</width>
          <height>190</height>
@@ -1004,7 +1004,7 @@
         <rect>
          <x>10</x>
          <y>100</y>
-         <width>761</width>
+         <width>521</width>
          <height>451</height>
         </rect>
        </property>
@@ -1012,7 +1012,7 @@
         <item>
          <widget class="QScrollArea" name="ScrollAreaProfilesHideGames">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>

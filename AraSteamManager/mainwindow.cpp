@@ -435,6 +435,16 @@ void MainWindow::on_ButtonSettings_clicked(){
 }
 void MainWindow::on_ButtonGoToMyProfile_clicked(){
     if(_setting.GetStatus()=="success"){
+        switch(_windowChild){
+        case 1:{
+            ReturnFromGames();
+            break;
+        }
+        case 2:{
+            ReturnFromFriends();
+            break;
+        }
+        }
         GoToProfile(_setting.GetMyProfile(),"url");
     } else {
         QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
