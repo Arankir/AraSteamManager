@@ -6,6 +6,16 @@ FormSettings::FormSettings(QWidget *parent) :
     ui(new Ui::FormSettings)
 {
     ui->setupUi(this);
+    switch(_setting.GetTheme()){
+    case 1:{
+        _theme="white";
+        break;
+        }
+    case 2:{
+        _theme="black";
+        break;
+        }
+    }
     InitComponents();
 }
 
@@ -61,19 +71,20 @@ void FormSettings::InitComponents(){
     ui->GroupBoxDarkTheme->setPalette(darkPalette);
     ui->GroupBoxWhiteTheme->setPalette(style()->standardPalette());
 
-    QVBoxLayout *layout = new QVBoxLayout;
+    QFormLayout *layout = new QFormLayout;
     QDir dirHiddenGames("Files/Hide");
     dirHiddenGames.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     dirHiddenGames.setSorting(QDir::Name);
     if(dirHiddenGames.exists()){
         QPair<QString,QList<QString>> pair;
-        pair.first="All.txt";
+        pair.first="All";
         pair.second=QList<QString>();
         if(QFile("Files/Hide/All.txt").exists()){
             QRadioButton *allHidden = new QRadioButton;
             connect(allHidden,SIGNAL(clicked()),this,SLOT(RadiobuttonHiddenGamesClicked()));
             allHidden->setObjectName("HiddenGames0");
             allHidden->setText(tr("Все профили"));
+            allHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
             layout->addWidget(allHidden);
             QFile fileHide1("Files/Hide/All.txt");
             if(fileHide1.open(QIODevice::ReadOnly)){
@@ -93,8 +104,10 @@ void FormSettings::InitComponents(){
                 SProfile profile(list.at(i).fileName().remove(".txt"),false,"url");
                 QList<QString> hide;
                 QRadioButton *profileHidden = new QRadioButton;
+                connect(profileHidden,SIGNAL(clicked()),this,SLOT(RadiobuttonHiddenGamesClicked()));
                 profileHidden->setObjectName("HiddenGames"+QString::number(i+1));
                 profileHidden->setText(profile.GetPersonaname());
+                profileHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
                 layout->addWidget(profileHidden);
                 QFile fileHide2("Files/Hide/"+list.at(i).fileName());
                 if(fileHide2.open(QIODevice::ReadOnly)){
@@ -104,12 +117,13 @@ void FormSettings::InitComponents(){
                     fileHide2.close();
                 }
                 QPair<QString,QList<QString>> pair;
-                pair.first=list.at(i).fileName();
+                pair.first=list.at(i).fileName().remove(".txt");
                 pair.second=hide;
                 _hiddenGames.append(pair);
             }
             }
     }
+    ui->ScrollAreaProfilesHideGames->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Expanding);
     ui->ScrollAreaProfilesHideGames->setLayout(layout);
 }
 
@@ -147,5 +161,59 @@ void FormSettings::on_RadioButtonLightTheme_clicked(){
 }
 
 void FormSettings::RadiobuttonHiddenGamesClicked(){
+    QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
+    int index=rb->objectName().mid(11).toInt();
+    if(index!=0){
+        SGames games;
+        games.Set(_hiddenGames[index].first,true,true,false);
+        ui->TableWidgetGames->setRowCount(0);
+        ui->TableWidgetGames->setRowCount(_hiddenGames[index].second.size());
+        for (int i=0;i<games.GetCount();i++) {
+            if(_hiddenGames[index].second.indexOf(QString::number(games.GetAppid(i)))>-1){
+                int setTo=_hiddenGames[index].second.indexOf(QString::number(games.GetAppid(i)));
+                QString path = "images/icon_games/"+games.GetImg_icon_url(i)+".jpg";
+                if(!QFile::exists(path)){
+                    if(games.GetImg_icon_url(i)!=""){
+                        ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+
+                                                               QString::number(games.GetAppid(i))+"/"+games.GetImg_icon_url(i)+".jpg",setTo,path,true);
+                        connect(image,&ImageRequest::s_finished,this,&FormSettings::OnResultImage);
+                        }
+                    } else {
+                    QPixmap pixmap;
+                    pixmap.load(path);
+                    QLabel *label = new QLabel;
+                    label->setPixmap(pixmap);
+                    ui->TableWidgetGames->setCellWidget(setTo,0,label);
+                    }
+                ui->TableWidgetGames->setItem(setTo,1,new QTableWidgetItem(games.GetName(i)));
+
+                ui->TableWidgetGames->setRowHeight(setTo,33);
+                QPushButton *button1 = new QPushButton(tr("Достижения"));
+                button1->setMinimumSize(QSize(25,25));
+                connect(button1,&QPushButton::pressed,this,&FormSettings::AchievementsClicked);
+                button1->setObjectName("ButtonAchievements"+QString::number(setTo));
+                ui->TableWidgetGames->setCellWidget(setTo,2,button1);
+
+                QPushButton *button3 = new QPushButton;
+                button3->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
+                button3->setMinimumSize(QSize(25,25));
+                connect(button3,&QPushButton::pressed,this,&FormSettings::HideClicked);
+                button3->setObjectName("ButtonHide"+QString::number(index));
+                ui->TableWidgetGames->setCellWidget(setTo,3,button3);
+            }
+        }
+    }
+    ui->TableWidgetGames->resizeColumnsToContents();
+}
+
+void FormSettings::OnResultImage(ImageRequest *){
+
+}
+
+void FormSettings::AchievementsClicked(){
+
+}
+
+void FormSettings::HideClicked(){
 
 }

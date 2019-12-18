@@ -4,10 +4,12 @@
 #include <QWidget>
 #include <QMessageBox>
 #include <QDebug>
-#include <QVBoxLayout>
+#include <QFormLayout>
 #include <QPair>
 #include <class/settings.h>
+#include <class/imagerequest.h>
 #include <class/steamapi/Sprofile.h>
+#include <class/steamapi/Sgames.h>
 
 namespace Ui {
 class FormSettings;
@@ -36,8 +38,13 @@ private slots:
 
     void RadiobuttonHiddenGamesClicked();
 
+    void OnResultImage(ImageRequest *);
+    void AchievementsClicked();
+    void HideClicked();
+
 private:
     Ui::FormSettings *ui;
+    QString _theme="white";
     Settings _setting;
     QVector<QPair<QString,QList<QString>>> _hiddenGames;
 };

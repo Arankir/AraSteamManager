@@ -158,7 +158,7 @@ public:
         scrollArea_5->setWidgetResizable(true);
         scrollAreaWidgetContents_7 = new QWidget();
         scrollAreaWidgetContents_7->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_7"));
-        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 481, 217));
+        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 495, 217));
         gridLayout = new QGridLayout(scrollAreaWidgetContents_7);
         gridLayout->setSpacing(1);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
@@ -243,7 +243,7 @@ public:
         scrollArea_6->setWidgetResizable(true);
         scrollAreaWidgetContents_8 = new QWidget();
         scrollAreaWidgetContents_8->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_8"));
-        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 481, 217));
+        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 495, 217));
         gridLayout_4 = new QGridLayout(scrollAreaWidgetContents_8);
         gridLayout_4->setSpacing(1);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
@@ -337,7 +337,7 @@ public:
         scrollArea_7->setWidgetResizable(true);
         scrollAreaWidgetContents_9 = new QWidget();
         scrollAreaWidgetContents_9->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_9"));
-        scrollAreaWidgetContents_9->setGeometry(QRect(0, 0, 481, 217));
+        scrollAreaWidgetContents_9->setGeometry(QRect(0, 0, 495, 217));
         gridLayout_2 = new QGridLayout(scrollAreaWidgetContents_9);
         gridLayout_2->setSpacing(1);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
@@ -416,7 +416,7 @@ public:
         scrollArea_8->setWidgetResizable(true);
         scrollAreaWidgetContents_10 = new QWidget();
         scrollAreaWidgetContents_10->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_10"));
-        scrollAreaWidgetContents_10->setGeometry(QRect(0, 0, 495, 215));
+        scrollAreaWidgetContents_10->setGeometry(QRect(0, 0, 495, 217));
         gridLayout_5 = new QGridLayout(scrollAreaWidgetContents_10);
         gridLayout_5->setSpacing(1);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
@@ -519,7 +519,7 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         layoutWidget = new QWidget(tab_2);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(540, 10, 243, 190));
+        layoutWidget->setGeometry(QRect(688, 9, 240, 200));
         verticalLayout_6 = new QVBoxLayout(layoutWidget);
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         verticalLayout_6->setContentsMargins(0, 0, 0, 0);
@@ -591,7 +591,7 @@ public:
 
         groupBox = new QGroupBox(tab_2);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(10, 10, 89, 85));
+        groupBox->setGeometry(QRect(9, 9, 89, 87));
         verticalLayout = new QVBoxLayout(groupBox);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         RadioButtonLanguageEnglish = new QRadioButton(groupBox);
@@ -606,17 +606,17 @@ public:
 
         CheckBoxVisibleHiddenGames = new QCheckBox(tab_2);
         CheckBoxVisibleHiddenGames->setObjectName(QString::fromUtf8("CheckBoxVisibleHiddenGames"));
-        CheckBoxVisibleHiddenGames->setGeometry(QRect(110, 10, 371, 19));
+        CheckBoxVisibleHiddenGames->setGeometry(QRect(348, 42, 269, 20));
         label_10 = new QLabel(tab_2);
         label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setGeometry(QRect(10, 560, 658, 16));
+        label_10->setGeometry(QRect(10, 600, 1012, 16));
         QFont font1;
         font1.setPointSize(10);
         label_10->setFont(font1);
         label_10->setWordWrap(true);
         layoutWidget1 = new QWidget(tab_2);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(10, 100, 521, 451));
+        layoutWidget1->setGeometry(QRect(9, 102, 671, 491));
         horizontalLayout_2 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -630,7 +630,12 @@ public:
         ScrollAreaProfilesHideGames->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 447));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 109, 487));
+        QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(scrollAreaWidgetContents->sizePolicy().hasHeightForWidth());
+        scrollAreaWidgetContents->setSizePolicy(sizePolicy4);
         ScrollAreaProfilesHideGames->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout_2->addWidget(ScrollAreaProfilesHideGames);
@@ -653,10 +658,15 @@ public:
         verticalLayout_10->addLayout(horizontalLayout);
 
         TableWidgetGames = new QTableWidget(layoutWidget1);
-        if (TableWidgetGames->columnCount() < 3)
-            TableWidgetGames->setColumnCount(3);
+        if (TableWidgetGames->columnCount() < 4)
+            TableWidgetGames->setColumnCount(4);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
-        TableWidgetGames->setColumnCount(3);
+        QSizePolicy sizePolicy5(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(TableWidgetGames->sizePolicy().hasHeightForWidth());
+        TableWidgetGames->setSizePolicy(sizePolicy5);
+        TableWidgetGames->setColumnCount(4);
 
         verticalLayout_10->addWidget(TableWidgetGames);
 

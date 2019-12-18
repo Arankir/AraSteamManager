@@ -90,7 +90,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>481</width>
+               <width>495</width>
                <height>217</height>
               </rect>
              </property>
@@ -252,7 +252,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>481</width>
+               <width>495</width>
                <height>217</height>
               </rect>
              </property>
@@ -462,7 +462,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>481</width>
+               <width>495</width>
                <height>217</height>
               </rect>
              </property>
@@ -625,7 +625,7 @@
                <x>0</x>
                <y>0</y>
                <width>495</width>
-               <height>215</height>
+               <height>217</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_5">
@@ -829,10 +829,10 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>540</x>
-         <y>10</y>
-         <width>243</width>
-         <height>190</height>
+         <x>688</x>
+         <y>9</y>
+         <width>240</width>
+         <height>200</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -939,10 +939,10 @@
       <widget class="QGroupBox" name="groupBox">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>10</y>
+         <x>9</x>
+         <y>9</y>
          <width>89</width>
-         <height>85</height>
+         <height>87</height>
         </rect>
        </property>
        <property name="title">
@@ -968,10 +968,10 @@
       <widget class="QCheckBox" name="CheckBoxVisibleHiddenGames">
        <property name="geometry">
         <rect>
-         <x>110</x>
-         <y>10</y>
-         <width>371</width>
-         <height>19</height>
+         <x>348</x>
+         <y>42</y>
+         <width>269</width>
+         <height>20</height>
         </rect>
        </property>
        <property name="text">
@@ -982,8 +982,8 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>560</y>
-         <width>658</width>
+         <y>600</y>
+         <width>1012</width>
          <height>16</height>
         </rect>
        </property>
@@ -1002,10 +1002,10 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>100</y>
-         <width>521</width>
-         <height>451</height>
+         <x>9</x>
+         <y>102</y>
+         <width>671</width>
+         <height>491</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -1025,9 +1025,15 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>68</width>
-             <height>447</height>
+             <width>109</width>
+             <height>487</height>
             </rect>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
           </widget>
          </widget>
@@ -1050,9 +1056,16 @@
           </item>
           <item>
            <widget class="QTableWidget" name="TableWidgetGames">
-            <property name="columnCount">
-             <number>3</number>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
+            <property name="columnCount">
+             <number>4</number>
+            </property>
+            <column/>
             <column/>
             <column/>
             <column/>
