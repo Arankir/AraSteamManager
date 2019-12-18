@@ -274,7 +274,7 @@ void FormGames::HideClicked(){
     QFile hide(save);
     hide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&hide);
-    writeStream <<_games[gamei].GetAppid()<<"\n";
+    writeStream <<_games[gamei].GetAppid()<<(save=="Files/Hide/All.txt"?"%%"+_games[gamei].GetImg_icon_url()+"%%"+_games[gamei].GetName():"")<<"\n";
     hide.close();
     for (int i=0;i<_games.size();i++) {
         if(_games[gamei].GetName()==ui->TableWidgetGames->item(i,1)->text()){

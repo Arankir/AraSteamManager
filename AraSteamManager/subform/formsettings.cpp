@@ -191,16 +191,53 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
                 QPushButton *button1 = new QPushButton(tr("Достижения"));
                 button1->setMinimumSize(QSize(25,25));
                 connect(button1,&QPushButton::pressed,this,&FormSettings::AchievementsClicked);
-                button1->setObjectName("ButtonAchievements"+QString::number(setTo));
+                button1->setObjectName("ButtonAchievements"+QString::number(index)+"_"+QString::number(setTo));
                 ui->TableWidgetGames->setCellWidget(setTo,2,button1);
 
                 QPushButton *button3 = new QPushButton;
                 button3->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
                 button3->setMinimumSize(QSize(25,25));
                 connect(button3,&QPushButton::pressed,this,&FormSettings::HideClicked);
-                button3->setObjectName("ButtonHide"+QString::number(index));
+                button3->setObjectName("ButtonHide"+QString::number(index)+"_"+QString::number(setTo));
                 ui->TableWidgetGames->setCellWidget(setTo,3,button3);
             }
+        }
+    } else {
+        ui->TableWidgetGames->setRowCount(0);
+        ui->TableWidgetGames->setRowCount(_hiddenGames[index].second.size());
+        for (int i=0;i<_hiddenGames[index].second.size();i++) {
+            QStringList list = _hiddenGames[index].second[i].split("%%");
+            //_games[gamei].GetAppid()<<(save=="Files/Hide/All.txt"?"%%"+_games[gamei].GetImg_icon_url()+"%%"+_games[gamei].GetName()
+            int setTo=_hiddenGames[index].second.indexOf(list[0]);
+            QString path = "images/icon_games/"+list[1]+".jpg";
+            if(!QFile::exists(path)){
+                if(list[1]!=""){
+                    ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+
+                                                           list[0]+"/"+list[1]+".jpg",setTo,path,true);
+                    connect(image,&ImageRequest::s_finished,this,&FormSettings::OnResultImage);
+                    }
+                } else {
+                QPixmap pixmap;
+                pixmap.load(path);
+                QLabel *label = new QLabel;
+                label->setPixmap(pixmap);
+                ui->TableWidgetGames->setCellWidget(i,0,label);
+                }
+            ui->TableWidgetGames->setItem(i,1,new QTableWidgetItem(list[2]));
+
+            ui->TableWidgetGames->setRowHeight(i,33);
+            QPushButton *button1 = new QPushButton(tr("Достижения"));
+            button1->setMinimumSize(QSize(25,25));
+            connect(button1,&QPushButton::pressed,this,&FormSettings::AchievementsClicked);
+            button1->setObjectName("ButtonAchievements"+QString::number(index)+"_"+QString::number(setTo));
+            ui->TableWidgetGames->setCellWidget(i,2,button1);
+
+            QPushButton *button3 = new QPushButton;
+            button3->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
+            button3->setMinimumSize(QSize(25,25));
+            connect(button3,&QPushButton::pressed,this,&FormSettings::HideClicked);
+            button3->setObjectName("ButtonHide"+QString::number(index)+"_"+QString::number(setTo));
+            ui->TableWidgetGames->setCellWidget(i,3,button3);
         }
     }
     ui->TableWidgetGames->resizeColumnsToContents();
@@ -211,9 +248,13 @@ void FormSettings::OnResultImage(ImageRequest *){
 }
 
 void FormSettings::AchievementsClicked(){
+    QPushButton *pb = qobject_cast<QPushButton*>(sender());
+    //int index=pb->objectName().mid(11).toInt();
 
 }
 
 void FormSettings::HideClicked(){
+    QPushButton *pb = qobject_cast<QPushButton*>(sender());
+    //int index=pb->objectName().mid(11).toInt();
 
 }
