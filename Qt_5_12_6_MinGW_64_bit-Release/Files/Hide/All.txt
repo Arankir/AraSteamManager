@@ -1,7 +1,4 @@
-787980%%709aa124fe99de657d7d624e250ce45ae3505665%%4D Minesweeper
 256290%%abd72e23f4d18e943f98169e4a3a4a9243e069ea%%Child of Light
-366080%%7a5d38eafdfbb9e703a2d3d77d8c7750214bf9b9%%Crypt of the NecroDancer Extended Soundtrack
-314680%%d6b5298b33cb990dcbb3fae94db4b421b813a724%%Crypt of the Necrodancer Soundtrack
 322330%%a80aa6cff8eebc1cbc18c367d9ab063e1553b0ee%%Don't Starve Together
 205790%%%%Dota 2 Test
 270790%%0ed1d7883eabd7057d041333cad9ba9412ed5dca%%Etherlords II
@@ -23,3 +20,8 @@
 17440%%00e6b5f1f7173e5a2db9978de34df03abb886430%%Spore: Creepy & Cute Parts Pack
 24720%%fb853a0ee1b27e6b9d0aa3b5a7d24d2bf3b0aae3%%Spore: Galactic Adventures
 823130%%920902c516d435c3d9a6c5ef92e3cd4372f9314b%%Totally Accurate Battlegrounds
+787980%%709aa124fe99de657d7d624e250ce45ae3505665%%4D Minesweeper
+366080%%7a5d38eafdfbb9e703a2d3d77d8c7750214bf9b9%%Crypt of the NecroDancer Extended Soundtrack
+314680%%d6b5298b33cb990dcbb3fae94db4b421b813a724%%Crypt of the Necrodancer Soundtrack
+836620%%fd76e9933c56ebb5536b0396cfdf7c2dcd3e029c%%Black Desert
+4580%%584fcb6284ffd2fcf378fb3c199a9275a0a01b2d%%Warhammer 40,000: Dawn of War - Dark Crusade

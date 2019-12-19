@@ -198,22 +198,24 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
                 button3->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
                 button3->setMinimumSize(QSize(25,25));
                 connect(button3,&QPushButton::pressed,this,&FormSettings::HideClicked);
-                button3->setObjectName("ButtonHide"+QString::number(index)+"_"+QString::number(setTo));
+                button3->setObjectName("ButtonHide"+QString::number(index)+"_"+QString::number(games.GetAppid(i)));
                 ui->TableWidgetGames->setCellWidget(setTo,3,button3);
             }
         }
     } else {
+        //list[0]=_games[gamei].GetAppid()
+        //list[1]=_games[gamei].GetImg_icon_url()
+        //list[2]=_games[gamei].GetName()
         ui->TableWidgetGames->setRowCount(0);
         ui->TableWidgetGames->setRowCount(_hiddenGames[index].second.size());
+        qDebug()<<_hiddenGames[index].second;
         for (int i=0;i<_hiddenGames[index].second.size();i++) {
             QStringList list = _hiddenGames[index].second[i].split("%%");
-            //_games[gamei].GetAppid()<<(save=="Files/Hide/All.txt"?"%%"+_games[gamei].GetImg_icon_url()+"%%"+_games[gamei].GetName()
-            int setTo=_hiddenGames[index].second.indexOf(list[0]);
             QString path = "images/icon_games/"+list[1]+".jpg";
             if(!QFile::exists(path)){
                 if(list[1]!=""){
                     ImageRequest *image = new ImageRequest("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                                           list[0]+"/"+list[1]+".jpg",setTo,path,true);
+                                                           list[0]+"/"+list[1]+".jpg",i,path,true);
                     connect(image,&ImageRequest::s_finished,this,&FormSettings::OnResultImage);
                     }
                 } else {
@@ -229,14 +231,14 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
             QPushButton *button1 = new QPushButton(tr("Достижения"));
             button1->setMinimumSize(QSize(25,25));
             connect(button1,&QPushButton::pressed,this,&FormSettings::AchievementsClicked);
-            button1->setObjectName("ButtonAchievements"+QString::number(index)+"_"+QString::number(setTo));
+            button1->setObjectName("ButtonAchievements"+QString::number(index)+"_"+QString::number(i));
             ui->TableWidgetGames->setCellWidget(i,2,button1);
 
             QPushButton *button3 = new QPushButton;
             button3->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
             button3->setMinimumSize(QSize(25,25));
             connect(button3,&QPushButton::pressed,this,&FormSettings::HideClicked);
-            button3->setObjectName("ButtonHide"+QString::number(index)+"_"+QString::number(setTo));
+            button3->setObjectName("ButtonHide"+QString::number(index)+"_"+list[0]);
             ui->TableWidgetGames->setCellWidget(i,3,button3);
         }
     }
@@ -255,6 +257,35 @@ void FormSettings::AchievementsClicked(){
 
 void FormSettings::HideClicked(){
     QPushButton *pb = qobject_cast<QPushButton*>(sender());
-    //int index=pb->objectName().mid(11).toInt();
-
+    qDebug()<<pb->objectName();
+    int index=pb->objectName().mid(10,pb->objectName().indexOf("_")-10).toInt();
+    QString game=pb->objectName().mid(pb->objectName().indexOf("_")+1);
+    int gameIndex=-1;
+    qDebug()<<index<<game;
+    QMessageBox messageBox(QMessageBox::Question,tr("Внимание!"),tr("Сделать игру видимой?"));
+    QAbstractButton *btnProfile = messageBox.addButton(tr("Да"),QMessageBox::YesRole);
+    messageBox.addButton(tr("Отмена"),QMessageBox::NoRole);
+    messageBox.exec();
+    if(messageBox.clickedButton()!=btnProfile){
+        return;
+    }
+    for(int i=0;i<_hiddenGames[index].second.size();i++){
+        QStringList lineList = _hiddenGames[index].second[i].split("%%");
+        if(lineList[0]==game){
+            gameIndex=i;
+            break;
+        }
+    }
+    QString save=_hiddenGames[index].first+".txt";
+    _hiddenGames[index].second.removeAt(gameIndex);
+    ui->TableWidgetGames->removeRow(gameIndex);
+    QFile fileSaveTo("Files/Hide/"+_hiddenGames[index].first+".txt");
+    qDebug()<<_hiddenGames[index].first+".txt";
+    fileSaveTo.open(QIODevice::WriteOnly| QIODevice::Text);
+    QTextStream writeStream(&fileSaveTo);
+    foreach(QString game, _hiddenGames[index].second){
+        writeStream <<game+"\n";
+    }
+    fileSaveTo.close();
+    QMessageBox(QMessageBox::Information,tr("Успешно!"),tr("Политика видимости для игры обновлена!"));
 }

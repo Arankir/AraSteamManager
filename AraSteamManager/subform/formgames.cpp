@@ -97,7 +97,7 @@ void FormGames::OnFinish(){
     fileHide2.setFileName("Files/Hide/All.txt");
     if(fileHide2.open(QIODevice::ReadOnly)){
         while(!fileHide2.atEnd()){
-            _hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
+            _hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n").split("%%").at(0);
         }
         fileHide2.close();
     }
