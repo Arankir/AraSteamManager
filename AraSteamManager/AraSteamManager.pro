@@ -57,7 +57,11 @@ SOURCES += \
     subform/formfriends.cpp \
     subform/formgames.cpp \
     subform/formsettings.cpp \
-    subform/formstatistics.cpp
+    subform/formstatistics.cpp \
+    subwidget/qbuttonwithdata.cpp \
+    subwidget/qcheckboxwithdata.cpp \
+    subwidget/qcomboboxwithdata.cpp \
+    subwidget/qradiobuttonwithdata.cpp
 
 HEADERS += \
     class/Threads/threadachievements.h \
@@ -91,7 +95,11 @@ HEADERS += \
     subform/formfriends.h \
     subform/formgames.h \
     subform/formsettings.h \
-    subform/formstatistics.h
+    subform/formstatistics.h \
+    subwidget/qbuttonwithdata.h \
+    subwidget/qcheckboxwithdata.h \
+    subwidget/qcomboboxwithdata.h \
+    subwidget/qradiobuttonwithdata.h
 
 FORMS += \
         mainwindow.ui \

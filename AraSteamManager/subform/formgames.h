@@ -11,6 +11,7 @@
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
 #include <class/Threads/threading.h>
+#include <subwidget/qbuttonwithdata.h>
 
 namespace Ui {
 class FormGames;

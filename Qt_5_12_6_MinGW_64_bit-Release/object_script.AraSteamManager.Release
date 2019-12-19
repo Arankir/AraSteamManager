@@ -31,6 +31,10 @@ release/formfriends.o
 release/formgames.o
 release/formsettings.o
 release/formstatistics.o
+release/qbuttonwithdata.o
+release/qcheckboxwithdata.o
+release/qcomboboxwithdata.o
+release/qradiobuttonwithdata.o
 release/qrc_resimg.o
 release/qrc_lang.o
 release/moc_threadachievements.o

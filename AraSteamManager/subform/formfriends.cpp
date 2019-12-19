@@ -56,17 +56,19 @@ void FormFriends::InitComponents(){
     LoadTable.AddThreadFriends(ui->TableWidgetFriends,_profiles,_friends);
 }
 void FormFriends::ProgressLoading(int p,int row){
-    QPushButton *button1 = new QPushButton(tr("На профиль"));
+    QButtonWithData *button1 = new QButtonWithData(tr("На профиль"));
     button1->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
-    button1->setObjectName("btn"+_profiles[p].GetSteamid());
-    connect(button1,&QPushButton::pressed,this,&FormFriends::GoToProfileClicked);
+    button1->setObjectName("ButtonGoToProfile"+QString::number(p));
+    button1->AddData("ProfileID",_profiles[p].GetSteamid());
+    connect(button1,&QButtonWithData::pressed,this,&FormFriends::GoToProfileClicked);
     ui->TableWidgetFriends->setCellWidget(row,6,button1);
 
-    QPushButton *button2 = new QPushButton;
+    QButtonWithData *button2 = new QButtonWithData("");
     button2->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
-    connect(button2,&QPushButton::pressed,this,&FormFriends::FavoritesClicked);
-    button2->setObjectName("btnf"+QString::number(row));
+    button2->setObjectName("ButtonFavorites"+QString::number(p));
+    button2->AddData("NumberFriend",QString::number(row));
+    connect(button2,&QButtonWithData::pressed,this,&FormFriends::FavoritesClicked);
     ui->TableWidgetFriends->setCellWidget(row,7,button2);
     ui->TableWidgetFriends->setRowHeight(row,33);
 }
@@ -188,14 +190,14 @@ void FormFriends::GoToProfileClicked(){
     if(_windowChildCount==0){
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         _windowChildCount++;
-        QPushButton *btn = qobject_cast<QPushButton*>(sender());
-        emit s_go_to_profile(btn->objectName().mid(3,btn->objectName().length()),"url");
+        QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
+        emit s_go_to_profile(btn->GetData(0),"url");
         emit s_return_to_profile();
     }
 }
 void FormFriends::FavoritesClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(4).toInt();
+    QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
+    int index=btn->GetData(0).toInt();
     QJsonObject newValue;
     newValue["id"]=_profiles[index].GetSteamid();
     newValue["name"]=_profiles[index].GetPersonaname();

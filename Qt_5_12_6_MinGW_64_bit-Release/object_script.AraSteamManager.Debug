@@ -31,6 +31,10 @@ debug/formfriends.o
 debug/formgames.o
 debug/formsettings.o
 debug/formstatistics.o
+debug/qbuttonwithdata.o
+debug/qcheckboxwithdata.o
+debug/qcomboboxwithdata.o
+debug/qradiobuttonwithdata.o
 debug/qrc_resimg.o
 debug/qrc_lang.o
 debug/moc_threadachievements.o

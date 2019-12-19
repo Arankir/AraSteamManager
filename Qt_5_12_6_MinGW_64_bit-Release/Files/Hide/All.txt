@@ -1,4 +1,3 @@
-256290%%abd72e23f4d18e943f98169e4a3a4a9243e069ea%%Child of Light
 322330%%a80aa6cff8eebc1cbc18c367d9ab063e1553b0ee%%Don't Starve Together
 205790%%%%Dota 2 Test
 270790%%0ed1d7883eabd7057d041333cad9ba9412ed5dca%%Etherlords II
@@ -25,3 +24,7 @@
 314680%%d6b5298b33cb990dcbb3fae94db4b421b813a724%%Crypt of the Necrodancer Soundtrack
 836620%%fd76e9933c56ebb5536b0396cfdf7c2dcd3e029c%%Black Desert
 4580%%584fcb6284ffd2fcf378fb3c199a9275a0a01b2d%%Warhammer 40,000: Dawn of War - Dark Crusade
+443080%%31f0d286128582e857a04270d15056a3f55c9e67%%Elite Dangerous: Arena
+304390%%64dd8eca34f0b5faeda135f057da1973806852f2%%For Honor
+654310%%64dd8eca34f0b5faeda135f057da1973806852f2%%For Honor - Public Test
+256290%%abd72e23f4d18e943f98169e4a3a4a9243e069ea%%Child of Light

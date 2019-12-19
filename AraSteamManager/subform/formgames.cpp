@@ -51,25 +51,28 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setRowCount(_games.count());
     for (int i=0;i<_games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
-        QPushButton *button1 = new QPushButton(tr("Достижения"));
+        QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
         button1->setMinimumSize(QSize(25,25));
-        connect(button1,&QPushButton::pressed,this,&FormGames::AchievementsClicked);
         button1->setObjectName("ButtonAchievements"+QString::number(i));
+        button1->AddData("NumberGame",QString::number(i));
+        connect(button1,&QButtonWithData::pressed,this,&FormGames::AchievementsClicked);
         ui->TableWidgetGames->setCellWidget(i,3,button1);
 
-        QPushButton *button2 = new QPushButton;
+        QButtonWithData *button2 = new QButtonWithData("");
         //проверка всего на избранное
         button2->setIcon(iFavorite);
         button2->setMinimumSize(QSize(25,25));
-        connect(button2,&QPushButton::pressed,this,&FormGames::FavoritesClicked);
+        connect(button2,&QButtonWithData::pressed,this,&FormGames::FavoritesClicked);
         button2->setObjectName("ButtonFavorites"+QString::number(i));
+        button2->AddData("NumberGame",QString::number(i));
         ui->TableWidgetGames->setCellWidget(i,4,button2);
 
-        QPushButton *button3 = new QPushButton;
+        QButtonWithData *button3 = new QButtonWithData("");
         button3->setIcon(iHide);
         button3->setMinimumSize(QSize(25,25));
-        connect(button3,&QPushButton::pressed,this,&FormGames::HideClicked);
+        connect(button3,&QButtonWithData::pressed,this,&FormGames::HideClicked);
         button3->setObjectName("ButtonHide"+QString::number(i));
+        button3->AddData("NumberGame",QString::number(i));
         ui->TableWidgetGames->setCellWidget(i,5,button3);
 
         QProgressBar *pb = new QProgressBar;
@@ -224,8 +227,8 @@ void FormGames::on_ButtonFind_clicked(){
 
 #define Functions {
 void FormGames::AchievementsClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(18,6).toInt();
+    QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
+    int index=btn->GetData(0).toInt();
     QEventLoop loop;
     SAchievementsPercentage Percentage(QString::number(_games[index].GetAppid()));
     connect(&Percentage, SIGNAL(s_finished()), &loop, SLOT(quit()));
@@ -241,11 +244,13 @@ void FormGames::AchievementsClicked(){
     }
 }
 void FormGames::FavoritesClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(15).toInt();
+    QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
+    int index=btn->GetData(0).toInt();
     QJsonObject newValue;
     newValue["id"]=QString::number(_games[index].GetAppid());
     newValue["name"]=_games[index].GetName();
+    newValue["icon"]=_games[index].GetImg_icon_url();
+    newValue["idUser"]=_id;
     if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {
@@ -268,8 +273,8 @@ void FormGames::HideClicked(){
          save="Files/Hide/All.txt";
     } else return;
 
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int gamei=btn->objectName().mid(10,6).toInt();
+    QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
+    int gamei=btn->GetData(0).toInt();
     _setting.CreateFile(save);
     QFile hide(save);
     hide.open(QIODevice::Append | QIODevice::Text);

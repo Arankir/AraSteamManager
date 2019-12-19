@@ -10,6 +10,7 @@
 #include <class/settings.h>
 #include <class/favorites.h>
 #include <class/filter.h>
+#include <subwidget/qbuttonwithdata.h>
 
 namespace Ui {
 class FormFriends;

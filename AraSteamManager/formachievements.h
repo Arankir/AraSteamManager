@@ -24,6 +24,10 @@
 #include <class/categoriesgame.h>
 #include <class/Threads/threading.h>
 #include <subform/formcategoryvalue.h>
+#include <subwidget/qbuttonwithdata.h>
+#include <subwidget/qradiobuttonwithdata.h>
+#include <subwidget/qcomboboxwithdata.h>
+#include <subwidget/qcheckboxwithdata.h>
 
 namespace Ui {
 class FormAchievements;
@@ -157,6 +161,7 @@ private:
     const int c_filterName = 0;
     const int c_filterFavorite = 2;
     const int c_filterEndConstValues = 3;
+    const int c_staticColumns=6;
     const int c_columnNoValueCategory = 7;
 };
 

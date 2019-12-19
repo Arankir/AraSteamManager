@@ -209,10 +209,11 @@ void FormAchievements::PullTableWidget(){
 }
 void FormAchievements::ProgressLoading(int AProgress,int ARow){
     qDebug()<<"Loading..."<<AProgress;
-    QPushButton *button1 = new QPushButton;
+    QButtonWithData *button1 = new QButtonWithData("");
     button1->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
-    connect(button1,&QPushButton::pressed,this,&FormAchievements::FavoritesClicked);
     button1->setObjectName("ButtonFavorites&"+QString::number(ARow));
+    button1->AddData("NumberGame",QString::number(ARow));
+    connect(button1,&QButtonWithData::pressed,this,&FormAchievements::FavoritesClicked);
     ui->TableWidgetAchievements->setCellWidget(ARow,6,button1);
 }
 void FormAchievements::OnFinish(){
@@ -474,45 +475,42 @@ void FormAchievements::on_RadioButtonCompareFriendsNotReached_clicked(){
     }
 }
 void FormAchievements::on_RadioButtonFriendAll_Click(){
-    QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
-    int col=(rb->objectName().mid(2,rb->objectName().indexOf("All")-2)).toInt();
-    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetCompareFriends->cellWidget(0,col))->toolTip();
-    int coll=0;
-    for(int i=6;i<ui->TableWidgetCompareAchievements->columnCount();i++) {
+    QRadioButtonWithData *rb = static_cast<QRadioButtonWithData*>(sender());
+    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetCompareFriends->cellWidget(0,rb->GetData(0).toInt()))->toolTip();
+    int col=0;
+    for(int i=c_staticColumns;i<ui->TableWidgetCompareAchievements->columnCount();i++) {
         if(ui->TableWidgetCompareAchievements->horizontalHeaderItem(i)->text()==Name){
-            coll=i;
+            col=i;
             break;
         }
     }
-    int filtercol=_fCompare.GetCol()-(ui->TableWidgetCompareAchievements->columnCount()-coll);
+    int filtercol=_fCompare.GetCol()-(ui->TableWidgetCompareAchievements->columnCount()-col);
     for(int i=2;i<ui->TableWidgetCompareAchievements->rowCount();i++){
         _fCompare.SetData(i,filtercol,true);
     }
     UpdateHiddenRows();
 }
 void FormAchievements::on_RadioButtonFriendReached_Click(){
-    QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
-    int col=(rb->objectName().mid(2,rb->objectName().indexOf("Reached")-2)).toInt();
-    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetCompareFriends->cellWidget(0,col))->toolTip();
-    int coll=0;
-    for(int i=6;i<ui->TableWidgetCompareAchievements->columnCount();i++) {
+    QRadioButtonWithData *rb = static_cast<QRadioButtonWithData*>(sender());
+    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetCompareFriends->cellWidget(0,rb->GetData(0).toInt()))->toolTip();
+    int col=0;
+    for(int i=c_staticColumns;i<ui->TableWidgetCompareAchievements->columnCount();i++) {
         if(ui->TableWidgetCompareAchievements->horizontalHeaderItem(i)->text()==Name){
-            coll=i;
+            col=i;
             break;
         }
     }
-    int filtercol=_fCompare.GetCol()-(ui->TableWidgetCompareAchievements->columnCount()-coll);
+    int filtercol=_fCompare.GetCol()-(ui->TableWidgetCompareAchievements->columnCount()-col);
     for(int i=2;i<ui->TableWidgetCompareAchievements->rowCount();i++){
-        _fCompare.SetData(i,filtercol,ui->TableWidgetCompareAchievements->item(i,coll)->text().indexOf(".")>-1);
+        _fCompare.SetData(i,filtercol,ui->TableWidgetCompareAchievements->item(i,col)->text().indexOf(".")>-1);
     }
     UpdateHiddenRows();
 }
 void FormAchievements::on_RadioButtonFriendNotReached_Click(){
-    QRadioButton *rb = qobject_cast<QRadioButton*>(sender());
-    int col=(rb->objectName().mid(2,rb->objectName().indexOf("NotReached")-2)).toInt();
-    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetCompareFriends->cellWidget(0,col))->toolTip();
+    QRadioButtonWithData *rb = static_cast<QRadioButtonWithData*>(sender());
+    QString Name=dynamic_cast<QLabel*>(ui->TableWidgetCompareFriends->cellWidget(0,rb->GetData(0).toInt()))->toolTip();
     int coll=0;
-    for(int i=6;i<ui->TableWidgetCompareAchievements->columnCount();i++) {
+    for(int i=c_staticColumns;i<ui->TableWidgetCompareAchievements->columnCount();i++) {
         if(ui->TableWidgetCompareAchievements->horizontalHeaderItem(i)->text()==Name){
             coll=i;
             break;
@@ -551,15 +549,18 @@ void FormAchievements::on_TableWidgetCompareFriendsCellChanged(int ARow, int ACo
             SAchievements ach=_achievements;
             ach.Set(pla);
             if(ProfileIsPublic(ach,col)){
-                QRadioButton *rbAll = new QRadioButton();
-                QRadioButton *rbReached = new QRadioButton();
-                QRadioButton *rbNotReached = new QRadioButton();
+                QRadioButtonWithData *rbAll = new QRadioButtonWithData();
+                QRadioButtonWithData *rbReached = new QRadioButtonWithData();
+                QRadioButtonWithData *rbNotReached = new QRadioButtonWithData();
                 rbAll->setObjectName("RB"+QString::number(AColumn)+"All");
                 rbReached->setObjectName("RB"+QString::number(AColumn)+"Reached");
                 rbNotReached->setObjectName("RB"+QString::number(AColumn)+"NotReached");
-                connect(rbAll,&QRadioButton::clicked,this,&FormAchievements::on_RadioButtonFriendAll_Click);
-                connect(rbReached,&QRadioButton::clicked,this,&FormAchievements::on_RadioButtonFriendReached_Click);
-                connect(rbNotReached,&QRadioButton::clicked,this,&FormAchievements::on_RadioButtonFriendNotReached_Click);
+                rbAll->AddData("NumberFriend",QString::number(AColumn));
+                rbReached->AddData("NumberFriend",QString::number(AColumn));
+                rbNotReached->AddData("NumberFriend",QString::number(AColumn));
+                connect(rbAll,&QRadioButtonWithData::clicked,this,&FormAchievements::on_RadioButtonFriendAll_Click);
+                connect(rbReached,&QRadioButtonWithData::clicked,this,&FormAchievements::on_RadioButtonFriendReached_Click);
+                connect(rbNotReached,&QRadioButtonWithData::clicked,this,&FormAchievements::on_RadioButtonFriendNotReached_Click);
                 rbAll->setChecked(true);
                 QWidget *wd = new QWidget;
                 QVBoxLayout *lay = new QVBoxLayout;
@@ -651,19 +652,20 @@ void FormAchievements::ShowCategories(){
     QWidget *widget2 = new QWidget;
     for(int i = 0; i < list.size(); i++){
         if(_categoriesGame.GetIsNoValues(i)==1){
-            QCheckBox *chb = new QCheckBox;
-            chb->setText(_categoriesGame.GetTitle(i));
+            QCheckBoxWithData *chb = new QCheckBoxWithData(_categoriesGame.GetTitle(i));
             chb->setObjectName("Category"+QString::number(i));
-            connect(chb,&QCheckBox::stateChanged,this,&FormAchievements::on_CheckBoxCategory_Change);
+            chb->AddData("NumberCategory",QString::number(i));
+            connect(chb,&QCheckBoxWithData::stateChanged,this,&FormAchievements::on_CheckBoxCategory_Change);
             layout2->addRow(chb);
         } else {
-            QComboBox *cb = new QComboBox;
+            QComboBoxWithData *cb = new QComboBoxWithData;
             cb->addItem(tr("Не выбрано"));
             QJsonArray values=_categoriesGame.GetValues(i);
             for(int j=0;j<values.size();j++) {
                 cb->addItem(values.at(j).toObject().value("Title").toString());
             }
             cb->setObjectName("Category"+QString::number(i));
+            cb->AddData("NumberCategory",QString::number(i));
             connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
             layout1->addRow(new QLabel(_categoriesGame.GetTitle(i)),cb);
         }
@@ -784,8 +786,8 @@ void FormAchievements::on_ButtonUpdate_clicked(){
     ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(_setting.GetKey(),true)));
 }
 void FormAchievements::FavoritesClicked(){
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    int index=btn->objectName().mid(16).toInt();
+    QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
+    int index=btn->GetData(0).toInt();
     QJsonObject gameO;
     QJsonObject newValue;
     gameO["id"]=_game.GetAppid();
@@ -808,9 +810,9 @@ void FormAchievements::on_CheckBoxShowFilter_stateChanged(int arg1){
     ui->GroupBoxFilter->setHidden(arg1==0);
 }
 void FormAchievements::on_ComboBoxCategory_Change(int AIndex){
-    QComboBox *cb = qobject_cast<QComboBox*>(sender());
+    QComboBoxWithData *cb = static_cast<QComboBoxWithData*>(sender());
     if(_categoriesGame.GetCounts()>0){
-        int categorynum = cb->objectName().mid(8,cb->objectName().length()).toInt();
+        int categorynum = cb->GetData(0).toInt();
         if(AIndex!=0){
             QList<QString> achievementsName = _categoriesGame.GetValues(categorynum,AIndex-1);
             for(int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
@@ -834,9 +836,9 @@ void FormAchievements::on_ComboBoxCategory_Change(int AIndex){
     }
 }
 void FormAchievements::on_CheckBoxCategory_Change(int AIndex){
-    QCheckBox *cb = qobject_cast<QCheckBox*>(sender());
+    QCheckBoxWithData *cb = static_cast<QCheckBoxWithData*>(sender());
     if(_categoriesGame.GetCounts()>0){
-        int categorynum = cb->objectName().mid(8,cb->objectName().length()).toInt();
+        int categorynum = cb->GetData(0).toInt();
         if(AIndex!=0){
             QList<QString> achievementsName = _categoriesGame.GetNoValues(categorynum);
             for(int i=0;i<ui->TableWidgetAchievements->rowCount();i++) {
