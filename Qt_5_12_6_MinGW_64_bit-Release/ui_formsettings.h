@@ -111,6 +111,7 @@ public:
     QLabel *label_9;
     QLabel *label_2;
     QLabel *label_4;
+    QLabel *label_27;
     QLabel *label_11;
     QLabel *label_5;
     QLabel *label;
@@ -673,6 +674,11 @@ public:
 
         verticalLayout_9->addWidget(label_4);
 
+        label_27 = new QLabel(groupBox_3);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+
+        verticalLayout_9->addWidget(label_27);
+
         label_11 = new QLabel(groupBox_3);
         label_11->setObjectName(QString::fromUtf8("label_11"));
         QFont font1;
@@ -847,7 +853,7 @@ public:
 
         retranslateUi(FormSettings);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(FormSettings);
@@ -945,6 +951,7 @@ public:
         label_9->setText(QApplication::translate("FormSettings", "\320\244\320\276\321\200\320\274\320\260\321\202 \320\264\320\260\321\202", nullptr));
         label_2->setText(QApplication::translate("FormSettings", "\320\222\321\213\320\263\321\200\321\203\320\267\320\272\320\260 \320\275\320\260\321\201\321\202\321\200\320\276\320\265\320\272, \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\271, \320\277\321\200\320\276\321\207\320\265\320\263\320\276", nullptr));
         label_4->setText(QApplication::translate("FormSettings", "\320\241\320\261\321\200\320\276\321\201 \320\272 \320\267\320\260\320\262\320\276\320\264\321\201\320\272\320\270\320\274 \320\275\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\260\320\274", nullptr));
+        label_27->setText(QApplication::translate("FormSettings", "\320\230\321\201\320\277\321\200\320\260\320\262\320\270\321\202\321\214 \320\277\321\200\320\276\320\261\320\273\320\265\320\274\321\203 \321\201 \320\275\320\265\321\200\320\265\321\201\320\260\320\271\320\267\321\217\321\211\320\265\320\271\321\201\321\217 ScrollArea \321\201 \321\204\320\260\320\271\320\273\320\260\320\274\320\270 \321\201\320\272\321\200\321\213\321\202\321\213\321\205 \320\270\320\263\321\200", nullptr));
         label_11->setText(QApplication::translate("FormSettings", "\320\224\320\276\321\201\321\202\320\260\321\202\321\214 \320\270\320\263\321\200\321\203 \320\270\320\267 \321\207\321\201", nullptr));
         label_5->setText(QApplication::translate("FormSettings", "\320\237\320\276\320\274\320\265\320\275\321\217\321\202\321\214 \321\202\320\265\320\274\321\203", nullptr));
         label->setText(QApplication::translate("FormSettings", "\320\237\320\276\320\274\320\265\320\275\321\217\321\202\321\214 \321\217\320\267\321\213\320\272", nullptr));

@@ -32,7 +32,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -985,6 +985,13 @@
            <widget class="QLabel" name="label_4">
             <property name="text">
              <string>Сброс к заводским настройкам</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>Исправить проблему с нересайзящейся ScrollArea с файлами скрытых игр</string>
             </property>
            </widget>
           </item>
