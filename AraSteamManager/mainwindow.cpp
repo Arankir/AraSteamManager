@@ -87,8 +87,8 @@ void MainWindow::InitComponents(){
     //ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
-void MainWindow::ProgressLoading(int p,int){
-    ui->FormProgressBar->setValue(p);
+void MainWindow::ProgressLoading(int Aprogress,int){
+    ui->FormProgressBar->setValue(Aprogress);
 }
 #define InitEnd }
 
@@ -193,8 +193,8 @@ void MainWindow::on_ButtonFindProfile_clicked(){
     }
     }
 }
-void MainWindow::GoToProfile(QString AID, QString AType){
-    SProfile profile(AID,false,AType);
+void MainWindow::GoToProfile(QString Aid, QString Atype){
+    SProfile profile(Aid,false,Atype);
     if(profile.GetStatus()=="success"){
         if(_currentBufferProfile!=_bufferProfiles.size())
             while(_bufferProfiles.size()!=_currentBufferProfile)
@@ -215,25 +215,25 @@ void MainWindow::GoToProfile(QString AID, QString AType){
             QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
         }
 }
-void MainWindow::ProfileToUi(SProfile AProfile){
-    _profile=AProfile;
+void MainWindow::ProfileToUi(SProfile Aprofile){
+    _profile=Aprofile;
     _games.Clear();
     _friends.Clear();
-    SBans Bans(AProfile.GetSteamid(),false);
-    SLevels Levels(AProfile.GetSteamid());
-    _games.Set(AProfile.GetSteamid(),true,true,false);
-    _friends.Set(AProfile.GetSteamid(),false);
+    SBans Bans(Aprofile.GetSteamid(),false);
+    SLevels Levels(Aprofile.GetSteamid());
+    _games.Set(Aprofile.GetSteamid(),true,true,false);
+    _friends.Set(Aprofile.GetSteamid(),false);
     //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
     //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
     ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()=="success"?QString::number(_games.GetCount()):"error"));
     ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()=="success"?QString::number(_friends.GetCount()):"error"));
-    if(!AProfile.GetGameextrainfo().isEmpty()){
-        ui->LabelPersonaState->setText(tr("В игре %1").arg(AProfile.GetGameextrainfo()));
+    if(!Aprofile.GetGameextrainfo().isEmpty()){
+        ui->LabelPersonaState->setText(tr("В игре %1").arg(Aprofile.GetGameextrainfo()));
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
     } else
-        switch (AProfile.GetPersonastate()) {
+        switch (Aprofile.GetPersonastate()) {
         case 0:{
-                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(AProfile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
+                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(Aprofile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                 break;
         }
@@ -268,12 +268,12 @@ void MainWindow::ProfileToUi(SProfile AProfile){
                 break;
         }
         }
-    ui->LabelProfileUrl->setText(AProfile.GetProfileurl());
+    ui->LabelProfileUrl->setText(Aprofile.GetProfileurl());
     ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(Levels.GetLevel())));
-    ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(AProfile.GetRealname()));
-    ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(AProfile.GetTimecreated().toString("yyyy.MM.dd")));
-    ui->LabelLocCountryCode->setText(tr("Язык: %1").arg(AProfile.GetLoccountrycode()));
-    switch (AProfile.GetCommunityvisibilitystate()) {
+    ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(Aprofile.GetRealname()));
+    ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(Aprofile.GetTimecreated().toString("yyyy.MM.dd")));
+    ui->LabelLocCountryCode->setText(tr("Язык: %1").arg(Aprofile.GetLoccountrycode()));
+    switch (Aprofile.GetCommunityvisibilitystate()) {
         case 1:{
             ui->LabelProfileVisibility->setText(tr("Скрытый"));
             ui->LabelProfileVisibility->setStyleSheet("color:red");
@@ -305,13 +305,13 @@ void MainWindow::ProfileToUi(SProfile AProfile){
     QNetworkAccessManager imagemanager;
     QEventLoop imageloop;
     connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(AProfile.GetAvatarmedium()));
+    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Aprofile.GetAvatarmedium()));
     imageloop.exec();
     disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
     QPixmap img;
     img.loadFromData(imagereply.readAll());
     ui->LabelAvatar->setPixmap(img);
-    ui->LabelNick->setText(AProfile.GetPersonaname());
+    ui->LabelNick->setText(Aprofile.GetPersonaname());
     //ui->LabelAvatar->setTextFormat(Qt::RichText);
     //ui->LabelAvatar->setText("<img src=\"images/profiles/main.png\"> "+Profile.GetPersonaname());
     //ui->LabelNick->setFont(QFont("MS Shell Dlg 2",14));
@@ -329,9 +329,9 @@ void MainWindow::ProfileToUi(SProfile AProfile){
     ui->ButtonGames->setEnabled(_games.GetStatus()=="success");
     ui->ButtonFriends->setEnabled(_friends.GetStatus()=="success");
     ui->ButtonFavorites->setEnabled(true);
-    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=AProfile.GetSteamid());
+    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=Aprofile.GetSteamid());
     ui->ButtonStatistics->setEnabled(true);
-    ui->ButtonGoToMyProfile->setEnabled((_setting.GetMyProfile()!="none")&&(_setting.GetMyProfile()!=AProfile.GetSteamid()));
+    ui->ButtonGoToMyProfile->setEnabled((_setting.GetMyProfile()!="none")&&(_setting.GetMyProfile()!=Aprofile.GetSteamid()));
 
 }
 void MainWindow::on_ButtonBack_clicked(){

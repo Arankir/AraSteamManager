@@ -4,9 +4,9 @@ ThreadGames::ThreadGames(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadGames::Set(QTableWidget *ATableWidgetGames, QVector<SGame> AGames){
-    _games=AGames;
-    _TableWidgetGames=ATableWidgetGames;
+void ThreadGames::Set(QTableWidget *AtableWidgetGames, QVector<SGame> Agames){
+    _games=Agames;
+    _TableWidgetGames=AtableWidgetGames;
 }
 
 int ThreadGames::Fill(){

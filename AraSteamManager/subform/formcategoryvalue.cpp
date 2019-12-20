@@ -1,9 +1,9 @@
 #include "formcategoryvalue.h"
 #include "ui_formcategoryvalue.h"
 
-FormCategoryValue::FormCategoryValue(int pos, QWidget *parent) : QWidget(parent), ui(new Ui::FormCategoryValue){
+FormCategoryValue::FormCategoryValue(int Apos, QWidget *parent) : QWidget(parent), ui(new Ui::FormCategoryValue){
     ui->setupUi(this);
-    _position=pos;
+    _position=Apos;
     switch(_setting.GetTheme()){
     case 1:{
         _theme="white";

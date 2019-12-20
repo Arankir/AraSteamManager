@@ -1,20 +1,20 @@
 #include "Sfriend.h"
 
-SFriend::SFriend(QJsonObject AFriend, QObject *parent) : QObject(parent){
-    _friend=AFriend;
+SFriend::SFriend(QJsonObject Afriend, QObject *parent) : QObject(parent){
+    _friend=Afriend;
 }
 SFriend::SFriend(){
 
 }
 
-void SFriend::Set(QJsonObject AFriend){
-    _friend=AFriend;
+void SFriend::Set(QJsonObject Afriend){
+    _friend=Afriend;
 }
 
-SFriend::SFriend( const SFriend & ANewFriend){
-    _friend=ANewFriend._friend;
+SFriend::SFriend( const SFriend & AnewFriend){
+    _friend=AnewFriend._friend;
 }
-SFriend & SFriend::operator=(const SFriend & ANewFriend) {
-    _friend=ANewFriend._friend;
+SFriend & SFriend::operator=(const SFriend & AnewFriend) {
+    _friend=AnewFriend._friend;
     return *this;
 }

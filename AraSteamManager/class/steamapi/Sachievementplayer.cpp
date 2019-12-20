@@ -1,29 +1,29 @@
 #include "Sachievementplayer.h"
 
-SAchievementPlayer::SAchievementPlayer(QJsonObject AAchievement, QObject *parent) : QObject(parent){
-    _apiName=AAchievement.value("apiname").toString();
-    _achieved=AAchievement.value("achieved").toInt();
-    _unlockTime=QDateTime::fromSecsSinceEpoch(AAchievement.value("unlocktime").toInt(),Qt::LocalTime);
+SAchievementPlayer::SAchievementPlayer(QJsonObject Aachievement, QObject *parent) : QObject(parent){
+    _apiName=Aachievement.value("apiname").toString();
+    _achieved=Aachievement.value("achieved").toInt();
+    _unlockTime=QDateTime::fromSecsSinceEpoch(Aachievement.value("unlocktime").toInt(),Qt::LocalTime);
 }
 SAchievementPlayer::SAchievementPlayer(){
 
 }
 
-void SAchievementPlayer::Set(QJsonObject AAchievement){
-    _apiName=AAchievement.value("apiname").toString();
-    _achieved=AAchievement.value("achieved").toInt();
-    _unlockTime=QDateTime::fromSecsSinceEpoch(AAchievement.value("unlocktime").toInt(),Qt::LocalTime);
+void SAchievementPlayer::Set(QJsonObject Aachievement){
+    _apiName=Aachievement.value("apiname").toString();
+    _achieved=Aachievement.value("achieved").toInt();
+    _unlockTime=QDateTime::fromSecsSinceEpoch(Aachievement.value("unlocktime").toInt(),Qt::LocalTime);
 }
 
 
-SAchievementPlayer::SAchievementPlayer( const SAchievementPlayer & ANewAchievement){
-    _apiName=ANewAchievement._apiName;
-    _achieved=ANewAchievement._achieved;
-    _unlockTime=ANewAchievement._unlockTime;
+SAchievementPlayer::SAchievementPlayer( const SAchievementPlayer & AnewAchievement){
+    _apiName=AnewAchievement._apiName;
+    _achieved=AnewAchievement._achieved;
+    _unlockTime=AnewAchievement._unlockTime;
 }
-SAchievementPlayer & SAchievementPlayer::operator=(const SAchievementPlayer & ANewAchievement) {
-    _apiName=ANewAchievement._apiName;
-    _achieved=ANewAchievement._achieved;
-    _unlockTime=ANewAchievement._unlockTime;
+SAchievementPlayer & SAchievementPlayer::operator=(const SAchievementPlayer & AnewAchievement) {
+    _apiName=AnewAchievement._apiName;
+    _achieved=AnewAchievement._achieved;
+    _unlockTime=AnewAchievement._unlockTime;
     return *this;
 }

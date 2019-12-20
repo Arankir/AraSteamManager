@@ -1,19 +1,19 @@
 #include "Sachievementsglobal.h"
 
-SAchievementsGlobal::SAchievementsGlobal(QString AAppid, QObject *parent) : QObject(parent){
+SAchievementsGlobal::SAchievementsGlobal(QString Aappid, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    _appid=AAppid;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+AAppid+"&l="+tr("russian")));
+    _appid=Aappid;
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+Aappid+"&l="+tr("russian")));
 }
-SAchievementsGlobal::SAchievementsGlobal(QJsonDocument AAchievements){
+SAchievementsGlobal::SAchievementsGlobal(QJsonDocument Aachievements){
     _manager = new QNetworkAccessManager();
-    if(AAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0){
-        _gameName=AAchievements.object().value("game").toObject().value("gameName").toString();
-        _gameVersion=AAchievements.object().value("game").toObject().value("gameVersion").toString();
-        _count=AAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();
+    if(Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0){
+        _gameName=Aachievements.object().value("game").toObject().value("gameName").toString();
+        _gameVersion=Aachievements.object().value("game").toObject().value("gameVersion").toString();
+        _count=Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();
         for (int i=0;i<_count;
-             _achievements.push_back(SAchievementGlobal(AAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(i++).toObject())));
+             _achievements.push_back(SAchievementGlobal(Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(i++).toObject())));
         _status="success";
     }
     else {
@@ -27,19 +27,19 @@ SAchievementsGlobal::~SAchievementsGlobal(){
     delete _manager;
 }
 
-void SAchievementsGlobal::Set(QString AAppid){
+void SAchievementsGlobal::Set(QString Aappid){
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    _appid=AAppid;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+AAppid+"&l="+tr("russian")));
+    _appid=Aappid;
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+Aappid+"&l="+tr("russian")));
 }
-void SAchievementsGlobal::Set(QJsonDocument AAchievements){
+void SAchievementsGlobal::Set(QJsonDocument Aachievements){
     Clear();
-    if(AAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0){
-        _gameName=AAchievements.object().value("game").toObject().value("gameName").toString();
-        _gameVersion=AAchievements.object().value("game").toObject().value("gameVersion").toString();
-        _count=AAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();
+    if(Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0){
+        _gameName=Aachievements.object().value("game").toObject().value("gameName").toString();
+        _gameVersion=Aachievements.object().value("game").toObject().value("gameVersion").toString();
+        _count=Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();
         for (int i=0;i<_count;
-             _achievements.push_back(SAchievementGlobal(AAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(i++).toObject())));
+             _achievements.push_back(SAchievementGlobal(Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(i++).toObject())));
         _status="success";
     }
     else {
@@ -47,10 +47,10 @@ void SAchievementsGlobal::Set(QJsonDocument AAchievements){
     }
 }
 
-void SAchievementsGlobal::Load(QNetworkReply *AReply){
+void SAchievementsGlobal::Load(QNetworkReply *Areply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    QJsonDocument localAchievements = QJsonDocument::fromJson(AReply->readAll());
-    AReply->deleteLater();
+    QJsonDocument localAchievements = QJsonDocument::fromJson(Areply->readAll());
+    Areply->deleteLater();
     Set(localAchievements);
     qDebug()<<"Global load";
     emit s_finished(*this);
@@ -65,23 +65,23 @@ void SAchievementsGlobal::Clear(){
     _count=0;
 }
 
-SAchievementsGlobal::SAchievementsGlobal( const SAchievementsGlobal & ANewAchievements){
-    _achievements=ANewAchievements._achievements;
-    _appid=ANewAchievements._appid;
-    _count=ANewAchievements._count;
-    _gameName=ANewAchievements._gameName;
-    _gameVersion=ANewAchievements._gameVersion;
-    _status=ANewAchievements._status;
+SAchievementsGlobal::SAchievementsGlobal(const SAchievementsGlobal & AnewAchievements){
+    _achievements=AnewAchievements._achievements;
+    _appid=AnewAchievements._appid;
+    _count=AnewAchievements._count;
+    _gameName=AnewAchievements._gameName;
+    _gameVersion=AnewAchievements._gameVersion;
+    _status=AnewAchievements._status;
     _manager = new QNetworkAccessManager;
 }
-SAchievementsGlobal & SAchievementsGlobal::operator=(const SAchievementsGlobal & ANewAchievements){
+SAchievementsGlobal & SAchievementsGlobal::operator=(const SAchievementsGlobal & AnewAchievements){
     delete _manager;
-    _achievements=ANewAchievements._achievements;
-    _appid=ANewAchievements._appid;
-    _count=ANewAchievements._count;
-    _gameName=ANewAchievements._gameName;
-    _gameVersion=ANewAchievements._gameVersion;
-    _status=ANewAchievements._status;
+    _achievements=AnewAchievements._achievements;
+    _appid=AnewAchievements._appid;
+    _count=AnewAchievements._count;
+    _gameName=AnewAchievements._gameName;
+    _gameVersion=AnewAchievements._gameVersion;
+    _status=AnewAchievements._status;
     _manager = new QNetworkAccessManager;
     return *this;
 }

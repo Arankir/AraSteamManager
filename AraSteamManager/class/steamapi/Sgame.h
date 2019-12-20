@@ -11,6 +11,7 @@
 #include <QEventLoop>
 #include <QTextCodec>
 #include <QObject>
+#include <class/settings.h>
 
 class SGame : public QObject
 {
@@ -26,7 +27,7 @@ public:
     QString GetImg_icon_url() {return _game.value("img_icon_url").toString();}
     QString GetImg_logo_url() {return _game.value("img_logo_url").toString();}
     bool GetHas_community_visible_stats() {return _game.value("has_community_visible_stats").toBool();}
-    QString GetNumberPlayers(QString key, bool hardreload);
+    QString GetNumberPlayers(bool hardreload);
     SGame(const SGame &);
     SGame & operator=(const SGame & game);
 
@@ -37,6 +38,7 @@ public slots:
 private:
     QJsonObject _game;
     QString _numberPlayers="";
+    Settings _setting;
 };
 
 //{"appid":218620,

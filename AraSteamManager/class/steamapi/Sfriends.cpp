@@ -1,13 +1,13 @@
 #include "Sfriends.h"
 
-SFriends::SFriends(QString AID, bool AParallel, QObject *parent) : QObject(parent){
+SFriends::SFriends(QString Aid, bool Aparallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
-    _id=AID;
-    if(AParallel){
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+AID+"&relationship=friend"));
+    _id=Aid;
+    if(Aparallel){
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+Aid+"&relationship=friend"));
         connect(_manager,&QNetworkAccessManager::finished,this,&SFriends::Load);
     } else {
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+AID+"&relationship=friend"));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+Aid+"&relationship=friend"));
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         loop.exec();
@@ -18,10 +18,10 @@ SFriends::SFriends(QString AID, bool AParallel, QObject *parent) : QObject(paren
         emit s_finished();
     }
 }
-SFriends::SFriends(QJsonDocument AFriends){
+SFriends::SFriends(QJsonDocument Afriends){
     _manager = new QNetworkAccessManager();
-    if(AFriends.object().value("friendslist").toObject().value("friends").toArray().size()>0){
-        _friends=AFriends.object().value("friendslist").toObject().value("friends").toArray();
+    if(Afriends.object().value("friendslist").toObject().value("friends").toArray().size()>0){
+        _friends=Afriends.object().value("friendslist").toObject().value("friends").toArray();
         _status="success";
     }
     else {
@@ -35,13 +35,13 @@ SFriends::~SFriends(){
     delete _manager;
 }
 
-void SFriends::Set(QString AID, bool AParallel){
-    _id=AID;
-    if(AParallel){
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+AID+"&relationship=friend"));
+void SFriends::Set(QString Aid, bool Aparallel){
+    _id=Aid;
+    if(Aparallel){
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+Aid+"&relationship=friend"));
         connect(_manager,&QNetworkAccessManager::finished,this,&SFriends::Load);
     } else {
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+AID+"&relationship=friend"));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+_setting.GetKey()+"&steamid="+Aid+"&relationship=friend"));
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         loop.exec();
@@ -52,10 +52,10 @@ void SFriends::Set(QString AID, bool AParallel){
         emit s_finished();
     }
 }
-void SFriends::Set(QJsonDocument AFriends){
+void SFriends::Set(QJsonDocument Afriends){
     Clear();
-    if(AFriends.object().value("friendslist").toObject().value("friends").toArray().size()>0){
-        _friends=AFriends.object().value("friendslist").toObject().value("friends").toArray();
+    if(Afriends.object().value("friendslist").toObject().value("friends").toArray().size()>0){
+        _friends=Afriends.object().value("friendslist").toObject().value("friends").toArray();
         _status="success";
     }
     else {
@@ -63,10 +63,10 @@ void SFriends::Set(QJsonDocument AFriends){
     }
 }
 
-void SFriends::Load(QNetworkReply *AReply){
+void SFriends::Load(QNetworkReply *Areply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SFriends::Load);
-    QJsonDocument localFriends = QJsonDocument::fromJson(AReply->readAll());
-    AReply->deleteLater();
+    QJsonDocument localFriends = QJsonDocument::fromJson(Areply->readAll());
+    Areply->deleteLater();
     Set(localFriends);
     emit s_finished(this);
     emit s_finished();
@@ -99,25 +99,25 @@ SProfile SFriends::GetProfiles(){
     return Profile;
 }
 
-void SFriends::Update(bool AParallel){
-    Set(_id,AParallel);
+void SFriends::Update(bool Aparallel){
+    Set(_id,Aparallel);
 }
 void SFriends::Clear(){
     _friends=QJsonArray();
 }
 
-SFriends::SFriends( const SFriends & ANewFriends){
-    _friends=ANewFriends._friends;
-    _status=ANewFriends._status;
-    _id=ANewFriends._id;
+SFriends::SFriends( const SFriends & AnewFriends){
+    _friends=AnewFriends._friends;
+    _status=AnewFriends._status;
+    _id=AnewFriends._id;
     _manager = new QNetworkAccessManager;
 }
 
-SFriends & SFriends::operator=(const SFriends & ANewFriends){
+SFriends & SFriends::operator=(const SFriends & AnewFriends){
     delete _manager;
-    _friends=ANewFriends._friends;
-    _status=ANewFriends._status;
-    _id=ANewFriends._id;
+    _friends=AnewFriends._friends;
+    _status=AnewFriends._status;
+    _id=AnewFriends._id;
     _manager = new QNetworkAccessManager;
     return *this;
 }

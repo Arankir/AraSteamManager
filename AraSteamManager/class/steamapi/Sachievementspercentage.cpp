@@ -1,17 +1,17 @@
 #include "Sachievementspercentage.h"
 
-SAchievementsPercentage::SAchievementsPercentage(QString AAppid, QObject *parent) : QObject(parent){
+SAchievementsPercentage::SAchievementsPercentage(QString Aappid, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    _appid=AAppid;
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+AAppid));
+    _appid=Aappid;
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+Aappid));
 }
-SAchievementsPercentage::SAchievementsPercentage(QJsonDocument AAchievements){
+SAchievementsPercentage::SAchievementsPercentage(QJsonDocument Aachievements){
     _manager = new QNetworkAccessManager();
-    if(AAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size()>0){
-        _count=AAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();
+    if(Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size()>0){
+        _count=Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();
         for (int i=0;i<_count;
-             _achievements.push_back(SAchievementPercentage(AAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i++).toObject())));
+             _achievements.push_back(SAchievementPercentage(Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i++).toObject())));
         _status="success";
     }
     else {
@@ -25,17 +25,17 @@ SAchievementsPercentage::~SAchievementsPercentage(){
     delete _manager;
 }
 
-void SAchievementsPercentage::Set(QString AAppid){
+void SAchievementsPercentage::Set(QString Aappid){
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    _appid=AAppid;
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+AAppid));
+    _appid=Aappid;
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+Aappid));
 }
-void SAchievementsPercentage::Set(QJsonDocument AAchievements){
+void SAchievementsPercentage::Set(QJsonDocument Aachievements){
     Clear();
-    if(AAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size()>0){
-        _count=AAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();
+    if(Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size()>0){
+        _count=Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();
         for (int i=0;i<_count;
-             _achievements.push_back(SAchievementPercentage(AAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i++).toObject())));
+             _achievements.push_back(SAchievementPercentage(Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i++).toObject())));
         _status="success";
     }
     else {
@@ -43,10 +43,10 @@ void SAchievementsPercentage::Set(QJsonDocument AAchievements){
     }
 }
 
-void SAchievementsPercentage::Load(QNetworkReply *AReply){
+void SAchievementsPercentage::Load(QNetworkReply *Areply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    QJsonDocument localAchievements = QJsonDocument::fromJson(AReply->readAll());
-    AReply->deleteLater();
+    QJsonDocument localAchievements = QJsonDocument::fromJson(Areply->readAll());
+    Areply->deleteLater();
     Set(localAchievements);
     qDebug()<<"Percent load";
     emit s_finished(*this);
@@ -61,19 +61,19 @@ void SAchievementsPercentage::Clear(){
     _count=0;
 }
 
-SAchievementsPercentage::SAchievementsPercentage( const SAchievementsPercentage & ANewAchievements){
-    _achievements=ANewAchievements._achievements;
-    _appid=ANewAchievements._appid;
-    _count=ANewAchievements._count;
-    _status=ANewAchievements._status;
+SAchievementsPercentage::SAchievementsPercentage( const SAchievementsPercentage & AnewAchievements){
+    _achievements=AnewAchievements._achievements;
+    _appid=AnewAchievements._appid;
+    _count=AnewAchievements._count;
+    _status=AnewAchievements._status;
     _manager = new QNetworkAccessManager;
 }
-SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievementsPercentage & ANewAchievements) {
+SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievementsPercentage & AnewAchievements) {
     delete _manager;
-    _achievements=ANewAchievements._achievements;
-    _appid=ANewAchievements._appid;
-    _count=ANewAchievements._count;
-    _status=ANewAchievements._status;
+    _achievements=AnewAchievements._achievements;
+    _appid=AnewAchievements._appid;
+    _count=AnewAchievements._count;
+    _status=AnewAchievements._status;
     _manager = new QNetworkAccessManager;
     return *this;
 }

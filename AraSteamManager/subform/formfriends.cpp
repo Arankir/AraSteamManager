@@ -1,10 +1,10 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-FormFriends::FormFriends(QString AID, SFriends AFriends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString Aid, SFriends Asriends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
-    _id=AID;
-    _friends=AFriends;
+    _id=Aid;
+    _friends=Asriends;
     SProfile profiles = _friends.GetProfiles();
     for(int i=0;i<profiles.GetCount();_profiles.push_back(profiles.GetProfile(i++)));
     switch(_setting.GetTheme()){
@@ -55,22 +55,22 @@ void FormFriends::InitComponents(){
     Threading LoadTable(this);
     LoadTable.AddThreadFriends(ui->TableWidgetFriends,_profiles,_friends);
 }
-void FormFriends::ProgressLoading(int p,int row){
+void FormFriends::ProgressLoading(int Aprogress,int Arow){
     QButtonWithData *button1 = new QButtonWithData(tr("На профиль"));
     button1->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
-    button1->setObjectName("ButtonGoToProfile"+QString::number(p));
-    button1->AddData("ProfileID",_profiles[p].GetSteamid());
+    button1->setObjectName("ButtonGoToProfile"+QString::number(Aprogress));
+    button1->AddData("ProfileID",_profiles[Aprogress].GetSteamid());
     connect(button1,&QButtonWithData::pressed,this,&FormFriends::GoToProfileClicked);
-    ui->TableWidgetFriends->setCellWidget(row,6,button1);
+    ui->TableWidgetFriends->setCellWidget(Arow,6,button1);
 
     QButtonWithData *button2 = new QButtonWithData("");
     button2->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
-    button2->setObjectName("ButtonFavorites"+QString::number(p));
-    button2->AddData("NumberFriend",QString::number(row));
+    button2->setObjectName("ButtonFavorites"+QString::number(Aprogress));
+    button2->AddData("NumberFriend",QString::number(Arow));
     connect(button2,&QButtonWithData::pressed,this,&FormFriends::FavoritesClicked);
-    ui->TableWidgetFriends->setCellWidget(row,7,button2);
-    ui->TableWidgetFriends->setRowHeight(row,33);
+    ui->TableWidgetFriends->setCellWidget(Arow,7,button2);
+    ui->TableWidgetFriends->setRowHeight(Arow,33);
 }
 void FormFriends::OnFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
@@ -93,18 +93,18 @@ void FormFriends::OnFinish(){
             }
         }
 }
-void FormFriends::OnResultImage(ImageRequest *AImage){
+void FormFriends::OnResultImage(ImageRequest *Aimage){
     QPixmap pixmap;
-    pixmap.loadFromData(AImage->GetAnswer());
+    pixmap.loadFromData(Aimage->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetFriends->setCellWidget(AImage->GetRow(),0,label);
+    ui->TableWidgetFriends->setCellWidget(Aimage->GetRow(),0,label);
     if(_numRequests==500&&_numNow<_friends.GetCount()){
-        AImage->LoadImage(_profiles[_numNow].GetAvatar(),_numNow,"images/profiles/"+_profiles[_numNow].GetAvatar().mid(72,20)+".jpg",true);
+        Aimage->LoadImage(_profiles[_numNow].GetAvatar(),_numNow,"images/profiles/"+_profiles[_numNow].GetAvatar().mid(72,20)+".jpg",true);
         _numNow++;
     } else {
-        disconnect(AImage,&ImageRequest::s_finished,this,&FormFriends::OnResultImage);
-        AImage->deleteLater();
+        disconnect(Aimage,&ImageRequest::s_finished,this,&FormFriends::OnResultImage);
+        Aimage->deleteLater();
     }
 }
 #define InitEnd }
@@ -147,9 +147,9 @@ void FormFriends::on_ComboBoxStatus_activated(int AIndex){
         }
     UpdateHiddenRows();
 }
-void FormFriends::on_LineEditName_textChanged(const QString & ANewText){
+void FormFriends::on_LineEditName_textChanged(const QString & AnewText){
     for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-        _filter.SetData(i,c_filterName,ui->TableWidgetFriends->item(i,1)->text().toLower().indexOf(ANewText.toLower())>-1);
+        _filter.SetData(i,c_filterName,ui->TableWidgetFriends->item(i,1)->text().toLower().indexOf(AnewText.toLower())>-1);
     UpdateHiddenRows();
 }
 void FormFriends::on_ButtonFind_clicked(){

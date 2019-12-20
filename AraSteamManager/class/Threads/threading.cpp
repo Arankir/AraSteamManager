@@ -5,11 +5,11 @@ Threading::Threading(QObject *parent) : QObject(parent)
 
 }
 
-int Threading::AddThreadGames(QTableWidget *ATableWidgetGames, QVector<SGame> AGames){
+int Threading::AddThreadGames(QTableWidget *AtableWidgetGames, QVector<SGame> Agames){
     ThreadGames *Games = new ThreadGames;
     QThread *thread = new QThread;
     Games->moveToThread(thread);
-    Games->Set(ATableWidgetGames,AGames);
+    Games->Set(AtableWidgetGames,Agames);
     connect(thread,SIGNAL(started()),Games,SLOT(Fill()));
     connect(Games,SIGNAL(s_finished()),thread,SLOT(quit()));
     connect(Games,SIGNAL(s_finished()),Games,SLOT(deleteLater()));
@@ -22,11 +22,11 @@ int Threading::AddThreadGames(QTableWidget *ATableWidgetGames, QVector<SGame> AG
     return 1;
 }
 
-int Threading::AddThreadFriends(QTableWidget *ATableWidgetFriends,QVector<SProfile> AProfiles,SFriends AFriends){
+int Threading::AddThreadFriends(QTableWidget *AtableWidgetFriends,QVector<SProfile> Aprofiles,SFriends Afriends){
     ThreadFriends *Friends = new ThreadFriends;
     QThread *thread = new QThread;
     Friends->moveToThread(thread);
-    Friends->Set(ATableWidgetFriends,AProfiles,AFriends);
+    Friends->Set(AtableWidgetFriends,Aprofiles,Afriends);
     connect(thread,SIGNAL(started()),Friends,SLOT(Fill()));
     connect(Friends,SIGNAL(s_finished()),thread,SLOT(quit()));
     connect(Friends,SIGNAL(s_finished()),Friends,SLOT(deleteLater()));
@@ -39,11 +39,11 @@ int Threading::AddThreadFriends(QTableWidget *ATableWidgetFriends,QVector<SProfi
     return 1;
 }
 
-int Threading::AddThreadAchievements(SAchievements AAchievements, QLabel *ALabelTotalPersent, QTableWidget *ATableWidgetAchievements, QLabel *ALabelTotalPersentCompare, QTableWidget *ATableWidgetCompareAchievements){
+int Threading::AddThreadAchievements(SAchievements AAchievements, QLabel *ALabelTotalPersent, QTableWidget *AtableWidgetAchievements, QLabel *ALabelTotalPersentCompare, QTableWidget *AtableWidgetCompareAchievements){
     ThreadAchievements *Achievements = new ThreadAchievements;
     QThread *thread = new QThread;
     Achievements->moveToThread(thread);
-    Achievements->Set(AAchievements, ALabelTotalPersent, ATableWidgetAchievements, ALabelTotalPersentCompare, ATableWidgetCompareAchievements);
+    Achievements->Set(AAchievements, ALabelTotalPersent, AtableWidgetAchievements, ALabelTotalPersentCompare, AtableWidgetCompareAchievements);
     connect(thread,SIGNAL(started()),Achievements,SLOT(Fill()));
     connect(Achievements,SIGNAL(s_finished()),thread,SLOT(quit()));
     connect(Achievements,SIGNAL(s_finished()),Achievements,SLOT(deleteLater()));

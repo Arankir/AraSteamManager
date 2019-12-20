@@ -1,21 +1,21 @@
 #include "Slevels.h"
 
-SLevels::SLevels(QString AID, QObject *parent) : QObject(parent){
+SLevels::SLevels(QString Aid, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     QEventLoop loop;
     connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-    _steamid=AID;
-    QNetworkReply& Reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+_setting.GetKey()+"&steamid="+AID));
+    _steamid=Aid;
+    QNetworkReply& Reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+_setting.GetKey()+"&steamid="+Aid));
     loop.exec();
     QJsonDocument DocLvls = QJsonDocument::fromJson(Reply.readAll());
     Set(DocLvls);
     emit s_finished(this);
     emit s_finished();
 }
-SLevels::SLevels(QJsonDocument ALvls){
+SLevels::SLevels(QJsonDocument Alvls){
     _manager = new QNetworkAccessManager();
-    if(ALvls.object().value("response").toObject().value("player_level").toInt()>0){
-        _player_level=ALvls.object().value("response").toObject().value("player_level").toInt();
+    if(Alvls.object().value("response").toObject().value("player_level").toInt()>0){
+        _player_level=Alvls.object().value("response").toObject().value("player_level").toInt();
         _status="success";
     }
     else {
@@ -30,20 +30,20 @@ SLevels::~SLevels(){
     delete _manager;
 }
 
-void SLevels::Set(QString AID){
+void SLevels::Set(QString Aid){
     QEventLoop loop;
     connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-    _steamid=AID;
-    QNetworkReply& Reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+_setting.GetKey()+"&steamid="+AID));
+    _steamid=Aid;
+    QNetworkReply& Reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+_setting.GetKey()+"&steamid="+Aid));
     loop.exec();
     QJsonDocument DocLvls = QJsonDocument::fromJson(Reply.readAll());
     Set(DocLvls);
     emit s_finished(this);
     emit s_finished();
 }
-void SLevels::Set(QJsonDocument ALvls){
-    if(ALvls.object().value("response").toObject().value("player_level").toInt()>0){
-        _player_level=ALvls.object().value("response").toObject().value("player_level").toInt();
+void SLevels::Set(QJsonDocument Alvls){
+    if(Alvls.object().value("response").toObject().value("player_level").toInt()>0){
+        _player_level=Alvls.object().value("response").toObject().value("player_level").toInt();
         _status="success";
     }
     else {

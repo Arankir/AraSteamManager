@@ -1,16 +1,16 @@
 #include "Sachievement.h"
 
-SAchievement::SAchievement(SAchievementGlobal AGlobal, SAchievementPlayer APlayer, SAchievementPercentage APercent, QObject *parent) : QObject(parent){
-    _apiName=AGlobal.GetApiname();
-    _defaultValue=AGlobal.GetDefaultvalue();
-    _displayName=AGlobal.GetDisplayname();
-    _hidden=AGlobal.GetHidden();
-    _description=AGlobal.GetDescription();
-    _icon=AGlobal.GetIcon();
-    _iconGray=AGlobal.GetIcongray();
-    _achieved=APlayer.GetAchieved();
-    _unlockTime=APlayer.GetUnlocktime();
-    _percent=APercent.GetPercent();
+SAchievement::SAchievement(SAchievementGlobal Aglobal, SAchievementPlayer Aplayer, SAchievementPercentage Apercent, QObject *parent) : QObject(parent){
+    _apiName=Aglobal.GetApiname();
+    _defaultValue=Aglobal.GetDefaultvalue();
+    _displayName=Aglobal.GetDisplayname();
+    _hidden=Aglobal.GetHidden();
+    _description=Aglobal.GetDescription();
+    _icon=Aglobal.GetIcon();
+    _iconGray=Aglobal.GetIcongray();
+    _achieved=Aplayer.GetAchieved();
+    _unlockTime=Aplayer.GetUnlocktime();
+    _percent=Apercent.GetPercent();
     _statusGlobal="success";
     _statusPlayer="success";
     _statusPercent="success";
@@ -19,81 +19,81 @@ SAchievement::SAchievement(){
 
 }
 
-void SAchievement::Set(SAchievementGlobal AGlobal, SAchievementPlayer APlayer, SAchievementPercentage APercent){
-    _apiName=AGlobal.GetApiname();
-    _defaultValue=AGlobal.GetDefaultvalue();
-    _displayName=AGlobal.GetDisplayname();
-    _hidden=AGlobal.GetHidden();
-    _description=AGlobal.GetDescription();
-    _icon=AGlobal.GetIcon();
-    _iconGray=AGlobal.GetIcongray();
-    _achieved=APlayer.GetAchieved();
-    _unlockTime=APlayer.GetUnlocktime();
-    _percent=APercent.GetPercent();
+void SAchievement::Set(SAchievementGlobal Aglobal, SAchievementPlayer Aplayer, SAchievementPercentage Apercent){
+    _apiName=Aglobal.GetApiname();
+    _defaultValue=Aglobal.GetDefaultvalue();
+    _displayName=Aglobal.GetDisplayname();
+    _hidden=Aglobal.GetHidden();
+    _description=Aglobal.GetDescription();
+    _icon=Aglobal.GetIcon();
+    _iconGray=Aglobal.GetIcongray();
+    _achieved=Aplayer.GetAchieved();
+    _unlockTime=Aplayer.GetUnlocktime();
+    _percent=Apercent.GetPercent();
     _statusGlobal="success";
     _statusPlayer="success";
     _statusPercent="success";
 }
 
-void SAchievement::SetGlobal(SAchievementGlobal AGlobal){
-    if(_apiName==""||_apiName==AGlobal.GetApiname()){
-        _apiName=AGlobal.GetApiname();
-        _defaultValue=AGlobal.GetDefaultvalue();
-        _displayName=AGlobal.GetDisplayname();
-        _hidden=AGlobal.GetHidden();
-        _description=AGlobal.GetDescription();
-        _icon=AGlobal.GetIcon();
-        _iconGray=AGlobal.GetIcongray();
+void SAchievement::SetGlobal(SAchievementGlobal Aglobal){
+    if(_apiName==""||_apiName==Aglobal.GetApiname()){
+        _apiName=Aglobal.GetApiname();
+        _defaultValue=Aglobal.GetDefaultvalue();
+        _displayName=Aglobal.GetDisplayname();
+        _hidden=Aglobal.GetHidden();
+        _description=Aglobal.GetDescription();
+        _icon=Aglobal.GetIcon();
+        _iconGray=Aglobal.GetIcongray();
         _statusGlobal="success";
     } else
         _statusGlobal="error: apiname is incorrect";
 }
-void SAchievement::SetPlayer(SAchievementPlayer APlayer){
-    if(_apiName==""||_apiName==APlayer.GetApiname()){
-        _apiName=APlayer.GetApiname();
-        _achieved=APlayer.GetAchieved();
-        _unlockTime=APlayer.GetUnlocktime();
+void SAchievement::SetPlayer(SAchievementPlayer Aplayer){
+    if(_apiName==""||_apiName==Aplayer.GetApiname()){
+        _apiName=Aplayer.GetApiname();
+        _achieved=Aplayer.GetAchieved();
+        _unlockTime=Aplayer.GetUnlocktime();
         _statusPlayer="success";
     } else
         _statusPlayer="error: apiname is incorrect";
 }
-void SAchievement::SetPercent(SAchievementPercentage APercent){
-    if(_apiName==""||_apiName==APercent.GetApiname()){
-        _apiName=APercent.GetApiname();
-        _percent=APercent.GetPercent();
+void SAchievement::SetPercent(SAchievementPercentage Apercent){
+    if(_apiName==""||_apiName==Apercent.GetApiname()){
+        _apiName=Apercent.GetApiname();
+        _percent=Apercent.GetPercent();
         _statusPercent="success";
     } else
         _statusPercent="error: apiname is incorrect";
 }
 
-SAchievement::SAchievement(const SAchievement & ANewAchievement){
-    _apiName=ANewAchievement._apiName;
-    _defaultValue=ANewAchievement._defaultValue;
-    _displayName=ANewAchievement._displayName;
-    _hidden=ANewAchievement._hidden;
-    _description=ANewAchievement._description;
-    _icon=ANewAchievement._icon;
-    _iconGray=ANewAchievement._iconGray;
-    _achieved=ANewAchievement._achieved;
-    _unlockTime=ANewAchievement._unlockTime;
-    _percent=ANewAchievement._percent;
-    _statusGlobal=ANewAchievement._statusGlobal;
-    _statusPlayer=ANewAchievement._statusPlayer;
-    _statusPercent=ANewAchievement._statusPercent;
+SAchievement::SAchievement(const SAchievement & AnewAchievement){
+    _apiName=AnewAchievement._apiName;
+    _defaultValue=AnewAchievement._defaultValue;
+    _displayName=AnewAchievement._displayName;
+    _hidden=AnewAchievement._hidden;
+    _description=AnewAchievement._description;
+    _icon=AnewAchievement._icon;
+    _iconGray=AnewAchievement._iconGray;
+    _achieved=AnewAchievement._achieved;
+    _unlockTime=AnewAchievement._unlockTime;
+    _percent=AnewAchievement._percent;
+    _statusGlobal=AnewAchievement._statusGlobal;
+    _statusPlayer=AnewAchievement._statusPlayer;
+    _statusPercent=AnewAchievement._statusPercent;
 }
-SAchievement & SAchievement::operator=(const SAchievement & ANewAchievement){
-    _apiName=ANewAchievement._apiName;
-    _defaultValue=ANewAchievement._defaultValue;
-    _displayName=ANewAchievement._displayName;
-    _hidden=ANewAchievement._hidden;
-    _description=ANewAchievement._description;
-    _icon=ANewAchievement._icon;
-    _iconGray=ANewAchievement._iconGray;
-    _achieved=ANewAchievement._achieved;
-    _unlockTime=ANewAchievement._unlockTime;
-    _percent=ANewAchievement._percent;
-    _statusGlobal=ANewAchievement._statusGlobal;
-    _statusPlayer=ANewAchievement._statusPlayer;
-    _statusPercent=ANewAchievement._statusPercent;
+SAchievement & SAchievement::operator=(const SAchievement & AnewAchievement){
+    _apiName=AnewAchievement._apiName;
+    _defaultValue=AnewAchievement._defaultValue;
+    _displayName=AnewAchievement._displayName;
+    _hidden=AnewAchievement._hidden;
+    _description=AnewAchievement._description;
+    _icon=AnewAchievement._icon;
+    _iconGray=AnewAchievement._iconGray;
+    _achieved=AnewAchievement._achieved;
+    _unlockTime=AnewAchievement._unlockTime;
+    _percent=AnewAchievement._percent;
+    _statusGlobal=AnewAchievement._statusGlobal;
+    _statusPlayer=AnewAchievement._statusPlayer;
+    _statusPercent=AnewAchievement._statusPercent;
     return *this;
 }

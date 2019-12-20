@@ -1,15 +1,15 @@
 #include "Sgames.h"
 
-SGames::SGames(QString AID, bool AFree_games, bool AGame_info, bool AParallel, QObject *parent) : QObject(parent){
+SGames::SGames(QString Aid, bool Afree_games, bool Agame_info, bool Aparallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
-    _id=AID;
+    _id=Aid;
     QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+_setting.GetKey();
-    if(AFree_games)
+    if(Afree_games)
         request+="&include_played_free_games=1";
-    if(AGame_info)
+    if(Agame_info)
         request+="&include_appinfo=1";
-    request+="&format=json&steamid="+AID;
-    if(AParallel){
+    request+="&format=json&steamid="+Aid;
+    if(Aparallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
         _manager->get(QNetworkRequest(request));
     } else {
@@ -24,10 +24,10 @@ SGames::SGames(QString AID, bool AFree_games, bool AGame_info, bool AParallel, Q
         emit s_finished();
     }
 }
-SGames::SGames(QJsonDocument AGames){
+SGames::SGames(QJsonDocument Agames){
     _manager = new QNetworkAccessManager();
-    if(AGames.object().value("response").toObject().value("games").toArray().size()>0){
-        _games=AGames.object().value("response").toObject().value("games").toArray();
+    if(Agames.object().value("response").toObject().value("games").toArray().size()>0){
+        _games=Agames.object().value("response").toObject().value("games").toArray();
         _status="success";
     }
     else {
@@ -41,15 +41,15 @@ SGames::~SGames(){
     delete _manager;
 }
 
-void SGames::Set(QString AID, bool AFree_games, bool AGame_info, bool AParallel){
-    _id=AID;
+void SGames::Set(QString Aid, bool Afree_games, bool Agame_info, bool Aparallel){
+    _id=Aid;
     QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+_setting.GetKey();
-    if(AFree_games)
+    if(Afree_games)
         request+="&include_played_free_games=1";
-    if(AGame_info)
+    if(Agame_info)
         request+="&include_appinfo=1";
-    request+="&format=json&steamid="+AID;
-    if(AParallel){
+    request+="&format=json&steamid="+Aid;
+    if(Aparallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
         _manager->get(QNetworkRequest(request));
     } else {
@@ -64,10 +64,10 @@ void SGames::Set(QString AID, bool AFree_games, bool AGame_info, bool AParallel)
         emit s_finished();
     }
 }
-void SGames::Set(QJsonDocument AGames){
+void SGames::Set(QJsonDocument Agames){
     Clear();
-    if(AGames.object().value("response").toObject().value("games").toArray().size()>0){
-        _games=AGames.object().value("response").toObject().value("games").toArray();
+    if(Agames.object().value("response").toObject().value("games").toArray().size()>0){
+        _games=Agames.object().value("response").toObject().value("games").toArray();
         _status="success";
     }
     else {
@@ -75,10 +75,10 @@ void SGames::Set(QJsonDocument AGames){
     }
 }
 
-void SGames::Load(QNetworkReply *Reply){
+void SGames::Load(QNetworkReply *Areply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
-    QJsonDocument localGames = QJsonDocument::fromJson(Reply->readAll());
-    Reply->deleteLater();
+    QJsonDocument localGames = QJsonDocument::fromJson(Areply->readAll());
+    Areply->deleteLater();
     Set(localGames);
     emit s_finished(this);
     emit s_finished();
@@ -91,21 +91,21 @@ void SGames::Clear(){
     _games=QJsonArray();
 }
 
-SGames::SGames( const SGames & ANewGames){
-    _games=ANewGames._games;
-    _status=ANewGames._status;
-    _id=ANewGames._id;
-    _free_games=ANewGames._free_games;
-    _game_info=ANewGames._game_info;
+SGames::SGames( const SGames & AnewGames){
+    _games=AnewGames._games;
+    _status=AnewGames._status;
+    _id=AnewGames._id;
+    _free_games=AnewGames._free_games;
+    _game_info=AnewGames._game_info;
     _manager = new QNetworkAccessManager;
 }
-SGames & SGames::operator=(const SGames & ANewGames){
+SGames & SGames::operator=(const SGames & AnewGames){
     delete _manager;
-    _games=ANewGames._games;
-    _status=ANewGames._status;
-    _id=ANewGames._id;
-    _free_games=ANewGames._free_games;
-    _game_info=ANewGames._game_info;
+    _games=AnewGames._games;
+    _status=AnewGames._status;
+    _id=AnewGames._id;
+    _free_games=AnewGames._free_games;
+    _game_info=AnewGames._game_info;
     _manager = new QNetworkAccessManager;
     return *this;
 }

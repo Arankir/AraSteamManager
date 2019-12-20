@@ -1,10 +1,10 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-FormGames::FormGames(QString AID, SGames AGames, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString Aid, SGames Agames, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
-    _id=AID;
-    SGames game=AGames;
+    _id=Aid;
+    SGames game=Agames;
     for (int i=0;i<game.GetCount();_games.push_back(game.GetGame(i++)));
     switch(_setting.GetTheme()){
     case 1:{
@@ -83,7 +83,7 @@ void FormGames::InitComponents(){
     Threading LoadTable(this);
     LoadTable.AddThreadGames(ui->TableWidgetGames,_games);
 }
-void FormGames::ProgressLoading(int p,int row){
+void FormGames::ProgressLoading(int Aprogress,int Arow){
 
 }
 void FormGames::OnFinish(){
@@ -140,43 +140,43 @@ void FormGames::OnFinish(){
             }
         }
 }
-void FormGames::OnResultImage(ImageRequest *AImage){
+void FormGames::OnResultImage(ImageRequest *Aimage){
     QPixmap pixmap;
-    pixmap.loadFromData(AImage->GetAnswer());
+    pixmap.loadFromData(Aimage->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetGames->setCellWidget(AImage->GetRow(),0,label);
+    ui->TableWidgetGames->setCellWidget(Aimage->GetRow(),0,label);
     if(_numRequests==500&&_numNow<_games.size()){
         while (QFile::exists("images/icon_games/"+_games[_numNow].GetImg_icon_url()+".jpg")||_games[_numNow].GetImg_icon_url()=="") {
             _numNow++;
         }
-        AImage->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+
+        Aimage->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+
                         QString::number(_games[_numNow].GetAppid())+"/"+_games[_numNow].GetImg_icon_url()+".jpg",_numNow,
                         "images/icon_games/"+_games[_numNow].GetImg_icon_url()+".jpg",true);
         _numNow++;
     } else {
-        disconnect(AImage,&ImageRequest::s_finished,this,&FormGames::OnResultImage);
-        AImage->deleteLater();
+        disconnect(Aimage,&ImageRequest::s_finished,this,&FormGames::OnResultImage);
+        Aimage->deleteLater();
     }
 }
-void FormGames::OnResultAchievements(SAchievementsPlayer AAchievements){
-    disconnect(&AAchievements,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
-    QProgressBar *pb = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(AAchievements.GetIndex(),2));
-    pb->setMaximum(AAchievements.GetCount());
+void FormGames::OnResultAchievements(SAchievementsPlayer Aachievements){
+    disconnect(&Aachievements,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
+    QProgressBar *pb = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(Aachievements.GetIndex(),2));
+    pb->setMaximum(Aachievements.GetCount());
     pb->setMinimumSize(QSize(25,25));
-    if(AAchievements.GetCount()>0){
+    if(Aachievements.GetCount()>0){
         int val=0;
-        for (int i=0;i<AAchievements.GetCount();i++) {
-            if(AAchievements.GetAchieved(i)==1)
+        for (int i=0;i<Aachievements.GetCount();i++) {
+            if(Aachievements.GetAchieved(i)==1)
                 val++;
         }
         pb->setValue(val);
     } else {
         pb->setValue(0);
-        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(AAchievements.GetIndex(),3))->setEnabled(false);
+        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(Aachievements.GetIndex(),3))->setEnabled(false);
     }
-    ui->TableWidgetGames->setItem(AAchievements.GetIndex(),2,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
-    _achievements[AAchievements.GetIndex()]=AAchievements;
+    ui->TableWidgetGames->setItem(Aachievements.GetIndex(),2,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
+    _achievements[Aachievements.GetIndex()]=Aachievements;
     //ach->deleteLater();
 }
 #define InitEnd }
@@ -194,8 +194,8 @@ void FormGames::closeEvent(QCloseEvent*){
     emit s_return_to_profile();
     //delete this;
 }
-void FormGames::ReturnFromAchievements(int ANum){
-    disconnect(achievementsforms[ANum],&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
+void FormGames::ReturnFromAchievements(int Anum){
+    disconnect(achievementsforms[Anum],&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
     //delete achievementsforms[num];
 }
 #define SystemEnd }

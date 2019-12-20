@@ -1,44 +1,44 @@
 #include "Sachievementglobal.h"
 
-SAchievementGlobal::SAchievementGlobal(QJsonObject AAchievement, QObject *parent) : QObject(parent){
-    _apiName=AAchievement.value("name").toString();
-    _defaultValue=AAchievement.value("defaultvalue").toInt();
-    _displayName=AAchievement.value("displayName").toString();
-    _hidden=AAchievement.value("hidden").toInt();
-    _description=AAchievement.value("description").toString();
-    _icon=AAchievement.value("icon").toString();
-    _iconGray=AAchievement.value("icongray").toString();
+SAchievementGlobal::SAchievementGlobal(QJsonObject Aachievement, QObject *parent) : QObject(parent){
+    _apiName=Aachievement.value("name").toString();
+    _defaultValue=Aachievement.value("defaultvalue").toInt();
+    _displayName=Aachievement.value("displayName").toString();
+    _hidden=Aachievement.value("hidden").toInt();
+    _description=Aachievement.value("description").toString();
+    _icon=Aachievement.value("icon").toString();
+    _iconGray=Aachievement.value("icongray").toString();
 }
 SAchievementGlobal::SAchievementGlobal(){
 
 }
 
-void SAchievementGlobal::Set(QJsonObject AAchievement){
-    _apiName=AAchievement.value("name").toString();
-    _defaultValue=AAchievement.value("defaultvalue").toInt();
-    _displayName=AAchievement.value("displayName").toString();
-    _hidden=AAchievement.value("hidden").toInt();
-    _description=AAchievement.value("description").toString();
-    _icon=AAchievement.value("icon").toString();
-    _iconGray=AAchievement.value("icongray").toString();
+void SAchievementGlobal::Set(QJsonObject Aachievement){
+    _apiName=Aachievement.value("name").toString();
+    _defaultValue=Aachievement.value("defaultvalue").toInt();
+    _displayName=Aachievement.value("displayName").toString();
+    _hidden=Aachievement.value("hidden").toInt();
+    _description=Aachievement.value("description").toString();
+    _icon=Aachievement.value("icon").toString();
+    _iconGray=Aachievement.value("icongray").toString();
 }
 
-SAchievementGlobal::SAchievementGlobal( const SAchievementGlobal & ANewAchievements){
-    _apiName=ANewAchievements._apiName;
-    _defaultValue=ANewAchievements._defaultValue;
-    _displayName=ANewAchievements._displayName;
-    _hidden=ANewAchievements._hidden;
-    _description=ANewAchievements._description;
-    _icon=ANewAchievements._icon;
-    _iconGray=ANewAchievements._iconGray;
+SAchievementGlobal::SAchievementGlobal( const SAchievementGlobal & AnewAchievements){
+    _apiName=AnewAchievements._apiName;
+    _defaultValue=AnewAchievements._defaultValue;
+    _displayName=AnewAchievements._displayName;
+    _hidden=AnewAchievements._hidden;
+    _description=AnewAchievements._description;
+    _icon=AnewAchievements._icon;
+    _iconGray=AnewAchievements._iconGray;
 }
-SAchievementGlobal & SAchievementGlobal::operator=(const SAchievementGlobal & ANewAchievements) {
-    _apiName=ANewAchievements._apiName;
-    _defaultValue=ANewAchievements._defaultValue;
-    _displayName=ANewAchievements._displayName;
-    _hidden=ANewAchievements._hidden;
-    _description=ANewAchievements._description;
-    _icon=ANewAchievements._icon;
-    _iconGray=ANewAchievements._iconGray;
+SAchievementGlobal & SAchievementGlobal::operator=(const SAchievementGlobal & AnewAchievements) {
+    _apiName=AnewAchievements._apiName;
+    _defaultValue=AnewAchievements._defaultValue;
+    _displayName=AnewAchievements._displayName;
+    _hidden=AnewAchievements._hidden;
+    _description=AnewAchievements._description;
+    _icon=AnewAchievements._icon;
+    _iconGray=AnewAchievements._iconGray;
     return *this;
 }

@@ -4,12 +4,12 @@ ThreadAchievements::ThreadAchievements(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadAchievements::Set(SAchievements AAchievements, QLabel *ALabelTotalPersent, QTableWidget *ATableWidgetAchievements, QLabel *ALabelTotalPersentCompare, QTableWidget *ATableWidgetCompareAchievements){
-    _achievements=AAchievements;
-    _LabelTotalPersent=ALabelTotalPersent;
-    _TableWidgetAchievements=ATableWidgetAchievements;
-    _LabelTotalPersentCompare=ALabelTotalPersentCompare;
-    _TableWidgetCompareAchievements=ATableWidgetCompareAchievements;
+void ThreadAchievements::Set(SAchievements Aachievements, QLabel *AlabelTotalPersent, QTableWidget *AtableWidgetAchievements, QLabel *AlabelTotalPersentCompare, QTableWidget *AtableWidgetCompareAchievements){
+    _achievements=Aachievements;
+    _LabelTotalPersent=AlabelTotalPersent;
+    _TableWidgetAchievements=AtableWidgetAchievements;
+    _LabelTotalPersentCompare=AlabelTotalPersentCompare;
+    _TableWidgetCompareAchievements=AtableWidgetCompareAchievements;
 }
 
 int ThreadAchievements::Fill(){
