@@ -11,32 +11,51 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "QtCharts/QtCharts"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_FormStatistics
 {
 public:
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_4;
+    QChartView *ChartViewPercentages;
     QVBoxLayout *verticalLayout;
     QLabel *LabelAveragePercent;
     QLabel *LabelSummColumn;
-    QLabel *LabelNumOf;
-    QLabel *label;
+    QHBoxLayout *horizontalLayout_3;
     QTableWidget *tableWidget;
-    QLabel *label_2;
+    QChartView *ChartsViewTimes;
+    QHBoxLayout *horizontalLayout_2;
     QTableWidget *tableWidget_2;
+    QChartView *ChartsViewMonths;
+    QHBoxLayout *horizontalLayout;
+    QTableWidget *tableWidget_3;
+    QChartView *ChartsViewYears;
 
     void setupUi(QWidget *FormStatistics)
     {
         if (FormStatistics->objectName().isEmpty())
             FormStatistics->setObjectName(QString::fromUtf8("FormStatistics"));
-        FormStatistics->resize(828, 300);
-        verticalLayout = new QVBoxLayout(FormStatistics);
+        FormStatistics->resize(828, 734);
+        verticalLayout_2 = new QVBoxLayout(FormStatistics);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        ChartViewPercentages = new QChartView(FormStatistics);
+        ChartViewPercentages->setObjectName(QString::fromUtf8("ChartViewPercentages"));
+        ChartViewPercentages->setMinimumSize(QSize(0, 250));
+
+        horizontalLayout_4->addWidget(ChartViewPercentages);
+
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         LabelAveragePercent = new QLabel(FormStatistics);
         LabelAveragePercent->setObjectName(QString::fromUtf8("LabelAveragePercent"));
@@ -48,43 +67,77 @@ public:
 
         verticalLayout->addWidget(LabelSummColumn);
 
-        LabelNumOf = new QLabel(FormStatistics);
-        LabelNumOf->setObjectName(QString::fromUtf8("LabelNumOf"));
-        LabelNumOf->setWordWrap(true);
 
-        verticalLayout->addWidget(LabelNumOf);
+        horizontalLayout_4->addLayout(verticalLayout);
 
-        label = new QLabel(FormStatistics);
-        label->setObjectName(QString::fromUtf8("label"));
 
-        verticalLayout->addWidget(label);
+        verticalLayout_2->addLayout(horizontalLayout_4);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         tableWidget = new QTableWidget(FormStatistics);
-        if (tableWidget->columnCount() < 24)
-            tableWidget->setColumnCount(24);
-        if (tableWidget->rowCount() < 1)
-            tableWidget->setRowCount(1);
+        if (tableWidget->columnCount() < 1)
+            tableWidget->setColumnCount(1);
+        if (tableWidget->rowCount() < 24)
+            tableWidget->setRowCount(24);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setRowCount(1);
-        tableWidget->setColumnCount(24);
+        tableWidget->setMaximumSize(QSize(16777215, 70));
+        tableWidget->setRowCount(24);
+        tableWidget->setColumnCount(1);
 
-        verticalLayout->addWidget(tableWidget);
+        horizontalLayout_3->addWidget(tableWidget);
 
-        label_2 = new QLabel(FormStatistics);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        ChartsViewTimes = new QChartView(FormStatistics);
+        ChartsViewTimes->setObjectName(QString::fromUtf8("ChartsViewTimes"));
 
-        verticalLayout->addWidget(label_2);
+        horizontalLayout_3->addWidget(ChartsViewTimes);
 
+
+        verticalLayout_2->addLayout(horizontalLayout_3);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         tableWidget_2 = new QTableWidget(FormStatistics);
-        if (tableWidget_2->columnCount() < 12)
-            tableWidget_2->setColumnCount(12);
-        if (tableWidget_2->rowCount() < 1)
-            tableWidget_2->setRowCount(1);
+        if (tableWidget_2->columnCount() < 1)
+            tableWidget_2->setColumnCount(1);
+        if (tableWidget_2->rowCount() < 12)
+            tableWidget_2->setRowCount(12);
         tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
-        tableWidget_2->setRowCount(1);
-        tableWidget_2->setColumnCount(12);
+        tableWidget_2->setMaximumSize(QSize(16777215, 70));
+        tableWidget_2->setRowCount(12);
+        tableWidget_2->setColumnCount(1);
 
-        verticalLayout->addWidget(tableWidget_2);
+        horizontalLayout_2->addWidget(tableWidget_2);
+
+        ChartsViewMonths = new QChartView(FormStatistics);
+        ChartsViewMonths->setObjectName(QString::fromUtf8("ChartsViewMonths"));
+
+        horizontalLayout_2->addWidget(ChartsViewMonths);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        tableWidget_3 = new QTableWidget(FormStatistics);
+        if (tableWidget_3->columnCount() < 1)
+            tableWidget_3->setColumnCount(1);
+        if (tableWidget_3->rowCount() < 1)
+            tableWidget_3->setRowCount(1);
+        tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
+        tableWidget_3->setMaximumSize(QSize(16777215, 70));
+        tableWidget_3->setRowCount(1);
+        tableWidget_3->setColumnCount(1);
+
+        horizontalLayout->addWidget(tableWidget_3);
+
+        ChartsViewYears = new QChartView(FormStatistics);
+        ChartsViewYears->setObjectName(QString::fromUtf8("ChartsViewYears"));
+
+        horizontalLayout->addWidget(ChartsViewYears);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
 
 
         retranslateUi(FormStatistics);
@@ -97,9 +150,6 @@ public:
         FormStatistics->setWindowTitle(QApplication::translate("FormStatistics", "Form", nullptr));
         LabelAveragePercent->setText(QApplication::translate("FormStatistics", "\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202: ", nullptr));
         LabelSummColumn->setText(QApplication::translate("FormStatistics", "\320\222\321\201\320\265\320\263\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271:", nullptr));
-        LabelNumOf->setText(QApplication::translate("FormStatistics", "\320\242\320\260\320\272\320\270\321\205 \321\202\320\276 \321\201\321\202\320\276\320\273\321\214\320\272\320\276:", nullptr));
-        label->setText(QApplication::translate("FormStatistics", "\320\247\320\260\321\201\321\213", nullptr));
-        label_2->setText(QApplication::translate("FormStatistics", "\320\234\320\265\321\201\321\217\321\206\320\260", nullptr));
     } // retranslateUi
 
 };

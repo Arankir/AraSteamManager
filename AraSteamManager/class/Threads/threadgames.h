@@ -6,7 +6,6 @@
 #include <class/steamapi/Sgame.h>
 #include <class/imagerequest.h>
 #include <QEventLoop>
-#include <QPushButton>
 
 class ThreadGames : public QObject
 {

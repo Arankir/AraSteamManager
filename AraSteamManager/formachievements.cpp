@@ -156,14 +156,14 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetCompareFriends->resizeRowsToContents();
     ui->TableWidgetCompareFriends->resizeColumnsToContents();
     #define SetTableWidgetCompareFriendsSettingsEnd }
-    #define InitcategoryValuesLayout {
+    #define InitCategoryValuesLayout {
     QWidget *widget = new QWidget;
     _categoryValuesLayout = new QFormLayout;
     _categoryValuesLayout->setSpacing(0);
     _categoryValuesLayout->setContentsMargins(1,1,1,1);
     widget->setLayout(_categoryValuesLayout);
     ui->ScrollAreaValuesCategory->setWidget(widget);
-    #define InitcategoryValuesLayoutEnd }
+    #define InitCategoryValuesLayoutEnd }
     #define SetIcon {
     ui->ButtonCompare->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/compare.png"));
     //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/program/filter_white.png)}");

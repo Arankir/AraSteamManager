@@ -54,6 +54,7 @@ private slots:
     void InitComponents();
     void ShowGames();
     void ShowFriends();
+    void ShowStatistic();
     void GoToProfile(QString id, QString type);
     void ProfileToUi(SProfile AProfile);
 

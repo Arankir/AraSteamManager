@@ -1,7 +1,10 @@
+debug/donutbreakdownchart.o
+debug/mainslice.o
 debug/threadachievements.o
 debug/threadfriends.o
 debug/threadgames.o
 debug/threading.o
+debug/threadstatistics.o
 debug/categoriesgame.o
 debug/favorites.o
 debug/filter.o
@@ -41,6 +44,7 @@ debug/moc_threadachievements.o
 debug/moc_threadfriends.o
 debug/moc_threadgames.o
 debug/moc_threading.o
+debug/moc_threadstatistics.o
 debug/moc_categoriesgame.o
 debug/moc_favorites.o
 debug/moc_filter.o

@@ -9,6 +9,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     qApp->setStyle(QStyleFactory::create("Fusion"));
     qRegisterMetaType<QVector<int>>("QVector<int>");
+    qRegisterMetaType<QVector<double>>("QVector<double>");
+    qRegisterMetaType<QVector<QPair<QString,int> >>("QVector<QPair<QString,int> >");
+    qRegisterMetaType<QVector<QPair<QString,QString> >>("QVector<QPair<QString,QString> >");
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
     QTranslator lang;
     Settings Setting;

@@ -132,8 +132,8 @@ public:
     QLabel *label_16;
     QGroupBox *groupBox_8;
     QVBoxLayout *verticalLayout_11;
-    QLabel *label_17;
     QLabel *label_18;
+    QLabel *label_17;
     QGroupBox *groupBox_10;
     QVBoxLayout *verticalLayout_13;
     QLabel *label_22;
@@ -563,7 +563,7 @@ public:
         ScrollAreaProfilesHideGames->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 109, 483));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 483));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
@@ -771,15 +771,16 @@ public:
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
         verticalLayout_11 = new QVBoxLayout(groupBox_8);
         verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
-        label_17 = new QLabel(groupBox_8);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-
-        verticalLayout_11->addWidget(label_17);
-
         label_18 = new QLabel(groupBox_8);
         label_18->setObjectName(QString::fromUtf8("label_18"));
 
         verticalLayout_11->addWidget(label_18);
+
+        label_17 = new QLabel(groupBox_8);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+        label_17->setFont(font1);
+
+        verticalLayout_11->addWidget(label_17);
 
 
         gridLayout_7->addWidget(groupBox_8, 4, 1, 1, 1);
@@ -967,8 +968,8 @@ public:
         groupBox_7->setTitle(QApplication::translate("FormSettings", "\320\224\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217", nullptr));
         label_16->setText(QApplication::translate("FormSettings", "\321\200\320\265\320\264\320\270\320\267\320\260\320\271\320\275", nullptr));
         groupBox_8->setTitle(QApplication::translate("FormSettings", "\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260", nullptr));
-        label_17->setText(QApplication::translate("FormSettings", "\320\223\321\200\320\260\321\204\320\270\320\272\320\270", nullptr));
         label_18->setText(QApplication::translate("FormSettings", "\320\241\321\200\320\260\320\262\320\275\320\270\321\202\321\214 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270", nullptr));
+        label_17->setText(QApplication::translate("FormSettings", "\320\223\321\200\320\260\321\204\320\270\320\272\320\270", nullptr));
         groupBox_10->setTitle(QApplication::translate("FormSettings", "\320\237\321\200\320\276\321\207\320\265\320\265", nullptr));
         label_22->setText(QApplication::translate("FormSettings", "\320\240\320\265\321\201\320\260\320\271\320\267 \321\215\320\273\320\265\320\274\320\265\320\275\321\202\320\276\320\262 \320\277\321\200\320\270 \320\270\320\267\320\274\320\265\320\275\320\265\320\275\320\270\320\270 \320\276\320\272\320\275\320\260", nullptr));
         label_24->setText(QApplication::translate("FormSettings", "\320\235\320\260\321\201\321\202\321\200\320\276\320\270\321\202\321\214 \321\201\320\270\321\201\321\202\320\265\320\274\321\203 \320\273\320\276\320\263\320\276\320\262 \320\264\320\273\321\217 \320\272\321\200\320\260\321\210\320\265\320\271", nullptr));

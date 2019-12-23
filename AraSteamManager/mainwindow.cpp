@@ -101,6 +101,11 @@ void MainWindow::ShowFriends(){
     ui->FormProgressBar->setVisible(false);
     _friendsForm->setVisible(true);
 }
+
+void MainWindow::ShowStatistic(){
+    ui->FormProgressBar->setVisible(false);
+    _statisticsForm->setVisible(true);
+}
 void MainWindow::keyPressEvent(QKeyEvent *event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
     if(event->key() == 16777220)
@@ -413,12 +418,12 @@ void MainWindow::on_ButtonStatistics_clicked(){
     if(_windowChild!=4){
         ReturnFromForms();
         _windowChild=4;
-        //ui->FormProgressBar->setMaximum(Friends.GetCount());
-        _statisticsForm = new FormStatistics(_profile.GetSteamid(),_games);
+        ui->FormProgressBar->setMaximum(_games.GetCount());
+        _statisticsForm = new FormStatistics(_profile.GetSteamid(),_games,_profile.GetPersonaname(),this);
         //connect(favoritesform,&FormFavorites::return_to_profile,this,&MainWindow::returnfromfavorites);
         ui->ScrollAreaForm->setWidget(_statisticsForm);
-        //ui->FormProgressBar->setVisible(true);
-        //favoritesform->setVisible(false);
+        ui->FormProgressBar->setVisible(true);
+        _statisticsForm->setVisible(false);
     }
 }
 void MainWindow::on_ButtonSettings_clicked(){

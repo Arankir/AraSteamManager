@@ -39,6 +39,27 @@ int Threading::AddThreadFriends(QTableWidget *AtableWidgetFriends,QVector<SProfi
     return 1;
 }
 
+int Threading::AddThreadStatistics(SGames Agames, QString Aid){
+    ThreadStatistics *Statistics = new ThreadStatistics;
+    QThread *thread = new QThread;
+    Statistics->moveToThread(thread);
+    Statistics->Set(Agames, Aid);
+    connect(thread,SIGNAL(started()),Statistics,SLOT(Fill()));
+    connect(Statistics,SIGNAL(s_finished(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
+                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>)),thread,SLOT(quit()));
+    connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
+    connect(Statistics,SIGNAL(s_progress(int,int)),this->parent()->parent(),SLOT(ProgressLoading(int,int)));
+    connect(Statistics,SIGNAL(s_finished(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
+                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>))
+            ,this->parent(),SLOT(OnFinish(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
+                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>)));
+    connect(Statistics,SIGNAL(s_finished(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
+                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>))
+            ,this->parent()->parent(),SLOT(ShowStatistic()));
+    thread->start();
+    return 1;
+}
+
 int Threading::AddThreadAchievements(SAchievements AAchievements, QLabel *ALabelTotalPersent, QTableWidget *AtableWidgetAchievements, QLabel *ALabelTotalPersentCompare, QTableWidget *AtableWidgetCompareAchievements){
     ThreadAchievements *Achievements = new ThreadAchievements;
     QThread *thread = new QThread;

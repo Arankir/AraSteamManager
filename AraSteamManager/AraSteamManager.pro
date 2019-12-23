@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network
+QT       += core gui network charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,10 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    class/NotMine/donutbreakdownchart.cpp \
+    class/NotMine/mainslice.cpp \
     class/Threads/threadachievements.cpp \
     class/Threads/threadfriends.cpp \
     class/Threads/threadgames.cpp \
     class/Threads/threading.cpp \
+    class/Threads/threadstatistics.cpp \
     class/categoriesgame.cpp \
     class/favorites.cpp \
     class/filter.cpp \
@@ -64,10 +67,13 @@ SOURCES += \
     subwidget/qradiobuttonwithdata.cpp
 
 HEADERS += \
+    class/NotMine/donutbreakdownchart.h \
+    class/NotMine/mainslice.h \
     class/Threads/threadachievements.h \
     class/Threads/threadfriends.h \
     class/Threads/threadgames.h \
     class/Threads/threading.h \
+    class/Threads/threadstatistics.h \
     class/categoriesgame.h \
     class/favorites.h \
     class/filter.h \
