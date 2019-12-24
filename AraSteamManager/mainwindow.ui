@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>913</width>
+    <width>465</width>
     <height>393</height>
    </rect>
   </property>
@@ -156,8 +156,8 @@ color: rgb(26, 26, 26);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>899</width>
-         <height>151</height>
+         <width>451</width>
+         <height>150</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -455,8 +455,8 @@ color: rgb(26, 26, 26);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>899</width>
-         <height>68</height>
+         <width>451</width>
+         <height>72</height>
         </rect>
        </property>
       </widget>
@@ -469,8 +469,8 @@ color: rgb(26, 26, 26);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>913</width>
-     <height>21</height>
+     <width>465</width>
+     <height>20</height>
     </rect>
    </property>
   </widget>
