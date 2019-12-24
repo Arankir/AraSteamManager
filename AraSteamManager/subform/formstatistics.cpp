@@ -59,10 +59,8 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
 
     QPieSeries *series1 = new QPieSeries();
     series1->append(tr("Не начато (%1)").arg(_numof[0]), _numof[0]);
-
     QPieSeries *series2 = new QPieSeries();
     series2->append(tr("Начато (%1)").arg(_numof[1]), _numof[1]);
-
     QPieSeries *series3 = new QPieSeries();
     series3->append(tr("Закончено (%1)").arg(_numof[2]), _numof[2]);
     //![1]
@@ -83,10 +81,10 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
         break;
     }
     }
-    donutBreakdown->addBreakdownSeries(series1, Qt::red);
-    donutBreakdown->addBreakdownSeries(series2, Qt::darkBlue);
-    donutBreakdown->addBreakdownSeries(series3, Qt::darkGreen);
-    donutBreakdown->legend()->setVisible(false);
+    donutBreakdown->addBreakdownSeries(series1, QColor("#b23232"));
+    donutBreakdown->addBreakdownSeries(series2, QColor("#cdcb1f"));
+    donutBreakdown->addBreakdownSeries(series3, QColor("#55b53e"));
+    //donutBreakdown->legend()->setVisible(false);
     ui->ChartViewPercentages->setChart(donutBreakdown);
 
     #define SetChartTimes {
@@ -121,6 +119,7 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
     chartTimes->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
     case 1:{
+        chartTimes->setTheme(QChart::ChartThemeDark);
         axisX1Times->setLabelsColor(Qt::white);
         axisX2Times->setLabelsColor(Qt::white);
         axisYTimes->setLabelsColor(Qt::white);
@@ -172,6 +171,7 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
     chartMonths->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
     case 1:{
+        chartMonths->setTheme(QChart::ChartThemeDark);
         axisX1Months->setLabelsColor(Qt::white);
         axisX2Months->setLabelsColor(Qt::white);
         axisYMonths->setLabelsColor(Qt::white);
@@ -222,6 +222,7 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
     chartYears->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
     case 1:{
+        chartYears->setTheme(QChart::ChartThemeDark);
         axisX1Years->setLabelsColor(Qt::white);
         axisX2Years->setLabelsColor(Qt::white);
         axisYYears->setLabelsColor(Qt::white);

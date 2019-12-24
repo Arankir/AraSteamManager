@@ -96,15 +96,17 @@ void MainWindow::ProgressLoading(int Aprogress,int){
 void MainWindow::ShowGames(){
     ui->FormProgressBar->setVisible(false);
     _gamesForm->setVisible(true);
+    ResizeScrollArea();
 }
 void MainWindow::ShowFriends(){
     ui->FormProgressBar->setVisible(false);
     _friendsForm->setVisible(true);
+    ResizeScrollArea();
 }
-
 void MainWindow::ShowStatistic(){
     ui->FormProgressBar->setVisible(false);
     _statisticsForm->setVisible(true);
+    ResizeScrollArea();
 }
 void MainWindow::keyPressEvent(QKeyEvent *event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
@@ -173,6 +175,16 @@ void MainWindow::ReturnFromSettings(){
     delete _settingsForm;
     _windowChildCount--;
     _windowChild=0;
+}
+void MainWindow::ResizeScrollArea(){
+    if(ui->ScrollAreaForm->height()<400){
+        QPropertyAnimation *anim = new QPropertyAnimation(this,"size");
+        anim->setDuration(500);
+        anim->setStartValue(QSize(this->width(),this->height()));
+        anim->setEndValue(QSize(this->width(),this->height()-ui->ScrollAreaForm->height()+400));
+        connect(anim,SIGNAL(finished),anim,SLOT(deleteLater));
+        anim->start();
+    }
 }
 #define SystemEnd }
 

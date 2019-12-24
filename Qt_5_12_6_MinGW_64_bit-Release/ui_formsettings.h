@@ -153,7 +153,7 @@ public:
     {
         if (FormSettings->objectName().isEmpty())
             FormSettings->setObjectName(QString::fromUtf8("FormSettings"));
-        FormSettings->resize(1034, 673);
+        FormSettings->resize(1034, 629);
         verticalLayout_2 = new QVBoxLayout(FormSettings);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -563,7 +563,7 @@ public:
         ScrollAreaProfilesHideGames->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 483));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 439));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
@@ -648,7 +648,9 @@ public:
         groupBox_3 = new QGroupBox(tab_3);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         verticalLayout_9 = new QVBoxLayout(groupBox_3);
+        verticalLayout_9->setSpacing(1);
         verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
+        verticalLayout_9->setContentsMargins(1, 1, 1, 1);
         label_6 = new QLabel(groupBox_3);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
@@ -717,7 +719,9 @@ public:
         groupBox_2 = new QGroupBox(tab_3);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         verticalLayout_3 = new QVBoxLayout(groupBox_2);
+        verticalLayout_3->setSpacing(1);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(1, 1, 1, 1);
         label_13 = new QLabel(groupBox_2);
         label_13->setObjectName(QString::fromUtf8("label_13"));
 
@@ -729,7 +733,9 @@ public:
         groupBox_6 = new QGroupBox(tab_3);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
         verticalLayout_6 = new QVBoxLayout(groupBox_6);
+        verticalLayout_6->setSpacing(1);
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setContentsMargins(1, 1, 1, 1);
         label_14 = new QLabel(groupBox_6);
         label_14->setObjectName(QString::fromUtf8("label_14"));
 
@@ -746,7 +752,9 @@ public:
         groupBox_5 = new QGroupBox(tab_3);
         groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
         verticalLayout_4 = new QVBoxLayout(groupBox_5);
+        verticalLayout_4->setSpacing(1);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(1, 1, 1, 1);
         label_12 = new QLabel(groupBox_5);
         label_12->setObjectName(QString::fromUtf8("label_12"));
 
@@ -758,7 +766,9 @@ public:
         groupBox_7 = new QGroupBox(tab_3);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
         verticalLayout_8 = new QVBoxLayout(groupBox_7);
+        verticalLayout_8->setSpacing(1);
         verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        verticalLayout_8->setContentsMargins(1, 1, 1, 1);
         label_16 = new QLabel(groupBox_7);
         label_16->setObjectName(QString::fromUtf8("label_16"));
 
@@ -770,7 +780,9 @@ public:
         groupBox_8 = new QGroupBox(tab_3);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
         verticalLayout_11 = new QVBoxLayout(groupBox_8);
+        verticalLayout_11->setSpacing(1);
         verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        verticalLayout_11->setContentsMargins(1, 1, 1, 1);
         label_18 = new QLabel(groupBox_8);
         label_18->setObjectName(QString::fromUtf8("label_18"));
 
@@ -788,7 +800,9 @@ public:
         groupBox_10 = new QGroupBox(tab_3);
         groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
         verticalLayout_13 = new QVBoxLayout(groupBox_10);
+        verticalLayout_13->setSpacing(1);
         verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
+        verticalLayout_13->setContentsMargins(1, 1, 1, 1);
         label_22 = new QLabel(groupBox_10);
         label_22->setObjectName(QString::fromUtf8("label_22"));
 
@@ -810,7 +824,9 @@ public:
         groupBox_11 = new QGroupBox(tab_3);
         groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
         verticalLayout_14 = new QVBoxLayout(groupBox_11);
+        verticalLayout_14->setSpacing(1);
         verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
+        verticalLayout_14->setContentsMargins(1, 1, 1, 1);
         label_23 = new QLabel(groupBox_11);
         label_23->setObjectName(QString::fromUtf8("label_23"));
         label_23->setWordWrap(true);
@@ -828,7 +844,9 @@ public:
         groupBox_9 = new QGroupBox(tab_3);
         groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
         verticalLayout_12 = new QVBoxLayout(groupBox_9);
+        verticalLayout_12->setSpacing(1);
         verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+        verticalLayout_12->setContentsMargins(1, 1, 1, 1);
         label_19 = new QLabel(groupBox_9);
         label_19->setObjectName(QString::fromUtf8("label_19"));
 

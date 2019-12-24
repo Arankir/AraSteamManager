@@ -54,7 +54,6 @@ void SAchievementsPlayer::Load(QNetworkReply *Areply){
     QJsonDocument localAchievements = QJsonDocument::fromJson(Areply->readAll());
     Areply->deleteLater();
     Set(localAchievements);
-    qDebug()<<"Player load";
     emit s_finished(*this);
     emit s_finished();
 }

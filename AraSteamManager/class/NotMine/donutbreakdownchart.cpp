@@ -45,7 +45,7 @@ DonutBreakdownChart::DonutBreakdownChart(QGraphicsItem *parent, Qt::WindowFlags 
 //![1]
 
 //![2]
-void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor color)
+void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor mainColor)
 {
     QFont font("Arial", 8);
 
@@ -56,8 +56,8 @@ void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor
     m_mainSeries->append(mainSlice);
 
     // customize the slice
-    mainSlice->setBrush(color);
-    mainSlice->setLabelVisible();
+    mainSlice->setBrush(mainColor);
+    mainSlice->setLabelVisible(false);
     mainSlice->setLabelColor(Qt::white);
     mainSlice->setLabelPosition(QPieSlice::LabelInsideHorizontal);
     mainSlice->setLabelFont(font);
@@ -68,10 +68,11 @@ void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor
     breakdownSeries->setLabelsVisible();
     const auto slices = breakdownSeries->slices();
     for (QPieSlice *slice : slices) {
-        color = color.lighter(115);
-        slice->setBrush(color);
+        mainColor = mainColor.lighter(115);
+        slice->setBrush(mainColor);
         slice->setLabelFont(font);
     }
+
 
     // add the series to the chart
     QChart::addSeries(breakdownSeries);
@@ -114,7 +115,7 @@ void DonutBreakdownChart::updateLegendMarkers()
                 // modify markers from breakdown series
                 pieMarker->setLabel(QString("%1 %2%")
                                     .arg(pieMarker->slice()->label())
-                                    .arg(pieMarker->slice()->percentage() * 100, 0, 'f', 2));
+                                    .arg(pieMarker->slice()->angleSpan()/3.6, 0, 'f', 2));
                 pieMarker->setFont(QFont("Arial", 8));
             }
         }

@@ -20,6 +20,7 @@
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sfriends.h>
 #include <class/settings.h>
+#include <QPropertyAnimation>
 
 namespace Ui {
 class MainWindow;
@@ -50,6 +51,7 @@ private slots:
     void ReturnFromFavorites();
     void ReturnFromStatistics();
     void ReturnFromSettings();
+    void ResizeScrollArea();
 
     void InitComponents();
     void ShowGames();
