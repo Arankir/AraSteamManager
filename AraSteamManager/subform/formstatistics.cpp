@@ -48,7 +48,7 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
     foreach (double averageForGame, _averagePercent) {
         totalAverage+=0.0+averageForGame;
     }
-    ui->LabelAveragePercent->setText(tr("Средний процент по всем играм: %1%\nСредний процент по начатым играм: %2%").arg(QString::number(totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(QString::number(totalAverage/(_numof[1]+_numof[2]))));
+    ui->LabelAveragePercent->setText(tr("Средний процент\n-по всем играм: %1%\n-по начатым играм: %2%").arg(QString::number(totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(QString::number(totalAverage/(_numof[1]+_numof[2]))));
     ui->LabelSummColumn->setText(tr("Всего достижений: %1").arg(_summcolumn));
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget_2->resizeColumnsToContents();

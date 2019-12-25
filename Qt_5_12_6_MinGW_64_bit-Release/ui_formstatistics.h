@@ -46,8 +46,11 @@ public:
             FormStatistics->setObjectName(QString::fromUtf8("FormStatistics"));
         FormStatistics->resize(828, 734);
         verticalLayout_2 = new QVBoxLayout(FormStatistics);
+        verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(1, 1, 1, 1);
         horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(0);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         ChartViewPercentages = new QChartView(FormStatistics);
         ChartViewPercentages->setObjectName(QString::fromUtf8("ChartViewPercentages"));
