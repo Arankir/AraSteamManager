@@ -8,20 +8,14 @@ FormStatistics::FormStatistics(QString Aid, SGames Agames, QString Aname, QWidge
     _games=Agames;
     _id=Aid;
     _name=Aname;
-    for (int i=0;i<24;i++) {
-        ui->tableWidget->setItem(0,i,new QTableWidgetItem(0));
-        }
-    for (int i=0;i<12;i++) {
-        ui->tableWidget_2->setItem(0,i,new QTableWidgetItem(0));
-        }
     Threading LoadData(this);
     LoadData.AddThreadStatistics(_games,_id);
 }
 
-void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QString> > Acomplete,
-                              QVector<QPair<QString, QString> > Astarted, QVector<QPair<QString, QString> > AnotStarted,
-                              QVector<double> AaveragePercent, int Asummcolumn, QVector<QPair<QString, int> > Atimes,
-                              QVector<QPair<QString, int> > Amonths, QVector<QPair<QString, int> > Ayears){
+void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString,QString> > Acomplete,
+                              QVector<QPair<QString,QString>> Astarted, QVector<QPair<QString,QString>> AnotStarted,
+                              QVector<double> AaveragePercent, int Asummcolumn, QVector<int> Atimes,
+                              QVector<int> Amonths, QVector<QPair<QString,int>> Ayears){
     _numof=Anumof;
     _complete=Acomplete;
     _started=Astarted;
@@ -32,40 +26,21 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
     _times=Atimes;
     _months=Amonths;
     _years=Ayears;
-    ui->tableWidget->setVerticalHeaderItem(0,new QTableWidgetItem(_name));
-    for (int i=0;i<24;i++) {
-        ui->tableWidget->setItem(i,0,new QTableWidgetItem(QString::number(_times[i].second)));
-        }
-    for (int i=0;i<12;i++) {
-        ui->tableWidget_2->setItem(i,0,new QTableWidgetItem(QString::number(_months[i].second)));
-        }
-    ui->tableWidget_3->setRowCount(_years.size());
-    for (int i=0;i<_years.size();i++) {
-        ui->tableWidget_3->setVerticalHeaderItem(i,new QTableWidgetItem(_years[i].first));
-        ui->tableWidget_3->setItem(i,0,new QTableWidgetItem(QString::number(_years[i].second)));
-    }
     double totalAverage=0.0;
     foreach (double averageForGame, _averagePercent) {
-        totalAverage+=0.0+averageForGame;
+        totalAverage+=averageForGame;
     }
     ui->LabelAveragePercent->setText(tr("Средний процент\n-по всем играм: %1%\n-по начатым играм: %2%").arg(QString::number(totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(QString::number(totalAverage/(_numof[1]+_numof[2]))));
     ui->LabelSummColumn->setText(tr("Всего достижений: %1").arg(_summcolumn));
-    ui->tableWidget->resizeColumnsToContents();
-    ui->tableWidget_2->resizeColumnsToContents();
-    ui->tableWidget_3->resizeColumnsToContents();
-    ui->tableWidget->setVisible(false);
-    ui->tableWidget_2->setVisible(false);
-    ui->tableWidget_3->setVisible(false);
 
+    #define SetChartDonut {
     QPieSeries *series1 = new QPieSeries();
     series1->append(tr("Не начато (%1)").arg(_numof[0]), _numof[0]);
     QPieSeries *series2 = new QPieSeries();
     series2->append(tr("Начато (%1)").arg(_numof[1]), _numof[1]);
     QPieSeries *series3 = new QPieSeries();
     series3->append(tr("Закончено (%1)").arg(_numof[2]), _numof[2]);
-    //![1]
 
-    //![2]
     DonutBreakdownChart *donutBreakdown = new DonutBreakdownChart();
     donutBreakdown->setBackgroundVisible(false);
     donutBreakdown->setAnimationOptions(QChart::SeriesAnimations);
@@ -86,158 +61,147 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString, QStrin
     donutBreakdown->addBreakdownSeries(series3, QColor("#55b53e"));
     //donutBreakdown->legend()->setVisible(false);
     ui->ChartViewPercentages->setChart(donutBreakdown);
-
+    #define SetChartDonutEnd }
     #define SetChartTimes {
-    QChart *chartTimes = new QChart;
-    chartTimes->setAnimationOptions(QChart::SeriesAnimations);
-    QBarSeries *seriesTimes = new QBarSeries;
-    QVBarModelMapper *mapperTimes = new QVBarModelMapper(this);
-    mapperTimes->setFirstBarSetColumn(0);
-    mapperTimes->setLastBarSetColumn(24);
-    mapperTimes->setFirstRow(0);
-    mapperTimes->setRowCount(24);
-    mapperTimes->setSeries(seriesTimes);
-    mapperTimes->setModel(ui->tableWidget->model());
-    chartTimes->addSeries(seriesTimes);
-    QStringList titlesX1Times;
-    QStringList titlesX2Times;
+    int max=0;
+    QBarCategoryAxis *axisXT = new QBarCategoryAxis();
+    QBarSet *barSetT = new QBarSet(_id);
     for(int i=0;i<24;i++){
-        titlesX1Times << _times[i].first;
-        titlesX2Times << QString::number(_times[i].second)+tr("шт");
+        axisXT->append(QString::number(i));
+        *barSetT<<_times[i];
+        if(max<_times[i])
+            max=_times[i];
         }
-    QBarCategoryAxis *axisX1Times = new QBarCategoryAxis();
-    QBarCategoryAxis *axisX2Times = new QBarCategoryAxis();
-    axisX1Times->append(titlesX1Times);
-    axisX2Times->append(titlesX2Times);
-    chartTimes->addAxis(axisX2Times, Qt::AlignTop);
-    chartTimes->addAxis(axisX1Times, Qt::AlignBottom);
-    seriesTimes->attachAxis(axisX1Times);
-    QValueAxis *axisYTimes = new QValueAxis();
-    axisYTimes->applyNiceNumbers();
-    axisYTimes->setLabelFormat("%i");
-    chartTimes->addAxis(axisYTimes, Qt::AlignLeft);
-    chartTimes->setBackgroundVisible(false);
+    max+=(10000-max%10000);
+
+    QValueAxis *axisYT = new QValueAxis();
+    axisYT->setMax(max);
+    axisYT->setLabelFormat("%i");
+
+    QChart *chartT = new QChart;
+    chartT->addAxis(axisXT, Qt::AlignBottom);
+    chartT->addAxis(axisYT, Qt::AlignLeft);
+    chartT->legend()->setAlignment(Qt::AlignBottom);
+    chartT->setAnimationOptions(QChart::SeriesAnimations);
+    chartT->setTitle(tr("Достижения по часам"));
+    chartT->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
     case 1:{
-        chartTimes->setTheme(QChart::ChartThemeDark);
-        axisX1Times->setLabelsColor(Qt::white);
-        axisX2Times->setLabelsColor(Qt::white);
-        axisYTimes->setLabelsColor(Qt::white);
-        chartTimes->setTitleBrush(QBrush(Qt::white));
-        chartTimes->legend()->setColor(Qt::white);
-        chartTimes->legend()->setBrush(QBrush(Qt::white));
+        chartT->setTheme(QChart::ChartThemeDark);
         break;
     }
     case 2:{
-
+        barSetT->setLabelColor(Qt::black);
         break;
     }
     }
-    chartTimes->setTitle(tr("Достижения по часам"));
-    seriesTimes->attachAxis(axisYTimes);
-    ui->ChartsViewTimes->setChart(chartTimes);
+
+    QBarSeries *barSeriesT = new QBarSeries;
+    barSeriesT->append(barSetT);
+    chartT->addSeries(barSeriesT);
+    barSeriesT->attachAxis(axisXT);
+    barSeriesT->attachAxis(axisYT);
+    barSeriesT->setLabelsVisible(true);
+    barSeriesT->setLabelsPosition(QAbstractBarSeries::LabelsOutsideEnd);
+    barSeriesT->setLabelsAngle(4);
+
+    ui->ChartsViewTimes->setChart(chartT);
     ui->ChartsViewTimes->setRenderHint(QPainter::Antialiasing);
     ui->ChartsViewTimes->setMinimumSize(480, 480);
     #define SetChartTimesEnd }
     #define SetChartMonths {
-    QChart *chartMonths = new QChart;
-    chartMonths->setAnimationOptions(QChart::SeriesAnimations);
-    QBarSeries *seriesMonths = new QBarSeries;
-    QVBarModelMapper *mapperMonths = new QVBarModelMapper(this);
-    mapperMonths->setFirstBarSetColumn(0);
-    mapperMonths->setLastBarSetColumn(12);
-    mapperMonths->setFirstRow(0);
-    mapperMonths->setRowCount(12);
-    mapperMonths->setSeries(seriesMonths);
-    mapperMonths->setModel(ui->tableWidget_2->model());
-    chartMonths->addSeries(seriesMonths);
-    QStringList titlesX1Months;
-    QStringList titlesX2Months;
+    max=0;
+    QBarCategoryAxis *axisXM = new QBarCategoryAxis();
+    QStringList titlesXM;
+    titlesXM <<tr("Январь")<<tr("Февраль")<<tr("Март")<<tr("Апрель")<<tr("Май")<<tr("Июнь")<<tr("Июль")<<tr("Август")<<tr("Сентябрь")<<tr("Октябрь")<<tr("Ноябрь")<<tr("Декабрь");
+    axisXM->append(titlesXM);
+    QBarSet *barSetM = new QBarSet(_id);
     for(int i=0;i<12;i++){
-        titlesX1Months << _months[i].first;
-        titlesX2Months << QString::number(_months[i].second)+tr("шт");
+        *barSetM<<_months[i];
+        if(max<_months[i])
+            max=_months[i];
         }
-    QBarCategoryAxis *axisX1Months = new QBarCategoryAxis();
-    QBarCategoryAxis *axisX2Months = new QBarCategoryAxis();
-    axisX1Months->append(titlesX1Months);
-    axisX2Months->append(titlesX2Months);
-    chartMonths->addAxis(axisX2Months, Qt::AlignTop);
-    chartMonths->addAxis(axisX1Months, Qt::AlignBottom);
-    seriesMonths->attachAxis(axisX1Months);
-    QValueAxis *axisYMonths = new QValueAxis();
-    axisYMonths->applyNiceNumbers();
-    axisYMonths->setLabelFormat("%i");
-    chartMonths->addAxis(axisYMonths, Qt::AlignLeft);
-    chartMonths->setBackgroundVisible(false);
+    max+=(10000-max%10000);
+
+    QValueAxis *axisYM = new QValueAxis();
+    axisYM->setMax(max);
+    axisYM->setLabelFormat("%i");
+
+    QChart *chartM = new QChart;
+    chartM->addAxis(axisXM, Qt::AlignBottom);
+    chartM->addAxis(axisYM, Qt::AlignLeft);
+    chartM->legend()->setAlignment(Qt::AlignBottom);
+    chartM->setAnimationOptions(QChart::SeriesAnimations);
+    chartM->setTitle(tr("Достижения по месяцам"));
+    chartM->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
     case 1:{
-        chartMonths->setTheme(QChart::ChartThemeDark);
-        axisX1Months->setLabelsColor(Qt::white);
-        axisX2Months->setLabelsColor(Qt::white);
-        axisYMonths->setLabelsColor(Qt::white);
-        chartMonths->setTitleBrush(QBrush(Qt::white));
-        chartMonths->legend()->setColor(Qt::white);
+        chartM->setTheme(QChart::ChartThemeDark);
         break;
     }
     case 2:{
-
+        barSetM->setLabelColor(Qt::black);
         break;
     }
     }
-    chartMonths->setTitle(tr("Достижения по месяцам"));
-    seriesMonths->attachAxis(axisYMonths);
-    ui->ChartsViewMonths->setChart(chartMonths);
+
+    QBarSeries *barSeriesM = new QBarSeries;
+    barSeriesM->append(barSetM);
+    chartM->addSeries(barSeriesM);
+    barSeriesM->attachAxis(axisXM);
+    barSeriesM->attachAxis(axisYM);
+    barSeriesM->setLabelsVisible(true);
+    barSeriesM->setLabelsPosition(QAbstractBarSeries::LabelsOutsideEnd);
+    barSeriesM->setLabelsAngle(4);
+
+    ui->ChartsViewMonths->setChart(chartM);
     ui->ChartsViewMonths->setRenderHint(QPainter::Antialiasing);
     ui->ChartsViewMonths->setMinimumSize(480, 480);
     #define SetChartMonthsEnd }
     #define SetChartYears {
-    QChart *chartYears = new QChart;
-    chartYears->setAnimationOptions(QChart::SeriesAnimations);
-    QBarSeries *seriesYears = new QBarSeries;
-    QVBarModelMapper *mapperYears = new QVBarModelMapper(this);
-    mapperYears->setFirstBarSetColumn(0);
-    mapperYears->setLastBarSetColumn(ui->tableWidget_3->rowCount());
-    mapperYears->setFirstRow(0);
-    mapperYears->setRowCount(ui->tableWidget_3->rowCount());
-    mapperYears->setSeries(seriesYears);
-    mapperYears->setModel(ui->tableWidget_3->model());
-    chartYears->addSeries(seriesYears);
-    QStringList titlesX1Years;
-    QStringList titlesX2Years;
-    for(int i=0;i<ui->tableWidget_3->rowCount();i++){
-        titlesX1Years << _years[i].first;
-        titlesX2Years << QString::number(_years[i].second)+tr("шт");
+    max=0;
+    QBarCategoryAxis *axisXY = new QBarCategoryAxis();
+    QBarSet *barSetY = new QBarSet(_id);
+    for(int i=0;i<_years.size();i++){
+        axisXY->append(_years[i].first);
+        *barSetY<<_years[i].second;
+        if(max<_years[i].second)
+            max=_years[i].second;
         }
-    QBarCategoryAxis *axisX1Years = new QBarCategoryAxis();
-    QBarCategoryAxis *axisX2Years = new QBarCategoryAxis();
-    axisX1Years->append(titlesX1Years);
-    axisX2Years->append(titlesX2Years);
-    chartYears->addAxis(axisX2Years, Qt::AlignTop);
-    chartYears->addAxis(axisX1Years, Qt::AlignBottom);
-    seriesYears->attachAxis(axisX1Years);
-    QValueAxis *axisYYears = new QValueAxis();
-    axisYYears->applyNiceNumbers();
-    axisYYears->setLabelFormat("%i");
-    chartYears->addAxis(axisYYears, Qt::AlignLeft);
-    chartYears->setBackgroundVisible(false);
+    max+=(10000-max%10000);
+
+    QValueAxis *axisYY = new QValueAxis();
+    axisYY->setMax(max);
+    axisYY->setLabelFormat("%i");
+
+    QChart *chartY = new QChart;
+    chartY->addAxis(axisXY, Qt::AlignBottom);
+    chartY->addAxis(axisYY, Qt::AlignLeft);
+    chartY->legend()->setAlignment(Qt::AlignBottom);
+    chartY->setAnimationOptions(QChart::SeriesAnimations);
+    chartY->setTitle(tr("Достижения по годам"));
+    chartY->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
     case 1:{
-        chartYears->setTheme(QChart::ChartThemeDark);
-        axisX1Years->setLabelsColor(Qt::white);
-        axisX2Years->setLabelsColor(Qt::white);
-        axisYYears->setLabelsColor(Qt::white);
-        chartYears->setTitleBrush(QBrush(Qt::white));
-        chartYears->legend()->setColor(Qt::white);
+        chartY->setTheme(QChart::ChartThemeDark);
         break;
     }
     case 2:{
-
+        barSetY->setLabelColor(Qt::black);
         break;
     }
     }
-    chartYears->setTitle(tr("Достижения по годам"));
-    seriesYears->attachAxis(axisYYears);
-    ui->ChartsViewYears->setChart(chartYears);
+
+    QBarSeries *barSeriesY = new QBarSeries;
+    barSeriesY->append(barSetY);
+    chartY->addSeries(barSeriesY);
+    barSeriesY->attachAxis(axisXY);
+    barSeriesY->attachAxis(axisYY);
+    barSeriesY->setLabelsVisible(true);
+    barSeriesY->setLabelsPosition(QAbstractBarSeries::LabelsOutsideEnd);
+    barSeriesY->setLabelsAngle(4);
+
+    ui->ChartsViewYears->setChart(chartY);
     ui->ChartsViewYears->setRenderHint(QPainter::Antialiasing);
     ui->ChartsViewYears->setMinimumSize(480, 480);
     #define SetChartYearsEnd }

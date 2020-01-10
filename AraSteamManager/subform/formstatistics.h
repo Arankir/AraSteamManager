@@ -36,10 +36,9 @@ public:
 
 public slots:
     void OnFinish(QVector<int> numof, QVector<QPair<QString,QString>> complete, QVector<QPair<QString,QString>> started, QVector<QPair<QString,QString>> notStarted,
-                                  QVector<double> averagePercent, int summcolumn, QVector<QPair<QString,int>> times, QVector<QPair<QString,int>> months, QVector<QPair<QString,int>> years);
+                                  QVector<double> averagePercent, int summcolumn, QVector<int> times, QVector<int> months, QVector<QPair<QString,int>> years);
 
 private:
-    //Переименовать потом
     Ui::FormStatistics *ui;
     Settings _setting;
     QString _id;
@@ -51,8 +50,8 @@ private:
     int _summcolumn=0;
     SGames _games;
     QString _name;
-    QVector<QPair<QString,int>> _times;
-    QVector<QPair<QString,int>> _months;
+    QVector<int> _times ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    QVector<int> _months ={0,0,0,0,0,0,0,0,0,0,0,0};
     QVector<QPair<QString,int>> _years;
 };
 

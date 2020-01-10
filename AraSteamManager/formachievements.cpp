@@ -1,7 +1,7 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 
-FormAchievements::FormAchievements(SAchievementsPlayer Aplayer, QString Aid, SGame Agame, int AunicNum, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormAchievements){
+FormAchievements::FormAchievements(SAchievementsPlayer Aplayer, QString Aid, SGame Agame, int AunicNum, QWidget *parent): QWidget(parent), ui(new Ui::FormAchievements){
     ui->setupUi(this);
     _id=Aid;
     _game=Agame;
@@ -805,6 +805,10 @@ void FormAchievements::on_ButtonUpdate_clicked(){
     _achievements.Update();
     PullTableWidget();
     ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(true)));
+    if(ui->RadioButtonReached->isChecked())
+        ui->RadioButtonReached->setChecked(true);
+    else if(ui->RadioButtonNotReached->isChecked())
+        ui->RadioButtonNotReached->setChecked(true);
 }
 void FormAchievements::FavoritesClicked(){
     QButtonWithData *btn = static_cast<QButtonWithData*>(sender());

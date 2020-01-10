@@ -44,9 +44,9 @@ QT_MOC_LITERAL(8, 98, 10), // "notStarted"
 QT_MOC_LITERAL(9, 109, 15), // "QVector<double>"
 QT_MOC_LITERAL(10, 125, 14), // "averagePercent"
 QT_MOC_LITERAL(11, 140, 10), // "summcolumn"
-QT_MOC_LITERAL(12, 151, 28), // "QVector<QPair<QString,int> >"
-QT_MOC_LITERAL(13, 180, 5), // "times"
-QT_MOC_LITERAL(14, 186, 6), // "months"
+QT_MOC_LITERAL(12, 151, 5), // "times"
+QT_MOC_LITERAL(13, 157, 6), // "months"
+QT_MOC_LITERAL(14, 164, 28), // "QVector<QPair<QString,int> >"
 QT_MOC_LITERAL(15, 193, 5), // "years"
 QT_MOC_LITERAL(16, 199, 10), // "s_progress"
 QT_MOC_LITERAL(17, 210, 1), // "p"
@@ -64,11 +64,11 @@ QT_MOC_LITERAL(26, 282, 3) // "ach"
     "ThreadStatistics\0s_finished\0\0QVector<int>\0"
     "numof\0QVector<QPair<QString,QString> >\0"
     "complete\0started\0notStarted\0QVector<double>\0"
-    "averagePercent\0summcolumn\0"
-    "QVector<QPair<QString,int> >\0times\0"
-    "months\0years\0s_progress\0p\0row\0Fill\0"
-    "Set\0SGames\0games\0id\0OnResultAchievements\0"
-    "SAchievementsPlayer\0ach"
+    "averagePercent\0summcolumn\0times\0months\0"
+    "QVector<QPair<QString,int> >\0years\0"
+    "s_progress\0p\0row\0Fill\0Set\0SGames\0games\0"
+    "id\0OnResultAchievements\0SAchievementsPlayer\0"
+    "ach"
 };
 #undef QT_MOC_LITERAL
 
@@ -95,7 +95,7 @@ static const uint qt_meta_data_ThreadStatistics[] = {
       24,    1,   69,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 9, QMetaType::Int, 0x80000000 | 12, 0x80000000 | 12, 0x80000000 | 12,    4,    6,    7,    8,   10,   11,   13,   14,   15,
+    QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 9, QMetaType::Int, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 14,    4,    6,    7,    8,   10,   11,   12,   13,   15,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,   17,   18,
 
  // slots: parameters
@@ -112,7 +112,7 @@ void ThreadStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<ThreadStatistics *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->s_finished((*reinterpret_cast< QVector<int>(*)>(_a[1])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[2])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[3])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[4])),(*reinterpret_cast< QVector<double>(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[7])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[8])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[9]))); break;
+        case 0: _t->s_finished((*reinterpret_cast< QVector<int>(*)>(_a[1])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[2])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[3])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[4])),(*reinterpret_cast< QVector<double>(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QVector<int>(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[9]))); break;
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
@@ -128,6 +128,8 @@ void ThreadStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 4:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<double> >(); break;
+            case 7:
+            case 6:
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
             }
@@ -136,7 +138,7 @@ void ThreadStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (ThreadStatistics::*)(QVector<int> , QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> , QVector<double> , int , QVector<QPair<QString,int>> , QVector<QPair<QString,int>> , QVector<QPair<QString,int>> );
+            using _t = void (ThreadStatistics::*)(QVector<int> , QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> , QVector<double> , int , QVector<int> , QVector<int> , QVector<QPair<QString,int>> );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadStatistics::s_finished)) {
                 *result = 0;
                 return;
@@ -193,7 +195,7 @@ int ThreadStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ThreadStatistics::s_finished(QVector<int> _t1, QVector<QPair<QString,QString>> _t2, QVector<QPair<QString,QString>> _t3, QVector<QPair<QString,QString>> _t4, QVector<double> _t5, int _t6, QVector<QPair<QString,int>> _t7, QVector<QPair<QString,int>> _t8, QVector<QPair<QString,int>> _t9)
+void ThreadStatistics::s_finished(QVector<int> _t1, QVector<QPair<QString,QString>> _t2, QVector<QPair<QString,QString>> _t3, QVector<QPair<QString,QString>> _t4, QVector<double> _t5, int _t6, QVector<int> _t7, QVector<int> _t8, QVector<QPair<QString,int>> _t9)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)), const_cast<void*>(reinterpret_cast<const void*>(&_t4)), const_cast<void*>(reinterpret_cast<const void*>(&_t5)), const_cast<void*>(reinterpret_cast<const void*>(&_t6)), const_cast<void*>(reinterpret_cast<const void*>(&_t7)), const_cast<void*>(reinterpret_cast<const void*>(&_t8)), const_cast<void*>(reinterpret_cast<const void*>(&_t9)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

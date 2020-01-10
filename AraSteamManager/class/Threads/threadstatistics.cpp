@@ -1,24 +1,7 @@
 #include "threadstatistics.h"
 
 ThreadStatistics::ThreadStatistics(QObject *parent) : QObject(parent){
-    _times.resize(24);
-    _months.resize(12);
 
-    for (int i=0;i<24;i++) {
-        _times[i]=QPair<QString,int>(QString::number(i)+":00",0);
-        }
-    _months[0]=QPair<QString,int>(tr("Январь"),0);
-    _months[1]=QPair<QString,int>(tr("Февраль"),0);
-    _months[2]=QPair<QString,int>(tr("Март"),0);
-    _months[3]=QPair<QString,int>(tr("Апрель"),0);
-    _months[4]=QPair<QString,int>(tr("Май"),0);
-    _months[5]=QPair<QString,int>(tr("Июнь"),0);
-    _months[6]=QPair<QString,int>(tr("Июль"),0);
-    _months[7]=QPair<QString,int>(tr("Август"),0);
-    _months[8]=QPair<QString,int>(tr("Сентябрь"),0);
-    _months[9]=QPair<QString,int>(tr("Октябрь"),0);
-    _months[10]=QPair<QString,int>(tr("Ноябрь"),0);
-    _months[11]=QPair<QString,int>(tr("Декабрь"),0);
 }
 
 int ThreadStatistics::Fill(){
@@ -47,8 +30,8 @@ void ThreadStatistics::OnResultAchievements(SAchievementsPlayer Aachievement){
             //помещаем данные в массивы
             if(Aachievement.GetAchieved(i)==1){
                 QDateTime dateTime = Aachievement.GetUnlocktime(i);
-                _times[dateTime.time().hour()].second++;
-                _months[dateTime.date().month()-1].second++;
+                _times[dateTime.time().hour()]++;
+                _months[dateTime.date().month()-1]++;
                 int pos=-1;
                 for (int i=0;i<_years.size();i++) {
                     if(_years[i].first.toInt()==dateTime.date().year()){

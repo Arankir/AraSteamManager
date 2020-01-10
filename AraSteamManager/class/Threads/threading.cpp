@@ -46,15 +46,15 @@ int Threading::AddThreadStatistics(SGames Agames, QString Aid){
     Statistics->Set(Agames, Aid);
     connect(thread,SIGNAL(started()),Statistics,SLOT(Fill()));
     connect(Statistics,SIGNAL(s_finished(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
-                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>)),thread,SLOT(quit()));
+                              QVector<double>, int, QVector<int>, QVector<int>, QVector<QPair<QString,int>>)),thread,SLOT(quit()));
     connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
     connect(Statistics,SIGNAL(s_progress(int,int)),this->parent()->parent(),SLOT(ProgressLoading(int,int)));
     connect(Statistics,SIGNAL(s_finished(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
-                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>))
+                              QVector<double>, int, QVector<int>, QVector<int>, QVector<QPair<QString,int>>))
             ,this->parent(),SLOT(OnFinish(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
-                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>)));
+                              QVector<double>, int, QVector<int>, QVector<int>, QVector<QPair<QString,int>>)));
     connect(Statistics,SIGNAL(s_finished(QVector<int>, QVector<QPair<QString,QString>>, QVector<QPair<QString,QString>> , QVector<QPair<QString,QString>> ,
-                              QVector<double>, int, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>, QVector<QPair<QString,int>>))
+                              QVector<double>, int, QVector<int>, QVector<int>, QVector<QPair<QString,int>>))
             ,this->parent()->parent(),SLOT(ShowStatistic()));
     thread->start();
     return 1;

@@ -446,6 +446,7 @@ void MainWindow::on_ButtonSettings_clicked(){
         _settingsForm = new FormSettings();
         //connect(favoritesform,&FormFavorites::return_to_profile,this,&MainWindow::returnfromfavorites);
         ui->ScrollAreaForm->setWidget(_settingsForm);
+        ResizeScrollArea();
         //ui->FormProgressBar->setVisible(true);
         //favoritesform->setVisible(false);
     }

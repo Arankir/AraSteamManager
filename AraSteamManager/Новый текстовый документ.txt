@@ -1,1 +1,6 @@
 C:\Qt\5.12.1\mingw73_64\bin>windeployqt --release --force --compiler-runtime --dry-run C:\Users\Arankir\Desktop\SteamAchievementStatistic\AraSteamManager\build-AraSteamManager-Desktop_Qt_5_12_1_MinGW_64_bit-Release\release
+
+legendmarkers - включаемые колонки по легенде
+linechart - ломаная линия на графике
+piechartcustomization - работа с круговой диаграммой
+callout - показывает позиции
