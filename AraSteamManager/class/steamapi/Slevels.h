@@ -12,6 +12,7 @@
 #include <QTcpSocket>
 #include <QEventLoop>
 #include <class/settings.h>
+#include <class/statusvalue.h>
 #include <QObject>
 
 class SLevels : public QObject
@@ -25,7 +26,8 @@ public:
     void Set(QString id);
     void Set(QJsonDocument DocLevel);
     int GetLevel() {return _player_level;}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     void Update();
 
 signals:
@@ -40,7 +42,8 @@ private:
     Settings _setting;
     QString _steamid;//"76561198065018572"
     int _player_level=0;
-    QString _status;
+    StatusValue _status;
+    QString _error="";
 };
 
 #endif // SLEVELS_H

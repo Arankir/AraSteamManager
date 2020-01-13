@@ -12,10 +12,11 @@ SAchievementsPercentage::SAchievementsPercentage(QJsonDocument Aachievements){
         _count=Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();
         for (int i=0;i<_count;
              _achievements.push_back(SAchievementPercentage(Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i++).toObject())));
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: game is not exist";
+        _status=StatusValue::error;
+        _error="game is not exist";
     }
 }
 SAchievementsPercentage::SAchievementsPercentage(){
@@ -36,10 +37,11 @@ void SAchievementsPercentage::Set(QJsonDocument Aachievements){
         _count=Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();
         for (int i=0;i<_count;
              _achievements.push_back(SAchievementPercentage(Aachievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i++).toObject())));
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: game is not exist";
+        _status=StatusValue::error;
+        _error="game is not exist";
     }
 }
 
@@ -65,6 +67,7 @@ SAchievementsPercentage::SAchievementsPercentage( const SAchievementsPercentage 
     _appid=AnewAchievements._appid;
     _count=AnewAchievements._count;
     _status=AnewAchievements._status;
+    _error=AnewAchievements._error;
     _manager = new QNetworkAccessManager;
 }
 SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievementsPercentage & AnewAchievements) {
@@ -73,6 +76,7 @@ SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievements
     _appid=AnewAchievements._appid;
     _count=AnewAchievements._count;
     _status=AnewAchievements._status;
+    _error=AnewAchievements._error;
     _manager = new QNetworkAccessManager;
     return *this;
 }

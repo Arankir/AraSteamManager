@@ -25,6 +25,9 @@ public:
     explicit FormSettings(QWidget *parent = nullptr);
     ~FormSettings();
 
+signals:
+    void s_return_to_profile();
+
 private slots:
     void InitComponents();
 

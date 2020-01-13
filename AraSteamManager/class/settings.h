@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QDir>
 #include <QTextStream>
+#include <class/statusvalue.h>
 
 class Settings : public QObject
 {
@@ -22,7 +23,8 @@ public:
     int GetLanguage() {return _language;}
     int GetTheme() {return _theme;}
     int GetSaveimages() {return _saveImages;}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     int GetVisibleHiddenGames() {return _visibleHiddenGames;}
     QString GetKey() {return _key;}
     bool CreateFile(QString path);
@@ -37,7 +39,8 @@ private:
     int _theme=1;
     int _saveImages=0;
     int _visibleHiddenGames=0;
-    QString _status="none";
+    StatusValue _status=StatusValue::none;
+    QString _error="";
     QString _key="3826BF60403D15613B4B0381DAB7A7BD";
 };
 

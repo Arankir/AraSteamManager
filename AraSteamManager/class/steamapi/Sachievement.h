@@ -9,6 +9,7 @@
 #include <class/steamapi/Sachievementglobal.h>
 #include <class/steamapi/Sachievementplayer.h>
 #include <class/steamapi/Sachievementpercentage.h>
+#include <class/statusvalue.h>
 #include <QDebug>
 
 class SAchievement : public QObject
@@ -30,8 +31,10 @@ public:
     QString GetIcongray() {return _iconGray;}
     int GetAchieved() {return _achieved;}
     QDateTime GetUnlocktime() {return _unlockTime;}
-    QString GetStatusGlobal() {return _statusGlobal;}
-    QString GetStatusPlayer() {return _statusPlayer;}
+    StatusValue GetStatusGlobal() {return _statusGlobal;}
+    StatusValue GetStatusPlayer() {return _statusPlayer;}
+    QString GetErrorGlobal() {return _errorGlobal;}
+    QString GetErrorPlayer() {return _errorPlayer;}
     double GetPercent() {return _percent;}
     SAchievement(const SAchievement &);
     SAchievement & operator=(const SAchievement & achievement);
@@ -51,9 +54,12 @@ private:
     int _achieved=0;
     QDateTime _unlockTime=QDateTime::fromSecsSinceEpoch(0,Qt::LocalTime);
     double _percent=0.0;
-    QString _statusGlobal="none";
-    QString _statusPlayer="none";
-    QString _statusPercent="none";
+    StatusValue _statusGlobal=StatusValue::none;
+    StatusValue _statusPlayer=StatusValue::none;
+    StatusValue _statusPercent=StatusValue::none;
+    QString _errorGlobal="";
+    QString _errorPlayer="";
+    QString _errorPercent="";
 };
 
 #endif // SACHIEVEMENT_H

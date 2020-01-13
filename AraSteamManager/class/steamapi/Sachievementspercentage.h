@@ -12,6 +12,7 @@
 #include <QEventLoop>
 #include <class/steamapi/Sachievementpercentage.h>
 #include <class/settings.h>
+#include <class/statusvalue.h>
 #include <QObject>
 
 class SAchievementsPercentage : public QObject
@@ -30,7 +31,8 @@ public:
     double GetPercent(int index) {return _achievements[index].GetPercent();}
     QString GetAppid() {return _appid;}
     int GetCount() {return _count;}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     void Update();
     void Clear();
     SAchievementsPercentage(const SAchievementsPercentage &);
@@ -47,7 +49,8 @@ private:
     QNetworkAccessManager *_manager;
     Settings _setting;
     QVector<SAchievementPercentage> _achievements;
-    QString _status="none";
+    QString _error="";
+    StatusValue _status=StatusValue::none;
     QString _appid="";
     int _count=0;
 };

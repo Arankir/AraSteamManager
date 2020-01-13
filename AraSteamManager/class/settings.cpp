@@ -26,12 +26,16 @@ Settings::Settings(QObject *parent) : QObject(parent){
                     _visibleHiddenGames=setting.mid(setting.indexOf("VisibleHiddenGames=",0)+19,setting.length()).toInt();
                     }
             }
-            _status="success";
+            _status=StatusValue::success;
             settings.close();
-        } else
-            _status="error: file is already open";
-    } else
-        _status="error: file not found";
+        } else {
+            _status=StatusValue::error;
+            _error="file is already open";
+        }
+    } else {
+        _status=StatusValue::error;
+        _error="file not found";
+    }
 }
 
 bool Settings::SetMyProfile(QString AmyProfiles){
@@ -43,7 +47,8 @@ bool Settings::SetMyProfile(QString AmyProfiles){
     }
     if (!file.open(QIODevice::ReadOnly))
     {
-        _status="error: file is already open";
+        _status=StatusValue::error;
+        _error="file is already open";
         return false;
     } else {
         file.close();
@@ -68,7 +73,8 @@ bool Settings::SetLanguage(int Alanguage){
     }
     if (!file.open(QIODevice::ReadOnly))
     {
-        _status="error: file is already open";
+        _status=StatusValue::error;
+        _error="file is already open";
         return false;
     } else {
         file.close();
@@ -93,7 +99,8 @@ bool Settings::SetTheme(int Atheme){
     }
     if (!file.open(QIODevice::ReadOnly))
     {
-        _status="error: file is already open";
+        _status=StatusValue::error;
+        _error="file is already open";
         return false;
     } else {
         file.close();
@@ -118,7 +125,8 @@ bool Settings::SetSaveimage(int AsaveImage){
     }
     if (!file.open(QIODevice::ReadOnly))
     {
-        _status="error: file is already open";
+        _status=StatusValue::error;
+        _error="file is already open";
         return false;
     } else {
         file.close();
@@ -143,7 +151,8 @@ bool Settings::SetVisibleHiddenGames(int AvisibleHiddenGames){
     }
     if (!file.open(QIODevice::ReadOnly))
     {
-        _status="error: file is already open";
+        _status=StatusValue::error;
+        _error="file is already open";
         return false;
     } else {
         file.close();

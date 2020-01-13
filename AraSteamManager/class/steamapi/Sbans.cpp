@@ -22,15 +22,16 @@ SBans::SBans(QJsonDocument Abans){
     _manager = new QNetworkAccessManager();
     if(Abans.object().value("players").toArray().size()>0){
         _bans=Abans.object().value("players").toArray();
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 SBans::SBans(){
     _manager = new QNetworkAccessManager();
-    _status="null";
+    _status=StatusValue::none;
 }
 SBans::~SBans(){
     delete _manager;
@@ -56,10 +57,11 @@ void SBans::Set(QString Aid, bool Aparallel){
 void SBans::Set(QJsonDocument Abans){
     if(Abans.object().value("players").toArray().size()>0){
         _bans=Abans.object().value("players").toArray();
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 

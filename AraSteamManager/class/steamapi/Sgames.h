@@ -6,6 +6,7 @@
 #include <QObject>
 #include <class/steamapi/Sgame.h>
 #include <class/settings.h>
+#include <class/statusvalue.h>
 
 class SGames : public QObject
 {
@@ -28,7 +29,8 @@ public:
     bool GetHas_community_visible_stats(int index) {return _games[index].toObject().value("has_community_visible_stats").toBool();}
     QString GetID() {return _id;}
     int GetIndex() {return _index;}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     int GetCount() {return _games.size();}
     void Update(bool parallel);
     void Clear();
@@ -46,7 +48,8 @@ private:
     QNetworkAccessManager *_manager;
     Settings _setting;
     QJsonArray _games;
-    QString _status="none";
+    StatusValue _status=StatusValue::none;
+    QString _error="";
     QString _id;
     int _index=-1;
     bool _free_games=false;

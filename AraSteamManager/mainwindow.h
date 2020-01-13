@@ -30,6 +30,16 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+enum class WindowChildType
+  {
+     none,
+     games,
+     friends,
+     favorites,
+     statistics,
+     settings
+  };
+
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
@@ -57,7 +67,7 @@ private slots:
     void ShowGames();
     void ShowFriends();
     void ShowStatistic();
-    void GoToProfile(QString id, QString type);
+    void GoToProfile(QString id, QueryType type);
     void ProfileToUi(SProfile AProfile);
 
     void on_ButtonFindProfile_clicked();
@@ -82,7 +92,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     int _windowChildCount=0;
-    int _windowChild=0;
+    WindowChildType _windowChild=WindowChildType::none;
     SProfile _profile;
     SGames _games;
     SFriends _friends;

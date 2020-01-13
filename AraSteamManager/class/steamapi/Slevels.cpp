@@ -16,15 +16,16 @@ SLevels::SLevels(QJsonDocument Alvls){
     _manager = new QNetworkAccessManager();
     if(Alvls.object().value("response").toObject().value("player_level").toInt()>0){
         _player_level=Alvls.object().value("response").toObject().value("player_level").toInt();
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 SLevels::SLevels(){
     _manager = new QNetworkAccessManager();
-    _status="null";
+    _status=StatusValue::none;
 }
 SLevels::~SLevels(){
     delete _manager;
@@ -44,10 +45,11 @@ void SLevels::Set(QString Aid){
 void SLevels::Set(QJsonDocument Alvls){
     if(Alvls.object().value("response").toObject().value("player_level").toInt()>0){
         _player_level=Alvls.object().value("response").toObject().value("player_level").toInt();
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 

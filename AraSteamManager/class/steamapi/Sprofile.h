@@ -12,19 +12,26 @@
 #include <QTcpSocket>
 #include <QEventLoop>
 #include <class/settings.h>
+#include <class/statusvalue.h>
 #include <QObject>
+
+enum class QueryType{
+    url,
+    vanity
+};
 
 class SProfile : public QObject
 {
+
     Q_OBJECT
 public:
-    explicit SProfile(QString id, bool parallel, QString type, QObject *parent = nullptr);
+    explicit SProfile(QString id, bool parallel, QueryType type, QObject *parent = nullptr);
     SProfile(QJsonDocument DocSummaries);
     SProfile(QJsonArray ArrSummaries);
     SProfile(QJsonObject ObjSummaries);
     SProfile();
     ~SProfile();
-    void Set(QString id, bool parallel, QString type);
+    void Set(QString id, bool parallel, QueryType type);
     void Set(QJsonDocument DocSummaries);
     void Set(QJsonArray ArrSummaries);
     void Set(QJsonObject ObjSummaries);
@@ -50,7 +57,8 @@ public:
     int GetLoccityid(int index=0) {return _profile[index].toObject().value("loccityid").toInt();}
     QString GetRealname(int index=0) {return _profile[index].toObject().value("realname").toString();}
     SProfile GetProfile(int index) {return _profile[index].toObject();}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     int GetUnicIndex() {return _unicIndex;}
     int GetCount() {return _profile.size();}
     void Update(bool parallel);
@@ -70,7 +78,8 @@ private:
     QNetworkAccessManager *_manager;
     Settings _setting;
     QJsonArray _profile;
-    QString _status="null";
+    StatusValue _status=StatusValue::none;
+    QString _error="";
     QString _id="";
     int _unicIndex=-1;
 };

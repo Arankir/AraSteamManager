@@ -22,10 +22,11 @@ SFriends::SFriends(QJsonDocument Afriends){
     _manager = new QNetworkAccessManager();
     if(Afriends.object().value("friendslist").toObject().value("friends").toArray().size()>0){
         _friends=Afriends.object().value("friendslist").toObject().value("friends").toArray();
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 SFriends::SFriends(){
@@ -56,10 +57,11 @@ void SFriends::Set(QJsonDocument Afriends){
     Clear();
     if(Afriends.object().value("friendslist").toObject().value("friends").toArray().size()>0){
         _friends=Afriends.object().value("friendslist").toObject().value("friends").toArray();
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 
@@ -109,6 +111,7 @@ void SFriends::Clear(){
 SFriends::SFriends( const SFriends & AnewFriends){
     _friends=AnewFriends._friends;
     _status=AnewFriends._status;
+    _error=AnewFriends._error;
     _id=AnewFriends._id;
     _manager = new QNetworkAccessManager;
 }
@@ -117,6 +120,7 @@ SFriends & SFriends::operator=(const SFriends & AnewFriends){
     delete _manager;
     _friends=AnewFriends._friends;
     _status=AnewFriends._status;
+    _error=AnewFriends._error;
     _id=AnewFriends._id;
     _manager = new QNetworkAccessManager;
     return *this;

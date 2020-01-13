@@ -12,6 +12,7 @@
 #include <QTcpSocket>
 #include <QEventLoop>
 #include <class/settings.h>
+#include <class/statusvalue.h>
 #include <QObject>
 
 class SBans : public QObject
@@ -31,7 +32,8 @@ public:
     int GetDaysSinceLastBan(int index=0) {return _bans[index].toObject().value("DaysSinceLastBan").toInt();}
     int GetNumberOfGameBans(int index=0) {return _bans[index].toObject().value("NumberOfGameBans").toInt();}
     QString GetEconomyBan(int index=0) {return _bans[index].toObject().value("EconomyBan").toString();}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     void Update(bool parallel);
 
 signals:
@@ -45,7 +47,8 @@ private:
     QNetworkAccessManager *_manager;
     Settings _setting;
     QJsonArray _bans;
-    QString _status;
+    StatusValue _status;
+    QString _error="";
     QString _id;
 };
 #endif // SBANS_H

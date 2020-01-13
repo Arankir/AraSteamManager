@@ -13,11 +13,11 @@ SAchievements::SAchievements(QString Aappid, QString Aid, QObject *parent) : QOb
 SAchievements::SAchievements(SAchievementsGlobal Aglobal, SAchievementsPlayer Aplayer, SAchievementsPercentage Apercent){
     qDebug()<<"Set All Achievements data";
     _percent=Apercent;
-    _statusPercent="success";
+    _statusPercent=StatusValue::success;
     _global=Aglobal;
-    _statusGlobal="success";
+    _statusGlobal=StatusValue::success;
     _player=Aplayer;
-    _statusPlayer="success";
+    _statusPlayer=StatusValue::success;
     SAchievementsGlobal localGlobal = _global;
     SAchievementsPlayer localPlayer = _player;
     SAchievementsPercentage localPercent = _percent;
@@ -36,7 +36,7 @@ SAchievements::SAchievements(SAchievementsGlobal Aglobal, SAchievementsPlayer Ap
         }
     }
     _count=_finish.size();
-    _statusFinish="success";
+    _statusFinish=StatusValue::success;
     emit s_finished();
 }
 SAchievements::SAchievements(){
@@ -72,24 +72,24 @@ void SAchievements::Set(SAchievementsGlobal Aglobal, SAchievementsPlayer Aplayer
 void SAchievements::Set(SAchievementsPlayer Aplayer){
     qDebug()<<"Player set";
     _player=Aplayer;
-    _statusPlayer="success";
-    if(_statusGlobal=="success"&&_statusPlayer=="success"&&_statusPercent=="success"){
+    _statusPlayer=StatusValue::success;
+    if(_statusGlobal==StatusValue::success&&_statusPlayer==StatusValue::success&&_statusPercent==StatusValue::success){
         SetFinish();
     }
 }
 void SAchievements::Set(SAchievementsGlobal Aglobal){
     qDebug()<<"Global set";
     _global=Aglobal;
-    _statusGlobal="success";
-    if(_statusGlobal=="success"&&_statusPlayer=="success"&&_statusPercent=="success"){
+    _statusGlobal=StatusValue::success;
+    if(_statusGlobal==StatusValue::success&&_statusPlayer==StatusValue::success&&_statusPercent==StatusValue::success){
         SetFinish();
     }
 }
 void SAchievements::Set(SAchievementsPercentage Apercent){
     qDebug()<<"Percent set";
     _percent=Apercent;
-    _statusPercent="success";
-    if(_statusGlobal=="success"&&_statusPlayer=="success"&&_statusPercent=="success"){
+    _statusPercent=StatusValue::success;
+    if(_statusGlobal==StatusValue::success&&_statusPlayer==StatusValue::success&&_statusPercent==StatusValue::success){
         SetFinish();
     }
 }
@@ -113,7 +113,7 @@ void SAchievements::SetFinish(){
         }
     }
     _count=_finish.size();
-    _statusFinish="success";
+    _statusFinish=StatusValue::success;
     emit s_finished();
 }
 
@@ -145,6 +145,10 @@ SAchievements::SAchievements(const SAchievements & AnewAchievements){
     _statusPlayer=AnewAchievements._statusPlayer;
     _statusPercent=AnewAchievements._statusPercent;
     _statusFinish=AnewAchievements._statusFinish;
+    _errorGlobal=AnewAchievements._errorGlobal;
+    _errorPlayer=AnewAchievements._errorPlayer;
+    _errorPercent=AnewAchievements._errorPercent;
+    _errorFinish=AnewAchievements._errorFinish;
     _id=AnewAchievements._id;
     _appid=AnewAchievements._appid;
     _gameName=AnewAchievements._gameName;
@@ -160,6 +164,10 @@ SAchievements & SAchievements::operator=(const SAchievements & AnewAchievements)
     _statusPlayer=AnewAchievements._statusPlayer;
     _statusPercent=AnewAchievements._statusPercent;
     _statusFinish=AnewAchievements._statusFinish;
+    _errorGlobal=AnewAchievements._errorGlobal;
+    _errorPlayer=AnewAchievements._errorPlayer;
+    _errorPercent=AnewAchievements._errorPercent;
+    _errorFinish=AnewAchievements._errorFinish;
     _id=AnewAchievements._id;
     _appid=AnewAchievements._appid;
     _gameName=AnewAchievements._gameName;

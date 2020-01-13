@@ -14,6 +14,7 @@
 #include <class/steamapi/Sachievementsglobal.h>
 #include <class/steamapi/Sachievementsplayer.h>
 #include <class/steamapi/Sachievementspercentage.h>
+#include <class/statusvalue.h>
 #include <QObject>
 
 class SAchievements : public QObject
@@ -39,10 +40,14 @@ public:
     int GetAchieved(int index) {return _finish[index].GetAchieved();}
     QDateTime GetUnlocktime(int index) {return _finish[index].GetUnlocktime();}
     double GetPercent(int index) {return _finish[index].GetPercent();}
-    QString GetStatusGlobal() {return _statusGlobal;}
-    QString GetStatusPlayer() {return _statusPlayer;}
-    QString GetStatusPercent() {return _statusPercent;}
-    QString GetStatusFinish() {return _statusFinish;}
+    StatusValue GetStatusGlobal() {return _statusGlobal;}
+    StatusValue GetStatusPlayer() {return _statusPlayer;}
+    StatusValue GetStatusPercent() {return _statusPercent;}
+    StatusValue GetStatusFinish() {return _statusFinish;}
+    QString GetErrorGlobal() {return _errorGlobal;}
+    QString GetErrorPlayer() {return _errorPlayer;}
+    QString GetErrorPercent() {return _errorPercent;}
+    QString GetErrorFinish() {return _errorFinish;}
     QString GetAppid() {return _appid;}
     QString GetGamename() {return _gameName;}
     QString GetGameversion() {return _gameVersion;}
@@ -67,10 +72,14 @@ private:
     SAchievementsPlayer _player;
     SAchievementsPercentage _percent;
     QVector<SAchievement> _finish;
-    QString _statusGlobal="none";
-    QString _statusPlayer="none";
-    QString _statusPercent="none";
-    QString _statusFinish="none";
+    StatusValue _statusGlobal=StatusValue::none;
+    StatusValue _statusPlayer=StatusValue::none;
+    StatusValue _statusPercent=StatusValue::none;
+    StatusValue _statusFinish=StatusValue::none;
+    QString _errorGlobal="";
+    QString _errorPlayer="";
+    QString _errorPercent="";
+    QString _errorFinish="";
     QString _id="";
     QString _appid="";
     QString _gameName="";

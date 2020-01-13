@@ -11,9 +11,9 @@ SAchievement::SAchievement(SAchievementGlobal Aglobal, SAchievementPlayer Aplaye
     _achieved=Aplayer.GetAchieved();
     _unlockTime=Aplayer.GetUnlocktime();
     _percent=Apercent.GetPercent();
-    _statusGlobal="success";
-    _statusPlayer="success";
-    _statusPercent="success";
+    _statusGlobal=StatusValue::success;
+    _statusPlayer=StatusValue::success;
+    _statusPercent=StatusValue::success;
 }
 SAchievement::SAchievement(){
 
@@ -30,9 +30,9 @@ void SAchievement::Set(SAchievementGlobal Aglobal, SAchievementPlayer Aplayer, S
     _achieved=Aplayer.GetAchieved();
     _unlockTime=Aplayer.GetUnlocktime();
     _percent=Apercent.GetPercent();
-    _statusGlobal="success";
-    _statusPlayer="success";
-    _statusPercent="success";
+    _statusGlobal=StatusValue::success;
+    _statusPlayer=StatusValue::success;
+    _statusPercent=StatusValue::success;
 }
 
 void SAchievement::SetGlobal(SAchievementGlobal Aglobal){
@@ -44,26 +44,32 @@ void SAchievement::SetGlobal(SAchievementGlobal Aglobal){
         _description=Aglobal.GetDescription();
         _icon=Aglobal.GetIcon();
         _iconGray=Aglobal.GetIcongray();
-        _statusGlobal="success";
-    } else
-        _statusGlobal="error: apiname is incorrect";
+        _statusGlobal=StatusValue::success;
+    } else {
+        _statusGlobal=StatusValue::error;
+        _errorGlobal="apiname is incorrect";
+    }
 }
 void SAchievement::SetPlayer(SAchievementPlayer Aplayer){
     if(_apiName==""||_apiName==Aplayer.GetApiname()){
         _apiName=Aplayer.GetApiname();
         _achieved=Aplayer.GetAchieved();
         _unlockTime=Aplayer.GetUnlocktime();
-        _statusPlayer="success";
-    } else
-        _statusPlayer="error: apiname is incorrect";
+        _statusPlayer=StatusValue::success;
+    } else {
+        _statusPlayer=StatusValue::error;
+        _errorPlayer="apiname is incorrect";
+    }
 }
 void SAchievement::SetPercent(SAchievementPercentage Apercent){
     if(_apiName==""||_apiName==Apercent.GetApiname()){
         _apiName=Apercent.GetApiname();
         _percent=Apercent.GetPercent();
-        _statusPercent="success";
-    } else
-        _statusPercent="error: apiname is incorrect";
+        _statusPercent=StatusValue::success;
+    } else {
+        _statusPercent=StatusValue::error;
+        _errorPercent="apiname is incorrect";
+    }
 }
 
 SAchievement::SAchievement(const SAchievement & AnewAchievement){
@@ -80,6 +86,9 @@ SAchievement::SAchievement(const SAchievement & AnewAchievement){
     _statusGlobal=AnewAchievement._statusGlobal;
     _statusPlayer=AnewAchievement._statusPlayer;
     _statusPercent=AnewAchievement._statusPercent;
+    _errorGlobal=AnewAchievement._errorGlobal;
+    _errorPlayer=AnewAchievement._errorPlayer;
+    _errorPercent=AnewAchievement._errorPercent;
 }
 SAchievement & SAchievement::operator=(const SAchievement & AnewAchievement){
     _apiName=AnewAchievement._apiName;
@@ -95,5 +104,8 @@ SAchievement & SAchievement::operator=(const SAchievement & AnewAchievement){
     _statusGlobal=AnewAchievement._statusGlobal;
     _statusPlayer=AnewAchievement._statusPlayer;
     _statusPercent=AnewAchievement._statusPercent;
+    _errorGlobal=AnewAchievement._errorGlobal;
+    _errorPlayer=AnewAchievement._errorPlayer;
+    _errorPercent=AnewAchievement._errorPercent;
     return *this;
 }

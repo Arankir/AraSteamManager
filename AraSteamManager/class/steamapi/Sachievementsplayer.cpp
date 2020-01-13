@@ -15,10 +15,11 @@ SAchievementsPlayer::SAchievementsPlayer(QJsonDocument Aachievements){
         _count=Aachievements.object().value("playerstats").toObject().value("achievements").toArray().size();
         for (int i=0;i<_count;
              _achievements.push_back(SAchievementPlayer(Aachievements.object().value("playerstats").toObject().value("achievements").toArray().at(i++).toObject())));
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 SAchievementsPlayer::SAchievementsPlayer(){
@@ -42,10 +43,11 @@ void SAchievementsPlayer::Set(QJsonDocument Aachievements){
         _count=Aachievements.object().value("playerstats").toObject().value("achievements").toArray().size();
         for (int i=0;i<_count;
              _achievements.push_back(SAchievementPlayer(Aachievements.object().value("playerstats").toObject().value("achievements").toArray().at(i++).toObject())));
-        _status="success";
+        _status=StatusValue::success;
     }
     else {
-        _status="error: profile is not exist";
+        _status=StatusValue::error;
+        _error="profile is not exist";
     }
 }
 
@@ -73,6 +75,7 @@ SAchievementsPlayer::SAchievementsPlayer( const SAchievementsPlayer & AnewAchiev
     _count=AnewAchievements._count;
     _gameName=AnewAchievements._gameName;
     _status=AnewAchievements._status;
+    _error=AnewAchievements._error;
     _index=AnewAchievements._index;
     _manager = new QNetworkAccessManager;
 }
@@ -84,6 +87,7 @@ SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer &
     _count=AnewAchievements._count;
     _gameName=AnewAchievements._gameName;
     _status=AnewAchievements._status;
+    _error=AnewAchievements._error;
     _index=AnewAchievements._index;
     _manager = new QNetworkAccessManager;
     return *this;

@@ -24,7 +24,7 @@ FormAchievements::FormAchievements(SAchievementsPlayer Aplayer, QString Aid, SGa
 #define Init {
 void FormAchievements::InitComponents(){
     #define LoadData {
-    SProfile profileData(_id,false,"url");
+    SProfile profileData(_id,false,QueryType::url);
     QNetworkAccessManager manager;
     QEventLoop loop;
     connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -201,10 +201,9 @@ void FormAchievements::InitComponents(){
     ui->GroupBoxFilter->setEnabled(false);
     _achievements.DoSet(QString::number(_game.GetAppid()),_id);
     connect(&_achievements,SIGNAL(s_finished()),this,SLOT(PullTableWidget()));
-    qDebug()<<"FinishStatus="<<_achievements.GetStatusFinish();
 }
 void FormAchievements::PullTableWidget(){
-    if(_achievements.GetStatusFinish()=="success"){
+    if(_achievements.GetStatusFinish()==StatusValue::success){
         ui->TableWidgetAchievements->setRowCount(_achievements.GetCount());
         for(int i=0;i<_achievements.GetCount();i++)
             ui->TableWidgetAchievements->setRowHeight(i,65);
@@ -343,7 +342,7 @@ void FormAchievements::SwitchSimpleCompare(int AsimpleCompare){
 }
 void FormAchievements::LoadingCompare(){
     _loadCompare++;
-    SProfile Profile(_id,false,"url");
+    SProfile Profile(_id,false,QueryType::url);
     ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(5,new QTableWidgetItem(Profile.GetPersonaname()));
 
     QNetworkAccessManager manager;

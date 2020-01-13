@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[36];
-    char stringdata0[590];
+    QByteArrayData data[37];
+    char stringdata0[600];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -52,21 +52,22 @@ QT_MOC_LITERAL(17, 231, 11), // "ShowFriends"
 QT_MOC_LITERAL(18, 243, 13), // "ShowStatistic"
 QT_MOC_LITERAL(19, 257, 11), // "GoToProfile"
 QT_MOC_LITERAL(20, 269, 2), // "id"
-QT_MOC_LITERAL(21, 272, 4), // "type"
-QT_MOC_LITERAL(22, 277, 11), // "ProfileToUi"
-QT_MOC_LITERAL(23, 289, 8), // "SProfile"
-QT_MOC_LITERAL(24, 298, 8), // "AProfile"
-QT_MOC_LITERAL(25, 307, 28), // "on_ButtonFindProfile_clicked"
-QT_MOC_LITERAL(26, 336, 22), // "on_ButtonGames_clicked"
-QT_MOC_LITERAL(27, 359, 24), // "on_ButtonFriends_clicked"
-QT_MOC_LITERAL(28, 384, 27), // "on_ButtonSetProfile_clicked"
-QT_MOC_LITERAL(29, 412, 21), // "on_ButtonExit_clicked"
-QT_MOC_LITERAL(30, 434, 30), // "on_ButtonGoToMyProfile_clicked"
-QT_MOC_LITERAL(31, 465, 21), // "on_ButtonBack_clicked"
-QT_MOC_LITERAL(32, 487, 21), // "on_ButtonNext_clicked"
-QT_MOC_LITERAL(33, 509, 26), // "on_ButtonFavorites_clicked"
-QT_MOC_LITERAL(34, 536, 27), // "on_ButtonStatistics_clicked"
-QT_MOC_LITERAL(35, 564, 25) // "on_ButtonSettings_clicked"
+QT_MOC_LITERAL(21, 272, 9), // "QueryType"
+QT_MOC_LITERAL(22, 282, 4), // "type"
+QT_MOC_LITERAL(23, 287, 11), // "ProfileToUi"
+QT_MOC_LITERAL(24, 299, 8), // "SProfile"
+QT_MOC_LITERAL(25, 308, 8), // "AProfile"
+QT_MOC_LITERAL(26, 317, 28), // "on_ButtonFindProfile_clicked"
+QT_MOC_LITERAL(27, 346, 22), // "on_ButtonGames_clicked"
+QT_MOC_LITERAL(28, 369, 24), // "on_ButtonFriends_clicked"
+QT_MOC_LITERAL(29, 394, 27), // "on_ButtonSetProfile_clicked"
+QT_MOC_LITERAL(30, 422, 21), // "on_ButtonExit_clicked"
+QT_MOC_LITERAL(31, 444, 30), // "on_ButtonGoToMyProfile_clicked"
+QT_MOC_LITERAL(32, 475, 21), // "on_ButtonBack_clicked"
+QT_MOC_LITERAL(33, 497, 21), // "on_ButtonNext_clicked"
+QT_MOC_LITERAL(34, 519, 26), // "on_ButtonFavorites_clicked"
+QT_MOC_LITERAL(35, 546, 27), // "on_ButtonStatistics_clicked"
+QT_MOC_LITERAL(36, 574, 25) // "on_ButtonSettings_clicked"
 
     },
     "MainWindow\0ProgressLoading\0\0keyPressEvent\0"
@@ -76,7 +77,7 @@ QT_MOC_LITERAL(35, 564, 25) // "on_ButtonSettings_clicked"
     "ReturnFromStatistics\0ReturnFromSettings\0"
     "ResizeScrollArea\0InitComponents\0"
     "ShowGames\0ShowFriends\0ShowStatistic\0"
-    "GoToProfile\0id\0type\0ProfileToUi\0"
+    "GoToProfile\0id\0QueryType\0type\0ProfileToUi\0"
     "SProfile\0AProfile\0on_ButtonFindProfile_clicked\0"
     "on_ButtonGames_clicked\0on_ButtonFriends_clicked\0"
     "on_ButtonSetProfile_clicked\0"
@@ -118,18 +119,18 @@ static const uint qt_meta_data_MainWindow[] = {
       17,    0,  169,    2, 0x08 /* Private */,
       18,    0,  170,    2, 0x08 /* Private */,
       19,    2,  171,    2, 0x08 /* Private */,
-      22,    1,  176,    2, 0x08 /* Private */,
-      25,    0,  179,    2, 0x08 /* Private */,
-      26,    0,  180,    2, 0x08 /* Private */,
-      27,    0,  181,    2, 0x08 /* Private */,
-      28,    0,  182,    2, 0x08 /* Private */,
-      29,    0,  183,    2, 0x08 /* Private */,
-      30,    0,  184,    2, 0x08 /* Private */,
-      31,    0,  185,    2, 0x08 /* Private */,
-      32,    0,  186,    2, 0x08 /* Private */,
-      33,    0,  187,    2, 0x08 /* Private */,
-      34,    0,  188,    2, 0x08 /* Private */,
-      35,    0,  189,    2, 0x08 /* Private */,
+      23,    1,  176,    2, 0x08 /* Private */,
+      26,    0,  179,    2, 0x08 /* Private */,
+      27,    0,  180,    2, 0x08 /* Private */,
+      28,    0,  181,    2, 0x08 /* Private */,
+      29,    0,  182,    2, 0x08 /* Private */,
+      30,    0,  183,    2, 0x08 /* Private */,
+      31,    0,  184,    2, 0x08 /* Private */,
+      32,    0,  185,    2, 0x08 /* Private */,
+      33,    0,  186,    2, 0x08 /* Private */,
+      34,    0,  187,    2, 0x08 /* Private */,
+      35,    0,  188,    2, 0x08 /* Private */,
+      36,    0,  189,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
@@ -146,8 +147,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,   20,   21,
-    QMetaType::Void, 0x80000000 | 23,   24,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 21,   20,   22,
+    QMetaType::Void, 0x80000000 | 24,   25,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -183,7 +184,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 11: _t->ShowGames(); break;
         case 12: _t->ShowFriends(); break;
         case 13: _t->ShowStatistic(); break;
-        case 14: _t->GoToProfile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 14: _t->GoToProfile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
         case 15: _t->ProfileToUi((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
         case 16: _t->on_ButtonFindProfile_clicked(); break;
         case 17: _t->on_ButtonGames_clicked(); break;

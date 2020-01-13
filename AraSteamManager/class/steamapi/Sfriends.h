@@ -13,6 +13,7 @@
 #include <class/steamapi/Sfriend.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/settings.h>
+#include <class/statusvalue.h>
 
 class SFriends : public QObject
 {
@@ -28,7 +29,8 @@ public:
     QString GetSteamid(int index) {return _friends[index].toObject().value("steamid").toString();}
     QString GetRelationship(int index) {return _friends[index].toObject().value("relationship").toString();}
     QDateTime GetFriend_since(int index) {return QDateTime::fromSecsSinceEpoch(_friends[index].toObject().value("friend_since").toInt(),Qt::LocalTime);}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     int GetCount() {return _friends.size();}
     SProfile GetProfiles();
     void Update(bool parallel);
@@ -46,7 +48,8 @@ public slots:
 private:
     QNetworkAccessManager *_manager;
     Settings _setting;
-    QString _status="none";
+    StatusValue _status=StatusValue::none;
+    QString _error="";
     QString _id;
     QJsonArray _friends;
 };

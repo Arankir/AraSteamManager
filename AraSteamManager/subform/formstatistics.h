@@ -38,6 +38,9 @@ public slots:
     void OnFinish(QVector<int> numof, QVector<QPair<QString,QString>> complete, QVector<QPair<QString,QString>> started, QVector<QPair<QString,QString>> notStarted,
                                   QVector<double> averagePercent, int summcolumn, QVector<int> times, QVector<int> months, QVector<QPair<QString,int>> years);
 
+signals:
+    void s_return_to_profile();
+
 private:
     Ui::FormStatistics *ui;
     Settings _setting;

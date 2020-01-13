@@ -26,7 +26,7 @@ public:
 
 signals:
     void s_return_to_profile();
-    void s_go_to_profile(QString id, QString type);
+    void s_go_to_profile(QString id, QueryType type);
 
 public slots:
     void ProgressLoading(int p,int row);

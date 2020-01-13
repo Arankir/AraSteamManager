@@ -12,6 +12,7 @@
 #include <QEventLoop>
 #include <class/steamapi/Sachievementplayer.h>
 #include <class/settings.h>
+#include <class/statusvalue.h>
 #include <QObject>
 
 class SAchievementsPlayer : public QObject
@@ -31,7 +32,8 @@ public:
     int GetAchieved(int index) {return _achievements[index].GetAchieved();}
     QDateTime GetUnlocktime(int index) {return _achievements[index].GetUnlocktime();}
     QString GetAppid() {return _appid;}
-    QString GetStatus() {return _status;}
+    StatusValue GetStatus() {return _status;}
+    QString GetError() {return _error;}
     QString GetGamename() {return _gameName;}
     int GetCount() {return _count;}
     int GetIndex() {return _index;}
@@ -51,7 +53,8 @@ private:
     QNetworkAccessManager *_manager;
     Settings _setting;
     QVector<SAchievementPlayer> _achievements;
-    QString _status="none";
+    StatusValue _status=StatusValue::none;
+    QString _error="";
     QString _id="";
     QString _appid="";
     QString _gameName="";

@@ -79,6 +79,7 @@ HEADERS += \
     class/filter.h \
     class/imagerequest.h \
     class/settings.h \
+    class/statusvalue.h \
     class/steamapi/Sachievement.h \
     class/steamapi/Sachievementglobal.h \
     class/steamapi/Sachievementpercentage.h \
