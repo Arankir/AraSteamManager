@@ -47,14 +47,11 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString,QString
     donutBreakdown->legend()->setAlignment(Qt::AlignRight);
     donutBreakdown->setMargins(QMargins(1,1,1,1));
     switch(_setting.GetTheme()){
-    case 1:{
-        donutBreakdown->setTheme(QChart::ChartThemeDark);
-        break;
-    }
-    case 2:{
-
-        break;
-    }
+        case 1:
+            donutBreakdown->setTheme(QChart::ChartThemeDark);
+            break;
+        case 2:
+            break;
     }
     donutBreakdown->addBreakdownSeries(series1, QColor("#b23232"));
     donutBreakdown->addBreakdownSeries(series2, QColor("#cdcb1f"));
@@ -86,14 +83,12 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString,QString
     chartT->setTitle(tr("Достижения по часам"));
     chartT->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
-    case 1:{
-        chartT->setTheme(QChart::ChartThemeDark);
-        break;
-    }
-    case 2:{
-        barSetT->setLabelColor(Qt::black);
-        break;
-    }
+        case 1:
+            chartT->setTheme(QChart::ChartThemeDark);
+            break;
+        case 2:
+            barSetT->setLabelColor(Qt::black);
+            break;
     }
 
     QBarSeries *barSeriesT = new QBarSeries;
@@ -135,14 +130,12 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString,QString
     chartM->setTitle(tr("Достижения по месяцам"));
     chartM->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
-    case 1:{
-        chartM->setTheme(QChart::ChartThemeDark);
-        break;
-    }
-    case 2:{
-        barSetM->setLabelColor(Qt::black);
-        break;
-    }
+        case 1:
+            chartM->setTheme(QChart::ChartThemeDark);
+            break;
+        case 2:
+            barSetM->setLabelColor(Qt::black);
+            break;
     }
 
     QBarSeries *barSeriesM = new QBarSeries;
@@ -182,14 +175,12 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString,QString
     chartY->setTitle(tr("Достижения по годам"));
     chartY->setBackgroundVisible(false);
     switch(_setting.GetTheme()){
-    case 1:{
-        chartY->setTheme(QChart::ChartThemeDark);
-        break;
-    }
-    case 2:{
-        barSetY->setLabelColor(Qt::black);
-        break;
-    }
+        case 1:
+            chartY->setTheme(QChart::ChartThemeDark);
+            break;
+        case 2:
+            barSetY->setLabelColor(Qt::black);
+            break;
     }
 
     QBarSeries *barSeriesY = new QBarSeries;

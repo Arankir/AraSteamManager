@@ -5,14 +5,12 @@ FormCategoryValue::FormCategoryValue(int Apos, QWidget *parent) : QWidget(parent
     ui->setupUi(this);
     _position=Apos;
     switch(_setting.GetTheme()){
-    case 1:{
-        _theme="white";
-        break;
-        }
-    case 2:{
-        _theme="black";
-        break;
-        }
+        case 1:
+            _theme="white";
+            break;
+        case 2:
+            _theme="black";
+            break;
     }
     ui->LabelPosition->setText(QString::number(_position+1));
     ui->ButtonUp->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/up.png"));
@@ -51,10 +49,10 @@ void FormCategoryValue::on_LineEditTitle_textChanged(const QString &arg1){
 void FormCategoryValue::SetVisible(bool AVisible){
     ui->CheckBoxVisible->setChecked(AVisible);
 }
-void FormCategoryValue::SetFirstLast(int AFirstLast){
+void FormCategoryValue::SetEnabledUpDown(EnabledUpDown AFirstLast){
     _isFirstLast=AFirstLast;
-    ui->ButtonUp->setEnabled((_isFirstLast==-2)||(_isFirstLast==-1)?false:true);
-    ui->ButtonDown->setEnabled((_isFirstLast==-2)||(_isFirstLast==1)?false:true);
+    ui->ButtonUp->setEnabled((_isFirstLast==EnabledUpDown::none)||(_isFirstLast==EnabledUpDown::down)?false:true);
+    ui->ButtonDown->setEnabled((_isFirstLast==EnabledUpDown::none)||(_isFirstLast==EnabledUpDown::up)?false:true);
 }
 void FormCategoryValue::SetPosition(int APos){
     _position=APos;

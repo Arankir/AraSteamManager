@@ -29,7 +29,7 @@ public slots:
     void OnResultImage(ImageRequest*);
 
 signals:
-    void s_return_to_profile();
+    void s_return_to_profile(QWidget*);
 
 private slots:
     void on_pushButton_clicked();

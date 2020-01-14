@@ -1,5 +1,15 @@
 #include "formgames.h"
 #include "ui_formgames.h"
+#define Constants {
+const int c_tableColumnAppid=0;
+const int c_tableColumnIcon=1;
+const int c_tableColumnName=2;
+const int c_tableColumnProgress=3;
+const int c_tableColumnAchievement=4;
+const int c_tableColumnFavorite=5;
+const int c_tableColumnHide=6;
+const int c_tableColumnCount=7;
+#define ConstantsEnd }
 
 FormGames::FormGames(QString Aid, SGames Agames, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
@@ -7,14 +17,12 @@ FormGames::FormGames(QString Aid, SGames Agames, QWidget *parent) :    QWidget(p
     SGames game=Agames;
     for (int i=0;i<game.GetCount();_games.push_back(game.GetGame(i++)));
     switch(_setting.GetTheme()){
-    case 1:{
-        _theme="white";
-        break;
-        }
-    case 2:{
-        _theme="black";
-        break;
-        }
+        case 1:
+            _theme="white";
+            break;
+        case 2:
+            _theme="black";
+            break;
     }
     InitComponents();
     ui->LineEditGame->setFocus();
@@ -32,7 +40,7 @@ void FormGames::InitComponents(){
         }
     }
     _favorites.SetPath("Files/Favorites/Games.json","Games");
-    ui->TableWidgetGames->setColumnCount(7);
+    ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
@@ -191,7 +199,7 @@ FormGames::~FormGames(){
     delete ui;
 }
 void FormGames::closeEvent(QCloseEvent*){
-    emit s_return_to_profile();
+    emit s_return_to_profile(this);
     //delete this;
 }
 void FormGames::ReturnFromAchievements(int Anum){

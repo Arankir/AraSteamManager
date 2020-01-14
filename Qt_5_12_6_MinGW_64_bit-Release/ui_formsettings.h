@@ -44,44 +44,40 @@ public:
     QWidget *scrollAreaWidgetContents_7;
     QGridLayout *gridLayout;
     QPushButton *pushButton;
-    QCheckBox *checkBox;
-    QCheckBox *checkBox_8;
-    QRadioButton *radioButton_7;
-    QRadioButton *radioButton;
     QLineEdit *lineEdit;
-    QTableWidget *tableWidget;
+    QCheckBox *checkBox;
+    QRadioButton *radioButton_7;
+    QCheckBox *checkBox_8;
+    QRadioButton *radioButton;
     QScrollArea *scrollArea_6;
     QWidget *scrollAreaWidgetContents_8;
     QGridLayout *gridLayout_4;
     QPushButton *pushButton_2;
-    QCheckBox *checkBox_2;
-    QCheckBox *checkBox_7;
-    QRadioButton *radioButton_2;
-    QRadioButton *radioButton_8;
     QLineEdit *lineEdit_2;
-    QTableWidget *tableWidget_2;
+    QCheckBox *checkBox_2;
+    QRadioButton *radioButton_2;
+    QCheckBox *checkBox_7;
+    QRadioButton *radioButton_8;
     QGroupBox *GroupBoxWhiteTheme;
     QVBoxLayout *verticalLayout_7;
     QScrollArea *scrollArea_7;
     QWidget *scrollAreaWidgetContents_9;
     QGridLayout *gridLayout_2;
     QPushButton *pushButton_3;
-    QCheckBox *checkBox_3;
-    QCheckBox *checkBox_9;
-    QRadioButton *radioButton_9;
-    QRadioButton *radioButton_3;
     QLineEdit *lineEdit_3;
-    QTableWidget *tableWidget_3;
+    QCheckBox *checkBox_3;
+    QRadioButton *radioButton_9;
+    QCheckBox *checkBox_9;
+    QRadioButton *radioButton_3;
     QScrollArea *scrollArea_8;
     QWidget *scrollAreaWidgetContents_10;
     QGridLayout *gridLayout_5;
     QPushButton *pushButton_4;
-    QCheckBox *checkBox_4;
-    QCheckBox *checkBox_10;
-    QRadioButton *radioButton_4;
-    QRadioButton *radioButton_10;
     QLineEdit *lineEdit_4;
-    QTableWidget *tableWidget_4;
+    QCheckBox *checkBox_4;
+    QRadioButton *radioButton_4;
+    QCheckBox *checkBox_10;
+    QRadioButton *radioButton_10;
     QGroupBox *groupBox_4;
     QGridLayout *gridLayout_3;
     QPushButton *pushButton_5;
@@ -176,32 +172,31 @@ public:
 
         GroupBoxDarkTheme = new QGroupBox(tab);
         GroupBoxDarkTheme->setObjectName(QString::fromUtf8("GroupBoxDarkTheme"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(GroupBoxDarkTheme->sizePolicy().hasHeightForWidth());
         GroupBoxDarkTheme->setSizePolicy(sizePolicy);
+        GroupBoxDarkTheme->setMaximumSize(QSize(16777215, 250));
         verticalLayout_5 = new QVBoxLayout(GroupBoxDarkTheme);
-        verticalLayout_5->setSpacing(0);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
         scrollArea_5 = new QScrollArea(GroupBoxDarkTheme);
         scrollArea_5->setObjectName(QString::fromUtf8("scrollArea_5"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(scrollArea_5->sizePolicy().hasHeightForWidth());
+        scrollArea_5->setSizePolicy(sizePolicy1);
         scrollArea_5->setWidgetResizable(true);
         scrollAreaWidgetContents_7 = new QWidget();
         scrollAreaWidgetContents_7->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_7"));
-        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 495, 217));
+        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 477, 100));
         gridLayout = new QGridLayout(scrollAreaWidgetContents_7);
-        gridLayout->setSpacing(1);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
         pushButton = new QPushButton(scrollAreaWidgetContents_7);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy);
         pushButton->setMinimumSize(QSize(25, 0));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/white/program/white/back.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -209,62 +204,40 @@ public:
 
         gridLayout->addWidget(pushButton, 0, 0, 1, 1);
 
+        lineEdit = new QLineEdit(scrollAreaWidgetContents_7);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        sizePolicy.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
+        lineEdit->setSizePolicy(sizePolicy);
+        lineEdit->setMinimumSize(QSize(25, 0));
+
+        gridLayout->addWidget(lineEdit, 0, 1, 1, 1);
+
         checkBox = new QCheckBox(scrollAreaWidgetContents_7);
         checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        sizePolicy1.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
-        checkBox->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
+        checkBox->setSizePolicy(sizePolicy);
 
-        gridLayout->addWidget(checkBox, 0, 1, 1, 1);
-
-        checkBox_8 = new QCheckBox(scrollAreaWidgetContents_7);
-        checkBox_8->setObjectName(QString::fromUtf8("checkBox_8"));
-        sizePolicy1.setHeightForWidth(checkBox_8->sizePolicy().hasHeightForWidth());
-        checkBox_8->setSizePolicy(sizePolicy1);
-        checkBox_8->setChecked(true);
-
-        gridLayout->addWidget(checkBox_8, 0, 2, 1, 1);
+        gridLayout->addWidget(checkBox, 1, 0, 1, 1);
 
         radioButton_7 = new QRadioButton(scrollAreaWidgetContents_7);
         radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
         radioButton_7->setChecked(false);
 
-        gridLayout->addWidget(radioButton_7, 0, 3, 1, 1);
+        gridLayout->addWidget(radioButton_7, 1, 1, 1, 1);
+
+        checkBox_8 = new QCheckBox(scrollAreaWidgetContents_7);
+        checkBox_8->setObjectName(QString::fromUtf8("checkBox_8"));
+        sizePolicy.setHeightForWidth(checkBox_8->sizePolicy().hasHeightForWidth());
+        checkBox_8->setSizePolicy(sizePolicy);
+        checkBox_8->setChecked(true);
+
+        gridLayout->addWidget(checkBox_8, 2, 0, 1, 1);
 
         radioButton = new QRadioButton(scrollAreaWidgetContents_7);
         radioButton->setObjectName(QString::fromUtf8("radioButton"));
         radioButton->setChecked(true);
 
-        gridLayout->addWidget(radioButton, 0, 4, 1, 1);
-
-        lineEdit = new QLineEdit(scrollAreaWidgetContents_7);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        sizePolicy1.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
-        lineEdit->setSizePolicy(sizePolicy1);
-        lineEdit->setMinimumSize(QSize(25, 0));
-
-        gridLayout->addWidget(lineEdit, 0, 5, 1, 1);
-
-        tableWidget = new QTableWidget(scrollAreaWidgetContents_7);
-        if (tableWidget->columnCount() < 3)
-            tableWidget->setColumnCount(3);
-        if (tableWidget->rowCount() < 3)
-            tableWidget->setRowCount(3);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget->setItem(0, 0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget->setItem(0, 1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget->setItem(1, 0, __qtablewidgetitem2);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
-        tableWidget->setSizePolicy(sizePolicy2);
-        tableWidget->setRowCount(3);
-        tableWidget->setColumnCount(3);
-
-        gridLayout->addWidget(tableWidget, 1, 0, 1, 6);
+        gridLayout->addWidget(radioButton, 2, 1, 1, 1);
 
         scrollArea_5->setWidget(scrollAreaWidgetContents_7);
 
@@ -272,82 +245,62 @@ public:
 
         scrollArea_6 = new QScrollArea(GroupBoxDarkTheme);
         scrollArea_6->setObjectName(QString::fromUtf8("scrollArea_6"));
+        sizePolicy1.setHeightForWidth(scrollArea_6->sizePolicy().hasHeightForWidth());
+        scrollArea_6->setSizePolicy(sizePolicy1);
         scrollArea_6->setWidgetResizable(true);
         scrollAreaWidgetContents_8 = new QWidget();
         scrollAreaWidgetContents_8->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_8"));
-        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 495, 217));
+        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 477, 99));
         gridLayout_4 = new QGridLayout(scrollAreaWidgetContents_8);
-        gridLayout_4->setSpacing(1);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        gridLayout_4->setContentsMargins(0, 0, 0, 0);
         pushButton_2 = new QPushButton(scrollAreaWidgetContents_8);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
         pushButton_2->setEnabled(false);
-        sizePolicy1.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
-        pushButton_2->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
+        pushButton_2->setSizePolicy(sizePolicy);
         pushButton_2->setMinimumSize(QSize(25, 0));
         pushButton_2->setIcon(icon);
 
         gridLayout_4->addWidget(pushButton_2, 0, 0, 1, 1);
 
+        lineEdit_2 = new QLineEdit(scrollAreaWidgetContents_8);
+        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        lineEdit_2->setEnabled(false);
+        sizePolicy.setHeightForWidth(lineEdit_2->sizePolicy().hasHeightForWidth());
+        lineEdit_2->setSizePolicy(sizePolicy);
+        lineEdit_2->setMinimumSize(QSize(25, 0));
+
+        gridLayout_4->addWidget(lineEdit_2, 0, 1, 1, 1);
+
         checkBox_2 = new QCheckBox(scrollAreaWidgetContents_8);
         checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
         checkBox_2->setEnabled(false);
-        sizePolicy1.setHeightForWidth(checkBox_2->sizePolicy().hasHeightForWidth());
-        checkBox_2->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(checkBox_2->sizePolicy().hasHeightForWidth());
+        checkBox_2->setSizePolicy(sizePolicy);
 
-        gridLayout_4->addWidget(checkBox_2, 0, 1, 1, 1);
-
-        checkBox_7 = new QCheckBox(scrollAreaWidgetContents_8);
-        checkBox_7->setObjectName(QString::fromUtf8("checkBox_7"));
-        checkBox_7->setEnabled(false);
-        sizePolicy1.setHeightForWidth(checkBox_7->sizePolicy().hasHeightForWidth());
-        checkBox_7->setSizePolicy(sizePolicy1);
-        checkBox_7->setChecked(true);
-
-        gridLayout_4->addWidget(checkBox_7, 0, 2, 1, 1);
+        gridLayout_4->addWidget(checkBox_2, 1, 0, 1, 1);
 
         radioButton_2 = new QRadioButton(scrollAreaWidgetContents_8);
         radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
         radioButton_2->setEnabled(false);
 
-        gridLayout_4->addWidget(radioButton_2, 0, 3, 1, 1);
+        gridLayout_4->addWidget(radioButton_2, 1, 1, 1, 1);
+
+        checkBox_7 = new QCheckBox(scrollAreaWidgetContents_8);
+        checkBox_7->setObjectName(QString::fromUtf8("checkBox_7"));
+        checkBox_7->setEnabled(false);
+        sizePolicy.setHeightForWidth(checkBox_7->sizePolicy().hasHeightForWidth());
+        checkBox_7->setSizePolicy(sizePolicy);
+        checkBox_7->setChecked(true);
+
+        gridLayout_4->addWidget(checkBox_7, 2, 0, 1, 1);
 
         radioButton_8 = new QRadioButton(scrollAreaWidgetContents_8);
         radioButton_8->setObjectName(QString::fromUtf8("radioButton_8"));
         radioButton_8->setEnabled(false);
         radioButton_8->setChecked(true);
 
-        gridLayout_4->addWidget(radioButton_8, 0, 4, 1, 1);
-
-        lineEdit_2 = new QLineEdit(scrollAreaWidgetContents_8);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setEnabled(false);
-        sizePolicy1.setHeightForWidth(lineEdit_2->sizePolicy().hasHeightForWidth());
-        lineEdit_2->setSizePolicy(sizePolicy1);
-        lineEdit_2->setMinimumSize(QSize(25, 0));
-
-        gridLayout_4->addWidget(lineEdit_2, 0, 5, 1, 1);
-
-        tableWidget_2 = new QTableWidget(scrollAreaWidgetContents_8);
-        if (tableWidget_2->columnCount() < 3)
-            tableWidget_2->setColumnCount(3);
-        if (tableWidget_2->rowCount() < 3)
-            tableWidget_2->setRowCount(3);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget_2->setItem(0, 0, __qtablewidgetitem3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget_2->setItem(0, 1, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget_2->setItem(1, 0, __qtablewidgetitem5);
-        tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
-        tableWidget_2->setEnabled(false);
-        sizePolicy2.setHeightForWidth(tableWidget_2->sizePolicy().hasHeightForWidth());
-        tableWidget_2->setSizePolicy(sizePolicy2);
-        tableWidget_2->setRowCount(3);
-        tableWidget_2->setColumnCount(3);
-
-        gridLayout_4->addWidget(tableWidget_2, 1, 0, 1, 6);
+        gridLayout_4->addWidget(radioButton_8, 2, 1, 1, 1);
 
         scrollArea_6->setWidget(scrollAreaWidgetContents_8);
 
@@ -360,24 +313,25 @@ public:
         GroupBoxWhiteTheme->setObjectName(QString::fromUtf8("GroupBoxWhiteTheme"));
         sizePolicy.setHeightForWidth(GroupBoxWhiteTheme->sizePolicy().hasHeightForWidth());
         GroupBoxWhiteTheme->setSizePolicy(sizePolicy);
+        GroupBoxWhiteTheme->setMaximumSize(QSize(16777215, 250));
         verticalLayout_7 = new QVBoxLayout(GroupBoxWhiteTheme);
         verticalLayout_7->setSpacing(0);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         verticalLayout_7->setContentsMargins(0, 0, 0, 0);
         scrollArea_7 = new QScrollArea(GroupBoxWhiteTheme);
         scrollArea_7->setObjectName(QString::fromUtf8("scrollArea_7"));
+        sizePolicy1.setHeightForWidth(scrollArea_7->sizePolicy().hasHeightForWidth());
+        scrollArea_7->setSizePolicy(sizePolicy1);
         scrollArea_7->setWidgetResizable(true);
         scrollAreaWidgetContents_9 = new QWidget();
         scrollAreaWidgetContents_9->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_9"));
-        scrollAreaWidgetContents_9->setGeometry(QRect(0, 0, 495, 217));
+        scrollAreaWidgetContents_9->setGeometry(QRect(0, 0, 495, 112));
         gridLayout_2 = new QGridLayout(scrollAreaWidgetContents_9);
-        gridLayout_2->setSpacing(1);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        gridLayout_2->setContentsMargins(0, 0, 0, 0);
         pushButton_3 = new QPushButton(scrollAreaWidgetContents_9);
         pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        sizePolicy1.setHeightForWidth(pushButton_3->sizePolicy().hasHeightForWidth());
-        pushButton_3->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(pushButton_3->sizePolicy().hasHeightForWidth());
+        pushButton_3->setSizePolicy(sizePolicy);
         pushButton_3->setMinimumSize(QSize(25, 0));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/black/program/black/back.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -385,59 +339,40 @@ public:
 
         gridLayout_2->addWidget(pushButton_3, 0, 0, 1, 1);
 
+        lineEdit_3 = new QLineEdit(scrollAreaWidgetContents_9);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+        sizePolicy.setHeightForWidth(lineEdit_3->sizePolicy().hasHeightForWidth());
+        lineEdit_3->setSizePolicy(sizePolicy);
+        lineEdit_3->setMinimumSize(QSize(25, 0));
+
+        gridLayout_2->addWidget(lineEdit_3, 0, 1, 1, 1);
+
         checkBox_3 = new QCheckBox(scrollAreaWidgetContents_9);
         checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
-        sizePolicy1.setHeightForWidth(checkBox_3->sizePolicy().hasHeightForWidth());
-        checkBox_3->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(checkBox_3->sizePolicy().hasHeightForWidth());
+        checkBox_3->setSizePolicy(sizePolicy);
 
-        gridLayout_2->addWidget(checkBox_3, 0, 1, 1, 1);
-
-        checkBox_9 = new QCheckBox(scrollAreaWidgetContents_9);
-        checkBox_9->setObjectName(QString::fromUtf8("checkBox_9"));
-        sizePolicy1.setHeightForWidth(checkBox_9->sizePolicy().hasHeightForWidth());
-        checkBox_9->setSizePolicy(sizePolicy1);
-        checkBox_9->setChecked(true);
-
-        gridLayout_2->addWidget(checkBox_9, 0, 2, 1, 1);
+        gridLayout_2->addWidget(checkBox_3, 1, 0, 1, 1);
 
         radioButton_9 = new QRadioButton(scrollAreaWidgetContents_9);
         radioButton_9->setObjectName(QString::fromUtf8("radioButton_9"));
         radioButton_9->setChecked(false);
 
-        gridLayout_2->addWidget(radioButton_9, 0, 3, 1, 1);
+        gridLayout_2->addWidget(radioButton_9, 1, 1, 1, 1);
+
+        checkBox_9 = new QCheckBox(scrollAreaWidgetContents_9);
+        checkBox_9->setObjectName(QString::fromUtf8("checkBox_9"));
+        sizePolicy.setHeightForWidth(checkBox_9->sizePolicy().hasHeightForWidth());
+        checkBox_9->setSizePolicy(sizePolicy);
+        checkBox_9->setChecked(true);
+
+        gridLayout_2->addWidget(checkBox_9, 2, 0, 1, 1);
 
         radioButton_3 = new QRadioButton(scrollAreaWidgetContents_9);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
         radioButton_3->setChecked(true);
 
-        gridLayout_2->addWidget(radioButton_3, 0, 4, 1, 1);
-
-        lineEdit_3 = new QLineEdit(scrollAreaWidgetContents_9);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-        sizePolicy1.setHeightForWidth(lineEdit_3->sizePolicy().hasHeightForWidth());
-        lineEdit_3->setSizePolicy(sizePolicy1);
-        lineEdit_3->setMinimumSize(QSize(25, 0));
-
-        gridLayout_2->addWidget(lineEdit_3, 0, 5, 1, 1);
-
-        tableWidget_3 = new QTableWidget(scrollAreaWidgetContents_9);
-        if (tableWidget_3->columnCount() < 3)
-            tableWidget_3->setColumnCount(3);
-        if (tableWidget_3->rowCount() < 3)
-            tableWidget_3->setRowCount(3);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget_3->setItem(0, 0, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        tableWidget_3->setItem(0, 1, __qtablewidgetitem7);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        tableWidget_3->setItem(1, 0, __qtablewidgetitem8);
-        tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
-        sizePolicy2.setHeightForWidth(tableWidget_3->sizePolicy().hasHeightForWidth());
-        tableWidget_3->setSizePolicy(sizePolicy2);
-        tableWidget_3->setRowCount(3);
-        tableWidget_3->setColumnCount(3);
-
-        gridLayout_2->addWidget(tableWidget_3, 1, 0, 1, 6);
+        gridLayout_2->addWidget(radioButton_3, 2, 1, 1, 1);
 
         scrollArea_7->setWidget(scrollAreaWidgetContents_9);
 
@@ -445,80 +380,62 @@ public:
 
         scrollArea_8 = new QScrollArea(GroupBoxWhiteTheme);
         scrollArea_8->setObjectName(QString::fromUtf8("scrollArea_8"));
+        sizePolicy1.setHeightForWidth(scrollArea_8->sizePolicy().hasHeightForWidth());
+        scrollArea_8->setSizePolicy(sizePolicy1);
         scrollArea_8->setWidgetResizable(true);
         scrollAreaWidgetContents_10 = new QWidget();
         scrollAreaWidgetContents_10->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_10"));
-        scrollAreaWidgetContents_10->setGeometry(QRect(0, 0, 495, 217));
+        scrollAreaWidgetContents_10->setGeometry(QRect(0, 0, 495, 111));
         gridLayout_5 = new QGridLayout(scrollAreaWidgetContents_10);
-        gridLayout_5->setSpacing(1);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        gridLayout_5->setContentsMargins(0, 0, 0, 0);
         pushButton_4 = new QPushButton(scrollAreaWidgetContents_10);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
         pushButton_4->setEnabled(false);
-        sizePolicy1.setHeightForWidth(pushButton_4->sizePolicy().hasHeightForWidth());
-        pushButton_4->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(pushButton_4->sizePolicy().hasHeightForWidth());
+        pushButton_4->setSizePolicy(sizePolicy);
         pushButton_4->setMinimumSize(QSize(25, 0));
         pushButton_4->setIcon(icon1);
 
         gridLayout_5->addWidget(pushButton_4, 0, 0, 1, 1);
 
+        lineEdit_4 = new QLineEdit(scrollAreaWidgetContents_10);
+        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+        lineEdit_4->setEnabled(false);
+        sizePolicy.setHeightForWidth(lineEdit_4->sizePolicy().hasHeightForWidth());
+        lineEdit_4->setSizePolicy(sizePolicy);
+        lineEdit_4->setMinimumSize(QSize(25, 0));
+
+        gridLayout_5->addWidget(lineEdit_4, 0, 1, 1, 1);
+
         checkBox_4 = new QCheckBox(scrollAreaWidgetContents_10);
         checkBox_4->setObjectName(QString::fromUtf8("checkBox_4"));
         checkBox_4->setEnabled(false);
-        sizePolicy1.setHeightForWidth(checkBox_4->sizePolicy().hasHeightForWidth());
-        checkBox_4->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(checkBox_4->sizePolicy().hasHeightForWidth());
+        checkBox_4->setSizePolicy(sizePolicy);
 
-        gridLayout_5->addWidget(checkBox_4, 0, 1, 1, 1);
-
-        checkBox_10 = new QCheckBox(scrollAreaWidgetContents_10);
-        checkBox_10->setObjectName(QString::fromUtf8("checkBox_10"));
-        checkBox_10->setEnabled(false);
-        sizePolicy1.setHeightForWidth(checkBox_10->sizePolicy().hasHeightForWidth());
-        checkBox_10->setSizePolicy(sizePolicy1);
-        checkBox_10->setChecked(true);
-
-        gridLayout_5->addWidget(checkBox_10, 0, 2, 1, 1);
+        gridLayout_5->addWidget(checkBox_4, 1, 0, 1, 1);
 
         radioButton_4 = new QRadioButton(scrollAreaWidgetContents_10);
         radioButton_4->setObjectName(QString::fromUtf8("radioButton_4"));
         radioButton_4->setEnabled(false);
 
-        gridLayout_5->addWidget(radioButton_4, 0, 3, 1, 1);
+        gridLayout_5->addWidget(radioButton_4, 1, 1, 1, 1);
+
+        checkBox_10 = new QCheckBox(scrollAreaWidgetContents_10);
+        checkBox_10->setObjectName(QString::fromUtf8("checkBox_10"));
+        checkBox_10->setEnabled(false);
+        sizePolicy.setHeightForWidth(checkBox_10->sizePolicy().hasHeightForWidth());
+        checkBox_10->setSizePolicy(sizePolicy);
+        checkBox_10->setChecked(true);
+
+        gridLayout_5->addWidget(checkBox_10, 2, 0, 1, 1);
 
         radioButton_10 = new QRadioButton(scrollAreaWidgetContents_10);
         radioButton_10->setObjectName(QString::fromUtf8("radioButton_10"));
         radioButton_10->setEnabled(false);
         radioButton_10->setChecked(true);
 
-        gridLayout_5->addWidget(radioButton_10, 0, 4, 1, 1);
-
-        lineEdit_4 = new QLineEdit(scrollAreaWidgetContents_10);
-        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
-        lineEdit_4->setEnabled(false);
-        sizePolicy1.setHeightForWidth(lineEdit_4->sizePolicy().hasHeightForWidth());
-        lineEdit_4->setSizePolicy(sizePolicy1);
-        lineEdit_4->setMinimumSize(QSize(25, 0));
-
-        gridLayout_5->addWidget(lineEdit_4, 0, 5, 1, 1);
-
-        tableWidget_4 = new QTableWidget(scrollAreaWidgetContents_10);
-        if (tableWidget_4->columnCount() < 3)
-            tableWidget_4->setColumnCount(3);
-        if (tableWidget_4->rowCount() < 3)
-            tableWidget_4->setRowCount(3);
-        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        tableWidget_4->setItem(0, 0, __qtablewidgetitem9);
-        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        tableWidget_4->setItem(0, 1, __qtablewidgetitem10);
-        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        tableWidget_4->setItem(1, 0, __qtablewidgetitem11);
-        tableWidget_4->setObjectName(QString::fromUtf8("tableWidget_4"));
-        tableWidget_4->setEnabled(false);
-        tableWidget_4->setRowCount(3);
-        tableWidget_4->setColumnCount(3);
-
-        gridLayout_5->addWidget(tableWidget_4, 1, 0, 1, 6);
+        gridLayout_5->addWidget(radioButton_10, 2, 1, 1, 1);
 
         scrollArea_8->setWidget(scrollAreaWidgetContents_10);
 
@@ -555,20 +472,20 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         ScrollAreaProfilesHideGames = new QScrollArea(tab_2);
         ScrollAreaProfilesHideGames->setObjectName(QString::fromUtf8("ScrollAreaProfilesHideGames"));
-        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(ScrollAreaProfilesHideGames->sizePolicy().hasHeightForWidth());
-        ScrollAreaProfilesHideGames->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(ScrollAreaProfilesHideGames->sizePolicy().hasHeightForWidth());
+        ScrollAreaProfilesHideGames->setSizePolicy(sizePolicy2);
         ScrollAreaProfilesHideGames->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 439));
-        QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(scrollAreaWidgetContents->sizePolicy().hasHeightForWidth());
-        scrollAreaWidgetContents->setSizePolicy(sizePolicy4);
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(scrollAreaWidgetContents->sizePolicy().hasHeightForWidth());
+        scrollAreaWidgetContents->setSizePolicy(sizePolicy3);
         ScrollAreaProfilesHideGames->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout_2->addWidget(ScrollAreaProfilesHideGames);
@@ -594,11 +511,11 @@ public:
         if (TableWidgetGames->columnCount() < 4)
             TableWidgetGames->setColumnCount(4);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
-        QSizePolicy sizePolicy5(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(TableWidgetGames->sizePolicy().hasHeightForWidth());
-        TableWidgetGames->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(TableWidgetGames->sizePolicy().hasHeightForWidth());
+        TableWidgetGames->setSizePolicy(sizePolicy4);
         TableWidgetGames->setColumnCount(4);
 
         verticalLayout_10->addWidget(TableWidgetGames);
@@ -872,7 +789,7 @@ public:
 
         retranslateUi(FormSettings);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(FormSettings);
@@ -885,74 +802,30 @@ public:
         RadioButtonLightTheme->setText(QApplication::translate("FormSettings", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
         GroupBoxDarkTheme->setTitle(QString());
         pushButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox_8->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_7->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         lineEdit->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-
-        const bool __sortingEnabled = tableWidget->isSortingEnabled();
-        tableWidget->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->item(0, 0);
-        ___qtablewidgetitem->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2021", nullptr));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->item(0, 1);
-        ___qtablewidgetitem1->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2022", nullptr));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->item(1, 0);
-        ___qtablewidgetitem2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2023", nullptr));
-        tableWidget->setSortingEnabled(__sortingEnabled);
-
+        checkBox->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_7->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        checkBox_8->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         pushButton_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox_7->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_8->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         lineEdit_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-
-        const bool __sortingEnabled1 = tableWidget_2->isSortingEnabled();
-        tableWidget_2->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->item(0, 0);
-        ___qtablewidgetitem3->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2021", nullptr));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_2->item(0, 1);
-        ___qtablewidgetitem4->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2022", nullptr));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget_2->item(1, 0);
-        ___qtablewidgetitem5->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2023", nullptr));
-        tableWidget_2->setSortingEnabled(__sortingEnabled1);
-
+        checkBox_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        checkBox_7->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_8->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         GroupBoxWhiteTheme->setTitle(QString());
         pushButton_3->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox_3->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox_9->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_9->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_3->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         lineEdit_3->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-
-        const bool __sortingEnabled2 = tableWidget_3->isSortingEnabled();
-        tableWidget_3->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_3->item(0, 0);
-        ___qtablewidgetitem6->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2021", nullptr));
-        QTableWidgetItem *___qtablewidgetitem7 = tableWidget_3->item(0, 1);
-        ___qtablewidgetitem7->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2022", nullptr));
-        QTableWidgetItem *___qtablewidgetitem8 = tableWidget_3->item(1, 0);
-        ___qtablewidgetitem8->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2023", nullptr));
-        tableWidget_3->setSortingEnabled(__sortingEnabled2);
-
+        checkBox_3->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_9->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        checkBox_9->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_3->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         pushButton_4->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox_4->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox_10->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_4->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_10->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         lineEdit_4->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-
-        const bool __sortingEnabled3 = tableWidget_4->isSortingEnabled();
-        tableWidget_4->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget_4->item(0, 0);
-        ___qtablewidgetitem9->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2021", nullptr));
-        QTableWidgetItem *___qtablewidgetitem10 = tableWidget_4->item(0, 1);
-        ___qtablewidgetitem10->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2022", nullptr));
-        QTableWidgetItem *___qtablewidgetitem11 = tableWidget_4->item(1, 0);
-        ___qtablewidgetitem11->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\2023", nullptr));
-        tableWidget_4->setSortingEnabled(__sortingEnabled3);
-
+        checkBox_4->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_4->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        checkBox_10->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_10->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         groupBox_4->setTitle(QApplication::translate("FormSettings", "GroupBox", nullptr));
         pushButton_5->setText(QApplication::translate("FormSettings", "\320\235\320\260\321\201\321\202\321\200\320\276\320\270\321\202\321\214", nullptr));
         RadioButtonCustomTheme->setText(QApplication::translate("FormSettings", "\320\241\320\262\320\276\321\217 \321\202\320\265\320\274\320\260 (\320\222 \321\200\320\260\320\267\321\200\320\260\320\261\320\276\321\202\320\272\320\265)", nullptr));

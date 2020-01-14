@@ -27,7 +27,7 @@ public:
     QVector<FormAchievements*> achievementsforms;
 
 signals:
-    void s_return_to_profile();
+    void s_return_to_profile(QWidget*);
 
 public slots:
     void ProgressLoading(int,int);
@@ -63,13 +63,6 @@ private:
     int _numRequests=0;
     int _numNow=0;
 
-    const int c_tableColumnAppid=0;
-    const int c_tableColumnIcon=1;
-    const int c_tableColumnName=2;
-    const int c_tableColumnProgress=3;
-    const int c_tableColumnAchievement=4;
-    const int c_tableColumnFavorite=5;
-    const int c_tableColumnHide=6;
 };
 
 #endif // FORMGAMES_H

@@ -39,7 +39,7 @@ public slots:
                                   QVector<double> averagePercent, int summcolumn, QVector<int> times, QVector<int> months, QVector<QPair<QString,int>> years);
 
 signals:
-    void s_return_to_profile();
+    void s_return_to_profile(QWidget*);
 
 private:
     Ui::FormStatistics *ui;

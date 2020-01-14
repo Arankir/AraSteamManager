@@ -1,5 +1,21 @@
 #include "formfavorites.h"
 #include "ui_formfavorites.h"
+#define Constants {
+const int c_tableFriendsColumnID=0;
+const int c_tableFriendsColumnIcon=1;
+const int c_tableFriendsColumnName=2;
+const int c_tableFriendsColumnStatus=3;
+const int c_tableFriendsColumnisPublic=4;
+const int c_tableFriendsColumnGoTo=5;
+const int c_tableFriendsColumnFavorite=6;
+const int c_tableFriendsColumnCount=7;
+
+//const int c_filterName=0;
+//const int c_filterStatus=1;
+//const int c_filterPublic=2;
+//const int c_filterFavorites=3;
+//const int c_filterCount=4;
+#define ConstantsEnd }
 
 FormFavorites::FormFavorites(QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites){
     ui->setupUi(this);
@@ -21,19 +37,19 @@ void FormFavorites::InitComponents(){
     for (int i=0;i<gamesJ.size();i++) {
         //
     }
-    ui->TableWidgetFriends->setColumnCount(7);
-    ui->TableWidgetFriends->setHorizontalHeaderItem(0,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(1,new QTableWidgetItem(tr("Ник")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(2,new QTableWidgetItem(tr("Статус")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(3,new QTableWidgetItem(tr("Профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(4,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(5,new QTableWidgetItem(tr("На профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(6,new QTableWidgetItem(tr("Избранное")));
+    ui->TableWidgetFriends->setColumnCount(c_tableFriendsColumnCount);
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnID,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnIcon,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnName,new QTableWidgetItem(tr("Ник")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnStatus,new QTableWidgetItem(tr("Статус")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnisPublic,new QTableWidgetItem(tr("Профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnGoTo,new QTableWidgetItem(tr("На профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnFavorite,new QTableWidgetItem(tr("Избранное")));
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->TableWidgetFriends->setColumnHidden(4,true);
-    ui->TableWidgetFriends->setColumnWidth(0,33);
+    ui->TableWidgetFriends->setColumnHidden(c_tableFriendsColumnID,true);
+    ui->TableWidgetFriends->setColumnWidth(c_tableFriendsColumnIcon,33);
     ui->TableWidgetFriends->setRowCount(friendsJ.size());
     foreach (QJsonValue frien, friendsJ) {
         SProfile *Profiles = new SProfile(frien.toObject().value("id").toString(),true,QueryType::url);
@@ -59,7 +75,7 @@ void FormFavorites::FriendLoad(SProfile *Aprofile){
             pixmap.load(path);
             QLabel *label = new QLabel;
             label->setPixmap(pixmap);
-            ui->TableWidgetFriends->setCellWidget(_numRequests,0,label);
+            ui->TableWidgetFriends->setCellWidget(_numRequests,c_tableFriendsColumnIcon,label);
         }
     QTableWidgetItem *item4 = new QTableWidgetItem;
     if(!Aprofile->GetGameextrainfo().isEmpty()){
@@ -67,69 +83,58 @@ void FormFavorites::FriendLoad(SProfile *Aprofile){
         item4->setTextColor(QColor("#89b753"));
     } else
         switch (Aprofile->GetPersonastate()){
-        case 0:{
-                item4->setText(tr("Не в сети"));
-                item4->setTextColor(QColor("#4c4d4f"));
-                break;
-        }
-        case 1:{
-                item4->setText(tr("В сети"));
-                item4->setTextColor(QColor("#57cbde"));
-                break;
-        }
-        case 2:{
-                item4->setText(tr("Не беспокоить"));
-                item4->setTextColor(QColor("#815560"));
-                break;
-        }
-        case 3:{
-                item4->setText(tr("Нет на месте"));
-                item4->setTextColor(QColor("#46788e"));
-                break;
-        }
-        case 4:{
-                item4->setText(tr("Спит"));
-                item4->setTextColor(QColor("#46788e"));
-                break;
-        }
-        case 5:{
-                item4->setText(tr("Ожидает обмена"));
-                item4->setTextColor(Qt::darkMagenta);
-                break;
-        }
-        case 6:{
-                item4->setText(tr("Хочет поиграть"));
-                item4->setTextColor(Qt::darkMagenta);
-                break;
-        }
+            case 0:
+                    item4->setText(tr("Не в сети"));
+                    item4->setTextColor(QColor("#4c4d4f"));
+                    break;
+            case 1:
+                    item4->setText(tr("В сети"));
+                    item4->setTextColor(QColor("#57cbde"));
+                    break;
+            case 2:
+                    item4->setText(tr("Не беспокоить"));
+                    item4->setTextColor(QColor("#815560"));
+                    break;
+            case 3:
+                    item4->setText(tr("Нет на месте"));
+                    item4->setTextColor(QColor("#46788e"));
+                    break;
+            case 4:
+                    item4->setText(tr("Спит"));
+                    item4->setTextColor(QColor("#46788e"));
+                    break;
+            case 5:
+                    item4->setText(tr("Ожидает обмена"));
+                    item4->setTextColor(Qt::darkMagenta);
+                    break;
+            case 6:
+                    item4->setText(tr("Хочет поиграть"));
+                    item4->setTextColor(Qt::darkMagenta);
+                    break;
         }
     QTableWidgetItem *item5 = new QTableWidgetItem;
     switch(Aprofile->GetCommunityvisibilitystate()){
-    case 1:{
-        item5->setText(tr("Скрытый"));
-        item5->setTextColor(Qt::red);
-        break;
+        case 1:
+            item5->setText(tr("Скрытый"));
+            item5->setTextColor(Qt::red);
+            break;
+        case 2:
+            item5->setText(tr("Скрытый"));
+            item5->setTextColor(Qt::red);
+            break;
+        case 3:
+            item5->setText(tr("Публичный"));
+            item5->setTextColor(Qt::green);
+            break;
+        case 8:
+            item5->setText(tr("Скрытый"));
+            item5->setTextColor(Qt::red);
+            break;
     }
-    case 2:{
-        item5->setText(tr("Скрытый"));
-        item5->setTextColor(Qt::red);
-        break;
-    }
-    case 3:{
-        item5->setText(tr("Публичный"));
-        item5->setTextColor(Qt::green);
-        break;
-    }
-    case 8:{
-        item5->setText(tr("Скрытый"));
-        item5->setTextColor(Qt::red);
-        break;
-    }
-    }
-    ui->TableWidgetFriends->setItem(_numRequests,1,new QTableWidgetItem(Aprofile->GetPersonaname()));
-    ui->TableWidgetFriends->setItem(_numRequests,2,item4);
-    ui->TableWidgetFriends->setItem(_numRequests,3,item5);
-    ui->TableWidgetFriends->setItem(_numRequests,4,new QTableWidgetItem(Aprofile->GetSteamid()));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID,new QTableWidgetItem(Aprofile->GetSteamid()));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName,new QTableWidgetItem(Aprofile->GetPersonaname()));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnStatus,item4);
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnisPublic,item5);
     _numRequests++;
 }
 
@@ -138,7 +143,7 @@ void FormFavorites::OnResultImage(ImageRequest* Aimage){
     pixmap.loadFromData(Aimage->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetFriends->setCellWidget(Aimage->GetRow(),0,label);
+    ui->TableWidgetFriends->setCellWidget(Aimage->GetRow(),c_tableFriendsColumnIcon,label);
     disconnect(Aimage,&ImageRequest::s_finished,this,&FormFavorites::OnResultImage);
     Aimage->deleteLater();
 }

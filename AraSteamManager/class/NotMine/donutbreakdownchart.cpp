@@ -33,20 +33,14 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-//![1]
 DonutBreakdownChart::DonutBreakdownChart(QGraphicsItem *parent, Qt::WindowFlags wFlags)
-    : QChart(QChart::ChartTypeCartesian, parent, wFlags)
-{
-    // create the series for main center pie
+    : QChart(QChart::ChartTypeCartesian, parent, wFlags){
     m_mainSeries = new QPieSeries();
     m_mainSeries->setPieSize(0.7);
     QChart::addSeries(m_mainSeries);
 }
-//![1]
 
-//![2]
-void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor mainColor)
-{
+void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor mainColor){
     QFont font("Arial", 8);
 
     // add breakdown series as a slice to center pie
@@ -73,7 +67,6 @@ void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor
         slice->setLabelFont(font);
     }
 
-
     // add the series to the chart
     QChart::addSeries(breakdownSeries);
 
@@ -83,11 +76,8 @@ void DonutBreakdownChart::addBreakdownSeries(QPieSeries *breakdownSeries, QColor
     // update customize legend markers
     updateLegendMarkers();
 }
-//![2]
 
-//![3]
-void DonutBreakdownChart::recalculateAngles()
-{
+void DonutBreakdownChart::recalculateAngles(){
     qreal angle = 0;
     const auto slices = m_mainSeries->slices();
     for (QPieSlice *slice : slices) {
@@ -97,11 +87,8 @@ void DonutBreakdownChart::recalculateAngles()
         breakdownSeries->setPieEndAngle(angle);
     }
 }
-//![3]
 
-//![4]
-void DonutBreakdownChart::updateLegendMarkers()
-{
+void DonutBreakdownChart::updateLegendMarkers(){
     // go through all markers
     const auto allseries = series();
     for (QAbstractSeries *series : allseries) {
@@ -121,4 +108,3 @@ void DonutBreakdownChart::updateLegendMarkers()
         }
     }
 }
-//![4]

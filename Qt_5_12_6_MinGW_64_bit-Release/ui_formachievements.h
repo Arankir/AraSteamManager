@@ -199,6 +199,7 @@ public:
         sizePolicy2.setHeightForWidth(GroupBoxFilter->sizePolicy().hasHeightForWidth());
         GroupBoxFilter->setSizePolicy(sizePolicy2);
         verticalLayout_3 = new QVBoxLayout(GroupBoxFilter);
+        verticalLayout_3->setSpacing(1);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));

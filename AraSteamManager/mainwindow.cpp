@@ -6,39 +6,47 @@
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
     switch(_setting.GetTheme()){
-    case 1:{
-        QPalette darkPalette;
-        darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
-        darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-        darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-        darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
-        //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
-        qApp->setPalette(darkPalette);
-        _theme="white";
-        break;
-        }
-    case 2:{
-        _theme="black";
-        // Настраиваем палитру для цветовых ролей элементов интерфейса
-        //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
-        //    darkPalette.setColor(QPalette::WindowText, Qt::white);
-        //    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
-        //    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-        //    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
-        //    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
-        //    darkPalette.setColor(QPalette::Text, Qt::white);
-        //    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
-        //    darkPalette.setColor(QPalette::ButtonText, Qt::white);
-        //    darkPalette.setColor(QPalette::BrightText, Qt::red);
-        //    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
-        //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-        //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-        // Устанавливаем данную палитру
-            // Для возврата к светлой палитре достаточно
-            // будет установить стандартную палитру из темы оформления
-            //qApp->setPalette(style()->standardPalette());
-        break;
-        }
+        case 1:{
+            QPalette darkPalette;
+            darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
+            darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+            darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+            darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
+            //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
+            qApp->setPalette(darkPalette);
+            _theme="white";
+            break;
+            }
+        case 2:
+            _theme="black";
+            // Настраиваем палитру для цветовых ролей элементов интерфейса
+            //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
+            //    darkPalette.setColor(QPalette::WindowText, Qt::white);
+            //    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
+            //    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+            //    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
+            //    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
+            //    darkPalette.setColor(QPalette::Text, Qt::white);
+            //    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
+            //    darkPalette.setColor(QPalette::ButtonText, Qt::white);
+            //    darkPalette.setColor(QPalette::BrightText, Qt::red);
+            //    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
+            //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+            //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+            // Устанавливаем данную палитру
+                // Для возврата к светлой палитре достаточно
+                // будет установить стандартную палитру из темы оформления
+                //qApp->setPalette(style()->standardPalette());
+            break;
+        default:
+            QPalette darkPalette;
+            darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
+            darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+            darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+            darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
+            //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
+            qApp->setPalette(darkPalette);
+            _theme="white";
     }
     InitComponents();
     if(_setting.GetStatus()==StatusValue::success){
@@ -49,8 +57,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 
 #define Init {
 void MainWindow::InitComponents(){
-    ui->LabelAvatar->setText("");
     ui->LabelLogo->setPixmap(QPixmap(":/program/program/logo.png"));
+    ui->LabelAvatar->setText("");
     ui->LabelTimeCreated->setText("");
     ui->LabelPersonaState->setText("");
     ui->LabelLocCountryCode->setText("");
@@ -58,6 +66,8 @@ void MainWindow::InitComponents(){
     ui->LabelRealName->setText("");
     ui->Labellvl->setText("");
     ui->LabelBans->setText("");
+    ui->ButtonBack->setText("");
+    ui->ButtonNext->setText("");
     ui->LabelPersonaState->setWordWrap(true);
     ui->ButtonGames->setVisible(false);
     ui->ButtonFriends->setVisible(false);
@@ -71,6 +81,8 @@ void MainWindow::InitComponents(){
     ui->LabelProfileVisibility->setVisible(false);
     ui->ScrollAreaProfileInfo->setVisible(false);
     ui->FormProgressBar->setVisible(false);
+    ui->ButtonBack->setEnabled(false);
+    ui->ButtonNext->setEnabled(false);
     ui->ButtonFindProfile->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
     ui->ButtonFavorites->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
     ui->ButtonStatistics->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/statistic.png"));
@@ -80,10 +92,6 @@ void MainWindow::InitComponents(){
     ui->ButtonGames->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/games.png"));
     ui->ButtonBack->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/left.png"));
     ui->ButtonNext->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/right.png"));
-    ui->ButtonBack->setText("");
-    ui->ButtonNext->setText("");
-    ui->ButtonBack->setEnabled(false);
-    ui->ButtonNext->setEnabled(false);
     //ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
@@ -96,16 +104,19 @@ void MainWindow::ProgressLoading(int Aprogress,int){
 void MainWindow::ShowGames(){
     ui->FormProgressBar->setVisible(false);
     _gamesForm->setVisible(true);
+    _windowChildCount++;
     ResizeScrollArea();
 }
 void MainWindow::ShowFriends(){
     ui->FormProgressBar->setVisible(false);
     _friendsForm->setVisible(true);
+    _windowChildCount++;
     ResizeScrollArea();
 }
 void MainWindow::ShowStatistic(){
     ui->FormProgressBar->setVisible(false);
     _statisticsForm->setVisible(true);
+    _windowChildCount++;
     ResizeScrollArea();
 }
 void MainWindow::keyPressEvent(QKeyEvent *event){
@@ -115,7 +126,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 void MainWindow::changeEvent(QEvent *event){
     if(event->type()==QEvent::LanguageChange){
-    //    ui->retranslateUi(this);
+        Retranslate();
     }
 }
 MainWindow::~MainWindow(){
@@ -123,61 +134,43 @@ MainWindow::~MainWindow(){
     delete ui;
 }
 void MainWindow::ReturnFromForms(){
-    switch(_windowChild){
-    case WindowChildType::games:{
-        ReturnFromGames();
-        break;
-    }
-    case WindowChildType::friends:{
-        ReturnFromFriends();
-        break;
-    }
-    case WindowChildType::favorites:{
-        ReturnFromFavorites();
-        break;
-    }
-    case WindowChildType::statistics:{
-        ReturnFromStatistics();
-        break;
-    }
-    case WindowChildType::settings:{
-        ReturnFromSettings();
-        break;
-    }
-    default:{
+    if(_windowChildCount>0)
+        switch(_windowChild){
+            case WindowChildType::games:
+                ReturnFromForm(_gamesForm);
+                break;
+            case WindowChildType::friends:
+                ReturnFromForm(_friendsForm);
+                break;
+            case WindowChildType::favorites:
+                ReturnFromForm(_favoritesForm);
+                break;
+            case WindowChildType::statistics:
+                ReturnFromForm(_statisticsForm);
+                break;
+            case WindowChildType::settings:
+                ReturnFromForm(_settingsForm);
+                break;
+            default:
+                break;
+        }
+}
+void MainWindow::ReturnFromForm(QWidget *Aform){
+    disconnect(Aform);
+    delete Aform;
+    _windowChildCount--;
+    _windowChild=WindowChildType::none;
+}
 
-    }
-    }
-}
-void MainWindow::ReturnFromGames(){
-    disconnect(_gamesForm);
-    delete _gamesForm;
-    _windowChildCount--;
-    _windowChild=WindowChildType::none;
-}
-void MainWindow::ReturnFromFriends(){
-    disconnect(_friendsForm);
-    delete _friendsForm;
-    _windowChildCount--;
-    _windowChild=WindowChildType::none;
-}
-void MainWindow::ReturnFromFavorites(){
-    disconnect(_favoritesForm);
-    delete _favoritesForm;
-    _windowChildCount--;
-    _windowChild=WindowChildType::none;
-}
-void MainWindow::ReturnFromStatistics(){
-    disconnect(_statisticsForm);
-    delete _statisticsForm;
-    _windowChildCount--;
-    _windowChild=WindowChildType::none;
-}
-void MainWindow::ReturnFromSettings(){
-    disconnect(_settingsForm);
-    delete _settingsForm;
-    _windowChildCount--;
-    _windowChild=WindowChildType::none;
+void MainWindow::Retranslate(){
+    if(_profile.GetStatus()==StatusValue::success)
+        ProfileToUi(_profile);
+    ui->ButtonBack->setText(tr("Назад"));
+    ui->ButtonNext->setText(tr("Вперед"));
+    ui->ButtonSetProfile->setText(tr("Это мой профиль"));
+    ui->LineEditIdProfile->setPlaceholderText(tr("Введите Steamid"));
+    ui->ButtonExit->setText(tr("Выход"));
+    ui->ButtonFindProfile->setText(tr("Найти"));
 }
 void MainWindow::ResizeScrollArea(){
     if(ui->ScrollAreaForm->height()<400){
@@ -203,17 +196,14 @@ void MainWindow::on_ButtonFindProfile_clicked(){
         GoToProfile(id,QueryType::url);
         }
     switch(_windowChild){
-    case WindowChildType::games:{
-        ReturnFromGames();
-        break;
-    }
-    case WindowChildType::friends:{
-        ReturnFromFriends();
-        break;
-    }
-    default:{
-
-    }
+        case WindowChildType::games:
+            ReturnFromForm(_gamesForm);
+            break;
+        case WindowChildType::friends:
+            ReturnFromForm(_friendsForm);
+            break;
+        default:
+            break;
     }
 }
 void MainWindow::GoToProfile(QString Aid, QueryType Atype){
@@ -255,41 +245,34 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
     } else
         switch (Aprofile.GetPersonastate()) {
-        case 0:{
+            case 0:
                 ui->LabelPersonaState->setText(tr("Был в сети %1").arg(Aprofile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                 break;
-        }
-        case 1:{
+            case 1:
                 ui->LabelPersonaState->setText(tr("В сети"));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
                 break;
-        }
-        case 2:{
+            case 2:
                 ui->LabelPersonaState->setText(tr("Не беспокоить"));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
                 break;
-        }
-        case 3:{
+            case 3:
                 ui->LabelPersonaState->setText(tr("Нет на месте"));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                 break;
-        }
-        case 4:{
+            case 4:
                 ui->LabelPersonaState->setText(tr("Спит"));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
                 break;
-        }
-        case 5:{
+            case 5:
                 ui->LabelPersonaState->setText(tr("Ожидает обмена"));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                 break;
-        }
-        case 6:{
+            case 6:
                 ui->LabelPersonaState->setText(tr("Хочет поиграть"));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                 break;
-        }
         }
     ui->LabelProfileUrl->setText(Aprofile.GetProfileurl());
     ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(Levels.GetLevel())));
@@ -297,25 +280,21 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
     ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(Aprofile.GetTimecreated().toString("yyyy.MM.dd")));
     ui->LabelLocCountryCode->setText(tr("Язык: %1").arg(Aprofile.GetLoccountrycode()));
     switch (Aprofile.GetCommunityvisibilitystate()) {
-        case 1:{
+        case 1:
             ui->LabelProfileVisibility->setText(tr("Скрытый"));
             ui->LabelProfileVisibility->setStyleSheet("color:red");
             break;
-        }
-        case 3:{
+        case 3:
             ui->LabelProfileVisibility->setText(tr("Публичный"));
             ui->LabelProfileVisibility->setStyleSheet("color:green");
             break;
-        }
-        case 8:{
+        case 8:
             ui->LabelProfileVisibility->setText(tr("Для друзей"));
             ui->LabelProfileVisibility->setStyleSheet("color:yellow");
             break;
-        }
-        default:{
+        default:
             ui->LabelProfileVisibility->setText(tr("Неизвестно"));
             ui->LabelProfileVisibility->setStyleSheet("color:white");
-        }
         }
     if(Bans.GetVACBanned()){
         ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(Bans.GetNumberOfVACBans())).arg(QString::number(Bans.GetDaysSinceLastBan())));
@@ -401,7 +380,7 @@ void MainWindow::on_ButtonGames_clicked(){
         _windowChild=WindowChildType::games;
         ui->FormProgressBar->setMaximum(_games.GetCount());
         _gamesForm = new FormGames(_profile.GetSteamid(),_games,this);
-        connect(_gamesForm,&FormGames::s_return_to_profile,this,&MainWindow::ReturnFromGames);
+        connect(_gamesForm,&FormGames::s_return_to_profile,this,&MainWindow::ReturnFromForm);
         ui->ScrollAreaForm->setWidget(_gamesForm);
         ui->FormProgressBar->setVisible(true);
         _gamesForm->setVisible(false);
@@ -413,7 +392,7 @@ void MainWindow::on_ButtonFriends_clicked(){
         _windowChild=WindowChildType::friends;
         ui->FormProgressBar->setMaximum(_friends.GetCount());
         _friendsForm = new FormFriends(_profile.GetSteamid(),_friends,this);
-        connect(_friendsForm,&FormFriends::s_return_to_profile,this,&MainWindow::ReturnFromFriends);
+        connect(_friendsForm,&FormFriends::s_return_to_profile,this,&MainWindow::ReturnFromForm);
         connect(_friendsForm,&FormFriends::s_go_to_profile,this,&MainWindow::GoToProfile);
         ui->ScrollAreaForm->setWidget(_friendsForm);
         ui->FormProgressBar->setVisible(true);
@@ -426,8 +405,9 @@ void MainWindow::on_ButtonFavorites_clicked(){
         _windowChild=WindowChildType::favorites;
         //ui->FormProgressBar->setMaximum(Friends.GetCount());
         _favoritesForm = new FormFavorites(this);
-        connect(_favoritesForm,&FormFavorites::s_return_to_profile,this,&MainWindow::ReturnFromFavorites);
+        connect(_favoritesForm,&FormFavorites::s_return_to_profile,this,&MainWindow::ReturnFromForm);
         ui->ScrollAreaForm->setWidget(_favoritesForm);
+        _windowChildCount++;
         //ui->FormProgressBar->setVisible(true);
         //favoritesform->setVisible(false);
     }
@@ -438,7 +418,7 @@ void MainWindow::on_ButtonStatistics_clicked(){
         _windowChild=WindowChildType::statistics;
         ui->FormProgressBar->setMaximum(_games.GetCount());
         _statisticsForm = new FormStatistics(_profile.GetSteamid(),_games,_profile.GetPersonaname(),this);
-        connect(_statisticsForm,&FormStatistics::s_return_to_profile,this,&MainWindow::ReturnFromStatistics);
+        connect(_statisticsForm,&FormStatistics::s_return_to_profile,this,&MainWindow::ReturnFromForm);
         ui->ScrollAreaForm->setWidget(_statisticsForm);
         ui->FormProgressBar->setVisible(true);
         _statisticsForm->setVisible(false);
@@ -449,28 +429,26 @@ void MainWindow::on_ButtonSettings_clicked(){
         ReturnFromForms();
         _windowChild=WindowChildType::settings;
         //ui->FormProgressBar->setMaximum(Friends.GetCount());
-        _settingsForm = new FormSettings();
-        connect(_settingsForm,&FormSettings::s_return_to_profile,this,&MainWindow::ReturnFromSettings);
+        _settingsForm = new FormSettings(this);
+        connect(_settingsForm,&FormSettings::s_return_to_profile,this,&MainWindow::ReturnFromForm);
         ui->ScrollAreaForm->setWidget(_settingsForm);
+        _windowChildCount++;
         ResizeScrollArea();
         //ui->FormProgressBar->setVisible(true);
         //favoritesform->setVisible(false);
     }
 }
 void MainWindow::on_ButtonGoToMyProfile_clicked(){
-    if(_setting.GetStatus()==StatusValue::success){
+    if(_setting.GetStatus()==StatusValue::success&&_setting.GetMyProfile()!="none"){
         switch(_windowChild){
-        case WindowChildType::games:{
-            ReturnFromGames();
-            break;
-        }
-        case WindowChildType::friends:{
-            ReturnFromFriends();
-            break;
-        }
-        default:{
-
-        }
+            case WindowChildType::games:
+                ReturnFromForm(_gamesForm);
+                break;
+            case WindowChildType::friends:
+                ReturnFromForm(_friendsForm);
+                break;
+            default:
+                break;
         }
         GoToProfile(_setting.GetMyProfile(),QueryType::url);
     } else {

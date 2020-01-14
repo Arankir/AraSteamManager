@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QFormLayout>
 #include <QPair>
+#include <QTranslator>
 #include <class/settings.h>
 #include <class/imagerequest.h>
 #include <class/steamapi/Sprofile.h>
@@ -26,7 +27,7 @@ public:
     ~FormSettings();
 
 signals:
-    void s_return_to_profile();
+    void s_return_to_profile(QWidget*);
 
 private slots:
     void InitComponents();

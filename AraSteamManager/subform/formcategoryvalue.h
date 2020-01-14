@@ -4,6 +4,13 @@
 #include <QWidget>
 #include <class/settings.h>
 
+enum class EnabledUpDown{
+    none,
+    up,
+    down,
+    both
+};
+
 namespace Ui {
 class FormCategoryValue;
 }
@@ -18,7 +25,7 @@ public:
     void SetVisible(bool visible);
     void SetPosition(int pos);
     void SetTitle(QString);
-    void SetFirstLast(int firstlast);
+    void SetEnabledUpDown(EnabledUpDown firstlast);
     int GetPosition() {return _position;}
     QString GetTitle();
     bool GetVisible();
@@ -46,7 +53,8 @@ private:
     Settings _setting;
     QString _theme="white";
     int _position=0;
-    int _isFirstLast=0;
+    EnabledUpDown _isFirstLast=EnabledUpDown::none;
 };
+
 
 #endif // FORMCATEGORYVALUE_H

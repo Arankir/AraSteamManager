@@ -83,11 +83,12 @@ int ThreadFriends::Fill(){
             break;
         }
         }
-        _TableWidgetFriends->setItem(i,1,new QTableWidgetItem(_profiles[i].GetPersonaname()));
-        _TableWidgetFriends->setItem(i,2,new QTableWidgetItem(_friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
-        _TableWidgetFriends->setItem(i,3,item4);
-        _TableWidgetFriends->setItem(i,4,item5);
-        _TableWidgetFriends->setItem(i,5,new QTableWidgetItem(_profiles[i].GetSteamid()));
+
+        _TableWidgetFriends->setItem(i,0,new QTableWidgetItem(_profiles[i].GetSteamid()));
+        _TableWidgetFriends->setItem(i,2,new QTableWidgetItem(_profiles[i].GetPersonaname()));
+        _TableWidgetFriends->setItem(i,3,new QTableWidgetItem(_friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
+        _TableWidgetFriends->setItem(i,4,item4);
+        _TableWidgetFriends->setItem(i,5,item5);
         emit s_progress(i,i);
     }
     emit s_finished();

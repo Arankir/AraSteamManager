@@ -30,8 +30,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-enum class WindowChildType
-  {
+enum class WindowChildType{
      none,
      games,
      friends,
@@ -56,11 +55,8 @@ private slots:
     void keyPressEvent(QKeyEvent *event) override;
     void changeEvent(QEvent *event) override;
     void ReturnFromForms();
-    void ReturnFromGames();
-    void ReturnFromFriends();
-    void ReturnFromFavorites();
-    void ReturnFromStatistics();
-    void ReturnFromSettings();
+    void ReturnFromForm(QWidget *form);
+    void Retranslate();
     void ResizeScrollArea();
 
     void InitComponents();

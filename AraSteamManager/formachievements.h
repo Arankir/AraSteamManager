@@ -37,6 +37,22 @@ class FormAchievements : public QWidget
 {
     Q_OBJECT
 
+enum class FormMode{
+    achievement,
+    compare
+};
+
+enum class FriendType{
+    haveGame,
+    haventGame
+};
+
+enum class CategoryType{
+    none,
+    add,
+    change
+};
+
 public:
     explicit FormAchievements(SAchievementsPlayer pl, QString ids, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
@@ -50,69 +66,56 @@ public slots:
 
 private slots:
     void InitComponents();
-
-    void OnResultImage(ImageRequest *imgr);
-    void SwitchSimpleCompare(int sc);
-    void LoadingCompare();
-    void closeEvent(QCloseEvent*);
-    void UpdateHiddenRows();
     void PullTableWidget();
-    bool ProfileIsPublic(SAchievements achievement, int col);
+    void OnResultImage(ImageRequest *imgr);
+
+    void SwitchSimpleCompare(FormMode sc);
+    void LoadingCompare();
     void LoadFriend(SGames *Games);
     void FinishLoadFriends();
-    void FavoritesClicked();
-    void ShowCategories();
-    void on_ComboBoxCategory_Change(int index);
-    void on_CheckBoxCategory_Change(int ind);
-    void on_ButtonAddCategory_clicked();
-
     void on_RadioButtonAll_clicked();
     void on_RadioButtonReached_clicked();
     void on_RadioButtonNotReached_clicked();
 
-    void on_LineEditNameAchievements_textChanged(const QString &arg1);
-
-    void on_ButtonChangeCategory_clicked();
-
-    void on_ButtonFindAchievement_clicked();
-
-    void on_ButtonUpdate_clicked();
-
-    void on_ButtonCompare_clicked();
-
-    void on_RadioButtonFriendAll_Click();
-    void on_RadioButtonFriendReached_Click();
-    void on_RadioButtonFriendNotReached_Click();
-
-    void on_CheckBoxCompareIcon_stateChanged(int arg1);
-
-    void on_CheckBoxCompareTitle_stateChanged(int arg1);
-
-    void on_CheckBoxCompareDescription_stateChanged(int arg1);
-
-    void on_CheckBoxCompareTotalPercent_stateChanged(int arg1);
-
-    void on_CheckBoxShowFilter_stateChanged(int arg1);
-
     void on_RadioButtonCompareFriendsAll_clicked();
     void on_RadioButtonCompareFriendsReached_clicked();
     void on_RadioButtonCompareFriendsNotReached_clicked();
-
+    void on_RadioButtonFriendAll_Click();
+    void on_RadioButtonFriendReached_Click();
+    void on_RadioButtonFriendNotReached_Click();
     void on_TableWidgetCompareFriendsCellChanged(int row, int column);
-
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
+    void closeEvent(QCloseEvent*);
+    void ShowCategories();
+    void UpdateHiddenRows();
+    bool ProfileIsPublic(SAchievements achievement, int col);
+
+    void on_LineEditNameAchievements_textChanged(const QString &arg1);
+    void on_ButtonFindAchievement_clicked();
+    void on_ButtonAddCategory_clicked();
+    void on_ButtonChangeCategory_clicked();
+    void on_ButtonUpdate_clicked();
+    void FavoritesClicked();
+    void on_ButtonCompare_clicked();
+    void on_CheckBoxShowFilter_stateChanged(int arg1);
+    void on_ComboBoxCategory_Change(int index);
+    void on_CheckBoxCategory_Change(int ind);
+    void on_ButtonDeleteAllCategories_clicked();
+
+    void on_CheckBoxCompareIcon_stateChanged(int arg1);
+    void on_CheckBoxCompareTitle_stateChanged(int arg1);
+    void on_CheckBoxCompareDescription_stateChanged(int arg1);
+    void on_CheckBoxCompareTotalPercent_stateChanged(int arg1);
+
     void on_ButtonAddValueCategory_clicked();
-
-    void on_CheckBoxCategoryOneValue_stateChanged(int arg1);
-
     void on_ButtonCancelCategory_clicked();
-
-    void on_ButtonDeleteCategory_clicked();
-
     void on_ButtonAcceptCategory_clicked();
-
+    void on_ButtonDeleteCategory_clicked();
+    void on_CheckBoxCategoryOneValue_stateChanged(int arg1);
+    void on_LineEditTitleCategory_textChanged(const QString &arg1);
     void on_ComboBoxCategoriesCategory_activated(int index);
+    void on_CheckBoxCategoryVisibleAll_clicked();
 
     void on_FormCategoryValueChange(int pos, QString value);
     void on_FormCategoryVisibleChange(int pos, bool visible);
@@ -120,14 +123,7 @@ private slots:
     void on_FormCategorySelectChange(int pos, bool select);
     void on_FormCategoryDeleting(int pos);
 
-    void on_CheckBoxCategoryVisibleAll_clicked();
-
-    void on_ButtonDeleteAllCategories_clicked();
-
-    void on_LineEditTitleCategory_textChanged(const QString &arg1);
-
     void on_CheckBoxFavorites_stateChanged(int arg1);
-    void on_ButtonReturn_clicked();
 
 private:
     Ui::FormAchievements *ui;
@@ -144,25 +140,21 @@ private:
     int _numRequests=0;
     int _numNow=0;
 
-    int _simpleCompare=1;
+    FormMode _simpleCompare=FormMode::compare;
     int _loadCompare=0;
     int _type1=0;
     int _type2=0;
     int _friendsCount=0;
     QVector<SProfile> _profiles;
-    QVector<QPair<SProfile,int>> _friends;
+    QVector<QPair<SProfile,FriendType>> _friends;
 
     QFormLayout *_categoryValuesLayout;
-    int _typeCategory=0;
+    CategoryType _typeCategory=CategoryType::none;
     QVector<FormCategoryValue*> _values;
+
     Filter _fAchievements;
     Filter _fCompare;
 
-    const int c_filterName = 0;
-    const int c_filterFavorite = 2;
-    const int c_filterEndConstValues = 3;
-    const int c_staticColumns=6;
-    const int c_columnNoValueCategory = 7;
 };
 
 #endif // FORMACHIEVEMENTS_H

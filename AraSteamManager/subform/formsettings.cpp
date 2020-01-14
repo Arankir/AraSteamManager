@@ -7,59 +7,50 @@ FormSettings::FormSettings(QWidget *parent) :
 {
     ui->setupUi(this);
     switch(_setting.GetTheme()){
-    case 1:{
-        _theme="white";
-        break;
-        }
-    case 2:{
-        _theme="black";
-        break;
-        }
+        case 1:
+            _theme="white";
+            break;
+        case 2:
+            _theme="black";
+            break;
     }
     InitComponents();
 }
 
-FormSettings::~FormSettings()
-{
+FormSettings::~FormSettings(){
     delete ui;
 }
 
 void FormSettings::InitComponents(){
     switch (_setting.GetLanguage()) {
-    case 1:{
-        ui->RadioButtonLanguageEnglish->setChecked(true);
-        break;
-    }
-    case 5:{
-        ui->RadioButtonLanguageRussian->setChecked(true);
-        break;
-    }
-    default:{
-    }
+        case 1:
+            ui->RadioButtonLanguageEnglish->setChecked(true);
+            break;
+        case 5:
+            ui->RadioButtonLanguageRussian->setChecked(true);
+            break;
+        default:
+            break;
     }
     switch (_setting.GetVisibleHiddenGames()) {
-    case 0:{
-        ui->CheckBoxVisibleHiddenGames->setChecked(false);
-        break;
-    }
-    case 1:{
-        ui->CheckBoxVisibleHiddenGames->setChecked(true);
-        break;
-    }
-    default:{
-    }
+        case 0:
+            ui->CheckBoxVisibleHiddenGames->setChecked(false);
+            break;
+        case 1:
+            ui->CheckBoxVisibleHiddenGames->setChecked(true);
+            break;
+        default:
+            break;
     }
     switch (_setting.GetTheme()) {
-    case 1:{
-        ui->RadioButtonDarkTheme->setChecked(true);
-        break;
-    }
-    case 2:{
-        ui->RadioButtonLightTheme->setChecked(true);
-        break;
-    }
-    default:{
-    }
+        case 1:
+            ui->RadioButtonDarkTheme->setChecked(true);
+            break;
+        case 2:
+            ui->RadioButtonLightTheme->setChecked(true);
+            break;
+        default:
+            break;
     }
 
     QPalette darkPalette;
@@ -89,9 +80,8 @@ void FormSettings::InitComponents(){
             layout->addWidget(allHidden);
             QFile fileHide1("Files/Hide/All.txt");
             if(fileHide1.open(QIODevice::ReadOnly)){
-                while(!fileHide1.atEnd()){
+                while(!fileHide1.atEnd())
                     pair.second << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
-                }
                 fileHide1.close();
             }
         }
@@ -113,9 +103,8 @@ void FormSettings::InitComponents(){
                 layout->addWidget(profileHidden);
                 QFile fileHide2("Files/Hide/"+list.at(i).fileName());
                 if(fileHide2.open(QIODevice::ReadOnly)){
-                    while(!fileHide2.atEnd()){
+                    while(!fileHide2.atEnd())
                         hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
-                    }
                     fileHide2.close();
                 }
                 QPair<QString,QList<QString>> pair;
@@ -131,25 +120,24 @@ void FormSettings::InitComponents(){
 
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
     _setting.SetLanguage(1);
+    QTranslator *translator = new QTranslator;
+        translator->load(":/AraSteamManager_en.qm");
+        qApp->installTranslator(translator);
+        //ui->retranslateUi(this);
     QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_RadioButtonLanguageRussian_clicked(){
     _setting.SetLanguage(5);
+    QTranslator *translator = new QTranslator;
+        translator->load(":/AraSteamManager_ru.qm");
+        qApp->installTranslator(translator);
+        //ui->retranslateUi(this);
     QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_CheckBoxVisibleHiddenGames_stateChanged(int arg1){
-    switch (arg1) {
-    case 0:{
-        _setting.SetVisibleHiddenGames(0);
-        break;
-    }
-    case 2:{
-        _setting.SetVisibleHiddenGames(1);
-        break;
-    }
-    }
+    _setting.SetVisibleHiddenGames(arg1/2);
 }
 
 void FormSettings::on_RadioButtonDarkTheme_clicked(){

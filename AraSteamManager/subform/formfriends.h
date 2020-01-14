@@ -25,7 +25,7 @@ public:
     ~FormFriends();
 
 signals:
-    void s_return_to_profile();
+    void s_return_to_profile(QWidget*);
     void s_go_to_profile(QString id, QueryType type);
 
 public slots:
@@ -66,10 +66,7 @@ private:
     int _numRequests=0;
     int _numNow=0;
 
-    const int c_filterName=0;
-    const int c_filterStatus=1;
-    const int c_filterPublic=2;
-    const int c_filterFavorites=3;
+
 };
 
 #endif // FORMFRIENDS_H
