@@ -129,6 +129,16 @@ void MainWindow::changeEvent(QEvent *event){
         Retranslate();
     }
 }
+void MainWindow::Retranslate(){
+    if(_profile.GetStatus()==StatusValue::success)
+        ProfileToUi(_profile);
+    ui->ButtonBack->setText(tr("Назад"));
+    ui->ButtonNext->setText(tr("Вперед"));
+    ui->ButtonSetProfile->setText(tr("Это мой профиль"));
+    ui->LineEditIdProfile->setPlaceholderText(tr("Введите Steamid"));
+    ui->ButtonExit->setText(tr("Выход"));
+    ui->ButtonFindProfile->setText(tr("Найти"));
+}
 MainWindow::~MainWindow(){
     ReturnFromForms();
     delete ui;
@@ -160,17 +170,6 @@ void MainWindow::ReturnFromForm(QWidget *Aform){
     delete Aform;
     _windowChildCount--;
     _windowChild=WindowChildType::none;
-}
-
-void MainWindow::Retranslate(){
-    if(_profile.GetStatus()==StatusValue::success)
-        ProfileToUi(_profile);
-    ui->ButtonBack->setText(tr("Назад"));
-    ui->ButtonNext->setText(tr("Вперед"));
-    ui->ButtonSetProfile->setText(tr("Это мой профиль"));
-    ui->LineEditIdProfile->setPlaceholderText(tr("Введите Steamid"));
-    ui->ButtonExit->setText(tr("Выход"));
-    ui->ButtonFindProfile->setText(tr("Найти"));
 }
 void MainWindow::ResizeScrollArea(){
     if(ui->ScrollAreaForm->height()<400){
