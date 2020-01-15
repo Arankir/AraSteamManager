@@ -31,6 +31,7 @@ signals:
 
 private slots:
     void InitComponents();
+    void changeEvent(QEvent *event);
 
     void on_RadioButtonLanguageEnglish_clicked();
 
@@ -47,6 +48,7 @@ private slots:
     void OnResultImage(ImageRequest *);
     void AchievementsClicked();
     void HideClicked();
+    void Retranslate();
 
 private:
     Ui::FormSettings *ui;
