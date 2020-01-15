@@ -74,7 +74,6 @@ public:
     QSpacerItem *horizontalSpacer_4;
     QPushButton *ButtonGoToMyProfile;
     QProgressBar *FormProgressBar;
-    QHBoxLayout *horizontalLayout_5;
     QScrollArea *ScrollAreaForm;
     QWidget *FormsWidget;
     QMenuBar *menuBar;
@@ -85,13 +84,14 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(730, 639);
+        MainWindow->resize(465, 393);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
+        verticalLayout->setSpacing(1);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(6, 6, 6, 6);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -173,7 +173,7 @@ public:
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 710, 150));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 451, 150));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setSpacing(3);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -332,26 +332,20 @@ public:
 
         verticalLayout->addWidget(FormProgressBar);
 
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         ScrollAreaForm = new QScrollArea(centralWidget);
         ScrollAreaForm->setObjectName(QString::fromUtf8("ScrollAreaForm"));
         ScrollAreaForm->setWidgetResizable(true);
         FormsWidget = new QWidget();
         FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 708, 285));
+        FormsWidget->setGeometry(QRect(0, 0, 451, 72));
         ScrollAreaForm->setWidget(FormsWidget);
 
-        horizontalLayout_5->addWidget(ScrollAreaForm);
-
-
-        verticalLayout->addLayout(horizontalLayout_5);
+        verticalLayout->addWidget(ScrollAreaForm);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 730, 20));
+        menuBar->setGeometry(QRect(0, 0, 465, 20));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

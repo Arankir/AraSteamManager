@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormSettings_t {
-    QByteArrayData data[9];
-    char stringdata0[218];
+    QByteArrayData data[16];
+    char stringdata0[337];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,22 +32,33 @@ struct qt_meta_stringdata_FormSettings_t {
 static const qt_meta_stringdata_FormSettings_t qt_meta_stringdata_FormSettings = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "FormSettings"
-QT_MOC_LITERAL(1, 13, 14), // "InitComponents"
-QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 37), // "on_RadioButtonLanguageEnglish..."
-QT_MOC_LITERAL(4, 67, 37), // "on_RadioButtonLanguageRussian..."
-QT_MOC_LITERAL(5, 105, 42), // "on_CheckBoxVisibleHiddenGames..."
-QT_MOC_LITERAL(6, 148, 4), // "arg1"
-QT_MOC_LITERAL(7, 153, 31), // "on_RadioButtonDarkTheme_clicked"
-QT_MOC_LITERAL(8, 185, 32) // "on_RadioButtonLightTheme_clicked"
+QT_MOC_LITERAL(1, 13, 19), // "s_return_to_profile"
+QT_MOC_LITERAL(2, 33, 0), // ""
+QT_MOC_LITERAL(3, 34, 8), // "QWidget*"
+QT_MOC_LITERAL(4, 43, 14), // "InitComponents"
+QT_MOC_LITERAL(5, 58, 37), // "on_RadioButtonLanguageEnglish..."
+QT_MOC_LITERAL(6, 96, 37), // "on_RadioButtonLanguageRussian..."
+QT_MOC_LITERAL(7, 134, 42), // "on_CheckBoxVisibleHiddenGames..."
+QT_MOC_LITERAL(8, 177, 4), // "arg1"
+QT_MOC_LITERAL(9, 182, 31), // "on_RadioButtonDarkTheme_clicked"
+QT_MOC_LITERAL(10, 214, 32), // "on_RadioButtonLightTheme_clicked"
+QT_MOC_LITERAL(11, 247, 29), // "RadiobuttonHiddenGamesClicked"
+QT_MOC_LITERAL(12, 277, 13), // "OnResultImage"
+QT_MOC_LITERAL(13, 291, 13), // "ImageRequest*"
+QT_MOC_LITERAL(14, 305, 19), // "AchievementsClicked"
+QT_MOC_LITERAL(15, 325, 11) // "HideClicked"
 
     },
-    "FormSettings\0InitComponents\0\0"
+    "FormSettings\0s_return_to_profile\0\0"
+    "QWidget*\0InitComponents\0"
     "on_RadioButtonLanguageEnglish_clicked\0"
     "on_RadioButtonLanguageRussian_clicked\0"
     "on_CheckBoxVisibleHiddenGames_stateChanged\0"
     "arg1\0on_RadioButtonDarkTheme_clicked\0"
-    "on_RadioButtonLightTheme_clicked"
+    "on_RadioButtonLightTheme_clicked\0"
+    "RadiobuttonHiddenGamesClicked\0"
+    "OnResultImage\0ImageRequest*\0"
+    "AchievementsClicked\0HideClicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,26 +68,40 @@ static const uint qt_meta_data_FormSettings[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    1,   69,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x08 /* Private */,
-       3,    0,   45,    2, 0x08 /* Private */,
-       4,    0,   46,    2, 0x08 /* Private */,
-       5,    1,   47,    2, 0x08 /* Private */,
-       7,    0,   50,    2, 0x08 /* Private */,
-       8,    0,   51,    2, 0x08 /* Private */,
+       4,    0,   72,    2, 0x08 /* Private */,
+       5,    0,   73,    2, 0x08 /* Private */,
+       6,    0,   74,    2, 0x08 /* Private */,
+       7,    1,   75,    2, 0x08 /* Private */,
+       9,    0,   78,    2, 0x08 /* Private */,
+      10,    0,   79,    2, 0x08 /* Private */,
+      11,    0,   80,    2, 0x08 /* Private */,
+      12,    1,   81,    2, 0x08 /* Private */,
+      14,    0,   84,    2, 0x08 /* Private */,
+      15,    0,   85,    2, 0x08 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void, 0x80000000 | 3,    2,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    8,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 13,    2,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -89,13 +114,45 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<FormSettings *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->InitComponents(); break;
-        case 1: _t->on_RadioButtonLanguageEnglish_clicked(); break;
-        case 2: _t->on_RadioButtonLanguageRussian_clicked(); break;
-        case 3: _t->on_CheckBoxVisibleHiddenGames_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->on_RadioButtonDarkTheme_clicked(); break;
-        case 5: _t->on_RadioButtonLightTheme_clicked(); break;
+        case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
+        case 1: _t->InitComponents(); break;
+        case 2: _t->on_RadioButtonLanguageEnglish_clicked(); break;
+        case 3: _t->on_RadioButtonLanguageRussian_clicked(); break;
+        case 4: _t->on_CheckBoxVisibleHiddenGames_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->on_RadioButtonDarkTheme_clicked(); break;
+        case 6: _t->on_RadioButtonLightTheme_clicked(); break;
+        case 7: _t->RadiobuttonHiddenGamesClicked(); break;
+        case 8: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 9: _t->AchievementsClicked(); break;
+        case 10: _t->HideClicked(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QWidget* >(); break;
+            }
+            break;
+        case 8:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< ImageRequest* >(); break;
+            }
+            break;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (FormSettings::*)(QWidget * );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormSettings::s_return_to_profile)) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -129,15 +186,22 @@ int FormSettings::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        if (_id < 11)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 11;
     }
     return _id;
+}
+
+// SIGNAL 0
+void FormSettings::s_return_to_profile(QWidget * _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

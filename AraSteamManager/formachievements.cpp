@@ -22,7 +22,6 @@ const int c_tableCompareColumnTitle=2;
 const int c_tableCompareColumnDescription=3;
 const int c_tableCompareColumnWorld=4;
 const int c_tableCompareColumnMy=5;
-const int c_tableCompareColumnFavorite=6;
 const int c_tableCompareColumnCount=6;
 
 const int c_tableFriendsRowAvatars=0;
@@ -227,12 +226,19 @@ void FormAchievements::InitComponents(){
     ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(false)));
     ui->LabelGameTitle->setText(_game.GetName());
     ui->GroupBoxFilter->setEnabled(false);
-    _achievements.DoSet(QString::number(_game.GetAppid()),_id);
+    _achievements.SetID(_id);
+    SAchievementsPercentage percent(QString::number(_game.GetAppid()));
+    connect(&percent,SIGNAL(s_finished()),&loop,SLOT(quit()));
+    loop.exec();
+    disconnect(&percent,SIGNAL(s_finished()),&loop,SLOT(quit()));
+    _achievements.Set(percent);
     connect(&_achievements,SIGNAL(s_finished()),this,SLOT(PullTableWidget()));
+    Retranslate();
 }
 void FormAchievements::PullTableWidget(){
     if(_achievements.GetStatusFinish()==StatusValue::success){
         ui->TableWidgetAchievements->setRowCount(_achievements.GetCount());
+        qDebug()<<ui->TableWidgetAchievements->rowCount();
         for(int i=0;i<_achievements.GetCount();i++)
             ui->TableWidgetAchievements->setRowHeight(i,65);
         ui->TableWidgetCompareAchievements->setRowCount(_achievements.GetCount()+2);
@@ -245,7 +251,7 @@ void FormAchievements::PullTableWidget(){
         LoadTable.AddThreadAchievements(_achievements,ui->LabelTotalPersent,ui->TableWidgetAchievements,lbl,ui->TableWidgetCompareAchievements);
     } else {
         ui->TableWidgetAchievements->insertRow(0);
-        ui->TableWidgetAchievements->setItem(c_tableAchievementColumnAppid,1,new QTableWidgetItem("Error"));
+        ui->TableWidgetAchievements->setItem(c_tableAchievementColumnAppid,1,new QTableWidgetItem(tr("Ошибка")));
         ui->TableWidgetAchievements->setColumnHidden(c_tableAchievementColumnTitle,true);
         ui->TableWidgetAchievements->setColumnHidden(c_tableAchievementColumnDescription,true);
         ui->TableWidgetAchievements->setColumnHidden(c_tableAchievementColumnWorld,true);
@@ -255,6 +261,68 @@ void FormAchievements::PullTableWidget(){
         ui->ButtonCompare->setEnabled(false);
     }
 }
+void FormAchievements::Retranslate(){
+    ui->CheckBoxShowFilter->setText(tr("Показать фильтр"));
+    ui->GroupBoxFilter->setTitle(tr("      Фильтр"));
+    ui->ButtonAddCategory->setText(tr("Добавить категорию"));
+    ui->ButtonChangeCategory->setText(tr("Изменить категорию"));
+    ui->ButtonDeleteAllCategories->setText(tr("Удалить все категории"));
+    ui->ButtonUpdate->setText(tr("Обновить"));
+    ui->GroupBoxCompareShowedColumns->setTitle(tr("Видимые столбцы"));
+    ui->CheckBoxCompareIcon->setText(tr("Иконка"));
+    ui->CheckBoxCompareTitle->setText(tr("Название"));
+    ui->CheckBoxCompareDescription->setText(tr("Описание"));
+    ui->CheckBoxCompareTotalPercent->setText(tr("По миру"));
+    ui->RadioButtonAll->setText(tr("Все достижения"));
+    ui->RadioButtonReached->setText(tr("Полученные достижения"));
+    ui->RadioButtonNotReached->setText(tr("Не полученные достижения"));
+    ui->CheckBoxFavorites->setText(tr("Только избранное"));
+    ui->CheckBoxCompareAllFriends->setText(tr("Все друзья"));
+    ui->LineEditTitleCategory->setPlaceholderText(tr("Название категории"));
+    ui->CheckBoxCategoryOneValue->setText(tr("Без значений"));
+    ui->ButtonAddValueCategory->setText(tr("Добавить значение"));
+    ui->ButtonCancelCategory->setText(tr("Отмена"));
+    ui->ButtonDeleteCategory->setText(tr("Удалить категорию"));
+    ui->CheckBoxCategoryVisibleAll->setText(tr("Показать всё"));
+    ui->ButtonAcceptCategory->setText(tr("Применить"));
+    ui->LineEditNameAchievements->setPlaceholderText(tr("Достижение"));
+    ui->ButtonFindAchievement->setText(tr(" Найти"));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnIcon,new QTableWidgetItem(""));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnTitle,new QTableWidgetItem(tr("Название")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnDescription,new QTableWidgetItem(tr("Описание")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnWorld,new QTableWidgetItem(tr("По миру")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnReached,new QTableWidgetItem(tr("Получено")));
+    ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnFavorite,new QTableWidgetItem(tr("Избранное")));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(c_tableCompareColumnTitle,new QTableWidgetItem(tr("Название")));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(c_tableCompareColumnDescription,new QTableWidgetItem(tr("Описание")));
+    ui->TableWidgetCompareAchievements->setHorizontalHeaderItem(c_tableCompareColumnWorld,new QTableWidgetItem(tr("По миру")));
+    ui->TableWidgetCompareFriends->cellWidget(c_tableFriendsRowAvatars,1)->setToolTip(tr("Достижения друзей"));
+    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(false)));
+    switch (_simpleCompare) {
+        case FormMode::compare:
+            ui->ButtonCompare->setText(tr("Обратно"));
+            break;
+        case FormMode::achievement:
+            ui->ButtonCompare->setText(tr("Сравнить с друзьями"));
+            break;
+    }
+    switch (_typeCategory) {
+        case CategoryType::add:
+            ui->GroupBoxCategories->setTitle(tr("Добавить категорию"));
+            break;
+        case CategoryType::change:
+            ui->GroupBoxCategories->setTitle(tr("Изменить категорию"));
+            break;
+        default:
+            break;
+    }
+    QEventLoop loop;
+    SAchievementsGlobal global(QString::number(_game.GetAppid()));
+    connect(&global,SIGNAL(s_finished()),&loop,SLOT(quit()));
+    loop.exec();
+    disconnect(&global,SIGNAL(s_finished()),&loop,SLOT(quit()));
+    _achievements.Set(global);
+}
 void FormAchievements::ProgressLoading(int Aprogress,int Arow){
     qDebug()<<"Loading..."<<Aprogress;
     QButtonWithData *button = new QButtonWithData("");
@@ -262,7 +330,7 @@ void FormAchievements::ProgressLoading(int Aprogress,int Arow){
     button->setObjectName("ButtonFavorites&"+QString::number(Arow));
     button->AddData("NumberGame",QString::number(Arow));
     connect(button,&QButtonWithData::pressed,this,&FormAchievements::FavoritesClicked);
-    ui->TableWidgetAchievements->setCellWidget(Arow,c_tableCompareColumnFavorite,button);
+    ui->TableWidgetAchievements->setCellWidget(Arow,c_tableAchievementColumnFavorite,button);
 }
 void FormAchievements::OnFinish(){
     ui->GroupBoxFilter->setEnabled(true);
@@ -459,7 +527,7 @@ void FormAchievements::FinishLoadFriends(){
         ava->setToolTip(_friends[i].first.GetPersonaname());
         ava->setAlignment(Qt::AlignCenter);
         ui->TableWidgetCompareFriends->setCellWidget(0,i+2,ava);
-        QTableWidgetItem *pItem(new QTableWidgetItem(tr("")));
+        QTableWidgetItem *pItem(new QTableWidgetItem(""));
         pItem->setFlags(pItem->flags() | Qt::ItemIsUserCheckable);
         pItem->setCheckState(Qt::Unchecked);
         pItem->setTextAlignment(Qt::AlignCenter);
@@ -680,6 +748,11 @@ void FormAchievements::closeEvent(QCloseEvent*){
     emit s_return_to_games(_unicNum);
     this->deleteLater();
 }
+void FormAchievements::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        Retranslate();
+    }
+}
 void FormAchievements::ShowCategories(){
     _categoriesGame.Set(_game);
     QList<QString> list = _categoriesGame.GetTitles();
@@ -748,6 +821,7 @@ bool FormAchievements::ProfileIsPublic(SAchievements Aachievement, int Acol){
             QTableWidgetItem *item5;
             if(Aachievement.GetAchieved(j)==1){
                 item5 = new QTableWidgetItem(tr("Получено %1").arg(Aachievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm")));
+                item5->setToolTip(Aachievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm"));
                 totalReach++;
                 } else {
                 item5 = new QTableWidgetItem(tr("Не получено"));
@@ -758,10 +832,10 @@ bool FormAchievements::ProfileIsPublic(SAchievements Aachievement, int Acol){
         }
         }
     if((totalReach==0)&&(totalNotReach==0)){
-        ui->TableWidgetCompareAchievements->setCellWidget(1,Acol, new QLabel("profile is \nnot public"));
+        ui->TableWidgetCompareAchievements->setItem(1,Acol, new QTableWidgetItem(tr("Профиль \nне публичный")));
         return false;
         } else {
-        ui->TableWidgetCompareAchievements->setCellWidget(1,Acol, new QLabel(QString(" %1/%2\n%3%").arg(QString::number(totalReach))
+        ui->TableWidgetCompareAchievements->setItem(1,Acol, new QTableWidgetItem(QString(" %1/%2\n%3%").arg(QString::number(totalReach))
                                                                              .arg(QString::number(totalReach+totalNotReach))
                                                                              .arg(QString::number(100.0*totalReach/(totalReach+totalNotReach)))));
         return true;
@@ -830,7 +904,6 @@ void FormAchievements::on_ButtonChangeCategory_clicked(){
 void FormAchievements::on_ButtonUpdate_clicked(){
     _achievements.Update();
     PullTableWidget();
-    ui->LabelGameOnline->setText(tr("Сейчас в игре :%1").arg(_game.GetNumberPlayers(true)));
     if(ui->RadioButtonReached->isChecked())
         ui->RadioButtonReached->setChecked(true);
     else if(ui->RadioButtonNotReached->isChecked())
@@ -1231,7 +1304,7 @@ void FormAchievements::on_FormCategoryVisibleChange(int Apos, bool Avisible){
 }
 void FormAchievements::on_FormCategoryPositionChange(int Apos, int AposNew){
     if(AposNew<0||AposNew>ui->TableWidgetAchievements->columnCount()-(c_tableAchievementColumnNoValue+1)){
-        QMessageBox::warning(this,"","Невозможно переместить значение");
+        QMessageBox::warning(this,"",tr("Невозможно переместить значение"));
     } else {
         for (int j=0;j<ui->TableWidgetAchievements->rowCount();j++) {
             Qt::CheckState pItem1 = ui->TableWidgetAchievements->item(j,(c_tableAchievementColumnNoValue+1)+Apos)->checkState();

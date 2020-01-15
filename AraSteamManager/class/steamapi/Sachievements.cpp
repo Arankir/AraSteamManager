@@ -56,13 +56,8 @@ void SAchievements::Set(QString Aappid, QString Aid){
     SAchievementsPercentage *Percent = new SAchievementsPercentage(Aappid);
     connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-void SAchievements::DoSet(QString Aappid, QString Aid){
-    _appid=Aappid;
+void SAchievements::SetID(QString Aid){
     _id=Aid;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(Aappid);
-    connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(Aappid);
-    connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
 void SAchievements::Set(SAchievementsGlobal Aglobal, SAchievementsPlayer Aplayer, SAchievementsPercentage Apercent){
     Set(Apercent);
@@ -94,6 +89,7 @@ void SAchievements::Set(SAchievementsPercentage Apercent){
     }
 }
 void SAchievements::SetFinish(){
+    qDebug()<<"Finish set";
     Clear();
     SAchievementsGlobal localGlobal = _global;
     SAchievementsPlayer localPlayer = _player;

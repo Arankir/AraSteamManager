@@ -118,13 +118,32 @@ void FormSettings::InitComponents(){
     ui->ScrollAreaProfilesHideGames->setLayout(layout);
 }
 
+void FormSettings::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        Retranslate();
+    }
+}
+
+void FormSettings::Retranslate(){
+    if(_profile.GetStatus()==StatusValue::success)
+        ProfileToUi(_profile);
+    ui->ButtonBack->setText(tr("Назад"));
+    ui->ButtonNext->setText(tr("Вперед"));
+    ui->ButtonSetProfile->setText(tr("Это мой профиль"));
+    ui->LineEditIdProfile->setPlaceholderText(tr("Введите Steamid"));
+    ui->ButtonExit->setText(tr("Выход"));
+    ui->ButtonFindProfile->setText(tr("Найти"));
+    ui->ButtonStatistics->setText(tr("Статистика"));
+    ui->ButtonFavorites->setText(tr("Избранное"));
+}
+
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
     _setting.SetLanguage(1);
     QTranslator *translator = new QTranslator;
         translator->load(":/AraSteamManager_en.qm");
         qApp->installTranslator(translator);
         //ui->retranslateUi(this);
-    QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
+    //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_RadioButtonLanguageRussian_clicked(){
@@ -133,7 +152,7 @@ void FormSettings::on_RadioButtonLanguageRussian_clicked(){
         translator->load(":/AraSteamManager_ru.qm");
         qApp->installTranslator(translator);
         //ui->retranslateUi(this);
-    QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
+    //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_CheckBoxVisibleHiddenGames_stateChanged(int arg1){

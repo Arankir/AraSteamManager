@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriends_t {
-    QByteArrayData data[29];
-    char stringdata0[415];
+    QByteArrayData data[30];
+    char stringdata0[421];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,37 +34,38 @@ static const qt_meta_stringdata_FormFriends_t qt_meta_stringdata_FormFriends = {
 QT_MOC_LITERAL(0, 0, 11), // "FormFriends"
 QT_MOC_LITERAL(1, 12, 19), // "s_return_to_profile"
 QT_MOC_LITERAL(2, 32, 0), // ""
-QT_MOC_LITERAL(3, 33, 15), // "s_go_to_profile"
-QT_MOC_LITERAL(4, 49, 2), // "id"
-QT_MOC_LITERAL(5, 52, 4), // "type"
-QT_MOC_LITERAL(6, 57, 12), // "UpdateBuffer"
-QT_MOC_LITERAL(7, 70, 15), // "ProgressLoading"
-QT_MOC_LITERAL(8, 86, 1), // "p"
-QT_MOC_LITERAL(9, 88, 3), // "row"
-QT_MOC_LITERAL(10, 92, 8), // "OnFinish"
-QT_MOC_LITERAL(11, 101, 14), // "InitComponents"
-QT_MOC_LITERAL(12, 116, 10), // "closeEvent"
-QT_MOC_LITERAL(13, 127, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(14, 140, 5), // "event"
-QT_MOC_LITERAL(15, 146, 23), // "on_ButtonReturn_clicked"
-QT_MOC_LITERAL(16, 170, 13), // "OnResultImage"
-QT_MOC_LITERAL(17, 184, 13), // "ImageRequest*"
-QT_MOC_LITERAL(18, 198, 4), // "imgr"
-QT_MOC_LITERAL(19, 203, 18), // "GoToProfileClicked"
-QT_MOC_LITERAL(20, 222, 16), // "FavoritesClicked"
-QT_MOC_LITERAL(21, 239, 16), // "UpdateHiddenRows"
-QT_MOC_LITERAL(22, 256, 35), // "on_CheckBoxOpenProfile_stateC..."
-QT_MOC_LITERAL(23, 292, 4), // "arg1"
-QT_MOC_LITERAL(24, 297, 27), // "on_LineEditName_textChanged"
-QT_MOC_LITERAL(25, 325, 21), // "on_ButtonFind_clicked"
-QT_MOC_LITERAL(26, 347, 27), // "on_ComboBoxStatus_activated"
-QT_MOC_LITERAL(27, 375, 5), // "index"
-QT_MOC_LITERAL(28, 381, 33) // "on_CheckBoxFavorites_stateCha..."
+QT_MOC_LITERAL(3, 33, 8), // "QWidget*"
+QT_MOC_LITERAL(4, 42, 15), // "s_go_to_profile"
+QT_MOC_LITERAL(5, 58, 2), // "id"
+QT_MOC_LITERAL(6, 61, 9), // "QueryType"
+QT_MOC_LITERAL(7, 71, 4), // "type"
+QT_MOC_LITERAL(8, 76, 15), // "ProgressLoading"
+QT_MOC_LITERAL(9, 92, 1), // "p"
+QT_MOC_LITERAL(10, 94, 3), // "row"
+QT_MOC_LITERAL(11, 98, 8), // "OnFinish"
+QT_MOC_LITERAL(12, 107, 14), // "InitComponents"
+QT_MOC_LITERAL(13, 122, 10), // "closeEvent"
+QT_MOC_LITERAL(14, 133, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(15, 146, 5), // "event"
+QT_MOC_LITERAL(16, 152, 23), // "on_ButtonReturn_clicked"
+QT_MOC_LITERAL(17, 176, 13), // "OnResultImage"
+QT_MOC_LITERAL(18, 190, 13), // "ImageRequest*"
+QT_MOC_LITERAL(19, 204, 4), // "imgr"
+QT_MOC_LITERAL(20, 209, 18), // "GoToProfileClicked"
+QT_MOC_LITERAL(21, 228, 16), // "FavoritesClicked"
+QT_MOC_LITERAL(22, 245, 16), // "UpdateHiddenRows"
+QT_MOC_LITERAL(23, 262, 35), // "on_CheckBoxOpenProfile_stateC..."
+QT_MOC_LITERAL(24, 298, 4), // "arg1"
+QT_MOC_LITERAL(25, 303, 27), // "on_LineEditName_textChanged"
+QT_MOC_LITERAL(26, 331, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(27, 353, 27), // "on_ComboBoxStatus_activated"
+QT_MOC_LITERAL(28, 381, 5), // "index"
+QT_MOC_LITERAL(29, 387, 33) // "on_CheckBoxFavorites_stateCha..."
 
     },
     "FormFriends\0s_return_to_profile\0\0"
-    "s_go_to_profile\0id\0type\0UpdateBuffer\0"
-    "ProgressLoading\0p\0row\0OnFinish\0"
+    "QWidget*\0s_go_to_profile\0id\0QueryType\0"
+    "type\0ProgressLoading\0p\0row\0OnFinish\0"
     "InitComponents\0closeEvent\0QCloseEvent*\0"
     "event\0on_ButtonReturn_clicked\0"
     "OnResultImage\0ImageRequest*\0imgr\0"
@@ -90,44 +91,44 @@ static const uint qt_meta_data_FormFriends[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   94,    2, 0x06 /* Public */,
-       3,    3,   95,    2, 0x06 /* Public */,
+       1,    1,   94,    2, 0x06 /* Public */,
+       4,    2,   97,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    2,  102,    2, 0x0a /* Public */,
-      10,    0,  107,    2, 0x0a /* Public */,
-      11,    0,  108,    2, 0x08 /* Private */,
-      12,    1,  109,    2, 0x08 /* Private */,
-      15,    0,  112,    2, 0x08 /* Private */,
-      16,    1,  113,    2, 0x08 /* Private */,
-      19,    0,  116,    2, 0x08 /* Private */,
-      20,    0,  117,    2, 0x08 /* Private */,
-      21,    0,  118,    2, 0x08 /* Private */,
-      22,    1,  119,    2, 0x08 /* Private */,
-      24,    1,  122,    2, 0x08 /* Private */,
-      25,    0,  125,    2, 0x08 /* Private */,
-      26,    1,  126,    2, 0x08 /* Private */,
-      28,    1,  129,    2, 0x08 /* Private */,
+       8,    2,  102,    2, 0x0a /* Public */,
+      11,    0,  107,    2, 0x0a /* Public */,
+      12,    0,  108,    2, 0x08 /* Private */,
+      13,    1,  109,    2, 0x08 /* Private */,
+      16,    0,  112,    2, 0x08 /* Private */,
+      17,    1,  113,    2, 0x08 /* Private */,
+      20,    0,  116,    2, 0x08 /* Private */,
+      21,    0,  117,    2, 0x08 /* Private */,
+      22,    0,  118,    2, 0x08 /* Private */,
+      23,    1,  119,    2, 0x08 /* Private */,
+      25,    1,  122,    2, 0x08 /* Private */,
+      26,    0,  125,    2, 0x08 /* Private */,
+      27,    1,  126,    2, 0x08 /* Private */,
+      29,    1,  129,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::Bool,    4,    5,    6,
+    QMetaType::Void, 0x80000000 | 3,    2,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 6,    5,    7,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    8,    9,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    9,   10,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 13,   14,
+    QMetaType::Void, 0x80000000 | 14,   15,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 17,   18,
+    QMetaType::Void, 0x80000000 | 18,   19,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   23,
-    QMetaType::Void, QMetaType::QString,   23,
+    QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void, QMetaType::QString,   24,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   27,
-    QMetaType::Void, QMetaType::Int,   23,
+    QMetaType::Void, QMetaType::Int,   28,
+    QMetaType::Void, QMetaType::Int,   24,
 
        0        // eod
 };
@@ -138,8 +139,8 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<FormFriends *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->s_return_to_profile(); break;
-        case 1: _t->s_go_to_profile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
+        case 1: _t->s_go_to_profile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
         case 2: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 3: _t->OnFinish(); break;
         case 4: _t->InitComponents(); break;
@@ -159,6 +160,13 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QWidget* >(); break;
+            }
+            break;
         case 7:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
@@ -170,14 +178,14 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FormFriends::*)();
+            using _t = void (FormFriends::*)(QWidget * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormFriends::s_return_to_profile)) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (FormFriends::*)(QString , QString , bool );
+            using _t = void (FormFriends::*)(QString , QueryType );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormFriends::s_go_to_profile)) {
                 *result = 1;
                 return;
@@ -227,15 +235,16 @@ int FormFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormFriends::s_return_to_profile()
+void FormFriends::s_return_to_profile(QWidget * _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void FormFriends::s_go_to_profile(QString _t1, QString _t2, bool _t3)
+void FormFriends::s_go_to_profile(QString _t1, QueryType _t2)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)), const_cast<void*>(reinterpret_cast<const void*>(&_t3)) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_WARNING_POP

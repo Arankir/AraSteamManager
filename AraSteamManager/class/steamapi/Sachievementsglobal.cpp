@@ -41,6 +41,7 @@ void SAchievementsGlobal::Set(QJsonDocument Aachievements){
         _count=Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();
         for (int i=0;i<_count;
              _achievements.push_back(SAchievementGlobal(Aachievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(i++).toObject())));
+        qDebug()<<Aachievements;
         _status=StatusValue::success;
     }
     else {

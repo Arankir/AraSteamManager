@@ -65,8 +65,10 @@ public slots:
     void OnFinish();
 
 private slots:
+    void changeEvent(QEvent *event);
     void InitComponents();
     void PullTableWidget();
+    void Retranslate();
     void OnResultImage(ImageRequest *imgr);
 
     void SwitchSimpleCompare(FormMode sc);

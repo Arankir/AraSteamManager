@@ -25,9 +25,9 @@ public:
     SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
     SAchievements();
     ~SAchievements();
-    void DoSet(QString appid, QString id);
     void Set(QString appid, QString id);
     void Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
+    void SetID(QString Aid);
     void SetFinish();
     SAchievement GetAchievement(int index) {return _finish[index];}
     QString GetApiname(int index) {return _finish[index].GetApiname();}

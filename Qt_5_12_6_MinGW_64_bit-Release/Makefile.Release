@@ -197,7 +197,8 @@ OBJECTS       = release/donutbreakdownchart.o \
 		release/moc_formsettings.o \
 		release/moc_formstatistics.o
 
-DIST          =  ..\AraSteamManager\class\NotMine\donutbreakdownchart.h \
+DIST          = AraSteamManager_en.qm \
+		AraSteamManager_ru.qm ..\AraSteamManager\class\NotMine\donutbreakdownchart.h \
 		..\AraSteamManager\class\NotMine\mainslice.h \
 		..\AraSteamManager\class\Threads\threadachievements.h \
 		..\AraSteamManager\class\Threads\threadfriends.h \
@@ -5676,6 +5677,8 @@ release/moc_formsettings.cpp: ../AraSteamManager/subform/formsettings.h \
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.12.6/mingw73_64/include/QtCore/QPair \
+		C:/Qt/5.12.6/mingw73_64/include/QtCore/QTranslator \
+		C:/Qt/5.12.6/mingw73_64/include/QtCore/qtranslator.h \
 		../AraSteamManager/class/settings.h \
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/QMainWindow \
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/qmainwindow.h \
@@ -11901,6 +11904,8 @@ release/formsettings.o: ../AraSteamManager/subform/formsettings.cpp ../AraSteamM
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.12.6/mingw73_64/include/QtCore/QPair \
+		C:/Qt/5.12.6/mingw73_64/include/QtCore/QTranslator \
+		C:/Qt/5.12.6/mingw73_64/include/QtCore/qtranslator.h \
 		../AraSteamManager/class/settings.h \
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/QMainWindow \
 		C:/Qt/5.12.6/mingw73_64/include/QtWidgets/qmainwindow.h \

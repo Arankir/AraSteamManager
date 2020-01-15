@@ -92,6 +92,7 @@ void MainWindow::InitComponents(){
     ui->ButtonGames->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/games.png"));
     ui->ButtonBack->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/left.png"));
     ui->ButtonNext->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/right.png"));
+    Retranslate();
     //ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
@@ -138,6 +139,8 @@ void MainWindow::Retranslate(){
     ui->LineEditIdProfile->setPlaceholderText(tr("Введите Steamid"));
     ui->ButtonExit->setText(tr("Выход"));
     ui->ButtonFindProfile->setText(tr("Найти"));
+    ui->ButtonStatistics->setText(tr("Статистика"));
+    ui->ButtonFavorites->setText(tr("Избранное"));
 }
 MainWindow::~MainWindow(){
     ReturnFromForms();
@@ -237,8 +240,8 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
     _friends.Set(Aprofile.GetSteamid(),false);
     //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
     //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
-    ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):"error"));
-    ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):"error"));
+    ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("error")));
+    ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("error")));
     if(!Aprofile.GetGameextrainfo().isEmpty()){
         ui->LabelPersonaState->setText(tr("В игре %1").arg(Aprofile.GetGameextrainfo()));
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
