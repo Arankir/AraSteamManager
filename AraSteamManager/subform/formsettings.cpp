@@ -125,16 +125,10 @@ void FormSettings::changeEvent(QEvent *event){
 }
 
 void FormSettings::Retranslate(){
-    if(_profile.GetStatus()==StatusValue::success)
-        ProfileToUi(_profile);
-    ui->ButtonBack->setText(tr("Назад"));
-    ui->ButtonNext->setText(tr("Вперед"));
-    ui->ButtonSetProfile->setText(tr("Это мой профиль"));
-    ui->LineEditIdProfile->setPlaceholderText(tr("Введите Steamid"));
-    ui->ButtonExit->setText(tr("Выход"));
-    ui->ButtonFindProfile->setText(tr("Найти"));
-    ui->ButtonStatistics->setText(tr("Статистика"));
-    ui->ButtonFavorites->setText(tr("Избранное"));
+    ui->retranslateUi(this);
+
+    QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
+    allHidden->setText(tr("Все профили"));
 }
 
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){

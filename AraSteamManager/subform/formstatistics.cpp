@@ -30,7 +30,7 @@ void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString,QString
     foreach (double averageForGame, _averagePercent) {
         totalAverage+=averageForGame;
     }
-    ui->LabelAveragePercent->setText(tr("Средний процент\n-по всем играм: %1%\n-по начатым играм: %2%").arg(QString::number(totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(QString::number(totalAverage/(_numof[1]+_numof[2]))));
+    ui->LabelAveragePercent->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент")).arg(tr("по всем играм")).arg(QString::number(totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(tr("по начатым играм")).arg(QString::number(totalAverage/(_numof[1]+_numof[2]))));
     ui->LabelSummColumn->setText(tr("Всего достижений: %1").arg(_summcolumn));
 
     #define SetChartDonut {

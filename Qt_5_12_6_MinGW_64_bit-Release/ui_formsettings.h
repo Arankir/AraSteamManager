@@ -789,7 +789,7 @@ public:
 
         retranslateUi(FormSettings);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(FormSettings);

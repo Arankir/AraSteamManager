@@ -141,6 +141,7 @@ void MainWindow::Retranslate(){
     ui->ButtonFindProfile->setText(tr("Найти"));
     ui->ButtonStatistics->setText(tr("Статистика"));
     ui->ButtonFavorites->setText(tr("Избранное"));
+    ui->ButtonGoToMyProfile->setText(tr("На мой профиль"));
 }
 MainWindow::~MainWindow(){
     ReturnFromForms();

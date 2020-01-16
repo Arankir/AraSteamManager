@@ -29,6 +29,7 @@ debug/main.o
 debug/mainwindow.o
 debug/formachievements.o
 debug/formcategoryvalue.o
+debug/formcompareprofilefilter.o
 debug/formfavorites.o
 debug/formfriends.o
 debug/formgames.o
@@ -68,6 +69,7 @@ debug/moc_Sprofile.o
 debug/moc_mainwindow.o
 debug/moc_formachievements.o
 debug/moc_formcategoryvalue.o
+debug/moc_formcompareprofilefilter.o
 debug/moc_formfavorites.o
 debug/moc_formfriends.o
 debug/moc_formgames.o

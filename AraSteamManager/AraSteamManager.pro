@@ -56,6 +56,7 @@ SOURCES += \
         mainwindow.cpp \
     formachievements.cpp \
     subform/formcategoryvalue.cpp \
+    subform/formcompareprofilefilter.cpp \
     subform/formfavorites.cpp \
     subform/formfriends.cpp \
     subform/formgames.cpp \
@@ -98,6 +99,7 @@ HEADERS += \
         mainwindow.h \
     formachievements.h \
     subform/formcategoryvalue.h \
+    subform/formcompareprofilefilter.h \
     subform/formfavorites.h \
     subform/formfriends.h \
     subform/formgames.h \
@@ -112,6 +114,7 @@ FORMS += \
         mainwindow.ui \
     formachievements.ui \
     subform/formcategoryvalue.ui \
+    subform/formcompareprofilefilter.ui \
     subform/formfavorites.ui \
     subform/formfriends.ui \
     subform/formgames.ui \

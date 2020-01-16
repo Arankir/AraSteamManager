@@ -336,6 +336,7 @@ void FormAchievements::OnFinish(){
     ui->GroupBoxFilter->setEnabled(true);
     ui->TableWidgetAchievements->resizeColumnToContents(c_tableCompareColumnWorld);
     ui->TableWidgetAchievements->resizeRowsToContents();
+    ui->TableWidgetAchievements->resizeColumnToContents(c_tableAchievementColumnIcon);
     int j=0;
     ui->TableWidgetCompareAchievements->resizeRowsToContents();
     for (int i=0;i<_achievements.GetCount();i++) {
@@ -368,6 +369,7 @@ void FormAchievements::OnFinish(){
                 ui->TableWidgetCompareAchievements->removeRow(ui->TableWidgetCompareAchievements->rowCount()-1);
             }
         }
+    ui->TableWidgetAchievements->resizeColumnToContents(c_tableAchievementColumnIcon);
 }
 void FormAchievements::OnResultImage(ImageRequest *Aimage){
     QPixmap pixmap;
