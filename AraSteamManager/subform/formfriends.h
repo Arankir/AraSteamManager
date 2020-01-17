@@ -51,6 +51,8 @@ private slots:
 
     void on_CheckBoxFavorites_stateChanged(int arg1);
 
+    void on_TableWidgetFriends_cellDoubleClicked(int row, int column);
+
 private:
     Ui::FormFriends *ui;
     QString _id;

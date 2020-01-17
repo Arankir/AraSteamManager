@@ -4,287 +4,297 @@
 <context>
     <name>FormAchievements</name>
     <message>
-        <location filename="formachievements.ui" line="14"/>
+        <location filename="subform/formachievements.ui" line="14"/>
         <source>SteamAchievementsStatistic</source>
         <translation>SteamAchievementsStatistic</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="58"/>
+        <location filename="subform/formachievements.ui" line="58"/>
         <source>GameLogo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="85"/>
+        <location filename="subform/formachievements.ui" line="85"/>
         <source> Сравнить с друзьями</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="131"/>
-        <location filename="formachievements.cpp" line="265"/>
+        <location filename="subform/formachievements.ui" line="131"/>
+        <location filename="subform/formachievements.cpp" line="246"/>
         <source>Показать фильтр</source>
         <translation>Показать фильтр</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="174"/>
-        <location filename="formachievements.cpp" line="266"/>
+        <location filename="subform/formachievements.ui" line="208"/>
+        <location filename="subform/formachievements.cpp" line="247"/>
         <source>      Фильтр</source>
         <translation>      Фильтр</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="233"/>
-        <location filename="formachievements.cpp" line="267"/>
-        <location filename="formachievements.cpp" line="311"/>
-        <location filename="formachievements.cpp" line="873"/>
+        <location filename="subform/formachievements.ui" line="264"/>
+        <location filename="subform/formachievements.cpp" line="248"/>
+        <location filename="subform/formachievements.cpp" line="290"/>
+        <location filename="subform/formachievements.cpp" line="827"/>
         <source>Добавить категорию</source>
         <translation>Добавить категорию</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="240"/>
+        <location filename="subform/formachievements.ui" line="271"/>
         <source>Изменить категории</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить категории</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="247"/>
-        <location filename="formachievements.cpp" line="269"/>
+        <location filename="subform/formachievements.ui" line="278"/>
+        <location filename="subform/formachievements.cpp" line="250"/>
         <source>Удалить все категории</source>
         <translation>Удалить все категории</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="264"/>
-        <location filename="formachievements.cpp" line="270"/>
+        <location filename="subform/formachievements.ui" line="186"/>
+        <location filename="subform/formachievements.cpp" line="251"/>
         <source>Обновить</source>
         <translation>Обновить</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="273"/>
-        <location filename="formachievements.cpp" line="271"/>
+        <location filename="subform/formachievements.ui" line="287"/>
+        <location filename="subform/formachievements.cpp" line="252"/>
         <source>Видимые столбцы</source>
         <translation>Видимые столбцы</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="294"/>
-        <location filename="formachievements.cpp" line="272"/>
+        <location filename="subform/formachievements.ui" line="308"/>
+        <location filename="subform/formachievements.cpp" line="253"/>
         <source>Иконка</source>
         <translation>Иконка</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="304"/>
-        <location filename="formachievements.cpp" line="87"/>
-        <location filename="formachievements.cpp" line="109"/>
-        <location filename="formachievements.cpp" line="273"/>
-        <location filename="formachievements.cpp" line="291"/>
-        <location filename="formachievements.cpp" line="296"/>
+        <location filename="subform/formachievements.ui" line="318"/>
+        <location filename="subform/formachievements.cpp" line="87"/>
+        <location filename="subform/formachievements.cpp" line="109"/>
+        <location filename="subform/formachievements.cpp" line="254"/>
+        <location filename="subform/formachievements.cpp" line="270"/>
+        <location filename="subform/formachievements.cpp" line="275"/>
         <source>Название</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="314"/>
-        <location filename="formachievements.cpp" line="88"/>
-        <location filename="formachievements.cpp" line="110"/>
-        <location filename="formachievements.cpp" line="274"/>
-        <location filename="formachievements.cpp" line="292"/>
-        <location filename="formachievements.cpp" line="297"/>
+        <location filename="subform/formachievements.ui" line="328"/>
+        <location filename="subform/formachievements.cpp" line="88"/>
+        <location filename="subform/formachievements.cpp" line="110"/>
+        <location filename="subform/formachievements.cpp" line="255"/>
+        <location filename="subform/formachievements.cpp" line="271"/>
+        <location filename="subform/formachievements.cpp" line="276"/>
         <source>Описание</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="324"/>
-        <location filename="formachievements.cpp" line="89"/>
-        <location filename="formachievements.cpp" line="111"/>
-        <location filename="formachievements.cpp" line="275"/>
-        <location filename="formachievements.cpp" line="293"/>
-        <location filename="formachievements.cpp" line="298"/>
+        <location filename="subform/formachievements.ui" line="338"/>
+        <location filename="subform/formachievements.cpp" line="89"/>
+        <location filename="subform/formachievements.cpp" line="111"/>
+        <location filename="subform/formachievements.cpp" line="256"/>
+        <location filename="subform/formachievements.cpp" line="272"/>
+        <location filename="subform/formachievements.cpp" line="277"/>
         <source>По миру</source>
         <translation>По миру</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="341"/>
-        <location filename="formachievements.cpp" line="276"/>
+        <location filename="subform/formachievements.cpp" line="134"/>
+        <location filename="subform/formachievements.cpp" line="257"/>
         <source>Все достижения</source>
         <translation>Все достижения</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="351"/>
-        <location filename="formachievements.cpp" line="277"/>
+        <location filename="subform/formachievements.cpp" line="134"/>
+        <location filename="subform/formachievements.cpp" line="257"/>
         <source>Полученные достижения</source>
         <translation>Полученные достижения</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="358"/>
-        <location filename="formachievements.cpp" line="278"/>
+        <location filename="subform/formachievements.cpp" line="134"/>
+        <location filename="subform/formachievements.cpp" line="257"/>
         <source>Не полученные достижения</source>
         <translation>Не полученные достижения</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="367"/>
-        <location filename="formachievements.cpp" line="279"/>
+        <location filename="subform/formachievements.ui" line="362"/>
+        <location filename="subform/formachievements.cpp" line="258"/>
         <source>Только избранное</source>
         <translation>Только избранное</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="374"/>
-        <location filename="formachievements.cpp" line="280"/>
+        <location filename="subform/formachievements.ui" line="369"/>
+        <location filename="subform/formachievements.cpp" line="259"/>
         <source>Все друзья</source>
         <translation>Все друзья</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="409"/>
+        <location filename="subform/formachievements.ui" line="406"/>
         <source>Категория не выбрана</source>
         <translation>Категория не выбрана</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="423"/>
-        <location filename="formachievements.cpp" line="281"/>
+        <location filename="subform/formachievements.ui" line="420"/>
+        <location filename="subform/formachievements.cpp" line="260"/>
         <source>Название категории</source>
         <translation>Название категории</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="436"/>
-        <location filename="formachievements.cpp" line="282"/>
+        <location filename="subform/formachievements.ui" line="433"/>
+        <location filename="subform/formachievements.cpp" line="261"/>
         <source>Без значений</source>
         <translation>Без значения</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="443"/>
-        <location filename="formachievements.cpp" line="283"/>
+        <location filename="subform/formachievements.ui" line="440"/>
+        <location filename="subform/formachievements.cpp" line="262"/>
         <source>Добавить значение</source>
         <translation>Добавить значение</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="477"/>
-        <location filename="formachievements.cpp" line="284"/>
-        <location filename="formachievements.cpp" line="993"/>
-        <location filename="formachievements.cpp" line="1000"/>
+        <location filename="subform/formachievements.ui" line="474"/>
+        <location filename="subform/formachievements.cpp" line="263"/>
+        <location filename="subform/formachievements.cpp" line="942"/>
+        <location filename="subform/formachievements.cpp" line="949"/>
         <source>Отмена</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="484"/>
-        <location filename="formachievements.cpp" line="285"/>
+        <location filename="subform/formachievements.ui" line="481"/>
+        <location filename="subform/formachievements.cpp" line="264"/>
         <source>Удалить категорию</source>
         <translation>Удалить категорию</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="491"/>
-        <location filename="formachievements.cpp" line="286"/>
+        <location filename="subform/formachievements.ui" line="488"/>
+        <location filename="subform/formachievements.cpp" line="265"/>
         <source>Показать всё</source>
         <translation>Показать всё</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="501"/>
-        <location filename="formachievements.cpp" line="287"/>
+        <location filename="subform/formachievements.ui" line="498"/>
+        <location filename="subform/formachievements.cpp" line="266"/>
         <source>Применить</source>
         <translation>Применить</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="535"/>
-        <location filename="formachievements.cpp" line="288"/>
+        <location filename="subform/formachievements.ui" line="532"/>
+        <location filename="subform/formachievements.cpp" line="267"/>
         <source>Достижение</source>
         <translation>Достижение</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="545"/>
+        <location filename="subform/formachievements.ui" line="542"/>
         <source>Найти</source>
         <translation>Найти</translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="111"/>
+        <location filename="subform/formachievements.ui" line="111"/>
         <source>GameTitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="154"/>
+        <location filename="subform/formachievements.ui" line="156"/>
         <source>GameOnline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="171"/>
+        <location filename="subform/formachievements.ui" line="205"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="254"/>
+        <location filename="subform/formachievements.ui" line="176"/>
         <source>TotalPersent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="391"/>
+        <location filename="subform/formachievements.ui" line="388"/>
         <source>Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="formachievements.ui" line="526"/>
+        <location filename="subform/formachievements.ui" line="523"/>
         <source>%v/%m</source>
         <translation>%v/%m</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="90"/>
-        <location filename="formachievements.cpp" line="294"/>
+        <location filename="subform/formachievements.cpp" line="90"/>
+        <location filename="subform/formachievements.cpp" line="273"/>
         <source>Получено</source>
         <translation>Получено</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="91"/>
-        <location filename="formachievements.cpp" line="295"/>
+        <location filename="subform/formachievements.cpp" line="91"/>
+        <location filename="subform/formachievements.cpp" line="274"/>
         <source>Избранное</source>
         <translation>Избранное</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="226"/>
-        <location filename="formachievements.cpp" line="300"/>
+        <location filename="subform/formachievements.cpp" line="208"/>
+        <location filename="subform/formachievements.cpp" line="279"/>
         <source>Сейчас в игре :%1</source>
         <translation>Сейчас в игре :%1</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="77"/>
-        <location filename="formachievements.cpp" line="299"/>
+        <location filename="subform/formachievements.cpp" line="77"/>
+        <location filename="subform/formachievements.cpp" line="278"/>
         <source>Достижения друзей</source>
         <translation>Достижения друзей</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="306"/>
-        <location filename="formachievements.cpp" line="414"/>
+        <location filename="subform/formachievements.cpp" line="285"/>
+        <location filename="subform/formachievements.cpp" line="392"/>
         <source>Сравнить с друзьями</source>
         <translation>Сравнить с друзьями</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="303"/>
-        <location filename="formachievements.cpp" line="430"/>
+        <location filename="subform/formachievements.cpp" line="282"/>
+        <location filename="subform/formachievements.cpp" line="406"/>
         <source>Обратно</source>
         <translation>Обратно</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="775"/>
+        <location filename="subform/formachievements.cpp" line="729"/>
         <source>Не выбрано</source>
         <translation>Не выбрано</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="823"/>
+        <location filename="subform/formachievements.cpp" line="777"/>
         <source>Получено %1</source>
         <translation>Получено %1</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="827"/>
+        <location filename="subform/formachievements.cpp" line="781"/>
         <source>Не получено</source>
         <translation>Не получено</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="268"/>
-        <location filename="formachievements.cpp" line="314"/>
-        <location filename="formachievements.cpp" line="900"/>
+        <location filename="subform/formachievements.cpp" line="249"/>
+        <location filename="subform/formachievements.cpp" line="293"/>
+        <location filename="subform/formachievements.cpp" line="854"/>
         <source>Изменить категорию</source>
         <translation>Изменить категорию</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="878"/>
-        <location filename="formachievements.cpp" line="1032"/>
-        <location filename="formachievements.cpp" line="1212"/>
-        <location filename="formachievements.cpp" line="1253"/>
+        <location filename="subform/formachievements.cpp" line="789"/>
+        <source>Профиль не</source>
+        <translation>Профиль не</translation>
+    </message>
+    <message>
+        <location filename="subform/formachievements.cpp" line="789"/>
+        <source>публичный</source>
+        <translation>публичный</translation>
+    </message>
+    <message>
+        <location filename="subform/formachievements.cpp" line="832"/>
+        <location filename="subform/formachievements.cpp" line="981"/>
+        <location filename="subform/formachievements.cpp" line="1161"/>
+        <location filename="subform/formachievements.cpp" line="1202"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1158"/>
+        <location filename="subform/formachievements.cpp" line="1107"/>
         <source>Внимание</source>
         <translation>Внимание</translation>
     </message>
@@ -295,96 +305,95 @@
 Все настроенные значения будут потеряны</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="254"/>
-        <location filename="formachievements.cpp" line="1109"/>
-        <location filename="formachievements.cpp" line="1114"/>
-        <location filename="formachievements.cpp" line="1151"/>
-        <location filename="formachievements.cpp" line="1153"/>
+        <location filename="subform/formachievements.cpp" line="235"/>
+        <location filename="subform/formachievements.cpp" line="1058"/>
+        <location filename="subform/formachievements.cpp" line="1063"/>
+        <location filename="subform/formachievements.cpp" line="1100"/>
+        <location filename="subform/formachievements.cpp" line="1102"/>
         <source>Ошибка</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="289"/>
+        <location filename="subform/formachievements.cpp" line="268"/>
         <source> Найти</source>
         <translation> Найти</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="835"/>
         <source>Профиль 
 не публичный</source>
-        <translation>Профиль \nне публичный</translation>
+        <translation type="vanished">Профиль \nне публичный</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="990"/>
-        <location filename="formachievements.cpp" line="997"/>
+        <location filename="subform/formachievements.cpp" line="939"/>
+        <location filename="subform/formachievements.cpp" line="946"/>
         <source>Внимание!</source>
         <translation>Внимание!</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="991"/>
+        <location filename="subform/formachievements.cpp" line="940"/>
         <source>Вы уверены, что хотите удалить все категории?</source>
         <translation>Вы уверены, что хотите удалить все категории?</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="992"/>
-        <location filename="formachievements.cpp" line="999"/>
+        <location filename="subform/formachievements.cpp" line="941"/>
+        <location filename="subform/formachievements.cpp" line="948"/>
         <source>Да</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="998"/>
+        <location filename="subform/formachievements.cpp" line="947"/>
         <source>Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?</source>
         <translation>Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1109"/>
-        <location filename="formachievements.cpp" line="1114"/>
+        <location filename="subform/formachievements.cpp" line="1058"/>
+        <location filename="subform/formachievements.cpp" line="1063"/>
         <source>Название значения пустое или повторяется!</source>
         <translation>Название значения пустое или повторяется!</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1148"/>
-        <location filename="formachievements.cpp" line="1170"/>
+        <location filename="subform/formachievements.cpp" line="1097"/>
+        <location filename="subform/formachievements.cpp" line="1119"/>
         <source>Успешно</source>
         <translation>Успешно</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1148"/>
+        <location filename="subform/formachievements.cpp" line="1097"/>
         <source>Категория была %1!</source>
         <translation>Категория была %1!</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1148"/>
+        <location filename="subform/formachievements.cpp" line="1097"/>
         <source>добавлена</source>
         <translation>добавлена</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1148"/>
+        <location filename="subform/formachievements.cpp" line="1097"/>
         <source>изменена</source>
         <translation>изменена</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1151"/>
+        <location filename="subform/formachievements.cpp" line="1100"/>
         <source>Такая категория уже есть!</source>
         <translation>Такая категория уже есть!</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1153"/>
+        <location filename="subform/formachievements.cpp" line="1102"/>
         <source>Название категории пустое!</source>
         <translation>Название категории пустое!</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1158"/>
+        <location filename="subform/formachievements.cpp" line="1107"/>
         <source>Вы уверены, что хотите удалить категорию?</source>
         <translation>Вы уверены, что хотите удалить категорию?</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1170"/>
+        <location filename="subform/formachievements.cpp" line="1119"/>
         <source>Категория была удалена!</source>
         <translation>Категория была удалена!</translation>
     </message>
     <message>
-        <location filename="formachievements.cpp" line="1307"/>
+        <location filename="subform/formachievements.cpp" line="1256"/>
         <source>Невозможно переместить значение</source>
         <translation>Невозможно переместить значение</translation>
     </message>
@@ -405,6 +414,22 @@
         <location filename="subform/formcategoryvalue.ui" line="51"/>
         <source>Visible</source>
         <translation>Видно</translation>
+    </message>
+</context>
+<context>
+    <name>FormCompareProfileFilter</name>
+    <message>
+        <location filename="subform/formcompareprofilefilter.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FormContainerAchievements</name>
+    <message>
+        <location filename="formcontainerachievements.ui" line="14"/>
+        <source>AraSteamManager</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -737,6 +762,11 @@
         <translation> Найти</translation>
     </message>
     <message>
+        <location filename="subform/formgames.ui" line="77"/>
+        <source>%v/%m</source>
+        <translation type="unfinished">%v/%m</translation>
+    </message>
+    <message>
         <location filename="subform/formgames.cpp" line="45"/>
         <source>Название игры</source>
         <translation>Название игры</translation>
@@ -748,7 +778,7 @@
     </message>
     <message>
         <location filename="subform/formgames.cpp" line="47"/>
-        <location filename="subform/formgames.cpp" line="61"/>
+        <location filename="subform/formgames.cpp" line="62"/>
         <source>Достижения</source>
         <translation>Достижения</translation>
     </message>
@@ -763,37 +793,37 @@
         <translation>Скрыть</translation>
     </message>
     <message>
-        <location filename="subform/formgames.cpp" line="246"/>
+        <location filename="subform/formgames.cpp" line="272"/>
         <source>Ошибка</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="subform/formgames.cpp" line="246"/>
+        <location filename="subform/formgames.cpp" line="272"/>
         <source>В этой игре нет достижений</source>
         <translation>В этой игре нет достижений</translation>
     </message>
     <message>
-        <location filename="subform/formgames.cpp" line="272"/>
+        <location filename="subform/formgames.cpp" line="295"/>
         <source>Внимание!</source>
         <translation>Внимание!</translation>
     </message>
     <message>
-        <location filename="subform/formgames.cpp" line="273"/>
+        <location filename="subform/formgames.cpp" line="296"/>
         <source>Вы уверены, что хотите скрыть эту игру?</source>
         <translation>Вы уверены, что хотите скрыть эту игру?</translation>
     </message>
     <message>
-        <location filename="subform/formgames.cpp" line="274"/>
+        <location filename="subform/formgames.cpp" line="297"/>
         <source>Да, но только для этого аккаунта</source>
         <translation>Да, но только для этого аккаунта</translation>
     </message>
     <message>
-        <location filename="subform/formgames.cpp" line="275"/>
+        <location filename="subform/formgames.cpp" line="298"/>
         <source>Да, для всех аккаунтов</source>
         <translation>Да, для всех аккаунтов</translation>
     </message>
     <message>
-        <location filename="subform/formgames.cpp" line="276"/>
+        <location filename="subform/formgames.cpp" line="299"/>
         <source>Отмена</source>
         <translation>Отмена</translation>
     </message>
@@ -1500,7 +1530,7 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="231"/>
-        <location filename="mainwindow.cpp" line="458"/>
+        <location filename="mainwindow.cpp" line="460"/>
         <source>Ошибка</source>
         <translation>Ошибка</translation>
     </message>
@@ -1536,7 +1566,7 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="231"/>
-        <location filename="mainwindow.cpp" line="458"/>
+        <location filename="mainwindow.cpp" line="460"/>
         <source>Не удаётся найти профиль!</source>
         <translation>Не удаётся найти профиль!</translation>
     </message>

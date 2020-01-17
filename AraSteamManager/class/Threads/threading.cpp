@@ -16,7 +16,7 @@ int Threading::AddThreadGames(QTableWidget *AtableWidgetGames, QVector<SGame> Ag
     connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
     connect(Games,SIGNAL(s_progress(int,int)),this->parent()->parent(),SLOT(ProgressLoading(int,int)));
     connect(Games,SIGNAL(s_progress(int,int)),this->parent(),SLOT(ProgressLoading(int,int)));
-    connect(Games,SIGNAL(s_finished()),this->parent()->parent(),SLOT(ShowGames()));
+    //connect(Games,SIGNAL(s_finished()),this->parent()->parent(),SLOT(ShowGames()));
     connect(Games,SIGNAL(s_finished()),this->parent(),SLOT(OnFinish()));
     thread->start();
     return 1;

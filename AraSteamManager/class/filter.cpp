@@ -81,7 +81,7 @@ void Filter::AddCol(int AcolNum){
 void Filter::RemoveCol(int AcolNum){
     if(AcolNum<_col+1){
         for(int i=0;i<_row;i++){
-            _filter.takeAt(AcolNum);
+            _filter[i].remove(AcolNum);
         }
         _col--;
     }

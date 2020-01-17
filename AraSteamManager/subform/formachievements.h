@@ -24,6 +24,7 @@
 #include <class/categoriesgame.h>
 #include <class/Threads/threading.h>
 #include <subform/formcategoryvalue.h>
+#include <subform/formcompareprofilefilter.h>
 #include <subwidget/qbuttonwithdata.h>
 #include <subwidget/qradiobuttonwithdata.h>
 #include <subwidget/qcomboboxwithdata.h>
@@ -75,16 +76,12 @@ private slots:
     void LoadingCompare();
     void LoadFriend(SGames *Games);
     void FinishLoadFriends();
-    void on_RadioButtonAll_clicked();
-    void on_RadioButtonReached_clicked();
-    void on_RadioButtonNotReached_clicked();
+    void CompareProfileFilterClickMy(QString name,ReachedType type);
+    void CompareProfileFilterClickFriends(QString name,ReachedType type);
 
-    void on_RadioButtonCompareFriendsAll_clicked();
-    void on_RadioButtonCompareFriendsReached_clicked();
-    void on_RadioButtonCompareFriendsNotReached_clicked();
-    void on_RadioButtonFriendAll_Click();
-    void on_RadioButtonFriendReached_Click();
-    void on_RadioButtonFriendNotReached_Click();
+    void on_ButtonCompareFriendsAll_clicked();
+    void on_ButtonCompareFriendsReached_clicked();
+    void on_ButtonCompareFriendsNotReached_clicked();
     void on_TableWidgetCompareFriendsCellChanged(int row, int column);
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
@@ -137,6 +134,7 @@ private:
     Settings _setting;
     QString _theme="white";
     Favorites _favorites;
+    FormCompareProfileFilter *FilterMyProfile;
 
     QVector<ImageRequest*> _request;
     int _numRequests=0;

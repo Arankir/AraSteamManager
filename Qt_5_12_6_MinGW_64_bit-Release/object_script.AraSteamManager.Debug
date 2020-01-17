@@ -25,6 +25,7 @@ debug/Sgame.o
 debug/Sgames.o
 debug/Slevels.o
 debug/Sprofile.o
+debug/formcontainerachievements.o
 debug/main.o
 debug/mainwindow.o
 debug/formachievements.o
@@ -66,6 +67,7 @@ debug/moc_Sgame.o
 debug/moc_Sgames.o
 debug/moc_Slevels.o
 debug/moc_Sprofile.o
+debug/moc_formcontainerachievements.o
 debug/moc_mainwindow.o
 debug/moc_formachievements.o
 debug/moc_formcategoryvalue.o

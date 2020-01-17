@@ -68,6 +68,16 @@
    <item>
     <widget class="QTableWidget" name="TableWidgetGames"/>
    </item>
+   <item>
+    <widget class="QProgressBar" name="ProgressBarLoading">
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="format">
+      <string>%v/%m</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>

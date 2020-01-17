@@ -52,9 +52,10 @@ SOURCES += \
     class/steamapi/Sgames.cpp \
     class/steamapi/Slevels.cpp \
     class/steamapi/Sprofile.cpp \
+    formcontainerachievements.cpp \
         main.cpp \
         mainwindow.cpp \
-    formachievements.cpp \
+    subform/formachievements.cpp \
     subform/formcategoryvalue.cpp \
     subform/formcompareprofilefilter.cpp \
     subform/formfavorites.cpp \
@@ -96,8 +97,9 @@ HEADERS += \
     class/steamapi/Sgames.h \
     class/steamapi/Slevels.h \
     class/steamapi/Sprofile.h \
+    formcontainerachievements.h \
         mainwindow.h \
-    formachievements.h \
+    subform/formachievements.h \
     subform/formcategoryvalue.h \
     subform/formcompareprofilefilter.h \
     subform/formfavorites.h \
@@ -111,8 +113,9 @@ HEADERS += \
     subwidget/qradiobuttonwithdata.h
 
 FORMS += \
+    formcontainerachievements.ui \
         mainwindow.ui \
-    formachievements.ui \
+    subform/formachievements.ui \
     subform/formcategoryvalue.ui \
     subform/formcompareprofilefilter.ui \
     subform/formfavorites.ui \

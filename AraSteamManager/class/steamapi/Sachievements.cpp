@@ -56,7 +56,8 @@ void SAchievements::Set(QString Aappid, QString Aid){
     SAchievementsPercentage *Percent = new SAchievementsPercentage(Aappid);
     connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-void SAchievements::SetID(QString Aid){
+void SAchievements::SetIDs(QString Aappid, QString Aid){
+    _appid=Aappid;
     _id=Aid;
 }
 void SAchievements::Set(SAchievementsGlobal Aglobal, SAchievementsPlayer Aplayer, SAchievementsPercentage Apercent){
@@ -114,6 +115,11 @@ void SAchievements::SetFinish(){
 }
 
 void SAchievements::Update(){
+    qDebug()<<_appid<<_id;
+    _statusGlobal=StatusValue::none;
+    _statusPlayer=StatusValue::none;
+    _statusPercent=StatusValue::none;
+    _statusFinish=StatusValue::none;
     Set(_appid,_id);
 }
 void SAchievements::Clear(){

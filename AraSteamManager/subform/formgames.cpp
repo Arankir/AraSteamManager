@@ -51,6 +51,7 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetGames->setSortingEnabled(true);
+    ui->ProgressBarLoading->setVisible(false);
     ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
     //iAchievement = ;
     QIcon iFavorite = QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png");
@@ -60,7 +61,7 @@ void FormGames::InitComponents(){
         ui->TableWidgetGames->setRowHeight(i,33);
         QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
         button1->setMinimumSize(QSize(25,25));
-        button1->setObjectName("ButtonAchievements"+QString::number(i));
+        button1->setObjectName("ButtonAchievements"+QString::number(_games[i].GetAppid()));
         button1->AddData("NumberGame",QString::number(i));
         connect(button1,&QButtonWithData::pressed,this,&FormGames::AchievementsClicked);
         ui->TableWidgetGames->setCellWidget(i,c_tableColumnAchievement,button1);
@@ -84,6 +85,7 @@ void FormGames::InitComponents(){
 
         QProgressBar *pb = new QProgressBar;
         ui->TableWidgetGames->setCellWidget(i,c_tableColumnProgress,pb);
+        emit s_achievementsLoaded(i,0);
     }
     ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon,33);
     ui->TableWidgetGames->setColumnWidth(c_tableColumnName,300);
@@ -185,6 +187,9 @@ void FormGames::OnResultAchievements(SAchievementsPlayer Aachievements){
     }
     ui->TableWidgetGames->setItem(Aachievements.GetIndex(),c_tableColumnProgress,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
     _achievements[Aachievements.GetIndex()]=Aachievements;
+    emit s_achievementsLoaded(_load++,0);
+    if(_load==_games.size())
+        emit s_finish();
     //ach->deleteLater();
 }
 #define InitEnd }
@@ -203,8 +208,26 @@ void FormGames::closeEvent(QCloseEvent*){
     //delete this;
 }
 void FormGames::ReturnFromAchievements(int Anum){
-    disconnect(achievementsforms[Anum],&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
+    disconnect(_achievementsForms[Anum],&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
     //delete achievementsforms[num];
+}
+void FormGames::AddAchievements(int index){
+    if(_achievementsCount==0){
+        _containerAchievementsForm = new FormContainerAchievements();
+        connect(_containerAchievementsForm,&FormContainerAchievements::s_removeAchievements,this,&FormGames::RemoveAchievements);
+        connect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&FormGames::ContainerAchievementsClose);
+        _windowChildCount++;
+    }
+    _containerAchievementsForm->AddFormAchievement(_achievements[index],_id,_games[index],_achievementsCount++);
+    _containerAchievementsForm->show();
+}
+void FormGames::RemoveAchievements(int){
+    _achievementsCount--;
+}
+void FormGames::ContainerAchievementsClose(){
+    _achievementsCount=0;
+    disconnect(_containerAchievementsForm,&FormContainerAchievements::s_removeAchievements,this,&FormGames::RemoveAchievements);
+    disconnect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&FormGames::ContainerAchievementsClose);
 }
 #define SystemEnd }
 
@@ -234,6 +257,9 @@ void FormGames::on_ButtonFind_clicked(){
 #define FilterEnd }
 
 #define Functions {
+void FormGames::on_TableWidgetGames_cellDoubleClicked(int row, int){
+    this->findChild<QButtonWithData*>("ButtonAchievements"+ui->TableWidgetGames->item(row,0)->text())->click();
+}
 void FormGames::AchievementsClicked(){
     QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
     int index=btn->GetData(0).toInt();
@@ -245,10 +271,7 @@ void FormGames::AchievementsClicked(){
     if(Percentage.GetCount()==0){
         QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
     } else {
-        FormAchievements *fa = new FormAchievements(_achievements[index],_id,_games[index],_windowChildCount++);
-        achievementsforms.append(fa);
-        connect(fa,&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
-        fa->show();
+        AddAchievements(index);
     }
 }
 void FormGames::FavoritesClicked(){
@@ -300,3 +323,4 @@ void FormGames::HideClicked(){
     btn->setEnabled(false);
 }
 #define FunctionsEnd }
+

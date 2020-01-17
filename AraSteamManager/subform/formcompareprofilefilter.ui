@@ -6,53 +6,51 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>129</width>
+    <height>130</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QRadioButton" name="radioButton">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>85</width>
-     <height>20</height>
-    </rect>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>1</number>
    </property>
-   <property name="text">
-    <string>All</string>
+   <property name="leftMargin">
+    <number>1</number>
    </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>85</width>
-     <height>20</height>
-    </rect>
+   <property name="topMargin">
+    <number>1</number>
    </property>
-   <property name="text">
-    <string>Reached</string>
+   <property name="rightMargin">
+    <number>1</number>
    </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_3">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>70</y>
-     <width>85</width>
-     <height>20</height>
-    </rect>
+   <property name="bottomMargin">
+    <number>1</number>
    </property>
-   <property name="text">
-    <string>Not reached</string>
-   </property>
-  </widget>
+   <item>
+    <widget class="QRadioButtonWithData" name="RadioButtonAll">
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButtonWithData" name="RadioButtonReached"/>
+   </item>
+   <item>
+    <widget class="QRadioButtonWithData" name="RadioButtonNotReached"/>
+   </item>
+  </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QRadioButtonWithData</class>
+   <extends>QRadioButton</extends>
+   <header>subwidget/qradiobuttonwithdata.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

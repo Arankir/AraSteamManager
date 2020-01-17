@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QProgressBar>
-#include <formachievements.h>
+#include <formcontainerachievements.h>
 #include <class/settings.h>
 #include <class/favorites.h>
 #include <class/steamapi/Sgames.h>
@@ -24,10 +24,13 @@ class FormGames : public QWidget
 public:
     explicit FormGames(QString id, SGames Games, QWidget *parent = nullptr);
     ~FormGames();
-    QVector<FormAchievements*> achievementsforms;
+    FormContainerAchievements *_containerAchievementsForm;
+    QVector<FormAchievements*> _achievementsForms;
 
 signals:
     void s_return_to_profile(QWidget*);
+    void s_achievementsLoaded(int,int);
+    void s_finish();
 
 public slots:
     void ProgressLoading(int,int);
@@ -43,10 +46,15 @@ private slots:
     void AchievementsClicked();
     void FavoritesClicked();
     void HideClicked();
+    void AddAchievements(int index);
+    void RemoveAchievements(int index);
+    void ContainerAchievementsClose();
 
     void on_LineEditGame_textChanged(const QString);
 
     void on_ButtonFind_clicked();
+
+    void on_TableWidgetGames_cellDoubleClicked(int row, int column);
 
 private:
     Ui::FormGames *ui;
@@ -58,6 +66,8 @@ private:
     QStringList _hide;
     Settings _setting;
     QString _theme="white";
+    int _achievementsCount=0;
+    int _load=0;
 
     QVector<ImageRequest*> _request;
     int _numRequests=0;

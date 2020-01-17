@@ -384,6 +384,8 @@ void MainWindow::on_ButtonGames_clicked(){
         ui->FormProgressBar->setMaximum(_games.GetCount());
         _gamesForm = new FormGames(_profile.GetSteamid(),_games,this);
         connect(_gamesForm,&FormGames::s_return_to_profile,this,&MainWindow::ReturnFromForm);
+        connect(_gamesForm,&FormGames::s_finish,this,&MainWindow::ShowGames);
+        connect(_gamesForm,&FormGames::s_achievementsLoaded,this,&MainWindow::ProgressLoading);
         ui->ScrollAreaForm->setWidget(_gamesForm);
         ui->FormProgressBar->setVisible(true);
         _gamesForm->setVisible(false);

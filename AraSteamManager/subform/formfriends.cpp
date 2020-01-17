@@ -75,7 +75,7 @@ void FormFriends::ProgressLoading(int Aprogress,int Arow){
     QButtonWithData *button1 = new QButtonWithData(tr("На профиль"));
     button1->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
-    button1->setObjectName("ButtonGoToProfile"+QString::number(Aprogress));
+    button1->setObjectName("ButtonGoToProfile"+_profiles[Aprogress].GetSteamid());
     button1->AddData("ProfileID",_profiles[Aprogress].GetSteamid());
     connect(button1,&QButtonWithData::pressed,this,&FormFriends::GoToProfileClicked);
     ui->TableWidgetFriends->setCellWidget(Arow,c_tableColumnGoTo,button1);
@@ -224,3 +224,7 @@ void FormFriends::FavoritesClicked(){
     //Поменять картинку
 }
 #define FunctionsEnd }
+
+void FormFriends::on_TableWidgetFriends_cellDoubleClicked(int row, int){
+    this->findChild<QButtonWithData*>("ButtonGoToProfile"+ui->TableWidgetFriends->item(row,0)->text())->click();
+}

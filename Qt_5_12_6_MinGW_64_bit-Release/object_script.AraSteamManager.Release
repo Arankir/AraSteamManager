@@ -25,6 +25,7 @@ release/Sgame.o
 release/Sgames.o
 release/Slevels.o
 release/Sprofile.o
+release/formcontainerachievements.o
 release/main.o
 release/mainwindow.o
 release/formachievements.o
@@ -66,6 +67,7 @@ release/moc_Sgame.o
 release/moc_Sgames.o
 release/moc_Slevels.o
 release/moc_Sprofile.o
+release/moc_formcontainerachievements.o
 release/moc_mainwindow.o
 release/moc_formachievements.o
 release/moc_formcategoryvalue.o

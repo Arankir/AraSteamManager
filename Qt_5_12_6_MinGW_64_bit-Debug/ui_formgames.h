@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formgames.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.12.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -14,6 +14,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -29,6 +30,7 @@ public:
     QLineEdit *LineEditGame;
     QPushButton *ButtonFind;
     QTableWidget *TableWidgetGames;
+    QProgressBar *ProgressBarLoading;
 
     void setupUi(QWidget *FormGames)
     {
@@ -67,6 +69,12 @@ public:
 
         verticalLayout->addWidget(TableWidgetGames);
 
+        ProgressBarLoading = new QProgressBar(FormGames);
+        ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));
+        ProgressBarLoading->setValue(0);
+
+        verticalLayout->addWidget(ProgressBarLoading);
+
         QWidget::setTabOrder(LineEditGame, ButtonFind);
 
         retranslateUi(FormGames);
@@ -79,6 +87,7 @@ public:
         FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
         LineEditGame->setPlaceholderText(QApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
         ButtonFind->setText(QApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
+        ProgressBarLoading->setFormat(QApplication::translate("FormGames", "%v/%m", nullptr));
     } // retranslateUi
 
 };

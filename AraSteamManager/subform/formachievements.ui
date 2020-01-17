@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_8">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QGroupBox" name="groupBox">
        <property name="sizePolicy">
@@ -138,22 +138,56 @@
         </layout>
        </item>
        <item>
-        <widget class="QLabel" name="LabelGameOnline">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>GameOnline</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="LabelGameOnline">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>GameOnline</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="LabelTotalPersent">
+           <property name="text">
+            <string>TotalPersent</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ButtonUpdate">
+           <property name="text">
+            <string>Обновить</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -173,10 +207,7 @@
      <property name="title">
       <string>      Фильтр</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <property name="spacing">
-       <number>1</number>
-      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_8">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
@@ -195,8 +226,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>174</width>
-             <height>126</height>
+             <width>199</width>
+             <height>106</height>
             </rect>
            </property>
           </widget>
@@ -218,15 +249,15 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>174</width>
-             <height>126</height>
+             <width>198</width>
+             <height>106</height>
             </rect>
            </property>
           </widget>
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <widget class="QPushButton" name="ButtonAddCategory">
             <property name="text">
@@ -245,23 +276,6 @@
            <widget class="QPushButton" name="ButtonDeleteAllCategories">
             <property name="text">
              <string>Удалить все категории</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="LabelTotalPersent">
-            <property name="text">
-             <string>TotalPersent</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="ButtonUpdate">
-            <property name="text">
-             <string>Обновить</string>
             </property>
            </widget>
           </item>
@@ -332,48 +346,31 @@
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout">
+           <widget class="QGroupBox" name="GroupBoxReachedFilter">
+            <property name="title">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QRadioButton" name="RadioButtonAll">
+             <widget class="QCheckBox" name="CheckBoxFavorites">
               <property name="text">
-               <string>Все достижения</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="RadioButtonReached">
-              <property name="text">
-               <string>Полученные достижения</string>
+               <string>Только избранное</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QRadioButton" name="RadioButtonNotReached">
+             <widget class="QCheckBox" name="CheckBoxCompareAllFriends">
               <property name="text">
-               <string>Не полученные достижения</string>
+               <string>Все друзья</string>
               </property>
              </widget>
             </item>
            </layout>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="CheckBoxFavorites">
-            <property name="text">
-             <string>Только избранное</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="CheckBoxCompareAllFriends">
-            <property name="text">
-             <string>Все друзья</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </item>
