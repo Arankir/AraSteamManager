@@ -173,7 +173,7 @@ public:
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 451, 150));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 451, 151));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setSpacing(3);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -292,6 +292,7 @@ public:
         ButtonGames = new QPushButton(scrollAreaWidgetContents);
         ButtonGames->setObjectName(QString::fromUtf8("ButtonGames"));
         ButtonGames->setEnabled(true);
+        ButtonGames->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(ButtonGames);
 
@@ -337,7 +338,7 @@ public:
         ScrollAreaForm->setWidgetResizable(true);
         FormsWidget = new QWidget();
         FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 451, 72));
+        FormsWidget->setGeometry(QRect(0, 0, 451, 68));
         ScrollAreaForm->setWidget(FormsWidget);
 
         verticalLayout->addWidget(ScrollAreaForm);
@@ -345,7 +346,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 465, 20));
+        menuBar->setGeometry(QRect(0, 0, 465, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

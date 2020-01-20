@@ -2,6 +2,15 @@
 #include "ui_mainwindow.h"
 //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 //qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
+//QPushButton#pushButton {
+//     background-url(Images/image1.png);
+// }
+// QPushButton#pushButton:pressed {
+//     background-url(Images/image2.png);
+// }
+// QPushButton#pushButton:hover {
+//      background-url(Images/image3.png);
+// }
 
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
@@ -48,6 +57,31 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             qApp->setPalette(darkPalette);
             _theme="white";
     }
+
+    qApp->setStyleSheet("QPushButton:hover{"
+                        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+                                                   "stop: 0 #6d6e6e, "
+                                                   "stop: 0.01 #2e6dac, "
+                                                   "stop: 0.5 #4b81b8, "
+                                                   "stop: 0.99 #2e6dac, "
+                                                   "stop: 1.0 #6d6e6e); "
+                        "border-style: inset; "
+                        "border-radius: 2px;} "
+
+                        "QProgressBar { "
+                        "border: 1px solid grey; "
+                        "border-radius: 7px; "
+                        "text-align: center;} "
+
+                        "QProgressBar::chunk { "
+                        "background-color: #CD96CD; "
+                        //"border-width: 2px; "
+                        "border-bottom-right-radius: 6px; "
+                        "border-bottom-left-radius: 6px; "
+                        "border-top-right-radius: 6px; "
+                        "border-top-left-radius: 6px;} "
+                        );
+
     InitComponents();
     if(_setting.GetStatus()==StatusValue::success){
         if(_setting.GetMyProfile()!="none")

@@ -157,7 +157,7 @@ color: rgb(26, 26, 26);</string>
          <x>0</x>
          <y>0</y>
          <width>451</width>
-         <height>150</height>
+         <height>151</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -383,6 +383,9 @@ color: rgb(26, 26, 26);</string>
             <property name="enabled">
              <bool>true</bool>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Games</string>
             </property>
@@ -456,7 +459,7 @@ color: rgb(26, 26, 26);</string>
          <x>0</x>
          <y>0</y>
          <width>451</width>
-         <height>72</height>
+         <height>68</height>
         </rect>
        </property>
       </widget>
@@ -470,7 +473,7 @@ color: rgb(26, 26, 26);</string>
      <x>0</x>
      <y>0</y>
      <width>465</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
