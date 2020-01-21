@@ -43,12 +43,12 @@ public:
     QScrollArea *scrollArea_5;
     QWidget *scrollAreaWidgetContents_7;
     QGridLayout *gridLayout;
-    QPushButton *pushButton;
-    QLineEdit *lineEdit;
-    QCheckBox *checkBox;
-    QRadioButton *radioButton_7;
     QCheckBox *checkBox_8;
     QRadioButton *radioButton;
+    QPushButton *pushButton;
+    QCheckBox *checkBox;
+    QLineEdit *lineEdit;
+    QRadioButton *radioButton_7;
     QScrollArea *scrollArea_6;
     QWidget *scrollAreaWidgetContents_8;
     QGridLayout *gridLayout_4;
@@ -187,38 +187,6 @@ public:
         scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 477, 100));
         gridLayout = new QGridLayout(scrollAreaWidgetContents_7);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        pushButton = new QPushButton(scrollAreaWidgetContents_7);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy);
-        pushButton->setMinimumSize(QSize(25, 0));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/white/program/white/back.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon);
-
-        gridLayout->addWidget(pushButton, 0, 0, 1, 1);
-
-        lineEdit = new QLineEdit(scrollAreaWidgetContents_7);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        sizePolicy.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
-        lineEdit->setSizePolicy(sizePolicy);
-        lineEdit->setMinimumSize(QSize(25, 0));
-
-        gridLayout->addWidget(lineEdit, 0, 1, 1, 1);
-
-        checkBox = new QCheckBox(scrollAreaWidgetContents_7);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        sizePolicy.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
-        checkBox->setSizePolicy(sizePolicy);
-
-        gridLayout->addWidget(checkBox, 1, 0, 1, 1);
-
-        radioButton_7 = new QRadioButton(scrollAreaWidgetContents_7);
-        radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
-        radioButton_7->setChecked(false);
-
-        gridLayout->addWidget(radioButton_7, 1, 1, 1, 1);
-
         checkBox_8 = new QCheckBox(scrollAreaWidgetContents_7);
         checkBox_8->setObjectName(QString::fromUtf8("checkBox_8"));
         sizePolicy.setHeightForWidth(checkBox_8->sizePolicy().hasHeightForWidth());
@@ -232,6 +200,38 @@ public:
         radioButton->setChecked(true);
 
         gridLayout->addWidget(radioButton, 2, 1, 1, 1);
+
+        pushButton = new QPushButton(scrollAreaWidgetContents_7);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy);
+        pushButton->setMinimumSize(QSize(25, 0));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/white/program/white/back.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon);
+
+        gridLayout->addWidget(pushButton, 0, 0, 1, 1);
+
+        checkBox = new QCheckBox(scrollAreaWidgetContents_7);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        sizePolicy.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
+        checkBox->setSizePolicy(sizePolicy);
+
+        gridLayout->addWidget(checkBox, 1, 0, 1, 1);
+
+        lineEdit = new QLineEdit(scrollAreaWidgetContents_7);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        sizePolicy.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
+        lineEdit->setSizePolicy(sizePolicy);
+        lineEdit->setMinimumSize(QSize(25, 0));
+
+        gridLayout->addWidget(lineEdit, 0, 1, 1, 1);
+
+        radioButton_7 = new QRadioButton(scrollAreaWidgetContents_7);
+        radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
+        radioButton_7->setChecked(false);
+
+        gridLayout->addWidget(radioButton_7, 1, 1, 1, 1);
 
         scrollArea_5->setWidget(scrollAreaWidgetContents_7);
 
@@ -762,12 +762,12 @@ public:
         RadioButtonDarkTheme->setText(QApplication::translate("FormSettings", "\320\242\321\221\320\274\320\275\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
         RadioButtonLightTheme->setText(QApplication::translate("FormSettings", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
         GroupBoxDarkTheme->setTitle(QString());
-        pushButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        lineEdit->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        checkBox->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
-        radioButton_7->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         checkBox_8->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         radioButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        pushButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        checkBox->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        lineEdit->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
+        radioButton_7->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         pushButton_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         lineEdit_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         checkBox_2->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));

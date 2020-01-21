@@ -12,6 +12,106 @@
 //      background-url(Images/image3.png);
 // }
 
+/*
+QPushButton:hover
+ background: qlineargradient
+    stop: 0 #6d6e6e,
+    stop: 0.01 #2e6dac,
+    stop: 0.5 #4b81b8,
+    stop: 0.99 #2e6dac,
+    stop: 1.0 #6d6e6e);
+
+QProgressBar
+ border: 1px solid grey;
+ border-radius: 7px;
+
+QProgressBar::chunk
+ background-color: #CD96CD;
+ border-bottom-right-radius: 6px;
+ border-bottom-left-radius: 6px;
+ border-top-right-radius: 6px;
+ border-top-left-radius: 6px;
+
+QRadioButton::indicator
+ border-radius: 1px;
+
+QRadioButton::indicator::unchecked
+ background-color: black;
+ border: 1px solid white;
+
+QRadioButton::indicator::checked
+ background-color: red;
+ border: 1px solid white;
+
+QRadioButton::hover
+ background-color: qlineargradient
+    stop: 0 #6d6e6e,
+    stop: 0.01 #2e6dac,
+    stop: 0.5 #4b81b8,
+    stop: 0.99 #2e6dac,
+    stop: 1.0 #6d6e6e);
+
+QTabBar::tab
+ border: 1px solid #6d6e6e;
+ border-bottom-color: #6d6e6e;
+ border-top-left-radius: 4px;
+ border-top-right-radius: 4px;
+
+QTabBar::tab:selected, QTabBar::tab:hover
+ background: qlineargradient
+    stop: 0 #6d6e6e,
+    stop: 0.01 #2e6dac,
+    stop: 0.5 #4b81b8,
+    stop: 0.99 #2e6dac,
+    stop: 1.0 #6d6e6e);
+
+QTabBar::tab:selected
+ border-color: #9B9B9B;
+ border-bottom-color: #C2C7CB;
+
+QCheckBox::hover
+ background-color: qlineargradient
+    stop: 0 #6d6e6e,
+    stop: 0.01 #2e6dac,
+    stop: 0.5 #4b81b8,
+    stop: 0.99 #2e6dac,
+    stop: 1.0 #6d6e6e);
+
+QComboBox
+ border: 1px solid #333333;
+ border-radius: 3px;
+ background: qlineargradient
+    stop:0 #797979,
+    stop:0.48 #696969,
+    stop:0.52 #5e5e5e,
+    stop:1 #4f4f4f);
+ color: #ffffff;
+
+QComboBox::hover
+ background-color: qlineargradient
+    stop: 0 #6d6e6e,
+    stop: 0.01 #2e6dac,
+    stop: 0.5 #4b81b8,
+    stop: 0.99 #2e6dac,
+    stop: 1.0 #6d6e6e);
+
+QComboBox QAbstractView
+ background-color: #4f4f4f;
+ color: #999999;
+ selection-background-color: #999999;
+ selection-color: #4f4f4f;
+
+QComboBox QAbstractView::hover
+ background-color: qlineargradient
+    stop: 0 #6d6e6e,
+    stop: 0.01 #2e6dac,
+    stop: 0.5 #4b81b8,
+    stop: 0.99 #2e6dac,
+    stop: 1.0 #6d6e6e);
+
+ */
+
+
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
     switch(_setting.GetTheme()){
@@ -23,6 +123,130 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
             //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
             qApp->setPalette(darkPalette);
+            qApp->setStyleSheet("QPushButton:hover{"
+                                    "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                                                               "stop: 0 #6d6e6e, "
+                                                               "stop: 0.01 #2e6dac, "
+                                                               "stop: 0.5 #4b81b8, "
+                                                               "stop: 0.99 #2e6dac, "
+                                                               "stop: 1.0 #6d6e6e); "
+                                    "border-style: inset; "
+                                    "border-radius: 2px; "
+                                "} "
+                                "QProgressBar { "
+                                    "border: 1px solid grey; "
+                                    "border-radius: 7px; "
+                                    "text-align: center; "
+                                "} "
+                                "QProgressBar::chunk { "
+                                    "background-color: #CD96CD; "
+                                    "border-bottom-right-radius: 6px; "
+                                    "border-bottom-left-radius: 6px; "
+                                    "border-top-right-radius: 6px; "
+                                    "border-top-left-radius: 6px; "
+                                "} "
+        //                        "QRadioButton::indicator { "
+        //                            "width: 13px; "
+        //                            "height: 13px; "
+        //                            "border-radius: 1px; "
+        //                        "} "
+        //                        "QRadioButton::indicator::unchecked { "
+        //                            "background-color:       black; "
+        //                            "border:                 1px solid white; "
+        //                        "} "
+        //                        "QRadioButton::indicator::checked { "
+        //                            "background-color:       red; "
+        //                            "border:                 1px solid white; "
+        //                        "} "
+                                "QRadioButton::hover { "
+                                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                                                            "stop: 0 #6d6e6e, "
+                                                            "stop: 0.01 #2e6dac, "
+                                                            "stop: 0.5 #4b81b8, "
+                                                            "stop: 0.99 #2e6dac, "
+                                                            "stop: 1.0 #6d6e6e); "
+                                "} "
+                                //"QRadioButton::indicator:unchecked:hover { "
+                                //    "image: url(:/images/radiobutton_unchecked_hover.png); "
+                                //"} "
+                                //"QRadioButton::indicator:unchecked:pressed { "
+                                //    "image: url(:/images/radiobutton_unchecked_pressed.png); "
+                                //"} "
+                                //"QRadioButton::indicator:checked:hover { "
+                                //    "image: url(:/images/radiobutton_checked_hover.png); "
+                                //"} "
+                                //"QRadioButton::indicator:checked:pressed { "
+                                //    "image: url(:/images/radiobutton_checked_pressed.png); "
+                                //"} "
+                                "QTabBar::tab { "
+                                    "border: 1px solid #6d6e6e; "
+                                    "border-bottom-color: #6d6e6e; "
+                                    "border-top-left-radius: 4px; "
+                                    "border-top-right-radius: 4px; "
+                                    "min-width: 8ex; "
+                                    "padding: 2px; "
+                                "} "
+
+                                "QTabBar::tab:selected, QTabBar::tab:hover { "
+                                    "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                                                                "stop: 0 #6d6e6e, "
+                                                                "stop: 0.01 #2e6dac, "
+                                                                "stop: 0.5 #4b81b8, "
+                                                                "stop: 0.99 #2e6dac, "
+                                                                "stop: 1.0 #6d6e6e); "
+                                "} "
+
+                                "QTabBar::tab:selected { "
+                                    "border-color: #9B9B9B; "
+                                    "border-bottom-color: #C2C7CB; "
+                                "} "
+
+                                "QTabBar::tab:!selected { "
+                                    "margin-top: 2px; "
+                                "} "
+                                "QCheckBox::hover { "
+                                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                                                            "stop: 0 #6d6e6e, "
+                                                            "stop: 0.01 #2e6dac, "
+                                                            "stop: 0.5 #4b81b8, "
+                                                            "stop: 0.99 #2e6dac, "
+                                                            "stop: 1.0 #6d6e6e); "
+                                "} "
+        //                        "QComboBox { "
+        //                            "border: 1px solid #333333; "
+        //                            "border-radius: 3px; "
+        //                            "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f); "
+        //                            "padding: 1px 23px 1px 3px; "
+        //                            "min-width: 6em; "
+        //                            "color: #ffffff; "
+        //                        "} "
+        //                        "QComboBox::hover { "
+        //                            "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+        //                                                "stop: 0 #6d6e6e, "
+        //                                                "stop: 0.01 #2e6dac, "
+        //                                                "stop: 0.5 #4b81b8, "
+        //                                                "stop: 0.99 #2e6dac, "
+        //                                                "stop: 1.0 #6d6e6e); "
+        //                        "} "
+        //                        "QComboBox QAbstractView{ "
+        //                            "background-color: #4f4f4f; "
+        //                            "color: #999999; "
+        //                            "selection-background-color: #999999; "
+        //                            "selection-color: #4f4f4f; "
+        //                        "} "
+        //                        "QComboBox QAbstractView::hover{ "
+        //                            "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+        //                                            "stop: 0 #6d6e6e, "
+        //                                            "stop: 0.01 #2e6dac, "
+        //                                            "stop: 0.5 #4b81b8, "
+        //                                            "stop: 0.99 #2e6dac, "
+        //                                            "stop: 1.0 #6d6e6e); "
+        //                        "} "
+        //                        "QComboBox::down-arrow { "
+        //                            "width: 14px; "
+        //                            "height: 14px; "
+        //                        "} "
+                                );
             _theme="white";
             break;
             }
@@ -57,30 +281,6 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             qApp->setPalette(darkPalette);
             _theme="white";
     }
-
-    qApp->setStyleSheet("QPushButton:hover{"
-                        "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
-                                                   "stop: 0 #6d6e6e, "
-                                                   "stop: 0.01 #2e6dac, "
-                                                   "stop: 0.5 #4b81b8, "
-                                                   "stop: 0.99 #2e6dac, "
-                                                   "stop: 1.0 #6d6e6e); "
-                        "border-style: inset; "
-                        "border-radius: 2px;} "
-
-                        "QProgressBar { "
-                        "border: 1px solid grey; "
-                        "border-radius: 7px; "
-                        "text-align: center;} "
-
-                        "QProgressBar::chunk { "
-                        "background-color: #CD96CD; "
-                        //"border-width: 2px; "
-                        "border-bottom-right-radius: 6px; "
-                        "border-bottom-left-radius: 6px; "
-                        "border-top-right-radius: 6px; "
-                        "border-top-left-radius: 6px;} "
-                        );
 
     InitComponents();
     if(_setting.GetStatus()==StatusValue::success){
@@ -130,6 +330,7 @@ void MainWindow::InitComponents(){
     //ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
+
 void MainWindow::ProgressLoading(int Aprogress,int){
     ui->FormProgressBar->setValue(Aprogress);
 }
@@ -504,4 +705,3 @@ void MainWindow::on_ButtonExit_clicked(){
     close();
 }
 #define FunctionsEnd }
-

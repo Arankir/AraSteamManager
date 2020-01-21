@@ -207,7 +207,7 @@
      <property name="title">
       <string>      Фильтр</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_8">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
@@ -226,8 +226,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>199</width>
-             <height>106</height>
+             <width>261</width>
+             <height>153</height>
             </rect>
            </property>
           </widget>
@@ -249,101 +249,105 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>198</width>
-             <height>106</height>
+             <width>260</width>
+             <height>153</height>
             </rect>
            </property>
           </widget>
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QPushButton" name="ButtonAddCategory">
-            <property name="text">
-             <string>Добавить категорию</string>
+           <widget class="QGroupBox" name="GroupBoxCompareShowedColumns">
+            <property name="title">
+             <string>Видимые столбцы</string>
             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="spacing">
+              <number>1</number>
+             </property>
+             <property name="leftMargin">
+              <number>1</number>
+             </property>
+             <property name="topMargin">
+              <number>1</number>
+             </property>
+             <property name="rightMargin">
+              <number>1</number>
+             </property>
+             <property name="bottomMargin">
+              <number>1</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="CheckBoxCompareIcon">
+               <property name="text">
+                <string>Иконка</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CheckBoxCompareTitle">
+               <property name="text">
+                <string>Название</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CheckBoxCompareDescription">
+               <property name="text">
+                <string>Описание</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CheckBoxCompareTotalPercent">
+               <property name="text">
+                <string>По миру</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="ButtonChangeCategory">
-            <property name="text">
-             <string>Изменить категории</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="ButtonDeleteAllCategories">
-            <property name="text">
-             <string>Удалить все категории</string>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QPushButton" name="ButtonAddCategory">
+              <property name="text">
+               <string>Добавить категорию</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ButtonChangeCategory">
+              <property name="text">
+               <string>Изменить категории</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ButtonDeleteAllCategories">
+              <property name="text">
+               <string>Удалить все категории</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="GroupBoxCompareShowedColumns">
-          <property name="title">
-           <string>Видимые столбцы</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
-           <property name="spacing">
-            <number>1</number>
-           </property>
-           <property name="leftMargin">
-            <number>1</number>
-           </property>
-           <property name="topMargin">
-            <number>1</number>
-           </property>
-           <property name="rightMargin">
-            <number>1</number>
-           </property>
-           <property name="bottomMargin">
-            <number>1</number>
-           </property>
-           <item>
-            <widget class="QCheckBox" name="CheckBoxCompareIcon">
-             <property name="text">
-              <string>Иконка</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="CheckBoxCompareTitle">
-             <property name="text">
-              <string>Название</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="CheckBoxCompareDescription">
-             <property name="text">
-              <string>Описание</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="CheckBoxCompareTotalPercent">
-             <property name="text">
-              <string>По миру</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
