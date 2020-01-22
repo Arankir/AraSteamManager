@@ -13,6 +13,7 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -40,6 +41,7 @@ public:
     QRadioButton *RadioButtonLightTheme;
     QGroupBox *GroupBoxDarkTheme;
     QVBoxLayout *verticalLayout_5;
+    QComboBox *comboBox;
     QScrollArea *scrollArea_5;
     QWidget *scrollAreaWidgetContents_7;
     QGridLayout *gridLayout;
@@ -174,6 +176,11 @@ public:
         GroupBoxDarkTheme->setMaximumSize(QSize(16777215, 250));
         verticalLayout_5 = new QVBoxLayout(GroupBoxDarkTheme);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        comboBox = new QComboBox(GroupBoxDarkTheme);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        verticalLayout_5->addWidget(comboBox);
+
         scrollArea_5 = new QScrollArea(GroupBoxDarkTheme);
         scrollArea_5->setObjectName(QString::fromUtf8("scrollArea_5"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -184,7 +191,7 @@ public:
         scrollArea_5->setWidgetResizable(true);
         scrollAreaWidgetContents_7 = new QWidget();
         scrollAreaWidgetContents_7->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_7"));
-        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 477, 100));
+        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 463, 94));
         gridLayout = new QGridLayout(scrollAreaWidgetContents_7);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         checkBox_8 = new QCheckBox(scrollAreaWidgetContents_7);
@@ -244,7 +251,7 @@ public:
         scrollArea_6->setWidgetResizable(true);
         scrollAreaWidgetContents_8 = new QWidget();
         scrollAreaWidgetContents_8->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_8"));
-        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 477, 99));
+        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 463, 94));
         gridLayout_4 = new QGridLayout(scrollAreaWidgetContents_8);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         pushButton_2 = new QPushButton(scrollAreaWidgetContents_8);

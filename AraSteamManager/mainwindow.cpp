@@ -212,14 +212,19 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                                                             "stop: 0.99 #2e6dac, "
                                                             "stop: 1.0 #6d6e6e); "
                                 "} "
-        //                        "QComboBox { "
-        //                            "border: 1px solid #333333; "
-        //                            "border-radius: 3px; "
-        //                            "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f); "
-        //                            "padding: 1px 23px 1px 3px; "
-        //                            "min-width: 6em; "
-        //                            "color: #ffffff; "
-        //                        "} "
+
+                                "QComboBox::hover { "
+                                "background-color: #4b81b8; "
+                                "} "
+
+//                                "QComboBox { "
+//                                    "border: 1px solid #333333; "
+//                                    "border-radius: 3px; "
+//                                    "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f); "
+//                                    "padding: 1px 23px 1px 3px; "
+//                                    "min-width: 6em; "
+//                                    "color: #ffffff; "
+//                                "} "
         //                        "QComboBox::hover { "
         //                            "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
         //                                                "stop: 0 #6d6e6e, "
@@ -228,24 +233,71 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
         //                                                "stop: 0.99 #2e6dac, "
         //                                                "stop: 1.0 #6d6e6e); "
         //                        "} "
-        //                        "QComboBox QAbstractView{ "
-        //                            "background-color: #4f4f4f; "
-        //                            "color: #999999; "
-        //                            "selection-background-color: #999999; "
-        //                            "selection-color: #4f4f4f; "
-        //                        "} "
-        //                        "QComboBox QAbstractView::hover{ "
-        //                            "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
-        //                                            "stop: 0 #6d6e6e, "
-        //                                            "stop: 0.01 #2e6dac, "
-        //                                            "stop: 0.5 #4b81b8, "
-        //                                            "stop: 0.99 #2e6dac, "
-        //                                            "stop: 1.0 #6d6e6e); "
-        //                        "} "
+//                                "QComboBox QAbstractView{ "
+//                                    "background-color: #4f4f4f; "
+//                                    "color: #999999; "
+//                                    "selection-background-color: #999999; "
+//                                    "selection-color: #4f4f4f; "
+//                                "} "
+//                                "QComboBox QAbstractView::hover{ "
+//                                    "background-color:: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+//                                                    "stop: 0 #6d6e6e, "
+//                                                    "stop: 0.01 #2e6dac, "
+//                                                    "stop: 0.5 #4b81b8, "
+//                                                    "stop: 0.99 #2e6dac, "
+//                                                    "stop: 1.0 #6d6e6e); "
+//                                "} "
         //                        "QComboBox::down-arrow { "
         //                            "width: 14px; "
         //                            "height: 14px; "
         //                        "} "
+
+
+//                                QComboBox {
+//                                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f);
+//                                border: 1px solid #333333;
+//                                border-style: none;
+//                                border-radius: 3px;
+//                                padding: 1px 23px 1px 3px;
+//                                min-width: 6em;
+//                                color: #ffffff;
+//                                }
+//                                QComboBox QAbstractView::hover{
+//                                selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+//                                stop: 0 #6d6e6e,
+//                                stop: 0.01 #2e6dac,
+//                                stop: 0.5 #4b81b8,
+//                                stop: 0.99 #2e6dac,
+//                                stop: 1.0 #6d6e6e);
+//                                }
+//                                QComboBox QAbstractView{
+//                                background-color: #4f4f4f;
+//                                color: #999999;
+//                                selection-background-color: #999999;
+//                                selection-color: #4f4f4f;
+//                                }
+//                                QComboBox::drop-down{
+//                                     subcontrol-origin: padding;
+//                                     subcontrol-position: top right;
+//                                     color: white;
+//                                     width:15px;
+//                                    height: 15px;
+//                                     border-left-color: red;
+//                                     border-top-right-radius: 3px; /* same radius as the QComboBox */
+//                                     border-bottom-right-radius: 3px;
+//                                     padding-left: 10px;
+//                                     border-left-width: 0px;
+//                                     border-left-style: solid; /* just a single line */
+//                                 }
+//                                QComboBox::down-arrow {
+//                                width: 14px;
+//                                height: 14px;
+//                                display: block;
+//                                content: '+';
+//                                position: absolute;
+//                                left: 0;
+//                                top: 0;
+//                                }
                                 );
             _theme="white";
             break;
