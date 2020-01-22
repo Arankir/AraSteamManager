@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "QtCharts/QtCharts"
@@ -26,6 +27,8 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QChartView *ChartViewPercentages;
     QVBoxLayout *verticalLayout;
+    QLabel *label;
+    QSpacerItem *verticalSpacer;
     QLabel *LabelAveragePercent;
     QLabel *LabelSummColumn;
     QChartView *ChartsViewTimes;
@@ -50,6 +53,22 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        label = new QLabel(FormStatistics);
+        label->setObjectName(QString::fromUtf8("label"));
+        QFont font;
+        font.setPointSize(10);
+        font.setBold(true);
+        font.setUnderline(true);
+        font.setWeight(75);
+        label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(label);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout->addItem(verticalSpacer);
+
         LabelAveragePercent = new QLabel(FormStatistics);
         LabelAveragePercent->setObjectName(QString::fromUtf8("LabelAveragePercent"));
 
@@ -90,6 +109,11 @@ public:
     void retranslateUi(QWidget *FormStatistics)
     {
         FormStatistics->setWindowTitle(QApplication::translate("FormStatistics", "Form", nullptr));
+#ifndef QT_NO_TOOLTIP
+        label->setToolTip(QApplication::translate("FormStatistics", "<html><head/><body><p><span style=\" font-family:'Open Sans','Arial','sans-serif'; font-size:12px; color:#000000;\">\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260 \320\262\321\213\320\262\320\276\320\264\320\270\321\202\321\201\321\217 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\275\320\260 \320\260\320\272\320\272\320\260\321\203\320\275\321\202\320\265 \321\203 \320\272\320\276\321\202\320\276\321\200\321\213\321\205 \320\265\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217.</span></p><p><span style=\" font-family:'Open Sans','Arial','sans-serif'; font-size:12px; color:#000000;\">\320\225\321\201\320\273\320\270 \321\201\321\203\320\274\320\274\320\260\321\200\320\275\320\276\320\265 \320\272\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\275\320\265 \321\201\320\276\320\262\320\277\320\260\320"
+                        "\264\320\260\320\265\321\202 \321\201 \320\270\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\320\265\320\271 \321\201\321\202\320\270\320\274\320\260, \320\267\320\275\320\260\321\207\320\270\321\202 \321\207\320\260\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\277\320\276\320\273\321\203\321\207\320\265\320\275\320\260 \321\201 \320\270\321\201\320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\320\275\320\270\320\265\320\274 \321\201\320\265\320\274\320\265\320\271\320\275\320\276\320\263\320\276 \320\264\320\276\321\201\321\202\321\203\320\277\320\260</span></p></body></html>", nullptr));
+#endif // QT_NO_TOOLTIP
+        label->setText(QApplication::translate("FormStatistics", "?", nullptr));
         LabelAveragePercent->setText(QApplication::translate("FormStatistics", "\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202: ", nullptr));
         LabelSummColumn->setText(QApplication::translate("FormStatistics", "\320\222\321\201\320\265\320\263\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271:", nullptr));
     } // retranslateUi

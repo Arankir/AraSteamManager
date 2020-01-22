@@ -133,7 +133,6 @@ public:
     QGroupBox *groupBox_8;
     QVBoxLayout *verticalLayout_11;
     QLabel *label_18;
-    QLabel *label_5;
     QGroupBox *groupBox_3;
     QVBoxLayout *verticalLayout_9;
     QLabel *label_8;
@@ -177,6 +176,9 @@ public:
         verticalLayout_5 = new QVBoxLayout(GroupBoxDarkTheme);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         comboBox = new QComboBox(GroupBoxDarkTheme);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
         verticalLayout_5->addWidget(comboBox);
@@ -555,6 +557,8 @@ public:
         font.setPointSize(10);
         label_10->setFont(font);
         label_10->setWordWrap(true);
+        label_10->setOpenExternalLinks(true);
+        label_10->setTextInteractionFlags(Qt::TextBrowserInteraction);
 
         gridLayout_8->addWidget(label_10, 3, 0, 1, 1);
 
@@ -708,11 +712,6 @@ public:
 
         verticalLayout_11->addWidget(label_18);
 
-        label_5 = new QLabel(groupBox_8);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-
-        verticalLayout_11->addWidget(label_5);
-
 
         gridLayout_9->addWidget(groupBox_8, 4, 1, 1, 1);
 
@@ -769,6 +768,10 @@ public:
         RadioButtonDarkTheme->setText(QApplication::translate("FormSettings", "\320\242\321\221\320\274\320\275\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
         RadioButtonLightTheme->setText(QApplication::translate("FormSettings", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
         GroupBoxDarkTheme->setTitle(QString());
+        comboBox->setItemText(0, QApplication::translate("FormSettings", "123", nullptr));
+        comboBox->setItemText(1, QApplication::translate("FormSettings", "12", nullptr));
+        comboBox->setItemText(2, QApplication::translate("FormSettings", "1", nullptr));
+
         checkBox_8->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         radioButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         pushButton->setText(QApplication::translate("FormSettings", "\320\242\320\265\320\272\321\201\321\202", nullptr));
@@ -803,7 +806,7 @@ public:
         RadioButtonLanguageEnglish->setText(QApplication::translate("FormSettings", "English", nullptr));
         RadioButtonLanguageRussian->setText(QApplication::translate("FormSettings", "\320\240\321\203\321\201\321\201\320\272\320\270\320\271", nullptr));
         CheckBoxVisibleHiddenGames->setText(QApplication::translate("FormSettings", "\320\237\321\200\320\270 \320\277\320\276\320\270\321\201\320\272\320\265 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\276\321\202\320\276\320\261\321\200\320\260\320\266\320\260\321\202\321\214 \321\201\320\272\321\200\321\213\321\202\321\213\320\265 \320\270\320\263\321\200\321\213", nullptr));
-        label_10->setText(QApplication::translate("FormSettings", "<html><head/><body><p>\320\230\320\272\320\276\320\275\320\272\320\270 \320\264\320\273\321\217 \321\215\321\202\320\276\320\263\320\276 \320\277\321\200\320\270\320\273\320\276\320\266\320\265\320\275\320\270\321\217 \320\261\321\213\320\273\320\270 \320\262\320\267\321\217\321\202\321\213 \320\261\320\265\321\201\320\277\320\273\320\260\321\202\320\275\320\276 \321\201 \321\201\320\260\320\271\321\202\320\260 <span style=\" color:#55aa00;\">https://icons8.ru/icons</span></p></body></html>", nullptr));
+        label_10->setText(QApplication::translate("FormSettings", "<html><head/><body><p>\320\230\320\272\320\276\320\275\320\272\320\270 \320\264\320\273\321\217 \320\277\321\200\320\270\320\273\320\276\320\266\320\265\320\275\320\270\321\217 \320\261\321\213\320\273\320\270 \320\277\321\200\320\265\320\264\320\276\321\201\321\202\320\260\320\262\320\273\320\265\320\275\321\213 \321\201\320\260\320\271\321\202\320\276\320\274 <a href=https://icons8.ru/icons>https://icons8.ru/icons</a></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("FormSettings", "\320\237\321\200\320\276\321\207\320\270\320\265 \320\275\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
         groupBox_2->setTitle(QApplication::translate("FormSettings", "\320\241\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\265", nullptr));
         label_13->setText(QApplication::translate("FormSettings", "\320\277\320\276\320\264\320\263\321\200\321\203\320\267\320\272\320\260 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\264\321\200\321\203\320\267\320\265\320\271 \320\262 \320\276\321\202\320\264\320\265\320\273\321\214\320\275\320\276\320\274 \320\277\320\276\321\202\320\276\320\272\320\265", nullptr));
@@ -828,7 +831,6 @@ public:
         label_24->setText(QApplication::translate("FormSettings", "\320\235\320\260\321\201\321\202\321\200\320\276\320\270\321\202\321\214 \321\201\320\270\321\201\321\202\320\265\320\274\321\203 \320\273\320\276\320\263\320\276\320\262 \320\264\320\273\321\217 \320\272\321\200\320\260\321\210\320\265\320\271", nullptr));
         groupBox_8->setTitle(QApplication::translate("FormSettings", "\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260", nullptr));
         label_18->setText(QApplication::translate("FormSettings", "\320\241\321\200\320\260\320\262\320\275\320\270\321\202\321\214 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270", nullptr));
-        label_5->setText(QApplication::translate("FormSettings", "\320\277\320\276\321\217\321\201\320\275\320\265\320\275\320\270\321\217 \320\272 \321\201\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\265", nullptr));
         groupBox_3->setTitle(QApplication::translate("FormSettings", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
         label_8->setText(QApplication::translate("FormSettings", "\320\224\320\260\320\275\320\275\321\213\320\265 \320\264\320\273\321\217 \320\264\320\276\320\275\320\260\321\202\320\276\320\262", nullptr));
         label_9->setText(QApplication::translate("FormSettings", "\320\244\320\276\321\200\320\274\320\260\321\202 \320\264\320\260\321\202", nullptr));

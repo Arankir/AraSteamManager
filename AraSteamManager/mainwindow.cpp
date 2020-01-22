@@ -15,11 +15,10 @@
 /*
 QPushButton:hover
  background: qlineargradient
-    stop: 0 #6d6e6e,
-    stop: 0.01 #2e6dac,
-    stop: 0.5 #4b81b8,
-    stop: 0.99 #2e6dac,
-    stop: 1.0 #6d6e6e);
+    stop: 0 #3d8fa8,
+    stop: 0.48 #2d7f98,
+    stop: 0.52 #22748c,
+    top: 1.0 #13657b);
 
 QProgressBar
  border: 1px solid grey;
@@ -27,58 +26,37 @@ QProgressBar
 
 QProgressBar::chunk
  background-color: #CD96CD;
- border-bottom-right-radius: 6px;
- border-bottom-left-radius: 6px;
- border-top-right-radius: 6px;
- border-top-left-radius: 6px;
-
-QRadioButton::indicator
- border-radius: 1px;
-
-QRadioButton::indicator::unchecked
- background-color: black;
- border: 1px solid white;
-
-QRadioButton::indicator::checked
- background-color: red;
- border: 1px solid white;
+ border-radius: 6px;
 
 QRadioButton::hover
  background-color: qlineargradient
-    stop: 0 #6d6e6e,
-    stop: 0.01 #2e6dac,
-    stop: 0.5 #4b81b8,
-    stop: 0.99 #2e6dac,
-    stop: 1.0 #6d6e6e);
+    stop: 0 #3d8fa8,
+    stop: 0.48 #2d7f98,
+    stop: 0.52 #22748c,
+    top: 1.0 #13657b);
 
 QTabBar::tab
- border: 1px solid #6d6e6e;
+ border: 1px solid #262626;
  border-bottom-color: #6d6e6e;
  border-top-left-radius: 4px;
  border-top-right-radius: 4px;
 
-QTabBar::tab:selected, QTabBar::tab:hover
- background: qlineargradient
-    stop: 0 #6d6e6e,
-    stop: 0.01 #2e6dac,
-    stop: 0.5 #4b81b8,
-    stop: 0.99 #2e6dac,
-    stop: 1.0 #6d6e6e);
+QTabBar::tab:hover
+ background: #434343;
 
 QTabBar::tab:selected
- border-color: #9B9B9B;
- border-bottom-color: #C2C7CB;
+ background: #434343;
+ border-bottom-color: #434343;
 
 QCheckBox::hover
  background-color: qlineargradient
-    stop: 0 #6d6e6e,
-    stop: 0.01 #2e6dac,
-    stop: 0.5 #4b81b8,
-    stop: 0.99 #2e6dac,
-    stop: 1.0 #6d6e6e);
+    stop: 0 #3d8fa8,
+    stop: 0.48 #2d7f98,
+    stop: 0.52 #22748c,
+    top: 1.0 #13657b);
 
 QComboBox
- border: 1px solid #333333;
+ border: 1px solid #262626;
  border-radius: 3px;
  background: qlineargradient
     stop:0 #797979,
@@ -89,26 +67,18 @@ QComboBox
 
 QComboBox::hover
  background-color: qlineargradient
-    stop: 0 #6d6e6e,
-    stop: 0.01 #2e6dac,
-    stop: 0.5 #4b81b8,
-    stop: 0.99 #2e6dac,
-    stop: 1.0 #6d6e6e);
+    stop: 0 #3d8fa8,
+    stop: 0.48 #2d7f98,
+    stop: 0.52 #22748c,
+    top: 1.0 #13657b);
 
-QComboBox QAbstractView
- background-color: #4f4f4f;
- color: #999999;
- selection-background-color: #999999;
- selection-color: #4f4f4f;
-
-QComboBox QAbstractView::hover
+QComboBox:item:selected
+ border: 1px solid #262626;
  background-color: qlineargradient
-    stop: 0 #6d6e6e,
-    stop: 0.01 #2e6dac,
-    stop: 0.5 #4b81b8,
-    stop: 0.99 #2e6dac,
-    stop: 1.0 #6d6e6e);
-
+    stop: 0 #3d8fa8,
+    stop: 0.48 #2d7f98,
+    stop: 0.52 #22748c,
+    top: 1.0 #13657b);
  */
 
 
@@ -125,12 +95,11 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             qApp->setPalette(darkPalette);
             qApp->setStyleSheet("QPushButton:hover{"
                                     "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                                                               "stop: 0 #6d6e6e, "
-                                                               "stop: 0.01 #2e6dac, "
-                                                               "stop: 0.5 #4b81b8, "
-                                                               "stop: 0.99 #2e6dac, "
-                                                               "stop: 1.0 #6d6e6e); "
-                                    "border-style: inset; "
+                                                                "stop: 0 #3d8fa8, "
+                                                                "stop: 0.48 #2d7f98, "
+                                                                "stop: 0.52 #22748c, "
+                                                                "stop: 1.0 #13657b); "
+                                    "border: 1px solid #262626; "
                                     "border-radius: 2px; "
                                 "} "
                                 "QProgressBar { "
@@ -139,32 +108,32 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                                     "text-align: center; "
                                 "} "
                                 "QProgressBar::chunk { "
-                                    "background-color: #CD96CD; "
-                                    "border-bottom-right-radius: 6px; "
-                                    "border-bottom-left-radius: 6px; "
-                                    "border-top-right-radius: 6px; "
-                                    "border-top-left-radius: 6px; "
+                                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                                                                "stop: 0 #3d8fa8, "
+                                                                "stop: 0.48 #2d7f98, "
+                                                                "stop: 0.52 #22748c, "
+                                                                "stop: 1.0 #13657b); "
+                                    "border-radius: 6px; "
                                 "} "
         //                        "QRadioButton::indicator { "
         //                            "width: 13px; "
         //                            "height: 13px; "
         //                            "border-radius: 1px; "
         //                        "} "
-        //                        "QRadioButton::indicator::unchecked { "
-        //                            "background-color:       black; "
-        //                            "border:                 1px solid white; "
-        //                        "} "
-        //                        "QRadioButton::indicator::checked { "
-        //                            "background-color:       red; "
-        //                            "border:                 1px solid white; "
-        //                        "} "
+//                                "QRadioButton::indicator::unchecked { "
+//                                    "background-color:       black; "
+//                                    "border:                 1px solid white; "
+//                                "} "
+//                                "QRadioButton::indicator::checked { "
+//                                    "background-color:       red; "
+//                                    "border:                 1px solid white; "
+//                                "} "
                                 "QRadioButton::hover { "
                                     "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                                                            "stop: 0 #6d6e6e, "
-                                                            "stop: 0.01 #2e6dac, "
-                                                            "stop: 0.5 #4b81b8, "
-                                                            "stop: 0.99 #2e6dac, "
-                                                            "stop: 1.0 #6d6e6e); "
+                                                            "stop: 0 #3d8fa8, "
+                                                            "stop: 0.48 #2d7f98, "
+                                                            "stop: 0.52 #22748c, "
+                                                            "stop: 1.0 #13657b); "
                                 "} "
                                 //"QRadioButton::indicator:unchecked:hover { "
                                 //    "image: url(:/images/radiobutton_unchecked_hover.png); "
@@ -179,7 +148,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                                 //    "image: url(:/images/radiobutton_checked_pressed.png); "
                                 //"} "
                                 "QTabBar::tab { "
-                                    "border: 1px solid #6d6e6e; "
+                                    "border: 1px solid #262626; "
                                     "border-bottom-color: #6d6e6e; "
                                     "border-top-left-radius: 4px; "
                                     "border-top-right-radius: 4px; "
@@ -187,117 +156,63 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                                     "padding: 2px; "
                                 "} "
 
-                                "QTabBar::tab:selected, QTabBar::tab:hover { "
-                                    "background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                                                                "stop: 0 #6d6e6e, "
-                                                                "stop: 0.01 #2e6dac, "
-                                                                "stop: 0.5 #4b81b8, "
-                                                                "stop: 0.99 #2e6dac, "
-                                                                "stop: 1.0 #6d6e6e); "
+                                "QTabBar::tab:hover { "
+                                    "background: #434343; "
                                 "} "
 
                                 "QTabBar::tab:selected { "
-                                    "border-color: #9B9B9B; "
-                                    "border-bottom-color: #C2C7CB; "
+                                    "background: #434343; "
+                                    "border-bottom-color: #434343; "
                                 "} "
 
                                 "QTabBar::tab:!selected { "
                                     "margin-top: 2px; "
                                 "} "
+
                                 "QCheckBox::hover { "
                                     "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                                                            "stop: 0 #6d6e6e, "
-                                                            "stop: 0.01 #2e6dac, "
-                                                            "stop: 0.5 #4b81b8, "
-                                                            "stop: 0.99 #2e6dac, "
-                                                            "stop: 1.0 #6d6e6e); "
+                                                                        "stop: 0 #3d8fa8, "
+                                                                        "stop: 0.48 #2d7f98, "
+                                                                        "stop: 0.52 #22748c, "
+                                                                        "stop: 1.0 #13657b); "
+                                "} "
+
+                                "QComboBox { "
+                                    "border: 1px solid #262626; "
+                                    "border-radius: 3px; "
+                                    "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, "
+                                                                        "stop:0 #797979, "
+                                                                        "stop:0.48 #696969, "
+                                                                        "stop:0.52 #5e5e5e, "
+                                                                        "stop:1 #4f4f4f); "
+                                    "padding: 1px 23px 1px 3px; "
+                                    "min-width: 6em; "
+                                    "color: #ffffff; "
                                 "} "
 
                                 "QComboBox::hover { "
-                                "background-color: #4b81b8; "
+                                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                                                                    "stop: 0 #3d8fa8, "
+                                                                    "stop: 0.48 #2d7f98, "
+                                                                    "stop: 0.52 #22748c, "
+                                                                    "stop: 1.0 #13657b); "
+                                "} "
+                                "QComboBox:item:selected { "
+                                    "border: 1px solid #262626; "
+                                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                                                                    "stop: 0 #3d8fa8, "
+                                                                    "stop: 0.48 #2d7f98, "
+                                                                    "stop: 0.52 #22748c, "
+                                                                    "stop: 1.0 #13657b); "
                                 "} "
 
-//                                "QComboBox { "
-//                                    "border: 1px solid #333333; "
-//                                    "border-radius: 3px; "
-//                                    "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f); "
-//                                    "padding: 1px 23px 1px 3px; "
-//                                    "min-width: 6em; "
-//                                    "color: #ffffff; "
-//                                "} "
-        //                        "QComboBox::hover { "
-        //                            "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
-        //                                                "stop: 0 #6d6e6e, "
-        //                                                "stop: 0.01 #2e6dac, "
-        //                                                "stop: 0.5 #4b81b8, "
-        //                                                "stop: 0.99 #2e6dac, "
-        //                                                "stop: 1.0 #6d6e6e); "
-        //                        "} "
-//                                "QComboBox QAbstractView{ "
-//                                    "background-color: #4f4f4f; "
-//                                    "color: #999999; "
-//                                    "selection-background-color: #999999; "
-//                                    "selection-color: #4f4f4f; "
-//                                "} "
-//                                "QComboBox QAbstractView::hover{ "
-//                                    "background-color:: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
-//                                                    "stop: 0 #6d6e6e, "
-//                                                    "stop: 0.01 #2e6dac, "
-//                                                    "stop: 0.5 #4b81b8, "
-//                                                    "stop: 0.99 #2e6dac, "
-//                                                    "stop: 1.0 #6d6e6e); "
-//                                "} "
-        //                        "QComboBox::down-arrow { "
-        //                            "width: 14px; "
-        //                            "height: 14px; "
-        //                        "} "
+                                "QComboBox:item:checked { "
+                                    "font-weight: bold; "
+                                "} "
 
-
-//                                QComboBox {
-//                                background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #797979, stop:0.48 #696969, stop:0.52 #5e5e5e, stop:1 #4f4f4f);
-//                                border: 1px solid #333333;
-//                                border-style: none;
-//                                border-radius: 3px;
-//                                padding: 1px 23px 1px 3px;
-//                                min-width: 6em;
-//                                color: #ffffff;
-//                                }
-//                                QComboBox QAbstractView::hover{
-//                                selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-//                                stop: 0 #6d6e6e,
-//                                stop: 0.01 #2e6dac,
-//                                stop: 0.5 #4b81b8,
-//                                stop: 0.99 #2e6dac,
-//                                stop: 1.0 #6d6e6e);
-//                                }
-//                                QComboBox QAbstractView{
-//                                background-color: #4f4f4f;
-//                                color: #999999;
-//                                selection-background-color: #999999;
-//                                selection-color: #4f4f4f;
-//                                }
-//                                QComboBox::drop-down{
-//                                     subcontrol-origin: padding;
-//                                     subcontrol-position: top right;
-//                                     color: white;
-//                                     width:15px;
-//                                    height: 15px;
-//                                     border-left-color: red;
-//                                     border-top-right-radius: 3px; /* same radius as the QComboBox */
-//                                     border-bottom-right-radius: 3px;
-//                                     padding-left: 10px;
-//                                     border-left-width: 0px;
-//                                     border-left-style: solid; /* just a single line */
-//                                 }
-//                                QComboBox::down-arrow {
-//                                width: 14px;
-//                                height: 14px;
-//                                display: block;
-//                                content: '+';
-//                                position: absolute;
-//                                left: 0;
-//                                top: 0;
-//                                }
+                                "QLineEdit { "
+                                    "selection-background-color: #2d7f98; "
+                                "}"
                                 );
             _theme="white";
             break;
@@ -363,6 +278,7 @@ void MainWindow::InitComponents(){
     ui->ButtonGoToMyProfile->setVisible(false);
     //ui->ScrollAreaForm->setVisible(false);
     ui->LabelNick->setVisible(false);
+    ui->LabelNick->setStyleSheet("color: #1657d9; font-weight: bold;");
     ui->line->setVisible(false);
     ui->LabelProfileVisibility->setVisible(false);
     ui->ScrollAreaProfileInfo->setVisible(false);
@@ -564,7 +480,8 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
                 ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                 break;
         }
-    ui->LabelProfileUrl->setText(Aprofile.GetProfileurl());
+    ui->LabelProfileUrl->setText("<a href=\""+Aprofile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+Aprofile.GetProfileurl()+"</span></a>");
+    ui->LabelProfileUrl->setTextFormat(Qt::RichText);
     ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(Levels.GetLevel())));
     ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(Aprofile.GetRealname()));
     ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(Aprofile.GetTimecreated().toString("yyyy.MM.dd")));
@@ -572,15 +489,15 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
     switch (Aprofile.GetCommunityvisibilitystate()) {
         case 1:
             ui->LabelProfileVisibility->setText(tr("Скрытый"));
-            ui->LabelProfileVisibility->setStyleSheet("color:red");
+            ui->LabelProfileVisibility->setStyleSheet("color: #6e0e0e");
             break;
         case 3:
             ui->LabelProfileVisibility->setText(tr("Публичный"));
-            ui->LabelProfileVisibility->setStyleSheet("color:green");
+            ui->LabelProfileVisibility->setStyleSheet("color: #0e6e11");
             break;
         case 8:
             ui->LabelProfileVisibility->setText(tr("Для друзей"));
-            ui->LabelProfileVisibility->setStyleSheet("color:yellow");
+            ui->LabelProfileVisibility->setStyleSheet("color: #6c6e0e");
             break;
         default:
             ui->LabelProfileVisibility->setText(tr("Неизвестно"));
@@ -588,10 +505,10 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
         }
     if(Bans.GetVACBanned()){
         ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(Bans.GetNumberOfVACBans())).arg(QString::number(Bans.GetDaysSinceLastBan())));
-        ui->LabelBans->setStyleSheet("color:red");
+        ui->LabelBans->setStyleSheet("color: #6e0e0e");
     } else {
         ui->LabelBans->setText(tr("VAC баны: Отсутствуют"));
-        ui->LabelBans->setStyleSheet("color:green");
+        ui->LabelBans->setStyleSheet("color: #0e6e11");
     }
 
     QNetworkAccessManager imagemanager;
@@ -624,7 +541,6 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
     ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=Aprofile.GetSteamid());
     ui->ButtonStatistics->setEnabled(true);
     ui->ButtonGoToMyProfile->setEnabled((_setting.GetMyProfile()!="none")&&(_setting.GetMyProfile()!=Aprofile.GetSteamid()));
-
 }
 void MainWindow::on_ButtonBack_clicked(){
     if(_currentBufferProfile>1){

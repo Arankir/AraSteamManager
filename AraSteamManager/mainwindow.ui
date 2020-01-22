@@ -236,14 +236,17 @@ color: rgb(26, 26, 26);</string>
               <pointsize>10</pointsize>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 102, 255);</string>
-            </property>
             <property name="text">
              <string>ProfileUrl</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::TextBrowserInteraction</set>
             </property>
            </widget>
           </item>
@@ -393,6 +396,15 @@ color: rgb(26, 26, 26);</string>
           </item>
           <item>
            <widget class="QPushButton" name="ButtonFriends">
+            <property name="styleSheet">
+             <string notr="true">QPushButton::hover { 
+                                    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                                            stop: 0 #3d8fa8, 
+                                                            stop: 0.48 #2d7f98, 
+                                                            stop: 0.52 #22748c, 
+                                                            stop: 1.0 #13657b); 
+                                } </string>
+            </property>
             <property name="text">
              <string>Friends</string>
             </property>

@@ -64,22 +64,22 @@ int ThreadFriends::Fill(){
         switch(_profiles[i].GetCommunityvisibilitystate()){
         case 1:{
             item5->setText(tr("Скрытый"));
-            item5->setTextColor(Qt::red);
+            item5->setTextColor(QColor("#6e0e0e"));
             break;
         }
         case 2:{
             item5->setText(tr("Скрытый"));
-            item5->setTextColor(Qt::red);
+            item5->setTextColor(QColor("#6e0e0e"));
             break;
         }
         case 3:{
             item5->setText(tr("Публичный"));
-            item5->setTextColor(Qt::green);
+            item5->setTextColor(QColor("#0e6e11"));
             break;
         }
         case 8:{
             item5->setText(tr("Скрытый"));
-            item5->setTextColor(Qt::red);
+            item5->setTextColor(QColor("#6e0e0e"));
             break;
         }
         }

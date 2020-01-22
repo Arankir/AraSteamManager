@@ -69,7 +69,23 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="comboBox">
+            <item>
+             <property name="text">
+              <string>123</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>12</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+           </widget>
           </item>
           <item>
            <widget class="QScrollArea" name="scrollArea_5">
@@ -746,10 +762,16 @@
           </font>
          </property>
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Иконки для этого приложения были взяты бесплатно с сайта &lt;span style=&quot; color:#55aa00;&quot;&gt;https://icons8.ru/icons&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Иконки для приложения были предоставлены сайтом &lt;a href=https://icons8.ru/icons&gt;https://icons8.ru/icons&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextBrowserInteraction</set>
          </property>
         </widget>
        </item>
@@ -1054,13 +1076,6 @@
            <widget class="QLabel" name="label_18">
             <property name="text">
              <string>Сравнить с друзьями</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>пояснения к статистике</string>
             </property>
            </widget>
           </item>
