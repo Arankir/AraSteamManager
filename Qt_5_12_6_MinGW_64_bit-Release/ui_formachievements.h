@@ -79,6 +79,7 @@ public:
     QComboBox *ComboBoxCategoriesCategory;
     QLineEdit *LineEditTitleCategory;
     QCheckBox *CheckBoxCategoryOneValue;
+    QCheckBox *CheckBoxCategoryUniqueValue;
     QPushButton *ButtonAddValueCategory;
     QScrollArea *ScrollAreaValuesCategory;
     QWidget *scrollAreaWidgetContents_5;
@@ -232,7 +233,7 @@ public:
         ScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 261, 153));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 261, 150));
         ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout->addWidget(ScrollAreaCategories);
@@ -244,7 +245,7 @@ public:
         ScrollAreaCheckCategories->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 260, 153));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 260, 150));
         ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
 
         horizontalLayout->addWidget(ScrollAreaCheckCategories);
@@ -369,6 +370,11 @@ public:
 
         verticalLayout_11->addWidget(CheckBoxCategoryOneValue);
 
+        CheckBoxCategoryUniqueValue = new QCheckBox(GroupBoxCategories);
+        CheckBoxCategoryUniqueValue->setObjectName(QString::fromUtf8("CheckBoxCategoryUniqueValue"));
+
+        verticalLayout_11->addWidget(CheckBoxCategoryUniqueValue);
+
         ButtonAddValueCategory = new QPushButton(GroupBoxCategories);
         ButtonAddValueCategory->setObjectName(QString::fromUtf8("ButtonAddValueCategory"));
 
@@ -384,7 +390,7 @@ public:
         ScrollAreaValuesCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 504, 104));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 504, 111));
         ScrollAreaValuesCategory->setWidget(scrollAreaWidgetContents_5);
 
         horizontalLayout_9->addWidget(ScrollAreaValuesCategory);
@@ -506,6 +512,7 @@ public:
 
         LineEditTitleCategory->setPlaceholderText(QApplication::translate("FormAchievements", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         CheckBoxCategoryOneValue->setText(QApplication::translate("FormAchievements", "\320\221\320\265\320\267 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\271", nullptr));
+        CheckBoxCategoryUniqueValue->setText(QApplication::translate("FormAchievements", "\320\243\320\275\320\270\320\272\320\260\320\273\321\214\320\275\321\213\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217", nullptr));
         ButtonAddValueCategory->setText(QApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265", nullptr));
         ButtonCancelCategory->setText(QApplication::translate("FormAchievements", "\320\236\321\202\320\274\320\265\320\275\320\260", nullptr));
         ButtonDeleteCategory->setText(QApplication::translate("FormAchievements", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\216", nullptr));

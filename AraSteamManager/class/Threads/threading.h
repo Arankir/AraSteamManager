@@ -21,6 +21,7 @@ public slots:
     int AddThreadAchievements(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
     int AddThreadFriends(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friendss);
     int AddThreadStatistics(SGames games, QString id);
+    int AddThreadFriendAchievements(QTableWidget *AtableWidgetAchievements, SAchievements Aachievement, int Acol, int AcolumnAppid);
 };
 
 #endif // THREADING_H

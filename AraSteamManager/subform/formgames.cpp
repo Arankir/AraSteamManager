@@ -2,13 +2,14 @@
 #include "ui_formgames.h"
 #define Constants {
 const int c_tableColumnAppid=0;
-const int c_tableColumnIcon=1;
-const int c_tableColumnName=2;
-const int c_tableColumnProgress=3;
-const int c_tableColumnAchievement=4;
-const int c_tableColumnFavorite=5;
-const int c_tableColumnHide=6;
-const int c_tableColumnCount=7;
+const int c_tableColumnIndex=1;
+const int c_tableColumnIcon=2;
+const int c_tableColumnName=3;
+const int c_tableColumnProgress=4;
+//const int c_tableColumnAchievement=5;
+//const int c_tableColumnFavorite=6;
+//const int c_tableColumnHide=7;
+const int c_tableColumnCount=5;
 #define ConstantsEnd }
 
 FormGames::FormGames(QString Aid, SGames Agames, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
@@ -44,48 +45,54 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnAchievement,new QTableWidgetItem(tr("Достижения")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnFavorite,new QTableWidgetItem(tr("Избранное")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnHide,new QTableWidgetItem(tr("Скрыть")));
+//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnAchievement,new QTableWidgetItem(tr("Достижения")));
+//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnFavorite,new QTableWidgetItem(tr("Избранное")));
+//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnHide,new QTableWidgetItem(tr("Скрыть")));
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
+    ui->GroupBoxGame->setVisible(false);
     ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
+    ui->ButtonAchievements->setText(tr("Достижения"));
+    ui->ButtonFavorite->setText("");
+    ui->ButtonHide->setText("");
+    ui->ButtonFavorite->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
+    ui->ButtonHide->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
     //iAchievement = ;
-    QIcon iFavorite = QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png");
-    QIcon iHide = QIcon(":/"+_theme+"/program/"+_theme+"/hide.png");
+//    QIcon iFavorite = QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png");
+//    QIcon iHide = QIcon(":/"+_theme+"/program/"+_theme+"/hide.png");
     ui->TableWidgetGames->setRowCount(_games.count());
     for (int i=0;i<_games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
-        QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
-        button1->setMinimumSize(QSize(25,25));
-        button1->setObjectName("ButtonAchievements"+QString::number(_games[i].GetAppid()));
-        button1->AddData("NumberGame",QString::number(i));
-        connect(button1,&QButtonWithData::pressed,this,&FormGames::AchievementsClicked);
-        ui->TableWidgetGames->setCellWidget(i,c_tableColumnAchievement,button1);
+//        QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
+//        button1->setMinimumSize(QSize(25,25));
+//        button1->setObjectName("ButtonAchievements"+QString::number(_games[i].GetAppid()));
+//        button1->AddData("NumberGame",QString::number(i));
+//        connect(button1,&QButtonWithData::pressed,this,&FormGames::AchievementsClicked);
+//        ui->TableWidgetGames->setCellWidget(i,c_tableColumnAchievement,button1);
 
-        QButtonWithData *button2 = new QButtonWithData("");
-        //проверка всего на избранное
-        button2->setIcon(iFavorite);
-        button2->setMinimumSize(QSize(25,25));
-        connect(button2,&QButtonWithData::pressed,this,&FormGames::FavoritesClicked);
-        button2->setObjectName("ButtonFavorites"+QString::number(i));
-        button2->AddData("NumberGame",QString::number(i));
-        ui->TableWidgetGames->setCellWidget(i,c_tableColumnFavorite,button2);
+//        QButtonWithData *button2 = new QButtonWithData("");
+//        //проверка всего на избранное
+//        button2->setIcon(iFavorite);
+//        button2->setMinimumSize(QSize(25,25));
+//        connect(button2,&QButtonWithData::pressed,this,&FormGames::FavoritesClicked);
+//        button2->setObjectName("ButtonFavorites"+QString::number(i));
+//        button2->AddData("NumberGame",QString::number(i));
+//        ui->TableWidgetGames->setCellWidget(i,c_tableColumnFavorite,button2);
 
-        QButtonWithData *button3 = new QButtonWithData("");
-        button3->setIcon(iHide);
-        button3->setMinimumSize(QSize(25,25));
-        connect(button3,&QButtonWithData::pressed,this,&FormGames::HideClicked);
-        button3->setObjectName("ButtonHide"+QString::number(i));
-        button3->AddData("NumberGame",QString::number(i));
-        ui->TableWidgetGames->setCellWidget(i,c_tableColumnHide,button3);
+//        QButtonWithData *button3 = new QButtonWithData("");
+//        button3->setIcon(iHide);
+//        button3->setMinimumSize(QSize(25,25));
+//        connect(button3,&QButtonWithData::pressed,this,&FormGames::HideClicked);
+//        button3->setObjectName("ButtonHide"+QString::number(i));
+//        button3->AddData("NumberGame",QString::number(i));
+//        ui->TableWidgetGames->setCellWidget(i,c_tableColumnHide,button3);
 
         QProgressBar *pb = new QProgressBar;
         ui->TableWidgetGames->setCellWidget(i,c_tableColumnProgress,pb);
-        emit s_achievementsLoaded(i,0);
+//        emit s_achievementsLoaded(i,0);
     }
     ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon,33);
     ui->TableWidgetGames->setColumnWidth(c_tableColumnName,300);
@@ -97,6 +104,7 @@ void FormGames::ProgressLoading(int Aprogress,int Arow){
 }
 void FormGames::OnFinish(){
     ui->TableWidgetGames->setColumnHidden(c_tableColumnAppid,true);
+    ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex,true);
     ui->TableWidgetGames->resizeColumnsToContents();
     QFile fileHide1;
     fileHide1.setFileName("Files/Hide/"+_id+".txt");
@@ -143,7 +151,7 @@ void FormGames::OnFinish(){
             if(hideList[j].toInt()==_games[i].GetAppid()){
                 ui->TableWidgetGames->setRowHidden(i,true);
                 ui->TableWidgetGames->item(i,c_tableColumnName)->setTextColor(Qt::red);
-                static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,c_tableColumnHide))->setEnabled(false);
+                //static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,c_tableColumnHide))->setEnabled(false);
                 hideList.removeAt(j);
                 break;
             }
@@ -183,7 +191,7 @@ void FormGames::OnResultAchievements(SAchievementsPlayer Aachievements){
         pb->setValue(val);
     } else {
         pb->setValue(0);
-        static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(Aachievements.GetIndex(),c_tableColumnAchievement))->setEnabled(false);
+        //static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(Aachievements.GetIndex(),c_tableColumnAchievement))->setEnabled(false);
     }
     ui->TableWidgetGames->setItem(Aachievements.GetIndex(),c_tableColumnProgress,new QTableWidgetItem(pb->text().rightJustified(4,'0')));
     _achievements[Aachievements.GetIndex()]=Aachievements;
@@ -258,9 +266,10 @@ void FormGames::on_ButtonFind_clicked(){
 
 #define Functions {
 void FormGames::on_TableWidgetGames_cellDoubleClicked(int row, int){
-    this->findChild<QButtonWithData*>("ButtonAchievements"+ui->TableWidgetGames->item(row,0)->text())->click();
+    on_ButtonAchievements_clicked();
+    //this->findChild<QButtonWithData*>("ButtonAchievements"+ui->TableWidgetGames->item(row,0)->text())->click();
 }
-void FormGames::AchievementsClicked(){
+/*void FormGames::AchievementsClicked(){
     QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
     int index=btn->GetData(0).toInt();
     QEventLoop loop;
@@ -316,11 +325,78 @@ void FormGames::HideClicked(){
         if(_games[gamei].GetName()==ui->TableWidgetGames->item(i,c_tableColumnName)->text()){
             ui->TableWidgetGames->item(i,c_tableColumnName)->setTextColor(Qt::red);
             ui->TableWidgetGames->setRowHidden(i,true);
-            ui->TableWidgetGames->setCurrentCell(i+1,c_tableColumnAchievement);
+            //ui->TableWidgetGames->setCurrentCell(i+1,c_tableColumnAchievement);
             break;
         }
     }
     btn->setEnabled(false);
+}*/
+
+void FormGames::on_TableWidgetGames_cellClicked(int row, int){
+    _selectedGame=ui->TableWidgetGames->item(row,c_tableColumnAppid)->text();
+    _selectedIndex=ui->TableWidgetGames->item(row,c_tableColumnIndex)->text();
+    ui->LabelIconGame->setPixmap(*static_cast<QLabel*>(ui->TableWidgetGames->cellWidget(row,c_tableColumnIcon))->pixmap());
+    ui->LabelTitleGame->setText(ui->TableWidgetGames->item(row,c_tableColumnName)->text());
+    ui->ProgressBarSelectedGame->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(row,c_tableColumnProgress))->maximum());
+    ui->ProgressBarSelectedGame->setValue(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(row,c_tableColumnProgress))->value());
+    ui->GroupBoxGame->setVisible(true);
+}
+void FormGames::on_ButtonAchievements_clicked(){
+    QEventLoop loop;
+    SAchievementsPercentage Percentage(_selectedGame);
+    connect(&Percentage, SIGNAL(s_finished()), &loop, SLOT(quit()));
+    loop.exec();
+    disconnect(&Percentage, SIGNAL(s_finished()), &loop, SLOT(quit()));
+    if(Percentage.GetCount()==0){
+        QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
+    } else {
+        AddAchievements(_selectedIndex.toInt());
+    }
+}
+void FormGames::on_ButtonFavorite_clicked(){
+    QJsonObject newValue;
+    newValue["id"]=QString::number(_games[_selectedIndex.toInt()].GetAppid());
+    newValue["name"]=_games[_selectedIndex.toInt()].GetName();
+    newValue["icon"]=_games[_selectedIndex.toInt()].GetImg_icon_url();
+    newValue["idUser"]=_id;
+    if(_favorites.AddValue(newValue,true)){
+        //Категория добавилась
+    } else {
+        //Категория уже есть (удалилась)
+    }
+    //Поменять картинку
+}
+void FormGames::on_ButtonHide_clicked(){
+    QString save="";
+    QMessageBox messageBox(QMessageBox::Question,
+                           tr("Внимание!"),
+                           tr("Вы уверены, что хотите скрыть эту игру?"));
+    QAbstractButton *btnProfile = messageBox.addButton(tr("Да, но только для этого аккаунта"),QMessageBox::YesRole);
+    QAbstractButton *btnAll = messageBox.addButton(tr("Да, для всех аккаунтов"),QMessageBox::YesRole);
+    messageBox.addButton(tr("Отмена"),QMessageBox::NoRole);
+    messageBox.exec();
+    if(messageBox.clickedButton()==btnProfile){
+         save="Files/Hide/"+_id+".txt";
+    } else if(messageBox.clickedButton()==btnAll){
+         save="Files/Hide/All.txt";
+    } else return;
+
+    _setting.CreateFile(save);
+    QFile hide(save);
+    hide.open(QIODevice::Append | QIODevice::Text);
+    QTextStream writeStream(&hide);
+    writeStream <<_games[_selectedIndex.toInt()].GetAppid()<<(save=="Files/Hide/All.txt"?"%%"
+                                                            +_games[_selectedIndex.toInt()].GetImg_icon_url()+"%%"
+                                                            +_games[_selectedIndex.toInt()].GetName():"")<<"\n";
+    hide.close();
+    for (int i=0;i<_games.size();i++) {
+        if(_games[_selectedIndex.toInt()].GetName()==ui->TableWidgetGames->item(i,c_tableColumnName)->text()){
+            ui->TableWidgetGames->item(i,c_tableColumnName)->setTextColor(Qt::red);
+            ui->TableWidgetGames->setRowHidden(i,true);
+            //ui->TableWidgetGames->setCurrentCell(i+1,c_tableColumnAchievement);
+            break;
+        }
+    }
 }
 #define FunctionsEnd }
 

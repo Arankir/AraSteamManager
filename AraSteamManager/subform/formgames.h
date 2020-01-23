@@ -43,18 +43,21 @@ private slots:
     void OnResultAchievements(SAchievementsPlayer ach);
     void closeEvent(QCloseEvent *event);
 
-    void AchievementsClicked();
-    void FavoritesClicked();
-    void HideClicked();
+    //void AchievementsClicked();
+    //void FavoritesClicked();
+    //void HideClicked();
     void AddAchievements(int index);
     void RemoveAchievements(int index);
     void ContainerAchievementsClose();
 
     void on_LineEditGame_textChanged(const QString);
-
     void on_ButtonFind_clicked();
 
     void on_TableWidgetGames_cellDoubleClicked(int row, int column);
+    void on_TableWidgetGames_cellClicked(int row, int column);
+    void on_ButtonAchievements_clicked();
+    void on_ButtonFavorite_clicked();
+    void on_ButtonHide_clicked();
 
 private:
     Ui::FormGames *ui;
@@ -68,6 +71,8 @@ private:
     QString _theme="white";
     int _achievementsCount=0;
     int _load=0;
+    QString _selectedGame;
+    QString _selectedIndex;
 
     QVector<ImageRequest*> _request;
     int _numRequests=0;

@@ -12,6 +12,52 @@ void ThreadAchievements::Set(SAchievements Aachievements, QLabel *AlabelTotalPer
     _TableWidgetCompareAchievements=AtableWidgetCompareAchievements;
 }
 
+void ThreadAchievements::SetFriend(QTableWidget *AtableWidgetAchievements, SAchievements Aachievement, int Acol, int AcolumnAppid){
+    _achievement = Aachievement;
+    _col = Acol;
+    _columnAppid = AcolumnAppid;
+    _TableWidgetCompareAchievements=AtableWidgetAchievements;
+}
+
+bool ThreadAchievements::AddFriend(){
+    int totalReach=0;
+    int totalNotReach=0;
+    for(int i=2;i<_TableWidgetCompareAchievements->rowCount();i++){
+        int j=0;
+        bool accept=false;
+        for(;j<_achievement.GetCount();j++){
+            if(_achievement.GetApiname(j)==_TableWidgetCompareAchievements->item(i,_columnAppid)->text()){
+                accept=true;
+                break;
+                }
+        }
+        if(accept){
+            QTableWidgetItem *item5;
+            if(_achievement.GetAchieved(j)==1){
+                item5 = new QTableWidgetItem(tr("Получено %1").arg(_achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm")));
+                item5->setToolTip(_achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm"));
+                totalReach++;
+                } else {
+                item5 = new QTableWidgetItem(tr("Не получено"));
+                totalNotReach++;
+                }
+            item5->setTextAlignment(Qt::AlignCenter);
+            _TableWidgetCompareAchievements->setItem(i,_col,item5);
+        }
+        }
+    if((totalReach==0)&&(totalNotReach==0)){
+        _TableWidgetCompareAchievements->setItem(1,_col, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не")).arg(tr("публичный"))));
+        emit s_is_public(false,_col);
+        } else {
+        _TableWidgetCompareAchievements->setItem(1,_col, new QTableWidgetItem(QString("%1/%2\n%3%").arg(QString::number(totalReach))
+                                                                             .arg(QString::number(totalReach+totalNotReach))
+                                                                             .arg(QString::number(100.0*totalReach/(totalReach+totalNotReach)))));
+        emit s_is_public(true,_col);
+    }
+    emit s_finished();
+    return true;
+}
+
 int ThreadAchievements::Fill(){
     int totalr=0;
     int totalnr=0;

@@ -60,6 +60,21 @@ int Threading::AddThreadStatistics(SGames Agames, QString Aid){
     return 1;
 }
 
+int Threading::AddThreadFriendAchievements(QTableWidget *AtableWidgetAchievements, SAchievements Aachievement, int Acol, int AcolumnAppid){
+    ThreadAchievements *Achievements = new ThreadAchievements;
+    QThread *thread = new QThread;
+    Achievements->moveToThread(thread);
+    Achievements->SetFriend(AtableWidgetAchievements, Aachievement, Acol, AcolumnAppid);
+    connect(thread,SIGNAL(started()),Achievements,SLOT(AddFriend()));
+    connect(Achievements,SIGNAL(s_finished()),thread,SLOT(quit()));
+    connect(Achievements,SIGNAL(s_finished()),Achievements,SLOT(deleteLater()));
+    connect(thread,SIGNAL(finished()),thread,SLOT(deleteLater()));
+    //connect(Achievements,SIGNAL(s_progress(int,int)),this->parent(),SLOT(ProgressLoading(int,int)));
+    connect(Achievements,SIGNAL(s_is_public(bool,int)),this->parent(),SLOT(CreateCompareProfileFilter(bool,int)));
+    thread->start();
+    return 1;
+}
+
 int Threading::AddThreadAchievements(SAchievements AAchievements, QLabel *ALabelTotalPersent, QTableWidget *AtableWidgetAchievements, QLabel *ALabelTotalPersentCompare, QTableWidget *AtableWidgetCompareAchievements){
     ThreadAchievements *Achievements = new ThreadAchievements;
     QThread *thread = new QThread;

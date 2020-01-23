@@ -12,7 +12,8 @@ void ThreadGames::Set(QTableWidget *AtableWidgetGames, QVector<SGame> Agames){
 int ThreadGames::Fill(){
     for(int i=0;i<_games.size();i++){
         _TableWidgetGames->setItem(i,0,new QTableWidgetItem(QString::number(_games[i].GetAppid())));
-        _TableWidgetGames->setItem(i,2,new QTableWidgetItem(_games[i].GetName()));
+        _TableWidgetGames->setItem(i,1,new QTableWidgetItem(QString::number(i)));
+        _TableWidgetGames->setItem(i,3,new QTableWidgetItem(_games[i].GetName()));
         emit s_progress(i,i);
         }
     emit s_finished();

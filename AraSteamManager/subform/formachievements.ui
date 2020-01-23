@@ -227,7 +227,7 @@
              <x>0</x>
              <y>0</y>
              <width>261</width>
-             <height>153</height>
+             <height>150</height>
             </rect>
            </property>
           </widget>
@@ -250,7 +250,7 @@
              <x>0</x>
              <y>0</y>
              <width>260</width>
-             <height>153</height>
+             <height>150</height>
             </rect>
            </property>
           </widget>
@@ -439,6 +439,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="CheckBoxCategoryUniqueValue">
+             <property name="text">
+              <string>Уникальные значения</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="ButtonAddValueCategory">
              <property name="text">
               <string>Добавить значение</string>
@@ -464,7 +471,7 @@
               <x>0</x>
               <y>0</y>
               <width>504</width>
-              <height>104</height>
+              <height>111</height>
              </rect>
             </property>
            </widget>

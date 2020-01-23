@@ -26,6 +26,8 @@
         <file>program/black/left.png</file>
         <file>program/black/right.png</file>
         <file>program/black/hide.png</file>
+        <file>program/white/reverse.png</file>
+        <file>program/black/reverse.png</file>
     </qresource>
     <qresource prefix="/white">
         <file>program/white/all.png</file>
@@ -54,6 +56,7 @@
         <file>program/white/left.png</file>
         <file>program/white/right.png</file>
         <file>program/white/hide.png</file>
+        <file>program/white/reverse.png</file>
     </qresource>
     <qresource prefix="/program">
         <file>program/apply.png</file>

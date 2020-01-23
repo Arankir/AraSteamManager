@@ -83,6 +83,7 @@ private slots:
     void on_ButtonCompareFriendsReached_clicked();
     void on_ButtonCompareFriendsNotReached_clicked();
     void on_TableWidgetCompareFriendsCellChanged(int row, int column);
+    void CreateCompareProfileFilter(bool Aaccept, int Acolumn);
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
     void closeEvent(QCloseEvent*);
@@ -121,8 +122,12 @@ private slots:
     void on_FormCategoryPositionChange(int pos, int newpos);
     void on_FormCategorySelectChange(int pos, bool select);
     void on_FormCategoryDeleting(int pos);
+    void on_FormCategoryReverse(int pos);
 
     void on_CheckBoxFavorites_stateChanged(int arg1);
+
+    void on_CheckBoxCategoryUniqueValue_stateChanged(int arg1);
+    void HideCheckedAchievement(QTableWidgetItem *item);
 
 private:
     Ui::FormAchievements *ui;

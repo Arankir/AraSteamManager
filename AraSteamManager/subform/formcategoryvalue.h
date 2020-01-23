@@ -40,6 +40,7 @@ private slots:
     void on_ButtonUnSelect_clicked();
     void on_ButtonDelete_clicked();
     void on_LineEditTitle_textChanged(const QString &arg1);
+    void on_ButtonReverse_clicked();
 
 signals:
     void s_valuechange(int pos, QString value);
@@ -47,6 +48,7 @@ signals:
     void s_positionchange(int pos, int posnew);
     void s_selectchange(int pos, bool select);
     void s_deleting(int pos);
+    void s_reverse(int pos);
 
 private:
     Ui::FormCategoryValue *ui;

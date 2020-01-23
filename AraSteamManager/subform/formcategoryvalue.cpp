@@ -18,6 +18,7 @@ FormCategoryValue::FormCategoryValue(int Apos, QWidget *parent) : QWidget(parent
     ui->ButtonSelect->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/check_visible.png"));
     ui->ButtonUnSelect->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/uncheck_visible.png"));
     ui->ButtonDelete->setIcon(QIcon(":/program/program/delete.png"));
+    ui->ButtonReverse->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/reverse.png"));
 }
 
 FormCategoryValue::~FormCategoryValue(){
@@ -68,3 +69,6 @@ bool FormCategoryValue::GetVisible(){
     return ui->CheckBoxVisible->isChecked();
 }
 
+void FormCategoryValue::on_ButtonReverse_clicked(){
+    emit s_reverse(_position);
+}

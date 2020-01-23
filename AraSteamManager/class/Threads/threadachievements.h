@@ -17,10 +17,13 @@ public:
 signals:
     void s_finished();
     void s_progress(int p, int row);
+    void s_is_public(bool Apublic, int Acolumn);
 
 public slots:
     int Fill();
     void Set(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
+    bool AddFriend();
+    void SetFriend(QTableWidget *TableWidgetAchievements, SAchievements Aachievement, int Acol, int AcolumnAppid);
 
 private:
     int num;
@@ -29,6 +32,10 @@ private:
     QTableWidget *_TableWidgetAchievements;
     QLabel *_LabelTotalPersentCompare;
     QTableWidget *_TableWidgetCompareAchievements;
+
+    SAchievements _achievement;
+    int _col;
+    int _columnAppid;
 };
 
 #endif // THREADACHIEVEMENTS_H
