@@ -33,3 +33,9 @@ SGame & SGame::operator=(const SGame & Agame) {
     _numberPlayers=Agame._numberPlayers;
     return *this;
 }
+
+const bool &SGame::operator<(const SGame &Agame){
+    static const bool b=_game.value("name").toString().toLower()<Agame._game.value("name").toString().toLower();
+    qDebug()<<_game.value("name").toString().toLower()<<Agame._game.value("name").toString().toLower();
+    return b;
+}

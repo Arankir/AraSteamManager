@@ -21,7 +21,7 @@ public:
     void SetIndex(int AIndex) {_index=AIndex;}
     SGame GetGame(int index) {return SGame(_games[index].toObject());}
     int GetAppid(int index) {return _games[index].toObject().value("appid").toInt();}
-    QString GetName(int index) {return _games[index].toObject().value("name").toString();}
+    QString GetName(int index) const {return _games[index].toObject().value("name").toString();}
     int GetPlaytime_2weeks(int index) {return _games[index].toObject().value("playtime_2weeks").toInt();}
     int GetPlaytime_forever(int index) {return _games[index].toObject().value("playtime_forever").toInt();}
     QString GetImg_icon_url(int index) {return _games[index].toObject().value("img_icon_url").toString();}

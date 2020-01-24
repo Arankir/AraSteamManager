@@ -30,6 +30,7 @@ public:
     QString GetNumberPlayers(bool hardreload);
     SGame(const SGame &);
     SGame & operator=(const SGame & game);
+    const bool &operator<(const SGame & game);
 
 signals:
 

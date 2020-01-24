@@ -12,6 +12,7 @@
 #include <class/steamapi/Sachievements.h>
 #include <class/Threads/threading.h>
 #include <subwidget/qbuttonwithdata.h>
+#include <QList>
 
 namespace Ui {
 class FormGames;

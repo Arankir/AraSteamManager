@@ -16,7 +16,10 @@ FormGames::FormGames(QString Aid, SGames Agames, QWidget *parent) :    QWidget(p
     ui->setupUi(this);
     _id=Aid;
     SGames game=Agames;
-    for (int i=0;i<game.GetCount();_games.push_back(game.GetGame(i++)));
+    std::list<SGame> list;
+    for (int i=0;i<game.GetCount();list.push_back(game.GetGame(i++)));
+    list.sort();
+    _games=QVector<SGame>::fromList(QList<SGame>::fromStdList(list));
     switch(_setting.GetTheme()){
         case 1:
             _theme="white";
@@ -31,15 +34,15 @@ FormGames::FormGames(QString Aid, SGames Agames, QWidget *parent) :    QWidget(p
 
 #define Init {
 void FormGames::InitComponents(){
-    for (int i=0; i < _games.size()-1; i++) {
-        for (int j=0; j < _games.size()-i-1; j++) {
-            if (_games[j].GetName() > _games[j+1].GetName()) {
-                SGame temp = _games[j];
-                _games[j] = _games[j+1];
-                _games[j+1] = temp;
-            }
-        }
-    }
+//    for (int i=0; i < _games.size()-1; i++) {
+//        for (int j=0; j < _games.size()-i-1; j++) {
+//            if (_games[j].GetName() > _games[j+1].GetName()) {
+//                SGame temp = _games[j];
+//                _games[j] = _games[j+1];
+//                _games[j+1] = temp;
+//            }
+//        }
+//    }
     _favorites.SetPath("Files/Favorites/Games.json","Games");
     ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
