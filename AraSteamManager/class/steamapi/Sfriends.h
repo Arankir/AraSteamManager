@@ -10,10 +10,35 @@
 #include <QTcpSocket>
 #include <QObject>
 #include <QEventLoop>
-#include <class/steamapi/Sfriend.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/settings.h>
 #include <class/statusvalue.h>
+#include <QObject>
+#include <QDateTime>
+#include <QJsonObject>
+#include <QTextCodec>
+
+class SFriend : public QObject
+{
+    Q_OBJECT
+public:
+    explicit SFriend(QJsonObject ObjFriend, QObject *parent = nullptr);
+    SFriend();
+    void Set(QJsonObject ObjFriend);
+    QString GetSteamid() {return _friend.value("steamid").toString();}
+    QString GetRelationship() {return _friend.value("relationship").toString();}
+    QDateTime GetFriend_since() {return QDateTime::fromSecsSinceEpoch(_friend.value("friend_since").toInt(),Qt::LocalTime);}
+    SFriend(const SFriend &);
+    SFriend & operator=(const SFriend &Afriend);
+    const bool &operator<(const SFriend &Afriend);
+
+signals:
+
+public slots:
+
+private:
+    QJsonObject _friend;
+};
 
 class SFriends : public QObject
 {
@@ -25,18 +50,16 @@ public:
     ~SFriends();
     void Set(QString id, bool parallel);
     void Set(QJsonDocument DocFriends);
-    SFriend GetFriend(int index) {return SFriend(_friends[index].toObject());}
-    QString GetSteamid(int index) {return _friends[index].toObject().value("steamid").toString();}
-    QString GetRelationship(int index) {return _friends[index].toObject().value("relationship").toString();}
-    QDateTime GetFriend_since(int index) {return QDateTime::fromSecsSinceEpoch(_friends[index].toObject().value("friend_since").toInt(),Qt::LocalTime);}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
     int GetCount() {return _friends.size();}
-    SProfile GetProfiles();
+    SProfiles GetProfiles();
     void Update(bool parallel);
     void Clear();
+    void Sort();
     SFriends(const SFriends &);
     SFriends & operator=(const SFriends & friends);
+    SFriend &operator[](const int &index);
 
 signals:
     void s_finished(SFriends*);
@@ -51,7 +74,7 @@ private:
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _id;
-    QJsonArray _friends;
+    QVector<SFriend> _friends;
 };
 
 #endif // SFRIENDS_H

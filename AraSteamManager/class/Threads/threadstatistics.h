@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <class/steamapi/Sgames.h>
-#include <class/steamapi/Sachievementsplayer.h>
+#include <class/steamapi/Sachievements.h>
 #include <class/imagerequest.h>
 #include <QEventLoop>
 

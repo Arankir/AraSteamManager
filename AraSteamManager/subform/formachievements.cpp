@@ -322,12 +322,12 @@ void FormAchievements::OnFinish(){
     int j=0;
     ui->TableWidgetCompareAchievements->resizeRowsToContents();
     for (int i=0;i<_achievements.GetCount();i++) {
-            QString achievementIcon=_achievements.GetIcon(i).mid(66,_achievements.GetIcon(i).length());
+            QString achievementIcon=_achievements[i].GetIcon().mid(66,_achievements[i].GetIcon().length());
             QString path="images/achievements/"+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
-            if(_achievements.GetDisplayname(i)!=""){
+            if(_achievements[i].GetDisplayname()!=""){
                 if(!QFile::exists(path)){
                     if(_numRequests<500){
-                            ImageRequest *image = new ImageRequest(_achievements.GetIcon(i),j,path,true);
+                            ImageRequest *image = new ImageRequest(_achievements[i].GetIcon(),j,path,true);
                             connect(image,&ImageRequest::s_finished,this,&FormAchievements::OnResultImage);
                             _request.append(image);
                             _numRequests++;
@@ -367,11 +367,11 @@ void FormAchievements::OnResultImage(ImageRequest *Aimage){
     ui->TableWidgetCompareAchievements->resizeRowToContents(Aimage->GetRow()+2);
     ui->TableWidgetAchievements->resizeColumnToContents(c_tableAchievementColumnIcon);
     if(_numRequests==500&&_numNow<_achievements.GetCount()){
-        QString achievementIcon=_achievements.GetIcon(_numNow).mid(66,_achievements.GetIcon(_numNow).length());
+        QString achievementIcon=_achievements[_numNow].GetIcon().mid(66,_achievements[_numNow].GetIcon().length());
         QString path="images/achievements/"+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
         while (QFile::exists(path))
             _numNow++;
-        Aimage->LoadImage(_achievements.GetIcon(_numNow),_numNow,path,true);
+        Aimage->LoadImage(_achievements[_numNow].GetIcon(),_numNow,path,true);
         _numNow++;
     } else {
         disconnect(Aimage,&ImageRequest::s_finished,this,&FormAchievements::OnResultImage);
@@ -443,7 +443,7 @@ void FormAchievements::LoadingCompare(){
 
 
     SFriends frien(_id,false);
-    SProfile profiless = frien.GetProfiles();
+    SProfiles profiless = frien.GetProfiles();
     _friendsCount=profiless.GetCount();
     ui->TableWidgetCompareFriends->setColumnCount(_friendsCount+2);
     for (int i=0;i<_friendsCount;i++) {
@@ -767,16 +767,16 @@ bool FormAchievements::ProfileIsPublic(SAchievements Aachievement, int Acol){
         int j=0;
         bool accept=false;
         for(;j<Aachievement.GetCount();j++){
-            if(Aachievement.GetApiname(j)==ui->TableWidgetCompareAchievements->item(i,c_tableAchievementColumnAppid)->text()){
+            if(Aachievement[j].GetApiname()==ui->TableWidgetCompareAchievements->item(i,c_tableAchievementColumnAppid)->text()){
                 accept=true;
                 break;
                 }
         }
         if(accept){
             QTableWidgetItem *item5;
-            if(Aachievement.GetAchieved(j)==1){
-                item5 = new QTableWidgetItem(tr("Получено %1").arg(Aachievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm")));
-                item5->setToolTip(Aachievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm"));
+            if(Aachievement[j].GetAchieved()==1){
+                item5 = new QTableWidgetItem(tr("Получено %1").arg(Aachievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm")));
+                item5->setToolTip(Aachievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm"));
                 totalReach++;
                 } else {
                 item5 = new QTableWidgetItem(tr("Не получено"));
@@ -866,9 +866,9 @@ void FormAchievements::FavoritesClicked(){
     QJsonObject newValue;
     gameO["id"]=_game.GetAppid();
     gameO["name"]=_game.GetName();
-    newValue["id"]=_achievements.GetApiname(index);
-    newValue["title"]=_achievements.GetDisplayname(index);
-    newValue["description"]=_achievements.GetDescription(index);
+    newValue["id"]=_achievements[index].GetApiname();
+    newValue["title"]=_achievements[index].GetDisplayname();
+    newValue["description"]=_achievements[index].GetDescription();
 
     if(_favorites.AddValue(gameO,newValue,true)){
         //Категория добавилась
@@ -1338,7 +1338,7 @@ void FormAchievements::on_CheckBoxFavorites_stateChanged(int arg1){
             for (int i=0;i<ui->TableWidgetAchievements->rowCount();i++){
                 bool accept=false;
                 for (int j=0;j<val.size();j++) {
-                    if(val[j].toObject().value("id").toString()==_achievements.GetApiname(i)){
+                    if(val[j].toObject().value("id").toString()==_achievements[i].GetApiname()){
                         accept=true;
                         break;
                     }

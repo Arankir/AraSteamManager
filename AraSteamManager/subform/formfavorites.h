@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <class/favorites.h>
-#include <class/steamapi/Sfriend.h>
+#include <class/steamapi/Sfriends.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>

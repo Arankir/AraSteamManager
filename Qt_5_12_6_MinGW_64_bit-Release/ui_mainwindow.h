@@ -299,13 +299,6 @@ public:
 
         ButtonFriends = new QPushButton(scrollAreaWidgetContents);
         ButtonFriends->setObjectName(QString::fromUtf8("ButtonFriends"));
-        ButtonFriends->setStyleSheet(QString::fromUtf8("QPushButton::hover { \n"
-"                                    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, \n"
-"                                                            stop: 0 #3d8fa8, \n"
-"                                                            stop: 0.48 #2d7f98, \n"
-"                                                            stop: 0.52 #22748c, \n"
-"                                                            stop: 1.0 #13657b); \n"
-"                                } "));
 
         horizontalLayout->addWidget(ButtonFriends);
 

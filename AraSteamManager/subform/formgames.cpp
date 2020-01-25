@@ -17,8 +17,13 @@ FormGames::FormGames(QString Aid, SGames Agames, QWidget *parent) :    QWidget(p
     _id=Aid;
     SGames game=Agames;
     std::list<SGame> list;
-    for (int i=0;i<game.GetCount();list.push_back(game.GetGame(i++)));
-    list.sort();
+    for (int i=0;i<game.GetCount();list.push_back(game[i++]));
+    list.sort([](const SGame &s1, const SGame &s2)-> const bool {
+        if(QString::compare(s1.GetName().toLower(),s2.GetName().toLower())<0)
+            return true;
+        else
+            return false;
+    });
     _games=QVector<SGame>::fromList(QList<SGame>::fromStdList(list));
     switch(_setting.GetTheme()){
         case 1:
@@ -48,12 +53,9 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
-//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnAchievement,new QTableWidgetItem(tr("Достижения")));
-//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnFavorite,new QTableWidgetItem(tr("Избранное")));
-//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnHide,new QTableWidgetItem(tr("Скрыть")));
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
     ui->GroupBoxGame->setVisible(false);
@@ -63,39 +65,11 @@ void FormGames::InitComponents(){
     ui->ButtonHide->setText("");
     ui->ButtonFavorite->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
     ui->ButtonHide->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
-    //iAchievement = ;
-//    QIcon iFavorite = QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png");
-//    QIcon iHide = QIcon(":/"+_theme+"/program/"+_theme+"/hide.png");
     ui->TableWidgetGames->setRowCount(_games.count());
     for (int i=0;i<_games.count();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
-//        QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
-//        button1->setMinimumSize(QSize(25,25));
-//        button1->setObjectName("ButtonAchievements"+QString::number(_games[i].GetAppid()));
-//        button1->AddData("NumberGame",QString::number(i));
-//        connect(button1,&QButtonWithData::pressed,this,&FormGames::AchievementsClicked);
-//        ui->TableWidgetGames->setCellWidget(i,c_tableColumnAchievement,button1);
-
-//        QButtonWithData *button2 = new QButtonWithData("");
-//        //проверка всего на избранное
-//        button2->setIcon(iFavorite);
-//        button2->setMinimumSize(QSize(25,25));
-//        connect(button2,&QButtonWithData::pressed,this,&FormGames::FavoritesClicked);
-//        button2->setObjectName("ButtonFavorites"+QString::number(i));
-//        button2->AddData("NumberGame",QString::number(i));
-//        ui->TableWidgetGames->setCellWidget(i,c_tableColumnFavorite,button2);
-
-//        QButtonWithData *button3 = new QButtonWithData("");
-//        button3->setIcon(iHide);
-//        button3->setMinimumSize(QSize(25,25));
-//        connect(button3,&QButtonWithData::pressed,this,&FormGames::HideClicked);
-//        button3->setObjectName("ButtonHide"+QString::number(i));
-//        button3->AddData("NumberGame",QString::number(i));
-//        ui->TableWidgetGames->setCellWidget(i,c_tableColumnHide,button3);
-
         QProgressBar *pb = new QProgressBar;
         ui->TableWidgetGames->setCellWidget(i,c_tableColumnProgress,pb);
-//        emit s_achievementsLoaded(i,0);
     }
     ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon,33);
     ui->TableWidgetGames->setColumnWidth(c_tableColumnName,300);
@@ -188,7 +162,7 @@ void FormGames::OnResultAchievements(SAchievementsPlayer Aachievements){
     if(Aachievements.GetCount()>0){
         int val=0;
         for (int i=0;i<Aachievements.GetCount();i++) {
-            if(Aachievements.GetAchieved(i)==1)
+            if(Aachievements[i].GetAchieved()==1)
                 val++;
         }
         pb->setValue(val);

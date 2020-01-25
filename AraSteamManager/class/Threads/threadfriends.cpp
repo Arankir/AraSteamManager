@@ -14,7 +14,7 @@ int ThreadFriends::Fill(){
     for (int i=0;i<_friends.GetCount();i++) {
         int j;
         for (j=0;;j++) {
-            if(_profiles[i].GetSteamid()==_friends.GetSteamid(j)){
+            if(_profiles[i].GetSteamid()==_friends[j].GetSteamid()){
                 break;
             }
         }
@@ -86,7 +86,7 @@ int ThreadFriends::Fill(){
 
         _TableWidgetFriends->setItem(i,0,new QTableWidgetItem(_profiles[i].GetSteamid()));
         _TableWidgetFriends->setItem(i,2,new QTableWidgetItem(_profiles[i].GetPersonaname()));
-        _TableWidgetFriends->setItem(i,3,new QTableWidgetItem(_friends.GetFriend_since(j).toString("yyyy.MM.dd hh:mm:ss")));
+        _TableWidgetFriends->setItem(i,3,new QTableWidgetItem(_friends[j].GetFriend_since().toString("yyyy.MM.dd hh:mm:ss")));
         _TableWidgetFriends->setItem(i,4,item4);
         _TableWidgetFriends->setItem(i,5,item5);
         emit s_progress(i,i);

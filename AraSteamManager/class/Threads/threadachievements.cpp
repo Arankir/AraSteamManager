@@ -26,16 +26,16 @@ bool ThreadAchievements::AddFriend(){
         int j=0;
         bool accept=false;
         for(;j<_achievement.GetCount();j++){
-            if(_achievement.GetApiname(j)==_TableWidgetCompareAchievements->item(i,_columnAppid)->text()){
+            if(_achievement[j].GetApiname()==_TableWidgetCompareAchievements->item(i,_columnAppid)->text()){
                 accept=true;
                 break;
                 }
         }
         if(accept){
             QTableWidgetItem *item5;
-            if(_achievement.GetAchieved(j)==1){
-                item5 = new QTableWidgetItem(tr("Получено %1").arg(_achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm")));
-                item5->setToolTip(_achievement.GetUnlocktime(j).toString("yyyy.MM.dd hh:mm"));
+            if(_achievement[j].GetAchieved()==1){
+                item5 = new QTableWidgetItem(tr("Получено %1").arg(_achievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm")));
+                item5->setToolTip(_achievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm"));
                 totalReach++;
                 } else {
                 item5 = new QTableWidgetItem(tr("Не получено"));
@@ -63,18 +63,18 @@ int ThreadAchievements::Fill(){
     int totalnr=0;
     int j=0;
     for(int i=0;i<_achievements.GetCount();i++){
-        if(_achievements.GetDisplayname(i)!=""){
-            _TableWidgetAchievements->setItem(j,0,new QTableWidgetItem(_achievements.GetApiname(i)));
-            _TableWidgetCompareAchievements->setItem(j+2,0,new QTableWidgetItem(_achievements.GetApiname(i)));
-            _TableWidgetAchievements->setItem(j,2,new QTableWidgetItem(_achievements.GetDisplayname(i)));
-            _TableWidgetCompareAchievements->setItem(j+2,2,new QTableWidgetItem(_achievements.GetDisplayname(i)));
-            _TableWidgetAchievements->setItem(j,3,new QTableWidgetItem(_achievements.GetDescription(i)));
-            _TableWidgetCompareAchievements->setItem(j+2,3,new QTableWidgetItem(_achievements.GetDescription(i)));
-            _TableWidgetAchievements->setItem(j,4,new QTableWidgetItem(_achievements.GetPercent(i)<10?"0"+QString::number(_achievements.GetPercent(i))+"%":QString::number(_achievements.GetPercent(i))+"%"));
-            _TableWidgetCompareAchievements->setItem(j+2,4,new QTableWidgetItem(_achievements.GetPercent(i)<10?"0"+QString::number(_achievements.GetPercent(i))+"%":QString::number(_achievements.GetPercent(i))+"%"));
-            if(_achievements.GetAchieved(i)==1){
-                _TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(tr("Получено %1").arg(_achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
-                _TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(tr("Получено %1").arg(_achievements.GetUnlocktime(i).toString("yyyy.MM.dd hh:mm"))));
+        if(_achievements[i].GetDisplayname()!=""){
+            _TableWidgetAchievements->setItem(j,0,new QTableWidgetItem(_achievements[i].GetApiname()));
+            _TableWidgetCompareAchievements->setItem(j+2,0,new QTableWidgetItem(_achievements[i].GetApiname()));
+            _TableWidgetAchievements->setItem(j,2,new QTableWidgetItem(_achievements[i].GetDisplayname()));
+            _TableWidgetCompareAchievements->setItem(j+2,2,new QTableWidgetItem(_achievements[i].GetDisplayname()));
+            _TableWidgetAchievements->setItem(j,3,new QTableWidgetItem(_achievements[i].GetDescription()));
+            _TableWidgetCompareAchievements->setItem(j+2,3,new QTableWidgetItem(_achievements[i].GetDescription()));
+            _TableWidgetAchievements->setItem(j,4,new QTableWidgetItem(_achievements[i].GetPercent()<10?"0"+QString::number(_achievements[i].GetPercent())+"%":QString::number(_achievements[i].GetPercent())+"%"));
+            _TableWidgetCompareAchievements->setItem(j+2,4,new QTableWidgetItem(_achievements[i].GetPercent()<10?"0"+QString::number(_achievements[i].GetPercent())+"%":QString::number(_achievements[i].GetPercent())+"%"));
+            if(_achievements[i].GetAchieved()==1){
+                _TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(tr("Получено %1").arg(_achievements[i].GetUnlocktime().toString("yyyy.MM.dd hh:mm"))));
+                _TableWidgetCompareAchievements->setItem(j+2,5,new QTableWidgetItem(tr("Получено %1").arg(_achievements[i].GetUnlocktime().toString("yyyy.MM.dd hh:mm"))));
                 totalr++;
                 } else {
                 _TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(tr("Не получено")));

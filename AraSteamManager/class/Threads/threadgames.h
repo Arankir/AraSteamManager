@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QTableWidget>
-#include <class/steamapi/Sgame.h>
+#include <class/steamapi/Sgames.h>
 #include <class/imagerequest.h>
 #include <QEventLoop>
 

@@ -22,7 +22,7 @@ FormFriends::FormFriends(QString Aid, SFriends Afriends, QWidget *parent) :    Q
     ui->setupUi(this);
     _id=Aid;
     _friends=Afriends;
-    SProfile profiles = _friends.GetProfiles();
+    SProfiles profiles = _friends.GetProfiles();
     for(int i=0;i<profiles.GetCount();_profiles.push_back(profiles.GetProfile(i++)));
     switch(_setting.GetTheme()){
         case 1:
@@ -57,15 +57,16 @@ void FormFriends::InitComponents(){
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+_theme+"/program/"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID,true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon,33);
-    for (int i=0; i < _profiles.size()-1; i++) {
-        for (int j=0; j < _profiles.size()-i-1; j++) {
-            if (_profiles[j].GetPersonaname() > _profiles[j+1].GetPersonaname()) {
-                SProfile temp = _profiles[j];
-                _profiles[j] = _profiles[j+1];
-                _profiles[j+1] = temp;
-            }
-        }
-    }
+
+    std::list<SProfile> list = _profiles.toList().toStdList();
+    list.sort([](const SProfile &s1, const SProfile &s2)-> const bool {
+        if(QString::compare(s1.GetPersonaname().toLower(),s2.GetPersonaname().toLower())<0)
+            return true;
+        else
+            return false;
+    });
+    _profiles=QVector<SProfile>::fromList(QList<SProfile>::fromStdList(list));
+
     _filter.SetRow(_friends.GetCount());
     _filter.SetCol(c_filterCount);
     Threading LoadTable(this);
@@ -215,7 +216,7 @@ void FormFriends::FavoritesClicked(){
     QJsonObject newValue;
     newValue["id"]=_profiles[index].GetSteamid();
     newValue["name"]=_profiles[index].GetPersonaname();
-    newValue["added"]=_friends.GetFriend_since(index).toString("yyyy.MM.dd hh:mm:ss");
+    newValue["added"]=_friends[index].GetFriend_since().toString("yyyy.MM.dd hh:mm:ss");
     if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {

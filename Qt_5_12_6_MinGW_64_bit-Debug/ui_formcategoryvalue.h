@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formcategoryvalue.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.12.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -27,6 +27,7 @@ public:
     QLabel *LabelPosition;
     QLineEdit *LineEditTitle;
     QCheckBox *CheckBoxVisible;
+    QPushButton *ButtonReverse;
     QPushButton *ButtonUp;
     QPushButton *ButtonDown;
     QPushButton *ButtonSelect;
@@ -62,6 +63,11 @@ public:
         CheckBoxVisible->setChecked(true);
 
         horizontalLayout->addWidget(CheckBoxVisible);
+
+        ButtonReverse = new QPushButton(FormCategoryValue);
+        ButtonReverse->setObjectName(QString::fromUtf8("ButtonReverse"));
+
+        horizontalLayout->addWidget(ButtonReverse);
 
         ButtonUp = new QPushButton(FormCategoryValue);
         ButtonUp->setObjectName(QString::fromUtf8("ButtonUp"));
@@ -99,6 +105,7 @@ public:
         FormCategoryValue->setWindowTitle(QApplication::translate("FormCategoryValue", "Form", nullptr));
         LabelPosition->setText(QApplication::translate("FormCategoryValue", "Pos", nullptr));
         CheckBoxVisible->setText(QApplication::translate("FormCategoryValue", "Visible", nullptr));
+        ButtonReverse->setText(QString());
     } // retranslateUi
 
 };

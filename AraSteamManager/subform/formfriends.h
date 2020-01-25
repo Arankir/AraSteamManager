@@ -11,6 +11,7 @@
 #include <class/favorites.h>
 #include <class/filter.h>
 #include <subwidget/qbuttonwithdata.h>
+#include <QtAlgorithms>
 
 namespace Ui {
 class FormFriends;

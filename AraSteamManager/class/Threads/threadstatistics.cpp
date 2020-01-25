@@ -6,7 +6,7 @@ ThreadStatistics::ThreadStatistics(QObject *parent) : QObject(parent){
 
 int ThreadStatistics::Fill(){
     for(int i=0;i<_games.GetCount();i++){
-        SAchievementsPlayer *pl = new SAchievementsPlayer(QString::number(_games.GetAppid(i)),_id);
+        SAchievementsPlayer *pl = new SAchievementsPlayer(QString::number(_games[i].GetAppid()),_id);
         connect(pl,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         _averagePercent[i]=0.0;
     }
@@ -28,8 +28,8 @@ void ThreadStatistics::OnResultAchievements(SAchievementsPlayer Aachievement){
         _summcolumn+=Aachievement.GetCount();
         for (int i=0;i<Aachievement.GetCount();i++) {
             //помещаем данные в массивы
-            if(Aachievement.GetAchieved(i)==1){
-                QDateTime dateTime = Aachievement.GetUnlocktime(i);
+            if(Aachievement[i].GetAchieved()==1){
+                QDateTime dateTime = Aachievement[i].GetUnlocktime();
                 _times[dateTime.time().hour()]++;
                 _months[dateTime.date().month()-1]++;
                 int pos=-1;

@@ -173,7 +173,7 @@ public:
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 451, 150));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 451, 151));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setSpacing(3);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -209,8 +209,9 @@ public:
         QFont font1;
         font1.setPointSize(10);
         LabelProfileUrl->setFont(font1);
-        LabelProfileUrl->setStyleSheet(QString::fromUtf8("color: rgb(0, 102, 255);"));
         LabelProfileUrl->setWordWrap(true);
+        LabelProfileUrl->setOpenExternalLinks(true);
+        LabelProfileUrl->setTextInteractionFlags(Qt::TextBrowserInteraction);
 
         gridLayout_2->addWidget(LabelProfileUrl, 2, 1, 1, 2);
 
@@ -292,11 +293,19 @@ public:
         ButtonGames = new QPushButton(scrollAreaWidgetContents);
         ButtonGames->setObjectName(QString::fromUtf8("ButtonGames"));
         ButtonGames->setEnabled(true);
+        ButtonGames->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(ButtonGames);
 
         ButtonFriends = new QPushButton(scrollAreaWidgetContents);
         ButtonFriends->setObjectName(QString::fromUtf8("ButtonFriends"));
+        ButtonFriends->setStyleSheet(QString::fromUtf8("QPushButton::hover { \n"
+"                                    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, \n"
+"                                                            stop: 0 #3d8fa8, \n"
+"                                                            stop: 0.48 #2d7f98, \n"
+"                                                            stop: 0.52 #22748c, \n"
+"                                                            stop: 1.0 #13657b); \n"
+"                                } "));
 
         horizontalLayout->addWidget(ButtonFriends);
 
@@ -337,7 +346,7 @@ public:
         ScrollAreaForm->setWidgetResizable(true);
         FormsWidget = new QWidget();
         FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 451, 72));
+        FormsWidget->setGeometry(QRect(0, 0, 451, 68));
         ScrollAreaForm->setWidget(FormsWidget);
 
         verticalLayout->addWidget(ScrollAreaForm);
@@ -345,7 +354,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 465, 20));
+        menuBar->setGeometry(QRect(0, 0, 465, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

@@ -4,9 +4,46 @@
 #include <QMainWindow>
 #include <QTcpSocket>
 #include <QObject>
-#include <class/steamapi/Sgame.h>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QEventLoop>
+#include <QTextCodec>
+#include <QObject>
 #include <class/settings.h>
 #include <class/statusvalue.h>
+
+class SGame : public QObject
+{
+    Q_OBJECT
+public:
+    explicit SGame(QJsonObject ObjGame, QObject *parent = nullptr);
+    SGame();
+    void Set(QJsonObject ObjGame);
+    int GetAppid() {return _game.value("appid").toInt();}
+    QString GetName() const {return _game.value("name").toString();}
+    int GetPlaytime_2weeks() {return _game.value("playtime_2weeks").toInt();}
+    int GetPlaytime_forever() {return _game.value("playtime_forever").toInt();}
+    QString GetImg_icon_url() {return _game.value("img_icon_url").toString();}
+    QString GetImg_logo_url() {return _game.value("img_logo_url").toString();}
+    bool GetHas_community_visible_stats() {return _game.value("has_community_visible_stats").toBool();}
+    QString GetNumberPlayers(bool hardreload);
+    SGame(const SGame &);
+    SGame & operator=(const SGame & game);
+    const bool &operator<(const SGame & game);
+
+signals:
+
+public slots:
+
+private:
+    QJsonObject _game;
+    QString _numberPlayers="";
+    Settings _setting;
+};
 
 class SGames : public QObject
 {
@@ -19,14 +56,7 @@ public:
     void Set(QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
     void SetIndex(int AIndex) {_index=AIndex;}
-    SGame GetGame(int index) {return SGame(_games[index].toObject());}
-    int GetAppid(int index) {return _games[index].toObject().value("appid").toInt();}
-    QString GetName(int index) const {return _games[index].toObject().value("name").toString();}
-    int GetPlaytime_2weeks(int index) {return _games[index].toObject().value("playtime_2weeks").toInt();}
-    int GetPlaytime_forever(int index) {return _games[index].toObject().value("playtime_forever").toInt();}
-    QString GetImg_icon_url(int index) {return _games[index].toObject().value("img_icon_url").toString();}
-    QString GetImg_logo_url(int index) {return _games[index].toObject().value("img_logo_url").toString();}
-    bool GetHas_community_visible_stats(int index) {return _games[index].toObject().value("has_community_visible_stats").toBool();}
+    int GetAppid(int index) {return _games[index].GetAppid();}
     QString GetID() {return _id;}
     int GetIndex() {return _index;}
     StatusValue GetStatus() {return _status;}
@@ -34,8 +64,10 @@ public:
     int GetCount() {return _games.size();}
     void Update(bool parallel);
     void Clear();
+    void Sort();
     SGames( const SGames & a);
-    SGames & operator=(const SGames & profile);
+    SGames & operator=(const SGames &games);
+    SGame &operator[](const int &index);
 
 signals:
     void s_finished(SGames*);
@@ -47,7 +79,7 @@ public slots:
 private:
     QNetworkAccessManager *_manager;
     Settings _setting;
-    QJsonArray _games;
+    QVector<SGame> _games;
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _id;

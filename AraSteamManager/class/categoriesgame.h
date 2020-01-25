@@ -8,7 +8,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <class/settings.h>
-#include <class/steamapi/Sgame.h>
+#include <class/steamapi/Sgames.h>
 
 class CategoriesGame : public QObject
 {

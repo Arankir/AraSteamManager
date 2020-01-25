@@ -212,8 +212,18 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 
                                 "QLineEdit { "
                                     "selection-background-color: #2d7f98; "
-                                "}"
+                                "} "
+
+
+//                                "QScrollArea {"
+//                                    "background-color: rgba(255, 255, 255, 0); "
+//                                "} "
                                 );
+//            this->setStyleSheet(""
+//                                "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+//                                                                    "stop: 0 #23262c, "
+//                                                                    "stop: 1.0 #1e2025); "
+//                                "");
             _theme="white";
             break;
             }

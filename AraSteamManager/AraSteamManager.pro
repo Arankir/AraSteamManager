@@ -37,18 +37,9 @@ SOURCES += \
     class/filter.cpp \
     class/imagerequest.cpp \
     class/settings.cpp \
-    class/steamapi/Sachievement.cpp \
-    class/steamapi/Sachievementglobal.cpp \
-    class/steamapi/Sachievementpercentage.cpp \
-    class/steamapi/Sachievementplayer.cpp \
     class/steamapi/Sachievements.cpp \
-    class/steamapi/Sachievementsglobal.cpp \
-    class/steamapi/Sachievementspercentage.cpp \
-    class/steamapi/Sachievementsplayer.cpp \
     class/steamapi/Sbans.cpp \
-    class/steamapi/Sfriend.cpp \
     class/steamapi/Sfriends.cpp \
-    class/steamapi/Sgame.cpp \
     class/steamapi/Sgames.cpp \
     class/steamapi/Slevels.cpp \
     class/steamapi/Sprofile.cpp \
@@ -82,18 +73,9 @@ HEADERS += \
     class/imagerequest.h \
     class/settings.h \
     class/statusvalue.h \
-    class/steamapi/Sachievement.h \
-    class/steamapi/Sachievementglobal.h \
-    class/steamapi/Sachievementpercentage.h \
-    class/steamapi/Sachievementplayer.h \
     class/steamapi/Sachievements.h \
-    class/steamapi/Sachievementsglobal.h \
-    class/steamapi/Sachievementspercentage.h \
-    class/steamapi/Sachievementsplayer.h \
     class/steamapi/Sbans.h \
-    class/steamapi/Sfriend.h \
     class/steamapi/Sfriends.h \
-    class/steamapi/Sgame.h \
     class/steamapi/Sgames.h \
     class/steamapi/Slevels.h \
     class/steamapi/Sprofile.h \
