@@ -21,6 +21,7 @@
 #include <class/steamapi/Sfriends.h>
 #include <class/settings.h>
 #include <QPropertyAnimation>
+#include <QFontDatabase>
 
 namespace Ui {
 class MainWindow;

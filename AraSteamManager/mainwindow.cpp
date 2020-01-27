@@ -1,5 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+const int c_fontSize=3;
+
 //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 //qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
 //QPushButton#pushButton {
@@ -258,6 +261,14 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             qApp->setPalette(darkPalette);
             _theme="white";
     }
+
+    int id = QFontDatabase::addApplicationFont("C:/font2.ttf");
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    qApp->setFont(family);
+    QFont font = qApp->font();
+    font.setPointSize(c_fontSize);
+    font.setPixelSize(1);
+    qApp->setFont(font);
 
     InitComponents();
     if(_setting.GetStatus()==StatusValue::success){

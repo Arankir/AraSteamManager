@@ -173,7 +173,7 @@ public:
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 451, 151));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 451, 154));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_2->setSpacing(3);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -186,7 +186,6 @@ public:
         LabelNick = new QLabel(scrollAreaWidgetContents);
         LabelNick->setObjectName(QString::fromUtf8("LabelNick"));
         QFont font;
-        font.setFamily(QString::fromUtf8("Mongolian Baiti"));
         font.setPointSize(16);
         LabelNick->setFont(font);
         LabelNick->setStyleSheet(QString::fromUtf8("color:rgb(0, 170, 0)"));

@@ -157,7 +157,7 @@ color: rgb(26, 26, 26);</string>
          <x>0</x>
          <y>0</y>
          <width>451</width>
-         <height>154</height>
+         <height>151</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -185,11 +185,9 @@ color: rgb(26, 26, 26);</string>
            <widget class="QLabel" name="LabelNick">
             <property name="font">
              <font>
+              <family>Mongolian Baiti</family>
               <pointsize>16</pointsize>
              </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color:rgb(0, 170, 0)</string>
             </property>
             <property name="text">
              <string>NickName</string>
