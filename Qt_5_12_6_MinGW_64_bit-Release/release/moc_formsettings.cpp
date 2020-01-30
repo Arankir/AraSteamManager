@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormSettings_t {
     QByteArrayData data[20];
-    char stringdata0[375];
+    char stringdata0[374];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,10 +47,10 @@ QT_MOC_LITERAL(12, 208, 31), // "on_RadioButtonDarkTheme_clicked"
 QT_MOC_LITERAL(13, 240, 32), // "on_RadioButtonLightTheme_clicked"
 QT_MOC_LITERAL(14, 273, 29), // "RadiobuttonHiddenGamesClicked"
 QT_MOC_LITERAL(15, 303, 13), // "OnResultImage"
-QT_MOC_LITERAL(16, 317, 13), // "ImageRequest*"
-QT_MOC_LITERAL(17, 331, 19), // "AchievementsClicked"
-QT_MOC_LITERAL(18, 351, 11), // "HideClicked"
-QT_MOC_LITERAL(19, 363, 11) // "Retranslate"
+QT_MOC_LITERAL(16, 317, 12), // "RequestData*"
+QT_MOC_LITERAL(17, 330, 19), // "AchievementsClicked"
+QT_MOC_LITERAL(18, 350, 11), // "HideClicked"
+QT_MOC_LITERAL(19, 362, 11) // "Retranslate"
 
     },
     "FormSettings\0s_return_to_profile\0\0"
@@ -61,7 +61,7 @@ QT_MOC_LITERAL(19, 363, 11) // "Retranslate"
     "arg1\0on_RadioButtonDarkTheme_clicked\0"
     "on_RadioButtonLightTheme_clicked\0"
     "RadiobuttonHiddenGamesClicked\0"
-    "OnResultImage\0ImageRequest*\0"
+    "OnResultImage\0RequestData*\0"
     "AchievementsClicked\0HideClicked\0"
     "Retranslate"
 };
@@ -132,7 +132,7 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 6: _t->on_RadioButtonDarkTheme_clicked(); break;
         case 7: _t->on_RadioButtonLightTheme_clicked(); break;
         case 8: _t->RadiobuttonHiddenGamesClicked(); break;
-        case 9: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 9: _t->OnResultImage((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
         case 10: _t->AchievementsClicked(); break;
         case 11: _t->HideClicked(); break;
         case 12: _t->Retranslate(); break;
@@ -152,7 +152,7 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< ImageRequest* >(); break;
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
             }
             break;
         }

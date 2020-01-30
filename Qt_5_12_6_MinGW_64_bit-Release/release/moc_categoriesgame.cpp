@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CategoriesGame_t {
     QByteArrayData data[22];
-    char stringdata0[207];
+    char stringdata0[206];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,22 +43,22 @@ QT_MOC_LITERAL(8, 80, 8), // "category"
 QT_MOC_LITERAL(9, 89, 5), // "value"
 QT_MOC_LITERAL(10, 95, 11), // "GetNoValues"
 QT_MOC_LITERAL(11, 107, 7), // "GetGame"
-QT_MOC_LITERAL(12, 115, 9), // "GetCounts"
-QT_MOC_LITERAL(13, 125, 9), // "GetGameID"
-QT_MOC_LITERAL(14, 135, 14), // "DeleteCategory"
-QT_MOC_LITERAL(15, 150, 9), // "DeleteAll"
-QT_MOC_LITERAL(16, 160, 14), // "ChangeCategory"
-QT_MOC_LITERAL(17, 175, 11), // "newCategory"
-QT_MOC_LITERAL(18, 187, 3), // "Set"
-QT_MOC_LITERAL(19, 191, 5), // "SGame"
-QT_MOC_LITERAL(20, 197, 4), // "game"
-QT_MOC_LITERAL(21, 202, 4) // "Save"
+QT_MOC_LITERAL(12, 115, 8), // "GetCount"
+QT_MOC_LITERAL(13, 124, 9), // "GetGameID"
+QT_MOC_LITERAL(14, 134, 14), // "DeleteCategory"
+QT_MOC_LITERAL(15, 149, 9), // "DeleteAll"
+QT_MOC_LITERAL(16, 159, 14), // "ChangeCategory"
+QT_MOC_LITERAL(17, 174, 11), // "newCategory"
+QT_MOC_LITERAL(18, 186, 3), // "Set"
+QT_MOC_LITERAL(19, 190, 5), // "SGame"
+QT_MOC_LITERAL(20, 196, 4), // "game"
+QT_MOC_LITERAL(21, 201, 4) // "Save"
 
     },
     "CategoriesGame\0GetTitles\0QList<QString>\0"
     "\0GetTitle\0index\0GetIsNoValues\0GetValues\0"
     "category\0value\0GetNoValues\0GetGame\0"
-    "GetCounts\0GetGameID\0DeleteCategory\0"
+    "GetCount\0GetGameID\0DeleteCategory\0"
     "DeleteAll\0ChangeCategory\0newCategory\0"
     "Set\0SGame\0game\0Save"
 };
@@ -132,7 +132,7 @@ void CategoriesGame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
             if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
         case 6: { QString _r = _t->GetGame();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 7: { int _r = _t->GetCounts();
+        case 7: { int _r = _t->GetCount();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 8: { int _r = _t->GetGameID();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;

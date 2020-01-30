@@ -5,7 +5,7 @@
 #include <QTableWidget>
 #include <QStandardItemModel>
 #include <class/steamapi/Sfriends.h>
-#include <class/imagerequest.h>
+#include <class/requestdata.h>
 
 class ThreadFriends : public QObject
 {
@@ -19,11 +19,11 @@ signals:
 
 public slots:
     int Fill();
-    void Set(QTableWidget *TableWidgetFriends,QVector<SProfile> Profiles,SFriends Friends);
+    void Set(QTableWidget *TableWidgetFriends, SProfiles Profiles,SFriends Friends);
 
 private:
     SFriends _friends;
-    QVector<SProfile> _profiles;
+    SProfiles _profiles;
     QTableWidget *_TableWidgetFriends;
 };
 

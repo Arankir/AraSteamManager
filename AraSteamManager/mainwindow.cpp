@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-const int c_fontSize=3;
-
 //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 //qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
 //QPushButton#pushButton {
@@ -15,76 +13,8 @@ const int c_fontSize=3;
 //      background-url(Images/image3.png);
 // }
 
-/*
-QPushButton:hover
- background: qlineargradient
-    stop: 0 #3d8fa8,
-    stop: 0.48 #2d7f98,
-    stop: 0.52 #22748c,
-    top: 1.0 #13657b);
 
-QProgressBar
- border: 1px solid grey;
- border-radius: 7px;
-
-QProgressBar::chunk
- background-color: #CD96CD;
- border-radius: 6px;
-
-QRadioButton::hover
- background-color: qlineargradient
-    stop: 0 #3d8fa8,
-    stop: 0.48 #2d7f98,
-    stop: 0.52 #22748c,
-    top: 1.0 #13657b);
-
-QTabBar::tab
- border: 1px solid #262626;
- border-bottom-color: #6d6e6e;
- border-top-left-radius: 4px;
- border-top-right-radius: 4px;
-
-QTabBar::tab:hover
- background: #434343;
-
-QTabBar::tab:selected
- background: #434343;
- border-bottom-color: #434343;
-
-QCheckBox::hover
- background-color: qlineargradient
-    stop: 0 #3d8fa8,
-    stop: 0.48 #2d7f98,
-    stop: 0.52 #22748c,
-    top: 1.0 #13657b);
-
-QComboBox
- border: 1px solid #262626;
- border-radius: 3px;
- background: qlineargradient
-    stop:0 #797979,
-    stop:0.48 #696969,
-    stop:0.52 #5e5e5e,
-    stop:1 #4f4f4f);
- color: #ffffff;
-
-QComboBox::hover
- background-color: qlineargradient
-    stop: 0 #3d8fa8,
-    stop: 0.48 #2d7f98,
-    stop: 0.52 #22748c,
-    top: 1.0 #13657b);
-
-QComboBox:item:selected
- border: 1px solid #262626;
- background-color: qlineargradient
-    stop: 0 #3d8fa8,
-    stop: 0.48 #2d7f98,
-    stop: 0.52 #22748c,
-    top: 1.0 #13657b);
- */
-
-
+#define Init {
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
     switch(_setting.GetTheme()){
@@ -262,13 +192,13 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             _theme="white";
     }
 
-    int id = QFontDatabase::addApplicationFont("C:/font2.ttf");
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    qApp->setFont(family);
-    QFont font = qApp->font();
-    font.setPointSize(c_fontSize);
-    font.setPixelSize(1);
-    qApp->setFont(font);
+//    int id = QFontDatabase::addApplicationFont("C:/font4.otf");
+//    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+//    qApp->setFont(family);
+//    QFont font = qApp->font();
+//    font.setPointSize(c_fontSize);
+//    font.setPixelSize(1);
+//    qApp->setFont(font);
 
     InitComponents();
     if(_setting.GetStatus()==StatusValue::success){
@@ -276,8 +206,6 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             GoToProfile(_setting.GetMyProfile(),QueryType::url);
     }
 }
-
-#define Init {
 void MainWindow::InitComponents(){
     ui->LabelLogo->setPixmap(QPixmap(":/program/program/logo.png"));
     ui->LabelAvatar->setText("");
@@ -299,7 +227,7 @@ void MainWindow::InitComponents(){
     ui->ButtonGoToMyProfile->setVisible(false);
     //ui->ScrollAreaForm->setVisible(false);
     ui->LabelNick->setVisible(false);
-    ui->LabelNick->setStyleSheet("color: #1657d9; font-weight: bold;");
+    ui->LabelNick->setStyleSheet("color: #1657d9;");
     ui->line->setVisible(false);
     ui->LabelProfileVisibility->setVisible(false);
     ui->ScrollAreaProfileInfo->setVisible(false);
@@ -316,16 +244,13 @@ void MainWindow::InitComponents(){
     ui->ButtonBack->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/left.png"));
     ui->ButtonNext->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/right.png"));
     Retranslate();
-    //ui->LabelRealName->setTextFormat(Qt::RichText);!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //ui->LabelRealName->setText("<img src=\"images/program/cog4.png\">Hello!");!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-}
-
-void MainWindow::ProgressLoading(int Aprogress,int){
-    ui->FormProgressBar->setValue(Aprogress);
 }
 #define InitEnd }
 
 #define System {
+void MainWindow::ProgressLoading(int a_progress,int){
+    ui->FormProgressBar->setValue(a_progress);
+}
 void MainWindow::ShowGames(){
     ui->FormProgressBar->setVisible(false);
     _gamesForm->setVisible(true);
@@ -393,87 +318,67 @@ void MainWindow::ReturnFromForms(){
                 break;
         }
 }
-void MainWindow::ReturnFromForm(QWidget *Aform){
-    disconnect(Aform);
-    delete Aform;
+void MainWindow::ReturnFromForm(QWidget *a_form){
+    disconnect(a_form);
+    delete a_form;
     _windowChildCount--;
     _windowChild=WindowChildType::none;
 }
 void MainWindow::ResizeScrollArea(){
     if(ui->ScrollAreaForm->height()<400){
-        QPropertyAnimation *anim = new QPropertyAnimation(this,"size");
-        anim->setDuration(500);
-        anim->setStartValue(QSize(this->width(),this->height()));
-        anim->setEndValue(QSize(this->width(),this->height()-ui->ScrollAreaForm->height()+400));
-        connect(anim,SIGNAL(finished),anim,SLOT(deleteLater));
-        anim->start();
+        QPropertyAnimation *animate = new QPropertyAnimation(this,"size");
+        animate->setDuration(500);
+        animate->setStartValue(QSize(this->width(),this->height()));
+        animate->setEndValue(QSize(this->width(),this->height()-ui->ScrollAreaForm->height()+400));
+        connect(animate,SIGNAL(finished),animate,SLOT(deleteLater));
+        animate->start();
     }
 }
 #define SystemEnd }
 
 #define Functions {
 void MainWindow::on_ButtonFindProfile_clicked(){
-    QString id=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove('\r');
+    QString profileid=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove('\r');
     if(ui->LineEditIdProfile->text().indexOf("id",0)>-1){
-        id=id.remove("id/").remove("/");
-        GoToProfile(id,QueryType::vanity);
+        profileid=profileid.remove("id/").remove("/");
+        GoToProfile(profileid,QueryType::vanity);
     } else {
         if(ui->LineEditIdProfile->text().indexOf("profiles",0)>-1)
-            id=id.remove("profiles/").remove("/");
-        GoToProfile(id,QueryType::url);
+            profileid=profileid.remove("profiles/").remove("/");
+        GoToProfile(profileid,QueryType::url);
         }
-    switch(_windowChild){
-        case WindowChildType::games:
-            ReturnFromForm(_gamesForm);
-            break;
-        case WindowChildType::friends:
-            ReturnFromForm(_friendsForm);
-            break;
-        default:
-            break;
-    }
+    ReturnFromForms();
 }
-void MainWindow::GoToProfile(QString Aid, QueryType Atype){
-    SProfile profile(Aid,false,Atype);
-    if(profile.GetStatus()==StatusValue::success){
+void MainWindow::GoToProfile(QString a_id, QueryType a_type){
+    SProfile newProfile(a_id,false,a_type);
+    if(newProfile.GetStatus()==StatusValue::success){
         if(_currentBufferProfile!=_bufferProfiles.size())
             while(_bufferProfiles.size()!=_currentBufferProfile)
                 _bufferProfiles.takeAt(_currentBufferProfile);
-        _bufferProfiles.append(profile);
+        _bufferProfiles.append(newProfile);
         _currentBufferProfile=_bufferProfiles.size();
-        if(_currentBufferProfile==_bufferProfiles.size())
-            ui->ButtonNext->setEnabled(false);
-        else
-            ui->ButtonNext->setEnabled(true);
-        if(_currentBufferProfile<2)
-            ui->ButtonBack->setEnabled(false);
-        else
-            ui->ButtonBack->setEnabled(true);
+        UpdateSwitchingProfileEnabled();
         qDebug()<<"Буфер профилей"<<_currentBufferProfile<<"/"<<_bufferProfiles.size();
-        ProfileToUi(profile);
+        ProfileToUi(newProfile);
         } else {
             QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
         }
 }
-void MainWindow::ProfileToUi(SProfile Aprofile){
-    _profile=Aprofile;
-    _games.Clear();
-    _friends.Clear();
-    SBans Bans(Aprofile.GetSteamid(),false);
-    SLevels Levels(Aprofile.GetSteamid());
-    _games.Set(Aprofile.GetSteamid(),true,true,false);
-    _friends.Set(Aprofile.GetSteamid(),false);
-    //ui->LabelProfileUrl->setTextFormat(Qt::RichText);
-    //ui->LabelProfileUrl->setText("<img src=\":/"+theme+"/program/"+theme+"/link.png\" width=\"15\" height=\"15\">"+Profile.GetProfileurl());
+void MainWindow::ProfileToUi(SProfile a_profile){
+    _profile=a_profile;
+    SBans bans(a_profile.GetSteamid(),false);
+    SLevels levels(a_profile.GetSteamid());
+    _games.Set(a_profile.GetSteamid(),true,true,false);
+    _friends.Set(a_profile.GetSteamid(),false);
     ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("error")));
     ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("error")));
-    if(!Aprofile.GetGameextrainfo().isEmpty()){
-        ui->LabelPersonaState->setText(tr("В игре %1").arg(Aprofile.GetGameextrainfo()));
+    if(!a_profile.GetGameextrainfo().isEmpty()){
+        ui->LabelPersonaState->setText(tr("В игре %1").arg(a_profile.GetGameextrainfo()));
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
     } else
-        switch (Aprofile.GetPersonastate()) {
+        switch (a_profile.GetPersonastate()) {
             case 0:
-                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(Aprofile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
+                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(a_profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                 break;
             case 1:
@@ -501,13 +406,12 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
                 ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                 break;
         }
-    ui->LabelProfileUrl->setText("<a href=\""+Aprofile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+Aprofile.GetProfileurl()+"</span></a>");
-    ui->LabelProfileUrl->setTextFormat(Qt::RichText);
-    ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(Levels.GetLevel())));
-    ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(Aprofile.GetRealname()));
-    ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(Aprofile.GetTimecreated().toString("yyyy.MM.dd")));
-    ui->LabelLocCountryCode->setText(tr("Язык: %1").arg(Aprofile.GetLoccountrycode()));
-    switch (Aprofile.GetCommunityvisibilitystate()) {
+    ui->LabelProfileUrl->setText("<a href=\""+a_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+a_profile.GetProfileurl()+"</span></a>");
+    ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(levels.GetLevel())));
+    ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(a_profile.GetRealname()));
+    ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(a_profile.GetTimecreated().toString("yyyy.MM.dd")));
+    ui->LabelLocCountryCode->setText(tr("Язык: %1").arg(a_profile.GetLoccountrycode()));
+    switch (a_profile.GetCommunityvisibilitystate()) {
         case 1:
             ui->LabelProfileVisibility->setText(tr("Скрытый"));
             ui->LabelProfileVisibility->setStyleSheet("color: #6e0e0e");
@@ -524,27 +428,16 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
             ui->LabelProfileVisibility->setText(tr("Неизвестно"));
             ui->LabelProfileVisibility->setStyleSheet("color:white");
         }
-    if(Bans.GetVACBanned()){
-        ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(Bans.GetNumberOfVACBans())).arg(QString::number(Bans.GetDaysSinceLastBan())));
+    if(bans.GetVACBanned()){
+        ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(bans.GetNumberOfVACBans())).arg(QString::number(bans.GetDaysSinceLastBan())));
         ui->LabelBans->setStyleSheet("color: #6e0e0e");
     } else {
         ui->LabelBans->setText(tr("VAC баны: Отсутствуют"));
         ui->LabelBans->setStyleSheet("color: #0e6e11");
     }
 
-    QNetworkAccessManager imagemanager;
-    QEventLoop imageloop;
-    connect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-    QNetworkReply &imagereply = *imagemanager.get(QNetworkRequest(Aprofile.GetAvatarmedium()));
-    imageloop.exec();
-    disconnect(&imagemanager, &QNetworkAccessManager::finished, &imageloop, &QEventLoop::quit);
-    QPixmap img;
-    img.loadFromData(imagereply.readAll());
-    ui->LabelAvatar->setPixmap(img);
-    ui->LabelNick->setText(Aprofile.GetPersonaname());
-    //ui->LabelAvatar->setTextFormat(Qt::RichText);
-    //ui->LabelAvatar->setText("<img src=\"images/profiles/main.png\"> "+Profile.GetPersonaname());
-    //ui->LabelNick->setFont(QFont("MS Shell Dlg 2",14));
+    ui->LabelAvatar->setPixmap(RequestData(a_profile.GetAvatarmedium(),false).GetPixmap());
+    ui->LabelNick->setText(a_profile.GetPersonaname());
     ui->ButtonGames->setVisible(true);
     ui->ButtonFriends->setVisible(true);
     ui->ButtonFavorites->setVisible(true);
@@ -559,46 +452,28 @@ void MainWindow::ProfileToUi(SProfile Aprofile){
     ui->ButtonGames->setEnabled(_games.GetStatus()==StatusValue::success);
     ui->ButtonFriends->setEnabled(_friends.GetStatus()==StatusValue::success);
     ui->ButtonFavorites->setEnabled(true);
-    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=Aprofile.GetSteamid());
+    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=a_profile.GetSteamid());
     ui->ButtonStatistics->setEnabled(true);
-    ui->ButtonGoToMyProfile->setEnabled((_setting.GetMyProfile()!="none")&&(_setting.GetMyProfile()!=Aprofile.GetSteamid()));
+    ui->ButtonGoToMyProfile->setEnabled((_setting.GetMyProfile()!="none")&&(_setting.GetMyProfile()!=a_profile.GetSteamid()));
+}
+void MainWindow::UpdateSwitchingProfileEnabled(){
+    ui->ButtonBack->setEnabled(_currentBufferProfile>=2);
+    ui->ButtonNext->setEnabled(_currentBufferProfile!=_bufferProfiles.size());
 }
 void MainWindow::on_ButtonBack_clicked(){
     if(_currentBufferProfile>1){
-        ui->ButtonGames->setEnabled(false);
-        ui->ButtonFriends->setEnabled(false);
-        ui->ButtonFavorites->setEnabled(false);
+        ui->ScrollAreaProfileInfo->setEnabled(false);
         ui->ButtonSetProfile->setEnabled(false);
-        ui->ButtonStatistics->setEnabled(false);
-        ui->ButtonGoToMyProfile->setEnabled(false);
         ProfileToUi(_bufferProfiles[--_currentBufferProfile-1]);
-        if(_currentBufferProfile==_bufferProfiles.size())
-            ui->ButtonNext->setEnabled(false);
-        else
-            ui->ButtonNext->setEnabled(true);
-        if(_currentBufferProfile<2)
-            ui->ButtonBack->setEnabled(false);
-        else
-            ui->ButtonBack->setEnabled(true);
+        UpdateSwitchingProfileEnabled();
     }
 }
 void MainWindow::on_ButtonNext_clicked(){
     if(_currentBufferProfile<_bufferProfiles.size()){
-        ui->ButtonGames->setEnabled(false);
-        ui->ButtonFriends->setEnabled(false);
-        ui->ButtonFavorites->setEnabled(false);
+        ui->ScrollAreaProfileInfo->setEnabled(false);
         ui->ButtonSetProfile->setEnabled(false);
-        ui->ButtonStatistics->setEnabled(false);
-        ui->ButtonGoToMyProfile->setEnabled(false);
         ProfileToUi(_bufferProfiles[++_currentBufferProfile-1]);
-        if(_currentBufferProfile==_bufferProfiles.size())
-            ui->ButtonNext->setEnabled(false);
-        else
-            ui->ButtonNext->setEnabled(true);
-        if(_currentBufferProfile<2)
-            ui->ButtonBack->setEnabled(false);
-        else
-            ui->ButtonBack->setEnabled(true);
+        UpdateSwitchingProfileEnabled();
     }
 }
 void MainWindow::on_ButtonGames_clicked(){
@@ -637,8 +512,9 @@ void MainWindow::on_ButtonFavorites_clicked(){
         connect(_favoritesForm,&FormFavorites::s_return_to_profile,this,&MainWindow::ReturnFromForm);
         ui->ScrollAreaForm->setWidget(_favoritesForm);
         _windowChildCount++;
+        ResizeScrollArea();
         //ui->FormProgressBar->setVisible(true);
-        //favoritesform->setVisible(false);
+        //_favoritesForm->setVisible(false);
     }
 }
 void MainWindow::on_ButtonStatistics_clicked(){
@@ -664,21 +540,12 @@ void MainWindow::on_ButtonSettings_clicked(){
         _windowChildCount++;
         ResizeScrollArea();
         //ui->FormProgressBar->setVisible(true);
-        //favoritesform->setVisible(false);
+        //_settingsForm->setVisible(false);
     }
 }
 void MainWindow::on_ButtonGoToMyProfile_clicked(){
     if(_setting.GetStatus()==StatusValue::success&&_setting.GetMyProfile()!="none"){
-        switch(_windowChild){
-            case WindowChildType::games:
-                ReturnFromForm(_gamesForm);
-                break;
-            case WindowChildType::friends:
-                ReturnFromForm(_friendsForm);
-                break;
-            default:
-                break;
-        }
+        ReturnFromForms();
         GoToProfile(_setting.GetMyProfile(),QueryType::url);
     } else {
         QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
@@ -691,6 +558,10 @@ void MainWindow::on_ButtonSetProfile_clicked(){
     }
 }
 void MainWindow::on_ButtonExit_clicked(){
-    close();
+    qApp->closeAllWindows();
+}
+void MainWindow::on_ButtonUpdate_clicked(){
+    _profile.Update(false);
+    ProfileToUi(_profile);
 }
 #define FunctionsEnd }

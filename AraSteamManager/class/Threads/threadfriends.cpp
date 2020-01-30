@@ -4,10 +4,10 @@ ThreadFriends::ThreadFriends(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadFriends::Set(QTableWidget *AtableWidgetFriends,QVector<SProfile> Aprofiles,SFriends Afriends){
-    _TableWidgetFriends=AtableWidgetFriends;
-    _profiles=Aprofiles;
-    _friends=Afriends;
+void ThreadFriends::Set(QTableWidget *a_tableWidgetFriends,SProfiles a_profiles,SFriends a_friends){
+    _TableWidgetFriends=a_tableWidgetFriends;
+    _profiles=a_profiles;
+    _friends=a_friends;
 }
 
 int ThreadFriends::Fill(){

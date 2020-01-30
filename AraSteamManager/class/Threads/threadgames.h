@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTableWidget>
 #include <class/steamapi/Sgames.h>
-#include <class/imagerequest.h>
+#include <class/requestdata.h>
 #include <QEventLoop>
 
 class ThreadGames : public QObject
@@ -19,10 +19,10 @@ signals:
 
 public slots:
     int Fill();
-    void Set(QTableWidget *TableWidgetGames, QVector<SGame> games);
+    void Set(QTableWidget *TableWidgetGames, SGames games);
 
 private:
-    QVector<SGame> _games;
+    SGames _games;
     QTableWidget *_TableWidgetGames;
 };
 

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formfriends.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.1
+** Created by: Qt User Interface Compiler version 5.12.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -46,6 +46,9 @@ public:
         if (FormFriends->objectName().isEmpty())
             FormFriends->setObjectName(QString::fromUtf8("FormFriends"));
         FormFriends->resize(825, 536);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
+        FormFriends->setFont(font);
         verticalLayout_2 = new QVBoxLayout(FormFriends);
         verticalLayout_2->setSpacing(1);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));

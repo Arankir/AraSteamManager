@@ -17,7 +17,7 @@ public:
     ~FormContainerAchievements();
 
 public slots:
-    void AddFormAchievement(SAchievementsPlayer pl, QString ids, SGame game, int num, QWidget *parent = nullptr);
+    void AddFormAchievement(SAchievementsPlayer pl, QString ids, SGame game, int num);
 
 signals:
     void s_removeAchievements(int index);
@@ -25,7 +25,7 @@ signals:
 
 private slots:
     void on_TabWidgetAchievements_tabCloseRequested(int index);
-    void OnResultImage(ImageRequest*);
+    void OnLoadImage(RequestData*);
 
 private:
     Ui::FormContainerAchievements *ui;

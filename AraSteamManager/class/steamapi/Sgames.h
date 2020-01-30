@@ -55,7 +55,7 @@ public:
     ~SGames();
     void Set(QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
-    void SetIndex(int AIndex) {_index=AIndex;}
+    void SetIndex(int Aindex) {_index=Aindex;}
     int GetAppid(int index) {return _games[index].GetAppid();}
     QString GetID() {return _id;}
     int GetIndex() {return _index;}

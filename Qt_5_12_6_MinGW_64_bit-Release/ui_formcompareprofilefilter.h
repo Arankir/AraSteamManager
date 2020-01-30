@@ -30,6 +30,9 @@ public:
         if (FormCompareProfileFilter->objectName().isEmpty())
             FormCompareProfileFilter->setObjectName(QString::fromUtf8("FormCompareProfileFilter"));
         FormCompareProfileFilter->resize(129, 130);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
+        FormCompareProfileFilter->setFont(font);
         verticalLayout = new QVBoxLayout(FormCompareProfileFilter);
         verticalLayout->setSpacing(1);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));

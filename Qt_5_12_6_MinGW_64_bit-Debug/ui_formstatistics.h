@@ -40,6 +40,9 @@ public:
         if (FormStatistics->objectName().isEmpty())
             FormStatistics->setObjectName(QString::fromUtf8("FormStatistics"));
         FormStatistics->resize(828, 734);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
+        FormStatistics->setFont(font);
         verticalLayout_2 = new QVBoxLayout(FormStatistics);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_4 = new QHBoxLayout();
@@ -55,12 +58,13 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         label = new QLabel(FormStatistics);
         label->setObjectName(QString::fromUtf8("label"));
-        QFont font;
-        font.setPointSize(10);
-        font.setBold(true);
-        font.setUnderline(true);
-        font.setWeight(75);
-        label->setFont(font);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Ebrima"));
+        font1.setPointSize(10);
+        font1.setBold(true);
+        font1.setUnderline(true);
+        font1.setWeight(75);
+        label->setFont(font1);
         label->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label);

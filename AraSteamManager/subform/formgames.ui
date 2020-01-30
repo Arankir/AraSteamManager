@@ -12,6 +12,7 @@
   </property>
   <property name="font">
    <font>
+    <family>Ebrima</family>
     <pointsize>10</pointsize>
    </font>
   </property>
@@ -82,7 +83,6 @@
           <property name="font">
            <font>
             <pointsize>16</pointsize>
-            <italic>true</italic>
            </font>
           </property>
           <property name="text">
@@ -148,6 +148,7 @@
       <widget class="QLineEdit" name="LineEditGame">
        <property name="font">
         <font>
+         <family>Ebrima</family>
          <pointsize>10</pointsize>
         </font>
        </property>
@@ -163,6 +164,7 @@
        </property>
        <property name="font">
         <font>
+         <family>Ebrima</family>
          <pointsize>8</pointsize>
         </font>
        </property>
@@ -174,7 +176,11 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="TableWidgetGames"/>
+    <widget class="QTableWidget" name="TableWidgetGames">
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+    </widget>
    </item>
    <item>
     <widget class="QProgressBar" name="ProgressBarLoading">

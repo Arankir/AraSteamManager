@@ -1,36 +1,36 @@
 #include "formstatistics.h"
 #include "ui_formstatistics.h"
 
-FormStatistics::FormStatistics(QString Aid, SGames Agames, QString Aname, QWidget *parent) :
+FormStatistics::FormStatistics(QString a_id, SGames a_games, QString a_name, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormStatistics){
     ui->setupUi(this);
-    _games=Agames;
-    _id=Aid;
-    _name=Aname;
+    _games=a_games;
+    _id=a_id;
+    _name=a_name;
     Threading LoadData(this);
     LoadData.AddThreadStatistics(_games,_id);
 }
 
-void FormStatistics::OnFinish(QVector<int> Anumof, QVector<QPair<QString,QString> > Acomplete,
-                              QVector<QPair<QString,QString>> Astarted, QVector<QPair<QString,QString>> AnotStarted,
-                              QVector<double> AaveragePercent, int Asummcolumn, QVector<int> Atimes,
-                              QVector<int> Amonths, QVector<QPair<QString,int>> Ayears){
-    _numof=Anumof;
-    _complete=Acomplete;
-    _started=Astarted;
-    _notStarted=AnotStarted;
-    _averagePercent=AaveragePercent;
+void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QString> > a_complete,
+                              QVector<QPair<QString,QString>> a_started, QVector<QPair<QString,QString>> a_notStarted,
+                              QVector<double> a_averagePercent, int a_summcolumn, QVector<int> a_times,
+                              QVector<int> a_months, QVector<QPair<QString,int>> a_years){
+    _numof=a_numof;
+    _complete=a_complete;
+    _started=a_started;
+    _notStarted=a_notStarted;
+    _averagePercent=a_averagePercent;
     _averagePercent.resize(_averagePercent.size());
-    _summcolumn=Asummcolumn;
-    _times=Atimes;
-    _months=Amonths;
-    _years=Ayears;
-    double totalAverage=0.0;
+    _summcolumn=a_summcolumn;
+    _times=a_times;
+    _months=a_months;
+    _years=a_years;
+    double totala_verage=0.0;
     foreach (double averageForGame, _averagePercent) {
-        totalAverage+=averageForGame;
+        totala_verage+=averageForGame;
     }
-    ui->LabelAveragePercent->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент")).arg(tr("по всем играм")).arg(QString::number(totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(tr("по начатым играм")).arg(QString::number(totalAverage/(_numof[1]+_numof[2]))));
+    ui->LabelAveragePercent->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент")).arg(tr("по всем играм")).arg(QString::number(totala_verage/(_numof[0]+_numof[1]+_numof[2]))).arg(tr("по начатым играм")).arg(QString::number(totala_verage/(_numof[1]+_numof[2]))));
     ui->LabelSummColumn->setText(tr("Всего достижений: %1").arg(_summcolumn));
 
     #define SetChartDonut {

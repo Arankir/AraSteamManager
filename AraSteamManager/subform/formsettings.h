@@ -8,7 +8,7 @@
 #include <QPair>
 #include <QTranslator>
 #include <class/settings.h>
-#include <class/imagerequest.h>
+#include <class/requestdata.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sgames.h>
 #include <subwidget/qbuttonwithdata.h>
@@ -45,7 +45,7 @@ private slots:
 
     void RadiobuttonHiddenGamesClicked();
 
-    void OnResultImage(ImageRequest *);
+    void OnResultImage(RequestData *);
     void AchievementsClicked();
     void HideClicked();
     void Retranslate();

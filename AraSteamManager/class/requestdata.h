@@ -11,23 +11,26 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <class/settings.h>
+#include <QEventLoop>
 #include <QDir>
 
-class ImageRequest : public QObject
+class RequestData : public QObject
 {
     Q_OBJECT
 public:
-    explicit ImageRequest(QString url, int column=-1, QString save="", bool autosave=false, QObject *parent = nullptr);
-    ImageRequest();
-    ~ImageRequest();
+    explicit RequestData(QString url, int column=-1, QString save="", bool autosave=false, QObject *parent = nullptr);
+    RequestData(QString str, bool parallel);
+    RequestData();
+    ~RequestData();
     void LoadImage(QString url, int column=-1, QString save="", bool autosave=false);
-    void Get(QString str);
+    void Get(QString str, bool parallel = false);
     QByteArray GetAnswer() {return _answer;}
+    QPixmap GetPixmap() { QPixmap result; result.loadFromData(_answer); return result;}
     QString GetSave() {return _save;}
     int GetRow() {return _row;}
 
 signals:
-    void s_finished(ImageRequest *imgr);
+    void s_finished(RequestData *imgr);
 
 private:
     QNetworkAccessManager *_manager;

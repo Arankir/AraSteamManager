@@ -101,7 +101,10 @@ public:
     {
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
-        FormAchievements->resize(837, 763);
+        FormAchievements->resize(837, 865);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
+        FormAchievements->setFont(font);
         verticalLayout_7 = new QVBoxLayout(FormAchievements);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         horizontalLayout_4 = new QHBoxLayout();
@@ -153,13 +156,12 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(LabelGameTitle->sizePolicy().hasHeightForWidth());
         LabelGameTitle->setSizePolicy(sizePolicy1);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Lucida Bright"));
-        font.setPointSize(16);
-        font.setBold(false);
-        font.setItalic(true);
-        font.setWeight(50);
-        LabelGameTitle->setFont(font);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Lucida Bright"));
+        font1.setPointSize(16);
+        font1.setBold(false);
+        font1.setWeight(50);
+        LabelGameTitle->setFont(font1);
 
         horizontalLayout_7->addWidget(LabelGameTitle);
 
@@ -182,9 +184,10 @@ public:
         LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
         sizePolicy.setHeightForWidth(LabelGameOnline->sizePolicy().hasHeightForWidth());
         LabelGameOnline->setSizePolicy(sizePolicy);
-        QFont font1;
-        font1.setPointSize(10);
-        LabelGameOnline->setFont(font1);
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Ebrima"));
+        font2.setPointSize(10);
+        LabelGameOnline->setFont(font2);
 
         horizontalLayout_2->addWidget(LabelGameOnline);
 
@@ -233,7 +236,7 @@ public:
         ScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 261, 150));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 262, 185));
         ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout->addWidget(ScrollAreaCategories);
@@ -245,7 +248,7 @@ public:
         ScrollAreaCheckCategories->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 260, 150));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 261, 185));
         ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
 
         horizontalLayout->addWidget(ScrollAreaCheckCategories);
@@ -390,7 +393,7 @@ public:
         ScrollAreaValuesCategory->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 504, 111));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 504, 135));
         ScrollAreaValuesCategory->setWidget(scrollAreaWidgetContents_5);
 
         horizontalLayout_9->addWidget(ScrollAreaValuesCategory);
@@ -431,6 +434,8 @@ public:
         sizePolicy5.setVerticalStretch(0);
         sizePolicy5.setHeightForWidth(TableWidgetCompareFriends->sizePolicy().hasHeightForWidth());
         TableWidgetCompareFriends->setSizePolicy(sizePolicy5);
+        TableWidgetCompareFriends->setSelectionBehavior(QAbstractItemView::SelectRows);
+        TableWidgetCompareFriends->verticalHeader()->setVisible(false);
 
         verticalLayout_2->addWidget(TableWidgetCompareFriends);
 

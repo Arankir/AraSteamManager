@@ -4,6 +4,7 @@
 FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormCompareProfileFilter){
+    ui->setupUi(this);
     QString theme;
     switch(_setting.GetTheme()){
         case 1:
@@ -13,7 +14,6 @@ FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
             theme="black";
             break;
     }
-    ui->setupUi(this);
     ui->RadioButtonAll->setIcon(QIcon(":/"+theme+"/program/"+theme+"/all.png"));
     ui->RadioButtonReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
     ui->RadioButtonNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
@@ -29,14 +29,14 @@ FormCompareProfileFilter::~FormCompareProfileFilter(){
     delete ui;
 }
 
-void FormCompareProfileFilter::SetTitles(QString At1, QString At2, QString At3){
-    ui->RadioButtonAll->setText(At1);
-    ui->RadioButtonReached->setText(At2);
-    ui->RadioButtonNotReached->setText(At3);
+void FormCompareProfileFilter::SetTitles(QString a_t1, QString a_t2, QString a_t3){
+    ui->RadioButtonAll->setText(a_t1);
+    ui->RadioButtonReached->setText(a_t2);
+    ui->RadioButtonNotReached->setText(a_t3);
 }
 
-void FormCompareProfileFilter::SetType(ReachedType Atype){
-    switch (Atype) {
+void FormCompareProfileFilter::SetType(ReachedType a_type){
+    switch (a_type) {
     case ReachedType::all:
         ui->RadioButtonAll->setChecked(true);
         ui->RadioButtonAll->click();

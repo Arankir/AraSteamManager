@@ -40,13 +40,10 @@ public slots:
 
 private slots:
     void InitComponents();
-    void OnResultImage(ImageRequest *imgr);
+    void OnImageLoad(RequestData *imgr);
     void OnResultAchievements(SAchievementsPlayer ach);
     void closeEvent(QCloseEvent *event);
 
-    //void AchievementsClicked();
-    //void FavoritesClicked();
-    //void HideClicked();
     void AddAchievements(int index);
     void RemoveAchievements(int index);
     void ContainerAchievementsClose();
@@ -64,7 +61,7 @@ private:
     Ui::FormGames *ui;
     QString _id;
     int _windowChildCount=0;
-    QVector<SGame> _games;
+    SGames _games;
     SAchievementsPlayer *_achievements;
     Favorites _favorites;
     QStringList _hide;
@@ -75,7 +72,7 @@ private:
     QString _selectedGame;
     QString _selectedIndex;
 
-    QVector<ImageRequest*> _request;
+    QVector<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 

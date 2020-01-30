@@ -15,7 +15,7 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <QButtonGroup>
-#include <class/imagerequest.h>
+#include <class/requestdata.h>
 #include <class/settings.h>
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
@@ -70,18 +70,16 @@ private slots:
     void InitComponents();
     void PullTableWidget();
     void Retranslate();
-    void OnResultImage(ImageRequest *imgr);
+    void OnImageLoaded(RequestData *imgr);
 
     void SwitchSimpleCompare(FormMode sc);
     void LoadingCompare();
-    void LoadFriend(SGames *Games);
+    void LoadFriendGames(SGames *Games);
     void FinishLoadFriends();
     void CompareProfileFilterClickMy(QString name,ReachedType type);
     void CompareProfileFilterClickFriends(QString name,ReachedType type);
 
-    void on_ButtonCompareFriendsAll_clicked();
-    void on_ButtonCompareFriendsReached_clicked();
-    void on_ButtonCompareFriendsNotReached_clicked();
+    void on_ButtonCompareAllFriendsReach_clicked();
     void on_TableWidgetCompareFriendsCellChanged(int row, int column);
     void CreateCompareProfileFilter(bool Aaccept, int Acolumn);
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
@@ -89,7 +87,7 @@ private slots:
     void closeEvent(QCloseEvent*);
     void ShowCategories();
     void UpdateHiddenRows();
-    bool ProfileIsPublic(SAchievements achievement, int col);
+    bool SetFriendAchievements(SAchievements achievement, int col);
 
     void on_LineEditNameAchievements_textChanged(const QString &arg1);
     void on_ButtonFindAchievement_clicked();
@@ -128,6 +126,7 @@ private slots:
 
     void on_CheckBoxCategoryUniqueValue_stateChanged(int arg1);
     void HideCheckedAchievement(QTableWidgetItem *item);
+    FormCategoryValue *CreateValueCategory();
 
 private:
     Ui::FormAchievements *ui;
@@ -141,7 +140,7 @@ private:
     Favorites _favorites;
     FormCompareProfileFilter *FilterMyProfile;
 
-    QVector<ImageRequest*> _request;
+    QVector<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 
@@ -149,8 +148,7 @@ private:
     int _loadCompare=0;
     int _type1=0;
     int _type2=0;
-    int _friendsCount=0;
-    QVector<SProfile> _profiles;
+    SProfiles _profilesFriends;
     QVector<QPair<SProfile,FriendType>> _friends;
 
     QFormLayout *_categoryValuesLayout;

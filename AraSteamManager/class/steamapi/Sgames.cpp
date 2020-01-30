@@ -1,18 +1,18 @@
 #include "Sgames.h"
 
-SGame::SGame(QJsonObject Agame, QObject *parent) : QObject(parent){
-    _game=Agame;
+SGame::SGame(QJsonObject a_game, QObject *parent) : QObject(parent){
+    _game=a_game;
 }
 SGame::SGame(){
 
 }
 
-void SGame::Set(QJsonObject Agame){
-    _game=Agame;
+void SGame::Set(QJsonObject a_game){
+    _game=a_game;
 }
 
-QString SGame::GetNumberPlayers(bool AhardReload){
-    if(_numberPlayers==""||AhardReload){
+QString SGame::GetNumberPlayers(bool a_hardReload){
+    if(_numberPlayers==""||a_hardReload){
         QNetworkAccessManager manager;
         QEventLoop loop;
         QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -24,31 +24,31 @@ QString SGame::GetNumberPlayers(bool AhardReload){
     return _numberPlayers;
 }
 
-SGame::SGame( const SGame & Agame){
-    _game=Agame._game;
-    _numberPlayers=Agame._numberPlayers;
+SGame::SGame( const SGame & a_game){
+    _game=a_game._game;
+    _numberPlayers=a_game._numberPlayers;
 }
-SGame & SGame::operator=(const SGame & Agame) {
-    _game=Agame._game;
-    _numberPlayers=Agame._numberPlayers;
+SGame & SGame::operator=(const SGame & a_game) {
+    _game=a_game._game;
+    _numberPlayers=a_game._numberPlayers;
     return *this;
 }
-const bool &SGame::operator<(const SGame &Agame){
-    static const bool b=_game.value("name").toString().toLower()<Agame._game.value("name").toString().toLower();
+const bool &SGame::operator<(const SGame &a_game){
+    static const bool b=_game.value("name").toString().toLower()<a_game._game.value("name").toString().toLower();
     return b;
 }
 
 
-SGames::SGames(QString Aid, bool Afree_games, bool Agame_info, bool Aparallel, QObject *parent) : QObject(parent){
+SGames::SGames(QString a_id, bool a_free_games, bool a_game_info, bool a_parallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
-    _id=Aid;
+    _id=a_id;
     QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+_setting.GetKey();
-    if(Afree_games)
+    if(a_free_games)
         request+="&include_played_free_games=1";
-    if(Agame_info)
+    if(a_game_info)
         request+="&include_appinfo=1";
-    request+="&format=json&steamid="+Aid;
-    if(Aparallel){
+    request+="&format=json&steamid="+a_id;
+    if(a_parallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
         _manager->get(QNetworkRequest(request));
     } else {
@@ -63,13 +63,13 @@ SGames::SGames(QString Aid, bool Afree_games, bool Agame_info, bool Aparallel, Q
         emit s_finished();
     }
 }
-SGames::SGames(QJsonDocument Agames){
+SGames::SGames(QJsonDocument a_games){
     _manager = new QNetworkAccessManager();
-    if(Agames.object().value("response").toObject().value("games").toArray().size()>0){
-        //_games=Agames.object().value("response").toObject().value("games").toArray();
-        _games.resize(Agames.object().value("response").toObject().value("games").toArray().size());
-        for(int i=0;i<Agames.object().value("response").toObject().value("games").toArray().size();i++){
-            _games[i]=SGame(Agames.object().value("response").toObject().value("games").toArray().at(i).toObject());
+    if(a_games.object().value("response").toObject().value("games").toArray().size()>0){
+        //_games=a_games.object().value("response").toObject().value("games").toArray();
+        _games.resize(a_games.object().value("response").toObject().value("games").toArray().size());
+        for(int i=0;i<a_games.object().value("response").toObject().value("games").toArray().size();i++){
+            _games[i]=SGame(a_games.object().value("response").toObject().value("games").toArray().at(i).toObject());
         }
         _status=StatusValue::success;
     }
@@ -85,15 +85,15 @@ SGames::~SGames(){
     delete _manager;
 }
 
-void SGames::Set(QString Aid, bool Afree_games, bool Agame_info, bool Aparallel){
-    _id=Aid;
+void SGames::Set(QString a_id, bool a_free_games, bool a_game_info, bool a_parallel){
+    _id=a_id;
     QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+_setting.GetKey();
-    if(Afree_games)
+    if(a_free_games)
         request+="&include_played_free_games=1";
-    if(Agame_info)
+    if(a_game_info)
         request+="&include_appinfo=1";
-    request+="&format=json&steamid="+Aid;
-    if(Aparallel){
+    request+="&format=json&steamid="+a_id;
+    if(a_parallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
         _manager->get(QNetworkRequest(request));
     } else {
@@ -108,13 +108,12 @@ void SGames::Set(QString Aid, bool Afree_games, bool Agame_info, bool Aparallel)
         emit s_finished();
     }
 }
-void SGames::Set(QJsonDocument Agames){
+void SGames::Set(QJsonDocument a_games){
     Clear();
-    if(Agames.object().value("response").toObject().value("games").toArray().size()>0){
-        //_games=Agames.object().value("response").toObject().value("games").toArray();
-        _games.resize(Agames.object().value("response").toObject().value("games").toArray().size());
-        for(int i=0;i<Agames.object().value("response").toObject().value("games").toArray().size();i++){
-            _games[i]=SGame(Agames.object().value("response").toObject().value("games").toArray().at(i).toObject());
+    if(a_games.object().value("response").toObject().value("games").toArray().size()>0){
+        _games.resize(a_games.object().value("response").toObject().value("games").toArray().size());
+        for(int i=0;i<a_games.object().value("response").toObject().value("games").toArray().size();i++){
+            _games[i]=SGame(a_games.object().value("response").toObject().value("games").toArray().at(i).toObject());
         }
         _status=StatusValue::success;
     }
@@ -124,10 +123,10 @@ void SGames::Set(QJsonDocument Agames){
     }
 }
 
-void SGames::Load(QNetworkReply *Areply){
+void SGames::Load(QNetworkReply *a_reply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
-    QJsonDocument localGames = QJsonDocument::fromJson(Areply->readAll());
-    Areply->deleteLater();
+    QJsonDocument localGames = QJsonDocument::fromJson(a_reply->readAll());
+    a_reply->deleteLater();
     Set(localGames);
     emit s_finished(this);
     emit s_finished();
@@ -153,27 +152,26 @@ void SGames::Sort(){
     _games=QVector<SGame>::fromList(QList<SGame>::fromStdList(list));
 }
 
-SGames::SGames( const SGames & AnewGames){
-    _games=AnewGames._games;
-    _status=AnewGames._status;
-    _error=AnewGames._error;
-    _id=AnewGames._id;
-    _free_games=AnewGames._free_games;
-    _game_info=AnewGames._game_info;
+SGames::SGames( const SGames & a_newGames){
+    _games=a_newGames._games;
+    _status=a_newGames._status;
+    _error=a_newGames._error;
+    _id=a_newGames._id;
+    _free_games=a_newGames._free_games;
+    _game_info=a_newGames._game_info;
     _manager = new QNetworkAccessManager;
 }
-SGames & SGames::operator=(const SGames & AnewGames){
+SGames & SGames::operator=(const SGames & a_newGames){
     delete _manager;
-    _games=AnewGames._games;
-    _status=AnewGames._status;
-    _error=AnewGames._error;
-    _id=AnewGames._id;
-    _free_games=AnewGames._free_games;
-    _game_info=AnewGames._game_info;
+    _games=a_newGames._games;
+    _status=a_newGames._status;
+    _error=a_newGames._error;
+    _id=a_newGames._id;
+    _free_games=a_newGames._free_games;
+    _game_info=a_newGames._game_info;
     _manager = new QNetworkAccessManager;
     return *this;
 }
-
-SGame &SGames::operator[](const int &Aindex){
-    return _games[Aindex];
+SGame &SGames::operator[](const int &a_index){
+    return _games[a_index];
 }

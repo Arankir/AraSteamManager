@@ -7,8 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>837</width>
-    <height>763</height>
+    <height>865</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Ebrima</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>SteamAchievementsStatistic</string>
@@ -103,7 +108,6 @@
              <family>Lucida Bright</family>
              <pointsize>16</pointsize>
              <weight>50</weight>
-             <italic>true</italic>
              <bold>false</bold>
             </font>
            </property>
@@ -149,6 +153,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Ebrima</family>
              <pointsize>10</pointsize>
             </font>
            </property>
@@ -226,8 +231,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>261</width>
-             <height>150</height>
+             <width>262</width>
+             <height>185</height>
             </rect>
            </property>
           </widget>
@@ -249,8 +254,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>260</width>
-             <height>150</height>
+             <width>261</width>
+             <height>185</height>
             </rect>
            </property>
           </widget>
@@ -471,7 +476,7 @@
               <x>0</x>
               <y>0</y>
               <width>504</width>
-              <height>111</height>
+              <height>135</height>
              </rect>
             </property>
            </widget>
@@ -523,6 +528,12 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
        </widget>
       </item>
       <item>

@@ -60,29 +60,27 @@ void FormFavorites::InitComponents(){
     }
 }
 
-void FormFavorites::FriendLoad(SProfile *Aprofile){
-    QString path = "images/profiles/"+Aprofile->GetAvatar().mid(72,20)+".jpg";
+void FormFavorites::FriendLoad(SProfile *a_profile){
+    QString path = "images/profiles/"+a_profile->GetAvatar().mid(72,20)+".jpg";
     if(!QFile::exists(path)){
         if(_numRequests<500){
-            ImageRequest *image = new ImageRequest(Aprofile->GetAvatar(),_numRequests,path,true);
-            connect(image,&ImageRequest::s_finished,this,&FormFavorites::OnResultImage);
+            RequestData *image = new RequestData(a_profile->GetAvatar(),_numRequests,path,true);
+            connect(image,&RequestData::s_finished,this,&FormFavorites::OnImageLoad);
             _request.append(image);
             //numrequests++;
             _numNow++;
             }
         } else {
-            QPixmap pixmap;
-            pixmap.load(path);
-            QLabel *label = new QLabel;
-            label->setPixmap(pixmap);
-            ui->TableWidgetFriends->setCellWidget(_numRequests,c_tableFriendsColumnIcon,label);
+            QLabel *avatarFriend = new QLabel;
+            avatarFriend->setPixmap(QPixmap(path));
+            ui->TableWidgetFriends->setCellWidget(_numRequests,c_tableFriendsColumnIcon,avatarFriend);
         }
     QTableWidgetItem *item4 = new QTableWidgetItem;
-    if(!Aprofile->GetGameextrainfo().isEmpty()){
+    if(!a_profile->GetGameextrainfo().isEmpty()){
         item4->setText(tr("В игре"));
         item4->setTextColor(QColor("#89b753"));
     } else
-        switch (Aprofile->GetPersonastate()){
+        switch (a_profile->GetPersonastate()){
             case 0:
                     item4->setText(tr("Не в сети"));
                     item4->setTextColor(QColor("#4c4d4f"));
@@ -113,7 +111,7 @@ void FormFavorites::FriendLoad(SProfile *Aprofile){
                     break;
         }
     QTableWidgetItem *item5 = new QTableWidgetItem;
-    switch(Aprofile->GetCommunityvisibilitystate()){
+    switch(a_profile->GetCommunityvisibilitystate()){
         case 1:
             item5->setText(tr("Скрытый"));
             item5->setTextColor(QColor("#6e0e0e"));
@@ -131,21 +129,21 @@ void FormFavorites::FriendLoad(SProfile *Aprofile){
             item5->setTextColor(QColor("#6e0e0e"));
             break;
     }
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID,new QTableWidgetItem(Aprofile->GetSteamid()));
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName,new QTableWidgetItem(Aprofile->GetPersonaname()));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID,new QTableWidgetItem(a_profile->GetSteamid()));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName,new QTableWidgetItem(a_profile->GetPersonaname()));
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnStatus,item4);
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnisPublic,item5);
     _numRequests++;
 }
 
-void FormFavorites::OnResultImage(ImageRequest* Aimage){
+void FormFavorites::OnImageLoad(RequestData* a_image){
     QPixmap pixmap;
-    pixmap.loadFromData(Aimage->GetAnswer());
-    QLabel *label = new QLabel;
-    label->setPixmap(pixmap);
-    ui->TableWidgetFriends->setCellWidget(Aimage->GetRow(),c_tableFriendsColumnIcon,label);
-    disconnect(Aimage,&ImageRequest::s_finished,this,&FormFavorites::OnResultImage);
-    Aimage->deleteLater();
+    pixmap.loadFromData(a_image->GetAnswer());
+    QLabel *avatarFriend = new QLabel;
+    avatarFriend->setPixmap(pixmap);
+    ui->TableWidgetFriends->setCellWidget(a_image->GetRow(),c_tableFriendsColumnIcon,avatarFriend);
+    disconnect(a_image,&RequestData::s_finished,this,&FormFavorites::OnImageLoad);
+    a_image->deleteLater();
 }
 
 void FormFavorites::on_pushButton_clicked(){

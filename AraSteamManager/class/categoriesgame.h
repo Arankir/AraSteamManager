@@ -29,7 +29,7 @@ public slots:
     QJsonArray GetValues(int value);
     QList<QString> GetNoValues(int category);
     QString GetGame();
-    int GetCounts() {return _categories.value("Categories").toArray().size();}
+    int GetCount() {return _categories.value("Categories").toArray().size();}
     int GetGameID();
     void DeleteCategory(int index);
     void DeleteAll();

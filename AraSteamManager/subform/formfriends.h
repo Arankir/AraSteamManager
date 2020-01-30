@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QFile>
 #include <QStandardItem>
-#include <class/imagerequest.h>
+#include <class/requestdata.h>
 #include <class/steamapi/Sfriends.h>
 #include <class/Threads/threading.h>
 #include <class/settings.h>
@@ -39,7 +39,7 @@ private slots:
 
     void on_ButtonReturn_clicked();
 
-    void OnResultImage(ImageRequest *imgr);
+    void OnImageLoad(RequestData *imgr);
 
     void GoToProfileClicked();
     void FavoritesClicked();
@@ -59,13 +59,13 @@ private:
     QString _id;
     int _windowChildCount=0;
     SFriends _friends;
-    QVector<SProfile> _profiles;
+    SProfiles _profiles;
     Settings _setting;
     QString _theme="white";
     Favorites _favorites;
     Filter _filter;
 
-    QVector<ImageRequest*> _request;
+    QVector<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 

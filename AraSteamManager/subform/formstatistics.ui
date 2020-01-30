@@ -10,6 +10,11 @@
     <height>734</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Ebrima</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -35,6 +40,7 @@
         <widget class="QLabel" name="label">
          <property name="font">
           <font>
+           <family>Ebrima</family>
            <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>

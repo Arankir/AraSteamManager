@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[36];
-    char stringdata0[547];
+    QByteArrayData data[38];
+    char stringdata0[601];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -56,17 +56,19 @@ QT_MOC_LITERAL(21, 229, 4), // "type"
 QT_MOC_LITERAL(22, 234, 11), // "ProfileToUi"
 QT_MOC_LITERAL(23, 246, 8), // "SProfile"
 QT_MOC_LITERAL(24, 255, 8), // "AProfile"
-QT_MOC_LITERAL(25, 264, 28), // "on_ButtonFindProfile_clicked"
-QT_MOC_LITERAL(26, 293, 22), // "on_ButtonGames_clicked"
-QT_MOC_LITERAL(27, 316, 24), // "on_ButtonFriends_clicked"
-QT_MOC_LITERAL(28, 341, 27), // "on_ButtonSetProfile_clicked"
-QT_MOC_LITERAL(29, 369, 21), // "on_ButtonExit_clicked"
-QT_MOC_LITERAL(30, 391, 30), // "on_ButtonGoToMyProfile_clicked"
-QT_MOC_LITERAL(31, 422, 21), // "on_ButtonBack_clicked"
-QT_MOC_LITERAL(32, 444, 21), // "on_ButtonNext_clicked"
-QT_MOC_LITERAL(33, 466, 26), // "on_ButtonFavorites_clicked"
-QT_MOC_LITERAL(34, 493, 27), // "on_ButtonStatistics_clicked"
-QT_MOC_LITERAL(35, 521, 25) // "on_ButtonSettings_clicked"
+QT_MOC_LITERAL(25, 264, 29), // "UpdateSwitchingProfileEnabled"
+QT_MOC_LITERAL(26, 294, 28), // "on_ButtonFindProfile_clicked"
+QT_MOC_LITERAL(27, 323, 22), // "on_ButtonGames_clicked"
+QT_MOC_LITERAL(28, 346, 24), // "on_ButtonFriends_clicked"
+QT_MOC_LITERAL(29, 371, 26), // "on_ButtonFavorites_clicked"
+QT_MOC_LITERAL(30, 398, 27), // "on_ButtonStatistics_clicked"
+QT_MOC_LITERAL(31, 426, 27), // "on_ButtonSetProfile_clicked"
+QT_MOC_LITERAL(32, 454, 21), // "on_ButtonExit_clicked"
+QT_MOC_LITERAL(33, 476, 30), // "on_ButtonGoToMyProfile_clicked"
+QT_MOC_LITERAL(34, 507, 21), // "on_ButtonBack_clicked"
+QT_MOC_LITERAL(35, 529, 21), // "on_ButtonNext_clicked"
+QT_MOC_LITERAL(36, 551, 25), // "on_ButtonSettings_clicked"
+QT_MOC_LITERAL(37, 577, 23) // "on_ButtonUpdate_clicked"
 
     },
     "MainWindow\0ProgressLoading\0\0keyPressEvent\0"
@@ -76,15 +78,17 @@ QT_MOC_LITERAL(35, 521, 25) // "on_ButtonSettings_clicked"
     "InitComponents\0ShowGames\0ShowFriends\0"
     "ShowStatistic\0GoToProfile\0id\0QueryType\0"
     "type\0ProfileToUi\0SProfile\0AProfile\0"
+    "UpdateSwitchingProfileEnabled\0"
     "on_ButtonFindProfile_clicked\0"
     "on_ButtonGames_clicked\0on_ButtonFriends_clicked\0"
+    "on_ButtonFavorites_clicked\0"
+    "on_ButtonStatistics_clicked\0"
     "on_ButtonSetProfile_clicked\0"
     "on_ButtonExit_clicked\0"
     "on_ButtonGoToMyProfile_clicked\0"
     "on_ButtonBack_clicked\0on_ButtonNext_clicked\0"
-    "on_ButtonFavorites_clicked\0"
-    "on_ButtonStatistics_clicked\0"
-    "on_ButtonSettings_clicked"
+    "on_ButtonSettings_clicked\0"
+    "on_ButtonUpdate_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -94,7 +98,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      26,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -102,30 +106,32 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    2,  134,    2, 0x0a /* Public */,
-       3,    1,  139,    2, 0x08 /* Private */,
-       6,    1,  142,    2, 0x08 /* Private */,
-       8,    0,  145,    2, 0x08 /* Private */,
-       9,    1,  146,    2, 0x08 /* Private */,
-      12,    0,  149,    2, 0x08 /* Private */,
-      13,    0,  150,    2, 0x08 /* Private */,
-      14,    0,  151,    2, 0x08 /* Private */,
-      15,    0,  152,    2, 0x08 /* Private */,
-      16,    0,  153,    2, 0x08 /* Private */,
-      17,    0,  154,    2, 0x08 /* Private */,
-      18,    2,  155,    2, 0x08 /* Private */,
-      22,    1,  160,    2, 0x08 /* Private */,
-      25,    0,  163,    2, 0x08 /* Private */,
-      26,    0,  164,    2, 0x08 /* Private */,
-      27,    0,  165,    2, 0x08 /* Private */,
-      28,    0,  166,    2, 0x08 /* Private */,
-      29,    0,  167,    2, 0x08 /* Private */,
-      30,    0,  168,    2, 0x08 /* Private */,
-      31,    0,  169,    2, 0x08 /* Private */,
-      32,    0,  170,    2, 0x08 /* Private */,
-      33,    0,  171,    2, 0x08 /* Private */,
-      34,    0,  172,    2, 0x08 /* Private */,
-      35,    0,  173,    2, 0x08 /* Private */,
+       1,    2,  144,    2, 0x0a /* Public */,
+       3,    1,  149,    2, 0x08 /* Private */,
+       6,    1,  152,    2, 0x08 /* Private */,
+       8,    0,  155,    2, 0x08 /* Private */,
+       9,    1,  156,    2, 0x08 /* Private */,
+      12,    0,  159,    2, 0x08 /* Private */,
+      13,    0,  160,    2, 0x08 /* Private */,
+      14,    0,  161,    2, 0x08 /* Private */,
+      15,    0,  162,    2, 0x08 /* Private */,
+      16,    0,  163,    2, 0x08 /* Private */,
+      17,    0,  164,    2, 0x08 /* Private */,
+      18,    2,  165,    2, 0x08 /* Private */,
+      22,    1,  170,    2, 0x08 /* Private */,
+      25,    0,  173,    2, 0x08 /* Private */,
+      26,    0,  174,    2, 0x08 /* Private */,
+      27,    0,  175,    2, 0x08 /* Private */,
+      28,    0,  176,    2, 0x08 /* Private */,
+      29,    0,  177,    2, 0x08 /* Private */,
+      30,    0,  178,    2, 0x08 /* Private */,
+      31,    0,  179,    2, 0x08 /* Private */,
+      32,    0,  180,    2, 0x08 /* Private */,
+      33,    0,  181,    2, 0x08 /* Private */,
+      34,    0,  182,    2, 0x08 /* Private */,
+      35,    0,  183,    2, 0x08 /* Private */,
+      36,    0,  184,    2, 0x08 /* Private */,
+      37,    0,  185,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
@@ -141,6 +147,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString, 0x80000000 | 20,   19,   21,
     QMetaType::Void, 0x80000000 | 23,   24,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -175,17 +183,19 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->ShowStatistic(); break;
         case 11: _t->GoToProfile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
         case 12: _t->ProfileToUi((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
-        case 13: _t->on_ButtonFindProfile_clicked(); break;
-        case 14: _t->on_ButtonGames_clicked(); break;
-        case 15: _t->on_ButtonFriends_clicked(); break;
-        case 16: _t->on_ButtonSetProfile_clicked(); break;
-        case 17: _t->on_ButtonExit_clicked(); break;
-        case 18: _t->on_ButtonGoToMyProfile_clicked(); break;
-        case 19: _t->on_ButtonBack_clicked(); break;
-        case 20: _t->on_ButtonNext_clicked(); break;
-        case 21: _t->on_ButtonFavorites_clicked(); break;
-        case 22: _t->on_ButtonStatistics_clicked(); break;
-        case 23: _t->on_ButtonSettings_clicked(); break;
+        case 13: _t->UpdateSwitchingProfileEnabled(); break;
+        case 14: _t->on_ButtonFindProfile_clicked(); break;
+        case 15: _t->on_ButtonGames_clicked(); break;
+        case 16: _t->on_ButtonFriends_clicked(); break;
+        case 17: _t->on_ButtonFavorites_clicked(); break;
+        case 18: _t->on_ButtonStatistics_clicked(); break;
+        case 19: _t->on_ButtonSetProfile_clicked(); break;
+        case 20: _t->on_ButtonExit_clicked(); break;
+        case 21: _t->on_ButtonGoToMyProfile_clicked(); break;
+        case 22: _t->on_ButtonBack_clicked(); break;
+        case 23: _t->on_ButtonNext_clicked(); break;
+        case 24: _t->on_ButtonSettings_clicked(); break;
+        case 25: _t->on_ButtonUpdate_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -231,13 +241,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 26)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 26;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 26)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 26;
     }
     return _id;
 }

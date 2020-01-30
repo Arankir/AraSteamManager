@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
     QByteArrayData data[33];
-    char stringdata0[522];
+    char stringdata0[519];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,35 +42,35 @@ QT_MOC_LITERAL(7, 86, 8), // "OnFinish"
 QT_MOC_LITERAL(8, 95, 22), // "ReturnFromAchievements"
 QT_MOC_LITERAL(9, 118, 3), // "num"
 QT_MOC_LITERAL(10, 122, 14), // "InitComponents"
-QT_MOC_LITERAL(11, 137, 13), // "OnResultImage"
-QT_MOC_LITERAL(12, 151, 13), // "ImageRequest*"
-QT_MOC_LITERAL(13, 165, 4), // "imgr"
-QT_MOC_LITERAL(14, 170, 20), // "OnResultAchievements"
-QT_MOC_LITERAL(15, 191, 19), // "SAchievementsPlayer"
-QT_MOC_LITERAL(16, 211, 3), // "ach"
-QT_MOC_LITERAL(17, 215, 10), // "closeEvent"
-QT_MOC_LITERAL(18, 226, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(19, 239, 5), // "event"
-QT_MOC_LITERAL(20, 245, 15), // "AddAchievements"
-QT_MOC_LITERAL(21, 261, 5), // "index"
-QT_MOC_LITERAL(22, 267, 18), // "RemoveAchievements"
-QT_MOC_LITERAL(23, 286, 26), // "ContainerAchievementsClose"
-QT_MOC_LITERAL(24, 313, 27), // "on_LineEditGame_textChanged"
-QT_MOC_LITERAL(25, 341, 21), // "on_ButtonFind_clicked"
-QT_MOC_LITERAL(26, 363, 37), // "on_TableWidgetGames_cellDoubl..."
-QT_MOC_LITERAL(27, 401, 3), // "row"
-QT_MOC_LITERAL(28, 405, 6), // "column"
-QT_MOC_LITERAL(29, 412, 31), // "on_TableWidgetGames_cellClicked"
-QT_MOC_LITERAL(30, 444, 29), // "on_ButtonAchievements_clicked"
-QT_MOC_LITERAL(31, 474, 25), // "on_ButtonFavorite_clicked"
-QT_MOC_LITERAL(32, 500, 21) // "on_ButtonHide_clicked"
+QT_MOC_LITERAL(11, 137, 11), // "OnImageLoad"
+QT_MOC_LITERAL(12, 149, 12), // "RequestData*"
+QT_MOC_LITERAL(13, 162, 4), // "imgr"
+QT_MOC_LITERAL(14, 167, 20), // "OnResultAchievements"
+QT_MOC_LITERAL(15, 188, 19), // "SAchievementsPlayer"
+QT_MOC_LITERAL(16, 208, 3), // "ach"
+QT_MOC_LITERAL(17, 212, 10), // "closeEvent"
+QT_MOC_LITERAL(18, 223, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(19, 236, 5), // "event"
+QT_MOC_LITERAL(20, 242, 15), // "AddAchievements"
+QT_MOC_LITERAL(21, 258, 5), // "index"
+QT_MOC_LITERAL(22, 264, 18), // "RemoveAchievements"
+QT_MOC_LITERAL(23, 283, 26), // "ContainerAchievementsClose"
+QT_MOC_LITERAL(24, 310, 27), // "on_LineEditGame_textChanged"
+QT_MOC_LITERAL(25, 338, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(26, 360, 37), // "on_TableWidgetGames_cellDoubl..."
+QT_MOC_LITERAL(27, 398, 3), // "row"
+QT_MOC_LITERAL(28, 402, 6), // "column"
+QT_MOC_LITERAL(29, 409, 31), // "on_TableWidgetGames_cellClicked"
+QT_MOC_LITERAL(30, 441, 29), // "on_ButtonAchievements_clicked"
+QT_MOC_LITERAL(31, 471, 25), // "on_ButtonFavorite_clicked"
+QT_MOC_LITERAL(32, 497, 21) // "on_ButtonHide_clicked"
 
     },
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
     "s_achievementsLoaded\0s_finish\0"
     "ProgressLoading\0OnFinish\0"
     "ReturnFromAchievements\0num\0InitComponents\0"
-    "OnResultImage\0ImageRequest*\0imgr\0"
+    "OnImageLoad\0RequestData*\0imgr\0"
     "OnResultAchievements\0SAchievementsPlayer\0"
     "ach\0closeEvent\0QCloseEvent*\0event\0"
     "AddAchievements\0index\0RemoveAchievements\0"
@@ -162,7 +162,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 4: _t->OnFinish(); break;
         case 5: _t->ReturnFromAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->InitComponents(); break;
-        case 7: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 7: _t->OnImageLoad((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
         case 8: _t->OnResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
         case 9: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 10: _t->AddAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -191,7 +191,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< ImageRequest* >(); break;
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
             }
             break;
         }

@@ -50,6 +50,7 @@ public:
             FormGames->setObjectName(QString::fromUtf8("FormGames"));
         FormGames->resize(603, 577);
         QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
         font.setPointSize(10);
         FormGames->setFont(font);
         verticalLayout = new QVBoxLayout(FormGames);
@@ -84,7 +85,6 @@ public:
         LabelTitleGame->setSizePolicy(sizePolicy);
         QFont font1;
         font1.setPointSize(16);
-        font1.setItalic(true);
         LabelTitleGame->setFont(font1);
         LabelTitleGame->setWordWrap(true);
 
@@ -140,6 +140,7 @@ public:
         ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
         ButtonFind->setEnabled(true);
         QFont font2;
+        font2.setFamily(QString::fromUtf8("Ebrima"));
         font2.setPointSize(8);
         ButtonFind->setFont(font2);
 
@@ -150,6 +151,7 @@ public:
 
         TableWidgetGames = new QTableWidget(FormGames);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
+        TableWidgetGames->verticalHeader()->setVisible(false);
 
         verticalLayout->addWidget(TableWidgetGames);
 

@@ -8,7 +8,7 @@ release/threadstatistics.o
 release/categoriesgame.o
 release/favorites.o
 release/filter.o
-release/imagerequest.o
+release/requestdata.o
 release/settings.o
 release/Sachievements.o
 release/Sbans.o
@@ -41,7 +41,7 @@ release/moc_threadstatistics.o
 release/moc_categoriesgame.o
 release/moc_favorites.o
 release/moc_filter.o
-release/moc_imagerequest.o
+release/moc_requestdata.o
 release/moc_settings.o
 release/moc_Sachievements.o
 release/moc_Sbans.o

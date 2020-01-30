@@ -66,25 +66,25 @@ private slots:
     void ShowStatistic();
     void GoToProfile(QString id, QueryType type);
     void ProfileToUi(SProfile AProfile);
+    void UpdateSwitchingProfileEnabled();
 
     void on_ButtonFindProfile_clicked();
     void on_ButtonGames_clicked();
     void on_ButtonFriends_clicked();
+    void on_ButtonFavorites_clicked();
+    void on_ButtonStatistics_clicked();
     void on_ButtonSetProfile_clicked();
     void on_ButtonExit_clicked();
 
     void on_ButtonGoToMyProfile_clicked();
 
     void on_ButtonBack_clicked();
-
     void on_ButtonNext_clicked();
 
-    void on_ButtonFavorites_clicked();
-
-    void on_ButtonStatistics_clicked();
 
     void on_ButtonSettings_clicked();
 
+    void on_ButtonUpdate_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -38,7 +38,7 @@ Settings::Settings(QObject *parent) : QObject(parent){
     }
 }
 
-bool Settings::SetMyProfile(QString AmyProfiles){
+bool Settings::SetMyProfile(QString a_myProfiles){
     CreateFile("Files/Settings.txt");
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -52,7 +52,7 @@ bool Settings::SetMyProfile(QString AmyProfiles){
         return false;
     } else {
         file.close();
-        _myProfile=AmyProfiles;
+        _myProfile=a_myProfiles;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
         writeStream << "Language="+QString::number(_language)<<"\n";
@@ -64,7 +64,7 @@ bool Settings::SetMyProfile(QString AmyProfiles){
         return true;
     }
 }
-bool Settings::SetLanguage(int Alanguage){
+bool Settings::SetLanguage(int a_language){
     CreateFile("Files/Settings.txt");
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -78,7 +78,7 @@ bool Settings::SetLanguage(int Alanguage){
         return false;
     } else {
         file.close();
-        _language=Alanguage;
+        _language=a_language;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
         writeStream << "Language="+QString::number(_language)<<"\n";
@@ -90,7 +90,7 @@ bool Settings::SetLanguage(int Alanguage){
         return true;
     }
 }
-bool Settings::SetTheme(int Atheme){
+bool Settings::SetTheme(int a_theme){
     CreateFile("Files/Settings.txt");
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -104,7 +104,7 @@ bool Settings::SetTheme(int Atheme){
         return false;
     } else {
         file.close();
-        _theme=Atheme;
+        _theme=a_theme;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
         writeStream << "Language="+QString::number(_language)<<"\n";
@@ -116,7 +116,7 @@ bool Settings::SetTheme(int Atheme){
         return true;
     }
 }
-bool Settings::SetSaveimage(int AsaveImage){
+bool Settings::SetSaveimage(int a_saveImage){
     CreateFile("Files/Settings.txt");
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -130,7 +130,7 @@ bool Settings::SetSaveimage(int AsaveImage){
         return false;
     } else {
         file.close();
-        _saveImages=AsaveImage;
+        _saveImages=a_saveImage;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
         writeStream << "Language="+QString::number(_language)<<"\n";
@@ -142,7 +142,7 @@ bool Settings::SetSaveimage(int AsaveImage){
         return true;
     }
 }
-bool Settings::SetVisibleHiddenGames(int AvisibleHiddenGames){
+bool Settings::SetVisibleHiddenGames(int a_visibleHiddenGames){
     CreateFile("Files/Settings.txt");
     QFile file("Files/Settings.txt");
     if(!QFile::exists("Files/Settings.txt"))
@@ -156,7 +156,7 @@ bool Settings::SetVisibleHiddenGames(int AvisibleHiddenGames){
         return false;
     } else {
         file.close();
-        _visibleHiddenGames=AvisibleHiddenGames;
+        _visibleHiddenGames=a_visibleHiddenGames;
         file.open(QIODevice::WriteOnly | QIODevice::Text);
         QTextStream writeStream(&file);
         writeStream << "Language="+QString::number(_language)<<"\n";
@@ -179,9 +179,9 @@ void Settings::SetDefault(){
     }
 }
 
-bool Settings::CreateFile(QString Apaths){
+bool Settings::CreateFile(QString a_paths){
     bool exist=true;
-    QString savenow=Apaths;
+    QString savenow=a_paths;
     QString path="";
     while(savenow.length()>0){
         if(savenow.indexOf("/",0)>-1){

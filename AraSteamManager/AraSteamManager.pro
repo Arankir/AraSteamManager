@@ -35,7 +35,7 @@ SOURCES += \
     class/categoriesgame.cpp \
     class/favorites.cpp \
     class/filter.cpp \
-    class/imagerequest.cpp \
+    class/requestdata.cpp \
     class/settings.cpp \
     class/steamapi/Sachievements.cpp \
     class/steamapi/Sbans.cpp \
@@ -70,7 +70,7 @@ HEADERS += \
     class/categoriesgame.h \
     class/favorites.h \
     class/filter.h \
-    class/imagerequest.h \
+    class/requestdata.h \
     class/settings.h \
     class/statusvalue.h \
     class/steamapi/Sachievements.h \

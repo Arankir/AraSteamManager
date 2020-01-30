@@ -96,7 +96,7 @@ class SAchievementsGlobal : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsGlobal(QString appid, QObject *parent = nullptr);
+    explicit SAchievementsGlobal(QString appid, bool parallel = true, QObject *parent = nullptr);
     SAchievementsGlobal(QJsonDocument DocAchievements);
     SAchievementsGlobal();
     ~SAchievementsGlobal();
@@ -137,7 +137,7 @@ class SAchievementsPercentage : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsPercentage(QString appid, QObject *parent = nullptr);
+    explicit SAchievementsPercentage(QString appid, bool parallel = true, QObject *parent = nullptr);
     SAchievementsPercentage(QJsonDocument DocAchievements);
     SAchievementsPercentage();
     ~SAchievementsPercentage();
@@ -174,7 +174,7 @@ class SAchievementsPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit SAchievementsPlayer(QString appid, QString id, QObject *parent = nullptr);
+    explicit SAchievementsPlayer(QString appid, QString id, bool parallel = true, QObject *parent = nullptr);
     SAchievementsPlayer(QJsonDocument DocAchievements);
     SAchievementsPlayer();
     ~SAchievementsPlayer();

@@ -1,5 +1,6 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
+
 #define Constants {
 const int c_tableColumnID=0;
 const int c_tableColumnIcon=1;
@@ -18,12 +19,12 @@ const int c_filterFavorites=3;
 const int c_filterCount=4;
 #define ConstantsEnd }
 
-FormFriends::FormFriends(QString Aid, SFriends Afriends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+#define Init {
+FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
-    _id=Aid;
-    _friends=Afriends;
-    SProfiles profiles = _friends.GetProfiles();
-    for(int i=0;i<profiles.GetCount();_profiles.push_back(profiles.GetProfile(i++)));
+    _id=a_id;
+    _friends=a_friends;
+    _profiles = _friends.GetProfiles();
     switch(_setting.GetTheme()){
         case 1:
             _theme="white";
@@ -35,8 +36,6 @@ FormFriends::FormFriends(QString Aid, SFriends Afriends, QWidget *parent) :    Q
     InitComponents();
     ui->LineEditName->setFocus();
 }
-
-#define Init {
 void FormFriends::InitComponents(){
     _favorites.SetPath("Files/Favorites/Friends.json","Friends");
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
@@ -57,37 +56,28 @@ void FormFriends::InitComponents(){
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+_theme+"/program/"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID,true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon,33);
-
-    std::list<SProfile> list = _profiles.toList().toStdList();
-    list.sort([](const SProfile &s1, const SProfile &s2)-> const bool {
-        if(QString::compare(s1.GetPersonaname().toLower(),s2.GetPersonaname().toLower())<0)
-            return true;
-        else
-            return false;
-    });
-    _profiles=QVector<SProfile>::fromList(QList<SProfile>::fromStdList(list));
-
+    _profiles.Sort();
     _filter.SetRow(_friends.GetCount());
     _filter.SetCol(c_filterCount);
-    Threading LoadTable(this);
-    LoadTable.AddThreadFriends(ui->TableWidgetFriends,_profiles,_friends);
+    Threading loadTable(this);
+    loadTable.AddThreadFriends(ui->TableWidgetFriends,_profiles,_friends);
 }
-void FormFriends::ProgressLoading(int Aprogress,int Arow){
-    QButtonWithData *button1 = new QButtonWithData(tr("На профиль"));
+void FormFriends::ProgressLoading(int a_progress,int a_row){
+    QButtonWithData *button1 = new QButtonWithData(tr(" На профиль"));
     button1->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
-    button1->setObjectName("ButtonGoToProfile"+_profiles[Aprogress].GetSteamid());
-    button1->AddData("ProfileID",_profiles[Aprogress].GetSteamid());
+    button1->setObjectName("ButtonGoToProfile"+_profiles[a_progress].GetSteamid());
+    button1->AddData("ProfileID",_profiles[a_progress].GetSteamid());
     connect(button1,&QButtonWithData::pressed,this,&FormFriends::GoToProfileClicked);
-    ui->TableWidgetFriends->setCellWidget(Arow,c_tableColumnGoTo,button1);
+    ui->TableWidgetFriends->setCellWidget(a_row,c_tableColumnGoTo,button1);
 
     QButtonWithData *button2 = new QButtonWithData("");
     button2->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
-    button2->setObjectName("ButtonFavorites"+QString::number(Aprogress));
-    button2->AddData("NumberFriend",QString::number(Arow));
+    button2->setObjectName("ButtonFavorites"+QString::number(a_progress));
+    button2->AddData("NumberFriend",QString::number(a_row));
     connect(button2,&QButtonWithData::pressed,this,&FormFriends::FavoritesClicked);
-    ui->TableWidgetFriends->setCellWidget(Arow,c_tableColumnFavorite,button2);
-    ui->TableWidgetFriends->setRowHeight(Arow,33);
+    ui->TableWidgetFriends->setCellWidget(a_row,c_tableColumnFavorite,button2);
+    ui->TableWidgetFriends->setRowHeight(a_row,33);
 }
 void FormFriends::OnFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
@@ -95,42 +85,40 @@ void FormFriends::OnFinish(){
         QString path = "images/profiles/"+_profiles[i].GetAvatar().mid(72,20)+".jpg";
         if(!QFile::exists(path)){
             if(_numRequests<500){
-                ImageRequest *image = new ImageRequest(_profiles[i].GetAvatar(),i,path,true);
-                connect(image,&ImageRequest::s_finished,this,&FormFriends::OnResultImage);
+                RequestData *image = new RequestData(_profiles[i].GetAvatar(),i,path,true);
+                connect(image,&RequestData::s_finished,this,&FormFriends::OnImageLoad);
                 _request.append(image);
                 _numRequests++;
                 _numNow++;
                 }
             } else {
-                QPixmap pixmap;
-                pixmap.load(path);
-                QLabel *label = new QLabel;
-                label->setPixmap(pixmap);
-                ui->TableWidgetFriends->setCellWidget(i,c_tableColumnIcon,label);
+                QLabel *avatarFriend = new QLabel;
+                avatarFriend->setPixmap(QPixmap(path));
+                ui->TableWidgetFriends->setCellWidget(i,c_tableColumnIcon,avatarFriend);
             }
         }
 }
-void FormFriends::OnResultImage(ImageRequest *Aimage){
+void FormFriends::OnImageLoad(RequestData *a_image){
     QPixmap pixmap;
-    pixmap.loadFromData(Aimage->GetAnswer());
+    pixmap.loadFromData(a_image->GetAnswer());
     QLabel *label = new QLabel;
     label->setPixmap(pixmap);
-    ui->TableWidgetFriends->setCellWidget(Aimage->GetRow(),c_tableColumnIcon,label);
+    ui->TableWidgetFriends->setCellWidget(a_image->GetRow(),c_tableColumnIcon,label);
     if(_numRequests==500&&_numNow<_friends.GetCount()){
-        Aimage->LoadImage(_profiles[_numNow].GetAvatar(),_numNow,"images/profiles/"+_profiles[_numNow].GetAvatar().mid(72,20)+".jpg",true);
+        a_image->LoadImage(_profiles[_numNow].GetAvatar(),_numNow,"images/profiles/"+_profiles[_numNow].GetAvatar().mid(72,20)+".jpg",true);
         _numNow++;
     } else {
-        disconnect(Aimage,&ImageRequest::s_finished,this,&FormFriends::OnResultImage);
-        Aimage->deleteLater();
+        disconnect(a_image,&RequestData::s_finished,this,&FormFriends::OnImageLoad);
+        a_image->deleteLater();
     }
 }
 #define InitEnd }
 
 #define System {
 FormFriends::~FormFriends(){
-    for (int i=0;i<=_numRequests;i++) {
-        //request[numrequests];
-    }
+//    for (int i=0;i<=_numRequests;i++) {
+//        //request[numrequests];
+//    }
     delete ui;
 }
 void FormFriends::closeEvent(QCloseEvent*){
@@ -154,8 +142,8 @@ void FormFriends::on_CheckBoxOpenProfile_stateChanged(int arg1){
         }
     UpdateHiddenRows();
 }
-void FormFriends::on_ComboBoxStatus_activated(int AIndex){
-    if(AIndex!=0){
+void FormFriends::on_ComboBoxStatus_activated(int a_index){
+    if(a_index!=0){
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
             _filter.SetData(i,c_filterStatus,ui->ComboBoxStatus->currentText()==ui->TableWidgetFriends->item(i,c_tableColumnStatus)->text());
         } else {
@@ -164,9 +152,9 @@ void FormFriends::on_ComboBoxStatus_activated(int AIndex){
         }
     UpdateHiddenRows();
 }
-void FormFriends::on_LineEditName_textChanged(const QString & AnewText){
+void FormFriends::on_LineEditName_textChanged(const QString & a_newText){
     for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-        _filter.SetData(i,c_filterName,ui->TableWidgetFriends->item(i,c_tableColumnName)->text().toLower().indexOf(AnewText.toLower())>-1);
+        _filter.SetData(i,c_filterName,ui->TableWidgetFriends->item(i,c_tableColumnName)->text().toLower().indexOf(a_newText.toLower())>-1);
     UpdateHiddenRows();
 }
 void FormFriends::on_ButtonFind_clicked(){
@@ -183,16 +171,16 @@ void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
                  _filter.SetData(i++,c_filterFavorites,true));
             break;
         case 2:
-            QJsonArray val=_favorites.GetValues();
+            QJsonArray values=_favorites.GetValues();
             for (int i=0;i<ui->TableWidgetFriends->rowCount();i++){
-                bool accept=false;
-                foreach (QJsonValue value, val) {
+                bool isFavorite=false;
+                foreach (QJsonValue value, values) {
                     if(value.toObject().value("id").toString()==_profiles[i].GetSteamid()){
-                        accept=true;
+                        isFavorite=true;
                         break;
                     }
                 }
-                _filter.SetData(i,c_filterFavorites,accept);
+                _filter.SetData(i,c_filterFavorites,isFavorite);
             }
             break;
     }
@@ -205,18 +193,16 @@ void FormFriends::GoToProfileClicked(){
     if(_windowChildCount==0){
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         _windowChildCount++;
-        QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
-        emit s_go_to_profile(btn->GetData(0),QueryType::url);
+        emit s_go_to_profile(static_cast<QButtonWithData*>(sender())->GetData(0),QueryType::url);
         emit s_return_to_profile(this);
     }
 }
 void FormFriends::FavoritesClicked(){
-    QButtonWithData *btn = static_cast<QButtonWithData*>(sender());
-    int index=btn->GetData(0).toInt();
+    int indexProfile=static_cast<QButtonWithData*>(sender())->GetData(0).toInt();
     QJsonObject newValue;
-    newValue["id"]=_profiles[index].GetSteamid();
-    newValue["name"]=_profiles[index].GetPersonaname();
-    newValue["added"]=_friends[index].GetFriend_since().toString("yyyy.MM.dd hh:mm:ss");
+    newValue["id"]=_profiles[indexProfile].GetSteamid();
+    newValue["name"]=_profiles[indexProfile].GetPersonaname();
+    newValue["added"]=_friends[indexProfile].GetFriend_since().toString("yyyy.MM.dd hh:mm:ss");
     if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {
@@ -224,8 +210,7 @@ void FormFriends::FavoritesClicked(){
     }
     //Поменять картинку
 }
-#define FunctionsEnd }
-
-void FormFriends::on_TableWidgetFriends_cellDoubleClicked(int row, int){
-    this->findChild<QButtonWithData*>("ButtonGoToProfile"+ui->TableWidgetFriends->item(row,0)->text())->click();
+void FormFriends::on_TableWidgetFriends_cellDoubleClicked(int a_row, int){
+    this->findChild<QButtonWithData*>("ButtonGoToProfile"+ui->TableWidgetFriends->item(a_row,0)->text())->click();
 }
+#define FunctionsEnd }

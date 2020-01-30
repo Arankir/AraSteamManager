@@ -9,7 +9,6 @@
 #include "../../AraSteamManager/class/Threads/threadgames.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
-#include <QtCore/QVector>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'threadgames.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -23,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadGames_t {
     QByteArrayData data[12];
-    char stringdata0[102];
+    char stringdata0[94];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,13 +41,13 @@ QT_MOC_LITERAL(6, 41, 4), // "Fill"
 QT_MOC_LITERAL(7, 46, 3), // "Set"
 QT_MOC_LITERAL(8, 50, 13), // "QTableWidget*"
 QT_MOC_LITERAL(9, 64, 16), // "TableWidgetGames"
-QT_MOC_LITERAL(10, 81, 14), // "QVector<SGame>"
-QT_MOC_LITERAL(11, 96, 5) // "games"
+QT_MOC_LITERAL(10, 81, 6), // "SGames"
+QT_MOC_LITERAL(11, 88, 5) // "games"
 
     },
     "ThreadGames\0s_finished\0\0s_progress\0p\0"
     "row\0Fill\0Set\0QTableWidget*\0TableWidgetGames\0"
-    "QVector<SGame>\0games"
+    "SGames\0games"
 };
 #undef QT_MOC_LITERAL
 
@@ -94,7 +93,7 @@ void ThreadGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->Set((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SGame>(*)>(_a[2]))); break;
+        case 3: _t->Set((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

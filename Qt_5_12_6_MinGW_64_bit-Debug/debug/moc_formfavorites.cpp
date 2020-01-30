@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFavorites_t {
     QByteArrayData data[10];
-    char stringdata0[130];
+    char stringdata0[129];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,13 +39,13 @@ QT_MOC_LITERAL(4, 44, 14), // "InitComponents"
 QT_MOC_LITERAL(5, 59, 10), // "FriendLoad"
 QT_MOC_LITERAL(6, 70, 9), // "SProfile*"
 QT_MOC_LITERAL(7, 80, 13), // "OnResultImage"
-QT_MOC_LITERAL(8, 94, 13), // "ImageRequest*"
-QT_MOC_LITERAL(9, 108, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(8, 94, 12), // "RequestData*"
+QT_MOC_LITERAL(9, 107, 21) // "on_pushButton_clicked"
 
     },
     "FormFavorites\0s_return_to_profile\0\0"
     "QWidget*\0InitComponents\0FriendLoad\0"
-    "SProfile*\0OnResultImage\0ImageRequest*\0"
+    "SProfile*\0OnResultImage\0RequestData*\0"
     "on_pushButton_clicked"
 };
 #undef QT_MOC_LITERAL
@@ -93,7 +93,7 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 1: _t->InitComponents(); break;
         case 2: _t->FriendLoad((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
-        case 3: _t->OnResultImage((*reinterpret_cast< ImageRequest*(*)>(_a[1]))); break;
+        case 3: _t->OnResultImage((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
         case 4: _t->on_pushButton_clicked(); break;
         default: ;
         }
@@ -118,7 +118,7 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< ImageRequest* >(); break;
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
             }
             break;
         }

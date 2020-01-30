@@ -39,6 +39,9 @@ public:
         if (FormCategoryValue->objectName().isEmpty())
             FormCategoryValue->setObjectName(QString::fromUtf8("FormCategoryValue"));
         FormCategoryValue->resize(588, 24);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
+        FormCategoryValue->setFont(font);
         horizontalLayout = new QHBoxLayout(FormCategoryValue);
         horizontalLayout->setSpacing(1);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));

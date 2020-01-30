@@ -9,7 +9,7 @@
 #include <class/steamapi/Sachievements.h>
 #include <class/filter.h>
 #include <class/settings.h>
-#include <class/imagerequest.h>
+#include <class/requestdata.h>
 
 namespace Ui {
 class FormFavorites;
@@ -26,7 +26,7 @@ public:
 public slots:
     void InitComponents();
     void FriendLoad(SProfile*);
-    void OnResultImage(ImageRequest*);
+    void OnImageLoad(RequestData*);
 
 signals:
     void s_return_to_profile(QWidget*);
@@ -42,7 +42,7 @@ private:
     Filter _filter;
     Settings _setting;
 
-    QVector<ImageRequest*> _request;
+    QVector<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 

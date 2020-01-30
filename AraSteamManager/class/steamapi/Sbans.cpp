@@ -1,15 +1,15 @@
 #include "Sbans.h"
 
-SBans::SBans(QString Aid, bool Aparallel, QObject *parent) : QObject(parent){
+SBans::SBans(QString a_id, bool a_parallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
-    _id=Aid;
-    if(Aparallel){
+    _id=a_id;
+    if(a_parallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+Aid));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
     } else {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+Aid));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
         loop.exec();
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
@@ -18,10 +18,10 @@ SBans::SBans(QString Aid, bool Aparallel, QObject *parent) : QObject(parent){
         emit s_finished();
     }
 }
-SBans::SBans(QJsonDocument Abans){
+SBans::SBans(QJsonDocument a_bans){
     _manager = new QNetworkAccessManager();
-    if(Abans.object().value("players").toArray().size()>0){
-        _bans=Abans.object().value("players").toArray();
+    if(a_bans.object().value("players").toArray().size()>0){
+        _bans=a_bans.object().value("players").toArray();
         _status=StatusValue::success;
     }
     else {
@@ -37,15 +37,15 @@ SBans::~SBans(){
     delete _manager;
 }
 
-void SBans::Set(QString Aid, bool Aparallel){
-    _id=Aid;
-    if(Aparallel){
+void SBans::Set(QString a_id, bool a_parallel){
+    _id=a_id;
+    if(a_parallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+Aid));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
     } else {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+Aid));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
         loop.exec();
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
@@ -54,9 +54,9 @@ void SBans::Set(QString Aid, bool Aparallel){
         emit s_finished();
     }
 }
-void SBans::Set(QJsonDocument Abans){
-    if(Abans.object().value("players").toArray().size()>0){
-        _bans=Abans.object().value("players").toArray();
+void SBans::Set(QJsonDocument a_bans){
+    if(a_bans.object().value("players").toArray().size()>0){
+        _bans=a_bans.object().value("players").toArray();
         _status=StatusValue::success;
     }
     else {
@@ -65,15 +65,15 @@ void SBans::Set(QJsonDocument Abans){
     }
 }
 
-void SBans::Load(QNetworkReply *Areply){
+void SBans::Load(QNetworkReply *a_reply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-    QJsonDocument localBans = QJsonDocument::fromJson(Areply->readAll());
-    Areply->deleteLater();
+    QJsonDocument localBans = QJsonDocument::fromJson(a_reply->readAll());
+    a_reply->deleteLater();
     Set(localBans);
     emit s_finished(this);
     emit s_finished();
 }
 
-void SBans::Update(bool Aparallel){
-    Set(_id, Aparallel);
+void SBans::Update(bool a_parallel){
+    Set(_id, a_parallel);
 }

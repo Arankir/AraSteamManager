@@ -10,6 +10,11 @@
     <height>629</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Ebrima</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -104,7 +109,7 @@
                <x>0</x>
                <y>0</y>
                <width>463</width>
-               <height>94</height>
+               <height>96</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout">
@@ -220,7 +225,7 @@
                <x>0</x>
                <y>0</y>
                <width>463</width>
-               <height>94</height>
+               <height>96</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_4">
@@ -387,7 +392,7 @@
                <x>0</x>
                <y>0</y>
                <width>495</width>
-               <height>112</height>
+               <height>111</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout_2">
@@ -675,7 +680,7 @@
               <x>0</x>
               <y>0</y>
               <width>68</width>
-              <height>439</height>
+              <height>431</height>
              </rect>
             </property>
             <property name="sizePolicy">
@@ -758,6 +763,7 @@
         <widget class="QLabel" name="label_10">
          <property name="font">
           <font>
+           <family>Ebrima</family>
            <pointsize>10</pointsize>
           </font>
          </property>

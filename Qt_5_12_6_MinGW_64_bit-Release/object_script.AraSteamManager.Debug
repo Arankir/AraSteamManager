@@ -8,7 +8,7 @@ debug/threadstatistics.o
 debug/categoriesgame.o
 debug/favorites.o
 debug/filter.o
-debug/imagerequest.o
+debug/requestdata.o
 debug/settings.o
 debug/Sachievements.o
 debug/Sbans.o
@@ -41,7 +41,7 @@ debug/moc_threadstatistics.o
 debug/moc_categoriesgame.o
 debug/moc_favorites.o
 debug/moc_filter.o
-debug/moc_imagerequest.o
+debug/moc_requestdata.o
 debug/moc_settings.o
 debug/moc_Sachievements.o
 debug/moc_Sbans.o

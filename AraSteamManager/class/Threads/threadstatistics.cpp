@@ -12,24 +12,24 @@ int ThreadStatistics::Fill(){
     }
 }
 
-void ThreadStatistics::Set(SGames Agames, QString Aid){
-    _games=Agames;
-    _id=Aid;
+void ThreadStatistics::Set(SGames a_games, QString a_id){
+    _games=a_games;
+    _id=a_id;
     _averagePercent.resize(_games.GetCount());
 }
 
-void ThreadStatistics::OnResultAchievements(SAchievementsPlayer Aachievement){
-    disconnect(&Aachievement,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
+void ThreadStatistics::OnResultAchievements(SAchievementsPlayer a_achievement){
+    disconnect(&a_achievement,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
     emit s_progress(_nownum,0);
-    if(Aachievement.GetCount()>0){
+    if(a_achievement.GetCount()>0){
         _colgames++;
         int colr=0;
         int colnr=0;
-        _summcolumn+=Aachievement.GetCount();
-        for (int i=0;i<Aachievement.GetCount();i++) {
+        _summcolumn+=a_achievement.GetCount();
+        for (int i=0;i<a_achievement.GetCount();i++) {
             //помещаем данные в массивы
-            if(Aachievement[i].GetAchieved()==1){
-                QDateTime dateTime = Aachievement[i].GetUnlocktime();
+            if(a_achievement[i].GetAchieved()==1){
+                QDateTime dateTime = a_achievement[i].GetUnlocktime();
                 _times[dateTime.time().hour()]++;
                 _months[dateTime.date().month()-1]++;
                 int pos=-1;
@@ -56,13 +56,13 @@ void ThreadStatistics::OnResultAchievements(SAchievementsPlayer Aachievement){
         _averagePercent.append(1.0*(colr*100)/(colr+colnr));
         if(colnr==0){
             _numof[2]++;
-            _complete.append(QPair<QString,QString>(Aachievement.GetAppid(),Aachievement.GetGamename()));
+            _complete.append(QPair<QString,QString>(a_achievement.GetAppid(),a_achievement.GetGamename()));
         } else if(colr==0){
             _numof[0]++;
-            _started.append(QPair<QString,QString>(Aachievement.GetAppid(),Aachievement.GetGamename()));
+            _started.append(QPair<QString,QString>(a_achievement.GetAppid(),a_achievement.GetGamename()));
         } else {
             _numof[1]++;
-            _notStarted.append(QPair<QString,QString>(Aachievement.GetAppid(),Aachievement.GetGamename()));
+            _notStarted.append(QPair<QString,QString>(a_achievement.GetAppid(),a_achievement.GetGamename()));
         }
     }
     _nownum++;

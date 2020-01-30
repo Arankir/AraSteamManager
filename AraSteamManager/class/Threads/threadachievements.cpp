@@ -4,19 +4,19 @@ ThreadAchievements::ThreadAchievements(QObject *parent) : QObject(parent){
 
 }
 
-void ThreadAchievements::Set(SAchievements Aachievements, QLabel *AlabelTotalPersent, QTableWidget *AtableWidgetAchievements, QLabel *AlabelTotalPersentCompare, QTableWidget *AtableWidgetCompareAchievements){
-    _achievements=Aachievements;
-    _LabelTotalPersent=AlabelTotalPersent;
-    _TableWidgetAchievements=AtableWidgetAchievements;
-    _LabelTotalPersentCompare=AlabelTotalPersentCompare;
-    _TableWidgetCompareAchievements=AtableWidgetCompareAchievements;
+void ThreadAchievements::Set(SAchievements a_achievements, QLabel *a_labelTotalPersent, QTableWidget *a_tableWidgetAchievements, QLabel *a_labelTotalPersentCompare, QTableWidget *a_tableWidgetCompareAchievements){
+    _achievements=a_achievements;
+    _LabelTotalPersent=a_labelTotalPersent;
+    _TableWidgetAchievements=a_tableWidgetAchievements;
+    _LabelTotalPersentCompare=a_labelTotalPersentCompare;
+    _TableWidgetCompareAchievements=a_tableWidgetCompareAchievements;
 }
 
-void ThreadAchievements::SetFriend(QTableWidget *AtableWidgetAchievements, SAchievements Aachievement, int Acol, int AcolumnAppid){
-    _achievement = Aachievement;
-    _col = Acol;
-    _columnAppid = AcolumnAppid;
-    _TableWidgetCompareAchievements=AtableWidgetAchievements;
+void ThreadAchievements::SetFriend(QTableWidget *a_tableWidgetAchievements, SAchievements a_achievement, int a_col, int a_columnAppid){
+    _achievement = a_achievement;
+    _col = a_col;
+    _columnAppid = a_columnAppid;
+    _TableWidgetCompareAchievements=a_tableWidgetAchievements;
 }
 
 bool ThreadAchievements::AddFriend(){

@@ -143,6 +143,9 @@ public:
         if (FormSettings->objectName().isEmpty())
             FormSettings->setObjectName(QString::fromUtf8("FormSettings"));
         FormSettings->resize(1034, 629);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
+        FormSettings->setFont(font);
         gridLayout_7 = new QGridLayout(FormSettings);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
         gridLayout_7->setContentsMargins(0, 0, 0, 0);
@@ -190,7 +193,7 @@ public:
         scrollArea_5->setWidgetResizable(true);
         scrollAreaWidgetContents_7 = new QWidget();
         scrollAreaWidgetContents_7->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_7"));
-        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 463, 94));
+        scrollAreaWidgetContents_7->setGeometry(QRect(0, 0, 463, 96));
         gridLayout = new QGridLayout(scrollAreaWidgetContents_7);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         checkBox_8 = new QCheckBox(scrollAreaWidgetContents_7);
@@ -250,7 +253,7 @@ public:
         scrollArea_6->setWidgetResizable(true);
         scrollAreaWidgetContents_8 = new QWidget();
         scrollAreaWidgetContents_8->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_8"));
-        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 463, 94));
+        scrollAreaWidgetContents_8->setGeometry(QRect(0, 0, 463, 96));
         gridLayout_4 = new QGridLayout(scrollAreaWidgetContents_8);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         pushButton_2 = new QPushButton(scrollAreaWidgetContents_8);
@@ -325,7 +328,7 @@ public:
         scrollArea_7->setWidgetResizable(true);
         scrollAreaWidgetContents_9 = new QWidget();
         scrollAreaWidgetContents_9->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_9"));
-        scrollAreaWidgetContents_9->setGeometry(QRect(0, 0, 495, 112));
+        scrollAreaWidgetContents_9->setGeometry(QRect(0, 0, 495, 111));
         gridLayout_2 = new QGridLayout(scrollAreaWidgetContents_9);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         pushButton_3 = new QPushButton(scrollAreaWidgetContents_9);
@@ -480,7 +483,7 @@ public:
         ScrollAreaProfilesHideGames->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 439));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 431));
         QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
@@ -550,9 +553,10 @@ public:
 
         label_10 = new QLabel(tab_2);
         label_10->setObjectName(QString::fromUtf8("label_10"));
-        QFont font;
-        font.setPointSize(10);
-        label_10->setFont(font);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Ebrima"));
+        font1.setPointSize(10);
+        label_10->setFont(font1);
         label_10->setWordWrap(true);
         label_10->setOpenExternalLinks(true);
         label_10->setTextInteractionFlags(Qt::TextBrowserInteraction);

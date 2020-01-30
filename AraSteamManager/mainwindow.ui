@@ -6,9 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>465</width>
+    <width>479</width>
     <height>393</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Ebrima</family>
+   </font>
   </property>
   <property name="windowTitle">
    <string>SteamAchievementsStatistic</string>
@@ -156,8 +161,8 @@ color: rgb(26, 26, 26);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>451</width>
-         <height>154</height>
+         <width>465</width>
+         <height>159</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -181,33 +186,30 @@ color: rgb(26, 26, 26);</string>
           <property name="verticalSpacing">
            <number>3</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QLabel" name="LabelNick">
-            <property name="font">
-             <font>
-              <pointsize>16</pointsize>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color:rgb(0, 170, 0)</string>
-            </property>
-            <property name="text">
-             <string>NickName</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+          <item row="1" column="1" colspan="2">
+           <widget class="QLabel" name="LabelPersonaState">
+            <property name="maximumSize">
              <size>
-              <width>40</width>
-              <height>20</height>
+              <width>16777215</width>
+              <height>16</height>
              </size>
             </property>
-           </spacer>
+            <property name="font">
+             <font>
+              <family>Ebrima</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>PersonaState</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item row="0" column="0" rowspan="3">
            <widget class="QLabel" name="LabelAvatar">
@@ -232,6 +234,7 @@ color: rgb(26, 26, 26);</string>
             </property>
             <property name="font">
              <font>
+              <family>Ebrima</family>
               <pointsize>10</pointsize>
              </font>
             </property>
@@ -249,27 +252,36 @@ color: rgb(26, 26, 26);</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1" colspan="2">
-           <widget class="QLabel" name="LabelPersonaState">
-            <property name="maximumSize">
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
              <size>
-              <width>16777215</width>
-              <height>16</height>
+              <width>40</width>
+              <height>20</height>
              </size>
             </property>
+           </spacer>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="LabelNick">
             <property name="font">
              <font>
-              <pointsize>10</pointsize>
+              <family>MS Shell Dlg 2</family>
+              <pointsize>16</pointsize>
              </font>
             </property>
             <property name="text">
-             <string>PersonaState</string>
+             <string>NickName</string>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QPushButton" name="ButtonUpdate">
+            <property name="text">
+             <string>Обновить</string>
             </property>
            </widget>
           </item>
@@ -281,6 +293,7 @@ color: rgb(26, 26, 26);</string>
            <widget class="QLabel" name="LabelTimeCreated">
             <property name="font">
              <font>
+              <family>Ebrima</family>
               <pointsize>10</pointsize>
              </font>
             </property>
@@ -293,6 +306,7 @@ color: rgb(26, 26, 26);</string>
            <widget class="QLabel" name="LabelLocCountryCode">
             <property name="font">
              <font>
+              <family>Ebrima</family>
               <pointsize>10</pointsize>
              </font>
             </property>
@@ -305,6 +319,7 @@ color: rgb(26, 26, 26);</string>
            <widget class="QLabel" name="LabelRealName">
             <property name="font">
              <font>
+              <family>Ebrima</family>
               <pointsize>10</pointsize>
              </font>
             </property>
@@ -317,6 +332,7 @@ color: rgb(26, 26, 26);</string>
            <widget class="QLabel" name="Labellvl">
             <property name="font">
              <font>
+              <family>Ebrima</family>
               <pointsize>10</pointsize>
              </font>
             </property>
@@ -342,6 +358,7 @@ color: rgb(26, 26, 26);</string>
            <widget class="QLabel" name="LabelProfileVisibility">
             <property name="font">
              <font>
+              <family>Ebrima</family>
               <pointsize>10</pointsize>
              </font>
             </property>
@@ -354,6 +371,7 @@ color: rgb(26, 26, 26);</string>
            <widget class="QLabel" name="LabelBans">
             <property name="font">
              <font>
+              <family>Ebrima</family>
               <pointsize>10</pointsize>
              </font>
             </property>
@@ -460,7 +478,7 @@ color: rgb(26, 26, 26);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>451</width>
+         <width>465</width>
          <height>68</height>
         </rect>
        </property>
@@ -474,7 +492,7 @@ color: rgb(26, 26, 26);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>465</width>
+     <width>479</width>
      <height>21</height>
     </rect>
    </property>

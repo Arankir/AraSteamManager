@@ -9,7 +9,6 @@
 #include "../../AraSteamManager/class/Threads/threadfriends.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
-#include <QtCore/QVector>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'threadfriends.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -23,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadFriends_t {
     QByteArrayData data[14];
-    char stringdata0[129];
+    char stringdata0[121];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,16 +41,16 @@ QT_MOC_LITERAL(6, 43, 4), // "Fill"
 QT_MOC_LITERAL(7, 48, 3), // "Set"
 QT_MOC_LITERAL(8, 52, 13), // "QTableWidget*"
 QT_MOC_LITERAL(9, 66, 18), // "TableWidgetFriends"
-QT_MOC_LITERAL(10, 85, 17), // "QVector<SProfile>"
-QT_MOC_LITERAL(11, 103, 8), // "Profiles"
-QT_MOC_LITERAL(12, 112, 8), // "SFriends"
-QT_MOC_LITERAL(13, 121, 7) // "Friends"
+QT_MOC_LITERAL(10, 85, 9), // "SProfiles"
+QT_MOC_LITERAL(11, 95, 8), // "Profiles"
+QT_MOC_LITERAL(12, 104, 8), // "SFriends"
+QT_MOC_LITERAL(13, 113, 7) // "Friends"
 
     },
     "ThreadFriends\0s_finished\0\0s_progress\0"
     "p\0row\0Fill\0Set\0QTableWidget*\0"
-    "TableWidgetFriends\0QVector<SProfile>\0"
-    "Profiles\0SFriends\0Friends"
+    "TableWidgetFriends\0SProfiles\0Profiles\0"
+    "SFriends\0Friends"
 };
 #undef QT_MOC_LITERAL
 
@@ -97,7 +96,7 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->Set((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< QVector<SProfile>(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3]))); break;
+        case 3: _t->Set((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< SProfiles(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
