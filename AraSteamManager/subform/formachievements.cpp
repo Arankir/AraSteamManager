@@ -233,7 +233,7 @@ void FormAchievements::Retranslate(){
     ui->ButtonChangeCategory->setText(tr("Изменить категорию"));
     ui->ButtonDeleteAllCategories->setText(tr("Удалить все категории"));
     ui->ButtonUpdate->setText(tr("Обновить"));
-    ui->GroupBoxCompareShowedColumns->setTitle(tr("Видимые столбцы"));
+    //ui->GroupBoxCompareShowedColumns->setTitle(tr("Видимые столбцы"));
     ui->CheckBoxCompareIcon->setText(tr("Иконка"));
     ui->CheckBoxCompareTitle->setText(tr("Название"));
     ui->CheckBoxCompareDescription->setText(tr("Описание"));

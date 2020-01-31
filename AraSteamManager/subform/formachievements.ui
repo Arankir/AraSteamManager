@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>837</width>
-    <height>865</height>
+    <height>885</height>
    </rect>
   </property>
   <property name="font">
@@ -232,7 +232,7 @@
              <x>0</x>
              <y>0</y>
              <width>262</width>
-             <height>185</height>
+             <height>89</height>
             </rect>
            </property>
           </widget>
@@ -255,104 +255,11 @@
              <x>0</x>
              <y>0</y>
              <width>261</width>
-             <height>185</height>
+             <height>89</height>
             </rect>
            </property>
           </widget>
          </widget>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QGroupBox" name="GroupBoxCompareShowedColumns">
-            <property name="title">
-             <string>Видимые столбцы</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_9">
-             <property name="spacing">
-              <number>1</number>
-             </property>
-             <property name="leftMargin">
-              <number>1</number>
-             </property>
-             <property name="topMargin">
-              <number>1</number>
-             </property>
-             <property name="rightMargin">
-              <number>1</number>
-             </property>
-             <property name="bottomMargin">
-              <number>1</number>
-             </property>
-             <item>
-              <widget class="QCheckBox" name="CheckBoxCompareIcon">
-               <property name="text">
-                <string>Иконка</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="CheckBoxCompareTitle">
-               <property name="text">
-                <string>Название</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="CheckBoxCompareDescription">
-               <property name="text">
-                <string>Описание</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="CheckBoxCompareTotalPercent">
-               <property name="text">
-                <string>По миру</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <item>
-             <widget class="QPushButton" name="ButtonAddCategory">
-              <property name="text">
-               <string>Добавить категорию</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ButtonChangeCategory">
-              <property name="text">
-               <string>Изменить категории</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ButtonDeleteAllCategories">
-              <property name="text">
-               <string>Удалить все категории</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -376,6 +283,35 @@
              <widget class="QCheckBox" name="CheckBoxCompareAllFriends">
               <property name="text">
                <string>Все друзья</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QPushButton" name="ButtonAddCategory">
+              <property name="text">
+               <string>Добавить категорию</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ButtonChangeCategory">
+              <property name="text">
+               <string>Изменить категории</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ButtonDeleteAllCategories">
+              <property name="text">
+               <string>Удалить все категории</string>
               </property>
              </widget>
             </item>
@@ -475,7 +411,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>504</width>
+              <width>505</width>
               <height>135</height>
              </rect>
             </property>
@@ -529,11 +465,42 @@
          </sizepolicy>
         </property>
         <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectRows</enum>
+         <enum>QAbstractItemView::SelectColumns</enum>
+        </property>
+        <property name="rowCount">
+         <number>4</number>
+        </property>
+        <property name="columnCount">
+         <number>2</number>
         </property>
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
         </attribute>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
+        <column/>
+        <column/>
+        <item row="0" column="1">
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+        <item row="1" column="1">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="foreground">
+          <brush brushstyle="CrossPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
@@ -545,6 +512,50 @@
          <string>%v/%m</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QCheckBox" name="CheckBoxCompareIcon">
+          <property name="text">
+           <string>Иконка</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="CheckBoxCompareTitle">
+          <property name="text">
+           <string>Название</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="CheckBoxCompareDescription">
+          <property name="text">
+           <string>Описание</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="CheckBoxCompareTotalPercent">
+          <property name="text">
+           <string>По миру</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">

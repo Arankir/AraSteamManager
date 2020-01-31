@@ -1,5 +1,6 @@
 #include "formgames.h"
 #include "ui_formgames.h"
+
 #define Constants {
 const int c_tableColumnAppid=0;
 const int c_tableColumnIndex=1;
@@ -9,6 +10,7 @@ const int c_tableColumnProgress=4;
 const int c_tableColumnCount=5;
 #define ConstantsEnd }
 
+#define Init {
 FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
     ui->setupUi(this);
     _id=a_id;
@@ -23,8 +25,6 @@ FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) :    QWidget
     }
     InitComponents();
 }
-
-#define Init {
 void FormGames::InitComponents(){
     _games.Sort();
     _favorites.SetPath("Files/Favorites/Games.json","Games");
@@ -32,50 +32,56 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
-    ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->TableWidgetGames->setAlternatingRowColors(true);
+    //ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
+    //ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
     ui->GroupBoxGame->setVisible(false);
-    ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
     ui->ButtonAchievements->setText(tr("Достижения"));
     ui->ButtonFavorite->setText("");
     ui->ButtonHide->setText("");
+    ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
     ui->ButtonFavorite->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
     ui->ButtonHide->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
+    ui->ButtonCreateGroup->setIcon(QIcon(":/program/program/create.png"));
+    ui->ButtonChangeGroup->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/change.png"));
     ui->TableWidgetGames->setRowCount(_games.GetCount());
     for (int i=0;i<_games.GetCount();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
         ui->TableWidgetGames->setCellWidget(i,c_tableColumnProgress, new QProgressBar);
     }
+    //загрузить группы
     ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon,33);
     ui->TableWidgetGames->setColumnWidth(c_tableColumnName,300);
     Threading loadTable(this);
     loadTable.AddThreadGames(ui->TableWidgetGames,_games);
 }
 void FormGames::ProgressLoading(int a_progress,int a_row){
-
+    ui->ProgressBarLoading->setValue(a_progress);
+    if(ui->ProgressBarLoading->value()==ui->ProgressBarLoading->maximum()-1){
+        //ui->ProgressBarLoading->setVisible(false);
+        //ui->TableWidgetGames->setEnabled(true);
+    }
 }
 void FormGames::OnFinish(){
     ui->TableWidgetGames->setColumnHidden(c_tableColumnAppid,true);
     ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex,true);
     ui->TableWidgetGames->resizeColumnsToContents();
-    QFile fileHide1;
-    fileHide1.setFileName("Files/Hide/"+_id+".txt");
-    if(fileHide1.open(QIODevice::ReadOnly)){
-        while(!fileHide1.atEnd()){
-            _hide << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
+    QFile fileHide;
+    fileHide.setFileName("Files/Hide/"+_id+".txt");
+    if(fileHide.open(QIODevice::ReadOnly)){
+        while(!fileHide.atEnd()){
+            _hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n");
         }
-        fileHide1.close();
+        fileHide.close();
     }
-    QFile fileHide2;
-    fileHide2.setFileName("Files/Hide/All.txt");
-    if(fileHide2.open(QIODevice::ReadOnly)){
-        while(!fileHide2.atEnd()){
-            _hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n").split("%%").at(0);
+    fileHide.setFileName("Files/Hide/All.txt");
+    if(fileHide.open(QIODevice::ReadOnly)){
+        while(!fileHide.atEnd()){
+            _hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n").split("%%").at(0);
         }
-        fileHide2.close();
+        fileHide.close();
     }
     QStringList hideList=_hide;
     _achievements = new SAchievementsPlayer[_games.GetCount()];
@@ -237,6 +243,9 @@ void FormGames::on_ButtonAchievements_clicked(){
     if(Percentage.GetCount()==0){
         QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
     } else {
+        //ui->TableWidgetGames->setEnabled(false);
+        ui->ProgressBarLoading->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(_selectedIndex.toInt(),c_tableColumnProgress))->maximum());
+        //ui->ProgressBarLoading->setVisible(true);
         AddAchievements(_selectedIndex.toInt());
     }
 }

@@ -48,9 +48,9 @@ void FormFriends::InitComponents(){
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnGoTo,new QTableWidgetItem(tr("На профиль")));
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnFavorite,new QTableWidgetItem(tr("Избранное")));
     ui->ComboBoxStatus->addItems(QStringList()<<tr("Статус")<<tr("В игре")<<tr("Не в сети")<<tr("В сети")<<tr("Не беспокоить")<<tr("Нет на месте")<<tr("Спит")<<tr("Ожидает обмена")<<tr("Хочет поиграть"));
-    ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->TableWidgetFriends->setAlternatingRowColors(true);
-    ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
+    //ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //ui->TableWidgetFriends->setAlternatingRowColors(true);
+    //ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetFriends->setRowCount(_friends.GetCount());
     ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+_theme+"/program/"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");

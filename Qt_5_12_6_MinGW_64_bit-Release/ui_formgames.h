@@ -27,7 +27,7 @@ QT_BEGIN_NAMESPACE
 class Ui_FormGames
 {
 public:
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_3;
     QGroupBox *GroupBoxGame;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
@@ -38,11 +38,17 @@ public:
     QPushButton *ButtonAchievements;
     QPushButton *ButtonFavorite;
     QPushButton *ButtonHide;
+    QProgressBar *ProgressBarLoading;
     QHBoxLayout *horizontalLayout;
     QLineEdit *LineEditGame;
     QPushButton *ButtonFind;
+    QHBoxLayout *horizontalLayout_5;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *ButtonCreateGroup;
+    QPushButton *ButtonChangeGroup;
+    QGroupBox *GroupBoxGroup;
     QTableWidget *TableWidgetGames;
-    QProgressBar *ProgressBarLoading;
 
     void setupUi(QWidget *FormGames)
     {
@@ -53,21 +59,15 @@ public:
         font.setFamily(QString::fromUtf8("Ebrima"));
         font.setPointSize(10);
         FormGames->setFont(font);
-        verticalLayout = new QVBoxLayout(FormGames);
-        verticalLayout->setSpacing(1);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(1, 1, 1, 1);
+        verticalLayout_3 = new QVBoxLayout(FormGames);
+        verticalLayout_3->setSpacing(2);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         GroupBoxGame = new QGroupBox(FormGames);
         GroupBoxGame->setObjectName(QString::fromUtf8("GroupBoxGame"));
-        GroupBoxGame->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
-"	border: 1px solid #13657b;\n"
-"	background-color: #262626;\n"
-"	border-radius: 1px;\n"
-"}"));
         verticalLayout_2 = new QVBoxLayout(GroupBoxGame);
-        verticalLayout_2->setSpacing(3);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(1, 1, 1, 1);
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(3);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -126,7 +126,13 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_3);
 
 
-        verticalLayout->addWidget(GroupBoxGame);
+        verticalLayout_3->addWidget(GroupBoxGame);
+
+        ProgressBarLoading = new QProgressBar(FormGames);
+        ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));
+        ProgressBarLoading->setValue(0);
+
+        verticalLayout_3->addWidget(ProgressBarLoading);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -147,19 +153,55 @@ public:
         horizontalLayout->addWidget(ButtonFind);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout_3->addLayout(horizontalLayout);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(0);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(0);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(0);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        ButtonCreateGroup = new QPushButton(FormGames);
+        ButtonCreateGroup->setObjectName(QString::fromUtf8("ButtonCreateGroup"));
+
+        horizontalLayout_4->addWidget(ButtonCreateGroup);
+
+        ButtonChangeGroup = new QPushButton(FormGames);
+        ButtonChangeGroup->setObjectName(QString::fromUtf8("ButtonChangeGroup"));
+
+        horizontalLayout_4->addWidget(ButtonChangeGroup);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        GroupBoxGroup = new QGroupBox(FormGames);
+        GroupBoxGroup->setObjectName(QString::fromUtf8("GroupBoxGroup"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(GroupBoxGroup->sizePolicy().hasHeightForWidth());
+        GroupBoxGroup->setSizePolicy(sizePolicy2);
+        QFont font3;
+        font3.setPointSize(10);
+        GroupBoxGroup->setFont(font3);
+        GroupBoxGroup->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        verticalLayout->addWidget(GroupBoxGroup);
+
+
+        horizontalLayout_5->addLayout(verticalLayout);
 
         TableWidgetGames = new QTableWidget(FormGames);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
         TableWidgetGames->verticalHeader()->setVisible(false);
 
-        verticalLayout->addWidget(TableWidgetGames);
+        horizontalLayout_5->addWidget(TableWidgetGames);
 
-        ProgressBarLoading = new QProgressBar(FormGames);
-        ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));
-        ProgressBarLoading->setValue(0);
 
-        verticalLayout->addWidget(ProgressBarLoading);
+        verticalLayout_3->addLayout(horizontalLayout_5);
 
         QWidget::setTabOrder(LineEditGame, ButtonFind);
 
@@ -177,9 +219,11 @@ public:
         ButtonAchievements->setText(QApplication::translate("FormGames", "Achievements", nullptr));
         ButtonFavorite->setText(QApplication::translate("FormGames", "Favorite", nullptr));
         ButtonHide->setText(QApplication::translate("FormGames", "Hide", nullptr));
+        ProgressBarLoading->setFormat(QApplication::translate("FormGames", "%v/%m", nullptr));
         LineEditGame->setPlaceholderText(QApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
         ButtonFind->setText(QApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
-        ProgressBarLoading->setFormat(QApplication::translate("FormGames", "%v/%m", nullptr));
+        ButtonCreateGroup->setText(QApplication::translate("FormGames", "Create", nullptr));
+        ButtonChangeGroup->setText(QApplication::translate("FormGames", "Change", nullptr));
     } // retranslateUi
 
 };

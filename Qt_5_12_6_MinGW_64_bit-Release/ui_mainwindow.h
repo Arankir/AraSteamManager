@@ -44,18 +44,16 @@ public:
     QPushButton *ButtonNext;
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *ButtonSetProfile;
-    QSpacerItem *horizontalSpacer_3;
     QScrollArea *ScrollAreaProfileInfo;
     QWidget *scrollAreaWidgetContents;
     QVBoxLayout *verticalLayout_2;
     QGridLayout *gridLayout_2;
-    QLabel *LabelPersonaState;
-    QLabel *LabelAvatar;
     QLabel *LabelProfileUrl;
-    QSpacerItem *horizontalSpacer;
     QLabel *LabelNick;
+    QLabel *LabelAvatar;
+    QLabel *LabelPersonaState;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *ButtonSetProfile;
     QPushButton *ButtonUpdate;
     QGridLayout *gridLayout_3;
     QLabel *LabelTimeCreated;
@@ -85,7 +83,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(479, 393);
+        MainWindow->resize(479, 365);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         MainWindow->setFont(font);
@@ -150,21 +148,6 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        ButtonSetProfile = new QPushButton(centralWidget);
-        ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
-
-        horizontalLayout_2->addWidget(ButtonSetProfile);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_3);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
-
         ScrollAreaProfileInfo = new QScrollArea(centralWidget);
         ScrollAreaProfileInfo->setObjectName(QString::fromUtf8("ScrollAreaProfileInfo"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -172,52 +155,33 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(ScrollAreaProfileInfo->sizePolicy().hasHeightForWidth());
         ScrollAreaProfileInfo->setSizePolicy(sizePolicy);
-        ScrollAreaProfileInfo->setMaximumSize(QSize(16777215, 190));
+        ScrollAreaProfileInfo->setMaximumSize(QSize(16777215, 150));
         ScrollAreaProfileInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         ScrollAreaProfileInfo->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 465, 159));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 465, 148));
         verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
-        verticalLayout_2->setSpacing(3);
+        verticalLayout_2->setSpacing(2);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(3, 3, 3, 15);
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(6);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setVerticalSpacing(3);
-        LabelPersonaState = new QLabel(scrollAreaWidgetContents);
-        LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
-        LabelPersonaState->setMaximumSize(QSize(16777215, 16));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Ebrima"));
-        font1.setPointSize(10);
-        LabelPersonaState->setFont(font1);
-        LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        LabelPersonaState->setWordWrap(true);
-
-        gridLayout_2->addWidget(LabelPersonaState, 1, 1, 1, 2);
-
-        LabelAvatar = new QLabel(scrollAreaWidgetContents);
-        LabelAvatar->setObjectName(QString::fromUtf8("LabelAvatar"));
-        LabelAvatar->setMaximumSize(QSize(64, 64));
-
-        gridLayout_2->addWidget(LabelAvatar, 0, 0, 3, 1);
-
         LabelProfileUrl = new QLabel(scrollAreaWidgetContents);
         LabelProfileUrl->setObjectName(QString::fromUtf8("LabelProfileUrl"));
         LabelProfileUrl->setMaximumSize(QSize(16777215, 16));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Ebrima"));
+        font1.setPointSize(10);
         LabelProfileUrl->setFont(font1);
         LabelProfileUrl->setWordWrap(true);
         LabelProfileUrl->setOpenExternalLinks(true);
         LabelProfileUrl->setTextInteractionFlags(Qt::TextBrowserInteraction);
 
         gridLayout_2->addWidget(LabelProfileUrl, 2, 1, 1, 2);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer, 0, 2, 1, 1);
 
         LabelNick = new QLabel(scrollAreaWidgetContents);
         LabelNick->setObjectName(QString::fromUtf8("LabelNick"));
@@ -228,10 +192,34 @@ public:
 
         gridLayout_2->addWidget(LabelNick, 0, 1, 1, 1);
 
+        LabelAvatar = new QLabel(scrollAreaWidgetContents);
+        LabelAvatar->setObjectName(QString::fromUtf8("LabelAvatar"));
+        LabelAvatar->setMaximumSize(QSize(64, 64));
+
+        gridLayout_2->addWidget(LabelAvatar, 0, 0, 3, 1);
+
+        LabelPersonaState = new QLabel(scrollAreaWidgetContents);
+        LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
+        LabelPersonaState->setMaximumSize(QSize(16777215, 16));
+        LabelPersonaState->setFont(font1);
+        LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        LabelPersonaState->setWordWrap(true);
+
+        gridLayout_2->addWidget(LabelPersonaState, 1, 1, 1, 2);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_2->addItem(horizontalSpacer, 0, 2, 1, 1);
+
+        ButtonSetProfile = new QPushButton(scrollAreaWidgetContents);
+        ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
+
+        gridLayout_2->addWidget(ButtonSetProfile, 0, 3, 1, 2);
+
         ButtonUpdate = new QPushButton(scrollAreaWidgetContents);
         ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
 
-        gridLayout_2->addWidget(ButtonUpdate, 0, 3, 1, 1);
+        gridLayout_2->addWidget(ButtonUpdate, 1, 4, 1, 1);
 
 
         verticalLayout_2->addLayout(gridLayout_2);
@@ -380,11 +368,11 @@ public:
         ButtonNext->setText(QApplication::translate("MainWindow", "Next", nullptr));
         LineEditIdProfile->setPlaceholderText(QApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
         ButtonFindProfile->setText(QApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
-        ButtonSetProfile->setText(QApplication::translate("MainWindow", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        LabelPersonaState->setText(QApplication::translate("MainWindow", "PersonaState", nullptr));
-        LabelAvatar->setText(QApplication::translate("MainWindow", "Avatar", nullptr));
         LabelProfileUrl->setText(QApplication::translate("MainWindow", "ProfileUrl", nullptr));
         LabelNick->setText(QApplication::translate("MainWindow", "NickName", nullptr));
+        LabelAvatar->setText(QApplication::translate("MainWindow", "Avatar", nullptr));
+        LabelPersonaState->setText(QApplication::translate("MainWindow", "PersonaState", nullptr));
+        ButtonSetProfile->setText(QApplication::translate("MainWindow", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         ButtonUpdate->setText(QApplication::translate("MainWindow", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214", nullptr));
         LabelTimeCreated->setText(QApplication::translate("MainWindow", "TimeCreated", nullptr));
         LabelLocCountryCode->setText(QApplication::translate("MainWindow", "CountryCode", nullptr));
