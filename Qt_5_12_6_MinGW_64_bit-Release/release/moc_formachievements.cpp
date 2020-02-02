@@ -179,7 +179,7 @@ static const uint qt_meta_data_FormAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      55,   14, // methods
+      56,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -187,63 +187,64 @@ static const uint qt_meta_data_FormAchievements[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  289,    2, 0x06 /* Public */,
+       1,    1,  294,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    2,  292,    2, 0x0a /* Public */,
-       7,    0,  297,    2, 0x0a /* Public */,
-       8,    1,  298,    2, 0x08 /* Private */,
-      11,    0,  301,    2, 0x08 /* Private */,
-      12,    0,  302,    2, 0x08 /* Private */,
-      13,    0,  303,    2, 0x08 /* Private */,
-      14,    1,  304,    2, 0x08 /* Private */,
-      17,    1,  307,    2, 0x08 /* Private */,
-      20,    0,  310,    2, 0x08 /* Private */,
-      21,    1,  311,    2, 0x08 /* Private */,
-      24,    0,  314,    2, 0x08 /* Private */,
-      25,    2,  315,    2, 0x08 /* Private */,
-      29,    2,  320,    2, 0x08 /* Private */,
-      30,    0,  325,    2, 0x08 /* Private */,
-      31,    2,  326,    2, 0x08 /* Private */,
-      33,    2,  331,    2, 0x08 /* Private */,
-      36,    1,  336,    2, 0x08 /* Private */,
-      38,    1,  339,    2, 0x08 /* Private */,
-      40,    0,  342,    2, 0x08 /* Private */,
-      41,    0,  343,    2, 0x08 /* Private */,
-      42,    2,  344,    2, 0x08 /* Private */,
-      46,    1,  349,    2, 0x08 /* Private */,
-      47,    0,  352,    2, 0x08 /* Private */,
-      48,    0,  353,    2, 0x08 /* Private */,
-      49,    0,  354,    2, 0x08 /* Private */,
-      50,    0,  355,    2, 0x08 /* Private */,
-      51,    0,  356,    2, 0x08 /* Private */,
-      52,    0,  357,    2, 0x08 /* Private */,
-      53,    1,  358,    2, 0x08 /* Private */,
-      54,    1,  361,    2, 0x08 /* Private */,
-      56,    1,  364,    2, 0x08 /* Private */,
-      58,    0,  367,    2, 0x08 /* Private */,
-      59,    1,  368,    2, 0x08 /* Private */,
-      60,    1,  371,    2, 0x08 /* Private */,
-      61,    1,  374,    2, 0x08 /* Private */,
-      62,    1,  377,    2, 0x08 /* Private */,
-      63,    0,  380,    2, 0x08 /* Private */,
-      64,    0,  381,    2, 0x08 /* Private */,
-      65,    0,  382,    2, 0x08 /* Private */,
-      66,    0,  383,    2, 0x08 /* Private */,
-      67,    1,  384,    2, 0x08 /* Private */,
-      68,    1,  387,    2, 0x08 /* Private */,
-      69,    1,  390,    2, 0x08 /* Private */,
-      70,    0,  393,    2, 0x08 /* Private */,
-      71,    2,  394,    2, 0x08 /* Private */,
-      74,    2,  399,    2, 0x08 /* Private */,
-      76,    2,  404,    2, 0x08 /* Private */,
-      78,    2,  409,    2, 0x08 /* Private */,
-      80,    1,  414,    2, 0x08 /* Private */,
-      81,    1,  417,    2, 0x08 /* Private */,
-      82,    1,  420,    2, 0x08 /* Private */,
-      83,    1,  423,    2, 0x08 /* Private */,
-      84,    1,  426,    2, 0x08 /* Private */,
-      87,    0,  429,    2, 0x08 /* Private */,
+       4,    2,  297,    2, 0x0a /* Public */,
+       7,    0,  302,    2, 0x0a /* Public */,
+       8,    1,  303,    2, 0x08 /* Private */,
+      11,    0,  306,    2, 0x08 /* Private */,
+      12,    0,  307,    2, 0x08 /* Private */,
+      13,    0,  308,    2, 0x08 /* Private */,
+      14,    1,  309,    2, 0x08 /* Private */,
+      17,    1,  312,    2, 0x08 /* Private */,
+      20,    0,  315,    2, 0x08 /* Private */,
+      21,    1,  316,    2, 0x08 /* Private */,
+      24,    0,  319,    2, 0x08 /* Private */,
+      25,    2,  320,    2, 0x08 /* Private */,
+      29,    2,  325,    2, 0x08 /* Private */,
+      30,    0,  330,    2, 0x08 /* Private */,
+      31,    2,  331,    2, 0x08 /* Private */,
+      33,    2,  336,    2, 0x08 /* Private */,
+      36,    1,  341,    2, 0x08 /* Private */,
+      38,    1,  344,    2, 0x08 /* Private */,
+      40,    0,  347,    2, 0x08 /* Private */,
+      41,    0,  348,    2, 0x08 /* Private */,
+      42,    2,  349,    2, 0x08 /* Private */,
+      46,    1,  354,    2, 0x08 /* Private */,
+      47,    0,  357,    2, 0x08 /* Private */,
+      48,    0,  358,    2, 0x08 /* Private */,
+      49,    0,  359,    2, 0x08 /* Private */,
+      50,    0,  360,    2, 0x08 /* Private */,
+      51,    0,  361,    2, 0x08 /* Private */,
+      52,    0,  362,    2, 0x08 /* Private */,
+      53,    1,  363,    2, 0x08 /* Private */,
+      54,    1,  366,    2, 0x08 /* Private */,
+      56,    1,  369,    2, 0x08 /* Private */,
+      58,    0,  372,    2, 0x08 /* Private */,
+      59,    1,  373,    2, 0x08 /* Private */,
+      60,    1,  376,    2, 0x08 /* Private */,
+      61,    1,  379,    2, 0x08 /* Private */,
+      62,    1,  382,    2, 0x08 /* Private */,
+      63,    0,  385,    2, 0x08 /* Private */,
+      64,    0,  386,    2, 0x08 /* Private */,
+      65,    0,  387,    2, 0x08 /* Private */,
+      66,    0,  388,    2, 0x08 /* Private */,
+      67,    1,  389,    2, 0x08 /* Private */,
+      68,    1,  392,    2, 0x08 /* Private */,
+      69,    1,  395,    2, 0x08 /* Private */,
+      70,    0,  398,    2, 0x08 /* Private */,
+      71,    2,  399,    2, 0x08 /* Private */,
+      74,    2,  404,    2, 0x08 /* Private */,
+      76,    2,  409,    2, 0x08 /* Private */,
+      78,    2,  414,    2, 0x08 /* Private */,
+      80,    1,  419,    2, 0x08 /* Private */,
+      81,    1,  422,    2, 0x08 /* Private */,
+      82,    1,  425,    2, 0x08 /* Private */,
+      83,    1,  428,    2, 0x08 /* Private */,
+      84,    1,  431,    2, 0x08 /* Private */,
+      87,    0,  434,    2, 0x08 /* Private */,
+      69,    1,  435,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -303,6 +304,7 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void, QMetaType::Int,   37,
     QMetaType::Void, 0x80000000 | 85,   86,
     0x80000000 | 88,
+    QMetaType::Void, QMetaType::QString,   37,
 
        0        // eod
 };
@@ -370,6 +372,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 53: _t->HideCheckedAchievement((*reinterpret_cast< QTableWidgetItem*(*)>(_a[1]))); break;
         case 54: { FormCategoryValue* _r = _t->CreateValueCategory();
             if (_a[0]) *reinterpret_cast< FormCategoryValue**>(_a[0]) = std::move(_r); }  break;
+        case 55: _t->on_ComboBoxCategoriesCategory_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -431,13 +434,13 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 55)
+        if (_id < 56)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 55;
+        _id -= 56;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 55)
+        if (_id < 56)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 55;
+        _id -= 56;
     }
     return _id;
 }

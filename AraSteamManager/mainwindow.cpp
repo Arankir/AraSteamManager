@@ -96,12 +96,16 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     "} "
                     ;
             subContainers =
-                    "QWidget#scrollAreaWidgetContents,QScrollArea,QAbstractScrollArea,QWidget[isScrollArea=\"true\"],QWidget[objectName=FormsWidget],"
-                    "QWidget[objectName=FormGames],QWidget[objectName=FormFriends],QWidget[objectName=FormAchievements],QWidget[objectName=FormCategoryValue],"
-                    "QWidget[objectName=FormCompareProfileFilter],QWidget[objectName=FormFavorites],QWidget[objectName=FormSettings],"
+                    "QScrollArea,QScrollArea > QWidget,QScrollArea > QWidget > QWidget, "
+                    "QAbstractScrollArea,QWidget[isScrollArea=\"true\"],QWidget[objectName=FormsWidget], "
+                    "QWidget[objectName=FormGames],QWidget[objectName=FormFriends],QWidget[objectName=FormAchievements],QWidget[objectName=FormCategoryValue], "
+                    "QWidget[objectName=FormCompareProfileFilter],QWidget[objectName=FormFavorites],QWidget[objectName=FormSettings], "
                     "QWidget[objectName=FormStatistics]{ "
-                        "background-color: rgba(0, 0, 0, 0); "
+                        "background-color: rgba(255, 255, 255, 0); "
                     "} "
+                    "QScrollArea { "
+                        "border: 1px solid black; "
+                    "}"
                     "QMessageBox{"
                         "background: black; "
                     "}"
@@ -114,7 +118,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             radioButtons =
                     "QRadioButton{"
                         "color: white; "
-                        //"background-color: rgba(0, 0, 0, 0); "
+                        "background-color: rgba(255, 255, 255, 0); "
+                        "border: 0px solid grey; "
                     "}"
 //                    "QRadioButton::indicator { "
 //                        "width: 13px; "
@@ -283,7 +288,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     ;
             checkBox =
                     "QCheckBox{ "
-                        "background-color: rgba(0,0,0,0); "
+                        "background-color: rgba(255,255,255,0); "
                         "color: white; "
                     "} "
                     "QCheckBox::hover { "
@@ -329,7 +334,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     "QTableWidget::item { "
                         "border-bottom: 1px solid #cccccc; "
                         "background-color: "+backgroundGradient+
-                        //"color: white; "
+                        "color: white; "
                     "} "
                     "QTableWidget::item:hover { "
                         //"border: 1px solid #232323; "

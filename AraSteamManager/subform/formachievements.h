@@ -128,6 +128,8 @@ private slots:
     void HideCheckedAchievement(QTableWidgetItem *item);
     FormCategoryValue *CreateValueCategory();
 
+    void on_ComboBoxCategoriesCategory_activated(const QString &arg1);
+
 private:
     Ui::FormAchievements *ui;
     QString _id;

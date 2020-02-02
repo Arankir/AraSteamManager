@@ -18,6 +18,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -28,7 +29,8 @@ class Ui_FormGames
 {
 public:
     QVBoxLayout *verticalLayout_3;
-    QGroupBox *GroupBoxGame;
+    QScrollArea *ScrollAreaGame;
+    QWidget *scrollAreaWidgetContents;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
     QLabel *LabelIconGame;
@@ -63,26 +65,36 @@ public:
         verticalLayout_3->setSpacing(2);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        GroupBoxGame = new QGroupBox(FormGames);
-        GroupBoxGame->setObjectName(QString::fromUtf8("GroupBoxGame"));
-        verticalLayout_2 = new QVBoxLayout(GroupBoxGame);
+        ScrollAreaGame = new QScrollArea(FormGames);
+        ScrollAreaGame->setObjectName(QString::fromUtf8("ScrollAreaGame"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ScrollAreaGame->sizePolicy().hasHeightForWidth());
+        ScrollAreaGame->setSizePolicy(sizePolicy);
+        ScrollAreaGame->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 601, 113));
+        verticalLayout_2 = new QVBoxLayout(scrollAreaWidgetContents);
+        verticalLayout_2->setSpacing(2);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(3);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        LabelIconGame = new QLabel(GroupBoxGame);
+        LabelIconGame = new QLabel(scrollAreaWidgetContents);
         LabelIconGame->setObjectName(QString::fromUtf8("LabelIconGame"));
 
         horizontalLayout_2->addWidget(LabelIconGame);
 
-        LabelTitleGame = new QLabel(GroupBoxGame);
+        LabelTitleGame = new QLabel(scrollAreaWidgetContents);
         LabelTitleGame->setObjectName(QString::fromUtf8("LabelTitleGame"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(LabelTitleGame->sizePolicy().hasHeightForWidth());
-        LabelTitleGame->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(LabelTitleGame->sizePolicy().hasHeightForWidth());
+        LabelTitleGame->setSizePolicy(sizePolicy1);
         QFont font1;
         font1.setPointSize(16);
         LabelTitleGame->setFont(font1);
@@ -93,7 +105,7 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
-        ProgressBarSelectedGame = new QProgressBar(GroupBoxGame);
+        ProgressBarSelectedGame = new QProgressBar(scrollAreaWidgetContents);
         ProgressBarSelectedGame->setObjectName(QString::fromUtf8("ProgressBarSelectedGame"));
         ProgressBarSelectedGame->setValue(0);
 
@@ -102,22 +114,22 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(3);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        ButtonAchievements = new QPushButton(GroupBoxGame);
+        ButtonAchievements = new QPushButton(scrollAreaWidgetContents);
         ButtonAchievements->setObjectName(QString::fromUtf8("ButtonAchievements"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(ButtonAchievements->sizePolicy().hasHeightForWidth());
-        ButtonAchievements->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(ButtonAchievements->sizePolicy().hasHeightForWidth());
+        ButtonAchievements->setSizePolicy(sizePolicy2);
 
         horizontalLayout_3->addWidget(ButtonAchievements);
 
-        ButtonFavorite = new QPushButton(GroupBoxGame);
+        ButtonFavorite = new QPushButton(scrollAreaWidgetContents);
         ButtonFavorite->setObjectName(QString::fromUtf8("ButtonFavorite"));
 
         horizontalLayout_3->addWidget(ButtonFavorite);
 
-        ButtonHide = new QPushButton(GroupBoxGame);
+        ButtonHide = new QPushButton(scrollAreaWidgetContents);
         ButtonHide->setObjectName(QString::fromUtf8("ButtonHide"));
 
         horizontalLayout_3->addWidget(ButtonHide);
@@ -125,8 +137,9 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_3);
 
+        ScrollAreaGame->setWidget(scrollAreaWidgetContents);
 
-        verticalLayout_3->addWidget(GroupBoxGame);
+        verticalLayout_3->addWidget(ScrollAreaGame);
 
         ProgressBarLoading = new QProgressBar(FormGames);
         ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));
@@ -179,11 +192,11 @@ public:
 
         GroupBoxGroup = new QGroupBox(FormGames);
         GroupBoxGroup->setObjectName(QString::fromUtf8("GroupBoxGroup"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(GroupBoxGroup->sizePolicy().hasHeightForWidth());
-        GroupBoxGroup->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(GroupBoxGroup->sizePolicy().hasHeightForWidth());
+        GroupBoxGroup->setSizePolicy(sizePolicy3);
         QFont font3;
         font3.setPointSize(10);
         GroupBoxGroup->setFont(font3);

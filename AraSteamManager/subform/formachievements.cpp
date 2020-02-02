@@ -1275,3 +1275,8 @@ void FormAchievements::on_CheckBoxFavorites_stateChanged(int arg1){
     UpdateHiddenRows();
 }
 #define FunctionEnd }
+
+void FormAchievements::on_ComboBoxCategoriesCategory_activated(const QString &arg1)
+{
+
+}

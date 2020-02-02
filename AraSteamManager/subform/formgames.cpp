@@ -37,7 +37,7 @@ void FormGames::InitComponents(){
     //ui->TableWidgetGames->setAlternatingRowColors(true);
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
-    ui->GroupBoxGame->setVisible(false);
+    ui->ScrollAreaGame->setVisible(false);
     ui->ButtonAchievements->setText(tr("Достижения"));
     ui->ButtonFavorite->setText("");
     ui->ButtonHide->setText("");
@@ -236,7 +236,7 @@ void FormGames::on_TableWidgetGames_cellClicked(int a_row, int){
     ui->LabelTitleGame->setText(ui->TableWidgetGames->item(a_row,c_tableColumnName)->text());
     ui->ProgressBarSelectedGame->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->maximum());
     ui->ProgressBarSelectedGame->setValue(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->value());
-    ui->GroupBoxGame->setVisible(true);
+    ui->ScrollAreaGame->setVisible(true);
 }
 void FormGames::on_ButtonAchievements_clicked(){
     SAchievementsPercentage Percentage(_selectedGame,false);
