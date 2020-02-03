@@ -682,6 +682,7 @@ void MainWindow::GoToProfile(QString a_id, QueryType a_type){
         ProfileToUi(newProfile);
         } else {
             QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
+            qDebug()<<newProfile.GetError();
         }
 }
 void MainWindow::ProfileToUi(SProfile a_profile){

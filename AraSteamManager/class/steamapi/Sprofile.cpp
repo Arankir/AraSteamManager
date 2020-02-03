@@ -30,7 +30,7 @@ SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *par
         }
         else {
             _status=StatusValue::error;
-            _error="profile is not exist";
+            _error=reply->readAll();
         }
         delete reply;
         emit s_finished(this);
