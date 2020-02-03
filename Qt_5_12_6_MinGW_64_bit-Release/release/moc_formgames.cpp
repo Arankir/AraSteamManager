@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
-    QByteArrayData data[33];
-    char stringdata0[519];
+    QByteArrayData data[39];
+    char stringdata0[595];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,37 +41,45 @@ QT_MOC_LITERAL(6, 70, 15), // "ProgressLoading"
 QT_MOC_LITERAL(7, 86, 8), // "OnFinish"
 QT_MOC_LITERAL(8, 95, 22), // "ReturnFromAchievements"
 QT_MOC_LITERAL(9, 118, 3), // "num"
-QT_MOC_LITERAL(10, 122, 14), // "InitComponents"
-QT_MOC_LITERAL(11, 137, 11), // "OnImageLoad"
-QT_MOC_LITERAL(12, 149, 12), // "RequestData*"
-QT_MOC_LITERAL(13, 162, 4), // "imgr"
-QT_MOC_LITERAL(14, 167, 20), // "OnResultAchievements"
-QT_MOC_LITERAL(15, 188, 19), // "SAchievementsPlayer"
-QT_MOC_LITERAL(16, 208, 3), // "ach"
-QT_MOC_LITERAL(17, 212, 10), // "closeEvent"
-QT_MOC_LITERAL(18, 223, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(19, 236, 5), // "event"
-QT_MOC_LITERAL(20, 242, 15), // "AddAchievements"
-QT_MOC_LITERAL(21, 258, 5), // "index"
-QT_MOC_LITERAL(22, 264, 18), // "RemoveAchievements"
-QT_MOC_LITERAL(23, 283, 26), // "ContainerAchievementsClose"
-QT_MOC_LITERAL(24, 310, 27), // "on_LineEditGame_textChanged"
-QT_MOC_LITERAL(25, 338, 21), // "on_ButtonFind_clicked"
-QT_MOC_LITERAL(26, 360, 37), // "on_TableWidgetGames_cellDoubl..."
-QT_MOC_LITERAL(27, 398, 3), // "row"
-QT_MOC_LITERAL(28, 402, 6), // "column"
-QT_MOC_LITERAL(29, 409, 31), // "on_TableWidgetGames_cellClicked"
-QT_MOC_LITERAL(30, 441, 29), // "on_ButtonAchievements_clicked"
-QT_MOC_LITERAL(31, 471, 25), // "on_ButtonFavorite_clicked"
-QT_MOC_LITERAL(32, 497, 21) // "on_ButtonHide_clicked"
+QT_MOC_LITERAL(10, 122, 19), // "showHideSlideWidget"
+QT_MOC_LITERAL(11, 142, 6), // "f_flag"
+QT_MOC_LITERAL(12, 149, 14), // "mouseMoveEvent"
+QT_MOC_LITERAL(13, 164, 12), // "QMouseEvent*"
+QT_MOC_LITERAL(14, 177, 2), // "ev"
+QT_MOC_LITERAL(15, 180, 17), // "slotShowHideSlide"
+QT_MOC_LITERAL(16, 198, 14), // "InitComponents"
+QT_MOC_LITERAL(17, 213, 11), // "OnImageLoad"
+QT_MOC_LITERAL(18, 225, 12), // "RequestData*"
+QT_MOC_LITERAL(19, 238, 4), // "imgr"
+QT_MOC_LITERAL(20, 243, 20), // "OnResultAchievements"
+QT_MOC_LITERAL(21, 264, 19), // "SAchievementsPlayer"
+QT_MOC_LITERAL(22, 284, 3), // "ach"
+QT_MOC_LITERAL(23, 288, 10), // "closeEvent"
+QT_MOC_LITERAL(24, 299, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(25, 312, 5), // "event"
+QT_MOC_LITERAL(26, 318, 15), // "AddAchievements"
+QT_MOC_LITERAL(27, 334, 5), // "index"
+QT_MOC_LITERAL(28, 340, 18), // "RemoveAchievements"
+QT_MOC_LITERAL(29, 359, 26), // "ContainerAchievementsClose"
+QT_MOC_LITERAL(30, 386, 27), // "on_LineEditGame_textChanged"
+QT_MOC_LITERAL(31, 414, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(32, 436, 37), // "on_TableWidgetGames_cellDoubl..."
+QT_MOC_LITERAL(33, 474, 3), // "row"
+QT_MOC_LITERAL(34, 478, 6), // "column"
+QT_MOC_LITERAL(35, 485, 31), // "on_TableWidgetGames_cellClicked"
+QT_MOC_LITERAL(36, 517, 29), // "on_ButtonAchievements_clicked"
+QT_MOC_LITERAL(37, 547, 25), // "on_ButtonFavorite_clicked"
+QT_MOC_LITERAL(38, 573, 21) // "on_ButtonHide_clicked"
 
     },
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
     "s_achievementsLoaded\0s_finish\0"
     "ProgressLoading\0OnFinish\0"
-    "ReturnFromAchievements\0num\0InitComponents\0"
-    "OnImageLoad\0RequestData*\0imgr\0"
-    "OnResultAchievements\0SAchievementsPlayer\0"
+    "ReturnFromAchievements\0num\0"
+    "showHideSlideWidget\0f_flag\0mouseMoveEvent\0"
+    "QMouseEvent*\0ev\0slotShowHideSlide\0"
+    "InitComponents\0OnImageLoad\0RequestData*\0"
+    "imgr\0OnResultAchievements\0SAchievementsPlayer\0"
     "ach\0closeEvent\0QCloseEvent*\0event\0"
     "AddAchievements\0index\0RemoveAchievements\0"
     "ContainerAchievementsClose\0"
@@ -91,7 +99,7 @@ static const uint qt_meta_data_FormGames[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      20,   14, // methods
+      23,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -99,28 +107,31 @@ static const uint qt_meta_data_FormGames[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  114,    2, 0x06 /* Public */,
-       4,    2,  117,    2, 0x06 /* Public */,
-       5,    0,  122,    2, 0x06 /* Public */,
+       1,    1,  129,    2, 0x06 /* Public */,
+       4,    2,  132,    2, 0x06 /* Public */,
+       5,    0,  137,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    2,  123,    2, 0x0a /* Public */,
-       7,    0,  128,    2, 0x0a /* Public */,
-       8,    1,  129,    2, 0x0a /* Public */,
-      10,    0,  132,    2, 0x08 /* Private */,
-      11,    1,  133,    2, 0x08 /* Private */,
-      14,    1,  136,    2, 0x08 /* Private */,
-      17,    1,  139,    2, 0x08 /* Private */,
-      20,    1,  142,    2, 0x08 /* Private */,
-      22,    1,  145,    2, 0x08 /* Private */,
-      23,    0,  148,    2, 0x08 /* Private */,
-      24,    1,  149,    2, 0x08 /* Private */,
-      25,    0,  152,    2, 0x08 /* Private */,
-      26,    2,  153,    2, 0x08 /* Private */,
-      29,    2,  158,    2, 0x08 /* Private */,
-      30,    0,  163,    2, 0x08 /* Private */,
-      31,    0,  164,    2, 0x08 /* Private */,
-      32,    0,  165,    2, 0x08 /* Private */,
+       6,    2,  138,    2, 0x0a /* Public */,
+       7,    0,  143,    2, 0x0a /* Public */,
+       8,    1,  144,    2, 0x0a /* Public */,
+      10,    1,  147,    2, 0x0a /* Public */,
+      12,    1,  150,    2, 0x0a /* Public */,
+      15,    0,  153,    2, 0x0a /* Public */,
+      16,    0,  154,    2, 0x08 /* Private */,
+      17,    1,  155,    2, 0x08 /* Private */,
+      20,    1,  158,    2, 0x08 /* Private */,
+      23,    1,  161,    2, 0x08 /* Private */,
+      26,    1,  164,    2, 0x08 /* Private */,
+      28,    1,  167,    2, 0x08 /* Private */,
+      29,    0,  170,    2, 0x08 /* Private */,
+      30,    1,  171,    2, 0x08 /* Private */,
+      31,    0,  174,    2, 0x08 /* Private */,
+      32,    2,  175,    2, 0x08 /* Private */,
+      35,    2,  180,    2, 0x08 /* Private */,
+      36,    0,  185,    2, 0x08 /* Private */,
+      37,    0,  186,    2, 0x08 /* Private */,
+      38,    0,  187,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -131,17 +142,20 @@ static const uint qt_meta_data_FormGames[] = {
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void, QMetaType::Bool,   11,
+    QMetaType::Void, 0x80000000 | 13,   14,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 12,   13,
-    QMetaType::Void, 0x80000000 | 15,   16,
+    QMetaType::Void,
     QMetaType::Void, 0x80000000 | 18,   19,
-    QMetaType::Void, QMetaType::Int,   21,
-    QMetaType::Void, QMetaType::Int,   21,
+    QMetaType::Void, 0x80000000 | 21,   22,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    QMetaType::Void, QMetaType::Int,   27,
+    QMetaType::Void, QMetaType::Int,   27,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   27,   28,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   27,   28,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   33,   34,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   33,   34,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -161,20 +175,23 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 3: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 4: _t->OnFinish(); break;
         case 5: _t->ReturnFromAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->InitComponents(); break;
-        case 7: _t->OnImageLoad((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 8: _t->OnResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
-        case 9: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 10: _t->AddAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 11: _t->RemoveAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: _t->ContainerAchievementsClose(); break;
-        case 13: _t->on_LineEditGame_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 14: _t->on_ButtonFind_clicked(); break;
-        case 15: _t->on_TableWidgetGames_cellDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 16: _t->on_TableWidgetGames_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 17: _t->on_ButtonAchievements_clicked(); break;
-        case 18: _t->on_ButtonFavorite_clicked(); break;
-        case 19: _t->on_ButtonHide_clicked(); break;
+        case 6: _t->showHideSlideWidget((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 7: _t->mouseMoveEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
+        case 8: _t->slotShowHideSlide(); break;
+        case 9: _t->InitComponents(); break;
+        case 10: _t->OnImageLoad((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
+        case 11: _t->OnResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
+        case 12: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
+        case 13: _t->AddAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->RemoveAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->ContainerAchievementsClose(); break;
+        case 16: _t->on_LineEditGame_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 17: _t->on_ButtonFind_clicked(); break;
+        case 18: _t->on_TableWidgetGames_cellDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 19: _t->on_TableWidgetGames_cellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 20: _t->on_ButtonAchievements_clicked(); break;
+        case 21: _t->on_ButtonFavorite_clicked(); break;
+        case 22: _t->on_ButtonHide_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -187,7 +204,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QWidget* >(); break;
             }
             break;
-        case 7:
+        case 10:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -250,13 +267,13 @@ int FormGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 20)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 20;
+        _id -= 23;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 20)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 20;
+        _id -= 23;
     }
     return _id;
 }

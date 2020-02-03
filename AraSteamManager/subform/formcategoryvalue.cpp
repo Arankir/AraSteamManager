@@ -3,6 +3,7 @@
 
 FormCategoryValue::FormCategoryValue(int a_pos, QWidget *parent) : QWidget(parent), ui(new Ui::FormCategoryValue){
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     _position=a_pos;
     switch(_setting.GetTheme()){
         case 1:
@@ -13,12 +14,12 @@ FormCategoryValue::FormCategoryValue(int a_pos, QWidget *parent) : QWidget(paren
             break;
     }
     ui->LabelPosition->setText(QString::number(_position+1));
-    ui->ButtonUp->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/up.png"));
-    ui->ButtonDown->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/down.png"));
-    ui->ButtonSelect->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/check_visible.png"));
-    ui->ButtonUnSelect->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/uncheck_visible.png"));
-    ui->ButtonDelete->setIcon(QIcon(":/program/program/delete.png"));
-    ui->ButtonReverse->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/reverse.png"));
+    ui->ButtonUp->setIcon(QIcon("://"+_theme+"/up.png"));
+    ui->ButtonDown->setIcon(QIcon("://"+_theme+"/down.png"));
+    ui->ButtonSelect->setIcon(QIcon("://"+_theme+"/check_visible.png"));
+    ui->ButtonUnSelect->setIcon(QIcon("://"+_theme+"/uncheck_visible.png"));
+    ui->ButtonDelete->setIcon(QIcon("://delete.png"));
+    ui->ButtonReverse->setIcon(QIcon("://"+_theme+"/reverse.png"));
 }
 
 FormCategoryValue::~FormCategoryValue(){

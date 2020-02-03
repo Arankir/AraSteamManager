@@ -5,6 +5,7 @@ FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormCompareProfileFilter){
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     QString theme;
     switch(_setting.GetTheme()){
         case 1:
@@ -14,9 +15,9 @@ FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
             theme="black";
             break;
     }
-    ui->RadioButtonAll->setIcon(QIcon(":/"+theme+"/program/"+theme+"/all.png"));
-    ui->RadioButtonReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/reached.png"));
-    ui->RadioButtonNotReached->setIcon(QIcon(":/"+theme+"/program/"+theme+"/notreached.png"));
+    ui->RadioButtonAll->setIcon(QIcon("://"+theme+"/all.png"));
+    ui->RadioButtonReached->setIcon(QIcon("://"+theme+"/reached.png"));
+    ui->RadioButtonNotReached->setIcon(QIcon("://"+theme+"/notreached.png"));
     ui->RadioButtonAll->SetReachedType(ReachedType::all);
     ui->RadioButtonReached->SetReachedType(ReachedType::reached);
     ui->RadioButtonNotReached->SetReachedType(ReachedType::notReached);

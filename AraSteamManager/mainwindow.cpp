@@ -49,18 +49,19 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     QString groupBox;
     switch(_setting.GetTheme()){
         case 1:{
+            _theme="white";
             hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                               "stop: 0 #185077, "
-                               "stop: 0.22 #387097, "
-                               "stop: 0.88 #286087, "
-                               "stop: 1.0 #185077); ";
+                        "stop: 0 #185077, "
+                        "stop: 0.22 #387097, "
+                        "stop: 0.88 #286087, "
+                        "stop: 1.0 #185077); ";
             backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                                                                                     "stop: 0 #213c57, "
-                                                                                     "stop: 1.0 #1a2839); ";
+                        "stop: 0 #213c57, "
+                        "stop: 1.0 #1a2839); ";
             pushButton =
                 "QPushButton{ "
                     "color: white; "
-                    "background-color: #2a475e; "
+                    "background-color: #24547d; "
                 "} "
                 "QPushButton:disabled{ "
                     //"color: 323232; "
@@ -96,11 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     "} "
                     ;
             subContainers =
-                    "QScrollArea,QScrollArea > QWidget,QScrollArea > QWidget > QWidget, "
-                    "QAbstractScrollArea,QWidget[isScrollArea=\"true\"],QWidget[objectName=FormsWidget], "
-                    "QWidget[objectName=FormGames],QWidget[objectName=FormFriends],QWidget[objectName=FormAchievements],QWidget[objectName=FormCategoryValue], "
-                    "QWidget[objectName=FormCompareProfileFilter],QWidget[objectName=FormFavorites],QWidget[objectName=FormSettings], "
-                    "QWidget[objectName=FormStatistics]{ "
+                    "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget, QWidget[isScrollArea=\"true\"]{ "
                         "background-color: rgba(255, 255, 255, 0); "
                     "} "
                     "QScrollArea { "
@@ -121,19 +118,15 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "background-color: rgba(255, 255, 255, 0); "
                         "border: 0px solid grey; "
                     "}"
-//                    "QRadioButton::indicator { "
-//                        "width: 13px; "
-//                        "height: 13px; "
-//                        "border-radius: 1px; "
-//                    "} "
-//                    "QRadioButton::indicator::unchecked { "
-//                        "background-color: black; "
-//                        "border: 1px solid white; "
-//                    "} "
-//                    "QRadioButton::indicator::checked { "
-//                        "background-color: red; "
-//                        "border: 1px solid white; "
-//                    "} "
+                    "QRadioButton::indicator { "
+                        "width: 15; "
+                    "} "
+                    "QRadioButton::indicator::unchecked { "
+                        "image: url(://"+_theme+"/widgets/radiobutton_unchecked.png); "
+                    "} "
+                    "QRadioButton::indicator::checked { "
+                        "image: url(://"+_theme+"/widgets/radiobutton_checked.png); "
+                    "} "
                     "QRadioButton::hover { "
                         "color: "+hoverGradient+
                     "} "
@@ -151,7 +144,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 //                    "} "
                     ;
             tabBar =
-                    "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget{ "
+                    "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics] { "
                         "background-color: "+backgroundGradient+
                     "} "
                     "QTabBar::tab { "
@@ -294,6 +287,29 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     "QCheckBox::hover { "
                         "color: "+hoverGradient+
                     "} "
+                    "QCheckBox::indicator { "
+                        "width: 15; "
+                    "} "
+                    "QCheckBox::indicator::checked { "
+                    "} "
+                    "QCheckBox::indicator:unchecked { "
+                        "image: url(://"+_theme+"/widgets/checkbox_uncheked.png); "
+                    "} "
+//                    QCheckBox::indicator:unchecked:hover {
+//                        image: url(:/images/checkbox_unchecked_hover.png);
+//                    }
+//                    QCheckBox::indicator:unchecked:pressed {
+//                        image: url(:/images/checkbox_unchecked_pressed.png);
+//                    }
+                    "QCheckBox::indicator:checked { "
+                        "image: url(://"+_theme+"/widgets/checkbox_checked.png); "
+                    "} "
+//                    QCheckBox::indicator:checked:hover {
+//                        image: url(:/images/checkbox_checked_hover.png);
+//                    }
+//                    QCheckBox::indicator:checked:pressed {
+//                        image: url(:/images/checkbox_checked_pressed.png);
+//                    }
                     ;
             comboBox =
                     "QComboBox { "
@@ -322,25 +338,112 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             lineEdit =
                     "QLineEdit { "
                         "selection-background-color: #387097; "
-                        "background-color: white; "
-                        "color: black; "
+                        "background-color: #A0A0A0; "
+                        "color: white; "
                     "} "
                     ;
             tableWidget =
                     "QTableWidget { "
                         "border: 0px solid #cccccc; "
                         "border-radius: 8px; "
+                        "background-color: "+backgroundGradient+
                     "} "
                     "QTableWidget::item { "
                         "border-bottom: 1px solid #cccccc; "
-                        "background-color: "+backgroundGradient+
+                        "background-color: #213c57; "//+backgroundGradient+
                         "color: white; "
                     "} "
-                    "QTableWidget::item:hover { "
-                        //"border: 1px solid #232323; "
-                        //"border-radius: 2px; "
-                        //"background-color: #ffffff; "
-                    "} "
+//                    "QTableWidget::item:hover { "
+//                        //"border: 1px solid #232323; "
+//                        //"border-radius: 2px; "
+//                        //"background-color: #ffffff; "
+//                    "} "
+                    "QScrollBar:vertical { "
+                        "border: 1px solid #999999; "
+                        "background: "+hoverGradient+
+                        "width:10px; "
+                        //"    margin: 0px 0px 0px 0px;"
+                    "}"
+                    "QScrollBar:horizontal { "
+                        "border: 1px solid #999999; "
+                        "background: "+hoverGradient+
+                        "width:10px; "
+                        //"    margin: 0px 0px 0px 0px;"
+                    "}"
+//                    QScrollBar:vertical {
+//                    border-color: rgb(227, 227, 227);
+//                    border-width: 1px;
+//                    border-style: solid;
+//                    background-color: rgb(240, 240, 240);
+//                    width: 15px;
+//                    margin: 21px 0 21px 0;
+//                    }
+//                    QScrollBar::handle:vertical {
+//                    background-color: rgb(200, 200, 200);
+//                    min-height: 25px;
+//                    }
+//                    QScrollBar::add-line:vertical {
+//                    border: 1px solid grey;
+//                    background-color: rgb(241, 241, 241);
+//                    height: 20px;
+//                    subcontrol-position: bottom;
+//                    subcontrol-origin: margin;
+//                    }
+//                    QScrollBar::sub-line:vertical {
+//                    border: 1px solid grey;
+//                    background-color: rgb(241, 241, 241);
+//                    height: 20px;
+//                    subcontrol-position: top;
+//                    subcontrol-origin: margin;
+//                    }
+//                    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+//                    background: none;
+//                    }
+//                    QScrollBar::up-arrow:vertical
+//                    {
+//                    image: url(:/BarIcon/Icons/uparrow.png);
+//                    }
+//                    QScrollBar::down-arrow:vertical
+//                    {
+//                    image: url(:/BarIcon/Icons/downarrow.png);
+//                    }
+//                    "QScrollBar:horizontal { "
+//                    "border-color: rgb(227, 227, 227); "
+//                    "border-width: 1px; "
+//                    "border-style: solid; "
+//                    "background-color: rgb(240, 240, 240); "
+//                    "width: 15px; "
+//                    "margin: 0px 21px 0 21px; "
+//                    "} "
+//                    QScrollBar::handle:horizontal {
+//                    background-color: rgb(200, 200, 200);
+//                    min-height: 25px;
+//                    }
+//                    QScrollBar::add-line:horizontal {
+//                    border: 1px solid grey;
+//                    background-color: rgb(241, 241, 241);
+//                    width: 20px;
+//                    subcontrol-position: right;
+//                    subcontrol-origin: margin;
+//                    }
+//                    QScrollBar::sub-line:horizontal {
+//                    border: 1px solid grey;
+//                    background-color: rgb(241, 241, 241);
+//                    width: 20px;
+//                    subcontrol-position: left;
+//                    subcontrol-origin: margin;
+//                    }
+//                    QScrollBar:left-arrow:horizontal
+//                    {
+//                    image: url(:/BarIcon/Icons/leftarrow.png);
+//                    }
+//                    QScrollBar::right-arrow:horizontal
+//                    {
+//                    image: url(:/BarIcon/Icons/rightarrow.png);
+//                    }
+//                    QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+//                    background: none;
+//                    }
                     ;
             headerView =
                     "QHeaderView::section { "
@@ -349,8 +452,14 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "padding-left: 4px; "
                         "border: 1px solid #6c6c6c; "
                     "} "
-                    "QHeaderView::section:checked { "
-                        //"background-color: red; "
+//                    "QHeaderView::section:checked { "
+//                        //"background-color: red; "
+//                    "} "
+                    "QHeaderView { "
+                        "selection-background-color: #303030; "
+                        "background-color: #303030; "
+                        "selection-color: #303030; "
+                        //"color: red; "
                     "} "
 //                    "QHeaderView::down-arrow { "
 //                        "image: url(down_arrow.png); "
@@ -364,7 +473,6 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "color: white; "
                     "}"
                     ;
-            _theme="white";
             break;
             }
         case 2:
@@ -415,7 +523,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     }
 }
 void MainWindow::InitComponents(){
-    ui->LabelLogo->setPixmap(QPixmap(":/program/program/logo.png"));
+    ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
     ui->LabelAvatar->setText("");
     ui->LabelTimeCreated->setText("");
     ui->LabelPersonaState->setText("");
@@ -442,15 +550,19 @@ void MainWindow::InitComponents(){
     ui->FormProgressBar->setVisible(false);
     ui->ButtonBack->setEnabled(false);
     ui->ButtonNext->setEnabled(false);
-    ui->ButtonFindProfile->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
-    ui->ButtonFavorites->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
-    ui->ButtonStatistics->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/statistic.png"));
-    ui->ButtonSettings->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/settings.png"));
-    ui->ButtonExit->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/exit.png"));
-    ui->ButtonFriends->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/friends.png"));
-    ui->ButtonGames->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/games.png"));
-    ui->ButtonBack->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/left.png"));
-    ui->ButtonNext->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/right.png"));
+    ui->LabelProfileUrl->setTextFormat(Qt::RichText);
+    ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
+    ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_theme+"/home.png"));
+    ui->ButtonSetProfile->setIcon(QIcon("://"+_theme+"/set_home.png"));
+    ui->ButtonFindProfile->setIcon(QIcon("://"+_theme+"/find_profile.png"));
+    ui->ButtonFavorites->setIcon(QIcon("://"+_theme+"/favorites.png"));
+    ui->ButtonStatistics->setIcon(QIcon("://"+_theme+"/statistic.png"));
+    ui->ButtonSettings->setIcon(QIcon("://"+_theme+"/settings.png"));
+    ui->ButtonExit->setIcon(QIcon("://"+_theme+"/exit.png"));
+    ui->ButtonFriends->setIcon(QIcon("://"+_theme+"/friends.png"));
+    ui->ButtonGames->setIcon(QIcon("://"+_theme+"/games.png"));
+    ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
+    ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
     Retranslate();
 }
 #define InitEnd }
@@ -614,7 +726,7 @@ void MainWindow::ProfileToUi(SProfile a_profile){
                 ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                 break;
         }
-    ui->LabelProfileUrl->setText("<a href=\""+a_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+a_profile.GetProfileurl()+"</span></a>");
+    ui->LabelProfileUrl->setText("<img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+a_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+a_profile.GetProfileurl()+"</span></a>");
     ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(levels.GetLevel())));
     ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(a_profile.GetRealname()));
     ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(a_profile.GetTimecreated().toString("yyyy.MM.dd")));
@@ -660,6 +772,7 @@ void MainWindow::ProfileToUi(SProfile a_profile){
     ui->ButtonGames->setEnabled(_games.GetStatus()==StatusValue::success);
     ui->ButtonFriends->setEnabled(_friends.GetStatus()==StatusValue::success);
     ui->ButtonFavorites->setEnabled(true);
+    ui->ScrollAreaProfileInfo->setEnabled(true);
     ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=a_profile.GetSteamid());
     ui->ButtonStatistics->setEnabled(_games.GetStatus()==StatusValue::success);
     ui->ButtonGoToMyProfile->setEnabled((_setting.GetMyProfile()!="none")&&(_setting.GetMyProfile()!=a_profile.GetSteamid()));

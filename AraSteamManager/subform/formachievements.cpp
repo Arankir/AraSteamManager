@@ -36,6 +36,7 @@ const int c_tableFriendsRowCount=4;
 #define Init {
 FormAchievements::FormAchievements(SAchievementsPlayer a_player, QString a_id, SGame a_game, int a_unicNum, QWidget *parent): QWidget(parent), ui(new Ui::FormAchievements){
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     _id=a_id;
     _game=a_game;
     _unicNum=a_unicNum;
@@ -168,22 +169,22 @@ void FormAchievements::InitComponents(){
     ui->ScrollAreaValuesCategory->setWidget(widgetValuesCategory);
     #define InitCategoryValuesLayoutEnd }
     #define SetIcon {
-    ui->ButtonCompare->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/compare.png"));
-    //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/program/filter_white.png)}");
-    //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(images/program/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(:/"+_theme+"/program/"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    ui->ButtonAddCategory->setIcon(QIcon(":/program/program/create.png"));
-    ui->ButtonChangeCategory->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/change.png"));
-    ui->ButtonDeleteCategory->setIcon(QIcon(":/program/program/delete.png"));
-    ui->ButtonFindAchievement->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
-    ui->ButtonAddValueCategory->setIcon(QIcon(":/program/program/create.png"));
-    ui->ButtonAcceptCategory->setIcon(QIcon(":/program/program/apply.png"));
-    ui->ButtonCancelCategory->setIcon(QIcon(":/program/program/cancel.png"));
-    ui->ButtonUpdate->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/update.png"));
-    allFriends->setPixmap(QPixmap(":/"+_theme+"/program/"+_theme+"/friends.png"));
-    pbFriendsAllAchievements->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/all.png"));
-    pbFriendsReachedAchievements->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/reached.png"));
-    pbFriendsNotReachedAchievements->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/notreached.png"));
+    ui->ButtonCompare->setIcon(QIcon("://"+_theme+"/compare.png"));
+    //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/filter_white.png)}");
+    //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(images/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->ButtonAddCategory->setIcon(QIcon("://create.png"));
+    ui->ButtonChangeCategory->setIcon(QIcon("://"+_theme+"/change.png"));
+    ui->ButtonDeleteCategory->setIcon(QIcon("://delete.png"));
+    ui->ButtonFindAchievement->setIcon(QIcon("://"+_theme+"/find.png"));
+    ui->ButtonAddValueCategory->setIcon(QIcon("://create.png"));
+    ui->ButtonAcceptCategory->setIcon(QIcon("://apply.png"));
+    ui->ButtonCancelCategory->setIcon(QIcon("://cancel.png"));
+    ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
+    allFriends->setPixmap(QPixmap("://"+_theme+"/friends.png"));
+    pbFriendsAllAchievements->setIcon(QIcon("://"+_theme+"/all.png"));
+    pbFriendsReachedAchievements->setIcon(QIcon("://"+_theme+"/reached.png"));
+    pbFriendsNotReachedAchievements->setIcon(QIcon("://"+_theme+"/notreached.png"));
     #define SetIconEnd }
     _favorites.SetPath("Files/Favorites/Achievements.json","Achievements");
     _setting.CreateFile("images/achievements/"+QString::number(_game.GetAppid()));
@@ -285,7 +286,7 @@ void FormAchievements::Retranslate(){
 void FormAchievements::ProgressLoading(int a_progress,int a_row){
     qDebug()<<"Loading..."<<a_progress;
     QButtonWithData *buttonFavorite = new QButtonWithData("");
-    buttonFavorite->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
+    buttonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
     buttonFavorite->setObjectName("ButtonFavorites&"+QString::number(a_row));
     buttonFavorite->AddData("NumberGame",QString::number(a_row));
     connect(buttonFavorite,&QButtonWithData::pressed,this,&FormAchievements::FavoritesClicked);
@@ -1108,7 +1109,7 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
                 QList<QString> noValues = _categoriesGame.GetNoValues(a_index-1);
                 ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnNoValue,new QTableWidgetItem(_categoriesGame.GetTitle(a_index-1)));
                 for(int j=0;j<ui->TableWidgetAchievements->rowCount();j++) {
-                    QTableWidgetItem *itemCheck(new QTableWidgetItem(tr("Add")));
+                    QTableWidgetItem *itemCheck = new QTableWidgetItem(tr("Add"));
                     itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
                     bool isAchievementCheck=true;
                     for(int k=0;k<noValues.size();k++) {
@@ -1121,18 +1122,19 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
                     ui->TableWidgetAchievements->setItem(j,c_tableAchievementColumnNoValue, itemCheck);
                 }
                 QJsonArray valuesTitles = _categoriesGame.GetValues(a_index-1);
+                qDebug()<<valuesTitles;
                 _values.clear();
-                for(int i=0;i<_categoriesGame.GetCount();i++) {
+                for(int i=0;i<valuesTitles.size();i++) {
                     FormCategoryValue *value = CreateValueCategory();
                     ui->TableWidgetAchievements->insertColumn(ui->TableWidgetAchievements->columnCount());
                     ui->TableWidgetAchievements->setHorizontalHeaderItem(ui->TableWidgetAchievements->columnCount()-1,new QTableWidgetItem(valuesTitles[i].toObject().value("Title").toString()));
                     value->SetTitle(valuesTitles[i].toObject().value("Title").toString());
                     for (int j=0;j<ui->TableWidgetAchievements->rowCount();j++) {
-                        QTableWidgetItem *itemCheck(new QTableWidgetItem(tr("Add")));
+                        QTableWidgetItem *itemCheck = new QTableWidgetItem(tr("Add"));
                         itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
                         bool isAchievementCheck=true;
                         for (int k=0;k<valuesTitles[i].toObject().value("Achievements").toArray().size();k++) {
-                            if(ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()==valuesTitles[i].toObject().value("Achievements").toArray().at(k).toString()){
+                            if(ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()==valuesTitles[k].toObject().value("Achievements").toArray().at(k).toString()){
                                 isAchievementCheck=false;
                                 break;
                             }

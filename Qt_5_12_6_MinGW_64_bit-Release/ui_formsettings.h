@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -20,7 +21,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
-#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -42,21 +42,19 @@ public:
     QGridLayout *gridLayout_3;
     QPushButton *pushButton_5;
     QWidget *tab_2;
-    QGridLayout *gridLayout_8;
-    QHBoxLayout *horizontalLayout_2;
-    QScrollArea *ScrollAreaProfilesHideGames;
-    QWidget *scrollAreaWidgetContents;
-    QVBoxLayout *verticalLayout_10;
+    QVBoxLayout *verticalLayout_5;
     QHBoxLayout *horizontalLayout;
     QLineEdit *LineEditFindGame;
     QPushButton *ButtonFindGame;
+    QHBoxLayout *horizontalLayout_3;
+    QFrame *FrameProfilesHideGames;
     QTableWidget *TableWidgetGames;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
     QRadioButton *RadioButtonLanguageEnglish;
     QRadioButton *RadioButtonLanguageRussian;
     QCheckBox *CheckBoxVisibleHiddenGames;
-    QLabel *label_10;
+    QLabel *labelIcons8;
     QWidget *tab_3;
     QGridLayout *gridLayout_9;
     QGroupBox *groupBox_9;
@@ -153,32 +151,8 @@ public:
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
-        gridLayout_8 = new QGridLayout(tab_2);
-        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        ScrollAreaProfilesHideGames = new QScrollArea(tab_2);
-        ScrollAreaProfilesHideGames->setObjectName(QString::fromUtf8("ScrollAreaProfilesHideGames"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(ScrollAreaProfilesHideGames->sizePolicy().hasHeightForWidth());
-        ScrollAreaProfilesHideGames->setSizePolicy(sizePolicy1);
-        ScrollAreaProfilesHideGames->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 68, 431));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(scrollAreaWidgetContents->sizePolicy().hasHeightForWidth());
-        scrollAreaWidgetContents->setSizePolicy(sizePolicy2);
-        ScrollAreaProfilesHideGames->setWidget(scrollAreaWidgetContents);
-
-        horizontalLayout_2->addWidget(ScrollAreaProfilesHideGames);
-
-        verticalLayout_10 = new QVBoxLayout();
-        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        verticalLayout_5 = new QVBoxLayout(tab_2);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         LineEditFindGame = new QLineEdit(tab_2);
@@ -192,27 +166,34 @@ public:
         horizontalLayout->addWidget(ButtonFindGame);
 
 
-        verticalLayout_10->addLayout(horizontalLayout);
+        verticalLayout_5->addLayout(horizontalLayout);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        FrameProfilesHideGames = new QFrame(tab_2);
+        FrameProfilesHideGames->setObjectName(QString::fromUtf8("FrameProfilesHideGames"));
+        FrameProfilesHideGames->setMinimumSize(QSize(100, 0));
+        FrameProfilesHideGames->setFrameShape(QFrame::StyledPanel);
+        FrameProfilesHideGames->setFrameShadow(QFrame::Raised);
+
+        horizontalLayout_3->addWidget(FrameProfilesHideGames);
 
         TableWidgetGames = new QTableWidget(tab_2);
         if (TableWidgetGames->columnCount() < 4)
             TableWidgetGames->setColumnCount(4);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
-        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(TableWidgetGames->sizePolicy().hasHeightForWidth());
-        TableWidgetGames->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(TableWidgetGames->sizePolicy().hasHeightForWidth());
+        TableWidgetGames->setSizePolicy(sizePolicy1);
         TableWidgetGames->setRowCount(0);
         TableWidgetGames->setColumnCount(4);
 
-        verticalLayout_10->addWidget(TableWidgetGames);
+        horizontalLayout_3->addWidget(TableWidgetGames);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_10);
-
-
-        gridLayout_8->addLayout(horizontalLayout_2, 0, 0, 1, 1);
+        verticalLayout_5->addLayout(horizontalLayout_3);
 
         groupBox = new QGroupBox(tab_2);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -229,24 +210,24 @@ public:
         verticalLayout->addWidget(RadioButtonLanguageRussian);
 
 
-        gridLayout_8->addWidget(groupBox, 1, 0, 1, 1);
+        verticalLayout_5->addWidget(groupBox);
 
         CheckBoxVisibleHiddenGames = new QCheckBox(tab_2);
         CheckBoxVisibleHiddenGames->setObjectName(QString::fromUtf8("CheckBoxVisibleHiddenGames"));
 
-        gridLayout_8->addWidget(CheckBoxVisibleHiddenGames, 2, 0, 1, 1);
+        verticalLayout_5->addWidget(CheckBoxVisibleHiddenGames);
 
-        label_10 = new QLabel(tab_2);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
+        labelIcons8 = new QLabel(tab_2);
+        labelIcons8->setObjectName(QString::fromUtf8("labelIcons8"));
         QFont font1;
         font1.setFamily(QString::fromUtf8("Ebrima"));
         font1.setPointSize(10);
-        label_10->setFont(font1);
-        label_10->setWordWrap(true);
-        label_10->setOpenExternalLinks(true);
-        label_10->setTextInteractionFlags(Qt::TextBrowserInteraction);
+        labelIcons8->setFont(font1);
+        labelIcons8->setWordWrap(true);
+        labelIcons8->setOpenExternalLinks(true);
+        labelIcons8->setTextInteractionFlags(Qt::TextBrowserInteraction);
 
-        gridLayout_8->addWidget(label_10, 3, 0, 1, 1);
+        verticalLayout_5->addWidget(labelIcons8);
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -446,7 +427,7 @@ public:
         RadioButtonLanguageEnglish->setText(QApplication::translate("FormSettings", "English", nullptr));
         RadioButtonLanguageRussian->setText(QApplication::translate("FormSettings", "\320\240\321\203\321\201\321\201\320\272\320\270\320\271", nullptr));
         CheckBoxVisibleHiddenGames->setText(QApplication::translate("FormSettings", "\320\237\321\200\320\270 \320\277\320\276\320\270\321\201\320\272\320\265 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\276\321\202\320\276\320\261\321\200\320\260\320\266\320\260\321\202\321\214 \321\201\320\272\321\200\321\213\321\202\321\213\320\265 \320\270\320\263\321\200\321\213", nullptr));
-        label_10->setText(QApplication::translate("FormSettings", "<html><head/><body><p>\320\230\320\272\320\276\320\275\320\272\320\270 \320\264\320\273\321\217 \320\277\321\200\320\270\320\273\320\276\320\266\320\265\320\275\320\270\321\217 \320\261\321\213\320\273\320\270 \320\277\321\200\320\265\320\264\320\276\321\201\321\202\320\260\320\262\320\273\320\265\320\275\321\213 \321\201\320\260\320\271\321\202\320\276\320\274 <a href=https://icons8.ru/icons>https://icons8.ru/icons</a></p></body></html>", nullptr));
+        labelIcons8->setText(QApplication::translate("FormSettings", "<html><head/><body><p>\320\230\320\272\320\276\320\275\320\272\320\270 \320\264\320\273\321\217 \320\277\321\200\320\270\320\273\320\276\320\266\320\265\320\275\320\270\321\217 \320\261\321\213\320\273\320\270 \320\277\321\200\320\265\320\264\320\276\321\201\321\202\320\260\320\262\320\273\320\265\320\275\321\213 \321\201\320\260\320\271\321\202\320\276\320\274 <a href=https://icons8.ru/icons>https://icons8.ru/icons</a></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("FormSettings", "  \320\237\321\200\320\276\321\207\320\270\320\265 \320\275\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270  ", nullptr));
         groupBox_9->setTitle(QApplication::translate("FormSettings", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         label_19->setText(QApplication::translate("FormSettings", "\320\237\320\265\321\200\320\265\321\205\320\276\320\264 \320\272 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\274 \320\270\320\263\321\200\320\260\320\274", nullptr));

@@ -19,6 +19,7 @@ const int c_tableFriendsColumnCount=7;
 
 FormFavorites::FormFavorites(QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites){
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     InitComponents();
 }
 

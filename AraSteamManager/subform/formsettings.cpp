@@ -6,6 +6,7 @@ FormSettings::FormSettings(QWidget *parent) :
     ui(new Ui::FormSettings)
 {
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     switch(_setting.GetTheme()){
         case 1:
             _theme="white";
@@ -62,6 +63,11 @@ void FormSettings::InitComponents(){
     //ui->GroupBoxDarkTheme->setPalette(darkPalette);
     //ui->GroupBoxWhiteTheme->setPalette(style()->standardPalette());
 
+    ui->tabWidget->setAttribute(Qt::WA_TranslucentBackground);
+
+    ui->labelIcons8->setTextFormat(Qt::RichText);
+    ui->labelIcons8->setText("<html><head/><body><p>Иконки для приложения были предоставлены сайтом <img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"><a href=https://icons8.ru/icons><span style=\" text-decoration: underline; color:#2d7fc8;\"> https://icons8.ru/icons</span></a></p></body></html>");
+
     QFormLayout *layout = new QFormLayout;
     QDir dirHiddenGames("Files/Hide");
     dirHiddenGames.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -114,8 +120,8 @@ void FormSettings::InitComponents(){
             }
             }
     }
-    ui->ScrollAreaProfilesHideGames->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Expanding);
-    ui->ScrollAreaProfilesHideGames->setLayout(layout);
+    ui->FrameProfilesHideGames->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Expanding);
+    ui->FrameProfilesHideGames->setLayout(layout);
 }
 
 void FormSettings::changeEvent(QEvent *event){
@@ -129,6 +135,7 @@ void FormSettings::Retranslate(){
 
     QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
     allHidden->setText(tr("Все профили"));
+    ui->labelIcons8->setText("<html><head/><body><p>Иконки для приложения были предоставлены сайтом <img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"><a href=https://icons8.ru/icons><span style=\" text-decoration: underline; color:#2d7fc8;\"> https://icons8.ru/icons</span></a></p></body></html>");
 }
 
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
@@ -196,7 +203,7 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
                 ui->TableWidgetGames->setCellWidget(setTo,2,button1);
 
                 QButtonWithData *button3 = new QButtonWithData("");
-                button3->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
+                button3->setIcon(QIcon("://"+_theme+"/hide.png"));
                 button3->setMinimumSize(QSize(25,25));
                 button3->setObjectName("ButtonHide"+QString::number(indexHiddenGame)+"_"+QString::number(games[i].GetAppid()));
                 button3->AddData("NumberFileHiddenGame",QString::number(indexHiddenGame));
@@ -235,7 +242,7 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
             ui->TableWidgetGames->setCellWidget(i,2,button1);
 
             QButtonWithData *button3 = new QButtonWithData("");
-            button3->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
+            button3->setIcon(QIcon("://"+_theme+"/hide.png"));
             button3->setMinimumSize(QSize(25,25));
             button3->setObjectName("ButtonHide"+QString::number(indexHiddenGame)+"_"+list[0]);
             button3->AddData("NumberFileHiddenGame",QString::number(indexHiddenGame));

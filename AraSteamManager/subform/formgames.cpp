@@ -15,6 +15,7 @@ FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) :    QWidget
     ui->setupUi(this);
     _id=a_id;
     _games=a_games;
+    this->setAttribute(Qt::WA_TranslucentBackground);
     switch(_setting.GetTheme()){
         case 1:
             _theme="white";
@@ -35,17 +36,23 @@ void FormGames::InitComponents(){
     //ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
     //ui->TableWidgetGames->setAlternatingRowColors(true);
+
+//    ui->FrameGroup->stackUnder(ui->TableWidgetGames);
+//    _geometryGroup = QRect(0,0,0,ui->FrameGroup->height());
+//    this->setMouseTracking(true);
+    ui->FrameGroup->setVisible(false);
+
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
-    ui->ScrollAreaGame->setVisible(false);
+    ui->FrameGame->setVisible(false);
     ui->ButtonAchievements->setText(tr("Достижения"));
     ui->ButtonFavorite->setText("");
     ui->ButtonHide->setText("");
-    ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
-    ui->ButtonFavorite->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
-    ui->ButtonHide->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/hide.png"));
-    ui->ButtonCreateGroup->setIcon(QIcon(":/program/program/create.png"));
-    ui->ButtonChangeGroup->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/change.png"));
+    ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find.png"));
+    ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
+    ui->ButtonHide->setIcon(QIcon("://"+_theme+"/hide.png"));
+    ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
+    ui->ButtonChangeGroup->setIcon(QIcon("://"+_theme+"/change.png"));
     ui->TableWidgetGames->setRowCount(_games.GetCount());
     for (int i=0;i<_games.GetCount();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
@@ -197,6 +204,48 @@ void FormGames::ContainerAchievementsClose(){
     disconnect(_containerAchievementsForm,&FormContainerAchievements::s_removeAchievements,this,&FormGames::RemoveAchievements);
     disconnect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&FormGames::ContainerAchievementsClose);
 }
+void FormGames::showHideSlideWidget(bool a_flag){
+//    if (a_flag)
+//        ui->FrameGroup->setGeometry(_geometryGroup);
+//    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
+//    _animate->setDuration(300);
+
+//    QRect startRect(0, 0, 0, height());
+//    QRect endRect(0, 0, 300, height());
+
+//    if (a_flag)
+//    {
+//        _animate->setStartValue(startRect);
+//        _animate->setEndValue(endRect);
+//        _geometryGroup=endRect;
+//    }
+//    else
+//    {
+//        _animate->setStartValue(endRect);
+//        _animate->setEndValue(startRect);
+//        _geometryGroup=startRect;
+//    }
+//    _animate->start();
+//    ui->FrameGroup->setVisible(!a_flag);
+}
+void FormGames::mouseMoveEvent(QMouseEvent *ev){
+//    if (ev->pos().x() < 50)
+//    {
+//        if (!ui->FrameGroup->isVisible())
+//            slotShowHideSlide();
+//    }
+//    else
+//    {
+//        if (ui->FrameGroup->isVisible())
+//            slotShowHideSlide();
+//    }
+}
+void FormGames::slotShowHideSlide(){
+//    if (ui->FrameGroup->isHidden())
+//        ui->FrameGroup->show();
+
+//    showHideSlideWidget(!ui->FrameGroup->isVisible());
+}
 #define SystemEnd }
 
 #define Filter {
@@ -236,7 +285,9 @@ void FormGames::on_TableWidgetGames_cellClicked(int a_row, int){
     ui->LabelTitleGame->setText(ui->TableWidgetGames->item(a_row,c_tableColumnName)->text());
     ui->ProgressBarSelectedGame->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->maximum());
     ui->ProgressBarSelectedGame->setValue(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->value());
-    ui->ScrollAreaGame->setVisible(true);
+    if(ui->TableWidgetGames->item(a_row,c_tableColumnName)->textColor()==Qt::red)
+        ui->ButtonHide->setIcon(QIcon("://"+_theme+"/unhide.png"));
+    ui->FrameGame->setVisible(true);
 }
 void FormGames::on_ButtonAchievements_clicked(){
     SAchievementsPercentage Percentage(_selectedGame,false);
@@ -257,10 +308,11 @@ void FormGames::on_ButtonFavorite_clicked(){
     newValue["idUser"]=_id;
     if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
+        ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/in_favorites.png"));
     } else {
         //Категория уже есть (удалилась)
+        ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
     }
-    //Поменять картинку
 }
 void FormGames::on_ButtonHide_clicked(){
     QString savePath="";
@@ -292,5 +344,6 @@ void FormGames::on_ButtonHide_clicked(){
             break;
         }
     }
+    ui->ButtonHide->setIcon(QIcon("://"+_theme+"/unhide.png"));
 }
 #define FunctionsEnd }

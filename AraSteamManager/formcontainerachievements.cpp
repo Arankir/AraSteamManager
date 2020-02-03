@@ -14,7 +14,7 @@ FormContainerAchievements::~FormContainerAchievements(){
 
 void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QString a_ids, SGame a_game, int a_num){
     FormAchievements *newFormAchievements = new FormAchievements(a_pl,a_ids,a_game,a_num,this);
-    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements,a_game.GetName());
+    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements,"  "+a_game.GetName()+"  ");
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
     QString filePath = "images/icon_games/"+a_game.GetImg_icon_url()+".jpg";
     QString urlPath = "http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(a_game.GetAppid())+"/"+a_game.GetImg_icon_url()+".jpg";

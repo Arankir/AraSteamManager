@@ -5,6 +5,11 @@ FormStatistics::FormStatistics(QString a_id, SGames a_games, QString a_name, QWi
     QWidget(parent),
     ui(new Ui::FormStatistics){
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    ui->ChartsViewTimes->setStyleSheet("background: rgba(0,0,0,0); ");
+    ui->ChartsViewMonths->setStyleSheet("background: rgba(0,0,0,0); ");
+    ui->ChartsViewYears->setStyleSheet("background: rgba(0,0,0,0); ");
+    ui->ChartViewPercentages->setStyleSheet("background: rgba(0,0,0,0); ");
     _games=a_games;
     _id=a_id;
     _name=a_name;

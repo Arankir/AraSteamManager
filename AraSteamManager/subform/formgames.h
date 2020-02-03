@@ -13,6 +13,7 @@
 #include <class/Threads/threading.h>
 #include <subwidget/qbuttonwithdata.h>
 #include <QList>
+#include <QPropertyAnimation>
 
 namespace Ui {
 class FormGames;
@@ -38,6 +39,9 @@ public slots:
     void OnFinish();
     void ReturnFromAchievements(int num);
 
+    void showHideSlideWidget(bool f_flag);
+    void mouseMoveEvent(QMouseEvent *ev);
+    void slotShowHideSlide();
 private slots:
     void InitComponents();
     void OnImageLoad(RequestData *imgr);
@@ -69,6 +73,8 @@ private:
     QString _theme="white";
     int _achievementsCount=0;
     int _load=0;
+//    QPropertyAnimation *_animate;
+//    QRect _geometryGroup;
     QString _selectedGame;
     QString _selectedIndex;
 

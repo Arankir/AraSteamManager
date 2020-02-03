@@ -22,6 +22,7 @@ const int c_filterCount=4;
 #define Init {
 FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
     ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     _id=a_id;
     _friends=a_friends;
     _profiles = _friends.GetProfiles();
@@ -52,8 +53,8 @@ void FormFriends::InitComponents(){
     //ui->TableWidgetFriends->setAlternatingRowColors(true);
     //ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetFriends->setRowCount(_friends.GetCount());
-    ui->ButtonFind->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/find.png"));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(:/"+_theme+"/program/"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find_profile.png"));
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID,true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon,33);
     _profiles.Sort();
@@ -64,7 +65,7 @@ void FormFriends::InitComponents(){
 }
 void FormFriends::ProgressLoading(int a_progress,int a_row){
     QButtonWithData *button1 = new QButtonWithData(tr(" На профиль"));
-    button1->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/go_to.png"));
+    button1->setIcon(QIcon("://"+_theme+"/go_to.png"));
     button1->setMinimumSize(QSize(25,25));
     button1->setObjectName("ButtonGoToProfile"+_profiles[a_progress].GetSteamid());
     button1->AddData("ProfileID",_profiles[a_progress].GetSteamid());
@@ -72,7 +73,7 @@ void FormFriends::ProgressLoading(int a_progress,int a_row){
     ui->TableWidgetFriends->setCellWidget(a_row,c_tableColumnGoTo,button1);
 
     QButtonWithData *button2 = new QButtonWithData("");
-    button2->setIcon(QIcon(":/"+_theme+"/program/"+_theme+"/favorites.png"));
+    button2->setIcon(QIcon("://"+_theme+"/favorites.png"));
     button2->setObjectName("ButtonFavorites"+QString::number(a_progress));
     button2->AddData("NumberFriend",QString::number(a_row));
     connect(button2,&QButtonWithData::pressed,this,&FormFriends::FavoritesClicked);
