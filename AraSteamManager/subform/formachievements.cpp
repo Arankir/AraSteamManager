@@ -1122,7 +1122,6 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
                     ui->TableWidgetAchievements->setItem(j,c_tableAchievementColumnNoValue, itemCheck);
                 }
                 QJsonArray valuesTitles = _categoriesGame.GetValues(a_index-1);
-                qDebug()<<valuesTitles;
                 _values.clear();
                 for(int i=0;i<valuesTitles.size();i++) {
                     FormCategoryValue *value = CreateValueCategory();
@@ -1134,7 +1133,7 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
                         itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
                         bool isAchievementCheck=true;
                         for (int k=0;k<valuesTitles[i].toObject().value("Achievements").toArray().size();k++) {
-                            if(ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()==valuesTitles[k].toObject().value("Achievements").toArray().at(k).toString()){
+                            if(ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()==valuesTitles[i].toObject().value("Achievements").toArray().at(k).toString()){
                                 isAchievementCheck=false;
                                 break;
                             }
