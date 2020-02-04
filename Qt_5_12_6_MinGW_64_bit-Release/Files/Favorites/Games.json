@@ -2,12 +2,6 @@
     "Type": "Games",
     "Values": [
         {
-            "icon": "a6abc0d0c1e79c0b5b0f5c8ab81ce9076a542414",
-            "id": "218620",
-            "idUser": "76561198065018572",
-            "name": "PAYDAY 2"
-        },
-        {
             "icon": "8e2fdc7d54960f91f3b3eca36d30e32d8fdb590f",
             "id": "792100",
             "idUser": "76561198065018572",
@@ -18,6 +12,12 @@
             "id": "202750",
             "idUser": "76561198038451539",
             "name": "Alan Wake's American Nightmare"
+        },
+        {
+            "icon": "a6abc0d0c1e79c0b5b0f5c8ab81ce9076a542414",
+            "id": "218620",
+            "idUser": "76561198065018572",
+            "name": "PAYDAY 2"
         }
     ]
 }

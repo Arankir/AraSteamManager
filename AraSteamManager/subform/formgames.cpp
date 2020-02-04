@@ -285,6 +285,18 @@ void FormGames::on_TableWidgetGames_cellClicked(int a_row, int){
     ui->LabelTitleGame->setText(ui->TableWidgetGames->item(a_row,c_tableColumnName)->text());
     ui->ProgressBarSelectedGame->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->maximum());
     ui->ProgressBarSelectedGame->setValue(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->value());
+    QJsonArray favorites = _favorites.GetValues();
+    bool isFavorite=false;
+    for(int i=0;i<favorites.size();i++){
+        if(favorites[i].toObject().value("id").toString()==_selectedGame){
+            isFavorite=true;
+            break;
+        }
+    }
+    if(isFavorite)
+        ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/in_favorites.png"));
+    else
+        ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
     if(ui->TableWidgetGames->item(a_row,c_tableColumnName)->textColor()==Qt::red)
         ui->ButtonHide->setIcon(QIcon("://"+_theme+"/unhide.png"));
     ui->FrameGame->setVisible(true);
@@ -306,6 +318,7 @@ void FormGames::on_ButtonFavorite_clicked(){
     newValue["name"]=_games[_selectedIndex.toInt()].GetName();
     newValue["icon"]=_games[_selectedIndex.toInt()].GetImg_icon_url();
     newValue["idUser"]=_id;
+    ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
     if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
         ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/in_favorites.png"));
@@ -344,6 +357,7 @@ void FormGames::on_ButtonHide_clicked(){
             break;
         }
     }
+    ui->ButtonHide->setFixedSize(ui->ButtonHide->size());
     ui->ButtonHide->setIcon(QIcon("://"+_theme+"/unhide.png"));
 }
 #define FunctionsEnd }

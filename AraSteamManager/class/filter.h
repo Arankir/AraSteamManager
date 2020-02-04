@@ -20,6 +20,16 @@ public:
     int GetCol() {return _col;}
     void AddCol(int colNum);
     void RemoveCol(int colNum);
+    friend QDebug operator<<(QDebug dbg, const Filter &f){
+        for(int i=0;i<f._row;i++){
+            dbg.nospace() << "(";
+            for(int j=0;j<f._col;j++)
+                dbg.nospace() << f._filter[i][j]<<" ";
+            dbg.nospace() << ")\n";
+        }
+
+        return dbg.space();
+    }
 
 private slots:
 

@@ -85,7 +85,7 @@ private slots:
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
     void closeEvent(QCloseEvent*);
-    void ShowCategories();
+    void ShowCategories(bool saveDate);
     void UpdateHiddenRows();
     bool SetFriendAchievements(SAchievements achievement, int col);
 
@@ -128,24 +128,30 @@ private slots:
     void HideCheckedAchievement(QTableWidgetItem *item);
     FormCategoryValue *CreateValueCategory();
 
-    void on_ComboBoxCategoriesCategory_activated(const QString &arg1);
-
 private:
     Ui::FormAchievements *ui;
+    Settings _setting;
+    QString _theme="white";
+    bool _isFirstLoad=true;
+
+    //ключевые данные
     QString _id;
     SGame _game;
     int _unicNum;
     SAchievements _achievements;
     CategoriesGame _categoriesGame;
-    Settings _setting;
-    QString _theme="white";
     Favorites _favorites;
-    FormCompareProfileFilter *FilterMyProfile;
 
+    //используются на форме
+    FormCompareProfileFilter *FilterMyProfile;
+    QFormLayout *_categoryValuesLayout;
+
+    //для загрузки картинок
     QVector<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 
+    //сравнение с друзьями
     FormMode _simpleCompare=FormMode::compare;
     int _loadCompare=0;
     int _type1=0;
@@ -153,10 +159,12 @@ private:
     SProfiles _profilesFriends;
     QVector<QPair<SProfile,FriendType>> _friends;
 
-    QFormLayout *_categoryValuesLayout;
+    //для создания/редактирования категории
     CategoryType _typeCategory=CategoryType::none;
     QVector<FormCategoryValue*> _values;
+    bool _isUnique=false;
 
+    //для фильтрации
     Filter _fAchievements;
     Filter _fCompare;
 

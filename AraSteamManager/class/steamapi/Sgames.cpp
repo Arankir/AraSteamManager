@@ -1,16 +1,15 @@
 #include "Sgames.h"
 
+#define SGameStart {
 SGame::SGame(QJsonObject a_game, QObject *parent) : QObject(parent){
     _game=a_game;
 }
 SGame::SGame(){
 
 }
-
 void SGame::Set(QJsonObject a_game){
     _game=a_game;
 }
-
 QString SGame::GetNumberPlayers(bool a_hardReload){
     if(_numberPlayers==""||a_hardReload){
         QNetworkAccessManager manager;
@@ -23,7 +22,6 @@ QString SGame::GetNumberPlayers(bool a_hardReload){
     }
     return _numberPlayers;
 }
-
 SGame::SGame( const SGame & a_game){
     _game=a_game._game;
     _numberPlayers=a_game._numberPlayers;
@@ -37,8 +35,8 @@ const bool &SGame::operator<(const SGame &a_game){
     static const bool b=_game.value("name").toString().toLower()<a_game._game.value("name").toString().toLower();
     return b;
 }
-
-
+#define SGameEnd }
+#define SGamesStart {
 SGames::SGames(QString a_id, bool a_free_games, bool a_game_info, bool a_parallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     _id=a_id;
@@ -84,7 +82,6 @@ SGames::SGames(){
 SGames::~SGames(){
     delete _manager;
 }
-
 void SGames::Set(QString a_id, bool a_free_games, bool a_game_info, bool a_parallel){
     _id=a_id;
     QString request="http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="+_setting.GetKey();
@@ -122,7 +119,6 @@ void SGames::Set(QJsonDocument a_games){
         _error="profile is not exist";
     }
 }
-
 void SGames::Load(QNetworkReply *a_reply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SGames::Load);
     QJsonDocument localGames = QJsonDocument::fromJson(a_reply->readAll());
@@ -131,14 +127,12 @@ void SGames::Load(QNetworkReply *a_reply){
     emit s_finished(this);
     emit s_finished();
 }
-
 void SGames::Update(bool parallel){
     Set(_id,_free_games,_game_info, parallel);
 }
 void SGames::Clear(){
     _games.clear();
 }
-
 void SGames::Sort(){
     //Переделать нормально
     std::list<SGame> list = _games.toList().toStdList();
@@ -151,7 +145,6 @@ void SGames::Sort(){
 
     _games=QVector<SGame>::fromList(QList<SGame>::fromStdList(list));
 }
-
 SGames::SGames( const SGames & a_newGames){
     _games=a_newGames._games;
     _status=a_newGames._status;
@@ -175,3 +168,4 @@ SGames & SGames::operator=(const SGames & a_newGames){
 SGame &SGames::operator[](const int &a_index){
     return _games[a_index];
 }
+#define SGamesEnd }

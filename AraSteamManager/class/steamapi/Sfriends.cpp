@@ -1,16 +1,15 @@
 #include "Sfriends.h"
 
+#define SFriendStart {
 SFriend::SFriend(QJsonObject a_friend, QObject *parent) : QObject(parent){
     _friend=a_friend;
 }
 SFriend::SFriend(){
 
 }
-
 void SFriend::Set(QJsonObject a_friend){
     _friend=a_friend;
 }
-
 SFriend::SFriend( const SFriend & a_newFriend){
     _friend=a_newFriend._friend;
 }
@@ -18,14 +17,13 @@ SFriend & SFriend::operator=(const SFriend & a_newFriend) {
     _friend=a_newFriend._friend;
     return *this;
 }
-
 const bool &SFriend::operator<(const SFriend &a_game){
     static const bool b=_friend.value("steamid").toString().toLower()<a_game._friend.value("steamid").toString().toLower();
     //qDebug()<<_game.value("name").toString().toLower()<<a_game._game.value("name").toString().toLower();
     return b;
 }
-
-
+#define SFriendEnd }
+#define SFriendsStart {
 SFriends::SFriends(QString a_id, bool a_parallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     _id=a_id;
@@ -64,7 +62,6 @@ SFriends::SFriends(){
 SFriends::~SFriends(){
     delete _manager;
 }
-
 void SFriends::Set(QString a_id, bool a_parallel){
     _id=a_id;
     if(a_parallel){
@@ -97,7 +94,6 @@ void SFriends::Set(QJsonDocument a_friends){
         _error="profile is not exist";
     }
 }
-
 void SFriends::Load(QNetworkReply *a_reply){
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SFriends::Load);
     QJsonDocument localFriends = QJsonDocument::fromJson(a_reply->readAll());
@@ -106,7 +102,6 @@ void SFriends::Load(QNetworkReply *a_reply){
     emit s_finished(this);
     emit s_finished();
 }
-
 SProfiles SFriends::GetProfiles(){
     QEventLoop loop;
     QNetworkAccessManager localManager;
@@ -133,14 +128,12 @@ SProfiles SFriends::GetProfiles(){
     qDebug()<<"Друзей"<<Profile.GetCount();
     return Profile;
 }
-
 void SFriends::Update(bool a_parallel){
     Set(_id,a_parallel);
 }
 void SFriends::Clear(){
     _friends.clear();
 }
-
 void SFriends::Sort(){
     //Переделать нормально
     std::list<SFriend> list = _friends.toList().toStdList();
@@ -152,7 +145,6 @@ void SFriends::Sort(){
     }*/);
     _friends=QVector<SFriend>::fromList(QList<SFriend>::fromStdList(list));
 }
-
 SFriends::SFriends( const SFriends & a_newFriends){
     _friends=a_newFriends._friends;
     _status=a_newFriends._status;
@@ -160,7 +152,6 @@ SFriends::SFriends( const SFriends & a_newFriends){
     _id=a_newFriends._id;
     _manager = new QNetworkAccessManager;
 }
-
 SFriends & SFriends::operator=(const SFriends & a_newFriends){
     delete _manager;
     _friends=a_newFriends._friends;
@@ -170,8 +161,7 @@ SFriends & SFriends::operator=(const SFriends & a_newFriends){
     _manager = new QNetworkAccessManager;
     return *this;
 }
-
 SFriend &SFriends::operator[](const int &index){
     return _friends[index];
 }
-
+#define SFriendsEnd }

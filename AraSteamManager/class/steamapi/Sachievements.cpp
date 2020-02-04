@@ -1,5 +1,6 @@
 #include "Sachievements.h"
 
+#define SAchievementGlobalStart {
 SAchievementGlobal::SAchievementGlobal(QJsonObject a_achievement, QObject *parent) : QObject(parent){
     _apiName=a_achievement.value("name").toString();
     _defaultValue=a_achievement.value("defaultvalue").toInt();
@@ -40,7 +41,8 @@ SAchievementGlobal & SAchievementGlobal::operator=(const SAchievementGlobal & a_
     _iconGray=a_newAchievements._iconGray;
     return *this;
 }
-
+#define SAchievementGlobalEnd }
+#define SAchievementPercentageStart {
 SAchievementPercentage::SAchievementPercentage(QJsonObject a_achievement, QObject *parent) : QObject(parent){
     _apiName=a_achievement.value("name").toString();
     _percent=a_achievement.value("percent").toDouble();
@@ -61,7 +63,8 @@ SAchievementPercentage & SAchievementPercentage::operator=(const SAchievementPer
     _percent=a_newAchievement._percent;
     return *this;
 }
-
+#define SAchievementPercentageEnd }
+#define SAchievementPlayerStart {
 SAchievementPlayer::SAchievementPlayer(QJsonObject a_achievement, QObject *parent) : QObject(parent){
     _apiName=a_achievement.value("apiname").toString();
     _achieved=a_achievement.value("achieved").toInt();
@@ -86,7 +89,8 @@ SAchievementPlayer & SAchievementPlayer::operator=(const SAchievementPlayer & a_
     _unlockTime=a_newAchievement._unlockTime;
     return *this;
 }
-
+#define SAchievementPlayerEnd }
+#define SAchievementsGlobalStart {
 SAchievementsGlobal::SAchievementsGlobal(QString a_appid, bool parallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
@@ -177,7 +181,8 @@ SAchievementsGlobal & SAchievementsGlobal::operator=(const SAchievementsGlobal &
 SAchievementGlobal &SAchievementsGlobal::operator[](const int &a_index){
     return _achievements[a_index];
 }
-
+#define SAchievementsGlobalEnd }
+#define SAchievementsPercentageStart {
 SAchievementsPercentage::SAchievementsPercentage(QString a_appid, bool parallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
@@ -260,7 +265,8 @@ SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievements
 SAchievementPercentage &SAchievementsPercentage::operator[](const int &a_index){
     return _achievements[a_index];
 }
-
+#define SAchievementsPercentageEnd }
+#define SAchievementsPlayerStart {
 SAchievementsPlayer::SAchievementsPlayer(QString a_appid, QString a_id, bool parallel, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
@@ -355,7 +361,8 @@ SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer &
 SAchievementPlayer &SAchievementsPlayer::operator[](const int &a_index){
     return _achievements[a_index];
 }
-
+#define SAchievementsPlayerEnd }
+#define SAchievementStart {
 SAchievement::SAchievement(SAchievementGlobal a_global, SAchievementPlayer a_player, SAchievementPercentage a_percent, QObject *parent) : QObject(parent){
     _apiName=a_global.GetApiname();
     _defaultValue=a_global.GetDefaultvalue();
@@ -466,7 +473,8 @@ const bool &SAchievement::operator<(const SAchievement &a_achievement){
     static const bool b=_displayName.toLower()<a_achievement._displayName.toLower();
     return b;
 }
-
+#define SAchievementEnd }
+#define SAchievementsStart {
 SAchievements::SAchievements(QString a_appid, QString a_id, QObject *parent) : QObject(parent){
     _appid=a_appid;
     _id=a_id;
@@ -628,3 +636,4 @@ SAchievements & SAchievements::operator=(const SAchievements & a_newAchievements
 SAchievement &SAchievements::operator[](const int &a_index){
     return _finish[a_index];
 }
+#define SAchievementsEnd }

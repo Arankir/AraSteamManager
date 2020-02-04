@@ -2,6 +2,7 @@
 
 CategoriesGame::CategoriesGame(SGame a_game, QObject *parent) : QObject(parent){
     _game=a_game;
+    _setting.CreateFile("Files/Categories/"+QString::number(a_game.GetAppid()));
     QDir categoriesOld("Files/Categories/"+QString::number(a_game.GetAppid()));
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     categoriesOld.setSorting(QDir::Name);
@@ -170,6 +171,7 @@ void CategoriesGame::Save(){
     doc.setObject(_categories);
     fileCategoryNew.write(doc.toJson());
     fileCategoryNew.close();
+    Set(_game);
 }
 
 void CategoriesGame::DeleteCategory(int a_index){

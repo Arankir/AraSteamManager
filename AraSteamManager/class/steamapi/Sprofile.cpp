@@ -1,5 +1,6 @@
 #include "Sprofile.h"
 
+#define SProfileStart {
 SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     _id=a_id;
@@ -123,7 +124,8 @@ const bool &SProfile::operator<(const SProfile &a_profile){
     static const bool b=_profile.value("personaname").toString().toLower()<a_profile._profile.value("personaname").toString().toLower();
     return b;
 }
-
+#define SProfileEnd }
+#define SProfilesStart {
 SProfiles::SProfiles(QString a_id, bool a_parallel, QueryType a_type, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     _id=a_id;
@@ -299,3 +301,4 @@ SProfiles & SProfiles::operator=(const SProfiles &a_newProfile){
 SProfile &SProfiles::operator[](const int &a_index){
     return _profile[a_index];
 }
+#define SProfilesEnd }

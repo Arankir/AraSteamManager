@@ -62,6 +62,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                 "QPushButton{ "
                     "color: white; "
                     "background-color: #24547d; "
+                    //"min-height: 20px; "
+                    //"max-height: 20px; "
                 "} "
                 "QPushButton:disabled{ "
                     //"color: 323232; "
@@ -337,6 +339,11 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     ;
             lineEdit =
                     "QLineEdit { "
+                        "selection-background-color: #387097; "
+                        "background-color: #202020; "
+                        "color: white; "
+                    "} "
+                    "QLineEdit:disabled { "
                         "selection-background-color: #387097; "
                         "background-color: #A0A0A0; "
                         "color: white; "
