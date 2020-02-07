@@ -204,6 +204,7 @@ public:
         TableWidgetGames = new QTableWidget(FormGames);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
         TableWidgetGames->setSelectionBehavior(QAbstractItemView::SelectRows);
+        TableWidgetGames->horizontalHeader()->setStretchLastSection(true);
         TableWidgetGames->verticalHeader()->setVisible(false);
 
         horizontalLayout_5->addWidget(TableWidgetGames);

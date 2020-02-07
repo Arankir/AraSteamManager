@@ -19,6 +19,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
@@ -75,8 +76,7 @@ public:
     QCheckBox *CheckBoxCategoryOneValue;
     QCheckBox *CheckBoxCategoryUniqueValue;
     QPushButton *ButtonAddValueCategory;
-    QScrollArea *ScrollAreaValuesCategory;
-    QWidget *scrollAreaWidgetContents_5;
+    QListWidget *ListWidgetValuesCategory;
     QVBoxLayout *verticalLayout_10;
     QPushButton *ButtonCancelCategory;
     QPushButton *ButtonDeleteCategory;
@@ -352,17 +352,16 @@ public:
 
         horizontalLayout_9->addLayout(verticalLayout_11);
 
-        ScrollAreaValuesCategory = new QScrollArea(GroupBoxCategories);
-        ScrollAreaValuesCategory->setObjectName(QString::fromUtf8("ScrollAreaValuesCategory"));
-        sizePolicy3.setHeightForWidth(ScrollAreaValuesCategory->sizePolicy().hasHeightForWidth());
-        ScrollAreaValuesCategory->setSizePolicy(sizePolicy3);
-        ScrollAreaValuesCategory->setWidgetResizable(true);
-        scrollAreaWidgetContents_5 = new QWidget();
-        scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 505, 135));
-        ScrollAreaValuesCategory->setWidget(scrollAreaWidgetContents_5);
+        ListWidgetValuesCategory = new QListWidget(GroupBoxCategories);
+        ListWidgetValuesCategory->setObjectName(QString::fromUtf8("ListWidgetValuesCategory"));
+        sizePolicy3.setHeightForWidth(ListWidgetValuesCategory->sizePolicy().hasHeightForWidth());
+        ListWidgetValuesCategory->setSizePolicy(sizePolicy3);
+        ListWidgetValuesCategory->setMaximumSize(QSize(16777215, 135));
+        ListWidgetValuesCategory->setDragEnabled(true);
+        ListWidgetValuesCategory->setDragDropMode(QAbstractItemView::InternalMove);
+        ListWidgetValuesCategory->setDefaultDropAction(Qt::MoveAction);
 
-        horizontalLayout_9->addWidget(ScrollAreaValuesCategory);
+        horizontalLayout_9->addWidget(ListWidgetValuesCategory);
 
         verticalLayout_10 = new QVBoxLayout();
         verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
@@ -476,12 +475,15 @@ public:
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         TableWidgetAchievements = new QTableWidget(FormAchievements);
         TableWidgetAchievements->setObjectName(QString::fromUtf8("TableWidgetAchievements"));
+        TableWidgetAchievements->setSelectionBehavior(QAbstractItemView::SelectRows);
         TableWidgetAchievements->setSortingEnabled(true);
+        TableWidgetAchievements->horizontalHeader()->setHighlightSections(false);
 
         horizontalLayout_5->addWidget(TableWidgetAchievements);
 
         TableWidgetCompareAchievements = new QTableWidget(FormAchievements);
         TableWidgetCompareAchievements->setObjectName(QString::fromUtf8("TableWidgetCompareAchievements"));
+        TableWidgetCompareAchievements->setSelectionBehavior(QAbstractItemView::SelectRows);
 
         horizontalLayout_5->addWidget(TableWidgetCompareAchievements);
 

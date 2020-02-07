@@ -68,7 +68,7 @@ void FormAchievements::InitComponents(){
     allFriends->setFixedSize(32,32);
     #define LoadDataEnd }
     #define SetTableWidgetAchievementsSettings {
-    ui->TableWidgetAchievements->setAlternatingRowColors(true);
+    //ui->TableWidgetAchievements->setAlternatingRowColors(true);
     ui->TableWidgetAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetAchievements->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetAchievements->setColumnCount(c_tableAchievementColumnCount);
@@ -86,7 +86,7 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetAchievements->setColumnWidth(c_tableAchievementColumnFavorite,50);
     #define SetTableWidgetAchievementsSettingsEnd }
     #define SetTableWidgetCompareAchievementsSettings {
-    ui->TableWidgetCompareAchievements->setAlternatingRowColors(true);
+    //ui->TableWidgetCompareAchievements->setAlternatingRowColors(true);
     ui->TableWidgetCompareAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetCompareAchievements->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetCompareAchievements->setColumnCount(c_tableCompareColumnCount);
@@ -161,12 +161,13 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetCompareFriends->resizeColumnsToContents();
     #define SetTableWidgetCompareFriendsSettingsEnd }
     #define InitCategoryValuesLayout {
-    QWidget *widgetValuesCategory = new QWidget;
-    _categoryValuesLayout = new QFormLayout;
-    _categoryValuesLayout->setSpacing(0);
-    _categoryValuesLayout->setContentsMargins(1,1,1,1);
-    widgetValuesCategory->setLayout(_categoryValuesLayout);
-    ui->ScrollAreaValuesCategory->setWidget(widgetValuesCategory);
+    //QWidget *widgetValuesCategory = new QWidget;
+    //_categoryValuesLayout = new QFormLayout;
+    //_categoryValuesLayout->setSpacing(0);
+    //_categoryValuesLayout->setContentsMargins(1,1,1,1);
+    //widgetValuesCategory->setLayout(_categoryValuesLayout);
+    //ui->ScrollAreaValuesCategory->setVisible(false);
+    //ui->ListWidgetValuesCategory->setLayout(_categoryValuesLayout);
     #define InitCategoryValuesLayoutEnd }
     #define SetIcon {
     ui->ButtonCompare->setIcon(QIcon("://"+_theme+"/compare.png"));
@@ -622,7 +623,7 @@ void FormAchievements::on_CheckBoxCompareAllFriends_stateChanged(int arg1){
 
 #define System {
 FormAchievements::~FormAchievements(){
-    delete _categoryValuesLayout;
+    //delete _categoryValuesLayout;
     delete ui;
 }
 void FormAchievements::closeEvent(QCloseEvent*){
@@ -772,7 +773,7 @@ void FormAchievements::HideCheckedAchievement(QTableWidgetItem *a_item){
     UpdateHiddenRows();
 }
 FormCategoryValue *FormAchievements::CreateValueCategory(){
-    int rowValues = _categoryValuesLayout->rowCount();
+    int rowValues = ui->ListWidgetValuesCategory->count();//->rowCount();
     FormCategoryValue *newValue = new FormCategoryValue(rowValues);
     _values.append(newValue);
     switch (rowValues) {
@@ -793,7 +794,10 @@ FormCategoryValue *FormAchievements::CreateValueCategory(){
     connect(newValue,&FormCategoryValue::s_selectchange,this,&FormAchievements::on_FormCategorySelectChange);
     connect(newValue,&FormCategoryValue::s_deleting,this,&FormAchievements::on_FormCategoryDeleting);
     connect(newValue,&FormCategoryValue::s_reverse,this,&FormAchievements::on_FormCategoryReverse);
-    _categoryValuesLayout->addRow(newValue);
+    //_categoryValuesLayout->addRow(newValue);
+    QListWidgetItem* item = new QListWidgetItem(ui->ListWidgetValuesCategory);
+    item->setSizeHint(newValue->sizeHint());
+    ui->ListWidgetValuesCategory->setItemWidget(item,newValue);
     return newValue;
 }
 #define SystemEnd }
@@ -991,9 +995,10 @@ void FormAchievements::on_ButtonCancelCategory_clicked(){
         ui->ButtonChangeCategory->setEnabled(_categoriesGame.GetCount()!=0);
         ui->ButtonDeleteAllCategories->setEnabled(_categoriesGame.GetCount()!=0);
         ui->ButtonCompare->setEnabled(true);
-        while (!_categoryValuesLayout->isEmpty()) {
-            _categoryValuesLayout->removeRow(0);
-        }
+//        while (!_categoryValuesLayout->isEmpty()) {
+//            _categoryValuesLayout->removeRow(0);
+//        }
+        ui->ListWidgetValuesCategory->clear();
         ui->LineEditTitleCategory->setText("");
         ui->ComboBoxCategoriesCategory->setCurrentIndex(0);
         _typeCategory=CategoryType::none;
@@ -1111,7 +1116,7 @@ void FormAchievements::on_CheckBoxCategoryOneValue_stateChanged(int arg1){
                 value=true;
         }
         ui->ButtonAddValueCategory->setEnabled(!value);
-        ui->ScrollAreaValuesCategory->setEnabled(!value);
+        ui->ListWidgetValuesCategory->setEnabled(!value);
         ui->TableWidgetAchievements->setColumnHidden(c_tableAchievementColumnNoValue,!value);
         for(int i=0;i<ui->TableWidgetAchievements->columnCount()-(c_tableAchievementColumnNoValue+1);i++) {
             ui->TableWidgetAchievements->setColumnHidden((c_tableAchievementColumnNoValue+1)+i,value);
@@ -1147,9 +1152,10 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
     if(_typeCategory==CategoryType::change){
         if(_categoriesGame.GetCount()>0){
             ui->LineEditTitleCategory->setText(ui->ComboBoxCategoriesCategory->itemText(a_index));
-            while(!_categoryValuesLayout->isEmpty()){
-                _categoryValuesLayout->removeRow(0);
-            }
+//            while(!_categoryValuesLayout->isEmpty()){
+//                _categoryValuesLayout->removeRow(0);
+//            }
+            ui->ListWidgetValuesCategory->clear();
             ui->TableWidgetAchievements->setColumnCount(c_tableAchievementColumnNoValue);
             if(a_index!=0){
                 ui->ButtonAddValueCategory->setEnabled(true);
@@ -1248,7 +1254,10 @@ void FormAchievements::on_FormCategoryPositionChange(int a_pos, int a_posNew){
 
         std::swap(_values[a_pos],_values[a_posNew]);
         for (int i=0;i<_values.size();i++) {
-            _categoryValuesLayout->addRow(_values[i]);
+            //_categoryValuesLayout->addRow(_values[i]);
+            QListWidgetItem* item = new QListWidgetItem(ui->ListWidgetValuesCategory);
+            item->setSizeHint(_values[i]->sizeHint());
+            ui->ListWidgetValuesCategory->setItemWidget(item,_values[i]);
             _values[i]->SetPosition(i);
             if(_values.size()==1){
                 _values[i]->SetEnabledUpDown(EnabledUpDown::none);
@@ -1280,7 +1289,9 @@ void FormAchievements::on_FormCategorySelectChange(int a_pos, bool a_select){
 }
 void FormAchievements::on_FormCategoryDeleting(int a_pos){
     ui->TableWidgetAchievements->removeColumn((c_tableAchievementColumnNoValue+1)+a_pos);
-    _categoryValuesLayout->removeRow(a_pos);
+    //_categoryValuesLayout->removeRow(a_pos);
+    QListWidgetItem* item = ui->ListWidgetValuesCategory->item(a_pos);
+    ui->ListWidgetValuesCategory->removeItemWidget(item);
     _values.remove(a_pos);
     for (int i=0;i<_values.size();i++) {
         _values[i]->SetPosition(i);

@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     QString tableWidget;
     QString headerView;
     QString groupBox;
+    QString listWidget;
     switch(_setting.GetTheme()){
         case 1:{
             _theme="white";
@@ -480,6 +481,18 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "color: white; "
                     "}"
                     ;
+            listWidget =
+                    "QListWidget { "
+                        "border: 0px solid #cccccc; "
+                        "border-radius: 8px; "
+                        "background-color: "+backgroundGradient+
+                    "} "
+                    "QListWidget::item { "
+                        "border-bottom: 1px solid #cccccc; "
+                        "background-color: #213c57; "//+backgroundGradient+
+                        "color: white; "
+                    "} "
+                    ;
             break;
             }
         case 2:
@@ -513,7 +526,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             qApp->setPalette(darkPalette);
             _theme="white";
     }
-    qApp->setStyleSheet(pushButton+progressBar+forms+subContainers+labels+radioButtons+tabBar+checkBox+comboBox+lineEdit+tableWidget+headerView+groupBox);
+    qApp->setStyleSheet(pushButton+progressBar+forms+subContainers+labels+radioButtons+tabBar+checkBox+comboBox+lineEdit+tableWidget+headerView+groupBox+listWidget);
 
 //    int id = QFontDatabase::addApplicationFont("C:/font4.otf");
 //    QString family = QFontDatabase::applicationFontFamilies(id).at(0);

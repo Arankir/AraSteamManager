@@ -396,26 +396,28 @@
           </layout>
          </item>
          <item>
-          <widget class="QScrollArea" name="ScrollAreaValuesCategory">
+          <widget class="QListWidget" name="ListWidgetValuesCategory">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="widgetResizable">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>135</height>
+            </size>
+           </property>
+           <property name="dragEnabled">
             <bool>true</bool>
            </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_5">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>505</width>
-              <height>135</height>
-             </rect>
-            </property>
-           </widget>
+           <property name="dragDropMode">
+            <enum>QAbstractItemView::InternalMove</enum>
+           </property>
+           <property name="defaultDropAction">
+            <enum>Qt::MoveAction</enum>
+           </property>
           </widget>
          </item>
          <item>
@@ -585,13 +587,23 @@
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QTableWidget" name="TableWidgetAchievements">
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
        <property name="sortingEnabled">
         <bool>true</bool>
        </property>
+       <attribute name="horizontalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
       </widget>
      </item>
      <item>
-      <widget class="QTableWidget" name="TableWidgetCompareAchievements"/>
+      <widget class="QTableWidget" name="TableWidgetCompareAchievements">
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

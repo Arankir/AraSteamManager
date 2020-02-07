@@ -44,7 +44,7 @@ void FormGames::InitComponents(){
 
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
-    ui->FrameGame->setVisible(false);
+//    ui->FrameGame->setVisible(false);
     ui->ButtonAchievements->setText(tr("Достижения"));
     ui->ButtonFavorite->setText("");
     ui->ButtonHide->setText("");
@@ -163,8 +163,10 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     ui->TableWidgetGames->setItem(a_achievements.GetIndex(),c_tableColumnProgress,new QTableWidgetItem(progressBarAchievements->text().rightJustified(4,'0')));
     _achievements[a_achievements.GetIndex()]=a_achievements;
     emit s_achievementsLoaded(_load++,0);
-    if(_load==_games.GetCount())
+    if(_load==_games.GetCount()){
+        on_TableWidgetGames_cellClicked(0,1);
         emit s_finish();
+    }
     //ach->deleteLater();
 }
 #define InitEnd }

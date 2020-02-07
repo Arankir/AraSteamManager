@@ -16,6 +16,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,6 +27,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *LabelPosition;
     QLineEdit *LineEditTitle;
+    QSpacerItem *horizontalSpacer;
     QCheckBox *CheckBoxVisible;
     QPushButton *ButtonReverse;
     QPushButton *ButtonUp;
@@ -38,7 +40,7 @@ public:
     {
         if (FormCategoryValue->objectName().isEmpty())
             FormCategoryValue->setObjectName(QString::fromUtf8("FormCategoryValue"));
-        FormCategoryValue->resize(588, 24);
+        FormCategoryValue->resize(588, 25);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormCategoryValue->setFont(font);
@@ -60,6 +62,10 @@ public:
         LineEditTitle->setObjectName(QString::fromUtf8("LineEditTitle"));
 
         horizontalLayout->addWidget(LineEditTitle);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
 
         CheckBoxVisible = new QCheckBox(FormCategoryValue);
         CheckBoxVisible->setObjectName(QString::fromUtf8("CheckBoxVisible"));
