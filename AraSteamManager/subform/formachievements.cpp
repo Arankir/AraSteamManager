@@ -528,6 +528,7 @@ void FormAchievements::CompareProfileFilterClickFriends(QString a_name, ReachedT
             break;
     }
     UpdateHiddenRows();
+    qDebug()<<_fCompare;
 }
 void FormAchievements::on_ButtonCompareAllFriendsReach_clicked(){
     QButtonWithData *senderButton=static_cast<QButtonWithData*>(sender());
