@@ -21,7 +21,7 @@ signals:
 
 public slots:
     int Fill();
-    void Set(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
+    void Set(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare);
     bool AddFriend();
     void SetFriend(QTableWidget *TableWidgetAchievements, SAchievements Aachievement, int Acol, int AcolumnAppid);
 
@@ -31,7 +31,6 @@ private:
     QLabel *_LabelTotalPersent;
     QTableWidget *_TableWidgetAchievements;
     QLabel *_LabelTotalPersentCompare;
-    QTableWidget *_TableWidgetCompareAchievements;
 
     SAchievements _achievement;
     int _col;

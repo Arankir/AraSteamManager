@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Threading_t {
-    QByteArrayData data[28];
-    char stringdata0[405];
+    QByteArrayData data[27];
+    char stringdata0[374];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,20 +45,19 @@ QT_MOC_LITERAL(10, 119, 7), // "QLabel*"
 QT_MOC_LITERAL(11, 127, 17), // "LabelTotalPersent"
 QT_MOC_LITERAL(12, 145, 23), // "TableWidgetAchievements"
 QT_MOC_LITERAL(13, 169, 24), // "LabelTotalPersentCompare"
-QT_MOC_LITERAL(14, 194, 30), // "TableWidgetCompareAchievements"
-QT_MOC_LITERAL(15, 225, 16), // "AddThreadFriends"
-QT_MOC_LITERAL(16, 242, 18), // "TableWidgetFriends"
-QT_MOC_LITERAL(17, 261, 9), // "SProfiles"
-QT_MOC_LITERAL(18, 271, 8), // "Profiles"
-QT_MOC_LITERAL(19, 280, 8), // "SFriends"
-QT_MOC_LITERAL(20, 289, 8), // "Friendss"
-QT_MOC_LITERAL(21, 298, 19), // "AddThreadStatistics"
-QT_MOC_LITERAL(22, 318, 2), // "id"
-QT_MOC_LITERAL(23, 321, 27), // "AddThreadFriendAchievements"
-QT_MOC_LITERAL(24, 349, 24), // "AtableWidgetAchievements"
-QT_MOC_LITERAL(25, 374, 12), // "Aachievement"
-QT_MOC_LITERAL(26, 387, 4), // "Acol"
-QT_MOC_LITERAL(27, 392, 12) // "AcolumnAppid"
+QT_MOC_LITERAL(14, 194, 16), // "AddThreadFriends"
+QT_MOC_LITERAL(15, 211, 18), // "TableWidgetFriends"
+QT_MOC_LITERAL(16, 230, 9), // "SProfiles"
+QT_MOC_LITERAL(17, 240, 8), // "Profiles"
+QT_MOC_LITERAL(18, 249, 8), // "SFriends"
+QT_MOC_LITERAL(19, 258, 8), // "Friendss"
+QT_MOC_LITERAL(20, 267, 19), // "AddThreadStatistics"
+QT_MOC_LITERAL(21, 287, 2), // "id"
+QT_MOC_LITERAL(22, 290, 27), // "AddThreadFriendAchievements"
+QT_MOC_LITERAL(23, 318, 24), // "AtableWidgetAchievements"
+QT_MOC_LITERAL(24, 343, 12), // "Aachievement"
+QT_MOC_LITERAL(25, 356, 4), // "Acol"
+QT_MOC_LITERAL(26, 361, 12) // "AcolumnAppid"
 
     },
     "Threading\0AddThreadGames\0\0QTableWidget*\0"
@@ -66,12 +65,10 @@ QT_MOC_LITERAL(27, 392, 12) // "AcolumnAppid"
     "AddThreadAchievements\0SAchievements\0"
     "achievements\0QLabel*\0LabelTotalPersent\0"
     "TableWidgetAchievements\0"
-    "LabelTotalPersentCompare\0"
-    "TableWidgetCompareAchievements\0"
-    "AddThreadFriends\0TableWidgetFriends\0"
-    "SProfiles\0Profiles\0SFriends\0Friendss\0"
-    "AddThreadStatistics\0id\0"
-    "AddThreadFriendAchievements\0"
+    "LabelTotalPersentCompare\0AddThreadFriends\0"
+    "TableWidgetFriends\0SProfiles\0Profiles\0"
+    "SFriends\0Friendss\0AddThreadStatistics\0"
+    "id\0AddThreadFriendAchievements\0"
     "AtableWidgetAchievements\0Aachievement\0"
     "Acol\0AcolumnAppid"
 };
@@ -92,17 +89,17 @@ static const uint qt_meta_data_Threading[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    2,   39,    2, 0x0a /* Public */,
-       7,    5,   44,    2, 0x0a /* Public */,
-      15,    3,   55,    2, 0x0a /* Public */,
-      21,    2,   62,    2, 0x0a /* Public */,
-      23,    4,   67,    2, 0x0a /* Public */,
+       7,    4,   44,    2, 0x0a /* Public */,
+      14,    3,   53,    2, 0x0a /* Public */,
+      20,    2,   60,    2, 0x0a /* Public */,
+      22,    4,   65,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Int, 0x80000000 | 3, 0x80000000 | 5,    4,    6,
-    QMetaType::Int, 0x80000000 | 8, 0x80000000 | 10, 0x80000000 | 3, 0x80000000 | 10, 0x80000000 | 3,    9,   11,   12,   13,   14,
-    QMetaType::Int, 0x80000000 | 3, 0x80000000 | 17, 0x80000000 | 19,   16,   18,   20,
-    QMetaType::Int, 0x80000000 | 5, QMetaType::QString,    6,   22,
-    QMetaType::Int, 0x80000000 | 3, 0x80000000 | 8, QMetaType::Int, QMetaType::Int,   24,   25,   26,   27,
+    QMetaType::Int, 0x80000000 | 8, 0x80000000 | 10, 0x80000000 | 3, 0x80000000 | 10,    9,   11,   12,   13,
+    QMetaType::Int, 0x80000000 | 3, 0x80000000 | 16, 0x80000000 | 18,   15,   17,   19,
+    QMetaType::Int, 0x80000000 | 5, QMetaType::QString,    6,   21,
+    QMetaType::Int, 0x80000000 | 3, 0x80000000 | 8, QMetaType::Int, QMetaType::Int,   23,   24,   25,   26,
 
        0        // eod
 };
@@ -115,7 +112,7 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: { int _r = _t->AddThreadGames((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 1: { int _r = _t->AddThreadAchievements((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QLabel*(*)>(_a[2])),(*reinterpret_cast< QTableWidget*(*)>(_a[3])),(*reinterpret_cast< QLabel*(*)>(_a[4])),(*reinterpret_cast< QTableWidget*(*)>(_a[5])));
+        case 1: { int _r = _t->AddThreadAchievements((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QLabel*(*)>(_a[2])),(*reinterpret_cast< QTableWidget*(*)>(_a[3])),(*reinterpret_cast< QLabel*(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 2: { int _r = _t->AddThreadFriends((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< SProfiles(*)>(_a[2])),(*reinterpret_cast< SFriends(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
@@ -141,7 +138,6 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             case 3:
             case 1:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QLabel* >(); break;
-            case 4:
             case 2:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QTableWidget* >(); break;
             }

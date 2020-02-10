@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadAchievements_t {
-    QByteArrayData data[24];
-    char stringdata0[283];
+    QByteArrayData data[23];
+    char stringdata0[252];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -49,12 +49,11 @@ QT_MOC_LITERAL(14, 120, 17), // "LabelTotalPersent"
 QT_MOC_LITERAL(15, 138, 13), // "QTableWidget*"
 QT_MOC_LITERAL(16, 152, 23), // "TableWidgetAchievements"
 QT_MOC_LITERAL(17, 176, 24), // "LabelTotalPersentCompare"
-QT_MOC_LITERAL(18, 201, 30), // "TableWidgetCompareAchievements"
-QT_MOC_LITERAL(19, 232, 9), // "AddFriend"
-QT_MOC_LITERAL(20, 242, 9), // "SetFriend"
-QT_MOC_LITERAL(21, 252, 12), // "Aachievement"
-QT_MOC_LITERAL(22, 265, 4), // "Acol"
-QT_MOC_LITERAL(23, 270, 12) // "AcolumnAppid"
+QT_MOC_LITERAL(18, 201, 9), // "AddFriend"
+QT_MOC_LITERAL(19, 211, 9), // "SetFriend"
+QT_MOC_LITERAL(20, 221, 12), // "Aachievement"
+QT_MOC_LITERAL(21, 234, 4), // "Acol"
+QT_MOC_LITERAL(22, 239, 12) // "AcolumnAppid"
 
     },
     "ThreadAchievements\0s_finished\0\0"
@@ -62,8 +61,7 @@ QT_MOC_LITERAL(23, 270, 12) // "AcolumnAppid"
     "Acolumn\0Fill\0Set\0SAchievements\0"
     "achievements\0QLabel*\0LabelTotalPersent\0"
     "QTableWidget*\0TableWidgetAchievements\0"
-    "LabelTotalPersentCompare\0"
-    "TableWidgetCompareAchievements\0AddFriend\0"
+    "LabelTotalPersentCompare\0AddFriend\0"
     "SetFriend\0Aachievement\0Acol\0AcolumnAppid"
 };
 #undef QT_MOC_LITERAL
@@ -88,9 +86,9 @@ static const uint qt_meta_data_ThreadAchievements[] = {
 
  // slots: name, argc, parameters, tag, flags
        9,    0,   60,    2, 0x0a /* Public */,
-      10,    5,   61,    2, 0x0a /* Public */,
-      19,    0,   72,    2, 0x0a /* Public */,
-      20,    4,   73,    2, 0x0a /* Public */,
+      10,    4,   61,    2, 0x0a /* Public */,
+      18,    0,   70,    2, 0x0a /* Public */,
+      19,    4,   71,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -99,9 +97,9 @@ static const uint qt_meta_data_ThreadAchievements[] = {
 
  // slots: parameters
     QMetaType::Int,
-    QMetaType::Void, 0x80000000 | 11, 0x80000000 | 13, 0x80000000 | 15, 0x80000000 | 13, 0x80000000 | 15,   12,   14,   16,   17,   18,
+    QMetaType::Void, 0x80000000 | 11, 0x80000000 | 13, 0x80000000 | 15, 0x80000000 | 13,   12,   14,   16,   17,
     QMetaType::Bool,
-    QMetaType::Void, 0x80000000 | 15, 0x80000000 | 11, QMetaType::Int, QMetaType::Int,   16,   21,   22,   23,
+    QMetaType::Void, 0x80000000 | 15, 0x80000000 | 11, QMetaType::Int, QMetaType::Int,   16,   20,   21,   22,
 
        0        // eod
 };
@@ -117,7 +115,7 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 2: _t->s_is_public((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 3: { int _r = _t->Fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->Set((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QLabel*(*)>(_a[2])),(*reinterpret_cast< QTableWidget*(*)>(_a[3])),(*reinterpret_cast< QLabel*(*)>(_a[4])),(*reinterpret_cast< QTableWidget*(*)>(_a[5]))); break;
+        case 4: _t->Set((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QLabel*(*)>(_a[2])),(*reinterpret_cast< QTableWidget*(*)>(_a[3])),(*reinterpret_cast< QLabel*(*)>(_a[4]))); break;
         case 5: { bool _r = _t->AddFriend();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 6: _t->SetFriend((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< SAchievements(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
@@ -132,7 +130,6 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
             case 3:
             case 1:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QLabel* >(); break;
-            case 4:
             case 2:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QTableWidget* >(); break;
             }

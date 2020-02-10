@@ -18,7 +18,7 @@ signals:
 
 public slots:
     int AddThreadGames(QTableWidget *TableWidgetGames, SGames games);
-    int AddThreadAchievements(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare, QTableWidget *TableWidgetCompareAchievements);
+    int AddThreadAchievements(SAchievements achievements, QLabel *LabelTotalPersent, QTableWidget *TableWidgetAchievements, QLabel *LabelTotalPersentCompare);
     int AddThreadFriends(QTableWidget *TableWidgetFriends, SProfiles Profiles,SFriends Friendss);
     int AddThreadStatistics(SGames games, QString id);
     int AddThreadFriendAchievements(QTableWidget *AtableWidgetAchievements, SAchievements Aachievement, int Acol, int AcolumnAppid);

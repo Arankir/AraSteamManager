@@ -199,7 +199,7 @@ public:
 
         retranslateUi(FormFavorites);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(FormFavorites);
@@ -209,11 +209,11 @@ public:
     {
         FormFavorites->setWindowTitle(QApplication::translate("FormFavorites", "Form", nullptr));
         ButtonGamesFind->setText(QApplication::translate("FormFavorites", "\320\237\320\276\320\270\321\201\320\272", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("FormFavorites", "Games", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("FormFavorites", "  Games  ", nullptr));
         LineEditFriendsFind->setPlaceholderText(QApplication::translate("FormFavorites", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
         ButtonFriendsFind->setText(QApplication::translate("FormFavorites", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
         CheckBoxFriendsOpenProfile->setText(QApplication::translate("FormFavorites", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("FormFavorites", "Friends", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("FormFavorites", "  Friends  ", nullptr));
         pushButton->setText(QApplication::translate("FormFavorites", "\320\226\320\274\320\270", nullptr));
         lineEdit->setText(QApplication::translate("FormFavorites", "0,0,0", nullptr));
         label->setText(QApplication::translate("FormFavorites", "\320\237\320\276\321\202\320\276\320\274 \320\264\320\276\320\261\320\260\320\262\320\273\321\216 \321\201\321\216\320\264\320\260 \320\260\321\207\320\270\320\262\320\272\320\270", nullptr));
@@ -242,7 +242,7 @@ public:
         label_6->setText(QApplication::translate("FormFavorites", "\320\235\320\265\321\202 \320\275\320\260 \320\274\320\265\321\201\321\202\320\265 70,120,142", nullptr));
         label_7->setText(QApplication::translate("FormFavorites", "\320\241\320\277\320\270\321\202 70,120,142", nullptr));
         label_8->setText(QApplication::translate("FormFavorites", "\320\236\320\266\320\270\320\264\320\260\320\265\321\202 \320\276\320\261\320\274\320\265\320\275\320\260 0,0,0", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("FormFavorites", "Achievements", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("FormFavorites", "  Achievements  ", nullptr));
     } // retranslateUi
 
 };

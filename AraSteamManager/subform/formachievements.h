@@ -89,6 +89,16 @@ private slots:
     void UpdateHiddenRows();
     bool SetFriendAchievements(SAchievements achievement, int col);
 
+    void TableSetColumnCount(int columns);
+    void TableInsertColumn(int columns);
+    void TableRemoveColumn(int columns);
+    void TableSetColumnVisible(int column, bool visible);
+    void TableSetHorizontalHeaderText(int index, QString text);
+    void TableSetRowCount(int row);
+    void TableInsertRow(int row);
+    void TableRemoveRow(int row);
+    void TableSetRowVisible(int row, bool visible);
+
     void on_LineEditNameAchievements_textChanged(const QString &arg1);
     void on_ButtonFindAchievement_clicked();
     void on_ButtonAddCategory_clicked();
@@ -127,6 +137,8 @@ private slots:
     void on_CheckBoxCategoryUniqueValue_stateChanged(int arg1);
     void HideCheckedAchievement(QTableWidgetItem *item);
     FormCategoryValue *CreateValueCategory();
+
+    void on_horizontalScrollBar_sliderMoved(int position);
 
 private:
     Ui::FormAchievements *ui;

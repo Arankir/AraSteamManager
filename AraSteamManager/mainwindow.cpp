@@ -34,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     ui->setupUi(this);
     QString hoverGradient;
     QString backgroundGradient;
+    QString blackGradient;
     QString pushButton;
     QString progressBar;
     QString forms;
@@ -59,6 +60,10 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                         "stop: 0 #213c57, "
                         "stop: 1.0 #1a2839); ";
+            blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                        "stop: 0 #202020, "
+                        "stop: 0.8 #303030, "
+                        "stop: 1.0 #606060); ";
             pushButton =
                 "QPushButton{ "
                     "color: white; "
@@ -341,7 +346,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             lineEdit =
                     "QLineEdit { "
                         "selection-background-color: #387097; "
-                        "background-color: #202020; "
+                        "background-color: "+blackGradient+
                         "color: white; "
                     "} "
                     "QLineEdit:disabled { "
@@ -352,12 +357,13 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     ;
             tableWidget =
                     "QTableWidget { "
-                        "border: 0px solid #cccccc; "
-                        "border-radius: 8px; "
+                        "border: 1px solid #777777; "
+                        "border-radius: 2px; "
                         "background-color: "+backgroundGradient+
                     "} "
                     "QTableWidget::item { "
-                        "border-bottom: 1px solid #cccccc; "
+                        //"border-bottom: 1px solid #cccccc; "
+                        "border: 1px solid #777777; "
                         "background-color: #213c57; "//+backgroundGradient+
                         "color: white; "
                     "} "
@@ -375,9 +381,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     "QScrollBar:horizontal { "
                         "border: 1px solid #999999; "
                         "background: "+hoverGradient+
-                        "width:10px; "
-                        //"    margin: 0px 0px 0px 0px;"
-                    "}"
+                        "height:10px; "
+                    "} "
 //                    QScrollBar:vertical {
 //                    border-color: rgb(227, 227, 227);
 //                    border-width: 1px;

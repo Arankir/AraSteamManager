@@ -75,11 +75,11 @@ int Threading::AddThreadFriendAchievements(QTableWidget *a_tableWidgetAchievemen
     return 1;
 }
 
-int Threading::AddThreadAchievements(SAchievements a_achievements, QLabel *a_LabelTotalPersent, QTableWidget *a_tableWidgetAchievements, QLabel *a_LabelTotalPersentCompare, QTableWidget *a_tableWidgetCompareAchievements){
+int Threading::AddThreadAchievements(SAchievements a_achievements, QLabel *a_LabelTotalPersent, QTableWidget *a_tableWidgetAchievements, QLabel *a_LabelTotalPersentCompare){
     ThreadAchievements *achievements = new ThreadAchievements;
     QThread *thread = new QThread;
     achievements->moveToThread(thread);
-    achievements->Set(a_achievements, a_LabelTotalPersent, a_tableWidgetAchievements, a_LabelTotalPersentCompare, a_tableWidgetCompareAchievements);
+    achievements->Set(a_achievements, a_LabelTotalPersent, a_tableWidgetAchievements, a_LabelTotalPersentCompare);
     connect(thread,SIGNAL(started()),achievements,SLOT(Fill()));
     connect(achievements,SIGNAL(s_finished()),thread,SLOT(quit()));
     connect(achievements,SIGNAL(s_finished()),achievements,SLOT(deleteLater()));
