@@ -13,6 +13,13 @@ FormContainerAchievements::~FormContainerAchievements(){
 }
 
 void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QString a_ids, SGame a_game, int a_num){
+    for (int i=0;i<ui->TabWidgetAchievements->count();i++) {
+        if((static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetGame().GetAppid()==a_game.GetAppid())&&(static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetProfile()==a_ids)){
+            static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->on_ButtonUpdate_clicked();
+            ui->TabWidgetAchievements->setCurrentIndex(i);
+            return;
+        }
+    }
     FormAchievements *newFormAchievements = new FormAchievements(a_pl,a_ids,a_game,a_num,this);
     int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements,"  "+a_game.GetName()+"  ");
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);

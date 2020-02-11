@@ -548,6 +548,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
     }
 }
 void MainWindow::InitComponents(){
+    _containerAchievementsForm = new FormContainerAchievements();
     ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
     ui->LabelAvatar->setText("");
     ui->LabelTimeCreated->setText("");
@@ -595,6 +596,28 @@ void MainWindow::InitComponents(){
 #define System {
 void MainWindow::ProgressLoading(int a_progress,int){
     ui->FormProgressBar->setValue(a_progress);
+}
+void MainWindow::AddAchievements(SAchievementsPlayer achievements, SGame games){
+    if(_achievementsCount==0){
+        _containerAchievementsForm = new FormContainerAchievements();
+        connect(_containerAchievementsForm,&FormContainerAchievements::s_removeAchievements,this,&MainWindow::RemoveAchievements);
+        connect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&MainWindow::ContainerAchievementsClose);
+        _windowChildCount++;
+    }
+    _containerAchievementsForm->AddFormAchievement(achievements,_profile.GetSteamid(),games,_achievementsCount++);
+    _containerAchievementsForm->show();
+}
+void MainWindow::RemoveAchievements(int index){
+    _achievementsCount--;
+}
+void MainWindow::ContainerAchievementsClose(){
+    _achievementsCount=0;
+    disconnect(_containerAchievementsForm,&FormContainerAchievements::s_removeAchievements,this,&MainWindow::RemoveAchievements);
+    disconnect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&MainWindow::ContainerAchievementsClose);
+}
+void MainWindow::ReturnFromAchievements(int a_num){
+    disconnect(_achievementsForms[a_num],&FormAchievements::s_return_to_games,this,&MainWindow::ReturnFromAchievements);
+    //delete achievementsforms[num];
 }
 void MainWindow::ShowGames(){
     ui->FormProgressBar->setVisible(false);
@@ -832,6 +855,7 @@ void MainWindow::on_ButtonGames_clicked(){
         connect(_gamesForm,&FormGames::s_return_to_profile,this,&MainWindow::ReturnFromForm);
         connect(_gamesForm,&FormGames::s_finish,this,&MainWindow::ShowGames);
         connect(_gamesForm,&FormGames::s_achievementsLoaded,this,&MainWindow::ProgressLoading);
+        connect(_gamesForm,&FormGames::s_showAchievements,this,&MainWindow::AddAchievements);
         ui->ScrollAreaForm->setWidget(_gamesForm);
         ui->FormProgressBar->setVisible(true);
         _gamesForm->setVisible(false);

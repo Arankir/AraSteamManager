@@ -26,31 +26,27 @@ class FormGames : public QWidget
 public:
     explicit FormGames(QString id, SGames Games, QWidget *parent = nullptr);
     ~FormGames();
-    FormContainerAchievements *_containerAchievementsForm;
-    QVector<FormAchievements*> _achievementsForms;
 
 signals:
     void s_return_to_profile(QWidget*);
     void s_achievementsLoaded(int,int);
     void s_finish();
+    void s_showAchievements(SAchievementsPlayer achievements,SGame games);
 
 public slots:
     void ProgressLoading(int,int);
     void OnFinish();
-    void ReturnFromAchievements(int num);
 
     void showHideSlideWidget(bool f_flag);
     void mouseMoveEvent(QMouseEvent *ev);
     void slotShowHideSlide();
+
 private slots:
     void InitComponents();
     void OnImageLoad(RequestData *imgr);
     void OnResultAchievements(SAchievementsPlayer ach);
     void closeEvent(QCloseEvent *event);
-
-    void AddAchievements(int index);
-    void RemoveAchievements(int index);
-    void ContainerAchievementsClose();
+    void resizeEvent(QResizeEvent *event);
 
     void on_LineEditGame_textChanged(const QString);
     void on_ButtonFind_clicked();
@@ -71,7 +67,6 @@ private:
     QStringList _hide;
     Settings _setting;
     QString _theme="white";
-    int _achievementsCount=0;
     int _load=0;
 //    QPropertyAnimation *_animate;
 //    QRect _geometryGroup;

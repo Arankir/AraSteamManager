@@ -197,15 +197,6 @@ void FormAchievements::InitComponents(){
     ui->TableWidgetFriends->resizeRowsToContents();
     ui->TableWidgetFriends->resizeColumnsToContents();
     #define SetTableWidgetCompareFriendsSettingsEnd }
-    #define InitCategoryValuesLayout {
-    //QWidget *widgetValuesCategory = new QWidget;
-    //_categoryValuesLayout = new QFormLayout;
-    //_categoryValuesLayout->setSpacing(0);
-    //_categoryValuesLayout->setContentsMargins(1,1,1,1);
-    //widgetValuesCategory->setLayout(_categoryValuesLayout);
-    //ui->ScrollAreaValuesCategory->setVisible(false);
-    //ui->ListWidgetValuesCategory->setLayout(_categoryValuesLayout);
-    #define InitCategoryValuesLayoutEnd }
     #define SetIcon {
     ui->ButtonCompare->setIcon(QIcon("://"+_theme+"/compare.png"));
     //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/filter_white.png)}");
@@ -220,6 +211,7 @@ void FormAchievements::InitComponents(){
     ui->ButtonAcceptCategory->setIcon(QIcon("://apply.png"));
     ui->ButtonCancelCategory->setIcon(QIcon("://cancel.png"));
     ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
+    ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
     allFriends->setPixmap(QPixmap("://"+_theme+"/friends.png"));
     pbFriendsAllAchievements->setIcon(QIcon("://"+_theme+"/all.png"));
     pbFriendsReachedAchievements->setIcon(QIcon("://"+_theme+"/reached.png"));
@@ -1413,4 +1405,46 @@ void FormAchievements::on_CheckBoxFavorites_stateChanged(int arg1){
 void FormAchievements::on_horizontalScrollBar_sliderMoved(int a_position){
     ui->TableWidgetAchievements->horizontalScrollBar()->setSliderPosition(a_position);
     ui->TableWidgetHorizontalHeaderAchievements->horizontalScrollBar()->setSliderPosition(a_position);
+}
+
+void FormAchievements::on_ButtonFavorite_clicked(){
+    if(_currentAchievementIndex>-1){
+        QJsonObject gameObject;
+        QJsonObject newValue;
+        gameObject["id"]=_game.GetAppid();
+        gameObject["name"]=_game.GetName();
+        newValue["id"]=_achievements[_currentAchievementIndex].GetApiname();
+        newValue["title"]=_achievements[_currentAchievementIndex].GetDisplayname();
+        newValue["description"]=_achievements[_currentAchievementIndex].GetDescription();
+        ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
+        if(_favorites.AddValue(gameObject,newValue,true)){
+            //Категория добавилась
+            ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/in_favorites.png"));
+        } else {
+            //Категория уже есть (удалилась)
+            ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
+        }
+    }
+}
+
+void FormAchievements::on_TableWidgetAchievements_cellClicked(int row, int){
+    _currentAchievement=ui->TableWidgetAchievements->item(row,c_tableAchievementColumnAppid)->text();
+    _currentAchievementIndex=row;
+    QJsonObject gameObject;
+    gameObject["id"]=_game.GetAppid();
+    gameObject["name"]=_game.GetName();
+    QJsonArray favorites=_favorites.GetValues(gameObject);
+    bool isFavorite=false;
+    for(int i=0;i<favorites.size();i++){
+        if(favorites[i].toObject().value("id").toString()==_currentAchievement){
+            isFavorite=true;
+            break;
+        }
+    }
+    ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
+    if(isFavorite){
+        ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/in_favorites.png"));
+    } else {
+        ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
+    }
 }

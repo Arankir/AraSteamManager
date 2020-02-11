@@ -48,9 +48,15 @@ public:
     FormFavorites *_favoritesForm;
     FormStatistics *_statisticsForm;
     FormSettings *_settingsForm;
+    FormContainerAchievements *_containerAchievementsForm;
+    QVector<FormAchievements*> _achievementsForms;
 
 public slots:
     void ProgressLoading(int,int);
+    void AddAchievements(SAchievementsPlayer achievements,SGame games);
+    void RemoveAchievements(int index);
+    void ContainerAchievementsClose();
+    void ReturnFromAchievements(int num);
 
 private slots:
     void keyPressEvent(QKeyEvent *event) override;
@@ -95,6 +101,7 @@ private:
     SFriends _friends;
     Settings _setting;
     QString _theme="white";
+    int _achievementsCount=0;
 
     QVector<SProfile> _bufferProfiles;
     int _currentBufferProfile=0;

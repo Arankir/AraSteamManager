@@ -55,7 +55,7 @@ enum class CategoryType{
 };
 
 public:
-    explicit FormAchievements(SAchievementsPlayer pl, QString ids, SGame game, int num, QWidget *parent = nullptr);
+    explicit FormAchievements(SAchievementsPlayer pl, QString id, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -64,6 +64,9 @@ signals:
 public slots:
     void ProgressLoading(int p,int row);
     void OnFinish();
+    QString GetProfile() {return _id;}
+    SGame GetGame() {return _game;}
+    void on_ButtonUpdate_clicked();
 
 private slots:
     void changeEvent(QEvent *event);
@@ -103,7 +106,6 @@ private slots:
     void on_ButtonFindAchievement_clicked();
     void on_ButtonAddCategory_clicked();
     void on_ButtonChangeCategory_clicked();
-    void on_ButtonUpdate_clicked();
     void FavoritesClicked();
     void on_ButtonCompare_clicked();
     void on_CheckBoxShowFilter_stateChanged(int arg1);
@@ -140,11 +142,17 @@ private slots:
 
     void on_horizontalScrollBar_sliderMoved(int position);
 
+    void on_ButtonFavorite_clicked();
+
+    void on_TableWidgetAchievements_cellClicked(int row, int column);
+
 private:
     Ui::FormAchievements *ui;
     Settings _setting;
     QString _theme="white";
     bool _isFirstLoad=true;
+    QString _currentAchievement;
+    int _currentAchievementIndex=-1;
 
     //ключевые данные
     QString _id;

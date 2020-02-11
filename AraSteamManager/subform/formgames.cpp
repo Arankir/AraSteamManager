@@ -40,7 +40,7 @@ void FormGames::InitComponents(){
 //    ui->FrameGroup->stackUnder(ui->TableWidgetGames);
 //    _geometryGroup = QRect(0,0,0,ui->FrameGroup->height());
 //    this->setMouseTracking(true);
-    ui->FrameGroup->setVisible(false);
+    ui->FrameGroup->setVisible(true);
 
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
@@ -184,27 +184,11 @@ void FormGames::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);
     //delete this;
 }
-void FormGames::ReturnFromAchievements(int a_num){
-    disconnect(_achievementsForms[a_num],&FormAchievements::s_return_to_games,this,&FormGames::ReturnFromAchievements);
-    //delete achievementsforms[num];
-}
-void FormGames::AddAchievements(int a_index){
-    if(_achievementsCount==0){
-        _containerAchievementsForm = new FormContainerAchievements();
-        connect(_containerAchievementsForm,&FormContainerAchievements::s_removeAchievements,this,&FormGames::RemoveAchievements);
-        connect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&FormGames::ContainerAchievementsClose);
-        _windowChildCount++;
-    }
-    _containerAchievementsForm->AddFormAchievement(_achievements[a_index],_id,_games[a_index],_achievementsCount++);
-    _containerAchievementsForm->show();
-}
-void FormGames::RemoveAchievements(int){
-    _achievementsCount--;
-}
-void FormGames::ContainerAchievementsClose(){
-    _achievementsCount=0;
-    disconnect(_containerAchievementsForm,&FormContainerAchievements::s_removeAchievements,this,&FormGames::RemoveAchievements);
-    disconnect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&FormGames::ContainerAchievementsClose);
+void FormGames::resizeEvent(QResizeEvent *event){
+    this->setLayout(ui->mainLayout);
+    ui->FrameGroup->raise();
+    ui->FrameGroup->setGeometry(0,0,100,this->y());
+    //ui->mainLayout->setParent(this);// ->setGeometry(this->geometry());
 }
 void FormGames::showHideSlideWidget(bool a_flag){
 //    if (a_flag)
@@ -311,7 +295,7 @@ void FormGames::on_ButtonAchievements_clicked(){
         //ui->TableWidgetGames->setEnabled(false);
         ui->ProgressBarLoading->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(_selectedIndex.toInt(),c_tableColumnProgress))->maximum());
         //ui->ProgressBarLoading->setVisible(true);
-        AddAchievements(_selectedIndex.toInt());
+        emit s_showAchievements(_achievements[_selectedIndex.toInt()],_games[_selectedIndex.toInt()]);
     }
 }
 void FormGames::on_ButtonFavorite_clicked(){
