@@ -68,8 +68,8 @@ private:
     Settings _setting;
     QString _theme="white";
     int _load=0;
-//    QPropertyAnimation *_animate;
-//    QRect _geometryGroup;
+    QPropertyAnimation *_animate;
+    QRect _geometryGroup;
     QString _selectedGame;
     QString _selectedIndex;
 

@@ -244,7 +244,7 @@
              <x>0</x>
              <y>0</y>
              <width>234</width>
-             <height>118</height>
+             <height>127</height>
             </rect>
            </property>
           </widget>
@@ -267,7 +267,7 @@
              <x>0</x>
              <y>0</y>
              <width>233</width>
-             <height>118</height>
+             <height>127</height>
             </rect>
            </property>
           </widget>
@@ -280,6 +280,7 @@
             <property name="title">
              <string/>
             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9"/>
            </widget>
           </item>
           <item>

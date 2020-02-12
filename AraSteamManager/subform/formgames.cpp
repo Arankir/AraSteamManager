@@ -37,10 +37,12 @@ void FormGames::InitComponents(){
     //ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
     //ui->TableWidgetGames->setAlternatingRowColors(true);
 
-//    ui->FrameGroup->stackUnder(ui->TableWidgetGames);
-//    _geometryGroup = QRect(0,0,0,ui->FrameGroup->height());
-//    this->setMouseTracking(true);
-    ui->FrameGroup->setVisible(true);
+    ui->FrameGroup->stackUnder(ui->TableWidgetGames);
+    _geometryGroup = QRect(0,0,0,ui->FrameGames->height());
+    //ui->TableWidgetGames->installEventFilter(this);
+    //ui->TableWidgetGames->setMouseTracking(true);
+    //ui->TableWidgetGames->viewport()->setMouseTracking(true);
+    ui->FrameGroup->setVisible(false);
 
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
@@ -185,52 +187,56 @@ void FormGames::closeEvent(QCloseEvent*){
     //delete this;
 }
 void FormGames::resizeEvent(QResizeEvent *event){
-    this->setLayout(ui->mainLayout);
-    ui->FrameGroup->raise();
-    ui->FrameGroup->setGeometry(0,0,100,this->y());
-    //ui->mainLayout->setParent(this);// ->setGeometry(this->geometry());
+    ui->TableWidgetGames->setGeometry(0,0,ui->FrameGames->width(),ui->FrameGames->height());
+    ui->FrameGroup->setGeometry(0,0,ui->FrameGroup->width(),ui->FrameGames->height());
+    //ui->FrameGroup->raise();
 }
 void FormGames::showHideSlideWidget(bool a_flag){
-//    if (a_flag)
-//        ui->FrameGroup->setGeometry(_geometryGroup);
-//    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
-//    _animate->setDuration(300);
+    qDebug()<<4<<a_flag;
+    if (a_flag)
+        ui->FrameGroup->setGeometry(_geometryGroup);
+    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
+    _animate->setDuration(300);
 
-//    QRect startRect(0, 0, 0, height());
-//    QRect endRect(0, 0, 300, height());
+    QRect startRect(0, 0, 0, height());
+    QRect endRect(0, 0, 300, height());
 
-//    if (a_flag)
-//    {
-//        _animate->setStartValue(startRect);
-//        _animate->setEndValue(endRect);
-//        _geometryGroup=endRect;
-//    }
-//    else
-//    {
-//        _animate->setStartValue(endRect);
-//        _animate->setEndValue(startRect);
-//        _geometryGroup=startRect;
-//    }
-//    _animate->start();
-//    ui->FrameGroup->setVisible(!a_flag);
+    if (a_flag)
+    {
+        _animate->setStartValue(startRect);
+        _animate->setEndValue(endRect);
+        _geometryGroup=endRect;
+    }
+    else
+    {
+        _animate->setStartValue(endRect);
+        _animate->setEndValue(startRect);
+        _geometryGroup=startRect;
+    }
+    _animate->start();
+    ui->FrameGroup->setVisible(!a_flag);
 }
 void FormGames::mouseMoveEvent(QMouseEvent *ev){
-//    if (ev->pos().x() < 50)
-//    {
-//        if (!ui->FrameGroup->isVisible())
-//            slotShowHideSlide();
-//    }
-//    else
-//    {
-//        if (ui->FrameGroup->isVisible())
-//            slotShowHideSlide();
-//    }
+    qDebug()<<ev->pos().x()<<ev->pos().y();
+    if (ev->pos().x() < 50)
+    {
+        qDebug()<<1;
+        if (!ui->FrameGroup->isVisible())
+            slotShowHideSlide();
+    }
+    else
+    {
+        qDebug()<<2;
+        if (ui->FrameGroup->isVisible())
+            slotShowHideSlide();
+    }
 }
 void FormGames::slotShowHideSlide(){
-//    if (ui->FrameGroup->isHidden())
-//        ui->FrameGroup->show();
+    if (ui->FrameGroup->isHidden())
+        ui->FrameGroup->show();
 
-//    showHideSlideWidget(!ui->FrameGroup->isVisible());
+    qDebug()<<3<<ui->FrameGroup->isVisible();
+    showHideSlideWidget(!ui->FrameGroup->isVisible());
 }
 #define SystemEnd }
 

@@ -28,15 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_FormGames
 {
 public:
-    QFrame *FrameGroup;
-    QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_4;
-    QPushButton *ButtonChangeGroup;
-    QPushButton *ButtonCreateGroup;
-    QScrollArea *ScrollAreaGroup;
-    QWidget *scrollAreaWidgetContents_2;
-    QWidget *widget;
-    QVBoxLayout *mainLayout;
+    QVBoxLayout *verticalLayout_2;
     QFrame *FrameGame;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
@@ -51,7 +43,15 @@ public:
     QHBoxLayout *horizontalLayout;
     QLineEdit *LineEditGame;
     QPushButton *ButtonFind;
+    QFrame *FrameGames;
     QTableWidget *TableWidgetGames;
+    QFrame *FrameGroup;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *ButtonChangeGroup;
+    QPushButton *ButtonCreateGroup;
+    QScrollArea *ScrollAreaGroup;
+    QWidget *scrollAreaWidgetContents_2;
 
     void setupUi(QWidget *FormGames)
     {
@@ -62,51 +62,17 @@ public:
         font.setFamily(QString::fromUtf8("Ebrima"));
         font.setPointSize(10);
         FormGames->setFont(font);
-        FrameGroup = new QFrame(FormGames);
-        FrameGroup->setObjectName(QString::fromUtf8("FrameGroup"));
-        FrameGroup->setGeometry(QRect(270, 20, 168, 100));
-        verticalLayout = new QVBoxLayout(FrameGroup);
-        verticalLayout->setSpacing(2);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        ButtonChangeGroup = new QPushButton(FrameGroup);
-        ButtonChangeGroup->setObjectName(QString::fromUtf8("ButtonChangeGroup"));
-
-        horizontalLayout_4->addWidget(ButtonChangeGroup);
-
-        ButtonCreateGroup = new QPushButton(FrameGroup);
-        ButtonCreateGroup->setObjectName(QString::fromUtf8("ButtonCreateGroup"));
-
-        horizontalLayout_4->addWidget(ButtonCreateGroup);
-
-
-        verticalLayout->addLayout(horizontalLayout_4);
-
-        ScrollAreaGroup = new QScrollArea(FrameGroup);
-        ScrollAreaGroup->setObjectName(QString::fromUtf8("ScrollAreaGroup"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalLayout_2 = new QVBoxLayout(FormGames);
+        verticalLayout_2->setSpacing(3);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        FrameGame = new QFrame(FormGames);
+        FrameGame->setObjectName(QString::fromUtf8("FrameGame"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(ScrollAreaGroup->sizePolicy().hasHeightForWidth());
-        ScrollAreaGroup->setSizePolicy(sizePolicy);
-        ScrollAreaGroup->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 166, 68));
-        ScrollAreaGroup->setWidget(scrollAreaWidgetContents_2);
-
-        verticalLayout->addWidget(ScrollAreaGroup);
-
-        widget = new QWidget(FormGames);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 260, 355));
-        mainLayout = new QVBoxLayout(widget);
-        mainLayout->setObjectName(QString::fromUtf8("mainLayout"));
-        mainLayout->setContentsMargins(0, 0, 0, 0);
-        FrameGame = new QFrame(widget);
-        FrameGame->setObjectName(QString::fromUtf8("FrameGame"));
+        sizePolicy.setHeightForWidth(FrameGame->sizePolicy().hasHeightForWidth());
+        FrameGame->setSizePolicy(sizePolicy);
         FrameGame->setFrameShape(QFrame::StyledPanel);
         FrameGame->setFrameShadow(QFrame::Raised);
         verticalLayout_3 = new QVBoxLayout(FrameGame);
@@ -123,7 +89,7 @@ public:
 
         LabelTitleGame = new QLabel(FrameGame);
         LabelTitleGame->setObjectName(QString::fromUtf8("LabelTitleGame"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(LabelTitleGame->sizePolicy().hasHeightForWidth());
@@ -149,11 +115,8 @@ public:
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         ButtonAchievements = new QPushButton(FrameGame);
         ButtonAchievements->setObjectName(QString::fromUtf8("ButtonAchievements"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(ButtonAchievements->sizePolicy().hasHeightForWidth());
-        ButtonAchievements->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(ButtonAchievements->sizePolicy().hasHeightForWidth());
+        ButtonAchievements->setSizePolicy(sizePolicy1);
 
         horizontalLayout_3->addWidget(ButtonAchievements);
 
@@ -171,25 +134,32 @@ public:
         verticalLayout_3->addLayout(horizontalLayout_3);
 
 
-        mainLayout->addWidget(FrameGame);
+        verticalLayout_2->addWidget(FrameGame);
 
-        ProgressBarLoading = new QProgressBar(widget);
+        ProgressBarLoading = new QProgressBar(FormGames);
         ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));
         ProgressBarLoading->setValue(0);
 
-        mainLayout->addWidget(ProgressBarLoading);
+        verticalLayout_2->addWidget(ProgressBarLoading);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        LineEditGame = new QLineEdit(widget);
+        LineEditGame = new QLineEdit(FormGames);
         LineEditGame->setObjectName(QString::fromUtf8("LineEditGame"));
+        sizePolicy1.setHeightForWidth(LineEditGame->sizePolicy().hasHeightForWidth());
+        LineEditGame->setSizePolicy(sizePolicy1);
         LineEditGame->setFont(font);
 
         horizontalLayout->addWidget(LineEditGame);
 
-        ButtonFind = new QPushButton(widget);
+        ButtonFind = new QPushButton(FormGames);
         ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
         ButtonFind->setEnabled(true);
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(ButtonFind->sizePolicy().hasHeightForWidth());
+        ButtonFind->setSizePolicy(sizePolicy2);
         QFont font2;
         font2.setFamily(QString::fromUtf8("Ebrima"));
         font2.setPointSize(8);
@@ -198,17 +168,63 @@ public:
         horizontalLayout->addWidget(ButtonFind);
 
 
-        mainLayout->addLayout(horizontalLayout);
+        verticalLayout_2->addLayout(horizontalLayout);
 
-        TableWidgetGames = new QTableWidget(widget);
+        FrameGames = new QFrame(FormGames);
+        FrameGames->setObjectName(QString::fromUtf8("FrameGames"));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(FrameGames->sizePolicy().hasHeightForWidth());
+        FrameGames->setSizePolicy(sizePolicy3);
+        FrameGames->setFrameShape(QFrame::StyledPanel);
+        FrameGames->setFrameShadow(QFrame::Raised);
+        TableWidgetGames = new QTableWidget(FrameGames);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
+        TableWidgetGames->setGeometry(QRect(184, 10, 256, 192));
         TableWidgetGames->setSelectionBehavior(QAbstractItemView::SelectRows);
         TableWidgetGames->horizontalHeader()->setStretchLastSection(true);
         TableWidgetGames->verticalHeader()->setVisible(false);
+        FrameGroup = new QFrame(FrameGames);
+        FrameGroup->setObjectName(QString::fromUtf8("FrameGroup"));
+        FrameGroup->setGeometry(QRect(10, 10, 168, 100));
+        verticalLayout = new QVBoxLayout(FrameGroup);
+        verticalLayout->setSpacing(2);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        ButtonChangeGroup = new QPushButton(FrameGroup);
+        ButtonChangeGroup->setObjectName(QString::fromUtf8("ButtonChangeGroup"));
 
-        mainLayout->addWidget(TableWidgetGames);
+        horizontalLayout_4->addWidget(ButtonChangeGroup);
 
-        QWidget::setTabOrder(LineEditGame, ButtonFind);
+        ButtonCreateGroup = new QPushButton(FrameGroup);
+        ButtonCreateGroup->setObjectName(QString::fromUtf8("ButtonCreateGroup"));
+
+        horizontalLayout_4->addWidget(ButtonCreateGroup);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        ScrollAreaGroup = new QScrollArea(FrameGroup);
+        ScrollAreaGroup->setObjectName(QString::fromUtf8("ScrollAreaGroup"));
+        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Expanding);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(ScrollAreaGroup->sizePolicy().hasHeightForWidth());
+        ScrollAreaGroup->setSizePolicy(sizePolicy4);
+        ScrollAreaGroup->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 166, 68));
+        ScrollAreaGroup->setWidget(scrollAreaWidgetContents_2);
+
+        verticalLayout->addWidget(ScrollAreaGroup);
+
+
+        verticalLayout_2->addWidget(FrameGames);
+
 
         retranslateUi(FormGames);
 
@@ -218,8 +234,6 @@ public:
     void retranslateUi(QWidget *FormGames)
     {
         FormGames->setWindowTitle(QApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        ButtonChangeGroup->setText(QApplication::translate("FormGames", "Change", nullptr));
-        ButtonCreateGroup->setText(QApplication::translate("FormGames", "Create", nullptr));
         LabelIconGame->setText(QApplication::translate("FormGames", "Icon", nullptr));
         LabelTitleGame->setText(QApplication::translate("FormGames", "Title", nullptr));
         ProgressBarSelectedGame->setFormat(QApplication::translate("FormGames", "%v/%m (%p%)", nullptr));
@@ -229,6 +243,8 @@ public:
         ProgressBarLoading->setFormat(QApplication::translate("FormGames", "%v/%m", nullptr));
         LineEditGame->setPlaceholderText(QApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
         ButtonFind->setText(QApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
+        ButtonChangeGroup->setText(QApplication::translate("FormGames", "Change", nullptr));
+        ButtonCreateGroup->setText(QApplication::translate("FormGames", "Create", nullptr));
     } // retranslateUi
 
 };
