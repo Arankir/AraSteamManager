@@ -51,7 +51,7 @@
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Open Sans','Arial','sans-serif'; font-size:12px; color:#000000;&quot;&gt;Статистика выводится по играм на аккаунте у которых есть достижения.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Open Sans','Arial','sans-serif'; font-size:12px; color:#000000;&quot;&gt;Если суммарное количество достижений не совпадает с информацией стима, значит часть достижений получена с использованием семейного доступа&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="text">
-          <string>?</string>
+          <string notr="true">?</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

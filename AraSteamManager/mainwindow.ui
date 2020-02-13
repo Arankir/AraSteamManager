@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>479</width>
-    <height>351</height>
+    <height>345</height>
    </rect>
   </property>
   <property name="font">
@@ -40,7 +40,7 @@
       <item>
        <widget class="QLabel" name="LabelLogo">
         <property name="text">
-         <string>Logo</string>
+         <string notr="true">Logo</string>
         </property>
        </widget>
       </item>
@@ -530,7 +530,7 @@
      <x>0</x>
      <y>0</y>
      <width>479</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

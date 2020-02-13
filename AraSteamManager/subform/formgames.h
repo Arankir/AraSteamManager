@@ -14,6 +14,7 @@
 #include <subwidget/qbuttonwithdata.h>
 #include <QList>
 #include <QPropertyAnimation>
+#include <QMouseEvent>
 
 namespace Ui {
 class FormGames;

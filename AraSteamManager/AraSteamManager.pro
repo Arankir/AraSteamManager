@@ -52,6 +52,7 @@ SOURCES += \
     subform/formfavorites.cpp \
     subform/formfriends.cpp \
     subform/formgames.cpp \
+    subform/formprofile.cpp \
     subform/formsettings.cpp \
     subform/formstatistics.cpp \
     subwidget/qbuttonwithdata.cpp \
@@ -87,6 +88,7 @@ HEADERS += \
     subform/formfavorites.h \
     subform/formfriends.h \
     subform/formgames.h \
+    subform/formprofile.h \
     subform/formsettings.h \
     subform/formstatistics.h \
     subwidget/qbuttonwithdata.h \
@@ -103,6 +105,7 @@ FORMS += \
     subform/formfavorites.ui \
     subform/formfriends.ui \
     subform/formgames.ui \
+    subform/formprofile.ui \
     subform/formsettings.ui \
     subform/formstatistics.ui
 

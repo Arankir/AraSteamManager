@@ -72,7 +72,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>GameLogo</string>
+           <string notr="true">GameLogo</string>
           </property>
          </widget>
         </item>
@@ -124,7 +124,7 @@
             </font>
            </property>
            <property name="text">
-            <string>GameTitle</string>
+            <string notr="true">GameTitle</string>
            </property>
           </widget>
          </item>
@@ -170,7 +170,7 @@
             </font>
            </property>
            <property name="text">
-            <string>GameOnline</string>
+            <string notr="true">GameOnline</string>
            </property>
           </widget>
          </item>
@@ -190,7 +190,7 @@
          <item>
           <widget class="QLabel" name="LabelTotalPersent">
            <property name="text">
-            <string>TotalPersent</string>
+            <string notr="true">TotalPersent</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -243,8 +243,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>234</width>
-             <height>127</height>
+             <width>230</width>
+             <height>120</height>
             </rect>
            </property>
           </widget>
@@ -266,8 +266,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>233</width>
-             <height>127</height>
+             <width>229</width>
+             <height>120</height>
             </rect>
            </property>
           </widget>
