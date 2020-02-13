@@ -14,6 +14,7 @@
 #include <subform/formfavorites.h>
 #include <subform/formstatistics.h>
 #include <subform/formsettings.h>
+#include <subform/formprofile.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sbans.h>
 #include <class/steamapi/Slevels.h>
@@ -58,6 +59,12 @@ public slots:
     void ContainerAchievementsClose();
     void ReturnFromAchievements(int num);
 
+    void GoToGames(QString prifileSteamid, SGames games);
+    void GoToFriends(QString prifileSteamid, SFriends friends);
+    void GoToFavorites();
+    void GoToStatistics(QString prifileSteamid, SGames games, QString profileName);
+    void MyProfileChange();
+
 private slots:
     void keyPressEvent(QKeyEvent *event) override;
     void changeEvent(QEvent *event) override;
@@ -71,14 +78,9 @@ private slots:
     void ShowFriends();
     void ShowStatistic();
     void GoToProfile(QString id, QueryType type);
-    void ProfileToUi(SProfile AProfile);
     void UpdateSwitchingProfileEnabled();
 
     void on_ButtonFindProfile_clicked();
-    void on_ButtonGames_clicked();
-    void on_ButtonFriends_clicked();
-    void on_ButtonFavorites_clicked();
-    void on_ButtonStatistics_clicked();
     void on_ButtonSetProfile_clicked();
     void on_ButtonExit_clicked();
 
@@ -95,13 +97,18 @@ private slots:
 private:
     Ui::MainWindow *ui;
     int _windowChildCount=0;
-    WindowChildType _windowChild=WindowChildType::none;
     SProfile _profile;
     SGames _games;
     SFriends _friends;
     Settings _setting;
     QString _theme="white";
     int _achievementsCount=0;
+
+    bool _initGames=false;
+    bool _initFriends=false;
+    bool _initFavorites=false;
+    bool _initStatistics=false;
+    bool _initSettings=false;
 
     QVector<SProfile> _bufferProfiles;
     int _currentBufferProfile=0;

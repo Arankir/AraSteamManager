@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>441</width>
+    <width>422</width>
     <height>150</height>
    </rect>
   </property>
@@ -126,13 +126,6 @@
            </property>
           </spacer>
          </item>
-         <item>
-          <widget class="QPushButton" name="ButtonUpdate">
-           <property name="text">
-            <string>Обновить</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -182,12 +175,18 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayoutInfo1">
      <property name="spacing">
       <number>2</number>
      </property>
      <item>
       <widget class="QLabel" name="Labellvl">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Ebrima</family>
@@ -208,6 +207,12 @@
      </item>
      <item>
       <widget class="QLabel" name="LabelTimeCreated">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Ebrima</family>
@@ -228,6 +233,12 @@
      </item>
      <item>
       <widget class="QLabel" name="LabelLocCountryCode">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Ebrima</family>
@@ -248,6 +259,12 @@
      </item>
      <item>
       <widget class="QLabel" name="LabelRealName">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Ebrima</family>
@@ -278,6 +295,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QLabel" name="LabelProfileVisibility">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Ebrima</family>
@@ -285,26 +308,44 @@
         </font>
        </property>
        <property name="text">
-        <string>Visibility</string>
+        <string>Profile</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="LabelGamesVisibility">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>Games</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="LabelFriendsVisibility">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>Friends</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="LabelBans">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="font">
         <font>
          <family>Ebrima</family>
@@ -369,13 +410,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ButtonGoToMyProfile">
-       <property name="text">
-        <string>На мой профиль</string>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>

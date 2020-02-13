@@ -81,5 +81,13 @@
         <file>white/widgets/radiobutton_unchecked.png</file>
         <file>black/set_home.png</file>
         <file>white/set_home.png</file>
+        <file>state_black.png</file>
+        <file>state_blue.png</file>
+        <file>state_green.png</file>
+        <file>state_orange.png</file>
+        <file>state_purple.png</file>
+        <file>state_red.png</file>
+        <file>state_white.png</file>
+        <file>state_yellow.png</file>
     </qresource>
 </RCC>

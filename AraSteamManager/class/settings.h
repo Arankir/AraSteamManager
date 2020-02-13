@@ -8,7 +8,7 @@
 #include <QTextStream>
 #include <class/statusvalue.h>
 
-
+/*
 class ThemePushButton{
 public:
     QString background[3];
@@ -171,7 +171,7 @@ class ThemeComboBox{
             abstractViewHoverBackgroundColor[2]=Abg3;
         }
     };
-
+*/
 
 class Settings : public QObject
 {
@@ -179,10 +179,11 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = nullptr);
     bool SetMyProfile(QString MyProfiles);
-    bool SetLanguage(int Language);
-    bool SetTheme(int Theme);
-    bool SetSaveimage(int SaveImage);
-    bool SetVisibleHiddenGames(int VisibleHiddenGames);
+    bool SetLanguage(int language);
+    bool SetTheme(int theme);
+    bool SetSaveimage(int saveImage);
+    bool SetVisibleHiddenGames(int visibleHiddenGames);
+    bool SetVisibleProfileInfo(bool visibleProfileInfo);
     void SetDefault();
     QString GetMyProfile() {return _myProfile;}
     int GetLanguage() {return _language;}
@@ -191,6 +192,7 @@ public:
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
     int GetVisibleHiddenGames() {return _visibleHiddenGames;}
+    bool GetVisibleProfileInfo() {return _visibleProfileInfo;}
     QString GetKey() {return _key;}
     bool CreateFile(QString path);
 
@@ -205,6 +207,7 @@ private:
     int _saveImages=0;
     int _visibleHiddenGames=0;
     StatusValue _status=StatusValue::none;
+    bool _visibleProfileInfo=true;
     QString _error="";
     QString _key="3826BF60403D15613B4B0381DAB7A7BD";
 };

@@ -11,7 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -21,6 +21,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
@@ -38,49 +39,39 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QPushButton *ButtonSettings;
     QPushButton *ButtonExit;
+    QHBoxLayout *horizontalLayout_9;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *ButtonBack;
     QPushButton *ButtonNext;
+    QPushButton *ButtonUpdate;
+    QPushButton *ButtonGoToMyProfile;
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
-    QScrollArea *ScrollAreaProfileInfo;
-    QWidget *scrollAreaWidgetContents;
-    QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *LabelAvatar;
-    QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *LabelNick;
-    QSpacerItem *horizontalSpacer;
-    QLabel *LabelProfileVisibility;
-    QPushButton *ButtonSetProfile;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *LabelPersonaState;
-    QSpacerItem *horizontalSpacer_6;
-    QPushButton *ButtonUpdate;
-    QHBoxLayout *horizontalLayout_5;
-    QLabel *LabelProfileUrl;
-    QSpacerItem *horizontalSpacer_3;
-    QLabel *LabelBans;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *Labellvl;
-    QFrame *line;
-    QLabel *LabelTimeCreated;
-    QFrame *line_2;
-    QLabel *LabelLocCountryCode;
-    QFrame *line_3;
-    QLabel *LabelRealName;
-    QSpacerItem *horizontalSpacer_5;
-    QHBoxLayout *horizontalLayout;
-    QPushButton *ButtonGames;
-    QPushButton *ButtonFriends;
-    QPushButton *ButtonStatistics;
-    QPushButton *ButtonFavorites;
-    QSpacerItem *horizontalSpacer_4;
-    QPushButton *ButtonGoToMyProfile;
+    QStackedWidget *StackedWidgetProfiles;
     QProgressBar *FormProgressBar;
-    QScrollArea *ScrollAreaForm;
-    QWidget *FormsWidget;
+    QStackedWidget *StackedWidgetForms;
+    QWidget *None;
+    QGridLayout *gridLayout;
+    QWidget *Games;
+    QGridLayout *gridLayout_2;
+    QScrollArea *ScrollAreaGames;
+    QWidget *widget;
+    QWidget *Friends;
+    QGridLayout *gridLayout_3;
+    QScrollArea *ScrollAreaFriends;
+    QWidget *scrollAreaWidgetContents_2;
+    QWidget *Statistic;
+    QGridLayout *gridLayout_4;
+    QScrollArea *ScrollAreaStatistic;
+    QWidget *scrollAreaWidgetContents_3;
+    QWidget *Favorites;
+    QGridLayout *gridLayout_5;
+    QScrollArea *ScrollAreaFavorites;
+    QWidget *scrollAreaWidgetContents_4;
+    QWidget *Settings;
+    QGridLayout *gridLayout_6;
+    QScrollArea *ScrollAreaSettings;
+    QWidget *scrollAreaWidgetContents_5;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -89,17 +80,17 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(479, 345);
+        MainWindow->resize(479, 524);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         MainWindow->setFont(font);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(3);
+        verticalLayout->setSpacing(1);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(3, 3, 3, 3);
+        verticalLayout->setContentsMargins(1, 1, 1, 1);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -126,8 +117,14 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+
+        verticalLayout->addLayout(horizontalLayout_9);
+
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setSpacing(3);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         ButtonBack = new QPushButton(centralWidget);
         ButtonBack->setObjectName(QString::fromUtf8("ButtonBack"));
@@ -138,6 +135,16 @@ public:
         ButtonNext->setObjectName(QString::fromUtf8("ButtonNext"));
 
         horizontalLayout_4->addWidget(ButtonNext);
+
+        ButtonUpdate = new QPushButton(centralWidget);
+        ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
+
+        horizontalLayout_4->addWidget(ButtonUpdate);
+
+        ButtonGoToMyProfile = new QPushButton(centralWidget);
+        ButtonGoToMyProfile->setObjectName(QString::fromUtf8("ButtonGoToMyProfile"));
+
+        horizontalLayout_4->addWidget(ButtonGoToMyProfile);
 
         LineEditIdProfile = new QLineEdit(centralWidget);
         LineEditIdProfile->setObjectName(QString::fromUtf8("LineEditIdProfile"));
@@ -153,221 +160,16 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
-        ScrollAreaProfileInfo = new QScrollArea(centralWidget);
-        ScrollAreaProfileInfo->setObjectName(QString::fromUtf8("ScrollAreaProfileInfo"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        StackedWidgetProfiles = new QStackedWidget(centralWidget);
+        StackedWidgetProfiles->setObjectName(QString::fromUtf8("StackedWidgetProfiles"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(ScrollAreaProfileInfo->sizePolicy().hasHeightForWidth());
-        ScrollAreaProfileInfo->setSizePolicy(sizePolicy);
-        ScrollAreaProfileInfo->setMinimumSize(QSize(0, 130));
-        ScrollAreaProfileInfo->setMaximumSize(QSize(16777215, 130));
-        ScrollAreaProfileInfo->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        ScrollAreaProfileInfo->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 471, 128));
-        verticalLayout_3 = new QVBoxLayout(scrollAreaWidgetContents);
-        verticalLayout_3->setSpacing(0);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setSpacing(6);
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        LabelAvatar = new QLabel(scrollAreaWidgetContents);
-        LabelAvatar->setObjectName(QString::fromUtf8("LabelAvatar"));
-        LabelAvatar->setMaximumSize(QSize(64, 64));
-
-        horizontalLayout_8->addWidget(LabelAvatar);
-
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(0);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        LabelNick = new QLabel(scrollAreaWidgetContents);
-        LabelNick->setObjectName(QString::fromUtf8("LabelNick"));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
-        font1.setPointSize(16);
-        LabelNick->setFont(font1);
-
-        horizontalLayout_7->addWidget(LabelNick);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_7->addItem(horizontalSpacer);
-
-        LabelProfileVisibility = new QLabel(scrollAreaWidgetContents);
-        LabelProfileVisibility->setObjectName(QString::fromUtf8("LabelProfileVisibility"));
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("Ebrima"));
-        font2.setPointSize(10);
-        LabelProfileVisibility->setFont(font2);
-
-        horizontalLayout_7->addWidget(LabelProfileVisibility);
-
-        ButtonSetProfile = new QPushButton(scrollAreaWidgetContents);
-        ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
-
-        horizontalLayout_7->addWidget(ButtonSetProfile);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_7);
-
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setSpacing(6);
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        LabelPersonaState = new QLabel(scrollAreaWidgetContents);
-        LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
-        LabelPersonaState->setMaximumSize(QSize(16777215, 16));
-        LabelPersonaState->setFont(font2);
-        LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        LabelPersonaState->setWordWrap(true);
-
-        horizontalLayout_6->addWidget(LabelPersonaState);
-
-        horizontalSpacer_6 = new QSpacerItem(108, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_6->addItem(horizontalSpacer_6);
-
-        ButtonUpdate = new QPushButton(scrollAreaWidgetContents);
-        ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
-
-        horizontalLayout_6->addWidget(ButtonUpdate);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_6);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        LabelProfileUrl = new QLabel(scrollAreaWidgetContents);
-        LabelProfileUrl->setObjectName(QString::fromUtf8("LabelProfileUrl"));
-        LabelProfileUrl->setMaximumSize(QSize(16777215, 16));
-        LabelProfileUrl->setFont(font2);
-        LabelProfileUrl->setOpenExternalLinks(true);
-        LabelProfileUrl->setTextInteractionFlags(Qt::TextBrowserInteraction);
-
-        horizontalLayout_5->addWidget(LabelProfileUrl);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_5->addItem(horizontalSpacer_3);
-
-        LabelBans = new QLabel(scrollAreaWidgetContents);
-        LabelBans->setObjectName(QString::fromUtf8("LabelBans"));
-        LabelBans->setFont(font2);
-
-        horizontalLayout_5->addWidget(LabelBans);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_5);
-
-
-        horizontalLayout_8->addLayout(verticalLayout_2);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_8);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(2);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        Labellvl = new QLabel(scrollAreaWidgetContents);
-        Labellvl->setObjectName(QString::fromUtf8("Labellvl"));
-        Labellvl->setFont(font2);
-
-        horizontalLayout_2->addWidget(Labellvl);
-
-        line = new QFrame(scrollAreaWidgetContents);
-        line->setObjectName(QString::fromUtf8("line"));
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayout_2->addWidget(line);
-
-        LabelTimeCreated = new QLabel(scrollAreaWidgetContents);
-        LabelTimeCreated->setObjectName(QString::fromUtf8("LabelTimeCreated"));
-        LabelTimeCreated->setFont(font2);
-
-        horizontalLayout_2->addWidget(LabelTimeCreated);
-
-        line_2 = new QFrame(scrollAreaWidgetContents);
-        line_2->setObjectName(QString::fromUtf8("line_2"));
-        line_2->setFrameShape(QFrame::VLine);
-        line_2->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayout_2->addWidget(line_2);
-
-        LabelLocCountryCode = new QLabel(scrollAreaWidgetContents);
-        LabelLocCountryCode->setObjectName(QString::fromUtf8("LabelLocCountryCode"));
-        LabelLocCountryCode->setFont(font2);
-
-        horizontalLayout_2->addWidget(LabelLocCountryCode);
-
-        line_3 = new QFrame(scrollAreaWidgetContents);
-        line_3->setObjectName(QString::fromUtf8("line_3"));
-        line_3->setFrameShape(QFrame::VLine);
-        line_3->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayout_2->addWidget(line_3);
-
-        LabelRealName = new QLabel(scrollAreaWidgetContents);
-        LabelRealName->setObjectName(QString::fromUtf8("LabelRealName"));
-        LabelRealName->setFont(font2);
-
-        horizontalLayout_2->addWidget(LabelRealName);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer_5);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_2);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(-1, -1, -1, 2);
-        ButtonGames = new QPushButton(scrollAreaWidgetContents);
-        ButtonGames->setObjectName(QString::fromUtf8("ButtonGames"));
-        ButtonGames->setEnabled(true);
-        ButtonGames->setStyleSheet(QString::fromUtf8(""));
-
-        horizontalLayout->addWidget(ButtonGames);
-
-        ButtonFriends = new QPushButton(scrollAreaWidgetContents);
-        ButtonFriends->setObjectName(QString::fromUtf8("ButtonFriends"));
-
-        horizontalLayout->addWidget(ButtonFriends);
-
-        ButtonStatistics = new QPushButton(scrollAreaWidgetContents);
-        ButtonStatistics->setObjectName(QString::fromUtf8("ButtonStatistics"));
-
-        horizontalLayout->addWidget(ButtonStatistics);
-
-        ButtonFavorites = new QPushButton(scrollAreaWidgetContents);
-        ButtonFavorites->setObjectName(QString::fromUtf8("ButtonFavorites"));
-
-        horizontalLayout->addWidget(ButtonFavorites);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_4);
-
-        ButtonGoToMyProfile = new QPushButton(scrollAreaWidgetContents);
-        ButtonGoToMyProfile->setObjectName(QString::fromUtf8("ButtonGoToMyProfile"));
-
-        horizontalLayout->addWidget(ButtonGoToMyProfile);
-
-
-        verticalLayout_3->addLayout(horizontalLayout);
-
-        ScrollAreaProfileInfo->setWidget(scrollAreaWidgetContents);
-
-        verticalLayout->addWidget(ScrollAreaProfileInfo);
+        sizePolicy.setHeightForWidth(StackedWidgetProfiles->sizePolicy().hasHeightForWidth());
+        StackedWidgetProfiles->setSizePolicy(sizePolicy);
+        StackedWidgetProfiles->setMaximumSize(QSize(16777215, 135));
+
+        verticalLayout->addWidget(StackedWidgetProfiles);
 
         FormProgressBar = new QProgressBar(centralWidget);
         FormProgressBar->setObjectName(QString::fromUtf8("FormProgressBar"));
@@ -375,15 +177,125 @@ public:
 
         verticalLayout->addWidget(FormProgressBar);
 
-        ScrollAreaForm = new QScrollArea(centralWidget);
-        ScrollAreaForm->setObjectName(QString::fromUtf8("ScrollAreaForm"));
-        ScrollAreaForm->setWidgetResizable(true);
-        FormsWidget = new QWidget();
-        FormsWidget->setObjectName(QString::fromUtf8("FormsWidget"));
-        FormsWidget->setGeometry(QRect(0, 0, 471, 68));
-        ScrollAreaForm->setWidget(FormsWidget);
+        StackedWidgetForms = new QStackedWidget(centralWidget);
+        StackedWidgetForms->setObjectName(QString::fromUtf8("StackedWidgetForms"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(StackedWidgetForms->sizePolicy().hasHeightForWidth());
+        StackedWidgetForms->setSizePolicy(sizePolicy1);
+        None = new QWidget();
+        None->setObjectName(QString::fromUtf8("None"));
+        sizePolicy1.setHeightForWidth(None->sizePolicy().hasHeightForWidth());
+        None->setSizePolicy(sizePolicy1);
+        gridLayout = new QGridLayout(None);
+        gridLayout->setSpacing(0);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        StackedWidgetForms->addWidget(None);
+        Games = new QWidget();
+        Games->setObjectName(QString::fromUtf8("Games"));
+        sizePolicy1.setHeightForWidth(Games->sizePolicy().hasHeightForWidth());
+        Games->setSizePolicy(sizePolicy1);
+        gridLayout_2 = new QGridLayout(Games);
+        gridLayout_2->setSpacing(0);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        ScrollAreaGames = new QScrollArea(Games);
+        ScrollAreaGames->setObjectName(QString::fromUtf8("ScrollAreaGames"));
+        ScrollAreaGames->setWidgetResizable(true);
+        widget = new QWidget();
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(0, 0, 269, 89));
+        ScrollAreaGames->setWidget(widget);
 
-        verticalLayout->addWidget(ScrollAreaForm);
+        gridLayout_2->addWidget(ScrollAreaGames, 0, 0, 1, 1);
+
+        StackedWidgetForms->addWidget(Games);
+        Friends = new QWidget();
+        Friends->setObjectName(QString::fromUtf8("Friends"));
+        sizePolicy1.setHeightForWidth(Friends->sizePolicy().hasHeightForWidth());
+        Friends->setSizePolicy(sizePolicy1);
+        gridLayout_3 = new QGridLayout(Friends);
+        gridLayout_3->setSpacing(0);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        gridLayout_3->setContentsMargins(0, 0, 0, 0);
+        ScrollAreaFriends = new QScrollArea(Friends);
+        ScrollAreaFriends->setObjectName(QString::fromUtf8("ScrollAreaFriends"));
+        ScrollAreaFriends->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 269, 89));
+        ScrollAreaFriends->setWidget(scrollAreaWidgetContents_2);
+
+        gridLayout_3->addWidget(ScrollAreaFriends, 0, 0, 1, 1);
+
+        StackedWidgetForms->addWidget(Friends);
+        Statistic = new QWidget();
+        Statistic->setObjectName(QString::fromUtf8("Statistic"));
+        sizePolicy1.setHeightForWidth(Statistic->sizePolicy().hasHeightForWidth());
+        Statistic->setSizePolicy(sizePolicy1);
+        gridLayout_4 = new QGridLayout(Statistic);
+        gridLayout_4->setSpacing(0);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_4->setContentsMargins(0, 0, 0, 0);
+        ScrollAreaStatistic = new QScrollArea(Statistic);
+        ScrollAreaStatistic->setObjectName(QString::fromUtf8("ScrollAreaStatistic"));
+        ScrollAreaStatistic->setWidgetResizable(true);
+        scrollAreaWidgetContents_3 = new QWidget();
+        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 269, 89));
+        ScrollAreaStatistic->setWidget(scrollAreaWidgetContents_3);
+
+        gridLayout_4->addWidget(ScrollAreaStatistic, 0, 0, 1, 1);
+
+        StackedWidgetForms->addWidget(Statistic);
+        Favorites = new QWidget();
+        Favorites->setObjectName(QString::fromUtf8("Favorites"));
+        sizePolicy1.setHeightForWidth(Favorites->sizePolicy().hasHeightForWidth());
+        Favorites->setSizePolicy(sizePolicy1);
+        gridLayout_5 = new QGridLayout(Favorites);
+        gridLayout_5->setSpacing(0);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setContentsMargins(0, 0, 0, 0);
+        ScrollAreaFavorites = new QScrollArea(Favorites);
+        ScrollAreaFavorites->setObjectName(QString::fromUtf8("ScrollAreaFavorites"));
+        ScrollAreaFavorites->setWidgetResizable(true);
+        scrollAreaWidgetContents_4 = new QWidget();
+        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 269, 89));
+        ScrollAreaFavorites->setWidget(scrollAreaWidgetContents_4);
+
+        gridLayout_5->addWidget(ScrollAreaFavorites, 0, 0, 1, 1);
+
+        StackedWidgetForms->addWidget(Favorites);
+        Settings = new QWidget();
+        Settings->setObjectName(QString::fromUtf8("Settings"));
+        sizePolicy1.setHeightForWidth(Settings->sizePolicy().hasHeightForWidth());
+        Settings->setSizePolicy(sizePolicy1);
+        gridLayout_6 = new QGridLayout(Settings);
+        gridLayout_6->setSpacing(0);
+        gridLayout_6->setContentsMargins(11, 11, 11, 11);
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        gridLayout_6->setContentsMargins(0, 0, 0, 0);
+        ScrollAreaSettings = new QScrollArea(Settings);
+        ScrollAreaSettings->setObjectName(QString::fromUtf8("ScrollAreaSettings"));
+        ScrollAreaSettings->setWidgetResizable(true);
+        scrollAreaWidgetContents_5 = new QWidget();
+        scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 475, 251));
+        ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
+
+        gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);
+
+        StackedWidgetForms->addWidget(Settings);
+
+        verticalLayout->addWidget(StackedWidgetForms);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -399,6 +311,9 @@ public:
 
         retranslateUi(MainWindow);
 
+        StackedWidgetForms->setCurrentIndex(5);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -409,25 +324,10 @@ public:
         ButtonExit->setText(QCoreApplication::translate("MainWindow", " \320\222\321\213\321\205\320\276\320\264", nullptr));
         ButtonBack->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         ButtonNext->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
+        ButtonUpdate->setText(QString());
+        ButtonGoToMyProfile->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         LineEditIdProfile->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
         ButtonFindProfile->setText(QCoreApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
-        LabelAvatar->setText(QCoreApplication::translate("MainWindow", "Avatar", nullptr));
-        LabelNick->setText(QCoreApplication::translate("MainWindow", "NickName", nullptr));
-        LabelProfileVisibility->setText(QCoreApplication::translate("MainWindow", "Visibility", nullptr));
-        ButtonSetProfile->setText(QCoreApplication::translate("MainWindow", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        LabelPersonaState->setText(QCoreApplication::translate("MainWindow", "PersonaState", nullptr));
-        ButtonUpdate->setText(QCoreApplication::translate("MainWindow", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214", nullptr));
-        LabelProfileUrl->setText(QCoreApplication::translate("MainWindow", "ProfileUrl", nullptr));
-        LabelBans->setText(QCoreApplication::translate("MainWindow", "Bans", nullptr));
-        Labellvl->setText(QCoreApplication::translate("MainWindow", "lvl", nullptr));
-        LabelTimeCreated->setText(QCoreApplication::translate("MainWindow", "TimeCreated", nullptr));
-        LabelLocCountryCode->setText(QCoreApplication::translate("MainWindow", "CountryCode", nullptr));
-        LabelRealName->setText(QCoreApplication::translate("MainWindow", "RealName", nullptr));
-        ButtonGames->setText(QCoreApplication::translate("MainWindow", "Games", nullptr));
-        ButtonFriends->setText(QCoreApplication::translate("MainWindow", "Friends", nullptr));
-        ButtonStatistics->setText(QCoreApplication::translate("MainWindow", " \320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260", nullptr));
-        ButtonFavorites->setText(QCoreApplication::translate("MainWindow", " \320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
-        ButtonGoToMyProfile->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         FormProgressBar->setFormat(QCoreApplication::translate("MainWindow", "%v/%m", nullptr));
     } // retranslateUi
 
