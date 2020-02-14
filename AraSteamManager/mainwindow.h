@@ -64,6 +64,10 @@ public slots:
     void GoToFavorites();
     void GoToStatistics(QString prifileSteamid, SGames games, QString profileName);
     void UpdateMyProfile();
+    void UpdateSettings();
+
+signals:
+    void s_updateSettings();
 
 private slots:
     void keyPressEvent(QKeyEvent *event) override;

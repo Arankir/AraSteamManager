@@ -141,6 +141,7 @@ void FormSettings::Retranslate(){
 
 void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
     _setting.SetLanguage(1);
+    emit s_updateSettings();
     QTranslator *translator = new QTranslator;
         translator->load(":/AraSteamManager_en.qm");
         qApp->installTranslator(translator);
@@ -150,6 +151,7 @@ void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
 
 void FormSettings::on_RadioButtonLanguageRussian_clicked(){
     _setting.SetLanguage(5);
+    emit s_updateSettings();
     QTranslator *translator = new QTranslator;
         translator->load(":/AraSteamManager_ru.qm");
         qApp->installTranslator(translator);
@@ -159,15 +161,18 @@ void FormSettings::on_RadioButtonLanguageRussian_clicked(){
 
 void FormSettings::on_CheckBoxVisibleHiddenGames_stateChanged(int arg1){
     _setting.SetVisibleHiddenGames(arg1/2);
+    emit s_updateSettings();
 }
 
 void FormSettings::on_RadioButtonDarkTheme_clicked(){
     _setting.SetTheme(1);
+    emit s_updateSettings();
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::on_RadioButtonLightTheme_clicked(){
     _setting.SetTheme(2);
+    emit s_updateSettings();
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
 
@@ -298,4 +303,5 @@ void FormSettings::HideClicked(){
 
 void FormSettings::on_CheckBoxVisibleProfileInfo_stateChanged(int arg1){
     _setting.SetVisibleProfileInfo(arg1==2);
+    emit s_updateSettings();
 }

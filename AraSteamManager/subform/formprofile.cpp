@@ -153,7 +153,6 @@ void FormProfile::ProfileToUi(SProfile a_profile){
     ui->LabelNick->setText(a_profile.GetPersonaname());
 
     UpdateVisibleInfo();
-    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=a_profile.GetSteamid());
 }
 
 void FormProfile::SetProfile(SProfile a_profile){
@@ -161,6 +160,7 @@ void FormProfile::SetProfile(SProfile a_profile){
 }
 
 void FormProfile::UpdateTheme(){
+    _setting.LoadSettings();
     switch(_setting.GetTheme()){
         case 1:
             _theme="white";
@@ -178,8 +178,10 @@ void FormProfile::UpdateTheme(){
 }
 
 void FormProfile::UpdateVisibleInfo(){
+    _setting.LoadSettings();
     _visibleInfo=_setting.GetVisibleProfileInfo();
     ui->FrameInfo->setVisible(_visibleInfo);
+    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=_profile.GetSteamid());
 }
 
 void FormProfile::UpdateInfo(){

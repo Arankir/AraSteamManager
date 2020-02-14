@@ -656,6 +656,7 @@ void MainWindow::ReturnFromForms(){
         delete _settingsForm;
         _initSettings=false;
     }
+    ui->StackedWidgetForms->setCurrentIndex(0);
 }
 void MainWindow::ResizeScrollArea(){
     if(ui->StackedWidgetForms->height()<400){
@@ -698,6 +699,8 @@ void MainWindow::GoToProfile(QString a_id, QueryType a_type){
         connect(newStackedProfile,&FormProfile::s_goToStatistic,this,&MainWindow::GoToStatistics);
         connect(newStackedProfile,&FormProfile::s_goToFavorites,this,&MainWindow::GoToFavorites);
         connect(newStackedProfile,&FormProfile::s_myProfileChange,this,&MainWindow::UpdateMyProfile);
+        connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateVisibleInfo);
+        connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateTheme);
         //connect(this,&MainWindow::on_ButtonSetProfile_clicked,newStackedProfile,&FormProfile::SetProfile);
         //void UpdateTheme();
         //void UpdateVisibleInfo();
@@ -793,17 +796,25 @@ void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QStrin
 }
 
 void MainWindow::UpdateMyProfile(){
+    _setting.LoadSettings();
     ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile().GetSteamid()!=_setting.GetMyProfile());
+    emit s_updateSettings();
+}
+void MainWindow::UpdateSettings(){
+    _setting.LoadSettings();
+    ui->StackedWidgetProfiles->setFixedHeight(_setting.GetVisibleProfileInfo()?155:95);
+    emit s_updateSettings();
 }
 void MainWindow::on_ButtonSettings_clicked(){
     if(!_initSettings){
         if(!_blockedLoad){
-        _settingsForm = new FormSettings(this);
-        ui->ScrollAreaSettings->setWidget(_settingsForm);
-        //
-        _initSettings=true;
-        ui->StackedWidgetForms->setCurrentIndex(5);
-        ResizeScrollArea();
+            _settingsForm = new FormSettings(this);
+            connect(_settingsForm,&FormSettings::s_updateSettings,this,&MainWindow::UpdateSettings);
+            ui->ScrollAreaSettings->setWidget(_settingsForm);
+            //
+            _initSettings=true;
+            ui->StackedWidgetForms->setCurrentIndex(5);
+            ResizeScrollArea();
         }
     } else {
         ui->StackedWidgetForms->setCurrentIndex(5);

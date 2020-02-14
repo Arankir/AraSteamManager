@@ -61,7 +61,6 @@ public:
     QWidget *scrollAreaWidgetContents_4;
     QVBoxLayout *verticalLayout_4;
     QGroupBox *GroupBoxReachedFilter;
-    QVBoxLayout *verticalLayout_9;
     QVBoxLayout *verticalLayout_3;
     QCheckBox *CheckBoxFavorites;
     QCheckBox *CheckBoxCompareAllFriends;
@@ -248,7 +247,7 @@ public:
         ScrollAreaCategories->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 230, 120));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 230, 109));
         ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
 
         horizontalLayout->addWidget(ScrollAreaCategories);
@@ -260,7 +259,7 @@ public:
         ScrollAreaCheckCategories->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 229, 120));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 229, 109));
         ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
 
         horizontalLayout->addWidget(ScrollAreaCheckCategories);
@@ -269,8 +268,6 @@ public:
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         GroupBoxReachedFilter = new QGroupBox(GroupBoxFilter);
         GroupBoxReachedFilter->setObjectName(QString::fromUtf8("GroupBoxReachedFilter"));
-        verticalLayout_9 = new QVBoxLayout(GroupBoxReachedFilter);
-        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
 
         verticalLayout_4->addWidget(GroupBoxReachedFilter);
 

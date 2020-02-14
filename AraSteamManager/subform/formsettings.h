@@ -28,6 +28,7 @@ public:
 
 signals:
     void s_return_to_profile(QWidget*);
+    void s_updateSettings();
 
 private slots:
     void InitComponents();
