@@ -63,13 +63,12 @@ public slots:
     void GoToFriends(QString prifileSteamid, SFriends friends);
     void GoToFavorites();
     void GoToStatistics(QString prifileSteamid, SGames games, QString profileName);
-    void MyProfileChange();
+    void UpdateMyProfile();
 
 private slots:
     void keyPressEvent(QKeyEvent *event) override;
     void changeEvent(QEvent *event) override;
     void ReturnFromForms();
-    void ReturnFromForm(QWidget *form);
     void Retranslate();
     void ResizeScrollArea();
 
@@ -78,17 +77,14 @@ private slots:
     void ShowFriends();
     void ShowStatistic();
     void GoToProfile(QString id, QueryType type);
-    void UpdateSwitchingProfileEnabled();
+    void UpdateButtonsBackNext();
 
     void on_ButtonFindProfile_clicked();
-    void on_ButtonSetProfile_clicked();
     void on_ButtonExit_clicked();
 
     void on_ButtonGoToMyProfile_clicked();
-
     void on_ButtonBack_clicked();
     void on_ButtonNext_clicked();
-
 
     void on_ButtonSettings_clicked();
 
@@ -109,9 +105,8 @@ private:
     bool _initFavorites=false;
     bool _initStatistics=false;
     bool _initSettings=false;
+    bool _blockedLoad=false;
 
-    QVector<SProfile> _bufferProfiles;
-    int _currentBufferProfile=0;
 };
 
 #endif // MAINWINDOW_H

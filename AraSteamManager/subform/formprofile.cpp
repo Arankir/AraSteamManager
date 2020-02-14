@@ -12,6 +12,7 @@ FormProfile::FormProfile(SProfile a_profile, QWidget *parent) :
     ui->LabelProfileUrl->setTextFormat(Qt::RichText);
     ui->LabelNick->setStyleSheet("color: #42a9c6;");
     ui->LabelPersonaState->setWordWrap(true);
+    UpdateTheme();
     Retranslate();
     ProfileToUi(_profile);
 }
@@ -86,57 +87,57 @@ void FormProfile::ProfileToUi(SProfile a_profile){
         case 1:
 //            ui->LabelProfileVisibility->setText(tr("Скрытый"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #6e0e0e");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\">"+tr("Профиль"));
+            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Профиль"));
             break;
         case 3:
 //            ui->LabelProfileVisibility->setText(tr("Публичный"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #0e6e11");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\">"+tr("Профиль"));
+            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Профиль"));
             break;
         case 8:
 //            ui->LabelProfileVisibility->setText(tr("Для друзей"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #6c6e0e");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_yellow.png\">"+tr("Профиль"));
+            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_yellow.png\"> "+tr("Профиль"));
             break;
         default:
 //            ui->LabelProfileVisibility->setText(tr("Неизвестно"));
 //            ui->LabelProfileVisibility->setStyleSheet("color:white");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\">"+tr("Профиль"));
+            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Профиль"));
         }
     switch (_games.GetStatus()){
     case StatusValue::success:{
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
-        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\">"+tr("Игры"));
+        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
         break;
     }
     case StatusValue::error:{
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\">"+tr("Игры"));
+        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
         break;
     }
     case StatusValue::none:{
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\">"+tr("Игры"));
+        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
         break;
     }
     }
     switch (_friends.GetStatus()){
     case StatusValue::success:{
         ui->ButtonFriends->setEnabled(true);
-        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\">"+tr("Друзья"));
+        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::error:{
         ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\">"+tr("Друзья"));
+        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::none:{
         ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\">"+tr("Друзья"));
+        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
         break;
     }
     }
@@ -160,6 +161,14 @@ void FormProfile::SetProfile(SProfile a_profile){
 }
 
 void FormProfile::UpdateTheme(){
+    switch(_setting.GetTheme()){
+        case 1:
+            _theme="white";
+            break;
+        case 2:
+            _theme="black";
+            break;
+    }
     ui->LabelProfileUrl->setText("<img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+_profile.GetProfileurl()+"</span></a>");
     ui->ButtonSetProfile->setIcon(QIcon("://"+_theme+"/set_home.png"));
     ui->ButtonFavorites->setIcon(QIcon("://"+_theme+"/favorites.png"));
