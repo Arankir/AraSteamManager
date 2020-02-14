@@ -179,13 +179,7 @@ void FormProfile::UpdateTheme(){
 
 void FormProfile::UpdateVisibleInfo(){
     _visibleInfo=_setting.GetVisibleProfileInfo();
-    ui->Labellvl->setVisible(_visibleInfo);
-    ui->line->setVisible(_visibleInfo);
-    ui->line_2->setVisible(_visibleInfo);
-    ui->line_3->setVisible(_visibleInfo);
-    ui->LabelRealName->setVisible(_visibleInfo);
-    ui->LabelLocCountryCode->setVisible(_visibleInfo);
-    ui->LabelTimeCreated->setVisible(_visibleInfo);
+    ui->FrameInfo->setVisible(_visibleInfo);
 }
 
 void FormProfile::UpdateInfo(){

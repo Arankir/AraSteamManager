@@ -53,6 +53,7 @@ void FormSettings::InitComponents(){
         default:
             break;
     }
+    ui->CheckBoxVisibleProfileInfo->setChecked(_setting.GetVisibleProfileInfo());
 
 //    QPalette darkPalette;
 //    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
@@ -293,4 +294,8 @@ void FormSettings::HideClicked(){
     }
     fileSaveTo.close();
     QMessageBox(QMessageBox::Information,tr("Успешно!"),tr("Политика видимости для игры обновлена!"));
+}
+
+void FormSettings::on_CheckBoxVisibleProfileInfo_stateChanged(int arg1){
+    _setting.SetVisibleProfileInfo(arg1==2);
 }

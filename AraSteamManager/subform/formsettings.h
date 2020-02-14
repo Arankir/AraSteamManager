@@ -50,6 +50,8 @@ private slots:
     void HideClicked();
     void Retranslate();
 
+    void on_CheckBoxVisibleProfileInfo_stateChanged(int arg1);
+
 private:
     Ui::FormSettings *ui;
     QString _theme="white";

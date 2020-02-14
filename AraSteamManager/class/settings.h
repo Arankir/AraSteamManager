@@ -195,19 +195,22 @@ public:
     bool GetVisibleProfileInfo() {return _visibleProfileInfo;}
     QString GetKey() {return _key;}
     bool CreateFile(QString path);
+    bool LoadSettings();
 
 signals:
 
 public slots:
 
 private:
+    bool SaveSettings();
+
     QString _myProfile="";
     int _language=1;
     int _theme=1;
     int _saveImages=0;
     int _visibleHiddenGames=0;
-    StatusValue _status=StatusValue::none;
     bool _visibleProfileInfo=true;
+    StatusValue _status=StatusValue::none;
     QString _error="";
     QString _key="3826BF60403D15613B4B0381DAB7A7BD";
 };

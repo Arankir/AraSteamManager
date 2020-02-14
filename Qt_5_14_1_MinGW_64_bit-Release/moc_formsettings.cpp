@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormSettings_t {
-    QByteArrayData data[20];
-    char stringdata0[374];
+    QByteArrayData data[21];
+    char stringdata0[417];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,7 +51,8 @@ QT_MOC_LITERAL(15, 303, 13), // "OnResultImage"
 QT_MOC_LITERAL(16, 317, 12), // "RequestData*"
 QT_MOC_LITERAL(17, 330, 19), // "AchievementsClicked"
 QT_MOC_LITERAL(18, 350, 11), // "HideClicked"
-QT_MOC_LITERAL(19, 362, 11) // "Retranslate"
+QT_MOC_LITERAL(19, 362, 11), // "Retranslate"
+QT_MOC_LITERAL(20, 374, 42) // "on_CheckBoxVisibleProfileInfo..."
 
     },
     "FormSettings\0s_return_to_profile\0\0"
@@ -64,7 +65,7 @@ QT_MOC_LITERAL(19, 362, 11) // "Retranslate"
     "RadiobuttonHiddenGamesClicked\0"
     "OnResultImage\0RequestData*\0"
     "AchievementsClicked\0HideClicked\0"
-    "Retranslate"
+    "Retranslate\0on_CheckBoxVisibleProfileInfo_stateChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -74,7 +75,7 @@ static const uint qt_meta_data_FormSettings[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -82,21 +83,22 @@ static const uint qt_meta_data_FormSettings[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   79,    2, 0x06 /* Public */,
+       1,    1,   84,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   82,    2, 0x08 /* Private */,
-       5,    1,   83,    2, 0x08 /* Private */,
-       8,    0,   86,    2, 0x08 /* Private */,
-       9,    0,   87,    2, 0x08 /* Private */,
-      10,    1,   88,    2, 0x08 /* Private */,
-      12,    0,   91,    2, 0x08 /* Private */,
-      13,    0,   92,    2, 0x08 /* Private */,
-      14,    0,   93,    2, 0x08 /* Private */,
-      15,    1,   94,    2, 0x08 /* Private */,
-      17,    0,   97,    2, 0x08 /* Private */,
-      18,    0,   98,    2, 0x08 /* Private */,
-      19,    0,   99,    2, 0x08 /* Private */,
+       4,    0,   87,    2, 0x08 /* Private */,
+       5,    1,   88,    2, 0x08 /* Private */,
+       8,    0,   91,    2, 0x08 /* Private */,
+       9,    0,   92,    2, 0x08 /* Private */,
+      10,    1,   93,    2, 0x08 /* Private */,
+      12,    0,   96,    2, 0x08 /* Private */,
+      13,    0,   97,    2, 0x08 /* Private */,
+      14,    0,   98,    2, 0x08 /* Private */,
+      15,    1,   99,    2, 0x08 /* Private */,
+      17,    0,  102,    2, 0x08 /* Private */,
+      18,    0,  103,    2, 0x08 /* Private */,
+      19,    0,  104,    2, 0x08 /* Private */,
+      20,    1,  105,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -114,6 +116,7 @@ static const uint qt_meta_data_FormSettings[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   11,
 
        0        // eod
 };
@@ -137,6 +140,7 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 10: _t->AchievementsClicked(); break;
         case 11: _t->HideClicked(); break;
         case 12: _t->Retranslate(); break;
+        case 13: _t->on_CheckBoxVisibleProfileInfo_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -198,13 +202,13 @@ int FormSettings::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }

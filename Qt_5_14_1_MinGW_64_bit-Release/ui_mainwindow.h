@@ -167,7 +167,6 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(StackedWidgetProfiles->sizePolicy().hasHeightForWidth());
         StackedWidgetProfiles->setSizePolicy(sizePolicy);
-        StackedWidgetProfiles->setMaximumSize(QSize(16777215, 135));
 
         verticalLayout->addWidget(StackedWidgetProfiles);
 
@@ -208,7 +207,7 @@ public:
         ScrollAreaGames->setWidgetResizable(true);
         widget = new QWidget();
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 269, 89));
+        widget->setGeometry(QRect(0, 0, 98, 28));
         ScrollAreaGames->setWidget(widget);
 
         gridLayout_2->addWidget(ScrollAreaGames, 0, 0, 1, 1);
@@ -228,7 +227,7 @@ public:
         ScrollAreaFriends->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 269, 89));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 98, 28));
         ScrollAreaFriends->setWidget(scrollAreaWidgetContents_2);
 
         gridLayout_3->addWidget(ScrollAreaFriends, 0, 0, 1, 1);
@@ -248,7 +247,7 @@ public:
         ScrollAreaStatistic->setWidgetResizable(true);
         scrollAreaWidgetContents_3 = new QWidget();
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 269, 89));
+        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 98, 28));
         ScrollAreaStatistic->setWidget(scrollAreaWidgetContents_3);
 
         gridLayout_4->addWidget(ScrollAreaStatistic, 0, 0, 1, 1);
@@ -268,7 +267,7 @@ public:
         ScrollAreaFavorites->setWidgetResizable(true);
         scrollAreaWidgetContents_4 = new QWidget();
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 269, 89));
+        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 98, 28));
         ScrollAreaFavorites->setWidget(scrollAreaWidgetContents_4);
 
         gridLayout_5->addWidget(ScrollAreaFavorites, 0, 0, 1, 1);
@@ -288,7 +287,7 @@ public:
         ScrollAreaSettings->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 475, 251));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 475, 192));
         ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
 
         gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);

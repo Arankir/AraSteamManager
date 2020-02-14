@@ -701,11 +701,11 @@ void MainWindow::GoToProfile(QString a_id, QueryType a_type){
         //connect(this,&MainWindow::on_ButtonSetProfile_clicked,newStackedProfile,&FormProfile::SetProfile);
         //void UpdateTheme();
         //void UpdateVisibleInfo();
-
-        //connect UpdateMyProfile();
+        qDebug()<<_setting.GetVisibleProfileInfo();
+        ui->StackedWidgetProfiles->setFixedHeight(_setting.GetVisibleProfileInfo()?155:95);
         UpdateMyProfile();
         UpdateButtonsBackNext();
-        qDebug()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex()<<"/"<<ui->StackedWidgetProfiles->count();
+        qDebug()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex()+1<<"/"<<ui->StackedWidgetProfiles->count();
         } else {
             QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
             qDebug()<<newProfile.GetError();
