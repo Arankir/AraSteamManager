@@ -109,6 +109,7 @@ public:
         ProgressBarSelectedGame = new QProgressBar(FrameGame);
         ProgressBarSelectedGame->setObjectName(QString::fromUtf8("ProgressBarSelectedGame"));
         ProgressBarSelectedGame->setValue(0);
+        ProgressBarSelectedGame->setFormat(QString::fromUtf8("%v/%m (%p%)"));
 
         verticalLayout_3->addWidget(ProgressBarSelectedGame);
 
@@ -124,11 +125,13 @@ public:
 
         ButtonFavorite = new QPushButton(FrameGame);
         ButtonFavorite->setObjectName(QString::fromUtf8("ButtonFavorite"));
+        ButtonFavorite->setText(QString::fromUtf8(""));
 
         horizontalLayout_3->addWidget(ButtonFavorite);
 
         ButtonHide = new QPushButton(FrameGame);
         ButtonHide->setObjectName(QString::fromUtf8("ButtonHide"));
+        ButtonHide->setText(QString::fromUtf8(""));
 
         horizontalLayout_3->addWidget(ButtonHide);
 
@@ -141,6 +144,7 @@ public:
         ProgressBarLoading = new QProgressBar(FormGames);
         ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));
         ProgressBarLoading->setValue(0);
+        ProgressBarLoading->setFormat(QString::fromUtf8("%v/%m"));
 
         verticalLayout_2->addWidget(ProgressBarLoading);
 
@@ -236,11 +240,7 @@ public:
     void retranslateUi(QWidget *FormGames)
     {
         FormGames->setWindowTitle(QCoreApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        ProgressBarSelectedGame->setFormat(QCoreApplication::translate("FormGames", "%v/%m (%p%)", nullptr));
         ButtonAchievements->setText(QCoreApplication::translate("FormGames", "Achievements", nullptr));
-        ButtonFavorite->setText(QCoreApplication::translate("FormGames", "Favorite", nullptr));
-        ButtonHide->setText(QCoreApplication::translate("FormGames", "Hide", nullptr));
-        ProgressBarLoading->setFormat(QCoreApplication::translate("FormGames", "%v/%m", nullptr));
         LineEditGame->setPlaceholderText(QCoreApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
         ButtonFind->setText(QCoreApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
         ButtonChangeGroup->setText(QCoreApplication::translate("FormGames", "Change", nullptr));

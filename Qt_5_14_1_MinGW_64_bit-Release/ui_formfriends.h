@@ -76,6 +76,7 @@ public:
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         ComboBoxStatus = new QComboBox(GroupBoxFilter);
         ComboBoxStatus->setObjectName(QString::fromUtf8("ComboBoxStatus"));
+        ComboBoxStatus->setCurrentText(QString::fromUtf8(""));
 
         horizontalLayout_3->addWidget(ComboBoxStatus);
 

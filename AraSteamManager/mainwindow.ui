@@ -84,14 +84,14 @@
       <item>
        <widget class="QPushButton" name="ButtonBack">
         <property name="text">
-         <string>Back</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="ButtonNext">
         <property name="text">
-         <string>Next</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -105,7 +105,7 @@
       <item>
        <widget class="QPushButton" name="ButtonGoToMyProfile">
         <property name="text">
-         <string>На мой профиль</string>
+         <string/>
         </property>
        </widget>
       </item>

@@ -106,7 +106,7 @@
          <number>0</number>
         </property>
         <property name="format">
-         <string>%v/%m (%p%)</string>
+         <string notr="true">%v/%m (%p%)</string>
         </property>
        </widget>
       </item>
@@ -131,14 +131,14 @@
         <item>
          <widget class="QPushButton" name="ButtonFavorite">
           <property name="text">
-           <string>Favorite</string>
+           <string notr="true"/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="ButtonHide">
           <property name="text">
-           <string>Hide</string>
+           <string notr="true"/>
           </property>
          </widget>
         </item>
@@ -153,7 +153,7 @@
       <number>0</number>
      </property>
      <property name="format">
-      <string>%v/%m</string>
+      <string notr="true">%v/%m</string>
      </property>
     </widget>
    </item>

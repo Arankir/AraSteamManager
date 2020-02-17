@@ -41,6 +41,9 @@ public slots:
 signals:
     void s_return_to_profile(QWidget*);
 
+private slots:
+    void changeEvent(QEvent *event);
+
 private:
     Ui::FormStatistics *ui;
     Settings _setting;

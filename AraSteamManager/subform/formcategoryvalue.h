@@ -32,7 +32,7 @@ public:
 
 
 private slots:
-
+    void changeEvent(QEvent *event);
     void on_CheckBoxVisible_stateChanged(int arg1);
     void on_ButtonUp_clicked();
     void on_ButtonDown_clicked();

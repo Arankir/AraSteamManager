@@ -32,6 +32,7 @@ signals:
     void s_return_to_profile(QWidget*);
 
 private slots:
+    void changeEvent(QEvent *event);
     void on_pushButton_clicked();
 
 private:

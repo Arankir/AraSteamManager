@@ -29,7 +29,7 @@ public:
     {
         if (FormCompareProfileFilter->objectName().isEmpty())
             FormCompareProfileFilter->setObjectName(QString::fromUtf8("FormCompareProfileFilter"));
-        FormCompareProfileFilter->resize(129, 130);
+        FormCompareProfileFilter->resize(129, 167);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormCompareProfileFilter->setFont(font);
@@ -39,17 +39,20 @@ public:
         verticalLayout->setContentsMargins(1, 1, 1, 1);
         RadioButtonAll = new QRadioButtonWithData(FormCompareProfileFilter);
         RadioButtonAll->setObjectName(QString::fromUtf8("RadioButtonAll"));
+        RadioButtonAll->setText(QString::fromUtf8(""));
         RadioButtonAll->setChecked(true);
 
         verticalLayout->addWidget(RadioButtonAll);
 
         RadioButtonReached = new QRadioButtonWithData(FormCompareProfileFilter);
         RadioButtonReached->setObjectName(QString::fromUtf8("RadioButtonReached"));
+        RadioButtonReached->setText(QString::fromUtf8(""));
 
         verticalLayout->addWidget(RadioButtonReached);
 
         RadioButtonNotReached = new QRadioButtonWithData(FormCompareProfileFilter);
         RadioButtonNotReached->setObjectName(QString::fromUtf8("RadioButtonNotReached"));
+        RadioButtonNotReached->setText(QString::fromUtf8(""));
 
         verticalLayout->addWidget(RadioButtonNotReached);
 

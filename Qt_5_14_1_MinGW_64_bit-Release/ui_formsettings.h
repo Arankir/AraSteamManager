@@ -96,16 +96,19 @@ public:
         RadioButtonCustomTheme->setEnabled(false);
         sizePolicy.setHeightForWidth(RadioButtonCustomTheme->sizePolicy().hasHeightForWidth());
         RadioButtonCustomTheme->setSizePolicy(sizePolicy);
+        RadioButtonCustomTheme->setText(QString::fromUtf8("\320\241\320\262\320\276\321\217 \321\202\320\265\320\274\320\260 (\320\222 \321\200\320\260\320\267\321\200\320\260\320\261\320\276\321\202\320\272\320\265)"));
 
         gridLayout->addWidget(RadioButtonCustomTheme, 0, 2, 1, 1);
 
         groupBox_4 = new QGroupBox(tab);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        groupBox_4->setTitle(QString::fromUtf8("GroupBox"));
         gridLayout_3 = new QGridLayout(groupBox_4);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         pushButton_5 = new QPushButton(groupBox_4);
         pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
         pushButton_5->setEnabled(false);
+        pushButton_5->setText(QString::fromUtf8("\320\235\320\260\321\201\321\202\321\200\320\276\320\270\321\202\321\214"));
 
         gridLayout_3->addWidget(pushButton_5, 0, 0, 1, 1);
 
@@ -218,9 +221,6 @@ public:
         FormSettings->setWindowTitle(QCoreApplication::translate("FormSettings", "Form", nullptr));
         RadioButtonDarkTheme->setText(QCoreApplication::translate("FormSettings", "\320\242\321\221\320\274\320\275\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
         RadioButtonLightTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
-        RadioButtonCustomTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\262\320\276\321\217 \321\202\320\265\320\274\320\260 (\320\222 \321\200\320\260\320\267\321\200\320\260\320\261\320\276\321\202\320\272\320\265)", nullptr));
-        groupBox_4->setTitle(QCoreApplication::translate("FormSettings", "GroupBox", nullptr));
-        pushButton_5->setText(QCoreApplication::translate("FormSettings", "\320\235\320\260\321\201\321\202\321\200\320\276\320\270\321\202\321\214", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("FormSettings", "  \320\242\320\265\320\274\320\260  ", nullptr));
         ButtonFindGame->setText(QCoreApplication::translate("FormSettings", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         groupBox->setTitle(QCoreApplication::translate("FormSettings", "Language", nullptr));

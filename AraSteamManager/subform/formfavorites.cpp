@@ -26,6 +26,11 @@ FormFavorites::FormFavorites(QWidget *parent): QWidget(parent), ui(new Ui::FormF
 FormFavorites::~FormFavorites(){
     delete ui;
 }
+void FormFavorites::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        ui->retranslateUi(this);
+    }
+}
 
 void FormFavorites::InitComponents(){
     _games.SetPath("Files/Favorites/Games.json","Games");

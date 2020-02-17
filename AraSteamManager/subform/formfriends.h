@@ -30,6 +30,7 @@ signals:
     void s_go_to_profile(QString id, QueryType type);
 
 public slots:
+    void changeEvent(QEvent *event);
     void ProgressLoading(int p,int row);
     void OnFinish();
 

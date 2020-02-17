@@ -31,8 +31,8 @@ signals:
     void s_updateSettings();
 
 private slots:
-    void InitComponents();
     void changeEvent(QEvent *event);
+    void InitComponents();
 
     void on_RadioButtonLanguageEnglish_clicked();
 

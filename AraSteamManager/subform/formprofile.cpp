@@ -13,26 +13,53 @@ FormProfile::FormProfile(SProfile a_profile, QWidget *parent) :
     ui->LabelNick->setStyleSheet("color: #42a9c6;");
     ui->LabelPersonaState->setWordWrap(true);
     UpdateTheme();
-    Retranslate();
     ProfileToUi(_profile);
 }
 
-FormProfile::~FormProfile()
-{
+FormProfile::~FormProfile(){
     delete ui;
 }
 void FormProfile::changeEvent(QEvent *event){
     if(event->type()==QEvent::LanguageChange){
-        Retranslate();
+        ui->retranslateUi(this);
+        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
+        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
+        if(!_profile.GetGameextrainfo().isEmpty()){
+            ui->LabelPersonaState->setText(tr("В игре %1").arg(_profile.GetGameextrainfo()));
+            ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
+        } else
+            switch (_profile.GetPersonastate()) {
+                case 0:
+                    ui->LabelPersonaState->setText(tr("Был в сети %1").arg(_profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
+                    break;
+                case 1:
+                    ui->LabelPersonaState->setText(tr("В сети"));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
+                    break;
+                case 2:
+                    ui->LabelPersonaState->setText(tr("Не беспокоить"));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
+                    break;
+                case 3:
+                    ui->LabelPersonaState->setText(tr("Нет на месте"));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
+                    break;
+                case 4:
+                    ui->LabelPersonaState->setText(tr("Спит"));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
+                    break;
+                case 5:
+                    ui->LabelPersonaState->setText(tr("Ожидает обмена"));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
+                    break;
+                case 6:
+                    ui->LabelPersonaState->setText(tr("Хочет поиграть"));
+                    ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
+                    break;
+            }
+
     }
-}
-void FormProfile::Retranslate(){
-    ui->retranslateUi(this);
-    if(_profile.GetStatus()==StatusValue::success)
-        ProfileToUi(_profile);
-//    ui->ButtonSetProfile->setText(tr("Это мой профиль"));
-//    ui->ButtonStatistics->setText(tr("Статистика"));
-//    ui->ButtonFavorites->setText(tr("Избранное"));
 }
 
 void FormProfile::ProfileToUi(SProfile a_profile){
@@ -41,8 +68,8 @@ void FormProfile::ProfileToUi(SProfile a_profile){
     SLevels levels(a_profile.GetSteamid());
     _games.Set(a_profile.GetSteamid(),true,true,false);
     _friends.Set(a_profile.GetSteamid(),false);
-    ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("error")));
-    ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("error")));
+    ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
+    ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
     if(!a_profile.GetGameextrainfo().isEmpty()){
         ui->LabelPersonaState->setText(tr("В игре %1").arg(a_profile.GetGameextrainfo()));
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
@@ -77,76 +104,100 @@ void FormProfile::ProfileToUi(SProfile a_profile){
                 ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                 break;
         }
-    ui->LabelProfileUrl->setText("<img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+a_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+a_profile.GetProfileurl()+"</span></a>");
-    ui->Labellvl->setText(tr("Уровень: %1").arg(QString::number(levels.GetLevel())));
-    ui->LabelRealName->setText(tr("Настоящее имя: %1").arg(a_profile.GetRealname()));
-    ui->LabelTimeCreated->setText(tr("Аккаунт создан: %1").arg(a_profile.GetTimecreated().toString("yyyy.MM.dd")));
-    ui->LabelLocCountryCode->setText(tr("Язык: %1").arg(a_profile.GetLoccountrycode()));
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+a_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+a_profile.GetProfileurl()+"</span></a>");
+    ui->LabellvlValue->setText(QString::number(levels.GetLevel()));
+    ui->LabelRealNameValue->setText(a_profile.GetRealname());
+    ui->LabelTimeCreatedValue->setText(a_profile.GetTimecreated().toString("yyyy.MM.dd"));
+    ui->LabelLocCountryCodeValue->setText(a_profile.GetLoccountrycode());
+    QPixmap profileState;
+    QPixmap gamesState;
+    QPixmap friendsState;
     //Добавить описание при наведении
     switch (a_profile.GetCommunityvisibilitystate()) {
         case 1:
 //            ui->LabelProfileVisibility->setText(tr("Скрытый"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #6e0e0e");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Профиль"));
+            profileState.load("://state_red.png");
             break;
         case 3:
 //            ui->LabelProfileVisibility->setText(tr("Публичный"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #0e6e11");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Профиль"));
+            profileState.load("://state_green.png");
             break;
         case 8:
 //            ui->LabelProfileVisibility->setText(tr("Для друзей"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #6c6e0e");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_yellow.png\"> "+tr("Профиль"));
+            profileState.load("://state_yellow.png");
             break;
         default:
 //            ui->LabelProfileVisibility->setText(tr("Неизвестно"));
 //            ui->LabelProfileVisibility->setStyleSheet("color:white");
-            ui->LabelProfileVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Профиль"));
+            profileState.load("://state_blue.png");
         }
     switch (_games.GetStatus()){
     case StatusValue::success:{
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
-        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
+        gamesState.load("://state_green.png");
+        //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
         break;
     }
     case StatusValue::error:{
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
+        gamesState.load("://state_red.png");
+        //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
         break;
     }
     case StatusValue::none:{
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
+        gamesState.load("://state_blue.png");
+        //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
         break;
     }
     }
     switch (_friends.GetStatus()){
     case StatusValue::success:{
         ui->ButtonFriends->setEnabled(true);
-        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
+        friendsState.load("://state_green.png");
+        //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::error:{
         ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
+        friendsState.load("://state_red.png");
+        //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::none:{
         ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
+        friendsState.load("://state_blue.png");
+        //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
         break;
     }
     }
+    ui->LabelProfileStatus->setPixmap(profileState.scaled(13,13));
+    ui->LabelGamesStatus->setPixmap(gamesState.scaled(13,13));
+    ui->LabelFriendsStatus->setPixmap(friendsState.scaled(13,13));
     if(bans.GetVACBanned()){
-        ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(bans.GetNumberOfVACBans())).arg(QString::number(bans.GetDaysSinceLastBan())));
-        ui->LabelBans->setStyleSheet("color: #6e0e0e");
+        ui->LabelBansNotNone->setText(QString::number(bans.GetNumberOfVACBans()));
+        ui->LabelBansDays->setText(QString::number(bans.GetDaysSinceLastBan()));
+        ui->LabelBansNotNone->setVisible(true);
+        ui->LabelBansLast->setVisible(true);
+        ui->LabelBansDays->setVisible(true);
+        ui->LabelBansDaysAgo->setVisible(true);
+        ui->LabelBansNone->setVisible(false);
+//        ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(bans.GetNumberOfVACBans())).arg(QString::number(bans.GetDaysSinceLastBan())));
+//        ui->LabelBans->setStyleSheet("color: #6e0e0e");
     } else {
-        ui->LabelBans->setText(tr("VAC баны: Отсутствуют"));
-        ui->LabelBans->setStyleSheet("color: #0e6e11");
+        ui->LabelBansNotNone->setVisible(false);
+        ui->LabelBansLast->setVisible(false);
+        ui->LabelBansDays->setVisible(false);
+        ui->LabelBansDaysAgo->setVisible(false);
+        ui->LabelBansNone->setVisible(true);
+//        ui->LabelBans->setText(tr("VAC баны: Отсутствуют"));
+//        ui->LabelBans->setStyleSheet("color: #0e6e11");
     }
 
     ui->LabelAvatar->setPixmap(RequestData(a_profile.GetAvatarmedium(),false).GetPixmap());
@@ -169,7 +220,7 @@ void FormProfile::UpdateTheme(){
             _theme="black";
             break;
     }
-    ui->LabelProfileUrl->setText("<img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+_profile.GetProfileurl()+"</span></a>");
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+_profile.GetProfileurl()+"</span></a>");
     ui->ButtonSetProfile->setIcon(QIcon("://"+_theme+"/set_home.png"));
     ui->ButtonFavorites->setIcon(QIcon("://"+_theme+"/favorites.png"));
     ui->ButtonStatistics->setIcon(QIcon("://"+_theme+"/statistic.png"));

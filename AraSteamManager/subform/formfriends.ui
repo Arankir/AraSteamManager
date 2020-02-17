@@ -61,7 +61,11 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QComboBox" name="ComboBoxStatus"/>
+         <widget class="QComboBox" name="ComboBoxStatus">
+          <property name="currentText">
+           <string notr="true"/>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="CheckBoxOpenProfile">

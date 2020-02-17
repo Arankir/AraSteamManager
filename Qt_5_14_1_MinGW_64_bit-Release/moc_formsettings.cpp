@@ -37,10 +37,10 @@ QT_MOC_LITERAL(1, 13, 19), // "s_return_to_profile"
 QT_MOC_LITERAL(2, 33, 0), // ""
 QT_MOC_LITERAL(3, 34, 8), // "QWidget*"
 QT_MOC_LITERAL(4, 43, 16), // "s_updateSettings"
-QT_MOC_LITERAL(5, 60, 14), // "InitComponents"
-QT_MOC_LITERAL(6, 75, 11), // "changeEvent"
-QT_MOC_LITERAL(7, 87, 7), // "QEvent*"
-QT_MOC_LITERAL(8, 95, 5), // "event"
+QT_MOC_LITERAL(5, 60, 11), // "changeEvent"
+QT_MOC_LITERAL(6, 72, 7), // "QEvent*"
+QT_MOC_LITERAL(7, 80, 5), // "event"
+QT_MOC_LITERAL(8, 86, 14), // "InitComponents"
 QT_MOC_LITERAL(9, 101, 37), // "on_RadioButtonLanguageEnglish..."
 QT_MOC_LITERAL(10, 139, 37), // "on_RadioButtonLanguageRussian..."
 QT_MOC_LITERAL(11, 177, 42), // "on_CheckBoxVisibleHiddenGames..."
@@ -57,8 +57,8 @@ QT_MOC_LITERAL(21, 391, 42) // "on_CheckBoxVisibleProfileInfo..."
 
     },
     "FormSettings\0s_return_to_profile\0\0"
-    "QWidget*\0s_updateSettings\0InitComponents\0"
-    "changeEvent\0QEvent*\0event\0"
+    "QWidget*\0s_updateSettings\0changeEvent\0"
+    "QEvent*\0event\0InitComponents\0"
     "on_RadioButtonLanguageEnglish_clicked\0"
     "on_RadioButtonLanguageRussian_clicked\0"
     "on_CheckBoxVisibleHiddenGames_stateChanged\0"
@@ -89,8 +89,8 @@ static const uint qt_meta_data_FormSettings[] = {
        4,    0,   92,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   93,    2, 0x08 /* Private */,
-       6,    1,   94,    2, 0x08 /* Private */,
+       5,    1,   93,    2, 0x08 /* Private */,
+       8,    0,   96,    2, 0x08 /* Private */,
        9,    0,   97,    2, 0x08 /* Private */,
       10,    0,   98,    2, 0x08 /* Private */,
       11,    1,   99,    2, 0x08 /* Private */,
@@ -108,8 +108,8 @@ static const uint qt_meta_data_FormSettings[] = {
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void, 0x80000000 | 6,    7,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7,    8,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   12,
@@ -133,8 +133,8 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         switch (_id) {
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 1: _t->s_updateSettings(); break;
-        case 2: _t->InitComponents(); break;
-        case 3: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 2: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 3: _t->InitComponents(); break;
         case 4: _t->on_RadioButtonLanguageEnglish_clicked(); break;
         case 5: _t->on_RadioButtonLanguageRussian_clicked(); break;
         case 6: _t->on_CheckBoxVisibleHiddenGames_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;

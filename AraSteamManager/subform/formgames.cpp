@@ -184,6 +184,11 @@ FormGames::~FormGames(){
     //}
     delete ui;
 }
+void FormGames::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        ui->retranslateUi(this);
+    }
+}
 void FormGames::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);
     //delete this;

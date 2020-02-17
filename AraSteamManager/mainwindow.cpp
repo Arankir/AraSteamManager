@@ -109,7 +109,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "background-color: rgba(255, 255, 255, 0); "
                     "} "
                     "QScrollArea { "
-                        "border: 1px solid black; "
+                        "border: 0px solid white; "
                     "}"
                     "QMessageBox{"
                         "background: black; "
@@ -338,9 +338,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "border: 1px solid #262626; "
                         "color: "+hoverGradient+
                     "} "
-
                     "QComboBox:item:checked { "
-                        "font-weight: bold; "
+                        //"font-weight: bold; "
                     "} "
                     ;
             lineEdit =
@@ -561,7 +560,6 @@ void MainWindow::InitComponents(){
     ui->ButtonExit->setIcon(QIcon("://"+_theme+"/exit.png"));
     ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
     ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
-    Retranslate();
 }
 #define InitEnd }
 
@@ -576,7 +574,8 @@ void MainWindow::AddAchievements(SAchievementsPlayer achievements, SGame games){
         connect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&MainWindow::ContainerAchievementsClose);
         _windowChildCount++;
     }
-    _containerAchievementsForm->AddFormAchievement(achievements,_profile.GetSteamid(),games,_achievementsCount++);
+    qDebug()<<static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile().GetSteamid();
+    _containerAchievementsForm->AddFormAchievement(achievements,static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile().GetSteamid(),games,_achievementsCount++);
     _containerAchievementsForm->show();
 }
 void MainWindow::RemoveAchievements(int index){
@@ -620,16 +619,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 void MainWindow::changeEvent(QEvent *event){
     if(event->type()==QEvent::LanguageChange){
-        Retranslate();
+        ui->retranslateUi(this);
     }
-}
-void MainWindow::Retranslate(){
-    ui->ButtonBack->setText(tr(""));
-    ui->ButtonNext->setText(tr(""));
-    ui->LineEditIdProfile->setPlaceholderText(tr("Введите Steamid"));
-    ui->ButtonExit->setText(tr("Выход"));
-    ui->ButtonFindProfile->setText(tr("Найти"));
-    ui->ButtonGoToMyProfile->setText(tr(""));
 }
 MainWindow::~MainWindow(){
     ReturnFromForms();
@@ -701,10 +692,6 @@ void MainWindow::GoToProfile(QString a_id, QueryType a_type){
         connect(newStackedProfile,&FormProfile::s_myProfileChange,this,&MainWindow::UpdateMyProfile);
         connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateVisibleInfo);
         connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateTheme);
-        //connect(this,&MainWindow::on_ButtonSetProfile_clicked,newStackedProfile,&FormProfile::SetProfile);
-        //void UpdateTheme();
-        //void UpdateVisibleInfo();
-        qDebug()<<_setting.GetVisibleProfileInfo();
         ui->StackedWidgetProfiles->setFixedHeight(_setting.GetVisibleProfileInfo()?155:95);
         UpdateMyProfile();
         UpdateButtonsBackNext();
@@ -734,12 +721,12 @@ void MainWindow::on_ButtonNext_clicked(){
         UpdateButtonsBackNext();
     }
 }
-void MainWindow::GoToGames(QString a_prifileSteamid, SGames a_games){
+void MainWindow::GoToGames(QString a_profileSteamid, SGames a_games){
     if(!_initGames){
         if(!_blockedLoad){
             _blockedLoad=true;
             ui->FormProgressBar->setMaximum(a_games.GetCount());
-            _gamesForm = new FormGames(a_prifileSteamid,a_games,this);
+            _gamesForm = new FormGames(a_profileSteamid,a_games,this);
             connect(_gamesForm,&FormGames::s_finish,this,&MainWindow::ShowGames);
             connect(_gamesForm,&FormGames::s_achievementsLoaded,this,&MainWindow::ProgressLoading);
             connect(_gamesForm,&FormGames::s_showAchievements,this,&MainWindow::AddAchievements);

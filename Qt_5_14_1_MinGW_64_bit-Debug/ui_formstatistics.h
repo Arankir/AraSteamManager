@@ -23,14 +23,18 @@ QT_BEGIN_NAMESPACE
 class Ui_FormStatistics
 {
 public:
-    QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_4;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout;
     QChartView *ChartViewPercentages;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_3;
     QLabel *label;
     QSpacerItem *verticalSpacer;
+    QVBoxLayout *verticalLayout;
     QLabel *LabelAveragePercent;
+    QLabel *LabelAveragePercentValue;
+    QVBoxLayout *verticalLayout_2;
     QLabel *LabelSummColumn;
+    QLabel *LabelSummColumnValue;
     QChartView *ChartsViewTimes;
     QChartView *ChartsViewMonths;
     QChartView *ChartsViewYears;
@@ -43,19 +47,21 @@ public:
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormStatistics->setFont(font);
-        verticalLayout_2 = new QVBoxLayout(FormStatistics);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(0);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        verticalLayout_4 = new QVBoxLayout(FormStatistics);
+        verticalLayout_4->setSpacing(3);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         ChartViewPercentages = new QChartView(FormStatistics);
         ChartViewPercentages->setObjectName(QString::fromUtf8("ChartViewPercentages"));
         ChartViewPercentages->setMinimumSize(QSize(0, 250));
 
-        horizontalLayout_4->addWidget(ChartViewPercentages);
+        horizontalLayout->addWidget(ChartViewPercentages);
 
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(3);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         label = new QLabel(FormStatistics);
         label->setObjectName(QString::fromUtf8("label"));
         QFont font1;
@@ -68,42 +74,64 @@ public:
         label->setText(QString::fromUtf8("?"));
         label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(label);
+        verticalLayout_3->addWidget(label);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout->addItem(verticalSpacer);
+        verticalLayout_3->addItem(verticalSpacer);
 
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         LabelAveragePercent = new QLabel(FormStatistics);
         LabelAveragePercent->setObjectName(QString::fromUtf8("LabelAveragePercent"));
 
         verticalLayout->addWidget(LabelAveragePercent);
 
+        LabelAveragePercentValue = new QLabel(FormStatistics);
+        LabelAveragePercentValue->setObjectName(QString::fromUtf8("LabelAveragePercentValue"));
+        LabelAveragePercentValue->setText(QString::fromUtf8("0"));
+
+        verticalLayout->addWidget(LabelAveragePercentValue);
+
+
+        verticalLayout_3->addLayout(verticalLayout);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         LabelSummColumn = new QLabel(FormStatistics);
         LabelSummColumn->setObjectName(QString::fromUtf8("LabelSummColumn"));
 
-        verticalLayout->addWidget(LabelSummColumn);
+        verticalLayout_2->addWidget(LabelSummColumn);
+
+        LabelSummColumnValue = new QLabel(FormStatistics);
+        LabelSummColumnValue->setObjectName(QString::fromUtf8("LabelSummColumnValue"));
+        LabelSummColumnValue->setText(QString::fromUtf8("0"));
+
+        verticalLayout_2->addWidget(LabelSummColumnValue);
 
 
-        horizontalLayout_4->addLayout(verticalLayout);
+        verticalLayout_3->addLayout(verticalLayout_2);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_4);
+        horizontalLayout->addLayout(verticalLayout_3);
+
+
+        verticalLayout_4->addLayout(horizontalLayout);
 
         ChartsViewTimes = new QChartView(FormStatistics);
         ChartsViewTimes->setObjectName(QString::fromUtf8("ChartsViewTimes"));
 
-        verticalLayout_2->addWidget(ChartsViewTimes);
+        verticalLayout_4->addWidget(ChartsViewTimes);
 
         ChartsViewMonths = new QChartView(FormStatistics);
         ChartsViewMonths->setObjectName(QString::fromUtf8("ChartsViewMonths"));
 
-        verticalLayout_2->addWidget(ChartsViewMonths);
+        verticalLayout_4->addWidget(ChartsViewMonths);
 
         ChartsViewYears = new QChartView(FormStatistics);
         ChartsViewYears->setObjectName(QString::fromUtf8("ChartsViewYears"));
 
-        verticalLayout_2->addWidget(ChartsViewYears);
+        verticalLayout_4->addWidget(ChartsViewYears);
 
 
         retranslateUi(FormStatistics);

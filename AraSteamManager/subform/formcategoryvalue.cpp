@@ -25,7 +25,11 @@ FormCategoryValue::FormCategoryValue(int a_pos, QWidget *parent) : QWidget(paren
 FormCategoryValue::~FormCategoryValue(){
     delete ui;
 }
-
+void FormCategoryValue::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        ui->retranslateUi(this);
+    }
+}
 void FormCategoryValue::on_CheckBoxVisible_stateChanged(int arg1){
     emit s_visiblechange(_position, arg1==2);
 }

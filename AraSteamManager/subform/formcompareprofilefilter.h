@@ -29,6 +29,7 @@ public:
     void Update();
 
 private slots:
+    void changeEvent(QEvent *event);
     void RadioButtonClick();
 
 private:

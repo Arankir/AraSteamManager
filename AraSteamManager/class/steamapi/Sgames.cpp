@@ -135,15 +135,14 @@ void SGames::Clear(){
 }
 void SGames::Sort(){
     //Переделать нормально
-    std::list<SGame> list = _games.toList().toStdList();
+    std::list<SGame> list(_games.begin(),_games.end());
     list.sort([](const SGame &s1, const SGame &s2)-> const bool {
         if(QString::compare(s1.GetName().toLower(),s2.GetName().toLower())<0)
             return true;
         else
             return false;
     });
-
-    _games=QVector<SGame>::fromList(QList<SGame>::fromStdList(list));
+    _games=QVector<SGame>(list.begin(),list.end());
 }
 SGames::SGames( const SGames & a_newGames){
     _games=a_newGames._games;

@@ -22,9 +22,7 @@ public:
     explicit FormProfile(SProfile profile, QWidget *parent = nullptr);
     ~FormProfile();
 
-    void changeEvent(QEvent *event);
 public slots:
-    void Retranslate();
     void ProfileToUi(SProfile profile);
     void SetProfile(SProfile profile);
     SProfile GetProfile() {return _profile;}
@@ -42,6 +40,7 @@ signals:
     void s_myProfileChange();
 
 private slots:
+    void changeEvent(QEvent *event);
     void on_ButtonSetProfile_clicked();
     void on_ButtonGames_clicked();
     void on_ButtonFriends_clicked();

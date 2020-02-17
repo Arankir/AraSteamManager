@@ -29,6 +29,11 @@ FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
 FormCompareProfileFilter::~FormCompareProfileFilter(){
     delete ui;
 }
+void FormCompareProfileFilter::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        ui->retranslateUi(this);
+    }
+}
 
 void FormCompareProfileFilter::SetTitles(QString a_t1, QString a_t2, QString a_t3){
     ui->RadioButtonAll->setText(a_t1);

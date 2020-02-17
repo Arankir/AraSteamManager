@@ -43,6 +43,7 @@ public slots:
     void slotShowHideSlide();
 
 private slots:
+    void changeEvent(QEvent *event);
     void InitComponents();
     void OnImageLoad(RequestData *imgr);
     void OnResultAchievements(SAchievementsPlayer ach);

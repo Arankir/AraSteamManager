@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFavorites_t {
-    QByteArrayData data[10];
-    char stringdata0[127];
+    QByteArrayData data[13];
+    char stringdata0[153];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,12 +41,16 @@ QT_MOC_LITERAL(5, 59, 10), // "FriendLoad"
 QT_MOC_LITERAL(6, 70, 9), // "SProfile*"
 QT_MOC_LITERAL(7, 80, 11), // "OnImageLoad"
 QT_MOC_LITERAL(8, 92, 12), // "RequestData*"
-QT_MOC_LITERAL(9, 105, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(9, 105, 11), // "changeEvent"
+QT_MOC_LITERAL(10, 117, 7), // "QEvent*"
+QT_MOC_LITERAL(11, 125, 5), // "event"
+QT_MOC_LITERAL(12, 131, 21) // "on_pushButton_clicked"
 
     },
     "FormFavorites\0s_return_to_profile\0\0"
     "QWidget*\0InitComponents\0FriendLoad\0"
     "SProfile*\0OnImageLoad\0RequestData*\0"
+    "changeEvent\0QEvent*\0event\0"
     "on_pushButton_clicked"
 };
 #undef QT_MOC_LITERAL
@@ -57,7 +61,7 @@ static const uint qt_meta_data_FormFavorites[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,13 +69,14 @@ static const uint qt_meta_data_FormFavorites[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
+       1,    1,   44,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    0,   42,    2, 0x0a /* Public */,
-       5,    1,   43,    2, 0x0a /* Public */,
-       7,    1,   46,    2, 0x0a /* Public */,
-       9,    0,   49,    2, 0x08 /* Private */,
+       4,    0,   47,    2, 0x0a /* Public */,
+       5,    1,   48,    2, 0x0a /* Public */,
+       7,    1,   51,    2, 0x0a /* Public */,
+       9,    1,   54,    2, 0x08 /* Private */,
+      12,    0,   57,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -80,6 +85,7 @@ static const uint qt_meta_data_FormFavorites[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 6,    2,
     QMetaType::Void, 0x80000000 | 8,    2,
+    QMetaType::Void, 0x80000000 | 10,   11,
     QMetaType::Void,
 
        0        // eod
@@ -95,7 +101,8 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 1: _t->InitComponents(); break;
         case 2: _t->FriendLoad((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
         case 3: _t->OnImageLoad((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 4: _t->on_pushButton_clicked(); break;
+        case 4: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 5: _t->on_pushButton_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -164,13 +171,13 @@ int FormFavorites::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

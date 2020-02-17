@@ -321,10 +321,10 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
         ButtonSettings->setText(QString());
         ButtonExit->setText(QCoreApplication::translate("MainWindow", " \320\222\321\213\321\205\320\276\320\264", nullptr));
-        ButtonBack->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
-        ButtonNext->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
+        ButtonBack->setText(QString());
+        ButtonNext->setText(QString());
         ButtonUpdate->setText(QString());
-        ButtonGoToMyProfile->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
+        ButtonGoToMyProfile->setText(QString());
         LineEditIdProfile->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
         ButtonFindProfile->setText(QCoreApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
         FormProgressBar->setFormat(QCoreApplication::translate("MainWindow", "%v/%m", nullptr));

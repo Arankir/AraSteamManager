@@ -122,6 +122,11 @@ FormFriends::~FormFriends(){
 //    }
     delete ui;
 }
+void FormFriends::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        ui->retranslateUi(this);
+    }
+}
 void FormFriends::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);
     //delete this;

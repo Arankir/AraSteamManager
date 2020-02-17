@@ -17,6 +17,11 @@ FormStatistics::FormStatistics(QString a_id, SGames a_games, QString a_name, QWi
     LoadData.AddThreadStatistics(_games,_id);
 }
 
+void FormStatistics::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        ui->retranslateUi(this);
+    }
+}
 void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QString> > a_complete,
                               QVector<QPair<QString,QString>> a_started, QVector<QPair<QString,QString>> a_notStarted,
                               QVector<double> a_averagePercent, int a_summcolumn, QVector<int> a_times,
@@ -35,8 +40,8 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
     foreach (double averageForGame, _averagePercent) {
         totala_verage+=averageForGame;
     }
-    ui->LabelAveragePercent->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент")).arg(tr("по всем играм")).arg(QString::number(totala_verage/(_numof[0]+_numof[1]+_numof[2]))).arg(tr("по начатым играм")).arg(QString::number(totala_verage/(_numof[1]+_numof[2]))));
-    ui->LabelSummColumn->setText(tr("Всего достижений: %1").arg(_summcolumn));
+    ui->LabelAveragePercentValue->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент")).arg(tr("по всем играм")).arg(QString::number(totala_verage/(_numof[0]+_numof[1]+_numof[2]))).arg(tr("по начатым играм")).arg(QString::number(totala_verage/(_numof[1]+_numof[2]))));
+    ui->LabelSummColumnValue->setText(QString::number(_summcolumn));
 
     #define SetChartDonut {
     QPieSeries *series1 = new QPieSeries();

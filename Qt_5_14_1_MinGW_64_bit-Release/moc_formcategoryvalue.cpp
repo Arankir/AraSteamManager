@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoryValue_t {
-    QByteArrayData data[22];
-    char stringdata0[341];
+    QByteArrayData data[25];
+    char stringdata0[367];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,23 +45,26 @@ QT_MOC_LITERAL(9, 91, 14), // "s_selectchange"
 QT_MOC_LITERAL(10, 106, 6), // "select"
 QT_MOC_LITERAL(11, 113, 10), // "s_deleting"
 QT_MOC_LITERAL(12, 124, 9), // "s_reverse"
-QT_MOC_LITERAL(13, 134, 31), // "on_CheckBoxVisible_stateChanged"
-QT_MOC_LITERAL(14, 166, 4), // "arg1"
-QT_MOC_LITERAL(15, 171, 19), // "on_ButtonUp_clicked"
-QT_MOC_LITERAL(16, 191, 21), // "on_ButtonDown_clicked"
-QT_MOC_LITERAL(17, 213, 23), // "on_ButtonSelect_clicked"
-QT_MOC_LITERAL(18, 237, 25), // "on_ButtonUnSelect_clicked"
-QT_MOC_LITERAL(19, 263, 23), // "on_ButtonDelete_clicked"
-QT_MOC_LITERAL(20, 287, 28), // "on_LineEditTitle_textChanged"
-QT_MOC_LITERAL(21, 316, 24) // "on_ButtonReverse_clicked"
+QT_MOC_LITERAL(13, 134, 11), // "changeEvent"
+QT_MOC_LITERAL(14, 146, 7), // "QEvent*"
+QT_MOC_LITERAL(15, 154, 5), // "event"
+QT_MOC_LITERAL(16, 160, 31), // "on_CheckBoxVisible_stateChanged"
+QT_MOC_LITERAL(17, 192, 4), // "arg1"
+QT_MOC_LITERAL(18, 197, 19), // "on_ButtonUp_clicked"
+QT_MOC_LITERAL(19, 217, 21), // "on_ButtonDown_clicked"
+QT_MOC_LITERAL(20, 239, 23), // "on_ButtonSelect_clicked"
+QT_MOC_LITERAL(21, 263, 25), // "on_ButtonUnSelect_clicked"
+QT_MOC_LITERAL(22, 289, 23), // "on_ButtonDelete_clicked"
+QT_MOC_LITERAL(23, 313, 28), // "on_LineEditTitle_textChanged"
+QT_MOC_LITERAL(24, 342, 24) // "on_ButtonReverse_clicked"
 
     },
     "FormCategoryValue\0s_valuechange\0\0pos\0"
     "value\0s_visiblechange\0visible\0"
     "s_positionchange\0posnew\0s_selectchange\0"
-    "select\0s_deleting\0s_reverse\0"
-    "on_CheckBoxVisible_stateChanged\0arg1\0"
-    "on_ButtonUp_clicked\0on_ButtonDown_clicked\0"
+    "select\0s_deleting\0s_reverse\0changeEvent\0"
+    "QEvent*\0event\0on_CheckBoxVisible_stateChanged\0"
+    "arg1\0on_ButtonUp_clicked\0on_ButtonDown_clicked\0"
     "on_ButtonSelect_clicked\0"
     "on_ButtonUnSelect_clicked\0"
     "on_ButtonDelete_clicked\0"
@@ -76,7 +79,7 @@ static const uint qt_meta_data_FormCategoryValue[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -84,22 +87,23 @@ static const uint qt_meta_data_FormCategoryValue[] = {
        6,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   84,    2, 0x06 /* Public */,
-       5,    2,   89,    2, 0x06 /* Public */,
-       7,    2,   94,    2, 0x06 /* Public */,
-       9,    2,   99,    2, 0x06 /* Public */,
-      11,    1,  104,    2, 0x06 /* Public */,
-      12,    1,  107,    2, 0x06 /* Public */,
+       1,    2,   89,    2, 0x06 /* Public */,
+       5,    2,   94,    2, 0x06 /* Public */,
+       7,    2,   99,    2, 0x06 /* Public */,
+       9,    2,  104,    2, 0x06 /* Public */,
+      11,    1,  109,    2, 0x06 /* Public */,
+      12,    1,  112,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      13,    1,  110,    2, 0x08 /* Private */,
-      15,    0,  113,    2, 0x08 /* Private */,
-      16,    0,  114,    2, 0x08 /* Private */,
-      17,    0,  115,    2, 0x08 /* Private */,
-      18,    0,  116,    2, 0x08 /* Private */,
-      19,    0,  117,    2, 0x08 /* Private */,
-      20,    1,  118,    2, 0x08 /* Private */,
-      21,    0,  121,    2, 0x08 /* Private */,
+      13,    1,  115,    2, 0x08 /* Private */,
+      16,    1,  118,    2, 0x08 /* Private */,
+      18,    0,  121,    2, 0x08 /* Private */,
+      19,    0,  122,    2, 0x08 /* Private */,
+      20,    0,  123,    2, 0x08 /* Private */,
+      21,    0,  124,    2, 0x08 /* Private */,
+      22,    0,  125,    2, 0x08 /* Private */,
+      23,    1,  126,    2, 0x08 /* Private */,
+      24,    0,  129,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::QString,    3,    4,
@@ -110,13 +114,14 @@ static const uint qt_meta_data_FormCategoryValue[] = {
     QMetaType::Void, QMetaType::Int,    3,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int,   14,
+    QMetaType::Void, 0x80000000 | 14,   15,
+    QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   14,
+    QMetaType::Void, QMetaType::QString,   17,
     QMetaType::Void,
 
        0        // eod
@@ -134,14 +139,15 @@ void FormCategoryValue::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 3: _t->s_selectchange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 4: _t->s_deleting((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->s_reverse((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->on_CheckBoxVisible_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 7: _t->on_ButtonUp_clicked(); break;
-        case 8: _t->on_ButtonDown_clicked(); break;
-        case 9: _t->on_ButtonSelect_clicked(); break;
-        case 10: _t->on_ButtonUnSelect_clicked(); break;
-        case 11: _t->on_ButtonDelete_clicked(); break;
-        case 12: _t->on_LineEditTitle_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 13: _t->on_ButtonReverse_clicked(); break;
+        case 6: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 7: _t->on_CheckBoxVisible_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: _t->on_ButtonUp_clicked(); break;
+        case 9: _t->on_ButtonDown_clicked(); break;
+        case 10: _t->on_ButtonSelect_clicked(); break;
+        case 11: _t->on_ButtonUnSelect_clicked(); break;
+        case 12: _t->on_ButtonDelete_clicked(); break;
+        case 13: _t->on_LineEditTitle_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: _t->on_ButtonReverse_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -220,13 +226,13 @@ int FormCategoryValue::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 15)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

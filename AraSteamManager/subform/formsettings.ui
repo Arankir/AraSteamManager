@@ -79,14 +79,14 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Своя тема (В разработке)</string>
+          <string notr="true">Своя тема (В разработке)</string>
          </property>
         </widget>
        </item>
        <item row="2" column="0" colspan="3">
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
-          <string>GroupBox</string>
+          <string notr="true">GroupBox</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
@@ -95,7 +95,7 @@
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Настроить</string>
+             <string notr="true">Настроить</string>
             </property>
            </widget>
           </item>

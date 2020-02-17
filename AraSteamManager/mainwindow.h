@@ -73,7 +73,6 @@ private slots:
     void keyPressEvent(QKeyEvent *event) override;
     void changeEvent(QEvent *event) override;
     void ReturnFromForms();
-    void Retranslate();
     void ResizeScrollArea();
 
     void InitComponents();

@@ -580,12 +580,16 @@ void SAchievements::SetFinish(){
     emit s_finished();
 }
 void SAchievements::Update(){
-    qDebug()<<_appid<<_id;
     _statusGlobal=StatusValue::none;
     _statusPlayer=StatusValue::none;
     _statusPercent=StatusValue::none;
     _statusFinish=StatusValue::none;
-    Set(_appid,_id);
+    SAchievementsGlobal *Global = new SAchievementsGlobal(_appid);
+    connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
+    SAchievementsPlayer *Player = new SAchievementsPlayer(_appid,_id);
+    connect(Player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
+    SAchievementsPercentage *Percent = new SAchievementsPercentage(_appid);
+    connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
 void SAchievements::Clear(){
     _finish.clear();
