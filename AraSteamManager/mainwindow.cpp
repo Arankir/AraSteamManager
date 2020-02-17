@@ -29,6 +29,15 @@
 // else
 // textEdit->setProperty("styleVariant", 0);
 // }
+#define Constants {
+const int c_formsNone=0;
+const int c_formsGames=1;
+const int c_formsFriends=2;
+const int c_formsStatistic=3;
+const int c_formsFavorites=4;
+const int c_formsSettings=5;
+#define ConstantsEnd }
+
 #define Init {
 MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
     ui->setupUi(this);
@@ -595,21 +604,21 @@ void MainWindow::ShowGames(){
     _initGames=true;
     ui->FormProgressBar->setVisible(false);
     _blockedLoad=false;
-    ui->StackedWidgetForms->setCurrentIndex(1);
+    ui->StackedWidgetForms->setCurrentIndex(c_formsGames);
     ResizeScrollArea();
 }
 void MainWindow::ShowFriends(){
     _initFriends=true;
     ui->FormProgressBar->setVisible(false);
     _blockedLoad=false;
-    ui->StackedWidgetForms->setCurrentIndex(2);
+    ui->StackedWidgetForms->setCurrentIndex(c_formsFriends);
     ResizeScrollArea();
 }
 void MainWindow::ShowStatistic(){
     _initStatistics=true;
     ui->FormProgressBar->setVisible(false);
     _blockedLoad=false;
-    ui->StackedWidgetForms->setCurrentIndex(3);
+    ui->StackedWidgetForms->setCurrentIndex(c_formsStatistic);
     ResizeScrollArea();
 }
 void MainWindow::keyPressEvent(QKeyEvent *event){
@@ -732,10 +741,10 @@ void MainWindow::GoToGames(QString a_profileSteamid, SGames a_games){
             connect(_gamesForm,&FormGames::s_showAchievements,this,&MainWindow::AddAchievements);
             ui->ScrollAreaGames->setWidget(_gamesForm);
             ui->FormProgressBar->setVisible(true);
-            ui->StackedWidgetForms->setCurrentIndex(0);
+            ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
         }
     } else {
-        ui->StackedWidgetForms->setCurrentIndex(1);
+        ui->StackedWidgetForms->setCurrentIndex(c_formsGames);
     }
 }
 void MainWindow::GoToFriends(QString a_prifileSteamid, SFriends a_friends){
@@ -747,10 +756,10 @@ void MainWindow::GoToFriends(QString a_prifileSteamid, SFriends a_friends){
             connect(_friendsForm,&FormFriends::s_go_to_profile,this,&MainWindow::GoToProfile);
             ui->ScrollAreaFriends->setWidget(_friendsForm);
             ui->FormProgressBar->setVisible(true);
-            ui->StackedWidgetForms->setCurrentIndex(0);
+            ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
         }
     } else {
-        ui->StackedWidgetForms->setCurrentIndex(2);
+        ui->StackedWidgetForms->setCurrentIndex(c_formsFriends);
     }
 }
 void MainWindow::GoToFavorites(){
@@ -760,11 +769,11 @@ void MainWindow::GoToFavorites(){
             ui->ScrollAreaFavorites->setWidget(_favoritesForm);
             //
             _initFavorites=true;
-            ui->StackedWidgetForms->setCurrentIndex(4);
+            ui->StackedWidgetForms->setCurrentIndex(c_formsFavorites);
             ResizeScrollArea();
         }
     } else {
-        ui->StackedWidgetForms->setCurrentIndex(4);
+        ui->StackedWidgetForms->setCurrentIndex(c_formsFavorites);
     }
 }
 void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QString a_profileName){
@@ -775,10 +784,10 @@ void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QStrin
             _statisticsForm = new FormStatistics(a_prifileSteamid,a_games,a_profileName,this);
             ui->ScrollAreaStatistic->setWidget(_statisticsForm);
             ui->FormProgressBar->setVisible(true);
-            ui->StackedWidgetForms->setCurrentIndex(0);
+            ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
         }
     } else {
-        ui->StackedWidgetForms->setCurrentIndex(3);
+        ui->StackedWidgetForms->setCurrentIndex(c_formsStatistic);
     }
 }
 
@@ -800,11 +809,11 @@ void MainWindow::on_ButtonSettings_clicked(){
             ui->ScrollAreaSettings->setWidget(_settingsForm);
             //
             _initSettings=true;
-            ui->StackedWidgetForms->setCurrentIndex(5);
+            ui->StackedWidgetForms->setCurrentIndex(c_formsSettings);
             ResizeScrollArea();
         }
     } else {
-        ui->StackedWidgetForms->setCurrentIndex(5);
+        ui->StackedWidgetForms->setCurrentIndex(c_formsSettings);
     }
 }
 void MainWindow::on_ButtonGoToMyProfile_clicked(){

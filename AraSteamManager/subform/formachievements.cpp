@@ -63,12 +63,12 @@ void FormAchievements::InitComponents(){
     connect(ui->TableWidgetHorizontalHeaderAchievements->horizontalHeader(),&QHeaderView::sectionResized,
             ui->TableWidgetAchievements->horizontalHeader(),[=](int logicalIndex, int, int newSize)
     {ui->TableWidgetAchievements->setColumnWidth(logicalIndex,newSize);});
-    connect(ui->TableWidgetHorizontalHeaderAchievements,&QTableWidget::hideColumn,
-            ui->TableWidgetAchievements,[=](int column)
-    {ui->TableWidgetAchievements->setColumnHidden(column,true);});
-    connect(ui->TableWidgetHorizontalHeaderAchievements,&QTableWidget::showColumn,
-            ui->TableWidgetAchievements,[=](int column)
-    {ui->TableWidgetAchievements->setColumnHidden(column,false);});
+//    connect(ui->TableWidgetHorizontalHeaderAchievements,&QTableWidget::hideColumn,
+//            ui->TableWidgetAchievements,[=](int column)
+//    {ui->TableWidgetAchievements->setColumnHidden(column,true);});
+//    connect(ui->TableWidgetHorizontalHeaderAchievements,&QTableWidget::showColumn,
+//            ui->TableWidgetAchievements,[=](int column)
+//    {ui->TableWidgetAchievements->setColumnHidden(column,false);});
     connect(ui->TableWidgetAchievements->horizontalScrollBar(), &QScrollBar::rangeChanged,
             ui->TableWidgetHorizontalHeaderAchievements->horizontalScrollBar(), &QScrollBar::setRange);
     connect(ui->TableWidgetAchievements->horizontalScrollBar(), &QScrollBar::sliderMoved,
@@ -90,12 +90,12 @@ void FormAchievements::InitComponents(){
     connect(ui->TableWidgetAchievements->verticalHeader(),&QHeaderView::sectionResized,
             ui->TableWidgetCategory->verticalHeader(),[=](int logicalIndex, int, int newSize)
     {ui->TableWidgetCategory->setRowHeight(logicalIndex,newSize);});
-    connect(ui->TableWidgetAchievements,&QTableWidget::hideRow,
-            ui->TableWidgetCategory,[=](int row)
-    {ui->TableWidgetCategory->setRowHidden(row,true);});
-    connect(ui->TableWidgetAchievements,&QTableWidget::showRow,
-            ui->TableWidgetCategory,[=](int row)
-    {ui->TableWidgetCategory->setRowHidden(row,false);});
+//    connect(ui->TableWidgetAchievements,&QTableWidget::hideRow,
+//            ui->TableWidgetCategory,[=](int row)
+//    {ui->TableWidgetCategory->setRowHidden(row,true);});
+//    connect(ui->TableWidgetAchievements,&QTableWidget::showRow,
+//            ui->TableWidgetCategory,[=](int row)
+//    {ui->TableWidgetCategory->setRowHidden(row,false);});
     connect(ui->TableWidgetAchievements->verticalScrollBar(), &QScrollBar::rangeChanged,
             ui->TableWidgetCategory->verticalScrollBar(), &QScrollBar::setRange);
     connect(ui->TableWidgetAchievements->verticalScrollBar(), &QScrollBar::sliderMoved,
