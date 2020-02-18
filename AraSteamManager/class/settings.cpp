@@ -1,32 +1,39 @@
 #include "settings.h"
 
+const QString c_language="Language=";
+const QString c_theme="Theme=";
+const QString c_saveImages="SaveImages=";
+const QString c_myProfile="MyProfile=";
+const QString c_visibleHiddenGames="VisibleHiddenGames=";
+const QString c_visibleProfileInfo="VisibleProfileInfo=";
+
 Settings::Settings(QObject *parent) : QObject(parent){
-    CreateFile("Files/Settings.txt");
-    if(QFile::exists("Files/Settings.txt")){
-        QFile settings("Files/Settings.txt");
+    CreateFile(_pathSettings);
+    if(QFile::exists(_pathSettings)){
+        QFile settings(_pathSettings);
         if (settings.open(QIODevice::ReadOnly)){
             QStringList settingList;
             while(!settings.atEnd()){
                 settingList << QString::fromLocal8Bit(settings.readLine()).remove("\r\n").remove("\n");
             }
             foreach (QString setting, settingList) {
-                if(setting.indexOf("MyProfile=",0)!=-1){
-                    _myProfile=setting.mid(setting.indexOf("MyProfile=",0)+10,setting.length());
+                if(setting.indexOf(c_myProfile,0)!=-1){
+                    _myProfile=setting.mid(setting.indexOf(c_myProfile,0)+c_myProfile.length(),setting.length());
                     }
-                if(setting.indexOf("Theme=",0)!=-1){
-                    _theme=setting.mid(setting.indexOf("Theme=",0)+6,setting.length()).toInt();
+                if(setting.indexOf(c_theme,0)!=-1){
+                    _theme=setting.mid(setting.indexOf(c_theme,0)+c_theme.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("Language=",0)!=-1){
-                    _language=setting.mid(setting.indexOf("Language=",0)+9,setting.length()).toInt();
+                if(setting.indexOf(c_language,0)!=-1){
+                    _language=setting.mid(setting.indexOf(c_language,0)+c_language.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("SaveImages=",0)!=-1){
-                    _saveImages=setting.mid(setting.indexOf("SaveImages=",0)+11,setting.length()).toInt();
+                if(setting.indexOf(c_saveImages,0)!=-1){
+                    _saveImages=setting.mid(setting.indexOf(c_saveImages,0)+c_saveImages.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("VisibleHiddenGames=",0)!=-1){
-                    _visibleHiddenGames=setting.mid(setting.indexOf("VisibleHiddenGames=",0)+19,setting.length()).toInt();
+                if(setting.indexOf(c_visibleHiddenGames,0)!=-1){
+                    _visibleHiddenGames=setting.mid(setting.indexOf(c_visibleHiddenGames,0)+c_visibleHiddenGames.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("VisibleProfileInfo=",0)!=-1){
-                    _visibleProfileInfo=setting.mid(setting.indexOf("VisibleProfileInfo=",0)+19,setting.length()).toInt()!=0;
+                if(setting.indexOf(c_visibleProfileInfo,0)!=-1){
+                    _visibleProfileInfo=setting.mid(setting.indexOf(c_visibleProfileInfo,0)+c_visibleProfileInfo.length(),setting.length()).toInt()!=0;
                     }
             }
             _status=StatusValue::success;
@@ -67,18 +74,18 @@ bool Settings::SetVisibleProfileInfo(bool a_visibleProfileInfo){
 }
 
 bool Settings::SaveSettings(){
-    CreateFile("Files/Settings.txt");
-    QFile file("Files/Settings.txt");
-    if(!QFile::exists("Files/Settings.txt"))
+    CreateFile(_pathSettings);
+    QFile file(_pathSettings);
+    if(!QFile::exists(_pathSettings))
         SetDefault();
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream writeStream(&file);
-        writeStream << "Language="+QString::number(_language)<<"\n";
-        writeStream << "Theme="+QString::number(_theme)<<"\n";
-        writeStream << "SaveImages="+QString::number(_saveImages)<<"\n";
-        writeStream << "MyProfile="+_myProfile<<"\n";
-        writeStream << "VisibleHiddenGames="+QString::number(_visibleHiddenGames)<<"\n";
-        writeStream << "VisibleProfileInfo="+QString::number(_visibleProfileInfo?1:0);
+        writeStream << c_language+QString::number(_language)<<"\n";
+        writeStream << c_theme+QString::number(_theme)<<"\n";
+        writeStream << c_saveImages+QString::number(_saveImages)<<"\n";
+        writeStream << c_myProfile+_myProfile<<"\n";
+        writeStream << c_visibleHiddenGames+QString::number(_visibleHiddenGames)<<"\n";
+        writeStream << c_visibleProfileInfo+QString::number(_visibleProfileInfo?1:0);
         file.close();
         return true;
     } else {
@@ -89,9 +96,9 @@ bool Settings::SaveSettings(){
 }
 
 void Settings::SetDefault(){
-    CreateFile("Files/Settings.txt");
-    QFile file("Files/Settings.txt");
-    if(!QFile::exists("Files/Settings.txt")){
+    CreateFile(_pathSettings);
+    QFile file(_pathSettings);
+    if(!QFile::exists(_pathSettings)){
         file.open(QIODevice::WriteOnly);
                 //дефолтные данные
         file.close();
@@ -117,32 +124,32 @@ bool Settings::CreateFile(QString a_paths){
     return exist;
 }
 bool Settings::LoadSettings(){
-    CreateFile("Files/Settings.txt");
-    if(QFile::exists("Files/Settings.txt")){
-        QFile settings("Files/Settings.txt");
+    CreateFile(_pathSettings);
+    if(QFile::exists(_pathSettings)){
+        QFile settings(_pathSettings);
         if (settings.open(QIODevice::ReadOnly)){
             QStringList settingList;
             while(!settings.atEnd()){
                 settingList << QString::fromLocal8Bit(settings.readLine()).remove("\r\n").remove("\n");
             }
             foreach (QString setting, settingList) {
-                if(setting.indexOf("MyProfile=",0)!=-1){
-                    _myProfile=setting.mid(setting.indexOf("MyProfile=",0)+10,setting.length());
+                if(setting.indexOf(c_myProfile,0)!=-1){
+                    _myProfile=setting.mid(setting.indexOf(c_myProfile,0)+c_myProfile.length(),setting.length());
                     }
-                if(setting.indexOf("Theme=",0)!=-1){
-                    _theme=setting.mid(setting.indexOf("Theme=",0)+6,setting.length()).toInt();
+                if(setting.indexOf(c_theme,0)!=-1){
+                    _theme=setting.mid(setting.indexOf(c_theme,0)+c_theme.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("Language=",0)!=-1){
-                    _language=setting.mid(setting.indexOf("Language=",0)+9,setting.length()).toInt();
+                if(setting.indexOf(c_language,0)!=-1){
+                    _language=setting.mid(setting.indexOf(c_language,0)+c_language.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("SaveImages=",0)!=-1){
-                    _saveImages=setting.mid(setting.indexOf("SaveImages=",0)+11,setting.length()).toInt();
+                if(setting.indexOf(c_saveImages,0)!=-1){
+                    _saveImages=setting.mid(setting.indexOf(c_saveImages,0)+c_saveImages.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("VisibleHiddenGames=",0)!=-1){
-                    _visibleHiddenGames=setting.mid(setting.indexOf("VisibleHiddenGames=",0)+19,setting.length()).toInt();
+                if(setting.indexOf(c_visibleHiddenGames,0)!=-1){
+                    _visibleHiddenGames=setting.mid(setting.indexOf(c_visibleHiddenGames,0)+c_visibleHiddenGames.length(),setting.length()).toInt();
                     }
-                if(setting.indexOf("VisibleProfileInfo=",0)!=-1){
-                    _visibleProfileInfo=setting.mid(setting.indexOf("VisibleProfileInfo=",0)+19,setting.length()).toInt()!=0;
+                if(setting.indexOf(c_visibleProfileInfo,0)!=-1){
+                    _visibleProfileInfo=setting.mid(setting.indexOf(c_visibleProfileInfo,0)+c_visibleProfileInfo.length(),setting.length()).toInt()!=0;
                     }
             }
             _status=StatusValue::success;

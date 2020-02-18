@@ -143,6 +143,7 @@ void SGames::Sort(){
             return false;
     });
     _games=QVector<SGame>(list.begin(),list.end());
+    //_games=QVector<SGame>::fromList(QList<SGame>::fromStdList(list));
 }
 SGames::SGames( const SGames & a_newGames){
     _games=a_newGames._games;

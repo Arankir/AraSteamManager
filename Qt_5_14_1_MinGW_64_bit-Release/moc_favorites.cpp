@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Favorites_t {
-    QByteArrayData data[16];
-    char stringdata0[128];
+    QByteArrayData data[15];
+    char stringdata0[123];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,22 +35,21 @@ static const qt_meta_stringdata_Favorites_t qt_meta_stringdata_Favorites = {
 QT_MOC_LITERAL(0, 0, 9), // "Favorites"
 QT_MOC_LITERAL(1, 10, 7), // "SetPath"
 QT_MOC_LITERAL(2, 18, 0), // ""
-QT_MOC_LITERAL(3, 19, 4), // "path"
-QT_MOC_LITERAL(4, 24, 4), // "type"
-QT_MOC_LITERAL(5, 29, 7), // "SetType"
-QT_MOC_LITERAL(6, 37, 8), // "AddValue"
-QT_MOC_LITERAL(7, 46, 8), // "newValue"
-QT_MOC_LITERAL(8, 55, 13), // "deleteIfExist"
-QT_MOC_LITERAL(9, 69, 11), // "RemoveValue"
-QT_MOC_LITERAL(10, 81, 4), // "game"
-QT_MOC_LITERAL(11, 86, 10), // "RemoveGame"
-QT_MOC_LITERAL(12, 97, 7), // "AddGame"
-QT_MOC_LITERAL(13, 105, 7), // "GetType"
-QT_MOC_LITERAL(14, 113, 9), // "GetValues"
-QT_MOC_LITERAL(15, 123, 4) // "Save"
+QT_MOC_LITERAL(3, 19, 4), // "type"
+QT_MOC_LITERAL(4, 24, 7), // "SetType"
+QT_MOC_LITERAL(5, 32, 8), // "AddValue"
+QT_MOC_LITERAL(6, 41, 8), // "newValue"
+QT_MOC_LITERAL(7, 50, 13), // "deleteIfExist"
+QT_MOC_LITERAL(8, 64, 11), // "RemoveValue"
+QT_MOC_LITERAL(9, 76, 4), // "game"
+QT_MOC_LITERAL(10, 81, 10), // "RemoveGame"
+QT_MOC_LITERAL(11, 92, 7), // "AddGame"
+QT_MOC_LITERAL(12, 100, 7), // "GetType"
+QT_MOC_LITERAL(13, 108, 9), // "GetValues"
+QT_MOC_LITERAL(14, 118, 4) // "Save"
 
     },
-    "Favorites\0SetPath\0\0path\0type\0SetType\0"
+    "Favorites\0SetPath\0\0type\0SetType\0"
     "AddValue\0newValue\0deleteIfExist\0"
     "RemoveValue\0game\0RemoveGame\0AddGame\0"
     "GetType\0GetValues\0Save"
@@ -71,35 +70,35 @@ static const uint qt_meta_data_Favorites[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    2,   84,    2, 0x0a /* Public */,
-       5,    1,   89,    2, 0x0a /* Public */,
-       6,    2,   92,    2, 0x0a /* Public */,
-       9,    1,   97,    2, 0x0a /* Public */,
-       6,    2,  100,    2, 0x0a /* Public */,
-       9,    1,  105,    2, 0x0a /* Public */,
-       6,    3,  108,    2, 0x0a /* Public */,
-       9,    2,  115,    2, 0x0a /* Public */,
-      11,    1,  120,    2, 0x0a /* Public */,
-      12,    1,  123,    2, 0x0a /* Public */,
-      13,    0,  126,    2, 0x0a /* Public */,
-      14,    0,  127,    2, 0x0a /* Public */,
-      14,    1,  128,    2, 0x0a /* Public */,
-      15,    0,  131,    2, 0x08 /* Private */,
+       1,    1,   84,    2, 0x0a /* Public */,
+       4,    1,   87,    2, 0x0a /* Public */,
+       5,    2,   90,    2, 0x0a /* Public */,
+       8,    1,   95,    2, 0x0a /* Public */,
+       5,    2,   98,    2, 0x0a /* Public */,
+       8,    1,  103,    2, 0x0a /* Public */,
+       5,    3,  106,    2, 0x0a /* Public */,
+       8,    2,  113,    2, 0x0a /* Public */,
+      10,    1,  118,    2, 0x0a /* Public */,
+      11,    1,  121,    2, 0x0a /* Public */,
+      12,    0,  124,    2, 0x0a /* Public */,
+      13,    0,  125,    2, 0x0a /* Public */,
+      13,    1,  126,    2, 0x0a /* Public */,
+      14,    0,  129,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,    3,    4,
-    QMetaType::Void, QMetaType::QString,    4,
-    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::Bool,    7,    8,
-    QMetaType::Void, QMetaType::QJsonObject,    7,
-    QMetaType::Bool, QMetaType::QJsonArray, QMetaType::Bool,    7,    8,
-    QMetaType::Void, QMetaType::QJsonArray,    7,
-    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject, QMetaType::Bool,   10,    7,    8,
-    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject,   10,    7,
-    QMetaType::Void, QMetaType::QJsonObject,   10,
-    QMetaType::Int, QMetaType::QJsonObject,   10,
+    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::Bool,    6,    7,
+    QMetaType::Void, QMetaType::QJsonObject,    6,
+    QMetaType::Bool, QMetaType::QJsonArray, QMetaType::Bool,    6,    7,
+    QMetaType::Void, QMetaType::QJsonArray,    6,
+    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject, QMetaType::Bool,    9,    6,    7,
+    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject,    9,    6,
+    QMetaType::Void, QMetaType::QJsonObject,    9,
+    QMetaType::Int, QMetaType::QJsonObject,    9,
     QMetaType::QString,
     QMetaType::QJsonArray,
-    QMetaType::QJsonArray, QMetaType::QJsonObject,   10,
+    QMetaType::QJsonArray, QMetaType::QJsonObject,    9,
     QMetaType::Void,
 
        0        // eod
@@ -111,7 +110,7 @@ void Favorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<Favorites *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->SetPath((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 0: _t->SetPath((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->SetType((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: { bool _r = _t->AddValue((*reinterpret_cast< QJsonObject(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;

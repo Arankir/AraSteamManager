@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <subform/formachievements.h>
+#include <class/settings.h>
 
 namespace Ui {
 class FormContainerAchievements;
@@ -29,6 +30,7 @@ private slots:
 
 private:
     Ui::FormContainerAchievements *ui;
+    Settings _setting;
 };
 
 #endif // FORMCONTAINERACHIEVEMENTS_H

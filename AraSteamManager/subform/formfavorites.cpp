@@ -33,9 +33,9 @@ void FormFavorites::changeEvent(QEvent *event){
 }
 
 void FormFavorites::InitComponents(){
-    _games.SetPath("Files/Favorites/Games.json","Games");
-    _friends.SetPath("Files/Favorites/Friends.json","Friends");
-    _achievements.SetPath("Files/Favorites/Achievements.json","Achievements");
+    _games.SetPath("games");
+    _friends.SetPath("friends");
+    _achievements.SetPath("achievements");
     QJsonArray gamesJ=_games.GetValues();
     QJsonArray friendsJ=_friends.GetValues();
     QJsonArray achievementsJ=_achievements.GetValues();
@@ -67,7 +67,7 @@ void FormFavorites::InitComponents(){
 }
 
 void FormFavorites::FriendLoad(SProfile *a_profile){
-    QString path = "images/profiles/"+a_profile->GetAvatar().mid(72,20)+".jpg";
+    QString path = _setting._pathImagesProfiles+a_profile->GetAvatar().mid(72,20)+".jpg";
     if(!QFile::exists(path)){
         if(_numRequests<500){
             RequestData *image = new RequestData(a_profile->GetAvatar(),_numRequests,path,true);

@@ -28,7 +28,7 @@ FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) :    QWidget
 }
 void FormGames::InitComponents(){
     _games.Sort();
-    _favorites.SetPath("Files/Favorites/Games.json","Games");
+    _favorites.SetPath("games");
     ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
@@ -80,14 +80,14 @@ void FormGames::OnFinish(){
     ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex,true);
     ui->TableWidgetGames->resizeColumnsToContents();
     QFile fileHide;
-    fileHide.setFileName("Files/Hide/"+_id+".txt");
+    fileHide.setFileName(_setting._pathHide+_id+".txt");
     if(fileHide.open(QIODevice::ReadOnly)){
         while(!fileHide.atEnd()){
             _hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n");
         }
         fileHide.close();
     }
-    fileHide.setFileName("Files/Hide/All.txt");
+    fileHide.setFileName(_setting._pathHide+"All.txt");
     if(fileHide.open(QIODevice::ReadOnly)){
         while(!fileHide.atEnd()){
             _hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n").split("%%").at(0);
@@ -97,7 +97,7 @@ void FormGames::OnFinish(){
     QStringList hideList=_hide;
     _achievements = new SAchievementsPlayer[_games.GetCount()];
     for(int i=0;i<_games.GetCount();i++){
-        QString path = "images/icon_games/"+_games[i].GetImg_icon_url()+".jpg";
+        QString path = _setting._pathImagesIconGames+_games[i].GetImg_icon_url()+".jpg";
         if(!QFile::exists(path)){
             if(_numRequests<500){
                 if(_games[i].GetImg_icon_url()!=""){
@@ -136,12 +136,12 @@ void FormGames::OnImageLoad(RequestData *a_image){
     label->setPixmap(iconGame);
     ui->TableWidgetGames->setCellWidget(a_image->GetRow(),c_tableColumnIcon,label);
     if(_numRequests==500&&_numNow<_games.GetCount()){
-        while (QFile::exists("images/icon_games/"+_games[_numNow].GetImg_icon_url()+".jpg")||_games[_numNow].GetImg_icon_url()=="") {
+        while (QFile::exists(_setting._pathImagesIconGames+_games[_numNow].GetImg_icon_url()+".jpg")||_games[_numNow].GetImg_icon_url()=="") {
             _numNow++;
         }
         a_image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+
                         QString::number(_games[_numNow].GetAppid())+"/"+_games[_numNow].GetImg_icon_url()+".jpg",_numNow,
-                        "images/icon_games/"+_games[_numNow].GetImg_icon_url()+".jpg",true);
+                        _setting._pathImagesIconGames+_games[_numNow].GetImg_icon_url()+".jpg",true);
         _numNow++;
     } else {
         disconnect(a_image,&RequestData::s_finished,this,&FormGames::OnImageLoad);
@@ -338,16 +338,16 @@ void FormGames::on_ButtonHide_clicked(){
     question.addButton(tr("Отмена"),QMessageBox::NoRole);
     question.exec();
     if(question.clickedButton()==btnProfile){
-         savePath="Files/Hide/"+_id+".txt";
+         savePath=_setting._pathHide+_id+".txt";
     } else if(question.clickedButton()==btnAll){
-         savePath="Files/Hide/All.txt";
+         savePath=_setting._pathHide+"All.txt";
     } else return;
 
     _setting.CreateFile(savePath);
     QFile fileHide(savePath);
     fileHide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&fileHide);
-    writeStream <<_games[_selectedIndex.toInt()].GetAppid()<<(savePath=="Files/Hide/All.txt"?"%%"
+    writeStream <<_games[_selectedIndex.toInt()].GetAppid()<<(savePath==_setting._pathHide+"All.txt"?"%%"
                                                             +_games[_selectedIndex.toInt()].GetImg_icon_url()+"%%"
                                                             +_games[_selectedIndex.toInt()].GetName():"")<<"\n";
     fileHide.close();

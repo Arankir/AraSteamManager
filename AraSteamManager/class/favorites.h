@@ -19,7 +19,7 @@ public:
 signals:
 
 public slots:
-    void SetPath(QString path, QString type);
+    void SetPath(QString type);
     void SetType(QString type);
     bool AddValue(QJsonObject newValue, bool deleteIfExist);
     void RemoveValue(QJsonObject newValue);

@@ -70,14 +70,14 @@ void FormSettings::InitComponents(){
     ui->labelIcons8->setText("<html><head/><body><p>Иконки для приложения были предоставлены сайтом <img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"><a href=https://icons8.ru/icons><span style=\" text-decoration: underline; color:#2d7fc8;\"> https://icons8.ru/icons</span></a></p></body></html>");
 
     QFormLayout *layout = new QFormLayout;
-    QDir dirHiddenGames("Files/Hide");
+    QDir dirHiddenGames(_setting._pathHide);
     dirHiddenGames.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     dirHiddenGames.setSorting(QDir::Name);
     if(dirHiddenGames.exists()){
         QPair<QString,QList<QString>> pair;
         pair.first="All";
         pair.second=QList<QString>();
-        if(QFile("Files/Hide/All.txt").exists()){
+        if(QFile(_setting._pathHide+"All.txt").exists()){
             QRadioButtonWithData *allHidden = new QRadioButtonWithData;
             allHidden->setText(tr("Все профили"));
             allHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
@@ -85,7 +85,7 @@ void FormSettings::InitComponents(){
             allHidden->AddData("NumberFileHiddenGame","0");
             connect(allHidden,SIGNAL(clicked()),this,SLOT(RadiobuttonHiddenGamesClicked()));
             layout->addWidget(allHidden);
-            QFile fileHide1("Files/Hide/All.txt");
+            QFile fileHide1(_setting._pathHide+"All.txt");
             if(fileHide1.open(QIODevice::ReadOnly)){
                 while(!fileHide1.atEnd())
                     pair.second << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
@@ -108,7 +108,7 @@ void FormSettings::InitComponents(){
                 profileHidden->AddData("NumberFileHiddenGame",QString::number(i+1));
                 connect(profileHidden,SIGNAL(clicked()),this,SLOT(RadiobuttonHiddenGamesClicked()));
                 layout->addWidget(profileHidden);
-                QFile fileHide2("Files/Hide/"+list.at(i).fileName());
+                QFile fileHide2(_setting._pathHide+list.at(i).fileName());
                 if(fileHide2.open(QIODevice::ReadOnly)){
                     while(!fileHide2.atEnd())
                         hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
@@ -185,7 +185,7 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
         for (int i=0;i<games.GetCount();i++) {
             if(_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i].GetAppid()))>-1){
                 int setTo=_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i].GetAppid()));
-                QString path = "images/icon_games/"+games[i].GetImg_icon_url()+".jpg";
+                QString path = _setting._pathImagesIconGames+games[i].GetImg_icon_url()+".jpg";
                 if(!QFile::exists(path)){
                     if(games[i].GetImg_icon_url()!=""){
                         RequestData *image = new RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
@@ -224,7 +224,7 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
         //list[2]=_games[gamei].GetName()
         for (int i=0;i<_hiddenGames[indexHiddenGame].second.size();i++) {
             QStringList list = _hiddenGames[indexHiddenGame].second[i].split("%%");
-            QString path = "images/icon_games/"+list[1]+".jpg";
+            QString path = _setting._pathImagesIconGames+list[1]+".jpg";
             if(!QFile::exists(path)){
                 if(list[1]!=""){
                     RequestData *image = new RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
@@ -291,7 +291,7 @@ void FormSettings::HideClicked(){
     QString save=_hiddenGames[index].first+".txt";
     _hiddenGames[index].second.removeAt(gameIndex);
     ui->TableWidgetGames->removeRow(gameIndex);
-    QFile fileSaveTo("Files/Hide/"+_hiddenGames[index].first+".txt");
+    QFile fileSaveTo(_setting._pathHide+_hiddenGames[index].first+".txt");
     fileSaveTo.open(QIODevice::WriteOnly| QIODevice::Text);
     QTextStream writeStream(&fileSaveTo);
     foreach(QString game, _hiddenGames[index].second){

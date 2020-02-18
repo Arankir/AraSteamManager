@@ -2,8 +2,8 @@
 
 CategoriesGame::CategoriesGame(SGame a_game, QObject *parent) : QObject(parent){
     _game=a_game;
-    _setting.CreateFile("Files/Categories/"+QString::number(a_game.GetAppid()));
-    QDir categoriesOld("Files/Categories/"+QString::number(a_game.GetAppid()));
+    _setting.CreateFile(_setting._pathCategories+QString::number(a_game.GetAppid()));
+    QDir categoriesOld(_setting._pathCategories+QString::number(a_game.GetAppid()));
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     categoriesOld.setSorting(QDir::Name);
     if(categoriesOld.exists()){
@@ -14,7 +14,7 @@ CategoriesGame::CategoriesGame(SGame a_game, QObject *parent) : QObject(parent){
         finalNew["GameID"]=a_game.GetAppid();
         QFileInfoList list = categoriesOld.entryInfoList();
         for (int i=0;i<list.size();++i){
-            QFile fileCategoryOld("Files/Categories/"+QString::number(a_game.GetAppid())+"/"+list.at(i).fileName());
+            QFile fileCategoryOld(_setting._pathCategories+QString::number(a_game.GetAppid())+"/"+list.at(i).fileName());
             fileCategoryOld.open(QFile::ReadOnly);
             QJsonDocument categoryOld=QJsonDocument().fromJson(fileCategoryOld.readAll());
 
@@ -48,14 +48,14 @@ CategoriesGame::CategoriesGame(SGame a_game, QObject *parent) : QObject(parent){
             }
         finalNew["Categories"]=categoriesNew;
         categoriesGameNew.setObject(finalNew);
-        QFile fileCategoryNew("Files/Categories/"+QString::number(a_game.GetAppid())+".json");
+        QFile fileCategoryNew(_setting._pathCategories+QString::number(a_game.GetAppid())+".json");
         fileCategoryNew.open(QFile::WriteOnly);
         fileCategoryNew.write(categoriesGameNew.toJson());
         fileCategoryNew.close();
         categoriesOld.removeRecursively();
     }
 
-    QFile fileCategory("Files/Categories/"+QString::number(a_game.GetAppid())+".json");
+    QFile fileCategory(_setting._pathCategories+QString::number(a_game.GetAppid())+".json");
     if(fileCategory.exists()){
         if(fileCategory.open(QFile::ReadOnly)){
             _categories=QJsonDocument().fromJson(fileCategory.readAll()).object();
@@ -102,7 +102,7 @@ int CategoriesGame::GetGameID(){
 }
 void CategoriesGame::Set(SGame a_game){
     _game=a_game;
-    QDir categoriesOld("Files/Categories/"+QString::number(a_game.GetAppid()));
+    QDir categoriesOld(_setting._pathCategories+QString::number(a_game.GetAppid()));
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     categoriesOld.setSorting(QDir::Name);
     if(categoriesOld.exists()){
@@ -113,7 +113,7 @@ void CategoriesGame::Set(SGame a_game){
         finalNew["GameID"]=a_game.GetAppid();
         QFileInfoList list = categoriesOld.entryInfoList();
         for (int i=0;i<list.size();++i){
-            QFile fileCategoryOld("Files/Categories/"+QString::number(a_game.GetAppid())+"/"+list.at(i).fileName());
+            QFile fileCategoryOld(_setting._pathCategories+QString::number(a_game.GetAppid())+"/"+list.at(i).fileName());
             fileCategoryOld.open(QFile::ReadOnly);
             QJsonDocument categoryOld=QJsonDocument().fromJson(fileCategoryOld.readAll());
 
@@ -147,14 +147,14 @@ void CategoriesGame::Set(SGame a_game){
             }
         finalNew["Categories"]=categoriesNew;
         categoriesGameNew.setObject(finalNew);
-        QFile fileCategoryNew("Files/Categories/"+QString::number(a_game.GetAppid())+".json");
+        QFile fileCategoryNew(_setting._pathCategories+QString::number(a_game.GetAppid())+".json");
         fileCategoryNew.open(QFile::WriteOnly);
         fileCategoryNew.write(categoriesGameNew.toJson());
         fileCategoryNew.close();
         categoriesOld.removeRecursively();
     }
 
-    QFile fileCategory("Files/Categories/"+QString::number(a_game.GetAppid())+".json");
+    QFile fileCategory(_setting._pathCategories+QString::number(a_game.GetAppid())+".json");
     if(fileCategory.exists()){
         if(fileCategory.open(QFile::ReadOnly)){
             _categories=QJsonDocument().fromJson(fileCategory.readAll()).object();
@@ -164,8 +164,8 @@ void CategoriesGame::Set(SGame a_game){
 }
 
 void CategoriesGame::Save(){
-    _setting.CreateFile("Files/Categories/");
-    QFile fileCategoryNew("Files/Categories/"+QString::number(_game.GetAppid())+".json");
+    _setting.CreateFile(_setting._pathCategories);
+    QFile fileCategoryNew(_setting._pathCategories+QString::number(_game.GetAppid())+".json");
     fileCategoryNew.open(QFile::WriteOnly);
     QJsonDocument doc;
     doc.setObject(_categories);

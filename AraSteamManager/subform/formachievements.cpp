@@ -217,8 +217,8 @@ void FormAchievements::InitComponents(){
     pbFriendsReachedAchievements->setIcon(QIcon("://"+_theme+"/reached.png"));
     pbFriendsNotReachedAchievements->setIcon(QIcon("://"+_theme+"/notreached.png"));
     #define SetIconEnd }
-    _favorites.SetPath("Files/Favorites/Achievements.json","Achievements");
-    _setting.CreateFile("images/achievements/"+QString::number(_game.GetAppid()));
+    _favorites.SetPath("achievements");
+    _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game.GetAppid()));
     _categoriesGame.Set(_game);
     ui->LabelGameLogo->setPixmap(RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
                                              QString::number(_game.GetAppid())+"/"+_game.GetImg_logo_url()+".jpg",false).GetPixmap());
@@ -304,7 +304,7 @@ void FormAchievements::OnFinish(){
     ui->TableWidgetAchievements->resizeRowsToContents();
     for (int i=0;i<_achievements.GetCount();i++) {
             QString achievementIcon=_achievements[i].GetIcon().mid(66,_achievements[i].GetIcon().length());
-            QString pathImage="images/achievements/"+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
+            QString pathImage=_setting._pathImagesAchievements+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
             if(_achievements[i].GetDisplayname()!=""){
                 if(!QFile::exists(pathImage)){
                     if(_numRequests<500){
@@ -339,7 +339,7 @@ void FormAchievements::OnImageLoaded(RequestData *a_image){
     ui->TableWidgetAchievements->resizeRowToContents(a_image->GetRow());
     if(_numRequests==500&&_numNow<_achievements.GetCount()){
         QString achievementIcon=_achievements[_numNow].GetIcon().mid(66,_achievements[_numNow].GetIcon().length());
-        QString pathImage="images/achievements/"+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
+        QString pathImage=_setting._pathImagesAchievements+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
         while (QFile::exists(pathImage))
             _numNow++;
         a_image->LoadImage(_achievements[_numNow].GetIcon(),_numNow,pathImage,true);

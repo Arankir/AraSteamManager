@@ -177,9 +177,9 @@ void FormProfile::ProfileToUi(SProfile a_profile){
         break;
     }
     }
-    ui->LabelProfileStatus->setPixmap(profileState.scaled(13,13));
-    ui->LabelGamesStatus->setPixmap(gamesState.scaled(13,13));
-    ui->LabelFriendsStatus->setPixmap(friendsState.scaled(13,13));
+    ui->LabelProfileStatus->setPixmap(profileState.scaled(14,14));
+    ui->LabelGamesStatus->setPixmap(gamesState.scaled(14,14));
+    ui->LabelFriendsStatus->setPixmap(friendsState.scaled(14,14));
     if(bans.GetVACBanned()){
         ui->LabelBansNotNone->setText(QString::number(bans.GetNumberOfVACBans()));
         ui->LabelBansDays->setText(QString::number(bans.GetDaysSinceLastBan()));

@@ -38,7 +38,7 @@ FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) :   
     ui->LineEditName->setFocus();
 }
 void FormFriends::InitComponents(){
-    _favorites.SetPath("Files/Favorites/Friends.json","Friends");
+    _favorites.SetPath("friends");
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnID,new QTableWidgetItem(""));
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
@@ -83,7 +83,7 @@ void FormFriends::ProgressLoading(int a_progress,int a_row){
 void FormFriends::OnFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
     for (int i=0;i<_friends.GetCount();i++) {
-        QString path = "images/profiles/"+_profiles[i].GetAvatar().mid(72,20)+".jpg";
+        QString path = _setting._pathImagesProfiles+_profiles[i].GetAvatar().mid(72,20)+".jpg";
         if(!QFile::exists(path)){
             if(_numRequests<500){
                 RequestData *image = new RequestData(_profiles[i].GetAvatar(),i,path,true);
@@ -106,7 +106,7 @@ void FormFriends::OnImageLoad(RequestData *a_image){
     label->setPixmap(pixmap);
     ui->TableWidgetFriends->setCellWidget(a_image->GetRow(),c_tableColumnIcon,label);
     if(_numRequests==500&&_numNow<_friends.GetCount()){
-        a_image->LoadImage(_profiles[_numNow].GetAvatar(),_numNow,"images/profiles/"+_profiles[_numNow].GetAvatar().mid(72,20)+".jpg",true);
+        a_image->LoadImage(_profiles[_numNow].GetAvatar(),_numNow,_setting._pathImagesProfiles+_profiles[_numNow].GetAvatar().mid(72,20)+".jpg",true);
         _numNow++;
     } else {
         disconnect(a_image,&RequestData::s_finished,this,&FormFriends::OnImageLoad);

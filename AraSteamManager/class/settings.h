@@ -196,6 +196,13 @@ public:
     QString GetKey() {return _key;}
     bool CreateFile(QString path);
     bool LoadSettings();
+    const QString _pathSettings="files/settings.txt";
+    const QString _pathImagesAchievements="images/achievements/";// /номер игры/url.jpg
+    const QString _pathImagesIconGames="images/icon_games/";// /url.jpg
+    const QString _pathImagesProfiles="images/profiles/";// /url.jpg
+    const QString _pathCategories="files/categories/";// /номер игры.json
+    const QString _pathFavorites="files/favorites/";// /тип.json
+    const QString _pathHide="files/hide/";// /номер игры.json
 
 signals:
 
