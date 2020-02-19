@@ -1317,6 +1317,7 @@ void FormAchievements::on_FormCategoryPositionChange(int a_pos, int a_posNew){
 
         std::swap(_values[a_pos],_values[a_posNew]);
         //ui->ListWidgetValuesCategory->clear();
+        //исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for (int i=0;i<_values.size();i++) {
             qDebug()<<i;
             ui->ListWidgetValuesCategory->removeItemWidget(ui->ListWidgetValuesCategory->item(i));

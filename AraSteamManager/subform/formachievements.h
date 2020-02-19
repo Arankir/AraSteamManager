@@ -127,6 +127,7 @@ private slots:
     void on_ComboBoxCategoriesCategory_activated(int index);
     void on_CheckBoxCategoryVisibleAll_clicked();
 
+    void UpdateValuesUpDown(int value=-1);
     void on_FormCategoryValueChange(int pos, QString value);
     void on_FormCategoryVisibleChange(int pos, bool visible);
     void on_FormCategoryPositionChange(int pos, int newpos);
