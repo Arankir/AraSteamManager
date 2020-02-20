@@ -180,19 +180,19 @@ public:
     ~SAchievementsPlayer();
     void Set(QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
-    void SetIndex(int ANewIndex) {_index=ANewIndex;}
     void Delete(int AIndex) { _achievements.remove(AIndex);}
     QString GetAppid() {return _appid;}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
     QString GetGamename() {return _gameName;}
     int GetCount() {return _achievements.size();}
-    int GetIndex() {return _index;}
     void Update();
     void Clear();
     SAchievementsPlayer(const SAchievementsPlayer &);
     SAchievementsPlayer &operator=(const SAchievementsPlayer & friends);
     SAchievementPlayer &operator[](const int &Aindex);
+
+    int _index=0;
 
 signals:
     void s_finished(SAchievementsPlayer);
@@ -210,7 +210,6 @@ private:
     QString _id="";
     QString _appid="";
     QString _gameName="";
-    int _index=0;
 };
 
 class SAchievement : public QObject
@@ -274,7 +273,6 @@ public:
     ~SAchievements() {};
     void Set(QString appid, QString id);
     void Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
-    void SetIDs(QString Aappid, QString Aid);
     void SetFinish();
     StatusValue GetStatusGlobal() {return _statusGlobal;}
     StatusValue GetStatusPlayer() {return _statusPlayer;}
@@ -294,6 +292,9 @@ public:
     SAchievements(const SAchievements &);
     SAchievements &operator=(const SAchievements & friends);
     SAchievement &operator[](const int &Aindex);
+
+    QString _id="";
+    QString _appid="";
 
 signals:
     void s_finished(SAchievements*);
@@ -317,8 +318,6 @@ private:
     QString _errorPlayer="";
     QString _errorPercent="";
     QString _errorFinish="";
-    QString _id="";
-    QString _appid="";
     QString _gameName="";
     QString _gameVersion="";
 };

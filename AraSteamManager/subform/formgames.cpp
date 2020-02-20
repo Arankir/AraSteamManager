@@ -28,7 +28,7 @@ FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) :    QWidget
 }
 void FormGames::InitComponents(){
     _games.Sort();
-    _favorites.SetPath("games");
+    _favorites.SetType("games");
     ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
@@ -115,7 +115,7 @@ void FormGames::OnFinish(){
             ui->TableWidgetGames->setCellWidget(i,c_tableColumnIcon,iconGame);
             }
         SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(_games[i].GetAppid()),_id);
-        achievementsGame->SetIndex(i);
+        achievementsGame->_index=i;
         connect(achievementsGame,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         for (int j=0;j<hideList.size();j++) {
             if(hideList[j].toInt()==_games[i].GetAppid()){
@@ -150,7 +150,7 @@ void FormGames::OnImageLoad(RequestData *a_image){
 }
 void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     disconnect(&a_achievements,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
-    QProgressBar *progressBarAchievements = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_achievements.GetIndex(),c_tableColumnProgress));
+    QProgressBar *progressBarAchievements = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_achievements._index,c_tableColumnProgress));
     progressBarAchievements->setMaximum(a_achievements.GetCount());
     progressBarAchievements->setMinimumSize(QSize(25,25));
     if(a_achievements.GetCount()>0){
@@ -164,8 +164,8 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
         progressBarAchievements->setValue(0);
         //static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_achievements.GetIndex(),c_tableColumnProgress))->setEnabled(false);
     }
-    ui->TableWidgetGames->setItem(a_achievements.GetIndex(),c_tableColumnProgress,new QTableWidgetItem(progressBarAchievements->text().rightJustified(4,'0')));
-    _achievements[a_achievements.GetIndex()]=a_achievements;
+    ui->TableWidgetGames->setItem(a_achievements._index,c_tableColumnProgress,new QTableWidgetItem(progressBarAchievements->text().rightJustified(4,'0')));
+    _achievements[a_achievements._index]=a_achievements;
     emit s_achievementsLoaded(_load++,0);
     if(_load==_games.GetCount()){
         on_TableWidgetGames_cellClicked(0,1);
@@ -179,9 +179,6 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
 FormGames::~FormGames(){
     qDebug()<<_numRequests<<"запросов на картинки";
     delete [] _achievements;
-    //for (int i=0;i<=numrequests;i++) {
-    //    delete request[numrequests];
-    //}
     delete ui;
 }
 void FormGames::changeEvent(QEvent *event){

@@ -55,10 +55,8 @@ public:
     ~SGames();
     void Set(QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
-    void SetIndex(int Aindex) {_index=Aindex;}
     int GetAppid(int index) {return _games[index].GetAppid();}
     QString GetID() {return _id;}
-    int GetIndex() {return _index;}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
     int GetCount() {return _games.size();}
@@ -68,6 +66,8 @@ public:
     SGames( const SGames & a);
     SGames & operator=(const SGames &games);
     SGame &operator[](const int &index);
+
+    int _index=-1;
 
 signals:
     void s_finished(SGames*);
@@ -83,7 +83,6 @@ private:
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _id;
-    int _index=-1;
     bool _free_games=false;
     bool _game_info=false;
 };

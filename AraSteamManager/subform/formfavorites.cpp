@@ -33,9 +33,9 @@ void FormFavorites::changeEvent(QEvent *event){
 }
 
 void FormFavorites::InitComponents(){
-    _games.SetPath("games");
-    _friends.SetPath("friends");
-    _achievements.SetPath("achievements");
+    _games.SetType("games");
+    _friends.SetType("friends");
+    _achievements.SetType("achievements");
     QJsonArray gamesJ=_games.GetValues();
     QJsonArray friendsJ=_friends.GetValues();
     QJsonArray achievementsJ=_achievements.GetValues();

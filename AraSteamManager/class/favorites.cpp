@@ -35,7 +35,7 @@ QJsonArray Favorites::GetValues(QJsonObject a_game){
             return _favorites.value("Values").toArray().at(i).toObject().value("Values").toArray();
     return QJsonArray();
 }
-void Favorites::SetPath(QString a_type){
+void Favorites::SetType(QString a_type){
     _path=_setting._pathFavorites+a_type+".json";
     _setting.CreateFile(_path);
     if(!QFile::exists(_path)){
@@ -53,14 +53,6 @@ void Favorites::SetPath(QString a_type){
             file.close();
         }
     }
-}
-void Favorites::SetType(QString a_type){
-    _setting.CreateFile(_path);
-    QJsonObject obj;
-    obj["Type"]=a_type;
-    obj["Values"]=_favorites.value("Values");
-    _favorites=obj;
-    Save();
 }
 
 bool Favorites::AddValue(QJsonObject a_newValue, bool a_deleteIfExist){

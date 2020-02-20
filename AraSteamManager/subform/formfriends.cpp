@@ -38,7 +38,7 @@ FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) :   
     ui->LineEditName->setFocus();
 }
 void FormFriends::InitComponents(){
-    _favorites.SetPath("friends");
+    _favorites.SetType("friends");
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnID,new QTableWidgetItem(""));
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));

@@ -31,7 +31,6 @@ public:
     ~SProfile();
     void Set(QString id, bool parallel, QueryType type);
     void Set(QJsonObject ObjSummaries);
-    void SetUnicIndex(int AUnicIndex) {_unicIndex=AUnicIndex;}
     QString GetSteamid() {return _profile.value("steamid").toString();}
     int GetCommunityvisibilitystate() {return _profile.value("communityvisibilitystate").toInt();}
     int GetProfilestate() {return _profile.value("profilestate").toInt();}
@@ -54,13 +53,14 @@ public:
     QString GetRealname() {return _profile.value("realname").toString();}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
-    int GetUnicIndex() {return _unicIndex;}
     int GetCount() {return _profile.size();}
     void Update(bool parallel);
     void Clear();
     SProfile( const SProfile & a);
     SProfile & operator=(const SProfile & profile);
     const bool &operator<(const SProfile & profile);
+
+    int _unicIndex=-1;
 
 signals:
     void s_finished(SProfile*);
@@ -77,7 +77,6 @@ private:
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _id="";
-    int _unicIndex=-1;
 };
 
 class SProfiles : public QObject

@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -58,9 +59,11 @@ public:
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
     QScrollArea *ScrollAreaCategories;
-    QWidget *scrollAreaWidgetContents;
+    QWidget *widget;
+    QFormLayout *layoutComboBoxCategories;
     QScrollArea *ScrollAreaCheckCategories;
-    QWidget *scrollAreaWidgetContents_4;
+    QWidget *widget_2;
+    QFormLayout *layoutCheckBoxCategories;
     QVBoxLayout *verticalLayout_4;
     QGroupBox *GroupBoxReachedFilter;
     QVBoxLayout *verticalLayout_3;
@@ -263,10 +266,12 @@ public:
         ScrollAreaCategories->setSizePolicy(sizePolicy3);
         ScrollAreaCategories->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         ScrollAreaCategories->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 239, 109));
-        ScrollAreaCategories->setWidget(scrollAreaWidgetContents);
+        widget = new QWidget();
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(0, 0, 239, 109));
+        layoutComboBoxCategories = new QFormLayout(widget);
+        layoutComboBoxCategories->setObjectName(QString::fromUtf8("layoutComboBoxCategories"));
+        ScrollAreaCategories->setWidget(widget);
 
         horizontalLayout->addWidget(ScrollAreaCategories);
 
@@ -276,10 +281,12 @@ public:
         ScrollAreaCheckCategories->setSizePolicy(sizePolicy3);
         ScrollAreaCheckCategories->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         ScrollAreaCheckCategories->setWidgetResizable(true);
-        scrollAreaWidgetContents_4 = new QWidget();
-        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 238, 109));
-        ScrollAreaCheckCategories->setWidget(scrollAreaWidgetContents_4);
+        widget_2 = new QWidget();
+        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        widget_2->setGeometry(QRect(0, 0, 238, 109));
+        layoutCheckBoxCategories = new QFormLayout(widget_2);
+        layoutCheckBoxCategories->setObjectName(QString::fromUtf8("layoutCheckBoxCategories"));
+        ScrollAreaCheckCategories->setWidget(widget_2);
 
         horizontalLayout->addWidget(ScrollAreaCheckCategories);
 

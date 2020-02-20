@@ -217,7 +217,7 @@ void FormAchievements::InitComponents(){
     pbFriendsReachedAchievements->setIcon(QIcon("://"+_theme+"/reached.png"));
     pbFriendsNotReachedAchievements->setIcon(QIcon("://"+_theme+"/notreached.png"));
     #define SetIconEnd }
-    _favorites.SetPath("achievements");
+    _favorites.SetType("achievements");
     _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game.GetAppid()));
     _categoriesGame.Set(_game);
     ui->LabelGameLogo->setPixmap(RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
@@ -228,7 +228,8 @@ void FormAchievements::InitComponents(){
     ui->LabelGameOnlineValue->setText(_game.GetNumberPlayers(false));
     ui->LabelGameTitle->setText(_game.GetName());
     ui->GroupBoxFilter->setEnabled(false);
-    _achievements.SetIDs(QString::number(_game.GetAppid()),_id);
+    _achievements._appid=QString::number(_game.GetAppid());
+    _achievements._id=_id;
     _achievements.Set(SAchievementsPercentage(QString::number(_game.GetAppid()),false));
     connect(&_achievements,SIGNAL(s_finished()),this,SLOT(PullTableWidget()));
     Retranslate();
@@ -422,7 +423,7 @@ void FormAchievements::LoadingCompare(){
 
     for (int i=0;i<_profilesFriends.GetCount();i++) {
         SGames *gamesFriend = new SGames;
-        gamesFriend->SetIndex(i);
+        gamesFriend->_index=i;
         gamesFriend->Set(_profilesFriends[i].GetSteamid(),true,true,true);
         connect(gamesFriend,SIGNAL(s_finished(SGames*)),this,SLOT(LoadFriendGames(SGames*)));
     }
@@ -437,7 +438,7 @@ void FormAchievements::LoadFriendGames(SGames *a_games){
         }
     }
     QPair<SProfile,FriendType> friendState;
-    friendState.first=_profilesFriends[a_games->GetIndex()];
+    friendState.first=_profilesFriends[a_games->_index];
     if(isGameExist){
         friendState.second=FriendType::haveGame;
         _type1++;
@@ -673,6 +674,8 @@ void FormAchievements::ShowCategories(bool a_saveDate){
 
     CategoriesGame oldCategories=_categoriesGame;
     _categoriesGame.Set(_game);
+    QFormLayout *layoutComboBox = ui->layoutComboBoxCategories;
+    QFormLayout *layoutCheckBox = ui->layoutCheckBoxCategories;
     if(a_saveDate){
         while(ui->ComboBoxCategoriesCategory->count()>1){
             ui->ComboBoxCategoriesCategory->removeItem(1);
@@ -688,7 +691,7 @@ void FormAchievements::ShowCategories(bool a_saveDate){
                     checkBoxCategoryNew->AddData("NumberCategory",QString::number(i));
                     connect(checkBoxCategoryNew,&QCheckBoxWithData::stateChanged,this,&FormAchievements::on_CheckBoxCategory_Change);
                     checkBoxCategoryNew->setCheckState(checked?Qt::Checked:Qt::Unchecked);
-                    static_cast<QFormLayout*>(ui->ScrollAreaCheckCategories->layout())->addRow(checkBoxCategoryNew);
+                    layoutCheckBox->addRow(checkBoxCategoryNew);
                 }
             } else {
                 QComboBoxWithData *comboBoxCategory = findChild<QComboBoxWithData*>("ComboBoxCategory"+QString::number(i));
@@ -701,7 +704,7 @@ void FormAchievements::ShowCategories(bool a_saveDate){
                 }
                 if(!isEqual){
                     int currentIndex=comboBoxCategory->currentIndex();
-                    delete comboBoxCategory;
+                    layoutComboBox->removeRow(comboBoxCategory);
 
                     QComboBoxWithData *comboBoxCategoryNew = new QComboBoxWithData;
                     comboBoxCategoryNew->addItem(tr("Не выбрано"));
@@ -713,7 +716,7 @@ void FormAchievements::ShowCategories(bool a_saveDate){
                     comboBoxCategoryNew->AddData("NumberCategory",QString::number(i));
                     connect(comboBoxCategoryNew,SIGNAL(currentIndexChanged(int)),this,SLOT(on_ComboBoxCategory_Change(int)));
                     comboBoxCategoryNew->setCurrentIndex(currentIndex);
-                    static_cast<QFormLayout*>(ui->ScrollAreaCategories->layout())->addRow(new QLabel(_categoriesGame.GetTitle(i)),comboBoxCategoryNew);
+                    layoutComboBox->addRow(new QLabel(_categoriesGame.GetTitle(i)),comboBoxCategoryNew);
                 }
             }
             ui->ComboBoxCategoriesCategory->addItem(_categoriesGame.GetTitle(i));
@@ -722,8 +725,6 @@ void FormAchievements::ShowCategories(bool a_saveDate){
         while(ui->ComboBoxCategoriesCategory->count()>1){
             ui->ComboBoxCategoriesCategory->removeItem(1);
         }
-        QFormLayout *layoutComboBox = new QFormLayout;
-        QFormLayout *layoutCheckBox = new QFormLayout;
         for(int i=0; i<_categoriesGame.GetCount(); i++){
             if(_categoriesGame.GetIsNoValues(i)==1){
                 QCheckBoxWithData *checkBoxCategory = new QCheckBoxWithData(_categoriesGame.GetTitle(i));
@@ -745,12 +746,10 @@ void FormAchievements::ShowCategories(bool a_saveDate){
             }
             ui->ComboBoxCategoriesCategory->addItem(_categoriesGame.GetTitle(i));
             }
-        ui->ScrollAreaCategories->setLayout(layoutComboBox);
-        ui->ScrollAreaCheckCategories->setLayout(layoutCheckBox);
     }
 
-    ui->ScrollAreaCategories->setHidden(static_cast<QFormLayout*>(ui->ScrollAreaCategories->layout())->rowCount()==0);
-    ui->ScrollAreaCheckCategories->setHidden(static_cast<QFormLayout*>(ui->ScrollAreaCheckCategories->layout())->rowCount()==0);
+    ui->ScrollAreaCategories->setHidden(layoutComboBox->rowCount()==0);
+    ui->ScrollAreaCheckCategories->setHidden(layoutCheckBox->rowCount()==0);
     ui->ButtonChangeCategory->setEnabled(_categoriesGame.GetCount()!=0);
     ui->ButtonDeleteAllCategories->setEnabled(_categoriesGame.GetCount()!=0);
 
@@ -1100,7 +1099,7 @@ void FormAchievements::on_ButtonAcceptCategory_clicked(){
                         noValuesNew.append(ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text());
                         }
                     }
-                for(int i=c_tableCategoryColumnNoValue+1;i<ui->TableWidgetAchievements->columnCount();i++){
+                for(int i=c_tableCategoryColumnNoValue+1;i<ui->TableWidgetCategory->columnCount();i++){
                     QJsonObject valueNew;
                     valueNew["Title"]=ui->TableWidgetCategory->horizontalHeaderItem(i)->text();
                     QJsonArray achievementsNew;
@@ -1198,6 +1197,7 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
         if(_categoriesGame.GetCount()>0){
             ui->LineEditTitleCategory->setText(ui->ComboBoxCategoriesCategory->itemText(a_index));
             ui->ListWidgetValuesCategory->clear();
+            ui->TableWidgetCategory->setVisible(true);
             ui->TableWidgetCategory->setColumnCount(c_tableCategoryColumnNoValue+1);
             if(a_index!=0){
                 ui->ButtonAddValueCategory->setEnabled(true);
@@ -1230,7 +1230,8 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
                         itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
                         bool isAchievementCheck=true;
                         for (int k=0;k<valuesTitles[i].toObject().value("Achievements").toArray().size();k++) {
-                            if(ui->TableWidgetCategory->item(j,c_tableAchievementColumnAppid)->text()==valuesTitles[i].toObject().value("Achievements").toArray().at(k).toString()){
+                            qDebug()<<ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()<<valuesTitles[i].toObject().value("Achievements").toArray().at(k).toString();
+                            if(ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()==valuesTitles[i].toObject().value("Achievements").toArray().at(k).toString()){
                                 isAchievementCheck=false;
                                 break;
                             }
@@ -1317,6 +1318,7 @@ void FormAchievements::on_FormCategoryPositionChange(int a_pos, int a_posNew){
 
         std::swap(_values[a_pos],_values[a_posNew]);
         //ui->ListWidgetValuesCategory->clear();
+        //исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for (int i=0;i<_values.size();i++) {
             qDebug()<<i;
             ui->ListWidgetValuesCategory->removeItemWidget(ui->ListWidgetValuesCategory->item(i));

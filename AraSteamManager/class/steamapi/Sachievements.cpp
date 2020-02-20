@@ -523,10 +523,6 @@ void SAchievements::Set(QString a_appid, QString a_id){
     SAchievementsPercentage *Percent = new SAchievementsPercentage(a_appid);
     connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-void SAchievements::SetIDs(QString a_appid, QString a_id){
-    _appid=a_appid;
-    _id=a_id;
-}
 void SAchievements::Set(SAchievementsGlobal a_global, SAchievementsPlayer a_player, SAchievementsPercentage a_percent){
     Set(a_percent);
     Set(a_global);
