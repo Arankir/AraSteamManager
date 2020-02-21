@@ -592,9 +592,11 @@ void SAchievements::Clear(){
 }
 void SAchievements::Sort(){
     //Переделать нормально
-    std::list<SAchievement> list = _finish.toList().toStdList();
+    //std::list<SAchievement> list = _finish.toList().toStdList();
+    std::list<SAchievement> list(_finish.toList().begin(),_finish.toList().end());
     list.sort();
-    _finish=QVector<SAchievement>::fromList(QList<SAchievement>::fromStdList(list));
+    _finish=QVector<SAchievement>(list.begin(),list.end());
+    //_finish=QVector<SAchievement>::fromList(QList<SAchievement>::fromStdList(list));
 }
 SAchievements::SAchievements(const SAchievements & a_newAchievements){
     _finish=a_newAchievements._finish;

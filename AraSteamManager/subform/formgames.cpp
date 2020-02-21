@@ -221,10 +221,9 @@ void FormGames::showHideSlideWidget(bool a_flag){
     //connect(_animate,QPropertyAnimations::, ui->FrameGroup->setVisible(!a_flag));
 }
 void FormGames::mouseMoveEvent(QMouseEvent *ev){
-    qDebug()<<ev->pos().x()<<ev->pos().y();
     if (ev->pos().x() < 50)
     {
-        qDebug()<<1;
+        qDebug()<<1<<ev->pos().x()<<ev->pos().y();
         if (!ui->FrameGroup->isVisible()){
             ui->FrameGroup->show();
             showHideSlideWidget(true);
@@ -232,7 +231,7 @@ void FormGames::mouseMoveEvent(QMouseEvent *ev){
     }
     else
     {
-        qDebug()<<2;
+        qDebug()<<2<<ev->pos().x()<<ev->pos().y();
         if (ui->FrameGroup->isVisible())
             showHideSlideWidget(false);
     }

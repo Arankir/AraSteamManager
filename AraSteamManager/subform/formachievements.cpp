@@ -671,7 +671,6 @@ void FormAchievements::changeEvent(QEvent *event){
     }
 }
 void FormAchievements::ShowCategories(bool a_saveDate){
-
     CategoriesGame oldCategories=_categoriesGame;
     _categoriesGame.Set(_game);
     QFormLayout *layoutComboBox = ui->layoutComboBoxCategories;
@@ -1230,7 +1229,6 @@ void FormAchievements::on_ComboBoxCategoriesCategory_activated(int a_index){
                         itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
                         bool isAchievementCheck=true;
                         for (int k=0;k<valuesTitles[i].toObject().value("Achievements").toArray().size();k++) {
-                            qDebug()<<ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()<<valuesTitles[i].toObject().value("Achievements").toArray().at(k).toString();
                             if(ui->TableWidgetAchievements->item(j,c_tableAchievementColumnAppid)->text()==valuesTitles[i].toObject().value("Achievements").toArray().at(k).toString()){
                                 isAchievementCheck=false;
                                 break;
@@ -1316,16 +1314,20 @@ void FormAchievements::on_FormCategoryPositionChange(int a_pos, int a_posNew){
                     ui->TableWidgetCategory->horizontalHeaderItem((c_tableCategoryColumnNoValue+1)+a_posNew)->text());
         ui->TableWidgetCategory->horizontalHeaderItem((c_tableCategoryColumnNoValue+1)+a_posNew)->setText(tempHorisontalHeader);
 
+        ui->ListWidgetValuesCategory->blockSignals(true);
         std::swap(_values[a_pos],_values[a_posNew]);
-        //ui->ListWidgetValuesCategory->clear();
+        ui->ListWidgetValuesCategory->clear();
         //исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         for (int i=0;i<_values.size();i++) {
-            qDebug()<<i;
-            ui->ListWidgetValuesCategory->removeItemWidget(ui->ListWidgetValuesCategory->item(i));
+            QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);//ui->ListWidgetValuesCategory->takeItem(0);
+            ui->ListWidgetValuesCategory->removeItemWidget(item);
+            item->setSizeHint(_values[i]->sizeHint());
             _values[i]->SetPosition(i);
             UpdateValuesUpDown(i);
-            ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(i),_values[i]);
+            ui->ListWidgetValuesCategory->setItemWidget(item,_values[i]);
+            qDebug()<<i<<item;
         }
+        //ui->ListWidgetValuesCategory->blockSignals(false);
     }
 }
 void FormAchievements::on_FormCategorySelectChange(int a_pos, bool a_select){
@@ -1348,6 +1350,7 @@ void FormAchievements::on_FormCategoryDeleting(int a_pos){
     ui->TableWidgetCategory->removeColumn((c_tableCategoryColumnNoValue+1)+a_pos);
     QListWidgetItem* item = ui->ListWidgetValuesCategory->item(a_pos);
     ui->ListWidgetValuesCategory->removeItemWidget(item);
+    delete item;
     _values.remove(a_pos);
     for (int i=0;i<_values.size();i++) {
         _values[i]->SetPosition(i);
