@@ -16,42 +16,36 @@
   <widget class="QTableWidget" name="TableWidgetHollow">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>256</width>
-     <height>192</height>
+     <x>10</x>
+     <y>10</y>
+     <width>131</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="rowCount">
-    <number>3</number>
+    <number>1</number>
    </property>
    <property name="columnCount">
-    <number>3</number>
+    <number>1</number>
    </property>
    <row/>
-   <row/>
-   <row/>
-   <column/>
-   <column/>
    <column/>
   </widget>
   <widget class="QTableWidget" name="TableWidgetHorizontalHeader">
    <property name="geometry">
     <rect>
-     <x>256</x>
-     <y>0</y>
-     <width>256</width>
-     <height>192</height>
+     <x>150</x>
+     <y>11</y>
+     <width>251</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="rowCount">
-    <number>3</number>
+    <number>1</number>
    </property>
    <property name="columnCount">
     <number>3</number>
    </property>
-   <row/>
-   <row/>
    <row/>
    <column/>
    <column/>
@@ -60,10 +54,30 @@
   <widget class="QTableWidget" name="TableWidgetVerticalHeader">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>301</y>
-     <width>256</width>
+     <x>10</x>
+     <y>110</y>
+     <width>131</width>
      <height>192</height>
+    </rect>
+   </property>
+   <property name="rowCount">
+    <number>3</number>
+   </property>
+   <property name="columnCount">
+    <number>1</number>
+   </property>
+   <row/>
+   <row/>
+   <row/>
+   <column/>
+  </widget>
+  <widget class="QTableWidget" name="TableWidgetContent">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>110</y>
+     <width>251</width>
+     <height>191</height>
     </rect>
    </property>
    <property name="rowCount">
@@ -79,27 +93,31 @@
    <column/>
    <column/>
   </widget>
-  <widget class="QTableWidget" name="TableWidgetContent">
+  <widget class="QScrollBar" name="horizontalScrollBar">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>290</y>
-     <width>256</width>
-     <height>192</height>
+     <x>150</x>
+     <y>310</y>
+     <width>251</width>
+     <height>16</height>
     </rect>
    </property>
-   <property name="rowCount">
-    <number>3</number>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
    </property>
-   <property name="columnCount">
-    <number>3</number>
+  </widget>
+  <widget class="QScrollBar" name="verticalScrollBar">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>110</y>
+     <width>16</width>
+     <height>191</height>
+    </rect>
    </property>
-   <row/>
-   <row/>
-   <row/>
-   <column/>
-   <column/>
-   <column/>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
   </widget>
  </widget>
  <resources/>

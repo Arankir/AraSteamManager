@@ -223,7 +223,7 @@ void FormAchievements::InitComponents(){
     ui->LabelGameLogo->setPixmap(RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
                                              QString::number(_game.GetAppid())+"/"+_game.GetImg_logo_url()+".jpg",false).GetPixmap());
     ui->GroupBoxCategories->setVisible(false);
-    ChangeFormMode(FormMode::achievement);
+    SwitchSimpleCompare(FormMode::compare);
     ui->ProgressBarFriendsLoad->setVisible(false);
     ui->LabelGameOnlineValue->setText(_game.GetNumberPlayers(false));
     ui->LabelGameTitle->setText(_game.GetName());
@@ -267,7 +267,7 @@ void FormAchievements::Retranslate(){
     ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnWorld,new QTableWidgetItem(tr("По миру")));
     ui->TableWidgetAchievements->setHorizontalHeaderItem(c_tableAchievementColumnReachedMy,new QTableWidgetItem(tr("Получено")));
     ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars,1)->setToolTip(tr("Достижения друзей"));
-    switch (_currentFormMode) {
+    switch (_simpleCompare) {
         case FormMode::compare:
             ui->ButtonCompare->setText(tr("Обратно"));
             break;
@@ -353,10 +353,9 @@ void FormAchievements::OnImageLoaded(RequestData *a_image){
 #define InitEnd }
 
 #define SimpleCompare {
-void FormAchievements::ChangeFormMode(FormAchievements::FormMode a_mode){
-    if(_currentFormMode!=a_mode)
-        switch (a_mode) {//перевести в режим
-        case FormMode::achievement:{
+void FormAchievements::SwitchSimpleCompare(FormMode a_simpleCompare){
+    switch (a_simpleCompare) {
+        case FormMode::compare:{
             ui->GroupBoxReachedFilter->setVisible(true);
             ui->TableWidgetCategory->setVisible(false);
             ui->CheckBoxCompareAllFriends->setVisible(false);
@@ -367,12 +366,11 @@ void FormAchievements::ChangeFormMode(FormAchievements::FormMode a_mode){
             ui->ButtonAddCategory->setVisible(true);
             ui->ButtonChangeCategory->setVisible(true);
             ui->ButtonDeleteAllCategories->setVisible(true);
-            ui->TableWidgetAchievements->setColumnCount(c_tableAchievementColumnCount);
             ui->ButtonCompare->setText(tr("Сравнить с друзьями"));
-            _currentFormMode=FormMode::achievement;
+            _simpleCompare=FormMode::achievement;
             break;
         }
-        case FormMode::compare:{
+    case FormMode::achievement:
             ui->GroupBoxReachedFilter->setVisible(false);
             ui->TableWidgetCategory->setVisible(false);
             ui->CheckBoxCompareAllFriends->setVisible(true);
@@ -383,7 +381,6 @@ void FormAchievements::ChangeFormMode(FormAchievements::FormMode a_mode){
             ui->ButtonAddCategory->setVisible(false);
             ui->ButtonChangeCategory->setVisible(false);
             ui->ButtonDeleteAllCategories->setVisible(false);
-            ui->TableWidgetAchievements->setColumnCount(c_tableAchievementColumnCount);
             ui->ButtonCompare->setText(tr("Обратно"));
             switch (_loadCompare) {
             case 0:
@@ -391,17 +388,15 @@ void FormAchievements::ChangeFormMode(FormAchievements::FormMode a_mode){
                 LoadingCompare();
                 break;
             case 1:
-                ui->TableWidgetFriends->setVisible(false);
+                ui->TableWidgetFriends->setVisible(true);
                 break;
             default:
                 ui->TableWidgetFriends->setVisible(true);
             }
-            _currentFormMode=FormMode::compare;
+            _simpleCompare=FormMode::compare;
             break;
-        }
-        }
+    }
 }
-
 void FormAchievements::LoadingCompare(){
     _loadCompare++;
     SProfile profile(_id,false,QueryType::url);
@@ -761,7 +756,7 @@ void FormAchievements::ShowCategories(bool a_saveDate){
     _fCompare.SetCol(_categoriesGame.GetCount()+c_filterColumnCount+ui->TableWidgetAchievements->columnCount()-c_tableAchievementColumnCount);
 }
 void FormAchievements::UpdateHiddenRows(){
-    switch (_currentFormMode) {
+    switch (_simpleCompare) {
     case FormMode::achievement:{
         if(_isUnique){
             for(int i=0;i<ui->TableWidgetAchievements->rowCount();i++){
@@ -936,16 +931,7 @@ void FormAchievements::FavoritesClicked(){
     //Поменять картинку
 }
 void FormAchievements::on_ButtonCompare_clicked(){
-    switch (_currentFormMode) {
-    case FormMode::compare:{
-        ChangeFormMode(FormMode::achievement);
-        break;
-    }
-    case FormMode::achievement:{
-        ChangeFormMode(FormMode::compare);
-        break;
-    }
-    }
+    SwitchSimpleCompare(_simpleCompare);
 }
 void FormAchievements::on_CheckBoxShowFilter_stateChanged(int arg1){
     ui->GroupBoxFilter->setHidden(arg1==0);
@@ -1330,18 +1316,23 @@ void FormAchievements::on_FormCategoryPositionChange(int a_pos, int a_posNew){
 
         ui->ListWidgetValuesCategory->blockSignals(true);
         std::swap(_values[a_pos],_values[a_posNew]);
-        ui->ListWidgetValuesCategory->clear();
+        //ui->ListWidgetValuesCategory->clear();
+        //QWidget *item1 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(a_pos));
+        //QWidget *item2 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(a_posNew));
+        //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(a_pos),item2);
+        //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(a_posNew),item1);
         //исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        for (int i=0;i<_values.size();i++) {
-            QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);//ui->ListWidgetValuesCategory->takeItem(0);
-            ui->ListWidgetValuesCategory->removeItemWidget(item);
-            item->setSizeHint(_values[i]->sizeHint());
-            _values[i]->SetPosition(i);
-            UpdateValuesUpDown(i);
-            ui->ListWidgetValuesCategory->setItemWidget(item,_values[i]);
-            qDebug()<<i<<item;
-        }
-        //ui->ListWidgetValuesCategory->blockSignals(false);
+//        for (int i=0;i<_values.size();i++) {
+//            QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);//ui->ListWidgetValuesCategory->takeItem(0);
+//            ui->ListWidgetValuesCategory->removeItemWidget(item);
+//            item->setSizeHint(_values[i]->sizeHint());
+//            _values[i]->SetPosition(i);
+//            UpdateValuesUpDown(i);
+//            ui->ListWidgetValuesCategory->setItemWidget(item,_values[i]);
+//            qDebug()<<i<<item;
+//        }
+        //обновить данные на ListWidget
+        ui->ListWidgetValuesCategory->blockSignals(false);
     }
 }
 void FormAchievements::on_FormCategorySelectChange(int a_pos, bool a_select){
