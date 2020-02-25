@@ -24,6 +24,8 @@
 #include <QPropertyAnimation>
 #include <QFontDatabase>
 
+#include <subform/formtablesheaders.h>
+
 namespace Ui {
 class MainWindow;
 }

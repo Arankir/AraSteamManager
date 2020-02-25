@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>479</width>
-    <height>524</height>
+    <height>623</height>
    </rect>
   </property>
   <property name="font">
@@ -157,7 +157,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="None">
        <property name="sizePolicy">
@@ -182,6 +182,23 @@
         <property name="spacing">
          <number>0</number>
         </property>
+        <item row="0" column="0">
+         <widget class="QScrollArea" name="ScrollAreaNone">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>475</width>
+             <height>241</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="Games">
@@ -386,7 +403,7 @@
              <x>0</x>
              <y>0</y>
              <width>475</width>
-             <height>192</height>
+             <height>91</height>
             </rect>
            </property>
           </widget>

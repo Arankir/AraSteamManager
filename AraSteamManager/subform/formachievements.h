@@ -75,7 +75,7 @@ private slots:
     void Retranslate();
     void OnImageLoaded(RequestData *imgr);
 
-    void SwitchSimpleCompare(FormMode sc);
+    void ChangeFormMode(FormMode mode);
     void LoadingCompare();
     void LoadFriendGames(SGames *Games);
     void FinishLoadFriends();
@@ -173,7 +173,7 @@ private:
     int _numNow=0;
 
     //сравнение с друзьями
-    FormMode _simpleCompare=FormMode::compare;
+    FormMode _currentFormMode=FormMode::compare;
     int _loadCompare=0;
     int _type1=0;
     int _type2=0;

@@ -55,6 +55,7 @@ SOURCES += \
     subform/formprofile.cpp \
     subform/formsettings.cpp \
     subform/formstatistics.cpp \
+    subform/formtablesheaders.cpp \
     subwidget/qbuttonwithdata.cpp \
     subwidget/qcheckboxwithdata.cpp \
     subwidget/qcomboboxwithdata.cpp \
@@ -91,6 +92,7 @@ HEADERS += \
     subform/formprofile.h \
     subform/formsettings.h \
     subform/formstatistics.h \
+    subform/formtablesheaders.h \
     subwidget/qbuttonwithdata.h \
     subwidget/qcheckboxwithdata.h \
     subwidget/qcomboboxwithdata.h \
@@ -107,7 +109,8 @@ FORMS += \
     subform/formgames.ui \
     subform/formprofile.ui \
     subform/formsettings.ui \
-    subform/formstatistics.ui
+    subform/formstatistics.ui \
+    subform/formtablesheaders.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

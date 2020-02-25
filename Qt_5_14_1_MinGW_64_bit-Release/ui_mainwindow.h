@@ -52,6 +52,8 @@ public:
     QStackedWidget *StackedWidgetForms;
     QWidget *None;
     QGridLayout *gridLayout;
+    QScrollArea *ScrollAreaNone;
+    QWidget *scrollAreaWidgetContents;
     QWidget *Games;
     QGridLayout *gridLayout_2;
     QScrollArea *ScrollAreaGames;
@@ -80,7 +82,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(479, 524);
+        MainWindow->resize(479, 623);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         MainWindow->setFont(font);
@@ -192,6 +194,16 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
+        ScrollAreaNone = new QScrollArea(None);
+        ScrollAreaNone->setObjectName(QString::fromUtf8("ScrollAreaNone"));
+        ScrollAreaNone->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 475, 241));
+        ScrollAreaNone->setWidget(scrollAreaWidgetContents);
+
+        gridLayout->addWidget(ScrollAreaNone, 0, 0, 1, 1);
+
         StackedWidgetForms->addWidget(None);
         Games = new QWidget();
         Games->setObjectName(QString::fromUtf8("Games"));
@@ -287,7 +299,7 @@ public:
         ScrollAreaSettings->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 475, 192));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 475, 91));
         ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
 
         gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);
@@ -310,7 +322,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        StackedWidgetForms->setCurrentIndex(5);
+        StackedWidgetForms->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

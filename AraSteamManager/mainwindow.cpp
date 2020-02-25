@@ -569,6 +569,10 @@ void MainWindow::InitComponents(){
     ui->ButtonExit->setIcon(QIcon("://"+_theme+"/exit.png"));
     ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
     ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
+
+
+    FormTablesHeaders *th = new FormTablesHeaders();
+    ui->ScrollAreaNone->setWidget(th);
 }
 #define InitEnd }
 
