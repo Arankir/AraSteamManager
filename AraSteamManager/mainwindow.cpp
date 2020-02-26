@@ -550,10 +550,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 //    qApp->setFont(font);
 
     InitComponents();
-    if(_setting.GetStatus()==StatusValue::success){
-        if(_setting.GetMyProfile()!="none")
-            GoToProfile(_setting.GetMyProfile(),QueryType::url);
-    }
+    if(_setting.GetMyProfile()!="none")
+        GoToProfile(_setting.GetMyProfile(),QueryType::url);
 }
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
@@ -796,12 +794,12 @@ void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QStrin
 }
 
 void MainWindow::UpdateMyProfile(){
-    _setting.LoadSettings();
+    _setting.SyncronizeSettings();
     ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile().GetSteamid()!=_setting.GetMyProfile());
     emit s_updateSettings();
 }
 void MainWindow::UpdateSettings(){
-    _setting.LoadSettings();
+    _setting.SyncronizeSettings();
     ui->StackedWidgetProfiles->setFixedHeight(_setting.GetVisibleProfileInfo()?155:95);
     emit s_updateSettings();
 }
@@ -821,7 +819,7 @@ void MainWindow::on_ButtonSettings_clicked(){
     }
 }
 void MainWindow::on_ButtonGoToMyProfile_clicked(){
-    if(_setting.GetStatus()==StatusValue::success&&_setting.GetMyProfile()!="none"){
+    if(_setting.GetMyProfile()!="none"){
         GoToProfile(_setting.GetMyProfile(),QueryType::url);
     } else {
         QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));

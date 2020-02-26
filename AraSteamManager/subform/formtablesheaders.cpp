@@ -3,6 +3,10 @@
 
 FormTablesHeaders::FormTablesHeaders(QWidget *parent): QWidget(parent), ui(new Ui::FormTablesHeaders){
     ui->setupUi(this);
+    connect(ui->TableWidgetContent->verticalScrollBar(),&QScrollBar::sliderMoved,ui->TableWidgetVerticalHeader->verticalScrollBar(),&QScrollBar::setValue);
+    connect(ui->TableWidgetContent->horizontalScrollBar(),&QScrollBar::sliderMoved,ui->TableWidgetHorizontalHeader->horizontalScrollBar(),&QScrollBar::setValue);
+    connect(ui->TableWidgetContent->verticalScrollBar(),&QScrollBar::valueChanged,ui->TableWidgetVerticalHeader->verticalScrollBar(),&QScrollBar::setValue);
+    connect(ui->TableWidgetContent->horizontalScrollBar(),&QScrollBar::valueChanged,ui->TableWidgetHorizontalHeader->horizontalScrollBar(),&QScrollBar::setValue);
 }
 
 FormTablesHeaders::~FormTablesHeaders(){
@@ -15,7 +19,7 @@ void FormTablesHeaders::resizeEvent(QResizeEvent *event){
     ui->TableWidgetHollow->setGeometry(0,0,width,height);
     ui->TableWidgetVerticalHeader->setGeometry(0,height,width,this->height()-height);
     ui->TableWidgetHorizontalHeader->setGeometry(width,0,this->width()-width,height);
-    ui->TableWidgetContent->setGeometry(width,height,this->width()-_verticalHeaderWidth,this->height()-_horizontalHeaderHeight);
+    ui->TableWidgetContent->setGeometry(width,height,this->width()-width,this->height()-height);
 }
 
 void FormTablesHeaders::SetColumnCount(int a_col){

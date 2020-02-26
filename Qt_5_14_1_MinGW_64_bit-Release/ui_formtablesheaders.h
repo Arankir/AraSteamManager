@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
@@ -25,8 +24,6 @@ public:
     QTableWidget *TableWidgetHorizontalHeader;
     QTableWidget *TableWidgetVerticalHeader;
     QTableWidget *TableWidgetContent;
-    QScrollBar *horizontalScrollBar;
-    QScrollBar *verticalScrollBar;
 
     void setupUi(QWidget *FormTablesHeaders)
     {
@@ -40,43 +37,43 @@ public:
             TableWidgetHollow->setRowCount(1);
         TableWidgetHollow->setObjectName(QString::fromUtf8("TableWidgetHollow"));
         TableWidgetHollow->setGeometry(QRect(10, 10, 131, 91));
+        TableWidgetHollow->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        TableWidgetHollow->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         TableWidgetHollow->setRowCount(1);
         TableWidgetHollow->setColumnCount(1);
         TableWidgetHorizontalHeader = new QTableWidget(FormTablesHeaders);
-        if (TableWidgetHorizontalHeader->columnCount() < 3)
-            TableWidgetHorizontalHeader->setColumnCount(3);
+        if (TableWidgetHorizontalHeader->columnCount() < 7)
+            TableWidgetHorizontalHeader->setColumnCount(7);
         if (TableWidgetHorizontalHeader->rowCount() < 1)
             TableWidgetHorizontalHeader->setRowCount(1);
         TableWidgetHorizontalHeader->setObjectName(QString::fromUtf8("TableWidgetHorizontalHeader"));
         TableWidgetHorizontalHeader->setGeometry(QRect(150, 11, 251, 91));
+        TableWidgetHorizontalHeader->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         TableWidgetHorizontalHeader->setRowCount(1);
-        TableWidgetHorizontalHeader->setColumnCount(3);
+        TableWidgetHorizontalHeader->setColumnCount(7);
+        TableWidgetHorizontalHeader->verticalHeader()->setVisible(false);
         TableWidgetVerticalHeader = new QTableWidget(FormTablesHeaders);
         if (TableWidgetVerticalHeader->columnCount() < 1)
             TableWidgetVerticalHeader->setColumnCount(1);
-        if (TableWidgetVerticalHeader->rowCount() < 3)
-            TableWidgetVerticalHeader->setRowCount(3);
+        if (TableWidgetVerticalHeader->rowCount() < 7)
+            TableWidgetVerticalHeader->setRowCount(7);
         TableWidgetVerticalHeader->setObjectName(QString::fromUtf8("TableWidgetVerticalHeader"));
         TableWidgetVerticalHeader->setGeometry(QRect(10, 110, 131, 192));
-        TableWidgetVerticalHeader->setRowCount(3);
+        TableWidgetVerticalHeader->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        TableWidgetVerticalHeader->setRowCount(7);
         TableWidgetVerticalHeader->setColumnCount(1);
+        TableWidgetVerticalHeader->horizontalHeader()->setVisible(false);
         TableWidgetContent = new QTableWidget(FormTablesHeaders);
-        if (TableWidgetContent->columnCount() < 3)
-            TableWidgetContent->setColumnCount(3);
-        if (TableWidgetContent->rowCount() < 3)
-            TableWidgetContent->setRowCount(3);
+        if (TableWidgetContent->columnCount() < 7)
+            TableWidgetContent->setColumnCount(7);
+        if (TableWidgetContent->rowCount() < 7)
+            TableWidgetContent->setRowCount(7);
         TableWidgetContent->setObjectName(QString::fromUtf8("TableWidgetContent"));
         TableWidgetContent->setGeometry(QRect(150, 110, 251, 191));
-        TableWidgetContent->setRowCount(3);
-        TableWidgetContent->setColumnCount(3);
-        horizontalScrollBar = new QScrollBar(FormTablesHeaders);
-        horizontalScrollBar->setObjectName(QString::fromUtf8("horizontalScrollBar"));
-        horizontalScrollBar->setGeometry(QRect(150, 310, 251, 16));
-        horizontalScrollBar->setOrientation(Qt::Horizontal);
-        verticalScrollBar = new QScrollBar(FormTablesHeaders);
-        verticalScrollBar->setObjectName(QString::fromUtf8("verticalScrollBar"));
-        verticalScrollBar->setGeometry(QRect(410, 110, 16, 191));
-        verticalScrollBar->setOrientation(Qt::Vertical);
+        TableWidgetContent->setRowCount(7);
+        TableWidgetContent->setColumnCount(7);
+        TableWidgetContent->horizontalHeader()->setVisible(false);
+        TableWidgetContent->verticalHeader()->setVisible(false);
 
         retranslateUi(FormTablesHeaders);
 

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtDebug>
+#include <QScrollBar>
 
 namespace Ui {
 class FormTablesHeaders;

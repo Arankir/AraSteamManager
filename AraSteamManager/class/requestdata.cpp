@@ -8,7 +8,7 @@ RequestData::RequestData(QString a_url, int a_row, QString a_save, bool a_autoSa
     _row=a_row;
     _save=a_save;
     _autosave=a_autoSave;
-    switch (_setting.GetSaveimages()) {
+    switch (_setting.GetSaveImages()) {
         case 0:{
             LoadImage(a_url,a_row);
             break;
