@@ -5,9 +5,17 @@ FormContainerAchievements::FormContainerAchievements(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormContainerAchievements){
     ui->setupUi(this);
+    _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
+    this->setGeometry(_setting.GetAchievementContainerGeometry());
+    if((_setting.GetAchievementContainerPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetAchievementContainerPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
+        this->move(_setting.GetAchievementContainerPercentPos().x(),_setting.GetAchievementContainerPercentPos().y()-31);
+    else
+        this->move(_setting.GetAchievementContainerPos().x(),_setting.GetAchievementContainerPos().y()-31);
 }
 
 FormContainerAchievements::~FormContainerAchievements(){
+    _setting.SetAchievementContainerParams(this->geometry());
+    _setting.SyncronizeSettings();
     emit s_formClose();
     delete ui;
 }
@@ -33,7 +41,10 @@ void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QSt
         } else {
         QPixmap tabIcon(filePath);
         ui->TabWidgetAchievements->setTabIcon(tabIndex,tabIcon);
-        }
+    }
+}
+
+void FormContainerAchievements::closeEvent(QCloseEvent *){
 }
 
 void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int a_index){

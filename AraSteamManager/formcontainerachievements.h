@@ -25,6 +25,7 @@ signals:
     void s_formClose();
 
 private slots:
+    void closeEvent(QCloseEvent*);
     void on_TabWidgetAchievements_tabCloseRequested(int index);
     void OnLoadImage(RequestData*);
 

@@ -23,6 +23,7 @@
 #include <class/settings.h>
 #include <QPropertyAnimation>
 #include <QFontDatabase>
+#include <QScreen>
 
 #include <subform/formtablesheaders.h>
 
@@ -74,6 +75,9 @@ signals:
 private slots:
     void keyPressEvent(QKeyEvent *event) override;
     void changeEvent(QEvent *event) override;
+    void closeEvent(QCloseEvent*);
+    void moveEvent(QMoveEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
     void ReturnFromForms();
     void ResizeScrollArea();
 

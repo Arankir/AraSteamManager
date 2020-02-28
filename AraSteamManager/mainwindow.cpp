@@ -555,7 +555,15 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 }
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
+    _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
     ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
+    this->setGeometry(_setting.GetMainWindowGeometry());
+    if((_setting.GetMainWindowPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetMainWindowPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
+        this->move(_setting.GetMainWindowPercentPos().x(),_setting.GetMainWindowPercentPos().y()-31);
+    else
+        this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
+
+
     ui->FormProgressBar->setVisible(false);
     ui->ButtonBack->setEnabled(false);
     ui->ButtonNext->setEnabled(false);
@@ -633,8 +641,24 @@ void MainWindow::changeEvent(QEvent *event){
         ui->retranslateUi(this);
     }
 }
+
+void MainWindow::closeEvent(QCloseEvent *event){
+    _setting.SetMainWindowParams(this->geometry());
+    _setting.SyncronizeSettings();
+    event->accept();
+}
+void MainWindow::moveEvent(QMoveEvent *)
+{
+//    _setting.SetMainWindowPos(event->pos());
+}
+void MainWindow::resizeEvent(QResizeEvent *)
+{
+//    _setting.SetMainWindowParams(this->geometry(),this->pos(),QGuiApplication::primaryScreen()->geometry());
+}
 MainWindow::~MainWindow(){
     ReturnFromForms();
+    if(_achievementsCount>0)
+        delete _containerAchievementsForm;
     delete ui;
 }
 void MainWindow::ReturnFromForms(){

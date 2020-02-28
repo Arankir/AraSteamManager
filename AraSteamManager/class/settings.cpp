@@ -3,37 +3,43 @@
 
 Settings::Settings(QObject *parent) : QObject(parent){
     _settings = new QSettings(QDir::currentPath()+"/settings.ini",QSettings::IniFormat);
-    _settings->setValue(c_language,_settings->value(c_language,1));
-    _settings->setValue(c_theme,_settings->value(c_theme,1));
-    _settings->setValue(c_saveImage,_settings->value(c_saveImage,0));
-    _settings->setValue(c_myProfile,_settings->value(c_myProfile,"none"));
-    _settings->setValue(c_visibleHiddenGames,_settings->value(c_visibleHiddenGames,0));
-    _settings->setValue(c_visibleProfileInfo,_settings->value(c_visibleProfileInfo,true));
 }
 
-void Settings::SetMyProfile(QString a_myProfiles){
-    _settings->setValue(c_myProfile,a_myProfiles);
-    _settings->sync();
+Settings::Settings(QRect a_geometry, QObject *parent) : QObject(parent){
+    _settings = new QSettings(QDir::currentPath()+"/settings.ini",QSettings::IniFormat);
+    _screen=a_geometry;
 }
-void Settings::SetLanguage(int a_language){
-    _settings->setValue(c_language,a_language);
-    _settings->sync();
+
+void Settings::CustomGeometry(QRect a_geometry){
+    _screen=a_geometry;
 }
-void Settings::SetTheme(int a_theme){
-    _settings->setValue(c_theme,a_theme);
-    _settings->sync();
+
+void Settings::SetMainWindowParams(QRect a_geometry){
+    _settings->setValue(c_mainWindowHeight,a_geometry.height());
+    _settings->setValue(c_mainWindowWidth,a_geometry.width());
+    _settings->setValue(c_mainWindowX,a_geometry.x());
+    _settings->setValue(c_mainWindowY,a_geometry.y());
+    _settings->setValue(c_mainWindowPercentX,a_geometry.x()/_screen.width());
+    _settings->setValue(c_mainWindowPercentY,a_geometry.y()/_screen.height());
 }
-void Settings::SetSaveimage(int a_saveImage){
-    _settings->setValue(c_saveImage,a_saveImage);
-    _settings->sync();
+void Settings::SetMainWindowPos(QPoint a_pos){
+    _settings->setValue(c_mainWindowX,a_pos.x());
+    _settings->setValue(c_mainWindowY,a_pos.y());
+    _settings->setValue(c_mainWindowPercentX,a_pos.x()/_screen.width());
+    _settings->setValue(c_mainWindowPercentY,a_pos.y()/_screen.height());
 }
-void Settings::SetVisibleHiddenGames(int a_visibleHiddenGames){
-    _settings->setValue(c_visibleHiddenGames,a_visibleHiddenGames);
-    _settings->sync();
+void Settings::SetMainWindowGeometry(QSize a_size){
+    _settings->setValue(c_mainWindowHeight,a_size.height());
+    _settings->setValue(c_mainWindowWidth,a_size.width());
 }
-void Settings::SetVisibleProfileInfo(bool a_visibleProfileInfo){
-    _settings->setValue(c_visibleProfileInfo,a_visibleProfileInfo);
-    _settings->sync();
+
+void Settings::SetAchievementContainerParams(QRect a_geometry){
+    _settings->setValue(c_achievementContainerHeight,a_geometry.height());
+    _settings->setValue(c_achievementContainerWidth,a_geometry.width());
+    _settings->setValue(c_achievementContainerX,a_geometry.x());
+    _settings->setValue(c_achievementContainerY,a_geometry.y());
+    _settings->setValue(c_achievementContainerPercentX,a_geometry.x()/_screen.width());
+    _settings->setValue(c_achievementContainerPercentY,a_geometry.y()/_screen.height());
 }
 
 void Settings::SyncronizeSettings(){
