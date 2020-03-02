@@ -51,6 +51,7 @@ public:
         TableWidgetHorizontalHeader->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         TableWidgetHorizontalHeader->setRowCount(1);
         TableWidgetHorizontalHeader->setColumnCount(7);
+        TableWidgetHorizontalHeader->horizontalHeader()->setStretchLastSection(true);
         TableWidgetHorizontalHeader->verticalHeader()->setVisible(false);
         TableWidgetVerticalHeader = new QTableWidget(FormTablesHeaders);
         if (TableWidgetVerticalHeader->columnCount() < 1)
@@ -63,6 +64,7 @@ public:
         TableWidgetVerticalHeader->setRowCount(7);
         TableWidgetVerticalHeader->setColumnCount(1);
         TableWidgetVerticalHeader->horizontalHeader()->setVisible(false);
+        TableWidgetVerticalHeader->verticalHeader()->setStretchLastSection(true);
         TableWidgetContent = new QTableWidget(FormTablesHeaders);
         if (TableWidgetContent->columnCount() < 7)
             TableWidgetContent->setColumnCount(7);
@@ -73,7 +75,9 @@ public:
         TableWidgetContent->setRowCount(7);
         TableWidgetContent->setColumnCount(7);
         TableWidgetContent->horizontalHeader()->setVisible(false);
+        TableWidgetContent->horizontalHeader()->setStretchLastSection(true);
         TableWidgetContent->verticalHeader()->setVisible(false);
+        TableWidgetContent->verticalHeader()->setStretchLastSection(true);
 
         retranslateUi(FormTablesHeaders);
 

@@ -33,7 +33,7 @@ private:
     int _columnCount=0;
     int _rowCount=0;
     int _horizontalHeaderHeight=50;
-    int _verticalHeaderWidth=100;
+    int _verticalHeaderWidth=120;
 
 
 };
