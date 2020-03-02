@@ -577,7 +577,7 @@ void MainWindow::InitComponents(){
     ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
 
 
-    FormTablesHeaders *th = new FormTablesHeaders();
+    FormTablesHeaders *th = new FormTablesHeaders(2,3,4,5,true,true);
     ui->ScrollAreaNone->setWidget(th);
 }
 #define InitEnd }
