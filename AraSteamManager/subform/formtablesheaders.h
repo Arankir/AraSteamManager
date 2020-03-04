@@ -15,7 +15,7 @@ class FormTablesHeaders : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormTablesHeaders(int rowHeaders, int columnHeaders, int rowContent, int columnContent, bool visibleHH, bool visibleVH, QWidget *parent = nullptr);
+    explicit FormTablesHeaders(int rowHeaders, int columnHeaders, int rowContent, int columnContent, bool visibleHH, bool visibleVH, bool visibleH, bool visibleC, QWidget *parent = nullptr);
     ~FormTablesHeaders();
     void resizeEvent(QResizeEvent *event);
 
@@ -26,14 +26,30 @@ public:
 
     void SetColumnCountHeaders(int columns);
     int GetColumnCountHeaders();
-    void SetRowCountHeaders(int row);
+    void SetRowCountHeaders(int rows);
     int GetRowCountHeaders();
+
+    void SetColumnWidthHeaders(int column, int width);
+    int GetColumnWidthHeaders(int column);
+    void SetRowHeightHeaders(int row, int height);
+    int GetRowHeightHeaders(int row);
+
+    void SetColumnWidth(int column, int width);
+    int GetColumnWidth(int column);
+    void SetRowHeight(int row, int height);
+    int GetRowHeight(int row);
 
     void SetHorizontalVisible(bool visible);
     bool GetHorizontalVisible() {return _visibleHorizontal;}
 
     void SetVerticalVisible(bool visible);
     bool GetVerticalVisible() {return _visibleVertical;}
+
+    void SetHollowVisible(bool visible);
+    bool GetHollowVisible() {return _visibleHollow;}
+
+    void SetContentVisible(bool visible);
+    bool GetContentVisible() {return _visibleContent;}
 
     void SetWidgetHollow(int row, int column, QWidget *widget);
     void SetWidgetHorizontalHeader(int row, int column, QWidget *widget);
@@ -85,6 +101,19 @@ public:
     void ResizeRowHeaders(int row, int height);
     void ResizeColumnHeaders(int column, int width);
 
+    QTableWidget *GetTableHollow();
+    QTableWidget *GetTableHH();
+    QTableWidget *GetTableVH();
+    QTableWidget *GetTableContent();
+
+public slots:
+    void InsertColumn(int a_columns);
+    void InsertColumnHeaders(int a_columns);
+    void RemoveColumn(int a_columns);
+    void RemoveColumnHeaders(int a_columns);
+    void SetHorizontalHeaderText(int a_index, QString a_text);
+    void InsertRow(int a_row);
+    void RemoveRow(int a_row);
 private:
     Ui::FormTablesHeaders *ui;
     bool _visibleHorizontal=true;

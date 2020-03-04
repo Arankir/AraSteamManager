@@ -29,6 +29,7 @@
 #include <subwidget/qradiobuttonwithdata.h>
 #include <subwidget/qcomboboxwithdata.h>
 #include <subwidget/qcheckboxwithdata.h>
+#include <subform/formtablesheaders.h>
 
 namespace Ui {
 class FormAchievements;
@@ -91,16 +92,6 @@ private slots:
     void ShowCategories(bool saveDate);
     void UpdateHiddenRows();
     bool SetFriendAchievements(SAchievements achievement, int col);
-
-    void TableSetColumnCount(int columns);
-    void TableInsertColumn(int columns);
-    void TableRemoveColumn(int columns);
-    void TableSetColumnVisible(int column, bool visible);
-    void TableSetHorizontalHeaderText(int index, QString text);
-    void TableSetRowCount(int row);
-    void TableInsertRow(int row);
-    void TableRemoveRow(int row);
-    void TableSetRowVisible(int row, bool visible);
 
     void on_LineEditNameAchievements_textChanged(const QString &arg1);
     void on_ButtonFindAchievement_clicked();
@@ -166,6 +157,7 @@ private:
     //используются на форме
     FormCompareProfileFilter *FilterMyProfile;
     QFormLayout *_categoryValuesLayout;
+    FormTablesHeaders *_tableAchievements;
 
     //для загрузки картинок
     QVector<RequestData*> _request;

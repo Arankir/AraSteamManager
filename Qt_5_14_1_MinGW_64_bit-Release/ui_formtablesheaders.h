@@ -39,6 +39,7 @@ public:
         TableWidgetHollow->setGeometry(QRect(10, 10, 141, 211));
         TableWidgetHollow->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         TableWidgetHollow->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        TableWidgetHollow->setShowGrid(false);
         TableWidgetHollow->setRowCount(1);
         TableWidgetHollow->setColumnCount(1);
         TableWidgetHollow->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
