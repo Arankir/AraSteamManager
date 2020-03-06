@@ -13,36 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTableWidget" name="TableWidgetHollow">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>141</width>
-     <height>211</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="showGrid">
-    <bool>false</bool>
-   </property>
-   <property name="rowCount">
-    <number>1</number>
-   </property>
-   <property name="columnCount">
-    <number>1</number>
-   </property>
-   <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-    <bool>true</bool>
-   </attribute>
-   <row/>
-   <column/>
-  </widget>
   <widget class="QTableWidget" name="TableWidgetHorizontalHeader">
    <property name="geometry">
     <rect>
@@ -77,42 +47,6 @@
    <column/>
    <column/>
    <column/>
-   <column/>
-  </widget>
-  <widget class="QTableWidget" name="TableWidgetVerticalHeader">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>231</y>
-     <width>141</width>
-     <height>361</height>
-    </rect>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="sortingEnabled">
-    <bool>true</bool>
-   </property>
-   <property name="rowCount">
-    <number>7</number>
-   </property>
-   <property name="columnCount">
-    <number>1</number>
-   </property>
-   <attribute name="horizontalHeaderVisible">
-    <bool>false</bool>
-   </attribute>
-   <attribute name="verticalHeaderStretchLastSection">
-    <bool>true</bool>
-   </attribute>
-   <row/>
-   <row/>
-   <row/>
-   <row/>
-   <row/>
-   <row/>
-   <row/>
    <column/>
   </widget>
   <widget class="QTableWidget" name="TableWidgetContent">

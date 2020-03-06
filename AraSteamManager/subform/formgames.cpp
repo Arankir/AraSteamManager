@@ -196,52 +196,52 @@ void FormGames::resizeEvent(QResizeEvent *event){
     ui->FrameGroup->raise();
 }
 void FormGames::showHideSlideWidget(bool a_flag){
-    qDebug()<<4<<a_flag;
-    if (a_flag)
-        ui->FrameGroup->setGeometry(_geometryGroup);
-    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
-    _animate->setDuration(300);
+//    qDebug()<<4<<a_flag;
+//    if (a_flag)
+//        ui->FrameGroup->setGeometry(_geometryGroup);
+//    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
+//    _animate->setDuration(300);
 
-    QRect startRect(0, 0, 0, height());
-    QRect endRect(0, 0, 300, height());
+//    QRect startRect(0, 0, 0, height());
+//    QRect endRect(0, 0, 300, height());
 
-    if (a_flag)
-    {
-        _animate->setStartValue(startRect);
-        _animate->setEndValue(endRect);
-        _geometryGroup=endRect;
-    }
-    else
-    {
-        _animate->setStartValue(endRect);
-        _animate->setEndValue(startRect);
-        _geometryGroup=startRect;
-    }
-    _animate->start();
+//    if (a_flag)
+//    {
+//        _animate->setStartValue(startRect);
+//        _animate->setEndValue(endRect);
+//        _geometryGroup=endRect;
+//    }
+//    else
+//    {
+//        _animate->setStartValue(endRect);
+//        _animate->setEndValue(startRect);
+//        _geometryGroup=startRect;
+//    }
+//    _animate->start();
     //connect(_animate,QPropertyAnimations::, ui->FrameGroup->setVisible(!a_flag));
 }
 void FormGames::mouseMoveEvent(QMouseEvent *ev){
-    if (ev->pos().x() < 50)
-    {
-        qDebug()<<1<<ev->pos().x()<<ev->pos().y();
-        if (!ui->FrameGroup->isVisible()){
-            ui->FrameGroup->show();
-            showHideSlideWidget(true);
-        }
-    }
-    else
-    {
-        qDebug()<<2<<ev->pos().x()<<ev->pos().y();
-        if (ui->FrameGroup->isVisible())
-            showHideSlideWidget(false);
-    }
+//    if (ev->pos().x() < 50)
+//    {
+//        qDebug()<<1<<ev->pos().x()<<ev->pos().y();
+//        if (!ui->FrameGroup->isVisible()){
+//            ui->FrameGroup->show();
+//            showHideSlideWidget(true);
+//        }
+//    }
+//    else
+//    {
+//        qDebug()<<2<<ev->pos().x()<<ev->pos().y();
+//        if (ui->FrameGroup->isVisible())
+//            showHideSlideWidget(false);
+//    }
 }
 void FormGames::slotShowHideSlide(){
-    if (ui->FrameGroup->isHidden())
-        ui->FrameGroup->show();
+//    if (ui->FrameGroup->isHidden())
+//        ui->FrameGroup->show();
 
-    qDebug()<<3<<ui->FrameGroup->isVisible();
-    showHideSlideWidget(!ui->FrameGroup->isVisible());
+//    qDebug()<<3<<ui->FrameGroup->isVisible();
+//    showHideSlideWidget(!ui->FrameGroup->isVisible());
 }
 #define SystemEnd }
 

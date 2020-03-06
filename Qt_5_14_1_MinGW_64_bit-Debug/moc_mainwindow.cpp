@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[48];
-    char stringdata0[681];
+    QByteArrayData data[54];
+    char stringdata0[753];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -62,24 +62,30 @@ QT_MOC_LITERAL(26, 332, 10), // "QKeyEvent*"
 QT_MOC_LITERAL(27, 343, 5), // "event"
 QT_MOC_LITERAL(28, 349, 11), // "changeEvent"
 QT_MOC_LITERAL(29, 361, 7), // "QEvent*"
-QT_MOC_LITERAL(30, 369, 15), // "ReturnFromForms"
-QT_MOC_LITERAL(31, 385, 16), // "ResizeScrollArea"
-QT_MOC_LITERAL(32, 402, 14), // "InitComponents"
-QT_MOC_LITERAL(33, 417, 9), // "ShowGames"
-QT_MOC_LITERAL(34, 427, 11), // "ShowFriends"
-QT_MOC_LITERAL(35, 439, 13), // "ShowStatistic"
-QT_MOC_LITERAL(36, 453, 11), // "GoToProfile"
-QT_MOC_LITERAL(37, 465, 2), // "id"
-QT_MOC_LITERAL(38, 468, 9), // "QueryType"
-QT_MOC_LITERAL(39, 478, 4), // "type"
-QT_MOC_LITERAL(40, 483, 21), // "UpdateButtonsBackNext"
-QT_MOC_LITERAL(41, 505, 28), // "on_ButtonFindProfile_clicked"
-QT_MOC_LITERAL(42, 534, 21), // "on_ButtonExit_clicked"
-QT_MOC_LITERAL(43, 556, 30), // "on_ButtonGoToMyProfile_clicked"
-QT_MOC_LITERAL(44, 587, 21), // "on_ButtonBack_clicked"
-QT_MOC_LITERAL(45, 609, 21), // "on_ButtonNext_clicked"
-QT_MOC_LITERAL(46, 631, 25), // "on_ButtonSettings_clicked"
-QT_MOC_LITERAL(47, 657, 23) // "on_ButtonUpdate_clicked"
+QT_MOC_LITERAL(30, 369, 10), // "closeEvent"
+QT_MOC_LITERAL(31, 380, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(32, 393, 9), // "moveEvent"
+QT_MOC_LITERAL(33, 403, 11), // "QMoveEvent*"
+QT_MOC_LITERAL(34, 415, 11), // "resizeEvent"
+QT_MOC_LITERAL(35, 427, 13), // "QResizeEvent*"
+QT_MOC_LITERAL(36, 441, 15), // "ReturnFromForms"
+QT_MOC_LITERAL(37, 457, 16), // "ResizeScrollArea"
+QT_MOC_LITERAL(38, 474, 14), // "InitComponents"
+QT_MOC_LITERAL(39, 489, 9), // "ShowGames"
+QT_MOC_LITERAL(40, 499, 11), // "ShowFriends"
+QT_MOC_LITERAL(41, 511, 13), // "ShowStatistic"
+QT_MOC_LITERAL(42, 525, 11), // "GoToProfile"
+QT_MOC_LITERAL(43, 537, 2), // "id"
+QT_MOC_LITERAL(44, 540, 9), // "QueryType"
+QT_MOC_LITERAL(45, 550, 4), // "type"
+QT_MOC_LITERAL(46, 555, 21), // "UpdateButtonsBackNext"
+QT_MOC_LITERAL(47, 577, 28), // "on_ButtonFindProfile_clicked"
+QT_MOC_LITERAL(48, 606, 21), // "on_ButtonExit_clicked"
+QT_MOC_LITERAL(49, 628, 30), // "on_ButtonGoToMyProfile_clicked"
+QT_MOC_LITERAL(50, 659, 21), // "on_ButtonBack_clicked"
+QT_MOC_LITERAL(51, 681, 21), // "on_ButtonNext_clicked"
+QT_MOC_LITERAL(52, 703, 25), // "on_ButtonSettings_clicked"
+QT_MOC_LITERAL(53, 729, 23) // "on_ButtonUpdate_clicked"
 
     },
     "MainWindow\0s_updateSettings\0\0"
@@ -92,7 +98,9 @@ QT_MOC_LITERAL(47, 657, 23) // "on_ButtonUpdate_clicked"
     "SFriends\0friends\0GoToFavorites\0"
     "GoToStatistics\0profileName\0UpdateMyProfile\0"
     "UpdateSettings\0keyPressEvent\0QKeyEvent*\0"
-    "event\0changeEvent\0QEvent*\0ReturnFromForms\0"
+    "event\0changeEvent\0QEvent*\0closeEvent\0"
+    "QCloseEvent*\0moveEvent\0QMoveEvent*\0"
+    "resizeEvent\0QResizeEvent*\0ReturnFromForms\0"
     "ResizeScrollArea\0InitComponents\0"
     "ShowGames\0ShowFriends\0ShowStatistic\0"
     "GoToProfile\0id\0QueryType\0type\0"
@@ -112,7 +120,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      29,   14, // methods
+      32,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -120,37 +128,40 @@ static const uint qt_meta_data_MainWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  159,    2, 0x06 /* Public */,
+       1,    0,  174,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    2,  160,    2, 0x0a /* Public */,
-       4,    2,  165,    2, 0x0a /* Public */,
-       9,    1,  170,    2, 0x0a /* Public */,
-      11,    0,  173,    2, 0x0a /* Public */,
-      12,    1,  174,    2, 0x0a /* Public */,
-      14,    2,  177,    2, 0x0a /* Public */,
-      17,    2,  182,    2, 0x0a /* Public */,
-      20,    0,  187,    2, 0x0a /* Public */,
-      21,    3,  188,    2, 0x0a /* Public */,
-      23,    0,  195,    2, 0x0a /* Public */,
-      24,    0,  196,    2, 0x0a /* Public */,
-      25,    1,  197,    2, 0x08 /* Private */,
-      28,    1,  200,    2, 0x08 /* Private */,
-      30,    0,  203,    2, 0x08 /* Private */,
-      31,    0,  204,    2, 0x08 /* Private */,
-      32,    0,  205,    2, 0x08 /* Private */,
-      33,    0,  206,    2, 0x08 /* Private */,
-      34,    0,  207,    2, 0x08 /* Private */,
-      35,    0,  208,    2, 0x08 /* Private */,
-      36,    2,  209,    2, 0x08 /* Private */,
-      40,    0,  214,    2, 0x08 /* Private */,
-      41,    0,  215,    2, 0x08 /* Private */,
-      42,    0,  216,    2, 0x08 /* Private */,
-      43,    0,  217,    2, 0x08 /* Private */,
-      44,    0,  218,    2, 0x08 /* Private */,
-      45,    0,  219,    2, 0x08 /* Private */,
-      46,    0,  220,    2, 0x08 /* Private */,
-      47,    0,  221,    2, 0x08 /* Private */,
+       3,    2,  175,    2, 0x0a /* Public */,
+       4,    2,  180,    2, 0x0a /* Public */,
+       9,    1,  185,    2, 0x0a /* Public */,
+      11,    0,  188,    2, 0x0a /* Public */,
+      12,    1,  189,    2, 0x0a /* Public */,
+      14,    2,  192,    2, 0x0a /* Public */,
+      17,    2,  197,    2, 0x0a /* Public */,
+      20,    0,  202,    2, 0x0a /* Public */,
+      21,    3,  203,    2, 0x0a /* Public */,
+      23,    0,  210,    2, 0x0a /* Public */,
+      24,    0,  211,    2, 0x0a /* Public */,
+      25,    1,  212,    2, 0x08 /* Private */,
+      28,    1,  215,    2, 0x08 /* Private */,
+      30,    1,  218,    2, 0x08 /* Private */,
+      32,    1,  221,    2, 0x08 /* Private */,
+      34,    1,  224,    2, 0x08 /* Private */,
+      36,    0,  227,    2, 0x08 /* Private */,
+      37,    0,  228,    2, 0x08 /* Private */,
+      38,    0,  229,    2, 0x08 /* Private */,
+      39,    0,  230,    2, 0x08 /* Private */,
+      40,    0,  231,    2, 0x08 /* Private */,
+      41,    0,  232,    2, 0x08 /* Private */,
+      42,    2,  233,    2, 0x08 /* Private */,
+      46,    0,  238,    2, 0x08 /* Private */,
+      47,    0,  239,    2, 0x08 /* Private */,
+      48,    0,  240,    2, 0x08 /* Private */,
+      49,    0,  241,    2, 0x08 /* Private */,
+      50,    0,  242,    2, 0x08 /* Private */,
+      51,    0,  243,    2, 0x08 /* Private */,
+      52,    0,  244,    2, 0x08 /* Private */,
+      53,    0,  245,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -169,13 +180,16 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 26,   27,
     QMetaType::Void, 0x80000000 | 29,   27,
+    QMetaType::Void, 0x80000000 | 31,    2,
+    QMetaType::Void, 0x80000000 | 33,   27,
+    QMetaType::Void, 0x80000000 | 35,   27,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 38,   37,   39,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 44,   43,   45,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -208,21 +222,24 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 11: _t->UpdateSettings(); break;
         case 12: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
         case 13: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 14: _t->ReturnFromForms(); break;
-        case 15: _t->ResizeScrollArea(); break;
-        case 16: _t->InitComponents(); break;
-        case 17: _t->ShowGames(); break;
-        case 18: _t->ShowFriends(); break;
-        case 19: _t->ShowStatistic(); break;
-        case 20: _t->GoToProfile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
-        case 21: _t->UpdateButtonsBackNext(); break;
-        case 22: _t->on_ButtonFindProfile_clicked(); break;
-        case 23: _t->on_ButtonExit_clicked(); break;
-        case 24: _t->on_ButtonGoToMyProfile_clicked(); break;
-        case 25: _t->on_ButtonBack_clicked(); break;
-        case 26: _t->on_ButtonNext_clicked(); break;
-        case 27: _t->on_ButtonSettings_clicked(); break;
-        case 28: _t->on_ButtonUpdate_clicked(); break;
+        case 14: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
+        case 15: _t->moveEvent((*reinterpret_cast< QMoveEvent*(*)>(_a[1]))); break;
+        case 16: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
+        case 17: _t->ReturnFromForms(); break;
+        case 18: _t->ResizeScrollArea(); break;
+        case 19: _t->InitComponents(); break;
+        case 20: _t->ShowGames(); break;
+        case 21: _t->ShowFriends(); break;
+        case 22: _t->ShowStatistic(); break;
+        case 23: _t->GoToProfile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
+        case 24: _t->UpdateButtonsBackNext(); break;
+        case 25: _t->on_ButtonFindProfile_clicked(); break;
+        case 26: _t->on_ButtonExit_clicked(); break;
+        case 27: _t->on_ButtonGoToMyProfile_clicked(); break;
+        case 28: _t->on_ButtonBack_clicked(); break;
+        case 29: _t->on_ButtonNext_clicked(); break;
+        case 30: _t->on_ButtonSettings_clicked(); break;
+        case 31: _t->on_ButtonUpdate_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -266,13 +283,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 29)
+        if (_id < 32)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 29;
+        _id -= 32;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 29)
+        if (_id < 32)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 29;
+        _id -= 32;
     }
     return _id;
 }

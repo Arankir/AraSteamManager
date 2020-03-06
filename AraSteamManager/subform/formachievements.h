@@ -132,8 +132,6 @@ private slots:
     void HideCheckedAchievement(QTableWidgetItem *item);
     FormCategoryValue *CreateValueCategory();
 
-    void on_horizontalScrollBar_sliderMoved(int position);
-
     void on_ButtonFavorite_clicked();
 
     void on_TableWidgetAchievements_cellClicked(int row, int column);

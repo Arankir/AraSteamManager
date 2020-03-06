@@ -28,6 +28,7 @@ formgames.o
 formprofile.o
 formsettings.o
 formstatistics.o
+formtablesheaders.o
 qbuttonwithdata.o
 qcheckboxwithdata.o
 qcomboboxwithdata.o
@@ -61,3 +62,4 @@ moc_formgames.o
 moc_formprofile.o
 moc_formsettings.o
 moc_formstatistics.o
+moc_formtablesheaders.o

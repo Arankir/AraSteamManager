@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormTablesHeaders_t {
-    QByteArrayData data[13];
-    char stringdata0[160];
+    QByteArrayData data[8];
+    char stringdata0[81];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,22 +36,15 @@ QT_MOC_LITERAL(0, 0, 17), // "FormTablesHeaders"
 QT_MOC_LITERAL(1, 18, 12), // "InsertColumn"
 QT_MOC_LITERAL(2, 31, 0), // ""
 QT_MOC_LITERAL(3, 32, 9), // "a_columns"
-QT_MOC_LITERAL(4, 42, 19), // "InsertColumnHeaders"
-QT_MOC_LITERAL(5, 62, 12), // "RemoveColumn"
-QT_MOC_LITERAL(6, 75, 19), // "RemoveColumnHeaders"
-QT_MOC_LITERAL(7, 95, 23), // "SetHorizontalHeaderText"
-QT_MOC_LITERAL(8, 119, 7), // "a_index"
-QT_MOC_LITERAL(9, 127, 6), // "a_text"
-QT_MOC_LITERAL(10, 134, 9), // "InsertRow"
-QT_MOC_LITERAL(11, 144, 5), // "a_row"
-QT_MOC_LITERAL(12, 150, 9) // "RemoveRow"
+QT_MOC_LITERAL(4, 42, 12), // "RemoveColumn"
+QT_MOC_LITERAL(5, 55, 9), // "InsertRow"
+QT_MOC_LITERAL(6, 65, 5), // "a_row"
+QT_MOC_LITERAL(7, 71, 9) // "RemoveRow"
 
     },
     "FormTablesHeaders\0InsertColumn\0\0"
-    "a_columns\0InsertColumnHeaders\0"
-    "RemoveColumn\0RemoveColumnHeaders\0"
-    "SetHorizontalHeaderText\0a_index\0a_text\0"
-    "InsertRow\0a_row\0RemoveRow"
+    "a_columns\0RemoveColumn\0InsertRow\0a_row\0"
+    "RemoveRow"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +54,7 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,22 +62,16 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   49,    2, 0x0a /* Public */,
-       4,    1,   52,    2, 0x0a /* Public */,
-       5,    1,   55,    2, 0x0a /* Public */,
-       6,    1,   58,    2, 0x0a /* Public */,
-       7,    2,   61,    2, 0x0a /* Public */,
-      10,    1,   66,    2, 0x0a /* Public */,
-      12,    1,   69,    2, 0x0a /* Public */,
+       1,    1,   34,    2, 0x0a /* Public */,
+       4,    1,   37,    2, 0x0a /* Public */,
+       5,    1,   40,    2, 0x0a /* Public */,
+       7,    1,   43,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void, QMetaType::Int,    3,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString,    8,    9,
-    QMetaType::Void, QMetaType::Int,   11,
-    QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
 
        0        // eod
 };
@@ -96,12 +83,9 @@ void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->InsertColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: _t->InsertColumnHeaders((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->RemoveColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: _t->RemoveColumnHeaders((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 4: _t->SetHorizontalHeaderText((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 5: _t->InsertRow((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->RemoveRow((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->RemoveColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->InsertRow((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->RemoveRow((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -136,13 +120,13 @@ int FormTablesHeaders::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 4;
     }
     return _id;
 }
