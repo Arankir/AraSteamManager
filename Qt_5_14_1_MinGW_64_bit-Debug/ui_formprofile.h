@@ -94,6 +94,7 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         LabelAvatar = new QLabel(FormProfile);
         LabelAvatar->setObjectName(QString::fromUtf8("LabelAvatar"));

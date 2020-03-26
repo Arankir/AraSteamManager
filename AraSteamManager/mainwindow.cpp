@@ -68,11 +68,11 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "stop: 1.0 #185077); ";
             backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                         "stop: 0 #213c57, "
-                        "stop: 1.0 #1a2839); ";
+                        "stop: 1.0 #1a2839); ";//193048
             blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                        "stop: 0 #202020, "
-                        "stop: 0.8 #303030, "
-                        "stop: 1.0 #505050); ";
+                        "stop: 0 #102b45, "
+                        "stop: 0.8 #17314c, "
+                        "stop: 1.0 #193048); ";
             pushButton =
                 "QPushButton{ "
                     "color: white; "
@@ -353,6 +353,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     ;
             lineEdit =
                     "QLineEdit { "
+                    "border: 1px solid #537ca6; "
+                    "border-radius: 2px; "
                         "selection-background-color: #387097; "
                         "background-color: "+blackGradient+
                         "color: white; "
@@ -576,9 +578,9 @@ void MainWindow::InitComponents(){
     ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
     ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
 
-
-    FormTablesHeaders *th = new FormTablesHeaders();
-    ui->ScrollAreaNone->setWidget(th);
+    this->setWindowFlag(Qt::FramelessWindowHint);
+    //FormTablesHeaders *th = new FormTablesHeaders();
+    //ui->ScrollAreaNone->setWidget(th);
 }
 #define InitEnd }
 

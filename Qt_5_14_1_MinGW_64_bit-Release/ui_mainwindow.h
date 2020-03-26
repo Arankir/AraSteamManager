@@ -92,7 +92,7 @@ public:
         verticalLayout->setSpacing(1);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(1, 1, 1, 1);
+        verticalLayout->setContentsMargins(5, 5, 5, 5);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -199,7 +199,7 @@ public:
         ScrollAreaNone->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 475, 241));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 467, 237));
         ScrollAreaNone->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(ScrollAreaNone, 0, 0, 1, 1);
@@ -299,7 +299,7 @@ public:
         ScrollAreaSettings->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 475, 91));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 98, 28));
         ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
 
         gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);
