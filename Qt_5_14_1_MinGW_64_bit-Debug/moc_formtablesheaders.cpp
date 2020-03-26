@@ -22,13 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormTablesHeaders_t {
-<<<<<<< HEAD
-    QByteArrayData data[1];
-    char stringdata0[18];
-=======
     QByteArrayData data[8];
     char stringdata0[81];
->>>>>>> работает
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +32,6 @@ struct qt_meta_stringdata_FormTablesHeaders_t {
     )
 static const qt_meta_stringdata_FormTablesHeaders_t qt_meta_stringdata_FormTablesHeaders = {
     {
-<<<<<<< HEAD
-QT_MOC_LITERAL(0, 0, 17) // "FormTablesHeaders"
-
-    },
-    "FormTablesHeaders"
-=======
 QT_MOC_LITERAL(0, 0, 17), // "FormTablesHeaders"
 QT_MOC_LITERAL(1, 18, 12), // "InsertColumn"
 QT_MOC_LITERAL(2, 31, 0), // ""
@@ -56,7 +45,6 @@ QT_MOC_LITERAL(7, 71, 9) // "RemoveRow"
     "FormTablesHeaders\0InsertColumn\0\0"
     "a_columns\0RemoveColumn\0InsertRow\0a_row\0"
     "RemoveRow"
->>>>>>> работает
 };
 #undef QT_MOC_LITERAL
 
@@ -66,19 +54,13 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-<<<<<<< HEAD
-       0,    0, // methods
-=======
        4,   14, // methods
->>>>>>> работает
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
-<<<<<<< HEAD
-=======
  // slots: name, argc, parameters, tag, flags
        1,    1,   34,    2, 0x0a /* Public */,
        4,    1,   37,    2, 0x0a /* Public */,
@@ -91,18 +73,11 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
     QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void, QMetaType::Int,    6,
 
->>>>>>> работает
        0        // eod
 };
 
 void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-<<<<<<< HEAD
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
-=======
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<FormTablesHeaders *>(_o);
         Q_UNUSED(_t)
@@ -114,7 +89,6 @@ void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         default: ;
         }
     }
->>>>>>> работает
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormTablesHeaders::staticMetaObject = { {
@@ -143,8 +117,6 @@ void *FormTablesHeaders::qt_metacast(const char *_clname)
 int FormTablesHeaders::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
-<<<<<<< HEAD
-=======
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -156,7 +128,6 @@ int FormTablesHeaders::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
             *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 4;
     }
->>>>>>> работает
     return _id;
 }
 QT_WARNING_POP

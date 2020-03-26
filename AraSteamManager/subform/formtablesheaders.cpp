@@ -196,8 +196,8 @@ void FormTablesHeaders::InsertColumn(int a_columns){
 }
 void FormTablesHeaders::RemoveColumn(int a_columns){
     qDebug()<<ui->TableWidgetContent->columnCount()<<a_columns;
-    ui->TableWidgetContent->removeColumn(a_columns);
     ui->TableWidgetHorizontalHeader->removeColumn(a_columns);
+    ui->TableWidgetContent->removeColumn(a_columns);
 }
 void FormTablesHeaders::InsertRow(int a_row){
     ui->TableWidgetContent->insertRow(a_row);

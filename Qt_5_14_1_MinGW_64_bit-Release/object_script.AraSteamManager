@@ -1,3 +1,5 @@
+requestdata.o
+requestimage.o
 donutbreakdownchart.o
 mainslice.o
 threadachievements.o
@@ -8,7 +10,6 @@ threadstatistics.o
 categoriesgame.o
 favorites.o
 filter.o
-requestdata.o
 settings.o
 Sachievements.o
 Sbans.o
@@ -35,6 +36,8 @@ qcomboboxwithdata.o
 qradiobuttonwithdata.o
 qrc_resimg.o
 qrc_lang.o
+moc_requestdata.o
+moc_requestimage.o
 moc_threadachievements.o
 moc_threadfriends.o
 moc_threadgames.o
@@ -43,7 +46,6 @@ moc_threadstatistics.o
 moc_categoriesgame.o
 moc_favorites.o
 moc_filter.o
-moc_requestdata.o
 moc_settings.o
 moc_Sachievements.o
 moc_Sbans.o

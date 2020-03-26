@@ -98,28 +98,22 @@ void FormGames::OnFinish(){
     _achievements = new SAchievementsPlayer[_games.GetCount()];
     for(int i=0;i<_games.GetCount();i++){
         QString path = _setting._pathImagesIconGames+_games[i].GetImg_icon_url()+".jpg";
+        QLabel *iconGame = new QLabel;
+        ui->TableWidgetGames->setCellWidget(i,c_tableColumnIcon,iconGame);
         if(!QFile::exists(path)){
-            if(_numRequests<500){
-                if(_games[i].GetImg_icon_url()!=""){
-                    RequestData *image = new RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                                           QString::number(_games[i].GetAppid())+"/"+_games[i].GetImg_icon_url()+".jpg",i,path,true);
-                    connect(image,&RequestData::s_finished,this,&FormGames::OnImageLoad);
-                    _request.append(image);
-                    _numRequests++;
-                    }
-                _numNow++;
-            }
-            } else {
-            QLabel *iconGame = new QLabel;
+            iconGame->setBaseSize(QSize(32,32));
+            new RequestImage(iconGame,"http://media.steampowered.com/steamcommunity/public/images/apps/"+
+                         QString::number(_games[i].GetAppid())+"/"+_games[i].GetImg_icon_url()+".jpg",path,true);
+        } else {
             iconGame->setPixmap(QPixmap(path));
-            ui->TableWidgetGames->setCellWidget(i,c_tableColumnIcon,iconGame);
-            }
+        }
         SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(_games[i].GetAppid()),_id);
         achievementsGame->_index=i;
         connect(achievementsGame,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         for (int j=0;j<hideList.size();j++) {
             if(hideList[j].toInt()==_games[i].GetAppid()){
                 ui->TableWidgetGames->setRowHidden(i,true);
+                ui->TableWidgetGames->item(i,c_tableColumnName)->setToolTip("StandartColor");
                 ui->TableWidgetGames->item(i,c_tableColumnName)->setTextColor(Qt::red);
                 //static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,c_tableColumnHide))->setEnabled(false);
                 hideList.removeAt(j);
@@ -128,25 +122,6 @@ void FormGames::OnFinish(){
             }
         }
     ui->LineEditGame->setFocus();
-}
-void FormGames::OnImageLoad(RequestData *a_image){
-    QPixmap iconGame;
-    iconGame.loadFromData(a_image->GetAnswer());
-    QLabel *label = new QLabel;
-    label->setPixmap(iconGame);
-    ui->TableWidgetGames->setCellWidget(a_image->GetRow(),c_tableColumnIcon,label);
-    if(_numRequests==500&&_numNow<_games.GetCount()){
-        while (QFile::exists(_setting._pathImagesIconGames+_games[_numNow].GetImg_icon_url()+".jpg")||_games[_numNow].GetImg_icon_url()=="") {
-            _numNow++;
-        }
-        a_image->LoadImage("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                        QString::number(_games[_numNow].GetAppid())+"/"+_games[_numNow].GetImg_icon_url()+".jpg",_numNow,
-                        _setting._pathImagesIconGames+_games[_numNow].GetImg_icon_url()+".jpg",true);
-        _numNow++;
-    } else {
-        disconnect(a_image,&RequestData::s_finished,this,&FormGames::OnImageLoad);
-        a_image->deleteLater();
-    }
 }
 void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     disconnect(&a_achievements,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
@@ -278,7 +253,10 @@ void FormGames::on_TableWidgetGames_cellDoubleClicked(int a_row, int){
 void FormGames::on_TableWidgetGames_cellClicked(int a_row, int){
     _selectedGame=ui->TableWidgetGames->item(a_row,c_tableColumnAppid)->text();
     _selectedIndex=ui->TableWidgetGames->item(a_row,c_tableColumnIndex)->text();
-    ui->LabelIconGame->setPixmap(*static_cast<QLabel*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnIcon))->pixmap());
+    if(static_cast<QLabel*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnIcon))->pixmap())
+        ui->LabelIconGame->setPixmap(*static_cast<QLabel*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnIcon))->pixmap());
+    else
+        ui->LabelIconGame->setPixmap(QPixmap());
     ui->LabelTitleGame->setText(ui->TableWidgetGames->item(a_row,c_tableColumnName)->text());
     ui->ProgressBarSelectedGame->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->maximum());
     ui->ProgressBarSelectedGame->setValue(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->value());

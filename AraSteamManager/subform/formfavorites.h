@@ -9,7 +9,7 @@
 #include <class/steamapi/Sachievements.h>
 #include <class/filter.h>
 #include <class/settings.h>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 
 namespace Ui {
 class FormFavorites;

@@ -2,11 +2,11 @@
 
 
 Settings::Settings(QObject *parent) : QObject(parent){
-    _settings = new QSettings(QDir::currentPath()+"/settings.ini",QSettings::IniFormat);
+    _settings = new QSettings("Arankir","SteamAchievementsStatistic");
 }
 
 Settings::Settings(QRect a_geometry, QObject *parent) : QObject(parent){
-    _settings = new QSettings(QDir::currentPath()+"/settings.ini",QSettings::IniFormat);
+    _settings = new QSettings("Arankir","SteamAchievementsStatistic");
     _screen=a_geometry;
 }
 

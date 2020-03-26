@@ -4,7 +4,7 @@
 #include <QObject>
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 #include <QEventLoop>
 
 class ThreadStatistics : public QObject

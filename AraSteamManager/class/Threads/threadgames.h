@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTableWidget>
 #include <class/steamapi/Sgames.h>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 #include <QEventLoop>
 
 class ThreadGames : public QObject

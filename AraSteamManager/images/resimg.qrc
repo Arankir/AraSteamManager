@@ -89,5 +89,6 @@
         <file>state_red.png</file>
         <file>state_white.png</file>
         <file>state_yellow.png</file>
+        <file>loading.gif</file>
     </qresource>
 </RCC>

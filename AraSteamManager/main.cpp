@@ -6,11 +6,11 @@
 
 int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
     QCoreApplication::setOrganizationName("Arankir");
     QCoreApplication::setOrganizationDomain("Arankir");
     QCoreApplication::setApplicationName("SteamAchievementsStatistic");
 
-    QApplication a(argc, argv);
     qApp->setStyle(QStyleFactory::create("Fusion"));
     qRegisterMetaType<QVector<int>>("QVector<int>");
     qRegisterMetaType<QVector<double>>("QVector<double>");

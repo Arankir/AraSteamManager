@@ -15,7 +15,7 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <QButtonGroup>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 #include <class/settings.h>
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>

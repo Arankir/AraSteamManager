@@ -8,7 +8,7 @@
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sfriends.h>
 #include <class/settings.h>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 
 namespace Ui {
 class FormProfile;

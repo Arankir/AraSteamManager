@@ -11,6 +11,7 @@
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
 #include <class/Threads/threading.h>
+#include <class/Network/requestimage.h>
 #include <subwidget/qbuttonwithdata.h>
 #include <QList>
 #include <QPropertyAnimation>
@@ -45,7 +46,6 @@ public slots:
 private slots:
     void changeEvent(QEvent *event);
     void InitComponents();
-    void OnImageLoad(RequestData *imgr);
     void OnResultAchievements(SAchievementsPlayer ach);
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event);

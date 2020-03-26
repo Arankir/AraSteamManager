@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QFile>
 #include <QStandardItem>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 #include <class/steamapi/Sfriends.h>
 #include <class/Threads/threading.h>
 #include <class/settings.h>

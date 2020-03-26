@@ -5,7 +5,7 @@
 #include <QTableWidget>
 #include <QStandardItemModel>
 #include <class/steamapi/Sfriends.h>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 
 class ThreadFriends : public QObject
 {

@@ -25,6 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    class/Network/requestdata.cpp \
+    class/Network/requestimage.cpp \
     class/NotMine/donutbreakdownchart.cpp \
     class/NotMine/mainslice.cpp \
     class/Threads/threadachievements.cpp \
@@ -35,7 +37,6 @@ SOURCES += \
     class/categoriesgame.cpp \
     class/favorites.cpp \
     class/filter.cpp \
-    class/requestdata.cpp \
     class/settings.cpp \
     class/steamapi/Sachievements.cpp \
     class/steamapi/Sbans.cpp \
@@ -62,6 +63,8 @@ SOURCES += \
     subwidget/qradiobuttonwithdata.cpp
 
 HEADERS += \
+    class/Network/requestdata.h \
+    class/Network/requestimage.h \
     class/NotMine/donutbreakdownchart.h \
     class/NotMine/mainslice.h \
     class/Threads/threadachievements.h \
@@ -72,7 +75,6 @@ HEADERS += \
     class/categoriesgame.h \
     class/favorites.h \
     class/filter.h \
-    class/requestdata.h \
     class/settings.h \
     class/statusvalue.h \
     class/steamapi/Sachievements.h \

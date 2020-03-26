@@ -54,7 +54,7 @@ void FormSettings::InitComponents(){
             break;
     }
     ui->CheckBoxVisibleProfileInfo->setChecked(_setting.GetVisibleProfileInfo());
-
+    ui->CheckBoxSaveImage->setChecked(_setting.GetSaveImages());
 //    QPalette darkPalette;
 //    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
 //    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
@@ -303,5 +303,10 @@ void FormSettings::HideClicked(){
 
 void FormSettings::on_CheckBoxVisibleProfileInfo_stateChanged(int arg1){
     _setting.SetVisibleProfileInfo(arg1==2);
+    emit s_updateSettings();
+}
+
+void FormSettings::on_CheckBoxSaveImage_stateChanged(int arg1){
+    _setting.SetSaveimage(arg1==2);
     emit s_updateSettings();
 }

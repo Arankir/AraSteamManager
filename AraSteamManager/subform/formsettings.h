@@ -8,7 +8,7 @@
 #include <QPair>
 #include <QTranslator>
 #include <class/settings.h>
-#include <class/requestdata.h>
+#include <class/Network/requestdata.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sgames.h>
 #include <subwidget/qbuttonwithdata.h>
@@ -52,6 +52,8 @@ private slots:
     void Retranslate();
 
     void on_CheckBoxVisibleProfileInfo_stateChanged(int arg1);
+
+    void on_CheckBoxSaveImage_stateChanged(int arg1);
 
 private:
     Ui::FormSettings *ui;

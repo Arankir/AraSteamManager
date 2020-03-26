@@ -56,7 +56,9 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                 "QPushButton:disabled{ "
                     "background-color: #48525a; "
                 "} "
-                "QPushButton:pressed{ background-color: #212121; } "
+                "QPushButton:pressed{ "
+                    "background-color: #212121; "
+                "} "
                 "QPushButton:hover{ "
                     "background-color: #22748c; "
                     "background: "+hoverGradient+

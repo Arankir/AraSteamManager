@@ -201,6 +201,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="CheckBoxSaveImage">
+         <property name="text">
+          <string>Автоматически сохранять картинки на компьютере (для более быстрой загрузки)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="labelIcons8">
          <property name="font">
           <font>
