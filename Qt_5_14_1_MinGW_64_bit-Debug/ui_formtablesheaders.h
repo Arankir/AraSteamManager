@@ -27,14 +27,14 @@ public:
     {
         if (FormTablesHeaders->objectName().isEmpty())
             FormTablesHeaders->setObjectName(QString::fromUtf8("FormTablesHeaders"));
-        FormTablesHeaders->resize(653, 601);
+        FormTablesHeaders->resize(650, 601);
         TableWidgetHorizontalHeader = new QTableWidget(FormTablesHeaders);
         if (TableWidgetHorizontalHeader->columnCount() < 7)
             TableWidgetHorizontalHeader->setColumnCount(7);
         if (TableWidgetHorizontalHeader->rowCount() < 1)
             TableWidgetHorizontalHeader->setRowCount(1);
         TableWidgetHorizontalHeader->setObjectName(QString::fromUtf8("TableWidgetHorizontalHeader"));
-        TableWidgetHorizontalHeader->setGeometry(QRect(160, 10, 481, 211));
+        TableWidgetHorizontalHeader->setGeometry(QRect(10, 10, 631, 111));
         TableWidgetHorizontalHeader->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         TableWidgetHorizontalHeader->setRowCount(1);
         TableWidgetHorizontalHeader->setColumnCount(7);
@@ -47,14 +47,13 @@ public:
         if (TableWidgetContent->rowCount() < 7)
             TableWidgetContent->setRowCount(7);
         TableWidgetContent->setObjectName(QString::fromUtf8("TableWidgetContent"));
-        TableWidgetContent->setGeometry(QRect(160, 230, 481, 361));
+        TableWidgetContent->setGeometry(QRect(10, 130, 631, 461));
         TableWidgetContent->setSortingEnabled(true);
         TableWidgetContent->setRowCount(7);
         TableWidgetContent->setColumnCount(7);
         TableWidgetContent->horizontalHeader()->setVisible(false);
         TableWidgetContent->horizontalHeader()->setStretchLastSection(true);
         TableWidgetContent->verticalHeader()->setVisible(false);
-        TableWidgetContent->verticalHeader()->setStretchLastSection(true);
 
         retranslateUi(FormTablesHeaders);
 

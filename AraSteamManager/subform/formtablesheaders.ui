@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
+    <width>650</width>
     <height>601</height>
    </rect>
   </property>
@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="TableWidgetHorizontalHeader">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>10</x>
      <y>10</y>
-     <width>481</width>
-     <height>211</height>
+     <width>631</width>
+     <height>111</height>
     </rect>
    </property>
    <property name="horizontalScrollBarPolicy">
@@ -52,10 +52,10 @@
   <widget class="QTableWidget" name="TableWidgetContent">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>230</y>
-     <width>481</width>
-     <height>361</height>
+     <x>10</x>
+     <y>130</y>
+     <width>631</width>
+     <height>461</height>
     </rect>
    </property>
    <property name="sortingEnabled">
@@ -75,9 +75,6 @@
    </attribute>
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>
-   </attribute>
-   <attribute name="verticalHeaderStretchLastSection">
-    <bool>true</bool>
    </attribute>
    <row/>
    <row/>

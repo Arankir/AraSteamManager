@@ -310,6 +310,7 @@ void FormAchievements::SwitchSimpleCompare(FormMode a_simpleCompare){
     switch (a_simpleCompare) {
         case FormMode::compare:{
             ui->GroupBoxReachedFilter->setVisible(true);
+            _tableAchievements->SetColumnCount(c_tableAchievementColumnCount);
             _tableAchievements->SetType(TableType::standart);
             ui->CheckBoxCompareAllFriends->setVisible(false);
             ui->TableWidgetFriends->setVisible(false);
