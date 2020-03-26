@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -23,7 +24,6 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -34,6 +34,10 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *ButtonMinimize;
+    QPushButton *ButtonMaximize;
+    QFrame *line;
     QHBoxLayout *horizontalLayout_3;
     QLabel *LabelLogo;
     QSpacerItem *horizontalSpacer_2;
@@ -75,7 +79,6 @@ public:
     QScrollArea *ScrollAreaSettings;
     QWidget *scrollAreaWidgetContents_5;
     QMenuBar *menuBar;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -92,7 +95,31 @@ public:
         verticalLayout->setSpacing(1);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(5, 5, 5, 5);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        ButtonMinimize = new QPushButton(centralWidget);
+        ButtonMinimize->setObjectName(QString::fromUtf8("ButtonMinimize"));
+        ButtonMinimize->setText(QString::fromUtf8(""));
+
+        horizontalLayout->addWidget(ButtonMinimize);
+
+        ButtonMaximize = new QPushButton(centralWidget);
+        ButtonMaximize->setObjectName(QString::fromUtf8("ButtonMaximize"));
+        ButtonMaximize->setText(QString::fromUtf8(""));
+
+        horizontalLayout->addWidget(ButtonMaximize);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        line = new QFrame(centralWidget);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        verticalLayout->addWidget(line);
+
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -199,7 +226,7 @@ public:
         ScrollAreaNone->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 467, 237));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 459, 228));
         ScrollAreaNone->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(ScrollAreaNone, 0, 0, 1, 1);
@@ -313,9 +340,6 @@ public:
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 479, 20));
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -332,7 +356,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
         ButtonSettings->setText(QString());
-        ButtonExit->setText(QCoreApplication::translate("MainWindow", " \320\222\321\213\321\205\320\276\320\264", nullptr));
+        ButtonExit->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\321\205\320\276\320\264", nullptr));
         ButtonBack->setText(QString());
         ButtonNext->setText(QString());
         ButtonUpdate->setText(QString());

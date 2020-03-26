@@ -45,27 +45,27 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                         "stop: 0 #213c57, "
                         "stop: 1.0 #1a2839); ";
             blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                        "stop: 0 #202020, "
-                        "stop: 0.8 #303030, "
-                        "stop: 1.0 #505050); ";
+                        "stop: 0 #102b45, "
+                        "stop: 0.8 #17314c, "
+                        "stop: 1.0 #193048); ";
             pushButton =
-                "QPushButton{ "
-                    "color: white; "
-                    "background-color: #24547d; "
-                "} "
-                "QPushButton:disabled{ "
-                    "background-color: #48525a; "
-                "} "
-                "QPushButton:pressed{ "
-                    "background-color: #212121; "
-                "} "
-                "QPushButton:hover{ "
-                    "background-color: #22748c; "
-                    "background: "+hoverGradient+
-                    "border: 1px solid #262626; "
-                    "border-radius: 2px; "
+                    "QPushButton{ "
+                        "color: white; "
+                        "background-color: #24547d; "
                     "} "
-                ;
+                    "QPushButton:disabled{ "
+                        "background-color: #48525a; "
+                    "} "
+                    "QPushButton:pressed{ "
+                        "background-color: #212121; "
+                    "} "
+                    "QPushButton:hover{ "
+                        "background-color: #22748c; "
+                        "background: "+hoverGradient+
+                        "border: 1px solid #262626; "
+                        "border-radius: 2px; "
+                    "} "
+                    ;
             progressBar =
                     "QProgressBar { "
                         "color: white; "
@@ -90,22 +90,22 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     "} "
                     "QScrollArea { "
                         "border: 0px solid white; "
-                    "}"
+                    "} "
                     "QMessageBox{"
                         "background: black; "
-                    "}"
+                    "} "
                     ;
             labels =
                     "QLabel{"
                         "color: white; "
-                    "}"
+                    "} "
                     ;
             radioButtons =
                     "QRadioButton{"
                         "color: white; "
                         "background-color: rgba(255, 255, 255, 0); "
                         "border: 0px solid grey; "
-                    "}"
+                    "} "
                     "QRadioButton::indicator { "
                         "width: 15; "
                     "} "
@@ -206,6 +206,8 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
                     ;
             lineEdit =
                     "QLineEdit { "
+                        "border: 1px solid #537ca6; "
+                        "border-radius: 2px; "
                         "selection-background-color: #387097; "
                         "background-color: "+blackGradient+
                         "color: white; "
@@ -254,7 +256,7 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
             groupBox =
                     "QGroupBox::title{ "
                         "color: white; "
-                    "}"
+                    "} "
                     ;
             listWidget =
                     "QListWidget { "
@@ -318,6 +320,12 @@ MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
     _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
+//    this->setWindowFlags(Qt::Window
+//                         | Qt::WindowTitleHint
+//                         | Qt::CustomizeWindowHint);
+    ui->ButtonMinimize->setVisible(false);
+    ui->ButtonMaximize->setVisible(false);
+    ui->line->setVisible(false);
     ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
     this->setGeometry(_setting.GetMainWindowGeometry());
     if((_setting.GetMainWindowPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetMainWindowPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
@@ -618,3 +626,17 @@ void MainWindow::on_ButtonUpdate_clicked(){
     static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->UpdateInfo();
 }
 #define FunctionsEnd }
+
+void MainWindow::on_ButtonMaximize_clicked(){
+    if(!this->isMaximized())
+        this->showMaximized();
+    else
+        this->showNormal();
+}
+
+void MainWindow::on_ButtonMinimize_clicked(){
+    if(!this->isMinimized())
+        this->showMinimized();
+    else
+        this->showNormal();
+}

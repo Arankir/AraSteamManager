@@ -99,6 +99,10 @@ private slots:
 
     void on_ButtonUpdate_clicked();
 
+    void on_ButtonMaximize_clicked();
+
+    void on_ButtonMinimize_clicked();
+
 private:
     Ui::MainWindow *ui;
     int _windowChildCount=0;
