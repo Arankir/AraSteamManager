@@ -199,7 +199,11 @@ public:
         ScrollAreaNone->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+<<<<<<< HEAD
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 467, 237));
+=======
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 475, 241));
+>>>>>>> работает
         ScrollAreaNone->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(ScrollAreaNone, 0, 0, 1, 1);
@@ -299,7 +303,11 @@ public:
         ScrollAreaSettings->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
+<<<<<<< HEAD
         scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 98, 28));
+=======
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 475, 91));
+>>>>>>> работает
         ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
 
         gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);

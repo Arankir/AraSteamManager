@@ -24,7 +24,6 @@
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
-#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
@@ -95,18 +94,13 @@ public:
     QLineEdit *LineEditNameAchievements;
     QPushButton *ButtonFindAchievement;
     QHBoxLayout *horizontalLayout_10;
-    QVBoxLayout *verticalLayout_7;
+    QVBoxLayout *LayoutTables;
     QHBoxLayout *horizontalLayout_8;
     QCheckBox *CheckBoxCompareIcon;
     QCheckBox *CheckBoxCompareTitle;
     QCheckBox *CheckBoxCompareDescription;
     QCheckBox *CheckBoxCompareTotalPercent;
     QSpacerItem *horizontalSpacer_4;
-    QTableWidget *TableWidgetHorizontalHeaderAchievements;
-    QHBoxLayout *horizontalLayout_5;
-    QTableWidget *TableWidgetAchievements;
-    QTableWidget *TableWidgetCategory;
-    QScrollBar *VerticalScrollBarTableAchievements;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -491,9 +485,9 @@ public:
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setSpacing(0);
         horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setSpacing(0);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        LayoutTables = new QVBoxLayout();
+        LayoutTables->setSpacing(0);
+        LayoutTables->setObjectName(QString::fromUtf8("LayoutTables"));
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         CheckBoxCompareIcon = new QCheckBox(FormAchievements);
@@ -525,50 +519,10 @@ public:
         horizontalLayout_8->addItem(horizontalSpacer_4);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_8);
-
-        TableWidgetHorizontalHeaderAchievements = new QTableWidget(FormAchievements);
-        TableWidgetHorizontalHeaderAchievements->setObjectName(QString::fromUtf8("TableWidgetHorizontalHeaderAchievements"));
-        TableWidgetHorizontalHeaderAchievements->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        TableWidgetHorizontalHeaderAchievements->horizontalHeader()->setStretchLastSection(true);
-        TableWidgetHorizontalHeaderAchievements->verticalHeader()->setVisible(false);
-        TableWidgetHorizontalHeaderAchievements->verticalHeader()->setStretchLastSection(true);
-
-        verticalLayout_7->addWidget(TableWidgetHorizontalHeaderAchievements);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(0);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        TableWidgetAchievements = new QTableWidget(FormAchievements);
-        TableWidgetAchievements->setObjectName(QString::fromUtf8("TableWidgetAchievements"));
-        TableWidgetAchievements->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        TableWidgetAchievements->setEditTriggers(QAbstractItemView::SelectedClicked);
-        TableWidgetAchievements->setSelectionBehavior(QAbstractItemView::SelectRows);
-        TableWidgetAchievements->horizontalHeader()->setVisible(false);
-        TableWidgetAchievements->horizontalHeader()->setStretchLastSection(true);
-
-        horizontalLayout_5->addWidget(TableWidgetAchievements);
-
-        TableWidgetCategory = new QTableWidget(FormAchievements);
-        TableWidgetCategory->setObjectName(QString::fromUtf8("TableWidgetCategory"));
-        TableWidgetCategory->setSelectionBehavior(QAbstractItemView::SelectRows);
-        TableWidgetCategory->setSortingEnabled(true);
-        TableWidgetCategory->horizontalHeader()->setHighlightSections(false);
-        TableWidgetCategory->verticalHeader()->setVisible(false);
-
-        horizontalLayout_5->addWidget(TableWidgetCategory);
+        LayoutTables->addLayout(horizontalLayout_8);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_5);
-
-
-        horizontalLayout_10->addLayout(verticalLayout_7);
-
-        VerticalScrollBarTableAchievements = new QScrollBar(FormAchievements);
-        VerticalScrollBarTableAchievements->setObjectName(QString::fromUtf8("VerticalScrollBarTableAchievements"));
-        VerticalScrollBarTableAchievements->setOrientation(Qt::Vertical);
-
-        horizontalLayout_10->addWidget(VerticalScrollBarTableAchievements);
+        horizontalLayout_10->addLayout(LayoutTables);
 
 
         verticalLayout_8->addLayout(horizontalLayout_10);

@@ -20,9 +20,13 @@ QT_BEGIN_NAMESPACE
 class Ui_FormTablesHeaders
 {
 public:
+<<<<<<< HEAD
     QTableWidget *TableWidgetHollow;
     QTableWidget *TableWidgetHorizontalHeader;
     QTableWidget *TableWidgetVerticalHeader;
+=======
+    QTableWidget *TableWidgetHorizontalHeader;
+>>>>>>> работает
     QTableWidget *TableWidgetContent;
 
     void setupUi(QWidget *FormTablesHeaders)
@@ -30,6 +34,7 @@ public:
         if (FormTablesHeaders->objectName().isEmpty())
             FormTablesHeaders->setObjectName(QString::fromUtf8("FormTablesHeaders"));
         FormTablesHeaders->resize(653, 601);
+<<<<<<< HEAD
         TableWidgetHollow = new QTableWidget(FormTablesHeaders);
         if (TableWidgetHollow->columnCount() < 1)
             TableWidgetHollow->setColumnCount(1);
@@ -41,12 +46,15 @@ public:
         TableWidgetHollow->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         TableWidgetHollow->setRowCount(1);
         TableWidgetHollow->setColumnCount(1);
+=======
+>>>>>>> работает
         TableWidgetHorizontalHeader = new QTableWidget(FormTablesHeaders);
         if (TableWidgetHorizontalHeader->columnCount() < 7)
             TableWidgetHorizontalHeader->setColumnCount(7);
         if (TableWidgetHorizontalHeader->rowCount() < 1)
             TableWidgetHorizontalHeader->setRowCount(1);
         TableWidgetHorizontalHeader->setObjectName(QString::fromUtf8("TableWidgetHorizontalHeader"));
+<<<<<<< HEAD
         TableWidgetHorizontalHeader->setGeometry(QRect(150, 11, 251, 91));
         TableWidgetHorizontalHeader->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         TableWidgetHorizontalHeader->setRowCount(1);
@@ -65,13 +73,27 @@ public:
         TableWidgetVerticalHeader->setColumnCount(1);
         TableWidgetVerticalHeader->horizontalHeader()->setVisible(false);
         TableWidgetVerticalHeader->verticalHeader()->setStretchLastSection(true);
+=======
+        TableWidgetHorizontalHeader->setGeometry(QRect(160, 10, 481, 211));
+        TableWidgetHorizontalHeader->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        TableWidgetHorizontalHeader->setRowCount(1);
+        TableWidgetHorizontalHeader->setColumnCount(7);
+        TableWidgetHorizontalHeader->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
+        TableWidgetHorizontalHeader->horizontalHeader()->setStretchLastSection(true);
+        TableWidgetHorizontalHeader->verticalHeader()->setVisible(false);
+>>>>>>> работает
         TableWidgetContent = new QTableWidget(FormTablesHeaders);
         if (TableWidgetContent->columnCount() < 7)
             TableWidgetContent->setColumnCount(7);
         if (TableWidgetContent->rowCount() < 7)
             TableWidgetContent->setRowCount(7);
         TableWidgetContent->setObjectName(QString::fromUtf8("TableWidgetContent"));
+<<<<<<< HEAD
         TableWidgetContent->setGeometry(QRect(150, 110, 251, 191));
+=======
+        TableWidgetContent->setGeometry(QRect(160, 230, 481, 361));
+        TableWidgetContent->setSortingEnabled(true);
+>>>>>>> работает
         TableWidgetContent->setRowCount(7);
         TableWidgetContent->setColumnCount(7);
         TableWidgetContent->horizontalHeader()->setVisible(false);
