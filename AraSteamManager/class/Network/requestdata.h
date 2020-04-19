@@ -19,8 +19,8 @@ class RequestData : public QObject
     Q_OBJECT
 public:
     explicit RequestData(QString url, int column=-1, QString save="", bool autosave=false, QObject *parent = nullptr);
-    RequestData(QString str, bool parallel);
-    RequestData();
+    RequestData(QString str, bool parallel, QObject *parent = nullptr);
+    RequestData(QObject *parent = nullptr);
     ~RequestData();
     void LoadImage(QString url, int column=-1, QString save="", bool autosave=false);
     void Get(QString str, bool parallel = false);

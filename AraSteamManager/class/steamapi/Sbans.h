@@ -20,8 +20,8 @@ class SBans : public QObject
     Q_OBJECT
 public:
     explicit SBans(QString id, bool parallel, QObject *parent = nullptr);
-    SBans(QJsonDocument DocBans);
-    SBans();
+    SBans(QJsonDocument DocBans, QObject *parent = nullptr);
+    SBans(QObject *parent = nullptr);
     ~SBans();
     void Set(QString id, bool parallel);
     void Set(QJsonDocument DocBans);

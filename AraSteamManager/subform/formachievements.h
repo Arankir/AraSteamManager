@@ -15,7 +15,7 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <QButtonGroup>
-#include <class/Network/requestdata.h>
+#include <class/Network/requestimage.h>
 #include <class/settings.h>
 #include <class/steamapi/Sgames.h>
 #include <class/steamapi/Sachievements.h>
@@ -89,7 +89,7 @@ private slots:
     void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
 
     void closeEvent(QCloseEvent*);
-    void ShowCategories(bool saveDate);
+    void ShowCategories();
     void UpdateHiddenRows();
     bool SetFriendAchievements(SAchievements achievement, int col);
 
@@ -140,7 +140,6 @@ private:
     Ui::FormAchievements *ui;
     Settings _setting;
     QString _theme="white";
-    bool _isFirstLoad=true;
     QString _currentAchievement;
     int _currentAchievementIndex=-1;
 

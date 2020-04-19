@@ -11,10 +11,8 @@ const int c_tableColumnCount=5;
 #define ConstantsEnd }
 
 #define Init {
-FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormGames){
+FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) : QWidget(parent),ui(new Ui::FormGames),_id(a_id),_games(a_games){
     ui->setupUi(this);
-    _id=a_id;
-    _games=a_games;
     this->setAttribute(Qt::WA_TranslucentBackground);
     switch(_setting.GetTheme()){
         case 1:

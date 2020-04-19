@@ -1,10 +1,10 @@
 #include "Sgames.h"
 
 #define SGameStart {
-SGame::SGame(QJsonObject a_game, QObject *parent) : QObject(parent){
-    _game=a_game;
+SGame::SGame(QJsonObject a_game, QObject *parent) : QObject(parent),_game(a_game){
+
 }
-SGame::SGame(){
+SGame::SGame(QObject *parent) : QObject(parent){
 
 }
 void SGame::Set(QJsonObject a_game){

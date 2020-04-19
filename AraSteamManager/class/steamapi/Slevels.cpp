@@ -1,10 +1,9 @@
 #include "Slevels.h"
 
-SLevels::SLevels(QString a_id, QObject *parent) : QObject(parent){
+SLevels::SLevels(QString a_id, QObject *parent) : QObject(parent),_steamid(a_id){
     _manager = new QNetworkAccessManager();
     QEventLoop loop;
     connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-    _steamid=a_id;
     QNetworkReply& Reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+_setting.GetKey()+"&steamid="+a_id));
     loop.exec();
     QJsonDocument DocLvls = QJsonDocument::fromJson(Reply.readAll());
@@ -12,7 +11,7 @@ SLevels::SLevels(QString a_id, QObject *parent) : QObject(parent){
     emit s_finished(this);
     emit s_finished();
 }
-SLevels::SLevels(QJsonDocument a_lvls){
+SLevels::SLevels(QJsonDocument a_lvls, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     if(a_lvls.object().value("response").toObject().value("player_level").toInt()>0){
         _player_level=a_lvls.object().value("response").toObject().value("player_level").toInt();
@@ -23,9 +22,8 @@ SLevels::SLevels(QJsonDocument a_lvls){
         _error="profile is not exist";
     }
 }
-SLevels::SLevels(){
+SLevels::SLevels(QObject *parent) : QObject(parent),_status(StatusValue::none){
     _manager = new QNetworkAccessManager();
-    _status=StatusValue::none;
 }
 SLevels::~SLevels(){
     delete _manager;

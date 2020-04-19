@@ -5,6 +5,12 @@
 #include <QtDebug>
 #include <QScrollBar>
 #include <QTableWidgetItem>
+#include <QLabel>
+#include <class/steamapi/Sprofile.h>
+#include <class/steamapi/Sgames.h>
+#include <class/steamapi/Sachievements.h>
+#include <class/filter.h>
+#include <class/Network/requestimage.h>
 
 namespace Ui {
 class FormTablesHeaders;
@@ -20,7 +26,7 @@ class FormTablesHeaders : public QWidget
     Q_OBJECT
 
 public:
-    explicit FormTablesHeaders(int rowHeaders, int rowContent, int column, TableType type, QWidget *parent = nullptr);
+    explicit FormTablesHeaders(int rowHeaders, int rowContent, SGame game, QString id, SAchievements achievements, TableType type, QWidget *parent = nullptr);
     ~FormTablesHeaders();
     void resizeEvent(QResizeEvent *event);
 
@@ -50,7 +56,6 @@ public:
     void SetVisibleColumn(int column, bool visible);
     void SetVisibleRowHeaders(int row, bool visible);
 
-    void SetHorizontalTitle(int column, QTableWidgetItem *item);
     void ChangeHorizontalTitle(int column, QString text);
     void SetVerticalTitle(int row, QTableWidgetItem *item);
     void SetVerticalHeaderTitle(int row, QTableWidgetItem *item);
@@ -66,7 +71,15 @@ public:
     void ResizeRowContent(int row, int height);
     void ResizeColumn(int column, int width);
     void ResizeRowHeaders(int row, int height);
+
     void SetType(TableType newType);
+    TableType GetType() {return _currentType;}
+    bool AddFriendColumn(SProfile friendProfile);
+    void AddNoValueColumn();
+    void AddCategoryColumn();
+    QVector<int> GetFriendsColumns() {return _friendsColumns;}
+    int GetNoValueColumn() {return _noValueColumn;}
+    QVector<int> GetCategoryColumns() {return _categoriesColumns;}
 
     QTableWidget *GetTableHH();
     QTableWidget *GetTableContent();
@@ -77,11 +90,22 @@ public slots:
     void InsertRow(int a_row);
     void RemoveRow(int a_row);
 private:
+    void SetHorizontalTitle(int column, QString text);
     Ui::FormTablesHeaders *ui;
     bool _visibleHorizontal=true;
     int _horizontalHeaderHeight=0;
+    SGame _game;
     TableType _currentType;
+    int _baseColumns;
+    int _noValueColumn;
+    QVector<int> _friendsColumns;
+    QVector<int> _categoriesColumns;
 
+    QString _id;
+    SAchievements _achievements;
+    //для фильтрации
+    Filter _fAchievements;
+    Filter _fCompare;
 
 };
 

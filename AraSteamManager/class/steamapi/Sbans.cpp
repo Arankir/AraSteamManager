@@ -1,8 +1,7 @@
 #include "Sbans.h"
 
-SBans::SBans(QString a_id, bool a_parallel, QObject *parent) : QObject(parent){
+SBans::SBans(QString a_id, bool a_parallel, QObject *parent) : QObject(parent),_id(a_id){
     _manager = new QNetworkAccessManager();
-    _id=a_id;
     if(a_parallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
         _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
@@ -18,7 +17,7 @@ SBans::SBans(QString a_id, bool a_parallel, QObject *parent) : QObject(parent){
         emit s_finished();
     }
 }
-SBans::SBans(QJsonDocument a_bans){
+SBans::SBans(QJsonDocument a_bans, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     if(a_bans.object().value("players").toArray().size()>0){
         _bans=a_bans.object().value("players").toArray();
@@ -29,9 +28,8 @@ SBans::SBans(QJsonDocument a_bans){
         _error="profile is not exist";
     }
 }
-SBans::SBans(){
+SBans::SBans(QObject *parent) : QObject(parent),_status(StatusValue::none){
     _manager = new QNetworkAccessManager();
-    _status=StatusValue::none;
 }
 SBans::~SBans(){
     delete _manager;

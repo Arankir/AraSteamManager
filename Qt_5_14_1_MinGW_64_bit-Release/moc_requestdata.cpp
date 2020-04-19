@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../AraSteamManager/class/requestdata.h"
+#include "../AraSteamManager/class/Network/requestdata.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

@@ -1,10 +1,9 @@
 #include "formcategoryvalue.h"
 #include "ui_formcategoryvalue.h"
 
-FormCategoryValue::FormCategoryValue(int a_pos, QWidget *parent) : QWidget(parent), ui(new Ui::FormCategoryValue){
+FormCategoryValue::FormCategoryValue(int a_pos, QWidget *parent) : QWidget(parent), ui(new Ui::FormCategoryValue),_position(a_pos){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    _position=a_pos;
     switch(_setting.GetTheme()){
         case 1:
             _theme="white";

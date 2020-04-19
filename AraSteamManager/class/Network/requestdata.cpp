@@ -1,13 +1,8 @@
 #include "requestdata.h"
 
-RequestData::RequestData(QString a_url, int a_row, QString a_save, bool a_autoSave, QObject *parent) : QObject(parent){
+RequestData::RequestData(QString a_url, int a_row, QString a_save, bool a_autoSave, QObject *parent):QObject(parent),_answer(""),_url(a_url),_row(a_row),_save(a_save),_autosave(a_autoSave){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&RequestData::OnResultGet);
-    _answer="";
-    _url=a_url;
-    _row=a_row;
-    _save=a_save;
-    _autosave=a_autoSave;
     switch (_setting.GetSaveImages()) {
         case 0:{
             LoadImage(a_url,a_row);
@@ -24,21 +19,15 @@ RequestData::RequestData(QString a_url, int a_row, QString a_save, bool a_autoSa
     }
 }
 
-RequestData::RequestData(QString a_url, bool a_parallel){
+RequestData::RequestData(QString a_url, bool a_parallel, QObject *parent):QObject(parent),_answer(""),_url(a_url),_row(-1),_save(false),_autosave(false){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&RequestData::OnResultGet);
-    _answer="";
-    _url=a_url;
-    _autosave=false;
-    _save=false;
-    _row=-1;
     Get(a_url,a_parallel);
 }
 
-RequestData::RequestData(){
+RequestData::RequestData(QObject *parent):QObject(parent),_answer(""){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&RequestData::OnResultGet);
-    _answer="";
 }
 
 void RequestData::Get(QString a_url, bool a_parallel){

@@ -15,7 +15,7 @@ public:
 signals:
     void s_loadComplete();
 
-private slots:
+public slots:
     void OnLoad(RequestData*);
 
 private:

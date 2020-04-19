@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[54];
-    char stringdata0[753];
+    QByteArrayData data[56];
+    char stringdata0[805];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -85,7 +85,9 @@ QT_MOC_LITERAL(49, 628, 30), // "on_ButtonGoToMyProfile_clicked"
 QT_MOC_LITERAL(50, 659, 21), // "on_ButtonBack_clicked"
 QT_MOC_LITERAL(51, 681, 21), // "on_ButtonNext_clicked"
 QT_MOC_LITERAL(52, 703, 25), // "on_ButtonSettings_clicked"
-QT_MOC_LITERAL(53, 729, 23) // "on_ButtonUpdate_clicked"
+QT_MOC_LITERAL(53, 729, 23), // "on_ButtonUpdate_clicked"
+QT_MOC_LITERAL(54, 753, 25), // "on_ButtonMaximize_clicked"
+QT_MOC_LITERAL(55, 779, 25) // "on_ButtonMinimize_clicked"
 
     },
     "MainWindow\0s_updateSettings\0\0"
@@ -110,7 +112,9 @@ QT_MOC_LITERAL(53, 729, 23) // "on_ButtonUpdate_clicked"
     "on_ButtonGoToMyProfile_clicked\0"
     "on_ButtonBack_clicked\0on_ButtonNext_clicked\0"
     "on_ButtonSettings_clicked\0"
-    "on_ButtonUpdate_clicked"
+    "on_ButtonUpdate_clicked\0"
+    "on_ButtonMaximize_clicked\0"
+    "on_ButtonMinimize_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -120,7 +124,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      32,   14, // methods
+      34,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -128,40 +132,42 @@ static const uint qt_meta_data_MainWindow[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  174,    2, 0x06 /* Public */,
+       1,    0,  184,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    2,  175,    2, 0x0a /* Public */,
-       4,    2,  180,    2, 0x0a /* Public */,
-       9,    1,  185,    2, 0x0a /* Public */,
-      11,    0,  188,    2, 0x0a /* Public */,
-      12,    1,  189,    2, 0x0a /* Public */,
-      14,    2,  192,    2, 0x0a /* Public */,
-      17,    2,  197,    2, 0x0a /* Public */,
-      20,    0,  202,    2, 0x0a /* Public */,
-      21,    3,  203,    2, 0x0a /* Public */,
-      23,    0,  210,    2, 0x0a /* Public */,
-      24,    0,  211,    2, 0x0a /* Public */,
-      25,    1,  212,    2, 0x08 /* Private */,
-      28,    1,  215,    2, 0x08 /* Private */,
-      30,    1,  218,    2, 0x08 /* Private */,
-      32,    1,  221,    2, 0x08 /* Private */,
-      34,    1,  224,    2, 0x08 /* Private */,
-      36,    0,  227,    2, 0x08 /* Private */,
-      37,    0,  228,    2, 0x08 /* Private */,
-      38,    0,  229,    2, 0x08 /* Private */,
-      39,    0,  230,    2, 0x08 /* Private */,
-      40,    0,  231,    2, 0x08 /* Private */,
-      41,    0,  232,    2, 0x08 /* Private */,
-      42,    2,  233,    2, 0x08 /* Private */,
-      46,    0,  238,    2, 0x08 /* Private */,
-      47,    0,  239,    2, 0x08 /* Private */,
-      48,    0,  240,    2, 0x08 /* Private */,
-      49,    0,  241,    2, 0x08 /* Private */,
-      50,    0,  242,    2, 0x08 /* Private */,
-      51,    0,  243,    2, 0x08 /* Private */,
-      52,    0,  244,    2, 0x08 /* Private */,
-      53,    0,  245,    2, 0x08 /* Private */,
+       3,    2,  185,    2, 0x0a /* Public */,
+       4,    2,  190,    2, 0x0a /* Public */,
+       9,    1,  195,    2, 0x0a /* Public */,
+      11,    0,  198,    2, 0x0a /* Public */,
+      12,    1,  199,    2, 0x0a /* Public */,
+      14,    2,  202,    2, 0x0a /* Public */,
+      17,    2,  207,    2, 0x0a /* Public */,
+      20,    0,  212,    2, 0x0a /* Public */,
+      21,    3,  213,    2, 0x0a /* Public */,
+      23,    0,  220,    2, 0x0a /* Public */,
+      24,    0,  221,    2, 0x0a /* Public */,
+      25,    1,  222,    2, 0x08 /* Private */,
+      28,    1,  225,    2, 0x08 /* Private */,
+      30,    1,  228,    2, 0x08 /* Private */,
+      32,    1,  231,    2, 0x08 /* Private */,
+      34,    1,  234,    2, 0x08 /* Private */,
+      36,    0,  237,    2, 0x08 /* Private */,
+      37,    0,  238,    2, 0x08 /* Private */,
+      38,    0,  239,    2, 0x08 /* Private */,
+      39,    0,  240,    2, 0x08 /* Private */,
+      40,    0,  241,    2, 0x08 /* Private */,
+      41,    0,  242,    2, 0x08 /* Private */,
+      42,    2,  243,    2, 0x08 /* Private */,
+      46,    0,  248,    2, 0x08 /* Private */,
+      47,    0,  249,    2, 0x08 /* Private */,
+      48,    0,  250,    2, 0x08 /* Private */,
+      49,    0,  251,    2, 0x08 /* Private */,
+      50,    0,  252,    2, 0x08 /* Private */,
+      51,    0,  253,    2, 0x08 /* Private */,
+      52,    0,  254,    2, 0x08 /* Private */,
+      53,    0,  255,    2, 0x08 /* Private */,
+      54,    0,  256,    2, 0x08 /* Private */,
+      55,    0,  257,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -190,6 +196,8 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString, 0x80000000 | 44,   43,   45,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -240,6 +248,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 29: _t->on_ButtonNext_clicked(); break;
         case 30: _t->on_ButtonSettings_clicked(); break;
         case 31: _t->on_ButtonUpdate_clicked(); break;
+        case 32: _t->on_ButtonMaximize_clicked(); break;
+        case 33: _t->on_ButtonMinimize_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -283,13 +293,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 32)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 34;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 32)
+        if (_id < 34)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 32;
+        _id -= 34;
     }
     return _id;
 }

@@ -1,10 +1,10 @@
 #include "Sfriends.h"
 
 #define SFriendStart {
-SFriend::SFriend(QJsonObject a_friend, QObject *parent) : QObject(parent){
-    _friend=a_friend;
+SFriend::SFriend(QJsonObject a_friend, QObject *parent) : QObject(parent),_friend(a_friend){
+
 }
-SFriend::SFriend(){
+SFriend::SFriend(QObject *parent) : QObject(parent){
 
 }
 void SFriend::Set(QJsonObject a_friend){

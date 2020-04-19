@@ -23,7 +23,7 @@ class SFriend : public QObject
     Q_OBJECT
 public:
     explicit SFriend(QJsonObject ObjFriend, QObject *parent = nullptr);
-    SFriend();
+    SFriend(QObject *parent = nullptr);
     void Set(QJsonObject ObjFriend);
     QString GetSteamid() {return _friend.value("steamid").toString();}
     QString GetRelationship() {return _friend.value("relationship").toString();}

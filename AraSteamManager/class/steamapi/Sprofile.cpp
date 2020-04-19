@@ -1,9 +1,8 @@
 #include "Sprofile.h"
 
 #define SProfileStart {
-SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *parent) : QObject(parent){
+SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *parent) : QObject(parent),_id(a_id){
     _manager = new QNetworkAccessManager();
-    _id=a_id;
     if(a_parallel){
         if(a_type==QueryType::vanity){
             connect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadVanity);
@@ -38,12 +37,10 @@ SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *par
         emit s_finished();
     }
 }
-SProfile::SProfile(QJsonObject a_objSummaries){
+SProfile::SProfile(QJsonObject a_objSummaries, QObject *parent) : QObject(parent),_profile(a_objSummaries),_status(StatusValue::success){
     _manager = new QNetworkAccessManager();
-    _profile=a_objSummaries;
-    _status=StatusValue::success;
 }
-SProfile::SProfile(){
+SProfile::SProfile(QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
 }
 SProfile::~SProfile(){
@@ -126,7 +123,7 @@ const bool &SProfile::operator<(const SProfile &a_profile){
 }
 #define SProfileEnd }
 #define SProfilesStart {
-SProfiles::SProfiles(QString a_id, bool a_parallel, QueryType a_type, QObject *parent) : QObject(parent){
+SProfiles::SProfiles(QString a_id, bool a_parallel, QueryType a_type, QObject *parent) : QObject(parent),_id(a_id){
     _manager = new QNetworkAccessManager();
     _id=a_id;
     if(a_parallel){
@@ -165,7 +162,7 @@ SProfiles::SProfiles(QString a_id, bool a_parallel, QueryType a_type, QObject *p
         emit s_finished();
     }
 }
-SProfiles::SProfiles(QJsonDocument a_docSummaries){
+SProfiles::SProfiles(QJsonDocument a_docSummaries, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     if(a_docSummaries.object().value("response").toObject().value("players").toArray().size()>0){
         _profile.resize(a_docSummaries.object().value("response").toObject().value("players").toArray().size());
@@ -178,19 +175,19 @@ SProfiles::SProfiles(QJsonDocument a_docSummaries){
         _error="profile is not exist";
     }
 }
-SProfiles::SProfiles(QJsonArray a_arrSummaries){
+SProfiles::SProfiles(QJsonArray a_arrSummaries, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     _profile.resize(a_arrSummaries.size());
     for(int i=0;i<_profile.size();i++)
         _profile[i]=SProfile(a_arrSummaries[i].toObject());
     _status=StatusValue::success;
 }
-SProfiles::SProfiles(QJsonObject a_objSummaries){
+SProfiles::SProfiles(QJsonObject a_objSummaries, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     _profile.push_back(SProfile(a_objSummaries));
     _status=StatusValue::success;
 }
-SProfiles::SProfiles(){
+SProfiles::SProfiles(QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
 }
 SProfiles::~SProfiles(){

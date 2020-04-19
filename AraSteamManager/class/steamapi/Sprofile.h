@@ -26,8 +26,8 @@ class SProfile : public QObject
     Q_OBJECT
 public:
     explicit SProfile(QString id, bool parallel, QueryType type, QObject *parent = nullptr);
-    SProfile(QJsonObject ObjSummaries);
-    SProfile();
+    SProfile(QJsonObject ObjSummaries, QObject *parent = nullptr);
+    SProfile(QObject *parent = nullptr);
     ~SProfile();
     void Set(QString id, bool parallel, QueryType type);
     void Set(QJsonObject ObjSummaries);
@@ -85,10 +85,10 @@ class SProfiles : public QObject
     Q_OBJECT
 public:
     explicit SProfiles(QString id, bool parallel, QueryType type, QObject *parent = nullptr);
-    SProfiles(QJsonDocument DocSummaries);
-    SProfiles(QJsonArray ArrSummaries);
-    SProfiles(QJsonObject ObjSummaries);
-    SProfiles();
+    SProfiles(QJsonDocument DocSummaries, QObject *parent = nullptr);
+    SProfiles(QJsonArray ArrSummaries, QObject *parent = nullptr);
+    SProfiles(QJsonObject ObjSummaries, QObject *parent = nullptr);
+    SProfiles(QObject *parent = nullptr);
     ~SProfiles();
     void Set(QString id, bool parallel, QueryType type);
     void Set(QJsonDocument DocSummaries);

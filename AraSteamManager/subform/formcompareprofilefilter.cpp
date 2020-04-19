@@ -2,8 +2,7 @@
 #include "ui_formcompareprofilefilter.h"
 
 FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormCompareProfileFilter){
+    QWidget(parent),ui(new Ui::FormCompareProfileFilter){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     QString theme;

@@ -23,6 +23,9 @@
     <property name="spacing">
      <number>1</number>
     </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -206,7 +209,7 @@
              <x>0</x>
              <y>0</y>
              <width>459</width>
-             <height>228</height>
+             <height>231</height>
             </rect>
            </property>
           </widget>

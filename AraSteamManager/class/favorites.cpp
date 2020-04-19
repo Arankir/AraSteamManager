@@ -1,7 +1,6 @@
 #include "favorites.h"
 
-Favorites::Favorites(QString a_path, QString a_type, QObject *parent) : QObject(parent){
-    _path=a_path;
+Favorites::Favorites(QString a_path, QString a_type, QObject *parent) : QObject(parent),_path(a_path){
     _setting.CreateFile(a_path);
     if(!QFile::exists(a_path)){
         QJsonObject obj;
@@ -19,7 +18,7 @@ Favorites::Favorites(QString a_path, QString a_type, QObject *parent) : QObject(
         }
     }
 }
-Favorites::Favorites(){
+Favorites::Favorites(QObject *parent) : QObject(parent){
 
 }
 

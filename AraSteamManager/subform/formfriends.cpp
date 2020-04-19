@@ -20,12 +20,9 @@ const int c_filterCount=4;
 #define ConstantsEnd }
 
 #define Init {
-FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) :    QWidget(parent),    ui(new Ui::FormFriends){
+FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) : QWidget(parent), ui(new Ui::FormFriends),_id(a_id),_friends(a_friends),_profiles(_friends.GetProfiles()){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    _id=a_id;
-    _friends=a_friends;
-    _profiles = _friends.GetProfiles();
     switch(_setting.GetTheme()){
         case 1:
             _theme="white";

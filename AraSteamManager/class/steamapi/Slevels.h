@@ -20,8 +20,8 @@ class SLevels : public QObject
     Q_OBJECT
 public:
     explicit SLevels(QString id, QObject *parent = nullptr);
-    SLevels(QJsonDocument DocLevels);
-    SLevels();
+    SLevels(QJsonDocument DocLevels, QObject *parent = nullptr);
+    SLevels(QObject *parent = nullptr);
     ~SLevels();
     void Set(QString id);
     void Set(QJsonDocument DocLevel);

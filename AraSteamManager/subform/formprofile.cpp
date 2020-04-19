@@ -1,11 +1,8 @@
 #include "formprofile.h"
 #include "ui_formprofile.h"
 
-FormProfile::FormProfile(SProfile a_profile, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormProfile){
+FormProfile::FormProfile(SProfile a_profile, QWidget *parent) : QWidget(parent),ui(new Ui::FormProfile),_profile(a_profile){
     ui->setupUi(this);
-    _profile=a_profile;
     ui->LabelProfileVisibility->setTextFormat(Qt::RichText);
     ui->LabelGamesVisibility->setTextFormat(Qt::RichText);
     ui->LabelFriendsVisibility->setTextFormat(Qt::RichText);

@@ -1,7 +1,6 @@
 #include "categoriesgame.h"
 
-CategoriesGame::CategoriesGame(SGame a_game, QObject *parent) : QObject(parent){
-    _game=a_game;
+CategoriesGame::CategoriesGame(SGame a_game, QObject *parent) : QObject(parent),_game(a_game){
     _setting.CreateFile(_setting._pathCategories+QString::number(a_game.GetAppid()));
     QDir categoriesOld(_setting._pathCategories+QString::number(a_game.GetAppid()));
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);

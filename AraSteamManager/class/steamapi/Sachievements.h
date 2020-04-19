@@ -22,7 +22,7 @@ class SAchievementGlobal : public QObject
     Q_OBJECT
 public:
     explicit SAchievementGlobal(QJsonObject ObjAchievement, QObject *parent = nullptr);
-    SAchievementGlobal();
+    SAchievementGlobal(QObject *parent = nullptr);
     void Set(QJsonObject ObjAchievement);
     QString GetApiname() {return _apiName;}
     int GetDefaultvalue() {return _defaultValue;}
@@ -53,7 +53,7 @@ class SAchievementPercentage : public QObject
     Q_OBJECT
 public:
     explicit SAchievementPercentage(QJsonObject ObjAchievement, QObject *parent = nullptr);
-    SAchievementPercentage();
+    SAchievementPercentage(QObject *parent = nullptr);
     void Set(QJsonObject ObjAchievement);
     QString GetApiname() {return _apiName;}
     double GetPercent() {return _percent;}
@@ -74,7 +74,7 @@ class SAchievementPlayer : public QObject
     Q_OBJECT
 public:
     explicit SAchievementPlayer(QJsonObject ObjAchievement, QObject *parent = nullptr);
-    SAchievementPlayer();
+    SAchievementPlayer(QObject *parent = nullptr);
     void Set(QJsonObject ObjAchievement);
     QString GetApiname() {return _apiName;}
     int GetAchieved() {return _achieved;}
@@ -97,8 +97,8 @@ class SAchievementsGlobal : public QObject
     Q_OBJECT
 public:
     explicit SAchievementsGlobal(QString appid, bool parallel = true, QObject *parent = nullptr);
-    SAchievementsGlobal(QJsonDocument DocAchievements);
-    SAchievementsGlobal();
+    SAchievementsGlobal(QJsonDocument DocAchievements, QObject *parent = nullptr);
+    SAchievementsGlobal(QObject *parent = nullptr);
     ~SAchievementsGlobal();
     void Set(QString appid);
     void Set(QJsonDocument DocAchievements);
@@ -138,8 +138,8 @@ class SAchievementsPercentage : public QObject
     Q_OBJECT
 public:
     explicit SAchievementsPercentage(QString appid, bool parallel = true, QObject *parent = nullptr);
-    SAchievementsPercentage(QJsonDocument DocAchievements);
-    SAchievementsPercentage();
+    SAchievementsPercentage(QJsonDocument DocAchievements, QObject *parent = nullptr);
+    SAchievementsPercentage(QObject *parent = nullptr);
     ~SAchievementsPercentage();
     void Set(QString appid);
     void Set(QJsonDocument DocAchievements);
@@ -175,8 +175,8 @@ class SAchievementsPlayer : public QObject
     Q_OBJECT
 public:
     explicit SAchievementsPlayer(QString appid, QString id, bool parallel = true, QObject *parent = nullptr);
-    SAchievementsPlayer(QJsonDocument DocAchievements);
-    SAchievementsPlayer();
+    SAchievementsPlayer(QJsonDocument DocAchievements, QObject *parent = nullptr);
+    SAchievementsPlayer(QObject *parent = nullptr);
     ~SAchievementsPlayer();
     void Set(QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
@@ -217,7 +217,7 @@ class SAchievement : public QObject
     Q_OBJECT
 public:
     explicit SAchievement(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent, QObject *parent = nullptr);
-    SAchievement();
+    SAchievement(QObject *parent = nullptr);
     void Set(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent);
     void SetGlobal(SAchievementGlobal Global);
     void SetPlayer(SAchievementPlayer Player);
@@ -268,8 +268,11 @@ class SAchievements : public QObject
     Q_OBJECT
 public:
     explicit SAchievements(QString appid, QString id, QObject *parent = nullptr);
-    SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
-    SAchievements() {};
+    SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent, QObject *parent = nullptr);
+    SAchievements(SAchievementsGlobal Global, QObject *parent = nullptr);
+    SAchievements(SAchievementsPlayer Player, QObject *parent = nullptr);
+    SAchievements(SAchievementsPercentage Percent, QObject *parent = nullptr);
+    SAchievements(QObject *parent = nullptr);
     ~SAchievements() {};
     void Set(QString appid, QString id);
     void Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);

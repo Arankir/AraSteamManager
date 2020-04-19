@@ -15,7 +15,7 @@ class CategoriesGame : public QObject
     Q_OBJECT
 public:
     explicit CategoriesGame(SGame game, QObject *parent = nullptr);
-    CategoriesGame() {}
+    CategoriesGame(QObject *parent = nullptr):QObject(parent) {}
     CategoriesGame & operator=(const CategoriesGame &);
     CategoriesGame(const CategoriesGame&);
 

@@ -1,9 +1,7 @@
 #include "formcontainerachievements.h"
 #include "ui_formcontainerachievements.h"
 
-FormContainerAchievements::FormContainerAchievements(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormContainerAchievements){
+FormContainerAchievements::FormContainerAchievements(QWidget *parent) : QWidget(parent),ui(new Ui::FormContainerAchievements){
     ui->setupUi(this);
     _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
     this->setGeometry(_setting.GetAchievementContainerGeometry());

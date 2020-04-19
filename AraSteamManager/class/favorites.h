@@ -14,7 +14,7 @@ class Favorites : public QObject
     Q_OBJECT
 public:
     explicit Favorites(QString path, QString type, QObject *parent = nullptr);
-    Favorites();
+    Favorites(QObject *parent = nullptr);
 
 signals:
 

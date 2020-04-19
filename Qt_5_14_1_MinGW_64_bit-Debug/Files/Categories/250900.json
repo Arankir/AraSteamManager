@@ -1,0 +1,73 @@
+{
+    "Categories": [
+        {
+            "IsNoValues": 0,
+            "NoValues": [
+            ],
+            "Title": "qwe",
+            "Values": [
+                {
+                    "Achievements": [
+                    ],
+                    "Title": "1"
+                },
+                {
+                    "Achievements": [
+                    ],
+                    "Title": "2"
+                }
+            ]
+        },
+        {
+            "IsNoValues": 0,
+            "NoValues": [
+            ],
+            "Title": "a",
+            "Values": [
+                {
+                    "Achievements": [
+                    ],
+                    "Title": "1"
+                },
+                {
+                    "Achievements": [
+                    ],
+                    "Title": "2"
+                }
+            ]
+        },
+        {
+            "IsNoValues": 0,
+            "NoValues": [
+            ],
+            "Title": "zz",
+            "Values": [
+                {
+                    "Achievements": [
+                    ],
+                    "Title": "4"
+                }
+            ]
+        },
+        {
+            "IsNoValues": 0,
+            "NoValues": [
+            ],
+            "Title": "fg",
+            "Values": [
+                {
+                    "Achievements": [
+                    ],
+                    "Title": "6"
+                },
+                {
+                    "Achievements": [
+                    ],
+                    "Title": "7"
+                }
+            ]
+        }
+    ],
+    "Game": null,
+    "GameID": null
+}

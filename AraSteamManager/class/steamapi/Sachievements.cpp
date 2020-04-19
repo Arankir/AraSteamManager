@@ -1,16 +1,14 @@
 #include "Sachievements.h"
 
+#define OneAchievement {
 #define SAchievementGlobalStart {
-SAchievementGlobal::SAchievementGlobal(QJsonObject a_achievement, QObject *parent) : QObject(parent){
-    _apiName=a_achievement.value("name").toString();
-    _defaultValue=a_achievement.value("defaultvalue").toInt();
-    _displayName=a_achievement.value("displayName").toString();
-    _hidden=a_achievement.value("hidden").toInt();
-    _description=a_achievement.value("description").toString();
-    _icon=a_achievement.value("icon").toString();
-    _iconGray=a_achievement.value("icongray").toString();
+SAchievementGlobal::SAchievementGlobal(QJsonObject a_achievement, QObject *parent) : QObject(parent),_apiName(a_achievement.value("name").toString()),
+                            _defaultValue(a_achievement.value("defaultvalue").toInt()),_displayName(a_achievement.value("displayName").toString()),
+                            _hidden(a_achievement.value("hidden").toInt()),_description(a_achievement.value("description").toString()),
+                            _icon(a_achievement.value("icon").toString()),_iconGray(a_achievement.value("icongray").toString()){
+
 }
-SAchievementGlobal::SAchievementGlobal(){
+SAchievementGlobal::SAchievementGlobal(QObject *parent): QObject(parent){
 
 }
 void SAchievementGlobal::Set(QJsonObject a_achievement){
@@ -43,11 +41,10 @@ SAchievementGlobal & SAchievementGlobal::operator=(const SAchievementGlobal & a_
 }
 #define SAchievementGlobalEnd }
 #define SAchievementPercentageStart {
-SAchievementPercentage::SAchievementPercentage(QJsonObject a_achievement, QObject *parent) : QObject(parent){
-    _apiName=a_achievement.value("name").toString();
-    _percent=a_achievement.value("percent").toDouble();
+SAchievementPercentage::SAchievementPercentage(QJsonObject a_achievement, QObject *parent) : QObject(parent),_apiName(a_achievement.value("name").toString()),_percent(a_achievement.value("percent").toDouble()){
+
 }
-SAchievementPercentage::SAchievementPercentage(){
+SAchievementPercentage::SAchievementPercentage(QObject *parent) : QObject(parent){
 
 }
 void SAchievementPercentage::Set(QJsonObject a_achievement){
@@ -65,12 +62,11 @@ SAchievementPercentage & SAchievementPercentage::operator=(const SAchievementPer
 }
 #define SAchievementPercentageEnd }
 #define SAchievementPlayerStart {
-SAchievementPlayer::SAchievementPlayer(QJsonObject a_achievement, QObject *parent) : QObject(parent){
-    _apiName=a_achievement.value("apiname").toString();
-    _achieved=a_achievement.value("achieved").toInt();
-    _unlockTime=QDateTime::fromSecsSinceEpoch(a_achievement.value("unlocktime").toInt(),Qt::LocalTime);
+SAchievementPlayer::SAchievementPlayer(QJsonObject a_achievement, QObject *parent) : QObject(parent),_apiName(a_achievement.value("apiname").toString()),
+                                    _achieved(a_achievement.value("achieved").toInt()),_unlockTime(QDateTime::fromSecsSinceEpoch(a_achievement.value("unlocktime").toInt(),Qt::LocalTime)){
+
 }
-SAchievementPlayer::SAchievementPlayer(){
+SAchievementPlayer::SAchievementPlayer(QObject *parent) : QObject(parent){
 
 }
 void SAchievementPlayer::Set(QJsonObject a_achievement){
@@ -90,11 +86,12 @@ SAchievementPlayer & SAchievementPlayer::operator=(const SAchievementPlayer & a_
     return *this;
 }
 #define SAchievementPlayerEnd }
+#define OneAchievementEnd }
+#define MultipleAchievements {
 #define SAchievementsGlobalStart {
-SAchievementsGlobal::SAchievementsGlobal(QString a_appid, bool parallel, QObject *parent) : QObject(parent){
+SAchievementsGlobal::SAchievementsGlobal(QString a_appid, bool parallel, QObject *parent) : QObject(parent),_appid(a_appid){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    _appid=a_appid;
     _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+a_appid+"&l="+tr("russian")));
     if(!parallel){
         QEventLoop loop;
@@ -103,7 +100,7 @@ SAchievementsGlobal::SAchievementsGlobal(QString a_appid, bool parallel, QObject
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
      }
 }
-SAchievementsGlobal::SAchievementsGlobal(QJsonDocument a_achievements){
+SAchievementsGlobal::SAchievementsGlobal(QJsonDocument a_achievements, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     if(a_achievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0){
         _gameName=a_achievements.object().value("game").toObject().value("gameName").toString();
@@ -118,7 +115,7 @@ SAchievementsGlobal::SAchievementsGlobal(QJsonDocument a_achievements){
         _error="game is not exist";
     }
 }
-SAchievementsGlobal::SAchievementsGlobal(){
+SAchievementsGlobal::SAchievementsGlobal(QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
 }
 SAchievementsGlobal::~SAchievementsGlobal(){
@@ -183,10 +180,9 @@ SAchievementGlobal &SAchievementsGlobal::operator[](const int &a_index){
 }
 #define SAchievementsGlobalEnd }
 #define SAchievementsPercentageStart {
-SAchievementsPercentage::SAchievementsPercentage(QString a_appid, bool parallel, QObject *parent) : QObject(parent){
+SAchievementsPercentage::SAchievementsPercentage(QString a_appid, bool parallel, QObject *parent) : QObject(parent), _appid(a_appid){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    _appid=a_appid;
     _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+a_appid));
     if(!parallel){
         QEventLoop loop;
@@ -195,7 +191,7 @@ SAchievementsPercentage::SAchievementsPercentage(QString a_appid, bool parallel,
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
      }
 }
-SAchievementsPercentage::SAchievementsPercentage(QJsonDocument a_achievements){
+SAchievementsPercentage::SAchievementsPercentage(QJsonDocument a_achievements, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     if(a_achievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size()>0){
         _achievements.resize(a_achievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size());
@@ -208,7 +204,7 @@ SAchievementsPercentage::SAchievementsPercentage(QJsonDocument a_achievements){
         _error="game is not exist";
     }
 }
-SAchievementsPercentage::SAchievementsPercentage(){
+SAchievementsPercentage::SAchievementsPercentage(QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
 }
 SAchievementsPercentage::~SAchievementsPercentage(){
@@ -267,11 +263,9 @@ SAchievementPercentage &SAchievementsPercentage::operator[](const int &a_index){
 }
 #define SAchievementsPercentageEnd }
 #define SAchievementsPlayerStart {
-SAchievementsPlayer::SAchievementsPlayer(QString a_appid, QString a_id, bool parallel, QObject *parent) : QObject(parent){
+SAchievementsPlayer::SAchievementsPlayer(QString a_appid, QString a_id, bool parallel, QObject *parent) : QObject(parent), _id(a_id), _appid(a_appid){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
-    _appid=a_appid;
-    _id=a_id;
     _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+_setting.GetKey()+"&appid="+a_appid+"&steamid="+a_id));
     if(!parallel){
         QEventLoop loop;
@@ -280,7 +274,7 @@ SAchievementsPlayer::SAchievementsPlayer(QString a_appid, QString a_id, bool par
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
      }
 }
-SAchievementsPlayer::SAchievementsPlayer(QJsonDocument a_achievements){
+SAchievementsPlayer::SAchievementsPlayer(QJsonDocument a_achievements, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     if(a_achievements.object().value("playerstats").toObject().value("achievements").toArray().size()>0){
         _appid=a_achievements.object().value("playerstats").toObject().value("steamID").toString();
@@ -295,7 +289,7 @@ SAchievementsPlayer::SAchievementsPlayer(QJsonDocument a_achievements){
         _error="profile is not exist";
     }
 }
-SAchievementsPlayer::SAchievementsPlayer(){
+SAchievementsPlayer::SAchievementsPlayer(QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
 }
 SAchievementsPlayer::~SAchievementsPlayer(){
@@ -362,23 +356,16 @@ SAchievementPlayer &SAchievementsPlayer::operator[](const int &a_index){
     return _achievements[a_index];
 }
 #define SAchievementsPlayerEnd }
+#define MultipleAchievementsEnd }
 #define SAchievementStart {
-SAchievement::SAchievement(SAchievementGlobal a_global, SAchievementPlayer a_player, SAchievementPercentage a_percent, QObject *parent) : QObject(parent){
-    _apiName=a_global.GetApiname();
-    _defaultValue=a_global.GetDefaultvalue();
-    _displayName=a_global.GetDisplayname();
-    _hidden=a_global.GetHidden();
-    _description=a_global.GetDescription();
-    _icon=a_global.GetIcon();
-    _iconGray=a_global.GetIcongray();
-    _achieved=a_player.GetAchieved();
-    _unlockTime=a_player.GetUnlocktime();
-    _percent=a_percent.GetPercent();
-    _statusGlobal=StatusValue::success;
-    _statusPlayer=StatusValue::success;
-    _statusPercent=StatusValue::success;
+SAchievement::SAchievement(SAchievementGlobal a_global, SAchievementPlayer a_player, SAchievementPercentage a_percent, QObject *parent) : QObject(parent),
+                _apiName(a_global.GetApiname()), _defaultValue(a_global.GetDefaultvalue()), _displayName(a_global.GetDisplayname()), _hidden(a_global.GetHidden()),
+                _description(a_global.GetDescription()), _icon(a_global.GetIcon()), _iconGray(a_global.GetIcongray()), _achieved(a_player.GetAchieved()),
+                _unlockTime(a_player.GetUnlocktime()), _percent(a_percent.GetPercent()), _statusGlobal(StatusValue::success), _statusPlayer(StatusValue::success),
+                _statusPercent(StatusValue::success){
+
 }
-SAchievement::SAchievement(){
+SAchievement::SAchievement(QObject *parent) : QObject(parent){
 
 }
 void SAchievement::Set(SAchievementGlobal a_global, SAchievementPlayer a_player, SAchievementPercentage a_percent){
@@ -475,9 +462,7 @@ const bool &SAchievement::operator<(const SAchievement &a_achievement){
 }
 #define SAchievementEnd }
 #define SAchievementsStart {
-SAchievements::SAchievements(QString a_appid, QString a_id, QObject *parent) : QObject(parent){
-    _appid=a_appid;
-    _id=a_id;
+SAchievements::SAchievements(QString a_appid, QString a_id, QObject *parent) : QObject(parent),_id(a_id),_appid(a_appid){
     SAchievementsGlobal *Global = new SAchievementsGlobal(a_appid);
     connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
     SAchievementsPlayer *Player = new SAchievementsPlayer(a_appid,a_id);
@@ -485,14 +470,9 @@ SAchievements::SAchievements(QString a_appid, QString a_id, QObject *parent) : Q
     SAchievementsPercentage *Percent = new SAchievementsPercentage(a_appid);
     connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
 }
-SAchievements::SAchievements(SAchievementsGlobal a_global, SAchievementsPlayer a_player, SAchievementsPercentage a_percent){
+SAchievements::SAchievements(SAchievementsGlobal a_global, SAchievementsPlayer a_player, SAchievementsPercentage a_percent, QObject *parent) : QObject(parent),
+                    _global(a_global),_player(a_player),_percent(a_percent),_statusGlobal(StatusValue::success),_statusPlayer(StatusValue::success),_statusPercent(StatusValue::success){
     qDebug()<<"Set All Achievements data";
-    _percent=a_percent;
-    _statusPercent=StatusValue::success;
-    _global=a_global;
-    _statusGlobal=StatusValue::success;
-    _player=a_player;
-    _statusPlayer=StatusValue::success;
     SAchievementsGlobal localGlobal = _global;
     SAchievementsPlayer localPlayer = _player;
     SAchievementsPercentage localPercent = _percent;
@@ -512,6 +492,18 @@ SAchievements::SAchievements(SAchievementsGlobal a_global, SAchievementsPlayer a
     }
     _statusFinish=StatusValue::success;
     emit s_finished();
+}
+SAchievements::SAchievements(SAchievementsGlobal a_global, QObject *parent) : QObject(parent),_global(a_global),_statusGlobal(StatusValue::success){
+
+}
+SAchievements::SAchievements(SAchievementsPlayer a_player, QObject *parent) : QObject(parent),_player(a_player),_statusPlayer(StatusValue::success){
+
+}
+SAchievements::SAchievements(SAchievementsPercentage a_percent, QObject *parent) : QObject(parent),_percent(a_percent),_statusPercent(StatusValue::success){
+
+}
+SAchievements::SAchievements(QObject *parent) : QObject(parent){
+
 }
 void SAchievements::Set(QString a_appid, QString a_id){
     _appid=a_appid;

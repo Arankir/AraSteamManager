@@ -1,10 +1,7 @@
 #include "formsettings.h"
 #include "ui_formsettings.h"
 
-FormSettings::FormSettings(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::FormSettings)
-{
+FormSettings::FormSettings(QWidget *parent) : QWidget(parent),ui(new Ui::FormSettings){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     switch(_setting.GetTheme()){

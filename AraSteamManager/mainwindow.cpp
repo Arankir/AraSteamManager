@@ -14,7 +14,7 @@ const int c_formsSettings=5;
 #define ConstantsEnd }
 
 #define Init {
-MainWindow::MainWindow(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::MainWindow){
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow){
     ui->setupUi(this);
     QString hoverGradient;
     QString backgroundGradient;

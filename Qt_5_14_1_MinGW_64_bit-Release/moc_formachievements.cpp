@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    QByteArrayData data[96];
-    char stringdata0[1891];
+    QByteArrayData data[95];
+    char stringdata0[1882];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -77,57 +77,56 @@ QT_MOC_LITERAL(41, 571, 4), // "arg1"
 QT_MOC_LITERAL(42, 576, 10), // "closeEvent"
 QT_MOC_LITERAL(43, 587, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(44, 600, 14), // "ShowCategories"
-QT_MOC_LITERAL(45, 615, 8), // "saveDate"
-QT_MOC_LITERAL(46, 624, 16), // "UpdateHiddenRows"
-QT_MOC_LITERAL(47, 641, 21), // "SetFriendAchievements"
-QT_MOC_LITERAL(48, 663, 13), // "SAchievements"
-QT_MOC_LITERAL(49, 677, 11), // "achievement"
-QT_MOC_LITERAL(50, 689, 3), // "col"
-QT_MOC_LITERAL(51, 693, 39), // "on_LineEditNameAchievements_t..."
-QT_MOC_LITERAL(52, 733, 32), // "on_ButtonFindAchievement_clicked"
-QT_MOC_LITERAL(53, 766, 28), // "on_ButtonAddCategory_clicked"
-QT_MOC_LITERAL(54, 795, 31), // "on_ButtonChangeCategory_clicked"
-QT_MOC_LITERAL(55, 827, 16), // "FavoritesClicked"
-QT_MOC_LITERAL(56, 844, 24), // "on_ButtonCompare_clicked"
-QT_MOC_LITERAL(57, 869, 34), // "on_CheckBoxShowFilter_stateCh..."
-QT_MOC_LITERAL(58, 904, 26), // "on_ComboBoxCategory_Change"
-QT_MOC_LITERAL(59, 931, 5), // "index"
-QT_MOC_LITERAL(60, 937, 26), // "on_CheckBoxCategory_Change"
-QT_MOC_LITERAL(61, 964, 3), // "ind"
-QT_MOC_LITERAL(62, 968, 36), // "on_ButtonDeleteAllCategories_..."
-QT_MOC_LITERAL(63, 1005, 35), // "on_CheckBoxCompareIcon_stateC..."
-QT_MOC_LITERAL(64, 1041, 36), // "on_CheckBoxCompareTitle_state..."
-QT_MOC_LITERAL(65, 1078, 42), // "on_CheckBoxCompareDescription..."
-QT_MOC_LITERAL(66, 1121, 43), // "on_CheckBoxCompareTotalPercen..."
-QT_MOC_LITERAL(67, 1165, 33), // "on_ButtonAddValueCategory_cli..."
-QT_MOC_LITERAL(68, 1199, 31), // "on_ButtonCancelCategory_clicked"
-QT_MOC_LITERAL(69, 1231, 31), // "on_ButtonAcceptCategory_clicked"
-QT_MOC_LITERAL(70, 1263, 31), // "on_ButtonDeleteCategory_clicked"
-QT_MOC_LITERAL(71, 1295, 40), // "on_CheckBoxCategoryOneValue_s..."
-QT_MOC_LITERAL(72, 1336, 36), // "on_LineEditTitleCategory_text..."
-QT_MOC_LITERAL(73, 1373, 39), // "on_ComboBoxCategoriesCategory..."
-QT_MOC_LITERAL(74, 1413, 37), // "on_CheckBoxCategoryVisibleAll..."
-QT_MOC_LITERAL(75, 1451, 18), // "UpdateValuesUpDown"
-QT_MOC_LITERAL(76, 1470, 5), // "value"
-QT_MOC_LITERAL(77, 1476, 26), // "on_FormCategoryValueChange"
-QT_MOC_LITERAL(78, 1503, 3), // "pos"
-QT_MOC_LITERAL(79, 1507, 28), // "on_FormCategoryVisibleChange"
-QT_MOC_LITERAL(80, 1536, 7), // "visible"
-QT_MOC_LITERAL(81, 1544, 29), // "on_FormCategoryPositionChange"
-QT_MOC_LITERAL(82, 1574, 6), // "newpos"
-QT_MOC_LITERAL(83, 1581, 27), // "on_FormCategorySelectChange"
-QT_MOC_LITERAL(84, 1609, 6), // "select"
-QT_MOC_LITERAL(85, 1616, 23), // "on_FormCategoryDeleting"
-QT_MOC_LITERAL(86, 1640, 22), // "on_FormCategoryReverse"
-QT_MOC_LITERAL(87, 1663, 33), // "on_CheckBoxFavorites_stateCha..."
-QT_MOC_LITERAL(88, 1697, 43), // "on_CheckBoxCategoryUniqueValu..."
-QT_MOC_LITERAL(89, 1741, 22), // "HideCheckedAchievement"
-QT_MOC_LITERAL(90, 1764, 17), // "QTableWidgetItem*"
-QT_MOC_LITERAL(91, 1782, 4), // "item"
-QT_MOC_LITERAL(92, 1787, 19), // "CreateValueCategory"
-QT_MOC_LITERAL(93, 1807, 18), // "FormCategoryValue*"
-QT_MOC_LITERAL(94, 1826, 25), // "on_ButtonFavorite_clicked"
-QT_MOC_LITERAL(95, 1852, 38) // "on_TableWidgetAchievements_ce..."
+QT_MOC_LITERAL(45, 615, 16), // "UpdateHiddenRows"
+QT_MOC_LITERAL(46, 632, 21), // "SetFriendAchievements"
+QT_MOC_LITERAL(47, 654, 13), // "SAchievements"
+QT_MOC_LITERAL(48, 668, 11), // "achievement"
+QT_MOC_LITERAL(49, 680, 3), // "col"
+QT_MOC_LITERAL(50, 684, 39), // "on_LineEditNameAchievements_t..."
+QT_MOC_LITERAL(51, 724, 32), // "on_ButtonFindAchievement_clicked"
+QT_MOC_LITERAL(52, 757, 28), // "on_ButtonAddCategory_clicked"
+QT_MOC_LITERAL(53, 786, 31), // "on_ButtonChangeCategory_clicked"
+QT_MOC_LITERAL(54, 818, 16), // "FavoritesClicked"
+QT_MOC_LITERAL(55, 835, 24), // "on_ButtonCompare_clicked"
+QT_MOC_LITERAL(56, 860, 34), // "on_CheckBoxShowFilter_stateCh..."
+QT_MOC_LITERAL(57, 895, 26), // "on_ComboBoxCategory_Change"
+QT_MOC_LITERAL(58, 922, 5), // "index"
+QT_MOC_LITERAL(59, 928, 26), // "on_CheckBoxCategory_Change"
+QT_MOC_LITERAL(60, 955, 3), // "ind"
+QT_MOC_LITERAL(61, 959, 36), // "on_ButtonDeleteAllCategories_..."
+QT_MOC_LITERAL(62, 996, 35), // "on_CheckBoxCompareIcon_stateC..."
+QT_MOC_LITERAL(63, 1032, 36), // "on_CheckBoxCompareTitle_state..."
+QT_MOC_LITERAL(64, 1069, 42), // "on_CheckBoxCompareDescription..."
+QT_MOC_LITERAL(65, 1112, 43), // "on_CheckBoxCompareTotalPercen..."
+QT_MOC_LITERAL(66, 1156, 33), // "on_ButtonAddValueCategory_cli..."
+QT_MOC_LITERAL(67, 1190, 31), // "on_ButtonCancelCategory_clicked"
+QT_MOC_LITERAL(68, 1222, 31), // "on_ButtonAcceptCategory_clicked"
+QT_MOC_LITERAL(69, 1254, 31), // "on_ButtonDeleteCategory_clicked"
+QT_MOC_LITERAL(70, 1286, 40), // "on_CheckBoxCategoryOneValue_s..."
+QT_MOC_LITERAL(71, 1327, 36), // "on_LineEditTitleCategory_text..."
+QT_MOC_LITERAL(72, 1364, 39), // "on_ComboBoxCategoriesCategory..."
+QT_MOC_LITERAL(73, 1404, 37), // "on_CheckBoxCategoryVisibleAll..."
+QT_MOC_LITERAL(74, 1442, 18), // "UpdateValuesUpDown"
+QT_MOC_LITERAL(75, 1461, 5), // "value"
+QT_MOC_LITERAL(76, 1467, 26), // "on_FormCategoryValueChange"
+QT_MOC_LITERAL(77, 1494, 3), // "pos"
+QT_MOC_LITERAL(78, 1498, 28), // "on_FormCategoryVisibleChange"
+QT_MOC_LITERAL(79, 1527, 7), // "visible"
+QT_MOC_LITERAL(80, 1535, 29), // "on_FormCategoryPositionChange"
+QT_MOC_LITERAL(81, 1565, 6), // "newpos"
+QT_MOC_LITERAL(82, 1572, 27), // "on_FormCategorySelectChange"
+QT_MOC_LITERAL(83, 1600, 6), // "select"
+QT_MOC_LITERAL(84, 1607, 23), // "on_FormCategoryDeleting"
+QT_MOC_LITERAL(85, 1631, 22), // "on_FormCategoryReverse"
+QT_MOC_LITERAL(86, 1654, 33), // "on_CheckBoxFavorites_stateCha..."
+QT_MOC_LITERAL(87, 1688, 43), // "on_CheckBoxCategoryUniqueValu..."
+QT_MOC_LITERAL(88, 1732, 22), // "HideCheckedAchievement"
+QT_MOC_LITERAL(89, 1755, 17), // "QTableWidgetItem*"
+QT_MOC_LITERAL(90, 1773, 4), // "item"
+QT_MOC_LITERAL(91, 1778, 19), // "CreateValueCategory"
+QT_MOC_LITERAL(92, 1798, 18), // "FormCategoryValue*"
+QT_MOC_LITERAL(93, 1817, 25), // "on_ButtonFavorite_clicked"
+QT_MOC_LITERAL(94, 1843, 38) // "on_TableWidgetAchievements_ce..."
 
     },
     "FormAchievements\0s_return_to_games\0\0"
@@ -147,7 +146,7 @@ QT_MOC_LITERAL(95, 1852, 38) // "on_TableWidgetAchievements_ce..."
     "Aaccept\0Acolumn\0"
     "on_CheckBoxCompareAllFriends_stateChanged\0"
     "arg1\0closeEvent\0QCloseEvent*\0"
-    "ShowCategories\0saveDate\0UpdateHiddenRows\0"
+    "ShowCategories\0UpdateHiddenRows\0"
     "SetFriendAchievements\0SAchievements\0"
     "achievement\0col\0on_LineEditNameAchievements_textChanged\0"
     "on_ButtonFindAchievement_clicked\0"
@@ -223,45 +222,45 @@ static const uint qt_meta_data_FormAchievements[] = {
       37,    2,  364,    2, 0x08 /* Private */,
       40,    1,  369,    2, 0x08 /* Private */,
       42,    1,  372,    2, 0x08 /* Private */,
-      44,    1,  375,    2, 0x08 /* Private */,
-      46,    0,  378,    2, 0x08 /* Private */,
-      47,    2,  379,    2, 0x08 /* Private */,
-      51,    1,  384,    2, 0x08 /* Private */,
-      52,    0,  387,    2, 0x08 /* Private */,
-      53,    0,  388,    2, 0x08 /* Private */,
-      54,    0,  389,    2, 0x08 /* Private */,
-      55,    0,  390,    2, 0x08 /* Private */,
-      56,    0,  391,    2, 0x08 /* Private */,
-      57,    1,  392,    2, 0x08 /* Private */,
-      58,    1,  395,    2, 0x08 /* Private */,
-      60,    1,  398,    2, 0x08 /* Private */,
-      62,    0,  401,    2, 0x08 /* Private */,
-      63,    1,  402,    2, 0x08 /* Private */,
-      64,    1,  405,    2, 0x08 /* Private */,
-      65,    1,  408,    2, 0x08 /* Private */,
-      66,    1,  411,    2, 0x08 /* Private */,
-      67,    0,  414,    2, 0x08 /* Private */,
-      68,    0,  415,    2, 0x08 /* Private */,
-      69,    0,  416,    2, 0x08 /* Private */,
-      70,    0,  417,    2, 0x08 /* Private */,
-      71,    1,  418,    2, 0x08 /* Private */,
-      72,    1,  421,    2, 0x08 /* Private */,
-      73,    1,  424,    2, 0x08 /* Private */,
-      74,    0,  427,    2, 0x08 /* Private */,
-      75,    1,  428,    2, 0x08 /* Private */,
-      75,    0,  431,    2, 0x28 /* Private | MethodCloned */,
-      77,    2,  432,    2, 0x08 /* Private */,
-      79,    2,  437,    2, 0x08 /* Private */,
-      81,    2,  442,    2, 0x08 /* Private */,
-      83,    2,  447,    2, 0x08 /* Private */,
-      85,    1,  452,    2, 0x08 /* Private */,
-      86,    1,  455,    2, 0x08 /* Private */,
-      87,    1,  458,    2, 0x08 /* Private */,
-      88,    1,  461,    2, 0x08 /* Private */,
-      89,    1,  464,    2, 0x08 /* Private */,
-      92,    0,  467,    2, 0x08 /* Private */,
-      94,    0,  468,    2, 0x08 /* Private */,
-      95,    2,  469,    2, 0x08 /* Private */,
+      44,    0,  375,    2, 0x08 /* Private */,
+      45,    0,  376,    2, 0x08 /* Private */,
+      46,    2,  377,    2, 0x08 /* Private */,
+      50,    1,  382,    2, 0x08 /* Private */,
+      51,    0,  385,    2, 0x08 /* Private */,
+      52,    0,  386,    2, 0x08 /* Private */,
+      53,    0,  387,    2, 0x08 /* Private */,
+      54,    0,  388,    2, 0x08 /* Private */,
+      55,    0,  389,    2, 0x08 /* Private */,
+      56,    1,  390,    2, 0x08 /* Private */,
+      57,    1,  393,    2, 0x08 /* Private */,
+      59,    1,  396,    2, 0x08 /* Private */,
+      61,    0,  399,    2, 0x08 /* Private */,
+      62,    1,  400,    2, 0x08 /* Private */,
+      63,    1,  403,    2, 0x08 /* Private */,
+      64,    1,  406,    2, 0x08 /* Private */,
+      65,    1,  409,    2, 0x08 /* Private */,
+      66,    0,  412,    2, 0x08 /* Private */,
+      67,    0,  413,    2, 0x08 /* Private */,
+      68,    0,  414,    2, 0x08 /* Private */,
+      69,    0,  415,    2, 0x08 /* Private */,
+      70,    1,  416,    2, 0x08 /* Private */,
+      71,    1,  419,    2, 0x08 /* Private */,
+      72,    1,  422,    2, 0x08 /* Private */,
+      73,    0,  425,    2, 0x08 /* Private */,
+      74,    1,  426,    2, 0x08 /* Private */,
+      74,    0,  429,    2, 0x28 /* Private | MethodCloned */,
+      76,    2,  430,    2, 0x08 /* Private */,
+      78,    2,  435,    2, 0x08 /* Private */,
+      80,    2,  440,    2, 0x08 /* Private */,
+      82,    2,  445,    2, 0x08 /* Private */,
+      84,    1,  450,    2, 0x08 /* Private */,
+      85,    1,  453,    2, 0x08 /* Private */,
+      86,    1,  456,    2, 0x08 /* Private */,
+      87,    1,  459,    2, 0x08 /* Private */,
+      88,    1,  462,    2, 0x08 /* Private */,
+      91,    0,  465,    2, 0x08 /* Private */,
+      93,    0,  466,    2, 0x08 /* Private */,
+      94,    2,  467,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -288,9 +287,9 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void, QMetaType::Bool, QMetaType::Int,   38,   39,
     QMetaType::Void, QMetaType::Int,   41,
     QMetaType::Void, 0x80000000 | 43,    2,
-    QMetaType::Void, QMetaType::Bool,   45,
     QMetaType::Void,
-    QMetaType::Bool, 0x80000000 | 48, QMetaType::Int,   49,   50,
+    QMetaType::Void,
+    QMetaType::Bool, 0x80000000 | 47, QMetaType::Int,   48,   49,
     QMetaType::Void, QMetaType::QString,   41,
     QMetaType::Void,
     QMetaType::Void,
@@ -298,8 +297,8 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   41,
-    QMetaType::Void, QMetaType::Int,   59,
-    QMetaType::Void, QMetaType::Int,   61,
+    QMetaType::Void, QMetaType::Int,   58,
+    QMetaType::Void, QMetaType::Int,   60,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   41,
     QMetaType::Void, QMetaType::Int,   41,
@@ -311,20 +310,20 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   41,
     QMetaType::Void, QMetaType::QString,   41,
-    QMetaType::Void, QMetaType::Int,   59,
+    QMetaType::Void, QMetaType::Int,   58,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   76,
+    QMetaType::Void, QMetaType::Int,   75,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString,   78,   76,
-    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   78,   80,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   78,   82,
-    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   78,   84,
-    QMetaType::Void, QMetaType::Int,   78,
-    QMetaType::Void, QMetaType::Int,   78,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,   77,   75,
+    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   77,   79,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   77,   81,
+    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   77,   83,
+    QMetaType::Void, QMetaType::Int,   77,
+    QMetaType::Void, QMetaType::Int,   77,
     QMetaType::Void, QMetaType::Int,   41,
     QMetaType::Void, QMetaType::Int,   41,
-    QMetaType::Void, 0x80000000 | 90,   91,
-    0x80000000 | 93,
+    QMetaType::Void, 0x80000000 | 89,   90,
+    0x80000000 | 92,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,   36,
 
@@ -361,7 +360,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 19: _t->CreateCompareProfileFilter((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 20: _t->on_CheckBoxCompareAllFriends_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 21: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 22: _t->ShowCategories((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->ShowCategories(); break;
         case 23: _t->UpdateHiddenRows(); break;
         case 24: { bool _r = _t->SetFriendAchievements((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;

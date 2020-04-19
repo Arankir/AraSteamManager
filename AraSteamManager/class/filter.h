@@ -9,7 +9,7 @@ class Filter : public QObject
     Q_OBJECT
 public:
     explicit Filter(int row, int col, QObject *parent = nullptr);
-    Filter() { }
+    Filter(QObject *parent = nullptr):QObject(parent) { }
     ~Filter();
     void SetRow(int row);
     void SetCol(int col);
