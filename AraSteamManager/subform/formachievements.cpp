@@ -174,8 +174,8 @@ void FormAchievements::InitComponents(){
     _favorites.SetType("achievements");
     _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game.GetAppid()));
     _categoriesGame.Set(_game);
-    ui->LabelGameLogo->setPixmap(RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                             QString::number(_game.GetAppid())+"/"+_game.GetImg_logo_url()+".jpg",false).GetPixmap());
+
+    new RequestImage(ui->LabelGameLogo,"http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(_game.GetAppid())+"/"+_game.GetImg_logo_url()+".jpg");
     ui->GroupBoxCategories->setVisible(false);
     SwitchSimpleCompare(FormMode::compare);
     ui->ProgressBarFriendsLoad->setVisible(false);
