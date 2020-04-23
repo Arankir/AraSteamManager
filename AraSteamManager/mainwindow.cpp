@@ -3,6 +3,7 @@
 
 //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 //qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
+//https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
 #define Constants {
 const int c_formsNone=0;
@@ -468,13 +469,13 @@ void MainWindow::ResizeScrollArea(){
 
 #define Functions {
 void MainWindow::on_ButtonFindProfile_clicked(){
-    QString profileid=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com/").remove('\r');
-    if(ui->LineEditIdProfile->text().indexOf("id",0)>-1){
-        profileid=profileid.remove("id/").remove("/");
+    QString profileid=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com").remove('\r');
+    if(ui->LineEditIdProfile->text().indexOf("/id/",0)>-1){
+        profileid=profileid.remove("/id/").remove("/");
         GoToProfile(profileid,QueryType::vanity);
     } else {
-        if(ui->LineEditIdProfile->text().indexOf("profiles",0)>-1)
-            profileid=profileid.remove("profiles/").remove("/");
+        if(ui->LineEditIdProfile->text().indexOf("/profiles/",0)>-1)
+            profileid=profileid.remove("/profiles/").remove("/");
         GoToProfile(profileid,QueryType::url);
         }
     ReturnFromForms();

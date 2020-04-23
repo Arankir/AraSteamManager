@@ -48,9 +48,9 @@ void FormAchievements::InitComponents(){
 //    profileAvatarCompare->setPixmap(RequestData(profileData.GetAvatar(),false).GetPixmap());
 //    profileAvatarCompare->setAlignment(Qt::AlignCenter);
     QLabel *profileAvatarFriend = new QLabel;
-    profileAvatarFriend->setPixmap(RequestData(profileData.GetAvatar(),false).GetPixmap());
     profileAvatarFriend->setAlignment(Qt::AlignCenter);
     profileAvatarFriend->setToolTip(profileData.GetPersonaname());
+    new RequestImage(profileAvatarFriend,profileData.GetAvatar());
     QLabel *allFriends = new QLabel("All");
     allFriends->setToolTip(tr("Достижения друзей"));
     allFriends->setScaledContents(true);
@@ -61,42 +61,6 @@ void FormAchievements::InitComponents(){
     _tableAchievements->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Expanding);
     ui->LayoutTables->addWidget(_tableAchievements);
     #define ConnectTablesEnd }
-    #define SetTableWidgetCategorySettings {
-//    ui->TableWidgetCategory->setEditTriggers(QAbstractItemView::NoEditTriggers);
-//    ui->TableWidgetCategory->setSelectionMode(QAbstractItemView::NoSelection);
-//    _tableAchievements->SetColumnCount(c_tableAchievementColumnCount);
-//    _tableAchievements->SetHorizontalHeaderTitle(c_tableAchievementColumnIcon,new QTableWidgetItem(""));
-//    _tableAchievements->SetHorizontalHeaderTitle(c_tableAchievementColumnTitle,new QTableWidgetItem(tr("Название")));
-//    _tableAchievements->SetHorizontalHeaderTitle(c_tableAchievementColumnDescription,new QTableWidgetItem(tr("Описание")));
-//    _tableAchievements->SetHorizontalHeaderTitle(c_tableAchievementColumnWorld,new QTableWidgetItem(tr("По миру")));
-//    _tableAchievements->SetHorizontalHeaderTitle(c_tableAchievementColumnReached,new QTableWidgetItem(tr("Получено")));
-//    _tableAchievements->SetHorizontalHeaderTitle(c_tableAchievementColumnFavorite,new QTableWidgetItem(tr("Избранное")));
-//    ui->TableWidgetCategory->setColumnHidden(c_tableAchievementColumnAppid,true);
-//    ui->TableWidgetCategory->setColumnWidth(c_tableAchievementColumnTitle,65);
-//    ui->TableWidgetCategory->setColumnWidth(c_tableAchievementColumnTitle,100);
-//    ui->TableWidgetCategory->setColumnWidth(c_tableAchievementColumnDescription,315);
-//    ui->TableWidgetCategory->setColumnWidth(c_tableAchievementColumnReached,80);
-//    ui->TableWidgetCategory->setColumnWidth(c_tableAchievementColumnFavorite,50);
-    #define SetTableWidgetCategorySettingsEnd }
-    #define SetTableWidgetAchievementsSettings {
-//    ui->TableWidgetAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
-//    ui->TableWidgetAchievements->setSelectionMode(QAbstractItemView::NoSelection);
-//    _tableAchievements->SetWidgetContent(0,c_tableAchievementColumnReachedMy,profileAvatarCompare);
-//    _tableAchievements->SetRowHeightHeaders(0,33);
-//    _tableAchievements->SetVerticalHeaderTitle(0,new  QTableWidgetItem(""));
-//    _tableAchievements->SetVerticalHeaderTitle(1,new  QTableWidgetItem("%"));
-//    _tableAchievements->ChangeHorizontalTitle(c_tableAchievementColumnIcon,"");
-//    _tableAchievements->ChangeHorizontalTitle(c_tableAchievementColumnTitle,tr("Название"));
-//    _tableAchievements->ChangeHorizontalTitle(c_tableAchievementColumnDescription,tr("Описание"));
-//    _tableAchievements->ChangeHorizontalTitle(c_tableAchievementColumnWorld,tr("По миру"));
-//    _tableAchievements->ChangeHorizontalTitle(c_tableAchievementColumnReachedMy,profileData.GetPersonaname());
-//    _tableAchievements->SetVisibleColumn(c_tableAchievementColumnAppid,false);
-//    _tableAchievements->SetColumnWidth(c_tableAchievementColumnIcon,65);
-//    _tableAchievements->SetColumnWidth(c_tableAchievementColumnTitle,100);
-//    _tableAchievements->SetColumnWidth(c_tableAchievementColumnDescription,315);
-//    _tableAchievements->SetColumnWidth(c_tableAchievementColumnWorld,65);
-//    _tableAchievements->SetColumnWidth(c_tableAchievementColumnReachedMy,80);
-    #define SetTableWidgetAchievementsSettingsEnd }
     #define SetTableWidgetCompareFriendsSettings {
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -174,7 +138,6 @@ void FormAchievements::InitComponents(){
     _favorites.SetType("achievements");
     _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game.GetAppid()));
     _categoriesGame.Set(_game);
-
     new RequestImage(ui->LabelGameLogo,"http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(_game.GetAppid())+"/"+_game.GetImg_logo_url()+".jpg");
     ui->GroupBoxCategories->setVisible(false);
     SwitchSimpleCompare(FormMode::compare);
@@ -342,16 +305,15 @@ void FormAchievements::LoadingCompare(){
     _loadCompare++;
     SProfile profile(_id,false,QueryType::url);
     _tableAchievements->ChangeHorizontalTitle(c_tableAchievementColumnReachedMy,profile.GetPersonaname());
-    QPixmap avatar = RequestData(profile.GetAvatar(),false).GetPixmap();
     QLabel *avatarAchievementsCompare = new QLabel;
-    avatarAchievementsCompare->setPixmap(avatar);
     avatarAchievementsCompare->setAlignment(Qt::AlignCenter);
+    new RequestImage(avatarAchievementsCompare,profile.GetAvatar());
     _tableAchievements->SetWidgetHorizontalHeader(0,c_tableAchievementColumnReachedMy,avatarAchievementsCompare);
-    _tableAchievements->GetTableHH()->resizeRowToContents(0);
+    _tableAchievements->GetTableHH()->setRowHeight(0,33);
     QLabel *avatarFriendsCompare = new QLabel;
-    avatarFriendsCompare->setPixmap(avatar);
     avatarFriendsCompare->setAlignment(Qt::AlignCenter);
     avatarFriendsCompare->setToolTip(profile.GetPersonaname());
+    new RequestImage(avatarFriendsCompare,profile.GetAvatar());
     ui->TableWidgetFriends->setCellWidget(0,c_tableFriendsRowAvatars,avatarFriendsCompare);
 
     _profilesFriends = SFriends(_id,false).GetProfiles();
@@ -397,9 +359,9 @@ void FormAchievements::FinishLoadFriends(){
     ui->ProgressBarFriendsLoad->setVisible(false);
     for(int i=0;i<_friends.size();i++) {
         QLabel *avatarFriend = new QLabel;
-        avatarFriend->setPixmap(RequestData(_friends[i].first.GetAvatar(),false).GetPixmap());
         avatarFriend->setToolTip(_friends[i].first.GetPersonaname());
         avatarFriend->setAlignment(Qt::AlignCenter);
+        new RequestImage(avatarFriend,_friends[i].first.GetAvatar());
         ui->TableWidgetFriends->setCellWidget(0,i+2,avatarFriend);
         QTableWidgetItem *itemCheck(new QTableWidgetItem(""));
         itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
@@ -410,7 +372,7 @@ void FormAchievements::FinishLoadFriends(){
         ui->TableWidgetFriends->setColumnHidden(i+2,_friends[i].second==FriendType::haventGame);
     }
     connect(ui->TableWidgetFriends,&QTableWidget::cellChanged,this,&FormAchievements::on_TableWidgetCompareFriendsCellChanged);
-    ui->TableWidgetFriends->resizeColumnsToContents();
+    //ui->TableWidgetFriends->resizeColumnsToContents();
     _loadCompare++;
     ui->TableWidgetFriends->setVisible(true);
 }
