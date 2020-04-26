@@ -101,7 +101,7 @@ void FormGames::OnFinish(){
         if(!QFile::exists(path)){
             iconGame->setBaseSize(QSize(32,32));
             new RequestImage(iconGame,"http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                         QString::number(_games[i].GetAppid())+"/"+_games[i].GetImg_icon_url()+".jpg",path,true);
+                         QString::number(_games[i].GetAppid())+"/"+_games[i].GetImg_icon_url()+".jpg",path,true,this);
         } else {
             iconGame->setPixmap(QPixmap(path));
         }

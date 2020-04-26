@@ -74,7 +74,6 @@ private slots:
     void InitComponents();
     void PullTableWidget();
     void Retranslate();
-    void OnImageLoaded(RequestData *imgr);
 
     void SwitchSimpleCompare(FormMode sc);
     void LoadingCompare();

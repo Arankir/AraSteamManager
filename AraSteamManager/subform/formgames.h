@@ -75,7 +75,7 @@ private:
     QString _selectedGame;
     QString _selectedIndex;
 
-    QVector<RequestData*> _request;
+    //QVector<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 

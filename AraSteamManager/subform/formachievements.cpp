@@ -224,7 +224,7 @@ void FormAchievements::OnFinish(){
             if(_achievements[i].GetDisplayname()!=""){
                 if(!QFile::exists(pathImage)){
                     iconGame->setBaseSize(QSize(64,64));
-                    new RequestImage(iconGame,_achievements[i].GetIcon(),pathImage,true);
+                    new RequestImage(iconGame,_achievements[i].GetIcon(),pathImage,true,this);
                 }  else {
                     iconGame->setPixmap(QPixmap(pathImage));
                 }
@@ -237,27 +237,6 @@ void FormAchievements::OnFinish(){
             }
         }
     FilterMyProfile->Update();
-}
-void FormAchievements::OnImageLoaded(RequestData *a_image){
-    QPixmap image;
-    image.loadFromData(a_image->GetAnswer());
-    QLabel *achievementImage = new QLabel;
-    achievementImage->setPixmap(image);
-    QLabel *achievementImageCompare = new QLabel;
-    achievementImageCompare->setPixmap(image);
-    _tableAchievements->GetTableContent()->setCellWidget(a_image->GetRow(),c_tableAchievementColumnIcon,achievementImage);
-    _tableAchievements->GetTableContent()->resizeRowToContents(a_image->GetRow());
-    if(_numRequests==500&&_numNow<_achievements.GetCount()){
-        QString achievementIcon=_achievements[_numNow].GetIcon().mid(66,_achievements[_numNow].GetIcon().length());
-        QString pathImage=_setting._pathImagesAchievements+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
-        while (QFile::exists(pathImage))
-            _numNow++;
-        a_image->LoadImage(_achievements[_numNow].GetIcon(),_numNow,pathImage,true);
-        _numNow++;
-    } else {
-        disconnect(a_image,&RequestData::s_finished,this,&FormAchievements::OnImageLoaded);
-        a_image->deleteLater();
-    }
 }
 #define InitEnd }
 

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RequestImage_t {
-    QByteArrayData data[5];
-    char stringdata0[49];
+    QByteArrayData data[7];
+    char stringdata0[83];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,12 +34,14 @@ static const qt_meta_stringdata_RequestImage_t qt_meta_stringdata_RequestImage =
 QT_MOC_LITERAL(0, 0, 12), // "RequestImage"
 QT_MOC_LITERAL(1, 13, 14), // "s_loadComplete"
 QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 6), // "OnLoad"
-QT_MOC_LITERAL(4, 36, 12) // "RequestData*"
+QT_MOC_LITERAL(3, 29, 13), // "RequestImage*"
+QT_MOC_LITERAL(4, 43, 13), // "OnLoadToLabel"
+QT_MOC_LITERAL(5, 57, 12), // "RequestData*"
+QT_MOC_LITERAL(6, 70, 12) // "OnLoadPixmap"
 
     },
-    "RequestImage\0s_loadComplete\0\0OnLoad\0"
-    "RequestData*"
+    "RequestImage\0s_loadComplete\0\0RequestImage*\0"
+    "OnLoadToLabel\0RequestData*\0OnLoadPixmap"
 };
 #undef QT_MOC_LITERAL
 
@@ -49,7 +51,7 @@ static const uint qt_meta_data_RequestImage[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -57,16 +59,18 @@ static const uint qt_meta_data_RequestImage[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   24,    2, 0x06 /* Public */,
+       1,    1,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    1,   25,    2, 0x0a /* Public */,
+       4,    1,   32,    2, 0x0a /* Public */,
+       6,    1,   35,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 3,    2,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 4,    2,
+    QMetaType::Void, 0x80000000 | 5,    2,
+    QMetaType::Void, 0x80000000 | 5,    2,
 
        0        // eod
 };
@@ -77,14 +81,29 @@ void RequestImage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<RequestImage *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->s_loadComplete(); break;
-        case 1: _t->OnLoad((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
+        case 0: _t->s_loadComplete((*reinterpret_cast< RequestImage*(*)>(_a[1]))); break;
+        case 1: _t->OnLoadToLabel((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
+        case 2: _t->OnLoadPixmap((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 0:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestImage* >(); break;
+            }
+            break;
         case 1:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
+            }
+            break;
+        case 2:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -95,7 +114,7 @@ void RequestImage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (RequestImage::*)();
+            using _t = void (RequestImage::*)(RequestImage * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RequestImage::s_loadComplete)) {
                 *result = 0;
                 return;
@@ -133,21 +152,22 @@ int RequestImage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
 
 // SIGNAL 0
-void RequestImage::s_loadComplete()
+void RequestImage::s_loadComplete(RequestImage * _t1)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

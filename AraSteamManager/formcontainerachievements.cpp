@@ -33,10 +33,11 @@ void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QSt
     QString urlPath = "http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(a_game.GetAppid())+"/"+a_game.GetImg_icon_url()+".jpg";
     if(!QFile::exists(filePath)){
         if(a_game.GetImg_icon_url()!=""){
-            RequestData *image = new RequestData(urlPath,tabIndex,filePath,true);
-            connect(image,&RequestData::s_finished,this,&FormContainerAchievements::OnLoadImage);
+            RequestImage *tabIcon = new RequestImage(urlPath,filePath,true,this);
+            tabIcon->SetIndex(tabIndex);
+            connect(tabIcon,&RequestImage::s_loadComplete,this,&FormContainerAchievements::OnLoadImage);
             }
-        } else {
+    } else {
         QPixmap tabIcon(filePath);
         ui->TabWidgetAchievements->setTabIcon(tabIndex,tabIcon);
     }
@@ -53,9 +54,9 @@ void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int a
         emit s_removeAchievements(a_index);
 }
 
-void FormContainerAchievements::OnLoadImage(RequestData *a_image){
-    QPixmap tabIcon(a_image->GetAnswer());
-    ui->TabWidgetAchievements->setTabIcon(a_image->GetRow(),tabIcon);
-    disconnect(a_image,&RequestData::s_finished,this,&FormContainerAchievements::OnLoadImage);
+void FormContainerAchievements::OnLoadImage(RequestImage *a_image){
+    QPixmap tabIcon(a_image->GetPixmap());
+    ui->TabWidgetAchievements->setTabIcon(a_image->GetIndex(),tabIcon);
+    disconnect(a_image,&RequestImage::s_loadComplete,this,&FormContainerAchievements::OnLoadImage);
     a_image->deleteLater();
 }

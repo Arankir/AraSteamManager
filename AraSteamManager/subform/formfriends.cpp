@@ -83,9 +83,10 @@ void FormFriends::OnFinish(){
         QString path = _setting._pathImagesProfiles+_profiles[i].GetAvatar().mid(72,20)+".jpg";
         if(!QFile::exists(path)){
             if(_numRequests<500){
-                RequestData *image = new RequestData(_profiles[i].GetAvatar(),i,path,true);
-                connect(image,&RequestData::s_finished,this,&FormFriends::OnImageLoad);
-                _request.append(image);
+                QLabel *label = new QLabel;
+                label->setBaseSize(QSize(32,32));
+                ui->TableWidgetFriends->setCellWidget(i,c_tableColumnIcon,label);
+                new RequestImage(label,_profiles[i].GetAvatar(),path,true,this);
                 _numRequests++;
                 _numNow++;
                 }
@@ -95,20 +96,6 @@ void FormFriends::OnFinish(){
                 ui->TableWidgetFriends->setCellWidget(i,c_tableColumnIcon,avatarFriend);
             }
         }
-}
-void FormFriends::OnImageLoad(RequestData *a_image){
-    QPixmap pixmap;
-    pixmap.loadFromData(a_image->GetAnswer());
-    QLabel *label = new QLabel;
-    label->setPixmap(pixmap);
-    ui->TableWidgetFriends->setCellWidget(a_image->GetRow(),c_tableColumnIcon,label);
-    if(_numRequests==500&&_numNow<_friends.GetCount()){
-        a_image->LoadImage(_profiles[_numNow].GetAvatar(),_numNow,_setting._pathImagesProfiles+_profiles[_numNow].GetAvatar().mid(72,20)+".jpg",true);
-        _numNow++;
-    } else {
-        disconnect(a_image,&RequestData::s_finished,this,&FormFriends::OnImageLoad);
-        a_image->deleteLater();
-    }
 }
 #define InitEnd }
 

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormSettings_t {
-    QByteArrayData data[23];
-    char stringdata0[468];
+    QByteArrayData data[21];
+    char stringdata0[441];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,13 +47,11 @@ QT_MOC_LITERAL(12, 220, 4), // "arg1"
 QT_MOC_LITERAL(13, 225, 31), // "on_RadioButtonDarkTheme_clicked"
 QT_MOC_LITERAL(14, 257, 32), // "on_RadioButtonLightTheme_clicked"
 QT_MOC_LITERAL(15, 290, 29), // "RadiobuttonHiddenGamesClicked"
-QT_MOC_LITERAL(16, 320, 13), // "OnResultImage"
-QT_MOC_LITERAL(17, 334, 12), // "RequestData*"
-QT_MOC_LITERAL(18, 347, 19), // "AchievementsClicked"
-QT_MOC_LITERAL(19, 367, 11), // "HideClicked"
-QT_MOC_LITERAL(20, 379, 11), // "Retranslate"
-QT_MOC_LITERAL(21, 391, 42), // "on_CheckBoxVisibleProfileInfo..."
-QT_MOC_LITERAL(22, 434, 33) // "on_CheckBoxSaveImage_stateCha..."
+QT_MOC_LITERAL(16, 320, 19), // "AchievementsClicked"
+QT_MOC_LITERAL(17, 340, 11), // "HideClicked"
+QT_MOC_LITERAL(18, 352, 11), // "Retranslate"
+QT_MOC_LITERAL(19, 364, 42), // "on_CheckBoxVisibleProfileInfo..."
+QT_MOC_LITERAL(20, 407, 33) // "on_CheckBoxSaveImage_stateCha..."
 
     },
     "FormSettings\0s_return_to_profile\0\0"
@@ -65,7 +63,6 @@ QT_MOC_LITERAL(22, 434, 33) // "on_CheckBoxSaveImage_stateCha..."
     "arg1\0on_RadioButtonDarkTheme_clicked\0"
     "on_RadioButtonLightTheme_clicked\0"
     "RadiobuttonHiddenGamesClicked\0"
-    "OnResultImage\0RequestData*\0"
     "AchievementsClicked\0HideClicked\0"
     "Retranslate\0on_CheckBoxVisibleProfileInfo_stateChanged\0"
     "on_CheckBoxSaveImage_stateChanged"
@@ -78,7 +75,7 @@ static const uint qt_meta_data_FormSettings[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -86,24 +83,23 @@ static const uint qt_meta_data_FormSettings[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   94,    2, 0x06 /* Public */,
-       4,    0,   97,    2, 0x06 /* Public */,
+       1,    1,   89,    2, 0x06 /* Public */,
+       4,    0,   92,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   98,    2, 0x08 /* Private */,
-       8,    0,  101,    2, 0x08 /* Private */,
-       9,    0,  102,    2, 0x08 /* Private */,
-      10,    0,  103,    2, 0x08 /* Private */,
-      11,    1,  104,    2, 0x08 /* Private */,
-      13,    0,  107,    2, 0x08 /* Private */,
-      14,    0,  108,    2, 0x08 /* Private */,
-      15,    0,  109,    2, 0x08 /* Private */,
-      16,    1,  110,    2, 0x08 /* Private */,
-      18,    0,  113,    2, 0x08 /* Private */,
-      19,    0,  114,    2, 0x08 /* Private */,
-      20,    0,  115,    2, 0x08 /* Private */,
-      21,    1,  116,    2, 0x08 /* Private */,
-      22,    1,  119,    2, 0x08 /* Private */,
+       5,    1,   93,    2, 0x08 /* Private */,
+       8,    0,   96,    2, 0x08 /* Private */,
+       9,    0,   97,    2, 0x08 /* Private */,
+      10,    0,   98,    2, 0x08 /* Private */,
+      11,    1,   99,    2, 0x08 /* Private */,
+      13,    0,  102,    2, 0x08 /* Private */,
+      14,    0,  103,    2, 0x08 /* Private */,
+      15,    0,  104,    2, 0x08 /* Private */,
+      16,    0,  105,    2, 0x08 /* Private */,
+      17,    0,  106,    2, 0x08 /* Private */,
+      18,    0,  107,    2, 0x08 /* Private */,
+      19,    1,  108,    2, 0x08 /* Private */,
+      20,    1,  111,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -118,7 +114,6 @@ static const uint qt_meta_data_FormSettings[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 17,    2,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -144,12 +139,11 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 7: _t->on_RadioButtonDarkTheme_clicked(); break;
         case 8: _t->on_RadioButtonLightTheme_clicked(); break;
         case 9: _t->RadiobuttonHiddenGamesClicked(); break;
-        case 10: _t->OnResultImage((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 11: _t->AchievementsClicked(); break;
-        case 12: _t->HideClicked(); break;
-        case 13: _t->Retranslate(); break;
-        case 14: _t->on_CheckBoxVisibleProfileInfo_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 15: _t->on_CheckBoxSaveImage_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->AchievementsClicked(); break;
+        case 11: _t->HideClicked(); break;
+        case 12: _t->Retranslate(); break;
+        case 13: _t->on_CheckBoxVisibleProfileInfo_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_CheckBoxSaveImage_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -160,13 +154,6 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QWidget* >(); break;
-            }
-            break;
-        case 10:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
             }
             break;
         }
@@ -218,13 +205,13 @@ int FormSettings::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 15;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 15;
     }
     return _id;
 }

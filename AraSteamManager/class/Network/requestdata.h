@@ -18,16 +18,13 @@ class RequestData : public QObject
 {
     Q_OBJECT
 public:
-    explicit RequestData(QString url, int column=-1, QString save="", bool autosave=false, QObject *parent = nullptr);
-    RequestData(QString str, bool parallel, QObject *parent = nullptr);
+    RequestData(QString url, bool parallel, QObject *parent = nullptr);
     RequestData(QObject *parent = nullptr);
     ~RequestData();
-    void LoadImage(QString url, int column=-1, QString save="", bool autosave=false);
-    void Get(QString str, bool parallel = false);
+    void Get(QString url, bool parallel = false);
     QByteArray GetAnswer() {return _answer;}
     QPixmap GetPixmap() { QPixmap result; result.loadFromData(_answer); return result;}
-    QString GetSave() {return _save;}
-    int GetRow() {return _row;}
+    //int GetRow() {return _row;}
 
 signals:
     void s_finished(RequestData *imgr);
@@ -36,9 +33,7 @@ private:
     QNetworkAccessManager *_manager;
     QByteArray _answer;
     QString _url;
-    int _row;
-    QString _save;
-    bool _autosave;
+    //int _row;
     Settings _setting;
 
 public slots:

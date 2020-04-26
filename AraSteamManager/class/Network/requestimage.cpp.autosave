@@ -20,7 +20,6 @@ QPixmap RequestImage::GetPixmap(){
 void RequestImage::OnLoadToLabel(RequestData *a_image){
     QPixmap pix;
     pix.loadFromData(a_image->GetAnswer());
-    qDebug()<<pix;
     if(_setting.GetSaveImages()==1&&_autosave){
         _setting.CreateFile(_save);
         pix.save(_save);

@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QFile>
 #include <QStandardItem>
-#include <class/Network/requestdata.h>
+#include <class/Network/requestimage.h>
 #include <class/steamapi/Sfriends.h>
 #include <class/Threads/threading.h>
 #include <class/settings.h>
@@ -40,8 +40,6 @@ private slots:
 
     void on_ButtonReturn_clicked();
 
-    void OnImageLoad(RequestData *imgr);
-
     void GoToProfileClicked();
     void FavoritesClicked();
 
@@ -66,7 +64,7 @@ private:
     Favorites _favorites;
     Filter _filter;
 
-    QVector<RequestData*> _request;
+    //QVector<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 

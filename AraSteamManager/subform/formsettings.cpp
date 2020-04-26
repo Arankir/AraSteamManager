@@ -183,16 +183,16 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
             if(_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i].GetAppid()))>-1){
                 int setTo=_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i].GetAppid()));
                 QString path = _setting._pathImagesIconGames+games[i].GetImg_icon_url()+".jpg";
+                QLabel *iconGame = new QLabel;
+                iconGame->setBaseSize(QSize(32,32));
+                ui->TableWidgetGames->setCellWidget(setTo,0,iconGame);
                 if(!QFile::exists(path)){
                     if(games[i].GetImg_icon_url()!=""){
-                        RequestData *image = new RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                                               QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",setTo,path,true);
-                        connect(image,&RequestData::s_finished,this,&FormSettings::OnResultImage);
+                        new RequestImage(iconGame,"http://media.steampowered.com/steamcommunity/public/images/apps/"+
+                                        QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",path,true,this);
                         }
                     } else {
-                    QLabel *iconGame = new QLabel;
                     iconGame->setPixmap(QPixmap(path));
-                    ui->TableWidgetGames->setCellWidget(setTo,0,iconGame);
                     }
                 ui->TableWidgetGames->setItem(setTo,1,new QTableWidgetItem(games[i].GetName()));
                 ui->TableWidgetGames->setRowHeight(setTo,33);
@@ -222,16 +222,15 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
         for (int i=0;i<_hiddenGames[indexHiddenGame].second.size();i++) {
             QStringList list = _hiddenGames[indexHiddenGame].second[i].split("%%");
             QString path = _setting._pathImagesIconGames+list[1]+".jpg";
+            QLabel *iconGame = new QLabel;
+            iconGame->setBaseSize(QSize(32,32));
+            ui->TableWidgetGames->setCellWidget(i,0,iconGame);
             if(!QFile::exists(path)){
                 if(list[1]!=""){
-                    RequestData *image = new RequestData("http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                                           list[0]+"/"+list[1]+".jpg",i,path,true);
-                    connect(image,&RequestData::s_finished,this,&FormSettings::OnResultImage);
+                    new RequestImage(iconGame,"http://media.steampowered.com/steamcommunity/public/images/apps/"+list[0]+"/"+list[1]+".jpg",path,true,this);
                     }
                 } else {
-                QLabel *iconGame = new QLabel;
-                iconGame->setPixmap(QPixmap(path));
-                ui->TableWidgetGames->setCellWidget(i,0,iconGame);
+                    iconGame->setPixmap(QPixmap(path));
                 }
             ui->TableWidgetGames->setItem(i,1,new QTableWidgetItem(list[2]));
 
@@ -255,10 +254,6 @@ void FormSettings::RadiobuttonHiddenGamesClicked(){
         }
     }
     ui->TableWidgetGames->resizeColumnsToContents();
-}
-
-void FormSettings::OnResultImage(RequestData *){
-
 }
 
 void FormSettings::AchievementsClicked(){

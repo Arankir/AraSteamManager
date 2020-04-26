@@ -27,7 +27,7 @@ signals:
 private slots:
     void closeEvent(QCloseEvent*);
     void on_TabWidgetAchievements_tabCloseRequested(int index);
-    void OnLoadImage(RequestData*);
+    void OnLoadImage(RequestImage*);
 
 private:
     Ui::FormContainerAchievements *ui;
