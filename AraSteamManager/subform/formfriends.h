@@ -37,6 +37,7 @@ public slots:
 private slots:
     void InitComponents();
     void closeEvent(QCloseEvent *event);
+    void Retranslate();
 
     void on_ButtonReturn_clicked();
 

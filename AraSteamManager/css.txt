@@ -292,11 +292,14 @@ QTableWidget {
 	border: 1px solid #777777; 
 	border-radius: 2px; 
 	background-color: "backgroundGradient"
+	//Цвет сетки можно указать с помощью свойства gridline-color.
 } 
 QTableWidget::item { 
 	border-bottom: 1px solid #cccccc; 
 	border: 1px solid #777777; 
 	background-color: #213c57;
+    border-top-color: transparent; 
+    border-bottom-color: transparent; 
 	color: white; 
 } 
 QTableWidget::item:hover { 
@@ -304,6 +307,17 @@ QTableWidget::item:hover {
 	border-radius: 2px; 
 	background-color: #ffffff; 
 } 
+QTableView QTableCornerButton::section { //Угловой виджет
+    background: red;
+    border: 2px outset red;
+    //Предупреждение: если вы устанавливаете цвет фона только для QTableCornerButton, фон может не появиться, если для свойства border не установлено какое-либо значение. Это происходит потому, что по умолчанию //QTableCornerButton рисует собственную границу, которая полностью перекрывает цвет фона.
+}
+QTableView::indicator:unchecked { //чекбоксы
+    background-color: #d7d6d5
+}
+QTableView::indicator:checked { //чекбоксы
+    background-color: #d7d6d5
+}
 QScrollBar:vertical { 
 	border: 1px solid #999999; 
 	background: "hoverGradient"

@@ -109,42 +109,42 @@
      </property>
      <column>
       <property name="text">
-       <string>Иконка</string>
+       <string notr="true">Иконка</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Новый столбец</string>
+       <string notr="true">Новый столбец</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Имя</string>
+       <string notr="true">Имя</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Статус</string>
+       <string notr="true">Статус</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Приватность</string>
+       <string notr="true">Приватность</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>айди</string>
+       <string notr="true">айди</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Перейти на профиль</string>
+       <string notr="true">Перейти на профиль</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Избранное</string>
+       <string notr="true">Избранное</string>
       </property>
      </column>
     </widget>

@@ -108,8 +108,23 @@ FormFriends::~FormFriends(){
 }
 void FormFriends::changeEvent(QEvent *event){
     if(event->type()==QEvent::LanguageChange){
-        ui->retranslateUi(this);
+        Retranslate();
     }
+}
+void FormFriends::Retranslate(){
+    ui->retranslateUi(this);
+    ui->ComboBoxStatus->clear();
+    ui->ComboBoxStatus->addItems(QStringList()<<tr("Статус")<<tr("В игре")<<tr("Не в сети")<<tr("В сети")<<tr("Не беспокоить")<<tr("Нет на месте")<<tr("Спит")<<tr("Ожидает обмена")<<tr("Хочет поиграть"));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnID,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Ник")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnAdded,new QTableWidgetItem(tr("Добавлен")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnStatus,new QTableWidgetItem(tr("Статус")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnisPublic,new QTableWidgetItem(tr("Профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnGoTo,new QTableWidgetItem(tr("На профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnFavorite,new QTableWidgetItem(tr("Избранное")));
+    Threading loadTable(this);
+    loadTable.AddThreadFriends(ui->TableWidgetFriends,_profiles,_friends);
 }
 void FormFriends::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);

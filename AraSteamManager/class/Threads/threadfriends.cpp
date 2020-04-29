@@ -21,42 +21,42 @@ int ThreadFriends::Fill(){
         QTableWidgetItem *item4 = new QTableWidgetItem;
         if(!_profiles[i].GetGameextrainfo().isEmpty()){
             item4->setText(tr("В игре"));
-            item4->setTextColor(QColor("#89b753"));
+            item4->setForeground(QColor("#89b753"));
         } else
             switch (_profiles[i].GetPersonastate()){
             case 0:{
                     item4->setText(tr("Не в сети"));
-                    item4->setTextColor(QColor("#4c4d4f"));
+                    item4->setForeground(QColor("#4c4d4f"));
                     break;
             }
             case 1:{
                     item4->setText(tr("В сети"));
-                    item4->setTextColor(QColor("#57cbde"));
+                    item4->setForeground(QColor("#57cbde"));
                     break;
             }
             case 2:{
                     item4->setText(tr("Не беспокоить"));
-                    item4->setTextColor(QColor("#815560"));
+                    item4->setForeground(QColor("#815560"));
                     break;
             }
             case 3:{
                     item4->setText(tr("Нет на месте"));
-                    item4->setTextColor(QColor("#46788e"));
+                    item4->setForeground(QColor("#46788e"));
                     break;
             }
             case 4:{
                     item4->setText(tr("Спит"));
-                    item4->setTextColor(QColor("#46788e"));
+                    item4->setForeground(QColor("#46788e"));
                     break;
             }
             case 5:{
                     item4->setText(tr("Ожидает обмена"));
-                    item4->setTextColor(Qt::darkMagenta);
+                    item4->setForeground(Qt::darkMagenta);
                     break;
             }
             case 6:{
                     item4->setText(tr("Хочет поиграть"));
-                    item4->setTextColor(Qt::darkMagenta);
+                    item4->setForeground(Qt::darkMagenta);
                     break;
             }
             }
@@ -64,22 +64,22 @@ int ThreadFriends::Fill(){
         switch(_profiles[i].GetCommunityvisibilitystate()){
         case 1:{
             item5->setText(tr("Скрытый"));
-            item5->setTextColor(QColor("#6e0e0e"));
+            item5->setForeground(QColor("#6e0e0e"));
             break;
         }
         case 2:{
             item5->setText(tr("Скрытый"));
-            item5->setTextColor(QColor("#6e0e0e"));
+            item5->setForeground(QColor("#6e0e0e"));
             break;
         }
         case 3:{
             item5->setText(tr("Публичный"));
-            item5->setTextColor(QColor("#0e6e11"));
+            item5->setForeground(QColor("#0e6e11"));
             break;
         }
         case 8:{
             item5->setText(tr("Скрытый"));
-            item5->setTextColor(QColor("#6e0e0e"));
+            item5->setForeground(QColor("#6e0e0e"));
             break;
         }
         }

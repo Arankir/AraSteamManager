@@ -43,6 +43,7 @@ signals:
 
 private slots:
     void changeEvent(QEvent *event);
+    void Retranslate();
 
 private:
     Ui::FormStatistics *ui;
@@ -59,6 +60,11 @@ private:
     QVector<int> _times ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     QVector<int> _months ={0,0,0,0,0,0,0,0,0,0,0,0};
     QVector<QPair<QString,int>> _years;
+    double _totalAverage;
+    DonutBreakdownChart *_donutBreakdown;
+    QChart *_chartT;
+    QChart *_chartM;
+    QChart *_chartY;
 };
 
 #endif // FORMSTATISTICS_H

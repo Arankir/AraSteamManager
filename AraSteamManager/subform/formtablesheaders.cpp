@@ -18,6 +18,7 @@ const int c_tableAchievementColumnReachedMy=5;
 const int c_tableAchievementColumnCount=6;
 #define ConstantsEnd }
 
+//Добавить Retranslate()
 FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a_game, QString a_id, SAchievements a_achievements, TableType a_type, QWidget *parent): QWidget(parent),
                     ui(new Ui::FormTablesHeaders),_game(a_game),_id(a_id){
     ui->setupUi(this);
@@ -32,7 +33,7 @@ FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a
 
     connect(ui->TableWidgetHorizontalHeader->verticalHeader(),&QHeaderView::sectionResized,[=](int /*logicalIndex*/, int oldSize, int newSize){
         _horizontalHeaderHeight+=(newSize-oldSize);
-        this->resize(this->geometry().width(), this->geometry().height());
+        Resize();
         });
 #define ConnectSlotsEnd }
     ui->TableWidgetHorizontalHeader->setRowCount(a_rowHeaders);
@@ -80,10 +81,48 @@ FormTablesHeaders::~FormTablesHeaders(){
 }
 
 void FormTablesHeaders::resizeEvent(QResizeEvent*){
+    Resize();
+}
+void FormTablesHeaders::Resize(){
     int height= _visibleHorizontal?_horizontalHeaderHeight+ui->TableWidgetHorizontalHeader->horizontalHeader()->height():0;
     ui->TableWidgetHorizontalHeader->setGeometry(0,0,this->width(),height);
     ui->TableWidgetContent->setGeometry(0,height,this->width(),this->height()-height);
 }
+
+#define Gets {
+int FormTablesHeaders::GetColumnCount(){
+    return ui->TableWidgetHorizontalHeader->columnCount();
+}
+int FormTablesHeaders::GetRowCount(){
+    return ui->TableWidgetContent->rowCount();
+}
+int FormTablesHeaders::GetRowCountHeaders(){
+    return ui->TableWidgetHorizontalHeader->rowCount();
+}
+int FormTablesHeaders::GetRowHeightHeaders(int a_row){
+    return ui->TableWidgetHorizontalHeader->rowHeight(a_row);
+}
+int FormTablesHeaders::GetColumnWidth(int a_column){
+    return ui->TableWidgetContent->columnWidth(a_column);
+}
+int FormTablesHeaders::GetRowHeight(int a_row){
+    return ui->TableWidgetContent->rowHeight(a_row);
+}
+
+QTableWidgetItem* FormTablesHeaders::ItemContent(int a_row, int a_column){
+    return ui->TableWidgetContent->item(a_row, a_column);
+}
+QTableWidgetItem* FormTablesHeaders::ItemHorizontalHeader(int a_row, int a_column){
+    return ui->TableWidgetHorizontalHeader->item(a_row, a_column);
+}
+
+QTableWidget *FormTablesHeaders::GetTableHH(){
+    return ui->TableWidgetHorizontalHeader;
+}
+QTableWidget *FormTablesHeaders::GetTableContent(){
+    return ui->TableWidgetContent;
+}
+#define GetsEnd }
 
 void FormTablesHeaders::SetColumnCount(int a_col){
     int columnNow=ui->TableWidgetContent->columnCount();
@@ -94,16 +133,17 @@ void FormTablesHeaders::SetColumnCount(int a_col){
         columnNow++;
     }
 }
-int FormTablesHeaders::GetColumnCount(){
-    return ui->TableWidgetHorizontalHeader->columnCount();
+void FormTablesHeaders::SetColumnWidth(int a_column, int a_width){
+    ui->TableWidgetHorizontalHeader->setColumnWidth(a_column,a_width);
+    ui->TableWidgetContent->setColumnWidth(a_column,a_width);
 }
 void FormTablesHeaders::SetRowCount(int a_row){
     ui->TableWidgetContent->setRowCount(a_row);
     _fAchievements.SetRow(a_row);
     _fCompare.SetRow(a_row);
 }
-int FormTablesHeaders::GetRowCount(){
-    return ui->TableWidgetContent->rowCount();
+void FormTablesHeaders::SetRowHeight(int a_row, int a_height){
+    ui->TableWidgetContent->setRowHeight(a_row,a_height);
 }
 void FormTablesHeaders::SetRowCountHeaders(int a_row){
     ui->TableWidgetHorizontalHeader->setRowCount(a_row);
@@ -112,58 +152,28 @@ void FormTablesHeaders::SetRowCountHeaders(int a_row){
         _horizontalHeaderHeight+=ui->TableWidgetHorizontalHeader->rowHeight(i);
     }
 }
-int FormTablesHeaders::GetRowCountHeaders(){
-    return ui->TableWidgetHorizontalHeader->rowCount();
-}
-
 void FormTablesHeaders::SetRowHeightHeaders(int a_row, int a_height){
     ui->TableWidgetHorizontalHeader->setRowHeight(a_row,a_height);
-}
-int FormTablesHeaders::GetRowHeightHeaders(int a_row){
-    return ui->TableWidgetHorizontalHeader->rowHeight(a_row);
-}
-
-void FormTablesHeaders::SetColumnWidth(int a_column, int a_width){
-    ui->TableWidgetHorizontalHeader->setColumnWidth(a_column,a_width);
-    ui->TableWidgetContent->setColumnWidth(a_column,a_width);
-}
-int FormTablesHeaders::GetColumnWidth(int a_column){
-    return ui->TableWidgetContent->columnWidth(a_column);
-}
-void FormTablesHeaders::SetRowHeight(int a_row, int a_height){
-    ui->TableWidgetContent->setRowHeight(a_row,a_height);
-}
-int FormTablesHeaders::GetRowHeight(int a_row){
-    return ui->TableWidgetContent->rowHeight(a_row);
-}
-
-void FormTablesHeaders::SetWidgetHorizontalHeader(int a_row, int a_column, QWidget *a_widget){
-    ui->TableWidgetHorizontalHeader->setCellWidget(a_row, a_column, a_widget);
 }
 void FormTablesHeaders::SetWidgetContent(int a_row, int a_column, QWidget *a_widget){
     ui->TableWidgetContent->setCellWidget(a_row, a_column, a_widget);
 }
-
-void FormTablesHeaders::SetItemHorizontalHeader(int a_row, int a_column, QTableWidgetItem *a_item){
-    ui->TableWidgetHorizontalHeader->setItem(a_row, a_column, a_item);
+void FormTablesHeaders::SetWidgetHorizontalHeader(int a_row, int a_column, QWidget *a_widget){
+    ui->TableWidgetHorizontalHeader->setCellWidget(a_row, a_column, a_widget);
 }
 void FormTablesHeaders::SetItemContent(int a_row, int a_column, QTableWidgetItem *a_item){
     ui->TableWidgetContent->setItem(a_row, a_column, a_item);
 }
-
-QTableWidgetItem* FormTablesHeaders::ItemHorizontalHeader(int a_row, int a_column){
-    return ui->TableWidgetHorizontalHeader->item(a_row, a_column);
-}
-QTableWidgetItem* FormTablesHeaders::ItemContent(int a_row, int a_column){
-    return ui->TableWidgetContent->item(a_row, a_column);
+void FormTablesHeaders::SetItemHorizontalHeader(int a_row, int a_column, QTableWidgetItem *a_item){
+    ui->TableWidgetHorizontalHeader->setItem(a_row, a_column, a_item);
 }
 
-void FormTablesHeaders::SetVisibleRowContent(int a_row, bool a_visible){
-    ui->TableWidgetContent->setRowHidden(a_row, !a_visible);
-}
 void FormTablesHeaders::SetVisibleColumn(int a_column, bool a_visible){
     ui->TableWidgetHorizontalHeader->setColumnHidden(a_column, !a_visible);
     ui->TableWidgetContent->setColumnHidden(a_column, !a_visible);
+}
+void FormTablesHeaders::SetVisibleRowContent(int a_row, bool a_visible){
+    ui->TableWidgetContent->setRowHidden(a_row, !a_visible);
 }
 void FormTablesHeaders::SetVisibleRowHeaders(int a_row, bool a_visible){
     ui->TableWidgetHorizontalHeader->setRowHidden(a_row, !a_visible);
@@ -218,14 +228,14 @@ void FormTablesHeaders::SetType(TableType a_newType){
         _visibleHorizontal=true;
         ui->TableWidgetHorizontalHeader->setVisible(true);
         ui->TableWidgetContent->horizontalHeader()->setVisible(false);
-        //resize;
+        Resize();
         break;
     }
     case TableType::standart:{
         _visibleHorizontal=false;
         ui->TableWidgetHorizontalHeader->setVisible(false);
         ui->TableWidgetContent->horizontalHeader()->setVisible(true);
-        //resize;
+        Resize();
         break;
     }
     }
@@ -303,13 +313,6 @@ void FormTablesHeaders::AddCategoryColumn(){
         ui->TableWidgetContent->setItem(i,ui->TableWidgetContent->columnCount()-1, itemCheck);
         }
     _categoriesColumns.push_back(ui->TableWidgetContent->columnCount()-1);
-}
-
-QTableWidget *FormTablesHeaders::GetTableHH(){
-    return ui->TableWidgetHorizontalHeader;
-}
-QTableWidget *FormTablesHeaders::GetTableContent(){
-    return ui->TableWidgetContent;
 }
 
 void FormTablesHeaders::InsertColumn(int a_columns){

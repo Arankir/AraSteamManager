@@ -117,9 +117,9 @@ void FormAchievements::InitComponents(){
     #define SetTableWidgetCompareFriendsSettingsEnd }
     #define SetIcon {
     ui->ButtonCompare->setIcon(QIcon("://"+_theme+"/compare.png"));
-    //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {background-image:url(images/filter_white.png)}");
-    //ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(images/filter_white.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    //ui->GroupBoxFilter->setStyleSheet(""QGroupBox[accessibleName=\"Filter\"]::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(://"+_theme+"/filter.png); image-position:left; margin-top:12px;}");
+    qDebug()<<ui->GroupBoxFilter->styleSheet();
     ui->ButtonAddCategory->setIcon(QIcon("://create.png"));
     ui->ButtonChangeCategory->setIcon(QIcon("://"+_theme+"/change.png"));
     ui->ButtonDeleteCategory->setIcon(QIcon("://delete.png"));
@@ -145,6 +145,7 @@ void FormAchievements::InitComponents(){
     ui->LabelGameOnlineValue->setText(_game.GetNumberPlayers(false));
     ui->LabelGameTitle->setText(_game.GetName());
     ui->GroupBoxFilter->setEnabled(false);
+    ui->ButtonCompare->setMinimumHeight(21);
     _achievements._appid=QString::number(_game.GetAppid());
     _achievements._id=_id;
     _achievements.Set(SAchievementsPercentage(QString::number(_game.GetAppid()),false));
@@ -303,7 +304,7 @@ void FormAchievements::LoadingCompare(){
     ui->ProgressBarFriendsLoad->setValue(0);
     ui->ProgressBarFriendsLoad->setVisible(true);
 
-    for (int i=0;i<_profilesFriends.GetCount();i++) {
+    for (int i=0;i<_profilesFriends.GetCount()+2;i++) {
         SGames *gamesFriend = new SGames;
         gamesFriend->_index=i;
         gamesFriend->Set(_profilesFriends[i].GetSteamid(),true,true,true);

@@ -239,7 +239,7 @@
       </sizepolicy>
      </property>
      <property name="accessibleName">
-      <string>Filter</string>
+      <string notr="true">Filter</string>
      </property>
      <property name="title">
       <string>      Фильтр</string>

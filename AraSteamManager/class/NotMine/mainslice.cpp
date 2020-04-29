@@ -2,10 +2,9 @@
 
 QT_CHARTS_USE_NAMESPACE
 
-MainSlice::MainSlice(QPieSeries *breakdownSeries, QObject *parent)
-    : QPieSlice(parent),
-      m_breakdownSeries(breakdownSeries){
+MainSlice::MainSlice(QPieSeries *breakdownSeries, QObject *parent) : QPieSlice(parent), m_breakdownSeries(breakdownSeries){
     connect(this, &MainSlice::percentageChanged, this, &MainSlice::updateLabel);
+    connect(this, &MainSlice::labelChanged, this, &MainSlice::updateLabel);
 }
 
 QPieSeries *MainSlice::breakdownSeries() const{

@@ -30,7 +30,6 @@ public:
     QLabel *label;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout;
-    QLabel *LabelAveragePercent;
     QLabel *LabelAveragePercentValue;
     QVBoxLayout *verticalLayout_2;
     QLabel *LabelSummColumn;
@@ -82,11 +81,6 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        LabelAveragePercent = new QLabel(FormStatistics);
-        LabelAveragePercent->setObjectName(QString::fromUtf8("LabelAveragePercent"));
-
-        verticalLayout->addWidget(LabelAveragePercent);
-
         LabelAveragePercentValue = new QLabel(FormStatistics);
         LabelAveragePercentValue->setObjectName(QString::fromUtf8("LabelAveragePercentValue"));
         LabelAveragePercentValue->setText(QString::fromUtf8("0"));
@@ -146,7 +140,6 @@ public:
         label->setToolTip(QCoreApplication::translate("FormStatistics", "<html><head/><body><p><span style=\" font-family:'Open Sans','Arial','sans-serif'; font-size:12px; color:#000000;\">\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260 \320\262\321\213\320\262\320\276\320\264\320\270\321\202\321\201\321\217 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\275\320\260 \320\260\320\272\320\272\320\260\321\203\320\275\321\202\320\265 \321\203 \320\272\320\276\321\202\320\276\321\200\321\213\321\205 \320\265\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217.</span></p><p><span style=\" font-family:'Open Sans','Arial','sans-serif'; font-size:12px; color:#000000;\">\320\225\321\201\320\273\320\270 \321\201\321\203\320\274\320\274\320\260\321\200\320\275\320\276\320\265 \320\272\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\275\320\265 \321\201\320\276\320\262\320\277\320\260\320"
                         "\264\320\260\320\265\321\202 \321\201 \320\270\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\320\265\320\271 \321\201\321\202\320\270\320\274\320\260, \320\267\320\275\320\260\321\207\320\270\321\202 \321\207\320\260\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\277\320\276\320\273\321\203\321\207\320\265\320\275\320\260 \321\201 \320\270\321\201\320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\320\275\320\270\320\265\320\274 \321\201\320\265\320\274\320\265\320\271\320\275\320\276\320\263\320\276 \320\264\320\276\321\201\321\202\321\203\320\277\320\260</span></p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        LabelAveragePercent->setText(QCoreApplication::translate("FormStatistics", "\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202: ", nullptr));
         LabelSummColumn->setText(QCoreApplication::translate("FormStatistics", "\320\222\321\201\320\265\320\263\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271:", nullptr));
     } // retranslateUi
 

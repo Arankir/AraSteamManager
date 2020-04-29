@@ -245,6 +245,9 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(GroupBoxFilter->sizePolicy().hasHeightForWidth());
         GroupBoxFilter->setSizePolicy(sizePolicy2);
+#if QT_CONFIG(accessibility)
+        GroupBoxFilter->setAccessibleName(QString::fromUtf8("Filter"));
+#endif // QT_CONFIG(accessibility)
         verticalLayout_2 = new QVBoxLayout(GroupBoxFilter);
         verticalLayout_2->setSpacing(3);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -541,9 +544,6 @@ public:
         CheckBoxShowFilter->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \321\204\320\270\320\273\321\214\321\202\321\200", nullptr));
         LabelGameOnline->setText(QCoreApplication::translate("FormAchievements", "GameOnline:", nullptr));
         ButtonUpdate->setText(QCoreApplication::translate("FormAchievements", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214", nullptr));
-#if QT_CONFIG(accessibility)
-        GroupBoxFilter->setAccessibleName(QCoreApplication::translate("FormAchievements", "Filter", nullptr));
-#endif // QT_CONFIG(accessibility)
         GroupBoxFilter->setTitle(QCoreApplication::translate("FormAchievements", "      \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
         GroupBoxReachedFilter->setTitle(QString());
         CheckBoxFavorites->setText(QCoreApplication::translate("FormAchievements", "\320\242\320\276\320\273\321\214\320\272\320\276 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));

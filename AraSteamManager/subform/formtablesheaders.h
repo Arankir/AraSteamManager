@@ -30,6 +30,7 @@ public:
     ~FormTablesHeaders();
     void resizeEvent(QResizeEvent *event);
 
+    void Resize();
     void SetColumnCount(int col);
     void SetRowCount(int row);
     void SetRowCountHeaders(int rows);

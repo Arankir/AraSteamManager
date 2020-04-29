@@ -156,14 +156,20 @@ FormGames::~FormGames(){
 }
 void FormGames::changeEvent(QEvent *event){
     if(event->type()==QEvent::LanguageChange){
-        ui->retranslateUi(this);
+        Retranslate();
     }
+}
+void FormGames::Retranslate(){
+    ui->retranslateUi(this);
+    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
+    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
+    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
 }
 void FormGames::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);
     //delete this;
 }
-void FormGames::resizeEvent(QResizeEvent *event){
+void FormGames::resizeEvent(QResizeEvent*){
     ui->TableWidgetGames->setGeometry(0,0,ui->FrameGames->width(),ui->FrameGames->height());
     ui->FrameGroup->setGeometry(0,0,ui->FrameGroup->width(),ui->FrameGames->height());
     ui->FrameGroup->raise();

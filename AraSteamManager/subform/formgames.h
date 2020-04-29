@@ -46,6 +46,7 @@ public slots:
 private slots:
     void changeEvent(QEvent *event);
     void InitComponents();
+    void Retranslate();
     void OnResultAchievements(SAchievementsPlayer ach);
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event);

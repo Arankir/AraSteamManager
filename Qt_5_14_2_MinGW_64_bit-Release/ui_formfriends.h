@@ -104,20 +104,28 @@ public:
         if (TableWidgetFriends->columnCount() < 8)
             TableWidgetFriends->setColumnCount(8);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        __qtablewidgetitem->setText(QString::fromUtf8("\320\230\320\272\320\276\320\275\320\272\320\260"));
         TableWidgetFriends->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        __qtablewidgetitem1->setText(QString::fromUtf8("\320\235\320\276\320\262\321\213\320\271 \321\201\321\202\320\276\320\273\320\261\320\265\321\206"));
         TableWidgetFriends->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        __qtablewidgetitem2->setText(QString::fromUtf8("\320\230\320\274\321\217"));
         TableWidgetFriends->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        __qtablewidgetitem3->setText(QString::fromUtf8("\320\241\321\202\320\260\321\202\321\203\321\201"));
         TableWidgetFriends->setHorizontalHeaderItem(3, __qtablewidgetitem3);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        __qtablewidgetitem4->setText(QString::fromUtf8("\320\237\321\200\320\270\320\262\320\260\321\202\320\275\320\276\321\201\321\202\321\214"));
         TableWidgetFriends->setHorizontalHeaderItem(4, __qtablewidgetitem4);
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        __qtablewidgetitem5->setText(QString::fromUtf8("\320\260\320\271\320\264\320\270"));
         TableWidgetFriends->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        __qtablewidgetitem6->setText(QString::fromUtf8("\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\275\320\260 \320\277\321\200\320\276\321\204\320\270\320\273\321\214"));
         TableWidgetFriends->setHorizontalHeaderItem(6, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        __qtablewidgetitem7->setText(QString::fromUtf8("\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265"));
         TableWidgetFriends->setHorizontalHeaderItem(7, __qtablewidgetitem7);
         TableWidgetFriends->setObjectName(QString::fromUtf8("TableWidgetFriends"));
         TableWidgetFriends->setSortingEnabled(true);
@@ -139,22 +147,6 @@ public:
         ButtonFind->setText(QCoreApplication::translate("FormFriends", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
         CheckBoxOpenProfile->setText(QCoreApplication::translate("FormFriends", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         CheckBoxFavorites->setText(QCoreApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
-        QTableWidgetItem *___qtablewidgetitem = TableWidgetFriends->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QCoreApplication::translate("FormFriends", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));
-        QTableWidgetItem *___qtablewidgetitem1 = TableWidgetFriends->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QCoreApplication::translate("FormFriends", "\320\235\320\276\320\262\321\213\320\271 \321\201\321\202\320\276\320\273\320\261\320\265\321\206", nullptr));
-        QTableWidgetItem *___qtablewidgetitem2 = TableWidgetFriends->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QCoreApplication::translate("FormFriends", "\320\230\320\274\321\217", nullptr));
-        QTableWidgetItem *___qtablewidgetitem3 = TableWidgetFriends->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QCoreApplication::translate("FormFriends", "\320\241\321\202\320\260\321\202\321\203\321\201", nullptr));
-        QTableWidgetItem *___qtablewidgetitem4 = TableWidgetFriends->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QCoreApplication::translate("FormFriends", "\320\237\321\200\320\270\320\262\320\260\321\202\320\275\320\276\321\201\321\202\321\214", nullptr));
-        QTableWidgetItem *___qtablewidgetitem5 = TableWidgetFriends->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("FormFriends", "\320\260\320\271\320\264\320\270", nullptr));
-        QTableWidgetItem *___qtablewidgetitem6 = TableWidgetFriends->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QCoreApplication::translate("FormFriends", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\275\320\260 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        QTableWidgetItem *___qtablewidgetitem7 = TableWidgetFriends->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QCoreApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
     } // retranslateUi
 
 };
