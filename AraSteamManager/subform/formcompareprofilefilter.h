@@ -19,6 +19,7 @@ signals:
 
 public:
     explicit FormCompareProfileFilter(QWidget *parent = nullptr);
+    explicit FormCompareProfileFilter(QString, QString, QString, QWidget *parent = nullptr);
     ~FormCompareProfileFilter();
     void SetName(QString Aname) {_name=Aname;}
     void SetIndex(QString Aindex) {_index=Aindex;}

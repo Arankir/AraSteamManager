@@ -1,12 +1,8 @@
 #include "Sgames.h"
 
 #define SGameStart {
-SGame::SGame(QJsonObject a_game, QObject *parent) : QObject(parent),_game(a_game){
-
-}
-SGame::SGame(QObject *parent) : QObject(parent){
-
-}
+SGame::SGame(QJsonObject a_game, QObject *parent) : QObject(parent),_game(a_game){}
+SGame::SGame(QObject *parent) : QObject(parent){}
 void SGame::Set(QJsonObject a_game){
     _game=a_game;
 }
@@ -57,11 +53,9 @@ SGames::SGames(QString a_id, bool a_free_games, bool a_game_info, bool a_paralle
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
         delete reply;
-        emit s_finished(this);
-        emit s_finished();
     }
 }
-SGames::SGames(QJsonDocument a_games){
+SGames::SGames(QJsonDocument a_games, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
     if(a_games.object().value("response").toObject().value("games").toArray().size()>0){
         //_games=a_games.object().value("response").toObject().value("games").toArray();
@@ -76,7 +70,7 @@ SGames::SGames(QJsonDocument a_games){
         _error="profile is not exist";
     }
 }
-SGames::SGames(){
+SGames::SGames(QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();
 }
 SGames::~SGames(){

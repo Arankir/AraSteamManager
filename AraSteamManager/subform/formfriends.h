@@ -41,8 +41,8 @@ private slots:
 
     void on_ButtonReturn_clicked();
 
-    void GoToProfileClicked();
-    void FavoritesClicked();
+    void ButtonFriendGoTo_Clicked();
+    void ButtonFriendFavorite_Clicked();
 
     void UpdateHiddenRows();
     void on_CheckBoxOpenProfile_stateChanged(int arg1);
@@ -53,6 +53,8 @@ private slots:
     void on_CheckBoxFavorites_stateChanged(int arg1);
 
     void on_TableWidgetFriends_cellDoubleClicked(int row, int column);
+    void TableWidgetFriends_CellClicked(int row, int col);
+    void FriendToUi();
 
 private:
     Ui::FormFriends *ui;
@@ -64,6 +66,8 @@ private:
     QString _theme="white";
     Favorites _favorites;
     Filter _filter;
+    QString _currentFriend;
+    int _currentFriendIndex=-1;
 
     //QVector<RequestData*> _request;
     int _numRequests=0;

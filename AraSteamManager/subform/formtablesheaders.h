@@ -75,23 +75,27 @@ public:
 
     void SetType(TableType newType);
     TableType GetType() {return _currentType;}
-    bool AddFriendColumn(SProfile friendProfile);
-    void AddNoValueColumn();
-    void AddCategoryColumn();
+
     QVector<int> GetFriendsColumns() {return _friendsColumns;}
     int GetNoValueColumn() {return _noValueColumn;}
     QVector<int> GetCategoryColumns() {return _categoriesColumns;}
 
     QTableWidget *GetTableHH();
     QTableWidget *GetTableContent();
-
+signals:
+    void s_contentCellClicked(int row, int col);
 public slots:
-    void InsertColumn(int a_columns);
-    void RemoveColumn(int a_columns);
     void InsertRow(int a_row);
     void RemoveRow(int a_row);
+    bool AddFriendColumn(SProfile friendProfile);
+    void AddNoValueColumn();
+    void AddCategoryColumn();
+    void RemoveFriendColumn(int a_column);
+    void RemoveCategoryColumn(int a_column);
 private:
     void SetHorizontalTitle(int column, QString text);
+    void InsertColumn(int a_columns);
+    void RemoveColumn(int a_columns);
     Ui::FormTablesHeaders *ui;
     bool _visibleHorizontal=true;
     int _horizontalHeaderHeight=0;

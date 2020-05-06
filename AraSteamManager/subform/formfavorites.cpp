@@ -84,55 +84,62 @@ void FormFavorites::FriendLoad(SProfile *a_profile){
     QTableWidgetItem *item4 = new QTableWidgetItem;
     if(!a_profile->GetGameextrainfo().isEmpty()){
         item4->setText(tr("В игре"));
-        item4->setForeground(QColor("#89b753"));
+        item4->setForeground(QColor(137,183,83));
     } else
         switch (a_profile->GetPersonastate()){
-            case 0:
-                    item4->setText(tr("Не в сети"));
-                    item4->setForeground(QColor("#4c4d4f"));
-                    break;
-            case 1:
-                    item4->setText(tr("В сети"));
-                    item4->setForeground(QColor("#57cbde"));
-                    break;
-            case 2:
-                    item4->setText(tr("Не беспокоить"));
-                    item4->setForeground(QColor("#815560"));
-                    break;
-            case 3:
-                    item4->setText(tr("Нет на месте"));
-                    item4->setForeground(QColor("#46788e"));
-                    break;
-            case 4:
-                    item4->setText(tr("Спит"));
-                    item4->setForeground(QColor("#46788e"));
-                    break;
-            case 5:
-                    item4->setText(tr("Ожидает обмена"));
-                    item4->setForeground(Qt::darkMagenta);
-                    break;
-            case 6:
-                    item4->setText(tr("Хочет поиграть"));
-                    item4->setForeground(Qt::darkMagenta);
-                    break;
+        case 0:{
+                item4->setText(tr("Не в сети"));
+                item4->setForeground(QColor(76,77,79));
+                break;
+        }
+        case 1:{
+                item4->setText(tr("В сети"));
+                item4->setForeground(QColor(87,203,222));
+                break;
+        }
+        case 2:{
+                item4->setText(tr("Не беспокоить"));
+                item4->setForeground(QColor(129,85,96));
+                break;
+        }
+        case 3:{
+                item4->setText(tr("Нет на месте"));
+                item4->setForeground(QColor(70,120,142));
+                break;
+        }
+        case 4:{
+                item4->setText(tr("Спит"));
+                item4->setForeground(QColor(70,120,142));
+                break;
+        }
+        case 5:{
+                item4->setText(tr("Ожидает обмена"));
+                item4->setForeground(Qt::darkMagenta);
+                break;
+        }
+        case 6:{
+                item4->setText(tr("Хочет поиграть"));
+                item4->setForeground(Qt::darkMagenta);
+                break;
+        }
         }
     QTableWidgetItem *item5 = new QTableWidgetItem;
     switch(a_profile->GetCommunityvisibilitystate()){
         case 1:
             item5->setText(tr("Скрытый"));
-            item5->setForeground(QColor("#6e0e0e"));
+            item5->setForeground(QColor(110,14,14));
             break;
         case 2:
             item5->setText(tr("Скрытый"));
-            item5->setForeground(QColor("#6e0e0e"));
+            item5->setForeground(QColor(110,14,14));
             break;
         case 3:
             item5->setText(tr("Публичный"));
-            item5->setForeground(QColor("#0e6e11"));
+            item5->setForeground(QColor(14,110,17));
             break;
         case 8:
             item5->setText(tr("Скрытый"));
-            item5->setForeground(QColor("#6e0e0e"));
+            item5->setForeground(QColor(110,14,14));
             break;
     }
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID,new QTableWidgetItem(a_profile->GetSteamid()));

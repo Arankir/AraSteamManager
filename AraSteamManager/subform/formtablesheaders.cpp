@@ -20,19 +20,20 @@ const int c_tableAchievementColumnCount=6;
 
 //Добавить Retranslate()
 FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a_game, QString a_id, SAchievements a_achievements, TableType a_type, QWidget *parent): QWidget(parent),
-                    ui(new Ui::FormTablesHeaders),_game(a_game),_id(a_id){
+                    ui(new Ui::FormTablesHeaders),_game(a_game),_noValueColumn(-1),_id(a_id){
     ui->setupUi(this);
 #define ConnectSlots {
     connect(ui->TableWidgetContent->horizontalScrollBar(),&QScrollBar::sliderMoved,ui->TableWidgetHorizontalHeader->horizontalScrollBar(),&QScrollBar::setValue);
     connect(ui->TableWidgetContent->horizontalScrollBar(),&QScrollBar::valueChanged,ui->TableWidgetHorizontalHeader->horizontalScrollBar(),&QScrollBar::setValue);
 
-    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(),&QHeaderView::sectionClicked,[=](int logicalIndex)
+    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(),&QHeaderView::sectionClicked,ui->TableWidgetContent,[=](int logicalIndex)
             {ui->TableWidgetContent->sortByColumn(logicalIndex,ui->TableWidgetHorizontalHeader->horizontalHeader()->sortIndicatorOrder());});
-    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(),&QHeaderView::sectionResized,[=](int logicalIndex, int, int newSize)
+    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(),&QHeaderView::sectionResized,ui->TableWidgetContent,[=](int logicalIndex, int, int newSize)
             {ui->TableWidgetContent->setColumnWidth(logicalIndex,newSize);});
 
-    connect(ui->TableWidgetHorizontalHeader->verticalHeader(),&QHeaderView::sectionResized,[=](int /*logicalIndex*/, int oldSize, int newSize){
+    connect(ui->TableWidgetHorizontalHeader->verticalHeader(),&QHeaderView::sectionResized,ui->TableWidgetContent,[=](int /*logicalIndex*/, int oldSize, int newSize){
         _horizontalHeaderHeight+=(newSize-oldSize);
+        connect(ui->TableWidgetContent,&QTableWidget::cellClicked,this,[=](int a_row, int a_col){emit s_contentCellClicked(a_row,a_col);});
         Resize();
         });
 #define ConnectSlotsEnd }
@@ -57,10 +58,10 @@ FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a
         _horizontalHeaderHeight+=ui->TableWidgetHorizontalHeader->rowHeight(i);
 
     SProfile profileData(_id,false,QueryType::url);
-    QLabel *profileAvatarCompare = new QLabel;
-    profileAvatarCompare->setPixmap(RequestData(profileData.GetAvatar(),false,this).GetPixmap());
-    profileAvatarCompare->setAlignment(Qt::AlignCenter);
-    SetWidgetContent(0,c_tableAchievementColumnReachedMy,profileAvatarCompare);
+//    QLabel *profileAvatarCompare = new QLabel;
+//    profileAvatarCompare->setAlignment(Qt::AlignCenter);
+//    new RequestImage(profileAvatarCompare,profileData.GetAvatar(),"",false,this);
+//    SetWidgetContent(0,c_tableAchievementColumnReachedMy,profileAvatarCompare);
     SetRowHeightHeaders(0,33);
     SetVerticalHeaderTitle(0,new  QTableWidgetItem(""));
     SetVerticalHeaderTitle(1,new  QTableWidgetItem("%"));
@@ -222,12 +223,17 @@ void FormTablesHeaders::ResizeRowHeaders(int a_row, int a_height){
 }
 
 void FormTablesHeaders::SetType(TableType a_newType){
-    _currentType=a_newType;
-    switch (_currentType) {
+    switch (a_newType) {
     case TableType::compare:{
         _visibleHorizontal=true;
         ui->TableWidgetHorizontalHeader->setVisible(true);
         ui->TableWidgetContent->horizontalHeader()->setVisible(false);
+        while(_categoriesColumns.size()>0){
+            RemoveCategoryColumn(0);
+        }
+        if(_noValueColumn>-1)
+            RemoveColumn(_noValueColumn);
+        _noValueColumn=-1;
         Resize();
         break;
     }
@@ -235,10 +241,14 @@ void FormTablesHeaders::SetType(TableType a_newType){
         _visibleHorizontal=false;
         ui->TableWidgetHorizontalHeader->setVisible(false);
         ui->TableWidgetContent->horizontalHeader()->setVisible(true);
+        while(_friendsColumns.size()>0){
+            RemoveFriendColumn(0);
+        }
         Resize();
         break;
     }
     }
+    _currentType=a_newType;
     //!!!!!!!!!!!!!
 }
 
@@ -285,12 +295,11 @@ bool FormTablesHeaders::AddFriendColumn(SProfile a_friendProfile){
         }
         }
     if((totalReach==0)&&(totalNotReach==0)){
-        ui->TableWidgetHorizontalHeader->setItem(1,column, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не")).arg(tr("публичный"))));
+        ui->TableWidgetHorizontalHeader->setItem(1,column, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не"),tr("публичный"))));
         return false;
-        } else {
-        ui->TableWidgetHorizontalHeader->setItem(1,column, new QTableWidgetItem(QString("%1/%2\n%3%").arg(QString::number(totalReach))
-                                                                             .arg(QString::number(totalReach+totalNotReach))
-                                                                             .arg(QString::number(100.0*totalReach/(totalReach+totalNotReach)))));
+    } else {
+        ui->TableWidgetHorizontalHeader->setItem(1,column, new QTableWidgetItem(QString("%1/%2\n%3%").arg(QString::number(totalReach),QString::number(totalReach+totalNotReach),
+                                                                                                          QString::number(100.0*totalReach/(totalReach+totalNotReach)))));
         return true;
     }
 }
@@ -313,6 +322,22 @@ void FormTablesHeaders::AddCategoryColumn(){
         ui->TableWidgetContent->setItem(i,ui->TableWidgetContent->columnCount()-1, itemCheck);
         }
     _categoriesColumns.push_back(ui->TableWidgetContent->columnCount()-1);
+}
+void FormTablesHeaders::RemoveFriendColumn(int a_column){
+    int column=_friendsColumns.takeAt(a_column);
+    RemoveColumn(column);
+    for (int i=0;i<_friendsColumns.size();i++) {
+        if(_friendsColumns[i]>column)
+            _friendsColumns[i]--;
+    }
+}
+void FormTablesHeaders::RemoveCategoryColumn(int a_column){
+    int column=_categoriesColumns.takeAt(a_column);
+    RemoveColumn(column);
+    for (int i=0;i<_categoriesColumns.size();i++) {
+        if(_categoriesColumns[i]>column)
+            _categoriesColumns[i]--;
+    }
 }
 
 void FormTablesHeaders::InsertColumn(int a_columns){

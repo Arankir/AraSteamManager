@@ -18,9 +18,7 @@ Favorites::Favorites(QString a_path, QString a_type, QObject *parent) : QObject(
         }
     }
 }
-Favorites::Favorites(QObject *parent) : QObject(parent){
-
-}
+Favorites::Favorites(QObject *parent) : QObject(parent){}
 
 QString Favorites::GetType(){
     return _favorites.value("Type").toString();

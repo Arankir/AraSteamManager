@@ -1,12 +1,8 @@
 #include "Sfriends.h"
 
 #define SFriendStart {
-SFriend::SFriend(QJsonObject a_friend, QObject *parent) : QObject(parent),_friend(a_friend){
-
-}
-SFriend::SFriend(QObject *parent) : QObject(parent){
-
-}
+SFriend::SFriend(QJsonObject a_friend, QObject *parent) : QObject(parent),_friend(a_friend){}
+SFriend::SFriend(QObject *parent) : QObject(parent){}
 void SFriend::Set(QJsonObject a_friend){
     _friend=a_friend;
 }
@@ -38,8 +34,6 @@ SFriends::SFriends(QString a_id, bool a_parallel, QObject *parent) : QObject(par
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
         delete reply;
-        emit s_finished(this);
-        emit s_finished();
     }
 }
 SFriends::SFriends(QJsonDocument a_friends){
@@ -136,14 +130,16 @@ void SFriends::Clear(){
 }
 void SFriends::Sort(){
     //Переделать нормально
-    std::list<SFriend> list = _friends.toList().toStdList();
+    //std::list<SFriend> list = _friends.toList().toStdList();
+    std::list<SFriend> list(_friends.toList().begin(),_friends.toList().end());
     list.sort(/*[](const SFriend &s1, const SFriend &s2)-> const bool {
         if(QString::compare(s1.GetName().toLower(),s2.GetName().toLower())<0)
             return true;
         else
             return false;
     }*/);
-    _friends=QVector<SFriend>::fromList(QList<SFriend>::fromStdList(list));
+    //_friends=QVector<SFriend>::fromList(QList<SFriend>::fromStdList(list));
+    _friends=QVector<SFriend>::fromList(QList<SFriend>(list.begin(),list.end()));
 }
 SFriends::SFriends( const SFriends & a_newFriends){
     _friends=a_newFriends._friends;

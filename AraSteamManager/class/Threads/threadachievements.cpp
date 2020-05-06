@@ -45,12 +45,11 @@ bool ThreadAchievements::AddFriend(){
         }
         }
     if((totalReach==0)&&(totalNotReach==0)){
-        _TableWidgetAchievements->setItem(1,_col, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не")).arg(tr("публичный"))));
+        _TableWidgetAchievements->setItem(1,_col, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не"),tr("публичный"))));
         emit s_is_public(false,_col);
         } else {
-        _TableWidgetAchievements->setItem(1,_col, new QTableWidgetItem(QString("%1/%2\n%3%").arg(QString::number(totalReach))
-                                                                             .arg(QString::number(totalReach+totalNotReach))
-                                                                             .arg(QString::number(100.0*totalReach/(totalReach+totalNotReach)))));
+        _TableWidgetAchievements->setItem(1,_col, new QTableWidgetItem(QString("%1/%2\n%3%").arg(QString::number(totalReach),QString::number(totalReach+totalNotReach),
+                                                                                                 QString::number(100.0*totalReach/(totalReach+totalNotReach)))));
         emit s_is_public(true,_col);
     }
     emit s_finished();
@@ -82,8 +81,8 @@ int ThreadAchievements::Fill(){
             j++;
         }
     }
-    _LabelTotalPersent->setText(QString("%1/%2 = %3%").arg(QString::number(totalr)).arg(QString::number(totalr+totalnr)).arg(QString::number(100.0*totalr/(totalr+totalnr))));
-    _LabelTotalPersentCompare->setText(QString("%1/%2\n%3%").arg(QString::number(totalr)).arg(QString::number(totalr+totalnr)).arg(QString::number(100.0*totalr/(totalr+totalnr))));
+    _LabelTotalPersent->setText(QString("%1/%2 = %3%").arg(QString::number(totalr),QString::number(totalr+totalnr),QString::number(100.0*totalr/(totalr+totalnr))));
+    _LabelTotalPersentCompare->setText(QString("%1/%2\n%3%").arg(QString::number(totalr),QString::number(totalr+totalnr),QString::number(100.0*totalr/(totalr+totalnr))));
     emit s_finished();
     return 1;
 }

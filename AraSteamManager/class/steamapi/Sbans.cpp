@@ -13,8 +13,6 @@ SBans::SBans(QString a_id, bool a_parallel, QObject *parent) : QObject(parent),_
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         Set(QJsonDocument::fromJson(reply->readAll()));
         delete reply;
-        emit s_finished(this);
-        emit s_finished();
     }
 }
 SBans::SBans(QJsonDocument a_bans, QObject *parent) : QObject(parent){

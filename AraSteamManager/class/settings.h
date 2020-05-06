@@ -16,7 +16,7 @@ class Settings : public QObject
     const QString c_saveImage="Settings/SaveImages";
     const QString c_myProfile="Settings/MyProfile";
     const QString c_visibleHiddenGames="Settings/VisibleHiddenGames";
-    const QString c_visibleProfileInfo="Settings/VisibleProfileInfo";
+    const QString c_ProfileInfoSize="Settings/VisibleProfileInfo";
 
     const QString c_mainWindowHeight="MainWindow/Height";
     const QString c_mainWindowWidth="MainWindow/Width";
@@ -42,7 +42,7 @@ public:
     void SetTheme(int a_theme) {return _settings->setValue(c_theme,a_theme);}
     void SetSaveimage(int a_saveImage) {return _settings->setValue(c_saveImage,a_saveImage);}
     void SetVisibleHiddenGames(int a_visibleHiddenGames) {return _settings->setValue(c_visibleHiddenGames,a_visibleHiddenGames);}
-    void SetVisibleProfileInfo(bool a_visibleProfileInfo) {return _settings->setValue(c_visibleProfileInfo,a_visibleProfileInfo);}
+    void SetVisibleProfileInfo(int a_visibleProfileInfo) {return _settings->setValue(c_ProfileInfoSize,a_visibleProfileInfo);}
 
     void SetMainWindowParams(QRect geometry);
     void SetMainWindowPos(QPoint pos);
@@ -55,7 +55,7 @@ public:
     int GetTheme() {return _settings->value(c_theme,1).toInt();}
     int GetSaveImages() {return _settings->value(c_saveImage,0).toInt();}
     int GetVisibleHiddenGames() {return _settings->value(c_visibleHiddenGames,0).toInt();}
-    bool GetVisibleProfileInfo() {return _settings->value(c_visibleProfileInfo,true).toBool();}
+    int GetProfileInfoSize() {return _settings->value(c_ProfileInfoSize,2).toInt();}
 
     QRect GetMainWindowGeometry() {return (QRect(0,0,_settings->value(c_mainWindowWidth,623).toInt(),_settings->value(c_mainWindowHeight,479).toInt()));}
     QPoint GetMainWindowPos() {return (QPoint(_settings->value(c_mainWindowX,100).toInt(),_settings->value(c_mainWindowY,100).toInt()));}

@@ -13,9 +13,7 @@ Filter::Filter(int a_row, int a_col, QObject *parent) : QObject(parent){
         }
     }
 }
-Filter::~Filter(){
-
-}
+Filter::~Filter(){}
 
 void Filter::SetRow(int a_row){
     if(a_row>_row){

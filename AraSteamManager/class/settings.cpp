@@ -1,13 +1,8 @@
 #include "settings.h"
 
 
-Settings::Settings(QObject *parent) : QObject(parent){
-    _settings = new QSettings("Arankir","SteamAchievementsStatistic");
-}
-
-Settings::Settings(QRect a_geometry, QObject *parent) : QObject(parent),_screen(a_geometry){
-    _settings = new QSettings("Arankir","SteamAchievementsStatistic");
-}
+Settings::Settings(QObject *a_parent) : Settings(QRect(),a_parent){}
+Settings::Settings(QRect a_geometry, QObject *parent) : QObject(parent),_settings(new QSettings("Arankir","SteamAchievementsStatistic")),_screen(a_geometry){}
 
 void Settings::CustomGeometry(QRect a_geometry){
     _screen=a_geometry;

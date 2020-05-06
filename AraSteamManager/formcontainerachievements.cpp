@@ -21,7 +21,7 @@ FormContainerAchievements::~FormContainerAchievements(){
 void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QString a_ids, SGame a_game, int a_num){
     for (int i=0;i<ui->TabWidgetAchievements->count();i++) {
         if((static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetGame().GetAppid()==a_game.GetAppid())&&(static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetProfile()==a_ids)){
-            static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->on_ButtonUpdate_clicked();
+            static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->ButtonUpdate_Clicked();
             ui->TabWidgetAchievements->setCurrentIndex(i);
             return;
         }
@@ -43,8 +43,7 @@ void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QSt
     }
 }
 
-void FormContainerAchievements::closeEvent(QCloseEvent *){
-}
+void FormContainerAchievements::closeEvent(QCloseEvent *){}
 
 void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int a_index){
     ui->TabWidgetAchievements->removeTab(a_index);

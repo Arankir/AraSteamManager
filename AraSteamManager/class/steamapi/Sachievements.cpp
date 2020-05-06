@@ -8,9 +8,7 @@ SAchievementGlobal::SAchievementGlobal(QJsonObject a_achievement, QObject *paren
                             _icon(a_achievement.value("icon").toString()),_iconGray(a_achievement.value("icongray").toString()){
 
 }
-SAchievementGlobal::SAchievementGlobal(QObject *parent): QObject(parent){
-
-}
+SAchievementGlobal::SAchievementGlobal(QObject *parent): QObject(parent){}
 void SAchievementGlobal::Set(QJsonObject a_achievement){
     _apiName=a_achievement.value("name").toString();
     _defaultValue=a_achievement.value("defaultvalue").toInt();
@@ -41,12 +39,8 @@ SAchievementGlobal & SAchievementGlobal::operator=(const SAchievementGlobal & a_
 }
 #define SAchievementGlobalEnd }
 #define SAchievementPercentageStart {
-SAchievementPercentage::SAchievementPercentage(QJsonObject a_achievement, QObject *parent) : QObject(parent),_apiName(a_achievement.value("name").toString()),_percent(a_achievement.value("percent").toDouble()){
-
-}
-SAchievementPercentage::SAchievementPercentage(QObject *parent) : QObject(parent){
-
-}
+SAchievementPercentage::SAchievementPercentage(QJsonObject a_achievement, QObject *parent) : QObject(parent),_apiName(a_achievement.value("name").toString()),_percent(a_achievement.value("percent").toDouble()){}
+SAchievementPercentage::SAchievementPercentage(QObject *parent) : QObject(parent){}
 void SAchievementPercentage::Set(QJsonObject a_achievement){
     _apiName=a_achievement.value("name").toString();
     _percent=a_achievement.value("percent").toDouble();
@@ -63,12 +57,8 @@ SAchievementPercentage & SAchievementPercentage::operator=(const SAchievementPer
 #define SAchievementPercentageEnd }
 #define SAchievementPlayerStart {
 SAchievementPlayer::SAchievementPlayer(QJsonObject a_achievement, QObject *parent) : QObject(parent),_apiName(a_achievement.value("apiname").toString()),
-                                    _achieved(a_achievement.value("achieved").toInt()),_unlockTime(QDateTime::fromSecsSinceEpoch(a_achievement.value("unlocktime").toInt(),Qt::LocalTime)){
-
-}
-SAchievementPlayer::SAchievementPlayer(QObject *parent) : QObject(parent){
-
-}
+                                    _achieved(a_achievement.value("achieved").toInt()),_unlockTime(QDateTime::fromSecsSinceEpoch(a_achievement.value("unlocktime").toInt(),Qt::LocalTime)){}
+SAchievementPlayer::SAchievementPlayer(QObject *parent) : QObject(parent){}
 void SAchievementPlayer::Set(QJsonObject a_achievement){
     _apiName=a_achievement.value("apiname").toString();
     _achieved=a_achievement.value("achieved").toInt();
@@ -491,20 +481,11 @@ SAchievements::SAchievements(SAchievementsGlobal a_global, SAchievementsPlayer a
         }
     }
     _statusFinish=StatusValue::success;
-    emit s_finished();
 }
-SAchievements::SAchievements(SAchievementsGlobal a_global, QObject *parent) : QObject(parent),_global(a_global),_statusGlobal(StatusValue::success){
-
-}
-SAchievements::SAchievements(SAchievementsPlayer a_player, QObject *parent) : QObject(parent),_player(a_player),_statusPlayer(StatusValue::success){
-
-}
-SAchievements::SAchievements(SAchievementsPercentage a_percent, QObject *parent) : QObject(parent),_percent(a_percent),_statusPercent(StatusValue::success){
-
-}
-SAchievements::SAchievements(QObject *parent) : QObject(parent){
-
-}
+SAchievements::SAchievements(SAchievementsGlobal a_global, QObject *parent) : QObject(parent),_global(a_global),_statusGlobal(StatusValue::success){}
+SAchievements::SAchievements(SAchievementsPlayer a_player, QObject *parent) : QObject(parent),_player(a_player),_statusPlayer(StatusValue::success){}
+SAchievements::SAchievements(SAchievementsPercentage a_percent, QObject *parent) : QObject(parent),_percent(a_percent),_statusPercent(StatusValue::success){}
+SAchievements::SAchievements(QObject *parent) : QObject(parent){}
 void SAchievements::Set(QString a_appid, QString a_id){
     _appid=a_appid;
     _id=a_id;

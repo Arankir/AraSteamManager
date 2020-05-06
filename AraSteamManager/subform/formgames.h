@@ -51,14 +51,14 @@ private slots:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event);
 
-    void on_LineEditGame_textChanged(const QString);
-    void on_ButtonFind_clicked();
+    void LineEditGame_TextChanged(const QString);
+    void ButtonFind_Clicked();
 
-    void on_TableWidgetGames_cellDoubleClicked(int row, int column);
-    void on_TableWidgetGames_cellClicked(int row, int column);
-    void on_ButtonAchievements_clicked();
-    void on_ButtonFavorite_clicked();
-    void on_ButtonHide_clicked();
+    void TableWidgetGames_CellDoubleClicked(int row, int column);
+    void TableWidgetGames_CellClicked(int row, int column);
+    void ButtonAchievements_Clicked();
+    void ButtonFavorite_Clicked();
+    void ButtonHide_Clicked();
 
 private:
     Ui::FormGames *ui;

@@ -17,6 +17,76 @@ const int c_formsSettings=5;
 #define Init {
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow){
     ui->setupUi(this);
+    switch(_setting.GetTheme()){
+        case 1:
+            _theme="white";
+            break;
+        case 2:
+            _theme="black";
+            break;
+        default:
+            _theme="white";
+    }
+    qApp->setStyleSheet(GetTheme());
+
+//    int id = QFontDatabase::addApplicationFont("C:/font4.otf");
+//    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+//    qApp->setFont(family);
+//    QFont font = qApp->font();
+//    font.setPointSize(c_fontSize);
+//    font.setPixelSize(1);
+//    qApp->setFont(font);
+    InitComponents();
+    if(_setting.GetMyProfile()!="none")
+        GoToProfile(_setting.GetMyProfile(),QueryType::url);
+}
+void MainWindow::InitComponents(){
+    _containerAchievementsForm = new FormContainerAchievements();
+    _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
+//    this->setWindowFlags(Qt::Window
+//                         | Qt::WindowTitleHint
+//                         | Qt::CustomizeWindowHint);
+    ui->ButtonMinimize->setVisible(false);
+    ui->ButtonMaximize->setVisible(false);
+    ui->line->setVisible(false);
+    ui->FormProgressBar->setVisible(false);
+    ui->ButtonBack->setEnabled(false);
+    ui->ButtonNext->setEnabled(false);
+    ui->StackedWidgetForms->setCurrentIndex(0);
+
+    this->setGeometry(_setting.GetMainWindowGeometry());
+    if((_setting.GetMainWindowPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetMainWindowPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
+        ;//this->move(_setting.GetMainWindowPercentPos().x(),_setting.GetMainWindowPercentPos().y()-31);
+    else
+        this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
+#define Connects {
+    connect(ui->ButtonFindProfile,&QPushButton::clicked,this,&MainWindow::ButtonFindProfile_Clicked);
+    connect(ui->ButtonExit,&QPushButton::clicked,this,&MainWindow::ButtonExit_Clicked);
+    connect(ui->ButtonGoToMyProfile,&QPushButton::clicked,this,&MainWindow::ButtonGoToMyProfile_Clicked);
+    connect(ui->ButtonBack,&QPushButton::clicked,this,&MainWindow::ButtonBack_Clicked);
+    connect(ui->ButtonNext,&QPushButton::clicked,this,&MainWindow::ButtonNext_Clicked);
+    connect(ui->ButtonSettings,&QPushButton::clicked,this,&MainWindow::ButtonSettings_Clicked);
+    connect(ui->ButtonUpdate,&QPushButton::clicked,this,&MainWindow::ButtonUpdate_Clicked);
+    connect(ui->ButtonMaximize,&QPushButton::clicked,this,&MainWindow::ButtonMaximize_Clicked);
+    connect(ui->ButtonMinimize,&QPushButton::clicked,this,&MainWindow::ButtonMinimize_Clicked);
+#define ConnectsEnd }
+#define Icons {
+    ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
+    ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
+    ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_theme+"/home.png"));
+    ui->ButtonFindProfile->setIcon(QIcon("://"+_theme+"/find_profile.png"));
+    ui->ButtonSettings->setIcon(QIcon("://"+_theme+"/settings.png"));
+    ui->ButtonExit->setIcon(QIcon("://"+_theme+"/exit.png"));
+    ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
+    ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
+#define IconsEnd }
+//    FormTablesHeaders *th = new FormTablesHeaders(2,3,4,5,false,true,false,true);
+//    ui->ScrollAreaNone->setWidget(th);
+}
+#define InitEnd }
+
+#define System {
+QString MainWindow::GetTheme(){
     QString hoverGradient;
     QString backgroundGradient;
     QString blackGradient;
@@ -36,7 +106,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     QString listWidget;
     switch(_setting.GetTheme()){
         case 1:{
-            _theme="white";
             hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                         "stop: 0 #185077, "
                         "stop: 0.22 #387097, "
@@ -276,7 +345,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
             break;
             }
         case 2:
-            _theme="black";
             // Настраиваем палитру для цветовых ролей элементов интерфейса
             //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
             //    darkPalette.setColor(QPalette::WindowText, Qt::white);
@@ -296,66 +364,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
                 // будет установить стандартную палитру из темы оформления
                 //qApp->setPalette(style()->standardPalette());
             break;
-        default:
-            QPalette darkPalette;
-            darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
-            darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-            darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-            darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
-            //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
-            qApp->setPalette(darkPalette);
-            _theme="white";
     }
-    qApp->setStyleSheet(pushButton+progressBar+forms+subContainers+labels+radioButtons+tabBar+checkBox+comboBox+lineEdit+tableWidget+headerView+groupBox+listWidget);
-
-//    int id = QFontDatabase::addApplicationFont("C:/font4.otf");
-//    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-//    qApp->setFont(family);
-//    QFont font = qApp->font();
-//    font.setPointSize(c_fontSize);
-//    font.setPixelSize(1);
-//    qApp->setFont(font);
-
-    InitComponents();
-    if(_setting.GetMyProfile()!="none")
-        GoToProfile(_setting.GetMyProfile(),QueryType::url);
+    return pushButton+progressBar+forms+subContainers+labels+radioButtons+tabBar+checkBox+comboBox+lineEdit+tableWidget+headerView+groupBox+listWidget;
 }
-void MainWindow::InitComponents(){
-    _containerAchievementsForm = new FormContainerAchievements();
-    _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
-//    this->setWindowFlags(Qt::Window
-//                         | Qt::WindowTitleHint
-//                         | Qt::CustomizeWindowHint);
-    ui->ButtonMinimize->setVisible(false);
-    ui->ButtonMaximize->setVisible(false);
-    ui->line->setVisible(false);
-    ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
-    this->setGeometry(_setting.GetMainWindowGeometry());
-    if((_setting.GetMainWindowPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetMainWindowPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
-        this->move(_setting.GetMainWindowPercentPos().x(),_setting.GetMainWindowPercentPos().y()-31);
-    else
-        this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
-
-
-    ui->FormProgressBar->setVisible(false);
-    ui->ButtonBack->setEnabled(false);
-    ui->ButtonNext->setEnabled(false);
-    ui->StackedWidgetForms->setCurrentIndex(0);
-    ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
-    ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_theme+"/home.png"));
-    ui->ButtonFindProfile->setIcon(QIcon("://"+_theme+"/find_profile.png"));
-    ui->ButtonSettings->setIcon(QIcon("://"+_theme+"/settings.png"));
-    ui->ButtonExit->setIcon(QIcon("://"+_theme+"/exit.png"));
-    ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
-    ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
-
-
-//    FormTablesHeaders *th = new FormTablesHeaders(2,3,4,5,false,true,false,true);
-//    ui->ScrollAreaNone->setWidget(th);
-}
-#define InitEnd }
-
-#define System {
 void MainWindow::ProgressLoading(int a_progress,int){
     ui->FormProgressBar->setValue(a_progress);
 }
@@ -407,7 +418,7 @@ void MainWindow::ShowStatistic(){
 void MainWindow::keyPressEvent(QKeyEvent *event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
     if(event->key() == 16777220)
-        on_ButtonFindProfile_clicked();
+        ButtonFindProfile_Clicked();
 }
 void MainWindow::changeEvent(QEvent *event){
     if(event->type()==QEvent::LanguageChange){
@@ -420,12 +431,10 @@ void MainWindow::closeEvent(QCloseEvent *event){
     _setting.SyncronizeSettings();
     event->accept();
 }
-void MainWindow::moveEvent(QMoveEvent *)
-{
+void MainWindow::moveEvent(QMoveEvent *){
 //    _setting.SetMainWindowPos(event->pos());
 }
-void MainWindow::resizeEvent(QResizeEvent *)
-{
+void MainWindow::resizeEvent(QResizeEvent *){
 //    _setting.SetMainWindowParams(this->geometry(),this->pos(),QGuiApplication::primaryScreen()->geometry());
 }
 MainWindow::~MainWindow(){
@@ -467,10 +476,22 @@ void MainWindow::ResizeScrollArea(){
         animate->start();
     }
 }
+void MainWindow::ButtonMaximize_Clicked(){
+    if(!this->isMaximized())
+        this->showMaximized();
+    else
+        this->showNormal();
+}
+void MainWindow::ButtonMinimize_Clicked(){
+    if(!this->isMinimized())
+        this->showMinimized();
+    else
+        this->showNormal();
+}
 #define SystemEnd }
 
 #define Functions {
-void MainWindow::on_ButtonFindProfile_clicked(){
+void MainWindow::ButtonFindProfile_Clicked(){
     QString profileid=ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com").remove('\r');
     if(ui->LineEditIdProfile->text().indexOf("/id/",0)>-1){
         profileid=profileid.remove("/id/").remove("/");
@@ -500,7 +521,7 @@ void MainWindow::GoToProfile(QString a_id, QueryType a_type){
         connect(newStackedProfile,&FormProfile::s_myProfileChange,this,&MainWindow::UpdateMyProfile);
         connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateVisibleInfo);
         connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateTheme);
-        ui->StackedWidgetProfiles->setFixedHeight(_setting.GetVisibleProfileInfo()?155:95);
+        UpdateSettings();
         UpdateMyProfile();
         UpdateButtonsBackNext();
         qDebug()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex()+1<<"/"<<ui->StackedWidgetProfiles->count();
@@ -513,7 +534,7 @@ void MainWindow::UpdateButtonsBackNext(){
     ui->ButtonBack->setEnabled(ui->StackedWidgetProfiles->currentIndex()>0);
     ui->ButtonNext->setEnabled(ui->StackedWidgetProfiles->currentIndex()!=ui->StackedWidgetProfiles->count()-1);
 }
-void MainWindow::on_ButtonBack_clicked(){
+void MainWindow::ButtonBack_Clicked(){
     if(ui->StackedWidgetProfiles->currentIndex()>0){
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex()-1);
         UpdateMyProfile();
@@ -521,7 +542,7 @@ void MainWindow::on_ButtonBack_clicked(){
         UpdateButtonsBackNext();
     }
 }
-void MainWindow::on_ButtonNext_clicked(){
+void MainWindow::ButtonNext_Clicked(){
     if(ui->StackedWidgetProfiles->currentIndex()<ui->StackedWidgetProfiles->count()){
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex()+1);
         UpdateMyProfile();
@@ -597,10 +618,22 @@ void MainWindow::UpdateMyProfile(){
 }
 void MainWindow::UpdateSettings(){
     _setting.SyncronizeSettings();
-    ui->StackedWidgetProfiles->setFixedHeight(_setting.GetVisibleProfileInfo()?155:95);
+    switch (_setting.GetProfileInfoSize()) {
+    case 0:{
+        ui->StackedWidgetProfiles->setFixedHeight(35);
+        break;
+    }
+    case 1:{
+        ui->StackedWidgetProfiles->setFixedHeight(95);
+        break;
+    }
+    case 2:{
+        ui->StackedWidgetProfiles->setFixedHeight(155);
+    }
+    }
     emit s_updateSettings();
 }
-void MainWindow::on_ButtonSettings_clicked(){
+void MainWindow::ButtonSettings_Clicked(){
     if(!_initSettings){
         if(!_blockedLoad){
             _settingsForm = new FormSettings(this);
@@ -615,31 +648,18 @@ void MainWindow::on_ButtonSettings_clicked(){
         ui->StackedWidgetForms->setCurrentIndex(c_formsSettings);
     }
 }
-void MainWindow::on_ButtonGoToMyProfile_clicked(){
+void MainWindow::ButtonGoToMyProfile_Clicked(){
     if(_setting.GetMyProfile()!="none"){
         GoToProfile(_setting.GetMyProfile(),QueryType::url);
     } else {
         QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
     }
 }
-void MainWindow::on_ButtonExit_clicked(){
+void MainWindow::ButtonExit_Clicked(){
     qApp->closeAllWindows();
 }
-void MainWindow::on_ButtonUpdate_clicked(){
+void MainWindow::ButtonUpdate_Clicked(){
     static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->UpdateInfo();
+
 }
 #define FunctionsEnd }
-
-void MainWindow::on_ButtonMaximize_clicked(){
-    if(!this->isMaximized())
-        this->showMaximized();
-    else
-        this->showNormal();
-}
-
-void MainWindow::on_ButtonMinimize_clicked(){
-    if(!this->isMinimized())
-        this->showMinimized();
-    else
-        this->showNormal();
-}

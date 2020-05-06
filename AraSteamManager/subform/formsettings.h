@@ -34,25 +34,22 @@ private slots:
     void changeEvent(QEvent *event);
     void InitComponents();
 
-    void on_RadioButtonLanguageEnglish_clicked();
+    void RadioButtonLanguageEnglish_Clicked();
+    void RadioButtonLanguageRussian_Clicked();
 
-    void on_RadioButtonLanguageRussian_clicked();
+    void RadioButtonDarkTheme_Clicked();
+    void RadioButtonLightTheme_Clicked();
 
-    void on_CheckBoxVisibleHiddenGames_stateChanged(int arg1);
-
-    void on_RadioButtonDarkTheme_clicked();
-
-    void on_RadioButtonLightTheme_clicked();
-
-    void RadiobuttonHiddenGamesClicked();
+    void RadioButtonHiddenGames_Clicked();
 
     void AchievementsClicked();
     void HideClicked();
     void Retranslate();
 
-    void on_CheckBoxVisibleProfileInfo_stateChanged(int arg1);
+    void CheckBoxVisibleHiddenGames_StateChanged(int arg1);
+    void CheckBoxSaveImage_StateChanged(int arg1);
 
-    void on_CheckBoxSaveImage_stateChanged(int arg1);
+    void SlideProfileSize_ValueChanged(int value);
 
 private:
     Ui::FormSettings *ui;

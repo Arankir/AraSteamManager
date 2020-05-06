@@ -1,0 +1,38 @@
+{
+    "Categories": [
+        {
+            "IsNoValues": 0,
+            "NoValues": [
+            ],
+            "Title": "weq",
+            "Values": [
+                {
+                    "Achievements": [
+                        "Totally meant that"
+                    ],
+                    "Title": "1"
+                },
+                {
+                    "Achievements": [
+                        "Spot of DIY"
+                    ],
+                    "Title": "2"
+                },
+                {
+                    "Achievements": [
+                        "Who's OP Now?"
+                    ],
+                    "Title": "3"
+                },
+                {
+                    "Achievements": [
+                        "Big Hitter"
+                    ],
+                    "Title": "4"
+                }
+            ]
+        }
+    ],
+    "Game": null,
+    "GameID": null
+}

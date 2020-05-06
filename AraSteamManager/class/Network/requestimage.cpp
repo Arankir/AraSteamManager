@@ -1,17 +1,18 @@
 #include "requestimage.h"
 
 RequestImage::RequestImage(QLabel *a_label, QString a_url, QString a_save, bool a_autosave, QObject *a_parent):QObject(a_parent),_label(a_label),_save(a_save),_autosave(a_autosave){
-    _label->setMovie(new QMovie("://loading.gif"));
-    _label->movie()->setScaledSize(_label->size());
-    _label->movie()->start();
     RequestData *image = new RequestData(a_url,true,this);
-    connect(image,SIGNAL(s_finished(RequestData*)),this,SLOT(OnLoadToLabel(RequestData*)));
+    if(_label!=nullptr){
+        _label->setMovie(new QMovie("://loading.gif"));
+        _label->movie()->setScaledSize(_label->size());
+        _label->movie()->start();
+        connect(image,SIGNAL(s_finished(RequestData*)),this,SLOT(OnLoadToLabel(RequestData*)));
+    } else {
+        connect(image,SIGNAL(s_finished(RequestData*)),this,SLOT(OnLoadPixmap(RequestData*)));
+    }
 }
-
-RequestImage::RequestImage(QString a_url, QString a_save, bool a_autosave, QObject *a_parent):QObject(a_parent),_save(a_save),_autosave(a_autosave){
-    RequestData *image = new RequestData(a_url,true,this);
-    connect(image,SIGNAL(s_finished(RequestData*)),this,SLOT(OnLoadPixmap(RequestData*)));
-}
+RequestImage::RequestImage(QLabel *a_label, QString a_url, QObject *a_parent):RequestImage(a_label,a_url,"",false,a_parent){}
+RequestImage::RequestImage(QString a_url, QString a_save, bool a_autosave, QObject *a_parent):RequestImage(nullptr,a_url,a_save,a_autosave,a_parent){}
 
 QPixmap RequestImage::GetPixmap(){
     return _pixmap;

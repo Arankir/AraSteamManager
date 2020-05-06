@@ -12,6 +12,14 @@ FormCategoryValue::FormCategoryValue(int a_pos, QWidget *parent) : QWidget(paren
             _theme="black";
             break;
     }
+    connect(ui->CheckBoxVisible,&QCheckBox::stateChanged,this,&FormCategoryValue::CheckBoxVisible_StateChanged);
+    connect(ui->ButtonUp,&QPushButton::clicked,this,&FormCategoryValue::ButtonUp_Clicked);
+    connect(ui->ButtonDown,&QPushButton::clicked,this,&FormCategoryValue::ButtonDown_Clicked);
+    connect(ui->ButtonSelect,&QPushButton::clicked,this,&FormCategoryValue::ButtonSelect_Clicked);
+    connect(ui->ButtonUnSelect,&QPushButton::clicked,this,&FormCategoryValue::ButtonUnSelect_Clicked);
+    connect(ui->ButtonDelete,&QPushButton::clicked,this,&FormCategoryValue::ButtonDelete_Clicked);
+    connect(ui->LineEditTitle,&QLineEdit::textChanged,this,&FormCategoryValue::LineEditTitle_TextChanged);
+    connect(ui->ButtonReverse,&QPushButton::clicked,this,&FormCategoryValue::ButtonReverse_Clicked);
     ui->LabelPosition->setText(QString::number(_position+1));
     ui->ButtonUp->setIcon(QIcon("://"+_theme+"/up.png"));
     ui->ButtonDown->setIcon(QIcon("://"+_theme+"/down.png"));
@@ -29,25 +37,25 @@ void FormCategoryValue::changeEvent(QEvent *event){
         ui->retranslateUi(this);
     }
 }
-void FormCategoryValue::on_CheckBoxVisible_stateChanged(int arg1){
+void FormCategoryValue::CheckBoxVisible_StateChanged(int arg1){
     emit s_visiblechange(_position, arg1==2);
 }
-void FormCategoryValue::on_ButtonUp_clicked(){
+void FormCategoryValue::ButtonUp_Clicked(){
     emit s_positionchange(_position, _position-1);
 }
-void FormCategoryValue::on_ButtonDown_clicked(){
+void FormCategoryValue::ButtonDown_Clicked(){
     emit s_positionchange(_position, _position+1);
 }
-void FormCategoryValue::on_ButtonSelect_clicked(){
+void FormCategoryValue::ButtonSelect_Clicked(){
     emit s_selectchange(_position, true);
 }
-void FormCategoryValue::on_ButtonUnSelect_clicked(){
+void FormCategoryValue::ButtonUnSelect_Clicked(){
     emit s_selectchange(_position, false);
 }
-void FormCategoryValue::on_ButtonDelete_clicked(){
+void FormCategoryValue::ButtonDelete_Clicked(){
     emit s_deleting(_position);
 }
-void FormCategoryValue::on_LineEditTitle_textChanged(const QString &arg1){
+void FormCategoryValue::LineEditTitle_TextChanged(const QString &arg1){
     emit s_valuechange(_position, arg1);
 }
 
@@ -73,6 +81,6 @@ bool FormCategoryValue::GetVisible(){
     return ui->CheckBoxVisible->isChecked();
 }
 
-void FormCategoryValue::on_ButtonReverse_clicked(){
+void FormCategoryValue::ButtonReverse_Clicked(){
     emit s_reverse(_position);
 }

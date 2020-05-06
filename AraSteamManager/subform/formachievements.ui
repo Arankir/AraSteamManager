@@ -281,7 +281,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>239</width>
+             <width>271</width>
              <height>109</height>
             </rect>
            </property>
@@ -308,7 +308,7 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>238</width>
+             <width>271</width>
              <height>109</height>
             </rect>
            </property>
@@ -344,7 +344,7 @@
             <item>
              <widget class="QPushButton" name="ButtonFavorite">
               <property name="text">
-               <string>Добавить достижение в избранное</string>
+               <string>Добавить в избранное</string>
               </property>
              </widget>
             </item>
@@ -416,7 +416,7 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
-            <widget class="QComboBox" name="ComboBoxCategoriesCategory">
+            <widget class="QComboBox" name="ComboBoxCategories">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                <horstretch>0</horstretch>

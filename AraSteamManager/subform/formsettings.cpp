@@ -50,7 +50,7 @@ void FormSettings::InitComponents(){
         default:
             break;
     }
-    ui->CheckBoxVisibleProfileInfo->setChecked(_setting.GetVisibleProfileInfo());
+    ui->SliderProfileSize->setValue(_setting.GetProfileInfoSize());
     ui->CheckBoxSaveImage->setChecked(_setting.GetSaveImages());
 //    QPalette darkPalette;
 //    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
@@ -80,7 +80,7 @@ void FormSettings::InitComponents(){
             allHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
             allHidden->setObjectName("HiddenGames0");
             allHidden->AddData("NumberFileHiddenGame","0");
-            connect(allHidden,SIGNAL(clicked()),this,SLOT(RadiobuttonHiddenGamesClicked()));
+            connect(allHidden,SIGNAL(clicked()),this,SLOT(RadioButtonHiddenGames_Clicked()));
             layout->addWidget(allHidden);
             QFile fileHide1(_setting._pathHide+"All.txt");
             if(fileHide1.open(QIODevice::ReadOnly)){
@@ -103,7 +103,7 @@ void FormSettings::InitComponents(){
                 profileHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
                 profileHidden->setObjectName("HiddenGames"+QString::number(i+1));
                 profileHidden->AddData("NumberFileHiddenGame",QString::number(i+1));
-                connect(profileHidden,SIGNAL(clicked()),this,SLOT(RadiobuttonHiddenGamesClicked()));
+                connect(profileHidden,SIGNAL(clicked()),this,SLOT(RadioButtonHiddenGames_Clicked()));
                 layout->addWidget(profileHidden);
                 QFile fileHide2(_setting._pathHide+list.at(i).fileName());
                 if(fileHide2.open(QIODevice::ReadOnly)){
@@ -120,6 +120,16 @@ void FormSettings::InitComponents(){
     }
     ui->FrameProfilesHideGames->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Expanding);
     ui->FrameProfilesHideGames->setLayout(layout);
+
+#define Connects {
+    connect(ui->RadioButtonLanguageEnglish,&QRadioButton::clicked,this,&FormSettings::RadioButtonLanguageEnglish_Clicked);
+    connect(ui->RadioButtonLanguageRussian,&QRadioButton::clicked,this,&FormSettings::RadioButtonLanguageRussian_Clicked);
+    connect(ui->CheckBoxVisibleHiddenGames,&QCheckBox::stateChanged,this,&FormSettings::CheckBoxVisibleHiddenGames_StateChanged);
+    connect(ui->RadioButtonDarkTheme,&QRadioButton::clicked,this,&FormSettings::RadioButtonDarkTheme_Clicked);
+    connect(ui->RadioButtonLightTheme,&QRadioButton::clicked,this,&FormSettings::RadioButtonLightTheme_Clicked);
+    connect(ui->CheckBoxSaveImage,&QCheckBox::stateChanged,this,&FormSettings::CheckBoxSaveImage_StateChanged);
+    connect(ui->SliderProfileSize,&QSlider::valueChanged,this,&FormSettings::SlideProfileSize_ValueChanged);
+#define ConnectsEnd }
 }
 
 void FormSettings::changeEvent(QEvent *event){
@@ -136,7 +146,7 @@ void FormSettings::Retranslate(){
     ui->labelIcons8->setText("<html><head/><body><p>Иконки для приложения были предоставлены сайтом <img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"><a href=https://icons8.ru/icons><span style=\" text-decoration: underline; color:#2d7fc8;\"> https://icons8.ru/icons</span></a></p></body></html>");
 }
 
-void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
+void FormSettings::RadioButtonLanguageEnglish_Clicked(){
     _setting.SetLanguage(1);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
@@ -146,7 +156,7 @@ void FormSettings::on_RadioButtonLanguageEnglish_clicked(){
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
-void FormSettings::on_RadioButtonLanguageRussian_clicked(){
+void FormSettings::RadioButtonLanguageRussian_Clicked(){
     _setting.SetLanguage(5);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
@@ -156,24 +166,24 @@ void FormSettings::on_RadioButtonLanguageRussian_clicked(){
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
-void FormSettings::on_CheckBoxVisibleHiddenGames_stateChanged(int arg1){
+void FormSettings::CheckBoxVisibleHiddenGames_StateChanged(int arg1){
     _setting.SetVisibleHiddenGames(arg1/2);
     emit s_updateSettings();
 }
 
-void FormSettings::on_RadioButtonDarkTheme_clicked(){
+void FormSettings::RadioButtonDarkTheme_Clicked(){
     _setting.SetTheme(1);
     emit s_updateSettings();
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
 
-void FormSettings::on_RadioButtonLightTheme_clicked(){
+void FormSettings::RadioButtonLightTheme_Clicked(){
     _setting.SetTheme(2);
     emit s_updateSettings();
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
 
-void FormSettings::RadiobuttonHiddenGamesClicked(){
+void FormSettings::RadioButtonHiddenGames_Clicked(){
     int indexHiddenGame=static_cast<QRadioButtonWithData*>(sender())->GetData(0).toInt();
     ui->TableWidgetGames->clear();
     ui->TableWidgetGames->setRowCount(_hiddenGames[indexHiddenGame].second.size());
@@ -280,7 +290,7 @@ void FormSettings::HideClicked(){
             break;
         }
     }
-    QString save=_hiddenGames[index].first+".txt";
+    //QString save=_hiddenGames[index].first+".txt";
     _hiddenGames[index].second.removeAt(gameIndex);
     ui->TableWidgetGames->removeRow(gameIndex);
     QFile fileSaveTo(_setting._pathHide+_hiddenGames[index].first+".txt");
@@ -293,12 +303,12 @@ void FormSettings::HideClicked(){
     QMessageBox(QMessageBox::Information,tr("Успешно!"),tr("Политика видимости для игры обновлена!"));
 }
 
-void FormSettings::on_CheckBoxVisibleProfileInfo_stateChanged(int arg1){
-    _setting.SetVisibleProfileInfo(arg1==2);
+void FormSettings::CheckBoxSaveImage_StateChanged(int arg1){
+    _setting.SetSaveimage(arg1==2);
     emit s_updateSettings();
 }
 
-void FormSettings::on_CheckBoxSaveImage_stateChanged(int arg1){
-    _setting.SetSaveimage(arg1==2);
+void FormSettings::SlideProfileSize_ValueChanged(int a_value){
+    _setting.SetVisibleProfileInfo(a_value);
     emit s_updateSettings();
 }

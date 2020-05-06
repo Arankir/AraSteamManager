@@ -1,8 +1,7 @@
 #include "formcompareprofilefilter.h"
 #include "ui_formcompareprofilefilter.h"
 
-FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
-    QWidget(parent),ui(new Ui::FormCompareProfileFilter){
+FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) : QWidget(parent), ui(new Ui::FormCompareProfileFilter){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     QString theme;
@@ -23,6 +22,32 @@ FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) :
     connect(ui->RadioButtonAll,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::RadioButtonClick);
     connect(ui->RadioButtonReached,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::RadioButtonClick);
     connect(ui->RadioButtonNotReached,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::RadioButtonClick);
+}
+
+FormCompareProfileFilter::FormCompareProfileFilter(QString a_t1, QString a_t2, QString a_t3, QWidget *parent) : QWidget(parent), ui(new Ui::FormCompareProfileFilter){
+    ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    QString theme;
+    switch(_setting.GetTheme()){
+        case 1:
+            theme="white";
+            break;
+        case 2:
+            theme="black";
+            break;
+    }
+    ui->RadioButtonAll->setIcon(QIcon("://"+theme+"/all.png"));
+    ui->RadioButtonReached->setIcon(QIcon("://"+theme+"/reached.png"));
+    ui->RadioButtonNotReached->setIcon(QIcon("://"+theme+"/notreached.png"));
+    ui->RadioButtonAll->SetReachedType(ReachedType::all);
+    ui->RadioButtonReached->SetReachedType(ReachedType::reached);
+    ui->RadioButtonNotReached->SetReachedType(ReachedType::notReached);
+    connect(ui->RadioButtonAll,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::RadioButtonClick);
+    connect(ui->RadioButtonReached,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::RadioButtonClick);
+    connect(ui->RadioButtonNotReached,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::RadioButtonClick);
+    ui->RadioButtonAll->setText(a_t1);
+    ui->RadioButtonReached->setText(a_t2);
+    ui->RadioButtonNotReached->setText(a_t3);
 }
 
 FormCompareProfileFilter::~FormCompareProfileFilter(){

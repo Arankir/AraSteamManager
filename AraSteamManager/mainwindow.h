@@ -66,6 +66,7 @@ public slots:
     void GoToFriends(QString prifileSteamid, SFriends friends);
     void GoToFavorites();
     void GoToStatistics(QString prifileSteamid, SGames games, QString profileName);
+
     void UpdateMyProfile();
     void UpdateSettings();
 
@@ -73,37 +74,36 @@ signals:
     void s_updateSettings();
 
 private slots:
+    //events
     void keyPressEvent(QKeyEvent *event) override;
     void changeEvent(QEvent *event) override;
-    void closeEvent(QCloseEvent*);
+    void closeEvent(QCloseEvent*) override;
     void moveEvent(QMoveEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    void ReturnFromForms();
-    void ResizeScrollArea();
-
-    void InitComponents();
+    //Forms
     void ShowGames();
     void ShowFriends();
     void ShowStatistic();
-    void GoToProfile(QString id, QueryType type);
+    void ReturnFromForms();
+    //Systems
+    void InitComponents();
+    void ResizeScrollArea();
     void UpdateButtonsBackNext();
-
-    void on_ButtonFindProfile_clicked();
-    void on_ButtonExit_clicked();
-
-    void on_ButtonGoToMyProfile_clicked();
-    void on_ButtonBack_clicked();
-    void on_ButtonNext_clicked();
-
-    void on_ButtonSettings_clicked();
-
-    void on_ButtonUpdate_clicked();
-
-    void on_ButtonMaximize_clicked();
-
-    void on_ButtonMinimize_clicked();
+    void ButtonMaximize_Clicked();
+    void ButtonMinimize_Clicked();
+    //Functions
+    void ButtonFindProfile_Clicked();
+    void GoToProfile(QString id, QueryType type);
+    void ButtonSettings_Clicked();
+    void ButtonExit_Clicked();
+    //Profile
+    void ButtonGoToMyProfile_Clicked();
+    void ButtonBack_Clicked();
+    void ButtonNext_Clicked();
+    void ButtonUpdate_Clicked();
 
 private:
+    QString GetTheme();
     Ui::MainWindow *ui;
     int _windowChildCount=0;
     SProfile _profile;

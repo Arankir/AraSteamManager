@@ -50,11 +50,6 @@ void FormGames::InitComponents(){
     ui->ButtonAchievements->setText(tr("Достижения"));
     ui->ButtonFavorite->setText("");
     ui->ButtonHide->setText("");
-    ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find.png"));
-    ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
-    ui->ButtonHide->setIcon(QIcon("://"+_theme+"/hide.png"));
-    ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
-    ui->ButtonChangeGroup->setIcon(QIcon("://"+_theme+"/change.png"));
     ui->TableWidgetGames->setRowCount(_games.GetCount());
     for (int i=0;i<_games.GetCount();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
@@ -63,6 +58,22 @@ void FormGames::InitComponents(){
     //загрузить группы
     ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon,33);
     ui->TableWidgetGames->setColumnWidth(c_tableColumnName,300);
+#define Connects {
+    connect(ui->LineEditGame,&QLineEdit::textChanged,this,&FormGames::LineEditGame_TextChanged);
+    connect(ui->ButtonFind,&QPushButton::clicked,this,&FormGames::ButtonFind_Clicked);
+    connect(ui->TableWidgetGames,&QTableWidget::cellDoubleClicked,this,&FormGames::TableWidgetGames_CellDoubleClicked);
+    connect(ui->TableWidgetGames,&QTableWidget::cellClicked,this,&FormGames::TableWidgetGames_CellClicked);
+    connect(ui->ButtonAchievements,&QPushButton::clicked,this,&FormGames::ButtonAchievements_Clicked);
+    connect(ui->ButtonFavorite,&QPushButton::clicked,this,&FormGames::ButtonFavorite_Clicked);
+    connect(ui->ButtonHide,&QPushButton::clicked,this,&FormGames::ButtonHide_Clicked);
+#define ConnectsEnd }
+#define Icons {
+    ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find.png"));
+    ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
+    ui->ButtonHide->setIcon(QIcon("://"+_theme+"/hide.png"));
+    ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
+    ui->ButtonChangeGroup->setIcon(QIcon("://"+_theme+"/change.png"));
+#define IconsEnd }
     Threading loadTable(this);
     loadTable.AddThreadGames(ui->TableWidgetGames,_games);
 }
@@ -141,7 +152,7 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     _achievements[a_achievements._index]=a_achievements;
     emit s_achievementsLoaded(_load++,0);
     if(_load==_games.GetCount()){
-        on_TableWidgetGames_cellClicked(0,1);
+        TableWidgetGames_CellClicked(0,1);
         emit s_finish();
     }
     //ach->deleteLater();
@@ -225,7 +236,7 @@ void FormGames::slotShowHideSlide(){
 #define SystemEnd }
 
 #define Filter {
-void FormGames::on_LineEditGame_textChanged(const QString arg){
+void FormGames::LineEditGame_TextChanged(const QString arg){
     if(_setting.GetVisibleHiddenGames()==1&&arg!=""){
         for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
             ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,c_tableColumnName)->text().toLower().indexOf(arg.toLower(),0)==-1);
@@ -244,17 +255,17 @@ void FormGames::on_LineEditGame_textChanged(const QString arg){
         }
     }
 }
-void FormGames::on_ButtonFind_clicked(){
-    on_LineEditGame_textChanged(ui->LineEditGame->text());
+void FormGames::ButtonFind_Clicked(){
+    LineEditGame_TextChanged(ui->LineEditGame->text());
 }
 #define FilterEnd }
 
 #define Functions {
-void FormGames::on_TableWidgetGames_cellDoubleClicked(int a_row, int){
-    on_ButtonAchievements_clicked();
+void FormGames::TableWidgetGames_CellDoubleClicked(int a_row, int){
+    ButtonAchievements_Clicked();
     //this->findChild<QButtonWithData*>("ButtonAchievements"+ui->TableWidgetGames->item(row,0)->text())->click();
 }
-void FormGames::on_TableWidgetGames_cellClicked(int a_row, int){
+void FormGames::TableWidgetGames_CellClicked(int a_row, int){
     _selectedGame=ui->TableWidgetGames->item(a_row,c_tableColumnAppid)->text();
     _selectedIndex=ui->TableWidgetGames->item(a_row,c_tableColumnIndex)->text();
     if(static_cast<QLabel*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnIcon))->pixmap())
@@ -280,7 +291,7 @@ void FormGames::on_TableWidgetGames_cellClicked(int a_row, int){
         ui->ButtonHide->setIcon(QIcon("://"+_theme+"/unhide.png"));
     ui->FrameGame->setVisible(true);
 }
-void FormGames::on_ButtonAchievements_clicked(){
+void FormGames::ButtonAchievements_Clicked(){
     SAchievementsPercentage Percentage(_selectedGame,false);
     if(Percentage.GetCount()==0){
         QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
@@ -291,7 +302,7 @@ void FormGames::on_ButtonAchievements_clicked(){
         emit s_showAchievements(_achievements[_selectedIndex.toInt()],_games[_selectedIndex.toInt()]);
     }
 }
-void FormGames::on_ButtonFavorite_clicked(){
+void FormGames::ButtonFavorite_Clicked(){
     QJsonObject newValue;
     newValue["id"]=QString::number(_games[_selectedIndex.toInt()].GetAppid());
     newValue["name"]=_games[_selectedIndex.toInt()].GetName();
@@ -306,7 +317,7 @@ void FormGames::on_ButtonFavorite_clicked(){
         ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
     }
 }
-void FormGames::on_ButtonHide_clicked(){
+void FormGames::ButtonHide_Clicked(){
     QString savePath="";
     QMessageBox question(QMessageBox::Question,
                            tr("Внимание!"),

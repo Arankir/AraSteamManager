@@ -33,8 +33,6 @@ SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *par
             _error=reply->readAll();
         }
         delete reply;
-        emit s_finished(this);
-        emit s_finished();
     }
 }
 SProfile::SProfile(QJsonObject a_objSummaries, QObject *parent) : QObject(parent),_profile(a_objSummaries),_status(StatusValue::success){
@@ -158,8 +156,6 @@ SProfiles::SProfiles(QString a_id, bool a_parallel, QueryType a_type, QObject *p
             _error="profile is not exist";
         }
         delete reply;
-        emit s_finished(this);
-        emit s_finished();
     }
 }
 SProfiles::SProfiles(QJsonDocument a_docSummaries, QObject *parent) : QObject(parent){
@@ -266,14 +262,17 @@ void SProfiles::Update(bool a_parallel){
 }
 void SProfiles::Sort(){
     //Переделать нормально
-    std::list<SProfile> list = _profile.toList().toStdList();
+    //std::list<SProfile> list = _profile.toList().toStdList();
+    std::list<SProfile> list(_profile.begin(),_profile.end());
     list.sort([](const SProfile &s1, const SProfile &s2)-> const bool {
         if(QString::compare(s1.GetPersonaname().toLower(),s2.GetPersonaname().toLower())<0)
             return true;
         else
             return false;
     });
-    _profile=QVector<SProfile>::fromList(QList<SProfile>::fromStdList(list));
+    //_profile=QVector<SProfile>::fromList(QList<SProfile>::fromStdList(list));
+    _profile=QVector<SProfile>(list.begin(),list.end());
+
 }
 void SProfiles::Clear(){
     _profile.clear();

@@ -24,13 +24,14 @@ public:
 
 public slots:
     void ProfileToUi(SProfile profile);
-    void SetProfile(SProfile profile);
+    void SetProfile(SProfile a_profile) {_profile=a_profile;}
     SProfile GetProfile() {return _profile;}
     SGames GetGames() {return _games;}
     SFriends GetFriends() {return _friends;}
     void UpdateTheme();
     void UpdateVisibleInfo();
     void UpdateInfo();
+    void Retranslate();
 
 signals:
     void s_goToGames(QString prifileSteamid, SGames games);
@@ -41,11 +42,11 @@ signals:
 
 private slots:
     void changeEvent(QEvent *event);
-    void on_ButtonSetProfile_clicked();
-    void on_ButtonGames_clicked();
-    void on_ButtonFriends_clicked();
-    void on_ButtonStatistics_clicked();
-    void on_ButtonFavorites_clicked();
+    void ButtonSetProfile_Clicked();
+    void ButtonGames_Clicked();
+    void ButtonFriends_Clicked();
+    void ButtonStatistics_Clicked();
+    void ButtonFavorites_Clicked();
 
 private:
     Ui::FormProfile *ui;
@@ -54,7 +55,7 @@ private:
     SFriends _friends;
     Settings _setting;
     QString _theme;
-    bool _visibleInfo;
+    int _visibleInfo;
 };
 
 #endif // FORMPROFILE_H

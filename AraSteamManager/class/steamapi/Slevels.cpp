@@ -8,8 +8,6 @@ SLevels::SLevels(QString a_id, QObject *parent) : QObject(parent),_steamid(a_id)
     loop.exec();
     QJsonDocument DocLvls = QJsonDocument::fromJson(Reply.readAll());
     Set(DocLvls);
-    emit s_finished(this);
-    emit s_finished();
 }
 SLevels::SLevels(QJsonDocument a_lvls, QObject *parent) : QObject(parent){
     _manager = new QNetworkAccessManager();

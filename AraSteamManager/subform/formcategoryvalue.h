@@ -33,14 +33,14 @@ public:
 
 private slots:
     void changeEvent(QEvent *event);
-    void on_CheckBoxVisible_stateChanged(int arg1);
-    void on_ButtonUp_clicked();
-    void on_ButtonDown_clicked();
-    void on_ButtonSelect_clicked();
-    void on_ButtonUnSelect_clicked();
-    void on_ButtonDelete_clicked();
-    void on_LineEditTitle_textChanged(const QString &arg1);
-    void on_ButtonReverse_clicked();
+    void CheckBoxVisible_StateChanged(int arg1);
+    void ButtonUp_Clicked();
+    void ButtonDown_Clicked();
+    void ButtonSelect_Clicked();
+    void ButtonUnSelect_Clicked();
+    void ButtonDelete_Clicked();
+    void LineEditTitle_TextChanged(const QString &arg1);
+    void ButtonReverse_Clicked();
 
 signals:
     void s_valuechange(int pos, QString value);

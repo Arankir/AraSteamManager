@@ -12,6 +12,7 @@ class RequestImage : public QObject
     Q_OBJECT
 public:
     explicit RequestImage(QLabel *label, QString url, QString save="", bool autosave=false, QObject *parent = nullptr);
+    explicit RequestImage(QLabel *label, QString url, QObject *parent);
     RequestImage(QString url, QString save="", bool autosave=false, QObject *parent = nullptr);
     QPixmap GetPixmap();
     void SetIndex(int a_index) {_index=a_index;}

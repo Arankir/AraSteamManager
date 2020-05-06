@@ -61,7 +61,7 @@ void FormStatistics::changeEvent(QEvent *event){
 }
 void FormStatistics::Retranslate(){
     ui->retranslateUi(this);
-    ui->LabelAveragePercentValue->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент")).arg(tr("по всем играм")).arg(QString::number(_totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(tr("по начатым играм")).arg(QString::number(_totalAverage/(_numof[1]+_numof[2]))));
+    ui->LabelAveragePercentValue->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент"),tr("по всем играм"),QString::number(_totalAverage/(_numof[0]+_numof[1]+_numof[2])),tr("по начатым играм"),QString::number(_totalAverage/(_numof[1]+_numof[2]))));
     QList<QAbstractSeries*> series = _donutBreakdown->series();
     switch (series.size()) {
         default:
@@ -81,9 +81,8 @@ void FormStatistics::Retranslate(){
     QStringList titlesXM;
     titlesXM <<tr("Январь")<<tr("Февраль")<<tr("Март")<<tr("Апрель")<<tr("Май")<<tr("Июнь")<<tr("Июль")<<tr("Август")<<tr("Сентябрь")<<tr("Октябрь")<<tr("Ноябрь")<<tr("Декабрь");
     axisXM->append(titlesXM);
-    if((_chartM->series().size()>0)&&(_chartM->axes(Qt::Horizontal,_chartM->series()[0]).size()>0))
-            dynamic_cast<QBarCategoryAxis*>(_chartM->axes(Qt::Horizontal,_chartM->series()[0])[0])->setCategories(titlesXM);
-    //_chartM->setAxisX(axisXM);
+    if((_chartM->series().size()>0)&&(_chartM->axes(Qt::Horizontal,_chartM->series().at(0)).size()>0))
+            dynamic_cast<QBarCategoryAxis*>(_chartM->axes(Qt::Horizontal,_chartM->series().at(0)).at(0))->setCategories(titlesXM);
     _chartY->setTitle(tr("Достижения по годам"));
 }
 void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QString> > a_complete,
@@ -104,7 +103,7 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
     foreach (double averageForGame, _averagePercent) {
         _totalAverage+=averageForGame;
     }
-    ui->LabelAveragePercentValue->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент")).arg(tr("по всем играм")).arg(QString::number(_totalAverage/(_numof[0]+_numof[1]+_numof[2]))).arg(tr("по начатым играм")).arg(QString::number(_totalAverage/(_numof[1]+_numof[2]))));
+    ui->LabelAveragePercentValue->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент"),tr("по всем играм"),QString::number(_totalAverage/(_numof[0]+_numof[1]+_numof[2])),tr("по начатым играм"),QString::number(_totalAverage/(_numof[1]+_numof[2]))));
     ui->LabelSummColumnValue->setText(QString::number(_summcolumn));
 
     #define SetChartDonut {
@@ -115,9 +114,9 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
     QPieSeries *series3 = new QPieSeries();
     series3->append(tr("Закончено (%1)").arg(_numof[2]), _numof[2]);
 
-    _donutBreakdown->addBreakdownSeries(series1, QColor("#b23232"));
-    _donutBreakdown->addBreakdownSeries(series2, QColor("#cdcb1f"));
-    _donutBreakdown->addBreakdownSeries(series3, QColor("#55b53e"));
+    _donutBreakdown->addBreakdownSeries(series1, QColor(178,50,50));
+    _donutBreakdown->addBreakdownSeries(series2, QColor(205,203,31));
+    _donutBreakdown->addBreakdownSeries(series3, QColor(85,181,62));
     //donutBreakdown->legend()->setVisible(false);
     ui->ChartViewPercentages->setChart(_donutBreakdown);
     #define SetChartDonutEnd }

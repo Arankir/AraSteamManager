@@ -1,15 +1,12 @@
 #include "requestdata.h"
 
-RequestData::RequestData(QString a_url, bool a_parallel, QObject *parent):QObject(parent),_answer(""),_url(a_url){
+RequestData::RequestData(QString a_url, bool a_parallel, QObject *a_parent): QObject(a_parent), _answer(""),_url(a_url){
     _manager = new QNetworkAccessManager();
     connect(_manager,&QNetworkAccessManager::finished,this,&RequestData::OnResultGet);
-    Get(a_url,a_parallel);
+    if(!a_url.isEmpty())
+        Get(a_url,a_parallel);
 }
-
-RequestData::RequestData(QObject *parent):QObject(parent),_answer(""){
-    _manager = new QNetworkAccessManager();
-    connect(_manager,&QNetworkAccessManager::finished,this,&RequestData::OnResultGet);
-}
+RequestData::RequestData(QObject *a_parent):RequestData("",true,a_parent){}
 
 void RequestData::Get(QString a_url, bool a_parallel){
     _manager->get(QNetworkRequest(QUrl(a_url)));

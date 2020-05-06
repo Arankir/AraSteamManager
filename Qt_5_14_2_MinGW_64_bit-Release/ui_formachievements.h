@@ -77,7 +77,7 @@ public:
     QGroupBox *GroupBoxCategories;
     QHBoxLayout *horizontalLayout_9;
     QVBoxLayout *verticalLayout_11;
-    QComboBox *ComboBoxCategoriesCategory;
+    QComboBox *ComboBoxCategories;
     QLineEdit *LineEditTitleCategory;
     QCheckBox *CheckBoxCategoryOneValue;
     QCheckBox *CheckBoxCategoryUniqueValue;
@@ -265,7 +265,7 @@ public:
         ScrollAreaCategories->setWidgetResizable(true);
         widget = new QWidget();
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 239, 109));
+        widget->setGeometry(QRect(0, 0, 271, 109));
         layoutComboBoxCategories = new QFormLayout(widget);
         layoutComboBoxCategories->setObjectName(QString::fromUtf8("layoutComboBoxCategories"));
         ScrollAreaCategories->setWidget(widget);
@@ -280,7 +280,7 @@ public:
         ScrollAreaCheckCategories->setWidgetResizable(true);
         widget_2 = new QWidget();
         widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        widget_2->setGeometry(QRect(0, 0, 238, 109));
+        widget_2->setGeometry(QRect(0, 0, 271, 109));
         layoutCheckBoxCategories = new QFormLayout(widget_2);
         layoutCheckBoxCategories->setObjectName(QString::fromUtf8("layoutCheckBoxCategories"));
         ScrollAreaCheckCategories->setWidget(widget_2);
@@ -356,17 +356,17 @@ public:
         horizontalLayout_9->setContentsMargins(0, 0, 0, 0);
         verticalLayout_11 = new QVBoxLayout();
         verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
-        ComboBoxCategoriesCategory = new QComboBox(GroupBoxCategories);
-        ComboBoxCategoriesCategory->addItem(QString());
-        ComboBoxCategoriesCategory->setObjectName(QString::fromUtf8("ComboBoxCategoriesCategory"));
+        ComboBoxCategories = new QComboBox(GroupBoxCategories);
+        ComboBoxCategories->addItem(QString());
+        ComboBoxCategories->setObjectName(QString::fromUtf8("ComboBoxCategories"));
         QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(ComboBoxCategoriesCategory->sizePolicy().hasHeightForWidth());
-        ComboBoxCategoriesCategory->setSizePolicy(sizePolicy4);
-        ComboBoxCategoriesCategory->setStyleSheet(QString::fromUtf8(""));
+        sizePolicy4.setHeightForWidth(ComboBoxCategories->sizePolicy().hasHeightForWidth());
+        ComboBoxCategories->setSizePolicy(sizePolicy4);
+        ComboBoxCategories->setStyleSheet(QString::fromUtf8(""));
 
-        verticalLayout_11->addWidget(ComboBoxCategoriesCategory);
+        verticalLayout_11->addWidget(ComboBoxCategories);
 
         LineEditTitleCategory = new QLineEdit(GroupBoxCategories);
         LineEditTitleCategory->setObjectName(QString::fromUtf8("LineEditTitleCategory"));
@@ -548,12 +548,12 @@ public:
         GroupBoxReachedFilter->setTitle(QString());
         CheckBoxFavorites->setText(QCoreApplication::translate("FormAchievements", "\320\242\320\276\320\273\321\214\320\272\320\276 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         CheckBoxCompareAllFriends->setText(QCoreApplication::translate("FormAchievements", "\320\222\321\201\320\265 \320\264\321\200\321\203\320\267\321\214\321\217", nullptr));
-        ButtonFavorite->setText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\265 \320\262 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
+        ButtonFavorite->setText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\262 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         ButtonAddCategory->setText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\216", nullptr));
         ButtonChangeCategory->setText(QCoreApplication::translate("FormAchievements", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         ButtonDeleteAllCategories->setText(QCoreApplication::translate("FormAchievements", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\262\321\201\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         GroupBoxCategories->setTitle(QCoreApplication::translate("FormAchievements", "Categories", nullptr));
-        ComboBoxCategoriesCategory->setItemText(0, QCoreApplication::translate("FormAchievements", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217 \320\275\320\265 \320\262\321\213\320\261\321\200\320\260\320\275\320\260", nullptr));
+        ComboBoxCategories->setItemText(0, QCoreApplication::translate("FormAchievements", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217 \320\275\320\265 \320\262\321\213\320\261\321\200\320\260\320\275\320\260", nullptr));
 
         LineEditTitleCategory->setPlaceholderText(QCoreApplication::translate("FormAchievements", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         CheckBoxCategoryOneValue->setText(QCoreApplication::translate("FormAchievements", "\320\221\320\265\320\267 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\271", nullptr));

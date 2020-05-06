@@ -50,8 +50,8 @@ class SGames : public QObject
     Q_OBJECT
 public:
     explicit SGames(QString id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
-    SGames(QJsonDocument DocGames);
-    SGames();
+    SGames(QJsonDocument DocGames, QObject *parent = nullptr);
+    SGames(QObject *parent = nullptr);
     ~SGames();
     void Set(QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);

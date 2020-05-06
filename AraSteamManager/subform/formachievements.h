@@ -67,7 +67,7 @@ public slots:
     void OnFinish();
     QString GetProfile() {return _id;}
     SGame GetGame() {return _game;}
-    void on_ButtonUpdate_clicked();
+    void ButtonUpdate_Clicked();
 
 private slots:
     void changeEvent(QEvent *event);
@@ -75,65 +75,60 @@ private slots:
     void PullTableWidget();
     void Retranslate();
 
-    void SwitchSimpleCompare(FormMode sc);
+    void SwitchSimpleCompare(FormAchievements::FormMode sc);
     void LoadingCompare();
     void LoadFriendGames(SGames *Games);
     void FinishLoadFriends();
     void CompareProfileFilterClickMy(QString name,ReachedType type);
     void CompareProfileFilterClickFriends(QString name,ReachedType type);
 
-    void on_ButtonCompareAllFriendsReach_clicked();
-    void on_TableWidgetCompareFriendsCellChanged(int row, int column);
+    void ButtonCompareAllFriendsReach_Clicked();
+    void TableWidgetCompareFriends_CellChanged(int row, int column);
     void CreateCompareProfileFilter(bool Aaccept, int Acolumn);
-    void on_CheckBoxCompareAllFriends_stateChanged(int arg1);
+    void CheckBoxCompareAllFriends_StateChanged(int arg1);
 
     void closeEvent(QCloseEvent*);
     void ShowCategories();
     void UpdateHiddenRows();
     bool SetFriendAchievements(SAchievements achievement, int col);
 
-    void on_LineEditNameAchievements_textChanged(const QString &arg1);
-    void on_ButtonFindAchievement_clicked();
-    void on_ButtonAddCategory_clicked();
-    void on_ButtonChangeCategory_clicked();
+    void LineEditNameAchievements_TextChanged(const QString &arg1);
+    void ButtonFindAchievement_Clicked();
+    void ButtonAddCategory_Clicked();
+    void ButtonChangeCategory_Clicked();
     void FavoritesClicked();
-    void on_ButtonCompare_clicked();
-    void on_CheckBoxShowFilter_stateChanged(int arg1);
-    void on_ComboBoxCategory_Change(int index);
-    void on_CheckBoxCategory_Change(int ind);
-    void on_ButtonDeleteAllCategories_clicked();
+    void ButtonCompare_Clicked();
+    void CheckBoxShowFilter_StateChanged(int arg1);
+    void ComboBoxCategory_IndexChange(int index);
+    void CheckBoxCategory_StateChanged(int ind);
+    void ButtonDeleteAllCategories_Clicked();
 
-    void on_CheckBoxCompareIcon_stateChanged(int arg1);
-    void on_CheckBoxCompareTitle_stateChanged(int arg1);
-    void on_CheckBoxCompareDescription_stateChanged(int arg1);
-    void on_CheckBoxCompareTotalPercent_stateChanged(int arg1);
-
-    void on_ButtonAddValueCategory_clicked();
-    void on_ButtonCancelCategory_clicked();
-    void on_ButtonAcceptCategory_clicked();
-    void on_ButtonDeleteCategory_clicked();
-    void on_CheckBoxCategoryOneValue_stateChanged(int arg1);
-    void on_LineEditTitleCategory_textChanged(const QString &arg1);
-    void on_ComboBoxCategoriesCategory_activated(int index);
-    void on_CheckBoxCategoryVisibleAll_clicked();
+    void ButtonAddValueCategory_Clicked();
+    void ButtonCancelCategory_Clicked();
+    void ButtonAcceptCategory_Clicked();
+    void ButtonDeleteCategory_Clicked();
+    void CheckBoxCategoryOneValue_StateChanged(int arg1);
+    void LineEditTitleCategory_TextChanged(const QString &arg1);
+    void ComboBoxCategories_Activated(int index);
+    void CheckBoxCategoryVisibleAll_Clicked();
 
     void UpdateValuesUpDown(int value=-1);
-    void on_FormCategoryValueChange(int pos, QString value);
-    void on_FormCategoryVisibleChange(int pos, bool visible);
-    void on_FormCategoryPositionChange(int pos, int newpos);
-    void on_FormCategorySelectChange(int pos, bool select);
-    void on_FormCategoryDeleting(int pos);
-    void on_FormCategoryReverse(int pos);
+    void FormCategoryValue_Change(int pos, QString value);
+    void FormCategoryVisible_Change(int pos, bool visible);
+    void FormCategoryPosition_Change(int pos, int newpos);
+    void FormCategorySelect_Change(int pos, bool select);
+    void FormCategoryDelete(int pos);
+    void FormCategoryReverse(int pos);
 
-    void on_CheckBoxFavorites_stateChanged(int arg1);
+    void CheckBoxFavorites_StateChanged(int arg1);
 
-    void on_CheckBoxCategoryUniqueValue_stateChanged(int arg1);
+    void CheckBoxCategoryUniqueValue_StateChanged(int arg1);
     void HideCheckedAchievement(QTableWidgetItem *item);
     FormCategoryValue *CreateValueCategory();
 
-    void on_ButtonFavorite_clicked();
+    void ButtonFavorite_Clicked();
 
-    void on_TableWidgetAchievements_cellClicked(int row, int column);
+    void TableAchievements_CellClicked(int row, int column);
 
 private:
     Ui::FormAchievements *ui;

@@ -8,7 +8,16 @@ FormProfile::FormProfile(SProfile a_profile, QWidget *parent) : QWidget(parent),
     ui->LabelFriendsVisibility->setTextFormat(Qt::RichText);
     ui->LabelProfileUrl->setTextFormat(Qt::RichText);
     ui->LabelNick->setStyleSheet("color: #42a9c6;");
+    ui->LabelNameMinimize->setStyleSheet("color: #42a9c6;");
+    ui->ButtonGames->setBaseSize(QSize(23,23));
     ui->LabelPersonaState->setWordWrap(true);
+#define Connects {
+    connect(ui->ButtonSetProfile,&QPushButton::clicked,this,&FormProfile::ButtonSetProfile_Clicked);
+    connect(ui->ButtonGames,&QPushButton::clicked,this,&FormProfile::ButtonGames_Clicked);
+    connect(ui->ButtonFriends,&QPushButton::clicked,this,&FormProfile::ButtonFriends_Clicked);
+    connect(ui->ButtonStatistics,&QPushButton::clicked,this,&FormProfile::ButtonStatistics_Clicked);
+    connect(ui->ButtonFavorites,&QPushButton::clicked,this,&FormProfile::ButtonFavorites_Clicked);
+#define ConnectsEnd }
     UpdateTheme();
     ProfileToUi(_profile);
 }
@@ -18,44 +27,7 @@ FormProfile::~FormProfile(){
 }
 void FormProfile::changeEvent(QEvent *event){
     if(event->type()==QEvent::LanguageChange){
-        ui->retranslateUi(this);
-        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
-        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
-        if(!_profile.GetGameextrainfo().isEmpty()){
-            ui->LabelPersonaState->setText(tr("В игре %1").arg(_profile.GetGameextrainfo()));
-            ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
-        } else
-            switch (_profile.GetPersonastate()) {
-                case 0:
-                    ui->LabelPersonaState->setText(tr("Был в сети %1").arg(_profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
-                    ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
-                    break;
-                case 1:
-                    ui->LabelPersonaState->setText(tr("В сети"));
-                    ui->LabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
-                    break;
-                case 2:
-                    ui->LabelPersonaState->setText(tr("Не беспокоить"));
-                    ui->LabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
-                    break;
-                case 3:
-                    ui->LabelPersonaState->setText(tr("Нет на месте"));
-                    ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
-                    break;
-                case 4:
-                    ui->LabelPersonaState->setText(tr("Спит"));
-                    ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
-                    break;
-                case 5:
-                    ui->LabelPersonaState->setText(tr("Ожидает обмена"));
-                    ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
-                    break;
-                case 6:
-                    ui->LabelPersonaState->setText(tr("Хочет поиграть"));
-                    ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
-                    break;
-            }
-
+        Retranslate();
     }
 }
 
@@ -65,8 +37,6 @@ void FormProfile::ProfileToUi(SProfile a_profile){
     SLevels levels(a_profile.GetSteamid());
     _games.Set(a_profile.GetSteamid(),true,true,false);
     _friends.Set(a_profile.GetSteamid(),false);
-    ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
-    ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
     if(!a_profile.GetGameextrainfo().isEmpty()){
         ui->LabelPersonaState->setText(tr("В игре %1").arg(a_profile.GetGameextrainfo()));
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
@@ -198,13 +168,11 @@ void FormProfile::ProfileToUi(SProfile a_profile){
     }
 
     ui->LabelAvatar->setPixmap(RequestData(a_profile.GetAvatarmedium(),false).GetPixmap());
+    ui->LabelAvatarMinimize->setPixmap(RequestData(a_profile.GetAvatar(),false).GetPixmap());
     ui->LabelNick->setText(a_profile.GetPersonaname());
+    ui->LabelNameMinimize->setText(a_profile.GetPersonaname());
 
     UpdateVisibleInfo();
-}
-
-void FormProfile::SetProfile(SProfile a_profile){
-    _profile=a_profile;
 }
 
 void FormProfile::UpdateTheme(){
@@ -227,8 +195,30 @@ void FormProfile::UpdateTheme(){
 
 void FormProfile::UpdateVisibleInfo(){
     _setting.SyncronizeSettings();
-    _visibleInfo=_setting.GetVisibleProfileInfo();
-    ui->FrameInfo->setVisible(_visibleInfo);
+    _visibleInfo=_setting.GetProfileInfoSize();
+    switch (_visibleInfo) {
+    case 0:{
+        ui->FrameNormalInfo->setVisible(false);
+        ui->LabelNameMinimize->setVisible(true);
+        ui->LabelAvatarMinimize->setVisible(true);
+        ui->LabelAvatarMinimize->pixmap()->scaled(23,23);
+        break;
+    }
+    case 1:{
+        ui->FrameNormalInfo->setVisible(true);
+        ui->LabelNameMinimize->setVisible(false);
+        ui->FrameMaximumInfo->setVisible(false);
+        ui->LabelAvatarMinimize->setVisible(false);
+        break;
+    }
+    case 2:{
+        ui->FrameNormalInfo->setVisible(true);
+        ui->LabelNameMinimize->setVisible(false);
+        ui->FrameMaximumInfo->setVisible(true);
+        ui->LabelAvatarMinimize->setVisible(false);
+    }
+    }
+    Retranslate();
     ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=_profile.GetSteamid());
 }
 
@@ -237,31 +227,75 @@ void FormProfile::UpdateInfo(){
     ProfileToUi(_profile);
 }
 
-void FormProfile::on_ButtonSetProfile_clicked(){
+void FormProfile::Retranslate(){
+    ui->retranslateUi(this);
+    switch (_visibleInfo) {
+    case 0:{
+        ui->ButtonGames->setText("");
+        ui->ButtonFriends->setText("");
+        ui->ButtonGames->setToolTip(tr("Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
+        ui->ButtonFriends->setToolTip(tr("Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
+        ui->ButtonStatistics->setText("");
+        ui->ButtonFavorites->setText("");
+        ui->ButtonStatistics->setToolTip(tr("Статистика"));
+        ui->ButtonFavorites->setToolTip(tr("Избранное"));
+        ui->ButtonSetProfile->setText("");
+        ui->ButtonSetProfile->setToolTip(tr("Установить профиль как свой"));
+        break;
+    }
+    case 1:{
+        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
+        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
+        ui->ButtonGames->setToolTip("");
+        ui->ButtonFriends->setToolTip("");
+        ui->ButtonStatistics->setText(tr("Статистика"));
+        ui->ButtonFavorites->setText(tr("Избранное"));
+        ui->ButtonStatistics->setToolTip("");
+        ui->ButtonFavorites->setToolTip("");
+        ui->ButtonSetProfile->setText(tr("Это мой профиль"));
+        ui->ButtonSetProfile->setToolTip("");
+        break;
+    }
+    case 2:{
+        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
+        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
+        ui->ButtonGames->setToolTip("");
+        ui->ButtonFriends->setToolTip("");
+        ui->ButtonStatistics->setText(tr("Статистика"));
+        ui->ButtonFavorites->setText(tr("Избранное"));
+        ui->ButtonStatistics->setToolTip("");
+        ui->ButtonFavorites->setToolTip("");
+        ui->ButtonSetProfile->setText(tr("Это мой профиль"));
+        ui->ButtonSetProfile->setToolTip("");
+    }
+    }
+}
+
+void FormProfile::ButtonSetProfile_Clicked(){
     _setting.SetMyProfile(_profile.GetSteamid());
     ui->ButtonSetProfile->setEnabled(false);
     emit s_myProfileChange();
 }
 
-void FormProfile::on_ButtonGames_clicked(){
+void FormProfile::ButtonGames_Clicked(){
     if(_games.GetStatus()==StatusValue::success){
         emit s_goToGames(_profile.GetSteamid(),_games);
     }
 }
 
-void FormProfile::on_ButtonFriends_clicked(){
+void FormProfile::ButtonFriends_Clicked(){
     if(_friends.GetStatus()==StatusValue::success){
         emit s_goToFriends(_profile.GetSteamid(),_friends);
     }
 }
 
-void FormProfile::on_ButtonStatistics_clicked(){
+void FormProfile::ButtonStatistics_Clicked(){
     if(_games.GetStatus()==StatusValue::success){
         emit s_goToStatistic(_profile.GetSteamid(),_games,_profile.GetPersonaname());
     }
 }
 
-void FormProfile::on_ButtonFavorites_clicked(){
+void FormProfile::ButtonFavorites_Clicked(){
     if(true){
         emit s_goToFavorites();
     }
