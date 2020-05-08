@@ -14,7 +14,7 @@ class Favorites : public QObject
     Q_OBJECT
 public:
     explicit Favorites(QString path, QString type, QObject *parent = nullptr);
-    Favorites(QObject *parent = nullptr);
+    Favorites(QObject *a_parent = nullptr): QObject(a_parent) {}
 
 signals:
 
@@ -28,14 +28,17 @@ public slots:
     bool RemoveValue(QJsonObject game, QJsonObject newValue);
     void RemoveGame(QJsonObject game);
     int AddGame(QJsonObject game);
-    QString GetType();
-    QJsonArray GetValues();
+    QString GetType() {return _favorites.value("Type").toString();}
+    QJsonArray GetValues() {return _favorites.value("Values").toArray();}
     QJsonArray GetValues(QJsonObject game);
 
 private slots:
     void Save();
 
 private:
+    void Init(QString type);
+    void Load();
+
     Settings _setting;
     QString _path;
     QJsonObject _favorites;

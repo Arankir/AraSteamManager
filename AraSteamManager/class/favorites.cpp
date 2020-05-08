@@ -1,55 +1,17 @@
 #include "favorites.h"
 
 Favorites::Favorites(QString a_path, QString a_type, QObject *parent) : QObject(parent),_path(a_path){
-    _setting.CreateFile(a_path);
-    if(!QFile::exists(a_path)){
-        QJsonObject obj;
-        obj["Type"]=a_type;
-        QJsonArray arr;
-        obj["Values"]=arr;
-        _favorites=obj;
-        Save();
-    }
-    QFile file(a_path);
-    if(file.exists()){
-        if(file.open(QFile::ReadOnly)){
-            _favorites=QJsonDocument().fromJson(file.readAll()).object();
-            file.close();
-        }
-    }
+    Init(a_type);
 }
-Favorites::Favorites(QObject *parent) : QObject(parent){}
-
-QString Favorites::GetType(){
-    return _favorites.value("Type").toString();
-}
-QJsonArray Favorites::GetValues(){
-    return _favorites.value("Values").toArray();
+void Favorites::SetType(QString a_type){
+    _path=_setting._pathFavorites+a_type+".json";
+    Init(a_type);
 }
 QJsonArray Favorites::GetValues(QJsonObject a_game){
     for(int i=0;i<_favorites.value("Values").toArray().size();i++)
         if(_favorites.value("Values").toArray().at(i).toObject().value("game").toObject()==a_game)
             return _favorites.value("Values").toArray().at(i).toObject().value("Values").toArray();
     return QJsonArray();
-}
-void Favorites::SetType(QString a_type){
-    _path=_setting._pathFavorites+a_type+".json";
-    _setting.CreateFile(_path);
-    if(!QFile::exists(_path)){
-        QJsonObject obj;
-        obj["Type"]=a_type;
-        QJsonArray arr;
-        obj["Values"]=arr;
-        _favorites=obj;
-        Save();
-    }
-    QFile file(_path);
-    if(file.exists()){
-        if(file.open(QFile::ReadOnly)){
-            _favorites=QJsonDocument().fromJson(file.readAll()).object();
-            file.close();
-        }
-    }
 }
 
 bool Favorites::AddValue(QJsonObject a_newValue, bool a_deleteIfExist){
@@ -244,4 +206,27 @@ void Favorites::Save(){
     doc.setObject(_favorites);
     file.write(doc.toJson());
     file.close();
+}
+
+void Favorites::Init(QString a_type){
+    _setting.CreateFile(_path);
+    if(!QFile::exists(_path)){
+        QJsonObject obj;
+        obj["Type"]=a_type;
+        QJsonArray arr;
+        obj["Values"]=arr;
+        _favorites=obj;
+        Save();
+    }
+    Load();
+}
+
+void Favorites::Load(){
+    QFile file(_path);
+    if(file.exists()){
+        if(file.open(QFile::ReadOnly)){
+            _favorites=QJsonDocument().fromJson(file.readAll()).object();
+            file.close();
+        }
+    }
 }

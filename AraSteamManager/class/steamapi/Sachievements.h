@@ -109,6 +109,8 @@ public:
     QString GetGamename() {return _gameName;}
     QString GetGameversion() {return _gameVersion;}
     int GetCount() {return _achievements.size();}
+    QVector<SAchievementGlobal>::iterator begin() {return _achievements.begin();}
+    QVector<SAchievementGlobal>::iterator end() {return _achievements.end();}
     void Update();
     void Clear();
     SAchievementsGlobal(const SAchievementsGlobal &);
@@ -148,6 +150,8 @@ public:
     int GetCount() {return _achievements.size();}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
+    QVector<SAchievementPercentage>::iterator begin() {return _achievements.begin();}
+    QVector<SAchievementPercentage>::iterator end() {return _achievements.end();}
     void Update();
     void Clear();
     SAchievementsPercentage(const SAchievementsPercentage &);
@@ -186,6 +190,8 @@ public:
     QString GetError() {return _error;}
     QString GetGamename() {return _gameName;}
     int GetCount() {return _achievements.size();}
+    QVector<SAchievementPlayer>::iterator begin() {return _achievements.begin();}
+    QVector<SAchievementPlayer>::iterator end() {return _achievements.end();}
     void Update();
     void Clear();
     SAchievementsPlayer(const SAchievementsPlayer &);
@@ -289,6 +295,8 @@ public:
     QString GetGamename() {return _gameName;}
     QString GetGameversion() {return _gameVersion;}
     int GetCount() {return _finish.size();}
+    QVector<SAchievement>::iterator begin() {return _finish.begin();}
+    QVector<SAchievement>::iterator end() {return _finish.end();}
     void Update();
     void Clear();
     void Sort();

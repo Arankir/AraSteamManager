@@ -55,6 +55,8 @@ public:
     int GetCount() {return _friends.size();}
     SProfiles GetProfiles();
     void Update(bool parallel);
+    QVector<SFriend>::iterator begin() {return _friends.begin();}
+    QVector<SFriend>::iterator end() {return _friends.end();}
     void Clear();
     void Sort();
     SFriends(const SFriends &);

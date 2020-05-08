@@ -6,12 +6,12 @@
 //https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
 #define Constants {
-const int c_formsNone=0;
-const int c_formsGames=1;
-const int c_formsFriends=2;
-const int c_formsStatistic=3;
-const int c_formsFavorites=4;
-const int c_formsSettings=5;
+constexpr int c_formsNone=0;
+constexpr int c_formsGames=1;
+constexpr int c_formsFriends=2;
+constexpr int c_formsStatistic=3;
+constexpr int c_formsFavorites=4;
+constexpr int c_formsSettings=5;
 #define ConstantsEnd }
 
 #define Init {

@@ -1,28 +1,28 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 #define Constants {
-const int c_filterName=0;
-const int c_filterReached=1;
-const int c_filterFavorite=2;
-const int c_filterUniqueValue=3;
-const int c_filterColumnCount=4;
-const int c_filterEndConstValues=4;
+constexpr int c_filterName=0;
+constexpr int c_filterReached=1;
+constexpr int c_filterFavorite=2;
+constexpr int c_filterUniqueValue=3;
+constexpr int c_filterColumnCount=4;
+constexpr int c_filterEndConstValues=4;
 
-const int c_tableAchievementColumnAppid=0;
-const int c_tableAchievementColumnIcon=1;
-const int c_tableAchievementColumnTitle=2;
-const int c_tableAchievementColumnDescription=3;
-const int c_tableAchievementColumnWorld=4;
-const int c_tableAchievementColumnReachedMy=5;
-const int c_tableAchievementColumnCount=6;
+constexpr int c_tableAchievementColumnAppid=0;
+constexpr int c_tableAchievementColumnIcon=1;
+constexpr int c_tableAchievementColumnTitle=2;
+constexpr int c_tableAchievementColumnDescription=3;
+constexpr int c_tableAchievementColumnWorld=4;
+constexpr int c_tableAchievementColumnReachedMy=5;
+constexpr int c_tableAchievementColumnCount=6;
 
-const int c_tableCategoryColumnNoValue=c_tableAchievementColumnCount;
+constexpr int c_tableCategoryColumnNoValue=c_tableAchievementColumnCount;
 
-const int c_tableFriendsRowAvatars=0;
-const int c_tableFriendsRowCheckBox=1;
-const int c_tableFriendsRowFilters=2;
-const int c_tableFriendsRowID=3;
-const int c_tableFriendsRowCount=4;
+constexpr int c_tableFriendsRowAvatars=0;
+constexpr int c_tableFriendsRowCheckBox=1;
+constexpr int c_tableFriendsRowFilters=2;
+constexpr int c_tableFriendsRowID=3;
+constexpr int c_tableFriendsRowCount=4;
 #define ConstantsEnd }
 
 #define Init {
@@ -164,7 +164,7 @@ void FormAchievements::InitComponents(){
     #define ConnectsEnd }
     _favorites.SetType("achievements");
     _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game.GetAppid()));
-    _categoriesGame.Set(_game);
+    _categoriesGame.SetGame(_game);
     ui->GroupBoxCategories->setVisible(false);
     SwitchSimpleCompare(FormMode::compare);
     ui->ProgressBarFriendsLoad->setVisible(false);
@@ -189,7 +189,8 @@ void FormAchievements::PullTableWidget(){
         Threading loadTable(this);
         QLabel *labelCompareSummary = new QLabel(this);
         _tableAchievements->SetWidgetHorizontalHeader(1,c_tableAchievementColumnReachedMy,labelCompareSummary);
-        loadTable.AddThreadAchievements(_achievements,ui->LabelTotalPersent,_tableAchievements->GetTableContent(),labelCompareSummary);
+        loadTable.AddThreadAchievements(c_tableAchievementColumnAppid, c_tableAchievementColumnTitle, c_tableAchievementColumnDescription, c_tableAchievementColumnWorld, c_tableAchievementColumnReachedMy,
+                                        _achievements,ui->LabelTotalPersent,_tableAchievements->GetTableContent(),labelCompareSummary);
     } else {
         _tableAchievements->SetRowCount(1);
         _tableAchievements->SetItemHorizontalHeader(c_tableAchievementColumnAppid,1,new QTableWidgetItem(tr("Ошибка")));
@@ -239,8 +240,12 @@ void FormAchievements::ProgressLoading(int a_progress,int a_row){
 //    connect(buttonFavorite,&QButtonWithData::pressed,this,&FormAchievements::FavoritesClicked);
 //    ui->TableWidgetCategory->setCellWidget(a_row,c_tableAchievementColumnFavorite,buttonFavorite);
 }
-void FormAchievements::OnFinish(){
+void FormAchievements::OnFinish(int reached, int notReached){
     ui->GroupBoxFilter->setEnabled(true);
+    QLabel *labelCompareSummary = new QLabel(this);
+    _tableAchievements->SetWidgetHorizontalHeader(1,c_tableAchievementColumnReachedMy,labelCompareSummary);
+    ui->LabelTotalPersent->setText(QString("%1/%2 = %3%").arg(QString::number(reached),QString::number(reached+notReached),QString::number(100.0*reached/(reached+notReached))));
+    labelCompareSummary->setText(QString("%1/%2\n%3%").arg(QString::number(reached),QString::number(reached+notReached),QString::number(100.0*reached/(reached+notReached))));
     _tableAchievements->GetTableContent()->resizeRowsToContents();
     int j=0;
     for (int i=0;i<_achievements.GetCount();i++) {
@@ -559,7 +564,7 @@ void FormAchievements::changeEvent(QEvent *event){
     }
 }
 void FormAchievements::ShowCategories(){
-    _categoriesGame.Set(_game);
+    _categoriesGame.SetGame(_game);
     QFormLayout *layoutComboBox = ui->layoutComboBoxCategories;
     QFormLayout *layoutCheckBox = ui->layoutCheckBoxCategories;
     while(ui->ComboBoxCategories->count()>1){

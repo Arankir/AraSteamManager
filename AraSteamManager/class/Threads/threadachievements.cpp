@@ -1,9 +1,5 @@
 #include "threadachievements.h"
 
-ThreadAchievements::ThreadAchievements(QObject *parent) : QObject(parent){
-
-}
-
 void ThreadAchievements::Set(SAchievements a_achievements, QLabel *a_labelTotalPersent, QTableWidget *a_tableWidgetAchievements, QLabel *a_labelTotalPersentCompare){
     _achievements=a_achievements;
     _LabelTotalPersent=a_labelTotalPersent;
@@ -52,37 +48,35 @@ bool ThreadAchievements::AddFriend(){
                                                                                                  QString::number(100.0*totalReach/(totalReach+totalNotReach)))));
         emit s_is_public(true,_col);
     }
-    emit s_finished();
+    emit s_finished(totalReach,totalNotReach);
     return true;
 }
 
 int ThreadAchievements::Fill(){
     int totalr=0;
     int totalnr=0;
-    int j=0;
-    for(int i=0;i<_achievements.GetCount();i++){
-        if(_achievements[i].GetDisplayname()!=""){
-            _TableWidgetAchievements->setItem(j,0,new QTableWidgetItem(_achievements[i].GetApiname()));
-            _TableWidgetAchievements->setItem(j,2,new QTableWidgetItem(_achievements[i].GetDisplayname()));
-            _TableWidgetAchievements->setItem(j,3,new QTableWidgetItem(_achievements[i].GetDescription()));
-            _TableWidgetAchievements->setItem(j,4,new QTableWidgetItem(_achievements[i].GetPercent()<10?"0"+QString::number(_achievements[i].GetPercent())+"%":QString::number(_achievements[i].GetPercent())+"%"));
-            if(_achievements[i].GetAchieved()==1){
-                _TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(tr("Получено %1").arg(_achievements[i].GetUnlocktime().toString("yyyy.MM.dd hh:mm"))));
+    int row=0;
+    for(auto &achievement:_achievements){
+        if(achievement.GetDisplayname()!=""){
+            _TableWidgetAchievements->setItem(row,c_tableColumnAppid,new QTableWidgetItem(achievement.GetApiname()));
+            _TableWidgetAchievements->setItem(row,c_tableColumnTitle,new QTableWidgetItem(achievement.GetDisplayname()));
+            _TableWidgetAchievements->setItem(row,c_tableColumnDescription,new QTableWidgetItem(achievement.GetDescription()));
+            _TableWidgetAchievements->setItem(row,c_tableColumnWorld,new QTableWidgetItem((achievement.GetPercent()<10?"0":"")+QString::number(achievement.GetPercent())+"%"));
+            if(achievement.GetAchieved()==1){
+                _TableWidgetAchievements->setItem(row,c_tableColumnMy,new QTableWidgetItem(tr("Получено %1").arg(achievement.GetUnlocktime().toString("yyyy.MM.dd hh:mm"))));
                 totalr++;
-                } else {
-                _TableWidgetAchievements->setItem(j,5,new QTableWidgetItem(tr("Не получено")));
+            } else {
+                _TableWidgetAchievements->setItem(row,c_tableColumnMy,new QTableWidgetItem(tr("Не получено")));
                 totalnr++;
-                }
-            _TableWidgetAchievements->item(j,2)->setTextAlignment(Qt::AlignCenter);
-            _TableWidgetAchievements->item(j,3)->setTextAlignment(Qt::AlignCenter);
-            _TableWidgetAchievements->item(j,4)->setTextAlignment(Qt::AlignCenter);
-            _TableWidgetAchievements->item(j,5)->setTextAlignment(Qt::AlignCenter);
-            emit s_progress(i,j);
-            j++;
+            }
+            _TableWidgetAchievements->item(row,c_tableColumnTitle)->setTextAlignment(Qt::AlignCenter);
+            _TableWidgetAchievements->item(row,c_tableColumnDescription)->setTextAlignment(Qt::AlignCenter);
+            _TableWidgetAchievements->item(row,c_tableColumnWorld)->setTextAlignment(Qt::AlignCenter);
+            _TableWidgetAchievements->item(row,c_tableColumnMy)->setTextAlignment(Qt::AlignCenter);
+            emit s_progress(row,row);
+            row++;
         }
     }
-    _LabelTotalPersent->setText(QString("%1/%2 = %3%").arg(QString::number(totalr),QString::number(totalr+totalnr),QString::number(100.0*totalr/(totalr+totalnr))));
-    _LabelTotalPersentCompare->setText(QString("%1/%2\n%3%").arg(QString::number(totalr),QString::number(totalr+totalnr),QString::number(100.0*totalr/(totalr+totalnr))));
-    emit s_finished();
+    emit s_finished(totalr,totalnr);
     return 1;
 }

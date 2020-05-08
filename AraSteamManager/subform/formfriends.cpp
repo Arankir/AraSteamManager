@@ -2,21 +2,21 @@
 #include "ui_formfriends.h"
 
 #define Constants {
-const int c_tableColumnID=0;
-const int c_tableColumnIcon=1;
-const int c_tableColumnName=2;
-const int c_tableColumnAdded=3;
-const int c_tableColumnStatus=4;
-const int c_tableColumnisPublic=5;
-const int c_tableColumnGoTo=6;
-const int c_tableColumnFavorite=7;
-const int c_tableColumnCount=6;
+constexpr int c_tableColumnID=0;
+constexpr int c_tableColumnIcon=1;
+constexpr int c_tableColumnName=2;
+constexpr int c_tableColumnAdded=3;
+constexpr int c_tableColumnStatus=4;
+constexpr int c_tableColumnisPublic=5;
+constexpr int c_tableColumnGoTo=6;
+constexpr int c_tableColumnFavorite=7;
+constexpr int c_tableColumnCount=6;
 
-const int c_filterName=0;
-const int c_filterStatus=1;
-const int c_filterPublic=2;
-const int c_filterFavorites=3;
-const int c_filterCount=4;
+constexpr int c_filterName=0;
+constexpr int c_filterStatus=1;
+constexpr int c_filterPublic=2;
+constexpr int c_filterFavorites=3;
+constexpr int c_filterCount=4;
 #define ConstantsEnd }
 
 #define Init {
@@ -69,7 +69,7 @@ void FormFriends::InitComponents(){
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
 #define IconsEnd }
     Threading loadTable(this);
-    loadTable.AddThreadFriends(ui->TableWidgetFriends,_profiles,_friends);
+    loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
 }
 void FormFriends::ProgressLoading(int a_progress,int a_row){
 //    QButtonWithData *button1 = new QButtonWithData(tr(" На профиль"));
@@ -135,7 +135,7 @@ void FormFriends::Retranslate(){
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnFavorite,new QTableWidgetItem(tr("Избранное")));
     FriendToUi();
     Threading loadTable(this);
-    loadTable.AddThreadFriends(ui->TableWidgetFriends,_profiles,_friends);
+    loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends,_profiles,_friends);
 }
 void FormFriends::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);

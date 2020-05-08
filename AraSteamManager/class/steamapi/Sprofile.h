@@ -120,6 +120,8 @@ public:
     QString GetError() {return _error;}
     int GetUnicIndex() {return _unicIndex;}
     int GetCount() {return _profile.size();}
+    QVector<SProfile>::iterator begin() {return _profile.begin();}
+    QVector<SProfile>::iterator end() {return _profile.end();}
     void Update(bool parallel);
     void Sort();
     void Clear();

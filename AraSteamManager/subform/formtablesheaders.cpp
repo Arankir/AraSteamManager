@@ -2,20 +2,20 @@
 #include "ui_formtablesheaders.h"
 
 #define Constants {
-const int c_filterName=0;
-const int c_filterReached=1;
-const int c_filterFavorite=2;
-const int c_filterUniqueValue=3;
-const int c_filterColumnCount=4;
-const int c_filterEndConstValues=4;
+constexpr int c_filterName=0;
+constexpr int c_filterReached=1;
+constexpr int c_filterFavorite=2;
+constexpr int c_filterUniqueValue=3;
+constexpr int c_filterColumnCount=4;
+constexpr int c_filterEndConstValues=4;
 
-const int c_tableAchievementColumnAppid=0;
-const int c_tableAchievementColumnIcon=1;
-const int c_tableAchievementColumnTitle=2;
-const int c_tableAchievementColumnDescription=3;
-const int c_tableAchievementColumnWorld=4;
-const int c_tableAchievementColumnReachedMy=5;
-const int c_tableAchievementColumnCount=6;
+constexpr int c_tableAchievementColumnAppid=0;
+constexpr int c_tableAchievementColumnIcon=1;
+constexpr int c_tableAchievementColumnTitle=2;
+constexpr int c_tableAchievementColumnDescription=3;
+constexpr int c_tableAchievementColumnWorld=4;
+constexpr int c_tableAchievementColumnReachedMy=5;
+constexpr int c_tableAchievementColumnCount=6;
 #define ConstantsEnd }
 
 //Добавить Retranslate()

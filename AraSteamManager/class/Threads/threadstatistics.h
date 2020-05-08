@@ -11,7 +11,7 @@ class ThreadStatistics : public QObject
 {
     Q_OBJECT
 public:
-    explicit ThreadStatistics(QObject *parent = nullptr);
+    explicit ThreadStatistics(SGames a_games, QString a_id, QObject *a_parent = nullptr):QObject(a_parent),_id(a_id),_games(a_games), _averagePercent(a_games.GetCount()){};
 
 signals:
     void s_finished(QVector<int> numof, QVector<QPair<QString,QString>> complete, QVector<QPair<QString,QString>> started, QVector<QPair<QString,QString>> notStarted,
@@ -20,22 +20,21 @@ signals:
 
 public slots:
     int Fill();
-    void Set(SGames games, QString id);
     void OnResultAchievements(SAchievementsPlayer ach);
 
 private:
     Settings _setting;
     QString _id;
-    QVector<QPair<QString,QString>> _complete;
-    QVector<QPair<QString,QString>> _started;
-    QVector<QPair<QString,QString>> _notStarted;
+    SGames _games;
     QVector<double> _averagePercent;
     QVector<int> _numof = {0,0,0};
     int _summcolumn=0;
-    SGames _games;
     QVector<int> _times ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     QVector<int> _months ={0,0,0,0,0,0,0,0,0,0,0,0};
     QVector<QPair<QString,int>> _years;
+    QVector<QPair<QString,QString>> _complete;
+    QVector<QPair<QString,QString>> _started;
+    QVector<QPair<QString,QString>> _notStarted;
 
     int _nownum=0;
     int _colgames=0;

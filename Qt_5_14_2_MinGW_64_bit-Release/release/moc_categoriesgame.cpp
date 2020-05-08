@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CategoriesGame_t {
-    QByteArrayData data[22];
-    char stringdata0[206];
+    QByteArrayData data[24];
+    char stringdata0[226];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,35 +33,38 @@ struct qt_meta_stringdata_CategoriesGame_t {
 static const qt_meta_stringdata_CategoriesGame_t qt_meta_stringdata_CategoriesGame = {
     {
 QT_MOC_LITERAL(0, 0, 14), // "CategoriesGame"
-QT_MOC_LITERAL(1, 15, 9), // "GetTitles"
-QT_MOC_LITERAL(2, 25, 14), // "QList<QString>"
-QT_MOC_LITERAL(3, 40, 0), // ""
-QT_MOC_LITERAL(4, 41, 8), // "GetTitle"
-QT_MOC_LITERAL(5, 50, 5), // "index"
-QT_MOC_LITERAL(6, 56, 13), // "GetIsNoValues"
-QT_MOC_LITERAL(7, 70, 9), // "GetValues"
-QT_MOC_LITERAL(8, 80, 8), // "category"
-QT_MOC_LITERAL(9, 89, 5), // "value"
-QT_MOC_LITERAL(10, 95, 11), // "GetNoValues"
-QT_MOC_LITERAL(11, 107, 7), // "GetGame"
-QT_MOC_LITERAL(12, 115, 8), // "GetCount"
-QT_MOC_LITERAL(13, 124, 9), // "GetGameID"
-QT_MOC_LITERAL(14, 134, 14), // "DeleteCategory"
-QT_MOC_LITERAL(15, 149, 9), // "DeleteAll"
-QT_MOC_LITERAL(16, 159, 14), // "ChangeCategory"
-QT_MOC_LITERAL(17, 174, 11), // "newCategory"
-QT_MOC_LITERAL(18, 186, 3), // "Set"
-QT_MOC_LITERAL(19, 190, 5), // "SGame"
-QT_MOC_LITERAL(20, 196, 4), // "game"
-QT_MOC_LITERAL(21, 201, 4) // "Save"
+QT_MOC_LITERAL(1, 15, 8), // "GetTitle"
+QT_MOC_LITERAL(2, 24, 0), // ""
+QT_MOC_LITERAL(3, 25, 7), // "a_index"
+QT_MOC_LITERAL(4, 33, 13), // "GetIsNoValues"
+QT_MOC_LITERAL(5, 47, 9), // "GetValues"
+QT_MOC_LITERAL(6, 57, 7), // "a_value"
+QT_MOC_LITERAL(7, 65, 7), // "GetGame"
+QT_MOC_LITERAL(8, 73, 8), // "GetCount"
+QT_MOC_LITERAL(9, 82, 9), // "GetGameID"
+QT_MOC_LITERAL(10, 92, 9), // "GetTitles"
+QT_MOC_LITERAL(11, 102, 14), // "QList<QString>"
+QT_MOC_LITERAL(12, 117, 8), // "category"
+QT_MOC_LITERAL(13, 126, 5), // "value"
+QT_MOC_LITERAL(14, 132, 11), // "GetNoValues"
+QT_MOC_LITERAL(15, 144, 14), // "DeleteCategory"
+QT_MOC_LITERAL(16, 159, 5), // "index"
+QT_MOC_LITERAL(17, 165, 9), // "DeleteAll"
+QT_MOC_LITERAL(18, 175, 14), // "ChangeCategory"
+QT_MOC_LITERAL(19, 190, 11), // "newCategory"
+QT_MOC_LITERAL(20, 202, 7), // "SetGame"
+QT_MOC_LITERAL(21, 210, 5), // "SGame"
+QT_MOC_LITERAL(22, 216, 4), // "game"
+QT_MOC_LITERAL(23, 221, 4) // "Save"
 
     },
-    "CategoriesGame\0GetTitles\0QList<QString>\0"
-    "\0GetTitle\0index\0GetIsNoValues\0GetValues\0"
-    "category\0value\0GetNoValues\0GetGame\0"
-    "GetCount\0GetGameID\0DeleteCategory\0"
-    "DeleteAll\0ChangeCategory\0newCategory\0"
-    "Set\0SGame\0game\0Save"
+    "CategoriesGame\0GetTitle\0\0a_index\0"
+    "GetIsNoValues\0GetValues\0a_value\0GetGame\0"
+    "GetCount\0GetGameID\0GetTitles\0"
+    "QList<QString>\0category\0value\0GetNoValues\0"
+    "DeleteCategory\0index\0DeleteAll\0"
+    "ChangeCategory\0newCategory\0SetGame\0"
+    "SGame\0game\0Save"
 };
 #undef QT_MOC_LITERAL
 
@@ -79,35 +82,35 @@ static const uint qt_meta_data_CategoriesGame[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   84,    3, 0x0a /* Public */,
-       4,    1,   85,    3, 0x0a /* Public */,
-       6,    1,   88,    3, 0x0a /* Public */,
-       7,    2,   91,    3, 0x0a /* Public */,
-       7,    1,   96,    3, 0x0a /* Public */,
-      10,    1,   99,    3, 0x0a /* Public */,
-      11,    0,  102,    3, 0x0a /* Public */,
-      12,    0,  103,    3, 0x0a /* Public */,
-      13,    0,  104,    3, 0x0a /* Public */,
-      14,    1,  105,    3, 0x0a /* Public */,
-      15,    0,  108,    3, 0x0a /* Public */,
-      16,    2,  109,    3, 0x0a /* Public */,
-      18,    1,  114,    3, 0x0a /* Public */,
-      21,    0,  117,    3, 0x0a /* Public */,
+       1,    1,   84,    2, 0x0a /* Public */,
+       4,    1,   87,    2, 0x0a /* Public */,
+       5,    1,   90,    2, 0x0a /* Public */,
+       7,    0,   93,    2, 0x0a /* Public */,
+       8,    0,   94,    2, 0x0a /* Public */,
+       9,    0,   95,    2, 0x0a /* Public */,
+      10,    0,   96,    2, 0x0a /* Public */,
+       5,    2,   97,    2, 0x0a /* Public */,
+      14,    1,  102,    2, 0x0a /* Public */,
+      15,    1,  105,    2, 0x0a /* Public */,
+      17,    0,  108,    2, 0x0a /* Public */,
+      18,    2,  109,    2, 0x0a /* Public */,
+      20,    1,  114,    2, 0x0a /* Public */,
+      23,    0,  117,    2, 0x0a /* Public */,
 
  // slots: parameters
-    0x80000000 | 2,
-    QMetaType::QString, QMetaType::Int,    5,
-    QMetaType::Int, QMetaType::Int,    5,
-    0x80000000 | 2, QMetaType::Int, QMetaType::Int,    8,    9,
-    QMetaType::QJsonArray, QMetaType::Int,    9,
-    0x80000000 | 2, QMetaType::Int,    8,
+    QMetaType::QString, QMetaType::Int,    3,
+    QMetaType::Int, QMetaType::Int,    3,
+    QMetaType::QJsonArray, QMetaType::Int,    6,
     QMetaType::QString,
     QMetaType::Int,
     QMetaType::Int,
-    QMetaType::Void, QMetaType::Int,    5,
+    0x80000000 | 11,
+    0x80000000 | 11, QMetaType::Int, QMetaType::Int,   12,   13,
+    0x80000000 | 11, QMetaType::Int,   12,
+    QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::QJsonObject,    8,   17,
-    QMetaType::Void, 0x80000000 | 19,   20,
+    QMetaType::Void, QMetaType::Int, QMetaType::QJsonObject,   12,   19,
+    QMetaType::Void, 0x80000000 | 21,   22,
     QMetaType::Void,
 
        0        // eod
@@ -119,28 +122,28 @@ void CategoriesGame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         auto *_t = static_cast<CategoriesGame *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: { QList<QString> _r = _t->GetTitles();
-            if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
-        case 1: { QString _r = _t->GetTitle((*reinterpret_cast< int(*)>(_a[1])));
+        case 0: { QString _r = _t->GetTitle((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 2: { int _r = _t->GetIsNoValues((*reinterpret_cast< int(*)>(_a[1])));
+        case 1: { int _r = _t->GetIsNoValues((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QList<QString> _r = _t->GetValues((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
-            if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
-        case 4: { QJsonArray _r = _t->GetValues((*reinterpret_cast< int(*)>(_a[1])));
+        case 2: { QJsonArray _r = _t->GetValues((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QJsonArray*>(_a[0]) = std::move(_r); }  break;
-        case 5: { QList<QString> _r = _t->GetNoValues((*reinterpret_cast< int(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
-        case 6: { QString _r = _t->GetGame();
+        case 3: { QString _r = _t->GetGame();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 7: { int _r = _t->GetCount();
+        case 4: { int _r = _t->GetCount();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 8: { int _r = _t->GetGameID();
+        case 5: { int _r = _t->GetGameID();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 6: { QList<QString> _r = _t->GetTitles();
+            if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
+        case 7: { QList<QString> _r = _t->GetValues((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
+        case 8: { QList<QString> _r = _t->GetNoValues((*reinterpret_cast< int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
         case 9: _t->DeleteCategory((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 10: _t->DeleteAll(); break;
         case 11: _t->ChangeCategory((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QJsonObject(*)>(_a[2]))); break;
-        case 12: _t->Set((*reinterpret_cast< SGame(*)>(_a[1]))); break;
+        case 12: _t->SetGame((*reinterpret_cast< SGame(*)>(_a[1]))); break;
         case 13: _t->Save(); break;
         default: ;
         }

@@ -2,12 +2,12 @@
 #include "ui_formgames.h"
 
 #define Constants {
-const int c_tableColumnAppid=0;
-const int c_tableColumnIndex=1;
-const int c_tableColumnIcon=2;
-const int c_tableColumnName=3;
-const int c_tableColumnProgress=4;
-const int c_tableColumnCount=5;
+constexpr int c_tableColumnAppid=0;
+constexpr int c_tableColumnIndex=1;
+constexpr int c_tableColumnIcon=2;
+constexpr int c_tableColumnName=3;
+constexpr int c_tableColumnProgress=4;
+constexpr int c_tableColumnCount=5;
 #define ConstantsEnd }
 
 #define Init {
@@ -75,7 +75,7 @@ void FormGames::InitComponents(){
     ui->ButtonChangeGroup->setIcon(QIcon("://"+_theme+"/change.png"));
 #define IconsEnd }
     Threading loadTable(this);
-    loadTable.AddThreadGames(ui->TableWidgetGames,_games);
+    loadTable.AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
 }
 void FormGames::ProgressLoading(int a_progress,int a_row){
     ui->ProgressBarLoading->setValue(a_progress);

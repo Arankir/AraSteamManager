@@ -64,7 +64,7 @@ signals:
 
 public slots:
     void ProgressLoading(int p,int row);
-    void OnFinish();
+    void OnFinish(int reached, int notReached);
     QString GetProfile() {return _id;}
     SGame GetGame() {return _game;}
     void ButtonUpdate_Clicked();

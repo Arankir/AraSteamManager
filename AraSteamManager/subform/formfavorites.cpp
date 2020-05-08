@@ -1,14 +1,14 @@
 #include "formfavorites.h"
 #include "ui_formfavorites.h"
 #define Constants {
-const int c_tableFriendsColumnID=0;
-const int c_tableFriendsColumnIcon=1;
-const int c_tableFriendsColumnName=2;
-const int c_tableFriendsColumnStatus=3;
-const int c_tableFriendsColumnisPublic=4;
-const int c_tableFriendsColumnGoTo=5;
-const int c_tableFriendsColumnFavorite=6;
-const int c_tableFriendsColumnCount=7;
+constexpr int c_tableFriendsColumnID=0;
+constexpr int c_tableFriendsColumnIcon=1;
+constexpr int c_tableFriendsColumnName=2;
+constexpr int c_tableFriendsColumnStatus=3;
+constexpr int c_tableFriendsColumnisPublic=4;
+constexpr int c_tableFriendsColumnGoTo=5;
+constexpr int c_tableFriendsColumnFavorite=6;
+constexpr int c_tableFriendsColumnCount=7;
 
 //const int c_filterName=0;
 //const int c_filterStatus=1;

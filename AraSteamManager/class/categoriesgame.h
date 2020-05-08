@@ -22,22 +22,26 @@ public:
 signals:
 
 public slots:
-    QList<QString> GetTitles();
-    QString GetTitle(int index);
-    int GetIsNoValues(int index);
-    QList<QString> GetValues(int category, int value);
-    QJsonArray GetValues(int value);
-    QList<QString> GetNoValues(int category);
-    QString GetGame();
+    QString GetTitle(int a_index) {return _categories.value("Categories").toArray().at(a_index).toObject().value("Title").toString();}
+    int GetIsNoValues(int a_index) {return _categories.value("Categories").toArray().at(a_index).toObject().value("IsNoValues").toInt();}
+    QJsonArray GetValues(int a_value) {return _categories.value("Categories").toArray().at(a_value).toObject().value("Values").toArray();}
+    QString GetGame() {return _categories.value("Game").toString();}
     int GetCount() {return _categories.value("Categories").toArray().size();}
-    int GetGameID();
+    int GetGameID() {return _categories.value("GameID").toInt();}
+    QList<QString> GetTitles();
+    QList<QString> GetValues(int category, int value);
+    QList<QString> GetNoValues(int category);
     void DeleteCategory(int index);
     void DeleteAll();
     void ChangeCategory(int category, QJsonObject newCategory);
-    void Set(SGame game);
+    void SetGame(SGame game);
     void Save();
 
 private:
+    QFileInfoList GetFiles(QString path);
+    void ConvertOldCategories();
+    void LoadCategories();
+
     QJsonObject _categories;
     Settings _setting;
     SGame _game;
