@@ -217,7 +217,7 @@ void FormFriends::ButtonFriendFavorite_Clicked(){
     QJsonObject newValue;
     newValue["id"]=_profiles[_currentFriendIndex].GetSteamid();
     newValue["name"]=_profiles[_currentFriendIndex].GetPersonaname();
-    newValue["added"]=_friends[_currentFriendIndex].GetFriend_since().toString("yyyy.MM.dd hh:mm:ss");
+    newValue["added"]=_friends[_currentFriendIndex]._friend_since.toString("yyyy.MM.dd hh:mm:ss");
     if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
     } else {

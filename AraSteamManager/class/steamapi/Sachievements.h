@@ -17,79 +17,68 @@
 #include <class/statusvalue.h>
 #include <QDebug>
 
-class SAchievementGlobal : public QObject
-{
+class SAchievementGlobal : public QObject{
     Q_OBJECT
 public:
-    explicit SAchievementGlobal(QJsonObject ObjAchievement, QObject *parent = nullptr);
-    SAchievementGlobal(QObject *parent = nullptr);
-    void Set(QJsonObject ObjAchievement);
-    QString GetApiname() {return _apiName;}
-    int GetDefaultvalue() {return _defaultValue;}
-    QString GetDisplayname() {return _displayName;}
-    int GetHidden() {return _hidden;}
-    QString GetDescription() {return _description;}
-    QString GetIcon() {return _icon;}
-    QString GetIcongray() {return _iconGray;}
-    SAchievementGlobal(const SAchievementGlobal &);
-    SAchievementGlobal & operator=(const SAchievementGlobal & achievement);
+    explicit SAchievementGlobal(QJsonObject a_achievement, QObject *a_parent = nullptr) : QObject(a_parent),_apiName(a_achievement.value("name").toString()),
+        _defaultValue(a_achievement.value("defaultvalue").toInt()),_displayName(a_achievement.value("displayName").toString()),
+        _hidden(a_achievement.value("hidden").toInt()),_description(a_achievement.value("description").toString()),
+        _icon(a_achievement.value("icon").toString()),_iconGray(a_achievement.value("icongray").toString()){};
+    const QString _apiName;
+    const int _defaultValue;
+    const QString _displayName;
+    const int _hidden;
+    const QString _description;
+    const QString _icon;
+    const QString _iconGray;
+    SAchievementGlobal(const SAchievementGlobal &a_achievement):QObject(a_achievement.parent()), _apiName(a_achievement._apiName), _defaultValue(a_achievement._defaultValue),
+        _displayName(a_achievement._displayName), _hidden(a_achievement._hidden), _description(a_achievement._description), _icon(a_achievement._icon), _iconGray(a_achievement._iconGray){};
 
-signals:
-
-public slots:
-
-private:
-    QString _apiName="";
-    int _defaultValue=0;
-    QString _displayName="";
-    int _hidden=0;
-    QString _description="";
-    QString _icon="";
-    QString _iconGray="";
 };
-
-class SAchievementPercentage : public QObject
-{
+class SAchievementPercentage : public QObject{
     Q_OBJECT
 public:
-    explicit SAchievementPercentage(QJsonObject ObjAchievement, QObject *parent = nullptr);
-    SAchievementPercentage(QObject *parent = nullptr);
-    void Set(QJsonObject ObjAchievement);
-    QString GetApiname() {return _apiName;}
-    double GetPercent() {return _percent;}
-    SAchievementPercentage(const SAchievementPercentage & achievement);
-    SAchievementPercentage & operator=(const SAchievementPercentage & achievement);
+    explicit SAchievementPercentage(QJsonObject a_achievement, QObject *parent = nullptr) : QObject(parent),_apiName(a_achievement.value("name").toString()),_percent(a_achievement.value("percent").toDouble()){};
+    const QString _apiName;
+    const double _percent;
+    SAchievementPercentage(const SAchievementPercentage &a_achievement): QObject(a_achievement.parent()),_apiName(a_achievement._apiName), _percent(a_achievement._percent){};
 
-signals:
-
-public slots:
-
-private:
-    QString _apiName="";
-    double _percent=0.0;
 };
-
-class SAchievementPlayer : public QObject
-{
+class SAchievementPlayer : public QObject{
     Q_OBJECT
 public:
-    explicit SAchievementPlayer(QJsonObject ObjAchievement, QObject *parent = nullptr);
-    SAchievementPlayer(QObject *parent = nullptr);
-    void Set(QJsonObject ObjAchievement);
-    QString GetApiname() {return _apiName;}
-    int GetAchieved() {return _achieved;}
-    QDateTime GetUnlocktime() {return _unlockTime;}
-    SAchievementPlayer(const SAchievementPlayer &);
-    SAchievementPlayer & operator=(const SAchievementPlayer & achievement);
+    explicit SAchievementPlayer(QJsonObject a_achievement, QObject *parent = nullptr): QObject(parent),_apiName(a_achievement.value("apiname").toString()),
+        _achieved(a_achievement.value("achieved").toInt()),_unlockTime(QDateTime::fromSecsSinceEpoch(a_achievement.value("unlocktime").toInt(),Qt::LocalTime)){};
+    const QString _apiName;
+    const int _achieved;
+    const QDateTime _unlockTime;
+    SAchievementPlayer(const SAchievementPlayer &a_achievement): QObject(a_achievement.parent()),_apiName(a_achievement._apiName),_achieved(a_achievement._achieved),
+        _unlockTime(a_achievement._unlockTime){};
 
-signals:
+};
+class SAchievement : public QObject{
+    Q_OBJECT
+public:
+    explicit SAchievement(SAchievementGlobal a_global, SAchievementPlayer a_player, SAchievementPercentage a_percent, QObject *parent = nullptr): QObject(parent),
+        _apiName(a_global._apiName), _defaultValue(a_global._defaultValue), _displayName(a_global._displayName), _hidden(a_global._hidden),
+        _description(a_global._description), _icon(a_global._icon), _iconGray(a_global._iconGray), _achieved(a_player._achieved),
+        _unlockTime(a_player._unlockTime), _percent(a_percent._percent){};
+    const QString _apiName;
+    const int _defaultValue;
+    const QString _displayName;
+    const int _hidden;
+    const QString _description;
+    const QString _icon;
+    const QString _iconGray;
+    const int _achieved;
+    const QDateTime _unlockTime;
+    const double _percent;
+    SAchievement(const SAchievement & a_achievement): QObject(a_achievement.parent()),
+        _apiName(a_achievement._apiName), _defaultValue(a_achievement._defaultValue), _displayName(a_achievement._displayName), _hidden(a_achievement._hidden),
+        _description(a_achievement._description), _icon(a_achievement._icon), _iconGray(a_achievement._iconGray), _achieved(a_achievement._achieved),
+        _unlockTime(a_achievement._unlockTime), _percent(a_achievement._percent){};
+    const bool &operator<(const SAchievement & achievement);
 
-public slots:
-
-private:
-    QString _apiName="";
-    int _achieved=0;
-    QDateTime _unlockTime=QDateTime::fromSecsSinceEpoch(0,Qt::LocalTime);
 };
 
 class SAchievementsGlobal : public QObject
@@ -98,24 +87,25 @@ class SAchievementsGlobal : public QObject
 public:
     explicit SAchievementsGlobal(QString appid, bool parallel = true, QObject *parent = nullptr);
     SAchievementsGlobal(QJsonDocument DocAchievements, QObject *parent = nullptr);
-    SAchievementsGlobal(QObject *parent = nullptr);
+    SAchievementsGlobal(QObject *parent = nullptr): QObject(parent),_manager(new QNetworkAccessManager()){};
     ~SAchievementsGlobal();
     void Set(QString appid);
     void Set(QJsonDocument DocAchievements);
-    void Delete(int index) { _achievements.remove(index);}
+    void Delete(int index) { _achievements.removeAt(index);}
     QString GetAppid() {return _appid;}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
     QString GetGamename() {return _gameName;}
     QString GetGameversion() {return _gameVersion;}
     int GetCount() {return _achievements.size();}
-    QVector<SAchievementGlobal>::iterator begin() {return _achievements.begin();}
-    QVector<SAchievementGlobal>::iterator end() {return _achievements.end();}
+    QList<SAchievementGlobal>::iterator begin() {return _achievements.begin();}
+    QList<SAchievementGlobal>::iterator end() {return _achievements.end();}
     void Update();
     void Clear();
-    SAchievementsGlobal(const SAchievementsGlobal &);
+    SAchievementsGlobal(const SAchievementsGlobal &achievements):QObject(achievements.parent()), _manager(new QNetworkAccessManager), _achievements(achievements._achievements),
+        _status(achievements._status), _error(achievements._error), _appid(achievements._appid), _gameName(achievements._gameName), _gameVersion(achievements._gameVersion){};
     SAchievementsGlobal &operator=(const SAchievementsGlobal & friends);
-    SAchievementGlobal &operator[](const int &Aindex);
+    SAchievementGlobal &operator[](const int &a_index) {return _achievements[a_index];}
 
 signals:
     void s_finished(SAchievementsGlobal);
@@ -127,36 +117,36 @@ public slots:
 private:
     QNetworkAccessManager *_manager;
     Settings _setting;
-    QVector<SAchievementGlobal> _achievements;
+    QList<SAchievementGlobal> _achievements;
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _appid="";
     QString _gameName="";
     QString _gameVersion="";
 };
-
 class SAchievementsPercentage : public QObject
 {
     Q_OBJECT
 public:
     explicit SAchievementsPercentage(QString appid, bool parallel = true, QObject *parent = nullptr);
     SAchievementsPercentage(QJsonDocument DocAchievements, QObject *parent = nullptr);
-    SAchievementsPercentage(QObject *parent = nullptr);
+    SAchievementsPercentage(QObject *parent = nullptr): QObject(parent),_manager(new QNetworkAccessManager()){};
     ~SAchievementsPercentage();
     void Set(QString appid);
     void Set(QJsonDocument DocAchievements);
-    void Delete(int index) { _achievements.remove(index);}
+    void Delete(int index) { _achievements.removeAt(index);}
     QString GetAppid() {return _appid;}
     int GetCount() {return _achievements.size();}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
-    QVector<SAchievementPercentage>::iterator begin() {return _achievements.begin();}
-    QVector<SAchievementPercentage>::iterator end() {return _achievements.end();}
+    QList<SAchievementPercentage>::iterator begin() {return _achievements.begin();}
+    QList<SAchievementPercentage>::iterator end() {return _achievements.end();}
     void Update();
     void Clear();
-    SAchievementsPercentage(const SAchievementsPercentage &);
+    SAchievementsPercentage(const SAchievementsPercentage &achievements): QObject(achievements.parent()),_manager(new QNetworkAccessManager()), _achievements(achievements._achievements),
+        _error(achievements._error), _status(achievements._status), _appid(achievements._appid){};
     SAchievementsPercentage &operator=(const SAchievementsPercentage & friends);
-    SAchievementPercentage &operator[](const int &Aindex);
+    SAchievementPercentage &operator[](const int &a_index) {return _achievements[a_index];}
 
 signals:
     void s_finished(SAchievementsPercentage);
@@ -168,35 +158,36 @@ public slots:
 private:
     QNetworkAccessManager *_manager;
     Settings _setting;
-    QVector<SAchievementPercentage> _achievements;
+    QList<SAchievementPercentage> _achievements;
     QString _error="";
     StatusValue _status=StatusValue::none;
     QString _appid="";
 };
-
 class SAchievementsPlayer : public QObject
 {
     Q_OBJECT
 public:
     explicit SAchievementsPlayer(QString appid, QString id, bool parallel = true, QObject *parent = nullptr);
     SAchievementsPlayer(QJsonDocument DocAchievements, QObject *parent = nullptr);
-    SAchievementsPlayer(QObject *parent = nullptr);
+    SAchievementsPlayer(QObject *parent = nullptr): QObject(parent),_manager(new QNetworkAccessManager()){};
     ~SAchievementsPlayer();
     void Set(QString appid, QString id);
     void Set(QJsonDocument DocAchievements);
-    void Delete(int AIndex) { _achievements.remove(AIndex);}
+    void Delete(int AIndex) { _achievements.removeAt(AIndex);}
     QString GetAppid() {return _appid;}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
     QString GetGamename() {return _gameName;}
     int GetCount() {return _achievements.size();}
-    QVector<SAchievementPlayer>::iterator begin() {return _achievements.begin();}
-    QVector<SAchievementPlayer>::iterator end() {return _achievements.end();}
+    QList<SAchievementPlayer>::iterator begin() {return _achievements.begin();}
+    QList<SAchievementPlayer>::iterator end() {return _achievements.end();}
     void Update();
     void Clear();
-    SAchievementsPlayer(const SAchievementsPlayer &);
+    SAchievementsPlayer(const SAchievementsPlayer &achievements): QObject(achievements.parent()), _index(achievements._index), _manager(new QNetworkAccessManager()),
+        _achievements(achievements._achievements), _status(achievements._status), _error(achievements._error), _id(achievements._id), _appid(achievements._appid),
+        _gameName(achievements._gameName){};
     SAchievementsPlayer &operator=(const SAchievementsPlayer & friends);
-    SAchievementPlayer &operator[](const int &Aindex);
+    SAchievementPlayer &operator[](const int &a_index) {return _achievements[a_index];}
 
     int _index=0;
 
@@ -210,7 +201,7 @@ public slots:
 private:
     QNetworkAccessManager *_manager;
     Settings _setting;
-    QVector<SAchievementPlayer> _achievements;
+    QList<SAchievementPlayer> _achievements;
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _id="";
@@ -218,70 +209,19 @@ private:
     QString _gameName="";
 };
 
-class SAchievement : public QObject
-{
-    Q_OBJECT
-public:
-    explicit SAchievement(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent, QObject *parent = nullptr);
-    SAchievement(QObject *parent = nullptr);
-    void Set(SAchievementGlobal Global, SAchievementPlayer Player, SAchievementPercentage Percent);
-    void SetGlobal(SAchievementGlobal Global);
-    void SetPlayer(SAchievementPlayer Player);
-    void SetPercent(SAchievementPercentage Percent);
-    QString GetApiname() {return _apiName;}
-    int GetDefaultvalue() {return _defaultValue;}
-    QString GetDisplayname() {return _displayName;}
-    int GetHidden() {return _hidden;}
-    QString GetDescription() {return _description;}
-    QString GetIcon() {return _icon;}
-    QString GetIcongray() {return _iconGray;}
-    int GetAchieved() {return _achieved;}
-    QDateTime GetUnlocktime() {return _unlockTime;}
-    StatusValue GetStatusGlobal() {return _statusGlobal;}
-    StatusValue GetStatusPlayer() {return _statusPlayer;}
-    QString GetErrorGlobal() {return _errorGlobal;}
-    QString GetErrorPlayer() {return _errorPlayer;}
-    double GetPercent() {return _percent;}
-    SAchievement(const SAchievement &);
-    SAchievement &operator=(const SAchievement & achievement);
-    const bool &operator<(const SAchievement & achievement);
-
-signals:
-
-public slots:
-
-private:
-    QString _apiName="";
-    int _defaultValue=0;
-    QString _displayName="";
-    int _hidden=0;
-    QString _description="";
-    QString _icon="";
-    QString _iconGray="";
-    int _achieved=0;
-    QDateTime _unlockTime=QDateTime::fromSecsSinceEpoch(0,Qt::LocalTime);
-    double _percent=0.0;
-    StatusValue _statusGlobal=StatusValue::none;
-    StatusValue _statusPlayer=StatusValue::none;
-    StatusValue _statusPercent=StatusValue::none;
-    QString _errorGlobal="";
-    QString _errorPlayer="";
-    QString _errorPercent="";
-};
-
 class SAchievements : public QObject
 {
     Q_OBJECT
 public:
     explicit SAchievements(QString appid, QString id, QObject *parent = nullptr);
-    SAchievements(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent, QObject *parent = nullptr);
-    SAchievements(SAchievementsGlobal Global, QObject *parent = nullptr);
-    SAchievements(SAchievementsPlayer Player, QObject *parent = nullptr);
-    SAchievements(SAchievementsPercentage Percent, QObject *parent = nullptr);
-    SAchievements(QObject *parent = nullptr);
+    SAchievements(SAchievementsGlobal &a_global, SAchievementsPlayer &Player, SAchievementsPercentage &Percent, QObject *parent = nullptr);
+    SAchievements(SAchievementsGlobal &a_global, QObject *parent = nullptr): QObject(parent),_global(a_global),_statusGlobal(StatusValue::success){};
+    SAchievements(SAchievementsPlayer &a_player, QObject *parent = nullptr): QObject(parent),_player(a_player),_statusPlayer(StatusValue::success){};
+    SAchievements(SAchievementsPercentage a_percent, QObject *parent = nullptr): QObject(parent),_percent(a_percent),_statusPercent(StatusValue::success){};
+    SAchievements(QObject *parent = nullptr): QObject(parent){};
     ~SAchievements() {};
     void Set(QString appid, QString id);
-    void Set(SAchievementsGlobal Global, SAchievementsPlayer Player, SAchievementsPercentage Percent);
+    void Set(SAchievementsGlobal &Global, SAchievementsPlayer &Player, SAchievementsPercentage &Percent);
     void SetFinish();
     StatusValue GetStatusGlobal() {return _statusGlobal;}
     StatusValue GetStatusPlayer() {return _statusPlayer;}
@@ -295,14 +235,17 @@ public:
     QString GetGamename() {return _gameName;}
     QString GetGameversion() {return _gameVersion;}
     int GetCount() {return _finish.size();}
-    QVector<SAchievement>::iterator begin() {return _finish.begin();}
-    QVector<SAchievement>::iterator end() {return _finish.end();}
+    QList<SAchievement>::iterator begin() {return _finish.begin();}
+    QList<SAchievement>::iterator end() {return _finish.end();}
     void Update();
     void Clear();
     void Sort();
-    SAchievements(const SAchievements &);
+    SAchievements(const SAchievements &achievements): QObject(achievements.parent()), _id(achievements._id), _appid(achievements._appid), _global(achievements._global),
+        _player(achievements._player), _percent(achievements._percent), _finish(achievements._finish), _statusGlobal(achievements._statusGlobal), _statusPlayer(achievements._statusPlayer),
+        _statusPercent(achievements._statusPercent), _statusFinish(achievements._statusFinish), _errorGlobal(achievements._errorGlobal), _errorPlayer(achievements._errorPlayer),
+        _errorPercent(achievements._errorPercent), _errorFinish(achievements._errorFinish), _gameName(achievements._gameName), _gameVersion(achievements._gameVersion){};
     SAchievements &operator=(const SAchievements & friends);
-    SAchievement &operator[](const int &Aindex);
+    SAchievement &operator[](const int &a_index) {return _finish[a_index];}
 
     QString _id="";
     QString _appid="";
@@ -320,7 +263,7 @@ private:
     SAchievementsGlobal _global;
     SAchievementsPlayer _player;
     SAchievementsPercentage _percent;
-    QVector<SAchievement> _finish;
+    QList<SAchievement> _finish;
     StatusValue _statusGlobal=StatusValue::none;
     StatusValue _statusPlayer=StatusValue::none;
     StatusValue _statusPercent=StatusValue::none;

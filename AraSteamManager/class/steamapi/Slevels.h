@@ -21,7 +21,7 @@ class SLevels : public QObject
 public:
     explicit SLevels(QString id, QObject *parent = nullptr);
     SLevels(QJsonDocument DocLevels, QObject *parent = nullptr);
-    SLevels(QObject *parent = nullptr);
+    SLevels(QObject *parent = nullptr): QObject(parent), _manager(new QNetworkAccessManager()), _status(StatusValue::none){};
     ~SLevels();
     void Set(QString id);
     void Set(QJsonDocument DocLevel);
@@ -38,6 +38,8 @@ public slots:
     //void Load(QNetworkReply *Reply);
 
 private:
+    void Load();
+
     QNetworkAccessManager *_manager;
     Settings _setting;
     QString _steamid;//"76561198065018572"

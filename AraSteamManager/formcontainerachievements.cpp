@@ -20,19 +20,19 @@ FormContainerAchievements::~FormContainerAchievements(){
 
 void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QString a_ids, SGame a_game, int a_num){
     for (int i=0;i<ui->TabWidgetAchievements->count();i++) {
-        if((static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetGame().GetAppid()==a_game.GetAppid())&&(static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetProfile()==a_ids)){
+        if((static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetGameAppID()==a_game._appID)&&(static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetProfile()==a_ids)){
             static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->ButtonUpdate_Clicked();
             ui->TabWidgetAchievements->setCurrentIndex(i);
             return;
         }
     }
     FormAchievements *newFormAchievements = new FormAchievements(a_pl,a_ids,a_game,a_num,this);
-    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements,"  "+a_game.GetName()+"  ");
+    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements,"  "+a_game._name+"  ");
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
-    QString filePath = _setting._pathImagesIconGames+a_game.GetImg_icon_url()+".jpg";
-    QString urlPath = "http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(a_game.GetAppid())+"/"+a_game.GetImg_icon_url()+".jpg";
+    QString filePath = _setting._pathImagesIconGames+a_game._img_icon_url+".jpg";
+    QString urlPath = "http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(a_game._appID)+"/"+a_game._img_icon_url+".jpg";
     if(!QFile::exists(filePath)){
-        if(a_game.GetImg_icon_url()!=""){
+        if(a_game._img_icon_url!=""){
             RequestImage *tabIcon = new RequestImage(urlPath,filePath,true,this);
             tabIcon->SetIndex(tabIndex);
             connect(tabIcon,&RequestImage::s_loadComplete,this,&FormContainerAchievements::OnLoadImage);

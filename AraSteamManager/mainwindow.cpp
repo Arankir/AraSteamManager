@@ -15,7 +15,7 @@ constexpr int c_formsSettings=5;
 #define ConstantsEnd }
 
 #define Init {
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow){
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), _games(this){
     ui->setupUi(this);
     switch(_setting.GetTheme()){
         case 1:

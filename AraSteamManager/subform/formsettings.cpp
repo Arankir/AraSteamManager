@@ -190,21 +190,21 @@ void FormSettings::RadioButtonHiddenGames_Clicked(){
     if(indexHiddenGame!=0){
         SGames games(_hiddenGames[indexHiddenGame].first,true,true,false);
         for (int i=0;i<games.GetCount();i++) {
-            if(_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i].GetAppid()))>-1){
-                int setTo=_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i].GetAppid()));
-                QString path = _setting._pathImagesIconGames+games[i].GetImg_icon_url()+".jpg";
+            if(_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i]._appID))>-1){
+                int setTo=_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i]._appID));
+                QString path = _setting._pathImagesIconGames+games[i]._img_icon_url+".jpg";
                 QLabel *iconGame = new QLabel;
                 iconGame->setBaseSize(QSize(32,32));
                 ui->TableWidgetGames->setCellWidget(setTo,0,iconGame);
                 if(!QFile::exists(path)){
-                    if(games[i].GetImg_icon_url()!=""){
+                    if(games[i]._img_icon_url!=""){
                         new RequestImage(iconGame,"http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                        QString::number(games[i].GetAppid())+"/"+games[i].GetImg_icon_url()+".jpg",path,true,this);
+                                        QString::number(games[i]._appID)+"/"+games[i]._img_icon_url+".jpg",path,true,this);
                         }
                     } else {
                     iconGame->setPixmap(QPixmap(path));
                     }
-                ui->TableWidgetGames->setItem(setTo,1,new QTableWidgetItem(games[i].GetName()));
+                ui->TableWidgetGames->setItem(setTo,1,new QTableWidgetItem(games[i]._name));
                 ui->TableWidgetGames->setRowHeight(setTo,33);
 
                 QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
@@ -218,9 +218,9 @@ void FormSettings::RadioButtonHiddenGames_Clicked(){
                 QButtonWithData *button3 = new QButtonWithData("");
                 button3->setIcon(QIcon("://"+_theme+"/hide.png"));
                 button3->setMinimumSize(QSize(25,25));
-                button3->setObjectName("ButtonHide"+QString::number(indexHiddenGame)+"_"+QString::number(games[i].GetAppid()));
+                button3->setObjectName("ButtonHide"+QString::number(indexHiddenGame)+"_"+QString::number(games[i]._appID));
                 button3->AddData("NumberFileHiddenGame",QString::number(indexHiddenGame));
-                button3->AddData("NumberHiddenGame",QString::number(games[i].GetAppid()));
+                button3->AddData("NumberHiddenGame",QString::number(games[i]._appID));
                 connect(button3,&QButtonWithData::pressed,this,&FormSettings::HideClicked);
                 ui->TableWidgetGames->setCellWidget(setTo,3,button3);
             }

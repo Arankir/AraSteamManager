@@ -21,16 +21,16 @@ bool ThreadAchievements::AddFriend(){
         int j=0;
         bool accept=false;
         for(;j<_achievement.GetCount();j++){
-            if(_achievement[j].GetApiname()==_TableWidgetAchievements->item(i,_columnAppid)->text()){
+            if(_achievement[j]._apiName==_TableWidgetAchievements->item(i,_columnAppid)->text()){
                 accept=true;
                 break;
                 }
         }
         if(accept){
             QTableWidgetItem *item5;
-            if(_achievement[j].GetAchieved()==1){
-                item5 = new QTableWidgetItem(tr("Получено %1").arg(_achievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm")));
-                item5->setToolTip(_achievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm"));
+            if(_achievement[j]._achieved==1){
+                item5 = new QTableWidgetItem(tr("Получено %1").arg(_achievement[j]._unlockTime.toString("yyyy.MM.dd hh:mm")));
+                item5->setToolTip(_achievement[j]._unlockTime.toString("yyyy.MM.dd hh:mm"));
                 totalReach++;
                 } else {
                 item5 = new QTableWidgetItem(tr("Не получено"));
@@ -57,13 +57,13 @@ int ThreadAchievements::Fill(){
     int totalnr=0;
     int row=0;
     for(auto &achievement:_achievements){
-        if(achievement.GetDisplayname()!=""){
-            _TableWidgetAchievements->setItem(row,c_tableColumnAppid,new QTableWidgetItem(achievement.GetApiname()));
-            _TableWidgetAchievements->setItem(row,c_tableColumnTitle,new QTableWidgetItem(achievement.GetDisplayname()));
-            _TableWidgetAchievements->setItem(row,c_tableColumnDescription,new QTableWidgetItem(achievement.GetDescription()));
-            _TableWidgetAchievements->setItem(row,c_tableColumnWorld,new QTableWidgetItem((achievement.GetPercent()<10?"0":"")+QString::number(achievement.GetPercent())+"%"));
-            if(achievement.GetAchieved()==1){
-                _TableWidgetAchievements->setItem(row,c_tableColumnMy,new QTableWidgetItem(tr("Получено %1").arg(achievement.GetUnlocktime().toString("yyyy.MM.dd hh:mm"))));
+        if(achievement._displayName!=""){
+            _TableWidgetAchievements->setItem(row,c_tableColumnAppid,new QTableWidgetItem(achievement._apiName));
+            _TableWidgetAchievements->setItem(row,c_tableColumnTitle,new QTableWidgetItem(achievement._displayName));
+            _TableWidgetAchievements->setItem(row,c_tableColumnDescription,new QTableWidgetItem(achievement._description));
+            _TableWidgetAchievements->setItem(row,c_tableColumnWorld,new QTableWidgetItem((achievement._percent<10?"0":"")+QString::number(achievement._percent)+"%"));
+            if(achievement._achieved==1){
+                _TableWidgetAchievements->setItem(row,c_tableColumnMy,new QTableWidgetItem(tr("Получено %1").arg(achievement._unlockTime.toString("yyyy.MM.dd hh:mm"))));
                 totalr++;
             } else {
                 _TableWidgetAchievements->setItem(row,c_tableColumnMy,new QTableWidgetItem(tr("Не получено")));

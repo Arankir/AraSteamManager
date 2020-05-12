@@ -27,7 +27,7 @@ constexpr int c_tableFriendsRowCount=4;
 
 #define Init {
 FormAchievements::FormAchievements(SAchievementsPlayer a_player, QString a_id, SGame a_game, int a_unicNum, QWidget *parent):QWidget(parent),ui(new Ui::FormAchievements),
-                                _id(a_id),_game(a_game),_unicNum(a_unicNum),_achievements(a_player){
+                                _id(a_id),_game(a_game),_unicNum(a_unicNum),_achievements(a_player),_categoriesGame(_game){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     switch(_setting.GetTheme()){
@@ -55,7 +55,7 @@ void FormAchievements::InitComponents(){
     avatarFriendsCompare->setToolTip(profile.GetPersonaname());
     new RequestImage(avatarAchievementsCompare,profile.GetAvatar(),this);
     new RequestImage(avatarFriendsCompare,profile.GetAvatar(),this);
-    new RequestImage(ui->LabelGameLogo,"http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(_game.GetAppid())+"/"+_game.GetImg_logo_url()+".jpg",this);
+    new RequestImage(ui->LabelGameLogo,"http://media.steampowered.com/steamcommunity/public/images/apps/"+QString::number(_game._appID)+"/"+_game._img_logo_url+".jpg",this);
     #define LoadDataEnd }
     #define ConnectTables {
     _tableAchievements = new FormTablesHeaders(2,0,_game,_id,_achievements,TableType::standart,this);
@@ -163,18 +163,17 @@ void FormAchievements::InitComponents(){
     connect(_tableAchievements,&FormTablesHeaders::s_contentCellClicked,this,&FormAchievements::TableAchievements_CellClicked);
     #define ConnectsEnd }
     _favorites.SetType("achievements");
-    _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game.GetAppid()));
-    _categoriesGame.SetGame(_game);
+    _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game._appID));
     ui->GroupBoxCategories->setVisible(false);
     SwitchSimpleCompare(FormMode::compare);
     ui->ProgressBarFriendsLoad->setVisible(false);
     ui->LabelGameOnlineValue->setText(_game.GetNumberPlayers(false));
-    ui->LabelGameTitle->setText(_game.GetName());
+    ui->LabelGameTitle->setText(_game._name);
     ui->GroupBoxFilter->setEnabled(false);
     ui->ButtonCompare->setMinimumHeight(21);
-    _achievements._appid=QString::number(_game.GetAppid());
+    _achievements._appid=QString::number(_game._appID);
     _achievements._id=_id;
-    _achievements.Set(SAchievementsPercentage(QString::number(_game.GetAppid()),false));
+    _achievements.Set(SAchievementsPercentage(QString::number(_game._appID),false));
     connect(&_achievements,SIGNAL(s_finished()),this,SLOT(PullTableWidget()));
     Retranslate();
 }
@@ -229,7 +228,7 @@ void FormAchievements::Retranslate(){
         default:
             break;
     }
-    _achievements.Set(SAchievementsGlobal(QString::number(_game.GetAppid()),false));
+    _achievements.Set(SAchievementsGlobal(QString::number(_game._appID),false));
 }
 void FormAchievements::ProgressLoading(int a_progress,int a_row){
     //qDebug()<<"Loading..."<<a_progress;
@@ -249,14 +248,14 @@ void FormAchievements::OnFinish(int reached, int notReached){
     _tableAchievements->GetTableContent()->resizeRowsToContents();
     int j=0;
     for (int i=0;i<_achievements.GetCount();i++) {
-            QString achievementIcon=_achievements[i].GetIcon().mid(66,_achievements[i].GetIcon().length());
-            QString pathImage=_setting._pathImagesAchievements+QString::number(_game.GetAppid())+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
+            QString achievementIcon=_achievements[i]._icon.mid(66,_achievements[i]._icon.length());
+            QString pathImage=_setting._pathImagesAchievements+QString::number(_game._appID)+"/"+achievementIcon.mid(achievementIcon.indexOf("/",1)+1,achievementIcon.length()-1);
             QLabel *iconGame = new QLabel(this);
             _tableAchievements->GetTableContent()->setCellWidget(j,c_tableAchievementColumnIcon,iconGame);
-            if(_achievements[i].GetDisplayname()!=""){
+            if(_achievements[i]._displayName!=""){
                 if(!QFile::exists(pathImage)){
                     iconGame->setBaseSize(QSize(64,64));
-                    new RequestImage(iconGame,_achievements[i].GetIcon(),pathImage,true,this);
+                    new RequestImage(iconGame,_achievements[i]._icon,pathImage,true,this);
                 }  else {
                     iconGame->setPixmap(QPixmap(pathImage));
                 }
@@ -333,7 +332,7 @@ void FormAchievements::LoadFriendGames(SGames *a_games){
     disconnect(a_games,SIGNAL(s_finished(SGames*)),this,SLOT(LoadFriendGames(SGames*)));
     bool isGameExist=false;
     for (int i=0;i<a_games->GetCount();i++) {//Проверка на наличие игры
-        if(a_games->GetAppid(i)==_game.GetAppid()){
+        if(a_games->GetAppid(i)==_game._appID){
             isGameExist=true;
             break;
         }
@@ -520,16 +519,16 @@ bool FormAchievements::SetFriendAchievements(SAchievements a_achievement, int a_
         int j=0;
         bool isAchievementExist=false;
         for(;j<a_achievement.GetCount();j++){
-            if(a_achievement[j].GetApiname()==_tableAchievements->ItemContent(i,c_tableAchievementColumnAppid)->text()){
+            if(a_achievement[j]._apiName==_tableAchievements->ItemContent(i,c_tableAchievementColumnAppid)->text()){
                 isAchievementExist=true;
                 break;
                 }
         }
         if(isAchievementExist){
             QTableWidgetItem *itemReached;
-            if(a_achievement[j].GetAchieved()==1){
-                itemReached = new QTableWidgetItem(tr("Получено %1").arg(a_achievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm")));
-                itemReached->setToolTip(a_achievement[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm"));
+            if(a_achievement[j]._achieved==1){
+                itemReached = new QTableWidgetItem(tr("Получено %1").arg(a_achievement[j]._unlockTime.toString("yyyy.MM.dd hh:mm")));
+                itemReached->setToolTip(a_achievement[j]._unlockTime.toString("yyyy.MM.dd hh:mm"));
                 totalReach++;
                 } else {
                 itemReached = new QTableWidgetItem(tr("Не получено"));
@@ -564,7 +563,7 @@ void FormAchievements::changeEvent(QEvent *event){
     }
 }
 void FormAchievements::ShowCategories(){
-    _categoriesGame.SetGame(_game);
+    _categoriesGame.Update();
     QFormLayout *layoutComboBox = ui->layoutComboBoxCategories;
     QFormLayout *layoutCheckBox = ui->layoutCheckBoxCategories;
     while(ui->ComboBoxCategories->count()>1){
@@ -764,11 +763,11 @@ void FormAchievements::FavoritesClicked(){
     int achievementIndex=static_cast<QButtonWithData*>(sender())->GetData(0).toInt();
     QJsonObject gameObject;
     QJsonObject newValue;
-    gameObject["id"]=_game.GetAppid();
-    gameObject["name"]=_game.GetName();
-    newValue["id"]=_achievements[achievementIndex].GetApiname();
-    newValue["title"]=_achievements[achievementIndex].GetDisplayname();
-    newValue["description"]=_achievements[achievementIndex].GetDescription();
+    gameObject["id"]=_game._appID;
+    gameObject["name"]=_game._name;
+    newValue["id"]=_achievements[achievementIndex]._apiName;
+    newValue["title"]=_achievements[achievementIndex]._displayName;
+    newValue["description"]=_achievements[achievementIndex]._description;
 
     if(_favorites.AddValue(gameObject,newValue,true)){
         //Категория добавилась
@@ -1208,13 +1207,13 @@ void FormAchievements::CheckBoxFavorites_StateChanged(int arg1){
             break;
         case 2:
             QJsonObject gameObject;
-            gameObject["id"]=_game.GetAppid();
-            gameObject["name"]=_game.GetName();
+            gameObject["id"]=_game._appID;
+            gameObject["name"]=_game._name;
             QJsonArray values=_favorites.GetValues(gameObject);
             for (int i=0;i<_tableAchievements->GetRowCount();i++){
                 bool accept=false;
                 for (int j=0;j<values.size();j++) {
-                    if(values[j].toObject().value("id").toString()==_achievements[i].GetApiname()){
+                    if(values[j].toObject().value("id").toString()==_achievements[i]._apiName){
                         accept=true;
                         break;
                     }
@@ -1229,11 +1228,11 @@ void FormAchievements::ButtonFavorite_Clicked(){
     if(_currentAchievementIndex>-1){
         QJsonObject gameObject;
         QJsonObject newValue;
-        gameObject["id"]=_game.GetAppid();
-        gameObject["name"]=_game.GetName();
-        newValue["id"]=_achievements[_currentAchievementIndex].GetApiname();
-        newValue["title"]=_achievements[_currentAchievementIndex].GetDisplayname();
-        newValue["description"]=_achievements[_currentAchievementIndex].GetDescription();
+        gameObject["id"]=_game._appID;
+        gameObject["name"]=_game._name;
+        newValue["id"]=_achievements[_currentAchievementIndex]._apiName;
+        newValue["title"]=_achievements[_currentAchievementIndex]._displayName;
+        newValue["description"]=_achievements[_currentAchievementIndex]._description;
         ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
         if(_favorites.AddValue(gameObject,newValue,true)){
             //Категория добавилась
@@ -1250,8 +1249,8 @@ void FormAchievements::TableAchievements_CellClicked(int row, int){
     _currentAchievement=_tableAchievements->ItemContent(row,c_tableAchievementColumnAppid)->text();
     _currentAchievementIndex=row;
     QJsonObject gameObject;
-    gameObject["id"]=_game.GetAppid();
-    gameObject["name"]=_game.GetName();
+    gameObject["id"]=_game._appID;
+    gameObject["name"]=_game._name;
     QJsonArray favorites=_favorites.GetValues(gameObject);
     bool isFavorite=false;
     for(int i=0;i<favorites.size();i++){

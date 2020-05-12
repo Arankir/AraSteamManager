@@ -15,9 +15,8 @@ class CategoriesGame : public QObject
     Q_OBJECT
 public:
     explicit CategoriesGame(SGame game, QObject *parent = nullptr);
-    CategoriesGame(QObject *parent = nullptr):QObject(parent) {}
-    CategoriesGame & operator=(const CategoriesGame &);
-    CategoriesGame(const CategoriesGame&);
+    //CategoriesGame & operator=(const CategoriesGame &);
+    CategoriesGame(const CategoriesGame &categories): QObject(categories.parent()), _categories(categories._categories), _game(categories._game){};
 
 signals:
 
@@ -34,7 +33,7 @@ public slots:
     void DeleteCategory(int index);
     void DeleteAll();
     void ChangeCategory(int category, QJsonObject newCategory);
-    void SetGame(SGame game);
+    void Update();
     void Save();
 
 private:

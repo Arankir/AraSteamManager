@@ -16,23 +16,24 @@
 #include <class/settings.h>
 #include <class/statusvalue.h>
 
-class SGame : public QObject
-{
+class SGame : public QObject{
     Q_OBJECT
 public:
-    explicit SGame(QJsonObject ObjGame, QObject *parent = nullptr);
-    SGame(QObject *parent = nullptr);
+    explicit SGame(QJsonObject game, QObject *parent = nullptr): QObject(parent), _appID(game.value("appid").toInt()), _name(game.value("name").toString()),
+        _playtime_2weeks(game.value("playtime_2weeks").toInt()), _playtime_forever(game.value("playtime_forever").toInt()), _img_icon_url(game.value("img_icon_url").toString()),
+        _img_logo_url(game.value("img_logo_url").toString()), _has_community_visible_stats(game.value("has_community_visible_stats").toBool()){};
     void Set(QJsonObject ObjGame);
-    int GetAppid() {return _game.value("appid").toInt();}
-    QString GetName() const {return _game.value("name").toString();}
-    int GetPlaytime_2weeks() {return _game.value("playtime_2weeks").toInt();}
-    int GetPlaytime_forever() {return _game.value("playtime_forever").toInt();}
-    QString GetImg_icon_url() {return _game.value("img_icon_url").toString();}
-    QString GetImg_logo_url() {return _game.value("img_logo_url").toString();}
-    bool GetHas_community_visible_stats() {return _game.value("has_community_visible_stats").toBool();}
-    QString GetNumberPlayers(bool hardreload);
-    SGame(const SGame &);
-    SGame & operator=(const SGame & game);
+    const int _appID;
+    const QString _name;
+    const int _playtime_2weeks;
+    const int _playtime_forever;
+    const QString _img_icon_url;
+    const QString _img_logo_url;
+    const bool _has_community_visible_stats;
+    const QString GetNumberPlayers(bool hardreload);
+    SGame(const SGame &game): QObject(game.parent()), _appID(game._appID), _name(game._name), _playtime_2weeks(game._playtime_2weeks), _playtime_forever(game._playtime_forever),
+        _img_icon_url(game._img_icon_url), _img_logo_url(game._img_logo_url), _has_community_visible_stats(game._has_community_visible_stats){};
+    //SGame & operator=(const SGame &game) { return SGame(game);}
     const bool &operator<(const SGame & game);
 
 signals:
@@ -40,7 +41,6 @@ signals:
 public slots:
 
 private:
-    QJsonObject _game;
     QString _numberPlayers="";
     Settings _setting;
 };
@@ -51,11 +51,11 @@ class SGames : public QObject
 public:
     explicit SGames(QString id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
     SGames(QJsonDocument DocGames, QObject *parent = nullptr);
-    SGames(QObject *parent = nullptr);
+    SGames(QObject *parent): QObject(parent), _manager(new QNetworkAccessManager){};
     ~SGames();
     void Set(QString id, bool free_games, bool game_info, bool parallel);
     void Set(QJsonDocument DocGames);
-    int GetAppid(int index) {return _games[index].GetAppid();}
+    int GetAppid(int index) {return _games[index]._appID;}
     QString GetID() {return _id;}
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
@@ -63,9 +63,10 @@ public:
     void Update(bool parallel);
     void Clear();
     void Sort();
-    SGames( const SGames & a);
+    SGames(const SGames &games): QObject(games.parent()), _manager(new QNetworkAccessManager), _games(games._games), _status(games._status), _error(games._error), _id(games._id),
+        _free_games(games._free_games), _game_info(games._game_info){};
     SGames & operator=(const SGames &games);
-    SGame &operator[](const int &index);
+    SGame &operator[](const int &index) {return _games[index];}
 
     int _index=-1;
 
@@ -79,7 +80,7 @@ public slots:
 private:
     QNetworkAccessManager *_manager;
     Settings _setting;
-    QVector<SGame> _games;
+    QList<SGame> _games;
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _id;

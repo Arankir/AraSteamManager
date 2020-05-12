@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CategoriesGame_t {
-    QByteArrayData data[24];
-    char stringdata0[226];
+    QByteArrayData data[22];
+    char stringdata0[214];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -52,10 +52,8 @@ QT_MOC_LITERAL(16, 159, 5), // "index"
 QT_MOC_LITERAL(17, 165, 9), // "DeleteAll"
 QT_MOC_LITERAL(18, 175, 14), // "ChangeCategory"
 QT_MOC_LITERAL(19, 190, 11), // "newCategory"
-QT_MOC_LITERAL(20, 202, 7), // "SetGame"
-QT_MOC_LITERAL(21, 210, 5), // "SGame"
-QT_MOC_LITERAL(22, 216, 4), // "game"
-QT_MOC_LITERAL(23, 221, 4) // "Save"
+QT_MOC_LITERAL(20, 202, 6), // "Update"
+QT_MOC_LITERAL(21, 209, 4) // "Save"
 
     },
     "CategoriesGame\0GetTitle\0\0a_index\0"
@@ -63,8 +61,8 @@ QT_MOC_LITERAL(23, 221, 4) // "Save"
     "GetCount\0GetGameID\0GetTitles\0"
     "QList<QString>\0category\0value\0GetNoValues\0"
     "DeleteCategory\0index\0DeleteAll\0"
-    "ChangeCategory\0newCategory\0SetGame\0"
-    "SGame\0game\0Save"
+    "ChangeCategory\0newCategory\0Update\0"
+    "Save"
 };
 #undef QT_MOC_LITERAL
 
@@ -94,8 +92,8 @@ static const uint qt_meta_data_CategoriesGame[] = {
       15,    1,  105,    2, 0x0a /* Public */,
       17,    0,  108,    2, 0x0a /* Public */,
       18,    2,  109,    2, 0x0a /* Public */,
-      20,    1,  114,    2, 0x0a /* Public */,
-      23,    0,  117,    2, 0x0a /* Public */,
+      20,    0,  114,    2, 0x0a /* Public */,
+      21,    0,  115,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::QString, QMetaType::Int,    3,
@@ -110,7 +108,7 @@ static const uint qt_meta_data_CategoriesGame[] = {
     QMetaType::Void, QMetaType::Int,   16,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int, QMetaType::QJsonObject,   12,   19,
-    QMetaType::Void, 0x80000000 | 21,   22,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -143,7 +141,7 @@ void CategoriesGame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 9: _t->DeleteCategory((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 10: _t->DeleteAll(); break;
         case 11: _t->ChangeCategory((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QJsonObject(*)>(_a[2]))); break;
-        case 12: _t->SetGame((*reinterpret_cast< SGame(*)>(_a[1]))); break;
+        case 12: _t->Update(); break;
         case 13: _t->Save(); break;
         default: ;
         }

@@ -66,7 +66,7 @@ public slots:
     void ProgressLoading(int p,int row);
     void OnFinish(int reached, int notReached);
     QString GetProfile() {return _id;}
-    SGame GetGame() {return _game;}
+    int GetGameAppID() {return _game._appID;}
     void ButtonUpdate_Clicked();
 
 private slots:

@@ -44,9 +44,9 @@ FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a
     SetType(a_type);
 
     _achievements=a_achievements;
-    _achievements._appid=QString::number(_game.GetAppid());
+    _achievements._appid=QString::number(_game._appID);
     _achievements._id=_id;
-    _achievements.Set(SAchievementsPercentage(QString::number(_game.GetAppid()),false,this));
+    _achievements.Set(SAchievementsPercentage(QString::number(_game._appID),false,this));
     _achievements.Update();
 
     ui->TableWidgetContent->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -262,7 +262,7 @@ bool FormTablesHeaders::AddFriendColumn(SProfile a_friendProfile){
     avatarFriend->setAlignment(Qt::AlignCenter);
     ui->TableWidgetHorizontalHeader->setCellWidget(0,column,avatarFriend);
     SAchievements achievementsFriends=_achievements;
-    achievementsFriends.Set(SAchievementsPlayer(QString::number(_game.GetAppid()),a_friendProfile.GetSteamid(),false,this));
+    achievementsFriends.Set(SAchievementsPlayer(QString::number(_game._appID),a_friendProfile.GetSteamid(),false,this));
 //    Threading LoadFriendTable(this);
 //    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
     _fCompare.SetCol(_fCompare.GetCol()+1);
@@ -275,16 +275,16 @@ bool FormTablesHeaders::AddFriendColumn(SProfile a_friendProfile){
         int j=0;
         bool isAchievementExist=false;
         for(;j<achievementsFriends.GetCount();j++){
-            if(achievementsFriends[j].GetApiname()==ui->TableWidgetContent->item(i,c_tableAchievementColumnAppid)->text()){
+            if(achievementsFriends[j]._apiName==ui->TableWidgetContent->item(i,c_tableAchievementColumnAppid)->text()){
                 isAchievementExist=true;
                 break;
                 }
         }
         if(isAchievementExist){
             QTableWidgetItem *itemReached;
-            if(achievementsFriends[j].GetAchieved()==1){
-                itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievementsFriends[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm")));
-                itemReached->setToolTip(achievementsFriends[j].GetUnlocktime().toString("yyyy.MM.dd hh:mm"));
+            if(achievementsFriends[j]._achieved==1){
+                itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievementsFriends[j]._unlockTime.toString("yyyy.MM.dd hh:mm")));
+                itemReached->setToolTip(achievementsFriends[j]._unlockTime.toString("yyyy.MM.dd hh:mm"));
                 totalReach++;
                 } else {
                 itemReached = new QTableWidgetItem(tr("Не получено"));

@@ -18,26 +18,17 @@
 #include <QJsonObject>
 #include <QTextCodec>
 
-class SFriend : public QObject
-{
+class SFriend : public QObject{
     Q_OBJECT
 public:
-    explicit SFriend(QJsonObject ObjFriend, QObject *parent = nullptr);
-    SFriend(QObject *parent = nullptr);
-    void Set(QJsonObject ObjFriend);
-    QString GetSteamid() {return _friend.value("steamid").toString();}
-    QString GetRelationship() {return _friend.value("relationship").toString();}
-    QDateTime GetFriend_since() {return QDateTime::fromSecsSinceEpoch(_friend.value("friend_since").toInt(),Qt::LocalTime);}
-    SFriend(const SFriend &);
-    SFriend & operator=(const SFriend &Afriend);
+    explicit SFriend(QJsonObject a_friend, QObject *parent = nullptr): QObject(parent),_steamID(a_friend.value("steamid").toString()),
+        _relationship(a_friend.value("relationship").toString()),_friend_since(QDateTime::fromSecsSinceEpoch(a_friend.value("friend_since").toInt(),Qt::LocalTime)){};
+    const QString _steamID;
+    const QString _relationship;
+    const QDateTime _friend_since;
+    SFriend(const SFriend &a_friend): QObject(a_friend.parent()), _steamID(a_friend._steamID), _relationship(a_friend._relationship), _friend_since(a_friend._friend_since){};
     const bool &operator<(const SFriend &Afriend);
 
-signals:
-
-public slots:
-
-private:
-    QJsonObject _friend;
 };
 
 class SFriends : public QObject
@@ -45,8 +36,8 @@ class SFriends : public QObject
     Q_OBJECT
 public:
     explicit SFriends(QString id, bool parallel, QObject *parent = nullptr);
-    SFriends(QJsonDocument DocFriends);
-    SFriends();
+    SFriends(QJsonDocument DocFriends, QObject *parent = nullptr);
+    SFriends(QObject *parent = nullptr): QObject(parent),_manager(new QNetworkAccessManager()){};
     ~SFriends();
     void Set(QString id, bool parallel);
     void Set(QJsonDocument DocFriends);
@@ -55,13 +46,13 @@ public:
     int GetCount() {return _friends.size();}
     SProfiles GetProfiles();
     void Update(bool parallel);
-    QVector<SFriend>::iterator begin() {return _friends.begin();}
-    QVector<SFriend>::iterator end() {return _friends.end();}
+    QList<SFriend>::iterator begin() {return _friends.begin();}
+    QList<SFriend>::iterator end() {return _friends.end();}
     void Clear();
     void Sort();
     SFriends(const SFriends &);
     SFriends & operator=(const SFriends & friends);
-    SFriend &operator[](const int &index);
+    SFriend &operator[](const int &index) {return _friends[index];}
 
 signals:
     void s_finished(SFriends*);
@@ -76,7 +67,7 @@ private:
     StatusValue _status=StatusValue::none;
     QString _error="";
     QString _id;
-    QVector<SFriend> _friends;
+    QList<SFriend> _friends;
 };
 
 #endif // SFRIENDS_H

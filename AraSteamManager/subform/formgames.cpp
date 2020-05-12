@@ -106,24 +106,24 @@ void FormGames::OnFinish(){
     QStringList hideList=_hide;
     _achievements = new SAchievementsPlayer[_games.GetCount()];
     for(int i=0;i<_games.GetCount();i++){
-        QString path = _setting._pathImagesIconGames+_games[i].GetImg_icon_url()+".jpg";
+        QString path = _setting._pathImagesIconGames+_games[i]._img_icon_url+".jpg";
         QLabel *iconGame = new QLabel;
         ui->TableWidgetGames->setCellWidget(i,c_tableColumnIcon,iconGame);
         if(!QFile::exists(path)){
             iconGame->setBaseSize(QSize(32,32));
             new RequestImage(iconGame,"http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                         QString::number(_games[i].GetAppid())+"/"+_games[i].GetImg_icon_url()+".jpg",path,true,this);
+                         QString::number(_games[i]._appID)+"/"+_games[i]._img_icon_url+".jpg",path,true,this);
         } else {
             iconGame->setPixmap(QPixmap(path));
         }
-        SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(_games[i].GetAppid()),_id);
+        SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(_games[i]._appID),_id);
         achievementsGame->_index=i;
         connect(achievementsGame,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
         for (int j=0;j<hideList.size();j++) {
-            if(hideList[j].toInt()==_games[i].GetAppid()){
+            if(hideList[j].toInt()==_games[i]._appID){
                 ui->TableWidgetGames->setRowHidden(i,true);
                 ui->TableWidgetGames->item(i,c_tableColumnName)->setToolTip("StandartColor");
-                ui->TableWidgetGames->item(i,c_tableColumnName)->setTextColor(Qt::red);
+                ui->TableWidgetGames->item(i,c_tableColumnName)->setForeground(Qt::red);
                 //static_cast<QPushButton*>(ui->TableWidgetGames->cellWidget(i,c_tableColumnHide))->setEnabled(false);
                 hideList.removeAt(j);
                 break;
@@ -140,7 +140,7 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     if(a_achievements.GetCount()>0){
         int val=0;
         for (int i=0;i<a_achievements.GetCount();i++) {
-            if(a_achievements[i].GetAchieved()==1)
+            if(a_achievements[i]._achieved==1)
                 val++;
         }
         progressBarAchievements->setValue(val);
@@ -287,7 +287,7 @@ void FormGames::TableWidgetGames_CellClicked(int a_row, int){
         ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/in_favorites.png"));
     else
         ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
-    if(ui->TableWidgetGames->item(a_row,c_tableColumnName)->textColor()==Qt::red)
+    if(ui->TableWidgetGames->item(a_row,c_tableColumnName)->foreground()==Qt::red)
         ui->ButtonHide->setIcon(QIcon("://"+_theme+"/unhide.png"));
     ui->FrameGame->setVisible(true);
 }
@@ -304,9 +304,9 @@ void FormGames::ButtonAchievements_Clicked(){
 }
 void FormGames::ButtonFavorite_Clicked(){
     QJsonObject newValue;
-    newValue["id"]=QString::number(_games[_selectedIndex.toInt()].GetAppid());
-    newValue["name"]=_games[_selectedIndex.toInt()].GetName();
-    newValue["icon"]=_games[_selectedIndex.toInt()].GetImg_icon_url();
+    newValue["id"]=QString::number(_games[_selectedIndex.toInt()]._appID);
+    newValue["name"]=_games[_selectedIndex.toInt()]._name;
+    newValue["icon"]=_games[_selectedIndex.toInt()]._img_icon_url;
     newValue["idUser"]=_id;
     ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
     if(_favorites.AddValue(newValue,true)){
@@ -336,13 +336,13 @@ void FormGames::ButtonHide_Clicked(){
     QFile fileHide(savePath);
     fileHide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&fileHide);
-    writeStream <<_games[_selectedIndex.toInt()].GetAppid()<<(savePath==_setting._pathHide+"All.txt"?"%%"
-                                                            +_games[_selectedIndex.toInt()].GetImg_icon_url()+"%%"
-                                                            +_games[_selectedIndex.toInt()].GetName():"")<<"\n";
+    writeStream <<_games[_selectedIndex.toInt()]._appID<<(savePath==_setting._pathHide+"All.txt"?"%%"
+                                                            +_games[_selectedIndex.toInt()]._img_icon_url+"%%"
+                                                            +_games[_selectedIndex.toInt()]._name:"")<<"\n";
     fileHide.close();
     for (int i=0;i<_games.GetCount();i++) {
-        if(_games[_selectedIndex.toInt()].GetName()==ui->TableWidgetGames->item(i,c_tableColumnName)->text()){
-            ui->TableWidgetGames->item(i,c_tableColumnName)->setTextColor(Qt::red);
+        if(_games[_selectedIndex.toInt()]._name==ui->TableWidgetGames->item(i,c_tableColumnName)->text()){
+            ui->TableWidgetGames->item(i,c_tableColumnName)->setForeground(Qt::red);
             ui->TableWidgetGames->setRowHidden(i,true);
             break;
         }

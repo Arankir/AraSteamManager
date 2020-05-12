@@ -4,10 +4,10 @@ int ThreadFriends::Fill(){
     int row=0;
     for(auto &profile: _profiles){
         for(auto &friendP: _friends){
-            if(profile.GetSteamid()==friendP.GetSteamid()){
+            if(profile.GetSteamid()==friendP._steamID){
                 _TableWidgetFriends->setItem(row,c_tableColumnID,new QTableWidgetItem(profile.GetSteamid()));
                 _TableWidgetFriends->setItem(row,c_tableColumnName,new QTableWidgetItem(profile.GetPersonaname()));
-                _TableWidgetFriends->setItem(row,c_tableColumnAdded,new QTableWidgetItem(friendP.GetFriend_since().toString("yyyy.MM.dd hh:mm:ss")));
+                _TableWidgetFriends->setItem(row,c_tableColumnAdded,new QTableWidgetItem(friendP._friend_since.toString("yyyy.MM.dd hh:mm:ss")));
                 _TableWidgetFriends->setItem(row,c_tableColumnStatus,GetState(profile.GetGameextrainfo(),profile.GetPersonastate()));
                 _TableWidgetFriends->setItem(row,c_tableColumnisPublic,GetPrivacy(profile.GetCommunityvisibilitystate()));
                 emit s_progress(row,row);
