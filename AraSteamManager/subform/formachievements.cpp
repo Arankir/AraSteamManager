@@ -331,8 +331,8 @@ void FormAchievements::LoadingCompare(){
 void FormAchievements::LoadFriendGames(SGames *a_games){
     disconnect(a_games,SIGNAL(s_finished(SGames*)),this,SLOT(LoadFriendGames(SGames*)));
     bool isGameExist=false;
-    for (int i=0;i<a_games->GetCount();i++) {//Проверка на наличие игры
-        if(a_games->GetAppid(i)==_game._appID){
+    for (const auto &game: *a_games) {
+        if(game._appID==_game._appID){
             isGameExist=true;
             break;
         }
@@ -346,7 +346,7 @@ void FormAchievements::LoadFriendGames(SGames *a_games){
         friendState.second=FriendType::haventGame;
         _type2++;
     }
-    _friends.push_back(friendState);
+    _friends.push_back(std::move(friendState));
     ui->ProgressBarFriendsLoad->setValue(ui->ProgressBarFriendsLoad->value()+1);
     if(ui->ProgressBarFriendsLoad->value()==_profilesFriends.GetCount())
         FinishLoadFriends();
@@ -354,19 +354,21 @@ void FormAchievements::LoadFriendGames(SGames *a_games){
 }
 void FormAchievements::FinishLoadFriends(){
     ui->ProgressBarFriendsLoad->setVisible(false);
-    for(int i=0;i<_friends.size();i++) {
+    int row=2;
+    for(auto &friendP: _friends){
         QLabel *avatarFriend = new QLabel(this);
-        avatarFriend->setToolTip(_friends[i].first.GetPersonaname());
+        avatarFriend->setToolTip(friendP.first.GetPersonaname());
         avatarFriend->setAlignment(Qt::AlignCenter);
-        new RequestImage(avatarFriend,_friends[i].first.GetAvatar(),this);
-        ui->TableWidgetFriends->setCellWidget(0,i+2,avatarFriend);
+        new RequestImage(avatarFriend,friendP.first.GetAvatar(),this);
+        ui->TableWidgetFriends->setCellWidget(0,row,avatarFriend);
         QTableWidgetItem *itemCheck(new QTableWidgetItem(""));
         itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
         itemCheck->setCheckState(Qt::Unchecked);
         itemCheck->setTextAlignment(Qt::AlignCenter);
-        ui->TableWidgetFriends->setItem(c_tableFriendsRowCheckBox,i+2,itemCheck);
-        ui->TableWidgetFriends->setItem(c_tableFriendsRowID,i+2,new QTableWidgetItem(_friends[i].first.GetSteamid()));
-        ui->TableWidgetFriends->setColumnHidden(i+2,_friends[i].second==FriendType::haventGame);
+        ui->TableWidgetFriends->setItem(c_tableFriendsRowCheckBox,row,itemCheck);
+        ui->TableWidgetFriends->setItem(c_tableFriendsRowID,row,new QTableWidgetItem(friendP.first.GetSteamid()));
+        ui->TableWidgetFriends->setColumnHidden(row,friendP.second==FriendType::haventGame);
+        row++;
     }
     connect(ui->TableWidgetFriends,&QTableWidget::cellChanged,this,&FormAchievements::TableWidgetCompareFriends_CellChanged);
     //ui->TableWidgetFriends->resizeColumnsToContents();

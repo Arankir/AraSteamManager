@@ -1,76 +1,15 @@
 #include "Sprofile.h"
 
 #define SProfileStart {
-SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *parent) : QObject(parent),_id(a_id){
-    _manager = new QNetworkAccessManager();
-    if(a_parallel){
-        if(a_type==QueryType::vanity){
-            connect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadVanity);
-            _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+a_id+"&url_type=1"));
-        } else if(a_type==QueryType::url){
-            connect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadURL);
-            _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+a_id));
-        }
-    } else {
-        QEventLoop loop;
-        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        if(a_type==QueryType::vanity){
-            QNetworkReply *reply = _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+a_id+"&url_type=1"));
-            loop.exec();
-            _id=QJsonDocument::fromJson(reply->readAll()).object().value("response").toObject().value("steamid").toString();
-            delete reply;
-        }
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id));
-        loop.exec();
-        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QJsonDocument localSummapries = QJsonDocument::fromJson(reply->readAll());
-        if(localSummapries.object().value("response").toObject().value("players").toArray().size()>0){
-            _profile=localSummapries.object().value("response").toObject().value("players").toArray().at(0).toObject();
-            _status=StatusValue::success;
-        }
-        else {
-            _status=StatusValue::error;
-            _error=reply->readAll();
-        }
-        delete reply;
-    }
-}
-SProfile::SProfile(QJsonObject a_objSummaries, QObject *parent) : QObject(parent),_profile(a_objSummaries),_status(StatusValue::success){
-    _manager = new QNetworkAccessManager();
-}
-SProfile::SProfile(QObject *parent) : QObject(parent){
-    _manager = new QNetworkAccessManager();
+SProfile::SProfile(QString a_id, bool a_parallel, QueryType a_type, QObject *parent): QObject(parent), _manager(new QNetworkAccessManager()), _id(a_id){
+    Loading(a_parallel, a_type);
 }
 SProfile::~SProfile(){
     delete _manager;
 }
 void SProfile::Set(QString a_id, bool a_parallel, QueryType a_type){
     _id=a_id;
-    if(a_parallel){
-        if(a_type==QueryType::vanity){
-            connect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadVanity);
-            _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+a_id+"&url_type=1"));
-        } else if(a_type==QueryType::url){
-            connect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadURL);
-            _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+a_id));
-        }
-    } else {
-        QEventLoop loop;
-        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        if(a_type==QueryType::vanity){
-            QNetworkReply *reply = _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+a_id+"&url_type=1"));
-            loop.exec();
-            _id=QJsonDocument::fromJson(reply->readAll()).object().value("response").toObject().value("steamid").toString();
-            delete reply;
-        }
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id));
-        loop.exec();
-        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        Set(QJsonDocument::fromJson(reply->readAll()).object().value("response").toObject().value("players").toArray().at(0).toObject());
-        delete reply;
-        emit s_finished(this);
-        emit s_finished();
-    }
+    Loading(a_parallel, a_type);
 }
 void SProfile::Set(QJsonObject a_objSummaries){
     Clear();
@@ -84,6 +23,33 @@ void SProfile::LoadVanity(QNetworkReply *a_reply){
     _id=localDoc.object().value("response").toObject().value("steamid").toString();
     _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id));
 }
+void SProfile::Loading(bool a_parallel, QueryType a_type){
+    if(a_parallel){
+        if(a_type==QueryType::vanity){
+            connect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadVanity);
+            _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+_id+"&url_type=1"));
+        } else if(a_type==QueryType::url){
+            connect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadURL);
+            _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id));
+        }
+    } else {
+        QEventLoop loop;
+        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        if(a_type==QueryType::vanity){
+            QNetworkReply *reply = _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+_id+"&url_type=1"));
+            loop.exec();
+            _id=QJsonDocument::fromJson(reply->readAll()).object().value("response").toObject().value("steamid").toString();
+            delete reply;
+        }
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id));
+        loop.exec();
+        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
+        Set(QJsonDocument::fromJson(reply->readAll()).object().value("response").toObject().value("players").toArray().at(0).toObject());
+        delete reply;
+        emit s_finished(this);
+        emit s_finished();
+    }
+}
 void SProfile::LoadURL(QNetworkReply *a_reply){
     QJsonDocument localSummaries = QJsonDocument::fromJson(a_reply->readAll());
     disconnect(_manager,&QNetworkAccessManager::finished,this,&SProfile::LoadURL);
@@ -93,18 +59,11 @@ void SProfile::LoadURL(QNetworkReply *a_reply){
     emit s_finished();
 }
 void SProfile::Update(bool a_parallel){
-    Set(_id, a_parallel, QueryType::url);
+    Loading(a_parallel, QueryType::url);
 }
 void SProfile::Clear(){
     _profile=QJsonObject();
     _status=StatusValue::none;
-}
-SProfile::SProfile( const SProfile & a_newProfile){
-    _profile=a_newProfile._profile;
-    _id=a_newProfile._id;
-    _status=a_newProfile._status;
-    _error=a_newProfile._error;
-    _manager = new QNetworkAccessManager;
 }
 SProfile & SProfile::operator=(const SProfile & a_newProfile){
     delete _manager;

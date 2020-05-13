@@ -60,6 +60,8 @@ public:
     StatusValue GetStatus() {return _status;}
     QString GetError() {return _error;}
     int GetCount() {return _games.size();}
+    QList<SGame>::iterator begin() {return _games.begin();}
+    QList<SGame>::iterator end() {return _games.end();}
     void Update(bool parallel);
     void Clear();
     void Sort();

@@ -26,8 +26,8 @@ class SProfile : public QObject
     Q_OBJECT
 public:
     explicit SProfile(QString id, bool parallel, QueryType type, QObject *parent = nullptr);
-    SProfile(QJsonObject ObjSummaries, QObject *parent = nullptr);
-    SProfile(QObject *parent = nullptr);
+    SProfile(QJsonObject summaries, QObject *parent = nullptr): QObject(parent), _manager(new QNetworkAccessManager()),_profile(summaries),_status(StatusValue::success){};
+    SProfile(QObject *parent = nullptr): QObject(parent), _manager(new QNetworkAccessManager()){};
     ~SProfile();
     void Set(QString id, bool parallel, QueryType type);
     void Set(QJsonObject ObjSummaries);
@@ -56,7 +56,8 @@ public:
     int GetCount() {return _profile.size();}
     void Update(bool parallel);
     void Clear();
-    SProfile( const SProfile & a);
+    SProfile( const SProfile & a_profile): QObject(a_profile.parent()),_manager(new QNetworkAccessManager()),_profile(a_profile._profile),_status(a_profile._status),
+        _error(a_profile._error),_id(a_profile._id){};
     SProfile & operator=(const SProfile & profile);
     const bool &operator<(const SProfile & profile);
 
@@ -71,8 +72,32 @@ public slots:
     void LoadVanity(QNetworkReply *Reply);
 
 private:
+    void Loading(bool parallel, QueryType type);
+
     QNetworkAccessManager *_manager;
     Settings _setting;
+
+    QString _steamID;
+    int _communityVisibilityState;
+    int _profileState;
+    QString _personaName;
+    QDateTime _lastLogoff;
+    int _commentPermission;
+    QString _profileUrl;
+    QString _avatar;
+    QString _avatarMedium;
+    QString _avatarFull;
+    int _personaState;
+    QString _primaryClanID;
+    QDateTime _timeCreated;
+    int _personaStateFlags;
+    QString _gameExtraInfo;
+    QString _gameID;
+    QString _locCountryCode;
+    QString _locStateCode;
+    int _locCityID;
+    QString _realName;
+
     QJsonObject _profile;
     StatusValue _status=StatusValue::none;
     QString _error="";
