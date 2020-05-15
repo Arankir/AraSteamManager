@@ -92,31 +92,31 @@ void FormSettings::InitComponents(){
         _hiddenGames.append(pair);
 
         QFileInfoList list = dirHiddenGames.entryInfoList();
-        for (int i=0;i<list.size();++i){
-            if(list.at(i).fileName()!="All.txt"){
-                QFile fileHide("Files/Hide/"+list.at(i).fileName());
+        int number=1;
+        for(auto &file :list){
+            QString fileName = file.fileName();
+            if(fileName!="All.txt"){
+                QFile fileHide(_setting._pathHide+fileName);
                 fileHide.open(QFile::ReadOnly);
-                SProfile profile(list.at(i).fileName().remove(".txt"),false,QueryType::url);
+                SProfile profile(fileName.remove(".txt"),false,QueryType::url);
                 QList<QString> hide;
                 QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
                 profileHidden->setText(profile.GetPersonaname());
                 profileHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
-                profileHidden->setObjectName("HiddenGames"+QString::number(i+1));
-                profileHidden->AddData("NumberFileHiddenGame",QString::number(i+1));
+                profileHidden->setObjectName("HiddenGames"+QString::number(number));
+                profileHidden->AddData("NumberFileHiddenGame",QString::number(number));
                 connect(profileHidden,SIGNAL(clicked()),this,SLOT(RadioButtonHiddenGames_Clicked()));
                 layout->addWidget(profileHidden);
-                QFile fileHide2(_setting._pathHide+list.at(i).fileName());
-                if(fileHide2.open(QIODevice::ReadOnly)){
-                    while(!fileHide2.atEnd())
-                        hide << QString::fromLocal8Bit(fileHide2.readLine()).remove("\r\n").remove("\n");
-                    fileHide2.close();
-                }
+                while(!fileHide.atEnd())
+                    hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n");
+                fileHide.close();
                 QPair<QString,QList<QString>> pair;
-                pair.first=list.at(i).fileName().remove(".txt");
+                pair.first=fileName.remove(".txt");
                 pair.second=hide;
-                _hiddenGames.append(pair);
+                _hiddenGames.append(std::move(pair));
+                number++;
             }
-            }
+        }
     }
     ui->FrameProfilesHideGames->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Expanding);
     ui->FrameProfilesHideGames->setLayout(layout);
@@ -185,26 +185,27 @@ void FormSettings::RadioButtonLightTheme_Clicked(){
 
 void FormSettings::RadioButtonHiddenGames_Clicked(){
     int indexHiddenGame=static_cast<QRadioButtonWithData*>(sender())->GetData(0).toInt();
+    auto &currentGame = _hiddenGames[indexHiddenGame];
     ui->TableWidgetGames->clear();
-    ui->TableWidgetGames->setRowCount(_hiddenGames[indexHiddenGame].second.size());
+    ui->TableWidgetGames->setRowCount(currentGame.second.size());
     if(indexHiddenGame!=0){
-        SGames games(_hiddenGames[indexHiddenGame].first,true,true,false);
-        for (int i=0;i<games.GetCount();i++) {
-            if(_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i]._appID))>-1){
-                int setTo=_hiddenGames[indexHiddenGame].second.indexOf(QString::number(games[i]._appID));
-                QString path = _setting._pathImagesIconGames+games[i]._img_icon_url+".jpg";
+        SGames games(currentGame.first,true,true,false);
+        for(auto &game: games){
+            if(currentGame.second.indexOf(QString::number(game._appID))>-1){
+                int setTo=currentGame.second.indexOf(QString::number(game._appID));
+                QString path = _setting._pathImagesIconGames+game._img_icon_url+".jpg";
                 QLabel *iconGame = new QLabel;
                 iconGame->setBaseSize(QSize(32,32));
                 ui->TableWidgetGames->setCellWidget(setTo,0,iconGame);
                 if(!QFile::exists(path)){
-                    if(games[i]._img_icon_url!=""){
+                    if(game._img_icon_url!=""){
                         new RequestImage(iconGame,"http://media.steampowered.com/steamcommunity/public/images/apps/"+
-                                        QString::number(games[i]._appID)+"/"+games[i]._img_icon_url+".jpg",path,true,this);
+                                        QString::number(game._appID)+"/"+game._img_icon_url+".jpg",path,true,this);
                         }
-                    } else {
+                } else {
                     iconGame->setPixmap(QPixmap(path));
-                    }
-                ui->TableWidgetGames->setItem(setTo,1,new QTableWidgetItem(games[i]._name));
+                }
+                ui->TableWidgetGames->setItem(setTo,1,new QTableWidgetItem(game._name));
                 ui->TableWidgetGames->setRowHeight(setTo,33);
 
                 QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
@@ -218,9 +219,9 @@ void FormSettings::RadioButtonHiddenGames_Clicked(){
                 QButtonWithData *button3 = new QButtonWithData("");
                 button3->setIcon(QIcon("://"+_theme+"/hide.png"));
                 button3->setMinimumSize(QSize(25,25));
-                button3->setObjectName("ButtonHide"+QString::number(indexHiddenGame)+"_"+QString::number(games[i]._appID));
+                button3->setObjectName("ButtonHide"+QString::number(indexHiddenGame)+"_"+QString::number(game._appID));
                 button3->AddData("NumberFileHiddenGame",QString::number(indexHiddenGame));
-                button3->AddData("NumberHiddenGame",QString::number(games[i]._appID));
+                button3->AddData("NumberHiddenGame",QString::number(game._appID));
                 connect(button3,&QButtonWithData::pressed,this,&FormSettings::HideClicked);
                 ui->TableWidgetGames->setCellWidget(setTo,3,button3);
             }
@@ -229,8 +230,8 @@ void FormSettings::RadioButtonHiddenGames_Clicked(){
         //list[0]=_games[gamei].GetAppid()
         //list[1]=_games[gamei].GetImg_icon_url()
         //list[2]=_games[gamei].GetName()
-        for (int i=0;i<_hiddenGames[indexHiddenGame].second.size();i++) {
-            QStringList list = _hiddenGames[indexHiddenGame].second[i].split("%%");
+        for (int i=0;i<currentGame.second.size();i++) {
+            QStringList list = currentGame.second[i].split("%%");
             QString path = _setting._pathImagesIconGames+list[1]+".jpg";
             QLabel *iconGame = new QLabel;
             iconGame->setBaseSize(QSize(32,32));
@@ -296,7 +297,7 @@ void FormSettings::HideClicked(){
     QFile fileSaveTo(_setting._pathHide+_hiddenGames[index].first+".txt");
     fileSaveTo.open(QIODevice::WriteOnly| QIODevice::Text);
     QTextStream writeStream(&fileSaveTo);
-    foreach(QString game, _hiddenGames[index].second){
+    for(QString game: _hiddenGames[index].second){
         writeStream <<game+"\n";
     }
     fileSaveTo.close();

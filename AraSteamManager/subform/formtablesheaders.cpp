@@ -272,28 +272,23 @@ bool FormTablesHeaders::AddFriendColumn(SProfile a_friendProfile){
     int totalReach=0;
     int totalNotReach=0;
     for(int i=0;i<ui->TableWidgetContent->rowCount();i++){
-        int j=0;
-        bool isAchievementExist=false;
-        for(;j<achievementsFriends.GetCount();j++){
-            if(achievementsFriends[j]._apiName==ui->TableWidgetContent->item(i,c_tableAchievementColumnAppid)->text()){
-                isAchievementExist=true;
-                break;
-                }
-        }
-        if(isAchievementExist){
-            QTableWidgetItem *itemReached;
-            if(achievementsFriends[j]._achieved==1){
-                itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievementsFriends[j]._unlockTime.toString("yyyy.MM.dd hh:mm")));
-                itemReached->setToolTip(achievementsFriends[j]._unlockTime.toString("yyyy.MM.dd hh:mm"));
-                totalReach++;
+        for(auto &achievement: achievementsFriends){
+            if(achievement._apiName==ui->TableWidgetContent->item(i,c_tableAchievementColumnAppid)->text()){
+                QTableWidgetItem *itemReached;
+                if(achievement._achieved==1){
+                    itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievement._unlockTime.toString("yyyy.MM.dd hh:mm")));
+                    itemReached->setToolTip(achievement._unlockTime.toString("yyyy.MM.dd hh:mm"));
+                    totalReach++;
                 } else {
-                itemReached = new QTableWidgetItem(tr("Не получено"));
-                totalNotReach++;
+                    itemReached = new QTableWidgetItem(tr("Не получено"));
+                    totalNotReach++;
                 }
-            itemReached->setTextAlignment(Qt::AlignCenter);
-            ui->TableWidgetContent->setItem(i,column,itemReached);
+                itemReached->setTextAlignment(Qt::AlignCenter);
+                ui->TableWidgetContent->setItem(i,column,itemReached);
+                break;
+            }
         }
-        }
+    }
     if((totalReach==0)&&(totalNotReach==0)){
         ui->TableWidgetHorizontalHeader->setItem(1,column, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не"),tr("публичный"))));
         return false;
@@ -321,22 +316,22 @@ void FormTablesHeaders::AddCategoryColumn(){
         itemCheck->setCheckState(Qt::Unchecked);
         ui->TableWidgetContent->setItem(i,ui->TableWidgetContent->columnCount()-1, itemCheck);
         }
-    _categoriesColumns.push_back(ui->TableWidgetContent->columnCount()-1);
+    _categoriesColumns.push_back(std::move(ui->TableWidgetContent->columnCount()-1));
 }
 void FormTablesHeaders::RemoveFriendColumn(int a_column){
     int column=_friendsColumns.takeAt(a_column);
     RemoveColumn(column);
-    for (int i=0;i<_friendsColumns.size();i++) {
-        if(_friendsColumns[i]>column)
-            _friendsColumns[i]--;
+    for(auto &fColumn: _friendsColumns){
+        if(fColumn>column)
+            fColumn--;
     }
 }
 void FormTablesHeaders::RemoveCategoryColumn(int a_column){
     int column=_categoriesColumns.takeAt(a_column);
     RemoveColumn(column);
-    for (int i=0;i<_categoriesColumns.size();i++) {
-        if(_categoriesColumns[i]>column)
-            _categoriesColumns[i]--;
+    for(auto &cColumn: _categoriesColumns){
+        if(cColumn>column)
+            cColumn--;
     }
 }
 

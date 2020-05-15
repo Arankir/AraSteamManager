@@ -55,10 +55,10 @@ void MainWindow::InitComponents(){
     ui->StackedWidgetForms->setCurrentIndex(0);
 
     this->setGeometry(_setting.GetMainWindowGeometry());
-    if((_setting.GetMainWindowPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetMainWindowPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
-        ;//this->move(_setting.GetMainWindowPercentPos().x(),_setting.GetMainWindowPercentPos().y()-31);
-    else
-        this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
+    //if((_setting.GetMainWindowPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetMainWindowPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
+    //    ;//this->move(_setting.GetMainWindowPercentPos().x(),_setting.GetMainWindowPercentPos().y()-31);
+    //else
+    this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
 #define Connects {
     connect(ui->ButtonFindProfile,&QPushButton::clicked,this,&MainWindow::ButtonFindProfile_Clicked);
     connect(ui->ButtonExit,&QPushButton::clicked,this,&MainWindow::ButtonExit_Clicked);
@@ -435,8 +435,9 @@ void MainWindow::moveEvent(QMoveEvent *){
 //    _setting.SetMainWindowPos(event->pos());
 }
 void MainWindow::resizeEvent(QResizeEvent *){
-//    _setting.SetMainWindowParams(this->geometry(),this->pos(),QGuiApplication::primaryScreen()->geometry());
+    //    _setting.SetMainWindowParams(this->geometry(),this->pos(),QGuiApplication::primaryScreen()->geometry());
 }
+
 MainWindow::~MainWindow(){
     ReturnFromForms();
     if(_achievementsCount>0)

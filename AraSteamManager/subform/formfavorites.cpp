@@ -58,7 +58,7 @@ void FormFavorites::InitComponents(){
     ui->TableWidgetFriends->setColumnHidden(c_tableFriendsColumnID,true);
     ui->TableWidgetFriends->setColumnWidth(c_tableFriendsColumnIcon,33);
     ui->TableWidgetFriends->setRowCount(friendsJ.size());
-    foreach (QJsonValue frien, friendsJ) {
+    for(QJsonValue frien: friendsJ) {
         SProfile *Profiles = new SProfile(frien.toObject().value("id").toString(),true,QueryType::url);
         connect(Profiles,SIGNAL(s_finished(SProfile*)),this,SLOT(FriendLoad(SProfile*)));
     }
