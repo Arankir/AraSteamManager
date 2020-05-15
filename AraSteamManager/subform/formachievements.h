@@ -151,7 +151,7 @@ private:
     FormTablesHeaders *_tableAchievements;
 
     //для загрузки картинок
-    QVector<RequestData*> _request;
+    QList<RequestData*> _request;
     int _numRequests=0;
     int _numNow=0;
 
@@ -161,11 +161,11 @@ private:
     int _type1=0;
     int _type2=0;
     SProfiles _profilesFriends;
-    QVector<QPair<SProfile,FriendType>> _friends;
+    QList<QPair<SProfile,FriendType>> _friends;
 
     //для создания/редактирования категории
     CategoryType _typeCategory=CategoryType::none;
-    QVector<FormCategoryValue*> _values;
+    QList<FormCategoryValue*> _values;
     bool _isUnique=false;
 
     //для фильтрации

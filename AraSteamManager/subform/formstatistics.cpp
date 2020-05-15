@@ -100,7 +100,7 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
     _months=a_months;
     _years=a_years;
     _totalAverage=0.0;
-    foreach (double averageForGame, _averagePercent) {
+    for(double averageForGame: _averagePercent) {
         _totalAverage+=averageForGame;
     }
     ui->LabelAveragePercentValue->setText(QString("%1\n-%2: %3%\n-%4: %5%").arg(tr("Средний процент"),tr("по всем играм"),QString::number(_totalAverage/(_numof[0]+_numof[1]+_numof[2])),tr("по начатым играм"),QString::number(_totalAverage/(_numof[1]+_numof[2]))));
@@ -198,12 +198,12 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
     max=0;
     QBarCategoryAxis *axisXY = new QBarCategoryAxis();
     QBarSet *barSetY = new QBarSet(_id);
-    for(int i=0;i<_years.size();i++){
-        axisXY->append(_years[i].first);
-        *barSetY<<_years[i].second;
-        if(max<_years[i].second)
-            max=_years[i].second;
-        }
+    for(auto &year: _years){
+        axisXY->append(year.first);
+        *barSetY<<year.second;
+        if(max<year.second)
+            max=year.second;
+    }
     max+=(10000-max%10000);
 
     QValueAxis *axisYY = new QValueAxis();

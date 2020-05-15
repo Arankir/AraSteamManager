@@ -90,22 +90,26 @@ void FormFriends::ProgressLoading(int a_progress,int a_row){
 }
 void FormFriends::OnFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
-    for (int i=0;i<_friends.GetCount();i++) {
-        QString path = _setting._pathImagesProfiles+_profiles[i]._avatar.mid(72,20)+".jpg";
+    int row=0;
+    for(auto &profile: _profiles){
+        QString path = _setting._pathImagesProfiles+profile.GetAvatar().mid(72,20)+".jpg";
         QLabel *avatarFriend = new QLabel;
-        ui->TableWidgetFriends->setCellWidget(i,c_tableColumnIcon,avatarFriend);
+        ui->TableWidgetFriends->setCellWidget(row,c_tableColumnIcon,avatarFriend);
         if(!QFile::exists(path)){
                 avatarFriend->setBaseSize(QSize(32,32));
-                if(i==0)//не работает
-                    connect(new RequestImage(avatarFriend,_profiles[i]._avatar,path,true,this),&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){TableWidgetFriends_CellClicked(0,0);});
+                if(row==0)//не работает
+                    connect(new RequestImage(avatarFriend,profile.GetAvatar(),path,true,this),&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
+                        TableWidgetFriends_CellClicked(0,0);
+                    });
                 else
-                    new RequestImage(avatarFriend,_profiles[i]._avatar,path,true,this);
+                    new RequestImage(avatarFriend,profile.GetAvatar(),path,true,this);
             } else {
                 avatarFriend->setPixmap(QPixmap(path));
-                if(i==0)
+                if(row==0)
                     TableWidgetFriends_CellClicked(0,0);
             }
-        }
+        row++;
+    }
 }
 #define InitEnd }
 
@@ -190,8 +194,8 @@ void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
             QJsonArray values=_favorites.GetValues();
             for (int i=0;i<ui->TableWidgetFriends->rowCount();i++){
                 bool isFavorite=false;
-                foreach (QJsonValue value, values) {
-                    if(value.toObject().value("id").toString()==_profiles[i]._steamID){
+                for(QJsonValue value: values) {
+                    if(value.toObject().value("id").toString()==_profiles[i].GetSteamid()){
                         isFavorite=true;
                         break;
                     }
@@ -247,81 +251,78 @@ void FormFriends::FriendToUi(){
     }
     if(row>-1){
         ui->LabelFriendIcon->setPixmap(*static_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row,c_tableColumnIcon))->pixmap());
-        int index=-1;
-        for (int i=0;i<ui->TableWidgetFriends->rowCount();i++) {
-            if(_profiles[i]._steamID==_currentFriend){
-                index=i;
-                break;
-            }
-        }
-        if(index>-1){
-            _currentFriendIndex=index;
-            ui->LabelFriendName->setText(_profiles[index]._personaName);
-            if(!_profiles[index]._gameExtraInfo.isEmpty()){
-                ui->LabelFriendStatus->setText(tr("В игре"));
-                ui->LabelFriendStatus->setStyleSheet("color: #89b753");
-            } else
-                switch (_profiles[index]._personaState){
-                case 0:{
-                        ui->LabelFriendStatus->setText(tr("Не в сети"));
-                        ui->LabelFriendStatus->setStyleSheet("color: #4c4d4f");
-                        break;
-                }
+        int indexFriend=0;
+        _currentFriendIndex=-1;
+        for(auto &profile: _profiles){
+            if(profile.GetSteamid()==_currentFriend){
+                _currentFriendIndex=indexFriend;
+                ui->LabelFriendName->setText(profile.GetPersonaname());
+                if(!profile.GetGameextrainfo().isEmpty()){
+                    ui->LabelFriendStatus->setText(tr("В игре"));
+                    ui->LabelFriendStatus->setStyleSheet("color: #89b753");
+                } else
+                    switch (profile.GetPersonastate()){
+                    case 0:{
+                            ui->LabelFriendStatus->setText(tr("Не в сети"));
+                            ui->LabelFriendStatus->setStyleSheet("color: #4c4d4f");
+                            break;
+                    }
+                    case 1:{
+                            ui->LabelFriendStatus->setText(tr("В сети"));
+                            ui->LabelFriendStatus->setStyleSheet("color: #57cbde");
+                            break;
+                    }
+                    case 2:{
+                            ui->LabelFriendStatus->setText(tr("Не беспокоить"));
+                            ui->LabelFriendStatus->setStyleSheet("color: #815560");
+                            break;
+                    }
+                    case 3:{
+                            ui->LabelFriendStatus->setText(tr("Нет на месте"));
+                            ui->LabelFriendStatus->setStyleSheet("color: #46788e");
+                            break;
+                    }
+                    case 4:{
+                            ui->LabelFriendStatus->setText(tr("Спит"));
+                            ui->LabelFriendStatus->setStyleSheet("color: #46788e");
+                            break;
+                    }
+                    case 5:{
+                            ui->LabelFriendStatus->setText(tr("Ожидает обмена"));
+                            ui->LabelFriendStatus->setStyleSheet("color: #761e87");
+                            break;
+                    }
+                    case 6:{
+                            ui->LabelFriendStatus->setText(tr("Хочет поиграть"));
+                            ui->LabelFriendStatus->setStyleSheet("color: #761e87");
+                            break;
+                    }
+                    }
+                switch(profile.GetCommunityvisibilitystate()){
                 case 1:{
-                        ui->LabelFriendStatus->setText(tr("В сети"));
-                        ui->LabelFriendStatus->setStyleSheet("color: #57cbde");
-                        break;
+                    ui->LabelFriendPublic->setText(tr("Скрытый"));
+                    ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
+                    break;
                 }
                 case 2:{
-                        ui->LabelFriendStatus->setText(tr("Не беспокоить"));
-                        ui->LabelFriendStatus->setStyleSheet("color: #815560");
-                        break;
+                    ui->LabelFriendPublic->setText(tr("Скрытый"));
+                    ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
+                    break;
                 }
                 case 3:{
-                        ui->LabelFriendStatus->setText(tr("Нет на месте"));
-                        ui->LabelFriendStatus->setStyleSheet("color: #46788e");
-                        break;
+                    ui->LabelFriendPublic->setText(tr("Публичный"));
+                    ui->LabelFriendPublic->setStyleSheet("color: #0e6e11");
+                    break;
                 }
-                case 4:{
-                        ui->LabelFriendStatus->setText(tr("Спит"));
-                        ui->LabelFriendStatus->setStyleSheet("color: #46788e");
-                        break;
-                }
-                case 5:{
-                        ui->LabelFriendStatus->setText(tr("Ожидает обмена"));
-                        ui->LabelFriendStatus->setStyleSheet("color: #761e87");
-                        break;
-                }
-                case 6:{
-                        ui->LabelFriendStatus->setText(tr("Хочет поиграть"));
-                        ui->LabelFriendStatus->setStyleSheet("color: #761e87");
-                        break;
+                case 8:{
+                    ui->LabelFriendPublic->setText(tr("Скрытый"));
+                    ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
+                    break;
                 }
                 }
-            switch(_profiles[index]._communityVisibilityState){
-            case 1:{
-                ui->LabelFriendPublic->setText(tr("Скрытый"));
-                ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
                 break;
             }
-            case 2:{
-                ui->LabelFriendPublic->setText(tr("Скрытый"));
-                ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
-                break;
-            }
-            case 3:{
-                ui->LabelFriendPublic->setText(tr("Публичный"));
-                ui->LabelFriendPublic->setStyleSheet("color: #0e6e11");
-                break;
-            }
-            case 8:{
-                ui->LabelFriendPublic->setText(tr("Скрытый"));
-                ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
-                break;
-            }
-            }
-        } else {
-            _currentFriendIndex=-1;
+            indexFriend++;
         }
     }
 }
