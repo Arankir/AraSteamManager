@@ -325,7 +325,7 @@ void FormAchievements::LoadingCompare(){
     for(auto &profileFriend: _profilesFriends){
         SGames *gamesFriend = new SGames(this);
         gamesFriend->_index=index++;
-        gamesFriend->Set(profileFriend.GetSteamid(),true,true,true);
+        gamesFriend->Set(profileFriend._steamID,true,true,true);
         connect(gamesFriend,SIGNAL(s_finished(SGames*)),this,SLOT(LoadFriendGames(SGames*)));
     }
 }
@@ -471,7 +471,7 @@ void FormAchievements::TableWidgetCompareFriends_CellChanged(int a_row, int a_co
             auto columns = _tableAchievements->GetFriendsColumns();
             int friendColumn=0;
             for (auto &column: columns) {
-                if(_tableAchievements->GetTableHH()->horizontalHeaderItem(column)->text()==profileFriend.GetPersonaname()){
+                if(_tableAchievements->GetTableHH()->horizontalHeaderItem(column)->text()==profileFriend._personaName){
                     columnFriend=column;
                     _tableAchievements->RemoveFriendColumn(friendColumn);
                     break;

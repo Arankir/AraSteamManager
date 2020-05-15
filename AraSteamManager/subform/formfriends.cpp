@@ -75,8 +75,8 @@ void FormFriends::ProgressLoading(int a_progress,int a_row){
 //    QButtonWithData *button1 = new QButtonWithData(tr(" На профиль"));
 //    button1->setIcon(QIcon("://"+_theme+"/go_to.png"));
 //    button1->setMinimumSize(QSize(25,25));
-//    button1->setObjectName("ButtonGoToProfile"+_profiles[a_progress].GetSteamid());
-//    button1->AddData("ProfileID",_profiles[a_progress].GetSteamid());
+//    button1->setObjectName("ButtonGoToProfile"+_profiles[a_progress]._steamID);
+//    button1->AddData("ProfileID",_profiles[a_progress]._steamID);
 //    connect(button1,&QButtonWithData::pressed,this,&FormFriends::GoToProfileClicked);
 //    ui->TableWidgetFriends->setCellWidget(a_row,c_tableColumnGoTo,button1);
 
@@ -92,17 +92,17 @@ void FormFriends::OnFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
     int row=0;
     for(auto &profile: _profiles){
-        QString path = _setting._pathImagesProfiles+profile.GetAvatar().mid(72,20)+".jpg";
+        QString path = _setting._pathImagesProfiles+profile._avatar.mid(72,20)+".jpg";
         QLabel *avatarFriend = new QLabel;
         ui->TableWidgetFriends->setCellWidget(row,c_tableColumnIcon,avatarFriend);
         if(!QFile::exists(path)){
                 avatarFriend->setBaseSize(QSize(32,32));
                 if(row==0)//не работает
-                    connect(new RequestImage(avatarFriend,profile.GetAvatar(),path,true,this),&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
+                    connect(new RequestImage(avatarFriend,profile._avatar,path,true,this),&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
                         TableWidgetFriends_CellClicked(0,0);
                     });
                 else
-                    new RequestImage(avatarFriend,profile.GetAvatar(),path,true,this);
+                    new RequestImage(avatarFriend,profile._avatar,path,true,this);
             } else {
                 avatarFriend->setPixmap(QPixmap(path));
                 if(row==0)
@@ -195,7 +195,7 @@ void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
             for (int i=0;i<ui->TableWidgetFriends->rowCount();i++){
                 bool isFavorite=false;
                 for(QJsonValue value: values) {
-                    if(value.toObject().value("id").toString()==_profiles[i].GetSteamid()){
+                    if(value.toObject().value("id").toString()==_profiles[i]._steamID){
                         isFavorite=true;
                         break;
                     }
@@ -254,14 +254,14 @@ void FormFriends::FriendToUi(){
         int indexFriend=0;
         _currentFriendIndex=-1;
         for(auto &profile: _profiles){
-            if(profile.GetSteamid()==_currentFriend){
+            if(profile._steamID==_currentFriend){
                 _currentFriendIndex=indexFriend;
-                ui->LabelFriendName->setText(profile.GetPersonaname());
-                if(!profile.GetGameextrainfo().isEmpty()){
+                ui->LabelFriendName->setText(profile._personaName);
+                if(!profile._gameExtraInfo.isEmpty()){
                     ui->LabelFriendStatus->setText(tr("В игре"));
                     ui->LabelFriendStatus->setStyleSheet("color: #89b753");
                 } else
-                    switch (profile.GetPersonastate()){
+                    switch (profile._personaState){
                     case 0:{
                             ui->LabelFriendStatus->setText(tr("Не в сети"));
                             ui->LabelFriendStatus->setStyleSheet("color: #4c4d4f");
@@ -298,7 +298,7 @@ void FormFriends::FriendToUi(){
                             break;
                     }
                     }
-                switch(profile.GetCommunityvisibilitystate()){
+                switch(profile._communityVisibilityState){
                 case 1:{
                     ui->LabelFriendPublic->setText(tr("Скрытый"));
                     ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
