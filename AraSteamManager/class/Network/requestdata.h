@@ -19,7 +19,7 @@ class RequestData : public QObject
     Q_OBJECT
 public:
     RequestData(QString url, bool parallel, QObject *parent = nullptr);
-    RequestData(QObject *parent = nullptr);
+    RequestData(QObject *parent = nullptr):RequestData("",true,parent){};
     ~RequestData();
     void Get(QString url, bool parallel = false);
     QByteArray GetAnswer() {return _answer;}

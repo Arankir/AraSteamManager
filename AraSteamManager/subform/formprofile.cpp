@@ -33,17 +33,17 @@ void FormProfile::changeEvent(QEvent *event){
 
 void FormProfile::ProfileToUi(SProfile a_profile){
     _profile=a_profile;
-    SBans bans(a_profile.GetSteamid(),false);
-    SLevels levels(a_profile.GetSteamid());
-    _games.Set(a_profile.GetSteamid(),true,true,false);
-    _friends.Set(a_profile.GetSteamid(),false);
-    if(!a_profile.GetGameextrainfo().isEmpty()){
-        ui->LabelPersonaState->setText(tr("В игре %1").arg(a_profile.GetGameextrainfo()));
+    SBans bans(a_profile._steamID,false);
+    SLevels levels(a_profile._steamID);
+    _games.Set(a_profile._steamID,true,true,false);
+    _friends.Set(a_profile._steamID,false);
+    if(!a_profile._gameExtraInfo.isEmpty()){
+        ui->LabelPersonaState->setText(tr("В игре %1").arg(a_profile._gameExtraInfo));
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
     } else
-        switch (a_profile.GetPersonastate()) {
+        switch (a_profile._personaState) {
             case 0:
-                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(a_profile.GetLastlogoff().toString("yyyy.MM.dd hh:mm:ss")));
+                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(a_profile._lastLogoff.toString("yyyy.MM.dd hh:mm:ss")));
                 ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
                 break;
             case 1:
@@ -71,16 +71,16 @@ void FormProfile::ProfileToUi(SProfile a_profile){
                 ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
                 break;
         }
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+a_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+a_profile.GetProfileurl()+"</span></a>");
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+a_profile._profileUrl+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+a_profile._profileUrl+"</span></a>");
     ui->LabellvlValue->setText(QString::number(levels.GetLevel()));
-    ui->LabelRealNameValue->setText(a_profile.GetRealname());
-    ui->LabelTimeCreatedValue->setText(a_profile.GetTimecreated().toString("yyyy.MM.dd"));
-    ui->LabelLocCountryCodeValue->setText(a_profile.GetLoccountrycode());
+    ui->LabelRealNameValue->setText(a_profile._realName);
+    ui->LabelTimeCreatedValue->setText(a_profile._timeCreated.toString("yyyy.MM.dd"));
+    ui->LabelLocCountryCodeValue->setText(a_profile._locCountryCode);
     QPixmap profileState;
     QPixmap gamesState;
     QPixmap friendsState;
     //Добавить описание при наведении
-    switch (a_profile.GetCommunityvisibilitystate()) {
+    switch (a_profile._communityVisibilityState) {
         case 1:
 //            ui->LabelProfileVisibility->setText(tr("Скрытый"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #6e0e0e");
@@ -167,10 +167,10 @@ void FormProfile::ProfileToUi(SProfile a_profile){
 //        ui->LabelBans->setStyleSheet("color: #0e6e11");
     }
 
-    ui->LabelAvatar->setPixmap(RequestData(a_profile.GetAvatarmedium(),false).GetPixmap());
-    ui->LabelAvatarMinimize->setPixmap(RequestData(a_profile.GetAvatar(),false).GetPixmap());
-    ui->LabelNick->setText(a_profile.GetPersonaname());
-    ui->LabelNameMinimize->setText(a_profile.GetPersonaname());
+    ui->LabelAvatar->setPixmap(RequestData(a_profile._avatarMedium,false).GetPixmap());
+    ui->LabelAvatarMinimize->setPixmap(RequestData(a_profile._avatar,false).GetPixmap());
+    ui->LabelNick->setText(a_profile._personaName);
+    ui->LabelNameMinimize->setText(a_profile._personaName);
 
     UpdateVisibleInfo();
 }
@@ -185,7 +185,7 @@ void FormProfile::UpdateTheme(){
             _theme="black";
             break;
     }
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+_profile.GetProfileurl()+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+_profile.GetProfileurl()+"</span></a>");
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"> <a href=\""+_profile._profileUrl+"\"><span style=\" text-decoration: underline; color:#2d7fc8;\">"+_profile._profileUrl+"</span></a>");
     ui->ButtonSetProfile->setIcon(QIcon("://"+_theme+"/set_home.png"));
     ui->ButtonFavorites->setIcon(QIcon("://"+_theme+"/favorites.png"));
     ui->ButtonStatistics->setIcon(QIcon("://"+_theme+"/statistic.png"));
@@ -219,7 +219,7 @@ void FormProfile::UpdateVisibleInfo(){
     }
     }
     Retranslate();
-    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=_profile.GetSteamid());
+    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=_profile._steamID);
 }
 
 void FormProfile::UpdateInfo(){
@@ -272,26 +272,26 @@ void FormProfile::Retranslate(){
 }
 
 void FormProfile::ButtonSetProfile_Clicked(){
-    _setting.SetMyProfile(_profile.GetSteamid());
+    _setting.SetMyProfile(_profile._steamID);
     ui->ButtonSetProfile->setEnabled(false);
     emit s_myProfileChange();
 }
 
 void FormProfile::ButtonGames_Clicked(){
     if(_games.GetStatus()==StatusValue::success){
-        emit s_goToGames(_profile.GetSteamid(),_games);
+        emit s_goToGames(_profile._steamID,_games);
     }
 }
 
 void FormProfile::ButtonFriends_Clicked(){
     if(_friends.GetStatus()==StatusValue::success){
-        emit s_goToFriends(_profile.GetSteamid(),_friends);
+        emit s_goToFriends(_profile._steamID,_friends);
     }
 }
 
 void FormProfile::ButtonStatistics_Clicked(){
     if(_games.GetStatus()==StatusValue::success){
-        emit s_goToStatistic(_profile.GetSteamid(),_games,_profile.GetPersonaname());
+        emit s_goToStatistic(_profile._steamID,_games,_profile._personaName);
     }
 }
 

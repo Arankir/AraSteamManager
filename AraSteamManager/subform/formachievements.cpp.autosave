@@ -163,7 +163,7 @@ void FormAchievements::InitComponents(){
     connect(_tableAchievements,&FormTablesHeaders::s_contentCellClicked,this,&FormAchievements::TableAchievements_CellClicked);
     #define ConnectsEnd }
     _favorites.SetType("achievements");
-    _setting.CreateFile(_setting._pathImagesAchievements+QString::number(_game._appID));
+    Settings::CreateFile(_setting._pathImagesAchievements+QString::number(_game._appID));
     ui->GroupBoxCategories->setVisible(false);
     SwitchSimpleCompare(FormMode::compare);
     ui->ProgressBarFriendsLoad->setVisible(false);

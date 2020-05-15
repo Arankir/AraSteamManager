@@ -57,7 +57,7 @@ FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a
     for (int i=0;i<ui->TableWidgetHorizontalHeader->rowCount();i++)
         _horizontalHeaderHeight+=ui->TableWidgetHorizontalHeader->rowHeight(i);
 
-    SProfile profileData(_id,false,QueryType::url);
+    SProfiles profileData(_id,false,QueryType::url);
 //    QLabel *profileAvatarCompare = new QLabel;
 //    profileAvatarCompare->setAlignment(Qt::AlignCenter);
 //    new RequestImage(profileAvatarCompare,profileData.GetAvatar(),"",false,this);
@@ -255,14 +255,14 @@ void FormTablesHeaders::SetType(TableType a_newType){
 bool FormTablesHeaders::AddFriendColumn(SProfile a_friendProfile){
     int column=ui->TableWidgetContent->columnCount();
     InsertColumn(column);
-    ChangeHorizontalTitle(column,a_friendProfile.GetPersonaname());
+    ChangeHorizontalTitle(column,a_friendProfile._personaName);
     QLabel *avatarFriend = new QLabel;
-    avatarFriend->setPixmap(RequestData(a_friendProfile.GetAvatar(),false).GetPixmap());
-    avatarFriend->setToolTip(a_friendProfile.GetPersonaname());
+    avatarFriend->setPixmap(RequestData(a_friendProfile._avatar,false).GetPixmap());
+    avatarFriend->setToolTip(a_friendProfile._personaName);
     avatarFriend->setAlignment(Qt::AlignCenter);
     ui->TableWidgetHorizontalHeader->setCellWidget(0,column,avatarFriend);
     SAchievements achievementsFriends=_achievements;
-    achievementsFriends.Set(SAchievementsPlayer(QString::number(_game._appID),a_friendProfile.GetSteamid(),false,this));
+    achievementsFriends.Set(SAchievementsPlayer(QString::number(_game._appID),a_friendProfile._steamID,false,this));
 //    Threading LoadFriendTable(this);
 //    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
     _fCompare.SetCol(_fCompare.GetCol()+1);

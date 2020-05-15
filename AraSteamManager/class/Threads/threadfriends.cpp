@@ -4,12 +4,12 @@ int ThreadFriends::Fill(){
     int row=0;
     for(auto &profile: _profiles){
         for(auto &friendP: _friends){
-            if(profile.GetSteamid()==friendP._steamID){
-                _TableWidgetFriends->setItem(row,c_tableColumnID,new QTableWidgetItem(profile.GetSteamid()));
-                _TableWidgetFriends->setItem(row,c_tableColumnName,new QTableWidgetItem(profile.GetPersonaname()));
+            if(profile._steamID==friendP._steamID){
+                _TableWidgetFriends->setItem(row,c_tableColumnID,new QTableWidgetItem(profile._steamID));
+                _TableWidgetFriends->setItem(row,c_tableColumnName,new QTableWidgetItem(profile._personaName));
                 _TableWidgetFriends->setItem(row,c_tableColumnAdded,new QTableWidgetItem(friendP._friend_since.toString("yyyy.MM.dd hh:mm:ss")));
-                _TableWidgetFriends->setItem(row,c_tableColumnStatus,GetState(profile.GetGameextrainfo(),profile.GetPersonastate()));
-                _TableWidgetFriends->setItem(row,c_tableColumnisPublic,GetPrivacy(profile.GetCommunityvisibilitystate()));
+                _TableWidgetFriends->setItem(row,c_tableColumnStatus,GetState(profile._gameExtraInfo,profile._personaState));
+                _TableWidgetFriends->setItem(row,c_tableColumnisPublic,GetPrivacy(profile._communityVisibilityState));
                 emit s_progress(row,row);
                 break;
             }

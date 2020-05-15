@@ -6,7 +6,6 @@ RequestData::RequestData(QString a_url, bool a_parallel, QObject *a_parent): QOb
     if(!a_url.isEmpty())
         Get(a_url,a_parallel);
 }
-RequestData::RequestData(QObject *a_parent):RequestData("",true,a_parent){}
 
 void RequestData::Get(QString a_url, bool a_parallel){
     _manager->get(QNetworkRequest(QUrl(a_url)));

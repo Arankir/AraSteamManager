@@ -377,8 +377,8 @@ void MainWindow::AddAchievements(SAchievementsPlayer achievements, SGame games){
         connect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&MainWindow::ContainerAchievementsClose);
         _windowChildCount++;
     }
-    qDebug()<<static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile().GetSteamid();
-    _containerAchievementsForm->AddFormAchievement(achievements,static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile().GetSteamid(),games,_achievementsCount++);
+    qDebug()<<static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID;
+    _containerAchievementsForm->AddFormAchievement(achievements,static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID,games,_achievementsCount++);
     _containerAchievementsForm->show();
 }
 void MainWindow::RemoveAchievements(int index){
@@ -504,13 +504,13 @@ void MainWindow::ButtonFindProfile_Clicked(){
     ReturnFromForms();
 }
 void MainWindow::GoToProfile(QString a_id, QueryType a_type){
-    SProfile newProfile(a_id,false,a_type);
+    SProfiles newProfile(a_id,false,a_type);
     if(newProfile.GetStatus()==StatusValue::success){
         ReturnFromForms();
         if(ui->StackedWidgetProfiles->currentIndex()!=ui->StackedWidgetProfiles->count()-1)
             while(ui->StackedWidgetProfiles->count()-1!=ui->StackedWidgetProfiles->currentIndex())
                 ui->StackedWidgetProfiles->removeWidget(ui->StackedWidgetProfiles->widget(ui->StackedWidgetProfiles->currentIndex()+1));
-        FormProfile *newStackedProfile = new FormProfile(newProfile);
+        FormProfile *newStackedProfile = new FormProfile(newProfile[0]);
         newStackedProfile->setSizePolicy(QSizePolicy(QSizePolicy::Preferred,QSizePolicy::Minimum));
         ui->StackedWidgetProfiles->addWidget(newStackedProfile);
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->count()-1);
@@ -613,7 +613,7 @@ void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QStrin
 
 void MainWindow::UpdateMyProfile(){
     _setting.SyncronizeSettings();
-    ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile().GetSteamid()!=_setting.GetMyProfile());
+    ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID!=_setting.GetMyProfile());
     emit s_updateSettings();
 }
 void MainWindow::UpdateSettings(){

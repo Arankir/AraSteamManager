@@ -96,7 +96,7 @@ void FormSettings::InitComponents(){
             if(list.at(i).fileName()!="All.txt"){
                 QFile fileHide("Files/Hide/"+list.at(i).fileName());
                 fileHide.open(QFile::ReadOnly);
-                SProfile profile(list.at(i).fileName().remove(".txt"),false,QueryType::url);
+                SProfiles profile(list.at(i).fileName().remove(".txt"),false,QueryType::url);
                 QList<QString> hide;
                 QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
                 profileHidden->setText(profile.GetPersonaname());

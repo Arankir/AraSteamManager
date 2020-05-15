@@ -106,7 +106,7 @@ private:
     QString GetTheme();
     Ui::MainWindow *ui;
     int _windowChildCount=0;
-    SProfile _profile;
+    SProfiles _profile;
     SGames _games;
     SFriends _friends;
     Settings _setting;

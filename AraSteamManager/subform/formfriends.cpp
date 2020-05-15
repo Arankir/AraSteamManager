@@ -91,15 +91,15 @@ void FormFriends::ProgressLoading(int a_progress,int a_row){
 void FormFriends::OnFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
     for (int i=0;i<_friends.GetCount();i++) {
-        QString path = _setting._pathImagesProfiles+_profiles[i].GetAvatar().mid(72,20)+".jpg";
+        QString path = _setting._pathImagesProfiles+_profiles[i]._avatar.mid(72,20)+".jpg";
         QLabel *avatarFriend = new QLabel;
         ui->TableWidgetFriends->setCellWidget(i,c_tableColumnIcon,avatarFriend);
         if(!QFile::exists(path)){
                 avatarFriend->setBaseSize(QSize(32,32));
                 if(i==0)//не работает
-                    connect(new RequestImage(avatarFriend,_profiles[i].GetAvatar(),path,true,this),&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){TableWidgetFriends_CellClicked(0,0);});
+                    connect(new RequestImage(avatarFriend,_profiles[i]._avatar,path,true,this),&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){TableWidgetFriends_CellClicked(0,0);});
                 else
-                    new RequestImage(avatarFriend,_profiles[i].GetAvatar(),path,true,this);
+                    new RequestImage(avatarFriend,_profiles[i]._avatar,path,true,this);
             } else {
                 avatarFriend->setPixmap(QPixmap(path));
                 if(i==0)
@@ -191,7 +191,7 @@ void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
             for (int i=0;i<ui->TableWidgetFriends->rowCount();i++){
                 bool isFavorite=false;
                 foreach (QJsonValue value, values) {
-                    if(value.toObject().value("id").toString()==_profiles[i].GetSteamid()){
+                    if(value.toObject().value("id").toString()==_profiles[i]._steamID){
                         isFavorite=true;
                         break;
                     }
@@ -215,8 +215,8 @@ void FormFriends::ButtonFriendGoTo_Clicked(){
 }
 void FormFriends::ButtonFriendFavorite_Clicked(){
     QJsonObject newValue;
-    newValue["id"]=_profiles[_currentFriendIndex].GetSteamid();
-    newValue["name"]=_profiles[_currentFriendIndex].GetPersonaname();
+    newValue["id"]=_profiles[_currentFriendIndex]._steamID;
+    newValue["name"]=_profiles[_currentFriendIndex]._personaName;
     newValue["added"]=_friends[_currentFriendIndex]._friend_since.toString("yyyy.MM.dd hh:mm:ss");
     if(_favorites.AddValue(newValue,true)){
         //Категория добавилась
@@ -249,19 +249,19 @@ void FormFriends::FriendToUi(){
         ui->LabelFriendIcon->setPixmap(*static_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row,c_tableColumnIcon))->pixmap());
         int index=-1;
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++) {
-            if(_profiles[i].GetSteamid()==_currentFriend){
+            if(_profiles[i]._steamID==_currentFriend){
                 index=i;
                 break;
             }
         }
         if(index>-1){
             _currentFriendIndex=index;
-            ui->LabelFriendName->setText(_profiles[index].GetPersonaname());
-            if(!_profiles[index].GetGameextrainfo().isEmpty()){
+            ui->LabelFriendName->setText(_profiles[index]._personaName);
+            if(!_profiles[index]._gameExtraInfo.isEmpty()){
                 ui->LabelFriendStatus->setText(tr("В игре"));
                 ui->LabelFriendStatus->setStyleSheet("color: #89b753");
             } else
-                switch (_profiles[index].GetPersonastate()){
+                switch (_profiles[index]._personaState){
                 case 0:{
                         ui->LabelFriendStatus->setText(tr("Не в сети"));
                         ui->LabelFriendStatus->setStyleSheet("color: #4c4d4f");
@@ -298,7 +298,7 @@ void FormFriends::FriendToUi(){
                         break;
                 }
                 }
-            switch(_profiles[index].GetCommunityvisibilitystate()){
+            switch(_profiles[index]._communityVisibilityState){
             case 1:{
                 ui->LabelFriendPublic->setText(tr("Скрытый"));
                 ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");

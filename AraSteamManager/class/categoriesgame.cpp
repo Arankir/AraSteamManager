@@ -13,27 +13,27 @@ void CategoriesGame::Update(){
 QList<QString> CategoriesGame::GetTitles(){
     QList<QString> list;
     for(auto title: _categories.value("Categories").toArray()){
-        list.append(title.toObject().value("Title").toString());
+        list.append(std::move(title.toObject().value("Title").toString()));
     }
     return list;
 }
 QList<QString> CategoriesGame::GetValues(int a_category, int a_value){
     QList<QString> list;
     for(auto achievement: _categories.value("Categories").toArray().at(a_category).toObject().value("Values").toArray().at(a_value).toObject().value("Achievements").toArray()){
-        list.append(achievement.toString());
+        list.append(std::move(achievement.toString()));
     }
     return list;
 }
 QList<QString> CategoriesGame::GetNoValues(int a_category){
     QList<QString> list;
     for(auto noValue: _categories.value("Categories").toArray().at(a_category).toObject().value("NoValues").toArray()){
-        list.append(noValue.toString());
+        list.append(std::move(noValue.toString()));
     }
     return list;
 }
 
 QFileInfoList CategoriesGame::GetFiles(QString a_path){
-    _setting.CreateFile(a_path);
+    Settings::CreateFile(a_path);
     QDir categoriesOld(a_path);
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     categoriesOld.setSorting(QDir::Name);
@@ -91,7 +91,7 @@ void CategoriesGame::ConvertOldCategories(){
     }
 }
 void CategoriesGame::Save(){
-    _setting.CreateFile(_setting._pathCategories);
+    Settings::CreateFile(_setting._pathCategories);
     QFile fileCategoryNew(_setting._pathCategories+QString::number(_game._appID)+".json");
     fileCategoryNew.open(QFile::WriteOnly);
     QJsonDocument doc;

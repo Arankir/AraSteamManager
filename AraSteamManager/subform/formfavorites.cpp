@@ -59,8 +59,8 @@ void FormFavorites::InitComponents(){
     ui->TableWidgetFriends->setColumnWidth(c_tableFriendsColumnIcon,33);
     ui->TableWidgetFriends->setRowCount(friendsJ.size());
     foreach (QJsonValue frien, friendsJ) {
-        SProfile *Profiles = new SProfile(frien.toObject().value("id").toString(),true,QueryType::url);
-        connect(Profiles,SIGNAL(s_finished(SProfile*)),this,SLOT(FriendLoad(SProfile*)));
+        SProfiles *Profiles = new SProfiles(frien.toObject().value("id").toString(),true,QueryType::url);
+        connect(Profiles,SIGNAL(s_finished(SProfiles*)),this,SLOT(FriendLoad(SProfiles*)));
     }
     for (int i=0;i<achievementsJ.size();i++) {
         //
@@ -68,13 +68,13 @@ void FormFavorites::InitComponents(){
 }
 
 void FormFavorites::FriendLoad(SProfile *a_profile){
-    QString path = _setting._pathImagesProfiles+a_profile->GetAvatar().mid(72,20)+".jpg";
+    QString path = _setting._pathImagesProfiles+a_profile->_avatar.mid(72,20)+".jpg";
     QLabel *avatarFriend = new QLabel;
     avatarFriend->setBaseSize(QSize(32,32));
     ui->TableWidgetFriends->setCellWidget(_numRequests,c_tableFriendsColumnIcon,avatarFriend);
     if(!QFile::exists(path)){
         //if(_numRequests<500){
-            new RequestImage(avatarFriend,a_profile->GetAvatar(),path,true,this);
+            new RequestImage(avatarFriend,a_profile->_avatar,path,true,this);
             //numrequests++;
             _numNow++;
         //    }
@@ -82,11 +82,11 @@ void FormFavorites::FriendLoad(SProfile *a_profile){
             avatarFriend->setPixmap(QPixmap(path));
         }
     QTableWidgetItem *item4 = new QTableWidgetItem;
-    if(!a_profile->GetGameextrainfo().isEmpty()){
+    if(!a_profile->_gameExtraInfo.isEmpty()){
         item4->setText(tr("В игре"));
         item4->setForeground(QColor(137,183,83));
     } else
-        switch (a_profile->GetPersonastate()){
+        switch (a_profile->_personaState){
         case 0:{
                 item4->setText(tr("Не в сети"));
                 item4->setForeground(QColor(76,77,79));
@@ -124,7 +124,7 @@ void FormFavorites::FriendLoad(SProfile *a_profile){
         }
         }
     QTableWidgetItem *item5 = new QTableWidgetItem;
-    switch(a_profile->GetCommunityvisibilitystate()){
+    switch(a_profile->_communityVisibilityState){
         case 1:
             item5->setText(tr("Скрытый"));
             item5->setForeground(QColor(110,14,14));
@@ -142,8 +142,8 @@ void FormFavorites::FriendLoad(SProfile *a_profile){
             item5->setForeground(QColor(110,14,14));
             break;
     }
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID,new QTableWidgetItem(a_profile->GetSteamid()));
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName,new QTableWidgetItem(a_profile->GetPersonaname()));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID,new QTableWidgetItem(a_profile->_steamID));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName,new QTableWidgetItem(a_profile->_personaName));
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnStatus,item4);
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnisPublic,item5);
     _numRequests++;
