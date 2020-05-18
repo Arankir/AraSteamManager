@@ -17,16 +17,7 @@ constexpr int c_formsSettings=5;
 #define Init {
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), _games(this){
     ui->setupUi(this);
-    switch(_setting.GetTheme()){
-        case 1:
-            _theme="white";
-            break;
-        case 2:
-            _theme="black";
-            break;
-        default:
-            _theme="white";
-    }
+
     qApp->setStyleSheet(GetTheme());
 
 //    int id = QFontDatabase::addApplicationFont("C:/font4.otf");
@@ -43,11 +34,12 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
     _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
+    this->setWindowFlags(Qt::FramelessWindowHint);
 //    this->setWindowFlags(Qt::Window
 //                         | Qt::WindowTitleHint
 //                         | Qt::CustomizeWindowHint);
-    ui->ButtonMinimize->setVisible(false);
-    ui->ButtonMaximize->setVisible(false);
+//    ui->ButtonMinimize->setVisible(false);
+//    ui->ButtonMaximize->setVisible(false);
     ui->line->setVisible(false);
     ui->FormProgressBar->setVisible(false);
     ui->ButtonBack->setEnabled(false);
@@ -55,9 +47,6 @@ void MainWindow::InitComponents(){
     ui->StackedWidgetForms->setCurrentIndex(0);
 
     this->setGeometry(_setting.GetMainWindowGeometry());
-    //if((_setting.GetMainWindowPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetMainWindowPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
-    //    ;//this->move(_setting.GetMainWindowPercentPos().x(),_setting.GetMainWindowPercentPos().y()-31);
-    //else
     this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
 #define Connects {
     connect(ui->ButtonFindProfile,&QPushButton::clicked,this,&MainWindow::ButtonFindProfile_Clicked);
@@ -70,7 +59,11 @@ void MainWindow::InitComponents(){
     connect(ui->ButtonMaximize,&QPushButton::clicked,this,&MainWindow::ButtonMaximize_Clicked);
     connect(ui->ButtonMinimize,&QPushButton::clicked,this,&MainWindow::ButtonMinimize_Clicked);
 #define ConnectsEnd }
-#define Icons {
+}
+#define InitEnd }
+
+#define System {
+void MainWindow::SetIcons(){
     ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
     ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
     ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_theme+"/home.png"));
@@ -79,13 +72,7 @@ void MainWindow::InitComponents(){
     ui->ButtonExit->setIcon(QIcon("://"+_theme+"/exit.png"));
     ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
     ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
-#define IconsEnd }
-//    FormTablesHeaders *th = new FormTablesHeaders(2,3,4,5,false,true,false,true);
-//    ui->ScrollAreaNone->setWidget(th);
 }
-#define InitEnd }
-
-#define System {
 QString MainWindow::GetTheme(){
     QString hoverGradient;
     QString backgroundGradient;
@@ -105,266 +92,273 @@ QString MainWindow::GetTheme(){
     QString groupBox;
     QString listWidget;
     switch(_setting.GetTheme()){
-        case 1:{
-            hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                        "stop: 0 #185077, "
-                        "stop: 0.22 #387097, "
-                        "stop: 0.88 #286087, "
-                        "stop: 1.0 #185077); ";
-            backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                        "stop: 0 #213c57, "
-                        "stop: 1.0 #1a2839); ";
-            blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                        "stop: 0 #102b45, "
-                        "stop: 0.8 #17314c, "
-                        "stop: 1.0 #193048); ";
-            pushButton =
-                    "QPushButton{ "
-                        "color: white; "
-                        "background-color: #24547d; "
-                    "} "
-                    "QPushButton:disabled{ "
-                        "background-color: #48525a; "
-                    "} "
-                    "QPushButton:pressed{ "
-                        "background-color: #212121; "
-                    "} "
-                    "QPushButton:hover{ "
-                        "background-color: #22748c; "
-                        "background: "+hoverGradient+
-                        "border: 1px solid #262626; "
-                        "border-radius: 2px; "
-                    "} "
-                    ;
-            progressBar =
-                    "QProgressBar { "
-                        "color: white; "
-                        "background-color: rgba(26,26,26,255); "
-                        "border: 1px solid grey; "
-                        "border-radius: 7px; "
-                        "text-align: center; "
-                    "} "
-                    "QProgressBar::chunk { "
-                        "background-color: "+hoverGradient+
-                        "border-radius: 6px; "
-                    "} "
-                    ;
-            forms =
-                    "QWidget[objectName=MainWindow],QWidget[objectName=FormContainerAchievements]{ "
-                        "background-color: "+backgroundGradient+
-                    "} "
-                    ;
-            subContainers =
-                    "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget, QWidget[isScrollArea=\"true\"]{ "
-                        "background-color: rgba(255, 255, 255, 0); "
-                    "} "
-                    "QScrollArea { "
-                        "border: 0px solid white; "
-                    "} "
-                    "QMessageBox{"
-                        "background: black; "
-                    "} "
-                    ;
-            labels =
-                    "QLabel{"
-                        "color: white; "
-                    "} "
-                    ;
-            radioButtons =
-                    "QRadioButton{"
-                        "color: white; "
-                        "background-color: rgba(255, 255, 255, 0); "
-                        "border: 0px solid grey; "
-                    "} "
-                    "QRadioButton::indicator { "
-                        "width: 15; "
-                    "} "
-                    "QRadioButton::indicator::unchecked { "
-                        "image: url(://"+_theme+"/widgets/radiobutton_unchecked.png); "
-                    "} "
-                    "QRadioButton::indicator::checked { "
-                        "image: url(://"+_theme+"/widgets/radiobutton_checked.png); "
-                    "} "
-                    "QRadioButton::hover { "
-                        "color: "+hoverGradient+
-                    "} "
-                    ;
-            tabBar =
-                    "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics] { "
-                        "background-color: "+backgroundGradient+
-                    "} "
-                    "QTabBar::tab { "
-                        "color: white; "
-                        "background-color: #333333; "
-                        "border: 1px solid black; "
-                        "border-bottom-color: black; "
-                        "border-top-left-radius: 4px; "
-                        "border-top-right-radius: 4px; "
-                        "min-width: 8ex; "
-                        "padding: 2px; "
-                    "} "
-                    "QTabBar::tab:hover { "
-                        "background: #434343; "
-                    "} "
-                    "QTabBar::tab:selected { "
-                        "background: #213c57; "
-                        "border-bottom-color: #213c57; "
-                    "} "
-                    "QTabBar::tab:!selected { "
-                        "margin-top: 2px; "
-                    "} "
-                    "QTabBar::tab:selected { "
-                        /* expand/overlap to the left and right by 4px */
-                        "margin-left: -4px; "
-                        "margin-right: -4px; "
-                    "} "
+    case 1:{
+        hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                    "stop: 0 #185077, "
+                    "stop: 0.22 #387097, "
+                    "stop: 0.88 #286087, "
+                    "stop: 1.0 #185077); ";
+        backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                    "stop: 0 #213c57, "
+                    "stop: 1.0 #1a2839); ";
+        blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                    "stop: 0 #102b45, "
+                    "stop: 0.8 #17314c, "
+                    "stop: 1.0 #193048); ";
+        pushButton =
+                "QPushButton{ "
+                    "color: white; "
+                    "background-color: #24547d; "
+                "} "
+                "QPushButton:disabled{ "
+                    "background-color: #48525a; "
+                "} "
+                "QPushButton:pressed{ "
+                    "background-color: #212121; "
+                "} "
+                "QPushButton:hover{ "
+                    "background-color: #22748c; "
+                    "background: "+hoverGradient+
+                    "border: 1px solid #262626; "
+                    "border-radius: 2px; "
+                "} "
+                ;
+        progressBar =
+                "QProgressBar { "
+                    "color: white; "
+                    "background-color: rgba(26,26,26,255); "
+                    "border: 1px solid grey; "
+                    "border-radius: 7px; "
+                    "text-align: center; "
+                "} "
+                "QProgressBar::chunk { "
+                    "background-color: "+hoverGradient+
+                    "border-radius: 6px; "
+                "} "
+                ;
+        forms =
+                "QWidget[objectName=MainWindow],QWidget[objectName=FormContainerAchievements]{ "
+                    "background-color: "+backgroundGradient+
+                "} "
+                ;
+        subContainers =
+                "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget, QWidget[isScrollArea=\"true\"]{ "
+                    "background-color: rgba(255, 255, 255, 0); "
+                "} "
+                "QScrollArea { "
+                    "border: 0px solid white; "
+                "} "
+                "QMessageBox{"
+                    "background: black; "
+                "} "
+                ;
+        labels =
+                "QLabel{"
+                    "color: white; "
+                "} "
+                ;
+        radioButtons =
+                "QRadioButton{"
+                    "color: white; "
+                    "background-color: rgba(255, 255, 255, 0); "
+                    "border: 0px solid grey; "
+                "} "
+                "QRadioButton::indicator { "
+                    "width: 15; "
+                "} "
+                "QRadioButton::indicator::unchecked { "
+                    "image: url(://"+_theme+"/widgets/radiobutton_unchecked.png); "
+                "} "
+                "QRadioButton::indicator::checked { "
+                    "image: url(://"+_theme+"/widgets/radiobutton_checked.png); "
+                "} "
+                "QRadioButton::hover { "
+                    "color: "+hoverGradient+
+                "} "
+                ;
+        tabBar =
+                "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics] { "
+                    "background-color: "+backgroundGradient+
+                "} "
+                "QTabBar::tab { "
+                    "color: white; "
+                    "background-color: #333333; "
+                    "border: 1px solid black; "
+                    "border-bottom-color: black; "
+                    "border-top-left-radius: 4px; "
+                    "border-top-right-radius: 4px; "
+                    "min-width: 8ex; "
+                    "padding: 2px; "
+                "} "
+                "QTabBar::tab:hover { "
+                    "background: #434343; "
+                "} "
+                "QTabBar::tab:selected { "
+                    "background: #213c57; "
+                    "border-bottom-color: #213c57; "
+                "} "
+                "QTabBar::tab:!selected { "
+                    "margin-top: 2px; "
+                "} "
+                "QTabBar::tab:selected { "
+                    /* expand/overlap to the left and right by 4px */
+                    "margin-left: -4px; "
+                    "margin-right: -4px; "
+                "} "
 
-                    "QTabBar::tab:first:selected { "
-                        "margin-left: 0; "/* the first selected tab has nothing to overlap with on the left */
-                    "} "
+                "QTabBar::tab:first:selected { "
+                    "margin-left: 0; "/* the first selected tab has nothing to overlap with on the left */
+                "} "
 
-                    "QTabBar::tab:last:selected { "
-                        "margin-right: 0; "/* the last selected tab has nothing to overlap with on the right */
-                    "} "
+                "QTabBar::tab:last:selected { "
+                    "margin-right: 0; "/* the last selected tab has nothing to overlap with on the right */
+                "} "
 
-                    "QTabBar::tab:only-one { "
-                        "margin: 0; "/* if there is only one tab, we don't want overlapping margins */
-                    "} "
-                    ;
-            checkBox =
-                    "QCheckBox{ "
-                        "background-color: rgba(255,255,255,0); "
-                        "color: white; "
-                    "} "
-                    "QCheckBox::hover { "
-                        "color: "+hoverGradient+
-                    "} "
-                    "QCheckBox::indicator { "
-                        "width: 15; "
-                    "} "
-                    "QCheckBox::indicator::checked { "
-                    "} "
-                    "QCheckBox::indicator:unchecked { "
-                        "image: url(://"+_theme+"/widgets/checkbox_uncheked.png); "
-                    "} "
-                    "QCheckBox::indicator:checked { "
-                        "image: url(://"+_theme+"/widgets/checkbox_checked.png); "
-                    "} "
-                    ;
-            comboBox =
-                    "QComboBox { "
-                        "border: 1px solid #232323; "
-                        "border-radius: 3px; "
-                        "background: "+hoverGradient+
-                        "padding: 1px 23px 1px 3px; "
-                        "min-width: 6em; "
-                        "color: #ffffff; "
-                    "} "
-                    "QComboBox:item { "
-                        "background-color: #387097; "
-                    "} "
-                    "QComboBox::hover { "
-                        "background-color: "+hoverGradient+
-                    "} "
-                    "QComboBox:item:selected { "
-                        "border: 1px solid #262626; "
-                        "color: "+hoverGradient+
-                    "} "
-                    "QComboBox:item:checked { "
-                        //"font-weight: bold; "
-                    "} "
-                    ;
-            lineEdit =
-                    "QLineEdit { "
-                        "border: 1px solid #537ca6; "
-                        "border-radius: 2px; "
-                        "selection-background-color: #387097; "
-                        "background-color: "+blackGradient+
-                        "color: white; "
-                    "} "
-                    "QLineEdit:disabled { "
-                        "selection-background-color: #387097; "
-                        "background-color: #A0A0A0; "
-                        "color: white; "
-                    "} "
-                    ;
-            tableWidget =
-                    "QTableWidget { "
-                        "border: 1px solid #777777; "
-                        "border-radius: 2px; "
-                        "background-color: "+backgroundGradient+
-                        "color: white; "
-                    "} "
-                    "QTableWidget::item { "
-                        "border: 1px solid #777777; "
-                        "border-top-color: transparent; "
-                        "border-bottom-color: transparent; "
-                        "background-color: #213c57; "
-                    "} "
-                    "QScrollBar:vertical { "
-                        "border: 1px solid #999999; "
-                        "background: "+hoverGradient+
-                        "width:10px; "
-                    "}"
-                    "QScrollBar:horizontal { "
-                        "border: 1px solid #999999; "
-                        "background: "+hoverGradient+
-                        "height:10px; "
-                    "} "
-                    ;
-            headerView =
-                    "QHeaderView::section { "
-                        "background-color: #505050; "
-                        "color: white; "
-                        "padding-left: 4px; "
-                        "border: 1px solid #6c6c6c; "
-                    "} "
-                    "QHeaderView { "
-                        "selection-background-color: #303030; "
-                        "background-color: #303030; "
-                        "selection-color: #303030; "
-                    "} "
-                    ;
-            groupBox =
-                    "QGroupBox::title{ "
-                        "color: white; "
-                    "} "
-                    ;
-            listWidget =
-                    "QListWidget { "
-                        "border: 0px solid #cccccc; "
-                        "border-radius: 8px; "
-                        "background-color: "+backgroundGradient+
-                    "} "
-                    "QListWidget::item { "
-                        "border-bottom: 1px solid #cccccc; "
-                        "background-color: #213c57; "
-                        "color: white; "
-                    "} "
-                    ;
-            break;
-            }
-        case 2:
-            // Настраиваем палитру для цветовых ролей элементов интерфейса
-            //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
-            //    darkPalette.setColor(QPalette::WindowText, Qt::white);
-            //    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
-            //    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-            //    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
-            //    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
-            //    darkPalette.setColor(QPalette::Text, Qt::white);
-            //    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
-            //    darkPalette.setColor(QPalette::ButtonText, Qt::white);
-            //    darkPalette.setColor(QPalette::BrightText, Qt::red);
-            //    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
-            //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-            //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-            // Устанавливаем данную палитру
-                // Для возврата к светлой палитре достаточно
-                // будет установить стандартную палитру из темы оформления
-                //qApp->setPalette(style()->standardPalette());
-            break;
+                "QTabBar::tab:only-one { "
+                    "margin: 0; "/* if there is only one tab, we don't want overlapping margins */
+                "} "
+                ;
+        checkBox =
+                "QCheckBox{ "
+                    "background-color: rgba(255,255,255,0); "
+                    "color: white; "
+                "} "
+                "QCheckBox::hover { "
+                    "color: "+hoverGradient+
+                "} "
+                "QCheckBox::indicator { "
+                    "width: 15; "
+                "} "
+                "QCheckBox::indicator::checked { "
+                "} "
+                "QCheckBox::indicator:unchecked { "
+                    "image: url(://"+_theme+"/widgets/checkbox_uncheked.png); "
+                "} "
+                "QCheckBox::indicator:checked { "
+                    "image: url(://"+_theme+"/widgets/checkbox_checked.png); "
+                "} "
+                ;
+        comboBox =
+                "QComboBox { "
+                    "border: 1px solid #232323; "
+                    "border-radius: 3px; "
+                    "background: "+hoverGradient+
+                    "padding: 1px 23px 1px 3px; "
+                    "min-width: 6em; "
+                    "color: #ffffff; "
+                "} "
+                "QComboBox:item { "
+                    "background-color: #387097; "
+                "} "
+                "QComboBox::hover { "
+                    "background-color: "+hoverGradient+
+                "} "
+                "QComboBox:item:selected { "
+                    "border: 1px solid #262626; "
+                    "color: "+hoverGradient+
+                "} "
+                "QComboBox:item:checked { "
+                    //"font-weight: bold; "
+                "} "
+                ;
+        lineEdit =
+                "QLineEdit { "
+                    "border: 1px solid #537ca6; "
+                    "border-radius: 2px; "
+                    "selection-background-color: #387097; "
+                    "background-color: "+blackGradient+
+                    "color: white; "
+                "} "
+                "QLineEdit:disabled { "
+                    "selection-background-color: #387097; "
+                    "background-color: #A0A0A0; "
+                    "color: white; "
+                "} "
+                ;
+        tableWidget =
+                "QTableWidget { "
+                    "border: 1px solid #777777; "
+                    "border-radius: 2px; "
+                    "background-color: "+backgroundGradient+
+                    "color: white; "
+                "} "
+                "QTableWidget::item { "
+                    "border: 1px solid #777777; "
+                    "border-top-color: transparent; "
+                    "border-bottom-color: transparent; "
+                    "background-color: #213c57; "
+                "} "
+                "QScrollBar:vertical { "
+                    "border: 1px solid #999999; "
+                    "background: "+hoverGradient+
+                    "width:10px; "
+                "}"
+                "QScrollBar:horizontal { "
+                    "border: 1px solid #999999; "
+                    "background: "+hoverGradient+
+                    "height:10px; "
+                "} "
+                ;
+        headerView =
+                "QHeaderView::section { "
+                    "background-color: #505050; "
+                    "color: white; "
+                    "padding-left: 4px; "
+                    "border: 1px solid #6c6c6c; "
+                "} "
+                "QHeaderView { "
+                    "selection-background-color: #303030; "
+                    "background-color: #303030; "
+                    "selection-color: #303030; "
+                "} "
+                ;
+        groupBox =
+                "QGroupBox::title{ "
+                    "color: white; "
+                "} "
+                ;
+        listWidget =
+                "QListWidget { "
+                    "border: 0px solid #cccccc; "
+                    "border-radius: 8px; "
+                    "background-color: "+backgroundGradient+
+                "} "
+                "QListWidget::item { "
+                    "border-bottom: 1px solid #cccccc; "
+                    "background-color: #213c57; "
+                    "color: white; "
+                "} "
+                ;
+        _theme="white";
+        break;
+        }
+    case 2:
+        // Настраиваем палитру для цветовых ролей элементов интерфейса
+        //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
+        //    darkPalette.setColor(QPalette::WindowText, Qt::white);
+        //    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
+        //    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+        //    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
+        //    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
+        //    darkPalette.setColor(QPalette::Text, Qt::white);
+        //    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
+        //    darkPalette.setColor(QPalette::ButtonText, Qt::white);
+        //    darkPalette.setColor(QPalette::BrightText, Qt::red);
+        //    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
+        //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+        //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+        // Устанавливаем данную палитру
+            // Для возврата к светлой палитре достаточно
+            // будет установить стандартную палитру из темы оформления
+            //qApp->setPalette(style()->standardPalette());
+    _theme="black";
+        break;
+    default:{
+        _theme="white";
+        break;
     }
+    }
+    SetIcons();
     return pushButton+progressBar+forms+subContainers+labels+radioButtons+tabBar+checkBox+comboBox+lineEdit+tableWidget+headerView+groupBox+listWidget;
 }
 void MainWindow::ProgressLoading(int a_progress,int){
@@ -394,55 +388,21 @@ void MainWindow::ReturnFromAchievements(int a_num){
     //delete achievementsforms[num];
 }
 
-void MainWindow::ShowGames(){
-    _initGames=true;
+void MainWindow::ShowForm(bool a_initForm, int a_widgetIndex){
+    a_initForm=true;
     ui->FormProgressBar->setVisible(false);
     _blockedLoad=false;
-    ui->StackedWidgetForms->setCurrentIndex(c_formsGames);
+    ui->StackedWidgetForms->setCurrentIndex(a_widgetIndex);
     ResizeScrollArea();
+}
+void MainWindow::ShowGames(){
+    ShowForm(_initGames, c_formsGames);
 }
 void MainWindow::ShowFriends(){
-    _initFriends=true;
-    ui->FormProgressBar->setVisible(false);
-    _blockedLoad=false;
-    ui->StackedWidgetForms->setCurrentIndex(c_formsFriends);
-    ResizeScrollArea();
+    ShowForm(_initFriends, c_formsFriends);
 }
 void MainWindow::ShowStatistic(){
-    _initStatistics=true;
-    ui->FormProgressBar->setVisible(false);
-    _blockedLoad=false;
-    ui->StackedWidgetForms->setCurrentIndex(c_formsStatistic);
-    ResizeScrollArea();
-}
-void MainWindow::keyPressEvent(QKeyEvent *event){
-    //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
-    if(event->key() == 16777220)
-        ButtonFindProfile_Clicked();
-}
-void MainWindow::changeEvent(QEvent *event){
-    if(event->type()==QEvent::LanguageChange){
-        ui->retranslateUi(this);
-    }
-}
-
-void MainWindow::closeEvent(QCloseEvent *event){
-    _setting.SetMainWindowParams(this->geometry());
-    _setting.SyncronizeSettings();
-    event->accept();
-}
-void MainWindow::moveEvent(QMoveEvent *){
-//    _setting.SetMainWindowPos(event->pos());
-}
-void MainWindow::resizeEvent(QResizeEvent *){
-    //    _setting.SetMainWindowParams(this->geometry(),this->pos(),QGuiApplication::primaryScreen()->geometry());
-}
-
-MainWindow::~MainWindow(){
-    ReturnFromForms();
-    if(_achievementsCount>0)
-        delete _containerAchievementsForm;
-    delete ui;
+    ShowForm(_initStatistics, c_formsStatistic);
 }
 void MainWindow::ReturnFromForms(){
     if(_initGames){
@@ -466,6 +426,45 @@ void MainWindow::ReturnFromForms(){
         _initSettings=false;
     }
     ui->StackedWidgetForms->setCurrentIndex(0);
+}
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
+    if(event->key() == 16777220)
+        ButtonFindProfile_Clicked();
+}
+void MainWindow::changeEvent(QEvent *event){
+    if(event->type()==QEvent::LanguageChange){
+        ui->retranslateUi(this);
+    }
+}
+void MainWindow::closeEvent(QCloseEvent *event){
+    _setting.SetMainWindowParams(this->geometry());
+    _setting.SyncronizeSettings();
+    event->accept();
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *a_event){
+    if(a_event->button() == Qt::LeftButton){
+        QPoint winPt  = this->pos();
+        QPoint mousePt = a_event->globalPos();
+        _mousePos = mousePt - winPt;
+        //Если схватил сверху, разрешить перемещать окно
+        _moveWindow=std::move(_mousePos.y()<24);
+    } else {
+        _moveWindow=std::move(false);
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *a_event){
+    if(_moveWindow){//Перемещать окно
+        this->move(a_event->globalPos() - _mousePos);
+    }
+}
+
+MainWindow::~MainWindow(){
+    ReturnFromForms();
+    delete _containerAchievementsForm;
+    delete ui;
 }
 void MainWindow::ResizeScrollArea(){
     if(ui->StackedWidgetForms->height()<400){
@@ -632,6 +631,7 @@ void MainWindow::UpdateSettings(){
         ui->StackedWidgetProfiles->setFixedHeight(155);
     }
     }
+    qApp->setStyleSheet(GetTheme());
     emit s_updateSettings();
 }
 void MainWindow::ButtonSettings_Clicked(){

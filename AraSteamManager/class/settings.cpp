@@ -40,7 +40,7 @@ void Settings::SyncronizeSettings(){
     _settings->sync();
 }
 
-bool Settings::CreateDirs(QString a_paths){
+bool Settings::CreateDir(QString a_paths){
     bool exist=true;
     QStringList dirs = a_paths.split("/");
     QString pathNow="";

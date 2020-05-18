@@ -7,22 +7,21 @@ Filter::Filter(int a_row, int a_col, QObject *parent) : QObject(parent){
         for(int i=0;i<_row;i++){
             QVector<bool> subFilter(_col);
             for(int j=0;j<_col;j++){
-                subFilter[j]=true;
+                subFilter[j]=std::move(true);
             }
-            _filter.append(subFilter);
+            _filter.append(std::move(subFilter));
         }
     }
 }
-Filter::~Filter(){}
 
 void Filter::SetRow(int a_row){
     if(a_row>_row){
         for(int i=_row;i<a_row;i++){
-            QVector<bool> subFilter;
+            QVector<bool> subFilter(_col);
             for(int j=0;j<_col;j++){
-                subFilter.append(true);
+                subFilter[j]=std::move(true);
             }
-            _filter.append(subFilter);
+            _filter.append(std::move(subFilter));
         }
         _row=a_row;
     } else if(a_row<_row){
@@ -37,7 +36,7 @@ void Filter::SetCol(int a_col){
     if(a_col>_col){
         for(int i=_col;i<a_col;i++){
             for(int j=0;j<_row;j++){
-                _filter[j].append(true);
+                _filter[j].append(std::move(true));
             }
         }
         _col=a_col;
@@ -52,7 +51,7 @@ void Filter::SetCol(int a_col){
 }
 void Filter::SetData(int a_row, int a_col, bool a_data){
     if(a_row<_row&&a_col<_col)
-        _filter[a_row][a_col]=a_data;
+        _filter[a_row][a_col]=std::move(a_data);
 }
 
 bool Filter::GetData(int a_row, int a_col){
@@ -71,7 +70,7 @@ bool Filter::GetData(int a_row){
 void Filter::AddCol(int a_colNum){
     if(a_colNum<_col+1){
         for(int i=0;i<_row;i++){
-            _filter[a_colNum].append(true);
+            _filter[a_colNum].append(std::move(true));
         }
         _col++;
     }

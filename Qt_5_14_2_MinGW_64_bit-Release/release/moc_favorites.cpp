@@ -39,8 +39,8 @@ QT_MOC_LITERAL(3, 19, 4), // "type"
 QT_MOC_LITERAL(4, 24, 8), // "AddValue"
 QT_MOC_LITERAL(5, 33, 8), // "newValue"
 QT_MOC_LITERAL(6, 42, 13), // "deleteIfExist"
-QT_MOC_LITERAL(7, 56, 11), // "RemoveValue"
-QT_MOC_LITERAL(8, 68, 4), // "game"
+QT_MOC_LITERAL(7, 56, 4), // "game"
+QT_MOC_LITERAL(8, 61, 11), // "RemoveValue"
 QT_MOC_LITERAL(9, 73, 10), // "RemoveGame"
 QT_MOC_LITERAL(10, 84, 7), // "AddGame"
 QT_MOC_LITERAL(11, 92, 7), // "GetType"
@@ -49,9 +49,9 @@ QT_MOC_LITERAL(13, 110, 4) // "Save"
 
     },
     "Favorites\0SetType\0\0type\0AddValue\0"
-    "newValue\0deleteIfExist\0RemoveValue\0"
-    "game\0RemoveGame\0AddGame\0GetType\0"
-    "GetValues\0Save"
+    "newValue\0deleteIfExist\0game\0RemoveValue\0"
+    "RemoveGame\0AddGame\0GetType\0GetValues\0"
+    "Save"
 };
 #undef QT_MOC_LITERAL
 
@@ -71,11 +71,11 @@ static const uint qt_meta_data_Favorites[] = {
  // slots: name, argc, parameters, tag, flags
        1,    1,   79,    2, 0x0a /* Public */,
        4,    2,   82,    2, 0x0a /* Public */,
-       7,    1,   87,    2, 0x0a /* Public */,
-       4,    2,   90,    2, 0x0a /* Public */,
-       7,    1,   95,    2, 0x0a /* Public */,
-       4,    3,   98,    2, 0x0a /* Public */,
-       7,    2,  105,    2, 0x0a /* Public */,
+       4,    2,   87,    2, 0x0a /* Public */,
+       4,    3,   92,    2, 0x0a /* Public */,
+       8,    1,   99,    2, 0x0a /* Public */,
+       8,    1,  102,    2, 0x0a /* Public */,
+       8,    2,  105,    2, 0x0a /* Public */,
        9,    1,  110,    2, 0x0a /* Public */,
       10,    1,  113,    2, 0x0a /* Public */,
       11,    0,  116,    2, 0x0a /* Public */,
@@ -86,16 +86,16 @@ static const uint qt_meta_data_Favorites[] = {
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Bool, QMetaType::QJsonObject, QMetaType::Bool,    5,    6,
-    QMetaType::Void, QMetaType::QJsonObject,    5,
     QMetaType::Bool, QMetaType::QJsonArray, QMetaType::Bool,    5,    6,
+    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject, QMetaType::Bool,    7,    5,    6,
+    QMetaType::Void, QMetaType::QJsonObject,    5,
     QMetaType::Void, QMetaType::QJsonArray,    5,
-    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject, QMetaType::Bool,    8,    5,    6,
-    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject,    8,    5,
-    QMetaType::Void, QMetaType::QJsonObject,    8,
-    QMetaType::Int, QMetaType::QJsonObject,    8,
+    QMetaType::Bool, QMetaType::QJsonObject, QMetaType::QJsonObject,    7,    5,
+    QMetaType::Void, QMetaType::QJsonObject,    7,
+    QMetaType::Int, QMetaType::QJsonObject,    7,
     QMetaType::QString,
     QMetaType::QJsonArray,
-    QMetaType::QJsonArray, QMetaType::QJsonObject,    8,
+    QMetaType::QJsonArray, QMetaType::QJsonObject,    7,
     QMetaType::Void,
 
        0        // eod
@@ -110,12 +110,12 @@ void Favorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 0: _t->SetType((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: { bool _r = _t->AddValue((*reinterpret_cast< QJsonObject(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 2: _t->RemoveValue((*reinterpret_cast< QJsonObject(*)>(_a[1]))); break;
-        case 3: { bool _r = _t->AddValue((*reinterpret_cast< QJsonArray(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])));
+        case 2: { bool _r = _t->AddValue((*reinterpret_cast< QJsonArray(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->RemoveValue((*reinterpret_cast< QJsonArray(*)>(_a[1]))); break;
-        case 5: { bool _r = _t->AddValue((*reinterpret_cast< QJsonObject(*)>(_a[1])),(*reinterpret_cast< QJsonObject(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])));
+        case 3: { bool _r = _t->AddValue((*reinterpret_cast< QJsonObject(*)>(_a[1])),(*reinterpret_cast< QJsonObject(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 4: _t->RemoveValue((*reinterpret_cast< QJsonObject(*)>(_a[1]))); break;
+        case 5: _t->RemoveValue((*reinterpret_cast< QJsonArray(*)>(_a[1]))); break;
         case 6: { bool _r = _t->RemoveValue((*reinterpret_cast< QJsonObject(*)>(_a[1])),(*reinterpret_cast< QJsonObject(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 7: _t->RemoveGame((*reinterpret_cast< QJsonObject(*)>(_a[1]))); break;

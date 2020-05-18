@@ -33,7 +33,7 @@ QList<QString> CategoriesGame::GetNoValues(int a_category){
 }
 
 QFileInfoList CategoriesGame::GetFiles(QString a_path){
-    Settings::CreateDirs(a_path);
+    Settings::CreateDir(a_path);
     QDir categoriesOld(a_path);
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     categoriesOld.setSorting(QDir::Name);
@@ -51,6 +51,7 @@ void CategoriesGame::ConvertOldCategories(){
             QFile fileCategoryOld(_setting._pathCategories+QString::number(_game._appID)+"/"+listFile.fileName());
             fileCategoryOld.open(QFile::ReadOnly);
             QJsonDocument categoryOld=QJsonDocument().fromJson(fileCategoryOld.readAll());
+            fileCategoryOld.close();
 
             QJsonObject categoryNew;
             categoryNew["Title"] = categoryOld.object().value("name").toString();
@@ -60,7 +61,7 @@ void CategoriesGame::ConvertOldCategories(){
             if(categoryOld.object().value("values").toArray().size() == 1){
                 categoryNew["IsNoValues"] = 1;
                 for(auto name: categoryOld.object().value(categoryOld.object().value("name").toString()).toArray()){
-                    NoValuesNew.append(name.toString());
+                    NoValuesNew.append(std::move(name.toString()));
                 }
             } else {
                 categoryNew["IsNoValues"]=0;
@@ -69,35 +70,31 @@ void CategoriesGame::ConvertOldCategories(){
                     valueNew["Title"]=value.toString();
                     QJsonArray achievementsNew;
                     for(auto newValue: categoryOld.object().value(value.toString()).toArray()){
-                        achievementsNew.append(newValue.toString());
+                        achievementsNew.append(std::move(newValue.toString()));
                     }
                     valueNew["Achievements"]=achievementsNew;
-                    ValuesNew.append(valueNew);
+                    ValuesNew.append(std::move(valueNew));
                 }
             }
-            fileCategoryOld.close();
             categoryNew["Values"] = ValuesNew;
             categoryNew["NoValues"] = NoValuesNew;
             categoriesNew.append(std::move(categoryNew));
         }
         finalNew["Categories"]=categoriesNew;
-        categoriesGameNew.setObject(finalNew);
-        QFile fileCategoryNew(_setting._pathCategories+QString::number(_game._appID)+".json");
-        fileCategoryNew.open(QFile::WriteOnly);
-        fileCategoryNew.write(categoriesGameNew.toJson());
-        fileCategoryNew.close();
+        _categories=std::move(finalNew);
+        Save();
         QDir categoriesOld(_setting._pathCategories+QString::number(_game._appID));
         categoriesOld.removeRecursively();
     }
 }
 void CategoriesGame::Save(){
-    Settings::CreateDirs(_setting._pathCategories);
-    QFile fileCategoryNew(_setting._pathCategories+QString::number(_game._appID)+".json");
-    fileCategoryNew.open(QFile::WriteOnly);
+    Settings::CreateDir(_setting._pathCategories);
+    QFile fileCategory(_setting._pathCategories+QString::number(_game._appID)+".json");
+    fileCategory.open(QFile::WriteOnly);
     QJsonDocument doc;
     doc.setObject(_categories);
-    fileCategoryNew.write(doc.toJson());
-    fileCategoryNew.close();
+    fileCategory.write(doc.toJson());
+    fileCategory.close();
     LoadCategories();
 }
 void CategoriesGame::LoadCategories(){
@@ -115,16 +112,17 @@ void CategoriesGame::ChangeCategory(int a_category, QJsonObject a_newCategory){
     obj["Game"]=_categories["Game"];
     obj["GameID"]=_categories["GameID"];
     QJsonArray arr;
-    if(a_category==_categories.value("Categories").toArray().size()){
-        for(int i=0;i<_categories.value("Categories").toArray().size();i++)
-                arr.append(_categories.value("Categories").toArray().at(i));
-        arr.append(a_newCategory);
+    if(a_category>=_categories.value("Categories").toArray().size()){
+        for(auto category: _categories.value("Categories").toArray()){
+            arr.append(std::move(category));
+        }
+        arr.append(std::move(a_newCategory));
     } else {
         for(int i=0;i<_categories.value("Categories").toArray().size();i++)
             if(i!=a_category)
-                arr.append(_categories.value("Categories").toArray().at(i));
+                arr.append(std::move(_categories.value("Categories").toArray().at(i)));
             else
-                arr.append(a_newCategory);
+                arr.append(std::move(a_newCategory));
     }
     obj["Categories"]=arr;
     _categories=obj;
@@ -141,7 +139,7 @@ void CategoriesGame::DeleteCategory(int a_index){
     QJsonArray arr;
     for(int i=0;i<_categories.value("Categories").toArray().size();i++)
         if(i!=a_index)
-            arr.append(_categories.value("Categories").toArray().at(i));
+            arr.append(std::move(_categories.value("Categories").toArray().at(i)));
     obj["Categories"]=arr;
     _categories=obj;
     Save();

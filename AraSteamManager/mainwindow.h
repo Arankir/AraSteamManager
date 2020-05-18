@@ -24,6 +24,7 @@
 #include <QPropertyAnimation>
 #include <QFontDatabase>
 #include <QScreen>
+#include <QSizeGrip>
 
 #include <subform/formtablesheaders.h>
 
@@ -75,18 +76,20 @@ signals:
 
 private slots:
     //events
-    void keyPressEvent(QKeyEvent *event) override;
-    void changeEvent(QEvent *event) override;
+    void keyPressEvent(QKeyEvent*) override;
+    void changeEvent(QEvent*) override;
     void closeEvent(QCloseEvent*) override;
-    void moveEvent(QMoveEvent *event) override;
-    void resizeEvent(QResizeEvent *event) override;
+    void mousePressEvent(QMouseEvent*) override;
+    void mouseMoveEvent(QMouseEvent*) override;
     //Forms
+    void ShowForm(bool initForm, int widgetIndex);
     void ShowGames();
     void ShowFriends();
     void ShowStatistic();
     void ReturnFromForms();
     //Systems
     void InitComponents();
+    void SetIcons();
     void ResizeScrollArea();
     void UpdateButtonsBackNext();
     void ButtonMaximize_Clicked();
@@ -119,6 +122,9 @@ private:
     bool _initStatistics=false;
     bool _initSettings=false;
     bool _blockedLoad=false;
+
+    QPoint _mousePos;
+    bool _moveWindow=false;
 
 };
 

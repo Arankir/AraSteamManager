@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.12.0, 2020-05-18T08:01:45. -->
+<!-- Written by QtCreator 4.11.2, 2020-05-18T14:51:39. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{9ac9e5e3-4549-4516-9ea2-1d5b1e2fb062}</value>
+  <value type="QByteArray">{d459b6ed-6c8e-4c95-9747-d0428864c324}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -59,18 +59,6 @@
     <value type="QString">-fno-delayed-template-parsing</value>
    </valuelist>
    <value type="bool" key="ClangCodeModel.UseGlobalConfig">true</value>
-   <value type="QString" key="ClangCodeModel.WarningConfigId">Builtin.Questionable</value>
-   <valuemap type="QVariantMap" key="ClangTools">
-    <value type="bool" key="ClangTools.BuildBeforeAnalysis">true</value>
-    <value type="QString" key="ClangTools.DiagnosticConfig">Builtin.DefaultTidyAndClazy</value>
-    <value type="int" key="ClangTools.ParallelJobs">6</value>
-    <valuelist type="QVariantList" key="ClangTools.SelectedDirs">
-     <value type="QString">C:/Users/Arankir/Desktop/Steam/AraSteamManager/AraSteamManager/AraSteamManager.pro</value>
-    </valuelist>
-    <valuelist type="QVariantList" key="ClangTools.SelectedFiles"/>
-    <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
-    <value type="bool" key="ClangTools.UseGlobalSettings">true</value>
-   </valuemap>
   </valuemap>
  </data>
  <data>
@@ -83,17 +71,16 @@
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
-    <value type="bool">true</value>
-    <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\Arankir\Desktop\Steam\AraSteamManager\Qt_5_14_2_MinGW_64_bit-Debug</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:\Users\Arankir\Desktop\Steam\AraSteamManager\Qt_5_14_2_MinGW_64_bit-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">QtProjectManager.QMakeBuildStep</value>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.LinkQmlDebuggingLibrary">true</value>
       <value type="QString" key="QtProjectManager.QMakeBuildStep.QMakeArguments"></value>
       <value type="bool" key="QtProjectManager.QMakeBuildStep.QMakeForced">false</value>
-      <valuelist type="QVariantList" key="QtProjectManager.QMakeBuildStep.SelectedAbis"/>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.SeparateDebugInfo">false</value>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.UseQtQuickCompiler">false</value>
      </valuemap>
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.1">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -130,21 +117,18 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Отладка</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
-    <value type="int" key="QtQuickCompiler">2</value>
-    <value type="int" key="SeparateDebugInfo">2</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="bool">true</value>
-    <value type="int" key="EnableQmlDebugging">2</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\Arankir\Desktop\Steam\AraSteamManager\Qt_5_14_2_MinGW_64_bit-Release</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:\Users\Arankir\Desktop\Steam\AraSteamManager\Qt_5_14_2_MinGW_64_bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Release</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">QtProjectManager.QMakeBuildStep</value>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.LinkQmlDebuggingLibrary">false</value>
       <value type="QString" key="QtProjectManager.QMakeBuildStep.QMakeArguments"></value>
       <value type="bool" key="QtProjectManager.QMakeBuildStep.QMakeForced">false</value>
-      <valuelist type="QVariantList" key="QtProjectManager.QMakeBuildStep.SelectedAbis"/>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.SeparateDebugInfo">false</value>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.UseQtQuickCompiler">true</value>
      </valuemap>
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.1">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -177,25 +161,24 @@
     </valuemap>
     <value type="int" key="ProjectExplorer.BuildConfiguration.BuildStepListCount">2</value>
     <value type="bool" key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment">false</value>
-    <valuelist type="QVariantList" key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges"/>
+    <valuelist type="QVariantList" key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges">
+     <value type="QString">Path=C:\Qt\Tools\mingw730_64\bin;C:\Qt\5.14.2\mingw73_64\bin;C:\Qt\Tools\mingw730_64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\OpenVPN\bin;C:\Users\RUSLANoffice\AppData\Local\Microsoft\WindowsApps;;C:\openssl</value>
+    </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Выпуск</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">0</value>
-    <value type="int" key="QtQuickCompiler">0</value>
-    <value type="int" key="SeparateDebugInfo">2</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
-    <value type="bool">true</value>
-    <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/Arankir/Desktop/Steam/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_14_2_MinGW_64_bit-Profile</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/Arankir/Desktop/Steam/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_14_2_MinGW_64_bit-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_5_14_2_MinGW_64_bit-Profile</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">QtProjectManager.QMakeBuildStep</value>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.LinkQmlDebuggingLibrary">true</value>
       <value type="QString" key="QtProjectManager.QMakeBuildStep.QMakeArguments"></value>
       <value type="bool" key="QtProjectManager.QMakeBuildStep.QMakeForced">false</value>
-      <valuelist type="QVariantList" key="QtProjectManager.QMakeBuildStep.SelectedAbis"/>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.SeparateDebugInfo">true</value>
+      <value type="bool" key="QtProjectManager.QMakeBuildStep.UseQtQuickCompiler">true</value>
      </valuemap>
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.1">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -232,8 +215,6 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Профилирование</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">0</value>
-    <value type="int" key="QtQuickCompiler">0</value>
-    <value type="int" key="SeparateDebugInfo">0</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.BuildConfigurationCount">3</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.DeployConfiguration.0">
@@ -244,8 +225,6 @@
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Deploy</value>
     </valuemap>
     <value type="int" key="ProjectExplorer.BuildConfiguration.BuildStepListCount">1</value>
-    <valuemap type="QVariantMap" key="ProjectExplorer.DeployConfiguration.CustomData"/>
-    <value type="bool" key="ProjectExplorer.DeployConfiguration.CustomDataEnabled">false</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.DefaultDeployConfiguration</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.DeployConfigurationCount">1</value>
@@ -310,8 +289,8 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Arankir/Desktop/Steam/AraSteamManager/AraSteamManager/AraSteamManager.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/Arankir/Desktop/Steam/AraSteamManager/AraSteamManager/AraSteamManager.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager/AraSteamManager.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager/AraSteamManager.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -322,7 +301,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/Arankir/Desktop/Steam/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Release</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Release</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

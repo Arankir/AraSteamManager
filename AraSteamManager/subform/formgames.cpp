@@ -11,7 +11,7 @@ constexpr int c_tableColumnCount=5;
 #define ConstantsEnd }
 
 #define Init {
-FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent) : QWidget(parent),ui(new Ui::FormGames),_id(a_id),_games(a_games){
+FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent): QWidget(parent), ui(new Ui::FormGames), _id(a_id),  _games(a_games){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     switch(_setting.GetTheme()){
@@ -77,7 +77,7 @@ void FormGames::InitComponents(){
     Threading loadTable(this);
     loadTable.AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
 }
-void FormGames::ProgressLoading(int a_progress,int a_row){
+void FormGames::ProgressLoading(int a_progress, int a_row){
     ui->ProgressBarLoading->setValue(a_progress);
     if(ui->ProgressBarLoading->value()==ui->ProgressBarLoading->maximum()-1){
         //ui->ProgressBarLoading->setVisible(false);
@@ -334,7 +334,7 @@ void FormGames::ButtonHide_Clicked(){
          savePath=_setting._pathHide+"All.txt";
     } else return;
 
-    _setting.CreateDirs(savePath);
+    Settings::CreateDir(savePath);
     QFile fileHide(savePath);
     fileHide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&fileHide);
