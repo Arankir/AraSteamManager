@@ -22,7 +22,7 @@ void RequestImage::OnLoadToLabel(RequestData *a_image){
     QPixmap pix;
     pix.loadFromData(a_image->GetAnswer());
     if(_setting.GetSaveImages()==1&&_autosave){
-        _setting.CreateFile(_save);
+        _setting.CreateDirs(_save);
         pix.save(_save);
     }
     _label->movie()->stop();
@@ -35,7 +35,7 @@ void RequestImage::OnLoadPixmap(RequestData *a_image){
     QPixmap pix;
     pix.loadFromData(a_image->GetAnswer());
     if(_setting.GetSaveImages()==1&&_autosave){
-        _setting.CreateFile(_save);
+        _setting.CreateDirs(_save);
         pix.save(_save);
     }
     _pixmap=pix;

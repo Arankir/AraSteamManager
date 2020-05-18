@@ -40,20 +40,14 @@ void Settings::SyncronizeSettings(){
     _settings->sync();
 }
 
-bool Settings::CreateFile(QString a_paths){
+bool Settings::CreateDirs(QString a_paths){
     bool exist=true;
+    QStringList dirs = a_paths.split("/");
     QString pathNow="";
-    while(a_paths.length()>0){
-        if(a_paths.indexOf("/",0)>-1){
-            QString dir=a_paths.mid(0,a_paths.indexOf("/",0));
-            a_paths=a_paths.mid(a_paths.indexOf("/",0)+1, a_paths.length());
-            if(!QDir(pathNow+dir).exists()){
-                QDir().mkdir(pathNow+dir);
-                exist=false;
-            }
-            pathNow+=dir+"/";
-        } else {
-            a_paths="";
+    for(auto &dir: dirs){
+        if(dir!=dirs.last()){
+            pathNow+=std::move(dir)+"/";
+            exist=(QDir().mkdir(pathNow)&&exist);
         }
     }
     return exist;

@@ -7,6 +7,18 @@ void Favorites::SetType(QString a_type){
     _path=_setting._pathFavorites+a_type+".json";
     Init(a_type);
 }
+void Favorites::Init(QString a_type){
+    Settings::CreateDirs(_path);
+    if(!QFile::exists(_path)){
+        QJsonObject obj;
+        obj["Type"]=a_type;
+        QJsonArray arr;
+        obj["Values"]=arr;
+        _favorites=obj;
+        Save();
+    }
+    Load();
+}
 QJsonArray Favorites::GetValues(QJsonObject a_game){
     for(int i=0;i<_favorites.value("Values").toArray().size();i++)
         if(_favorites.value("Values").toArray().at(i).toObject().value("game").toObject()==a_game)
@@ -15,7 +27,7 @@ QJsonArray Favorites::GetValues(QJsonObject a_game){
 }
 
 bool Favorites::AddValue(QJsonObject a_newValue, bool a_deleteIfExist){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -34,7 +46,7 @@ bool Favorites::AddValue(QJsonObject a_newValue, bool a_deleteIfExist){
     return true;
 }
 bool Favorites::AddValue(QJsonArray a_newValue, bool a_deleteIfExist){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -53,7 +65,7 @@ bool Favorites::AddValue(QJsonArray a_newValue, bool a_deleteIfExist){
     return true;
 }
 bool Favorites::AddValue(QJsonObject a_game, QJsonObject a_newValue, bool a_deleteIfExist){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -99,7 +111,7 @@ bool Favorites::AddValue(QJsonObject a_game, QJsonObject a_newValue, bool a_dele
 }
 
 void Favorites::RemoveValue(QJsonObject a_newValue){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -112,7 +124,7 @@ void Favorites::RemoveValue(QJsonObject a_newValue){
     Save();
 }
 void Favorites::RemoveValue(QJsonArray a_newValue){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -125,7 +137,7 @@ void Favorites::RemoveValue(QJsonArray a_newValue){
     Save();
 }
 bool Favorites::RemoveValue(QJsonObject a_game, QJsonObject a_newValue){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -165,7 +177,7 @@ bool Favorites::RemoveValue(QJsonObject a_game, QJsonObject a_newValue){
 }
 
 void Favorites::RemoveGame(QJsonObject a_game){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -178,7 +190,7 @@ void Favorites::RemoveGame(QJsonObject a_game){
     Save();
 }
 int Favorites::AddGame(QJsonObject a_game){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -199,7 +211,7 @@ int Favorites::AddGame(QJsonObject a_game){
 }
 
 void Favorites::Save(){
-    Settings::CreateFile(_path);
+    Settings::CreateDirs(_path);
     QFile file(_path);
     file.open(QFile::WriteOnly);
     QJsonDocument doc;
@@ -207,20 +219,6 @@ void Favorites::Save(){
     file.write(doc.toJson());
     file.close();
 }
-
-void Favorites::Init(QString a_type){
-    Settings::CreateFile(_path);
-    if(!QFile::exists(_path)){
-        QJsonObject obj;
-        obj["Type"]=a_type;
-        QJsonArray arr;
-        obj["Values"]=arr;
-        _favorites=obj;
-        Save();
-    }
-    Load();
-}
-
 void Favorites::Load(){
     QFile file(_path);
     if(file.exists()){

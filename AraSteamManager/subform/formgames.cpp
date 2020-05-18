@@ -334,7 +334,7 @@ void FormGames::ButtonHide_Clicked(){
          savePath=_setting._pathHide+"All.txt";
     } else return;
 
-    _setting.CreateFile(savePath);
+    _setting.CreateDirs(savePath);
     QFile fileHide(savePath);
     fileHide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&fileHide);

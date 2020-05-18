@@ -33,7 +33,7 @@ QList<QString> CategoriesGame::GetNoValues(int a_category){
 }
 
 QFileInfoList CategoriesGame::GetFiles(QString a_path){
-    Settings::CreateFile(a_path);
+    Settings::CreateDirs(a_path);
     QDir categoriesOld(a_path);
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     categoriesOld.setSorting(QDir::Name);
@@ -91,7 +91,7 @@ void CategoriesGame::ConvertOldCategories(){
     }
 }
 void CategoriesGame::Save(){
-    Settings::CreateFile(_setting._pathCategories);
+    Settings::CreateDirs(_setting._pathCategories);
     QFile fileCategoryNew(_setting._pathCategories+QString::number(_game._appID)+".json");
     fileCategoryNew.open(QFile::WriteOnly);
     QJsonDocument doc;

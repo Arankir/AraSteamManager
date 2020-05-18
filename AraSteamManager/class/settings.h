@@ -66,7 +66,7 @@ public:
     QPoint GetAchievementContainerPercentPos() {return (QPoint(_settings->value(c_achievementContainerPercentX,0).toInt(),_settings->value(c_achievementContainerPercentY,0).toInt()));}
 
     QString GetKey() {return _key;}
-    static bool CreateFile(QString path);
+    static bool CreateDirs(QString path);
     void SyncronizeSettings();
     const QString _pathImagesAchievements="images/achievements/";// /номер игры/url.jpg
     const QString _pathImagesIconGames="images/icon_games/";// /url.jpg
