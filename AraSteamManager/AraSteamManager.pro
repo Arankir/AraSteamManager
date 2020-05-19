@@ -45,6 +45,7 @@ SOURCES += \
     class/steamapi/Slevels.cpp \
     class/steamapi/Sprofile.cpp \
     formcontainerachievements.cpp \
+    frameless.cpp \
         main.cpp \
         mainwindow.cpp \
     subform/formachievements.cpp \
@@ -84,6 +85,7 @@ HEADERS += \
     class/steamapi/Slevels.h \
     class/steamapi/Sprofile.h \
     formcontainerachievements.h \
+    frameless.h \
         mainwindow.h \
     subform/formachievements.h \
     subform/formcategoryvalue.h \

@@ -90,5 +90,13 @@
         <file>state_white.png</file>
         <file>state_yellow.png</file>
         <file>loading.gif</file>
+        <file>black/close_window.png</file>
+        <file>black/maximize_window.png</file>
+        <file>black/minimize_window.png</file>
+        <file>black/restore_window.png</file>
+        <file>white/close_window.png</file>
+        <file>white/maximize_window.png</file>
+        <file>white/minimize_window.png</file>
+        <file>white/restore_window.png</file>
     </qresource>
 </RCC>

@@ -155,7 +155,10 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     emit s_achievementsLoaded(_load++,0);
     if(_load==_games.GetCount()){
         TableWidgetGames_CellClicked(0,1);
-        emit s_finish();
+        int width=22;
+        for(int i=0; i<ui->TableWidgetGames->columnCount(); i++)
+            width+=ui->TableWidgetGames->columnWidth(i);
+        emit s_finish(width);
     }
     //ach->deleteLater();
 }

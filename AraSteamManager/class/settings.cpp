@@ -26,6 +26,9 @@ void Settings::SetMainWindowGeometry(QSize a_size){
     _settings->setValue(c_mainWindowHeight,a_size.height());
     _settings->setValue(c_mainWindowWidth,a_size.width());
 }
+void Settings::SetMainWindowMaximize(bool a_maximize){
+    _settings->setValue(c_mainWindowMaximize,a_maximize);
+}
 
 void Settings::SetAchievementContainerParams(QRect a_geometry){
     _settings->setValue(c_achievementContainerHeight,a_geometry.height());

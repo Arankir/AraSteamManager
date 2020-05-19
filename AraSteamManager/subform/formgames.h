@@ -32,7 +32,7 @@ public:
 signals:
     void s_return_to_profile(QWidget*);
     void s_achievementsLoaded(int,int);
-    void s_finish();
+    void s_finish(int width);
     void s_showAchievements(SAchievementsPlayer achievements,SGame games);
 
 public slots:

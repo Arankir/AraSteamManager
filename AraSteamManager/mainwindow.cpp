@@ -17,9 +17,6 @@ constexpr int c_formsSettings=5;
 #define Init {
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), _games(this){
     ui->setupUi(this);
-
-    qApp->setStyleSheet(GetTheme());
-
 //    int id = QFontDatabase::addApplicationFont("C:/font4.otf");
 //    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
 //    qApp->setFont(family);
@@ -34,20 +31,23 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
     _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
-    this->setWindowFlags(Qt::FramelessWindowHint);
-//    this->setWindowFlags(Qt::Window
-//                         | Qt::WindowTitleHint
-//                         | Qt::CustomizeWindowHint);
-//    ui->ButtonMinimize->setVisible(false);
-//    ui->ButtonMaximize->setVisible(false);
     ui->line->setVisible(false);
+    ui->ButtonMinimize->setFlat(true);
+    ui->ButtonMaximize->setFlat(true);
+    ui->ButtonExit->setFlat(true);
     ui->FormProgressBar->setVisible(false);
     ui->ButtonBack->setEnabled(false);
     ui->ButtonNext->setEnabled(false);
     ui->StackedWidgetForms->setCurrentIndex(0);
 
+    ui->ButtonMinimize->setFixedSize(QSize(23,23));
+    ui->ButtonMaximize->setFixedSize(QSize(23,23));
+    ui->ButtonExit->setFixedSize(QSize(23,23));
     this->setGeometry(_setting.GetMainWindowGeometry());
     this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
+    if(_setting.GetMainWindowMaximize())
+        this->showMaximized();
+    qApp->setStyleSheet(GetTheme());
 #define Connects {
     connect(ui->ButtonFindProfile,&QPushButton::clicked,this,&MainWindow::ButtonFindProfile_Clicked);
     connect(ui->ButtonExit,&QPushButton::clicked,this,&MainWindow::ButtonExit_Clicked);
@@ -63,19 +63,10 @@ void MainWindow::InitComponents(){
 #define InitEnd }
 
 #define System {
-void MainWindow::SetIcons(){
-    ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
-    ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
-    ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_theme+"/home.png"));
-    ui->ButtonFindProfile->setIcon(QIcon("://"+_theme+"/find_profile.png"));
-    ui->ButtonSettings->setIcon(QIcon("://"+_theme+"/settings.png"));
-    ui->ButtonExit->setIcon(QIcon("://"+_theme+"/exit.png"));
-    ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
-    ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
-}
 QString MainWindow::GetTheme(){
     QString hoverGradient;
     QString backgroundGradient;
+    QString backgroundGradientTitle;
     QString blackGradient;
     QString pushButton;
     QString progressBar;
@@ -101,6 +92,10 @@ QString MainWindow::GetTheme(){
         backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #213c57, "
                     "stop: 1.0 #1a2839); ";
+        backgroundGradientTitle = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                    "stop: 0 #406090, "
+                    "stop: 0.9 #406090, "
+                    "stop: 1.0 #213c57); ";
         blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
                     "stop: 0 #102b45, "
                     "stop: 0.8 #17314c, "
@@ -148,8 +143,12 @@ QString MainWindow::GetTheme(){
                 "QScrollArea { "
                     "border: 0px solid white; "
                 "} "
-                "QMessageBox{"
+                "QMessageBox{ "
                     "background: black; "
+                "} "
+                "QFrame[accessibleName=TitleWindow]{ "
+                    "background-color: "+backgroundGradientTitle+
+                    "border: 0px solid white; "
                 "} "
                 ;
         labels =
@@ -361,6 +360,21 @@ QString MainWindow::GetTheme(){
     SetIcons();
     return pushButton+progressBar+forms+subContainers+labels+radioButtons+tabBar+checkBox+comboBox+lineEdit+tableWidget+headerView+groupBox+listWidget;
 }
+void MainWindow::SetIcons(){
+    ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
+    ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
+    ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_theme+"/home.png"));
+    ui->ButtonFindProfile->setIcon(QIcon("://"+_theme+"/find_profile.png"));
+    ui->ButtonSettings->setIcon(QIcon("://"+_theme+"/settings.png"));
+    ui->ButtonExit->setIcon(QIcon("://"+_theme+"/close_window.png"));
+    ui->ButtonMinimize->setIcon(QIcon("://"+_theme+"/minimize_window.png"));
+    if(this->isMaximized())
+        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/restore_window.png"));
+    else
+        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/maximize_window.png"));
+    ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
+    ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
+}
 void MainWindow::ProgressLoading(int a_progress,int){
     ui->FormProgressBar->setValue(a_progress);
 }
@@ -388,15 +402,15 @@ void MainWindow::ReturnFromAchievements(int a_num){
     //delete achievementsforms[num];
 }
 
-void MainWindow::ShowForm(bool a_initForm, int a_widgetIndex){
+void MainWindow::ShowForm(bool &a_initForm, int a_widgetIndex, int a_widthWindow){
     a_initForm=true;
     ui->FormProgressBar->setVisible(false);
     _blockedLoad=false;
     ui->StackedWidgetForms->setCurrentIndex(a_widgetIndex);
-    ResizeScrollArea();
+    ResizeScrollArea(a_widthWindow);
 }
-void MainWindow::ShowGames(){
-    ShowForm(_initGames, c_formsGames);
+void MainWindow::ShowGames(int a_width){
+    ShowForm(_initGames, c_formsGames, a_width);
 }
 void MainWindow::ShowFriends(){
     ShowForm(_initFriends, c_formsFriends);
@@ -406,59 +420,66 @@ void MainWindow::ShowStatistic(){
 }
 void MainWindow::ReturnFromForms(){
     if(_initGames){
+        disconnect(_gamesForm);
         delete _gamesForm;
         _initGames=false;
     }
     if(_initFriends){
+        disconnect(_friendsForm);
 //        delete _friendsForm;
         _initFriends=false;
     }
     if(_initStatistics){
+        disconnect(_statisticsForm);
         delete _statisticsForm;
         _initStatistics=false;
     }
     if(_initFavorites){
+        disconnect(_favoritesForm);
         delete _favoritesForm;
         _initFavorites=false;
     }
     if(_initSettings){
+        disconnect(_settingsForm);
         delete _settingsForm;
         _initSettings=false;
     }
     ui->StackedWidgetForms->setCurrentIndex(0);
 }
-void MainWindow::keyPressEvent(QKeyEvent *event){
+void MainWindow::keyPressEvent(QKeyEvent *a_event){
     //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
-    if(event->key() == 16777220)
+    if(a_event->key() == 16777220)
         ButtonFindProfile_Clicked();
 }
-void MainWindow::changeEvent(QEvent *event){
-    if(event->type()==QEvent::LanguageChange){
+void MainWindow::changeEvent(QEvent *a_event){
+    if(a_event->type()==QEvent::LanguageChange){
         ui->retranslateUi(this);
     }
 }
-void MainWindow::closeEvent(QCloseEvent *event){
+void MainWindow::closeEvent(QCloseEvent *a_event){
+    _setting.SetMainWindowMaximize(this->isMaximized());
+    if(this->isMaximized()){
+        this->showNormal();
+    }
     _setting.SetMainWindowParams(this->geometry());
     _setting.SyncronizeSettings();
-    event->accept();
+    a_event->accept();
 }
-
 void MainWindow::mousePressEvent(QMouseEvent *a_event){
-    if(a_event->button() == Qt::LeftButton){
-        QPoint winPt  = this->pos();
-        QPoint mousePt = a_event->globalPos();
-        _mousePos = mousePt - winPt;
-        //Если схватил сверху, разрешить перемещать окно
-        _moveWindow=std::move(_mousePos.y()<24);
-    } else {
-        _moveWindow=std::move(false);
-    }
+//    if(a_event->button() == Qt::LeftButton){
+//        QPoint winPt  = this->pos();
+//        QPoint mousePt = a_event->globalPos();
+//        _mousePos = mousePt - winPt;
+//        //Если схватил сверху, разрешить перемещать окно
+//        _moveWindow=std::move(_mousePos.y()<24);
+//    } else {
+//        _moveWindow=std::move(false);
+//    }
 }
-
 void MainWindow::mouseMoveEvent(QMouseEvent *a_event){
-    if(_moveWindow){//Перемещать окно
-        this->move(a_event->globalPos() - _mousePos);
-    }
+//    if(_moveWindow){//Перемещать окно
+//        this->move(a_event->globalPos() - _mousePos);
+//    }
 }
 
 MainWindow::~MainWindow(){
@@ -466,21 +487,25 @@ MainWindow::~MainWindow(){
     delete _containerAchievementsForm;
     delete ui;
 }
-void MainWindow::ResizeScrollArea(){
-    if(ui->StackedWidgetForms->height()<400){
+void MainWindow::ResizeScrollArea(int a_width){
+    if((ui->StackedWidgetForms->height()<400)||(ui->StackedWidgetForms->width()<a_width)){
         QPropertyAnimation *animate = new QPropertyAnimation(this,"size");
         animate->setDuration(500);
         animate->setStartValue(QSize(this->width(),this->height()));
-        animate->setEndValue(QSize(this->width(),this->height()-ui->StackedWidgetForms->height()+400));
+        //qDebug()<<this->width()+a_width-ui->StackedWidgetForms->width()<<this->width()<<a_width<<ui->StackedWidgetForms->width();
+        animate->setEndValue(QSize(this->width()+a_width-ui->StackedWidgetForms->width(),this->height()-ui->StackedWidgetForms->height()+400));
         connect(animate,SIGNAL(finished),animate,SLOT(deleteLater));
         animate->start();
     }
 }
 void MainWindow::ButtonMaximize_Clicked(){
-    if(!this->isMaximized())
+    if(!this->isMaximized()){
         this->showMaximized();
-    else
+        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/restore_window.png"));
+    } else {
         this->showNormal();
+        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/maximize_window.png"));
+    }
 }
 void MainWindow::ButtonMinimize_Clicked(){
     if(!this->isMinimized())
@@ -661,6 +686,5 @@ void MainWindow::ButtonExit_Clicked(){
 }
 void MainWindow::ButtonUpdate_Clicked(){
     static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->UpdateInfo();
-
 }
 #define FunctionsEnd }

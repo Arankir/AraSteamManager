@@ -22,6 +22,7 @@ class Settings : public QObject
     const QString c_mainWindowWidth="MainWindow/Width";
     const QString c_mainWindowX="MainWindow/X";
     const QString c_mainWindowY="MainWindow/Y";
+    const QString c_mainWindowMaximize="MainWindow/Maximize";
     const QString c_mainWindowPercentX="MainWindow/PercentX";
     const QString c_mainWindowPercentY="MainWindow/PercentY";
 
@@ -29,6 +30,7 @@ class Settings : public QObject
     const QString c_achievementContainerWidth="AchievementContainer/Width";
     const QString c_achievementContainerX="AchievementContainer/X";
     const QString c_achievementContainerY="AchievementContainer/Y";
+    const QString c_achievementContainerMaximize="achievementContainer/Maximize";
     const QString c_achievementContainerPercentX="AchievementContainer/PercentX";
     const QString c_achievementContainerPercentY="AchievementContainer/PercentY";
 
@@ -47,6 +49,7 @@ public:
     void SetMainWindowParams(QRect geometry);
     void SetMainWindowPos(QPoint pos);
     void SetMainWindowGeometry(QSize size);
+    void SetMainWindowMaximize(bool maximize);
 
     void SetAchievementContainerParams(QRect geometry);
 
@@ -60,6 +63,7 @@ public:
     QRect GetMainWindowGeometry() {return (QRect(0,0,_settings->value(c_mainWindowWidth,623).toInt(),_settings->value(c_mainWindowHeight,479).toInt()));}
     QPoint GetMainWindowPos() {return (QPoint(_settings->value(c_mainWindowX,100).toInt(),_settings->value(c_mainWindowY,100).toInt()));}
     QPoint GetMainWindowPercentPos() {return (QPoint(_settings->value(c_mainWindowPercentX,0).toInt(),_settings->value(c_mainWindowPercentY,0).toInt()));}
+    bool GetMainWindowMaximize() {return _settings->value(c_mainWindowMaximize,false).toBool();}
 
     QRect GetAchievementContainerGeometry() {return (QRect(0,0,_settings->value(c_achievementContainerWidth,623).toInt(),_settings->value(c_achievementContainerHeight,479).toInt()));}
     QPoint GetAchievementContainerPos() {return (QPoint(_settings->value(c_achievementContainerX,100).toInt(),_settings->value(c_achievementContainerY,100).toInt()));}

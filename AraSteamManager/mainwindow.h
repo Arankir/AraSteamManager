@@ -82,15 +82,15 @@ private slots:
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
     //Forms
-    void ShowForm(bool initForm, int widgetIndex);
-    void ShowGames();
+    void ShowForm(bool &initForm, int widgetIndex, int widthWindow=300);
+    void ShowGames(int width);
     void ShowFriends();
     void ShowStatistic();
     void ReturnFromForms();
     //Systems
     void InitComponents();
     void SetIcons();
-    void ResizeScrollArea();
+    void ResizeScrollArea(int width=300);
     void UpdateButtonsBackNext();
     void ButtonMaximize_Clicked();
     void ButtonMinimize_Clicked();
@@ -122,9 +122,6 @@ private:
     bool _initStatistics=false;
     bool _initSettings=false;
     bool _blockedLoad=false;
-
-    QPoint _mousePos;
-    bool _moveWindow=false;
 
 };
 

@@ -3,6 +3,7 @@
 #include <QStyleFactory>
 #include <QTranslator>
 #include <class/settings.h>
+#include <frameless.h>
 
 int main(int argc, char *argv[])
 {
@@ -35,7 +36,8 @@ int main(int argc, char *argv[])
         a.installTranslator(&lang);
     }
     }
-    MainWindow w;
-    w.show();
+    MainWindow *w = new MainWindow;
+    FrameLess f(w);
+    w->show();
     return a.exec();
 }

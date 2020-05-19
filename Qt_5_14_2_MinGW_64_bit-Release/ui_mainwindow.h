@@ -33,22 +33,22 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_2;
+    QFrame *FrameTitleWindow;
     QHBoxLayout *horizontalLayout;
+    QLabel *LabelLogo;
+    QSpacerItem *horizontalSpacer;
     QPushButton *ButtonMinimize;
     QPushButton *ButtonMaximize;
-    QFrame *line;
-    QHBoxLayout *horizontalLayout_3;
-    QLabel *LabelLogo;
-    QSpacerItem *horizontalSpacer_2;
-    QPushButton *ButtonSettings;
     QPushButton *ButtonExit;
-    QHBoxLayout *horizontalLayout_9;
+    QFrame *line;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *ButtonBack;
     QPushButton *ButtonNext;
     QPushButton *ButtonUpdate;
     QPushButton *ButtonGoToMyProfile;
+    QPushButton *ButtonSettings;
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
     QStackedWidget *StackedWidgetProfiles;
@@ -91,68 +91,64 @@ public:
         MainWindow->setFont(font);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(1);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(-1, 3, -1, -1);
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
+        verticalLayout_2 = new QVBoxLayout(centralWidget);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, -1);
+        FrameTitleWindow = new QFrame(centralWidget);
+        FrameTitleWindow->setObjectName(QString::fromUtf8("FrameTitleWindow"));
+#if QT_CONFIG(accessibility)
+        FrameTitleWindow->setAccessibleName(QString::fromUtf8("TitleWindow"));
+#endif // QT_CONFIG(accessibility)
+        FrameTitleWindow->setFrameShape(QFrame::StyledPanel);
+        FrameTitleWindow->setFrameShadow(QFrame::Raised);
+        horizontalLayout = new QHBoxLayout(FrameTitleWindow);
+        horizontalLayout->setSpacing(3);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        ButtonMinimize = new QPushButton(centralWidget);
+        horizontalLayout->setContentsMargins(3, 0, 3, 0);
+        LabelLogo = new QLabel(FrameTitleWindow);
+        LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
+        LabelLogo->setText(QString::fromUtf8("Logo"));
+
+        horizontalLayout->addWidget(LabelLogo);
+
+        horizontalSpacer = new QSpacerItem(337, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        ButtonMinimize = new QPushButton(FrameTitleWindow);
         ButtonMinimize->setObjectName(QString::fromUtf8("ButtonMinimize"));
         ButtonMinimize->setText(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(ButtonMinimize);
 
-        ButtonMaximize = new QPushButton(centralWidget);
+        ButtonMaximize = new QPushButton(FrameTitleWindow);
         ButtonMaximize->setObjectName(QString::fromUtf8("ButtonMaximize"));
         ButtonMaximize->setText(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(ButtonMaximize);
 
+        ButtonExit = new QPushButton(FrameTitleWindow);
+        ButtonExit->setObjectName(QString::fromUtf8("ButtonExit"));
 
-        verticalLayout->addLayout(horizontalLayout);
+        horizontalLayout->addWidget(ButtonExit);
+
+
+        verticalLayout_2->addWidget(FrameTitleWindow);
 
         line = new QFrame(centralWidget);
         line->setObjectName(QString::fromUtf8("line"));
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
 
-        verticalLayout->addWidget(line);
+        verticalLayout_2->addWidget(line);
 
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        LabelLogo = new QLabel(centralWidget);
-        LabelLogo->setObjectName(QString::fromUtf8("LabelLogo"));
-        LabelLogo->setText(QString::fromUtf8("Logo"));
-
-        horizontalLayout_3->addWidget(LabelLogo);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_2);
-
-        ButtonSettings = new QPushButton(centralWidget);
-        ButtonSettings->setObjectName(QString::fromUtf8("ButtonSettings"));
-
-        horizontalLayout_3->addWidget(ButtonSettings);
-
-        ButtonExit = new QPushButton(centralWidget);
-        ButtonExit->setObjectName(QString::fromUtf8("ButtonExit"));
-
-        horizontalLayout_3->addWidget(ButtonExit);
-
-
-        verticalLayout->addLayout(horizontalLayout_3);
-
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setSpacing(6);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-
-        verticalLayout->addLayout(horizontalLayout_9);
-
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(9, -1, 9, -1);
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(3);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
@@ -175,6 +171,11 @@ public:
         ButtonGoToMyProfile->setObjectName(QString::fromUtf8("ButtonGoToMyProfile"));
 
         horizontalLayout_4->addWidget(ButtonGoToMyProfile);
+
+        ButtonSettings = new QPushButton(centralWidget);
+        ButtonSettings->setObjectName(QString::fromUtf8("ButtonSettings"));
+
+        horizontalLayout_4->addWidget(ButtonSettings);
 
         LineEditIdProfile = new QLineEdit(centralWidget);
         LineEditIdProfile->setObjectName(QString::fromUtf8("LineEditIdProfile"));
@@ -336,6 +337,9 @@ public:
 
         verticalLayout->addWidget(StackedWidgetForms);
 
+
+        verticalLayout_2->addLayout(verticalLayout);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -356,12 +360,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "SteamAchievementsStatistic", nullptr));
-        ButtonSettings->setText(QString());
-        ButtonExit->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\321\205\320\276\320\264", nullptr));
+        ButtonExit->setText(QString());
         ButtonBack->setText(QString());
         ButtonNext->setText(QString());
         ButtonUpdate->setText(QString());
         ButtonGoToMyProfile->setText(QString());
+        ButtonSettings->setText(QString());
         LineEditIdProfile->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
         ButtonFindProfile->setText(QCoreApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
         FormProgressBar->setFormat(QCoreApplication::translate("MainWindow", "%v/%m", nullptr));
