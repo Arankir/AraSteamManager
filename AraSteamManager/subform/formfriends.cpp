@@ -23,14 +23,6 @@ constexpr int c_filterCount=4;
 FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) : QWidget(parent), ui(new Ui::FormFriends),_id(a_id),_friends(a_friends),_profiles(_friends.GetProfiles()){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    switch(_setting.GetTheme()){
-        case 1:
-            _theme="white";
-            break;
-        case 2:
-            _theme="black";
-            break;
-    }
     InitComponents();
     ui->LineEditName->setFocus();
 }
@@ -55,37 +47,18 @@ void FormFriends::InitComponents(){
     _profiles.Sort();
     _filter.SetRow(_friends.GetCount());
     _filter.SetCol(c_filterCount);
-    ui->ButtonFriendGoTo->setMinimumSize(QSize(25,25));
-    ui->ButtonFriendFavorite->setMinimumSize(QSize(25,25));
+    ui->ButtonFriendGoTo->setFixedSize(QSize(25,25));
+    ui->ButtonFriendFavorite->setFixedSize(QSize(25,25));
 #define Connects {
     connect(ui->TableWidgetFriends,&QTableWidget::cellClicked,this,&FormFriends::TableWidgetFriends_CellClicked);
     connect(ui->ButtonFriendGoTo,&QPushButton::clicked,this,&FormFriends::ButtonFriendGoTo_Clicked);
     connect(ui->ButtonFriendFavorite,&QPushButton::clicked,this,&FormFriends::ButtonFriendFavorite_Clicked);
 #define ConnectsEnd }
-#define Icons {
-    ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find_profile.png"));
-    ui->ButtonFriendGoTo->setIcon(QIcon("://"+_theme+"/go_to.png"));
-    ui->ButtonFriendFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-#define IconsEnd }
+    SetIcons();
     Threading loadTable(this);
     loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
 }
 void FormFriends::ProgressLoading(int a_progress,int a_row){
-//    QButtonWithData *button1 = new QButtonWithData(tr(" На профиль"));
-//    button1->setIcon(QIcon("://"+_theme+"/go_to.png"));
-//    button1->setMinimumSize(QSize(25,25));
-//    button1->setObjectName("ButtonGoToProfile"+_profiles[a_progress]._steamID);
-//    button1->AddData("ProfileID",_profiles[a_progress]._steamID);
-//    connect(button1,&QButtonWithData::pressed,this,&FormFriends::GoToProfileClicked);
-//    ui->TableWidgetFriends->setCellWidget(a_row,c_tableColumnGoTo,button1);
-
-//    QButtonWithData *button2 = new QButtonWithData("");
-//    button2->setIcon(QIcon("://"+_theme+"/favorites.png"));
-//    button2->setObjectName("ButtonFavorites"+QString::number(a_progress));
-//    button2->AddData("NumberFriend",QString::number(a_row));
-//    connect(button2,&QButtonWithData::pressed,this,&FormFriends::FavoritesClicked);
-//    ui->TableWidgetFriends->setCellWidget(a_row,c_tableColumnFavorite,button2);
     ui->TableWidgetFriends->setRowHeight(a_row,33);
 }
 void FormFriends::OnFinish(){
@@ -115,9 +88,6 @@ void FormFriends::OnFinish(){
 
 #define System {
 FormFriends::~FormFriends(){
-//    for (int i=0;i<=_numRequests;i++) {
-//        //request[numrequests];
-//    }
     delete ui;
 }
 void FormFriends::changeEvent(QEvent *event){
@@ -141,11 +111,22 @@ void FormFriends::Retranslate(){
     Threading loadTable(this);
     loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends,_profiles,_friends);
 }
-void FormFriends::closeEvent(QCloseEvent*){
-    emit s_return_to_profile(this);
-    //delete this;
+
+void FormFriends::SetIcons(){
+    switch(_setting.GetTheme()){
+        case 1:
+            _theme="white";
+            break;
+        case 2:
+            _theme="black";
+            break;
+    }
+    ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find_profile.png"));
+    ui->ButtonFriendGoTo->setIcon(QIcon("://"+_theme+"/go_to.png"));
+    ui->ButtonFriendFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
 }
-void FormFriends::on_ButtonReturn_clicked(){
+void FormFriends::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);
     //delete this;
 }

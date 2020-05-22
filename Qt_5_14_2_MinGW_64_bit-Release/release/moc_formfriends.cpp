@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriends_t {
     QByteArrayData data[35];
-    char stringdata0[531];
+    char stringdata0[516];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,22 +51,22 @@ QT_MOC_LITERAL(15, 133, 14), // "InitComponents"
 QT_MOC_LITERAL(16, 148, 10), // "closeEvent"
 QT_MOC_LITERAL(17, 159, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(18, 172, 11), // "Retranslate"
-QT_MOC_LITERAL(19, 184, 23), // "on_ButtonReturn_clicked"
-QT_MOC_LITERAL(20, 208, 24), // "ButtonFriendGoTo_Clicked"
-QT_MOC_LITERAL(21, 233, 28), // "ButtonFriendFavorite_Clicked"
-QT_MOC_LITERAL(22, 262, 16), // "UpdateHiddenRows"
-QT_MOC_LITERAL(23, 279, 35), // "on_CheckBoxOpenProfile_stateC..."
-QT_MOC_LITERAL(24, 315, 4), // "arg1"
-QT_MOC_LITERAL(25, 320, 27), // "on_LineEditName_textChanged"
-QT_MOC_LITERAL(26, 348, 21), // "on_ButtonFind_clicked"
-QT_MOC_LITERAL(27, 370, 27), // "on_ComboBoxStatus_activated"
-QT_MOC_LITERAL(28, 398, 5), // "index"
-QT_MOC_LITERAL(29, 404, 33), // "on_CheckBoxFavorites_stateCha..."
-QT_MOC_LITERAL(30, 438, 39), // "on_TableWidgetFriends_cellDou..."
-QT_MOC_LITERAL(31, 478, 6), // "column"
-QT_MOC_LITERAL(32, 485, 30), // "TableWidgetFriends_CellClicked"
-QT_MOC_LITERAL(33, 516, 3), // "col"
-QT_MOC_LITERAL(34, 520, 10) // "FriendToUi"
+QT_MOC_LITERAL(19, 184, 8), // "SetIcons"
+QT_MOC_LITERAL(20, 193, 24), // "ButtonFriendGoTo_Clicked"
+QT_MOC_LITERAL(21, 218, 28), // "ButtonFriendFavorite_Clicked"
+QT_MOC_LITERAL(22, 247, 16), // "UpdateHiddenRows"
+QT_MOC_LITERAL(23, 264, 35), // "on_CheckBoxOpenProfile_stateC..."
+QT_MOC_LITERAL(24, 300, 4), // "arg1"
+QT_MOC_LITERAL(25, 305, 27), // "on_LineEditName_textChanged"
+QT_MOC_LITERAL(26, 333, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(27, 355, 27), // "on_ComboBoxStatus_activated"
+QT_MOC_LITERAL(28, 383, 5), // "index"
+QT_MOC_LITERAL(29, 389, 33), // "on_CheckBoxFavorites_stateCha..."
+QT_MOC_LITERAL(30, 423, 39), // "on_TableWidgetFriends_cellDou..."
+QT_MOC_LITERAL(31, 463, 6), // "column"
+QT_MOC_LITERAL(32, 470, 30), // "TableWidgetFriends_CellClicked"
+QT_MOC_LITERAL(33, 501, 3), // "col"
+QT_MOC_LITERAL(34, 505, 10) // "FriendToUi"
 
     },
     "FormFriends\0s_return_to_profile\0\0"
@@ -74,8 +74,7 @@ QT_MOC_LITERAL(34, 520, 10) // "FriendToUi"
     "type\0changeEvent\0QEvent*\0event\0"
     "ProgressLoading\0p\0row\0OnFinish\0"
     "InitComponents\0closeEvent\0QCloseEvent*\0"
-    "Retranslate\0on_ButtonReturn_clicked\0"
-    "ButtonFriendGoTo_Clicked\0"
+    "Retranslate\0SetIcons\0ButtonFriendGoTo_Clicked\0"
     "ButtonFriendFavorite_Clicked\0"
     "UpdateHiddenRows\0on_CheckBoxOpenProfile_stateChanged\0"
     "arg1\0on_LineEditName_textChanged\0"
@@ -165,7 +164,7 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 5: _t->InitComponents(); break;
         case 6: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 7: _t->Retranslate(); break;
-        case 8: _t->on_ButtonReturn_clicked(); break;
+        case 8: _t->SetIcons(); break;
         case 9: _t->ButtonFriendGoTo_Clicked(); break;
         case 10: _t->ButtonFriendFavorite_Clicked(); break;
         case 11: _t->UpdateHiddenRows(); break;

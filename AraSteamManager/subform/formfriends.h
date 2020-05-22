@@ -38,8 +38,7 @@ private slots:
     void InitComponents();
     void closeEvent(QCloseEvent *event);
     void Retranslate();
-
-    void on_ButtonReturn_clicked();
+    void SetIcons();
 
     void ButtonFriendGoTo_Clicked();
     void ButtonFriendFavorite_Clicked();

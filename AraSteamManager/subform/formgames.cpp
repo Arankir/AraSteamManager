@@ -13,6 +13,7 @@ constexpr int c_tableColumnCount=5;
 #define Init {
 FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent): QWidget(parent), ui(new Ui::FormGames), _id(a_id),  _games(a_games){
     ui->setupUi(this);
+    ui->TableWidgetGames->setMouseTracking(false);
     this->setAttribute(Qt::WA_TranslucentBackground);
     switch(_setting.GetTheme()){
         case 1:
@@ -216,20 +217,20 @@ void FormGames::showHideSlideWidget(bool a_flag){
     //connect(_animate,QPropertyAnimations::, ui->FrameGroup->setVisible(!a_flag));
 }
 void FormGames::mouseMoveEvent(QMouseEvent *ev){
-//    if (ev->pos().x() < 50)
-//    {
-//        qDebug()<<1<<ev->pos().x()<<ev->pos().y();
-//        if (!ui->FrameGroup->isVisible()){
-//            ui->FrameGroup->show();
-//            showHideSlideWidget(true);
-//        }
-//    }
-//    else
-//    {
-//        qDebug()<<2<<ev->pos().x()<<ev->pos().y();
-//        if (ui->FrameGroup->isVisible())
-//            showHideSlideWidget(false);
-//    }
+    if (ev->pos().x() < 50)
+    {
+        qDebug()<<1<<ev->pos();
+        if (!ui->FrameGroup->isVisible()){
+            ui->FrameGroup->show();
+            showHideSlideWidget(true);
+        }
+    }
+    else
+    {
+        qDebug()<<2<<ev->pos();
+        if (ui->FrameGroup->isVisible())
+            showHideSlideWidget(false);
+    }
 }
 void FormGames::slotShowHideSlide(){
 //    if (ui->FrameGroup->isHidden())

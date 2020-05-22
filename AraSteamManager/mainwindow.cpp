@@ -44,7 +44,7 @@ void MainWindow::InitComponents(){
     ui->ButtonMaximize->setFixedSize(QSize(23,23));
     ui->ButtonExit->setFixedSize(QSize(23,23));
     this->setGeometry(_setting.GetMainWindowGeometry());
-    this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y()-31);
+    this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y());
     if(_setting.GetMainWindowMaximize())
         this->showMaximized();
     qApp->setStyleSheet(GetTheme());
@@ -461,7 +461,7 @@ void MainWindow::closeEvent(QCloseEvent *a_event){
     if(this->isMaximized()){
         this->showNormal();
     }
-    _setting.SetMainWindowParams(this->geometry());
+    _setting.SetMainWindowParams(this->frameGeometry());
     _setting.SyncronizeSettings();
     a_event->accept();
 }
