@@ -3,6 +3,9 @@
 Favorites::Favorites(QString a_path, QString a_type, QObject *parent) : QObject(parent),_path(a_path){
     Init(a_type);
 }
+Favorites::Favorites(QString a_type, QObject *parent) : QObject(parent),_path(_setting._pathFavorites+a_type+".json"){
+    Init(a_type);
+}
 void Favorites::SetType(QString a_type){
     _path=_setting._pathFavorites+a_type+".json";
     Init(a_type);

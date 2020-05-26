@@ -20,6 +20,7 @@ enum class jsonType{
 
 public:
     explicit Favorites(QString path, QString type, QObject *parent = nullptr);
+    Favorites(QString type, QObject *parent = nullptr);
     Favorites(QObject *a_parent = nullptr): QObject(a_parent) {}
 
 signals:

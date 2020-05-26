@@ -20,41 +20,30 @@ constexpr int c_filterCount=4;
 #define ConstantsEnd }
 
 #define Init {
-FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent) : QWidget(parent), ui(new Ui::FormFriends),_id(a_id),_friends(a_friends),_profiles(_friends.GetProfiles()){
+FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent): QWidget(parent), ui(new Ui::FormFriends), _id(a_id), _friends(a_friends), _profiles(_friends.GetProfiles()),
+    _favorites("friends"), _filter(_friends.GetCount(),c_filterCount){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     InitComponents();
     ui->LineEditName->setFocus();
 }
 void FormFriends::InitComponents(){
-    _favorites.SetType("friends");
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnID,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Ник")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnAdded,new QTableWidgetItem(tr("Добавлен")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnStatus,new QTableWidgetItem(tr("Статус")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnisPublic,new QTableWidgetItem(tr("Профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnGoTo,new QTableWidgetItem(tr("На профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnFavorite,new QTableWidgetItem(tr("Избранное")));
-    ui->ComboBoxStatus->addItems(QStringList()<<tr("Статус")<<tr("В игре")<<tr("Не в сети")<<tr("В сети")<<tr("Не беспокоить")<<tr("Нет на месте")<<tr("Спит")<<tr("Ожидает обмена")<<tr("Хочет поиграть"));
+    Retranslate();
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //ui->TableWidgetFriends->setAlternatingRowColors(true);
-    //ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetFriends->setRowCount(_friends.GetCount());
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID,true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon,33);
     _profiles.Sort();
-    _filter.SetRow(_friends.GetCount());
-    _filter.SetCol(c_filterCount);
     ui->ButtonFriendGoTo->setFixedSize(QSize(25,25));
     ui->ButtonFriendFavorite->setFixedSize(QSize(25,25));
+    SetIcons();
 #define Connects {
     connect(ui->TableWidgetFriends,&QTableWidget::cellClicked,this,&FormFriends::TableWidgetFriends_CellClicked);
     connect(ui->ButtonFriendGoTo,&QPushButton::clicked,this,&FormFriends::ButtonFriendGoTo_Clicked);
     connect(ui->ButtonFriendFavorite,&QPushButton::clicked,this,&FormFriends::ButtonFriendFavorite_Clicked);
 #define ConnectsEnd }
-    SetIcons();
     Threading loadTable(this);
     loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
 }
@@ -68,14 +57,13 @@ void FormFriends::OnFinish(){
         QString path = _setting._pathImagesProfiles+profile._avatar.mid(72,20)+".jpg";
         QLabel *avatarFriend = new QLabel;
         ui->TableWidgetFriends->setCellWidget(row,c_tableColumnIcon,avatarFriend);
-        if(!QFile::exists(path)){
+        if(!QFile::exists(path)){//Подумать над row==0
                 avatarFriend->setBaseSize(QSize(32,32));
+                RequestImage* image = new RequestImage(avatarFriend,profile._avatar,path,true,this);
                 if(row==0)//не работает
-                    connect(new RequestImage(avatarFriend,profile._avatar,path,true,this),&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
+                    connect(image,&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
                         TableWidgetFriends_CellClicked(0,0);
                     });
-                else
-                    new RequestImage(avatarFriend,profile._avatar,path,true,this);
             } else {
                 avatarFriend->setPixmap(QPixmap(path));
                 if(row==0)
@@ -124,7 +112,11 @@ void FormFriends::SetIcons(){
     ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find_profile.png"));
     ui->ButtonFriendGoTo->setIcon(QIcon("://"+_theme+"/go_to.png"));
     ui->ButtonFriendFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title { "
+                                        "image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; "
+                                        "image-position:left; "
+                                        "margin-top:15px; "
+                                      "}");
 }
 void FormFriends::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);

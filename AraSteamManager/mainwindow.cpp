@@ -17,13 +17,6 @@ constexpr int c_formsSettings=5;
 #define Init {
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), _games(this){
     ui->setupUi(this);
-//    int id = QFontDatabase::addApplicationFont("C:/font4.otf");
-//    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-//    qApp->setFont(family);
-//    QFont font = qApp->font();
-//    font.setPointSize(c_fontSize);
-//    font.setPixelSize(1);
-//    qApp->setFont(font);
     InitComponents();
     if(_setting.GetMyProfile()!="none")
         GoToProfile(_setting.GetMyProfile(),QueryType::url);
@@ -31,6 +24,13 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
     _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
+        int id = QFontDatabase::addApplicationFont("C:/16172.ttf");
+        QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+        qApp->setFont(family);
+        QFont font = qApp->font();
+        font.setPointSize(12);
+        font.setPixelSize(12);
+        qApp->setFont(font);
     ui->line->setVisible(false);
     ui->ButtonMinimize->setFlat(true);
     ui->ButtonMaximize->setFlat(true);

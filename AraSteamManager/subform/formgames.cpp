@@ -11,28 +11,18 @@ constexpr int c_tableColumnCount=5;
 #define ConstantsEnd }
 
 #define Init {
-FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent): QWidget(parent), ui(new Ui::FormGames), _id(a_id),  _games(a_games){
+FormGames::FormGames(QString a_id, SGames a_games, QWidget *parent): QWidget(parent), ui(new Ui::FormGames), _id(a_id),  _games(a_games), _favorites("games"){
     ui->setupUi(this);
-    ui->TableWidgetGames->setMouseTracking(false);
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    switch(_setting.GetTheme()){
-        case 1:
-            _theme="white";
-            break;
-        case 2:
-            _theme="black";
-            break;
-    }
     InitComponents();
 }
 void FormGames::InitComponents(){
-    _games.Sort();
-    _favorites.SetType("games");
+    ui->TableWidgetGames->setMouseTracking(false);
+    this->setAttribute(Qt::WA_TranslucentBackground);
     ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
-    //ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    _games.Sort();
+    UpdateTheme();
+    Retranslate();
+    ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
     //ui->TableWidgetGames->setAlternatingRowColors(true);
 
@@ -48,9 +38,6 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
 //    ui->FrameGame->setVisible(false);
-    ui->ButtonAchievements->setText(tr("Достижения"));
-    ui->ButtonFavorite->setText("");
-    ui->ButtonHide->setText("");
     ui->TableWidgetGames->setRowCount(_games.GetCount());
     for (int i=0;i<_games.GetCount();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
@@ -68,15 +55,26 @@ void FormGames::InitComponents(){
     connect(ui->ButtonFavorite,&QPushButton::clicked,this,&FormGames::ButtonFavorite_Clicked);
     connect(ui->ButtonHide,&QPushButton::clicked,this,&FormGames::ButtonHide_Clicked);
 #define ConnectsEnd }
-#define Icons {
+    Threading loadTable(this);
+    loadTable.AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
+}
+void FormGames::UpdateTheme(){
+    switch(_setting.GetTheme()){
+        case 1:
+            _theme="white";
+            break;
+        case 2:
+            _theme="black";
+            break;
+    }
+    SetIcons();
+}
+void FormGames::SetIcons(){
     ui->ButtonFind->setIcon(QIcon("://"+_theme+"/find.png"));
     ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/favorites.png"));
     ui->ButtonHide->setIcon(QIcon("://"+_theme+"/hide.png"));
     ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
     ui->ButtonChangeGroup->setIcon(QIcon("://"+_theme+"/change.png"));
-#define IconsEnd }
-    Threading loadTable(this);
-    loadTable.AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
 }
 void FormGames::ProgressLoading(int a_progress, int a_row){
     ui->ProgressBarLoading->setValue(a_progress);
@@ -181,6 +179,9 @@ void FormGames::Retranslate(){
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
     ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
+    ui->ButtonAchievements->setText(tr("Достижения"));
+    ui->ButtonFavorite->setText("");
+    ui->ButtonHide->setText("");
 }
 void FormGames::closeEvent(QCloseEvent*){
     emit s_return_to_profile(this);
