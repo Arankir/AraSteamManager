@@ -5,7 +5,9 @@
 #include <QTableWidget>
 #include <class/steamapi/Sgames.h>
 #include <class/Network/requestdata.h>
+#include <class/settings.h>
 #include <QEventLoop>
+#include <QFontDatabase>
 
 class ThreadGames : public QObject
 {
@@ -28,6 +30,7 @@ private:
     const int c_tableColumnIndex;
     const int c_tableColumnName;
     SGames _games;
+    Settings _setting;
     QTableWidget *_TableWidgetGames;
 };
 

@@ -24,10 +24,9 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
     _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
-        int id = QFontDatabase::addApplicationFont("C:/16172.ttf");
+        int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
         QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-        qApp->setFont(family);
-        QFont font = qApp->font();
+        QFont font(family, 12);
         font.setPointSize(12);
         font.setPixelSize(12);
         qApp->setFont(font);

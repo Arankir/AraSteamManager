@@ -5,6 +5,9 @@
 FormStatistics::FormStatistics(QString a_id, SGames a_games, QString a_name, QWidget *parent) : QWidget(parent),ui(new Ui::FormStatistics),_id(a_id),_games(a_games),_name(a_name){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
+    int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    QFont font(family);
     ui->ChartsViewTimes->setStyleSheet("background: rgba(0,0,0,0); ");
     ui->ChartsViewMonths->setStyleSheet("background: rgba(0,0,0,0); ");
     ui->ChartsViewYears->setStyleSheet("background: rgba(0,0,0,0); ");

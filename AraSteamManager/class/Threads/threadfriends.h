@@ -6,6 +6,8 @@
 #include <QStandardItemModel>
 #include <class/steamapi/Sfriends.h>
 #include <class/Network/requestdata.h>
+#include <class/settings.h>
+#include <QFontDatabase>
 
 class ThreadFriends : public QObject
 {
@@ -33,6 +35,7 @@ private:
     QTableWidgetItem *GetPrivacy(int communityVisibilityState);
     SFriends _friends;
     SProfiles _profiles;
+    Settings _setting;
     QTableWidget *_TableWidgetFriends;
 };
 

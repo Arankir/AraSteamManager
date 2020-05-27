@@ -1,15 +1,26 @@
 #include "threadfriends.h"
 
 int ThreadFriends::Fill(){
+    int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    QFont font(family, 9);
     int row=0;
     for(auto &profile: _profiles){
         for(auto &friendP: _friends){
             if(profile._steamID==friendP._steamID){
+                QTableWidgetItem *itemName = new QTableWidgetItem(profile._personaName);
+                QTableWidgetItem *itemAdded = new QTableWidgetItem(friendP._friend_since.toString("yyyy.MM.dd hh:mm:ss"));
+                QTableWidgetItem *itemState = GetState(profile._gameExtraInfo,profile._personaState);
+                QTableWidgetItem *itemPrivacy = GetPrivacy(profile._communityVisibilityState);
+                itemName->setFont(font);
+                itemAdded->setFont(font);
+                itemState->setFont(font);
+                itemPrivacy->setFont(font);
                 _TableWidgetFriends->setItem(row,c_tableColumnID,new QTableWidgetItem(profile._steamID));
-                _TableWidgetFriends->setItem(row,c_tableColumnName,new QTableWidgetItem(profile._personaName));
-                _TableWidgetFriends->setItem(row,c_tableColumnAdded,new QTableWidgetItem(friendP._friend_since.toString("yyyy.MM.dd hh:mm:ss")));
-                _TableWidgetFriends->setItem(row,c_tableColumnStatus,GetState(profile._gameExtraInfo,profile._personaState));
-                _TableWidgetFriends->setItem(row,c_tableColumnisPublic,GetPrivacy(profile._communityVisibilityState));
+                _TableWidgetFriends->setItem(row,c_tableColumnName,itemName);
+                _TableWidgetFriends->setItem(row,c_tableColumnAdded,itemAdded);
+                _TableWidgetFriends->setItem(row,c_tableColumnStatus,itemState);
+                _TableWidgetFriends->setItem(row,c_tableColumnisPublic,itemPrivacy);
                 emit s_progress(row,row);
                 break;
             }

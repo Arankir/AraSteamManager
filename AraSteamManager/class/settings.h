@@ -79,6 +79,8 @@ public:
     const QString _pathFavorites="files/favorites/";// /тип.json
     const QString _pathHide="files/hide/";// /номер игры.json
 
+    const QString c_defaultFont="C:/JosefinSans-Italic-VariableFont_wght.ttf"; // Шрифт
+
 signals:
 
 public slots:
