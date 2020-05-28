@@ -131,6 +131,9 @@ private slots:
     void TableAchievements_CellClicked(int row, int column);
 
 private:
+    void SetTheme();
+    void SetIcons();
+
     Ui::FormAchievements *ui;
     Settings _setting;
     QString _theme="white";

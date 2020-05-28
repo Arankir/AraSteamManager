@@ -26,9 +26,9 @@ void MainWindow::InitComponents(){
     _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
         int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
         QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-        QFont font(family, 12);
-        font.setPointSize(12);
-        font.setPixelSize(12);
+        QFont font(family, 10);
+        //font.setPointSize(12);
+        //font.setPixelSize(12);
         qApp->setFont(font);
     ui->line->setVisible(false);
     ui->ButtonMinimize->setFlat(true);
@@ -66,6 +66,9 @@ QString MainWindow::GetTheme(){
     QString hoverGradient;
     QString backgroundGradient;
     QString backgroundGradientTitle;
+    QString buttonGradient;
+    QString buttonHoverGradient;
+    QString progressbarGradient;
     QString blackGradient;
     QString pushButton;
     QString progressBar;
@@ -83,18 +86,36 @@ QString MainWindow::GetTheme(){
     QString listWidget;
     switch(_setting.GetTheme()){
     case 1:{
+        buttonGradient = "qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, "
+                    "stop: 0 #136186, "
+                    "stop: 0.5 #145c81, "
+                    "stop: 1.0 #136186); ";
+        buttonHoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                    "stop: 0 #377097, "
+                    "stop: 0.22 #377097, "
+                    "stop: 0.88 #286087, "
+                    "stop: 1.0 #286087); ";
+        progressbarGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                    "stop: 0 #136186, "
+                    "stop: 0.25 #237196, "
+                    "stop: 0.5 #3381A6, "
+                    "stop: 0.75 #237196, "
+                    "stop: 1.0 #136186); ";
         hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #185077, "
                     "stop: 0.22 #387097, "
                     "stop: 0.88 #286087, "
                     "stop: 1.0 #185077); ";
-        backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                    "stop: 0 #213c57, "
-                    "stop: 1.0 #1a2839); ";
+        backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                    "stop: 0 #13273a, "
+                    "stop: 0.12 #12324b, "
+                    "stop: 0.5 #14384f, "
+                    "stop: 0.83 #12324b, "
+                    "stop: 1.0 #13273a); ";
         backgroundGradientTitle = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                    "stop: 0 #406090, "
-                    "stop: 0.9 #406090, "
-                    "stop: 1.0 #213c57); ";
+                    "stop: 0 #10131b, "
+                    "stop: 0.5 #20232b, "
+                    "stop: 1.0 #10131b); ";
         blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
                     "stop: 0 #102b45, "
                     "stop: 0.8 #17314c, "
@@ -102,7 +123,11 @@ QString MainWindow::GetTheme(){
         pushButton =
                 "QPushButton{ "
                     "color: white; "
-                    "background-color: #24547d; "
+                    "background: "+buttonGradient+
+                    "border: 1px outset #262626; "
+                    "min-width: 25px; "
+                    "min-height: 20px; "
+                    "border-radius: 4px; "
                 "} "
                 "QPushButton:disabled{ "
                     "background-color: #48525a; "
@@ -111,10 +136,14 @@ QString MainWindow::GetTheme(){
                     "background-color: #212121; "
                 "} "
                 "QPushButton:hover{ "
-                    "background-color: #22748c; "
-                    "background: "+hoverGradient+
-                    "border: 1px solid #262626; "
-                    "border-radius: 2px; "
+                    "background-color: #dfe7ed; "
+                    "background: "+buttonHoverGradient+
+                    "border: 2px outset #262626; "
+                    "border-radius: 4px; "
+                "} "
+                "QPushButton:flat { "
+                    "background-color: none; "
+                    //"border: none; "/* no border for a flat push button */
                 "} "
                 ;
         progressBar =
@@ -126,7 +155,7 @@ QString MainWindow::GetTheme(){
                     "text-align: center; "
                 "} "
                 "QProgressBar::chunk { "
-                    "background-color: "+hoverGradient+
+                    "background-color: "+progressbarGradient+
                     "border-radius: 6px; "
                 "} "
                 ;
@@ -261,7 +290,7 @@ QString MainWindow::GetTheme(){
                 ;
         lineEdit =
                 "QLineEdit { "
-                    "border: 1px solid #537ca6; "
+                    "border: 1px solid #262626; "
                     "border-radius: 2px; "
                     "selection-background-color: #387097; "
                     "background-color: "+blackGradient+
@@ -270,6 +299,13 @@ QString MainWindow::GetTheme(){
                 "QLineEdit:disabled { "
                     "selection-background-color: #387097; "
                     "background-color: #A0A0A0; "
+                    "color: white; "
+                "} "
+                "QLineEdit:hover { "
+                    "border: 1px solid #537ca6; "
+                    "border-radius: 2px; "
+                    "selection-background-color: #387097; "
+                    "background-color: "+blackGradient+
                     "color: white; "
                 "} "
                 ;
@@ -425,7 +461,7 @@ void MainWindow::ReturnFromForms(){
     }
     if(_initFriends){
         disconnect(_friendsForm);
-//        delete _friendsForm;
+        delete _friendsForm;
         _initFriends=false;
     }
     if(_initStatistics){

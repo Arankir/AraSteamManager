@@ -23,8 +23,7 @@ void FormGames::InitComponents(){
     UpdateTheme();
     Retranslate();
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //ui->TableWidgetGames->setSelectionMode(QAbstractItemView::NoSelection);
-    //ui->TableWidgetGames->setAlternatingRowColors(true);
+    ui->TableWidgetGames->setAlternatingRowColors(true);
 
     ui->FrameGroup->stackUnder(ui->TableWidgetGames);
     _geometryGroup = QRect(0,0,0,ui->FrameGames->height());
@@ -37,7 +36,6 @@ void FormGames::InitComponents(){
 
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
-//    ui->FrameGame->setVisible(false);
     ui->TableWidgetGames->setRowCount(_games.GetCount());
     for (int i=0;i<_games.GetCount();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
@@ -78,10 +76,9 @@ void FormGames::SetIcons(){
 }
 void FormGames::ProgressLoading(int a_progress, int a_row){
     ui->ProgressBarLoading->setValue(a_progress);
-    if(ui->ProgressBarLoading->value()==ui->ProgressBarLoading->maximum()-1){
+    //if(ui->ProgressBarLoading->value()==ui->ProgressBarLoading->maximum()-1){
         //ui->ProgressBarLoading->setVisible(false);
-        //ui->TableWidgetGames->setEnabled(true);
-    }
+    //}
 }
 void FormGames::OnFinish(){
     ui->TableWidgetGames->setColumnHidden(c_tableColumnAppid,true);
@@ -150,6 +147,7 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
         //static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_achievements.GetIndex(),c_tableColumnProgress))->setEnabled(false);
     }
     ui->TableWidgetGames->setItem(a_achievements._index,c_tableColumnProgress,new QTableWidgetItem(progressBarAchievements->text().rightJustified(4,'0')));
+    ui->TableWidgetGames->item(a_achievements._index,c_tableColumnProgress)->setTextAlignment(Qt::AlignRight);;
     _achievements[a_achievements._index]=a_achievements;
     emit s_achievementsLoaded(_load++,0);
     if(_load==_games.GetCount()){
@@ -176,9 +174,9 @@ void FormGames::changeEvent(QEvent *event){
 }
 void FormGames::Retranslate(){
     ui->retranslateUi(this);
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon,new QTableWidgetItem(""));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName,new QTableWidgetItem(tr("Название игры")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress,new QTableWidgetItem(tr("Прогресс")));
+    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon, new QTableWidgetItem(""));
+    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName, new QTableWidgetItem(tr("Название игры")));
+    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress, new QTableWidgetItem(tr("Прогресс")));
     ui->ButtonAchievements->setText(tr("Достижения"));
     ui->ButtonFavorite->setText("");
     ui->ButtonHide->setText("");

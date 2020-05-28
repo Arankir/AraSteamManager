@@ -60,10 +60,10 @@ void FormFriends::OnFinish(){
         if(!QFile::exists(path)){//Подумать над row==0
                 avatarFriend->setBaseSize(QSize(32,32));
                 RequestImage* image = new RequestImage(avatarFriend,profile._avatar,path,true,this);
-                if(row==0)//не работает
-                    connect(image,&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
-                        TableWidgetFriends_CellClicked(0,0);
-                    });
+//                if(row==0)//не работает
+//                    connect(image,&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
+//                        TableWidgetFriends_CellClicked(0,0);
+//                    });
             } else {
                 avatarFriend->setPixmap(QPixmap(path));
                 if(row==0)
@@ -187,7 +187,7 @@ void FormFriends::ButtonFriendGoTo_Clicked(){
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         _windowChildCount++;
         emit s_go_to_profile(_currentFriend,QueryType::url);
-        emit s_return_to_profile(this);
+        //emit s_return_to_profile(this);
     }
 }
 void FormFriends::ButtonFriendFavorite_Clicked(){

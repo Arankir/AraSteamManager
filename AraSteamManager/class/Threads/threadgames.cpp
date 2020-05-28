@@ -3,7 +3,7 @@
 int ThreadGames::Fill(){
     int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    QFont font(family, 8);
+    QFont font(family, 10);
     for(int i=0;i<_games.GetCount();i++){
         QTableWidgetItem *itemTitle = new QTableWidgetItem(_games[i]._name);
         itemTitle->setFont(font);

@@ -64,7 +64,7 @@ void FormSettings::InitComponents(){
     ui->tabWidget->setAttribute(Qt::WA_TranslucentBackground);
 
     ui->labelIcons8->setTextFormat(Qt::RichText);
-    ui->labelIcons8->setText("<html><head/><body><p>Иконки для приложения были предоставлены сайтом <img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"><a href=https://icons8.ru/icons><span style=\" text-decoration: underline; color:#2d7fc8;\"> https://icons8.ru/icons</span></a></p></body></html>");
+    ui->labelIcons8->setText("<html><head/><body><p>Иконки для приложения были предоставлены сайтом <a href=https://icons8.ru/icons><span style=\" text-decoration: underline; color:#2d7fc8;\"> https://icons8.ru/icons</span></a></p></body></html>");
 
     QFormLayout *layout = new QFormLayout;
     QDir dirHiddenGames(_setting._pathHide);
