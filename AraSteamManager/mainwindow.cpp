@@ -70,22 +70,12 @@ QString MainWindow::GetTheme(){
     QString buttonHoverGradient;
     QString progressbarGradient;
     QString blackGradient;
-    QString pushButton;
-    QString progressBar;
-    QString forms;
-    QString subContainers;
-    QString labels;
-    QString radioButtons;
-    QString tabBar;
-    QString checkBox;
-    QString comboBox;
-    QString lineEdit;
-    QString tableWidget;
-    QString headerView;
-    QString groupBox;
-    QString listWidget;
+    QString tableWidgetRowGradient;
+    QString tableWidgetAlterRowGradient;
+    QString qss;
     switch(_setting.GetTheme()){
     case 1:{
+#define gradients {
         buttonGradient = "qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, "
                     "stop: 0 #136186, "
                     "stop: 0.5 #145c81, "
@@ -120,7 +110,17 @@ QString MainWindow::GetTheme(){
                     "stop: 0 #102b45, "
                     "stop: 0.8 #17314c, "
                     "stop: 1.0 #193048); ";
-        pushButton =
+        tableWidgetRowGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                    "stop: 0 #102b45, "
+                    "stop: 0.8 #17314c, "
+                    "stop: 1.0 #193048); ";
+        tableWidgetAlterRowGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                    "stop: 0 #203b55, "
+                    "stop: 0.8 #27415c, "
+                    "stop: 1.0 #294058); ";
+#define gradientsend }
+        qss =
+#define button {
                 "QPushButton{ "
                     "color: white; "
                     "background: "+buttonGradient+
@@ -145,8 +145,8 @@ QString MainWindow::GetTheme(){
                     "background-color: none; "
                     //"border: none; "/* no border for a flat push button */
                 "} "
-                ;
-        progressBar =
+#define buttonend }
+#define progressbar {
                 "QProgressBar { "
                     "color: white; "
                     "background-color: rgba(26,26,26,255); "
@@ -158,33 +158,8 @@ QString MainWindow::GetTheme(){
                     "background-color: "+progressbarGradient+
                     "border-radius: 6px; "
                 "} "
-                ;
-        forms =
-                "QWidget[objectName=MainWindow],QWidget[objectName=FormContainerAchievements]{ "
-                    "background-color: "+backgroundGradient+
-                "} "
-                ;
-        subContainers =
-                "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget, QWidget[isScrollArea=\"true\"]{ "
-                    "background-color: rgba(255, 255, 255, 0); "
-                "} "
-                "QScrollArea { "
-                    "border: 0px solid white; "
-                "} "
-                "QMessageBox{ "
-                    "background: black; "
-                "} "
-                "QFrame[accessibleName=TitleWindow]{ "
-                    "background-color: "+backgroundGradientTitle+
-                    "border: 0px solid white; "
-                "} "
-                ;
-        labels =
-                "QLabel{"
-                    "color: white; "
-                "} "
-                ;
-        radioButtons =
+#define progressbarend }
+#define radiobutton {
                 "QRadioButton{"
                     "color: white; "
                     "background-color: rgba(255, 255, 255, 0); "
@@ -194,19 +169,16 @@ QString MainWindow::GetTheme(){
                     "width: 15; "
                 "} "
                 "QRadioButton::indicator::unchecked { "
-                    "image: url(://"+_theme+"/widgets/radiobutton_unchecked.png); "
+                    "image: url(://"+_iconColor+"/widgets/radiobutton_unchecked.png); "
                 "} "
                 "QRadioButton::indicator::checked { "
-                    "image: url(://"+_theme+"/widgets/radiobutton_checked.png); "
+                    "image: url(://"+_iconColor+"/widgets/radiobutton_checked.png); "
                 "} "
                 "QRadioButton::hover { "
                     "color: "+hoverGradient+
                 "} "
-                ;
-        tabBar =
-                "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics] { "
-                    "background-color: "+backgroundGradient+
-                "} "
+#define radiobuttonend }
+#define tabbar {
                 "QTabBar::tab { "
                     "color: white; "
                     "background-color: #333333; "
@@ -227,25 +199,21 @@ QString MainWindow::GetTheme(){
                 "QTabBar::tab:!selected { "
                     "margin-top: 2px; "
                 "} "
-                "QTabBar::tab:selected { "
-                    /* expand/overlap to the left and right by 4px */
+                "QTabBar::tab:selected { " /* expand/overlap to the left and right by 4px */
                     "margin-left: -4px; "
                     "margin-right: -4px; "
                 "} "
-
                 "QTabBar::tab:first:selected { "
                     "margin-left: 0; "/* the first selected tab has nothing to overlap with on the left */
                 "} "
-
                 "QTabBar::tab:last:selected { "
                     "margin-right: 0; "/* the last selected tab has nothing to overlap with on the right */
                 "} "
-
                 "QTabBar::tab:only-one { "
                     "margin: 0; "/* if there is only one tab, we don't want overlapping margins */
                 "} "
-                ;
-        checkBox =
+#define tabbarend }
+#define checkbox {
                 "QCheckBox{ "
                     "background-color: rgba(255,255,255,0); "
                     "color: white; "
@@ -256,16 +224,14 @@ QString MainWindow::GetTheme(){
                 "QCheckBox::indicator { "
                     "width: 15; "
                 "} "
-                "QCheckBox::indicator::checked { "
-                "} "
                 "QCheckBox::indicator:unchecked { "
-                    "image: url(://"+_theme+"/widgets/checkbox_uncheked.png); "
+                    "image: url(://"+_iconColor+"/widgets/checkbox_uncheked.png); "
                 "} "
                 "QCheckBox::indicator:checked { "
-                    "image: url(://"+_theme+"/widgets/checkbox_checked.png); "
+                    "image: url(://"+_iconColor+"/widgets/checkbox_checked.png); "
                 "} "
-                ;
-        comboBox =
+#define checkboxend }
+#define combobox {
                 "QComboBox { "
                     "border: 1px solid #232323; "
                     "border-radius: 3px; "
@@ -287,8 +253,8 @@ QString MainWindow::GetTheme(){
                 "QComboBox:item:checked { "
                     //"font-weight: bold; "
                 "} "
-                ;
-        lineEdit =
+#define comboboxend }
+#define lineedit {
                 "QLineEdit { "
                     "border: 1px solid #262626; "
                     "border-radius: 2px; "
@@ -308,8 +274,8 @@ QString MainWindow::GetTheme(){
                     "background-color: "+blackGradient+
                     "color: white; "
                 "} "
-                ;
-        tableWidget =
+#define lineeditend }
+#define tablewidget {
                 "QTableWidget { "
                     "border: 1px solid #777777; "
                     "border-radius: 2px; "
@@ -322,6 +288,8 @@ QString MainWindow::GetTheme(){
                     "border-bottom-color: transparent; "
                     "background-color: #213c57; "
                 "} "
+#define tablewidgetend }
+#define scrollbar {
                 "QScrollBar:vertical { "
                     "border: 1px solid #999999; "
                     "background: "+hoverGradient+
@@ -332,8 +300,8 @@ QString MainWindow::GetTheme(){
                     "background: "+hoverGradient+
                     "height:10px; "
                 "} "
-                ;
-        headerView =
+#define scrollbarend }
+#define headerview {
                 "QHeaderView::section { "
                     "background-color: #505050; "
                     "color: white; "
@@ -345,13 +313,38 @@ QString MainWindow::GetTheme(){
                     "background-color: #303030; "
                     "selection-color: #303030; "
                 "} "
-                ;
-        groupBox =
+#define headerviewend }
+                "QTableView{ "
+                    "background-color: "+tableWidgetRowGradient+
+                    "alternate-background-color: "+tableWidgetAlterRowGradient+
+                "} "
+                "QWidget[objectName=MainWindow],QWidget[objectName=FormContainerAchievements]{ "
+                    "background-color: "+backgroundGradient+
+                "} "
+                "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics] { "
+                    "background-color: "+backgroundGradient+
+                "} "
+                "QFrame[accessibleName=TitleWindow]{ "
+                    "background-color: "+backgroundGradientTitle+
+                    "border: 0px solid white; "
+                "} "
+                "QScrollArea > QWidget, QScrollArea > QWidget > QWidget{ "
+                    "background-color: rgba(255, 255, 255, 0); "
+                "} "
+                "QScrollArea { "
+                    "border: 0px solid white; "
+                    "background-color: rgba(255, 255, 255, 0); "
+                "} "
+                "QMessageBox{ "
+                    "background: black; "
+                "} "
+                "QLabel{"
+                    "color: white; "
+                "} "
                 "QGroupBox::title{ "
                     "color: white; "
                 "} "
-                ;
-        listWidget =
+#define listwidget {
                 "QListWidget { "
                     "border: 0px solid #cccccc; "
                     "border-radius: 8px; "
@@ -362,11 +355,16 @@ QString MainWindow::GetTheme(){
                     "background-color: #213c57; "
                     "color: white; "
                 "} "
+#define listwidgetend }
                 ;
-        _theme="white";
+        _iconColor="white";
         break;
-        }
-    case 2:
+    }
+    case 2:{
+        _iconColor="black";
+        break;
+    }
+    default:{
         // Настраиваем палитру для цветовых ролей элементов интерфейса
         //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
         //    darkPalette.setColor(QPalette::WindowText, Qt::white);
@@ -385,30 +383,27 @@ QString MainWindow::GetTheme(){
             // Для возврата к светлой палитре достаточно
             // будет установить стандартную палитру из темы оформления
             //qApp->setPalette(style()->standardPalette());
-    _theme="black";
-        break;
-    default:{
-        _theme="white";
+        _iconColor="white";
         break;
     }
     }
     SetIcons();
-    return pushButton+progressBar+forms+subContainers+labels+radioButtons+tabBar+checkBox+comboBox+lineEdit+tableWidget+headerView+groupBox+listWidget;
+    return qss;
 }
 void MainWindow::SetIcons(){
     ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
-    ui->ButtonUpdate->setIcon(QIcon("://"+_theme+"/update.png"));
-    ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_theme+"/home.png"));
-    ui->ButtonFindProfile->setIcon(QIcon("://"+_theme+"/find_profile.png"));
-    ui->ButtonSettings->setIcon(QIcon("://"+_theme+"/settings.png"));
-    ui->ButtonExit->setIcon(QIcon("://"+_theme+"/close_window.png"));
-    ui->ButtonMinimize->setIcon(QIcon("://"+_theme+"/minimize_window.png"));
+    ui->ButtonUpdate->setIcon(QIcon("://"+_iconColor+"/update.png"));
+    ui->ButtonGoToMyProfile->setIcon(QIcon("://"+_iconColor+"/home.png"));
+    ui->ButtonFindProfile->setIcon(QIcon("://"+_iconColor+"/find_profile.png"));
+    ui->ButtonSettings->setIcon(QIcon("://"+_iconColor+"/settings.png"));
+    ui->ButtonExit->setIcon(QIcon("://"+_iconColor+"/close_window.png"));
+    ui->ButtonMinimize->setIcon(QIcon("://"+_iconColor+"/minimize_window.png"));
     if(this->isMaximized())
-        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/restore_window.png"));
+        ui->ButtonMaximize->setIcon(QIcon("://"+_iconColor+"/restore_window.png"));
     else
-        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/maximize_window.png"));
-    ui->ButtonBack->setIcon(QIcon("://"+_theme+"/left.png"));
-    ui->ButtonNext->setIcon(QIcon("://"+_theme+"/right.png"));
+        ui->ButtonMaximize->setIcon(QIcon("://"+_iconColor+"/maximize_window.png"));
+    ui->ButtonBack->setIcon(QIcon("://"+_iconColor+"/left.png"));
+    ui->ButtonNext->setIcon(QIcon("://"+_iconColor+"/right.png"));
 }
 void MainWindow::ProgressLoading(int a_progress,int){
     ui->FormProgressBar->setValue(a_progress);
@@ -536,10 +531,10 @@ void MainWindow::ResizeScrollArea(int a_width){
 void MainWindow::ButtonMaximize_Clicked(){
     if(!this->isMaximized()){
         this->showMaximized();
-        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/restore_window.png"));
+        ui->ButtonMaximize->setIcon(QIcon("://"+_iconColor+"/restore_window.png"));
     } else {
         this->showNormal();
-        ui->ButtonMaximize->setIcon(QIcon("://"+_theme+"/maximize_window.png"));
+        ui->ButtonMaximize->setIcon(QIcon("://"+_iconColor+"/maximize_window.png"));
     }
 }
 void MainWindow::ButtonMinimize_Clicked(){

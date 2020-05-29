@@ -113,7 +113,7 @@ private:
     SGames _games;
     SFriends _friends;
     Settings _setting;
-    QString _theme="white";
+    QString _iconColor="white";
     int _achievementsCount=0;
 
     bool _initGames=false;

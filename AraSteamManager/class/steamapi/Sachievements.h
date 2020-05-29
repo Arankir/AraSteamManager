@@ -31,8 +31,9 @@ public:
     const QString _description;
     const QString _icon;
     const QString _iconGray;
-    SAchievementGlobal(const SAchievementGlobal &a_achievement):QObject(a_achievement.parent()), _apiName(a_achievement._apiName), _defaultValue(a_achievement._defaultValue),
+    SAchievementGlobal(const SAchievementGlobal &a_achievement): QObject(a_achievement.parent()), _apiName(a_achievement._apiName), _defaultValue(a_achievement._defaultValue),
         _displayName(a_achievement._displayName), _hidden(a_achievement._hidden), _description(a_achievement._description), _icon(a_achievement._icon), _iconGray(a_achievement._iconGray){};
+    SAchievementGlobal &operator=(const SAchievementGlobal &) {return *this;}
 
 };
 class SAchievementPercentage : public QObject{
@@ -42,6 +43,7 @@ public:
     const QString _apiName;
     const double _percent;
     SAchievementPercentage(const SAchievementPercentage &a_achievement): QObject(a_achievement.parent()),_apiName(a_achievement._apiName), _percent(a_achievement._percent){};
+    SAchievementPercentage &operator=(const SAchievementPercentage &) {return *this;}
 
 };
 class SAchievementPlayer : public QObject{
@@ -54,6 +56,7 @@ public:
     const QDateTime _unlockTime;
     SAchievementPlayer(const SAchievementPlayer &a_achievement): QObject(a_achievement.parent()),_apiName(a_achievement._apiName),_achieved(a_achievement._achieved),
         _unlockTime(a_achievement._unlockTime){};
+    SAchievementPlayer &operator=(const SAchievementPlayer &) {return *this;}
 
 };
 class SAchievement : public QObject{
@@ -77,6 +80,7 @@ public:
         _apiName(a_achievement._apiName), _defaultValue(a_achievement._defaultValue), _displayName(a_achievement._displayName), _hidden(a_achievement._hidden),
         _description(a_achievement._description), _icon(a_achievement._icon), _iconGray(a_achievement._iconGray), _achieved(a_achievement._achieved),
         _unlockTime(a_achievement._unlockTime), _percent(a_achievement._percent){};
+    SAchievement &operator=(const SAchievement &) {return *this;}
     const bool &operator<(const SAchievement & achievement);
 
 };

@@ -33,7 +33,7 @@ public:
     const QString GetNumberPlayers(bool hardreload);
     SGame(const SGame &game): QObject(game.parent()), _appID(game._appID), _name(game._name), _playtime_2weeks(game._playtime_2weeks), _playtime_forever(game._playtime_forever),
         _img_icon_url(game._img_icon_url), _img_logo_url(game._img_logo_url), _has_community_visible_stats(game._has_community_visible_stats){};
-    //SGame & operator=(const SGame &game) { return SGame(game);}
+    SGame & operator=(const SGame &a_game) { _numberPlayers=a_game._numberPlayers; return *this;}
     const bool &operator<(const SGame & game);
 
 signals:

@@ -27,6 +27,7 @@ public:
     const QString _relationship;
     const QDateTime _friend_since;
     SFriend(const SFriend &a_friend): QObject(a_friend.parent()), _steamID(a_friend._steamID), _relationship(a_friend._relationship), _friend_since(a_friend._friend_since){};
+    SFriend &operator=(const SFriend &) {return *this;}
     const bool &operator<(const SFriend &Afriend);
 
 };

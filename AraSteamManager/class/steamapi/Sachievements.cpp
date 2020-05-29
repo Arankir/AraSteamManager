@@ -313,3 +313,4 @@ SAchievements & SAchievements::operator=(const SAchievements & a_newAchievements
     return *this;
 }
 #define SAchievementsEnd }
+
