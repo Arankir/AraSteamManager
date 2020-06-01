@@ -52,8 +52,8 @@ QT_MOC_LITERAL(15, 193, 5), // "years"
 QT_MOC_LITERAL(16, 199, 10), // "s_progress"
 QT_MOC_LITERAL(17, 210, 1), // "p"
 QT_MOC_LITERAL(18, 212, 3), // "row"
-QT_MOC_LITERAL(19, 216, 4), // "Fill"
-QT_MOC_LITERAL(20, 221, 20), // "OnResultAchievements"
+QT_MOC_LITERAL(19, 216, 4), // "fill"
+QT_MOC_LITERAL(20, 221, 20), // "onResultAchievements"
 QT_MOC_LITERAL(21, 242, 19), // "SAchievementsPlayer"
 QT_MOC_LITERAL(22, 262, 3) // "ach"
 
@@ -63,7 +63,7 @@ QT_MOC_LITERAL(22, 262, 3) // "ach"
     "complete\0started\0notStarted\0QVector<double>\0"
     "averagePercent\0summcolumn\0times\0months\0"
     "QVector<QPair<QString,int> >\0years\0"
-    "s_progress\0p\0row\0Fill\0OnResultAchievements\0"
+    "s_progress\0p\0row\0fill\0onResultAchievements\0"
     "SAchievementsPlayer\0ach"
 };
 #undef QT_MOC_LITERAL
@@ -87,7 +87,7 @@ static const uint qt_meta_data_ThreadStatistics[] = {
 
  // slots: name, argc, parameters, tag, flags
       19,    0,   58,    2, 0x0a /* Public */,
-      20,    1,   59,    2, 0x0a /* Public */,
+      20,    1,   59,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 9, QMetaType::Int, 0x80000000 | 3, 0x80000000 | 3, 0x80000000 | 14,    4,    6,    7,    8,   10,   11,   12,   13,   15,
@@ -108,9 +108,9 @@ void ThreadStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< QVector<int>(*)>(_a[1])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[2])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[3])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[4])),(*reinterpret_cast< QVector<double>(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QVector<int>(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[9]))); break;
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: { int _r = _t->Fill();
+        case 2: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->OnResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
+        case 3: _t->onResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

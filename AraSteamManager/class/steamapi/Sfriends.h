@@ -18,55 +18,52 @@
 #include <QJsonObject>
 #include <QTextCodec>
 
-class SFriend : public QObject{
+class SFriend : public QObject {
     Q_OBJECT
 public:
-    explicit SFriend(QJsonObject a_friend, QObject *parent = nullptr): QObject(parent),_steamID(a_friend.value("steamid").toString()),
-        _relationship(a_friend.value("relationship").toString()),_friend_since(QDateTime::fromSecsSinceEpoch(a_friend.value("friend_since").toInt(),Qt::LocalTime)){};
+    explicit SFriend(QJsonObject a_friend, QObject *parent = nullptr);
     const QString _steamID;
     const QString _relationship;
     const QDateTime _friend_since;
-    SFriend(const SFriend &a_friend): QObject(a_friend.parent()), _steamID(a_friend._steamID), _relationship(a_friend._relationship), _friend_since(a_friend._friend_since){};
-    SFriend &operator=(const SFriend &) {return *this;}
-    const bool &operator<(const SFriend &Afriend);
+    SFriend(const SFriend &aFriend);
+    SFriend &operator=(const SFriend &);
+    const bool &operator<(const SFriend &aFriend);
 
 };
 
-class SFriends : public QObject
-{
+class SFriends : public QObject {
     Q_OBJECT
 public:
     explicit SFriends(QString id, bool parallel, QObject *parent = nullptr);
     SFriends(QJsonDocument DocFriends, QObject *parent = nullptr);
-    SFriends(QObject *parent = nullptr): QObject(parent),_manager(new QNetworkAccessManager()){};
+    SFriends(QObject *parent = nullptr);
     ~SFriends();
-    void Set(QString id, bool parallel);
-    void Set(QJsonDocument DocFriends);
-    StatusValue GetStatus() {return _status;}
-    QString GetError() {return _error;}
-    int GetCount() {return _friends.size();}
-    SProfiles GetProfiles();
-    void Update(bool parallel);
+    void set(QString id, bool parallel);
+    void set(QJsonDocument DocFriends);
+    StatusValue getStatus();
+    QString getError();
+    int getCount();
+    SProfiles getProfiles();
+    void update(bool parallel);
+    void clear();
+    void sort();
+    SFriends(const SFriends &);
+    SFriends &operator=(const SFriends &friends);
+    SFriend &operator[](const int &index);
     QList<SFriend>::iterator begin() {return _friends.begin();}
     QList<SFriend>::iterator end() {return _friends.end();}
-    void Clear();
-    void Sort();
-    SFriends(const SFriends &);
-    SFriends & operator=(const SFriends & friends);
-    SFriend &operator[](const int &index) {return _friends[index];}
 
 signals:
     void s_finished(SFriends*);
     void s_finished();
 
-public slots:
-    void Load(QNetworkReply *Reply);
+private slots:
+    void onLoad(QNetworkReply *reply);
 
 private:
     QNetworkAccessManager *_manager;
-    Settings _setting;
-    StatusValue _status=StatusValue::none;
-    QString _error="";
+    StatusValue _status = StatusValue::none;
+    QString _error = "";
     QString _id;
     QList<SFriend> _friends;
 };

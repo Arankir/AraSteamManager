@@ -69,7 +69,7 @@ public:
     QPoint GetAchievementContainerPos() {return (QPoint(_settings->value(c_achievementContainerX,100).toInt(),_settings->value(c_achievementContainerY,100).toInt()));}
     QPoint GetAchievementContainerPercentPos() {return (QPoint(_settings->value(c_achievementContainerPercentX,0).toInt(),_settings->value(c_achievementContainerPercentY,0).toInt()));}
 
-    QString GetKey() {return _key;}
+    static QString GetKey() {return "3826BF60403D15613B4B0381DAB7A7BD";}
     static bool CreateDir(QString path);
     void SyncronizeSettings();
     const QString _pathImagesAchievements="images/achievements/";// /номер игры/url.jpg
@@ -88,7 +88,6 @@ public slots:
 private:
     QSettings *_settings;
     QRect _screen;
-    QString _key="3826BF60403D15613B4B0381DAB7A7BD";
 };
 
 #endif // SETTINGS_H

@@ -9,21 +9,18 @@
 #include <QEventLoop>
 #include <QFontDatabase>
 
-class ThreadGames : public QObject
-{
+class ThreadGames : public QObject {
     Q_OBJECT
+public slots:
+    int fill();
+
 public:
-    explicit ThreadGames(const int a_tableColumnAppid, const int a_tableColumnIndex, const int a_tableColumnName,
-                         QTableWidget *a_tableWidgetGames, SGames a_games, QObject *a_parent = nullptr)
-    :QObject(a_parent),c_tableColumnAppid(a_tableColumnAppid),c_tableColumnIndex(a_tableColumnIndex),c_tableColumnName(a_tableColumnName),
-    _games(a_games),_TableWidgetGames(a_tableWidgetGames){};
+    explicit ThreadGames(const int a_tableColumnAppid, const int a_tableColumnIndex, const int a_tableColumnName, QTableWidget *a_tableWidgetGames,
+                         SGames a_games, QObject *a_parent = nullptr);
 
 signals:
     void s_finished();
     void s_progress(int p, int row);
-
-public slots:
-    int Fill();
 
 private:
     const int c_tableColumnAppid;

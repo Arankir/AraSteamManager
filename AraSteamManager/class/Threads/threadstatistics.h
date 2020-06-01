@@ -7,23 +7,23 @@
 #include <class/Network/requestdata.h>
 #include <QEventLoop>
 
-class ThreadStatistics : public QObject
-{
+class ThreadStatistics : public QObject {
     Q_OBJECT
+public slots:
+    int fill();
+
 public:
-    explicit ThreadStatistics(SGames a_games, QString a_id, QObject *a_parent = nullptr):QObject(a_parent),_id(a_id),_games(a_games), _averagePercent(a_games.GetCount()){};
+    explicit ThreadStatistics(SGames a_games, QString a_id, QObject *a_parent = nullptr);
 
 signals:
     void s_finished(QVector<int> numof, QVector<QPair<QString,QString>> complete, QVector<QPair<QString,QString>> started, QVector<QPair<QString,QString>> notStarted,
                     QVector<double> averagePercent, int summcolumn, QVector<int> times, QVector<int> months, QVector<QPair<QString,int>> years);
     void s_progress(int p, int row);
 
-public slots:
-    int Fill();
-    void OnResultAchievements(SAchievementsPlayer ach);
+private slots:
+    void onResultAchievements(SAchievementsPlayer ach);
 
 private:
-    Settings _setting;
     QString _id;
     SGames _games;
     QVector<double> _averagePercent;

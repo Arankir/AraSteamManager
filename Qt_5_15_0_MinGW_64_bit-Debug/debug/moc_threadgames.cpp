@@ -38,11 +38,11 @@ QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 10), // "s_progress"
 QT_MOC_LITERAL(4, 35, 1), // "p"
 QT_MOC_LITERAL(5, 37, 3), // "row"
-QT_MOC_LITERAL(6, 41, 4) // "Fill"
+QT_MOC_LITERAL(6, 41, 4) // "fill"
 
     },
     "ThreadGames\0s_finished\0\0s_progress\0p\0"
-    "row\0Fill"
+    "row\0fill"
 };
 #undef QT_MOC_LITERAL
 
@@ -84,7 +84,7 @@ void ThreadGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->s_finished(); break;
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: { int _r = _t->Fill();
+        case 2: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }

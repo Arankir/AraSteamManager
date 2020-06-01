@@ -101,7 +101,7 @@ void FormSettings::InitComponents(){
                 SProfiles profile(fileName.remove(".txt"),false,QueryType::url);
                 QList<QString> hide;
                 QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
-                profileHidden->setText(profile.GetPersonaname());
+                profileHidden->setText(profile.getPersonaname());
                 profileHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
                 profileHidden->setObjectName("HiddenGames"+QString::number(number));
                 profileHidden->AddData("NumberFileHiddenGame",QString::number(number));

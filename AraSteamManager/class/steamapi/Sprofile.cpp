@@ -1,183 +1,329 @@
 #include "Sprofile.h"
 
 #define SProfileStart {
-void SProfile::Set(QJsonObject profile){
-    _steamID=profile.value("steamid").toInt();//!
-    _timeCreated=QDateTime::fromSecsSinceEpoch(profile.value("timecreated").toInt(),Qt::LocalTime);//!
-    _communityVisibilityState=profile.value("communityvisibilitystate").toInt();
-    _profileState=profile.value("profilestate").toInt();
-    _personaName=profile.value("personaname").toString();
-    _lastLogoff=QDateTime::fromSecsSinceEpoch(profile.value("lastlogoff").toInt(),Qt::LocalTime);
-    _commentPermission=profile.value("commentpermission").toInt();
-    _profileUrl=profile.value("profileurl").toString();
-    _avatar=profile.value("avatar").toString();
-    _avatarMedium=profile.value("avatarmedium").toString();
-    _avatarFull=profile.value("avatarfull").toString();
-    _personaState=profile.value("personastate").toInt();
-    _primaryClanID=profile.value("primaryclanid").toString();
-    _personaStateFlags=profile.value("personastateflags").toInt();
-    _gameExtraInfo=profile.value("gameextrainfo").toString();
-    _gameID=profile.value("gameid").toString();
-    _locCountryCode=profile.value("loccountrycode").toString();
-    _locStateCode=profile.value("locstatecode").toString();
-    _locCityID=profile.value("loccityid").toInt();
-    _realName=profile.value("realname").toString();
+void SProfile::set(QJsonObject aProfile) {
+    _steamID = aProfile.value("steamid").toInt();//!
+    _timeCreated = QDateTime::fromSecsSinceEpoch(aProfile.value("timecreated").toInt(),Qt::LocalTime);//!
+    _communityVisibilityState = aProfile.value("communityvisibilitystate").toInt();
+    _profileState = aProfile.value("profilestate").toInt();
+    _personaName = aProfile.value("personaname").toString();
+    _lastLogoff = QDateTime::fromSecsSinceEpoch(aProfile.value("lastlogoff").toInt(),Qt::LocalTime);
+    _commentPermission = aProfile.value("commentpermission").toInt();
+    _profileUrl = aProfile.value("profileurl").toString();
+    _avatar = aProfile.value("avatar").toString();
+    _avatarMedium = aProfile.value("avatarmedium").toString();
+    _avatarFull = aProfile.value("avatarfull").toString();
+    _personaState = aProfile.value("personastate").toInt();
+    _primaryClanID = aProfile.value("primaryclanid").toString();
+    _personaStateFlags = aProfile.value("personastateflags").toInt();
+    _gameExtraInfo = aProfile.value("gameextrainfo").toString();
+    _gameID = aProfile.value("gameid").toString();
+    _locCountryCode = aProfile.value("loccountrycode").toString();
+    _locStateCode = aProfile.value("locstatecode").toString();
+    _locCityID = aProfile.value("loccityid").toInt();
+    _realName = aProfile.value("realname").toString();
 }
-void SProfile::Loading(bool a_parallel){
-    QString url="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_steamID;
-    if(a_parallel){
-        RequestData *request = new RequestData(url,true);
-        connect(request,&RequestData::s_finished,this,&SProfile::LoadURL);
+
+void SProfile::loading(bool aParallel){
+    QString url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_steamID;
+    if (aParallel) {
+        RequestData *request = new RequestData(url, true);
+        connect(request, &RequestData::s_finished, this, &SProfile::loadURL);
     } else {
-        RequestData *request = new RequestData(url,false);
-        Set(QJsonDocument::fromJson(request->GetAnswer()).object().value("response").toObject().value("players").toArray().at(0).toObject());
-        delete request;
+        RequestData request(url, false);
+        set(QJsonDocument::fromJson(request.getAnswer()).object().value("response").toObject().value("players").toArray().at(0).toObject());
         emit s_finished(this);
         emit s_finished();
     }
 }
-void SProfile::LoadURL(RequestData *a_request){
-    QJsonDocument localSummaries = QJsonDocument::fromJson(a_request->GetAnswer());
-    disconnect(a_request,&RequestData::s_finished,this,&SProfile::LoadURL);
-    a_request->deleteLater();
-    Set(localSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject());
+
+void SProfile::loadURL(RequestData *aRequest){
+    QJsonDocument localSummaries = QJsonDocument::fromJson(aRequest->getAnswer());
+    set(localSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject());
+    disconnect(aRequest,&RequestData::s_finished,this,&SProfile::loadURL);
+    aRequest->deleteLater();
     emit s_finished(this);
     emit s_finished();
 }
-void SProfile::Update(bool a_parallel){
-    Loading(a_parallel);
+
+SProfile::SProfile(QJsonObject aProfile, QObject *aParent): QObject(aParent), _steamID(aProfile.value("steamid").toString()),
+_communityVisibilityState(aProfile.value("communityvisibilitystate").toInt()), _profileState(aProfile.value("profilestate").toInt()),
+_personaName(aProfile.value("personaname").toString()), _lastLogoff(QDateTime::fromSecsSinceEpoch(aProfile.value("lastlogoff").toInt(),Qt::LocalTime)),
+_commentPermission(aProfile.value("commentpermission").toInt()), _profileUrl(aProfile.value("profileurl").toString()), _avatar(aProfile.value("avatar").toString()),
+_avatarMedium(aProfile.value("avatarmedium").toString()), _avatarFull(aProfile.value("avatarfull").toString()), _personaState(aProfile.value("personastate").toInt()),
+_primaryClanID(aProfile.value("primaryclanid").toString()), _timeCreated(QDateTime::fromSecsSinceEpoch(aProfile.value("timecreated").toInt(),Qt::LocalTime)),
+_personaStateFlags(aProfile.value("personastateflags").toInt()), _gameExtraInfo(aProfile.value("gameextrainfo").toString()), _gameID(aProfile.value("gameid").toString()),
+_locCountryCode(aProfile.value("loccountrycode").toString()), _locStateCode(aProfile.value("locstatecode").toString()), _locCityID(aProfile.value("loccityid").toInt()),
+_realName(aProfile.value("realname").toString()) {
+
 }
-SProfile & SProfile::operator=(const SProfile & a_profile){
-    _steamID=a_profile._steamID;//!
-    _timeCreated=a_profile._timeCreated;//!
-    _communityVisibilityState=a_profile._communityVisibilityState;
-    _profileState=a_profile._profileState;
-    _personaName=a_profile._personaName;
-    _lastLogoff=a_profile._lastLogoff;
-    _commentPermission=a_profile._commentPermission;
-    _profileUrl=a_profile._profileUrl;
-    _avatar=a_profile._avatar;
-    _avatarMedium=a_profile._avatarMedium;
-    _avatarFull=a_profile._avatarFull;
-    _personaState=a_profile._personaState;
-    _primaryClanID=a_profile._primaryClanID;
-    _personaStateFlags=a_profile._personaStateFlags;
-    _gameExtraInfo=a_profile._gameExtraInfo;
-    _gameID=a_profile._gameID;
-    _locCountryCode=a_profile._locCountryCode;
-    _locStateCode=a_profile._locStateCode;
-    _locCityID=a_profile._locCityID;
-    _realName=a_profile._realName;
+
+SProfile::~SProfile() {
+
+}
+
+void SProfile::update(bool aParallel) {
+    loading(aParallel);
+}
+
+SProfile::SProfile(const SProfile &aProfile): QObject(aProfile.parent()), _steamID(aProfile._steamID), _communityVisibilityState(aProfile._communityVisibilityState),
+_profileState(aProfile._profileState), _personaName(aProfile._personaName), _lastLogoff(aProfile._lastLogoff), _commentPermission(aProfile._commentPermission),
+_profileUrl(aProfile._profileUrl), _avatar(aProfile._avatar), _avatarMedium(aProfile._avatarMedium), _avatarFull(aProfile._avatarFull), _personaState(aProfile._personaState),
+_primaryClanID(aProfile._primaryClanID), _timeCreated(aProfile._timeCreated), _personaStateFlags(aProfile._personaStateFlags), _gameExtraInfo(aProfile._gameExtraInfo),
+_gameID(aProfile._gameID), _locCountryCode(aProfile._locCountryCode), _locStateCode(aProfile._locStateCode), _locCityID(aProfile._locCityID), _realName(aProfile._realName) {
+
+}
+
+SProfile &SProfile::operator=(const SProfile &aProfile){
+    _steamID = aProfile._steamID;//!
+    _timeCreated = aProfile._timeCreated;//!
+    _communityVisibilityState = aProfile._communityVisibilityState;
+    _profileState = aProfile._profileState;
+    _personaName = aProfile._personaName;
+    _lastLogoff = aProfile._lastLogoff;
+    _commentPermission = aProfile._commentPermission;
+    _profileUrl = aProfile._profileUrl;
+    _avatar = aProfile._avatar;
+    _avatarMedium = aProfile._avatarMedium;
+    _avatarFull = aProfile._avatarFull;
+    _personaState = aProfile._personaState;
+    _primaryClanID = aProfile._primaryClanID;
+    _personaStateFlags = aProfile._personaStateFlags;
+    _gameExtraInfo = aProfile._gameExtraInfo;
+    _gameID = aProfile._gameID;
+    _locCountryCode = aProfile._locCountryCode;
+    _locStateCode = aProfile._locStateCode;
+    _locCityID = aProfile._locCityID;
+    _realName = aProfile._realName;
     return *this;
 }
-const bool &SProfile::operator<(const SProfile &a_profile){
-    static const bool b=_personaName.toLower()<a_profile._personaName.toLower();
+
+const bool &SProfile::operator<(const SProfile &aProfile){
+    static const bool b = _personaName.toLower() < aProfile._personaName.toLower();
     return b;
 }
 #define SProfileEnd }
 #define SProfilesStart {
-SProfiles::SProfiles(QString a_id, bool a_parallel, QueryType a_type, QObject *parent): QObject(parent), _request(new RequestData()), _id(a_id){
-    Load(a_parallel, a_type);
+SProfiles::SProfiles(QString aId, bool aParallel, QueryType aType, QObject *aParent): QObject(aParent), _request(new RequestData()), _id(aId) {
+    load(aParallel, aType);
 }
-SProfiles::SProfiles(QJsonDocument a_docProfiles, QObject *parent): QObject(parent), _request(new RequestData()){
-    Set(a_docProfiles);
+
+SProfiles::SProfiles(QJsonDocument aDocprofiles, QObject *aParent): QObject(aParent), _request(new RequestData()) {
+    set(aDocprofiles);
 }
-SProfiles::SProfiles(QJsonArray a_profiles, QObject *parent): QObject(parent), _request(new RequestData()){
-    Set(a_profiles);
+
+SProfiles::SProfiles(QJsonArray aProfiles, QObject *aParent): QObject(aParent), _request(new RequestData()) {
+    set(aProfiles);
 }
-SProfiles::SProfiles(QJsonObject a_profile, QObject *parent): QObject(parent), _request(new RequestData()){
-    Set(a_profile);
+
+SProfiles::SProfiles(QJsonObject aProfile, QObject *aParent): QObject(aParent), _request(new RequestData()) {
+    set(aProfile);
 }
+
+SProfiles::SProfiles(QObject *aParent): QObject(aParent), _request(new RequestData()) {
+
+}
+
 SProfiles::~SProfiles(){
     delete _request;
 }
-void SProfiles::Set(QString a_id, bool a_parallel, QueryType a_type){
-    _id=a_id;
-    Load(a_parallel, a_type);
+
+void SProfiles::set(QString aId, bool aParallel, QueryType aType) {
+    _id = std::move(aId);
+    load(aParallel, aType);
 }
-void SProfiles::Set(QJsonDocument a_docProfiles){
-    Set(a_docProfiles.object().value("response").toObject().value("players").toArray());
+
+void SProfiles::set(QJsonDocument aProfiles){
+    set(aProfiles.object().value("response").toObject().value("players").toArray());
 }
-void SProfiles::Set(QJsonArray a_profiles){
-    Clear();
-    if(a_profiles.size()>0){
-        for(int i=0;i<a_profiles.size();i++)
-            _profile.append(std::move(SProfile(a_profiles.at(i).toObject())));
-        _status=StatusValue::success;
+
+void SProfiles::set(QJsonArray aProfiles){
+    clear();
+    if(aProfiles.size() > 0) {
+        for (auto profile: aProfiles) {
+            _profile.append(std::move(SProfile(profile.toObject())));
+        }
+        _status = std::move(StatusValue::success);
     }
     else {
-        _status=StatusValue::error;
-        _error="profile is not exist";
+        _status = std::move(StatusValue::error);
+        _error = std::move("profile is not exist");
     }
 }
-void SProfiles::Set(QJsonObject a_player){
-    Clear();
-    _profile.append(std::move(a_player));
-    _status=StatusValue::success;
+
+void SProfiles::set(QJsonObject aPlayer){
+    clear();
+    _profile.append(std::move(aPlayer));
+    _status = std::move(StatusValue::success);
 }
-void SProfiles::LoadVanity(RequestData *a_request){
-    QJsonDocument localDoc = QJsonDocument::fromJson(a_request->GetAnswer());
-    disconnect(_request,&RequestData::s_finished,this,&SProfiles::LoadVanity);
-    connect(_request,&RequestData::s_finished,this,&SProfiles::LoadURL);
-    _id=localDoc.object().value("response").toObject().value("steamid").toString();
-    _request->Get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id);
+
+QString SProfiles::getSteamid(int aIndex) {
+    return _profile[aIndex]._steamID;
 }
-void SProfiles::LoadURL(RequestData *a_request){
-    QJsonDocument localDoc = QJsonDocument::fromJson(a_request->GetAnswer());
-    disconnect(_request,&RequestData::s_finished,this,&SProfiles::LoadURL);
-    Set(localDoc);
+
+int SProfiles::getCommunityvisibilitystate(int aIndex) {
+    return _profile[aIndex]._communityVisibilityState;
+}
+
+int SProfiles::getProfilestate(int aIndex) {
+    return _profile[aIndex]._profileState;
+}
+
+QString SProfiles::getPersonaname(int aIndex) const {
+    return _profile[aIndex]._personaName;
+}
+
+QDateTime SProfiles::getLastlogoff(int aIndex) {
+    return _profile[aIndex]._lastLogoff;
+}
+
+int SProfiles::getCommentpermission(int aIndex) {
+    return _profile[aIndex]._commentPermission;
+}
+
+QString SProfiles::getProfileurl(int aIndex) {
+    return _profile[aIndex]._profileUrl;
+}
+
+QString SProfiles::getAvatar(int aIndex) {
+    return _profile[aIndex]._avatar;
+}
+
+QString SProfiles::getAvatarmedium(int aIndex) {
+    return _profile[aIndex]._avatarMedium;
+}
+
+QString SProfiles::getAvatarfull(int aIndex) {
+    return _profile[aIndex]._avatarFull;
+}
+
+int SProfiles::getPersonastate(int aIndex) {
+    return _profile[aIndex]._personaState;
+}
+
+QString SProfiles::getPrimaryclanid(int aIndex) {
+    return _profile[aIndex]._primaryClanID;
+}
+
+QDateTime SProfiles::getTimecreated(int aIndex) {
+    return _profile[aIndex]._timeCreated;
+}
+
+int SProfiles::getPersonastateflags(int aIndex) {
+    return _profile[aIndex]._personaStateFlags;
+}
+
+QString SProfiles::getGameextrainfo(int aIndex) {
+    return _profile[aIndex]._gameExtraInfo;
+}
+
+QString SProfiles::getGameid(int aIndex) {
+    return _profile[aIndex]._gameID;
+}
+
+QString SProfiles::getLoccountrycode(int aIndex) {
+    return _profile[aIndex]._locCountryCode;
+}
+
+QString SProfiles::getLocstatecode(int aIndex) {
+    return _profile[aIndex]._locStateCode;
+}
+
+int SProfiles::getLoccityid(int aIndex) {
+    return _profile[aIndex]._locCityID;
+}
+
+QString SProfiles::getRealname(int aIndex) {
+    return _profile[aIndex]._realName;
+}
+
+SProfile SProfiles::getProfile(int aIndex) {
+    return _profile[aIndex];
+}
+
+StatusValue SProfiles::getStatus() {
+    return _status;
+}
+
+QString SProfiles::getError() {
+    return _error;
+}
+
+int SProfiles::getCount() {
+    return _profile.size();
+}
+
+void SProfiles::loadVanity(RequestData *aRequest) {
+    disconnect(_request, &RequestData::s_finished, this, &SProfiles::loadVanity);
+    connect(_request, &RequestData::s_finished, this, &SProfiles::loadURL);
+    _id = QJsonDocument::fromJson(aRequest->getAnswer()).object().value("response").toObject().value("steamid").toString();
+    _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_id);
+}
+
+void SProfiles::loadURL(RequestData *aRequest){
+    disconnect(_request, &RequestData::s_finished, this, &SProfiles::loadURL);
+    set(QJsonDocument::fromJson(aRequest->getAnswer()));
+    aRequest->deleteLater();
     emit s_finished(this);
     emit s_finished();
 }
-void SProfiles::Load(bool a_parallel, QueryType a_type){
-    if(a_parallel){
-        if(a_type==QueryType::vanity){
-            connect(_request,&RequestData::s_finished,this,&SProfiles::LoadVanity);
-            _request->Get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+_id+"&url_type=1", true);
-        } else if(a_type==QueryType::url){
-            connect(_request,&RequestData::s_finished,this,&SProfiles::LoadURL);
-            _request->Get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id, true);
+
+void SProfiles::load(bool aParallel, QueryType aType) {
+    if (aParallel) {
+        if (aType == QueryType::vanity) {
+            connect(_request, &RequestData::s_finished, this, &SProfiles::loadVanity);
+            _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::GetKey()+"&vanityurl="+_id+"&url_type=1", true);
+        } else if(aType == QueryType::url) {
+            connect(_request,&RequestData::s_finished,this,&SProfiles::loadURL);
+            _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_id, true);
         }
     } else {
-        if(a_type==QueryType::vanity){
-            _request->Get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+_setting.GetKey()+"&vanityurl="+_id+"&url_type=1", false);
-            _id=QJsonDocument::fromJson(_request->GetAnswer()).object().value("response").toObject().value("steamid").toString();
+        if(aType == QueryType::vanity){
+            _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::GetKey()+"&vanityurl="+_id+"&url_type=1", false);
+            _id = QJsonDocument::fromJson(_request->getAnswer()).object().value("response").toObject().value("steamid").toString();
         }
-        _request->Get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+_setting.GetKey()+"&steamids="+_id, false);
-        Set(QJsonDocument::fromJson(_request->GetAnswer()).object().value("response").toObject().value("players").toArray());
+        _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_id, false);
+        set(QJsonDocument::fromJson(_request->getAnswer()).object().value("response").toObject().value("players").toArray());
     }
 }
-void SProfiles::Update(bool a_parallel){
-    Load(a_parallel, QueryType::url);
+
+void SProfiles::update(bool aParallel) {
+    load(aParallel, QueryType::url);
 }
-void SProfiles::Sort(){
+
+void SProfiles::sort() {
     //Переделать нормально
     //std::list<SProfile> list = _profile.toList().toStdList();
-    std::list<SProfile> list(_profile.begin(),_profile.end());
+    std::list<SProfile> list(_profile.begin(), _profile.end());
     list.sort([](const SProfile &s1, const SProfile &s2)-> const bool {
-        if(QString::compare(s1._personaName.toLower(),s2._personaName.toLower())<0)
-            return true;
-        else
-            return false;
+        return QString::compare(s1._personaName.toLower(), s2._personaName.toLower()) < 0;
     });
     //_profile=QVector<SProfile>::fromList(QList<SProfile>::fromStdList(list));
-    _profile=QList<SProfile>(list.begin(),list.end());
+    _profile = QList<SProfile>(list.begin(), list.end());
 
 }
-void SProfiles::Clear(){
+
+void SProfiles::clear() {
     _profile.clear();
-    _status=StatusValue::none;
+    _status = std::move(StatusValue::none);
 }
-SProfiles & SProfiles::operator=(const SProfiles &a_profile){
+
+SProfiles::SProfiles(const SProfiles &aProfile): QObject(aProfile.parent()), _request(new RequestData), _profile(aProfile._profile),
+_status(aProfile._status), _error(aProfile._error), _id(aProfile._id) {
+
+}
+
+SProfiles &SProfiles::operator=(const SProfiles &aProfile) {
     delete _request;
-    _profile=a_profile._profile;
-    _id=a_profile._id;
-    _status=a_profile._status;
-    _error=a_profile._error;
+    _profile = aProfile._profile;
+    _id = aProfile._id;
+    _status = aProfile._status;
+    _error = aProfile._error;
     _request = new RequestData();
     return *this;
 }
-SProfile &SProfiles::operator[](const int &a_index){
-    return _profile[a_index];
+
+SProfile &SProfiles::operator[](const int &aIndex) {
+    return _profile[aIndex];
 }
 #define SProfilesEnd }

@@ -19,15 +19,18 @@ class RequestData : public QObject
     Q_OBJECT
 public:
     RequestData(QString url, bool parallel, QObject *parent = nullptr);
-    RequestData(QObject *parent = nullptr):RequestData("",true,parent){};
+    RequestData(QObject *parent = nullptr);;
     ~RequestData();
-    void Get(QString url, bool parallel = false);
-    QByteArray GetAnswer() {return _answer;}
-    QPixmap GetPixmap() { QPixmap result; result.loadFromData(_answer); return result;}
+    void get(QString url, bool parallel = false);
+    QByteArray getAnswer();
+    QPixmap getPixmap();
     //int GetRow() {return _row;}
 
 signals:
     void s_finished(RequestData *imgr);
+
+public slots:
+    void onResultGet(QNetworkReply *reply);
 
 private:
     QNetworkAccessManager *_manager;
@@ -36,8 +39,6 @@ private:
     //int _row;
     Settings _setting;
 
-public slots:
-    void OnResultGet(QNetworkReply *reply);
 };
 
 #endif // IMAGEREQUEST_H

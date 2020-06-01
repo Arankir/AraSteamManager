@@ -1,75 +1,112 @@
 #include "Sbans.h"
 
-SBans::SBans(QString a_id, bool a_parallel, QObject *parent) : QObject(parent),_id(a_id){
-    _manager = new QNetworkAccessManager();
-    if(a_parallel){
-        connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
+SBans::SBans(QString aId, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _id(aId) {
+    if(aParallel){
+        connect(_manager,&QNetworkAccessManager::finished,this,&SBans::onLoad);
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
     } else {
         QEventLoop loop;
-        connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
+        connect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
         loop.exec();
-        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        Set(QJsonDocument::fromJson(reply->readAll()));
+        disconnect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        set(QJsonDocument::fromJson(reply->readAll()));
         delete reply;
     }
 }
-SBans::SBans(QJsonDocument a_bans, QObject *parent) : QObject(parent){
-    _manager = new QNetworkAccessManager();
-    if(a_bans.object().value("players").toArray().size()>0){
-        _bans=a_bans.object().value("players").toArray();
-        _status=StatusValue::success;
+
+SBans::SBans(QJsonDocument aBans, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()) {
+    if(aBans.object().value("players").toArray().size() > 0){
+        _bans = aBans.object().value("players").toArray();
+        _status = std::move(StatusValue::success);
     }
     else {
-        _status=StatusValue::error;
-        _error="profile is not exist";
+        _status = std::move(StatusValue::error);
+        _error = std::move("profile is not exist");
     }
 }
-SBans::SBans(QObject *parent) : QObject(parent),_status(StatusValue::none){
-    _manager = new QNetworkAccessManager();
+
+SBans::SBans(QObject *parent): QObject(parent), _manager(new QNetworkAccessManager()), _status(StatusValue::none){
+
 }
-SBans::~SBans(){
+
+SBans::~SBans() {
     delete _manager;
 }
 
-void SBans::Set(QString a_id, bool a_parallel){
-    _id=a_id;
-    if(a_parallel){
-        connect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
+void SBans::set(QString aId, bool aParallel){
+    _id = std::move(aId);
+    if (aParallel) {
+        connect(_manager, &QNetworkAccessManager::finished, this, &SBans::onLoad);
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
     } else {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+_setting.GetKey()+"&steamids="+a_id));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
         loop.exec();
-        disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        Set(QJsonDocument::fromJson(reply->readAll()));
+        disconnect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        set(QJsonDocument::fromJson(reply->readAll()));
         delete reply;
         emit s_finished(this);
         emit s_finished();
     }
 }
-void SBans::Set(QJsonDocument a_bans){
-    if(a_bans.object().value("players").toArray().size()>0){
-        _bans=a_bans.object().value("players").toArray();
-        _status=StatusValue::success;
+
+void SBans::set(QJsonDocument aBans){
+    if(aBans.object().value("players").toArray().size() > 0){
+        _bans = aBans.object().value("players").toArray();
+        _status = std::move(StatusValue::success);
     }
     else {
-        _status=StatusValue::error;
-        _error="profile is not exist";
+        _status = std::move(StatusValue::error);
+        _error = std::move("profile is not exist");
     }
 }
 
-void SBans::Load(QNetworkReply *a_reply){
-    disconnect(_manager,&QNetworkAccessManager::finished,this,&SBans::Load);
-    QJsonDocument localBans = QJsonDocument::fromJson(a_reply->readAll());
-    a_reply->deleteLater();
-    Set(localBans);
+QString SBans::getSteamid(int aIndex) {
+    return _bans[aIndex].toObject().value("steamid").toString();
+}
+
+bool SBans::getCommunityBanned(int aIndex) {
+    return _bans[aIndex].toObject().value("CommunityBanned").toBool();
+}
+
+bool SBans::getVacBanned(int aIndex) {
+    return _bans[aIndex].toObject().value("VACBanned").toBool();
+}
+
+int SBans::getNumberOfVacBans(int aIndex) {
+    return _bans[aIndex].toObject().value("NumberOfVACBans").toInt();
+}
+
+int SBans::getDaysSinceLastBan(int aIndex) {
+    return _bans[aIndex].toObject().value("DaysSinceLastBan").toInt();
+}
+
+int SBans::getNumberOfGameBans(int aIndex) {
+    return _bans[aIndex].toObject().value("NumberOfGameBans").toInt();
+}
+
+QString SBans::getEconomyBan(int aIndex) {
+    return _bans[aIndex].toObject().value("EconomyBan").toString();
+}
+
+StatusValue SBans::getStatus() {
+    return _status;
+}
+
+QString SBans::getError() {
+    return _error;
+}
+
+void SBans::onLoad(QNetworkReply *aReply) {
+    disconnect(_manager,&QNetworkAccessManager::finished,this,&SBans::onLoad);
+    set(QJsonDocument::fromJson(aReply->readAll()));
+    aReply->deleteLater();
     emit s_finished(this);
     emit s_finished();
 }
 
-void SBans::Update(bool a_parallel){
-    Set(_id, a_parallel);
+void SBans::update(bool aParallel) {
+    set(_id, aParallel);
 }

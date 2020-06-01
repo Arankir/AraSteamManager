@@ -19,7 +19,7 @@ void FormGames::InitComponents(){
     ui->TableWidgetGames->setMouseTracking(false);
     this->setAttribute(Qt::WA_TranslucentBackground);
     ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
-    _games.Sort();
+    _games.sort();
     UpdateTheme();
     Retranslate();
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -36,8 +36,8 @@ void FormGames::InitComponents(){
 
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
-    ui->TableWidgetGames->setRowCount(_games.GetCount());
-    for (int i=0;i<_games.GetCount();i++) {
+    ui->TableWidgetGames->setRowCount(_games.getCount());
+    for (int i=0;i<_games.getCount();i++) {
         ui->TableWidgetGames->setRowHeight(i,33);
         ui->TableWidgetGames->setCellWidget(i,c_tableColumnProgress, new QProgressBar);
     }
@@ -100,7 +100,7 @@ void FormGames::OnFinish(){
         fileHide.close();
     }
     QStringList hideList=_hide;
-    _achievements = new SAchievementsPlayer[_games.GetCount()];
+    _achievements = new SAchievementsPlayer[_games.getCount()];
     int row=0;
     for(auto &game: _games){
         QString path = _setting._pathImagesIconGames+game._img_icon_url+".jpg";
@@ -133,11 +133,11 @@ void FormGames::OnFinish(){
 void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     disconnect(&a_achievements,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(OnResultAchievements(SAchievementsPlayer)));
     QProgressBar *progressBarAchievements = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_achievements._index,c_tableColumnProgress));
-    progressBarAchievements->setMaximum(a_achievements.GetCount());
+    progressBarAchievements->setMaximum(a_achievements.getCount());
     progressBarAchievements->setMinimumSize(QSize(25,25));
-    if(a_achievements.GetCount()>0){
+    if(a_achievements.getCount()>0){
         int val=0;
-        for (int i=0;i<a_achievements.GetCount();i++) {
+        for (int i=0;i<a_achievements.getCount();i++) {
             if(a_achievements[i]._achieved==1)
                 val++;
         }
@@ -150,7 +150,7 @@ void FormGames::OnResultAchievements(SAchievementsPlayer a_achievements){
     ui->TableWidgetGames->item(a_achievements._index,c_tableColumnProgress)->setTextAlignment(Qt::AlignRight);;
     _achievements[a_achievements._index]=a_achievements;
     emit s_achievementsLoaded(_load++,0);
-    if(_load==_games.GetCount()){
+    if(_load==_games.getCount()){
         TableWidgetGames_CellClicked(0,1);
         int width=22;
         for(int i=0; i<ui->TableWidgetGames->columnCount(); i++)
@@ -280,7 +280,7 @@ void FormGames::TableWidgetGames_CellClicked(int a_row, int){
     ui->LabelTitleGame->setText(ui->TableWidgetGames->item(a_row,c_tableColumnName)->text());
     ui->ProgressBarSelectedGame->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->maximum());
     ui->ProgressBarSelectedGame->setValue(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_row,c_tableColumnProgress))->value());
-    QJsonArray favorites = _favorites.GetValues();
+    QJsonArray favorites = _favorites.getValues();
     bool isFavorite=false;
     for(auto favorite: favorites){
         if(favorite.toObject().value("id").toString()==_selectedGame){
@@ -298,7 +298,7 @@ void FormGames::TableWidgetGames_CellClicked(int a_row, int){
 }
 void FormGames::ButtonAchievements_Clicked(){
     SAchievementsPercentage Percentage(_selectedGame,false);
-    if(Percentage.GetCount()==0){
+    if(Percentage.getCount()==0){
         QMessageBox::warning(this,tr("Ошибка"),tr("В этой игре нет достижений"));
     } else {
         //ui->TableWidgetGames->setEnabled(false);
@@ -314,7 +314,7 @@ void FormGames::ButtonFavorite_Clicked(){
     newValue["icon"]=_games[_selectedIndex.toInt()]._img_icon_url;
     newValue["idUser"]=_id;
     ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
-    if(_favorites.AddValue(newValue,true)){
+    if(_favorites.addValue(newValue,true)){
         //Категория добавилась
         ui->ButtonFavorite->setIcon(QIcon("://"+_theme+"/in_favorites.png"));
     } else {
@@ -345,7 +345,7 @@ void FormGames::ButtonHide_Clicked(){
                                                             +_games[_selectedIndex.toInt()]._img_icon_url+"%%"
                                                             +_games[_selectedIndex.toInt()]._name:"")<<"\n";
     fileHide.close();
-    for (int i=0;i<_games.GetCount();i++) {
+    for (int i=0;i<_games.getCount();i++) {
         if(_games[_selectedIndex.toInt()]._name==ui->TableWidgetGames->item(i,c_tableColumnName)->text()){
             ui->TableWidgetGames->item(i,c_tableColumnName)->setForeground(Qt::red);
             ui->TableWidgetGames->setRowHidden(i,true);

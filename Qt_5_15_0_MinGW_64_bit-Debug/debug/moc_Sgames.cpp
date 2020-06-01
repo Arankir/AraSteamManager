@@ -93,7 +93,7 @@ int SGame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 struct qt_meta_stringdata_SGames_t {
     QByteArrayData data[7];
-    char stringdata0[53];
+    char stringdata0[55];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -106,12 +106,12 @@ QT_MOC_LITERAL(0, 0, 6), // "SGames"
 QT_MOC_LITERAL(1, 7, 10), // "s_finished"
 QT_MOC_LITERAL(2, 18, 0), // ""
 QT_MOC_LITERAL(3, 19, 7), // "SGames*"
-QT_MOC_LITERAL(4, 27, 4), // "Load"
-QT_MOC_LITERAL(5, 32, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 47, 5) // "Reply"
+QT_MOC_LITERAL(4, 27, 6), // "onLoad"
+QT_MOC_LITERAL(5, 34, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(6, 49, 5) // "Reply"
 
     },
-    "SGames\0s_finished\0\0SGames*\0Load\0"
+    "SGames\0s_finished\0\0SGames*\0onLoad\0"
     "QNetworkReply*\0Reply"
 };
 #undef QT_MOC_LITERAL
@@ -134,7 +134,7 @@ static const uint qt_meta_data_SGames[] = {
        1,    0,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   33,    2, 0x0a /* Public */,
+       4,    1,   33,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -154,7 +154,7 @@ void SGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SGames*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->Load((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 2: _t->onLoad((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

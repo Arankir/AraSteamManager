@@ -1,86 +1,103 @@
 #include "filter.h"
 
-Filter::Filter(int a_row, int a_col, QObject *parent) : QObject(parent){
-    _row=a_row>0?a_row:0;
-    _col=a_col>0?a_col:0;
-    if(_row>0&&_col>0){
-        for(int i=0;i<_row;i++){
+Filter::Filter(int aRow, int aCol, QObject *aParent): QObject(aParent), _row(aRow > 0 ? aRow : 0), _col(aCol > 0 ? aCol : 0) {
+    if (_row > 0 && _col > 0) {
+        for (int i = 0; i < _row; i++) {
             QVector<bool> subFilter(_col);
-            for(int j=0;j<_col;j++){
-                subFilter[j]=std::move(true);
+            for (int j = 0; j < _col; j++) {
+                subFilter[j] = std::move(true);
             }
             _filter.append(std::move(subFilter));
         }
     }
 }
 
-void Filter::SetRow(int a_row){
-    if(a_row>_row){
-        for(int i=_row;i<a_row;i++){
+Filter::Filter(QObject *aParent): QObject(aParent) {
+
+}
+
+Filter::~Filter() {
+
+}
+
+void Filter::setRow(int aRow){
+    if (aRow > _row) {
+        for (int i = _row; i < aRow; i++) {
             QVector<bool> subFilter(_col);
-            for(int j=0;j<_col;j++){
-                subFilter[j]=std::move(true);
+            for (int j = 0; j < _col; j++) {
+                subFilter[j] = std::move(true);
             }
             _filter.append(std::move(subFilter));
         }
-        _row=a_row;
-    } else if(a_row<_row){
-        for(int i=_row;i<a_row;i++){
-            while(_filter.size()>a_row)
-                _filter.takeAt(a_row);
+        _row = aRow;
+    } else if (aRow < _row) {
+        for (int i = _row; i < aRow; i++) {
+            while(_filter.size() > aRow) {
+                _filter.takeAt(aRow);
+            }
         }
-        _row=a_row;
+        _row = aRow;
     }
 }
-void Filter::SetCol(int a_col){
-    if(a_col>_col){
-        for(int i=_col;i<a_col;i++){
-            for(int j=0;j<_row;j++){
+void Filter::setCol(int aCol) {
+    if (aCol > _col) {
+        for (int i = _col; i < aCol; i++) {
+            for (int j = 0; j < _row; j++) {
                 _filter[j].append(std::move(true));
             }
         }
-        _col=a_col;
-    } else if(a_col<_col){
-        for(int i=_col;i<a_col;i++){
-            for(int j=0;j<_row;j++){
+        _col = aCol;
+    } else if (aCol < _col) {
+        for(int i = _col; i < aCol; i++) {
+            for(int j = 0; j < _row; j++) {
                 _filter[j].takeAt(_col);
             }
         }
-        _col=a_col;
+        _col = aCol;
     }
 }
-void Filter::SetData(int a_row, int a_col, bool a_data){
-    if(a_row<_row&&a_col<_col)
-        _filter[a_row][a_col]=std::move(a_data);
+void Filter::setData(int aRow, int aCol, bool aData) {
+    if (aRow < _row && aCol < _col) {
+        _filter[aRow][aCol] = std::move(aData);
+    }
 }
 
-bool Filter::GetData(int a_row, int a_col){
-    if(a_row<_row&&a_col<_col){
-        return _filter[a_row][a_col];
-    }
-    return false;
-}
-bool Filter::GetData(int a_row){
-    if(a_row<_row){
-        return _filter[a_row].indexOf(false)==-1;
+bool Filter::getData(int aRow, int aCol) {
+    if (aRow < _row && aCol < _col) {
+        return _filter[aRow][aCol];
     }
     return false;
 }
 
-void Filter::AddCol(int a_colNum){
-    if(a_colNum<_col+1){
-        for(int i=0;i<_row;i++){
-            _filter[a_colNum].append(std::move(true));
+bool Filter::getData(int aRow) {
+    if (aRow < _row) {
+        return _filter[aRow].indexOf(false) == -1;
+    }
+    return false;
+}
+
+int Filter::getRow() {
+    return _row;
+}
+
+int Filter::getCol() {
+    return _col;
+}
+
+void Filter::addCol(int aColNum) {
+    if (aColNum < _col + 1) {
+        for (int i = 0; i < _row; i++) {
+            _filter[aColNum].append(std::move(true));
         }
         _col++;
     }
 }
-void Filter::RemoveCol(int a_colNum){
-    if(a_colNum<_col+1){
-        for(int i=0;i<_row;i++){
-            _filter[i].remove(a_colNum);
+
+void Filter::removeCol(int aColNum) {
+    if (aColNum < _col + 1) {
+        for (int i = 0; i < _row; i++) {
+            _filter[i].remove(aColNum);
         }
         _col--;
     }
 }
-

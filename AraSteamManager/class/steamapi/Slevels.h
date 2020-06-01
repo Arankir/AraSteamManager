@@ -20,32 +20,31 @@ class SLevels : public QObject
     Q_OBJECT
 public:
     explicit SLevels(QString id, QObject *parent = nullptr);
-    SLevels(QJsonDocument DocLevels, QObject *parent = nullptr);
-    SLevels(QObject *parent = nullptr): QObject(parent), _manager(new QNetworkAccessManager()), _status(StatusValue::none){};
+    SLevels(QJsonDocument docLevels, QObject *parent = nullptr);
+    SLevels(QObject *parent = nullptr);;
     ~SLevels();
     void Set(QString id);
-    void Set(QJsonDocument DocLevel);
-    int GetLevel() {return _player_level;}
-    StatusValue GetStatus() {return _status;}
-    QString GetError() {return _error;}
+    void Set(QJsonDocument docLevel);
+    int GetLevel();
+    StatusValue GetStatus();
+    QString GetError();
     void Update();
 
 signals:
     void s_finished(SLevels*);
     void s_finished();
 
-public slots:
+private slots:
     //void Load(QNetworkReply *Reply);
-
-private:
     void Load();
 
+private:
     QNetworkAccessManager *_manager;
-    Settings _setting;
     QString _steamid;//"76561198065018572"
-    int _player_level=0;
+    int _player_level = 0;
     StatusValue _status;
-    QString _error="";
+    QString _error = "";
+
 };
 
 #endif // SLEVELS_H

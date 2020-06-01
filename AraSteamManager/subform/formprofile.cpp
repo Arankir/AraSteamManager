@@ -35,8 +35,8 @@ void FormProfile::ProfileToUi(SProfile a_profile){
     _profile=a_profile;
     SBans bans(a_profile._steamID,false);
     SLevels levels(a_profile._steamID);
-    _games.Set(a_profile._steamID,true,true,false);
-    _friends.Set(a_profile._steamID,false);
+    _games.set(a_profile._steamID,true,true,false);
+    _friends.set(a_profile._steamID,false);
     if(!a_profile._gameExtraInfo.isEmpty()){
         ui->LabelPersonaState->setText(tr("В игре %1").arg(a_profile._gameExtraInfo));
         ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
@@ -101,7 +101,7 @@ void FormProfile::ProfileToUi(SProfile a_profile){
 //            ui->LabelProfileVisibility->setStyleSheet("color:white");
             profileState.load("://state_blue.png");
         }
-    switch (_games.GetStatus()){
+    switch (_games.getStatus()){
     case StatusValue::success:{
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
@@ -124,7 +124,7 @@ void FormProfile::ProfileToUi(SProfile a_profile){
         break;
     }
     }
-    switch (_friends.GetStatus()){
+    switch (_friends.getStatus()){
     case StatusValue::success:{
         ui->ButtonFriends->setEnabled(true);
         friendsState.load("://state_green.png");
@@ -147,9 +147,9 @@ void FormProfile::ProfileToUi(SProfile a_profile){
     ui->LabelProfileStatus->setPixmap(profileState.scaled(14,14));
     ui->LabelGamesStatus->setPixmap(gamesState.scaled(14,14));
     ui->LabelFriendsStatus->setPixmap(friendsState.scaled(14,14));
-    if(bans.GetVACBanned()){
-        ui->LabelBansNotNone->setText(QString::number(bans.GetNumberOfVACBans()));
-        ui->LabelBansDays->setText(QString::number(bans.GetDaysSinceLastBan()));
+    if(bans.getVacBanned()){
+        ui->LabelBansNotNone->setText(QString::number(bans.getNumberOfVacBans()));
+        ui->LabelBansDays->setText(QString::number(bans.getDaysSinceLastBan()));
         ui->LabelBansNotNone->setVisible(true);
         ui->LabelBansLast->setVisible(true);
         ui->LabelBansDays->setVisible(true);
@@ -167,8 +167,8 @@ void FormProfile::ProfileToUi(SProfile a_profile){
 //        ui->LabelBans->setStyleSheet("color: #0e6e11");
     }
 
-    ui->LabelAvatar->setPixmap(RequestData(a_profile._avatarMedium,false).GetPixmap());
-    ui->LabelAvatarMinimize->setPixmap(RequestData(a_profile._avatar,false).GetPixmap());
+    ui->LabelAvatar->setPixmap(RequestData(a_profile._avatarMedium,false).getPixmap());
+    ui->LabelAvatarMinimize->setPixmap(RequestData(a_profile._avatar,false).getPixmap());
     ui->LabelNick->setText(a_profile._personaName);
     ui->LabelNameMinimize->setText(a_profile._personaName);
 
@@ -223,7 +223,7 @@ void FormProfile::UpdateVisibleInfo(){
 }
 
 void FormProfile::UpdateInfo(){
-    _profile.Update(false);
+    _profile.update(false);
     ProfileToUi(_profile);
 }
 
@@ -233,8 +233,8 @@ void FormProfile::Retranslate(){
     case 0:{
         ui->ButtonGames->setText("");
         ui->ButtonFriends->setText("");
-        ui->ButtonGames->setToolTip(tr("Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
-        ui->ButtonFriends->setToolTip(tr("Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
+        ui->ButtonGames->setToolTip(tr("Игры (%1)").arg(_games.getStatus()==StatusValue::success?QString::number(_games.getCount()):tr("???")));
+        ui->ButtonFriends->setToolTip(tr("Друзья (%1)").arg(_friends.getStatus()==StatusValue::success?QString::number(_friends.getCount()):tr("???")));
         ui->ButtonStatistics->setText("");
         ui->ButtonFavorites->setText("");
         ui->ButtonStatistics->setToolTip(tr("Статистика"));
@@ -244,8 +244,8 @@ void FormProfile::Retranslate(){
         break;
     }
     case 1:{
-        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
-        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
+        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.getStatus()==StatusValue::success?QString::number(_games.getCount()):tr("???")));
+        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.getStatus()==StatusValue::success?QString::number(_friends.getCount()):tr("???")));
         ui->ButtonGames->setToolTip("");
         ui->ButtonFriends->setToolTip("");
         ui->ButtonStatistics->setText(tr("Статистика"));
@@ -257,8 +257,8 @@ void FormProfile::Retranslate(){
         break;
     }
     case 2:{
-        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.GetStatus()==StatusValue::success?QString::number(_games.GetCount()):tr("???")));
-        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.GetStatus()==StatusValue::success?QString::number(_friends.GetCount()):tr("???")));
+        ui->ButtonGames->setText(tr(" Игры (%1)").arg(_games.getStatus()==StatusValue::success?QString::number(_games.getCount()):tr("???")));
+        ui->ButtonFriends->setText(tr(" Друзья (%1)").arg(_friends.getStatus()==StatusValue::success?QString::number(_friends.getCount()):tr("???")));
         ui->ButtonGames->setToolTip("");
         ui->ButtonFriends->setToolTip("");
         ui->ButtonStatistics->setText(tr("Статистика"));
@@ -278,19 +278,19 @@ void FormProfile::ButtonSetProfile_Clicked(){
 }
 
 void FormProfile::ButtonGames_Clicked(){
-    if(_games.GetStatus()==StatusValue::success){
+    if(_games.getStatus()==StatusValue::success){
         emit s_goToGames(_profile._steamID,_games);
     }
 }
 
 void FormProfile::ButtonFriends_Clicked(){
-    if(_friends.GetStatus()==StatusValue::success){
+    if(_friends.getStatus()==StatusValue::success){
         emit s_goToFriends(_profile._steamID,_friends);
     }
 }
 
 void FormProfile::ButtonStatistics_Clicked(){
-    if(_games.GetStatus()==StatusValue::success){
+    if(_games.getStatus()==StatusValue::success){
         emit s_goToStatistic(_profile._steamID,_games,_profile._personaName);
     }
 }

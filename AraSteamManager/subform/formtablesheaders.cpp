@@ -46,8 +46,8 @@ FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a
     _achievements=a_achievements;
     _achievements._appid=QString::number(_game._appID);
     _achievements._id=_id;
-    _achievements.Set(SAchievementsPercentage(QString::number(_game._appID),false,this));
-    _achievements.Update();
+    _achievements.set(SAchievementsPercentage(QString::number(_game._appID),false,this));
+    _achievements.update();
 
     ui->TableWidgetContent->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetHorizontalHeader->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -69,7 +69,7 @@ FormTablesHeaders::FormTablesHeaders(int a_rowHeaders, int a_rowContent, SGame a
     ChangeHorizontalTitle(c_tableAchievementColumnTitle,tr("Название"));
     ChangeHorizontalTitle(c_tableAchievementColumnDescription,tr("Описание"));
     ChangeHorizontalTitle(c_tableAchievementColumnWorld,tr("По миру"));
-    ChangeHorizontalTitle(c_tableAchievementColumnReachedMy,profileData.GetPersonaname());
+    ChangeHorizontalTitle(c_tableAchievementColumnReachedMy,profileData.getPersonaname());
     SetVisibleColumn(c_tableAchievementColumnAppid,false);
     SetColumnWidth(c_tableAchievementColumnIcon,65);
     SetColumnWidth(c_tableAchievementColumnTitle,100);
@@ -140,8 +140,8 @@ void FormTablesHeaders::SetColumnWidth(int a_column, int a_width){
 }
 void FormTablesHeaders::SetRowCount(int a_row){
     ui->TableWidgetContent->setRowCount(a_row);
-    _fAchievements.SetRow(a_row);
-    _fCompare.SetRow(a_row);
+    _fAchievements.setRow(a_row);
+    _fCompare.setRow(a_row);
 }
 void FormTablesHeaders::SetRowHeight(int a_row, int a_height){
     ui->TableWidgetContent->setRowHeight(a_row,a_height);
@@ -257,15 +257,15 @@ bool FormTablesHeaders::AddFriendColumn(SProfile a_friendProfile){
     InsertColumn(column);
     ChangeHorizontalTitle(column,a_friendProfile._personaName);
     QLabel *avatarFriend = new QLabel;
-    avatarFriend->setPixmap(RequestData(a_friendProfile._avatar,false).GetPixmap());
+    avatarFriend->setPixmap(RequestData(a_friendProfile._avatar,false).getPixmap());
     avatarFriend->setToolTip(a_friendProfile._personaName);
     avatarFriend->setAlignment(Qt::AlignCenter);
     ui->TableWidgetHorizontalHeader->setCellWidget(0,column,avatarFriend);
     SAchievements achievementsFriends=_achievements;
-    achievementsFriends.Set(SAchievementsPlayer(QString::number(_game._appID),a_friendProfile._steamID,false,this));
+    achievementsFriends.set(SAchievementsPlayer(QString::number(_game._appID),a_friendProfile._steamID,false,this));
 //    Threading LoadFriendTable(this);
 //    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
-    _fCompare.SetCol(_fCompare.GetCol()+1);
+    _fCompare.setCol(_fCompare.getCol()+1);
     SetColumnWidth(column,80);
 
     _friendsColumns.push_back(column);

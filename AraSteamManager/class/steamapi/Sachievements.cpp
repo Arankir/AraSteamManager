@@ -1,316 +1,587 @@
 #include "Sachievements.h"
 
+#define SingleAchievements {
+#define SAchievementGlobalStart {
+SAchievementGlobal::SAchievementGlobal(QJsonObject aAchievement, QObject *aParent): QObject(aParent),
+_apiName(aAchievement.value("name").toString()), _defaultValue(aAchievement.value("defaultvalue").toInt()),
+_displayName(aAchievement.value("displayName").toString()), _hidden(aAchievement.value("hidden").toInt()),
+_description(aAchievement.value("description").toString()), _icon(aAchievement.value("icon").toString()),
+_iconGray(aAchievement.value("icongray").toString()) {
+
+}
+
+SAchievementGlobal::SAchievementGlobal(const SAchievementGlobal &aAchievement): QObject(aAchievement.parent()),
+_apiName(aAchievement._apiName), _defaultValue(aAchievement._defaultValue), _displayName(aAchievement._displayName),
+_hidden(aAchievement._hidden), _description(aAchievement._description), _icon(aAchievement._icon), _iconGray(aAchievement._iconGray) {
+
+}
+
+SAchievementGlobal &SAchievementGlobal::operator=(const SAchievementGlobal &) {
+    return *this;
+}
+#define SAchievementGlobalEnd }
+#define SAchievementPercentageStart {
+SAchievementPercentage::SAchievementPercentage(QJsonObject aAchievement, QObject *aParent): QObject(aParent),
+_apiName(aAchievement.value("name").toString()), _percent(aAchievement.value("percent").toDouble()) {
+
+}
+
+SAchievementPercentage::SAchievementPercentage(const SAchievementPercentage &aAchievement): QObject(aAchievement.parent()),
+_apiName(aAchievement._apiName), _percent(aAchievement._percent) {
+
+}
+
+SAchievementPercentage &SAchievementPercentage::operator=(const SAchievementPercentage &) {
+    return *this;
+}
+#define SAchievementPercentageEnd }
+#define SAchievementPlayerStart {
+SAchievementPlayer::SAchievementPlayer(QJsonObject aAchievement, QObject *aParent): QObject(aParent),
+_apiName(aAchievement.value("apiname").toString()), _achieved(aAchievement.value("achieved").toInt()),
+_unlockTime(QDateTime::fromSecsSinceEpoch(aAchievement.value("unlocktime").toInt(), Qt::LocalTime)) {
+
+}
+
+SAchievementPlayer::SAchievementPlayer(const SAchievementPlayer &aAchievement): QObject(aAchievement.parent()),
+_apiName(aAchievement._apiName), _achieved(aAchievement._achieved), _unlockTime(aAchievement._unlockTime) {
+
+}
+
+SAchievementPlayer &SAchievementPlayer::operator=(const SAchievementPlayer &) {
+    return *this;
+}
+#define SAchievementPlayerEnd }
 #define SAchievementStart {
-const bool &SAchievement::operator<(const SAchievement &a_achievement){
-    static const bool b=_displayName.toLower()<a_achievement._displayName.toLower();
+SAchievement::SAchievement(SAchievementGlobal aGlobal, SAchievementPlayer aPlayer, SAchievementPercentage aPercent, QObject *aParent):
+QObject(aParent), _apiName(aGlobal._apiName), _defaultValue(aGlobal._defaultValue), _displayName(aGlobal._displayName), _hidden(aGlobal._hidden),
+_description(aGlobal._description), _icon(aGlobal._icon), _iconGray(aGlobal._iconGray), _achieved(aPlayer._achieved), _unlockTime(aPlayer._unlockTime),
+_percent(aPercent._percent) {
+
+}
+
+SAchievement::SAchievement(const SAchievement &aAchievement): QObject(aAchievement.parent()), _apiName(aAchievement._apiName),
+_defaultValue(aAchievement._defaultValue), _displayName(aAchievement._displayName), _hidden(aAchievement._hidden),
+_description(aAchievement._description), _icon(aAchievement._icon), _iconGray(aAchievement._iconGray), _achieved(aAchievement._achieved),
+_unlockTime(aAchievement._unlockTime), _percent(aAchievement._percent) {
+
+}
+
+SAchievement &SAchievement::operator=(const SAchievement &) {
+    return *this;
+}
+
+const bool &SAchievement::operator<(const SAchievement &aAchievement){
+    static const bool b = _displayName.toLower() < aAchievement._displayName.toLower();
     return b;
 }
 #define SAchievementEnd }
+#define SingleAchievementsEnd }
 #define MultipleAchievements {
 #define SAchievementsGlobalStart {
-SAchievementsGlobal::SAchievementsGlobal(QString a_appid, bool parallel, QObject *parent) : QObject(parent),_manager(new QNetworkAccessManager()),_appid(a_appid){
-    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+a_appid+"&l="+tr("russian")));
-    if(!parallel){
+SAchievementsGlobal::SAchievementsGlobal(QString aAppid, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _appid(aAppid) {
+    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::onLoad);
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+Settings::GetKey()+"&appid="+aAppid+"&l="+tr("russian")));
+    if (!aParallel) {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         loop.exec();
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
      }
 }
-SAchievementsGlobal::SAchievementsGlobal(QJsonDocument a_achievements, QObject *parent) : QObject(parent),_manager(new QNetworkAccessManager()){
-    Set(a_achievements);
+
+SAchievementsGlobal::SAchievementsGlobal(QJsonDocument aAchievements, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()) {
+    set(aAchievements);
 }
-SAchievementsGlobal::~SAchievementsGlobal(){
+
+SAchievementsGlobal::~SAchievementsGlobal() {
     delete _manager;
 }
-void SAchievementsGlobal::Set(QString a_appid){
-    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    _appid=a_appid;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+_setting.GetKey()+"&appid="+a_appid+"&l="+tr("russian")));
+
+void SAchievementsGlobal::set(QString aAppid) {
+    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::onLoad);
+    _appid = std::move(aAppid);
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+Settings::GetKey()+"&appid="+aAppid+"&l="+tr("russian")));
 }
-void SAchievementsGlobal::Set(QJsonDocument a_achievements){
-    Clear();
-    if(a_achievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size()>0){
-        _gameName=a_achievements.object().value("game").toObject().value("gameName").toString();
-        _gameVersion=a_achievements.object().value("game").toObject().value("gameVersion").toString();
-        for(int i=0; i<a_achievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().size();i++){
-            _achievements.append(std::move(SAchievementGlobal(a_achievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray().at(i).toObject())));
+
+void SAchievementsGlobal::set(QJsonDocument aAchievements) {
+    clear();
+    QJsonArray gameAchievements = aAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray();
+    if(gameAchievements.size() > 0) {
+        _gameName = aAchievements.object().value("game").toObject().value("gameName").toString();
+        _gameVersion = aAchievements.object().value("game").toObject().value("gameVersion").toString();
+        for(int i = 0; i < gameAchievements.size(); i++) {
+            _achievements.append(std::move(SAchievementGlobal(gameAchievements.at(i).toObject())));
         }
-        _status=StatusValue::success;
+        _status = std::move(StatusValue::success);
     }
     else {
-        _status=StatusValue::error;
-        _error="game is not exist";
+        _status = std::move(StatusValue::error);
+        _error = std::move("game is not exist");
     }
 }
-void SAchievementsGlobal::Load(QNetworkReply *a_reply){
-    disconnect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::Load);
-    Set(QJsonDocument::fromJson(a_reply->readAll()));
-    a_reply->deleteLater();
+
+void SAchievementsGlobal::remove(int aIndex) {
+    _achievements.removeAt(aIndex);
+}
+
+QString SAchievementsGlobal::getAppid() {
+    return _appid;
+}
+
+StatusValue SAchievementsGlobal::getStatus() {
+    return _status;
+}
+
+QString SAchievementsGlobal::getError() {
+    return _error;
+}
+
+QString SAchievementsGlobal::getGamename() {
+    return _gameName;
+}
+
+QString SAchievementsGlobal::getGameversion() {
+    return _gameVersion;
+}
+
+int SAchievementsGlobal::getCount() {
+    return _achievements.size();
+}
+
+void SAchievementsGlobal::onLoad(QNetworkReply *aReply) {
+    disconnect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::onLoad);
+    set(QJsonDocument::fromJson(aReply->readAll()));
+    aReply->deleteLater();
     emit s_finished(*this);
     emit s_finished();
 }
-void SAchievementsGlobal::Update(){
-    Set(_appid);
+
+void SAchievementsGlobal::update() {
+    set(_appid);
 }
-void SAchievementsGlobal::Clear(){
+
+void SAchievementsGlobal::clear() {
     _achievements.clear();
-    _status=StatusValue::none;
+    _status = std::move(StatusValue::none);
 }
-SAchievementsGlobal & SAchievementsGlobal::operator=(const SAchievementsGlobal & a_newAchievements){
+
+SAchievementsGlobal::SAchievementsGlobal(const SAchievementsGlobal &aAchievements): QObject(aAchievements.parent()),
+_manager(new QNetworkAccessManager), _achievements(aAchievements._achievements), _status(aAchievements._status),
+_error(aAchievements._error), _appid(aAchievements._appid), _gameName(aAchievements._gameName), _gameVersion(aAchievements._gameVersion) {
+
+}
+
+SAchievementsGlobal &SAchievementsGlobal::operator=(const SAchievementsGlobal &aAchievements){
     delete _manager;
-    _achievements=a_newAchievements._achievements;
-    _appid=a_newAchievements._appid;
-    _gameName=a_newAchievements._gameName;
-    _gameVersion=a_newAchievements._gameVersion;
-    _status=a_newAchievements._status;
-    _error=a_newAchievements._error;
+    _achievements = aAchievements._achievements;
+    _appid = aAchievements._appid;
+    _gameName = aAchievements._gameName;
+    _gameVersion = aAchievements._gameVersion;
+    _status = aAchievements._status;
+    _error = aAchievements._error;
     _manager = new QNetworkAccessManager;
     return *this;
+}
+
+SAchievementGlobal &SAchievementsGlobal::operator[](const int &aIndex) {
+    return _achievements[aIndex];
 }
 #define SAchievementsGlobalEnd }
 #define SAchievementsPercentageStart {
-SAchievementsPercentage::SAchievementsPercentage(QString a_appid, bool parallel, QObject *parent) : QObject(parent),_manager(new QNetworkAccessManager()), _appid(a_appid){
-    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+a_appid));
-    if(!parallel){
+SAchievementsPercentage::SAchievementsPercentage(QString aAppid, bool aParallel, QObject *aParent): QObject(aParent),
+_manager(new QNetworkAccessManager()), _appid(aAppid) {
+    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::onLoad);
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+Settings::GetKey()+"&gameid="+aAppid));
+    if (!aParallel) {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         loop.exec();
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
      }
 }
-SAchievementsPercentage::SAchievementsPercentage(QJsonDocument a_achievements, QObject *parent) : QObject(parent),_manager(new QNetworkAccessManager()){
-    Set(a_achievements);
+
+SAchievementsPercentage::SAchievementsPercentage(QJsonDocument aAchievements, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()) {
+    set(aAchievements);
 }
-SAchievementsPercentage::~SAchievementsPercentage(){
+
+SAchievementsPercentage::SAchievementsPercentage(QObject *parent): QObject(parent), _manager(new QNetworkAccessManager()) {
+
+}
+
+SAchievementsPercentage::~SAchievementsPercentage() {
     delete _manager;
 }
-void SAchievementsPercentage::Set(QString a_appid){
-    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    _appid=a_appid;
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+_setting.GetKey()+"&gameid="+a_appid));
+
+void SAchievementsPercentage::set(QString aAppid) {
+    connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::onLoad);
+    _appid = std::move(aAppid);
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+Settings::GetKey()+"&gameid="+aAppid));
 }
-void SAchievementsPercentage::Set(QJsonDocument a_achievements){
-    Clear();
-    if(a_achievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size()>0){
-        for(int i=0;i<a_achievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().size();i++){
-            _achievements.append(std::move(SAchievementPercentage(a_achievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray().at(i).toObject())));
+
+void SAchievementsPercentage::set(QJsonDocument aAchievements){
+    clear();
+    QJsonArray achievementsArray = aAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray();
+    if (achievementsArray.size() > 0) {
+        for (auto achievement: achievementsArray) {
+            _achievements.append(std::move(SAchievementPercentage(achievement.toObject())));
         }
-        _status=StatusValue::success;
-    }
-    else {
-        _status=StatusValue::error;
-        _error="game is not exist";
+        _status = std::move(StatusValue::success);
+    } else {
+        _status = std::move(StatusValue::error);
+        _error = std::move("game is not exist");
     }
 }
-void SAchievementsPercentage::Load(QNetworkReply *a_reply){
-    disconnect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::Load);
-    QJsonDocument localAchievements = QJsonDocument::fromJson(a_reply->readAll());
-    a_reply->deleteLater();
-    Set(localAchievements);
+
+void SAchievementsPercentage::remove(int index) {
+    _achievements.removeAt(index);
+}
+
+QString SAchievementsPercentage::getAppid() {
+    return _appid;
+}
+
+int SAchievementsPercentage::getCount() {
+    return _achievements.size();
+}
+
+StatusValue SAchievementsPercentage::getStatus() {
+    return _status;
+}
+
+QString SAchievementsPercentage::getError() {
+    return _error;
+}
+
+void SAchievementsPercentage::onLoad(QNetworkReply *aReply){
+    disconnect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::onLoad);
+    set(QJsonDocument::fromJson(aReply->readAll()));
+    aReply->deleteLater();
     emit s_finished(*this);
     emit s_finished();
 }
-void SAchievementsPercentage::Update(){
-    Set(_appid);
+
+void SAchievementsPercentage::update(){
+    set(_appid);
 }
-void SAchievementsPercentage::Clear(){
+
+void SAchievementsPercentage::clear(){
     _achievements.clear();
-    _status=StatusValue::none;
+    _status = std::move(StatusValue::none);
 }
-SAchievementsPercentage & SAchievementsPercentage::operator=(const SAchievementsPercentage & a_newAchievements) {
+
+SAchievementsPercentage::SAchievementsPercentage(const SAchievementsPercentage &aAchievements): QObject(aAchievements.parent()),
+_manager(new QNetworkAccessManager()), _achievements(aAchievements._achievements), _error(aAchievements._error),
+_status(aAchievements._status), _appid(aAchievements._appid) {
+
+}
+
+SAchievementsPercentage &SAchievementsPercentage::operator=(const SAchievementsPercentage &aAchievements) {
     delete _manager;
-    _achievements=a_newAchievements._achievements;
-    _appid=a_newAchievements._appid;
-    _status=a_newAchievements._status;
-    _error=a_newAchievements._error;
+    _achievements = aAchievements._achievements;
+    _appid = aAchievements._appid;
+    _status = aAchievements._status;
+    _error = aAchievements._error;
     _manager = new QNetworkAccessManager;
     return *this;
+}
+
+SAchievementPercentage &SAchievementsPercentage::operator[](const int &aIndex) {
+    return _achievements[aIndex];
 }
 #define SAchievementsPercentageEnd }
 #define SAchievementsPlayerStart {
-SAchievementsPlayer::SAchievementsPlayer(QString a_appid, QString a_id, bool parallel, QObject *parent) : QObject(parent),_manager(new QNetworkAccessManager()), _id(a_id), _appid(a_appid){
+SAchievementsPlayer::SAchievementsPlayer(QString aAppid, QString aId, bool aParallel, QObject *aParent): QObject(aParent),
+_manager(new QNetworkAccessManager()), _id(aId), _appid(aAppid) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+_setting.GetKey()+"&appid="+a_appid+"&steamid="+a_id));
-    if(!parallel){
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+Settings::GetKey()+"&appid="+aAppid+"&steamid="+aId));
+    if (!aParallel) {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         loop.exec();
         disconnect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
      }
 }
-SAchievementsPlayer::SAchievementsPlayer(QJsonDocument a_achievements, QObject *parent) : QObject(parent),_manager(new QNetworkAccessManager()){
-    Set(a_achievements);
+
+SAchievementsPlayer::SAchievementsPlayer(QJsonDocument aAchievements, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()) {
+    set(aAchievements);
 }
-SAchievementsPlayer::~SAchievementsPlayer(){
+
+SAchievementsPlayer::SAchievementsPlayer(QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()) {
+
+}
+
+SAchievementsPlayer::~SAchievementsPlayer() {
     delete _manager;
 }
-void SAchievementsPlayer::Set(QString a_appid, QString a_id){
+
+void SAchievementsPlayer::set(QString aAppid, QString aId) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
-    _appid=a_appid;
-    _id=a_id;
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+_setting.GetKey()+"&appid="+a_appid+"&steamid="+a_id));
+    _appid = std::move(aAppid);
+    _id = std::move(aId);
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+Settings::GetKey()+"&appid="+aAppid+"&steamid="+aId));
 }
-void SAchievementsPlayer::Set(QJsonDocument a_achievements){
-    Clear();
-    if(a_achievements.object().value("playerstats").toObject().value("achievements").toArray().size()>0){
-        _appid=a_achievements.object().value("playerstats").toObject().value("steamID").toString();
-        _gameName=a_achievements.object().value("playerstats").toObject().value("gameName").toString();
-        for(int i=0;i<a_achievements.object().value("playerstats").toObject().value("achievements").toArray().size();i++){
-            _achievements.append(std::move(SAchievementPlayer(a_achievements.object().value("playerstats").toObject().value("achievements").toArray().at(i).toObject())));
+
+void SAchievementsPlayer::set(QJsonDocument aAchievements) {
+    clear();
+    QJsonArray achievementsArray = aAchievements.object().value("playerstats").toObject().value("achievements").toArray();
+    if (achievementsArray.size() > 0){
+        _appid = aAchievements.object().value("playerstats").toObject().value("steamID").toString();
+        _gameName = aAchievements.object().value("playerstats").toObject().value("gameName").toString();
+        for (auto achievement: achievementsArray) {
+            _achievements.append(std::move(SAchievementPlayer(achievement.toObject())));
         }
-        _status=StatusValue::success;
-    }
-    else {
-        _status=StatusValue::error;
-        _error="profile is not exist";
+        _status = std::move(StatusValue::success);
+    } else {
+        _status = std::move(StatusValue::error);
+        _error = std::move("profile is not exist");
     }
 }
-void SAchievementsPlayer::Load(QNetworkReply *a_reply){
-    disconnect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
-    QJsonDocument localAchievements = QJsonDocument::fromJson(a_reply->readAll());
-    a_reply->deleteLater();
-    Set(localAchievements);
+
+void SAchievementsPlayer::remove(int aIndex) {
+    _achievements.removeAt(aIndex);
+}
+
+QString SAchievementsPlayer::getAppid() {
+    return _appid;
+}
+
+StatusValue SAchievementsPlayer::getStatus() {
+    return _status;
+}
+
+QString SAchievementsPlayer::getError() {
+    return _error;
+}
+
+QString SAchievementsPlayer::getGameName() {
+    return _gameName;
+}
+
+int SAchievementsPlayer::getCount() {
+    return _achievements.size();
+}
+
+void SAchievementsPlayer::Load(QNetworkReply *aReply) {
+    disconnect(_manager, &QNetworkAccessManager::finished, this, &SAchievementsPlayer::Load);
+    set(QJsonDocument::fromJson(aReply->readAll()));
+    aReply->deleteLater();
     emit s_finished(*this);
     emit s_finished();
 }
-void SAchievementsPlayer::Update(){
-    Set(_appid,_id);
+
+void SAchievementsPlayer::update() {
+    set(_appid, _id);
 }
-void SAchievementsPlayer::Clear(){
+
+void SAchievementsPlayer::clear() {
     _achievements.clear();
-    _status=StatusValue::none;
+    _status = std::move(StatusValue::none);
 }
-SAchievementsPlayer & SAchievementsPlayer::operator=(const SAchievementsPlayer & a_newAchievements) {
+
+SAchievementsPlayer::SAchievementsPlayer(const SAchievementsPlayer &aAchievements): QObject(aAchievements.parent()),
+_index(aAchievements._index), _manager(new QNetworkAccessManager()), _achievements(aAchievements._achievements),
+_status(aAchievements._status), _error(aAchievements._error), _id(aAchievements._id), _appid(aAchievements._appid),
+_gameName(aAchievements._gameName) {
+
+}
+
+SAchievementsPlayer &SAchievementsPlayer::operator=(const SAchievementsPlayer &aAchievements) {
     delete _manager;
-    _achievements=a_newAchievements._achievements;
-    _appid=a_newAchievements._appid;
-    _id=a_newAchievements._id;
-    _gameName=a_newAchievements._gameName;
-    _status=a_newAchievements._status;
-    _error=a_newAchievements._error;
-    _index=a_newAchievements._index;
+    _achievements = aAchievements._achievements;
+    _appid = aAchievements._appid;
+    _id = aAchievements._id;
+    _gameName = aAchievements._gameName;
+    _status = aAchievements._status;
+    _error = aAchievements._error;
+    _index = aAchievements._index;
     _manager = new QNetworkAccessManager;
     return *this;
 }
+
+SAchievementPlayer &SAchievementsPlayer::operator[](const int &aIndex) {
+    return _achievements[aIndex];
+}
 #define SAchievementsPlayerEnd }
-#define MultipleAchievementsEnd }
 #define SAchievementsStart {
-SAchievements::SAchievements(QString a_appid, QString a_id, QObject *parent) : QObject(parent),_id(a_id),_appid(a_appid){
-    SAchievementsGlobal *global = new SAchievementsGlobal(a_appid);
-    connect(global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPlayer *player = new SAchievementsPlayer(a_appid,a_id);
-    connect(player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
-    SAchievementsPercentage *percent = new SAchievementsPercentage(a_appid);
-    connect(percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
+SAchievements::SAchievements(QString aAppid, QString aId, QObject *aParent): QObject(aParent), _id(aId), _appid(aAppid) {
+    SAchievementsGlobal *global = new SAchievementsGlobal(aAppid);
+    SAchievementsPlayer *player = new SAchievementsPlayer(aAppid, aId);
+    SAchievementsPercentage *percent = new SAchievementsPercentage(aAppid);
+    connect(global, SIGNAL(s_finished(SAchievementsGlobal)), this, SLOT(set(SAchievementsGlobal)));
+    connect(player, SIGNAL(s_finished(SAchievementsPlayer)), this, SLOT(set(SAchievementsPlayer)));
+    connect(percent, SIGNAL(s_finished(SAchievementsPercentage)), this, SLOT(set(SAchievementsPercentage)));
 }
-SAchievements::SAchievements(SAchievementsGlobal &a_global, SAchievementsPlayer &a_player, SAchievementsPercentage &a_percent, QObject *parent) : QObject(parent),
-                    _global(a_global),_player(a_player),_percent(a_percent),_statusGlobal(StatusValue::success),_statusPlayer(StatusValue::success),_statusPercent(StatusValue::success){
+
+SAchievements::SAchievements(SAchievementsGlobal &aGlobal, SAchievementsPlayer &aPlayer, SAchievementsPercentage &aPercent, QObject *aParent): QObject(aParent),
+_global(aGlobal), _player(aPlayer), _percent(aPercent), _statusGlobal(StatusValue::success), _statusPlayer(StatusValue::success), _statusPercent(StatusValue::success) {
     qDebug()<<"Set All Achievements data";
-    SetFinish();
+    setFinish();
 }
-void SAchievements::Set(QString a_appid, QString a_id){
-    _appid=a_appid;
-    _id=a_id;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(a_appid);
-    connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPlayer *Player = new SAchievementsPlayer(a_appid,a_id);
-    connect(Player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(a_appid);
-    connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
+
+SAchievements::SAchievements(SAchievementsGlobal &aGlobal, QObject *aParent): QObject(aParent), _global(aGlobal), _statusGlobal(StatusValue::success) {
+
 }
-void SAchievements::Set(SAchievementsGlobal &a_global, SAchievementsPlayer &a_player, SAchievementsPercentage &a_percent){
-    Set(a_percent);
-    Set(a_global);
-    Set(a_player);
+
+SAchievements::SAchievements(SAchievementsPlayer &aPlayer, QObject *aParent): QObject(aParent), _player(aPlayer), _statusPlayer(StatusValue::success) {
+
 }
-void SAchievements::Set(SAchievementsPlayer a_player){
+
+SAchievements::SAchievements(SAchievementsPercentage aPercent, QObject *aParent): QObject(aParent), _percent(aPercent), _statusPercent(StatusValue::success) {
+
+}
+
+SAchievements::SAchievements(QObject *aParent): QObject(aParent) {
+
+}
+
+SAchievements::~SAchievements() {
+
+}
+
+void SAchievements::set(QString aAppid, QString aId) {
+    _appid = std::move(aAppid);
+    _id = std::move(aId);
+    SAchievementsGlobal *global = new SAchievementsGlobal(aAppid);
+    SAchievementsPlayer *player = new SAchievementsPlayer(aAppid, aId);
+    SAchievementsPercentage *percent = new SAchievementsPercentage(aAppid);
+    connect(global, SIGNAL(s_finished(SAchievementsGlobal)), this, SLOT(set(SAchievementsGlobal)));
+    connect(player, SIGNAL(s_finished(SAchievementsPlayer)), this, SLOT(set(SAchievementsPlayer)));
+    connect(percent, SIGNAL(s_finished(SAchievementsPercentage)), this, SLOT(set(SAchievementsPercentage)));
+}
+
+void SAchievements::set(SAchievementsGlobal &aGlobal, SAchievementsPlayer &aPlayer, SAchievementsPercentage &aPercent) {
+    set(aPercent);
+    set(aGlobal);
+    set(aPlayer);
+}
+
+void SAchievements::set(SAchievementsPlayer aPlayer) {
     qDebug()<<"Player set";
-    _player=a_player;
-    _statusPlayer=StatusValue::success;
-    if(_statusGlobal==StatusValue::success&&_statusPlayer==StatusValue::success&&_statusPercent==StatusValue::success){
-        SetFinish();
+    _player = std::move(aPlayer);
+    _statusPlayer = std::move(StatusValue::success);
+    if(_statusGlobal == StatusValue::success && _statusPlayer == StatusValue::success && _statusPercent == StatusValue::success) {
+        setFinish();
     }
 }
-void SAchievements::Set(SAchievementsGlobal a_global){
+
+void SAchievements::set(SAchievementsGlobal aGlobal) {
     qDebug()<<"Global set";
-    _global=a_global;
-    _statusGlobal=StatusValue::success;
-    if(_statusGlobal==StatusValue::success&&_statusPlayer==StatusValue::success&&_statusPercent==StatusValue::success){
-        SetFinish();
+    _global = std::move(aGlobal);
+    _statusGlobal = std::move(StatusValue::success);
+    if(_statusGlobal == StatusValue::success && _statusPlayer == StatusValue::success && _statusPercent == StatusValue::success) {
+        setFinish();
     }
 }
-void SAchievements::Set(SAchievementsPercentage a_percent){
+
+void SAchievements::set(SAchievementsPercentage aPercent) {
     qDebug()<<"Percent set";
-    _percent=a_percent;
-    _statusPercent=StatusValue::success;
-    if(_statusGlobal==StatusValue::success&&_statusPlayer==StatusValue::success&&_statusPercent==StatusValue::success){
-        SetFinish();
+    _percent = std::move(aPercent);
+    _statusPercent = std::move(StatusValue::success);
+    if(_statusGlobal == StatusValue::success && _statusPlayer == StatusValue::success && _statusPercent == StatusValue::success) {
+        setFinish();
     }
 }
-void SAchievements::SetFinish(){
+
+void SAchievements::setFinish() {
     qDebug()<<"Finish set";
-    Clear();
-    SAchievementsGlobal localGlobal = _global;
-    SAchievementsPlayer localPlayer = _player;
-    SAchievementsPercentage localPercent = _percent;
-    for(const auto &percent: localPercent){
-        int globalIndex=0;
-        for(const auto &player: localPlayer){
-            const auto &global = localGlobal[globalIndex++];
-            if(percent._apiName==player._apiName){
+    clear();
+    for (const auto &percent: _percent) {
+        int globalIndex = std::move(0);
+        for (const auto &player: _player) {
+            const auto &global = std::move(_global[globalIndex++]);
+            if (percent._apiName == player._apiName) {
                 _finish.push_back(std::move(SAchievement(global,player,percent)));
                 break;
             }
         }
     }
-    _statusFinish=StatusValue::success;
+    _statusFinish = std::move(StatusValue::success);
     emit s_finished();
 }
-void SAchievements::Update(){
-    _statusGlobal=StatusValue::none;
-    _statusPlayer=StatusValue::none;
-    _statusPercent=StatusValue::none;
-    _statusFinish=StatusValue::none;
-    SAchievementsGlobal *Global = new SAchievementsGlobal(_appid);
-    connect(Global,SIGNAL(s_finished(SAchievementsGlobal)),this,SLOT(Set(SAchievementsGlobal)));
-    SAchievementsPlayer *Player = new SAchievementsPlayer(_appid,_id);
-    connect(Player,SIGNAL(s_finished(SAchievementsPlayer)),this,SLOT(Set(SAchievementsPlayer)));
-    SAchievementsPercentage *Percent = new SAchievementsPercentage(_appid);
-    connect(Percent,SIGNAL(s_finished(SAchievementsPercentage)),this,SLOT(Set(SAchievementsPercentage)));
+
+StatusValue SAchievements::getStatus() {
+    return _statusFinish;
 }
-void SAchievements::Clear(){
+
+QString SAchievements::getError() {
+    return _errorFinish;
+}
+
+QString SAchievements::getAppid() {
+    return _appid;
+}
+
+QString SAchievements::getGameName() {
+    return _gameName;
+}
+
+QString SAchievements::getGameVersion() {
+    return _gameVersion;
+}
+
+int SAchievements::getCount() {
+    return _finish.size();
+}
+
+void SAchievements::update() {
+    //_finish.clear();
+    _statusGlobal = std::move(StatusValue::none);
+    _statusPlayer = std::move(StatusValue::none);
+    _statusPercent = std::move(StatusValue::none);
+    _statusFinish = std::move(StatusValue::none);
+    SAchievementsGlobal *global = new SAchievementsGlobal(_appid);
+    SAchievementsPlayer *player = new SAchievementsPlayer(_appid, _id);
+    SAchievementsPercentage *percent = new SAchievementsPercentage(_appid);
+    connect(global, SIGNAL(s_finished(SAchievementsGlobal)), this, SLOT(set(SAchievementsGlobal)));
+    connect(player, SIGNAL(s_finished(SAchievementsPlayer)), this, SLOT(set(SAchievementsPlayer)));
+    connect(percent, SIGNAL(s_finished(SAchievementsPercentage)), this, SLOT(set(SAchievementsPercentage)));
+}
+
+void SAchievements::clear(){
     _finish.clear();
-    _statusFinish=StatusValue::none;
+    _statusFinish = std::move(StatusValue::none);
 }
-void SAchievements::Sort(){
+
+void SAchievements::sort(){
     //Переделать нормально
     //std::list<SAchievement> list = _finish.toList().toStdList();
-    std::list<SAchievement> list(_finish.begin(),_finish.end());
+    std::list<SAchievement> list(_finish.begin(), _finish.end());
     list.sort();
-    _finish=QList<SAchievement>(list.begin(),list.end());
+    _finish = QList<SAchievement>(list.begin(), list.end());
     //_finish=QVector<SAchievement>::fromList(QList<SAchievement>::fromStdList(list));
 }
-SAchievements & SAchievements::operator=(const SAchievements & a_newAchievements){
-    _finish=a_newAchievements._finish;
-    _global=a_newAchievements._global;
-    _player=a_newAchievements._player;
-    _percent=a_newAchievements._percent;
-    _statusGlobal=a_newAchievements._statusGlobal;
-    _statusPlayer=a_newAchievements._statusPlayer;
-    _statusPercent=a_newAchievements._statusPercent;
-    _statusFinish=a_newAchievements._statusFinish;
-    _errorGlobal=a_newAchievements._errorGlobal;
-    _errorPlayer=a_newAchievements._errorPlayer;
-    _errorPercent=a_newAchievements._errorPercent;
-    _errorFinish=a_newAchievements._errorFinish;
-    _id=a_newAchievements._id;
-    _appid=a_newAchievements._appid;
-    _gameName=a_newAchievements._gameName;
-    _gameVersion=a_newAchievements._gameVersion;
+
+SAchievements::SAchievements(const SAchievements &aAchievements): QObject(aAchievements.parent()), _id(aAchievements._id),
+_appid(aAchievements._appid), _global(aAchievements._global), _player(aAchievements._player), _percent(aAchievements._percent),
+_finish(aAchievements._finish), _statusGlobal(aAchievements._statusGlobal), _statusPlayer(aAchievements._statusPlayer),
+_statusPercent(aAchievements._statusPercent), _statusFinish(aAchievements._statusFinish), _errorGlobal(aAchievements._errorGlobal),
+_errorPlayer(aAchievements._errorPlayer), _errorPercent(aAchievements._errorPercent), _errorFinish(aAchievements._errorFinish),
+_gameName(aAchievements._gameName), _gameVersion(aAchievements._gameVersion) {
+
+}
+
+SAchievements &SAchievements::operator=(const SAchievements &aAchievements){
+    _finish = aAchievements._finish;
+    _global = aAchievements._global;
+    _player = aAchievements._player;
+    _percent = aAchievements._percent;
+    _statusGlobal = aAchievements._statusGlobal;
+    _statusPlayer = aAchievements._statusPlayer;
+    _statusPercent = aAchievements._statusPercent;
+    _statusFinish = aAchievements._statusFinish;
+    _errorGlobal = aAchievements._errorGlobal;
+    _errorPlayer = aAchievements._errorPlayer;
+    _errorPercent = aAchievements._errorPercent;
+    _errorFinish = aAchievements._errorFinish;
+    _id = aAchievements._id;
+    _appid = aAchievements._appid;
+    _gameName = aAchievements._gameName;
+    _gameVersion = aAchievements._gameVersion;
     return *this;
 }
-#define SAchievementsEnd }
 
+SAchievement &SAchievements::operator[](const int &aIndex) {
+    return _finish[aIndex];
+}
+#define SAchievementsEnd }
+#define MultipleAchievementsEnd }

@@ -34,12 +34,12 @@ void FormFavorites::changeEvent(QEvent *event){
 }
 
 void FormFavorites::InitComponents(){
-    _games.SetType("games");
-    _friends.SetType("friends");
-    _achievements.SetType("achievements");
-    QJsonArray gamesJ=_games.GetValues();
-    QJsonArray friendsJ=_friends.GetValues();
-    QJsonArray achievementsJ=_achievements.GetValues();
+    _games.setType("games");
+    _friends.setType("friends");
+    _achievements.setType("achievements");
+    QJsonArray gamesJ=_games.getValues();
+    QJsonArray friendsJ=_friends.getValues();
+    QJsonArray achievementsJ=_achievements.getValues();
     //сделать отдельным потоком
     for (int i=0;i<gamesJ.size();i++) {
         //

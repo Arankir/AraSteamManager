@@ -560,7 +560,7 @@ void MainWindow::ButtonFindProfile_Clicked(){
 }
 void MainWindow::GoToProfile(QString a_id, QueryType a_type){
     SProfiles newProfile(a_id,false,a_type);
-    if(newProfile.GetStatus()==StatusValue::success){
+    if(newProfile.getStatus()==StatusValue::success){
         ReturnFromForms();
         if(ui->StackedWidgetProfiles->currentIndex()!=ui->StackedWidgetProfiles->count()-1)
             while(ui->StackedWidgetProfiles->count()-1!=ui->StackedWidgetProfiles->currentIndex())
@@ -582,7 +582,7 @@ void MainWindow::GoToProfile(QString a_id, QueryType a_type){
         qDebug()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex()+1<<"/"<<ui->StackedWidgetProfiles->count();
         } else {
             QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
-            qDebug()<<newProfile.GetError();
+            qDebug()<<newProfile.getError();
         }
 }
 void MainWindow::UpdateButtonsBackNext(){
@@ -609,7 +609,7 @@ void MainWindow::GoToGames(QString a_profileSteamid, SGames a_games){
     if(!_initGames){
         if(!_blockedLoad){
             _blockedLoad=true;
-            ui->FormProgressBar->setMaximum(a_games.GetCount());
+            ui->FormProgressBar->setMaximum(a_games.getCount());
             _gamesForm = new FormGames(a_profileSteamid,a_games,this);
             connect(_gamesForm,&FormGames::s_finish,this,&MainWindow::ShowGames);
             connect(_gamesForm,&FormGames::s_achievementsLoaded,this,&MainWindow::ProgressLoading);
@@ -626,7 +626,7 @@ void MainWindow::GoToFriends(QString a_prifileSteamid, SFriends a_friends){
     if(!_initFriends){
         if(!_blockedLoad){
             _blockedLoad=true;
-            ui->FormProgressBar->setMaximum(a_friends.GetCount());
+            ui->FormProgressBar->setMaximum(a_friends.getCount());
             _friendsForm = new FormFriends(a_prifileSteamid,a_friends,this);
             connect(_friendsForm,&FormFriends::s_go_to_profile,this,&MainWindow::GoToProfile);
             ui->ScrollAreaFriends->setWidget(_friendsForm);
@@ -655,7 +655,7 @@ void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QStrin
     if(!_initStatistics){
         if(!_blockedLoad){
             _blockedLoad=true;
-            ui->FormProgressBar->setMaximum(a_games.GetCount());
+            ui->FormProgressBar->setMaximum(a_games.getCount());
             _statisticsForm = new FormStatistics(a_prifileSteamid,a_games,a_profileName,this);
             ui->ScrollAreaStatistic->setWidget(_statisticsForm);
             ui->FormProgressBar->setVisible(true);

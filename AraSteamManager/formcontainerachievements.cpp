@@ -34,7 +34,7 @@ void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QSt
     if(!QFile::exists(filePath)){
         if(a_game._img_icon_url!=""){
             RequestImage *tabIcon = new RequestImage(urlPath,filePath,true,this);
-            tabIcon->SetIndex(tabIndex);
+            tabIcon->setIndex(tabIndex);
             connect(tabIcon,&RequestImage::s_loadComplete,this,&FormContainerAchievements::OnLoadImage);
             }
     } else {
@@ -54,8 +54,8 @@ void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int a
 }
 
 void FormContainerAchievements::OnLoadImage(RequestImage *a_image){
-    QPixmap tabIcon(a_image->GetPixmap());
-    ui->TabWidgetAchievements->setTabIcon(a_image->GetIndex(),tabIcon);
+    QPixmap tabIcon(a_image->getPixmap());
+    ui->TabWidgetAchievements->setTabIcon(a_image->getIndex(),tabIcon);
     disconnect(a_image,&RequestImage::s_loadComplete,this,&FormContainerAchievements::OnLoadImage);
     a_image->deleteLater();
 }

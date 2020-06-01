@@ -1,43 +1,51 @@
 #include "requestimage.h"
 
-RequestImage::RequestImage(QLabel *a_label, QString a_url, QString a_save, bool a_autosave, QObject *a_parent):QObject(a_parent),_label(a_label),_save(a_save),_autosave(a_autosave){
-    RequestData *image = new RequestData(a_url,true,this);
-    if(_label!=nullptr){
+RequestImage::RequestImage(QLabel *aLabel, QString aUrl, QString aSave, bool aAutoSave, QObject *aParent): QObject(aParent),
+_label(aLabel), _save(aSave), _autosave(aAutoSave) {
+    RequestData *image = new RequestData(aUrl, true, this);
+    if (_label != nullptr) {
         _label->setMovie(new QMovie("://loading.gif"));
         _label->movie()->setScaledSize(_label->size());
         _label->movie()->start();
-        connect(image,SIGNAL(s_finished(RequestData*)),this,SLOT(OnLoadToLabel(RequestData*)));
-    } else {
-        connect(image,SIGNAL(s_finished(RequestData*)),this,SLOT(OnLoadPixmap(RequestData*)));
     }
+    connect(image, SIGNAL(s_finished(RequestData*)), this, SLOT(onLoad(RequestData*)));
 }
-RequestImage::RequestImage(QLabel *a_label, QString a_url, QObject *a_parent):RequestImage(a_label,a_url,"",false,a_parent){}
-RequestImage::RequestImage(QString a_url, QString a_save, bool a_autosave, QObject *a_parent):RequestImage(nullptr,a_url,a_save,a_autosave,a_parent){}
 
-QPixmap RequestImage::GetPixmap(){
+RequestImage::RequestImage(QLabel *aLabel, QString aUrl, QObject *aParent): RequestImage(aLabel, aUrl, "", false, aParent) {
+
+}
+
+RequestImage::RequestImage(QString aUrl, QString aSave, bool aAutoSave, QObject *aParent): RequestImage(nullptr, aUrl, aSave, aAutoSave, aParent) {
+
+}
+
+QPixmap RequestImage::getPixmap() {
     return _pixmap;
 }
 
-void RequestImage::OnLoadToLabel(RequestData *a_image){
-    QPixmap pix;
-    pix.loadFromData(a_image->GetAnswer());
-    if(_setting.GetSaveImages()==1&&_autosave){
-        Settings::CreateDir(_save);
-        pix.save(_save);
-    }
-    _label->movie()->stop();
-    _label->setPixmap(pix);
-    //emit s_loadComplete();
-    this->deleteLater();
+void RequestImage::setIndex(int aIndex) {
+    _index=aIndex;
 }
 
-void RequestImage::OnLoadPixmap(RequestData *a_image){
-    QPixmap pix;
-    pix.loadFromData(a_image->GetAnswer());
-    if(_setting.GetSaveImages()==1&&_autosave){
-        Settings::CreateDir(_save);
-        pix.save(_save);
-    }
-    _pixmap=pix;
-    emit s_loadComplete(this);
+int RequestImage::getIndex() {
+    return _index;
 }
+
+void RequestImage::onLoad(RequestData *aImage) {
+    QPixmap loadedImage;
+    loadedImage.loadFromData(aImage->getAnswer());
+    if (_setting.GetSaveImages() == 1 && _autosave) {
+        Settings::CreateDir(_save);
+        loadedImage.save(_save);
+    }
+    if (_label != nullptr) {
+        _label->movie()->stop();
+        _label->setPixmap(loadedImage);
+        //emit s_loadComplete();
+        this->deleteLater();
+    } else {
+        _pixmap=loadedImage;
+        emit s_loadComplete(this);
+    }
+}
+

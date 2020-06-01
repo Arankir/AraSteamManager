@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadFriends_t {
-    QByteArrayData data[7];
-    char stringdata0[48];
+    QByteArrayData data[13];
+    char stringdata0[138];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,11 +38,19 @@ QT_MOC_LITERAL(2, 25, 0), // ""
 QT_MOC_LITERAL(3, 26, 10), // "s_progress"
 QT_MOC_LITERAL(4, 37, 1), // "p"
 QT_MOC_LITERAL(5, 39, 3), // "row"
-QT_MOC_LITERAL(6, 43, 4) // "Fill"
+QT_MOC_LITERAL(6, 43, 4), // "fill"
+QT_MOC_LITERAL(7, 48, 8), // "getState"
+QT_MOC_LITERAL(8, 57, 17), // "QTableWidgetItem*"
+QT_MOC_LITERAL(9, 75, 13), // "gameExtraInfo"
+QT_MOC_LITERAL(10, 89, 12), // "personaState"
+QT_MOC_LITERAL(11, 102, 10), // "getPrivacy"
+QT_MOC_LITERAL(12, 113, 24) // "communityVisibilityState"
 
     },
     "ThreadFriends\0s_finished\0\0s_progress\0"
-    "p\0row\0Fill"
+    "p\0row\0fill\0getState\0QTableWidgetItem*\0"
+    "gameExtraInfo\0personaState\0getPrivacy\0"
+    "communityVisibilityState"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,7 +60,7 @@ static const uint qt_meta_data_ThreadFriends[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,11 +68,13 @@ static const uint qt_meta_data_ThreadFriends[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x06 /* Public */,
-       3,    2,   30,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
+       3,    2,   40,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   35,    2, 0x0a /* Public */,
+       6,    0,   45,    2, 0x0a /* Public */,
+       7,    2,   46,    2, 0x08 /* Private */,
+      11,    1,   51,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -72,6 +82,8 @@ static const uint qt_meta_data_ThreadFriends[] = {
 
  // slots: parameters
     QMetaType::Int,
+    0x80000000 | 8, QMetaType::QString, QMetaType::Int,    9,   10,
+    0x80000000 | 8, QMetaType::Int,   12,
 
        0        // eod
 };
@@ -84,8 +96,12 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->s_finished(); break;
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: { int _r = _t->Fill();
+        case 2: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 3: { QTableWidgetItem* _r = _t->getState((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< QTableWidgetItem**>(_a[0]) = std::move(_r); }  break;
+        case 4: { QTableWidgetItem* _r = _t->getPrivacy((*reinterpret_cast< int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QTableWidgetItem**>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -136,13 +152,13 @@ int ThreadFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 5;
     }
     return _id;
 }

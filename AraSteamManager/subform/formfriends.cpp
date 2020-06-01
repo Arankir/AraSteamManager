@@ -20,8 +20,8 @@ constexpr int c_filterCount=4;
 #define ConstantsEnd }
 
 #define Init {
-FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent): QWidget(parent), ui(new Ui::FormFriends), _id(a_id), _friends(a_friends), _profiles(_friends.GetProfiles()),
-    _favorites("friends"), _filter(_friends.GetCount(),c_filterCount){
+FormFriends::FormFriends(QString a_id, SFriends a_friends, QWidget *parent): QWidget(parent), ui(new Ui::FormFriends), _id(a_id), _friends(a_friends), _profiles(_friends.getProfiles()),
+    _favorites("friends"), _filter(_friends.getCount(),c_filterCount){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     InitComponents();
@@ -32,10 +32,10 @@ void FormFriends::InitComponents(){
     Retranslate();
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //ui->TableWidgetFriends->setAlternatingRowColors(true);
-    ui->TableWidgetFriends->setRowCount(_friends.GetCount());
+    ui->TableWidgetFriends->setRowCount(_friends.getCount());
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID,true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon,33);
-    _profiles.Sort();
+    _profiles.sort();
     ui->ButtonFriendGoTo->setFixedSize(QSize(25,25));
     ui->ButtonFriendFavorite->setFixedSize(QSize(25,25));
     SetIcons();
@@ -128,26 +128,26 @@ void FormFriends::closeEvent(QCloseEvent*){
 void FormFriends::on_CheckBoxOpenProfile_stateChanged(int arg1){
     if(arg1==2){
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-            _filter.SetData(i,c_filterPublic,ui->TableWidgetFriends->item(i,c_tableColumnisPublic)->text().indexOf(tr("Публичный"))>-1);
+            _filter.setData(i,c_filterPublic,ui->TableWidgetFriends->item(i,c_tableColumnisPublic)->text().indexOf(tr("Публичный"))>-1);
         } else {
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-            _filter.SetData(i,c_filterPublic,true);
+            _filter.setData(i,c_filterPublic,true);
         }
     UpdateHiddenRows();
 }
 void FormFriends::on_ComboBoxStatus_activated(int a_index){
     if(a_index!=0){
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-            _filter.SetData(i,c_filterStatus,ui->ComboBoxStatus->currentText()==ui->TableWidgetFriends->item(i,c_tableColumnStatus)->text());
+            _filter.setData(i,c_filterStatus,ui->ComboBoxStatus->currentText()==ui->TableWidgetFriends->item(i,c_tableColumnStatus)->text());
         } else {
         for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-            _filter.SetData(i,c_filterStatus,true);
+            _filter.setData(i,c_filterStatus,true);
         }
     UpdateHiddenRows();
 }
 void FormFriends::on_LineEditName_textChanged(const QString & a_newText){
     for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-        _filter.SetData(i,c_filterName,ui->TableWidgetFriends->item(i,c_tableColumnName)->text().toLower().indexOf(a_newText.toLower())>-1);
+        _filter.setData(i,c_filterName,ui->TableWidgetFriends->item(i,c_tableColumnName)->text().toLower().indexOf(a_newText.toLower())>-1);
     UpdateHiddenRows();
 }
 void FormFriends::on_ButtonFind_clicked(){
@@ -155,16 +155,16 @@ void FormFriends::on_ButtonFind_clicked(){
 }
 void FormFriends::UpdateHiddenRows(){
     for (int i=0;i<ui->TableWidgetFriends->rowCount();i++)
-        ui->TableWidgetFriends->setRowHidden(i,!_filter.GetData(i));
+        ui->TableWidgetFriends->setRowHidden(i,!_filter.getData(i));
 }
 void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
     switch (arg1) {
         case 0:
             for (int i=0;i<ui->TableWidgetFriends->rowCount();
-                 _filter.SetData(i++,c_filterFavorites,true));
+                 _filter.setData(i++,c_filterFavorites,true));
             break;
         case 2:
-            QJsonArray values=_favorites.GetValues();
+            QJsonArray values=_favorites.getValues();
             for (int i=0;i<ui->TableWidgetFriends->rowCount();i++){
                 bool isFavorite=false;
                 for(QJsonValue value: values) {
@@ -173,7 +173,7 @@ void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1){
                         break;
                     }
                 }
-                _filter.SetData(i,c_filterFavorites,isFavorite);
+                _filter.setData(i,c_filterFavorites,isFavorite);
             }
             break;
     }
@@ -195,7 +195,7 @@ void FormFriends::ButtonFriendFavorite_Clicked(){
     newValue["id"]=_profiles[_currentFriendIndex]._steamID;
     newValue["name"]=_profiles[_currentFriendIndex]._personaName;
     newValue["added"]=_friends[_currentFriendIndex]._friend_since.toString("yyyy.MM.dd hh:mm:ss");
-    if(_favorites.AddValue(newValue,true)){
+    if(_favorites.addValue(newValue,true)){
         //Категория добавилась
     } else {
         //Категория уже есть (удалилась)

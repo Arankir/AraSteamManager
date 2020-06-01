@@ -14,16 +14,15 @@ public:
     explicit RequestImage(QLabel *label, QString url, QString save="", bool autosave=false, QObject *parent = nullptr);
     explicit RequestImage(QLabel *label, QString url, QObject *parent);
     RequestImage(QString url, QString save="", bool autosave=false, QObject *parent = nullptr);
-    QPixmap GetPixmap();
-    void SetIndex(int a_index) {_index=a_index;}
-    int GetIndex() {return _index;}
+    QPixmap getPixmap();
+    void setIndex(int aIndex);
+    int getIndex();
 
 signals:
     void s_loadComplete(RequestImage*);
 
 public slots:
-    void OnLoadToLabel(RequestData*);
-    void OnLoadPixmap(RequestData*);
+    void onLoad(RequestData*);
 
 private:
     QLabel *_label;
