@@ -47,6 +47,7 @@ void MainWindow::InitComponents(){
     if(_setting.getMainWindowMaximize())
         this->showMaximized();
     qApp->setStyleSheet(GetTheme());
+    setWindowIcon(QIcon("://"+_iconColor+"/update.png"));
 #define Connects {
     connect(ui->ButtonFindProfile,&QPushButton::clicked,this,&MainWindow::ButtonFindProfile_Clicked);
     connect(ui->ButtonExit,&QPushButton::clicked,this,&MainWindow::ButtonExit_Clicked);
@@ -96,12 +97,18 @@ QString MainWindow::GetTheme(){
                     "stop: 0.22 #387097, "
                     "stop: 0.88 #286087, "
                     "stop: 1.0 #185077); ";
-        backgroundGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+        backgroundGradient = "qradialgradient("
+                    "cx:0.5, cy:0.5, "
+                    "radius: 0.4, "
+                    "fx:0.4, fy:0.5, "
+                    "stop:0 #14384f, "
+                    "stop:0.5 #12324b, "
+                    "stop:1 #13273a); ";/*"qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
                     "stop: 0 #13273a, "
                     "stop: 0.12 #12324b, "
                     "stop: 0.5 #14384f, "
                     "stop: 0.83 #12324b, "
-                    "stop: 1.0 #13273a); ";
+                    "stop: 1.0 #13273a); ";*/
         backgroundGradientTitle = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #10131b, "
                     "stop: 0.5 #20232b, "
@@ -121,13 +128,22 @@ QString MainWindow::GetTheme(){
 #define gradientsend }
         qss =
 #define button {
+                "QPushButton[text]{ "
+                    "color: white; "
+                    "background: "+buttonGradient+
+                    "border: 1px solid #262626; "
+                    //"min-width: 25px; "
+                    "min-height: 20px; "
+                    "border-radius: 2px; "
+                    "padding: 0em 0em 0em 0.3em; "
+                "} "
                 "QPushButton{ "
                     "color: white; "
                     "background: "+buttonGradient+
-                    "border: 1px outset #262626; "
-                    "min-width: 25px; "
+                    "border: 1px solid #262626; "
+                    //"min-width: 25px; "
                     "min-height: 20px; "
-                    "border-radius: 4px; "
+                    "border-radius: 2px; "
                 "} "
                 "QPushButton:disabled{ "
                     "background-color: #48525a; "

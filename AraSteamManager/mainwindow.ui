@@ -78,6 +78,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="ButtonMinimize">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string notr="true"/>
          </property>
@@ -85,6 +90,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="ButtonMaximize">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string notr="true"/>
          </property>
@@ -92,6 +102,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="ButtonExit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string/>
          </property>
@@ -122,6 +137,11 @@
         </property>
         <item>
          <widget class="QPushButton" name="ButtonBack">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -129,6 +149,11 @@
         </item>
         <item>
          <widget class="QPushButton" name="ButtonNext">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -136,6 +161,11 @@
         </item>
         <item>
          <widget class="QPushButton" name="ButtonUpdate">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -143,6 +173,11 @@
         </item>
         <item>
          <widget class="QPushButton" name="ButtonGoToMyProfile">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -150,6 +185,11 @@
         </item>
         <item>
          <widget class="QPushButton" name="ButtonSettings">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -157,6 +197,11 @@
         </item>
         <item>
          <widget class="QLineEdit" name="LineEditIdProfile">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="placeholderText">
            <string>Введите Steamid</string>
           </property>
@@ -166,6 +211,11 @@
          <widget class="QPushButton" name="ButtonFindProfile">
           <property name="enabled">
            <bool>true</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string> Найти</string>
@@ -239,7 +289,7 @@
                <x>0</x>
                <y>0</y>
                <width>459</width>
-               <height>231</height>
+               <height>229</height>
               </rect>
              </property>
             </widget>

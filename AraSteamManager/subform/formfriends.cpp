@@ -66,8 +66,8 @@ void FormFriends::onFinish(){
 //                    });
             } else {
                 avatarFriend->setPixmap(QPixmap(path));
-                if(row==0)
-                    TableWidgetFriends_CellClicked(0,0);
+//                if(row==0)
+//                    TableWidgetFriends_CellClicked(0,0);
             }
         row++;
     }
@@ -223,7 +223,7 @@ void FormFriends::FriendToUi(){
         }
     }
     if(row>-1){
-        ui->LabelFriendIcon->setPixmap(*static_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row,c_tableColumnIcon))->pixmap());
+        ui->LabelFriendIcon->setPixmap(*static_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row,c_tableColumnIcon))->pixmap());//TODO Тут ошибка вызывающая краш
         int indexFriend=0;
         _currentFriendIndex=-1;
         for(auto &profile: _profiles){
