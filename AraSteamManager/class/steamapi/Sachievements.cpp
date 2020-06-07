@@ -80,7 +80,7 @@ const bool &SAchievement::operator<(const SAchievement &aAchievement){
 #define SAchievementsGlobalStart {
 SAchievementsGlobal::SAchievementsGlobal(QString aAppid, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _appid(aAppid) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::onLoad);
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+Settings::GetKey()+"&appid="+aAppid+"&l="+tr("russian")));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+Settings::getKey()+"&appid="+aAppid+"&l="+tr("russian")));
     if (!aParallel) {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
@@ -100,7 +100,7 @@ SAchievementsGlobal::~SAchievementsGlobal() {
 void SAchievementsGlobal::set(QString aAppid) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsGlobal::onLoad);
     _appid = std::move(aAppid);
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+Settings::GetKey()+"&appid="+aAppid+"&l="+tr("russian")));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key="+Settings::getKey()+"&appid="+aAppid+"&l="+tr("russian")));
 }
 
 void SAchievementsGlobal::set(QJsonDocument aAchievements) {
@@ -191,7 +191,7 @@ SAchievementGlobal &SAchievementsGlobal::operator[](const int &aIndex) {
 SAchievementsPercentage::SAchievementsPercentage(QString aAppid, bool aParallel, QObject *aParent): QObject(aParent),
 _manager(new QNetworkAccessManager()), _appid(aAppid) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::onLoad);
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+Settings::GetKey()+"&gameid="+aAppid));
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+Settings::getKey()+"&gameid="+aAppid));
     if (!aParallel) {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
@@ -215,7 +215,7 @@ SAchievementsPercentage::~SAchievementsPercentage() {
 void SAchievementsPercentage::set(QString aAppid) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPercentage::onLoad);
     _appid = std::move(aAppid);
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+Settings::GetKey()+"&gameid="+aAppid));
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key="+Settings::getKey()+"&gameid="+aAppid));
 }
 
 void SAchievementsPercentage::set(QJsonDocument aAchievements){
@@ -293,7 +293,7 @@ SAchievementPercentage &SAchievementsPercentage::operator[](const int &aIndex) {
 SAchievementsPlayer::SAchievementsPlayer(QString aAppid, QString aId, bool aParallel, QObject *aParent): QObject(aParent),
 _manager(new QNetworkAccessManager()), _id(aId), _appid(aAppid) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+Settings::GetKey()+"&appid="+aAppid+"&steamid="+aId));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+Settings::getKey()+"&appid="+aAppid+"&steamid="+aId));
     if (!aParallel) {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
@@ -318,7 +318,7 @@ void SAchievementsPlayer::set(QString aAppid, QString aId) {
     connect(_manager,&QNetworkAccessManager::finished,this,&SAchievementsPlayer::Load);
     _appid = std::move(aAppid);
     _id = std::move(aId);
-    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+Settings::GetKey()+"&appid="+aAppid+"&steamid="+aId));
+    _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key="+Settings::getKey()+"&appid="+aAppid+"&steamid="+aId));
 }
 
 void SAchievementsPlayer::set(QJsonDocument aAchievements) {

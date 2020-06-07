@@ -25,7 +25,7 @@ void SProfile::set(QJsonObject aProfile) {
 }
 
 void SProfile::loading(bool aParallel){
-    QString url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_steamID;
+    QString url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::getKey()+"&steamids="+_steamID;
     if (aParallel) {
         RequestData *request = new RequestData(url, true);
         connect(request, &RequestData::s_finished, this, &SProfile::loadURL);
@@ -257,7 +257,7 @@ void SProfiles::loadVanity(RequestData *aRequest) {
     disconnect(_request, &RequestData::s_finished, this, &SProfiles::loadVanity);
     connect(_request, &RequestData::s_finished, this, &SProfiles::loadURL);
     _id = QJsonDocument::fromJson(aRequest->getAnswer()).object().value("response").toObject().value("steamid").toString();
-    _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_id);
+    _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::getKey()+"&steamids="+_id);
 }
 
 void SProfiles::loadURL(RequestData *aRequest){
@@ -272,17 +272,17 @@ void SProfiles::load(bool aParallel, QueryType aType) {
     if (aParallel) {
         if (aType == QueryType::vanity) {
             connect(_request, &RequestData::s_finished, this, &SProfiles::loadVanity);
-            _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::GetKey()+"&vanityurl="+_id+"&url_type=1", true);
+            _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::getKey()+"&vanityurl="+_id+"&url_type=1", true);
         } else if(aType == QueryType::url) {
             connect(_request,&RequestData::s_finished,this,&SProfiles::loadURL);
-            _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_id, true);
+            _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::getKey()+"&steamids="+_id, true);
         }
     } else {
         if(aType == QueryType::vanity){
-            _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::GetKey()+"&vanityurl="+_id+"&url_type=1", false);
+            _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::getKey()+"&vanityurl="+_id+"&url_type=1", false);
             _id = QJsonDocument::fromJson(_request->getAnswer()).object().value("response").toObject().value("steamid").toString();
         }
-        _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_id, false);
+        _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::getKey()+"&steamids="+_id, false);
         set(QJsonDocument::fromJson(_request->getAnswer()).object().value("response").toObject().value("players").toArray());
     }
 }

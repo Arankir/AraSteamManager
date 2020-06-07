@@ -37,7 +37,6 @@ signals:
 
 private:
     QString _numberPlayers = "";
-    Settings _setting;
 };
 
 class SGames : public QObject {

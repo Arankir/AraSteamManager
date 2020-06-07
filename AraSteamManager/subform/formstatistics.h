@@ -35,7 +35,7 @@ public:
     ~FormStatistics();
 
 public slots:
-    void OnFinish(QVector<int> numof, QVector<QPair<QString,QString>> complete, QVector<QPair<QString,QString>> started, QVector<QPair<QString,QString>> notStarted,
+    void onFinish(QVector<int> numof, QVector<QPair<QString,QString>> complete, QVector<QPair<QString,QString>> started, QVector<QPair<QString,QString>> notStarted,
                                   QVector<double> averagePercent, int summcolumn, QVector<int> times, QVector<int> months, QVector<QPair<QString,int>> years);
 
 signals:
@@ -53,12 +53,12 @@ private:
     QVector<QPair<QString,QString>> _started;
     QVector<QPair<QString,QString>> _notStarted;
     QVector<double> _averagePercent;
-    QVector<int> _numof = {0,0,0};
-    int _summcolumn=0;
+    QVector<int> _numof = {0, 0, 0};
+    int _summcolumn = 0;
     SGames _games;
     QString _name;
-    QVector<int> _times ={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    QVector<int> _months ={0,0,0,0,0,0,0,0,0,0,0,0};
+    QVector<int> _times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    QVector<int> _months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     QVector<QPair<QString,int>> _years;
     double _totalAverage;
     DonutBreakdownChart *_donutBreakdown;

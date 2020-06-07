@@ -12,7 +12,7 @@ const QString SGame::getNumberPlayers(bool aHardReload){
         QNetworkAccessManager manager;
         QEventLoop loop;
         QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        QNetworkReply &replyNumberOfPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+Settings::GetKey()+"&appid="+QString::number(_appID))));
+        QNetworkReply &replyNumberOfPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+Settings::getKey()+"&appid="+QString::number(_appID))));
         loop.exec();
         double playersCount = QJsonDocument::fromJson(replyNumberOfPlayers.readAll()).object().value("response").toObject().value("player_count").toDouble();
         _numberPlayers = QString::number(playersCount);
@@ -55,7 +55,7 @@ SGames::~SGames() {
 void SGames::set(QString aId, bool aFreeGames, bool aGameInfo, bool aParallel) {
     _id = std::move(aId);
     QString request = QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=%1%2%3&format=json&steamid=%4").arg(
-                Settings::GetKey(),
+                Settings::getKey(),
                 aFreeGames ? "&include_played_free_games=1" : "",
                 aGameInfo ? "&include_appinfo=1" : "",
                 _id);

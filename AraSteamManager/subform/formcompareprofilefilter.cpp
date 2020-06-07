@@ -5,7 +5,7 @@ FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) : QWidget(pa
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     QString theme;
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             theme="white";
             break;
@@ -28,7 +28,7 @@ FormCompareProfileFilter::FormCompareProfileFilter(QString a_t1, QString a_t2, Q
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     QString theme;
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             theme="white";
             break;

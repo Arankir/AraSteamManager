@@ -4,7 +4,7 @@
 FormSettings::FormSettings(QWidget *parent) : QWidget(parent),ui(new Ui::FormSettings){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _theme="white";
             break;
@@ -20,7 +20,7 @@ FormSettings::~FormSettings(){
 }
 
 void FormSettings::InitComponents(){
-    switch (_setting.GetLanguage()) {
+    switch (_setting.getLanguage()) {
         case 1:
             ui->RadioButtonLanguageEnglish->setChecked(true);
             break;
@@ -30,7 +30,7 @@ void FormSettings::InitComponents(){
         default:
             break;
     }
-    switch (_setting.GetVisibleHiddenGames()) {
+    switch (_setting.getVisibleHiddenGames()) {
         case 0:
             ui->CheckBoxVisibleHiddenGames->setChecked(false);
             break;
@@ -40,7 +40,7 @@ void FormSettings::InitComponents(){
         default:
             break;
     }
-    switch (_setting.GetTheme()) {
+    switch (_setting.getTheme()) {
         case 1:
             ui->RadioButtonDarkTheme->setChecked(true);
             break;
@@ -50,8 +50,8 @@ void FormSettings::InitComponents(){
         default:
             break;
     }
-    ui->SliderProfileSize->setValue(_setting.GetProfileInfoSize());
-    ui->CheckBoxSaveImage->setChecked(_setting.GetSaveImages());
+    ui->SliderProfileSize->setValue(_setting.getProfileInfoSize());
+    ui->CheckBoxSaveImage->setChecked(_setting.getSaveImages());
 //    QPalette darkPalette;
 //    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
 //    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
@@ -147,7 +147,7 @@ void FormSettings::Retranslate(){
 }
 
 void FormSettings::RadioButtonLanguageEnglish_Clicked(){
-    _setting.SetLanguage(1);
+    _setting.setLanguage(1);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
         translator->load(":/AraSteamManager_en.qm");
@@ -157,7 +157,7 @@ void FormSettings::RadioButtonLanguageEnglish_Clicked(){
 }
 
 void FormSettings::RadioButtonLanguageRussian_Clicked(){
-    _setting.SetLanguage(5);
+    _setting.setLanguage(5);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
         translator->load(":/AraSteamManager_ru.qm");
@@ -167,18 +167,18 @@ void FormSettings::RadioButtonLanguageRussian_Clicked(){
 }
 
 void FormSettings::CheckBoxVisibleHiddenGames_StateChanged(int arg1){
-    _setting.SetVisibleHiddenGames(arg1/2);
+    _setting.setVisibleHiddenGames(arg1/2);
     emit s_updateSettings();
 }
 
 void FormSettings::RadioButtonDarkTheme_Clicked(){
-    _setting.SetTheme(1);
+    _setting.setTheme(1);
     emit s_updateSettings();
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::RadioButtonLightTheme_Clicked(){
-    _setting.SetTheme(2);
+    _setting.setTheme(2);
     emit s_updateSettings();
     QMessageBox::information(this,tr("Тема изменена"),tr("Для применения изменений перезапустите приложение!"));
 }
@@ -305,11 +305,11 @@ void FormSettings::HideClicked(){
 }
 
 void FormSettings::CheckBoxSaveImage_StateChanged(int arg1){
-    _setting.SetSaveimage(arg1==2);
+    _setting.setSaveimage(arg1==2);
     emit s_updateSettings();
 }
 
 void FormSettings::SlideProfileSize_ValueChanged(int a_value){
-    _setting.SetVisibleProfileInfo(a_value);
+    _setting.setVisibleProfileInfo(a_value);
     emit s_updateSettings();
 }

@@ -24,10 +24,10 @@ const bool &SFriend::operator<(const SFriend &aGame){
 #define SFriendsStart {
 SFriends::SFriends(QString aId, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _id(aId) {
     if (aParallel) {
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::GetKey()+"&steamid="+aId+"&relationship=friend"));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::getKey()+"&steamid="+aId+"&relationship=friend"));
         connect(_manager, &QNetworkAccessManager::finished, this, &SFriends::onLoad);
     } else {
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::GetKey()+"&steamid="+aId+"&relationship=friend"));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::getKey()+"&steamid="+aId+"&relationship=friend"));
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
         loop.exec();
@@ -51,10 +51,10 @@ SFriends::~SFriends() {
 void SFriends::set(QString aId, bool aParallel) {
     _id = std::move(aId);
     if (aParallel) {
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::GetKey()+"&steamid="+aId+"&relationship=friend"));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::getKey()+"&steamid="+_id+"&relationship=friend"));
         connect(_manager, &QNetworkAccessManager::finished, this, &SFriends::onLoad);
     } else {
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::GetKey()+"&steamid="+aId+"&relationship=friend"));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="+Settings::getKey()+"&steamid="+_id+"&relationship=friend"));
         QEventLoop loop;
         connect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
         loop.exec();
@@ -106,7 +106,7 @@ SProfiles SFriends::getProfiles() {
     QJsonArray profilesArray;
     SProfiles profiles;
     while(nowFriendsLoaded < _friends.size()) {
-        QString querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::GetKey()+"&steamids="+_friends[nowFriendsLoaded++]._steamID;
+        QString querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::getKey()+"&steamids="+_friends[nowFriendsLoaded++]._steamID;
         if(nowFriendsLoaded+99>_friends.size()){
             while(nowFriendsLoaded < _friends.size()){
                 querry += ", " + _friends[nowFriendsLoaded++]._steamID;

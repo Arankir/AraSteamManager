@@ -37,7 +37,7 @@ QT_MOC_LITERAL(0, 0, 14), // "FormStatistics"
 QT_MOC_LITERAL(1, 15, 19), // "s_return_to_profile"
 QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 8), // "QWidget*"
-QT_MOC_LITERAL(4, 45, 8), // "OnFinish"
+QT_MOC_LITERAL(4, 45, 8), // "onFinish"
 QT_MOC_LITERAL(5, 54, 12), // "QVector<int>"
 QT_MOC_LITERAL(6, 67, 5), // "numof"
 QT_MOC_LITERAL(7, 73, 32), // "QVector<QPair<QString,QString> >"
@@ -58,7 +58,7 @@ QT_MOC_LITERAL(21, 250, 11) // "Retranslate"
 
     },
     "FormStatistics\0s_return_to_profile\0\0"
-    "QWidget*\0OnFinish\0QVector<int>\0numof\0"
+    "QWidget*\0onFinish\0QVector<int>\0numof\0"
     "QVector<QPair<QString,QString> >\0"
     "complete\0started\0notStarted\0QVector<double>\0"
     "averagePercent\0summcolumn\0times\0months\0"
@@ -106,7 +106,7 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
-        case 1: _t->OnFinish((*reinterpret_cast< QVector<int>(*)>(_a[1])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[2])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[3])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[4])),(*reinterpret_cast< QVector<double>(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QVector<int>(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[9]))); break;
+        case 1: _t->onFinish((*reinterpret_cast< QVector<int>(*)>(_a[1])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[2])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[3])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[4])),(*reinterpret_cast< QVector<double>(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QVector<int>(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[9]))); break;
         case 2: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
         case 3: _t->Retranslate(); break;
         default: ;

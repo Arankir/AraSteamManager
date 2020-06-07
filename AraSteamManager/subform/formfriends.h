@@ -31,8 +31,8 @@ signals:
 
 public slots:
     void changeEvent(QEvent *event);
-    void ProgressLoading(int p,int row);
-    void OnFinish();
+    void progressLoading(int p,int row);
+    void onFinish();
 
 private slots:
     void InitComponents();

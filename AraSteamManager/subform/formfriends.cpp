@@ -47,15 +47,15 @@ void FormFriends::InitComponents(){
     Threading loadTable(this);
     loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
 }
-void FormFriends::ProgressLoading(int a_progress,int a_row){
+void FormFriends::progressLoading(int a_progress,int a_row){
     ui->TableWidgetFriends->setRowHeight(a_row,33);
 }
-void FormFriends::OnFinish(){
+void FormFriends::onFinish(){
     ui->TableWidgetFriends->resizeColumnsToContents();
     int row=0;
     for(auto &profile: _profiles){
         QString path = _setting._pathImagesProfiles+profile._avatar.mid(72,20)+".jpg";
-        QLabel *avatarFriend = new QLabel;
+        QLabel *avatarFriend = new QLabel(this);
         ui->TableWidgetFriends->setCellWidget(row,c_tableColumnIcon,avatarFriend);
         if(!QFile::exists(path)){//Подумать над row==0
                 avatarFriend->setBaseSize(QSize(32,32));
@@ -101,7 +101,7 @@ void FormFriends::Retranslate(){
 }
 
 void FormFriends::SetIcons(){
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _theme="white";
             break;

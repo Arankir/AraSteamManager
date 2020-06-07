@@ -3,11 +3,11 @@
 SBans::SBans(QString aId, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _id(aId) {
     if(aParallel){
         connect(_manager,&QNetworkAccessManager::finished,this,&SBans::onLoad);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::getKey()+"&steamids="+aId));
     } else {
         QEventLoop loop;
         connect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::getKey()+"&steamids="+aId));
         loop.exec();
         disconnect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
         set(QJsonDocument::fromJson(reply->readAll()));
@@ -38,11 +38,11 @@ void SBans::set(QString aId, bool aParallel){
     _id = std::move(aId);
     if (aParallel) {
         connect(_manager, &QNetworkAccessManager::finished, this, &SBans::onLoad);
-        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
+        _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::getKey()+"&steamids="+aId));
     } else {
         QEventLoop loop;
         connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::GetKey()+"&steamids="+aId));
+        QNetworkReply *reply = _manager->get(QNetworkRequest("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key="+Settings::getKey()+"&steamids="+aId));
         loop.exec();
         disconnect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
         set(QJsonDocument::fromJson(reply->readAll()));

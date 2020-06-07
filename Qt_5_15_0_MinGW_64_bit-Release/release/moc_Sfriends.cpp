@@ -93,7 +93,7 @@ int SFriend::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 struct qt_meta_stringdata_SFriends_t {
     QByteArrayData data[7];
-    char stringdata0[57];
+    char stringdata0[59];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -106,13 +106,13 @@ QT_MOC_LITERAL(0, 0, 8), // "SFriends"
 QT_MOC_LITERAL(1, 9, 10), // "s_finished"
 QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 9), // "SFriends*"
-QT_MOC_LITERAL(4, 31, 4), // "Load"
-QT_MOC_LITERAL(5, 36, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 51, 5) // "Reply"
+QT_MOC_LITERAL(4, 31, 6), // "onLoad"
+QT_MOC_LITERAL(5, 38, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(6, 53, 5) // "reply"
 
     },
-    "SFriends\0s_finished\0\0SFriends*\0Load\0"
-    "QNetworkReply*\0Reply"
+    "SFriends\0s_finished\0\0SFriends*\0onLoad\0"
+    "QNetworkReply*\0reply"
 };
 #undef QT_MOC_LITERAL
 
@@ -134,7 +134,7 @@ static const uint qt_meta_data_SFriends[] = {
        1,    0,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   33,    2, 0x0a /* Public */,
+       4,    1,   33,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -154,7 +154,7 @@ void SFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SFriends*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->Load((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 2: _t->onLoad((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

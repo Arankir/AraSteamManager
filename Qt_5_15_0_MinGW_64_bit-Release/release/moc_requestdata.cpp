@@ -37,13 +37,13 @@ QT_MOC_LITERAL(1, 12, 10), // "s_finished"
 QT_MOC_LITERAL(2, 23, 0), // ""
 QT_MOC_LITERAL(3, 24, 12), // "RequestData*"
 QT_MOC_LITERAL(4, 37, 4), // "imgr"
-QT_MOC_LITERAL(5, 42, 11), // "OnResultGet"
+QT_MOC_LITERAL(5, 42, 11), // "onResultGet"
 QT_MOC_LITERAL(6, 54, 14), // "QNetworkReply*"
 QT_MOC_LITERAL(7, 69, 5) // "reply"
 
     },
     "RequestData\0s_finished\0\0RequestData*\0"
-    "imgr\0OnResultGet\0QNetworkReply*\0reply"
+    "imgr\0onResultGet\0QNetworkReply*\0reply"
 };
 #undef QT_MOC_LITERAL
 
@@ -82,7 +82,7 @@ void RequestData::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 1: _t->OnResultGet((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 1: _t->onResultGet((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

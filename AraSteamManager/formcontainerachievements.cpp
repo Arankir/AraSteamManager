@@ -3,25 +3,25 @@
 
 FormContainerAchievements::FormContainerAchievements(QWidget *parent) : QWidget(parent),ui(new Ui::FormContainerAchievements){
     ui->setupUi(this);
-    _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
-    this->setGeometry(_setting.GetAchievementContainerGeometry());
-    if((_setting.GetAchievementContainerPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.GetAchievementContainerPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
-        this->move(_setting.GetAchievementContainerPercentPos().x(),_setting.GetAchievementContainerPercentPos().y()-31);
+    _setting.customGeometry(QGuiApplication::primaryScreen()->geometry());
+    this->setGeometry(_setting.getAchievementContainerGeometry());
+    if((_setting.getAchievementContainerPos().x()>QGuiApplication::primaryScreen()->geometry().width())||(_setting.getAchievementContainerPos().y()>QGuiApplication::primaryScreen()->geometry().height()))
+        this->move(_setting.getAchievementContainerPercentPos().x(),_setting.getAchievementContainerPercentPos().y()-31);
     else
-        this->move(_setting.GetAchievementContainerPos().x(),_setting.GetAchievementContainerPos().y()-31);
+        this->move(_setting.getAchievementContainerPos().x(),_setting.getAchievementContainerPos().y()-31);
 }
 
 FormContainerAchievements::~FormContainerAchievements(){
-    _setting.SetAchievementContainerParams(this->geometry());
-    _setting.SyncronizeSettings();
+    _setting.setAchievementContainerParams(this->geometry());
+    _setting.syncronizeSettings();
     emit s_formClose();
     delete ui;
 }
 
 void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer a_pl, QString a_ids, SGame a_game, int a_num){
     for (int i=0;i<ui->TabWidgetAchievements->count();i++) {
-        if((static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetGameAppID()==a_game._appID)&&(static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->GetProfile()==a_ids)){
-            static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->ButtonUpdate_Clicked();
+        if((static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->getGameAppId()==a_game._appID)&&(static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->getProfile()==a_ids)){
+            static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0))->buttonUpdate_Clicked();
             ui->TabWidgetAchievements->setCurrentIndex(i);
             return;
         }

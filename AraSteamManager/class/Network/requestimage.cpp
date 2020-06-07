@@ -24,7 +24,7 @@ QPixmap RequestImage::getPixmap() {
 }
 
 void RequestImage::setIndex(int aIndex) {
-    _index=aIndex;
+    _index = aIndex;
 }
 
 int RequestImage::getIndex() {
@@ -34,17 +34,19 @@ int RequestImage::getIndex() {
 void RequestImage::onLoad(RequestData *aImage) {
     QPixmap loadedImage;
     loadedImage.loadFromData(aImage->getAnswer());
-    if (_setting.GetSaveImages() == 1 && _autosave) {
-        Settings::CreateDir(_save);
+    if (_setting.getSaveImages() == 1 && _autosave) {
+        Settings::createDir(_save);
         loadedImage.save(_save);
     }
     if (_label != nullptr) {
-        _label->movie()->stop();
+        if (_label->movie()->state() == QMovie::MovieState::Running) {
+            _label->movie()->stop();
+        }
         _label->setPixmap(loadedImage);
         //emit s_loadComplete();
         this->deleteLater();
     } else {
-        _pixmap=loadedImage;
+        _pixmap = loadedImage;
         emit s_loadComplete(this);
     }
 }

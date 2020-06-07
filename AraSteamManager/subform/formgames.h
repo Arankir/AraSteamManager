@@ -36,8 +36,8 @@ signals:
     void s_showAchievements(SAchievementsPlayer achievements,SGame games);
 
 public slots:
-    void ProgressLoading(int,int);
-    void OnFinish();
+    void progressLoading(int,int);
+    void onFinish();
 
     void showHideSlideWidget(bool f_flag);
     void mouseMoveEvent(QMouseEvent *ev);

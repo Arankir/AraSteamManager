@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
     QTranslator lang;
     Settings Setting;
-    switch(Setting.GetLanguage()){
+    switch(Setting.getLanguage()){
     case 1:{
         lang.load(":/AraSteamManager_en.qm");
         a.installTranslator(&lang);

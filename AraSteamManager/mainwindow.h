@@ -57,7 +57,7 @@ public:
     QVector<FormAchievements*> _achievementsForms;
 
 public slots:
-    void ProgressLoading(int,int);
+    void progressLoading(int,int);
     void AddAchievements(SAchievementsPlayer achievements,SGame games);
     void RemoveAchievements(int index);
     void ContainerAchievementsClose();
@@ -82,11 +82,11 @@ private slots:
     void mousePressEvent(QMouseEvent*) override;
     void mouseMoveEvent(QMouseEvent*) override;
     //Forms
-    void ShowForm(bool &initForm, int widgetIndex, int widthWindow=300);
-    void ShowGames(int width);
-    void ShowFriends();
-    void ShowStatistic();
-    void ReturnFromForms();
+    void showForm(bool &initForm, int widgetIndex, int widthWindow=300);
+    void showGames(int width);
+    void showFriends();
+    void showStatistic();
+    void returnFromForms();
     //Systems
     void InitComponents();
     void SetIcons();

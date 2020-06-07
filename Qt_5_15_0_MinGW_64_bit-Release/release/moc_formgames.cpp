@@ -44,8 +44,8 @@ QT_MOC_LITERAL(8, 95, 19), // "SAchievementsPlayer"
 QT_MOC_LITERAL(9, 115, 12), // "achievements"
 QT_MOC_LITERAL(10, 128, 5), // "SGame"
 QT_MOC_LITERAL(11, 134, 5), // "games"
-QT_MOC_LITERAL(12, 140, 15), // "ProgressLoading"
-QT_MOC_LITERAL(13, 156, 8), // "OnFinish"
+QT_MOC_LITERAL(12, 140, 15), // "progressLoading"
+QT_MOC_LITERAL(13, 156, 8), // "onFinish"
 QT_MOC_LITERAL(14, 165, 19), // "showHideSlideWidget"
 QT_MOC_LITERAL(15, 185, 6), // "f_flag"
 QT_MOC_LITERAL(16, 192, 14), // "mouseMoveEvent"
@@ -79,8 +79,8 @@ QT_MOC_LITERAL(41, 559, 18) // "ButtonHide_Clicked"
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
     "s_achievementsLoaded\0s_finish\0width\0"
     "s_showAchievements\0SAchievementsPlayer\0"
-    "achievements\0SGame\0games\0ProgressLoading\0"
-    "OnFinish\0showHideSlideWidget\0f_flag\0"
+    "achievements\0SGame\0games\0progressLoading\0"
+    "onFinish\0showHideSlideWidget\0f_flag\0"
     "mouseMoveEvent\0QMouseEvent*\0ev\0"
     "slotShowHideSlide\0changeEvent\0QEvent*\0"
     "event\0InitComponents\0UpdateTheme\0"
@@ -177,8 +177,8 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1: _t->s_achievementsLoaded((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->s_finish((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->s_showAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< SGame(*)>(_a[2]))); break;
-        case 4: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 5: _t->OnFinish(); break;
+        case 4: _t->progressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 5: _t->onFinish(); break;
         case 6: _t->showHideSlideWidget((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 7: _t->mouseMoveEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
         case 8: _t->slotShowHideSlide(); break;

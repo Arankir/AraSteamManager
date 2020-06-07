@@ -9,8 +9,7 @@
 #include <QDebug>
 #include <QScreen>
 
-class Settings : public QObject
-{
+class Settings : public QObject {
     const QString c_language="Settings/Language";
     const QString c_theme="Settings/Theme";
     const QString c_saveImage="Settings/SaveImages";
@@ -38,40 +37,41 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = nullptr);
     explicit Settings(QRect geometry, QObject *parent = nullptr);
-    void CustomGeometry(QRect geometry);
-    void SetMyProfile(QString a_myProfiles) {return _settings->setValue(c_myProfile,a_myProfiles);}
-    void SetLanguage(int a_language) {return _settings->setValue(c_language,a_language);}
-    void SetTheme(int a_theme) {return _settings->setValue(c_theme,a_theme);}
-    void SetSaveimage(int a_saveImage) {return _settings->setValue(c_saveImage,a_saveImage);}
-    void SetVisibleHiddenGames(int a_visibleHiddenGames) {return _settings->setValue(c_visibleHiddenGames,a_visibleHiddenGames);}
-    void SetVisibleProfileInfo(int a_visibleProfileInfo) {return _settings->setValue(c_ProfileInfoSize,a_visibleProfileInfo);}
+    void customGeometry(QRect geometry);
+    void setMyProfile(QString a_myProfiles);
+    void setLanguage(int a_language);
+    void setTheme(int a_theme);
+    void setSaveimage(int a_saveImage);
+    void setVisibleHiddenGames(int a_visibleHiddenGames);
+    void setVisibleProfileInfo(int a_visibleProfileInfo);
 
-    void SetMainWindowParams(QRect geometry);
-    void SetMainWindowPos(QPoint pos);
-    void SetMainWindowGeometry(QSize size);
-    void SetMainWindowMaximize(bool maximize);
+    void setMainWindowParams(QRect geometry);
+    void setMainWindowPos(QPoint pos);
+    void setMainWindowGeometry(QSize size);
+    void setMainWindowMaximize(bool maximize);
 
-    void SetAchievementContainerParams(QRect geometry);
+    void setAchievementContainerParams(QRect geometry);
 
-    QString GetMyProfile() {return _settings->value(c_myProfile,"none").toString();}
-    int GetLanguage() {return _settings->value(c_language,1).toInt();}
-    int GetTheme() {return _settings->value(c_theme,1).toInt();}
-    int GetSaveImages() {return _settings->value(c_saveImage,0).toInt();}
-    int GetVisibleHiddenGames() {return _settings->value(c_visibleHiddenGames,0).toInt();}
-    int GetProfileInfoSize() {return _settings->value(c_ProfileInfoSize,2).toInt();}
+    QString getMyProfile();
+    int getLanguage();
+    int getTheme();
+    int getSaveImages();
+    int getVisibleHiddenGames();
+    int getProfileInfoSize();
 
-    QRect GetMainWindowGeometry() {return (QRect(0,0,_settings->value(c_mainWindowWidth,623).toInt(),_settings->value(c_mainWindowHeight,479).toInt()));}
-    QPoint GetMainWindowPos() {return (QPoint(_settings->value(c_mainWindowX,100).toInt(),_settings->value(c_mainWindowY,100).toInt()));}
-    QPoint GetMainWindowPercentPos() {return (QPoint(_settings->value(c_mainWindowPercentX,0).toInt(),_settings->value(c_mainWindowPercentY,0).toInt()));}
-    bool GetMainWindowMaximize() {return _settings->value(c_mainWindowMaximize,false).toBool();}
+    QRect getMainWindowGeometry();
+    QPoint getMainWindowPos();
+    QPoint getMainWindowPercentPos();
+    bool getMainWindowMaximize();
 
-    QRect GetAchievementContainerGeometry() {return (QRect(0,0,_settings->value(c_achievementContainerWidth,623).toInt(),_settings->value(c_achievementContainerHeight,479).toInt()));}
-    QPoint GetAchievementContainerPos() {return (QPoint(_settings->value(c_achievementContainerX,100).toInt(),_settings->value(c_achievementContainerY,100).toInt()));}
-    QPoint GetAchievementContainerPercentPos() {return (QPoint(_settings->value(c_achievementContainerPercentX,0).toInt(),_settings->value(c_achievementContainerPercentY,0).toInt()));}
+    QRect getAchievementContainerGeometry();
+    QPoint getAchievementContainerPos();
+    QPoint getAchievementContainerPercentPos();
 
-    static QString GetKey() {return "3826BF60403D15613B4B0381DAB7A7BD";}
-    static bool CreateDir(QString path);
-    void SyncronizeSettings();
+    static QString getKey();
+    static bool createDir(QString path);
+    void syncronizeSettings();
+
     const QString _pathImagesAchievements="images/achievements/";// /номер игры/url.jpg
     const QString _pathImagesIconGames="images/icon_games/";// /url.jpg
     const QString _pathImagesProfiles="images/profiles/";// /url.jpg
@@ -82,8 +82,6 @@ public:
     const QString c_defaultFont="C:/JosefinSans-Italic-VariableFont_wght.ttf"; // Шрифт
 
 signals:
-
-public slots:
 
 private:
     QSettings *_settings;

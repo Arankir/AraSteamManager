@@ -29,7 +29,7 @@ void SLevels::Update() {
 void SLevels::Load() {
     QEventLoop loop;
     connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-    QNetworkReply& reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+Settings::GetKey()+"&steamid="+_steamid));
+    QNetworkReply& reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+Settings::getKey()+"&steamid="+_steamid));
     loop.exec();
     Set(QJsonDocument::fromJson(reply.readAll()));
 }

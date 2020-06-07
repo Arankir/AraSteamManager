@@ -18,12 +18,12 @@ constexpr int c_formsSettings=5;
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), _games(this){
     ui->setupUi(this);
     InitComponents();
-    if(_setting.GetMyProfile()!="none")
-        GoToProfile(_setting.GetMyProfile(),QueryType::url);
+    if(_setting.getMyProfile()!="none")
+        GoToProfile(_setting.getMyProfile(),QueryType::url);
 }
 void MainWindow::InitComponents(){
     _containerAchievementsForm = new FormContainerAchievements();
-    _setting.CustomGeometry(QGuiApplication::primaryScreen()->geometry());
+    _setting.customGeometry(QGuiApplication::primaryScreen()->geometry());
         int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
         QString family = QFontDatabase::applicationFontFamilies(id).at(0);
         QFont font(family, 10);
@@ -42,9 +42,9 @@ void MainWindow::InitComponents(){
     ui->ButtonMinimize->setFixedSize(QSize(23,23));
     ui->ButtonMaximize->setFixedSize(QSize(23,23));
     ui->ButtonExit->setFixedSize(QSize(23,23));
-    this->setGeometry(_setting.GetMainWindowGeometry());
-    this->move(_setting.GetMainWindowPos().x(),_setting.GetMainWindowPos().y());
-    if(_setting.GetMainWindowMaximize())
+    this->setGeometry(_setting.getMainWindowGeometry());
+    this->move(_setting.getMainWindowPos().x(),_setting.getMainWindowPos().y());
+    if(_setting.getMainWindowMaximize())
         this->showMaximized();
     qApp->setStyleSheet(GetTheme());
 #define Connects {
@@ -73,18 +73,18 @@ QString MainWindow::GetTheme(){
     QString tableWidgetRowGradient;
     QString tableWidgetAlterRowGradient;
     QString qss;
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
     case 1:{
 #define gradients {
-        buttonGradient = "qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, "
-                    "stop: 0 #136186, "
-                    "stop: 0.5 #145c81, "
-                    "stop: 1.0 #136186); ";
-        buttonHoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+        buttonGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #377097, "
                     "stop: 0.22 #377097, "
                     "stop: 0.88 #286087, "
                     "stop: 1.0 #286087); ";
+        buttonHoverGradient = "qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, "
+                    "stop: 0 #136186, "
+                    "stop: 0.5 #145c81, "
+                    "stop: 1.0 #136186); ";
         progressbarGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #136186, "
                     "stop: 0.25 #237196, "
@@ -405,7 +405,7 @@ void MainWindow::SetIcons(){
     ui->ButtonBack->setIcon(QIcon("://"+_iconColor+"/left.png"));
     ui->ButtonNext->setIcon(QIcon("://"+_iconColor+"/right.png"));
 }
-void MainWindow::ProgressLoading(int a_progress,int){
+void MainWindow::progressLoading(int a_progress,int){
     ui->FormProgressBar->setValue(a_progress);
 }
 void MainWindow::AddAchievements(SAchievementsPlayer achievements, SGame games){
@@ -428,27 +428,27 @@ void MainWindow::ContainerAchievementsClose(){
     disconnect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&MainWindow::ContainerAchievementsClose);
 }
 void MainWindow::ReturnFromAchievements(int a_num){
-    disconnect(_achievementsForms[a_num],&FormAchievements::s_return_to_games,this,&MainWindow::ReturnFromAchievements);
+    disconnect(_achievementsForms[a_num],&FormAchievements::s_returnToGames,this,&MainWindow::ReturnFromAchievements);
     //delete achievementsforms[num];
 }
 
-void MainWindow::ShowForm(bool &a_initForm, int a_widgetIndex, int a_widthWindow){
+void MainWindow::showForm(bool &a_initForm, int a_widgetIndex, int a_widthWindow){
     a_initForm=true;
     ui->FormProgressBar->setVisible(false);
     _blockedLoad=false;
     ui->StackedWidgetForms->setCurrentIndex(a_widgetIndex);
     ResizeScrollArea(a_widthWindow);
 }
-void MainWindow::ShowGames(int a_width){
-    ShowForm(_initGames, c_formsGames, a_width);
+void MainWindow::showGames(int a_width){
+    showForm(_initGames, c_formsGames, a_width);
 }
-void MainWindow::ShowFriends(){
-    ShowForm(_initFriends, c_formsFriends);
+void MainWindow::showFriends(){
+    showForm(_initFriends, c_formsFriends);
 }
-void MainWindow::ShowStatistic(){
-    ShowForm(_initStatistics, c_formsStatistic);
+void MainWindow::showStatistic(){
+    showForm(_initStatistics, c_formsStatistic);
 }
-void MainWindow::ReturnFromForms(){
+void MainWindow::returnFromForms(){
     if(_initGames){
         disconnect(_gamesForm);
         delete _gamesForm;
@@ -487,12 +487,12 @@ void MainWindow::changeEvent(QEvent *a_event){
     }
 }
 void MainWindow::closeEvent(QCloseEvent *a_event){
-    _setting.SetMainWindowMaximize(this->isMaximized());
+    _setting.setMainWindowMaximize(this->isMaximized());
     if(this->isMaximized()){
         this->showNormal();
     }
-    _setting.SetMainWindowParams(this->frameGeometry());
-    _setting.SyncronizeSettings();
+    _setting.setMainWindowParams(this->frameGeometry());
+    _setting.syncronizeSettings();
     a_event->accept();
 }
 void MainWindow::mousePressEvent(QMouseEvent *a_event){
@@ -513,7 +513,7 @@ void MainWindow::mouseMoveEvent(QMouseEvent *a_event){
 }
 
 MainWindow::~MainWindow(){
-    ReturnFromForms();
+    returnFromForms();
     delete _containerAchievementsForm;
     delete ui;
 }
@@ -556,12 +556,12 @@ void MainWindow::ButtonFindProfile_Clicked(){
             profileid=profileid.remove("/profiles/").remove("/");
         GoToProfile(profileid,QueryType::url);
         }
-    ReturnFromForms();
+    returnFromForms();
 }
 void MainWindow::GoToProfile(QString a_id, QueryType a_type){
     SProfiles newProfile(a_id,false,a_type);
     if(newProfile.getStatus()==StatusValue::success){
-        ReturnFromForms();
+        returnFromForms();
         if(ui->StackedWidgetProfiles->currentIndex()!=ui->StackedWidgetProfiles->count()-1)
             while(ui->StackedWidgetProfiles->count()-1!=ui->StackedWidgetProfiles->currentIndex())
                 ui->StackedWidgetProfiles->removeWidget(ui->StackedWidgetProfiles->widget(ui->StackedWidgetProfiles->currentIndex()+1));
@@ -593,7 +593,7 @@ void MainWindow::ButtonBack_Clicked(){
     if(ui->StackedWidgetProfiles->currentIndex()>0){
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex()-1);
         UpdateMyProfile();
-        ReturnFromForms();
+        returnFromForms();
         UpdateButtonsBackNext();
     }
 }
@@ -601,7 +601,7 @@ void MainWindow::ButtonNext_Clicked(){
     if(ui->StackedWidgetProfiles->currentIndex()<ui->StackedWidgetProfiles->count()){
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex()+1);
         UpdateMyProfile();
-        ReturnFromForms();
+        returnFromForms();
         UpdateButtonsBackNext();
     }
 }
@@ -611,8 +611,8 @@ void MainWindow::GoToGames(QString a_profileSteamid, SGames a_games){
             _blockedLoad=true;
             ui->FormProgressBar->setMaximum(a_games.getCount());
             _gamesForm = new FormGames(a_profileSteamid,a_games,this);
-            connect(_gamesForm,&FormGames::s_finish,this,&MainWindow::ShowGames);
-            connect(_gamesForm,&FormGames::s_achievementsLoaded,this,&MainWindow::ProgressLoading);
+            connect(_gamesForm,&FormGames::s_finish,this,&MainWindow::showGames);
+            connect(_gamesForm,&FormGames::s_achievementsLoaded,this,&MainWindow::progressLoading);
             connect(_gamesForm,&FormGames::s_showAchievements,this,&MainWindow::AddAchievements);
             ui->ScrollAreaGames->setWidget(_gamesForm);
             ui->FormProgressBar->setVisible(true);
@@ -667,13 +667,13 @@ void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QStrin
 }
 
 void MainWindow::UpdateMyProfile(){
-    _setting.SyncronizeSettings();
-    ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID!=_setting.GetMyProfile());
+    _setting.syncronizeSettings();
+    ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID!=_setting.getMyProfile());
     emit s_updateSettings();
 }
 void MainWindow::UpdateSettings(){
-    _setting.SyncronizeSettings();
-    switch (_setting.GetProfileInfoSize()) {
+    _setting.syncronizeSettings();
+    switch (_setting.getProfileInfoSize()) {
     case 0:{
         ui->StackedWidgetProfiles->setFixedHeight(35);
         break;
@@ -705,8 +705,8 @@ void MainWindow::ButtonSettings_Clicked(){
     }
 }
 void MainWindow::ButtonGoToMyProfile_Clicked(){
-    if(_setting.GetMyProfile()!="none"){
-        GoToProfile(_setting.GetMyProfile(),QueryType::url);
+    if(_setting.getMyProfile()!="none"){
+        GoToProfile(_setting.getMyProfile(),QueryType::url);
     } else {
         QMessageBox::warning(this,tr("Ошибка"),tr("Не удаётся найти профиль!"));
     }

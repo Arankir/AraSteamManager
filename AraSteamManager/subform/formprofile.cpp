@@ -176,8 +176,8 @@ void FormProfile::ProfileToUi(SProfile a_profile){
 }
 
 void FormProfile::UpdateTheme(){
-    _setting.SyncronizeSettings();
-    switch(_setting.GetTheme()){
+    _setting.syncronizeSettings();
+    switch(_setting.getTheme()){
         case 1:
             _theme="white";
             break;
@@ -194,8 +194,8 @@ void FormProfile::UpdateTheme(){
 }
 
 void FormProfile::UpdateVisibleInfo(){
-    _setting.SyncronizeSettings();
-    _visibleInfo=_setting.GetProfileInfoSize();
+    _setting.syncronizeSettings();
+    _visibleInfo=_setting.getProfileInfoSize();
     switch (_visibleInfo) {
     case 0:{
         ui->FrameNormalInfo->setVisible(false);
@@ -219,7 +219,7 @@ void FormProfile::UpdateVisibleInfo(){
     }
     }
     Retranslate();
-    ui->ButtonSetProfile->setEnabled(_setting.GetMyProfile()!=_profile._steamID);
+    ui->ButtonSetProfile->setEnabled(_setting.getMyProfile()!=_profile._steamID);
 }
 
 void FormProfile::UpdateInfo(){
@@ -272,7 +272,7 @@ void FormProfile::Retranslate(){
 }
 
 void FormProfile::ButtonSetProfile_Clicked(){
-    _setting.SetMyProfile(_profile._steamID);
+    _setting.setMyProfile(_profile._steamID);
     ui->ButtonSetProfile->setEnabled(false);
     emit s_myProfileChange();
 }

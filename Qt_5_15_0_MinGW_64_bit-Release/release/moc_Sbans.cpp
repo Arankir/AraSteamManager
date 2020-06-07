@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SBans_t {
     QByteArrayData data[7];
-    char stringdata0[51];
+    char stringdata0[53];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,13 +36,13 @@ QT_MOC_LITERAL(0, 0, 5), // "SBans"
 QT_MOC_LITERAL(1, 6, 10), // "s_finished"
 QT_MOC_LITERAL(2, 17, 0), // ""
 QT_MOC_LITERAL(3, 18, 6), // "SBans*"
-QT_MOC_LITERAL(4, 25, 4), // "Load"
-QT_MOC_LITERAL(5, 30, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 45, 5) // "Reply"
+QT_MOC_LITERAL(4, 25, 6), // "onLoad"
+QT_MOC_LITERAL(5, 32, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(6, 47, 5) // "reply"
 
     },
-    "SBans\0s_finished\0\0SBans*\0Load\0"
-    "QNetworkReply*\0Reply"
+    "SBans\0s_finished\0\0SBans*\0onLoad\0"
+    "QNetworkReply*\0reply"
 };
 #undef QT_MOC_LITERAL
 
@@ -64,7 +64,7 @@ static const uint qt_meta_data_SBans[] = {
        1,    0,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   33,    2, 0x0a /* Public */,
+       4,    1,   33,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -84,7 +84,7 @@ void SBans::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SBans*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->Load((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 2: _t->onLoad((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

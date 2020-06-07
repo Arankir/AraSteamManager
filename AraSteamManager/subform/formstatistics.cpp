@@ -21,7 +21,7 @@ FormStatistics::FormStatistics(QString a_id, SGames a_games, QString a_name, QWi
     _donutBreakdown->setAnimationOptions(QChart::SeriesAnimations);
     _donutBreakdown->legend()->setAlignment(Qt::AlignRight);
     _donutBreakdown->setMargins(QMargins(1,1,1,1));
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _donutBreakdown->setTheme(QChart::ChartThemeDark);
             break;
@@ -88,7 +88,7 @@ void FormStatistics::Retranslate(){
             dynamic_cast<QBarCategoryAxis*>(_chartM->axes(Qt::Horizontal,_chartM->series().at(0)).at(0))->setCategories(titlesXM);
     _chartY->setTitle(tr("Достижения по годам"));
 }
-void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QString> > a_complete,
+void FormStatistics::onFinish(QVector<int> a_numof, QVector<QPair<QString,QString> > a_complete,
                               QVector<QPair<QString,QString>> a_started, QVector<QPair<QString,QString>> a_notStarted,
                               QVector<double> a_averagePercent, int a_summcolumn, QVector<int> a_times,
                               QVector<int> a_months, QVector<QPair<QString,int>> a_years){
@@ -141,7 +141,7 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
 
     _chartT->addAxis(axisXT, Qt::AlignBottom);
     _chartT->addAxis(axisYT, Qt::AlignLeft);
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _chartT->setTheme(QChart::ChartThemeDark);
             break;
@@ -179,7 +179,7 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
 
     _chartM->addAxis(axisXM, Qt::AlignBottom);
     _chartM->addAxis(axisYM, Qt::AlignLeft);
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _chartM->setTheme(QChart::ChartThemeDark);
             break;
@@ -215,7 +215,7 @@ void FormStatistics::OnFinish(QVector<int> a_numof, QVector<QPair<QString,QStrin
 
     _chartY->addAxis(axisXY, Qt::AlignBottom);
     _chartY->addAxis(axisYY, Qt::AlignLeft);
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _chartY->setTheme(QChart::ChartThemeDark);
             break;

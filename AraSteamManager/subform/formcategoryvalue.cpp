@@ -4,7 +4,7 @@
 FormCategoryValue::FormCategoryValue(int a_pos, QWidget *parent) : QWidget(parent), ui(new Ui::FormCategoryValue),_position(a_pos){
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _theme="white";
             break;

@@ -43,10 +43,10 @@ QT_MOC_LITERAL(7, 71, 4), // "type"
 QT_MOC_LITERAL(8, 76, 11), // "changeEvent"
 QT_MOC_LITERAL(9, 88, 7), // "QEvent*"
 QT_MOC_LITERAL(10, 96, 5), // "event"
-QT_MOC_LITERAL(11, 102, 15), // "ProgressLoading"
+QT_MOC_LITERAL(11, 102, 15), // "progressLoading"
 QT_MOC_LITERAL(12, 118, 1), // "p"
 QT_MOC_LITERAL(13, 120, 3), // "row"
-QT_MOC_LITERAL(14, 124, 8), // "OnFinish"
+QT_MOC_LITERAL(14, 124, 8), // "onFinish"
 QT_MOC_LITERAL(15, 133, 14), // "InitComponents"
 QT_MOC_LITERAL(16, 148, 10), // "closeEvent"
 QT_MOC_LITERAL(17, 159, 12), // "QCloseEvent*"
@@ -72,7 +72,7 @@ QT_MOC_LITERAL(34, 505, 10) // "FriendToUi"
     "FormFriends\0s_return_to_profile\0\0"
     "QWidget*\0s_go_to_profile\0id\0QueryType\0"
     "type\0changeEvent\0QEvent*\0event\0"
-    "ProgressLoading\0p\0row\0OnFinish\0"
+    "progressLoading\0p\0row\0onFinish\0"
     "InitComponents\0closeEvent\0QCloseEvent*\0"
     "Retranslate\0SetIcons\0ButtonFriendGoTo_Clicked\0"
     "ButtonFriendFavorite_Clicked\0"
@@ -159,8 +159,8 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 1: _t->s_go_to_profile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
         case 2: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 3: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 4: _t->OnFinish(); break;
+        case 3: _t->progressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 4: _t->onFinish(); break;
         case 5: _t->InitComponents(); break;
         case 6: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 7: _t->Retranslate(); break;

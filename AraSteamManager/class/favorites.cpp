@@ -18,7 +18,7 @@ void Favorites::setType(QString aType) {
 }
 
 void Favorites::init(QString aType) {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     if (!QFile::exists(_path)) {
         QJsonObject obj;
         obj["Type"] = aType;
@@ -48,7 +48,7 @@ bool Favorites::addValue(QJsonArray aNewValue, bool aDeleteIfExist) {
 }
 
 bool Favorites::addValue(QJsonObject aGame, QJsonObject aNewValue, bool aDeleteIfExist) {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
     QJsonArray arr;
@@ -95,7 +95,7 @@ bool Favorites::addValue(QJsonObject aGame, QJsonObject aNewValue, bool aDeleteI
 }
 
 bool Favorites::addValue(QJsonValue aNewValue, bool aDeleteIfExist, jsonType aType) {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
     QJsonArray arr;
@@ -134,7 +134,7 @@ void Favorites::removeValue(QJsonArray aNewValue) {
 }
 
 bool Favorites::removeValue(QJsonObject aGame, QJsonObject aNewValue) {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
     QJsonArray arr;
@@ -176,7 +176,7 @@ bool Favorites::removeValue(QJsonObject aGame, QJsonObject aNewValue) {
 }
 
 void Favorites::removeValue(QJsonValue aNewValue) {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
     QJsonArray arr;
@@ -191,7 +191,7 @@ void Favorites::removeValue(QJsonValue aNewValue) {
 }
 
 void Favorites::removeGame(QJsonObject aGame) {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
     QJsonArray arr;
@@ -206,7 +206,7 @@ void Favorites::removeGame(QJsonObject aGame) {
 }
 
 int Favorites::addGame(QJsonObject aGame) {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
     QJsonArray arr;
@@ -237,7 +237,7 @@ QJsonArray Favorites::getValues() {
 }
 
 void Favorites::save() {
-    Settings::CreateDir(_path);
+    Settings::createDir(_path);
     QFile file(_path);
     file.open(QFile::WriteOnly);
     QJsonDocument doc;

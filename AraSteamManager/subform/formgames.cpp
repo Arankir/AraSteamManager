@@ -57,7 +57,7 @@ void FormGames::InitComponents(){
     loadTable.AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
 }
 void FormGames::UpdateTheme(){
-    switch(_setting.GetTheme()){
+    switch(_setting.getTheme()){
         case 1:
             _theme="white";
             break;
@@ -74,13 +74,13 @@ void FormGames::SetIcons(){
     ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
     ui->ButtonChangeGroup->setIcon(QIcon("://"+_theme+"/change.png"));
 }
-void FormGames::ProgressLoading(int a_progress, int a_row){
+void FormGames::progressLoading(int a_progress, int a_row){
     ui->ProgressBarLoading->setValue(a_progress);
     //if(ui->ProgressBarLoading->value()==ui->ProgressBarLoading->maximum()-1){
         //ui->ProgressBarLoading->setVisible(false);
     //}
 }
-void FormGames::OnFinish(){
+void FormGames::onFinish(){
     ui->TableWidgetGames->setColumnHidden(c_tableColumnAppid,true);
     ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex,true);
     ui->TableWidgetGames->resizeColumnsToContents();
@@ -242,7 +242,7 @@ void FormGames::slotShowHideSlide(){
 
 #define Filter {
 void FormGames::LineEditGame_TextChanged(const QString arg){
-    if(_setting.GetVisibleHiddenGames()==1&&arg!=""){
+    if(_setting.getVisibleHiddenGames()==1&&arg!=""){
         for (int i=0;i<ui->TableWidgetGames->rowCount();i++) {
             ui->TableWidgetGames->setRowHidden(i,ui->TableWidgetGames->item(i,c_tableColumnName)->text().toLower().indexOf(arg.toLower(),0)==-1);
         }
@@ -337,7 +337,7 @@ void FormGames::ButtonHide_Clicked(){
          savePath=_setting._pathHide+"All.txt";
     } else return;
 
-    Settings::CreateDir(savePath);
+    Settings::createDir(savePath);
     QFile fileHide(savePath);
     fileHide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&fileHide);

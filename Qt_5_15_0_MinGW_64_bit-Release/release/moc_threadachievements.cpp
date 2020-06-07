@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadAchievements_t {
-    QByteArrayData data[25];
-    char stringdata0[271];
+    QByteArrayData data[22];
+    char stringdata0[225];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,36 +36,32 @@ QT_MOC_LITERAL(0, 0, 18), // "ThreadAchievements"
 QT_MOC_LITERAL(1, 19, 10), // "s_finished"
 QT_MOC_LITERAL(2, 30, 0), // ""
 QT_MOC_LITERAL(3, 31, 7), // "reached"
-QT_MOC_LITERAL(4, 39, 10), // "notreached"
+QT_MOC_LITERAL(4, 39, 10), // "notReached"
 QT_MOC_LITERAL(5, 50, 10), // "s_progress"
-QT_MOC_LITERAL(6, 61, 1), // "p"
-QT_MOC_LITERAL(7, 63, 3), // "row"
-QT_MOC_LITERAL(8, 67, 11), // "s_is_public"
-QT_MOC_LITERAL(9, 79, 8), // "a_public"
-QT_MOC_LITERAL(10, 88, 8), // "a_column"
-QT_MOC_LITERAL(11, 97, 4), // "Fill"
-QT_MOC_LITERAL(12, 102, 3), // "Set"
-QT_MOC_LITERAL(13, 106, 13), // "SAchievements"
-QT_MOC_LITERAL(14, 120, 12), // "achievements"
-QT_MOC_LITERAL(15, 133, 7), // "QLabel*"
-QT_MOC_LITERAL(16, 141, 17), // "LabelTotalPersent"
-QT_MOC_LITERAL(17, 159, 13), // "QTableWidget*"
-QT_MOC_LITERAL(18, 173, 23), // "TableWidgetAchievements"
-QT_MOC_LITERAL(19, 197, 24), // "LabelTotalPersentCompare"
-QT_MOC_LITERAL(20, 222, 9), // "AddFriend"
-QT_MOC_LITERAL(21, 232, 9), // "SetFriend"
-QT_MOC_LITERAL(22, 242, 11), // "achievement"
-QT_MOC_LITERAL(23, 254, 3), // "col"
-QT_MOC_LITERAL(24, 258, 12) // "AcolumnAppid"
+QT_MOC_LITERAL(6, 61, 8), // "progress"
+QT_MOC_LITERAL(7, 70, 3), // "row"
+QT_MOC_LITERAL(8, 74, 11), // "s_is_public"
+QT_MOC_LITERAL(9, 86, 7), // "aPublic"
+QT_MOC_LITERAL(10, 94, 7), // "aColumn"
+QT_MOC_LITERAL(11, 102, 4), // "fill"
+QT_MOC_LITERAL(12, 107, 3), // "set"
+QT_MOC_LITERAL(13, 111, 13), // "SAchievements"
+QT_MOC_LITERAL(14, 125, 12), // "achievements"
+QT_MOC_LITERAL(15, 138, 13), // "QTableWidget*"
+QT_MOC_LITERAL(16, 152, 23), // "TableWidgetAchievements"
+QT_MOC_LITERAL(17, 176, 9), // "addFriend"
+QT_MOC_LITERAL(18, 186, 9), // "setFriend"
+QT_MOC_LITERAL(19, 196, 11), // "achievement"
+QT_MOC_LITERAL(20, 208, 3), // "col"
+QT_MOC_LITERAL(21, 212, 12) // "AcolumnAppid"
 
     },
     "ThreadAchievements\0s_finished\0\0reached\0"
-    "notreached\0s_progress\0p\0row\0s_is_public\0"
-    "a_public\0a_column\0Fill\0Set\0SAchievements\0"
-    "achievements\0QLabel*\0LabelTotalPersent\0"
-    "QTableWidget*\0TableWidgetAchievements\0"
-    "LabelTotalPersentCompare\0AddFriend\0"
-    "SetFriend\0achievement\0col\0AcolumnAppid"
+    "notReached\0s_progress\0progress\0row\0"
+    "s_is_public\0aPublic\0aColumn\0fill\0set\0"
+    "SAchievements\0achievements\0QTableWidget*\0"
+    "TableWidgetAchievements\0addFriend\0"
+    "setFriend\0achievement\0col\0AcolumnAppid"
 };
 #undef QT_MOC_LITERAL
 
@@ -89,9 +85,9 @@ static const uint qt_meta_data_ThreadAchievements[] = {
 
  // slots: name, argc, parameters, tag, flags
       11,    0,   64,    2, 0x0a /* Public */,
-      12,    4,   65,    2, 0x0a /* Public */,
-      20,    0,   74,    2, 0x0a /* Public */,
-      21,    4,   75,    2, 0x0a /* Public */,
+      12,    2,   65,    2, 0x0a /* Public */,
+      17,    0,   70,    2, 0x0a /* Public */,
+      18,    4,   71,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -100,9 +96,9 @@ static const uint qt_meta_data_ThreadAchievements[] = {
 
  // slots: parameters
     QMetaType::Int,
-    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 15, 0x80000000 | 17, 0x80000000 | 15,   14,   16,   18,   19,
+    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 15,   14,   16,
     QMetaType::Bool,
-    QMetaType::Void, 0x80000000 | 17, 0x80000000 | 13, QMetaType::Int, QMetaType::Int,   18,   22,   23,   24,
+    QMetaType::Void, 0x80000000 | 15, 0x80000000 | 13, QMetaType::Int, QMetaType::Int,   16,   19,   20,   21,
 
        0        // eod
 };
@@ -116,12 +112,12 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 0: _t->s_finished((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->s_is_public((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 3: { int _r = _t->Fill();
+        case 3: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->Set((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QLabel*(*)>(_a[2])),(*reinterpret_cast< QTableWidget*(*)>(_a[3])),(*reinterpret_cast< QLabel*(*)>(_a[4]))); break;
-        case 5: { bool _r = _t->AddFriend();
+        case 4: _t->set((*reinterpret_cast< SAchievements(*)>(_a[1])),(*reinterpret_cast< QTableWidget*(*)>(_a[2]))); break;
+        case 5: { bool _r = _t->addFriend();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 6: _t->SetFriend((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< SAchievements(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
+        case 6: _t->setFriend((*reinterpret_cast< QTableWidget*(*)>(_a[1])),(*reinterpret_cast< SAchievements(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -130,10 +126,7 @@ void ThreadAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 4:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 3:
             case 1:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QLabel* >(); break;
-            case 2:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QTableWidget* >(); break;
             }
             break;
