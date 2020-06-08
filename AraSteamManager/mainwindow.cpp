@@ -78,6 +78,16 @@ QString MainWindow::GetTheme(){
 #define gradients {
 //        qconicalgradient(cx:0.5, cy:0.5, angle:30,
 //                        stop:0 white, stop:1 #00FF00)
+
+//        QpushButton{
+//                  qproperty-icon:url(:/images/start.png);
+//        }
+
+//        QPushButton:hover
+//        {
+//                  qproperty-icon:url(:/images/start_hov.png);
+//        }
+
         buttonGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #377097, "
                     "stop: 0.22 #377097, "
