@@ -126,3 +126,5 @@ RESOURCES += \
     languages/lang.qrc
 
 DISTFILES +=
+
+RC_ICONS = SAS.ico

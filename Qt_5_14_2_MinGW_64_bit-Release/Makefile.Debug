@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++11 -Wall -Wextra -Wextra
 INCPATH       = -I..\AraSteamManager -I. -ID:\Qt\5.14.2\mingw73_64\include -ID:\Qt\5.14.2\mingw73_64\include\QtCharts -ID:\Qt\5.14.2\mingw73_64\include\QtWidgets -ID:\Qt\5.14.2\mingw73_64\include\QtGui -ID:\Qt\5.14.2\mingw73_64\include\QtANGLE -ID:\Qt\5.14.2\mingw73_64\include\QtNetwork -ID:\Qt\5.14.2\mingw73_64\include\QtCore -Idebug -I. -I/include -ID:\Qt\5.14.2\mingw73_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        D:\Qt\5.14.2\mingw73_64\lib\libQt5Charts.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Widgets.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Gui.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Network.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Core.a  -lmingw32 D:\Qt\5.14.2\mingw73_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+LIBS        =        D:\Qt\5.14.2\mingw73_64\lib\libQt5Charts.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Widgets.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Gui.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Network.a D:\Qt\5.14.2\mingw73_64\lib\libQt5Core.a debug\AraSteamManager_resource_res.o  -lmingw32 D:\Qt\5.14.2\mingw73_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
 QMAKE         = D:\Qt\5.14.2\mingw73_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\AraSteamManager_resource_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -271,8 +271,11 @@ DESTDIR_TARGET = debug\AraSteamManager.exe
 first: all
 all: Makefile.Debug  debug/AraSteamManager.exe
 
-debug/AraSteamManager.exe: D:/Qt/5.14.2/mingw73_64/lib/libQt5Charts.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Widgets.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Gui.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Network.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Core.a D:/Qt/5.14.2/mingw73_64/lib/libqtmain.a ui_formcontainerachievements.h ui_mainwindow.h ui_formachievements.h ui_formcategoryvalue.h ui_formcompareprofilefilter.h ui_formfavorites.h ui_formfriends.h ui_formgames.h ui_formprofile.h ui_formsettings.h ui_formstatistics.h ui_formtablesheaders.h $(OBJECTS) 
+debug/AraSteamManager.exe: D:/Qt/5.14.2/mingw73_64/lib/libQt5Charts.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Widgets.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Gui.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Network.a D:/Qt/5.14.2/mingw73_64/lib/libQt5Core.a D:/Qt/5.14.2/mingw73_64/lib/libqtmain.a ui_formcontainerachievements.h ui_mainwindow.h ui_formachievements.h ui_formcategoryvalue.h ui_formcompareprofilefilter.h ui_formfavorites.h ui_formfriends.h ui_formgames.h ui_formprofile.h ui_formsettings.h ui_formstatistics.h ui_formtablesheaders.h $(OBJECTS) debug/AraSteamManager_resource_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) @object_script.AraSteamManager.Debug  $(LIBS)
+
+debug/AraSteamManager_resource_res.o: AraSteamManager_resource.rc
+	windres -i AraSteamManager_resource.rc -o debug\AraSteamManager_resource_res.o --include-dir=. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\AraSteamManager\AraSteamManager.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
@@ -284,6 +287,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\requestdata.o debug\requestimage.o debug\donutbreakdownchart.o debug\mainslice.o debug\threadachievements.o debug\threadfriends.o debug\threadgames.o debug\threading.o debug\threadstatistics.o debug\categoriesgame.o debug\favorites.o debug\filter.o debug\settings.o debug\Sachievements.o debug\Sbans.o debug\Sfriends.o debug\Sgames.o debug\Slevels.o debug\Sprofile.o debug\formcontainerachievements.o debug\frameless.o debug\main.o debug\mainwindow.o debug\formachievements.o debug\formcategoryvalue.o debug\formcompareprofilefilter.o debug\formfavorites.o debug\formfriends.o debug\formgames.o debug\formprofile.o debug\formsettings.o debug\formstatistics.o debug\formtablesheaders.o debug\qbuttonwithdata.o debug\qcheckboxwithdata.o debug\qcomboboxwithdata.o debug\qradiobuttonwithdata.o debug\qrc_resimg.o debug\qrc_lang.o debug\moc_requestdata.o debug\moc_requestimage.o debug\moc_threadachievements.o debug\moc_threadfriends.o debug\moc_threadgames.o debug\moc_threading.o debug\moc_threadstatistics.o debug\moc_categoriesgame.o debug\moc_favorites.o debug\moc_filter.o debug\moc_settings.o debug\moc_Sachievements.o debug\moc_Sbans.o debug\moc_Sfriends.o debug\moc_Sgames.o debug\moc_Slevels.o debug\moc_Sprofile.o debug\moc_formcontainerachievements.o debug\moc_frameless.o debug\moc_mainwindow.o debug\moc_formachievements.o debug\moc_formcategoryvalue.o debug\moc_formcompareprofilefilter.o debug\moc_formfavorites.o debug\moc_formfriends.o debug\moc_formgames.o debug\moc_formprofile.o debug\moc_formsettings.o debug\moc_formstatistics.o debug\moc_formtablesheaders.o
+	-$(DEL_FILE) debug\AraSteamManager_resource_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash

@@ -15,7 +15,7 @@ SFriend &SFriend::operator=(const SFriend &) {
     return *this;
 }
 
-const bool &SFriend::operator<(const SFriend &aGame){
+const bool &SFriend::operator<(const SFriend &aGame) {
     static const bool b = _steamID.toLower() < aGame._steamID.toLower();
     //qDebug()<<_game.value("name").toString().toLower()<<a_game._game.value("name").toString().toLower();
     return b;

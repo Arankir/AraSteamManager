@@ -47,7 +47,6 @@ void MainWindow::InitComponents(){
     if(_setting.getMainWindowMaximize())
         this->showMaximized();
     qApp->setStyleSheet(GetTheme());
-    setWindowIcon(QIcon("://"+_iconColor+"/update.png"));
 #define Connects {
     connect(ui->ButtonFindProfile,&QPushButton::clicked,this,&MainWindow::ButtonFindProfile_Clicked);
     connect(ui->ButtonExit,&QPushButton::clicked,this,&MainWindow::ButtonExit_Clicked);
@@ -77,6 +76,8 @@ QString MainWindow::GetTheme(){
     switch(_setting.getTheme()){
     case 1:{
 #define gradients {
+//        qconicalgradient(cx:0.5, cy:0.5, angle:30,
+//                        stop:0 white, stop:1 #00FF00)
         buttonGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #377097, "
                     "stop: 0.22 #377097, "
