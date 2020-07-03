@@ -1,0 +1,153 @@
+{
+    "Categories": [
+        {
+            "IsNoValues": 0,
+            "NoValues": [
+            ],
+            "Title": "Character",
+            "Values": [
+                {
+                    "Achievements": [
+                        "Moms_Knife",
+                        "_d20",
+                        "_head",
+                        "pisaac"
+                    ],
+                    "Title": "Isaac"
+                },
+                {
+                    "Achievements": [
+                        "Maggy",
+                        "The_Cross",
+                        "The_Guardian_Angel",
+                        "_cross",
+                        "_faith",
+                        "pmaggy"
+                    ],
+                    "Title": "Magdalene"
+                },
+                {
+                    "Achievements": [
+                        "Cain",
+                        "The_Bag",
+                        "bombs",
+                        "_abel",
+                        "_eye",
+                        "pcain"
+                    ],
+                    "Title": "Cain"
+                },
+                {
+                    "Achievements": [
+                        "The_Robo-Baby",
+                        "The_Monster_Manual",
+                        "_horn",
+                        "_tongue",
+                        "pjudas"
+                    ],
+                    "Title": "Judas"
+                },
+                {
+                    "Achievements": [
+                        "The_Razor_Blade",
+                        "The_Demon_Baby",
+                        "_knife2",
+                        "_birdfoot",
+                        "peve"
+                    ],
+                    "Title": "Eve"
+                },
+                {
+                    "Achievements": [
+                        "_bloodlust",
+                        "_bloodpenny",
+                        "_bloodrights",
+                        "_lock",
+                        "psam"
+                    ],
+                    "Title": "Samson"
+                },
+                {
+                    "Achievements": [
+                        "Baby",
+                        "The_D6",
+                        "_rainbow",
+                        "Forget_Me_Now",
+                        "_soul",
+                        "pblue"
+                    ],
+                    "Title": "???"
+                },
+                {
+                    "Achievements": [
+                        "The_Spider",
+                        "The_Rock",
+                        "The_Bean",
+                        "Monstros_Tooth",
+                        "Eve",
+                        "The_Spelunker",
+                        "The_Parasite",
+                        "Mr_Mega",
+                        "Lil_Chubby",
+                        "Book_of_Sin",
+                        "Killed_Mom",
+                        "a_gift_from_krampus",
+                        "Steven",
+                        "Common_Cold",
+                        "Pill_Bottle",
+                        "Lokis_Horns",
+                        "Judas",
+                        "Chad",
+                        "Moms_Contact",
+                        "The_Gamekid",
+                        "The_Shears",
+                        "The_Noose",
+                        "Basement_Boy",
+                        "The_Necronomicon",
+                        "The_Nail",
+                        "_samson",
+                        "The_Quarter",
+                        "_hand",
+                        "The_Fetus",
+                        "Terrible",
+                        "The_Wafer",
+                        "The_Halo",
+                        "Money_Power",
+                        "It_Lives",
+                        "Gish",
+                        "_megafetus",
+                        "The_Bandage",
+                        "_hairball",
+                        "_toe",
+                        "_superfan",
+                        "_candle",
+                        "_spiderbutt",
+                        "_burntpenny",
+                        "Cave_Boy",
+                        "_tail",
+                        "_polaroid",
+                        "_dadskey",
+                        "_fish",
+                        "Womb_Boy",
+                        "_counterfeit",
+                        "Depths_Boy",
+                        "_eggsack",
+                        "Golden_God",
+                        "_platinum",
+                        "emom",
+                        "eheart",
+                        "elife",
+                        "eisaac",
+                        "hardgame",
+                        "esatan",
+                        "ppers",
+                        "egod"
+                    ],
+                    "Title": "Not"
+                }
+            ]
+        }
+    ],
+    "Game": null,
+    "GameID": null
+}

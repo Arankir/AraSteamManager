@@ -340,7 +340,7 @@ public:
         ScrollAreaSettings->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 98, 28));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 459, 229));
         ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
 
         gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);
@@ -363,7 +363,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        StackedWidgetForms->setCurrentIndex(0);
+        StackedWidgetForms->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

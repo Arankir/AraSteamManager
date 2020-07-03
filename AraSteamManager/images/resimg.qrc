@@ -76,7 +76,7 @@
         <file>white/up.png</file>
         <file>white/update.png</file>
         <file>white/widgets/checkbox_checked.png</file>
-        <file>white/widgets/checkbox_uncheked.png</file>
+        <file>white/widgets/checkbox_unchecked.png</file>
         <file>white/widgets/radiobutton_checked.png</file>
         <file>white/widgets/radiobutton_unchecked.png</file>
         <file>black/set_home.png</file>
@@ -98,5 +98,13 @@
         <file>white/maximize_window.png</file>
         <file>white/minimize_window.png</file>
         <file>white/restore_window.png</file>
+        <file>white/widgets/checkbox_checked_hover.png</file>
+        <file>white/widgets/checkbox_checked_press.png</file>
+        <file>white/widgets/checkbox_unchecked_hover.png</file>
+        <file>white/widgets/checkbox_unchecked_press.png</file>
+        <file>white/widgets/radiobutton_checked_hover.png</file>
+        <file>white/widgets/radiobutton_checked_press.png</file>
+        <file>white/widgets/radiobutton_unchecked_hover.png</file>
+        <file>white/widgets/radiobutton_unchecked_press.png</file>
     </qresource>
 </RCC>

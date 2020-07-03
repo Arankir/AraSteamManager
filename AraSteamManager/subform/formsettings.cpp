@@ -141,8 +141,11 @@ void FormSettings::changeEvent(QEvent *event){
 void FormSettings::Retranslate(){
     ui->retranslateUi(this);
 
-    QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
-    allHidden->setText(tr("Все профили"));
+//TODO тут крашится без комментариев
+    if (this->findChild<QRadioButtonWithData*>("HiddenGames0") != 0) {
+        QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
+        allHidden->setText(tr("Все профили"));
+    }
     ui->labelIcons8->setText("<html><head/><body><p>Иконки для приложения были предоставлены сайтом <img height=15 style=\"vertical-align: top\" src=\"://"+_theme+"/link.png\"><a href=https://icons8.ru/icons><span style=\" text-decoration: underline; color:#2d7fc8;\"> https://icons8.ru/icons</span></a></p></body></html>");
 }
 

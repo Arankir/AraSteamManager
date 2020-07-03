@@ -35,7 +35,7 @@ static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 16), // "s_updateSettings"
 QT_MOC_LITERAL(2, 28, 0), // ""
-QT_MOC_LITERAL(3, 29, 15), // "ProgressLoading"
+QT_MOC_LITERAL(3, 29, 15), // "progressLoading"
 QT_MOC_LITERAL(4, 45, 15), // "AddAchievements"
 QT_MOC_LITERAL(5, 61, 19), // "SAchievementsPlayer"
 QT_MOC_LITERAL(6, 81, 12), // "achievements"
@@ -66,16 +66,16 @@ QT_MOC_LITERAL(30, 374, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(31, 387, 15), // "mousePressEvent"
 QT_MOC_LITERAL(32, 403, 12), // "QMouseEvent*"
 QT_MOC_LITERAL(33, 416, 14), // "mouseMoveEvent"
-QT_MOC_LITERAL(34, 431, 8), // "ShowForm"
+QT_MOC_LITERAL(34, 431, 8), // "showForm"
 QT_MOC_LITERAL(35, 440, 5), // "bool&"
 QT_MOC_LITERAL(36, 446, 8), // "initForm"
 QT_MOC_LITERAL(37, 455, 11), // "widgetIndex"
 QT_MOC_LITERAL(38, 467, 11), // "widthWindow"
-QT_MOC_LITERAL(39, 479, 9), // "ShowGames"
+QT_MOC_LITERAL(39, 479, 9), // "showGames"
 QT_MOC_LITERAL(40, 489, 5), // "width"
-QT_MOC_LITERAL(41, 495, 11), // "ShowFriends"
-QT_MOC_LITERAL(42, 507, 13), // "ShowStatistic"
-QT_MOC_LITERAL(43, 521, 15), // "ReturnFromForms"
+QT_MOC_LITERAL(41, 495, 11), // "showFriends"
+QT_MOC_LITERAL(42, 507, 13), // "showStatistic"
+QT_MOC_LITERAL(43, 521, 15), // "returnFromForms"
 QT_MOC_LITERAL(44, 537, 14), // "InitComponents"
 QT_MOC_LITERAL(45, 552, 8), // "SetIcons"
 QT_MOC_LITERAL(46, 561, 16), // "ResizeScrollArea"
@@ -96,7 +96,7 @@ QT_MOC_LITERAL(60, 810, 20) // "ButtonUpdate_Clicked"
 
     },
     "MainWindow\0s_updateSettings\0\0"
-    "ProgressLoading\0AddAchievements\0"
+    "progressLoading\0AddAchievements\0"
     "SAchievementsPlayer\0achievements\0SGame\0"
     "games\0RemoveAchievements\0index\0"
     "ContainerAchievementsClose\0"
@@ -107,10 +107,10 @@ QT_MOC_LITERAL(60, 810, 20) // "ButtonUpdate_Clicked"
     "UpdateSettings\0keyPressEvent\0QKeyEvent*\0"
     "changeEvent\0QEvent*\0closeEvent\0"
     "QCloseEvent*\0mousePressEvent\0QMouseEvent*\0"
-    "mouseMoveEvent\0ShowForm\0bool&\0initForm\0"
-    "widgetIndex\0widthWindow\0ShowGames\0"
-    "width\0ShowFriends\0ShowStatistic\0"
-    "ReturnFromForms\0InitComponents\0SetIcons\0"
+    "mouseMoveEvent\0showForm\0bool&\0initForm\0"
+    "widgetIndex\0widthWindow\0showGames\0"
+    "width\0showFriends\0showStatistic\0"
+    "returnFromForms\0InitComponents\0SetIcons\0"
     "ResizeScrollArea\0UpdateButtonsBackNext\0"
     "ButtonMaximize_Clicked\0ButtonMinimize_Clicked\0"
     "ButtonFindProfile_Clicked\0GoToProfile\0"
@@ -228,7 +228,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_updateSettings(); break;
-        case 1: _t->ProgressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 1: _t->progressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->AddAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< SGame(*)>(_a[2]))); break;
         case 3: _t->RemoveAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->ContainerAchievementsClose(); break;
@@ -244,12 +244,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 14: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 15: _t->mousePressEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
         case 16: _t->mouseMoveEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
-        case 17: _t->ShowForm((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
-        case 18: _t->ShowForm((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 19: _t->ShowGames((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 20: _t->ShowFriends(); break;
-        case 21: _t->ShowStatistic(); break;
-        case 22: _t->ReturnFromForms(); break;
+        case 17: _t->showForm((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 18: _t->showForm((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 19: _t->showGames((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 20: _t->showFriends(); break;
+        case 21: _t->showStatistic(); break;
+        case 22: _t->returnFromForms(); break;
         case 23: _t->InitComponents(); break;
         case 24: _t->SetIcons(); break;
         case 25: _t->ResizeScrollArea((*reinterpret_cast< int(*)>(_a[1]))); break;

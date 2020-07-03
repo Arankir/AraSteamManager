@@ -92,7 +92,7 @@ public:
     {
         if (FormProfile->objectName().isEmpty())
             FormProfile->setObjectName(QString::fromUtf8("FormProfile"));
-        FormProfile->resize(802, 385);
+        FormProfile->resize(802, 265);
         verticalLayout_4 = new QVBoxLayout(FormProfile);
         verticalLayout_4->setSpacing(0);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
