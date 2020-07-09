@@ -6,12 +6,12 @@
 //https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
 #define Constants {
-constexpr int c_formsNone=0;
-constexpr int c_formsGames=1;
-constexpr int c_formsFriends=2;
-constexpr int c_formsStatistic=3;
-constexpr int c_formsFavorites=4;
-constexpr int c_formsSettings=5;
+constexpr int c_formsNone = 0;
+constexpr int c_formsGames = 1;
+constexpr int c_formsFriends = 2;
+constexpr int c_formsStatistic = 3;
+constexpr int c_formsFavorites = 4;
+constexpr int c_formsSettings = 5;
 #define ConstantsEnd }
 
 #define Init {
@@ -474,8 +474,8 @@ void MainWindow::AddAchievements(SAchievementsPlayer achievements, SGame games){
         connect(_containerAchievementsForm,&FormContainerAchievements::s_formClose,this,&MainWindow::ContainerAchievementsClose);
         _windowChildCount++;
     }
-    qDebug()<<static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID;
-    _containerAchievementsForm->AddFormAchievement(achievements,static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID,games,_achievementsCount++);
+    qDebug()<<static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->getProfile()._steamID;
+    _containerAchievementsForm->AddFormAchievement(achievements,static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->getProfile()._steamID,games,_achievementsCount++);
     _containerAchievementsForm->show();
 }
 void MainWindow::RemoveAchievements(int index){
@@ -633,8 +633,8 @@ void MainWindow::GoToProfile(QString a_id, QueryType a_type){
         connect(newStackedProfile,&FormProfile::s_goToStatistic,this,&MainWindow::GoToStatistics);
         connect(newStackedProfile,&FormProfile::s_goToFavorites,this,&MainWindow::GoToFavorites);
         connect(newStackedProfile,&FormProfile::s_myProfileChange,this,&MainWindow::UpdateMyProfile);
-        connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateVisibleInfo);
-        connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::UpdateTheme);
+        connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::updateVisibleInfo);
+        connect(this,&MainWindow::s_updateSettings,newStackedProfile,&FormProfile::updateTheme);
         UpdateSettings();
         UpdateMyProfile();
         UpdateButtonsBackNext();
@@ -727,7 +727,7 @@ void MainWindow::GoToStatistics(QString a_prifileSteamid, SGames a_games, QStrin
 
 void MainWindow::UpdateMyProfile(){
     _setting.syncronizeSettings();
-    ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->GetProfile()._steamID!=_setting.getMyProfile());
+    ui->ButtonGoToMyProfile->setEnabled(static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->getProfile()._steamID!=_setting.getMyProfile());
     emit s_updateSettings();
 }
 void MainWindow::UpdateSettings(){
@@ -774,6 +774,6 @@ void MainWindow::ButtonExit_Clicked(){
     qApp->closeAllWindows();
 }
 void MainWindow::ButtonUpdate_Clicked(){
-    static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->UpdateInfo();
+    static_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())->updateInfo();
 }
 #define FunctionsEnd }

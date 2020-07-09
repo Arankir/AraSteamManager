@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formsettings.h"
+#include "../../AraSteamManager/MainSubForms/formsettings.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -40,34 +40,34 @@ QT_MOC_LITERAL(4, 43, 16), // "s_updateSettings"
 QT_MOC_LITERAL(5, 60, 11), // "changeEvent"
 QT_MOC_LITERAL(6, 72, 7), // "QEvent*"
 QT_MOC_LITERAL(7, 80, 5), // "event"
-QT_MOC_LITERAL(8, 86, 14), // "InitComponents"
-QT_MOC_LITERAL(9, 101, 34), // "RadioButtonLanguageEnglish_Cl..."
-QT_MOC_LITERAL(10, 136, 34), // "RadioButtonLanguageRussian_Cl..."
-QT_MOC_LITERAL(11, 171, 28), // "RadioButtonDarkTheme_Clicked"
-QT_MOC_LITERAL(12, 200, 29), // "RadioButtonLightTheme_Clicked"
-QT_MOC_LITERAL(13, 230, 30), // "RadioButtonHiddenGames_Clicked"
-QT_MOC_LITERAL(14, 261, 19), // "AchievementsClicked"
-QT_MOC_LITERAL(15, 281, 11), // "HideClicked"
-QT_MOC_LITERAL(16, 293, 11), // "Retranslate"
-QT_MOC_LITERAL(17, 305, 39), // "CheckBoxVisibleHiddenGames_St..."
+QT_MOC_LITERAL(8, 86, 14), // "initComponents"
+QT_MOC_LITERAL(9, 101, 34), // "radioButtonLanguageEnglish_Cl..."
+QT_MOC_LITERAL(10, 136, 34), // "radioButtonLanguageRussian_Cl..."
+QT_MOC_LITERAL(11, 171, 28), // "radioButtonDarkTheme_Clicked"
+QT_MOC_LITERAL(12, 200, 29), // "radioButtonLightTheme_Clicked"
+QT_MOC_LITERAL(13, 230, 30), // "radioButtonHiddenGames_Clicked"
+QT_MOC_LITERAL(14, 261, 19), // "achievementsClicked"
+QT_MOC_LITERAL(15, 281, 11), // "hideClicked"
+QT_MOC_LITERAL(16, 293, 11), // "retranslate"
+QT_MOC_LITERAL(17, 305, 39), // "checkBoxVisibleHiddenGames_St..."
 QT_MOC_LITERAL(18, 345, 4), // "arg1"
-QT_MOC_LITERAL(19, 350, 30), // "CheckBoxSaveImage_StateChanged"
-QT_MOC_LITERAL(20, 381, 29), // "SlideProfileSize_ValueChanged"
+QT_MOC_LITERAL(19, 350, 30), // "checkBoxSaveImage_StateChanged"
+QT_MOC_LITERAL(20, 381, 29), // "slideProfileSize_ValueChanged"
 QT_MOC_LITERAL(21, 411, 5) // "value"
 
     },
     "FormSettings\0s_return_to_profile\0\0"
     "QWidget*\0s_updateSettings\0changeEvent\0"
-    "QEvent*\0event\0InitComponents\0"
-    "RadioButtonLanguageEnglish_Clicked\0"
-    "RadioButtonLanguageRussian_Clicked\0"
-    "RadioButtonDarkTheme_Clicked\0"
-    "RadioButtonLightTheme_Clicked\0"
-    "RadioButtonHiddenGames_Clicked\0"
-    "AchievementsClicked\0HideClicked\0"
-    "Retranslate\0CheckBoxVisibleHiddenGames_StateChanged\0"
-    "arg1\0CheckBoxSaveImage_StateChanged\0"
-    "SlideProfileSize_ValueChanged\0value"
+    "QEvent*\0event\0initComponents\0"
+    "radioButtonLanguageEnglish_Clicked\0"
+    "radioButtonLanguageRussian_Clicked\0"
+    "radioButtonDarkTheme_Clicked\0"
+    "radioButtonLightTheme_Clicked\0"
+    "radioButtonHiddenGames_Clicked\0"
+    "achievementsClicked\0hideClicked\0"
+    "retranslate\0checkBoxVisibleHiddenGames_StateChanged\0"
+    "arg1\0checkBoxSaveImage_StateChanged\0"
+    "slideProfileSize_ValueChanged\0value"
 };
 #undef QT_MOC_LITERAL
 
@@ -134,18 +134,18 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 1: _t->s_updateSettings(); break;
         case 2: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 3: _t->InitComponents(); break;
-        case 4: _t->RadioButtonLanguageEnglish_Clicked(); break;
-        case 5: _t->RadioButtonLanguageRussian_Clicked(); break;
-        case 6: _t->RadioButtonDarkTheme_Clicked(); break;
-        case 7: _t->RadioButtonLightTheme_Clicked(); break;
-        case 8: _t->RadioButtonHiddenGames_Clicked(); break;
-        case 9: _t->AchievementsClicked(); break;
-        case 10: _t->HideClicked(); break;
-        case 11: _t->Retranslate(); break;
-        case 12: _t->CheckBoxVisibleHiddenGames_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->CheckBoxSaveImage_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 14: _t->SlideProfileSize_ValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->initComponents(); break;
+        case 4: _t->radioButtonLanguageEnglish_Clicked(); break;
+        case 5: _t->radioButtonLanguageRussian_Clicked(); break;
+        case 6: _t->radioButtonDarkTheme_Clicked(); break;
+        case 7: _t->radioButtonLightTheme_Clicked(); break;
+        case 8: _t->radioButtonHiddenGames_Clicked(); break;
+        case 9: _t->achievementsClicked(); break;
+        case 10: _t->hideClicked(); break;
+        case 11: _t->retranslate(); break;
+        case 12: _t->checkBoxVisibleHiddenGames_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: _t->checkBoxSaveImage_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->slideProfileSize_ValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

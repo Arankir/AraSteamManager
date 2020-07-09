@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formcompareprofilefilter.h"
+#include "../../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -41,12 +41,12 @@ QT_MOC_LITERAL(5, 63, 4), // "type"
 QT_MOC_LITERAL(6, 68, 11), // "changeEvent"
 QT_MOC_LITERAL(7, 80, 7), // "QEvent*"
 QT_MOC_LITERAL(8, 88, 5), // "event"
-QT_MOC_LITERAL(9, 94, 16) // "RadioButtonClick"
+QT_MOC_LITERAL(9, 94, 16) // "radioButtonClick"
 
     },
     "FormCompareProfileFilter\0s_radioButtonChange\0"
     "\0name\0ReachedType\0type\0changeEvent\0"
-    "QEvent*\0event\0RadioButtonClick"
+    "QEvent*\0event\0radioButtonClick"
 };
 #undef QT_MOC_LITERAL
 
@@ -88,7 +88,7 @@ void FormCompareProfileFilter::qt_static_metacall(QObject *_o, QMetaObject::Call
         switch (_id) {
         case 0: _t->s_radioButtonChange((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
         case 1: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 2: _t->RadioButtonClick(); break;
+        case 2: _t->radioButtonClick(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

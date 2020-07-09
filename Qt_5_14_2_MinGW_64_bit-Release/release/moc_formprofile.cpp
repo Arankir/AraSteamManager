@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formprofile.h"
+#include "../../AraSteamManager/MainSubForms/formprofile.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -45,39 +45,39 @@ QT_MOC_LITERAL(9, 84, 15), // "s_goToStatistic"
 QT_MOC_LITERAL(10, 100, 11), // "profileName"
 QT_MOC_LITERAL(11, 112, 15), // "s_goToFavorites"
 QT_MOC_LITERAL(12, 128, 17), // "s_myProfileChange"
-QT_MOC_LITERAL(13, 146, 11), // "ProfileToUi"
+QT_MOC_LITERAL(13, 146, 11), // "profileToUi"
 QT_MOC_LITERAL(14, 158, 8), // "SProfile"
 QT_MOC_LITERAL(15, 167, 7), // "profile"
-QT_MOC_LITERAL(16, 175, 10), // "SetProfile"
+QT_MOC_LITERAL(16, 175, 10), // "setProfile"
 QT_MOC_LITERAL(17, 186, 9), // "a_profile"
-QT_MOC_LITERAL(18, 196, 10), // "GetProfile"
-QT_MOC_LITERAL(19, 207, 8), // "GetGames"
-QT_MOC_LITERAL(20, 216, 10), // "GetFriends"
-QT_MOC_LITERAL(21, 227, 11), // "UpdateTheme"
-QT_MOC_LITERAL(22, 239, 17), // "UpdateVisibleInfo"
-QT_MOC_LITERAL(23, 257, 10), // "UpdateInfo"
-QT_MOC_LITERAL(24, 268, 11), // "Retranslate"
+QT_MOC_LITERAL(18, 196, 10), // "getProfile"
+QT_MOC_LITERAL(19, 207, 8), // "getGames"
+QT_MOC_LITERAL(20, 216, 10), // "getFriends"
+QT_MOC_LITERAL(21, 227, 11), // "updateTheme"
+QT_MOC_LITERAL(22, 239, 17), // "updateVisibleInfo"
+QT_MOC_LITERAL(23, 257, 10), // "updateInfo"
+QT_MOC_LITERAL(24, 268, 11), // "retranslate"
 QT_MOC_LITERAL(25, 280, 11), // "changeEvent"
 QT_MOC_LITERAL(26, 292, 7), // "QEvent*"
 QT_MOC_LITERAL(27, 300, 5), // "event"
-QT_MOC_LITERAL(28, 306, 24), // "ButtonSetProfile_Clicked"
-QT_MOC_LITERAL(29, 331, 19), // "ButtonGames_Clicked"
-QT_MOC_LITERAL(30, 351, 21), // "ButtonFriends_Clicked"
-QT_MOC_LITERAL(31, 373, 24), // "ButtonStatistics_Clicked"
-QT_MOC_LITERAL(32, 398, 23) // "ButtonFavorites_Clicked"
+QT_MOC_LITERAL(28, 306, 24), // "buttonSetProfile_Clicked"
+QT_MOC_LITERAL(29, 331, 19), // "buttonGames_Clicked"
+QT_MOC_LITERAL(30, 351, 21), // "buttonFriends_Clicked"
+QT_MOC_LITERAL(31, 373, 24), // "buttonStatistics_Clicked"
+QT_MOC_LITERAL(32, 398, 23) // "buttonFavorites_Clicked"
 
     },
     "FormProfile\0s_goToGames\0\0prifileSteamid\0"
     "SGames\0games\0s_goToFriends\0SFriends\0"
     "friends\0s_goToStatistic\0profileName\0"
     "s_goToFavorites\0s_myProfileChange\0"
-    "ProfileToUi\0SProfile\0profile\0SetProfile\0"
-    "a_profile\0GetProfile\0GetGames\0GetFriends\0"
-    "UpdateTheme\0UpdateVisibleInfo\0UpdateInfo\0"
-    "Retranslate\0changeEvent\0QEvent*\0event\0"
-    "ButtonSetProfile_Clicked\0ButtonGames_Clicked\0"
-    "ButtonFriends_Clicked\0ButtonStatistics_Clicked\0"
-    "ButtonFavorites_Clicked"
+    "profileToUi\0SProfile\0profile\0setProfile\0"
+    "a_profile\0getProfile\0getGames\0getFriends\0"
+    "updateTheme\0updateVisibleInfo\0updateInfo\0"
+    "retranslate\0changeEvent\0QEvent*\0event\0"
+    "buttonSetProfile_Clicked\0buttonGames_Clicked\0"
+    "buttonFriends_Clicked\0buttonStatistics_Clicked\0"
+    "buttonFavorites_Clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -156,24 +156,24 @@ void FormProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->s_goToStatistic((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
         case 3: _t->s_goToFavorites(); break;
         case 4: _t->s_myProfileChange(); break;
-        case 5: _t->ProfileToUi((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
-        case 6: _t->SetProfile((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
-        case 7: { SProfile _r = _t->GetProfile();
+        case 5: _t->profileToUi((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
+        case 6: _t->setProfile((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
+        case 7: { SProfile _r = _t->getProfile();
             if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
-        case 8: { SGames _r = _t->GetGames();
+        case 8: { SGames _r = _t->getGames();
             if (_a[0]) *reinterpret_cast< SGames*>(_a[0]) = std::move(_r); }  break;
-        case 9: { SFriends _r = _t->GetFriends();
+        case 9: { SFriends _r = _t->getFriends();
             if (_a[0]) *reinterpret_cast< SFriends*>(_a[0]) = std::move(_r); }  break;
-        case 10: _t->UpdateTheme(); break;
-        case 11: _t->UpdateVisibleInfo(); break;
-        case 12: _t->UpdateInfo(); break;
-        case 13: _t->Retranslate(); break;
+        case 10: _t->updateTheme(); break;
+        case 11: _t->updateVisibleInfo(); break;
+        case 12: _t->updateInfo(); break;
+        case 13: _t->retranslate(); break;
         case 14: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 15: _t->ButtonSetProfile_Clicked(); break;
-        case 16: _t->ButtonGames_Clicked(); break;
-        case 17: _t->ButtonFriends_Clicked(); break;
-        case 18: _t->ButtonStatistics_Clicked(); break;
-        case 19: _t->ButtonFavorites_Clicked(); break;
+        case 15: _t->buttonSetProfile_Clicked(); break;
+        case 16: _t->buttonGames_Clicked(); break;
+        case 17: _t->buttonFriends_Clicked(); break;
+        case 18: _t->buttonStatistics_Clicked(); break;
+        case 19: _t->buttonFavorites_Clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formcategoryvalue.h"
+#include "../../AraSteamManager/AchievementsSubForms/formcategoryvalue.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -48,26 +48,26 @@ QT_MOC_LITERAL(12, 124, 9), // "s_reverse"
 QT_MOC_LITERAL(13, 134, 11), // "changeEvent"
 QT_MOC_LITERAL(14, 146, 7), // "QEvent*"
 QT_MOC_LITERAL(15, 154, 5), // "event"
-QT_MOC_LITERAL(16, 160, 28), // "CheckBoxVisible_StateChanged"
+QT_MOC_LITERAL(16, 160, 28), // "checkBoxVisible_StateChanged"
 QT_MOC_LITERAL(17, 189, 4), // "arg1"
-QT_MOC_LITERAL(18, 194, 16), // "ButtonUp_Clicked"
-QT_MOC_LITERAL(19, 211, 18), // "ButtonDown_Clicked"
-QT_MOC_LITERAL(20, 230, 20), // "ButtonSelect_Clicked"
-QT_MOC_LITERAL(21, 251, 22), // "ButtonUnSelect_Clicked"
-QT_MOC_LITERAL(22, 274, 20), // "ButtonDelete_Clicked"
-QT_MOC_LITERAL(23, 295, 25), // "LineEditTitle_TextChanged"
-QT_MOC_LITERAL(24, 321, 21) // "ButtonReverse_Clicked"
+QT_MOC_LITERAL(18, 194, 16), // "buttonUp_Clicked"
+QT_MOC_LITERAL(19, 211, 18), // "buttonDown_Clicked"
+QT_MOC_LITERAL(20, 230, 20), // "buttonSelect_Clicked"
+QT_MOC_LITERAL(21, 251, 22), // "buttonUnSelect_Clicked"
+QT_MOC_LITERAL(22, 274, 20), // "buttonDelete_Clicked"
+QT_MOC_LITERAL(23, 295, 25), // "lineEditTitle_TextChanged"
+QT_MOC_LITERAL(24, 321, 21) // "buttonReverse_Clicked"
 
     },
     "FormCategoryValue\0s_valuechange\0\0pos\0"
     "value\0s_visiblechange\0visible\0"
     "s_positionchange\0posnew\0s_selectchange\0"
     "select\0s_deleting\0s_reverse\0changeEvent\0"
-    "QEvent*\0event\0CheckBoxVisible_StateChanged\0"
-    "arg1\0ButtonUp_Clicked\0ButtonDown_Clicked\0"
-    "ButtonSelect_Clicked\0ButtonUnSelect_Clicked\0"
-    "ButtonDelete_Clicked\0LineEditTitle_TextChanged\0"
-    "ButtonReverse_Clicked"
+    "QEvent*\0event\0checkBoxVisible_StateChanged\0"
+    "arg1\0buttonUp_Clicked\0buttonDown_Clicked\0"
+    "buttonSelect_Clicked\0buttonUnSelect_Clicked\0"
+    "buttonDelete_Clicked\0lineEditTitle_TextChanged\0"
+    "buttonReverse_Clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -138,14 +138,14 @@ void FormCategoryValue::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 4: _t->s_deleting((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->s_reverse((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 7: _t->CheckBoxVisible_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 8: _t->ButtonUp_Clicked(); break;
-        case 9: _t->ButtonDown_Clicked(); break;
-        case 10: _t->ButtonSelect_Clicked(); break;
-        case 11: _t->ButtonUnSelect_Clicked(); break;
-        case 12: _t->ButtonDelete_Clicked(); break;
-        case 13: _t->LineEditTitle_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 14: _t->ButtonReverse_Clicked(); break;
+        case 7: _t->checkBoxVisible_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: _t->buttonUp_Clicked(); break;
+        case 9: _t->buttonDown_Clicked(); break;
+        case 10: _t->buttonSelect_Clicked(); break;
+        case 11: _t->buttonUnSelect_Clicked(); break;
+        case 12: _t->buttonDelete_Clicked(); break;
+        case 13: _t->lineEditTitle_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: _t->buttonReverse_Clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

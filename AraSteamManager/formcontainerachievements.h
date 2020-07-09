@@ -2,15 +2,14 @@
 #define FORMCONTAINERACHIEVEMENTS_H
 
 #include <QWidget>
-#include <subform/formachievements.h>
+#include <AchievementsSubForms/formachievements.h>
 #include <class/settings.h>
 
 namespace Ui {
 class FormContainerAchievements;
 }
 
-class FormContainerAchievements : public QWidget
-{
+class FormContainerAchievements : public QWidget {
     Q_OBJECT
 
 public:

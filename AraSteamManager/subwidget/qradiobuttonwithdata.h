@@ -3,7 +3,7 @@
 
 #include <QRadioButton>
 
-enum class ReachedType{
+enum class ReachedType {
     all,
     reached,
     notReached,
@@ -13,18 +13,18 @@ enum class ReachedType{
 class QRadioButtonWithData : public QRadioButton
 {
 public:
-    QRadioButtonWithData(const QString &text, QWidget *parent = nullptr):QRadioButton(text,parent){};
-    QRadioButtonWithData(QWidget *parent = nullptr):QRadioButton(parent){};
+    QRadioButtonWithData(const QString &text, QWidget *parent = nullptr);
+    QRadioButtonWithData(QWidget *parent = nullptr);
     void AddData(QString Title, QString Data);
     QString GetData(QString Title);
     QString GetData(int index);
-    void SetReachedType(ReachedType Aset) {_type=Aset;}
+    void SetReachedType(ReachedType Aset);
     ReachedType GetReachedType() {return _type;}
 
 
 private:
     QVector<QPair<QString,QString>> _data;
-    ReachedType _type=ReachedType::none;
+    ReachedType _type = ReachedType::none;
 };
 
 #endif // QRADIOBUTTONWITHDATA_H

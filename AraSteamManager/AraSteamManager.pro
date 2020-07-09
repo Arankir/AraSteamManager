@@ -25,6 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    AchievementsSubForms/formachievements.cpp \
+    AchievementsSubForms/formcategoryvalue.cpp \
+    AchievementsSubForms/formcompareprofilefilter.cpp \
+    AchievementsSubForms/formtablesheaders.cpp \
+    MainSubForms/formfavorites.cpp \
+    MainSubForms/formfriends.cpp \
+    MainSubForms/formgames.cpp \
+    MainSubForms/formprofile.cpp \
+    MainSubForms/formsettings.cpp \
+    MainSubForms/formstatistics.cpp \
     class/Network/requestdata.cpp \
     class/Network/requestimage.cpp \
     class/NotMine/donutbreakdownchart.cpp \
@@ -48,22 +58,22 @@ SOURCES += \
     frameless.cpp \
         main.cpp \
         mainwindow.cpp \
-    subform/formachievements.cpp \
-    subform/formcategoryvalue.cpp \
-    subform/formcompareprofilefilter.cpp \
-    subform/formfavorites.cpp \
-    subform/formfriends.cpp \
-    subform/formgames.cpp \
-    subform/formprofile.cpp \
-    subform/formsettings.cpp \
-    subform/formstatistics.cpp \
-    subform/formtablesheaders.cpp \
     subwidget/qbuttonwithdata.cpp \
     subwidget/qcheckboxwithdata.cpp \
     subwidget/qcomboboxwithdata.cpp \
     subwidget/qradiobuttonwithdata.cpp
 
 HEADERS += \
+    AchievementsSubForms/formachievements.h \
+    AchievementsSubForms/formcategoryvalue.h \
+    AchievementsSubForms/formcompareprofilefilter.h \
+    AchievementsSubForms/formtablesheaders.h \
+    MainSubForms/formfavorites.h \
+    MainSubForms/formfriends.h \
+    MainSubForms/formgames.h \
+    MainSubForms/formprofile.h \
+    MainSubForms/formsettings.h \
+    MainSubForms/formstatistics.h \
     class/Network/requestdata.h \
     class/Network/requestimage.h \
     class/NotMine/donutbreakdownchart.h \
@@ -87,34 +97,24 @@ HEADERS += \
     formcontainerachievements.h \
     frameless.h \
         mainwindow.h \
-    subform/formachievements.h \
-    subform/formcategoryvalue.h \
-    subform/formcompareprofilefilter.h \
-    subform/formfavorites.h \
-    subform/formfriends.h \
-    subform/formgames.h \
-    subform/formprofile.h \
-    subform/formsettings.h \
-    subform/formstatistics.h \
-    subform/formtablesheaders.h \
     subwidget/qbuttonwithdata.h \
     subwidget/qcheckboxwithdata.h \
     subwidget/qcomboboxwithdata.h \
     subwidget/qradiobuttonwithdata.h
 
 FORMS += \
+    AchievementsSubForms/formachievements.ui \
+    AchievementsSubForms/formcategoryvalue.ui \
+    AchievementsSubForms/formcompareprofilefilter.ui \
+    AchievementsSubForms/formtablesheaders.ui \
+    MainSubForms/formfavorites.ui \
+    MainSubForms/formfriends.ui \
+    MainSubForms/formgames.ui \
+    MainSubForms/formprofile.ui \
+    MainSubForms/formsettings.ui \
+    MainSubForms/formstatistics.ui \
     formcontainerachievements.ui \
         mainwindow.ui \
-    subform/formachievements.ui \
-    subform/formcategoryvalue.ui \
-    subform/formcompareprofilefilter.ui \
-    subform/formfavorites.ui \
-    subform/formfriends.ui \
-    subform/formgames.ui \
-    subform/formprofile.ui \
-    subform/formsettings.ui \
-    subform/formstatistics.ui \
-    subform/formtablesheaders.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

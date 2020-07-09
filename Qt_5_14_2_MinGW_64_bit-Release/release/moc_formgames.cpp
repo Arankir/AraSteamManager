@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formgames.h"
+#include "../../AraSteamManager/MainSubForms/formgames.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -55,25 +55,25 @@ QT_MOC_LITERAL(19, 223, 17), // "slotShowHideSlide"
 QT_MOC_LITERAL(20, 241, 11), // "changeEvent"
 QT_MOC_LITERAL(21, 253, 7), // "QEvent*"
 QT_MOC_LITERAL(22, 261, 5), // "event"
-QT_MOC_LITERAL(23, 267, 14), // "InitComponents"
-QT_MOC_LITERAL(24, 282, 11), // "UpdateTheme"
-QT_MOC_LITERAL(25, 294, 8), // "SetIcons"
-QT_MOC_LITERAL(26, 303, 11), // "Retranslate"
-QT_MOC_LITERAL(27, 315, 20), // "OnResultAchievements"
+QT_MOC_LITERAL(23, 267, 14), // "initComponents"
+QT_MOC_LITERAL(24, 282, 11), // "updateTheme"
+QT_MOC_LITERAL(25, 294, 8), // "setIcons"
+QT_MOC_LITERAL(26, 303, 11), // "retranslate"
+QT_MOC_LITERAL(27, 315, 20), // "onResultAchievements"
 QT_MOC_LITERAL(28, 336, 3), // "ach"
 QT_MOC_LITERAL(29, 340, 10), // "closeEvent"
 QT_MOC_LITERAL(30, 351, 12), // "QCloseEvent*"
 QT_MOC_LITERAL(31, 364, 11), // "resizeEvent"
 QT_MOC_LITERAL(32, 376, 13), // "QResizeEvent*"
-QT_MOC_LITERAL(33, 390, 24), // "LineEditGame_TextChanged"
-QT_MOC_LITERAL(34, 415, 18), // "ButtonFind_Clicked"
-QT_MOC_LITERAL(35, 434, 34), // "TableWidgetGames_CellDoubleCl..."
+QT_MOC_LITERAL(33, 390, 24), // "lineEditGame_TextChanged"
+QT_MOC_LITERAL(34, 415, 18), // "buttonFind_Clicked"
+QT_MOC_LITERAL(35, 434, 34), // "tableWidgetGames_CellDoubleCl..."
 QT_MOC_LITERAL(36, 469, 3), // "row"
 QT_MOC_LITERAL(37, 473, 6), // "column"
-QT_MOC_LITERAL(38, 480, 28), // "TableWidgetGames_CellClicked"
-QT_MOC_LITERAL(39, 509, 26), // "ButtonAchievements_Clicked"
-QT_MOC_LITERAL(40, 536, 22), // "ButtonFavorite_Clicked"
-QT_MOC_LITERAL(41, 559, 18) // "ButtonHide_Clicked"
+QT_MOC_LITERAL(38, 480, 28), // "tableWidgetGames_CellClicked"
+QT_MOC_LITERAL(39, 509, 26), // "buttonAchievements_Clicked"
+QT_MOC_LITERAL(40, 536, 22), // "buttonFavorite_Clicked"
+QT_MOC_LITERAL(41, 559, 18) // "buttonHide_Clicked"
 
     },
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
@@ -83,15 +83,15 @@ QT_MOC_LITERAL(41, 559, 18) // "ButtonHide_Clicked"
     "onFinish\0showHideSlideWidget\0f_flag\0"
     "mouseMoveEvent\0QMouseEvent*\0ev\0"
     "slotShowHideSlide\0changeEvent\0QEvent*\0"
-    "event\0InitComponents\0UpdateTheme\0"
-    "SetIcons\0Retranslate\0OnResultAchievements\0"
+    "event\0initComponents\0updateTheme\0"
+    "setIcons\0retranslate\0onResultAchievements\0"
     "ach\0closeEvent\0QCloseEvent*\0resizeEvent\0"
-    "QResizeEvent*\0LineEditGame_TextChanged\0"
-    "ButtonFind_Clicked\0"
-    "TableWidgetGames_CellDoubleClicked\0"
-    "row\0column\0TableWidgetGames_CellClicked\0"
-    "ButtonAchievements_Clicked\0"
-    "ButtonFavorite_Clicked\0ButtonHide_Clicked"
+    "QResizeEvent*\0lineEditGame_TextChanged\0"
+    "buttonFind_Clicked\0"
+    "tableWidgetGames_CellDoubleClicked\0"
+    "row\0column\0tableWidgetGames_CellClicked\0"
+    "buttonAchievements_Clicked\0"
+    "buttonFavorite_Clicked\0buttonHide_Clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -183,20 +183,20 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 7: _t->mouseMoveEvent((*reinterpret_cast< QMouseEvent*(*)>(_a[1]))); break;
         case 8: _t->slotShowHideSlide(); break;
         case 9: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 10: _t->InitComponents(); break;
-        case 11: _t->UpdateTheme(); break;
-        case 12: _t->SetIcons(); break;
-        case 13: _t->Retranslate(); break;
-        case 14: _t->OnResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
+        case 10: _t->initComponents(); break;
+        case 11: _t->updateTheme(); break;
+        case 12: _t->setIcons(); break;
+        case 13: _t->retranslate(); break;
+        case 14: _t->onResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
         case 15: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 16: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
-        case 17: _t->LineEditGame_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 18: _t->ButtonFind_Clicked(); break;
-        case 19: _t->TableWidgetGames_CellDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 20: _t->TableWidgetGames_CellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 21: _t->ButtonAchievements_Clicked(); break;
-        case 22: _t->ButtonFavorite_Clicked(); break;
-        case 23: _t->ButtonHide_Clicked(); break;
+        case 17: _t->lineEditGame_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 18: _t->buttonFind_Clicked(); break;
+        case 19: _t->tableWidgetGames_CellDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 20: _t->tableWidgetGames_CellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 21: _t->buttonAchievements_Clicked(); break;
+        case 22: _t->buttonFavorite_Clicked(); break;
+        case 23: _t->buttonHide_Clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

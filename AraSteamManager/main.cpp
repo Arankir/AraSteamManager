@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 
     qApp->setStyle(QStyleFactory::create("Fusion"));
     qRegisterMetaType<QVector<int>>("QVector<int>");
+    qRegisterMetaType<QMetaTypeId<ReachedType>>("QMetaTypeId<ReachedType>");
     qRegisterMetaType<QVector<double>>("QVector<double>");
     qRegisterMetaType<QVector<QPair<QString,int> >>("QVector<QPair<QString,int> >");
     qRegisterMetaType<QVector<QPair<QString,QString> >>("QVector<QPair<QString,QString> >");

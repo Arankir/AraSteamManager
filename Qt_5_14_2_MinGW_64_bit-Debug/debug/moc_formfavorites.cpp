@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formfavorites.h"
+#include "../../AraSteamManager/MainSubForms/formfavorites.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -36,8 +36,8 @@ QT_MOC_LITERAL(0, 0, 13), // "FormFavorites"
 QT_MOC_LITERAL(1, 14, 19), // "s_return_to_profile"
 QT_MOC_LITERAL(2, 34, 0), // ""
 QT_MOC_LITERAL(3, 35, 8), // "QWidget*"
-QT_MOC_LITERAL(4, 44, 14), // "InitComponents"
-QT_MOC_LITERAL(5, 59, 10), // "FriendLoad"
+QT_MOC_LITERAL(4, 44, 14), // "initComponents"
+QT_MOC_LITERAL(5, 59, 10), // "friendLoad"
 QT_MOC_LITERAL(6, 70, 9), // "SProfile*"
 QT_MOC_LITERAL(7, 80, 11), // "changeEvent"
 QT_MOC_LITERAL(8, 92, 7), // "QEvent*"
@@ -46,7 +46,7 @@ QT_MOC_LITERAL(10, 106, 21) // "on_pushButton_clicked"
 
     },
     "FormFavorites\0s_return_to_profile\0\0"
-    "QWidget*\0InitComponents\0FriendLoad\0"
+    "QWidget*\0initComponents\0friendLoad\0"
     "SProfile*\0changeEvent\0QEvent*\0event\0"
     "on_pushButton_clicked"
 };
@@ -93,8 +93,8 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
-        case 1: _t->InitComponents(); break;
-        case 2: _t->FriendLoad((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
+        case 1: _t->initComponents(); break;
+        case 2: _t->friendLoad((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
         case 3: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
         case 4: _t->on_pushButton_clicked(); break;
         default: ;

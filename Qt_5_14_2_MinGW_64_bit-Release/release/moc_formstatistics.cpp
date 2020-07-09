@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formstatistics.h"
+#include "../../AraSteamManager/MainSubForms/formstatistics.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/QVector>
@@ -54,7 +54,7 @@ QT_MOC_LITERAL(17, 218, 5), // "years"
 QT_MOC_LITERAL(18, 224, 11), // "changeEvent"
 QT_MOC_LITERAL(19, 236, 7), // "QEvent*"
 QT_MOC_LITERAL(20, 244, 5), // "event"
-QT_MOC_LITERAL(21, 250, 11) // "Retranslate"
+QT_MOC_LITERAL(21, 250, 11) // "retranslate"
 
     },
     "FormStatistics\0s_return_to_profile\0\0"
@@ -63,7 +63,7 @@ QT_MOC_LITERAL(21, 250, 11) // "Retranslate"
     "complete\0started\0notStarted\0QVector<double>\0"
     "averagePercent\0summcolumn\0times\0months\0"
     "QVector<QPair<QString,int> >\0years\0"
-    "changeEvent\0QEvent*\0event\0Retranslate"
+    "changeEvent\0QEvent*\0event\0retranslate"
 };
 #undef QT_MOC_LITERAL
 
@@ -108,7 +108,7 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 1: _t->onFinish((*reinterpret_cast< QVector<int>(*)>(_a[1])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[2])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[3])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[4])),(*reinterpret_cast< QVector<double>(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QVector<int>(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[9]))); break;
         case 2: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 3: _t->Retranslate(); break;
+        case 3: _t->retranslate(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

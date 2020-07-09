@@ -117,7 +117,7 @@ int Threading::AddThreadAchievements(const int aTableColumnAppid, const int aTab
     connect(achievements, SIGNAL(s_finished()), achievements, SLOT(deleteLater()));
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     connect(achievements, SIGNAL(s_progress(int, int)), this->parent(), SLOT(progressLoading(int, int)));
-    connect(achievements, SIGNAL(s_finished(int, int)), this->parent(), SLOT(onFinish(int, int)));
+    connect(achievements, SIGNAL(s_finished(int, int)), this->parent(), SLOT(onTablePulled(int, int)));
     thread->start();
     return 1;
 }

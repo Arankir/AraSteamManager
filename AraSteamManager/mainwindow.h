@@ -9,12 +9,12 @@
 #include <QKeyEvent>
 #include <QTranslator>
 #include <QLibraryInfo>
-#include <subform/formgames.h>
-#include <subform/formfriends.h>
-#include <subform/formfavorites.h>
-#include <subform/formstatistics.h>
-#include <subform/formsettings.h>
-#include <subform/formprofile.h>
+#include <MainSubForms/formgames.h>
+#include <MainSubForms/formfriends.h>
+#include <MainSubForms/formfavorites.h>
+#include <MainSubForms/formstatistics.h>
+#include <MainSubForms/formsettings.h>
+#include <MainSubForms/formprofile.h>
 #include <class/steamapi/Sprofile.h>
 #include <class/steamapi/Sbans.h>
 #include <class/steamapi/Slevels.h>
@@ -25,8 +25,6 @@
 #include <QFontDatabase>
 #include <QScreen>
 #include <QSizeGrip>
-
-#include <subform/formtablesheaders.h>
 
 namespace Ui {
 class MainWindow;

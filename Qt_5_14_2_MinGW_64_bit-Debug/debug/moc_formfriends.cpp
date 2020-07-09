@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/subform/formfriends.h"
+#include "../../AraSteamManager/MainSubForms/formfriends.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -47,14 +47,14 @@ QT_MOC_LITERAL(11, 102, 15), // "progressLoading"
 QT_MOC_LITERAL(12, 118, 1), // "p"
 QT_MOC_LITERAL(13, 120, 3), // "row"
 QT_MOC_LITERAL(14, 124, 8), // "onFinish"
-QT_MOC_LITERAL(15, 133, 14), // "InitComponents"
+QT_MOC_LITERAL(15, 133, 14), // "initComponents"
 QT_MOC_LITERAL(16, 148, 10), // "closeEvent"
 QT_MOC_LITERAL(17, 159, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(18, 172, 11), // "Retranslate"
-QT_MOC_LITERAL(19, 184, 8), // "SetIcons"
-QT_MOC_LITERAL(20, 193, 24), // "ButtonFriendGoTo_Clicked"
-QT_MOC_LITERAL(21, 218, 28), // "ButtonFriendFavorite_Clicked"
-QT_MOC_LITERAL(22, 247, 16), // "UpdateHiddenRows"
+QT_MOC_LITERAL(18, 172, 11), // "retranslate"
+QT_MOC_LITERAL(19, 184, 8), // "setIcons"
+QT_MOC_LITERAL(20, 193, 24), // "buttonFriendGoTo_Clicked"
+QT_MOC_LITERAL(21, 218, 28), // "buttonFriendFavorite_Clicked"
+QT_MOC_LITERAL(22, 247, 16), // "updateHiddenRows"
 QT_MOC_LITERAL(23, 264, 35), // "on_CheckBoxOpenProfile_stateC..."
 QT_MOC_LITERAL(24, 300, 4), // "arg1"
 QT_MOC_LITERAL(25, 305, 27), // "on_LineEditName_textChanged"
@@ -64,25 +64,25 @@ QT_MOC_LITERAL(28, 383, 5), // "index"
 QT_MOC_LITERAL(29, 389, 33), // "on_CheckBoxFavorites_stateCha..."
 QT_MOC_LITERAL(30, 423, 39), // "on_TableWidgetFriends_cellDou..."
 QT_MOC_LITERAL(31, 463, 6), // "column"
-QT_MOC_LITERAL(32, 470, 30), // "TableWidgetFriends_CellClicked"
+QT_MOC_LITERAL(32, 470, 30), // "tableWidgetFriends_CellClicked"
 QT_MOC_LITERAL(33, 501, 3), // "col"
-QT_MOC_LITERAL(34, 505, 10) // "FriendToUi"
+QT_MOC_LITERAL(34, 505, 10) // "friendToUi"
 
     },
     "FormFriends\0s_return_to_profile\0\0"
     "QWidget*\0s_go_to_profile\0id\0QueryType\0"
     "type\0changeEvent\0QEvent*\0event\0"
     "progressLoading\0p\0row\0onFinish\0"
-    "InitComponents\0closeEvent\0QCloseEvent*\0"
-    "Retranslate\0SetIcons\0ButtonFriendGoTo_Clicked\0"
-    "ButtonFriendFavorite_Clicked\0"
-    "UpdateHiddenRows\0on_CheckBoxOpenProfile_stateChanged\0"
+    "initComponents\0closeEvent\0QCloseEvent*\0"
+    "retranslate\0setIcons\0buttonFriendGoTo_Clicked\0"
+    "buttonFriendFavorite_Clicked\0"
+    "updateHiddenRows\0on_CheckBoxOpenProfile_stateChanged\0"
     "arg1\0on_LineEditName_textChanged\0"
     "on_ButtonFind_clicked\0on_ComboBoxStatus_activated\0"
     "index\0on_CheckBoxFavorites_stateChanged\0"
     "on_TableWidgetFriends_cellDoubleClicked\0"
-    "column\0TableWidgetFriends_CellClicked\0"
-    "col\0FriendToUi"
+    "column\0tableWidgetFriends_CellClicked\0"
+    "col\0friendToUi"
 };
 #undef QT_MOC_LITERAL
 
@@ -161,21 +161,21 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
         case 3: _t->progressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 4: _t->onFinish(); break;
-        case 5: _t->InitComponents(); break;
+        case 5: _t->initComponents(); break;
         case 6: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 7: _t->Retranslate(); break;
-        case 8: _t->SetIcons(); break;
-        case 9: _t->ButtonFriendGoTo_Clicked(); break;
-        case 10: _t->ButtonFriendFavorite_Clicked(); break;
-        case 11: _t->UpdateHiddenRows(); break;
+        case 7: _t->retranslate(); break;
+        case 8: _t->setIcons(); break;
+        case 9: _t->buttonFriendGoTo_Clicked(); break;
+        case 10: _t->buttonFriendFavorite_Clicked(); break;
+        case 11: _t->updateHiddenRows(); break;
         case 12: _t->on_CheckBoxOpenProfile_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 13: _t->on_LineEditName_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 14: _t->on_ButtonFind_clicked(); break;
         case 15: _t->on_ComboBoxStatus_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 16: _t->on_CheckBoxFavorites_stateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 17: _t->on_TableWidgetFriends_cellDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 18: _t->TableWidgetFriends_CellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 19: _t->FriendToUi(); break;
+        case 18: _t->tableWidgetFriends_CellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 19: _t->friendToUi(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
