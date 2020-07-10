@@ -39,8 +39,10 @@ void RequestImage::onLoad(RequestData *aImage) {
         loadedImage.save(_save);
     }
     if (_label != nullptr) {
-        if (_label->movie()->state() == QMovie::MovieState::Running) {
-            _label->movie()->stop();
+        if (_label->movie()) {
+            if (_label->movie()->state() == QMovie::MovieState::Running) {
+                _label->movie()->stop();
+            }
         }
         _label->setPixmap(loadedImage);
         //emit s_loadComplete();

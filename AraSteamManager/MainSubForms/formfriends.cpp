@@ -244,7 +244,10 @@ void FormFriends::friendToUi() {
         }
     }
     if(row > -1) {
-        ui->LabelFriendIcon->setPixmap(*static_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row, c_tableColumnIcon))->pixmap());//TODO Тут ошибка вызывающая краш
+        QLabel *lIconFriend =dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row, c_tableColumnIcon));
+        if (lIconFriend) {
+            ui->LabelFriendIcon->setPixmap(*lIconFriend->pixmap());
+        }
         int indexFriend = 0;
         _currentFriendIndex = -1;
         for(auto &profile: _profiles) {

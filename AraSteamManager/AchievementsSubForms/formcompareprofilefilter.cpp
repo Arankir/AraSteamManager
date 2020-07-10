@@ -92,5 +92,7 @@ void FormCompareProfileFilter::update() {
 
 void FormCompareProfileFilter::radioButtonClick() {
     QRadioButtonWithData *rb = static_cast<QRadioButtonWithData*>(sender());
-    emit s_radioButtonChange(_name, rb->GetReachedType());
+    if (rb) {
+        emit s_radioButtonChange(_name, rb->GetReachedType());
+    }
 }

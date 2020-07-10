@@ -30,11 +30,10 @@ namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow: public QMainWindow {
     Q_OBJECT
 
-enum class WindowChildType{
+enum class WindowChildType {
      none,
      games,
      friends,
@@ -56,18 +55,18 @@ public:
 
 public slots:
     void progressLoading(int,int);
-    void AddAchievements(SAchievementsPlayer achievements,SGame games);
-    void RemoveAchievements(int index);
-    void ContainerAchievementsClose();
-    void ReturnFromAchievements(int num);
+    void addAchievements(SAchievementsPlayer achievements,SGame games);
+    void removeAchievements(int index);
+    void containerAchievementsClose();
+    void returnFromAchievements(int num);
 
-    void GoToGames(QString prifileSteamid, SGames games);
-    void GoToFriends(QString prifileSteamid, SFriends friends);
-    void GoToFavorites();
-    void GoToStatistics(QString prifileSteamid, SGames games, QString profileName);
+    void goToGames(QString prifileSteamid, SGames games);
+    void goToFriends(QString prifileSteamid, SFriends friends);
+    void goToFavorites();
+    void goToStatistics(QString prifileSteamid, SGames games, QString profileName);
 
-    void UpdateMyProfile();
-    void UpdateSettings();
+    void updateMyProfile();
+    void updateSettings();
 
 signals:
     void s_updateSettings();
@@ -86,40 +85,40 @@ private slots:
     void showStatistic();
     void returnFromForms();
     //Systems
-    void InitComponents();
-    void SetIcons();
-    void ResizeScrollArea(int width=300);
-    void UpdateButtonsBackNext();
-    void ButtonMaximize_Clicked();
-    void ButtonMinimize_Clicked();
+    void initComponents();
+    QString getTheme();
+    void setIcons();
+    void resizeScrollArea(int width=300);
+    void updateButtonsBackNext();
+    void buttonMaximize_Clicked();
+    void buttonMinimize_Clicked();
     //Functions
-    void ButtonFindProfile_Clicked();
-    void GoToProfile(QString id, QueryType type);
-    void ButtonSettings_Clicked();
-    void ButtonExit_Clicked();
+    void buttonFindProfile_Clicked();
+    void goToProfile(QString id, QueryType type);
+    void buttonSettings_Clicked();
+    void buttonExit_Clicked();
     //Profile
-    void ButtonGoToMyProfile_Clicked();
-    void ButtonBack_Clicked();
-    void ButtonNext_Clicked();
-    void ButtonUpdate_Clicked();
+    void buttonGoToMyProfile_Clicked();
+    void buttonBack_Clicked();
+    void buttonNext_Clicked();
+    void buttonUpdate_Clicked();
 
 private:
-    QString GetTheme();
     Ui::MainWindow *ui;
-    int _windowChildCount=0;
+    int _windowChildCount = 0;
     SProfiles _profile;
     SGames _games;
     SFriends _friends;
     Settings _setting;
-    QString _iconColor="white";
-    int _achievementsCount=0;
+    QString _iconColor = "white";
+    int _achievementsCount = 0;
 
-    bool _initGames=false;
-    bool _initFriends=false;
-    bool _initFavorites=false;
-    bool _initStatistics=false;
-    bool _initSettings=false;
-    bool _blockedLoad=false;
+    bool _initGames = false;
+    bool _initFriends = false;
+    bool _initFavorites = false;
+    bool _initStatistics = false;
+    bool _initSettings = false;
+    bool _blockedLoad = false;
 
 };
 

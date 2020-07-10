@@ -124,7 +124,7 @@ void FormAchievements::initComponents() {
     setTheme();
     #define Connects {
     connect(ui->ButtonUpdate, &QPushButton::clicked, this, &FormAchievements::buttonUpdate_Clicked);
-    connect(ui->CheckBoxCompareAllFriends, &QPushButton::clicked, this, &FormAchievements::checkBoxCompareAllFriends_StateChanged);
+    connect(ui->CheckBoxCompareAllFriends, &QCheckBox::stateChanged, this, &FormAchievements::checkBoxCompareAllFriends_StateChanged);
     connect(ui->LineEditNameAchievements, &QLineEdit::textChanged, this, &FormAchievements::lineEditNameAchievements_TextChanged);
     connect(ui->ButtonFindAchievement, &QPushButton::clicked, this, &FormAchievements::buttonFindAchievement_Clicked);
     connect(ui->ButtonAddCategory, &QPushButton::clicked, this, &FormAchievements::buttonAddCategory_Clicked);
@@ -142,7 +142,7 @@ void FormAchievements::initComponents() {
     connect(ui->ButtonDeleteCategory, &QPushButton::clicked, this, &FormAchievements::buttonDeleteCategory_Clicked);
     connect(ui->CheckBoxCategoryOneValue, &QCheckBox::stateChanged, this, &FormAchievements::checkBoxCategoryOneValue_StateChanged);
     connect(ui->LineEditTitleCategory, &QLineEdit::textChanged, this, &FormAchievements::lineEditTitleCategory_TextChanged);
-    connect(ui->ComboBoxCategories, SIGNAL(activated(int i)), this, SLOT(comboBoxCategories_Activated(int i)));
+    connect(ui->ComboBoxCategories, SIGNAL(activated(int)), this, SLOT(comboBoxCategories_Activated(int)));
     connect(ui->CheckBoxCategoryVisibleAll, &QCheckBox::clicked, this, &FormAchievements::checkBoxCategoryVisibleAll_Clicked);
     connect(ui->CheckBoxFavorites, &QCheckBox::stateChanged, this, &FormAchievements::checkBoxFavorites_StateChanged);
     connect(ui->CheckBoxCategoryUniqueValue, &QCheckBox::stateChanged, this, &FormAchievements::checkBoxCategoryUniqueValue_StateChanged);
@@ -204,7 +204,7 @@ void FormAchievements::progressLoading(int aProgress, int aRow) {
 
 void FormAchievements::onFinish(int reached, int notReached) {
     showCategories();
-    if (reached > 0 && notReached > 0) {
+    if ((reached > 0) || (notReached > 0)) {
         ui->GroupBoxFilter->setEnabled(true);
         ui->LabelTotalPersent->setText(QString("%1/%2 = %3% ").arg(
                                            QString::number(reached),
@@ -617,15 +617,15 @@ void FormAchievements::hideCheckedAchievement(QTableWidgetItem *aItem) {
 FormCategoryValue *FormAchievements::createValueCategory() {
     int rowValues = ui->ListWidgetValuesCategory->count();//->rowCount();
     FormCategoryValue *newValue = new FormCategoryValue(rowValues, this);
-    _values.append(std::move(newValue));
-    updateValuesUpDown();
     connect(newValue, &FormCategoryValue::s_valuechange, this, &FormAchievements::formCategoryValue_Change);
     connect(newValue, &FormCategoryValue::s_visiblechange, this, &FormAchievements::formCategoryVisible_Change);
     connect(newValue, &FormCategoryValue::s_positionchange, this, &FormAchievements::formCategoryPosition_Change);
     connect(newValue, &FormCategoryValue::s_selectchange, this, &FormAchievements::formCategorySelect_Change);
     connect(newValue, &FormCategoryValue::s_deleting, this, &FormAchievements::formCategoryDelete);
     connect(newValue, &FormCategoryValue::s_reverse, this, &FormAchievements::formCategoryReverse);
-    QListWidgetItem* item = new QListWidgetItem(ui->ListWidgetValuesCategory);
+    _values.append(newValue);
+    updateValuesUpDown();
+    QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);
     item->setSizeHint(newValue->sizeHint());
     ui->ListWidgetValuesCategory->setItemWidget(item, newValue);
     return newValue;
@@ -919,7 +919,7 @@ void FormAchievements::comboBoxCategories_Activated(int aIndex) {
         if (_categoriesGame.getCount() > 0) {
             ui->LineEditTitleCategory->setText(ui->ComboBoxCategories->itemText(aIndex));
             ui->ListWidgetValuesCategory->clear();
-            if (aIndex != 0) {
+            if (aIndex > 0) {
                 ui->ButtonAddValueCategory->setEnabled(true);
                 ui->LineEditTitleCategory->setEnabled(true);
                 QList<QString> noValues = _categoriesGame.getNoValues(aIndex - 1);

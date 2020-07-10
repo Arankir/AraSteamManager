@@ -12,14 +12,14 @@ FormCategoryValue::FormCategoryValue(int aPos, QWidget *aParent): QWidget(aParen
             _theme = "black";
             break;
     }
-    connect(ui->CheckBoxVisible,&QCheckBox::stateChanged,this,&FormCategoryValue::checkBoxVisible_StateChanged);
-    connect(ui->ButtonUp,&QPushButton::clicked,this,&FormCategoryValue::buttonUp_Clicked);
-    connect(ui->ButtonDown,&QPushButton::clicked,this,&FormCategoryValue::buttonDown_Clicked);
-    connect(ui->ButtonSelect,&QPushButton::clicked,this,&FormCategoryValue::buttonSelect_Clicked);
-    connect(ui->ButtonUnSelect,&QPushButton::clicked,this,&FormCategoryValue::buttonUnSelect_Clicked);
-    connect(ui->ButtonDelete,&QPushButton::clicked,this,&FormCategoryValue::buttonDelete_Clicked);
-    connect(ui->LineEditTitle,&QLineEdit::textChanged,this,&FormCategoryValue::lineEditTitle_TextChanged);
-    connect(ui->ButtonReverse,&QPushButton::clicked,this,&FormCategoryValue::buttonReverse_Clicked);
+    connect(ui->CheckBoxVisible, &QCheckBox::stateChanged, this, &FormCategoryValue::checkBoxVisible_StateChanged);
+    connect(ui->ButtonUp, &QPushButton::clicked, this, &FormCategoryValue::buttonUp_Clicked);
+    connect(ui->ButtonDown, &QPushButton::clicked, this, &FormCategoryValue::buttonDown_Clicked);
+    connect(ui->ButtonSelect, &QPushButton::clicked, this, &FormCategoryValue::buttonSelect_Clicked);
+    connect(ui->ButtonUnSelect, &QPushButton::clicked, this, &FormCategoryValue::buttonUnSelect_Clicked);
+    connect(ui->ButtonDelete, &QPushButton::clicked, this, &FormCategoryValue::buttonDelete_Clicked);
+    connect(ui->LineEditTitle, &QLineEdit::textChanged, this, &FormCategoryValue::lineEditTitle_TextChanged);
+    connect(ui->ButtonReverse, &QPushButton::clicked, this, &FormCategoryValue::buttonReverse_Clicked);
     ui->LabelPosition->setText(QString::number(_position + 1));
     ui->ButtonUp->setIcon(QIcon("://" + _theme + "/up.png"));
     ui->ButtonDown->setIcon(QIcon("://" + _theme + "/down.png"));
@@ -87,6 +87,7 @@ void FormCategoryValue::setPosition(int aPos) {
 }
 
 void FormCategoryValue::setTitle(QString aTitle) {
+    qDebug()<<_position<<aTitle;
     ui->LineEditTitle->setText(aTitle);
 }
 

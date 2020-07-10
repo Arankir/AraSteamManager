@@ -75,15 +75,28 @@ void FormStatistics::retranslate() {
                                         QString::number(_totalAverage / (_numof[1] + _numof[2]))));
     QList<QAbstractSeries*> series = _donutBreakdown->series();
     switch (series.size()) {
-        default:
+    default:{
 
-        case 3:
-            dynamic_cast<QPieSeries*>(series[2])->slices()[0]->setLabel(tr("Закончено (%1)").arg(_numof[2]));
-        case 2:
-            dynamic_cast<QPieSeries*>(series[1])->slices()[0]->setLabel(tr("Начато (%1)").arg(_numof[1]));
-        case 1:
-            dynamic_cast<QPieSeries*>(series[0])->slices()[0]->setLabel(tr("Не начато (%1)").arg(_numof[0]));
-        case 0:;
+    }
+    case 3: {
+        QPieSeries *pie = dynamic_cast<QPieSeries*>(series[2]);
+        if (pie) {
+            pie->slices()[0]->setLabel(tr("Закончено (%1)").arg(_numof[2]));
+        }
+    }
+    case 2: {
+        QPieSeries *pie = dynamic_cast<QPieSeries*>(series[1]);
+        if (pie) {
+            pie->slices()[0]->setLabel(tr("Начато (%1)").arg(_numof[1]));
+        }
+    }
+    case 1: {
+        QPieSeries *pie = dynamic_cast<QPieSeries*>(series[0]);
+        if (pie) {
+            pie->slices()[0]->setLabel(tr("Не начато (%1)").arg(_numof[0]));
+        }
+    }
+    case 0:;
 
     }
     _chartT->setTitle(tr("Достижения по часам"));
@@ -94,7 +107,10 @@ void FormStatistics::retranslate() {
             <<tr("Июль") <<tr("Август") <<tr("Сентябрь") <<tr("Октябрь") <<tr("Ноябрь") <<tr("Декабрь");
     axisXM->append(titlesXM);
     if((_chartM->series().size() > 0) && (_chartM->axes(Qt::Horizontal, _chartM->series().at(0)).size() > 0)) {
-        dynamic_cast<QBarCategoryAxis*>(_chartM->axes(Qt::Horizontal, _chartM->series().at(0)).at(0))->setCategories(titlesXM);
+        QBarCategoryAxis *bar = dynamic_cast<QBarCategoryAxis*>(_chartM->axes(Qt::Horizontal, _chartM->series().at(0)).at(0));
+        if (bar) {
+            bar->setCategories(titlesXM);
+        }
     }
     _chartY->setTitle(tr("Достижения по годам"));
 }

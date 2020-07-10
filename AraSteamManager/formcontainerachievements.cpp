@@ -22,8 +22,8 @@ FormContainerAchievements::~FormContainerAchievements() {
 
 void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer aPl, QString aIds, SGame aGame, int aNum) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); i++) {
-        FormAchievements *tab = static_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0));
-        if((tab->getGameAppId() == aGame._appID) && (tab->getProfile() == aIds)) {
+        FormAchievements *tab = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0));
+        if((tab) && (tab->getGameAppId() == aGame._appID) && (tab->getProfile() == aIds)) {
             tab->buttonUpdate_Clicked();
             ui->TabWidgetAchievements->setCurrentIndex(i);
             return;

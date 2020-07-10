@@ -138,34 +138,36 @@ void FormGames::onFinish() {
 
 void FormGames::onResultAchievements(SAchievementsPlayer aAchievements) {
     disconnect(&aAchievements, SIGNAL(s_finished(SAchievementsPlayer)), this, SLOT(onResultAchievements(SAchievementsPlayer)));
-    QProgressBar *progressBarAchievements = static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aAchievements._index, c_tableColumnProgress));
-    progressBarAchievements->setMaximum(aAchievements.getCount());
-    progressBarAchievements->setMinimumSize(QSize(25, 25));
-    if(aAchievements.getCount() > 0) {
-        int val = 0;
-        for (int i = 0; i < aAchievements.getCount(); i++) {
-            if(aAchievements[i]._achieved == 1) {
-                val++;
+    QProgressBar *progressBarAchievements = dynamic_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aAchievements._index, c_tableColumnProgress));
+    if (progressBarAchievements) {
+        progressBarAchievements->setMaximum(aAchievements.getCount());
+        progressBarAchievements->setMinimumSize(QSize(25, 25));
+        if(aAchievements.getCount() > 0) {
+            int val = 0;
+            for (int i = 0; i < aAchievements.getCount(); i++) {
+                if(aAchievements[i]._achieved == 1) {
+                    val++;
+                }
             }
+            progressBarAchievements->setValue(val);
+        } else {
+            progressBarAchievements->setValue(0);
+            //static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_achievements.GetIndex(),c_tableColumnProgress))->setEnabled(false);
         }
-        progressBarAchievements->setValue(val);
-    } else {
-        progressBarAchievements->setValue(0);
-        //static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(a_achievements.GetIndex(),c_tableColumnProgress))->setEnabled(false);
-    }
-    ui->TableWidgetGames->setItem(aAchievements._index, c_tableColumnProgress, new QTableWidgetItem(progressBarAchievements->text().rightJustified(4, '0')));
-    ui->TableWidgetGames->item(aAchievements._index, c_tableColumnProgress)->setTextAlignment(Qt::AlignRight);
-    _achievements[aAchievements._index] = aAchievements;
-    emit s_achievementsLoaded(_load++, 0);
-    if(_load == _games.getCount()) {
-        tableWidgetGames_CellClicked(0, 1);
-        int width = 22;
-        for(int i = 0; i < ui->TableWidgetGames->columnCount(); i++) {
-            width += ui->TableWidgetGames->columnWidth(i);
+        ui->TableWidgetGames->setItem(aAchievements._index, c_tableColumnProgress, new QTableWidgetItem(progressBarAchievements->text().rightJustified(4, '0')));
+        ui->TableWidgetGames->item(aAchievements._index, c_tableColumnProgress)->setTextAlignment(Qt::AlignRight);
+        _achievements[aAchievements._index] = aAchievements;
+        emit s_achievementsLoaded(_load++, 0);
+        if(_load == _games.getCount()) {
+            tableWidgetGames_CellClicked(0, 1);
+            int width = 22;
+            for(int i = 0; i < ui->TableWidgetGames->columnCount(); i++) {
+                width += ui->TableWidgetGames->columnWidth(i);
+            }
+            emit s_finish(width);
         }
-        emit s_finish(width);
+        //ach->deleteLater();
     }
-    //ach->deleteLater();
 }
 #define InitEnd }
 
@@ -288,14 +290,18 @@ void FormGames::tableWidgetGames_CellDoubleClicked(int aRow, int) {
 void FormGames::tableWidgetGames_CellClicked(int aRow, int) {
     _selectedGame = ui->TableWidgetGames->item(aRow, c_tableColumnAppid)->text();
     _selectedIndex = ui->TableWidgetGames->item(aRow, c_tableColumnIndex)->text();
-    if(static_cast<QLabel*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnIcon))->pixmap()) {
-        ui->LabelIconGame->setPixmap(*static_cast<QLabel*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnIcon))->pixmap());
+    QLabel *lGameIcon = dynamic_cast<QLabel*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnIcon));
+    if(lGameIcon) {
+        ui->LabelIconGame->setPixmap(*lGameIcon->pixmap());
     } else {
         ui->LabelIconGame->setPixmap(QPixmap());
     }
     ui->LabelTitleGame->setText(ui->TableWidgetGames->item(aRow, c_tableColumnName)->text());
-    ui->ProgressBarSelectedGame->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnProgress))->maximum());
-    ui->ProgressBarSelectedGame->setValue(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnProgress))->value());
+    QProgressBar *progressBarSelectedGame = dynamic_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnProgress));
+    if (progressBarSelectedGame) {
+        ui->ProgressBarSelectedGame->setMaximum(progressBarSelectedGame->maximum());
+        ui->ProgressBarSelectedGame->setValue(progressBarSelectedGame->value());
+    }
     QJsonArray favorites = _favorites.getValues();
     bool isFavorite = false;
     for(auto favorite: favorites) {
@@ -321,7 +327,7 @@ void FormGames::buttonAchievements_Clicked() {
         QMessageBox::warning(this, tr("Ошибка"), tr("В этой игре нет достижений"));
     } else {
         //ui->TableWidgetGames->setEnabled(false);
-        ui->ProgressBarLoading->setMaximum(static_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(_selectedIndex.toInt(), c_tableColumnProgress))->maximum());
+        ui->ProgressBarLoading->setMaximum(ui->ProgressBarSelectedGame->maximum());
         //ui->ProgressBarLoading->setVisible(true);
         emit s_showAchievements(_achievements[_selectedIndex.toInt()], _games[_selectedIndex.toInt()]);
     }
