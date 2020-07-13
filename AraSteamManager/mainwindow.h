@@ -60,10 +60,10 @@ public slots:
     void containerAchievementsClose();
     void returnFromAchievements(int num);
 
-    void goToGames(QString prifileSteamid, SGames games);
-    void goToFriends(QString prifileSteamid, SFriends friends);
+    void goToGames(SProfile profileSteamid, SGames games);
+    void goToFriends(QString profileSteamid, SFriends friends);
     void goToFavorites();
-    void goToStatistics(QString prifileSteamid, SGames games, QString profileName);
+    void goToStatistics(QString profileSteamid, SGames games, QString profileName);
 
     void updateMyProfile();
     void updateSettings();

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[62];
-    char stringdata0[840];
+    QByteArrayData data[63];
+    char stringdata0[849];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,53 +47,54 @@ QT_MOC_LITERAL(11, 131, 26), // "containerAchievementsClose"
 QT_MOC_LITERAL(12, 158, 22), // "returnFromAchievements"
 QT_MOC_LITERAL(13, 181, 3), // "num"
 QT_MOC_LITERAL(14, 185, 9), // "goToGames"
-QT_MOC_LITERAL(15, 195, 14), // "prifileSteamid"
-QT_MOC_LITERAL(16, 210, 6), // "SGames"
-QT_MOC_LITERAL(17, 217, 11), // "goToFriends"
-QT_MOC_LITERAL(18, 229, 8), // "SFriends"
-QT_MOC_LITERAL(19, 238, 7), // "friends"
-QT_MOC_LITERAL(20, 246, 13), // "goToFavorites"
-QT_MOC_LITERAL(21, 260, 14), // "goToStatistics"
-QT_MOC_LITERAL(22, 275, 11), // "profileName"
-QT_MOC_LITERAL(23, 287, 15), // "updateMyProfile"
-QT_MOC_LITERAL(24, 303, 14), // "updateSettings"
-QT_MOC_LITERAL(25, 318, 13), // "keyPressEvent"
-QT_MOC_LITERAL(26, 332, 10), // "QKeyEvent*"
-QT_MOC_LITERAL(27, 343, 11), // "changeEvent"
-QT_MOC_LITERAL(28, 355, 7), // "QEvent*"
-QT_MOC_LITERAL(29, 363, 10), // "closeEvent"
-QT_MOC_LITERAL(30, 374, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(31, 387, 15), // "mousePressEvent"
-QT_MOC_LITERAL(32, 403, 12), // "QMouseEvent*"
-QT_MOC_LITERAL(33, 416, 14), // "mouseMoveEvent"
-QT_MOC_LITERAL(34, 431, 8), // "showForm"
-QT_MOC_LITERAL(35, 440, 5), // "bool&"
-QT_MOC_LITERAL(36, 446, 8), // "initForm"
-QT_MOC_LITERAL(37, 455, 11), // "widgetIndex"
-QT_MOC_LITERAL(38, 467, 11), // "widthWindow"
-QT_MOC_LITERAL(39, 479, 9), // "showGames"
-QT_MOC_LITERAL(40, 489, 5), // "width"
-QT_MOC_LITERAL(41, 495, 11), // "showFriends"
-QT_MOC_LITERAL(42, 507, 13), // "showStatistic"
-QT_MOC_LITERAL(43, 521, 15), // "returnFromForms"
-QT_MOC_LITERAL(44, 537, 14), // "initComponents"
-QT_MOC_LITERAL(45, 552, 8), // "getTheme"
-QT_MOC_LITERAL(46, 561, 8), // "setIcons"
-QT_MOC_LITERAL(47, 570, 16), // "resizeScrollArea"
-QT_MOC_LITERAL(48, 587, 21), // "updateButtonsBackNext"
-QT_MOC_LITERAL(49, 609, 22), // "buttonMaximize_Clicked"
-QT_MOC_LITERAL(50, 632, 22), // "buttonMinimize_Clicked"
-QT_MOC_LITERAL(51, 655, 25), // "buttonFindProfile_Clicked"
-QT_MOC_LITERAL(52, 681, 11), // "goToProfile"
-QT_MOC_LITERAL(53, 693, 2), // "id"
-QT_MOC_LITERAL(54, 696, 9), // "QueryType"
-QT_MOC_LITERAL(55, 706, 4), // "type"
-QT_MOC_LITERAL(56, 711, 22), // "buttonSettings_Clicked"
-QT_MOC_LITERAL(57, 734, 18), // "buttonExit_Clicked"
-QT_MOC_LITERAL(58, 753, 27), // "buttonGoToMyProfile_Clicked"
-QT_MOC_LITERAL(59, 781, 18), // "buttonBack_Clicked"
-QT_MOC_LITERAL(60, 800, 18), // "buttonNext_Clicked"
-QT_MOC_LITERAL(61, 819, 20) // "buttonUpdate_Clicked"
+QT_MOC_LITERAL(15, 195, 8), // "SProfile"
+QT_MOC_LITERAL(16, 204, 14), // "profileSteamid"
+QT_MOC_LITERAL(17, 219, 6), // "SGames"
+QT_MOC_LITERAL(18, 226, 11), // "goToFriends"
+QT_MOC_LITERAL(19, 238, 8), // "SFriends"
+QT_MOC_LITERAL(20, 247, 7), // "friends"
+QT_MOC_LITERAL(21, 255, 13), // "goToFavorites"
+QT_MOC_LITERAL(22, 269, 14), // "goToStatistics"
+QT_MOC_LITERAL(23, 284, 11), // "profileName"
+QT_MOC_LITERAL(24, 296, 15), // "updateMyProfile"
+QT_MOC_LITERAL(25, 312, 14), // "updateSettings"
+QT_MOC_LITERAL(26, 327, 13), // "keyPressEvent"
+QT_MOC_LITERAL(27, 341, 10), // "QKeyEvent*"
+QT_MOC_LITERAL(28, 352, 11), // "changeEvent"
+QT_MOC_LITERAL(29, 364, 7), // "QEvent*"
+QT_MOC_LITERAL(30, 372, 10), // "closeEvent"
+QT_MOC_LITERAL(31, 383, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(32, 396, 15), // "mousePressEvent"
+QT_MOC_LITERAL(33, 412, 12), // "QMouseEvent*"
+QT_MOC_LITERAL(34, 425, 14), // "mouseMoveEvent"
+QT_MOC_LITERAL(35, 440, 8), // "showForm"
+QT_MOC_LITERAL(36, 449, 5), // "bool&"
+QT_MOC_LITERAL(37, 455, 8), // "initForm"
+QT_MOC_LITERAL(38, 464, 11), // "widgetIndex"
+QT_MOC_LITERAL(39, 476, 11), // "widthWindow"
+QT_MOC_LITERAL(40, 488, 9), // "showGames"
+QT_MOC_LITERAL(41, 498, 5), // "width"
+QT_MOC_LITERAL(42, 504, 11), // "showFriends"
+QT_MOC_LITERAL(43, 516, 13), // "showStatistic"
+QT_MOC_LITERAL(44, 530, 15), // "returnFromForms"
+QT_MOC_LITERAL(45, 546, 14), // "initComponents"
+QT_MOC_LITERAL(46, 561, 8), // "getTheme"
+QT_MOC_LITERAL(47, 570, 8), // "setIcons"
+QT_MOC_LITERAL(48, 579, 16), // "resizeScrollArea"
+QT_MOC_LITERAL(49, 596, 21), // "updateButtonsBackNext"
+QT_MOC_LITERAL(50, 618, 22), // "buttonMaximize_Clicked"
+QT_MOC_LITERAL(51, 641, 22), // "buttonMinimize_Clicked"
+QT_MOC_LITERAL(52, 664, 25), // "buttonFindProfile_Clicked"
+QT_MOC_LITERAL(53, 690, 11), // "goToProfile"
+QT_MOC_LITERAL(54, 702, 2), // "id"
+QT_MOC_LITERAL(55, 705, 9), // "QueryType"
+QT_MOC_LITERAL(56, 715, 4), // "type"
+QT_MOC_LITERAL(57, 720, 22), // "buttonSettings_Clicked"
+QT_MOC_LITERAL(58, 743, 18), // "buttonExit_Clicked"
+QT_MOC_LITERAL(59, 762, 27), // "buttonGoToMyProfile_Clicked"
+QT_MOC_LITERAL(60, 790, 18), // "buttonBack_Clicked"
+QT_MOC_LITERAL(61, 809, 18), // "buttonNext_Clicked"
+QT_MOC_LITERAL(62, 828, 20) // "buttonUpdate_Clicked"
 
     },
     "MainWindow\0s_updateSettings\0\0"
@@ -102,8 +103,8 @@ QT_MOC_LITERAL(61, 819, 20) // "buttonUpdate_Clicked"
     "games\0removeAchievements\0index\0"
     "containerAchievementsClose\0"
     "returnFromAchievements\0num\0goToGames\0"
-    "prifileSteamid\0SGames\0goToFriends\0"
-    "SFriends\0friends\0goToFavorites\0"
+    "SProfile\0profileSteamid\0SGames\0"
+    "goToFriends\0SFriends\0friends\0goToFavorites\0"
     "goToStatistics\0profileName\0updateMyProfile\0"
     "updateSettings\0keyPressEvent\0QKeyEvent*\0"
     "changeEvent\0QEvent*\0closeEvent\0"
@@ -146,38 +147,38 @@ static const uint qt_meta_data_MainWindow[] = {
       11,    0,  223,    2, 0x0a /* Public */,
       12,    1,  224,    2, 0x0a /* Public */,
       14,    2,  227,    2, 0x0a /* Public */,
-      17,    2,  232,    2, 0x0a /* Public */,
-      20,    0,  237,    2, 0x0a /* Public */,
-      21,    3,  238,    2, 0x0a /* Public */,
-      23,    0,  245,    2, 0x0a /* Public */,
-      24,    0,  246,    2, 0x0a /* Public */,
-      25,    1,  247,    2, 0x08 /* Private */,
-      27,    1,  250,    2, 0x08 /* Private */,
-      29,    1,  253,    2, 0x08 /* Private */,
-      31,    1,  256,    2, 0x08 /* Private */,
-      33,    1,  259,    2, 0x08 /* Private */,
-      34,    3,  262,    2, 0x08 /* Private */,
-      34,    2,  269,    2, 0x28 /* Private | MethodCloned */,
-      39,    1,  274,    2, 0x08 /* Private */,
-      41,    0,  277,    2, 0x08 /* Private */,
-      42,    0,  278,    2, 0x08 /* Private */,
-      43,    0,  279,    2, 0x08 /* Private */,
-      44,    0,  280,    2, 0x08 /* Private */,
-      45,    0,  281,    2, 0x08 /* Private */,
-      46,    0,  282,    2, 0x08 /* Private */,
-      47,    1,  283,    2, 0x08 /* Private */,
-      47,    0,  286,    2, 0x28 /* Private | MethodCloned */,
-      48,    0,  287,    2, 0x08 /* Private */,
-      49,    0,  288,    2, 0x08 /* Private */,
-      50,    0,  289,    2, 0x08 /* Private */,
-      51,    0,  290,    2, 0x08 /* Private */,
-      52,    2,  291,    2, 0x08 /* Private */,
-      56,    0,  296,    2, 0x08 /* Private */,
-      57,    0,  297,    2, 0x08 /* Private */,
-      58,    0,  298,    2, 0x08 /* Private */,
-      59,    0,  299,    2, 0x08 /* Private */,
-      60,    0,  300,    2, 0x08 /* Private */,
-      61,    0,  301,    2, 0x08 /* Private */,
+      18,    2,  232,    2, 0x0a /* Public */,
+      21,    0,  237,    2, 0x0a /* Public */,
+      22,    3,  238,    2, 0x0a /* Public */,
+      24,    0,  245,    2, 0x0a /* Public */,
+      25,    0,  246,    2, 0x0a /* Public */,
+      26,    1,  247,    2, 0x08 /* Private */,
+      28,    1,  250,    2, 0x08 /* Private */,
+      30,    1,  253,    2, 0x08 /* Private */,
+      32,    1,  256,    2, 0x08 /* Private */,
+      34,    1,  259,    2, 0x08 /* Private */,
+      35,    3,  262,    2, 0x08 /* Private */,
+      35,    2,  269,    2, 0x28 /* Private | MethodCloned */,
+      40,    1,  274,    2, 0x08 /* Private */,
+      42,    0,  277,    2, 0x08 /* Private */,
+      43,    0,  278,    2, 0x08 /* Private */,
+      44,    0,  279,    2, 0x08 /* Private */,
+      45,    0,  280,    2, 0x08 /* Private */,
+      46,    0,  281,    2, 0x08 /* Private */,
+      47,    0,  282,    2, 0x08 /* Private */,
+      48,    1,  283,    2, 0x08 /* Private */,
+      48,    0,  286,    2, 0x28 /* Private | MethodCloned */,
+      49,    0,  287,    2, 0x08 /* Private */,
+      50,    0,  288,    2, 0x08 /* Private */,
+      51,    0,  289,    2, 0x08 /* Private */,
+      52,    0,  290,    2, 0x08 /* Private */,
+      53,    2,  291,    2, 0x08 /* Private */,
+      57,    0,  296,    2, 0x08 /* Private */,
+      58,    0,  297,    2, 0x08 /* Private */,
+      59,    0,  298,    2, 0x08 /* Private */,
+      60,    0,  299,    2, 0x08 /* Private */,
+      61,    0,  300,    2, 0x08 /* Private */,
+      62,    0,  301,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -188,33 +189,33 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Int,   10,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   13,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 16,   15,    8,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 18,   15,   19,
+    QMetaType::Void, 0x80000000 | 15, 0x80000000 | 17,   16,    8,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 19,   16,   20,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 16, QMetaType::QString,   15,    8,   22,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 17, QMetaType::QString,   16,    8,   23,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 26,    2,
-    QMetaType::Void, 0x80000000 | 28,    2,
-    QMetaType::Void, 0x80000000 | 30,    2,
-    QMetaType::Void, 0x80000000 | 32,    2,
-    QMetaType::Void, 0x80000000 | 32,    2,
-    QMetaType::Void, 0x80000000 | 35, QMetaType::Int, QMetaType::Int,   36,   37,   38,
-    QMetaType::Void, 0x80000000 | 35, QMetaType::Int,   36,   37,
-    QMetaType::Void, QMetaType::Int,   40,
+    QMetaType::Void, 0x80000000 | 27,    2,
+    QMetaType::Void, 0x80000000 | 29,    2,
+    QMetaType::Void, 0x80000000 | 31,    2,
+    QMetaType::Void, 0x80000000 | 33,    2,
+    QMetaType::Void, 0x80000000 | 33,    2,
+    QMetaType::Void, 0x80000000 | 36, QMetaType::Int, QMetaType::Int,   37,   38,   39,
+    QMetaType::Void, 0x80000000 | 36, QMetaType::Int,   37,   38,
+    QMetaType::Void, QMetaType::Int,   41,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::QString,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   40,
+    QMetaType::Void, QMetaType::Int,   41,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 54,   53,   55,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 55,   54,   56,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -237,7 +238,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->removeAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->containerAchievementsClose(); break;
         case 5: _t->returnFromAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 6: _t->goToGames((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2]))); break;
+        case 6: _t->goToGames((*reinterpret_cast< SProfile(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2]))); break;
         case 7: _t->goToFriends((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SFriends(*)>(_a[2]))); break;
         case 8: _t->goToFavorites(); break;
         case 9: _t->goToStatistics((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;

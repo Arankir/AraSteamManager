@@ -40,7 +40,7 @@ public:
     {
         if (FormCategoryValue->objectName().isEmpty())
             FormCategoryValue->setObjectName(QString::fromUtf8("FormCategoryValue"));
-        FormCategoryValue->resize(588, 25);
+        FormCategoryValue->resize(605, 24);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormCategoryValue->setFont(font);

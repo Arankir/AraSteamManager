@@ -43,7 +43,7 @@ public slots:
     void updateFilterCategoriesColumns(int categories);
     void updateFilterTextAchievement(QString aNewText, bool aSolo, bool aCompare);
     void updateFilterCategory(int aCategoryIndex, bool aClear, QList<QString> aAchievementNames = QList<QString>());
-    void updateFilterFavorite(int aRow, int aFavorite);
+    void updateFilterFavorite(QJsonArray afavoritesAchievement);
     void setValuesMode(bool value);
     void setUniqueMode(bool aUnique);
     void setVisibleContentSelect(int aPos, bool aSelect);
@@ -51,9 +51,11 @@ public slots:
     bool swapCategoryColumns(int aPosOld, int aPosNew);
     void update();
     QString getHeaderText(int aIndex);
+    SAchievement getAchievement(int aIndex);
+    void cancelCategory();
 
 public:
-    explicit FormTablesHeaders(int rowHeaders, int rowContent, SGame game, QString id, SAchievements achievements, TableType type, QWidget *parent = nullptr);
+    explicit FormTablesHeaders(int rowHeaders, int rowContent, SGame game, QString id, SAchievementsPlayer achievements, TableType type, QWidget *parent = nullptr);
     ~FormTablesHeaders();
     void resizeEvent(QResizeEvent *event);
     void changeEvent(QEvent *event);

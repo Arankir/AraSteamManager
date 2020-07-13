@@ -13,10 +13,10 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     ui->LabelPersonaState->setWordWrap(true);
 #define Connects {
     connect(ui->ButtonSetProfile, &QPushButton::clicked, this, &FormProfile::buttonSetProfile_Clicked);
-    connect(ui->ButtonGames, &QPushButton::clicked, this, &FormProfile::buttonGames_Clicked);
-    connect(ui->ButtonFriends, &QPushButton::clicked, this, &FormProfile::buttonFriends_Clicked);
+    connect(ui->ButtonGames,      &QPushButton::clicked, this, &FormProfile::buttonGames_Clicked);
+    connect(ui->ButtonFriends,    &QPushButton::clicked, this, &FormProfile::buttonFriends_Clicked);
     connect(ui->ButtonStatistics, &QPushButton::clicked, this, &FormProfile::buttonStatistics_Clicked);
-    connect(ui->ButtonFavorites, &QPushButton::clicked, this, &FormProfile::buttonFavorites_Clicked);
+    connect(ui->ButtonFavorites,  &QPushButton::clicked, this, &FormProfile::buttonFavorites_Clicked);
 #define ConnectsEnd }
     updateTheme();
     profileToUi(_profile);
@@ -301,7 +301,7 @@ void FormProfile::buttonSetProfile_Clicked() {
 
 void FormProfile::buttonGames_Clicked() {
     if(_games.getStatus() == StatusValue::success) {
-        emit s_goToGames(_profile._steamID, _games);
+        emit s_goToGames(_profile, _games);
     }
 }
 

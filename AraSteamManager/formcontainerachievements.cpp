@@ -20,16 +20,16 @@ FormContainerAchievements::~FormContainerAchievements() {
     delete ui;
 }
 
-void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer aPl, QString aIds, SGame aGame, int aNum) {
+void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer aPl, SProfile aProfile, SGame aGame, int aNum) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); i++) {
         FormAchievements *tab = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0));
-        if((tab) && (tab->getGameAppId() == aGame._appID) && (tab->getProfile() == aIds)) {
+        if((tab) && (tab->getGameAppId() == aGame._appID) && (tab->getProfileId() == aProfile._steamID)) {
             tab->buttonUpdate_Clicked();
             ui->TabWidgetAchievements->setCurrentIndex(i);
             return;
         }
     }
-    FormAchievements *newFormAchievements = new FormAchievements(aPl, aIds, aGame, aNum, this);
+    FormAchievements *newFormAchievements = new FormAchievements(aPl, aProfile, aGame, aNum, this);
     int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements, "  " + aGame._name + "  ");
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
     QString filePath = _setting._pathImagesIconGames + aGame._img_icon_url + ".jpg";

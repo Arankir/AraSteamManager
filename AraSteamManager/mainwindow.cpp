@@ -488,7 +488,7 @@ void MainWindow::addAchievements(SAchievementsPlayer aAchievements, SGame aGames
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
     if (currentProfile) {
-        _containerAchievementsForm->AddFormAchievement(aAchievements, currentProfile->getProfile()._steamID, aGames, _achievementsCount++);
+        _containerAchievementsForm->AddFormAchievement(aAchievements, currentProfile->getProfile(), aGames, _achievementsCount++);
         _containerAchievementsForm->show();
     }
 }
@@ -500,7 +500,7 @@ void MainWindow::removeAchievements(int index) {
 void MainWindow::containerAchievementsClose() {
     _achievementsCount = 0;
     disconnect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
-    disconnect(_containerAchievementsForm, &FormContainerAchievements::s_formClose, this, &MainWindow::containerAchievementsClose);
+    disconnect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &MainWindow::containerAchievementsClose);
 }
 
 void MainWindow::returnFromAchievements(int aNum) {
@@ -638,11 +638,11 @@ void MainWindow::buttonMinimize_Clicked() {
 #define Functions {
 void MainWindow::buttonFindProfile_Clicked() {
     QString profileId = ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com").remove('\r');
-    if(ui->LineEditIdProfile->text().indexOf("/id/",0) > -1) {
+    if(ui->LineEditIdProfile->text().indexOf("/id/", 0) > -1) {
         profileId = profileId.remove("/id/").remove("/");
         goToProfile(profileId, QueryType::vanity);
     } else {
-        if(ui->LineEditIdProfile->text().indexOf("/profiles/",0) > -1) {
+        if(ui->LineEditIdProfile->text().indexOf("/profiles/", 0) > -1) {
             profileId = profileId.remove("/profiles/").remove("/");
         }
         goToProfile(profileId,QueryType::url);
@@ -659,17 +659,17 @@ void MainWindow::goToProfile(QString aId, QueryType aType) {
                 ui->StackedWidgetProfiles->removeWidget(ui->StackedWidgetProfiles->widget(ui->StackedWidgetProfiles->currentIndex() + 1));
             }
         }
-        FormProfile *newStackedProfile = new FormProfile(newProfile[0]);
-        newStackedProfile->setSizePolicy(QSizePolicy(QSizePolicy::Preferred,QSizePolicy::Minimum));
-        ui->StackedWidgetProfiles->addWidget(newStackedProfile);
+        FormProfile *newFormProfile = new FormProfile(newProfile[0]);
+        newFormProfile->setSizePolicy(QSizePolicy(QSizePolicy::Preferred,QSizePolicy::Minimum));
+        ui->StackedWidgetProfiles->addWidget(newFormProfile);
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->count() - 1);
-        connect(newStackedProfile, &FormProfile::s_goToGames, this, &MainWindow::goToGames);
-        connect(newStackedProfile, &FormProfile::s_goToFriends, this, &MainWindow::goToFriends);
-        connect(newStackedProfile, &FormProfile::s_goToStatistic, this, &MainWindow::goToStatistics);
-        connect(newStackedProfile, &FormProfile::s_goToFavorites, this, &MainWindow::goToFavorites);
-        connect(newStackedProfile, &FormProfile::s_myProfileChange, this, &MainWindow::updateMyProfile);
-        connect(this, &MainWindow::s_updateSettings, newStackedProfile, &FormProfile::updateVisibleInfo);
-        connect(this, &MainWindow::s_updateSettings, newStackedProfile, &FormProfile::updateTheme);
+        connect(newFormProfile, &FormProfile::s_goToGames,       this,           &MainWindow::goToGames);
+        connect(newFormProfile, &FormProfile::s_goToFriends,     this,           &MainWindow::goToFriends);
+        connect(newFormProfile, &FormProfile::s_goToStatistic,   this,           &MainWindow::goToStatistics);
+        connect(newFormProfile, &FormProfile::s_goToFavorites,   this,           &MainWindow::goToFavorites);
+        connect(newFormProfile, &FormProfile::s_myProfileChange, this,           &MainWindow::updateMyProfile);
+        connect(this,           &MainWindow::s_updateSettings,   newFormProfile, &FormProfile::updateVisibleInfo);
+        connect(this,           &MainWindow::s_updateSettings,   newFormProfile, &FormProfile::updateTheme);
         updateSettings();
         updateMyProfile();
         updateButtonsBackNext();
@@ -703,15 +703,15 @@ void MainWindow::buttonNext_Clicked() {
     }
 }
 
-void MainWindow::goToGames(QString aProfileSteamId, SGames aGames) {
+void MainWindow::goToGames(SProfile aProfileSteamId, SGames aGames) {
     if(!_initGames) {
         if(!_blockedLoad) {
             _blockedLoad = true;
             ui->FormProgressBar->setMaximum(aGames.getCount());
             _gamesForm = new FormGames(aProfileSteamId, aGames, this);
-            connect(_gamesForm, &FormGames::s_finish, this, &MainWindow::showGames);
+            connect(_gamesForm, &FormGames::s_finish,             this, &MainWindow::showGames);
             connect(_gamesForm, &FormGames::s_achievementsLoaded, this, &MainWindow::progressLoading);
-            connect(_gamesForm, &FormGames::s_showAchievements, this, &MainWindow::addAchievements);
+            connect(_gamesForm, &FormGames::s_showAchievements,   this, &MainWindow::addAchievements);
             ui->ScrollAreaGames->setWidget(_gamesForm);
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
@@ -721,12 +721,12 @@ void MainWindow::goToGames(QString aProfileSteamId, SGames aGames) {
     }
 }
 
-void MainWindow::goToFriends(QString aPrifileSteamid, SFriends aFriends) {
+void MainWindow::goToFriends(QString aProfileSteamid, SFriends aFriends) {
     if(!_initFriends) {
         if(!_blockedLoad) {
             _blockedLoad = true;
             ui->FormProgressBar->setMaximum(aFriends.getCount());
-            _friendsForm = new FormFriends(aPrifileSteamid, aFriends, this);
+            _friendsForm = new FormFriends(aProfileSteamid, aFriends, this);
             connect(_friendsForm, &FormFriends::s_go_to_profile, this, &MainWindow::goToProfile);
             ui->ScrollAreaFriends->setWidget(_friendsForm);
             ui->FormProgressBar->setVisible(true);

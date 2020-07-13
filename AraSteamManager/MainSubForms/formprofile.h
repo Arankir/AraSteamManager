@@ -24,7 +24,7 @@ public:
 
 public slots:
     void profileToUi(SProfile profile);
-    void setProfile(SProfile a_profile);
+    void setProfile(SProfile profile);
     SProfile getProfile();
     SGames getGames();
     SFriends getFriends();
@@ -34,9 +34,9 @@ public slots:
     void retranslate();
 
 signals:
-    void s_goToGames(QString prifileSteamid, SGames games);
-    void s_goToFriends(QString prifileSteamid, SFriends friends);
-    void s_goToStatistic(QString prifileSteamid, SGames games, QString profileName);
+    void s_goToGames(SProfile profileSteamid, SGames games);
+    void s_goToFriends(QString profileSteamid, SFriends friends);
+    void s_goToStatistic(QString profileSteamid, SGames games, QString profileName);
     void s_goToFavorites();
     void s_myProfileChange();
 

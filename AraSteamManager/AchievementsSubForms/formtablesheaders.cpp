@@ -19,8 +19,8 @@ constexpr int c_tableAchievementColumnCount = 6;
 #define ConstantsEnd }
 
 //Добавить Retranslate()
-FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGame, QString aId, SAchievements aAchievements, TableType aType, QWidget *aParent): QWidget(aParent),
-                    ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _id(aId) {
+FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGame, QString aId, SAchievementsPlayer aPlayer, TableType aType, QWidget *aParent): QWidget(aParent),
+                    ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false), _id(aId), _achievements(aPlayer) {
     ui->setupUi(this);
 #define ConnectSlots {
     connect(ui->TableWidgetContent->horizontalScrollBar(), &QScrollBar::sliderMoved, ui->TableWidgetHorizontalHeader->horizontalScrollBar(), &QScrollBar::setValue);
@@ -47,7 +47,6 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
     setColumnCount(c_tableAchievementColumnCount);
     setType(aType);
 
-    _achievements = aAchievements;
     _achievements._appid = QString::number(_game._appID);
     _achievements._id = _id;
     _achievements.set(SAchievementsPercentage(QString::number(_game._appID), false, this));
@@ -147,6 +146,10 @@ QTableWidgetItem* FormTablesHeaders::itemContent(int aRow, int aColumn) {
 
 QTableWidgetItem* FormTablesHeaders::itemHorizontalHeader(int aRow, int aColumn) {
     return ui->TableWidgetHorizontalHeader->item(aRow, aColumn);
+}
+
+SAchievement FormTablesHeaders::getAchievement(int aIndex) {
+    return _achievements[aIndex];
 }
 
 QTableWidget *FormTablesHeaders::getTableHH() {
@@ -276,33 +279,45 @@ void FormTablesHeaders::resizeRowHeaders(int aRow, int aHeight) {
 }
 
 void FormTablesHeaders::setType(TableType aNewType) {
+    qDebug()<< _categoriesColumns<< _noValueColumn<< _friendsColumns;
     switch (aNewType) {
-    case TableType::compare:{
+    case TableType::compare: {
+        qDebug()<< 1;
         _visibleHorizontal = true;
         ui->TableWidgetHorizontalHeader->setVisible(true);
         ui->TableWidgetContent->horizontalHeader()->setVisible(false);
-        while(_categoriesColumns.size() > 0) {
-            removeCategoryColumn(0);
+        for (const int &index: _categoriesColumns) {
+            setVisibleColumn(index, false);
         }
-        if(_noValueColumn > -1) {
-            removeColumn(_noValueColumn);
+        if (_noValueColumn > -1) {
+            setVisibleColumn(_noValueColumn, false);
         }
-        _noValueColumn = -1;
+        for (const int &index: _friendsColumns) {
+            setVisibleColumn(index, true);
+        }
         resize();
         break;
     }
-    case TableType::standart:{
+    case TableType::standart: {
+        qDebug()<< 2;
         _visibleHorizontal = false;
         ui->TableWidgetHorizontalHeader->setVisible(false);
         ui->TableWidgetContent->horizontalHeader()->setVisible(true);
-        while(_friendsColumns.size() > 0) {
-            removeFriendColumn(0);
+        for (const int &index: _categoriesColumns) {
+            setVisibleColumn(index, true);
+        }
+        if (_noValueColumn > -1) {
+            setVisibleColumn(_noValueColumn, true);
+        }
+        for (const int &index: _friendsColumns) {
+            setVisibleColumn(index, false);
         }
         resize();
         break;
     }
     }
     _currentType = aNewType;
+    updateHiddenRows();
     //!!!!!!!!!!!!!
 }
 
@@ -320,6 +335,18 @@ int FormTablesHeaders::getNoValueColumn() {
 
 QVector<int> FormTablesHeaders::getCategoryColumns() {
     return _categoriesColumns;
+}
+
+void FormTablesHeaders::cancelCategory() {
+    while (_categoriesColumns.size() > 0) {
+        removeColumn(_categoriesColumns[0]);
+        _categoriesColumns.remove(0);
+    }
+    if (_noValueColumn > -1) {
+        removeColumn(_noValueColumn);
+        _isNoValue = -1;
+    }
+    _isUnique = false;
 }
 
 void FormTablesHeaders::setValuesMode(bool value) {
@@ -615,10 +642,16 @@ void FormTablesHeaders::updateHiddenRows() {
             for (int i = 0; i < getRowCount(); i++) {
                 if (_fAchievements.getData(i)) {
                     bool isExist = false;
-                    for (int j = c_tableAchievementColumnCount; j < getColumnCount(); j++) {
-                        if (itemContent(i, j)->checkState() == Qt::Checked) {
+                    if (_isNoValue) {
+                        if (itemContent(i, _noValueColumn)->checkState() == Qt::Checked) {
                             isExist = true;
-                            break;
+                        }
+                    } else {
+                        for (int j = 0; j < _categoriesColumns.size(); j++) {
+                            if (itemContent(i, _categoriesColumns[j])->checkState() == Qt::Checked) {
+                                isExist = true;
+                                break;
+                            }
                         }
                     }
                     setVisibleRowContent(i, !isExist);
@@ -782,9 +815,25 @@ void FormTablesHeaders::updateFilterCategoriesColumns(int aCategories) {
     updateHiddenRows();
 }
 
-void FormTablesHeaders::updateFilterFavorite(int aRow, int aFavorite) {
-    _fAchievements.setData(aRow, c_filterFavorite, aFavorite);
-    _fCompare.setData(aRow, c_filterFavorite, aFavorite);
+void FormTablesHeaders::updateFilterFavorite(QJsonArray aFavoritesAchievement) {
+    if (aFavoritesAchievement == QJsonArray()) {
+        for (int i = 0; i < getRowCount(); i++) {
+            _fAchievements.setData(i, c_filterFavorite, true);
+            _fCompare.setData(i, c_filterFavorite, true);
+        }
+    } else {
+        for (int i = 0; i < getRowCount(); i++) {
+            bool accept = false;
+            for (auto value: aFavoritesAchievement) {
+                if (value.toObject().value("id").toString() == _achievements[i]._apiName) {
+                    accept = true;
+                    break;
+                }
+            }
+            _fAchievements.setData(i, c_filterFavorite, accept);
+            _fCompare.setData(i, c_filterFavorite, accept);
+        }
+    }
     updateHiddenRows();
 }
 

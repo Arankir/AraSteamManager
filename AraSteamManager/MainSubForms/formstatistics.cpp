@@ -75,7 +75,7 @@ void FormStatistics::retranslate() {
                                         QString::number(_totalAverage / (_numof[1] + _numof[2]))));
     QList<QAbstractSeries*> series = _donutBreakdown->series();
     switch (series.size()) {
-    default:{
+    default: {
 
     }
     case 3: {
@@ -96,8 +96,9 @@ void FormStatistics::retranslate() {
             pie->slices()[0]->setLabel(tr("Не начато (%1)").arg(_numof[0]));
         }
     }
-    case 0:;
+    case 0: {
 
+    }
     }
     _chartT->setTitle(tr("Достижения по часам"));
     _chartM->setTitle(tr("Достижения по месяцам"));

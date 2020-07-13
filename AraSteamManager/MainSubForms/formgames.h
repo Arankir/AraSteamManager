@@ -33,7 +33,7 @@ public slots:
     void slotShowHideSlide();
 
 public:
-    explicit FormGames(QString id, SGames Games, QWidget *parent = nullptr);
+    explicit FormGames(SProfile profile, SGames Games, QWidget *parent = nullptr);
     ~FormGames();
 
 signals:
@@ -63,7 +63,7 @@ private slots:
 
 private:
     Ui::FormGames *ui;
-    QString _id;
+    SProfile _profile;
     int _windowChildCount = 0;
     SGames _games;
     SAchievementsPlayer *_achievements;

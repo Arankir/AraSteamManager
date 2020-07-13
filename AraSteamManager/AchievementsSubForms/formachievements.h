@@ -33,7 +33,7 @@ class FormAchievements: public QWidget {
     Q_OBJECT
 
 enum class FormMode {
-    achievement,
+    standart,
     compare
 };
 
@@ -51,12 +51,12 @@ enum class CategoryType {
 public slots:
     void progressLoading(int progress, int row);
     void onFinish(int reached, int notReached);
-    QString getProfile();
+    QString getProfileId();
     int getGameAppId();
     void buttonUpdate_Clicked();
 
 public:
-    explicit FormAchievements(SAchievementsPlayer pl, QString id, SGame game, int num, QWidget *parent = nullptr);
+    explicit FormAchievements(SAchievementsPlayer pl, SProfile profile, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -65,15 +65,16 @@ signals:
 
 private slots:
     void changeEvent(QEvent *event);
-    void initComponents();
-    void pullTable();
+    void initComponents(SAchievementsPlayer player);
     void retranslate();
+    void setTheme();
+    void setIcons();
 
-    void switchMode(FormAchievements::FormMode mode);
+    QButtonWithData *createButtonWithData(QString aObjectName, QString aAppertain, QString aType, bool aChecked);
+    void setFromMode(FormAchievements::FormMode mode);
     void loadingCompare();
     void loadFriendGames(SGames *games);
     void finishLoadFriends();
-    void compareProfileFilterClickMy(QString name, ReachedType type);
     void compareProfileFilterClickFriends(QString name, ReachedType type);
 
     void buttonCompareAllFriendsReach_Clicked();
@@ -83,16 +84,10 @@ private slots:
 
     void closeEvent(QCloseEvent*);
     void showCategories();
-    void updateHiddenRows();
-    bool setFriendAchievements(SAchievements achievement, int column);
 
-    void lineEditNameAchievements_TextChanged(const QString &arg1);
-    void buttonFindAchievement_Clicked();
     void buttonAddCategory_Clicked();
     void buttonChangeCategory_Clicked();
-    void favoritesClicked();
     void buttonCompare_Clicked();
-    void checkBoxShowFilter_StateChanged(int arg1);
     void comboBoxCategory_IndexChange(int index);
     void checkBoxCategory_StateChanged(int ind);
     void buttonDeleteAllCategories_Clicked();
@@ -107,38 +102,30 @@ private slots:
     void checkBoxCategoryVisibleAll_Clicked();
 
     void updateValuesUpDown(int value = -1);
-    void formCategoryValue_Change(int pos, QString value);
     void formCategoryVisible_Change(int pos, bool visible);
     void formCategoryPosition_Change(int pos, int newpos);
-    void formCategorySelect_Change(int pos, bool select);
     void formCategoryDelete(int pos);
     void formCategoryReverse(int pos);
 
     void checkBoxFavorites_StateChanged(int arg1);
 
-    void checkBoxCategoryUniqueValue_StateChanged(int arg1);
-    void hideCheckedAchievement(QTableWidgetItem *item);
     FormCategoryValue* createValueCategory();
 
     void buttonFavorite_Clicked();
 
     void tableAchievements_CellClicked(int row, int column);
 
-    void setTheme();
-    void setIcons();
-
 private:
     Ui::FormAchievements *ui;
     Settings _setting;
-    QString _theme = "white";
+    QString _iconsColor = "white";
     QString _currentAchievement;
     int _currentAchievementIndex = -1;
 
     //ключевые данные
-    QString _id;
+    SProfile _profile;
     SGame _game;
     int _unicNum;
-    SAchievements _achievements;
     CategoriesGame _categoriesGame;
     Favorites _favorites;
 
@@ -163,11 +150,6 @@ private:
     //для создания/редактирования категории
     CategoryType _typeCategory = CategoryType::none;
     QList<FormCategoryValue*> _values;
-    bool _isUnique = false;
-
-    //для фильтрации
-    Filter _fAchievements;
-    Filter _fCompare;
 
 };
 

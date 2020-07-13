@@ -1,21 +1,24 @@
 #include "formcompareprofilefilter.h"
 #include "ui_formcompareprofilefilter.h"
 
-FormCompareProfileFilter::FormCompareProfileFilter(QWidget *parent) : FormCompareProfileFilter("","","",parent) {
+FormCompareProfileFilter::FormCompareProfileFilter(QWidget *aParent): FormCompareProfileFilter("", "", "", aParent) {
 
 }
 
-FormCompareProfileFilter::FormCompareProfileFilter(QString aTitleAll, QString aTitleReached, QString aTitleNotReached, QWidget *parent): QWidget(parent), ui(new Ui::FormCompareProfileFilter){
+FormCompareProfileFilter::FormCompareProfileFilter(QString aTitleAll, QString aTitleReached, QString aTitleNotReached, QWidget *parent): QWidget(parent),
+ui(new Ui::FormCompareProfileFilter) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     QString theme;
-    switch(_setting.getTheme()){
-        case 1:
-            theme = "white";
-            break;
-        case 2:
-            theme = "black";
-            break;
+    switch(_setting.getTheme()) {
+    case 1: {
+        theme = "white";
+        break;
+    }
+    case 2: {
+        theme = "black";
+        break;
+    }
     }
     ui->RadioButtonAll->setIcon(QIcon("://" + theme + "/all.png"));
     ui->RadioButtonReached->setIcon(QIcon("://" + theme + "/reached.png"));
@@ -23,13 +26,13 @@ FormCompareProfileFilter::FormCompareProfileFilter(QString aTitleAll, QString aT
     ui->RadioButtonAll->SetReachedType(ReachedType::all);
     ui->RadioButtonReached->SetReachedType(ReachedType::reached);
     ui->RadioButtonNotReached->SetReachedType(ReachedType::notReached);
-    connect(ui->RadioButtonAll,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::radioButtonClick);
-    connect(ui->RadioButtonReached,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::radioButtonClick);
-    connect(ui->RadioButtonNotReached,&QRadioButtonWithData::clicked,this,&FormCompareProfileFilter::radioButtonClick);
+    connect(ui->RadioButtonAll, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
+    connect(ui->RadioButtonReached, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
+    connect(ui->RadioButtonNotReached, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
     setTitles(aTitleAll, aTitleReached, aTitleNotReached);
 }
 
-FormCompareProfileFilter::~FormCompareProfileFilter(){
+FormCompareProfileFilter::~FormCompareProfileFilter() {
     delete ui;
 }
 

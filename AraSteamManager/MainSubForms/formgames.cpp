@@ -11,7 +11,7 @@ constexpr int c_tableColumnCount = 5;
 #define ConstantsEnd }
 
 #define Init {
-FormGames::FormGames(QString aId, SGames aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _id(aId),  _games(aGames), _favorites("games") {
+FormGames::FormGames(SProfile aProfile, SGames aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _profile(aProfile),  _games(aGames), _favorites("games") {
     ui->setupUi(this);
     initComponents();
 }
@@ -90,7 +90,7 @@ void FormGames::onFinish() {
     ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex, true);
     ui->TableWidgetGames->resizeColumnsToContents();
     QFile fileHide;
-    fileHide.setFileName(_setting._pathHide + _id + ".txt");
+    fileHide.setFileName(_setting._pathHide + _profile._steamID + ".txt");
     if(fileHide.open(QIODevice::ReadOnly)) {
         while(!fileHide.atEnd()) {
             _hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n");
@@ -118,7 +118,7 @@ void FormGames::onFinish() {
         } else {
             iconGame->setPixmap(QPixmap(path));
         }
-        SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(game._appID), _id);
+        SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(game._appID), _profile._steamID);
         achievementsGame->_index = row;
         connect(achievementsGame, SIGNAL(s_finished(SAchievementsPlayer)), this, SLOT(onResultAchievements(SAchievementsPlayer)));
         for (int j = 0; j < hideList.size(); j++) {
@@ -338,7 +338,7 @@ void FormGames::buttonFavorite_Clicked() {
     newValue["id"] = QString::number(_games[_selectedIndex.toInt()]._appID);
     newValue["name"] = _games[_selectedIndex.toInt()]._name;
     newValue["icon"] = _games[_selectedIndex.toInt()]._img_icon_url;
-    newValue["idUser"] = _id;
+    newValue["idUser"] = _profile._steamID;
     ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
     if(_favorites.addValue(newValue, true)) {
         //Категория добавилась
@@ -359,7 +359,7 @@ void FormGames::buttonHide_Clicked() {
     question.addButton(tr("Отмена"), QMessageBox::NoRole);
     question.exec();
     if(question.clickedButton() == btnProfile) {
-         savePath = _setting._pathHide + _id + ".txt";
+         savePath = _setting._pathHide + _profile._steamID + ".txt";
     } else if(question.clickedButton() == btnAll) {
          savePath = _setting._pathHide + "All.txt";
     } else {
