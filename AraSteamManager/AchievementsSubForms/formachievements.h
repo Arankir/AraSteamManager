@@ -50,7 +50,7 @@ enum class CategoryType {
 
 public slots:
     void progressLoading(int progress, int row);
-    void onFinish(int reached, int notReached);
+    void onTablePulled(int reached, int notReached);
     QString getProfileId();
     int getGameAppId();
     void buttonUpdate_Clicked();

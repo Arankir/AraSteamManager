@@ -18,6 +18,7 @@ public:
     explicit ThreadGames(const int a_tableColumnAppid, const int a_tableColumnIndex, const int a_tableColumnName, QTableWidget *a_tableWidgetGames,
                          SGames a_games, QObject *a_parent = nullptr);
 
+    ~ThreadGames();
 signals:
     void s_finished();
     void s_progress(int p, int row);

@@ -22,11 +22,13 @@ FormContainerAchievements::~FormContainerAchievements() {
 
 void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer aPl, SProfile aProfile, SGame aGame, int aNum) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); i++) {
-        FormAchievements *tab = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements[i].widget(0));
-        if((tab) && (tab->getGameAppId() == aGame._appID) && (tab->getProfileId() == aProfile._steamID)) {
-            tab->buttonUpdate_Clicked();
-            ui->TabWidgetAchievements->setCurrentIndex(i);
-            return;
+        FormAchievements *tab = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements[0].widget(i));
+        if (tab) {
+            if((tab->getGameAppId() == aGame._appID) && (tab->getProfileId() == aProfile._steamID)) {
+                tab->buttonUpdate_Clicked();
+                ui->TabWidgetAchievements->setCurrentIndex(i);
+                return;
+            }
         }
     }
     FormAchievements *newFormAchievements = new FormAchievements(aPl, aProfile, aGame, aNum, this);

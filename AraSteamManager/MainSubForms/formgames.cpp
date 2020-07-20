@@ -46,16 +46,15 @@ void FormGames::initComponents() {
     ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33);
     ui->TableWidgetGames->setColumnWidth(c_tableColumnName, 300);
 #define Connects {
-    connect(ui->LineEditGame, &QLineEdit::textChanged, this, &FormGames::lineEditGame_TextChanged);
-    connect(ui->ButtonFind, &QPushButton::clicked, this, &FormGames::buttonFind_Clicked);
-    connect(ui->TableWidgetGames, &QTableWidget::cellDoubleClicked, this, &FormGames::tableWidgetGames_CellDoubleClicked);
-    connect(ui->TableWidgetGames, &QTableWidget::cellClicked, this, &FormGames::tableWidgetGames_CellClicked);
-    connect(ui->ButtonAchievements, &QPushButton::clicked, this, &FormGames::buttonAchievements_Clicked);
-    connect(ui->ButtonFavorite, &QPushButton::clicked, this, &FormGames::buttonFavorite_Clicked);
-    connect(ui->ButtonHide, &QPushButton::clicked, this, &FormGames::buttonHide_Clicked);
+    connect(ui->LineEditGame,       &QLineEdit::textChanged,          this, &FormGames::lineEditGame_TextChanged);
+    connect(ui->ButtonFind,         &QPushButton::clicked,            this, &FormGames::buttonFind_Clicked);
+    connect(ui->TableWidgetGames,   &QTableWidget::cellDoubleClicked, this, &FormGames::tableWidgetGames_CellDoubleClicked);
+    connect(ui->TableWidgetGames,   &QTableWidget::cellClicked,       this, &FormGames::tableWidgetGames_CellClicked);
+    connect(ui->ButtonAchievements, &QPushButton::clicked,            this, &FormGames::buttonAchievements_Clicked);
+    connect(ui->ButtonFavorite,     &QPushButton::clicked,            this, &FormGames::buttonFavorite_Clicked);
+    connect(ui->ButtonHide,         &QPushButton::clicked,            this, &FormGames::buttonHide_Clicked);
 #define ConnectsEnd }
-    Threading loadTable(this);
-    loadTable.AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
+    createThread();
 }
 
 void FormGames::updateTheme() {
@@ -76,13 +75,6 @@ void FormGames::setIcons() {
     ui->ButtonHide->setIcon(QIcon("://" + _theme + "/hide.png"));
     ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
     ui->ButtonChangeGroup->setIcon(QIcon("://" + _theme + "/change.png"));
-}
-
-void FormGames::progressLoading(int aProgress, int aRow){
-    ui->ProgressBarLoading->setValue(aProgress);
-    //if(ui->ProgressBarLoading->value()==ui->ProgressBarLoading->maximum()-1){
-        //ui->ProgressBarLoading->setVisible(false);
-    //}
 }
 
 void FormGames::onFinish() {
@@ -252,6 +244,16 @@ void FormGames::slotShowHideSlide() {
 
 //    qDebug()<<3<<ui->FrameGroup->isVisible();
 //    showHideSlideWidget(!ui->FrameGroup->isVisible());
+}
+
+void FormGames::createThread() {
+    Threading *loadTable = new Threading(this);
+    loadTable->AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
+    connect (loadTable, &Threading::s_games_progress, this, [=](int progress, int row) {
+        ui->ProgressBarLoading->setValue(progress);
+        emit s_achievementsLoaded(progress, row);
+    });
+    connect (loadTable, &Threading::s_games_finished, this, &FormGames::onFinish);
 }
 #define SystemEnd }
 

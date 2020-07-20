@@ -47,12 +47,6 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
     setColumnCount(c_tableAchievementColumnCount);
     setType(aType);
 
-    _achievements._appid = QString::number(_game._appID);
-    _achievements._id = _id;
-    _achievements.set(SAchievementsPercentage(QString::number(_game._appID), false, this));
-    _achievements.update();
-    connect(&_achievements, SIGNAL(s_finished()), this, SLOT(pullTable()));
-
     ui->TableWidgetContent->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetHorizontalHeader->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //ui->TableWidgetContent->setSelectionMode(QAbstractItemView::NoSelection);
@@ -82,6 +76,12 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
     setColumnWidth(c_tableAchievementColumnWorld, 65);
     setColumnWidth(c_tableAchievementColumnReachedMy, 80);
     ui->TableWidgetHorizontalHeader->setRowHeight(0, 33);
+
+    _achievements._appid = QString::number(_game._appID);
+    _achievements._id = _id;
+    _achievements.set(SAchievementsPercentage(QString::number(_game._appID), false, this));
+    _achievements.update();
+    connect(&_achievements, SIGNAL(s_finished()), this, SLOT(pullTable()));
 }
 
 FormTablesHeaders::~FormTablesHeaders() {
@@ -279,10 +279,8 @@ void FormTablesHeaders::resizeRowHeaders(int aRow, int aHeight) {
 }
 
 void FormTablesHeaders::setType(TableType aNewType) {
-    qDebug()<< _categoriesColumns<< _noValueColumn<< _friendsColumns;
     switch (aNewType) {
     case TableType::compare: {
-        qDebug()<< 1;
         _visibleHorizontal = true;
         ui->TableWidgetHorizontalHeader->setVisible(true);
         ui->TableWidgetContent->horizontalHeader()->setVisible(false);
@@ -299,7 +297,6 @@ void FormTablesHeaders::setType(TableType aNewType) {
         break;
     }
     case TableType::standart: {
-        qDebug()<< 2;
         _visibleHorizontal = false;
         ui->TableWidgetHorizontalHeader->setVisible(false);
         ui->TableWidgetContent->horizontalHeader()->setVisible(true);
@@ -523,12 +520,13 @@ bool FormTablesHeaders::pullTable() {
         }
         _fAchievements.setRow(getRowCount());
         _fCompare.setRow(getRowCount());
-        Threading loadTable(this);
-        //QLabel *labelCompareSummary = new QLabel(this);
-        //setWidgetHorizontalHeader(1, c_tableAchievementColumnReachedMy, labelCompareSummary);
-        loadTable.AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription,
-                                        c_tableAchievementColumnWorld,  c_tableAchievementColumnReachedMy,
-                                        _achievements, ui->TableWidgetContent);
+        createThread();
+//        Threading loadTable(this);
+//        //QLabel *labelCompareSummary = new QLabel(this);
+//        //setWidgetHorizontalHeader(1, c_tableAchievementColumnReachedMy, labelCompareSummary);
+//        loadTable.AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription,
+//                                        c_tableAchievementColumnWorld,  c_tableAchievementColumnReachedMy,
+//                                        _achievements, ui->TableWidgetContent);
         return true;
     } else {
         setRowCount(1);
@@ -539,6 +537,17 @@ bool FormTablesHeaders::pullTable() {
         setVisibleColumn(c_tableAchievementColumnReachedMy, false);
         return false;
     }
+}
+
+void FormTablesHeaders::createThread() {
+    Threading *loadTable = new Threading(this);
+    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription,
+                                    c_tableAchievementColumnWorld,  c_tableAchievementColumnReachedMy,
+                                    _achievements, ui->TableWidgetContent);
+    connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
+        emit s_achievementsLoaded(progress, row);
+    });
+    connect (loadTable, &Threading::s_achievements_finished, this, &FormTablesHeaders::onTablePulled);
 }
 
 void FormTablesHeaders::onTablePulled(int reached, int notReached) {

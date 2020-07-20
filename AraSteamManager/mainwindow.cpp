@@ -387,25 +387,25 @@ QString MainWindow::getTheme() {
                     "background-color: "+backgroundGradient+
                     "border: 1px solid #000000; "
                 "} "
-                "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics]{ "
+                "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics] { "
                     "background-color: "+backgroundGradient+
                     "border: 0px solid black; "
                 "} "
-                "QFrame{ "
+                "QFrame { "
                     "border: 0px solid #000000; "
                 "} "
-                "QFrame[accessibleName=TitleWindow]{ "
+                "QFrame[accessibleName=TitleWindow] { "
                     "background-color: "+backgroundGradientTitle+
                     "border: 1px solid #000000; "
                 "} "
-                "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget{ "
+                "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget { "
                     "background-color: rgba(0, 0, 0, 0); "
                     "border: 0px solid black; "
                 "} "
-                "QMessageBox{ "
+                "QMessageBox { "
                     "background: black; "
                 "} "
-                "QLabel{"
+                "QLabel, QLabel:disabled {"
                     "color: white; "
                 "} "
                 "QGroupBox::title{ "
@@ -727,6 +727,8 @@ void MainWindow::goToFriends(QString aProfileSteamid, SFriends aFriends) {
             _blockedLoad = true;
             ui->FormProgressBar->setMaximum(aFriends.getCount());
             _friendsForm = new FormFriends(aProfileSteamid, aFriends, this);
+            connect(_friendsForm, &FormFriends::s_friendsLoaded, this, &MainWindow::progressLoading);
+            connect(_friendsForm, &FormFriends::s_finish,        this, &MainWindow::showFriends);
             connect(_friendsForm, &FormFriends::s_go_to_profile, this, &MainWindow::goToProfile);
             ui->ScrollAreaFriends->setWidget(_friendsForm);
             ui->FormProgressBar->setVisible(true);
@@ -758,6 +760,8 @@ void MainWindow::goToStatistics(QString aProfileSteamId, SGames aGames, QString 
             _blockedLoad = true;
             ui->FormProgressBar->setMaximum(aGames.getCount());
             _statisticsForm = new FormStatistics(aProfileSteamId, aGames, aProfileName, this);
+            connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this, &MainWindow::progressLoading);
+            connect(_statisticsForm, &FormStatistics::s_finish,           this, &MainWindow::showStatistic);
             ui->ScrollAreaStatistic->setWidget(_statisticsForm);
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);

@@ -25,7 +25,6 @@ class FormGames : public QWidget {
     Q_OBJECT
 
 public slots:
-    void progressLoading(int, int);
     void onFinish();
 
     void showHideSlideWidget(bool f_flag);
@@ -60,6 +59,7 @@ private slots:
     void buttonAchievements_Clicked();
     void buttonFavorite_Clicked();
     void buttonHide_Clicked();
+    void createThread();
 
 private:
     Ui::FormGames *ui;

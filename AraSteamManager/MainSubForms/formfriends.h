@@ -24,12 +24,15 @@ public slots:
     void changeEvent(QEvent *event);
     void progressLoading(int p,int row);
     void onFinish();
+    void setTheme();
 
 public:
     explicit FormFriends(QString id, SFriends Friends, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
+    void s_friendsLoaded(int progress, int row);
+    void s_finish();
     void s_return_to_profile(QWidget*);
     void s_go_to_profile(QString id, QueryType type);
 
@@ -53,6 +56,7 @@ private slots:
     void on_TableWidgetFriends_cellDoubleClicked(int row, int column);
     void tableWidgetFriends_CellClicked(int row, int col);
     void friendToUi();
+    void createThread();
 
 private:
     Ui::FormFriends *ui;

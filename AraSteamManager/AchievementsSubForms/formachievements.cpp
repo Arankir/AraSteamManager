@@ -55,7 +55,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     #define LoadDataEnd }
     #define ConnectTables {
     _tableAchievements = new FormTablesHeaders(2, 0, _game, _profile._steamID, aPlayer, TableType::standart, this);
-    connect(_tableAchievements, &FormTablesHeaders::s_tablePulled, this, &FormAchievements::onFinish);
+    connect(_tableAchievements, &FormTablesHeaders::s_tablePulled, this, &FormAchievements::onTablePulled);
     _tableAchievements->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->LayoutTables->addWidget(_tableAchievements);
     _tableAchievements->changeHorizontalTitle(c_tableAchievementColumnReachedMy, _profile._personaName);
@@ -72,7 +72,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowAvatars, 0, avatarFriendsCompare);
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowAvatars, 1, allFriends);
 
-    QVBoxLayout *layoutReachedFilter = new QVBoxLayout(this);
+    QVBoxLayout *layoutReachedFilter = new QVBoxLayout(ui->GroupBoxReachedFilter);
     _filterMyProfile = new FormCompareProfileFilter(tr("Все достижения"),
                                                     tr("Полученные достижения"),
                                                     tr("Не полученные достижения"),
@@ -81,7 +81,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
         _tableAchievements->updateFilterWithMyProfile(aType, true, false);
     });
     layoutReachedFilter->addWidget(_filterMyProfile);
-    ui->GroupBoxReachedFilter->setLayout(layoutReachedFilter);
+    //ui->GroupBoxReachedFilter->setLayout(layoutReachedFilter);
 
     FormCompareProfileFilter *myFilter = new FormCompareProfileFilter(this);
     myFilter->setObjectName("FormCompareProfileFilterMy");
@@ -90,13 +90,13 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     });
 
     QWidget *widgetFriendsAchievementsFilter = new QWidget(this);
-    QVBoxLayout *layoutFriendsAchievementsFilter = new QVBoxLayout(this);
+    QVBoxLayout *layoutFriendsAchievementsFilter = new QVBoxLayout(widgetFriendsAchievementsFilter);
     layoutFriendsAchievementsFilter->setMargin(1);
     layoutFriendsAchievementsFilter->setAlignment(Qt::AlignCenter);
     layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsAll", "Friends", "All", true));
     layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsReached", "Friends", "Reached", false));
     layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsNotReached", "Friends", "NotReached", false));
-    widgetFriendsAchievementsFilter->setLayout(layoutFriendsAchievementsFilter);
+    //widgetFriendsAchievementsFilter->setLayout(layoutFriendsAchievementsFilter);
 
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, 0, myFilter);
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, 1, widgetFriendsAchievementsFilter);
@@ -268,7 +268,7 @@ void FormAchievements::progressLoading(int aProgress, int aRow) {
     //qDebug()<<"Loading..."<<a_progress;
 }
 
-void FormAchievements::onFinish(int reached, int notReached) {
+void FormAchievements::onTablePulled(int reached, int notReached) {
     showCategories();
     if ((reached > 0) || (notReached > 0)) {
         ui->GroupBoxFilter->setEnabled(true);

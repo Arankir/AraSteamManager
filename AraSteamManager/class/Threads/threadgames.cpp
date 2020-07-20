@@ -5,6 +5,10 @@ QObject(aParent), c_tableColumnAppid(aTableColumnAppid), c_tableColumnIndex(aTab
 
 }
 
+ThreadGames::~ThreadGames() {
+    qDebug()<<"Thread games deleted";
+}
+
 int ThreadGames::fill() {
     int id = std::move(QFontDatabase::addApplicationFont(_setting.c_defaultFont));
     QString family = std::move(QFontDatabase::applicationFontFamilies(id).at(0));

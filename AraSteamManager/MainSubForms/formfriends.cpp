@@ -44,8 +44,7 @@ void FormFriends::initComponents() {
     connect(ui->ButtonFriendGoTo,&QPushButton::clicked,this,&FormFriends::buttonFriendGoTo_Clicked);
     connect(ui->ButtonFriendFavorite,&QPushButton::clicked,this,&FormFriends::buttonFriendFavorite_Clicked);
 #define ConnectsEnd }
-    Threading loadTable(this);
-    loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
+    createThread();
 }
 
 void FormFriends::progressLoading(int aProgress,int aRow) {
@@ -73,6 +72,7 @@ void FormFriends::onFinish() {
             }
         row++;
     }
+    emit s_finish();
 }
 #define InitEnd }
 
@@ -101,11 +101,9 @@ void FormFriends::retranslate() {
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnGoTo, new QTableWidgetItem(tr("На профиль")));
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnFavorite, new QTableWidgetItem(tr("Избранное")));
     friendToUi();
-    Threading loadTable(this);
-    loadTable.AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
 }
 
-void FormFriends::setIcons() {
+void FormFriends::setTheme() {
     switch(_setting.getTheme()) {
         case 1:
             _theme = "white";
@@ -114,6 +112,10 @@ void FormFriends::setIcons() {
             _theme = "black";
             break;
     }
+    setIcons();
+}
+
+void FormFriends::setIcons() {
     ui->ButtonFind->setIcon(QIcon("://" + _theme + "/find_profile.png"));
     ui->ButtonFriendGoTo->setIcon(QIcon("://" + _theme + "/go_to.png"));
     ui->ButtonFriendFavorite->setIcon(QIcon("://" + _theme + "/favorites.png"));
@@ -127,6 +129,16 @@ void FormFriends::setIcons() {
 void FormFriends::closeEvent(QCloseEvent*) {
     emit s_return_to_profile(this);
     //delete this;
+}
+
+void FormFriends::createThread() {
+    Threading *loadTable = new Threading(this);
+    loadTable->AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
+    connect (loadTable, &Threading::s_friends_progress, this, [=](int progress, int row) {
+        ui->TableWidgetFriends->setRowHeight(row, 33);
+        emit s_friendsLoaded(progress, row);
+    });
+    connect (loadTable, &Threading::s_friends_finished, this, &FormFriends::onFinish);
 }
 #define SystemEnd }
 

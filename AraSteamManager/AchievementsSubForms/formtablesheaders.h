@@ -53,6 +53,7 @@ public slots:
     QString getHeaderText(int aIndex);
     SAchievement getAchievement(int aIndex);
     void cancelCategory();
+    void createThread();
 
 public:
     explicit FormTablesHeaders(int rowHeaders, int rowContent, SGame game, QString id, SAchievementsPlayer achievements, TableType type, QWidget *parent = nullptr);
@@ -112,6 +113,7 @@ public:
 
 signals:
     void s_contentCellClicked(int row, int col);
+    void s_achievementsLoaded(int progress, int row);
     void s_tablePulled(int, int);
 
 private slots:

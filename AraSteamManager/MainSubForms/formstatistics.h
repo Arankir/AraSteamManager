@@ -30,14 +30,16 @@ class FormStatistics : public QWidget {
     Q_OBJECT
 
 public slots:
-    void onFinish(QVector<int> numof, QVector<QPair<QString,QString>> complete, QVector<QPair<QString,QString>> started, QVector<QPair<QString,QString>> notStarted,
-                                  QVector<double> averagePercent, int summcolumn, QVector<int> times, QVector<int> months, QVector<QPair<QString,int>> years);
+    void onFinish();
+    void createThread();
 
 public:
     explicit FormStatistics(QString id, SGames games, QString name, QWidget *parent = nullptr);
     ~FormStatistics();
 
 signals:
+    void s_statisticsLoaded(int progress, int row);
+    void s_finish();
     void s_return_to_profile(QWidget*);
 
 private slots:

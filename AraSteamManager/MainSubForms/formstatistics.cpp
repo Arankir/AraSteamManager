@@ -55,8 +55,7 @@ FormStatistics::FormStatistics(QString aId, SGames aGames, QString aName, QWidge
     ui->ChartsViewYears->setRenderHint(QPainter::Antialiasing);
     ui->ChartsViewYears->setMinimumSize(480, 480);
 
-    Threading LoadData(this);
-    LoadData.AddThreadStatistics(_games, _id);
+    createThread();
 }
 
 void FormStatistics::changeEvent(QEvent *aEvent) {
@@ -116,20 +115,16 @@ void FormStatistics::retranslate() {
     _chartY->setTitle(tr("Достижения по годам"));
 }
 
-void FormStatistics::onFinish(QVector<int> aNumOf, QVector<QPair<QString,QString> > aComplete,
-                              QVector<QPair<QString,QString>> aStarted, QVector<QPair<QString,QString>> aNotStarted,
-                              QVector<double> aAveragePercent, int aSummColumn, QVector<int> aTimes,
-                              QVector<int> aMonths, QVector<QPair<QString,int>> aYears) {
-    _numof = aNumOf;
-    _complete = aComplete;
-    _started = aStarted;
-    _notStarted = aNotStarted;
-    _averagePercent = aAveragePercent;
-    _averagePercent.resize(_averagePercent.size());
-    _summcolumn = aSummColumn;
-    _times = aTimes;
-    _months = aMonths;
-    _years = aYears;
+void FormStatistics::createThread() {
+    Threading *loadData = new Threading(this);
+    loadData->AddThreadStatistics(_games, _id, _numof, _complete, _started, _notStarted, _averagePercent, _summcolumn, _times, _months, _years);
+    connect (loadData, &Threading::s_statistics_progress, this, [=](int progress, int row) {
+        emit s_statisticsLoaded(progress, row);
+    });
+    connect (loadData, &Threading::s_statistics_finished, this, &FormStatistics::onFinish);
+}
+
+void FormStatistics::onFinish() {
     _totalAverage = 0.0;
     for(double averageForGame: _averagePercent) {
         _totalAverage += averageForGame;
@@ -275,6 +270,7 @@ void FormStatistics::onFinish(QVector<int> aNumOf, QVector<QPair<QString,QString
     barSeriesY->setLabelsPosition(QAbstractBarSeries::LabelsOutsideEnd);
     barSeriesY->setLabelsAngle(4);
     #define SetChartYearsEnd }
+    emit s_finish();
 }
 
 FormStatistics::~FormStatistics() {

@@ -87,7 +87,6 @@ void FormCategoryValue::setPosition(int aPos) {
 }
 
 void FormCategoryValue::setTitle(QString aTitle) {
-    qDebug()<<_position<<aTitle;
     ui->LineEditTitle->setText(aTitle);
 }
 

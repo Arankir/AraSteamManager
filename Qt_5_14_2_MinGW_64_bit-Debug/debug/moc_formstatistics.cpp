@@ -10,7 +10,6 @@
 #include "../../AraSteamManager/MainSubForms/formstatistics.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
-#include <QtCore/QVector>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'formstatistics.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -23,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormStatistics_t {
-    QByteArrayData data[22];
-    char stringdata0[262];
+    QByteArrayData data[14];
+    char stringdata0[146];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,35 +33,24 @@ struct qt_meta_stringdata_FormStatistics_t {
 static const qt_meta_stringdata_FormStatistics_t qt_meta_stringdata_FormStatistics = {
     {
 QT_MOC_LITERAL(0, 0, 14), // "FormStatistics"
-QT_MOC_LITERAL(1, 15, 19), // "s_return_to_profile"
-QT_MOC_LITERAL(2, 35, 0), // ""
-QT_MOC_LITERAL(3, 36, 8), // "QWidget*"
-QT_MOC_LITERAL(4, 45, 8), // "onFinish"
-QT_MOC_LITERAL(5, 54, 12), // "QVector<int>"
-QT_MOC_LITERAL(6, 67, 5), // "numof"
-QT_MOC_LITERAL(7, 73, 32), // "QVector<QPair<QString,QString> >"
-QT_MOC_LITERAL(8, 106, 8), // "complete"
-QT_MOC_LITERAL(9, 115, 7), // "started"
-QT_MOC_LITERAL(10, 123, 10), // "notStarted"
-QT_MOC_LITERAL(11, 134, 15), // "QVector<double>"
-QT_MOC_LITERAL(12, 150, 14), // "averagePercent"
-QT_MOC_LITERAL(13, 165, 10), // "summcolumn"
-QT_MOC_LITERAL(14, 176, 5), // "times"
-QT_MOC_LITERAL(15, 182, 6), // "months"
-QT_MOC_LITERAL(16, 189, 28), // "QVector<QPair<QString,int> >"
-QT_MOC_LITERAL(17, 218, 5), // "years"
-QT_MOC_LITERAL(18, 224, 11), // "changeEvent"
-QT_MOC_LITERAL(19, 236, 7), // "QEvent*"
-QT_MOC_LITERAL(20, 244, 5), // "event"
-QT_MOC_LITERAL(21, 250, 11) // "retranslate"
+QT_MOC_LITERAL(1, 15, 18), // "s_statisticsLoaded"
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 8), // "progress"
+QT_MOC_LITERAL(4, 44, 3), // "row"
+QT_MOC_LITERAL(5, 48, 8), // "s_finish"
+QT_MOC_LITERAL(6, 57, 19), // "s_return_to_profile"
+QT_MOC_LITERAL(7, 77, 8), // "QWidget*"
+QT_MOC_LITERAL(8, 86, 8), // "onFinish"
+QT_MOC_LITERAL(9, 95, 12), // "createThread"
+QT_MOC_LITERAL(10, 108, 11), // "changeEvent"
+QT_MOC_LITERAL(11, 120, 7), // "QEvent*"
+QT_MOC_LITERAL(12, 128, 5), // "event"
+QT_MOC_LITERAL(13, 134, 11) // "retranslate"
 
     },
-    "FormStatistics\0s_return_to_profile\0\0"
-    "QWidget*\0onFinish\0QVector<int>\0numof\0"
-    "QVector<QPair<QString,QString> >\0"
-    "complete\0started\0notStarted\0QVector<double>\0"
-    "averagePercent\0summcolumn\0times\0months\0"
-    "QVector<QPair<QString,int> >\0years\0"
+    "FormStatistics\0s_statisticsLoaded\0\0"
+    "progress\0row\0s_finish\0s_return_to_profile\0"
+    "QWidget*\0onFinish\0createThread\0"
     "changeEvent\0QEvent*\0event\0retranslate"
 };
 #undef QT_MOC_LITERAL
@@ -73,27 +61,33 @@ static const uint qt_meta_data_FormStatistics[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x06 /* Public */,
+       1,    2,   49,    2, 0x06 /* Public */,
+       5,    0,   54,    2, 0x06 /* Public */,
+       6,    1,   55,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    9,   37,    2, 0x0a /* Public */,
-      18,    1,   56,    2, 0x08 /* Private */,
-      21,    0,   59,    2, 0x08 /* Private */,
+       8,    0,   58,    2, 0x0a /* Public */,
+       9,    0,   59,    2, 0x0a /* Public */,
+      10,    1,   60,    2, 0x08 /* Private */,
+      13,    0,   63,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    2,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 7,    2,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 7, 0x80000000 | 7, 0x80000000 | 7, 0x80000000 | 11, QMetaType::Int, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 16,    6,    8,    9,   10,   12,   13,   14,   15,   17,
-    QMetaType::Void, 0x80000000 | 19,   20,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 11,   12,
     QMetaType::Void,
 
        0        // eod
@@ -105,40 +99,46 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         auto *_t = static_cast<FormStatistics *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
-        case 1: _t->onFinish((*reinterpret_cast< QVector<int>(*)>(_a[1])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[2])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[3])),(*reinterpret_cast< QVector<QPair<QString,QString> >(*)>(_a[4])),(*reinterpret_cast< QVector<double>(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< QVector<int>(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[9]))); break;
-        case 2: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 3: _t->retranslate(); break;
+        case 0: _t->s_statisticsLoaded((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 1: _t->s_finish(); break;
+        case 2: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
+        case 3: _t->onFinish(); break;
+        case 4: _t->createThread(); break;
+        case 5: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 6: _t->retranslate(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 0:
+        case 2:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QWidget* >(); break;
             }
             break;
-        case 1:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 4:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<double> >(); break;
-            case 7:
-            case 6:
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QVector<int> >(); break;
-            }
-            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
+            using _t = void (FormStatistics::*)(int , int );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormStatistics::s_statisticsLoaded)) {
+                *result = 0;
+                return;
+            }
+        }
+        {
+            using _t = void (FormStatistics::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormStatistics::s_finish)) {
+                *result = 1;
+                return;
+            }
+        }
+        {
             using _t = void (FormStatistics::*)(QWidget * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormStatistics::s_return_to_profile)) {
-                *result = 0;
+                *result = 2;
                 return;
             }
         }
@@ -174,22 +174,35 @@ int FormStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 7;
     }
     return _id;
 }
 
 // SIGNAL 0
+void FormStatistics::s_statisticsLoaded(int _t1, int _t2)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void FormStatistics::s_finish()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
 void FormStatistics::s_return_to_profile(QWidget * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

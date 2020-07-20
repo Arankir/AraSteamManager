@@ -11,9 +11,9 @@ class ThreadAchievements : public QObject {
     Q_OBJECT
 public slots:
     int fill();
-    void set(SAchievements achievements, QTableWidget *TableWidgetAchievements);
-    bool addFriend();
-    void setFriend(QTableWidget *TableWidgetAchievements, SAchievements achievement, int col, int AcolumnAppid);
+//    void set(SAchievements achievements, QTableWidget *TableWidgetAchievements);
+//    bool addFriend();
+//    void setFriend(QTableWidget *TableWidgetAchievements, SAchievements achievement, int col, int AcolumnAppid);
 
 public:
     explicit ThreadAchievements(SAchievements achievements, QTableWidget *tableWidgetAchievements, const int tableColumnAppid, const int tableColumnTitle,
