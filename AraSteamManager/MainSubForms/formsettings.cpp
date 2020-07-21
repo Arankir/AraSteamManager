@@ -4,14 +4,6 @@
 FormSettings::FormSettings(QWidget *aParent): QWidget(aParent), ui(new Ui::FormSettings) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    switch(_setting.getTheme()) {
-        case 1:
-            _theme = "white";
-            break;
-        case 2:
-            _theme = "black";
-            break;
-    }
     initComponents();
 }
 
@@ -97,7 +89,7 @@ void FormSettings::initComponents() {
                 fileHide1.close();
             }
         }
-        _hiddenGames.append(pair);
+        _hiddenGames.append(std::move(pair));
 
         QFileInfoList list = dirHiddenGames.entryInfoList();
         int number = 1;
@@ -110,7 +102,7 @@ void FormSettings::initComponents() {
                 QList<QString> hide;
                 QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
                 profileHidden->setText(profile.getPersonaname());
-                profileHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
+                profileHidden->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
                 profileHidden->setObjectName("HiddenGames" + QString::number(number));
                 profileHidden->AddData("NumberFileHiddenGame", QString::number(number));
                 connect(profileHidden, SIGNAL(clicked()), this, SLOT(radioButtonHiddenGames_Clicked()));
@@ -131,13 +123,13 @@ void FormSettings::initComponents() {
     ui->FrameProfilesHideGames->setLayout(layout);
 
 #define Connects {
-    connect(ui->RadioButtonLanguageEnglish, &QRadioButton::clicked, this, &FormSettings::radioButtonLanguageEnglish_Clicked);
-    connect(ui->RadioButtonLanguageRussian, &QRadioButton::clicked, this, &FormSettings::radioButtonLanguageRussian_Clicked);
+    connect(ui->RadioButtonLanguageEnglish, &QRadioButton::clicked,   this, &FormSettings::radioButtonLanguageEnglish_Clicked);
+    connect(ui->RadioButtonLanguageRussian, &QRadioButton::clicked,   this, &FormSettings::radioButtonLanguageRussian_Clicked);
     connect(ui->CheckBoxVisibleHiddenGames, &QCheckBox::stateChanged, this, &FormSettings::checkBoxVisibleHiddenGames_StateChanged);
-    connect(ui->RadioButtonDarkTheme, &QRadioButton::clicked, this, &FormSettings::radioButtonDarkTheme_Clicked);
-    connect(ui->RadioButtonLightTheme, &QRadioButton::clicked, this, &FormSettings::radioButtonLightTheme_Clicked);
-    connect(ui->CheckBoxSaveImage, &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
-    connect(ui->SliderProfileSize, &QSlider::valueChanged, this, &FormSettings::slideProfileSize_ValueChanged);
+    connect(ui->RadioButtonDarkTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonDarkTheme_Clicked);
+    connect(ui->RadioButtonLightTheme,      &QRadioButton::clicked,   this, &FormSettings::radioButtonLightTheme_Clicked);
+    connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
+    connect(ui->SliderProfileSize,          &QSlider::valueChanged,   this, &FormSettings::slideProfileSize_ValueChanged);
 #define ConnectsEnd }
     retranslate();
 }
@@ -155,9 +147,10 @@ void FormSettings::retranslate() {
         QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
         allHidden->setText(tr("Все профили"));
     }
+    QString iconsColor = _setting.getIconsColor();
     ui->labelIcons8->setText("<html><head/><body><p>"
                              "Иконки для приложения были предоставлены сайтом "
-                             "<img height=15 style=\"vertical-align: top\" src=\"://" + _theme + "/link.png\">"
+                             "<img height=15 style=\"vertical-align: top\" src=\"://" + iconsColor + "/link.png\">"
                             "<a href=https://icons8.ru/icons>"
                             "<span style=\" text-decoration: underline; color:#2d7fc8;\"> "
                             "https://icons8.ru/icons"
@@ -168,9 +161,9 @@ void FormSettings::radioButtonLanguageEnglish_Clicked() {
     _setting.setLanguage(1);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
-        translator->load(":/AraSteamManager_en.qm");
-        qApp->installTranslator(translator);
-        //ui->retranslateUi(this);
+    translator->load(":/AraSteamManager_en.qm");
+    qApp->installTranslator(translator);
+    //ui->retranslateUi(this);
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
@@ -178,9 +171,9 @@ void FormSettings::radioButtonLanguageRussian_Clicked() {
     _setting.setLanguage(5);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
-        translator->load(":/AraSteamManager_ru.qm");
-        qApp->installTranslator(translator);
-        //ui->retranslateUi(this);
+    translator->load(":/AraSteamManager_ru.qm");
+    qApp->installTranslator(translator);
+    //ui->retranslateUi(this);
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
@@ -205,6 +198,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
     QRadioButtonWithData *rbSender = dynamic_cast<QRadioButtonWithData*>(sender());
     if (rbSender) {
         int indexHiddenGame = rbSender->GetData(0).toInt();
+        QString iconsColor = _setting.getIconsColor();
         auto &currentGame = _hiddenGames[indexHiddenGame];
         ui->TableWidgetGames->clear();
         ui->TableWidgetGames->setRowCount(currentGame.second.size());
@@ -237,7 +231,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                     ui->TableWidgetGames->setCellWidget(setTo, 2, button1);
 
                     QButtonWithData *button3 = new QButtonWithData("");
-                    button3->setIcon(QIcon("://" + _theme + "/hide.png"));
+                    button3->setIcon(QIcon("://" + iconsColor + "/hide.png"));
                     button3->setMinimumSize(QSize(25, 25));
                     button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + QString::number(game._appID));
                     button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
@@ -275,7 +269,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                 ui->TableWidgetGames->setCellWidget(i, 2, button1);
 
                 QButtonWithData *button3 = new QButtonWithData("");
-                button3->setIcon(QIcon("://" + _theme + "/hide.png"));
+                button3->setIcon(QIcon("://" + iconsColor + "/hide.png"));
                 button3->setMinimumSize(QSize(25, 25));
                 button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + list[0]);
                 button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));

@@ -103,24 +103,18 @@ void FormFriends::retranslate() {
     friendToUi();
 }
 
-void FormFriends::setTheme() {
-    switch(_setting.getTheme()) {
-        case 1:
-            _theme = "white";
-            break;
-        case 2:
-            _theme = "black";
-            break;
-    }
+void FormFriends::updateSettings() {
+    _setting.syncronizeSettings();
     setIcons();
 }
 
 void FormFriends::setIcons() {
-    ui->ButtonFind->setIcon(QIcon("://" + _theme + "/find_profile.png"));
-    ui->ButtonFriendGoTo->setIcon(QIcon("://" + _theme + "/go_to.png"));
-    ui->ButtonFriendFavorite->setIcon(QIcon("://" + _theme + "/favorites.png"));
+    QString iconsColor = _setting.getIconsColor();
+    ui->ButtonFind->setIcon(QIcon("://" + iconsColor + "/find_profile.png"));
+    ui->ButtonFriendGoTo->setIcon(QIcon("://" + iconsColor + "/go_to.png"));
+    ui->ButtonFriendFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
     ui->GroupBoxFilter->setStyleSheet("QGroupBox::title { "
-                                        "image:url(://" + _theme + "/filter.png) 0 0 0 0 stretch stretch; "
+                                        "image:url(://" + iconsColor + "/filter.png) 0 0 0 0 stretch stretch; "
                                         "image-position:left; "
                                         "margin-top:15px; "
                                       "}");

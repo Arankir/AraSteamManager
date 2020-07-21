@@ -29,6 +29,9 @@ public:
     QString getTitle();
     bool getVisible();
 
+public slots:
+    void updateSettings();
+    void setIcons();
 signals:
     void s_valuechange(int pos, QString value);
     void s_visiblechange(int pos, bool visible);
@@ -51,7 +54,6 @@ private slots:
 private:
     Ui::FormCategoryValue *ui;
     Settings _setting;
-    QString _theme = "white";
     int _position = 0;
     EnabledUpDown _isFirstLast = EnabledUpDown::none;
 };

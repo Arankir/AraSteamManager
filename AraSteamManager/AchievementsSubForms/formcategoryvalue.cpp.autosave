@@ -74,8 +74,8 @@ void FormCategoryValue::setVisible(bool aVisible) {
 
 void FormCategoryValue::setEnabledUpDown(EnabledUpDown aFirstLast) {
     _isFirstLast = aFirstLast;
-    ui->ButtonUp->setEnabled((_isFirstLast == EnabledUpDown::none) || (_isFirstLast == EnabledUpDown::down) ? false : true);
-    ui->ButtonDown->setEnabled((_isFirstLast == EnabledUpDown::none) || (_isFirstLast == EnabledUpDown::up) ? false : true);
+    ui->ButtonUp->setEnabled(!((_isFirstLast == EnabledUpDown::none) || (_isFirstLast == EnabledUpDown::down)));
+    ui->ButtonDown->setEnabled(!((_isFirstLast == EnabledUpDown::none) || (_isFirstLast == EnabledUpDown::up)));
 }
 
 int FormCategoryValue::getPosition() {

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormStatistics_t {
-    QByteArrayData data[14];
-    char stringdata0[146];
+    QByteArrayData data[16];
+    char stringdata0[170];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,16 +42,19 @@ QT_MOC_LITERAL(6, 57, 19), // "s_return_to_profile"
 QT_MOC_LITERAL(7, 77, 8), // "QWidget*"
 QT_MOC_LITERAL(8, 86, 8), // "onFinish"
 QT_MOC_LITERAL(9, 95, 12), // "createThread"
-QT_MOC_LITERAL(10, 108, 11), // "changeEvent"
-QT_MOC_LITERAL(11, 120, 7), // "QEvent*"
-QT_MOC_LITERAL(12, 128, 5), // "event"
-QT_MOC_LITERAL(13, 134, 11) // "retranslate"
+QT_MOC_LITERAL(10, 108, 14), // "updateSettings"
+QT_MOC_LITERAL(11, 123, 8), // "setIcons"
+QT_MOC_LITERAL(12, 132, 11), // "changeEvent"
+QT_MOC_LITERAL(13, 144, 7), // "QEvent*"
+QT_MOC_LITERAL(14, 152, 5), // "event"
+QT_MOC_LITERAL(15, 158, 11) // "retranslate"
 
     },
     "FormStatistics\0s_statisticsLoaded\0\0"
     "progress\0row\0s_finish\0s_return_to_profile\0"
     "QWidget*\0onFinish\0createThread\0"
-    "changeEvent\0QEvent*\0event\0retranslate"
+    "updateSettings\0setIcons\0changeEvent\0"
+    "QEvent*\0event\0retranslate"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,7 +64,7 @@ static const uint qt_meta_data_FormStatistics[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -69,15 +72,17 @@ static const uint qt_meta_data_FormStatistics[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   49,    2, 0x06 /* Public */,
-       5,    0,   54,    2, 0x06 /* Public */,
-       6,    1,   55,    2, 0x06 /* Public */,
+       1,    2,   59,    2, 0x06 /* Public */,
+       5,    0,   64,    2, 0x06 /* Public */,
+       6,    1,   65,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    0,   58,    2, 0x0a /* Public */,
-       9,    0,   59,    2, 0x0a /* Public */,
-      10,    1,   60,    2, 0x08 /* Private */,
-      13,    0,   63,    2, 0x08 /* Private */,
+       8,    0,   68,    2, 0x0a /* Public */,
+       9,    0,   69,    2, 0x0a /* Public */,
+      10,    0,   70,    2, 0x0a /* Public */,
+      11,    0,   71,    2, 0x0a /* Public */,
+      12,    1,   72,    2, 0x08 /* Private */,
+      15,    0,   75,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -87,7 +92,9 @@ static const uint qt_meta_data_FormStatistics[] = {
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 11,   12,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 13,   14,
     QMetaType::Void,
 
        0        // eod
@@ -104,8 +111,10 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 2: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 3: _t->onFinish(); break;
         case 4: _t->createThread(); break;
-        case 5: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 6: _t->retranslate(); break;
+        case 5: _t->updateSettings(); break;
+        case 6: _t->setIcons(); break;
+        case 7: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 8: _t->retranslate(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -174,13 +183,13 @@ int FormStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }

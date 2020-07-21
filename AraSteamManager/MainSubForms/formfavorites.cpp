@@ -28,12 +28,6 @@ FormFavorites::~FormFavorites() {
     delete ui;
 }
 
-void FormFavorites::changeEvent(QEvent *event) {
-    if(event->type() == QEvent::LanguageChange) {
-        ui->retranslateUi(this);
-    }
-}
-
 void FormFavorites::initComponents() {
     _games.setType("games");
     _friends.setType("friends");
@@ -46,13 +40,6 @@ void FormFavorites::initComponents() {
         //
     }
     ui->TableWidgetFriends->setColumnCount(c_tableFriendsColumnCount);
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnID, new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnIcon, new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnName, new QTableWidgetItem(tr("Ник")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnStatus, new QTableWidgetItem(tr("Статус")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnisPublic, new QTableWidgetItem(tr("Профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnGoTo, new QTableWidgetItem(tr("На профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnFavorite, new QTableWidgetItem(tr("Избранное")));
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
@@ -66,6 +53,7 @@ void FormFavorites::initComponents() {
     for (int i = 0; i < achievementsJ.size(); i++) {
         //
     }
+    retranslate();
 }
 
 void FormFavorites::friendLoad(SProfile *aProfile) {
@@ -148,6 +136,32 @@ void FormFavorites::friendLoad(SProfile *aProfile) {
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnStatus, item4);
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnisPublic, item5);
     _numRequests++;
+}
+
+void FormFavorites::updateSettings() {
+    _setting.syncronizeSettings();
+    setIcons();
+}
+
+void FormFavorites::setIcons() {
+
+}
+
+void FormFavorites::changeEvent(QEvent *event) {
+    if(event->type() == QEvent::LanguageChange) {
+        retranslate();
+    }
+}
+
+void FormFavorites::retranslate() {
+    ui->retranslateUi(this);
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnID, new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnIcon, new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnName, new QTableWidgetItem(tr("Ник")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnStatus, new QTableWidgetItem(tr("Статус")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnisPublic, new QTableWidgetItem(tr("Профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnGoTo, new QTableWidgetItem(tr("На профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnFavorite, new QTableWidgetItem(tr("Избранное")));
 }
 
 void FormFavorites::on_pushButton_clicked() {

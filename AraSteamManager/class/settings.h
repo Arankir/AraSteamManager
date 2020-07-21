@@ -55,6 +55,7 @@ public:
     QString getMyProfile();
     int getLanguage();
     int getTheme();
+    QString getIconsColor();
     int getSaveImages();
     int getVisibleHiddenGames();
     int getProfileInfoSize();

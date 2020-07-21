@@ -29,8 +29,10 @@ public slots:
 
     void showHideSlideWidget(bool f_flag);
     void mouseMoveEvent(QMouseEvent *ev);
-    void slotShowHideSlide();
+    void enableMouseTracking(const QObjectList &aChildren);
 
+    bool eventFilter(QObject *obj, QEvent *event);
+    void updateSettings();
 public:
     explicit FormGames(SProfile profile, SGames Games, QWidget *parent = nullptr);
     ~FormGames();
@@ -44,7 +46,6 @@ signals:
 private slots:
     void changeEvent(QEvent *event);
     void initComponents();
-    void updateTheme();
     void setIcons();
     void retranslate();
     void onResultAchievements(SAchievementsPlayer ach);
@@ -70,10 +71,16 @@ private:
     Favorites _favorites;
     QStringList _hide;
     Settings _setting;
-    QString _theme = "white";
     int _load = 0;
+
     QPropertyAnimation *_animate;
-    QRect _geometryGroup;
+
+    const int c_widthVisibleGroup = 20;
+    const QPoint c_invisibleGroupPos = QPoint(-280, 0);
+    const QPoint c_visibleGroupPos = QPoint(20, 0);
+    const int c_widthGroup = 300;
+    bool _isGroupShow = false;
+
     QString _selectedGame;
     QString _selectedIndex;
 

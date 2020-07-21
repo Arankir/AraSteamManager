@@ -22,6 +22,9 @@ public slots:
     void initComponents();
     void friendLoad(SProfile*);
 
+    void updateSettings();
+    void setIcons();
+    void retranslate();
 public:
     explicit FormFavorites(QWidget *parent = nullptr);
     ~FormFavorites();
@@ -40,6 +43,8 @@ private:
     Favorites _achievements;
     Filter _filter;
     Settings _setting;
+
+    QString _iconsColor;
 
     //QVector<RequestData*> _request;
     int _numRequests = 0;

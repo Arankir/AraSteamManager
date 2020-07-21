@@ -33,6 +33,8 @@ public slots:
     void onFinish();
     void createThread();
 
+    void updateSettings();
+    void setIcons();
 public:
     explicit FormStatistics(QString id, SGames games, QString name, QWidget *parent = nullptr);
     ~FormStatistics();

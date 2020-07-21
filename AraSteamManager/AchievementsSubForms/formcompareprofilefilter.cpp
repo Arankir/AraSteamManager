@@ -9,27 +9,25 @@ FormCompareProfileFilter::FormCompareProfileFilter(QString aTitleAll, QString aT
 ui(new Ui::FormCompareProfileFilter) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    QString theme;
-    switch(_setting.getTheme()) {
-    case 1: {
-        theme = "white";
-        break;
-    }
-    case 2: {
-        theme = "black";
-        break;
-    }
-    }
-    ui->RadioButtonAll->setIcon(QIcon("://" + theme + "/all.png"));
-    ui->RadioButtonReached->setIcon(QIcon("://" + theme + "/reached.png"));
-    ui->RadioButtonNotReached->setIcon(QIcon("://" + theme + "/notreached.png"));
+    setIcons();
     ui->RadioButtonAll->SetReachedType(ReachedType::all);
     ui->RadioButtonReached->SetReachedType(ReachedType::reached);
     ui->RadioButtonNotReached->SetReachedType(ReachedType::notReached);
-    connect(ui->RadioButtonAll, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
-    connect(ui->RadioButtonReached, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
+    connect(ui->RadioButtonAll,        &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
+    connect(ui->RadioButtonReached,    &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
     connect(ui->RadioButtonNotReached, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
     setTitles(aTitleAll, aTitleReached, aTitleNotReached);
+}
+
+void FormCompareProfileFilter::updateSettings() {
+    setIcons();
+}
+
+void FormCompareProfileFilter::setIcons() {
+    QString iconsColor = _setting.getIconsColor();
+    ui->RadioButtonAll->setIcon(QIcon("://" + iconsColor + "/all.png"));
+    ui->RadioButtonReached->setIcon(QIcon("://" + iconsColor + "/reached.png"));
+    ui->RadioButtonNotReached->setIcon(QIcon("://" + iconsColor + "/notreached.png"));
 }
 
 FormCompareProfileFilter::~FormCompareProfileFilter() {

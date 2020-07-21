@@ -65,7 +65,6 @@ public slots:
     void goToFavorites();
     void goToStatistics(QString profileSteamid, SGames games, QString profileName);
 
-    void updateMyProfile();
     void updateSettings();
 
 signals:
@@ -76,8 +75,6 @@ private slots:
     void keyPressEvent(QKeyEvent*) override;
     void changeEvent(QEvent*) override;
     void closeEvent(QCloseEvent*) override;
-    void mousePressEvent(QMouseEvent*) override;
-    void mouseMoveEvent(QMouseEvent*) override;
     //Forms
     void showForm(bool &initForm, int widgetIndex, int widthWindow=300);
     void showGames(int width);

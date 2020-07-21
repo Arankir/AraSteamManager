@@ -52,7 +52,6 @@ private slots:
 
 private:
     Ui::FormSettings *ui;
-    QString _theme = "white";
     Settings _setting;
     QVector<QPair<QString,QList<QString>>> _hiddenGames;
 };

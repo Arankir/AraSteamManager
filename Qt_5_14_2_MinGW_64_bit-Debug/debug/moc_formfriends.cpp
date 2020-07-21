@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriends_t {
     QByteArrayData data[40];
-    char stringdata0[572];
+    char stringdata0[578];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -50,35 +50,35 @@ QT_MOC_LITERAL(14, 134, 5), // "event"
 QT_MOC_LITERAL(15, 140, 15), // "progressLoading"
 QT_MOC_LITERAL(16, 156, 1), // "p"
 QT_MOC_LITERAL(17, 158, 8), // "onFinish"
-QT_MOC_LITERAL(18, 167, 8), // "setTheme"
-QT_MOC_LITERAL(19, 176, 14), // "initComponents"
-QT_MOC_LITERAL(20, 191, 10), // "closeEvent"
-QT_MOC_LITERAL(21, 202, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(22, 215, 11), // "retranslate"
-QT_MOC_LITERAL(23, 227, 8), // "setIcons"
-QT_MOC_LITERAL(24, 236, 24), // "buttonFriendGoTo_Clicked"
-QT_MOC_LITERAL(25, 261, 28), // "buttonFriendFavorite_Clicked"
-QT_MOC_LITERAL(26, 290, 16), // "updateHiddenRows"
-QT_MOC_LITERAL(27, 307, 35), // "on_CheckBoxOpenProfile_stateC..."
-QT_MOC_LITERAL(28, 343, 4), // "arg1"
-QT_MOC_LITERAL(29, 348, 27), // "on_LineEditName_textChanged"
-QT_MOC_LITERAL(30, 376, 21), // "on_ButtonFind_clicked"
-QT_MOC_LITERAL(31, 398, 27), // "on_ComboBoxStatus_activated"
-QT_MOC_LITERAL(32, 426, 5), // "index"
-QT_MOC_LITERAL(33, 432, 33), // "on_CheckBoxFavorites_stateCha..."
-QT_MOC_LITERAL(34, 466, 39), // "on_TableWidgetFriends_cellDou..."
-QT_MOC_LITERAL(35, 506, 6), // "column"
-QT_MOC_LITERAL(36, 513, 30), // "tableWidgetFriends_CellClicked"
-QT_MOC_LITERAL(37, 544, 3), // "col"
-QT_MOC_LITERAL(38, 548, 10), // "friendToUi"
-QT_MOC_LITERAL(39, 559, 12) // "createThread"
+QT_MOC_LITERAL(18, 167, 14), // "updateSettings"
+QT_MOC_LITERAL(19, 182, 14), // "initComponents"
+QT_MOC_LITERAL(20, 197, 10), // "closeEvent"
+QT_MOC_LITERAL(21, 208, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(22, 221, 11), // "retranslate"
+QT_MOC_LITERAL(23, 233, 8), // "setIcons"
+QT_MOC_LITERAL(24, 242, 24), // "buttonFriendGoTo_Clicked"
+QT_MOC_LITERAL(25, 267, 28), // "buttonFriendFavorite_Clicked"
+QT_MOC_LITERAL(26, 296, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(27, 313, 35), // "on_CheckBoxOpenProfile_stateC..."
+QT_MOC_LITERAL(28, 349, 4), // "arg1"
+QT_MOC_LITERAL(29, 354, 27), // "on_LineEditName_textChanged"
+QT_MOC_LITERAL(30, 382, 21), // "on_ButtonFind_clicked"
+QT_MOC_LITERAL(31, 404, 27), // "on_ComboBoxStatus_activated"
+QT_MOC_LITERAL(32, 432, 5), // "index"
+QT_MOC_LITERAL(33, 438, 33), // "on_CheckBoxFavorites_stateCha..."
+QT_MOC_LITERAL(34, 472, 39), // "on_TableWidgetFriends_cellDou..."
+QT_MOC_LITERAL(35, 512, 6), // "column"
+QT_MOC_LITERAL(36, 519, 30), // "tableWidgetFriends_CellClicked"
+QT_MOC_LITERAL(37, 550, 3), // "col"
+QT_MOC_LITERAL(38, 554, 10), // "friendToUi"
+QT_MOC_LITERAL(39, 565, 12) // "createThread"
 
     },
     "FormFriends\0s_friendsLoaded\0\0progress\0"
     "row\0s_finish\0s_return_to_profile\0"
     "QWidget*\0s_go_to_profile\0id\0QueryType\0"
     "type\0changeEvent\0QEvent*\0event\0"
-    "progressLoading\0p\0onFinish\0setTheme\0"
+    "progressLoading\0p\0onFinish\0updateSettings\0"
     "initComponents\0closeEvent\0QCloseEvent*\0"
     "retranslate\0setIcons\0buttonFriendGoTo_Clicked\0"
     "buttonFriendFavorite_Clicked\0"
@@ -177,7 +177,7 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 4: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
         case 5: _t->progressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 6: _t->onFinish(); break;
-        case 7: _t->setTheme(); break;
+        case 7: _t->updateSettings(); break;
         case 8: _t->initComponents(); break;
         case 9: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 10: _t->retranslate(); break;

@@ -28,11 +28,13 @@ public slots:
     SProfile getProfile();
     SGames getGames();
     SFriends getFriends();
-    void updateTheme();
     void updateVisibleInfo();
     void updateInfo();
     void retranslate();
 
+    void setIcons();
+    void updateSettings();
+    void updateMyProfile();
 signals:
     void s_goToGames(SProfile profileSteamid, SGames games);
     void s_goToFriends(QString profileSteamid, SFriends friends);
@@ -54,7 +56,6 @@ private:
     SGames _games;
     SFriends _friends;
     Settings _setting;
-    QString _theme;
     int _visibleInfo;
 };
 

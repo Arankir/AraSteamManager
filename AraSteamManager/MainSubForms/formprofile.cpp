@@ -18,8 +18,8 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     connect(ui->ButtonStatistics, &QPushButton::clicked, this, &FormProfile::buttonStatistics_Clicked);
     connect(ui->ButtonFavorites,  &QPushButton::clicked, this, &FormProfile::buttonFavorites_Clicked);
 #define ConnectsEnd }
-    updateTheme();
     profileToUi(_profile);
+    updateSettings();
 }
 
 FormProfile::~FormProfile(){
@@ -73,7 +73,8 @@ void FormProfile::profileToUi(SProfile aProfile) {
                 break;
         }
     }
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://" + _theme + "/link.png\"> "
+    QString iconsColor = _setting.getIconsColor();
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://" + iconsColor + "/link.png\"> "
                                 "<a href=\"" + aProfile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + aProfile._profileUrl + "</span></a>");
     ui->LabellvlValue->setText(QString::number(levels.GetLevel()));
@@ -175,8 +176,6 @@ void FormProfile::profileToUi(SProfile aProfile) {
     ui->LabelAvatarMinimize->setPixmap(RequestData(aProfile._avatar, false).getPixmap());
     ui->LabelNick->setText(aProfile._personaName);
     ui->LabelNameMinimize->setText(aProfile._personaName);
-
-    updateVisibleInfo();
 }
 
 void FormProfile::setProfile(SProfile aProfile) {
@@ -195,28 +194,26 @@ SFriends FormProfile::getFriends() {
     return _friends;
 }
 
-void FormProfile::updateTheme() {
+void FormProfile::updateSettings() {
     _setting.syncronizeSettings();
-    switch(_setting.getTheme()) {
-        case 1:
-            _theme = "white";
-            break;
-        case 2:
-            _theme = "black";
-            break;
-    }
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://" + _theme + "/link.png\"> "
+    setIcons();
+    updateVisibleInfo();
+    updateMyProfile();
+}
+
+void FormProfile::setIcons() {
+    QString iconsColor = _setting.getIconsColor();
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://" + iconsColor + "/link.png\"> "
                                 "<a href=\"" + _profile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
-    ui->ButtonSetProfile->setIcon(QIcon("://" + _theme + "/set_home.png"));
-    ui->ButtonFavorites->setIcon(QIcon("://" + _theme + "/favorites.png"));
-    ui->ButtonStatistics->setIcon(QIcon("://" + _theme + "/statistic.png"));
-    ui->ButtonFriends->setIcon(QIcon("://" + _theme + "/friends.png"));
-    ui->ButtonGames->setIcon(QIcon("://" + _theme + "/games.png"));
+    ui->ButtonSetProfile->setIcon(QIcon("://" + iconsColor + "/set_home.png"));
+    ui->ButtonFavorites->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+    ui->ButtonStatistics->setIcon(QIcon("://" + iconsColor + "/statistic.png"));
+    ui->ButtonFriends->setIcon(QIcon("://" + iconsColor + "/friends.png"));
+    ui->ButtonGames->setIcon(QIcon("://" + iconsColor + "/games.png"));
 }
 
 void FormProfile::updateVisibleInfo() {
-    _setting.syncronizeSettings();
     _visibleInfo = _setting.getProfileInfoSize();
     switch (_visibleInfo) {
     case 0:{
@@ -247,6 +244,11 @@ void FormProfile::updateVisibleInfo() {
 void FormProfile::updateInfo() {
     _profile.update(false);
     profileToUi(_profile);
+}
+
+void FormProfile::updateMyProfile() {
+    QString currentMyProfile = _setting.getMyProfile();
+    ui->ButtonSetProfile->setEnabled(!(currentMyProfile == _profile._steamID));
 }
 
 void FormProfile::retranslate() {

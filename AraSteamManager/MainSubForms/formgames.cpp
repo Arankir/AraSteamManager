@@ -21,19 +21,28 @@ void FormGames::initComponents() {
     this->setAttribute(Qt::WA_TranslucentBackground);
     ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
     _games.sort();
-    updateTheme();
+    updateSettings();
     retranslate();
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetGames->setAlternatingRowColors(true);
 
     ui->FrameGroup->stackUnder(ui->TableWidgetGames);
-    _geometryGroup = QRect(0, 0, 0, ui->FrameGames->height());
-    //ui->TableWidgetGames->installEventFilter(this);
+
+    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
+    _animate->setDuration(300);
+
     this->setMouseTracking(true);
     ui->FrameGames->setMouseTracking(true);
-    ui->TableWidgetGames->setMouseTracking(true);
     ui->TableWidgetGames->viewport()->setMouseTracking(true);
-    ui->FrameGroup->setVisible(false);
+    enableMouseTracking(ui->FrameGames->children());
+//    enableMouseTracking(ui->TableWidgetGames->children());
+//    enableMouseTracking(ui->TableWidgetGames->viewport()->children());
+//    ui->FrameGames->setMouseTracking(true);
+//    ui->FrameGroup->setMouseTracking(true);
+//    ui->TableWidgetGames->setMouseTracking(true);
+//    ui->TableWidgetGames->viewport()->setMouseTracking(true);
+//    ui->TableWidgetGames->installEventFilter(this);
+    //ui->TableWidgetGames->viewport()->installEventFilter(this);
 
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
@@ -57,24 +66,29 @@ void FormGames::initComponents() {
     createThread();
 }
 
-void FormGames::updateTheme() {
-    switch(_setting.getTheme()) {
-        case 1:
-            _theme = "white";
-            break;
-        case 2:
-            _theme = "black";
-            break;
+void FormGames::enableMouseTracking(const QObjectList &aChildren) {
+    for(QObject *child: aChildren) {
+        QWidget *childWidget = qobject_cast<QWidget*>(child);
+
+        if(childWidget) {
+            childWidget->setMouseTracking(true);
+            enableMouseTracking(childWidget->children());
+        }
     }
+}
+
+void FormGames::updateSettings() {
+    _setting.syncronizeSettings();
     setIcons();
 }
 
 void FormGames::setIcons() {
-    ui->ButtonFind->setIcon(QIcon("://" + _theme + "/find.png"));
-    ui->ButtonFavorite->setIcon(QIcon("://" + _theme + "/favorites.png"));
-    ui->ButtonHide->setIcon(QIcon("://" + _theme + "/hide.png"));
+    QString iconsColor = _setting.getIconsColor();
+    ui->ButtonFind->setIcon(QIcon("://" + iconsColor + "/find.png"));
+    ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+    ui->ButtonHide->setIcon(QIcon("://" + iconsColor + "/hide.png"));
     ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
-    ui->ButtonChangeGroup->setIcon(QIcon("://" + _theme + "/change.png"));
+    ui->ButtonChangeGroup->setIcon(QIcon("://" + iconsColor + "/change.png"));
 }
 
 void FormGames::onFinish() {
@@ -125,7 +139,30 @@ void FormGames::onFinish() {
         }
         row++;
     }
+//    enableMouseTracking(ui->TableWidgetGames->children());
+//    ui->TableWidgetGames->viewport()->setMouseTracking(true);
+//    enableMouseTracking(ui->TableWidgetGames->viewport()->children());
+//    ui->TableWidgetGames->installEventFilter(this);
+//    ui->TableWidgetGames->viewport()->installEventFilter(this);
     ui->LineEditGame->setFocus();
+}
+
+bool FormGames::eventFilter(QObject *obj, QEvent *event) {
+//       if (obj == ui->TableWidgetGames)
+//       {
+//           if (event->type() == QEvent::MouseButtonPress)
+//               qDebug() << "table mouse press event";
+//           else if (event->type() == QEvent::MouseMove)
+//               qDebug() << "table mouse moveevent";
+//       }
+//       else if (obj == ui->TableWidgetGames->viewport())
+//       {
+//           if (event->type() == QEvent::MouseButtonPress)
+//               qDebug() << "table->viewport mouse press event";
+//           else if (event->type() == QEvent::MouseMove)
+//               qDebug() << "table->viewport mouse moveevent";
+//       }
+//       return QObject::eventFilter(obj, event);
 }
 
 void FormGames::onResultAchievements(SAchievementsPlayer aAchievements) {
@@ -192,58 +229,42 @@ void FormGames::closeEvent(QCloseEvent*) {
 }
 
 void FormGames::resizeEvent(QResizeEvent*) {
-    ui->TableWidgetGames->setGeometry(0, 0, ui->FrameGames->width(), ui->FrameGames->height());
-    ui->FrameGroup->setGeometry(0, 0, ui->FrameGroup->width(), ui->FrameGames->height());
+    ui->TableWidgetGames->setGeometry(c_widthVisibleGroup, 0, ui->FrameGames->width() - c_widthVisibleGroup, ui->FrameGames->height());
+
+    QRect invisibleRect(c_invisibleGroupPos, QPoint(c_invisibleGroupPos.x() + c_widthGroup, height()));
+    QRect visibleRect(c_visibleGroupPos, QPoint(c_visibleGroupPos.x() + c_widthGroup, height()));
+
+    ui->FrameGroup->setGeometry(_isGroupShow ? visibleRect : invisibleRect);
     ui->FrameGroup->raise();
 }
 
-void FormGames::showHideSlideWidget(bool aFlag){
-//    qDebug()<<4<<aFlag;
-//    if (aFlag)
-//        ui->FrameGroup->setGeometry(_geometryGroup);
-//    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
-//    _animate->setDuration(300);
+void FormGames::showHideSlideWidget(bool aShowing) {
+    QRect invisibleRect(c_invisibleGroupPos, QPoint(c_invisibleGroupPos.x() + c_widthGroup, height()));
+    QRect visibleRect(c_visibleGroupPos, QPoint(c_visibleGroupPos.x() + c_widthGroup, height()));
 
-//    QRect startRect(0, 0, 0, height());
-//    QRect endRect(0, 0, 300, height());
+    if (aShowing) {
+        _animate->setStartValue(invisibleRect);
+        _animate->setEndValue(visibleRect);
+    } else {
+        _animate->setStartValue(visibleRect);
+        _animate->setEndValue(invisibleRect);
+    }
+    _animate->start();
 
-//    if (aFlag)
-//    {
-//        _animate->setStartValue(startRect);
-//        _animate->setEndValue(endRect);
-//        _geometryGroup=endRect;
-//    }
-//    else
-//    {
-//        _animate->setStartValue(endRect);
-//        _animate->setEndValue(startRect);
-//        _geometryGroup=startRect;
-//    }
-//    _animate->start();
-    //connect(_animate, QPropertyAnimations::, ui->FrameGroup->setVisible(!aFlag));
+    _isGroupShow = aShowing;
 }
 
 void FormGames::mouseMoveEvent(QMouseEvent *aEvent) {
-    if (aEvent->pos().x() < 50) {
-        qDebug()<<1<<aEvent->pos();
-        if (!ui->FrameGroup->isVisible()){
-            ui->FrameGroup->show();
+    qDebug()<< "pos"<< aEvent->x()<< aEvent->y();
+    if (aEvent->pos().x() < c_widthVisibleGroup) {
+        if (!_isGroupShow) {
             showHideSlideWidget(true);
         }
     } else {
-        qDebug()<<2<<aEvent->pos();
-        if (ui->FrameGroup->isVisible()) {
+        if ((_isGroupShow) && (aEvent->pos().x() > (c_visibleGroupPos.x() + c_widthGroup))) {
             showHideSlideWidget(false);
         }
     }
-}
-
-void FormGames::slotShowHideSlide() {
-//    if (ui->FrameGroup->isHidden())
-//        ui->FrameGroup->show();
-
-//    qDebug()<<3<<ui->FrameGroup->isVisible();
-//    showHideSlideWidget(!ui->FrameGroup->isVisible());
 }
 
 void FormGames::createThread() {
@@ -312,13 +333,14 @@ void FormGames::tableWidgetGames_CellClicked(int aRow, int) {
             break;
         }
     }
+    QString iconsColor = _setting.getIconsColor();
     if(isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon("://" + _theme + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
     } else {
-        ui->ButtonFavorite->setIcon(QIcon("://" + _theme + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
     }
     if(ui->TableWidgetGames->item(aRow,c_tableColumnName)->foreground() == Qt::red) {
-        ui->ButtonHide->setIcon(QIcon("://" + _theme + "/unhide.png"));
+        ui->ButtonHide->setIcon(QIcon("://" + iconsColor + "/unhide.png"));
     }
     ui->FrameGame->setVisible(true);
 }
@@ -342,12 +364,13 @@ void FormGames::buttonFavorite_Clicked() {
     newValue["icon"] = _games[_selectedIndex.toInt()]._img_icon_url;
     newValue["idUser"] = _profile._steamID;
     ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
+    QString iconsColor = _setting.getIconsColor();
     if(_favorites.addValue(newValue, true)) {
         //Категория добавилась
-        ui->ButtonFavorite->setIcon(QIcon("://" + _theme + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
     } else {
         //Категория уже есть (удалилась)
-        ui->ButtonFavorite->setIcon(QIcon("://" + _theme + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
     }
 }
 
@@ -384,6 +407,6 @@ void FormGames::buttonHide_Clicked() {
         }
     }
     ui->ButtonHide->setFixedSize(ui->ButtonHide->size());
-    ui->ButtonHide->setIcon(QIcon("://" + _theme + "/unhide.png"));
+    ui->ButtonHide->setIcon(QIcon("://" + _setting.getIconsColor() + "/unhide.png"));
 }
 #define FunctionsEnd }

@@ -103,7 +103,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     ui->TableWidgetFriends->resizeRowsToContents();
     ui->TableWidgetFriends->resizeColumnsToContents();
     #define SetTableWidgetCompareFriendsSettingsEnd }
-    setTheme();
+    setIcons();
     #define Connects {
     connect(ui->ButtonUpdate,                &QPushButton::clicked,                    this,                &FormAchievements::buttonUpdate_Clicked);
     connect(ui->CheckBoxCompareAllFriends,   &QCheckBox::stateChanged,                 this,                &FormAchievements::checkBoxCompareAllFriends_StateChanged);
@@ -181,34 +181,31 @@ void FormAchievements::retranslate() {
     }
 }
 
-void FormAchievements::setTheme() {
-    switch(_setting.getTheme()) {
-    case 1: {
-        _iconsColor = "white";
-        break;
-    }
-    case 2: {
-        _iconsColor = "black";
-        break;
-    }
-    }
+void FormAchievements::updateSettings() {
+    _setting.syncronizeSettings();
     setIcons();
+    emit s_updateSettings();
 }
 
 void FormAchievements::setIcons() {
-    ui->ButtonCompare->setIcon(QIcon("://" + _iconsColor + "/compare.png"));
+    QString iconsColor = _setting.getIconsColor();
+    ui->ButtonCompare->setIcon(QIcon("://" + iconsColor + "/compare.png"));
     //ui->GroupBoxFilter->setStyleSheet(""QGroupBox[accessibleName=\"Filter\"]::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {image:url(://" + _iconsColor + "/filter.png); image-position:left; margin-top:12px;}");
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {"
+                                        "image:url(://" + iconsColor + "/filter.png); "
+                                        "image-position:left; "
+                                        "margin-top:12px;"
+                                      "}");
     ui->ButtonAddCategory->setIcon(QIcon("://create.png"));
-    ui->ButtonChangeCategory->setIcon(QIcon("://" + _iconsColor + "/change.png"));
+    ui->ButtonChangeCategory->setIcon(QIcon("://" + iconsColor + "/change.png"));
     ui->ButtonDeleteCategory->setIcon(QIcon("://delete.png"));
-    ui->ButtonDeleteAllCategories->setIcon(QIcon("://" + _iconsColor + "/delete_all.png"));
-    ui->ButtonFindAchievement->setIcon(QIcon("://" + _iconsColor + "/find.png"));
+    ui->ButtonDeleteAllCategories->setIcon(QIcon("://" + iconsColor + "/delete_all.png"));
+    ui->ButtonFindAchievement->setIcon(QIcon("://" + iconsColor + "/find.png"));
     ui->ButtonAddValueCategory->setIcon(QIcon("://create.png"));
     ui->ButtonAcceptCategory->setIcon(QIcon("://apply.png"));
     ui->ButtonCancelCategory->setIcon(QIcon("://cancel.png"));
-    ui->ButtonUpdate->setIcon(QIcon("://" + _iconsColor + "/update.png"));
-    ui->ButtonFavorite->setIcon(QIcon("://" + _iconsColor + "/favorites.png"));
+    ui->ButtonUpdate->setIcon(QIcon("://" + iconsColor + "/update.png"));
+    ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
     QJsonObject gameObject;
     gameObject["id"] = _game._appID;
     gameObject["name"] = _game._name;
@@ -221,31 +218,31 @@ void FormAchievements::setIcons() {
         }
     }
     if (isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon("://" + _iconsColor + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
     } else {
-        ui->ButtonFavorite->setIcon(QIcon("://" + _iconsColor + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
     }
     QLabel *friendsIcon = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1));
     if (friendsIcon) {
-        friendsIcon->setPixmap(QPixmap("://" + _iconsColor + "/friends.png"));
+        friendsIcon->setPixmap(QPixmap("://" + iconsColor + "/friends.png"));
     }
     QWidget *wFriendsFilter = dynamic_cast<QWidget*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowFilters, 1));
     if (wFriendsFilter) {
         QButtonWithData *bFriendsAll = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(0)->widget());
         if (bFriendsAll) {
-            bFriendsAll->setIcon(QIcon("://" + _iconsColor + "/all.png"));
+            bFriendsAll->setIcon(QIcon("://" + iconsColor + "/all.png"));
         } else {
             qDebug()<<"error FormAchievements::setIcons() bFriendsAll";
         }
         QButtonWithData *bFriendsReached = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(1)->widget());
         if (bFriendsReached) {
-            bFriendsReached->setIcon(QIcon("://" + _iconsColor + "/reached.png"));
+            bFriendsReached->setIcon(QIcon("://" + iconsColor + "/reached.png"));
         } else {
             qDebug()<<"error FormAchievements::setIcons() bFriendsReached";
         }
         QButtonWithData *bFriendsNotReached = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(2)->widget());
         if (bFriendsNotReached) {
-            bFriendsNotReached->setIcon(QIcon("://" + _iconsColor + "/notreached.png"));
+            bFriendsNotReached->setIcon(QIcon("://" + iconsColor + "/notreached.png"));
         } else {
             qDebug()<<"error FormAchievements::setIcons() bFriendsNotReached";
         }
@@ -468,7 +465,8 @@ void FormAchievements::createCompareProfileFilter(bool aAccept, int aColumn) {
         FormCompareProfileFilter *friendFilter = new FormCompareProfileFilter(this);
         friendFilter->setObjectName("FormCompareProfileFilterFriend" + QString::number(aColumn));
         friendFilter->setName(QString::number(aColumn));
-        connect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this, &FormAchievements::compareProfileFilterClickFriends);
+        connect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this,         &FormAchievements::compareProfileFilterClickFriends);
+        connect(this,         &FormAchievements::s_updateSettings,            friendFilter, &FormCompareProfileFilter::updateSettings);
         ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, aColumn, friendFilter);
         ui->TableWidgetFriends->resizeRowsToContents();
         ui->TableWidgetFriends->resizeColumnsToContents();
@@ -598,10 +596,11 @@ void FormAchievements::showCategories() {
 FormCategoryValue *FormAchievements::createValueCategory() {
     int rowValues = ui->ListWidgetValuesCategory->count();//->rowCount();
     FormCategoryValue *newValue = new FormCategoryValue(rowValues, ui->ListWidgetValuesCategory);
-    connect(newValue, &FormCategoryValue::s_visiblechange,  this, &FormAchievements::formCategoryVisible_Change);
-    connect(newValue, &FormCategoryValue::s_positionchange, this, &FormAchievements::formCategoryPosition_Change);
-    connect(newValue, &FormCategoryValue::s_deleting,       this, &FormAchievements::formCategoryDelete);
-    connect(newValue, &FormCategoryValue::s_reverse,        this, &FormAchievements::formCategoryReverse);
+    connect(newValue, &FormCategoryValue::s_visiblechange,  this,     &FormAchievements::formCategoryVisible_Change);
+    connect(newValue, &FormCategoryValue::s_positionchange, this,     &FormAchievements::formCategoryPosition_Change);
+    connect(newValue, &FormCategoryValue::s_deleting,       this,     &FormAchievements::formCategoryDelete);
+    connect(newValue, &FormCategoryValue::s_reverse,        this,     &FormAchievements::formCategoryReverse);
+    connect(this    , &FormAchievements::s_updateSettings,  newValue, &FormCategoryValue::updateSettings);
     connect(newValue, &FormCategoryValue::s_valuechange,    this, [=](int aPos, QString aValue) {
         _tableAchievements->changeHorizontalTitle((c_tableCategoryColumnNoValue + 1) + aPos, aValue);
     });
@@ -1031,12 +1030,13 @@ void FormAchievements::buttonFavorite_Clicked() {
         newValue["id"] = achievement._apiName;
         newValue["title"] = achievement._displayName;
         newValue["description"] = achievement._description;
+        QString iconsColor = _setting.getIconsColor();
         if (_favorites.addValue(gameObject, newValue, true)) {
             //Категория добавилась
-            ui->ButtonFavorite->setIcon(QIcon("://" + _iconsColor + "/in_favorites.png"));
+            ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
         } else {
             //Категория уже есть (удалилась)
-            ui->ButtonFavorite->setIcon(QIcon("://" + _iconsColor + "/favorites.png"));
+            ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
         }
     }
 }
@@ -1056,9 +1056,10 @@ void FormAchievements::tableAchievements_CellClicked(int row, int) {
             break;
         }
     }
+    QString iconsColor = _setting.getIconsColor();
     if (isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon("://" + _iconsColor + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
     } else {
-        ui->ButtonFavorite->setIcon(QIcon("://" + _iconsColor + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
     }
 }

@@ -580,24 +580,6 @@ void MainWindow::closeEvent(QCloseEvent *aEvent) {
     aEvent->accept();
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *aEvent){
-//    if(aEvent->button() == Qt::LeftButton){
-//        QPoint winPt  = this->pos();
-//        QPoint mousePt = a_event->globalPos();
-//        _mousePos = mousePt - winPt;
-//        //Если схватил сверху, разрешить перемещать окно
-//        _moveWindow=std::move(_mousePos.y()<24);
-//    } else {
-//        _moveWindow=std::move(false);
-//    }
-}
-
-void MainWindow::mouseMoveEvent(QMouseEvent *aEvent){
-//    if(_moveWindow){//Перемещать окно
-//        this->move(aEvent->globalPos() - _mousePos);
-//    }
-}
-
 MainWindow::~MainWindow() {
     returnFromForms();
     delete _containerAchievementsForm;
@@ -667,11 +649,9 @@ void MainWindow::goToProfile(QString aId, QueryType aType) {
         connect(newFormProfile, &FormProfile::s_goToFriends,     this,           &MainWindow::goToFriends);
         connect(newFormProfile, &FormProfile::s_goToStatistic,   this,           &MainWindow::goToStatistics);
         connect(newFormProfile, &FormProfile::s_goToFavorites,   this,           &MainWindow::goToFavorites);
-        connect(newFormProfile, &FormProfile::s_myProfileChange, this,           &MainWindow::updateMyProfile);
-        connect(this,           &MainWindow::s_updateSettings,   newFormProfile, &FormProfile::updateVisibleInfo);
-        connect(this,           &MainWindow::s_updateSettings,   newFormProfile, &FormProfile::updateTheme);
+        connect(newFormProfile, &FormProfile::s_myProfileChange, this,           &MainWindow::updateSettings);
+        connect(this,           &MainWindow::s_updateSettings,   newFormProfile, &FormProfile::updateSettings);
         updateSettings();
-        updateMyProfile();
         updateButtonsBackNext();
         qDebug()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex() + 1<<"/"<<ui->StackedWidgetProfiles->count();
         } else {
@@ -688,8 +668,8 @@ void MainWindow::updateButtonsBackNext() {
 void MainWindow::buttonBack_Clicked() {
     if(ui->StackedWidgetProfiles->currentIndex() > 0) {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() - 1);
-        updateMyProfile();
         returnFromForms();
+        updateSettings();
         updateButtonsBackNext();
     }
 }
@@ -697,8 +677,8 @@ void MainWindow::buttonBack_Clicked() {
 void MainWindow::buttonNext_Clicked() {
     if(ui->StackedWidgetProfiles->currentIndex() < ui->StackedWidgetProfiles->count()) {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() + 1);
-        updateMyProfile();
         returnFromForms();
+        updateSettings();
         updateButtonsBackNext();
     }
 }
@@ -712,6 +692,7 @@ void MainWindow::goToGames(SProfile aProfileSteamId, SGames aGames) {
             connect(_gamesForm, &FormGames::s_finish,             this, &MainWindow::showGames);
             connect(_gamesForm, &FormGames::s_achievementsLoaded, this, &MainWindow::progressLoading);
             connect(_gamesForm, &FormGames::s_showAchievements,   this, &MainWindow::addAchievements);
+            connect(this, &MainWindow::s_updateSettings, _gamesForm, &FormGames::updateSettings);
             ui->ScrollAreaGames->setWidget(_gamesForm);
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
@@ -730,6 +711,7 @@ void MainWindow::goToFriends(QString aProfileSteamid, SFriends aFriends) {
             connect(_friendsForm, &FormFriends::s_friendsLoaded, this, &MainWindow::progressLoading);
             connect(_friendsForm, &FormFriends::s_finish,        this, &MainWindow::showFriends);
             connect(_friendsForm, &FormFriends::s_go_to_profile, this, &MainWindow::goToProfile);
+            connect(this, &MainWindow::s_updateSettings, _friendsForm, &FormFriends::updateSettings);
             ui->ScrollAreaFriends->setWidget(_friendsForm);
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
@@ -743,6 +725,7 @@ void MainWindow::goToFavorites() {
     if(!_initFavorites) {
         if(!_blockedLoad) {
             _favoritesForm = new FormFavorites(this);
+            connect(this, &MainWindow::s_updateSettings, _favoritesForm, &FormFavorites::updateSettings);
             ui->ScrollAreaFavorites->setWidget(_favoritesForm);
             //
             _initFavorites = true;
@@ -760,23 +743,15 @@ void MainWindow::goToStatistics(QString aProfileSteamId, SGames aGames, QString 
             _blockedLoad = true;
             ui->FormProgressBar->setMaximum(aGames.getCount());
             _statisticsForm = new FormStatistics(aProfileSteamId, aGames, aProfileName, this);
-            connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this, &MainWindow::progressLoading);
-            connect(_statisticsForm, &FormStatistics::s_finish,           this, &MainWindow::showStatistic);
+            connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this,            &MainWindow::progressLoading);
+            connect(_statisticsForm, &FormStatistics::s_finish,           this,            &MainWindow::showStatistic);
+            connect(this,            &MainWindow::s_updateSettings,       _statisticsForm, &FormStatistics::updateSettings);
             ui->ScrollAreaStatistic->setWidget(_statisticsForm);
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
         }
     } else {
         ui->StackedWidgetForms->setCurrentIndex(c_formsStatistic);
-    }
-}
-
-void MainWindow::updateMyProfile() {
-    _setting.syncronizeSettings();
-    FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
-    if (currentProfile) {
-        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != _setting.getMyProfile());
-        emit s_updateSettings();
     }
 }
 
@@ -794,6 +769,10 @@ void MainWindow::updateSettings() {
     case 2:{
         ui->StackedWidgetProfiles->setFixedHeight(155);
     }
+    }
+    FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
+    if (currentProfile) {
+        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != _setting.getMyProfile());
     }
     qApp->setStyleSheet(getTheme());
     emit s_updateSettings();

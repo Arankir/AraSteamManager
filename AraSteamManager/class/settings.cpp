@@ -83,6 +83,22 @@ int Settings::getTheme() {
     return _settings->value(c_theme, 1).toInt();
 }
 
+QString Settings::getIconsColor(){
+    switch(getTheme()) {
+    case 1: {
+        return "white";
+        break;
+    }
+    case 2: {
+        return "black";
+        break;
+    }
+    default: {
+        return "white";
+    }
+    }
+}
+
 int Settings::getSaveImages() {
     return _settings->value(c_saveImage, 0).toInt();
 }

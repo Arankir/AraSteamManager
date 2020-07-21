@@ -273,6 +273,15 @@ void FormStatistics::onFinish() {
     emit s_finish();
 }
 
+void FormStatistics::updateSettings() {
+    _setting.syncronizeSettings();
+    setIcons();
+}
+
+void FormStatistics::setIcons() {
+
+}
+
 FormStatistics::~FormStatistics() {
     delete ui;
 }

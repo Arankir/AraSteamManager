@@ -24,7 +24,7 @@ public slots:
     void changeEvent(QEvent *event);
     void progressLoading(int p,int row);
     void onFinish();
-    void setTheme();
+    void updateSettings();
 
 public:
     explicit FormFriends(QString id, SFriends Friends, QWidget *parent = nullptr);
@@ -65,7 +65,6 @@ private:
     SFriends _friends;
     SProfiles _profiles;
     Settings _setting;
-    QString _theme = "white";
     Favorites _favorites;
     Filter _filter;
     QString _currentFriend;

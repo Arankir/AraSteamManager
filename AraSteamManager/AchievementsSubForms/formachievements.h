@@ -54,20 +54,20 @@ public slots:
     QString getProfileId();
     int getGameAppId();
     void buttonUpdate_Clicked();
-
+    
+    void updateSettings();
 public:
     explicit FormAchievements(SAchievementsPlayer pl, SProfile profile, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
     void s_returnToGames(int num);
-
+    void s_updateSettings();
 
 private slots:
     void changeEvent(QEvent *event);
     void initComponents(SAchievementsPlayer player);
     void retranslate();
-    void setTheme();
     void setIcons();
 
     QButtonWithData *createButtonWithData(QString aObjectName, QString aAppertain, QString aType, bool aChecked);
@@ -118,7 +118,6 @@ private slots:
 private:
     Ui::FormAchievements *ui;
     Settings _setting;
-    QString _iconsColor = "white";
     QString _currentAchievement;
     int _currentAchievementIndex = -1;
 

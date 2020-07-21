@@ -25,6 +25,9 @@ public:
     void setType(ReachedType);
     void update();
 
+public slots:
+    void updateSettings();
+    void setIcons();
 signals:
     void s_radioButtonChange(QString name, ReachedType type);
 
