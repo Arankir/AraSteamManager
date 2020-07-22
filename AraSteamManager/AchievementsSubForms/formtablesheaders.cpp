@@ -56,7 +56,7 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
         _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
     }
 
-    SProfiles profileData(_id, false, QueryType::url);
+    SProfiles profileData(_id, false, ProfileUrlType::id);
 //    QLabel *profileAvatarCompare = new QLabel;
 //    profileAvatarCompare->setAlignment(Qt::AlignCenter);
 //    new RequestImage(profileAvatarCompare,profileData.GetAvatar(),"",false,this);

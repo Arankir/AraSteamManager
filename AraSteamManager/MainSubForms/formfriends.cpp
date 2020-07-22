@@ -27,6 +27,7 @@ FormFriends::FormFriends(QString aId, SFriends aFriends, QWidget *aParent): QWid
     initComponents();
     ui->LineEditName->setFocus();
 }
+
 void FormFriends::initComponents() {
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
     retranslate();
@@ -40,18 +41,20 @@ void FormFriends::initComponents() {
     ui->ButtonFriendFavorite->setFixedSize(QSize(25, 25));
     setIcons();
 #define Connects {
-    connect(ui->TableWidgetFriends,&QTableWidget::cellClicked,this,&FormFriends::tableWidgetFriends_CellClicked);
-    connect(ui->ButtonFriendGoTo,&QPushButton::clicked,this,&FormFriends::buttonFriendGoTo_Clicked);
-    connect(ui->ButtonFriendFavorite,&QPushButton::clicked,this,&FormFriends::buttonFriendFavorite_Clicked);
+    connect(ui->TableWidgetFriends,   &QTableWidget::cellClicked,       this, &FormFriends::tableWidgetFriends_CellClicked);
+    connect(ui->ButtonFriendGoTo,     &QPushButton::clicked,            this, &FormFriends::buttonFriendGoTo_Clicked);
+    connect(ui->ButtonFriendFavorite, &QPushButton::clicked,            this, &FormFriends::buttonFriendFavorite_Clicked);
+    connect(ui->CheckBoxOpenProfile,  &QCheckBox::stateChanged,         this, &FormFriends::checkBoxOpenProfile_StateChanged);
+    connect(ui->ComboBoxStatus,       SIGNAL(activated(int)),           this, SLOT(comboBoxStatus_Activated(int)));
+    connect(ui->LineEditName,         &QLineEdit::textChanged,          this, &FormFriends::lineEditName_TextChanged);
+    connect(ui->ButtonFind,           &QPushButton::clicked,            this, &FormFriends::buttonFind_Clicked);
+    connect(ui->CheckBoxFavorites,    &QCheckBox::stateChanged,         this, &FormFriends::checkBoxFavorites_StateChanged);
+    connect(ui->TableWidgetFriends,   &QTableWidget::cellDoubleClicked, this, &FormFriends::tableWidgetFriends_CellDoubleClicked);
 #define ConnectsEnd }
     createThread();
 }
 
-void FormFriends::progressLoading(int aProgress,int aRow) {
-    ui->TableWidgetFriends->setRowHeight(aRow, 33);
-}
-
-void FormFriends::onFinish() {
+void FormFriends::onTablePulled() {
     ui->TableWidgetFriends->resizeColumnsToContents();
     int row = 0;
     for(auto &profile: _profiles) {
@@ -87,6 +90,11 @@ void FormFriends::changeEvent(QEvent *event) {
     }
 }
 
+void FormFriends::closeEvent(QCloseEvent*) {
+    emit s_return_to_profile(this);
+    //delete this;
+}
+
 void FormFriends::retranslate() {
     ui->retranslateUi(this);
     ui->ComboBoxStatus->clear();
@@ -106,139 +114,6 @@ void FormFriends::retranslate() {
 void FormFriends::updateSettings() {
     _setting.syncronizeSettings();
     setIcons();
-}
-
-void FormFriends::setIcons() {
-    QString iconsColor = _setting.getIconsColor();
-    ui->ButtonFind->setIcon(QIcon("://" + iconsColor + "/find_profile.png"));
-    ui->ButtonFriendGoTo->setIcon(QIcon("://" + iconsColor + "/go_to.png"));
-    ui->ButtonFriendFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title { "
-                                        "image:url(://" + iconsColor + "/filter.png) 0 0 0 0 stretch stretch; "
-                                        "image-position:left; "
-                                        "margin-top:15px; "
-                                      "}");
-}
-
-void FormFriends::closeEvent(QCloseEvent*) {
-    emit s_return_to_profile(this);
-    //delete this;
-}
-
-void FormFriends::createThread() {
-    Threading *loadTable = new Threading(this);
-    loadTable->AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
-    connect (loadTable, &Threading::s_friends_progress, this, [=](int progress, int row) {
-        ui->TableWidgetFriends->setRowHeight(row, 33);
-        emit s_friendsLoaded(progress, row);
-    });
-    connect (loadTable, &Threading::s_friends_finished, this, &FormFriends::onFinish);
-}
-#define SystemEnd }
-
-#define Filter {
-void FormFriends::on_CheckBoxOpenProfile_stateChanged(int arg1) {
-    if(arg1 == 2) {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i, c_filterPublic, ui->TableWidgetFriends->item(i, c_tableColumnisPublic)->text().indexOf(tr("Публичный")) > -1);
-        }
-    } else {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i,c_filterPublic, true);
-        }
-    }
-    updateHiddenRows();
-}
-
-void FormFriends::on_ComboBoxStatus_activated(int aIndex) {
-    if(aIndex != 0) {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i, c_filterStatus, ui->ComboBoxStatus->currentText() == ui->TableWidgetFriends->item(i, c_tableColumnStatus)->text());
-        }
-    } else {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i, c_filterStatus, true);
-        }
-    }
-    updateHiddenRows();
-}
-
-void FormFriends::on_LineEditName_textChanged(const QString &aNewText) {
-    for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-        _filter.setData(i, c_filterName, ui->TableWidgetFriends->item(i, c_tableColumnName)->text().toLower().indexOf(aNewText.toLower()) > -1);
-    }
-    updateHiddenRows();
-}
-
-void FormFriends::on_ButtonFind_clicked() {
-    on_LineEditName_textChanged(ui->LineEditName->text());
-}
-
-void FormFriends::updateHiddenRows() {
-    for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-        ui->TableWidgetFriends->setRowHidden(i, !_filter.getData(i));
-    }
-}
-
-void FormFriends::on_CheckBoxFavorites_stateChanged(int arg1) {
-    switch (arg1) {
-    case 0: {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i, c_filterFavorites, true);
-        }
-        break;
-    }
-    case 2: {
-        QJsonArray values = _favorites.getValues();
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            bool isFavorite = false;
-            for(QJsonValue value: values) {
-                if(value.toObject().value("id").toString() == _profiles[i]._steamID) {
-                    isFavorite = true;
-                    break;
-                }
-            }
-            _filter.setData(i, c_filterFavorites, isFavorite);
-        }
-        break;
-    }
-    }
-    updateHiddenRows();
-}
-#define FilterEnd }
-
-#define Functions {
-void FormFriends::buttonFriendGoTo_Clicked() {
-    if((_windowChildCount == 0) && (_currentFriend != "")) {
-        //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
-        _windowChildCount++;
-        emit s_go_to_profile(_currentFriend, QueryType::url);
-        //emit s_return_to_profile(this);
-    }
-}
-
-void FormFriends::buttonFriendFavorite_Clicked() {
-    QJsonObject newValue;
-    newValue["id"] = _profiles[_currentFriendIndex]._steamID;
-    newValue["name"] = _profiles[_currentFriendIndex]._personaName;
-    newValue["added"] = _friends[_currentFriendIndex]._friend_since.toString("yyyy.MM.dd hh:mm:ss");
-    if(_favorites.addValue(newValue, true)) {
-        //Категория добавилась
-    } else {
-        //Категория уже есть (удалилась)
-    }
-    //Поменять картинку
-}
-void FormFriends::on_TableWidgetFriends_cellDoubleClicked(int aRow, int) {
-    _currentFriend = ui->TableWidgetFriends->item(aRow, c_tableColumnID)->text();
-    buttonFriendGoTo_Clicked();
-}
-
-void FormFriends::tableWidgetFriends_CellClicked(int aRow, int) {
-    if(_currentFriend != ui->TableWidgetFriends->item(aRow, c_tableColumnID)->text()) {
-        _currentFriend = ui->TableWidgetFriends->item(aRow, c_tableColumnID)->text();
-        friendToUi();
-    }
 }
 
 void FormFriends::friendToUi() {
@@ -328,5 +203,138 @@ void FormFriends::friendToUi() {
             indexFriend++;
         }
     }
+}
+
+void FormFriends::setIcons() {
+    QString iconsColor = _setting.getIconsColor();
+    ui->ButtonFind->setIcon(QIcon("://" + iconsColor + "/find_profile.png"));
+    ui->ButtonFriendGoTo->setIcon(QIcon("://" + iconsColor + "/go_to.png"));
+    ui->ButtonFriendFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title { "
+                                        "image:url(://" + iconsColor + "/filter.png) 0 0 0 0 stretch stretch; "
+                                        "image-position:left; "
+                                        "margin-top:15px; "
+                                      "}");
+}
+
+void FormFriends::createThread() {
+    Threading *threadLoadTable = new Threading(this);
+    threadLoadTable->AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
+    connect (threadLoadTable, &Threading::s_friends_progress, this, [=](int progress, int row) {
+        ui->TableWidgetFriends->setRowHeight(row, 33);
+        emit s_friendsLoaded(progress, row);
+    });
+    connect (threadLoadTable, &Threading::s_friends_finished, this, &FormFriends::onTablePulled);
+}
+
+void FormFriends::updateHiddenRows() {
+    for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+        ui->TableWidgetFriends->setRowHidden(i, !_filter.getData(i));
+    }
+}
+
+void FormFriends::progressLoading(int aProgress,int aRow) {
+    ui->TableWidgetFriends->setRowHeight(aRow, 33);
+}
+#define SystemEnd }
+
+#define Filter {
+void FormFriends::checkBoxOpenProfile_StateChanged(int aState) {
+    if(aState == 2) {
+        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+            _filter.setData(i, c_filterPublic, ui->TableWidgetFriends->item(i, c_tableColumnisPublic)->text().indexOf(tr("Публичный")) > -1);
+        }
+    } else {
+        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+            _filter.setData(i,c_filterPublic, true);
+        }
+    }
+    updateHiddenRows();
+}
+
+void FormFriends::comboBoxStatus_Activated(int aIndex) {
+    if(aIndex != 0) {
+        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+            _filter.setData(i, c_filterStatus, ui->ComboBoxStatus->currentText() == ui->TableWidgetFriends->item(i, c_tableColumnStatus)->text());
+        }
+    } else {
+        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+            _filter.setData(i, c_filterStatus, true);
+        }
+    }
+    updateHiddenRows();
+}
+
+void FormFriends::lineEditName_TextChanged(const QString &aNewText) {
+    for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+        _filter.setData(i, c_filterName, ui->TableWidgetFriends->item(i, c_tableColumnName)->text().toLower().indexOf(aNewText.toLower()) > -1);
+    }
+    updateHiddenRows();
+}
+
+void FormFriends::buttonFind_Clicked() {
+    lineEditName_TextChanged(ui->LineEditName->text());
+}
+
+void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
+    switch (arg1) {
+    case 0: {
+        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+            _filter.setData(i, c_filterFavorites, true);
+        }
+        break;
+    }
+    case 2: {
+        QJsonArray values = _favorites.getValues();
+        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+            bool isFavorite = false;
+            for(QJsonValue value: values) {
+                if(value.toObject().value("id").toString() == _profiles[i]._steamID) {
+                    isFavorite = true;
+                    break;
+                }
+            }
+            _filter.setData(i, c_filterFavorites, isFavorite);
+        }
+        break;
+    }
+    }
+    updateHiddenRows();
+}
+#define FilterEnd }
+
+#define Functions {
+void FormFriends::buttonFriendGoTo_Clicked() {
+    if((_windowChildCount == 0) && (_currentFriend != "")) {
+        //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
+        _windowChildCount++;
+        emit s_go_to_profile(_currentFriend, ProfileUrlType::id);
+        //emit s_return_to_profile(this);
+    }
+}
+
+void FormFriends::buttonFriendFavorite_Clicked() {
+    QJsonObject newValue;
+    newValue["id"] = _profiles[_currentFriendIndex]._steamID;
+    newValue["name"] = _profiles[_currentFriendIndex]._personaName;
+    newValue["added"] = _friends[_currentFriendIndex]._friend_since.toString("yyyy.MM.dd hh:mm:ss");
+    if(_favorites.addValue(newValue, true)) {
+        //Категория добавилась
+    } else {
+        //Категория уже есть (удалилась)
+    }
+    //Поменять картинку
+}
+
+void FormFriends::tableWidgetFriends_CellClicked(int aRow, int) {
+    if(_currentFriend != ui->TableWidgetFriends->item(aRow, c_tableColumnID)->text()) {
+        _currentFriend = ui->TableWidgetFriends->item(aRow, c_tableColumnID)->text();
+        friendToUi();
+    }
+}
+
+void FormFriends::tableWidgetFriends_CellDoubleClicked(int aRow, int) {
+    _currentFriend = ui->TableWidgetFriends->item(aRow, c_tableColumnID)->text();
+    buttonFriendGoTo_Clicked();
 }
 #define FunctionsEnd }

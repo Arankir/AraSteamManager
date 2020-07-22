@@ -47,7 +47,7 @@ void FormFavorites::initComponents() {
     ui->TableWidgetFriends->setColumnWidth(c_tableFriendsColumnIcon, 33);
     ui->TableWidgetFriends->setRowCount(friendsJ.size());
     for(QJsonValue frien: friendsJ) {
-        SProfiles *Profiles = new SProfiles(frien.toObject().value("id").toString(), true, QueryType::url);
+        SProfiles *Profiles = new SProfiles(frien.toObject().value("id").toString(), true, ProfileUrlType::id);
         connect(Profiles, SIGNAL(s_finished(SProfile*)), this, SLOT(friendLoad(SProfile*)));
     }
     for (int i = 0; i < achievementsJ.size(); i++) {

@@ -45,11 +45,11 @@ enum class WindowChildType {
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
-    FormGames *_gamesForm;
-    FormFriends *_friendsForm;
-    FormFavorites *_favoritesForm;
-    FormStatistics *_statisticsForm;
-    FormSettings *_settingsForm;
+    FormGames *_gamesForm = nullptr;
+    FormFriends *_friendsForm = nullptr;
+    FormFavorites *_favoritesForm = nullptr;
+    FormStatistics *_statisticsForm = nullptr;
+    FormSettings *_settingsForm = nullptr;
     FormContainerAchievements *_containerAchievementsForm;
     QVector<FormAchievements*> _achievementsForms;
 
@@ -67,6 +67,12 @@ public slots:
 
     void updateSettings();
 
+    FormProfile *createFormProfile(SProfile aProfile);
+    FormGames *createFormGames(SProfile aProfile, SGames aGames);
+    FormFriends *createFormFriends(QString aId, SFriends aFriends);
+    FormFavorites *createFormFavorites();
+    FormStatistics *createFormStatistics(QString aId, SGames aGames, QString aName);
+    FormSettings *createFormSettings();
 signals:
     void s_updateSettings();
 
@@ -76,22 +82,19 @@ private slots:
     void changeEvent(QEvent*) override;
     void closeEvent(QCloseEvent*) override;
     //Forms
-    void showForm(bool &initForm, int widgetIndex, int widthWindow=300);
-    void showGames(int width);
-    void showFriends();
-    void showStatistic();
+    void showForm(int widgetIndex, int widthWindow = 300);
     void returnFromForms();
     //Systems
     void initComponents();
     QString getTheme();
     void setIcons();
     void resizeScrollArea(int width=300);
-    void updateButtonsBackNext();
+    void updateEnabledButtonsBackNext();
     void buttonMaximize_Clicked();
     void buttonMinimize_Clicked();
     //Functions
     void buttonFindProfile_Clicked();
-    void goToProfile(QString id, QueryType type);
+    void goToProfile(QString id, ProfileUrlType type);
     void buttonSettings_Clicked();
     void buttonExit_Clicked();
     //Profile
@@ -107,14 +110,8 @@ private:
     SGames _games;
     SFriends _friends;
     Settings _setting;
-    QString _iconColor = "white";
     int _achievementsCount = 0;
 
-    bool _initGames = false;
-    bool _initFriends = false;
-    bool _initFavorites = false;
-    bool _initStatistics = false;
-    bool _initSettings = false;
     bool _blockedLoad = false;
 
 };

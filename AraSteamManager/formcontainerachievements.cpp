@@ -13,10 +13,13 @@ FormContainerAchievements::FormContainerAchievements(QWidget *parent): QWidget(p
     }
 }
 
-FormContainerAchievements::~FormContainerAchievements() {
+void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
     _setting.setAchievementContainerParams(this->geometry());
     _setting.syncronizeSettings();
     emit s_formClose();
+}
+
+FormContainerAchievements::~FormContainerAchievements() {
     delete ui;
 }
 
@@ -48,13 +51,10 @@ void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer aPl, SPro
     }
 }
 
-void FormContainerAchievements::closeEvent(QCloseEvent *) {
-
-}
-
 void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int aIndex) {
     ui->TabWidgetAchievements->removeTab(aIndex);
     if(ui->TabWidgetAchievements->count() == 0) {
+        close();
         delete this;
     } else {
         emit s_removeAchievements(aIndex);

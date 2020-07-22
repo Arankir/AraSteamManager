@@ -23,7 +23,7 @@ class FormFriends : public QWidget {
 public slots:
     void changeEvent(QEvent *event);
     void progressLoading(int p,int row);
-    void onFinish();
+    void onTablePulled();
     void updateSettings();
 
 public:
@@ -34,29 +34,28 @@ signals:
     void s_friendsLoaded(int progress, int row);
     void s_finish();
     void s_return_to_profile(QWidget*);
-    void s_go_to_profile(QString id, QueryType type);
+    void s_go_to_profile(QString id, ProfileUrlType type);
 
 private slots:
     void initComponents();
     void closeEvent(QCloseEvent *event);
     void retranslate();
     void setIcons();
+    void updateHiddenRows();
+    void friendToUi();
+    void createThread();
 
     void buttonFriendGoTo_Clicked();
     void buttonFriendFavorite_Clicked();
 
-    void updateHiddenRows();
-    void on_CheckBoxOpenProfile_stateChanged(int arg1);
-    void on_LineEditName_textChanged(const QString &arg1);
-    void on_ButtonFind_clicked();
-    void on_ComboBoxStatus_activated(int index);
+    void checkBoxOpenProfile_StateChanged(int arg1);
+    void lineEditName_TextChanged(const QString &arg1);
+    void buttonFind_Clicked();
+    void comboBoxStatus_Activated(int index);
+    void checkBoxFavorites_StateChanged(int arg1);
 
-    void on_CheckBoxFavorites_stateChanged(int arg1);
-
-    void on_TableWidgetFriends_cellDoubleClicked(int row, int column);
     void tableWidgetFriends_CellClicked(int row, int col);
-    void friendToUi();
-    void createThread();
+    void tableWidgetFriends_CellDoubleClicked(int row, int column);
 
 private:
     Ui::FormFriends *ui;

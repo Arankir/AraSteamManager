@@ -189,7 +189,7 @@ void SProfile::s_finished()
 }
 struct qt_meta_stringdata_SProfiles_t {
     QByteArrayData data[12];
-    char stringdata0[102];
+    char stringdata0[107];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -208,13 +208,13 @@ QT_MOC_LITERAL(6, 54, 7), // "request"
 QT_MOC_LITERAL(7, 62, 10), // "loadVanity"
 QT_MOC_LITERAL(8, 73, 4), // "load"
 QT_MOC_LITERAL(9, 78, 8), // "parallel"
-QT_MOC_LITERAL(10, 87, 9), // "QueryType"
-QT_MOC_LITERAL(11, 97, 4) // "type"
+QT_MOC_LITERAL(10, 87, 14), // "ProfileUrlType"
+QT_MOC_LITERAL(11, 102, 4) // "type"
 
     },
     "SProfiles\0s_finished\0\0SProfiles*\0"
     "loadURL\0RequestData*\0request\0loadVanity\0"
-    "load\0parallel\0QueryType\0type"
+    "load\0parallel\0ProfileUrlType\0type"
 };
 #undef QT_MOC_LITERAL
 
@@ -262,7 +262,7 @@ void SProfiles::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1: _t->s_finished(); break;
         case 2: _t->loadURL((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
         case 3: _t->loadVanity((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 4: _t->load((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
+        case 4: _t->load((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< ProfileUrlType(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

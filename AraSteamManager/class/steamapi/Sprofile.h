@@ -16,8 +16,8 @@
 #include <class/Network/requestdata.h>
 #include <QObject>
 
-enum class QueryType {
-    url,
+enum class ProfileUrlType {
+    id,
     vanity
 };
 
@@ -75,13 +75,13 @@ public slots:
     void loadVanity(RequestData *request);
 
 public:
-    explicit SProfiles(QString id, bool parallel, QueryType type, QObject *parent = nullptr);
+    explicit SProfiles(QString id, bool parallel, ProfileUrlType type, QObject *parent = nullptr);
     SProfiles(QJsonDocument docSummaries, QObject *parent = nullptr);
     SProfiles(QJsonArray arrSummaries, QObject *parent = nullptr);
     SProfiles(QJsonObject objSummaries, QObject *parent = nullptr);
     SProfiles(QObject *parent = nullptr);
     ~SProfiles();
-    void set(QString id, bool parallel, QueryType type);
+    void set(QString id, bool parallel, ProfileUrlType type);
     void set(QJsonDocument docSummaries);
     void set(QJsonArray arrSummaries);
     void set(QJsonObject objSummaries);
@@ -125,7 +125,7 @@ signals:
     void s_finished();
 
 private slots:
-    void load(bool parallel, QueryType type);
+    void load(bool parallel, ProfileUrlType type);
 
 private:
     RequestData *_request;

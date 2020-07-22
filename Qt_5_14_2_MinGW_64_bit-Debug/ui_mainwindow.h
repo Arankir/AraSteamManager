@@ -260,7 +260,7 @@ public:
         ScrollAreaGames->setWidgetResizable(true);
         widget = new QWidget();
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 98, 28));
+        widget->setGeometry(QRect(0, 0, 459, 229));
         ScrollAreaGames->setWidget(widget);
 
         gridLayout_2->addWidget(ScrollAreaGames, 0, 0, 1, 1);
@@ -363,7 +363,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        StackedWidgetForms->setCurrentIndex(5);
+        StackedWidgetForms->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

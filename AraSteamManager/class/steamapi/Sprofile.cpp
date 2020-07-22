@@ -104,7 +104,7 @@ const bool &SProfile::operator<(const SProfile &aProfile){
 }
 #define SProfileEnd }
 #define SProfilesStart {
-SProfiles::SProfiles(QString aId, bool aParallel, QueryType aType, QObject *aParent): QObject(aParent), _request(new RequestData()), _id(aId) {
+SProfiles::SProfiles(QString aId, bool aParallel, ProfileUrlType aType, QObject *aParent): QObject(aParent), _request(new RequestData()), _id(aId) {
     load(aParallel, aType);
 }
 
@@ -128,7 +128,7 @@ SProfiles::~SProfiles(){
     delete _request;
 }
 
-void SProfiles::set(QString aId, bool aParallel, QueryType aType) {
+void SProfiles::set(QString aId, bool aParallel, ProfileUrlType aType) {
     _id = std::move(aId);
     load(aParallel, aType);
 }
@@ -268,17 +268,17 @@ void SProfiles::loadURL(RequestData *aRequest){
     emit s_finished();
 }
 
-void SProfiles::load(bool aParallel, QueryType aType) {
+void SProfiles::load(bool aParallel, ProfileUrlType aType) {
     if (aParallel) {
-        if (aType == QueryType::vanity) {
+        if (aType == ProfileUrlType::vanity) {
             connect(_request, &RequestData::s_finished, this, &SProfiles::loadVanity);
             _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::getKey()+"&vanityurl="+_id+"&url_type=1", true);
-        } else if(aType == QueryType::url) {
+        } else if(aType == ProfileUrlType::id) {
             connect(_request,&RequestData::s_finished,this,&SProfiles::loadURL);
             _request->get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::getKey()+"&steamids="+_id, true);
         }
     } else {
-        if(aType == QueryType::vanity){
+        if(aType == ProfileUrlType::vanity){
             _request->get("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key="+Settings::getKey()+"&vanityurl="+_id+"&url_type=1", false);
             _id = QJsonDocument::fromJson(_request->getAnswer()).object().value("response").toObject().value("steamid").toString();
         }
@@ -288,7 +288,7 @@ void SProfiles::load(bool aParallel, QueryType aType) {
 }
 
 void SProfiles::update(bool aParallel) {
-    load(aParallel, QueryType::url);
+    load(aParallel, ProfileUrlType::id);
 }
 
 void SProfiles::sort() {
