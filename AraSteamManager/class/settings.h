@@ -71,6 +71,7 @@ public:
 
     static QString getKey();
     static bool createDir(QString path);
+    static QString getUrlIconGame(QString appId, QString img_icon_url);
     void syncronizeSettings();
 
     const QString _pathImagesAchievements="images/achievements/";// /номер игры/url.jpg

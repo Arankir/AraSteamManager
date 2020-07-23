@@ -83,7 +83,7 @@ int Threading::AddThreadFriendAchievements(QTableWidget *aTableWidgetAchievement
 }
 
 int Threading::AddThreadAchievements(const int aTableColumnAppid, const int aTableColumnTitle, const int aTableColumnDescription, const int aTableColumnWorld, const int aTableColumnMy,
-                                     SAchievements aAchievements, QTableWidget *aTableWidgetAchievements) {
+                                     SAchievements *aAchievements, QTableWidget *aTableWidgetAchievements) {
     ThreadAchievements *achievements = new ThreadAchievements(aAchievements, aTableWidgetAchievements, aTableColumnAppid, aTableColumnTitle, aTableColumnDescription,
                                                               aTableColumnWorld, aTableColumnMy);
     QThread *thread = new QThread;

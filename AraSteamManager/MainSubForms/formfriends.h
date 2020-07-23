@@ -60,7 +60,7 @@ private slots:
 private:
     Ui::FormFriends *ui;
     QString _id;
-    int _windowChildCount = 0;
+    bool _blockedLoad = false;
     SFriends _friends;
     SProfiles _profiles;
     Settings _setting;

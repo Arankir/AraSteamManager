@@ -25,14 +25,13 @@ class FormGames : public QWidget {
     Q_OBJECT
 
 public slots:
-    void onFinish();
+    void onTablePushed();
+    void updateSettings();
 
     void showHideSlideWidget(bool f_flag);
     void mouseMoveEvent(QMouseEvent *ev);
     void enableMouseTracking(const QObjectList &aChildren);
 
-    bool eventFilter(QObject *obj, QEvent *event);
-    void updateSettings();
 public:
     explicit FormGames(SProfile profile, SGames Games, QWidget *parent = nullptr);
     ~FormGames();
@@ -48,7 +47,7 @@ private slots:
     void initComponents();
     void setIcons();
     void retranslate();
-    void onResultAchievements(SAchievementsPlayer ach);
+    void onResultAchievements(SAchievementsPlayer *ach);
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event);
 
@@ -83,10 +82,6 @@ private:
 
     QString _selectedGame;
     QString _selectedIndex;
-
-    //QVector<RequestData*> _request;
-    int _numRequests = 0;
-    int _numNow = 0;
 
 };
 

@@ -28,7 +28,7 @@ signals:
 public slots:
     int AddThreadGames(const int columnID, const int columnIndex, const int columnName, QTableWidget *tableWidgetGames, SGames games);
     int AddThreadAchievements(const int tableColumnAppid, const int tableColumnTitle, const int tableColumnDescription, const int tableColumnWorld, const int tableColumnMy,
-                              SAchievements achievements, QTableWidget *TableWidgetAchievements);
+                              SAchievements *achievements, QTableWidget *TableWidgetAchievements);
     int AddThreadFriends(const int columnID, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
                          QTableWidget *tableWidgetFriends, SProfiles profiles,SFriends friends);
     int AddThreadStatistics(SGames games, QString id, QVector<int> &numOf, QVector<QPair<QString,QString> > &complete,

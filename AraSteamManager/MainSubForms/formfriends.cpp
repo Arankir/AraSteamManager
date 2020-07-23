@@ -305,9 +305,9 @@ void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
 
 #define Functions {
 void FormFriends::buttonFriendGoTo_Clicked() {
-    if((_windowChildCount == 0) && (_currentFriend != "")) {
+    if((!_blockedLoad) && (_currentFriend != "")) {
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
-        _windowChildCount++;
+        _blockedLoad = true;
         emit s_go_to_profile(_currentFriend, ProfileUrlType::id);
         //emit s_return_to_profile(this);
     }

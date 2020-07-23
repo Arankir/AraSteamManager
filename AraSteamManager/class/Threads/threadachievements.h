@@ -16,7 +16,7 @@ public slots:
 //    void setFriend(QTableWidget *TableWidgetAchievements, SAchievements achievement, int col, int AcolumnAppid);
 
 public:
-    explicit ThreadAchievements(SAchievements achievements, QTableWidget *tableWidgetAchievements, const int tableColumnAppid, const int tableColumnTitle,
+    explicit ThreadAchievements(SAchievements *achievements, QTableWidget *tableWidgetAchievements, const int tableColumnAppid, const int tableColumnTitle,
                                 const int tableColumnDescription, const int tableColumnWorld, const int tableColumnMy, QObject *parent = nullptr);
     explicit ThreadAchievements(QObject *parent = nullptr);
     ~ThreadAchievements();
@@ -33,7 +33,7 @@ private:
     const int c_tableColumnWorld;
     const int c_tableColumnMy;
     int num;
-    SAchievements _achievements;
+    SAchievements *_achievements;
     QTableWidget *_tableWidgetAchievements;
 
     SAchievements _achievement;

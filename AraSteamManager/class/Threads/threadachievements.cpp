@@ -1,6 +1,6 @@
 #include "threadachievements.h"
 
-ThreadAchievements::ThreadAchievements(SAchievements aAchievements, QTableWidget *aTableWidgetAchievements, const int aTableColumnAppid,
+ThreadAchievements::ThreadAchievements(SAchievements *aAchievements, QTableWidget *aTableWidgetAchievements, const int aTableColumnAppid,
 const int aTableColumnTitle, const int aTableColumnDescription, const int aTableColumnWorld, const int aTableColumnMy, QObject *aParent):
 QObject(aParent), c_tableColumnAppid(aTableColumnAppid), c_tableColumnTitle(aTableColumnTitle), c_tableColumnDescription(aTableColumnDescription),
 c_tableColumnWorld(aTableColumnWorld), c_tableColumnMy(aTableColumnMy), _achievements(aAchievements), _tableWidgetAchievements(aTableWidgetAchievements) {
@@ -20,7 +20,7 @@ int ThreadAchievements::fill() {
     int totalReached = 0;
     int totalNotReached = 0;
     int row = 0;
-    for (auto &achievement: _achievements) {
+    for (auto &achievement: *_achievements) {
         if (achievement._displayName != "") {
             emit s_progress(row, row);
             _tableWidgetAchievements->setItem(row, c_tableColumnAppid, new QTableWidgetItem(achievement._apiName));

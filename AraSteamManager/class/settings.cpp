@@ -159,3 +159,7 @@ bool Settings::createDir(QString aPath) {
     }
     return exist;
 }
+
+QString Settings::getUrlIconGame(QString appId, QString img_icon_url) {
+    return "http://media.steampowered.com/steamcommunity/public/images/apps/" + appId + "/" + img_icon_url + ".jpg";
+}
