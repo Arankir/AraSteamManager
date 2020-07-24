@@ -21,13 +21,12 @@ void FormCategoryValue::updateSettings() {
 }
 
 void FormCategoryValue::setIcons() {
-    QString iconsColor = _setting.getIconsColor();
-    ui->ButtonUp->setIcon(QIcon("://" + iconsColor + "/up.png"));
-    ui->ButtonDown->setIcon(QIcon("://" + iconsColor + "/down.png"));
-    ui->ButtonSelect->setIcon(QIcon("://" + iconsColor + "/check_visible.png"));
-    ui->ButtonUnSelect->setIcon(QIcon("://" + iconsColor + "/uncheck_visible.png"));
-    ui->ButtonDelete->setIcon(QIcon("://delete.png"));
-    ui->ButtonReverse->setIcon(QIcon("://" + iconsColor + "/reverse.png"));
+    ui->ButtonUp->setIcon(QIcon(_setting.getIconUp()));
+    ui->ButtonDown->setIcon(QIcon(_setting.getIconDown()));
+    ui->ButtonSelect->setIcon(QIcon(_setting.getIconCheckVisible()));
+    ui->ButtonUnSelect->setIcon(QIcon(_setting.getIconUncheckVisible()));
+    ui->ButtonDelete->setIcon(QIcon(_setting.getIconDeleteColor()));
+    ui->ButtonReverse->setIcon(QIcon(_setting.getIconReverse()));
 }
 
 FormCategoryValue::~FormCategoryValue() {

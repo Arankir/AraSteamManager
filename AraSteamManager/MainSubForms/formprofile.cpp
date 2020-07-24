@@ -74,7 +74,7 @@ void FormProfile::profileToUi(SProfile aProfile) {
         }
     }
     QString iconsColor = _setting.getIconsColor();
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://" + iconsColor + "/link.png\"> "
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
                                 "<a href=\"" + aProfile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + aProfile._profileUrl + "</span></a>");
     ui->LabellvlValue->setText(QString::number(levels.GetLevel()));
@@ -89,42 +89,42 @@ void FormProfile::profileToUi(SProfile aProfile) {
         case 1:
 //            ui->LabelProfileVisibility->setText(tr("Скрытый"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #6e0e0e");
-            profileState.load("://state_red.png");
+            profileState.load(_setting.getIconStateRed());
             break;
         case 3:
 //            ui->LabelProfileVisibility->setText(tr("Публичный"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #0e6e11");
-            profileState.load("://state_green.png");
+            profileState.load(_setting.getIconStateGreen());
             break;
         case 8:
 //            ui->LabelProfileVisibility->setText(tr("Для друзей"));
 //            ui->LabelProfileVisibility->setStyleSheet("color: #6c6e0e");
-            profileState.load("://state_yellow.png");
+            profileState.load(_setting.getIconStateYellow());
             break;
         default:
 //            ui->LabelProfileVisibility->setText(tr("Неизвестно"));
 //            ui->LabelProfileVisibility->setStyleSheet("color:white");
-            profileState.load("://state_blue.png");
+            profileState.load(_setting.getIconStateBlue());
         }
     switch (_games.getStatus()) {
     case StatusValue::success: {
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
-        gamesState.load("://state_green.png");
+        gamesState.load(_setting.getIconStateGreen());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
         break;
     }
     case StatusValue::error: {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        gamesState.load("://state_red.png");
+        gamesState.load(_setting.getIconStateRed());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
         break;
     }
     case StatusValue::none: {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        gamesState.load("://state_blue.png");
+        gamesState.load(_setting.getIconStateBlue());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
         break;
     }
@@ -132,19 +132,19 @@ void FormProfile::profileToUi(SProfile aProfile) {
     switch (_friends.getStatus()) {
     case StatusValue::success: {
         ui->ButtonFriends->setEnabled(true);
-        friendsState.load("://state_green.png");
+        friendsState.load(_setting.getIconStateGreen());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::error: {
         ui->ButtonFriends->setEnabled(false);
-        friendsState.load("://state_red.png");
+        friendsState.load(_setting.getIconStateRed());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::none: {
         ui->ButtonFriends->setEnabled(false);
-        friendsState.load("://state_blue.png");
+        friendsState.load(_setting.getIconStateBlue());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
         break;
     }
@@ -203,14 +203,14 @@ void FormProfile::updateSettings() {
 
 void FormProfile::setIcons() {
     QString iconsColor = _setting.getIconsColor();
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"://" + iconsColor + "/link.png\"> "
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
                                 "<a href=\"" + _profile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
-    ui->ButtonSetProfile->setIcon(QIcon("://" + iconsColor + "/set_home.png"));
-    ui->ButtonFavorites->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
-    ui->ButtonStatistics->setIcon(QIcon("://" + iconsColor + "/statistic.png"));
-    ui->ButtonFriends->setIcon(QIcon("://" + iconsColor + "/friends.png"));
-    ui->ButtonGames->setIcon(QIcon("://" + iconsColor + "/games.png"));
+    ui->ButtonSetProfile->setIcon(QIcon(_setting.getIconSetHome()));
+    ui->ButtonFavorites->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+    ui->ButtonStatistics->setIcon(QIcon(_setting.getIconStatistic()));
+    ui->ButtonFriends->setIcon(QIcon(_setting.getIconFriends()));
+    ui->ButtonGames->setIcon(QIcon(_setting.getIconGames()));
 }
 
 void FormProfile::updateVisibleInfo() {

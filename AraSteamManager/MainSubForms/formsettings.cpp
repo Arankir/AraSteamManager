@@ -150,7 +150,7 @@ void FormSettings::retranslate() {
     QString iconsColor = _setting.getIconsColor();
     ui->labelIcons8->setText("<html><head/><body><p>"
                              "Иконки для приложения были предоставлены сайтом "
-                             "<img height=15 style=\"vertical-align: top\" src=\"://" + iconsColor + "/link.png\">"
+                             "<img height=15 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\">"
                             "<a href=https://icons8.ru/icons>"
                             "<span style=\" text-decoration: underline; color:#2d7fc8;\"> "
                             "https://icons8.ru/icons"
@@ -231,7 +231,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                     ui->TableWidgetGames->setCellWidget(setTo, 2, button1);
 
                     QButtonWithData *button3 = new QButtonWithData("");
-                    button3->setIcon(QIcon("://" + iconsColor + "/hide.png"));
+                    button3->setIcon(QIcon(_setting.getIconHide()));
                     button3->setMinimumSize(QSize(25, 25));
                     button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + QString::number(game._appID));
                     button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
@@ -269,7 +269,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                 ui->TableWidgetGames->setCellWidget(i, 2, button1);
 
                 QButtonWithData *button3 = new QButtonWithData("");
-                button3->setIcon(QIcon("://" + iconsColor + "/hide.png"));
+                button3->setIcon(QIcon(_setting.getIconHide()));
                 button3->setMinimumSize(QSize(25, 25));
                 button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + list[0]);
                 button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));

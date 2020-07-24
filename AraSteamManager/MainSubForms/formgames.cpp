@@ -100,12 +100,11 @@ void FormGames::updateSettings() {
 }
 
 void FormGames::setIcons() {
-    QString iconsColor = _setting.getIconsColor();
-    ui->ButtonFind->setIcon(QIcon("://" + iconsColor + "/find.png"));
-    ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
-    ui->ButtonHide->setIcon(QIcon("://" + iconsColor + "/hide.png"));
-    ui->ButtonCreateGroup->setIcon(QIcon(":/create.png"));
-    ui->ButtonChangeGroup->setIcon(QIcon("://" + iconsColor + "/change.png"));
+    ui->ButtonFind->setIcon(QIcon(_setting.getIconFind()));
+    ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+    ui->ButtonHide->setIcon(QIcon(_setting.getIconHide()));
+    ui->ButtonCreateGroup->setIcon(QIcon(_setting.getIconCreateColor()));
+    ui->ButtonChangeGroup->setIcon(QIcon(_setting.getIconChange()));
 }
 
 void FormGames::onTablePushed() {
@@ -310,15 +309,14 @@ void FormGames::tableWidgetGames_CellClicked(int aRow, int) {
             break;
         }
     }
-    QString iconsColor = _setting.getIconsColor();
     if(isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsFavorites()));
     } else {
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
     }
     //Проверка является ли игра скрытой
     if(ui->TableWidgetGames->item(aRow, c_tableColumnName)->foreground() == Qt::red) {
-        ui->ButtonHide->setIcon(QIcon("://" + iconsColor + "/unhide.png"));
+        ui->ButtonHide->setIcon(QIcon(_setting.getIconUnhide()));
     }
     ui->FrameGame->setVisible(true);
 }
@@ -344,13 +342,12 @@ void FormGames::buttonFavorite_Clicked() {
     newValue["icon"] = _games[_selectedIndex.toInt()]._img_icon_url;
     newValue["idUser"] = _profile._steamID;
     ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
-    QString iconsColor = _setting.getIconsColor();
     if(_favorites.addValue(newValue, true)) {
         //Категория добавилась
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsFavorites()));
     } else {
         //Категория уже есть (удалилась)
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
     }
 }
 
@@ -387,7 +384,7 @@ void FormGames::buttonHide_Clicked() {
         }
     }
     ui->ButtonHide->setFixedSize(ui->ButtonHide->size());
-    ui->ButtonHide->setIcon(QIcon("://" + _setting.getIconsColor() + "/unhide.png"));
+    ui->ButtonHide->setIcon(QIcon(_setting.getIconUnhide()));
     delete btnProfile;
     delete btnAll;
 }

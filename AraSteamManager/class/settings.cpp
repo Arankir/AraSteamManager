@@ -111,6 +111,266 @@ int Settings::getProfileInfoSize() {
     return _settings->value(c_ProfileInfoSize, 2).toInt();
 }
 
+#define IconsStart {
+QString Settings::getIconApplyColor() {
+    return "://apply.png";
+}
+
+QString Settings::getIconCancelColor() {
+    return "://cancel.png";
+}
+
+QString Settings::getIconCreateColor() {
+    return "://create.png";
+}
+
+QString Settings::getIconDeleteColor() {
+    return "://delete.png";
+}
+
+QString Settings::getIconLoadingColor() {
+    return "://loading.png";
+}
+
+QString Settings::getIconLogoColor() {
+    return "://logo.png";
+}
+
+QString Settings::getIconStateBlack() {
+    return "://state_black.png";
+}
+
+QString Settings::getIconStateBlue() {
+    return "://state_blue.png";
+}
+
+QString Settings::getIconStateGreen() {
+    return "://state_green.png";
+}
+
+QString Settings::getIconStateOrange() {
+    return "://state_orange.png";
+}
+
+QString Settings::getIconStatePurple() {
+    return "://state_purple.png";
+}
+
+QString Settings::getIconStateRed() {
+    return "://state_red.png";
+}
+
+QString Settings::getIconStateWhite() {
+    return "://state_white.png";
+}
+
+QString Settings::getIconStateYellow() {
+    return "://state_yellow.png";
+}
+
+QString Settings::getIconAll() {
+    return "://" + getIconsColor() + "/all.png";
+}
+
+QString Settings::getIconBack() {
+    return "://" + getIconsColor() + "/back.png";
+}
+
+QString Settings::getIconCancel() {
+    return "://" + getIconsColor() + "/cancel.png";
+}
+
+QString Settings::getIconChange() {
+    return "://" + getIconsColor() + "/change.png";
+}
+
+QString Settings::getIconCheckAll() {
+    return "://" + getIconsColor() + "/check_all.png";
+}
+
+QString Settings::getIconCheckVisible() {
+    return "://" + getIconsColor() + "/check_visible.png";
+}
+
+QString Settings::getIconCloseWindow() {
+    return "://" + getIconsColor() + "/close_window.png";
+}
+
+QString Settings::getIconCompare() {
+    return "://" + getIconsColor() + "/back.png";
+}
+
+QString Settings::getIconDeleteAll() {
+    return "://" + getIconsColor() + "/delete_all.png";
+}
+
+QString Settings::getIconDown() {
+    return "://" + getIconsColor() + "/down.png";
+}
+
+QString Settings::getIconExit() {
+    return "://" + getIconsColor() + "/exit.png";
+}
+
+QString Settings::getIconIsFavorites() {
+    return "://" + getIconsColor() + "/in_favorites.png";
+}
+
+QString Settings::getIconIsNotFavorites() {
+    return "://" + getIconsColor() + "/favorites.png";
+}
+
+QString Settings::getIconFilter() {
+    return "://" + getIconsColor() + "/filter.png";
+}
+
+QString Settings::getIconFind() {
+    return "://" + getIconsColor() + "/find.png";
+}
+
+QString Settings::getIconFindProfile() {
+    return "://" + getIconsColor() + "/find_profile.png";
+}
+
+QString Settings::getIconFriends() {
+    return "://" + getIconsColor() + "/friends.png";
+}
+
+QString Settings::getIconGames() {
+    return "://" + getIconsColor() + "/games.png";
+}
+
+QString Settings::getIconGoTo() {
+    return "://" + getIconsColor() + "/go_to.png";
+}
+
+QString Settings::getIconHide() {
+    return "://" + getIconsColor() + "/hide.png";
+}
+
+QString Settings::getIconHome() {
+    return "://" + getIconsColor() + "/home.png";
+}
+
+QString Settings::getIconLeft() {
+    return "://" + getIconsColor() + "/left.png";
+}
+
+QString Settings::getIconLink() {
+    return "://" + getIconsColor() + "/link.png";
+}
+
+QString Settings::getIconMaximizeWindow() {
+    return "://" + getIconsColor() + "/maximize_window.png";
+}
+
+QString Settings::getIconMinimizeWindow() {
+    return "://" + getIconsColor() + "/minimize_window.png";
+}
+
+QString Settings::getIconNotReached() {
+    return "://" + getIconsColor() + "/notreached.png";
+}
+
+QString Settings::getIconProfile() {
+    return "://" + getIconsColor() + "/profile.png";
+}
+
+QString Settings::getIconReached() {
+    return "://" + getIconsColor() + "/reached.png";
+}
+
+QString Settings::getIconNormalizeWindow() {
+    return "://" + getIconsColor() + "/restore_window.png";
+}
+
+QString Settings::getIconReverse() {
+    return "://" + getIconsColor() + "/reverse.png";
+}
+
+QString Settings::getIconRight() {
+    return "://" + getIconsColor() + "/right.png";
+}
+
+QString Settings::getIconSetHome() {
+    return "://" + getIconsColor() + "/set_home.png";
+}
+
+QString Settings::getIconSettings() {
+    return "://" + getIconsColor() + "/settings.png";
+}
+
+QString Settings::getIconStatistic() {
+    return "://" + getIconsColor() + "/statistic.png";
+}
+
+QString Settings::getIconUncheckVisible() {
+    return "://" + getIconsColor() + "/uncheck_visible.png";
+}
+
+QString Settings::getIconUnhide() {
+    return "://" + getIconsColor() + "/unhide.png";
+}
+
+QString Settings::getIconUp() {
+    return "://" + getIconsColor() + "/up.png";
+}
+
+QString Settings::getIconUpdate() {
+    return "://" + getIconsColor() + "/update.png";
+}
+
+#define IconsWidgetStart {
+QString Settings::getIconCheckBoxChecked() {
+    return "://" + getIconsColor() + "/widgets/checkbox_checked.png";
+}
+
+QString Settings::getIconCheckBoxCheckedHover() {
+    return "://" + getIconsColor() + "/widgets/checkbox_checked_hover.png";
+}
+
+QString Settings::getIconCheckBoxCheckedPress() {
+    return "://" + getIconsColor() + "/widgets/checkbox_checked_press.png";
+}
+
+QString Settings::getIconCheckBoxUnchecked() {
+    return "://" + getIconsColor() + "/widgets/checkbox_unchecked.png";
+}
+
+QString Settings::getIconCheckBoxUncheckedHover() {
+    return "://" + getIconsColor() + "/widgets/checkbox_unchecked_hover.png";
+}
+
+QString Settings::getIconCheckBoxUncheckedPress() {
+    return "://" + getIconsColor() + "/widgets/checkbox_unchecked_press.png";
+}
+
+QString Settings::getIconRadioButtonChecked() {
+    return "://" + getIconsColor() + "/widgets/radiobutton_checked.png";
+}
+
+QString Settings::getIconRadioButtonCheckedHover() {
+    return "://" + getIconsColor() + "/widgets/radiobutton_checked_hover.png";
+}
+
+QString Settings::getIconRadioButtonCheckedPress() {
+    return "://" + getIconsColor() + "/widgets/radiobutton_checked_press.png";
+}
+
+QString Settings::getIconRadioButtonUnchecked() {
+    return "://" + getIconsColor() + "/widgets/radiobutton_unchecked.png";
+}
+
+QString Settings::getIconRadioButtonUncheckedHover() {
+    return "://" + getIconsColor() + "/widgets/radiobutton_unchecked_hover.png";
+}
+
+QString Settings::getIconRadioButtonUncheckedPress() {
+    return "://" + getIconsColor() + "/widgets/radiobutton_unchecked_press.png";
+}
+#define IconsWidgetEnd }
+#define IconsEnd }
+
 QRect Settings::getMainWindowGeometry() {
     return (QRect(0, 0, _settings->value(c_mainWindowWidth, 623).toInt(), _settings->value(c_mainWindowHeight, 479).toInt()));
 }

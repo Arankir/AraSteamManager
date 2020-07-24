@@ -66,24 +66,16 @@ void MainWindow::initComponents() {
 
 #define System {
 QString MainWindow::getTheme() {
-    QString iconColor = _setting.getIconsColor();
-
     QString hoverGradient;
     QString backgroundGradient;
     QString backgroundGradientTitle;
-    QString buttonGradient;
     QString buttonHoverGradient;
-    QString progressbarGradient;
-    QString blackGradient;
     QString tableWidgetRowGradient;
     QString tableWidgetAlterRowGradient;
     QString qss;
     switch(_setting.getTheme()) {
     case 1:{
 #define gradients {
-//        qconicalgradient(cx:0.5, cy:0.5, angle:30,
-//                        stop:0 white, stop:1 #00FF00)
-
 //        QpushButton{
 //                  qproperty-icon:url(:/images/start.png);
 //        }
@@ -93,21 +85,6 @@ QString MainWindow::getTheme() {
 //                  qproperty-icon:url(:/images/start_hov.png);
 //        }
 
-        buttonGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                    "stop: 0 #377097, "
-                    "stop: 0.22 #377097, "
-                    "stop: 0.88 #286087, "
-                    "stop: 1.0 #286087); ";
-        buttonHoverGradient = "qlineargradient(x1: 0, y1: 1, x2: 1, y2: 0, "
-                    "stop: 0 #136186, "
-                    "stop: 0.5 #145c81, "
-                    "stop: 1.0 #136186); ";
-        progressbarGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                    "stop: 0 #136186, "
-                    "stop: 0.25 #237196, "
-                    "stop: 0.5 #3381A6, "
-                    "stop: 0.75 #237196, "
-                    "stop: 1.0 #136186); ";
         hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #185077, "
                     "stop: 0.22 #387097, "
@@ -115,24 +92,28 @@ QString MainWindow::getTheme() {
                     "stop: 1.0 #185077); ";
         backgroundGradient = "qradialgradient("
                     "cx:0.5, cy:0.5, "
+                    "radius: 0.6, "
+                    "fx:0.4, fy:0.5, "
+                    "stop:0 #2e5db3, "
+                    //"stop:0.5 #12324b, "
+                    "stop:1 #09152d); "
+        /*"qradialgradient("
+                    "cx:0.5, cy:0.5, "
                     "radius: 0.4, "
                     "fx:0.4, fy:0.5, "
                     "stop:0 #14384f, "
                     "stop:0.5 #12324b, "
-                    "stop:1 #13273a); ";/*"qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                    "stop: 0 #13273a, "
-                    "stop: 0.12 #12324b, "
-                    "stop: 0.5 #14384f, "
-                    "stop: 0.83 #12324b, "
-                    "stop: 1.0 #13273a); ";*/
+                    "stop:1 #13273a); "*/
+/*        "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
+                    "stop: 0 #DDDDFF, "
+//                    "stop: 0.12 #12324b, "
+//                    "stop: 0.5 #14384f, "
+//                    "stop: 0.83 #12324b, "
+                    "stop: 1.0 #0000FF); "*/;
         backgroundGradientTitle = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #10131b, "
                     "stop: 0.5 #20232b, "
                     "stop: 1.0 #10131b); ";
-        blackGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                    "stop: 0 #102b45, "
-                    "stop: 0.8 #17314c, "
-                    "stop: 1.0 #193048); ";
         tableWidgetRowGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
                     "stop: 0 #102b45, "
                     "stop: 0.8 #17314c, "
@@ -144,7 +125,7 @@ QString MainWindow::getTheme() {
 #define gradientsend }
         qss =
 #define button {
-                "QPushButton[text]{ "
+                "QPushButton[text] { "
 //                    "color: white; "
 //                    "background: "+buttonGradient+
 //                    "border: 1px solid #262626; "
@@ -153,41 +134,50 @@ QString MainWindow::getTheme() {
 //                    "border-radius: 2px; "
                     "padding: 0em 0em 0em 0.3em; "
                 "} "
-                "QPushButton{ "
+                "QPushButton { "
                     "color: white; "
-                    "background: "+buttonGradient+
+                    "background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
+                        "stop: 0 #1c2686, "
+                        "stop: 1.0 #46a8b7); "
                     "border: 1px solid #262626; "
                     //"min-width: 25px; "
                     "min-height: 20px; "
                     "border-radius: 2px; "
                 "} "
-                "QPushButton:disabled{ "
-                    "background-color: #48525a; "
-                "} "
-                "QPushButton:pressed{ "
-                    "background-color: #212121; "
-                "} "
-                "QPushButton:hover{ "
+                "QPushButton:hover { "
                     "background-color: #dfe7ed; "
-                    "background: "+buttonHoverGradient+
-                    "border: 2px outset #262626; "
-                    "border-radius: 4px; "
+                    "background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                        "stop: 0 #1c2686, "
+                        "stop: 0.5 #28808e, "
+                        "stop: 1.0 #1c2686); "
+                    "border: 2px solid #262626; "
+                    "border-radius: 2px; "
+                "} "
+                "QPushButton:pressed { "
+                    //"background-color: #3698a7; "
+                    "margin: 1px; "
                 "} "
                 "QPushButton:flat { "
                     "background-color: none; "
                     //"border: none; "
+                "} "
+                "QPushButton:disabled { "
+                    "background-color: #48525a; "
                 "} "
 #define buttonend }
 #define progressbar {
                 "QProgressBar { "
                     "color: white; "
                     "background-color: rgba(26,26,26,255); "
-                    "border: 1px solid grey; "
+                    "border: 1px solid black; "
                     "border-radius: 7px; "
                     "text-align: center; "
                 "} "
                 "QProgressBar::chunk { "
-                    "background-color: "+progressbarGradient+
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                        "stop: 0 #1c2686, "
+                        "stop: 0.5 #0681bb, "
+                        "stop: 1.0 #1c2686); "
                     "border-radius: 6px; "
                 "} "
 #define progressbarend }
@@ -201,22 +191,22 @@ QString MainWindow::getTheme() {
                     "width: 15; "
                 "} "
                 "QRadioButton::indicator::unchecked { "
-                    "image: url(://" + iconColor + "/widgets/radiobutton_unchecked.png); "
+                    "image: url(" + _setting.getIconRadioButtonUnchecked() + "); "
                 "} "
                 "QRadioButton::indicator::checked { "
-                    "image: url(://" + iconColor + "/widgets/radiobutton_checked.png); "
+                    "image: url(" + _setting.getIconRadioButtonChecked() + "); "
                 "} "
                 "QRadioButton::indicator::unchecked:hover { "
-                    "image: url(://" + iconColor + "/widgets/radiobutton_unchecked_hover.png); "
+                    "image: url(" + _setting.getIconRadioButtonUncheckedHover() + "); "
                 "} "
                 "QRadioButton::indicator::checked:hover { "
-                    "image: url(://" + iconColor + "/widgets/radiobutton_checked_hover.png); "
+                    "image: url(" + _setting.getIconRadioButtonCheckedHover() + "); "
                 "} "
                 "QRadioButton::indicator::unchecked:pressed { "
-                    "image: url(://" + iconColor + "/widgets/radiobutton_unchecked_press.png); "
+                    "image: url(" + _setting.getIconRadioButtonUncheckedPress() + "); "
                 "} "
                 "QRadioButton::indicator::checked:pressed { "
-                    "image: url(://" + iconColor + "/widgets/radiobutton_checked_press.png); "
+                    "image: url(" + _setting.getIconRadioButtonCheckedPress() + "); "
                 "} "
                 "QRadioButton::hover { "
                     "color: #57CBDE"//+hoverGradient+
@@ -228,7 +218,7 @@ QString MainWindow::getTheme() {
                 "} "
                 "QTabBar::close-button { "
                    "subcontrol-position: right; "
-                   "image: url(://" + iconColor + "/close_window.png); "
+                   "image: url(" + _setting.getIconCloseWindow() + "); "
                 "} "
                 "QTabBar::tab { "
                     "color: white; "
@@ -244,7 +234,7 @@ QString MainWindow::getTheme() {
                     "background: #434343; "
                 "} "
                 "QTabBar::tab:selected { "
-                    "background: #13273a; "
+                    "background: #09152d; "
                     "border-bottom-color: #13273a; "
                 "} "
                 "QTabBar::tab:!selected { "
@@ -276,42 +266,42 @@ QString MainWindow::getTheme() {
                     "width: 15; "
                 "} "
                 "QCheckBox::indicator:unchecked { "
-                    "image: url(://" + iconColor + "/widgets/checkbox_unchecked.png); "
+                    "image: url(" + _setting.getIconCheckBoxUnchecked() + "); "
                 "} "
                 "QCheckBox::indicator:checked { "
-                    "image: url(://" + iconColor + "/widgets/checkbox_checked.png); "
+                    "image: url(" + _setting.getIconCheckBoxChecked() + "); "
                 "} "
                 "QCheckBox::indicator:unchecked:hover { "
-                    "image: url(://" + iconColor + "/widgets/checkbox_unchecked_hover.png); "
+                    "image: url(" + _setting.getIconCheckBoxUncheckedHover() + "); "
                 "} "
                 "QCheckBox::indicator:checked:hover { "
-                    "image: url(://" + iconColor + "/widgets/checkbox_checked_hover.png); "
+                    "image: url(" + _setting.getIconCheckBoxCheckedHover() + "); "
                 "} "
                 "QCheckBox::indicator:unchecked:pressed { "
-                    "image: url(://" + iconColor + "/widgets/checkbox_unchecked_press.png); "
+                    "image: url(" + _setting.getIconCheckBoxUncheckedPress() + "); "
                 "} "
                 "QCheckBox::indicator:checked:pressed { "
-                    "image: url(://" + iconColor + "/widgets/checkbox_checked_press.png); "
+                    "image: url(" + _setting.getIconCheckBoxCheckedPress() + "); "
                 "} "
 #define checkboxend }
 #define combobox {
                 "QComboBox { "
                     "border: 1px solid #232323; "
                     "border-radius: 3px; "
-                    "background: "+hoverGradient+
+                    "background: " + hoverGradient +
                     "padding: 1px 23px 1px 3px; "
                     "min-width: 6em; "
-                    "color: #ffffff; "
+                    "color: #dddddd; "
                 "} "
                 "QComboBox:item { "
                     "background-color: #387097; "
                 "} "
                 "QComboBox::hover { "
-                    "background-color: "+hoverGradient+
+                    "background-color: " + hoverGradient +
                 "} "
                 "QComboBox:item:selected { "
                     "border: 1px solid #262626; "
-                    "color: "+hoverGradient+
+                    "color: " + hoverGradient +
                 "} "
                 "QComboBox:item:checked { "
                     //"font-weight: bold; "
@@ -319,57 +309,91 @@ QString MainWindow::getTheme() {
 #define comboboxend }
 #define lineedit {
                 "QLineEdit { "
-                    "border: 1px solid #262626; "
-                    "border-radius: 2px; "
+                    "border: 1px solid qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                        "stop: 0 #262626, "
+                        "stop: 0.7 #262626, "
+                        "stop: 0.99 rgba(255,255,255,0)); "
+                    "border-right: 0px rgba(0,0,0,0); "
+                    "border-radius: 0px; "
                     "selection-background-color: #387097; "
-                    "background-color: "+blackGradient+
-                    "color: white; "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                        "stop: 0 #333333, "
+                        "stop: 0.7 #333333, "
+                        "stop: 0.99 rgba(255,255,255,0)); "
+                    "color: #dddddd; "
                 "} "
                 "QLineEdit:disabled { "
-                    "selection-background-color: #387097; "
+                    //"selection-background-color: #387097; "
                     "background-color: #A0A0A0; "
-                    "color: white; "
+                    //"color: white; "
                 "} "
                 "QLineEdit:hover { "
-                    "border: 1px solid #537ca6; "
-                    "border-radius: 2px; "
-                    "selection-background-color: #387097; "
-                    "background-color: "+blackGradient+
-                    "color: white; "
+                    "border: 1px solid qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                        "stop: 0 #537ca6, "
+                        "stop: 0.7 #537ca6, "
+                        "stop: 0.99 rgba(255,255,255,0)); "
+                    "border-right: 0px rgba(0,0,0,0); "
+                    "border-radius: 0px; "
+                    //"selection-background-color: #387097; "
+                    //"background-color: " + lineEditGradient +
+                    //"color: #638cb6; "
                 "} "
 #define lineeditend }
 #define tablewidget {
                 "QTableWidget { "
                     "border: 1px solid #777777; "
                     "border-radius: 2px; "
-                    "background-color: "+backgroundGradient+
-                    "color: white; "
+                    "color: #dddddd; "
                 "} "
                 "QTableWidget::item { "
                     "border: 1px solid #777777; "
-                    "border-top-color: transparent; "
-                    "border-bottom-color: transparent; "
-                    "background-color: #213c57; "
+                    "background-color: #004182; "
+                "} "
+                "QTableWidget::item:inactive { "
+                    "background-color: #004182;"
+                    "color: #dddddd; "
+                "} "
+                "QTableWidget::item:selected { "
+                    "background-color: qradialgradient("
+                        "cx:0.5, cy:0.5, "
+                        "radius: 0.6, "
+                        "fx:0.4, fy:0.5, "
+                        "stop:0 #0055ab, "
+                        "stop:1 #2692ff); "
+                    //"font: bold; "
+                "} "
+                "QTableWidget::item:hover { "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
+                        "stop: 0 #2692ff, "
+                        "stop: 0.7 #004182, "
+                        "stop: 1.0 #004182); "
+                "} "
+                "QTableWidget::item:pressed { "
+                    "background-color: #2692ff; "
                 "} "
 #define tablewidgetend }
 #define scrollbar {
                 "QScrollBar:vertical { "
                     "border: 1px solid #999999; "
-                    "background: "+hoverGradient+
+                    "background: " + hoverGradient +
                     "width:10px; "
                 "}"
                 "QScrollBar:horizontal { "
                     "border: 1px solid #999999; "
-                    "background: "+hoverGradient+
+                    "background: " + hoverGradient +
                     "height:10px; "
                 "} "
 #define scrollbarend }
 #define headerview {
-                "QHeaderView::section { "
-                    "background-color: #505050; "
-                    "color: white; "
+                "QHeaderView::section, QTableView QTableCornerButton::section { "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                        "stop: 0 #0061c3, "
+                        "stop: 1.0 #002041); "
+                    "color: #dddddd; "
                     "padding-left: 4px; "
                     "border: 1px solid #6c6c6c; "
+                    "border-bottom: 0px solid #6c6c6c; "
+                    "border-radius: 4px; "
                 "} "
                 "QHeaderView { "
                     "selection-background-color: #303030; "
@@ -377,14 +401,12 @@ QString MainWindow::getTheme() {
                     "selection-color: #303030; "
                 "} "
 #define headerviewend }
-                "QTableView{ "
-                    "background-color: " + tableWidgetRowGradient +
+                "QTableView { "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                        "stop: 0 #0f52ba, "
+                        "stop: 1.0 #1034a6); "
+                    "border-radius: 2px; "
                     "alternate-background-color: " + tableWidgetAlterRowGradient +
-                "} "
-                "QTableView QTableCornerButton::section { "//Угловой виджет
-                    "background: #444444; "
-                    "border: 1px outset #444444; "
-                    //Предупреждение: если вы устанавливаете цвет фона только для QTableCornerButton, фон может не появиться, если для свойства border не установлено какое-либо значение. Это происходит потому, что по умолчанию //QTableCornerButton рисует собственную границу, которая полностью перекрывает цвет фона.
                 "} "
                 "QWidget[objectName=MainWindow],QWidget[objectName=FormContainerAchievements]{ "
                     "background-color: " + backgroundGradient +
@@ -418,7 +440,7 @@ QString MainWindow::getTheme() {
                 "QListWidget { "
                     "border: 0px solid #cccccc; "
                     "border-radius: 8px; "
-                    "background-color: "+backgroundGradient+
+                    "background-color: " + backgroundGradient +
                 "} "
                 "QListWidget::item { "
                     "border-bottom: 1px solid #cccccc; "
@@ -459,21 +481,20 @@ QString MainWindow::getTheme() {
 }
 
 void MainWindow::setIcons() {
-    QString iconColor = _setting.getIconsColor();
-    ui->LabelLogo->setPixmap(QPixmap("://logo.png"));
-    ui->ButtonUpdate->setIcon(QIcon("://" + iconColor + "/update.png"));
-    ui->ButtonGoToMyProfile->setIcon(QIcon("://" + iconColor + "/home.png"));
-    ui->ButtonFindProfile->setIcon(QIcon("://" + iconColor + "/find_profile.png"));
-    ui->ButtonSettings->setIcon(QIcon("://" + iconColor + "/settings.png"));
-    ui->ButtonExit->setIcon(QIcon("://" + iconColor + "/close_window.png"));
-    ui->ButtonMinimize->setIcon(QIcon("://" + iconColor + "/minimize_window.png"));
+    ui->LabelLogo->setPixmap(QPixmap(_setting.getIconLogoColor()));
+    ui->ButtonUpdate->setIcon(QIcon(_setting.getIconUpdate()));
+    ui->ButtonGoToMyProfile->setIcon(QIcon(_setting.getIconHome()));
+    ui->ButtonFindProfile->setIcon(QIcon(_setting.getIconFindProfile()));
+    ui->ButtonSettings->setIcon(QIcon(_setting.getIconSettings()));
+    ui->ButtonExit->setIcon(QIcon(_setting.getIconCloseWindow()));
+    ui->ButtonMinimize->setIcon(QIcon(_setting.getIconMinimizeWindow()));
     if(this->isMaximized()) {
-        ui->ButtonMaximize->setIcon(QIcon("://" + iconColor + "/restore_window.png"));
+        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconNormalizeWindow()));
     } else {
-        ui->ButtonMaximize->setIcon(QIcon("://" + iconColor + "/maximize_window.png"));
+        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconMaximizeWindow()));
     }
-    ui->ButtonBack->setIcon(QIcon("://" + iconColor + "/left.png"));
-    ui->ButtonNext->setIcon(QIcon("://" + iconColor + "/right.png"));
+    ui->ButtonBack->setIcon(QIcon(_setting.getIconLeft()));
+    ui->ButtonNext->setIcon(QIcon(_setting.getIconRight()));
 }
 
 void MainWindow::progressLoading(int aProgress, int) {
@@ -828,14 +849,12 @@ void MainWindow::buttonExit_Clicked() {
 }
 
 void MainWindow::buttonMaximize_Clicked() {
-    QString iconColor = _setting.getIconsColor();
-
     if(!this->isMaximized()) {
         this->showMaximized();
-        ui->ButtonMaximize->setIcon(QIcon("://" + iconColor + "/restore_window.png"));
+        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconNormalizeWindow()));
     } else {
         this->showNormal();
-        ui->ButtonMaximize->setIcon(QIcon("://" + iconColor + "/maximize_window.png"));
+        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconMaximizeWindow()));
     }
 }
 

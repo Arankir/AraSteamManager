@@ -189,23 +189,23 @@ void FormAchievements::updateSettings() {
 
 void FormAchievements::setIcons() {
     QString iconsColor = _setting.getIconsColor();
-    ui->ButtonCompare->setIcon(QIcon("://" + iconsColor + "/compare.png"));
+    ui->ButtonCompare->setIcon(QIcon(_setting.getIconCompare()));
     //ui->GroupBoxFilter->setStyleSheet(""QGroupBox[accessibleName=\"Filter\"]::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
     ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {"
-                                        "image:url(://" + iconsColor + "/filter.png); "
+                                        "image:url(" + _setting.getIconFilter() + "); "
                                         "image-position:left; "
                                         "margin-top:12px;"
                                       "}");
-    ui->ButtonAddCategory->setIcon(QIcon("://create.png"));
-    ui->ButtonChangeCategory->setIcon(QIcon("://" + iconsColor + "/change.png"));
-    ui->ButtonDeleteCategory->setIcon(QIcon("://delete.png"));
-    ui->ButtonDeleteAllCategories->setIcon(QIcon("://" + iconsColor + "/delete_all.png"));
-    ui->ButtonFindAchievement->setIcon(QIcon("://" + iconsColor + "/find.png"));
-    ui->ButtonAddValueCategory->setIcon(QIcon("://create.png"));
-    ui->ButtonAcceptCategory->setIcon(QIcon("://apply.png"));
-    ui->ButtonCancelCategory->setIcon(QIcon("://cancel.png"));
-    ui->ButtonUpdate->setIcon(QIcon("://" + iconsColor + "/update.png"));
-    ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+    ui->ButtonAddCategory->setIcon(QIcon(_setting.getIconCreateColor()));
+    ui->ButtonChangeCategory->setIcon(QIcon(_setting.getIconChange()));
+    ui->ButtonDeleteCategory->setIcon(QIcon(_setting.getIconDeleteColor()));
+    ui->ButtonDeleteAllCategories->setIcon(QIcon(_setting.getIconDeleteAll()));
+    ui->ButtonFindAchievement->setIcon(QIcon(_setting.getIconFind()));
+    ui->ButtonAddValueCategory->setIcon(QIcon(_setting.getIconCreateColor()));
+    ui->ButtonAcceptCategory->setIcon(QIcon(_setting.getIconApplyColor()));
+    ui->ButtonCancelCategory->setIcon(QIcon(_setting.getIconCancelColor()));
+    ui->ButtonUpdate->setIcon(QIcon(_setting.getIconUpdate()));
+    ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
     QJsonObject gameObject;
     gameObject["id"] = _game._appID;
     gameObject["name"] = _game._name;
@@ -218,31 +218,31 @@ void FormAchievements::setIcons() {
         }
     }
     if (isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsFavorites()));
     } else {
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
     }
     QLabel *friendsIcon = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1));
     if (friendsIcon) {
-        friendsIcon->setPixmap(QPixmap("://" + iconsColor + "/friends.png"));
+        friendsIcon->setPixmap(QPixmap(_setting.getIconFriends()));
     }
     QWidget *wFriendsFilter = dynamic_cast<QWidget*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowFilters, 1));
     if (wFriendsFilter) {
         QButtonWithData *bFriendsAll = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(0)->widget());
         if (bFriendsAll) {
-            bFriendsAll->setIcon(QIcon("://" + iconsColor + "/all.png"));
+            bFriendsAll->setIcon(QIcon(_setting.getIconAll()));
         } else {
             qDebug()<<"error FormAchievements::setIcons() bFriendsAll";
         }
         QButtonWithData *bFriendsReached = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(1)->widget());
         if (bFriendsReached) {
-            bFriendsReached->setIcon(QIcon("://" + iconsColor + "/reached.png"));
+            bFriendsReached->setIcon(QIcon(_setting.getIconReached()));
         } else {
             qDebug()<<"error FormAchievements::setIcons() bFriendsReached";
         }
         QButtonWithData *bFriendsNotReached = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(2)->widget());
         if (bFriendsNotReached) {
-            bFriendsNotReached->setIcon(QIcon("://" + iconsColor + "/notreached.png"));
+            bFriendsNotReached->setIcon(QIcon(_setting.getIconNotReached()));
         } else {
             qDebug()<<"error FormAchievements::setIcons() bFriendsNotReached";
         }
@@ -430,7 +430,7 @@ void FormAchievements::buttonCompareAllFriendsReach_Clicked() {
             if (friendFilter) {
                 friendFilter->setType(setType);
             } else {
-                qDebug()<<"error FormAchievements::buttonCompareAllFriendsReach_Clicked() filterFriend";
+                //qDebug()<<"error FormAchievements::buttonCompareAllFriendsReach_Clicked() filterFriend";
             }
         }
     } else {
@@ -1033,10 +1033,10 @@ void FormAchievements::buttonFavorite_Clicked() {
         QString iconsColor = _setting.getIconsColor();
         if (_favorites.addValue(gameObject, newValue, true)) {
             //Категория добавилась
-            ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
+            ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsFavorites()));
         } else {
             //Категория уже есть (удалилась)
-            ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+            ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
         }
     }
 }
@@ -1058,8 +1058,8 @@ void FormAchievements::tableAchievements_CellClicked(int row, int) {
     }
     QString iconsColor = _setting.getIconsColor();
     if (isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/in_favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsFavorites()));
     } else {
-        ui->ButtonFavorite->setIcon(QIcon("://" + iconsColor + "/favorites.png"));
+        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
     }
 }
