@@ -373,6 +373,9 @@ debug/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/widgets/radiobutton_checked_hover.png \
 		../AraSteamManager/images/white/widgets/radiobutton_unchecked.png \
 		../AraSteamManager/images/white/widgets/checkbox_checked_press.png \
+		../AraSteamManager/images/lvls/2.png \
+		../AraSteamManager/images/lvls/1.png \
+		../AraSteamManager/images/lvls/0.png \
 		../AraSteamManager/images/black/statistic.png \
 		../AraSteamManager/images/black/check_all.png \
 		../AraSteamManager/images/black/check_visible.png \

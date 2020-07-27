@@ -12,21 +12,21 @@ int ThreadStatistics::fill() {
     //int i = 0;
     for (auto &game: _games) {
         SAchievementsPlayer *pl = new SAchievementsPlayer(QString::number(game._appID), _id);
-        connect(pl, SIGNAL(s_finished(SAchievementsPlayer)), this, SLOT(onResultAchievements(SAchievementsPlayer)));
+        connect(pl, SIGNAL(s_finished(SAchievementsPlayer*)), this, SLOT(onResultAchievements(SAchievementsPlayer*)));
         //_averagePercent[i++] = 0.0;
     }
     return 1;
 }
 
-void ThreadStatistics::onResultAchievements(SAchievementsPlayer aAchievements) {
-    disconnect(&aAchievements, SIGNAL(s_finished(SAchievementsPlayer)), this, SLOT(onResultAchievements(SAchievementsPlayer)));
+void ThreadStatistics::onResultAchievements(SAchievementsPlayer *aAchievements) {
+    disconnect(aAchievements, SIGNAL(s_finished(SAchievementsPlayer*)), this, SLOT(onResultAchievements(SAchievementsPlayer*)));
     emit s_progress(_nownum, 0);
-    if (aAchievements.getCount() > 0) {
+    if (aAchievements->getCount() > 0) {
         _colgames++;
         int countReached = 0;
         int countNotReached = 0;
-        _summcolumn += aAchievements.getCount();
-        for (auto &achievement: aAchievements) {
+        _summcolumn += aAchievements->getCount();
+        for (auto &achievement: *aAchievements) {
             if (achievement._achieved == 1) {
                 QDateTime dateTime = achievement._unlockTime;
                 (*_times)[dateTime.time().hour()]++;
@@ -57,13 +57,13 @@ void ThreadStatistics::onResultAchievements(SAchievementsPlayer aAchievements) {
         (*_averagePercent).append(std::move(1.0 * (countReached * 100) / (countReached + countNotReached)));
         if (countNotReached == 0) {
             (*_numof)[2]++;
-            (*_complete).append(QPair<QString, QString>(aAchievements.getAppid(), aAchievements.getGameName()));
+            (*_complete).append(QPair<QString, QString>(aAchievements->getAppid(), aAchievements->getGameName()));
         } else if (countReached == 0) {
             (*_numof)[0]++;
-            (*_started).append(QPair<QString, QString>(aAchievements.getAppid(), aAchievements.getGameName()));
+            (*_started).append(QPair<QString, QString>(aAchievements->getAppid(), aAchievements->getGameName()));
         } else {
             (*_numof)[1]++;
-            (*_notStarted).append(QPair<QString, QString>(aAchievements.getAppid(), aAchievements.getGameName()));
+            (*_notStarted).append(QPair<QString, QString>(aAchievements->getAppid(), aAchievements->getGameName()));
         }
     }
     _nownum++;

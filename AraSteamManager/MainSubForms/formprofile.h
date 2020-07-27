@@ -50,6 +50,7 @@ private slots:
     void buttonStatistics_Clicked();
     void buttonFavorites_Clicked();
 
+    void setLvl(QString aSteamId);
 private:
     Ui::FormProfile *ui;
     SProfile _profile;

@@ -64,6 +64,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     #define SetTableWidgetCompareFriendsSettings {
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
     //ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetFriends->setMinimumSize(0, 180);
     ui->TableWidgetFriends->setColumnCount(2);
@@ -101,6 +102,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, 0, myFilter);
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, 1, widgetFriendsAchievementsFilter);
     ui->TableWidgetFriends->resizeRowsToContents();
+    ui->TableWidgetFriends->setRowHeight(c_tableFriendsRowCheckBox, 40);//TODO не помещается чекбокс
     ui->TableWidgetFriends->resizeColumnsToContents();
     #define SetTableWidgetCompareFriendsSettingsEnd }
     setIcons();

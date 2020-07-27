@@ -25,6 +25,7 @@
 #include <QFontDatabase>
 #include <QScreen>
 #include <QSizeGrip>
+#include <QGraphicsDropShadowEffect>
 
 namespace Ui {
 class MainWindow;

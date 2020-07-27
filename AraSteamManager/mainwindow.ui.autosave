@@ -240,7 +240,7 @@
          <number>0</number>
         </property>
         <property name="format">
-         <string>%v/%m</string>
+         <string/>
         </property>
        </widget>
       </item>

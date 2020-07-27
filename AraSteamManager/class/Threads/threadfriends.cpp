@@ -89,22 +89,22 @@ QTableWidgetItem *ThreadFriends::getPrivacy(int aCommunityVisibilityState){
     switch (aCommunityVisibilityState) {
     case 1:{
         item->setText(tr("Скрытый"));
-        item->setForeground(QColor(110,14,14));
+        item->setForeground(QColor(155,44,44));
         break;
     }
     case 2:{
         item->setText(tr("Скрытый"));
-        item->setForeground(QColor(110,14,14));
+        item->setForeground(QColor(155,44,44));
         break;
     }
     case 3:{
         item->setText(tr("Публичный"));
-        item->setForeground(QColor(14,110,17));
+        item->setForeground(QColor(105,155,44));
         break;
     }
     case 8:{
         item->setText(tr("Скрытый"));
-        item->setForeground(QColor(110,14,14));
+        item->setForeground(QColor(155,44,44));
         break;
     }
     }

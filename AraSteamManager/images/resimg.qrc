@@ -106,5 +106,8 @@
         <file>white/widgets/radiobutton_checked_press.png</file>
         <file>white/widgets/radiobutton_unchecked_hover.png</file>
         <file>white/widgets/radiobutton_unchecked_press.png</file>
+        <file>lvls/0.png</file>
+        <file>lvls/1.png</file>
+        <file>lvls/2.png</file>
     </qresource>
 </RCC>

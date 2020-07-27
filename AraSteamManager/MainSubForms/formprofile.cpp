@@ -1,6 +1,13 @@
 #include "formprofile.h"
 #include "ui_formprofile.h"
 
+#define Constants {
+QString c_green = "#699b2c";
+QString c_yellow = "#6c6e0e";
+QString c_red = "#b33a3a";
+QString c_blue = "blue";
+#define ConstantsEnd }
+
 FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormProfile), _profile(aProfile), _games(this) {
     ui->setupUi(this);
     ui->LabelProfileVisibility->setTextFormat(Qt::RichText);
@@ -11,6 +18,19 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     ui->LabelNameMinimize->setStyleSheet("color: #42a9c6;");
     ui->ButtonGames->setBaseSize(QSize(23, 23));
     ui->LabelPersonaState->setWordWrap(true);
+
+    //ui->Labellvl->setStyleSheet("color: #699b2c;");
+    ui->LabellvlValue->setStyleSheet("color: #42a9c6; ");
+
+    //ui->LabelTimeCreated->setStyleSheet("color: #6e93d6;");
+    ui->LabelTimeCreatedValue->setStyleSheet("color: #42a9c6;");
+
+    //ui->LabelRealName->setStyleSheet("color: #63a583;");
+    ui->LabelRealNameValue->setStyleSheet("color: #42a9c6;");
+
+    //ui->LabelLocCountryCode->setStyleSheet("color: #b33a3a;");
+    ui->LabelLocCountryCodeValue->setStyleSheet("color: #42a9c6;");
+
 #define Connects {
     connect(ui->ButtonSetProfile, &QPushButton::clicked, this, &FormProfile::buttonSetProfile_Clicked);
     connect(ui->ButtonGames,      &QPushButton::clicked, this, &FormProfile::buttonGames_Clicked);
@@ -35,7 +55,7 @@ void FormProfile::changeEvent(QEvent *aEvent) {
 void FormProfile::profileToUi(SProfile aProfile) {
     _profile = aProfile;
     SBans bans(aProfile._steamID,false);
-    SLevels levels(aProfile._steamID);
+    setLvl(_profile._steamID);
     _games.set(aProfile._steamID,true,true,false);
     _friends.set(aProfile._steamID,false);
     if(!aProfile._gameExtraInfo.isEmpty()) {
@@ -77,39 +97,39 @@ void FormProfile::profileToUi(SProfile aProfile) {
     ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
                                 "<a href=\"" + aProfile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + aProfile._profileUrl + "</span></a>");
-    ui->LabellvlValue->setText(QString::number(levels.GetLevel()));
     ui->LabelRealNameValue->setText(aProfile._realName);
     ui->LabelTimeCreatedValue->setText(aProfile._timeCreated.toString("yyyy.MM.dd"));
     ui->LabelLocCountryCodeValue->setText(aProfile._locCountryCode);
     QPixmap profileState;
     QPixmap gamesState;
     QPixmap friendsState;
-    //Добавить описание при наведении
     switch (aProfile._communityVisibilityState) {
         case 1:
-//            ui->LabelProfileVisibility->setText(tr("Скрытый"));
-//            ui->LabelProfileVisibility->setStyleSheet("color: #6e0e0e");
+            ui->LabelProfileVisibility->setText(tr("Скрытый"));
+            ui->LabelProfileVisibility->setStyleSheet("color: " + c_red);
             profileState.load(_setting.getIconStateRed());
             break;
         case 3:
-//            ui->LabelProfileVisibility->setText(tr("Публичный"));
-//            ui->LabelProfileVisibility->setStyleSheet("color: #0e6e11");
+            ui->LabelProfileVisibility->setText(tr("Публичный"));
+            ui->LabelProfileVisibility->setStyleSheet("color: " + c_green);
             profileState.load(_setting.getIconStateGreen());
             break;
         case 8:
-//            ui->LabelProfileVisibility->setText(tr("Для друзей"));
-//            ui->LabelProfileVisibility->setStyleSheet("color: #6c6e0e");
+            ui->LabelProfileVisibility->setText(tr("Для друзей"));
+            ui->LabelProfileVisibility->setStyleSheet("color: " + c_yellow);
             profileState.load(_setting.getIconStateYellow());
             break;
         default:
-//            ui->LabelProfileVisibility->setText(tr("Неизвестно"));
-//            ui->LabelProfileVisibility->setStyleSheet("color:white");
+            ui->LabelProfileVisibility->setText(tr("Неизвестно"));
+            ui->LabelProfileVisibility->setStyleSheet("color: " + c_blue);
             profileState.load(_setting.getIconStateBlue());
         }
     switch (_games.getStatus()) {
     case StatusValue::success: {
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
+        ui->LabelGamesVisibility->setText(tr("Публичный"));
+        ui->LabelGamesVisibility->setStyleSheet("color: " + c_green);
         gamesState.load(_setting.getIconStateGreen());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
         break;
@@ -117,6 +137,8 @@ void FormProfile::profileToUi(SProfile aProfile) {
     case StatusValue::error: {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
+        ui->LabelGamesVisibility->setText(tr("Скрытый"));
+        ui->LabelGamesVisibility->setStyleSheet("color: " + c_red);
         gamesState.load(_setting.getIconStateRed());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
         break;
@@ -124,6 +146,8 @@ void FormProfile::profileToUi(SProfile aProfile) {
     case StatusValue::none: {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
+        ui->LabelGamesVisibility->setText(tr("Неизвестно"));
+        ui->LabelGamesVisibility->setStyleSheet("color: " + c_blue);
         gamesState.load(_setting.getIconStateBlue());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
         break;
@@ -132,18 +156,24 @@ void FormProfile::profileToUi(SProfile aProfile) {
     switch (_friends.getStatus()) {
     case StatusValue::success: {
         ui->ButtonFriends->setEnabled(true);
+        ui->LabelFriendsVisibility->setText(tr("Публичный"));
+        ui->LabelFriendsVisibility->setStyleSheet("color: " + c_green);
         friendsState.load(_setting.getIconStateGreen());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::error: {
         ui->ButtonFriends->setEnabled(false);
+        ui->LabelFriendsVisibility->setText(tr("Скрытый"));
+        ui->LabelFriendsVisibility->setStyleSheet("color: " + c_red);
         friendsState.load(_setting.getIconStateRed());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
         break;
     }
     case StatusValue::none: {
         ui->ButtonFriends->setEnabled(false);
+        ui->LabelFriendsVisibility->setText(tr("Неизвестно"));
+        ui->LabelFriendsVisibility->setStyleSheet("color: " + c_blue);
         friendsState.load(_setting.getIconStateBlue());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
         break;
@@ -160,16 +190,19 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelBansDays->setVisible(true);
         ui->LabelBansDaysAgo->setVisible(true);
         ui->LabelBansNone->setVisible(false);
-//        ui->LabelBans->setText(tr("VAC баны: %1| Последний %2 дней назад").arg(QString::number(bans.GetNumberOfVACBans())).arg(QString::number(bans.GetDaysSinceLastBan())));
-//        ui->LabelBans->setStyleSheet("color: #6e0e0e");
+        //ui->LabelBans->setStyleSheet("color: " + c_red);
+        ui->LabelBansNotNone->setStyleSheet("color: " + c_red);
+        ui->LabelBansLast->setStyleSheet("color: " + c_red);
+        ui->LabelBansDays->setStyleSheet("color: " + c_red);
+        ui->LabelBansDaysAgo->setStyleSheet("color: " + c_red);
     } else {
         ui->LabelBansNotNone->setVisible(false);
         ui->LabelBansLast->setVisible(false);
         ui->LabelBansDays->setVisible(false);
         ui->LabelBansDaysAgo->setVisible(false);
         ui->LabelBansNone->setVisible(true);
-//        ui->LabelBans->setText(tr("VAC баны: Отсутствуют"));
-//        ui->LabelBans->setStyleSheet("color: #0e6e11");
+        //ui->LabelBans->setStyleSheet("color: " + c_green);
+        ui->LabelBansNone->setStyleSheet("color: " + c_green);
     }
 
     ui->LabelAvatar->setPixmap(RequestData(aProfile._avatarMedium, false).getPixmap());
@@ -180,6 +213,16 @@ void FormProfile::profileToUi(SProfile aProfile) {
 
 void FormProfile::setProfile(SProfile aProfile) {
     _profile = aProfile;
+}
+
+void FormProfile::setLvl(QString aSteamId) {
+//TODO Вставить проверку на существование картинки
+    SLevels levels(aSteamId);
+    ui->LabellvlValue->setText(QString::number(levels.GetLevel()));
+    QString qss = "color: #42a9c6; "
+                  "image: url(://lvls/" + QString::number(levels.GetLevel() / 100) + ".png) 0 0 0 0 stretch stretch; ";
+    qDebug()<<levels.GetLevel()<<levels.GetLevel() / 100;
+    ui->LabellvlValue->setStyleSheet(qss);
 }
 
 SProfile FormProfile::getProfile() {

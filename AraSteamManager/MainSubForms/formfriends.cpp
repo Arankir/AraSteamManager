@@ -32,7 +32,7 @@ void FormFriends::initComponents() {
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
     retranslate();
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //ui->TableWidgetFriends->setAlternatingRowColors(true);
+    ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setRowCount(_friends.getCount());
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID, true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, 33);

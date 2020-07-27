@@ -23,7 +23,7 @@ signals:
     void s_progress(int p, int row);
 
 private slots:
-    void onResultAchievements(SAchievementsPlayer ach);
+    void onResultAchievements(SAchievementsPlayer *ach);
 
 private:
     QString _id;

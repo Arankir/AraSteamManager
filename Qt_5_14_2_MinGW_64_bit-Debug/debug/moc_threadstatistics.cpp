@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadStatistics_t {
     QByteArrayData data[10];
-    char stringdata0[96];
+    char stringdata0[97];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,13 +40,13 @@ QT_MOC_LITERAL(4, 40, 1), // "p"
 QT_MOC_LITERAL(5, 42, 3), // "row"
 QT_MOC_LITERAL(6, 46, 4), // "fill"
 QT_MOC_LITERAL(7, 51, 20), // "onResultAchievements"
-QT_MOC_LITERAL(8, 72, 19), // "SAchievementsPlayer"
-QT_MOC_LITERAL(9, 92, 3) // "ach"
+QT_MOC_LITERAL(8, 72, 20), // "SAchievementsPlayer*"
+QT_MOC_LITERAL(9, 93, 3) // "ach"
 
     },
     "ThreadStatistics\0s_finished\0\0s_progress\0"
     "p\0row\0fill\0onResultAchievements\0"
-    "SAchievementsPlayer\0ach"
+    "SAchievementsPlayer*\0ach"
 };
 #undef QT_MOC_LITERAL
 
@@ -92,8 +92,19 @@ void ThreadStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->onResultAchievements((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
+        case 3: _t->onResultAchievements((*reinterpret_cast< SAchievementsPlayer*(*)>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 3:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SAchievementsPlayer* >(); break;
+            }
+            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -148,7 +159,7 @@ int ThreadStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 4)
-            *reinterpret_cast<int*>(_a[0]) = -1;
+            qt_static_metacall(this, _c, _id, _a);
         _id -= 4;
     }
     return _id;

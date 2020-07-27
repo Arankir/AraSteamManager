@@ -50,6 +50,15 @@ void MainWindow::initComponents() {
         this->showMaximized();
     }
     qApp->setStyleSheet(getTheme());
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
+    shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
+    shadowEffect->setOffset(0);
+    shadowEffect->setBlurRadius(50);
+    ui->FormProgressBar->setGraphicsEffect(shadowEffect);
+//    ui->FormProgressBar->setVisible(true);
+//    ui->FormProgressBar->setValue(20);
+//    ui->FormProgressBar->setMaximum(100);
+    ui->FormProgressBar->
 #define Connects {
     connect(ui->ButtonFindProfile,   &QPushButton::clicked, this, &MainWindow::buttonFindProfile_Clicked);
     connect(ui->ButtonExit,          &QPushButton::clicked, this, &MainWindow::buttonExit_Clicked);
@@ -168,17 +177,18 @@ QString MainWindow::getTheme() {
 #define progressbar {
                 "QProgressBar { "
                     "color: white; "
-                    "background-color: rgba(26,26,26,255); "
-                    "border: 1px solid black; "
-                    "border-radius: 7px; "
+                    "background-color: #5daae0; "
+                    //"border: 1px solid black; "
+                    //"border-radius: 7px; "
                     "text-align: center; "
                 "} "
                 "QProgressBar::chunk { "
-                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                    "background-color: #386584; "
+                    "margin: 5px; "/*qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                         "stop: 0 #1c2686, "
                         "stop: 0.5 #0681bb, "
-                        "stop: 1.0 #1c2686); "
-                    "border-radius: 6px; "
+                        "stop: 1.0 #1c2686); "*/
+                    //"border-radius: 6px; "
                 "} "
 #define progressbarend }
 #define radiobutton {
@@ -212,6 +222,36 @@ QString MainWindow::getTheme() {
                     "color: #57CBDE"//+hoverGradient+
                 "} "
 #define radiobuttonend }
+#define checkbox {
+                "QCheckBox{ "
+                    "background-color: rgba(255,255,255,0); "
+                    "color: white; "
+                "} "
+                "QCheckBox::hover { "
+                    "color: #57CBDE"
+                "} "
+                "QCheckBox::indicator { "
+                    "width: 15; "
+                "} "
+                "QCheckBox::indicator:unchecked { "
+                    "image: url(" + _setting.getIconCheckBoxUnchecked() + "); "
+                "} "
+                "QCheckBox::indicator:checked { "
+                    "image: url(" + _setting.getIconCheckBoxChecked() + "); "
+                "} "
+                "QCheckBox::indicator:unchecked:hover { "
+                    "image: url(" + _setting.getIconCheckBoxUncheckedHover() + "); "
+                "} "
+                "QCheckBox::indicator:checked:hover { "
+                    "image: url(" + _setting.getIconCheckBoxCheckedHover() + "); "
+                "} "
+                "QCheckBox::indicator:unchecked:pressed { "
+                    "image: url(" + _setting.getIconCheckBoxUncheckedPress() + "); "
+                "} "
+                "QCheckBox::indicator:checked:pressed { "
+                    "image: url(" + _setting.getIconCheckBoxCheckedPress() + "); "
+                "} "
+#define checkboxend }
 #define tabbar {
                 "QTabWidget::pane { "
                     "border: 1px solid black; "
@@ -254,36 +294,6 @@ QString MainWindow::getTheme() {
                     "margin: 0; "/* if there is only one tab, we don't want overlapping margins */
                 "} "
 #define tabbarend }
-#define checkbox {
-                "QCheckBox{ "
-                    "background-color: rgba(255,255,255,0); "
-                    "color: white; "
-                "} "
-                "QCheckBox::hover { "
-                    "color: #57CBDE"//+hoverGradient+
-                "} "
-                "QCheckBox::indicator { "
-                    "width: 15; "
-                "} "
-                "QCheckBox::indicator:unchecked { "
-                    "image: url(" + _setting.getIconCheckBoxUnchecked() + "); "
-                "} "
-                "QCheckBox::indicator:checked { "
-                    "image: url(" + _setting.getIconCheckBoxChecked() + "); "
-                "} "
-                "QCheckBox::indicator:unchecked:hover { "
-                    "image: url(" + _setting.getIconCheckBoxUncheckedHover() + "); "
-                "} "
-                "QCheckBox::indicator:checked:hover { "
-                    "image: url(" + _setting.getIconCheckBoxCheckedHover() + "); "
-                "} "
-                "QCheckBox::indicator:unchecked:pressed { "
-                    "image: url(" + _setting.getIconCheckBoxUncheckedPress() + "); "
-                "} "
-                "QCheckBox::indicator:checked:pressed { "
-                    "image: url(" + _setting.getIconCheckBoxCheckedPress() + "); "
-                "} "
-#define checkboxend }
 #define combobox {
                 "QComboBox { "
                     "border: 1px solid #232323; "
@@ -340,37 +350,90 @@ QString MainWindow::getTheme() {
                 "} "
 #define lineeditend }
 #define tablewidget {
+                "QTableView { "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                        "stop: 0 #777777, "
+                        "stop: 1.0 #333333); "
+                    "border-radius: 2px; "
+                "} "
+                "QTableView::hover { "
+                    "color: #57CBDE; "
+                "} "
+                "QTableView#TableWidgetContent::indicator { "
+                    "width: 40px; "
+                    "height: 40px; "
+                "} "
+                "QTableView::indicator:unchecked { "
+                    "image: url(" + _setting.getIconCheckBoxUnchecked() + "); "
+                "} "
+                "QTableView::indicator:checked { "
+                    "image: url(" + _setting.getIconCheckBoxChecked() + "); "
+                "} "
+                "QTableView::indicator:unchecked:hover { "
+                    "image: url(" + _setting.getIconCheckBoxUncheckedHover() + "); "
+                "} "
+                "QTableView::indicator:checked:hover { "
+                    "image: url(" + _setting.getIconCheckBoxCheckedHover() + "); "
+                "} "
+                "QTableView::indicator:unchecked:pressed { "
+                    "image: url(" + _setting.getIconCheckBoxUncheckedPress() + "); "
+                "} "
+                "QTableView::indicator:checked:pressed { "
+                    "image: url(" + _setting.getIconCheckBoxCheckedPress() + "); "
+                "} "
                 "QTableWidget { "
                     "border: 1px solid #777777; "
                     "border-radius: 2px; "
                     "color: #dddddd; "
                 "} "
-                "QTableWidget::item { "
-                    "border: 1px solid #777777; "
-                    "background-color: #004182; "
+                "QTableWidget::item, QTableWidget::item:inactive { "
+                    //"border: 5px solid rgba(0, 0, 0, 0); "
+                    "border-bottom: 1px solid #777777; "
+                    "border-top: 1px solid #777777; "
+                    "background-color: #171a21; "
+                    "border-left: 0px; "
+                    "border-right: 0px; "
+                    //"color: #dddddd; "
                 "} "
-                "QTableWidget::item:inactive { "
-                    "background-color: #004182;"
-                    "color: #dddddd; "
+                "QTableWidget::item:alternate { "
+                    "background-color: #1d2027; "
                 "} "
-                "QTableWidget::item:selected { "
-                    "background-color: qradialgradient("
-                        "cx:0.5, cy:0.5, "
-                        "radius: 0.6, "
-                        "fx:0.4, fy:0.5, "
-                        "stop:0 #0055ab, "
-                        "stop:1 #2692ff); "
-                    //"font: bold; "
-                "} "
-                "QTableWidget::item:hover { "
-                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
+                "QTableWidget::item:hover:!selected { "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5, "
                         "stop: 0 #2692ff, "
-                        "stop: 0.7 #004182, "
-                        "stop: 1.0 #004182); "
+                        "stop: 1.0 #171a21); "
+                "} "
+                "QTableWidget::item:alternate:hover:!selected { "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5, "
+                        "stop: 0 #2692ff, "
+                        "stop: 1.0 #1d2027); "
                 "} "
                 "QTableWidget::item:pressed { "
                     "background-color: #2692ff; "
                 "} "
+                "QTableWidget::item:selected { "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                        "stop: 0 #2692ff, "
+                        "stop: 1.0 #0672ff); "
+                    //"font: bold; "
+                "} "
+#define headerview {
+                "QHeaderView::section, QTableView QTableCornerButton::section { "
+                    "background-color: #002041; "/*qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                        "stop: 0 #0061c3, "
+                        "stop: 1.0 #002041); "*/
+                    "color: #dddddd; "
+                    "padding-left: 4px; "
+                    "border: 1px solid #6c6c6c; "
+                    "border-bottom: 0px solid #6c6c6c; "
+                    "border-radius: 4px; "
+                "} "
+                "QHeaderView { "
+                    "selection-background-color: #303030; "
+                    "background-color: #303030; "
+                    "selection-color: #303030; "
+                "} "
+#define headerviewend }
 #define tablewidgetend }
 #define scrollbar {
                 "QScrollBar:vertical { "
@@ -384,35 +447,11 @@ QString MainWindow::getTheme() {
                     "height:10px; "
                 "} "
 #define scrollbarend }
-#define headerview {
-                "QHeaderView::section, QTableView QTableCornerButton::section { "
-                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                        "stop: 0 #0061c3, "
-                        "stop: 1.0 #002041); "
-                    "color: #dddddd; "
-                    "padding-left: 4px; "
-                    "border: 1px solid #6c6c6c; "
-                    "border-bottom: 0px solid #6c6c6c; "
-                    "border-radius: 4px; "
-                "} "
-                "QHeaderView { "
-                    "selection-background-color: #303030; "
-                    "background-color: #303030; "
-                    "selection-color: #303030; "
-                "} "
-#define headerviewend }
-                "QTableView { "
-                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                        "stop: 0 #0f52ba, "
-                        "stop: 1.0 #1034a6); "
-                    "border-radius: 2px; "
-                    "alternate-background-color: " + tableWidgetAlterRowGradient +
-                "} "
-                "QWidget[objectName=MainWindow],QWidget[objectName=FormContainerAchievements]{ "
+                "QWidget#MainWindow, QWidget#FormContainerAchievements { "
                     "background-color: " + backgroundGradient +
                     "border: 1px solid #000000; "
                 "} "
-                "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget[objectName=FormStatistics] { "
+                "QTabWidget > QStackedWidget > QWidget, QTabWidget > QStackedWidget, QTabWidget, QWidget#FormStatistics { "
                     "background-color: " + backgroundGradient +
                     "border: 0px solid black; "
                 "} "
@@ -433,7 +472,7 @@ QString MainWindow::getTheme() {
                 "QLabel, QLabel:disabled {"
                     "color: white; "
                 "} "
-                "QGroupBox::title{ "
+                "QGroupBox::title { "
                     "color: white; "
                 "} "
 #define listwidget {
@@ -749,11 +788,11 @@ void MainWindow::updateSettings() {
         break;
     }
     case 1:{
-        ui->StackedWidgetProfiles->setFixedHeight(95);
+        ui->StackedWidgetProfiles->setFixedHeight(100);
         break;
     }
     case 2:{
-        ui->StackedWidgetProfiles->setFixedHeight(155);
+        ui->StackedWidgetProfiles->setFixedHeight(200);
     }
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
