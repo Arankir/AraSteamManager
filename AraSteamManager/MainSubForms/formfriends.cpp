@@ -32,7 +32,7 @@ void FormFriends::initComponents() {
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
     retranslate();
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->TableWidgetFriends->setAlternatingRowColors(true);
+    //ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setRowCount(_friends.getCount());
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID, true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, 33);
@@ -75,6 +75,7 @@ void FormFriends::onTablePulled() {
             }
         row++;
     }
+    ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, ui->TableWidgetFriends->columnWidth(c_tableColumnIcon) + 8);
     emit s_finish();
 }
 #define InitEnd }
@@ -102,12 +103,20 @@ void FormFriends::retranslate() {
                                               <<tr("Нет на месте") <<tr("Спит") <<tr("Ожидает обмена") <<tr("Хочет поиграть"));
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnID, new QTableWidgetItem(""));
     ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnIcon, new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnName, new QTableWidgetItem(tr("Ник")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnAdded, new QTableWidgetItem(tr("Добавлен")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnStatus, new QTableWidgetItem(tr("Статус")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnisPublic, new QTableWidgetItem(tr("Профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnGoTo, new QTableWidgetItem(tr("На профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnFavorite, new QTableWidgetItem(tr("Избранное")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnName, new QTableWidgetItem(tr("   НИК")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnAdded, new QTableWidgetItem(tr("   ДОБАВЛЕН")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnStatus, new QTableWidgetItem(tr("   СТАТУС")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnisPublic, new QTableWidgetItem(tr("   ПРОФИЛЬ")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnGoTo, new QTableWidgetItem(tr("   НА ПРОФИЛЬ")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableColumnFavorite, new QTableWidgetItem(tr("   ИЗБРАННОЕ")));
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnName)->setTextAlignment(Qt::AlignLeft);
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnAdded)->setTextAlignment(Qt::AlignLeft);
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnStatus)->setTextAlignment(Qt::AlignLeft);
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnisPublic)->setTextAlignment(Qt::AlignLeft);
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnName)->setTextAlignment(Qt::AlignVCenter);
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnAdded)->setTextAlignment(Qt::AlignVCenter);
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnStatus)->setTextAlignment(Qt::AlignVCenter);
+    ui->TableWidgetFriends->horizontalHeaderItem(c_tableColumnisPublic)->setTextAlignment(Qt::AlignVCenter);
     friendToUi();
 }
 
@@ -203,6 +212,7 @@ void FormFriends::friendToUi() {
             indexFriend++;
         }
     }
+    //ui->TableWidgetFriends->setRowHeight(row, 1000);
 }
 
 void FormFriends::setIcons() {
@@ -220,7 +230,7 @@ void FormFriends::createThread() {
     Threading *threadLoadTable = new Threading(this);
     threadLoadTable->AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
     connect (threadLoadTable, &Threading::s_friends_progress, this, [=](int progress, int row) {
-        ui->TableWidgetFriends->setRowHeight(row, 33);
+        ui->TableWidgetFriends->setRowHeight(row, 52);
         emit s_friendsLoaded(progress, row);
     });
     connect (threadLoadTable, &Threading::s_friends_finished, this, &FormFriends::onTablePulled);
@@ -233,7 +243,7 @@ void FormFriends::updateHiddenRows() {
 }
 
 void FormFriends::progressLoading(int aProgress,int aRow) {
-    ui->TableWidgetFriends->setRowHeight(aRow, 33);
+    ui->TableWidgetFriends->setRowHeight(aRow, 52);
 }
 #define SystemEnd }
 

@@ -24,7 +24,7 @@ QT_BEGIN_NAMESPACE
 class Ui_FormProfile
 {
 public:
-    QVBoxLayout *verticalLayout_4;
+    QVBoxLayout *verticalLayout_6;
     QFrame *FrameNormalInfo;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_8;
@@ -41,34 +41,34 @@ public:
     QSpacerItem *horizontalSpacer_3;
     QFrame *FrameMaximumInfo;
     QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayoutInfo1;
-    QHBoxLayout *horizontalLayout_11;
+    QHBoxLayout *horizontalLayout_12;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_3;
     QLabel *Labellvl;
     QLabel *LabellvlValue;
-    QFrame *line;
-    QHBoxLayout *horizontalLayout_12;
+    QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout_4;
     QLabel *LabelTimeCreated;
     QLabel *LabelTimeCreatedValue;
-    QFrame *line_2;
-    QHBoxLayout *horizontalLayout_13;
-    QLabel *LabelLocCountryCode;
-    QLabel *LabelLocCountryCodeValue;
-    QFrame *line_3;
-    QHBoxLayout *horizontalLayout_14;
+    QSpacerItem *horizontalSpacer_8;
+    QHBoxLayout *horizontalLayout_9;
     QLabel *LabelRealName;
     QLabel *LabelRealNameValue;
+    QSpacerItem *horizontalSpacer_9;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *LabelLocCountryCode;
+    QLabel *LabelLocCountryCodeValue;
+    QSpacerItem *horizontalSpacer_10;
     QSpacerItem *horizontalSpacer_5;
-    QHBoxLayout *horizontalLayout_3;
     QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout_7;
     QLabel *LabelProfileStatus;
-    QLabel *LabelProfileVisibility;
-    QHBoxLayout *horizontalLayout_4;
     QLabel *LabelFriendsStatus;
-    QLabel *LabelFriendsVisibility;
-    QHBoxLayout *horizontalLayout_9;
     QLabel *LabelGamesStatus;
+    QVBoxLayout *verticalLayout_8;
+    QLabel *LabelProfileVisibility;
+    QLabel *LabelFriendsVisibility;
     QLabel *LabelGamesVisibility;
-    QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout_10;
     QLabel *LabelBans;
     QLabel *LabelBansNone;
@@ -92,11 +92,10 @@ public:
     {
         if (FormProfile->objectName().isEmpty())
             FormProfile->setObjectName(QString::fromUtf8("FormProfile"));
-        FormProfile->resize(802, 265);
-        verticalLayout_4 = new QVBoxLayout(FormProfile);
-        verticalLayout_4->setSpacing(0);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        FormProfile->resize(519, 253);
+        verticalLayout_6 = new QVBoxLayout(FormProfile);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_6->setContentsMargins(0, 0, 0, 0);
         FrameNormalInfo = new QFrame(FormProfile);
         FrameNormalInfo->setObjectName(QString::fromUtf8("FrameNormalInfo"));
         FrameNormalInfo->setFrameShape(QFrame::StyledPanel);
@@ -190,15 +189,15 @@ public:
         FrameMaximumInfo->setFrameShape(QFrame::StyledPanel);
         FrameMaximumInfo->setFrameShadow(QFrame::Raised);
         verticalLayout_3 = new QVBoxLayout(FrameMaximumInfo);
-        verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        horizontalLayoutInfo1 = new QHBoxLayout();
-        horizontalLayoutInfo1->setSpacing(2);
-        horizontalLayoutInfo1->setObjectName(QString::fromUtf8("horizontalLayoutInfo1"));
-        horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setSpacing(1);
-        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(3);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         Labellvl = new QLabel(FrameMaximumInfo);
         Labellvl->setObjectName(QString::fromUtf8("Labellvl"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
@@ -208,180 +207,166 @@ public:
         Labellvl->setSizePolicy(sizePolicy);
         Labellvl->setFont(font1);
 
-        horizontalLayout_11->addWidget(Labellvl);
+        horizontalLayout_3->addWidget(Labellvl);
 
         LabellvlValue = new QLabel(FrameMaximumInfo);
         LabellvlValue->setObjectName(QString::fromUtf8("LabellvlValue"));
         QFont font2;
         font2.setPointSize(10);
+        font2.setBold(true);
+        font2.setWeight(75);
         LabellvlValue->setFont(font2);
         LabellvlValue->setText(QString::fromUtf8("0"));
 
-        horizontalLayout_11->addWidget(LabellvlValue);
-
-
-        horizontalLayoutInfo1->addLayout(horizontalLayout_11);
-
-        line = new QFrame(FrameMaximumInfo);
-        line->setObjectName(QString::fromUtf8("line"));
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayoutInfo1->addWidget(line);
-
-        horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setSpacing(1);
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        LabelTimeCreated = new QLabel(FrameMaximumInfo);
-        LabelTimeCreated->setObjectName(QString::fromUtf8("LabelTimeCreated"));
-        sizePolicy.setHeightForWidth(LabelTimeCreated->sizePolicy().hasHeightForWidth());
-        LabelTimeCreated->setSizePolicy(sizePolicy);
-        LabelTimeCreated->setFont(font1);
-
-        horizontalLayout_12->addWidget(LabelTimeCreated);
-
-        LabelTimeCreatedValue = new QLabel(FrameMaximumInfo);
-        LabelTimeCreatedValue->setObjectName(QString::fromUtf8("LabelTimeCreatedValue"));
-        LabelTimeCreatedValue->setFont(font2);
-        LabelTimeCreatedValue->setText(QString::fromUtf8("0"));
-
-        horizontalLayout_12->addWidget(LabelTimeCreatedValue);
-
-
-        horizontalLayoutInfo1->addLayout(horizontalLayout_12);
-
-        line_2 = new QFrame(FrameMaximumInfo);
-        line_2->setObjectName(QString::fromUtf8("line_2"));
-        line_2->setFrameShape(QFrame::VLine);
-        line_2->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayoutInfo1->addWidget(line_2);
-
-        horizontalLayout_13 = new QHBoxLayout();
-        horizontalLayout_13->setSpacing(1);
-        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
-        LabelLocCountryCode = new QLabel(FrameMaximumInfo);
-        LabelLocCountryCode->setObjectName(QString::fromUtf8("LabelLocCountryCode"));
-        sizePolicy.setHeightForWidth(LabelLocCountryCode->sizePolicy().hasHeightForWidth());
-        LabelLocCountryCode->setSizePolicy(sizePolicy);
-        LabelLocCountryCode->setFont(font1);
-
-        horizontalLayout_13->addWidget(LabelLocCountryCode);
-
-        LabelLocCountryCodeValue = new QLabel(FrameMaximumInfo);
-        LabelLocCountryCodeValue->setObjectName(QString::fromUtf8("LabelLocCountryCodeValue"));
-        LabelLocCountryCodeValue->setFont(font2);
-        LabelLocCountryCodeValue->setText(QString::fromUtf8("EN"));
-
-        horizontalLayout_13->addWidget(LabelLocCountryCodeValue);
-
-
-        horizontalLayoutInfo1->addLayout(horizontalLayout_13);
-
-        line_3 = new QFrame(FrameMaximumInfo);
-        line_3->setObjectName(QString::fromUtf8("line_3"));
-        line_3->setFrameShape(QFrame::VLine);
-        line_3->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayoutInfo1->addWidget(line_3);
-
-        horizontalLayout_14 = new QHBoxLayout();
-        horizontalLayout_14->setSpacing(1);
-        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
-        LabelRealName = new QLabel(FrameMaximumInfo);
-        LabelRealName->setObjectName(QString::fromUtf8("LabelRealName"));
-        sizePolicy.setHeightForWidth(LabelRealName->sizePolicy().hasHeightForWidth());
-        LabelRealName->setSizePolicy(sizePolicy);
-        LabelRealName->setFont(font1);
-
-        horizontalLayout_14->addWidget(LabelRealName);
-
-        LabelRealNameValue = new QLabel(FrameMaximumInfo);
-        LabelRealNameValue->setObjectName(QString::fromUtf8("LabelRealNameValue"));
-        LabelRealNameValue->setFont(font2);
-        LabelRealNameValue->setText(QString::fromUtf8("none"));
-
-        horizontalLayout_14->addWidget(LabelRealNameValue);
-
-
-        horizontalLayoutInfo1->addLayout(horizontalLayout_14);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayoutInfo1->addItem(horizontalSpacer_5);
-
-
-        verticalLayout_3->addLayout(horizontalLayoutInfo1);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(3);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(1);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        LabelProfileStatus = new QLabel(FrameMaximumInfo);
-        LabelProfileStatus->setObjectName(QString::fromUtf8("LabelProfileStatus"));
-        LabelProfileStatus->setText(QString::fromUtf8("S"));
-
-        horizontalLayout_2->addWidget(LabelProfileStatus);
-
-        LabelProfileVisibility = new QLabel(FrameMaximumInfo);
-        LabelProfileVisibility->setObjectName(QString::fromUtf8("LabelProfileVisibility"));
-        sizePolicy.setHeightForWidth(LabelProfileVisibility->sizePolicy().hasHeightForWidth());
-        LabelProfileVisibility->setSizePolicy(sizePolicy);
-        LabelProfileVisibility->setFont(font2);
-
-        horizontalLayout_2->addWidget(LabelProfileVisibility);
-
-
-        horizontalLayout_3->addLayout(horizontalLayout_2);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(1);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        LabelFriendsStatus = new QLabel(FrameMaximumInfo);
-        LabelFriendsStatus->setObjectName(QString::fromUtf8("LabelFriendsStatus"));
-        LabelFriendsStatus->setText(QString::fromUtf8("S"));
-
-        horizontalLayout_4->addWidget(LabelFriendsStatus);
-
-        LabelFriendsVisibility = new QLabel(FrameMaximumInfo);
-        LabelFriendsVisibility->setObjectName(QString::fromUtf8("LabelFriendsVisibility"));
-        sizePolicy.setHeightForWidth(LabelFriendsVisibility->sizePolicy().hasHeightForWidth());
-        LabelFriendsVisibility->setSizePolicy(sizePolicy);
-        LabelFriendsVisibility->setFont(font2);
-
-        horizontalLayout_4->addWidget(LabelFriendsVisibility);
-
-
-        horizontalLayout_3->addLayout(horizontalLayout_4);
-
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setSpacing(1);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        LabelGamesStatus = new QLabel(FrameMaximumInfo);
-        LabelGamesStatus->setObjectName(QString::fromUtf8("LabelGamesStatus"));
-        LabelGamesStatus->setText(QString::fromUtf8("S"));
-
-        horizontalLayout_9->addWidget(LabelGamesStatus);
-
-        LabelGamesVisibility = new QLabel(FrameMaximumInfo);
-        LabelGamesVisibility->setObjectName(QString::fromUtf8("LabelGamesVisibility"));
-        sizePolicy.setHeightForWidth(LabelGamesVisibility->sizePolicy().hasHeightForWidth());
-        LabelGamesVisibility->setSizePolicy(sizePolicy);
-        LabelGamesVisibility->setFont(font2);
-
-        horizontalLayout_9->addWidget(LabelGamesVisibility);
-
-
-        horizontalLayout_3->addLayout(horizontalLayout_9);
+        horizontalLayout_3->addWidget(LabellvlValue);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_2);
 
 
-        verticalLayout_3->addLayout(horizontalLayout_3);
+        verticalLayout_5->addLayout(horizontalLayout_3);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        LabelTimeCreated = new QLabel(FrameMaximumInfo);
+        LabelTimeCreated->setObjectName(QString::fromUtf8("LabelTimeCreated"));
+        sizePolicy.setHeightForWidth(LabelTimeCreated->sizePolicy().hasHeightForWidth());
+        LabelTimeCreated->setSizePolicy(sizePolicy);
+        LabelTimeCreated->setFont(font1);
+
+        horizontalLayout_4->addWidget(LabelTimeCreated);
+
+        LabelTimeCreatedValue = new QLabel(FrameMaximumInfo);
+        LabelTimeCreatedValue->setObjectName(QString::fromUtf8("LabelTimeCreatedValue"));
+        LabelTimeCreatedValue->setFont(font2);
+        LabelTimeCreatedValue->setText(QString::fromUtf8("0"));
+
+        horizontalLayout_4->addWidget(LabelTimeCreatedValue);
+
+        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_8);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_4);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        LabelRealName = new QLabel(FrameMaximumInfo);
+        LabelRealName->setObjectName(QString::fromUtf8("LabelRealName"));
+        sizePolicy.setHeightForWidth(LabelRealName->sizePolicy().hasHeightForWidth());
+        LabelRealName->setSizePolicy(sizePolicy);
+        LabelRealName->setFont(font1);
+
+        horizontalLayout_9->addWidget(LabelRealName);
+
+        LabelRealNameValue = new QLabel(FrameMaximumInfo);
+        LabelRealNameValue->setObjectName(QString::fromUtf8("LabelRealNameValue"));
+        LabelRealNameValue->setFont(font2);
+        LabelRealNameValue->setText(QString::fromUtf8("none"));
+
+        horizontalLayout_9->addWidget(LabelRealNameValue);
+
+        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_9->addItem(horizontalSpacer_9);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_9);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        LabelLocCountryCode = new QLabel(FrameMaximumInfo);
+        LabelLocCountryCode->setObjectName(QString::fromUtf8("LabelLocCountryCode"));
+        sizePolicy.setHeightForWidth(LabelLocCountryCode->sizePolicy().hasHeightForWidth());
+        LabelLocCountryCode->setSizePolicy(sizePolicy);
+        LabelLocCountryCode->setFont(font1);
+
+        horizontalLayout_11->addWidget(LabelLocCountryCode);
+
+        LabelLocCountryCodeValue = new QLabel(FrameMaximumInfo);
+        LabelLocCountryCodeValue->setObjectName(QString::fromUtf8("LabelLocCountryCodeValue"));
+        LabelLocCountryCodeValue->setFont(font2);
+        LabelLocCountryCodeValue->setText(QString::fromUtf8("EN"));
+
+        horizontalLayout_11->addWidget(LabelLocCountryCodeValue);
+
+        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_11->addItem(horizontalSpacer_10);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_11);
+
+
+        horizontalLayout_12->addLayout(verticalLayout_5);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_12->addItem(horizontalSpacer_5);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        verticalLayout_7 = new QVBoxLayout();
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        LabelProfileStatus = new QLabel(FrameMaximumInfo);
+        LabelProfileStatus->setObjectName(QString::fromUtf8("LabelProfileStatus"));
+        LabelProfileStatus->setText(QString::fromUtf8("SP"));
+
+        verticalLayout_7->addWidget(LabelProfileStatus);
+
+        LabelFriendsStatus = new QLabel(FrameMaximumInfo);
+        LabelFriendsStatus->setObjectName(QString::fromUtf8("LabelFriendsStatus"));
+        LabelFriendsStatus->setText(QString::fromUtf8("SF"));
+
+        verticalLayout_7->addWidget(LabelFriendsStatus);
+
+        LabelGamesStatus = new QLabel(FrameMaximumInfo);
+        LabelGamesStatus->setObjectName(QString::fromUtf8("LabelGamesStatus"));
+        LabelGamesStatus->setText(QString::fromUtf8("SG"));
+
+        verticalLayout_7->addWidget(LabelGamesStatus);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_7);
+
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        LabelProfileVisibility = new QLabel(FrameMaximumInfo);
+        LabelProfileVisibility->setObjectName(QString::fromUtf8("LabelProfileVisibility"));
+        sizePolicy.setHeightForWidth(LabelProfileVisibility->sizePolicy().hasHeightForWidth());
+        LabelProfileVisibility->setSizePolicy(sizePolicy);
+        QFont font3;
+        font3.setPointSize(10);
+        LabelProfileVisibility->setFont(font3);
+
+        verticalLayout_8->addWidget(LabelProfileVisibility);
+
+        LabelFriendsVisibility = new QLabel(FrameMaximumInfo);
+        LabelFriendsVisibility->setObjectName(QString::fromUtf8("LabelFriendsVisibility"));
+        sizePolicy.setHeightForWidth(LabelFriendsVisibility->sizePolicy().hasHeightForWidth());
+        LabelFriendsVisibility->setSizePolicy(sizePolicy);
+        LabelFriendsVisibility->setFont(font3);
+
+        verticalLayout_8->addWidget(LabelFriendsVisibility);
+
+        LabelGamesVisibility = new QLabel(FrameMaximumInfo);
+        LabelGamesVisibility->setObjectName(QString::fromUtf8("LabelGamesVisibility"));
+        sizePolicy.setHeightForWidth(LabelGamesVisibility->sizePolicy().hasHeightForWidth());
+        LabelGamesVisibility->setSizePolicy(sizePolicy);
+        LabelGamesVisibility->setFont(font3);
+
+        verticalLayout_8->addWidget(LabelGamesVisibility);
+
+
+        horizontalLayout_2->addLayout(verticalLayout_8);
+
+
+        horizontalLayout_12->addLayout(horizontalLayout_2);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_12);
 
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setSpacing(1);
@@ -390,40 +375,40 @@ public:
         LabelBans->setObjectName(QString::fromUtf8("LabelBans"));
         sizePolicy.setHeightForWidth(LabelBans->sizePolicy().hasHeightForWidth());
         LabelBans->setSizePolicy(sizePolicy);
-        LabelBans->setFont(font2);
+        LabelBans->setFont(font3);
         LabelBans->setText(QString::fromUtf8("VAC Bans: "));
 
         horizontalLayout_10->addWidget(LabelBans);
 
         LabelBansNone = new QLabel(FrameMaximumInfo);
         LabelBansNone->setObjectName(QString::fromUtf8("LabelBansNone"));
-        LabelBansNone->setFont(font2);
+        LabelBansNone->setFont(font3);
 
         horizontalLayout_10->addWidget(LabelBansNone);
 
         LabelBansNotNone = new QLabel(FrameMaximumInfo);
         LabelBansNotNone->setObjectName(QString::fromUtf8("LabelBansNotNone"));
-        LabelBansNotNone->setFont(font2);
+        LabelBansNotNone->setFont(font3);
         LabelBansNotNone->setText(QString::fromUtf8("0"));
 
         horizontalLayout_10->addWidget(LabelBansNotNone);
 
         LabelBansLast = new QLabel(FrameMaximumInfo);
         LabelBansLast->setObjectName(QString::fromUtf8("LabelBansLast"));
-        LabelBansLast->setFont(font2);
+        LabelBansLast->setFont(font3);
 
         horizontalLayout_10->addWidget(LabelBansLast);
 
         LabelBansDays = new QLabel(FrameMaximumInfo);
         LabelBansDays->setObjectName(QString::fromUtf8("LabelBansDays"));
-        LabelBansDays->setFont(font2);
+        LabelBansDays->setFont(font3);
         LabelBansDays->setText(QString::fromUtf8("000-00-00"));
 
         horizontalLayout_10->addWidget(LabelBansDays);
 
         LabelBansDaysAgo = new QLabel(FrameMaximumInfo);
         LabelBansDaysAgo->setObjectName(QString::fromUtf8("LabelBansDaysAgo"));
-        LabelBansDaysAgo->setFont(font2);
+        LabelBansDaysAgo->setFont(font3);
 
         horizontalLayout_10->addWidget(LabelBansDaysAgo);
 
@@ -438,7 +423,7 @@ public:
         verticalLayout->addWidget(FrameMaximumInfo);
 
 
-        verticalLayout_4->addWidget(FrameNormalInfo);
+        verticalLayout_6->addWidget(FrameNormalInfo);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
@@ -452,11 +437,11 @@ public:
 
         LabelNameMinimize = new QLabel(FormProfile);
         LabelNameMinimize->setObjectName(QString::fromUtf8("LabelNameMinimize"));
-        QFont font3;
-        font3.setPointSize(12);
-        font3.setBold(false);
-        font3.setWeight(50);
-        LabelNameMinimize->setFont(font3);
+        QFont font4;
+        font4.setPointSize(12);
+        font4.setBold(false);
+        font4.setWeight(50);
+        LabelNameMinimize->setFont(font4);
         LabelNameMinimize->setText(QString::fromUtf8("Name"));
 
         horizontalLayout->addWidget(LabelNameMinimize);
@@ -497,11 +482,11 @@ public:
         horizontalLayout->addWidget(ButtonSetProfile);
 
 
-        verticalLayout_4->addLayout(horizontalLayout);
+        verticalLayout_6->addLayout(horizontalLayout);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_4->addItem(verticalSpacer);
+        verticalLayout_6->addItem(verticalSpacer);
 
 
         retranslateUi(FormProfile);
@@ -514,8 +499,8 @@ public:
         FormProfile->setWindowTitle(QCoreApplication::translate("FormProfile", "Form", nullptr));
         Labellvl->setText(QCoreApplication::translate("FormProfile", "lvl:", nullptr));
         LabelTimeCreated->setText(QCoreApplication::translate("FormProfile", "TimeCreated:", nullptr));
-        LabelLocCountryCode->setText(QCoreApplication::translate("FormProfile", "CountryCode:", nullptr));
         LabelRealName->setText(QCoreApplication::translate("FormProfile", "RealName:", nullptr));
+        LabelLocCountryCode->setText(QCoreApplication::translate("FormProfile", "CountryCode:", nullptr));
         LabelProfileVisibility->setText(QCoreApplication::translate("FormProfile", "Profile", nullptr));
         LabelFriendsVisibility->setText(QCoreApplication::translate("FormProfile", "Friends", nullptr));
         LabelGamesVisibility->setText(QCoreApplication::translate("FormProfile", "Games", nullptr));

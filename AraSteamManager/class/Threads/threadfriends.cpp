@@ -16,7 +16,7 @@ int ThreadFriends::fill() {
         for (const auto &friendP: _friends) {
             if (profile._steamID == friendP._steamID) {
                 QTableWidgetItem *itemName = new QTableWidgetItem(profile._personaName);
-                QTableWidgetItem *itemAdded = new QTableWidgetItem(friendP._friend_since.toString("yyyy.MM.dd hh:mm:ss"));
+                QTableWidgetItem *itemAdded = new QTableWidgetItem(friendP._friend_since.toString("yyyy.MM.dd hh:mm"));
                 QTableWidgetItem *itemState = getState(profile._gameExtraInfo,profile._personaState);
                 QTableWidgetItem *itemPrivacy = getPrivacy(profile._communityVisibilityState);
                 itemName->setFont(font);

@@ -62,7 +62,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     _tableAchievements->setWidgetHorizontalHeader(0, c_tableAchievementColumnReachedMy, avatarAchievementsCompare);
     #define ConnectTablesEnd }
     #define SetTableWidgetCompareFriendsSettings {
-    ui->TableWidgetFriends->setAlternatingRowColors(true);
+    //ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     //ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);

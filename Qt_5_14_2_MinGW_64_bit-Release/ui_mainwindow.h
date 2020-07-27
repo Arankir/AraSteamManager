@@ -260,7 +260,7 @@ public:
         ScrollAreaGames->setWidgetResizable(true);
         widget = new QWidget();
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 459, 229));
+        widget->setGeometry(QRect(0, 0, 98, 28));
         ScrollAreaGames->setWidget(widget);
 
         gridLayout_2->addWidget(ScrollAreaGames, 0, 0, 1, 1);
@@ -340,7 +340,7 @@ public:
         ScrollAreaSettings->setWidgetResizable(true);
         scrollAreaWidgetContents_5 = new QWidget();
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 459, 229));
+        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 98, 28));
         ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
 
         gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);
@@ -380,7 +380,7 @@ public:
         ButtonSettings->setText(QString());
         LineEditIdProfile->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
         ButtonFindProfile->setText(QCoreApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
-        FormProgressBar->setFormat(QCoreApplication::translate("MainWindow", "%v/%m", nullptr));
+        FormProgressBar->setFormat(QString());
     } // retranslateUi
 
 };

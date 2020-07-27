@@ -24,7 +24,7 @@ void FormGames::initComponents() {
     updateSettings();
     retranslate();
     ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->TableWidgetGames->setAlternatingRowColors(true);
+    //ui->TableWidgetGames->setAlternatingRowColors(true);
 
     ui->FrameGroup->stackUnder(ui->TableWidgetGames);
 

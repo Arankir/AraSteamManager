@@ -76,7 +76,7 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
     setColumnWidth(c_tableAchievementColumnWorld, 65);
     setColumnWidth(c_tableAchievementColumnReachedMy, 80);
     ui->TableWidgetHorizontalHeader->setRowHeight(0, 33);
-    ui->TableWidgetContent->setAlternatingRowColors(true);
+    //ui->TableWidgetContent->setAlternatingRowColors(true);
 
     _achievements._appid = QString::number(_game._appID);
     _achievements._id = _id;

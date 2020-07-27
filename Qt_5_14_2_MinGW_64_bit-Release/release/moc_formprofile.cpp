@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormProfile_t {
-    QByteArrayData data[34];
-    char stringdata0[440];
+    QByteArrayData data[36];
+    char stringdata0[456];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -65,7 +65,9 @@ QT_MOC_LITERAL(29, 324, 24), // "buttonSetProfile_Clicked"
 QT_MOC_LITERAL(30, 349, 19), // "buttonGames_Clicked"
 QT_MOC_LITERAL(31, 369, 21), // "buttonFriends_Clicked"
 QT_MOC_LITERAL(32, 391, 24), // "buttonStatistics_Clicked"
-QT_MOC_LITERAL(33, 416, 23) // "buttonFavorites_Clicked"
+QT_MOC_LITERAL(33, 416, 23), // "buttonFavorites_Clicked"
+QT_MOC_LITERAL(34, 440, 6), // "setLvl"
+QT_MOC_LITERAL(35, 447, 8) // "aSteamId"
 
     },
     "FormProfile\0s_goToGames\0\0SProfile\0"
@@ -80,7 +82,7 @@ QT_MOC_LITERAL(33, 416, 23) // "buttonFavorites_Clicked"
     "event\0buttonSetProfile_Clicked\0"
     "buttonGames_Clicked\0buttonFriends_Clicked\0"
     "buttonStatistics_Clicked\0"
-    "buttonFavorites_Clicked"
+    "buttonFavorites_Clicked\0setLvl\0aSteamId"
 };
 #undef QT_MOC_LITERAL
 
@@ -90,7 +92,7 @@ static const uint qt_meta_data_FormProfile[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      22,   14, // methods
+      23,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -98,30 +100,31 @@ static const uint qt_meta_data_FormProfile[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,  124,    2, 0x06 /* Public */,
-       7,    2,  129,    2, 0x06 /* Public */,
-      10,    3,  134,    2, 0x06 /* Public */,
-      12,    0,  141,    2, 0x06 /* Public */,
-      13,    0,  142,    2, 0x06 /* Public */,
+       1,    2,  129,    2, 0x06 /* Public */,
+       7,    2,  134,    2, 0x06 /* Public */,
+      10,    3,  139,    2, 0x06 /* Public */,
+      12,    0,  146,    2, 0x06 /* Public */,
+      13,    0,  147,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      14,    1,  143,    2, 0x0a /* Public */,
-      16,    1,  146,    2, 0x0a /* Public */,
-      17,    0,  149,    2, 0x0a /* Public */,
-      18,    0,  150,    2, 0x0a /* Public */,
-      19,    0,  151,    2, 0x0a /* Public */,
-      20,    0,  152,    2, 0x0a /* Public */,
-      21,    0,  153,    2, 0x0a /* Public */,
-      22,    0,  154,    2, 0x0a /* Public */,
-      23,    0,  155,    2, 0x0a /* Public */,
-      24,    0,  156,    2, 0x0a /* Public */,
-      25,    0,  157,    2, 0x0a /* Public */,
-      26,    1,  158,    2, 0x08 /* Private */,
-      29,    0,  161,    2, 0x08 /* Private */,
-      30,    0,  162,    2, 0x08 /* Private */,
-      31,    0,  163,    2, 0x08 /* Private */,
-      32,    0,  164,    2, 0x08 /* Private */,
-      33,    0,  165,    2, 0x08 /* Private */,
+      14,    1,  148,    2, 0x0a /* Public */,
+      16,    1,  151,    2, 0x0a /* Public */,
+      17,    0,  154,    2, 0x0a /* Public */,
+      18,    0,  155,    2, 0x0a /* Public */,
+      19,    0,  156,    2, 0x0a /* Public */,
+      20,    0,  157,    2, 0x0a /* Public */,
+      21,    0,  158,    2, 0x0a /* Public */,
+      22,    0,  159,    2, 0x0a /* Public */,
+      23,    0,  160,    2, 0x0a /* Public */,
+      24,    0,  161,    2, 0x0a /* Public */,
+      25,    0,  162,    2, 0x0a /* Public */,
+      26,    1,  163,    2, 0x08 /* Private */,
+      29,    0,  166,    2, 0x08 /* Private */,
+      30,    0,  167,    2, 0x08 /* Private */,
+      31,    0,  168,    2, 0x08 /* Private */,
+      32,    0,  169,    2, 0x08 /* Private */,
+      33,    0,  170,    2, 0x08 /* Private */,
+      34,    1,  171,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5,    4,    6,
@@ -148,6 +151,7 @@ static const uint qt_meta_data_FormProfile[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   35,
 
        0        // eod
 };
@@ -183,6 +187,7 @@ void FormProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 19: _t->buttonFriends_Clicked(); break;
         case 20: _t->buttonStatistics_Clicked(); break;
         case 21: _t->buttonFavorites_Clicked(); break;
+        case 22: _t->setLvl((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -254,13 +259,13 @@ int FormProfile::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 22)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 22;
+        _id -= 23;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 22)
+        if (_id < 23)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 22;
+        _id -= 23;
     }
     return _id;
 }

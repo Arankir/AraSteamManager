@@ -2,7 +2,7 @@
 #include "ui_formprofile.h"
 
 #define Constants {
-QString c_green = "#699b2c";
+QString c_green = "#57FF7C";
 QString c_yellow = "#6c6e0e";
 QString c_red = "#b33a3a";
 QString c_blue = "blue";
