@@ -55,10 +55,6 @@ void MainWindow::initComponents() {
     shadowEffect->setOffset(0);
     shadowEffect->setBlurRadius(50);
     ui->FormProgressBar->setGraphicsEffect(shadowEffect);
-//    ui->FormProgressBar->setVisible(true);
-//    ui->FormProgressBar->setValue(20);
-//    ui->FormProgressBar->setMaximum(100);
-    ui->FormProgressBar->
 #define Connects {
     connect(ui->ButtonFindProfile,   &QPushButton::clicked, this, &MainWindow::buttonFindProfile_Clicked);
     connect(ui->ButtonExit,          &QPushButton::clicked, this, &MainWindow::buttonExit_Clicked);
@@ -77,23 +73,9 @@ void MainWindow::initComponents() {
 QString MainWindow::getTheme() {
     QString hoverGradient;
     QString backgroundGradient;
-    QString backgroundGradientTitle;
-    QString buttonHoverGradient;
-    QString tableWidgetRowGradient;
-    QString tableWidgetAlterRowGradient;
     QString qss;
     switch(_setting.getTheme()) {
     case 1:{
-#define gradients {
-//        QpushButton{
-//                  qproperty-icon:url(:/images/start.png);
-//        }
-
-//        QPushButton:hover
-//        {
-//                  qproperty-icon:url(:/images/start_hov.png);
-//        }
-
         hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
                     "stop: 0 #185077, "
                     "stop: 0.22 #387097, "
@@ -101,37 +83,11 @@ QString MainWindow::getTheme() {
                     "stop: 1.0 #185077); ";
         backgroundGradient = "qradialgradient("
                     "cx:0.5, cy:0.5, "
-                    "radius: 0.8, "
+                    "radius: 0.9, "
                     "fx:0.4, fy:0.5, "
                     "stop:0 #12457c, "
                     //"stop:0.5 #12324b, "
-                    "stop:1 #19253d); "
-        /*"qradialgradient("
-                    "cx:0.5, cy:0.5, "
-                    "radius: 0.4, "
-                    "fx:0.4, fy:0.5, "
-                    "stop:0 #14384f, "
-                    "stop:0.5 #12324b, "
-                    "stop:1 #13273a); "*/
-/*        "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
-                    "stop: 0 #DDDDFF, "
-//                    "stop: 0.12 #12324b, "
-//                    "stop: 0.5 #14384f, "
-//                    "stop: 0.83 #12324b, "
-                    "stop: 1.0 #0000FF); "*/;
-        backgroundGradientTitle = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                    "stop: 0 #10131b, "
-                    "stop: 0.5 #20232b, "
-                    "stop: 1.0 #10131b); ";
-        tableWidgetRowGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                    "stop: 0 #102b45, "
-                    "stop: 0.8 #17314c, "
-                    "stop: 1.0 #193048); ";
-        tableWidgetAlterRowGradient = "qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                    "stop: 0 #203b55, "
-                    "stop: 0.8 #27415c, "
-                    "stop: 1.0 #294058); ";
-#define gradientsend }
+                    "stop:1 #19253d); ";
         qss =
 #define button {
                 "QPushButton[text] { "
@@ -296,25 +252,63 @@ QString MainWindow::getTheme() {
 #define tabbarend }
 #define combobox {
                 "QComboBox { "
-                    "border: 1px solid #232323; "
-                    "border-radius: 3px; "
-                    "background: " + hoverGradient +
-                    "padding: 1px 23px 1px 3px; "
-                    "min-width: 6em; "
-                    "color: #dddddd; "
-                "} "
-                "QComboBox:item { "
-                    "background-color: #387097; "
-                "} "
-                "QComboBox::hover { "
-                    "background-color: " + hoverGradient +
-                "} "
-                "QComboBox:item:selected { "
                     "border: 1px solid #262626; "
-                    "color: " + hoverGradient +
+                    "border-radius: 4px; "
+                    "padding: 1px 18px 1px 3px; "
+                    "color: #dddddd; "
+                    "background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
+                        "stop: 0 #1c2686, "
+                        "stop: 1.0 #46a8b7); "
                 "} "
-                "QComboBox:item:checked { "
-                    //"font-weight: bold; "
+                "QComboBox:hover { "
+                    "border: 1px solid #87b6ff; "
+                "} "
+                "QComboBox:on { "/* shift the text when the popup opens */
+                    "padding-top: 3px; "
+                    "padding-left: 4px; "
+                "} "
+                "QComboBox::drop-down { "
+                    "subcontrol-origin: padding; "
+                    "subcontrol-position: top right; "
+                    "width: 15px; "
+
+                    "border-left: 1px solid #262626; "
+                    "border-top-right-radius: 4px; "
+                    "border-bottom-right-radius: 4px; "
+                "} "
+                "QComboBox::down-arrow { "
+                    "image: url(" + _setting.getIconDown() + "); "
+                    "width: 20px; "
+                "} "
+                "QComboBox::item { "
+                    "border: 1px solid #262626; "
+                    "border-radius: 4px; "
+                    "background-color: #13243e; "
+                    "height: 20px; "
+                    "padding-left: -20px; "
+                "} "
+                "QComboBox::item:selected { "
+                    "border: 1px solid #87b6ff; "
+                    "background-color: qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, "
+                        "stop: 0 #2692ff, "
+                        "stop: 1.0 #153257); "
+                "} "
+                "QComboBox::item:checked { "
+                    "font: bold; "
+                    "color: #87b6ff; "
+                    //"background-color: green; "
+                "} "
+                "QComboBox QAbstractItemView { "
+                    "border: 0px; "
+                    "background-color: #262626; "
+                    "border-bottom-left-radius: 4px; "
+                    "border-bottom-right-radius: 4px; "
+                "} "
+                "QComboBox::indicator { "
+                    "background-color: transparent; "
+                    "selection-background-color: transparent; "
+                    "color: transparent; "
+                    "selection-color: transparent; "
                 "} "
 #define comboboxend }
 #define lineedit {
@@ -355,6 +349,7 @@ QString MainWindow::getTheme() {
                     "background-color: rgba(0, 0, 0, 0); "
                     "selection-background-color: rgba(0, 0, 0, 0); "
                     "border-radius: 2px; "
+                    "border: 1px solid #777777; "
                 "} "
                 "QTableView#TableWidgetContent::indicator { "
                     "width: 40px; "
@@ -385,21 +380,20 @@ QString MainWindow::getTheme() {
                     "color: #dddddd; "
                 "} "
                 "QTableWidget::item, QTableWidget::item:inactive { "
-                    "border-bottom: 1px solid #87b6ff; "
-                    "border-top: 1px solid #87b6ff; "
+//                    "border-bottom: 1px solid #87b6ff; "
+//                    "border-top: 1px solid #87b6ff; "
                     "background-color: rgba(23, 26, 33, 0.5); "
-                    "border-left: 0px; "
-                    "border-right: 0px; "
-                    "margin-bottom: 10px; "
+                    "margin-top: 10px; "
                     "padding: 4px; "
                 "} "
                 "QTableWidget::item:alternate { "
                     "background-color: #1d2027; "
                 "} "
                 "QTableWidget::item:hover:!selected { "
-                    "background-color: qlineargradient(x1: -2, y1: -2, x2: 1, y2: 1, "
-                        "stop: 0 #2692ff, "
-                        "stop: 1.0 #171a21); "
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
+                        "stop: 0 rgba(23, 26, 33, 0.5), "
+                        "stop: 0.5 #4776bf, "
+                        "stop: 1.0 rgba(23, 26, 33, 0.5)); "
                 "} "
                 "QTableWidget::item:alternate:hover:!selected { "
                     "background-color: qlineargradient(x1: -2, y1: -2, x2: 1, y2: 1, "
@@ -413,7 +407,6 @@ QString MainWindow::getTheme() {
                     "border: 1px solid #87b6ff; "
                     "border-right: 0px solid #87b6ff; "
                     "border-left: 0px solid #87b6ff; "
-                    //"font: bold; "
                 "} "
 #define headerview {
                 "QHeaderView::section, QTableView QTableCornerButton::section { "
@@ -462,7 +455,10 @@ QString MainWindow::getTheme() {
                     "border: 0px solid #000000; "
                 "} "
                 "QFrame[accessibleName=TitleWindow] { "
-                    "background-color: " + backgroundGradientTitle +
+                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+                        "stop: 0 #10131b, "
+                        "stop: 0.5 #20232b, "
+                        "stop: 1.0 #10131b); "
                     "border: 1px solid #000000; "
                 "} "
                 "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget { "
@@ -477,6 +473,11 @@ QString MainWindow::getTheme() {
                 "} "
                 "QGroupBox::title { "
                     "color: white; "
+                "} "
+                "QGroupBox#GroupBoxFilter::title { "
+                    "image: url(" + _setting.getIconFilter() + "); "
+                    "image-position: left; "
+                    //"margin-top: 12px; "
                 "} "
 #define listwidget {
                 "QListWidget { "

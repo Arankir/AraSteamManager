@@ -380,7 +380,6 @@ public:
         ButtonSettings->setText(QString());
         LineEditIdProfile->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
         ButtonFindProfile->setText(QCoreApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
-        FormProgressBar->setFormat(QString());
     } // retranslateUi
 
 };

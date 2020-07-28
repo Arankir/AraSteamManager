@@ -31,7 +31,7 @@ public:
     QLabel *LabelAvatar;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_7;
-    QLabel *LabelNick;
+    QLabel *LabelName;
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_6;
     QLabel *LabelPersonaState;
@@ -120,15 +120,15 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        LabelNick = new QLabel(FrameNormalInfo);
-        LabelNick->setObjectName(QString::fromUtf8("LabelNick"));
+        LabelName = new QLabel(FrameNormalInfo);
+        LabelName->setObjectName(QString::fromUtf8("LabelNick"));
         QFont font;
         font.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
         font.setPointSize(16);
-        LabelNick->setFont(font);
-        LabelNick->setText(QString::fromUtf8("NickName"));
+        LabelName->setFont(font);
+        LabelName->setText(QString::fromUtf8("NickName"));
 
-        horizontalLayout_7->addWidget(LabelNick);
+        horizontalLayout_7->addWidget(LabelName);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 

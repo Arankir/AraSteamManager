@@ -182,8 +182,14 @@ public:
         __qtablewidgetitem7->setText(QString::fromUtf8("\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265"));
         TableWidgetFriends->setHorizontalHeaderItem(7, __qtablewidgetitem7);
         TableWidgetFriends->setObjectName(QString::fromUtf8("TableWidgetFriends"));
+        TableWidgetFriends->setSelectionBehavior(QAbstractItemView::SelectRows);
+        TableWidgetFriends->setShowGrid(false);
         TableWidgetFriends->setSortingEnabled(true);
         TableWidgetFriends->setColumnCount(8);
+        TableWidgetFriends->horizontalHeader()->setMinimumSectionSize(33);
+        TableWidgetFriends->horizontalHeader()->setStretchLastSection(true);
+        TableWidgetFriends->verticalHeader()->setVisible(false);
+        TableWidgetFriends->verticalHeader()->setMinimumSectionSize(44);
 
         verticalLayout->addWidget(TableWidgetFriends);
 

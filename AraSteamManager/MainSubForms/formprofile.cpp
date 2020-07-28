@@ -4,7 +4,7 @@
 #define Constants {
 QString c_green = "#57FF7C";
 QString c_yellow = "#6c6e0e";
-QString c_red = "#b33a3a";
+QString c_red = "#E44B4B"; //b33a3a
 QString c_blue = "blue";
 #define ConstantsEnd }
 
@@ -14,22 +14,20 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     ui->LabelGamesVisibility->setTextFormat(Qt::RichText);
     ui->LabelFriendsVisibility->setTextFormat(Qt::RichText);
     ui->LabelProfileUrl->setTextFormat(Qt::RichText);
-    ui->LabelNick->setStyleSheet("color: #42a9c6;");
-    ui->LabelNameMinimize->setStyleSheet("color: #42a9c6;");
     ui->ButtonGames->setBaseSize(QSize(23, 23));
     ui->LabelPersonaState->setWordWrap(true);
 
-    //ui->Labellvl->setStyleSheet("color: #699b2c;");
+    ui->LabelName->setGraphicsEffect(createLightning());
+    ui->LabelNameMinimize->setGraphicsEffect(createLightning());
+
     ui->LabellvlValue->setStyleSheet("color: #42a9c6; ");
-
-    //ui->LabelTimeCreated->setStyleSheet("color: #6e93d6;");
     ui->LabelTimeCreatedValue->setStyleSheet("color: #42a9c6;");
-
-    //ui->LabelRealName->setStyleSheet("color: #63a583;");
     ui->LabelRealNameValue->setStyleSheet("color: #42a9c6;");
-
-    //ui->LabelLocCountryCode->setStyleSheet("color: #b33a3a;");
     ui->LabelLocCountryCodeValue->setStyleSheet("color: #42a9c6;");
+
+    ui->LabelProfileVisibility->setGraphicsEffect(createLightning());
+    ui->LabelGamesVisibility->setGraphicsEffect(createLightning());
+    ui->LabelFriendsVisibility->setGraphicsEffect(createLightning());
 
 #define Connects {
     connect(ui->ButtonSetProfile, &QPushButton::clicked, this, &FormProfile::buttonSetProfile_Clicked);
@@ -53,77 +51,137 @@ void FormProfile::changeEvent(QEvent *aEvent) {
 }
 
 void FormProfile::profileToUi(SProfile aProfile) {
-    _profile = aProfile;
-    SBans bans(aProfile._steamID,false);
-    setLvl(_profile._steamID);
-    _games.set(aProfile._steamID,true,true,false);
-    _friends.set(aProfile._steamID,false);
-    if(!aProfile._gameExtraInfo.isEmpty()) {
-        ui->LabelPersonaState->setText(tr("В игре %1").arg(aProfile._gameExtraInfo));
-        ui->LabelPersonaState->setStyleSheet("color: rgb(137,183,83);");
-    } else {
-        switch (aProfile._personaState) {
-            case 0:
-                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(aProfile._lastLogoff.toString("yyyy.MM.dd hh:mm:ss")));
-                ui->LabelPersonaState->setStyleSheet("color: rgb(125,126,128);");
-                break;
-            case 1:
-                ui->LabelPersonaState->setText(tr("В сети"));
-                ui->LabelPersonaState->setStyleSheet("color: rgb(87,203,222);");
-                break;
-            case 2:
-                ui->LabelPersonaState->setText(tr("Не беспокоить"));
-                ui->LabelPersonaState->setStyleSheet("color: rgb(129,85,96);");
-                break;
-            case 3:
-                ui->LabelPersonaState->setText(tr("Нет на месте"));
-                ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
-                break;
-            case 4:
-                ui->LabelPersonaState->setText(tr("Спит"));
-                ui->LabelPersonaState->setStyleSheet("color: rgb(70,120,142);");
-                break;
-            case 5:
-                ui->LabelPersonaState->setText(tr("Ожидает обмена"));
-                ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
-                break;
-            case 6:
-                ui->LabelPersonaState->setText(tr("Хочет поиграть"));
-                ui->LabelPersonaState->setStyleSheet("color: rgb(0,0,0);");
-                break;
-        }
-    }
-    QString iconsColor = _setting.getIconsColor();
+    _profile = std::move(aProfile);
+
+    ui->LabelAvatar->setPixmap(RequestData(_profile._avatarMedium, false).getPixmap());
+    ui->LabelAvatarMinimize->setPixmap(RequestData(_profile._avatar, false).getPixmap());
+
+    ui->LabelRealNameValue->setText(_profile._realName);
+    ui->LabelTimeCreatedValue->setText(_profile._timeCreated.toString("yyyy.MM.dd"));
+    ui->LabelLocCountryCodeValue->setText(_profile._locCountryCode);
     ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
-                                "<a href=\"" + aProfile._profileUrl + "\">"
-                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + aProfile._profileUrl + "</span></a>");
-    ui->LabelRealNameValue->setText(aProfile._realName);
-    ui->LabelTimeCreatedValue->setText(aProfile._timeCreated.toString("yyyy.MM.dd"));
-    ui->LabelLocCountryCodeValue->setText(aProfile._locCountryCode);
+                                "<a href=\"" + _profile._profileUrl + "\">"
+                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
+
+    setName();
+    setStatus();
+
+    setGames(_profile._steamID);
+    setFriends(_profile._steamID);
+    setLvl(_profile._steamID);
+    setBans(_profile._steamID);
+}
+
+QGraphicsDropShadowEffect *FormProfile::createLightning() {
+    QGraphicsDropShadowEffect *lightning = new QGraphicsDropShadowEffect;
+    //shadowEffect3->setColor(QColor(255, 255, 0, 255 * 0.7));
+    lightning->setOffset(0);
+    lightning->setBlurRadius(10);
+    return lightning;
+}
+
+#define setData {
+void FormProfile::setProfile(SProfile aProfile) {
+    _profile = aProfile;
+}
+
+void FormProfile::setName() {
+    ui->LabelName->setText(_profile._personaName);
+    ui->LabelNameMinimize->setText(_profile._personaName);
     QPixmap profileState;
-    QPixmap gamesState;
-    QPixmap friendsState;
-    switch (aProfile._communityVisibilityState) {
+    QGraphicsDropShadowEffect *profileLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelProfileVisibility->graphicsEffect());
+    switch (_profile._communityVisibilityState) {
         case 1:
             ui->LabelProfileVisibility->setText(tr("Скрытый"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_red);
             profileState.load(_setting.getIconStateRed());
+            if (profileLight) {
+                profileLight->setColor(QColor (255, 48, 48, 255 * 1));
+            }
             break;
         case 3:
             ui->LabelProfileVisibility->setText(tr("Публичный"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_green);
             profileState.load(_setting.getIconStateGreen());
+            if (profileLight) {
+                profileLight->setColor(QColor (87, 255, 124, 255 * 0.7));
+            }
             break;
         case 8:
             ui->LabelProfileVisibility->setText(tr("Для друзей"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_yellow);
             profileState.load(_setting.getIconStateYellow());
+            if (profileLight) {
+                profileLight->setColor(QColor (108, 110, 14, 255 * 0.7));
+            }
             break;
         default:
             ui->LabelProfileVisibility->setText(tr("Неизвестно"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_blue);
             profileState.load(_setting.getIconStateBlue());
+            if (profileLight) {
+                profileLight->setColor(QColor (0, 0, 255, 255 * 0.7));
+            }
         }
+    ui->LabelProfileStatus->setPixmap(profileState.scaled(14, 14));
+}
+
+void FormProfile::setStatus() {
+    if(!_profile._gameExtraInfo.isEmpty()) {
+        ui->LabelPersonaState->setText(tr("В игре %1").arg(_profile._gameExtraInfo));
+        setColorStatus(137, 183, 83, 255 * 0.7);
+    } else {
+        switch (_profile._personaState) {
+            case 0:
+                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(_profile._lastLogoff.toString("yyyy.MM.dd hh:mm:ss")));
+                setColorStatus(125, 126, 128, 255 * 0.7);
+                break;
+            case 1:
+                ui->LabelPersonaState->setText(tr("В сети"));
+                setColorStatus(87, 203, 222, 255 * 0.7);
+                break;
+            case 2:
+                ui->LabelPersonaState->setText(tr("Не беспокоить"));
+                setColorStatus(129, 85, 96, 255 * 0.7);
+                break;
+            case 3:
+                ui->LabelPersonaState->setText(tr("Нет на месте"));
+                setColorStatus(70, 120, 142, 255 * 0.7);
+                break;
+            case 4:
+                ui->LabelPersonaState->setText(tr("Спит"));
+                setColorStatus(70, 120, 142, 255 * 0.7);
+                break;
+            case 5:
+                ui->LabelPersonaState->setText(tr("Ожидает обмена"));
+                setColorStatus(0, 0, 0, 255 * 0.7);
+                break;
+            case 6:
+                ui->LabelPersonaState->setText(tr("Хочет поиграть"));
+                setColorStatus(0, 0, 0, 255 * 0.7);
+                break;
+        }
+    }
+}
+
+void FormProfile::setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha) {
+    QGraphicsDropShadowEffect *nameLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelName->graphicsEffect());
+    QGraphicsDropShadowEffect *nameSmallLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelNameMinimize->graphicsEffect());
+    ui->LabelPersonaState->setStyleSheet("color: rgb(" + QString::number(aRed) + ", " + QString::number(aGreen) + ", " + QString::number(aBlue) + ");");
+    ui->LabelName->setStyleSheet("color: rgb(" + QString::number(aRed) + ", " + QString::number(aGreen) + ", " + QString::number(aBlue) + ");");
+    ui->LabelNameMinimize->setStyleSheet("color: rgb(" + QString::number(aRed) + ", " + QString::number(aGreen) + ", " + QString::number(aBlue) + ");");
+    if (nameLight) {
+        nameLight->setColor(QColor(aRed, aGreen, aBlue, aAlpha));
+    }
+    if (nameSmallLight) {
+        nameSmallLight->setColor(QColor(aRed, aGreen, aBlue, aAlpha));
+    }
+}
+
+void FormProfile::setGames(QString aSteamId) {
+    _games.set(aSteamId,true,true,false);
+    QPixmap gamesState;
+    QGraphicsDropShadowEffect *gamesLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelGamesVisibility->graphicsEffect());
     switch (_games.getStatus()) {
     case StatusValue::success: {
         ui->ButtonGames->setEnabled(true);
@@ -132,6 +190,9 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_green);
         gamesState.load(_setting.getIconStateGreen());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
+        if (gamesLight) {
+            gamesLight->setColor(QColor (87, 255, 124, 255 * 0.7));
+        }
         break;
     }
     case StatusValue::error: {
@@ -141,6 +202,9 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_red);
         gamesState.load(_setting.getIconStateRed());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
+        if (gamesLight) {
+            gamesLight->setColor(QColor (255, 48, 48, 255 * 1));
+        }
         break;
     }
     case StatusValue::none: {
@@ -150,9 +214,19 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_blue);
         gamesState.load(_setting.getIconStateBlue());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
+        if (gamesLight) {
+            gamesLight->setColor(QColor (0, 0, 255, 255 * 0.7));
+        }
         break;
     }
     }
+    ui->LabelGamesStatus->setPixmap(gamesState.scaled(14, 14));
+}
+
+void FormProfile::setFriends(QString aSteamId) {
+    _friends.set(aSteamId,false);
+    QPixmap friendsState;
+    QGraphicsDropShadowEffect *friendsLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelFriendsVisibility->graphicsEffect());
     switch (_friends.getStatus()) {
     case StatusValue::success: {
         ui->ButtonFriends->setEnabled(true);
@@ -160,6 +234,9 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_green);
         friendsState.load(_setting.getIconStateGreen());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
+        if (friendsLight) {
+            friendsLight->setColor(QColor (87, 255, 124, 255 * 0.7));
+        }
         break;
     }
     case StatusValue::error: {
@@ -168,6 +245,9 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_red);
         friendsState.load(_setting.getIconStateRed());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
+        if (friendsLight) {
+            friendsLight->setColor(QColor (255, 48, 48, 255 * 1));
+        }
         break;
     }
     case StatusValue::none: {
@@ -176,12 +256,17 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_blue);
         friendsState.load(_setting.getIconStateBlue());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
+        if (friendsLight) {
+            friendsLight->setColor(QColor (0, 0, 255, 255 * 0.7));
+        }
         break;
     }
     }
-    ui->LabelProfileStatus->setPixmap(profileState.scaled(14, 14));
-    ui->LabelGamesStatus->setPixmap(gamesState.scaled(14, 14));
     ui->LabelFriendsStatus->setPixmap(friendsState.scaled(14, 14));
+}
+
+void FormProfile::setBans(QString aSteamId) {
+    SBans bans(aSteamId,false);
     if(bans.getVacBanned()) {
         ui->LabelBansNotNone->setText(QString::number(bans.getNumberOfVacBans()));
         ui->LabelBansDays->setText(QString::number(bans.getDaysSinceLastBan()));
@@ -204,15 +289,6 @@ void FormProfile::profileToUi(SProfile aProfile) {
         //ui->LabelBans->setStyleSheet("color: " + c_green);
         ui->LabelBansNone->setStyleSheet("color: " + c_green);
     }
-
-    ui->LabelAvatar->setPixmap(RequestData(aProfile._avatarMedium, false).getPixmap());
-    ui->LabelAvatarMinimize->setPixmap(RequestData(aProfile._avatar, false).getPixmap());
-    ui->LabelNick->setText(aProfile._personaName);
-    ui->LabelNameMinimize->setText(aProfile._personaName);
-}
-
-void FormProfile::setProfile(SProfile aProfile) {
-    _profile = aProfile;
 }
 
 void FormProfile::setLvl(QString aSteamId) {
@@ -224,7 +300,9 @@ void FormProfile::setLvl(QString aSteamId) {
     qDebug()<<levels.GetLevel()<<levels.GetLevel() / 100;
     ui->LabellvlValue->setStyleSheet(qss);
 }
+#define setDataEnd }
 
+#define getData {
 SProfile FormProfile::getProfile() {
     return _profile;
 }
@@ -236,24 +314,14 @@ SGames FormProfile::getGames() {
 SFriends FormProfile::getFriends() {
     return _friends;
 }
+#define getDataEnd }
 
+#define updateData {
 void FormProfile::updateSettings() {
     _setting.syncronizeSettings();
     setIcons();
     updateVisibleInfo();
     updateMyProfile();
-}
-
-void FormProfile::setIcons() {
-    QString iconsColor = _setting.getIconsColor();
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
-                                "<a href=\"" + _profile._profileUrl + "\">"
-                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
-    ui->ButtonSetProfile->setIcon(QIcon(_setting.getIconSetHome()));
-    ui->ButtonFavorites->setIcon(QIcon(_setting.getIconIsNotFavorites()));
-    ui->ButtonStatistics->setIcon(QIcon(_setting.getIconStatistic()));
-    ui->ButtonFriends->setIcon(QIcon(_setting.getIconFriends()));
-    ui->ButtonGames->setIcon(QIcon(_setting.getIconGames()));
 }
 
 void FormProfile::updateVisibleInfo() {
@@ -338,6 +406,20 @@ void FormProfile::retranslate() {
     }
 }
 
+void FormProfile::setIcons() {
+    QString iconsColor = _setting.getIconsColor();
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
+                                "<a href=\"" + _profile._profileUrl + "\">"
+                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
+    ui->ButtonSetProfile->setIcon(QIcon(_setting.getIconSetHome()));
+    ui->ButtonFavorites->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+    ui->ButtonStatistics->setIcon(QIcon(_setting.getIconStatistic()));
+    ui->ButtonFriends->setIcon(QIcon(_setting.getIconFriends()));
+    ui->ButtonGames->setIcon(QIcon(_setting.getIconGames()));
+}
+#define updateDataEnd }
+
+#define uiFunctions {
 void FormProfile::buttonSetProfile_Clicked() {
     _setting.setMyProfile(_profile._steamID);
     ui->ButtonSetProfile->setEnabled(false);
@@ -367,3 +449,4 @@ void FormProfile::buttonFavorites_Clicked() {
         emit s_goToFavorites();
     }
 }
+#define uiFunctionsEnd }

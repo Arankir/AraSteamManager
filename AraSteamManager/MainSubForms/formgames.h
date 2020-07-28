@@ -16,6 +16,7 @@
 #include <QList>
 #include <QPropertyAnimation>
 #include <QMouseEvent>
+#include <QGraphicsDropShadowEffect>
 
 namespace Ui {
 class FormGames;

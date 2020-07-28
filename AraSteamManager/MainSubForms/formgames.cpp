@@ -44,15 +44,28 @@ void FormGames::initComponents() {
 //    ui->TableWidgetGames->installEventFilter(this);
     //ui->TableWidgetGames->viewport()->installEventFilter(this);
 
+
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
+    shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
+    shadowEffect->setOffset(0);
+    shadowEffect->setBlurRadius(50);
+    ui->ProgressBarSelectedGame->setGraphicsEffect(shadowEffect);
+
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
     ui->TableWidgetGames->setRowCount(_games.getCount());
     for (int i = 0; i < _games.getCount(); i++) {
-        ui->TableWidgetGames->setRowHeight(i, 33);
-        ui->TableWidgetGames->setCellWidget(i, c_tableColumnProgress, new QProgressBar);
+        ui->TableWidgetGames->setRowHeight(i, 33 + 18);
+        QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
+        shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
+        shadowEffect->setOffset(0);
+        shadowEffect->setBlurRadius(50);
+        QProgressBar *pb = new QProgressBar();
+        pb->setGraphicsEffect(shadowEffect);
+        ui->TableWidgetGames->setCellWidget(i, c_tableColumnProgress, pb);
     }
 //TODO загрузить группы
-    ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33);
+    ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33 + 8);
     ui->TableWidgetGames->setColumnWidth(c_tableColumnName, 400);
     //Загрузка номеров скрываемых игр
     QFile fileHide;
@@ -111,6 +124,7 @@ void FormGames::onTablePushed() {
     ui->TableWidgetGames->setColumnHidden(c_tableColumnAppid, true);
     ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex, true);
     ui->TableWidgetGames->resizeColumnsToContents();
+    ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33 + 8);
 
     QStringList hideList = _hide;
     _achievements = new SAchievementsPlayer[_games.getCount()];
@@ -120,6 +134,8 @@ void FormGames::onTablePushed() {
         QString path = _setting._pathImagesIconGames + game._img_icon_url + ".jpg";
         QLabel *iconGame = new QLabel;
         ui->TableWidgetGames->setCellWidget(row, c_tableColumnIcon, iconGame);
+        //ui->TableWidgetGames->resizeRowToContents(row);
+        ui->TableWidgetGames->setRowHeight(row, 32 + 18);
         if(!QFile::exists(path)) {
             iconGame->setBaseSize(QSize(32, 32));
             new RequestImage(iconGame, Settings::getUrlIconGame(QString::number(game._appID), game._img_icon_url), path, true, this);
@@ -233,16 +249,16 @@ void FormGames::showHideSlideWidget(bool aShowing) {
 }
 
 void FormGames::mouseMoveEvent(QMouseEvent *aEvent) {
-    qDebug()<< "pos"<< aEvent->x()<< aEvent->y();
-    if (aEvent->pos().x() < c_widthVisibleGroup) {
-        if (!_isGroupShow) {
-            showHideSlideWidget(true);
-        }
-    } else {
-        if ((_isGroupShow) && (aEvent->pos().x() > (c_visibleGroupPos.x() + c_widthGroup))) {
-            showHideSlideWidget(false);
-        }
-    }
+//    qDebug()<< "pos"<< aEvent->x()<< aEvent->y();
+//    if (aEvent->pos().x() < c_widthVisibleGroup) {
+//        if (!_isGroupShow) {
+//            showHideSlideWidget(true);
+//        }
+//    } else {
+//        if ((_isGroupShow) && (aEvent->pos().x() > (c_visibleGroupPos.x() + c_widthGroup))) {
+//            showHideSlideWidget(false);
+//        }
+//    }
 }
 
 void FormGames::createThread() {

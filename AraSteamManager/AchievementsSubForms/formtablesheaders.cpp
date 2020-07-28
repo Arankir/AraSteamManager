@@ -51,17 +51,16 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
     ui->TableWidgetHorizontalHeader->setEditTriggers(QAbstractItemView::NoEditTriggers);
     //ui->TableWidgetContent->setSelectionMode(QAbstractItemView::NoSelection);
 
+    setRowHeightHeaders(0, 33 + 18);
+    setRowHeightHeaders(1, 33 + 18);
+
     _horizontalHeaderHeight = 2;
     for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); i++) {
         _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
     }
 
     SProfiles profileData(_id, false, ProfileUrlType::id);
-//    QLabel *profileAvatarCompare = new QLabel;
-//    profileAvatarCompare->setAlignment(Qt::AlignCenter);
-//    new RequestImage(profileAvatarCompare,profileData.GetAvatar(),"",false,this);
-//    SetWidgetContent(0,c_tableAchievementColumnReachedMy,profileAvatarCompare);
-    setRowHeightHeaders(0, 33);
+
     setVerticalHeaderTitle(0, new  QTableWidgetItem(""));
     setVerticalHeaderTitle(1, new  QTableWidgetItem("%"));
     changeHorizontalTitle(c_tableAchievementColumnIcon, "");
@@ -70,13 +69,11 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
     changeHorizontalTitle(c_tableAchievementColumnWorld, tr("По миру"));
     changeHorizontalTitle(c_tableAchievementColumnReachedMy, profileData.getPersonaname());
     setVisibleColumn(c_tableAchievementColumnAppid, false);
-    setColumnWidth(c_tableAchievementColumnIcon, 65);
+    setColumnWidth(c_tableAchievementColumnIcon, 65 + 8);
     setColumnWidth(c_tableAchievementColumnTitle, 100);
     setColumnWidth(c_tableAchievementColumnDescription, 315);
     setColumnWidth(c_tableAchievementColumnWorld, 65);
     setColumnWidth(c_tableAchievementColumnReachedMy, 80);
-    ui->TableWidgetHorizontalHeader->setRowHeight(0, 33);
-    //ui->TableWidgetContent->setAlternatingRowColors(true);
 
     _achievements._appid = QString::number(_game._appID);
     _achievements._id = _id;
@@ -457,6 +454,7 @@ void FormTablesHeaders::addNoValueColumn() {
 
 void FormTablesHeaders::addCategoryColumn() {
     insertColumn(ui->TableWidgetContent->columnCount());
+    setColumnWidth(ui->TableWidgetContent->columnCount() -1, 48);
     for(int i = 0;i<ui->TableWidgetContent->rowCount();i++) {
         ui->TableWidgetContent->setItem(i, ui->TableWidgetContent->columnCount() - 1, createFlag(false));
     }
@@ -523,7 +521,7 @@ bool FormTablesHeaders::pullTable() {
     if (_achievements.getStatus() == StatusValue::success) {
         setRowCount(_achievements.getCount());
         for (int i = 0; i < _achievements.getCount(); i++) {
-            setRowHeight(i, 65);
+            setRowHeight(i, 66 + 18);
         }
         _fAchievements.setRow(getRowCount());
         _fCompare.setRow(getRowCount());
@@ -579,8 +577,8 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
                 iconGame->setPixmap(QPixmap(pathImage));
             }
             ui->TableWidgetContent->resizeRowToContents(row);
-            if(ui->TableWidgetContent->rowHeight(row) < 64) {
-                ui->TableWidgetContent->setRowHeight(row, 64);
+            if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {
+                ui->TableWidgetContent->setRowHeight(row, 64 + 18);
             }
             row++;
         } else {

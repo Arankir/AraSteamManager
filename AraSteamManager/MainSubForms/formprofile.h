@@ -9,6 +9,7 @@
 #include <class/steamapi/Sfriends.h>
 #include <class/settings.h>
 #include <class/Network/requestdata.h>
+#include <QGraphicsDropShadowEffect>
 
 namespace Ui {
 class FormProfile;
@@ -51,6 +52,13 @@ private slots:
     void buttonFavorites_Clicked();
 
     void setLvl(QString aSteamId);
+    void setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha);
+    void setStatus();
+    void setGames(QString aSteamId);
+    void setFriends(QString aSteamId);
+    void setBans(QString aSteamId);
+    void setName();
+    QGraphicsDropShadowEffect *createLightning();
 private:
     Ui::FormProfile *ui;
     SProfile _profile;

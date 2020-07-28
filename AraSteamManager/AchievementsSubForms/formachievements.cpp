@@ -66,7 +66,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     //ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->TableWidgetFriends->setMinimumSize(0, 180);
+    ui->TableWidgetFriends->setMinimumSize(0, 210);
     ui->TableWidgetFriends->setColumnCount(2);
     ui->TableWidgetFriends->setRowCount(c_tableFriendsRowCount);
     ui->TableWidgetFriends->setRowHidden(c_tableFriendsRowID, true);
@@ -102,7 +102,10 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, 0, myFilter);
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, 1, widgetFriendsAchievementsFilter);
     ui->TableWidgetFriends->resizeRowsToContents();
-    ui->TableWidgetFriends->setRowHeight(c_tableFriendsRowCheckBox, 40);//TODO не помещается чекбокс
+    for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+        ui->TableWidgetFriends->setRowHeight(i, ui->TableWidgetFriends->rowHeight(i) + 18);
+    }
+    ui->TableWidgetFriends->setRowHeight(c_tableFriendsRowCheckBox, 30);
     ui->TableWidgetFriends->resizeColumnsToContents();
     #define SetTableWidgetCompareFriendsSettingsEnd }
     setIcons();
@@ -192,12 +195,6 @@ void FormAchievements::updateSettings() {
 void FormAchievements::setIcons() {
     QString iconsColor = _setting.getIconsColor();
     ui->ButtonCompare->setIcon(QIcon(_setting.getIconCompare()));
-    //ui->GroupBoxFilter->setStyleSheet(""QGroupBox[accessibleName=\"Filter\"]::title {image:url(://"+_theme+"/filter.png) 0 0 0 0 stretch stretch; image-position:left; margin-top:15px;}");
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox[accessibleName=\"Filter\"]::title {"
-                                        "image:url(" + _setting.getIconFilter() + "); "
-                                        "image-position:left; "
-                                        "margin-top:12px;"
-                                      "}");
     ui->ButtonAddCategory->setIcon(QIcon(_setting.getIconCreateColor()));
     ui->ButtonChangeCategory->setIcon(QIcon(_setting.getIconChange()));
     ui->ButtonDeleteCategory->setIcon(QIcon(_setting.getIconDeleteColor()));
@@ -338,7 +335,7 @@ void FormAchievements::loadingCompare() {
     _profilesFriends = SFriends(_profile._steamID, false).getProfiles();
     ui->TableWidgetFriends->setColumnCount(_profilesFriends.getCount() + 2);
     for (int i = 0; i < _profilesFriends.getCount() + 2; i++) {
-        ui->TableWidgetFriends->setColumnWidth(i, 33);
+        ui->TableWidgetFriends->setColumnWidth(i, 33 + 8);
     }
     _profilesFriends.sort();
     ui->ProgressBarFriendsLoad->setMaximum(_profilesFriends.getCount());
@@ -401,7 +398,6 @@ void FormAchievements::finishLoadFriends() {
         row++;
     }
     connect(ui->TableWidgetFriends, &QTableWidget::cellChanged, this, &FormAchievements::tableWidgetCompareFriends_CellChanged);
-    //ui->TableWidgetFriends->resizeColumnsToContents();
     _loadCompare++;
     ui->TableWidgetFriends->setVisible(true);
 }
@@ -454,7 +450,7 @@ void FormAchievements::tableWidgetCompareFriends_CellChanged(int aRow, int aColu
                 disconnect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this, &FormAchievements::compareProfileFilterClickFriends);
                 ui->TableWidgetFriends->removeCellWidget(c_tableFriendsRowFilters, aColumn);
                 delete friendFilter;
-                ui->TableWidgetFriends->resizeColumnsToContents();
+                //ui->TableWidgetFriends->resizeColumnsToContents();
             } else {
                 qDebug()<<"error FormAchievements::tableWidgetCompareFriends_CellChanged(" + QString::number(aRow) + ", " + QString::number(aColumn) + ") friendFilter";
             }
@@ -470,8 +466,8 @@ void FormAchievements::createCompareProfileFilter(bool aAccept, int aColumn) {
         connect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this,         &FormAchievements::compareProfileFilterClickFriends);
         connect(this,         &FormAchievements::s_updateSettings,            friendFilter, &FormCompareProfileFilter::updateSettings);
         ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, aColumn, friendFilter);
-        ui->TableWidgetFriends->resizeRowsToContents();
-        ui->TableWidgetFriends->resizeColumnsToContents();
+        //ui->TableWidgetFriends->resizeRowsToContents();
+        //ui->TableWidgetFriends->resizeColumnsToContents();
     }
 }
 
@@ -491,7 +487,7 @@ void FormAchievements::checkBoxCompareAllFriends_StateChanged(int arg1) {
                 ui->TableWidgetFriends->setColumnHidden(i + 2, false);
             }
         }
-        ui->TableWidgetFriends->resizeColumnsToContents();
+        //ui->TableWidgetFriends->resizeColumnsToContents();
         break;
     }
     }

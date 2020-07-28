@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormProfile_t {
-    QByteArrayData data[36];
-    char stringdata0[456];
+    QByteArrayData data[48];
+    char stringdata0[585];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -67,7 +67,19 @@ QT_MOC_LITERAL(31, 369, 21), // "buttonFriends_Clicked"
 QT_MOC_LITERAL(32, 391, 24), // "buttonStatistics_Clicked"
 QT_MOC_LITERAL(33, 416, 23), // "buttonFavorites_Clicked"
 QT_MOC_LITERAL(34, 440, 6), // "setLvl"
-QT_MOC_LITERAL(35, 447, 8) // "aSteamId"
+QT_MOC_LITERAL(35, 447, 8), // "aSteamId"
+QT_MOC_LITERAL(36, 456, 14), // "setColorStatus"
+QT_MOC_LITERAL(37, 471, 4), // "aRed"
+QT_MOC_LITERAL(38, 476, 6), // "aGreen"
+QT_MOC_LITERAL(39, 483, 5), // "aBlue"
+QT_MOC_LITERAL(40, 489, 6), // "aAlpha"
+QT_MOC_LITERAL(41, 496, 9), // "setStatus"
+QT_MOC_LITERAL(42, 506, 8), // "setGames"
+QT_MOC_LITERAL(43, 515, 10), // "setFriends"
+QT_MOC_LITERAL(44, 526, 7), // "setBans"
+QT_MOC_LITERAL(45, 534, 7), // "setName"
+QT_MOC_LITERAL(46, 542, 15), // "createLightning"
+QT_MOC_LITERAL(47, 558, 26) // "QGraphicsDropShadowEffect*"
 
     },
     "FormProfile\0s_goToGames\0\0SProfile\0"
@@ -82,7 +94,11 @@ QT_MOC_LITERAL(35, 447, 8) // "aSteamId"
     "event\0buttonSetProfile_Clicked\0"
     "buttonGames_Clicked\0buttonFriends_Clicked\0"
     "buttonStatistics_Clicked\0"
-    "buttonFavorites_Clicked\0setLvl\0aSteamId"
+    "buttonFavorites_Clicked\0setLvl\0aSteamId\0"
+    "setColorStatus\0aRed\0aGreen\0aBlue\0"
+    "aAlpha\0setStatus\0setGames\0setFriends\0"
+    "setBans\0setName\0createLightning\0"
+    "QGraphicsDropShadowEffect*"
 };
 #undef QT_MOC_LITERAL
 
@@ -92,7 +108,7 @@ static const uint qt_meta_data_FormProfile[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      23,   14, // methods
+      30,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -100,31 +116,38 @@ static const uint qt_meta_data_FormProfile[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,  129,    2, 0x06 /* Public */,
-       7,    2,  134,    2, 0x06 /* Public */,
-      10,    3,  139,    2, 0x06 /* Public */,
-      12,    0,  146,    2, 0x06 /* Public */,
-      13,    0,  147,    2, 0x06 /* Public */,
+       1,    2,  164,    2, 0x06 /* Public */,
+       7,    2,  169,    2, 0x06 /* Public */,
+      10,    3,  174,    2, 0x06 /* Public */,
+      12,    0,  181,    2, 0x06 /* Public */,
+      13,    0,  182,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      14,    1,  148,    2, 0x0a /* Public */,
-      16,    1,  151,    2, 0x0a /* Public */,
-      17,    0,  154,    2, 0x0a /* Public */,
-      18,    0,  155,    2, 0x0a /* Public */,
-      19,    0,  156,    2, 0x0a /* Public */,
-      20,    0,  157,    2, 0x0a /* Public */,
-      21,    0,  158,    2, 0x0a /* Public */,
-      22,    0,  159,    2, 0x0a /* Public */,
-      23,    0,  160,    2, 0x0a /* Public */,
-      24,    0,  161,    2, 0x0a /* Public */,
-      25,    0,  162,    2, 0x0a /* Public */,
-      26,    1,  163,    2, 0x08 /* Private */,
-      29,    0,  166,    2, 0x08 /* Private */,
-      30,    0,  167,    2, 0x08 /* Private */,
-      31,    0,  168,    2, 0x08 /* Private */,
-      32,    0,  169,    2, 0x08 /* Private */,
-      33,    0,  170,    2, 0x08 /* Private */,
-      34,    1,  171,    2, 0x08 /* Private */,
+      14,    1,  183,    2, 0x0a /* Public */,
+      16,    1,  186,    2, 0x0a /* Public */,
+      17,    0,  189,    2, 0x0a /* Public */,
+      18,    0,  190,    2, 0x0a /* Public */,
+      19,    0,  191,    2, 0x0a /* Public */,
+      20,    0,  192,    2, 0x0a /* Public */,
+      21,    0,  193,    2, 0x0a /* Public */,
+      22,    0,  194,    2, 0x0a /* Public */,
+      23,    0,  195,    2, 0x0a /* Public */,
+      24,    0,  196,    2, 0x0a /* Public */,
+      25,    0,  197,    2, 0x0a /* Public */,
+      26,    1,  198,    2, 0x08 /* Private */,
+      29,    0,  201,    2, 0x08 /* Private */,
+      30,    0,  202,    2, 0x08 /* Private */,
+      31,    0,  203,    2, 0x08 /* Private */,
+      32,    0,  204,    2, 0x08 /* Private */,
+      33,    0,  205,    2, 0x08 /* Private */,
+      34,    1,  206,    2, 0x08 /* Private */,
+      36,    4,  209,    2, 0x08 /* Private */,
+      41,    0,  218,    2, 0x08 /* Private */,
+      42,    1,  219,    2, 0x08 /* Private */,
+      43,    1,  222,    2, 0x08 /* Private */,
+      44,    1,  225,    2, 0x08 /* Private */,
+      45,    0,  228,    2, 0x08 /* Private */,
+      46,    0,  229,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5,    4,    6,
@@ -152,6 +175,13 @@ static const uint qt_meta_data_FormProfile[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,   35,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Double,   37,   38,   39,   40,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   35,
+    QMetaType::Void, QMetaType::QString,   35,
+    QMetaType::Void, QMetaType::QString,   35,
+    QMetaType::Void,
+    0x80000000 | 47,
 
        0        // eod
 };
@@ -188,6 +218,14 @@ void FormProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 20: _t->buttonStatistics_Clicked(); break;
         case 21: _t->buttonFavorites_Clicked(); break;
         case 22: _t->setLvl((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 23: _t->setColorStatus((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< double(*)>(_a[4]))); break;
+        case 24: _t->setStatus(); break;
+        case 25: _t->setGames((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 26: _t->setFriends((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 27: _t->setBans((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 28: _t->setName(); break;
+        case 29: { QGraphicsDropShadowEffect* _r = _t->createLightning();
+            if (_a[0]) *reinterpret_cast< QGraphicsDropShadowEffect**>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -259,13 +297,13 @@ int FormProfile::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 23)
+        if (_id < 30)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 23;
+        _id -= 30;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 23)
+        if (_id < 30)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 23;
+        _id -= 30;
     }
     return _id;
 }

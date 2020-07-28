@@ -25,6 +25,9 @@
    <property name="horizontalScrollBarPolicy">
     <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
+   <property name="showGrid">
+    <bool>false</bool>
+   </property>
    <property name="rowCount">
     <number>1</number>
    </property>
@@ -57,6 +60,12 @@
      <width>631</width>
      <height>461</height>
     </rect>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="showGrid">
+    <bool>false</bool>
    </property>
    <property name="sortingEnabled">
     <bool>true</bool>

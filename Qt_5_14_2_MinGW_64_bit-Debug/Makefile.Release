@@ -685,7 +685,7 @@ release/moc_formachievements.cpp: ../AraSteamManager/AchievementsSubForms/formac
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formachievements.h -o release\moc_formachievements.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formachievements.h -o release\moc_formachievements.cpp
 
 release/moc_formcategoryvalue.cpp: ../AraSteamManager/AchievementsSubForms/formcategoryvalue.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -814,7 +814,7 @@ release/moc_formcategoryvalue.cpp: ../AraSteamManager/AchievementsSubForms/formc
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QTransform \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.h -o release\moc_formcategoryvalue.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.h -o release\moc_formcategoryvalue.cpp
 
 release/moc_formcompareprofilefilter.cpp: ../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -947,7 +947,7 @@ release/moc_formcompareprofilefilter.cpp: ../AraSteamManager/AchievementsSubForm
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.h -o release\moc_formcompareprofilefilter.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.h -o release\moc_formcompareprofilefilter.cpp
 
 release/moc_formtablesheaders.cpp: ../AraSteamManager/AchievementsSubForms/formtablesheaders.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -1172,7 +1172,7 @@ release/moc_formtablesheaders.cpp: ../AraSteamManager/AchievementsSubForms/formt
 		../AraSteamManager/class/Threads/threadstatistics.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formtablesheaders.h -o release\moc_formtablesheaders.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\AchievementsSubForms\formtablesheaders.h -o release\moc_formtablesheaders.cpp
 
 release/moc_formfavorites.cpp: ../AraSteamManager/MainSubForms/formfavorites.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -1362,7 +1362,7 @@ release/moc_formfavorites.cpp: ../AraSteamManager/MainSubForms/formfavorites.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formfavorites.h -o release\moc_formfavorites.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formfavorites.h -o release\moc_formfavorites.cpp
 
 release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -1586,7 +1586,7 @@ release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QtAlgorithms \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formfriends.h -o release\moc_formfriends.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formfriends.h -o release\moc_formfriends.cpp
 
 release/moc_formgames.cpp: ../AraSteamManager/MainSubForms/formgames.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -1848,7 +1848,7 @@ release/moc_formgames.cpp: ../AraSteamManager/MainSubForms/formgames.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formgames.h -o release\moc_formgames.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formgames.h -o release\moc_formgames.cpp
 
 release/moc_formprofile.cpp: ../AraSteamManager/MainSubForms/formprofile.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -2023,9 +2023,11 @@ release/moc_formprofile.cpp: ../AraSteamManager/MainSubForms/formprofile.h \
 		../AraSteamManager/class/steamapi/Sgames.h \
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formprofile.h -o release\moc_formprofile.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formprofile.h -o release\moc_formprofile.cpp
 
 release/moc_formsettings.cpp: ../AraSteamManager/MainSubForms/formsettings.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -2230,7 +2232,7 @@ release/moc_formsettings.cpp: ../AraSteamManager/MainSubForms/formsettings.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qradiobutton.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formsettings.h -o release\moc_formsettings.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formsettings.h -o release\moc_formsettings.cpp
 
 release/moc_formstatistics.cpp: ../AraSteamManager/MainSubForms/formstatistics.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -2496,7 +2498,7 @@ release/moc_formstatistics.cpp: ../AraSteamManager/MainSubForms/formstatistics.h
 		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qvalueaxis.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formstatistics.h -o release\moc_formstatistics.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formstatistics.h -o release\moc_formstatistics.cpp
 
 release/moc_requestdata.cpp: ../AraSteamManager/class/Network/requestdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -2664,7 +2666,7 @@ release/moc_requestdata.cpp: ../AraSteamManager/class/Network/requestdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeventloop.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Network\requestdata.h -o release\moc_requestdata.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Network\requestdata.h -o release\moc_requestdata.cpp
 
 release/moc_requestimage.cpp: ../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -2844,7 +2846,7 @@ release/moc_requestimage.cpp: ../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QEventLoop \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Network\requestimage.h -o release\moc_requestimage.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Network\requestimage.h -o release\moc_requestimage.cpp
 
 release/moc_mainslice.cpp: ../AraSteamManager/class/NotMine/mainslice.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QPieSlice \
@@ -2953,7 +2955,7 @@ release/moc_mainslice.cpp: ../AraSteamManager/class/NotMine/mainslice.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcontiguouscache.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\NotMine\mainslice.h -o release\moc_mainslice.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\NotMine\mainslice.h -o release\moc_mainslice.cpp
 
 release/moc_threadachievements.cpp: ../AraSteamManager/class/Threads/threadachievements.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -3145,7 +3147,7 @@ release/moc_threadachievements.cpp: ../AraSteamManager/class/Threads/threadachie
 		../AraSteamManager/class/statusvalue.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadachievements.h -o release\moc_threadachievements.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadachievements.h -o release\moc_threadachievements.cpp
 
 release/moc_threadfriends.cpp: ../AraSteamManager/class/Threads/threadfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -3340,7 +3342,7 @@ release/moc_threadfriends.cpp: ../AraSteamManager/class/Threads/threadfriends.h 
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/qfontdatabase.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadfriends.h -o release\moc_threadfriends.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadfriends.h -o release\moc_threadfriends.cpp
 
 release/moc_threadgames.cpp: ../AraSteamManager/class/Threads/threadgames.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -3531,7 +3533,7 @@ release/moc_threadgames.cpp: ../AraSteamManager/class/Threads/threadgames.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/qfontdatabase.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadgames.h -o release\moc_threadgames.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadgames.h -o release\moc_threadgames.cpp
 
 release/moc_threading.cpp: ../AraSteamManager/class/Threads/threading.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -3736,7 +3738,7 @@ release/moc_threading.cpp: ../AraSteamManager/class/Threads/threading.h \
 		../AraSteamManager/class/Threads/threadstatistics.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threading.h -o release\moc_threading.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threading.h -o release\moc_threading.cpp
 
 release/moc_threadstatistics.cpp: ../AraSteamManager/class/Threads/threadstatistics.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -3909,7 +3911,7 @@ release/moc_threadstatistics.cpp: ../AraSteamManager/class/Threads/threadstatist
 		../AraSteamManager/class/Network/requestdata.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadstatistics.h -o release\moc_threadstatistics.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Threads\threadstatistics.h -o release\moc_threadstatistics.cpp
 
 release/moc_categoriesgame.cpp: ../AraSteamManager/class/categoriesgame.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -4079,7 +4081,7 @@ release/moc_categoriesgame.cpp: ../AraSteamManager/class/categoriesgame.h \
 		../AraSteamManager/class/statusvalue.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\categoriesgame.h -o release\moc_categoriesgame.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\categoriesgame.h -o release\moc_categoriesgame.cpp
 
 release/moc_favorites.cpp: ../AraSteamManager/class/favorites.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -4214,7 +4216,7 @@ release/moc_favorites.cpp: ../AraSteamManager/class/favorites.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QTransform \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\favorites.h -o release\moc_favorites.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\favorites.h -o release\moc_favorites.cpp
 
 release/moc_filter.cpp: ../AraSteamManager/class/filter.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
@@ -4285,7 +4287,7 @@ release/moc_filter.cpp: ../AraSteamManager/class/filter.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsharedpointer_impl.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\filter.h -o release\moc_filter.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\filter.h -o release\moc_filter.cpp
 
 release/moc_settings.cpp: ../AraSteamManager/class/settings.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -4412,7 +4414,7 @@ release/moc_settings.cpp: ../AraSteamManager/class/settings.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QTransform \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\settings.h -o release\moc_settings.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\settings.h -o release\moc_settings.cpp
 
 release/moc_Sachievements.cpp: ../AraSteamManager/class/steamapi/Sachievements.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -4582,7 +4584,7 @@ release/moc_Sachievements.cpp: ../AraSteamManager/class/steamapi/Sachievements.h
 		../AraSteamManager/class/statusvalue.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sachievements.h -o release\moc_Sachievements.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sachievements.h -o release\moc_Sachievements.cpp
 
 release/moc_Sbans.cpp: ../AraSteamManager/class/steamapi/Sbans.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -4751,7 +4753,7 @@ release/moc_Sbans.cpp: ../AraSteamManager/class/steamapi/Sbans.h \
 		../AraSteamManager/class/statusvalue.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sbans.h -o release\moc_Sbans.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sbans.h -o release\moc_Sbans.cpp
 
 release/moc_Sfriends.cpp: ../AraSteamManager/class/steamapi/Sfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -4923,7 +4925,7 @@ release/moc_Sfriends.cpp: ../AraSteamManager/class/steamapi/Sfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sfriends.h -o release\moc_Sfriends.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sfriends.h -o release\moc_Sfriends.cpp
 
 release/moc_Sgames.cpp: ../AraSteamManager/class/steamapi/Sgames.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -5092,7 +5094,7 @@ release/moc_Sgames.cpp: ../AraSteamManager/class/steamapi/Sgames.h \
 		../AraSteamManager/class/statusvalue.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sgames.h -o release\moc_Sgames.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sgames.h -o release\moc_Sgames.cpp
 
 release/moc_Slevels.cpp: ../AraSteamManager/class/steamapi/Slevels.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -5261,7 +5263,7 @@ release/moc_Slevels.cpp: ../AraSteamManager/class/steamapi/Slevels.h \
 		../AraSteamManager/class/statusvalue.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Slevels.h -o release\moc_Slevels.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Slevels.h -o release\moc_Slevels.cpp
 
 release/moc_Sprofile.cpp: ../AraSteamManager/class/steamapi/Sprofile.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -5431,7 +5433,7 @@ release/moc_Sprofile.cpp: ../AraSteamManager/class/steamapi/Sprofile.h \
 		../AraSteamManager/class/Network/requestdata.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sprofile.h -o release\moc_Sprofile.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\steamapi\Sprofile.h -o release\moc_Sprofile.cpp
 
 release/moc_formcontainerachievements.cpp: ../AraSteamManager/formcontainerachievements.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -5684,7 +5686,7 @@ release/moc_formcontainerachievements.cpp: ../AraSteamManager/formcontainerachie
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\formcontainerachievements.h -o release\moc_formcontainerachievements.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\formcontainerachievements.h -o release\moc_formcontainerachievements.cpp
 
 release/moc_frameless.cpp: ../AraSteamManager/frameless.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
@@ -5802,7 +5804,7 @@ release/moc_frameless.cpp: ../AraSteamManager/frameless.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\frameless.h -o release\moc_frameless.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\frameless.h -o release\moc_frameless.cpp
 
 release/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
@@ -6137,11 +6139,13 @@ release/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		../AraSteamManager/MainSubForms/formprofile.h \
 		../AraSteamManager/class/steamapi/Sbans.h \
 		../AraSteamManager/class/steamapi/Slevels.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSizeGrip \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsizegrip.h \
 		release/moc_predefs.h \
 		C:/Qt/5.14.2/mingw73_64/bin/moc.exe
-	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/5.14.2/mingw73_64/include -IC:/Qt/5.14.2/mingw73_64/include/QtCharts -IC:/Qt/5.14.2/mingw73_64/include/QtWidgets -IC:/Qt/5.14.2/mingw73_64/include/QtGui -IC:/Qt/5.14.2/mingw73_64/include/QtANGLE -IC:/Qt/5.14.2/mingw73_64/include/QtNetwork -IC:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\mainwindow.h -o release\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -6567,33 +6571,7 @@ release/formachievements.o: ../AraSteamManager/AchievementsSubForms/formachievem
 		../AraSteamManager/subwidget/qcheckboxwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		ui_formachievements.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGridLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGroupBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgroupbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QListWidget \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QProgressBar \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qprogressbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QScrollArea \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qscrollarea.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		ui_formachievements.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formachievements.o ..\AraSteamManager\AchievementsSubForms\formachievements.cpp
 
 release/formcategoryvalue.o: ../AraSteamManager/AchievementsSubForms/formcategoryvalue.cpp ../AraSteamManager/AchievementsSubForms/formcategoryvalue.h \
@@ -6721,35 +6699,7 @@ release/formcategoryvalue.o: ../AraSteamManager/AchievementsSubForms/formcategor
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QSize \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QSizeF \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QTransform \
-		ui_formcategoryvalue.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QVariant \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeventloop.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem
+		ui_formcategoryvalue.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formcategoryvalue.o ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.cpp
 
 release/formcompareprofilefilter.o: ../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.cpp ../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.h \
@@ -6881,20 +6831,7 @@ release/formcompareprofilefilter.o: ../AraSteamManager/AchievementsSubForms/form
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QRadioButton \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qradiobutton.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		ui_formcompareprofilefilter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QVariant \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeventloop.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h
+		ui_formcompareprofilefilter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formcompareprofilefilter.o ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.cpp
 
 release/formtablesheaders.o: ../AraSteamManager/AchievementsSubForms/formtablesheaders.cpp ../AraSteamManager/AchievementsSubForms/formtablesheaders.h \
@@ -7118,14 +7055,7 @@ release/formtablesheaders.o: ../AraSteamManager/AchievementsSubForms/formtablesh
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		../AraSteamManager/class/Threads/threadstatistics.h \
-		ui_formtablesheaders.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qheaderview.h
+		ui_formtablesheaders.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formtablesheaders.o ..\AraSteamManager\AchievementsSubForms\formtablesheaders.cpp
 
 release/formfavorites.o: ../AraSteamManager/MainSubForms/formfavorites.cpp ../AraSteamManager/MainSubForms/formfavorites.h \
@@ -7314,52 +7244,7 @@ release/formfavorites.o: ../AraSteamManager/MainSubForms/formfavorites.cpp ../Ar
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
-		ui_formfavorites.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qvalidator.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qregularexpression.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qslider.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyle.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTabWidget \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTableWidget \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtableview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		ui_formfavorites.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formfavorites.o ..\AraSteamManager\MainSubForms\formfavorites.cpp
 
 release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSteamManager/MainSubForms/formfriends.h \
@@ -7582,34 +7467,7 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QtAlgorithms \
-		ui_formfriends.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGroupBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgroupbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		ui_formfriends.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formfriends.o ..\AraSteamManager\MainSubForms\formfriends.cpp
 
 release/formgames.o: ../AraSteamManager/MainSubForms/formgames.cpp ../AraSteamManager/MainSubForms/formgames.h \
@@ -7870,25 +7728,7 @@ release/formgames.o: ../AraSteamManager/MainSubForms/formgames.cpp ../AraSteamMa
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
-		ui_formgames.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QScrollArea \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qscrollarea.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		ui_formgames.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formgames.o ..\AraSteamManager\MainSubForms\formgames.cpp
 
 release/formprofile.o: ../AraSteamManager/MainSubForms/formprofile.cpp ../AraSteamManager/MainSubForms/formprofile.h \
@@ -8064,27 +7904,9 @@ release/formprofile.o: ../AraSteamManager/MainSubForms/formprofile.cpp ../AraSte
 		../AraSteamManager/class/steamapi/Sgames.h \
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
-		ui_formprofile.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
+		ui_formprofile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formprofile.o ..\AraSteamManager\MainSubForms\formprofile.cpp
 
 release/formsettings.o: ../AraSteamManager/MainSubForms/formsettings.cpp ../AraSteamManager/MainSubForms/formsettings.h \
@@ -8288,48 +8110,7 @@ release/formsettings.o: ../AraSteamManager/MainSubForms/formsettings.cpp ../AraS
 		../AraSteamManager/subwidget/qradiobuttonwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QRadioButton \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qradiobutton.h \
-		ui_formsettings.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGridLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGroupBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgroupbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qheaderview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qitemselectionmodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractspinbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qvalidator.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qregularexpression.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qslider.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractslider.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyle.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qrubberband.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSlider \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTabWidget \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTableWidget \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtablewidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtableview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		ui_formsettings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formsettings.o ..\AraSteamManager\MainSubForms\formsettings.cpp
 
 release/formstatistics.o: ../AraSteamManager/MainSubForms/formstatistics.cpp ../AraSteamManager/MainSubForms/formstatistics.h \
@@ -8594,366 +8375,7 @@ release/formstatistics.o: ../AraSteamManager/MainSubForms/formstatistics.cpp ../
 		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qbarcategoryaxis.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QValueAxis \
 		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qvalueaxis.h \
-		ui_formstatistics.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QtCharts \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QtChartsDepends \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QtCore \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QtCoreDepends \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstracteventdispatcher.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractnativeeventfilter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractproxymodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractstate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstracttransition.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qanimationgroup.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qarraydataops.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qarraydatapointer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qbasictimer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qbitarray.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qbuffer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qbytearraymatcher.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcache.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcalendar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcborarray.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcborvalue.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcborcommon.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/quuid.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcbormap.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcborstream.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfloat16.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcollator.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcommandlineoption.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcommandlineparser.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qconcatenatetablesproxymodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qdeadlinetimer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qelapsedtimer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qdiriterator.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qendian.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeventtransition.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qexception.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfileselector.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfilesystemwatcher.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfinalstate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfuture.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfutureinterface.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qrunnable.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qresultstore.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfuturesynchronizer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfuturewatcher.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qhistorystate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qidentityproxymodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qisenum.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qlibrary.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qlibraryinfo.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qversionnumber.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qlinkedlist.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qlockfile.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qloggingcategory.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qmath.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qmessageauthenticationcode.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qmetaobject.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qmimedata.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qmimedatabase.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qmimetype.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qobjectcleanuphandler.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qoperatingsystemversion.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qparallelanimationgroup.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpauseanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpluginloader.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qprocess.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qqueue.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qrandom.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qreadwritelock.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qresource.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsavefile.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qscopedvaluerollback.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qscopeguard.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsemaphore.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsequentialanimationgroup.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsharedmemory.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsignalmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsignaltransition.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsocketnotifier.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsortfilterproxymodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qstack.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qstandardpaths.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qstate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qstatemachine.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qstorageinfo.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qstringlistmodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qsystemsemaphore.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtemporarydir.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtemporaryfile.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtextboundaryfinder.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qthreadpool.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qthreadstorage.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtimeline.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtimer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtimezone.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtranslator.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtransposeproxymodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtypetraits.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qwaitcondition.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qwineventnotifier.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qxmlstream.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qtcoreversion.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QtGui \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QtGuiDepends \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qabstracttextdocumentlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qglyphrun.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qrawfont.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextdocument.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qaccessible.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qaccessiblebridge.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qaccessibleobject.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qaccessibleplugin.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qbackingstore.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qwindow.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QEvent \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qsurface.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qsurfaceformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qbitmap.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qclipboard.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qcolorspace.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qcolortransform.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qdesktopservices.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qdrag.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qgenericmatrix.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qgenericplugin.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qgenericpluginfactory.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qiconengine.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qiconengineplugin.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qimagewriter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qmatrix4x4.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qvector3d.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qvector4d.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qquaternion.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qoffscreensurface.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopengl.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qt_windows.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtANGLE/GLES3/gl3.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtANGLE/GLES3/gl3platform.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtANGLE/KHR/khrplatform.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtANGLE/GLES2/gl2.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtANGLE/GLES2/gl2platform.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopengles2ext.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglext.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglbuffer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglcontext.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QScopedPointer \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QSurfaceFormat \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglversionfunctions.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopengldebug.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglextrafunctions.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglfunctions.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglframebufferobject.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglpaintdevice.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglpixeltransferoptions.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglshaderprogram.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopengltexture.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopengltextureblitter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMatrix3x3 \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMatrix4x4 \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopengltimerquery.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglvertexarrayobject.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qopenglwindow.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QPaintDeviceWindow \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpaintdevicewindow.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QWindow \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QPaintDevice \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QOpenGLContext \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QImage \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpagedpaintdevice.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpagelayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpagesize.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpaintengine.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpdfwriter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpicture.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpictureformatplugin.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qpixmapcache.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qrasterwindow.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qsessionmanager.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qstatictext.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qstylehints.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qsyntaxhighlighter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextobject.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextdocumentfragment.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextdocumentwriter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextlist.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtexttable.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtguiversion.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QtWidgets \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QtWidgetsDepends \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qaccessiblewidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qaction.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qactiongroup.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcalendarwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcolordialog.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdialog.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcolormap.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcolumnview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcommandlinkbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcommonstyle.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcompleter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdatawidgetmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdatetimeedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdial.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdialogbuttonbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdirmodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qfileiconprovider.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdockwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdrawutil.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qerrormessage.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qfiledialog.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qfilesystemmodel.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qfocusframe.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qfontcombobox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qfontdialog.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qformlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgesture.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgesturerecognizer.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicsanchorlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicslayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicsgridlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicsitemanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicslinearlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicsproxywidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicssceneevent.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicstransform.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/QVector3D \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgroupbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qinputdialog.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qitemdelegate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qitemeditorfactory.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qkeyeventtransition.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qkeysequenceedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlcdnumber.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmdiarea.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmdisubwindow.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenubar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmessagebox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmouseeventtransition.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qopenglwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qplaintextedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtextedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qprogressbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qprogressdialog.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qproxystyle.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCommonStyle \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qradiobutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qscrollbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qscroller.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPointF \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QScrollerProperties \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qscrollerproperties.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qshortcut.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsizegrip.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qspinbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsplashscreen.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsplitter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstackedlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstackedwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstatusbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleditemdelegate.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstylefactory.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstylepainter.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleplugin.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsystemtrayicon.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtextbrowser.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbutton.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtooltip.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtreeview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtreewidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtreewidgetitemiterator.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qundogroup.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qundostack.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qundoview.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qwhatsthis.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qwidgetaction.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qwizard.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtwidgetsversion.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/chartsnamespace.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qarealegendmarker.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QLegendMarker \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qlegendmarker.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QAreaSeries \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qareaseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qbarlegendmarker.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qboxplotlegendmarker.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QBoxPlotSeries \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qboxplotseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QBoxSet \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qboxset.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qboxplotmodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qcandlesticklegendmarker.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QCandlestickSeries \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qcandlestickseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qcandlestickmodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qcandlestickset.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qcategoryaxis.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qdatetimeaxis.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhbarmodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhboxplotmodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QBoxPlotModelMapper \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhcandlestickmodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QCandlestickModelMapper \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhorizontalbarseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhorizontalpercentbarseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhorizontalstackedbarseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhpiemodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/QPieModelMapper \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qpiemodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qhxymodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qlogvalueaxis.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qpercentbarseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qpielegendmarker.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qpolarchart.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qscatterseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qsplineseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qstackedbarseries.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qvboxplotmodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qvcandlestickmodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qvpiemodelmapper.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qxylegendmarker.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCharts/qtchartsversion.h
+		ui_formstatistics.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formstatistics.o ..\AraSteamManager\MainSubForms\formstatistics.cpp
 
 release/requestdata.o: ../AraSteamManager/class/Network/requestdata.cpp ../AraSteamManager/class/Network/requestdata.h \
@@ -12238,14 +11660,7 @@ release/formcontainerachievements.o: ../AraSteamManager/formcontainerachievement
 		../AraSteamManager/subwidget/qcheckboxwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		ui_formcontainerachievements.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTabWidget \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		ui_formcontainerachievements.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formcontainerachievements.o ..\AraSteamManager\formcontainerachievements.cpp
 
 release/frameless.o: ../AraSteamManager/frameless.cpp ../AraSteamManager/frameless.h \
@@ -12698,6 +12113,8 @@ release/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		../AraSteamManager/MainSubForms/formprofile.h \
 		../AraSteamManager/class/steamapi/Sbans.h \
 		../AraSteamManager/class/steamapi/Slevels.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSizeGrip \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsizegrip.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
@@ -13048,33 +12465,11 @@ release/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainw
 		../AraSteamManager/MainSubForms/formprofile.h \
 		../AraSteamManager/class/steamapi/Sbans.h \
 		../AraSteamManager/class/steamapi/Slevels.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSizeGrip \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsizegrip.h \
-		ui_mainwindow.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGridLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenuBar \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenubar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qaction.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qactiongroup.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QScrollArea \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QStackedWidget \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstackedwidget.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QStatusBar \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstatusbar.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\AraSteamManager\mainwindow.cpp
 
 release/qbuttonwithdata.o: ../AraSteamManager/subwidget/qbuttonwithdata.cpp ../AraSteamManager/subwidget/qbuttonwithdata.h \

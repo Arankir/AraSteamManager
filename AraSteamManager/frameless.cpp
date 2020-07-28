@@ -68,7 +68,7 @@ void FrameLess::mousePress(QMouseEvent *e) {
             _rubberband->setGeometry(_target->frameGeometry());
         }
         //qDebug()<<(e->globalPos() - _target->pos()).y();
-        if (_target->rect().marginsRemoved(QMargins(borderWidth(), borderWidth(), borderWidth(), borderWidth())).contains(e->pos())&&((e->globalPos() - _target->pos()).y()<25)) {
+        if (_target->rect().marginsRemoved(QMargins(borderWidth(), borderWidth(), borderWidth(), borderWidth())).contains(e->pos())&&((e->globalPos() - _target->pos()).y() < 33)) {
             _dragStart = true;
             _dragPos = e->pos();
         }

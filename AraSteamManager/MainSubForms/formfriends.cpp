@@ -219,11 +219,6 @@ void FormFriends::setIcons() {
     ui->ButtonFind->setIcon(QIcon(_setting.getIconFindProfile()));
     ui->ButtonFriendGoTo->setIcon(QIcon(_setting.getIconGoTo()));
     ui->ButtonFriendFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
-    ui->GroupBoxFilter->setStyleSheet("QGroupBox::title { "
-                                        "image:url(" + _setting.getIconFilter() + ") 0 0 0 0 stretch stretch; "
-                                        "image-position:left; "
-                                        "margin-top:15px; "
-                                      "}");
 }
 
 void FormFriends::createThread() {
