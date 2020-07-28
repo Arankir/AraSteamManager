@@ -82,7 +82,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QLabel" name="LabelNick">
+             <widget class="QLabel" name="LabelName">
               <property name="font">
                <font>
                 <family>MS Shell Dlg 2</family>
