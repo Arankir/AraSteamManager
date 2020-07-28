@@ -523,7 +523,7 @@ QString MainWindow::getTheme() {
 }
 
 void MainWindow::setIcons() {
-    ui->LabelLogo->setPixmap(QPixmap(_setting.getIconLogoColor()));
+    ui->LabelLogo->setPixmap(QPixmap(_setting.getIconLogoColor()).scaled(30, 30));
     ui->ButtonUpdate->setIcon(QIcon(_setting.getIconUpdate()));
     ui->ButtonGoToMyProfile->setIcon(QIcon(_setting.getIconHome()));
     ui->ButtonFindProfile->setIcon(QIcon(_setting.getIconFindProfile()));
