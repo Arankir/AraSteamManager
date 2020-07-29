@@ -125,6 +125,11 @@ public:
     QString getIconRadioButtonUnchecked();
     QString getIconRadioButtonUncheckedHover();
     QString getIconRadioButtonUncheckedPress();
+    QString getIconComboboxDown();
+    QString getIconScrollbarUp();
+    QString getIconScrollbarDown();
+    QString getIconScrollbarLeft();
+    QString getIconScrollbarRight();
 
     QRect getMainWindowGeometry();
     QPoint getMainWindowPos();

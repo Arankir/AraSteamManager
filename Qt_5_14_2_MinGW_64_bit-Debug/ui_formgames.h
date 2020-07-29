@@ -244,7 +244,8 @@ public:
         label->setObjectName(QString::fromUtf8("label"));
         label->setMinimumSize(QSize(20, 0));
         label->setMaximumSize(QSize(20, 16777215));
-        label->setPixmap(QPixmap(QString::fromUtf8(":/white/left.png")));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/white/widgets/scrollbar_right.png")));
+        label->setScaledContents(true);
 
         horizontalLayout_5->addWidget(label);
 

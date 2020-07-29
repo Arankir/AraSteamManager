@@ -13,6 +13,7 @@ RequestData::RequestData(QObject *parent): RequestData("", true, parent) {
 }
 
 void RequestData::get(QString aUrl, bool aParallel) {
+    qDebug()<<aUrl;
     _manager->get(QNetworkRequest(QUrl(aUrl)));
     if (!aParallel) {
         QEventLoop loop;

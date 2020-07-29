@@ -53,12 +53,39 @@ void FormProfile::changeEvent(QEvent *aEvent) {
 void FormProfile::profileToUi(SProfile aProfile) {
     _profile = std::move(aProfile);
 
-    ui->LabelAvatar->setPixmap(RequestData(_profile._avatarMedium, false).getPixmap());
-    ui->LabelAvatarMinimize->setPixmap(RequestData(_profile._avatar, false).getPixmap());
+    ui->LabelAvatar->setFixedSize(QSize(64, 64));
+    new RequestImage(ui->LabelAvatar, _profile._avatarMedium, 0, false);
+    new RequestImage(ui->LabelAvatarMinimize, _profile._avatar, 0, false);
 
     ui->LabelRealNameValue->setText(_profile._realName);
+    if (_profile._realName != "") {
+        ui->LabelRealName->setVisible(true);
+        ui->LabelRealNameValue->setVisible(true);
+    } else {
+        ui->LabelRealName->setVisible(false);
+        ui->LabelRealNameValue->setVisible(false);
+    }
+
     ui->LabelTimeCreatedValue->setText(_profile._timeCreated.toString("yyyy.MM.dd"));
+    if (_profile._timeCreated > QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
+        ui->LabelTimeCreated->setVisible(true);
+        ui->LabelTimeCreatedValue->setVisible(true);
+    } else {
+        ui->LabelTimeCreated->setVisible(false);
+        ui->LabelTimeCreatedValue->setVisible(false);
+    }
+
     ui->LabelLocCountryCodeValue->setText(_profile._locCountryCode);
+    if (_profile._locCountryCode != "") {
+        ui->LabelLocCountryCode->setVisible(true);
+        ui->LabelLocCountryCodeValue->setVisible(true);
+    } else {
+        ui->LabelLocCountryCode->setVisible(false);
+        ui->LabelLocCountryCodeValue->setVisible(false);
+    }
+
+    ui->LabelProfileState->setText(tr("%1 профиль сообщества").arg(_profile._profileState == 1 ? tr("Настроен") : tr("Не настроен")));
+    ui->LabelCommentPermission->setText(tr("Публичные комментарии %1").arg(_profile._commentPermission == 1 ? tr("разрешены") : tr("запрещены")));
     ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
                                 "<a href=\"" + _profile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
@@ -292,12 +319,11 @@ void FormProfile::setBans(QString aSteamId) {
 }
 
 void FormProfile::setLvl(QString aSteamId) {
-//TODO Вставить проверку на существование картинки
+//TODO исправить картинки
     SLevels levels(aSteamId);
-    ui->LabellvlValue->setText(QString::number(levels.GetLevel()));
+    ui->LabellvlValue->setText(levels.GetLevel() > 0 ? QString::number(levels.GetLevel()) : "?");
     QString qss = "color: #42a9c6; "
-                  "image: url(://lvls/" + QString::number(levels.GetLevel() / 100) + ".png) 0 0 0 0 stretch stretch; ";
-    qDebug()<<levels.GetLevel()<<levels.GetLevel() / 100;
+                  "border-image: url(://lvls/" + QString::number(levels.GetLevel() / 100) + ".png) 0 0 0 0 stretch stretch; ";
     ui->LabellvlValue->setStyleSheet(qss);
 }
 #define setDataEnd }
@@ -327,24 +353,28 @@ void FormProfile::updateSettings() {
 void FormProfile::updateVisibleInfo() {
     _visibleInfo = _setting.getProfileInfoSize();
     switch (_visibleInfo) {
-    case 0:{
-        ui->FrameNormalInfo->setVisible(false);
+    case 0: {
+        ui->FrameProfileBaseInfo->setVisible(false);
+        ui->FrameProfileMaximumInfo->setVisible(false);
+
         ui->LabelNameMinimize->setVisible(true);
-        ui->LabelAvatarMinimize->setVisible(true);
         ui->LabelAvatarMinimize->pixmap()->scaled(23, 23);
+        ui->LabelAvatarMinimize->setVisible(true);
         break;
     }
-    case 1:{
-        ui->FrameNormalInfo->setVisible(true);
+    case 1: {
+        ui->FrameProfileBaseInfo->setVisible(true);
+        ui->FrameProfileMaximumInfo->setVisible(false);
+
         ui->LabelNameMinimize->setVisible(false);
-        ui->FrameMaximumInfo->setVisible(false);
         ui->LabelAvatarMinimize->setVisible(false);
         break;
     }
-    case 2:{
-        ui->FrameNormalInfo->setVisible(true);
+    case 2: {
+        ui->FrameProfileBaseInfo->setVisible(true);
+        ui->FrameProfileMaximumInfo->setVisible(true);
+
         ui->LabelNameMinimize->setVisible(false);
-        ui->FrameMaximumInfo->setVisible(true);
         ui->LabelAvatarMinimize->setVisible(false);
     }
     }

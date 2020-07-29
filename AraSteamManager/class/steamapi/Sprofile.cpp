@@ -133,7 +133,7 @@ void SProfiles::set(QString aId, bool aParallel, ProfileUrlType aType) {
     load(aParallel, aType);
 }
 
-void SProfiles::set(QJsonDocument aProfiles){
+void SProfiles::set(QJsonDocument aProfiles) {
     set(aProfiles.object().value("response").toObject().value("players").toArray());
 }
 
@@ -151,7 +151,7 @@ void SProfiles::set(QJsonArray aProfiles){
     }
 }
 
-void SProfiles::set(QJsonObject aPlayer){
+void SProfiles::set(QJsonObject aPlayer) {
     clear();
     _profile.append(std::move(aPlayer));
     _status = std::move(StatusValue::success);

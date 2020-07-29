@@ -368,6 +368,26 @@ QString Settings::getIconRadioButtonUncheckedHover() {
 QString Settings::getIconRadioButtonUncheckedPress() {
     return "://" + getIconsColor() + "/widgets/radiobutton_unchecked_press.png";
 }
+
+QString Settings::getIconComboboxDown() {
+    return "://" + getIconsColor() + "/widgets/combobox_down.png";
+}
+
+QString Settings::getIconScrollbarUp() {
+    return "://" + getIconsColor() + "/widgets/scrollbar_up.png";
+}
+
+QString Settings::getIconScrollbarDown() {
+    return "://" + getIconsColor() + "/widgets/scrollbar_down.png";
+}
+
+QString Settings::getIconScrollbarLeft() {
+    return "://" + getIconsColor() + "/widgets/scrollbar_left.png";
+}
+
+QString Settings::getIconScrollbarRight() {
+    return "://" + getIconsColor() + "/widgets/scrollbar_right.png";
+}
 #define IconsWidgetEnd }
 #define IconsEnd }
 

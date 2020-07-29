@@ -44,7 +44,6 @@ void FormGames::initComponents() {
 //    ui->TableWidgetGames->installEventFilter(this);
     //ui->TableWidgetGames->viewport()->installEventFilter(this);
 
-
     QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
     shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
     shadowEffect->setOffset(0);
@@ -214,8 +213,8 @@ void FormGames::closeEvent(QCloseEvent*) {
 void FormGames::resizeEvent(QResizeEvent*) {
     ui->TableWidgetGames->setGeometry(c_widthVisibleGroup, 0, ui->FrameGames->width() - c_widthVisibleGroup, ui->FrameGames->height());
 
-    QRect invisibleRect(c_invisibleGroupPos, QPoint(c_invisibleGroupPos.x() + c_widthGroup, height()));
-    QRect visibleRect(c_visibleGroupPos, QPoint(c_visibleGroupPos.x() + c_widthGroup, height()));
+    QRect invisibleRect(c_invisibleGroupPos, QPoint(c_invisibleGroupPos.x() + c_widthGroup, ui->FrameGames->height()));
+    QRect visibleRect(c_visibleGroupPos, QPoint(c_visibleGroupPos.x() + c_widthGroup, ui->FrameGames->height()));
 
     ui->FrameGroup->setGeometry(_isGroupShow ? visibleRect : invisibleRect);
     ui->FrameGroup->raise();

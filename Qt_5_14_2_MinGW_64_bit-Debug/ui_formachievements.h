@@ -14,7 +14,6 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFormLayout>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -36,8 +35,6 @@ class Ui_FormAchievements
 public:
     QVBoxLayout *verticalLayout_8;
     QHBoxLayout *horizontalLayout_11;
-    QGroupBox *groupBox;
-    QGridLayout *gridLayout_5;
     QLabel *LabelGameLogo;
     QVBoxLayout *verticalLayout_6;
     QHBoxLayout *horizontalLayout_6;
@@ -115,28 +112,16 @@ public:
         verticalLayout_8->setContentsMargins(3, 3, 3, 3);
         horizontalLayout_11 = new QHBoxLayout();
         horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        groupBox = new QGroupBox(FormAchievements);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        LabelGameLogo = new QLabel(FormAchievements);
+        LabelGameLogo->setObjectName(QString::fromUtf8("LabelGameLogo"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy);
-        gridLayout_5 = new QGridLayout(groupBox);
-        gridLayout_5->setSpacing(1);
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        gridLayout_5->setSizeConstraint(QLayout::SetMinimumSize);
-        gridLayout_5->setContentsMargins(1, 1, 1, 1);
-        LabelGameLogo = new QLabel(groupBox);
-        LabelGameLogo->setObjectName(QString::fromUtf8("LabelGameLogo"));
         sizePolicy.setHeightForWidth(LabelGameLogo->sizePolicy().hasHeightForWidth());
         LabelGameLogo->setSizePolicy(sizePolicy);
         LabelGameLogo->setText(QString::fromUtf8("GameLogo"));
 
-        gridLayout_5->addWidget(LabelGameLogo, 0, 0, 1, 1);
-
-
-        horizontalLayout_11->addWidget(groupBox);
+        horizontalLayout_11->addWidget(LabelGameLogo);
 
         verticalLayout_6 = new QVBoxLayout();
         verticalLayout_6->setSpacing(0);
@@ -533,7 +518,6 @@ public:
     void retranslateUi(QWidget *FormAchievements)
     {
         FormAchievements->setWindowTitle(QCoreApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
-        groupBox->setTitle(QString());
         ButtonCompare->setText(QCoreApplication::translate("FormAchievements", " \320\241\321\200\320\260\320\262\320\275\320\270\321\202\321\214 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270", nullptr));
         CheckBoxShowFilter->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \321\204\320\270\320\273\321\214\321\202\321\200", nullptr));
         LabelGameOnline->setText(QCoreApplication::translate("FormAchievements", "GameOnline:", nullptr));

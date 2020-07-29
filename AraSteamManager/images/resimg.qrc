@@ -109,5 +109,15 @@
         <file>lvls/0.png</file>
         <file>lvls/1.png</file>
         <file>lvls/2.png</file>
+        <file>black/widgets/combobox_down.png</file>
+        <file>black/widgets/scrollbar_down.png</file>
+        <file>black/widgets/scrollbar_up.png</file>
+        <file>white/widgets/combobox_down.png</file>
+        <file>white/widgets/scrollbar_down.png</file>
+        <file>white/widgets/scrollbar_up.png</file>
+        <file>black/widgets/scrollbar_left.png</file>
+        <file>black/widgets/scrollbar_right.png</file>
+        <file>white/widgets/scrollbar_left.png</file>
+        <file>white/widgets/scrollbar_right.png</file>
     </qresource>
 </RCC>
