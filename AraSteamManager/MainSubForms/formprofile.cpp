@@ -54,33 +54,33 @@ void FormProfile::profileToUi(SProfile aProfile) {
     _profile = std::move(aProfile);
 
     ui->LabelAvatar->setFixedSize(QSize(64, 64));
-    new RequestImage(ui->LabelAvatar, _profile._avatarMedium, 0, false);
-    new RequestImage(ui->LabelAvatarMinimize, _profile._avatar, 0, false);
+    new RequestImage(ui->LabelAvatar,         _profile._avatarMedium, 0, false);
+    new RequestImage(ui->LabelAvatarMinimize, _profile._avatar,       0, false);
 
     ui->LabelRealNameValue->setText(_profile._realName);
     if (_profile._realName != "") {
-        ui->LabelRealName->setVisible(true);
+        ui->LabelRealName     ->setVisible(true);
         ui->LabelRealNameValue->setVisible(true);
     } else {
-        ui->LabelRealName->setVisible(false);
+        ui->LabelRealName     ->setVisible(false);
         ui->LabelRealNameValue->setVisible(false);
     }
 
     ui->LabelTimeCreatedValue->setText(_profile._timeCreated.toString("yyyy.MM.dd"));
     if (_profile._timeCreated > QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
-        ui->LabelTimeCreated->setVisible(true);
+        ui->LabelTimeCreated     ->setVisible(true);
         ui->LabelTimeCreatedValue->setVisible(true);
     } else {
-        ui->LabelTimeCreated->setVisible(false);
+        ui->LabelTimeCreated     ->setVisible(false);
         ui->LabelTimeCreatedValue->setVisible(false);
     }
 
     ui->LabelLocCountryCodeValue->setText(_profile._locCountryCode);
     if (_profile._locCountryCode != "") {
-        ui->LabelLocCountryCode->setVisible(true);
+        ui->LabelLocCountryCode     ->setVisible(true);
         ui->LabelLocCountryCodeValue->setVisible(true);
     } else {
-        ui->LabelLocCountryCode->setVisible(false);
+        ui->LabelLocCountryCode     ->setVisible(false);
         ui->LabelLocCountryCodeValue->setVisible(false);
     }
 
@@ -97,6 +97,7 @@ void FormProfile::profileToUi(SProfile aProfile) {
     setFriends(_profile._steamID);
     setLvl(_profile._steamID);
     setBans(_profile._steamID);
+
 }
 
 QGraphicsDropShadowEffect *FormProfile::createLightning() {
@@ -434,6 +435,8 @@ void FormProfile::retranslate() {
         ui->ButtonSetProfile->setToolTip("");
     }
     }
+    ui->LabelProfileState->setText(tr("%1 профиль сообщества").arg(_profile._profileState == 1 ? tr("Настроен") : tr("Не настроен")));
+    ui->LabelCommentPermission->setText(tr("Публичные комментарии %1").arg(_profile._commentPermission == 1 ? tr("разрешены") : tr("запрещены")));
 }
 
 void FormProfile::setIcons() {

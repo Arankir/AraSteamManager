@@ -108,6 +108,7 @@ public:
         FrameProfileBaseInfo->setFrameShadow(QFrame::Raised);
         horizontalLayout_15 = new QHBoxLayout(FrameProfileBaseInfo);
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
+        horizontalLayout_15->setContentsMargins(-1, -1, 20, -1);
         LabelAvatar = new QLabel(FrameProfileBaseInfo);
         LabelAvatar->setObjectName(QString::fromUtf8("LabelAvatar"));
         LabelAvatar->setText(QString::fromUtf8("Avatar"));
@@ -418,6 +419,8 @@ public:
         horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
         LabelProfileState = new QLabel(FrameProfileMaximumInfo);
         LabelProfileState->setObjectName(QString::fromUtf8("LabelProfileState"));
+        LabelProfileState->setFont(font3);
+        LabelProfileState->setText(QString::fromUtf8("ProfileState"));
 
         horizontalLayout_12->addWidget(LabelProfileState);
 
@@ -432,6 +435,8 @@ public:
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         LabelCommentPermission = new QLabel(FrameProfileMaximumInfo);
         LabelCommentPermission->setObjectName(QString::fromUtf8("LabelCommentPermission"));
+        LabelCommentPermission->setFont(font3);
+        LabelCommentPermission->setText(QString::fromUtf8("CommentPermission"));
 
         horizontalLayout_8->addWidget(LabelCommentPermission);
 
@@ -455,7 +460,7 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(-1, -1, -1, 2);
+        horizontalLayout->setContentsMargins(-1, 9, -1, 2);
         LabelAvatarMinimize = new QLabel(FormProfile);
         LabelAvatarMinimize->setObjectName(QString::fromUtf8("LabelAvatarMinimize"));
         LabelAvatarMinimize->setText(QString::fromUtf8("Ava"));
@@ -534,8 +539,6 @@ public:
         LabelBansDaysAgo->setText(QCoreApplication::translate("FormProfile", "days ago.", nullptr));
         LabelTimeCreated->setText(QCoreApplication::translate("FormProfile", "TimeCreated:", nullptr));
         LabelLocCountryCode->setText(QCoreApplication::translate("FormProfile", "CountryCode:", nullptr));
-        LabelProfileState->setText(QCoreApplication::translate("FormProfile", "ProfileState", nullptr));
-        LabelCommentPermission->setText(QCoreApplication::translate("FormProfile", "CommentPermission", nullptr));
         ButtonSetProfile->setText(QCoreApplication::translate("FormProfile", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
     } // retranslateUi
 

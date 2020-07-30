@@ -38,6 +38,9 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_15">
+      <property name="rightMargin">
+       <number>20</number>
+      </property>
       <item>
        <widget class="QLabel" name="LabelAvatar">
         <property name="text">
@@ -573,8 +576,13 @@
          <layout class="QHBoxLayout" name="horizontalLayout_12">
           <item>
            <widget class="QLabel" name="LabelProfileState">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="text">
-             <string>ProfileState</string>
+             <string notr="true">ProfileState</string>
             </property>
            </widget>
           </item>
@@ -597,8 +605,13 @@
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
            <widget class="QLabel" name="LabelCommentPermission">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="text">
-             <string>CommentPermission</string>
+             <string notr="true">CommentPermission</string>
             </property>
            </widget>
           </item>
@@ -639,6 +652,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
       <number>6</number>
+     </property>
+     <property name="topMargin">
+      <number>9</number>
      </property>
      <property name="bottomMargin">
       <number>2</number>
