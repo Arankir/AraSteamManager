@@ -227,15 +227,24 @@
       <item>
        <widget class="QStackedWidget" name="StackedWidgetProfiles">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QProgressBar" name="FormProgressBar">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="value">
          <number>0</number>
         </property>
@@ -286,7 +295,7 @@
                <x>0</x>
                <y>0</y>
                <width>459</width>
-               <height>229</height>
+               <height>460</height>
               </rect>
              </property>
             </widget>

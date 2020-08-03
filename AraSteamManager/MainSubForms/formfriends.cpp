@@ -37,8 +37,8 @@ void FormFriends::initComponents() {
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID, true);
     ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, 33);
     _profiles.sort();
-    ui->ButtonFriendGoTo->setFixedSize(QSize(25, 25));
-    ui->ButtonFriendFavorite->setFixedSize(QSize(25, 25));
+    ui->ButtonFriendGoTo->setFixedSize(QSize(32, 32));
+    ui->ButtonFriendFavorite->setFixedSize(QSize(32, 32));
     setIcons();
 #define Connects {
     connect(ui->TableWidgetFriends,   &QTableWidget::cellClicked,       this, &FormFriends::tableWidgetFriends_CellClicked);

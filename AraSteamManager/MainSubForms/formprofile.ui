@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>559</width>
-    <height>355</height>
+    <width>638</width>
+    <height>328</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -100,7 +100,7 @@
              </font>
             </property>
             <property name="text">
-             <string>RealName:</string>
+             <string>RealName: </string>
             </property>
            </widget>
           </item>
@@ -649,92 +649,97 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>6</number>
+    <widget class="QFrame" name="FrameProfileButtons">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>41</height>
+      </size>
      </property>
-     <property name="topMargin">
-      <number>9</number>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="bottomMargin">
-      <number>2</number>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
-     <item>
-      <widget class="QLabel" name="LabelAvatarMinimize">
-       <property name="text">
-        <string notr="true">Ava</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="LabelNameMinimize">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string notr="true">Name</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ButtonGames">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string notr="true">Games</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ButtonFriends">
-       <property name="text">
-        <string notr="true">Friends</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ButtonStatistics">
-       <property name="text">
-        <string notr="true"> Статистика</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ButtonFavorites">
-       <property name="text">
-        <string notr="true"> Избранное</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>10</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ButtonSetProfile">
-       <property name="text">
-        <string>Это мой профиль</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     <layout class="QHBoxLayout" name="horizontalLayout_16">
+      <item>
+       <widget class="QLabel" name="LabelAvatarMinimize">
+        <property name="text">
+         <string notr="true">Ava</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="LabelNameMinimize">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string notr="true">Name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonGames">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string notr="true">Games</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonFriends">
+        <property name="text">
+         <string notr="true">Friends</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonStatistics">
+        <property name="text">
+         <string notr="true"> Статистика</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonFavorites">
+        <property name="text">
+         <string notr="true"> Избранное</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>98</width>
+          <height>17</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="ButtonSetProfile">
+        <property name="text">
+         <string>Это мой профиль</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">

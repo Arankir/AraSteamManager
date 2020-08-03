@@ -85,7 +85,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="FrameSelected">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -97,16 +97,16 @@
        <number>9</number>
       </property>
       <property name="leftMargin">
-       <number>3</number>
+       <number>9</number>
       </property>
       <property name="topMargin">
-       <number>3</number>
+       <number>9</number>
       </property>
       <property name="rightMargin">
-       <number>3</number>
+       <number>9</number>
       </property>
       <property name="bottomMargin">
-       <number>3</number>
+       <number>9</number>
       </property>
       <item>
        <widget class="QLabel" name="LabelFriendIcon">

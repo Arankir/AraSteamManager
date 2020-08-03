@@ -73,7 +73,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowAvatars, 0, avatarFriendsCompare);
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowAvatars, 1, allFriends);
 
-    QVBoxLayout *layoutReachedFilter = new QVBoxLayout(ui->GroupBoxReachedFilter);
+    QVBoxLayout *layoutReachedFilter = new QVBoxLayout(ui->FrameReachedFilter);
     _filterMyProfile = new FormCompareProfileFilter(tr("Все достижения"),
                                                     tr("Полученные достижения"),
                                                     tr("Не полученные достижения"),
@@ -289,7 +289,7 @@ int FormAchievements::getGameAppId() {
 void FormAchievements::setFromMode(FormMode aMode) {
     switch (aMode) {
     case FormMode::standart: {
-        ui->GroupBoxReachedFilter->setVisible(true);
+        ui->FrameReachedFilter->setVisible(true);
         _tableAchievements->setType(TableType::standart);
         ui->CheckBoxCompareAllFriends->setVisible(false);
         ui->TableWidgetFriends->setVisible(false);
@@ -301,7 +301,7 @@ void FormAchievements::setFromMode(FormMode aMode) {
         break;
     }
     case FormMode::compare: {
-        ui->GroupBoxReachedFilter->setVisible(false);
+        ui->FrameReachedFilter->setVisible(false);
         _tableAchievements->setType(TableType::compare);
         ui->CheckBoxCompareAllFriends->setVisible(true);
         ui->TableWidgetFriends->setVisible(true);

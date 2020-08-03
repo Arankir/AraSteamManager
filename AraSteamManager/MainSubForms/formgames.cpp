@@ -55,13 +55,13 @@ void FormGames::initComponents() {
     ui->TableWidgetGames->setRowCount(_games.getCount());
     for (int i = 0; i < _games.getCount(); i++) {
         ui->TableWidgetGames->setRowHeight(i, 33 + 18);
-        QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
-        shadowEffect->setOffset(0);
-        shadowEffect->setBlurRadius(50);
-        QProgressBar *pb = new QProgressBar();
-        pb->setGraphicsEffect(shadowEffect);
-        ui->TableWidgetGames->setCellWidget(i, c_tableColumnProgress, pb);
+//        QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
+//        shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
+//        shadowEffect->setOffset(0);
+//        shadowEffect->setBlurRadius(50);
+//        QProgressBar *pb = new QProgressBar();
+//        pb->setGraphicsEffect(shadowEffect);
+//        ui->TableWidgetGames->setCellWidget(i, c_tableColumnProgress, pb);
     }
 //TODO загрузить группы
     ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33 + 8);
@@ -167,14 +167,32 @@ void FormGames::onTablePushed() {
 
 void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
     disconnect(aAchievements, &SAchievementsPlayer::s_finished, this, &FormGames::onResultAchievements);
-    QProgressBar *progressBarAchievements = dynamic_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aAchievements->_index, c_tableColumnProgress));
-    if (progressBarAchievements) {
+
+        QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
+        shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
+        shadowEffect->setOffset(0);
+        shadowEffect->setBlurRadius(50);
+        QProgressBar *pb = new QProgressBar();
+        if (aAchievements->getCount() == 0) {
+            pb->setAccessibleName("BadAchievements");
+            shadowEffect->setColor(QColor(255, 0, 0, 255 * 0.7));
+            pb->setFormat("");
+        }
+        pb->setGraphicsEffect(shadowEffect);
+        ui->TableWidgetGames->setCellWidget(aAchievements->_index, c_tableColumnProgress, pb);
+
+    //QProgressBar *progressBarAchievements = dynamic_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aAchievements->_index, c_tableColumnProgress));
+    //if (progressBarAchievements) {
         //Устанавливается значение програссбара игры
-        progressBarAchievements->setMaximum(aAchievements->getCount());
-        progressBarAchievements->setValue(aAchievements->getReached());
-        progressBarAchievements->setMinimumSize(QSize(25, 25));
+        pb->setMaximum(aAchievements->getCount());
+        pb->setValue(aAchievements->getReached());
+        pb->setMinimumSize(QSize(25, 25));
+
+//        if (aAchievements->getCount() == 0) {
+//            progressBarAchievements->setAccessibleName("BadAchievements");
+//        }
         //Создается item для работы сортировки таблицы
-        ui->TableWidgetGames->setItem(aAchievements->_index, c_tableColumnProgress, new QTableWidgetItem(progressBarAchievements->text().rightJustified(5, '0')));
+        ui->TableWidgetGames->setItem(aAchievements->_index, c_tableColumnProgress, new QTableWidgetItem(pb->text().rightJustified(5, '0')));
         ui->TableWidgetGames->item(aAchievements->_index, c_tableColumnProgress)->setTextAlignment(Qt::AlignRight);
         _achievements[aAchievements->_index] = std::move(*aAchievements);
         emit s_achievementsLoaded(_load++, 0);
@@ -186,7 +204,7 @@ void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
             }
             emit s_finish(width);
         }
-    }
+    //}
     aAchievements->deleteLater();
 }
 #define InitEnd }
@@ -333,7 +351,6 @@ void FormGames::tableWidgetGames_CellClicked(int aRow, int) {
     if(ui->TableWidgetGames->item(aRow, c_tableColumnName)->foreground() == Qt::red) {
         ui->ButtonHide->setIcon(QIcon(_setting.getIconUnhide()));
     }
-    ui->FrameGame->setVisible(true);
 }
 
 void FormGames::tableWidgetGames_CellDoubleClicked(int aRow, int) {

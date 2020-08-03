@@ -366,14 +366,19 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/friends.png \
 		../AraSteamManager/images/white/notreached.png \
 		../AraSteamManager/images/white/find_profile.png \
+		../AraSteamManager/images/white/widgets/scrollbar_down.png \
 		../AraSteamManager/images/white/widgets/checkbox_checked_hover.png \
 		../AraSteamManager/images/white/widgets/radiobutton_unchecked_press.png \
+		../AraSteamManager/images/white/widgets/scrollbar_right.png \
+		../AraSteamManager/images/white/widgets/combobox_down.png \
 		../AraSteamManager/images/white/widgets/checkbox_unchecked.png \
 		../AraSteamManager/images/white/widgets/radiobutton_unchecked_hover.png \
 		../AraSteamManager/images/white/widgets/checkbox_checked.png \
+		../AraSteamManager/images/white/widgets/scrollbar_up.png \
 		../AraSteamManager/images/white/widgets/radiobutton_checked.png \
 		../AraSteamManager/images/white/widgets/checkbox_unchecked_press.png \
 		../AraSteamManager/images/white/widgets/radiobutton_checked_press.png \
+		../AraSteamManager/images/white/widgets/scrollbar_left.png \
 		../AraSteamManager/images/white/widgets/checkbox_unchecked_hover.png \
 		../AraSteamManager/images/white/widgets/radiobutton_checked_hover.png \
 		../AraSteamManager/images/white/widgets/radiobutton_unchecked.png \
@@ -419,9 +424,14 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/friends.png \
 		../AraSteamManager/images/black/notreached.png \
 		../AraSteamManager/images/black/find_profile.png \
+		../AraSteamManager/images/black/widgets/scrollbar_down.png \
+		../AraSteamManager/images/black/widgets/scrollbar_right.png \
+		../AraSteamManager/images/black/widgets/combobox_down.png \
 		../AraSteamManager/images/black/widgets/checkbox_checked.png \
+		../AraSteamManager/images/black/widgets/scrollbar_up.png \
 		../AraSteamManager/images/black/widgets/checkbox_uncheked.png \
 		../AraSteamManager/images/black/widgets/radiobutton_checked.png \
+		../AraSteamManager/images/black/widgets/scrollbar_left.png \
 		../AraSteamManager/images/black/widgets/radiobutton_unchecked.png
 	D:\Qt\5.14.2\mingw73_64\bin\rcc.exe -name resimg ..\AraSteamManager\images\resimg.qrc -o release\qrc_resimg.cpp
 
@@ -2030,6 +2040,18 @@ release/moc_formprofile.cpp: ../AraSteamManager/MainSubForms/formprofile.h \
 		../AraSteamManager/class/steamapi/Sgames.h \
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
+		../AraSteamManager/class/Network/requestimage.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		release/moc_predefs.h \
@@ -7913,6 +7935,18 @@ release/formprofile.o: ../AraSteamManager/MainSubForms/formprofile.cpp ../AraSte
 		../AraSteamManager/class/steamapi/Sgames.h \
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
+		../AraSteamManager/class/Network/requestimage.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		ui_formprofile.h

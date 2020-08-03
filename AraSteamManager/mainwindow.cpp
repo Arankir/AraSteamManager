@@ -18,9 +18,6 @@ constexpr int c_formsSettings = 5;
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), _games(this) {
     ui->setupUi(this);
     initComponents();
-    if (_setting.getMyProfile() != "none") {
-        goToProfile(_setting.getMyProfile(), ProfileUrlType::id);
-    }
 }
 
 void MainWindow::initComponents() {
@@ -36,6 +33,7 @@ void MainWindow::initComponents() {
     ui->ButtonMinimize->setFlat(true);
     ui->ButtonMaximize->setFlat(true);
     ui->ButtonExit->setFlat(true);
+
     ui->FormProgressBar->setVisible(false);
     ui->ButtonBack->setEnabled(false);
     ui->ButtonNext->setEnabled(false);
@@ -66,6 +64,9 @@ void MainWindow::initComponents() {
     connect(ui->ButtonMaximize,      &QPushButton::clicked, this, &MainWindow::buttonMaximize_Clicked);
     connect(ui->ButtonMinimize,      &QPushButton::clicked, this, &MainWindow::buttonMinimize_Clicked);
 #define ConnectsEnd }
+    if (_setting.getMyProfile() != "none") {
+        goToProfile(_setting.getMyProfile(), ProfileUrlType::id);
+    }
 }
 #define InitEnd }
 
@@ -91,13 +92,7 @@ QString MainWindow::getTheme() {
         qss =
 #define button {
                 "QPushButton[text] { "
-//                    "color: white; "
-//                    "background: "+buttonGradient+
-//                    "border: 1px solid #262626; "
-//                    //"min-width: 25px; "
-//                    "min-height: 20px; "
-//                    "border-radius: 2px; "
-                    "padding: 0em 0em 0em 0.3em; "
+                    "padding-left: 0.3em; "
                 "} "
                 "QPushButton { "
                     "color: white; "
@@ -107,6 +102,7 @@ QString MainWindow::getTheme() {
                     "border: 1px solid #262626; "
                     //"min-width: 25px; "
                     "min-height: 20px; "
+                    "padding: 1 4 1 4; "
                     "border-radius: 1px; "
                 "} "
                 "QPushButton:hover { "
@@ -168,6 +164,14 @@ QString MainWindow::getTheme() {
                 "QProgressBar::chunk { "
                     "background-color: #386584; "
                     "margin: 5px; "
+                "} "
+                "QProgressBar[accessibleName=BadAchievements] { "
+                    "color: white; "
+                    "background-color: #E44B4B; "
+                    "text-align: center; "
+                "} "
+                "QProgressBar::chunk[accessibleName=BadAchievements] { "
+                    "background-color: #E44B4B; "
                 "} "
 #define progressbarend }
 #define radiobutton {
@@ -391,8 +395,6 @@ QString MainWindow::getTheme() {
                     "color: #dddddd; "
                 "} "
                 "QTableWidget::item, QTableWidget::item:inactive { "
-//                    "border-bottom: 1px solid #87b6ff; "
-//                    "border-top: 1px solid #87b6ff; "
                     "background-color: rgba(23, 26, 33, 0.5); "
                     "margin-top: 10px; "
                     "padding: 4px; "
@@ -402,7 +404,7 @@ QString MainWindow::getTheme() {
                 "} "
                 "QTableWidget::item:hover:!selected { "
                     "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, "
-                        "stop: 0 rgba(23, 26, 33, 0.5), "
+                        "stop: 0   rgba(23, 26, 33, 0.5), "
                         "stop: 0.5 rgba(43, 46, 53, 0.5), "
                         "stop: 1.0 rgba(23, 26, 33, 0.5)); "
                 "} "
@@ -413,7 +415,7 @@ QString MainWindow::getTheme() {
                 "} "
                 "QTableWidget::item:selected { "
                     "background-color: qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, "
-                        "stop: 0 #2692ff, "
+                        "stop: 0   #2692ff, "
                         "stop: 1.0 #153257); "
                     "border: 1px solid #87b6ff; "
                     "border-right: 0px solid #87b6ff; "
@@ -471,6 +473,7 @@ QString MainWindow::getTheme() {
                 "} "
                 "QFrame { "
                     "border: 0px solid #000000; "
+                    //"background-color: rgba(23, 26, 33, 0.5);"
                 "} "
                 "QFrame[accessibleName=TitleWindow] { "
                     "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
@@ -487,6 +490,12 @@ QString MainWindow::getTheme() {
                 "QFrame#FrameProfileMaximumInfo { "
                     "background-color: rgba(30, 41, 59, 0.5); "
                 "} "
+                "QFrame#FrameProfileButtons { "
+                    "background-color: rgba(30, 41, 59, 0.5); "
+                "} "
+                "QFrame#FrameSelected { "
+                    "background-color: rgba(23, 26, 33, 0.8); "
+                "} "
                 "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget { "
                     "background-color: rgba(0, 0, 0, 0); "
                     "border: 0px solid black; "
@@ -499,6 +508,12 @@ QString MainWindow::getTheme() {
                 "} "
                 "QGroupBox::title { "
                     "color: white; "
+                    "margin: 9 0 0 9; "
+                "} "
+                "QGroupBox { "
+                    "padding-top: 18; "
+                    "border: none; "
+                    "background-color: rgba(23, 26, 33, 0.5); "
                 "} "
                 "QGroupBox#GroupBoxFilter::title { "
                     "image: url(" + _setting.getIconFilter() + "); "
@@ -816,17 +831,19 @@ MainWindow::~MainWindow() {
 
 void MainWindow::updateSettings() {
     _setting.syncronizeSettings();
+//TODO исправить ресайз профилей на нормальный вариант
     switch (_setting.getProfileInfoSize()) {
-    case 0:{
-        ui->StackedWidgetProfiles->setFixedHeight(35);
+    case 0: {
+        ui->StackedWidgetProfiles->setFixedHeight(50);
         break;
     }
-    case 1:{
-        ui->StackedWidgetProfiles->setFixedHeight(100);
+    case 1: {
+        ui->StackedWidgetProfiles->setFixedHeight(140);
         break;
     }
-    case 2:{
-        ui->StackedWidgetProfiles->setFixedHeight(500);
+    case 2: {
+        ui->StackedWidgetProfiles->setFixedHeight(320);
+        break;
     }
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());

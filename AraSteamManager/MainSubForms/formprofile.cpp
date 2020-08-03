@@ -20,6 +20,8 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     ui->LabelName->setGraphicsEffect(createLightning());
     ui->LabelNameMinimize->setGraphicsEffect(createLightning());
 
+    ui->FrameProfileButtons->setMinimumHeight(32 + 18);
+
     ui->LabellvlValue->setStyleSheet("color: #42a9c6; ");
     ui->LabelTimeCreatedValue->setStyleSheet("color: #42a9c6;");
     ui->LabelRealNameValue->setStyleSheet("color: #42a9c6;");
@@ -54,6 +56,7 @@ void FormProfile::profileToUi(SProfile aProfile) {
     _profile = std::move(aProfile);
 
     ui->LabelAvatar->setFixedSize(QSize(64, 64));
+    ui->LabelAvatarMinimize->setFixedSize(QSize(32, 32));
     new RequestImage(ui->LabelAvatar,         _profile._avatarMedium, 0, false);
     new RequestImage(ui->LabelAvatarMinimize, _profile._avatar,       0, false);
 
