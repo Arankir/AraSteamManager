@@ -82,7 +82,8 @@ public:
     QLabel *LabelCommentPermission;
     QSpacerItem *horizontalSpacer_12;
     QSpacerItem *horizontalSpacer_5;
-    QHBoxLayout *horizontalLayout;
+    QFrame *FrameProfileButtons;
+    QHBoxLayout *horizontalLayout_16;
     QLabel *LabelAvatarMinimize;
     QLabel *LabelNameMinimize;
     QPushButton *ButtonGames;
@@ -97,7 +98,7 @@ public:
     {
         if (FormProfile->objectName().isEmpty())
             FormProfile->setObjectName(QString::fromUtf8("FormProfile"));
-        FormProfile->resize(559, 355);
+        FormProfile->resize(638, 328);
         verticalLayout_3 = new QVBoxLayout(FormProfile);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -457,17 +458,20 @@ public:
 
         verticalLayout_3->addWidget(FrameProfileMaximumInfo);
 
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(-1, 9, -1, 2);
-        LabelAvatarMinimize = new QLabel(FormProfile);
+        FrameProfileButtons = new QFrame(FormProfile);
+        FrameProfileButtons->setObjectName(QString::fromUtf8("FrameProfileButtons"));
+        FrameProfileButtons->setMinimumSize(QSize(0, 41));
+        FrameProfileButtons->setFrameShape(QFrame::StyledPanel);
+        FrameProfileButtons->setFrameShadow(QFrame::Raised);
+        horizontalLayout_16 = new QHBoxLayout(FrameProfileButtons);
+        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
+        LabelAvatarMinimize = new QLabel(FrameProfileButtons);
         LabelAvatarMinimize->setObjectName(QString::fromUtf8("LabelAvatarMinimize"));
         LabelAvatarMinimize->setText(QString::fromUtf8("Ava"));
 
-        horizontalLayout->addWidget(LabelAvatarMinimize);
+        horizontalLayout_16->addWidget(LabelAvatarMinimize);
 
-        LabelNameMinimize = new QLabel(FormProfile);
+        LabelNameMinimize = new QLabel(FrameProfileButtons);
         LabelNameMinimize->setObjectName(QString::fromUtf8("LabelNameMinimize"));
         QFont font4;
         font4.setPointSize(12);
@@ -476,45 +480,45 @@ public:
         LabelNameMinimize->setFont(font4);
         LabelNameMinimize->setText(QString::fromUtf8("Name"));
 
-        horizontalLayout->addWidget(LabelNameMinimize);
+        horizontalLayout_16->addWidget(LabelNameMinimize);
 
-        ButtonGames = new QPushButton(FormProfile);
+        ButtonGames = new QPushButton(FrameProfileButtons);
         ButtonGames->setObjectName(QString::fromUtf8("ButtonGames"));
         ButtonGames->setEnabled(true);
         ButtonGames->setStyleSheet(QString::fromUtf8(""));
         ButtonGames->setText(QString::fromUtf8("Games"));
 
-        horizontalLayout->addWidget(ButtonGames);
+        horizontalLayout_16->addWidget(ButtonGames);
 
-        ButtonFriends = new QPushButton(FormProfile);
+        ButtonFriends = new QPushButton(FrameProfileButtons);
         ButtonFriends->setObjectName(QString::fromUtf8("ButtonFriends"));
         ButtonFriends->setText(QString::fromUtf8("Friends"));
 
-        horizontalLayout->addWidget(ButtonFriends);
+        horizontalLayout_16->addWidget(ButtonFriends);
 
-        ButtonStatistics = new QPushButton(FormProfile);
+        ButtonStatistics = new QPushButton(FrameProfileButtons);
         ButtonStatistics->setObjectName(QString::fromUtf8("ButtonStatistics"));
         ButtonStatistics->setText(QString::fromUtf8(" \320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260"));
 
-        horizontalLayout->addWidget(ButtonStatistics);
+        horizontalLayout_16->addWidget(ButtonStatistics);
 
-        ButtonFavorites = new QPushButton(FormProfile);
+        ButtonFavorites = new QPushButton(FrameProfileButtons);
         ButtonFavorites->setObjectName(QString::fromUtf8("ButtonFavorites"));
         ButtonFavorites->setText(QString::fromUtf8(" \320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265"));
 
-        horizontalLayout->addWidget(ButtonFavorites);
+        horizontalLayout_16->addWidget(ButtonFavorites);
 
-        horizontalSpacer_4 = new QSpacerItem(40, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer_4 = new QSpacerItem(98, 17, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout->addItem(horizontalSpacer_4);
+        horizontalLayout_16->addItem(horizontalSpacer_4);
 
-        ButtonSetProfile = new QPushButton(FormProfile);
+        ButtonSetProfile = new QPushButton(FrameProfileButtons);
         ButtonSetProfile->setObjectName(QString::fromUtf8("ButtonSetProfile"));
 
-        horizontalLayout->addWidget(ButtonSetProfile);
+        horizontalLayout_16->addWidget(ButtonSetProfile);
 
 
-        verticalLayout_3->addLayout(horizontalLayout);
+        verticalLayout_3->addWidget(FrameProfileButtons);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -529,7 +533,7 @@ public:
     void retranslateUi(QWidget *FormProfile)
     {
         FormProfile->setWindowTitle(QCoreApplication::translate("FormProfile", "Form", nullptr));
-        LabelRealName->setText(QCoreApplication::translate("FormProfile", "RealName:", nullptr));
+        LabelRealName->setText(QCoreApplication::translate("FormProfile", "RealName: ", nullptr));
         LabelProfileVisibility->setText(QCoreApplication::translate("FormProfile", "Profile", nullptr));
         LabelFriendsVisibility->setText(QCoreApplication::translate("FormProfile", "Friends", nullptr));
         LabelGamesVisibility->setText(QCoreApplication::translate("FormProfile", "Games", nullptr));

@@ -41,7 +41,7 @@ public:
     QCheckBox *CheckBoxOpenProfile;
     QCheckBox *CheckBoxFavorites;
     QSpacerItem *horizontalSpacer_2;
-    QFrame *frame;
+    QFrame *FrameSelected;
     QHBoxLayout *horizontalLayout;
     QLabel *LabelFriendIcon;
     QLabel *LabelFriendName;
@@ -109,30 +109,30 @@ public:
 
         verticalLayout->addWidget(GroupBoxFilter);
 
-        frame = new QFrame(FormFriends);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        horizontalLayout = new QHBoxLayout(frame);
+        FrameSelected = new QFrame(FormFriends);
+        FrameSelected->setObjectName(QString::fromUtf8("FrameSelected"));
+        FrameSelected->setFrameShape(QFrame::StyledPanel);
+        FrameSelected->setFrameShadow(QFrame::Raised);
+        horizontalLayout = new QHBoxLayout(FrameSelected);
         horizontalLayout->setSpacing(9);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(3, 3, 3, 3);
-        LabelFriendIcon = new QLabel(frame);
+        horizontalLayout->setContentsMargins(9, 9, 9, 9);
+        LabelFriendIcon = new QLabel(FrameSelected);
         LabelFriendIcon->setObjectName(QString::fromUtf8("LabelFriendIcon"));
 
         horizontalLayout->addWidget(LabelFriendIcon);
 
-        LabelFriendName = new QLabel(frame);
+        LabelFriendName = new QLabel(FrameSelected);
         LabelFriendName->setObjectName(QString::fromUtf8("LabelFriendName"));
 
         horizontalLayout->addWidget(LabelFriendName);
 
-        LabelFriendStatus = new QLabel(frame);
+        LabelFriendStatus = new QLabel(FrameSelected);
         LabelFriendStatus->setObjectName(QString::fromUtf8("LabelFriendStatus"));
 
         horizontalLayout->addWidget(LabelFriendStatus);
 
-        LabelFriendPublic = new QLabel(frame);
+        LabelFriendPublic = new QLabel(FrameSelected);
         LabelFriendPublic->setObjectName(QString::fromUtf8("LabelFriendPublic"));
 
         horizontalLayout->addWidget(LabelFriendPublic);
@@ -141,18 +141,18 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        ButtonFriendGoTo = new QPushButton(frame);
+        ButtonFriendGoTo = new QPushButton(FrameSelected);
         ButtonFriendGoTo->setObjectName(QString::fromUtf8("ButtonFriendGoTo"));
 
         horizontalLayout->addWidget(ButtonFriendGoTo);
 
-        ButtonFriendFavorite = new QPushButton(frame);
+        ButtonFriendFavorite = new QPushButton(FrameSelected);
         ButtonFriendFavorite->setObjectName(QString::fromUtf8("ButtonFriendFavorite"));
 
         horizontalLayout->addWidget(ButtonFriendFavorite);
 
 
-        verticalLayout->addWidget(frame);
+        verticalLayout->addWidget(FrameSelected);
 
         TableWidgetFriends = new QTableWidget(FormFriends);
         if (TableWidgetFriends->columnCount() < 8)

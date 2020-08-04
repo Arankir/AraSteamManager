@@ -799,8 +799,8 @@ void MainWindow::returnFromForms() {
 
 #define EventsStart {
 void MainWindow::keyPressEvent(QKeyEvent *aEvent) {
-    //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter;
-    if(aEvent->key() == 16777220) {
+    //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter << 16777220;
+    if(aEvent->key() == Qt::Key_Enter) {
         buttonFindProfile_Clicked();
     }
 }

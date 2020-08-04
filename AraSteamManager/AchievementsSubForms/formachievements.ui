@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>837</width>
-    <height>717</height>
+    <height>703</height>
    </rect>
   </property>
   <property name="font">
@@ -562,64 +562,64 @@
         </layout>
        </widget>
       </item>
-      <item>
-       <widget class="QTableWidget" name="TableWidgetFriends">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectColumns</enum>
-        </property>
-        <property name="rowCount">
-         <number>4</number>
-        </property>
-        <property name="columnCount">
-         <number>2</number>
-        </property>
-        <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <column/>
-        <column/>
-        <item row="0" column="1">
-         <property name="text">
-          <string/>
-         </property>
-        </item>
-        <item row="1" column="1">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="foreground">
-          <brush brushstyle="CrossPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QProgressBar" name="ProgressBarFriendsLoad">
-        <property name="value">
-         <number>0</number>
-        </property>
-        <property name="format">
-         <string>%v/%m</string>
-        </property>
-       </widget>
-      </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="TableWidgetFriends">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectColumns</enum>
+     </property>
+     <property name="rowCount">
+      <number>4</number>
+     </property>
+     <property name="columnCount">
+      <number>2</number>
+     </property>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <column/>
+     <column/>
+     <item row="0" column="1">
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+     <item row="1" column="1">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="foreground">
+       <brush brushstyle="CrossPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QProgressBar" name="ProgressBarFriendsLoad">
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="format">
+      <string>%v/%m</string>
+     </property>
     </widget>
    </item>
    <item>

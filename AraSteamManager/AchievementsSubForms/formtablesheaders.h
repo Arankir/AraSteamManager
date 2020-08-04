@@ -128,6 +128,7 @@ private slots:
     QTableWidget *getTableHH();
     QTableWidget *getTableContent();
 
+    int insertCheckableColumn();
 private:
     Ui::FormTablesHeaders *ui;
     bool _visibleHorizontal = true;

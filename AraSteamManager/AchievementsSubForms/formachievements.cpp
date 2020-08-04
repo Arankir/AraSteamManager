@@ -30,6 +30,9 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     #define LoadData {
     this->setAttribute(Qt::WA_TranslucentBackground);
 
+    //Временно
+    ui->ListWidgetValuesCategory->setDragEnabled(false);
+
     QLabel *allFriends = new QLabel("All", this);
     allFriends->setToolTip(tr("Достижения друзей"));
     allFriends->setScaledContents(true);
@@ -275,14 +278,6 @@ void FormAchievements::onTablePulled(int reached, int notReached) {
         _filterMyProfile->update();
     }
 }
-
-QString FormAchievements::getProfileId() {
-    return _profile._steamID;
-}
-
-int FormAchievements::getGameAppId() {
-    return _game._appID;
-}
 #define InitEnd }
 
 #define SimpleCompare {
@@ -510,6 +505,14 @@ void FormAchievements::changeEvent(QEvent *event) {
     }
 }
 
+QString FormAchievements::getProfileId() {
+    return _profile._steamID;
+}
+
+int FormAchievements::getGameAppId() {
+    return _game._appID;
+}
+
 void FormAchievements::showCategories() {
     _categoriesGame.update();
     QFormLayout *layoutComboBox = ui->layoutComboBoxCategories;
@@ -599,10 +602,10 @@ FormCategoryValue *FormAchievements::createValueCategory() {
     connect(newValue, &FormCategoryValue::s_deleting,       this,     &FormAchievements::formCategoryDelete);
     connect(newValue, &FormCategoryValue::s_reverse,        this,     &FormAchievements::formCategoryReverse);
     connect(this    , &FormAchievements::s_updateSettings,  newValue, &FormCategoryValue::updateSettings);
-    connect(newValue, &FormCategoryValue::s_valuechange,    this, [=](int aPos, QString aValue) {
+    connect(newValue, &FormCategoryValue::s_valuechange,    this,     [=](int aPos, QString aValue) {
         _tableAchievements->changeHorizontalTitle((c_tableCategoryColumnNoValue + 1) + aPos, aValue);
     });
-    connect(newValue, &FormCategoryValue::s_selectchange,   this, [=](int aPos, bool aSelect) {
+    connect(newValue, &FormCategoryValue::s_selectchange,   this,     [=](int aPos, bool aSelect) {
         _tableAchievements->setVisibleContentSelect(aPos, aSelect);
     });
     _values.append(newValue);
@@ -896,7 +899,7 @@ void FormAchievements::comboBoxCategories_Activated(int aIndex) {
 void FormAchievements::checkBoxCategoryVisibleAll_Clicked() {
     bool check = ui->CheckBoxCategoryVisibleAll->isChecked();
     for (auto &value: _values) {
-        value->setVisible(check);
+        value->setColumnVisible(check);
     }
 }
 
@@ -944,25 +947,41 @@ void FormAchievements::formCategoryPosition_Change(int aPosOld, int aPosNew) {
         QMessageBox::warning(this, "Ошибка!", tr("Невозможно переместить значение"));
     } else {
         if (_tableAchievements->swapCategoryColumns(aPosOld, aPosNew)) {
-            ui->ListWidgetValuesCategory->blockSignals(true);
             std::swap(_values[aPosOld], _values[aPosNew]);
-            //ui->ListWidgetValuesCategory->clear();
-            //QWidget *item1 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(a_pos));
-            //QWidget *item2 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(a_posNew));
-            //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(a_pos),item2);
-            //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(a_posNew),item1);
-            //исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //        for (int i=0;i<_values.size();i++) {
-    //            QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);//ui->ListWidgetValuesCategory->takeItem(0);
-    //            ui->ListWidgetValuesCategory->removeItemWidget(item);
-    //            item->setSizeHint(_values[i]->sizeHint());
-    //            _values[i]->SetPosition(i);
-    //            UpdateValuesUpDown(i);
-    //            ui->ListWidgetValuesCategory->setItemWidget(item,_values[i]);
-    //            qDebug()<<i<<item;
-    //        }
+//            for (auto &value: _values) {
+//                value->setParent(nullptr);
+//            }
+//            ui->ListWidgetValuesCategory->blockSignals(true);
+//            ui->ListWidgetValuesCategory->clear();
+//            ui->ListWidgetValuesCategory->blockSignals(false);
+//            ui->ListWidgetValuesCategory->clear();
+//            for (auto value: _values) {
+//                qDebug()<<value->getTitle();
+//            }
+            QListWidgetItem *oldPosItem = ui->ListWidgetValuesCategory->item(aPosOld);
+            oldPosItem->setToolTip("1");
+            QListWidgetItem *newPosItem = ui->ListWidgetValuesCategory->item(aPosNew);
+            int newIndex = ui->ListWidgetValuesCategory->row(newPosItem);
+            newPosItem->setToolTip("2");
+            qDebug()<<newPosItem;
+            //QListWidgetItem *temp = ui->ListWidgetValuesCategory->takeItem(newIndex);
+            ui->ListWidgetValuesCategory->insertItem(aPosOld, newPosItem);
+            ui->ListWidgetValuesCategory->insertItem(aPosNew, oldPosItem);
+            //QWidget *item1 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(aPosOld));
+            //QWidget *item2 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(aPosNew));
+            //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(aPosOld), item2);
+            //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(aPosNew), item1);
+            qDebug()<<1;
+//исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            for (int i = 0; i < _values.size(); i++) {
+                //QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);//ui->ListWidgetValuesCategory->takeItem(0);
+                //item->setSizeHint(_values[i]->sizeHint());
+                _values[i]->setPosition(i);
+                updateValuesUpDown(i);
+                //ui->ListWidgetValuesCategory->setItemWidget(item, _values[i]);
+                qDebug()<<i;
+            }
             //обновить данные на ListWidget
-            ui->ListWidgetValuesCategory->blockSignals(false);
         }
     }
 }

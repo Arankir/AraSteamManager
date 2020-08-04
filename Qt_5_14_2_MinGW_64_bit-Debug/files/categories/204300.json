@@ -1,0 +1,34 @@
+{
+    "Categories": [
+        {
+            "IsNoValues": 1,
+            "NoValues": [
+            ],
+            "Title": "123",
+            "Values": [
+                {
+                    "Achievements": [
+                    ],
+                    "Title": ""
+                },
+                {
+                    "Achievements": [
+                    ],
+                    "Title": ""
+                },
+                {
+                    "Achievements": [
+                    ],
+                    "Title": ""
+                },
+                {
+                    "Achievements": [
+                    ],
+                    "Title": ""
+                }
+            ]
+        }
+    ],
+    "Game": null,
+    "GameID": null
+}

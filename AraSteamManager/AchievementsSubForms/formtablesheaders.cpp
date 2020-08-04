@@ -340,10 +340,20 @@ TableType FormTablesHeaders::getType() {
 
 void FormTablesHeaders::cancelCategory() {
     while (_categoriesColumns.size() > 0) {
-        removeColumn(_categoriesColumns[0]);
-        _categoriesColumns.remove(0);
+        for (auto friendColumn: _friendsColumns) {
+            if (friendColumn > _categoriesColumns.last()) {
+                friendColumn--;
+            }
+        }
+        removeColumn(_categoriesColumns.last());
+        _categoriesColumns.removeLast();
     }
     if (_noValueColumn > -1) {
+        for (auto friendColumn: _friendsColumns) {
+            if (friendColumn > _noValueColumn) {
+                friendColumn--;
+            }
+        }
         removeColumn(_noValueColumn);
         _isNoValue = -1;
     }
@@ -445,20 +455,20 @@ bool FormTablesHeaders::addFriendColumn(SProfile aFriendProfile) {
 }
 
 void FormTablesHeaders::addNoValueColumn() {
-    insertColumn(ui->TableWidgetContent->columnCount());
-    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
-        ui->TableWidgetContent->setItem(i, ui->TableWidgetContent->columnCount() - 1, createFlag(false));
-    }
-    _noValueColumn = ui->TableWidgetContent->columnCount() - 1;
+    _noValueColumn = insertCheckableColumn();
 }
 
 void FormTablesHeaders::addCategoryColumn() {
+    _categoriesColumns.push_back(insertCheckableColumn());
+}
+
+int FormTablesHeaders::insertCheckableColumn() {
     insertColumn(ui->TableWidgetContent->columnCount());
     setColumnWidth(ui->TableWidgetContent->columnCount() -1, 48);
-    for(int i = 0;i<ui->TableWidgetContent->rowCount();i++) {
+    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
         ui->TableWidgetContent->setItem(i, ui->TableWidgetContent->columnCount() - 1, createFlag(false));
     }
-    _categoriesColumns.push_back(std::move(ui->TableWidgetContent->columnCount() - 1));
+    return ui->TableWidgetContent->columnCount() - 1;
 }
 
 void FormTablesHeaders::removeFriendColumn(QString aFriendName) {
@@ -526,12 +536,6 @@ bool FormTablesHeaders::pullTable() {
         _fAchievements.setRow(getRowCount());
         _fCompare.setRow(getRowCount());
         createThread();
-//        Threading loadTable(this);
-//        //QLabel *labelCompareSummary = new QLabel(this);
-//        //setWidgetHorizontalHeader(1, c_tableAchievementColumnReachedMy, labelCompareSummary);
-//        loadTable.AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription,
-//                                        c_tableAchievementColumnWorld,  c_tableAchievementColumnReachedMy,
-//                                        _achievements, ui->TableWidgetContent);
         return true;
     } else {
         setRowCount(1);
@@ -546,9 +550,8 @@ bool FormTablesHeaders::pullTable() {
 
 void FormTablesHeaders::createThread() {
     Threading *loadTable = new Threading(this);
-    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription,
-                                    c_tableAchievementColumnWorld,  c_tableAchievementColumnReachedMy,
-                                    &_achievements, ui->TableWidgetContent);
+    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription, c_tableAchievementColumnWorld,
+                                     c_tableAchievementColumnReachedMy, &_achievements, ui->TableWidgetContent);
     connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
         emit s_achievementsLoaded(progress, row);
     });
@@ -565,6 +568,7 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
     ui->TableWidgetContent->resizeRowsToContents();
     int row = 0;
     for (const auto &achievement: _achievements) {
+        //создание картинок
         QString achievementIcon = achievement._icon.mid(66, achievement._icon.length());
         QString pathImage = _setting._pathImagesAchievements + QString::number(_game._appID) + "/" + achievementIcon.mid(achievementIcon.indexOf("/", 1) + 1, achievementIcon.length() - 1);
         QLabel *iconGame = new QLabel(this);
@@ -576,6 +580,7 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
             } else {
                 iconGame->setPixmap(QPixmap(pathImage));
             }
+
             ui->TableWidgetContent->resizeRowToContents(row);
             if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {
                 ui->TableWidgetContent->setRowHeight(row, 64 + 18);

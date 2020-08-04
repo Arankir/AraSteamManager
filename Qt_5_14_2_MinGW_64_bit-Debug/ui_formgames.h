@@ -29,7 +29,7 @@ class Ui_FormGames
 {
 public:
     QVBoxLayout *verticalLayout_2;
-    QFrame *FrameGame;
+    QFrame *FrameSelected;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
     QLabel *LabelIconGame;
@@ -66,32 +66,32 @@ public:
         font.setPointSize(10);
         FormGames->setFont(font);
         verticalLayout_2 = new QVBoxLayout(FormGames);
-        verticalLayout_2->setSpacing(3);
+        verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        FrameGame = new QFrame(FormGames);
-        FrameGame->setObjectName(QString::fromUtf8("FrameGame"));
+        FrameSelected = new QFrame(FormGames);
+        FrameSelected->setObjectName(QString::fromUtf8("FrameSelected"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(FrameGame->sizePolicy().hasHeightForWidth());
-        FrameGame->setSizePolicy(sizePolicy);
-        FrameGame->setFrameShape(QFrame::StyledPanel);
-        FrameGame->setFrameShadow(QFrame::Raised);
-        verticalLayout_3 = new QVBoxLayout(FrameGame);
-        verticalLayout_3->setSpacing(3);
+        sizePolicy.setHeightForWidth(FrameSelected->sizePolicy().hasHeightForWidth());
+        FrameSelected->setSizePolicy(sizePolicy);
+        FrameSelected->setFrameShape(QFrame::StyledPanel);
+        FrameSelected->setFrameShadow(QFrame::Raised);
+        verticalLayout_3 = new QVBoxLayout(FrameSelected);
+        verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_3->setContentsMargins(9, 9, 9, 9);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(3);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        LabelIconGame = new QLabel(FrameGame);
+        LabelIconGame = new QLabel(FrameSelected);
         LabelIconGame->setObjectName(QString::fromUtf8("LabelIconGame"));
         LabelIconGame->setText(QString::fromUtf8("Icon"));
 
         horizontalLayout_2->addWidget(LabelIconGame);
 
-        LabelTitleGame = new QLabel(FrameGame);
+        LabelTitleGame = new QLabel(FrameSelected);
         LabelTitleGame->setObjectName(QString::fromUtf8("LabelTitleGame"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
@@ -109,7 +109,7 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
-        ProgressBarSelectedGame = new QProgressBar(FrameGame);
+        ProgressBarSelectedGame = new QProgressBar(FrameSelected);
         ProgressBarSelectedGame->setObjectName(QString::fromUtf8("ProgressBarSelectedGame"));
         ProgressBarSelectedGame->setValue(0);
         ProgressBarSelectedGame->setFormat(QString::fromUtf8("%v/%m (%p%)"));
@@ -119,20 +119,20 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(3);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        ButtonAchievements = new QPushButton(FrameGame);
+        ButtonAchievements = new QPushButton(FrameSelected);
         ButtonAchievements->setObjectName(QString::fromUtf8("ButtonAchievements"));
         sizePolicy1.setHeightForWidth(ButtonAchievements->sizePolicy().hasHeightForWidth());
         ButtonAchievements->setSizePolicy(sizePolicy1);
 
         horizontalLayout_3->addWidget(ButtonAchievements);
 
-        ButtonFavorite = new QPushButton(FrameGame);
+        ButtonFavorite = new QPushButton(FrameSelected);
         ButtonFavorite->setObjectName(QString::fromUtf8("ButtonFavorite"));
         ButtonFavorite->setText(QString::fromUtf8(""));
 
         horizontalLayout_3->addWidget(ButtonFavorite);
 
-        ButtonHide = new QPushButton(FrameGame);
+        ButtonHide = new QPushButton(FrameSelected);
         ButtonHide->setObjectName(QString::fromUtf8("ButtonHide"));
         ButtonHide->setText(QString::fromUtf8(""));
 
@@ -142,7 +142,7 @@ public:
         verticalLayout_3->addLayout(horizontalLayout_3);
 
 
-        verticalLayout_2->addWidget(FrameGame);
+        verticalLayout_2->addWidget(FrameSelected);
 
         ProgressBarLoading = new QProgressBar(FormGames);
         ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));

@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormTablesHeaders_t {
-    QByteArrayData data[79];
-    char stringdata0[1025];
+    QByteArrayData data[80];
+    char stringdata0[1047];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -111,7 +111,8 @@ QT_MOC_LITERAL(74, 957, 9), // "flagState"
 QT_MOC_LITERAL(75, 967, 16), // "updateHiddenRows"
 QT_MOC_LITERAL(76, 984, 10), // "getTableHH"
 QT_MOC_LITERAL(77, 995, 13), // "QTableWidget*"
-QT_MOC_LITERAL(78, 1009, 15) // "getTableContent"
+QT_MOC_LITERAL(78, 1009, 15), // "getTableContent"
+QT_MOC_LITERAL(79, 1025, 21) // "insertCheckableColumn"
 
     },
     "FormTablesHeaders\0s_contentCellClicked\0"
@@ -142,7 +143,8 @@ QT_MOC_LITERAL(78, 1009, 15) // "getTableContent"
     "columns\0removeColumn\0retranslate\0"
     "onTablePulled\0reached\0notReached\0"
     "createFlag\0flagState\0updateHiddenRows\0"
-    "getTableHH\0QTableWidget*\0getTableContent"
+    "getTableHH\0QTableWidget*\0getTableContent\0"
+    "insertCheckableColumn"
 };
 #undef QT_MOC_LITERAL
 
@@ -152,7 +154,7 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      40,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -160,47 +162,48 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,  209,    2, 0x06 /* Public */,
-       5,    2,  214,    2, 0x06 /* Public */,
-       7,    2,  219,    2, 0x06 /* Public */,
+       1,    2,  214,    2, 0x06 /* Public */,
+       5,    2,  219,    2, 0x06 /* Public */,
+       7,    2,  224,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    1,  224,    2, 0x0a /* Public */,
-       9,    1,  227,    2, 0x0a /* Public */,
-      10,    1,  230,    2, 0x0a /* Public */,
-      13,    0,  233,    2, 0x0a /* Public */,
-      14,    0,  234,    2, 0x0a /* Public */,
-      15,    1,  235,    2, 0x0a /* Public */,
-      15,    1,  238,    2, 0x0a /* Public */,
-      18,    1,  241,    2, 0x0a /* Public */,
-      19,    0,  244,    2, 0x0a /* Public */,
-      20,    1,  245,    2, 0x0a /* Public */,
-      23,    3,  248,    2, 0x0a /* Public */,
-      28,    2,  255,    2, 0x0a /* Public */,
-      29,    1,  260,    2, 0x0a /* Public */,
-      31,    3,  263,    2, 0x0a /* Public */,
-      35,    3,  270,    2, 0x0a /* Public */,
-      35,    2,  277,    2, 0x2a /* Public | MethodCloned */,
-      40,    1,  282,    2, 0x0a /* Public */,
-      42,    1,  285,    2, 0x0a /* Public */,
-      44,    1,  288,    2, 0x0a /* Public */,
-      46,    2,  291,    2, 0x0a /* Public */,
-      49,    4,  296,    2, 0x0a /* Public */,
-      54,    2,  305,    2, 0x0a /* Public */,
-      57,    0,  310,    2, 0x0a /* Public */,
-      58,    1,  311,    2, 0x0a /* Public */,
-      60,    1,  314,    2, 0x0a /* Public */,
-      62,    0,  317,    2, 0x0a /* Public */,
-      63,    0,  318,    2, 0x0a /* Public */,
-      64,    2,  319,    2, 0x08 /* Private */,
-      66,    1,  324,    2, 0x08 /* Private */,
-      68,    1,  327,    2, 0x08 /* Private */,
-      69,    0,  330,    2, 0x08 /* Private */,
-      70,    2,  331,    2, 0x08 /* Private */,
-      73,    1,  336,    2, 0x08 /* Private */,
-      75,    0,  339,    2, 0x08 /* Private */,
-      76,    0,  340,    2, 0x08 /* Private */,
-      78,    0,  341,    2, 0x08 /* Private */,
+       8,    1,  229,    2, 0x0a /* Public */,
+       9,    1,  232,    2, 0x0a /* Public */,
+      10,    1,  235,    2, 0x0a /* Public */,
+      13,    0,  238,    2, 0x0a /* Public */,
+      14,    0,  239,    2, 0x0a /* Public */,
+      15,    1,  240,    2, 0x0a /* Public */,
+      15,    1,  243,    2, 0x0a /* Public */,
+      18,    1,  246,    2, 0x0a /* Public */,
+      19,    0,  249,    2, 0x0a /* Public */,
+      20,    1,  250,    2, 0x0a /* Public */,
+      23,    3,  253,    2, 0x0a /* Public */,
+      28,    2,  260,    2, 0x0a /* Public */,
+      29,    1,  265,    2, 0x0a /* Public */,
+      31,    3,  268,    2, 0x0a /* Public */,
+      35,    3,  275,    2, 0x0a /* Public */,
+      35,    2,  282,    2, 0x2a /* Public | MethodCloned */,
+      40,    1,  287,    2, 0x0a /* Public */,
+      42,    1,  290,    2, 0x0a /* Public */,
+      44,    1,  293,    2, 0x0a /* Public */,
+      46,    2,  296,    2, 0x0a /* Public */,
+      49,    4,  301,    2, 0x0a /* Public */,
+      54,    2,  310,    2, 0x0a /* Public */,
+      57,    0,  315,    2, 0x0a /* Public */,
+      58,    1,  316,    2, 0x0a /* Public */,
+      60,    1,  319,    2, 0x0a /* Public */,
+      62,    0,  322,    2, 0x0a /* Public */,
+      63,    0,  323,    2, 0x0a /* Public */,
+      64,    2,  324,    2, 0x08 /* Private */,
+      66,    1,  329,    2, 0x08 /* Private */,
+      68,    1,  332,    2, 0x08 /* Private */,
+      69,    0,  335,    2, 0x08 /* Private */,
+      70,    2,  336,    2, 0x08 /* Private */,
+      73,    1,  341,    2, 0x08 /* Private */,
+      75,    0,  344,    2, 0x08 /* Private */,
+      76,    0,  345,    2, 0x08 /* Private */,
+      78,    0,  346,    2, 0x08 /* Private */,
+      79,    0,  347,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -244,6 +247,7 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
     QMetaType::Void,
     0x80000000 | 77,
     0x80000000 | 77,
+    QMetaType::Int,
 
        0        // eod
 };
@@ -301,6 +305,8 @@ void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
             if (_a[0]) *reinterpret_cast< QTableWidget**>(_a[0]) = std::move(_r); }  break;
         case 38: { QTableWidget* _r = _t->getTableContent();
             if (_a[0]) *reinterpret_cast< QTableWidget**>(_a[0]) = std::move(_r); }  break;
+        case 39: { int _r = _t->insertCheckableColumn();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -376,13 +382,13 @@ int FormTablesHeaders::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 39)
+        if (_id < 40)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 40;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 39)
+        if (_id < 40)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 40;
     }
     return _id;
 }

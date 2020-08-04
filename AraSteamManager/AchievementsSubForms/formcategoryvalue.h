@@ -21,7 +21,7 @@ class FormCategoryValue: public QWidget {
 public:
     explicit FormCategoryValue(int position, QWidget *parent = nullptr);
     ~FormCategoryValue();
-    void setVisible(bool visible);
+    void setColumnVisible(bool visible);
     void setPosition(int pos);
     void setTitle(QString);
     void setEnabledUpDown(EnabledUpDown firstlast);
@@ -32,6 +32,7 @@ public:
 public slots:
     void updateSettings();
     void setIcons();
+
 signals:
     void s_valuechange(int pos, QString value);
     void s_visiblechange(int pos, bool visible);

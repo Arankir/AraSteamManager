@@ -4,14 +4,14 @@
 FormCategoryValue::FormCategoryValue(int aPos, QWidget *aParent): QWidget(aParent), ui(new Ui::FormCategoryValue), _position(aPos) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    connect(ui->CheckBoxVisible, &QCheckBox::stateChanged, this, &FormCategoryValue::checkBoxVisible_StateChanged);
-    connect(ui->ButtonUp, &QPushButton::clicked, this, &FormCategoryValue::buttonUp_Clicked);
-    connect(ui->ButtonDown, &QPushButton::clicked, this, &FormCategoryValue::buttonDown_Clicked);
-    connect(ui->ButtonSelect, &QPushButton::clicked, this, &FormCategoryValue::buttonSelect_Clicked);
-    connect(ui->ButtonUnSelect, &QPushButton::clicked, this, &FormCategoryValue::buttonUnSelect_Clicked);
-    connect(ui->ButtonDelete, &QPushButton::clicked, this, &FormCategoryValue::buttonDelete_Clicked);
-    connect(ui->LineEditTitle, &QLineEdit::textChanged, this, &FormCategoryValue::lineEditTitle_TextChanged);
-    connect(ui->ButtonReverse, &QPushButton::clicked, this, &FormCategoryValue::buttonReverse_Clicked);
+    connect(ui->ButtonUp,        &QPushButton::clicked,     this, &FormCategoryValue::buttonUp_Clicked);
+    connect(ui->ButtonDown,      &QPushButton::clicked,     this, &FormCategoryValue::buttonDown_Clicked);
+    connect(ui->ButtonSelect,    &QPushButton::clicked,     this, &FormCategoryValue::buttonSelect_Clicked);
+    connect(ui->ButtonUnSelect,  &QPushButton::clicked,     this, &FormCategoryValue::buttonUnSelect_Clicked);
+    connect(ui->ButtonDelete,    &QPushButton::clicked,     this, &FormCategoryValue::buttonDelete_Clicked);
+    connect(ui->ButtonReverse,   &QPushButton::clicked,     this, &FormCategoryValue::buttonReverse_Clicked);
+    connect(ui->CheckBoxVisible, &QCheckBox::stateChanged,  this, &FormCategoryValue::checkBoxVisible_StateChanged);
+    connect(ui->LineEditTitle,   &QLineEdit::textChanged,   this, &FormCategoryValue::lineEditTitle_TextChanged);
     ui->LabelPosition->setText(QString::number(_position + 1));
     setIcons();
 }
@@ -67,7 +67,7 @@ void FormCategoryValue::lineEditTitle_TextChanged(const QString &arg1) {
     emit s_valuechange(_position, arg1);
 }
 
-void FormCategoryValue::setVisible(bool aVisible) {
+void FormCategoryValue::setColumnVisible(bool aVisible) {
     ui->CheckBoxVisible->setChecked(aVisible);
 }
 
