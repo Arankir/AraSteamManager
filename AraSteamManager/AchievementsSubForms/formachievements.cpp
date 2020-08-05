@@ -948,39 +948,27 @@ void FormAchievements::formCategoryPosition_Change(int aPosOld, int aPosNew) {
     } else {
         if (_tableAchievements->swapCategoryColumns(aPosOld, aPosNew)) {
             std::swap(_values[aPosOld], _values[aPosNew]);
-//            for (auto &value: _values) {
-//                value->setParent(nullptr);
-//            }
+            for (int i = 0; i < _values.size(); i++) {
+                _values[i]->setPosition(i);
+                updateValuesUpDown(i);
+            }
 //            ui->ListWidgetValuesCategory->blockSignals(true);
 //            ui->ListWidgetValuesCategory->clear();
 //            ui->ListWidgetValuesCategory->blockSignals(false);
-//            ui->ListWidgetValuesCategory->clear();
-//            for (auto value: _values) {
-//                qDebug()<<value->getTitle();
-//            }
-            QListWidgetItem *oldPosItem = ui->ListWidgetValuesCategory->item(aPosOld);
-            oldPosItem->setToolTip("1");
-            QListWidgetItem *newPosItem = ui->ListWidgetValuesCategory->item(aPosNew);
-            int newIndex = ui->ListWidgetValuesCategory->row(newPosItem);
-            newPosItem->setToolTip("2");
-            qDebug()<<newPosItem;
-            //QListWidgetItem *temp = ui->ListWidgetValuesCategory->takeItem(newIndex);
-            ui->ListWidgetValuesCategory->insertItem(aPosOld, newPosItem);
+            qDebug()<<aPosOld<<aPosNew;
+            QListWidgetItem *oldPosItem = ui->ListWidgetValuesCategory->takeItem(aPosOld);
             ui->ListWidgetValuesCategory->insertItem(aPosNew, oldPosItem);
+            qDebug()<<111;
+            //QListWidgetItem *newPosItem = ui->ListWidgetValuesCategory->item(aPosNew);
+            //int newIndex = ui->ListWidgetValuesCategory->row(newPosItem);
+            //QListWidgetItem *temp = ui->ListWidgetValuesCategory->takeItem(newIndex);
+            //ui->ListWidgetValuesCategory->insertItem(aPosOld, newPosItem);
+            //ui->ListWidgetValuesCategory->insertItem(aPosNew, oldPosItem);
             //QWidget *item1 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(aPosOld));
             //QWidget *item2 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(aPosNew));
             //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(aPosOld), item2);
             //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(aPosNew), item1);
-            qDebug()<<1;
 //исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            for (int i = 0; i < _values.size(); i++) {
-                //QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);//ui->ListWidgetValuesCategory->takeItem(0);
-                //item->setSizeHint(_values[i]->sizeHint());
-                _values[i]->setPosition(i);
-                updateValuesUpDown(i);
-                //ui->ListWidgetValuesCategory->setItemWidget(item, _values[i]);
-                qDebug()<<i;
-            }
             //обновить данные на ListWidget
         }
     }
