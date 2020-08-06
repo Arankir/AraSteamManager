@@ -1,9 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>apply.png</file>
-        <file>cancel.png</file>
-        <file>create.png</file>
-        <file>delete.png</file>
         <file>logo.png</file>
         <file>black/all.png</file>
         <file>black/back.png</file>
@@ -81,13 +77,9 @@
         <file>white/widgets/radiobutton_unchecked.png</file>
         <file>black/set_home.png</file>
         <file>white/set_home.png</file>
-        <file>state_black.png</file>
         <file>state_blue.png</file>
         <file>state_green.png</file>
-        <file>state_orange.png</file>
-        <file>state_purple.png</file>
         <file>state_red.png</file>
-        <file>state_white.png</file>
         <file>state_yellow.png</file>
         <file>loading.gif</file>
         <file>black/close_window.png</file>
@@ -106,9 +98,6 @@
         <file>white/widgets/radiobutton_checked_press.png</file>
         <file>white/widgets/radiobutton_unchecked_hover.png</file>
         <file>white/widgets/radiobutton_unchecked_press.png</file>
-        <file>lvls/0.png</file>
-        <file>lvls/1.png</file>
-        <file>lvls/2.png</file>
         <file>black/widgets/combobox_down.png</file>
         <file>black/widgets/scrollbar_down.png</file>
         <file>black/widgets/scrollbar_up.png</file>
@@ -119,5 +108,70 @@
         <file>black/widgets/scrollbar_right.png</file>
         <file>white/widgets/scrollbar_left.png</file>
         <file>white/widgets/scrollbar_right.png</file>
+        <file>black/create.png</file>
+        <file>black/delete.png</file>
+        <file>black/edit.png</file>
+        <file>white/create.png</file>
+        <file>white/delete.png</file>
+        <file>white/edit.png</file>
+        <file>white/apply.png</file>
+        <file>black/apply.png</file>
+        <file>black/bottom.png</file>
+        <file>black/top.png</file>
+        <file>white/bottom.png</file>
+        <file>white/top.png</file>
+        <file>levels/1.png</file>
+        <file>levels/10.png</file>
+        <file>levels/11.png</file>
+        <file>levels/12.png</file>
+        <file>levels/13.png</file>
+        <file>levels/14.png</file>
+        <file>levels/15.png</file>
+        <file>levels/16.png</file>
+        <file>levels/17.png</file>
+        <file>levels/18.png</file>
+        <file>levels/19.png</file>
+        <file>levels/2.png</file>
+        <file>levels/20.png</file>
+        <file>levels/21.png</file>
+        <file>levels/22.png</file>
+        <file>levels/23.png</file>
+        <file>levels/24.png</file>
+        <file>levels/25.png</file>
+        <file>levels/26.png</file>
+        <file>levels/27.png</file>
+        <file>levels/28.png</file>
+        <file>levels/29.png</file>
+        <file>levels/3.png</file>
+        <file>levels/30.png</file>
+        <file>levels/31.png</file>
+        <file>levels/32.png</file>
+        <file>levels/33.png</file>
+        <file>levels/34.png</file>
+        <file>levels/35.png</file>
+        <file>levels/36.png</file>
+        <file>levels/37.png</file>
+        <file>levels/38.png</file>
+        <file>levels/39.png</file>
+        <file>levels/4.png</file>
+        <file>levels/40.png</file>
+        <file>levels/41.png</file>
+        <file>levels/42.png</file>
+        <file>levels/43.png</file>
+        <file>levels/44.png</file>
+        <file>levels/45.png</file>
+        <file>levels/46.png</file>
+        <file>levels/47.png</file>
+        <file>levels/48.png</file>
+        <file>levels/49.png</file>
+        <file>levels/5.png</file>
+        <file>levels/50.png</file>
+        <file>levels/51.png</file>
+        <file>levels/52.png</file>
+        <file>levels/6.png</file>
+        <file>levels/7.png</file>
+        <file>levels/8.png</file>
+        <file>levels/9.png</file>
+        <file>levels/0.png</file>
     </qresource>
 </RCC>

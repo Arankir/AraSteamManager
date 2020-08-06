@@ -278,6 +278,8 @@ public:
 
         LabellvlValue = new QLabel(FrameProfileMaximumInfo);
         LabellvlValue->setObjectName(QString::fromUtf8("LabellvlValue"));
+        LabellvlValue->setMinimumSize(QSize(32, 32));
+        LabellvlValue->setMaximumSize(QSize(32, 32));
         LabellvlValue->setFont(font2);
         LabellvlValue->setText(QString::fromUtf8("0"));
         LabellvlValue->setAlignment(Qt::AlignCenter);

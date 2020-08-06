@@ -13,6 +13,13 @@ FormCategoryValue::FormCategoryValue(int aPos, QWidget *aParent): QWidget(aParen
     connect(ui->CheckBoxVisible, &QCheckBox::stateChanged,  this, &FormCategoryValue::checkBoxVisible_StateChanged);
     connect(ui->LineEditTitle,   &QLineEdit::textChanged,   this, &FormCategoryValue::lineEditTitle_TextChanged);
     ui->LabelPosition->setText(QString::number(_position + 1));
+
+    ui->ButtonReverse->setVisible(false);
+    ui->ButtonUp->setVisible(false);
+    ui->ButtonDown->setVisible(false);
+    ui->ButtonSelect->setVisible(false);
+    ui->ButtonUnSelect->setVisible(false);
+    ui->ButtonDelete->setVisible(false);
     setIcons();
 }
 
@@ -25,7 +32,7 @@ void FormCategoryValue::setIcons() {
     ui->ButtonDown->setIcon(QIcon(_setting.getIconDown()));
     ui->ButtonSelect->setIcon(QIcon(_setting.getIconCheckVisible()));
     ui->ButtonUnSelect->setIcon(QIcon(_setting.getIconUncheckVisible()));
-    ui->ButtonDelete->setIcon(QIcon(_setting.getIconDeleteColor()));
+    ui->ButtonDelete->setIcon(QIcon(_setting.getIconDelete()));
     ui->ButtonReverse->setIcon(QIcon(_setting.getIconReverse()));
 }
 

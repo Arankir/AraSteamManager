@@ -60,19 +60,11 @@ public:
     int getVisibleHiddenGames();
     int getProfileInfoSize();
 
-    QString getIconApplyColor();
-    QString getIconCancelColor();
-    QString getIconCreateColor();
-    QString getIconDeleteColor();
     QString getIconLoadingColor();
     QString getIconLogoColor();
-    QString getIconStateBlack();
     QString getIconStateBlue();
     QString getIconStateGreen();
-    QString getIconStateOrange();
-    QString getIconStatePurple();
     QString getIconStateRed();
-    QString getIconStateWhite();
     QString getIconStateYellow();
     QString getIconAll();
     QString getIconBack();
@@ -112,6 +104,12 @@ public:
     QString getIconUnhide();
     QString getIconUp();
     QString getIconUpdate();
+    QString getIconCreate();
+    QString getIconDelete();
+    QString getIconEdit();
+    QString getIconApply();
+    QString getIconTop();
+    QString getIconBottom();
 
     QString getIconCheckBoxChecked();
     QString getIconCheckBoxCheckedHover();

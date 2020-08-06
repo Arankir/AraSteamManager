@@ -313,16 +313,8 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/loading.gif \
 		../AraSteamManager/images/state_yellow.png \
 		../AraSteamManager/images/logo.png \
-		../AraSteamManager/images/state_purple.png \
 		../AraSteamManager/images/state_red.png \
-		../AraSteamManager/images/cancel.png \
-		../AraSteamManager/images/apply.png \
-		../AraSteamManager/images/create.png \
-		../AraSteamManager/images/delete.png \
 		../AraSteamManager/images/state_blue.png \
-		../AraSteamManager/images/state_orange.png \
-		../AraSteamManager/images/state_white.png \
-		../AraSteamManager/images/state_black.png \
 		../AraSteamManager/images/white/statistic.png \
 		../AraSteamManager/images/white/check_all.png \
 		../AraSteamManager/images/white/check_visible.png \
@@ -331,6 +323,7 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/cancel.png \
 		../AraSteamManager/images/white/exit.png \
 		../AraSteamManager/images/white/maximize_window.png \
+		../AraSteamManager/images/white/edit.png \
 		../AraSteamManager/images/white/update.png \
 		../AraSteamManager/images/white/uncheck_visible.png \
 		../AraSteamManager/images/white/favorites.png \
@@ -339,6 +332,7 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/minimize_window.png \
 		../AraSteamManager/images/white/all.png \
 		../AraSteamManager/images/white/settings.png \
+		../AraSteamManager/images/white/apply.png \
 		../AraSteamManager/images/white/delete_all.png \
 		../AraSteamManager/images/white/profile.png \
 		../AraSteamManager/images/white/down.png \
@@ -349,12 +343,14 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/filter.png \
 		../AraSteamManager/images/white/hide.png \
 		../AraSteamManager/images/white/unhide.png \
+		../AraSteamManager/images/white/create.png \
 		../AraSteamManager/images/white/find.png \
 		../AraSteamManager/images/white/in_favorites.png \
 		../AraSteamManager/images/white/change.png \
 		../AraSteamManager/images/white/right.png \
 		../AraSteamManager/images/white/up.png \
 		../AraSteamManager/images/white/link.png \
+		../AraSteamManager/images/white/delete.png \
 		../AraSteamManager/images/white/left.png \
 		../AraSteamManager/images/white/close_window.png \
 		../AraSteamManager/images/white/reached.png \
@@ -389,6 +385,7 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/cancel.png \
 		../AraSteamManager/images/black/exit.png \
 		../AraSteamManager/images/black/maximize_window.png \
+		../AraSteamManager/images/black/edit.png \
 		../AraSteamManager/images/black/update.png \
 		../AraSteamManager/images/black/uncheck_visible.png \
 		../AraSteamManager/images/black/favorites.png \
@@ -397,6 +394,7 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/minimize_window.png \
 		../AraSteamManager/images/black/all.png \
 		../AraSteamManager/images/black/settings.png \
+		../AraSteamManager/images/black/apply.png \
 		../AraSteamManager/images/black/delete_all.png \
 		../AraSteamManager/images/black/profile.png \
 		../AraSteamManager/images/black/down.png \
@@ -407,12 +405,14 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/filter.png \
 		../AraSteamManager/images/black/hide.png \
 		../AraSteamManager/images/black/unhide.png \
+		../AraSteamManager/images/black/create.png \
 		../AraSteamManager/images/black/find.png \
 		../AraSteamManager/images/black/in_favorites.png \
 		../AraSteamManager/images/black/change.png \
 		../AraSteamManager/images/black/right.png \
 		../AraSteamManager/images/black/up.png \
 		../AraSteamManager/images/black/link.png \
+		../AraSteamManager/images/black/delete.png \
 		../AraSteamManager/images/black/left.png \
 		../AraSteamManager/images/black/close_window.png \
 		../AraSteamManager/images/black/reached.png \
@@ -2035,6 +2035,18 @@ release/moc_formprofile.cpp: ../AraSteamManager/MainSubForms/formprofile.h \
 		../AraSteamManager/class/steamapi/Sgames.h \
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
+		../AraSteamManager/class/Network/requestimage.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		release/moc_predefs.h \
@@ -6589,8 +6601,7 @@ release/formachievements.o: ../AraSteamManager/AchievementsSubForms/formachievem
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGroupBox \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgroupbox.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHeaderView \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qheaderview.h \
@@ -8081,24 +8092,32 @@ release/formprofile.o: ../AraSteamManager/MainSubForms/formprofile.cpp ../AraSte
 		../AraSteamManager/class/steamapi/Sgames.h \
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
+		../AraSteamManager/class/Network/requestimage.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
 		ui_formprofile.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/qguiapplication.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qboxlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
-		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \

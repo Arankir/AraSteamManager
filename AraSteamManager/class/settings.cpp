@@ -112,32 +112,12 @@ int Settings::getProfileInfoSize() {
 }
 
 #define IconsStart {
-QString Settings::getIconApplyColor() {
-    return "://apply.png";
-}
-
-QString Settings::getIconCancelColor() {
-    return "://cancel.png";
-}
-
-QString Settings::getIconCreateColor() {
-    return "://create.png";
-}
-
-QString Settings::getIconDeleteColor() {
-    return "://delete.png";
-}
-
 QString Settings::getIconLoadingColor() {
     return "://loading.png";
 }
 
 QString Settings::getIconLogoColor() {
     return "://logo.png";
-}
-
-QString Settings::getIconStateBlack() {
-    return "://state_black.png";
 }
 
 QString Settings::getIconStateBlue() {
@@ -148,20 +128,8 @@ QString Settings::getIconStateGreen() {
     return "://state_green.png";
 }
 
-QString Settings::getIconStateOrange() {
-    return "://state_orange.png";
-}
-
-QString Settings::getIconStatePurple() {
-    return "://state_purple.png";
-}
-
 QString Settings::getIconStateRed() {
     return "://state_red.png";
-}
-
-QString Settings::getIconStateWhite() {
-    return "://state_white.png";
 }
 
 QString Settings::getIconStateYellow() {
@@ -318,6 +286,30 @@ QString Settings::getIconUp() {
 
 QString Settings::getIconUpdate() {
     return "://" + getIconsColor() + "/update.png";
+}
+
+QString Settings::getIconCreate() {
+    return "://" + getIconsColor() + "/create.png";
+}
+
+QString Settings::getIconDelete() {
+    return "://" + getIconsColor() + "/delete.png";
+}
+
+QString Settings::getIconEdit() {
+    return "://" + getIconsColor() + "/edit.png";
+}
+
+QString Settings::getIconApply() {
+    return "://" + getIconsColor() + "/apply.png";
+}
+
+QString Settings::getIconTop() {
+    return "://" + getIconsColor() + "/top.png";
+}
+
+QString Settings::getIconBottom() {
+    return "://" + getIconsColor() + "/bottom.png";
 }
 
 #define IconsWidgetStart {

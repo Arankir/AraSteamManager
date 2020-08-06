@@ -323,11 +323,12 @@ void FormProfile::setBans(QString aSteamId) {
 }
 
 void FormProfile::setLvl(QString aSteamId) {
-//TODO исправить картинки
     SLevels levels(aSteamId);
     ui->LabellvlValue->setText(levels.GetLevel() > 0 ? QString::number(levels.GetLevel()) : "?");
+    int ten = (levels.GetLevel() / 10) % 10;
     QString qss = "color: #42a9c6; "
-                  "border-image: url(://lvls/" + QString::number(levels.GetLevel() / 100) + ".png) 0 0 0 0 stretch stretch; ";
+                  "border-image: url(://levels/" + QString::number(levels.GetLevel() / 100) + ".png) "
+                  + QString::number(ten * 32) + " 0 " + QString::number((10 - ten - 1) * 32) + " 0; ";
     ui->LabellvlValue->setStyleSheet(qss);
 }
 #define setDataEnd }

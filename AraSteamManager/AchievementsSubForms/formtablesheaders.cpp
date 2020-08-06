@@ -471,6 +471,13 @@ int FormTablesHeaders::insertCheckableColumn() {
     return ui->TableWidgetContent->columnCount() - 1;
 }
 
+void FormTablesHeaders::reverseCategoryColumn(int index) {
+    for (int i = 0; i < getRowCount(); i++) {
+        QTableWidgetItem *item = itemContent(i, _categoriesColumns[index]);
+        item->setCheckState(item->checkState() == Qt::Checked ? Qt::Unchecked : Qt::Checked);
+    }
+}
+
 void FormTablesHeaders::removeFriendColumn(QString aFriendName) {
     int columnFriend = 0;
     int indexFriend = 0;
@@ -704,17 +711,19 @@ void FormTablesHeaders::hideCheckedAchievement(QTableWidgetItem *aItem) {
 }
 
 void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
-    if (_isUnique) {
-        for (int i = 0; i < getRowCount(); i++) {
-            if (!ui->TableWidgetContent->isRowHidden(i)) {
-                itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
-                _fAchievements.setData(i, c_filterUniqueValue, !aSelect);
+    if (aPos < ui->TableWidgetContent->columnCount()) {
+        if (_isUnique) {
+            for (int i = 0; i < getRowCount(); i++) {
+                if (!ui->TableWidgetContent->isRowHidden(i)) {
+                    itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
+                    _fAchievements.setData(i, c_filterUniqueValue, !aSelect);
+                }
             }
-        }
-    } else {
-        for (int i = 0; i < getRowCount(); i++) {
-            if (!ui->TableWidgetContent->isRowHidden(i)) {
-                itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
+        } else {
+            for (int i = 0; i < getRowCount(); i++) {
+                if (!ui->TableWidgetContent->isRowHidden(i)) {
+                    itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
+                }
             }
         }
     }

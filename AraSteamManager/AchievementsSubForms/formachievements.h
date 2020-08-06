@@ -56,6 +56,17 @@ public slots:
     void buttonUpdate_Clicked();
     
     void updateSettings();
+    void formCategoryValueReverse();
+    void formCategoryValueDown();
+    void formCategoryValueUp();
+    void formCategoryValueSelectVisible();
+    void formCategoryValueUnselectVisible();
+    void formCategoryValueTop();
+    void formCategoryValueBottom();
+    void noSelectedValue();
+    void updateValueUpDown();
+    void formCategoryValueDelete();
+    void formCategoryListWidget_CurrentRowChanged();
 public:
     explicit FormAchievements(SAchievementsPlayer pl, SProfile profile, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
@@ -66,12 +77,14 @@ signals:
 
 private slots:
     void changeEvent(QEvent *event);
+    void resizeEvent(QResizeEvent *);
+    void closeEvent(QCloseEvent*);
     void initComponents(SAchievementsPlayer player);
     void retranslate();
     void setIcons();
 
     QButtonWithData *createButtonWithData(QString aObjectName, QString aAppertain, QString aType, bool aChecked);
-    void setFromMode(FormAchievements::FormMode mode);
+    void setFormMode(FormAchievements::FormMode mode);
     void loadingCompare();
     void loadFriendGames(SGames *games);
     void finishLoadFriends();
@@ -82,7 +95,6 @@ private slots:
     void createCompareProfileFilter(bool accept, int column);
     void checkBoxCompareAllFriends_StateChanged(int arg1);
 
-    void closeEvent(QCloseEvent*);
     void showCategories();
 
     void buttonAddCategory_Clicked();
@@ -102,10 +114,10 @@ private slots:
     void checkBoxCategoryVisibleAll_Clicked();
 
     void updateValuesUpDown(int value = -1);
-    void formCategoryVisible_Change(int pos, bool visible);
+    void formCategoryValueVisibleChange(int pos, bool visible);
     void formCategoryPosition_Change(int pos, int newpos);
     void formCategoryDelete(int pos);
-    void formCategoryReverse(int pos);
+    //void formCategoryValueReverse(int pos);
 
     void checkBoxFavorites_StateChanged(int arg1);
 
@@ -115,6 +127,7 @@ private slots:
 
     void tableAchievements_CellClicked(int row, int column);
 
+    void resizeForm();
 private:
     Ui::FormAchievements *ui;
     Settings _setting;

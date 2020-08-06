@@ -115,7 +115,7 @@ void FormGames::setIcons() {
     ui->ButtonFind->setIcon(QIcon(_setting.getIconFind()));
     ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
     ui->ButtonHide->setIcon(QIcon(_setting.getIconHide()));
-    ui->ButtonCreateGroup->setIcon(QIcon(_setting.getIconCreateColor()));
+    ui->ButtonCreateGroup->setIcon(QIcon(_setting.getIconCreate()));
     ui->ButtonChangeGroup->setIcon(QIcon(_setting.getIconChange()));
 }
 
