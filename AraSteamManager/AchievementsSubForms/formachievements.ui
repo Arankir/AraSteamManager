@@ -50,7 +50,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="CheckBoxShowFilter">
+         <widget class="QCheckBox" name="CheckBoxShowCategories">
           <property name="text">
            <string>Показать категории</string>
           </property>

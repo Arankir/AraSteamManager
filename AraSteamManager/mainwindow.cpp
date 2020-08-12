@@ -496,6 +496,9 @@ QString MainWindow::getTheme() {
                 "QFrame#FrameSelected { "
                     "background-color: rgba(23, 26, 33, 0.8); "
                 "} "
+                "QFrame#FrameCategories, QFrame#FrameEditCategory { "
+                    "background-color: rgba(23, 26, 33, 0.8); "
+                "} "
                 "QScrollArea, QScrollArea > QWidget, QScrollArea > QWidget > QWidget { "
                     "background-color: rgba(0, 0, 0, 0); "
                     "border: 0px solid black; "
@@ -567,16 +570,16 @@ QString MainWindow::getTheme() {
 void MainWindow::setIcons() {
     ui->LabelLogo->setPixmap(QPixmap(_setting.getIconLogoColor()).scaled(30, 30));
 
-    ui->LabelLogo->setTextFormat(Qt::RichText);
-    ui->LabelLogo->setText("<img height=30 style=\"vertical-align: top\" src=\"" + _setting.getIconLogoColor() + "\"> "
-                                "<span style=\"vertical-align: bottom\">НАЯ ПРОГА</span>");
+//    ui->LabelLogo->setTextFormat(Qt::RichText);
+//    ui->LabelLogo->setText("<img height=30 style=\"vertical-align: top\" src=\"" + _setting.getIconLogoColor() + "\"> "
+//                                "<span style=\"vertical-align: bottom\">НАЯ ПРОГА</span>");
     ui->ButtonUpdate->setIcon(QIcon(_setting.getIconUpdate()));
     ui->ButtonGoToMyProfile->setIcon(QIcon(_setting.getIconHome()));
     ui->ButtonFindProfile->setIcon(QIcon(_setting.getIconFindProfile()));
     ui->ButtonSettings->setIcon(QIcon(_setting.getIconSettings()));
     ui->ButtonExit->setIcon(QIcon(_setting.getIconCloseWindow()));
     ui->ButtonMinimize->setIcon(QIcon(_setting.getIconMinimizeWindow()));
-    if(this->isMaximized()) {
+    if (this->isMaximized()) {
         ui->ButtonMaximize->setIcon(QIcon(_setting.getIconNormalizeWindow()));
     } else {
         ui->ButtonMaximize->setIcon(QIcon(_setting.getIconMaximizeWindow()));

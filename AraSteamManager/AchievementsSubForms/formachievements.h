@@ -9,6 +9,7 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <QButtonGroup>
+#include <QPropertyAnimation>
 #include <class/Network/requestimage.h>
 #include <class/settings.h>
 #include <class/steamapi/Sgames.h>
@@ -128,6 +129,7 @@ private slots:
     void tableAchievements_CellClicked(int row, int column);
 
     void resizeForm();
+    void animateFrameEditCategories(bool toVisible);
 private:
     Ui::FormAchievements *ui;
     Settings _setting;

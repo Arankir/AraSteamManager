@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>638</width>
-    <height>328</height>
+    <height>334</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -311,8 +311,8 @@
               </property>
               <property name="maximumSize">
                <size>
-                <width>32</width>
-                <height>32</height>
+                <width>16777215</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="font">
@@ -366,62 +366,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="LabelBansNone">
+             <widget class="QLabel" name="LabelBansValue">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>None</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="LabelBansNotNone">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string notr="true">0</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="LabelBansLast">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Last</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="LabelBansDays">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string notr="true">000-00-00</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="LabelBansDaysAgo">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>days ago.</string>
+               <string notr="true">BansValue</string>
               </property>
              </widget>
             </item>

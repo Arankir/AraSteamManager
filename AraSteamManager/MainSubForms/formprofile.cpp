@@ -22,14 +22,18 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
 
     ui->FrameProfileButtons->setMinimumHeight(32 + 18);
 
-    ui->LabellvlValue->setStyleSheet("color: #42a9c6; ");
-    ui->LabelTimeCreatedValue->setStyleSheet("color: #42a9c6;");
-    ui->LabelRealNameValue->setStyleSheet("color: #42a9c6;");
+    ui->LabellvlValue           ->setStyleSheet("color: #42a9c6;");
+    ui->LabelTimeCreatedValue   ->setStyleSheet("color: #42a9c6;");
+    ui->LabelRealNameValue      ->setStyleSheet("color: #42a9c6;");
     ui->LabelLocCountryCodeValue->setStyleSheet("color: #42a9c6;");
 
     ui->LabelProfileVisibility->setGraphicsEffect(createLightning());
-    ui->LabelGamesVisibility->setGraphicsEffect(createLightning());
+    ui->LabelGamesVisibility  ->setGraphicsEffect(createLightning());
     ui->LabelFriendsVisibility->setGraphicsEffect(createLightning());
+
+    ui->LabelProfileState     ->setGraphicsEffect(createLightning());
+    ui->LabelCommentPermission->setGraphicsEffect(createLightning());
+    ui->LabelBansValue        ->setGraphicsEffect(createLightning());
 
 #define Connects {
     connect(ui->ButtonSetProfile, &QPushButton::clicked, this, &FormProfile::buttonSetProfile_Clicked);
@@ -87,8 +91,6 @@ void FormProfile::profileToUi(SProfile aProfile) {
         ui->LabelLocCountryCodeValue->setVisible(false);
     }
 
-    ui->LabelProfileState->setText(tr("%1 профиль сообщества").arg(_profile._profileState == 1 ? tr("Настроен") : tr("Не настроен")));
-    ui->LabelCommentPermission->setText(tr("Публичные комментарии %1").arg(_profile._commentPermission == 1 ? tr("разрешены") : tr("запрещены")));
     ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
                                 "<a href=\"" + _profile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
@@ -96,6 +98,8 @@ void FormProfile::profileToUi(SProfile aProfile) {
     setName();
     setStatus();
 
+    setProfileState();
+    setCommentPermission();
     setGames(_profile._steamID);
     setFriends(_profile._steamID);
     setLvl(_profile._steamID);
@@ -298,27 +302,19 @@ void FormProfile::setFriends(QString aSteamId) {
 
 void FormProfile::setBans(QString aSteamId) {
     SBans bans(aSteamId,false);
+    QGraphicsDropShadowEffect *bansLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelBansValue->graphicsEffect());
     if(bans.getVacBanned()) {
-        ui->LabelBansNotNone->setText(QString::number(bans.getNumberOfVacBans()));
-        ui->LabelBansDays->setText(QString::number(bans.getDaysSinceLastBan()));
-        ui->LabelBansNotNone->setVisible(true);
-        ui->LabelBansLast->setVisible(true);
-        ui->LabelBansDays->setVisible(true);
-        ui->LabelBansDaysAgo->setVisible(true);
-        ui->LabelBansNone->setVisible(false);
-        //ui->LabelBans->setStyleSheet("color: " + c_red);
-        ui->LabelBansNotNone->setStyleSheet("color: " + c_red);
-        ui->LabelBansLast->setStyleSheet("color: " + c_red);
-        ui->LabelBansDays->setStyleSheet("color: " + c_red);
-        ui->LabelBansDaysAgo->setStyleSheet("color: " + c_red);
+        ui->LabelBansValue->setText(tr("%1, последний %2 дней назад").arg(QString::number(bans.getNumberOfVacBans()), QString::number(bans.getDaysSinceLastBan())));
+        ui->LabelBansValue->setStyleSheet("color: " + c_red);
+        if (bansLight) {
+            bansLight->setColor(QColor (255, 48, 48, 255 * 1));
+        }
     } else {
-        ui->LabelBansNotNone->setVisible(false);
-        ui->LabelBansLast->setVisible(false);
-        ui->LabelBansDays->setVisible(false);
-        ui->LabelBansDaysAgo->setVisible(false);
-        ui->LabelBansNone->setVisible(true);
-        //ui->LabelBans->setStyleSheet("color: " + c_green);
-        ui->LabelBansNone->setStyleSheet("color: " + c_green);
+        ui->LabelBansValue->setText(tr("отсутствуют"));
+        ui->LabelBansValue->setStyleSheet("color: " + c_green);
+        if (bansLight) {
+            bansLight->setColor(QColor (87, 255, 124, 255 * 0.7));
+        }
     }
 }
 
@@ -330,6 +326,40 @@ void FormProfile::setLvl(QString aSteamId) {
                   "border-image: url(://levels/" + QString::number(levels.GetLevel() / 100) + ".png) "
                   + QString::number(ten * 32) + " 0 " + QString::number((10 - ten - 1) * 32) + " 0; ";
     ui->LabellvlValue->setStyleSheet(qss);
+}
+
+void FormProfile::setProfileState() {
+    QGraphicsDropShadowEffect *stateLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelProfileState->graphicsEffect());
+    if (_profile._profileState == 1) {
+        ui->LabelProfileState->setText(tr("Настроен профиль сообщества"));
+        ui->LabelProfileState->setStyleSheet("color: " + c_green);
+        if (stateLight) {
+            stateLight->setColor(QColor (87, 255, 124, 255 * 0.7));
+        }
+    } else {
+        ui->LabelProfileState->setText(tr("Не настроен профиль сообщества"));
+        ui->LabelGamesVisibility->setStyleSheet("color: " + c_red);
+        if (stateLight) {
+            stateLight->setColor(QColor (255, 48, 48, 255 * 1));
+        }
+    }
+}
+
+void FormProfile::setCommentPermission() {
+    QGraphicsDropShadowEffect *commentLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelCommentPermission->graphicsEffect());
+    if (_profile._commentPermission == 1) {
+        ui->LabelCommentPermission->setText(tr("Публичные комментарии разрешены"));
+        ui->LabelCommentPermission->setStyleSheet("color: " + c_green);
+        if (commentLight) {
+            commentLight->setColor(QColor (87, 255, 124, 255 * 0.7));
+        }
+    } else {
+        ui->LabelCommentPermission->setText(tr("Публичные комментарии запрещены"));
+        ui->LabelCommentPermission->setStyleSheet("color: " + c_red);
+        if (commentLight) {
+            commentLight->setColor(QColor (255, 48, 48, 255 * 1));
+        }
+    }
 }
 #define setDataEnd }
 
@@ -439,8 +469,9 @@ void FormProfile::retranslate() {
         ui->ButtonSetProfile->setToolTip("");
     }
     }
-    ui->LabelProfileState->setText(tr("%1 профиль сообщества").arg(_profile._profileState == 1 ? tr("Настроен") : tr("Не настроен")));
-    ui->LabelCommentPermission->setText(tr("Публичные комментарии %1").arg(_profile._commentPermission == 1 ? tr("разрешены") : tr("запрещены")));
+    setBans(_profile._steamID);
+    setProfileState();
+    setCommentPermission();
 }
 
 void FormProfile::setIcons() {

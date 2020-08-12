@@ -134,7 +134,7 @@ void FormFriends::friendToUi() {
         }
     }
     if(row > -1) {
-        QLabel *lIconFriend =dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row, c_tableColumnIcon));
+        QLabel *lIconFriend = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(row, c_tableColumnIcon));
         if (lIconFriend) {
             ui->LabelFriendIcon->setPixmap(*lIconFriend->pixmap());
         }
@@ -188,22 +188,22 @@ void FormFriends::friendToUi() {
                 switch(profile._communityVisibilityState) {
                 case 1:{
                     ui->LabelFriendPublic->setText(tr("Скрытый"));
-                    ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
+                    ui->LabelFriendPublic->setStyleSheet("color: #9b2c2c");
                     break;
                 }
                 case 2:{
                     ui->LabelFriendPublic->setText(tr("Скрытый"));
-                    ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
+                    ui->LabelFriendPublic->setStyleSheet("color: #9b2c2c");
                     break;
                 }
                 case 3:{
                     ui->LabelFriendPublic->setText(tr("Публичный"));
-                    ui->LabelFriendPublic->setStyleSheet("color: #0e6e11");
+                    ui->LabelFriendPublic->setStyleSheet("color: #699b2c");
                     break;
                 }
                 case 8:{
                     ui->LabelFriendPublic->setText(tr("Скрытый"));
-                    ui->LabelFriendPublic->setStyleSheet("color: #6e0e0e");
+                    ui->LabelFriendPublic->setStyleSheet("color: #9b2c2c");
                     break;
                 }
                 }

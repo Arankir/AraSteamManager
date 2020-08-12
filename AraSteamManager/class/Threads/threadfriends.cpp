@@ -11,7 +11,7 @@ int ThreadFriends::fill() {
     int id = std::move(QFontDatabase::addApplicationFont(_setting.c_defaultFont));
     QString family = std::move(QFontDatabase::applicationFontFamilies(id).at(0));
     QFont font(family, 9);
-    int row = std::move(0);
+    int row = 0;
     for (const auto &profile: _profiles) {
         for (const auto &friendP: _friends) {
             if (profile._steamID == friendP._steamID) {
@@ -38,7 +38,7 @@ int ThreadFriends::fill() {
     return 1;
 }
 
-QTableWidgetItem *ThreadFriends::getState(QString aGameExtraInfo, int aPersonaState){
+QTableWidgetItem *ThreadFriends::getState(QString aGameExtraInfo, int aPersonaState) {
     QTableWidgetItem *item = new QTableWidgetItem;
     if (!aGameExtraInfo.isEmpty()) {
         item->setText(tr("В игре"));
@@ -84,7 +84,7 @@ QTableWidgetItem *ThreadFriends::getState(QString aGameExtraInfo, int aPersonaSt
     return item;
 }
 
-QTableWidgetItem *ThreadFriends::getPrivacy(int aCommunityVisibilityState){
+QTableWidgetItem *ThreadFriends::getPrivacy(int aCommunityVisibilityState) {
     QTableWidgetItem *item = new QTableWidgetItem;
     switch (aCommunityVisibilityState) {
     case 1:{

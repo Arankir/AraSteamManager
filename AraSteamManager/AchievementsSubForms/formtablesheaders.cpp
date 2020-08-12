@@ -627,10 +627,10 @@ void FormTablesHeaders::categoryToTable(QString aTitle, QList<QString> aNoValues
             addCategoryColumn();
             changeHorizontalTitle(getColumnCount() - 1, title.toObject().value("Title").toString());
             for (int j = 0; j < getRowCount(); j++) {
-                bool isAchievementCheck = true;
+                bool isAchievementCheck = false;
                 for (auto appid: title.toObject().value("Achievements").toArray()) {
                     if (itemContent(j, c_tableAchievementColumnAppid)->text() == appid.toString()) {
-                        isAchievementCheck = false;
+                        isAchievementCheck = true;
                         break;
                     }
                 }

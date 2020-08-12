@@ -59,6 +59,8 @@ private slots:
     void setBans(QString aSteamId);
     void setName();
     QGraphicsDropShadowEffect *createLightning();
+    void setCommentPermission();
+    void setProfileState();
 private:
     Ui::FormProfile *ui;
     SProfile _profile;

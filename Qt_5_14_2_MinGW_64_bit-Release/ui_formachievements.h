@@ -38,7 +38,7 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QVBoxLayout *verticalLayout_7;
     QLabel *LabelGameLogo;
-    QCheckBox *CheckBoxShowFilter;
+    QCheckBox *CheckBoxShowCategories;
     QVBoxLayout *verticalLayout_8;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_4;
@@ -150,11 +150,11 @@ public:
 
         verticalLayout_7->addWidget(LabelGameLogo);
 
-        CheckBoxShowFilter = new QCheckBox(FrameGameInfo);
-        CheckBoxShowFilter->setObjectName(QString::fromUtf8("CheckBoxShowFilter"));
-        CheckBoxShowFilter->setChecked(true);
+        CheckBoxShowCategories = new QCheckBox(FrameGameInfo);
+        CheckBoxShowCategories->setObjectName(QString::fromUtf8("CheckBoxShowCategories"));
+        CheckBoxShowCategories->setChecked(true);
 
-        verticalLayout_7->addWidget(CheckBoxShowFilter);
+        verticalLayout_7->addWidget(CheckBoxShowCategories);
 
 
         horizontalLayout_7->addLayout(verticalLayout_7);
@@ -622,7 +622,7 @@ public:
     void retranslateUi(QWidget *FormAchievements)
     {
         FormAchievements->setWindowTitle(QCoreApplication::translate("FormAchievements", "SteamAchievementsStatistic", nullptr));
-        CheckBoxShowFilter->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
+        CheckBoxShowCategories->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         LabelGameOnline->setText(QCoreApplication::translate("FormAchievements", "GameOnline:  ", nullptr));
         ButtonUpdate->setText(QCoreApplication::translate("FormAchievements", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214", nullptr));
         CheckBoxFavorites->setText(QCoreApplication::translate("FormAchievements", "\320\242\320\276\320\273\321\214\320\272\320\276 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
