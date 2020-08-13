@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormTablesHeaders_t {
-    QByteArrayData data[80];
-    char stringdata0[1047];
+    QByteArrayData data[82];
+    char stringdata0[1075];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -97,22 +97,24 @@ QT_MOC_LITERAL(60, 787, 14), // "getAchievement"
 QT_MOC_LITERAL(61, 802, 12), // "SAchievement"
 QT_MOC_LITERAL(62, 815, 14), // "cancelCategory"
 QT_MOC_LITERAL(63, 830, 12), // "createThread"
-QT_MOC_LITERAL(64, 843, 18), // "setHorizontalTitle"
-QT_MOC_LITERAL(65, 862, 4), // "text"
-QT_MOC_LITERAL(66, 867, 12), // "insertColumn"
-QT_MOC_LITERAL(67, 880, 7), // "columns"
-QT_MOC_LITERAL(68, 888, 12), // "removeColumn"
-QT_MOC_LITERAL(69, 901, 11), // "retranslate"
-QT_MOC_LITERAL(70, 913, 13), // "onTablePulled"
-QT_MOC_LITERAL(71, 927, 7), // "reached"
-QT_MOC_LITERAL(72, 935, 10), // "notReached"
-QT_MOC_LITERAL(73, 946, 10), // "createFlag"
-QT_MOC_LITERAL(74, 957, 9), // "flagState"
-QT_MOC_LITERAL(75, 967, 16), // "updateHiddenRows"
-QT_MOC_LITERAL(76, 984, 10), // "getTableHH"
-QT_MOC_LITERAL(77, 995, 13), // "QTableWidget*"
-QT_MOC_LITERAL(78, 1009, 15), // "getTableContent"
-QT_MOC_LITERAL(79, 1025, 21) // "insertCheckableColumn"
+QT_MOC_LITERAL(64, 843, 21), // "reverseCategoryColumn"
+QT_MOC_LITERAL(65, 865, 5), // "index"
+QT_MOC_LITERAL(66, 871, 18), // "setHorizontalTitle"
+QT_MOC_LITERAL(67, 890, 4), // "text"
+QT_MOC_LITERAL(68, 895, 12), // "insertColumn"
+QT_MOC_LITERAL(69, 908, 7), // "columns"
+QT_MOC_LITERAL(70, 916, 12), // "removeColumn"
+QT_MOC_LITERAL(71, 929, 11), // "retranslate"
+QT_MOC_LITERAL(72, 941, 13), // "onTablePulled"
+QT_MOC_LITERAL(73, 955, 7), // "reached"
+QT_MOC_LITERAL(74, 963, 10), // "notReached"
+QT_MOC_LITERAL(75, 974, 10), // "createFlag"
+QT_MOC_LITERAL(76, 985, 9), // "flagState"
+QT_MOC_LITERAL(77, 995, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(78, 1012, 10), // "getTableHH"
+QT_MOC_LITERAL(79, 1023, 13), // "QTableWidget*"
+QT_MOC_LITERAL(80, 1037, 15), // "getTableContent"
+QT_MOC_LITERAL(81, 1053, 21) // "insertCheckableColumn"
 
     },
     "FormTablesHeaders\0s_contentCellClicked\0"
@@ -139,6 +141,7 @@ QT_MOC_LITERAL(79, 1025, 21) // "insertCheckableColumn"
     "aPosOld\0aPosNew\0update\0getHeaderText\0"
     "aIndex\0getAchievement\0SAchievement\0"
     "cancelCategory\0createThread\0"
+    "reverseCategoryColumn\0index\0"
     "setHorizontalTitle\0text\0insertColumn\0"
     "columns\0removeColumn\0retranslate\0"
     "onTablePulled\0reached\0notReached\0"
@@ -154,7 +157,7 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      40,   14, // methods
+      41,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -162,48 +165,49 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,  214,    2, 0x06 /* Public */,
-       5,    2,  219,    2, 0x06 /* Public */,
-       7,    2,  224,    2, 0x06 /* Public */,
+       1,    2,  219,    2, 0x06 /* Public */,
+       5,    2,  224,    2, 0x06 /* Public */,
+       7,    2,  229,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    1,  229,    2, 0x0a /* Public */,
-       9,    1,  232,    2, 0x0a /* Public */,
-      10,    1,  235,    2, 0x0a /* Public */,
-      13,    0,  238,    2, 0x0a /* Public */,
-      14,    0,  239,    2, 0x0a /* Public */,
-      15,    1,  240,    2, 0x0a /* Public */,
-      15,    1,  243,    2, 0x0a /* Public */,
-      18,    1,  246,    2, 0x0a /* Public */,
-      19,    0,  249,    2, 0x0a /* Public */,
-      20,    1,  250,    2, 0x0a /* Public */,
-      23,    3,  253,    2, 0x0a /* Public */,
-      28,    2,  260,    2, 0x0a /* Public */,
-      29,    1,  265,    2, 0x0a /* Public */,
-      31,    3,  268,    2, 0x0a /* Public */,
-      35,    3,  275,    2, 0x0a /* Public */,
-      35,    2,  282,    2, 0x2a /* Public | MethodCloned */,
-      40,    1,  287,    2, 0x0a /* Public */,
-      42,    1,  290,    2, 0x0a /* Public */,
-      44,    1,  293,    2, 0x0a /* Public */,
-      46,    2,  296,    2, 0x0a /* Public */,
-      49,    4,  301,    2, 0x0a /* Public */,
-      54,    2,  310,    2, 0x0a /* Public */,
-      57,    0,  315,    2, 0x0a /* Public */,
-      58,    1,  316,    2, 0x0a /* Public */,
-      60,    1,  319,    2, 0x0a /* Public */,
-      62,    0,  322,    2, 0x0a /* Public */,
-      63,    0,  323,    2, 0x0a /* Public */,
-      64,    2,  324,    2, 0x08 /* Private */,
-      66,    1,  329,    2, 0x08 /* Private */,
-      68,    1,  332,    2, 0x08 /* Private */,
-      69,    0,  335,    2, 0x08 /* Private */,
-      70,    2,  336,    2, 0x08 /* Private */,
-      73,    1,  341,    2, 0x08 /* Private */,
-      75,    0,  344,    2, 0x08 /* Private */,
-      76,    0,  345,    2, 0x08 /* Private */,
-      78,    0,  346,    2, 0x08 /* Private */,
-      79,    0,  347,    2, 0x08 /* Private */,
+       8,    1,  234,    2, 0x0a /* Public */,
+       9,    1,  237,    2, 0x0a /* Public */,
+      10,    1,  240,    2, 0x0a /* Public */,
+      13,    0,  243,    2, 0x0a /* Public */,
+      14,    0,  244,    2, 0x0a /* Public */,
+      15,    1,  245,    2, 0x0a /* Public */,
+      15,    1,  248,    2, 0x0a /* Public */,
+      18,    1,  251,    2, 0x0a /* Public */,
+      19,    0,  254,    2, 0x0a /* Public */,
+      20,    1,  255,    2, 0x0a /* Public */,
+      23,    3,  258,    2, 0x0a /* Public */,
+      28,    2,  265,    2, 0x0a /* Public */,
+      29,    1,  270,    2, 0x0a /* Public */,
+      31,    3,  273,    2, 0x0a /* Public */,
+      35,    3,  280,    2, 0x0a /* Public */,
+      35,    2,  287,    2, 0x2a /* Public | MethodCloned */,
+      40,    1,  292,    2, 0x0a /* Public */,
+      42,    1,  295,    2, 0x0a /* Public */,
+      44,    1,  298,    2, 0x0a /* Public */,
+      46,    2,  301,    2, 0x0a /* Public */,
+      49,    4,  306,    2, 0x0a /* Public */,
+      54,    2,  315,    2, 0x0a /* Public */,
+      57,    0,  320,    2, 0x0a /* Public */,
+      58,    1,  321,    2, 0x0a /* Public */,
+      60,    1,  324,    2, 0x0a /* Public */,
+      62,    0,  327,    2, 0x0a /* Public */,
+      63,    0,  328,    2, 0x0a /* Public */,
+      64,    1,  329,    2, 0x0a /* Public */,
+      66,    2,  332,    2, 0x08 /* Private */,
+      68,    1,  337,    2, 0x08 /* Private */,
+      70,    1,  340,    2, 0x08 /* Private */,
+      71,    0,  343,    2, 0x08 /* Private */,
+      72,    2,  344,    2, 0x08 /* Private */,
+      75,    1,  349,    2, 0x08 /* Private */,
+      77,    0,  352,    2, 0x08 /* Private */,
+      78,    0,  353,    2, 0x08 /* Private */,
+      80,    0,  354,    2, 0x08 /* Private */,
+      81,    0,  355,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -238,15 +242,16 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
     0x80000000 | 61, QMetaType::Int,   59,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString,   17,   65,
-    QMetaType::Void, QMetaType::Int,   67,
-    QMetaType::Void, QMetaType::Int,   67,
+    QMetaType::Void, QMetaType::Int,   65,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,   17,   67,
+    QMetaType::Void, QMetaType::Int,   69,
+    QMetaType::Void, QMetaType::Int,   69,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   71,   72,
-    0x80000000 | 21, QMetaType::Bool,   74,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   73,   74,
+    0x80000000 | 21, QMetaType::Bool,   76,
     QMetaType::Void,
-    0x80000000 | 77,
-    0x80000000 | 77,
+    0x80000000 | 79,
+    0x80000000 | 79,
     QMetaType::Int,
 
        0        // eod
@@ -293,19 +298,20 @@ void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
             if (_a[0]) *reinterpret_cast< SAchievement*>(_a[0]) = std::move(_r); }  break;
         case 28: _t->cancelCategory(); break;
         case 29: _t->createThread(); break;
-        case 30: _t->setHorizontalTitle((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 31: _t->insertColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 32: _t->removeColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 33: _t->retranslate(); break;
-        case 34: _t->onTablePulled((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 35: { QTableWidgetItem* _r = _t->createFlag((*reinterpret_cast< bool(*)>(_a[1])));
+        case 30: _t->reverseCategoryColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 31: _t->setHorizontalTitle((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 32: _t->insertColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 33: _t->removeColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 34: _t->retranslate(); break;
+        case 35: _t->onTablePulled((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 36: { QTableWidgetItem* _r = _t->createFlag((*reinterpret_cast< bool(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QTableWidgetItem**>(_a[0]) = std::move(_r); }  break;
-        case 36: _t->updateHiddenRows(); break;
-        case 37: { QTableWidget* _r = _t->getTableHH();
+        case 37: _t->updateHiddenRows(); break;
+        case 38: { QTableWidget* _r = _t->getTableHH();
             if (_a[0]) *reinterpret_cast< QTableWidget**>(_a[0]) = std::move(_r); }  break;
-        case 38: { QTableWidget* _r = _t->getTableContent();
+        case 39: { QTableWidget* _r = _t->getTableContent();
             if (_a[0]) *reinterpret_cast< QTableWidget**>(_a[0]) = std::move(_r); }  break;
-        case 39: { int _r = _t->insertCheckableColumn();
+        case 40: { int _r = _t->insertCheckableColumn();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -382,13 +388,13 @@ int FormTablesHeaders::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 40)
+        if (_id < 41)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 40;
+        _id -= 41;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 40)
+        if (_id < 41)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 40;
+        _id -= 41;
     }
     return _id;
 }

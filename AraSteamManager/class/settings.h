@@ -16,6 +16,7 @@ class Settings : public QObject {
     const QString c_myProfile="Settings/MyProfile";
     const QString c_visibleHiddenGames="Settings/VisibleHiddenGames";
     const QString c_ProfileInfoSize="Settings/VisibleProfileInfo";
+    const QString c_MaxTableRows="Settings/MaxTableRows";
 
     const QString c_mainWindowHeight="MainWindow/Height";
     const QString c_mainWindowWidth="MainWindow/Width";
@@ -44,6 +45,7 @@ public:
     void setSaveimage(int a_saveImage);
     void setVisibleHiddenGames(int a_visibleHiddenGames);
     void setVisibleProfileInfo(int a_visibleProfileInfo);
+    void setMaximumTableRows(int rows);
 
     void setMainWindowParams(QRect geometry);
     void setMainWindowPos(QPoint pos);
@@ -59,6 +61,7 @@ public:
     int getSaveImages();
     int getVisibleHiddenGames();
     int getProfileInfoSize();
+    int getMaximumTableRows();
 
     QString getIconLoadingColor();
     QString getIconLogoColor();

@@ -37,6 +37,10 @@ void Settings::setVisibleProfileInfo(int aVisibleProfileInfo) {
     return _settings->setValue(c_ProfileInfoSize, aVisibleProfileInfo);
 }
 
+void Settings::setMaximumTableRows(int rows){
+    return _settings->setValue(c_MaxTableRows, rows);
+}
+
 void Settings::setMainWindowParams(QRect aGeometry) {
     _settings->setValue(c_mainWindowHeight, aGeometry.height());
     _settings->setValue(c_mainWindowWidth, aGeometry.width());
@@ -109,6 +113,10 @@ int Settings::getVisibleHiddenGames() {
 
 int Settings::getProfileInfoSize() {
     return _settings->value(c_ProfileInfoSize, 2).toInt();
+}
+
+int Settings::getMaximumTableRows() {
+    return _settings->value(c_MaxTableRows, 100).toInt();
 }
 
 #define IconsStart {

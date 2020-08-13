@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormProfile_t {
-    QByteArrayData data[48];
-    char stringdata0[585];
+    QByteArrayData data[50];
+    char stringdata0[622];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -79,7 +79,9 @@ QT_MOC_LITERAL(43, 515, 10), // "setFriends"
 QT_MOC_LITERAL(44, 526, 7), // "setBans"
 QT_MOC_LITERAL(45, 534, 7), // "setName"
 QT_MOC_LITERAL(46, 542, 15), // "createLightning"
-QT_MOC_LITERAL(47, 558, 26) // "QGraphicsDropShadowEffect*"
+QT_MOC_LITERAL(47, 558, 26), // "QGraphicsDropShadowEffect*"
+QT_MOC_LITERAL(48, 585, 20), // "setCommentPermission"
+QT_MOC_LITERAL(49, 606, 15) // "setProfileState"
 
     },
     "FormProfile\0s_goToGames\0\0SProfile\0"
@@ -98,7 +100,8 @@ QT_MOC_LITERAL(47, 558, 26) // "QGraphicsDropShadowEffect*"
     "setColorStatus\0aRed\0aGreen\0aBlue\0"
     "aAlpha\0setStatus\0setGames\0setFriends\0"
     "setBans\0setName\0createLightning\0"
-    "QGraphicsDropShadowEffect*"
+    "QGraphicsDropShadowEffect*\0"
+    "setCommentPermission\0setProfileState"
 };
 #undef QT_MOC_LITERAL
 
@@ -108,7 +111,7 @@ static const uint qt_meta_data_FormProfile[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      30,   14, // methods
+      32,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -116,38 +119,40 @@ static const uint qt_meta_data_FormProfile[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,  164,    2, 0x06 /* Public */,
-       7,    2,  169,    2, 0x06 /* Public */,
-      10,    3,  174,    2, 0x06 /* Public */,
-      12,    0,  181,    2, 0x06 /* Public */,
-      13,    0,  182,    2, 0x06 /* Public */,
+       1,    2,  174,    2, 0x06 /* Public */,
+       7,    2,  179,    2, 0x06 /* Public */,
+      10,    3,  184,    2, 0x06 /* Public */,
+      12,    0,  191,    2, 0x06 /* Public */,
+      13,    0,  192,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      14,    1,  183,    2, 0x0a /* Public */,
-      16,    1,  186,    2, 0x0a /* Public */,
-      17,    0,  189,    2, 0x0a /* Public */,
-      18,    0,  190,    2, 0x0a /* Public */,
-      19,    0,  191,    2, 0x0a /* Public */,
-      20,    0,  192,    2, 0x0a /* Public */,
-      21,    0,  193,    2, 0x0a /* Public */,
-      22,    0,  194,    2, 0x0a /* Public */,
-      23,    0,  195,    2, 0x0a /* Public */,
-      24,    0,  196,    2, 0x0a /* Public */,
-      25,    0,  197,    2, 0x0a /* Public */,
-      26,    1,  198,    2, 0x08 /* Private */,
-      29,    0,  201,    2, 0x08 /* Private */,
-      30,    0,  202,    2, 0x08 /* Private */,
-      31,    0,  203,    2, 0x08 /* Private */,
-      32,    0,  204,    2, 0x08 /* Private */,
-      33,    0,  205,    2, 0x08 /* Private */,
-      34,    1,  206,    2, 0x08 /* Private */,
-      36,    4,  209,    2, 0x08 /* Private */,
-      41,    0,  218,    2, 0x08 /* Private */,
-      42,    1,  219,    2, 0x08 /* Private */,
-      43,    1,  222,    2, 0x08 /* Private */,
-      44,    1,  225,    2, 0x08 /* Private */,
-      45,    0,  228,    2, 0x08 /* Private */,
-      46,    0,  229,    2, 0x08 /* Private */,
+      14,    1,  193,    2, 0x0a /* Public */,
+      16,    1,  196,    2, 0x0a /* Public */,
+      17,    0,  199,    2, 0x0a /* Public */,
+      18,    0,  200,    2, 0x0a /* Public */,
+      19,    0,  201,    2, 0x0a /* Public */,
+      20,    0,  202,    2, 0x0a /* Public */,
+      21,    0,  203,    2, 0x0a /* Public */,
+      22,    0,  204,    2, 0x0a /* Public */,
+      23,    0,  205,    2, 0x0a /* Public */,
+      24,    0,  206,    2, 0x0a /* Public */,
+      25,    0,  207,    2, 0x0a /* Public */,
+      26,    1,  208,    2, 0x08 /* Private */,
+      29,    0,  211,    2, 0x08 /* Private */,
+      30,    0,  212,    2, 0x08 /* Private */,
+      31,    0,  213,    2, 0x08 /* Private */,
+      32,    0,  214,    2, 0x08 /* Private */,
+      33,    0,  215,    2, 0x08 /* Private */,
+      34,    1,  216,    2, 0x08 /* Private */,
+      36,    4,  219,    2, 0x08 /* Private */,
+      41,    0,  228,    2, 0x08 /* Private */,
+      42,    1,  229,    2, 0x08 /* Private */,
+      43,    1,  232,    2, 0x08 /* Private */,
+      44,    1,  235,    2, 0x08 /* Private */,
+      45,    0,  238,    2, 0x08 /* Private */,
+      46,    0,  239,    2, 0x08 /* Private */,
+      48,    0,  240,    2, 0x08 /* Private */,
+      49,    0,  241,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 5,    4,    6,
@@ -182,6 +187,8 @@ static const uint qt_meta_data_FormProfile[] = {
     QMetaType::Void, QMetaType::QString,   35,
     QMetaType::Void,
     0x80000000 | 47,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -226,6 +233,8 @@ void FormProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 28: _t->setName(); break;
         case 29: { QGraphicsDropShadowEffect* _r = _t->createLightning();
             if (_a[0]) *reinterpret_cast< QGraphicsDropShadowEffect**>(_a[0]) = std::move(_r); }  break;
+        case 30: _t->setCommentPermission(); break;
+        case 31: _t->setProfileState(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -297,13 +306,13 @@ int FormProfile::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 30)
+        if (_id < 32)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 30;
+        _id -= 32;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 30)
+        if (_id < 32)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 30;
+        _id -= 32;
     }
     return _id;
 }

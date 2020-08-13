@@ -725,10 +725,11 @@ void MainWindow::goToFriends(QString aSteamId, SFriends aFriends) {
     if(_friendsForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
-            ui->FormProgressBar->setMaximum(aFriends.getCount());
+            //ui->FormProgressBar->setMaximum(aFriends.getCount());
             ui->ScrollAreaFriends->setWidget(createFormFriends(aSteamId, aFriends));
-            ui->FormProgressBar->setVisible(true);
-            ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
+            //ui->FormProgressBar->setVisible(true);
+            //ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
+            showForm(c_formsFriends);
         }
     } else {
         ui->StackedWidgetForms->setCurrentIndex(c_formsFriends);

@@ -223,7 +223,7 @@ SAchievementsPercentage::~SAchievementsPercentage() {
 
 void SAchievementsPercentage::Load(QString aAppid) {
     _appid = std::move(aAppid);
-    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v1/?key=" + Settings::getKey() +
+    _manager->get(QNetworkRequest("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2/?key=" + Settings::getKey() +
                                                                                                                         "&gameid=" + _appid));
 }
 
@@ -235,7 +235,7 @@ void SAchievementsPercentage::onLoad(QNetworkReply *aReply) {
 
 void SAchievementsPercentage::set(QJsonDocument aAchievements) {
     clear();
-    QJsonArray achievementsArray = aAchievements.object().value("achievementpercentages").toObject().value("achievements").toObject().value("achievement").toArray();
+    QJsonArray achievementsArray = aAchievements.object().value("achievementpercentages").toObject().value("achievements").toArray();
     if (achievementsArray.size() > 0) {
         for (auto achievement: achievementsArray) {
             _achievements.append(SAchievementPercentage(achievement.toObject()));

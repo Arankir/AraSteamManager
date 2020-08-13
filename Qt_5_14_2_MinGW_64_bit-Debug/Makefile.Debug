@@ -336,6 +336,7 @@ debug/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/delete_all.png \
 		../AraSteamManager/images/white/profile.png \
 		../AraSteamManager/images/white/down.png \
+		../AraSteamManager/images/white/bottom.png \
 		../AraSteamManager/images/white/set_home.png \
 		../AraSteamManager/images/white/compare.png \
 		../AraSteamManager/images/white/home.png \
@@ -343,6 +344,7 @@ debug/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/filter.png \
 		../AraSteamManager/images/white/hide.png \
 		../AraSteamManager/images/white/unhide.png \
+		../AraSteamManager/images/white/top.png \
 		../AraSteamManager/images/white/create.png \
 		../AraSteamManager/images/white/find.png \
 		../AraSteamManager/images/white/in_favorites.png \
@@ -374,9 +376,6 @@ debug/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/widgets/radiobutton_checked_hover.png \
 		../AraSteamManager/images/white/widgets/radiobutton_unchecked.png \
 		../AraSteamManager/images/white/widgets/checkbox_checked_press.png \
-		../AraSteamManager/images/lvls/2.png \
-		../AraSteamManager/images/lvls/1.png \
-		../AraSteamManager/images/lvls/0.png \
 		../AraSteamManager/images/black/statistic.png \
 		../AraSteamManager/images/black/check_all.png \
 		../AraSteamManager/images/black/check_visible.png \
@@ -398,6 +397,7 @@ debug/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/delete_all.png \
 		../AraSteamManager/images/black/profile.png \
 		../AraSteamManager/images/black/down.png \
+		../AraSteamManager/images/black/bottom.png \
 		../AraSteamManager/images/black/set_home.png \
 		../AraSteamManager/images/black/compare.png \
 		../AraSteamManager/images/black/home.png \
@@ -405,6 +405,7 @@ debug/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/filter.png \
 		../AraSteamManager/images/black/hide.png \
 		../AraSteamManager/images/black/unhide.png \
+		../AraSteamManager/images/black/top.png \
 		../AraSteamManager/images/black/create.png \
 		../AraSteamManager/images/black/find.png \
 		../AraSteamManager/images/black/in_favorites.png \
@@ -427,7 +428,60 @@ debug/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/widgets/checkbox_uncheked.png \
 		../AraSteamManager/images/black/widgets/radiobutton_checked.png \
 		../AraSteamManager/images/black/widgets/scrollbar_left.png \
-		../AraSteamManager/images/black/widgets/radiobutton_unchecked.png
+		../AraSteamManager/images/black/widgets/radiobutton_unchecked.png \
+		../AraSteamManager/images/levels/32.png \
+		../AraSteamManager/images/levels/24.png \
+		../AraSteamManager/images/levels/49.png \
+		../AraSteamManager/images/levels/16.png \
+		../AraSteamManager/images/levels/3.png \
+		../AraSteamManager/images/levels/31.png \
+		../AraSteamManager/images/levels/23.png \
+		../AraSteamManager/images/levels/48.png \
+		../AraSteamManager/images/levels/15.png \
+		../AraSteamManager/images/levels/2.png \
+		../AraSteamManager/images/levels/30.png \
+		../AraSteamManager/images/levels/22.png \
+		../AraSteamManager/images/levels/47.png \
+		../AraSteamManager/images/levels/39.png \
+		../AraSteamManager/images/levels/14.png \
+		../AraSteamManager/images/levels/1.png \
+		../AraSteamManager/images/levels/21.png \
+		../AraSteamManager/images/levels/46.png \
+		../AraSteamManager/images/levels/38.png \
+		../AraSteamManager/images/levels/13.png \
+		../AraSteamManager/images/levels/0.png \
+		../AraSteamManager/images/levels/20.png \
+		../AraSteamManager/images/levels/45.png \
+		../AraSteamManager/images/levels/9.png \
+		../AraSteamManager/images/levels/37.png \
+		../AraSteamManager/images/levels/12.png \
+		../AraSteamManager/images/levels/29.png \
+		../AraSteamManager/images/levels/52.png \
+		../AraSteamManager/images/levels/44.png \
+		../AraSteamManager/images/levels/8.png \
+		../AraSteamManager/images/levels/36.png \
+		../AraSteamManager/images/levels/11.png \
+		../AraSteamManager/images/levels/28.png \
+		../AraSteamManager/images/levels/51.png \
+		../AraSteamManager/images/levels/43.png \
+		../AraSteamManager/images/levels/7.png \
+		../AraSteamManager/images/levels/35.png \
+		../AraSteamManager/images/levels/10.png \
+		../AraSteamManager/images/levels/27.png \
+		../AraSteamManager/images/levels/50.png \
+		../AraSteamManager/images/levels/19.png \
+		../AraSteamManager/images/levels/42.png \
+		../AraSteamManager/images/levels/6.png \
+		../AraSteamManager/images/levels/34.png \
+		../AraSteamManager/images/levels/26.png \
+		../AraSteamManager/images/levels/18.png \
+		../AraSteamManager/images/levels/41.png \
+		../AraSteamManager/images/levels/5.png \
+		../AraSteamManager/images/levels/33.png \
+		../AraSteamManager/images/levels/25.png \
+		../AraSteamManager/images/levels/17.png \
+		../AraSteamManager/images/levels/40.png \
+		../AraSteamManager/images/levels/4.png
 	C:\Qt\5.14.2\mingw73_64\bin\rcc.exe -name resimg ..\AraSteamManager\images\resimg.qrc -o debug\qrc_resimg.cpp
 
 debug/qrc_lang.cpp: ../AraSteamManager/languages/lang.qrc \
@@ -584,6 +638,11 @@ debug/moc_formachievements.cpp: ../AraSteamManager/AchievementsSubForms/formachi
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
@@ -1746,6 +1805,11 @@ debug/moc_formgames.cpp: ../AraSteamManager/MainSubForms/formgames.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
@@ -1850,11 +1914,6 @@ debug/moc_formgames.cpp: ../AraSteamManager/MainSubForms/formgames.h \
 		../AraSteamManager/subwidget/qcheckboxwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
@@ -5599,6 +5658,11 @@ debug/moc_formcontainerachievements.cpp: ../AraSteamManager/formcontainerachieve
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
@@ -5990,6 +6054,11 @@ debug/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
@@ -6090,11 +6159,6 @@ debug/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		../AraSteamManager/subwidget/qcheckboxwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
@@ -6486,6 +6550,11 @@ debug/formachievements.o: ../AraSteamManager/AchievementsSubForms/formachievemen
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
@@ -7786,6 +7855,11 @@ debug/formgames.o: ../AraSteamManager/MainSubForms/formgames.cpp ../AraSteamMana
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
@@ -7890,11 +7964,6 @@ debug/formgames.o: ../AraSteamManager/MainSubForms/formgames.cpp ../AraSteamMana
 		../AraSteamManager/subwidget/qcheckboxwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
@@ -12167,6 +12236,11 @@ debug/formcontainerachievements.o: ../AraSteamManager/formcontainerachievements.
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
@@ -12563,6 +12637,11 @@ debug/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
@@ -12663,11 +12742,6 @@ debug/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		../AraSteamManager/subwidget/qcheckboxwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \
@@ -12915,6 +12989,11 @@ debug/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainwin
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qbuttongroup.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		../AraSteamManager/class/Network/requestimage.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
@@ -13015,11 +13094,6 @@ debug/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainwin
 		../AraSteamManager/subwidget/qcheckboxwithdata.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/QPropertyAnimation \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qpropertyanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qvariantanimation.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qeasingcurve.h \
-		C:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractanimation.h \
 		C:/Qt/5.14.2/mingw73_64/include/QtGui/QMouseEvent \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		C:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgraphicseffect.h \

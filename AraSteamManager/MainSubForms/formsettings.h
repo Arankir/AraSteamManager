@@ -50,6 +50,7 @@ private slots:
 
     void slideProfileSize_ValueChanged(int value);
 
+    void comboBoxMaxTableRows(int index);
 private:
     Ui::FormSettings *ui;
     Settings _setting;

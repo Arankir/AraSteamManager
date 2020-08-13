@@ -12,7 +12,8 @@ const QString SGame::getNumberPlayers(bool aHardReload){
         QNetworkAccessManager manager;
         QEventLoop loop;
         QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        QNetworkReply &replyNumberOfPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="+Settings::getKey()+"&appid="+QString::number(_appID))));
+        QNetworkReply &replyNumberOfPlayers = *manager.get(QNetworkRequest(QString("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key="
+                                                                                   + Settings::getKey() + "&appid=" + QString::number(_appID))));
         loop.exec();
         double playersCount = QJsonDocument::fromJson(replyNumberOfPlayers.readAll()).object().value("response").toObject().value("player_count").toDouble();
         _numberPlayers = QString::number(playersCount);

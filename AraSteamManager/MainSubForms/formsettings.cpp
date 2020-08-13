@@ -12,6 +12,8 @@ FormSettings::~FormSettings() {
 }
 
 void FormSettings::initComponents() {
+    ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
+
     switch (_setting.getLanguage()) {
     case 1: {
         ui->RadioButtonLanguageEnglish->setChecked(true);
@@ -48,6 +50,32 @@ void FormSettings::initComponents() {
         break;
     }
     default: {
+        break;
+    }
+    }
+    switch (_setting.getMaximumTableRows()) {
+    case 10: {
+        ui->ComboBoxMaxRows->setCurrentIndex(0);
+        break;
+    }
+    case 20: {
+        ui->ComboBoxMaxRows->setCurrentIndex(1);
+        break;
+    }
+    case 50: {
+        ui->ComboBoxMaxRows->setCurrentIndex(2);
+        break;
+    }
+    case 100: {
+        ui->ComboBoxMaxRows->setCurrentIndex(3);
+        break;
+    }
+    case 200: {
+        ui->ComboBoxMaxRows->setCurrentIndex(4);
+        break;
+    }
+    case 500: {
+        ui->ComboBoxMaxRows->setCurrentIndex(5);
         break;
     }
     }
@@ -130,6 +158,7 @@ void FormSettings::initComponents() {
     connect(ui->RadioButtonLightTheme,      &QRadioButton::clicked,   this, &FormSettings::radioButtonLightTheme_Clicked);
     connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
     connect(ui->SliderProfileSize,          &QSlider::valueChanged,   this, &FormSettings::slideProfileSize_ValueChanged);
+    connect(ui->ComboBoxMaxRows,            SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxMaxTableRows(int)));
 #define ConnectsEnd }
     retranslate();
 }
@@ -280,6 +309,11 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
         }
         ui->TableWidgetGames->resizeColumnsToContents();
     }
+}
+
+void FormSettings::comboBoxMaxTableRows(int index) {
+    _setting.setMaximumTableRows(ui->ComboBoxMaxRows->currentText().toInt());
+    emit s_updateSettings();
 }
 
 void FormSettings::achievementsClicked() {

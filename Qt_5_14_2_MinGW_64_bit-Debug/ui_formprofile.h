@@ -58,11 +58,7 @@ public:
     QFrame *line;
     QHBoxLayout *horizontalLayout_10;
     QLabel *LabelBans;
-    QLabel *LabelBansNone;
-    QLabel *LabelBansNotNone;
-    QLabel *LabelBansLast;
-    QLabel *LabelBansDays;
-    QLabel *LabelBansDaysAgo;
+    QLabel *LabelBansValue;
     QSpacerItem *horizontalSpacer_7;
     QHBoxLayout *horizontalLayout_4;
     QLabel *LabelTimeCreated;
@@ -98,7 +94,7 @@ public:
     {
         if (FormProfile->objectName().isEmpty())
             FormProfile->setObjectName(QString::fromUtf8("FormProfile"));
-        FormProfile->resize(638, 328);
+        FormProfile->resize(638, 334);
         verticalLayout_3 = new QVBoxLayout(FormProfile);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -279,7 +275,7 @@ public:
         LabellvlValue = new QLabel(FrameProfileMaximumInfo);
         LabellvlValue->setObjectName(QString::fromUtf8("LabellvlValue"));
         LabellvlValue->setMinimumSize(QSize(32, 32));
-        LabellvlValue->setMaximumSize(QSize(32, 32));
+        LabellvlValue->setMaximumSize(QSize(16777215, 16777215));
         LabellvlValue->setFont(font2);
         LabellvlValue->setText(QString::fromUtf8("0"));
         LabellvlValue->setAlignment(Qt::AlignCenter);
@@ -309,37 +305,12 @@ public:
 
         horizontalLayout_10->addWidget(LabelBans);
 
-        LabelBansNone = new QLabel(FrameProfileMaximumInfo);
-        LabelBansNone->setObjectName(QString::fromUtf8("LabelBansNone"));
-        LabelBansNone->setFont(font3);
+        LabelBansValue = new QLabel(FrameProfileMaximumInfo);
+        LabelBansValue->setObjectName(QString::fromUtf8("LabelBansValue"));
+        LabelBansValue->setFont(font3);
+        LabelBansValue->setText(QString::fromUtf8("BansValue"));
 
-        horizontalLayout_10->addWidget(LabelBansNone);
-
-        LabelBansNotNone = new QLabel(FrameProfileMaximumInfo);
-        LabelBansNotNone->setObjectName(QString::fromUtf8("LabelBansNotNone"));
-        LabelBansNotNone->setFont(font3);
-        LabelBansNotNone->setText(QString::fromUtf8("0"));
-
-        horizontalLayout_10->addWidget(LabelBansNotNone);
-
-        LabelBansLast = new QLabel(FrameProfileMaximumInfo);
-        LabelBansLast->setObjectName(QString::fromUtf8("LabelBansLast"));
-        LabelBansLast->setFont(font3);
-
-        horizontalLayout_10->addWidget(LabelBansLast);
-
-        LabelBansDays = new QLabel(FrameProfileMaximumInfo);
-        LabelBansDays->setObjectName(QString::fromUtf8("LabelBansDays"));
-        LabelBansDays->setFont(font3);
-        LabelBansDays->setText(QString::fromUtf8("000-00-00"));
-
-        horizontalLayout_10->addWidget(LabelBansDays);
-
-        LabelBansDaysAgo = new QLabel(FrameProfileMaximumInfo);
-        LabelBansDaysAgo->setObjectName(QString::fromUtf8("LabelBansDaysAgo"));
-        LabelBansDaysAgo->setFont(font3);
-
-        horizontalLayout_10->addWidget(LabelBansDaysAgo);
+        horizontalLayout_10->addWidget(LabelBansValue);
 
         horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -540,9 +511,6 @@ public:
         LabelFriendsVisibility->setText(QCoreApplication::translate("FormProfile", "Friends", nullptr));
         LabelGamesVisibility->setText(QCoreApplication::translate("FormProfile", "Games", nullptr));
         Labellvl->setText(QCoreApplication::translate("FormProfile", "lvl:", nullptr));
-        LabelBansNone->setText(QCoreApplication::translate("FormProfile", "None", nullptr));
-        LabelBansLast->setText(QCoreApplication::translate("FormProfile", "Last", nullptr));
-        LabelBansDaysAgo->setText(QCoreApplication::translate("FormProfile", "days ago.", nullptr));
         LabelTimeCreated->setText(QCoreApplication::translate("FormProfile", "TimeCreated:", nullptr));
         LabelLocCountryCode->setText(QCoreApplication::translate("FormProfile", "CountryCode:", nullptr));
         ButtonSetProfile->setText(QCoreApplication::translate("FormProfile", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));

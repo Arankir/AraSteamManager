@@ -20,63 +20,170 @@ constexpr int c_filterCount = 4;
 #define ConstantsEnd }
 
 #define Init {
-FormFriends::FormFriends(QString aId, SFriends aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId), _friends(aFriends),
-    _profiles(_friends.getProfiles()), _favorites("friends"), _filter(_friends.getCount(), c_filterCount) {
+FormFriends::FormFriends(QString aId, SFriends aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId),  _favorites("friends"),
+_filter(aFriends.getCount(), c_filterCount) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    initComponents();
+    initComponents(aFriends);
     ui->LineEditName->setFocus();
 }
 
-void FormFriends::initComponents() {
-    ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
-    retranslate();
+void FormFriends::initComponents(SFriends aFriends) {
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //ui->TableWidgetFriends->setAlternatingRowColors(true);
-    ui->TableWidgetFriends->setRowCount(_friends.getCount());
+    ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID, true);
-    ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, 33);
-    _profiles.sort();
+
+    SFriends friends(aFriends);
+    SProfiles profiles(friends.getProfiles());
+    profiles.sort();
+    for(auto profile: profiles) {
+        for (auto currentFriend: friends) {
+            if (currentFriend._steamID == profile._steamID) {
+                _frienddd.append(QPair<SFriend, SProfile>(currentFriend, profile));
+            }
+        }
+    }
     ui->ButtonFriendGoTo->setFixedSize(QSize(32, 32));
     ui->ButtonFriendFavorite->setFixedSize(QSize(32, 32));
     setIcons();
 #define Connects {
-    connect(ui->TableWidgetFriends,   &QTableWidget::cellClicked,       this, &FormFriends::tableWidgetFriends_CellClicked);
+    connect(ui->ButtonFind,           &QPushButton::clicked,            this, &FormFriends::buttonFind_Clicked);
     connect(ui->ButtonFriendGoTo,     &QPushButton::clicked,            this, &FormFriends::buttonFriendGoTo_Clicked);
     connect(ui->ButtonFriendFavorite, &QPushButton::clicked,            this, &FormFriends::buttonFriendFavorite_Clicked);
-    connect(ui->CheckBoxOpenProfile,  &QCheckBox::stateChanged,         this, &FormFriends::checkBoxOpenProfile_StateChanged);
+
+    connect(ui->ButtonPageFirst,      &QPushButton::clicked,            this, &FormFriends::buttonPageFirst_Clicked);
+    connect(ui->ButtonPageBack2,      &QPushButton::clicked,            this, &FormFriends::buttonPageBack2_Clicked);
+    connect(ui->ButtonPageBack,       &QPushButton::clicked,            this, &FormFriends::buttonPageBack_Clicked);
+    connect(ui->ButtonPageNext,       &QPushButton::clicked,            this, &FormFriends::buttonPageNext_Clicked);
+    connect(ui->ButtonPageNext2,      &QPushButton::clicked,            this, &FormFriends::buttonPageNext2_Clicked);
+    connect(ui->ButtonPageLast,       &QPushButton::clicked,            this, &FormFriends::buttonPageLast_Clicked);
+
     connect(ui->ComboBoxStatus,       SIGNAL(activated(int)),           this, SLOT(comboBoxStatus_Activated(int)));
     connect(ui->LineEditName,         &QLineEdit::textChanged,          this, &FormFriends::lineEditName_TextChanged);
-    connect(ui->ButtonFind,           &QPushButton::clicked,            this, &FormFriends::buttonFind_Clicked);
+    connect(ui->CheckBoxOpenProfile,  &QCheckBox::stateChanged,         this, &FormFriends::checkBoxOpenProfile_StateChanged);
     connect(ui->CheckBoxFavorites,    &QCheckBox::stateChanged,         this, &FormFriends::checkBoxFavorites_StateChanged);
-    connect(ui->TableWidgetFriends,   &QTableWidget::cellDoubleClicked, this, &FormFriends::tableWidgetFriends_CellDoubleClicked);
+    connect(ui->TableWidgetFriends,   &QTableWidget::cellClicked,       this, &FormFriends::tableWidgetFriends_CellClicked);
+    //connect(ui->TableWidgetFriends,   &QTableWidget::cellDoubleClicked, this, &FormFriends::tableWidgetFriends_CellDoubleClicked);
 #define ConnectsEnd }
-    createThread();
+    updateHiddenRows();
+    retranslate();
+    //TODO Подумать над row==0
 }
 
-void FormFriends::onTablePulled() {
-    ui->TableWidgetFriends->resizeColumnsToContents();
-    int row = 0;
-    for(auto &profile: _profiles) {
-        QString path = _setting._pathImagesProfiles + profile._avatar.mid(72,20) + ".jpg";
-        QLabel *avatarFriend = new QLabel(this);
-        ui->TableWidgetFriends->setCellWidget(row, c_tableColumnIcon, avatarFriend);
-        if(!QFile::exists(path)) {//Подумать над row==0
+void FormFriends::pullTable(int aTo, int aDo) {
+    if (_visibleFriends.size() < aDo) {
+        aDo = _visibleFriends.size();
+    }
+    ui->TableWidgetFriends->setRowCount(0);
+    ui->TableWidgetFriends->setRowCount(aDo - aTo);
+    if (_visibleFriends.size() > aTo) {
+        int row = 0;
+        for (int i = aTo; i < aDo; i++) {
+            int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+            QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+            QFont font(family, 9);
+            QString path = _setting._pathImagesProfiles + _visibleFriends[i].second->_avatar.mid(72, 20) + ".jpg";
+            QLabel *avatarFriend = new QLabel();
+            ui->TableWidgetFriends->setCellWidget(row, c_tableColumnIcon, avatarFriend);
+            if(!QFile::exists(path)) {
                 avatarFriend->setBaseSize(QSize(32, 32));
-                RequestImage* image = new RequestImage(avatarFriend, profile._avatar, path, true, this);
-//                if(row==0)//не работает
-//                    connect(image,&RequestImage::s_loadComplete,ui->TableWidgetFriends,[=](){
-//                        TableWidgetFriends_CellClicked(0,0);
-//                    });
+                new RequestImage(avatarFriend, _visibleFriends[i].second->_avatar, path, true, this);
             } else {
                 avatarFriend->setPixmap(QPixmap(path));
-//                if(row==0)
-//                    TableWidgetFriends_CellClicked(0,0);
             }
-        row++;
+
+            QTableWidgetItem *itemName = new QTableWidgetItem(_visibleFriends[i].second->_personaName);
+            QTableWidgetItem *itemAdded = new QTableWidgetItem(_visibleFriends[i].first->_friend_since.toString("yyyy.MM.dd hh:mm"));
+            QTableWidgetItem *itemState = getState(_visibleFriends[i].second->_gameExtraInfo, _visibleFriends[i].second->_personaState);
+            QTableWidgetItem *itemPrivacy = getPrivacy(_visibleFriends[i].second->_communityVisibilityState);
+            itemName->setFont(font);
+            itemAdded->setFont(font);
+            itemState->setFont(font);
+            itemPrivacy->setFont(font);
+            ui->TableWidgetFriends->setItem(row, c_tableColumnID, new QTableWidgetItem(_visibleFriends[i].second->_steamID));
+            ui->TableWidgetFriends->setItem(row, c_tableColumnName, itemName);
+            ui->TableWidgetFriends->setItem(row, c_tableColumnAdded, itemAdded);
+            ui->TableWidgetFriends->setItem(row, c_tableColumnStatus, itemState);
+            ui->TableWidgetFriends->setItem(row, c_tableColumnisPublic, itemPrivacy);
+            ui->TableWidgetFriends->setRowHeight(row, 52);
+            row++;
+        }
+        ui->TableWidgetFriends->resizeColumnsToContents();
+        ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, 32 + 8);
     }
-    ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, ui->TableWidgetFriends->columnWidth(c_tableColumnIcon) + 8);
-    emit s_finish();
+}
+
+QTableWidgetItem *FormFriends::getState(QString aGameExtraInfo, int aPersonaState) {
+    QTableWidgetItem *item = new QTableWidgetItem;
+    if (!aGameExtraInfo.isEmpty()) {
+        item->setText(tr("В игре"));
+        item->setForeground(QColor(137,183,83));
+    } else
+        switch (aPersonaState) {
+        case 0:{
+                item->setText(tr("Не в сети"));
+                item->setForeground(QColor(76,77,79));
+                break;
+        }
+        case 1:{
+                item->setText(tr("В сети"));
+                item->setForeground(QColor(87,203,222));
+                break;
+        }
+        case 2:{
+                item->setText(tr("Не беспокоить"));
+                item->setForeground(QColor(129,85,96));
+                break;
+        }
+        case 3:{
+                item->setText(tr("Нет на месте"));
+                item->setForeground(QColor(70,120,142));
+                break;
+        }
+        case 4:{
+                item->setText(tr("Спит"));
+                item->setForeground(QColor(70,120,142));
+                break;
+        }
+        case 5:{
+                item->setText(tr("Ожидает обмена"));
+                item->setForeground(Qt::darkMagenta);
+                break;
+        }
+        case 6:{
+                item->setText(tr("Хочет поиграть"));
+                item->setForeground(Qt::darkMagenta);
+                break;
+        }
+        }
+    return item;
+}
+
+QTableWidgetItem *FormFriends::getPrivacy(int aCommunityVisibilityState) {
+    QTableWidgetItem *item = new QTableWidgetItem;
+    switch (aCommunityVisibilityState) {
+    case 1:{
+        item->setText(tr("Скрытый"));
+        item->setForeground(QColor(155,44,44));
+        break;
+    }
+    case 2:{
+        item->setText(tr("Скрытый"));
+        item->setForeground(QColor(155,44,44));
+        break;
+    }
+    case 3:{
+        item->setText(tr("Публичный"));
+        item->setForeground(QColor(105,155,44));
+        break;
+    }
+    case 8:{
+        item->setText(tr("Скрытый"));
+        item->setForeground(QColor(155,44,44));
+        break;
+    }
+    }
+    return item;
 }
 #define InitEnd }
 
@@ -122,6 +229,7 @@ void FormFriends::retranslate() {
 
 void FormFriends::updateSettings() {
     _setting.syncronizeSettings();
+    updateHiddenRows();
     setIcons();
 }
 
@@ -140,15 +248,15 @@ void FormFriends::friendToUi() {
         }
         int indexFriend = 0;
         _currentFriendIndex = -1;
-        for(auto &profile: _profiles) {
-            if(profile._steamID == _currentFriend) {
+        for(auto &profile: _frienddd) {
+            if(profile.second._steamID == _currentFriend) {
                 _currentFriendIndex = indexFriend;
-                ui->LabelFriendName->setText(profile._personaName);
-                if(!profile._gameExtraInfo.isEmpty()) {
+                ui->LabelFriendName->setText(profile.second._personaName);
+                if(!profile.second._gameExtraInfo.isEmpty()) {
                     ui->LabelFriendStatus->setText(tr("В игре"));
                     ui->LabelFriendStatus->setStyleSheet("color: #89b753");
                 } else
-                    switch (profile._personaState) {
+                    switch (profile.second._personaState) {
                     case 0:{
                             ui->LabelFriendStatus->setText(tr("Не в сети"));
                             ui->LabelFriendStatus->setStyleSheet("color: #4c4d4f");
@@ -185,7 +293,7 @@ void FormFriends::friendToUi() {
                             break;
                     }
                     }
-                switch(profile._communityVisibilityState) {
+                switch(profile.second._communityVisibilityState) {
                 case 1:{
                     ui->LabelFriendPublic->setText(tr("Скрытый"));
                     ui->LabelFriendPublic->setStyleSheet("color: #9b2c2c");
@@ -221,20 +329,103 @@ void FormFriends::setIcons() {
     ui->ButtonFriendFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
 }
 
-void FormFriends::createThread() {
-    Threading *threadLoadTable = new Threading(this);
-    threadLoadTable->AddThreadFriends(c_tableColumnID, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, ui->TableWidgetFriends, _profiles, _friends);
-    connect (threadLoadTable, &Threading::s_friends_progress, this, [=](int progress, int row) {
-        ui->TableWidgetFriends->setRowHeight(row, 52);
-        emit s_friendsLoaded(progress, row);
-    });
-    connect (threadLoadTable, &Threading::s_friends_finished, this, &FormFriends::onTablePulled);
+void FormFriends::updateHiddenRows() {
+    _visibleFriends.clear();
+    int index = 0;
+    for (auto &userFriend: _frienddd) {
+        if (_filter.getData(index)) {
+            _visibleFriends.append(QPair<SFriend*, SProfile*>(&userFriend.first, &userFriend.second));
+        }
+        index++;
+    }
+
+    calculateButtonPages();
+    pullTable(_currentPage * _setting.getMaximumTableRows(), (_currentPage + 1) * _setting.getMaximumTableRows());
 }
 
-void FormFriends::updateHiddenRows() {
-    for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-        ui->TableWidgetFriends->setRowHidden(i, !_filter.getData(i));
+void FormFriends::calculateButtonPages() {
+    int pages = _visibleFriends.size() / _setting.getMaximumTableRows() + 1;
+    if (_currentPage >= pages) {
+        _currentPage = pages - 1;
     }
+    if (_currentPage < 0) {
+        _currentPage = 0;
+    }
+
+    updateButtonsPages(_currentPage > 0, "1",
+                       _currentPage > 3,
+                       _currentPage > 2, QString::number(_currentPage - 1),
+                       _currentPage > 1, QString::number(_currentPage),
+                       true, QString::number(_currentPage + 1),
+                       pages > (_currentPage + 1), QString::number(_currentPage + 2),
+                       pages > (_currentPage + 2), QString::number(_currentPage + 3),
+                       pages > (_currentPage + 4),
+                       pages > (_currentPage + 3), QString::number(pages));
+}
+
+void FormFriends::updateButtonsPages(bool aFirst, QString aFirstText, bool aLabelDots1, bool aBack2, QString aBack2Text, bool aBack, QString aBackText,
+                                     bool aCurrent, QString aCurrentText,
+                                     bool aNext, QString aNextText, bool aNext2, QString aNext2Text, bool aLabelDots2, bool aLast, QString aLastText) {
+    ui->ButtonPageFirst->setVisible(aFirst);
+    ui->ButtonPageFirst->setText(aFirstText);
+
+    ui->LabelBackDots->setVisible(aLabelDots1);
+
+    ui->ButtonPageBack2->setVisible(aBack2);
+    ui->ButtonPageBack2->setText(aBack2Text);
+
+    ui->ButtonPageBack->setVisible(aBack);
+    ui->ButtonPageBack->setText(aBackText);
+
+    ui->ButtonPageNow->setVisible(aCurrent);
+    ui->ButtonPageNow->setText(aCurrentText);
+
+    ui->ButtonPageNext->setVisible(aNext);
+    ui->ButtonPageNext->setText(aNextText);
+
+    ui->ButtonPageNext2->setVisible(aNext2);
+    ui->ButtonPageNext2->setText(aNext2Text);
+
+    ui->LabelNextDots->setVisible(aLabelDots2);
+
+    ui->ButtonPageLast->setVisible(aLast);
+    ui->ButtonPageLast->setText(aLastText);
+}
+
+void FormFriends::buttonPageFirst_Clicked() {
+    _currentPage = 0;
+    calculateButtonPages();
+    pullTable(_currentPage * _setting.getMaximumTableRows(), (_currentPage + 1) * _setting.getMaximumTableRows());
+}
+
+void FormFriends::buttonPageBack2_Clicked() {
+    _currentPage -= 2;
+    calculateButtonPages();
+    pullTable(_currentPage * _setting.getMaximumTableRows(), (_currentPage + 1) * _setting.getMaximumTableRows());
+}
+
+void FormFriends::buttonPageBack_Clicked() {
+    _currentPage--;
+    calculateButtonPages();
+    pullTable(_currentPage * _setting.getMaximumTableRows(), (_currentPage + 1) * _setting.getMaximumTableRows());
+}
+
+void FormFriends::buttonPageNext_Clicked() {
+    _currentPage++;
+    calculateButtonPages();
+    pullTable(_currentPage * _setting.getMaximumTableRows(), (_currentPage + 1) * _setting.getMaximumTableRows());
+}
+
+void FormFriends::buttonPageNext2_Clicked() {
+    _currentPage += 2;
+    calculateButtonPages();
+    pullTable(_currentPage * _setting.getMaximumTableRows(), (_currentPage + 1) * _setting.getMaximumTableRows());
+}
+
+void FormFriends::buttonPageLast_Clicked() {
+    _currentPage = _visibleFriends.size() / _setting.getMaximumTableRows();
+    calculateButtonPages();
+    pullTable(_currentPage * _setting.getMaximumTableRows(), (_currentPage + 1) * _setting.getMaximumTableRows());
 }
 
 void FormFriends::progressLoading(int aProgress,int aRow) {
@@ -245,33 +436,43 @@ void FormFriends::progressLoading(int aProgress,int aRow) {
 #define Filter {
 void FormFriends::checkBoxOpenProfile_StateChanged(int aState) {
     if(aState == 2) {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i, c_filterPublic, ui->TableWidgetFriends->item(i, c_tableColumnisPublic)->text().indexOf(tr("Публичный")) > -1);
+        for (int i = 0; i < _frienddd.count(); i++) {
+            _filter.setData(i, c_filterPublic, _frienddd[i].second._communityVisibilityState == 3);
         }
     } else {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i,c_filterPublic, true);
+        for (int i = 0; i < _frienddd.count(); i++) {
+            _filter.setData(i, c_filterPublic, true);
         }
     }
     updateHiddenRows();
 }
 
 void FormFriends::comboBoxStatus_Activated(int aIndex) {
-    if(aIndex != 0) {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-            _filter.setData(i, c_filterStatus, ui->ComboBoxStatus->currentText() == ui->TableWidgetFriends->item(i, c_tableColumnStatus)->text());
-        }
-    } else {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+    switch (aIndex) {
+    case 0: {
+        for (int i = 0; i < _frienddd.count(); i++) {
             _filter.setData(i, c_filterStatus, true);
         }
+        break;
+    }
+    case 1: {
+        for (int i = 0; i < _frienddd.count(); i++) {
+            _filter.setData(i, c_filterStatus, !_frienddd[i].second._gameExtraInfo.isEmpty());
+        }
+        break;
+    }
+    default: {
+        for (int i = 0; i < _frienddd.count(); i++) {
+            _filter.setData(i, c_filterStatus, (_frienddd[i].second._personaState == ui->ComboBoxStatus->currentIndex() - 2) && (_frienddd[i].second._gameExtraInfo.isEmpty()));
+        }
+    }
     }
     updateHiddenRows();
 }
 
 void FormFriends::lineEditName_TextChanged(const QString &aNewText) {
-    for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
-        _filter.setData(i, c_filterName, ui->TableWidgetFriends->item(i, c_tableColumnName)->text().toLower().indexOf(aNewText.toLower()) > -1);
+    for (int i = 0; i < _frienddd.count(); i++) {
+        _filter.setData(i, c_filterName, _frienddd[i].second._personaName.toLower().indexOf(aNewText.toLower()) > -1);
     }
     updateHiddenRows();
 }
@@ -283,17 +484,17 @@ void FormFriends::buttonFind_Clicked() {
 void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
     switch (arg1) {
     case 0: {
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+        for (int i = 0; i < _frienddd.count(); i++) {
             _filter.setData(i, c_filterFavorites, true);
         }
         break;
     }
     case 2: {
         QJsonArray values = _favorites.getValues();
-        for (int i = 0; i < ui->TableWidgetFriends->rowCount(); i++) {
+        for (int i = 0; i < _frienddd.count(); i++) {
             bool isFavorite = false;
             for(QJsonValue value: values) {
-                if(value.toObject().value("id").toString() == _profiles[i]._steamID) {
+                if(value.toObject().value("id").toString() == _frienddd[i].second._steamID) {
                     isFavorite = true;
                     break;
                 }
@@ -319,9 +520,9 @@ void FormFriends::buttonFriendGoTo_Clicked() {
 
 void FormFriends::buttonFriendFavorite_Clicked() {
     QJsonObject newValue;
-    newValue["id"] = _profiles[_currentFriendIndex]._steamID;
-    newValue["name"] = _profiles[_currentFriendIndex]._personaName;
-    newValue["added"] = _friends[_currentFriendIndex]._friend_since.toString("yyyy.MM.dd hh:mm:ss");
+    newValue["id"] = _frienddd[_currentFriendIndex].second._steamID;
+    newValue["name"] = _frienddd[_currentFriendIndex].second._personaName;
+    newValue["added"] = _frienddd[_currentFriendIndex].first._friend_since.toString("yyyy.MM.dd hh:mm:ss");
     if(_favorites.addValue(newValue, true)) {
         //Категория добавилась
     } else {

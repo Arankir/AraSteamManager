@@ -23,9 +23,9 @@ class FormFriends : public QWidget {
 public slots:
     void changeEvent(QEvent *event);
     void progressLoading(int p,int row);
-    void onTablePulled();
     void updateSettings();
 
+    void pullTable(int aTo, int aDo);
 public:
     explicit FormFriends(QString id, SFriends Friends, QWidget *parent = nullptr);
     ~FormFriends();
@@ -37,13 +37,12 @@ signals:
     void s_go_to_profile(QString id, ProfileUrlType type);
 
 private slots:
-    void initComponents();
+    void initComponents(SFriends aFriends);
     void closeEvent(QCloseEvent *event);
     void retranslate();
     void setIcons();
     void updateHiddenRows();
     void friendToUi();
-    void createThread();
 
     void buttonFriendGoTo_Clicked();
     void buttonFriendFavorite_Clicked();
@@ -57,17 +56,28 @@ private slots:
     void tableWidgetFriends_CellClicked(int row, int col);
     void tableWidgetFriends_CellDoubleClicked(int row, int column);
 
+    QTableWidgetItem *getState(QString aGameExtraInfo, int aPersonaState);
+    QTableWidgetItem *getPrivacy(int aCommunityVisibilityState);
+    void updateButtonsPages(bool aFirst, QString aFirstText, bool aLabelDots1, bool aBack2, QString aBack2Text, bool aBack, QString aBackText, bool aCurrent, QString aCurrentText, bool aNext, QString aNextText, bool aNext2, QString aNext2Text, bool aLabelDots2, bool aLast, QString aLastText);
+    void buttonPageFirst_Clicked();
+    void buttonPageBack2_Clicked();
+    void buttonPageBack_Clicked();
+    void buttonPageNext_Clicked();
+    void buttonPageNext2_Clicked();
+    void buttonPageLast_Clicked();
+    void calculateButtonPages();
 private:
     Ui::FormFriends *ui;
     QString _id;
     bool _blockedLoad = false;
-    SFriends _friends;
-    SProfiles _profiles;
+    QList<QPair<SFriend, SProfile>> _frienddd;
+    QList<QPair<SFriend*, SProfile*>> _visibleFriends;
     Settings _setting;
     Favorites _favorites;
     Filter _filter;
     QString _currentFriend;
     int _currentFriendIndex = -1;
+    int _currentPage = 0;
 
     //QVector<RequestData*> _request;
     int _numRequests = 0;
