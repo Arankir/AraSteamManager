@@ -13,7 +13,7 @@
 #include <QEventLoop>
 #include <class/settings.h>
 #include <class/statusvalue.h>
-#include <class/Network/requestdata.h>
+#include <class/Network/requestimage.h>
 #include <QObject>
 
 enum class ProfileUrlType {
@@ -48,10 +48,15 @@ public:
     int _locCityID;
     QString _realName;
 
-    int _unicIndex=-1;
+    int _unicIndex = -1;
 
     void update(bool parallel);
-    SProfile(const SProfile &profile);;
+
+    QPixmap getPixmapAvatar(QString savePath);
+    QPixmap getPixmapAvatarMedium(QString savePath);
+    QPixmap getPixmapAvatarFull(QString savePath);
+
+    SProfile(const SProfile &profile);
     SProfile &operator=(const SProfile &profile);
     const bool &operator<(const SProfile &profile);
 
@@ -65,6 +70,9 @@ private slots:
     void set(QJsonObject ObjSummaries);
 
 private:
+    QPixmap _pixmapAvatar;
+    QPixmap _pixmapAvatarMedium;
+    QPixmap _pixmapAvatarFull;
 
 };
 

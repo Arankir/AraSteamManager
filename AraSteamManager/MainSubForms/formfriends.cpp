@@ -77,19 +77,19 @@ void FormFriends::pullTable(int aTo, int aDo) {
     ui->TableWidgetFriends->setRowCount(0);
     ui->TableWidgetFriends->setRowCount(aDo - aTo);
     if (_visibleFriends.size() > aTo) {
+        int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+        QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+        QFont font(family, 9);
+
         int row = 0;
         for (int i = aTo; i < aDo; i++) {
-            int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
-            QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-            QFont font(family, 9);
-            QString path = _setting._pathImagesProfiles + _visibleFriends[i].second->_avatar.mid(72, 20) + ".jpg";
+            QString savePath = _setting._pathImagesProfiles + _visibleFriends[i].second->_avatar.mid(_visibleFriends[i].second->_avatar.lastIndexOf("/") + 1, 40) + ".jpg";
             QLabel *avatarFriend = new QLabel();
             ui->TableWidgetFriends->setCellWidget(row, c_tableColumnIcon, avatarFriend);
-            if(!QFile::exists(path)) {
-                avatarFriend->setBaseSize(QSize(32, 32));
-                new RequestImage(avatarFriend, _visibleFriends[i].second->_avatar, path, true, this);
+            if(!QFile::exists(savePath)) {
+                avatarFriend->setPixmap(_visibleFriends[i].second->getPixmapAvatar(savePath));
             } else {
-                avatarFriend->setPixmap(QPixmap(path));
+                avatarFriend->setPixmap(QPixmap(savePath));
             }
 
             QTableWidgetItem *itemName = new QTableWidgetItem(_visibleFriends[i].second->_personaName);

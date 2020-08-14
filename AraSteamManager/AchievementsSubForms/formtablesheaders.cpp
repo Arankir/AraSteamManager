@@ -18,11 +18,50 @@ constexpr int c_tableAchievementColumnReachedMy = 5;
 constexpr int c_tableAchievementColumnCount = 6;
 #define ConstantsEnd }
 
-//Добавить Retranslate()
-FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGame, QString aId, SAchievementsPlayer aPlayer, TableType aType, QWidget *aParent): QWidget(aParent),
-                    ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false), _id(aId), _achievements(aPlayer) {
+FormTablesHeaders::FormTablesHeaders(SGame aGame, QString aId, SAchievementsPlayer aPlayer, QWidget *aParent): QWidget(aParent),
+ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false), _id(aId), _achievements(aPlayer) {
     ui->setupUi(this);
+    ui->TableWidgetContent->setRowCount(0);
+    setColumnCount(0);
+    setColumnCount(c_tableAchievementColumnCount);
+
+    setType(TableType::standart);
+    ui->TableWidgetContent         ->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableWidgetHorizontalHeader->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+#define InitHeaderTable {
+    ui->TableWidgetHorizontalHeader->setRowCount(2);
+    setRowHeightHeaders(0, 33 + 18);
+    setRowHeightHeaders(1, 33 + 18);
+    _horizontalHeaderHeight = 2;
+    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); i++) {
+        _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
+    }
+    setVerticalHeaderTitle(0, new  QTableWidgetItem(""));
+    setVerticalHeaderTitle(1, new  QTableWidgetItem("%"));
+#define InitHeaderTableEnd }
+
+    SProfiles profileData(_id, false, ProfileUrlType::id);
+
+    changeHorizontalTitle(c_tableAchievementColumnIcon,         "");
+    changeHorizontalTitle(c_tableAchievementColumnTitle,        tr("Название"));
+    changeHorizontalTitle(c_tableAchievementColumnDescription,  tr("Описание"));
+    changeHorizontalTitle(c_tableAchievementColumnWorld,        tr("По миру"));
+    changeHorizontalTitle(c_tableAchievementColumnReachedMy,    profileData.getPersonaname());
+    setColumnWidth(       c_tableAchievementColumnIcon,         65 + 8);
+    setColumnWidth(       c_tableAchievementColumnTitle,        100);
+    setColumnWidth(       c_tableAchievementColumnDescription,  315);
+    setColumnWidth(       c_tableAchievementColumnWorld,        65);
+    setColumnWidth(       c_tableAchievementColumnReachedMy,    80);
+
+    setVisibleColumn(     c_tableAchievementColumnAppid,        false);
+
+    _achievements._appid = QString::number(_game._appID);
+    _achievements._id = _id;
+    _achievements.update();
+
 #define ConnectSlots {
+    connect(&_achievements,                                      SIGNAL(s_finished()),         this,                                                   SLOT(pullTable()));
     connect(ui->TableWidgetContent->horizontalScrollBar(),       &QScrollBar::sliderMoved,     ui->TableWidgetHorizontalHeader->horizontalScrollBar(), &QScrollBar::setValue);
     connect(ui->TableWidgetContent->horizontalScrollBar(),       &QScrollBar::valueChanged,    ui->TableWidgetHorizontalHeader->horizontalScrollBar(), &QScrollBar::setValue);
 
@@ -35,51 +74,13 @@ FormTablesHeaders::FormTablesHeaders(int aRowHeaders, int aRowContent, SGame aGa
 
     connect(ui->TableWidgetHorizontalHeader->verticalHeader(),   &QHeaderView::sectionResized, ui->TableWidgetContent,                                 [=](int /*logicalIndex*/, int oldSize, int newSize) {
         _horizontalHeaderHeight += (newSize - oldSize);
-        connect(ui->TableWidgetContent, &QTableWidget::cellClicked, this, [=](int aRow, int aCol) {
-            emit s_contentCellClicked(aRow, aCol);
-        });
         resize();
     });
+
+    connect(ui->TableWidgetContent,                              &QTableWidget::cellClicked,   this,                                                   [=](int aRow, int aCol) {
+        emit s_contentCellClicked(aRow, aCol);
+    });
 #define ConnectSlotsEnd }
-    ui->TableWidgetHorizontalHeader->setRowCount(aRowHeaders);
-    ui->TableWidgetContent->setRowCount(aRowContent);
-    setColumnCount(0);
-    setColumnCount(c_tableAchievementColumnCount);
-    setType(aType);
-
-    ui->TableWidgetContent->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->TableWidgetHorizontalHeader->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //ui->TableWidgetContent->setSelectionMode(QAbstractItemView::NoSelection);
-
-    setRowHeightHeaders(0, 33 + 18);
-    setRowHeightHeaders(1, 33 + 18);
-
-    _horizontalHeaderHeight = 2;
-    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); i++) {
-        _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
-    }
-
-    SProfiles profileData(_id, false, ProfileUrlType::id);
-
-    setVerticalHeaderTitle(0, new  QTableWidgetItem(""));
-    setVerticalHeaderTitle(1, new  QTableWidgetItem("%"));
-    changeHorizontalTitle(c_tableAchievementColumnIcon, "");
-    changeHorizontalTitle(c_tableAchievementColumnTitle, tr("Название"));
-    changeHorizontalTitle(c_tableAchievementColumnDescription, tr("Описание"));
-    changeHorizontalTitle(c_tableAchievementColumnWorld, tr("По миру"));
-    changeHorizontalTitle(c_tableAchievementColumnReachedMy, profileData.getPersonaname());
-    setVisibleColumn(c_tableAchievementColumnAppid, false);
-    setColumnWidth(c_tableAchievementColumnIcon, 65 + 8);
-    setColumnWidth(c_tableAchievementColumnTitle, 100);
-    setColumnWidth(c_tableAchievementColumnDescription, 315);
-    setColumnWidth(c_tableAchievementColumnWorld, 65);
-    setColumnWidth(c_tableAchievementColumnReachedMy, 80);
-
-    _achievements._appid = QString::number(_game._appID);
-    _achievements._id = _id;
-    //_achievements.set(SAchievementsPercentage(QString::number(_game._appID), false, this));
-    _achievements.update();
-    connect(&_achievements, SIGNAL(s_finished()), this, SLOT(pullTable()));
 }
 
 FormTablesHeaders::~FormTablesHeaders() {
@@ -115,6 +116,53 @@ void FormTablesHeaders::retranslate() {
     pullTable();
 }
 
+void FormTablesHeaders::updateHiddenRows() {
+    switch (_currentType) {
+    case TableType::standart: {
+        if (_isUnique) {
+            for (int i = 0; i < getRowCount(); i++) {
+                if (_fAchievements.getData(i)) {
+                    bool isExist = false;
+                    if (_isNoValue) {
+                        if (itemContent(i, _noValueColumn)->checkState() == Qt::Checked) {
+                            isExist = true;
+                        }
+                    } else {
+                        for (int j = 0; j < _categoriesColumns.size(); j++) {
+                            if (itemContent(i, _categoriesColumns[j])->checkState() == Qt::Checked) {
+                                isExist = true;
+                                break;
+                            }
+                        }
+                    }
+                    setVisibleRowContent(i, !isExist);
+                } else {
+                    setVisibleRowContent(i, false);
+                }
+            }
+        } else {
+            for (int i = 0; i < getRowCount(); i++) {
+                setVisibleRowContent(i, _fAchievements.getData(i));
+            }
+        }
+        break;
+    }
+    case TableType::compare: {
+        for (int i = 0; i < getRowCount(); i++) {
+            setVisibleRowContent(i, _fCompare.getData(i));
+        }
+        break;
+    }
+    }
+}
+
+void FormTablesHeaders::update() {
+    _achievements.update();
+//TODO Подождать пока ачивки обновятся
+//    pullTable();
+}
+
+#define StandartFunctions {
 #define Gets {
 int FormTablesHeaders::getColumnCount() {
     return ui->TableWidgetHorizontalHeader->columnCount();
@@ -170,6 +218,10 @@ int FormTablesHeaders::getNoValueColumn() {
 
 QVector<int> FormTablesHeaders::getCategoryColumns() {
     return _categoriesColumns;
+}
+
+QString FormTablesHeaders::getHeaderText(int aIndex) {
+    return ui->TableWidgetHorizontalHeader->horizontalHeaderItem(aIndex)->text();
 }
 #define GetsEnd }
 
@@ -294,70 +346,66 @@ void FormTablesHeaders::resizeRowHeaders(int aRow, int aHeight) {
 }
 #define ResizesEnd }
 
-void FormTablesHeaders::setType(TableType aNewType) {
-    switch (aNewType) {
-    case TableType::compare: {
-        _visibleHorizontal = true;
-        ui->TableWidgetHorizontalHeader->setVisible(true);
-        ui->TableWidgetContent->horizontalHeader()->setVisible(false);
-        for (const int &index: _categoriesColumns) {
-            setVisibleColumn(index, false);
-        }
-        if (_noValueColumn > -1) {
-            setVisibleColumn(_noValueColumn, false);
-        }
-        for (const int &index: _friendsColumns) {
-            setVisibleColumn(index, true);
-        }
-        resize();
-        break;
-    }
-    case TableType::standart: {
-        _visibleHorizontal = false;
-        ui->TableWidgetHorizontalHeader->setVisible(false);
-        ui->TableWidgetContent->horizontalHeader()->setVisible(true);
-        for (const int &index: _categoriesColumns) {
-            setVisibleColumn(index, true);
-        }
-        if (_noValueColumn > -1) {
-            setVisibleColumn(_noValueColumn, true);
-        }
-        for (const int &index: _friendsColumns) {
-            setVisibleColumn(index, false);
-        }
-        resize();
-        break;
-    }
-    }
-    _currentType = aNewType;
-    updateHiddenRows();
-    //!!!!!!!!!!!!!
+void FormTablesHeaders::insertColumn(int aColumns) {
+    ui->TableWidgetHorizontalHeader->insertColumn(aColumns);
+    ui->TableWidgetContent->insertColumn(aColumns);
+    setHorizontalTitle(aColumns, "");
 }
 
-TableType FormTablesHeaders::getType() {
-    return _currentType;
+void FormTablesHeaders::removeColumn(int aColumns) {
+    ui->TableWidgetContent->removeColumn(aColumns);
+    ui->TableWidgetHorizontalHeader->removeColumn(aColumns);
 }
 
-void FormTablesHeaders::cancelCategory() {
-    while (_categoriesColumns.size() > 0) {
-        for (auto friendColumn: _friendsColumns) {
-            if (friendColumn > _categoriesColumns.last()) {
-                friendColumn--;
-            }
-        }
-        removeColumn(_categoriesColumns.last());
-        _categoriesColumns.removeLast();
+void FormTablesHeaders::insertRow(int aRow) {
+    ui->TableWidgetContent->insertRow(aRow);
+}
+
+void FormTablesHeaders::removeRow(int aRow) {
+    ui->TableWidgetContent->removeRow(aRow);
+}
+#define StandartFunctionsEnd }
+
+#define Category {
+void FormTablesHeaders::addCategoryColumn() {
+    _categoriesColumns.push_back(insertCheckableColumn());
+}
+
+void FormTablesHeaders::addNoValueColumn() {
+    _noValueColumn = insertCheckableColumn();
+}
+
+int FormTablesHeaders::insertCheckableColumn() {
+    insertColumn(ui->TableWidgetContent->columnCount());
+    setColumnWidth(ui->TableWidgetContent->columnCount() -1, 48);
+    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
+        ui->TableWidgetContent->setItem(i, ui->TableWidgetContent->columnCount() - 1, createFlag(false));
     }
-    if (_noValueColumn > -1) {
-        for (auto friendColumn: _friendsColumns) {
-            if (friendColumn > _noValueColumn) {
-                friendColumn--;
-            }
-        }
-        removeColumn(_noValueColumn);
-        _isNoValue = -1;
+    return ui->TableWidgetContent->columnCount() - 1;
+}
+
+QTableWidgetItem *FormTablesHeaders::createFlag(bool flagState) {
+    QTableWidgetItem *itemCheck(new QTableWidgetItem(tr("")));
+    itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
+    itemCheck->setCheckState(flagState ? Qt::Checked : Qt::Unchecked);
+    return itemCheck;
+}
+
+void FormTablesHeaders::reverseCategoryColumn(int index) {
+    for (int i = 0; i < getRowCount(); i++) {
+        QTableWidgetItem *item = itemContent(i, _categoriesColumns[index]);
+        item->setCheckState(item->checkState() == Qt::Checked ? Qt::Unchecked : Qt::Checked);
     }
-    _isUnique = false;
+}
+
+void FormTablesHeaders::removeCategoryColumn(int aColumn) {
+    int column = _categoriesColumns.takeAt(aColumn);
+    removeColumn(column);
+    for(auto &cColumn: _categoriesColumns) {
+        if(cColumn > column) {
+            cColumn--;
+        }
+    }
 }
 
 void FormTablesHeaders::setValuesMode(bool value) {
@@ -406,205 +454,33 @@ void FormTablesHeaders::setUniqueMode(bool aUnique) {
     updateHiddenRows();
 }
 
-bool FormTablesHeaders::addFriendColumn(SProfile aFriendProfile) {
-    int column=ui->TableWidgetContent->columnCount();
-    insertColumn(column);
-    changeHorizontalTitle(column, aFriendProfile._personaName);
-    QLabel *avatarFriend = new QLabel;
-    avatarFriend->setPixmap(RequestData(aFriendProfile._avatar, false).getPixmap());
-    avatarFriend->setToolTip(aFriendProfile._personaName);
-    avatarFriend->setAlignment(Qt::AlignCenter);
-    ui->TableWidgetHorizontalHeader->setCellWidget(0, column, avatarFriend);
-    SAchievements achievementsFriends = _achievements;
-    achievementsFriends.set(new SAchievementsPlayer (QString::number(_game._appID), aFriendProfile._steamID, false, this));
-//    Threading LoadFriendTable(this);
-//    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
-    _fCompare.setCol(_fCompare.getCol() + 1);
-    setColumnWidth(column, 80);
-
-    _friendsColumns.push_back(column);
-    int totalReach = 0;
-    int totalNotReach = 0;
-    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
-        for(auto &achievement: achievementsFriends) {
-            if(achievement._apiName == ui->TableWidgetContent->item(i, c_tableAchievementColumnAppid)->text()) {
-                QTableWidgetItem *itemReached;
-                if(achievement._achieved == 1) {
-                    itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievement._unlockTime.toString("yyyy.MM.dd hh:mm")));
-                    itemReached->setToolTip(achievement._unlockTime.toString("yyyy.MM.dd hh:mm"));
-                    totalReach++;
-                } else {
-                    itemReached = new QTableWidgetItem(tr("Не получено"));
-                    totalNotReach++;
-                }
-                itemReached->setTextAlignment(Qt::AlignCenter);
-                ui->TableWidgetContent->setItem(i, column, itemReached);
-                break;
-            }
+void FormTablesHeaders::hideCheckedAchievement(QTableWidgetItem *aItem) {
+    if (aItem->column() > c_tableAchievementColumnCount) {
+        if (aItem->checkState() == Qt::Checked) {
+            _fAchievements.setData(aItem->row(), c_filterUniqueValue, false);
         }
-    }
-    if((totalReach == 0) && (totalNotReach == 0)) {
-        ui->TableWidgetHorizontalHeader->setItem(1, column, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не"), tr("публичный"))));
-        return false;
-    } else {
-        ui->TableWidgetHorizontalHeader->setItem(1, column, new QTableWidgetItem(QString("%1/%2\n%3%").arg(QString::number(totalReach),
-                                                                                                           QString::number(totalReach + totalNotReach),
-                                                                                                           QString::number(100.0 * totalReach / (totalReach + totalNotReach)))));
-        return true;
-    }
-}
-
-void FormTablesHeaders::addNoValueColumn() {
-    _noValueColumn = insertCheckableColumn();
-}
-
-void FormTablesHeaders::addCategoryColumn() {
-    _categoriesColumns.push_back(insertCheckableColumn());
-}
-
-int FormTablesHeaders::insertCheckableColumn() {
-    insertColumn(ui->TableWidgetContent->columnCount());
-    setColumnWidth(ui->TableWidgetContent->columnCount() -1, 48);
-    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
-        ui->TableWidgetContent->setItem(i, ui->TableWidgetContent->columnCount() - 1, createFlag(false));
-    }
-    return ui->TableWidgetContent->columnCount() - 1;
-}
-
-void FormTablesHeaders::reverseCategoryColumn(int index) {
-    for (int i = 0; i < getRowCount(); i++) {
-        QTableWidgetItem *item = itemContent(i, _categoriesColumns[index]);
-        item->setCheckState(item->checkState() == Qt::Checked ? Qt::Unchecked : Qt::Checked);
-    }
-}
-
-void FormTablesHeaders::removeFriendColumn(QString aFriendName) {
-    int columnFriend = 0;
-    int indexFriend = 0;
-    for (auto &column: _friendsColumns) {
-        if (ui->TableWidgetHorizontalHeader->horizontalHeaderItem(column)->text() == aFriendName) {
-            columnFriend = column;
-            removeFriendColumn(indexFriend);
-            break;
-        }
-        indexFriend++;
-    }
-    if(_fCompare.getCol() >= columnFriend) {
-        _fCompare.removeCol(_fCompare.getCol() - (getColumnCount() - columnFriend + 1));
     }
     updateHiddenRows();
 }
 
-void FormTablesHeaders::removeFriendColumn(int aColumn) {
-    int column = _friendsColumns.takeAt(aColumn);
-    removeColumn(column);
-    for(auto &fColumn: _friendsColumns) {
-        if(fColumn > column) {
-            fColumn--;
-        }
-    }
-}
-
-void FormTablesHeaders::removeCategoryColumn(int aColumn) {
-    int column = _categoriesColumns.takeAt(aColumn);
-    removeColumn(column);
-    for(auto &cColumn: _categoriesColumns) {
-        if(cColumn > column) {
-            cColumn--;
-        }
-    }
-}
-
-void FormTablesHeaders::insertColumn(int aColumns) {
-    ui->TableWidgetHorizontalHeader->insertColumn(aColumns);
-    ui->TableWidgetContent->insertColumn(aColumns);
-    setHorizontalTitle(aColumns, "");
-}
-
-void FormTablesHeaders::removeColumn(int aColumns) {
-    ui->TableWidgetContent->removeColumn(aColumns);
-    ui->TableWidgetHorizontalHeader->removeColumn(aColumns);
-}
-
-void FormTablesHeaders::insertRow(int aRow) {
-    ui->TableWidgetContent->insertRow(aRow);
-}
-
-void FormTablesHeaders::removeRow(int aRow) {
-    ui->TableWidgetContent->removeRow(aRow);
-}
-
-bool FormTablesHeaders::pullTable() {
-    if (_achievements.getStatus() == StatusValue::success) {
-        setRowCount(_achievements.getCount());
-        for (int i = 0; i < _achievements.getCount(); i++) {
-            setRowHeight(i, 66 + 18);
-        }
-        _fAchievements.setRow(getRowCount());
-        _fCompare.setRow(getRowCount());
-        createThread();
-        return true;
-    } else {
-        setRowCount(1);
-        setItemHorizontalHeader(c_tableAchievementColumnAppid, 1, new QTableWidgetItem(tr("Ошибка")));
-        setVisibleColumn(c_tableAchievementColumnTitle, false);
-        setVisibleColumn(c_tableAchievementColumnDescription, false);
-        setVisibleColumn(c_tableAchievementColumnWorld, false);
-        setVisibleColumn(c_tableAchievementColumnReachedMy, false);
-        return false;
-    }
-}
-
-void FormTablesHeaders::createThread() {
-    Threading *loadTable = new Threading(this);
-    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription, c_tableAchievementColumnWorld,
-                                     c_tableAchievementColumnReachedMy, &_achievements, ui->TableWidgetContent);
-    connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
-        emit s_achievementsLoaded(progress, row);
-    });
-    connect (loadTable, &Threading::s_achievements_finished, this, &FormTablesHeaders::onTablePulled);
-}
-
-void FormTablesHeaders::onTablePulled(int reached, int notReached) {
-    QLabel *labelCompareSummary = new QLabel(this);
-    setWidgetHorizontalHeader(1, c_tableAchievementColumnReachedMy, labelCompareSummary);
-    labelCompareSummary->setText(QString("%1/%2\n%3%").arg(
-                                     QString::number(reached),
-                                     QString::number(reached + notReached),
-                                     QString::number(100.0 * reached / (reached + notReached))));
-    ui->TableWidgetContent->resizeRowsToContents();
-    int row = 0;
-    for (const auto &achievement: _achievements) {
-        //создание картинок
-        QString achievementIcon = achievement._icon.mid(66, achievement._icon.length());
-        QString pathImage = _setting._pathImagesAchievements + QString::number(_game._appID) + "/" + achievementIcon.mid(achievementIcon.indexOf("/", 1) + 1, achievementIcon.length() - 1);
-        QLabel *iconGame = new QLabel(this);
-        getTableContent()->setCellWidget(row, c_tableAchievementColumnIcon, iconGame);
-        if (achievement._displayName != "") {
-            if (!QFile::exists(pathImage)) {
-                iconGame->setBaseSize(QSize(64, 64));
-                new RequestImage(iconGame, achievement._icon, pathImage, true, this);
-            } else {
-                iconGame->setPixmap(QPixmap(pathImage));
+void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
+    if (aPos < ui->TableWidgetContent->columnCount()) {
+        if (_isUnique) {
+            for (int i = 0; i < getRowCount(); i++) {
+                if (!ui->TableWidgetContent->isRowHidden(i)) {
+                    itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
+                    _fAchievements.setData(i, c_filterUniqueValue, !aSelect);
+                }
             }
-
-            ui->TableWidgetContent->resizeRowToContents(row);
-            if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {
-                ui->TableWidgetContent->setRowHeight(row, 64 + 18);
-            }
-            row++;
         } else {
-            setRowCount(getRowCount() - 1);
+            for (int i = 0; i < getRowCount(); i++) {
+                if (!ui->TableWidgetContent->isRowHidden(i)) {
+                    itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
+                }
+            }
         }
     }
-    emit s_tablePulled(reached, notReached);
-}
-
-QTableWidgetItem *FormTablesHeaders::createFlag(bool flagState) {
-    QTableWidgetItem *itemCheck(new QTableWidgetItem(tr("")));
-    itemCheck->setFlags(itemCheck->flags() | Qt::ItemIsUserCheckable);
-    itemCheck->setCheckState(flagState ? Qt::Checked : Qt::Unchecked);
-    return itemCheck;
+    updateHiddenRows();
 }
 
 void FormTablesHeaders::categoryToTable(QString aTitle, QList<QString> aNoValues, QJsonArray aValues, bool aIsNoValue) {
@@ -661,75 +537,250 @@ bool FormTablesHeaders::swapCategoryColumns(int aPosOld, int aPosNew) {
     }
 }
 
-void FormTablesHeaders::updateHiddenRows() {
-    switch (_currentType) {
-    case TableType::standart: {
-        if (_isUnique) {
-            for (int i = 0; i < getRowCount(); i++) {
-                if (_fAchievements.getData(i)) {
-                    bool isExist = false;
-                    if (_isNoValue) {
-                        if (itemContent(i, _noValueColumn)->checkState() == Qt::Checked) {
-                            isExist = true;
-                        }
-                    } else {
-                        for (int j = 0; j < _categoriesColumns.size(); j++) {
-                            if (itemContent(i, _categoriesColumns[j])->checkState() == Qt::Checked) {
-                                isExist = true;
-                                break;
-                            }
-                        }
-                    }
-                    setVisibleRowContent(i, !isExist);
+void FormTablesHeaders::cancelCategory() {
+    while (_categoriesColumns.size() > 0) {
+        for (auto friendColumn: _friendsColumns) {
+            if (friendColumn > _categoriesColumns.last()) {
+                friendColumn--;
+            }
+        }
+        removeColumn(_categoriesColumns.last());
+        _categoriesColumns.removeLast();
+    }
+    if (_noValueColumn > -1) {
+        for (auto friendColumn: _friendsColumns) {
+            if (friendColumn > _noValueColumn) {
+                friendColumn--;
+            }
+        }
+        removeColumn(_noValueColumn);
+        _isNoValue = -1;
+    }
+    _isUnique = false;
+}
+#define CategoryEnd }
+
+#define Friends {
+bool FormTablesHeaders::addFriendColumn(SProfile aFriendProfile) {
+    int column=ui->TableWidgetContent->columnCount();
+    insertColumn(column);
+    changeHorizontalTitle(column, aFriendProfile._personaName);
+    QLabel *avatarFriend = new QLabel;
+    avatarFriend->setPixmap(RequestData(aFriendProfile._avatar, false).getPixmap());
+    avatarFriend->setToolTip(aFriendProfile._personaName);
+    avatarFriend->setAlignment(Qt::AlignCenter);
+    ui->TableWidgetHorizontalHeader->setCellWidget(0, column, avatarFriend);
+    SAchievements achievementsFriends = _achievements;
+    achievementsFriends.set(new SAchievementsPlayer (QString::number(_game._appID), aFriendProfile._steamID, false, this));
+//    Threading LoadFriendTable(this);
+//    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
+    _fCompare.setCol(_fCompare.getCol() + 1);
+    setColumnWidth(column, 80);
+
+    _friendsColumns.push_back(column);
+    int totalReach = 0;
+    int totalNotReach = 0;
+    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
+        for(auto &achievement: achievementsFriends) {
+            if(achievement._apiName == ui->TableWidgetContent->item(i, c_tableAchievementColumnAppid)->text()) {
+                QTableWidgetItem *itemReached;
+                if(achievement._achieved == 1) {
+                    itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievement._unlockTime.toString("yyyy.MM.dd hh:mm")));
+                    itemReached->setToolTip(achievement._unlockTime.toString("yyyy.MM.dd hh:mm"));
+                    totalReach++;
                 } else {
-                    setVisibleRowContent(i, false);
+                    itemReached = new QTableWidgetItem(tr("Не получено"));
+                    totalNotReach++;
                 }
-            }
-        } else {
-            for (int i = 0; i < getRowCount(); i++) {
-                setVisibleRowContent(i, _fAchievements.getData(i));
+                itemReached->setTextAlignment(Qt::AlignCenter);
+                ui->TableWidgetContent->setItem(i, column, itemReached);
+                break;
             }
         }
-        break;
     }
-    case TableType::compare: {
+    if((totalReach == 0) && (totalNotReach == 0)) {
+        ui->TableWidgetHorizontalHeader->setItem(1, column, new QTableWidgetItem(QString("%1\n%2").arg(tr("Профиль не"), tr("публичный"))));
+        return false;
+    } else {
+        ui->TableWidgetHorizontalHeader->setItem(1, column, new QTableWidgetItem(QString("%1/%2\n%3%").arg(QString::number(totalReach),
+                                                                                                           QString::number(totalReach + totalNotReach),
+                                                                                                           QString::number(100.0 * totalReach / (totalReach + totalNotReach)))));
+        return true;
+    }
+}
+
+void FormTablesHeaders::removeFriendColumn(QString aFriendName) {
+    int columnFriend = 0;
+    int indexFriend = 0;
+    for (auto &column: _friendsColumns) {
+        if (ui->TableWidgetHorizontalHeader->horizontalHeaderItem(column)->text() == aFriendName) {
+            columnFriend = column;
+            removeFriendColumn(indexFriend);
+            break;
+        }
+        indexFriend++;
+    }
+    if(_fCompare.getCol() >= columnFriend) {
+        _fCompare.removeCol(_fCompare.getCol() - (getColumnCount() - columnFriend + 1));
+    }
+    updateHiddenRows();
+}
+
+void FormTablesHeaders::removeFriendColumn(int aColumn) {
+    int column = _friendsColumns.takeAt(aColumn);
+    removeColumn(column);
+    for(auto &fColumn: _friendsColumns) {
+        if(fColumn > column) {
+            fColumn--;
+        }
+    }
+}
+
+void FormTablesHeaders::updateFilterWithFriend(QString aFriendName, ReachedType aType) {
+    int columnFriend = 0;
+    for (auto &column: _friendsColumns) {
+        if (ui->TableWidgetHorizontalHeader->horizontalHeaderItem(column)->text() == aFriendName){
+            columnFriend = column;
+            break;
+        }
+    }
+    int filterColumn = _fCompare.getCol() - (getColumnCount() - columnFriend);
+    switch (aType) {
+    case ReachedType::all: {
         for (int i = 0; i < getRowCount(); i++) {
-            setVisibleRowContent(i, _fCompare.getData(i));
+            _fCompare.setData(i, filterColumn, true);
         }
         break;
     }
-    }
-}
-
-void FormTablesHeaders::hideCheckedAchievement(QTableWidgetItem *aItem) {
-    if (aItem->column() > c_tableAchievementColumnCount) {
-        if (aItem->checkState() == Qt::Checked) {
-            _fAchievements.setData(aItem->row(), c_filterUniqueValue, false);
+    case ReachedType::reached: {
+        for (int i = 0; i < getRowCount(); i++) {
+            _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") > -1);
         }
+        break;
+    }
+    case ReachedType::notReached: {
+        for (int i = 0; i < getRowCount(); i++) {
+            _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") == -1);
+        }
+        break;
+    }
+    default: {
+        break;
+    }
     }
     updateHiddenRows();
 }
+#define FriendsEnd }
 
-void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
-    if (aPos < ui->TableWidgetContent->columnCount()) {
-        if (_isUnique) {
-            for (int i = 0; i < getRowCount(); i++) {
-                if (!ui->TableWidgetContent->isRowHidden(i)) {
-                    itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
-                    _fAchievements.setData(i, c_filterUniqueValue, !aSelect);
-                }
+void FormTablesHeaders::setType(TableType aNewType) {
+    switch (aNewType) {
+    case TableType::compare: {
+        _visibleHorizontal = true;
+        ui->TableWidgetHorizontalHeader->setVisible(true);
+        ui->TableWidgetContent->horizontalHeader()->setVisible(false);
+        for (const int &index: _categoriesColumns) {
+            setVisibleColumn(index, false);
+        }
+        if (_noValueColumn > -1) {
+            setVisibleColumn(_noValueColumn, false);
+        }
+        for (const int &index: _friendsColumns) {
+            setVisibleColumn(index, true);
+        }
+        resize();
+        break;
+    }
+    case TableType::standart: {
+        _visibleHorizontal = false;
+        ui->TableWidgetHorizontalHeader->setVisible(false);
+        ui->TableWidgetContent->horizontalHeader()->setVisible(true);
+        for (const int &index: _categoriesColumns) {
+            setVisibleColumn(index, true);
+        }
+        if (_noValueColumn > -1) {
+            setVisibleColumn(_noValueColumn, true);
+        }
+        for (const int &index: _friendsColumns) {
+            setVisibleColumn(index, false);
+        }
+        resize();
+        break;
+    }
+    }
+    _currentType = aNewType;
+    updateHiddenRows();
+    //!!!!!!!!!!!!!
+}
+
+TableType FormTablesHeaders::getType() {
+    return _currentType;
+}
+
+bool FormTablesHeaders::pullTable() {
+    if (_achievements.getStatus() == StatusValue::success) {
+        setRowCount(_achievements.getCount());
+        for (int i = 0; i < _achievements.getCount(); i++) {
+            setRowHeight(i, 66 + 18);
+        }
+        _fAchievements.setRow(getRowCount());
+        _fCompare.setRow(getRowCount());
+        createThread();
+        return true;
+    } else {
+        setRowCount(1);
+        setItemHorizontalHeader(c_tableAchievementColumnAppid, 1, new QTableWidgetItem(tr("Ошибка")));
+        setVisibleColumn(c_tableAchievementColumnTitle, false);
+        setVisibleColumn(c_tableAchievementColumnDescription, false);
+        setVisibleColumn(c_tableAchievementColumnWorld, false);
+        setVisibleColumn(c_tableAchievementColumnReachedMy, false);
+        return false;
+    }
+}
+
+void FormTablesHeaders::createThread() {
+    Threading *loadTable = new Threading(this);
+    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription, c_tableAchievementColumnWorld,
+                                     c_tableAchievementColumnReachedMy, &_achievements, ui->TableWidgetContent);
+    connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
+        emit s_achievementsLoaded(progress, row);
+    });
+    connect (loadTable, &Threading::s_achievements_finished, this, &FormTablesHeaders::onTablePulled);
+}
+
+void FormTablesHeaders::onTablePulled(int reached, int notReached) {
+    QLabel *labelCompareSummary = new QLabel(this);
+    setWidgetHorizontalHeader(1, c_tableAchievementColumnReachedMy, labelCompareSummary);
+    labelCompareSummary->setText(QString("%1/%2\n%3%").arg(
+                                     QString::number(reached),
+                                     QString::number(reached + notReached),
+                                     QString::number(100.0 * reached / (reached + notReached))));
+    ui->TableWidgetContent->resizeRowsToContents();
+    int row = 0;
+    for (auto &achievement: _achievements) {
+        //создание картинок
+        QString savePath = _setting._pathImagesAchievements + QString::number(_game._appID) + "/" + achievement._icon.mid(achievement._icon.lastIndexOf("/") + 1, 40) + ".jpg";
+        QLabel *iconGame = new QLabel(this);
+        getTableContent()->setCellWidget(row, c_tableAchievementColumnIcon, iconGame);
+        if (achievement._displayName != "") {
+            if (!QFile::exists(savePath)) {
+                iconGame->setPixmap(achievement.getIcon(savePath));
+            } else {
+                iconGame->setPixmap(QPixmap(savePath));
             }
+
+            ui->TableWidgetContent->resizeRowToContents(row);
+            if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {
+                ui->TableWidgetContent->setRowHeight(row, 64 + 18);
+            }
+            row++;
         } else {
-            for (int i = 0; i < getRowCount(); i++) {
-                if (!ui->TableWidgetContent->isRowHidden(i)) {
-                    itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
-                }
-            }
+            setRowCount(getRowCount() - 1);
         }
     }
-    updateHiddenRows();
+    emit s_tablePulled(reached, notReached);
 }
 
+#define Filter {
 void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo, bool aCompare) {
     switch (aType) {
     case ReachedType::all: {
@@ -792,41 +843,6 @@ void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo,
                     _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
                 }
             }
-        }
-        break;
-    }
-    default: {
-        break;
-    }
-    }
-    updateHiddenRows();
-}
-
-void FormTablesHeaders::updateFilterWithFriend(QString aFriendName, ReachedType aType) {
-    int columnFriend = 0;
-    for (auto &column: _friendsColumns) {
-        if (ui->TableWidgetHorizontalHeader->horizontalHeaderItem(column)->text() == aFriendName){
-            columnFriend = column;
-            break;
-        }
-    }
-    int filterColumn = _fCompare.getCol() - (getColumnCount() - columnFriend);
-    switch (aType) {
-    case ReachedType::all: {
-        for (int i = 0; i < getRowCount(); i++) {
-            _fCompare.setData(i, filterColumn, true);
-        }
-        break;
-    }
-    case ReachedType::reached: {
-        for (int i = 0; i < getRowCount(); i++) {
-            _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") > -1);
-        }
-        break;
-    }
-    case ReachedType::notReached: {
-        for (int i = 0; i < getRowCount(); i++) {
-            _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") == -1);
         }
         break;
     }
@@ -912,13 +928,4 @@ void FormTablesHeaders::updateFilterCategory(int aCategoryIndex, bool aClear, QL
     }
     updateHiddenRows();
 }
-
-void FormTablesHeaders::update() {
-    _achievements.update();
-//TODO Подождать пока ачивки обновятся
-//    pullTable();
-}
-
-QString FormTablesHeaders::getHeaderText(int aIndex) {
-    return ui->TableWidgetHorizontalHeader->horizontalHeaderItem(aIndex)->text();
-}
+#define FilterEnd }

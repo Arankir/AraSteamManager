@@ -53,6 +53,7 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *LabelTotalPersent;
     QPushButton *ButtonUpdate;
+    QPushButton *ButtonGuides;
     QSpacerItem *horizontalSpacer_2;
     QFrame *FrameFilter;
     QHBoxLayout *horizontalLayout_13;
@@ -241,6 +242,11 @@ public:
         ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
 
         horizontalLayout_6->addWidget(ButtonUpdate);
+
+        ButtonGuides = new QPushButton(FrameGameInfo);
+        ButtonGuides->setObjectName(QString::fromUtf8("ButtonGuides"));
+
+        horizontalLayout_6->addWidget(ButtonGuides);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -625,6 +631,7 @@ public:
         CheckBoxShowCategories->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         LabelGameOnline->setText(QCoreApplication::translate("FormAchievements", "GameOnline:  ", nullptr));
         ButtonUpdate->setText(QCoreApplication::translate("FormAchievements", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214", nullptr));
+        ButtonGuides->setText(QCoreApplication::translate("FormAchievements", "\320\240\321\203\320\272\320\276\320\262\320\276\320\264\321\201\321\202\320\262\320\260", nullptr));
         CheckBoxFavorites->setText(QCoreApplication::translate("FormAchievements", "\320\242\320\276\320\273\321\214\320\272\320\276 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         ButtonFavorite->setText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\262 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
         ButtonCompare->setText(QCoreApplication::translate("FormAchievements", " \320\241\321\200\320\260\320\262\320\275\320\270\321\202\321\214 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270", nullptr));

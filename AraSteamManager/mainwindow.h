@@ -115,6 +115,8 @@ private:
 
     bool _blockedLoad = false;
 
+    int test = 0;
+
 };
 
 #endif // MAINWINDOW_H

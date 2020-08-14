@@ -10,6 +10,7 @@
 #include <QFormLayout>
 #include <QButtonGroup>
 #include <QPropertyAnimation>
+#include <QDesktopServices>
 #include <class/Network/requestimage.h>
 #include <class/settings.h>
 #include <class/steamapi/Sgames.h>
@@ -68,6 +69,7 @@ public slots:
     void updateValueUpDown();
     void formCategoryValueDelete();
     void formCategoryListWidget_CurrentRowChanged();
+    void buttonManual_Clicked();
 public:
     explicit FormAchievements(SAchievementsPlayer pl, SProfile profile, SGame game, int num, QWidget *parent = nullptr);
     ~FormAchievements();

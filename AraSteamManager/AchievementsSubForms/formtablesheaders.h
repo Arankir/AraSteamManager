@@ -57,7 +57,7 @@ public slots:
 
     void reverseCategoryColumn(int index);
 public:
-    explicit FormTablesHeaders(int rowHeaders, int rowContent, SGame game, QString id, SAchievementsPlayer achievements, TableType type, QWidget *parent = nullptr);
+    explicit FormTablesHeaders(SGame game, QString id, SAchievementsPlayer achievements, QWidget *parent = nullptr);
     ~FormTablesHeaders();
     void resizeEvent(QResizeEvent *event);
     void changeEvent(QEvent *event);

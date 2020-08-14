@@ -97,8 +97,8 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     QVBoxLayout *layoutFriendsAchievementsFilter = new QVBoxLayout(widgetFriendsAchievementsFilter);
     layoutFriendsAchievementsFilter->setMargin(1);
     layoutFriendsAchievementsFilter->setAlignment(Qt::AlignCenter);
-    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsAll", "Friends", "All", true));
-    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsReached", "Friends", "Reached", false));
+    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsAll",        "Friends", "All",        true));
+    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsReached",    "Friends", "Reached",    false));
     layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsNotReached", "Friends", "NotReached", false));
     //widgetFriendsAchievementsFilter->setLayout(layoutFriendsAchievementsFilter);
 

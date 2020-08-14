@@ -66,6 +66,45 @@ void SProfile::update(bool aParallel) {
     loading(aParallel);
 }
 
+QPixmap SProfile::getPixmapAvatar(QString aPath) {
+    if (_pixmapAvatar == QPixmap()) {
+        RequestImage *img = new RequestImage(_avatar, aPath, true, this);
+        QEventLoop loop;
+        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        loop.exec();
+        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        _pixmapAvatar = img->getPixmap();
+        delete img;
+    }
+    return _pixmapAvatar;
+}
+
+QPixmap SProfile::getPixmapAvatarMedium(QString aPath) {
+    if (_pixmapAvatarMedium == QPixmap()) {
+        RequestImage *img = new RequestImage(_avatarMedium, aPath, true, this);
+        QEventLoop loop;
+        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        loop.exec();
+        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        _pixmapAvatarMedium = img->getPixmap();
+        delete img;
+    }
+    return _pixmapAvatarMedium;
+}
+
+QPixmap SProfile::getPixmapAvatarFull(QString aPath) {
+    if (_pixmapAvatarFull == QPixmap()) {
+        RequestImage *img = new RequestImage(_avatarFull, aPath, true, this);
+        QEventLoop loop;
+        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        loop.exec();
+        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        _pixmapAvatarFull = img->getPixmap();
+        delete img;
+    }
+    return _pixmapAvatarFull;
+}
+
 SProfile::SProfile(const SProfile &aProfile): QObject(aProfile.parent()), _steamID(aProfile._steamID), _communityVisibilityState(aProfile._communityVisibilityState),
 _profileState(aProfile._profileState), _personaName(aProfile._personaName), _lastLogoff(aProfile._lastLogoff), _commentPermission(aProfile._commentPermission),
 _profileUrl(aProfile._profileUrl), _avatar(aProfile._avatar), _avatarMedium(aProfile._avatarMedium), _avatarFull(aProfile._avatarFull), _personaState(aProfile._personaState),

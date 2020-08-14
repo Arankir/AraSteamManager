@@ -41,7 +41,7 @@ void MainWindow::initComponents() {
 
     ui->ButtonMinimize->setFixedSize(QSize(23, 23));
     ui->ButtonMaximize->setFixedSize(QSize(23, 23));
-    ui->ButtonExit->setFixedSize(QSize(23, 23));
+    ui->ButtonExit    ->setFixedSize(QSize(23, 23));
     this->setGeometry(_setting.getMainWindowGeometry());
     this->move(_setting.getMainWindowPos().x(), _setting.getMainWindowPos().y());
     if(_setting.getMainWindowMaximize()) {
@@ -67,6 +67,22 @@ void MainWindow::initComponents() {
     if (_setting.getMyProfile() != "none") {
         goToProfile(_setting.getMyProfile(), ProfileUrlType::id);
     }
+
+    QAction *minimizeAction = new QAction("Перейти на профиль", this);
+    QAction *restoreAction = new QAction("Добавить в избранное", this);
+
+    connect (minimizeAction, &QAction::triggered, this, [=]() {
+        qDebug()<<test<<sender();
+    });
+    //connect (restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
+
+    QMenu* yourMenu = new QMenu(this);
+    yourMenu -> addAction (minimizeAction);
+    yourMenu -> addAction (restoreAction);
+    ui->toolButton->setMenu(yourMenu);
+    connect (ui->toolButton, &QToolButton::clicked, this, [=]() {test++;});
+    connect (ui->toolButton, &QToolButton::clicked, ui->toolButton, &QToolButton::showMenu);
+    //ui->toolButton->setPopupMode(QToolButton::MenuButtonPopup);
 }
 #define InitEnd }
 
@@ -810,7 +826,7 @@ void MainWindow::keyPressEvent(QKeyEvent *aEvent) {
 }
 
 void MainWindow::changeEvent(QEvent *aEvent) {
-    if(aEvent->type() == QEvent::LanguageChange) {
+    if (aEvent->type() == QEvent::LanguageChange) {
         ui->retranslateUi(this);
     }
 }
@@ -895,7 +911,10 @@ void MainWindow::buttonBack_Clicked() {
     if(ui->StackedWidgetProfiles->currentIndex() > 0) {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() - 1);
         returnFromForms();
-        updateSettings();
+        FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
+        if (currentProfile) {
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != _setting.getMyProfile());
+        }
         updateEnabledButtonsBackNext();
     }
 }
@@ -904,7 +923,10 @@ void MainWindow::buttonNext_Clicked() {
     if(ui->StackedWidgetProfiles->currentIndex() < ui->StackedWidgetProfiles->count()) {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() + 1);
         returnFromForms();
-        updateSettings();
+        FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
+        if (currentProfile) {
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != _setting.getMyProfile());
+        }
         updateEnabledButtonsBackNext();
     }
 }

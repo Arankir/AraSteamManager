@@ -15,6 +15,7 @@
 #include <QTextCodec>
 #include <class/settings.h>
 #include <class/statusvalue.h>
+#include <class/Network/requestimage.h>
 #include <QDebug>
 
 class SAchievementGlobal : public QObject {
@@ -68,10 +69,14 @@ public:
     const int _achieved;
     const QDateTime _unlockTime;
     const double _percent;
+    QPixmap getIcon(QString savePath);
+    QPixmap getIconGray(QString savePath);
     SAchievement(const SAchievement &achievement);
     SAchievement &operator=(const SAchievement&);
     const bool &operator<(const SAchievement &achievement);
-
+private:
+    QPixmap _pixmapIcon;
+    QPixmap _pixmapIconGray;
 };
 
 class SAchievementsGlobal : public QObject {

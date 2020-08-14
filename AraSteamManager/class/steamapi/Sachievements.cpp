@@ -59,6 +59,32 @@ _percent(aPercent._percent) {
 
 }
 
+QPixmap SAchievement::getIcon(QString aSavePath) {
+    if (_pixmapIcon == QPixmap()) {
+        RequestImage *img = new RequestImage(_icon, aSavePath, true, this);
+        QEventLoop loop;
+        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        loop.exec();
+        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        _pixmapIcon = img->getPixmap();
+        delete img;
+    }
+    return _pixmapIcon;
+}
+
+QPixmap SAchievement::getIconGray(QString aSavePath) {
+    if (_pixmapIconGray == QPixmap()) {
+        RequestImage *img = new RequestImage(_iconGray, aSavePath, true, this);
+        QEventLoop loop;
+        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        loop.exec();
+        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+        _pixmapIconGray = img->getPixmap();
+        delete img;
+    }
+    return _pixmapIconGray;
+}
+
 SAchievement::SAchievement(const SAchievement &aAchievement): QObject(aAchievement.parent()), _apiName(aAchievement._apiName),
 _defaultValue(aAchievement._defaultValue), _displayName(aAchievement._displayName), _hidden(aAchievement._hidden),
 _description(aAchievement._description), _icon(aAchievement._icon), _iconGray(aAchievement._iconGray), _achieved(aAchievement._achieved),

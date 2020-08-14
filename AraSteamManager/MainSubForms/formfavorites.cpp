@@ -17,7 +17,6 @@ constexpr int c_tableFriendsColumnCount = 7;
 //const int c_filterCount=4;
 #define ConstantsEnd }
 
-//Добавить Retranslate()
 FormFavorites::FormFavorites(QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);

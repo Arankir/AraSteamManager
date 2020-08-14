@@ -5,7 +5,7 @@ FrameLess::FrameLess(QWidget *target) :
     _target(target),
     _cursorchanged(false),
     _leftButtonPressed(false),
-    _borderWidth(5),
+    _borderWidth(9),
     _dragPos(QPoint())
 {
     _target->setMouseTracking(true);
@@ -16,12 +16,6 @@ FrameLess::FrameLess(QWidget *target) :
 }
 
 bool FrameLess::eventFilter(QObject *o, QEvent*e) {
-    if (e->type() == QEvent::MouseMove ||
-        e->type() == QEvent::HoverMove ||
-        e->type() == QEvent::Leave ||
-        e->type() == QEvent::MouseButtonPress ||
-        e->type() == QEvent::MouseButtonRelease) {
-
         switch (e->type()) {
         case QEvent::MouseMove:
             mouseMove(static_cast<QMouseEvent*>(e));
@@ -43,11 +37,10 @@ bool FrameLess::eventFilter(QObject *o, QEvent*e) {
             mouseRealese(static_cast<QMouseEvent*>(e));
             return true;
             break;
+        default: {
+            return _target->eventFilter(o, e);
         }
-    }
-    else {
-        return _target->eventFilter(o, e);
-    }
+        }
 }
 
 void FrameLess::mouseHover(QHoverEvent *e) {
@@ -69,6 +62,7 @@ void FrameLess::mousePress(QMouseEvent *e) {
         }
         //qDebug()<<(e->globalPos() - _target->pos()).y();
         if (_target->rect().marginsRemoved(QMargins(borderWidth(), borderWidth(), borderWidth(), borderWidth())).contains(e->pos())&&((e->globalPos() - _target->pos()).y() < 33)) {
+
             _dragStart = true;
             _dragPos = e->pos();
         }
@@ -85,6 +79,13 @@ void FrameLess::mouseRealese(QMouseEvent *e) {
 void FrameLess::mouseMove(QMouseEvent *e) {
     if (_leftButtonPressed) {
         if (_dragStart) {
+            if (_target->isMaximized()) {
+                _target->showNormal();
+            }
+//            if (_target->x() + _target->width() < e->globalPos().x()) {
+//                qDebug()<<11<<e->globalPos().x()<<_target->width()<<e->pos().x() - (_target->width() / 2);
+//                _target->move(QPoint(e->globalPos().x() - (_target->width() / 2), _target->y()));
+//            }
             _target->move(_target->frameGeometry().topLeft() + (e->pos() - _dragPos));
         }
 
@@ -181,7 +182,7 @@ void FrameLess::calculateCursorPosition(const QPoint &pos, const QRect &framerec
     bool onTop = pos.x() >= framerect.x() + _borderWidth && pos.x() <= framerect.x() + framerect.width() - _borderWidth &&
         pos.y() >= framerect.y() && pos.y() <= framerect.y() + _borderWidth;
 
-    bool  onBottomLeft = pos.x() <= framerect.x() + _borderWidth && pos.x() >= framerect.x() &&
+    bool onBottomLeft = pos.x() <= framerect.x() + _borderWidth && pos.x() >= framerect.x() &&
         pos.y() <= framerect.y() + framerect.height() && pos.y() >= framerect.y() + framerect.height() - _borderWidth;
 
     bool onBottomRight = pos.x() >= framerect.x() + framerect.width() - _borderWidth && pos.x() <= framerect.x() + framerect.width() &&
