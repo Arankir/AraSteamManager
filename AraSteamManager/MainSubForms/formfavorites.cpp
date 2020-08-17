@@ -56,19 +56,11 @@ void FormFavorites::initComponents() {
 }
 
 void FormFavorites::friendLoad(SProfile *aProfile) {
-    QString path = _setting._pathImagesProfiles + aProfile->_avatar.mid(72,20) + ".jpg";
     QLabel *avatarFriend = new QLabel;
     avatarFriend->setBaseSize(QSize(32,32));
     ui->TableWidgetFriends->setCellWidget(_numRequests, c_tableFriendsColumnIcon, avatarFriend);
-    if(!QFile::exists(path)) {
-        //if(_numRequests<500){
-            new RequestImage(avatarFriend, aProfile->_avatar, path, true, this);
-            //numrequests++;
-            _numNow++;
-        //    }
-        } else {
-            avatarFriend->setPixmap(QPixmap(path));
-        }
+    avatarFriend->setPixmap(aProfile->getPixmapAvatar());
+
     QTableWidgetItem *item4 = new QTableWidgetItem;
     if(!aProfile->_gameExtraInfo.isEmpty()) {
         item4->setText(tr("В игре"));

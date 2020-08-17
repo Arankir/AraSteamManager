@@ -51,19 +51,6 @@ public:
     QPushButton *ButtonFriendGoTo;
     QPushButton *ButtonFriendFavorite;
     QTableWidget *TableWidgetFriends;
-    QFrame *frame;
-    QHBoxLayout *horizontalLayout_4;
-    QSpacerItem *horizontalSpacer_3;
-    QPushButton *ButtonPageFirst;
-    QLabel *LabelBackDots;
-    QPushButton *ButtonPageBack2;
-    QPushButton *ButtonPageBack;
-    QPushButton *ButtonPageNow;
-    QPushButton *ButtonPageNext;
-    QPushButton *ButtonPageNext2;
-    QLabel *LabelNextDots;
-    QPushButton *ButtonPageLast;
-    QSpacerItem *horizontalSpacer_4;
 
     void setupUi(QWidget *FormFriends)
     {
@@ -206,76 +193,6 @@ public:
 
         verticalLayout->addWidget(TableWidgetFriends);
 
-        frame = new QFrame(FormFriends);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-        horizontalLayout_4 = new QHBoxLayout(frame);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalSpacer_3 = new QSpacerItem(243, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_4->addItem(horizontalSpacer_3);
-
-        ButtonPageFirst = new QPushButton(frame);
-        ButtonPageFirst->setObjectName(QString::fromUtf8("ButtonPageFirst"));
-        ButtonPageFirst->setText(QString::fromUtf8(""));
-
-        horizontalLayout_4->addWidget(ButtonPageFirst);
-
-        LabelBackDots = new QLabel(frame);
-        LabelBackDots->setObjectName(QString::fromUtf8("LabelBackDots"));
-
-        horizontalLayout_4->addWidget(LabelBackDots);
-
-        ButtonPageBack2 = new QPushButton(frame);
-        ButtonPageBack2->setObjectName(QString::fromUtf8("ButtonPageBack2"));
-        ButtonPageBack2->setText(QString::fromUtf8(""));
-
-        horizontalLayout_4->addWidget(ButtonPageBack2);
-
-        ButtonPageBack = new QPushButton(frame);
-        ButtonPageBack->setObjectName(QString::fromUtf8("ButtonPageBack"));
-        ButtonPageBack->setText(QString::fromUtf8(""));
-
-        horizontalLayout_4->addWidget(ButtonPageBack);
-
-        ButtonPageNow = new QPushButton(frame);
-        ButtonPageNow->setObjectName(QString::fromUtf8("ButtonPageNow"));
-        ButtonPageNow->setText(QString::fromUtf8(""));
-        ButtonPageNow->setFlat(true);
-
-        horizontalLayout_4->addWidget(ButtonPageNow);
-
-        ButtonPageNext = new QPushButton(frame);
-        ButtonPageNext->setObjectName(QString::fromUtf8("ButtonPageNext"));
-        ButtonPageNext->setText(QString::fromUtf8(""));
-
-        horizontalLayout_4->addWidget(ButtonPageNext);
-
-        ButtonPageNext2 = new QPushButton(frame);
-        ButtonPageNext2->setObjectName(QString::fromUtf8("ButtonPageNext2"));
-        ButtonPageNext2->setText(QString::fromUtf8(""));
-
-        horizontalLayout_4->addWidget(ButtonPageNext2);
-
-        LabelNextDots = new QLabel(frame);
-        LabelNextDots->setObjectName(QString::fromUtf8("LabelNextDots"));
-
-        horizontalLayout_4->addWidget(LabelNextDots);
-
-        ButtonPageLast = new QPushButton(frame);
-        ButtonPageLast->setObjectName(QString::fromUtf8("ButtonPageLast"));
-        ButtonPageLast->setText(QString::fromUtf8(""));
-
-        horizontalLayout_4->addWidget(ButtonPageLast);
-
-        horizontalSpacer_4 = new QSpacerItem(242, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_4->addItem(horizontalSpacer_4);
-
-
-        verticalLayout->addWidget(frame);
-
 
         retranslateUi(FormFriends);
 
@@ -302,8 +219,6 @@ public:
         ButtonFriendFavorite->setToolTip(QCoreApplication::translate("FormFriends", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\262 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265", nullptr));
 #endif // QT_CONFIG(tooltip)
         ButtonFriendFavorite->setText(QString());
-        LabelBackDots->setText(QCoreApplication::translate("FormFriends", "...", nullptr));
-        LabelNextDots->setText(QCoreApplication::translate("FormFriends", "...", nullptr));
     } // retranslateUi
 
 };

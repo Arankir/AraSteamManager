@@ -37,18 +37,7 @@ void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer aPl, SPro
     FormAchievements *newFormAchievements = new FormAchievements(aPl, aProfile, aGame, aNum, this);
     int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements, "  " + aGame._name + "  ");
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
-    QString filePath = _setting._pathImagesIconGames + aGame._img_icon_url + ".jpg";
-    QString urlPath = "http://media.steampowered.com/steamcommunity/public/images/apps/" + QString::number(aGame._appID) + "/" + aGame._img_icon_url + ".jpg";
-    if(!QFile::exists(filePath)) {
-        if(aGame._img_icon_url != "") {
-            RequestImage *tabIcon = new RequestImage(urlPath, filePath, true, this);
-            tabIcon->setIndex(tabIndex);
-            connect(tabIcon, &RequestImage::s_loadComplete, this, &FormContainerAchievements::OnLoadImage);
-        }
-    } else {
-        QPixmap tabIcon(filePath);
-        ui->TabWidgetAchievements->setTabIcon(tabIndex, tabIcon);
-    }
+    ui->TabWidgetAchievements->setTabIcon(tabIndex, aGame.getPixmapIcon());
 }
 
 void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int aIndex) {

@@ -2,8 +2,9 @@
 
 #define SGameStart {
 SGame::SGame(QJsonObject aGame, QObject *aParent): QObject(aParent), _appID(aGame.value("appid").toInt()), _name(aGame.value("name").toString()),
-_playtime_2weeks(aGame.value("playtime_2weeks").toInt()), _playtime_forever(aGame.value("playtime_forever").toInt()), _img_icon_url(aGame.value("img_icon_url").toString()),
-_img_logo_url(aGame.value("img_logo_url").toString()), _has_community_visible_stats(aGame.value("has_community_visible_stats").toBool()) {
+_playtime_2weeks(aGame.value("playtime_2weeks").toInt()), _playtime_forever(aGame.value("playtime_forever").toInt()),
+_has_community_visible_stats(aGame.value("has_community_visible_stats").toBool()), _img_icon_url(aGame.value("img_icon_url").toString()),
+_img_logo_url(aGame.value("img_logo_url").toString()) {
 
 }
 
@@ -21,14 +22,61 @@ const QString SGame::getNumberPlayers(bool aHardReload){
     return _numberPlayers;
 }
 
+QPixmap SGame::getPixmapIcon() {
+    if (_pixmapIcon.isNull()) {
+        if ((_img_icon_url != "") && (_img_icon_url.lastIndexOf("/") != _img_icon_url.length() - 1)) {
+            QString savePath = _setting.getPathForIconGames(_img_icon_url);
+            if (!QFile::exists(savePath)) {
+                RequestImage *img = new RequestImage(_img_icon_url, savePath, true, this);
+                QEventLoop loop;
+                connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                loop.exec();
+                disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                _pixmapIcon = img->getPixmap();
+                delete img;
+            } else {
+                _pixmapIcon = QPixmap(savePath);
+            }
+        } else {
+            _pixmapIcon = QPixmap(_setting.getMissingImage()).scaled(32, 32);
+        }
+    }
+    return _pixmapIcon;
+}
+
+QPixmap SGame::getPixmapLogo() {
+    if (_pixmapLogo.isNull()) {
+        if ((_img_logo_url != "") && (_img_logo_url.lastIndexOf("/") != _img_logo_url.length() - 1)) {
+            QString savePath = _setting.getPathForIconGames(_img_logo_url);
+            if (!QFile::exists(savePath)) {
+                RequestImage *img = new RequestImage(QString("http://media.steampowered.com/steamcommunity/public/images/apps/%1/%2.jpg").arg(QString::number(_appID), _img_logo_url), savePath, true, this);
+                QEventLoop loop;
+                connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                loop.exec();
+                disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                _pixmapLogo = img->getPixmap();
+                delete img;
+            } else {
+                _pixmapLogo = QPixmap(savePath);
+            }
+        } else {
+            _pixmapLogo = QPixmap(_setting.getMissingImage()).scaled(184, 69);
+        }
+    }
+    return _pixmapLogo;
+
+}
+
 SGame::SGame(const SGame &aGame): QObject(aGame.parent()), _appID(aGame._appID), _name(aGame._name), _playtime_2weeks(aGame._playtime_2weeks),
-_playtime_forever(aGame._playtime_forever), _img_icon_url(aGame._img_icon_url), _img_logo_url(aGame._img_logo_url),
-_has_community_visible_stats(aGame._has_community_visible_stats) {
+_playtime_forever(aGame._playtime_forever), _has_community_visible_stats(aGame._has_community_visible_stats), _img_icon_url(aGame._img_icon_url),
+_img_logo_url(aGame._img_logo_url) {
 
 }
 
 SGame &SGame::operator=(const SGame &aGame) {
-    _numberPlayers=aGame._numberPlayers;
+    _numberPlayers = aGame._numberPlayers;
+    _pixmapIcon = aGame._pixmapIcon;
+    _pixmapLogo = aGame._pixmapLogo;
     return *this;
 }
 
@@ -41,6 +89,7 @@ const bool &SGame::operator<(const SGame &aGame) {
 SGames::SGames(QString aId, bool aFreeGames, bool aGameInfo, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager), _id(aId) {
     set(aId, aFreeGames, aGameInfo, aParallel);
 }
+
 SGames::SGames(QJsonDocument aGames, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager) {
     set(aGames);
 }
@@ -83,10 +132,10 @@ void SGames::set(QJsonDocument aGames){
         for (auto game: gamesArray) {
             _games.append(std::move(SGame(game.toObject())));
         }
-        _status = std::move(StatusValue::success);
+        _status = StatusValue::success;
     } else {
-        _status = std::move(StatusValue::error);
-        _error = std::move("profile is not exist");
+        _status = StatusValue::error;
+        _error = "profile is not exist";
     }
 }
 

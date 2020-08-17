@@ -388,6 +388,10 @@ QString Settings::getIconScrollbarLeft() {
 QString Settings::getIconScrollbarRight() {
     return "://" + getIconsColor() + "/widgets/scrollbar_right.png";
 }
+
+QString Settings::getMissingImage() {
+    return "://MissingImage.png";
+}
 #define IconsWidgetEnd }
 #define IconsEnd }
 
@@ -425,6 +429,18 @@ QString Settings::getKey() {
 
 void Settings::syncronizeSettings() {
     _settings->sync();
+}
+
+QString Settings::getPathForImagesProfiles(QString url) {
+    return "images/profiles/" + url.mid(url.lastIndexOf("/") + 1, url.lastIndexOf(".jpg") - url.lastIndexOf("/") - 1) + ".jpg";
+}
+
+QString Settings::getPathForImagesAchievements(QString gameId, QString url) {
+    return "images/achievements/" + gameId + "/" + url.mid(url.lastIndexOf("/") + 1, url.lastIndexOf(".jpg") - url.lastIndexOf("/") - 1) + ".jpg";
+}
+
+QString Settings::getPathForIconGames(QString url) {
+    return "images/icon_games/" + url + ".jpg";
 }
 
 bool Settings::createDir(QString aPath) {

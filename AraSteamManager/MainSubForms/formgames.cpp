@@ -130,17 +130,11 @@ void FormGames::onTablePushed() {
     int row = 0;
     for(auto &game: _games) {
         //Загрузка картинок
-        QString path = _setting._pathImagesIconGames + game._img_icon_url + ".jpg";
         QLabel *iconGame = new QLabel;
         ui->TableWidgetGames->setCellWidget(row, c_tableColumnIcon, iconGame);
         //ui->TableWidgetGames->resizeRowToContents(row);
         ui->TableWidgetGames->setRowHeight(row, 32 + 18);
-        if(!QFile::exists(path)) {
-            iconGame->setBaseSize(QSize(32, 32));
-            new RequestImage(iconGame, Settings::getUrlIconGame(QString::number(game._appID), game._img_icon_url), path, true, this);
-        } else {
-            iconGame->setPixmap(QPixmap(path));
-        }
+        iconGame->setPixmap(game.getPixmapIcon());
         //Загрузка достижений
         SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(game._appID), _profile._steamID);
         achievementsGame->_index = row;

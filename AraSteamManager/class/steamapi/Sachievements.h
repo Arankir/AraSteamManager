@@ -64,19 +64,22 @@ public:
     const QString _displayName;
     const int _hidden;
     const QString _description;
-    const QString _icon;
-    const QString _iconGray;
     const int _achieved;
     const QDateTime _unlockTime;
     const double _percent;
-    QPixmap getIcon(QString savePath);
-    QPixmap getIconGray(QString savePath);
+    QPixmap getIcon(int aGameId);
+    QPixmap getIconGray(int aGameId);
     SAchievement(const SAchievement &achievement);
     SAchievement &operator=(const SAchievement&);
     const bool &operator<(const SAchievement &achievement);
 private:
+    const QString _icon;
+    const QString _iconGray;
+
     QPixmap _pixmapIcon;
     QPixmap _pixmapIconGray;
+
+    Settings _setting;
 };
 
 class SAchievementsGlobal : public QObject {

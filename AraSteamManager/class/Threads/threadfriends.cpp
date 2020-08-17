@@ -1,9 +1,9 @@
 #include "threadfriends.h"
 
-ThreadFriends::ThreadFriends(const int aColumnId, const int aColumnName, const int aColumnAdded, const int aColumnStatus, const int aColumnisPublic,
-QTableWidget *aTableWidgetFriends, SProfiles aProfiles, SFriends aFriends, QObject *aParent):
-QObject(aParent), c_tableColumnID(aColumnId), c_tableColumnName(aColumnName), c_tableColumnAdded(aColumnAdded), c_tableColumnStatus(aColumnStatus),
-c_tableColumnisPublic(aColumnisPublic), _friends(aFriends), _profiles(aProfiles), _tableWidgetFriends(aTableWidgetFriends) {
+ThreadFriends::ThreadFriends(const int columnID, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
+QTableWidget *TableWidgetFriends, QList<QPair<SFriend, SProfile>> aFriends, QObject *parent):
+QObject(parent), c_tableColumnID(columnID), c_tableColumnName(columnName), c_tableColumnAdded(columnAdded), c_tableColumnStatus(columnStatus),
+c_tableColumnisPublic(columnisPublic), _friends(aFriends), _tableWidgetFriends(TableWidgetFriends) {
 
 }
 
@@ -12,26 +12,21 @@ int ThreadFriends::fill() {
     QString family = std::move(QFontDatabase::applicationFontFamilies(id).at(0));
     QFont font(family, 9);
     int row = 0;
-    for (const auto &profile: _profiles) {
-        for (const auto &friendP: _friends) {
-            if (profile._steamID == friendP._steamID) {
-                QTableWidgetItem *itemName = new QTableWidgetItem(profile._personaName);
-                QTableWidgetItem *itemAdded = new QTableWidgetItem(friendP._friend_since.toString("yyyy.MM.dd hh:mm"));
-                QTableWidgetItem *itemState = getState(profile._gameExtraInfo,profile._personaState);
-                QTableWidgetItem *itemPrivacy = getPrivacy(profile._communityVisibilityState);
-                itemName->setFont(font);
-                itemAdded->setFont(font);
-                itemState->setFont(font);
-                itemPrivacy->setFont(font);
-                _tableWidgetFriends->setItem(row, c_tableColumnID, new QTableWidgetItem(profile._steamID));
-                _tableWidgetFriends->setItem(row, c_tableColumnName, itemName);
-                _tableWidgetFriends->setItem(row, c_tableColumnAdded, itemAdded);
-                _tableWidgetFriends->setItem(row, c_tableColumnStatus, itemState);
-                _tableWidgetFriends->setItem(row, c_tableColumnisPublic, itemPrivacy);
-                emit s_progress(row, row);
-                break;
-            }
-        }
+    for (auto friendP: _friends) {
+        QTableWidgetItem *itemName = new QTableWidgetItem(friendP.second._personaName);
+        QTableWidgetItem *itemAdded = new QTableWidgetItem(friendP.first._friend_since.toString("yyyy.MM.dd hh:mm"));
+        QTableWidgetItem *itemState = getState(friendP.second._gameExtraInfo, friendP.second._personaState);
+        QTableWidgetItem *itemPrivacy = getPrivacy(friendP.second._communityVisibilityState);
+        itemName->setFont(font);
+        itemAdded->setFont(font);
+        itemState->setFont(font);
+        itemPrivacy->setFont(font);
+        _tableWidgetFriends->setItem(row, c_tableColumnID, new QTableWidgetItem(friendP.second._steamID));
+        _tableWidgetFriends->setItem(row, c_tableColumnName, itemName);
+        _tableWidgetFriends->setItem(row, c_tableColumnAdded, itemAdded);
+        _tableWidgetFriends->setItem(row, c_tableColumnStatus, itemState);
+        _tableWidgetFriends->setItem(row, c_tableColumnisPublic, itemPrivacy);
+        emit s_progress(row, row);
         row++;
     }
     emit s_finished();

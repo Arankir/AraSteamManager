@@ -173,5 +173,6 @@
         <file>levels/8.png</file>
         <file>levels/9.png</file>
         <file>levels/0.png</file>
+        <file>MissingImage.png</file>
     </qresource>
 </RCC>

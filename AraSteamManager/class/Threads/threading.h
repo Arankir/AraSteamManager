@@ -30,7 +30,7 @@ public slots:
     int AddThreadAchievements(const int tableColumnAppid, const int tableColumnTitle, const int tableColumnDescription, const int tableColumnWorld, const int tableColumnMy,
                               SAchievements *achievements, QTableWidget *TableWidgetAchievements);
     int AddThreadFriends(const int columnID, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
-                         QTableWidget *tableWidgetFriends, SProfiles profiles,SFriends friends);
+                         QTableWidget *tableWidgetFriends, QList<QPair<SFriend, SProfile> > friends);
     int AddThreadStatistics(SGames games, QString id, QVector<int> &numOf, QVector<QPair<QString,QString> > &complete,
                             QVector<QPair<QString,QString>> &started, QVector<QPair<QString,QString>> &notStarted,
                             QVector<double> &averagePercent, int &summColumn, QVector<int> &times,

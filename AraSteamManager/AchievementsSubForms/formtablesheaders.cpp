@@ -566,7 +566,7 @@ bool FormTablesHeaders::addFriendColumn(SProfile aFriendProfile) {
     insertColumn(column);
     changeHorizontalTitle(column, aFriendProfile._personaName);
     QLabel *avatarFriend = new QLabel;
-    avatarFriend->setPixmap(RequestData(aFriendProfile._avatar, false).getPixmap());
+    avatarFriend->setPixmap(aFriendProfile.getPixmapAvatar());
     avatarFriend->setToolTip(aFriendProfile._personaName);
     avatarFriend->setAlignment(Qt::AlignCenter);
     ui->TableWidgetHorizontalHeader->setCellWidget(0, column, avatarFriend);
@@ -758,15 +758,10 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
     int row = 0;
     for (auto &achievement: _achievements) {
         //создание картинок
-        QString savePath = _setting._pathImagesAchievements + QString::number(_game._appID) + "/" + achievement._icon.mid(achievement._icon.lastIndexOf("/") + 1, 40) + ".jpg";
         QLabel *iconGame = new QLabel(this);
         getTableContent()->setCellWidget(row, c_tableAchievementColumnIcon, iconGame);
         if (achievement._displayName != "") {
-            if (!QFile::exists(savePath)) {
-                iconGame->setPixmap(achievement.getIcon(savePath));
-            } else {
-                iconGame->setPixmap(QPixmap(savePath));
-            }
+            iconGame->setPixmap(achievement.getIcon(_game._appID));
 
             ui->TableWidgetContent->resizeRowToContents(row);
             if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {

@@ -12,7 +12,7 @@ FormSettings::~FormSettings() {
 }
 
 void FormSettings::initComponents() {
-    ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
+    //ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
 
     switch (_setting.getLanguage()) {
     case 1: {
@@ -53,32 +53,32 @@ void FormSettings::initComponents() {
         break;
     }
     }
-    switch (_setting.getMaximumTableRows()) {
-    case 10: {
-        ui->ComboBoxMaxRows->setCurrentIndex(0);
-        break;
-    }
-    case 20: {
-        ui->ComboBoxMaxRows->setCurrentIndex(1);
-        break;
-    }
-    case 50: {
-        ui->ComboBoxMaxRows->setCurrentIndex(2);
-        break;
-    }
-    case 100: {
-        ui->ComboBoxMaxRows->setCurrentIndex(3);
-        break;
-    }
-    case 200: {
-        ui->ComboBoxMaxRows->setCurrentIndex(4);
-        break;
-    }
-    case 500: {
-        ui->ComboBoxMaxRows->setCurrentIndex(5);
-        break;
-    }
-    }
+//    switch (_setting.getMaximumTableRows()) {
+//    case 10: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(0);
+//        break;
+//    }
+//    case 20: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(1);
+//        break;
+//    }
+//    case 50: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(2);
+//        break;
+//    }
+//    case 100: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(3);
+//        break;
+//    }
+//    case 200: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(4);
+//        break;
+//    }
+//    case 500: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(5);
+//        break;
+//    }
+//    }
     ui->SliderProfileSize->setValue(_setting.getProfileInfoSize());
     ui->CheckBoxSaveImage->setChecked(_setting.getSaveImages());
 //    QPalette darkPalette;
@@ -158,7 +158,7 @@ void FormSettings::initComponents() {
     connect(ui->RadioButtonLightTheme,      &QRadioButton::clicked,   this, &FormSettings::radioButtonLightTheme_Clicked);
     connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
     connect(ui->SliderProfileSize,          &QSlider::valueChanged,   this, &FormSettings::slideProfileSize_ValueChanged);
-    connect(ui->ComboBoxMaxRows,            SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxMaxTableRows(int)));
+    //connect(ui->ComboBoxMaxRows,            SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxMaxTableRows(int)));
 #define ConnectsEnd }
     retranslate();
 }
@@ -236,18 +236,10 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
             for(auto &game: games) {
                 if(currentGame.second.indexOf(QString::number(game._appID)) > -1) {
                     int setTo = currentGame.second.indexOf(QString::number(game._appID));
-                    QString path = _setting._pathImagesIconGames + game._img_icon_url + ".jpg";
                     QLabel *iconGame = new QLabel;
                     iconGame->setBaseSize(QSize(32, 32));
+                    iconGame->setPixmap(game.getPixmapIcon());
                     ui->TableWidgetGames->setCellWidget(setTo, 0, iconGame);
-                    if(!QFile::exists(path)) {
-                        if(game._img_icon_url != "") {
-                            new RequestImage(iconGame, "http://media.steampowered.com/steamcommunity/public/images/apps/" +
-                                            QString::number(game._appID) + "/" + game._img_icon_url + ".jpg", path, true, this);
-                        }
-                    } else {
-                        iconGame->setPixmap(QPixmap(path));
-                    }
                     ui->TableWidgetGames->setItem(setTo, 1, new QTableWidgetItem(game._name));
                     ui->TableWidgetGames->setRowHeight(setTo, 33);
 
@@ -275,7 +267,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
             //list[2]=_games[gamei].GetName()
             for (int i = 0; i < currentGame.second.size(); i++) {
                 QStringList list = currentGame.second[i].split("%%");
-                QString path = _setting._pathImagesIconGames + list[1] + ".jpg";
+                QString path = _setting.getPathForIconGames(list[1]);
                 QLabel *iconGame = new QLabel;
                 iconGame->setBaseSize(QSize(32, 32));
                 ui->TableWidgetGames->setCellWidget(i, 0, iconGame);
@@ -312,8 +304,8 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
 }
 
 void FormSettings::comboBoxMaxTableRows(int index) {
-    _setting.setMaximumTableRows(ui->ComboBoxMaxRows->currentText().toInt());
-    emit s_updateSettings();
+//    _setting.setMaximumTableRows(ui->ComboBoxMaxRows->currentText().toInt());
+//    emit s_updateSettings();
 }
 
 void FormSettings::achievementsClicked() {

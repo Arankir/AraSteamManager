@@ -54,45 +54,65 @@ SAchievementPlayer &SAchievementPlayer::operator=(const SAchievementPlayer &) {
 #define SAchievementStart {
 SAchievement::SAchievement(SAchievementGlobal aGlobal, SAchievementPlayer aPlayer, SAchievementPercentage aPercent, QObject *aParent):
 QObject(aParent), _apiName(aGlobal._apiName), _defaultValue(aGlobal._defaultValue), _displayName(aGlobal._displayName), _hidden(aGlobal._hidden),
-_description(aGlobal._description), _icon(aGlobal._icon), _iconGray(aGlobal._iconGray), _achieved(aPlayer._achieved), _unlockTime(aPlayer._unlockTime),
-_percent(aPercent._percent) {
+_description(aGlobal._description), _achieved(aPlayer._achieved), _unlockTime(aPlayer._unlockTime),
+_percent(aPercent._percent), _icon(aGlobal._icon), _iconGray(aGlobal._iconGray) {
 
 }
 
-QPixmap SAchievement::getIcon(QString aSavePath) {
-    if (_pixmapIcon == QPixmap()) {
-        RequestImage *img = new RequestImage(_icon, aSavePath, true, this);
-        QEventLoop loop;
-        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        loop.exec();
-        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        _pixmapIcon = img->getPixmap();
-        delete img;
+QPixmap SAchievement::getIcon(int aGameId) {
+    if (_pixmapIcon.isNull()) {
+        if ((_icon != "") && (_icon.lastIndexOf("/") != _icon.length() - 1)) {
+            QString savePath = _setting.getPathForImagesAchievements(QString::number(aGameId), _icon);
+            if (!QFile::exists(savePath)) {
+                RequestImage *img = new RequestImage(_icon, savePath, true, this);
+                QEventLoop loop;
+                connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                loop.exec();
+                disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                _pixmapIcon = img->getPixmap();
+                delete img;
+            } else {
+                _pixmapIcon = QPixmap(savePath);
+            }
+        } else {
+            _pixmapIcon = QPixmap(_setting.getMissingImage()).scaled(64, 64);
+        }
     }
     return _pixmapIcon;
 }
 
-QPixmap SAchievement::getIconGray(QString aSavePath) {
-    if (_pixmapIconGray == QPixmap()) {
-        RequestImage *img = new RequestImage(_iconGray, aSavePath, true, this);
-        QEventLoop loop;
-        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        loop.exec();
-        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        _pixmapIconGray = img->getPixmap();
-        delete img;
+QPixmap SAchievement::getIconGray(int aGameId) {
+    if (_pixmapIcon.isNull()) {
+        if ((_icon != "") && (_icon.lastIndexOf("/") != _icon.length() - 1)) {
+            QString savePath = _setting.getPathForImagesAchievements(QString::number(aGameId), _iconGray);
+            if (!QFile::exists(savePath)) {
+                RequestImage *img = new RequestImage(_iconGray, savePath, true, this);
+                QEventLoop loop;
+                connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                loop.exec();
+                disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+                _pixmapIconGray = img->getPixmap();
+                delete img;
+            } else {
+                _pixmapIconGray = QPixmap(savePath);
+            }
+        } else {
+            _pixmapIcon = QPixmap(_setting.getMissingImage()).scaled(64, 64);
+        }
     }
     return _pixmapIconGray;
 }
 
 SAchievement::SAchievement(const SAchievement &aAchievement): QObject(aAchievement.parent()), _apiName(aAchievement._apiName),
 _defaultValue(aAchievement._defaultValue), _displayName(aAchievement._displayName), _hidden(aAchievement._hidden),
-_description(aAchievement._description), _icon(aAchievement._icon), _iconGray(aAchievement._iconGray), _achieved(aAchievement._achieved),
-_unlockTime(aAchievement._unlockTime), _percent(aAchievement._percent) {
+_description(aAchievement._description), _achieved(aAchievement._achieved), _unlockTime(aAchievement._unlockTime), _percent(aAchievement._percent),
+_icon(aAchievement._icon), _iconGray(aAchievement._iconGray), _pixmapIcon(aAchievement._pixmapIcon), _pixmapIconGray(aAchievement._pixmapIconGray) {
 
 }
 
-SAchievement &SAchievement::operator=(const SAchievement &) {
+SAchievement &SAchievement::operator=(const SAchievement &aAchievement) {
+    _pixmapIcon = aAchievement._pixmapIcon;
+    _pixmapIconGray = aAchievement._pixmapIconGray;
     return *this;
 }
 

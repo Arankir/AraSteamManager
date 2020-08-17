@@ -67,22 +67,6 @@ void MainWindow::initComponents() {
     if (_setting.getMyProfile() != "none") {
         goToProfile(_setting.getMyProfile(), ProfileUrlType::id);
     }
-
-    QAction *minimizeAction = new QAction("Перейти на профиль", this);
-    QAction *restoreAction = new QAction("Добавить в избранное", this);
-
-    connect (minimizeAction, &QAction::triggered, this, [=]() {
-        qDebug()<<test<<sender();
-    });
-    //connect (restoreAction, SIGNAL(triggered()), this, SLOT(showNormal()));
-
-    QMenu* yourMenu = new QMenu(this);
-    yourMenu -> addAction (minimizeAction);
-    yourMenu -> addAction (restoreAction);
-    ui->toolButton->setMenu(yourMenu);
-    connect (ui->toolButton, &QToolButton::clicked, this, [=]() {test++;});
-    connect (ui->toolButton, &QToolButton::clicked, ui->toolButton, &QToolButton::showMenu);
-    //ui->toolButton->setPopupMode(QToolButton::MenuButtonPopup);
 }
 #define InitEnd }
 
@@ -110,7 +94,7 @@ QString MainWindow::getTheme() {
                 "QPushButton[text] { "
                     "padding-left: 0.3em; "
                 "} "
-                "QPushButton { "
+                "QPushButton, QToolButton { "
                     "color: white; "
                     "background: qlineargradient(x1: -1, y1: -1, x2: 2, y2: 2, "
                         "stop: 0 #3998ec, "
@@ -121,13 +105,13 @@ QString MainWindow::getTheme() {
                     "padding: 1 4 1 4; "
                     "border-radius: 1px; "
                 "} "
-                "QPushButton:hover { "
+                "QPushButton:hover, QToolButton:hover { "
                     "background-color: #dfe7ed; "
                     "background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
                         "stop: 0 #45bafd, "
                         "stop: 1.0 #3285e2); "
                 "} "
-                "QPushButton:pressed { "
+                "QPushButton:pressed, QToolButton:pressed { "
                     //"background-color: #3698a7; "
                     "margin: 1px; "
                 "} "
@@ -135,7 +119,7 @@ QString MainWindow::getTheme() {
                     "background-color: none; "
                     //"border: none; "
                 "} "
-                "QPushButton:disabled { "
+                "QPushButton:disabled, QToolButton:disabled { "
                     "background-color: #48525a; "
                 "} "
 #define buttonend }
@@ -290,7 +274,15 @@ QString MainWindow::getTheme() {
                     "height: 20px; "
                     "padding-left: -20px; "
                 "} "
-                "QComboBox::item:selected { "
+                "QMenu::item { "
+                    "border: 1px solid #262626; "
+                    "border-radius: 4px; "
+                    "background-color: #13243e; "
+                    "height: 20px; "
+                    "color: #dddddd; "
+                    "padding: 2 5 2 5; "
+                "} "
+                "QComboBox::item:selected, QMenu::item:selected { "
                     "border: 1px solid #87b6ff; "
                     "background-color: qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, "
                         "stop: 0 #2692ff, "
@@ -741,11 +733,11 @@ void MainWindow::goToFriends(QString aSteamId, SFriends aFriends) {
     if(_friendsForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
-            //ui->FormProgressBar->setMaximum(aFriends.getCount());
+            ui->FormProgressBar->setMaximum(aFriends.getCount());
             ui->ScrollAreaFriends->setWidget(createFormFriends(aSteamId, aFriends));
-            //ui->FormProgressBar->setVisible(true);
-            //ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
-            showForm(c_formsFriends);
+            ui->FormProgressBar->setVisible(true);
+            ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
+            //showForm(c_formsFriends);
         }
     } else {
         ui->StackedWidgetForms->setCurrentIndex(c_formsFriends);
@@ -795,7 +787,7 @@ void MainWindow::returnFromForms() {
     }
     if(_friendsForm != nullptr) {
         disconnect(_friendsForm);
-        delete _friendsForm;
+        _friendsForm->deleteLater();
         _friendsForm = nullptr;
     }
     if(_statisticsForm != nullptr) {

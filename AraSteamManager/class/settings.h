@@ -10,29 +10,29 @@
 #include <QScreen>
 
 class Settings : public QObject {
-    const QString c_language="Settings/Language";
-    const QString c_theme="Settings/Theme";
-    const QString c_saveImage="Settings/SaveImages";
-    const QString c_myProfile="Settings/MyProfile";
-    const QString c_visibleHiddenGames="Settings/VisibleHiddenGames";
-    const QString c_ProfileInfoSize="Settings/VisibleProfileInfo";
-    const QString c_MaxTableRows="Settings/MaxTableRows";
+    const QString c_language                     = "Settings/Language";
+    const QString c_theme                        = "Settings/Theme";
+    const QString c_saveImage                    = "Settings/SaveImages";
+    const QString c_myProfile                    = "Settings/MyProfile";
+    const QString c_visibleHiddenGames           = "Settings/VisibleHiddenGames";
+    const QString c_ProfileInfoSize              = "Settings/VisibleProfileInfo";
+    const QString c_MaxTableRows                 = "Settings/MaxTableRows";
 
-    const QString c_mainWindowHeight="MainWindow/Height";
-    const QString c_mainWindowWidth="MainWindow/Width";
-    const QString c_mainWindowX="MainWindow/X";
-    const QString c_mainWindowY="MainWindow/Y";
-    const QString c_mainWindowMaximize="MainWindow/Maximize";
-    const QString c_mainWindowPercentX="MainWindow/PercentX";
-    const QString c_mainWindowPercentY="MainWindow/PercentY";
+    const QString c_mainWindowHeight             = "MainWindow/Height";
+    const QString c_mainWindowWidth              = "MainWindow/Width";
+    const QString c_mainWindowX                  = "MainWindow/X";
+    const QString c_mainWindowY                  = "MainWindow/Y";
+    const QString c_mainWindowMaximize           = "MainWindow/Maximize";
+    const QString c_mainWindowPercentX           = "MainWindow/PercentX";
+    const QString c_mainWindowPercentY           = "MainWindow/PercentY";
 
-    const QString c_achievementContainerHeight="AchievementContainer/Height";
-    const QString c_achievementContainerWidth="AchievementContainer/Width";
-    const QString c_achievementContainerX="AchievementContainer/X";
-    const QString c_achievementContainerY="AchievementContainer/Y";
-    const QString c_achievementContainerMaximize="achievementContainer/Maximize";
-    const QString c_achievementContainerPercentX="AchievementContainer/PercentX";
-    const QString c_achievementContainerPercentY="AchievementContainer/PercentY";
+    const QString c_achievementContainerHeight   = "AchievementContainer/Height";
+    const QString c_achievementContainerWidth    = "AchievementContainer/Width";
+    const QString c_achievementContainerX        = "AchievementContainer/X";
+    const QString c_achievementContainerY        = "AchievementContainer/Y";
+    const QString c_achievementContainerMaximize = "achievementContainer/Maximize";
+    const QString c_achievementContainerPercentX = "AchievementContainer/PercentX";
+    const QString c_achievementContainerPercentY = "AchievementContainer/PercentY";
 
     Q_OBJECT
 public:
@@ -132,6 +132,8 @@ public:
     QString getIconScrollbarLeft();
     QString getIconScrollbarRight();
 
+    QString getMissingImage();
+
     QRect getMainWindowGeometry();
     QPoint getMainWindowPos();
     QPoint getMainWindowPercentPos();
@@ -146,14 +148,14 @@ public:
     static QString getUrlIconGame(QString appId, QString img_icon_url);
     void syncronizeSettings();
 
-    const QString _pathImagesAchievements="images/achievements/";// /номер игры/url.jpg
-    const QString _pathImagesIconGames="images/icon_games/";// /url.jpg
-    const QString _pathImagesProfiles="images/profiles/";// /url.jpg
-    const QString _pathCategories="files/categories/";// /номер игры.json
-    const QString _pathFavorites="files/favorites/";// /тип.json
-    const QString _pathHide="files/hide/";// /номер игры.json
+    QString getPathForImagesProfiles(QString url);
+    QString getPathForImagesAchievements(QString gameId, QString url);
+    QString getPathForIconGames(QString url);
+    const QString _pathCategories = "files/categories/";// /номер игры.json
+    const QString _pathFavorites = "files/favorites/";// /тип.json
+    const QString _pathHide = "files/hide/";// /номер игры.json
 
-    const QString c_defaultFont="C:/JosefinSans-Italic-VariableFont_wght.ttf"; // Шрифт
+    const QString c_defaultFont = "C:/JosefinSans-Italic-VariableFont_wght.ttf"; // Шрифт
 
 signals:
 

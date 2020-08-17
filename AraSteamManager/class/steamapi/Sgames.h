@@ -15,6 +15,7 @@
 #include <QObject>
 #include <class/settings.h>
 #include <class/statusvalue.h>
+#include <class/Network/requestimage.h>
 
 class SGame : public QObject {
     Q_OBJECT
@@ -25,10 +26,12 @@ public:
     const QString _name;
     const int _playtime_2weeks;
     const int _playtime_forever;
+    const bool _has_community_visible_stats;
     const QString _img_icon_url;
     const QString _img_logo_url;
-    const bool _has_community_visible_stats;
     const QString getNumberPlayers(bool hardreload);
+    QPixmap getPixmapIcon();
+    QPixmap getPixmapLogo();
     SGame(const SGame &game);
     SGame &operator=(const SGame &game);
     const bool &operator<(const SGame &game);
@@ -36,6 +39,10 @@ public:
 signals:
 
 private:
+    QPixmap _pixmapIcon;
+    QPixmap _pixmapLogo;
+
+    Settings _setting;
     QString _numberPlayers = "";
 };
 
@@ -62,7 +69,7 @@ public:
     QList<SGame>::iterator begin() {return _games.begin();}
     QList<SGame>::iterator end() {return _games.end();}
 
-    int _index=-1;
+    int _index = -1;
 
 signals:
     void s_finished(SGames*);

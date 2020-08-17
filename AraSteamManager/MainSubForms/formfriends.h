@@ -12,6 +12,9 @@
 #include <class/filter.h>
 #include <subwidget/qbuttonwithdata.h>
 #include <QtAlgorithms>
+#include <QAction>
+#include <QMenu>
+#include <QToolButton>
 
 namespace Ui {
 class FormFriends;
@@ -26,6 +29,8 @@ public slots:
     void updateSettings();
 
     void pullTable(int aTo, int aDo);
+    void onTablePulled();
+    void createThread();
 public:
     explicit FormFriends(QString id, SFriends Friends, QWidget *parent = nullptr);
     ~FormFriends();
@@ -56,21 +61,21 @@ private slots:
     void tableWidgetFriends_CellClicked(int row, int col);
     void tableWidgetFriends_CellDoubleClicked(int row, int column);
 
-    QTableWidgetItem *getState(QString aGameExtraInfo, int aPersonaState);
-    QTableWidgetItem *getPrivacy(int aCommunityVisibilityState);
-    void updateButtonsPages(bool aFirst, QString aFirstText, bool aLabelDots1, bool aBack2, QString aBack2Text, bool aBack, QString aBackText, bool aCurrent, QString aCurrentText, bool aNext, QString aNextText, bool aNext2, QString aNext2Text, bool aLabelDots2, bool aLast, QString aLastText);
-    void buttonPageFirst_Clicked();
-    void buttonPageBack2_Clicked();
-    void buttonPageBack_Clicked();
-    void buttonPageNext_Clicked();
-    void buttonPageNext2_Clicked();
-    void buttonPageLast_Clicked();
-    void calculateButtonPages();
+//    QTableWidgetItem *getState(QString aGameExtraInfo, int aPersonaState);
+//    QTableWidgetItem *getPrivacy(int aCommunityVisibilityState);
+//    void updateButtonsPages(bool aFirst, QString aFirstText, bool aLabelDots1, bool aBack2, QString aBack2Text, bool aBack, QString aBackText, bool aCurrent, QString aCurrentText, bool aNext, QString aNextText, bool aNext2, QString aNext2Text, bool aLabelDots2, bool aLast, QString aLastText);
+//    void buttonPageFirst_Clicked();
+//    void buttonPageBack2_Clicked();
+//    void buttonPageBack_Clicked();
+//    void buttonPageNext_Clicked();
+//    void buttonPageNext2_Clicked();
+//    void buttonPageLast_Clicked();
+//    void calculateButtonPages();
 private:
     Ui::FormFriends *ui;
     QString _id;
     bool _blockedLoad = false;
-    QList<QPair<SFriend, SProfile>> _frienddd;
+    QList<QPair<SFriend, SProfile>> _friends;
     QList<QPair<SFriend*, SProfile*>> _visibleFriends;
     Settings _setting;
     Favorites _favorites;

@@ -24,8 +24,8 @@ int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const
 }
 
 int Threading::AddThreadFriends(const int aColumnID, const int aColumnName, const int aColumnAdded, const int aColumnStatus, const int aColumnisPublic,
-                                QTableWidget *aTableWidgetFriends, SProfiles aProfiles, SFriends aFriends) {
-    ThreadFriends *friends = new ThreadFriends(aColumnID, aColumnName, aColumnAdded, aColumnStatus, aColumnisPublic, aTableWidgetFriends, aProfiles, aFriends);
+                                QTableWidget *aTableWidgetFriends, QList<QPair<SFriend, SProfile>> aFriends) {
+    ThreadFriends *friends = new ThreadFriends(aColumnID, aColumnName, aColumnAdded, aColumnStatus, aColumnisPublic, aTableWidgetFriends, aFriends);
     QThread *thread = new QThread;
     friends->moveToThread(thread);
     connect(thread,  &QThread::started,          friends,        &ThreadFriends::fill);

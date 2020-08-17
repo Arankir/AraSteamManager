@@ -34,9 +34,6 @@ public:
     QDateTime _lastLogoff;
     int _commentPermission;
     QString _profileUrl;
-    QString _avatar;
-    QString _avatarMedium;
-    QString _avatarFull;
     int _personaState;
     QString _primaryClanID;
     /*const*/ QDateTime _timeCreated;
@@ -52,9 +49,9 @@ public:
 
     void update(bool parallel);
 
-    QPixmap getPixmapAvatar(QString savePath);
-    QPixmap getPixmapAvatarMedium(QString savePath);
-    QPixmap getPixmapAvatarFull(QString savePath);
+    QPixmap getPixmapAvatar();
+    QPixmap getPixmapAvatarMedium();
+    QPixmap getPixmapAvatarFull();
 
     SProfile(const SProfile &profile);
     SProfile &operator=(const SProfile &profile);
@@ -70,9 +67,15 @@ private slots:
     void set(QJsonObject ObjSummaries);
 
 private:
+    QString _avatar;
+    QString _avatarMedium;
+    QString _avatarFull;
+
     QPixmap _pixmapAvatar;
     QPixmap _pixmapAvatarMedium;
     QPixmap _pixmapAvatarFull;
+
+    Settings _setting;
 
 };
 
@@ -100,9 +103,9 @@ public:
     QDateTime getLastlogoff(int index = 0);
     int getCommentpermission(int index = 0);
     QString getProfileurl(int index = 0);
-    QString getAvatar(int index = 0);
-    QString getAvatarmedium(int index = 0);
-    QString getAvatarfull(int index = 0);
+    QPixmap getAvatar(int index = 0);
+    QPixmap getAvatarmedium(int index = 0);
+    QPixmap getAvatarfull(int index = 0);
     int getPersonastate(int index = 0);
     QString getPrimaryclanid(int index = 0);
     QDateTime getTimecreated(int index = 0);

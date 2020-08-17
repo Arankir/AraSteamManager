@@ -44,15 +44,15 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
 
     QLabel *avatarAchievementsCompare = new QLabel(this);
     avatarAchievementsCompare->setAlignment(Qt::AlignCenter);
-    new RequestImage(avatarAchievementsCompare, _profile._avatar, this);
+    avatarAchievementsCompare->setPixmap(_profile.getPixmapAvatar());
 
     QLabel *avatarFriendsCompare = new QLabel(this);
     avatarFriendsCompare->setAlignment(Qt::AlignCenter);
     avatarFriendsCompare->setToolTip(_profile._personaName);
-    new RequestImage(avatarFriendsCompare, _profile._avatar, this);
+    avatarFriendsCompare->setPixmap(_profile.getPixmapAvatar());
 
-    new RequestImage(ui->LabelGameLogo, QString("http://media.steampowered.com/steamcommunity/public/images/apps/%1/%2.jpg").arg(QString::number(_game._appID), _game._img_logo_url), this);
-    Settings::createDir(_setting._pathImagesAchievements + QString::number(_game._appID));
+    ui->LabelGameLogo->setPixmap(_game.getPixmapLogo());
+    Settings::createDir(_setting.getPathForImagesAchievements(QString::number(_game._appID),""));
     //ui->FrameEditCategory->setVisible(false);
     ui->ProgressBarFriendsLoad->setVisible(false);
     ui->LabelGameOnlineValue->setText(_game.getNumberPlayers(false));
@@ -97,8 +97,8 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     QVBoxLayout *layoutFriendsAchievementsFilter = new QVBoxLayout(widgetFriendsAchievementsFilter);
     layoutFriendsAchievementsFilter->setMargin(1);
     layoutFriendsAchievementsFilter->setAlignment(Qt::AlignCenter);
-    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsAll", "Friends", "All", true));
-    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsReached", "Friends", "Reached", false));
+    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsAll",        "Friends", "All",        true));
+    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsReached",    "Friends", "Reached",    false));
     layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsNotReached", "Friends", "NotReached", false));
     //widgetFriendsAchievementsFilter->setLayout(layoutFriendsAchievementsFilter);
 
@@ -413,7 +413,7 @@ void FormAchievements::finishLoadFriends() {
         QLabel *avatarFriend = new QLabel(this);
         avatarFriend->setToolTip(friendP.first._personaName);
         avatarFriend->setAlignment(Qt::AlignCenter);
-        new RequestImage(avatarFriend, friendP.first._avatar, this);
+        avatarFriend->setPixmap(friendP.first.getPixmapAvatar());
         ui->TableWidgetFriends->setCellWidget(0, row, avatarFriend);
 
         QTableWidgetItem *itemCheck(new QTableWidgetItem(""));

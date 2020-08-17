@@ -40,7 +40,7 @@ void SProfile::loading(bool aParallel){
 void SProfile::loadURL(RequestData *aRequest){
     QJsonDocument localSummaries = QJsonDocument::fromJson(aRequest->getAnswer());
     set(localSummaries.object().value("response").toObject().value("players").toArray().at(0).toObject());
-    disconnect(aRequest,&RequestData::s_finished,this,&SProfile::loadURL);
+    disconnect(aRequest, &RequestData::s_finished, this, &SProfile::loadURL);
     aRequest->deleteLater();
     emit s_finished(this);
     emit s_finished();
@@ -49,12 +49,12 @@ void SProfile::loadURL(RequestData *aRequest){
 SProfile::SProfile(QJsonObject aProfile, QObject *aParent): QObject(aParent), _steamID(aProfile.value("steamid").toString()),
 _communityVisibilityState(aProfile.value("communityvisibilitystate").toInt()), _profileState(aProfile.value("profilestate").toInt()),
 _personaName(aProfile.value("personaname").toString()), _lastLogoff(QDateTime::fromSecsSinceEpoch(aProfile.value("lastlogoff").toInt(),Qt::LocalTime)),
-_commentPermission(aProfile.value("commentpermission").toInt()), _profileUrl(aProfile.value("profileurl").toString()), _avatar(aProfile.value("avatar").toString()),
-_avatarMedium(aProfile.value("avatarmedium").toString()), _avatarFull(aProfile.value("avatarfull").toString()), _personaState(aProfile.value("personastate").toInt()),
+_commentPermission(aProfile.value("commentpermission").toInt()), _profileUrl(aProfile.value("profileurl").toString()), _personaState(aProfile.value("personastate").toInt()),
 _primaryClanID(aProfile.value("primaryclanid").toString()), _timeCreated(QDateTime::fromSecsSinceEpoch(aProfile.value("timecreated").toInt(),Qt::LocalTime)),
 _personaStateFlags(aProfile.value("personastateflags").toInt()), _gameExtraInfo(aProfile.value("gameextrainfo").toString()), _gameID(aProfile.value("gameid").toString()),
 _locCountryCode(aProfile.value("loccountrycode").toString()), _locStateCode(aProfile.value("locstatecode").toString()), _locCityID(aProfile.value("loccityid").toInt()),
-_realName(aProfile.value("realname").toString()) {
+_realName(aProfile.value("realname").toString()), _avatar(aProfile.value("avatar").toString()), _avatarMedium(aProfile.value("avatarmedium").toString()),
+_avatarFull(aProfile.value("avatarfull").toString()) {
 
 }
 
@@ -66,50 +66,66 @@ void SProfile::update(bool aParallel) {
     loading(aParallel);
 }
 
-QPixmap SProfile::getPixmapAvatar(QString aPath) {
-    if (_pixmapAvatar == QPixmap()) {
-        RequestImage *img = new RequestImage(_avatar, aPath, true, this);
-        QEventLoop loop;
-        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        loop.exec();
-        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        _pixmapAvatar = img->getPixmap();
-        delete img;
+QPixmap SProfile::getPixmapAvatar() {
+    if (_pixmapAvatar.isNull()) {
+        QString savePath = _setting.getPathForImagesProfiles(_avatar);
+        if(!QFile::exists(savePath)) {
+            RequestImage *img = new RequestImage(_avatar, savePath, true, this);
+            QEventLoop loop;
+            connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            loop.exec();
+            disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            _pixmapAvatar = img->getPixmap();
+            delete img;
+        } else {
+            _pixmapAvatar = QPixmap(savePath, "JPG");
+        }
     }
     return _pixmapAvatar;
 }
 
-QPixmap SProfile::getPixmapAvatarMedium(QString aPath) {
-    if (_pixmapAvatarMedium == QPixmap()) {
-        RequestImage *img = new RequestImage(_avatarMedium, aPath, true, this);
-        QEventLoop loop;
-        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        loop.exec();
-        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        _pixmapAvatarMedium = img->getPixmap();
-        delete img;
+QPixmap SProfile::getPixmapAvatarMedium() {
+    if (_pixmapAvatarMedium.isNull()) {
+        QString savePath = _setting.getPathForImagesProfiles(_avatarMedium);
+        if(!QFile::exists(savePath)) {
+            RequestImage *img = new RequestImage(_avatarMedium, savePath, true, this);
+            QEventLoop loop;
+            connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            loop.exec();
+            disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            _pixmapAvatarMedium = img->getPixmap();
+            delete img;
+        } else {
+            _pixmapAvatarMedium = QPixmap(savePath);
+        }
     }
     return _pixmapAvatarMedium;
 }
 
-QPixmap SProfile::getPixmapAvatarFull(QString aPath) {
-    if (_pixmapAvatarFull == QPixmap()) {
-        RequestImage *img = new RequestImage(_avatarFull, aPath, true, this);
-        QEventLoop loop;
-        connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        loop.exec();
-        disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-        _pixmapAvatarFull = img->getPixmap();
-        delete img;
+QPixmap SProfile::getPixmapAvatarFull() {
+    if (_pixmapAvatarFull.isNull()) {
+        QString savePath = _setting.getPathForImagesProfiles(_avatarFull);
+        if(!QFile::exists(savePath)) {
+            RequestImage *img = new RequestImage(_avatarFull, savePath, true, this);
+            QEventLoop loop;
+            connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            loop.exec();
+            disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            _pixmapAvatarFull = img->getPixmap();
+            delete img;
+        } else {
+            _pixmapAvatarFull = QPixmap(savePath);
+        }
     }
     return _pixmapAvatarFull;
 }
 
 SProfile::SProfile(const SProfile &aProfile): QObject(aProfile.parent()), _steamID(aProfile._steamID), _communityVisibilityState(aProfile._communityVisibilityState),
 _profileState(aProfile._profileState), _personaName(aProfile._personaName), _lastLogoff(aProfile._lastLogoff), _commentPermission(aProfile._commentPermission),
-_profileUrl(aProfile._profileUrl), _avatar(aProfile._avatar), _avatarMedium(aProfile._avatarMedium), _avatarFull(aProfile._avatarFull), _personaState(aProfile._personaState),
-_primaryClanID(aProfile._primaryClanID), _timeCreated(aProfile._timeCreated), _personaStateFlags(aProfile._personaStateFlags), _gameExtraInfo(aProfile._gameExtraInfo),
-_gameID(aProfile._gameID), _locCountryCode(aProfile._locCountryCode), _locStateCode(aProfile._locStateCode), _locCityID(aProfile._locCityID), _realName(aProfile._realName) {
+_profileUrl(aProfile._profileUrl), _personaState(aProfile._personaState), _primaryClanID(aProfile._primaryClanID), _timeCreated(aProfile._timeCreated),
+_personaStateFlags(aProfile._personaStateFlags), _gameExtraInfo(aProfile._gameExtraInfo), _gameID(aProfile._gameID), _locCountryCode(aProfile._locCountryCode),
+_locStateCode(aProfile._locStateCode), _locCityID(aProfile._locCityID), _realName(aProfile._realName), _avatar(aProfile._avatar), _avatarMedium(aProfile._avatarMedium),
+_avatarFull(aProfile._avatarFull), _pixmapAvatar(aProfile._pixmapAvatar), _pixmapAvatarMedium(aProfile._pixmapAvatarMedium), _pixmapAvatarFull(aProfile._pixmapAvatarFull) {
 
 }
 
@@ -125,6 +141,9 @@ SProfile &SProfile::operator=(const SProfile &aProfile){
     _avatar = aProfile._avatar;
     _avatarMedium = aProfile._avatarMedium;
     _avatarFull = aProfile._avatarFull;
+    _pixmapAvatar = aProfile._pixmapAvatar;
+    _pixmapAvatarMedium = aProfile._pixmapAvatarMedium;
+    _pixmapAvatarFull = aProfile._pixmapAvatarFull;
     _personaState = aProfile._personaState;
     _primaryClanID = aProfile._primaryClanID;
     _personaStateFlags = aProfile._personaStateFlags;
@@ -224,16 +243,16 @@ QString SProfiles::getProfileurl(int aIndex) {
     return _profile[aIndex]._profileUrl;
 }
 
-QString SProfiles::getAvatar(int aIndex) {
-    return _profile[aIndex]._avatar;
+QPixmap SProfiles::getAvatar(int aIndex) {
+    return _profile[aIndex].getPixmapAvatar();
 }
 
-QString SProfiles::getAvatarmedium(int aIndex) {
-    return _profile[aIndex]._avatarMedium;
+QPixmap SProfiles::getAvatarmedium(int aIndex) {
+    return _profile[aIndex].getPixmapAvatarMedium();
 }
 
-QString SProfiles::getAvatarfull(int aIndex) {
-    return _profile[aIndex]._avatarFull;
+QPixmap SProfiles::getAvatarfull(int aIndex) {
+    return _profile[aIndex].getPixmapAvatarFull();
 }
 
 int SProfiles::getPersonastate(int aIndex) {

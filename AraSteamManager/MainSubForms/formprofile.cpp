@@ -60,9 +60,10 @@ void FormProfile::profileToUi(SProfile aProfile) {
     _profile = std::move(aProfile);
 
     ui->LabelAvatar->setFixedSize(QSize(64, 64));
+    ui->LabelAvatar->setPixmap(_profile.getPixmapAvatarMedium());
+
     ui->LabelAvatarMinimize->setFixedSize(QSize(32, 32));
-    new RequestImage(ui->LabelAvatar,         _profile._avatarMedium, 0, false);
-    new RequestImage(ui->LabelAvatarMinimize, _profile._avatar,       0, false);
+    ui->LabelAvatarMinimize->setPixmap(_profile.getPixmapAvatar());
 
     ui->LabelRealNameValue->setText(_profile._realName);
     if (_profile._realName != "") {
