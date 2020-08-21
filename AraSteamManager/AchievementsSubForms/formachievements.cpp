@@ -24,7 +24,7 @@ constexpr int c_CategoriesEditHeight              = 300;
 
 #define Init {
 FormAchievements::FormAchievements(SAchievementsPlayer aPlayer, SProfile aProfile, SGame aGame, int aUnicNum, QWidget *aParent): QWidget(aParent), ui(new Ui::FormAchievements),
-_profile(aProfile), _game(aGame), _unicNum(aUnicNum), _categoriesGame(_game), _favorites("achievements") {
+_achievements(aPlayer), _profile(aProfile), _game(aGame), _unicNum(aUnicNum), _categoriesGame(_game), _favorites("achievements") {
     ui->setupUi(this);
     initComponents(aPlayer);
     ui->LineEditNameAchievements->setFocus();
@@ -59,7 +59,13 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     ui->LabelGameTitle->setText(_game._name);
     ui->FrameFilter->setEnabled(false);
     ui->ButtonCompare->setMinimumHeight(21);
+    ui->tabWidget->setCurrentIndex(0);
     #define LoadDataEnd }
+
+    _achievements._appid = QString::number(_game._appID);
+    _achievements._id = _profile._steamID;
+    _achievements.update();
+
     #define ConnectTables {
     _tableAchievements = new FormTablesHeaders(_game, _profile._steamID, aPlayer, ui->FrameContainer);
     connect(_tableAchievements, &FormTablesHeaders::s_tablePulled, this, &FormAchievements::onTablePulled);
@@ -140,6 +146,7 @@ void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
     connect(ui->ButtonCategoryValueCheckVisible,    &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueSelectVisible);
     connect(ui->ButtonCategoryValueUncheckVisible,  &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueUnselectVisible);
     connect(ui->ButtonCategoryValueDelete,          &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueDelete);
+    connect(ui->tabWidget,                          &QTabWidget::currentChanged,              this,                &FormAchievements::tabWidget_CurrentChanged);
     connect(ui->CheckBoxCategoryUniqueValue,        &QCheckBox::stateChanged,                 this,                [=](int checkBoxState) {
         _tableAchievements->setUniqueMode(checkBoxState == 2);
     });
@@ -748,6 +755,8 @@ void FormAchievements::buttonAddCategory_Clicked() {
         animateFrameEditCategories(true);
         _tableAchievements->addNoValueColumn();
         _tableAchievements->setVisibleColumn(_tableAchievements->getNoValueColumn(), false);
+
+
     }
 }
 
@@ -849,6 +858,10 @@ void FormAchievements::buttonAddValueCategory_Clicked() {
     if ((_tableAchievements->getType() == TableType::standart) && ((_typeCategory == CategoryType::add) || (_typeCategory == CategoryType::change))) {
         _tableAchievements->addCategoryColumn();
         createValueCategory();
+
+        FormCategoryValue_2 *value = new FormCategoryValue_2();
+        value->setFixedWidth(value->sizeHint().width());
+        ui->ScrollAreaValues->widget()->layout()->addWidget(value);
     }
 }
 
@@ -1364,4 +1377,40 @@ void FormAchievements::tableAchievements_CellClicked(int row, int) {
 void FormAchievements::buttonManual_Clicked() {
     QDesktopServices::openUrl(QUrl("https://steamcommunity.com/app/" + QString::number(_game._appID) + "/guides/"));
     //https://steamcommunity.com/app/218620/guides/
+}
+
+void FormAchievements::tabWidget_CurrentChanged(int index) {
+    switch(index) {
+    case 0: {//standart
+
+        break;
+    }
+    case 1: {//editCategory
+        if (!_isEditCategoryLoaded) {
+            loadEditCategory();
+        }
+        break;
+    }
+    case 2: {//compare
+        if (!_isCompareLoaded) {
+            loadCompare();
+        }
+        break;
+    }
+    }
+}
+
+void FormAchievements::loadEditCategory() {
+    for (auto achievement: _achievements) {
+        FormAchievementWidget *achievementWidget = new FormAchievementWidget(&achievement, _game._appID);
+        QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetAchievements);
+        item->setSizeHint(achievementWidget->sizeHint());
+        ui->ListWidgetAchievements->setItemWidget(item, achievementWidget);
+    }
+    _isEditCategoryLoaded = true;
+}
+
+void FormAchievements::loadCompare() {
+    //блаблаs
+    _isCompareLoaded = true;
 }

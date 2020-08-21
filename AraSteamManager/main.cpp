@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QVector<int>>("QVector<int>");
     qRegisterMetaType<QMetaTypeId<ReachedType>>("QMetaTypeId<ReachedType>");
     qRegisterMetaType<QVector<double>>("QVector<double>");
-    qRegisterMetaType<QVector<QPair<QString,int> >>("QVector<QPair<QString,int> >");
-    qRegisterMetaType<QVector<QPair<QString,QString> >>("QVector<QPair<QString,QString> >");
+    qRegisterMetaType<QVector<QPair<QString,int> >>("QVector<QPair<QString, int> >");
+    qRegisterMetaType<QVector<QPair<QString,QString> >>("QVector<QPair<QString, QString> >");
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
     QTranslator lang;
     Settings Setting;

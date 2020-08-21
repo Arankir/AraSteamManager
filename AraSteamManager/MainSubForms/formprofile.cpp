@@ -2,23 +2,20 @@
 #include "ui_formprofile.h"
 
 #define Constants {
-QString c_green = "#57FF7C";
+QString c_green  = "#57FF7C";
 QString c_yellow = "#6c6e0e";
-QString c_red = "#E44B4B"; //b33a3a
-QString c_blue = "blue";
+QString c_red    = "#E44B4B"; //b33a3a
+QString c_blue   = "#42a9c6";
 #define ConstantsEnd }
 
 FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormProfile), _profile(aProfile), _games(this) {
     ui->setupUi(this);
     ui->LabelProfileVisibility->setTextFormat(Qt::RichText);
-    ui->LabelGamesVisibility->setTextFormat(Qt::RichText);
+    ui->LabelGamesVisibility  ->setTextFormat(Qt::RichText);
     ui->LabelFriendsVisibility->setTextFormat(Qt::RichText);
-    ui->LabelProfileUrl->setTextFormat(Qt::RichText);
+    ui->LabelProfileUrl       ->setTextFormat(Qt::RichText);
     ui->ButtonGames->setBaseSize(QSize(23, 23));
     ui->LabelPersonaState->setWordWrap(true);
-
-    ui->LabelName->setGraphicsEffect(createLightning());
-    ui->LabelNameMinimize->setGraphicsEffect(createLightning());
 
     ui->FrameProfileButtons->setMinimumHeight(32 + 18);
 
@@ -26,6 +23,9 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     ui->LabelTimeCreatedValue   ->setStyleSheet("color: #42a9c6;");
     ui->LabelRealNameValue      ->setStyleSheet("color: #42a9c6;");
     ui->LabelLocCountryCodeValue->setStyleSheet("color: #42a9c6;");
+
+    ui->LabelName             ->setGraphicsEffect(createLightning());
+    ui->LabelNameMinimize     ->setGraphicsEffect(createLightning());
 
     ui->LabelProfileVisibility->setGraphicsEffect(createLightning());
     ui->LabelGamesVisibility  ->setGraphicsEffect(createLightning());
@@ -169,7 +169,11 @@ void FormProfile::setStatus() {
     } else {
         switch (_profile._personaState) {
             case 0:
-                ui->LabelPersonaState->setText(tr("Был в сети %1").arg(_profile._lastLogoff.toString("yyyy.MM.dd hh:mm:ss")));
+                if (_profile._lastLogoff == QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
+                    ui->LabelPersonaState->setText(tr("Не в сети"));
+                } else {
+                    ui->LabelPersonaState->setText(tr("Был в сети %1").arg(_profile._lastLogoff.toString("yyyy.MM.dd hh:mm:ss")));
+                }
                 setColorStatus(125, 126, 128, 255 * 0.7);
                 break;
             case 1:

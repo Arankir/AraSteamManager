@@ -116,12 +116,30 @@ void FormFriends::onTablePulled() {
         QLabel *avatarFriend = new QLabel(this);
         avatarFriend->setPixmap(profile.second.getPixmapAvatar());
 
-        QToolButton *toolBtn = new QToolButton();
-        toolBtn->setText("...");
-        toolBtn->setMaximumSize(QSize(32, 32));
-        toolBtn->setObjectName("TBtn" + QString::number(row));
+        QPushButton *btn = new QPushButton("...");
+        btn->setFont(QFont("Times New Roman", 16));
+        btn->setFlat(true);
+        btn->setMaximumSize(QSize(46, 32));
+        btn->setObjectName("TBtn" + QString::number(row));
         QAction *actionGoToProfile = new QAction(tr("Перейти на профиль"), this);
-        QAction *actionFavorites = new QAction(tr("Добавить/удалить из избранного"), this);
+        QAction *actionFavorites;
+        actionGoToProfile->setIcon(QIcon(_setting.getIconGoTo()));
+
+        QJsonArray values = _favorites.getValues();
+        bool isFavorite = false;
+        for(QJsonValue value: values) {
+            if(value.toObject().value("id").toString() == profile.second._steamID) {
+                isFavorite = true;
+                break;
+            }
+        }
+        if (isFavorite) {
+            actionFavorites = new QAction(tr("Удалить из избранного"), this);
+            actionFavorites->setIcon(QIcon(_setting.getIconIsFavorites()));
+        } else {
+            actionFavorites = new QAction(tr("Добавить в избранное"), this);
+            actionFavorites->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+        }
 
         connect (actionGoToProfile, &QAction::triggered, this, &FormFriends::buttonFriendGoTo_Clicked);
         connect (actionFavorites,   &QAction::triggered, this, &FormFriends::buttonFriendFavorite_Clicked);
@@ -129,15 +147,16 @@ void FormFriends::onTablePulled() {
         QMenu* menu = new QMenu(this);
         menu -> addAction (actionGoToProfile);
         menu -> addAction (actionFavorites);
-        toolBtn->setMenu(menu);
-        connect (toolBtn, &QToolButton::clicked, this,    [=]() {tableWidgetFriends_CellClicked(row, 0);});
-        connect (toolBtn, &QToolButton::clicked, toolBtn, &QToolButton::showMenu);
+        btn->setMenu(menu);
+        connect (btn, &QPushButton::clicked, this,    [=]() {tableWidgetFriends_CellClicked(row, 0);});
+        connect (btn, &QPushButton::clicked, btn, &QPushButton::showMenu);
 
         ui->TableWidgetFriends->setCellWidget(row, c_tableColumnIcon,    avatarFriend);
-        ui->TableWidgetFriends->setCellWidget(row, c_tableColumnActions, toolBtn);
+        ui->TableWidgetFriends->setCellWidget(row, c_tableColumnActions, btn);
         row++;
     }
-    ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon, 32 + 8);
+    ui->TableWidgetFriends->setColumnWidth(c_tableColumnIcon,    32 + 8);
+    ui->TableWidgetFriends->setColumnWidth(c_tableColumnActions, 32 + 8);
     retranslate();
 //TODO Подумать над row==0
     emit s_finish();
@@ -182,7 +201,7 @@ void FormFriends::retranslate() {
     ui->TableWidgetFriends->   horizontalHeaderItem(c_tableColumnAdded)     ->setTextAlignment(Qt::AlignVCenter);
     ui->TableWidgetFriends->   horizontalHeaderItem(c_tableColumnStatus)    ->setTextAlignment(Qt::AlignVCenter);
     ui->TableWidgetFriends->   horizontalHeaderItem(c_tableColumnisPublic)  ->setTextAlignment(Qt::AlignVCenter);
-    friendToUi();
+//    friendToUi();
 }
 
 void FormFriends::updateSettings() {
@@ -385,16 +404,24 @@ void FormFriends::buttonFriendGoTo_Clicked() {
 
 void FormFriends::buttonFriendFavorite_Clicked() {
     if (_currentFriendIndex >= 0 && _currentFriendIndex < _friends.count()) {
+        QAction *action = dynamic_cast<QAction*>(sender());
         QJsonObject newValue;
         newValue["id"] = _friends[_currentFriendIndex].second._steamID;
         newValue["name"] = _friends[_currentFriendIndex].second._personaName;
         newValue["added"] = _friends[_currentFriendIndex].first._friend_since.toString("yyyy.MM.dd hh:mm:ss");
         if(_favorites.addValue(newValue, true)) {
             //Категория добавилась
+            if (action) {
+                action->setText(tr("Удалить из избранного"));
+                action->setIcon(QIcon(_setting.getIconIsFavorites()));
+            }
         } else {
             //Категория уже есть (удалилась)
+            if (action) {
+                action->setText(tr("Добавить в избранное"));
+                action->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+            }
         }
-        //Поменять картинку
     }
 }
 

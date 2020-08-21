@@ -78,7 +78,7 @@ QPixmap SProfile::getPixmapAvatar() {
             _pixmapAvatar = img->getPixmap();
             delete img;
         } else {
-            _pixmapAvatar = QPixmap(savePath, "JPG");
+            _pixmapAvatar = QPixmap(savePath);
         }
     }
     return _pixmapAvatar;

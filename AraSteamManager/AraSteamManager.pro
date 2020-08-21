@@ -26,7 +26,9 @@ CONFIG += c++11
 
 SOURCES += \
     AchievementsSubForms/formachievements.cpp \
+    AchievementsSubForms/formachievementwidget.cpp \
     AchievementsSubForms/formcategoryvalue.cpp \
+    AchievementsSubForms/formcategoryvalue_2.cpp \
     AchievementsSubForms/formcompareprofilefilter.cpp \
     AchievementsSubForms/formtablesheaders.cpp \
     MainSubForms/formfavorites.cpp \
@@ -65,7 +67,9 @@ SOURCES += \
 
 HEADERS += \
     AchievementsSubForms/formachievements.h \
+    AchievementsSubForms/formachievementwidget.h \
     AchievementsSubForms/formcategoryvalue.h \
+    AchievementsSubForms/formcategoryvalue_2.h \
     AchievementsSubForms/formcompareprofilefilter.h \
     AchievementsSubForms/formtablesheaders.h \
     MainSubForms/formfavorites.h \
@@ -104,7 +108,9 @@ HEADERS += \
 
 FORMS += \
     AchievementsSubForms/formachievements.ui \
+    AchievementsSubForms/formachievementwidget.ui \
     AchievementsSubForms/formcategoryvalue.ui \
+    AchievementsSubForms/formcategoryvalue_2.ui \
     AchievementsSubForms/formcompareprofilefilter.ui \
     AchievementsSubForms/formtablesheaders.ui \
     MainSubForms/formfavorites.ui \

@@ -20,6 +20,8 @@
 #include <class/categoriesgame.h>
 #include <class/Threads/threading.h>
 #include <AchievementsSubForms/formcategoryvalue.h>
+#include <AchievementsSubForms/formcategoryvalue_2.h>
+#include <AchievementsSubForms/formachievementwidget.h>
 #include <AchievementsSubForms/formcompareprofilefilter.h>
 #include <AchievementsSubForms/formtablesheaders.h>
 #include <subwidget/qbuttonwithdata.h>
@@ -132,9 +134,15 @@ private slots:
 
     void resizeForm();
     void animateFrameEditCategories(bool toVisible);
+
+    void loadEditCategory();
+    void loadCompare();
+    void tabWidget_CurrentChanged(int index);
+
 private:
     Ui::FormAchievements *ui;
     Settings _setting;
+    SAchievements _achievements;
     QString _currentAchievement;
     int _currentAchievementIndex = -1;
 
@@ -150,10 +158,8 @@ private:
     QFormLayout *_categoryValuesLayout;
     FormTablesHeaders *_tableAchievements;
 
-    //для загрузки картинок
-    QList<RequestData*> _request;
-    int _numRequests=0;
-    int _numNow=0;
+    bool _isEditCategoryLoaded = false;
+    bool _isCompareLoaded      = false;
 
     //сравнение с друзьями
     FormMode _currentMode = FormMode::compare;

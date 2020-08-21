@@ -171,7 +171,7 @@ QString MainWindow::getTheme() {
                     "text-align: center; "
                 "} "
                 "QProgressBar::chunk[accessibleName=BadAchievements] { "
-                    "background-color: #E44B4B; "
+                    "background-color: rgba(0,0,0,0); "
                 "} "
 #define progressbarend }
 #define radiobutton {
@@ -402,8 +402,9 @@ QString MainWindow::getTheme() {
                     "border-radius: 2px; "
                     "color: #dddddd; "
                 "} "
-                "QTableWidget::item, QTableWidget::item:inactive { "
+                "QTableWidget::item { "
                     "background-color: rgba(23, 26, 33, 0.5); "
+                    //"color: #dddddd; "
                     "margin-top: 10px; "
                     "padding: 4px; "
                 "} "

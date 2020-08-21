@@ -72,10 +72,10 @@ void SFriends::set(QJsonDocument aFriends){
         for (auto friendP: aFriends.object().value("friendslist").toObject().value("friends").toArray()) {
             _friends.append(std::move(SFriend(friendP.toObject())));
         }
-        _status = std::move(StatusValue::success);
+        _status = StatusValue::success;
     } else {
-        _status = std::move(StatusValue::error);
-        _error = std::move("profile is not exist");
+        _status = StatusValue::error;
+        _error = "profile is not exist";
     }
 }
 
@@ -98,42 +98,47 @@ void SFriends::onLoad(QNetworkReply *aReply) {
     emit s_finished(this);
     emit s_finished();
 }
+
 SProfiles SFriends::getProfiles() {
     QEventLoop loop;
     QNetworkAccessManager localManager;
     connect(&localManager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    int nowFriendsLoaded = std::move(0);
+    int nowFriendsLoaded = 0;
     QJsonArray profilesArray;
     SProfiles profiles;
     while(nowFriendsLoaded < _friends.size()) {
-        QString querry="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="+Settings::getKey()+"&steamids="+_friends[nowFriendsLoaded++]._steamID;
-        if(nowFriendsLoaded+99>_friends.size()){
-            while(nowFriendsLoaded < _friends.size()){
+        QString querry = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + Settings::getKey() + "&steamids=" + _friends[nowFriendsLoaded++]._steamID;
+        if(nowFriendsLoaded + 99 > _friends.size()) {
+            while(nowFriendsLoaded < _friends.size()) {
                 querry += ", " + _friends[nowFriendsLoaded++]._steamID;
             }
         } else {
-            for (int i=0;i<99;i++)
+            for (int i = 0; i < 99; i++) {
                 querry += ", " + _friends[nowFriendsLoaded++]._steamID;
+            }
         }
-        qDebug()<<"Запрос="<<querry;
+        //qDebug()<<"Запрос="<<querry;
         QNetworkReply &localReply = *localManager.get(QNetworkRequest(querry));
         loop.exec();
-        QJsonArray friends = QJsonDocument::fromJson(localReply.readAll()).object().value("response").toObject().value("players").toArray();
-        for (auto friendd: friends) {
-            profilesArray.append(std::move(friendd.toObject()));
+        QJsonArray profileFriends = QJsonDocument::fromJson(localReply.readAll()).object().value("response").toObject().value("players").toArray();
+        for (auto profileFriend: profileFriends) {
+            profilesArray.append(std::move(profileFriend.toObject()));
         }
     }
     profiles.set(profilesArray);
     qDebug()<<"Друзей"<<profiles.getCount();
     return profiles;
 }
-void SFriends::update(bool aParallel){
-    set(_id,aParallel);
+
+void SFriends::update(bool aParallel) {
+    set(_id, aParallel);
 }
-void SFriends::clear(){
+
+void SFriends::clear() {
     _friends.clear();
-    _status = std::move(StatusValue::none);
+    _status = StatusValue::none;
 }
+
 void SFriends::sort(){
     //Переделать нормально
     //std::list<SFriend> list = _friends.toList().toStdList();
