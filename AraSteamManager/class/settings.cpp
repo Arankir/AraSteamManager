@@ -445,6 +445,10 @@ QString Settings::getPathForIconGames(QString url) {
 
 bool Settings::createDir(QString aPath) {
     bool exist = true;
+    aPath.replace("\\", "/");
+    if (aPath.lastIndexOf("/") != aPath.length() - 1) {
+        aPath += "/";
+    }
     QStringList dirs = aPath.split("/");
     QString pathNow = "";
     for (auto &dir: dirs) {

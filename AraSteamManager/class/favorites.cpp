@@ -228,6 +228,12 @@ int Favorites::addGame(QJsonObject aGame) {
     return arr.size()-1;
 }
 
+bool Favorites::isInFavorites(QJsonObject aGame, QString aId) {
+    QJsonArray favorites = getValues(aGame);
+    return std::any_of(favorites.cbegin(), favorites.cend(),
+                                      [=](QJsonValue id) { return aId == id.toObject().value("id").toString(); } );
+}
+
 QString Favorites::getType() {
     return _favorites.value("Type").toString();
 }

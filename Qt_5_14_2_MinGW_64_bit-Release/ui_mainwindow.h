@@ -24,7 +24,6 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -52,7 +51,6 @@ public:
     QPushButton *ButtonSettings;
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
-    QToolButton *toolButton;
     QStackedWidget *StackedWidgetProfiles;
     QProgressBar *FormProgressBar;
     QStackedWidget *StackedWidgetForms;
@@ -201,11 +199,6 @@ public:
         ButtonFindProfile->setFont(font1);
 
         horizontalLayout_4->addWidget(ButtonFindProfile);
-
-        toolButton = new QToolButton(centralWidget);
-        toolButton->setObjectName(QString::fromUtf8("toolButton"));
-
-        horizontalLayout_4->addWidget(toolButton);
 
 
         verticalLayout->addLayout(horizontalLayout_4);
@@ -393,7 +386,6 @@ public:
         ButtonSettings->setText(QString());
         LineEditIdProfile->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 Steamid", nullptr));
         ButtonFindProfile->setText(QCoreApplication::translate("MainWindow", " \320\235\320\260\320\271\321\202\320\270", nullptr));
-        toolButton->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
     } // retranslateUi
 
 };

@@ -304,6 +304,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
 }
 
 void FormSettings::comboBoxMaxTableRows(int index) {
+    Q_UNUSED(index);
 //    _setting.setMaximumTableRows(ui->ComboBoxMaxRows->currentText().toInt());
 //    emit s_updateSettings();
 }

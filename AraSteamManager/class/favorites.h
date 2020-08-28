@@ -27,6 +27,7 @@ public slots:
     bool removeValue(QJsonObject game, QJsonObject newValue);
     void removeGame(QJsonObject game);
     int addGame(QJsonObject game);
+    bool isInFavorites(QJsonObject aGame, QString id);
     QString getType();
     QJsonArray getValues();
     QJsonArray getValues(QJsonObject game);

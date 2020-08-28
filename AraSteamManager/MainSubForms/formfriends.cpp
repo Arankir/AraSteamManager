@@ -313,6 +313,7 @@ void FormFriends::updateHiddenRows() {
 }
 
 void FormFriends::progressLoading(int aProgress,int aRow) {
+    Q_UNUSED(aProgress);
     ui->TableWidgetFriends->setRowHeight(aRow, 52);
 }
 #define SystemEnd }

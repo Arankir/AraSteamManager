@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -63,10 +62,6 @@ public:
     QLabel *label;
     QSlider *SliderProfileSize;
     QSpacerItem *horizontalSpacer;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_2;
-    QComboBox *ComboBoxMaxRows;
-    QSpacerItem *horizontalSpacer_2;
     QLabel *labelIcons8;
 
     void setupUi(QWidget *FormSettings)
@@ -230,25 +225,6 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_2 = new QLabel(tab_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        horizontalLayout_4->addWidget(label_2);
-
-        ComboBoxMaxRows = new QComboBox(tab_2);
-        ComboBoxMaxRows->setObjectName(QString::fromUtf8("ComboBoxMaxRows"));
-
-        horizontalLayout_4->addWidget(ComboBoxMaxRows);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_4->addItem(horizontalSpacer_2);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_4);
-
         labelIcons8 = new QLabel(tab_2);
         labelIcons8->setObjectName(QString::fromUtf8("labelIcons8"));
         QFont font1;
@@ -285,7 +261,6 @@ public:
         CheckBoxVisibleHiddenGames->setText(QCoreApplication::translate("FormSettings", "\320\237\321\200\320\270 \320\277\320\276\320\270\321\201\320\272\320\265 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\276\321\202\320\276\320\261\321\200\320\260\320\266\320\260\321\202\321\214 \321\201\320\272\321\200\321\213\321\202\321\213\320\265 \320\270\320\263\321\200\321\213", nullptr));
         CheckBoxSaveImage->setText(QCoreApplication::translate("FormSettings", "\320\220\320\262\321\202\320\276\320\274\320\260\321\202\320\270\321\207\320\265\321\201\320\272\320\270 \321\201\320\276\321\205\321\200\320\260\320\275\321\217\321\202\321\214 \320\272\320\260\321\200\321\202\320\270\320\275\320\272\320\270 \320\275\320\260 \320\272\320\276\320\274\320\277\321\214\321\216\321\202\320\265\321\200\320\265 (\320\264\320\273\321\217 \320\261\320\276\320\273\320\265\320\265 \320\261\321\213\321\201\321\202\321\200\320\276\320\271 \320\267\320\260\320\263\321\200\321\203\320\267\320\272\320\270)", nullptr));
         label->setText(QCoreApplication::translate("FormSettings", "\320\224\320\260\320\275\320\275\321\213\320\265 \320\276 \320\277\321\200\320\276\321\204\320\270\320\273\320\265", nullptr));
-        label_2->setText(QCoreApplication::translate("FormSettings", "\320\232\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\276\321\202\320\276\320\261\321\200\320\260\320\266\320\260\320\265\320\274\321\213\321\205 \320\270\320\263\321\200/\320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271/\320\264\321\200\321\203\320\267\320\265\320\271 \320\275\320\260 \320\276\320\264\320\275\320\276\320\271 \321\201\321\202\321\200\320\260\320\275\320\270\321\206\320\265", nullptr));
         labelIcons8->setText(QCoreApplication::translate("FormSettings", "<html><head/><body><p>\320\230\320\272\320\276\320\275\320\272\320\270 \320\264\320\273\321\217 \320\277\321\200\320\270\320\273\320\276\320\266\320\265\320\275\320\270\321\217 \320\261\321\213\320\273\320\270 \320\277\321\200\320\265\320\264\320\276\321\201\321\202\320\260\320\262\320\273\320\265\320\275\321\213 \321\201\320\260\320\271\321\202\320\276\320\274 <a href=https://icons8.ru/icons>https://icons8.ru/icons</a></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("FormSettings", "  \320\237\321\200\320\276\321\207\320\270\320\265 \320\275\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270  ", nullptr));
     } // retranslateUi

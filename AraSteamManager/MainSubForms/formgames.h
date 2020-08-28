@@ -17,6 +17,8 @@
 #include <QPropertyAnimation>
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
+#include <QAction>
+#include <QMenu>
 
 namespace Ui {
 class FormGames;
@@ -41,7 +43,7 @@ signals:
     void s_return_to_profile(QWidget*);
     void s_achievementsLoaded(int,int);
     void s_finish(int width);
-    void s_showAchievements(SAchievementsPlayer achievements,SGame games);
+    void s_showAchievements(SAchievementsPlayer &achievements, SGame games);
 
 private slots:
     void changeEvent(QEvent *event);
@@ -52,7 +54,7 @@ private slots:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event);
 
-    void lineEditGame_TextChanged(const QString);
+    void lineEditGame_TextChanged(QString aFindText);
     void buttonFind_Clicked();
 
     void tableWidgetGames_CellDoubleClicked(int row, int column);
@@ -62,12 +64,15 @@ private slots:
     void buttonHide_Clicked();
     void createThread();
 
+    void hideHiddenGames();
+    QMenu *createMenu(SGame aGame, int aIndex);
+    void loadHiddenGames();
 private:
     Ui::FormGames *ui;
     SProfile _profile;
     int _windowChildCount = 0;
     SGames _games;
-    SAchievementsPlayer *_achievements;
+    QVector<SAchievementsPlayer*> _achievements;
     Favorites _favorites;
     QStringList _hide;
     Settings _setting;

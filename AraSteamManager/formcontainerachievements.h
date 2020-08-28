@@ -17,7 +17,7 @@ public:
     ~FormContainerAchievements();
 
 public slots:
-    void AddFormAchievement(SAchievementsPlayer pl, SProfile ids, SGame game, int num);
+    void AddFormAchievement(SAchievementsPlayer &pl, SProfile ids, SGame game, int num);
 
 signals:
     void s_removeAchievements(int index);

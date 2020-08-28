@@ -1,5 +1,7 @@
 debug/formachievements.o
+debug/formachievementwidget.o
 debug/formcategoryvalue.o
+debug/formcategoryvalue_2.o
 debug/formcompareprofilefilter.o
 debug/formtablesheaders.o
 debug/formfavorites.o
@@ -38,7 +40,9 @@ debug/qradiobuttonwithdata.o
 debug/qrc_resimg.o
 debug/qrc_lang.o
 debug/moc_formachievements.o
+debug/moc_formachievementwidget.o
 debug/moc_formcategoryvalue.o
+debug/moc_formcategoryvalue_2.o
 debug/moc_formcompareprofilefilter.o
 debug/moc_formtablesheaders.o
 debug/moc_formfavorites.o

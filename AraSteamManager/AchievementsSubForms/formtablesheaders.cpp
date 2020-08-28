@@ -755,6 +755,8 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
                                      QString::number(reached + notReached),
                                      QString::number(100.0 * reached / (reached + notReached))));
     ui->TableWidgetContent->resizeRowsToContents();
+    emit s_tablePulled(reached, notReached);
+//TODO Если отсортируют пока не все загрузилось, то поломается
     int row = 0;
     for (auto &achievement: _achievements) {
         //создание картинок
@@ -772,7 +774,6 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
             setRowCount(getRowCount() - 1);
         }
     }
-    emit s_tablePulled(reached, notReached);
 }
 
 #define Filter {

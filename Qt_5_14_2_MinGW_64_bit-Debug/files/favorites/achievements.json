@@ -1,5 +1,18 @@
 {
     "Type": "achievements",
     "Values": [
+        {
+            "Values": [
+                {
+                    "description": "Repair all the rooms in your home",
+                    "id": "Spot of DIY",
+                    "title": "Spot of DIY"
+                }
+            ],
+            "game": {
+                "id": 227580,
+                "name": "10,000,000"
+            }
+        }
     ]
 }

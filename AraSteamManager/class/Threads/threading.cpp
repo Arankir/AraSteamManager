@@ -66,6 +66,10 @@ int Threading::AddThreadStatistics(SGames aGames, QString aId, QVector<int> &aNu
 }
 
 int Threading::AddThreadFriendAchievements(QTableWidget *aTableWidgetAchievements, SAchievements aAchievement, int aCol, int aColumnAppid) {
+    Q_UNUSED(aTableWidgetAchievements);
+    Q_UNUSED(aAchievement);
+    Q_UNUSED(aCol);
+    Q_UNUSED(aColumnAppid);
 //    ThreadAchievements *achievements = new ThreadAchievements;
 //    QThread *thread = new QThread;
 //    achievements->moveToThread(thread);

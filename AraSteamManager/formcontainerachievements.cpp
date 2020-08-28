@@ -7,13 +7,14 @@ FormContainerAchievements::FormContainerAchievements(QWidget *parent): QWidget(p
     this->setGeometry(_setting.getAchievementContainerGeometry());
     if((_setting.getAchievementContainerPos().x() > QGuiApplication::primaryScreen()->geometry().width()) ||
        (_setting.getAchievementContainerPos().y() > QGuiApplication::primaryScreen()->geometry().height())) {
-        this->move(_setting.getAchievementContainerPercentPos().x(), _setting.getAchievementContainerPercentPos().y() - 31);
+        //this->move(_setting.getAchievementContainerPercentPos().x(), _setting.getAchievementContainerPercentPos().y() - 31);
     } else {
         this->move(_setting.getAchievementContainerPos().x(), _setting.getAchievementContainerPos().y() - 31);
     }
 }
 
 void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
+    Q_UNUSED(aEvent);
     _setting.setAchievementContainerParams(this->geometry());
     _setting.syncronizeSettings();
     emit s_formClose();
@@ -23,7 +24,7 @@ FormContainerAchievements::~FormContainerAchievements() {
     delete ui;
 }
 
-void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer aPl, SProfile aProfile, SGame aGame, int aNum) {
+void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer &aPl, SProfile aProfile, SGame aGame, int aNum) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); i++) {
         FormAchievements *tab = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements[0].widget(i));
         if (tab) {

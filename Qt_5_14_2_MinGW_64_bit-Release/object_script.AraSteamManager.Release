@@ -1,5 +1,7 @@
 release/formachievements.o
+release/formachievementwidget.o
 release/formcategoryvalue.o
+release/formcategoryvalue_2.o
 release/formcompareprofilefilter.o
 release/formtablesheaders.o
 release/formfavorites.o
@@ -38,7 +40,9 @@ release/qradiobuttonwithdata.o
 release/qrc_resimg.o
 release/qrc_lang.o
 release/moc_formachievements.o
+release/moc_formachievementwidget.o
 release/moc_formcategoryvalue.o
+release/moc_formcategoryvalue_2.o
 release/moc_formcompareprofilefilter.o
 release/moc_formtablesheaders.o
 release/moc_formfavorites.o

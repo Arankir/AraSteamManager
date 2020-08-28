@@ -56,7 +56,7 @@ public:
 
 public slots:
     void progressLoading(int,int);
-    void addAchievements(SAchievementsPlayer achievements,SGame games);
+    void addAchievements(SAchievementsPlayer &achievements, SGame games);
     void removeAchievements(int index);
     void containerAchievementsClose();
     void returnFromAchievements(int num);

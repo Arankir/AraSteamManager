@@ -602,7 +602,7 @@ void MainWindow::progressLoading(int aProgress, int) {
 }
 
 #define ContainerAchievementsStart {
-void MainWindow::addAchievements(SAchievementsPlayer aAchievements, SGame aGames) {
+void MainWindow::addAchievements(SAchievementsPlayer &aAchievements, SGame aGames) {
     if (_achievementsCount == 0) {
         _containerAchievementsForm = new FormContainerAchievements();
         connect(_containerAchievementsForm ,&FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
@@ -617,6 +617,7 @@ void MainWindow::addAchievements(SAchievementsPlayer aAchievements, SGame aGames
 }
 
 void MainWindow::removeAchievements(int index) {
+    Q_UNUSED(index);
     _achievementsCount--;
 }
 
@@ -637,7 +638,7 @@ void MainWindow::returnFromAchievements(int aNum) {
 #define FormsCreateStart {
 FormProfile *MainWindow::createFormProfile(SProfile aProfile) {
     FormProfile *newFormProfile = new FormProfile(aProfile);
-    newFormProfile->setSizePolicy(QSizePolicy(QSizePolicy::Preferred,QSizePolicy::Minimum));
+    newFormProfile->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum));
     connect(newFormProfile, &FormProfile::s_goToGames,       this,           &MainWindow::goToGames);
     connect(newFormProfile, &FormProfile::s_goToFriends,     this,           &MainWindow::goToFriends);
     connect(newFormProfile, &FormProfile::s_goToStatistic,   this,           &MainWindow::goToStatistics);

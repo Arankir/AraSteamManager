@@ -73,6 +73,7 @@ void FormStatistics::retranslate() {
                                         tr("по начатым играм"),
                                         QString::number(_totalAverage / (_numof[1] + _numof[2]))));
     QList<QAbstractSeries*> series = _donutBreakdown->series();
+    //Using fall-through
     switch (series.size()) {
     default: {
 

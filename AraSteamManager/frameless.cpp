@@ -48,6 +48,7 @@ void FrameLess::mouseHover(QHoverEvent *e) {
 }
 
 void FrameLess::mouseLeave(QEvent *e) {
+    Q_UNUSED(e);
     if (!_leftButtonPressed) {
         _target->unsetCursor();
     }
