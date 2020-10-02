@@ -2,8 +2,8 @@
 #define FORMCOMPAREPROFILEFILTER_H
 
 #include <QWidget>
-#include <class/settings.h>
-#include <subwidget/qradiobuttonwithdata.h>
+#include "class/settings.h"
+#include "subwidget/qradiobuttonwithdata.h"
 #include <QDebug>
 
 namespace Ui {
@@ -15,11 +15,11 @@ class FormCompareProfileFilter: public QWidget {
 
 public:
     explicit FormCompareProfileFilter(QWidget *parent = nullptr);
-    explicit FormCompareProfileFilter(QString, QString, QString, QWidget *parent = nullptr);
+    explicit FormCompareProfileFilter(const QString &all, const QString &reached, const QString &notReached, QWidget *parent = nullptr);
     ~FormCompareProfileFilter();
-    void setName(QString Aname);
-    void setIndex(QString Aindex);
-    void setTitles(QString titleAll, QString titleReached, QString titleNotReached);
+    void setName(const QString &name);
+    void setIndex(const QString &index);
+    void setTitles(const QString &titleAll, const QString &titleReached, const QString &titleNotReached);
     QString getName();
     QString getIndex();
     void setType(ReachedType);
@@ -29,7 +29,7 @@ public slots:
     void updateSettings();
     void setIcons();
 signals:
-    void s_radioButtonChange(QString name, ReachedType type);
+    void s_radioButtonChange(const QString &name, ReachedType type);
 
 private slots:
     void changeEvent(QEvent *event);

@@ -2,7 +2,7 @@
 #define FORMCATEGORYVALUE_H
 
 #include <QWidget>
-#include <class/settings.h>
+#include "class/settings.h"
 
 enum class EnabledUpDown{
     none,

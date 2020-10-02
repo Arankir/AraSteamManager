@@ -13,15 +13,15 @@
 #include <QEventLoop>
 #include <QTextCodec>
 #include <QObject>
-#include <class/settings.h>
-#include <class/statusvalue.h>
-#include <class/Network/requestimage.h>
+#include "class/settings.h"
+#include "class/statusvalue.h"
+#include "class/Network/requestimage.h"
 
 class SGame : public QObject {
     Q_OBJECT
 public:
-    explicit SGame(QJsonObject game, QObject *parent = nullptr);
-    void Set(QJsonObject objGame);
+    explicit SGame(QJsonObject &game, QObject *parent = nullptr);
+    void Set(QJsonObject &objGame);
     const int _appID;
     const QString _name;
     const int _playtime_2weeks;
@@ -29,7 +29,7 @@ public:
     const bool _has_community_visible_stats;
     const QString _img_icon_url;
     const QString _img_logo_url;
-    const QString getNumberPlayers(bool hardreload);
+    const QString getNumberPlayers(bool hardReload);
     QPixmap getPixmapIcon();
     QPixmap getPixmapLogo();
     SGame(const SGame &game);
@@ -49,12 +49,12 @@ private:
 class SGames : public QObject {
     Q_OBJECT
 public:
-    explicit SGames(QString id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
-    SGames(QJsonDocument docGames, QObject *parent = nullptr);
+    explicit SGames(const QString &id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
+    SGames(QJsonDocument &docGames, QObject *parent = nullptr);
     SGames(QObject *parent);
     ~SGames();
-    void set(QString id, bool free_games, bool game_info, bool parallel);
-    void set(QJsonDocument docGames);
+    void set(const QString &id, bool free_games, bool game_info, bool parallel);
+    void set(QJsonDocument &docGames);
     int getAppid(int index);
     QString getID();
     StatusValue getStatus();

@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QTableWidget>
 #include <QLabel>
-#include <class/Network/requestdata.h>
-#include <class/steamapi/Sachievements.h>
+#include "class/Network/requestdata.h"
+#include "class/steamapi/Sachievements.h"
 
 class ThreadAchievements : public QObject {
     Q_OBJECT

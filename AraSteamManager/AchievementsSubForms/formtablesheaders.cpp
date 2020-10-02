@@ -18,7 +18,7 @@ constexpr int c_tableAchievementColumnReachedMy = 5;
 constexpr int c_tableAchievementColumnCount = 6;
 #define ConstantsEnd }
 
-FormTablesHeaders::FormTablesHeaders(SGame aGame, QString aId, SAchievementsPlayer aPlayer, QWidget *aParent): QWidget(aParent),
+FormTablesHeaders::FormTablesHeaders(SGame &aGame, const QString &aId, SAchievementsPlayer &aPlayer, QWidget *aParent): QWidget(aParent),
 ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false), _id(aId), _achievements(aPlayer) {
     ui->setupUi(this);
     ui->TableWidgetContent->setRowCount(0);
@@ -293,12 +293,12 @@ void FormTablesHeaders::setVisibleRowHeaders(int aRow, bool aVisible) {
     ui->TableWidgetHorizontalHeader->setRowHidden(aRow, !aVisible);
 }
 
-void FormTablesHeaders::setHorizontalTitle(int aColumn, QString aText) {
+void FormTablesHeaders::setHorizontalTitle(int aColumn, const QString &aText) {
     ui->TableWidgetHorizontalHeader->setHorizontalHeaderItem(aColumn, new QTableWidgetItem(aText));
     ui->TableWidgetContent->setHorizontalHeaderItem(aColumn, new QTableWidgetItem(aText));
 }
 
-void FormTablesHeaders::changeHorizontalTitle(int aColumn, QString aText) {
+void FormTablesHeaders::changeHorizontalTitle(int aColumn, const QString &aText) {
     ui->TableWidgetHorizontalHeader->horizontalHeaderItem(aColumn)->setText(aText);
     ui->TableWidgetContent->horizontalHeaderItem(aColumn)->setText(aText);
 }
@@ -483,7 +483,7 @@ void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
     updateHiddenRows();
 }
 
-void FormTablesHeaders::categoryToTable(QString aTitle, QList<QString> aNoValues, QJsonArray aValues, bool aIsNoValue) {
+void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aNoValues, QJsonArray aValues, bool aIsNoValue) {
     if (_currentType == TableType::standart) {
         setColumnCount(c_tableAchievementColumnCount);
         _categoriesColumns.clear();
@@ -561,7 +561,7 @@ void FormTablesHeaders::cancelCategory() {
 #define CategoryEnd }
 
 #define Friends {
-bool FormTablesHeaders::addFriendColumn(SProfile aFriendProfile) {
+bool FormTablesHeaders::addFriendColumn(SProfile &aFriendProfile) {
     int column=ui->TableWidgetContent->columnCount();
     insertColumn(column);
     changeHorizontalTitle(column, aFriendProfile._personaName);
@@ -609,7 +609,7 @@ bool FormTablesHeaders::addFriendColumn(SProfile aFriendProfile) {
     }
 }
 
-void FormTablesHeaders::removeFriendColumn(QString aFriendName) {
+void FormTablesHeaders::removeFriendColumn(const QString &aFriendName) {
     int columnFriend = 0;
     int indexFriend = 0;
     for (auto &column: _friendsColumns) {
@@ -636,7 +636,7 @@ void FormTablesHeaders::removeFriendColumn(int aColumn) {
     }
 }
 
-void FormTablesHeaders::updateFilterWithFriend(QString aFriendName, ReachedType aType) {
+void FormTablesHeaders::updateFilterWithFriend(const QString &aFriendName, ReachedType aType) {
     int columnFriend = 0;
     for (auto &column: _friendsColumns) {
         if (ui->TableWidgetHorizontalHeader->horizontalHeaderItem(column)->text() == aFriendName){
@@ -877,7 +877,7 @@ void FormTablesHeaders::updateFilterFavorite(QJsonArray aFavoritesAchievement) {
     updateHiddenRows();
 }
 
-void FormTablesHeaders::updateFilterTextAchievement(QString aNewText, bool aSolo, bool aCompare) {
+void FormTablesHeaders::updateFilterTextAchievement(const QString &aNewText, bool aSolo, bool aCompare) {
     if (aSolo) {
         if (aCompare) {
             for (int i = 0; i < getRowCount(); i++) {

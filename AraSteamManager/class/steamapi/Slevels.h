@@ -11,24 +11,24 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
-#include <class/settings.h>
-#include <class/statusvalue.h>
+#include "class/settings.h"
+#include "class/statusvalue.h"
 #include <QObject>
 
 class SLevels : public QObject
 {
     Q_OBJECT
 public:
-    explicit SLevels(QString id, QObject *parent = nullptr);
-    SLevels(QJsonDocument docLevels, QObject *parent = nullptr);
+    explicit SLevels(const QString &id, QObject *parent = nullptr);
+    SLevels(QJsonDocument &docLevels, QObject *parent = nullptr);
     SLevels(QObject *parent = nullptr);;
     ~SLevels();
-    void Set(QString id);
-    void Set(QJsonDocument docLevel);
-    int GetLevel();
-    StatusValue GetStatus();
-    QString GetError();
-    void Update();
+    void set(const QString &id);
+    void set(QJsonDocument &docLevel);
+    int getLevel();
+    StatusValue getStatus();
+    QString getError();
+    void update();
 
 signals:
     void s_finished(SLevels*);
@@ -36,7 +36,7 @@ signals:
 
 private slots:
     //void Load(QNetworkReply *Reply);
-    void Load();
+    void load();
 
 private:
     QNetworkAccessManager *_manager;

@@ -1,10 +1,10 @@
 #include "favorites.h"
 
-Favorites::Favorites(QString aPath, QString aType, QObject *aParent): QObject(aParent), _path(aPath) {
+Favorites::Favorites(const QString &aPath, const QString &aType, QObject *aParent): QObject(aParent), _path(aPath) {
     init(aType);
 }
 
-Favorites::Favorites(QString aType, QObject *aParent): QObject(aParent), _path(_setting._pathFavorites+aType+".json") {
+Favorites::Favorites(const QString &aType, QObject *aParent): QObject(aParent), _path(_setting._pathFavorites+aType+".json") {
     init(aType);
 }
 
@@ -12,12 +12,12 @@ Favorites::Favorites(QObject *aParent): QObject(aParent) {
 
 }
 
-void Favorites::setType(QString aType) {
+void Favorites::setType(const QString &aType) {
     _path = _setting._pathFavorites + aType + ".json";
     init(aType);
 }
 
-void Favorites::init(QString aType) {
+void Favorites::init(const QString &aType) {
     Settings::createDir(_path);
     if (!QFile::exists(_path)) {
         QJsonObject obj;
@@ -30,7 +30,7 @@ void Favorites::init(QString aType) {
     load();
 }
 
-QJsonArray Favorites::getValues(QJsonObject aGame) {
+QJsonArray Favorites::getValues(QJsonObject &aGame) {
     for(auto value: _favorites.value("Values").toArray()) {
         if(value.toObject().value("game").toObject() == aGame) {
             return value.toObject().value("Values").toArray();
@@ -39,15 +39,15 @@ QJsonArray Favorites::getValues(QJsonObject aGame) {
     return QJsonArray();
 }
 
-bool Favorites::addValue(QJsonObject aNewValue, bool aDeleteIfExist) {
+bool Favorites::addValue(QJsonObject &aNewValue, bool aDeleteIfExist) {
     return addValue(aNewValue, aDeleteIfExist, jsonType::object);
 }
 
-bool Favorites::addValue(QJsonArray aNewValue, bool aDeleteIfExist) {
+bool Favorites::addValue(QJsonArray &aNewValue, bool aDeleteIfExist) {
     return addValue(aNewValue, aDeleteIfExist, jsonType::array);
 }
 
-bool Favorites::addValue(QJsonObject aGame, QJsonObject aNewValue, bool aDeleteIfExist) {
+bool Favorites::addValue(QJsonObject &aGame, QJsonObject &aNewValue, bool aDeleteIfExist) {
     Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
@@ -125,15 +125,15 @@ bool Favorites::addValue(QJsonValue aNewValue, bool aDeleteIfExist, jsonType aTy
     return true;
 }
 
-void Favorites::removeValue(QJsonObject aNewValue) {
+void Favorites::removeValue(QJsonObject &aNewValue) {
     return removeValue(QJsonValue(aNewValue));
 }
 
-void Favorites::removeValue(QJsonArray aNewValue) {
+void Favorites::removeValue(QJsonArray &aNewValue) {
     return removeValue(QJsonValue(aNewValue));
 }
 
-bool Favorites::removeValue(QJsonObject aGame, QJsonObject aNewValue) {
+bool Favorites::removeValue(QJsonObject &aGame, QJsonObject &aNewValue) {
     Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
@@ -190,7 +190,7 @@ void Favorites::removeValue(QJsonValue aNewValue) {
     save();
 }
 
-void Favorites::removeGame(QJsonObject aGame) {
+void Favorites::removeGame(QJsonObject &aGame) {
     Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"]=_favorites["Type"];
@@ -205,7 +205,7 @@ void Favorites::removeGame(QJsonObject aGame) {
     save();
 }
 
-int Favorites::addGame(QJsonObject aGame) {
+int Favorites::addGame(QJsonObject &aGame) {
     Settings::createDir(_path);
     QJsonObject obj;
     obj["Type"] = _favorites["Type"];
@@ -228,7 +228,7 @@ int Favorites::addGame(QJsonObject aGame) {
     return arr.size()-1;
 }
 
-bool Favorites::isInFavorites(QJsonObject aGame, QString aId) {
+bool Favorites::isInFavorites(QJsonObject &aGame, const QString &aId) {
     QJsonArray favorites = getValues(aGame);
     return std::any_of(favorites.cbegin(), favorites.cend(),
                                       [=](QJsonValue id) { return aId == id.toObject().value("id").toString(); } );

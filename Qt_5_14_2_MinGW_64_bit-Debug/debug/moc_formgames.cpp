@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
     QByteArrayData data[52];
-    char stringdata0[702];
+    char stringdata0[703];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,54 +42,54 @@ QT_MOC_LITERAL(6, 70, 5), // "width"
 QT_MOC_LITERAL(7, 76, 18), // "s_showAchievements"
 QT_MOC_LITERAL(8, 95, 20), // "SAchievementsPlayer&"
 QT_MOC_LITERAL(9, 116, 12), // "achievements"
-QT_MOC_LITERAL(10, 129, 5), // "SGame"
-QT_MOC_LITERAL(11, 135, 5), // "games"
-QT_MOC_LITERAL(12, 141, 13), // "onTablePushed"
-QT_MOC_LITERAL(13, 155, 14), // "updateSettings"
-QT_MOC_LITERAL(14, 170, 19), // "showHideSlideWidget"
-QT_MOC_LITERAL(15, 190, 6), // "f_flag"
-QT_MOC_LITERAL(16, 197, 14), // "mouseMoveEvent"
-QT_MOC_LITERAL(17, 212, 12), // "QMouseEvent*"
-QT_MOC_LITERAL(18, 225, 2), // "ev"
-QT_MOC_LITERAL(19, 228, 19), // "enableMouseTracking"
-QT_MOC_LITERAL(20, 248, 11), // "QObjectList"
-QT_MOC_LITERAL(21, 260, 9), // "aChildren"
-QT_MOC_LITERAL(22, 270, 11), // "changeEvent"
-QT_MOC_LITERAL(23, 282, 7), // "QEvent*"
-QT_MOC_LITERAL(24, 290, 5), // "event"
-QT_MOC_LITERAL(25, 296, 14), // "initComponents"
-QT_MOC_LITERAL(26, 311, 8), // "setIcons"
-QT_MOC_LITERAL(27, 320, 11), // "retranslate"
-QT_MOC_LITERAL(28, 332, 20), // "onResultAchievements"
-QT_MOC_LITERAL(29, 353, 20), // "SAchievementsPlayer*"
-QT_MOC_LITERAL(30, 374, 3), // "ach"
-QT_MOC_LITERAL(31, 378, 10), // "closeEvent"
-QT_MOC_LITERAL(32, 389, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(33, 402, 11), // "resizeEvent"
-QT_MOC_LITERAL(34, 414, 13), // "QResizeEvent*"
-QT_MOC_LITERAL(35, 428, 24), // "lineEditGame_TextChanged"
-QT_MOC_LITERAL(36, 453, 9), // "aFindText"
-QT_MOC_LITERAL(37, 463, 18), // "buttonFind_Clicked"
-QT_MOC_LITERAL(38, 482, 34), // "tableWidgetGames_CellDoubleCl..."
-QT_MOC_LITERAL(39, 517, 3), // "row"
-QT_MOC_LITERAL(40, 521, 6), // "column"
-QT_MOC_LITERAL(41, 528, 28), // "tableWidgetGames_CellClicked"
-QT_MOC_LITERAL(42, 557, 26), // "buttonAchievements_Clicked"
-QT_MOC_LITERAL(43, 584, 22), // "buttonFavorite_Clicked"
-QT_MOC_LITERAL(44, 607, 18), // "buttonHide_Clicked"
-QT_MOC_LITERAL(45, 626, 12), // "createThread"
-QT_MOC_LITERAL(46, 639, 15), // "hideHiddenGames"
-QT_MOC_LITERAL(47, 655, 10), // "createMenu"
-QT_MOC_LITERAL(48, 666, 6), // "QMenu*"
-QT_MOC_LITERAL(49, 673, 5), // "aGame"
-QT_MOC_LITERAL(50, 679, 6), // "aIndex"
-QT_MOC_LITERAL(51, 686, 15) // "loadHiddenGames"
+QT_MOC_LITERAL(10, 129, 6), // "SGame&"
+QT_MOC_LITERAL(11, 136, 5), // "games"
+QT_MOC_LITERAL(12, 142, 13), // "onTablePushed"
+QT_MOC_LITERAL(13, 156, 14), // "updateSettings"
+QT_MOC_LITERAL(14, 171, 19), // "showHideSlideWidget"
+QT_MOC_LITERAL(15, 191, 6), // "f_flag"
+QT_MOC_LITERAL(16, 198, 14), // "mouseMoveEvent"
+QT_MOC_LITERAL(17, 213, 12), // "QMouseEvent*"
+QT_MOC_LITERAL(18, 226, 2), // "ev"
+QT_MOC_LITERAL(19, 229, 19), // "enableMouseTracking"
+QT_MOC_LITERAL(20, 249, 11), // "QObjectList"
+QT_MOC_LITERAL(21, 261, 9), // "aChildren"
+QT_MOC_LITERAL(22, 271, 11), // "changeEvent"
+QT_MOC_LITERAL(23, 283, 7), // "QEvent*"
+QT_MOC_LITERAL(24, 291, 5), // "event"
+QT_MOC_LITERAL(25, 297, 14), // "initComponents"
+QT_MOC_LITERAL(26, 312, 8), // "setIcons"
+QT_MOC_LITERAL(27, 321, 11), // "retranslate"
+QT_MOC_LITERAL(28, 333, 20), // "onResultAchievements"
+QT_MOC_LITERAL(29, 354, 20), // "SAchievementsPlayer*"
+QT_MOC_LITERAL(30, 375, 3), // "ach"
+QT_MOC_LITERAL(31, 379, 10), // "closeEvent"
+QT_MOC_LITERAL(32, 390, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(33, 403, 11), // "resizeEvent"
+QT_MOC_LITERAL(34, 415, 13), // "QResizeEvent*"
+QT_MOC_LITERAL(35, 429, 24), // "lineEditGame_TextChanged"
+QT_MOC_LITERAL(36, 454, 9), // "aFindText"
+QT_MOC_LITERAL(37, 464, 18), // "buttonFind_Clicked"
+QT_MOC_LITERAL(38, 483, 34), // "tableWidgetGames_CellDoubleCl..."
+QT_MOC_LITERAL(39, 518, 3), // "row"
+QT_MOC_LITERAL(40, 522, 6), // "column"
+QT_MOC_LITERAL(41, 529, 28), // "tableWidgetGames_CellClicked"
+QT_MOC_LITERAL(42, 558, 26), // "buttonAchievements_Clicked"
+QT_MOC_LITERAL(43, 585, 22), // "buttonFavorite_Clicked"
+QT_MOC_LITERAL(44, 608, 18), // "buttonHide_Clicked"
+QT_MOC_LITERAL(45, 627, 12), // "createThread"
+QT_MOC_LITERAL(46, 640, 15), // "hideHiddenGames"
+QT_MOC_LITERAL(47, 656, 10), // "createMenu"
+QT_MOC_LITERAL(48, 667, 6), // "QMenu*"
+QT_MOC_LITERAL(49, 674, 5), // "aGame"
+QT_MOC_LITERAL(50, 680, 6), // "aIndex"
+QT_MOC_LITERAL(51, 687, 15) // "loadHiddenGames"
 
     },
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
     "s_achievementsLoaded\0s_finish\0width\0"
     "s_showAchievements\0SAchievementsPlayer&\0"
-    "achievements\0SGame\0games\0onTablePushed\0"
+    "achievements\0SGame&\0games\0onTablePushed\0"
     "updateSettings\0showHideSlideWidget\0"
     "f_flag\0mouseMoveEvent\0QMouseEvent*\0"
     "ev\0enableMouseTracking\0QObjectList\0"
@@ -208,7 +208,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 13: _t->onResultAchievements((*reinterpret_cast< SAchievementsPlayer*(*)>(_a[1]))); break;
         case 14: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 15: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
-        case 16: _t->lineEditGame_TextChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 16: _t->lineEditGame_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 17: _t->buttonFind_Clicked(); break;
         case 18: _t->tableWidgetGames_CellDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 19: _t->tableWidgetGames_CellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
@@ -264,7 +264,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             }
         }
         {
-            using _t = void (FormGames::*)(SAchievementsPlayer & , SGame );
+            using _t = void (FormGames::*)(SAchievementsPlayer & , SGame & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormGames::s_showAchievements)) {
                 *result = 3;
                 return;
@@ -335,7 +335,7 @@ void FormGames::s_finish(int _t1)
 }
 
 // SIGNAL 3
-void FormGames::s_showAchievements(SAchievementsPlayer & _t1, SGame _t2)
+void FormGames::s_showAchievements(SAchievementsPlayer & _t1, SGame & _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);

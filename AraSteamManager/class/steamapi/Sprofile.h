@@ -11,9 +11,9 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
-#include <class/settings.h>
-#include <class/statusvalue.h>
-#include <class/Network/requestimage.h>
+#include "class/settings.h"
+#include "class/statusvalue.h"
+#include "class/Network/requestimage.h"
 #include <QObject>
 
 enum class ProfileUrlType {
@@ -24,7 +24,8 @@ enum class ProfileUrlType {
 class SProfile : public QObject {
     Q_OBJECT
 public:
-    SProfile(QJsonObject profile = QJsonObject(), QObject *parent = nullptr);
+    SProfile(QJsonObject &profile, QObject *parent = nullptr);
+    SProfile(QObject *parent = nullptr);
     ~SProfile();
 
     /*const*/ QString _steamID;
@@ -64,7 +65,7 @@ signals:
 private slots:
     void loadURL(RequestData *request);
     void loading(bool parallel);
-    void set(QJsonObject ObjSummaries);
+    void set(QJsonObject &ObjSummaries);
 
 private:
     QString _avatar;
@@ -86,16 +87,16 @@ public slots:
     void loadVanity(RequestData *request);
 
 public:
-    explicit SProfiles(QString id, bool parallel, ProfileUrlType type, QObject *parent = nullptr);
-    SProfiles(QJsonDocument docSummaries, QObject *parent = nullptr);
-    SProfiles(QJsonArray arrSummaries, QObject *parent = nullptr);
-    SProfiles(QJsonObject objSummaries, QObject *parent = nullptr);
+    explicit SProfiles(const QString &id, bool parallel, ProfileUrlType type, QObject *parent = nullptr);
+    SProfiles(QJsonDocument &docSummaries, QObject *parent = nullptr);
+    SProfiles(QJsonArray &arrSummaries, QObject *parent = nullptr);
+    SProfiles(QJsonObject &objSummaries, QObject *parent = nullptr);
     SProfiles(QObject *parent = nullptr);
     ~SProfiles();
-    void set(QString id, bool parallel, ProfileUrlType type);
-    void set(QJsonDocument docSummaries);
-    void set(QJsonArray arrSummaries);
-    void set(QJsonObject objSummaries);
+    void set(const QString &id, bool parallel, ProfileUrlType type);
+    void set(QJsonDocument &docSummaries);
+    void set(QJsonArray &arrSummaries);
+    void set(QJsonObject &objSummaries);
     QString getSteamid(int index = 0);
     int getCommunityvisibilitystate(int index = 0);
     int getProfilestate(int index = 0);

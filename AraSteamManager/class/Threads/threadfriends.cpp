@@ -33,7 +33,7 @@ int ThreadFriends::fill() {
     return 1;
 }
 
-QTableWidgetItem *ThreadFriends::getState(QString aGameExtraInfo, int aPersonaState) {
+QTableWidgetItem *ThreadFriends::getState(const QString &aGameExtraInfo, int aPersonaState) {
     QTableWidgetItem *item = new QTableWidgetItem;
     if (!aGameExtraInfo.isEmpty()) {
         item->setText(tr("В игре"));

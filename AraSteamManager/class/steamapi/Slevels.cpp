@@ -1,10 +1,10 @@
 #include "Slevels.h"
 
-SLevels::SLevels(QString aId, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _steamid(aId) {
-    Load();
+SLevels::SLevels(const QString &aId, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _steamid(aId) {
+    load();
 }
-SLevels::SLevels(QJsonDocument aLvls, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()) {
-    Set(aLvls);
+SLevels::SLevels(QJsonDocument &aLvls, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()) {
+    set(aLvls);
 }
 
 SLevels::SLevels(QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager()), _status(StatusValue::none) {
@@ -15,44 +15,45 @@ SLevels::~SLevels() {
     delete _manager;
 }
 
-void SLevels::Set(QString aId) {
+void SLevels::set(const QString &aId) {
     _steamid = std::move(aId);
-    Load();
+    load();
     emit s_finished(this);
     emit s_finished();
 }
 
-void SLevels::Update() {
-    Load();
+void SLevels::update() {
+    load();
 }
 
-void SLevels::Load() {
+void SLevels::load() {
     QEventLoop loop;
     connect(_manager,&QNetworkAccessManager::finished,&loop,&QEventLoop::quit);
-    QNetworkReply& reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key="+Settings::getKey()+"&steamid="+_steamid));
+    QNetworkReply& reply = *_manager->get(QNetworkRequest("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=" + Settings::getKey() + "&steamid=" + _steamid));
     loop.exec();
-    Set(QJsonDocument::fromJson(reply.readAll()));
+    QJsonDocument doc = QJsonDocument::fromJson(reply.readAll());
+    set(doc);
 }
 
-void SLevels::Set(QJsonDocument a_lvls){
-    int lvl = a_lvls.object().value("response").toObject().value("player_level").toInt();
+void SLevels::set(QJsonDocument &aLvls) {
+    int lvl = aLvls.object().value("response").toObject().value("player_level").toInt();
     if (lvl > 0) {
         _player_level = std::move(lvl);
-        _status = std::move(StatusValue::success);
+        _status = StatusValue::success;
     } else {
-        _status = std::move(StatusValue::error);
-        _error = std::move("profile is not exist");
+        _status = StatusValue::error;
+        _error = "profile is not exist";
     }
 }
 
-int SLevels::GetLevel() {
+int SLevels::getLevel() {
     return _player_level;
 }
 
-StatusValue SLevels::GetStatus() {
+StatusValue SLevels::getStatus() {
     return _status;
 }
 
-QString SLevels::GetError() {
+QString SLevels::getError() {
     return _error;
 }

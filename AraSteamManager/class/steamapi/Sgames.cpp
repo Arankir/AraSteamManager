@@ -1,15 +1,15 @@
 #include "Sgames.h"
 
 #define SGameStart {
-SGame::SGame(QJsonObject aGame, QObject *aParent): QObject(aParent), _appID(aGame.value("appid").toInt()), _name(aGame.value("name").toString()),
+SGame::SGame(QJsonObject &aGame, QObject *aParent): QObject(aParent), _appID(aGame.value("appid").toInt()), _name(aGame.value("name").toString()),
 _playtime_2weeks(aGame.value("playtime_2weeks").toInt()), _playtime_forever(aGame.value("playtime_forever").toInt()),
 _has_community_visible_stats(aGame.value("has_community_visible_stats").toBool()), _img_icon_url(aGame.value("img_icon_url").toString()),
 _img_logo_url(aGame.value("img_logo_url").toString()) {
 
 }
 
-const QString SGame::getNumberPlayers(bool aHardReload){
-    if (_numberPlayers == "" || aHardReload) {
+const QString SGame::getNumberPlayers(bool hardReload){
+    if (_numberPlayers == "" || hardReload) {
         QNetworkAccessManager manager;
         QEventLoop loop;
         QObject::connect(&manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
@@ -86,11 +86,11 @@ const bool &SGame::operator<(const SGame &aGame) {
 }
 #define SGameEnd }
 #define SGamesStart {
-SGames::SGames(QString aId, bool aFreeGames, bool aGameInfo, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager), _id(aId) {
+SGames::SGames(const QString &aId, bool aFreeGames, bool aGameInfo, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager) {
     set(aId, aFreeGames, aGameInfo, aParallel);
 }
 
-SGames::SGames(QJsonDocument aGames, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager) {
+SGames::SGames(QJsonDocument &aGames, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager) {
     set(aGames);
 }
 
@@ -102,8 +102,8 @@ SGames::~SGames() {
     delete _manager;
 }
 
-void SGames::set(QString aId, bool aFreeGames, bool aGameInfo, bool aParallel) {
-    _id = std::move(aId);
+void SGames::set(const QString &aId, bool aFreeGames, bool aGameInfo, bool aParallel) {
+    _id = aId;
     QString request = QString("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=%1%2%3&format=json&steamid=%4").arg(
                 Settings::getKey(),
                 aFreeGames ? "&include_played_free_games=1" : "",
@@ -118,19 +118,21 @@ void SGames::set(QString aId, bool aFreeGames, bool aGameInfo, bool aParallel) {
         QNetworkReply *reply = _manager->get(QNetworkRequest(request));
         loop.exec();
         disconnect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        set(QJsonDocument::fromJson(reply->readAll()));
+        QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+        set(doc);
         delete reply;
         emit s_finished(this);
         emit s_finished();
     }
 }
 
-void SGames::set(QJsonDocument aGames){
+void SGames::set(QJsonDocument &aGames){
     clear();
     QJsonArray gamesArray = aGames.object().value("response").toObject().value("games").toArray();
     if (gamesArray.size() > 0) {
         for (auto game: gamesArray) {
-            _games.append(std::move(SGame(game.toObject())));
+            QJsonObject objectGame = game.toObject();
+            _games.append(std::move(SGame(objectGame)));
         }
         _status = StatusValue::success;
     } else {
@@ -161,7 +163,8 @@ int SGames::getCount() {
 
 void SGames::onLoad(QNetworkReply *aReply) {
     disconnect(_manager, &QNetworkAccessManager::finished, this, &SGames::onLoad);
-    set(QJsonDocument::fromJson(aReply->readAll()));
+    QJsonDocument doc = QJsonDocument::fromJson(aReply->readAll());
+    set(doc);
     aReply->deleteLater();
     emit s_finished(this);
     emit s_finished();
@@ -174,6 +177,9 @@ void SGames::clear() {
 }
 void SGames::sort() {
     //Переделать нормально
+//    std::sort(_games.begin(), _games.end(), [](const SGame &s1, const SGame &s2)-> const bool {
+//        return QString::compare(s1._name.toLower(), s2._name.toLower()) < 0;
+//    });
     std::list<SGame> list(_games.begin(), _games.end());
     list.sort([](const SGame &s1, const SGame &s2)-> const bool {
         return QString::compare(s1._name.toLower(), s2._name.toLower()) < 0;

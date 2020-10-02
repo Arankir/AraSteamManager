@@ -23,14 +23,14 @@ constexpr int c_CategoriesEditHeight              = 300;
 #define ConstantsEnd }
 
 #define Init {
-FormAchievements::FormAchievements(SAchievementsPlayer aPlayer, SProfile aProfile, SGame aGame, int aUnicNum, QWidget *aParent): QWidget(aParent), ui(new Ui::FormAchievements),
+FormAchievements::FormAchievements(SAchievementsPlayer &aPlayer, SProfile &aProfile, SGame &aGame, int aUnicNum, QWidget *aParent): QWidget(aParent), ui(new Ui::FormAchievements),
 _achievements(aPlayer), _profile(aProfile), _game(aGame), _unicNum(aUnicNum), _categoriesGame(_game), _favorites("achievements") {
     ui->setupUi(this);
     initComponents(aPlayer);
     ui->LineEditNameAchievements->setFocus();
 }
 
-void FormAchievements::initComponents(SAchievementsPlayer aPlayer) {
+void FormAchievements::initComponents(SAchievementsPlayer &aPlayer) {
     #define LoadData {
     this->setAttribute(Qt::WA_TranslucentBackground);
 
@@ -284,7 +284,7 @@ void FormAchievements::setIcons() {
     }
 }
 
-QButtonWithData *FormAchievements::createButtonWithData(QString aObjectName, QString aAppertain, QString aType, bool aChecked) {
+QButtonWithData *FormAchievements::createButtonWithData(const QString &aObjectName, const QString &aAppertain, const QString &aType, bool aChecked) {
     QButtonWithData *button = new QButtonWithData("", this);
     button->setObjectName(aObjectName);
     button->AddData("Appertain", aAppertain);
@@ -432,7 +432,7 @@ void FormAchievements::finishLoadFriends() {
     ui->TableWidgetFriends->setVisible(_currentMode == FormMode::compare);
 }
 
-void FormAchievements::compareProfileFilterClickFriends(QString aName, ReachedType aType) {
+void FormAchievements::compareProfileFilterClickFriends(const QString &aName, ReachedType aType) {
     QLabel *friendAvatar = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0, aName.toInt()));
     if (friendAvatar) {
         QString name = friendAvatar->toolTip();

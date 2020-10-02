@@ -1,6 +1,6 @@
 #include "threadstatistics.h"
 
-ThreadStatistics::ThreadStatistics(SGames aGames, QString aId, QVector<int> &aNumOf, QVector<QPair<QString, QString> > &aComplete,
+ThreadStatistics::ThreadStatistics(SGames &aGames, const QString &aId, QVector<int> &aNumOf, QVector<QPair<QString, QString> > &aComplete,
                                    QVector<QPair<QString, QString> > &aStarted, QVector<QPair<QString, QString> > &aNotStarted,
                                    QVector<double> &aAveragePercent, int &aSummColumn, QVector<int> &aTimes, QVector<int> &aMonths,
                                    QVector<QPair<QString, int> > &aYears, QObject *aParent): QObject(aParent), _id(aId), _games(aGames), _averagePercent(&aAveragePercent),

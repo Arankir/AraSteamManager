@@ -2,14 +2,14 @@
 #define FORMFAVORITES_H
 
 #include <QWidget>
-#include <class/favorites.h>
-#include <class/steamapi/Sfriends.h>
-#include <class/steamapi/Sprofile.h>
-#include <class/steamapi/Sgames.h>
-#include <class/steamapi/Sachievements.h>
-#include <class/filter.h>
-#include <class/settings.h>
-#include <class/Network/requestimage.h>
+#include "class/favorites.h"
+#include "class/steamapi/Sfriends.h"
+#include "class/steamapi/Sprofile.h"
+#include "class/steamapi/Sgames.h"
+#include "class/steamapi/Sachievements.h"
+#include "class/filter.h"
+#include "class/settings.h"
+#include "class/Network/requestimage.h"
 
 namespace Ui {
 class FormFavorites;

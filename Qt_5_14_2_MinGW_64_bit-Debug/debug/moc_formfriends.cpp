@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriends_t {
     QByteArrayData data[45];
-    char stringdata0[606];
+    char stringdata0[607];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -56,27 +56,27 @@ QT_MOC_LITERAL(20, 192, 3), // "aDo"
 QT_MOC_LITERAL(21, 196, 13), // "onTablePulled"
 QT_MOC_LITERAL(22, 210, 12), // "createThread"
 QT_MOC_LITERAL(23, 223, 14), // "initComponents"
-QT_MOC_LITERAL(24, 238, 8), // "SFriends"
-QT_MOC_LITERAL(25, 247, 8), // "aFriends"
-QT_MOC_LITERAL(26, 256, 10), // "closeEvent"
-QT_MOC_LITERAL(27, 267, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(28, 280, 11), // "retranslate"
-QT_MOC_LITERAL(29, 292, 8), // "setIcons"
-QT_MOC_LITERAL(30, 301, 16), // "updateHiddenRows"
-QT_MOC_LITERAL(31, 318, 10), // "friendToUi"
-QT_MOC_LITERAL(32, 329, 24), // "buttonFriendGoTo_Clicked"
-QT_MOC_LITERAL(33, 354, 28), // "buttonFriendFavorite_Clicked"
-QT_MOC_LITERAL(34, 383, 32), // "checkBoxOpenProfile_StateChanged"
-QT_MOC_LITERAL(35, 416, 4), // "arg1"
-QT_MOC_LITERAL(36, 421, 24), // "lineEditName_TextChanged"
-QT_MOC_LITERAL(37, 446, 18), // "buttonFind_Clicked"
-QT_MOC_LITERAL(38, 465, 24), // "comboBoxStatus_Activated"
-QT_MOC_LITERAL(39, 490, 5), // "index"
-QT_MOC_LITERAL(40, 496, 30), // "checkBoxFavorites_StateChanged"
-QT_MOC_LITERAL(41, 527, 30), // "tableWidgetFriends_CellClicked"
-QT_MOC_LITERAL(42, 558, 3), // "col"
-QT_MOC_LITERAL(43, 562, 36), // "tableWidgetFriends_CellDouble..."
-QT_MOC_LITERAL(44, 599, 6) // "column"
+QT_MOC_LITERAL(24, 238, 9), // "SFriends&"
+QT_MOC_LITERAL(25, 248, 8), // "aFriends"
+QT_MOC_LITERAL(26, 257, 10), // "closeEvent"
+QT_MOC_LITERAL(27, 268, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(28, 281, 11), // "retranslate"
+QT_MOC_LITERAL(29, 293, 8), // "setIcons"
+QT_MOC_LITERAL(30, 302, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(31, 319, 10), // "friendToUi"
+QT_MOC_LITERAL(32, 330, 24), // "buttonFriendGoTo_Clicked"
+QT_MOC_LITERAL(33, 355, 28), // "buttonFriendFavorite_Clicked"
+QT_MOC_LITERAL(34, 384, 32), // "checkBoxOpenProfile_StateChanged"
+QT_MOC_LITERAL(35, 417, 4), // "arg1"
+QT_MOC_LITERAL(36, 422, 24), // "lineEditName_TextChanged"
+QT_MOC_LITERAL(37, 447, 18), // "buttonFind_Clicked"
+QT_MOC_LITERAL(38, 466, 24), // "comboBoxStatus_Activated"
+QT_MOC_LITERAL(39, 491, 5), // "index"
+QT_MOC_LITERAL(40, 497, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(41, 528, 30), // "tableWidgetFriends_CellClicked"
+QT_MOC_LITERAL(42, 559, 3), // "col"
+QT_MOC_LITERAL(43, 563, 36), // "tableWidgetFriends_CellDouble..."
+QT_MOC_LITERAL(44, 600, 6) // "column"
 
     },
     "FormFriends\0s_friendsLoaded\0\0progress\0"
@@ -85,7 +85,7 @@ QT_MOC_LITERAL(44, 599, 6) // "column"
     "type\0changeEvent\0QEvent*\0event\0"
     "progressLoading\0p\0updateSettings\0"
     "pullTable\0aTo\0aDo\0onTablePulled\0"
-    "createThread\0initComponents\0SFriends\0"
+    "createThread\0initComponents\0SFriends&\0"
     "aFriends\0closeEvent\0QCloseEvent*\0"
     "retranslate\0setIcons\0updateHiddenRows\0"
     "friendToUi\0buttonFriendGoTo_Clicked\0"
@@ -183,7 +183,7 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: _t->s_friendsLoaded((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 1: _t->s_finish(); break;
         case 2: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
-        case 3: _t->s_go_to_profile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< ProfileUrlType(*)>(_a[2]))); break;
+        case 3: _t->s_go_to_profile((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< ProfileUrlType(*)>(_a[2]))); break;
         case 4: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
         case 5: _t->progressLoading((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 6: _t->updateSettings(); break;
@@ -242,7 +242,7 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             }
         }
         {
-            using _t = void (FormFriends::*)(QString , ProfileUrlType );
+            using _t = void (FormFriends::*)(const QString & , ProfileUrlType );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormFriends::s_go_to_profile)) {
                 *result = 3;
                 return;
@@ -312,7 +312,7 @@ void FormFriends::s_return_to_profile(QWidget * _t1)
 }
 
 // SIGNAL 3
-void FormFriends::s_go_to_profile(QString _t1, ProfileUrlType _t2)
+void FormFriends::s_go_to_profile(const QString & _t1, ProfileUrlType _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);

@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormTablesHeaders_t {
-    QByteArrayData data[82];
-    char stringdata0[1075];
+    QByteArrayData data[80];
+    char stringdata0[1052];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,83 +44,81 @@ QT_MOC_LITERAL(7, 78, 13), // "s_tablePulled"
 QT_MOC_LITERAL(8, 92, 9), // "insertRow"
 QT_MOC_LITERAL(9, 102, 9), // "removeRow"
 QT_MOC_LITERAL(10, 112, 15), // "addFriendColumn"
-QT_MOC_LITERAL(11, 128, 8), // "SProfile"
-QT_MOC_LITERAL(12, 137, 13), // "friendProfile"
-QT_MOC_LITERAL(13, 151, 16), // "addNoValueColumn"
-QT_MOC_LITERAL(14, 168, 17), // "addCategoryColumn"
-QT_MOC_LITERAL(15, 186, 18), // "removeFriendColumn"
-QT_MOC_LITERAL(16, 205, 10), // "friendName"
-QT_MOC_LITERAL(17, 216, 6), // "column"
-QT_MOC_LITERAL(18, 223, 20), // "removeCategoryColumn"
-QT_MOC_LITERAL(19, 244, 9), // "pullTable"
-QT_MOC_LITERAL(20, 254, 22), // "hideCheckedAchievement"
-QT_MOC_LITERAL(21, 277, 17), // "QTableWidgetItem*"
-QT_MOC_LITERAL(22, 295, 5), // "aItem"
-QT_MOC_LITERAL(23, 301, 25), // "updateFilterWithMyProfile"
-QT_MOC_LITERAL(24, 327, 11), // "ReachedType"
-QT_MOC_LITERAL(25, 339, 4), // "type"
-QT_MOC_LITERAL(26, 344, 4), // "solo"
-QT_MOC_LITERAL(27, 349, 7), // "compare"
-QT_MOC_LITERAL(28, 357, 22), // "updateFilterWithFriend"
-QT_MOC_LITERAL(29, 380, 29), // "updateFilterCategoriesColumns"
-QT_MOC_LITERAL(30, 410, 10), // "categories"
-QT_MOC_LITERAL(31, 421, 27), // "updateFilterTextAchievement"
-QT_MOC_LITERAL(32, 449, 8), // "aNewText"
-QT_MOC_LITERAL(33, 458, 5), // "aSolo"
-QT_MOC_LITERAL(34, 464, 8), // "aCompare"
-QT_MOC_LITERAL(35, 473, 20), // "updateFilterCategory"
-QT_MOC_LITERAL(36, 494, 14), // "aCategoryIndex"
-QT_MOC_LITERAL(37, 509, 6), // "aClear"
-QT_MOC_LITERAL(38, 516, 14), // "QList<QString>"
-QT_MOC_LITERAL(39, 531, 17), // "aAchievementNames"
-QT_MOC_LITERAL(40, 549, 20), // "updateFilterFavorite"
-QT_MOC_LITERAL(41, 570, 21), // "afavoritesAchievement"
-QT_MOC_LITERAL(42, 592, 13), // "setValuesMode"
-QT_MOC_LITERAL(43, 606, 5), // "value"
-QT_MOC_LITERAL(44, 612, 13), // "setUniqueMode"
-QT_MOC_LITERAL(45, 626, 7), // "aUnique"
-QT_MOC_LITERAL(46, 634, 23), // "setVisibleContentSelect"
-QT_MOC_LITERAL(47, 658, 4), // "aPos"
-QT_MOC_LITERAL(48, 663, 7), // "aSelect"
-QT_MOC_LITERAL(49, 671, 15), // "categoryToTable"
-QT_MOC_LITERAL(50, 687, 6), // "aTitle"
-QT_MOC_LITERAL(51, 694, 9), // "aNoValues"
-QT_MOC_LITERAL(52, 704, 7), // "aValues"
-QT_MOC_LITERAL(53, 712, 10), // "aIsNoValue"
-QT_MOC_LITERAL(54, 723, 19), // "swapCategoryColumns"
-QT_MOC_LITERAL(55, 743, 7), // "aPosOld"
-QT_MOC_LITERAL(56, 751, 7), // "aPosNew"
-QT_MOC_LITERAL(57, 759, 6), // "update"
-QT_MOC_LITERAL(58, 766, 13), // "getHeaderText"
-QT_MOC_LITERAL(59, 780, 6), // "aIndex"
-QT_MOC_LITERAL(60, 787, 14), // "getAchievement"
-QT_MOC_LITERAL(61, 802, 12), // "SAchievement"
-QT_MOC_LITERAL(62, 815, 14), // "cancelCategory"
-QT_MOC_LITERAL(63, 830, 12), // "createThread"
-QT_MOC_LITERAL(64, 843, 21), // "reverseCategoryColumn"
-QT_MOC_LITERAL(65, 865, 5), // "index"
-QT_MOC_LITERAL(66, 871, 18), // "setHorizontalTitle"
-QT_MOC_LITERAL(67, 890, 4), // "text"
-QT_MOC_LITERAL(68, 895, 12), // "insertColumn"
-QT_MOC_LITERAL(69, 908, 7), // "columns"
-QT_MOC_LITERAL(70, 916, 12), // "removeColumn"
-QT_MOC_LITERAL(71, 929, 11), // "retranslate"
-QT_MOC_LITERAL(72, 941, 13), // "onTablePulled"
-QT_MOC_LITERAL(73, 955, 7), // "reached"
-QT_MOC_LITERAL(74, 963, 10), // "notReached"
-QT_MOC_LITERAL(75, 974, 10), // "createFlag"
-QT_MOC_LITERAL(76, 985, 9), // "flagState"
-QT_MOC_LITERAL(77, 995, 16), // "updateHiddenRows"
-QT_MOC_LITERAL(78, 1012, 10), // "getTableHH"
-QT_MOC_LITERAL(79, 1023, 13), // "QTableWidget*"
-QT_MOC_LITERAL(80, 1037, 15), // "getTableContent"
-QT_MOC_LITERAL(81, 1053, 21) // "insertCheckableColumn"
+QT_MOC_LITERAL(11, 128, 9), // "SProfile&"
+QT_MOC_LITERAL(12, 138, 13), // "friendProfile"
+QT_MOC_LITERAL(13, 152, 16), // "addNoValueColumn"
+QT_MOC_LITERAL(14, 169, 17), // "addCategoryColumn"
+QT_MOC_LITERAL(15, 187, 18), // "removeFriendColumn"
+QT_MOC_LITERAL(16, 206, 10), // "friendName"
+QT_MOC_LITERAL(17, 217, 6), // "column"
+QT_MOC_LITERAL(18, 224, 20), // "removeCategoryColumn"
+QT_MOC_LITERAL(19, 245, 9), // "pullTable"
+QT_MOC_LITERAL(20, 255, 22), // "hideCheckedAchievement"
+QT_MOC_LITERAL(21, 278, 17), // "QTableWidgetItem*"
+QT_MOC_LITERAL(22, 296, 5), // "aItem"
+QT_MOC_LITERAL(23, 302, 25), // "updateFilterWithMyProfile"
+QT_MOC_LITERAL(24, 328, 11), // "ReachedType"
+QT_MOC_LITERAL(25, 340, 4), // "type"
+QT_MOC_LITERAL(26, 345, 4), // "solo"
+QT_MOC_LITERAL(27, 350, 7), // "compare"
+QT_MOC_LITERAL(28, 358, 22), // "updateFilterWithFriend"
+QT_MOC_LITERAL(29, 381, 29), // "updateFilterCategoriesColumns"
+QT_MOC_LITERAL(30, 411, 10), // "categories"
+QT_MOC_LITERAL(31, 422, 27), // "updateFilterTextAchievement"
+QT_MOC_LITERAL(32, 450, 7), // "newText"
+QT_MOC_LITERAL(33, 458, 20), // "updateFilterCategory"
+QT_MOC_LITERAL(34, 479, 13), // "categoryIndex"
+QT_MOC_LITERAL(35, 493, 5), // "clear"
+QT_MOC_LITERAL(36, 499, 14), // "QList<QString>"
+QT_MOC_LITERAL(37, 514, 16), // "achievementNames"
+QT_MOC_LITERAL(38, 531, 20), // "updateFilterFavorite"
+QT_MOC_LITERAL(39, 552, 20), // "favoritesAchievement"
+QT_MOC_LITERAL(40, 573, 13), // "setValuesMode"
+QT_MOC_LITERAL(41, 587, 5), // "value"
+QT_MOC_LITERAL(42, 593, 13), // "setUniqueMode"
+QT_MOC_LITERAL(43, 607, 6), // "unique"
+QT_MOC_LITERAL(44, 614, 23), // "setVisibleContentSelect"
+QT_MOC_LITERAL(45, 638, 3), // "pos"
+QT_MOC_LITERAL(46, 642, 6), // "select"
+QT_MOC_LITERAL(47, 649, 15), // "categoryToTable"
+QT_MOC_LITERAL(48, 665, 5), // "title"
+QT_MOC_LITERAL(49, 671, 9), // "aNoValues"
+QT_MOC_LITERAL(50, 681, 7), // "aValues"
+QT_MOC_LITERAL(51, 689, 10), // "aIsNoValue"
+QT_MOC_LITERAL(52, 700, 19), // "swapCategoryColumns"
+QT_MOC_LITERAL(53, 720, 7), // "aPosOld"
+QT_MOC_LITERAL(54, 728, 7), // "aPosNew"
+QT_MOC_LITERAL(55, 736, 6), // "update"
+QT_MOC_LITERAL(56, 743, 13), // "getHeaderText"
+QT_MOC_LITERAL(57, 757, 6), // "aIndex"
+QT_MOC_LITERAL(58, 764, 14), // "getAchievement"
+QT_MOC_LITERAL(59, 779, 12), // "SAchievement"
+QT_MOC_LITERAL(60, 792, 14), // "cancelCategory"
+QT_MOC_LITERAL(61, 807, 12), // "createThread"
+QT_MOC_LITERAL(62, 820, 21), // "reverseCategoryColumn"
+QT_MOC_LITERAL(63, 842, 5), // "index"
+QT_MOC_LITERAL(64, 848, 18), // "setHorizontalTitle"
+QT_MOC_LITERAL(65, 867, 4), // "text"
+QT_MOC_LITERAL(66, 872, 12), // "insertColumn"
+QT_MOC_LITERAL(67, 885, 7), // "columns"
+QT_MOC_LITERAL(68, 893, 12), // "removeColumn"
+QT_MOC_LITERAL(69, 906, 11), // "retranslate"
+QT_MOC_LITERAL(70, 918, 13), // "onTablePulled"
+QT_MOC_LITERAL(71, 932, 7), // "reached"
+QT_MOC_LITERAL(72, 940, 10), // "notReached"
+QT_MOC_LITERAL(73, 951, 10), // "createFlag"
+QT_MOC_LITERAL(74, 962, 9), // "flagState"
+QT_MOC_LITERAL(75, 972, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(76, 989, 10), // "getTableHH"
+QT_MOC_LITERAL(77, 1000, 13), // "QTableWidget*"
+QT_MOC_LITERAL(78, 1014, 15), // "getTableContent"
+QT_MOC_LITERAL(79, 1030, 21) // "insertCheckableColumn"
 
     },
     "FormTablesHeaders\0s_contentCellClicked\0"
     "\0row\0col\0s_achievementsLoaded\0progress\0"
     "s_tablePulled\0insertRow\0removeRow\0"
-    "addFriendColumn\0SProfile\0friendProfile\0"
+    "addFriendColumn\0SProfile&\0friendProfile\0"
     "addNoValueColumn\0addCategoryColumn\0"
     "removeFriendColumn\0friendName\0column\0"
     "removeCategoryColumn\0pullTable\0"
@@ -129,14 +127,13 @@ QT_MOC_LITERAL(81, 1053, 21) // "insertCheckableColumn"
     "ReachedType\0type\0solo\0compare\0"
     "updateFilterWithFriend\0"
     "updateFilterCategoriesColumns\0categories\0"
-    "updateFilterTextAchievement\0aNewText\0"
-    "aSolo\0aCompare\0updateFilterCategory\0"
-    "aCategoryIndex\0aClear\0QList<QString>\0"
-    "aAchievementNames\0updateFilterFavorite\0"
-    "afavoritesAchievement\0setValuesMode\0"
-    "value\0setUniqueMode\0aUnique\0"
-    "setVisibleContentSelect\0aPos\0aSelect\0"
-    "categoryToTable\0aTitle\0aNoValues\0"
+    "updateFilterTextAchievement\0newText\0"
+    "updateFilterCategory\0categoryIndex\0"
+    "clear\0QList<QString>\0achievementNames\0"
+    "updateFilterFavorite\0favoritesAchievement\0"
+    "setValuesMode\0value\0setUniqueMode\0"
+    "unique\0setVisibleContentSelect\0pos\0"
+    "select\0categoryToTable\0title\0aNoValues\0"
     "aValues\0aIsNoValue\0swapCategoryColumns\0"
     "aPosOld\0aPosNew\0update\0getHeaderText\0"
     "aIndex\0getAchievement\0SAchievement\0"
@@ -184,30 +181,30 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
       28,    2,  265,    2, 0x0a /* Public */,
       29,    1,  270,    2, 0x0a /* Public */,
       31,    3,  273,    2, 0x0a /* Public */,
-      35,    3,  280,    2, 0x0a /* Public */,
-      35,    2,  287,    2, 0x2a /* Public | MethodCloned */,
-      40,    1,  292,    2, 0x0a /* Public */,
-      42,    1,  295,    2, 0x0a /* Public */,
-      44,    1,  298,    2, 0x0a /* Public */,
-      46,    2,  301,    2, 0x0a /* Public */,
-      49,    4,  306,    2, 0x0a /* Public */,
-      54,    2,  315,    2, 0x0a /* Public */,
-      57,    0,  320,    2, 0x0a /* Public */,
-      58,    1,  321,    2, 0x0a /* Public */,
-      60,    1,  324,    2, 0x0a /* Public */,
-      62,    0,  327,    2, 0x0a /* Public */,
-      63,    0,  328,    2, 0x0a /* Public */,
-      64,    1,  329,    2, 0x0a /* Public */,
-      66,    2,  332,    2, 0x08 /* Private */,
-      68,    1,  337,    2, 0x08 /* Private */,
-      70,    1,  340,    2, 0x08 /* Private */,
-      71,    0,  343,    2, 0x08 /* Private */,
-      72,    2,  344,    2, 0x08 /* Private */,
-      75,    1,  349,    2, 0x08 /* Private */,
-      77,    0,  352,    2, 0x08 /* Private */,
-      78,    0,  353,    2, 0x08 /* Private */,
-      80,    0,  354,    2, 0x08 /* Private */,
-      81,    0,  355,    2, 0x08 /* Private */,
+      33,    3,  280,    2, 0x0a /* Public */,
+      33,    2,  287,    2, 0x2a /* Public | MethodCloned */,
+      38,    1,  292,    2, 0x0a /* Public */,
+      40,    1,  295,    2, 0x0a /* Public */,
+      42,    1,  298,    2, 0x0a /* Public */,
+      44,    2,  301,    2, 0x0a /* Public */,
+      47,    4,  306,    2, 0x0a /* Public */,
+      52,    2,  315,    2, 0x0a /* Public */,
+      55,    0,  320,    2, 0x0a /* Public */,
+      56,    1,  321,    2, 0x0a /* Public */,
+      58,    1,  324,    2, 0x0a /* Public */,
+      60,    0,  327,    2, 0x0a /* Public */,
+      61,    0,  328,    2, 0x0a /* Public */,
+      62,    1,  329,    2, 0x0a /* Public */,
+      64,    2,  332,    2, 0x08 /* Private */,
+      66,    1,  337,    2, 0x08 /* Private */,
+      68,    1,  340,    2, 0x08 /* Private */,
+      69,    0,  343,    2, 0x08 /* Private */,
+      70,    2,  344,    2, 0x08 /* Private */,
+      73,    1,  349,    2, 0x08 /* Private */,
+      75,    0,  352,    2, 0x08 /* Private */,
+      76,    0,  353,    2, 0x08 /* Private */,
+      78,    0,  354,    2, 0x08 /* Private */,
+      79,    0,  355,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -228,30 +225,30 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
     QMetaType::Void, 0x80000000 | 24, QMetaType::Bool, QMetaType::Bool,   25,   26,   27,
     QMetaType::Void, QMetaType::QString, 0x80000000 | 24,   16,   25,
     QMetaType::Void, QMetaType::Int,   30,
-    QMetaType::Void, QMetaType::QString, QMetaType::Bool, QMetaType::Bool,   32,   33,   34,
-    QMetaType::Void, QMetaType::Int, QMetaType::Bool, 0x80000000 | 38,   36,   37,   39,
-    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   36,   37,
-    QMetaType::Void, QMetaType::QJsonArray,   41,
+    QMetaType::Void, QMetaType::QString, QMetaType::Bool, QMetaType::Bool,   32,   26,   27,
+    QMetaType::Void, QMetaType::Int, QMetaType::Bool, 0x80000000 | 36,   34,   35,   37,
+    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   34,   35,
+    QMetaType::Void, QMetaType::QJsonArray,   39,
+    QMetaType::Void, QMetaType::Bool,   41,
     QMetaType::Void, QMetaType::Bool,   43,
-    QMetaType::Void, QMetaType::Bool,   45,
-    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   47,   48,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 38, QMetaType::QJsonArray, QMetaType::Bool,   50,   51,   52,   53,
-    QMetaType::Bool, QMetaType::Int, QMetaType::Int,   55,   56,
+    QMetaType::Void, QMetaType::Int, QMetaType::Bool,   45,   46,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 36, QMetaType::QJsonArray, QMetaType::Bool,   48,   49,   50,   51,
+    QMetaType::Bool, QMetaType::Int, QMetaType::Int,   53,   54,
     QMetaType::Void,
-    QMetaType::QString, QMetaType::Int,   59,
-    0x80000000 | 61, QMetaType::Int,   59,
+    QMetaType::QString, QMetaType::Int,   57,
+    0x80000000 | 59, QMetaType::Int,   57,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   65,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString,   17,   67,
-    QMetaType::Void, QMetaType::Int,   69,
-    QMetaType::Void, QMetaType::Int,   69,
+    QMetaType::Void, QMetaType::Int,   63,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,   17,   65,
+    QMetaType::Void, QMetaType::Int,   67,
+    QMetaType::Void, QMetaType::Int,   67,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   73,   74,
-    0x80000000 | 21, QMetaType::Bool,   76,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   71,   72,
+    0x80000000 | 21, QMetaType::Bool,   74,
     QMetaType::Void,
-    0x80000000 | 79,
-    0x80000000 | 79,
+    0x80000000 | 77,
+    0x80000000 | 77,
     QMetaType::Int,
 
        0        // eod
@@ -272,23 +269,23 @@ void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 6: _t->addNoValueColumn(); break;
         case 7: _t->addCategoryColumn(); break;
-        case 8: _t->removeFriendColumn((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: _t->removeFriendColumn((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 9: _t->removeFriendColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 10: _t->removeCategoryColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 11: { bool _r = _t->pullTable();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 12: _t->hideCheckedAchievement((*reinterpret_cast< QTableWidgetItem*(*)>(_a[1]))); break;
         case 13: _t->updateFilterWithMyProfile((*reinterpret_cast< ReachedType(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
-        case 14: _t->updateFilterWithFriend((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
+        case 14: _t->updateFilterWithFriend((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
         case 15: _t->updateFilterCategoriesColumns((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 16: _t->updateFilterTextAchievement((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 16: _t->updateFilterTextAchievement((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
         case 17: _t->updateFilterCategory((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< QList<QString>(*)>(_a[3]))); break;
         case 18: _t->updateFilterCategory((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 19: _t->updateFilterFavorite((*reinterpret_cast< QJsonArray(*)>(_a[1]))); break;
         case 20: _t->setValuesMode((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 21: _t->setUniqueMode((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 22: _t->setVisibleContentSelect((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 23: _t->categoryToTable((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QList<QString>(*)>(_a[2])),(*reinterpret_cast< QJsonArray(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
+        case 23: _t->categoryToTable((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< QList<QString>(*)>(_a[2])),(*reinterpret_cast< QJsonArray(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
         case 24: { bool _r = _t->swapCategoryColumns((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 25: _t->update(); break;
@@ -299,7 +296,7 @@ void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 28: _t->cancelCategory(); break;
         case 29: _t->createThread(); break;
         case 30: _t->reverseCategoryColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 31: _t->setHorizontalTitle((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 31: _t->setHorizontalTitle((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
         case 32: _t->insertColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 33: _t->removeColumn((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 34: _t->retranslate(); break;

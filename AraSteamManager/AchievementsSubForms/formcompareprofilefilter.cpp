@@ -5,7 +5,7 @@ FormCompareProfileFilter::FormCompareProfileFilter(QWidget *aParent): FormCompar
 
 }
 
-FormCompareProfileFilter::FormCompareProfileFilter(QString aTitleAll, QString aTitleReached, QString aTitleNotReached, QWidget *parent): QWidget(parent),
+FormCompareProfileFilter::FormCompareProfileFilter(const QString &all, const QString &reached, const QString &notReached, QWidget *parent): QWidget(parent),
 ui(new Ui::FormCompareProfileFilter) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
@@ -16,7 +16,7 @@ ui(new Ui::FormCompareProfileFilter) {
     connect(ui->RadioButtonAll,        &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
     connect(ui->RadioButtonReached,    &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
     connect(ui->RadioButtonNotReached, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
-    setTitles(aTitleAll, aTitleReached, aTitleNotReached);
+    setTitles(all, reached, notReached);
 }
 
 void FormCompareProfileFilter::updateSettings() {
@@ -34,11 +34,11 @@ FormCompareProfileFilter::~FormCompareProfileFilter() {
     delete ui;
 }
 
-void FormCompareProfileFilter::setName(QString aName) {
+void FormCompareProfileFilter::setName(const QString &aName) {
     _name = aName;
 }
 
-void FormCompareProfileFilter::setIndex(QString aIndex) {
+void FormCompareProfileFilter::setIndex(const QString &aIndex) {
     _index = aIndex;
 }
 
@@ -48,7 +48,7 @@ void FormCompareProfileFilter::changeEvent(QEvent *event) {
     }
 }
 
-void FormCompareProfileFilter::setTitles(QString aTitleAll, QString aTitleReached, QString aTitleNotReached) {
+void FormCompareProfileFilter::setTitles(const QString &aTitleAll, const QString &aTitleReached, const QString &aTitleNotReached) {
     ui->RadioButtonAll->setText(aTitleAll);
     ui->RadioButtonReached->setText(aTitleReached);
     ui->RadioButtonNotReached->setText(aTitleNotReached);

@@ -431,25 +431,26 @@ void Settings::syncronizeSettings() {
     _settings->sync();
 }
 
-QString Settings::getPathForImagesProfiles(QString url) {
+QString Settings::getPathForImagesProfiles(const QString &url) {
     return "images/profiles/" + url.mid(url.lastIndexOf("/") + 1, url.lastIndexOf(".jpg") - url.lastIndexOf("/") - 1) + ".jpg";
 }
 
-QString Settings::getPathForImagesAchievements(QString gameId, QString url) {
+QString Settings::getPathForImagesAchievements(const QString &gameId, const QString &url) {
     return "images/achievements/" + gameId + "/" + url.mid(url.lastIndexOf("/") + 1, url.lastIndexOf(".jpg") - url.lastIndexOf("/") - 1) + ".jpg";
 }
 
-QString Settings::getPathForIconGames(QString url) {
+QString Settings::getPathForIconGames(const QString &url) {
     return "images/icon_games/" + url + ".jpg";
 }
 
-bool Settings::createDir(QString aPath) {
+bool Settings::createDir(const QString &aPath) {
     bool exist = true;
-    aPath.replace("\\", "/");
-    if (aPath.lastIndexOf("/") != aPath.length() - 1) {
-        aPath += "/";
+    QString path = aPath;
+    path.replace("\\", "/");
+    if (path.lastIndexOf("/") != path.length() - 1) {
+        path += "/";
     }
-    QStringList dirs = aPath.split("/");
+    QStringList dirs = path.split("/");
     QString pathNow = "";
     for (auto &dir: dirs) {
         if (dir != dirs.last()) {
@@ -460,6 +461,6 @@ bool Settings::createDir(QString aPath) {
     return exist;
 }
 
-QString Settings::getUrlIconGame(QString appId, QString img_icon_url) {
+QString Settings::getUrlIconGame(const QString &appId, const QString &img_icon_url) {
     return "http://media.steampowered.com/steamcommunity/public/images/apps/" + appId + "/" + img_icon_url + ".jpg";
 }

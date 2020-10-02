@@ -12,7 +12,7 @@ constexpr int c_tableColumnCount = 6;
 #define ConstantsEnd }
 
 #define Init {
-FormGames::FormGames(SProfile aProfile, SGames aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _profile(aProfile),  _games(aGames), _favorites("games") {
+FormGames::FormGames(SProfile &aProfile, SGames &aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _profile(aProfile),  _games(aGames), _favorites("games") {
     ui->setupUi(this);
     initComponents();
 }
@@ -163,7 +163,7 @@ void FormGames::onTablePushed() {
     ui->LineEditGame->setFocus();
 }
 
-QMenu *FormGames::createMenu(SGame aGame, int aIndex) {
+QMenu *FormGames::createMenu(SGame &aGame, int aIndex) {
     QString appId = QString::number(aGame._appID);
 
     //Добавление перехода на достижения
@@ -356,12 +356,12 @@ void FormGames::createThread() {
 #define SystemEnd }
 
 #define Filter {
-void FormGames::lineEditGame_TextChanged(QString aFindText) {
-    aFindText = aFindText.toLower();
+void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
+    QString findText = aFindText.toLower();
     for (int i = 0; i < ui->TableWidgetGames->rowCount(); i++) {
-        ui->TableWidgetGames->setRowHidden(i, ui->TableWidgetGames->item(i, c_tableColumnName)->text().toLower().indexOf(aFindText, 0) == -1);
+        ui->TableWidgetGames->setRowHidden(i, ui->TableWidgetGames->item(i, c_tableColumnName)->text().toLower().indexOf(findText, 0) == -1);
     }
-    if (_setting.getVisibleHiddenGames() != 1 || aFindText == "") {
+    if (_setting.getVisibleHiddenGames() != 1 || findText == "") {
         hideHiddenGames();
     }
 }

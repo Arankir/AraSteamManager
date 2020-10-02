@@ -19,7 +19,7 @@ constexpr int c_filterCount = 4;
 #define ConstantsEnd }
 
 #define Init {
-FormFriends::FormFriends(QString aId, SFriends aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId),  _favorites("friends"),
+FormFriends::FormFriends(const QString &aId, SFriends &aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId),  _favorites("friends"),
 _filter(aFriends.getCount(), c_filterCount) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
@@ -27,7 +27,7 @@ _filter(aFriends.getCount(), c_filterCount) {
     ui->LineEditName->setFocus();
 }
 
-void FormFriends::initComponents(SFriends aFriends) {
+void FormFriends::initComponents(SFriends &aFriends) {
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setColumnCount(c_tableColumnCount);
     ui->TableWidgetFriends->setColumnHidden(c_tableColumnID, true);

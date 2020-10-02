@@ -36,10 +36,10 @@ QT_MOC_LITERAL(0, 0, 7), // "SLevels"
 QT_MOC_LITERAL(1, 8, 10), // "s_finished"
 QT_MOC_LITERAL(2, 19, 0), // ""
 QT_MOC_LITERAL(3, 20, 8), // "SLevels*"
-QT_MOC_LITERAL(4, 29, 4) // "Load"
+QT_MOC_LITERAL(4, 29, 4) // "load"
 
     },
-    "SLevels\0s_finished\0\0SLevels*\0Load"
+    "SLevels\0s_finished\0\0SLevels*\0load"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,7 +81,7 @@ void SLevels::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SLevels*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->Load(); break;
+        case 2: _t->load(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

@@ -56,8 +56,8 @@ void FormProfile::changeEvent(QEvent *aEvent) {
     }
 }
 
-void FormProfile::profileToUi(SProfile aProfile) {
-    _profile = std::move(aProfile);
+void FormProfile::profileToUi(SProfile &aProfile) {
+    _profile = aProfile;
 
     ui->LabelAvatar->setFixedSize(QSize(64, 64));
     ui->LabelAvatar->setPixmap(_profile.getPixmapAvatarMedium());
@@ -95,7 +95,6 @@ void FormProfile::profileToUi(SProfile aProfile) {
     ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
                                 "<a href=\"" + _profile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
-
     setName();
     setStatus();
 
@@ -117,7 +116,7 @@ QGraphicsDropShadowEffect *FormProfile::createLightning() {
 }
 
 #define setData {
-void FormProfile::setProfile(SProfile aProfile) {
+void FormProfile::setProfile(SProfile &aProfile) {
     _profile = aProfile;
 }
 
@@ -218,8 +217,9 @@ void FormProfile::setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha)
     }
 }
 
-void FormProfile::setGames(QString aSteamId) {
-    _games.set(aSteamId,true,true,false);
+void FormProfile::setGames(const QString &aSteamId) {
+    qDebug()<<"FormProfile::setGames"<<aSteamId;
+    _games.set(aSteamId, true, true, false);
     QPixmap gamesState;
     QGraphicsDropShadowEffect *gamesLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelGamesVisibility->graphicsEffect());
     switch (_games.getStatus()) {
@@ -263,7 +263,7 @@ void FormProfile::setGames(QString aSteamId) {
     ui->LabelGamesStatus->setPixmap(gamesState.scaled(14, 14));
 }
 
-void FormProfile::setFriends(QString aSteamId) {
+void FormProfile::setFriends(const QString &aSteamId) {
     _friends.set(aSteamId,false);
     QPixmap friendsState;
     QGraphicsDropShadowEffect *friendsLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelFriendsVisibility->graphicsEffect());
@@ -305,7 +305,7 @@ void FormProfile::setFriends(QString aSteamId) {
     ui->LabelFriendsStatus->setPixmap(friendsState.scaled(14, 14));
 }
 
-void FormProfile::setBans(QString aSteamId) {
+void FormProfile::setBans(const QString &aSteamId) {
     SBans bans(aSteamId,false);
     QGraphicsDropShadowEffect *bansLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelBansValue->graphicsEffect());
     if(bans.getVacBanned()) {
@@ -323,12 +323,12 @@ void FormProfile::setBans(QString aSteamId) {
     }
 }
 
-void FormProfile::setLvl(QString aSteamId) {
+void FormProfile::setLvl(const QString &aSteamId) {
     SLevels levels(aSteamId);
-    ui->LabellvlValue->setText(levels.GetLevel() > 0 ? QString::number(levels.GetLevel()) : "?");
-    int ten = (levels.GetLevel() / 10) % 10;
+    ui->LabellvlValue->setText(levels.getLevel() > 0 ? QString::number(levels.getLevel()) : "?");
+    int ten = (levels.getLevel() / 10) % 10;
     QString qss = "color: #42a9c6; "
-                  "border-image: url(://levels/" + QString::number(levels.GetLevel() / 100) + ".png) "
+                  "border-image: url(://levels/" + QString::number(levels.getLevel() / 100) + ".png) "
                   + QString::number(ten * 32) + " 0 " + QString::number((10 - ten - 1) * 32) + " 0; ";
     ui->LabellvlValue->setStyleSheet(qss);
 }

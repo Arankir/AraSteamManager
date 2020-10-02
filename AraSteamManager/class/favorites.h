@@ -7,7 +7,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <class/settings.h>
+#include "class/settings.h"
 
 class Favorites : public QObject {
     Q_OBJECT
@@ -18,30 +18,30 @@ enum class jsonType{
 };
 
 public slots:
-    void setType(QString type);
-    bool addValue(QJsonObject newValue, bool deleteIfExist);
-    bool addValue(QJsonArray newValue, bool deleteIfExist);
-    bool addValue(QJsonObject game, QJsonObject newValue, bool deleteIfExist);
-    void removeValue(QJsonObject newValue);
-    void removeValue(QJsonArray newValue);
-    bool removeValue(QJsonObject game, QJsonObject newValue);
-    void removeGame(QJsonObject game);
-    int addGame(QJsonObject game);
-    bool isInFavorites(QJsonObject aGame, QString id);
+    void setType(const QString &type);
+    bool addValue(QJsonObject &newValue, bool deleteIfExist);
+    bool addValue(QJsonArray &newValue, bool deleteIfExist);
+    bool addValue(QJsonObject &game, QJsonObject &newValue, bool deleteIfExist);
+    void removeValue(QJsonObject &newValue);
+    void removeValue(QJsonArray &newValue);
+    bool removeValue(QJsonObject &game, QJsonObject &newValue);
+    void removeGame(QJsonObject &game);
+    int addGame(QJsonObject &game);
+    bool isInFavorites(QJsonObject &aGame, const QString &id);
     QString getType();
     QJsonArray getValues();
-    QJsonArray getValues(QJsonObject game);
+    QJsonArray getValues(QJsonObject &game);
 
 public:
-    explicit Favorites(QString path, QString type, QObject *parent = nullptr);
-    Favorites(QString type, QObject *parent = nullptr);
-    Favorites(QObject *a_parent = nullptr);
+    explicit Favorites(const QString &path, const QString &type, QObject *parent = nullptr);
+    Favorites(const QString &type, QObject *parent = nullptr);
+    Favorites(QObject *parent = nullptr);
 
 signals:
 
 private slots:
     void save();
-    void init(QString type);
+    void init(const QString &type);
     bool addValue(QJsonValue newValue, bool deleteIfExist, jsonType type);
     void removeValue(QJsonValue newValue);
     void load();

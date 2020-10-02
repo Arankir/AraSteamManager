@@ -11,27 +11,27 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
-#include <class/settings.h>
-#include <class/statusvalue.h>
+#include "class/settings.h"
+#include "class/statusvalue.h"
 #include <QObject>
 
 class SBans : public QObject
 {
     Q_OBJECT
 public:
-    explicit SBans(QString id, bool parallel, QObject *parent = nullptr);
-    SBans(QJsonDocument docBans, QObject *parent = nullptr);
+    explicit SBans(const QString &id, bool parallel, QObject *parent = nullptr);
+    SBans(QJsonDocument &docBans, QObject *parent = nullptr);
     SBans(QObject *parent = nullptr);
     ~SBans();
-    void set(QString id, bool parallel);
-    void set(QJsonDocument docBans);
-    QString getSteamid(int index=0);
-    bool getCommunityBanned(int index=0);
-    bool getVacBanned(int index=0);
-    int getNumberOfVacBans(int index=0);
-    int getDaysSinceLastBan(int index=0);
-    int getNumberOfGameBans(int index=0);
-    QString getEconomyBan(int index=0);
+    void set(const QString &id, bool parallel);
+    void set(QJsonDocument &docBans);
+    QString getSteamid(int index = 0);
+    bool getCommunityBanned(int index = 0);
+    bool getVacBanned(int index = 0);
+    int getNumberOfVacBans(int index = 0);
+    int getDaysSinceLastBan(int index = 0);
+    int getNumberOfGameBans(int index = 0);
+    QString getEconomyBan(int index = 0);
     StatusValue getStatus();
     QString getError();
     void update(bool parallel);

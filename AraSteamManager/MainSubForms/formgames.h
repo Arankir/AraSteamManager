@@ -5,15 +5,16 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QProgressBar>
-#include <formcontainerachievements.h>
-#include <class/settings.h>
-#include <class/favorites.h>
-#include <class/steamapi/Sgames.h>
-#include <class/steamapi/Sachievements.h>
-#include <class/Threads/threading.h>
-#include <class/Network/requestimage.h>
-#include <subwidget/qbuttonwithdata.h>
+//#include "formcontainerachievements.h"
+#include "class/settings.h"
+#include "class/favorites.h"
+#include "class/steamapi/Sgames.h"
+#include "class/steamapi/Sachievements.h"
+#include "class/Threads/threading.h"
+#include "class/Network/requestimage.h"
+#include "subwidget/qbuttonwithdata.h"
 #include <QList>
+#include <QMessageBox>
 #include <QPropertyAnimation>
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
@@ -36,14 +37,14 @@ public slots:
     void enableMouseTracking(const QObjectList &aChildren);
 
 public:
-    explicit FormGames(SProfile profile, SGames Games, QWidget *parent = nullptr);
+    explicit FormGames(SProfile &profile, SGames &Games, QWidget *parent = nullptr);
     ~FormGames();
 
 signals:
     void s_return_to_profile(QWidget*);
     void s_achievementsLoaded(int,int);
     void s_finish(int width);
-    void s_showAchievements(SAchievementsPlayer &achievements, SGame games);
+    void s_showAchievements(SAchievementsPlayer &achievements, SGame &games);
 
 private slots:
     void changeEvent(QEvent *event);
@@ -54,7 +55,7 @@ private slots:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event);
 
-    void lineEditGame_TextChanged(QString aFindText);
+    void lineEditGame_TextChanged(const QString &aFindText);
     void buttonFind_Clicked();
 
     void tableWidgetGames_CellDoubleClicked(int row, int column);
@@ -65,7 +66,7 @@ private slots:
     void createThread();
 
     void hideHiddenGames();
-    QMenu *createMenu(SGame aGame, int aIndex);
+    QMenu *createMenu(SGame &aGame, int aIndex);
     void loadHiddenGames();
 private:
     Ui::FormGames *ui;

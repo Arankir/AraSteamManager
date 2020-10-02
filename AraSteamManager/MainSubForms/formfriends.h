@@ -4,13 +4,13 @@
 #include <QWidget>
 #include <QFile>
 #include <QStandardItem>
-#include <class/Network/requestimage.h>
-#include <class/steamapi/Sfriends.h>
-#include <class/Threads/threading.h>
-#include <class/settings.h>
-#include <class/favorites.h>
-#include <class/filter.h>
-#include <subwidget/qbuttonwithdata.h>
+#include "class/Network/requestimage.h"
+#include "class/steamapi/Sfriends.h"
+#include "class/Threads/threading.h"
+#include "class/settings.h"
+#include "class/favorites.h"
+#include "class/filter.h"
+#include "subwidget/qbuttonwithdata.h"
 #include <QtAlgorithms>
 #include <QAction>
 #include <QMenu>
@@ -32,17 +32,17 @@ public slots:
     void onTablePulled();
     void createThread();
 public:
-    explicit FormFriends(QString id, SFriends Friends, QWidget *parent = nullptr);
+    explicit FormFriends(const QString &id, SFriends &Friends, QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
     void s_friendsLoaded(int progress, int row);
     void s_finish();
     void s_return_to_profile(QWidget*);
-    void s_go_to_profile(QString id, ProfileUrlType type);
+    void s_go_to_profile(const QString &id, ProfileUrlType type);
 
 private slots:
-    void initComponents(SFriends aFriends);
+    void initComponents(SFriends &aFriends);
     void closeEvent(QCloseEvent *event);
     void retranslate();
     void setIcons();

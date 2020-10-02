@@ -10,9 +10,9 @@
 #include <QTcpSocket>
 #include <QObject>
 #include <QEventLoop>
-#include <class/steamapi/Sprofile.h>
-#include <class/settings.h>
-#include <class/statusvalue.h>
+#include "class/steamapi/Sprofile.h"
+#include "class/settings.h"
+#include "class/statusvalue.h"
 #include <QObject>
 #include <QDateTime>
 #include <QJsonObject>
@@ -21,7 +21,7 @@
 class SFriend : public QObject {
     Q_OBJECT
 public:
-    explicit SFriend(QJsonObject a_friend, QObject *parent = nullptr);
+    explicit SFriend(QJsonObject &aFriend, QObject *parent = nullptr);
     const QString _steamID;
     const QString _relationship;
     const QDateTime _friend_since;
@@ -34,12 +34,12 @@ public:
 class SFriends : public QObject {
     Q_OBJECT
 public:
-    explicit SFriends(QString id, bool parallel, QObject *parent = nullptr);
-    SFriends(QJsonDocument DocFriends, QObject *parent = nullptr);
+    explicit SFriends(const QString &id, bool parallel, QObject *parent = nullptr);
+    SFriends(QJsonDocument &DocFriends, QObject *parent = nullptr);
     SFriends(QObject *parent = nullptr);
     ~SFriends();
-    void set(QString id, bool parallel);
-    void set(QJsonDocument DocFriends);
+    void set(const QString &id, bool parallel);
+    void set(QJsonDocument &DocFriends);
     StatusValue getStatus();
     QString getError();
     int getCount();

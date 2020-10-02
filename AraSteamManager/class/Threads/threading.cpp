@@ -43,7 +43,7 @@ int Threading::AddThreadFriends(const int aColumnID, const int aColumnName, cons
     return 1;
 }
 
-int Threading::AddThreadStatistics(SGames aGames, QString aId, QVector<int> &aNumOf, QVector<QPair<QString,QString> > &aComplete,
+int Threading::AddThreadStatistics(SGames &aGames, const QString &aId, QVector<int> &aNumOf, QVector<QPair<QString,QString> > &aComplete,
                                    QVector<QPair<QString,QString>> &aStarted, QVector<QPair<QString,QString>> &aNotStarted,
                                    QVector<double> &aAveragePercent, int &aSummColumn, QVector<int> &aTimes,
                                    QVector<int> &aMonths, QVector<QPair<QString,int>> &aYears) {
@@ -65,7 +65,7 @@ int Threading::AddThreadStatistics(SGames aGames, QString aId, QVector<int> &aNu
     return 1;
 }
 
-int Threading::AddThreadFriendAchievements(QTableWidget *aTableWidgetAchievements, SAchievements aAchievement, int aCol, int aColumnAppid) {
+int Threading::AddThreadFriendAchievements(QTableWidget *aTableWidgetAchievements, SAchievements &aAchievement, int aCol, int aColumnAppid) {
     Q_UNUSED(aTableWidgetAchievements);
     Q_UNUSED(aAchievement);
     Q_UNUSED(aCol);

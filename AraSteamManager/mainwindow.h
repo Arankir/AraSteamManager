@@ -9,18 +9,19 @@
 #include <QKeyEvent>
 #include <QTranslator>
 #include <QLibraryInfo>
-#include <MainSubForms/formgames.h>
-#include <MainSubForms/formfriends.h>
-#include <MainSubForms/formfavorites.h>
-#include <MainSubForms/formstatistics.h>
-#include <MainSubForms/formsettings.h>
-#include <MainSubForms/formprofile.h>
-#include <class/steamapi/Sprofile.h>
-#include <class/steamapi/Sbans.h>
-#include <class/steamapi/Slevels.h>
-#include <class/steamapi/Sgames.h>
-#include <class/steamapi/Sfriends.h>
-#include <class/settings.h>
+#include "MainSubForms/formgames.h"
+#include "MainSubForms/formfriends.h"
+#include "MainSubForms/formfavorites.h"
+#include "MainSubForms/formstatistics.h"
+#include "MainSubForms/formsettings.h"
+#include "MainSubForms/formprofile.h"
+#include "formcontainerachievements.h"
+#include "class/steamapi/Sprofile.h"
+#include "class/steamapi/Sbans.h"
+#include "class/steamapi/Slevels.h"
+#include "class/steamapi/Sgames.h"
+#include "class/steamapi/Sfriends.h"
+#include "class/settings.h"
 #include <QPropertyAnimation>
 #include <QFontDatabase>
 #include <QScreen>
@@ -52,27 +53,27 @@ public:
     FormStatistics *_statisticsForm = nullptr;
     FormSettings *_settingsForm = nullptr;
     FormContainerAchievements *_containerAchievementsForm;
-    QVector<FormAchievements*> _achievementsForms;
+    //QVector<FormAchievements*> _achievementsForms;
 
 public slots:
-    void progressLoading(int,int);
-    void addAchievements(SAchievementsPlayer &achievements, SGame games);
+    void progressLoading(int, int);
+    void addAchievements(SAchievementsPlayer &achievements, SGame &games);
     void removeAchievements(int index);
     void containerAchievementsClose();
     void returnFromAchievements(int num);
 
-    void goToGames(SProfile profileSteamid, SGames games);
-    void goToFriends(QString profileSteamid, SFriends friends);
+    void goToGames(SProfile &profileSteamid, SGames &games);
+    void goToFriends(const QString &profileSteamid, SFriends &friends);
     void goToFavorites();
-    void goToStatistics(QString profileSteamid, SGames games, QString profileName);
+    void goToStatistics(const QString &profileSteamid, SGames &games, const QString &profileName);
 
     void updateSettings();
 
-    FormProfile *createFormProfile(SProfile aProfile);
-    FormGames *createFormGames(SProfile aProfile, SGames aGames);
-    FormFriends *createFormFriends(QString aId, SFriends aFriends);
+    FormProfile *createFormProfile(SProfile &aProfile);
+    FormGames *createFormGames(SProfile &aProfile, SGames &aGames);
+    FormFriends *createFormFriends(const QString &aId, SFriends &aFriends);
     FormFavorites *createFormFavorites();
-    FormStatistics *createFormStatistics(QString aId, SGames aGames, QString aName);
+    FormStatistics *createFormStatistics(const QString &aId, SGames &aGames, const QString &aName);
     FormSettings *createFormSettings();
 signals:
     void s_updateSettings();
@@ -89,13 +90,13 @@ private slots:
     void initComponents();
     QString getTheme();
     void setIcons();
-    void resizeScrollArea(int width=300);
+    void resizeScrollArea(int width = 300);
     void updateEnabledButtonsBackNext();
     void buttonMaximize_Clicked();
     void buttonMinimize_Clicked();
     //Functions
     void buttonFindProfile_Clicked();
-    void goToProfile(QString id, ProfileUrlType type);
+    void goToProfile(const QString &id, ProfileUrlType type);
     void buttonSettings_Clicked();
     void buttonExit_Clicked();
     //Profile

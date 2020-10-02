@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QTableWidget>
-#include <class/steamapi/Sgames.h>
-#include <class/Network/requestdata.h>
-#include <class/settings.h>
+#include "class/steamapi/Sgames.h"
+#include "class/Network/requestdata.h"
+#include "class/settings.h"
 #include <QEventLoop>
 #include <QFontDatabase>
 
@@ -16,7 +16,7 @@ public slots:
 
 public:
     explicit ThreadGames(const int a_tableColumnAppid, const int a_tableColumnIndex, const int a_tableColumnName, QTableWidget *a_tableWidgetGames,
-                         SGames a_games, QObject *a_parent = nullptr);
+                         SGames &a_games, QObject *a_parent = nullptr);
 
     ~ThreadGames();
 signals:

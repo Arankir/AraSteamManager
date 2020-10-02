@@ -2,9 +2,9 @@
 #define THREADSTATISTICS_H
 
 #include <QObject>
-#include <class/steamapi/Sgames.h>
-#include <class/steamapi/Sachievements.h>
-#include <class/Network/requestdata.h>
+#include "class/steamapi/Sgames.h"
+#include "class/steamapi/Sachievements.h"
+#include "class/Network/requestdata.h"
 #include <QEventLoop>
 
 class ThreadStatistics : public QObject {
@@ -13,7 +13,7 @@ public slots:
     int fill();
 
 public:
-    explicit ThreadStatistics(SGames a_games, QString a_id, QVector<int> &aNumOf, QVector<QPair<QString,QString> > &aComplete,
+    explicit ThreadStatistics(SGames &a_games, const QString &a_id, QVector<int> &aNumOf, QVector<QPair<QString,QString> > &aComplete,
                               QVector<QPair<QString,QString>> &aStarted, QVector<QPair<QString,QString>> &aNotStarted,
                               QVector<double> &aAveragePercent, int &aSummColumn, QVector<int> &aTimes,
                               QVector<int> &aMonths, QVector<QPair<QString,int>> &aYears, QObject *a_parent = nullptr);

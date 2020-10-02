@@ -3,14 +3,14 @@
 
 #include <QWidget>
 #include <QPair>
-#include <class/steamapi/Sgames.h>
-#include <class/settings.h>
-#include <class/steamapi/Sachievements.h>
-#include <class/steamapi/Sfriends.h>
-#include <class/settings.h>
-#include <class/Threads/threading.h>
+#include "class/steamapi/Sgames.h"
+#include "class/settings.h"
+#include "class/steamapi/Sachievements.h"
+#include "class/steamapi/Sfriends.h"
+#include "class/settings.h"
+#include "class/Threads/threading.h"
 
-#include <class/NotMine/donutbreakdownchart.h>
+#include "class/NotMine/donutbreakdownchart.h"
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -36,7 +36,7 @@ public slots:
     void updateSettings();
     void setIcons();
 public:
-    explicit FormStatistics(QString id, SGames games, QString name, QWidget *parent = nullptr);
+    explicit FormStatistics(const QString &id, SGames &games, const QString &name, QWidget *parent = nullptr);
     ~FormStatistics();
 
 signals:

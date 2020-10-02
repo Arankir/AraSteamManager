@@ -24,7 +24,7 @@ FormContainerAchievements::~FormContainerAchievements() {
     delete ui;
 }
 
-void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer &aPl, SProfile aProfile, SGame aGame, int aNum) {
+void FormContainerAchievements::AddFormAchievement(SAchievementsPlayer &aPl, SProfile aProfile, SGame &aGame, int aNum) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); i++) {
         FormAchievements *tab = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements[0].widget(i));
         if (tab) {

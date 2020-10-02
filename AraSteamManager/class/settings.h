@@ -144,13 +144,13 @@ public:
     QPoint getAchievementContainerPercentPos();
 
     static QString getKey();
-    static bool createDir(QString path);
-    static QString getUrlIconGame(QString appId, QString img_icon_url);
+    static bool createDir(const QString &path);
+    static QString getUrlIconGame(const QString &appId, const QString &img_icon_url);
     void syncronizeSettings();
 
-    QString getPathForImagesProfiles(QString url);
-    QString getPathForImagesAchievements(QString gameId, QString url);
-    QString getPathForIconGames(QString url);
+    QString getPathForImagesProfiles(const QString &url);
+    QString getPathForImagesAchievements(const QString &gameId, const QString &url);
+    QString getPathForIconGames(const QString &url);
     const QString _pathCategories = "files/categories/";// /номер игры.json
     const QString _pathFavorites = "files/favorites/";// /тип.json
     const QString _pathHide = "files/hide/";// /номер игры.json

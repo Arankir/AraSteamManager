@@ -2,7 +2,7 @@
 #include "ui_formstatistics.h"
 
 //Можно подключить при изменении названия слайса изменить название мейн слайса, тогда будет переводиться легенда
-FormStatistics::FormStatistics(QString aId, SGames aGames, QString aName, QWidget *aParent): QWidget(aParent), ui(new Ui::FormStatistics), _id(aId), _games(aGames), _name(aName) {
+FormStatistics::FormStatistics(const QString &aId, SGames &aGames, const QString &aName, QWidget *aParent): QWidget(aParent), ui(new Ui::FormStatistics), _id(aId), _games(aGames), _name(aName) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);

@@ -1,6 +1,6 @@
 #include "threadgames.h"
 
-ThreadGames::ThreadGames(const int aTableColumnAppid, const int aTableColumnIndex, const int aTableColumnName, QTableWidget *aTableWidgetGames, SGames aGames, QObject *aParent):
+ThreadGames::ThreadGames(const int aTableColumnAppid, const int aTableColumnIndex, const int aTableColumnName, QTableWidget *aTableWidgetGames, SGames &aGames, QObject *aParent):
 QObject(aParent), c_tableColumnAppid(aTableColumnAppid), c_tableColumnIndex(aTableColumnIndex), c_tableColumnName(aTableColumnName), _games(aGames), _TableWidgetGames(aTableWidgetGames) {
 
 }

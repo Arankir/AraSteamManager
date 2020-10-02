@@ -602,11 +602,11 @@ void MainWindow::progressLoading(int aProgress, int) {
 }
 
 #define ContainerAchievementsStart {
-void MainWindow::addAchievements(SAchievementsPlayer &aAchievements, SGame aGames) {
+void MainWindow::addAchievements(SAchievementsPlayer &aAchievements, SGame &aGames) {
     if (_achievementsCount == 0) {
         _containerAchievementsForm = new FormContainerAchievements();
-        connect(_containerAchievementsForm ,&FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
-        connect(_containerAchievementsForm, &FormContainerAchievements::s_formClose, this, &MainWindow::containerAchievementsClose);
+        connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
+        connect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &MainWindow::containerAchievementsClose);
         _windowChildCount++;
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
@@ -628,7 +628,9 @@ void MainWindow::containerAchievementsClose() {
 }
 
 void MainWindow::returnFromAchievements(int aNum) {
-    disconnect(_achievementsForms[aNum], &FormAchievements::s_returnToGames, this, &MainWindow::returnFromAchievements);
+    //disconnect(_achievementsForms[aNum], &FormAchievements::s_returnToGames, this, &MainWindow::returnFromAchievements);
+    disconnect(_containerAchievementsForm);
+    delete _containerAchievementsForm;
     //delete achievementsforms[num];
 }
 #define ContainerAchievementsEnd }
@@ -636,7 +638,7 @@ void MainWindow::returnFromAchievements(int aNum) {
 #define FormsStart {
 
 #define FormsCreateStart {
-FormProfile *MainWindow::createFormProfile(SProfile aProfile) {
+FormProfile *MainWindow::createFormProfile(SProfile &aProfile) {
     FormProfile *newFormProfile = new FormProfile(aProfile);
     newFormProfile->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum));
     connect(newFormProfile, &FormProfile::s_goToGames,       this,           &MainWindow::goToGames);
@@ -648,26 +650,26 @@ FormProfile *MainWindow::createFormProfile(SProfile aProfile) {
     return newFormProfile;
 }
 
-FormGames *MainWindow::createFormGames(SProfile aProfile, SGames aGames) {
+FormGames *MainWindow::createFormGames(SProfile &aProfile, SGames &aGames) {
     _gamesForm = new FormGames(aProfile, aGames, this);
-    connect(_gamesForm, &FormGames::s_finish,             this,       [=](int aWidth) {
-        showForm(c_formsGames, aWidth);
-    });
-    connect(_gamesForm, &FormGames::s_achievementsLoaded, this,       &MainWindow::progressLoading);
-    connect(_gamesForm, &FormGames::s_showAchievements,   this,       &MainWindow::addAchievements);
-    connect(this,       &MainWindow::s_updateSettings,    _gamesForm, &FormGames::updateSettings);
+    connect(this,       &MainWindow::s_updateSettings,    _gamesForm,   &FormGames::updateSettings);
+    connect(_gamesForm, &FormGames::s_achievementsLoaded, this,         &MainWindow::progressLoading);
+    connect(_gamesForm, &FormGames::s_showAchievements,   this,         &MainWindow::addAchievements);
+    connect(_gamesForm, &FormGames::s_finish,             this,         [=](int aWidth) {
+                                                                            showForm(c_formsGames, aWidth);
+                                                                        });
     _gamesForm->setWhatsThis("FormGames");
     return _gamesForm;
 }
 
-FormFriends *MainWindow::createFormFriends(QString aId, SFriends aFriends) {
+FormFriends *MainWindow::createFormFriends(const QString &aId, SFriends &aFriends) {
     _friendsForm = new FormFriends(aId, aFriends, this);
-    connect(_friendsForm, &FormFriends::s_friendsLoaded, this,         &MainWindow::progressLoading);
-    connect(_friendsForm, &FormFriends::s_finish,        this,         [=]() {
-        showForm(c_formsFriends);
-    });
-    connect(_friendsForm, &FormFriends::s_go_to_profile, this,         &MainWindow::goToProfile);
-    connect(this,         &MainWindow::s_updateSettings, _friendsForm, &FormFriends::updateSettings);
+    connect(this,         &MainWindow::s_updateSettings, _friendsForm,  &FormFriends::updateSettings);
+    connect(_friendsForm, &FormFriends::s_friendsLoaded, this,          &MainWindow::progressLoading);
+    connect(_friendsForm, &FormFriends::s_go_to_profile, this,          &MainWindow::goToProfile);
+    connect(_friendsForm, &FormFriends::s_finish,        this,          [=]() {
+                                                                            showForm(c_formsFriends);
+                                                                        });
     _friendsForm->setWhatsThis("FormFriends");
     return _friendsForm;
 }
@@ -679,13 +681,13 @@ FormFavorites *MainWindow::createFormFavorites() {
     return _favoritesForm;
 }
 
-FormStatistics *MainWindow::createFormStatistics(QString aId, SGames aGames, QString aName) {
+FormStatistics *MainWindow::createFormStatistics(const QString &aId, SGames &aGames, const QString &aName) {
     _statisticsForm = new FormStatistics(aId, aGames, aName, this);
-    connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this,            &MainWindow::progressLoading);
-    connect(_statisticsForm, &FormStatistics::s_finish,           this,            [=]() {
-        showForm(c_formsStatistic);
-    });
-    connect(this,            &MainWindow::s_updateSettings,       _statisticsForm, &FormStatistics::updateSettings);
+    connect(this,            &MainWindow::s_updateSettings,       _statisticsForm,  &FormStatistics::updateSettings);
+    connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this,             &MainWindow::progressLoading);
+    connect(_statisticsForm, &FormStatistics::s_finish,           this,             [=]() {
+                                                                                        showForm(c_formsStatistic);
+                                                                                    });
     return _statisticsForm;
 }
 
@@ -697,7 +699,7 @@ FormSettings *MainWindow::createFormSettings() {
 #define FormsCreateEnd }
 
 #define GoToFormStart {
-void MainWindow::goToProfile(QString aId, ProfileUrlType aType) {
+void MainWindow::goToProfile(const QString &aId, ProfileUrlType aType) {
     SProfiles newProfile(aId, false, aType);
     if(newProfile.getStatus() == StatusValue::success) {
         returnFromForms();
@@ -717,7 +719,7 @@ void MainWindow::goToProfile(QString aId, ProfileUrlType aType) {
     }
 }
 
-void MainWindow::goToGames(SProfile aProfileSteamId, SGames aGames) {
+void MainWindow::goToGames(SProfile &aProfileSteamId, SGames &aGames) {
     if(_gamesForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
@@ -731,7 +733,7 @@ void MainWindow::goToGames(SProfile aProfileSteamId, SGames aGames) {
     }
 }
 
-void MainWindow::goToFriends(QString aSteamId, SFriends aFriends) {
+void MainWindow::goToFriends(const QString &aSteamId, SFriends &aFriends) {
     if(_friendsForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
@@ -759,7 +761,7 @@ void MainWindow::goToFavorites() {
     }
 }
 
-void MainWindow::goToStatistics(QString aId, SGames aGames, QString aProfileName) {
+void MainWindow::goToStatistics(const QString &aId, SGames &aGames, const QString &aProfileName) {
     if(_statisticsForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
@@ -837,6 +839,7 @@ void MainWindow::closeEvent(QCloseEvent *aEvent) {
 #define EventsEnd }
 
 MainWindow::~MainWindow() {
+    //может быть ошибка
     returnFromForms();
     _containerAchievementsForm->close();
     delete _containerAchievementsForm;
@@ -884,15 +887,17 @@ void MainWindow::resizeScrollArea(int aWidth) {
 #define Functions {
 void MainWindow::buttonFindProfile_Clicked() {
     QString profileId = ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com").remove('\r');
-    if(ui->LineEditIdProfile->text().indexOf("/id/", 0) > -1) {
+    ProfileUrlType type;
+    if(ui->LineEditIdProfile->text().indexOf("/id/") > -1) {
         profileId = profileId.remove("/id/").remove("/");
-        goToProfile(profileId, ProfileUrlType::vanity);
+        type = ProfileUrlType::vanity;
     } else {
-        if(ui->LineEditIdProfile->text().indexOf("/profiles/", 0) > -1) {
+        if(ui->LineEditIdProfile->text().indexOf("/profiles/") > -1) {
             profileId = profileId.remove("/profiles/").remove("/");
         }
-        goToProfile(profileId, ProfileUrlType::id);
+        type = ProfileUrlType::id;
     }
+    goToProfile(profileId, type);
     returnFromForms();
 }
 

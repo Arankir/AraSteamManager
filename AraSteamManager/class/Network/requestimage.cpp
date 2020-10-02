@@ -1,6 +1,6 @@
 #include "requestimage.h"
 
-RequestImage::RequestImage(QLabel *aLabel, QString aUrl, QString aSave, bool aAutoSave, QObject *aParent): QObject(aParent),
+RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, const QString &aSave, bool aAutoSave, QObject *aParent): QObject(aParent),
 _label(aLabel), _save(aSave), _autosave(aAutoSave) {
     RequestData *image = new RequestData(aUrl, true, this);
     if (_label != nullptr) {
@@ -11,11 +11,11 @@ _label(aLabel), _save(aSave), _autosave(aAutoSave) {
     connect(image, SIGNAL(s_finished(RequestData*)), this, SLOT(onLoad(RequestData*)));
 }
 
-RequestImage::RequestImage(QLabel *aLabel, QString aUrl, QObject *aParent): RequestImage(aLabel, aUrl, "", false, aParent) {
+RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, QObject *aParent): RequestImage(aLabel, aUrl, "", false, aParent) {
 
 }
 
-RequestImage::RequestImage(QString aUrl, QString aSave, bool aAutoSave, QObject *aParent): RequestImage(nullptr, aUrl, aSave, aAutoSave, aParent) {
+RequestImage::RequestImage(const QString &aUrl, const QString &aSave, bool aAutoSave, QObject *aParent): RequestImage(nullptr, aUrl, aSave, aAutoSave, aParent) {
 
 }
 

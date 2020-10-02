@@ -2,8 +2,8 @@
 #include <QApplication>
 #include <QStyleFactory>
 #include <QTranslator>
-#include <class/settings.h>
-#include <frameless.h>
+#include "class/settings.h"
+#include "frameless.h"
 
 int main(int argc, char *argv[])
 {

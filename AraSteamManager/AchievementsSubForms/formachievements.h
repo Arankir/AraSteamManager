@@ -11,23 +11,23 @@
 #include <QButtonGroup>
 #include <QPropertyAnimation>
 #include <QDesktopServices>
-#include <class/Network/requestimage.h>
-#include <class/settings.h>
-#include <class/steamapi/Sgames.h>
-#include <class/steamapi/Sachievements.h>
-#include <class/filter.h>
-#include <class/favorites.h>
-#include <class/categoriesgame.h>
-#include <class/Threads/threading.h>
-#include <AchievementsSubForms/formcategoryvalue.h>
-#include <AchievementsSubForms/formcategoryvalue_2.h>
-#include <AchievementsSubForms/formachievementwidget.h>
-#include <AchievementsSubForms/formcompareprofilefilter.h>
-#include <AchievementsSubForms/formtablesheaders.h>
-#include <subwidget/qbuttonwithdata.h>
-#include <subwidget/qradiobuttonwithdata.h>
-#include <subwidget/qcomboboxwithdata.h>
-#include <subwidget/qcheckboxwithdata.h>
+#include "class/Network/requestimage.h"
+#include "class/settings.h"
+#include "class/steamapi/Sgames.h"
+#include "class/steamapi/Sachievements.h"
+#include "class/filter.h"
+#include "class/favorites.h"
+#include "class/categoriesgame.h"
+#include "class/Threads/threading.h"
+#include "AchievementsSubForms/formcategoryvalue.h"
+#include "AchievementsSubForms/formcategoryvalue_2.h"
+#include "AchievementsSubForms/formachievementwidget.h"
+#include "AchievementsSubForms/formcompareprofilefilter.h"
+#include "AchievementsSubForms/formtablesheaders.h"
+#include "subwidget/qbuttonwithdata.h"
+#include "subwidget/qradiobuttonwithdata.h"
+#include "subwidget/qcomboboxwithdata.h"
+#include "subwidget/qcheckboxwithdata.h"
 
 namespace Ui {
     class FormAchievements;
@@ -73,7 +73,7 @@ public slots:
     void formCategoryListWidget_CurrentRowChanged();
     void buttonManual_Clicked();
 public:
-    explicit FormAchievements(SAchievementsPlayer pl, SProfile profile, SGame game, int num, QWidget *parent = nullptr);
+    explicit FormAchievements(SAchievementsPlayer &pl, SProfile &profile, SGame &game, int num, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -84,16 +84,16 @@ private slots:
     void changeEvent(QEvent *event);
     void resizeEvent(QResizeEvent *);
     void closeEvent(QCloseEvent*);
-    void initComponents(SAchievementsPlayer player);
+    void initComponents(SAchievementsPlayer &player);
     void retranslate();
     void setIcons();
 
-    QButtonWithData *createButtonWithData(QString aObjectName, QString aAppertain, QString aType, bool aChecked);
-    void setFormMode(FormAchievements::FormMode mode);
+    QButtonWithData *createButtonWithData(const QString &aObjectName, const QString &aAppertain, const QString &aType, bool aChecked);
+    void setFormMode(FormMode mode);
     void loadingCompare();
     void loadFriendGames(SGames *games);
     void finishLoadFriends();
-    void compareProfileFilterClickFriends(QString name, ReachedType type);
+    void compareProfileFilterClickFriends(const QString &name, ReachedType type);
 
     void buttonCompareAllFriendsReach_Clicked();
     void tableWidgetCompareFriends_CellChanged(int row, int column);

@@ -28,7 +28,7 @@ int CategoriesGame::getGameID() {
     return _categories.value("GameID").toInt();
 }
 
-CategoriesGame::CategoriesGame(SGame aGame, QObject *aParent): QObject(aParent), _game(aGame) {
+CategoriesGame::CategoriesGame(SGame &aGame, QObject *aParent): QObject(aParent), _game(aGame) {
     update();
 }
 
@@ -61,7 +61,7 @@ QList<QString> CategoriesGame::getNoValues(int aCategory) {
     return list;
 }
 
-QFileInfoList CategoriesGame::getFiles(QString aPath) {
+QFileInfoList CategoriesGame::getFiles(const QString &aPath) {
     Settings::createDir(aPath);
     QDir categoriesOld(aPath);
     categoriesOld.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -139,7 +139,7 @@ void CategoriesGame::loadCategories() {
     }
 }
 
-void CategoriesGame::changeCategory(int aCategory, QJsonObject aNewCategory) {
+void CategoriesGame::changeCategory(int aCategory, QJsonObject &aNewCategory) {
     QJsonObject obj;
     obj["Game"] = _categories["Game"];
     obj["GameID"] = _categories["GameID"];

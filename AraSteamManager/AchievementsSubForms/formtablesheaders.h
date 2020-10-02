@@ -6,14 +6,14 @@
 #include <QScrollBar>
 #include <QTableWidgetItem>
 #include <QLabel>
-#include <subwidget/qradiobuttonwithdata.h>
-#include <class/steamapi/Sprofile.h>
-#include <class/steamapi/Sgames.h>
-#include <class/steamapi/Sachievements.h>
-#include <class/filter.h>
-#include <class/settings.h>
-#include <class/Network/requestimage.h>
-#include <class/Threads/threading.h>
+#include "subwidget/qradiobuttonwithdata.h"
+#include "class/steamapi/Sprofile.h"
+#include "class/steamapi/Sgames.h"
+#include "class/steamapi/Sachievements.h"
+#include "class/filter.h"
+#include "class/settings.h"
+#include "class/Network/requestimage.h"
+#include "class/Threads/threading.h"
 
 namespace Ui {
 class FormTablesHeaders;
@@ -30,24 +30,24 @@ class FormTablesHeaders : public QWidget {
 public slots:
     void insertRow(int row);
     void removeRow(int row);
-    bool addFriendColumn(SProfile friendProfile);
+    bool addFriendColumn(SProfile &friendProfile);
     void addNoValueColumn();
     void addCategoryColumn();
-    void removeFriendColumn(QString friendName);
+    void removeFriendColumn(const QString &friendName);
     void removeFriendColumn(int column);
     void removeCategoryColumn(int column);
     bool pullTable();
     void hideCheckedAchievement(QTableWidgetItem *aItem);
     void updateFilterWithMyProfile(ReachedType type, bool solo, bool compare);
-    void updateFilterWithFriend(QString friendName, ReachedType type);
+    void updateFilterWithFriend(const QString &friendName, ReachedType type);
     void updateFilterCategoriesColumns(int categories);
-    void updateFilterTextAchievement(QString aNewText, bool aSolo, bool aCompare);
-    void updateFilterCategory(int aCategoryIndex, bool aClear, QList<QString> aAchievementNames = QList<QString>());
-    void updateFilterFavorite(QJsonArray afavoritesAchievement);
+    void updateFilterTextAchievement(const QString &newText, bool solo, bool compare);
+    void updateFilterCategory(int categoryIndex, bool clear, QList<QString> achievementNames = QList<QString>());
+    void updateFilterFavorite(QJsonArray favoritesAchievement);
     void setValuesMode(bool value);
-    void setUniqueMode(bool aUnique);
-    void setVisibleContentSelect(int aPos, bool aSelect);
-    void categoryToTable(QString aTitle, QList<QString> aNoValues, QJsonArray aValues, bool aIsNoValue);
+    void setUniqueMode(bool unique);
+    void setVisibleContentSelect(int pos, bool select);
+    void categoryToTable(const QString &title, QList<QString> aNoValues, QJsonArray aValues, bool aIsNoValue);
     bool swapCategoryColumns(int aPosOld, int aPosNew);
     void update();
     QString getHeaderText(int aIndex);
@@ -57,7 +57,7 @@ public slots:
 
     void reverseCategoryColumn(int index);
 public:
-    explicit FormTablesHeaders(SGame game, QString id, SAchievementsPlayer achievements, QWidget *parent = nullptr);
+    explicit FormTablesHeaders(SGame &game, const QString &id, SAchievementsPlayer &achievements, QWidget *parent = nullptr);
     ~FormTablesHeaders();
     void resizeEvent(QResizeEvent *event);
     void changeEvent(QEvent *event);
@@ -89,7 +89,7 @@ public:
     void setVisibleColumn(int column, bool visible);
     void setVisibleRowHeaders(int row, bool visible);
 
-    void changeHorizontalTitle(int column, QString text);
+    void changeHorizontalTitle(int column, const QString &text);
     void setVerticalTitle(int row, QTableWidgetItem *item);
     void setVerticalHeaderTitle(int row, QTableWidgetItem *item);
 
@@ -118,7 +118,7 @@ signals:
     void s_tablePulled(int, int);
 
 private slots:
-    void setHorizontalTitle(int column, QString text);
+    void setHorizontalTitle(int column, const QString &text);
     void insertColumn(int columns);
     void removeColumn(int columns);
     void retranslate();

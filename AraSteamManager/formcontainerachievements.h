@@ -2,8 +2,8 @@
 #define FORMCONTAINERACHIEVEMENTS_H
 
 #include <QWidget>
-#include <AchievementsSubForms/formachievements.h>
-#include <class/settings.h>
+#include "AchievementsSubForms/formachievements.h"
+#include "class/settings.h"
 
 namespace Ui {
 class FormContainerAchievements;
@@ -17,7 +17,7 @@ public:
     ~FormContainerAchievements();
 
 public slots:
-    void AddFormAchievement(SAchievementsPlayer &pl, SProfile ids, SGame game, int num);
+    void AddFormAchievement(SAchievementsPlayer &pl, SProfile ids, SGame &game, int num);
 
 signals:
     void s_removeAchievements(int index);

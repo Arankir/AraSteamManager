@@ -13,15 +13,15 @@
 #include <QEventLoop>
 #include <QDateTime>
 #include <QTextCodec>
-#include <class/settings.h>
-#include <class/statusvalue.h>
-#include <class/Network/requestimage.h>
+#include "class/settings.h"
+#include "class/statusvalue.h"
+#include "class/Network/requestimage.h"
 #include <QDebug>
 
 class SAchievementGlobal : public QObject {
     Q_OBJECT
 public:
-    explicit SAchievementGlobal(QJsonObject achievement, QObject *parent = nullptr);
+    explicit SAchievementGlobal(QJsonObject &achievement, QObject *parent = nullptr);
     const QString _apiName;
     const int _defaultValue;
     const QString _displayName;
@@ -36,7 +36,7 @@ public:
 class SAchievementPercentage : public QObject {
     Q_OBJECT
 public:
-    explicit SAchievementPercentage(QJsonObject achievement, QObject *parent = nullptr);
+    explicit SAchievementPercentage(QJsonObject &achievement, QObject *parent = nullptr);
     const QString _apiName;
     const double _percent;
     SAchievementPercentage(const SAchievementPercentage &achievement);
@@ -46,7 +46,7 @@ public:
 class SAchievementPlayer : public QObject {
     Q_OBJECT
 public:
-    explicit SAchievementPlayer(QJsonObject achievement, QObject *parent = nullptr);
+    explicit SAchievementPlayer(QJsonObject &achievement, QObject *parent = nullptr);
     const QString _apiName;
     const int _achieved;
     const QDateTime _unlockTime;
@@ -58,7 +58,7 @@ public:
 class SAchievement : public QObject {
     Q_OBJECT
 public:
-    explicit SAchievement(SAchievementGlobal global, SAchievementPlayer player, SAchievementPercentage percent, QObject *parent = nullptr);
+    explicit SAchievement(SAchievementGlobal &global, SAchievementPlayer &player, SAchievementPercentage &percent, QObject *parent = nullptr);
     const QString _apiName;
     const int _defaultValue;
     const QString _displayName;
@@ -85,12 +85,12 @@ private:
 class SAchievementsGlobal : public QObject {
     Q_OBJECT
 public:
-    explicit SAchievementsGlobal(QString appid, bool parallel = true, QObject *parent = nullptr);
-    SAchievementsGlobal(QJsonDocument DocAchievements, QObject *parent = nullptr);
+    explicit SAchievementsGlobal(const QString &appid, bool parallel = true, QObject *parent = nullptr);
+    SAchievementsGlobal(QJsonDocument &DocAchievements, QObject *parent = nullptr);
     SAchievementsGlobal(QObject *parent = nullptr);;
     ~SAchievementsGlobal();
-    void Load(QString appid);
-    void set(QJsonDocument DocAchievements);
+    void Load(QString &appid);
+    void set(QJsonDocument &DocAchievements);
     void remove(int index);
     QString getAppid();
     StatusValue getStatus();
@@ -124,12 +124,12 @@ private:
 class SAchievementsPercentage : public QObject {
     Q_OBJECT
 public:
-    explicit SAchievementsPercentage(QString appid, bool parallel = true, QObject *parent = nullptr);
-    SAchievementsPercentage(QJsonDocument docAchievements, QObject *parent = nullptr);
+    explicit SAchievementsPercentage(const QString &appid, bool parallel = true, QObject *parent = nullptr);
+    SAchievementsPercentage(QJsonDocument &docAchievements, QObject *parent = nullptr);
     SAchievementsPercentage(QObject *parent = nullptr);
     ~SAchievementsPercentage();
-    void Load(QString appid);
-    void set(QJsonDocument docAchievements);
+    void Load(const QString &appid);
+    void set(QJsonDocument &docAchievements);
     void remove(int index);
     QString getAppid();
     int getCount();
@@ -138,7 +138,7 @@ public:
     void update();
     void clear();
     SAchievementsPercentage(const SAchievementsPercentage &achievements);
-    SAchievementsPercentage &operator=(const SAchievementsPercentage & friends);
+    SAchievementsPercentage &operator=(const SAchievementsPercentage &friends);
     SAchievementPercentage &operator[](const int &index);
     QList<SAchievementPercentage>::iterator begin() {return _achievements.begin();}
     QList<SAchievementPercentage>::iterator end() {return _achievements.end();}
@@ -159,12 +159,12 @@ private:
 class SAchievementsPlayer : public QObject {
     Q_OBJECT
 public:
-    explicit SAchievementsPlayer(QString appid, QString id, bool parallel = true, QObject *parent = nullptr);
-    SAchievementsPlayer(QJsonDocument docAchievements, QObject *parent = nullptr);
+    explicit SAchievementsPlayer(const QString &appid, const QString &id, bool parallel = true, QObject *parent = nullptr);
+    SAchievementsPlayer(QJsonDocument &docAchievements, QObject *parent = nullptr);
     SAchievementsPlayer(QObject *parent = nullptr);
     ~SAchievementsPlayer();
-    void Load(QString appid, QString id);
-    void set(QJsonDocument docAchievements);
+    void Load(const QString &appid, const QString &id);
+    void set(QJsonDocument &docAchievements);
     int getReached();
     int getNotReached();
     void remove(int index);
@@ -210,14 +210,14 @@ public slots:
     void set(SAchievementsPercentage *percent);
 
 public:
-    explicit SAchievements(QString appid, QString id, QObject *parent = nullptr);
+    explicit SAchievements(const QString &appid, const QString &id, QObject *parent = nullptr);
     SAchievements(SAchievementsGlobal &global, SAchievementsPlayer &player, SAchievementsPercentage &percent, QObject *parent = nullptr);
     SAchievements(SAchievementsGlobal &global, QObject *parent = nullptr);
     SAchievements(SAchievementsPlayer &player, QObject *parent = nullptr);
     SAchievements(SAchievementsPercentage percent, QObject *parent = nullptr);
     SAchievements(QObject *parent = nullptr);
     ~SAchievements();
-    void Load(QString appid, QString id);
+    void Load(const QString &appid, const QString &id);
     void set(SAchievementsGlobal &global, SAchievementsPlayer &player, SAchievementsPercentage &percent);
     void setFinish();
     StatusValue getStatus();

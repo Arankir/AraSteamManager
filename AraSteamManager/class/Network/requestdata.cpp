@@ -1,6 +1,6 @@
 #include "requestdata.h"
 
-RequestData::RequestData(QString aUrl, bool aParallel, QObject *aParent): QObject(aParent), _answer(""), _url(aUrl) {
+RequestData::RequestData(const QString &aUrl, bool aParallel, QObject *aParent): QObject(aParent), _answer(""), _url(aUrl) {
     _manager = new QNetworkAccessManager();
     connect(_manager, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
     if (!aUrl.isEmpty()) {
@@ -12,7 +12,7 @@ RequestData::RequestData(QObject *parent): RequestData("", true, parent) {
 
 }
 
-void RequestData::get(QString aUrl, bool aParallel) {
+void RequestData::get(const QString &aUrl, bool aParallel) {
     _manager->get(QNetworkRequest(QUrl(aUrl)));
     if (!aParallel) {
         QEventLoop loop;

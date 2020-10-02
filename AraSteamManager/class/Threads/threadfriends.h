@@ -4,9 +4,9 @@
 #include <QObject>
 #include <QTableWidget>
 #include <QStandardItemModel>
-#include <class/steamapi/Sfriends.h>
-#include <class/Network/requestdata.h>
-#include <class/settings.h>
+#include "class/steamapi/Sfriends.h"
+#include "class/Network/requestdata.h"
+#include "class/settings.h"
 #include <QFontDatabase>
 
 class ThreadFriends : public QObject {
@@ -23,7 +23,7 @@ signals:
     void s_progress(int p, int row);
 
 private slots:
-    QTableWidgetItem *getState(QString gameExtraInfo, int personaState);
+    QTableWidgetItem *getState(const QString &gameExtraInfo, int personaState);
     QTableWidgetItem *getPrivacy(int communityVisibilityState);
 
 private:
