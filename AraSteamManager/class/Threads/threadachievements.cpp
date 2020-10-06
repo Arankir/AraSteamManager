@@ -13,7 +13,7 @@ c_tableColumnWorld(0), c_tableColumnMy(0) {
 }
 
 ThreadAchievements::~ThreadAchievements() {
-    qDebug()<<"Thread achievements deleted";
+    qInfo()<<"Thread achievements deleted";
 }
 
 int ThreadAchievements::fill() {

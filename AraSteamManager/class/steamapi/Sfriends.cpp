@@ -119,7 +119,7 @@ SProfiles SFriends::getProfiles() {
         }
     }
     profiles.set(profilesArray);
-    qDebug()<<"Друзей"<<profiles.getCount();
+    qInfo() << "Друзей" << profiles.getCount();
     return profiles;
 }
 

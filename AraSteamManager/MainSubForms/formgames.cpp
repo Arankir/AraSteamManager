@@ -263,7 +263,7 @@ void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
 
 #define System {
 FormGames::~FormGames() {
-    qDebug()<<"Форма игр удалилась";
+    qInfo()<<"Форма игр удалилась";
     delete ui;
 }
 

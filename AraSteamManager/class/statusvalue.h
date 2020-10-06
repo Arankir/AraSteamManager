@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-enum class StatusValue{
+enum class StatusValue {
     none,
     success,
     error

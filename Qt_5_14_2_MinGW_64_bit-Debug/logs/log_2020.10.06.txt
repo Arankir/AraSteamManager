@@ -1,0 +1,7 @@
+INFO 2020-10-06 15:37:51.239 void MainWindow::goToProfile(const QString&, ProfileUrlType)Буфер профилей 1 / 1
+INFO 2020-10-06 15:49:36.064 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 16:48:47.075 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 16:52:09.436 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 16:52:48.498 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 16:54:45.567 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 16:55:07.239 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

@@ -265,22 +265,22 @@ void FormAchievements::setIcons() {
         if (bFriendsAll) {
             bFriendsAll->setIcon(QIcon(_setting.getIconAll()));
         } else {
-            qDebug()<<"error FormAchievements::setIcons() bFriendsAll";
+            qWarning()<<"not init bFriendsAll";
         }
         QButtonWithData *bFriendsReached = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(1)->widget());
         if (bFriendsReached) {
             bFriendsReached->setIcon(QIcon(_setting.getIconReached()));
         } else {
-            qDebug()<<"error FormAchievements::setIcons() bFriendsReached";
+            qWarning()<<"not init bFriendsReached";
         }
         QButtonWithData *bFriendsNotReached = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(2)->widget());
         if (bFriendsNotReached) {
             bFriendsNotReached->setIcon(QIcon(_setting.getIconNotReached()));
         } else {
-            qDebug()<<"error FormAchievements::setIcons() bFriendsNotReached";
+            qWarning()<<"not init bFriendsNotReached";
         }
     } else {
-        qDebug()<<"error FormAchievements::setIcons() wFriendsFilter";
+        qWarning()<<"not init wFriendsFilter";
     }
 }
 
@@ -438,7 +438,7 @@ void FormAchievements::compareProfileFilterClickFriends(const QString &aName, Re
         QString name = friendAvatar->toolTip();
         _tableAchievements->updateFilterWithFriend(name, aType);
     } else {
-        qDebug()<<"error FormAchievements::compareProfileFilterClickFriends(" + aName + ", "/*+QVariant::fromValue(aType).toString()+*/")";
+        qWarning()<<"not init friendAvatar";
     }
 }
 
@@ -462,7 +462,7 @@ void FormAchievements::buttonCompareAllFriendsReach_Clicked() {
             }
         }
     } else {
-        qDebug()<<"error FormAchievements::buttonCompareAllFriendsReach_Clicked() sender";
+        qWarning()<<"not init senderButton";
     }
 }
 
@@ -482,7 +482,7 @@ void FormAchievements::tableWidgetCompareFriends_CellChanged(int aRow, int aColu
                 delete friendFilter;
                 //ui->TableWidgetFriends->resizeColumnsToContents();
             } else {
-                qDebug()<<"error FormAchievements::tableWidgetCompareFriends_CellChanged(" + QString::number(aRow) + ", " + QString::number(aColumn) + ") friendFilter";
+                qWarning()<<"not init friendFilter";
             }
         }
     }
@@ -799,7 +799,7 @@ void FormAchievements::comboBoxCategory_IndexChange(int aIndex) {
                 _tableAchievements->updateFilterCategory(categoryIndex, true);
             }
         } else {
-            qDebug()<<"error FormAchievements::comboBoxCategory_IndexChange(" + QString::number(aIndex) + ") comboBox";
+            qWarning()<<"not init comboBox";
         }
     }
 }
@@ -816,7 +816,7 @@ void FormAchievements::checkBoxCategory_StateChanged(int aIndex) {
                 _tableAchievements->updateFilterCategory(categoryIndex, true);
             }
         } else {
-            qDebug()<<"error FormAchievements::checkBoxCategory_IndexChange(" + QString::number(aIndex) + ") checkBox";
+            qWarning()<<"not init checkBox";
         }
     }
 }
@@ -1092,7 +1092,7 @@ void FormAchievements::formCategoryValueVisibleChange(int aPos, bool aVisible) {
                 break;
             }
         } else {
-            qDebug()<<"FormAchievements::formCategoryValueVisibleChange error";
+            qWarning()<<"not init value";
         }
     }
     ui->ListWidgetValuesCategory->setCurrentRow(currentRow);

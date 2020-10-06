@@ -712,10 +712,10 @@ void MainWindow::goToProfile(const QString &aId, ProfileUrlType aType) {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->count() - 1);
         updateSettings();
         updateEnabledButtonsBackNext();
-        qDebug()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex() + 1<<"/"<<ui->StackedWidgetProfiles->count();
+        qInfo()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex() + 1<<"/"<<ui->StackedWidgetProfiles->count();
     } else {
         QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
-        qDebug()<<newProfile.getError();
+        qWarning()<<newProfile.getError();
     }
 }
 
@@ -834,6 +834,7 @@ void MainWindow::closeEvent(QCloseEvent *aEvent) {
     }
     _setting.setMainWindowParams(this->frameGeometry());
     _setting.syncronizeSettings();
+    qInfo()<<"Programm closed";
     aEvent->accept();
 }
 #define EventsEnd }

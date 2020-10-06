@@ -46,7 +46,7 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     updateSettings();
 }
 
-FormProfile::~FormProfile(){
+FormProfile::~FormProfile() {
     delete ui;
 }
 
@@ -123,11 +123,12 @@ void FormProfile::setProfile(SProfile &aProfile) {
 void FormProfile::setName() {
     ui->LabelName->setText(_profile._personaName);
     ui->LabelNameMinimize->setText(_profile._personaName);
+    ui->LabelProfileVisibility->setText(tr("Профиль"));
     QPixmap profileState;
     QGraphicsDropShadowEffect *profileLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelProfileVisibility->graphicsEffect());
     switch (_profile._communityVisibilityState) {
         case 1:
-            ui->LabelProfileVisibility->setText(tr("Скрытый"));
+            ui->LabelProfileVisibility->setToolTip(tr("Скрытый"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_red);
             profileState.load(_setting.getIconStateRed());
             if (profileLight) {
@@ -135,7 +136,7 @@ void FormProfile::setName() {
             }
             break;
         case 3:
-            ui->LabelProfileVisibility->setText(tr("Публичный"));
+            ui->LabelProfileVisibility->setToolTip(tr("Публичный"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_green);
             profileState.load(_setting.getIconStateGreen());
             if (profileLight) {
@@ -143,7 +144,7 @@ void FormProfile::setName() {
             }
             break;
         case 8:
-            ui->LabelProfileVisibility->setText(tr("Для друзей"));
+            ui->LabelProfileVisibility->setToolTip(tr("Для друзей"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_yellow);
             profileState.load(_setting.getIconStateYellow());
             if (profileLight) {
@@ -151,7 +152,7 @@ void FormProfile::setName() {
             }
             break;
         default:
-            ui->LabelProfileVisibility->setText(tr("Неизвестно"));
+            ui->LabelProfileVisibility->setToolTip(tr("Неизвестно"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_blue);
             profileState.load(_setting.getIconStateBlue());
             if (profileLight) {
@@ -218,15 +219,15 @@ void FormProfile::setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha)
 }
 
 void FormProfile::setGames(const QString &aSteamId) {
-    qDebug()<<"FormProfile::setGames"<<aSteamId;
     _games.set(aSteamId, true, true, false);
+    ui->LabelGamesVisibility->setText(tr("Игры"));
     QPixmap gamesState;
     QGraphicsDropShadowEffect *gamesLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelGamesVisibility->graphicsEffect());
     switch (_games.getStatus()) {
     case StatusValue::success: {
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
-        ui->LabelGamesVisibility->setText(tr("Публичный"));
+        ui->LabelGamesVisibility->setToolTip(tr("Публичный"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_green);
         gamesState.load(_setting.getIconStateGreen());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
@@ -238,7 +239,7 @@ void FormProfile::setGames(const QString &aSteamId) {
     case StatusValue::error: {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setText(tr("Скрытый"));
+        ui->LabelGamesVisibility->setToolTip(tr("Скрытый"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_red);
         gamesState.load(_setting.getIconStateRed());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
@@ -250,7 +251,7 @@ void FormProfile::setGames(const QString &aSteamId) {
     case StatusValue::none: {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setText(tr("Неизвестно"));
+        ui->LabelGamesVisibility->setToolTip(tr("Неизвестно"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_blue);
         gamesState.load(_setting.getIconStateBlue());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
@@ -265,12 +266,13 @@ void FormProfile::setGames(const QString &aSteamId) {
 
 void FormProfile::setFriends(const QString &aSteamId) {
     _friends.set(aSteamId,false);
+    ui->LabelFriendsVisibility->setText(tr("Друзья"));
     QPixmap friendsState;
     QGraphicsDropShadowEffect *friendsLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelFriendsVisibility->graphicsEffect());
     switch (_friends.getStatus()) {
     case StatusValue::success: {
         ui->ButtonFriends->setEnabled(true);
-        ui->LabelFriendsVisibility->setText(tr("Публичный"));
+        ui->LabelFriendsVisibility->setToolTip(tr("Публичный"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_green);
         friendsState.load(_setting.getIconStateGreen());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
@@ -281,7 +283,7 @@ void FormProfile::setFriends(const QString &aSteamId) {
     }
     case StatusValue::error: {
         ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setText(tr("Скрытый"));
+        ui->LabelFriendsVisibility->setToolTip(tr("Скрытый"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_red);
         friendsState.load(_setting.getIconStateRed());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
@@ -292,7 +294,7 @@ void FormProfile::setFriends(const QString &aSteamId) {
     }
     case StatusValue::none: {
         ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setText(tr("Неизвестно"));
+        ui->LabelFriendsVisibility->setToolTip(tr("Неизвестно"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_blue);
         friendsState.load(_setting.getIconStateBlue());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));

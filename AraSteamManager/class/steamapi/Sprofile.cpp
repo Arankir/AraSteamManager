@@ -32,7 +32,6 @@ void SProfile::loading(bool aParallel) {
     } else {
         RequestData request(url, false);
         QJsonObject doc = QJsonDocument::fromJson(request.getAnswer()).object().value("response").toObject().value("players").toArray().at(0).toObject();
-        qDebug()<<doc;
         set(doc);
         emit s_finished(this);
         emit s_finished();

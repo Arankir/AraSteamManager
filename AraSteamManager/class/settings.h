@@ -8,6 +8,12 @@
 #include <QSettings>
 #include <QDebug>
 #include <QScreen>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(logDebug)
+Q_DECLARE_LOGGING_CATEGORY(logInfo)
+Q_DECLARE_LOGGING_CATEGORY(logWarning)
+Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
 class Settings : public QObject {
     const QString c_language                     = "Settings/Language";
@@ -39,12 +45,12 @@ public:
     explicit Settings(QObject *parent = nullptr);
     explicit Settings(QRect geometry, QObject *parent = nullptr);
     void customGeometry(QRect geometry);
-    void setMyProfile(QString a_myProfiles);
-    void setLanguage(int a_language);
-    void setTheme(int a_theme);
-    void setSaveimage(int a_saveImage);
-    void setVisibleHiddenGames(int a_visibleHiddenGames);
-    void setVisibleProfileInfo(int a_visibleProfileInfo);
+    void setMyProfile(QString myProfiles);
+    void setLanguage(int language);
+    void setTheme(int theme);
+    void setSaveimage(int saveImage);
+    void setVisibleHiddenGames(int visibleHiddenGames);
+    void setVisibleProfileInfo(int visibleProfileInfo);
     void setMaximumTableRows(int rows);
 
     void setMainWindowParams(QRect geometry);
@@ -148,9 +154,9 @@ public:
     static QString getUrlIconGame(const QString &appId, const QString &img_icon_url);
     void syncronizeSettings();
 
-    QString getPathForImagesProfiles(const QString &url);
-    QString getPathForImagesAchievements(const QString &gameId, const QString &url);
-    QString getPathForIconGames(const QString &url);
+    static QString getPathForImagesProfiles(const QString &url);
+    static QString getPathForImagesAchievements(const QString &gameId, const QString &url);
+    static QString getPathForIconGames(const QString &url);
     const QString _pathCategories = "files/categories/";// /номер игры.json
     const QString _pathFavorites = "files/favorites/";// /тип.json
     const QString _pathHide = "files/hide/";// /номер игры.json

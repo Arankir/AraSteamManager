@@ -6,7 +6,7 @@ QObject(aParent), c_tableColumnAppid(aTableColumnAppid), c_tableColumnIndex(aTab
 }
 
 ThreadGames::~ThreadGames() {
-    qDebug()<<"Thread games deleted";
+    qInfo()<<"Thread games deleted";
 }
 
 int ThreadGames::fill() {
