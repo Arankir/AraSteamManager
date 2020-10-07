@@ -582,19 +582,19 @@ void MainWindow::setIcons() {
 //    ui->LabelLogo->setTextFormat(Qt::RichText);
 //    ui->LabelLogo->setText("<img height=30 style=\"vertical-align: top\" src=\"" + _setting.getIconLogoColor() + "\"> "
 //                                "<span style=\"vertical-align: bottom\">НАЯ ПРОГА</span>");
-    ui->ButtonUpdate->setIcon(QIcon(_setting.getIconUpdate()));
-    ui->ButtonGoToMyProfile->setIcon(QIcon(_setting.getIconHome()));
-    ui->ButtonFindProfile->setIcon(QIcon(_setting.getIconFindProfile()));
-    ui->ButtonSettings->setIcon(QIcon(_setting.getIconSettings()));
-    ui->ButtonExit->setIcon(QIcon(_setting.getIconCloseWindow()));
-    ui->ButtonMinimize->setIcon(QIcon(_setting.getIconMinimizeWindow()));
+    ui->ButtonUpdate        ->setIcon(QIcon(_setting.getIconUpdate()));
+    ui->ButtonGoToMyProfile ->setIcon(QIcon(_setting.getIconHome()));
+    ui->ButtonFindProfile   ->setIcon(QIcon(_setting.getIconFindProfile()));
+    ui->ButtonSettings      ->setIcon(QIcon(_setting.getIconSettings()));
+    ui->ButtonExit          ->setIcon(QIcon(_setting.getIconCloseWindow()));
+    ui->ButtonMinimize      ->setIcon(QIcon(_setting.getIconMinimizeWindow()));
     if (this->isMaximized()) {
-        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconNormalizeWindow()));
+        ui->ButtonMaximize  ->setIcon(QIcon(_setting.getIconNormalizeWindow()));
     } else {
-        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconMaximizeWindow()));
+        ui->ButtonMaximize  ->setIcon(QIcon(_setting.getIconMaximizeWindow()));
     }
-    ui->ButtonBack->setIcon(QIcon(_setting.getIconLeft()));
-    ui->ButtonNext->setIcon(QIcon(_setting.getIconRight()));
+    ui->ButtonBack          ->setIcon(QIcon(_setting.getIconLeft()));
+    ui->ButtonNext          ->setIcon(QIcon(_setting.getIconRight()));
 }
 
 void MainWindow::progressLoading(int aProgress, int) {

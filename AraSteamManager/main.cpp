@@ -40,24 +40,21 @@ int main(int argc, char *argv[]) {
 }
 
 void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMessage) {
-    Q_UNUSED(aContext);
     const char *function = aContext.function ? aContext.function : "";
-    // Открываем поток записи в файл
     QTextStream out(logFile_.data());
-    // По типу определяем, к какому уровню относится сообщение
-    switch (aType)
-    {
+
+    switch (aType) {
     case QtInfoMsg:     out << "INFO "; break;
     case QtDebugMsg:    out << "DEBG "; break;
     case QtWarningMsg:  out << "WRNG "; break;
     case QtCriticalMsg: out << "CRCL "; break;
     case QtFatalMsg:    out << "FATL "; break;
     }
-    // Записываем дату записи
-    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz ");
-    // Записываем в вывод категорию сообщения и само сообщение
-    out /*<< context.category << ": " */<< function << "  " << aMessage << endl;
-    out.flush();    // Очищаем буферизированные данные
+
+    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ");
+    out << /*aContext.category << ": " << */function << "  " << aMessage << endl;
+    out.flush();
+
     QString output(function);
     output += "  " + aMessage;
     OutputDebugString(reinterpret_cast<const wchar_t *>(output.utf16()));
@@ -75,7 +72,7 @@ void initLog() {
         if (file.fileName().indexOf("log_") == 0) {
             QDateTime date;
             date.fromString(file.fileName().remove("log_"), "yyyy.MM.dd");
-            if (date < QDateTime::currentDateTime().addMonths(-6)) {
+            if (date < QDateTime::currentDateTime().addMonths(-1)) {
                 QFile::remove(file.filePath() + "/" + file.fileName());
             }
         }

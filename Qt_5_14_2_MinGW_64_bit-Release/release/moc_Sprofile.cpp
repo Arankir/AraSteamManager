@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SProfile_t {
-    QByteArrayData data[11];
-    char stringdata0[94];
+    QByteArrayData data[12];
+    char stringdata0[107];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,12 +42,13 @@ QT_MOC_LITERAL(6, 52, 7), // "request"
 QT_MOC_LITERAL(7, 60, 7), // "loading"
 QT_MOC_LITERAL(8, 68, 8), // "parallel"
 QT_MOC_LITERAL(9, 77, 3), // "set"
-QT_MOC_LITERAL(10, 81, 12) // "ObjSummaries"
+QT_MOC_LITERAL(10, 81, 12), // "QJsonObject&"
+QT_MOC_LITERAL(11, 94, 12) // "ObjSummaries"
 
     },
     "SProfile\0s_finished\0\0SProfile*\0loadURL\0"
     "RequestData*\0request\0loading\0parallel\0"
-    "set\0ObjSummaries"
+    "set\0QJsonObject&\0ObjSummaries"
 };
 #undef QT_MOC_LITERAL
 
@@ -80,7 +81,7 @@ static const uint qt_meta_data_SProfile[] = {
  // slots: parameters
     QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void, QMetaType::Bool,    8,
-    QMetaType::Void, QMetaType::QJsonObject,   10,
+    QMetaType::Void, 0x80000000 | 10,   11,
 
        0        // eod
 };

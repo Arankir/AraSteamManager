@@ -21,7 +21,7 @@ public:
 signals:
     void s_loadComplete(RequestImage*);
 
-public slots:
+private slots:
     void onLoad(RequestData*);
 
 private:

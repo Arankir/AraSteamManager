@@ -12,8 +12,10 @@
 
 Q_DECLARE_LOGGING_CATEGORY(logDebug)
 Q_DECLARE_LOGGING_CATEGORY(logInfo)
+Q_DECLARE_LOGGING_CATEGORY(logFunc)
 Q_DECLARE_LOGGING_CATEGORY(logWarning)
 Q_DECLARE_LOGGING_CATEGORY(logCritical)
+
 
 class Settings : public QObject {
     const QString c_language                     = "Settings/Language";

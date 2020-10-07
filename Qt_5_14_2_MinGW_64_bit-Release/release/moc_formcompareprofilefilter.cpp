@@ -93,7 +93,7 @@ void FormCompareProfileFilter::qt_static_metacall(QObject *_o, QMetaObject::Call
         auto *_t = static_cast<FormCompareProfileFilter *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->s_radioButtonChange((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
+        case 0: _t->s_radioButtonChange((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
         case 1: _t->updateSettings(); break;
         case 2: _t->setIcons(); break;
         case 3: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
@@ -103,7 +103,7 @@ void FormCompareProfileFilter::qt_static_metacall(QObject *_o, QMetaObject::Call
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FormCompareProfileFilter::*)(QString , ReachedType );
+            using _t = void (FormCompareProfileFilter::*)(const QString & , ReachedType );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCompareProfileFilter::s_radioButtonChange)) {
                 *result = 0;
                 return;
@@ -153,7 +153,7 @@ int FormCompareProfileFilter::qt_metacall(QMetaObject::Call _c, int _id, void **
 }
 
 // SIGNAL 0
-void FormCompareProfileFilter::s_radioButtonChange(QString _t1, ReachedType _t2)
+void FormCompareProfileFilter::s_radioButtonChange(const QString & _t1, ReachedType _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

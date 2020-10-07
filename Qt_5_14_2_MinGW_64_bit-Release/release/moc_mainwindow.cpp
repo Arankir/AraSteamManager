@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[71];
-    char stringdata0[980];
+    char stringdata0[984];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,85 +39,85 @@ QT_MOC_LITERAL(3, 29, 15), // "progressLoading"
 QT_MOC_LITERAL(4, 45, 15), // "addAchievements"
 QT_MOC_LITERAL(5, 61, 20), // "SAchievementsPlayer&"
 QT_MOC_LITERAL(6, 82, 12), // "achievements"
-QT_MOC_LITERAL(7, 95, 5), // "SGame"
-QT_MOC_LITERAL(8, 101, 5), // "games"
-QT_MOC_LITERAL(9, 107, 18), // "removeAchievements"
-QT_MOC_LITERAL(10, 126, 5), // "index"
-QT_MOC_LITERAL(11, 132, 26), // "containerAchievementsClose"
-QT_MOC_LITERAL(12, 159, 22), // "returnFromAchievements"
-QT_MOC_LITERAL(13, 182, 3), // "num"
-QT_MOC_LITERAL(14, 186, 9), // "goToGames"
-QT_MOC_LITERAL(15, 196, 8), // "SProfile"
-QT_MOC_LITERAL(16, 205, 14), // "profileSteamid"
-QT_MOC_LITERAL(17, 220, 6), // "SGames"
-QT_MOC_LITERAL(18, 227, 11), // "goToFriends"
-QT_MOC_LITERAL(19, 239, 8), // "SFriends"
-QT_MOC_LITERAL(20, 248, 7), // "friends"
-QT_MOC_LITERAL(21, 256, 13), // "goToFavorites"
-QT_MOC_LITERAL(22, 270, 14), // "goToStatistics"
-QT_MOC_LITERAL(23, 285, 11), // "profileName"
-QT_MOC_LITERAL(24, 297, 14), // "updateSettings"
-QT_MOC_LITERAL(25, 312, 17), // "createFormProfile"
-QT_MOC_LITERAL(26, 330, 12), // "FormProfile*"
-QT_MOC_LITERAL(27, 343, 8), // "aProfile"
-QT_MOC_LITERAL(28, 352, 15), // "createFormGames"
-QT_MOC_LITERAL(29, 368, 10), // "FormGames*"
-QT_MOC_LITERAL(30, 379, 6), // "aGames"
-QT_MOC_LITERAL(31, 386, 17), // "createFormFriends"
-QT_MOC_LITERAL(32, 404, 12), // "FormFriends*"
-QT_MOC_LITERAL(33, 417, 3), // "aId"
-QT_MOC_LITERAL(34, 421, 8), // "aFriends"
-QT_MOC_LITERAL(35, 430, 19), // "createFormFavorites"
-QT_MOC_LITERAL(36, 450, 14), // "FormFavorites*"
-QT_MOC_LITERAL(37, 465, 20), // "createFormStatistics"
-QT_MOC_LITERAL(38, 486, 15), // "FormStatistics*"
-QT_MOC_LITERAL(39, 502, 5), // "aName"
-QT_MOC_LITERAL(40, 508, 18), // "createFormSettings"
-QT_MOC_LITERAL(41, 527, 13), // "FormSettings*"
-QT_MOC_LITERAL(42, 541, 13), // "keyPressEvent"
-QT_MOC_LITERAL(43, 555, 10), // "QKeyEvent*"
-QT_MOC_LITERAL(44, 566, 11), // "changeEvent"
-QT_MOC_LITERAL(45, 578, 7), // "QEvent*"
-QT_MOC_LITERAL(46, 586, 10), // "closeEvent"
-QT_MOC_LITERAL(47, 597, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(48, 610, 8), // "showForm"
-QT_MOC_LITERAL(49, 619, 11), // "widgetIndex"
-QT_MOC_LITERAL(50, 631, 11), // "widthWindow"
-QT_MOC_LITERAL(51, 643, 15), // "returnFromForms"
-QT_MOC_LITERAL(52, 659, 14), // "initComponents"
-QT_MOC_LITERAL(53, 674, 8), // "getTheme"
-QT_MOC_LITERAL(54, 683, 8), // "setIcons"
-QT_MOC_LITERAL(55, 692, 16), // "resizeScrollArea"
-QT_MOC_LITERAL(56, 709, 5), // "width"
-QT_MOC_LITERAL(57, 715, 28), // "updateEnabledButtonsBackNext"
-QT_MOC_LITERAL(58, 744, 22), // "buttonMaximize_Clicked"
-QT_MOC_LITERAL(59, 767, 22), // "buttonMinimize_Clicked"
-QT_MOC_LITERAL(60, 790, 25), // "buttonFindProfile_Clicked"
-QT_MOC_LITERAL(61, 816, 11), // "goToProfile"
-QT_MOC_LITERAL(62, 828, 2), // "id"
-QT_MOC_LITERAL(63, 831, 14), // "ProfileUrlType"
-QT_MOC_LITERAL(64, 846, 4), // "type"
-QT_MOC_LITERAL(65, 851, 22), // "buttonSettings_Clicked"
-QT_MOC_LITERAL(66, 874, 18), // "buttonExit_Clicked"
-QT_MOC_LITERAL(67, 893, 27), // "buttonGoToMyProfile_Clicked"
-QT_MOC_LITERAL(68, 921, 18), // "buttonBack_Clicked"
-QT_MOC_LITERAL(69, 940, 18), // "buttonNext_Clicked"
-QT_MOC_LITERAL(70, 959, 20) // "buttonUpdate_Clicked"
+QT_MOC_LITERAL(7, 95, 6), // "SGame&"
+QT_MOC_LITERAL(8, 102, 5), // "games"
+QT_MOC_LITERAL(9, 108, 18), // "removeAchievements"
+QT_MOC_LITERAL(10, 127, 5), // "index"
+QT_MOC_LITERAL(11, 133, 26), // "containerAchievementsClose"
+QT_MOC_LITERAL(12, 160, 22), // "returnFromAchievements"
+QT_MOC_LITERAL(13, 183, 3), // "num"
+QT_MOC_LITERAL(14, 187, 9), // "goToGames"
+QT_MOC_LITERAL(15, 197, 9), // "SProfile&"
+QT_MOC_LITERAL(16, 207, 14), // "profileSteamid"
+QT_MOC_LITERAL(17, 222, 7), // "SGames&"
+QT_MOC_LITERAL(18, 230, 11), // "goToFriends"
+QT_MOC_LITERAL(19, 242, 9), // "SFriends&"
+QT_MOC_LITERAL(20, 252, 7), // "friends"
+QT_MOC_LITERAL(21, 260, 13), // "goToFavorites"
+QT_MOC_LITERAL(22, 274, 14), // "goToStatistics"
+QT_MOC_LITERAL(23, 289, 11), // "profileName"
+QT_MOC_LITERAL(24, 301, 14), // "updateSettings"
+QT_MOC_LITERAL(25, 316, 17), // "createFormProfile"
+QT_MOC_LITERAL(26, 334, 12), // "FormProfile*"
+QT_MOC_LITERAL(27, 347, 8), // "aProfile"
+QT_MOC_LITERAL(28, 356, 15), // "createFormGames"
+QT_MOC_LITERAL(29, 372, 10), // "FormGames*"
+QT_MOC_LITERAL(30, 383, 6), // "aGames"
+QT_MOC_LITERAL(31, 390, 17), // "createFormFriends"
+QT_MOC_LITERAL(32, 408, 12), // "FormFriends*"
+QT_MOC_LITERAL(33, 421, 3), // "aId"
+QT_MOC_LITERAL(34, 425, 8), // "aFriends"
+QT_MOC_LITERAL(35, 434, 19), // "createFormFavorites"
+QT_MOC_LITERAL(36, 454, 14), // "FormFavorites*"
+QT_MOC_LITERAL(37, 469, 20), // "createFormStatistics"
+QT_MOC_LITERAL(38, 490, 15), // "FormStatistics*"
+QT_MOC_LITERAL(39, 506, 5), // "aName"
+QT_MOC_LITERAL(40, 512, 18), // "createFormSettings"
+QT_MOC_LITERAL(41, 531, 13), // "FormSettings*"
+QT_MOC_LITERAL(42, 545, 13), // "keyPressEvent"
+QT_MOC_LITERAL(43, 559, 10), // "QKeyEvent*"
+QT_MOC_LITERAL(44, 570, 11), // "changeEvent"
+QT_MOC_LITERAL(45, 582, 7), // "QEvent*"
+QT_MOC_LITERAL(46, 590, 10), // "closeEvent"
+QT_MOC_LITERAL(47, 601, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(48, 614, 8), // "showForm"
+QT_MOC_LITERAL(49, 623, 11), // "widgetIndex"
+QT_MOC_LITERAL(50, 635, 11), // "widthWindow"
+QT_MOC_LITERAL(51, 647, 15), // "returnFromForms"
+QT_MOC_LITERAL(52, 663, 14), // "initComponents"
+QT_MOC_LITERAL(53, 678, 8), // "getTheme"
+QT_MOC_LITERAL(54, 687, 8), // "setIcons"
+QT_MOC_LITERAL(55, 696, 16), // "resizeScrollArea"
+QT_MOC_LITERAL(56, 713, 5), // "width"
+QT_MOC_LITERAL(57, 719, 28), // "updateEnabledButtonsBackNext"
+QT_MOC_LITERAL(58, 748, 22), // "buttonMaximize_Clicked"
+QT_MOC_LITERAL(59, 771, 22), // "buttonMinimize_Clicked"
+QT_MOC_LITERAL(60, 794, 25), // "buttonFindProfile_Clicked"
+QT_MOC_LITERAL(61, 820, 11), // "goToProfile"
+QT_MOC_LITERAL(62, 832, 2), // "id"
+QT_MOC_LITERAL(63, 835, 14), // "ProfileUrlType"
+QT_MOC_LITERAL(64, 850, 4), // "type"
+QT_MOC_LITERAL(65, 855, 22), // "buttonSettings_Clicked"
+QT_MOC_LITERAL(66, 878, 18), // "buttonExit_Clicked"
+QT_MOC_LITERAL(67, 897, 27), // "buttonGoToMyProfile_Clicked"
+QT_MOC_LITERAL(68, 925, 18), // "buttonBack_Clicked"
+QT_MOC_LITERAL(69, 944, 18), // "buttonNext_Clicked"
+QT_MOC_LITERAL(70, 963, 20) // "buttonUpdate_Clicked"
 
     },
     "MainWindow\0s_updateSettings\0\0"
     "progressLoading\0addAchievements\0"
     "SAchievementsPlayer&\0achievements\0"
-    "SGame\0games\0removeAchievements\0index\0"
+    "SGame&\0games\0removeAchievements\0index\0"
     "containerAchievementsClose\0"
     "returnFromAchievements\0num\0goToGames\0"
-    "SProfile\0profileSteamid\0SGames\0"
-    "goToFriends\0SFriends\0friends\0goToFavorites\0"
-    "goToStatistics\0profileName\0updateSettings\0"
-    "createFormProfile\0FormProfile*\0aProfile\0"
-    "createFormGames\0FormGames*\0aGames\0"
-    "createFormFriends\0FormFriends*\0aId\0"
-    "aFriends\0createFormFavorites\0"
+    "SProfile&\0profileSteamid\0SGames&\0"
+    "goToFriends\0SFriends&\0friends\0"
+    "goToFavorites\0goToStatistics\0profileName\0"
+    "updateSettings\0createFormProfile\0"
+    "FormProfile*\0aProfile\0createFormGames\0"
+    "FormGames*\0aGames\0createFormFriends\0"
+    "FormFriends*\0aId\0aFriends\0createFormFavorites\0"
     "FormFavorites*\0createFormStatistics\0"
     "FormStatistics*\0aName\0createFormSettings\0"
     "FormSettings*\0keyPressEvent\0QKeyEvent*\0"
@@ -250,19 +250,19 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->containerAchievementsClose(); break;
         case 5: _t->returnFromAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 6: _t->goToGames((*reinterpret_cast< SProfile(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2]))); break;
-        case 7: _t->goToFriends((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SFriends(*)>(_a[2]))); break;
+        case 7: _t->goToFriends((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< SFriends(*)>(_a[2]))); break;
         case 8: _t->goToFavorites(); break;
-        case 9: _t->goToStatistics((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
+        case 9: _t->goToStatistics((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
         case 10: _t->updateSettings(); break;
         case 11: { FormProfile* _r = _t->createFormProfile((*reinterpret_cast< SProfile(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< FormProfile**>(_a[0]) = std::move(_r); }  break;
         case 12: { FormGames* _r = _t->createFormGames((*reinterpret_cast< SProfile(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< FormGames**>(_a[0]) = std::move(_r); }  break;
-        case 13: { FormFriends* _r = _t->createFormFriends((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SFriends(*)>(_a[2])));
+        case 13: { FormFriends* _r = _t->createFormFriends((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< SFriends(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< FormFriends**>(_a[0]) = std::move(_r); }  break;
         case 14: { FormFavorites* _r = _t->createFormFavorites();
             if (_a[0]) *reinterpret_cast< FormFavorites**>(_a[0]) = std::move(_r); }  break;
-        case 15: { FormStatistics* _r = _t->createFormStatistics((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])));
+        case 15: { FormStatistics* _r = _t->createFormStatistics((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< SGames(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< FormStatistics**>(_a[0]) = std::move(_r); }  break;
         case 16: { FormSettings* _r = _t->createFormSettings();
             if (_a[0]) *reinterpret_cast< FormSettings**>(_a[0]) = std::move(_r); }  break;
@@ -282,7 +282,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 29: _t->buttonMaximize_Clicked(); break;
         case 30: _t->buttonMinimize_Clicked(); break;
         case 31: _t->buttonFindProfile_Clicked(); break;
-        case 32: _t->goToProfile((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< ProfileUrlType(*)>(_a[2]))); break;
+        case 32: _t->goToProfile((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< ProfileUrlType(*)>(_a[2]))); break;
         case 33: _t->buttonSettings_Clicked(); break;
         case 34: _t->buttonExit_Clicked(); break;
         case 35: _t->buttonGoToMyProfile_Clicked(); break;

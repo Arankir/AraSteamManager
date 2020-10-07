@@ -29,7 +29,7 @@ public:
 signals:
     void s_finished(RequestData *imgr);
 
-public slots:
+private slots:
     void onResultGet(QNetworkReply *reply);
 
 private:

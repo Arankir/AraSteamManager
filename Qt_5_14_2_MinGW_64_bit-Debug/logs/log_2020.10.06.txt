@@ -5,3 +5,19 @@ INFO 2020-10-06 16:52:09.436 void MainWindow::goToProfile(const QString&, Profil
 INFO 2020-10-06 16:52:48.498 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
 INFO 2020-10-06 16:54:45.567 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
 INFO 2020-10-06 16:55:07.239 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-06 21:38:37.965 default: void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 21:43:17.127 default: virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-06 21:43:25.962 Function: void MainWindow::initComponents()  
+INFO 2020-10-06 21:43:28.917 default: void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 21:47:21.112 default: virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+void MainWindow::initComponents()2020-10-06 21:48:52.512 Function: void MainWindow::initComponents()  
+INFO 2020-10-06 21:48:55.453 default: void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 21:49:49.427 default: virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+void MainWindow::initComponents()2020-10-06 21:49:57.896 Function: void MainWindow::initComponents()  
+INFO 2020-10-06 21:50:01.487 default: void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 21:51:07.345 default: virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+void MainWindow::initComponents()2020-10-06 21:51:15.764 Function: void MainWindow::initComponents()  
+INFO 2020-10-06 21:51:18.568 default: void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 21:51:55.475 default: virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-06 21:55:14 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-06 22:00:32 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

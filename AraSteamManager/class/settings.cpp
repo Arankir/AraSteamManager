@@ -1,16 +1,17 @@
 #include "settings.h"
 
+Q_LOGGING_CATEGORY(logFunc,     "Function")
 
 Settings::Settings(QObject *aParent): Settings(QRect(), aParent) {
 
 }
 
-Settings::Settings(QRect aGeometry, QObject *aParent): QObject(aParent), _settings(new QSettings("Arankir", "SteamAchievementsStatistic")) ,_screen(aGeometry) {
+Settings::Settings(QRect aGeometry, QObject *aParent): QObject(aParent), _settings(new QSettings("Arankir", "SteamAchievementsStatistic")), _screen(aGeometry) {
 
 }
 
 void Settings::customGeometry(QRect aGeometry) {
-    _screen=aGeometry;
+    _screen = aGeometry;
 }
 
 void Settings::setMyProfile(QString aMyProfiles) {

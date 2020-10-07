@@ -1,0 +1,2 @@
+INFO 2020-10-07 07:00:16 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-07 07:00:18 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

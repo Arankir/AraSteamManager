@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormContainerAchievements_t {
     QByteArrayData data[18];
-    char stringdata0[230];
+    char stringdata0[231];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,20 +42,20 @@ QT_MOC_LITERAL(6, 85, 20), // "SAchievementsPlayer&"
 QT_MOC_LITERAL(7, 106, 2), // "pl"
 QT_MOC_LITERAL(8, 109, 8), // "SProfile"
 QT_MOC_LITERAL(9, 118, 3), // "ids"
-QT_MOC_LITERAL(10, 122, 5), // "SGame"
-QT_MOC_LITERAL(11, 128, 4), // "game"
-QT_MOC_LITERAL(12, 133, 3), // "num"
-QT_MOC_LITERAL(13, 137, 10), // "closeEvent"
-QT_MOC_LITERAL(14, 148, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(15, 161, 11), // "OnLoadImage"
-QT_MOC_LITERAL(16, 173, 13), // "RequestImage*"
-QT_MOC_LITERAL(17, 187, 42) // "on_TabWidgetAchievements_tabC..."
+QT_MOC_LITERAL(10, 122, 6), // "SGame&"
+QT_MOC_LITERAL(11, 129, 4), // "game"
+QT_MOC_LITERAL(12, 134, 3), // "num"
+QT_MOC_LITERAL(13, 138, 10), // "closeEvent"
+QT_MOC_LITERAL(14, 149, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(15, 162, 11), // "OnLoadImage"
+QT_MOC_LITERAL(16, 174, 13), // "RequestImage*"
+QT_MOC_LITERAL(17, 188, 42) // "on_TabWidgetAchievements_tabC..."
 
     },
     "FormContainerAchievements\0"
     "s_removeAchievements\0\0index\0s_formClose\0"
     "AddFormAchievement\0SAchievementsPlayer&\0"
-    "pl\0SProfile\0ids\0SGame\0game\0num\0"
+    "pl\0SProfile\0ids\0SGame&\0game\0num\0"
     "closeEvent\0QCloseEvent*\0OnLoadImage\0"
     "RequestImage*\0on_TabWidgetAchievements_tabCloseRequested"
 };
