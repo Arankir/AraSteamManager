@@ -7,7 +7,7 @@
 #include "class/Network/requestimage.h"
 #include "class/steamapi/Sfriends.h"
 #include "class/Threads/threading.h"
-#include "class/settings.h"
+//#include "class/settings.h"
 #include "class/favorites.h"
 #include "class/filter.h"
 #include "subwidget/qbuttonwithdata.h"
@@ -77,7 +77,6 @@ private:
     bool _blockedLoad = false;
     QList<QPair<SFriend, SProfile>> _friends;
     QList<QPair<SFriend*, SProfile*>> _visibleFriends;
-    Settings _setting;
     Favorites _favorites;
     Filter _filter;
     QString _currentFriend;

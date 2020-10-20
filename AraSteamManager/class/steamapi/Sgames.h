@@ -13,15 +13,28 @@
 #include <QEventLoop>
 #include <QTextCodec>
 #include <QObject>
-#include "class/settings.h"
-#include "class/statusvalue.h"
+#include "class/steamapi/Sapi.h"
 #include "class/Network/requestimage.h"
 
-class SGame : public QObject {
+class SGame : public Sapi {
     Q_OBJECT
 public:
-    explicit SGame(QJsonObject &game, QObject *parent = nullptr);
-    void Set(QJsonObject &objGame);
+    explicit SGame(const QJsonObject &game, QObject *parent = nullptr): Sapi(parent), _appID(game.value("appid").toInt()), _name(game.value("name").toString()),
+        _playtime_2weeks(game.value("playtime_2weeks").toInt()), _playtime_forever(game.value("playtime_forever").toInt()),
+        _has_community_visible_stats(game.value("has_community_visible_stats").toBool()), _img_icon_url(game.value("img_icon_url").toString()),
+        _img_logo_url(game.value("img_logo_url").toString()) {}
+    SGame(const SGame &game): Sapi(game.parent()), _appID(game._appID), _name(game._name), _playtime_2weeks(game._playtime_2weeks),
+        _playtime_forever(game._playtime_forever), _has_community_visible_stats(game._has_community_visible_stats), _img_icon_url(game._img_icon_url),
+        _img_logo_url(game._img_logo_url) {}
+
+    SGame &operator=(const SGame &game);
+    const bool &operator<(const SGame &game);
+
+    QPixmap getPixmapIcon();
+    QPixmap getPixmapLogo();
+
+    const QString getNumberPlayers(bool hardReload);
+
     const int _appID;
     const QString _name;
     const int _playtime_2weeks;
@@ -29,45 +42,39 @@ public:
     const bool _has_community_visible_stats;
     const QString _img_icon_url;
     const QString _img_logo_url;
-    const QString getNumberPlayers(bool hardReload);
-    QPixmap getPixmapIcon();
-    QPixmap getPixmapLogo();
-    SGame(const SGame &game);
-    SGame &operator=(const SGame &game);
-    const bool &operator<(const SGame &game);
 
 signals:
 
 private:
+    QPixmap getPixmap(QPixmap &pixmap, const QString &url, QSize size);
+    void onLoad() override {}
+
     QPixmap _pixmapIcon;
     QPixmap _pixmapLogo;
 
-    Settings _setting;
     QString _numberPlayers = "";
 };
 
-class SGames : public QObject {
+class SGames : public Sapi {
     Q_OBJECT
 public:
-    explicit SGames(const QString &id, bool free_games, bool game_info, bool parallel, QObject *parent = nullptr);
-    SGames(QJsonDocument &docGames, QObject *parent = nullptr);
-    SGames(QObject *parent);
-    ~SGames();
-    void set(const QString &id, bool free_games, bool game_info, bool parallel);
-    void set(QJsonDocument &docGames);
-    int getAppid(int index);
-    QString getID();
-    StatusValue getStatus();
-    QString getError();
-    int getCount();
-    void update(bool parallel);
-    void clear();
-    void sort();
-    SGames(const SGames &games);
-    SGames & operator=(const SGames &games);
-    SGame &operator[](const int &index);
+    explicit SGames(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false, QObject *parent = nullptr);
+    SGames(const SGames &games): Sapi(games.parent()), _games(games._games), _id(games._id), _free_games(games._free_games), _game_info(games._game_info) {}
+    SGames(QObject *parent = nullptr): SGames("", false, false, false, parent) {}
+    ~SGames() {}
+
+    SGames &operator=(const SGames &games);
+    SGame &operator[](const int &index) {return _games[index];};
+
+    SGames &load(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false);
+    SGames &update(bool parallel);
+    SGames &clear();
+    SGames &sort();
+
     QList<SGame>::iterator begin() {return _games.begin();}
     QList<SGame>::iterator end() {return _games.end();}
+    QString getID() const {return _id;}
+    int getCount() const {return _games.size();}
 
     int _index = -1;
 
@@ -76,16 +83,14 @@ signals:
     void s_finished();
 
 private slots:
-    void onLoad(QNetworkReply *Reply);
+    void onLoad() override;
+    void parse(const QJsonDocument &doc);
 
 private:
-    QNetworkAccessManager *_manager;
     QList<SGame> _games;
-    StatusValue _status = StatusValue::none;
-    QString _error = "";
     QString _id;
-    bool _free_games = false;
-    bool _game_info = false;
+    int _free_games = 0;
+    int _game_info = 0;
 };
 
 //{"appid":218620,

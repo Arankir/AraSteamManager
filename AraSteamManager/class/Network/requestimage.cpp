@@ -3,40 +3,19 @@
 RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, const QString &aSave, bool aAutoSave, QObject *aParent): QObject(aParent),
 _label(aLabel), _save(aSave), _autosave(aAutoSave) {
     RequestData *image = new RequestData(aUrl, true, this);
+    connect(image, SIGNAL(s_finished(RequestData*)), this, SLOT(onLoad(RequestData*)));
     if (_label != nullptr) {
         _label->setMovie(new QMovie("://loading.gif"));
         _label->movie()->setScaledSize(_label->size());
         _label->movie()->start();
     }
-    connect(image, SIGNAL(s_finished(RequestData*)), this, SLOT(onLoad(RequestData*)));
-}
-
-RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, QObject *aParent): RequestImage(aLabel, aUrl, "", false, aParent) {
-
-}
-
-RequestImage::RequestImage(const QString &aUrl, const QString &aSave, bool aAutoSave, QObject *aParent): RequestImage(nullptr, aUrl, aSave, aAutoSave, aParent) {
-
-}
-
-QPixmap RequestImage::getPixmap() {
-    return _pixmap;
-}
-
-void RequestImage::setIndex(int aIndex) {
-    _index = aIndex;
-}
-
-int RequestImage::getIndex() {
-    return _index;
 }
 
 void RequestImage::onLoad(RequestData *aImage) {
-    QPixmap loadedImage;
-    loadedImage.loadFromData(aImage->getAnswer());
-    if (_setting.getSaveImages() == 1 && _autosave) {
+    _pixmap.loadFromData(aImage->getReply());
+    if (Settings::getSaveImages() == 1 && _autosave) {
         Settings::createDir(_save);
-        loadedImage.save(_save);
+        _pixmap.save(_save);
     }
     if (_label != nullptr) {
         if (_label->movie()) {
@@ -44,11 +23,10 @@ void RequestImage::onLoad(RequestData *aImage) {
                 _label->movie()->stop();
             }
         }
-        _label->setPixmap(loadedImage);
+        _label->setPixmap(_pixmap);
         //emit s_loadComplete();
         this->deleteLater();
     } else {
-        _pixmap = loadedImage;
         emit s_loadComplete(this);
     }
 }

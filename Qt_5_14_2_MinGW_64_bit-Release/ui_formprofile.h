@@ -507,9 +507,9 @@ public:
     {
         FormProfile->setWindowTitle(QCoreApplication::translate("FormProfile", "Form", nullptr));
         LabelRealName->setText(QCoreApplication::translate("FormProfile", "RealName: ", nullptr));
-        LabelProfileVisibility->setText(QCoreApplication::translate("FormProfile", "Profile", nullptr));
-        LabelFriendsVisibility->setText(QCoreApplication::translate("FormProfile", "Friends", nullptr));
-        LabelGamesVisibility->setText(QCoreApplication::translate("FormProfile", "Games", nullptr));
+        LabelProfileVisibility->setText(QCoreApplication::translate("FormProfile", "\320\237\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
+        LabelFriendsVisibility->setText(QCoreApplication::translate("FormProfile", "\320\224\321\200\321\203\320\267\321\214\321\217", nullptr));
+        LabelGamesVisibility->setText(QCoreApplication::translate("FormProfile", "\320\230\320\263\321\200\321\213", nullptr));
         Labellvl->setText(QCoreApplication::translate("FormProfile", "lvl:", nullptr));
         LabelTimeCreated->setText(QCoreApplication::translate("FormProfile", "TimeCreated:", nullptr));
         LabelLocCountryCode->setText(QCoreApplication::translate("FormProfile", "CountryCode:", nullptr));

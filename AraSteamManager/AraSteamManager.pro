@@ -51,6 +51,7 @@ SOURCES += \
     class/filter.cpp \
     class/settings.cpp \
     class/steamapi/Sachievements.cpp \
+    class/steamapi/Sapi.cpp \
     class/steamapi/Sbans.cpp \
     class/steamapi/Sfriends.cpp \
     class/steamapi/Sgames.cpp \
@@ -91,8 +92,8 @@ HEADERS += \
     class/favorites.h \
     class/filter.h \
     class/settings.h \
-    class/statusvalue.h \
     class/steamapi/Sachievements.h \
+    class/steamapi/Sapi.h \
     class/steamapi/Sbans.h \
     class/steamapi/Sfriends.h \
     class/steamapi/Sgames.h \

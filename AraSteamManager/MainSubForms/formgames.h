@@ -6,7 +6,7 @@
 #include <QPushButton>
 #include <QProgressBar>
 //#include "formcontainerachievements.h"
-#include "class/settings.h"
+//#include "class/settings.h"
 #include "class/favorites.h"
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sachievements.h"
@@ -76,7 +76,6 @@ private:
     QVector<SAchievementsPlayer*> _achievements;
     Favorites _favorites;
     QStringList _hide;
-    Settings _setting;
     int _load = 0;
 
     QPropertyAnimation *_animate;

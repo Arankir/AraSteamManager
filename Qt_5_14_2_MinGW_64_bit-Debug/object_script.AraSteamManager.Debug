@@ -24,6 +24,7 @@ debug/favorites.o
 debug/filter.o
 debug/settings.o
 debug/Sachievements.o
+debug/Sapi.o
 debug/Sbans.o
 debug/Sfriends.o
 debug/Sgames.o
@@ -63,6 +64,7 @@ debug/moc_favorites.o
 debug/moc_filter.o
 debug/moc_settings.o
 debug/moc_Sachievements.o
+debug/moc_Sapi.o
 debug/moc_Sbans.o
 debug/moc_Sfriends.o
 debug/moc_Sgames.o

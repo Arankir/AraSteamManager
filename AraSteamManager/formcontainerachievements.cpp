@@ -3,20 +3,14 @@
 
 FormContainerAchievements::FormContainerAchievements(QWidget *parent): QWidget(parent), ui(new Ui::FormContainerAchievements) {
     ui->setupUi(this);
-    _setting.customGeometry(QGuiApplication::primaryScreen()->geometry());
-    this->setGeometry(_setting.getAchievementContainerGeometry());
-    if((_setting.getAchievementContainerPos().x() > QGuiApplication::primaryScreen()->geometry().width()) ||
-       (_setting.getAchievementContainerPos().y() > QGuiApplication::primaryScreen()->geometry().height())) {
-        //this->move(_setting.getAchievementContainerPercentPos().x(), _setting.getAchievementContainerPercentPos().y() - 31);
-    } else {
-        this->move(_setting.getAchievementContainerPos().x(), _setting.getAchievementContainerPos().y() - 31);
-    }
+    this->setGeometry(Settings::getAchievementContainerGeometry());
+    this->move(Settings::getAchievementContainerPos().x(), Settings::getAchievementContainerPos().y() - 31);
 }
 
 void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
     Q_UNUSED(aEvent);
     _setting.setAchievementContainerParams(this->geometry());
-    _setting.syncronizeSettings();
+    Settings::syncronizeSettings();
     emit s_formClose();
 }
 

@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormTablesHeaders_t {
-    QByteArrayData data[80];
-    char stringdata0[1052];
+    QByteArrayData data[81];
+    char stringdata0[1073];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -83,36 +83,37 @@ QT_MOC_LITERAL(46, 642, 6), // "select"
 QT_MOC_LITERAL(47, 649, 15), // "categoryToTable"
 QT_MOC_LITERAL(48, 665, 5), // "title"
 QT_MOC_LITERAL(49, 671, 9), // "aNoValues"
-QT_MOC_LITERAL(50, 681, 7), // "aValues"
-QT_MOC_LITERAL(51, 689, 10), // "aIsNoValue"
-QT_MOC_LITERAL(52, 700, 19), // "swapCategoryColumns"
-QT_MOC_LITERAL(53, 720, 7), // "aPosOld"
-QT_MOC_LITERAL(54, 728, 7), // "aPosNew"
-QT_MOC_LITERAL(55, 736, 6), // "update"
-QT_MOC_LITERAL(56, 743, 13), // "getHeaderText"
-QT_MOC_LITERAL(57, 757, 6), // "aIndex"
-QT_MOC_LITERAL(58, 764, 14), // "getAchievement"
-QT_MOC_LITERAL(59, 779, 12), // "SAchievement"
-QT_MOC_LITERAL(60, 792, 14), // "cancelCategory"
-QT_MOC_LITERAL(61, 807, 12), // "createThread"
-QT_MOC_LITERAL(62, 820, 21), // "reverseCategoryColumn"
-QT_MOC_LITERAL(63, 842, 5), // "index"
-QT_MOC_LITERAL(64, 848, 18), // "setHorizontalTitle"
-QT_MOC_LITERAL(65, 867, 4), // "text"
-QT_MOC_LITERAL(66, 872, 12), // "insertColumn"
-QT_MOC_LITERAL(67, 885, 7), // "columns"
-QT_MOC_LITERAL(68, 893, 12), // "removeColumn"
-QT_MOC_LITERAL(69, 906, 11), // "retranslate"
-QT_MOC_LITERAL(70, 918, 13), // "onTablePulled"
-QT_MOC_LITERAL(71, 932, 7), // "reached"
-QT_MOC_LITERAL(72, 940, 10), // "notReached"
-QT_MOC_LITERAL(73, 951, 10), // "createFlag"
-QT_MOC_LITERAL(74, 962, 9), // "flagState"
-QT_MOC_LITERAL(75, 972, 16), // "updateHiddenRows"
-QT_MOC_LITERAL(76, 989, 10), // "getTableHH"
-QT_MOC_LITERAL(77, 1000, 13), // "QTableWidget*"
-QT_MOC_LITERAL(78, 1014, 15), // "getTableContent"
-QT_MOC_LITERAL(79, 1030, 21) // "insertCheckableColumn"
+QT_MOC_LITERAL(50, 681, 20), // "QList<CategoryValue>"
+QT_MOC_LITERAL(51, 702, 7), // "aValues"
+QT_MOC_LITERAL(52, 710, 10), // "aIsNoValue"
+QT_MOC_LITERAL(53, 721, 19), // "swapCategoryColumns"
+QT_MOC_LITERAL(54, 741, 7), // "aPosOld"
+QT_MOC_LITERAL(55, 749, 7), // "aPosNew"
+QT_MOC_LITERAL(56, 757, 6), // "update"
+QT_MOC_LITERAL(57, 764, 13), // "getHeaderText"
+QT_MOC_LITERAL(58, 778, 6), // "aIndex"
+QT_MOC_LITERAL(59, 785, 14), // "getAchievement"
+QT_MOC_LITERAL(60, 800, 12), // "SAchievement"
+QT_MOC_LITERAL(61, 813, 14), // "cancelCategory"
+QT_MOC_LITERAL(62, 828, 12), // "createThread"
+QT_MOC_LITERAL(63, 841, 21), // "reverseCategoryColumn"
+QT_MOC_LITERAL(64, 863, 5), // "index"
+QT_MOC_LITERAL(65, 869, 18), // "setHorizontalTitle"
+QT_MOC_LITERAL(66, 888, 4), // "text"
+QT_MOC_LITERAL(67, 893, 12), // "insertColumn"
+QT_MOC_LITERAL(68, 906, 7), // "columns"
+QT_MOC_LITERAL(69, 914, 12), // "removeColumn"
+QT_MOC_LITERAL(70, 927, 11), // "retranslate"
+QT_MOC_LITERAL(71, 939, 13), // "onTablePulled"
+QT_MOC_LITERAL(72, 953, 7), // "reached"
+QT_MOC_LITERAL(73, 961, 10), // "notReached"
+QT_MOC_LITERAL(74, 972, 10), // "createFlag"
+QT_MOC_LITERAL(75, 983, 9), // "flagState"
+QT_MOC_LITERAL(76, 993, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(77, 1010, 10), // "getTableHH"
+QT_MOC_LITERAL(78, 1021, 13), // "QTableWidget*"
+QT_MOC_LITERAL(79, 1035, 15), // "getTableContent"
+QT_MOC_LITERAL(80, 1051, 21) // "insertCheckableColumn"
 
     },
     "FormTablesHeaders\0s_contentCellClicked\0"
@@ -134,10 +135,10 @@ QT_MOC_LITERAL(79, 1030, 21) // "insertCheckableColumn"
     "setValuesMode\0value\0setUniqueMode\0"
     "unique\0setVisibleContentSelect\0pos\0"
     "select\0categoryToTable\0title\0aNoValues\0"
-    "aValues\0aIsNoValue\0swapCategoryColumns\0"
-    "aPosOld\0aPosNew\0update\0getHeaderText\0"
-    "aIndex\0getAchievement\0SAchievement\0"
-    "cancelCategory\0createThread\0"
+    "QList<CategoryValue>\0aValues\0aIsNoValue\0"
+    "swapCategoryColumns\0aPosOld\0aPosNew\0"
+    "update\0getHeaderText\0aIndex\0getAchievement\0"
+    "SAchievement\0cancelCategory\0createThread\0"
     "reverseCategoryColumn\0index\0"
     "setHorizontalTitle\0text\0insertColumn\0"
     "columns\0removeColumn\0retranslate\0"
@@ -188,23 +189,23 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
       42,    1,  298,    2, 0x0a /* Public */,
       44,    2,  301,    2, 0x0a /* Public */,
       47,    4,  306,    2, 0x0a /* Public */,
-      52,    2,  315,    2, 0x0a /* Public */,
-      55,    0,  320,    2, 0x0a /* Public */,
-      56,    1,  321,    2, 0x0a /* Public */,
-      58,    1,  324,    2, 0x0a /* Public */,
-      60,    0,  327,    2, 0x0a /* Public */,
-      61,    0,  328,    2, 0x0a /* Public */,
-      62,    1,  329,    2, 0x0a /* Public */,
-      64,    2,  332,    2, 0x08 /* Private */,
-      66,    1,  337,    2, 0x08 /* Private */,
-      68,    1,  340,    2, 0x08 /* Private */,
-      69,    0,  343,    2, 0x08 /* Private */,
-      70,    2,  344,    2, 0x08 /* Private */,
-      73,    1,  349,    2, 0x08 /* Private */,
-      75,    0,  352,    2, 0x08 /* Private */,
-      76,    0,  353,    2, 0x08 /* Private */,
-      78,    0,  354,    2, 0x08 /* Private */,
-      79,    0,  355,    2, 0x08 /* Private */,
+      53,    2,  315,    2, 0x0a /* Public */,
+      56,    0,  320,    2, 0x0a /* Public */,
+      57,    1,  321,    2, 0x0a /* Public */,
+      59,    1,  324,    2, 0x0a /* Public */,
+      61,    0,  327,    2, 0x0a /* Public */,
+      62,    0,  328,    2, 0x0a /* Public */,
+      63,    1,  329,    2, 0x0a /* Public */,
+      65,    2,  332,    2, 0x08 /* Private */,
+      67,    1,  337,    2, 0x08 /* Private */,
+      69,    1,  340,    2, 0x08 /* Private */,
+      70,    0,  343,    2, 0x08 /* Private */,
+      71,    2,  344,    2, 0x08 /* Private */,
+      74,    1,  349,    2, 0x08 /* Private */,
+      76,    0,  352,    2, 0x08 /* Private */,
+      77,    0,  353,    2, 0x08 /* Private */,
+      79,    0,  354,    2, 0x08 /* Private */,
+      80,    0,  355,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -232,23 +233,23 @@ static const uint qt_meta_data_FormTablesHeaders[] = {
     QMetaType::Void, QMetaType::Bool,   41,
     QMetaType::Void, QMetaType::Bool,   43,
     QMetaType::Void, QMetaType::Int, QMetaType::Bool,   45,   46,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 36, QMetaType::QJsonArray, QMetaType::Bool,   48,   49,   50,   51,
-    QMetaType::Bool, QMetaType::Int, QMetaType::Int,   53,   54,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 36, 0x80000000 | 50, QMetaType::Bool,   48,   49,   51,   52,
+    QMetaType::Bool, QMetaType::Int, QMetaType::Int,   54,   55,
     QMetaType::Void,
-    QMetaType::QString, QMetaType::Int,   57,
-    0x80000000 | 59, QMetaType::Int,   57,
+    QMetaType::QString, QMetaType::Int,   58,
+    0x80000000 | 60, QMetaType::Int,   58,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   63,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString,   17,   65,
-    QMetaType::Void, QMetaType::Int,   67,
-    QMetaType::Void, QMetaType::Int,   67,
+    QMetaType::Void, QMetaType::Int,   64,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,   17,   66,
+    QMetaType::Void, QMetaType::Int,   68,
+    QMetaType::Void, QMetaType::Int,   68,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   71,   72,
-    0x80000000 | 21, QMetaType::Bool,   74,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   72,   73,
+    0x80000000 | 21, QMetaType::Bool,   75,
     QMetaType::Void,
-    0x80000000 | 77,
-    0x80000000 | 77,
+    0x80000000 | 78,
+    0x80000000 | 78,
     QMetaType::Int,
 
        0        // eod
@@ -285,7 +286,7 @@ void FormTablesHeaders::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 20: _t->setValuesMode((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 21: _t->setUniqueMode((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 22: _t->setVisibleContentSelect((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 23: _t->categoryToTable((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< QList<QString>(*)>(_a[2])),(*reinterpret_cast< QJsonArray(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
+        case 23: _t->categoryToTable((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< QList<QString>(*)>(_a[2])),(*reinterpret_cast< QList<CategoryValue>(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4]))); break;
         case 24: { bool _r = _t->swapCategoryColumns((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 25: _t->update(); break;

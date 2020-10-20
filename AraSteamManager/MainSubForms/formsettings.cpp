@@ -14,7 +14,7 @@ FormSettings::~FormSettings() {
 void FormSettings::initComponents() {
     //ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
 
-    switch (_setting.getLanguage()) {
+    switch (Settings::getLanguage()) {
     case 1: {
         ui->RadioButtonLanguageEnglish->setChecked(true);
         break;
@@ -27,7 +27,7 @@ void FormSettings::initComponents() {
         break;
     }
     }
-    switch (_setting.getVisibleHiddenGames()) {
+    switch (Settings::getVisibleHiddenGames()) {
     case 0: {
         ui->CheckBoxVisibleHiddenGames->setChecked(false);
         break;
@@ -40,7 +40,7 @@ void FormSettings::initComponents() {
         break;
     }
     }
-    switch (_setting.getTheme()) {
+    switch (Settings::getTheme()) {
     case 1: {
         ui->RadioButtonDarkTheme->setChecked(true);
         break;
@@ -79,8 +79,8 @@ void FormSettings::initComponents() {
 //        break;
 //    }
 //    }
-    ui->SliderProfileSize->setValue(_setting.getProfileInfoSize());
-    ui->CheckBoxSaveImage->setChecked(_setting.getSaveImages());
+    ui->SliderProfileSize->setValue(Settings::getProfileInfoSize());
+    ui->CheckBoxSaveImage->setChecked(Settings::getSaveImages());
 //    QPalette darkPalette;
 //    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
 //    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
@@ -94,14 +94,14 @@ void FormSettings::initComponents() {
 
     ui->labelIcons8->setTextFormat(Qt::RichText);
     QFormLayout *layout = new QFormLayout;
-    QDir dirHiddenGames(_setting._pathHide);
+    QDir dirHiddenGames(Paths::hiddenGames());
     dirHiddenGames.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     dirHiddenGames.setSorting(QDir::Name);
     if(dirHiddenGames.exists()){
         QPair<QString,QList<QString>> pair;
         pair.first = "All";
         pair.second = QList<QString>();
-        if(QFile(_setting._pathHide + "All.txt").exists()) {
+        if(QFile(Paths::hiddenGames("All")).exists()) {
             QRadioButtonWithData *allHidden = new QRadioButtonWithData;
             allHidden->setText(tr("Все профили"));
             allHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
@@ -109,7 +109,7 @@ void FormSettings::initComponents() {
             allHidden->AddData("NumberFileHiddenGame","0");
             connect(allHidden, SIGNAL(clicked()), this, SLOT(radioButtonHiddenGames_Clicked()));
             layout->addWidget(allHidden);
-            QFile fileHide1(_setting._pathHide + "All.txt");
+            QFile fileHide1(Paths::hiddenGames("All"));
             if(fileHide1.open(QIODevice::ReadOnly)) {
                 while(!fileHide1.atEnd()) {
                     pair.second << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
@@ -124,12 +124,12 @@ void FormSettings::initComponents() {
         for(auto &file :list) {
             QString fileName = file.fileName();
             if(fileName != "All.txt") {
-                QFile fileHide(_setting._pathHide + fileName);
+                QFile fileHide(Paths::hiddenGames(fileName));
                 fileHide.open(QFile::ReadOnly);
                 SProfiles profile(fileName.remove(".txt"), false, ProfileUrlType::id);
                 QList<QString> hide;
                 QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
-                profileHidden->setText(profile.getPersonaname());
+                profileHidden->setText(profile[0]._personaName);
                 profileHidden->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
                 profileHidden->setObjectName("HiddenGames" + QString::number(number));
                 profileHidden->AddData("NumberFileHiddenGame", QString::number(number));
@@ -176,10 +176,10 @@ void FormSettings::retranslate() {
         QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
         allHidden->setText(tr("Все профили"));
     }
-    QString iconsColor = _setting.getIconsColor();
+    QString iconsColor = Settings::getIconsColor();
     ui->labelIcons8->setText("<html><head/><body><p>"
                              "Иконки для приложения были предоставлены сайтом "
-                             "<img height=15 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\">"
+                             "<img height=15 style=\"vertical-align: top\" src=\"" + Images::link() + "\">"
                             "<a href=https://icons8.ru/icons>"
                             "<span style=\" text-decoration: underline; color:#2d7fc8;\"> "
                             "https://icons8.ru/icons"
@@ -187,7 +187,7 @@ void FormSettings::retranslate() {
 }
 
 void FormSettings::radioButtonLanguageEnglish_Clicked() {
-    _setting.setLanguage(1);
+    Settings::setLanguage(1);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
     translator->load(":/AraSteamManager_en.qm");
@@ -197,7 +197,7 @@ void FormSettings::radioButtonLanguageEnglish_Clicked() {
 }
 
 void FormSettings::radioButtonLanguageRussian_Clicked() {
-    _setting.setLanguage(5);
+    Settings::setLanguage(5);
     emit s_updateSettings();
     QTranslator *translator = new QTranslator;
     translator->load(":/AraSteamManager_ru.qm");
@@ -207,18 +207,18 @@ void FormSettings::radioButtonLanguageRussian_Clicked() {
 }
 
 void FormSettings::checkBoxVisibleHiddenGames_StateChanged(int arg1) {
-    _setting.setVisibleHiddenGames(arg1 / 2);
+    Settings::setVisibleHiddenGames(arg1 / 2);
     emit s_updateSettings();
 }
 
 void FormSettings::radioButtonDarkTheme_Clicked() {
-    _setting.setTheme(1);
+    Settings::setTheme(1);
     emit s_updateSettings();
     QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::radioButtonLightTheme_Clicked() {
-    _setting.setTheme(2);
+    Settings::setTheme(2);
     emit s_updateSettings();
     QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
 }
@@ -227,7 +227,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
     QRadioButtonWithData *rbSender = dynamic_cast<QRadioButtonWithData*>(sender());
     if (rbSender) {
         int indexHiddenGame = rbSender->GetData(0).toInt();
-        QString iconsColor = _setting.getIconsColor();
+        QString iconsColor = Settings::getIconsColor();
         auto &currentGame = _hiddenGames[indexHiddenGame];
         ui->TableWidgetGames->clear();
         ui->TableWidgetGames->setRowCount(currentGame.second.size());
@@ -252,7 +252,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                     ui->TableWidgetGames->setCellWidget(setTo, 2, button1);
 
                     QButtonWithData *button3 = new QButtonWithData("");
-                    button3->setIcon(QIcon(_setting.getIconHide()));
+                    button3->setIcon(QIcon(Images::hide()));
                     button3->setMinimumSize(QSize(25, 25));
                     button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + QString::number(game._appID));
                     button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
@@ -267,7 +267,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
             //list[2]=_games[gamei].GetName()
             for (int i = 0; i < currentGame.second.size(); i++) {
                 QStringList list = currentGame.second[i].split("%%");
-                QString path = _setting.getPathForIconGames(list[1]);
+                QString path = Paths::imagesGames(list[1]);
                 QLabel *iconGame = new QLabel;
                 iconGame->setBaseSize(QSize(32, 32));
                 ui->TableWidgetGames->setCellWidget(i, 0, iconGame);
@@ -290,7 +290,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                 ui->TableWidgetGames->setCellWidget(i, 2, button1);
 
                 QButtonWithData *button3 = new QButtonWithData("");
-                button3->setIcon(QIcon(_setting.getIconHide()));
+                button3->setIcon(QIcon(Images::hide()));
                 button3->setMinimumSize(QSize(25, 25));
                 button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + list[0]);
                 button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
@@ -340,7 +340,7 @@ void FormSettings::hideClicked() {
         //QString save=_hiddenGames[index].first+".txt";
         _hiddenGames[index].second.removeAt(gameIndex);
         ui->TableWidgetGames->removeRow(gameIndex);
-        QFile fileSaveTo(_setting._pathHide + _hiddenGames[index].first + ".txt");
+        QFile fileSaveTo(Paths::hiddenGames(_hiddenGames[index].first));
         fileSaveTo.open(QIODevice::WriteOnly| QIODevice::Text);
         QTextStream writeStream(&fileSaveTo);
         for(QString game: _hiddenGames[index].second) {
@@ -352,11 +352,11 @@ void FormSettings::hideClicked() {
 }
 
 void FormSettings::checkBoxSaveImage_StateChanged(int arg1) {
-    _setting.setSaveimage(arg1 == 2);
+    Settings::setSaveimage(arg1 == 2);
     emit s_updateSettings();
 }
 
 void FormSettings::slideProfileSize_ValueChanged(int aValue) {
-    _setting.setVisibleProfileInfo(aValue);
+    Settings::setVisibleProfileInfo(aValue);
     emit s_updateSettings();
 }

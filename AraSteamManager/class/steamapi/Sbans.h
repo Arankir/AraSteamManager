@@ -11,43 +11,37 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
-#include "class/settings.h"
-#include "class/statusvalue.h"
+#include "class/steamapi/Sapi.h"
 #include <QObject>
 
-class SBans : public QObject
+class SBans : public Sapi
 {
     Q_OBJECT
 public:
     explicit SBans(const QString &id, bool parallel, QObject *parent = nullptr);
-    SBans(QJsonDocument &docBans, QObject *parent = nullptr);
-    SBans(QObject *parent = nullptr);
-    ~SBans();
-    void set(const QString &id, bool parallel);
-    void set(QJsonDocument &docBans);
-    QString getSteamid(int index = 0);
-    bool getCommunityBanned(int index = 0);
-    bool getVacBanned(int index = 0);
-    int getNumberOfVacBans(int index = 0);
-    int getDaysSinceLastBan(int index = 0);
-    int getNumberOfGameBans(int index = 0);
-    QString getEconomyBan(int index = 0);
-    StatusValue getStatus();
-    QString getError();
-    void update(bool parallel);
+    SBans(QObject *parent = nullptr): Sapi(parent) {}
+    ~SBans() {}
+
+    SBans &load(const QString &id, bool parallel);
+    SBans &update(bool parallel);
+
+    QString getSteamid(int index = 0) const;
+    bool getCommunityBanned(int index = 0) const;
+    bool getVacBanned(int index = 0) const;
+    int getNumberOfVacBans(int index = 0) const;
+    int getDaysSinceLastBan(int index = 0) const;
+    int getNumberOfGameBans(int index = 0) const;
+    QString getEconomyBan(int index = 0) const;
 
 signals:
-    void s_finished(SBans*);
     void s_finished();
 
 private slots:
-    void onLoad(QNetworkReply *reply);
+    void onLoad() override;
+    void parse(const QJsonDocument &doc);
 
 private:
-    QNetworkAccessManager *_manager;
     QJsonArray _bans;
-    StatusValue _status;
-    QString _error="";
     QString _id;
 };
 #endif // SBANS_H

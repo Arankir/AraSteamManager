@@ -8,7 +8,7 @@
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sachievements.h"
 #include "class/filter.h"
-#include "class/settings.h"
+//#include "class/settings.h"
 #include "class/Network/requestimage.h"
 
 namespace Ui {
@@ -42,7 +42,7 @@ private:
     Favorites _friends;
     Favorites _achievements;
     Filter _filter;
-    Settings _setting;
+    //Settings _setting;
 
     QString _iconsColor;
 

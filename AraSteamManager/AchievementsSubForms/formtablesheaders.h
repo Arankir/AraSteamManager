@@ -11,7 +11,7 @@
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sachievements.h"
 #include "class/filter.h"
-#include "class/settings.h"
+#include "class/categoriesgame.h"
 #include "class/Network/requestimage.h"
 #include "class/Threads/threading.h"
 
@@ -47,7 +47,7 @@ public slots:
     void setValuesMode(bool value);
     void setUniqueMode(bool unique);
     void setVisibleContentSelect(int pos, bool select);
-    void categoryToTable(const QString &title, QList<QString> aNoValues, QJsonArray aValues, bool aIsNoValue);
+    void categoryToTable(const QString &title, QList<QString> aNoValues, QList<CategoryValue> aValues, bool aIsNoValue);
     bool swapCategoryColumns(int aPosOld, int aPosNew);
     void update();
     QString getHeaderText(int aIndex);
@@ -140,7 +140,7 @@ private:
     int _noValueColumn;
     QVector<int> _friendsColumns;
     QVector<int> _categoriesColumns;
-    Settings _setting;
+    //Settings _setting;
 
     bool _isUnique;
     bool _isNoValue;

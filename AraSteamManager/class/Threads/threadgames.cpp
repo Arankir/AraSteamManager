@@ -1,16 +1,7 @@
 #include "threadgames.h"
 
-ThreadGames::ThreadGames(const int aTableColumnAppid, const int aTableColumnIndex, const int aTableColumnName, QTableWidget *aTableWidgetGames, SGames &aGames, QObject *aParent):
-QObject(aParent), c_tableColumnAppid(aTableColumnAppid), c_tableColumnIndex(aTableColumnIndex), c_tableColumnName(aTableColumnName), _games(aGames), _TableWidgetGames(aTableWidgetGames) {
-
-}
-
-ThreadGames::~ThreadGames() {
-    qInfo()<<"Thread games deleted";
-}
-
 int ThreadGames::fill() {
-    int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+    int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family, 10);
     for(int i = 0; i < _games.getCount(); i++) {

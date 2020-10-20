@@ -7,7 +7,7 @@
 #include "class/steamapi/Slevels.h"
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sfriends.h"
-#include "class/settings.h"
+//#include "class/settings.h"
 #include "class/Network/requestimage.h"
 #include <QGraphicsDropShadowEffect>
 
@@ -66,7 +66,7 @@ private:
     SProfile _profile;
     SGames _games;
     SFriends _friends;
-    Settings _setting;
+    //Settings _setting;
     int _visibleInfo;
 };
 

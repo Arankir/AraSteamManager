@@ -21,7 +21,7 @@
 #include "class/steamapi/Slevels.h"
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sfriends.h"
-#include "class/settings.h"
+//#include "class/settings.h"
 #include <QPropertyAnimation>
 #include <QFontDatabase>
 #include <QScreen>
@@ -52,7 +52,7 @@ public:
     FormFavorites *_favoritesForm = nullptr;
     FormStatistics *_statisticsForm = nullptr;
     FormSettings *_settingsForm = nullptr;
-    FormContainerAchievements *_containerAchievementsForm;
+    FormContainerAchievements *_containerAchievementsForm = nullptr;
     //QVector<FormAchievements*> _achievementsForms;
 
 public slots:
@@ -75,6 +75,7 @@ public slots:
     FormFavorites *createFormFavorites();
     FormStatistics *createFormStatistics(const QString &aId, SGames &aGames, const QString &aName);
     FormSettings *createFormSettings();
+    FormContainerAchievements *createFormContainerAchievements();
 signals:
     void s_updateSettings();
 

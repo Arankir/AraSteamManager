@@ -12,7 +12,7 @@
 class Favorites : public QObject {
     Q_OBJECT
 
-enum class jsonType{
+enum class jsonType {
     object,
     array
 };
@@ -28,14 +28,14 @@ public slots:
     void removeGame(QJsonObject &game);
     int addGame(QJsonObject &game);
     bool isInFavorites(QJsonObject &aGame, const QString &id);
-    QString getType();
-    QJsonArray getValues();
-    QJsonArray getValues(QJsonObject &game);
+    QString getType() const;
+    QJsonArray getValues() const;
+    QJsonArray getValues(QJsonObject &game) const;
 
 public:
     explicit Favorites(const QString &path, const QString &type, QObject *parent = nullptr);
     Favorites(const QString &type, QObject *parent = nullptr);
-    Favorites(QObject *parent = nullptr);
+    Favorites(QObject *parent = nullptr): QObject(parent) {}
 
 signals:
 
@@ -47,7 +47,6 @@ private slots:
     void load();
 
 private:
-    Settings _setting;
     QString _path;
     QJsonObject _favorites;
 };

@@ -70,8 +70,7 @@ void initLog() {
     QFileInfoList list = dirLogs.entryInfoList();
     for(auto &file: list) {
         if (file.fileName().indexOf("log_") == 0) {
-            QDateTime date;
-            date.fromString(file.fileName().remove("log_"), "yyyy.MM.dd");
+            QDateTime date = QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), "yyyy.MM.dd");
             if (date < QDateTime::currentDateTime().addMonths(-1)) {
                 QFile::remove(file.filePath() + "/" + file.fileName());
             }

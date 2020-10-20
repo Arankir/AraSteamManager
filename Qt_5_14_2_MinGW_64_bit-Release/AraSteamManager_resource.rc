@@ -1,6 +1,6 @@
 #include <windows.h>
 
-IDI_ICON1	ICON	DISCARDABLE	"C:\\Users\\Arankir\\Desktop\\Steam\\AraSteamManager\\AraSteamManager\\SAS.ico"
+IDI_ICON1	ICON	DISCARDABLE	"C:\\Users\\RUSLANoffice\\Desktop\\All\\Projects\\AraSteamManager\\AraSteamManager\\SAS.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 0,0,0,0

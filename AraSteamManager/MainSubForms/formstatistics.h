@@ -4,10 +4,8 @@
 #include <QWidget>
 #include <QPair>
 #include "class/steamapi/Sgames.h"
-#include "class/settings.h"
 #include "class/steamapi/Sachievements.h"
 #include "class/steamapi/Sfriends.h"
-#include "class/settings.h"
 #include "class/Threads/threading.h"
 
 #include "class/NotMine/donutbreakdownchart.h"
@@ -50,7 +48,6 @@ private slots:
 
 private:
     Ui::FormStatistics *ui;
-    Settings _setting;
     QString _id;
     QVector<QPair<QString,QString>> _complete;
     QVector<QPair<QString,QString>> _started;

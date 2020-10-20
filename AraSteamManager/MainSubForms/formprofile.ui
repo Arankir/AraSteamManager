@@ -220,7 +220,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Profile</string>
+             <string>Профиль</string>
             </property>
            </widget>
           </item>
@@ -238,7 +238,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Friends</string>
+             <string>Друзья</string>
             </property>
            </widget>
           </item>
@@ -256,7 +256,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Games</string>
+             <string>Игры</string>
             </property>
            </widget>
           </item>

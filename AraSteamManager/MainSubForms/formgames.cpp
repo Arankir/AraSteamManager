@@ -88,31 +88,31 @@ void FormGames::enableMouseTracking(const QObjectList &aChildren) {
 }
 
 void FormGames::updateSettings() {
-    _setting.syncronizeSettings();
+    Settings::syncronizeSettings();
     setIcons();
     loadHiddenGames();
     hideHiddenGames();
 }
 
 void FormGames::setIcons() {
-    ui->ButtonFind->setIcon(QIcon(_setting.getIconFind()));
-    ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
-    ui->ButtonHide->setIcon(QIcon(_setting.getIconHide()));
-    ui->ButtonCreateGroup->setIcon(QIcon(_setting.getIconCreate()));
-    ui->ButtonChangeGroup->setIcon(QIcon(_setting.getIconChange()));
+    ui->ButtonFind->setIcon(QIcon(Images::find()));
+    ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
+    ui->ButtonHide->setIcon(QIcon(Images::hide()));
+    ui->ButtonCreateGroup->setIcon(QIcon(Images::create()));
+    ui->ButtonChangeGroup->setIcon(QIcon(Images::change()));
 }
 
 void FormGames::loadHiddenGames() {
     _hide.clear();
     QFile fileHide;
-    fileHide.setFileName(_setting._pathHide + _profile._steamID + ".txt");
+    fileHide.setFileName(Paths::hiddenGames(_profile._steamID));
     if(fileHide.open(QIODevice::ReadOnly)) {
         while(!fileHide.atEnd()) {
             _hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n");
         }
         fileHide.close();
     }
-    fileHide.setFileName(_setting._pathHide + "All.txt");
+    fileHide.setFileName(Paths::hiddenGames("All"));
     if(fileHide.open(QIODevice::ReadOnly)) {
         while(!fileHide.atEnd()) {
             _hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n").split("%%").at(0);
@@ -179,10 +179,10 @@ QMenu *FormGames::createMenu(SGame &aGame, int aIndex) {
                                   [=](QJsonValue curFavorite) {return curFavorite.toObject().value("id").toString() == appId;});
     if(isFavorite) {
         actionFavorites = new QAction(tr("Удалить из избранного"), this);
-        actionFavorites->setIcon(QIcon(_setting.getIconIsFavorites()));
+        actionFavorites->setIcon(QIcon(Images::isFavorites()));
     } else {
         actionFavorites = new QAction(tr("Добавить в избранное"), this);
-        actionFavorites->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+        actionFavorites->setIcon(QIcon(Images::isNotFavorites()));
     }
     actionFavorites->setData(aIndex);
     actionFavorites->setWhatsThis(appId);
@@ -193,10 +193,10 @@ QMenu *FormGames::createMenu(SGame &aGame, int aIndex) {
                                    [=](QString curGame) {return curGame == appId;});
     if (hiddenGame != _hide.cend()) {
         actionHide = new QAction(tr("Показать игру"), this);
-        actionHide->setIcon(QIcon(_setting.getIconUnhide()));
+        actionHide->setIcon(QIcon(Images::unhide()));
     } else {
         actionHide = new QAction(tr("Скрыть игру"), this);
-        actionHide->setIcon(QIcon(_setting.getIconHide()));
+        actionHide->setIcon(QIcon(Images::hide()));
     }
     actionHide->setData(aIndex);
     actionHide->setWhatsThis(appId);
@@ -361,7 +361,7 @@ void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
     for (int i = 0; i < ui->TableWidgetGames->rowCount(); i++) {
         ui->TableWidgetGames->setRowHidden(i, ui->TableWidgetGames->item(i, c_tableColumnName)->text().toLower().indexOf(findText, 0) == -1);
     }
-    if (_setting.getVisibleHiddenGames() != 1 || findText == "") {
+    if (Settings::getVisibleHiddenGames() != 1 || findText == "") {
         hideHiddenGames();
     }
 }
@@ -394,13 +394,13 @@ void FormGames::tableWidgetGames_CellClicked(int aRow, int) {
     bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(),
                                   [=](QJsonValue curFavorite) {return curFavorite.toObject().value("id").toString() == _selectedGame;});
     if(isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsFavorites()));
+        ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
     } else {
-        ui->ButtonFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+        ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
     }
     //Проверка является ли игра скрытой
     if(ui->TableWidgetGames->item(aRow, c_tableColumnName)->foreground() == QColor(255 * 0.7, 0, 0)) {
-        ui->ButtonHide->setIcon(QIcon(_setting.getIconUnhide()));
+        ui->ButtonHide->setIcon(QIcon(Images::unhide()));
     }
 }
 
@@ -439,11 +439,11 @@ void FormGames::buttonFavorite_Clicked() {
     if(_favorites.addValue(newValue, true)) {
         //Категория добавилась
         action->setText(tr("Удалить из избранного"));
-        action->setIcon(QIcon(_setting.getIconIsFavorites()));
+        action->setIcon(QIcon(Images::isFavorites()));
     } else {
         //Категория уже есть (удалилась)
         action->setText(tr("Добавить в избранное"));
-        action->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+        action->setIcon(QIcon(Images::isNotFavorites()));
     }
 }
 
@@ -462,9 +462,9 @@ void FormGames::buttonHide_Clicked() {
     question.addButton(tr("Отмена"), QMessageBox::NoRole);
     question.exec();
     if(question.clickedButton() == btnProfile) {
-         savePath = _setting._pathHide + _profile._steamID + ".txt";
+         savePath = Paths::hiddenGames(_profile._steamID);
     } else if(question.clickedButton() == btnAll) {
-         savePath = _setting._pathHide + "All.txt";
+         savePath = Paths::hiddenGames("All");
     } else {
         return;
     }
@@ -473,7 +473,7 @@ void FormGames::buttonHide_Clicked() {
     QFile fileHide(savePath);
     fileHide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&fileHide);
-    if (savePath == _setting._pathHide + "All.txt") {
+    if (savePath == Paths::hiddenGames("All")) {
         writeStream <<_games[_selectedIndex.toInt()]._appID <<"%%" + _games[_selectedIndex.toInt()]._img_icon_url + "%%" + _games[_selectedIndex.toInt()]._name <<"\n";
     } else {
         writeStream <<_games[_selectedIndex.toInt()]._appID <<"\n";
@@ -488,7 +488,7 @@ void FormGames::buttonHide_Clicked() {
         }
     }
     ui->ButtonHide->setFixedSize(ui->ButtonHide->size());
-    ui->ButtonHide->setIcon(QIcon(_setting.getIconUnhide()));
+    ui->ButtonHide->setIcon(QIcon(Images::unhide()));
     delete btnProfile;
     delete btnAll;
 }

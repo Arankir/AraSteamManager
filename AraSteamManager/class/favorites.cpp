@@ -4,16 +4,14 @@ Favorites::Favorites(const QString &aPath, const QString &aType, QObject *aParen
     init(aType);
 }
 
-Favorites::Favorites(const QString &aType, QObject *aParent): QObject(aParent), _path(_setting._pathFavorites+aType+".json") {
+Favorites::Favorites(const QString &aType, QObject *aParent): QObject(aParent), _path(Paths::favorites(aType)) {
     init(aType);
 }
 
-Favorites::Favorites(QObject *aParent): QObject(aParent) {
 
-}
 
 void Favorites::setType(const QString &aType) {
-    _path = _setting._pathFavorites + aType + ".json";
+    _path = Paths::favorites(aType);
     init(aType);
 }
 
@@ -30,7 +28,7 @@ void Favorites::init(const QString &aType) {
     load();
 }
 
-QJsonArray Favorites::getValues(QJsonObject &aGame) {
+QJsonArray Favorites::getValues(QJsonObject &aGame) const {
     for(auto value: _favorites.value("Values").toArray()) {
         if(value.toObject().value("game").toObject() == aGame) {
             return value.toObject().value("Values").toArray();
@@ -234,11 +232,11 @@ bool Favorites::isInFavorites(QJsonObject &aGame, const QString &aId) {
                                       [=](QJsonValue id) { return aId == id.toObject().value("id").toString(); } );
 }
 
-QString Favorites::getType() {
+QString Favorites::getType() const {
     return _favorites.value("Type").toString();
 }
 
-QJsonArray Favorites::getValues() {
+QJsonArray Favorites::getValues() const {
     return _favorites.value("Values").toArray();
 }
 

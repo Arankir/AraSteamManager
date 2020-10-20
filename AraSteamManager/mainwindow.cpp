@@ -22,8 +22,7 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 
 void MainWindow::initComponents() {
     _containerAchievementsForm = new FormContainerAchievements();
-    _setting.customGeometry(QGuiApplication::primaryScreen()->geometry());
-        int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+        int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
         QString family = QFontDatabase::applicationFontFamilies(id).at(0);
         QFont font(family, 10);
         //font.setPointSize(12);
@@ -42,9 +41,9 @@ void MainWindow::initComponents() {
     ui->ButtonMinimize->setFixedSize(QSize(23, 23));
     ui->ButtonMaximize->setFixedSize(QSize(23, 23));
     ui->ButtonExit    ->setFixedSize(QSize(23, 23));
-    this->setGeometry(_setting.getMainWindowGeometry());
-    this->move(_setting.getMainWindowPos().x(), _setting.getMainWindowPos().y());
-    if(_setting.getMainWindowMaximize()) {
+    this->setGeometry(Settings::getMainWindowGeometry());
+    this->move(Settings::getMainWindowPos().x(), Settings::getMainWindowPos().y());
+    if(Settings::getMainWindowMaximize()) {
         this->showMaximized();
     }
     qApp->setStyleSheet(getTheme());
@@ -64,8 +63,8 @@ void MainWindow::initComponents() {
     connect(ui->ButtonMaximize,      &QPushButton::clicked, this, &MainWindow::buttonMaximize_Clicked);
     connect(ui->ButtonMinimize,      &QPushButton::clicked, this, &MainWindow::buttonMinimize_Clicked);
 #define ConnectsEnd }
-    if (_setting.getMyProfile() != "none") {
-        goToProfile(_setting.getMyProfile(), ProfileUrlType::id);
+    if (Settings::getMyProfile() != "none") {
+        goToProfile(Settings::getMyProfile(), ProfileUrlType::id);
     }
 }
 #define InitEnd }
@@ -75,13 +74,13 @@ QString MainWindow::getTheme() {
     QString hoverGradient;
     QString backgroundGradient;
     QString qss;
-    switch(_setting.getTheme()) {
+    switch(Settings::getTheme()) {
     case 1:{
-        hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                    "stop: 0 #185077, "
-                    "stop: 0.22 #387097, "
-                    "stop: 0.88 #286087, "
-                    "stop: 1.0 #185077); ";
+//        hoverGradient = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+//                    "stop: 0 #185077, "
+//                    "stop: 0.22 #387097, "
+//                    "stop: 0.88 #286087, "
+//                    "stop: 1.0 #185077); ";
         backgroundGradient = "qradialgradient("
                     "cx:0.5, cy:0.5, "
                     "radius: 0.9, "
@@ -184,22 +183,22 @@ QString MainWindow::getTheme() {
                     "width: 15; "
                 "} "
                 "QRadioButton::indicator::unchecked { "
-                    "image: url(" + _setting.getIconRadioButtonUnchecked() + "); "
+                    "image: url(" + Images::radioButtonUnchecked() + "); "
                 "} "
                 "QRadioButton::indicator::checked { "
-                    "image: url(" + _setting.getIconRadioButtonChecked() + "); "
+                    "image: url(" + Images::radioButtonChecked() + "); "
                 "} "
                 "QRadioButton::indicator::unchecked:hover { "
-                    "image: url(" + _setting.getIconRadioButtonUncheckedHover() + "); "
+                    "image: url(" + Images::radioButtonUncheckedHover() + "); "
                 "} "
                 "QRadioButton::indicator::checked:hover { "
-                    "image: url(" + _setting.getIconRadioButtonCheckedHover() + "); "
+                    "image: url(" + Images::radioButtonCheckedHover() + "); "
                 "} "
                 "QRadioButton::indicator::unchecked:pressed { "
-                    "image: url(" + _setting.getIconRadioButtonUncheckedPress() + "); "
+                    "image: url(" + Images::radioButtonUncheckedPress() + "); "
                 "} "
                 "QRadioButton::indicator::checked:pressed { "
-                    "image: url(" + _setting.getIconRadioButtonCheckedPress() + "); "
+                    "image: url(" + Images::radioButtonCheckedPress() + "); "
                 "} "
                 "QRadioButton::hover { "
                     "color: #57CBDE"
@@ -217,22 +216,22 @@ QString MainWindow::getTheme() {
                     "width: 15; "
                 "} "
                 "QCheckBox::indicator:unchecked { "
-                    "image: url(" + _setting.getIconCheckBoxUnchecked() + "); "
+                    "image: url(" + Images::checkBoxUnchecked() + "); "
                 "} "
                 "QCheckBox::indicator:checked { "
-                    "image: url(" + _setting.getIconCheckBoxChecked() + "); "
+                    "image: url(" + Images::checkBoxChecked() + "); "
                 "} "
                 "QCheckBox::indicator:unchecked:hover { "
-                    "image: url(" + _setting.getIconCheckBoxUncheckedHover() + "); "
+                    "image: url(" + Images::checkBoxUncheckedHover() + "); "
                 "} "
                 "QCheckBox::indicator:checked:hover { "
-                    "image: url(" + _setting.getIconCheckBoxCheckedHover() + "); "
+                    "image: url(" + Images::checkBoxCheckedHover() + "); "
                 "} "
                 "QCheckBox::indicator:unchecked:pressed { "
-                    "image: url(" + _setting.getIconCheckBoxUncheckedPress() + "); "
+                    "image: url(" + Images::checkBoxUncheckedPress() + "); "
                 "} "
                 "QCheckBox::indicator:checked:pressed { "
-                    "image: url(" + _setting.getIconCheckBoxCheckedPress() + "); "
+                    "image: url(" + Images::checkBoxCheckedPress() + "); "
                 "} "
 #define checkboxend }
 #define combobox {
@@ -263,7 +262,7 @@ QString MainWindow::getTheme() {
                     "border-bottom-right-radius: 1px; "
                 "} "
                 "QComboBox::down-arrow { "
-                    "image: url(" + _setting.getIconComboboxDown() + "); "
+                    "image: url(" + Images::comboBoxDown() + "); "
                     "width: 20px; "
                     "padding-left: 3px; "
                 "} "
@@ -311,7 +310,7 @@ QString MainWindow::getTheme() {
                 "} "
                 "QTabBar::close-button { "
                    "subcontrol-position: right; "
-                   "image: url(" + _setting.getIconCloseWindow() + "); "
+                   "image: url(" + Images::closeWindow() + "); "
                 "} "
                 "QTabBar::tab { "
                     "color: white; "
@@ -379,22 +378,22 @@ QString MainWindow::getTheme() {
                     "height: 40px; "
                 "} "
                 "QTableView::indicator:unchecked { "
-                    "image: url(" + _setting.getIconCheckBoxUnchecked() + "); "
+                    "image: url(" + Images::checkBoxUnchecked() + "); "
                 "} "
                 "QTableView::indicator:checked { "
-                    "image: url(" + _setting.getIconCheckBoxChecked() + "); "
+                    "image: url(" + Images::checkBoxChecked() + "); "
                 "} "
                 "QTableView::indicator:unchecked:hover { "
-                    "image: url(" + _setting.getIconCheckBoxUncheckedHover() + "); "
+                    "image: url(" + Images::checkBoxUncheckedHover() + "); "
                 "} "
                 "QTableView::indicator:checked:hover { "
-                    "image: url(" + _setting.getIconCheckBoxCheckedHover() + "); "
+                    "image: url(" + Images::checkBoxCheckedHover() + "); "
                 "} "
                 "QTableView::indicator:unchecked:pressed { "
-                    "image: url(" + _setting.getIconCheckBoxUncheckedPress() + "); "
+                    "image: url(" + Images::checkBoxUncheckedPress() + "); "
                 "} "
                 "QTableView::indicator:checked:pressed { "
-                    "image: url(" + _setting.getIconCheckBoxCheckedPress() + "); "
+                    "image: url(" + Images::checkBoxCheckedPress() + "); "
                 "} "
 #define tableviewEnd }
                 "QTableWidget { "
@@ -460,16 +459,16 @@ QString MainWindow::getTheme() {
                     "margin-left: 15; "
                 "}"
                 "QScrollBar::add-line:vertical { "
-                    "image: url(" + _setting.getIconScrollbarDown() + "); "
+                    "image: url(" + Images::scrollBarDown() + "); "
                 "}"
                 "QScrollBar::sub-line:vertical { "
-                    "image: url(" + _setting.getIconScrollbarUp() + "); "
+                    "image: url(" + Images::scrollBarUp() + "); "
                 "}"
                 "QScrollBar::add-line:horizontal { "
-                    "image: url(" + _setting.getIconScrollbarRight() + "); "
+                    "image: url(" + Images::scrollBarRight() + "); "
                 "}"
                 "QScrollBar::sub-line:horizontal { "
-                    "image: url(" + _setting.getIconScrollbarLeft() + "); "
+                    "image: url(" + Images::scrollBarLeft() + "); "
                 "}"
 #define scrollbarend }
                 "QWidget#MainWindow, QWidget#FormContainerAchievements { "
@@ -528,7 +527,7 @@ QString MainWindow::getTheme() {
 //                    "background-color: rgba(23, 26, 33, 0.5); "
 //                "} "
                 "QGroupBox#GroupBoxFilter::title { "
-                    "image: url(" + _setting.getIconFilter() + "); "
+                    "image: url(" + Images::filter() + "); "
                     "image-position: left; "
                     //"margin-top: 12px; "
                 "} "
@@ -577,24 +576,24 @@ QString MainWindow::getTheme() {
 }
 
 void MainWindow::setIcons() {
-    ui->LabelLogo->setPixmap(QPixmap(_setting.getIconLogoColor()).scaled(30, 30));
+    ui->LabelLogo->setPixmap(QPixmap(Images::logo()).scaled(30, 30));
 
 //    ui->LabelLogo->setTextFormat(Qt::RichText);
 //    ui->LabelLogo->setText("<img height=30 style=\"vertical-align: top\" src=\"" + _setting.getIconLogoColor() + "\"> "
 //                                "<span style=\"vertical-align: bottom\">НАЯ ПРОГА</span>");
-    ui->ButtonUpdate        ->setIcon(QIcon(_setting.getIconUpdate()));
-    ui->ButtonGoToMyProfile ->setIcon(QIcon(_setting.getIconHome()));
-    ui->ButtonFindProfile   ->setIcon(QIcon(_setting.getIconFindProfile()));
-    ui->ButtonSettings      ->setIcon(QIcon(_setting.getIconSettings()));
-    ui->ButtonExit          ->setIcon(QIcon(_setting.getIconCloseWindow()));
-    ui->ButtonMinimize      ->setIcon(QIcon(_setting.getIconMinimizeWindow()));
+    ui->ButtonUpdate        ->setIcon(QIcon(Images::update()));
+    ui->ButtonGoToMyProfile ->setIcon(QIcon(Images::home()));
+    ui->ButtonFindProfile   ->setIcon(QIcon(Images::findProfile()));
+    ui->ButtonSettings      ->setIcon(QIcon(Images::settings()));
+    ui->ButtonExit          ->setIcon(QIcon(Images::closeWindow()));
+    ui->ButtonMinimize      ->setIcon(QIcon(Images::minimizeWindow()));
     if (this->isMaximized()) {
-        ui->ButtonMaximize  ->setIcon(QIcon(_setting.getIconNormalizeWindow()));
+        ui->ButtonMaximize  ->setIcon(QIcon(Images::normalizeWindow()));
     } else {
-        ui->ButtonMaximize  ->setIcon(QIcon(_setting.getIconMaximizeWindow()));
+        ui->ButtonMaximize  ->setIcon(QIcon(Images::maximizeWindow()));
     }
-    ui->ButtonBack          ->setIcon(QIcon(_setting.getIconLeft()));
-    ui->ButtonNext          ->setIcon(QIcon(_setting.getIconRight()));
+    ui->ButtonBack          ->setIcon(QIcon(Images::left()));
+    ui->ButtonNext          ->setIcon(QIcon(Images::right()));
 }
 
 void MainWindow::progressLoading(int aProgress, int) {
@@ -603,11 +602,8 @@ void MainWindow::progressLoading(int aProgress, int) {
 
 #define ContainerAchievementsStart {
 void MainWindow::addAchievements(SAchievementsPlayer &aAchievements, SGame &aGames) {
-    if (_achievementsCount == 0) {
-        _containerAchievementsForm = new FormContainerAchievements();
-        connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
-        connect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &MainWindow::containerAchievementsClose);
-        _windowChildCount++;
+    if (_containerAchievementsForm == nullptr) {
+        createFormContainerAchievements();
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
     if (currentProfile) {
@@ -625,9 +621,12 @@ void MainWindow::containerAchievementsClose() {
     _achievementsCount = 0;
     disconnect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
     disconnect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &MainWindow::containerAchievementsClose);
+    delete _containerAchievementsForm;
+    _containerAchievementsForm = nullptr;
 }
 
 void MainWindow::returnFromAchievements(int aNum) {
+    Q_UNUSED(aNum);
     //disconnect(_achievementsForms[aNum], &FormAchievements::s_returnToGames, this, &MainWindow::returnFromAchievements);
     disconnect(_containerAchievementsForm);
     delete _containerAchievementsForm;
@@ -696,6 +695,14 @@ FormSettings *MainWindow::createFormSettings() {
     connect(_settingsForm, &FormSettings::s_updateSettings, this, &MainWindow::updateSettings);
     return _settingsForm;
 }
+
+FormContainerAchievements *MainWindow::createFormContainerAchievements() {
+    _containerAchievementsForm = new FormContainerAchievements();
+    connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
+    connect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &MainWindow::containerAchievementsClose);
+    //_windowChildCount++;
+    return _containerAchievementsForm;
+}
 #define FormsCreateEnd }
 
 #define GoToFormStart {
@@ -712,10 +719,10 @@ void MainWindow::goToProfile(const QString &aId, ProfileUrlType aType) {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->count() - 1);
         updateSettings();
         updateEnabledButtonsBackNext();
-        qInfo()<<"Буфер профилей"<<ui->StackedWidgetProfiles->currentIndex() + 1<<"/"<<ui->StackedWidgetProfiles->count();
+        qInfo() << "Буфер профилей" << ui->StackedWidgetProfiles->currentIndex() + 1 << "/" << ui->StackedWidgetProfiles->count();
     } else {
         QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
-        qWarning()<<newProfile.getError();
+        qWarning() << newProfile.getError();
     }
 }
 
@@ -833,8 +840,8 @@ void MainWindow::closeEvent(QCloseEvent *aEvent) {
         this->showNormal();
     }
     _setting.setMainWindowParams(this->frameGeometry());
-    _setting.syncronizeSettings();
-    qInfo()<<"Programm closed";
+    Settings::syncronizeSettings();
+    qInfo() << "Programm closed";
     aEvent->accept();
 }
 #define EventsEnd }
@@ -848,9 +855,9 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::updateSettings() {
-    _setting.syncronizeSettings();
+    Settings::syncronizeSettings();
 //TODO исправить ресайз профилей на нормальный вариант
-    switch (_setting.getProfileInfoSize()) {
+    switch (Settings::getProfileInfoSize()) {
     case 0: {
         ui->StackedWidgetProfiles->setFixedHeight(50);
         break;
@@ -866,7 +873,7 @@ void MainWindow::updateSettings() {
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
     if (currentProfile) {
-        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != _setting.getMyProfile());
+        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != Settings::getMyProfile());
     }
     qApp->setStyleSheet(getTheme());
     emit s_updateSettings();
@@ -913,7 +920,7 @@ void MainWindow::buttonBack_Clicked() {
         returnFromForms();
         FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
         if (currentProfile) {
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != _setting.getMyProfile());
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != Settings::getMyProfile());
         }
         updateEnabledButtonsBackNext();
     }
@@ -925,7 +932,7 @@ void MainWindow::buttonNext_Clicked() {
         returnFromForms();
         FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
         if (currentProfile) {
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != _setting.getMyProfile());
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != Settings::getMyProfile());
         }
         updateEnabledButtonsBackNext();
     }
@@ -946,8 +953,8 @@ void MainWindow::buttonSettings_Clicked() {
 }
 
 void MainWindow::buttonGoToMyProfile_Clicked() {
-    if(_setting.getMyProfile() != "none") {
-        goToProfile(_setting.getMyProfile(), ProfileUrlType::id);
+    if(Settings::getMyProfile() != "none") {
+        goToProfile(Settings::getMyProfile(), ProfileUrlType::id);
     } else {
         QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
     }
@@ -967,10 +974,10 @@ void MainWindow::buttonExit_Clicked() {
 void MainWindow::buttonMaximize_Clicked() {
     if(!this->isMaximized()) {
         this->showMaximized();
-        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconNormalizeWindow()));
+        ui->ButtonMaximize->setIcon(QIcon(Images::normalizeWindow()));
     } else {
         this->showNormal();
-        ui->ButtonMaximize->setIcon(QIcon(_setting.getIconMaximizeWindow()));
+        ui->ButtonMaximize->setIcon(QIcon(Images::maximizeWindow()));
     }
 }
 

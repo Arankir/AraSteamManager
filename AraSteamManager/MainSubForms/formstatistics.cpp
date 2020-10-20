@@ -5,7 +5,7 @@
 FormStatistics::FormStatistics(const QString &aId, SGames &aGames, const QString &aName, QWidget *aParent): QWidget(aParent), ui(new Ui::FormStatistics), _id(aId), _games(aGames), _name(aName) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+    int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
     ui->ChartsViewTimes->setStyleSheet("background: rgba(0,0,0,0); ");
@@ -21,7 +21,7 @@ FormStatistics::FormStatistics(const QString &aId, SGames &aGames, const QString
     _donutBreakdown->setAnimationOptions(QChart::SeriesAnimations);
     _donutBreakdown->legend()->setAlignment(Qt::AlignRight);
     _donutBreakdown->setMargins(QMargins(1, 1, 1, 1));
-    switch(_setting.getTheme()) {
+    switch(Settings::getTheme()) {
     case 1: {
         _donutBreakdown->setTheme(QChart::ChartThemeDark);
         break;
@@ -104,8 +104,8 @@ void FormStatistics::retranslate() {
     _chartM->setTitle(tr("Достижения по месяцам"));
     QBarCategoryAxis *axisXM = new QBarCategoryAxis();
     QStringList titlesXM;
-    titlesXM <<tr("Январь") <<tr("Февраль") <<tr("Март") <<tr("Апрель") <<tr("Май") <<tr("Июнь")
-            <<tr("Июль") <<tr("Август") <<tr("Сентябрь") <<tr("Октябрь") <<tr("Ноябрь") <<tr("Декабрь");
+    titlesXM << tr("Январь") << tr("Февраль") << tr("Март") << tr("Апрель") << tr("Май") << tr("Июнь")
+            << tr("Июль") << tr("Август") << tr("Сентябрь") << tr("Октябрь") << tr("Ноябрь") << tr("Декабрь");
     axisXM->append(titlesXM);
     if((_chartM->series().size() > 0) && (_chartM->axes(Qt::Horizontal, _chartM->series().at(0)).size() > 0)) {
         QBarCategoryAxis *bar = dynamic_cast<QBarCategoryAxis*>(_chartM->axes(Qt::Horizontal, _chartM->series().at(0)).at(0));
@@ -170,7 +170,7 @@ void FormStatistics::onFinish() {
 
     _chartT->addAxis(axisXT, Qt::AlignBottom);
     _chartT->addAxis(axisYT, Qt::AlignLeft);
-    switch(_setting.getTheme()) {
+    switch(Settings::getTheme()) {
     case 1: {
         _chartT->setTheme(QChart::ChartThemeDark);
         break;
@@ -212,7 +212,7 @@ void FormStatistics::onFinish() {
 
     _chartM->addAxis(axisXM, Qt::AlignBottom);
     _chartM->addAxis(axisYM, Qt::AlignLeft);
-    switch(_setting.getTheme()){
+    switch(Settings::getTheme()){
     case 1: {
         _chartM->setTheme(QChart::ChartThemeDark);
         break;
@@ -251,7 +251,7 @@ void FormStatistics::onFinish() {
 
     _chartY->addAxis(axisXY, Qt::AlignBottom);
     _chartY->addAxis(axisYY, Qt::AlignLeft);
-    switch(_setting.getTheme()) {
+    switch(Settings::getTheme()) {
     case 1: {
         _chartY->setTheme(QChart::ChartThemeDark);
         break;
@@ -275,7 +275,7 @@ void FormStatistics::onFinish() {
 }
 
 void FormStatistics::updateSettings() {
-    _setting.syncronizeSettings();
+    Settings::syncronizeSettings();
     setIcons();
 }
 

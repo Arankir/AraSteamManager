@@ -16,7 +16,9 @@ public slots:
 
 public:
     explicit ThreadFriends(const int columnID, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
-                           QTableWidget *TableWidgetFriends, QList<QPair<SFriend, SProfile>> friends, QObject *parent = nullptr);
+                           QTableWidget *TableWidgetFriends, QList<QPair<SFriend, SProfile>> friends, QObject *parent = nullptr):
+        QObject(parent), c_tableColumnID(columnID), c_tableColumnName(columnName), c_tableColumnAdded(columnAdded), c_tableColumnStatus(columnStatus),
+        c_tableColumnisPublic(columnisPublic), _friends(friends), _tableWidgetFriends(TableWidgetFriends) {}
 
 signals:
     void s_finished();
@@ -34,7 +36,6 @@ private:
     const int c_tableColumnisPublic;
     QList<QPair<SFriend, SProfile>> _friends;
     SProfiles _profiles;
-    Settings _setting;
     QTableWidget *_tableWidgetFriends;
 };
 

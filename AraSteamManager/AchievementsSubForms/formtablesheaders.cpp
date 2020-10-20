@@ -47,7 +47,7 @@ ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false
     changeHorizontalTitle(c_tableAchievementColumnTitle,        tr("Название"));
     changeHorizontalTitle(c_tableAchievementColumnDescription,  tr("Описание"));
     changeHorizontalTitle(c_tableAchievementColumnWorld,        tr("По миру"));
-    changeHorizontalTitle(c_tableAchievementColumnReachedMy,    profileData.getPersonaname());
+    changeHorizontalTitle(c_tableAchievementColumnReachedMy,    profileData[0]._personaName);
     setColumnWidth(       c_tableAchievementColumnIcon,         65 + 8);
     setColumnWidth(       c_tableAchievementColumnTitle,        100);
     setColumnWidth(       c_tableAchievementColumnDescription,  315);
@@ -56,8 +56,10 @@ ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false
 
     setVisibleColumn(     c_tableAchievementColumnAppid,        false);
 
-    _achievements._appid = QString::number(_game._appID);
-    _achievements._id = _id;
+    _achievements   .set(SAchievementsPercentage(QString::number(_game._appID)))
+                    .set(SAchievementsGlobal(QString::number(_game._appID)));
+                    //.set(SAchievementsPlayer(QString::number(_game._appID), _id));// _appid = QString::number(_game._appID);
+    //_achievements._id = _id;
     _achievements.update();
 
 #define ConnectSlots {
@@ -483,7 +485,7 @@ void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
     updateHiddenRows();
 }
 
-void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aNoValues, QJsonArray aValues, bool aIsNoValue) {
+void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aNoValues, QList<CategoryValue> aValues, bool aIsNoValue) {
     if (_currentType == TableType::standart) {
         setColumnCount(c_tableAchievementColumnCount);
         _categoriesColumns.clear();
@@ -499,13 +501,13 @@ void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aN
             }
             setItemContent(j, _noValueColumn, createFlag(isAchievementCheck));
         }
-        for(auto title: aValues) {
+        for(auto category: aValues) {
             addCategoryColumn();
-            changeHorizontalTitle(getColumnCount() - 1, title.toObject().value("Title").toString());
+            changeHorizontalTitle(getColumnCount() - 1, category.title);
             for (int j = 0; j < getRowCount(); j++) {
                 bool isAchievementCheck = false;
-                for (auto appid: title.toObject().value("Achievements").toArray()) {
-                    if (itemContent(j, c_tableAchievementColumnAppid)->text() == appid.toString()) {
+                for (auto appid: category.achievements) {
+                    if (itemContent(j, c_tableAchievementColumnAppid)->text() == appid) {
                         isAchievementCheck = true;
                         break;
                     }
@@ -571,7 +573,8 @@ bool FormTablesHeaders::addFriendColumn(SProfile &aFriendProfile) {
     avatarFriend->setAlignment(Qt::AlignCenter);
     ui->TableWidgetHorizontalHeader->setCellWidget(0, column, avatarFriend);
     SAchievements achievementsFriends = _achievements;
-    achievementsFriends.set(new SAchievementsPlayer (QString::number(_game._appID), aFriendProfile._steamID, false, this));
+    SAchievementsPlayer friendsPlayer(QString::number(_game._appID), aFriendProfile._steamID, false, this);
+    achievementsFriends.set(friendsPlayer);
 //    Threading LoadFriendTable(this);
 //    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
     _fCompare.setCol(_fCompare.getCol() + 1);

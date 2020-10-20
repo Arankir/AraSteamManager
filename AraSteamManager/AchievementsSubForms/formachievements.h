@@ -141,7 +141,7 @@ private slots:
 
 private:
     Ui::FormAchievements *ui;
-    Settings _setting;
+    //Settings _setting;
     SAchievements _achievements;
     QString _currentAchievement;
     int _currentAchievementIndex = -1;

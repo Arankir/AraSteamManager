@@ -11,39 +11,33 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
-#include "class/settings.h"
-#include "class/statusvalue.h"
+#include "class/steamapi/Sapi.h"
 #include <QObject>
 
-class SLevels : public QObject
+class SLevels : public Sapi
 {
     Q_OBJECT
 public:
     explicit SLevels(const QString &id, QObject *parent = nullptr);
-    SLevels(QJsonDocument &docLevels, QObject *parent = nullptr);
-    SLevels(QObject *parent = nullptr);;
-    ~SLevels();
-    void set(const QString &id);
-    void set(QJsonDocument &docLevel);
-    int getLevel();
-    StatusValue getStatus();
-    QString getError();
-    void update();
+    SLevels(QObject *parent = nullptr): Sapi(parent) {}
+    ~SLevels() {}
+
+    SLevels &load(const QString &steamId);
+    SLevels &update();
+
+    int getLevel() const;
 
 signals:
     void s_finished(SLevels*);
     void s_finished();
 
 private slots:
-    //void Load(QNetworkReply *Reply);
-    void load();
+    void onLoad() override;
+    void parse(const QJsonDocument &doc);
 
 private:
-    QNetworkAccessManager *_manager;
     QString _steamid;//"76561198065018572"
     int _player_level = 0;
-    StatusValue _status;
-    QString _error = "";
 
 };
 

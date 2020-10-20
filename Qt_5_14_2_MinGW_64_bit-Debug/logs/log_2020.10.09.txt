@@ -1,0 +1,16 @@
+INFO 2020-10-09 16:12:36 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-09 16:12:45 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-09 17:08:13 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-09 17:08:51 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-09 17:17:33 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-09 17:18:02 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-09 17:43:41 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-09 17:43:44 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-09 17:43:56 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-09 17:44:18 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-09 17:44:32 SProfiles SFriends::getProfiles()  Друзей 35
+INFO 2020-10-09 17:44:40 virtual FormGames::~FormGames()  Форма игр удалилась
+INFO 2020-10-09 17:44:45 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-09 17:44:57 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-09 17:48:19 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-09 17:48:26 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

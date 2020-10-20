@@ -54,7 +54,7 @@ private slots:
 
 private:
     Ui::FormCategoryValue *ui;
-    Settings _setting;
+    //Settings _setting;
     int _position = 0;
     EnabledUpDown _isFirstLast = EnabledUpDown::none;
 };

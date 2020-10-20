@@ -7,7 +7,7 @@
 #include <QFormLayout>
 #include <QPair>
 #include <QTranslator>
-#include "class/settings.h"
+//#include "class/settings.h"
 #include "class/Network/requestimage.h"
 #include "class/steamapi/Sprofile.h"
 #include "class/steamapi/Sgames.h"

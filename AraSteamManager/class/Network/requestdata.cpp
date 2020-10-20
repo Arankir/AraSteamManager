@@ -1,15 +1,15 @@
 #include "requestdata.h"
 
-RequestData::RequestData(const QString &aUrl, bool aParallel, QObject *aParent): QObject(aParent), _answer(""), _url(aUrl) {
-    _manager = new QNetworkAccessManager();
+RequestData::RequestData(const QString &aUrl, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager), _reply(""), _url(aUrl) {
     connect(_manager, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
     if (!aUrl.isEmpty()) {
         get(aUrl,aParallel);
     }
 }
 
-RequestData::RequestData(QObject *parent): RequestData("", true, parent) {
-
+RequestData::~RequestData() {
+    disconnect(_manager, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
+    delete _manager;
 }
 
 void RequestData::get(const QString &aUrl, bool aParallel) {
@@ -22,24 +22,9 @@ void RequestData::get(const QString &aUrl, bool aParallel) {
     }
 }
 
-QByteArray RequestData::getAnswer() {
-    return _answer;
-}
-
-QPixmap RequestData::getPixmap() {
-    QPixmap result;
-    result.loadFromData(_answer);
-    return result;
-}
-
 void RequestData::onResultGet(QNetworkReply *aReply) {
     if(!aReply->error()) {
-        _answer=aReply->readAll();
+        _reply = aReply->readAll();
     }
     emit s_finished(this);
-}
-
-RequestData::~RequestData() {
-    disconnect(_manager, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
-    delete _manager;
 }

@@ -28,12 +28,12 @@ void FormCategoryValue::updateSettings() {
 }
 
 void FormCategoryValue::setIcons() {
-    ui->ButtonUp->setIcon(QIcon(_setting.getIconUp()));
-    ui->ButtonDown->setIcon(QIcon(_setting.getIconDown()));
-    ui->ButtonSelect->setIcon(QIcon(_setting.getIconCheckVisible()));
-    ui->ButtonUnSelect->setIcon(QIcon(_setting.getIconUncheckVisible()));
-    ui->ButtonDelete->setIcon(QIcon(_setting.getIconDelete()));
-    ui->ButtonReverse->setIcon(QIcon(_setting.getIconReverse()));
+    ui->ButtonUp->setIcon(QIcon(Images::up()));
+    ui->ButtonDown->setIcon(QIcon(Images::down()));
+    ui->ButtonSelect->setIcon(QIcon(Images::checkVisible()));
+    ui->ButtonUnSelect->setIcon(QIcon(Images::uncheckVisible()));
+    ui->ButtonDelete->setIcon(QIcon(Images::deleteIcon()));
+    ui->ButtonReverse->setIcon(QIcon(Images::reverse()));
 }
 
 FormCategoryValue::~FormCategoryValue() {

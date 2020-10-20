@@ -1,14 +1,7 @@
 #include "threadfriends.h"
 
-ThreadFriends::ThreadFriends(const int columnID, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
-QTableWidget *TableWidgetFriends, QList<QPair<SFriend, SProfile>> aFriends, QObject *parent):
-QObject(parent), c_tableColumnID(columnID), c_tableColumnName(columnName), c_tableColumnAdded(columnAdded), c_tableColumnStatus(columnStatus),
-c_tableColumnisPublic(columnisPublic), _friends(aFriends), _tableWidgetFriends(TableWidgetFriends) {
-
-}
-
 int ThreadFriends::fill() {
-    int id = std::move(QFontDatabase::addApplicationFont(_setting.c_defaultFont));
+    int id = std::move(QFontDatabase::addApplicationFont(Paths::defaultFont()));
     QString family = std::move(QFontDatabase::applicationFontFamilies(id).at(0));
     QFont font(family, 9);
     int row = 0;

@@ -24,6 +24,7 @@ release/favorites.o
 release/filter.o
 release/settings.o
 release/Sachievements.o
+release/Sapi.o
 release/Sbans.o
 release/Sfriends.o
 release/Sgames.o
@@ -63,6 +64,7 @@ release/moc_favorites.o
 release/moc_filter.o
 release/moc_settings.o
 release/moc_Sachievements.o
+release/moc_Sapi.o
 release/moc_Sbans.o
 release/moc_Sfriends.o
 release/moc_Sgames.o

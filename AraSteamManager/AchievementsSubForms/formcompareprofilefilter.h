@@ -37,7 +37,7 @@ private slots:
 
 private:
     Ui::FormCompareProfileFilter *ui;
-    Settings _setting;
+    //Settings _setting;
     QString _name;
     QString _index;
 };

@@ -24,10 +24,10 @@ void FormCompareProfileFilter::updateSettings() {
 }
 
 void FormCompareProfileFilter::setIcons() {
-    QString iconsColor = _setting.getIconsColor();
-    ui->RadioButtonAll->setIcon(QIcon(_setting.getIconAll()));
-    ui->RadioButtonReached->setIcon(QIcon(_setting.getIconReached()));
-    ui->RadioButtonNotReached->setIcon(QIcon(_setting.getIconNotReached()));
+    QString iconsColor = Settings::getIconsColor();
+    ui->RadioButtonAll->setIcon(QIcon(Images::allAchievements()));
+    ui->RadioButtonReached->setIcon(QIcon(Images::reached()));
+    ui->RadioButtonNotReached->setIcon(QIcon(Images::notReached()));
 }
 
 FormCompareProfileFilter::~FormCompareProfileFilter() {

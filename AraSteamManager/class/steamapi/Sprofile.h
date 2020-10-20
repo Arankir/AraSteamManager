@@ -11,8 +11,7 @@
 #include <QTextCodec>
 #include <QTcpSocket>
 #include <QEventLoop>
-#include "class/settings.h"
-#include "class/statusvalue.h"
+#include "class/steamapi/Sapi.h"
 #include "class/Network/requestimage.h"
 #include <QObject>
 
@@ -21,12 +20,38 @@ enum class ProfileUrlType {
     vanity
 };
 
-class SProfile : public QObject {
+class SProfile : public Sapi {
     Q_OBJECT
 public:
-    SProfile(QJsonObject &profile, QObject *parent = nullptr);
-    SProfile(QObject *parent = nullptr);
-    ~SProfile();
+    SProfile(const QJsonObject &profile, QObject *parent = nullptr): Sapi(parent), _steamID(profile.value("steamid").toString()),
+        _communityVisibilityState(profile.value("communityvisibilitystate").toInt()), _profileState(profile.value("profilestate").toInt()),
+        _personaName(profile.value("personaname").toString()), _lastLogoff(QDateTime::fromSecsSinceEpoch(profile.value("lastlogoff").toInt(),Qt::LocalTime)),
+        _commentPermission(profile.value("commentpermission").toInt()), _profileUrl(profile.value("profileurl").toString()), _personaState(profile.value("personastate").toInt()),
+        _primaryClanID(profile.value("primaryclanid").toString()), _timeCreated(QDateTime::fromSecsSinceEpoch(profile.value("timecreated").toInt(),Qt::LocalTime)),
+        _personaStateFlags(profile.value("personastateflags").toInt()), _gameExtraInfo(profile.value("gameextrainfo").toString()), _gameID(profile.value("gameid").toString()),
+        _locCountryCode(profile.value("loccountrycode").toString()), _locStateCode(profile.value("locstatecode").toString()), _locCityID(profile.value("loccityid").toInt()),
+        _realName(profile.value("realname").toString()), _avatar(profile.value("avatar").toString()), _avatarMedium(profile.value("avatarmedium").toString()),
+        _avatarFull(profile.value("avatarfull").toString()) {}
+    SProfile(QObject *parent = nullptr): Sapi(parent), _steamID(""), _communityVisibilityState(0), _profileState(0), _personaName(""),
+        _lastLogoff(QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)), _commentPermission(0), _profileUrl(""), _personaState(0), _primaryClanID(""),
+        _timeCreated(QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)), _personaStateFlags(0), _gameExtraInfo(""), _gameID(""), _locCountryCode(""), _locStateCode(""),
+        _locCityID(0), _realName(""), _avatar(""), _avatarMedium(""), _avatarFull("") {}
+    SProfile(const SProfile &profile): Sapi(profile.parent()), _steamID(profile._steamID), _communityVisibilityState(profile._communityVisibilityState),
+        _profileState(profile._profileState), _personaName(profile._personaName), _lastLogoff(profile._lastLogoff), _commentPermission(profile._commentPermission),
+        _profileUrl(profile._profileUrl), _personaState(profile._personaState), _primaryClanID(profile._primaryClanID), _timeCreated(profile._timeCreated),
+        _personaStateFlags(profile._personaStateFlags), _gameExtraInfo(profile._gameExtraInfo), _gameID(profile._gameID), _locCountryCode(profile._locCountryCode),
+        _locStateCode(profile._locStateCode), _locCityID(profile._locCityID), _realName(profile._realName), _avatar(profile._avatar), _avatarMedium(profile._avatarMedium),
+        _avatarFull(profile._avatarFull), _pixmapAvatar(profile._pixmapAvatar), _pixmapAvatarMedium(profile._pixmapAvatarMedium), _pixmapAvatarFull(profile._pixmapAvatarFull) {}
+    ~SProfile() {}
+
+    SProfile &operator=(const SProfile &profile);
+    const bool &operator<(const SProfile &profile);
+
+    SProfile &update(bool parallel);
+
+    QPixmap getPixmapAvatar();
+    QPixmap getPixmapAvatarMedium();
+    QPixmap getPixmapAvatarFull();
 
     /*const*/ QString _steamID;
     int _communityVisibilityState;
@@ -48,24 +73,15 @@ public:
 
     int _unicIndex = -1;
 
-    void update(bool parallel);
-
-    QPixmap getPixmapAvatar();
-    QPixmap getPixmapAvatarMedium();
-    QPixmap getPixmapAvatarFull();
-
-    SProfile(const SProfile &profile);
-    SProfile &operator=(const SProfile &profile);
-    const bool &operator<(const SProfile &profile);
-
 signals:
     void s_finished(SProfile*);
     void s_finished();
 
 private slots:
-    void loadURL(RequestData *request);
-    void loading(bool parallel);
-    void set(QJsonObject &ObjSummaries);
+    void load(bool parallel);
+    void onLoad() override;
+    void parse(const QJsonObject &ObjSummaries);
+    QPixmap loadPixmap(QPixmap &pixmap, const QString &url, QSize size);
 
 private:
     QString _avatar;
@@ -76,75 +92,49 @@ private:
     QPixmap _pixmapAvatarMedium;
     QPixmap _pixmapAvatarFull;
 
-    Settings _setting;
-
 };
 
-class SProfiles : public QObject {
+class SProfiles : public Sapi {
     Q_OBJECT
 public slots:
-    void loadURL(RequestData *request);
-    void loadVanity(RequestData *request);
+    //void loadURL(RequestData *request);
+    //void loadVanity(RequestData *request);
 
 public:
-    explicit SProfiles(const QString &id, bool parallel, ProfileUrlType type, QObject *parent = nullptr);
-    SProfiles(QJsonDocument &docSummaries, QObject *parent = nullptr);
-    SProfiles(QJsonArray &arrSummaries, QObject *parent = nullptr);
-    SProfiles(QJsonObject &objSummaries, QObject *parent = nullptr);
-    SProfiles(QObject *parent = nullptr);
-    ~SProfiles();
-    void set(const QString &id, bool parallel, ProfileUrlType type);
-    void set(QJsonDocument &docSummaries);
-    void set(QJsonArray &arrSummaries);
-    void set(QJsonObject &objSummaries);
-    QString getSteamid(int index = 0);
-    int getCommunityvisibilitystate(int index = 0);
-    int getProfilestate(int index = 0);
-    QString getPersonaname(int index = 0) const;
-    QDateTime getLastlogoff(int index = 0);
-    int getCommentpermission(int index = 0);
-    QString getProfileurl(int index = 0);
-    QPixmap getAvatar(int index = 0);
-    QPixmap getAvatarmedium(int index = 0);
-    QPixmap getAvatarfull(int index = 0);
-    int getPersonastate(int index = 0);
-    QString getPrimaryclanid(int index = 0);
-    QDateTime getTimecreated(int index = 0);
-    int getPersonastateflags(int index = 0);
-    QString getGameextrainfo(int index = 0);
-    QString getGameid(int index = 0);
-    QString getLoccountrycode(int index = 0);
-    QString getLocstatecode(int index = 0);
-    int getLoccityid(int index = 0);
-    QString getRealname(int index = 0);
-    SProfile getProfile(int index);
-    StatusValue getStatus();
-    QString getError();
-    int getCount();
-    void update(bool parallel);
-    void sort();
-    void clear();
-    SProfiles(const SProfiles &profile);;
+    explicit SProfiles(const QStringList &ids, bool parallel, ProfileUrlType type, QObject *parent = nullptr);
+    explicit SProfiles(const QString &id, bool parallel, ProfileUrlType type, QObject *parent = nullptr): SProfiles(QStringList() << id, parallel, type, parent) {}
+    SProfiles(const QJsonArray &arrSummaries, QObject *parent = nullptr);
+    SProfiles(const QJsonObject &profile, QObject *parent = nullptr): SProfiles(QJsonArray() << profile, parent) {}
+    SProfiles(const SProfiles &profile): Sapi(profile.parent()), _profile(profile._profile), _ids(profile._ids) {}
+    SProfiles(QObject *parent = nullptr): Sapi(parent) {}
+    ~SProfiles() {}
+
     SProfiles &operator=(const SProfiles &profile);
-    SProfile &operator[](const int &index);
+    SProfile &operator[](const int &index) {return _profile[index];};
+
+    SProfiles &load(QStringList ids, bool parallel, ProfileUrlType type);
+    SProfiles &add(const QJsonArray &arrSummaries);
+    SProfiles &update(bool parallel);
+    SProfiles &sort();
+    SProfiles &clear();
+
     QList<SProfile>::iterator begin() {return _profile.begin();}
     QList<SProfile>::iterator end() {return _profile.end();}
+    int getCount() const {return _profile.size();}
 
-    int _unicIndex=-1;
+    int _unicIndex = -1;
 
 signals:
     void s_finished(SProfiles*);
     void s_finished();
 
 private slots:
-    void load(bool parallel, ProfileUrlType type);
+    void onLoad() override;
 
 private:
-    RequestData *_request;
     QList<SProfile> _profile;
-    StatusValue _status = StatusValue::none;
-    QString _error = "";
-    QString _id = "";
+    ProfileUrlType _type;
+    QStringList _ids;
 };
 
 #endif // SPROFILE_H

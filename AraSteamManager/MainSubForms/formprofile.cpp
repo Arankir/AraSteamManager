@@ -92,7 +92,7 @@ void FormProfile::profileToUi(SProfile &aProfile) {
         ui->LabelLocCountryCodeValue->setVisible(false);
     }
 
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + Images::link() + "\"> "
                                 "<a href=\"" + _profile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
     setName();
@@ -104,7 +104,6 @@ void FormProfile::profileToUi(SProfile &aProfile) {
     setFriends(_profile._steamID);
     setLvl(_profile._steamID);
     setBans(_profile._steamID);
-
 }
 
 QGraphicsDropShadowEffect *FormProfile::createLightning() {
@@ -123,14 +122,14 @@ void FormProfile::setProfile(SProfile &aProfile) {
 void FormProfile::setName() {
     ui->LabelName->setText(_profile._personaName);
     ui->LabelNameMinimize->setText(_profile._personaName);
-    ui->LabelProfileVisibility->setText(tr("Профиль"));
+    //ui->LabelProfileVisibility->setText(tr("Профиль"));
     QPixmap profileState;
     QGraphicsDropShadowEffect *profileLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelProfileVisibility->graphicsEffect());
     switch (_profile._communityVisibilityState) {
         case 1:
             ui->LabelProfileVisibility->setToolTip(tr("Скрытый"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_red);
-            profileState.load(_setting.getIconStateRed());
+            profileState.load(Images::stateRed());
             if (profileLight) {
                 profileLight->setColor(QColor (255, 48, 48, 255 * 1));
             }
@@ -138,7 +137,7 @@ void FormProfile::setName() {
         case 3:
             ui->LabelProfileVisibility->setToolTip(tr("Публичный"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_green);
-            profileState.load(_setting.getIconStateGreen());
+            profileState.load(Images::stateGreen());
             if (profileLight) {
                 profileLight->setColor(QColor (87, 255, 124, 255 * 0.7));
             }
@@ -146,7 +145,7 @@ void FormProfile::setName() {
         case 8:
             ui->LabelProfileVisibility->setToolTip(tr("Для друзей"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_yellow);
-            profileState.load(_setting.getIconStateYellow());
+            profileState.load(Images::stateYellow());
             if (profileLight) {
                 profileLight->setColor(QColor (108, 110, 14, 255 * 0.7));
             }
@@ -154,7 +153,7 @@ void FormProfile::setName() {
         default:
             ui->LabelProfileVisibility->setToolTip(tr("Неизвестно"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_blue);
-            profileState.load(_setting.getIconStateBlue());
+            profileState.load(Images::stateBlue());
             if (profileLight) {
                 profileLight->setColor(QColor (0, 0, 255, 255 * 0.7));
             }
@@ -219,8 +218,8 @@ void FormProfile::setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha)
 }
 
 void FormProfile::setGames(const QString &aSteamId) {
-    _games.set(aSteamId, true, true, false);
-    ui->LabelGamesVisibility->setText(tr("Игры"));
+    _games.load(aSteamId, true, true, false);
+    //ui->LabelGamesVisibility->setText(tr("Игры"));
     QPixmap gamesState;
     QGraphicsDropShadowEffect *gamesLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelGamesVisibility->graphicsEffect());
     switch (_games.getStatus()) {
@@ -229,7 +228,7 @@ void FormProfile::setGames(const QString &aSteamId) {
         ui->ButtonStatistics->setEnabled(true);
         ui->LabelGamesVisibility->setToolTip(tr("Публичный"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_green);
-        gamesState.load(_setting.getIconStateGreen());
+        gamesState.load(Images::stateGreen());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
         if (gamesLight) {
             gamesLight->setColor(QColor (87, 255, 124, 255 * 0.7));
@@ -241,7 +240,7 @@ void FormProfile::setGames(const QString &aSteamId) {
         ui->ButtonStatistics->setEnabled(false);
         ui->LabelGamesVisibility->setToolTip(tr("Скрытый"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_red);
-        gamesState.load(_setting.getIconStateRed());
+        gamesState.load(Images::stateRed());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
         if (gamesLight) {
             gamesLight->setColor(QColor (255, 48, 48, 255 * 1));
@@ -253,7 +252,7 @@ void FormProfile::setGames(const QString &aSteamId) {
         ui->ButtonStatistics->setEnabled(false);
         ui->LabelGamesVisibility->setToolTip(tr("Неизвестно"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_blue);
-        gamesState.load(_setting.getIconStateBlue());
+        gamesState.load(Images::stateBlue());
         //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
         if (gamesLight) {
             gamesLight->setColor(QColor (0, 0, 255, 255 * 0.7));
@@ -265,8 +264,8 @@ void FormProfile::setGames(const QString &aSteamId) {
 }
 
 void FormProfile::setFriends(const QString &aSteamId) {
-    _friends.set(aSteamId,false);
-    ui->LabelFriendsVisibility->setText(tr("Друзья"));
+    _friends.load(aSteamId,false);
+    //ui->LabelFriendsVisibility->setText(tr("Друзья"));
     QPixmap friendsState;
     QGraphicsDropShadowEffect *friendsLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelFriendsVisibility->graphicsEffect());
     switch (_friends.getStatus()) {
@@ -274,7 +273,7 @@ void FormProfile::setFriends(const QString &aSteamId) {
         ui->ButtonFriends->setEnabled(true);
         ui->LabelFriendsVisibility->setToolTip(tr("Публичный"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_green);
-        friendsState.load(_setting.getIconStateGreen());
+        friendsState.load(Images::stateGreen());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
         if (friendsLight) {
             friendsLight->setColor(QColor (87, 255, 124, 255 * 0.7));
@@ -285,7 +284,7 @@ void FormProfile::setFriends(const QString &aSteamId) {
         ui->ButtonFriends->setEnabled(false);
         ui->LabelFriendsVisibility->setToolTip(tr("Скрытый"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_red);
-        friendsState.load(_setting.getIconStateRed());
+        friendsState.load(Images::stateRed());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
         if (friendsLight) {
             friendsLight->setColor(QColor (255, 48, 48, 255 * 1));
@@ -296,7 +295,7 @@ void FormProfile::setFriends(const QString &aSteamId) {
         ui->ButtonFriends->setEnabled(false);
         ui->LabelFriendsVisibility->setToolTip(tr("Неизвестно"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_blue);
-        friendsState.load(_setting.getIconStateBlue());
+        friendsState.load(Images::stateBlue());
         //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
         if (friendsLight) {
             friendsLight->setColor(QColor (0, 0, 255, 255 * 0.7));
@@ -386,14 +385,14 @@ SFriends FormProfile::getFriends() {
 
 #define updateData {
 void FormProfile::updateSettings() {
-    _setting.syncronizeSettings();
+    Settings::syncronizeSettings();
     setIcons();
     updateVisibleInfo();
     updateMyProfile();
 }
 
 void FormProfile::updateVisibleInfo() {
-    _visibleInfo = _setting.getProfileInfoSize();
+    _visibleInfo = Settings::getProfileInfoSize();
     switch (_visibleInfo) {
     case 0: {
         ui->FrameProfileBaseInfo->setVisible(false);
@@ -421,7 +420,7 @@ void FormProfile::updateVisibleInfo() {
     }
     }
     retranslate();
-    ui->ButtonSetProfile->setEnabled(_setting.getMyProfile() != _profile._steamID);
+    ui->ButtonSetProfile->setEnabled(Settings::getMyProfile() != _profile._steamID);
 }
 
 void FormProfile::updateInfo() {
@@ -430,7 +429,7 @@ void FormProfile::updateInfo() {
 }
 
 void FormProfile::updateMyProfile() {
-    QString currentMyProfile = _setting.getMyProfile();
+    QString currentMyProfile = Settings::getMyProfile();
     ui->ButtonSetProfile->setEnabled(!(currentMyProfile == _profile._steamID));
 }
 
@@ -482,21 +481,20 @@ void FormProfile::retranslate() {
 }
 
 void FormProfile::setIcons() {
-    QString iconsColor = _setting.getIconsColor();
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + _setting.getIconLink() + "\"> "
+    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + Images::link() + "\"> "
                                 "<a href=\"" + _profile._profileUrl + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile._profileUrl + "</span></a>");
-    ui->ButtonSetProfile->setIcon(QIcon(_setting.getIconSetHome()));
-    ui->ButtonFavorites->setIcon(QIcon(_setting.getIconIsNotFavorites()));
-    ui->ButtonStatistics->setIcon(QIcon(_setting.getIconStatistic()));
-    ui->ButtonFriends->setIcon(QIcon(_setting.getIconFriends()));
-    ui->ButtonGames->setIcon(QIcon(_setting.getIconGames()));
+    ui->ButtonSetProfile->setIcon(QIcon(Images::setHome()));
+    ui->ButtonFavorites->setIcon(QIcon(Images::isNotFavorites()));
+    ui->ButtonStatistics->setIcon(QIcon(Images::statistic()));
+    ui->ButtonFriends->setIcon(QIcon(Images::friends()));
+    ui->ButtonGames->setIcon(QIcon(Images::games()));
 }
 #define updateDataEnd }
 
 #define uiFunctions {
 void FormProfile::buttonSetProfile_Clicked() {
-    _setting.setMyProfile(_profile._steamID);
+    Settings::setMyProfile(_profile._steamID);
     ui->ButtonSetProfile->setEnabled(false);
     emit s_myProfileChange();
 }

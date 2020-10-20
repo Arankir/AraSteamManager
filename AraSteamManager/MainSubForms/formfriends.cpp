@@ -68,7 +68,7 @@ void FormFriends::pullTable(int aTo, int aDo) {
     ui->TableWidgetFriends->setRowCount(_visibleFriends.count());
     ui->TableWidgetFriends->setRowCount(aDo - aTo);
     if (_visibleFriends.size() > aTo) {
-        int id = QFontDatabase::addApplicationFont(_setting.c_defaultFont);
+        int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
         QString family = QFontDatabase::applicationFontFamilies(id).at(0);
         QFont font(family, 9);
 
@@ -123,7 +123,7 @@ void FormFriends::onTablePulled() {
         btn->setObjectName("TBtn" + QString::number(row));
         QAction *actionGoToProfile = new QAction(tr("Перейти на профиль"), this);
         QAction *actionFavorites;
-        actionGoToProfile->setIcon(QIcon(_setting.getIconGoTo()));
+        actionGoToProfile->setIcon(QIcon(Images::goTo()));
 
         QJsonArray values = _favorites.getValues();
         bool isFavorite = false;
@@ -135,10 +135,10 @@ void FormFriends::onTablePulled() {
         }
         if (isFavorite) {
             actionFavorites = new QAction(tr("Удалить из избранного"), this);
-            actionFavorites->setIcon(QIcon(_setting.getIconIsFavorites()));
+            actionFavorites->setIcon(QIcon(Images::isFavorites()));
         } else {
             actionFavorites = new QAction(tr("Добавить в избранное"), this);
-            actionFavorites->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+            actionFavorites->setIcon(QIcon(Images::isNotFavorites()));
         }
 
         connect (actionGoToProfile, &QAction::triggered, this, &FormFriends::buttonFriendGoTo_Clicked);
@@ -205,7 +205,7 @@ void FormFriends::retranslate() {
 }
 
 void FormFriends::updateSettings() {
-    _setting.syncronizeSettings();
+    Settings::syncronizeSettings();
     updateHiddenRows();
     setIcons();
 }
@@ -301,9 +301,9 @@ void FormFriends::friendToUi() {
 }
 
 void FormFriends::setIcons() {
-    ui->ButtonFind->setIcon(QIcon(_setting.getIconFindProfile()));
-    ui->ButtonFriendGoTo->setIcon(QIcon(_setting.getIconGoTo()));
-    ui->ButtonFriendFavorite->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+    ui->ButtonFind->setIcon(QIcon(Images::findProfile()));
+    ui->ButtonFriendGoTo->setIcon(QIcon(Images::goTo()));
+    ui->ButtonFriendFavorite->setIcon(QIcon(Images::isNotFavorites()));
 }
 
 void FormFriends::updateHiddenRows() {
@@ -395,6 +395,7 @@ void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
 
 #define Functions {
 void FormFriends::buttonFriendGoTo_Clicked() {
+    qDebug()<<_blockedLoad<<_currentFriend;
     if((!_blockedLoad) && (_currentFriend != "")) {
         //disconnect(sender(),SIGNAL(pressed()),this,SLOT(GoToProfileClicked()));
         _blockedLoad = true;
@@ -414,13 +415,13 @@ void FormFriends::buttonFriendFavorite_Clicked() {
             //Категория добавилась
             if (action) {
                 action->setText(tr("Удалить из избранного"));
-                action->setIcon(QIcon(_setting.getIconIsFavorites()));
+                action->setIcon(QIcon(Images::isFavorites()));
             }
         } else {
             //Категория уже есть (удалилась)
             if (action) {
                 action->setText(tr("Добавить в избранное"));
-                action->setIcon(QIcon(_setting.getIconIsNotFavorites()));
+                action->setIcon(QIcon(Images::isNotFavorites()));
             }
         }
     }

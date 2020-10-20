@@ -7,43 +7,81 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
-#include "class/settings.h"
+//#include "class/settings.h"
 #include "class/steamapi/Sgames.h"
+
+struct CategoryValue {
+    QString title;
+    QList<QString> achievements;
+
+    CategoryValue &fromJson(QJsonObject);
+    QJsonObject toJson(); //Потом заменить на другой вид хранения данных
+};
+
+class CategoryGame : public QObject {
+public:
+    CategoryGame(const QJsonObject category);
+    CategoryGame(const QString &title, int isNoValue, QList<CategoryValue> &values, QList<QString> &noValues): _isNoValue(isNoValue), _noValues(noValues), _title(title), _values(values) {}
+    CategoryGame(const CategoryGame &category): _isNoValue(category._isNoValue), _noValues(category._noValues), _title(category._title), _values(category._values) {}
+    CategoryGame &operator=(const CategoryGame category);
+
+    CategoryGame &updateCategory(QJsonObject newCategory);
+    CategoryGame &updateCategory(const QString &title, int isNoValue, QList<CategoryValue> &values, QList<QString> &noValues);
+
+    CategoryGame &fromJson(QJsonObject categoryGame);
+    QJsonObject toJson() const; //Потом заменить на другой вид хранения данных
+    QList<QString> getNoValues() const {return _noValues;}
+    QString getTitle() const {return _title;}
+    int getIsNoValue() const {return _isNoValue;}
+    QList<CategoryValue> getValues() const {return _values;}
+    friend QDebug operator<<(QDebug dbg, const CategoryGame &category) {
+        dbg.nospace() << "Category(";
+        dbg.nospace() << category.toJson();
+        dbg.nospace() << ")";
+        return dbg.space();
+    }
+
+private:
+    int _isNoValue;
+    QList<QString> _noValues;
+    QString _title;
+    QList<CategoryValue> _values;
+};
 
 class CategoriesGame : public QObject {
     Q_OBJECT
 public:
     explicit CategoriesGame(SGame &game, QObject *parent = nullptr);
-    //CategoriesGame & operator=(const CategoriesGame &);
-    CategoriesGame(const CategoriesGame &categories);
+    CategoriesGame(const CategoriesGame &categories): QObject(categories.parent()), _categories(categories._categories), _game(categories._game) {}
+    CategoryGame &operator[](const int index);
 
-signals:
-
-public slots:
-    QString getTitle(int index);
-    int getIsNoValues(int index);
-    QJsonArray getValues(int value);
-    QString getGame();
-    int getCount();
-    int getGameID();
-    QList<QString> getTitles();
-    QList<QString> getValues(int category, int value);
-    QList<QString> getNoValues(int category);
     void deleteCategory(int index);
     void deleteAll();
     void changeCategory(int category, QJsonObject &newCategory);
     void update();
-    void save();
+    void save(QJsonObject aCategories);
+
+    QList<CategoryGame>::iterator begin() {return _categories.begin();}
+    QList<CategoryGame>::iterator end() {return _categories.end();}
+    QString getGame() const {return _gameName;}
+    int getCount() const {return _categories.count();}
+    int getGameID() const {return _gameId;}
+
+    QList<QString> getCategoriesTitles() const;
 
 private slots:
+    void fromJson(QJsonObject _categories);
     QFileInfoList getFiles(const QString &path);
     void convertOldCategories();
-    void loadCategories();
+    void load();
+    QJsonObject toJson(); //Потом заменить на другой вид хранения данных
 
 private:
-    QJsonObject _categories;
-    Settings _setting;
+    QList<CategoryGame> _categories;
     SGame _game;
+
+    QString _gameName;
+    int _gameId;
 };
 
 #endif // CATEGORIESGAME_H

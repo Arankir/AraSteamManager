@@ -19,12 +19,12 @@ class RequestData : public QObject
     Q_OBJECT
 public:
     RequestData(const QString &url, bool parallel, QObject *parent = nullptr);
-    RequestData(QObject *parent = nullptr);
+    RequestData(QObject *parent = nullptr): RequestData("", true, parent) {}
     ~RequestData();
+
     void get(const QString &url, bool parallel = false);
-    QByteArray getAnswer();
-    QPixmap getPixmap();
-    //int GetRow() {return _row;}
+
+    QByteArray getReply() const {return _reply;}
 
 signals:
     void s_finished(RequestData *imgr);
@@ -34,10 +34,8 @@ private slots:
 
 private:
     QNetworkAccessManager *_manager;
-    QByteArray _answer;
+    QByteArray _reply;
     QString _url;
-    //int _row;
-    Settings _setting;
 
 };
 

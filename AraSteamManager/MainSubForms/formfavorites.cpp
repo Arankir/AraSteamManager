@@ -130,7 +130,7 @@ void FormFavorites::friendLoad(SProfile *aProfile) {
 }
 
 void FormFavorites::updateSettings() {
-    _setting.syncronizeSettings();
+    Settings::syncronizeSettings();
     setIcons();
 }
 

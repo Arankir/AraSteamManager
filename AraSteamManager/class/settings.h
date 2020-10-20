@@ -1,13 +1,12 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <QMainWindow>
 #include <QObject>
 #include <QFile>
 #include <QDir>
 #include <QSettings>
 #include <QDebug>
-#include <QScreen>
+#include <QRect>
 #include <QLoggingCategory>
 
 Q_DECLARE_LOGGING_CATEGORY(logDebug)
@@ -16,160 +15,176 @@ Q_DECLARE_LOGGING_CATEGORY(logFunc)
 Q_DECLARE_LOGGING_CATEGORY(logWarning)
 Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
-
 class Settings : public QObject {
-    const QString c_language                     = "Settings/Language";
-    const QString c_theme                        = "Settings/Theme";
-    const QString c_saveImage                    = "Settings/SaveImages";
-    const QString c_myProfile                    = "Settings/MyProfile";
-    const QString c_visibleHiddenGames           = "Settings/VisibleHiddenGames";
-    const QString c_ProfileInfoSize              = "Settings/VisibleProfileInfo";
-    const QString c_MaxTableRows                 = "Settings/MaxTableRows";
-
-    const QString c_mainWindowHeight             = "MainWindow/Height";
-    const QString c_mainWindowWidth              = "MainWindow/Width";
-    const QString c_mainWindowX                  = "MainWindow/X";
-    const QString c_mainWindowY                  = "MainWindow/Y";
-    const QString c_mainWindowMaximize           = "MainWindow/Maximize";
-    const QString c_mainWindowPercentX           = "MainWindow/PercentX";
-    const QString c_mainWindowPercentY           = "MainWindow/PercentY";
-
-    const QString c_achievementContainerHeight   = "AchievementContainer/Height";
-    const QString c_achievementContainerWidth    = "AchievementContainer/Width";
-    const QString c_achievementContainerX        = "AchievementContainer/X";
-    const QString c_achievementContainerY        = "AchievementContainer/Y";
-    const QString c_achievementContainerMaximize = "achievementContainer/Maximize";
-    const QString c_achievementContainerPercentX = "AchievementContainer/PercentX";
-    const QString c_achievementContainerPercentY = "AchievementContainer/PercentY";
-
     Q_OBJECT
 public:
-    explicit Settings(QObject *parent = nullptr);
-    explicit Settings(QRect geometry, QObject *parent = nullptr);
-    void customGeometry(QRect geometry);
-    void setMyProfile(QString myProfiles);
-    void setLanguage(int language);
-    void setTheme(int theme);
-    void setSaveimage(int saveImage);
-    void setVisibleHiddenGames(int visibleHiddenGames);
-    void setVisibleProfileInfo(int visibleProfileInfo);
-    void setMaximumTableRows(int rows);
+    explicit Settings(QObject *parent = nullptr): QObject(parent) {}
 
-    void setMainWindowParams(QRect geometry);
-    void setMainWindowPos(QPoint pos);
-    void setMainWindowGeometry(QSize size);
-    void setMainWindowMaximize(bool maximize);
+    static void setMyProfile(const QString &myProfiles);
+    static void setLanguage(int language);
+    static void setTheme(int theme);
+    static void setSaveimage(int saveImage);
+    static void setVisibleHiddenGames(int visibleHiddenGames);
+    static void setVisibleProfileInfo(int visibleProfileInfo);
+    static void setMaximumTableRows(int rows);
 
-    void setAchievementContainerParams(QRect geometry);
+    static QString getMyProfile();
+    static int getLanguage();
+    static int getTheme();
+    static QString getIconsColor();
+    static int getSaveImages();
+    static int getVisibleHiddenGames();
+    static int getProfileInfoSize();
+    static int getMaximumTableRows();
 
-    QString getMyProfile();
-    int getLanguage();
-    int getTheme();
-    QString getIconsColor();
-    int getSaveImages();
-    int getVisibleHiddenGames();
-    int getProfileInfoSize();
-    int getMaximumTableRows();
+    static void setMainWindowParams(QRect geometry);
+    static void setMainWindowPos(QPoint pos);
+    static void setMainWindowGeometry(QSize size);
+    static void setMainWindowMaximize(bool maximize);
 
-    QString getIconLoadingColor();
-    QString getIconLogoColor();
-    QString getIconStateBlue();
-    QString getIconStateGreen();
-    QString getIconStateRed();
-    QString getIconStateYellow();
-    QString getIconAll();
-    QString getIconBack();
-    QString getIconCancel();
-    QString getIconChange();
-    QString getIconCheckAll();
-    QString getIconCheckVisible();
-    QString getIconCloseWindow();
-    QString getIconCompare();
-    QString getIconDeleteAll();
-    QString getIconDown();
-    QString getIconExit();
-    QString getIconIsFavorites();
-    QString getIconIsNotFavorites();
-    QString getIconFilter();
-    QString getIconFind();
-    QString getIconFindProfile();
-    QString getIconFriends();
-    QString getIconGames();
-    QString getIconGoTo();
-    QString getIconHide();
-    QString getIconHome();
-    QString getIconLeft();
-    QString getIconLink();
-    QString getIconMaximizeWindow();
-    QString getIconMinimizeWindow();
-    QString getIconNotReached();
-    QString getIconProfile();
-    QString getIconReached();
-    QString getIconNormalizeWindow();
-    QString getIconReverse();
-    QString getIconRight();
-    QString getIconSetHome();
-    QString getIconSettings();
-    QString getIconStatistic();
-    QString getIconUncheckVisible();
-    QString getIconUnhide();
-    QString getIconUp();
-    QString getIconUpdate();
-    QString getIconCreate();
-    QString getIconDelete();
-    QString getIconEdit();
-    QString getIconApply();
-    QString getIconTop();
-    QString getIconBottom();
+    static void setAchievementContainerParams(QRect geometry);
 
-    QString getIconCheckBoxChecked();
-    QString getIconCheckBoxCheckedHover();
-    QString getIconCheckBoxCheckedPress();
-    QString getIconCheckBoxUnchecked();
-    QString getIconCheckBoxUncheckedHover();
-    QString getIconCheckBoxUncheckedPress();
-    QString getIconRadioButtonChecked();
-    QString getIconRadioButtonCheckedHover();
-    QString getIconRadioButtonCheckedPress();
-    QString getIconRadioButtonUnchecked();
-    QString getIconRadioButtonUncheckedHover();
-    QString getIconRadioButtonUncheckedPress();
-    QString getIconComboboxDown();
-    QString getIconScrollbarUp();
-    QString getIconScrollbarDown();
-    QString getIconScrollbarLeft();
-    QString getIconScrollbarRight();
+    static QRect getMainWindowGeometry();
+    static QPoint getMainWindowPos();
+    static bool getMainWindowMaximize();
 
-    QString getMissingImage();
+    static QRect getAchievementContainerGeometry();
+    static QPoint getAchievementContainerPos();
 
-    QRect getMainWindowGeometry();
-    QPoint getMainWindowPos();
-    QPoint getMainWindowPercentPos();
-    bool getMainWindowMaximize();
-
-    QRect getAchievementContainerGeometry();
-    QPoint getAchievementContainerPos();
-    QPoint getAchievementContainerPercentPos();
-
-    static QString getKey();
+    static QString const getKey();
     static bool createDir(const QString &path);
-    static QString getUrlIconGame(const QString &appId, const QString &img_icon_url);
-    void syncronizeSettings();
-
-    static QString getPathForImagesProfiles(const QString &url);
-    static QString getPathForImagesAchievements(const QString &gameId, const QString &url);
-    static QString getPathForIconGames(const QString &url);
-    const QString _pathCategories = "files/categories/";// /номер игры.json
-    const QString _pathFavorites = "files/favorites/";// /тип.json
-    const QString _pathHide = "files/hide/";// /номер игры.json
-
-    const QString c_defaultFont = "C:/JosefinSans-Italic-VariableFont_wght.ttf"; // Шрифт
+    static void syncronizeSettings();
 
 signals:
 
 private:
-    QSettings *_settings;
-    QRect _screen;
+    static QSettings *_settings;
+
+    static const QString c_language;
+    static const QString c_theme;
+    static const QString c_saveImage;
+    static const QString c_myProfile;
+    static const QString c_visibleHiddenGames;
+    static const QString c_ProfileInfoSize;
+    static const QString c_MaxTableRows;
+
+    static const QString c_mainWindowHeight;
+    static const QString c_mainWindowWidth;
+    static const QString c_mainWindowX;
+    static const QString c_mainWindowY;
+    static const QString c_mainWindowMaximize;
+
+    static const QString c_achievementContainerHeight;
+    static const QString c_achievementContainerWidth;
+    static const QString c_achievementContainerX;
+    static const QString c_achievementContainerY;
+    static const QString c_achievementContainerMaximize;
+
+};
+
+class Paths : public QObject {
+public:
+    static QString defaultFont();
+    static QString categories(QString gameId = "");
+    static QString favorites(QString type = "");
+    static QString hiddenGames(QString gameID = "");
+    static QString imagesProfiles(const QString &url);
+    static QString imagesAchievements(const QString &gameId, const QString &url);
+    static QString imagesGames(const QString &url);
+};
+
+class Images : public QObject {
+public:
+    static QString loading();
+    static QString logo();
+
+    static QString stateBlue();
+    static QString stateGreen();
+    static QString stateRed();
+    static QString stateYellow();
+
+    static QString allAchievements();
+
+    static QString left();
+    static QString right();
+    static QString up();
+    static QString down();
+
+    static QString checkAll();
+    static QString checkVisible();
+    static QString uncheckVisible();
+    static QString reverse();
+
+    static QString maximizeWindow();
+    static QString minimizeWindow();
+    static QString normalizeWindow();
+
+    static QString reached();
+    static QString notReached();
+
+    static QString isFavorites();
+    static QString isNotFavorites();
+
+    static QString hide();
+    static QString unhide();
+
+    static QString top();
+    static QString bottom();
+
+    static QString home();
+    static QString setHome();
+
+    static QString change();
+    static QString create();
+
+    static QString edit();
+    static QString update();
+
+    static QString apply();
+    static QString cancel();
+
+    static QString back();
+    static QString exit();
+    static QString closeWindow();
+
+    static QString compare();
+    static QString deleteAll();
+    static QString filter();
+    static QString find();
+    static QString findProfile();
+    static QString friends();
+    static QString games();
+    static QString goTo();
+    static QString link();
+    static QString profile();
+    static QString settings();
+    static QString statistic();
+    static QString deleteIcon();
+
+    static QString checkBoxChecked();
+    static QString checkBoxCheckedHover();
+    static QString checkBoxCheckedPress();
+
+    static QString checkBoxUnchecked();
+    static QString checkBoxUncheckedHover();
+    static QString checkBoxUncheckedPress();
+
+    static QString radioButtonChecked();
+    static QString radioButtonCheckedHover();
+    static QString radioButtonCheckedPress();
+
+    static QString radioButtonUnchecked();
+    static QString radioButtonUncheckedHover();
+    static QString radioButtonUncheckedPress();
+
+    static QString comboBoxDown();
+
+    static QString scrollBarUp();
+    static QString scrollBarDown();
+    static QString scrollBarLeft();
+    static QString scrollBarRight();
+
+    static QString missingImage();
 };
 
 #endif // SETTINGS_H
