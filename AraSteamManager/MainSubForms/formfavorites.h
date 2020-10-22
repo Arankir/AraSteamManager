@@ -20,7 +20,7 @@ class FormFavorites : public QWidget {
 
 public slots:
     void initComponents();
-    void friendLoad(SProfile*);
+    void friendLoad(SProfiles *);
 
     void updateSettings();
     void setIcons();
@@ -38,9 +38,10 @@ private slots:
 
 private:
     Ui::FormFavorites *ui;
-    Favorites _games;
-    Favorites _friends;
-    Favorites _achievements;
+//    Favorites _games;
+//    Favorites _friends;
+//    Favorites _achievements;
+    Favorites _favorites;
     Filter _filter;
     //Settings _setting;
 

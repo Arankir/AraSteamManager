@@ -20,7 +20,7 @@
 class SFriend : public QObject {
     Q_OBJECT
 public:
-    explicit SFriend(const QJsonObject &aFriend, QObject *parent = nullptr): QObject(parent), _steamID(aFriend.value("steamid").toString()),
+    explicit SFriend(const QJsonObject &aFriend = QJsonObject(), QObject *parent = nullptr): QObject(parent), _steamID(aFriend.value("steamid").toString()),
         _relationship(aFriend.value("relationship").toString()), _friend_since(QDateTime::fromSecsSinceEpoch(aFriend.value("friend_since").toInt(), Qt::LocalTime)) {}
     SFriend(const SFriend &aFriend): QObject(aFriend.parent()), _steamID(aFriend._steamID),
         _relationship(aFriend._relationship), _friend_since(aFriend._friend_since) {}

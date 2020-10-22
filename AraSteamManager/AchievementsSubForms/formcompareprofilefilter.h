@@ -17,11 +17,11 @@ public:
     explicit FormCompareProfileFilter(QWidget *parent = nullptr);
     explicit FormCompareProfileFilter(const QString &all, const QString &reached, const QString &notReached, QWidget *parent = nullptr);
     ~FormCompareProfileFilter();
-    void setName(const QString &name);
-    void setIndex(const QString &index);
+    void setName(const QString &name) {_name = name;}
+    void setIndex(const QString &index) {_index = index;}
     void setTitles(const QString &titleAll, const QString &titleReached, const QString &titleNotReached);
-    QString getName();
-    QString getIndex();
+    QString getName() {return _name;}
+    QString getIndex() {return _index;}
     void setType(ReachedType);
     void update();
 

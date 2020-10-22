@@ -214,7 +214,7 @@ void SAchievementsPlayer::parse(const QJsonDocument &aAchievements) {
         //_appid = aAchievements.object().value("playerstats").toObject().value("steamID").toString();
         _gameName = aAchievements.object().value("playerstats").toObject().value("gameName").toString();
         for (auto achievement: achievementsArray) {
-            achievement.toObject().value("achieved").toInt() ? _reached++ : _notReached++;
+            achievement.toObject().value("achieved").toInt() ? ++_reached : ++_notReached;
             _achievements.append(std::move(SAchievementPlayer(achievement.toObject())));
         }
         _status = StatusValue::success;
@@ -345,9 +345,9 @@ SAchievements &SAchievements::setFinish() {
         //qDebug()<<"Finish set";
         clear();
         for (auto &percent: _percent) {
-            int globalIndex = 0;
+            int globalIndex = -1;
             for (auto &player: _player) {
-                auto global = std::move(_global[globalIndex++]);
+                auto global = std::move(_global[++globalIndex]);
                 if (percent._apiName == player._apiName) {
                     _finish.push_back(std::move(SAchievement(global, player, percent)));
                     break;

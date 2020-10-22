@@ -1,21 +1,21 @@
 #include "qcheckboxwithdata.h"
 
-void QCheckBoxWithData::AddData(QString a_title, QString a_data){
-    _data.append(QPair<QString,QString>(a_title,a_data));
+void QCheckBoxWithData::addData(QString aTitle, QString aData) {
+    _data.append(QPair<QString, QString>(aTitle, aData));
 }
 
-QString QCheckBoxWithData::GetData(QString a_title){
-    for(int i=0;i<_data.size();i++){
-        if(_data[i].first==a_title){
+QString QCheckBoxWithData::getData(QString aTitle) {
+    for(int i = 0; i < _data.size(); ++i) {
+        if(_data[i].first == aTitle) {
             return _data[i].second;
         }
     }
     return "";
 }
 
-QString QCheckBoxWithData::GetData(int a_index){
-    if(a_index<_data.size()){
-        return _data[a_index].second;
+QString QCheckBoxWithData::getData(int aIndex) {
+    if(aIndex < _data.size()) {
+        return _data[aIndex].second;
     }
     return "";
 }

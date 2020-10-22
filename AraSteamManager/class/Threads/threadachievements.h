@@ -17,9 +17,11 @@ public slots:
 
 public:
     explicit ThreadAchievements(SAchievements *achievements, QTableWidget *tableWidgetAchievements, const int tableColumnAppid, const int tableColumnTitle,
-                                const int tableColumnDescription, const int tableColumnWorld, const int tableColumnMy, QObject *parent = nullptr);
-    explicit ThreadAchievements(QObject *parent = nullptr);
-    ~ThreadAchievements();
+                                const int tableColumnDescription, const int tableColumnWorld, const int tableColumnMy, QObject *parent = nullptr):
+        QObject(parent), c_tableColumnAppid(tableColumnAppid), c_tableColumnTitle(tableColumnTitle), c_tableColumnDescription(tableColumnDescription),
+        c_tableColumnWorld(tableColumnWorld), c_tableColumnMy(tableColumnMy), _achievements(achievements), _tableWidgetAchievements(tableWidgetAchievements) {}
+    explicit ThreadAchievements(QObject *parent = nullptr): ThreadAchievements(nullptr, nullptr, 0, 0, 0, 0, 0, parent) {}
+    ~ThreadAchievements() {qInfo()<<"Thread achievements deleted";}
 
 signals:
     void s_finished(int reached, int notReached);

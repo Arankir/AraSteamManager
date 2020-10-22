@@ -10,57 +10,55 @@ int ThreadStatistics::fill() {
 
 void ThreadStatistics::onResultAchievements(SAchievementsPlayer *aAchievements) {
     disconnect(aAchievements, SIGNAL(s_finished(SAchievementsPlayer*)), this, SLOT(onResultAchievements(SAchievementsPlayer*)));
-    emit s_progress(_nownum, 0);
+    static int nowProcessed = 0;
+    emit s_progress(nowProcessed, 0);
     if (aAchievements->getCount() > 0) {
-        static int gamesCount = 0;
-        gamesCount++;
+        ++_colgames;
         int countReached = 0;
         int countNotReached = 0;
-        _summcolumn += aAchievements->getCount();
+
         for (auto &achievement: *aAchievements) {
             if (achievement._achieved == 1) {
-                QDateTime dateTime = achievement._unlockTime;
-                QString yearTitle = QString::number(dateTime.date().year());
-                _times[dateTime.time().hour()]++;
-                _months[dateTime.date().month() - 1]++;
-                int pos = -1;
-                for (int i = 0; i < _years.size(); i++) {
-                    if(_years[i].first.toInt() == dateTime.date().year()) {
-                        pos = i;
-                        break;
-                    }
-                }
-                if (pos > -1) {
-                    _years[pos].second++;
-                } else {
-                    _years.append(QPair<QString, int>(QString::number(dateTime.date().year()), 1));
-                    for (int i = _years.size() - 1; i > 0; i--) {
-                        if(_years[i].first < _years[i - 1].first) {
-                            std::swap(_years[i], _years[i - 1]);
-                        }
-                    }
-                    _years.resize(_years.size());
-                }
-                countReached++;
+                updateTimes(achievement._unlockTime);
+                ++countReached;
             } else {
-                countNotReached++;
+                ++countNotReached;
             }
         }
-        _averagePercent.append(std::move(1.0 * (countReached * 100) / (countReached + countNotReached)));
+
+        _summcolumn += aAchievements->getCount();
+        (*_averagePercent).append(std::move(1.0 * (countReached * 100) / (countReached + countNotReached)));
+
+        QPair<QString, QString> dataNow(aAchievements->getAppid(), aAchievements->getGameName());
         if (countNotReached == 0) {
-            _numof[2]++;
-            _complete.append(QPair<QString, QString>(aAchievements->getAppid(), aAchievements->getGameName()));
+            ++(*_numof)[2];
+            (*_complete).append(std::move(dataNow));
         } else if (countReached == 0) {
-            _numof[0]++;
-            _started.append(QPair<QString, QString>(aAchievements->getAppid(), aAchievements->getGameName()));
+            ++(*_numof)[0];
+            (*_started).append(std::move(dataNow));
         } else {
-            _numof[1]++;
-            _notStarted.append(QPair<QString, QString>(aAchievements->getAppid(), aAchievements->getGameName()));
+            ++(*_numof)[1];
+            (*_notStarted).append(std::move(dataNow));
         }
     }
-    _nownum++;
-    if (_nownum == _games.getCount()) {
+    if (++nowProcessed == _games.getCount()) {
         emit s_finished();
         this->deleteLater();
+    }
+}
+
+void ThreadStatistics::updateTimes(const QDateTime &achievementTime) {
+    ++(*_times)[achievementTime.time().hour()];
+    ++(*_months)[achievementTime.date().month() - 1];
+    auto iterator = std::find_if((*_years).begin(), (*_years).end(), [=](const QPair<QString, int> &year) {
+                                                                        return year.first.toInt() == achievementTime.date().year();
+                                                                    });
+    if (iterator != (*_years).end()) {
+        ++(*iterator).second;
+    } else {
+        (*_years).append(QPair<QString, int>(QString::number(achievementTime.date().year()), 1));
+        std::sort((*_years).begin(), (*_years).end(), [](const QPair<QString, int> &p1, const QPair<QString, int> &p2){
+                                                            return p1.first < p2.first;
+                                                        });
     }
 }

@@ -148,6 +148,12 @@ QPoint Settings::getAchievementContainerPos() {
     return (QPoint(_settings->value(c_achievementContainerX, 100).toInt(), _settings->value(c_achievementContainerY, 100).toInt()));
 }
 
+QString Settings::getFontDefaultName() {
+    static int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
+    static QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    return family;
+}
+
 const QString Settings::getKey() {
     return "3826BF60403D15613B4B0381DAB7A7BD";
 }

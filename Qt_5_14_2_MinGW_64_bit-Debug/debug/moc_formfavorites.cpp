@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFavorites_t {
     QByteArrayData data[14];
-    char stringdata0[164];
+    char stringdata0[165];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,19 +38,19 @@ QT_MOC_LITERAL(2, 34, 0), // ""
 QT_MOC_LITERAL(3, 35, 8), // "QWidget*"
 QT_MOC_LITERAL(4, 44, 14), // "initComponents"
 QT_MOC_LITERAL(5, 59, 10), // "friendLoad"
-QT_MOC_LITERAL(6, 70, 9), // "SProfile*"
-QT_MOC_LITERAL(7, 80, 14), // "updateSettings"
-QT_MOC_LITERAL(8, 95, 8), // "setIcons"
-QT_MOC_LITERAL(9, 104, 11), // "retranslate"
-QT_MOC_LITERAL(10, 116, 11), // "changeEvent"
-QT_MOC_LITERAL(11, 128, 7), // "QEvent*"
-QT_MOC_LITERAL(12, 136, 5), // "event"
-QT_MOC_LITERAL(13, 142, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(6, 70, 10), // "SProfiles*"
+QT_MOC_LITERAL(7, 81, 14), // "updateSettings"
+QT_MOC_LITERAL(8, 96, 8), // "setIcons"
+QT_MOC_LITERAL(9, 105, 11), // "retranslate"
+QT_MOC_LITERAL(10, 117, 11), // "changeEvent"
+QT_MOC_LITERAL(11, 129, 7), // "QEvent*"
+QT_MOC_LITERAL(12, 137, 5), // "event"
+QT_MOC_LITERAL(13, 143, 21) // "on_pushButton_clicked"
 
     },
     "FormFavorites\0s_return_to_profile\0\0"
     "QWidget*\0initComponents\0friendLoad\0"
-    "SProfile*\0updateSettings\0setIcons\0"
+    "SProfiles*\0updateSettings\0setIcons\0"
     "retranslate\0changeEvent\0QEvent*\0event\0"
     "on_pushButton_clicked"
 };
@@ -104,7 +104,7 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 1: _t->initComponents(); break;
-        case 2: _t->friendLoad((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
+        case 2: _t->friendLoad((*reinterpret_cast< SProfiles*(*)>(_a[1]))); break;
         case 3: _t->updateSettings(); break;
         case 4: _t->setIcons(); break;
         case 5: _t->retranslate(); break;
@@ -126,7 +126,7 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfile* >(); break;
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfiles* >(); break;
             }
             break;
         }

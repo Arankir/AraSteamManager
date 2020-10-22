@@ -129,7 +129,7 @@ SProfiles &SProfiles::load(QStringList aIds, bool aParallel, ProfileUrlType aTyp
         QStringList ids = _ids;
         while (ids.count() > 0) {
             QStringList localId;
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 100; ++i) {
                 if (ids.isEmpty()) {
                     break;
                 }

@@ -18,7 +18,7 @@ struct CategoryValue {
     QJsonObject toJson(); //Потом заменить на другой вид хранения данных
 };
 
-class CategoryGame : public QObject {
+class CategoryGame {
 public:
     CategoryGame(const QJsonObject category);
     CategoryGame(const QString &title, int isNoValue, QList<CategoryValue> &values, QList<QString> &noValues): _isNoValue(isNoValue), _noValues(noValues), _title(title), _values(values) {}
@@ -35,9 +35,7 @@ public:
     int getIsNoValue() const {return _isNoValue;}
     QList<CategoryValue> getValues() const {return _values;}
     friend QDebug operator<<(QDebug dbg, const CategoryGame &category) {
-        dbg.nospace() << "Category(";
-        dbg.nospace() << category.toJson();
-        dbg.nospace() << ")";
+        dbg.nospace() << "Category(" << category.toJson() << ")";
         return dbg.space();
     }
 

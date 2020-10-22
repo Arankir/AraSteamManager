@@ -28,45 +28,45 @@ FormFavorites::~FormFavorites() {
 }
 
 void FormFavorites::initComponents() {
-    _games.setType("games");
-    _friends.setType("friends");
-    _achievements.setType("achievements");
-    QJsonArray gamesJ = _games.getValues();
-    QJsonArray friendsJ = _friends.getValues();
-    QJsonArray achievementsJ = _achievements.getValues();
+//    _games.setType("games");
+//    _friends.setType("friends");
+//    _achievements.setType("achievements");
+//    QJsonArray gamesJ = _games.getValues();
+//    QJsonArray friendsJ = _friends.getValues();
+//    QJsonArray achievementsJ = _achievements.getValues();
     //сделать отдельным потоком
-    for (int i = 0; i < gamesJ.size(); i++) {
-        //
-    }
+//    for (int i = 0; i < gamesJ.size(); ++i) {
+//        //
+//    }
     ui->TableWidgetFriends->setColumnCount(c_tableFriendsColumnCount);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetFriends->setColumnHidden(c_tableFriendsColumnID, true);
     ui->TableWidgetFriends->setColumnWidth(c_tableFriendsColumnIcon, 33);
-    ui->TableWidgetFriends->setRowCount(friendsJ.size());
-    for(QJsonValue frien: friendsJ) {
-        SProfiles *Profiles = new SProfiles(frien.toObject().value("id").toString(), true, ProfileUrlType::id);
-        connect(Profiles, SIGNAL(s_finished(SProfile*)), this, SLOT(friendLoad(SProfile*)));
+    ui->TableWidgetFriends->setRowCount(_favorites.getFriends().count());
+    for(FavoriteFriend steamFriend: _favorites.getFriends()) {
+        SProfiles *Profiles = new SProfiles(steamFriend.getId(), true, ProfileUrlType::id);
+        connect(Profiles, SIGNAL(s_finished(SProfiles*)), this, SLOT(friendLoad(SProfiles*)));
     }
-    for (int i = 0; i < achievementsJ.size(); i++) {
-        //
-    }
+//    for (int i = 0; i < achievementsJ.size(); ++i) {
+//        //
+//    }
     retranslate();
 }
 
-void FormFavorites::friendLoad(SProfile *aProfile) {
+void FormFavorites::friendLoad(SProfiles *aProfile) {
     QLabel *avatarFriend = new QLabel;
     avatarFriend->setBaseSize(QSize(32,32));
     ui->TableWidgetFriends->setCellWidget(_numRequests, c_tableFriendsColumnIcon, avatarFriend);
-    avatarFriend->setPixmap(aProfile->getPixmapAvatar());
+    avatarFriend->setPixmap((*aProfile)[0].getPixmapAvatar());
 
     QTableWidgetItem *item4 = new QTableWidgetItem;
-    if(!aProfile->_gameExtraInfo.isEmpty()) {
+    if(!(*aProfile)[0]._gameExtraInfo.isEmpty()) {
         item4->setText(tr("В игре"));
         item4->setForeground(QColor(137,183,83));
     } else
-        switch (aProfile->_personaState) {
+        switch ((*aProfile)[0]._personaState) {
         case 0:{
                 item4->setText(tr("Не в сети"));
                 item4->setForeground(QColor(76,77,79));
@@ -104,7 +104,7 @@ void FormFavorites::friendLoad(SProfile *aProfile) {
         }
         }
     QTableWidgetItem *item5 = new QTableWidgetItem;
-    switch(aProfile->_communityVisibilityState) {
+    switch((*aProfile)[0]._communityVisibilityState) {
         case 1:
             item5->setText(tr("Скрытый"));
             item5->setForeground(QColor(110,14,14));
@@ -122,11 +122,11 @@ void FormFavorites::friendLoad(SProfile *aProfile) {
             item5->setForeground(QColor(110,14,14));
             break;
     }
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID, new QTableWidgetItem(aProfile->_steamID));
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName, new QTableWidgetItem(aProfile->_personaName));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID, new QTableWidgetItem((*aProfile)[0]._steamID));
+    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName, new QTableWidgetItem((*aProfile)[0]._personaName));
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnStatus, item4);
     ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnisPublic, item5);
-    _numRequests++;
+    ++_numRequests;
 }
 
 void FormFavorites::updateSettings() {
@@ -156,6 +156,6 @@ void FormFavorites::retranslate() {
 }
 
 void FormFavorites::on_pushButton_clicked() {
-    ui->label->setStyleSheet("color: rgb("+ui->lineEdit->text()+");");
-    ui->label_2->setStyleSheet("color: rgb("+ui->lineEdit->text()+");");
+    ui->label   ->setStyleSheet("color: rgb(" + ui->lineEdit->text() + ");");
+    ui->label_2 ->setStyleSheet("color: rgb(" + ui->lineEdit->text() + ");");
 }

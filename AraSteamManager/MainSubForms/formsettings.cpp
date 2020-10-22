@@ -106,7 +106,7 @@ void FormSettings::initComponents() {
             allHidden->setText(tr("Все профили"));
             allHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
             allHidden->setObjectName("HiddenGames0");
-            allHidden->AddData("NumberFileHiddenGame","0");
+            allHidden->addData("NumberFileHiddenGame","0");
             connect(allHidden, SIGNAL(clicked()), this, SLOT(radioButtonHiddenGames_Clicked()));
             layout->addWidget(allHidden);
             QFile fileHide1(Paths::hiddenGames("All"));
@@ -132,7 +132,7 @@ void FormSettings::initComponents() {
                 profileHidden->setText(profile[0]._personaName);
                 profileHidden->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
                 profileHidden->setObjectName("HiddenGames" + QString::number(number));
-                profileHidden->AddData("NumberFileHiddenGame", QString::number(number));
+                profileHidden->addData("NumberFileHiddenGame", QString::number(number));
                 connect(profileHidden, SIGNAL(clicked()), this, SLOT(radioButtonHiddenGames_Clicked()));
                 layout->addWidget(profileHidden);
                 while(!fileHide.atEnd()) {
@@ -143,7 +143,7 @@ void FormSettings::initComponents() {
                 pair.first = fileName.remove(".txt");
                 pair.second = hide;
                 _hiddenGames.append(std::move(pair));
-                number++;
+                ++number;
             }
         }
     }
@@ -226,7 +226,7 @@ void FormSettings::radioButtonLightTheme_Clicked() {
 void FormSettings::radioButtonHiddenGames_Clicked() {
     QRadioButtonWithData *rbSender = dynamic_cast<QRadioButtonWithData*>(sender());
     if (rbSender) {
-        int indexHiddenGame = rbSender->GetData(0).toInt();
+        int indexHiddenGame = rbSender->getData(0).toInt();
         QString iconsColor = Settings::getIconsColor();
         auto &currentGame = _hiddenGames[indexHiddenGame];
         ui->TableWidgetGames->clear();
@@ -246,8 +246,8 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                     QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
                     button1->setMinimumSize(QSize(25, 25));
                     button1->setObjectName("ButtonAchievements" + QString::number(indexHiddenGame) + "_" + QString::number(setTo));
-                    button1->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
-                    button1->AddData("NumberHiddenGame", QString::number(setTo));
+                    button1->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                    button1->addData("NumberHiddenGame", QString::number(setTo));
                     connect(button1, &QButtonWithData::pressed, this, &FormSettings::achievementsClicked);
                     ui->TableWidgetGames->setCellWidget(setTo, 2, button1);
 
@@ -255,8 +255,8 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                     button3->setIcon(QIcon(Images::hide()));
                     button3->setMinimumSize(QSize(25, 25));
                     button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + QString::number(game._appID));
-                    button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
-                    button3->AddData("NumberHiddenGame", QString::number(game._appID));
+                    button3->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                    button3->addData("NumberHiddenGame", QString::number(game._appID));
                     connect(button3, &QButtonWithData::pressed, this, &FormSettings::hideClicked);
                     ui->TableWidgetGames->setCellWidget(setTo, 3, button3);
                 }
@@ -265,7 +265,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
             //list[0]=_games[gamei].GetAppid()
             //list[1]=_games[gamei].GetImg_icon_url()
             //list[2]=_games[gamei].GetName()
-            for (int i = 0; i < currentGame.second.size(); i++) {
+            for (int i = 0; i < currentGame.second.size(); ++i) {
                 QStringList list = currentGame.second[i].split("%%");
                 QString path = Paths::imagesGames(list[1]);
                 QLabel *iconGame = new QLabel;
@@ -284,8 +284,8 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                 QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
                 button1->setMinimumSize(QSize(25, 25));
                 button1->setObjectName("ButtonAchievements" + QString::number(indexHiddenGame) + "_" + QString::number(i));
-                button1->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
-                button1->AddData("NumberHiddenGame", QString::number(i));
+                button1->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                button1->addData("NumberHiddenGame", QString::number(i));
                 connect(button1, &QButtonWithData::pressed, this, &FormSettings::achievementsClicked);
                 ui->TableWidgetGames->setCellWidget(i, 2, button1);
 
@@ -293,8 +293,8 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                 button3->setIcon(QIcon(Images::hide()));
                 button3->setMinimumSize(QSize(25, 25));
                 button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + list[0]);
-                button3->AddData("NumberFileHiddenGame", QString::number(indexHiddenGame));
-                button3->AddData("NumberHiddenGame", list[0]);
+                button3->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                button3->addData("NumberHiddenGame", list[0]);
                 connect(button3, &QButtonWithData::pressed, this, &FormSettings::hideClicked);
                 ui->TableWidgetGames->setCellWidget(i, 3, button3);
             }
@@ -321,7 +321,7 @@ void FormSettings::achievementsClicked() {
 void FormSettings::hideClicked() {
     QButtonWithData *pb = dynamic_cast<QButtonWithData*>(sender());
     if (pb) {
-        int index = pb->GetData(0).toInt();
+        int index = pb->getData(0).toInt();
         int gameIndex = -1;
         QMessageBox messageBox(QMessageBox::Question, tr("Внимание!"), tr("Сделать игру видимой?"));
         QAbstractButton *btnProfile = messageBox.addButton(tr("Да"), QMessageBox::YesRole);
@@ -330,9 +330,9 @@ void FormSettings::hideClicked() {
         if(messageBox.clickedButton() != btnProfile) {
             return;
         }
-        for(int i = 0; i < _hiddenGames[index].second.size(); i++) {
+        for(int i = 0; i < _hiddenGames[index].second.size(); ++i) {
             QStringList lineList = _hiddenGames[index].second[i].split("%%");
-            if(lineList[0] == pb->GetData(1)) {
+            if(lineList[0] == pb->getData(1)) {
                 gameIndex = i;
                 break;
             }

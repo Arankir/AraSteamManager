@@ -1,11 +1,18 @@
 {
-    "Type": "games",
-    "Values": [
+    "type": "games",
+    "values": [
         {
+            "appid": 218620,
             "icon": "a6abc0d0c1e79c0b5b0f5c8ab81ce9076a542414",
-            "id": "218620",
-            "idUser": "76561198065018572",
-            "name": "PAYDAY 2"
+            "name": "PAYDAY 2",
+            "userId": "76561198065018572"
+        },
+        {
+            "appid": 792100,
+            "icon": "8e2fdc7d54960f91f3b3eca36d30e32d8fdb590f",
+            "name": "7 Billion Humans",
+            "userId": "76561198065018572"
         }
-    ]
+    ],
+    "version": "1.0"
 }

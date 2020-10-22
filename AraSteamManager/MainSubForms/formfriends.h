@@ -28,6 +28,7 @@ public slots:
     void progressLoading(int p,int row);
     void updateSettings();
 
+    [[deprecated("now use in throw")]]
     void pullTable(int aTo, int aDo);
     void onTablePulled();
     void createThread();
@@ -47,6 +48,8 @@ private slots:
     void retranslate();
     void setIcons();
     void updateHiddenRows();
+
+    [[deprecated("now use in QMenu")]]
     void friendToUi();
 
     void buttonFriendGoTo_Clicked();
@@ -76,18 +79,23 @@ private:
     QString _id;
     bool _blockedLoad = false;
     QList<QPair<SFriend, SProfile>> _friends;
-    QList<QPair<SFriend*, SProfile*>> _visibleFriends;
+    //QList<QPair<SFriend*, SProfile*>> _visibleFriends;
     Favorites _favorites;
     Filter _filter;
-    QString _currentFriend;
-    int _currentFriendIndex = -1;
-    int _currentPage = 0;
+    //QString _currentFriend;
+    //int _currentFriendIndex = -1;
+    //int _currentPage = 0;
+    QPair<SFriend, SProfile> *_currentFriend2 = nullptr;
 
     //QVector<RequestData*> _request;
-    int _numRequests = 0;
-    int _numNow = 0;
+    //int _numRequests = 0;
+    //int _numNow = 0;
 
 
+    QMenu *createMenu(const QPair<SFriend, SProfile> &profile);
+    QPushButton *createFriendButtonMenu(const QPair<SFriend, SProfile> &aProfile, int aRow);
+    bool isProfileFavorite(const QPair<SFriend, SProfile> &aProfile);
+    void updateActionFavoriteData(QAction *aAction, bool aIsFavorite);
 };
 
 #endif // FORMFRIENDS_H

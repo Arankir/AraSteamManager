@@ -14,6 +14,7 @@
 #include "class/categoriesgame.h"
 #include "class/Network/requestimage.h"
 #include "class/Threads/threading.h"
+#include "class/favorites.h"
 
 namespace Ui {
 class FormTablesHeaders;
@@ -44,6 +45,7 @@ public slots:
     void updateFilterTextAchievement(const QString &newText, bool solo, bool compare);
     void updateFilterCategory(int categoryIndex, bool clear, QList<QString> achievementNames = QList<QString>());
     void updateFilterFavorite(QJsonArray favoritesAchievement);
+    void updateFilterFavorite(const QList<FavoriteAchievement> &favoritesAchievement);
     void setValuesMode(bool value);
     void setUniqueMode(bool unique);
     void setVisibleContentSelect(int pos, bool select);

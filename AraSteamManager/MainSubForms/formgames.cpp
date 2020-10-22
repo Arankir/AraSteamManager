@@ -12,7 +12,7 @@ constexpr int c_tableColumnCount = 6;
 #define ConstantsEnd }
 
 #define Init {
-FormGames::FormGames(SProfile &aProfile, SGames &aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _profile(aProfile),  _games(aGames), _favorites("games") {
+FormGames::FormGames(SProfile &aProfile, SGames &aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _profile(aProfile),  _games(aGames) {
     ui->setupUi(this);
     initComponents();
 }
@@ -54,7 +54,7 @@ void FormGames::initComponents() {
     ui->TableWidgetGames->setSortingEnabled(true);
     ui->ProgressBarLoading->setVisible(false);
     ui->TableWidgetGames->setRowCount(_games.getCount());
-    for (int i = 0; i < _games.getCount(); i++) {
+    for (int i = 0; i < _games.getCount(); ++i) {
         ui->TableWidgetGames->setRowHeight(i, 33 + 18);
     }
 //TODO загрузить группы
@@ -152,7 +152,7 @@ void FormGames::onTablePushed() {
         connect (tools, &QPushButton::clicked, tools, &QPushButton::showMenu);
         ui->TableWidgetGames->setCellWidget(row, c_tableColumnTools, tools);
 
-        row++;
+        ++row;
     }
     hideHiddenGames();
 //    enableMouseTracking(ui->TableWidgetGames->children());
@@ -174,9 +174,12 @@ QMenu *FormGames::createMenu(SGame &aGame, int aIndex) {
 
     //Добавление кнопки избранного
     QAction *actionFavorites;
-    QJsonArray favorites = _favorites.getValues();
-    bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(),
-                                  [=](QJsonValue curFavorite) {return curFavorite.toObject().value("id").toString() == appId;});
+    QList<FavoriteGame> favorites = _favorites.getGames();
+    bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(), [=](FavoriteGame curFavorite) {
+                                                                            return curFavorite.getName() == aGame._name
+                                                                            && curFavorite.getAppid() == aGame._appID
+                                                                            && curFavorite.getUserId() == _profile._steamID;
+                                                                        });
     if(isFavorite) {
         actionFavorites = new QAction(tr("Удалить из избранного"), this);
         actionFavorites->setIcon(QIcon(Images::isFavorites()));
@@ -247,13 +250,13 @@ void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
     ui->TableWidgetGames->setItem(aAchievements->_index, c_tableColumnProgress, new QTableWidgetItem(pb->text().rightJustified(5, '0')));
     ui->TableWidgetGames->item(aAchievements->_index, c_tableColumnProgress)->setTextAlignment(Qt::AlignRight);
     _achievements[aAchievements->_index] = aAchievements;
-    emit s_achievementsLoaded(_load++, 0);
+    emit s_achievementsLoaded(_load, 0);
 
     //Проверка всё ли загрузилось
-    if(_load == _games.getCount()) {
+    if(++_load == _games.getCount()) {
         //tableWidgetGames_CellClicked(0, 1);
         int width = 22;
-        for(int i = 0; i < ui->TableWidgetGames->columnCount(); i++) {
+        for(int i = 0; i < ui->TableWidgetGames->columnCount(); ++i) {
             width += ui->TableWidgetGames->columnWidth(i);
         }
         emit s_finish(width);
@@ -263,7 +266,7 @@ void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
 
 #define System {
 FormGames::~FormGames() {
-    qInfo()<<"Форма игр удалилась";
+    qInfo() << "Форма игр удалилась";
     delete ui;
 }
 
@@ -292,9 +295,10 @@ void FormGames::resizeEvent(QResizeEvent*) {
 
 void FormGames::hideHiddenGames() {
     QStringList hideList = _hide;
-    for (int i = 0; i < ui->TableWidgetGames->rowCount(); i++) {
-        auto hiddenGame = std::find_if(hideList.cbegin(), hideList.cend(),
-                                       [=](QString curGame) {return curGame == ui->TableWidgetGames->item(i, c_tableColumnAppid)->text();});
+    for (int i = 0; i < ui->TableWidgetGames->rowCount(); ++i) {
+        auto hiddenGame = std::find_if(hideList.cbegin(), hideList.cend(), [=](QString curGame) {
+                                                                                return curGame == ui->TableWidgetGames->item(i, c_tableColumnAppid)->text();
+                                                                            });
         if (hiddenGame != hideList.cend()) {
             ui->TableWidgetGames->item(i, c_tableColumnName)->setForeground(QColor(255 * 0.7, 0, 0));
             ui->TableWidgetGames->hideRow(i);
@@ -358,7 +362,7 @@ void FormGames::createThread() {
 #define Filter {
 void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
     QString findText = aFindText.toLower();
-    for (int i = 0; i < ui->TableWidgetGames->rowCount(); i++) {
+    for (int i = 0; i < ui->TableWidgetGames->rowCount(); ++i) {
         ui->TableWidgetGames->setRowHidden(i, ui->TableWidgetGames->item(i, c_tableColumnName)->text().toLower().indexOf(findText, 0) == -1);
     }
     if (Settings::getVisibleHiddenGames() != 1 || findText == "") {
@@ -389,19 +393,19 @@ void FormGames::tableWidgetGames_CellClicked(int aRow, int) {
         ui->ProgressBarSelectedGame->setMaximum(progressBarSelectedGame->maximum());
         ui->ProgressBarSelectedGame->setValue(progressBarSelectedGame->value());
     }
-    //Проверка является ли игра избранной
-    QJsonArray favorites = _favorites.getValues();
-    bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(),
-                                  [=](QJsonValue curFavorite) {return curFavorite.toObject().value("id").toString() == _selectedGame;});
-    if(isFavorite) {
-        ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
-    } else {
-        ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
-    }
-    //Проверка является ли игра скрытой
-    if(ui->TableWidgetGames->item(aRow, c_tableColumnName)->foreground() == QColor(255 * 0.7, 0, 0)) {
-        ui->ButtonHide->setIcon(QIcon(Images::unhide()));
-    }
+//    //Проверка является ли игра избранной
+//    QJsonArray favorites = _favorites.getValues();
+//    bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(),
+//                                  [=](QJsonValue curFavorite) {return curFavorite.toObject().value("id").toString() == _selectedGame;});
+//    if(isFavorite) {
+//        ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
+//    } else {
+//        ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
+//    }
+//    //Проверка является ли игра скрытой
+//    if(ui->TableWidgetGames->item(aRow, c_tableColumnName)->foreground() == QColor(255 * 0.7, 0, 0)) {
+//        ui->ButtonHide->setIcon(QIcon(Images::unhide()));
+//    }
 }
 
 void FormGames::tableWidgetGames_CellDoubleClicked(int aRow, int) {
@@ -430,13 +434,7 @@ void FormGames::buttonFavorite_Clicked() {
         _selectedIndex = action->data().toString();
         _selectedGame = action->whatsThis();
     }
-    QJsonObject newValue;
-    newValue["id"] = QString::number(_games[_selectedIndex.toInt()]._appID);
-    newValue["name"] = _games[_selectedIndex.toInt()]._name;
-    newValue["icon"] = _games[_selectedIndex.toInt()]._img_icon_url;
-    newValue["idUser"] = _profile._steamID;
-    ui->ButtonFavorite->setFixedSize(ui->ButtonFavorite->size());
-    if(_favorites.addValue(newValue, true)) {
+    if(_favorites.addGame(_profile._steamID, _games[_selectedIndex.toInt()], true)) {
         //Категория добавилась
         action->setText(tr("Удалить из избранного"));
         action->setIcon(QIcon(Images::isFavorites()));
@@ -480,7 +478,7 @@ void FormGames::buttonHide_Clicked() {
     }
 
     fileHide.close();
-    for (int i = 0; i < _games.getCount(); i++) {
+    for (int i = 0; i < _games.getCount(); ++i) {
         if(_games[_selectedIndex.toInt()]._name == ui->TableWidgetGames->item(i, c_tableColumnName)->text()) {
             ui->TableWidgetGames->item(i, c_tableColumnName)->setForeground(QColor(255 * 0.7, 0, 0));
             ui->TableWidgetGames->setRowHidden(i, true);

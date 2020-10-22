@@ -1,2 +1,69 @@
 INFO 2020-10-20 12:26:47 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
 INFO 2020-10-20 12:26:50 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 12:30:19 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 12:30:31 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+DEBG 2020-10-20 14:11:51 void MainWindow::initComponents()  "Josefin Sans Thin" 0
+INFO 2020-10-20 14:11:55 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 14:12:20 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+DEBG 2020-10-20 14:12:33 void MainWindow::initComponents()  "Josefin Sans Thin" 0
+INFO 2020-10-20 14:12:36 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 14:12:38 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 14:12:59 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+DEBG 2020-10-20 14:13:11 void MainWindow::initComponents()  "Josefin Sans Thin" 0
+INFO 2020-10-20 14:13:14 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 14:13:16 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 14:13:42 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+DEBG 2020-10-20 14:13:54 void MainWindow::initComponents()  "Josefin Sans Thin" 0
+INFO 2020-10-20 14:13:57 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 14:14:02 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 14:14:43 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 14:41:22 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 14:41:26 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 14:41:35 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-20 14:56:46 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:02:15 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:02:51 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 15:03:15 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:03:30 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:03:43 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:03:58 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:04:00 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 15:05:41 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:05:57 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:06:29 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 15:07:04 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:07:19 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:07:21 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 15:18:12 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:19:56 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:20:40 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:27:00 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:29:00 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:30:10 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:31:34 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:32:25 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:36:46 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:37:01 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:37:17 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:42:51 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:45:33 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 15:51:13 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 15:52:51 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 16:27:06 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 16:28:46 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 16:28:53 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-20 16:29:01 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-20 16:50:09 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 16:51:03 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 16:51:10 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 16:52:26 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-20 16:52:36 void FormFriends::buttonFriendGoTo_Clicked()  false ""
+DEBG 2020-10-20 16:52:41 void FormFriends::buttonFriendGoTo_Clicked()  false "76561198038451539"
+INFO 2020-10-20 16:52:47 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 16:52:48 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-20 16:54:51 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 16:55:17 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 16:55:29 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-20 16:55:37 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-20 17:16:02 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 08:48:16 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

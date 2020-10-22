@@ -6,13 +6,13 @@
 class QComboBoxWithData : public QComboBox
 {
 public:
-    QComboBoxWithData(QWidget *parent = nullptr):QComboBox(parent){};
-    void AddData(QString Title, QString Data);
-    QString GetData(QString Title);
-    QString GetData(int index);
+    QComboBoxWithData(QWidget *parent = nullptr) : QComboBox(parent) {};
+    void addData(QString title, QString data);
+    QString getData(QString title);
+    QString getData(int index);
 
 private:
-    QVector<QPair<QString,QString>> _data;
+    QVector<QPair<QString, QString>> _data;
 };
 
 #endif // QCOMBOBOXWITHDATA_H

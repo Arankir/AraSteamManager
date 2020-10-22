@@ -1,21 +1,5 @@
 #include "threadachievements.h"
 
-ThreadAchievements::ThreadAchievements(SAchievements *aAchievements, QTableWidget *aTableWidgetAchievements, const int aTableColumnAppid,
-const int aTableColumnTitle, const int aTableColumnDescription, const int aTableColumnWorld, const int aTableColumnMy, QObject *aParent):
-QObject(aParent), c_tableColumnAppid(aTableColumnAppid), c_tableColumnTitle(aTableColumnTitle), c_tableColumnDescription(aTableColumnDescription),
-c_tableColumnWorld(aTableColumnWorld), c_tableColumnMy(aTableColumnMy), _achievements(aAchievements), _tableWidgetAchievements(aTableWidgetAchievements) {
-
-}
-
-ThreadAchievements::ThreadAchievements(QObject *aParent): QObject(aParent), c_tableColumnAppid(0), c_tableColumnTitle(0), c_tableColumnDescription(0),
-c_tableColumnWorld(0), c_tableColumnMy(0) {
-
-}
-
-ThreadAchievements::~ThreadAchievements() {
-    qInfo()<<"Thread achievements deleted";
-}
-
 int ThreadAchievements::fill() {
     int totalReached = 0;
     int totalNotReached = 0;
@@ -23,22 +7,22 @@ int ThreadAchievements::fill() {
     for (auto &achievement: *_achievements) {
         if (achievement._displayName != "") {
             emit s_progress(row, row);
-            _tableWidgetAchievements->setItem(row, c_tableColumnAppid, new QTableWidgetItem(achievement._apiName));
-            _tableWidgetAchievements->setItem(row, c_tableColumnTitle, new QTableWidgetItem(achievement._displayName));
-            _tableWidgetAchievements->setItem(row, c_tableColumnDescription, new QTableWidgetItem(achievement._description));
-            _tableWidgetAchievements->setItem(row, c_tableColumnWorld, new QTableWidgetItem((achievement._percent < 10 ? "0" : "") + QString::number(achievement._percent) + "%"));
+            _tableWidgetAchievements->setItem(row, c_tableColumnAppid,          new QTableWidgetItem(achievement._apiName));
+            _tableWidgetAchievements->setItem(row, c_tableColumnTitle,          new QTableWidgetItem(achievement._displayName));
+            _tableWidgetAchievements->setItem(row, c_tableColumnDescription,    new QTableWidgetItem(achievement._description));
+            _tableWidgetAchievements->setItem(row, c_tableColumnWorld,          new QTableWidgetItem((achievement._percent < 10 ? "0" : "") + QString::number(achievement._percent) + "%"));
             if(achievement._achieved == 1) {
                 _tableWidgetAchievements->setItem(row, c_tableColumnMy, new QTableWidgetItem(tr("Получено %1").arg(achievement._unlockTime.toString("yyyy.MM.dd hh:mm"))));
-                totalReached++;
+                ++totalReached;
             } else {
                 _tableWidgetAchievements->setItem(row, c_tableColumnMy, new QTableWidgetItem(tr("Не получено")));
-                totalNotReached++;
+                ++totalNotReached;
             }
-            _tableWidgetAchievements->item(row, c_tableColumnTitle)->setTextAlignment(Qt::AlignCenter);
-            _tableWidgetAchievements->item(row, c_tableColumnDescription)->setTextAlignment(Qt::AlignCenter);
-            _tableWidgetAchievements->item(row, c_tableColumnWorld)->setTextAlignment(Qt::AlignCenter);
-            _tableWidgetAchievements->item(row, c_tableColumnMy)->setTextAlignment(Qt::AlignCenter);
-            row++;
+            _tableWidgetAchievements->item(row, c_tableColumnTitle)         ->setTextAlignment(Qt::AlignCenter);
+            _tableWidgetAchievements->item(row, c_tableColumnDescription)   ->setTextAlignment(Qt::AlignCenter);
+            _tableWidgetAchievements->item(row, c_tableColumnWorld)         ->setTextAlignment(Qt::AlignCenter);
+            _tableWidgetAchievements->item(row, c_tableColumnMy)            ->setTextAlignment(Qt::AlignCenter);
+            ++row;
         }
     }
     emit s_finished(totalReached, totalNotReached);

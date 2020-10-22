@@ -1,21 +1,21 @@
 #include "qbuttonwithdata.h"
 
-void QButtonWithData::AddData(QString a_title, QString a_data){
-    _data.append(QPair<QString,QString>(std::move(a_title),std::move(a_data)));
+void QButtonWithData::addData(QString aTitle, QString aData) {
+    _data.append(QPair<QString, QString>(std::move(aTitle), std::move(aData)));
 }
 
-QString QButtonWithData::GetData(QString a_title){
-    for(auto &data: _data){
-        if(data.first==a_title){
+QString QButtonWithData::getData(QString aTitle) {
+    for(auto &data: _data) {
+        if (data.first == aTitle) {
             return data.second;
         }
     }
     return "";
 }
 
-QString QButtonWithData::GetData(int a_index){
-    if(a_index<_data.size()){
-        return _data[a_index].second;
+QString QButtonWithData::getData(int aIndex) {
+    if (aIndex < _data.size()) {
+        return _data[aIndex].second;
     }
     return "";
 }

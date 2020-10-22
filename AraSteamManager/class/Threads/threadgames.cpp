@@ -1,10 +1,8 @@
 #include "threadgames.h"
 
 int ThreadGames::fill() {
-    int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    QFont font(family, 10);
-    for(int i = 0; i < _games.getCount(); i++) {
+    QFont font(Settings::getFontDefaultName(), 10);
+    for(int i = 0; i < _games.getCount(); ++i) {
         QTableWidgetItem *itemTitle = new QTableWidgetItem(_games[i]._name);
         itemTitle->setFont(font);
         _TableWidgetGames->setItem(i, c_tableColumnAppid, new QTableWidgetItem(QString::number(_games[i]._appID)));

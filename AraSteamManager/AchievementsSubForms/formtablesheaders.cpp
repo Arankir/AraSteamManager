@@ -34,7 +34,7 @@ ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false
     setRowHeightHeaders(0, 33 + 18);
     setRowHeightHeaders(1, 33 + 18);
     _horizontalHeaderHeight = 2;
-    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); i++) {
+    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); ++i) {
         _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
     }
     setVerticalHeaderTitle(0, new  QTableWidgetItem(""));
@@ -122,7 +122,7 @@ void FormTablesHeaders::updateHiddenRows() {
     switch (_currentType) {
     case TableType::standart: {
         if (_isUnique) {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 if (_fAchievements.getData(i)) {
                     bool isExist = false;
                     if (_isNoValue) {
@@ -130,7 +130,7 @@ void FormTablesHeaders::updateHiddenRows() {
                             isExist = true;
                         }
                     } else {
-                        for (int j = 0; j < _categoriesColumns.size(); j++) {
+                        for (int j = 0; j < _categoriesColumns.size(); ++j) {
                             if (itemContent(i, _categoriesColumns[j])->checkState() == Qt::Checked) {
                                 isExist = true;
                                 break;
@@ -143,14 +143,14 @@ void FormTablesHeaders::updateHiddenRows() {
                 }
             }
         } else {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 setVisibleRowContent(i, _fAchievements.getData(i));
             }
         }
         break;
     }
     case TableType::compare: {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             setVisibleRowContent(i, _fCompare.getData(i));
         }
         break;
@@ -234,7 +234,7 @@ void FormTablesHeaders::setColumnCount(int aCol) {
     ui->TableWidgetHorizontalHeader->setColumnCount(aCol);
     while (columnNow < ui->TableWidgetContent->columnCount()) {
         setHorizontalTitle(columnNow, "");
-        columnNow++;
+        ++columnNow;
     }
     updateHiddenRows();
 }
@@ -257,7 +257,7 @@ void FormTablesHeaders::setRowHeight(int aRow, int aHeight){
 void FormTablesHeaders::setRowCountHeaders(int aRow) {
     ui->TableWidgetHorizontalHeader->setRowCount(aRow);
     _horizontalHeaderHeight = 1;
-    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); i++) {
+    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); ++i) {
         _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
     }
 }
@@ -380,7 +380,7 @@ void FormTablesHeaders::addNoValueColumn() {
 int FormTablesHeaders::insertCheckableColumn() {
     insertColumn(ui->TableWidgetContent->columnCount());
     setColumnWidth(ui->TableWidgetContent->columnCount() -1, 48);
-    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
+    for(int i = 0; i < ui->TableWidgetContent->rowCount(); ++i) {
         ui->TableWidgetContent->setItem(i, ui->TableWidgetContent->columnCount() - 1, createFlag(false));
     }
     return ui->TableWidgetContent->columnCount() - 1;
@@ -394,7 +394,7 @@ QTableWidgetItem *FormTablesHeaders::createFlag(bool flagState) {
 }
 
 void FormTablesHeaders::reverseCategoryColumn(int index) {
-    for (int i = 0; i < getRowCount(); i++) {
+    for (int i = 0; i < getRowCount(); ++i) {
         QTableWidgetItem *item = itemContent(i, _categoriesColumns[index]);
         item->setCheckState(item->checkState() == Qt::Checked ? Qt::Unchecked : Qt::Checked);
     }
@@ -432,13 +432,13 @@ void FormTablesHeaders::setUniqueMode(bool aUnique) {
         connect(ui->TableWidgetContent, &QTableWidget::itemClicked, this, &FormTablesHeaders::hideCheckedAchievement);
         _isUnique = true;
         if (_isNoValue) {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 if (itemContent(i, _noValueColumn)->checkState() == Qt::Checked) {
                     _fAchievements.setData(i, c_filterUniqueValue, false);
                 }
             }
         } else {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 for (auto &column: _categoriesColumns) {
                     if (itemContent(i, column)->checkState() == Qt::Checked) {
                         _fAchievements.setData(i, c_filterUniqueValue, false);
@@ -449,7 +449,7 @@ void FormTablesHeaders::setUniqueMode(bool aUnique) {
     } else {
         disconnect(ui->TableWidgetContent, &QTableWidget::itemClicked, this, &FormTablesHeaders::hideCheckedAchievement);
         _isUnique = false;
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             _fAchievements.setData(i, c_filterUniqueValue, true);
         }
     }
@@ -468,14 +468,14 @@ void FormTablesHeaders::hideCheckedAchievement(QTableWidgetItem *aItem) {
 void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
     if (aPos < ui->TableWidgetContent->columnCount()) {
         if (_isUnique) {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 if (!ui->TableWidgetContent->isRowHidden(i)) {
                     itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
                     _fAchievements.setData(i, c_filterUniqueValue, !aSelect);
                 }
             }
         } else {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 if (!ui->TableWidgetContent->isRowHidden(i)) {
                     itemContent(i, (_noValueColumn + 1) + aPos)->setCheckState(aSelect ? Qt::Checked : Qt::Unchecked);
                 }
@@ -491,9 +491,9 @@ void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aN
         _categoriesColumns.clear();
         addNoValueColumn();
         changeHorizontalTitle(_noValueColumn, aTitle);
-        for (int j = 0; j < getRowCount(); j++) {
+        for (int j = 0; j < getRowCount(); ++j) {
             bool isAchievementCheck = true;
-            for(int k = 0; k < aNoValues.size(); k++) {
+            for(int k = 0; k < aNoValues.size(); ++k) {
                 if(itemContent(j, c_tableAchievementColumnAppid)->text() == aNoValues[k]) {
                     isAchievementCheck = false;
                     break;
@@ -504,7 +504,7 @@ void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aN
         for(auto category: aValues) {
             addCategoryColumn();
             changeHorizontalTitle(getColumnCount() - 1, category.title);
-            for (int j = 0; j < getRowCount(); j++) {
+            for (int j = 0; j < getRowCount(); ++j) {
                 bool isAchievementCheck = false;
                 for (auto appid: category.achievements) {
                     if (itemContent(j, c_tableAchievementColumnAppid)->text() == appid) {
@@ -527,7 +527,7 @@ bool FormTablesHeaders::swapCategoryColumns(int aPosOld, int aPosNew) {
         (aPosOld > getColumnCount() - (_noValueColumn + 1))) {
         return false;
     } else {
-        for (int j = 0; j < getRowCount(); j++) {
+        for (int j = 0; j < getRowCount(); ++j) {
             Qt::CheckState tempCheckState = itemContent(j, (_noValueColumn + 1) + aPosOld)->checkState();
             itemContent(j, (_noValueColumn + 1) + aPosOld)->setCheckState(itemContent(j, (_noValueColumn + 1) + aPosNew)->checkState());
             itemContent(j, (_noValueColumn + 1) + aPosNew)->setCheckState(tempCheckState);
@@ -583,17 +583,17 @@ bool FormTablesHeaders::addFriendColumn(SProfile &aFriendProfile) {
     _friendsColumns.push_back(column);
     int totalReach = 0;
     int totalNotReach = 0;
-    for(int i = 0; i < ui->TableWidgetContent->rowCount(); i++) {
+    for(int i = 0; i < ui->TableWidgetContent->rowCount(); ++i) {
         for(auto &achievement: achievementsFriends) {
             if(achievement._apiName == ui->TableWidgetContent->item(i, c_tableAchievementColumnAppid)->text()) {
                 QTableWidgetItem *itemReached;
                 if(achievement._achieved == 1) {
                     itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievement._unlockTime.toString("yyyy.MM.dd hh:mm")));
                     itemReached->setToolTip(achievement._unlockTime.toString("yyyy.MM.dd hh:mm"));
-                    totalReach++;
+                    ++totalReach;
                 } else {
                     itemReached = new QTableWidgetItem(tr("Не получено"));
-                    totalNotReach++;
+                    ++totalNotReach;
                 }
                 itemReached->setTextAlignment(Qt::AlignCenter);
                 ui->TableWidgetContent->setItem(i, column, itemReached);
@@ -621,7 +621,7 @@ void FormTablesHeaders::removeFriendColumn(const QString &aFriendName) {
             removeFriendColumn(indexFriend);
             break;
         }
-        indexFriend++;
+        ++indexFriend;
     }
     if(_fCompare.getCol() >= columnFriend) {
         _fCompare.removeCol(_fCompare.getCol() - (getColumnCount() - columnFriend + 1));
@@ -650,19 +650,19 @@ void FormTablesHeaders::updateFilterWithFriend(const QString &aFriendName, Reach
     int filterColumn = _fCompare.getCol() - (getColumnCount() - columnFriend);
     switch (aType) {
     case ReachedType::all: {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             _fCompare.setData(i, filterColumn, true);
         }
         break;
     }
     case ReachedType::reached: {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") > -1);
         }
         break;
     }
     case ReachedType::notReached: {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") == -1);
         }
         break;
@@ -722,7 +722,7 @@ TableType FormTablesHeaders::getType() {
 bool FormTablesHeaders::pullTable() {
     if (_achievements.getStatus() == StatusValue::success) {
         setRowCount(_achievements.getCount());
-        for (int i = 0; i < _achievements.getCount(); i++) {
+        for (int i = 0; i < _achievements.getCount(); ++i) {
             setRowHeight(i, 66 + 18);
         }
         _fAchievements.setRow(getRowCount());
@@ -772,7 +772,7 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
             if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {
                 ui->TableWidgetContent->setRowHeight(row, 64 + 18);
             }
-            row++;
+            ++row;
         } else {
             setRowCount(getRowCount() - 1);
         }
@@ -785,18 +785,18 @@ void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo,
     case ReachedType::all: {
         if (aSolo) {
             if (aCompare) {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fAchievements.setData(i, c_filterReached, true);
                     _fCompare.setData(i, c_filterReached, true);
                 }
             } else {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fAchievements.setData(i, c_filterReached, true);
                 }
             }
         } else {
             if (aCompare) {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fCompare.setData(i, c_filterReached, true);
                 }
             }
@@ -806,18 +806,18 @@ void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo,
     case ReachedType::reached: {
         if (aSolo) {
             if (aCompare) {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
                     _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
                 }
             } else {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
                 }
             }
         } else {
             if (aCompare) {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
                 }
             }
@@ -827,18 +827,18 @@ void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo,
     case ReachedType::notReached: {
         if (aSolo) {
             if (aCompare) {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
                     _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
                 }
             } else {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
                 }
             }
         } else {
             if (aCompare) {
-                for (int i = 0; i < getRowCount(); i++) {
+                for (int i = 0; i < getRowCount(); ++i) {
                     _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
                 }
             }
@@ -860,12 +860,12 @@ void FormTablesHeaders::updateFilterCategoriesColumns(int aCategories) {
 
 void FormTablesHeaders::updateFilterFavorite(QJsonArray aFavoritesAchievement) {
     if (aFavoritesAchievement == QJsonArray()) {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             _fAchievements.setData(i, c_filterFavorite, true);
             _fCompare.setData(i, c_filterFavorite, true);
         }
     } else {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             bool accept = false;
             for (auto value: aFavoritesAchievement) {
                 if (value.toObject().value("id").toString() == _achievements[i]._apiName) {
@@ -880,24 +880,43 @@ void FormTablesHeaders::updateFilterFavorite(QJsonArray aFavoritesAchievement) {
     updateHiddenRows();
 }
 
+void FormTablesHeaders::updateFilterFavorite(const QList<FavoriteAchievement> &aFavoritesAchievements) {
+    if (aFavoritesAchievements.count() == 0) {
+        for (int i = 0; i < getRowCount(); ++i) {
+            _fAchievements.setData(i, c_filterFavorite, true);
+            _fCompare.setData(i, c_filterFavorite, true);
+        }
+    } else {
+        for (int i = 0; i < getRowCount(); ++i) {
+            bool accept = std::any_of(aFavoritesAchievements.begin(), aFavoritesAchievements.end(), [=](const FavoriteAchievement &achievement) {
+                                                                                                        return (achievement.getId() == _achievements[i]._apiName)
+                                                                                                                && (achievement.getTitle() == _achievements[i]._displayName);
+                                                                                                    });
+            _fAchievements.setData(i, c_filterFavorite, accept);
+            _fCompare.setData(i, c_filterFavorite, accept);
+        }
+    }
+    updateHiddenRows();
+}
+
 void FormTablesHeaders::updateFilterTextAchievement(const QString &aNewText, bool aSolo, bool aCompare) {
     if (aSolo) {
         if (aCompare) {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 _fAchievements.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
                                                        ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
                 _fCompare.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
                                                     ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
             }
         } else {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 _fAchievements.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
                                                        ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
             }
         }
     } else {
         if (aCompare) {
-            for (int i = 0; i < getRowCount(); i++) {
+            for (int i = 0; i < getRowCount(); ++i) {
                 _fCompare.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
                                                     ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
             }
@@ -908,12 +927,12 @@ void FormTablesHeaders::updateFilterTextAchievement(const QString &aNewText, boo
 
 void FormTablesHeaders::updateFilterCategory(int aCategoryIndex, bool aClear, QList<QString> aAchievementNames) {
     if (aClear) {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             _fAchievements.setData(i, c_filterEndConstValues + aCategoryIndex, true);
             _fCompare.setData(i, c_filterEndConstValues + aCategoryIndex, true);
         }
     } else {
-        for (int i = 0; i < getRowCount(); i++) {
+        for (int i = 0; i < getRowCount(); ++i) {
             _fAchievements.setData(i, c_filterEndConstValues + aCategoryIndex, false);
             _fCompare.setData(i, c_filterEndConstValues + aCategoryIndex, false);
             for (auto &achievementName: aAchievementNames) {

@@ -1,18 +1,15 @@
 {
-    "Type": "achievements",
-    "Values": [
+    "type": "achievements",
+    "values": [
         {
-            "Values": [
-                {
-                    "description": "Repair all the rooms in your home",
-                    "id": "Spot of DIY",
-                    "title": "Spot of DIY"
-                }
-            ],
             "game": {
-                "id": 227580,
-                "name": "10,000,000"
-            }
+                "appid": 227580,
+                "name": "10,000,000",
+                "userId": "76561198065018572"
+            },
+            "values": [
+            ]
         }
-    ]
+    ],
+    "version": "1.0"
 }

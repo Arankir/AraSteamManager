@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QRect>
 #include <QLoggingCategory>
+#include <QFontDatabase>
 
 Q_DECLARE_LOGGING_CATEGORY(logDebug)
 Q_DECLARE_LOGGING_CATEGORY(logInfo)
@@ -50,6 +51,8 @@ public:
 
     static QRect getAchievementContainerGeometry();
     static QPoint getAchievementContainerPos();
+
+    static QString getFontDefaultName();
 
     static QString const getKey();
     static bool createDir(const QString &path);

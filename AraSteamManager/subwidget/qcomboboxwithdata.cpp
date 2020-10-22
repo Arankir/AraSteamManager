@@ -1,21 +1,21 @@
 #include "qcomboboxwithdata.h"
 
-void QComboBoxWithData::AddData(QString a_title, QString a_data){
-    _data.append(QPair<QString,QString>(a_title,a_data));
+void QComboBoxWithData::addData(QString aTitle, QString aData) {
+    _data.append(QPair<QString, QString>(aTitle, aData));
 }
 
-QString QComboBoxWithData::GetData(QString a_title){
-    for(int i=0;i<_data.size();i++){
-        if(_data[i].first==a_title){
+QString QComboBoxWithData::getData(QString aTitle) {
+    for(int i = 0; i < _data.size(); ++i) {
+        if (_data[i].first == aTitle) {
             return _data[i].second;
         }
     }
     return "";
 }
 
-QString QComboBoxWithData::GetData(int a_index){
-    if(a_index<_data.size()){
-        return _data[a_index].second;
+QString QComboBoxWithData::getData(int aIndex) {
+    if (aIndex < _data.size()) {
+        return _data[aIndex].second;
     }
     return "";
 }

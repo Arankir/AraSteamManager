@@ -10,9 +10,9 @@ ui(new Ui::FormCompareProfileFilter) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     setIcons();
-    ui->RadioButtonAll->SetReachedType(ReachedType::all);
-    ui->RadioButtonReached->SetReachedType(ReachedType::reached);
-    ui->RadioButtonNotReached->SetReachedType(ReachedType::notReached);
+    ui->RadioButtonAll->setReachedType(ReachedType::all);
+    ui->RadioButtonReached->setReachedType(ReachedType::reached);
+    ui->RadioButtonNotReached->setReachedType(ReachedType::notReached);
     connect(ui->RadioButtonAll,        &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
     connect(ui->RadioButtonReached,    &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
     connect(ui->RadioButtonNotReached, &QRadioButtonWithData::clicked, this, &FormCompareProfileFilter::radioButtonClick);
@@ -25,21 +25,13 @@ void FormCompareProfileFilter::updateSettings() {
 
 void FormCompareProfileFilter::setIcons() {
     QString iconsColor = Settings::getIconsColor();
-    ui->RadioButtonAll->setIcon(QIcon(Images::allAchievements()));
-    ui->RadioButtonReached->setIcon(QIcon(Images::reached()));
-    ui->RadioButtonNotReached->setIcon(QIcon(Images::notReached()));
+    ui->RadioButtonAll          ->setIcon(QIcon(Images::allAchievements()));
+    ui->RadioButtonReached      ->setIcon(QIcon(Images::reached()));
+    ui->RadioButtonNotReached   ->setIcon(QIcon(Images::notReached()));
 }
 
 FormCompareProfileFilter::~FormCompareProfileFilter() {
     delete ui;
-}
-
-void FormCompareProfileFilter::setName(const QString &aName) {
-    _name = aName;
-}
-
-void FormCompareProfileFilter::setIndex(const QString &aIndex) {
-    _index = aIndex;
 }
 
 void FormCompareProfileFilter::changeEvent(QEvent *event) {
@@ -52,14 +44,6 @@ void FormCompareProfileFilter::setTitles(const QString &aTitleAll, const QString
     ui->RadioButtonAll->setText(aTitleAll);
     ui->RadioButtonReached->setText(aTitleReached);
     ui->RadioButtonNotReached->setText(aTitleNotReached);
-}
-
-QString FormCompareProfileFilter::getName() {
-    return _name;
-}
-
-QString FormCompareProfileFilter::getIndex() {
-    return _index;
 }
 
 void FormCompareProfileFilter::setType(ReachedType aType) {
@@ -94,6 +78,6 @@ void FormCompareProfileFilter::update() {
 void FormCompareProfileFilter::radioButtonClick() {
     QRadioButtonWithData *rb = static_cast<QRadioButtonWithData*>(sender());
     if (rb) {
-        emit s_radioButtonChange(_name, rb->GetReachedType());
+        emit s_radioButtonChange(_name, rb->getReachedType());
     }
 }

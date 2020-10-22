@@ -17,6 +17,7 @@ QScopedPointer<QFile> logFile_;
 void registerTypes();
 void initSetting();
 void initLanguage(QApplication &app);
+void initFont();
 void initLog();
 void log(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
@@ -28,6 +29,7 @@ int main(int argc, char *argv[]) {
     registerTypes();
     initSetting();
     initLanguage(a);
+    initFont();
     initLog();
 
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
@@ -109,4 +111,11 @@ void initLanguage(QApplication &app) {
         lang.load(":/AraSteamManager_en.qm");
         app.installTranslator(&lang);
     }
+}
+
+void initFont() {
+    QFont font(Settings::getFontDefaultName(), 10);
+    //font.setPointSize(12);
+    //font.setPixelSize(12);
+    qApp->setFont(font);
 }

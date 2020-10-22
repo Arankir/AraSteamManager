@@ -5,9 +5,7 @@
 FormStatistics::FormStatistics(const QString &aId, SGames &aGames, const QString &aName, QWidget *aParent): QWidget(aParent), ui(new Ui::FormStatistics), _id(aId), _games(aGames), _name(aName) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    QFont font(family);
+    QFont font(Settings::getFontDefaultName());
     ui->ChartsViewTimes->setStyleSheet("background: rgba(0,0,0,0); ");
     ui->ChartsViewMonths->setStyleSheet("background: rgba(0,0,0,0); ");
     ui->ChartsViewYears->setStyleSheet("background: rgba(0,0,0,0); ");
@@ -155,7 +153,7 @@ void FormStatistics::onFinish() {
     int max = 0;
     QBarCategoryAxis *axisXT = new QBarCategoryAxis();
     QBarSet *barSetT = new QBarSet(_id);
-    for(int i = 0; i < 24; i++) {
+    for(int i = 0; i < 24; ++i) {
         axisXT->append(QString::number(i));
         *barSetT<<_times[i];
         if(max < _times[i]) {
@@ -198,7 +196,7 @@ void FormStatistics::onFinish() {
             <<tr("Июль") <<tr("Август") <<tr("Сентябрь") <<tr("Октябрь") <<tr("Ноябрь") <<tr("Декабрь");
     axisXM->append(titlesXM);
     QBarSet *barSetM = new QBarSet(_id);
-    for(int i = 0; i < 12; i++) {
+    for(int i = 0; i < 12; ++i) {
         *barSetM <<_months[i];
         if(max < _months[i]) {
             max = _months[i];

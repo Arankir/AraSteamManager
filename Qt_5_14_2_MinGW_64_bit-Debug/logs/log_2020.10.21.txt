@@ -1,0 +1,133 @@
+INFO 2020-10-21 08:57:11 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-21 08:57:18 void FormFriends::buttonFriendGoTo_Clicked()  false "" -1
+INFO 2020-10-21 09:02:13 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 09:05:01 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-21 09:05:05 void FormFriends::buttonFriendGoTo_Clicked()  false "76561198038451539" 0 "76561198038451539"
+INFO 2020-10-21 09:05:09 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-21 09:14:52 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 09:15:10 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-21 09:15:53 void FormFriends::buttonFriendGoTo_Clicked()  false "" -1 "76561198041744724"
+INFO 2020-10-21 09:15:56 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+DEBG 2020-10-21 09:16:06 void FormFriends::buttonFriendGoTo_Clicked()  false "" -1 "76561198038451539"
+INFO 2020-10-21 09:16:09 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-21 09:35:57 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 09:45:38 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 09:45:53 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-21 09:46:03 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-21 09:46:07 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 11:04:05 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 11:04:14 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 11:23:35 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 11:23:44 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 11:25:22 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 11:39:40 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 13:57:50 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 13:57:52 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-21 13:58:05 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(null)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:05 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:06 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+INFO 2020-10-21 13:58:14 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+DEBG 2020-10-21 13:58:14 QPixmap SAchievement::getPixmap(QPixmap&, const QString&, QSize, int)  QPixmap(QSize(64, 64),depth=32,devicePixelRatio=1,cacheKey=0x18e400000042)
+INFO 2020-10-21 14:29:20 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 14:36:18 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 15:03:22 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 15:07:13 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 15:07:18 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 15:08:31 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 15:08:42 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-21 15:09:45 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-21 15:10:03 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

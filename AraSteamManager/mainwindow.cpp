@@ -2,36 +2,35 @@
 #include "ui_mainwindow.h"
 
 //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
+//qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter << 16777220;
 //qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
 //https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
 #define Constants {
-constexpr int c_formsNone = 0;
-constexpr int c_formsGames = 1;
-constexpr int c_formsFriends = 2;
-constexpr int c_formsStatistic = 3;
-constexpr int c_formsFavorites = 4;
-constexpr int c_formsSettings = 5;
+constexpr int c_formsNone       = 0;
+constexpr int c_formsGames      = 1;
+constexpr int c_formsFriends    = 2;
+constexpr int c_formsStatistic  = 3;
+constexpr int c_formsFavorites  = 4;
+constexpr int c_formsSettings   = 5;
 #define ConstantsEnd }
 
 #define Init {
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow), _games(this) {
     ui->setupUi(this);
     initComponents();
+    if (Settings::getMyProfile() != "none") {
+        goToProfile(Settings::getMyProfile(), ProfileUrlType::id);
+    }
 }
 
 void MainWindow::initComponents() {
     _containerAchievementsForm = new FormContainerAchievements();
-        int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
-        QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-        QFont font(family, 10);
-        //font.setPointSize(12);
-        //font.setPixelSize(12);
-        qApp->setFont(font);
     ui->line->setVisible(false);
-    ui->ButtonMinimize->setFlat(true);
-    ui->ButtonMaximize->setFlat(true);
-    ui->ButtonExit->setFlat(true);
+
+    ui->ButtonMinimize  ->setFlat(true);
+    ui->ButtonMaximize  ->setFlat(true);
+    ui->ButtonExit      ->setFlat(true);
 
     ui->FormProgressBar->setVisible(false);
     ui->ButtonBack->setEnabled(false);
@@ -42,7 +41,7 @@ void MainWindow::initComponents() {
     ui->ButtonMaximize->setFixedSize(QSize(23, 23));
     ui->ButtonExit    ->setFixedSize(QSize(23, 23));
     this->setGeometry(Settings::getMainWindowGeometry());
-    this->move(Settings::getMainWindowPos().x(), Settings::getMainWindowPos().y());
+    this->move(Settings::getMainWindowPos());
     if(Settings::getMainWindowMaximize()) {
         this->showMaximized();
     }
@@ -63,9 +62,6 @@ void MainWindow::initComponents() {
     connect(ui->ButtonMaximize,      &QPushButton::clicked, this, &MainWindow::buttonMaximize_Clicked);
     connect(ui->ButtonMinimize,      &QPushButton::clicked, this, &MainWindow::buttonMinimize_Clicked);
 #define ConnectsEnd }
-    if (Settings::getMyProfile() != "none") {
-        goToProfile(Settings::getMyProfile(), ProfileUrlType::id);
-    }
 }
 #define InitEnd }
 
@@ -607,14 +603,14 @@ void MainWindow::addAchievements(SAchievementsPlayer &aAchievements, SGame &aGam
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
     if (currentProfile) {
-        _containerAchievementsForm->AddFormAchievement(aAchievements, currentProfile->getProfile(), aGames, _achievementsCount++);
+        _containerAchievementsForm->addFormAchievement(aAchievements, currentProfile->getProfile(), aGames, _achievementsCount++);
         _containerAchievementsForm->show();
     }
 }
 
 void MainWindow::removeAchievements(int index) {
     Q_UNUSED(index);
-    _achievementsCount--;
+    --_achievementsCount;
 }
 
 void MainWindow::containerAchievementsClose() {
@@ -700,7 +696,7 @@ FormContainerAchievements *MainWindow::createFormContainerAchievements() {
     _containerAchievementsForm = new FormContainerAchievements();
     connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &MainWindow::removeAchievements);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &MainWindow::containerAchievementsClose);
-    //_windowChildCount++;
+    //++_windowChildCount;
     return _containerAchievementsForm;
 }
 #define FormsCreateEnd }
@@ -822,7 +818,6 @@ void MainWindow::returnFromForms() {
 
 #define EventsStart {
 void MainWindow::keyPressEvent(QKeyEvent *aEvent) {
-    //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter << 16777220;
     if(aEvent->key() == Qt::Key_Enter) {
         buttonFindProfile_Clicked();
     }

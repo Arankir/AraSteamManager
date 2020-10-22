@@ -37,7 +37,7 @@ QT_MOC_LITERAL(1, 26, 20), // "s_removeAchievements"
 QT_MOC_LITERAL(2, 47, 0), // ""
 QT_MOC_LITERAL(3, 48, 5), // "index"
 QT_MOC_LITERAL(4, 54, 11), // "s_formClose"
-QT_MOC_LITERAL(5, 66, 18), // "AddFormAchievement"
+QT_MOC_LITERAL(5, 66, 18), // "addFormAchievement"
 QT_MOC_LITERAL(6, 85, 20), // "SAchievementsPlayer&"
 QT_MOC_LITERAL(7, 106, 2), // "pl"
 QT_MOC_LITERAL(8, 109, 8), // "SProfile"
@@ -54,7 +54,7 @@ QT_MOC_LITERAL(17, 188, 42) // "on_TabWidgetAchievements_tabC..."
     },
     "FormContainerAchievements\0"
     "s_removeAchievements\0\0index\0s_formClose\0"
-    "AddFormAchievement\0SAchievementsPlayer&\0"
+    "addFormAchievement\0SAchievementsPlayer&\0"
     "pl\0SProfile\0ids\0SGame&\0game\0num\0"
     "closeEvent\0QCloseEvent*\0OnLoadImage\0"
     "RequestImage*\0on_TabWidgetAchievements_tabCloseRequested"
@@ -105,7 +105,7 @@ void FormContainerAchievements::qt_static_metacall(QObject *_o, QMetaObject::Cal
         switch (_id) {
         case 0: _t->s_removeAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->s_formClose(); break;
-        case 2: _t->AddFormAchievement((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< SProfile(*)>(_a[2])),(*reinterpret_cast< SGame(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
+        case 2: _t->addFormAchievement((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< SProfile(*)>(_a[2])),(*reinterpret_cast< SGame(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
         case 3: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 4: _t->OnLoadImage((*reinterpret_cast< RequestImage*(*)>(_a[1]))); break;
         case 5: _t->on_TabWidgetAchievements_tabCloseRequested((*reinterpret_cast< int(*)>(_a[1]))); break;
