@@ -260,6 +260,60 @@
           <number>0</number>
          </property>
          <item>
+          <widget class="QScrollArea" name="ScrollAreaCategories">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContents</enum>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="widget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>188</width>
+              <height>80</height>
+             </rect>
+            </property>
+            <layout class="QFormLayout" name="layoutComboBoxCategories"/>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QScrollArea" name="ScrollAreaCheckCategories">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContents</enum>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="widget_2">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>188</width>
+              <height>80</height>
+             </rect>
+            </property>
+            <layout class="QFormLayout" name="layoutCheckBoxCategories"/>
+           </widget>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_11">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -348,7 +402,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tabStandart">
       <attribute name="title">
@@ -697,60 +751,6 @@
               </spacer>
              </item>
             </layout>
-           </item>
-           <item>
-            <widget class="QScrollArea" name="ScrollAreaCategories">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QAbstractScrollArea::AdjustToContents</enum>
-             </property>
-             <property name="widgetResizable">
-              <bool>true</bool>
-             </property>
-             <widget class="QWidget" name="widget">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>239</width>
-                <height>68</height>
-               </rect>
-              </property>
-              <layout class="QFormLayout" name="layoutComboBoxCategories"/>
-             </widget>
-            </widget>
-           </item>
-           <item>
-            <widget class="QScrollArea" name="ScrollAreaCheckCategories">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QAbstractScrollArea::AdjustToContents</enum>
-             </property>
-             <property name="widgetResizable">
-              <bool>true</bool>
-             </property>
-             <widget class="QWidget" name="widget_2">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>239</width>
-                <height>68</height>
-               </rect>
-              </property>
-              <layout class="QFormLayout" name="layoutCheckBoxCategories"/>
-             </widget>
-            </widget>
            </item>
           </layout>
          </widget>
@@ -1141,6 +1141,19 @@
       <attribute name="title">
        <string>Сравнение с друзьями</string>
       </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_17">
+       <item>
+        <widget class="QFrame" name="FrameCompare">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_12"/>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>

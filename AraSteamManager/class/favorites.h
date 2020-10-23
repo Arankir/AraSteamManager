@@ -2,11 +2,6 @@
 #define FAVORITES_H
 
 #include <QObject>
-#include <QDir>
-#include <QFile>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
 #include <QDateTime>
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sfriends.h"
@@ -24,7 +19,7 @@ public:
     FavoriteGame &operator=(const FavoriteGame &game);
 
     QJsonObject toJson();//Поменять на другой тип хранения данных
-    void fromJson(QJsonObject game);
+    FavoriteGame &fromJson(QJsonObject game);
     FavoriteGame &setIcon(QString icon);
 
     QString getUserId() const {return _userId;}
@@ -49,7 +44,7 @@ public:
     FavoriteFriend &operator=(const FavoriteFriend &steamFriend);
 
     QJsonObject toJson();//Поменять на другой тип хранения данных
-    void fromJson(QJsonObject);
+    FavoriteFriend &fromJson(QJsonObject);
     FavoriteFriend &setAdded(const QDateTime &date);
 
     QString getUserId()     const {return _userId;}
@@ -77,7 +72,7 @@ public:
     FavoriteAchievement &operator=(const FavoriteAchievement &fag);
 
     QJsonObject toJson();//Поменять на другой тип хранения данных
-    void fromJson(QJsonObject);
+    FavoriteAchievement &fromJson(QJsonObject);
     bool isThisAchievement(const SAchievement &achievement);
 
     QString getId()             const {return _id;}
@@ -111,7 +106,7 @@ public:
     bool removeAchievement(const SAchievement &achievement, const bool elseRemove = false);
     bool isInAchievements(const SAchievement &achievement);
     QJsonObject toJson();//Поменять на другой тип хранения данных
-    void fromJson(QJsonObject);
+    FavoriteAchievementsGame &fromJson(QJsonObject);
     bool isEqual(const SGame &game) const;
 
     QList<FavoriteAchievement>::iterator begin() {return _achievements.begin();}
@@ -131,26 +126,21 @@ private:
 class Favorites : public QObject {
     Q_OBJECT
 
-public slots:
-    bool addGame(const QString &idUser, const QString &icon, const int &appid, const QString &name, bool elseRemove = false);
+public:
+    Favorites(QObject *parent = nullptr): QObject(parent) {}
+
     bool addGame(const QString &idUser, const SGame &game, bool elseRemove = false);
-    bool addFriend(const QString &idUser, const QDateTime &added, const QString &id, const QString &name, bool elseRemove = false);
     bool addFriend(const QString &idUser, const SProfile &profileFriend, const SFriend &friendLink, bool elseRemove = false);
     bool addAchievement(const QString &idUser, const SGame &game, const SAchievement &achievement, bool elseRemove = false);
 
-    bool removeGame(const QString &idUser, const QString &icon, const int &appid, const QString &name, bool elseRemove = false);
-    bool removeGame(const QString &idUser, const SGame &game, bool elseRemove = false);
-    bool removeFriend(const QString &idUser, const QDateTime &added, const QString &id, const QString &name, bool elseRemove = false);
-    bool removeFriend(const QString &idUser, const SProfile &profileFriend, const SFriend &friendLink, bool elseRemove = false);
-    bool removeAchievement(const QString &idUser, const SGame &game, const SAchievement &achievement, bool elseRemove = false);
+    bool removeGame(const QString &idUser, const SGame &game, bool elseCreate = false);
+    bool removeFriend(const QString &idUser, const SProfile &profileFriend, const SFriend &friendLink, bool elseCreate = false);
+    bool removeAchievement(const QString &idUser, const SGame &game, const SAchievement &achievement, bool elseCreate = false);
 
-    QList<FavoriteGame> getGames() const {return _fGame;}
-    QList<FavoriteFriend> getFriends() const {return _fFriend;}
-    QList<FavoriteAchievementsGame> getAchievementsGames() const {return _fAchievement;}
-    FavoriteAchievementsGame &getAchievementsGame(const QString &idUser, const SGame &game) const;
-
-public:
-    Favorites(QObject *parent = nullptr): QObject(parent) {}
+    QList<FavoriteGame>             getGames()                                                      const {return _fGame;}
+    QList<FavoriteFriend>           getFriends()                                                    const {return _fFriend;}
+    QList<FavoriteAchievementsGame> getAchievementsGames()                                          const {return _fAchievement;}
+    FavoriteAchievementsGame&       getAchievementsGame(const QString &idUser, const SGame &game)   const;
 
 signals:
 
@@ -167,7 +157,6 @@ private slots:
     static QList<FavoriteGame> initGames();
     static QList<FavoriteFriend> initFriends();
     static QList<FavoriteAchievementsGame> initAchievements();
-
 
 private:
     static QList<FavoriteGame> _fGame;

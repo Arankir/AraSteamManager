@@ -29,6 +29,7 @@ SOURCES += \
     AchievementsSubForms/formachievementwidget.cpp \
     AchievementsSubForms/formcategoryvalue.cpp \
     AchievementsSubForms/formcategoryvalue_2.cpp \
+    AchievementsSubForms/formcomparefriends.cpp \
     AchievementsSubForms/formcompareprofilefilter.cpp \
     AchievementsSubForms/formtablesheaders.cpp \
     MainSubForms/formfavorites.cpp \
@@ -71,6 +72,7 @@ HEADERS += \
     AchievementsSubForms/formachievementwidget.h \
     AchievementsSubForms/formcategoryvalue.h \
     AchievementsSubForms/formcategoryvalue_2.h \
+    AchievementsSubForms/formcomparefriends.h \
     AchievementsSubForms/formcompareprofilefilter.h \
     AchievementsSubForms/formtablesheaders.h \
     MainSubForms/formfavorites.h \
@@ -112,6 +114,7 @@ FORMS += \
     AchievementsSubForms/formachievementwidget.ui \
     AchievementsSubForms/formcategoryvalue.ui \
     AchievementsSubForms/formcategoryvalue_2.ui \
+    AchievementsSubForms/formcomparefriends.ui \
     AchievementsSubForms/formcompareprofilefilter.ui \
     AchievementsSubForms/formtablesheaders.ui \
     MainSubForms/formfavorites.ui \

@@ -4,7 +4,7 @@
 #include <QWidget>
 #include "class/settings.h"
 
-enum class EnabledUpDown{
+enum class EnabledUpDown {
     none,
     up,
     down,
@@ -54,7 +54,6 @@ private slots:
 
 private:
     Ui::FormCategoryValue *ui;
-    //Settings _setting;
     int _position = 0;
     EnabledUpDown _isFirstLast = EnabledUpDown::none;
 };

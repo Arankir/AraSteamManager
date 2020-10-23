@@ -19,70 +19,9 @@ constexpr int c_tableAchievementColumnCount = 6;
 #define ConstantsEnd }
 
 FormTablesHeaders::FormTablesHeaders(SGame &aGame, const QString &aId, SAchievementsPlayer &aPlayer, QWidget *aParent): QWidget(aParent),
-ui(new Ui::FormTablesHeaders), _game(aGame), _noValueColumn(-1), _isUnique(false), _id(aId), _achievements(aPlayer) {
+ui(new Ui::FormTablesHeaders), _game(&aGame), _noValueColumn(-1), _isUnique(false), _id(aId), _achievements(aPlayer) {
     ui->setupUi(this);
-    ui->TableWidgetContent->setRowCount(0);
-    setColumnCount(0);
-    setColumnCount(c_tableAchievementColumnCount);
-
-    setType(TableType::standart);
-    ui->TableWidgetContent         ->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->TableWidgetHorizontalHeader->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-#define InitHeaderTable {
-    ui->TableWidgetHorizontalHeader->setRowCount(2);
-    setRowHeightHeaders(0, 33 + 18);
-    setRowHeightHeaders(1, 33 + 18);
-    _horizontalHeaderHeight = 2;
-    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); ++i) {
-        _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
-    }
-    setVerticalHeaderTitle(0, new  QTableWidgetItem(""));
-    setVerticalHeaderTitle(1, new  QTableWidgetItem("%"));
-#define InitHeaderTableEnd }
-
-    SProfiles profileData(_id, false, ProfileUrlType::id);
-
-    changeHorizontalTitle(c_tableAchievementColumnIcon,         "");
-    changeHorizontalTitle(c_tableAchievementColumnTitle,        tr("Название"));
-    changeHorizontalTitle(c_tableAchievementColumnDescription,  tr("Описание"));
-    changeHorizontalTitle(c_tableAchievementColumnWorld,        tr("По миру"));
-    changeHorizontalTitle(c_tableAchievementColumnReachedMy,    profileData[0]._personaName);
-    setColumnWidth(       c_tableAchievementColumnIcon,         65 + 8);
-    setColumnWidth(       c_tableAchievementColumnTitle,        100);
-    setColumnWidth(       c_tableAchievementColumnDescription,  315);
-    setColumnWidth(       c_tableAchievementColumnWorld,        65);
-    setColumnWidth(       c_tableAchievementColumnReachedMy,    80);
-
-    setVisibleColumn(     c_tableAchievementColumnAppid,        false);
-
-    _achievements   .set(SAchievementsPercentage(QString::number(_game._appID)))
-                    .set(SAchievementsGlobal(QString::number(_game._appID)));
-                    //.set(SAchievementsPlayer(QString::number(_game._appID), _id));// _appid = QString::number(_game._appID);
-    //_achievements._id = _id;
-    _achievements.update();
-
-#define ConnectSlots {
-    connect(&_achievements,                                      SIGNAL(s_finished()),         this,                                                   SLOT(pullTable()));
-    connect(ui->TableWidgetContent->horizontalScrollBar(),       &QScrollBar::sliderMoved,     ui->TableWidgetHorizontalHeader->horizontalScrollBar(), &QScrollBar::setValue);
-    connect(ui->TableWidgetContent->horizontalScrollBar(),       &QScrollBar::valueChanged,    ui->TableWidgetHorizontalHeader->horizontalScrollBar(), &QScrollBar::setValue);
-
-    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(), &QHeaderView::sectionClicked, ui->TableWidgetContent,                                 [=](int logicalIndex) {
-        ui->TableWidgetContent->sortByColumn(logicalIndex, ui->TableWidgetHorizontalHeader->horizontalHeader()->sortIndicatorOrder());
-    });
-    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(), &QHeaderView::sectionResized, ui->TableWidgetContent,                                 [=](int logicalIndex, int, int newSize) {
-        ui->TableWidgetContent->setColumnWidth(logicalIndex, newSize);
-    });
-
-    connect(ui->TableWidgetHorizontalHeader->verticalHeader(),   &QHeaderView::sectionResized, ui->TableWidgetContent,                                 [=](int /*logicalIndex*/, int oldSize, int newSize) {
-        _horizontalHeaderHeight += (newSize - oldSize);
-        resize();
-    });
-
-    connect(ui->TableWidgetContent,                              &QTableWidget::cellClicked,   this,                                                   [=](int aRow, int aCol) {
-        emit s_contentCellClicked(aRow, aCol);
-    });
-#define ConnectSlotsEnd }
+    init();
 }
 
 FormTablesHeaders::~FormTablesHeaders() {
@@ -573,7 +512,7 @@ bool FormTablesHeaders::addFriendColumn(SProfile &aFriendProfile) {
     avatarFriend->setAlignment(Qt::AlignCenter);
     ui->TableWidgetHorizontalHeader->setCellWidget(0, column, avatarFriend);
     SAchievements achievementsFriends = _achievements;
-    SAchievementsPlayer friendsPlayer(QString::number(_game._appID), aFriendProfile._steamID, false, this);
+    SAchievementsPlayer friendsPlayer(QString::number((*_game)._appID), aFriendProfile._steamID, false, this);
     achievementsFriends.set(friendsPlayer);
 //    Threading LoadFriendTable(this);
 //    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
@@ -766,7 +705,7 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
         QLabel *iconGame = new QLabel(this);
         getTableContent()->setCellWidget(row, c_tableAchievementColumnIcon, iconGame);
         if (achievement._displayName != "") {
-            iconGame->setPixmap(achievement.getIcon(_game._appID));
+            iconGame->setPixmap(achievement.getIcon((*_game)._appID));
 
             ui->TableWidgetContent->resizeRowToContents(row);
             if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {
@@ -897,6 +836,77 @@ void FormTablesHeaders::updateFilterFavorite(const QList<FavoriteAchievement> &a
         }
     }
     updateHiddenRows();
+}
+
+void FormTablesHeaders::setGame(SGame &aGame, const QString &aId, SAchievementsPlayer &aPlayer) {
+    _game = &aGame;
+    _id = aId;
+    _achievements = aPlayer;
+}
+
+void FormTablesHeaders::init() {
+    ui->TableWidgetContent->setRowCount(0);
+    setColumnCount(0);
+    setColumnCount(c_tableAchievementColumnCount);
+
+    setType(TableType::standart);
+    ui->TableWidgetContent         ->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TableWidgetHorizontalHeader->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+#define InitHeaderTable {
+    ui->TableWidgetHorizontalHeader->setRowCount(2);
+    setRowHeightHeaders(0, 33 + 18);
+    setRowHeightHeaders(1, 33 + 18);
+    _horizontalHeaderHeight = 2;
+    for (int i = 0; i < ui->TableWidgetHorizontalHeader->rowCount(); ++i) {
+        _horizontalHeaderHeight += ui->TableWidgetHorizontalHeader->rowHeight(i);
+    }
+    setVerticalHeaderTitle(0, new  QTableWidgetItem(""));
+    setVerticalHeaderTitle(1, new  QTableWidgetItem("%"));
+#define InitHeaderTableEnd }
+
+    SProfiles profileData(_id, false, ProfileUrlType::id);
+
+    changeHorizontalTitle(c_tableAchievementColumnIcon,         "");
+    changeHorizontalTitle(c_tableAchievementColumnTitle,        tr("Название"));
+    changeHorizontalTitle(c_tableAchievementColumnDescription,  tr("Описание"));
+    changeHorizontalTitle(c_tableAchievementColumnWorld,        tr("По миру"));
+    changeHorizontalTitle(c_tableAchievementColumnReachedMy,    profileData[0]._personaName);
+    setColumnWidth(       c_tableAchievementColumnIcon,         65 + 8);
+    setColumnWidth(       c_tableAchievementColumnTitle,        100);
+    setColumnWidth(       c_tableAchievementColumnDescription,  315);
+    setColumnWidth(       c_tableAchievementColumnWorld,        65);
+    setColumnWidth(       c_tableAchievementColumnReachedMy,    80);
+
+    setVisibleColumn(     c_tableAchievementColumnAppid,        false);
+
+    _achievements   .set(SAchievementsPercentage(QString::number((*_game)._appID)))
+                    .set(SAchievementsGlobal(QString::number((*_game)._appID)));
+                    //.set(SAchievementsPlayer(QString::number(_game._appID), _id));// _appid = QString::number(_game._appID);
+    //_achievements._id = _id;
+    _achievements.update();
+
+#define ConnectSlots {
+    connect(&_achievements,                                      SIGNAL(s_finished()),         this,                                                   SLOT(pullTable()));
+    connect(ui->TableWidgetContent->horizontalScrollBar(),       &QScrollBar::sliderMoved,     ui->TableWidgetHorizontalHeader->horizontalScrollBar(), &QScrollBar::setValue);
+    connect(ui->TableWidgetContent->horizontalScrollBar(),       &QScrollBar::valueChanged,    ui->TableWidgetHorizontalHeader->horizontalScrollBar(), &QScrollBar::setValue);
+
+    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(), &QHeaderView::sectionClicked, ui->TableWidgetContent,                                 [=](int logicalIndex) {
+        ui->TableWidgetContent->sortByColumn(logicalIndex, ui->TableWidgetHorizontalHeader->horizontalHeader()->sortIndicatorOrder());
+    });
+    connect(ui->TableWidgetHorizontalHeader->horizontalHeader(), &QHeaderView::sectionResized, ui->TableWidgetContent,                                 [=](int logicalIndex, int, int newSize) {
+        ui->TableWidgetContent->setColumnWidth(logicalIndex, newSize);
+    });
+
+    connect(ui->TableWidgetHorizontalHeader->verticalHeader(),   &QHeaderView::sectionResized, ui->TableWidgetContent,                                 [=](int /*logicalIndex*/, int oldSize, int newSize) {
+        _horizontalHeaderHeight += (newSize - oldSize);
+        resize();
+    });
+
+    connect(ui->TableWidgetContent,                              &QTableWidget::cellClicked,   this,                                                   [=](int aRow, int aCol) {
+        emit s_contentCellClicked(aRow, aCol);
+    });
+#define ConnectSlotsEnd }
 }
 
 void FormTablesHeaders::updateFilterTextAchievement(const QString &aNewText, bool aSolo, bool aCompare) {

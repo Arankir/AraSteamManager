@@ -1,0 +1,95 @@
+INFO 2020-10-23 09:44:52 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 09:44:56 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 09:45:06 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+WRNG 2020-10-23 09:45:33   QFormLayout::takeRow: Invalid widget
+INFO 2020-10-23 09:49:09 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 09:50:39 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 09:51:22 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 09:51:59 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 09:54:10 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 09:54:46 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 09:54:52 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 10:16:07 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 10:41:32 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 10:52:07 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 10:52:11 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 10:52:20 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+WRNG 2020-10-23 10:52:42   QFormLayout::takeRow: Invalid widget
+WRNG 2020-10-23 10:52:42   QFormLayout::takeRow: Invalid widget
+INFO 2020-10-23 10:52:48 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+WRNG 2020-10-23 10:52:48   QFormLayout::takeRow: Invalid widget
+WRNG 2020-10-23 10:52:48   QFormLayout::takeRow: Invalid widget
+INFO 2020-10-23 10:52:48 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+WRNG 2020-10-23 10:52:48   QFormLayout::takeRow: Invalid widget
+WRNG 2020-10-23 10:52:48   QFormLayout::takeRow: Invalid widget
+INFO 2020-10-23 10:52:50 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 10:52:59 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 10:53:00 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 10:53:09 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+FATL 2020-10-23 10:54:24   ASSERT failure in QList<T>::operator[]: "index out of range", file C:\Qt\5.14.2\mingw73_64\include/QtCore/qlist.h, line 579
+INFO 2020-10-23 10:54:38 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 10:54:59 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 11:08:51 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 11:08:53 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 11:09:01 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 11:09:37 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 11:09:56 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 11:10:12 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 11:10:20 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 11:10:42 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 11:12:16 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 11:12:18 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 11:12:26 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 11:34:37 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 11:35:07 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 11:35:11 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 11:35:20 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 11:35:34 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 11:43:10 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 11:44:44 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 11:45:00 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 11:45:03 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 11:45:11 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 11:45:40 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 11:45:58 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 11:46:23 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 12:26:26 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 12:26:28 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 12:26:36 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 12:26:58 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 12:27:32 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 12:27:50 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 12:29:12 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 12:44:54 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 14:11:35 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 14:11:38 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 14:11:45 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 14:11:54 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 14:53:16 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 14:53:18 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 14:54:41 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 14:54:46 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 14:57:14 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 14:57:17 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 14:57:25 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 15:00:35 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 15:02:20 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 15:03:01 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 15:03:21 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 15:38:42 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 15:38:49 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 15:38:57 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 15:39:24 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 15:39:50 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 15:40:25 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 15:40:35 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 16:10:16 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+FATL 2020-10-23 16:10:42   ASSERT failure in QList<T>::operator[]: "index out of range", file C:\Qt\5.14.2\mingw73_64\include/QtCore/qlist.h, line 579
+INFO 2020-10-23 16:25:17 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 16:25:21 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 16:25:30 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 16:27:52 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-23 16:28:11 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-23 16:28:14 virtual ThreadGames::~ThreadGames()  Thread games deleted
+INFO 2020-10-23 16:28:22 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 2020-10-23 16:33:44 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

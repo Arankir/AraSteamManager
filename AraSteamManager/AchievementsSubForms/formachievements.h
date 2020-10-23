@@ -28,6 +28,7 @@
 #include "subwidget/qradiobuttonwithdata.h"
 #include "subwidget/qcomboboxwithdata.h"
 #include "subwidget/qcheckboxwithdata.h"
+#include "AchievementsSubForms/formcomparefriends.h"
 
 namespace Ui {
     class FormAchievements;
@@ -55,8 +56,8 @@ enum class CategoryType {
 public slots:
     void progressLoading(int progress, int row);
     void onTablePulled(int reached, int notReached);
-    QString getProfileId();
-    int getGameAppId();
+    QString getProfileId() const {return _profile._steamID;}
+    int getGameAppId() const {return _game._appID;}
     void buttonUpdate_Clicked();
     
     void updateSettings();

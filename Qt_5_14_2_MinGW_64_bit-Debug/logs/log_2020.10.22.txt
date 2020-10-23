@@ -1653,3 +1653,7 @@ INFO 2020-10-22 17:12:30 virtual void MainWindow::closeEvent(QCloseEvent*)  Prog
 INFO 2020-10-22 17:12:52 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
 INFO 2020-10-22 17:12:55 virtual ThreadGames::~ThreadGames()  Thread games deleted
 INFO 2020-10-22 17:13:12 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-22 17:21:40 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-22 17:22:00 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-22 17:51:00 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-22 17:51:08 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

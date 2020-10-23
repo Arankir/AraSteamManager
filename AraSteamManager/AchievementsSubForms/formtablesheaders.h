@@ -46,6 +46,10 @@ public slots:
     void updateFilterCategory(int categoryIndex, bool clear, QList<QString> achievementNames = QList<QString>());
     void updateFilterFavorite(QJsonArray favoritesAchievement);
     void updateFilterFavorite(const QList<FavoriteAchievement> &favoritesAchievement);
+
+    void setGame(SGame &game, const QString &aId, SAchievementsPlayer &aPlayer);
+    void init();
+
     void setValuesMode(bool value);
     void setUniqueMode(bool unique);
     void setVisibleContentSelect(int pos, bool select);
@@ -59,6 +63,7 @@ public slots:
 
     void reverseCategoryColumn(int index);
 public:
+    explicit FormTablesHeaders(QWidget *parent = nullptr) : QWidget(parent) {}
     explicit FormTablesHeaders(SGame &game, const QString &id, SAchievementsPlayer &achievements, QWidget *parent = nullptr);
     ~FormTablesHeaders();
     void resizeEvent(QResizeEvent *event);
@@ -136,7 +141,7 @@ private:
     Ui::FormTablesHeaders *ui;
     bool _visibleHorizontal = true;
     int _horizontalHeaderHeight = 0;
-    SGame _game;
+    SGame *_game = nullptr;
     TableType _currentType;
     int _baseColumns;
     int _noValueColumn;

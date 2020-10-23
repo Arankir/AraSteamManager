@@ -61,6 +61,12 @@ public:
     QVBoxLayout *verticalLayout_9;
     QFrame *FrameFilter;
     QHBoxLayout *horizontalLayout_13;
+    QScrollArea *ScrollAreaCategories;
+    QWidget *widget;
+    QFormLayout *layoutComboBoxCategories;
+    QScrollArea *ScrollAreaCheckCategories;
+    QWidget *widget_2;
+    QFormLayout *layoutCheckBoxCategories;
     QSpacerItem *horizontalSpacer_11;
     QFrame *FrameReachedFilter;
     QVBoxLayout *verticalLayout_3;
@@ -113,12 +119,6 @@ public:
     QPushButton *ButtonChangeCategory_3;
     QPushButton *ButtonDeleteAllCategories_3;
     QSpacerItem *horizontalSpacer_6;
-    QScrollArea *ScrollAreaCategories;
-    QWidget *widget;
-    QFormLayout *layoutComboBoxCategories;
-    QScrollArea *ScrollAreaCheckCategories;
-    QWidget *widget_2;
-    QFormLayout *layoutCheckBoxCategories;
     QTableWidget *TableWidgetFriends;
     QFrame *FrameHideColumns;
     QHBoxLayout *horizontalLayout_8;
@@ -154,6 +154,9 @@ public:
     QWidget *scrollAreaWidgetContents;
     QHBoxLayout *horizontalLayout_11;
     QWidget *tabCompare;
+    QHBoxLayout *horizontalLayout_17;
+    QFrame *FrameCompare;
+    QVBoxLayout *verticalLayout_12;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -314,6 +317,39 @@ public:
         horizontalLayout_13 = new QHBoxLayout(FrameFilter);
         horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
         horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
+        ScrollAreaCategories = new QScrollArea(FrameFilter);
+        ScrollAreaCategories->setObjectName(QString::fromUtf8("ScrollAreaCategories"));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(ScrollAreaCategories->sizePolicy().hasHeightForWidth());
+        ScrollAreaCategories->setSizePolicy(sizePolicy2);
+        ScrollAreaCategories->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        ScrollAreaCategories->setWidgetResizable(true);
+        widget = new QWidget();
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(0, 0, 188, 80));
+        layoutComboBoxCategories = new QFormLayout(widget);
+        layoutComboBoxCategories->setObjectName(QString::fromUtf8("layoutComboBoxCategories"));
+        ScrollAreaCategories->setWidget(widget);
+
+        horizontalLayout_13->addWidget(ScrollAreaCategories);
+
+        ScrollAreaCheckCategories = new QScrollArea(FrameFilter);
+        ScrollAreaCheckCategories->setObjectName(QString::fromUtf8("ScrollAreaCheckCategories"));
+        sizePolicy2.setHeightForWidth(ScrollAreaCheckCategories->sizePolicy().hasHeightForWidth());
+        ScrollAreaCheckCategories->setSizePolicy(sizePolicy2);
+        ScrollAreaCheckCategories->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        ScrollAreaCheckCategories->setWidgetResizable(true);
+        widget_2 = new QWidget();
+        widget_2->setObjectName(QString::fromUtf8("widget_2"));
+        widget_2->setGeometry(QRect(0, 0, 188, 80));
+        layoutCheckBoxCategories = new QFormLayout(widget_2);
+        layoutCheckBoxCategories->setObjectName(QString::fromUtf8("layoutCheckBoxCategories"));
+        ScrollAreaCheckCategories->setWidget(widget_2);
+
+        horizontalLayout_13->addWidget(ScrollAreaCheckCategories);
+
         horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_13->addItem(horizontalSpacer_11);
@@ -403,19 +439,19 @@ public:
         ComboBoxCategories_3 = new QComboBox(FrameEditCategory);
         ComboBoxCategories_3->addItem(QString());
         ComboBoxCategories_3->setObjectName(QString::fromUtf8("ComboBoxCategories_3"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(ComboBoxCategories_3->sizePolicy().hasHeightForWidth());
-        ComboBoxCategories_3->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(ComboBoxCategories_3->sizePolicy().hasHeightForWidth());
+        ComboBoxCategories_3->setSizePolicy(sizePolicy3);
         ComboBoxCategories_3->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout_14->addWidget(ComboBoxCategories_3);
 
         LineEditTitleCategory_3 = new QLineEdit(FrameEditCategory);
         LineEditTitleCategory_3->setObjectName(QString::fromUtf8("LineEditTitleCategory_3"));
-        sizePolicy2.setHeightForWidth(LineEditTitleCategory_3->sizePolicy().hasHeightForWidth());
-        LineEditTitleCategory_3->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(LineEditTitleCategory_3->sizePolicy().hasHeightForWidth());
+        LineEditTitleCategory_3->setSizePolicy(sizePolicy3);
 
         horizontalLayout_14->addWidget(LineEditTitleCategory_3);
 
@@ -445,8 +481,8 @@ public:
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
         CheckBoxCategoryOneValue_3 = new QCheckBox(FrameEditCategory);
         CheckBoxCategoryOneValue_3->setObjectName(QString::fromUtf8("CheckBoxCategoryOneValue_3"));
-        sizePolicy2.setHeightForWidth(CheckBoxCategoryOneValue_3->sizePolicy().hasHeightForWidth());
-        CheckBoxCategoryOneValue_3->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(CheckBoxCategoryOneValue_3->sizePolicy().hasHeightForWidth());
+        CheckBoxCategoryOneValue_3->setSizePolicy(sizePolicy3);
 
         horizontalLayout_15->addWidget(CheckBoxCategoryOneValue_3);
 
@@ -484,11 +520,8 @@ public:
 
         ListWidgetValuesCategory = new QListWidget(FrameEditCategory);
         ListWidgetValuesCategory->setObjectName(QString::fromUtf8("ListWidgetValuesCategory"));
-        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Minimum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(ListWidgetValuesCategory->sizePolicy().hasHeightForWidth());
-        ListWidgetValuesCategory->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(ListWidgetValuesCategory->sizePolicy().hasHeightForWidth());
+        ListWidgetValuesCategory->setSizePolicy(sizePolicy2);
         ListWidgetValuesCategory->setMaximumSize(QSize(16777215, 135));
         ListWidgetValuesCategory->setDragEnabled(true);
         ListWidgetValuesCategory->setDragDropMode(QAbstractItemView::InternalMove);
@@ -580,36 +613,6 @@ public:
 
 
         verticalLayout_5->addLayout(LayoutCategoriesSettings);
-
-        ScrollAreaCategories = new QScrollArea(FrameCategories);
-        ScrollAreaCategories->setObjectName(QString::fromUtf8("ScrollAreaCategories"));
-        sizePolicy3.setHeightForWidth(ScrollAreaCategories->sizePolicy().hasHeightForWidth());
-        ScrollAreaCategories->setSizePolicy(sizePolicy3);
-        ScrollAreaCategories->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        ScrollAreaCategories->setWidgetResizable(true);
-        widget = new QWidget();
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 239, 68));
-        layoutComboBoxCategories = new QFormLayout(widget);
-        layoutComboBoxCategories->setObjectName(QString::fromUtf8("layoutComboBoxCategories"));
-        ScrollAreaCategories->setWidget(widget);
-
-        verticalLayout_5->addWidget(ScrollAreaCategories);
-
-        ScrollAreaCheckCategories = new QScrollArea(FrameCategories);
-        ScrollAreaCheckCategories->setObjectName(QString::fromUtf8("ScrollAreaCheckCategories"));
-        sizePolicy3.setHeightForWidth(ScrollAreaCheckCategories->sizePolicy().hasHeightForWidth());
-        ScrollAreaCheckCategories->setSizePolicy(sizePolicy3);
-        ScrollAreaCheckCategories->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        ScrollAreaCheckCategories->setWidgetResizable(true);
-        widget_2 = new QWidget();
-        widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        widget_2->setGeometry(QRect(0, 0, 239, 68));
-        layoutCheckBoxCategories = new QFormLayout(widget_2);
-        layoutCheckBoxCategories->setObjectName(QString::fromUtf8("layoutCheckBoxCategories"));
-        ScrollAreaCheckCategories->setWidget(widget_2);
-
-        verticalLayout_5->addWidget(ScrollAreaCheckCategories);
 
         TableWidgetFriends = new QTableWidget(FrameContainer);
         if (TableWidgetFriends->columnCount() < 2)
@@ -736,16 +739,16 @@ public:
         ComboBoxCategories = new QComboBox(tabEditCategory);
         ComboBoxCategories->addItem(QString());
         ComboBoxCategories->setObjectName(QString::fromUtf8("ComboBoxCategories"));
-        sizePolicy2.setHeightForWidth(ComboBoxCategories->sizePolicy().hasHeightForWidth());
-        ComboBoxCategories->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(ComboBoxCategories->sizePolicy().hasHeightForWidth());
+        ComboBoxCategories->setSizePolicy(sizePolicy3);
         ComboBoxCategories->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout_19->addWidget(ComboBoxCategories);
 
         LineEditTitleCategory = new QLineEdit(tabEditCategory);
         LineEditTitleCategory->setObjectName(QString::fromUtf8("LineEditTitleCategory"));
-        sizePolicy2.setHeightForWidth(LineEditTitleCategory->sizePolicy().hasHeightForWidth());
-        LineEditTitleCategory->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(LineEditTitleCategory->sizePolicy().hasHeightForWidth());
+        LineEditTitleCategory->setSizePolicy(sizePolicy3);
 
         horizontalLayout_19->addWidget(LineEditTitleCategory);
 
@@ -780,8 +783,8 @@ public:
 
         CheckBoxCategoryOneValue = new QCheckBox(tabEditCategory);
         CheckBoxCategoryOneValue->setObjectName(QString::fromUtf8("CheckBoxCategoryOneValue"));
-        sizePolicy2.setHeightForWidth(CheckBoxCategoryOneValue->sizePolicy().hasHeightForWidth());
-        CheckBoxCategoryOneValue->setSizePolicy(sizePolicy2);
+        sizePolicy3.setHeightForWidth(CheckBoxCategoryOneValue->sizePolicy().hasHeightForWidth());
+        CheckBoxCategoryOneValue->setSizePolicy(sizePolicy3);
 
         horizontalLayout_18->addWidget(CheckBoxCategoryOneValue);
 
@@ -821,6 +824,17 @@ public:
         tabWidget->addTab(tabEditCategory, QString());
         tabCompare = new QWidget();
         tabCompare->setObjectName(QString::fromUtf8("tabCompare"));
+        horizontalLayout_17 = new QHBoxLayout(tabCompare);
+        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
+        FrameCompare = new QFrame(tabCompare);
+        FrameCompare->setObjectName(QString::fromUtf8("FrameCompare"));
+        FrameCompare->setFrameShape(QFrame::StyledPanel);
+        FrameCompare->setFrameShadow(QFrame::Raised);
+        verticalLayout_12 = new QVBoxLayout(FrameCompare);
+        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+
+        horizontalLayout_17->addWidget(FrameCompare);
+
         tabWidget->addTab(tabCompare, QString());
 
         verticalLayout_6->addWidget(tabWidget);
@@ -828,7 +842,7 @@ public:
 
         retranslateUi(FormAchievements);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(FormAchievements);

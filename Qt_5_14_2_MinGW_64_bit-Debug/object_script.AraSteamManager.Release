@@ -2,6 +2,7 @@ release/formachievements.o
 release/formachievementwidget.o
 release/formcategoryvalue.o
 release/formcategoryvalue_2.o
+release/formcomparefriends.o
 release/formcompareprofilefilter.o
 release/formtablesheaders.o
 release/formfavorites.o
@@ -44,6 +45,7 @@ release/moc_formachievements.o
 release/moc_formachievementwidget.o
 release/moc_formcategoryvalue.o
 release/moc_formcategoryvalue_2.o
+release/moc_formcomparefriends.o
 release/moc_formcompareprofilefilter.o
 release/moc_formtablesheaders.o
 release/moc_formfavorites.o

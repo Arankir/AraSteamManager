@@ -11,8 +11,7 @@ enum class StatusValue {
     error
 };
 
-class Sapi : public QObject
-{
+class Sapi : public QObject {
     Q_OBJECT
 public:
     StatusValue getStatus() const;
