@@ -13,6 +13,7 @@ debug/formsettings.o
 debug/formstatistics.o
 debug/requestdata.o
 debug/requestimage.o
+debug/MultiSelectComboBox.o
 debug/donutbreakdownchart.o
 debug/mainslice.o
 debug/threadachievements.o
@@ -57,6 +58,7 @@ debug/moc_formsettings.o
 debug/moc_formstatistics.o
 debug/moc_requestdata.o
 debug/moc_requestimage.o
+debug/moc_MultiSelectComboBox.o
 debug/moc_threadachievements.o
 debug/moc_threadfriends.o
 debug/moc_threadgames.o

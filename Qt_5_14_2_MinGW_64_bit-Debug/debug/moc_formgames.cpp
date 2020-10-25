@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
-    QByteArrayData data[52];
-    char stringdata0[703];
+    QByteArrayData data[53];
+    char stringdata0[721];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -83,7 +83,8 @@ QT_MOC_LITERAL(47, 656, 10), // "createMenu"
 QT_MOC_LITERAL(48, 667, 6), // "QMenu*"
 QT_MOC_LITERAL(49, 674, 5), // "aGame"
 QT_MOC_LITERAL(50, 680, 6), // "aIndex"
-QT_MOC_LITERAL(51, 687, 15) // "loadHiddenGames"
+QT_MOC_LITERAL(51, 687, 15), // "loadHiddenGames"
+QT_MOC_LITERAL(52, 703, 17) // "updateCurrentGame"
 
     },
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
@@ -104,7 +105,8 @@ QT_MOC_LITERAL(51, 687, 15) // "loadHiddenGames"
     "buttonAchievements_Clicked\0"
     "buttonFavorite_Clicked\0buttonHide_Clicked\0"
     "createThread\0hideHiddenGames\0createMenu\0"
-    "QMenu*\0aGame\0aIndex\0loadHiddenGames"
+    "QMenu*\0aGame\0aIndex\0loadHiddenGames\0"
+    "updateCurrentGame"
 };
 #undef QT_MOC_LITERAL
 
@@ -114,7 +116,7 @@ static const uint qt_meta_data_FormGames[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      27,   14, // methods
+      28,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -122,35 +124,36 @@ static const uint qt_meta_data_FormGames[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  149,    2, 0x06 /* Public */,
-       4,    2,  152,    2, 0x06 /* Public */,
-       5,    1,  157,    2, 0x06 /* Public */,
-       7,    2,  160,    2, 0x06 /* Public */,
+       1,    1,  154,    2, 0x06 /* Public */,
+       4,    2,  157,    2, 0x06 /* Public */,
+       5,    1,  162,    2, 0x06 /* Public */,
+       7,    2,  165,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      12,    0,  165,    2, 0x0a /* Public */,
-      13,    0,  166,    2, 0x0a /* Public */,
-      14,    1,  167,    2, 0x0a /* Public */,
-      16,    1,  170,    2, 0x0a /* Public */,
-      19,    1,  173,    2, 0x0a /* Public */,
-      22,    1,  176,    2, 0x08 /* Private */,
-      25,    0,  179,    2, 0x08 /* Private */,
-      26,    0,  180,    2, 0x08 /* Private */,
-      27,    0,  181,    2, 0x08 /* Private */,
-      28,    1,  182,    2, 0x08 /* Private */,
-      31,    1,  185,    2, 0x08 /* Private */,
-      33,    1,  188,    2, 0x08 /* Private */,
-      35,    1,  191,    2, 0x08 /* Private */,
-      37,    0,  194,    2, 0x08 /* Private */,
-      38,    2,  195,    2, 0x08 /* Private */,
-      41,    2,  200,    2, 0x08 /* Private */,
-      42,    0,  205,    2, 0x08 /* Private */,
-      43,    0,  206,    2, 0x08 /* Private */,
-      44,    0,  207,    2, 0x08 /* Private */,
-      45,    0,  208,    2, 0x08 /* Private */,
-      46,    0,  209,    2, 0x08 /* Private */,
-      47,    2,  210,    2, 0x08 /* Private */,
-      51,    0,  215,    2, 0x08 /* Private */,
+      12,    0,  170,    2, 0x0a /* Public */,
+      13,    0,  171,    2, 0x0a /* Public */,
+      14,    1,  172,    2, 0x0a /* Public */,
+      16,    1,  175,    2, 0x0a /* Public */,
+      19,    1,  178,    2, 0x0a /* Public */,
+      22,    1,  181,    2, 0x08 /* Private */,
+      25,    0,  184,    2, 0x08 /* Private */,
+      26,    0,  185,    2, 0x08 /* Private */,
+      27,    0,  186,    2, 0x08 /* Private */,
+      28,    1,  187,    2, 0x08 /* Private */,
+      31,    1,  190,    2, 0x08 /* Private */,
+      33,    1,  193,    2, 0x08 /* Private */,
+      35,    1,  196,    2, 0x08 /* Private */,
+      37,    0,  199,    2, 0x08 /* Private */,
+      38,    2,  200,    2, 0x08 /* Private */,
+      41,    2,  205,    2, 0x08 /* Private */,
+      42,    0,  210,    2, 0x08 /* Private */,
+      43,    0,  211,    2, 0x08 /* Private */,
+      44,    0,  212,    2, 0x08 /* Private */,
+      45,    0,  213,    2, 0x08 /* Private */,
+      46,    0,  214,    2, 0x08 /* Private */,
+      47,    2,  215,    2, 0x08 /* Private */,
+      51,    0,  220,    2, 0x08 /* Private */,
+      52,    0,  221,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -181,6 +184,7 @@ static const uint qt_meta_data_FormGames[] = {
     QMetaType::Void,
     QMetaType::Void,
     0x80000000 | 48, 0x80000000 | 10, QMetaType::Int,   49,   50,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -220,6 +224,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 25: { QMenu* _r = _t->createMenu((*reinterpret_cast< SGame(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         case 26: _t->loadHiddenGames(); break;
+        case 27: _t->updateCurrentGame(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -302,13 +307,13 @@ int FormGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 27)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 27;
+        _id -= 28;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 27)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 27;
+        _id -= 28;
     }
     return _id;
 }

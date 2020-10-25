@@ -82,30 +82,30 @@ int ThreadFriends::fill() {
 
         QStandardItem *itemIndex = new QStandardItem(QString::number(row));
 
-        QStandardItem *itemIcon2 = new QStandardItem();
-        itemIcon2->setData(QVariant(friendP.second.getPixmapAvatar()), Qt::DecorationRole);
-        itemIcon2->setFlags(Qt::ItemFlag::ItemIsEnabled);
+        QStandardItem *itemIcon = new QStandardItem();
+        itemIcon->setData(QVariant(friendP.second.getPixmapAvatar()), Qt::DecorationRole);
+        itemIcon->setFlags(Qt::ItemFlag::ItemIsEnabled);
 
-        QStandardItem *itemNickName2 = new QStandardItem(friendP.second._personaName);
+        QStandardItem *itemNickName = new QStandardItem(friendP.second._personaName);
 
-        QStandardItem *itemAdded2 = new QStandardItem(friendP.first._friend_since.toString("yyyy.MM.dd hh:mm"));
+        QStandardItem *itemAdded = new QStandardItem(friendP.first._friend_since.toString("yyyy.MM.dd hh:mm"));
 
-        QStandardItem *itemState2 = getState(friendP.second._gameExtraInfo, friendP.second._personaState);
+        QStandardItem *itemState = getState(friendP.second._gameExtraInfo, friendP.second._personaState);
 
-        QStandardItem *itemPrivacy2 = getPrivacy(friendP.second._communityVisibilityState);
+        QStandardItem *itemPrivacy = getPrivacy(friendP.second._communityVisibilityState);
 
-        itemNickName2->setFont(font);
-        itemAdded2   ->setFont(font);
-        itemState2   ->setFont(font);
-        itemPrivacy2 ->setFont(font);
+        itemNickName->setFont(font);
+        itemAdded   ->setFont(font);
+        itemState   ->setFont(font);
+        itemPrivacy ->setFont(font);
 
         model->setItem(row, c_tableColumnID, itemId);
         model->setItem(row, c_tableColumnIndex, itemIndex);
-        model->setItem(row, c_tableColumnIcon, itemIcon2);
-        model->setItem(row, c_tableColumnName, itemNickName2);
-        model->setItem(row, c_tableColumnAdded, itemAdded2);
-        model->setItem(row, c_tableColumnStatus, itemState2);
-        model->setItem(row, c_tableColumnisPublic, itemPrivacy2);
+        model->setItem(row, c_tableColumnIcon, itemIcon);
+        model->setItem(row, c_tableColumnName, itemNickName);
+        model->setItem(row, c_tableColumnAdded, itemAdded);
+        model->setItem(row, c_tableColumnStatus, itemState);
+        model->setItem(row, c_tableColumnisPublic, itemPrivacy);
         emit s_progress(row, row);
         ++row;
     }

@@ -65,6 +65,7 @@ SOURCES       = ..\AraSteamManager\AchievementsSubForms\formachievements.cpp \
 		..\AraSteamManager\MainSubForms\formstatistics.cpp \
 		..\AraSteamManager\class\Network\requestdata.cpp \
 		..\AraSteamManager\class\Network\requestimage.cpp \
+		..\AraSteamManager\class\NotMine\MultiSelectComboBox.cpp \
 		..\AraSteamManager\class\NotMine\donutbreakdownchart.cpp \
 		..\AraSteamManager\class\NotMine\mainslice.cpp \
 		..\AraSteamManager\class\Threads\threadachievements.cpp \
@@ -108,6 +109,7 @@ SOURCES       = ..\AraSteamManager\AchievementsSubForms\formachievements.cpp \
 		release\moc_formstatistics.cpp \
 		release\moc_requestdata.cpp \
 		release\moc_requestimage.cpp \
+		release\moc_MultiSelectComboBox.cpp \
 		release\moc_threadachievements.cpp \
 		release\moc_threadfriends.cpp \
 		release\moc_threadgames.cpp \
@@ -143,6 +145,7 @@ OBJECTS       = release/formachievements.o \
 		release/formstatistics.o \
 		release/requestdata.o \
 		release/requestimage.o \
+		release/MultiSelectComboBox.o \
 		release/donutbreakdownchart.o \
 		release/mainslice.o \
 		release/threadachievements.o \
@@ -187,6 +190,7 @@ OBJECTS       = release/formachievements.o \
 		release/moc_formstatistics.o \
 		release/moc_requestdata.o \
 		release/moc_requestimage.o \
+		release/moc_MultiSelectComboBox.o \
 		release/moc_threadachievements.o \
 		release/moc_threadfriends.o \
 		release/moc_threadgames.o \
@@ -223,6 +227,7 @@ DIST          =  ..\AraSteamManager\AchievementsSubForms\formachievements.h \
 		..\AraSteamManager\MainSubForms\formstatistics.h \
 		..\AraSteamManager\class\Network\requestdata.h \
 		..\AraSteamManager\class\Network\requestimage.h \
+		..\AraSteamManager\class\NotMine\MultiSelectComboBox.h \
 		..\AraSteamManager\class\NotMine\donutbreakdownchart.h \
 		..\AraSteamManager\class\NotMine\mainslice.h \
 		..\AraSteamManager\class\Threads\threadachievements.h \
@@ -263,6 +268,7 @@ DIST          =  ..\AraSteamManager\AchievementsSubForms\formachievements.h \
 		..\AraSteamManager\MainSubForms\formstatistics.cpp \
 		..\AraSteamManager\class\Network\requestdata.cpp \
 		..\AraSteamManager\class\Network\requestimage.cpp \
+		..\AraSteamManager\class\NotMine\MultiSelectComboBox.cpp \
 		..\AraSteamManager\class\NotMine\donutbreakdownchart.cpp \
 		..\AraSteamManager\class\NotMine\mainslice.cpp \
 		..\AraSteamManager\class\Threads\threadachievements.cpp \
@@ -312,10 +318,11 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) AraSteamManager.zip $(SOURCES) $(DIST) ..\AraSteamManager\AraSteamManager.pro D:\Qt\5.14.2\mingw73_64\mkspecs\features\spec_pre.prf D:\Qt\5.14.2\mingw73_64\mkspecs\qdevice.pri D:\Qt\5.14.2\mingw73_64\mkspecs\features\device_config.prf D:\Qt\5.14.2\mingw73_64\mkspecs\common\sanitize.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\gcc-base.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\g++-base.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\angle.conf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\windows_vulkan_sdk.prf D:\Qt\5.14.2\mingw73_64\mkspecs\common\windows-vulkan.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\g++-win32.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\windows-desktop.conf D:\Qt\5.14.2\mingw73_64\mkspecs\qconfig.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bodymovin_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_edid_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickshapes_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_vulkan_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\features\qt_functions.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qt_config.prf D:\Qt\5.14.2\mingw73_64\mkspecs\win32-g++\qmake.conf D:\Qt\5.14.2\mingw73_64\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\5.14.2\mingw73_64\mkspecs\features\exclusive_builds.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\toolchain.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\default_pre.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\default_pre.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\resolve_config.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\exclusive_builds_post.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\default_post.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\build_pass.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qml_debug.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\precompile_header.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\warn_on.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qt.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\resources_functions.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\resources.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\moc.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\opengl.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\uic.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qmake_use.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\file_copies.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\windows.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\testcase_targets.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\exceptions.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\yacc.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\lex.prf ..\AraSteamManager\AraSteamManager.pro ..\AraSteamManager\images\resimg.qrc ..\AraSteamManager\languages\lang.qrc D:\Qt\5.14.2\mingw73_64\lib\Qt5Charts.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Widgets.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Gui.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Network.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Core.prl D:\Qt\5.14.2\mingw73_64\lib\qtmain.prl "AraSteamManager_en.ts AraSteamManager_ru.ts" AraSteamManager_en.ts AraSteamManager_ru.ts  ..\AraSteamManager\images\resimg.qrc ..\AraSteamManager\languages\lang.qrc D:\Qt\5.14.2\mingw73_64\mkspecs\features\data\dummy.cpp ..\AraSteamManager\AchievementsSubForms\formachievements.h ..\AraSteamManager\AchievementsSubForms\formachievementwidget.h ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.h ..\AraSteamManager\AchievementsSubForms\formcategoryvalue_2.h ..\AraSteamManager\AchievementsSubForms\formcomparefriends.h ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.h ..\AraSteamManager\AchievementsSubForms\formtablesheaders.h ..\AraSteamManager\MainSubForms\formfavorites.h ..\AraSteamManager\MainSubForms\formfriends.h ..\AraSteamManager\MainSubForms\formgames.h ..\AraSteamManager\MainSubForms\formprofile.h ..\AraSteamManager\MainSubForms\formsettings.h ..\AraSteamManager\MainSubForms\formstatistics.h ..\AraSteamManager\class\Network\requestdata.h ..\AraSteamManager\class\Network\requestimage.h ..\AraSteamManager\class\NotMine\donutbreakdownchart.h ..\AraSteamManager\class\NotMine\mainslice.h ..\AraSteamManager\class\Threads\threadachievements.h ..\AraSteamManager\class\Threads\threadfriends.h ..\AraSteamManager\class\Threads\threadgames.h ..\AraSteamManager\class\Threads\threading.h ..\AraSteamManager\class\Threads\threadstatistics.h ..\AraSteamManager\class\categoriesgame.h ..\AraSteamManager\class\favorites.h ..\AraSteamManager\class\filter.h ..\AraSteamManager\class\settings.h ..\AraSteamManager\class\steamapi\Sachievements.h ..\AraSteamManager\class\steamapi\Sapi.h ..\AraSteamManager\class\steamapi\Sbans.h ..\AraSteamManager\class\steamapi\Sfriends.h ..\AraSteamManager\class\steamapi\Sgames.h ..\AraSteamManager\class\steamapi\Slevels.h ..\AraSteamManager\class\steamapi\Sprofile.h ..\AraSteamManager\formcontainerachievements.h ..\AraSteamManager\frameless.h ..\AraSteamManager\mainwindow.h ..\AraSteamManager\subwidget\freezerowstable.h ..\AraSteamManager\subwidget\qbuttonwithdata.h ..\AraSteamManager\subwidget\qcheckboxwithdata.h ..\AraSteamManager\subwidget\qcomboboxwithdata.h ..\AraSteamManager\subwidget\qradiobuttonwithdata.h  ..\AraSteamManager\AchievementsSubForms\formachievements.cpp ..\AraSteamManager\AchievementsSubForms\formachievementwidget.cpp ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.cpp ..\AraSteamManager\AchievementsSubForms\formcategoryvalue_2.cpp ..\AraSteamManager\AchievementsSubForms\formcomparefriends.cpp ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.cpp ..\AraSteamManager\AchievementsSubForms\formtablesheaders.cpp ..\AraSteamManager\MainSubForms\formfavorites.cpp ..\AraSteamManager\MainSubForms\formfriends.cpp ..\AraSteamManager\MainSubForms\formgames.cpp ..\AraSteamManager\MainSubForms\formprofile.cpp ..\AraSteamManager\MainSubForms\formsettings.cpp ..\AraSteamManager\MainSubForms\formstatistics.cpp ..\AraSteamManager\class\Network\requestdata.cpp ..\AraSteamManager\class\Network\requestimage.cpp ..\AraSteamManager\class\NotMine\donutbreakdownchart.cpp ..\AraSteamManager\class\NotMine\mainslice.cpp ..\AraSteamManager\class\Threads\threadachievements.cpp ..\AraSteamManager\class\Threads\threadfriends.cpp ..\AraSteamManager\class\Threads\threadgames.cpp ..\AraSteamManager\class\Threads\threading.cpp ..\AraSteamManager\class\Threads\threadstatistics.cpp ..\AraSteamManager\class\categoriesgame.cpp ..\AraSteamManager\class\favorites.cpp ..\AraSteamManager\class\filter.cpp ..\AraSteamManager\class\settings.cpp ..\AraSteamManager\class\steamapi\Sachievements.cpp ..\AraSteamManager\class\steamapi\Sapi.cpp ..\AraSteamManager\class\steamapi\Sbans.cpp ..\AraSteamManager\class\steamapi\Sfriends.cpp ..\AraSteamManager\class\steamapi\Sgames.cpp ..\AraSteamManager\class\steamapi\Slevels.cpp ..\AraSteamManager\class\steamapi\Sprofile.cpp ..\AraSteamManager\formcontainerachievements.cpp ..\AraSteamManager\frameless.cpp ..\AraSteamManager\main.cpp ..\AraSteamManager\mainwindow.cpp ..\AraSteamManager\subwidget\freezerowstable.cpp ..\AraSteamManager\subwidget\qbuttonwithdata.cpp ..\AraSteamManager\subwidget\qcheckboxwithdata.cpp ..\AraSteamManager\subwidget\qcomboboxwithdata.cpp ..\AraSteamManager\subwidget\qradiobuttonwithdata.cpp ..\AraSteamManager\AchievementsSubForms\formachievements.ui ..\AraSteamManager\AchievementsSubForms\formachievementwidget.ui ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.ui ..\AraSteamManager\AchievementsSubForms\formcategoryvalue_2.ui ..\AraSteamManager\AchievementsSubForms\formcomparefriends.ui ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.ui ..\AraSteamManager\AchievementsSubForms\formtablesheaders.ui ..\AraSteamManager\MainSubForms\formfavorites.ui ..\AraSteamManager\MainSubForms\formfriends.ui ..\AraSteamManager\MainSubForms\formgames.ui ..\AraSteamManager\MainSubForms\formprofile.ui ..\AraSteamManager\MainSubForms\formsettings.ui ..\AraSteamManager\MainSubForms\formstatistics.ui ..\AraSteamManager\formcontainerachievements.ui ..\AraSteamManager\mainwindow.ui    
+	$(ZIP) AraSteamManager.zip $(SOURCES) $(DIST) ..\AraSteamManager\AraSteamManager.pro D:\Qt\5.14.2\mingw73_64\mkspecs\features\spec_pre.prf D:\Qt\5.14.2\mingw73_64\mkspecs\qdevice.pri D:\Qt\5.14.2\mingw73_64\mkspecs\features\device_config.prf D:\Qt\5.14.2\mingw73_64\mkspecs\common\sanitize.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\gcc-base.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\g++-base.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\angle.conf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\windows_vulkan_sdk.prf D:\Qt\5.14.2\mingw73_64\mkspecs\common\windows-vulkan.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\g++-win32.conf D:\Qt\5.14.2\mingw73_64\mkspecs\common\windows-desktop.conf D:\Qt\5.14.2\mingw73_64\mkspecs\qconfig.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bodymovin_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_core_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_edid_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_help_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_location_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_network_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_positioningquick_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlmodels_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qmlworkerscript_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3d_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dassetimport_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3drender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3druntimerender_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick3dutils_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickshapes_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_script_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_virtualkeyboard_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_vulkan_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\5.14.2\mingw73_64\mkspecs\features\qt_functions.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qt_config.prf D:\Qt\5.14.2\mingw73_64\mkspecs\win32-g++\qmake.conf D:\Qt\5.14.2\mingw73_64\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\5.14.2\mingw73_64\mkspecs\features\exclusive_builds.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\toolchain.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\default_pre.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\default_pre.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\resolve_config.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\exclusive_builds_post.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\default_post.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\build_pass.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qml_debug.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\precompile_header.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\warn_on.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qt.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\resources_functions.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\resources.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\moc.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\opengl.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\uic.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\qmake_use.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\file_copies.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\win32\windows.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\testcase_targets.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\exceptions.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\yacc.prf D:\Qt\5.14.2\mingw73_64\mkspecs\features\lex.prf ..\AraSteamManager\AraSteamManager.pro ..\AraSteamManager\images\resimg.qrc ..\AraSteamManager\languages\lang.qrc D:\Qt\5.14.2\mingw73_64\lib\Qt5Charts.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Widgets.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Gui.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Network.prl D:\Qt\5.14.2\mingw73_64\lib\Qt5Core.prl D:\Qt\5.14.2\mingw73_64\lib\qtmain.prl "AraSteamManager_en.ts AraSteamManager_ru.ts" AraSteamManager_en.ts AraSteamManager_ru.ts  ..\AraSteamManager\images\resimg.qrc ..\AraSteamManager\languages\lang.qrc D:\Qt\5.14.2\mingw73_64\mkspecs\features\data\dummy.cpp ..\AraSteamManager\AchievementsSubForms\formachievements.h ..\AraSteamManager\AchievementsSubForms\formachievementwidget.h ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.h ..\AraSteamManager\AchievementsSubForms\formcategoryvalue_2.h ..\AraSteamManager\AchievementsSubForms\formcomparefriends.h ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.h ..\AraSteamManager\AchievementsSubForms\formtablesheaders.h ..\AraSteamManager\MainSubForms\formfavorites.h ..\AraSteamManager\MainSubForms\formfriends.h ..\AraSteamManager\MainSubForms\formgames.h ..\AraSteamManager\MainSubForms\formprofile.h ..\AraSteamManager\MainSubForms\formsettings.h ..\AraSteamManager\MainSubForms\formstatistics.h ..\AraSteamManager\class\Network\requestdata.h ..\AraSteamManager\class\Network\requestimage.h ..\AraSteamManager\class\NotMine\MultiSelectComboBox.h ..\AraSteamManager\class\NotMine\donutbreakdownchart.h ..\AraSteamManager\class\NotMine\mainslice.h ..\AraSteamManager\class\Threads\threadachievements.h ..\AraSteamManager\class\Threads\threadfriends.h ..\AraSteamManager\class\Threads\threadgames.h ..\AraSteamManager\class\Threads\threading.h ..\AraSteamManager\class\Threads\threadstatistics.h ..\AraSteamManager\class\categoriesgame.h ..\AraSteamManager\class\favorites.h ..\AraSteamManager\class\filter.h ..\AraSteamManager\class\settings.h ..\AraSteamManager\class\steamapi\Sachievements.h ..\AraSteamManager\class\steamapi\Sapi.h ..\AraSteamManager\class\steamapi\Sbans.h ..\AraSteamManager\class\steamapi\Sfriends.h ..\AraSteamManager\class\steamapi\Sgames.h ..\AraSteamManager\class\steamapi\Slevels.h ..\AraSteamManager\class\steamapi\Sprofile.h ..\AraSteamManager\formcontainerachievements.h ..\AraSteamManager\frameless.h ..\AraSteamManager\mainwindow.h ..\AraSteamManager\subwidget\freezerowstable.h ..\AraSteamManager\subwidget\qbuttonwithdata.h ..\AraSteamManager\subwidget\qcheckboxwithdata.h ..\AraSteamManager\subwidget\qcomboboxwithdata.h ..\AraSteamManager\subwidget\qradiobuttonwithdata.h  ..\AraSteamManager\AchievementsSubForms\formachievements.cpp ..\AraSteamManager\AchievementsSubForms\formachievementwidget.cpp ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.cpp ..\AraSteamManager\AchievementsSubForms\formcategoryvalue_2.cpp ..\AraSteamManager\AchievementsSubForms\formcomparefriends.cpp ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.cpp ..\AraSteamManager\AchievementsSubForms\formtablesheaders.cpp ..\AraSteamManager\MainSubForms\formfavorites.cpp ..\AraSteamManager\MainSubForms\formfriends.cpp ..\AraSteamManager\MainSubForms\formgames.cpp ..\AraSteamManager\MainSubForms\formprofile.cpp ..\AraSteamManager\MainSubForms\formsettings.cpp ..\AraSteamManager\MainSubForms\formstatistics.cpp ..\AraSteamManager\class\Network\requestdata.cpp ..\AraSteamManager\class\Network\requestimage.cpp ..\AraSteamManager\class\NotMine\MultiSelectComboBox.cpp ..\AraSteamManager\class\NotMine\donutbreakdownchart.cpp ..\AraSteamManager\class\NotMine\mainslice.cpp ..\AraSteamManager\class\Threads\threadachievements.cpp ..\AraSteamManager\class\Threads\threadfriends.cpp ..\AraSteamManager\class\Threads\threadgames.cpp ..\AraSteamManager\class\Threads\threading.cpp ..\AraSteamManager\class\Threads\threadstatistics.cpp ..\AraSteamManager\class\categoriesgame.cpp ..\AraSteamManager\class\favorites.cpp ..\AraSteamManager\class\filter.cpp ..\AraSteamManager\class\settings.cpp ..\AraSteamManager\class\steamapi\Sachievements.cpp ..\AraSteamManager\class\steamapi\Sapi.cpp ..\AraSteamManager\class\steamapi\Sbans.cpp ..\AraSteamManager\class\steamapi\Sfriends.cpp ..\AraSteamManager\class\steamapi\Sgames.cpp ..\AraSteamManager\class\steamapi\Slevels.cpp ..\AraSteamManager\class\steamapi\Sprofile.cpp ..\AraSteamManager\formcontainerachievements.cpp ..\AraSteamManager\frameless.cpp ..\AraSteamManager\main.cpp ..\AraSteamManager\mainwindow.cpp ..\AraSteamManager\subwidget\freezerowstable.cpp ..\AraSteamManager\subwidget\qbuttonwithdata.cpp ..\AraSteamManager\subwidget\qcheckboxwithdata.cpp ..\AraSteamManager\subwidget\qcomboboxwithdata.cpp ..\AraSteamManager\subwidget\qradiobuttonwithdata.cpp ..\AraSteamManager\AchievementsSubForms\formachievements.ui ..\AraSteamManager\AchievementsSubForms\formachievementwidget.ui ..\AraSteamManager\AchievementsSubForms\formcategoryvalue.ui ..\AraSteamManager\AchievementsSubForms\formcategoryvalue_2.ui ..\AraSteamManager\AchievementsSubForms\formcomparefriends.ui ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.ui ..\AraSteamManager\AchievementsSubForms\formtablesheaders.ui ..\AraSteamManager\MainSubForms\formfavorites.ui ..\AraSteamManager\MainSubForms\formfriends.ui ..\AraSteamManager\MainSubForms\formgames.ui ..\AraSteamManager\MainSubForms\formprofile.ui ..\AraSteamManager\MainSubForms\formsettings.ui ..\AraSteamManager\MainSubForms\formstatistics.ui ..\AraSteamManager\formcontainerachievements.ui ..\AraSteamManager\mainwindow.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\formachievements.o release\formachievementwidget.o release\formcategoryvalue.o release\formcategoryvalue_2.o release\formcomparefriends.o release\formcompareprofilefilter.o release\formtablesheaders.o release\formfavorites.o release\formfriends.o release\formgames.o release\formprofile.o release\formsettings.o release\formstatistics.o release\requestdata.o release\requestimage.o release\donutbreakdownchart.o release\mainslice.o release\threadachievements.o release\threadfriends.o release\threadgames.o release\threading.o release\threadstatistics.o release\categoriesgame.o release\favorites.o release\filter.o release\settings.o release\Sachievements.o release\Sapi.o release\Sbans.o release\Sfriends.o release\Sgames.o release\Slevels.o release\Sprofile.o release\formcontainerachievements.o release\frameless.o release\main.o release\mainwindow.o release\freezerowstable.o release\qbuttonwithdata.o release\qcheckboxwithdata.o release\qcomboboxwithdata.o release\qradiobuttonwithdata.o release\qrc_resimg.o release\qrc_lang.o release\moc_formachievements.o release\moc_formachievementwidget.o release\moc_formcategoryvalue.o release\moc_formcategoryvalue_2.o release\moc_formcomparefriends.o release\moc_formcompareprofilefilter.o release\moc_formtablesheaders.o release\moc_formfavorites.o release\moc_formfriends.o release\moc_formgames.o release\moc_formprofile.o release\moc_formsettings.o release\moc_formstatistics.o release\moc_requestdata.o release\moc_requestimage.o release\moc_threadachievements.o release\moc_threadfriends.o release\moc_threadgames.o release\moc_threading.o release\moc_threadstatistics.o release\moc_categoriesgame.o release\moc_favorites.o release\moc_filter.o release\moc_settings.o release\moc_Sachievements.o release\moc_Sapi.o release\moc_Sbans.o release\moc_Sfriends.o release\moc_Sgames.o release\moc_Slevels.o release\moc_Sprofile.o release\moc_formcontainerachievements.o release\moc_frameless.o release\moc_mainwindow.o release\moc_freezerowstable.o
+	-$(DEL_FILE) release\formachievements.o release\formachievementwidget.o release\formcategoryvalue.o release\formcategoryvalue_2.o release\formcomparefriends.o release\formcompareprofilefilter.o release\formtablesheaders.o release\formfavorites.o release\formfriends.o release\formgames.o release\formprofile.o release\formsettings.o release\formstatistics.o release\requestdata.o release\requestimage.o release\MultiSelectComboBox.o release\donutbreakdownchart.o release\mainslice.o release\threadachievements.o release\threadfriends.o release\threadgames.o release\threading.o release\threadstatistics.o release\categoriesgame.o release\favorites.o release\filter.o release\settings.o release\Sachievements.o release\Sapi.o release\Sbans.o release\Sfriends.o release\Sgames.o release\Slevels.o release\Sprofile.o release\formcontainerachievements.o release\frameless.o release\main.o release\mainwindow.o release\freezerowstable.o release\qbuttonwithdata.o release\qcheckboxwithdata.o release\qcomboboxwithdata.o release\qradiobuttonwithdata.o release\qrc_resimg.o release\qrc_lang.o release\moc_formachievements.o release\moc_formachievementwidget.o release\moc_formcategoryvalue.o release\moc_formcategoryvalue_2.o release\moc_formcomparefriends.o release\moc_formcompareprofilefilter.o release\moc_formtablesheaders.o release\moc_formfavorites.o release\moc_formfriends.o release\moc_formgames.o release\moc_formprofile.o release\moc_formsettings.o release\moc_formstatistics.o release\moc_requestdata.o release\moc_requestimage.o release\moc_MultiSelectComboBox.o release\moc_threadachievements.o release\moc_threadfriends.o release\moc_threadgames.o release\moc_threading.o release\moc_threadstatistics.o release\moc_categoriesgame.o release\moc_favorites.o release\moc_filter.o release\moc_settings.o release\moc_Sachievements.o release\moc_Sapi.o release\moc_Sbans.o release\moc_Sfriends.o release\moc_Sgames.o release\moc_Slevels.o release\moc_Sprofile.o release\moc_formcontainerachievements.o release\moc_frameless.o
+	-$(DEL_FILE) release\moc_mainwindow.o release\moc_freezerowstable.o
 	-$(DEL_FILE) release\AraSteamManager_resource_res.o
 
 distclean: clean 
@@ -526,9 +533,9 @@ compiler_moc_predefs_clean:
 release/moc_predefs.h: D:/Qt/5.14.2/mingw73_64/mkspecs/features/data/dummy.cpp
 	g++ -fno-keep-inline-dllexport -O2 -std=gnu++11 -Wall -Wextra -Wextra -dM -E -o release\moc_predefs.h D:\Qt\5.14.2\mingw73_64\mkspecs\features\data\dummy.cpp
 
-compiler_moc_header_make_all: release/moc_formachievements.cpp release/moc_formachievementwidget.cpp release/moc_formcategoryvalue.cpp release/moc_formcategoryvalue_2.cpp release/moc_formcomparefriends.cpp release/moc_formcompareprofilefilter.cpp release/moc_formtablesheaders.cpp release/moc_formfavorites.cpp release/moc_formfriends.cpp release/moc_formgames.cpp release/moc_formprofile.cpp release/moc_formsettings.cpp release/moc_formstatistics.cpp release/moc_requestdata.cpp release/moc_requestimage.cpp release/moc_mainslice.cpp release/moc_threadachievements.cpp release/moc_threadfriends.cpp release/moc_threadgames.cpp release/moc_threading.cpp release/moc_threadstatistics.cpp release/moc_categoriesgame.cpp release/moc_favorites.cpp release/moc_filter.cpp release/moc_settings.cpp release/moc_Sachievements.cpp release/moc_Sapi.cpp release/moc_Sbans.cpp release/moc_Sfriends.cpp release/moc_Sgames.cpp release/moc_Slevels.cpp release/moc_Sprofile.cpp release/moc_formcontainerachievements.cpp release/moc_frameless.cpp release/moc_mainwindow.cpp release/moc_freezerowstable.cpp
+compiler_moc_header_make_all: release/moc_formachievements.cpp release/moc_formachievementwidget.cpp release/moc_formcategoryvalue.cpp release/moc_formcategoryvalue_2.cpp release/moc_formcomparefriends.cpp release/moc_formcompareprofilefilter.cpp release/moc_formtablesheaders.cpp release/moc_formfavorites.cpp release/moc_formfriends.cpp release/moc_formgames.cpp release/moc_formprofile.cpp release/moc_formsettings.cpp release/moc_formstatistics.cpp release/moc_requestdata.cpp release/moc_requestimage.cpp release/moc_MultiSelectComboBox.cpp release/moc_mainslice.cpp release/moc_threadachievements.cpp release/moc_threadfriends.cpp release/moc_threadgames.cpp release/moc_threading.cpp release/moc_threadstatistics.cpp release/moc_categoriesgame.cpp release/moc_favorites.cpp release/moc_filter.cpp release/moc_settings.cpp release/moc_Sachievements.cpp release/moc_Sapi.cpp release/moc_Sbans.cpp release/moc_Sfriends.cpp release/moc_Sgames.cpp release/moc_Slevels.cpp release/moc_Sprofile.cpp release/moc_formcontainerachievements.cpp release/moc_frameless.cpp release/moc_mainwindow.cpp release/moc_freezerowstable.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) release\moc_formachievements.cpp release\moc_formachievementwidget.cpp release\moc_formcategoryvalue.cpp release\moc_formcategoryvalue_2.cpp release\moc_formcomparefriends.cpp release\moc_formcompareprofilefilter.cpp release\moc_formtablesheaders.cpp release\moc_formfavorites.cpp release\moc_formfriends.cpp release\moc_formgames.cpp release\moc_formprofile.cpp release\moc_formsettings.cpp release\moc_formstatistics.cpp release\moc_requestdata.cpp release\moc_requestimage.cpp release\moc_mainslice.cpp release\moc_threadachievements.cpp release\moc_threadfriends.cpp release\moc_threadgames.cpp release\moc_threading.cpp release\moc_threadstatistics.cpp release\moc_categoriesgame.cpp release\moc_favorites.cpp release\moc_filter.cpp release\moc_settings.cpp release\moc_Sachievements.cpp release\moc_Sapi.cpp release\moc_Sbans.cpp release\moc_Sfriends.cpp release\moc_Sgames.cpp release\moc_Slevels.cpp release\moc_Sprofile.cpp release\moc_formcontainerachievements.cpp release\moc_frameless.cpp release\moc_mainwindow.cpp release\moc_freezerowstable.cpp
+	-$(DEL_FILE) release\moc_formachievements.cpp release\moc_formachievementwidget.cpp release\moc_formcategoryvalue.cpp release\moc_formcategoryvalue_2.cpp release\moc_formcomparefriends.cpp release\moc_formcompareprofilefilter.cpp release\moc_formtablesheaders.cpp release\moc_formfavorites.cpp release\moc_formfriends.cpp release\moc_formgames.cpp release\moc_formprofile.cpp release\moc_formsettings.cpp release\moc_formstatistics.cpp release\moc_requestdata.cpp release\moc_requestimage.cpp release\moc_MultiSelectComboBox.cpp release\moc_mainslice.cpp release\moc_threadachievements.cpp release\moc_threadfriends.cpp release\moc_threadgames.cpp release\moc_threading.cpp release\moc_threadstatistics.cpp release\moc_categoriesgame.cpp release\moc_favorites.cpp release\moc_filter.cpp release\moc_settings.cpp release\moc_Sachievements.cpp release\moc_Sapi.cpp release\moc_Sbans.cpp release\moc_Sfriends.cpp release\moc_Sgames.cpp release\moc_Slevels.cpp release\moc_Sprofile.cpp release\moc_formcontainerachievements.cpp release\moc_frameless.cpp release\moc_mainwindow.cpp release\moc_freezerowstable.cpp
 release/moc_formachievements.cpp: ../AraSteamManager/AchievementsSubForms/formachievements.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QWidget \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qwidget.h \
@@ -1957,28 +1964,12 @@ release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfiledevice.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qvector2d.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtouchdevice.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QFile \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenu \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qicon.h \
-		../AraSteamManager/class/Network/requestimage.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qeventloop.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonobject.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonvalue.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
-		../AraSteamManager/class/Network/requestdata.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qaction.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qactiongroup.h \
+		../AraSteamManager/class/steamapi/Sfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmainwindow.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabwidget.h \
@@ -1992,6 +1983,7 @@ release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QUrl \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QVariant \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QVector \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/QSslConfiguration \
 		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/qsslconfiguration.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/qsslsocket.h \
@@ -2012,13 +2004,20 @@ release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QIODevice \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonDocument \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsondocument.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonObject \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonvalue.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonArray \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonarray.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/QTcpSocket \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QEventLoop \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qeventloop.h \
+		../AraSteamManager/class/steamapi/Sprofile.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonObject \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonobject.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QTextCodec \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtextcodec.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/QTcpSocket \
+		../AraSteamManager/class/steamapi/Sapi.h \
 		../AraSteamManager/class/settings.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QFile \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QDir \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qdir.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfileinfo.h \
@@ -2030,10 +2029,19 @@ release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qloggingcategory.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/QFontDatabase \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfontdatabase.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QEventLoop \
-		../AraSteamManager/class/steamapi/Sfriends.h \
-		../AraSteamManager/class/steamapi/Sprofile.h \
-		../AraSteamManager/class/steamapi/Sapi.h \
+		../AraSteamManager/class/Network/requestdata.h \
+		../AraSteamManager/class/Network/requestimage.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
 		../AraSteamManager/class/Threads/threading.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QThread \
@@ -2044,6 +2052,7 @@ release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtableview.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemview.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qitemselectionmodel.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleoption.h \
@@ -2060,21 +2069,10 @@ release/moc_formfriends.cpp: ../AraSteamManager/MainSubForms/formfriends.h \
 		../AraSteamManager/class/steamapi/Sachievements.h \
 		../AraSteamManager/class/Threads/threadfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItemModel \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		../AraSteamManager/class/Threads/threadstatistics.h \
 		../AraSteamManager/class/favorites.h \
 		../AraSteamManager/class/filter.h \
-		../AraSteamManager/subwidget/qbuttonwithdata.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QtAlgorithms \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QAction \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qaction.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qactiongroup.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenu \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QToolButton \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbutton.h \
 		release/moc_predefs.h \
 		D:/Qt/5.14.2/mingw73_64/bin/moc.exe
 	D:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/Steam/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/Steam/AraSteamManager/AraSteamManager -ID:/Qt/5.14.2/mingw73_64/include -ID:/Qt/5.14.2/mingw73_64/include/QtCharts -ID:/Qt/5.14.2/mingw73_64/include/QtWidgets -ID:/Qt/5.14.2/mingw73_64/include/QtGui -ID:/Qt/5.14.2/mingw73_64/include/QtANGLE -ID:/Qt/5.14.2/mingw73_64/include/QtNetwork -ID:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\MainSubForms\formfriends.h -o release\moc_formfriends.cpp
@@ -3321,6 +3319,136 @@ release/moc_requestimage.cpp: ../AraSteamManager/class/Network/requestimage.h \
 		release/moc_predefs.h \
 		D:/Qt/5.14.2/mingw73_64/bin/moc.exe
 	D:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/Steam/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/Steam/AraSteamManager/AraSteamManager -ID:/Qt/5.14.2/mingw73_64/include -ID:/Qt/5.14.2/mingw73_64/include/QtCharts -ID:/Qt/5.14.2/mingw73_64/include/QtWidgets -ID:/Qt/5.14.2/mingw73_64/include/QtGui -ID:/Qt/5.14.2/mingw73_64/include/QtANGLE -ID:/Qt/5.14.2/mingw73_64/include/QtNetwork -ID:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\Network\requestimage.h -o release\moc_requestimage.cpp
+
+release/moc_MultiSelectComboBox.cpp: ../AraSteamManager/class/NotMine/MultiSelectComboBox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtwidgetsglobal.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtguiglobal.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qglobal.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qconfig-bootstrapped.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qconfig.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtcore-config.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsystemdetection.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qprocessordetection.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcompilerdetection.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtypeinfo.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsysinfo.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qlogging.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qflags.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qbasicatomic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic_bootstrap.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qgenericatomic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic_cxx11.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic_msvc.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qglobalstatic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmutex.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qnumeric.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qversiontagging.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtgui-config.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtwidgets-config.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qwidget.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qwindowdefs.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobjectdefs.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qnamespace.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobjectdefs_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qwindowdefs_win.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobject.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstring.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qchar.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qbytearray.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qrefcount.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qarraydata.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringliteral.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringalgorithms.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringview.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringbuilder.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qlist.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qalgorithms.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qiterator.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qhashfunctions.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpair.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qvector.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcontainertools_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpoint.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qbytearraylist.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringlist.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qregexp.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringmatcher.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreevent.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qscopedpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmetatype.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qvarlengtharray.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcontainerfwd.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobject_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmargins.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpaintdevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qrect.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsize.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpalette.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qcolor.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qrgb.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qrgba64.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qbrush.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmatrix.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpolygon.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qregion.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qdatastream.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qiodevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qline.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtransform.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpainterpath.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimage.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpixelformat.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpixmap.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsharedpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qshareddata.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qhash.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsharedpointer_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfont.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfontmetrics.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfontinfo.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsizepolicy.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qcursor.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qkeysequence.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qevent.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qvariant.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmap.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qdebug.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtextstream.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qlocale.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qset.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcontiguouscache.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qurl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qurlquery.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfile.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfiledevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qvector2d.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtouchdevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleoption.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractspinbox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qvalidator.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qregularexpression.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qicon.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qslider.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyle.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabbar.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabwidget.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qrubberband.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QListWidget \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistwidget.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistview.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemview.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qitemselectionmodel.h \
+		release/moc_predefs.h \
+		D:/Qt/5.14.2/mingw73_64/bin/moc.exe
+	D:\Qt\5.14.2\mingw73_64\bin\moc.exe $(DEFINES) --include C:/Users/Arankir/Desktop/Steam/AraSteamManager/Qt_5_14_2_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.14.2/mingw73_64/mkspecs/win32-g++ -IC:/Users/Arankir/Desktop/Steam/AraSteamManager/AraSteamManager -ID:/Qt/5.14.2/mingw73_64/include -ID:/Qt/5.14.2/mingw73_64/include/QtCharts -ID:/Qt/5.14.2/mingw73_64/include/QtWidgets -ID:/Qt/5.14.2/mingw73_64/include/QtGui -ID:/Qt/5.14.2/mingw73_64/include/QtANGLE -ID:/Qt/5.14.2/mingw73_64/include/QtNetwork -ID:/Qt/5.14.2/mingw73_64/include/QtCore -I. -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -IC:/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -IC:/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\AraSteamManager\class\NotMine\MultiSelectComboBox.h -o release\moc_MultiSelectComboBox.cpp
 
 release/moc_mainslice.cpp: ../AraSteamManager/class/NotMine/mainslice.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCharts/QPieSlice \
@@ -6797,11 +6925,7 @@ release/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenu \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
 		../AraSteamManager/MainSubForms/formfriends.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../AraSteamManager/class/filter.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QtAlgorithms \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QToolButton \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbutton.h \
 		../AraSteamManager/MainSubForms/formfavorites.h \
 		../AraSteamManager/MainSubForms/formstatistics.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QPair \
@@ -6879,6 +7003,7 @@ release/moc_mainwindow.cpp: ../AraSteamManager/mainwindow.h \
 		../AraSteamManager/class/steamapi/Slevels.h \
 		../AraSteamManager/formcontainerachievements.h \
 		../AraSteamManager/AchievementsSubForms/formachievements.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
@@ -8278,10 +8403,10 @@ release/formcomparefriends.o: ../AraSteamManager/AchievementsSubForms/formcompar
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QScrollArea \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qscrollarea.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTableWidget \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtablewidget.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtableview.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout \
+		../AraSteamManager/subwidget/freezerowstable.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTableView \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtableview.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItemModel \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QFile \
@@ -8994,28 +9119,12 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfiledevice.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qvector2d.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtouchdevice.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QFile \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenu \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qicon.h \
-		../AraSteamManager/class/Network/requestimage.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qeventloop.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonobject.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonvalue.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
-		../AraSteamManager/class/Network/requestdata.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qaction.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qactiongroup.h \
+		../AraSteamManager/class/steamapi/Sfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMainWindow \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmainwindow.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabwidget.h \
@@ -9029,6 +9138,7 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QUrl \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QVariant \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QVector \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QObject \
 		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/QSslConfiguration \
 		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/qsslconfiguration.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/qsslsocket.h \
@@ -9049,13 +9159,20 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QIODevice \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonDocument \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsondocument.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonObject \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonvalue.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonArray \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonarray.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/QTcpSocket \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QEventLoop \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qeventloop.h \
+		../AraSteamManager/class/steamapi/Sprofile.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QJsonObject \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qjsonobject.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QTextCodec \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtextcodec.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtNetwork/QTcpSocket \
+		../AraSteamManager/class/steamapi/Sapi.h \
 		../AraSteamManager/class/settings.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QFile \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QDir \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qdir.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfileinfo.h \
@@ -9067,10 +9184,19 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qloggingcategory.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/QFontDatabase \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfontdatabase.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QEventLoop \
-		../AraSteamManager/class/steamapi/Sfriends.h \
-		../AraSteamManager/class/steamapi/Sprofile.h \
-		../AraSteamManager/class/steamapi/Sapi.h \
+		../AraSteamManager/class/Network/requestdata.h \
+		../AraSteamManager/class/Network/requestimage.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLabel \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlabel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/QMovie \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmovie.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimagereader.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreapplication.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimageiohandler.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qplugin.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfactoryinterface.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QDateTime \
 		../AraSteamManager/class/Threads/threading.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QThread \
@@ -9081,6 +9207,7 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtableview.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemview.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/qitemselectionmodel.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleoption.h \
@@ -9097,21 +9224,10 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		../AraSteamManager/class/steamapi/Sachievements.h \
 		../AraSteamManager/class/Threads/threadfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItemModel \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qstandarditemmodel.h \
 		../AraSteamManager/class/Threads/threadstatistics.h \
 		../AraSteamManager/class/favorites.h \
 		../AraSteamManager/class/filter.h \
-		../AraSteamManager/subwidget/qbuttonwithdata.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QtAlgorithms \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QAction \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qaction.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qactiongroup.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenu \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QToolButton \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbutton.h \
 		ui_formfriends.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QApplication \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qapplication.h \
@@ -9120,9 +9236,9 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qinputmethod.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QFrame \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QGroupBox \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qgroupbox.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QHBoxLayout \
@@ -9138,7 +9254,10 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qpushbutton.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QTableView \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formfriends.o ..\AraSteamManager\MainSubForms\formfriends.cpp
 
@@ -10811,6 +10930,144 @@ release/requestimage.o: ../AraSteamManager/class/Network/requestimage.cpp ../Ara
 		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfontdatabase.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QEventLoop
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\requestimage.o ..\AraSteamManager\class\Network\requestimage.cpp
+
+release/MultiSelectComboBox.o: ../AraSteamManager/class/NotMine/MultiSelectComboBox.cpp ../AraSteamManager/class/NotMine/MultiSelectComboBox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtwidgetsglobal.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtguiglobal.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qglobal.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qconfig-bootstrapped.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qconfig.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtcore-config.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsystemdetection.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qprocessordetection.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcompilerdetection.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtypeinfo.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsysinfo.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qlogging.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qflags.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qbasicatomic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic_bootstrap.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qgenericatomic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic_cxx11.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qatomic_msvc.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qglobalstatic.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmutex.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qnumeric.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qversiontagging.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtgui-config.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtwidgets-config.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qwidget.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qwindowdefs.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobjectdefs.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qnamespace.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobjectdefs_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qwindowdefs_win.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobject.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstring.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qchar.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qbytearray.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qrefcount.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qarraydata.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringliteral.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringalgorithms.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringview.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringbuilder.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qlist.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qalgorithms.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qiterator.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qhashfunctions.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpair.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qvector.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcontainertools_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qpoint.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qbytearraylist.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringlist.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qregexp.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qstringmatcher.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcoreevent.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qscopedpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmetatype.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qvarlengtharray.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcontainerfwd.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qobject_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmargins.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpaintdevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qrect.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsize.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpalette.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qcolor.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qrgb.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qrgba64.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qbrush.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qmatrix.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpolygon.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qregion.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qdatastream.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qiodevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qline.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtransform.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpainterpath.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qimage.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpixelformat.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpixmap.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsharedpointer.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qshareddata.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qhash.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qsharedpointer_impl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfont.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfontmetrics.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qfontinfo.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qsizepolicy.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qcursor.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qkeysequence.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qevent.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qvariant.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qmap.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qdebug.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qtextstream.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qlocale.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qset.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qcontiguouscache.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qurl.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qurlquery.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfile.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qfiledevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qvector2d.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtouchdevice.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyleoption.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractspinbox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qvalidator.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qregularexpression.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qicon.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qslider.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qstyle.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabbar.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtabwidget.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qrubberband.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QListWidget \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistwidget.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlistview.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractitemview.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/qitemselectionmodel.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qpen.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QCheckBox \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcheckbox.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtCore/QEvent
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MultiSelectComboBox.o ..\AraSteamManager\class\NotMine\MultiSelectComboBox.cpp
 
 release/donutbreakdownchart.o: ../AraSteamManager/class/NotMine/donutbreakdownchart.cpp ../AraSteamManager/class/NotMine/donutbreakdownchart.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCharts/QChart \
@@ -14392,11 +14649,7 @@ release/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenu \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
 		../AraSteamManager/MainSubForms/formfriends.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../AraSteamManager/class/filter.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QtAlgorithms \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QToolButton \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbutton.h \
 		../AraSteamManager/MainSubForms/formfavorites.h \
 		../AraSteamManager/MainSubForms/formstatistics.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QPair \
@@ -14474,6 +14727,7 @@ release/main.o: ../AraSteamManager/main.cpp ../AraSteamManager/mainwindow.h \
 		../AraSteamManager/class/steamapi/Slevels.h \
 		../AraSteamManager/formcontainerachievements.h \
 		../AraSteamManager/AchievementsSubForms/formachievements.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
@@ -14761,11 +15015,7 @@ release/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainw
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QMenu \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qmenu.h \
 		../AraSteamManager/MainSubForms/formfriends.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		../AraSteamManager/class/filter.h \
-		D:/Qt/5.14.2/mingw73_64/include/QtCore/QtAlgorithms \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QToolButton \
-		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qtoolbutton.h \
 		../AraSteamManager/MainSubForms/formfavorites.h \
 		../AraSteamManager/MainSubForms/formstatistics.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtCore/QPair \
@@ -14843,6 +15093,7 @@ release/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainw
 		../AraSteamManager/class/steamapi/Slevels.h \
 		../AraSteamManager/formcontainerachievements.h \
 		../AraSteamManager/AchievementsSubForms/formachievements.h \
+		D:/Qt/5.14.2/mingw73_64/include/QtGui/QStandardItem \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QComboBox \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/qcombobox.h \
 		D:/Qt/5.14.2/mingw73_64/include/QtWidgets/QButtonGroup \
@@ -15527,6 +15778,9 @@ release/moc_requestdata.o: release/moc_requestdata.cpp
 
 release/moc_requestimage.o: release/moc_requestimage.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_requestimage.o release\moc_requestimage.cpp
+
+release/moc_MultiSelectComboBox.o: release/moc_MultiSelectComboBox.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_MultiSelectComboBox.o release\moc_MultiSelectComboBox.cpp
 
 release/moc_threadachievements.o: release/moc_threadachievements.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\moc_threadachievements.o release\moc_threadachievements.cpp

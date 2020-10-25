@@ -1,7 +1,7 @@
 #include "threading.h"
 
-int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const int aColumnName, QTableWidget *aTableWidgetGames, SGames aGames) {
-    ThreadGames *games = new ThreadGames(aColumnID, aColumnIndex, aColumnName, aTableWidgetGames, aGames);
+int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const int aColumnIcon, const int aColumnName, const int aColumnComment, const int aColumnProgress, SGames aGames) {
+    ThreadGames *games = new ThreadGames(aColumnID, aColumnIndex, aColumnIcon, aColumnName, aColumnComment, aColumnProgress, aGames);
     QThread *thread = createThread();
     games->moveToThread(thread);
     connect(thread, &QThread::started,        games,          &ThreadGames::fill);
@@ -12,9 +12,9 @@ int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const
     connect(games,  &ThreadGames::s_progress, this->parent(), [=](int progress, int row) {
                                                                     emit s_games_progress(progress, row);
                                                                 });
-    connect(games,  &ThreadGames::s_finished, this->parent(), [=]() {
-                                                                    emit s_games_finished();
-                                                                });
+    connect(games,  &ThreadGames::s_finishedModel, parent(),  [=](QStandardItemModel *model) {
+                                                                     emit s_games_finished_model(model);
+                                                                 });
     thread->start();
     return 1;
 }

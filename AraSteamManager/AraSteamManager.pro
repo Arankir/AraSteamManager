@@ -40,6 +40,7 @@ SOURCES += \
     MainSubForms/formstatistics.cpp \
     class/Network/requestdata.cpp \
     class/Network/requestimage.cpp \
+    class/NotMine/MultiSelectComboBox.cpp \
     class/NotMine/donutbreakdownchart.cpp \
     class/NotMine/mainslice.cpp \
     class/Threads/threadachievements.cpp \
@@ -84,6 +85,7 @@ HEADERS += \
     MainSubForms/formstatistics.h \
     class/Network/requestdata.h \
     class/Network/requestimage.h \
+    class/NotMine/MultiSelectComboBox.h \
     class/NotMine/donutbreakdownchart.h \
     class/NotMine/mainslice.h \
     class/Threads/threadachievements.h \

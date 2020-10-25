@@ -68,11 +68,14 @@ private slots:
     void hideHiddenGames();
     QMenu *createMenu(SGame &aGame, int aIndex);
     void loadHiddenGames();
+    void updateCurrentGame();
 private:
     Ui::FormGames *ui;
     SProfile _profile;
     int _windowChildCount = 0;
     SGames _games;
+    SGame *_currentGame = nullptr;
+    int _currentIndex;
     QVector<SAchievementsPlayer*> _achievements;
     Favorites _favorites;
     QStringList _hide;
@@ -85,9 +88,6 @@ private:
     const QPoint c_visibleGroupPos = QPoint(20, 0);
     const int c_widthGroup = 300;
     bool _isGroupShow = false;
-
-    QString _selectedGame;
-    QString _selectedIndex;
 
 };
 

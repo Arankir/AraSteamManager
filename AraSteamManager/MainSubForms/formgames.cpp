@@ -6,8 +6,8 @@ constexpr int c_tableColumnAppid    = 0;
 constexpr int c_tableColumnIndex    = 1;
 constexpr int c_tableColumnIcon     = 2;
 constexpr int c_tableColumnName     = 3;
-constexpr int c_tableColumnProgress = 4;
-constexpr int c_tableColumnTools    = 5;
+constexpr int c_tableColumnComment  = 4;
+constexpr int c_tableColumnProgress = 5;
 constexpr int c_tableColumnCount    = 6;
 #define ConstantsEnd }
 
@@ -18,59 +18,18 @@ FormGames::FormGames(SProfile &aProfile, SGames &aGames, QWidget *aParent): QWid
 }
 
 void FormGames::initComponents() {
-    ui->TableWidgetGames->setMouseTracking(false);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    ui->TableWidgetGames->setColumnCount(c_tableColumnCount);
     _games.sort();
-    updateSettings();
-    retranslate();
-    ui->TableWidgetGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    ui->FrameGroup->stackUnder(ui->TableWidgetGames);
-
-    ui->FrameSelected->setVisible(false);
-//    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
-//    shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
-//    shadowEffect->setOffset(0);
-//    shadowEffect->setBlurRadius(50);
-//    ui->ProgressBarSelectedGame->setGraphicsEffect(shadowEffect);
-
-    _animate = new QPropertyAnimation(ui->FrameGroup, "geometry");
-    _animate->setDuration(300);
-
-//    this->setMouseTracking(true);
-//    ui->FrameGames->setMouseTracking(true);
-//    ui->TableWidgetGames->viewport()->setMouseTracking(true);
-//    enableMouseTracking(ui->FrameGames->children());
-//    enableMouseTracking(ui->TableWidgetGames->children());
-//    enableMouseTracking(ui->TableWidgetGames->viewport()->children());
-//    ui->FrameGames->setMouseTracking(true);
-//    ui->FrameGroup->setMouseTracking(true);
-//    ui->TableWidgetGames->setMouseTracking(true);
-//    ui->TableWidgetGames->viewport()->setMouseTracking(true);
-//    ui->TableWidgetGames->installEventFilter(this);
-    //ui->TableWidgetGames->viewport()->installEventFilter(this);
-
-    ui->TableWidgetGames->setSortingEnabled(true);
+//    updateSettings();
+//    retranslate();
     ui->ProgressBarLoading->setVisible(false);
-    ui->TableWidgetGames->setRowCount(_games.getCount());
-    for (int i = 0; i < _games.getCount(); ++i) {
-        ui->TableWidgetGames->setRowHeight(i, 33 + 18);
-    }
 //TODO загрузить группы
-    ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33 + 8);
-    ui->TableWidgetGames->setColumnWidth(c_tableColumnName, 400);
     //Загрузка номеров скрываемых игр
     loadHiddenGames();
 
 #define Connects {
     connect(ui->LineEditGame,       &QLineEdit::textChanged,          this, &FormGames::lineEditGame_TextChanged);
     connect(ui->ButtonFind,         &QPushButton::clicked,            this, &FormGames::buttonFind_Clicked);
-    connect(ui->TableWidgetGames,   &QTableWidget::cellDoubleClicked, this, &FormGames::tableWidgetGames_CellDoubleClicked);
-    connect(ui->TableWidgetGames,   &QTableWidget::cellClicked,       this, &FormGames::tableWidgetGames_CellClicked);
-    //connect(ui->ButtonAchievements, &QPushButton::clicked,            this, &FormGames::buttonAchievements_Clicked);
-    //connect(ui->ButtonFavorite,     &QPushButton::clicked,            this, &FormGames::buttonFavorite_Clicked);
-    //connect(ui->ButtonHide,         &QPushButton::clicked,            this, &FormGames::buttonHide_Clicked);
 #define ConnectsEnd }
     createThread();
 }
@@ -96,10 +55,23 @@ void FormGames::updateSettings() {
 
 void FormGames::setIcons() {
     ui->ButtonFind->setIcon(QIcon(Images::find()));
-    ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
-    ui->ButtonHide->setIcon(QIcon(Images::hide()));
-    ui->ButtonCreateGroup->setIcon(QIcon(Images::create()));
-    ui->ButtonChangeGroup->setIcon(QIcon(Images::change()));
+    //ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
+    //ui->ButtonHide->setIcon(QIcon(Images::hide()));
+    //ui->ButtonCreateGroup->setIcon(QIcon(Images::create()));
+    //ui->ButtonChangeGroup->setIcon(QIcon(Images::change()));
+}
+
+void FormGames::updateCurrentGame() {
+    QModelIndex index = ui->tableView->currentIndex();
+    _currentIndex = ui->tableView->model()->index(index.row(), c_tableColumnIndex).data().toString().toInt();
+    int appId = ui->tableView->model()->index(index.row(), c_tableColumnAppid).data().toString().toInt();
+
+    auto iterator = std::find_if(_games.begin(), _games.end(), [=](const SGame &game) {
+                                                                    return game._appID == appId;
+                                                                });
+    if (iterator != _games.end()) {
+        _currentGame = &*iterator;
+    }
 }
 
 void FormGames::loadHiddenGames() {
@@ -122,45 +94,45 @@ void FormGames::loadHiddenGames() {
 }
 
 void FormGames::onTablePushed() {
-    ui->TableWidgetGames->setColumnHidden(c_tableColumnAppid, true);
-    ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex, true);
-    ui->TableWidgetGames->resizeColumnsToContents();
-    ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33 + 8);
-    ui->TableWidgetGames->setColumnWidth(c_tableColumnProgress, 150 + 8);
+//    ui->TableWidgetGames->setColumnHidden(c_tableColumnAppid, true);
+//    ui->TableWidgetGames->setColumnHidden(c_tableColumnIndex, true);
+//    ui->TableWidgetGames->resizeColumnsToContents();
+//    ui->TableWidgetGames->setColumnWidth(c_tableColumnIcon, 33 + 8);
+//    ui->TableWidgetGames->setColumnWidth(c_tableColumnProgress, 150 + 8);
 
-    _achievements.resize(_games.getCount());
-    int row = 0;
-    for (auto &game: _games) {
-        //Загрузка картинок
-        QLabel *iconGame = new QLabel();
-        iconGame->setPixmap(game.getPixmapIcon());
-        ui->TableWidgetGames->setCellWidget(row, c_tableColumnIcon, iconGame);
-        ui->TableWidgetGames->setRowHeight(row, 32 + 18);
+//    _achievements.resize(_games.getCount());
+//    int row = 0;
+//    for (auto &game: _games) {
+//        //Загрузка картинок
+//        QLabel *iconGame = new QLabel();
+//        iconGame->setPixmap(game.getPixmapIcon());
+//        ui->TableWidgetGames->setCellWidget(row, c_tableColumnIcon, iconGame);
+//        ui->TableWidgetGames->setRowHeight(row, 32 + 18);
 
-        //Загрузка достижений игрока
-        SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(game._appID), _profile._steamID);
-        achievementsGame->_index = row;
-        connect(achievementsGame, &SAchievementsPlayer::s_finished, this, &FormGames::onResultAchievements);
+//        //Загрузка достижений игрока
+//        SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(game._appID), _profile._steamID);
+//        achievementsGame->_index = row;
+//        connect(achievementsGame, &SAchievementsPlayer::s_finished, this, &FormGames::onResultAchievements);
 
-        //Добавление кнопки с настройками
-        QPushButton *tools = new QPushButton("...");
-        tools->setFont(QFont("Times New Roman", 16));
-        tools->setFlat(true);
-        tools->setMaximumSize(QSize(46, 32));
-        tools->setObjectName("TBtn" + QString::number(row));
-        tools->setMenu(createMenu(game, row));
-        connect (tools, &QPushButton::clicked, tools, &QPushButton::showMenu);
-        ui->TableWidgetGames->setCellWidget(row, c_tableColumnTools, tools);
+////        //Добавление кнопки с настройками
+////        QPushButton *tools = new QPushButton("...");
+////        tools->setFont(QFont("Times New Roman", 16));
+////        tools->setFlat(true);
+////        tools->setMaximumSize(QSize(46, 32));
+////        tools->setObjectName("TBtn" + QString::number(row));
+////        tools->setMenu(createMenu(game, row));
+////        connect (tools, &QPushButton::clicked, tools, &QPushButton::showMenu);
+////        ui->TableWidgetGames->setCellWidget(row, c_tableColumnTools, tools);
 
-        ++row;
-    }
-    hideHiddenGames();
-//    enableMouseTracking(ui->TableWidgetGames->children());
-//    ui->TableWidgetGames->viewport()->setMouseTracking(true);
-//    enableMouseTracking(ui->TableWidgetGames->viewport()->children());
-//    ui->TableWidgetGames->installEventFilter(this);
-//    ui->TableWidgetGames->viewport()->installEventFilter(this);
-    ui->LineEditGame->setFocus();
+//        ++row;
+//    }
+//    hideHiddenGames();
+////    enableMouseTracking(ui->TableWidgetGames->children());
+////    ui->TableWidgetGames->viewport()->setMouseTracking(true);
+////    enableMouseTracking(ui->TableWidgetGames->viewport()->children());
+////    ui->TableWidgetGames->installEventFilter(this);
+////    ui->TableWidgetGames->viewport()->installEventFilter(this);
+//    ui->LineEditGame->setFocus();
 }
 
 QMenu *FormGames::createMenu(SGame &aGame, int aIndex) {
@@ -244,21 +216,20 @@ void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
         shadowEffect->setColor(QColor(255, 0, 0, 255 * 0.7));
         pb->setFormat("");
     }
-    ui->TableWidgetGames->setCellWidget(aAchievements->_index, c_tableColumnProgress, pb);
+    QModelIndex index = ui->tableView->model()->index(aAchievements->_index, c_tableColumnProgress);
+    ui->tableView->model()->setData(index, pb->text().rightJustified(5, '0'));
+    ui->tableView->setIndexWidget(index, pb);
+    ui->tableView->resizeRowToContents(aAchievements->_index);
 
-    //Создается item для работы сортировки таблицы
-    ui->TableWidgetGames->setItem(aAchievements->_index, c_tableColumnProgress, new QTableWidgetItem(pb->text().rightJustified(5, '0')));
-    ui->TableWidgetGames->item(aAchievements->_index, c_tableColumnProgress)->setTextAlignment(Qt::AlignRight);
     _achievements[aAchievements->_index] = aAchievements;
     emit s_achievementsLoaded(_load, 0);
 
     //Проверка всё ли загрузилось
     if(++_load == _games.getCount()) {
-        //tableWidgetGames_CellClicked(0, 1);
         int width = 22;
-        for(int i = 0; i < ui->TableWidgetGames->columnCount(); ++i) {
-            width += ui->TableWidgetGames->columnWidth(i);
-        }
+//        for(int i = 0; i < ui->TableWidgetGames->columnCount(); ++i) {
+//            width += ui->TableWidgetGames->columnWidth(i);
+//        }
         emit s_finish(width);
     }
 }
@@ -283,25 +254,26 @@ void FormGames::closeEvent(QCloseEvent*) {
 }
 
 void FormGames::resizeEvent(QResizeEvent*) {
-    ui->TableWidgetGames->setGeometry(c_widthVisibleGroup, 0, ui->FrameGames->width() - c_widthVisibleGroup, ui->FrameGames->height());
+//    ui->TableWidgetGames->setGeometry(c_widthVisibleGroup, 0, ui->FrameGames->width() - c_widthVisibleGroup, ui->FrameGames->height());
 
-    QRect invisibleRect(c_invisibleGroupPos, QPoint(c_invisibleGroupPos.x() + c_widthGroup, ui->FrameGames->height()));
-    QRect visibleRect(c_visibleGroupPos, QPoint(c_visibleGroupPos.x() + c_widthGroup, ui->FrameGames->height()));
+//    QRect invisibleRect(c_invisibleGroupPos, QPoint(c_invisibleGroupPos.x() + c_widthGroup, ui->FrameGames->height()));
+//    QRect visibleRect(c_visibleGroupPos, QPoint(c_visibleGroupPos.x() + c_widthGroup, ui->FrameGames->height()));
 
-    ui->FrameGroup->setGeometry(_isGroupShow ? visibleRect : invisibleRect);
-    ui->FrameGroup->raise();
+    //ui->FrameGroup->setGeometry(_isGroupShow ? visibleRect : invisibleRect);
+    //ui->FrameGroup->raise();
 }
 #define EventsEnd }
 
 void FormGames::hideHiddenGames() {
     QStringList hideList = _hide;
-    for (int i = 0; i < ui->TableWidgetGames->rowCount(); ++i) {
+    for (int i = 0; i < ui->tableView->model()->rowCount(); ++i) {
         auto hiddenGame = std::find_if(hideList.cbegin(), hideList.cend(), [=](QString curGame) {
-                                                                                return curGame == ui->TableWidgetGames->item(i, c_tableColumnAppid)->text();
+                                                                                return curGame == ui->tableView->model()->index(i, c_tableColumnAppid).data().toString();
                                                                             });
         if (hiddenGame != hideList.cend()) {
-            ui->TableWidgetGames->item(i, c_tableColumnName)->setForeground(QColor(255 * 0.7, 0, 0));
-            ui->TableWidgetGames->hideRow(i);
+            //Найти аналог
+            //ui->TableWidgetGames->item(i, c_tableColumnName)->setForeground(QColor(255 * 0.7, 0, 0));
+            ui->tableView->hideRow(i);
             hideList.removeOne(*hiddenGame);
         }
     }
@@ -309,13 +281,16 @@ void FormGames::hideHiddenGames() {
 
 void FormGames::retranslate() {
     ui->retranslateUi(this);
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon, new QTableWidgetItem(tr("")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName, new QTableWidgetItem(tr("Название игры")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress, new QTableWidgetItem(tr("Прогресс")));
-    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnTools, new QTableWidgetItem(tr("")));
-    ui->ButtonAchievements->setText(tr("Достижения"));
-    ui->ButtonFavorite->setText("");
-    ui->ButtonHide->setText("");
+    ui->tableView->model()->setHeaderData(c_tableColumnIcon,        Qt::Horizontal, tr(""));
+    ui->tableView->model()->setHeaderData(c_tableColumnName,        Qt::Horizontal, tr("Название игры"));
+    ui->tableView->model()->setHeaderData(c_tableColumnProgress,    Qt::Horizontal, tr("Прогресс"));
+//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnIcon, new QTableWidgetItem(tr("")));
+//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnName, new QTableWidgetItem(tr("Название игры")));
+//    ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnProgress, new QTableWidgetItem(tr("Прогресс")));
+    //ui->TableWidgetGames->setHorizontalHeaderItem(c_tableColumnTools, new QTableWidgetItem(tr("")));
+    //ui->ButtonAchievements->setText(tr("Достижения"));
+    //ui->ButtonFavorite->setText("");
+    //ui->ButtonHide->setText("");
 }
 
 void FormGames::showHideSlideWidget(bool aShowing) {
@@ -350,20 +325,70 @@ void FormGames::mouseMoveEvent(QMouseEvent *aEvent) {
 
 void FormGames::createThread() {
     Threading *loadTable = new Threading(this);
-    loadTable->AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnName, ui->TableWidgetGames, _games);
+    loadTable->AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnIcon, c_tableColumnName, c_tableColumnComment, c_tableColumnProgress, _games);
     connect (loadTable, &Threading::s_games_progress, this, [=](int progress, int row) {
-        ui->ProgressBarLoading->setValue(progress);
-        emit s_achievementsLoaded(progress, row);
+                                                                ui->ProgressBarLoading->setValue(progress);
+                                                                emit s_achievementsLoaded(progress, row);
+                                                            });
+    connect (loadTable, &Threading::s_games_finished_model, this, [=](QStandardItemModel *model) {
+        ui->tableView->setModel(model);
+        ui->tableView->setSortingEnabled(true);
+        ui->tableView->resizeColumnsToContents();
+
+        ui->tableView->setVerticalScrollMode  (QAbstractItemView::ScrollMode::ScrollPerPixel);
+        ui->tableView->setHorizontalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
+
+        ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        ui->tableView->setShowGrid(false);
+        ui->tableView->setSortingEnabled(true);
+        ui->tableView->horizontalHeader()->setStretchLastSection(true);
+        ui->tableView->verticalHeader()->setVisible(false);
+        ui->tableView->setContextMenuPolicy(Qt::CustomContextMenu);
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+//        ui->tableView->setColumnHidden(c_tableColumnAppid, true);
+//        ui->tableView->setColumnHidden(c_tableColumnIndex, true);
+//        ui->tableView->resizeColumnsToContents();
+//        ui->tableView->setColumnWidth(c_tableColumnIcon, 33 + 8);
+//        ui->tableView->setColumnWidth(c_tableColumnProgress, 150 + 8);
+
+        _achievements.resize(_games.getCount());
+        int row = 0;
+        for (auto &game: _games) {
+            //Загрузка достижений игрока
+            SAchievementsPlayer *achievementsGame = new SAchievementsPlayer(QString::number(game._appID), _profile._steamID);
+            achievementsGame->_index = row;
+            connect(achievementsGame, &SAchievementsPlayer::s_finished, this, &FormGames::onResultAchievements);
+            ++row;
+        }
+        hideHiddenGames();
+
+        connect(ui->tableView, &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
+            updateCurrentGame();
+            if (_currentGame != nullptr) {
+                QMenu *menu = createMenu(*_currentGame, _currentIndex);
+                menu->popup(ui->tableView->viewport()->mapToGlobal(pos));
+            }
+        });
+
+        connect(ui->tableView, &QTableView::doubleClicked, this, [=](QModelIndex) {
+            updateCurrentGame();
+            buttonAchievements_Clicked();
+        });
+//    //    enableMouseTracking(ui->TableWidgetGames->children());
+//    //    ui->TableWidgetGames->viewport()->setMouseTracking(true);
+//    //    enableMouseTracking(ui->TableWidgetGames->viewport()->children());
+//    //    ui->TableWidgetGames->installEventFilter(this);
+//    //    ui->TableWidgetGames->viewport()->installEventFilter(this);
+        ui->LineEditGame->setFocus();
     });
-    connect (loadTable, &Threading::s_games_finished, this, &FormGames::onTablePushed);
 }
 #define SystemEnd }
 
 #define Filter {
 void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
     QString findText = aFindText.toLower();
-    for (int i = 0; i < ui->TableWidgetGames->rowCount(); ++i) {
-        ui->TableWidgetGames->setRowHidden(i, ui->TableWidgetGames->item(i, c_tableColumnName)->text().toLower().indexOf(findText, 0) == -1);
+    for (int i = 0; i < ui->tableView->model()->rowCount(); ++i) {
+        ui->tableView->setRowHidden(i, ui->tableView->model()->index(i, c_tableColumnName).data().toString().toLower().indexOf(findText, 0) == -1);
     }
     if (Settings::getVisibleHiddenGames() != 1 || findText == "") {
         hideHiddenGames();
@@ -377,22 +402,22 @@ void FormGames::buttonFind_Clicked() {
 
 #define Functions {
 void FormGames::tableWidgetGames_CellClicked(int aRow, int) {
-    _selectedGame = ui->TableWidgetGames->item(aRow, c_tableColumnAppid)->text();
-    _selectedIndex = ui->TableWidgetGames->item(aRow, c_tableColumnIndex)->text();
+//    _selectedGame = ui->tableView->model()->index(aRow, c_tableColumnAppid).data().toString();
+//    _selectedIndex = ui->tableView->model()->index(aRow, c_tableColumnIndex).data().toString();
     //Постановка иконки
-    QLabel *lGameIcon = dynamic_cast<QLabel*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnIcon));
-    if(lGameIcon) {
-        ui->LabelIconGame->setPixmap(*lGameIcon->pixmap());
-    } else {
-        ui->LabelIconGame->setPixmap(QPixmap());
-    }
-    ui->LabelTitleGame->setText(ui->TableWidgetGames->item(aRow, c_tableColumnName)->text());
+//    QLabel *lGameIcon = dynamic_cast<QLabel*>(ui->tableView->cellWidget(aRow, c_tableColumnIcon));
+//    if(lGameIcon) {
+//        ui->LabelIconGame->setPixmap(*lGameIcon->pixmap());
+//    } else {
+//        ui->LabelIconGame->setPixmap(QPixmap());
+//    }
+//    ui->LabelTitleGame->setText(ui->TableWidgetGames->item(aRow, c_tableColumnName)->text());
     //Постановка прогрессбар
-    QProgressBar *progressBarSelectedGame = dynamic_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnProgress));
-    if (progressBarSelectedGame) {
-        ui->ProgressBarSelectedGame->setMaximum(progressBarSelectedGame->maximum());
-        ui->ProgressBarSelectedGame->setValue(progressBarSelectedGame->value());
-    }
+//    QProgressBar *progressBarSelectedGame = dynamic_cast<QProgressBar*>(ui->TableWidgetGames->cellWidget(aRow, c_tableColumnProgress));
+//    if (progressBarSelectedGame) {
+////        ui->ProgressBarSelectedGame->setMaximum(progressBarSelectedGame->maximum());
+////        ui->ProgressBarSelectedGame->setValue(progressBarSelectedGame->value());
+//    }
 //    //Проверка является ли игра избранной
 //    QJsonArray favorites = _favorites.getValues();
 //    bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(),
@@ -414,27 +439,22 @@ void FormGames::tableWidgetGames_CellDoubleClicked(int aRow, int) {
 }
 
 void FormGames::buttonAchievements_Clicked() {
-    QAction *action = dynamic_cast<QAction*>(sender());
-    if (action) {
-        _selectedIndex = action->data().toString();
-        _selectedGame = action->whatsThis();
-    }
-    SAchievementsPercentage Percentage(_selectedGame, false);
+    SAchievementsPercentage Percentage(QString::number(_currentGame->_appID), false);
     if (Percentage.getCount() == 0) {
         QMessageBox::warning(this, tr("Ошибка"), tr("В этой игре нет достижений"));
     } else {
-        ui->ProgressBarLoading->setMaximum(ui->ProgressBarSelectedGame->maximum());
-        emit s_showAchievements(*_achievements[_selectedIndex.toInt()], _games[_selectedIndex.toInt()]);
+        //ui->ProgressBarLoading->setMaximum(ui->ProgressBarSelectedGame->maximum());
+        emit s_showAchievements(*_achievements[_currentIndex], _games[_currentIndex]);
     }
 }
 
 void FormGames::buttonFavorite_Clicked() {
     QAction *action = dynamic_cast<QAction*>(sender());
     if (action) {
-        _selectedIndex = action->data().toString();
-        _selectedGame = action->whatsThis();
+//        _selectedIndex = action->data().toString();
+//        _selectedGame = action->whatsThis();
     }
-    if(_favorites.addGame(_profile._steamID, _games[_selectedIndex.toInt()], true)) {
+    if(_favorites.addGame(_profile._steamID, _games[_currentIndex], true)) {
         //Категория добавилась
         action->setText(tr("Удалить из избранного"));
         action->setIcon(QIcon(Images::isFavorites()));
@@ -448,8 +468,8 @@ void FormGames::buttonFavorite_Clicked() {
 void FormGames::buttonHide_Clicked() {
     QAction *action = dynamic_cast<QAction*>(sender());
     if (action) {
-        _selectedIndex = action->data().toString();
-        _selectedGame = action->whatsThis();
+//        _selectedIndex = action->data().toString();
+//        _selectedGame = action->whatsThis();
     }
     QString savePath = "";
     QMessageBox question(QMessageBox::Question,
@@ -472,21 +492,22 @@ void FormGames::buttonHide_Clicked() {
     fileHide.open(QIODevice::Append | QIODevice::Text);
     QTextStream writeStream(&fileHide);
     if (savePath == Paths::hiddenGames("All")) {
-        writeStream <<_games[_selectedIndex.toInt()]._appID <<"%%" + _games[_selectedIndex.toInt()]._img_icon_url + "%%" + _games[_selectedIndex.toInt()]._name <<"\n";
+        writeStream <<_games[_currentIndex]._appID <<"%%" + _games[_currentIndex]._img_icon_url + "%%" + _games[_currentIndex]._name <<"\n";
     } else {
-        writeStream <<_games[_selectedIndex.toInt()]._appID <<"\n";
+        writeStream <<_games[_currentIndex]._appID <<"\n";
     }
 
     fileHide.close();
     for (int i = 0; i < _games.getCount(); ++i) {
-        if(_games[_selectedIndex.toInt()]._name == ui->TableWidgetGames->item(i, c_tableColumnName)->text()) {
-            ui->TableWidgetGames->item(i, c_tableColumnName)->setForeground(QColor(255 * 0.7, 0, 0));
-            ui->TableWidgetGames->setRowHidden(i, true);
+        if(_games[_currentIndex]._name == ui->tableView->model()->index(i, c_tableColumnName).data().toString()) {
+            //Найти аналог
+            //ui->tableView->item(i, c_tableColumnName)->setForeground(QColor(255 * 0.7, 0, 0));
+            ui->tableView->setRowHidden(i, true);
             break;
         }
     }
-    ui->ButtonHide->setFixedSize(ui->ButtonHide->size());
-    ui->ButtonHide->setIcon(QIcon(Images::unhide()));
+    //ui->ButtonHide->setFixedSize(ui->ButtonHide->size());
+    //ui->ButtonHide->setIcon(QIcon(Images::unhide()));
     delete btnProfile;
     delete btnAll;
 }

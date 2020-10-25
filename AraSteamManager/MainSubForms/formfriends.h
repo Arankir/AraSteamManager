@@ -47,6 +47,8 @@ private slots:
     void updateCurrentFriend();
     QPair<SFriend, SProfile> *getFriendFromRow(int aRow);
     int getCurrentFriendIndex();
+    int getIndexFriendFromRow(int aRow);
+    int getRowFromIndexFriend(int aIndex);
     bool isProfileFavorite(const QPair<SFriend, SProfile> &aProfile);
     //Взаимодействие с таблицей
     QMenu *createMenu(const QPair<SFriend, SProfile> &profile);
@@ -60,8 +62,6 @@ private slots:
     void comboBoxStatus_Activated(int index);
     void checkBoxFavorites_StateChanged(int arg1);
 
-    int getIndexFriendFromRow(int aRow);
-    int getRowFromIndexFriend(int aIndex);
 private:
     Ui::FormFriends *ui;
 

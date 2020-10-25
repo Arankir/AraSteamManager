@@ -15,7 +15,7 @@ public:
 
 signals:
     void s_games_progress(int progress, int row);
-    void s_games_finished();
+    void s_games_finished_model(QStandardItemModel *);
     void s_friends_progress(int progress, int row);
     void s_friends_finished_model(QStandardItemModel *);
     void s_statistics_progress(int progress, int row);
@@ -26,7 +26,7 @@ signals:
 
 
 public slots:
-    int AddThreadGames(const int columnID, const int columnIndex, const int columnName, QTableWidget *tableWidgetGames, SGames games);
+    int AddThreadGames(const int columnID, const int columnIndex, const int columnIcon, const int columnName, const int columnComment, const int columnProgress, SGames games);
     int AddThreadAchievements(const int tableColumnAppid, const int tableColumnTitle, const int tableColumnDescription, const int tableColumnWorld, const int tableColumnMy,
                               SAchievements *achievements, QTableWidget *TableWidgetAchievements);
     int AddThreadFriends(const int columnID, const int columnIndex, const int columnIcon, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
