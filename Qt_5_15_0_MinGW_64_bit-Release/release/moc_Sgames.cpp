@@ -64,7 +64,7 @@ void SGame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
 }
 
 QT_INIT_METAOBJECT const QMetaObject SGame::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    QMetaObject::SuperData::link<Sapi::staticMetaObject>(),
     qt_meta_stringdata_SGame.data,
     qt_meta_data_SGame,
     qt_static_metacall,
@@ -83,17 +83,17 @@ void *SGame::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_SGame.stringdata0))
         return static_cast<void*>(this);
-    return QObject::qt_metacast(_clname);
+    return Sapi::qt_metacast(_clname);
 }
 
 int SGame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = Sapi::qt_metacall(_c, _id, _a);
     return _id;
 }
 struct qt_meta_stringdata_SGames_t {
     QByteArrayData data[7];
-    char stringdata0[55];
+    char stringdata0[44];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -107,12 +107,12 @@ QT_MOC_LITERAL(1, 7, 10), // "s_finished"
 QT_MOC_LITERAL(2, 18, 0), // ""
 QT_MOC_LITERAL(3, 19, 7), // "SGames*"
 QT_MOC_LITERAL(4, 27, 6), // "onLoad"
-QT_MOC_LITERAL(5, 34, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 49, 5) // "Reply"
+QT_MOC_LITERAL(5, 34, 5), // "parse"
+QT_MOC_LITERAL(6, 40, 3) // "doc"
 
     },
     "SGames\0s_finished\0\0SGames*\0onLoad\0"
-    "QNetworkReply*\0Reply"
+    "parse\0doc"
 };
 #undef QT_MOC_LITERAL
 
@@ -122,7 +122,7 @@ static const uint qt_meta_data_SGames[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -130,18 +130,20 @@ static const uint qt_meta_data_SGames[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   29,    2, 0x06 /* Public */,
-       1,    0,   32,    2, 0x06 /* Public */,
+       1,    1,   34,    2, 0x06 /* Public */,
+       1,    0,   37,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   33,    2, 0x08 /* Private */,
+       4,    0,   38,    2, 0x08 /* Private */,
+       5,    1,   39,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QJsonDocument,    6,
 
        0        // eod
 };
@@ -154,7 +156,8 @@ void SGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SGames*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->onLoad((*reinterpret_cast< QNetworkReply*(*)>(_a[1]))); break;
+        case 2: _t->onLoad(); break;
+        case 3: _t->parse((*reinterpret_cast< const QJsonDocument(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -165,13 +168,6 @@ void SGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SGames* >(); break;
-            }
-            break;
-        case 2:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QNetworkReply* >(); break;
             }
             break;
         }
@@ -195,7 +191,7 @@ void SGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
 }
 
 QT_INIT_METAOBJECT const QMetaObject SGames::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    QMetaObject::SuperData::link<Sapi::staticMetaObject>(),
     qt_meta_stringdata_SGames.data,
     qt_meta_data_SGames,
     qt_static_metacall,
@@ -214,22 +210,22 @@ void *SGames::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_SGames.stringdata0))
         return static_cast<void*>(this);
-    return QObject::qt_metacast(_clname);
+    return Sapi::qt_metacast(_clname);
 }
 
 int SGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = Sapi::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

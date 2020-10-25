@@ -36,7 +36,7 @@ void FormAchievements::initComponents(SAchievementsPlayer &aPlayer) {
 
     //Временно
     ui->ListWidgetValuesCategory->setDragEnabled(false);
-    FormCompareFriends *Compare = new FormCompareFriends(ui->FrameCompare);
+    //FormCompareFriends *Compare = new FormCompareFriends(ui->FrameCompare);
 
     QLabel *allFriends = new QLabel("All", this);
     allFriends->setToolTip(tr("Достижения друзей"));

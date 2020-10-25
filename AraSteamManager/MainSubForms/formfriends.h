@@ -2,19 +2,12 @@
 #define FORMFRIENDS_H
 
 #include <QWidget>
-#include <QFile>
-#include <QStandardItem>
-#include "class/Network/requestimage.h"
+#include <QMenu>
+
 #include "class/steamapi/Sfriends.h"
 #include "class/Threads/threading.h"
-//#include "class/settings.h"
 #include "class/favorites.h"
 #include "class/filter.h"
-#include "subwidget/qbuttonwithdata.h"
-#include <QtAlgorithms>
-#include <QAction>
-#include <QMenu>
-#include <QToolButton>
 
 namespace Ui {
 class FormFriends;
@@ -24,14 +17,8 @@ class FormFriends : public QWidget {
     Q_OBJECT
 
 public slots:
-    void changeEvent(QEvent *event);
-    void progressLoading(int p,int row);
     void updateSettings();
 
-    [[deprecated("now use in throw")]]
-    void pullTable(int aTo, int aDo);
-    void onTablePulled();
-    void createThread();
 public:
     explicit FormFriends(const QString &id, SFriends &Friends, QWidget *parent = nullptr);
     ~FormFriends();
@@ -43,59 +30,50 @@ signals:
     void s_go_to_profile(const QString &id, ProfileUrlType type);
 
 private slots:
-    void initComponents(SFriends &aFriends);
+    //Инициализация
+    void initFriends(SFriends &aFriends);
+    void initTable();
+    void initComboBoxStatus();
+    //Доподгрузка данных
+    void createThread();
+    void setTableModel(QStandardItemModel *aModel);
+    //Эвенты
+    void changeEvent(QEvent *event);
     void closeEvent(QCloseEvent *event);
+    //Часто использующиеся функции
     void retranslate();
     void setIcons();
     void updateHiddenRows();
-
-    [[deprecated("now use in QMenu")]]
-    void friendToUi();
-
-    void buttonFriendGoTo_Clicked();
-    void buttonFriendFavorite_Clicked();
-
+    void updateCurrentFriend();
+    QPair<SFriend, SProfile> *getFriendFromRow(int aRow);
+    int getCurrentFriendIndex();
+    bool isProfileFavorite(const QPair<SFriend, SProfile> &aProfile);
+    //Взаимодействие с таблицей
+    QMenu *createMenu(const QPair<SFriend, SProfile> &profile);
+    void updateActionFavoriteData(QAction *aAction, bool aIsFavorite);
+    void goToProfile();
+    void friendToFavorite();
+    //Фильтр
     void checkBoxOpenProfile_StateChanged(int arg1);
     void lineEditName_TextChanged(const QString &arg1);
     void buttonFind_Clicked();
     void comboBoxStatus_Activated(int index);
     void checkBoxFavorites_StateChanged(int arg1);
 
-    void tableWidgetFriends_CellClicked(int row, int col);
-    void tableWidgetFriends_CellDoubleClicked(int row, int column);
-
-//    QTableWidgetItem *getState(QString aGameExtraInfo, int aPersonaState);
-//    QTableWidgetItem *getPrivacy(int aCommunityVisibilityState);
-//    void updateButtonsPages(bool aFirst, QString aFirstText, bool aLabelDots1, bool aBack2, QString aBack2Text, bool aBack, QString aBackText, bool aCurrent, QString aCurrentText, bool aNext, QString aNextText, bool aNext2, QString aNext2Text, bool aLabelDots2, bool aLast, QString aLastText);
-//    void buttonPageFirst_Clicked();
-//    void buttonPageBack2_Clicked();
-//    void buttonPageBack_Clicked();
-//    void buttonPageNext_Clicked();
-//    void buttonPageNext2_Clicked();
-//    void buttonPageLast_Clicked();
-//    void calculateButtonPages();
+    int getIndexFriendFromRow(int aRow);
+    int getRowFromIndexFriend(int aIndex);
 private:
     Ui::FormFriends *ui;
+
     QString _id;
-    bool _blockedLoad = false;
     QList<QPair<SFriend, SProfile>> _friends;
-    //QList<QPair<SFriend*, SProfile*>> _visibleFriends;
+    QPair<SFriend, SProfile> *_currentFriend = nullptr;
+
+    bool _blockedLoad = false;
+
     Favorites _favorites;
     Filter _filter;
-    //QString _currentFriend;
-    //int _currentFriendIndex = -1;
-    //int _currentPage = 0;
-    QPair<SFriend, SProfile> *_currentFriend2 = nullptr;
 
-    //QVector<RequestData*> _request;
-    //int _numRequests = 0;
-    //int _numNow = 0;
-
-
-    QMenu *createMenu(const QPair<SFriend, SProfile> &profile);
-    QPushButton *createFriendButtonMenu(const QPair<SFriend, SProfile> &aProfile, int aRow);
-    bool isProfileFavorite(const QPair<SFriend, SProfile> &aProfile);
-    void updateActionFavoriteData(QAction *aAction, bool aIsFavorite);
 };
 
 #endif // FORMFRIENDS_H

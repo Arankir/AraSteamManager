@@ -2,13 +2,13 @@
 #include "ui_formgames.h"
 
 #define Constants {
-constexpr int c_tableColumnAppid = 0;
-constexpr int c_tableColumnIndex = 1;
-constexpr int c_tableColumnIcon = 2;
-constexpr int c_tableColumnName = 3;
+constexpr int c_tableColumnAppid    = 0;
+constexpr int c_tableColumnIndex    = 1;
+constexpr int c_tableColumnIcon     = 2;
+constexpr int c_tableColumnName     = 3;
 constexpr int c_tableColumnProgress = 4;
-constexpr int c_tableColumnTools = 5;
-constexpr int c_tableColumnCount = 6;
+constexpr int c_tableColumnTools    = 5;
+constexpr int c_tableColumnCount    = 6;
 #define ConstantsEnd }
 
 #define Init {

@@ -15,14 +15,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QTableWidget" name="tableWidget"/>
-     </item>
-     <item>
-      <widget class="QTableWidget" name="tableWidget_2"/>
-     </item>
-    </layout>
+    <widget class="FreezeRowsTable" name="tableView"/>
    </item>
    <item>
     <widget class="QFrame" name="frame">
@@ -86,6 +79,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FreezeRowsTable</class>
+   <extends>QTableView</extends>
+   <header>subwidget/freezerowstable.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

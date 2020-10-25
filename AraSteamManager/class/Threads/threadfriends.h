@@ -15,28 +15,25 @@ public slots:
     int fill();
 
 public:
-    explicit ThreadFriends(const int columnID, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
-                           QTableWidget *TableWidgetFriends, QList<QPair<SFriend, SProfile>> friends, QObject *parent = nullptr):
-        QObject(parent), c_tableColumnID(columnID), c_tableColumnName(columnName), c_tableColumnAdded(columnAdded), c_tableColumnStatus(columnStatus),
-        c_tableColumnisPublic(columnisPublic), _friends(friends), _tableWidgetFriends(TableWidgetFriends) {}
+    explicit ThreadFriends(const int columnID, const int columnIndex, const int columnIcon, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
+        QList<QPair<SFriend, SProfile>> friends, QObject *parent = nullptr): QObject(parent), c_tableColumnID(columnID), c_tableColumnIndex(columnIndex), c_tableColumnIcon(columnIcon),
+        c_tableColumnName(columnName), c_tableColumnAdded(columnAdded), c_tableColumnStatus(columnStatus), c_tableColumnisPublic(columnisPublic), _friends(friends) {}
 
 signals:
-    void s_finished();
+    void s_finishedModel(QStandardItemModel *model);
     void s_progress(int p, int row);
-
-private slots:
-    QTableWidgetItem *getState(const QString &gameExtraInfo, int personaState);
-    QTableWidgetItem *getPrivacy(int communityVisibilityState);
+    void s_finished();
 
 private:
     const int c_tableColumnID;
+    const int c_tableColumnIndex;
+    const int c_tableColumnIcon;
     const int c_tableColumnName;
     const int c_tableColumnAdded;
     const int c_tableColumnStatus;
     const int c_tableColumnisPublic;
     QList<QPair<SFriend, SProfile>> _friends;
     SProfiles _profiles;
-    QTableWidget *_tableWidgetFriends;
 };
 
 #endif // THREADFRIENDS_H

@@ -1,0 +1,135 @@
+INFO 2020-10-25 00:30:26 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-25 00:30:42 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(156,35)
+DEBG 2020-10-25 00:30:45 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(201,31)
+DEBG 2020-10-25 00:30:46 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(233,29)
+DEBG 2020-10-25 00:30:47 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(167,72)
+INFO 2020-10-25 00:37:56 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:38:04 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-25 00:38:11 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(171,118)
+INFO 2020-10-25 00:38:51 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-25 00:38:56 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(262,175)
+DEBG 2020-10-25 00:38:56 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(3,3,0x73e9fa0,QStandardItemModel(0x73ea0c0))
+DEBG 2020-10-25 00:38:56 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(3,0,0x73e9fa0,QStandardItemModel(0x73ea0c0))
+DEBG 2020-10-25 00:38:56 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561197975037801"
+DEBG 2020-10-25 00:38:56 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+INFO 2020-10-25 00:39:57 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-25 00:40:06 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(192,28)
+DEBG 2020-10-25 00:40:06 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,2,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:06 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,0,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:06 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198038451539"
+DEBG 2020-10-25 00:40:06 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(161,77)
+DEBG 2020-10-25 00:40:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,2,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,0,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198041744724"
+DEBG 2020-10-25 00:40:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:08 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(126,122)
+DEBG 2020-10-25 00:40:08 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(2,2,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:08 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(2,0,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:08 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198178328999"
+DEBG 2020-10-25 00:40:08 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(130,68)
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,2,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,0,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198041744724"
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(137,35)
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,2,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,0,0x74e9d60,QStandardItemModel(0x74e9ec0))
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198038451539"
+DEBG 2020-10-25 00:40:09 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+WRNG 2020-10-25 00:40:13   QPixmap::scaled: Pixmap is a null pixmap
+WRNG 2020-10-25 00:40:14   QPixmap::scaled: Pixmap is a null pixmap
+INFO 2020-10-25 00:40:14 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+DEBG 2020-10-25 00:40:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(160,27)
+DEBG 2020-10-25 00:40:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,2,0x7605960,QStandardItemModel(0x7605940))
+DEBG 2020-10-25 00:40:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,0,0x7605960,QStandardItemModel(0x7605940))
+DEBG 2020-10-25 00:40:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198038451539"
+DEBG 2020-10-25 00:40:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+INFO 2020-10-25 00:40:32 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-25 00:40:35 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(129,29)
+DEBG 2020-10-25 00:40:35 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,2,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:35 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,0,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:35 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198038451539"
+DEBG 2020-10-25 00:40:35 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:36 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(101,71)
+DEBG 2020-10-25 00:40:36 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,2,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:36 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,0,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:36 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198041744724"
+DEBG 2020-10-25 00:40:36 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(117,47)
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,2,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,0,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198038451539"
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(102,72)
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,2,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(1,0,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198041744724"
+DEBG 2020-10-25 00:40:37 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+DEBG 2020-10-25 00:40:38 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(111,35)
+DEBG 2020-10-25 00:40:38 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,2,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:38 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,0,0x73b1d90,QStandardItemModel(0x73b1eb0))
+DEBG 2020-10-25 00:40:38 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198038451539"
+DEBG 2020-10-25 00:40:38 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+INFO 2020-10-25 00:41:44 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-25 00:41:50 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(147,179)
+DEBG 2020-10-25 00:41:50 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(3,2,0x66e1540,QStandardItemModel(0x66e1320))
+DEBG 2020-10-25 00:41:50 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(3,0,0x66e1540,QStandardItemModel(0x66e1320))
+DEBG 2020-10-25 00:41:50 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561197975037801"
+DEBG 2020-10-25 00:41:50 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+INFO 2020-10-25 00:41:54 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 00:42:43 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:42:52 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 00:42:54 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:43:02 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+DEBG 2020-10-25 00:43:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(131,33)
+DEBG 2020-10-25 00:43:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,2,0x7570660,QStandardItemModel(0x7570520))
+DEBG 2020-10-25 00:43:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(0,0,0x7570660,QStandardItemModel(0x7570520))
+DEBG 2020-10-25 00:43:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198038451539"
+DEBG 2020-10-25 00:43:07 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+INFO 2020-10-25 00:43:12 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+DEBG 2020-10-25 00:43:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QPoint(108,136)
+DEBG 2020-10-25 00:43:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(2,2,0x8ecf860,QStandardItemModel(0x8ecf8a0))
+DEBG 2020-10-25 00:43:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  QModelIndex(2,0,0x8ecf860,QStandardItemModel(0x8ecf8a0))
+DEBG 2020-10-25 00:43:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  "76561198090770010"
+DEBG 2020-10-25 00:43:22 FormFriends::createThread()::<lambda(QStandardItemModel*)>::<lambda(QPoint)>  1
+INFO 2020-10-25 00:43:26 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 3 / 3
+INFO 2020-10-25 00:50:56 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:51:07 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 00:51:23 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:51:32 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 00:52:09 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:52:18 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 00:54:27 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:54:48 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 00:55:49 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:56:00 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 00:56:22 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:56:33 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 00:57:05 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 00:57:11 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 00:59:49 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 01:00:00 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 01:01:47 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 01:01:57 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 01:02:08 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 01:03:40 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 01:03:48 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 01:04:10 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 01:04:19 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 01:05:11 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 01:22:26 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 01:23:20 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 01:23:31 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 01:23:36 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 01:54:39 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 02:06:27 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 2020-10-25 02:06:38 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 02:07:14 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 02:07:23 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 02:07:35 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 3 / 3
+INFO 2020-10-25 02:07:46 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 3 / 3
+INFO 2020-10-25 02:08:00 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 2020-10-25 02:08:07 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 2 / 2
+INFO 2020-10-25 02:08:15 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 3 / 3

@@ -62,6 +62,7 @@ SOURCES += \
     frameless.cpp \
         main.cpp \
         mainwindow.cpp \
+    subwidget/freezerowstable.cpp \
     subwidget/qbuttonwithdata.cpp \
     subwidget/qcheckboxwithdata.cpp \
     subwidget/qcomboboxwithdata.cpp \
@@ -104,6 +105,7 @@ HEADERS += \
     formcontainerachievements.h \
     frameless.h \
         mainwindow.h \
+    subwidget/freezerowstable.h \
     subwidget/qbuttonwithdata.h \
     subwidget/qcheckboxwithdata.h \
     subwidget/qcomboboxwithdata.h \

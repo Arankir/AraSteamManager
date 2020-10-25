@@ -98,7 +98,7 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QTableWidgetItem* _r = _t->getState((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+        case 3: { QTableWidgetItem* _r = _t->getState((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< QTableWidgetItem**>(_a[0]) = std::move(_r); }  break;
         case 4: { QTableWidgetItem* _r = _t->getPrivacy((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QTableWidgetItem**>(_a[0]) = std::move(_r); }  break;

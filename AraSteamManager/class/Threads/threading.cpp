@@ -19,9 +19,9 @@ int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const
     return 1;
 }
 
-int Threading::AddThreadFriends(const int aColumnID, const int aColumnName, const int aColumnAdded, const int aColumnStatus, const int aColumnisPublic,
-                                QTableWidget *aTableWidgetFriends, QList<QPair<SFriend, SProfile>> aFriends) {
-    ThreadFriends *friends = new ThreadFriends(aColumnID, aColumnName, aColumnAdded, aColumnStatus, aColumnisPublic, aTableWidgetFriends, aFriends);
+int Threading::AddThreadFriends(const int aColumnID, const int aColumnIndex, const int aColumnIcon, const int aColumnName, const int aColumnAdded, const int aColumnStatus, const int aColumnisPublic,
+                                QList<QPair<SFriend, SProfile>> aFriends) {
+    ThreadFriends *friends = new ThreadFriends(aColumnID, aColumnIndex, aColumnIcon, aColumnName, aColumnAdded, aColumnStatus, aColumnisPublic, aFriends);
     QThread *thread = createThread();
     friends->moveToThread(thread);
     connect(thread,  &QThread::started,          friends,        &ThreadFriends::fill);
@@ -29,12 +29,12 @@ int Threading::AddThreadFriends(const int aColumnID, const int aColumnName, cons
     connect(friends, &ThreadFriends::s_finished, friends,        &ThreadFriends::deleteLater);
     connect(thread,  &QThread::finished,         thread,         &QThread::deleteLater);
     connect(thread,  &QThread::finished,         this,           &Threading::deleteLater);
+    connect(friends, &ThreadFriends::s_finishedModel, parent(),  [=](QStandardItemModel *model) {
+                                                                     emit s_friends_finished_model(model);
+                                                                 });
     connect(friends, &ThreadFriends::s_progress, this->parent(), [=](int progress, int row) {
-                                                                        emit s_friends_progress(progress, row);
-                                                                    });
-    connect(friends, &ThreadFriends::s_finished, this->parent(), [=]() {
-                                                                        emit s_friends_finished();
-                                                                    });
+                                                                     emit s_friends_progress(progress, row);
+                                                                 });
     thread->start();
     return 1;
 }

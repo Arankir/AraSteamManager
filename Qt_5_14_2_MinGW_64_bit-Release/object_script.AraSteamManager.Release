@@ -2,6 +2,7 @@ release/formachievements.o
 release/formachievementwidget.o
 release/formcategoryvalue.o
 release/formcategoryvalue_2.o
+release/formcomparefriends.o
 release/formcompareprofilefilter.o
 release/formtablesheaders.o
 release/formfavorites.o
@@ -34,6 +35,7 @@ release/formcontainerachievements.o
 release/frameless.o
 release/main.o
 release/mainwindow.o
+release/freezerowstable.o
 release/qbuttonwithdata.o
 release/qcheckboxwithdata.o
 release/qcomboboxwithdata.o
@@ -44,6 +46,7 @@ release/moc_formachievements.o
 release/moc_formachievementwidget.o
 release/moc_formcategoryvalue.o
 release/moc_formcategoryvalue_2.o
+release/moc_formcomparefriends.o
 release/moc_formcompareprofilefilter.o
 release/moc_formtablesheaders.o
 release/moc_formfavorites.o
@@ -73,3 +76,4 @@ release/moc_Sprofile.o
 release/moc_formcontainerachievements.o
 release/moc_frameless.o
 release/moc_mainwindow.o
+release/moc_freezerowstable.o
