@@ -144,7 +144,7 @@ SProfiles &SProfiles::load(QStringList aIds, bool aParallel, ProfileUrlType aTyp
 }
 
 void SProfiles::onLoad() {
-    if (_type == ProfileUrlType::vanity) {
+    if (QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("steamid").toString() != "") {
         QString id = QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("steamid").toString();
         _request.get(profileUrl(id), false);
     }

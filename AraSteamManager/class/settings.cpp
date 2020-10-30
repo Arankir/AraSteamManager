@@ -26,8 +26,6 @@ const QString    Settings::c_achievementContainerY        = "AchievementContaine
 const QString    Settings::c_achievementContainerMaximize = "achievementContainer/Maximize";
 
 #define SettingsStart {
-
-
 void Settings::setMyProfile(const QString &aMyProfiles) {
     return _settings->setValue(c_myProfile, aMyProfiles);
 }
@@ -166,19 +164,14 @@ bool Settings::createDir(const QString &aPath) {
     bool exist = true;
     QString path = aPath;
     path.replace("\\", "/");
-    if (path.lastIndexOf("/") != path.length() - 1) {
-        path += "/";
-    }
     QStringList dirs = path.split("/");
-    if (dirs.last() == "") {
+    if (dirs.last() != "") {
         dirs.removeLast();
     }
     QString pathNow = "";
     for (auto &dir: dirs) {
-        if (dir != dirs.last()) {
-            pathNow += std::move(dir) + "/";
-            exist = (QDir().mkdir(pathNow) && exist);
-        }
+        pathNow += std::move(dir) + "/";
+        exist = (QDir().mkdir(pathNow) && exist);
     }
     return exist;
 }
@@ -386,6 +379,38 @@ QString Images::bottom() {
     return "://" + Settings::getIconsColor() + "/bottom.png";
 }
 
+QString Images::isComment() {
+    return "://" + Settings::getIconsColor() + "/isComment.png";
+}
+
+QString Images::isNotComment() {
+    return "://" + Settings::getIconsColor() + "/isNotComment.png";
+}
+
+QString Images::achievement() {
+    return "://" + Settings::getIconsColor() + "/achievement.png";
+}
+
+QString Images::download() {
+    return "://" + Settings::getIconsColor() + "/download.png";
+}
+
+QString Images::visible() {
+    return "://" + Settings::getIconsColor() + "/visible.png";
+}
+
+QString Images::category() {
+    return "://" + Settings::getIconsColor() + "/category.png";
+}
+
+QString Images::group1() {
+    return "://" + Settings::getIconsColor() + "/group1.png";
+}
+
+QString Images::group2() {
+    return "://" + Settings::getIconsColor() + "/group2.png";
+}
+
 #define IconsWidgetStart {
 QString Images::checkBoxChecked() {
     return "://" + Settings::getIconsColor() + "/widgets/checkbox_checked.png";
@@ -478,15 +503,27 @@ QString Paths::hiddenGames(QString aGameId) {
     return QString("files/hide/%1%2").arg(aGameId, aGameId != "" ? ".txt" : "");
 }
 
+QString Paths::groupGames(QString aProfileId) {
+    return QString("files/groups/%1%2").arg(aProfileId, aProfileId != "" ? ".txt" : "");
+}
+
 QString Paths::imagesProfiles(const QString &aUrl) {
-    return QString("images/profiles/%1.jpg").arg(aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
+    return QString("files/images/profiles/%1.jpg").arg(aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
 }
 
 QString Paths::imagesAchievements(const QString &aGameId, const QString &aUrl) {
-    return QString("images/achievements/%1/%2.jpg").arg(aGameId, aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
+    return QString("files/images/achievements/%1/%2.jpg").arg(aGameId, aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
 }
 
 QString Paths::imagesGames(const QString &aUrl) {
-    return QString("images/games/%1.jpg").arg(aUrl);
+    return QString("files/images/games/%1.jpg").arg(aUrl);
+}
+
+QString Paths::commentsGames(const QString &aProfileId) {
+    return QString("files/comments/games/%1%2").arg(aProfileId, ".json");
+}
+
+QString Paths::commentsAchievements(const QString &aProfileId) {
+    return QString("files/comments/achievements/%1%2").arg(aProfileId, aProfileId != "" ? ".json" : "");
 }
 #define PathsEnd }

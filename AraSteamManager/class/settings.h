@@ -19,8 +19,6 @@ Q_DECLARE_LOGGING_CATEGORY(logCritical)
 class Settings : public QObject {
     Q_OBJECT
 public:
-    explicit Settings(QObject *parent = nullptr): QObject(parent) {}
-
     static void setMyProfile(const QString &myProfiles);
     static void setLanguage(int language);
     static void setTheme(int theme);
@@ -91,9 +89,12 @@ public:
     static QString categories(QString gameId = "");
     static QString favorites(QString type = "");
     static QString hiddenGames(QString gameID = "");
+    static QString groupGames(QString profileId = "");
     static QString imagesProfiles(const QString &url);
     static QString imagesAchievements(const QString &gameId, const QString &url);
     static QString imagesGames(const QString &url);
+    static QString commentsGames(const QString &profileId);
+    static QString commentsAchievements(const QString &aProfileId = "");
 };
 
 class Images : public QObject {
@@ -186,6 +187,16 @@ public:
     static QString scrollBarDown();
     static QString scrollBarLeft();
     static QString scrollBarRight();
+
+    static QString isComment();
+    static QString isNotComment();
+
+    static QString achievement();
+    static QString download();
+    static QString visible();
+    static QString category();
+    static QString group1();
+    static QString group2();
 
     static QString missingImage();
 };

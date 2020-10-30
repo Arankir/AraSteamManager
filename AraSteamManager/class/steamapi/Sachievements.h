@@ -195,28 +195,26 @@ class SAchievementsPlayer : public Sapi {
 public:
     explicit SAchievementsPlayer(const QString &appid, const QString &id, bool parallel = true, QObject *parent = nullptr);
     SAchievementsPlayer(QObject *parent = nullptr): Sapi(parent) {/*qDebug()<<"constructor 3";*/};
-    SAchievementsPlayer(const SAchievementsPlayer &achievements): Sapi(achievements.parent()), _index(achievements._index), _achievements(achievements._achievements),
+    SAchievementsPlayer(const SAchievementsPlayer &achievements): Sapi(achievements.parent()), _achievements(achievements._achievements),
         _id(achievements._id), _appid(achievements._appid), _gameName(achievements._gameName) {/*qDebug() << "copy" << _appid << _id;*/};
     ~SAchievementsPlayer() {/*qDebug() << "deleted" << _appid << _id;*/};
 
     SAchievementsPlayer &operator=(const SAchievementsPlayer &friends);
-    SAchievementPlayer &operator[](const int &index) {return _achievements[index];};
+    SAchievementPlayer &operator[](const int &index) {return _achievements[index];}
 
     SAchievementsPlayer &load(const QString &appid, const QString &id, bool paralell);
     SAchievementsPlayer &update(bool paralell = false);
     SAchievementsPlayer &clear();
 
-    SAchievementPlayer at(const int &index) {return _achievements[index];};
-    SAchievementsPlayer &remove(int index);;
+    SAchievementPlayer at(const int &index) {return _achievements[index];}
+    SAchievementsPlayer &remove(int index);
     QList<SAchievementPlayer>::iterator begin() {return _achievements.begin();}
     QList<SAchievementPlayer>::iterator end() {return _achievements.end();}
-    QString getAppid() const {return _appid;};
-    QString getGameName() const {return _gameName;};
-    int getReached() const {return _reached;};
-    int getNotReached() const {return _notReached;};
-    int getCount() const {return _achievements.size();};
-
-    int _index = 0;
+    QString getAppid()      const {return _appid;}
+    QString getGameName()   const {return _gameName;}
+    int getReached()        const {return _reached;}
+    int getNotReached()     const {return _notReached;}
+    int getCount()          const {return _achievements.size();}
 
 signals:
     void s_finished(SAchievementsPlayer*);

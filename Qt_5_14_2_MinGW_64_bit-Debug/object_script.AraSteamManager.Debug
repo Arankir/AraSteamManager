@@ -22,8 +22,10 @@ debug/threadgames.o
 debug/threading.o
 debug/threadstatistics.o
 debug/categoriesgame.o
+debug/comments.o
 debug/favorites.o
 debug/filter.o
+debug/groupsgames.o
 debug/settings.o
 debug/Sachievements.o
 debug/Sapi.o
@@ -32,7 +34,9 @@ debug/Sfriends.o
 debug/Sgames.o
 debug/Slevels.o
 debug/Sprofile.o
+debug/formcommentsinteractions.o
 debug/formcontainerachievements.o
+debug/formgroupsgamesinteractions.o
 debug/frameless.o
 debug/main.o
 debug/mainwindow.o
@@ -75,7 +79,9 @@ debug/moc_Sfriends.o
 debug/moc_Sgames.o
 debug/moc_Slevels.o
 debug/moc_Sprofile.o
+debug/moc_formcommentsinteractions.o
 debug/moc_formcontainerachievements.o
+debug/moc_formgroupsgamesinteractions.o
 debug/moc_frameless.o
 debug/moc_mainwindow.o
 debug/moc_freezerowstable.o

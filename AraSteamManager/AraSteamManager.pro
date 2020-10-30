@@ -49,8 +49,10 @@ SOURCES += \
     class/Threads/threading.cpp \
     class/Threads/threadstatistics.cpp \
     class/categoriesgame.cpp \
+    class/comments.cpp \
     class/favorites.cpp \
     class/filter.cpp \
+    class/groupsgames.cpp \
     class/settings.cpp \
     class/steamapi/Sachievements.cpp \
     class/steamapi/Sapi.cpp \
@@ -59,7 +61,9 @@ SOURCES += \
     class/steamapi/Sgames.cpp \
     class/steamapi/Slevels.cpp \
     class/steamapi/Sprofile.cpp \
+    formcommentsinteractions.cpp \
     formcontainerachievements.cpp \
+    formgroupsgamesinteractions.cpp \
     frameless.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -94,8 +98,10 @@ HEADERS += \
     class/Threads/threading.h \
     class/Threads/threadstatistics.h \
     class/categoriesgame.h \
+    class/comments.h \
     class/favorites.h \
     class/filter.h \
+    class/groupsgames.h \
     class/settings.h \
     class/steamapi/Sachievements.h \
     class/steamapi/Sapi.h \
@@ -104,7 +110,9 @@ HEADERS += \
     class/steamapi/Sgames.h \
     class/steamapi/Slevels.h \
     class/steamapi/Sprofile.h \
+    formcommentsinteractions.h \
     formcontainerachievements.h \
+    formgroupsgamesinteractions.h \
     frameless.h \
         mainwindow.h \
     subwidget/freezerowstable.h \
@@ -127,7 +135,9 @@ FORMS += \
     MainSubForms/formprofile.ui \
     MainSubForms/formsettings.ui \
     MainSubForms/formstatistics.ui \
+    formcommentsinteractions.ui \
     formcontainerachievements.ui \
+    formgroupsgamesinteractions.ui \
         mainwindow.ui \
 
 # Default rules for deployment.

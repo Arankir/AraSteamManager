@@ -135,7 +135,6 @@ void MultiSelectComboBox::onSearch(const QString& aSearchString)
     }
 }
 
-
 void MultiSelectComboBox::itemClicked(int aIndex)
 {
     if(aIndex != scSearchBarIndex)// 0 means the search bar

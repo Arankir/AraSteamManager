@@ -1,0 +1,19 @@
+INFO 13:00:51 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 13:00:55 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 14:00:31 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+WRNG 14:01:19 void FormGames::updateHideFromFile(const QString&)  file "files/hide/All.txt" coudn't open
+INFO 14:03:10 virtual ThreadAchievements::~ThreadAchievements()  Thread achievements deleted
+INFO 14:09:44 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 14:10:01 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+WRNG 14:10:03 void FormGames::updateHideFromFile(const QString&)  file "files/hide/All.txt" coudn't open
+INFO 14:11:28 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 14:11:36 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+WRNG 14:11:39 void FormGames::updateHideFromFile(const QString&)  file "files/hide/All.txt" coudn't open
+INFO 14:12:09 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 17:41:46 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 17:41:50 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 17:42:53 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+INFO 17:43:03 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed
+INFO 17:46:33 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
+WRNG 17:46:35 void FormGames::updateHideFromFile(const QString&)  file "files/hide/All.txt" coudn't open
+INFO 17:49:46 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SProfile_t {
-    QByteArrayData data[11];
-    char stringdata0[94];
+    QByteArrayData data[14];
+    char stringdata0[107];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,18 +36,21 @@ QT_MOC_LITERAL(0, 0, 8), // "SProfile"
 QT_MOC_LITERAL(1, 9, 10), // "s_finished"
 QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 9), // "SProfile*"
-QT_MOC_LITERAL(4, 31, 7), // "loadURL"
-QT_MOC_LITERAL(5, 39, 12), // "RequestData*"
-QT_MOC_LITERAL(6, 52, 7), // "request"
-QT_MOC_LITERAL(7, 60, 7), // "loading"
-QT_MOC_LITERAL(8, 68, 8), // "parallel"
-QT_MOC_LITERAL(9, 77, 3), // "set"
-QT_MOC_LITERAL(10, 81, 12) // "ObjSummaries"
+QT_MOC_LITERAL(4, 31, 4), // "load"
+QT_MOC_LITERAL(5, 36, 8), // "parallel"
+QT_MOC_LITERAL(6, 45, 6), // "onLoad"
+QT_MOC_LITERAL(7, 52, 5), // "parse"
+QT_MOC_LITERAL(8, 58, 12), // "ObjSummaries"
+QT_MOC_LITERAL(9, 71, 10), // "loadPixmap"
+QT_MOC_LITERAL(10, 82, 8), // "QPixmap&"
+QT_MOC_LITERAL(11, 91, 6), // "pixmap"
+QT_MOC_LITERAL(12, 98, 3), // "url"
+QT_MOC_LITERAL(13, 102, 4) // "size"
 
     },
-    "SProfile\0s_finished\0\0SProfile*\0loadURL\0"
-    "RequestData*\0request\0loading\0parallel\0"
-    "set\0ObjSummaries"
+    "SProfile\0s_finished\0\0SProfile*\0load\0"
+    "parallel\0onLoad\0parse\0ObjSummaries\0"
+    "loadPixmap\0QPixmap&\0pixmap\0url\0size"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,7 +60,7 @@ static const uint qt_meta_data_SProfile[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,22 +68,24 @@ static const uint qt_meta_data_SProfile[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
-       1,    0,   42,    2, 0x06 /* Public */,
+       1,    1,   44,    2, 0x06 /* Public */,
+       1,    0,   47,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   43,    2, 0x08 /* Private */,
-       7,    1,   46,    2, 0x08 /* Private */,
-       9,    1,   49,    2, 0x08 /* Private */,
+       4,    1,   48,    2, 0x08 /* Private */,
+       6,    0,   51,    2, 0x08 /* Private */,
+       7,    1,   52,    2, 0x08 /* Private */,
+       9,    3,   55,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5,    6,
-    QMetaType::Void, QMetaType::Bool,    8,
-    QMetaType::Void, QMetaType::QJsonObject,   10,
+    QMetaType::Void, QMetaType::Bool,    5,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QJsonObject,    8,
+    QMetaType::QPixmap, 0x80000000 | 10, QMetaType::QString, QMetaType::QSize,   11,   12,   13,
 
        0        // eod
 };
@@ -93,9 +98,11 @@ void SProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->loadURL((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 3: _t->loading((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 4: _t->set((*reinterpret_cast< QJsonObject(*)>(_a[1]))); break;
+        case 2: _t->load((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 3: _t->onLoad(); break;
+        case 4: _t->parse((*reinterpret_cast< const QJsonObject(*)>(_a[1]))); break;
+        case 5: { QPixmap _r = _t->loadPixmap((*reinterpret_cast< QPixmap(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< QSize(*)>(_a[3])));
+            if (_a[0]) *reinterpret_cast< QPixmap*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -106,13 +113,6 @@ void SProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfile* >(); break;
-            }
-            break;
-        case 2:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
             }
             break;
         }
@@ -136,7 +136,7 @@ void SProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
 }
 
 QT_INIT_METAOBJECT const QMetaObject SProfile::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    QMetaObject::SuperData::link<Sapi::staticMetaObject>(),
     qt_meta_stringdata_SProfile.data,
     qt_meta_data_SProfile,
     qt_static_metacall,
@@ -155,22 +155,22 @@ void *SProfile::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_SProfile.stringdata0))
         return static_cast<void*>(this);
-    return QObject::qt_metacast(_clname);
+    return Sapi::qt_metacast(_clname);
 }
 
 int SProfile::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = Sapi::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }
@@ -188,8 +188,8 @@ void SProfile::s_finished()
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 struct qt_meta_stringdata_SProfiles_t {
-    QByteArrayData data[12];
-    char stringdata0[102];
+    QByteArrayData data[5];
+    char stringdata0[40];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -202,19 +202,11 @@ QT_MOC_LITERAL(0, 0, 9), // "SProfiles"
 QT_MOC_LITERAL(1, 10, 10), // "s_finished"
 QT_MOC_LITERAL(2, 21, 0), // ""
 QT_MOC_LITERAL(3, 22, 10), // "SProfiles*"
-QT_MOC_LITERAL(4, 33, 7), // "loadURL"
-QT_MOC_LITERAL(5, 41, 12), // "RequestData*"
-QT_MOC_LITERAL(6, 54, 7), // "request"
-QT_MOC_LITERAL(7, 62, 10), // "loadVanity"
-QT_MOC_LITERAL(8, 73, 4), // "load"
-QT_MOC_LITERAL(9, 78, 8), // "parallel"
-QT_MOC_LITERAL(10, 87, 9), // "QueryType"
-QT_MOC_LITERAL(11, 97, 4) // "type"
+QT_MOC_LITERAL(4, 33, 6) // "onLoad"
 
     },
     "SProfiles\0s_finished\0\0SProfiles*\0"
-    "loadURL\0RequestData*\0request\0loadVanity\0"
-    "load\0parallel\0QueryType\0type"
+    "onLoad"
 };
 #undef QT_MOC_LITERAL
 
@@ -224,7 +216,7 @@ static const uint qt_meta_data_SProfiles[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -232,22 +224,18 @@ static const uint qt_meta_data_SProfiles[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
-       1,    0,   42,    2, 0x06 /* Public */,
+       1,    1,   29,    2, 0x06 /* Public */,
+       1,    0,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   43,    2, 0x0a /* Public */,
-       7,    1,   46,    2, 0x0a /* Public */,
-       8,    2,   49,    2, 0x08 /* Private */,
+       4,    0,   33,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5,    6,
-    QMetaType::Void, 0x80000000 | 5,    6,
-    QMetaType::Void, QMetaType::Bool, 0x80000000 | 10,    9,   11,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -260,9 +248,7 @@ void SProfiles::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SProfiles*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->loadURL((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 3: _t->loadVanity((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
-        case 4: _t->load((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< QueryType(*)>(_a[2]))); break;
+        case 2: _t->onLoad(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -273,20 +259,6 @@ void SProfiles::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfiles* >(); break;
-            }
-            break;
-        case 2:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
-            }
-            break;
-        case 3:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestData* >(); break;
             }
             break;
         }
@@ -310,7 +282,7 @@ void SProfiles::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
 }
 
 QT_INIT_METAOBJECT const QMetaObject SProfiles::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    QMetaObject::SuperData::link<Sapi::staticMetaObject>(),
     qt_meta_stringdata_SProfiles.data,
     qt_meta_data_SProfiles,
     qt_static_metacall,
@@ -329,22 +301,22 @@ void *SProfiles::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_SProfiles.stringdata0))
         return static_cast<void*>(this);
-    return QObject::qt_metacast(_clname);
+    return Sapi::qt_metacast(_clname);
 }
 
 int SProfiles::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = Sapi::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 3;
     }
     return _id;
 }

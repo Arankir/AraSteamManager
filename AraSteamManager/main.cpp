@@ -53,7 +53,7 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
     case QtFatalMsg:    out << "FATL "; break;
     }
 
-    out << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss ");
+    out << QTime::currentTime().toString("hh:mm:ss ");//"yyyy-MM-dd hh:mm:ss "
     out << /*aContext.category << ": " << */function << "  " << aMessage << endl;
     out.flush();
 
@@ -63,10 +63,10 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
 }
 
 void initLog() {
-    Settings::createDir("logs/");
+    Settings::createDir("files/logs/");
 
     //Удаление старых файлов
-    QDir dirLogs("logs/");
+    QDir dirLogs("files/logs/");
     dirLogs.setFilter(QDir::Files | QDir::NoSymLinks);
     dirLogs.setSorting(QDir::Name);
     QFileInfoList list = dirLogs.entryInfoList();
@@ -79,7 +79,7 @@ void initLog() {
         }
     }
 
-    logFile_.reset(new QFile("logs/" + QDateTime::currentDateTime().toString("log_yyyy.MM.dd") + ".txt"));
+    logFile_.reset(new QFile("files/logs/" + QDateTime::currentDateTime().toString("log_yyyy.MM.dd") + ".txt"));
     logFile_.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(log);
 }

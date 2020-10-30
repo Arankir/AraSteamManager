@@ -174,5 +174,23 @@
         <file>levels/9.png</file>
         <file>levels/0.png</file>
         <file>MissingImage.png</file>
+        <file>black/achievement.png</file>
+        <file>black/category.png</file>
+        <file>black/download.png</file>
+        <file>black/group1.png</file>
+        <file>black/group2.png</file>
+        <file>black/guides.png</file>
+        <file>black/isComment.png</file>
+        <file>black/isNotComment.png</file>
+        <file>black/visible.png</file>
+        <file>white/achievement.png</file>
+        <file>white/category.png</file>
+        <file>white/download.png</file>
+        <file>white/group1.png</file>
+        <file>white/group2.png</file>
+        <file>white/guides.png</file>
+        <file>white/isComment.png</file>
+        <file>white/isNotComment.png</file>
+        <file>white/visible.png</file>
     </qresource>
 </RCC>

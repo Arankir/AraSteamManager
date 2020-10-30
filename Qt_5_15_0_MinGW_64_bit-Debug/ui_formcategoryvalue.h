@@ -40,14 +40,9 @@ public:
     {
         if (FormCategoryValue->objectName().isEmpty())
             FormCategoryValue->setObjectName(QString::fromUtf8("FormCategoryValue"));
-        FormCategoryValue->resize(588, 25);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        FormCategoryValue->setFont(font);
+        FormCategoryValue->resize(470, 40);
         horizontalLayout = new QHBoxLayout(FormCategoryValue);
-        horizontalLayout->setSpacing(1);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(1, 1, 1, 1);
         LabelPosition = new QLabel(FormCategoryValue);
         LabelPosition->setObjectName(QString::fromUtf8("LabelPosition"));
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);

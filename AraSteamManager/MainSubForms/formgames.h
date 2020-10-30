@@ -5,14 +5,6 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QProgressBar>
-//#include "formcontainerachievements.h"
-//#include "class/settings.h"
-#include "class/favorites.h"
-#include "class/steamapi/Sgames.h"
-#include "class/steamapi/Sachievements.h"
-#include "class/Threads/threading.h"
-#include "class/Network/requestimage.h"
-#include "subwidget/qbuttonwithdata.h"
 #include <QList>
 #include <QMessageBox>
 #include <QPropertyAnimation>
@@ -20,6 +12,15 @@
 #include <QGraphicsDropShadowEffect>
 #include <QAction>
 #include <QMenu>
+#include "formgroupsgamesinteractions.h"
+#include "formcommentsinteractions.h"
+#include "class/favorites.h"
+#include "class/steamapi/Sgames.h"
+#include "class/steamapi/Sachievements.h"
+#include "class/Threads/threading.h"
+#include "class/Network/requestimage.h"
+#include "class/filter.h"
+#include "subwidget/qbuttonwithdata.h"
 
 namespace Ui {
 class FormGames;
@@ -29,12 +30,7 @@ class FormGames : public QWidget {
     Q_OBJECT
 
 public slots:
-    void onTablePushed();
     void updateSettings();
-
-    void showHideSlideWidget(bool f_flag);
-    void mouseMoveEvent(QMouseEvent *ev);
-    void enableMouseTracking(const QObjectList &aChildren);
 
 public:
     explicit FormGames(SProfile &profile, SGames &Games, QWidget *parent = nullptr);
@@ -53,41 +49,45 @@ private slots:
     void retranslate();
     void onResultAchievements(SAchievementsPlayer *ach);
     void closeEvent(QCloseEvent *event);
-    void resizeEvent(QResizeEvent *event);
 
     void lineEditGame_TextChanged(const QString &aFindText);
     void buttonFind_Clicked();
 
-    void tableWidgetGames_CellDoubleClicked(int row, int column);
-    void tableWidgetGames_CellClicked(int row, int column);
     void buttonAchievements_Clicked();
     void buttonFavorite_Clicked();
     void buttonHide_Clicked();
     void createThread();
 
-    void hideHiddenGames();
-    QMenu *createMenu(SGame &aGame, int aIndex);
-    void loadHiddenGames();
+    QMenu *createMenu(SGame &game);
+    void updateHiddenGames();
     void updateCurrentGame();
+    void initTable();
+    void setTableModel(QStandardItemModel *aModel);
+    int getIndexGameFromRow(int aRow);
+    int getRowFromIndexGame(int aIndex);
+    int getIndexGameFromIdGame(QString aId);
+    void updateHiddenRows();
+    void updateHideFromFile(const QString &aFile);
+    void initGroups();
+    void updateGroupsFilter();
+    void showGroupsInteractive();
+    void showCommentsInteractive();
+    int getRowFromIdGame(QString aId);
 private:
     Ui::FormGames *ui;
     SProfile _profile;
-    int _windowChildCount = 0;
     SGames _games;
+    QVector<SAchievementsPlayer*> _achievements;
+
     SGame *_currentGame = nullptr;
     int _currentIndex;
-    QVector<SAchievementsPlayer*> _achievements;
+
     Favorites _favorites;
+    Filter _filter;
     QStringList _hide;
-    int _load = 0;
+    GroupsGames _groups;
 
-    QPropertyAnimation *_animate;
-
-    const int c_widthVisibleGroup = 20;
-    const QPoint c_invisibleGroupPos = QPoint(-280, 0);
-    const QPoint c_visibleGroupPos = QPoint(20, 0);
-    const int c_widthGroup = 300;
-    bool _isGroupShow = false;
+    int _windowChildCount = 0;
 
 };
 

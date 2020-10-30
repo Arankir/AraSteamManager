@@ -342,7 +342,6 @@ QString MainWindow::getTheme() {
                     "margin: 0; "/* if there is only one tab, we don't want overlapping margins */
                 "} "
 #define tabbarend }
-#define tablewidget {
 #define headerview {
                 "QHeaderView::section, QTableView QTableCornerButton::section { "
                     "background-color: #13243e; "
@@ -462,7 +461,7 @@ QString MainWindow::getTheme() {
                     "image: url(" + Images::scrollBarLeft() + "); "
                 "}"
 #define scrollbarend }
-                "QWidget#MainWindow, QWidget#FormContainerAchievements { "
+                "QWidget#MainWindow, QWidget#FormContainerAchievements, QWidget#FormGroupsGamesInteractions, QWidget#FormCommentsInteractions { "
                     "background-color: " + backgroundGradient +
                     "border: 1px solid rgb(87, 203, 222); "
                 "} "
@@ -884,18 +883,24 @@ void MainWindow::resizeScrollArea(int aWidth) {
 
 #define Functions {
 void MainWindow::buttonFindProfile_Clicked() {
-    QString profileId = ui->LineEditIdProfile->text().remove("https://").remove("steamcommunity.com").remove('\r');
-    ProfileUrlType type;
-    if(ui->LineEditIdProfile->text().indexOf("/id/") > -1) {
-        profileId = profileId.remove("/id/").remove("/");
-        type = ProfileUrlType::vanity;
-    } else {
-        if(ui->LineEditIdProfile->text().indexOf("/profiles/") > -1) {
-            profileId = profileId.remove("/profiles/").remove("/");
-        }
-        type = ProfileUrlType::id;
+    //https://steamcommunity.com/profiles/76561198017985018/
+    //https://steamcommunity.com/id/xFrenzy47x
+    //steamcommunity.com/profiles/76561198017985018/
+    //steamcommunity.com/id/xFrenzy47x
+    //76561198017985018
+    //xFrenzy47x
+    QRegExp regExpProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
+    if (regExpProfileUrl.indexIn(ui->LineEditIdProfile->text()) < 0) {
+        qWarning() << "Не распознан профиль" << ui->LineEditIdProfile->text();
+        QMessageBox::warning(this, tr("Ошибка"), tr("Не удалось распознать синтаксис профиля"));
+        return;
     }
-    goToProfile(profileId, type);
+
+    if ((regExpProfileUrl.cap(4) == "profiles") || (QRegExp("\\d{17}").indexIn(regExpProfileUrl.cap(5)) >= 0)) {
+        goToProfile(regExpProfileUrl.cap(5), ProfileUrlType::id);
+    } else {
+        goToProfile(regExpProfileUrl.cap(5), ProfileUrlType::vanity);
+    }
     returnFromForms();
 }
 

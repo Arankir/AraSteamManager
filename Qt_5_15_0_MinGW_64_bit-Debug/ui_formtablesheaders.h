@@ -36,6 +36,7 @@ public:
         TableWidgetHorizontalHeader->setObjectName(QString::fromUtf8("TableWidgetHorizontalHeader"));
         TableWidgetHorizontalHeader->setGeometry(QRect(10, 10, 631, 111));
         TableWidgetHorizontalHeader->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        TableWidgetHorizontalHeader->setShowGrid(false);
         TableWidgetHorizontalHeader->setRowCount(1);
         TableWidgetHorizontalHeader->setColumnCount(7);
         TableWidgetHorizontalHeader->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
@@ -48,6 +49,8 @@ public:
             TableWidgetContent->setRowCount(7);
         TableWidgetContent->setObjectName(QString::fromUtf8("TableWidgetContent"));
         TableWidgetContent->setGeometry(QRect(10, 130, 631, 461));
+        TableWidgetContent->setSelectionBehavior(QAbstractItemView::SelectRows);
+        TableWidgetContent->setShowGrid(false);
         TableWidgetContent->setSortingEnabled(true);
         TableWidgetContent->setRowCount(7);
         TableWidgetContent->setColumnCount(7);

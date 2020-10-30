@@ -13,6 +13,7 @@ release/formsettings.o
 release/formstatistics.o
 release/requestdata.o
 release/requestimage.o
+release/MultiSelectComboBox.o
 release/donutbreakdownchart.o
 release/mainslice.o
 release/threadachievements.o
@@ -21,8 +22,10 @@ release/threadgames.o
 release/threading.o
 release/threadstatistics.o
 release/categoriesgame.o
+release/comments.o
 release/favorites.o
 release/filter.o
+release/groupsgames.o
 release/settings.o
 release/Sachievements.o
 release/Sapi.o
@@ -31,7 +34,9 @@ release/Sfriends.o
 release/Sgames.o
 release/Slevels.o
 release/Sprofile.o
+release/formcommentsinteractions.o
 release/formcontainerachievements.o
+release/formgroupsgamesinteractions.o
 release/frameless.o
 release/main.o
 release/mainwindow.o
@@ -57,6 +62,7 @@ release/moc_formsettings.o
 release/moc_formstatistics.o
 release/moc_requestdata.o
 release/moc_requestimage.o
+release/moc_MultiSelectComboBox.o
 release/moc_threadachievements.o
 release/moc_threadfriends.o
 release/moc_threadgames.o
@@ -73,7 +79,9 @@ release/moc_Sfriends.o
 release/moc_Sgames.o
 release/moc_Slevels.o
 release/moc_Sprofile.o
+release/moc_formcommentsinteractions.o
 release/moc_formcontainerachievements.o
+release/moc_formgroupsgamesinteractions.o
 release/moc_frameless.o
 release/moc_mainwindow.o
 release/moc_freezerowstable.o

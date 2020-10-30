@@ -18,7 +18,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -38,8 +37,7 @@ public:
     QHBoxLayout *horizontalLayout_6;
     MultiSelectComboBox *ComboBoxGroups;
     QCheckBox *CheckBoxFavorites;
-    QSpacerItem *horizontalSpacer;
-    QTableView *tableView;
+    QTableView *TableGames;
     QProgressBar *ProgressBarLoading;
 
     void setupUi(QWidget *FormGames)
@@ -99,12 +97,13 @@ public:
 
         CheckBoxFavorites = new QCheckBox(groupBox);
         CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
+        QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(CheckBoxFavorites->sizePolicy().hasHeightForWidth());
+        CheckBoxFavorites->setSizePolicy(sizePolicy2);
 
         horizontalLayout_6->addWidget(CheckBoxFavorites);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_6->addItem(horizontalSpacer);
 
 
         verticalLayout_5->addLayout(horizontalLayout_6);
@@ -112,10 +111,10 @@ public:
 
         verticalLayout_2->addWidget(groupBox);
 
-        tableView = new QTableView(FormGames);
-        tableView->setObjectName(QString::fromUtf8("tableView"));
+        TableGames = new QTableView(FormGames);
+        TableGames->setObjectName(QString::fromUtf8("TableGames"));
 
-        verticalLayout_2->addWidget(tableView);
+        verticalLayout_2->addWidget(TableGames);
 
         ProgressBarLoading = new QProgressBar(FormGames);
         ProgressBarLoading->setObjectName(QString::fromUtf8("ProgressBarLoading"));

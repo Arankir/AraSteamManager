@@ -178,7 +178,7 @@ SAchievementsPercentage &SAchievementsPercentage::remove(int aIndex) {
 #define SAchievementsPercentageEnd }
 #define SAchievementsPlayerStart {
 SAchievementsPlayer::SAchievementsPlayer(const QString &aAppid, const QString &aId, bool aParallel, QObject *aParent): Sapi(aParent), _id(aId), _appid(aAppid) {
-    //qDebug()<<"SAchievementsPlayer constructor 1"<<_id<<_appid;
+    //qDebug() << "SAchievementsPlayer constructor 1" << _id << _appid;
     load(_appid, _id, aParallel);
 }
 
@@ -190,8 +190,7 @@ SAchievementsPlayer &SAchievementsPlayer::operator=(const SAchievementsPlayer &a
     _appid          = aAchievements._appid;
     _id             = aAchievements._id;
     _gameName       = aAchievements._gameName;
-    _index          = aAchievements._index;
-    //qDebug()<<"SAchievementsPlayer equality"<<_appid<<_id;
+    //qDebug() << "SAchievementsPlayer equality" << _appid << _id;
     return *this;
 }
 
