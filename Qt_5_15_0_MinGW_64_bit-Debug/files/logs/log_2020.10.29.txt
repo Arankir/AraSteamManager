@@ -1,2 +1,0 @@
-INFO 15:45:44 void MainWindow::goToProfile(const QString&, ProfileUrlType)  Буфер профилей 1 / 1
-INFO 15:46:26 virtual void MainWindow::closeEvent(QCloseEvent*)  Programm closed

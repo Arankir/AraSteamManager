@@ -155,16 +155,8 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QWidget *tabCompare;
     QHBoxLayout *horizontalLayout_17;
-    QTableWidget *tableWidget;
-    QFrame *frame_2;
+    QFrame *FrameCompare;
     QVBoxLayout *verticalLayout_12;
-    QHBoxLayout *horizontalLayout_20;
-    QLineEdit *lineEdit;
-    QPushButton *pushButton;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents_2;
-    QScrollArea *scrollArea_2;
-    QWidget *scrollAreaWidgetContents_3;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -834,65 +826,14 @@ public:
         tabCompare->setObjectName(QString::fromUtf8("tabCompare"));
         horizontalLayout_17 = new QHBoxLayout(tabCompare);
         horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
-        tableWidget = new QTableWidget(tabCompare);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-
-        horizontalLayout_17->addWidget(tableWidget);
-
-        frame_2 = new QFrame(tabCompare);
-        frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        verticalLayout_12 = new QVBoxLayout(frame_2);
+        FrameCompare = new QFrame(tabCompare);
+        FrameCompare->setObjectName(QString::fromUtf8("FrameCompare"));
+        FrameCompare->setFrameShape(QFrame::StyledPanel);
+        FrameCompare->setFrameShadow(QFrame::Raised);
+        verticalLayout_12 = new QVBoxLayout(FrameCompare);
         verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
-        horizontalLayout_20 = new QHBoxLayout();
-        horizontalLayout_20->setObjectName(QString::fromUtf8("horizontalLayout_20"));
-        lineEdit = new QLineEdit(frame_2);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        sizePolicy5.setHeightForWidth(lineEdit->sizePolicy().hasHeightForWidth());
-        lineEdit->setSizePolicy(sizePolicy5);
 
-        horizontalLayout_20->addWidget(lineEdit);
-
-        pushButton = new QPushButton(frame_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        sizePolicy5.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy5);
-
-        horizontalLayout_20->addWidget(pushButton);
-
-
-        verticalLayout_12->addLayout(horizontalLayout_20);
-
-        scrollArea = new QScrollArea(frame_2);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        QSizePolicy sizePolicy7(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(scrollArea->sizePolicy().hasHeightForWidth());
-        scrollArea->setSizePolicy(sizePolicy7);
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 68, 68));
-        scrollArea->setWidget(scrollAreaWidgetContents_2);
-
-        verticalLayout_12->addWidget(scrollArea);
-
-        scrollArea_2 = new QScrollArea(frame_2);
-        scrollArea_2->setObjectName(QString::fromUtf8("scrollArea_2"));
-        sizePolicy6.setHeightForWidth(scrollArea_2->sizePolicy().hasHeightForWidth());
-        scrollArea_2->setSizePolicy(sizePolicy6);
-        scrollArea_2->setWidgetResizable(true);
-        scrollAreaWidgetContents_3 = new QWidget();
-        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 68, 318));
-        scrollArea_2->setWidget(scrollAreaWidgetContents_3);
-
-        verticalLayout_12->addWidget(scrollArea_2);
-
-
-        horizontalLayout_17->addWidget(frame_2);
+        horizontalLayout_17->addWidget(FrameCompare);
 
         tabWidget->addTab(tabCompare, QString());
 
@@ -901,7 +842,7 @@ public:
 
         retranslateUi(FormAchievements);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(FormAchievements);
@@ -1003,7 +944,6 @@ public:
         CheckBoxCategoryUniqueValue->setText(QCoreApplication::translate("FormAchievements", "\320\243\320\275\320\270\320\272\320\260\320\273\321\214\320\275\321\213\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\321\217", nullptr));
         CheckBoxCategoryVisibleAll->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \320\262\321\201\321\221", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabEditCategory), QCoreApplication::translate("FormAchievements", "\320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217\320\274\320\270", nullptr));
-        pushButton->setText(QCoreApplication::translate("FormAchievements", "PushButton", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabCompare), QCoreApplication::translate("FormAchievements", "\320\241\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\265 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270", nullptr));
     } // retranslateUi
 

@@ -507,16 +507,20 @@ QString Paths::groupGames(QString aProfileId) {
     return QString("files/groups/%1%2").arg(aProfileId, aProfileId != "" ? ".txt" : "");
 }
 
+QString Paths::temp() {
+    return QDir::tempPath() + "/" + QApplication::organizationName() + "/" + QApplication::applicationName() + "/";
+}
+
 QString Paths::imagesProfiles(const QString &aUrl) {
-    return QString("files/images/profiles/%1.jpg").arg(aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
+    return QString(temp() + "images/profiles/%1.jpg").arg(aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
 }
 
 QString Paths::imagesAchievements(const QString &aGameId, const QString &aUrl) {
-    return QString("files/images/achievements/%1/%2.jpg").arg(aGameId, aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
+    return QString(temp() + "images/achievements/%1/%2.jpg").arg(aGameId, aUrl.mid(aUrl.lastIndexOf("/") + 1, aUrl.lastIndexOf(".jpg") - aUrl.lastIndexOf("/") - 1));
 }
 
 QString Paths::imagesGames(const QString &aUrl) {
-    return QString("files/images/games/%1.jpg").arg(aUrl);
+    return QString(temp() + "images/games/%1.jpg").arg(aUrl);
 }
 
 QString Paths::commentsGames(const QString &aProfileId) {

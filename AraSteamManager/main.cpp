@@ -63,23 +63,23 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
 }
 
 void initLog() {
-    Settings::createDir("files/logs/");
+    Settings::createDir(Paths::temp() + "files/logs/");
 
     //Удаление старых файлов
-    QDir dirLogs("files/logs/");
+    QDir dirLogs(Paths::temp() + "files/logs/");
     dirLogs.setFilter(QDir::Files | QDir::NoSymLinks);
     dirLogs.setSorting(QDir::Name);
     QFileInfoList list = dirLogs.entryInfoList();
     for(auto &file: list) {
         if (file.fileName().indexOf("log_") == 0) {
-            QDateTime date = QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), "yyyy.MM.dd");
+            QDateTime date {QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), "yyyy.MM.dd")};
             if (date < QDateTime::currentDateTime().addMonths(-1)) {
                 QFile::remove(file.filePath() + "/" + file.fileName());
             }
         }
     }
 
-    logFile_.reset(new QFile("files/logs/" + QDateTime::currentDateTime().toString("log_yyyy.MM.dd") + ".txt"));
+    logFile_.reset(new QFile(Paths::temp() + "files/logs/" + QDateTime::currentDateTime().toString("log_yyyy.MM.dd") + ".txt"));
     logFile_.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(log);
 }

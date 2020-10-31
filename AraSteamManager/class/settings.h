@@ -9,6 +9,7 @@
 #include <QRect>
 #include <QLoggingCategory>
 #include <QFontDatabase>
+#include <QApplication>
 
 Q_DECLARE_LOGGING_CATEGORY(logDebug)
 Q_DECLARE_LOGGING_CATEGORY(logInfo)
@@ -90,6 +91,7 @@ public:
     static QString favorites(QString type = "");
     static QString hiddenGames(QString gameID = "");
     static QString groupGames(QString profileId = "");
+    static QString temp();
     static QString imagesProfiles(const QString &url);
     static QString imagesAchievements(const QString &gameId, const QString &url);
     static QString imagesGames(const QString &url);
