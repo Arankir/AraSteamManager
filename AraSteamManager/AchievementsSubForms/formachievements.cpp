@@ -609,6 +609,7 @@ void FormAchievements::showCategories() {
     }
     QList<QComboBoxWithData*> allComboBoxes = ui->ScrollAreaCategories->findChildren<QComboBoxWithData*>();
     QList<QCheckBoxWithData*> allCheckBoxes = ui->ScrollAreaCheckCategories->findChildren<QCheckBoxWithData*>();
+    int categoryNum = 0;
     for (auto &category: _categoriesGame) {
         QString title = category.getTitle();
         if (category.getIsNoValue()) {
@@ -620,7 +621,7 @@ void FormAchievements::showCategories() {
                 allCheckBoxes.removeOne(*checkBox);
                 //Создать новый чекбокс
                 QCheckBoxWithData *checkBoxCategoryNew = new QCheckBoxWithData(category.getTitle(), this);
-                //checkBoxCategoryNew->setObjectName("CheckBoxCategory" + QString::number(i));
+                checkBoxCategoryNew->setObjectName("CheckBoxCategory" + QString::number(categoryNum));
                 checkBoxCategoryNew->addData("TitleCategory", category.getTitle());
                 connect(checkBoxCategoryNew, &QCheckBoxWithData::stateChanged, this, &FormAchievements::checkBoxCategory_StateChanged);
                 layoutCheckBox->addRow(checkBoxCategoryNew);
@@ -655,14 +656,15 @@ void FormAchievements::showCategories() {
                 for (auto &&value: values) {
                     comboBoxCategoryNew->addItem(value.title);
                 }
-                //comboBoxCategoryNew->setObjectName("ComboBoxCategory" + QString::number(i));
-                //comboBoxCategoryNew->addData("NumberCategory", QString::number(i));
+                comboBoxCategoryNew->setObjectName("ComboBoxCategory" + QString::number(categoryNum));
+                comboBoxCategoryNew->addData("NumberCategory", QString::number(categoryNum));
                 comboBoxCategoryNew->addData("TitleCategory", category.getTitle());
                 connect(comboBoxCategoryNew, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxCategory_IndexChange(int)));
                 layoutComboBox->addRow(new QLabel(category.getTitle(), this), comboBoxCategoryNew);
             }
         }
         ui->ComboBoxCategories->addItem(category.getTitle());
+        ++categoryNum;
     }
 
     for(QCheckBoxWithData &&currentCheckBox: allCheckBoxes) {

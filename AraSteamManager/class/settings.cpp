@@ -2,8 +2,11 @@
 
 Q_LOGGING_CATEGORY(logFunc,     "Function")
 
+const QString    Settings::c_organizationName             = "Arankir";
+const QString    Settings::c_organizationDomain           = "Arankir";
+const QString    Settings::c_applicationName              = "SteamAchievementsStatistic";
 
-QSettings *Settings::_settings = new QSettings("Arankir", "SteamAchievementsStatistic");
+QSettings *Settings::_settings = new QSettings(c_organizationName, c_applicationName);
 
 const QString    Settings::c_language                     = "Settings/Language";
 const QString    Settings::c_theme                        = "Settings/Theme";
@@ -487,28 +490,32 @@ QString Images::missingImage() {
 #define SettingsEnd }
 
 #define PathsStart {
+QString Paths::documents() {
+    return QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/" + Settings::c_organizationName + "/" + Settings::c_applicationName + "/";
+}
+
+QString Paths::temp() {
+    return QDir::tempPath() + "/" + Settings::c_organizationName + "/" + Settings::c_applicationName + "/";
+}
+
 QString Paths::defaultFont() {
     return "C:/JosefinSans-Italic-VariableFont_wght.ttf";
 }
 
 QString Paths::categories(QString aGameId) {
-    return QString("files/categories/%1%2").arg(aGameId , aGameId != "" ? ".json" : "");
+    return QString(documents() + "files/categories/%1%2").arg(aGameId , aGameId != "" ? ".json" : "");
 }
 
 QString Paths::favorites(QString aType) {
-    return QString("files/favorites/%1%2").arg(aType , aType != "" ? ".json" : "");
+    return QString(documents() + "files/favorites/%1%2").arg(aType , aType != "" ? ".json" : "");
 }
 
 QString Paths::hiddenGames(QString aGameId) {
-    return QString("files/hide/%1%2").arg(aGameId, aGameId != "" ? ".txt" : "");
+    return QString(documents() + "files/hide/%1%2").arg(aGameId, aGameId != "" ? ".txt" : "");
 }
 
 QString Paths::groupGames(QString aProfileId) {
-    return QString("files/groups/%1%2").arg(aProfileId, aProfileId != "" ? ".txt" : "");
-}
-
-QString Paths::temp() {
-    return QDir::tempPath() + "/" + QApplication::organizationName() + "/" + QApplication::applicationName() + "/";
+    return QString(documents() + "files/groups/%1%2").arg(aProfileId, aProfileId != "" ? ".txt" : "");
 }
 
 QString Paths::imagesProfiles(const QString &aUrl) {
@@ -524,10 +531,10 @@ QString Paths::imagesGames(const QString &aUrl) {
 }
 
 QString Paths::commentsGames(const QString &aProfileId) {
-    return QString("files/comments/games/%1%2").arg(aProfileId, ".json");
+    return QString(documents() + "files/comments/games/%1%2").arg(aProfileId, ".json");
 }
 
 QString Paths::commentsAchievements(const QString &aProfileId) {
-    return QString("files/comments/achievements/%1%2").arg(aProfileId, aProfileId != "" ? ".json" : "");
+    return QString(documents() + "files/comments/achievements/%1%2").arg(aProfileId, aProfileId != "" ? ".json" : "");
 }
 #define PathsEnd }

@@ -10,6 +10,7 @@
 #include <QLoggingCategory>
 #include <QFontDatabase>
 #include <QApplication>
+#include <QStandardPaths>
 
 Q_DECLARE_LOGGING_CATEGORY(logDebug)
 Q_DECLARE_LOGGING_CATEGORY(logInfo)
@@ -20,6 +21,10 @@ Q_DECLARE_LOGGING_CATEGORY(logCritical)
 class Settings : public QObject {
     Q_OBJECT
 public:
+    static const QString c_organizationName;
+    static const QString c_organizationDomain;
+    static const QString c_applicationName;
+
     static void setMyProfile(const QString &myProfiles);
     static void setLanguage(int language);
     static void setTheme(int theme);
@@ -86,12 +91,13 @@ private:
 
 class Paths : public QObject {
 public:
+    static QString documents();
+    static QString temp();
     static QString defaultFont();
     static QString categories(QString gameId = "");
     static QString favorites(QString type = "");
     static QString hiddenGames(QString gameID = "");
     static QString groupGames(QString profileId = "");
-    static QString temp();
     static QString imagesProfiles(const QString &url);
     static QString imagesAchievements(const QString &gameId, const QString &url);
     static QString imagesGames(const QString &url);

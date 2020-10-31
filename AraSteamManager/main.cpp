@@ -63,10 +63,11 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
 }
 
 void initLog() {
-    Settings::createDir(Paths::temp() + "files/logs/");
+    QString logsPath = Paths::temp() + "files/logs/";
+    Settings::createDir(logsPath);
 
     //Удаление старых файлов
-    QDir dirLogs(Paths::temp() + "files/logs/");
+    QDir dirLogs(logsPath);
     dirLogs.setFilter(QDir::Files | QDir::NoSymLinks);
     dirLogs.setSorting(QDir::Name);
     QFileInfoList list = dirLogs.entryInfoList();
@@ -79,7 +80,7 @@ void initLog() {
         }
     }
 
-    logFile_.reset(new QFile(Paths::temp() + "files/logs/" + QDateTime::currentDateTime().toString("log_yyyy.MM.dd") + ".txt"));
+    logFile_.reset(new QFile(logsPath + QDateTime::currentDateTime().toString("log_yyyy.MM.dd") + ".txt"));
     logFile_.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(log);
 }
@@ -93,9 +94,9 @@ void registerTypes() {
 }
 
 void initSetting() {
-    QCoreApplication::setOrganizationName("Arankir");
-    QCoreApplication::setOrganizationDomain("Arankir");
-    QCoreApplication::setApplicationName("SteamAchievementsStatistic");
+    QCoreApplication::setOrganizationName(Settings::c_organizationName);
+    QCoreApplication::setOrganizationDomain(Settings::c_organizationDomain);
+    QCoreApplication::setApplicationName(Settings::c_applicationName);
 }
 
 void initLanguage(QApplication &app) {
