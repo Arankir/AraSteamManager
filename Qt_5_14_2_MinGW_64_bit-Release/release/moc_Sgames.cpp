@@ -64,7 +64,7 @@ void SGame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
 }
 
 QT_INIT_METAOBJECT const QMetaObject SGame::staticMetaObject = { {
-    QMetaObject::SuperData::link<Sapi::staticMetaObject>(),
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_SGame.data,
     qt_meta_data_SGame,
     qt_static_metacall,
@@ -83,17 +83,17 @@ void *SGame::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_SGame.stringdata0))
         return static_cast<void*>(this);
-    return Sapi::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int SGame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = Sapi::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     return _id;
 }
 struct qt_meta_stringdata_SGames_t {
     QByteArrayData data[7];
-    char stringdata0[44];
+    char stringdata0[49];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -107,12 +107,12 @@ QT_MOC_LITERAL(1, 7, 10), // "s_finished"
 QT_MOC_LITERAL(2, 18, 0), // ""
 QT_MOC_LITERAL(3, 19, 7), // "SGames*"
 QT_MOC_LITERAL(4, 27, 6), // "onLoad"
-QT_MOC_LITERAL(5, 34, 5), // "parse"
-QT_MOC_LITERAL(6, 40, 3) // "doc"
+QT_MOC_LITERAL(5, 34, 8), // "fromJson"
+QT_MOC_LITERAL(6, 43, 5) // "value"
 
     },
     "SGames\0s_finished\0\0SGames*\0onLoad\0"
-    "parse\0doc"
+    "fromJson\0value"
 };
 #undef QT_MOC_LITERAL
 
@@ -143,7 +143,7 @@ static const uint qt_meta_data_SGames[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QJsonDocument,    6,
+    QMetaType::Void, QMetaType::QJsonValue,    6,
 
        0        // eod
 };
@@ -157,7 +157,7 @@ void SGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->s_finished((*reinterpret_cast< SGames*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
         case 2: _t->onLoad(); break;
-        case 3: _t->parse((*reinterpret_cast< const QJsonDocument(*)>(_a[1]))); break;
+        case 3: _t->fromJson((*reinterpret_cast< const QJsonValue(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

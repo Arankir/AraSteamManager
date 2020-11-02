@@ -1,13 +1,6 @@
 #ifndef CATEGORIESGAME_H
 #define CATEGORIESGAME_H
 
-#include <QObject>
-#include <QDir>
-#include <QFile>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-//#include "class/settings.h"
 #include "class/steamapi/Sgames.h"
 
 struct CategoryValue {

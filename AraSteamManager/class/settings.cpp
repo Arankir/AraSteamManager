@@ -1,12 +1,12 @@
 #include "settings.h"
 
-Q_LOGGING_CATEGORY(logFunc,     "Function")
+//Q_LOGGING_CATEGORY(logFunc,     "Function")
 
 const QString    Settings::c_organizationName             = "Arankir";
 const QString    Settings::c_organizationDomain           = "Arankir";
 const QString    Settings::c_applicationName              = "SteamAchievementsStatistic";
 
-QSettings *Settings::_settings = new QSettings(c_organizationName, c_applicationName);
+QSettings *      Settings::_settings                      = new QSettings(c_organizationName, c_applicationName);
 
 const QString    Settings::c_language                     = "Settings/Language";
 const QString    Settings::c_theme                        = "Settings/Theme";
@@ -14,7 +14,7 @@ const QString    Settings::c_saveImage                    = "Settings/SaveImages
 const QString    Settings::c_myProfile                    = "Settings/MyProfile";
 const QString    Settings::c_visibleHiddenGames           = "Settings/VisibleHiddenGames";
 const QString    Settings::c_ProfileInfoSize              = "Settings/VisibleProfileInfo";
-const QString    Settings::c_MaxTableRows                 = "Settings/MaxTableRows";
+//const QString    Settings::c_MaxTableRows                 = "Settings/MaxTableRows";
 
 const QString    Settings::c_mainWindowHeight             = "MainWindow/Height";
 const QString    Settings::c_mainWindowWidth              = "MainWindow/Width";
@@ -53,9 +53,9 @@ void Settings::setVisibleProfileInfo(int aVisibleProfileInfo) {
     return _settings->setValue(c_ProfileInfoSize, aVisibleProfileInfo);
 }
 
-void Settings::setMaximumTableRows(int rows){
-    return _settings->setValue(c_MaxTableRows, rows);
-}
+//void Settings::setMaximumTableRows(int rows){
+//    return _settings->setValue(c_MaxTableRows, rows);
+//}
 
 void Settings::setMainWindowParams(QRect aGeometry) {
     _settings->setValue(c_mainWindowHeight, aGeometry.height());
@@ -74,7 +74,7 @@ void Settings::setMainWindowGeometry(QSize aSize) {
     _settings->setValue(c_mainWindowWidth, aSize.width());
 }
 
-void Settings::setMainWindowMaximize(bool aMaximize) {
+void Settings::setMainWindowIsMaximize(bool aMaximize) {
     _settings->setValue(c_mainWindowMaximize, aMaximize);
 }
 
@@ -99,13 +99,13 @@ int Settings::getTheme() {
 
 QString Settings::getIconsColor() {
     switch(getTheme()) {
-    case 1: {
-        return "white";
-        break;
-    }
     case 2: {
         return "black";
-        break;
+        //break;
+    }
+    case 1: {
+        //return "white";
+        //break;
     }
     default: {
         return "white";
@@ -125,9 +125,9 @@ int Settings::getProfileInfoSize() {
     return _settings->value(c_ProfileInfoSize, 2).toInt();
 }
 
-int Settings::getMaximumTableRows() {
-    return _settings->value(c_MaxTableRows, 100).toInt();
-}
+//int Settings::getMaximumTableRows() {
+//    return _settings->value(c_MaxTableRows, 100).toInt();
+//}
 
 QRect Settings::getMainWindowGeometry() {
     return (QRect(0, 0, _settings->value(c_mainWindowWidth, 623).toInt(), _settings->value(c_mainWindowHeight, 479).toInt()));
@@ -153,10 +153,6 @@ QString Settings::getFontDefaultName() {
     static int id = QFontDatabase::addApplicationFont(Paths::defaultFont());
     static QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     return family;
-}
-
-const QString Settings::getKey() {
-    return "3826BF60403D15613B4B0381DAB7A7BD";
 }
 
 void Settings::syncronizeSettings() {

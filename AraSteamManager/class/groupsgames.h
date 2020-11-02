@@ -1,10 +1,8 @@
 #ifndef GROUPSGAMES_H
 #define GROUPSGAMES_H
 
-#include <QObject>
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sprofile.h"
-#include "class/settings.h"
 
 class GroupGames {
 public:

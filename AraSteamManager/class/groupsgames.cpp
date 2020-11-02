@@ -37,8 +37,8 @@ QJsonObject GroupGames::toJson() const {
 }
 
 GroupGames &GroupGames::fromJson(const QJsonObject &aObject) {
-    _title = aObject.value("title").toString();
-    _profileId = aObject.value("profileId").toString();
+    _title      = aObject.value("title").toString();
+    _profileId  = aObject.value("profileId").toString();
     for(const auto &game: aObject.value("games").toArray()) {
         _games.append(game.toString());
     }

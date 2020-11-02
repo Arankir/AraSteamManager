@@ -1,18 +1,7 @@
 #ifndef SLEVELS_H
 #define SLEVELS_H
 
-#include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QTextCodec>
-#include <QTcpSocket>
-#include <QEventLoop>
 #include "class/steamapi/Sapi.h"
-#include <QObject>
 
 class SLevels : public Sapi
 {
@@ -25,7 +14,7 @@ public:
     SLevels &load(const QString &steamId);
     SLevels &update();
 
-    int getLevel() const;
+    int getLevel() const {return _player_level;}
 
 signals:
     void s_finished(SLevels*);
@@ -33,7 +22,7 @@ signals:
 
 private slots:
     void onLoad() override;
-    void parse(const QJsonDocument &doc);
+    void fromJson(const QJsonValue &value) override;
 
 private:
     QString _steamid;//"76561198065018572"

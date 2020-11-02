@@ -1,13 +1,11 @@
 #ifndef FORMSETTINGS_H
 #define FORMSETTINGS_H
 
-#include <QWidget>
 #include <QMessageBox>
 #include <QDebug>
 #include <QFormLayout>
 #include <QPair>
 #include <QTranslator>
-//#include "class/settings.h"
 #include "class/Network/requestimage.h"
 #include "class/steamapi/Sprofile.h"
 #include "class/steamapi/Sgames.h"

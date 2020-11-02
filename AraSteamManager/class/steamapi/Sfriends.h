@@ -1,21 +1,8 @@
 #ifndef SFRIENDS_H
 #define SFRIENDS_H
 
-#include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QTcpSocket>
-#include <QObject>
-#include <QEventLoop>
 #include "class/steamapi/Sprofile.h"
 #include "class/steamapi/Sapi.h"
-#include <QObject>
-#include <QDateTime>
-#include <QJsonObject>
-#include <QTextCodec>
 
 class SFriend : public QObject {
     Q_OBJECT
@@ -60,7 +47,7 @@ signals:
 
 private slots:
     void onLoad() override;
-    void parse(const QJsonDocument &doc);
+    void fromJson(const QJsonValue &value) override;
 
 private:
     QString _id;

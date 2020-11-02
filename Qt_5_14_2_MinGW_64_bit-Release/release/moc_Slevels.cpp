@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SLevels_t {
     QByteArrayData data[7];
-    char stringdata0[46];
+    char stringdata0[51];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,12 +37,12 @@ QT_MOC_LITERAL(1, 8, 10), // "s_finished"
 QT_MOC_LITERAL(2, 19, 0), // ""
 QT_MOC_LITERAL(3, 20, 8), // "SLevels*"
 QT_MOC_LITERAL(4, 29, 6), // "onLoad"
-QT_MOC_LITERAL(5, 36, 5), // "parse"
-QT_MOC_LITERAL(6, 42, 3) // "doc"
+QT_MOC_LITERAL(5, 36, 8), // "fromJson"
+QT_MOC_LITERAL(6, 45, 5) // "value"
 
     },
     "SLevels\0s_finished\0\0SLevels*\0onLoad\0"
-    "parse\0doc"
+    "fromJson\0value"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,7 +73,7 @@ static const uint qt_meta_data_SLevels[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QJsonDocument,    6,
+    QMetaType::Void, QMetaType::QJsonValue,    6,
 
        0        // eod
 };
@@ -87,7 +87,7 @@ void SLevels::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 0: _t->s_finished((*reinterpret_cast< SLevels*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
         case 2: _t->onLoad(); break;
-        case 3: _t->parse((*reinterpret_cast< const QJsonDocument(*)>(_a[1]))); break;
+        case 3: _t->fromJson((*reinterpret_cast< const QJsonValue(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

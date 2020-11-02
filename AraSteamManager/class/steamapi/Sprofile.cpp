@@ -1,10 +1,12 @@
 #include "Sprofile.h"
 
 #define SProfileStart {
-SProfile &SProfile::operator=(const SProfile &aProfile) {
-    _status                     = aProfile._status;
-    _error                      = aProfile._error;
+SProfile::SProfile(const QJsonObject &aProfile, QObject *aParent): Sapi(aParent) {
+    fromJson(aProfile);
+}
 
+SProfile &SProfile::operator=(const SProfile &aProfile) {
+    Sapi::operator=(aProfile);
     _steamID                    = aProfile._steamID;//!
     _timeCreated                = aProfile._timeCreated;//!
     _communityVisibilityState   = aProfile._communityVisibilityState;
@@ -31,9 +33,8 @@ SProfile &SProfile::operator=(const SProfile &aProfile) {
     return *this;
 }
 
-const bool &SProfile::operator<(const SProfile &aProfile) {
-    static const bool b = _personaName.toLower() < aProfile._personaName.toLower();
-    return b;
+bool SProfile::operator<(const SProfile &aProfile) {
+    return _personaName.toLower() < aProfile._personaName.toLower();
 }
 
 void SProfile::load(bool aParallel) {
@@ -41,32 +42,32 @@ void SProfile::load(bool aParallel) {
 }
 
 void SProfile::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("players").toArray().at(0).toObject());
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("players").toArray().at(0).toObject());
     emit s_finished(this);
     emit s_finished();
 }
 
-void SProfile::parse(const QJsonObject &aProfile) {
-    _steamID =                                                    aProfile.value("steamid").toString();//!
-    _timeCreated =                  QDateTime::fromSecsSinceEpoch(aProfile.value("timecreated").toInt(),Qt::LocalTime);//!
-    _communityVisibilityState =                                   aProfile.value("communityvisibilitystate").toInt();
-    _profileState =                                               aProfile.value("profilestate").toInt();
-    _personaName =                                                aProfile.value("personaname").toString();
-    _lastLogoff =                   QDateTime::fromSecsSinceEpoch(aProfile.value("lastlogoff").toInt(),Qt::LocalTime);
-    _commentPermission =                                          aProfile.value("commentpermission").toInt();
-    _profileUrl =                                                 aProfile.value("profileurl").toString();
-    _avatar =                                                     aProfile.value("avatar").toString();
-    _avatarMedium =                                               aProfile.value("avatarmedium").toString();
-    _avatarFull =                                                 aProfile.value("avatarfull").toString();
-    _personaState =                                               aProfile.value("personastate").toInt();
-    _primaryClanID =                                              aProfile.value("primaryclanid").toString();
-    _personaStateFlags =                                          aProfile.value("personastateflags").toInt();
-    _gameExtraInfo =                                              aProfile.value("gameextrainfo").toString();
-    _gameID =                                                     aProfile.value("gameid").toString();
-    _locCountryCode =                                             aProfile.value("loccountrycode").toString();
-    _locStateCode =                                               aProfile.value("locstatecode").toString();
-    _locCityID =                                                  aProfile.value("loccityid").toInt();
-    _realName =                                                   aProfile.value("realname").toString();
+void SProfile::fromJson(const QJsonValue &aValue) {
+    _steamID =                                                    aValue.toObject().value("steamid").toString();//!
+    _timeCreated =                  QDateTime::fromSecsSinceEpoch(aValue.toObject().value("timecreated").toInt(),Qt::LocalTime);//!
+    _communityVisibilityState =                                   aValue.toObject().value("communityvisibilitystate").toInt();
+    _profileState =                                               aValue.toObject().value("profilestate").toInt();
+    _personaName =                                                aValue.toObject().value("personaname").toString();
+    _lastLogoff =                   QDateTime::fromSecsSinceEpoch(aValue.toObject().value("lastlogoff").toInt(),Qt::LocalTime);
+    _commentPermission =                                          aValue.toObject().value("commentpermission").toInt();
+    _profileUrl =                                                 aValue.toObject().value("profileurl").toString();
+    _avatar =                                                     aValue.toObject().value("avatar").toString();
+    _avatarMedium =                                               aValue.toObject().value("avatarmedium").toString();
+    _avatarFull =                                                 aValue.toObject().value("avatarfull").toString();
+    _personaState =                                               aValue.toObject().value("personastate").toInt();
+    _primaryClanID =                                              aValue.toObject().value("primaryclanid").toString();
+    _personaStateFlags =                                          aValue.toObject().value("personastateflags").toInt();
+    _gameExtraInfo =                                              aValue.toObject().value("gameextrainfo").toString();
+    _gameID =                                                     aValue.toObject().value("gameid").toString();
+    _locCountryCode =                                             aValue.toObject().value("loccountrycode").toString();
+    _locStateCode =                                               aValue.toObject().value("locstatecode").toString();
+    _locCityID =                                                  aValue.toObject().value("loccityid").toInt();
+    _realName =                                                   aValue.toObject().value("realname").toString();
 }
 
 SProfile &SProfile::update(bool aParallel) {
@@ -75,37 +76,15 @@ SProfile &SProfile::update(bool aParallel) {
 }
 
 QPixmap SProfile::getPixmapAvatar() {
-    return loadPixmap(_pixmapAvatar, _avatar, QSize(32, 32));
+    return loadPixmap(_pixmapAvatar, _avatar, Paths::imagesProfiles(_avatar), QSize(32, 32));
 }
 
 QPixmap SProfile::getPixmapAvatarMedium() {
-    return loadPixmap(_pixmapAvatarMedium, _avatarMedium, QSize(64, 64));
+    return loadPixmap(_pixmapAvatarMedium, _avatarMedium, Paths::imagesProfiles(_avatarMedium), QSize(64, 64));
 }
 
 QPixmap SProfile::getPixmapAvatarFull() {
-    return loadPixmap(_pixmapAvatarFull, _avatarFull, QSize(128, 128));
-}
-
-QPixmap SProfile::loadPixmap(QPixmap &aPixmap, const QString &aUrl, QSize aSize) {
-    if (aPixmap.isNull()) {
-        if (!aUrl.isEmpty()) {
-            QString savePath = Paths::imagesProfiles(aUrl);
-            if(!QFile::exists(savePath)) {
-                RequestImage *img = new RequestImage(aUrl, savePath, true, this);
-                QEventLoop loop;
-                connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-                loop.exec();
-                disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-                aPixmap = img->getPixmap();
-                delete img;
-            } else {
-                aPixmap = QPixmap(savePath);
-            }
-        } else {
-            aPixmap = QPixmap(Images::missingImage()).scaled(aSize);
-        }
-    }
-    return aPixmap;
+    return loadPixmap(_pixmapAvatarFull, _avatarFull, Paths::imagesProfiles(_avatarFull), QSize(128, 128));
 }
 #define SProfileEnd }
 #define SProfilesStart {
@@ -144,16 +123,20 @@ SProfiles &SProfiles::load(QStringList aIds, bool aParallel, ProfileUrlType aTyp
 }
 
 void SProfiles::onLoad() {
-    if (QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("steamid").toString() != "") {
-        QString id = QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("steamid").toString();
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response"));
+}
+
+void SProfiles::fromJson(const QJsonValue &aValue) {
+    if (aValue.toObject().value("steamid").toString() != "") {
+        QString id = aValue.toObject().value("steamid").toString();
         _request.get(profileUrl(id), false);
     }
-    add(QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("players").toArray());
+    add(aValue.toObject().value("players").toArray());
 }
 
 SProfiles &SProfiles::add(const QJsonArray &aProfiles) {
     if(aProfiles.size() > 0) {
-        for (auto profile: aProfiles) {
+        for (const auto &profile: aProfiles) {
             _profile.append(std::move(SProfile(profile.toObject())));
         }
         _status = StatusValue::success;
@@ -171,8 +154,8 @@ SProfiles &SProfiles::update(bool aParallel) {
 
 SProfiles &SProfiles::sort() {
     std::sort(_profile.begin(), _profile.end(), [](const SProfile &s1, const SProfile &s2)-> const bool {
-        return s1._personaName.compare(s2._personaName, Qt::CaseInsensitive) < 0;
-    });
+                                                    return s1._personaName.compare(s2._personaName, Qt::CaseInsensitive) < 0;
+                                                });
     return *this;
 }
 
@@ -183,9 +166,7 @@ SProfiles &SProfiles::clear() {
 }
 
 SProfiles &SProfiles::operator=(const SProfiles &aProfile) {
-    _status = aProfile._status;
-    _error = aProfile._error;
-
+    Sapi::operator=(aProfile);
     _profile = aProfile._profile;
     _ids = aProfile._ids;
     return *this;

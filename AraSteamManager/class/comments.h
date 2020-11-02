@@ -1,10 +1,7 @@
 #ifndef COMMENTS_H
 #define COMMENTS_H
 
-#include <QObject>
-#include <QFile>
 #include "class/steamapi/Sgames.h"
-#include "class/settings.h"
 
 class AchievementComment {
 public:

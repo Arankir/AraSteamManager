@@ -824,7 +824,7 @@ void MainWindow::changeEvent(QEvent *aEvent) {
 }
 
 void MainWindow::closeEvent(QCloseEvent *aEvent) {
-    _setting.setMainWindowMaximize(this->isMaximized());
+    _setting.setMainWindowIsMaximize(this->isMaximized());
     if(this->isMaximized()) {
         this->showNormal();
     }

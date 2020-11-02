@@ -21,10 +21,15 @@ SFriends &SFriends::load(const QString &aId, bool aParallel) {
     return *this;
 }
 
-void SFriends::parse(const QJsonDocument &aFriends) {
+void SFriends::onLoad() {
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("friendslist").toObject().value("friends"));
+    emit s_finished();
+}
+
+void SFriends::fromJson(const QJsonValue &aValue) {
     clear();
-    if (aFriends.object().value("friendslist").toObject().value("friends").toArray().size() > 0) {
-        for (auto friendP: aFriends.object().value("friendslist").toObject().value("friends").toArray()) {
+    if (aValue.toArray().size() > 0) {
+        for (const auto &friendP: aValue.toArray()) {
             _friends.append(std::move(SFriend(friendP.toObject())));
         }
         _status = StatusValue::success;
@@ -32,13 +37,6 @@ void SFriends::parse(const QJsonDocument &aFriends) {
         _status = StatusValue::error;
         _error = tr("friends is not exist");
     }
-}
-
-
-
-void SFriends::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()));
-    emit s_finished();
 }
 
 SProfiles SFriends::getProfiles() const {
@@ -74,9 +72,7 @@ SFriends::SFriends(const SFriends &aFriends) {
 }
 
 SFriends &SFriends::operator=(const SFriends &aFriends) {
-    _status     = aFriends._status;
-    _error      = aFriends._error;
-
+    Sapi::operator=(aFriends);
     _friends    = aFriends._friends;
     _id         = aFriends._id;
     return *this;

@@ -27,7 +27,7 @@ Filter &Filter::setCol(int aCol) {
     if (aCol > _col) {
         for (int i = 0; i < _row; ++i) {
             for (int j = _col; j < aCol; ++j) {
-                    _filter[i][j] = true;
+                _filter[i][j] = true;
             }
         }
     }

@@ -1,18 +1,7 @@
 #ifndef SBANS_H
 #define SBANS_H
 
-#include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QTextCodec>
-#include <QTcpSocket>
-#include <QEventLoop>
 #include "class/steamapi/Sapi.h"
-#include <QObject>
 
 class SBans : public Sapi
 {
@@ -38,7 +27,7 @@ signals:
 
 private slots:
     void onLoad() override;
-    void parse(const QJsonDocument &doc);
+    void fromJson(const QJsonValue &value) override;
 
 private:
     QJsonArray _bans;

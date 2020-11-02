@@ -303,7 +303,7 @@ int SAchievement::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 struct qt_meta_stringdata_SAchievementsGlobal_t {
     QByteArrayData data[6];
-    char stringdata0[49];
+    char stringdata0[54];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -316,12 +316,12 @@ QT_MOC_LITERAL(0, 0, 19), // "SAchievementsGlobal"
 QT_MOC_LITERAL(1, 20, 10), // "s_finished"
 QT_MOC_LITERAL(2, 31, 0), // ""
 QT_MOC_LITERAL(3, 32, 6), // "onLoad"
-QT_MOC_LITERAL(4, 39, 5), // "parse"
-QT_MOC_LITERAL(5, 45, 3) // "doc"
+QT_MOC_LITERAL(4, 39, 8), // "fromJson"
+QT_MOC_LITERAL(5, 48, 5) // "value"
 
     },
     "SAchievementsGlobal\0s_finished\0\0onLoad\0"
-    "parse\0doc"
+    "fromJson\0value"
 };
 #undef QT_MOC_LITERAL
 
@@ -350,7 +350,7 @@ static const uint qt_meta_data_SAchievementsGlobal[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QJsonDocument,    5,
+    QMetaType::Void, QMetaType::QJsonValue,    5,
 
        0        // eod
 };
@@ -363,7 +363,7 @@ void SAchievementsGlobal::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         switch (_id) {
         case 0: _t->s_finished(); break;
         case 1: _t->onLoad(); break;
-        case 2: _t->parse((*reinterpret_cast< const QJsonDocument(*)>(_a[1]))); break;
+        case 2: _t->fromJson((*reinterpret_cast< const QJsonValue(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -425,7 +425,7 @@ void SAchievementsGlobal::s_finished()
 }
 struct qt_meta_stringdata_SAchievementsPercentage_t {
     QByteArrayData data[6];
-    char stringdata0[53];
+    char stringdata0[58];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -438,12 +438,12 @@ QT_MOC_LITERAL(0, 0, 23), // "SAchievementsPercentage"
 QT_MOC_LITERAL(1, 24, 10), // "s_finished"
 QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 6), // "onLoad"
-QT_MOC_LITERAL(4, 43, 5), // "parse"
-QT_MOC_LITERAL(5, 49, 3) // "doc"
+QT_MOC_LITERAL(4, 43, 8), // "fromJson"
+QT_MOC_LITERAL(5, 52, 5) // "value"
 
     },
     "SAchievementsPercentage\0s_finished\0\0"
-    "onLoad\0parse\0doc"
+    "onLoad\0fromJson\0value"
 };
 #undef QT_MOC_LITERAL
 
@@ -472,7 +472,7 @@ static const uint qt_meta_data_SAchievementsPercentage[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QJsonDocument,    5,
+    QMetaType::Void, QMetaType::QJsonValue,    5,
 
        0        // eod
 };
@@ -485,7 +485,7 @@ void SAchievementsPercentage::qt_static_metacall(QObject *_o, QMetaObject::Call 
         switch (_id) {
         case 0: _t->s_finished(); break;
         case 1: _t->onLoad(); break;
-        case 2: _t->parse((*reinterpret_cast< const QJsonDocument(*)>(_a[1]))); break;
+        case 2: _t->fromJson((*reinterpret_cast< const QJsonValue(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -547,7 +547,7 @@ void SAchievementsPercentage::s_finished()
 }
 struct qt_meta_stringdata_SAchievementsPlayer_t {
     QByteArrayData data[7];
-    char stringdata0[70];
+    char stringdata0[75];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -561,12 +561,13 @@ QT_MOC_LITERAL(1, 20, 10), // "s_finished"
 QT_MOC_LITERAL(2, 31, 0), // ""
 QT_MOC_LITERAL(3, 32, 20), // "SAchievementsPlayer*"
 QT_MOC_LITERAL(4, 53, 6), // "onLoad"
-QT_MOC_LITERAL(5, 60, 5), // "parse"
-QT_MOC_LITERAL(6, 66, 3) // "doc"
+QT_MOC_LITERAL(5, 60, 8), // "fromJson"
+QT_MOC_LITERAL(6, 69, 5) // "value"
 
     },
     "SAchievementsPlayer\0s_finished\0\0"
-    "SAchievementsPlayer*\0onLoad\0parse\0doc"
+    "SAchievementsPlayer*\0onLoad\0fromJson\0"
+    "value"
 };
 #undef QT_MOC_LITERAL
 
@@ -595,7 +596,7 @@ static const uint qt_meta_data_SAchievementsPlayer[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QJsonDocument,    6,
+    QMetaType::Void, QMetaType::QJsonValue,    6,
 
        0        // eod
 };
@@ -608,7 +609,7 @@ void SAchievementsPlayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         switch (_id) {
         case 0: _t->s_finished((*reinterpret_cast< SAchievementsPlayer*(*)>(_a[1]))); break;
         case 1: _t->onLoad(); break;
-        case 2: _t->parse((*reinterpret_cast< const QJsonDocument(*)>(_a[1]))); break;
+        case 2: _t->fromJson((*reinterpret_cast< const QJsonValue(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {

@@ -11,13 +11,13 @@ SBans &SBans::load(const QString &aId, bool aParallel) {
 }
 
 void SBans::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()));
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("players"));
     emit s_finished();
 }
 
-void SBans::parse(const QJsonDocument &doc) {
-    if(doc.object().value("players").toArray().size() > 0) {
-        _bans = doc.object().value("players").toArray();
+void SBans::fromJson(const QJsonValue &aValue) {
+    if(aValue.toArray().size() > 0) {
+        _bans = aValue.toArray();
         _status = StatusValue::success;
     }
     else {

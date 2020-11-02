@@ -58,7 +58,7 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
     out.flush();
 
     QString output(function);
-    output += "  " + aMessage;
+    output += "  " + aMessage + "\n";
     OutputDebugString(reinterpret_cast<const wchar_t *>(output.utf16()));
 }
 

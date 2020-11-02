@@ -2,24 +2,23 @@
 #define SETTINGS_H
 
 #include <QObject>
-#include <QFile>
-#include <QDir>
-#include <QSettings>
 #include <QDebug>
+#include <QSettings>
+#include <QDir>
+#include <QFile>
 #include <QRect>
 #include <QLoggingCategory>
 #include <QFontDatabase>
 #include <QApplication>
 #include <QStandardPaths>
 
-Q_DECLARE_LOGGING_CATEGORY(logDebug)
-Q_DECLARE_LOGGING_CATEGORY(logInfo)
-Q_DECLARE_LOGGING_CATEGORY(logFunc)
-Q_DECLARE_LOGGING_CATEGORY(logWarning)
-Q_DECLARE_LOGGING_CATEGORY(logCritical)
+//Q_DECLARE_LOGGING_CATEGORY(logDebug)
+//Q_DECLARE_LOGGING_CATEGORY(logInfo)
+//Q_DECLARE_LOGGING_CATEGORY(logFunc)
+//Q_DECLARE_LOGGING_CATEGORY(logWarning)
+//Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
-class Settings : public QObject {
-    Q_OBJECT
+class Settings {
 public:
     static const QString c_organizationName;
     static const QString c_organizationDomain;
@@ -31,7 +30,7 @@ public:
     static void setSaveimage(int saveImage);
     static void setVisibleHiddenGames(int visibleHiddenGames);
     static void setVisibleProfileInfo(int visibleProfileInfo);
-    static void setMaximumTableRows(int rows);
+    //static void setMaximumTableRows(int rows);
 
     static QString getMyProfile();
     static int getLanguage();
@@ -40,12 +39,12 @@ public:
     static int getSaveImages();
     static int getVisibleHiddenGames();
     static int getProfileInfoSize();
-    static int getMaximumTableRows();
+    //static int getMaximumTableRows();
 
     static void setMainWindowParams(QRect geometry);
     static void setMainWindowPos(QPoint pos);
     static void setMainWindowGeometry(QSize size);
-    static void setMainWindowMaximize(bool maximize);
+    static void setMainWindowIsMaximize(bool maximize);
 
     static void setAchievementContainerParams(QRect geometry);
 
@@ -58,11 +57,8 @@ public:
 
     static QString getFontDefaultName();
 
-    static QString const getKey();
     static bool createDir(const QString &path);
     static void syncronizeSettings();
-
-signals:
 
 private:
     static QSettings *_settings;
@@ -73,7 +69,7 @@ private:
     static const QString c_myProfile;
     static const QString c_visibleHiddenGames;
     static const QString c_ProfileInfoSize;
-    static const QString c_MaxTableRows;
+    //static const QString c_MaxTableRows;
 
     static const QString c_mainWindowHeight;
     static const QString c_mainWindowWidth;
@@ -89,7 +85,7 @@ private:
 
 };
 
-class Paths : public QObject {
+class Paths {
 public:
     static QString documents();
     static QString temp();
@@ -105,7 +101,7 @@ public:
     static QString commentsAchievements(const QString &aProfileId = "");
 };
 
-class Images : public QObject {
+class Images {
 public:
     static QString loading();
     static QString logo();

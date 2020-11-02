@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SBans_t {
     QByteArrayData data[6];
-    char stringdata0[35];
+    char stringdata0[40];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,11 +36,12 @@ QT_MOC_LITERAL(0, 0, 5), // "SBans"
 QT_MOC_LITERAL(1, 6, 10), // "s_finished"
 QT_MOC_LITERAL(2, 17, 0), // ""
 QT_MOC_LITERAL(3, 18, 6), // "onLoad"
-QT_MOC_LITERAL(4, 25, 5), // "parse"
-QT_MOC_LITERAL(5, 31, 3) // "doc"
+QT_MOC_LITERAL(4, 25, 8), // "fromJson"
+QT_MOC_LITERAL(5, 34, 5) // "value"
 
     },
-    "SBans\0s_finished\0\0onLoad\0parse\0doc"
+    "SBans\0s_finished\0\0onLoad\0fromJson\0"
+    "value"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +70,7 @@ static const uint qt_meta_data_SBans[] = {
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QJsonDocument,    5,
+    QMetaType::Void, QMetaType::QJsonValue,    5,
 
        0        // eod
 };
@@ -82,7 +83,7 @@ void SBans::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         switch (_id) {
         case 0: _t->s_finished(); break;
         case 1: _t->onLoad(); break;
-        case 2: _t->parse((*reinterpret_cast< const QJsonDocument(*)>(_a[1]))); break;
+        case 2: _t->fromJson((*reinterpret_cast< const QJsonValue(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

@@ -1,38 +1,26 @@
 #ifndef SGAMES_H
 #define SGAMES_H
 
-#include <QMainWindow>
-#include <QTcpSocket>
-#include <QObject>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QEventLoop>
-#include <QTextCodec>
-#include <QObject>
 #include "class/steamapi/Sapi.h"
-#include "class/Network/requestimage.h"
 
-class SGame : public Sapi {
+class SGame : public QObject {
     Q_OBJECT
 public:
-    explicit SGame(const QJsonObject &game, QObject *parent = nullptr): Sapi(parent), _appID(game.value("appid").toInt()), _name(game.value("name").toString()),
+    explicit SGame(const QJsonObject &game, QObject *parent = nullptr): QObject(parent), _appID(game.value("appid").toInt()), _name(game.value("name").toString()),
         _playtime_2weeks(game.value("playtime_2weeks").toInt()), _playtime_forever(game.value("playtime_forever").toInt()),
         _has_community_visible_stats(game.value("has_community_visible_stats").toBool()), _img_icon_url(game.value("img_icon_url").toString()),
         _img_logo_url(game.value("img_logo_url").toString()) {}
-    SGame(const SGame &game): Sapi(game.parent()), _appID(game._appID), _name(game._name), _playtime_2weeks(game._playtime_2weeks),
+    SGame(const SGame &game): QObject(game.parent()), _appID(game._appID), _name(game._name), _playtime_2weeks(game._playtime_2weeks),
         _playtime_forever(game._playtime_forever), _has_community_visible_stats(game._has_community_visible_stats), _img_icon_url(game._img_icon_url),
         _img_logo_url(game._img_logo_url) {}
 
-    SGame &operator=(const SGame &game);
-    const bool &operator<(const SGame &game);
+    SGame & operator=(const SGame &game);
+    bool    operator<(const SGame &game);
 
     QPixmap getPixmapIcon();
     QPixmap getPixmapLogo();
 
+    //Пока сломано
     const QString getNumberPlayers(bool hardReload);
 
     const int _appID;
@@ -46,9 +34,6 @@ public:
 signals:
 
 private:
-    QPixmap getPixmap(QPixmap &pixmap, const QString &url, QSize size);
-    void onLoad() override {}
-
     QPixmap _pixmapIcon;
     QPixmap _pixmapLogo;
 
@@ -84,7 +69,7 @@ signals:
 
 private slots:
     void onLoad() override;
-    void parse(const QJsonDocument &doc);
+    void fromJson(const QJsonValue &value) override;
 
 private:
     QList<SGame> _games;

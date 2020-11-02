@@ -41,8 +41,8 @@ signals:
 public slots:
 
 private:
-    int _row = 0;
-    int _col = 0;
+    int _row {0};
+    int _col {0};
     QVector<QVector<bool>> _filter;
 };
 

@@ -1,9 +1,7 @@
 #ifndef SAPI_H
 #define SAPI_H
 
-#include <QObject>
-#include "class/settings.h"
-#include "class/Network/requestdata.h"
+#include "class/Network/requestimage.h"
 
 enum class StatusValue {
     none,
@@ -11,15 +9,19 @@ enum class StatusValue {
     error
 };
 
+QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePath, QSize aSize);
+
 class Sapi : public QObject {
     Q_OBJECT
 public:
-    StatusValue getStatus() const;
-    QString getError() const;
+    StatusValue getStatus() const {return _status;}
+    QString getError() const {return _error;}
+
+    static QString gameImageUrl(QString game, QString img_id);
 
 protected:
     explicit Sapi(QObject *parent = nullptr);
-             Sapi(const Sapi &api);
+    Sapi(const Sapi &api);
     ~Sapi();
     Sapi &operator=(const Sapi &api);
 
@@ -32,17 +34,21 @@ protected:
     static QString profileUrl(QStringList steamIds);
     static QString profilefromVanityUrl(QString steamId);
     static QString gameUrl(int freeGames, int gameInfo, QString steamId);
-    static QString gameImageUrl(QString game, QString img_id);
     static QString numberPlayersUrl(QString appId);
     static QString lvlUrl(QString steamId);
+
+    virtual void onLoad() = 0;
+    virtual void fromJson(const QJsonValue&) = 0;
 
 signals:
 
 protected:
-    virtual void onLoad() = 0;
     RequestData _request;
     StatusValue _status;
     QString _error;
+
+private:
+    static const QString _key;
 };
 
 #endif // SAPI_H

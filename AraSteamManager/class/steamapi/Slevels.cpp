@@ -11,13 +11,13 @@ SLevels &SLevels::load(const QString &aSteamId) {
 }
 
 void SLevels::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()));
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response"));
     emit s_finished(this);
     emit s_finished();
 }
 
-void SLevels::parse(const QJsonDocument &aLvls) {
-    int lvl = aLvls.object().value("response").toObject().value("player_level").toInt();
+void SLevels::fromJson(const QJsonValue &aValue) {
+    int lvl = aValue.toObject().value("player_level").toInt();
     if (lvl > 0) {
         _player_level = std::move(lvl);
         _status = StatusValue::success;
@@ -30,8 +30,4 @@ void SLevels::parse(const QJsonDocument &aLvls) {
 SLevels &SLevels::update() {
     load(_steamid);
     return *this;
-}
-
-int SLevels::getLevel() const {
-    return _player_level;
 }

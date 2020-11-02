@@ -1,12 +1,9 @@
 #ifndef FAVORITES_H
 #define FAVORITES_H
 
-#include <QObject>
-#include <QDateTime>
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sfriends.h"
 #include "class/steamapi/Sachievements.h"
-#include "class/settings.h"
 
 class FavoriteGame {
 public:

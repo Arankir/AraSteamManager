@@ -8,47 +8,24 @@ SGame &SGame::operator=(const SGame &aGame) {
     return *this;
 }
 
-const bool &SGame::operator<(const SGame &aGame) {
-    static const bool b = _name.compare(aGame._name, Qt::CaseInsensitive) < 0;
-    return b;
+bool SGame::operator<(const SGame &aGame) {
+//    qDebug() << _name.compare(aGame._name, Qt::CaseInsensitive);
+    return (_name < aGame._name);
 }
 
 QPixmap SGame::getPixmapIcon() {
-    return getPixmap(_pixmapIcon, _img_icon_url, QSize(32, 32));
+    return loadPixmap(_pixmapIcon, Sapi::gameImageUrl(QString::number(_appID), _img_icon_url), Paths::imagesGames(_img_icon_url), QSize(32, 32));
 }
 
 QPixmap SGame::getPixmapLogo() {
-    return getPixmap(_pixmapLogo, _img_logo_url, QSize(184, 69));
+    return loadPixmap(_pixmapLogo, Sapi::gameImageUrl(QString::number(_appID), _img_logo_url), Paths::imagesGames(_img_logo_url), QSize(184, 69));
 }
-
-QPixmap SGame::getPixmap(QPixmap &aPixmap, const QString &aUrl, QSize aSize) {
-    if (aPixmap.isNull()) {
-        if ((aUrl != "") && (aUrl.lastIndexOf("/") != aUrl.length() - 1)) {
-            QString savePath = Paths::imagesGames(aUrl);
-            if (!QFile::exists(savePath)) {
-                RequestImage img(gameImageUrl(QString::number(_appID), aUrl), savePath, true, this);
-                QEventLoop loop;
-                connect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-                loop.exec();
-                disconnect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-                aPixmap = img.getPixmap();
-            } else {
-                aPixmap = QPixmap(savePath);
-            }
-        } else {
-            aPixmap = QPixmap(Images::missingImage()).scaled(aSize);
-        }
-    }
-    return aPixmap;
-}
-
-
 
 const QString SGame::getNumberPlayers(bool hardReload) {
     if (_numberPlayers == "" || hardReload) {
-        _request.get(numberPlayersUrl(QString::number(_appID)), false);
-        double playersCount = QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("player_count").toDouble();
-        _numberPlayers = QString::number(playersCount);
+//        _request.get(numberPlayersUrl(QString::number(_appID)), false);
+//        double playersCount = QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("player_count").toDouble();
+//        _numberPlayers = QString::number(playersCount);
     }
     return _numberPlayers;
 }
@@ -58,35 +35,34 @@ SGames::SGames(const QString &aId, int aFreeGames, int aGameInfo, bool aParallel
     load(aId, aFreeGames, aGameInfo, aParallel);
 }
 
-SGames &SGames::operator=(const SGames & aGames) {
-    _games = aGames._games;
-    _status = aGames._status;
-    _error = aGames._error;
-    _id = aGames._id;
+SGames &SGames::operator=(const SGames &aGames) {
+    Sapi::operator=(aGames);
+    _games      = aGames._games;
+    _id         = aGames._id;
     _free_games = aGames._free_games;
-    _game_info = aGames._game_info;
+    _game_info  = aGames._game_info;
     return *this;
 }
 
 SGames &SGames::load(const QString &aId, int aFreeGames, int aGameInfo, bool aParallel) {
-    _id = aId;
+    _id         = aId;
     _free_games = aFreeGames;
-    _game_info = aGameInfo;
+    _game_info  = aGameInfo;
     _request.get(gameUrl(_free_games, _game_info, _id), aParallel);
     return *this;
 }
 
 void SGames::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()));
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("games"));
     emit s_finished(this);
     emit s_finished();
 }
 
-void SGames::parse(const QJsonDocument &doc) {
+void SGames::fromJson(const QJsonValue &aValue) {
     clear();
-    QJsonArray gamesArray = doc.object().value("response").toObject().value("games").toArray();
+    QJsonArray gamesArray = aValue.toArray();
     if (gamesArray.size() > 0) {
-        for (auto game: gamesArray) {
+        for (const auto &game: gamesArray) {
             _games.append(std::move(SGame(game.toObject())));
         }
         _status = StatusValue::success;
@@ -108,7 +84,9 @@ SGames &SGames::clear() {
 
 SGames &SGames::sort() {
     //Переделать нормально
-    //std::sort(_games.begin(), _games.end());
+//    std::sort(_games.begin(), _games.end(), [](const SGame &s1, const SGame &s2)-> const bool {
+//                            return s1._name.compare(s2._name, Qt::CaseInsensitive) < 0;
+//                        });
     std::list<SGame> list(_games.begin(), _games.end());
     list.sort(  [](const SGame &s1, const SGame &s2)-> const bool {
                     return s1._name.compare(s2._name, Qt::CaseInsensitive) < 0;

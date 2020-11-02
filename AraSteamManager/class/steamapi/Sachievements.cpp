@@ -17,44 +17,21 @@ _icon(aAchievement._icon), _iconGray(aAchievement._iconGray), _pixmapIcon(aAchie
 
 SAchievement &SAchievement::operator=(const SAchievement &aAchievement) {
     //qDebug()<<"SAchievement equality"<<_apiName;
-    _pixmapIcon = aAchievement._pixmapIcon;
+    _pixmapIcon     = aAchievement._pixmapIcon;
     _pixmapIconGray = aAchievement._pixmapIconGray;
     return *this;
 }
 
-const bool &SAchievement::operator<(const SAchievement &aAchievement){
-    static const bool b = _displayName.toLower() < aAchievement._displayName.toLower();
-    return b;
+bool SAchievement::operator<(const SAchievement &aAchievement) {
+    return _displayName.compare(aAchievement._displayName, Qt::CaseInsensitive) < 0;
 }
 
 QPixmap SAchievement::getIcon(int aGameId) {
-    return getPixmap(_pixmapIcon, _icon, QSize(64, 64), aGameId);
+    return loadPixmap(_pixmapIcon, _icon, Paths::imagesAchievements(QString::number(aGameId), _icon), QSize(64, 64));
 }
 
 QPixmap SAchievement::getIconGray(int aGameId) {
-    return getPixmap(_pixmapIconGray, _iconGray, QSize(64, 64), aGameId);
-}
-
-QPixmap SAchievement::getPixmap(QPixmap &pixmap, const QString &url, QSize size, int aGameId) {
-    if (pixmap.isNull()) {
-        if ((url != "") && (url.lastIndexOf("/") != url.length() - 1)) {
-            QString savePath = Paths::imagesAchievements(QString::number(aGameId), _icon);
-            if (!QFile::exists(savePath)) {
-                RequestImage *img = new RequestImage(url, savePath, true, this);
-                QEventLoop loop;
-                connect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-                loop.exec();
-                disconnect(img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-                pixmap = img->getPixmap();
-                delete img;
-            } else {
-                pixmap = QPixmap(savePath);
-            }
-        } else {
-            pixmap = QPixmap(Images::missingImage()).scaled(size);
-        }
-    }
-    return pixmap;
+    return loadPixmap(_pixmapIconGray, _iconGray, Paths::imagesAchievements(QString::number(aGameId), _iconGray), QSize(64, 64));
 }
 #define SAchievementEnd }
 
@@ -65,13 +42,11 @@ SAchievementsGlobal::SAchievementsGlobal(const QString &aAppid, bool aParallel, 
 }
 
 SAchievementsGlobal &SAchievementsGlobal::operator=(const SAchievementsGlobal &aAchievements) {
-    _status = _status;
-    _error = _error;
-
-    _achievements = aAchievements._achievements;
-    _appid = aAchievements._appid;
-    _gameName = aAchievements._gameName;
-    _gameVersion = aAchievements._gameVersion;
+    Sapi::operator=(aAchievements);
+    _achievements   = aAchievements._achievements;
+    _appid          = aAchievements._appid;
+    _gameName       = aAchievements._gameName;
+    _gameVersion    = aAchievements._gameVersion;
     //qDebug()<<"SAchievementsGlobal equality"<<_appid;
     return *this;
 }
@@ -88,17 +63,17 @@ SAchievementsGlobal &SAchievementsGlobal::load(const QString &aAppid, bool aPara
 }
 
 void SAchievementsGlobal::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()));
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("game"));
     emit s_finished();
 }
 
-void SAchievementsGlobal::parse(const QJsonDocument &aAchievements) {
+void SAchievementsGlobal::fromJson(const QJsonValue &aValue) {
     clear();
-    QJsonArray gameAchievements = aAchievements.object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray();
+    QJsonArray gameAchievements = aValue.toObject().value("availableGameStats").toObject().value("achievements").toArray();
     if(gameAchievements.size() > 0) {
-        _gameName = aAchievements.object().value("game").toObject().value("gameName").toString();
-        _gameVersion = aAchievements.object().value("game").toObject().value("gameVersion").toString();
-        for(auto achievement: gameAchievements) {
+        _gameName = aValue.toObject().value("gameName").toString();
+        _gameVersion = aValue.toObject().value("gameVersion").toString();
+        for(const auto &achievement: gameAchievements) {
             _achievements.append(std::move(SAchievementGlobal(achievement.toObject())));
         }
         _status = StatusValue::success;
@@ -126,11 +101,9 @@ SAchievementsPercentage::SAchievementsPercentage(const QString &aAppid, bool aPa
 }
 
 SAchievementsPercentage &SAchievementsPercentage::operator=(const SAchievementsPercentage &aAchievements) {
-    _status = aAchievements._status;
-    _error = aAchievements._error;
-
-    _achievements = aAchievements._achievements;
-    _appid = aAchievements._appid;
+    Sapi::operator=(aAchievements);
+    _achievements   = aAchievements._achievements;
+    _appid          = aAchievements._appid;
     //qDebug() << "equality" << _appid;
     return *this;
 }
@@ -142,15 +115,15 @@ SAchievementsPercentage &SAchievementsPercentage::load(const QString &aAppid, bo
 }
 
 void SAchievementsPercentage::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()));
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("achievementpercentages").toObject().value("achievements"));
     emit s_finished();
 }
 
-void SAchievementsPercentage::parse(const QJsonDocument &aAchievements) {
+void SAchievementsPercentage::fromJson(const QJsonValue &aValue) {
     clear();
-    QJsonArray achievementsArray = aAchievements.object().value("achievementpercentages").toObject().value("achievements").toArray();
+    QJsonArray achievementsArray = aValue.toArray();
     if (achievementsArray.size() > 0) {
-        for (auto achievement: achievementsArray) {
+        for (const auto &achievement: achievementsArray) {
             _achievements.append(std::move(SAchievementPercentage(achievement.toObject())));
         }
         _status = StatusValue::success;
@@ -183,9 +156,7 @@ SAchievementsPlayer::SAchievementsPlayer(const QString &aAppid, const QString &a
 }
 
 SAchievementsPlayer &SAchievementsPlayer::operator=(const SAchievementsPlayer &aAchievements) {
-    _status         = aAchievements._status;
-    _error          = aAchievements._error;
-
+    Sapi::operator=(aAchievements);
     _achievements   = aAchievements._achievements;
     _appid          = aAchievements._appid;
     _id             = aAchievements._id;
@@ -202,17 +173,17 @@ SAchievementsPlayer &SAchievementsPlayer::load(const QString &aAppid, const QStr
 }
 
 void SAchievementsPlayer::onLoad() {
-    parse(QJsonDocument::fromJson(_request.getReply()));
+    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("playerstats"));
     emit s_finished(this);
 }
 
-void SAchievementsPlayer::parse(const QJsonDocument &aAchievements) {
+void SAchievementsPlayer::fromJson(const QJsonValue &aValue) {
     clear();
-    QJsonArray achievementsArray = aAchievements.object().value("playerstats").toObject().value("achievements").toArray();
+    QJsonArray achievementsArray = aValue.toObject().value("achievements").toArray();
     if (achievementsArray.size() > 0) {
-        //_appid = aAchievements.object().value("playerstats").toObject().value("steamID").toString();
-        _gameName = aAchievements.object().value("playerstats").toObject().value("gameName").toString();
-        for (auto achievement: achievementsArray) {
+        //_appid = aValue.toObject().value("steamID").toString();
+        _gameName = aValue.toObject().value("gameName").toString();
+        for (const auto &achievement: achievementsArray) {
             achievement.toObject().value("achieved").toInt() ? ++_reached : ++_notReached;
             _achievements.append(std::move(SAchievementPlayer(achievement.toObject())));
         }
@@ -277,14 +248,13 @@ void SAchievements::initConnects() {
 }
 
 void SAchievements::setStatus(StatusValue aStatus) {
+    _status = aStatus;
     switch (aStatus) {
     case StatusValue::none: {
-        _status = StatusValue::none;
-        _error = "none";
+        _error  = "none";
         break;
     }
     case StatusValue::error: {
-        _status = StatusValue::error;
         QStringList needList;
         if (_global.getStatus() != StatusValue::success) {
             needList.append(tr("global"));
@@ -301,8 +271,7 @@ void SAchievements::setStatus(StatusValue aStatus) {
         break;
     }
     case StatusValue::success: {
-        _status = StatusValue::success;
-        _error = "none";
+        _error  = "none";
     }
     }
 }

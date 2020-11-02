@@ -1,19 +1,6 @@
 #ifndef SACHIEVEMENTS_H
 #define SACHIEVEMENTS_H
 
-#include <QMainWindow>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonObject>
-#include <QTcpSocket>
-#include <QObject>
-#include <QEventLoop>
-#include <QDateTime>
-#include <QTextCodec>
-#include "class/Network/requestimage.h"
 #include "class/steamapi/Sapi.h"
 
 class SAchievementGlobal : public QObject {
@@ -93,11 +80,11 @@ class SAchievement : public QObject {
 public:
     explicit SAchievement(SAchievementGlobal &global, SAchievementPlayer &player, SAchievementPercentage &percent, QObject *parent = nullptr);
              SAchievement(const SAchievement &achievement);
-    SAchievement &operator=(const SAchievement&);
-    const bool &operator<(const SAchievement &achievement);
+    SAchievement &  operator=(const SAchievement &achievement);
+    bool            operator<(const SAchievement &achievement);
 
-    QPixmap getIcon(int aGameId);
-    QPixmap getIconGray(int aGameId);
+    QPixmap getIcon     (int aGameId);
+    QPixmap getIconGray (int aGameId);
 
     const QString   _apiName;
     const int       _defaultValue;
@@ -109,8 +96,6 @@ public:
     const double    _percent;
 
 private:
-    QPixmap getPixmap(QPixmap &pixmap, const QString &url, QSize size, int gameId);
-
     const QString _icon;
     const QString _iconGray;
 
@@ -149,7 +134,7 @@ signals:
 
 private slots:
     void onLoad() override;
-    void parse(const QJsonDocument &doc);
+    void fromJson(const QJsonValue &value) override;
 
 private:
     QList<SAchievementGlobal> _achievements;
@@ -161,7 +146,7 @@ class SAchievementsPercentage : public Sapi {
     Q_OBJECT
 public:
     explicit SAchievementsPercentage(const QString &appid, bool parallel = true, QObject *parent = nullptr);
-    SAchievementsPercentage(QObject *parent = nullptr): Sapi(parent) {/*qDebug()<<"constructor 3";*/};
+    SAchievementsPercentage(QObject *parent = nullptr): Sapi(parent) {/*qDebug() << "constructor 3";*/};
     SAchievementsPercentage(const SAchievementsPercentage &achievements): Sapi(achievements.parent()), _achievements(achievements._achievements),
         _appid(achievements._appid) {/*qDebug() << "copy" << _appid;*/};
     ~SAchievementsPercentage() {/*qDebug() << "deleted" << _appid;*/};
@@ -184,7 +169,7 @@ signals:
 
 private slots:
     void onLoad() override;
-    void parse(const QJsonDocument &doc);
+    void fromJson(const QJsonValue &value) override;
 
 private:
     QList<SAchievementPercentage> _achievements;
@@ -221,7 +206,7 @@ signals:
 
 private slots:
     void onLoad() override;
-    void parse(const QJsonDocument &doc);
+    void fromJson(const QJsonValue &value) override;
 
 private:
     QList<SAchievementPlayer> _achievements;
