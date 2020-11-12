@@ -202,6 +202,10 @@ QString Images::stateYellow() {
     return "://state_yellow.png";
 }
 
+QString Images::levels(int aHundreds) {
+    return QString("://levels/%1.png").arg(QString::number(aHundreds));
+}
+
 QString Images::allAchievements() {
     return "://" + Settings::getIconsColor() + "/all.png";
 }
@@ -506,8 +510,8 @@ QString Paths::favorites(QString aType) {
     return QString(documents() + "files/favorites/%1%2").arg(aType , aType != "" ? ".json" : "");
 }
 
-QString Paths::hiddenGames(QString aGameId) {
-    return QString(documents() + "files/hide/%1%2").arg(aGameId, aGameId != "" ? ".txt" : "");
+QString Paths::hiddenGames(QString aSteamId) {
+    return QString(documents() + "files/hide/%1%2").arg(aSteamId != "" ? aSteamId : "All", ".txt");
 }
 
 QString Paths::groupGames(QString aProfileId) {

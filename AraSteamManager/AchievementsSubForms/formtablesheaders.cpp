@@ -9,13 +9,15 @@ constexpr int c_filterUniqueValue = 3;
 constexpr int c_filterColumnCount = 4;
 constexpr int c_filterEndConstValues = 4;
 
-constexpr int c_tableAchievementColumnAppid = 0;
-constexpr int c_tableAchievementColumnIcon = 1;
-constexpr int c_tableAchievementColumnTitle = 2;
-constexpr int c_tableAchievementColumnDescription = 3;
-constexpr int c_tableAchievementColumnWorld = 4;
-constexpr int c_tableAchievementColumnReachedMy = 5;
-constexpr int c_tableAchievementColumnCount = 6;
+constexpr int c_tableAchievementColumnAppid       = 0;
+constexpr int c_tableAchievementColumnIndex       = 1;
+constexpr int c_tableAchievementColumnIcon        = 2;
+constexpr int c_tableAchievementColumnTitle       = 3;
+constexpr int c_tableAchievementColumnDescription = 4;
+constexpr int c_tableAchievementColumnComment     = 5;
+constexpr int c_tableAchievementColumnWorld       = 6;
+constexpr int c_tableAchievementColumnReachedMy   = 7;
+constexpr int c_tableAchievementColumnCount       = 8;
 #define ConstantsEnd }
 
 FormTablesHeaders::FormTablesHeaders(SGame &aGame, const QString &aId, SAchievementsPlayer &aPlayer, QWidget *aParent): QWidget(aParent),
@@ -512,7 +514,7 @@ bool FormTablesHeaders::addFriendColumn(SProfile &aFriendProfile) {
     avatarFriend->setAlignment(Qt::AlignCenter);
     ui->TableWidgetHorizontalHeader->setCellWidget(0, column, avatarFriend);
     SAchievements achievementsFriends = _achievements;
-    SAchievementsPlayer friendsPlayer(QString::number((*_game)._appID), aFriendProfile._steamID, false, this);
+    SAchievementsPlayer friendsPlayer(QString::number((*_game).appId()), aFriendProfile._steamID, false, this);
     achievementsFriends.set(friendsPlayer);
 //    Threading LoadFriendTable(this);
 //    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
@@ -681,8 +683,9 @@ bool FormTablesHeaders::pullTable() {
 
 void FormTablesHeaders::createThread() {
     Threading *loadTable = new Threading(this);
-    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid,  c_tableAchievementColumnTitle,  c_tableAchievementColumnDescription, c_tableAchievementColumnWorld,
-                                     c_tableAchievementColumnReachedMy, &_achievements, ui->TableWidgetContent);
+    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid, c_tableAchievementColumnIndex, c_tableAchievementColumnIcon,  c_tableAchievementColumnTitle,
+                                     c_tableAchievementColumnDescription, c_tableAchievementColumnComment, c_tableAchievementColumnWorld,
+                                     c_tableAchievementColumnReachedMy, c_tableAchievementColumnCount, _achievements, _game->appId());
     connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
         emit s_achievementsLoaded(progress, row);
     });
@@ -705,7 +708,7 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
         QLabel *iconGame = new QLabel(this);
         getTableContent()->setCellWidget(row, c_tableAchievementColumnIcon, iconGame);
         if (achievement._displayName != "") {
-            iconGame->setPixmap(achievement.getIcon((*_game)._appID));
+            iconGame->setPixmap(achievement.getIcon((*_game).appId()));
 
             ui->TableWidgetContent->resizeRowToContents(row);
             if(ui->TableWidgetContent->rowHeight(row) < (64 + 18)) {
@@ -880,8 +883,8 @@ void FormTablesHeaders::init() {
 
     setVisibleColumn(     c_tableAchievementColumnAppid,        false);
 
-    _achievements   .set(SAchievementsPercentage(QString::number((*_game)._appID)))
-                    .set(SAchievementsGlobal(QString::number((*_game)._appID)));
+    _achievements   .set(SAchievementsPercentage(QString::number((*_game).appId())))
+                    .set(SAchievementsGlobal(QString::number((*_game).appId())));
                     //.set(SAchievementsPlayer(QString::number(_game._appID), _id));// _appid = QString::number(_game._appID);
     //_achievements._id = _id;
     _achievements.update();

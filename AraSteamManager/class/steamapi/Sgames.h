@@ -6,10 +6,7 @@
 class SGame : public QObject {
     Q_OBJECT
 public:
-    explicit SGame(const QJsonObject &game, QObject *parent = nullptr): QObject(parent), _appID(game.value("appid").toInt()), _name(game.value("name").toString()),
-        _playtime_2weeks(game.value("playtime_2weeks").toInt()), _playtime_forever(game.value("playtime_forever").toInt()),
-        _has_community_visible_stats(game.value("has_community_visible_stats").toBool()), _img_icon_url(game.value("img_icon_url").toString()),
-        _img_logo_url(game.value("img_logo_url").toString()) {}
+    explicit SGame(const QJsonObject &game = QJsonObject(), QObject *parent = nullptr);
     SGame(const SGame &game): QObject(game.parent()), _appID(game._appID), _name(game._name), _playtime_2weeks(game._playtime_2weeks),
         _playtime_forever(game._playtime_forever), _has_community_visible_stats(game._has_community_visible_stats), _img_icon_url(game._img_icon_url),
         _img_logo_url(game._img_logo_url) {}
@@ -17,23 +14,35 @@ public:
     SGame & operator=(const SGame &game);
     bool    operator<(const SGame &game);
 
-    QPixmap getPixmapIcon();
-    QPixmap getPixmapLogo();
+    QPixmap pixmapIcon();
+    QPixmap pixmapLogo();
 
     //Пока сломано
     const QString getNumberPlayers(bool hardReload);
 
-    const int _appID;
-    const QString _name;
-    const int _playtime_2weeks;
-    const int _playtime_forever;
-    const bool _has_community_visible_stats;
-    const QString _img_icon_url;
-    const QString _img_logo_url;
+    int appId()                     const {return _appID;}
+    QString sAppId()                const {return QString::number(_appID);}
+    QString name()                  const {return _name;}
+    int playtime2Weeks()            const {return _playtime_2weeks;}
+    int playtimeForever()           const {return _playtime_forever;}
+    bool hasCommunityVisibleStats() const {return _has_community_visible_stats;}
+
+    QString imgIconUrl()            const {return _img_icon_url;}
+    QString imgLogoUrl()            const {return _img_logo_url;}
 
 signals:
 
 private:
+    void fromJson(const QJsonValue &value);
+
+    int _appID;
+    QString _name;
+    int _playtime_2weeks;
+    int _playtime_forever;
+    bool _has_community_visible_stats;
+    QString _img_icon_url;
+    QString _img_logo_url;
+
     QPixmap _pixmapIcon;
     QPixmap _pixmapLogo;
 
@@ -45,11 +54,11 @@ class SGames : public Sapi {
 public:
     explicit SGames(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false, QObject *parent = nullptr);
     SGames(const SGames &games): Sapi(games.parent()), _games(games._games), _id(games._id), _free_games(games._free_games), _game_info(games._game_info) {}
-    SGames(QObject *parent = nullptr): SGames("", false, false, false, parent) {}
+    SGames(QObject *parent = nullptr): Sapi(parent) {}
     ~SGames() {}
 
     SGames &operator=(const SGames &games);
-    SGame &operator[](const int &index) {return _games[index];};
+    SGame &operator[](const int &index) {return _games[index];}
 
     SGames &load(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false);
     SGames &update(bool parallel);

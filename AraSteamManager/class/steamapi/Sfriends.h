@@ -30,7 +30,7 @@ public:
     ~SFriends() {}
 
     SFriends &operator=(const SFriends &friends);
-    SFriend &operator[](const int &index) {return _friends[index];};
+    SFriend &operator[](const int &index) {return _friends[index];}
 
     SFriends &load(const QString &id, bool parallel);
     SFriends &update(bool parallel);

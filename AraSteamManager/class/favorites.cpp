@@ -77,15 +77,15 @@ void Favorites::saveAll() {
 bool Favorites::addGame(const QString &aIdUser, const SGame &aGame, bool aElseRemove) {
     auto iterator = std::find_if(_fGame.begin(), _fGame.end(), [=](FavoriteGame &game) {
                                                                     return (aIdUser == game.getUserId())
-                                                                            && (aGame._appID == game.getAppid())
-                                                                            && (aGame._name == game.getName());
+                                                                            && (aGame.appId() == game.getAppid())
+                                                                            && (aGame.name() == game.getName());
                                                                 });
     if (iterator == _fGame.end()) {
         _fGame.append(FavoriteGame(aIdUser, aGame));
         saveGames();
         return true;
     } else {
-        (*iterator).setIcon(aGame._img_icon_url);
+        (*iterator).setIcon(aGame.imgIconUrl());
         if (aElseRemove) {
             removeGame(aIdUser, aGame);
         }
@@ -124,8 +124,8 @@ bool Favorites::addAchievement(const QString &aIdUser, const SGame &aGame, const
 bool Favorites::removeGame(const QString &aIdUser, const SGame &aGame, bool aElseCreate) {
     auto iterator = std::remove_if(_fGame.begin(), _fGame.end(), [=](FavoriteGame &game) {
                                                                     return (aIdUser == game.getUserId())
-                                                                            && (aGame._appID == game.getAppid())
-                                                                            && (aGame._name == game.getName());
+                                                                            && (aGame.appId() == game.getAppid())
+                                                                            && (aGame.name() == game.getName());
                                                                 });
     if (iterator == _fGame.end()) {
         if (aElseCreate) {
@@ -434,6 +434,6 @@ FavoriteAchievementsGame &FavoriteAchievementsGame::fromJson(QJsonObject achieve
 }
 
 bool FavoriteAchievementsGame::isEqual(const SGame &aGame) const {
-    return (_appid == aGame._appID) && (_name == aGame._name);
+    return (_appid == aGame.appId());// && (_name == aGame.name());
 }
 #define FavAchievementsGameEnd }

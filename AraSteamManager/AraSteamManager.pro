@@ -42,6 +42,7 @@ SOURCES += \
     class/Network/requestimage.cpp \
     class/NotMine/MultiSelectComboBox.cpp \
     class/NotMine/donutbreakdownchart.cpp \
+    class/NotMine/freezetablewidget.cpp \
     class/NotMine/mainslice.cpp \
     class/Threads/threadachievements.cpp \
     class/Threads/threadfriends.cpp \
@@ -53,6 +54,7 @@ SOURCES += \
     class/favorites.cpp \
     class/filter.cpp \
     class/groupsgames.cpp \
+    class/hiddengames.cpp \
     class/settings.cpp \
     class/steamapi/Sachievements.cpp \
     class/steamapi/Sapi.cpp \
@@ -91,6 +93,7 @@ HEADERS += \
     class/Network/requestimage.h \
     class/NotMine/MultiSelectComboBox.h \
     class/NotMine/donutbreakdownchart.h \
+    class/NotMine/freezetablewidget.h \
     class/NotMine/mainslice.h \
     class/Threads/threadachievements.h \
     class/Threads/threadfriends.h \
@@ -102,6 +105,7 @@ HEADERS += \
     class/favorites.h \
     class/filter.h \
     class/groupsgames.h \
+    class/hiddengames.h \
     class/settings.h \
     class/steamapi/Sachievements.h \
     class/steamapi/Sapi.h \

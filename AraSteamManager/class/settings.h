@@ -92,7 +92,7 @@ public:
     static QString defaultFont();
     static QString categories(QString gameId = "");
     static QString favorites(QString type = "");
-    static QString hiddenGames(QString gameID = "");
+    static QString hiddenGames(QString steamId = "");
     static QString groupGames(QString profileId = "");
     static QString imagesProfiles(const QString &url);
     static QString imagesAchievements(const QString &gameId, const QString &url);
@@ -110,6 +110,8 @@ public:
     static QString stateGreen();
     static QString stateRed();
     static QString stateYellow();
+
+    static QString levels(int hundreds);
 
     static QString allAchievements();
 

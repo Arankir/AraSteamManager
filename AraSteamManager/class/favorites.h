@@ -9,7 +9,7 @@ class FavoriteGame {
 public:
     FavoriteGame(const QString &idUser, const QString &icon, const int &appid, const QString &name) : _userId(idUser), _icon(icon),
     _appid(appid), _name(name) {}
-    FavoriteGame(const QString &idUser, const SGame &game) : _userId(idUser), _icon(game._img_icon_url), _appid(game._appID), _name(game._name) {}
+    FavoriteGame(const QString &idUser, const SGame &game) : _userId(idUser), _icon(game.imgIconUrl()), _appid(game.appId()), _name(game.name()) {}
     FavoriteGame(const QJsonObject &object);
     FavoriteGame(const FavoriteGame &game) : _userId(game._userId), _icon(game._icon), _appid(game._appid), _name(game._name) {}
 
@@ -91,7 +91,7 @@ private:
 
 class FavoriteAchievementsGame {
 public:
-    FavoriteAchievementsGame(const QString &idUser, const SGame &game) : _userId(idUser), _appid(game._appID), _name(game._name) {}
+    FavoriteAchievementsGame(const QString &idUser, const SGame &game) : _userId(idUser), _appid(game.appId()), _name(game.name()) {}
     FavoriteAchievementsGame(const QJsonObject &object);
     FavoriteAchievementsGame(const FavoriteAchievementsGame &steamFriend) : _userId(steamFriend._userId), _achievements(steamFriend._achievements),
     _appid(steamFriend._appid), _name(steamFriend._name) {}

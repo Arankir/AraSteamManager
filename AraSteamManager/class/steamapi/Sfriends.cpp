@@ -64,9 +64,7 @@ SFriends &SFriends::sort() {
 }
 
 SFriends::SFriends(const SFriends &aFriends) {
-    _status     = aFriends._status;
-    _error      = aFriends._error;
-
+    Sapi::operator=(aFriends);
     _friends    = aFriends._friends;
     _id         = aFriends._id;
 }

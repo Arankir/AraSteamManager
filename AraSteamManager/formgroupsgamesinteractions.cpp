@@ -13,7 +13,7 @@ FormGroupsGamesInteractions::~FormGroupsGamesInteractions() {
 
 void FormGroupsGamesInteractions::init() {
     initUi();
-    ui->LabelTitle->setText(_game._name);
+    ui->LabelTitle->setText(_game.name());
 
     connect(ui->ButtonAdd,          &QPushButton::clicked, this, &FormGroupsGamesInteractions::add_clicked);
     connect(ui->ButtonChangeTitle,  &QPushButton::clicked, this, &FormGroupsGamesInteractions::changeTitle_clicked);
@@ -28,7 +28,7 @@ void FormGroupsGamesInteractions::initUi() {
         QCheckBox *chb = new QCheckBox(group.getTitle());
         auto games = group.getGames();
         bool isInGroup = std::any_of(games.begin(), games.end(), [=](QString game) {
-                                                                    return game == QString::number(_game._appID);
+                                                                    return game == _game.sAppId();
                                                                 });
         if (isInGroup) {
             chb->setChecked(true);

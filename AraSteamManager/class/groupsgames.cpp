@@ -5,13 +5,13 @@ GroupGames::GroupGames(const QJsonObject &aObject) {
 }
 
 GroupGames &GroupGames::addGame(const SGame &aGame) {
-    _games.append(QString::number(aGame._appID));
+    _games.append(aGame.sAppId());
     return *this;
 }
 
 GroupGames &GroupGames::removeGame(const SGame &aGame) {
     for(int i = 0; i < _games.count(); ++i) {
-        if (_games[i] == QString::number(aGame._appID)) {
+        if (_games[i] == aGame.sAppId()) {
             _games.removeAt(i);
             break;
         }

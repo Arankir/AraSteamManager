@@ -15,6 +15,7 @@ debug/requestdata.o
 debug/requestimage.o
 debug/MultiSelectComboBox.o
 debug/donutbreakdownchart.o
+debug/freezetablewidget.o
 debug/mainslice.o
 debug/threadachievements.o
 debug/threadfriends.o
@@ -26,6 +27,7 @@ debug/comments.o
 debug/favorites.o
 debug/filter.o
 debug/groupsgames.o
+debug/hiddengames.o
 debug/settings.o
 debug/Sachievements.o
 debug/Sapi.o
@@ -63,6 +65,7 @@ debug/moc_formstatistics.o
 debug/moc_requestdata.o
 debug/moc_requestimage.o
 debug/moc_MultiSelectComboBox.o
+debug/moc_freezetablewidget.o
 debug/moc_threadachievements.o
 debug/moc_threadfriends.o
 debug/moc_threadgames.o
@@ -71,7 +74,6 @@ debug/moc_threadstatistics.o
 debug/moc_categoriesgame.o
 debug/moc_favorites.o
 debug/moc_filter.o
-debug/moc_settings.o
 debug/moc_Sachievements.o
 debug/moc_Sapi.o
 debug/moc_Sbans.o

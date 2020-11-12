@@ -238,25 +238,25 @@ public:
     SAchievements(const SAchievements &achievements): QObject(achievements.parent()),// _id(achievements._id), _appid(achievements._appid),
         _global(achievements._global), _player(achievements._player), _percent(achievements._percent), _finish(achievements._finish),
         _status(achievements._status), _error(achievements._error), _gameName(achievements._gameName), _gameVersion(achievements._gameVersion) {
-            /*qDebug() << "copy";*/};
-    ~SAchievements() {/*qDebug() << "deleted" << _appid << _id;*/};
+            /*qDebug() << "copy"*/;}
+    ~SAchievements() {/*qDebug() << "deleted" << _appid << _id*/;}
 
     SAchievements &operator=(const SAchievements &friends);
-    SAchievement &operator[](const int &index) {return _finish[index];};
+    SAchievement &operator[](const int &index) {return _finish[index];}
 
     SAchievements &load(const QString &appid, const QString &id, bool paralell);
     SAchievements &set(SAchievementsGlobal &global, SAchievementsPlayer &player, SAchievementsPercentage &percent);
     SAchievements &update(bool paralell = true);
     SAchievements &clear();
 
-    SAchievements &sort();;
+    SAchievements &sort();
     QList<SAchievement>::iterator begin() {return _finish.begin();}
     QList<SAchievement>::iterator end() {return _finish.end();}
-    StatusValue getStatus() const {return _status;};
-    QString getError() const {return _error;};
-    QString getGameName() const {return _gameName;};
-    QString getGameVersion() const {return _gameVersion;};
-    int getCount() const {return _finish.size();};
+    StatusValue getStatus()     const {return _status;}
+    QString getError()          const {return _error;}
+    QString getGameName()       const {return _gameName;}
+    QString getGameVersion()    const {return _gameVersion;}
+    int getCount()              const {return _finish.size();}
 
 signals:
     void s_finished();

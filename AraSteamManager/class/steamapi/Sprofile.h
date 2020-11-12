@@ -30,7 +30,7 @@ public:
     QPixmap getPixmapAvatarMedium();
     QPixmap getPixmapAvatarFull();
 
-    /*const*/ QString _steamID;
+    /*const*/ QString _steamID = "";
     int _communityVisibilityState;
     int _profileState;
     QString _personaName;

@@ -77,6 +77,7 @@ int ThreadFriends::fill() {
     QFont font(Settings::getFontDefaultName(), 9);
     int row = 0;
     QStandardItemModel *model = new QStandardItemModel;
+
     for (auto friendP: _friends) {
         QStandardItem *itemId = new QStandardItem(friendP.second._steamID);
 

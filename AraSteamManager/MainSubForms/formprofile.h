@@ -24,18 +24,17 @@ public:
     ~FormProfile();
 
 public slots:
-    void profileToUi(SProfile &profile);
-    void setProfile(SProfile &profile);
-    SProfile getProfile();
-    SGames getGames();
-    SFriends getFriends();
+    void profileToUi(const SProfile &profile);
+    void setProfile(const SProfile &profile);
     void updateVisibleInfo();
     void updateInfo();
     void retranslate();
-
-    void setIcons();
     void updateSettings();
-    void updateMyProfile();
+
+    SProfile getProfile() const {return _profile;}
+    SGames getGames() const {return _games;}
+    SFriends getFriends() const {return _friends;}
+
 signals:
     void s_goToGames(SProfile &profileSteamid, SGames &games);
     void s_goToFriends(const QString &profileSteamid, SFriends &friends);
@@ -45,22 +44,27 @@ signals:
 
 private slots:
     void changeEvent(QEvent *event);
+
+    void setLvl(const QString &aSteamId);
+    void setOnlineStatus();
+    void setGames(const QString &aSteamId);
+    void setFriends(const QString &aSteamId);
+    void setBans(const QString &aSteamId);
+    void setProfileStatus();
+    void setCommentPermission();
+    void setCommunityProfile();
+
     void buttonSetProfile_Clicked();
     void buttonGames_Clicked();
     void buttonFriends_Clicked();
     void buttonStatistics_Clicked();
     void buttonFavorites_Clicked();
 
-    void setLvl(const QString &aSteamId);
-    void setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha);
-    void setStatus();
-    void setGames(const QString &aSteamId);
-    void setFriends(const QString &aSteamId);
-    void setBans(const QString &aSteamId);
-    void setName();
+    void setIcons();
+    void updateMyProfile();
     QGraphicsDropShadowEffect *createLightning();
-    void setCommentPermission();
-    void setProfileState();
+    void setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha);
+
 private:
     Ui::FormProfile *ui;
     SProfile _profile;

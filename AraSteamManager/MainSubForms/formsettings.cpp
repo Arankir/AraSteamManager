@@ -121,7 +121,7 @@ void FormSettings::initComponents() {
 
         QFileInfoList list = dirHiddenGames.entryInfoList();
         int number = 1;
-        for(auto &file :list) {
+        for(auto &file: list) {
             QString fileName = file.fileName();
             if(fileName != "All.txt") {
                 QFile fileHide(Paths::hiddenGames(fileName));
@@ -176,7 +176,6 @@ void FormSettings::retranslate() {
         QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
         allHidden->setText(tr("Все профили"));
     }
-    QString iconsColor = Settings::getIconsColor();
     ui->labelIcons8->setText("<html><head/><body><p>"
                              "Иконки для приложения были предоставлены сайтом "
                              "<img height=15 style=\"vertical-align: top\" src=\"" + Images::link() + "\">"
@@ -227,20 +226,19 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
     QRadioButtonWithData *rbSender = dynamic_cast<QRadioButtonWithData*>(sender());
     if (rbSender) {
         int indexHiddenGame = rbSender->getData(0).toInt();
-        QString iconsColor = Settings::getIconsColor();
         auto &currentGame = _hiddenGames[indexHiddenGame];
         ui->TableWidgetGames->clear();
         ui->TableWidgetGames->setRowCount(currentGame.second.size());
         if(indexHiddenGame != 0) {
             SGames games(currentGame.first, true, true, false);
             for(auto &game: games) {
-                if(currentGame.second.indexOf(QString::number(game._appID)) > -1) {
-                    int setTo = currentGame.second.indexOf(QString::number(game._appID));
+                if(currentGame.second.indexOf(game.sAppId()) > -1) {
+                    int setTo = currentGame.second.indexOf(game.sAppId());
                     QLabel *iconGame = new QLabel;
                     iconGame->setBaseSize(QSize(32, 32));
-                    iconGame->setPixmap(game.getPixmapIcon());
+                    iconGame->setPixmap(game.pixmapIcon());
                     ui->TableWidgetGames->setCellWidget(setTo, 0, iconGame);
-                    ui->TableWidgetGames->setItem(setTo, 1, new QTableWidgetItem(game._name));
+                    ui->TableWidgetGames->setItem(setTo, 1, new QTableWidgetItem(game.name()));
                     ui->TableWidgetGames->setRowHeight(setTo, 33);
 
                     QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
@@ -254,9 +252,9 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                     QButtonWithData *button3 = new QButtonWithData("");
                     button3->setIcon(QIcon(Images::hide()));
                     button3->setMinimumSize(QSize(25, 25));
-                    button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + QString::number(game._appID));
+                    button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + game.sAppId());
                     button3->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
-                    button3->addData("NumberHiddenGame", QString::number(game._appID));
+                    button3->addData("NumberHiddenGame", game.sAppId());
                     connect(button3, &QButtonWithData::pressed, this, &FormSettings::hideClicked);
                     ui->TableWidgetGames->setCellWidget(setTo, 3, button3);
                 }

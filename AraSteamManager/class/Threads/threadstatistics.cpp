@@ -2,7 +2,7 @@
 
 int ThreadStatistics::fill() {
     for (auto &game: _games) {
-        SAchievementsPlayer *pl = new SAchievementsPlayer(QString::number(game._appID), _id);
+        SAchievementsPlayer *pl = new SAchievementsPlayer(game.sAppId(), _id);
         connect(pl, SIGNAL(s_finished(SAchievementsPlayer*)), this, SLOT(onResultAchievements(SAchievementsPlayer*)));
     }
     return 1;

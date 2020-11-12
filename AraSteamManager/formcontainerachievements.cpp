@@ -22,7 +22,7 @@ void FormContainerAchievements::addFormAchievement(SAchievementsPlayer &aPl, SPr
     for (int i = 0; i < ui->TabWidgetAchievements->count(); ++i) {
         FormAchievements *tab = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements[0].widget(i));
         if (tab) {
-            if((tab->getGameAppId() == aGame._appID) && (tab->getProfileId() == aProfile._steamID)) {
+            if((tab->getGameAppId() == aGame.appId()) && (tab->getProfileId() == aProfile._steamID)) {
                 tab->buttonUpdate_Clicked();
                 ui->TabWidgetAchievements->setCurrentIndex(i);
                 return;
@@ -30,9 +30,9 @@ void FormContainerAchievements::addFormAchievement(SAchievementsPlayer &aPl, SPr
         }
     }
     FormAchievements *newFormAchievements = new FormAchievements(aPl, aProfile, aGame, aNum, this);
-    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements, "  " + aGame._name + "  ");
+    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements, "  " + aGame.name() + "  ");
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
-    ui->TabWidgetAchievements->setTabIcon(tabIndex, aGame.getPixmapIcon());
+    ui->TabWidgetAchievements->setTabIcon(tabIndex, aGame.pixmapIcon());
 }
 
 void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int aIndex) {

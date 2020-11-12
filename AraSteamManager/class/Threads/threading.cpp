@@ -1,7 +1,8 @@
 #include "threading.h"
 
-int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const int aColumnIcon, const int aColumnName, const int aColumnComment, const int aColumnProgress, SGames aGames) {
-    ThreadGames *games = new ThreadGames(aColumnID, aColumnIndex, aColumnIcon, aColumnName, aColumnComment, aColumnProgress, aGames);
+int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const int aColumnIcon, const int aColumnName, const int aColumnComment,
+                              const int aColumnProgress, const int aColumnCount, SGames aGames) {
+    ThreadGames *games = new ThreadGames(aColumnID, aColumnIndex, aColumnIcon, aColumnName, aColumnComment, aColumnProgress, aColumnCount, aGames);
     QThread *thread = createThread();
     games->moveToThread(thread);
     connect(thread, &QThread::started,        games,          &ThreadGames::fill);
@@ -80,21 +81,24 @@ int Threading::AddThreadFriendAchievements(QTableWidget *aTableWidgetAchievement
     return 1;
 }
 
-int Threading::AddThreadAchievements(const int aTableColumnAppid, const int aTableColumnTitle, const int aTableColumnDescription, const int aTableColumnWorld, const int aTableColumnMy,
-                                     SAchievements *aAchievements, QTableWidget *aTableWidgetAchievements) {
-    ThreadAchievements *achievements = new ThreadAchievements(aAchievements, aTableWidgetAchievements, aTableColumnAppid, aTableColumnTitle, aTableColumnDescription,
-                                                              aTableColumnWorld, aTableColumnMy);
+int Threading::AddThreadAchievements(const int aColumnAppid, const int aColumnIndex, const int aColumnIcon, const int aColumnTitle, const int aColumnDescription,
+                                     const int aColumnComment, const int aColumnWorld, const int aColumnMy, const int aColumnCount, const SAchievements &aAchievements, int aGameAppId) {
+    ThreadAchievements *achievements = new ThreadAchievements(aAchievements, aGameAppId, aColumnAppid, aColumnIndex, aColumnIcon, aColumnTitle, aColumnDescription, aColumnComment,
+                                                              aColumnWorld, aColumnMy, aColumnCount);
     QThread *thread = createThread();
     achievements->moveToThread(thread);
     connect(thread,       &QThread::started,               achievements,   &ThreadAchievements::fill);
     connect(achievements, &ThreadAchievements::s_finished, thread,         &QThread::quit);
     connect(achievements, &ThreadAchievements::s_finished, achievements,   &ThreadAchievements::deleteLater);
+    connect(achievements, &ThreadAchievements::s_finishedModel, parent(),  [=](QStandardItemModel *model, int reached, int notReached) {
+                                                                                emit s_achievements_finished_model(model, reached, notReached);
+                                                                            });
     connect(achievements, &ThreadAchievements::s_progress, this->parent(), [=](int progress, int row) {
                                                                                 emit s_achievements_progress(progress, row);
                                                                             });
-    connect(achievements, &ThreadAchievements::s_finished, this->parent(), [=](int totalReached, int totalNotReached) {
-                                                                                emit s_achievements_finished(totalReached, totalNotReached);
-                                                                            });
+//    connect(achievements, &ThreadAchievements::s_finished, this->parent(), [=](int totalReached, int totalNotReached) {
+//                                                                                emit s_achievements_finished(totalReached, totalNotReached);
+//                                                                            });
     thread->start();
     return 1;
 }

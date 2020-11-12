@@ -279,7 +279,7 @@ void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
 
 #define TableAction {
 QMenu *FormFriends::createMenu(const QPair<SFriend, SProfile> &aProfile) {
-    QMenu* menu = new QMenu(this);
+    QMenu *menu = new QMenu(this);
 
     QAction *actionGoToProfile = new QAction(tr("Перейти на профиль"), this);
     actionGoToProfile->setIcon(QIcon(Images::goTo()));

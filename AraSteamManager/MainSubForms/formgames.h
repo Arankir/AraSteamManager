@@ -20,6 +20,7 @@
 #include "class/Threads/threading.h"
 #include "class/Network/requestimage.h"
 #include "class/filter.h"
+#include "class/hiddengames.h"
 #include "subwidget/qbuttonwithdata.h"
 
 namespace Ui {
@@ -62,17 +63,23 @@ private slots:
     void updateHiddenGames();
     void updateCurrentGame();
     void initTable();
-    void setTableModel(QStandardItemModel *aModel);
-    int getIndexGameFromRow(int aRow);
-    int getRowFromIndexGame(int aIndex);
-    int getIndexGameFromIdGame(QString aId);
-    void updateHiddenRows();
-    void updateHideFromFile(const QString &aFile);
     void initGroups();
+    void initComments();
+    void setTableModel(QStandardItemModel *aModel);
+
+    int indexFromRow(int aRow);
+    int rowFromIndex(int aIndex);
+    int indexFromId(QString aId);
+    int rowFromId(QString aId);
+
+    void updateHiddenRows();
     void updateGroupsFilter();
     void showGroupsInteractive();
     void showCommentsInteractive();
-    int getRowFromIdGame(QString aId);
+
+    void checkBoxFavorites_StateChanged(int arg1);
+
+    bool isInFavorites(const int &aAppId);
 private:
     Ui::FormGames *ui;
     SProfile _profile;
@@ -84,8 +91,9 @@ private:
 
     Favorites _favorites;
     Filter _filter;
-    QStringList _hide;
+    QList<gameData> _hide;
     GroupsGames _groups;
+    Comments _comments;
 
     int _windowChildCount = 0;
 

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
-    QByteArrayData data[54];
-    char stringdata0[749];
+    QByteArrayData data[57];
+    char stringdata0[762];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -69,23 +69,26 @@ QT_MOC_LITERAL(33, 443, 4), // "game"
 QT_MOC_LITERAL(34, 448, 17), // "updateHiddenGames"
 QT_MOC_LITERAL(35, 466, 17), // "updateCurrentGame"
 QT_MOC_LITERAL(36, 484, 9), // "initTable"
-QT_MOC_LITERAL(37, 494, 13), // "setTableModel"
-QT_MOC_LITERAL(38, 508, 19), // "QStandardItemModel*"
-QT_MOC_LITERAL(39, 528, 6), // "aModel"
-QT_MOC_LITERAL(40, 535, 19), // "getIndexGameFromRow"
-QT_MOC_LITERAL(41, 555, 4), // "aRow"
-QT_MOC_LITERAL(42, 560, 19), // "getRowFromIndexGame"
-QT_MOC_LITERAL(43, 580, 6), // "aIndex"
-QT_MOC_LITERAL(44, 587, 22), // "getIndexGameFromIdGame"
-QT_MOC_LITERAL(45, 610, 3), // "aId"
-QT_MOC_LITERAL(46, 614, 16), // "updateHiddenRows"
-QT_MOC_LITERAL(47, 631, 18), // "updateHideFromFile"
-QT_MOC_LITERAL(48, 650, 5), // "aFile"
-QT_MOC_LITERAL(49, 656, 10), // "initGroups"
-QT_MOC_LITERAL(50, 667, 18), // "updateGroupsFilter"
-QT_MOC_LITERAL(51, 686, 21), // "showGroupsInteractive"
-QT_MOC_LITERAL(52, 708, 23), // "showCommentsInteractive"
-QT_MOC_LITERAL(53, 732, 16) // "getRowFromIdGame"
+QT_MOC_LITERAL(37, 494, 10), // "initGroups"
+QT_MOC_LITERAL(38, 505, 12), // "initComments"
+QT_MOC_LITERAL(39, 518, 13), // "setTableModel"
+QT_MOC_LITERAL(40, 532, 19), // "QStandardItemModel*"
+QT_MOC_LITERAL(41, 552, 6), // "aModel"
+QT_MOC_LITERAL(42, 559, 12), // "indexFromRow"
+QT_MOC_LITERAL(43, 572, 4), // "aRow"
+QT_MOC_LITERAL(44, 577, 12), // "rowFromIndex"
+QT_MOC_LITERAL(45, 590, 6), // "aIndex"
+QT_MOC_LITERAL(46, 597, 11), // "indexFromId"
+QT_MOC_LITERAL(47, 609, 3), // "aId"
+QT_MOC_LITERAL(48, 613, 9), // "rowFromId"
+QT_MOC_LITERAL(49, 623, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(50, 640, 18), // "updateGroupsFilter"
+QT_MOC_LITERAL(51, 659, 21), // "showGroupsInteractive"
+QT_MOC_LITERAL(52, 681, 23), // "showCommentsInteractive"
+QT_MOC_LITERAL(53, 705, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(54, 736, 4), // "arg1"
+QT_MOC_LITERAL(55, 741, 13), // "isInFavorites"
+QT_MOC_LITERAL(56, 755, 6) // "aAppId"
 
     },
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
@@ -101,13 +104,14 @@ QT_MOC_LITERAL(53, 732, 16) // "getRowFromIdGame"
     "buttonFavorite_Clicked\0buttonHide_Clicked\0"
     "createThread\0createMenu\0QMenu*\0game\0"
     "updateHiddenGames\0updateCurrentGame\0"
-    "initTable\0setTableModel\0QStandardItemModel*\0"
-    "aModel\0getIndexGameFromRow\0aRow\0"
-    "getRowFromIndexGame\0aIndex\0"
-    "getIndexGameFromIdGame\0aId\0updateHiddenRows\0"
-    "updateHideFromFile\0aFile\0initGroups\0"
-    "updateGroupsFilter\0showGroupsInteractive\0"
-    "showCommentsInteractive\0getRowFromIdGame"
+    "initTable\0initGroups\0initComments\0"
+    "setTableModel\0QStandardItemModel*\0"
+    "aModel\0indexFromRow\0aRow\0rowFromIndex\0"
+    "aIndex\0indexFromId\0aId\0rowFromId\0"
+    "updateHiddenRows\0updateGroupsFilter\0"
+    "showGroupsInteractive\0showCommentsInteractive\0"
+    "checkBoxFavorites_StateChanged\0arg1\0"
+    "isInFavorites\0aAppId"
 };
 #undef QT_MOC_LITERAL
 
@@ -117,7 +121,7 @@ static const uint qt_meta_data_FormGames[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      32,   14, // methods
+      34,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -125,40 +129,42 @@ static const uint qt_meta_data_FormGames[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  174,    2, 0x06 /* Public */,
-       4,    2,  177,    2, 0x06 /* Public */,
-       5,    1,  182,    2, 0x06 /* Public */,
-       7,    2,  185,    2, 0x06 /* Public */,
+       1,    1,  184,    2, 0x06 /* Public */,
+       4,    2,  187,    2, 0x06 /* Public */,
+       5,    1,  192,    2, 0x06 /* Public */,
+       7,    2,  195,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      12,    0,  190,    2, 0x0a /* Public */,
-      13,    1,  191,    2, 0x08 /* Private */,
-      16,    0,  194,    2, 0x08 /* Private */,
-      17,    0,  195,    2, 0x08 /* Private */,
-      18,    0,  196,    2, 0x08 /* Private */,
-      19,    1,  197,    2, 0x08 /* Private */,
-      22,    1,  200,    2, 0x08 /* Private */,
-      24,    1,  203,    2, 0x08 /* Private */,
-      26,    0,  206,    2, 0x08 /* Private */,
-      27,    0,  207,    2, 0x08 /* Private */,
-      28,    0,  208,    2, 0x08 /* Private */,
-      29,    0,  209,    2, 0x08 /* Private */,
-      30,    0,  210,    2, 0x08 /* Private */,
-      31,    1,  211,    2, 0x08 /* Private */,
-      34,    0,  214,    2, 0x08 /* Private */,
-      35,    0,  215,    2, 0x08 /* Private */,
-      36,    0,  216,    2, 0x08 /* Private */,
-      37,    1,  217,    2, 0x08 /* Private */,
-      40,    1,  220,    2, 0x08 /* Private */,
-      42,    1,  223,    2, 0x08 /* Private */,
-      44,    1,  226,    2, 0x08 /* Private */,
-      46,    0,  229,    2, 0x08 /* Private */,
-      47,    1,  230,    2, 0x08 /* Private */,
-      49,    0,  233,    2, 0x08 /* Private */,
-      50,    0,  234,    2, 0x08 /* Private */,
-      51,    0,  235,    2, 0x08 /* Private */,
-      52,    0,  236,    2, 0x08 /* Private */,
-      53,    1,  237,    2, 0x08 /* Private */,
+      12,    0,  200,    2, 0x0a /* Public */,
+      13,    1,  201,    2, 0x08 /* Private */,
+      16,    0,  204,    2, 0x08 /* Private */,
+      17,    0,  205,    2, 0x08 /* Private */,
+      18,    0,  206,    2, 0x08 /* Private */,
+      19,    1,  207,    2, 0x08 /* Private */,
+      22,    1,  210,    2, 0x08 /* Private */,
+      24,    1,  213,    2, 0x08 /* Private */,
+      26,    0,  216,    2, 0x08 /* Private */,
+      27,    0,  217,    2, 0x08 /* Private */,
+      28,    0,  218,    2, 0x08 /* Private */,
+      29,    0,  219,    2, 0x08 /* Private */,
+      30,    0,  220,    2, 0x08 /* Private */,
+      31,    1,  221,    2, 0x08 /* Private */,
+      34,    0,  224,    2, 0x08 /* Private */,
+      35,    0,  225,    2, 0x08 /* Private */,
+      36,    0,  226,    2, 0x08 /* Private */,
+      37,    0,  227,    2, 0x08 /* Private */,
+      38,    0,  228,    2, 0x08 /* Private */,
+      39,    1,  229,    2, 0x08 /* Private */,
+      42,    1,  232,    2, 0x08 /* Private */,
+      44,    1,  235,    2, 0x08 /* Private */,
+      46,    1,  238,    2, 0x08 /* Private */,
+      48,    1,  241,    2, 0x08 /* Private */,
+      49,    0,  244,    2, 0x08 /* Private */,
+      50,    0,  245,    2, 0x08 /* Private */,
+      51,    0,  246,    2, 0x08 /* Private */,
+      52,    0,  247,    2, 0x08 /* Private */,
+      53,    1,  248,    2, 0x08 /* Private */,
+      55,    1,  251,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -184,17 +190,19 @@ static const uint qt_meta_data_FormGames[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 38,   39,
-    QMetaType::Int, QMetaType::Int,   41,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 40,   41,
     QMetaType::Int, QMetaType::Int,   43,
-    QMetaType::Int, QMetaType::QString,   45,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   48,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Int, QMetaType::Int,   45,
+    QMetaType::Int, QMetaType::QString,   47,
+    QMetaType::Int, QMetaType::QString,   47,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Int, QMetaType::QString,   45,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   54,
+    QMetaType::Bool, QMetaType::Int,   56,
 
        0        // eod
 };
@@ -227,21 +235,24 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 18: _t->updateHiddenGames(); break;
         case 19: _t->updateCurrentGame(); break;
         case 20: _t->initTable(); break;
-        case 21: _t->setTableModel((*reinterpret_cast< QStandardItemModel*(*)>(_a[1]))); break;
-        case 22: { int _r = _t->getIndexGameFromRow((*reinterpret_cast< int(*)>(_a[1])));
+        case 21: _t->initGroups(); break;
+        case 22: _t->initComments(); break;
+        case 23: _t->setTableModel((*reinterpret_cast< QStandardItemModel*(*)>(_a[1]))); break;
+        case 24: { int _r = _t->indexFromRow((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 23: { int _r = _t->getRowFromIndexGame((*reinterpret_cast< int(*)>(_a[1])));
+        case 25: { int _r = _t->rowFromIndex((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 24: { int _r = _t->getIndexGameFromIdGame((*reinterpret_cast< QString(*)>(_a[1])));
+        case 26: { int _r = _t->indexFromId((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 25: _t->updateHiddenRows(); break;
-        case 26: _t->updateHideFromFile((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 27: _t->initGroups(); break;
-        case 28: _t->updateGroupsFilter(); break;
-        case 29: _t->showGroupsInteractive(); break;
-        case 30: _t->showCommentsInteractive(); break;
-        case 31: { int _r = _t->getRowFromIdGame((*reinterpret_cast< QString(*)>(_a[1])));
+        case 27: { int _r = _t->rowFromId((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 28: _t->updateHiddenRows(); break;
+        case 29: _t->updateGroupsFilter(); break;
+        case 30: _t->showGroupsInteractive(); break;
+        case 31: _t->showCommentsInteractive(); break;
+        case 32: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 33: { bool _r = _t->isInFavorites((*reinterpret_cast< const int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -261,7 +272,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SAchievementsPlayer* >(); break;
             }
             break;
-        case 21:
+        case 23:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
@@ -331,13 +342,13 @@ int FormGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 32)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 34;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 32)
+        if (_id < 34)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 34;
     }
     return _id;
 }

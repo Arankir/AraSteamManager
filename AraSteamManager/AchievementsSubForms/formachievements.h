@@ -11,6 +11,8 @@
 #include <QButtonGroup>
 #include <QPropertyAnimation>
 #include <QDesktopServices>
+#include <QMenu>
+#include <QAction>
 #include "class/Network/requestimage.h"
 #include "class/settings.h"
 #include "class/steamapi/Sgames.h"
@@ -57,7 +59,7 @@ public slots:
     void progressLoading(int progress, int row);
     void onTablePulled(int reached, int notReached);
     QString getProfileId() const {return _profile._steamID;}
-    int getGameAppId() const {return _game._appID;}
+    int getGameAppId() const {return _game.appId();}
     void buttonUpdate_Clicked();
     
     void updateSettings();
@@ -140,6 +142,16 @@ private slots:
     void loadCompare();
     void tabWidget_CurrentChanged(int index);
 
+    void createThread();
+    void setTableModels(QStandardItemModel *aModel);
+    void initTableStandart();
+    void updateCurrentAchievementMy();
+    void initComments();
+    void updateHiddenRows(QTableView *aTable);
+    void buttonComment_Clicked();
+    QMenu *createMenuMy(const SAchievement &aAchievement);
+    void updateCurrentAchievementCompare();
+    QMenu *createMenuCompare(const SAchievement &aAchievement);
 private:
     Ui::FormAchievements *ui;
     //Settings _setting;
@@ -173,6 +185,14 @@ private:
     //для создания/редактирования категории
     CategoryType _typeCategory = CategoryType::none;
     QList<FormCategoryValue*> _values;
+    //для фильтрации
+    Filter _fAchievements;
+    Filter _fCompare;
+
+    SAchievement *_currentAchievementMy = nullptr;
+    SAchievement *_currentAchievementCompare = nullptr;
+    int _currentIndexMy;
+    int _currentIndexCompare;
 
 };
 
