@@ -1,13 +1,13 @@
 #include "formachievementscategoriesedit.h"
 #include "ui_formachievementscategoriesedit.h"
 
-FormAchievementsCategoriesEdit::FormAchievementsCategoriesEdit(const SGame &aGame, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormAchievementsCategoriesEdit),
+FormAchievementsCategoriesEdit::FormAchievementsCategoriesEdit(const SGame &aGame, FormAchievements *aParent) : QWidget(aParent), ui(new Ui::FormAchievementsCategoriesEdit),
     _game(aGame), _categoriesGame(_game) {
     ui->setupUi(this);
     init();
 }
 
-FormAchievementsCategoriesEdit::FormAchievementsCategoriesEdit(QWidget *aParent) : FormAchievementsCategoriesEdit(SGame(), aParent) {
+FormAchievementsCategoriesEdit::FormAchievementsCategoriesEdit(FormAchievements *aParent) : FormAchievementsCategoriesEdit(SGame(), aParent) {
 
 }
 
@@ -179,7 +179,7 @@ void FormAchievementsCategoriesEdit::buttonDeleteAllCategories_Clicked() {
     QAbstractButton *btnYes = deleteQuestion.addButton(tr("Да"), QMessageBox::YesRole);
     deleteQuestion.addButton(tr("Отмена"), QMessageBox::NoRole);
     deleteQuestion.exec();
-    if(deleteQuestion.clickedButton()-> != btnYes) {
+    if(deleteQuestion.clickedButton() == btnYes) {
         return;
     }
 
