@@ -80,8 +80,12 @@ class SAchievement : public QObject {
 public:
     explicit SAchievement(SAchievementGlobal &global, SAchievementPlayer &player, SAchievementPercentage &percent, QObject *parent = nullptr);
              SAchievement(const SAchievement &achievement);
+             SAchievement(const QJsonObject &object);
+             SAchievement(const QString &text);
     SAchievement &  operator=(const SAchievement &achievement);
     bool            operator<(const SAchievement &achievement);
+
+    QString toString() const;
 
     QPixmap getIcon     (int aGameId);
     QPixmap getIconGray (int aGameId);

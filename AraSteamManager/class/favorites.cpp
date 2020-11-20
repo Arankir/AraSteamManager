@@ -166,7 +166,7 @@ bool Favorites::removeAchievement(const QString &aIdUser, const SGame &aGame, co
     return result;
 }
 
-FavoriteAchievementsGame &Favorites::getAchievementsGame(const QString &aIdUser, const SGame &aGame) const {
+FavoriteAchievementsGame &Favorites::getAchievementsGame(const QString &aIdUser, const SGame &aGame) {
     auto iterator = std::find_if(_fAchievement.begin(), _fAchievement.end(), [=](FavoriteAchievementsGame &achievementsGame) {
                                                                         return (aIdUser == achievementsGame.getUserId())
                                                                                 && (achievementsGame.isEqual(aGame));

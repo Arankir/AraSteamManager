@@ -106,6 +106,7 @@ public:
     static QString loading();
     static QString logo();
 
+    //States
     static QString stateBlue();
     static QString stateGreen();
     static QString stateRed();
@@ -113,64 +114,88 @@ public:
 
     static QString levels(int hundreds);
 
+    //Achievements Checkbox
     static QString allAchievements();
+    static QString reached();
+    static QString notReached();
 
-    static QString left();
-    static QString right();
-    static QString up();
-    static QString down();
-
-    static QString checkAll();
+    //Achievements Categories
     static QString checkVisible();
     static QString uncheckVisible();
     static QString reverse();
 
+    //Achievements
+    static QString category();
+    static QString checkAll();
+    static QString guides();
+    static QString guide();
+
+    //Comments
+    static QString isComment();
+    static QString isNotComment();
+
+    //Dirrection arrows
+    static QString first();
+    static QString back();
+    static QString next();
+    static QString last();
+    static QString top();
+    static QString bottom();
+    static QString up();
+    static QString down();
+
+    //Favorites
+    static QString isFavorites();
+    static QString isNotFavorites();
+
+    //Hide
+    static QString hide();
+    static QString visible();
+
+    //Main
+    static QString findProfile();
+    static QString home();
+    static QString left();
+    static QString right();
+    static QString settings();
+
+    //Management
+    static QString apply();
+    static QString cancel();
+    static QString change();
+    static QString compare();
+    static QString create();
+    static QString deleteIcon();
+    static QString deleteAll();
+    static QString download();
+    static QString edit();
+    static QString find();
+    static QString update();
+
+    //Profile icon
+    static QString friends();
+    static QString games();
+    static QString setHome();
+    static QString statistic();
+
+    //Window buttons
+    static QString closeWindow();
     static QString maximizeWindow();
     static QString minimizeWindow();
     static QString normalizeWindow();
 
-    static QString reached();
-    static QString notReached();
-
-    static QString isFavorites();
-    static QString isNotFavorites();
-
-    static QString hide();
-    static QString unhide();
-
-    static QString top();
-    static QString bottom();
-
-    static QString home();
-    static QString setHome();
-
-    static QString change();
-    static QString create();
-
-    static QString edit();
-    static QString update();
-
-    static QString apply();
-    static QString cancel();
-
-    static QString back();
+    //Other
+    static QString achievement();
+    static QString backRounded();
     static QString exit();
-    static QString closeWindow();
-
-    static QString compare();
-    static QString deleteAll();
     static QString filter();
-    static QString find();
-    static QString findProfile();
-    static QString friends();
-    static QString games();
     static QString goTo();
+    static QString group1();
+    static QString group2();
     static QString link();
     static QString profile();
-    static QString settings();
-    static QString statistic();
-    static QString deleteIcon();
 
+    //Widgets
     static QString checkBoxChecked();
     static QString checkBoxCheckedHover();
     static QString checkBoxCheckedPress();
@@ -193,16 +218,6 @@ public:
     static QString scrollBarDown();
     static QString scrollBarLeft();
     static QString scrollBarRight();
-
-    static QString isComment();
-    static QString isNotComment();
-
-    static QString achievement();
-    static QString download();
-    static QString visible();
-    static QString category();
-    static QString group1();
-    static QString group2();
 
     static QString missingImage();
 };

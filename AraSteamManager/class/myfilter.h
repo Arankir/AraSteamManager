@@ -4,25 +4,25 @@
 #include <QObject>
 #include <QDebug>
 
-class Filter : public QObject {
+class MyFilter : public QObject {
     Q_OBJECT
 public:
-    explicit Filter(int row, int col, QObject *parent = nullptr);
-    Filter(QObject *parent = nullptr): QObject(parent) {}
-    ~Filter() {}
+    explicit MyFilter(int row, int col, QObject *parent = nullptr);
+    MyFilter(QObject *parent = nullptr): QObject(parent) {}
+    ~MyFilter() {}
 
-    Filter &setRow(int row);
-    Filter &setCol(int col);
-    Filter &addCol(int colNum);
-    Filter &removeCol(int colNum);
-    Filter &setData(int row, int col, bool data);
+    MyFilter &setRow(int row);
+    MyFilter &setCol(int col);
+    MyFilter &addCol(int colNum);
+    MyFilter &removeCol(int colNum);
+    MyFilter &setData(int row, int col, bool data);
 
     bool getData(int row, int col) const;
     bool getData(int row) const;
     int getRow() const {return _row;}
     int getCol() const {return _col;}
 
-    friend QDebug operator<<(QDebug dbg, const Filter &f) {
+    friend QDebug operator<<(QDebug dbg, const MyFilter &f) {
         dbg.nospace() << "Filter(";
         for(auto &filterRow: f._filter) {
             dbg.nospace() << "      (";

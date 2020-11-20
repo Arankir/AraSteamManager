@@ -10,7 +10,7 @@
 #include "class/steamapi/Sprofile.h"
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sachievements.h"
-#include "class/filter.h"
+#include "class/myfilter.h"
 #include "class/categoriesgame.h"
 #include "class/Network/requestimage.h"
 #include "class/Threads/threading.h"
@@ -155,8 +155,8 @@ private:
     QString _id;
     SAchievements _achievements;
     //для фильтрации
-    Filter _fAchievements;
-    Filter _fCompare;
+    MyFilter _fAchievements;
+    MyFilter _fCompare;
 
 };
 

@@ -7,7 +7,7 @@
 #include "class/steamapi/Sprofile.h"
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sachievements.h"
-#include "class/filter.h"
+#include "class/myfilter.h"
 //#include "class/settings.h"
 #include "class/Network/requestimage.h"
 
@@ -42,7 +42,7 @@ private:
 //    Favorites _friends;
 //    Favorites _achievements;
     Favorites _favorites;
-    Filter _filter;
+    MyFilter _filter;
     //Settings _setting;
 
     QString _iconsColor;

@@ -15,6 +15,22 @@ _icon(aAchievement._icon), _iconGray(aAchievement._iconGray), _pixmapIcon(aAchie
     //qDebug()<<"SAchievement copy"<<_apiName;
 }
 
+SAchievement::SAchievement(const QJsonObject &aObject): _apiName(aObject.value("apiName").toString()),
+                           _defaultValue(aObject.value("defaultValue").toInt()),
+                           _displayName(aObject.value("displayName").toString()),
+                           _hidden(aObject.value("hidden").toInt()),
+                           _description(aObject.value("description").toString()),
+                           _achieved(aObject.value("achieved").toInt()),
+                           _unlockTime(QDateTime::fromString(aObject.value("unlockTime").toString())),
+                           _percent(aObject.value("percent").toDouble()), _icon(aObject.value("icon").toString()),
+                           _iconGray(aObject.value("iconGray").toString()) {
+    //qDebug()<<"SAchievement copy"<<_apiName;
+}
+
+SAchievement::SAchievement(const QString &aText): SAchievement(QJsonValue(aText).toObject()) {
+    //qDebug()<<"SAchievement copy"<<_apiName;
+}
+
 SAchievement &SAchievement::operator=(const SAchievement &aAchievement) {
     //qDebug()<<"SAchievement equality"<<_apiName;
     _pixmapIcon     = aAchievement._pixmapIcon;
@@ -24,6 +40,21 @@ SAchievement &SAchievement::operator=(const SAchievement &aAchievement) {
 
 bool SAchievement::operator<(const SAchievement &aAchievement) {
     return _displayName.compare(aAchievement._displayName, Qt::CaseInsensitive) < 0;
+}
+
+QString SAchievement::toString() const {
+    QJsonObject object;
+    object["apiName"] = _apiName;
+    object["defaultValue"] = _defaultValue;
+    object["displayName"] = _displayName;
+    object["hidden"] = _hidden;
+    object["description"] = _description;
+    object["achieved"] = _achieved;
+    object["unlockTime"] = _unlockTime.toString();
+    object["percent"] = _percent;
+    object["icon"] = _icon;
+    object["iconGray"] = _iconGray;
+    return QJsonDocument(object).toJson(QJsonDocument::Compact);
 }
 
 QPixmap SAchievement::getIcon(int aGameId) {

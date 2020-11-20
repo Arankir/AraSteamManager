@@ -14,11 +14,11 @@ struct CategoryValue {
 class CategoryGame {
 public:
     CategoryGame(const QJsonObject category);
-    CategoryGame(const QString &title, int isNoValue, QList<CategoryValue> &values, QList<QString> &noValues): _isNoValue(isNoValue), _noValues(noValues), _title(title), _values(values) {}
+    CategoryGame(const QString &title, int isNoValue, const QList<CategoryValue> &values, const QList<QString> &noValues): _isNoValue(isNoValue), _noValues(noValues), _title(title), _values(values) {}
     CategoryGame(const CategoryGame &category): _isNoValue(category._isNoValue), _noValues(category._noValues), _title(category._title), _values(category._values) {}
     CategoryGame &operator=(const CategoryGame category);
 
-    CategoryGame &updateCategory(const QString &title, int isNoValue, QList<CategoryValue> &values, QList<QString> &noValues);
+    CategoryGame &updateCategory(const QString &title, int isNoValue, const QList<CategoryValue> &values, const QList<QString> &noValues);
 
     CategoryGame &fromJson(QJsonObject categoryGame);
     QJsonObject toJson() const; //Потом заменить на другой вид хранения данных
@@ -44,12 +44,15 @@ class CategoriesGame : public QObject {
     Q_OBJECT
 public:
     explicit CategoriesGame(SGame &game, QObject *parent = nullptr);
+    explicit CategoriesGame(QObject *parent = nullptr): QObject(parent) {;}
     CategoriesGame(const CategoriesGame &categories): QObject(categories.parent()), _categories(categories._categories), _game(categories._game) {}
     CategoryGame &operator[](const int index) {return _categories[index];}
 
+    void setGame(SGame game);
+
     CategoriesGame &deleteCategory(int index);
     CategoriesGame &deleteAll();
-    CategoriesGame &changeCategory(int category, const QString &title, int isNoValue, QList<CategoryValue> &values, QList<QString> &noValues);
+    CategoriesGame &changeCategory(int category, const QString &title, int isNoValue, const QList<CategoryValue> &values, const QList<QString> &noValues);
     CategoriesGame &update();
     void save(QJsonObject aCategories);
 

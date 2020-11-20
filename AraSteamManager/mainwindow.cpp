@@ -521,18 +521,18 @@ QString MainWindow::getTheme() {
                     "image-position: left; "
                     //"margin-top: 12px; "
                 "} "
-#define listwidget {
-                "QListWidget { "
+#define listview {
+                "QListView { "
                     "border: 0px solid #cccccc; "
-                    "border-radius: 8px; "
-                    "background-color: " + backgroundGradient +
+                    //"border-radius: 8px; "
+                    "background-color: rgba(30, 41, 59, 0.5); "// + backgroundGradient +
                 "} "
-                "QListWidget::item { "
+                "QListView::item { "
                     "border-bottom: 1px solid #cccccc; "
-                    "background-color: #213c57; "
+                    "background-color: rgba(23, 26, 33, 0.5); "
                     "color: white; "
                 "} "
-#define listwidgetend }
+#define listviewend }
                 ;
         break;
     }

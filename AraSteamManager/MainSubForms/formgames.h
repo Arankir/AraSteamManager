@@ -19,7 +19,7 @@
 #include "class/steamapi/Sachievements.h"
 #include "class/Threads/threading.h"
 #include "class/Network/requestimage.h"
-#include "class/filter.h"
+#include "class/myfilter.h"
 #include "class/hiddengames.h"
 #include "subwidget/qbuttonwithdata.h"
 
@@ -90,7 +90,7 @@ private:
     int _currentIndex;
 
     Favorites _favorites;
-    Filter _filter;
+    MyFilter _filter;
     QList<gameData> _hide;
     GroupsGames _groups;
     Comments _comments;

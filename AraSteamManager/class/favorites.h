@@ -134,10 +134,10 @@ public:
     bool removeFriend(const QString &idUser, const SProfile &profileFriend, const SFriend &friendLink, bool elseCreate = false);
     bool removeAchievement(const QString &idUser, const SGame &game, const SAchievement &achievement, bool elseCreate = false);
 
-    QList<FavoriteGame>             getGames()                                                      const {return _fGame;}
-    QList<FavoriteFriend>           getFriends()                                                    const {return _fFriend;}
-    QList<FavoriteAchievementsGame> getAchievementsGames()                                          const {return _fAchievement;}
-    FavoriteAchievementsGame&       getAchievementsGame(const QString &idUser, const SGame &game)   const;
+    static QList<FavoriteGame>             getGames()                                               {return _fGame;}
+    static QList<FavoriteFriend>           getFriends()                                             {return _fFriend;}
+    static QList<FavoriteAchievementsGame> getAchievementsGames()                                   {return _fAchievement;}
+    static FavoriteAchievementsGame&       getAchievementsGame(const QString &idUser, const SGame &game);
 
 signals:
 

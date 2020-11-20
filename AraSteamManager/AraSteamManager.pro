@@ -26,10 +26,9 @@ CONFIG += c++11
 
 SOURCES += \
     AchievementsSubForms/formachievements.cpp \
-    AchievementsSubForms/formachievementwidget.cpp \
-    AchievementsSubForms/formcategoryvalue.cpp \
+    AchievementsSubForms/formachievementscategoriesedit.cpp \
+    AchievementsSubForms/formachievementsfriendscompare.cpp \
     AchievementsSubForms/formcategoryvalue_2.cpp \
-    AchievementsSubForms/formcomparefriends.cpp \
     AchievementsSubForms/formcompareprofilefilter.cpp \
     AchievementsSubForms/formtablesheaders.cpp \
     MainSubForms/formfavorites.cpp \
@@ -52,9 +51,9 @@ SOURCES += \
     class/categoriesgame.cpp \
     class/comments.cpp \
     class/favorites.cpp \
-    class/filter.cpp \
     class/groupsgames.cpp \
     class/hiddengames.cpp \
+    class/myfilter.cpp \
     class/settings.cpp \
     class/steamapi/Sachievements.cpp \
     class/steamapi/Sapi.cpp \
@@ -77,10 +76,9 @@ SOURCES += \
 
 HEADERS += \
     AchievementsSubForms/formachievements.h \
-    AchievementsSubForms/formachievementwidget.h \
-    AchievementsSubForms/formcategoryvalue.h \
+    AchievementsSubForms/formachievementscategoriesedit.h \
+    AchievementsSubForms/formachievementsfriendscompare.h \
     AchievementsSubForms/formcategoryvalue_2.h \
-    AchievementsSubForms/formcomparefriends.h \
     AchievementsSubForms/formcompareprofilefilter.h \
     AchievementsSubForms/formtablesheaders.h \
     MainSubForms/formfavorites.h \
@@ -103,9 +101,9 @@ HEADERS += \
     class/categoriesgame.h \
     class/comments.h \
     class/favorites.h \
-    class/filter.h \
     class/groupsgames.h \
     class/hiddengames.h \
+    class/myfilter.h \
     class/settings.h \
     class/steamapi/Sachievements.h \
     class/steamapi/Sapi.h \
@@ -127,10 +125,9 @@ HEADERS += \
 
 FORMS += \
     AchievementsSubForms/formachievements.ui \
-    AchievementsSubForms/formachievementwidget.ui \
-    AchievementsSubForms/formcategoryvalue.ui \
+    AchievementsSubForms/formachievementscategoriesedit.ui \
+    AchievementsSubForms/formachievementsfriendscompare.ui \
     AchievementsSubForms/formcategoryvalue_2.ui \
-    AchievementsSubForms/formcomparefriends.ui \
     AchievementsSubForms/formcompareprofilefilter.ui \
     AchievementsSubForms/formtablesheaders.ui \
     MainSubForms/formfavorites.ui \

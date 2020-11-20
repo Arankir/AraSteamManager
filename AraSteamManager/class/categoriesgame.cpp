@@ -5,6 +5,12 @@ CategoriesGame::CategoriesGame(SGame &aGame, QObject *aParent): QObject(aParent)
     update();
 }
 
+void CategoriesGame::setGame(SGame aGame) {
+    _game = aGame;
+    convertOldCategories();
+    update();
+}
+
 CategoriesGame &CategoriesGame::update() {
     load();
     return *this;
@@ -18,8 +24,12 @@ QList<QString> CategoriesGame::getCategoriesTitles() const {
     return list;
 }
 
-CategoriesGame &CategoriesGame::changeCategory(int aCategory, const QString &aTitle, int aIsNoValue, QList<CategoryValue> &aValues, QList<QString> &aNoValues) {
-    _categories[aCategory].updateCategory(aTitle, aIsNoValue, aValues, aNoValues);
+CategoriesGame &CategoriesGame::changeCategory(int aCategory, const QString &aTitle, int aIsNoValue, const QList<CategoryValue> &aValues, const QList<QString> &aNoValues) {
+    if (aCategory >= _categories.size()) {
+        _categories.append(CategoryGame(aTitle, aIsNoValue, aValues, aNoValues));
+    } else {
+        _categories[aCategory].updateCategory(aTitle, aIsNoValue, aValues, aNoValues);
+    }
     save(toJson());
     return *this;
 }
@@ -121,8 +131,8 @@ void CategoriesGame::fromJson(QJsonObject aCategories) {
 
 QJsonObject CategoriesGame::toJson() {
     QJsonObject obj;
-    obj["Game"] = _gameName;
-    obj["GameID"] = _gameId;
+    obj["Game"] = _game.name();
+    obj["GameID"] = _game.sAppId();
     QJsonArray categoriesArr;
     for(auto category: _categories) {
         categoriesArr.append(category.toJson());
@@ -144,7 +154,7 @@ CategoryGame &CategoryGame::operator=(const CategoryGame aCategory) {
     return *this;
 }
 
-CategoryGame &CategoryGame::updateCategory(const QString &aTitle, int aIsNoValue, QList<CategoryValue> &aValues, QList<QString> &aNoValues) {
+CategoryGame &CategoryGame::updateCategory(const QString &aTitle, int aIsNoValue, const QList<CategoryValue> &aValues, const QList<QString> &aNoValues) {
     _title      = aTitle;
     _isNoValue  = aIsNoValue;
     _noValues   = aNoValues;

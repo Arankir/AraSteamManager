@@ -186,6 +186,7 @@ QString Images::logo() {
     return "://logo.png";
 }
 
+#define States {
 QString Images::stateBlue() {
     return "://state_blue.png";
 }
@@ -201,220 +202,209 @@ QString Images::stateRed() {
 QString Images::stateYellow() {
     return "://state_yellow.png";
 }
+#define StatesEnd }
 
 QString Images::levels(int aHundreds) {
     return QString("://levels/%1.png").arg(QString::number(aHundreds));
 }
 
+#define AchievementsDir {
+#define AchievementsCheckBox {
 QString Images::allAchievements() {
-    return "://" + Settings::getIconsColor() + "/all.png";
-}
-
-QString Images::back() {
-    return "://" + Settings::getIconsColor() + "/back.png";
-}
-
-QString Images::cancel() {
-    return "://" + Settings::getIconsColor() + "/cancel.png";
-}
-
-QString Images::change() {
-    return "://" + Settings::getIconsColor() + "/change.png";
-}
-
-QString Images::checkAll() {
-    return "://" + Settings::getIconsColor() + "/check_all.png";
-}
-
-QString Images::checkVisible() {
-    return "://" + Settings::getIconsColor() + "/check_visible.png";
-}
-
-QString Images::closeWindow() {
-    return "://" + Settings::getIconsColor() + "/close_window.png";
-}
-
-QString Images::compare() {
-    return "://" + Settings::getIconsColor() + "/back.png";
-}
-
-QString Images::deleteAll() {
-    return "://" + Settings::getIconsColor() + "/delete_all.png";
-}
-
-QString Images::down() {
-    return "://" + Settings::getIconsColor() + "/down.png";
-}
-
-QString Images::exit() {
-    return "://" + Settings::getIconsColor() + "/exit.png";
-}
-
-QString Images::isFavorites() {
-    return "://" + Settings::getIconsColor() + "/in_favorites.png";
-}
-
-QString Images::isNotFavorites() {
-    return "://" + Settings::getIconsColor() + "/favorites.png";
-}
-
-QString Images::filter() {
-    return "://" + Settings::getIconsColor() + "/filter.png";
-}
-
-QString Images::find() {
-    return "://" + Settings::getIconsColor() + "/find.png";
-}
-
-QString Images::findProfile() {
-    return "://" + Settings::getIconsColor() + "/find_profile.png";
-}
-
-QString Images::friends() {
-    return "://" + Settings::getIconsColor() + "/friends.png";
-}
-
-QString Images::games() {
-    return "://" + Settings::getIconsColor() + "/games.png";
-}
-
-QString Images::goTo() {
-    return "://" + Settings::getIconsColor() + "/go_to.png";
-}
-
-QString Images::hide() {
-    return "://" + Settings::getIconsColor() + "/hide.png";
-}
-
-QString Images::home() {
-    return "://" + Settings::getIconsColor() + "/home.png";
-}
-
-QString Images::left() {
-    return "://" + Settings::getIconsColor() + "/left.png";
-}
-
-QString Images::link() {
-    return "://" + Settings::getIconsColor() + "/link.png";
-}
-
-QString Images::maximizeWindow() {
-    return "://" + Settings::getIconsColor() + "/maximize_window.png";
-}
-
-QString Images::minimizeWindow() {
-    return "://" + Settings::getIconsColor() + "/minimize_window.png";
-}
-
-QString Images::notReached() {
-    return "://" + Settings::getIconsColor() + "/notreached.png";
-}
-
-QString Images::profile() {
-    return "://" + Settings::getIconsColor() + "/profile.png";
+    return "://" + Settings::getIconsColor() + "/achievements/checkbox/all.png";
 }
 
 QString Images::reached() {
-    return "://" + Settings::getIconsColor() + "/reached.png";
+    return "://" + Settings::getIconsColor() + "/achievements/checkbox/reached.png";
 }
 
-QString Images::normalizeWindow() {
-    return "://" + Settings::getIconsColor() + "/restore_window.png";
+QString Images::notReached() {
+    return "://" + Settings::getIconsColor() + "/achievements/checkbox/notreached.png";
 }
+#define AchievementsCheckBoxEnd }
 
-QString Images::reverse() {
-    return "://" + Settings::getIconsColor() + "/reverse.png";
-}
-
-QString Images::right() {
-    return "://" + Settings::getIconsColor() + "/right.png";
-}
-
-QString Images::setHome() {
-    return "://" + Settings::getIconsColor() + "/set_home.png";
-}
-
-QString Images::settings() {
-    return "://" + Settings::getIconsColor() + "/settings.png";
-}
-
-QString Images::statistic() {
-    return "://" + Settings::getIconsColor() + "/statistic.png";
+#define AchievementsCategories {
+QString Images::checkVisible() {
+    return "://" + Settings::getIconsColor() + "/achievements/categories/check_visible.png";
 }
 
 QString Images::uncheckVisible() {
-    return "://" + Settings::getIconsColor() + "/uncheck_visible.png";
+    return "://" + Settings::getIconsColor() + "/achievements/categories/uncheck_visible.png";
 }
 
-QString Images::unhide() {
-    return "://" + Settings::getIconsColor() + "/unhide.png";
+QString Images::reverse() {
+    return "://" + Settings::getIconsColor() + "/achievements/categories/reverse.png";
+}
+#define AchievementCategoriesEnd }
+
+QString Images::category() {
+    return "://" + Settings::getIconsColor() + "/achievements/category.png";
 }
 
-QString Images::up() {
-    return "://" + Settings::getIconsColor() + "/up.png";
+QString Images::checkAll() {
+    return "://" + Settings::getIconsColor() + "/achievements/check_all.png";
 }
 
-QString Images::update() {
-    return "://" + Settings::getIconsColor() + "/update.png";
+QString Images::guides() {
+    return "://" + Settings::getIconsColor() + "/achievements/guides.png";
 }
 
-QString Images::create() {
-    return "://" + Settings::getIconsColor() + "/create.png";
+QString Images::guide() {
+    return "://" + Settings::getIconsColor() + "/achievements/guide.png";
 }
+#define AchievementsDirEnd }
 
-QString Images::deleteIcon() {
-    return "://" + Settings::getIconsColor() + "/delete.png";
-}
-
-QString Images::edit() {
-    return "://" + Settings::getIconsColor() + "/edit.png";
-}
-
-QString Images::apply() {
-    return "://" + Settings::getIconsColor() + "/apply.png";
-}
-
-QString Images::top() {
-    return "://" + Settings::getIconsColor() + "/top.png";
-}
-
-QString Images::bottom() {
-    return "://" + Settings::getIconsColor() + "/bottom.png";
-}
-
+#define Comments {
 QString Images::isComment() {
-    return "://" + Settings::getIconsColor() + "/isComment.png";
+    return "://" + Settings::getIconsColor() + "/comments/isComment.png";
 }
 
 QString Images::isNotComment() {
-    return "://" + Settings::getIconsColor() + "/isNotComment.png";
+    return "://" + Settings::getIconsColor() + "/comments/isNotComment.png";
+}
+#define CommentsEnd }
+
+#define Direction {
+QString Images::first() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/first.png";
 }
 
-QString Images::achievement() {
-    return "://" + Settings::getIconsColor() + "/achievement.png";
+QString Images::back() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/left.png";
 }
 
-QString Images::download() {
-    return "://" + Settings::getIconsColor() + "/download.png";
+QString Images::next() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/right.png";
+}
+
+QString Images::last() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/last.png";
+}
+
+QString Images::top() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/top.png";
+}
+
+QString Images::up() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/up.png";
+}
+
+QString Images::down() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/down.png";
+}
+
+QString Images::bottom() {
+    return "://" + Settings::getIconsColor() + "/dirrection arrows/bottom.png";
+}
+#define DirectionEnd }
+
+#define Favorites {
+QString Images::isFavorites() {
+    return "://" + Settings::getIconsColor() + "/favorites/in_favorites.png";
+}
+
+QString Images::isNotFavorites() {
+    return "://" + Settings::getIconsColor() + "/favorites/favorites.png";
+}
+#define FavoritesEnd }
+
+#define Hide {
+QString Images::hide() {
+    return "://" + Settings::getIconsColor() + "/hide/hide.png";
 }
 
 QString Images::visible() {
-    return "://" + Settings::getIconsColor() + "/visible.png";
+    return "://" + Settings::getIconsColor() + "/hide/visible.png";
+}
+#define HideEnd }
+
+#define Main {
+QString Images::findProfile() {
+    return "://" + Settings::getIconsColor() + "/main/find_profile.png";
 }
 
-QString Images::category() {
-    return "://" + Settings::getIconsColor() + "/category.png";
+QString Images::home() {
+    return "://" + Settings::getIconsColor() + "/main/home.png";
 }
 
-QString Images::group1() {
-    return "://" + Settings::getIconsColor() + "/group1.png";
+QString Images::left() {
+    return "://" + Settings::getIconsColor() + "/main/left.png";
 }
 
-QString Images::group2() {
-    return "://" + Settings::getIconsColor() + "/group2.png";
+QString Images::right() {
+    return "://" + Settings::getIconsColor() + "/main/right.png";
 }
 
-#define IconsWidgetStart {
+QString Images::settings() {
+    return "://" + Settings::getIconsColor() + "/main/settings.png";
+}
+#define MainEnd }
+
+#define Management {
+QString Images::apply() {
+    return "://" + Settings::getIconsColor() + "/management/apply.png";
+}
+
+QString Images::cancel() {
+    return "://" + Settings::getIconsColor() + "/management/cancel.png";
+}
+
+QString Images::change() {
+    return "://" + Settings::getIconsColor() + "/management/change.png";
+}
+
+QString Images::compare() {
+    return "://" + Settings::getIconsColor() + "/management/back.png";
+}
+
+QString Images::create() {
+    return "://" + Settings::getIconsColor() + "/management/create.png";
+}
+
+QString Images::deleteIcon() {
+    return "://" + Settings::getIconsColor() + "/management/delete.png";
+}
+
+QString Images::deleteAll() {
+    return "://" + Settings::getIconsColor() + "/management/delete_all.png";
+}
+
+QString Images::download() {
+    return "://" + Settings::getIconsColor() + "/management/download.png";
+}
+
+QString Images::edit() {
+    return "://" + Settings::getIconsColor() + "/management/edit.png";
+}
+
+QString Images::find() {
+    return "://" + Settings::getIconsColor() + "/management/find.png";
+}
+
+QString Images::update() {
+    return "://" + Settings::getIconsColor() + "/management/update.png";
+}
+#define ManagementEnd }
+
+#define ProfileIcon {
+QString Images::friends() {
+    return "://" + Settings::getIconsColor() + "/profile icons/friends.png";
+}
+
+QString Images::games() {
+    return "://" + Settings::getIconsColor() + "/profile icons/games.png";
+}
+
+QString Images::setHome() {
+    return "://" + Settings::getIconsColor() + "/profile icons/set_home.png";
+}
+
+QString Images::statistic() {
+    return "://" + Settings::getIconsColor() + "/profile icons/statistic.png";
+}
+#define ProfileIconEnd }
+
+#define Widgets {
 QString Images::checkBoxChecked() {
     return "://" + Settings::getIconsColor() + "/widgets/checkbox_checked.png";
 }
@@ -482,11 +472,67 @@ QString Images::scrollBarLeft() {
 QString Images::scrollBarRight() {
     return "://" + Settings::getIconsColor() + "/widgets/scrollbar_right.png";
 }
+#define WidgetsEnd }
+
+#define WindowButtons {
+QString Images::closeWindow() {
+    return "://" + Settings::getIconsColor() + "/window buttons/close_window.png";
+}
+
+QString Images::maximizeWindow() {
+    return "://" + Settings::getIconsColor() + "/window buttons/maximize_window.png";
+}
+
+QString Images::minimizeWindow() {
+    return "://" + Settings::getIconsColor() + "/window buttons/minimize_window.png";
+}
+
+QString Images::normalizeWindow() {
+    return "://" + Settings::getIconsColor() + "/window buttons/restore_window.png";
+}
+#define WindowButtonsEnd }
+
+#define Other {
+QString Images::achievement() {
+    return "://" + Settings::getIconsColor() + "/achievement.png";
+}
+
+QString Images::backRounded() {
+    return "://" + Settings::getIconsColor() + "/back.png";
+}
+
+QString Images::exit() {
+    return "://" + Settings::getIconsColor() + "/exit.png";
+}
+
+QString Images::filter() {
+    return "://" + Settings::getIconsColor() + "/filter.png";
+}
+
+QString Images::goTo() {
+    return "://" + Settings::getIconsColor() + "/go_to.png";
+}
+
+QString Images::group1() {
+    return "://" + Settings::getIconsColor() + "/group1.png";
+}
+
+QString Images::group2() {
+    return "://" + Settings::getIconsColor() + "/group2.png";
+}
+
+QString Images::link() {
+    return "://" + Settings::getIconsColor() + "/link.png";
+}
+
+QString Images::profile() {
+    return "://" + Settings::getIconsColor() + "/profile.png";
+}
+#define OtherEnd }
 
 QString Images::missingImage() {
     return "://MissingImage.png";
 }
-#define IconsWidgetEnd }
 #define SettingsEnd }
 
 #define PathsStart {

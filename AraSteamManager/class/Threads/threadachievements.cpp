@@ -1,7 +1,7 @@
 #include "threadachievements.h"
 
-const QColor achievedColor      = QColor(0, 255, 0);
-const QColor notAchievedColor   = QColor(255, 0, 0);
+const QColor achievedColor      = QColor (87, 220, 87, 255 * 1);
+const QColor notAchievedColor   = QColor (255, 48, 48, 255 * 1);
 
 int ThreadAchievements::fill() {
     //icon
@@ -46,6 +46,12 @@ int ThreadAchievements::fill() {
         itemDescription ->setFont(font);
         itemPercent     ->setFont(font);
         itemAchieved    ->setFont(font);
+
+        itemTitle->setToolTip(achievement._displayName);
+        itemDescription->setToolTip(achievement._description);
+
+        itemPercent->setTextAlignment(Qt::AlignCenter);
+        itemAchieved->setTextAlignment(Qt::AlignCenter);
 
         model->setItem(row, c_columnAppid, itemId);
         model->setItem(row, c_columnIndex, itemIndex);

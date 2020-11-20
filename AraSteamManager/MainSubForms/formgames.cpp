@@ -211,6 +211,19 @@ int FormGames::rowFromId(QString aId) {
     }
     return -1;
 }
+
+void FormGames::updateCurrentGame() {
+    QModelIndex index = ui->TableGames->currentIndex();
+    _currentIndex = ui->TableGames->model()->index(index.row(), c_tableColumnIndex).data().toString().toInt();
+    int appId = ui->TableGames->model()->index(index.row(), c_tableColumnAppid).data().toString().toInt();
+
+    auto iterator = std::find_if(_games.begin(), _games.end(), [=](const SGame &game) {
+                                                                    return game.appId() == appId;
+                                                                });
+    if (iterator != _games.end()) {
+        _currentGame = &*iterator;
+    }
+}
 #define FindGameInTableEnd }
 
 #define System {
@@ -239,19 +252,6 @@ void FormGames::retranslate() {
     ui->TableGames->model()->setHeaderData(c_tableColumnName,        Qt::Horizontal, tr("Название игры"));
     ui->TableGames->model()->setHeaderData(c_tableColumnComment,     Qt::Horizontal, tr(""));
     ui->TableGames->model()->setHeaderData(c_tableColumnProgress,    Qt::Horizontal, tr("Прогресс"));
-}
-
-void FormGames::updateCurrentGame() {
-    QModelIndex index = ui->TableGames->currentIndex();
-    _currentIndex = ui->TableGames->model()->index(index.row(), c_tableColumnIndex).data().toString().toInt();
-    int appId = ui->TableGames->model()->index(index.row(), c_tableColumnAppid).data().toString().toInt();
-
-    auto iterator = std::find_if(_games.begin(), _games.end(), [=](const SGame &game) {
-                                                                    return game.appId() == appId;
-                                                                });
-    if (iterator != _games.end()) {
-        _currentGame = &*iterator;
-    }
 }
 
 void FormGames::updateSettings() {

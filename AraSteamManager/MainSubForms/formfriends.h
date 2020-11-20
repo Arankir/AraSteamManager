@@ -7,7 +7,7 @@
 #include "class/steamapi/Sfriends.h"
 #include "class/Threads/threading.h"
 #include "class/favorites.h"
-#include "class/filter.h"
+#include "class/myfilter.h"
 
 namespace Ui {
 class FormFriends;
@@ -72,7 +72,7 @@ private:
     bool _blockedLoad = false;
 
     Favorites _favorites;
-    Filter _filter;
+    MyFilter _filter;
 
 };
 

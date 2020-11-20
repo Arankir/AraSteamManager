@@ -19,14 +19,19 @@ constexpr int c_tableFriendsRowFilters            = 2;
 constexpr int c_tableFriendsRowID                 = 3;
 constexpr int c_tableFriendsRowCount              = 4;
 
-constexpr int c_categoriesWidth                   = 200;
-constexpr int c_CategoriesEditWidth               = 400;
-constexpr int c_CategoriesEditHeight              = 300;
+constexpr int c_filterName = 0;
+constexpr int c_filterReached = 1;
+constexpr int c_filterFavorite = 2;
+constexpr int c_filterUniqueValue = 3;
+constexpr int c_filterColumnCount = 4;
+constexpr int c_filterEndConstValues = 4;
 #define ConstantsEnd }
 
 #define Init {
-FormAchievements::FormAchievements(SAchievementsPlayer &aPlayer, SProfile &aProfile, SGame &aGame, int aUnicNum, QWidget *aParent): QWidget(aParent), ui(new Ui::FormAchievements),
-_achievements(aPlayer), _profile(aProfile), _game(aGame), _unicNum(aUnicNum), _categoriesGame(_game) {
+FormAchievements::FormAchievements(SAchievementsPlayer &aPlayer, SProfile &aProfile, SGame &aGame, int aUnicNum,
+                                   QWidget *aParent): QWidget(aParent), ui(new Ui::FormAchievements),
+                                   _achievements(aPlayer), _profile(aProfile), _game(aGame), _unicNum(aUnicNum),
+                                   _categoriesGame(_game), _comments(_profile._steamID) {
     ui->setupUi(this);
     initComponents(aPlayer);
     ui->LineEditNameAchievements->setFocus();
@@ -37,29 +42,17 @@ void FormAchievements::initComponents(SAchievementsPlayer &aPlayer) {
     this->setAttribute(Qt::WA_TranslucentBackground);
 
     //Временно
-    ui->ListWidgetValuesCategory->setDragEnabled(false);
-    QStandardItemModel *model = new QStandardItemModel;
-    QStandardItem *itemId = new QStandardItem("555");
-    model->setItem(0, 0, itemId);
-    for (int i = 1; i < 100; ++i) {
-        QStandardItem *itemId2 = new QStandardItem("777");
-        model->setItem(i, 0, itemId2);
-    }
-    ui->TableViewCompare->setModel(model);
-
     _achievements   .set(SAchievementsPercentage(_game.sAppId()))
                     .set(SAchievementsGlobal(_game.sAppId()));
     _achievements.update(false);
+    _fAchievements.setCol(c_filterColumnCount);
+    _fCompare.setCol(c_filterColumnCount);
     //FormCompareFriends *Compare = new FormCompareFriends(ui->FrameCompare);
 
     QLabel *allFriends = new QLabel("All", this);
     allFriends->setToolTip(tr("Достижения друзей"));
     allFriends->setScaledContents(true);
     allFriends->setFixedSize(32, 32);
-
-    QLabel *avatarAchievementsCompare = new QLabel(this);
-    avatarAchievementsCompare->setAlignment(Qt::AlignCenter);
-    avatarAchievementsCompare->setPixmap(_profile.getPixmapAvatar());
 
     QLabel *avatarFriendsCompare = new QLabel(this);
     avatarFriendsCompare->setAlignment(Qt::AlignCenter);
@@ -68,26 +61,21 @@ void FormAchievements::initComponents(SAchievementsPlayer &aPlayer) {
 
     ui->LabelGameLogo->setPixmap(_game.pixmapLogo());
     Settings::createDir(Paths::imagesAchievements(QString::number(_game.appId()), ""));
-    //ui->FrameEditCategory->setVisible(false);
     ui->ProgressBarFriendsLoad->setVisible(false);
     ui->LabelGameOnlineValue->setText(_game.getNumberPlayers(false));
     ui->LabelGameTitle->setText(_game.name());
     ui->FrameFilter->setEnabled(false);
-    ui->ButtonCompare->setMinimumHeight(21);
+    //ui->ButtonCompare->setMinimumHeight(21);
     ui->tabWidget->setCurrentIndex(0);
     #define LoadDataEnd }
 
     initTableStandart();
-    //_achievements._appid = QString::number(_game._appID);
-    //_achievements._id = _profile._steamID;
-    //_achievements.update();
+    initTableCompare();
 
     #define ConnectTables {
     _tableAchievements = new FormTablesHeaders(_game, _profile._steamID, aPlayer);
     connect(_tableAchievements, &FormTablesHeaders::s_tablePulled, this, &FormAchievements::onTablePulled);
     _tableAchievements->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
-    _tableAchievements->changeHorizontalTitle(c_tableAchievementColumnReachedMy, _profile._personaName);
-    _tableAchievements->setWidgetHorizontalHeader(0, c_tableAchievementColumnReachedMy, avatarAchievementsCompare);
     #define ConnectTablesEnd }
     #define SetTableWidgetCompareFriendsSettings {
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -103,25 +91,25 @@ void FormAchievements::initComponents(SAchievementsPlayer &aPlayer) {
                                                     tr("Полученные достижения"),
                                                     tr("Не полученные достижения"),
                                                     this);
-    connect(_filterMyProfile, &FormCompareProfileFilter::s_radioButtonChange, _tableAchievements, [=](QString, ReachedType aType) {
-        _tableAchievements->updateFilterWithMyProfile(aType, true, false);
+    connect(_filterMyProfile, &FormCompareProfileFilter::s_radioButtonChange, this, [=](QString, ReachedType aType) {
+        updateFilterWithMyProfile(aType, true, false);
     });
     layoutReachedFilter->addWidget(_filterMyProfile);
     //ui->GroupBoxReachedFilter->setLayout(layoutReachedFilter);
 
     FormCompareProfileFilter *myFilter = new FormCompareProfileFilter(this);
     myFilter->setObjectName("FormCompareProfileFilterMy");
-    connect(myFilter, &FormCompareProfileFilter::s_radioButtonChange, _tableAchievements, [=](QString, ReachedType aType) {
-        _tableAchievements->updateFilterWithMyProfile(aType, false, true);
+    connect(myFilter, &FormCompareProfileFilter::s_radioButtonChange, this, [=](QString, ReachedType aType) {
+        updateFilterWithMyProfile(aType, false, true);
     });
 
     QWidget *widgetFriendsAchievementsFilter = new QWidget(this);
-    QVBoxLayout *layoutFriendsAchievementsFilter = new QVBoxLayout(widgetFriendsAchievementsFilter);
-    layoutFriendsAchievementsFilter->setMargin(1);
-    layoutFriendsAchievementsFilter->setAlignment(Qt::AlignCenter);
-    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsAll",        "Friends", "All",        true));
-    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsReached",    "Friends", "Reached",    false));
-    layoutFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsNotReached", "Friends", "NotReached", false));
+    QVBoxLayout *lFriendsAchievementsFilter = new QVBoxLayout(widgetFriendsAchievementsFilter);
+    lFriendsAchievementsFilter->setMargin(1);
+    lFriendsAchievementsFilter->setAlignment(Qt::AlignCenter);
+    lFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsAll",        "Friends", "All",        true));
+    lFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsReached",    "Friends", "Reached",    false));
+    lFriendsAchievementsFilter->addWidget(createButtonWithData("PBFriendsNotReached", "Friends", "NotReached", false));
     //widgetFriendsAchievementsFilter->setLayout(layoutFriendsAchievementsFilter);
 
     ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, 0, myFilter);
@@ -135,59 +123,31 @@ void FormAchievements::initComponents(SAchievementsPlayer &aPlayer) {
     #define SetTableWidgetCompareFriendsSettingsEnd }
     setIcons();
     #define Connects {
-    connect(ui->ButtonUpdate,                       &QPushButton::clicked,                    this,                &FormAchievements::buttonUpdate_Clicked);
-    connect(ui->CheckBoxCompareAllFriends,          &QCheckBox::stateChanged,                 this,                &FormAchievements::checkBoxCompareAllFriends_StateChanged);
-    connect(ui->ButtonAddCategory,                  &QPushButton::clicked,                    this,                &FormAchievements::buttonAddCategory_Clicked);
-    connect(ui->ButtonChangeCategory,               &QPushButton::clicked,                    this,                &FormAchievements::buttonChangeCategory_Clicked);
-    connect(ui->ButtonCompare,                      &QPushButton::clicked,                    this,                &FormAchievements::buttonCompare_Clicked);
-    connect(ui->ButtonDeleteAllCategories,          &QPushButton::clicked,                    this,                &FormAchievements::buttonDeleteAllCategories_Clicked);
-    connect(ui->ButtonAddValueCategory,             &QPushButton::clicked,                    this,                &FormAchievements::buttonAddValueCategory_Clicked);
-    connect(ui->ButtonAcceptCategory,               &QPushButton::clicked,                    this,                &FormAchievements::buttonAcceptCategory_Clicked);
-    connect(ui->ButtonCancelCategory,               &QPushButton::clicked,                    this,                &FormAchievements::buttonCancelCategory_Clicked);
-    connect(ui->ButtonDeleteCategory,               &QPushButton::clicked,                    this,                &FormAchievements::buttonDeleteCategory_Clicked);
-    connect(ui->CheckBoxCategoryOneValue,           &QCheckBox::stateChanged,                 this,                &FormAchievements::checkBoxCategoryOneValue_StateChanged);
-    connect(ui->LineEditTitleCategory,              &QLineEdit::textChanged,                  this,                &FormAchievements::lineEditTitleCategory_TextChanged);
-    connect(ui->ComboBoxCategories,                 SIGNAL(activated(int)),                   this,                SLOT(comboBoxCategories_Activated(int)));
-    connect(ui->CheckBoxCategoryVisibleAll,         &QCheckBox::clicked,                      this,                &FormAchievements::checkBoxCategoryVisibleAll_Clicked);
-    connect(ui->CheckBoxFavorites,                  &QCheckBox::stateChanged,                 this,                &FormAchievements::checkBoxFavorites_StateChanged);
-    connect(ui->ButtonFavorite,                     &QPushButton::clicked,                    this,                &FormAchievements::buttonFavorite_Clicked);
-    connect(ui->ButtonGuides,                       &QPushButton::clicked,                    this,                &FormAchievements::buttonManual_Clicked);
-    connect(_tableAchievements,                     &FormTablesHeaders::s_contentCellClicked, this,                &FormAchievements::tableAchievements_CellClicked);
-    connect(ui->ListWidgetValuesCategory,           &QListWidget::currentRowChanged,          this,                &FormAchievements::formCategoryListWidget_CurrentRowChanged);
-    connect(ui->ButtonCategoryValueReverse,         &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueReverse);
-    connect(ui->ButtonCategoryValueTop,             &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueTop);
-    connect(ui->ButtonCategoryValueUp,              &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueUp);
-    connect(ui->ButtonCategoryValueDown,            &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueDown);
-    connect(ui->ButtonCategoryValueBottom,          &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueBottom);
-    connect(ui->ButtonCategoryValueCheckVisible,    &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueSelectVisible);
-    connect(ui->ButtonCategoryValueUncheckVisible,  &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueUnselectVisible);
-    connect(ui->ButtonCategoryValueDelete,          &QPushButton::clicked,                    this,                &FormAchievements::formCategoryValueDelete);
-    connect(ui->tabWidget,                          &QTabWidget::currentChanged,              this,                &FormAchievements::tabWidget_CurrentChanged);
-    connect(ui->CheckBoxCategoryUniqueValue,        &QCheckBox::stateChanged,                 this,                [=](int checkBoxState) {
-        _tableAchievements->setUniqueMode(checkBoxState == 2);
+    connect(ui->ButtonUpdate,                   &QPushButton::clicked,          this,                   &FormAchievements::buttonUpdate_Clicked);
+    connect(ui->CheckBoxCompareAllFriends,      &QCheckBox::stateChanged,       this,                   &FormAchievements::checkBoxCompareAllFriends_StateChanged);
+    connect(ui->CheckBoxFavorites,              &QCheckBox::stateChanged,       this,                   &FormAchievements::checkBoxFavorites_StateChanged);
+    connect(ui->ButtonGuides,                   &QPushButton::clicked,          this,                   &FormAchievements::buttonManual_Clicked);
+    connect(ui->tabWidget,                      &QTabWidget::currentChanged,    this,                   &FormAchievements::tabWidget_CurrentChanged);
+    connect(ui->LineEditNameAchievements,       &QLineEdit::textChanged,        this,                   [=](const QString &newText) {
+        updateFilterTextAchievement(newText, true, true);
     });
-    connect(ui->LineEditNameAchievements,           &QLineEdit::textChanged,                  this,                [=](const QString &newText) {
-        _tableAchievements->updateFilterTextAchievement(newText, true, true);
-    });
-    connect(ui->ButtonFindAchievement,              &QPushButton::clicked,                    this,                [=]() {
+    connect(ui->ButtonFindAchievement,          &QPushButton::clicked,          this,                   [=]() {
         ui->LineEditNameAchievements->setText(ui->LineEditNameAchievements->text());
     });
-    connect(ui->CheckBoxCompareIcon,                &QCheckBox::stateChanged,                 ui->TableViewCompare,  [=](int arg1) {
+    connect(ui->CheckBoxCompareIcon,            &QCheckBox::stateChanged,       ui->TableViewCompare,   [=](int arg1) {
         ui->TableViewCompare->setColumnHidden(c_tableAchievementColumnIcon, arg1 == 0);
     });
-    connect(ui->CheckBoxCompareTitle,               &QCheckBox::stateChanged,                 ui->TableViewCompare,  [=](int arg1) {
+    connect(ui->CheckBoxCompareTitle,           &QCheckBox::stateChanged,       ui->TableViewCompare,   [=](int arg1) {
         ui->TableViewCompare->setColumnHidden(c_tableAchievementColumnTitle, arg1 == 0);
     });
-    connect(ui->CheckBoxCompareDescription,         &QCheckBox::stateChanged,                 ui->TableViewCompare,  [=](int arg1) {
+    connect(ui->CheckBoxCompareDescription,     &QCheckBox::stateChanged,       ui->TableViewCompare,   [=](int arg1) {
         ui->TableViewCompare->setColumnHidden(c_tableAchievementColumnDescription, arg1 == 0);
     });
-    connect(ui->CheckBoxCompareTotalPercent,        &QCheckBox::stateChanged,                 ui->TableViewCompare,  [=](int arg1) {
+    connect(ui->CheckBoxCompareTotalPercent,    &QCheckBox::stateChanged,       ui->TableViewCompare,   [=](int arg1) {
         ui->TableViewCompare->setColumnHidden(c_tableAchievementColumnWorld, arg1 == 0);
     });
     #define ConnectsEnd }
-    ui->FrameEditCategory->raise();
     setFormMode(FormMode::standart);
-    showCategories();
     createThread();
     retranslate();
 }
@@ -196,34 +156,28 @@ void FormAchievements::retranslate() {
     ui->retranslateUi(this);
     _filterMyProfile->setTitles(tr("Все достижения"), tr("Полученные достижения"), tr("Не полученные достижения"));
     ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1)->setToolTip(tr("Достижения друзей"));
-    switch (_currentMode) {
-    case FormMode::compare: {
-        ui->ButtonCompare->setText(tr("Обратно"));
-        break;
-    }
-    case FormMode::standart: {
-        ui->ButtonCompare->setText(tr("Сравнить с друзьями"));
-        break;
-    }
-    }
-    switch (_typeCategory) {
-    case CategoryType::add: {
-        //ui->GroupBoxCategories->setTitle(tr("Добавить категорию"));
-        break;
-    }
-    case CategoryType::change: {
-        //ui->GroupBoxCategories->setTitle(tr("Изменить категорию"));
-        break;
-    }
-    default: {
-        break;
-    }
+    if (ui->TableViewMyAchievements->model() != nullptr) {
+        ui->TableViewMyAchievements->model()->setHeaderData(c_tableAchievementColumnIcon,           Qt::Horizontal, tr(""));
+        ui->TableViewMyAchievements->model()->setHeaderData(c_tableAchievementColumnTitle,          Qt::Horizontal, tr("Название"));
+        ui->TableViewMyAchievements->model()->setHeaderData(c_tableAchievementColumnDescription,    Qt::Horizontal, tr("Описание"));
+        ui->TableViewMyAchievements->model()->setHeaderData(c_tableAchievementColumnComment,        Qt::Horizontal, tr(""));
+        ui->TableViewMyAchievements->model()->setHeaderData(c_tableAchievementColumnWorld,          Qt::Horizontal, tr("По миру"));
     }
 }
 
-void FormAchievements::updateHiddenRows(QTableView *aTable) {
-    for (int i = 0; i < aTable->model()->rowCount(); ++i) {
-        aTable->setRowHidden(i, _fAchievements.getData(i));
+void FormAchievements::updateHiddenRows(bool aStandart, bool aCompare) {
+    if (aStandart) {
+        if (_isEditCategoryLoaded) {
+            ui->CategoriesEdit->updateFilter(_fAchievements);
+        }
+        for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+            ui->TableViewMyAchievements->setRowHidden(i + 1, !_fAchievements.getData(i));
+        }
+    }
+    if (aCompare) {
+        for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+            ui->TableViewCompare->setRowHidden(i + 1, !_fCompare.getData(i));
+        }
     }
 }
 
@@ -234,35 +188,10 @@ void FormAchievements::updateSettings() {
 }
 
 void FormAchievements::setIcons() {
-    ui->ButtonCompare                       ->setIcon(QIcon(Images::compare()));
-    ui->ButtonAddCategory                   ->setIcon(QIcon(Images::create()));
-    ui->ButtonChangeCategory                ->setIcon(QIcon(Images::change()));
-    ui->ButtonDeleteCategory                ->setIcon(QIcon(Images::deleteIcon()));
-    ui->ButtonDeleteAllCategories           ->setIcon(QIcon(Images::deleteAll()));
-    ui->ButtonFindAchievement               ->setIcon(QIcon(Images::find()));
-    ui->ButtonAddValueCategory              ->setIcon(QIcon(Images::create()));
-    ui->ButtonAcceptCategory                ->setIcon(QIcon(Images::apply()));
-    ui->ButtonCancelCategory                ->setIcon(QIcon(Images::cancel()));
-    ui->ButtonUpdate                        ->setIcon(QIcon(Images::update()));
-    ui->ButtonFavorite                      ->setIcon(QIcon(Images::isNotFavorites()));
+    ui->ButtonFindAchievement   ->setIcon(QIcon(Images::find()));
+    ui->ButtonUpdate            ->setIcon(QIcon(Images::update()));
+    ui->ButtonGuides            ->setIcon(QIcon(Images::guide()));
 
-    ui->ButtonCategoryValueReverse          ->setIcon(QIcon(Images::reverse()));
-    ui->ButtonCategoryValueTop              ->setIcon(QIcon(Images::top()));
-    ui->ButtonCategoryValueUp               ->setIcon(QIcon(Images::up()));
-    ui->ButtonCategoryValueDown             ->setIcon(QIcon(Images::down()));
-    ui->ButtonCategoryValueBottom           ->setIcon(QIcon(Images::bottom()));
-    ui->ButtonCategoryValueCheckVisible     ->setIcon(QIcon(Images::checkVisible()));
-    ui->ButtonCategoryValueUncheckVisible   ->setIcon(QIcon(Images::uncheckVisible()));
-    ui->ButtonCategoryValueDelete           ->setIcon(QIcon(Images::deleteIcon()));
-
-//    QJsonObject gameObject;
-//    gameObject["id"] = _game._appID;
-//    gameObject["name"] = _game._name;
-//    if (/*_favorites.isInFavorites(gameObject, _currentAchievement)*/_favorites.getAchievementsGame(_profile._steamID, _game).isInAchievements(_tableAchievements->getAchievement(0))) {
-//        ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
-//    } else {
-        ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
-    //}
     QLabel *friendsIcon = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1));
     if (friendsIcon) {
         friendsIcon->setPixmap(QPixmap(Images::friends()));
@@ -309,7 +238,7 @@ void FormAchievements::progressLoading(int aProgress, int aRow) {
 }
 
 void FormAchievements::onTablePulled(int reached, int notReached) {
-    showCategories();
+    ui->ProgressBarFriendsLoad->setVisible(false);
     if ((reached > 0) || (notReached > 0)) {
         ui->FrameFilter->setEnabled(true);
         ui->LabelTotalPersent->setText(QString("%1/%2 (%3%)").arg(
@@ -333,15 +262,15 @@ void FormAchievements::initTableStandart() {
     ui->TableViewMyAchievements->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(ui->TableViewMyAchievements, &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
-        updateCurrentAchievementMy();
-        if (_currentAchievementMy != nullptr) {
-            QMenu *menu = createMenuMy(*_currentAchievementMy);
+        updateCurrentAchievement();
+        if (_currentAchievement != nullptr) {
+            QMenu *menu = createMenu(*_currentAchievement);
             menu->popup(ui->TableViewMyAchievements->viewport()->mapToGlobal(pos));
         }
     });
 
     connect(ui->TableViewMyAchievements, &QTableView::doubleClicked, this, [=](QModelIndex aIndex) {
-        updateCurrentAchievementMy();
+        updateCurrentAchievement();
         if (aIndex.column() == c_tableAchievementColumnComment) {
             buttonComment_Clicked();
         } else {
@@ -363,15 +292,15 @@ void FormAchievements::initTableCompare() {
     ui->TableViewCompare->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     connect(ui->TableViewCompare, &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
-        updateCurrentAchievementCompare();
-        if (_currentAchievementCompare != nullptr) {
-            QMenu *menu = createMenuCompare(*_currentAchievementCompare);
+        updateCurrentAchievement();
+        if (_currentAchievement != nullptr) {
+            QMenu *menu = createMenu(*_currentAchievement);
             menu->popup(ui->TableViewCompare->viewport()->mapToGlobal(pos));
         }
     });
 
     connect(ui->TableViewCompare, &QTableView::doubleClicked, this, [=](QModelIndex aIndex) {
-        updateCurrentAchievementCompare();
+        updateCurrentAchievement();
         if (aIndex.column() == c_tableAchievementColumnComment) {
             buttonComment_Clicked();
         } else {
@@ -380,81 +309,29 @@ void FormAchievements::initTableCompare() {
     });
 }
 
-void FormAchievements::updateCurrentAchievementMy() {
-    QModelIndex index = ui->TableViewMyAchievements->currentIndex();
-    _currentIndexMy = ui->TableViewMyAchievements->model()->index(index.row(), c_tableAchievementColumnIndex).data().toString().toInt();
-    QString appId = ui->TableViewMyAchievements->model()->index(index.row(), c_tableAchievementColumnAppid).data().toString();
+void FormAchievements::updateCurrentAchievement() {
+    QTableView *table = dynamic_cast<QTableView*>(QApplication::focusWidget());
+    if ((table != ui->TableViewMyAchievements) && (table != ui->TableViewCompare)) {
+        return;
+    }
+    QModelIndex index = table->currentIndex();
+    _currentIndex = table->model()->index(index.row(), c_tableAchievementColumnIndex).data().toString().toInt();
+    QString appId = table->model()->index(index.row(), c_tableAchievementColumnAppid).data().toString();
 
     auto iterator = std::find_if(_achievements.begin(), _achievements.end(), [=](const SAchievement &achievement) {
                                                                                 return achievement._apiName == appId;
                                                                             });
     if (iterator != _achievements.end()) {
-        _currentAchievementMy = &*iterator;
+        _currentAchievement = &*iterator;
     }
 }
 
-void FormAchievements::updateCurrentAchievementCompare() {
-    QModelIndex index = ui->TableViewCompare->currentIndex();
-    _currentIndexCompare = ui->TableViewCompare->model()->index(index.row(), c_tableAchievementColumnIndex).data().toString().toInt();
-    QString appId = ui->TableViewCompare->model()->index(index.row(), c_tableAchievementColumnAppid).data().toString();
-
-    auto iterator = std::find_if(_achievements.begin(), _achievements.end(), [=](const SAchievement &achievement) {
-                                                                                return achievement._apiName == appId;
-                                                                            });
-    if (iterator != _achievements.end()) {
-        _currentAchievementCompare = &*iterator;
-    }
-}
-
-QMenu *FormAchievements::createMenuMy(const SAchievement &aAchievement) {
+QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
     QString appId = aAchievement._apiName;
 
     //Добавление кнопки избранного
     QAction *actionFavorites;
-    QList<FavoriteAchievement> favorites = _favorites.getAchievementsGame(_profile._steamID, _game).getAchievements();
-    bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(), [=](FavoriteAchievement curFavorite) {
-                                                                            return curFavorite.getId() == appId;
-                                                                        });
-    if(isFavorite) {
-        actionFavorites = new QAction(tr("Удалить из избранного"), this);
-        actionFavorites->setIcon(QIcon(Images::isFavorites()));
-    } else {
-        actionFavorites = new QAction(tr("Добавить в избранное"), this);
-        actionFavorites->setIcon(QIcon(Images::isNotFavorites()));
-    }
-
-    //Добавление кнопки комментариев
-    QAction *actionComment = new QAction(tr("Редактировать комментарий...     "), this);
-    actionComment->setIcon(QIcon(Images::isComment()));
-
-    //Добавление кнопки руководств
-    QAction *actionGuides = new QAction(tr("Перейти в руководства"), this);
-    //actionGroup->setIcon(QIcon(Images::group1()));
-
-    //Добавление кнопки обновления
-    QAction *actionUpdate = new QAction(tr("Обновить"), this);
-    //actionGroup->setIcon(QIcon(Images::group1()));
-
-    QMenu *menu = new QMenu(this);
-    menu->addAction (actionFavorites);
-    menu->addAction (actionComment);
-    menu->addAction (actionGuides);
-    menu->addAction (actionUpdate);
-
-    connect (actionFavorites,   &QAction::triggered,    this,   &FormAchievements::buttonFavorite_Clicked);
-    connect (actionComment,     &QAction::triggered,    this,   &FormAchievements::buttonComment_Clicked);
-    connect (actionGuides,      &QAction::triggered,    this,   &FormAchievements::buttonManual_Clicked);
-    connect (actionUpdate,      &QAction::triggered,    this,   &FormAchievements::buttonUpdate_Clicked);
-
-    return menu;
-}
-
-QMenu *FormAchievements::createMenuCompare(const SAchievement &aAchievement) {
-    QString appId = aAchievement._apiName;
-
-    //Добавление кнопки избранного
-    QAction *actionFavorites;
-    QList<FavoriteAchievement> favorites = _favorites.getAchievementsGame(_profile._steamID, _game).getAchievements();
+    QList<FavoriteAchievement> favorites = Favorites::getAchievementsGame(_profile._steamID, _game).getAchievements();
     bool isFavorite = std::any_of(favorites.cbegin(), favorites.cend(), [=](FavoriteAchievement curFavorite) {
                                                                             return curFavorite.getId() == appId;
                                                                         });
@@ -493,11 +370,48 @@ QMenu *FormAchievements::createMenuCompare(const SAchievement &aAchievement) {
 }
 
 void FormAchievements::buttonComment_Clicked() {
-
+    FormCommentsInteractions *ci = new FormCommentsInteractions(_profile, _game, _currentAchievement);
+    connect(ci, &FormCommentsInteractions::s_updateComments, this, [=](bool isUpdate) {
+        if (isUpdate) {
+            initComments();
+        }
+        delete ci;
+    });
+    ci->show();
 }
 
 void FormAchievements::initComments() {
+    _comments.load();
+    for(const auto &achievement: _achievements) {
+        QStringList comment = _comments.getAchievementComment(_profile._steamID, _game.sAppId(), achievement._apiName).getComment();
+        QVariant icon;
+        QModelIndex index = ui->TableViewMyAchievements->model()->index(rowFromId(achievement._apiName), c_tableAchievementColumnComment);
 
+        if ((comment != QStringList()) && (comment != QStringList() << "")) {
+            icon = QVariant(QPixmap(Images::isComment()).scaled(32, 32));
+            ui->TableViewMyAchievements->model()->setData(index, comment, Qt::ToolTipRole);
+            ui->TableViewMyAchievements->model()->setData(index, "1", Qt::ForegroundRole);
+        } else {
+            icon = QVariant(QPixmap(Images::isNotComment()).scaled(32, 32));
+            ui->TableViewMyAchievements->model()->setData(index, "0", Qt::ForegroundRole);
+        }
+        ui->TableViewMyAchievements->model()->setData(index, icon, Qt::DecorationRole);
+    }
+}
+
+int FormAchievements::rowFromId(QString aId) {
+    QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(ui->TableViewMyAchievements->model());
+    if (model) {
+        QList<QStandardItem*> items = model->findItems(aId, Qt::MatchExactly, c_tableAchievementColumnAppid);
+        if (items.count() == 1) {
+            return items[0]->row();
+        } else {
+            qWarning() << "duplicates achievement" << aId << ", " << items.count() << " count";
+        }
+    } else {
+        qWarning() << "error model cast";
+    }
+    return -1;
 }
 
 void FormAchievements::setTableModels(QStandardItemModel *aModel) {
@@ -511,13 +425,13 @@ void FormAchievements::setTableModels(QStandardItemModel *aModel) {
     aModel->setItem(0, c_tableAchievementColumnReachedMy, avatar);
 
     ui->TableViewMyAchievements->setModel(aModel);
+    _fAchievements.setRow(aModel->rowCount());
+    _fCompare.setRow(aModel->rowCount());
     //ui->TableViewMyAchievements->setSortingEnabled(true);
     ui->TableViewMyAchievements->setRowHidden(0, true);
     ui->TableViewMyAchievements->setColumnHidden(c_tableAchievementColumnAppid, true);
     ui->TableViewMyAchievements->setColumnHidden(c_tableAchievementColumnIndex, true);
     initComments();
-    ui->TableViewMyAchievements->resizeColumnsToContents();
-    ui->TableViewMyAchievements->resizeRowsToContents();
 
     ui->TableViewCompare->setModel(aModel);
     //ui->TableViewCompare->setSortingEnabled(true);
@@ -527,16 +441,25 @@ void FormAchievements::setTableModels(QStandardItemModel *aModel) {
     ui->TableViewCompare->resizeRowsToContents();
 
     retranslate();
+    showCategories();
+    ui->TableViewMyAchievements->resizeColumnsToContents();
+    ui->TableViewMyAchievements->setColumnWidth(c_tableAchievementColumnTitle, 220);
+    ui->TableViewMyAchievements->setColumnWidth(c_tableAchievementColumnDescription, 450);
+    ui->TableViewMyAchievements->resizeRowsToContents();
     ui->LineEditNameAchievements->setFocus();
 }
 
 void FormAchievements::createThread() {
     Threading *loadTable = new Threading(this);
+    ui->ProgressBarFriendsLoad->setMaximum(_achievements.getCount());
+    ui->ProgressBarFriendsLoad->setValue(0);
+    ui->ProgressBarFriendsLoad->setVisible(true);
     loadTable->AddThreadAchievements(c_tableAchievementColumnAppid, c_tableAchievementColumnIndex, c_tableAchievementColumnIcon,  c_tableAchievementColumnTitle,
                                      c_tableAchievementColumnDescription, c_tableAchievementColumnComment, c_tableAchievementColumnWorld,
                                      c_tableAchievementColumnReachedMy, c_tableAchievementColumnCount, _achievements, _game.appId());
     connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
         //emit s_achievementsLoaded(progress, row);
+        ui->ProgressBarFriendsLoad->setValue(progress);
     });
     connect (loadTable, &Threading::s_achievements_finished_model, this, [=](QStandardItemModel *model, int reached, int notReached) {
         setTableModels(model);
@@ -545,35 +468,95 @@ void FormAchievements::createThread() {
 }
 #define InitEnd }
 
+void FormAchievements::updateFilterWithMyProfile(ReachedType aType, bool aStandart, bool aCompare) {
+    switch (aType) {
+    case ReachedType::all: {
+        if (aStandart) {
+            for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+                _fAchievements.setData(i, c_filterReached, true);
+            }
+        }
+        if (aCompare) {
+            for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+                _fCompare.setData(i, c_filterReached, true);
+            }
+        }
+        break;
+    }
+    case ReachedType::reached: {
+        if (aStandart) {
+            for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+                _fAchievements.setData(i, c_filterReached, ui->TableViewMyAchievements->model()->index(i + 1, c_tableAchievementColumnReachedMy).data().toString().indexOf(".") > -1);
+            }
+        }
+        if (aCompare) {
+            for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+                _fCompare.setData(i, c_filterReached, ui->TableViewCompare->model()->index(i + 1, c_tableAchievementColumnReachedMy).data().toString().indexOf(".") > -1);
+            }
+        }
+        break;
+    }
+    case ReachedType::notReached: {
+        if (aStandart) {
+            for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+                _fAchievements.setData(i, c_filterReached, ui->TableViewMyAchievements->model()->index(i + 1, c_tableAchievementColumnReachedMy).data().toString().indexOf(".") == -1);
+            }
+        }
+        if (aCompare) {
+            for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+                _fCompare.setData(i, c_filterReached, ui->TableViewCompare->model()->index(i + 1, c_tableAchievementColumnReachedMy).data().toString().indexOf(".") == -1);
+            }
+        }
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+    updateHiddenRows(aStandart, aCompare);
+}
+
+void FormAchievements::updateFilterTextAchievement(const QString &aNewText, bool aStandart, bool aCompare) {
+    if (aStandart) {
+        for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+            _fAchievements.setData(i, c_filterName, ((ui->TableViewMyAchievements->model()->index(i + 1, c_tableAchievementColumnTitle).data().toString().toLower().indexOf(aNewText.toLower()) > -1)
+                                                   ||(ui->TableViewMyAchievements->model()->index(i + 1, c_tableAchievementColumnDescription).data().toString().toLower().indexOf(aNewText.toLower()) > -1)));
+        }
+    }
+    if (aCompare) {
+        for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+            _fCompare.setData(i, c_filterName, ((ui->TableViewCompare->model()->index(i + 1, c_tableAchievementColumnTitle).data().toString().toLower().indexOf(aNewText.toLower()) > -1)
+                                                ||(ui->TableViewCompare->model()->index(i + 1, c_tableAchievementColumnDescription).data().toString().toLower().indexOf(aNewText.toLower()) > -1)));
+        }
+    }
+    updateHiddenRows(aStandart, aCompare);
+}
+
 #define SimpleCompare {
 void FormAchievements::setFormMode(FormMode aMode) {
     switch (aMode) {
     case FormMode::standart: {
         ui->FrameReachedFilter          ->setVisible(true);
-        _tableAchievements->setType(TableType::standart);
-        ui->CheckBoxCompareAllFriends->setVisible(false);
+        ui->CheckBoxCompareAllFriends   ->setVisible(false);
         ui->TableWidgetFriends          ->setVisible(false);
 
-        ui->ButtonAddCategory           ->setEnabled(true);
-        ui->ButtonChangeCategory        ->setEnabled(true);
+//        ui->ButtonAddCategory           ->setEnabled(true);
+//        ui->ButtonChangeCategory        ->setEnabled(true);
 
-        ui->ButtonDeleteAllCategories   ->setEnabled(true);
-        ui->ButtonCompare->setText(tr("Сравнить с друзьями"));
-        _currentMode = FormMode::standart;
-        resizeForm();
+//        ui->ButtonDeleteAllCategories   ->setEnabled(true);
+//        ui->ButtonCompare->setText(tr("Сравнить с друзьями"));
         break;
     }
     case FormMode::compare: {
         ui->FrameReachedFilter          ->setVisible(false);
-        _tableAchievements->setType(TableType::compare);
         ui->CheckBoxCompareAllFriends   ->setVisible(true);
         ui->TableWidgetFriends          ->setVisible(true);
 
-        ui->ButtonAddCategory           ->setEnabled(false);
-        ui->ButtonChangeCategory        ->setEnabled(false);
+//        ui->ButtonAddCategory           ->setEnabled(false);
+//        ui->ButtonChangeCategory        ->setEnabled(false);
 
-        ui->ButtonDeleteAllCategories   ->setEnabled(false);
-        ui->ButtonCompare->setText(tr("Обратно"));
+//        ui->ButtonDeleteAllCategories   ->setEnabled(false);
+//        ui->ButtonCompare->setText(tr("Обратно"));
         switch (_loadCompare) {
         case 0: {
             ui->TableWidgetFriends      ->setVisible(false);
@@ -588,8 +571,6 @@ void FormAchievements::setFormMode(FormMode aMode) {
             ui->TableWidgetFriends      ->setVisible(true);
         }
         }
-        _currentMode = FormMode::compare;
-        resizeForm();
         break;
     }
     }
@@ -772,81 +753,35 @@ void FormAchievements::changeEvent(QEvent *event) {
     }
 }
 
-void FormAchievements::resizeEvent(QResizeEvent*) {
-    //resizeForm();
-}
-
-void FormAchievements::resizeForm() {
-//    int height = 0;
-//    switch(_currentMode) {
-//    case FormMode::standart: {
-//        break;
-//    }
-//    case FormMode::compare: {
-//        ui->TableWidgetFriends->setGeometry(0, height, ui->FrameContainer->width(), 210);
-//        height += 210;
-//        break;
-//    }
-//    }
-//    ui->FrameHideColumns->setGeometry(QRect(0, height, ui->FrameContainer->width(), 19 + 18));
-//    height += 19 + 18;
-//    _tableAchievements->setGeometry(0, height, ui->FrameContainer->width(), ui->FrameContainer->height() - height);
-
-//#define categories {
-//    int heighCategories = 0;
-//    for (auto &&item: ui->ScrollAreaCategories->findChildren<QComboBoxWithData*>()) {
-//        heighCategories += item->sizeHint().height() + 6;
-//    }
-//    ui->ScrollAreaCategories->setFixedHeight(9 + heighCategories + 9 + 14);
-
-//    heighCategories = 0;
-//    for (auto &&item: ui->ScrollAreaCheckCategories->findChildren<QCheckBoxWithData*>()) {
-//        heighCategories += item->sizeHint().height() + 6;
-//    }
-//    ui->ScrollAreaCheckCategories->setFixedHeight(9 + heighCategories + 9);
-
-//    heighCategories = 9 + ui->ScrollAreaCheckCategories->height() + 6 + ui->ScrollAreaCategories->height() + 9;
-//#define categoriesEnd }
-
-//#define editCategories {
-//    switch (_typeCategory) {
-//    case CategoryType::none: {
-//        ui->FrameEditCategory->setGeometry(ui->FrameContainer->width(), 0, c_CategoriesEditWidth, c_CategoriesEditHeight);
-//        break;
-//    }
-//    case CategoryType::add: {
-
-//    }
-//    case CategoryType::change: {
-//        ui->FrameEditCategory->setGeometry(ui->FrameContainer->width() - c_CategoriesEditWidth - 16, 0, c_CategoriesEditWidth, c_CategoriesEditHeight);
-//        break;
-//    }
-//    }
-//#define editCategoriesEnd }
-}
-
 void FormAchievements::showCategories() {
     _categoriesGame.update();
     QFormLayout *layoutComboBox = ui->layoutComboBoxCategories;
     QFormLayout *layoutCheckBox = ui->layoutCheckBoxCategories;
-    while (ui->ComboBoxCategories->count() > 1) {
-        ui->ComboBoxCategories->removeItem(1);
-    }
+//    while (ui->ComboBoxCategories->count() > 1) {
+//        ui->ComboBoxCategories->removeItem(1);
+//    }
     QList<QComboBoxWithData*> allComboBoxes = ui->ScrollAreaCategories->findChildren<QComboBoxWithData*>();
     QList<QCheckBoxWithData*> allCheckBoxes = ui->ScrollAreaCheckCategories->findChildren<QCheckBoxWithData*>();
     int categoryNum = 0;
     for (auto &category: _categoriesGame) {
         QString title = category.getTitle();
         if (category.getIsNoValue()) {
-            auto checkBox = std::find_if(allCheckBoxes.cbegin(), allCheckBoxes.cend(), [title](const QCheckBoxWithData *curCheckBox) {
-                                                                                            return curCheckBox->text() == title;
-                                                                                        });
-//TODO при изменении имени категории старая версия категории не удаляется
+            auto checkBox = std::find_if(allCheckBoxes.begin(),
+                                         allCheckBoxes.end(),
+                                         [title](const QCheckBoxWithData *curCheckBox) {
+                                            return curCheckBox->text() == title;
+                                        });
             if (checkBox != allCheckBoxes.end()) {
-                allCheckBoxes.removeOne(*checkBox);
+                (*checkBox)->setText(category.getTitle());
+                (*checkBox)->setObjectName("CheckBoxCategory" + QString::number(categoryNum));
+                (*checkBox)->clearData();
+                (*checkBox)->addData("Row", QString::number(categoryNum));
+                (*checkBox)->addData("TitleCategory", category.getTitle());
+            } else {
                 //Создать новый чекбокс
                 QCheckBoxWithData *checkBoxCategoryNew = new QCheckBoxWithData(category.getTitle(), this);
                 checkBoxCategoryNew->setObjectName("CheckBoxCategory" + QString::number(categoryNum));
+                checkBoxCategoryNew->addData("Row", QString::number(categoryNum));
                 checkBoxCategoryNew->addData("TitleCategory", category.getTitle());
                 connect(checkBoxCategoryNew, &QCheckBoxWithData::stateChanged, this, &FormAchievements::checkBoxCategory_StateChanged);
                 layoutCheckBox->addRow(checkBoxCategoryNew);
@@ -888,7 +823,7 @@ void FormAchievements::showCategories() {
                 layoutComboBox->addRow(new QLabel(category.getTitle(), this), comboBoxCategoryNew);
             }
         }
-        ui->ComboBoxCategories->addItem(category.getTitle());
+//        ui->ComboBoxCategories->addItem(category.getTitle());
         ++categoryNum;
     }
 
@@ -901,114 +836,60 @@ void FormAchievements::showCategories() {
     ui->ScrollAreaCategories        ->setHidden(layoutComboBox->rowCount() == 0);
     ui->ScrollAreaCheckCategories   ->setHidden(layoutCheckBox->rowCount() == 0);
 
-    ui->ButtonChangeCategory        ->setEnabled(_categoriesGame.getCount() != 0);
-    ui->ButtonDeleteAllCategories   ->setEnabled(_categoriesGame.getCount() != 0);
+//    ui->ButtonChangeCategory        ->setEnabled(_categoriesGame.getCount() != 0);
+//    ui->ButtonDeleteAllCategories   ->setEnabled(_categoriesGame.getCount() != 0);
 
-    _tableAchievements->updateFilterCategoriesColumns(_categoriesGame.getCount());
-}
-
-FormCategoryValue *FormAchievements::createValueCategory() {
-    int rowValues = ui->ListWidgetValuesCategory->count();//->rowCount();
-    FormCategoryValue *newValue = new FormCategoryValue(rowValues, ui->ListWidgetValuesCategory);
-    connect(newValue, &FormCategoryValue::s_visiblechange,  this,     &FormAchievements::formCategoryValueVisibleChange);
-//    connect(newValue, &FormCategoryValue::s_positionchange, this,     &FormAchievements::formCategoryPosition_Change);
-//    connect(newValue, &FormCategoryValue::s_deleting,       this,     &FormAchievements::formCategoryDelete);
-    connect(this    , &FormAchievements::s_updateSettings,  newValue, &FormCategoryValue::updateSettings);
-    connect(newValue, &FormCategoryValue::s_valuechange,    this,     [=](int aPos, QString aValue) {
-        _tableAchievements->changeHorizontalTitle((c_tableCategoryColumnNoValue + 1) + aPos, aValue);
-        formCategoryListWidget_CurrentRowChanged();
-    });
-//    connect(newValue, &FormCategoryValue::s_selectchange,   this,     [=](int aPos, bool aSelect) {
-//        _tableAchievements->setVisibleContentSelect(aPos, aSelect);
-//    });
-    _values.append(newValue);
-    updateValueUpDown();
-    QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetValuesCategory);
-    item->setSizeHint(newValue->sizeHint());
-    ui->ListWidgetValuesCategory->setItemWidget(item, newValue);
-    ui->ListWidgetValuesCategory->setCurrentRow(ui->ListWidgetValuesCategory->count() - 1);
-    return newValue;
-}
-
-void FormAchievements::animateFrameEditCategories(bool toVisible) {
-//    QPropertyAnimation *animation = new QPropertyAnimation(ui->FrameEditCategory, "geometry");
-//    connect(animation, &QPropertyAnimation::finished, animation, &QPropertyAnimation::deleteLater);
-//    animation->setDuration(500);
-//    if (toVisible) {
-//        animation->setStartValue(QRect(ui->FrameContainer->width(), 0, ui->FrameEditCategory->width(), ui->FrameEditCategory->height()));
-//        animation->setEndValue(QRect(ui->FrameContainer->width() - ui->FrameEditCategory->width() - 16, 0, ui->FrameEditCategory->width(), ui->FrameEditCategory->height()));
-//    } else {
-//        animation->setStartValue(QRect(ui->FrameContainer->width() - ui->FrameEditCategory->width() - 16, 0, ui->FrameEditCategory->width(), ui->FrameEditCategory->height()));
-//        animation->setEndValue(QRect(ui->FrameContainer->width(), 0, ui->FrameEditCategory->width(), ui->FrameEditCategory->height()));
-//    }
-//    animation->start();
+//    _tableAchievements->updateFilterCategoriesColumns(_categoriesGame.getCount());
+    _fAchievements.setCol(_categoriesGame.getCount() + c_filterColumnCount);
+    if (ui->TableViewCompare->model() != nullptr) {
+        _fCompare.setCol(_categoriesGame.getCount() + c_filterColumnCount + ui->TableViewCompare->model()->columnCount() - c_tableAchievementColumnCount);
+    } else {
+        _fCompare.setCol(_categoriesGame.getCount() + c_filterColumnCount - c_tableAchievementColumnCount);
+    }
+    updateHiddenRows(true, true);
 }
 #define SystemEnd }
 
 #define Filter {
-void FormAchievements::buttonAddCategory_Clicked() {
-    if ((_typeCategory == CategoryType::none) && (_currentMode == FormMode::standart)) {
-        _typeCategory = CategoryType::add;
-        ui->ButtonAddCategory->setEnabled(false);
-        ui->ButtonChangeCategory->setEnabled(false);
-        ui->ButtonDeleteAllCategories->setEnabled(false);
-        ui->ButtonCompare->setEnabled(false);
-        ui->CheckBoxCategoryOneValue->setChecked(false);
-
-        ui->ComboBoxCategories->setVisible(false);
-        ui->ButtonDeleteCategory->setVisible(false);
-        ui->LineEditTitleCategory->setEnabled(true);
-        ui->ButtonAddValueCategory->setEnabled(true);
-
-        //ui->GroupBoxCategories->setTitle(tr("Добавить категорию"));
-        //ui->FrameEditCategory->setVisible(true);
-        resizeForm();
-        noSelectedValue();
-        animateFrameEditCategories(true);
-        _tableAchievements->addNoValueColumn();
-        _tableAchievements->setVisibleColumn(_tableAchievements->getNoValueColumn(), false);
-
-
-    }
-}
-
-void FormAchievements::buttonChangeCategory_Clicked() {
-    if (!(_typeCategory == CategoryType::none) || !(_currentMode == FormMode::standart)) {
-        return;
-    }
-    _typeCategory = CategoryType::change;
-    ui->ButtonAddCategory->setEnabled(false);
-    ui->ButtonChangeCategory->setEnabled(false);
-    ui->ButtonDeleteAllCategories->setEnabled(false);
-    ui->ButtonCompare->setEnabled(false);
-    ui->CheckBoxCategoryOneValue->setChecked(false);
-
-    ui->ComboBoxCategories->setVisible(true);
-    ui->ButtonDeleteCategory->setVisible(true);
-    ui->LineEditTitleCategory->setEnabled(false);
-    ui->ButtonAddValueCategory->setEnabled(false);
-    ui->CheckBoxCategoryOneValue->setEnabled(false);
-
-    resizeForm();
-    noSelectedValue();
-    animateFrameEditCategories(true);
-}
-
 void FormAchievements::buttonUpdate_Clicked() {
     _tableAchievements->update();
 }
 
-void FormAchievements::buttonCompare_Clicked() {
-    switch (_currentMode) {
-    case FormMode::standart: {
-        setFormMode(FormMode::compare);
-        break;
+void FormAchievements::updateFilterCategory(int aCategoryIndex, bool aClear, QList<QString> aAchievementNames) {
+    if (aClear) {
+        for (int i = 0; i < _fAchievements.getRow(); ++i) {
+            _fAchievements.setData(i, c_filterEndConstValues + aCategoryIndex, true);
+        }
+        for (int i = 0; i < _fCompare.getRow(); ++i) {
+            _fCompare.setData(i, c_filterEndConstValues + aCategoryIndex, true);
+        }
+    } else {
+        for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+            _fAchievements.setData(i, c_filterEndConstValues + aCategoryIndex, false);
+            auto text = ui->TableViewMyAchievements->model()->index(i + 1, c_tableAchievementColumnAppid).data().toString();
+            bool isAchievementExist = std::any_of(aAchievementNames.begin(),
+                                                  aAchievementNames.end(),
+                                                  [=](QString &achievementName) {
+                                                        return text == achievementName;
+                                                    });
+            if (isAchievementExist) {
+                _fAchievements.setData(i, c_filterEndConstValues + aCategoryIndex, true);
+            }
+        }
+        for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+            _fCompare.setData(i, c_filterEndConstValues + aCategoryIndex, false);
+            auto text = ui->TableViewCompare->model()->index(i + 1, c_tableAchievementColumnAppid).data().toString();
+            bool isAchievementExist = std::any_of(aAchievementNames.begin(),
+                                                  aAchievementNames.end(),
+                                                  [=](QString &achievementName) {
+                                                        return text == achievementName;
+                                                    });
+            if (isAchievementExist) {
+                _fCompare.setData(i, c_filterEndConstValues + aCategoryIndex, true);
+            }
+        }
     }
-    case FormMode::compare: {
-        setFormMode(FormMode::standart);
-        break;
-    }
-    }
+    updateHiddenRows(true, true);
 }
 
 void FormAchievements::comboBoxCategory_IndexChange(int aIndex) {
@@ -1018,9 +899,9 @@ void FormAchievements::comboBoxCategory_IndexChange(int aIndex) {
             int categoryIndex = comboBox->getData(0).toInt();
             if (aIndex != 0) {
                 QList<QString> achievementsName = _categoriesGame[categoryIndex].getValues().at(aIndex - 1).achievements;
-                _tableAchievements->updateFilterCategory(categoryIndex, false, achievementsName);
+                updateFilterCategory(categoryIndex, false, achievementsName);
             } else {
-                _tableAchievements->updateFilterCategory(categoryIndex, true);
+                updateFilterCategory(categoryIndex, true);
             }
         } else {
             qWarning() << "not init comboBox";
@@ -1035,536 +916,85 @@ void FormAchievements::checkBoxCategory_StateChanged(int aIndex) {
             int categoryIndex = checkBox->getData(0).toInt();
             if (aIndex != 0) {
                 QList<QString> achievementsName = _categoriesGame[categoryIndex].getNoValues();
-                _tableAchievements->updateFilterCategory(categoryIndex, false, achievementsName);
+                updateFilterCategory(categoryIndex, false, achievementsName);
             } else {
-                _tableAchievements->updateFilterCategory(categoryIndex, true);
+                updateFilterCategory(categoryIndex, true);
             }
         } else {
             qWarning() << "not init checkBox";
         }
     }
 }
-
-void FormAchievements::buttonDeleteAllCategories_Clicked() {
-    QMessageBox deleteQuestion(QMessageBox::Question,
-                           tr("Внимание!"),
-                           tr("Вы уверены, что хотите удалить все категории?"));
-    QAbstractButton *btnYes = deleteQuestion.addButton(tr("Да"), QMessageBox::YesRole);
-    deleteQuestion.addButton(tr("Отмена"), QMessageBox::NoRole);
-    deleteQuestion.exec();
-    if(deleteQuestion.clickedButton() != btnYes) {
-        return;
-    }
-
-    deleteQuestion.setText(tr("Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?"));
-    deleteQuestion.exec();
-    if (deleteQuestion.clickedButton() != btnYes) {
-        return;
-    }
-
-    _categoriesGame.deleteAll();
-    showCategories();
-}
-
-#define Categorys {
-void FormAchievements::buttonAddValueCategory_Clicked() {
-    if ((_tableAchievements->getType() == TableType::standart) && ((_typeCategory == CategoryType::add) || (_typeCategory == CategoryType::change))) {
-        _tableAchievements->addCategoryColumn();
-        createValueCategory();
-
-        FormCategoryValue_2 *value = new FormCategoryValue_2();
-        value->setFixedWidth(value->sizeHint().width());
-        ui->ScrollAreaValues->widget()->layout()->addWidget(value);
-    }
-}
-
-void FormAchievements::buttonCancelCategory_Clicked() {
-    if ((_typeCategory == CategoryType::add) || (_typeCategory == CategoryType::change)) {
-        resizeForm();
-        animateFrameEditCategories(false);
-        ui->ButtonAddCategory->setEnabled(true);
-        ui->ButtonCompare->setEnabled(true);
-        ui->ButtonChangeCategory->setEnabled(_categoriesGame.getCount() != 0);
-        ui->ButtonDeleteAllCategories->setEnabled(_categoriesGame.getCount() != 0);
-        ui->ListWidgetValuesCategory->clear();
-        ui->LineEditTitleCategory->setText("");
-        ui->ComboBoxCategories->setCurrentIndex(0);
-        _typeCategory = CategoryType::none;
-        while(!_values.isEmpty()) {
-            _values.removeAt(0);
-        }
-        _tableAchievements->cancelCategory();
-        ui->CheckBoxCategoryOneValue->setChecked(false);
-    }
-}
-
-void FormAchievements::buttonAcceptCategory_Clicked() {
-    if (_typeCategory == CategoryType::add || _typeCategory == CategoryType::change) {
-        if (ui->LineEditTitleCategory->text() != "") {
-            int targetCategory = -1;
-            if (_typeCategory == CategoryType::change) {
-                targetCategory = ui->ComboBoxCategories->currentIndex() - 1;
-            } else {
-                targetCategory = _categoriesGame.getCount();
-            }
-
-            QList<QString> titles = _categoriesGame.getCategoriesTitles();
-            bool isUniqueTitle = true;
-            for (int i = 0; i < titles.size(); ++i) {
-                if((titles[i] == ui->LineEditTitleCategory->text()) && (i != ui->ComboBoxCategories->currentIndex() - 1)) {
-                    isUniqueTitle = false;
-                    break;
-                }
-            }
-            if (isUniqueTitle) {
-                int isNoValue;
-                QList<CategoryValue> values;
-                QList<QString> noValues;
-                if (ui->CheckBoxCategoryOneValue->isChecked()) {
-                    isNoValue = 1;
-                } else {
-                    isNoValue = 0;
-                    for (int i = c_tableCategoryColumnNoValue + 1; i < _tableAchievements->getColumnCount(); ++i) {
-                        if (_tableAchievements->getHeaderText(i) == "") {
-                            QMessageBox::warning(this, tr("Ошибка"), tr("Название значения пустое!"));
-                            return;
-                        }
-                        for (int j = c_tableCategoryColumnNoValue + 1; j < i; ++j) {
-                            if (_tableAchievements->getHeaderText(i) == _tableAchievements->getHeaderText(j)) {
-                                QMessageBox::warning(this, tr("Ошибка"), tr("Название значения повторяется!"));
-                                return;
-                            }
-                        }
-                    }
-                }
-                for (int j = 0; j < _tableAchievements->getRowCount(); ++j) {
-                    if (_tableAchievements->itemContent(j, c_tableCategoryColumnNoValue)->checkState()) {
-                        noValues.append(_tableAchievements->itemContent(j, c_tableAchievementColumnAppid)->text());
-                    }
-                }
-                for(int i = c_tableCategoryColumnNoValue + 1; i < _tableAchievements->getColumnCount(); ++i) {
-                    CategoryValue val;
-                    val.title = _tableAchievements->getHeaderText(i);
-                    for (int j = 0; j < _tableAchievements->getRowCount(); ++j) {
-                        if(_tableAchievements->itemContent(j, i)->checkState() == Qt::Checked) {
-                            val.achievements.append(_tableAchievements->itemContent(j, c_tableAchievementColumnAppid)->text());
-                        }
-                    }
-                    values.append(val);
-                }
-                _categoriesGame.changeCategory(targetCategory, ui->LineEditTitleCategory->text(), isNoValue, values, noValues);
-                ui->LineEditTitleCategory->setText("");
-                ui->LineEditTitleCategory->setEnabled(false);
-                delete ui->ScrollAreaCategories->layout();
-                delete ui->ScrollAreaCheckCategories->layout();
-                showCategories();
-                ui->LineEditNameAchievements->setText("");
-                _filterMyProfile->setType(ReachedType::all);
-                ui->CheckBoxFavorites->setChecked(false);
-                QMessageBox::information(this, tr("Успешно"), tr("Категория была %1!").arg(_typeCategory == CategoryType::add ? tr("добавлена") : tr("изменена")));
-                buttonCancelCategory_Clicked();
-            } else {
-                QMessageBox::warning(this, tr("Ошибка"), tr("Такая категория уже есть!"));
-            }
-        } else {
-            QMessageBox::warning(this, tr("Ошибка"), tr("Название категории пустое!"));
-        }
-    }
-}
-
-void FormAchievements::buttonDeleteCategory_Clicked() {
-    if (_typeCategory == CategoryType::change) {
-        QMessageBox::StandardButton clickedButton = QMessageBox::question(this, tr("Внимание"), tr("Вы уверены, что хотите удалить категорию?"), QMessageBox::Yes | QMessageBox::No);
-        if (clickedButton == QMessageBox::No) {
-            return;
-        }
-        if (ui->ComboBoxCategories->currentIndex() != 0) {
-            _categoriesGame.deleteCategory(ui->ComboBoxCategories->currentIndex() - 1);
-            showCategories();
-            ui->LineEditNameAchievements->setText("");
-            _filterMyProfile->setType(ReachedType::all);
-            ui->CheckBoxFavorites->setChecked(false);
-            QMessageBox::information(this, tr("Успешно"), tr("Категория была удалена!"));
-            buttonCancelCategory_Clicked();
-        }
-    }
-}
-
-void FormAchievements::checkBoxCategoryOneValue_StateChanged(int arg1) {
-    if (_typeCategory == CategoryType::add || _typeCategory == CategoryType::change) {
-        bool value = arg1 == 2;
-        ui->ButtonAddValueCategory->setEnabled(!value);
-        ui->ListWidgetValuesCategory->setEnabled(!value);
-        _tableAchievements->setValuesMode(!value);
-    }
-}
-
-void FormAchievements::lineEditTitleCategory_TextChanged(const QString &arg1) {
-    if (_tableAchievements->getColumnCount() > c_tableCategoryColumnNoValue) {
-        _tableAchievements->changeHorizontalTitle(c_tableCategoryColumnNoValue, arg1);
-    }
-}
-
-void FormAchievements::comboBoxCategories_Activated(int aIndex) {
-    if (_typeCategory == CategoryType::change) {
-        if (_categoriesGame.getCount() > 0) {
-            ui->LineEditTitleCategory->setText(ui->ComboBoxCategories->itemText(aIndex));
-            ui->ListWidgetValuesCategory->clear();
-            if (aIndex > 0) {
-                ui->ButtonAddValueCategory->setEnabled(true);
-                ui->CheckBoxCategoryOneValue->setEnabled(true);
-                ui->LineEditTitleCategory->setEnabled(true);
-                QList<QString> noValues = _categoriesGame[aIndex - 1].getNoValues();
-                QList<CategoryValue> valuesTitles = _categoriesGame[aIndex - 1].getValues();
-                _tableAchievements->categoryToTable(_categoriesGame[aIndex - 1].getTitle(), noValues, valuesTitles, _categoriesGame[aIndex - 1].getIsNoValue());
-                ui->CheckBoxCategoryOneValue->setChecked(_categoriesGame[aIndex - 1].getIsNoValue());
-
-                while(!_values.isEmpty()) {
-                    _values.removeAt(0);
-                }
-                for(auto &&title: valuesTitles) {
-                    FormCategoryValue *value = createValueCategory();
-                    value->setTitle(title.title);
-                }
-            } else {
-                _tableAchievements->setType(TableType::compare);
-                _tableAchievements->setType(TableType::standart);
-                ui->ButtonAddValueCategory->setEnabled(false);
-                ui->CheckBoxCategoryOneValue->setEnabled(false);
-            }
-        }
-    }
-}
-
-void FormAchievements::checkBoxCategoryVisibleAll_Clicked() {
-    bool check = ui->CheckBoxCategoryVisibleAll->isChecked();
-    for (auto &value: _values) {
-        value->setColumnVisible(check);
-    }
-}
-
-void FormAchievements::updateValuesUpDown(int aValue) {
-    if (aValue == -1) {
-        for (int i = 0; i < _values.size(); ++i) {
-            switch (i) {
-            case 0: {
-                _values[i]->setEnabledUpDown(_values.size() == 0 ? EnabledUpDown::none : EnabledUpDown::down);
-                break;
-            }
-            default: {
-                _values[i]->setEnabledUpDown(_values.size() - 1 == i ? EnabledUpDown::up : EnabledUpDown::both);
-            }
-            }
-        }
-    } else {
-        switch (aValue) {
-        case 0: {
-            _values[aValue]->setEnabledUpDown(_values.size() == 0 ? EnabledUpDown::none : EnabledUpDown::down);
-            break;
-        }
-        default: {
-            _values[aValue]->setEnabledUpDown(_values.size() - 1 == aValue ? EnabledUpDown::up : EnabledUpDown::both);
-        }
-        }
-    }
-}
-
-#define CategorysValues {
-void FormAchievements::noSelectedValue() {
-    ui->LabelValueTitle->setText("");
-    updateValueUpDown();
-    ui->ButtonCategoryValueReverse->setEnabled(false);
-    ui->ButtonCategoryValueCheckVisible->setEnabled(false);
-    ui->ButtonCategoryValueUncheckVisible->setEnabled(false);
-    ui->ButtonCategoryValueDelete->setEnabled(false);
-}
-
-void FormAchievements::updateValueUpDown() {
-    ui->ButtonCategoryValueTop->setEnabled(false);
-    ui->ButtonCategoryValueUp->setEnabled(false);
-    ui->ButtonCategoryValueDown->setEnabled(false);
-    ui->ButtonCategoryValueBottom->setEnabled(false);
-}
-
-void FormAchievements::formCategoryListWidget_CurrentRowChanged() {
-    QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->currentItem();
-    //int currentIndex = ui->ListWidgetValuesCategory->row(currentItem);
-
-    FormCategoryValue *value = dynamic_cast<FormCategoryValue*>(ui->ListWidgetValuesCategory->itemWidget(currentItem));
-    if (value) {
-        ui->LabelValueTitle->setText(value->getTitle());
-        ui->ButtonCategoryValueReverse->setEnabled(true);
-        ui->ButtonCategoryValueCheckVisible->setEnabled(true);
-        ui->ButtonCategoryValueUncheckVisible->setEnabled(true);
-        ui->ButtonCategoryValueDelete->setEnabled(true);
-    }
-}
-
-void FormAchievements::formCategoryValueVisibleChange(int aPos, bool aVisible) {
-    bool isAllVisible = true;
-    int currentRow = ui->ListWidgetValuesCategory->currentRow();
-    for (int i = 0; i < ui->ListWidgetValuesCategory->count(); ++i) {
-        FormCategoryValue *value = dynamic_cast<FormCategoryValue*>(ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(i)));
-        if (value) {
-            if (!value->getVisible()) {
-                isAllVisible = false;
-                break;
-            }
-        } else {
-            qWarning() << "not init value";
-        }
-    }
-    ui->ListWidgetValuesCategory->setCurrentRow(currentRow);
-    ui->CheckBoxCategoryVisibleAll->setChecked(isAllVisible);
-    _tableAchievements->setVisibleColumn((c_tableCategoryColumnNoValue + 1) + aPos, aVisible);
-}
-
-void FormAchievements::formCategoryValueReverse() {
-    QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->currentItem();
-    int currentIndex = ui->ListWidgetValuesCategory->row(currentItem);
-
-    _tableAchievements->reverseCategoryColumn(currentIndex);
-}
-
-void FormAchievements::formCategoryValueTop() {
-    if (ui->ListWidgetValuesCategory->count() > 0) {
-        int currentIndex = ui->ListWidgetValuesCategory->currentRow();
-        if(currentIndex == 0) {
-            return;
-        } else {
-            if (_tableAchievements->swapCategoryColumns(currentIndex, 0)) {
-                QWidget *widget = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(currentIndex));
-//TODO Сделать нормальное перемещение
-                //widget->setParent(nullptr);
-                ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(currentIndex), ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(0)));
-                ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(currentIndex), widget);
-//                ui->ListWidgetValuesCategory->removeItemWidget(ui->ListWidgetValuesCategory->item(currentIndex));
-//                QWidget *widget2 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(0));
-//                ui->ListWidgetValuesCategory->removeItemWidget(ui->ListWidgetValuesCategory->item(0));
-//                ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(0), widget1);
-//                ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(currentIndex), widget2);
-                //ui->ListWidgetValuesCategory->removeItemWidget(ui->ListWidgetValuesCategory->item(currentIndex));
-                //QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->takeItem(currentIndex);
-                //ui->ListWidgetValuesCategory->insertItem(0, currentItem);
-                //ui->ListWidgetValuesCategory->setItemWidget(currentItem, widget);
-                ui->ListWidgetValuesCategory->setCurrentRow(0);
-
-                FormCategoryValue *value = dynamic_cast<FormCategoryValue*>(ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(currentIndex)));
-                if (value) {
-                    value->setPosition(0);
-                }
-            }
-        }
-    }
-}
-
-void FormAchievements::formCategoryValueUp() {
-    QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->currentItem();
-    int currentIndex = ui->ListWidgetValuesCategory->row(currentItem);
-
-    if(currentIndex == 0) {
-        QMessageBox::warning(this, tr("Ошибка!"), tr("Невозможно переместить значение"));
-    } else {
-        QListWidgetItem *prev = ui->ListWidgetValuesCategory->item(ui->ListWidgetValuesCategory->row(currentItem) - 1);
-        int prevIndex = ui->ListWidgetValuesCategory->row(prev);
-
-        QListWidgetItem *temp = ui->ListWidgetValuesCategory->takeItem(prevIndex);
-        ui->ListWidgetValuesCategory->insertItem(prevIndex, currentItem);
-        ui->ListWidgetValuesCategory->insertItem(currentIndex, temp);
-        ui->ListWidgetValuesCategory->setCurrentRow(currentIndex - 1);
-
-        FormCategoryValue *value = dynamic_cast<FormCategoryValue*>(ui->ListWidgetValuesCategory->itemWidget(currentItem));
-        if (value) {
-            value->setPosition(currentIndex - 1);
-        }
-    }
-}
-
-void FormAchievements::formCategoryValueDown() {
-    QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->currentItem();
-    int currentIndex = ui->ListWidgetValuesCategory->row(currentItem);
-
-    if(currentIndex >= ui->ListWidgetValuesCategory->count() - 1) {
-        QMessageBox::warning(this, tr("Ошибка!"), tr("Невозможно переместить значение"));
-    } else {
-        QListWidgetItem *next = ui->ListWidgetValuesCategory->item(ui->ListWidgetValuesCategory->row(currentItem) + 1);
-        int nextIndex = ui->ListWidgetValuesCategory->row(next);
-
-        QListWidgetItem *temp = ui->ListWidgetValuesCategory->takeItem(nextIndex);
-        ui->ListWidgetValuesCategory->insertItem(currentIndex, temp);
-        ui->ListWidgetValuesCategory->insertItem(nextIndex, currentItem);
-        ui->ListWidgetValuesCategory->setCurrentRow(currentIndex + 1);
-
-        FormCategoryValue *value = dynamic_cast<FormCategoryValue*>(ui->ListWidgetValuesCategory->itemWidget(currentItem));
-        if (value) {
-            value->setPosition(currentIndex + 1);
-        }
-    }
-}
-
-void FormAchievements::formCategoryValueBottom() {
-    if (ui->ListWidgetValuesCategory->count() > 0) {
-        int currentIndex = ui->ListWidgetValuesCategory->currentRow();
-        if(currentIndex == ui->ListWidgetValuesCategory->count() - 1) {
-            return;
-        } else {
-            QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->takeItem(currentIndex);
-            ui->ListWidgetValuesCategory->insertItem(ui->ListWidgetValuesCategory->count(), currentItem);
-            ui->ListWidgetValuesCategory->setCurrentRow(ui->ListWidgetValuesCategory->count() - 1);
-
-            FormCategoryValue *value = dynamic_cast<FormCategoryValue*>(ui->ListWidgetValuesCategory->itemWidget(currentItem));
-            if (value) {
-                value->setPosition(ui->ListWidgetValuesCategory->count() - 1);
-            }
-        }
-    }
-}
-
-void FormAchievements::formCategoryValueSelectVisible() {
-    QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->currentItem();
-    int currentIndex = ui->ListWidgetValuesCategory->row(currentItem);
-
-    _tableAchievements->setVisibleContentSelect(currentIndex, true);
-}
-
-void FormAchievements::formCategoryValueUnselectVisible() {
-    QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->currentItem();
-    int currentIndex = ui->ListWidgetValuesCategory->row(currentItem);
-
-    _tableAchievements->setVisibleContentSelect(currentIndex, false);
-}
-
-void FormAchievements::formCategoryValueDelete() {
-    if (ui->ListWidgetValuesCategory->count() > 0) {
-        QListWidgetItem *currentItem = ui->ListWidgetValuesCategory->currentItem();
-        int currentIndex = ui->ListWidgetValuesCategory->row(currentItem);
-        _tableAchievements->removeCategoryColumn(currentIndex);
-
-        if (ui->ListWidgetValuesCategory->count() == 1) {
-            if (QListWidgetItem *item = ui->ListWidgetValuesCategory->takeItem(currentIndex)) {
-                delete item;
-            }
-            noSelectedValue();
-        } else {
-            if (currentIndex == 0) {
-                if (QListWidgetItem *item = ui->ListWidgetValuesCategory->takeItem(currentIndex)) {
-                    delete item;
-                }
-                ui->ListWidgetValuesCategory->setCurrentRow(0);
-            } else {
-                if (QListWidgetItem *item = ui->ListWidgetValuesCategory->takeItem(currentIndex)) {
-                    delete item;
-                }
-                ui->ListWidgetValuesCategory->setCurrentRow(currentIndex - 1);
-            }
-        }
-    }
-    updateValueUpDown();
-}
-
-void FormAchievements::formCategoryPosition_Change(int aPosOld, int aPosNew) {
-    if(aPosNew < 0 || aPosNew > _tableAchievements->getColumnCount() - (c_tableCategoryColumnNoValue + 1)) {
-        QMessageBox::warning(this, "Ошибка!", tr("Невозможно переместить значение"));
-    } else {
-        if (_tableAchievements->swapCategoryColumns(aPosOld, aPosNew)) {
-            std::swap(_values[aPosOld], _values[aPosNew]);
-            for (int i = 0; i < _values.size(); ++i) {
-                _values[i]->setPosition(i);
-                updateValuesUpDown(i);
-            }
-//            ui->ListWidgetValuesCategory->blockSignals(true);
-//            ui->ListWidgetValuesCategory->clear();
-//            ui->ListWidgetValuesCategory->blockSignals(false);
-            qDebug() << aPosOld << aPosNew;
-            QListWidgetItem *oldPosItem = ui->ListWidgetValuesCategory->takeItem(aPosOld);
-            ui->ListWidgetValuesCategory->insertItem(aPosNew, oldPosItem);
-            qDebug() << 111;
-            //QListWidgetItem *newPosItem = ui->ListWidgetValuesCategory->item(aPosNew);
-            //int newIndex = ui->ListWidgetValuesCategory->row(newPosItem);
-            //QListWidgetItem *temp = ui->ListWidgetValuesCategory->takeItem(newIndex);
-            //ui->ListWidgetValuesCategory->insertItem(aPosOld, newPosItem);
-            //ui->ListWidgetValuesCategory->insertItem(aPosNew, oldPosItem);
-            //QWidget *item1 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(aPosOld));
-            //QWidget *item2 = ui->ListWidgetValuesCategory->itemWidget(ui->ListWidgetValuesCategory->item(aPosNew));
-            //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(aPosOld), item2);
-            //ui->ListWidgetValuesCategory->setItemWidget(ui->ListWidgetValuesCategory->item(aPosNew), item1);
-//исправить!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //обновить данные на ListWidget
-        }
-    }
-}
-
-void FormAchievements::formCategoryDelete(int aPos) {
-    _tableAchievements->removeCategoryColumn(aPos);
-    QListWidgetItem* item = ui->ListWidgetValuesCategory->item(aPos);
-    ui->ListWidgetValuesCategory->removeItemWidget(item);
-    delete item;
-    _values.removeAt(aPos);
-    int pos = 0;
-    for (auto &value: _values) {
-        value->setPosition(pos);
-        if (_values.size() == 1) {
-            value->setEnabledUpDown(EnabledUpDown::none);
-        } else if(_values.size() - 1 == pos) {
-            value->setEnabledUpDown(EnabledUpDown::up);
-        } else if(pos == 0) {
-            value->setEnabledUpDown(EnabledUpDown::down);
-        } else {
-            value->setEnabledUpDown(EnabledUpDown::both);
-        }
-        ++pos;
-    }
-}
-#define CategoryValuesEnd }
-#define CategoryEnd }
 #define FilterEnd }
 
 #define Function {
+
+void FormAchievements::updateFilterFavorite(const QList<FavoriteAchievement> &aFavorites) {
+    if (aFavorites.count() == 0) {
+        for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+            _fAchievements.setData(i, c_filterFavorite, true);
+        }
+        for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+            _fCompare.setData(i, c_filterFavorite, true);
+        }
+    } else {
+        for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount() - 1; ++i) {
+            QString apiName = _achievements[i]._apiName;
+            bool accept = std::any_of(aFavorites.begin(), aFavorites.end(), [=](const FavoriteAchievement &achievement) {
+                                                                                return (achievement.getId() == apiName);
+                                                                            });
+            _fAchievements.setData(i, c_filterFavorite, accept);
+        }
+        for (int i = 0; i < ui->TableViewCompare->model()->rowCount() - 1; ++i) {
+            QString apiName = _achievements[i]._apiName;
+            bool accept = std::any_of(aFavorites.begin(), aFavorites.end(), [=](const FavoriteAchievement &achievement) {
+                                                                                return (achievement.getId() == apiName);
+                                                                            });
+            _fCompare.setData(i, c_filterFavorite, accept);
+        }
+    }
+    updateHiddenRows(true, true);
+}
+
 void FormAchievements::checkBoxFavorites_StateChanged(int arg1) {
     switch (arg1) {
     case 0: {
-        _tableAchievements->updateFilterFavorite(QList<FavoriteAchievement>());
+        updateFilterFavorite(QList<FavoriteAchievement>());
         break;
     }
     case 2: {
-        _tableAchievements->updateFilterFavorite(_favorites.getAchievementsGame(_profile._steamID, _game).getAchievements());
+        updateFilterFavorite(_favorites.getAchievementsGame(_profile._steamID, _game).getAchievements());
         break;
     }
     }
 }
 
 void FormAchievements::buttonFavorite_Clicked() {
-    if (_currentAchievementIndex > -1) {
-        if (_favorites.addAchievement(_profile._steamID, _game, _tableAchievements->getAchievement(_currentAchievementIndex), true)) {
+    if (_currentIndex > -1) {
+        if (_favorites.addAchievement(_profile._steamID, _game,  *_currentAchievement, true)) {
             //Категория добавилась
-            ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
+            //ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
         } else {
             //Категория уже есть (удалилась)
-            ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
+            //ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
         }
     }
 }
 #define FunctionEnd }
-
-void FormAchievements::tableAchievements_CellClicked(int row, int) {
-    _currentAchievement = _tableAchievements->itemContent(row, c_tableAchievementColumnAppid)->text();
-    _currentAchievementIndex = row;
-    if (_favorites.getAchievementsGame(_profile._steamID, _game).isInAchievements(_tableAchievements->getAchievement(_currentAchievementIndex))) {
-        ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
-    } else {
-        ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
-    }
-}
 
 void FormAchievements::buttonManual_Clicked() {
     QDesktopServices::openUrl(QUrl("https://steamcommunity.com/app/" + QString::number(_game.appId()) + "/guides/"));
     //https://steamcommunity.com/app/218620/guides/
 }
 
+void FormAchievements::updateHiddenColumnsStandart() {
+
+}
+
 void FormAchievements::tabWidget_CurrentChanged(int index) {
     switch(index) {
     case 0: {//standart
-
+        updateHiddenColumnsStandart();
         break;
     }
     case 1: {//editCategory
@@ -1583,12 +1013,14 @@ void FormAchievements::tabWidget_CurrentChanged(int index) {
 }
 
 void FormAchievements::loadEditCategory() {
-    for (auto achievement: _achievements) {
-        FormAchievementWidget *achievementWidget = new FormAchievementWidget(&achievement, _game.appId());
-        QListWidgetItem *item = new QListWidgetItem(ui->ListWidgetAchievements);
-        item->setSizeHint(achievementWidget->sizeHint());
-        ui->ListWidgetAchievements->setItemWidget(item, achievementWidget);
-    }
+    ui->CategoriesEdit->setGame(_game);
+    ui->CategoriesEdit->setAchievements(_achievements);
+    ui->CategoriesEdit->updateFilter(_fAchievements);
+    connect(ui->CategoriesEdit, &FormAchievementsCategoriesEdit::s_categoriesIsUpdated, this, [=](bool isUpdated) {
+        if (isUpdated) {
+            showCategories();
+        }
+    });
     _isEditCategoryLoaded = true;
 }
 

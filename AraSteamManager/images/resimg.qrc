@@ -1,95 +1,31 @@
 <RCC>
     <qresource prefix="/">
         <file>logo.png</file>
-        <file>black/all.png</file>
         <file>black/back.png</file>
-        <file>black/cancel.png</file>
-        <file>black/change.png</file>
-        <file>black/check_all.png</file>
-        <file>black/check_visible.png</file>
-        <file>black/compare.png</file>
-        <file>black/delete_all.png</file>
-        <file>black/down.png</file>
         <file>black/exit.png</file>
-        <file>black/favorites.png</file>
         <file>black/filter.png</file>
-        <file>black/find.png</file>
-        <file>black/find_profile.png</file>
-        <file>black/friends.png</file>
-        <file>black/games.png</file>
         <file>black/go_to.png</file>
-        <file>black/hide.png</file>
-        <file>black/home.png</file>
-        <file>black/in_favorites.png</file>
-        <file>black/left.png</file>
         <file>black/link.png</file>
-        <file>black/notreached.png</file>
         <file>black/profile.png</file>
-        <file>black/reached.png</file>
-        <file>black/reverse.png</file>
-        <file>black/right.png</file>
-        <file>black/settings.png</file>
-        <file>black/statistic.png</file>
-        <file>black/uncheck_visible.png</file>
-        <file>black/unhide.png</file>
-        <file>black/up.png</file>
-        <file>black/update.png</file>
         <file>black/widgets/checkbox_checked.png</file>
         <file>black/widgets/checkbox_uncheked.png</file>
         <file>black/widgets/radiobutton_checked.png</file>
         <file>black/widgets/radiobutton_unchecked.png</file>
-        <file>white/all.png</file>
         <file>white/back.png</file>
-        <file>white/cancel.png</file>
-        <file>white/change.png</file>
-        <file>white/check_all.png</file>
-        <file>white/check_visible.png</file>
-        <file>white/compare.png</file>
-        <file>white/delete_all.png</file>
-        <file>white/down.png</file>
         <file>white/exit.png</file>
-        <file>white/favorites.png</file>
         <file>white/filter.png</file>
-        <file>white/find.png</file>
-        <file>white/find_profile.png</file>
-        <file>white/friends.png</file>
-        <file>white/games.png</file>
         <file>white/go_to.png</file>
-        <file>white/hide.png</file>
-        <file>white/home.png</file>
-        <file>white/in_favorites.png</file>
-        <file>white/left.png</file>
         <file>white/link.png</file>
-        <file>white/notreached.png</file>
         <file>white/profile.png</file>
-        <file>white/reached.png</file>
-        <file>white/reverse.png</file>
-        <file>white/right.png</file>
-        <file>white/settings.png</file>
-        <file>white/statistic.png</file>
-        <file>white/uncheck_visible.png</file>
-        <file>white/unhide.png</file>
-        <file>white/up.png</file>
-        <file>white/update.png</file>
         <file>white/widgets/checkbox_checked.png</file>
         <file>white/widgets/checkbox_unchecked.png</file>
         <file>white/widgets/radiobutton_checked.png</file>
         <file>white/widgets/radiobutton_unchecked.png</file>
-        <file>black/set_home.png</file>
-        <file>white/set_home.png</file>
         <file>state_blue.png</file>
         <file>state_green.png</file>
         <file>state_red.png</file>
         <file>state_yellow.png</file>
         <file>loading.gif</file>
-        <file>black/close_window.png</file>
-        <file>black/maximize_window.png</file>
-        <file>black/minimize_window.png</file>
-        <file>black/restore_window.png</file>
-        <file>white/close_window.png</file>
-        <file>white/maximize_window.png</file>
-        <file>white/minimize_window.png</file>
-        <file>white/restore_window.png</file>
         <file>white/widgets/checkbox_checked_hover.png</file>
         <file>white/widgets/checkbox_checked_press.png</file>
         <file>white/widgets/checkbox_unchecked_hover.png</file>
@@ -108,18 +44,6 @@
         <file>black/widgets/scrollbar_right.png</file>
         <file>white/widgets/scrollbar_left.png</file>
         <file>white/widgets/scrollbar_right.png</file>
-        <file>black/create.png</file>
-        <file>black/delete.png</file>
-        <file>black/edit.png</file>
-        <file>white/create.png</file>
-        <file>white/delete.png</file>
-        <file>white/edit.png</file>
-        <file>white/apply.png</file>
-        <file>black/apply.png</file>
-        <file>black/bottom.png</file>
-        <file>black/top.png</file>
-        <file>white/bottom.png</file>
-        <file>white/top.png</file>
         <file>levels/1.png</file>
         <file>levels/10.png</file>
         <file>levels/11.png</file>
@@ -175,22 +99,116 @@
         <file>levels/0.png</file>
         <file>MissingImage.png</file>
         <file>black/achievement.png</file>
-        <file>black/category.png</file>
-        <file>black/download.png</file>
         <file>black/group1.png</file>
         <file>black/group2.png</file>
-        <file>black/guides.png</file>
-        <file>black/isComment.png</file>
-        <file>black/isNotComment.png</file>
-        <file>black/visible.png</file>
         <file>white/achievement.png</file>
-        <file>white/category.png</file>
-        <file>white/download.png</file>
         <file>white/group1.png</file>
         <file>white/group2.png</file>
-        <file>white/guides.png</file>
-        <file>white/isComment.png</file>
-        <file>white/isNotComment.png</file>
-        <file>white/visible.png</file>
+        <file>black/dirrection arrows/bottom.png</file>
+        <file>black/dirrection arrows/down.png</file>
+        <file>black/dirrection arrows/first.png</file>
+        <file>black/dirrection arrows/last.png</file>
+        <file>black/dirrection arrows/left.png</file>
+        <file>black/dirrection arrows/right.png</file>
+        <file>black/dirrection arrows/top.png</file>
+        <file>black/dirrection arrows/up.png</file>
+        <file>white/dirrection arrows/bottom.png</file>
+        <file>white/dirrection arrows/down.png</file>
+        <file>white/dirrection arrows/first.png</file>
+        <file>white/dirrection arrows/last.png</file>
+        <file>white/dirrection arrows/top.png</file>
+        <file>white/dirrection arrows/up.png</file>
+        <file>white/dirrection arrows/left.png</file>
+        <file>white/dirrection arrows/right.png</file>
+        <file>white/achievements/categories/check_visible.png</file>
+        <file>white/achievements/categories/reverse.png</file>
+        <file>white/achievements/categories/uncheck_visible.png</file>
+        <file>white/achievements/checkbox/all.png</file>
+        <file>white/achievements/checkbox/notreached.png</file>
+        <file>white/achievements/checkbox/reached.png</file>
+        <file>white/achievements/category.png</file>
+        <file>white/achievements/check_all.png</file>
+        <file>white/achievements/guide.png</file>
+        <file>white/achievements/guides.png</file>
+        <file>white/comments/isComment.png</file>
+        <file>white/comments/isNotComment.png</file>
+        <file>white/favorites/favorites.png</file>
+        <file>white/favorites/in_favorites.png</file>
+        <file>white/hide/hide.png</file>
+        <file>white/hide/visible.png</file>
+        <file>white/main/find_profile.png</file>
+        <file>white/main/home.png</file>
+        <file>white/main/left.png</file>
+        <file>white/main/right.png</file>
+        <file>white/main/settings.png</file>
+        <file>white/management/apply.png</file>
+        <file>white/management/cancel.png</file>
+        <file>white/management/change.png</file>
+        <file>white/management/compare.png</file>
+        <file>white/management/create.png</file>
+        <file>white/management/delete.png</file>
+        <file>white/management/delete_all.png</file>
+        <file>white/management/download.png</file>
+        <file>white/management/edit.png</file>
+        <file>white/management/find.png</file>
+        <file>white/management/update.png</file>
+        <file>white/profile icons/friends.png</file>
+        <file>white/profile icons/games.png</file>
+        <file>white/profile icons/set_home.png</file>
+        <file>white/profile icons/statistic.png</file>
+        <file>white/widgets/checkbox_uncheked.png</file>
+        <file>white/widgets/radiobutton_checked2.png</file>
+        <file>white/window buttons/close_window.png</file>
+        <file>white/window buttons/maximize_window.png</file>
+        <file>white/window buttons/minimize_window.png</file>
+        <file>white/window buttons/restore_window.png</file>
+        <file>black/achievements/categories/check_visible.png</file>
+        <file>black/achievements/categories/reverse.png</file>
+        <file>black/achievements/categories/uncheck_visible.png</file>
+        <file>black/achievements/checkbox/all.png</file>
+        <file>black/achievements/checkbox/notreached.png</file>
+        <file>black/achievements/checkbox/reached.png</file>
+        <file>black/achievements/category.png</file>
+        <file>black/achievements/check_all.png</file>
+        <file>black/achievements/guide.png</file>
+        <file>black/achievements/guides.png</file>
+        <file>black/comments/isComment.png</file>
+        <file>black/comments/isNotComment.png</file>
+        <file>black/favorites/favorites.png</file>
+        <file>black/favorites/in_favorites.png</file>
+        <file>black/hide/hide.png</file>
+        <file>black/hide/visible.png</file>
+        <file>black/main/find_profile.png</file>
+        <file>black/main/home.png</file>
+        <file>black/main/left.png</file>
+        <file>black/main/right.png</file>
+        <file>black/main/settings.png</file>
+        <file>black/management/apply.png</file>
+        <file>black/management/cancel.png</file>
+        <file>black/management/change.png</file>
+        <file>black/management/compare.png</file>
+        <file>black/management/create.png</file>
+        <file>black/management/delete.png</file>
+        <file>black/management/delete_all.png</file>
+        <file>black/management/download.png</file>
+        <file>black/management/edit.png</file>
+        <file>black/management/find.png</file>
+        <file>black/management/update.png</file>
+        <file>black/profile icons/friends.png</file>
+        <file>black/profile icons/games.png</file>
+        <file>black/profile icons/set_home.png</file>
+        <file>black/profile icons/statistic.png</file>
+        <file>black/widgets/checkbox_checked_hover.png</file>
+        <file>black/widgets/checkbox_checked_press.png</file>
+        <file>black/widgets/checkbox_unchecked_hover.png</file>
+        <file>black/widgets/checkbox_unchecked_press.png</file>
+        <file>black/widgets/radiobutton_checked_hover.png</file>
+        <file>black/widgets/radiobutton_checked_press.png</file>
+        <file>black/widgets/radiobutton_unchecked_hover.png</file>
+        <file>black/widgets/radiobutton_unchecked_press.png</file>
+        <file>black/window buttons/close_window.png</file>
+        <file>black/window buttons/maximize_window.png</file>
+        <file>black/window buttons/minimize_window.png</file>
+        <file>black/window buttons/restore_window.png</file>
     </qresource>
 </RCC>
