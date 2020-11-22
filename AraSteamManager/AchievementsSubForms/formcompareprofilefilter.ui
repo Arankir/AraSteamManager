@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>129</width>
-    <height>167</height>
+    <width>84</width>
+    <height>30</height>
    </rect>
   </property>
   <property name="font">
@@ -20,53 +20,93 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>1</number>
+    <number>0</number>
    </property>
    <item>
-    <widget class="QRadioButtonWithData" name="RadioButtonAll">
-     <property name="text">
-      <string notr="true"/>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
      </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
+     <item>
+      <widget class="QLabel" name="LabelReached">
+       <property name="toolTip">
+        <string>Получено</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="LabelAll">
+       <property name="toolTip">
+        <string>Все</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="LabelNotReached">
+       <property name="toolTip">
+        <string>Не получено</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QRadioButtonWithData" name="RadioButtonReached">
-     <property name="text">
-      <string notr="true"/>
+    <widget class="QSlider" name="Slider">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QRadioButtonWithData" name="RadioButtonNotReached">
-     <property name="text">
-      <string notr="true"/>
+     <property name="maximum">
+      <number>2</number>
+     </property>
+     <property name="pageStep">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <number>1</number>
+     </property>
+     <property name="sliderPosition">
+      <number>1</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QRadioButtonWithData</class>
-   <extends>QRadioButton</extends>
-   <header>subwidget/qradiobuttonwithdata.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

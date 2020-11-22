@@ -7,6 +7,7 @@
 #include <QTableWidgetItem>
 #include <QLabel>
 #include "subwidget/qradiobuttonwithdata.h"
+#include "AchievementsSubForms/formcompareprofilefilter.h"
 #include "class/steamapi/Sprofile.h"
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sachievements.h"

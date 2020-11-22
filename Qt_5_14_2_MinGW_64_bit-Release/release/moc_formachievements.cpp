@@ -10,6 +10,7 @@
 #include "../../AraSteamManager/AchievementsSubForms/formachievements.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'formachievements.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -22,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    QByteArrayData data[100];
-    char stringdata0[1791];
+    QByteArrayData data[93];
+    char stringdata0[1382];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,91 +48,84 @@ QT_MOC_LITERAL(11, 117, 12), // "getProfileId"
 QT_MOC_LITERAL(12, 130, 12), // "getGameAppId"
 QT_MOC_LITERAL(13, 143, 20), // "buttonUpdate_Clicked"
 QT_MOC_LITERAL(14, 164, 14), // "updateSettings"
-QT_MOC_LITERAL(15, 179, 24), // "formCategoryValueReverse"
-QT_MOC_LITERAL(16, 204, 21), // "formCategoryValueDown"
-QT_MOC_LITERAL(17, 226, 19), // "formCategoryValueUp"
-QT_MOC_LITERAL(18, 246, 30), // "formCategoryValueSelectVisible"
-QT_MOC_LITERAL(19, 277, 32), // "formCategoryValueUnselectVisible"
-QT_MOC_LITERAL(20, 310, 20), // "formCategoryValueTop"
-QT_MOC_LITERAL(21, 331, 23), // "formCategoryValueBottom"
-QT_MOC_LITERAL(22, 355, 15), // "noSelectedValue"
-QT_MOC_LITERAL(23, 371, 17), // "updateValueUpDown"
-QT_MOC_LITERAL(24, 389, 23), // "formCategoryValueDelete"
-QT_MOC_LITERAL(25, 413, 40), // "formCategoryListWidget_Curren..."
-QT_MOC_LITERAL(26, 454, 20), // "buttonManual_Clicked"
-QT_MOC_LITERAL(27, 475, 11), // "changeEvent"
-QT_MOC_LITERAL(28, 487, 7), // "QEvent*"
-QT_MOC_LITERAL(29, 495, 5), // "event"
-QT_MOC_LITERAL(30, 501, 11), // "resizeEvent"
-QT_MOC_LITERAL(31, 513, 13), // "QResizeEvent*"
-QT_MOC_LITERAL(32, 527, 10), // "closeEvent"
-QT_MOC_LITERAL(33, 538, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(34, 551, 14), // "initComponents"
-QT_MOC_LITERAL(35, 566, 20), // "SAchievementsPlayer&"
-QT_MOC_LITERAL(36, 587, 6), // "player"
-QT_MOC_LITERAL(37, 594, 11), // "retranslate"
-QT_MOC_LITERAL(38, 606, 8), // "setIcons"
-QT_MOC_LITERAL(39, 615, 20), // "createButtonWithData"
-QT_MOC_LITERAL(40, 636, 16), // "QButtonWithData*"
-QT_MOC_LITERAL(41, 653, 11), // "aObjectName"
-QT_MOC_LITERAL(42, 665, 10), // "aAppertain"
-QT_MOC_LITERAL(43, 676, 5), // "aType"
-QT_MOC_LITERAL(44, 682, 8), // "aChecked"
-QT_MOC_LITERAL(45, 691, 11), // "setFormMode"
-QT_MOC_LITERAL(46, 703, 8), // "FormMode"
-QT_MOC_LITERAL(47, 712, 4), // "mode"
-QT_MOC_LITERAL(48, 717, 14), // "loadingCompare"
-QT_MOC_LITERAL(49, 732, 15), // "loadFriendGames"
-QT_MOC_LITERAL(50, 748, 7), // "SGames*"
-QT_MOC_LITERAL(51, 756, 5), // "games"
-QT_MOC_LITERAL(52, 762, 17), // "finishLoadFriends"
-QT_MOC_LITERAL(53, 780, 32), // "compareProfileFilterClickFriends"
-QT_MOC_LITERAL(54, 813, 4), // "name"
-QT_MOC_LITERAL(55, 818, 11), // "ReachedType"
-QT_MOC_LITERAL(56, 830, 4), // "type"
-QT_MOC_LITERAL(57, 835, 36), // "buttonCompareAllFriendsReach_..."
-QT_MOC_LITERAL(58, 872, 37), // "tableWidgetCompareFriends_Cel..."
-QT_MOC_LITERAL(59, 910, 6), // "column"
-QT_MOC_LITERAL(60, 917, 26), // "createCompareProfileFilter"
-QT_MOC_LITERAL(61, 944, 6), // "accept"
-QT_MOC_LITERAL(62, 951, 38), // "checkBoxCompareAllFriends_Sta..."
-QT_MOC_LITERAL(63, 990, 4), // "arg1"
-QT_MOC_LITERAL(64, 995, 14), // "showCategories"
-QT_MOC_LITERAL(65, 1010, 25), // "buttonAddCategory_Clicked"
-QT_MOC_LITERAL(66, 1036, 28), // "buttonChangeCategory_Clicked"
-QT_MOC_LITERAL(67, 1065, 21), // "buttonCompare_Clicked"
-QT_MOC_LITERAL(68, 1087, 28), // "comboBoxCategory_IndexChange"
-QT_MOC_LITERAL(69, 1116, 5), // "index"
-QT_MOC_LITERAL(70, 1122, 29), // "checkBoxCategory_StateChanged"
-QT_MOC_LITERAL(71, 1152, 3), // "ind"
-QT_MOC_LITERAL(72, 1156, 33), // "buttonDeleteAllCategories_Cli..."
-QT_MOC_LITERAL(73, 1190, 30), // "buttonAddValueCategory_Clicked"
-QT_MOC_LITERAL(74, 1221, 28), // "buttonCancelCategory_Clicked"
-QT_MOC_LITERAL(75, 1250, 28), // "buttonAcceptCategory_Clicked"
-QT_MOC_LITERAL(76, 1279, 28), // "buttonDeleteCategory_Clicked"
-QT_MOC_LITERAL(77, 1308, 37), // "checkBoxCategoryOneValue_Stat..."
-QT_MOC_LITERAL(78, 1346, 33), // "lineEditTitleCategory_TextCha..."
-QT_MOC_LITERAL(79, 1380, 28), // "comboBoxCategories_Activated"
-QT_MOC_LITERAL(80, 1409, 34), // "checkBoxCategoryVisibleAll_Cl..."
-QT_MOC_LITERAL(81, 1444, 18), // "updateValuesUpDown"
-QT_MOC_LITERAL(82, 1463, 5), // "value"
-QT_MOC_LITERAL(83, 1469, 30), // "formCategoryValueVisibleChange"
-QT_MOC_LITERAL(84, 1500, 3), // "pos"
-QT_MOC_LITERAL(85, 1504, 7), // "visible"
-QT_MOC_LITERAL(86, 1512, 27), // "formCategoryPosition_Change"
-QT_MOC_LITERAL(87, 1540, 6), // "newpos"
-QT_MOC_LITERAL(88, 1547, 18), // "formCategoryDelete"
-QT_MOC_LITERAL(89, 1566, 30), // "checkBoxFavorites_StateChanged"
-QT_MOC_LITERAL(90, 1597, 19), // "createValueCategory"
-QT_MOC_LITERAL(91, 1617, 18), // "FormCategoryValue*"
-QT_MOC_LITERAL(92, 1636, 22), // "buttonFavorite_Clicked"
-QT_MOC_LITERAL(93, 1659, 29), // "tableAchievements_CellClicked"
-QT_MOC_LITERAL(94, 1689, 10), // "resizeForm"
-QT_MOC_LITERAL(95, 1700, 26), // "animateFrameEditCategories"
-QT_MOC_LITERAL(96, 1727, 9), // "toVisible"
-QT_MOC_LITERAL(97, 1737, 16), // "loadEditCategory"
-QT_MOC_LITERAL(98, 1754, 11), // "loadCompare"
-QT_MOC_LITERAL(99, 1766, 24) // "tabWidget_CurrentChanged"
+QT_MOC_LITERAL(15, 179, 20), // "buttonManual_Clicked"
+QT_MOC_LITERAL(16, 200, 11), // "changeEvent"
+QT_MOC_LITERAL(17, 212, 7), // "QEvent*"
+QT_MOC_LITERAL(18, 220, 5), // "event"
+QT_MOC_LITERAL(19, 226, 10), // "closeEvent"
+QT_MOC_LITERAL(20, 237, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(21, 250, 14), // "initComponents"
+QT_MOC_LITERAL(22, 265, 20), // "SAchievementsPlayer&"
+QT_MOC_LITERAL(23, 286, 6), // "player"
+QT_MOC_LITERAL(24, 293, 11), // "retranslate"
+QT_MOC_LITERAL(25, 305, 8), // "setIcons"
+QT_MOC_LITERAL(26, 314, 20), // "createButtonWithData"
+QT_MOC_LITERAL(27, 335, 16), // "QButtonWithData*"
+QT_MOC_LITERAL(28, 352, 11), // "aObjectName"
+QT_MOC_LITERAL(29, 364, 10), // "aAppertain"
+QT_MOC_LITERAL(30, 375, 5), // "aType"
+QT_MOC_LITERAL(31, 381, 8), // "aChecked"
+QT_MOC_LITERAL(32, 390, 11), // "setFormMode"
+QT_MOC_LITERAL(33, 402, 8), // "FormMode"
+QT_MOC_LITERAL(34, 411, 4), // "mode"
+QT_MOC_LITERAL(35, 416, 14), // "loadingCompare"
+QT_MOC_LITERAL(36, 431, 15), // "loadFriendGames"
+QT_MOC_LITERAL(37, 447, 7), // "SGames*"
+QT_MOC_LITERAL(38, 455, 5), // "games"
+QT_MOC_LITERAL(39, 461, 17), // "finishLoadFriends"
+QT_MOC_LITERAL(40, 479, 32), // "compareProfileFilterClickFriends"
+QT_MOC_LITERAL(41, 512, 4), // "name"
+QT_MOC_LITERAL(42, 517, 11), // "ReachedType"
+QT_MOC_LITERAL(43, 529, 4), // "type"
+QT_MOC_LITERAL(44, 534, 36), // "buttonCompareAllFriendsReach_..."
+QT_MOC_LITERAL(45, 571, 37), // "tableWidgetCompareFriends_Cel..."
+QT_MOC_LITERAL(46, 609, 6), // "column"
+QT_MOC_LITERAL(47, 616, 26), // "createCompareProfileFilter"
+QT_MOC_LITERAL(48, 643, 6), // "accept"
+QT_MOC_LITERAL(49, 650, 38), // "checkBoxCompareAllFriends_Sta..."
+QT_MOC_LITERAL(50, 689, 4), // "arg1"
+QT_MOC_LITERAL(51, 694, 14), // "showCategories"
+QT_MOC_LITERAL(52, 709, 28), // "comboBoxCategory_IndexChange"
+QT_MOC_LITERAL(53, 738, 5), // "index"
+QT_MOC_LITERAL(54, 744, 29), // "checkBoxCategory_StateChanged"
+QT_MOC_LITERAL(55, 774, 3), // "ind"
+QT_MOC_LITERAL(56, 778, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(57, 809, 22), // "buttonFavorite_Clicked"
+QT_MOC_LITERAL(58, 832, 16), // "loadEditCategory"
+QT_MOC_LITERAL(59, 849, 11), // "loadCompare"
+QT_MOC_LITERAL(60, 861, 24), // "tabWidget_CurrentChanged"
+QT_MOC_LITERAL(61, 886, 12), // "createThread"
+QT_MOC_LITERAL(62, 899, 14), // "setTableModels"
+QT_MOC_LITERAL(63, 914, 19), // "QStandardItemModel*"
+QT_MOC_LITERAL(64, 934, 6), // "aModel"
+QT_MOC_LITERAL(65, 941, 17), // "initTableStandart"
+QT_MOC_LITERAL(66, 959, 24), // "updateCurrentAchievement"
+QT_MOC_LITERAL(67, 984, 12), // "initComments"
+QT_MOC_LITERAL(68, 997, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(69, 1014, 8), // "standart"
+QT_MOC_LITERAL(70, 1023, 7), // "compare"
+QT_MOC_LITERAL(71, 1031, 21), // "buttonComment_Clicked"
+QT_MOC_LITERAL(72, 1053, 10), // "createMenu"
+QT_MOC_LITERAL(73, 1064, 6), // "QMenu*"
+QT_MOC_LITERAL(74, 1071, 12), // "SAchievement"
+QT_MOC_LITERAL(75, 1084, 12), // "aAchievement"
+QT_MOC_LITERAL(76, 1097, 16), // "initTableCompare"
+QT_MOC_LITERAL(77, 1114, 25), // "updateFilterWithMyProfile"
+QT_MOC_LITERAL(78, 1140, 9), // "aStandart"
+QT_MOC_LITERAL(79, 1150, 8), // "aCompare"
+QT_MOC_LITERAL(80, 1159, 27), // "updateFilterTextAchievement"
+QT_MOC_LITERAL(81, 1187, 8), // "aNewText"
+QT_MOC_LITERAL(82, 1196, 27), // "updateHiddenColumnsStandart"
+QT_MOC_LITERAL(83, 1224, 20), // "updateFilterCategory"
+QT_MOC_LITERAL(84, 1245, 13), // "categoryIndex"
+QT_MOC_LITERAL(85, 1259, 5), // "clear"
+QT_MOC_LITERAL(86, 1265, 14), // "QList<QString>"
+QT_MOC_LITERAL(87, 1280, 16), // "achievementNames"
+QT_MOC_LITERAL(88, 1297, 20), // "updateFilterFavorite"
+QT_MOC_LITERAL(89, 1318, 26), // "QList<FavoriteAchievement>"
+QT_MOC_LITERAL(90, 1345, 22), // "aFavoritesAchievements"
+QT_MOC_LITERAL(91, 1368, 9), // "rowFromId"
+QT_MOC_LITERAL(92, 1378, 3) // "aId"
 
     },
     "FormAchievements\0s_returnToGames\0\0num\0"
@@ -139,52 +133,38 @@ QT_MOC_LITERAL(99, 1766, 24) // "tabWidget_CurrentChanged"
     "progress\0row\0onTablePulled\0reached\0"
     "notReached\0getProfileId\0getGameAppId\0"
     "buttonUpdate_Clicked\0updateSettings\0"
-    "formCategoryValueReverse\0formCategoryValueDown\0"
-    "formCategoryValueUp\0formCategoryValueSelectVisible\0"
-    "formCategoryValueUnselectVisible\0"
-    "formCategoryValueTop\0formCategoryValueBottom\0"
-    "noSelectedValue\0updateValueUpDown\0"
-    "formCategoryValueDelete\0"
-    "formCategoryListWidget_CurrentRowChanged\0"
     "buttonManual_Clicked\0changeEvent\0"
-    "QEvent*\0event\0resizeEvent\0QResizeEvent*\0"
-    "closeEvent\0QCloseEvent*\0initComponents\0"
-    "SAchievementsPlayer&\0player\0retranslate\0"
-    "setIcons\0createButtonWithData\0"
-    "QButtonWithData*\0aObjectName\0aAppertain\0"
-    "aType\0aChecked\0setFormMode\0FormMode\0"
-    "mode\0loadingCompare\0loadFriendGames\0"
-    "SGames*\0games\0finishLoadFriends\0"
-    "compareProfileFilterClickFriends\0name\0"
-    "ReachedType\0type\0buttonCompareAllFriendsReach_Clicked\0"
+    "QEvent*\0event\0closeEvent\0QCloseEvent*\0"
+    "initComponents\0SAchievementsPlayer&\0"
+    "player\0retranslate\0setIcons\0"
+    "createButtonWithData\0QButtonWithData*\0"
+    "aObjectName\0aAppertain\0aType\0aChecked\0"
+    "setFormMode\0FormMode\0mode\0loadingCompare\0"
+    "loadFriendGames\0SGames*\0games\0"
+    "finishLoadFriends\0compareProfileFilterClickFriends\0"
+    "name\0ReachedType\0type\0"
+    "buttonCompareAllFriendsReach_Clicked\0"
     "tableWidgetCompareFriends_CellChanged\0"
     "column\0createCompareProfileFilter\0"
     "accept\0checkBoxCompareAllFriends_StateChanged\0"
-    "arg1\0showCategories\0buttonAddCategory_Clicked\0"
-    "buttonChangeCategory_Clicked\0"
-    "buttonCompare_Clicked\0"
-    "comboBoxCategory_IndexChange\0index\0"
-    "checkBoxCategory_StateChanged\0ind\0"
-    "buttonDeleteAllCategories_Clicked\0"
-    "buttonAddValueCategory_Clicked\0"
-    "buttonCancelCategory_Clicked\0"
-    "buttonAcceptCategory_Clicked\0"
-    "buttonDeleteCategory_Clicked\0"
-    "checkBoxCategoryOneValue_StateChanged\0"
-    "lineEditTitleCategory_TextChanged\0"
-    "comboBoxCategories_Activated\0"
-    "checkBoxCategoryVisibleAll_Clicked\0"
-    "updateValuesUpDown\0value\0"
-    "formCategoryValueVisibleChange\0pos\0"
-    "visible\0formCategoryPosition_Change\0"
-    "newpos\0formCategoryDelete\0"
-    "checkBoxFavorites_StateChanged\0"
-    "createValueCategory\0FormCategoryValue*\0"
-    "buttonFavorite_Clicked\0"
-    "tableAchievements_CellClicked\0resizeForm\0"
-    "animateFrameEditCategories\0toVisible\0"
-    "loadEditCategory\0loadCompare\0"
-    "tabWidget_CurrentChanged"
+    "arg1\0showCategories\0comboBoxCategory_IndexChange\0"
+    "index\0checkBoxCategory_StateChanged\0"
+    "ind\0checkBoxFavorites_StateChanged\0"
+    "buttonFavorite_Clicked\0loadEditCategory\0"
+    "loadCompare\0tabWidget_CurrentChanged\0"
+    "createThread\0setTableModels\0"
+    "QStandardItemModel*\0aModel\0initTableStandart\0"
+    "updateCurrentAchievement\0initComments\0"
+    "updateHiddenRows\0standart\0compare\0"
+    "buttonComment_Clicked\0createMenu\0"
+    "QMenu*\0SAchievement\0aAchievement\0"
+    "initTableCompare\0updateFilterWithMyProfile\0"
+    "aStandart\0aCompare\0updateFilterTextAchievement\0"
+    "aNewText\0updateHiddenColumnsStandart\0"
+    "updateFilterCategory\0categoryIndex\0"
+    "clear\0QList<QString>\0achievementNames\0"
+    "updateFilterFavorite\0QList<FavoriteAchievement>\0"
+    "aFavoritesAchievements\0rowFromId\0aId"
 };
 #undef QT_MOC_LITERAL
 
@@ -194,7 +174,7 @@ static const uint qt_meta_data_FormAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      65,   14, // methods
+      48,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -202,73 +182,56 @@ static const uint qt_meta_data_FormAchievements[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  339,    2, 0x06 /* Public */,
-       4,    0,  342,    2, 0x06 /* Public */,
+       1,    1,  254,    2, 0x06 /* Public */,
+       4,    0,  257,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    2,  343,    2, 0x0a /* Public */,
-       8,    2,  348,    2, 0x0a /* Public */,
-      11,    0,  353,    2, 0x0a /* Public */,
-      12,    0,  354,    2, 0x0a /* Public */,
-      13,    0,  355,    2, 0x0a /* Public */,
-      14,    0,  356,    2, 0x0a /* Public */,
-      15,    0,  357,    2, 0x0a /* Public */,
-      16,    0,  358,    2, 0x0a /* Public */,
-      17,    0,  359,    2, 0x0a /* Public */,
-      18,    0,  360,    2, 0x0a /* Public */,
-      19,    0,  361,    2, 0x0a /* Public */,
-      20,    0,  362,    2, 0x0a /* Public */,
-      21,    0,  363,    2, 0x0a /* Public */,
-      22,    0,  364,    2, 0x0a /* Public */,
-      23,    0,  365,    2, 0x0a /* Public */,
-      24,    0,  366,    2, 0x0a /* Public */,
-      25,    0,  367,    2, 0x0a /* Public */,
-      26,    0,  368,    2, 0x0a /* Public */,
-      27,    1,  369,    2, 0x08 /* Private */,
-      30,    1,  372,    2, 0x08 /* Private */,
-      32,    1,  375,    2, 0x08 /* Private */,
-      34,    1,  378,    2, 0x08 /* Private */,
-      37,    0,  381,    2, 0x08 /* Private */,
-      38,    0,  382,    2, 0x08 /* Private */,
-      39,    4,  383,    2, 0x08 /* Private */,
-      45,    1,  392,    2, 0x08 /* Private */,
-      48,    0,  395,    2, 0x08 /* Private */,
-      49,    1,  396,    2, 0x08 /* Private */,
-      52,    0,  399,    2, 0x08 /* Private */,
-      53,    2,  400,    2, 0x08 /* Private */,
-      57,    0,  405,    2, 0x08 /* Private */,
-      58,    2,  406,    2, 0x08 /* Private */,
-      60,    2,  411,    2, 0x08 /* Private */,
-      62,    1,  416,    2, 0x08 /* Private */,
-      64,    0,  419,    2, 0x08 /* Private */,
-      65,    0,  420,    2, 0x08 /* Private */,
-      66,    0,  421,    2, 0x08 /* Private */,
-      67,    0,  422,    2, 0x08 /* Private */,
-      68,    1,  423,    2, 0x08 /* Private */,
-      70,    1,  426,    2, 0x08 /* Private */,
-      72,    0,  429,    2, 0x08 /* Private */,
-      73,    0,  430,    2, 0x08 /* Private */,
-      74,    0,  431,    2, 0x08 /* Private */,
-      75,    0,  432,    2, 0x08 /* Private */,
-      76,    0,  433,    2, 0x08 /* Private */,
-      77,    1,  434,    2, 0x08 /* Private */,
-      78,    1,  437,    2, 0x08 /* Private */,
-      79,    1,  440,    2, 0x08 /* Private */,
-      80,    0,  443,    2, 0x08 /* Private */,
-      81,    1,  444,    2, 0x08 /* Private */,
-      81,    0,  447,    2, 0x28 /* Private | MethodCloned */,
-      83,    2,  448,    2, 0x08 /* Private */,
-      86,    2,  453,    2, 0x08 /* Private */,
-      88,    1,  458,    2, 0x08 /* Private */,
-      89,    1,  461,    2, 0x08 /* Private */,
-      90,    0,  464,    2, 0x08 /* Private */,
-      92,    0,  465,    2, 0x08 /* Private */,
-      93,    2,  466,    2, 0x08 /* Private */,
-      94,    0,  471,    2, 0x08 /* Private */,
-      95,    1,  472,    2, 0x08 /* Private */,
-      97,    0,  475,    2, 0x08 /* Private */,
-      98,    0,  476,    2, 0x08 /* Private */,
-      99,    1,  477,    2, 0x08 /* Private */,
+       5,    2,  258,    2, 0x0a /* Public */,
+       8,    2,  263,    2, 0x0a /* Public */,
+      11,    0,  268,    2, 0x0a /* Public */,
+      12,    0,  269,    2, 0x0a /* Public */,
+      13,    0,  270,    2, 0x0a /* Public */,
+      14,    0,  271,    2, 0x0a /* Public */,
+      15,    0,  272,    2, 0x0a /* Public */,
+      16,    1,  273,    2, 0x08 /* Private */,
+      19,    1,  276,    2, 0x08 /* Private */,
+      21,    1,  279,    2, 0x08 /* Private */,
+      24,    0,  282,    2, 0x08 /* Private */,
+      25,    0,  283,    2, 0x08 /* Private */,
+      26,    4,  284,    2, 0x08 /* Private */,
+      32,    1,  293,    2, 0x08 /* Private */,
+      35,    0,  296,    2, 0x08 /* Private */,
+      36,    1,  297,    2, 0x08 /* Private */,
+      39,    0,  300,    2, 0x08 /* Private */,
+      40,    2,  301,    2, 0x08 /* Private */,
+      44,    0,  306,    2, 0x08 /* Private */,
+      45,    2,  307,    2, 0x08 /* Private */,
+      47,    2,  312,    2, 0x08 /* Private */,
+      49,    1,  317,    2, 0x08 /* Private */,
+      51,    0,  320,    2, 0x08 /* Private */,
+      52,    1,  321,    2, 0x08 /* Private */,
+      54,    1,  324,    2, 0x08 /* Private */,
+      56,    1,  327,    2, 0x08 /* Private */,
+      57,    0,  330,    2, 0x08 /* Private */,
+      58,    0,  331,    2, 0x08 /* Private */,
+      59,    0,  332,    2, 0x08 /* Private */,
+      60,    1,  333,    2, 0x08 /* Private */,
+      61,    0,  336,    2, 0x08 /* Private */,
+      62,    1,  337,    2, 0x08 /* Private */,
+      65,    0,  340,    2, 0x08 /* Private */,
+      66,    0,  341,    2, 0x08 /* Private */,
+      67,    0,  342,    2, 0x08 /* Private */,
+      68,    2,  343,    2, 0x08 /* Private */,
+      71,    0,  348,    2, 0x08 /* Private */,
+      72,    1,  349,    2, 0x08 /* Private */,
+      76,    0,  352,    2, 0x08 /* Private */,
+      77,    3,  353,    2, 0x08 /* Private */,
+      80,    3,  360,    2, 0x08 /* Private */,
+      82,    0,  367,    2, 0x08 /* Private */,
+      83,    3,  368,    2, 0x08 /* Private */,
+      83,    2,  375,    2, 0x28 /* Private | MethodCloned */,
+      88,    1,  380,    2, 0x08 /* Private */,
+      91,    1,  383,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -282,62 +245,45 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 17,   18,
+    QMetaType::Void, 0x80000000 | 20,    2,
+    QMetaType::Void, 0x80000000 | 22,   23,
+    QMetaType::Void,
+    QMetaType::Void,
+    0x80000000 | 27, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Bool,   28,   29,   30,   31,
+    QMetaType::Void, 0x80000000 | 33,   34,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 37,   38,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, 0x80000000 | 42,   41,   43,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,   46,
+    QMetaType::Void, QMetaType::Bool, QMetaType::Int,   48,   46,
+    QMetaType::Void, QMetaType::Int,   50,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   53,
+    QMetaType::Void, QMetaType::Int,   55,
+    QMetaType::Void, QMetaType::Int,   50,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   53,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 63,   64,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool, QMetaType::Bool,   69,   70,
     QMetaType::Void,
+    0x80000000 | 73, 0x80000000 | 74,   75,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 42, QMetaType::Bool, QMetaType::Bool,   30,   78,   79,
+    QMetaType::Void, QMetaType::QString, QMetaType::Bool, QMetaType::Bool,   81,   78,   79,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 28,   29,
-    QMetaType::Void, 0x80000000 | 31,    2,
-    QMetaType::Void, 0x80000000 | 33,    2,
-    QMetaType::Void, 0x80000000 | 35,   36,
-    QMetaType::Void,
-    QMetaType::Void,
-    0x80000000 | 40, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Bool,   41,   42,   43,   44,
-    QMetaType::Void, 0x80000000 | 46,   47,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 50,   51,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 55,   54,   56,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,   59,
-    QMetaType::Void, QMetaType::Bool, QMetaType::Int,   61,   59,
-    QMetaType::Void, QMetaType::Int,   63,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   69,
-    QMetaType::Void, QMetaType::Int,   71,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   63,
-    QMetaType::Void, QMetaType::QString,   63,
-    QMetaType::Void, QMetaType::Int,   69,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   82,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Bool, 0x80000000 | 86,   84,   85,   87,
     QMetaType::Void, QMetaType::Int, QMetaType::Bool,   84,   85,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   84,   87,
-    QMetaType::Void, QMetaType::Int,   84,
-    QMetaType::Void, QMetaType::Int,   63,
-    0x80000000 | 91,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,   59,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   96,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   69,
+    QMetaType::Void, 0x80000000 | 89,   90,
+    QMetaType::Int, QMetaType::QString,   92,
 
        0        // eod
 };
@@ -358,75 +304,73 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 6: _t->buttonUpdate_Clicked(); break;
         case 7: _t->updateSettings(); break;
-        case 8: _t->formCategoryValueReverse(); break;
-        case 9: _t->formCategoryValueDown(); break;
-        case 10: _t->formCategoryValueUp(); break;
-        case 11: _t->formCategoryValueSelectVisible(); break;
-        case 12: _t->formCategoryValueUnselectVisible(); break;
-        case 13: _t->formCategoryValueTop(); break;
-        case 14: _t->formCategoryValueBottom(); break;
-        case 15: _t->noSelectedValue(); break;
-        case 16: _t->updateValueUpDown(); break;
-        case 17: _t->formCategoryValueDelete(); break;
-        case 18: _t->formCategoryListWidget_CurrentRowChanged(); break;
-        case 19: _t->buttonManual_Clicked(); break;
-        case 20: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 21: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
-        case 22: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 23: _t->initComponents((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
-        case 24: _t->retranslate(); break;
-        case 25: _t->setIcons(); break;
-        case 26: { QButtonWithData* _r = _t->createButtonWithData((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4])));
+        case 8: _t->buttonManual_Clicked(); break;
+        case 9: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 10: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
+        case 11: _t->initComponents((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1]))); break;
+        case 12: _t->retranslate(); break;
+        case 13: _t->setIcons(); break;
+        case 14: { QButtonWithData* _r = _t->createButtonWithData((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4])));
             if (_a[0]) *reinterpret_cast< QButtonWithData**>(_a[0]) = std::move(_r); }  break;
-        case 27: _t->setFormMode((*reinterpret_cast< FormMode(*)>(_a[1]))); break;
-        case 28: _t->loadingCompare(); break;
-        case 29: _t->loadFriendGames((*reinterpret_cast< SGames*(*)>(_a[1]))); break;
-        case 30: _t->finishLoadFriends(); break;
-        case 31: _t->compareProfileFilterClickFriends((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
-        case 32: _t->buttonCompareAllFriendsReach_Clicked(); break;
-        case 33: _t->tableWidgetCompareFriends_CellChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 34: _t->createCompareProfileFilter((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 35: _t->checkBoxCompareAllFriends_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 36: _t->showCategories(); break;
-        case 37: _t->buttonAddCategory_Clicked(); break;
-        case 38: _t->buttonChangeCategory_Clicked(); break;
-        case 39: _t->buttonCompare_Clicked(); break;
-        case 40: _t->comboBoxCategory_IndexChange((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 41: _t->checkBoxCategory_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 42: _t->buttonDeleteAllCategories_Clicked(); break;
-        case 43: _t->buttonAddValueCategory_Clicked(); break;
-        case 44: _t->buttonCancelCategory_Clicked(); break;
-        case 45: _t->buttonAcceptCategory_Clicked(); break;
-        case 46: _t->buttonDeleteCategory_Clicked(); break;
-        case 47: _t->checkBoxCategoryOneValue_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 48: _t->lineEditTitleCategory_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 49: _t->comboBoxCategories_Activated((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 50: _t->checkBoxCategoryVisibleAll_Clicked(); break;
-        case 51: _t->updateValuesUpDown((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 52: _t->updateValuesUpDown(); break;
-        case 53: _t->formCategoryValueVisibleChange((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 54: _t->formCategoryPosition_Change((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 55: _t->formCategoryDelete((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 56: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 57: { FormCategoryValue* _r = _t->createValueCategory();
-            if (_a[0]) *reinterpret_cast< FormCategoryValue**>(_a[0]) = std::move(_r); }  break;
-        case 58: _t->buttonFavorite_Clicked(); break;
-        case 59: _t->tableAchievements_CellClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 60: _t->resizeForm(); break;
-        case 61: _t->animateFrameEditCategories((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 62: _t->loadEditCategory(); break;
-        case 63: _t->loadCompare(); break;
-        case 64: _t->tabWidget_CurrentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->setFormMode((*reinterpret_cast< FormMode(*)>(_a[1]))); break;
+        case 16: _t->loadingCompare(); break;
+        case 17: _t->loadFriendGames((*reinterpret_cast< SGames*(*)>(_a[1]))); break;
+        case 18: _t->finishLoadFriends(); break;
+        case 19: _t->compareProfileFilterClickFriends((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
+        case 20: _t->buttonCompareAllFriendsReach_Clicked(); break;
+        case 21: _t->tableWidgetCompareFriends_CellChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 22: _t->createCompareProfileFilter((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 23: _t->checkBoxCompareAllFriends_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 24: _t->showCategories(); break;
+        case 25: _t->comboBoxCategory_IndexChange((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 26: _t->checkBoxCategory_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 27: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 28: _t->buttonFavorite_Clicked(); break;
+        case 29: _t->loadEditCategory(); break;
+        case 30: _t->loadCompare(); break;
+        case 31: _t->tabWidget_CurrentChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 32: _t->createThread(); break;
+        case 33: _t->setTableModels((*reinterpret_cast< QStandardItemModel*(*)>(_a[1]))); break;
+        case 34: _t->initTableStandart(); break;
+        case 35: _t->updateCurrentAchievement(); break;
+        case 36: _t->initComments(); break;
+        case 37: _t->updateHiddenRows((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 38: _t->buttonComment_Clicked(); break;
+        case 39: { QMenu* _r = _t->createMenu((*reinterpret_cast< const SAchievement(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
+        case 40: _t->initTableCompare(); break;
+        case 41: _t->updateFilterWithMyProfile((*reinterpret_cast< ReachedType(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 42: _t->updateFilterTextAchievement((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< bool(*)>(_a[3]))); break;
+        case 43: _t->updateHiddenColumnsStandart(); break;
+        case 44: _t->updateFilterCategory((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2])),(*reinterpret_cast< QList<QString>(*)>(_a[3]))); break;
+        case 45: _t->updateFilterCategory((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 46: _t->updateFilterFavorite((*reinterpret_cast< const QList<FavoriteAchievement>(*)>(_a[1]))); break;
+        case 47: { int _r = _t->rowFromId((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 29:
+        case 17:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SGames* >(); break;
+            }
+            break;
+        case 33:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 0:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QStandardItemModel* >(); break;
+            }
+            break;
+        case 44:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 2:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QList<QString> >(); break;
             }
             break;
         }
@@ -478,13 +422,13 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 65)
+        if (_id < 48)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 65;
+        _id -= 48;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 65)
+        if (_id < 48)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 65;
+        _id -= 48;
     }
     return _id;
 }

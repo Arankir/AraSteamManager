@@ -1,8 +1,7 @@
 debug/formachievements.o
-debug/formachievementwidget.o
-debug/formcategoryvalue.o
+debug/formachievementscategoriesedit.o
+debug/formachievementsfriendscompare.o
 debug/formcategoryvalue_2.o
-debug/formcomparefriends.o
 debug/formcompareprofilefilter.o
 debug/formtablesheaders.o
 debug/formfavorites.o
@@ -15,6 +14,7 @@ debug/requestdata.o
 debug/requestimage.o
 debug/MultiSelectComboBox.o
 debug/donutbreakdownchart.o
+debug/freezetablewidget.o
 debug/mainslice.o
 debug/threadachievements.o
 debug/threadfriends.o
@@ -24,8 +24,9 @@ debug/threadstatistics.o
 debug/categoriesgame.o
 debug/comments.o
 debug/favorites.o
-debug/filter.o
 debug/groupsgames.o
+debug/hiddengames.o
+debug/myfilter.o
 debug/settings.o
 debug/Sachievements.o
 debug/Sapi.o
@@ -48,10 +49,9 @@ debug/qradiobuttonwithdata.o
 debug/qrc_resimg.o
 debug/qrc_lang.o
 debug/moc_formachievements.o
-debug/moc_formachievementwidget.o
-debug/moc_formcategoryvalue.o
+debug/moc_formachievementscategoriesedit.o
+debug/moc_formachievementsfriendscompare.o
 debug/moc_formcategoryvalue_2.o
-debug/moc_formcomparefriends.o
 debug/moc_formcompareprofilefilter.o
 debug/moc_formtablesheaders.o
 debug/moc_formfavorites.o
@@ -63,6 +63,7 @@ debug/moc_formstatistics.o
 debug/moc_requestdata.o
 debug/moc_requestimage.o
 debug/moc_MultiSelectComboBox.o
+debug/moc_freezetablewidget.o
 debug/moc_threadachievements.o
 debug/moc_threadfriends.o
 debug/moc_threadgames.o
@@ -70,8 +71,7 @@ debug/moc_threading.o
 debug/moc_threadstatistics.o
 debug/moc_categoriesgame.o
 debug/moc_favorites.o
-debug/moc_filter.o
-debug/moc_settings.o
+debug/moc_myfilter.o
 debug/moc_Sachievements.o
 debug/moc_Sapi.o
 debug/moc_Sbans.o

@@ -193,15 +193,15 @@ void FormAchievementsCategoriesEdit::buttonDeleteAllCategories_Clicked() {
     emit s_categoriesIsUpdated(true);
 }
 
-FormCategoryValue_2 *FormAchievementsCategoriesEdit::createValueCategory() {
+FormCategoryValue *FormAchievementsCategoriesEdit::createValueCategory() {
 //    int rowValues = ui->ListWidgetValuesCategory->count();//->rowCount();
-    FormCategoryValue_2 *newValue = new FormCategoryValue_2();
-    connect(newValue, &FormCategoryValue_2::s_goFirst,              this,   &FormAchievementsCategoriesEdit::formCategoryValueFirst);
-    connect(newValue, &FormCategoryValue_2::s_goBack,               this,   &FormAchievementsCategoriesEdit::formCategoryValueBack);
-    connect(newValue, &FormCategoryValue_2::s_goNext,               this,   &FormAchievementsCategoriesEdit::formCategoryValueNext);
-    connect(newValue, &FormCategoryValue_2::s_goLast,               this,   &FormAchievementsCategoriesEdit::formCategoryValueLast);
-    connect(newValue, &FormCategoryValue_2::s_deleteValue,          this,   &FormAchievementsCategoriesEdit::formCategoryValueDelete);
-    connect(newValue, &FormCategoryValue_2::s_deleteAchievement,    this,   &FormAchievementsCategoriesEdit::updateUniqueAchievements);
+    FormCategoryValue *newValue = new FormCategoryValue();
+    connect(newValue, &FormCategoryValue::s_goFirst,              this,   &FormAchievementsCategoriesEdit::formCategoryValueFirst);
+    connect(newValue, &FormCategoryValue::s_goBack,               this,   &FormAchievementsCategoriesEdit::formCategoryValueBack);
+    connect(newValue, &FormCategoryValue::s_goNext,               this,   &FormAchievementsCategoriesEdit::formCategoryValueNext);
+    connect(newValue, &FormCategoryValue::s_goLast,               this,   &FormAchievementsCategoriesEdit::formCategoryValueLast);
+    connect(newValue, &FormCategoryValue::s_deleteValue,          this,   &FormAchievementsCategoriesEdit::formCategoryValueDelete);
+    connect(newValue, &FormCategoryValue::s_deleteAchievement,    this,   &FormAchievementsCategoriesEdit::updateUniqueAchievements);
     _values.append(newValue);
     updateValuesOrder();
     newValue->setFixedWidth(newValue->sizeHint().width());
@@ -217,6 +217,7 @@ void FormAchievementsCategoriesEdit::updateUniqueAchievements() {
 #define Categorys {
 void FormAchievementsCategoriesEdit::buttonAddValueCategory_Clicked() {
     createValueCategory();
+    _isNoValue = _values.size() == 1;
 }
 
 void FormAchievementsCategoriesEdit::buttonCancelCategory_Clicked() {
@@ -376,7 +377,7 @@ void FormAchievementsCategoriesEdit::comboBoxCategories_Activated(int aIndex) {
             _values.removeAt(0);
         }
         for(auto &&title: valuesTitles) {
-            FormCategoryValue_2 *value = createValueCategory();
+            FormCategoryValue *value = createValueCategory();
             value->setTitle(title.title);
         }
     } else {

@@ -9,15 +9,15 @@ constexpr int c_filterUniqueValue = 3;
 constexpr int c_filterColumnCount = 4;
 constexpr int c_filterEndConstValues = 4;
 
-constexpr int c_tableAchievementColumnAppid       = 0;
-constexpr int c_tableAchievementColumnIndex       = 1;
-constexpr int c_tableAchievementColumnIcon        = 2;
-constexpr int c_tableAchievementColumnTitle       = 3;
-constexpr int c_tableAchievementColumnDescription = 4;
-constexpr int c_tableAchievementColumnComment     = 5;
-constexpr int c_tableAchievementColumnWorld       = 6;
-constexpr int c_tableAchievementColumnReachedMy   = 7;
-constexpr int c_tableAchievementColumnCount       = 8;
+constexpr int c_columnAppid       = 0;
+constexpr int c_columnIndex       = 1;
+constexpr int c_columnIcon        = 2;
+constexpr int c_columnTitle       = 3;
+constexpr int c_columnDescription = 4;
+constexpr int c_columnComment     = 5;
+constexpr int c_columnWorld       = 6;
+constexpr int c_columnReachedMy   = 7;
+constexpr int c_columnCount       = 8;
 #define ConstantsEnd }
 
 FormTablesHeaders::FormTablesHeaders(SGame &aGame, const QString &aId, SAchievementsPlayer &aPlayer, QWidget *aParent): QWidget(aParent),
@@ -50,10 +50,10 @@ void FormTablesHeaders::resize() {
 
 void FormTablesHeaders::retranslate() {
     ui->retranslateUi(this);
-    changeHorizontalTitle(c_tableAchievementColumnIcon, "");
-    changeHorizontalTitle(c_tableAchievementColumnTitle, tr("Название"));
-    changeHorizontalTitle(c_tableAchievementColumnDescription, tr("Описание"));
-    changeHorizontalTitle(c_tableAchievementColumnWorld, tr("По миру"));
+    changeHorizontalTitle(c_columnIcon, "");
+    changeHorizontalTitle(c_columnTitle, tr("Название"));
+    changeHorizontalTitle(c_columnDescription, tr("Описание"));
+    changeHorizontalTitle(c_columnWorld, tr("По миру"));
     //_tableAchievements->ChangeHorizontalTitle(c_tableAchievementColumnReachedMy, tr("Получено"));
     //_achievements.set(SAchievementsGlobal(QString::number(_game._appID), false));
     pullTable();
@@ -398,7 +398,7 @@ void FormTablesHeaders::setUniqueMode(bool aUnique) {
 }
 
 void FormTablesHeaders::hideCheckedAchievement(QTableWidgetItem *aItem) {
-    if (aItem->column() > c_tableAchievementColumnCount) {
+    if (aItem->column() > c_columnCount) {
         if (aItem->checkState() == Qt::Checked) {
             _fAchievements.setData(aItem->row(), c_filterUniqueValue, false);
         }
@@ -428,14 +428,14 @@ void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
 
 void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aNoValues, QList<CategoryValue> aValues, bool aIsNoValue) {
     if (_currentType == TableType::standart) {
-        setColumnCount(c_tableAchievementColumnCount);
+        setColumnCount(c_columnCount);
         _categoriesColumns.clear();
         addNoValueColumn();
         changeHorizontalTitle(_noValueColumn, aTitle);
         for (int j = 0; j < getRowCount(); ++j) {
             bool isAchievementCheck = true;
             for(int k = 0; k < aNoValues.size(); ++k) {
-                if(itemContent(j, c_tableAchievementColumnAppid)->text() == aNoValues[k]) {
+                if(itemContent(j, c_columnAppid)->text() == aNoValues[k]) {
                     isAchievementCheck = false;
                     break;
                 }
@@ -448,7 +448,7 @@ void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aN
             for (int j = 0; j < getRowCount(); ++j) {
                 bool isAchievementCheck = false;
                 for (auto appid: category.achievements) {
-                    if (itemContent(j, c_tableAchievementColumnAppid)->text() == appid) {
+                    if (itemContent(j, c_columnAppid)->text() == appid) {
                         isAchievementCheck = true;
                         break;
                     }
@@ -526,7 +526,7 @@ bool FormTablesHeaders::addFriendColumn(SProfile &aFriendProfile) {
     int totalNotReach = 0;
     for(int i = 0; i < ui->TableWidgetContent->rowCount(); ++i) {
         for(auto &achievement: achievementsFriends) {
-            if(achievement._apiName == ui->TableWidgetContent->item(i, c_tableAchievementColumnAppid)->text()) {
+            if(achievement._apiName == ui->TableWidgetContent->item(i, c_columnAppid)->text()) {
                 QTableWidgetItem *itemReached;
                 if(achievement._achieved == 1) {
                     itemReached = new QTableWidgetItem(tr("Получено %1").arg(achievement._unlockTime.toString("yyyy.MM.dd hh:mm")));
@@ -672,20 +672,20 @@ bool FormTablesHeaders::pullTable() {
         return true;
     } else {
         setRowCount(1);
-        setItemHorizontalHeader(c_tableAchievementColumnAppid, 1, new QTableWidgetItem(tr("Ошибка")));
-        setVisibleColumn(c_tableAchievementColumnTitle, false);
-        setVisibleColumn(c_tableAchievementColumnDescription, false);
-        setVisibleColumn(c_tableAchievementColumnWorld, false);
-        setVisibleColumn(c_tableAchievementColumnReachedMy, false);
+        setItemHorizontalHeader(c_columnAppid, 1, new QTableWidgetItem(tr("Ошибка")));
+        setVisibleColumn(c_columnTitle, false);
+        setVisibleColumn(c_columnDescription, false);
+        setVisibleColumn(c_columnWorld, false);
+        setVisibleColumn(c_columnReachedMy, false);
         return false;
     }
 }
 
 void FormTablesHeaders::createThread() {
     Threading *loadTable = new Threading(this);
-    loadTable->AddThreadAchievements(c_tableAchievementColumnAppid, c_tableAchievementColumnIndex, c_tableAchievementColumnIcon,  c_tableAchievementColumnTitle,
-                                     c_tableAchievementColumnDescription, c_tableAchievementColumnComment, c_tableAchievementColumnWorld,
-                                     c_tableAchievementColumnReachedMy, c_tableAchievementColumnCount, _achievements, _game->appId());
+    loadTable->AddThreadAchievements(c_columnAppid, c_columnIndex, c_columnIcon,  c_columnTitle,
+                                     c_columnDescription, c_columnComment, c_columnWorld,
+                                     c_columnReachedMy, c_columnCount, _achievements, _game->appId());
     connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
         emit s_achievementsLoaded(progress, row);
     });
@@ -694,7 +694,7 @@ void FormTablesHeaders::createThread() {
 
 void FormTablesHeaders::onTablePulled(int reached, int notReached) {
     QLabel *labelCompareSummary = new QLabel(this);
-    setWidgetHorizontalHeader(1, c_tableAchievementColumnReachedMy, labelCompareSummary);
+    setWidgetHorizontalHeader(1, c_columnReachedMy, labelCompareSummary);
     labelCompareSummary->setText(QString("%1/%2\n%3%").arg(
                                      QString::number(reached),
                                      QString::number(reached + notReached),
@@ -706,7 +706,7 @@ void FormTablesHeaders::onTablePulled(int reached, int notReached) {
     for (auto &achievement: _achievements) {
         //создание картинок
         QLabel *iconGame = new QLabel(this);
-        getTableContent()->setCellWidget(row, c_tableAchievementColumnIcon, iconGame);
+        getTableContent()->setCellWidget(row, c_columnIcon, iconGame);
         if (achievement._displayName != "") {
             iconGame->setPixmap(achievement.getIcon((*_game).appId()));
 
@@ -749,18 +749,18 @@ void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo,
         if (aSolo) {
             if (aCompare) {
                 for (int i = 0; i < getRowCount(); ++i) {
-                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
-                    _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
+                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") > -1);
+                    _fCompare.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") > -1);
                 }
             } else {
                 for (int i = 0; i < getRowCount(); ++i) {
-                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
+                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") > -1);
                 }
             }
         } else {
             if (aCompare) {
                 for (int i = 0; i < getRowCount(); ++i) {
-                    _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") > -1);
+                    _fCompare.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") > -1);
                 }
             }
         }
@@ -770,18 +770,18 @@ void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo,
         if (aSolo) {
             if (aCompare) {
                 for (int i = 0; i < getRowCount(); ++i) {
-                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
-                    _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
+                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") == -1);
+                    _fCompare.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") == -1);
                 }
             } else {
                 for (int i = 0; i < getRowCount(); ++i) {
-                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
+                    _fAchievements.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") == -1);
                 }
             }
         } else {
             if (aCompare) {
                 for (int i = 0; i < getRowCount(); ++i) {
-                    _fCompare.setData(i, c_filterReached, itemContent(i, c_tableAchievementColumnReachedMy)->text().indexOf(".") == -1);
+                    _fCompare.setData(i, c_filterReached, itemContent(i, c_columnReachedMy)->text().indexOf(".") == -1);
                 }
             }
         }
@@ -796,7 +796,7 @@ void FormTablesHeaders::updateFilterWithMyProfile(ReachedType aType, bool aSolo,
 
 void FormTablesHeaders::updateFilterCategoriesColumns(int aCategories) {
     _fAchievements.setCol(aCategories + c_filterColumnCount);
-    _fCompare.setCol(aCategories + c_filterColumnCount + getColumnCount() - c_tableAchievementColumnCount);
+    _fCompare.setCol(aCategories + c_filterColumnCount + getColumnCount() - c_columnCount);
     updateHiddenRows();
 }
 
@@ -850,7 +850,7 @@ void FormTablesHeaders::setGame(SGame &aGame, const QString &aId, SAchievementsP
 void FormTablesHeaders::init() {
     ui->TableWidgetContent->setRowCount(0);
     setColumnCount(0);
-    setColumnCount(c_tableAchievementColumnCount);
+    setColumnCount(c_columnCount);
 
     setType(TableType::standart);
     ui->TableWidgetContent         ->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -870,18 +870,18 @@ void FormTablesHeaders::init() {
 
     SProfiles profileData(_id, false, ProfileUrlType::id);
 
-    changeHorizontalTitle(c_tableAchievementColumnIcon,         "");
-    changeHorizontalTitle(c_tableAchievementColumnTitle,        tr("Название"));
-    changeHorizontalTitle(c_tableAchievementColumnDescription,  tr("Описание"));
-    changeHorizontalTitle(c_tableAchievementColumnWorld,        tr("По миру"));
-    changeHorizontalTitle(c_tableAchievementColumnReachedMy,    profileData[0]._personaName);
-    setColumnWidth(       c_tableAchievementColumnIcon,         65 + 8);
-    setColumnWidth(       c_tableAchievementColumnTitle,        100);
-    setColumnWidth(       c_tableAchievementColumnDescription,  315);
-    setColumnWidth(       c_tableAchievementColumnWorld,        65);
-    setColumnWidth(       c_tableAchievementColumnReachedMy,    80);
+    changeHorizontalTitle(c_columnIcon,         "");
+    changeHorizontalTitle(c_columnTitle,        tr("Название"));
+    changeHorizontalTitle(c_columnDescription,  tr("Описание"));
+    changeHorizontalTitle(c_columnWorld,        tr("По миру"));
+    changeHorizontalTitle(c_columnReachedMy,    profileData[0]._personaName);
+    setColumnWidth(       c_columnIcon,         65 + 8);
+    setColumnWidth(       c_columnTitle,        100);
+    setColumnWidth(       c_columnDescription,  315);
+    setColumnWidth(       c_columnWorld,        65);
+    setColumnWidth(       c_columnReachedMy,    80);
 
-    setVisibleColumn(     c_tableAchievementColumnAppid,        false);
+    setVisibleColumn(     c_columnAppid,        false);
 
     _achievements   .set(SAchievementsPercentage(QString::number((*_game).appId())))
                     .set(SAchievementsGlobal(QString::number((*_game).appId())));
@@ -917,21 +917,21 @@ void FormTablesHeaders::updateFilterTextAchievement(const QString &aNewText, boo
         if (aCompare) {
             for (int i = 0; i < getRowCount(); ++i) {
                 _fAchievements.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
-                                                       ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
+                                                       ||(itemContent(i, c_columnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
                 _fCompare.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
-                                                    ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
+                                                    ||(itemContent(i, c_columnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
             }
         } else {
             for (int i = 0; i < getRowCount(); ++i) {
                 _fAchievements.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
-                                                       ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
+                                                       ||(itemContent(i, c_columnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
             }
         }
     } else {
         if (aCompare) {
             for (int i = 0; i < getRowCount(); ++i) {
                 _fCompare.setData(i, c_filterName, ((itemContent(i, c_filterName + 2)->text().toLower().indexOf(aNewText.toLower()) > -1)
-                                                    ||(itemContent(i, c_tableAchievementColumnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
+                                                    ||(itemContent(i, c_columnDescription)->text().toLower().indexOf(aNewText.toLower()) > -1)));
             }
         }
     }
@@ -949,7 +949,7 @@ void FormTablesHeaders::updateFilterCategory(int aCategoryIndex, bool aClear, QL
             _fAchievements.setData(i, c_filterEndConstValues + aCategoryIndex, false);
             _fCompare.setData(i, c_filterEndConstValues + aCategoryIndex, false);
             for (auto &achievementName: aAchievementNames) {
-                if (itemContent(i, c_tableAchievementColumnAppid)->text() == achievementName) {
+                if (itemContent(i, c_columnAppid)->text() == achievementName) {
                     _fAchievements.setData(i, c_filterEndConstValues + aCategoryIndex, true);
                     _fCompare.setData(i, c_filterEndConstValues + aCategoryIndex, true);
                     break;

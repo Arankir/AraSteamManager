@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCompareProfileFilter_t {
     QByteArrayData data[12];
-    char stringdata0[135];
+    char stringdata0[136];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,13 +43,13 @@ QT_MOC_LITERAL(7, 83, 8), // "setIcons"
 QT_MOC_LITERAL(8, 92, 11), // "changeEvent"
 QT_MOC_LITERAL(9, 104, 7), // "QEvent*"
 QT_MOC_LITERAL(10, 112, 5), // "event"
-QT_MOC_LITERAL(11, 118, 16) // "radioButtonClick"
+QT_MOC_LITERAL(11, 118, 17) // "slideValueChanged"
 
     },
     "FormCompareProfileFilter\0s_radioButtonChange\0"
     "\0name\0ReachedType\0type\0updateSettings\0"
     "setIcons\0changeEvent\0QEvent*\0event\0"
-    "radioButtonClick"
+    "slideValueChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -97,7 +97,7 @@ void FormCompareProfileFilter::qt_static_metacall(QObject *_o, QMetaObject::Call
         case 1: _t->updateSettings(); break;
         case 2: _t->setIcons(); break;
         case 3: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 4: _t->radioButtonClick(); break;
+        case 4: _t->slideValueChanged(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

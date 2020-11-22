@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievementsCategoriesEdit_t {
     QByteArrayData data[42];
-    char stringdata0[850];
+    char stringdata0[848];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -65,15 +65,15 @@ QT_MOC_LITERAL(29, 658, 18), // "formCategoryDelete"
 QT_MOC_LITERAL(30, 677, 4), // "aPos"
 QT_MOC_LITERAL(31, 682, 8), // "setIcons"
 QT_MOC_LITERAL(32, 691, 19), // "createValueCategory"
-QT_MOC_LITERAL(33, 711, 20), // "FormCategoryValue_2*"
-QT_MOC_LITERAL(34, 732, 24), // "updateUniqueAchievements"
-QT_MOC_LITERAL(35, 757, 4), // "init"
-QT_MOC_LITERAL(36, 762, 13), // "setUniqueMode"
-QT_MOC_LITERAL(37, 776, 9), // "aIsUnique"
-QT_MOC_LITERAL(38, 786, 21), // "createCategoryNoValue"
-QT_MOC_LITERAL(39, 808, 14), // "aCategoryIndex"
-QT_MOC_LITERAL(40, 823, 6), // "aTitle"
-QT_MOC_LITERAL(41, 830, 19) // "createCategoryValue"
+QT_MOC_LITERAL(33, 711, 18), // "FormCategoryValue*"
+QT_MOC_LITERAL(34, 730, 24), // "updateUniqueAchievements"
+QT_MOC_LITERAL(35, 755, 4), // "init"
+QT_MOC_LITERAL(36, 760, 13), // "setUniqueMode"
+QT_MOC_LITERAL(37, 774, 9), // "aIsUnique"
+QT_MOC_LITERAL(38, 784, 21), // "createCategoryNoValue"
+QT_MOC_LITERAL(39, 806, 14), // "aCategoryIndex"
+QT_MOC_LITERAL(40, 821, 6), // "aTitle"
+QT_MOC_LITERAL(41, 828, 19) // "createCategoryValue"
 
     },
     "FormAchievementsCategoriesEdit\0"
@@ -96,7 +96,7 @@ QT_MOC_LITERAL(41, 830, 19) // "createCategoryValue"
     "formCategoryValueUnselectVisible\0"
     "formCategoryValueDelete\0formCategoryDelete\0"
     "aPos\0setIcons\0createValueCategory\0"
-    "FormCategoryValue_2*\0updateUniqueAchievements\0"
+    "FormCategoryValue*\0updateUniqueAchievements\0"
     "init\0setUniqueMode\0aIsUnique\0"
     "createCategoryNoValue\0aCategoryIndex\0"
     "aTitle\0createCategoryValue"
@@ -217,8 +217,8 @@ void FormAchievementsCategoriesEdit::qt_static_metacall(QObject *_o, QMetaObject
         case 21: _t->formCategoryValueDelete(); break;
         case 22: _t->formCategoryDelete((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 23: _t->setIcons(); break;
-        case 24: { FormCategoryValue_2* _r = _t->createValueCategory();
-            if (_a[0]) *reinterpret_cast< FormCategoryValue_2**>(_a[0]) = std::move(_r); }  break;
+        case 24: { FormCategoryValue* _r = _t->createValueCategory();
+            if (_a[0]) *reinterpret_cast< FormCategoryValue**>(_a[0]) = std::move(_r); }  break;
         case 25: _t->updateUniqueAchievements(); break;
         case 26: _t->init(); break;
         case 27: _t->setUniqueMode((*reinterpret_cast< bool(*)>(_a[1]))); break;

@@ -1,62 +1,59 @@
-#ifndef FORMCATEGORYVALUE_H
-#define FORMCATEGORYVALUE_H
+#ifndef FORMCATEGORYVALUE_2_H
+#define FORMCATEGORYVALUE_2_H
 
 #include <QWidget>
+#include <QStandardItemModel>
+#include <QMenu>
+#include <QAction>
+#include <QDebug>
 #include "class/settings.h"
-
-enum class EnabledUpDown {
-    none,
-    up,
-    down,
-    both
-};
+#include "class/steamapi/Sachievements.h"
 
 namespace Ui {
 class FormCategoryValue;
 }
 
-class FormCategoryValue: public QWidget {
+class FormCategoryValue : public QWidget
+{
     Q_OBJECT
 
 public:
-    explicit FormCategoryValue(int position, QWidget *parent = nullptr);
+    explicit FormCategoryValue(QWidget *parent = nullptr);
     ~FormCategoryValue();
-    void setColumnVisible(bool visible);
-    void setPosition(int pos);
-    void setTitle(QString);
-    void setEnabledUpDown(EnabledUpDown firstlast);
-    int getPosition();
-    QString getTitle();
-    bool getVisible();
 
-public slots:
-    void updateSettings();
-    void setIcons();
+    void setTitle(const QString &title);
+    void setAchievements(QList<SAchievement> &achievements, const int &gameId);
+
+    QString getTitle() const;
+    QList<QString> getAchievements() const;
 
 signals:
-    void s_valuechange(int pos, QString value);
-    void s_visiblechange(int pos, bool visible);
-    void s_positionchange(int pos, int posnew);
-    void s_selectchange(int pos, bool select);
-    void s_deleting(int pos);
-    void s_reverse(int pos);
+    void s_goFirst();
+    void s_goBack();
+    void s_goNext();
+    void s_goLast();
+    void s_deleteValue();
+    void s_deleteAchievement();
 
 private slots:
-    void changeEvent(QEvent *event);
-    void checkBoxVisible_StateChanged(int arg1);
-    void buttonUp_Clicked();
-    void buttonDown_Clicked();
-    void buttonSelect_Clicked();
-    void buttonUnSelect_Clicked();
-    void buttonDelete_Clicked();
-    void lineEditTitle_TextChanged(const QString &arg1);
-    void buttonReverse_Clicked();
+    void on_ButtonDelete_clicked();
+
+    void on_ButtonFirst_clicked();
+    void on_ButtonBack_clicked();
+    void on_ButtonNext_clicked();
+    void on_ButtonLast_clicked();
+
+    void on_ButtonAddVisible_clicked();
+    void on_ButtonRemoveVisible_clicked();
+
+    void on_ButtonReverse_clicked();
+
+    void setIcons();
+    QMenu *createMenu(QModelIndex aIndex);
 
 private:
     Ui::FormCategoryValue *ui;
-    int _position = 0;
-    EnabledUpDown _isFirstLast = EnabledUpDown::none;
+    QString _currentAchievement = "";
 };
 
-
-#endif // FORMCATEGORYVALUE_H
+#endif // FORMCATEGORYVALUE_2_H

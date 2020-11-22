@@ -69,7 +69,7 @@ signals:
 private slots:
     void changeEvent(QEvent *event);
     void closeEvent(QCloseEvent*);
-    void initComponents(SAchievementsPlayer &player);
+    void initComponents();
     void retranslate();
     void setIcons();
 
@@ -125,7 +125,6 @@ private:
     Favorites _favorites;
 
     //используются на форме
-    FormCompareProfileFilter *_filterMyProfile;
     QFormLayout *_categoryValuesLayout;
     FormTablesHeaders *_tableAchievements;
 

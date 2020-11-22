@@ -11,9 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "subwidget/qradiobuttonwithdata.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -21,40 +23,59 @@ class Ui_FormCompareProfileFilter
 {
 public:
     QVBoxLayout *verticalLayout;
-    QRadioButtonWithData *RadioButtonAll;
-    QRadioButtonWithData *RadioButtonReached;
-    QRadioButtonWithData *RadioButtonNotReached;
+    QHBoxLayout *horizontalLayout;
+    QLabel *LabelReached;
+    QLabel *LabelAll;
+    QLabel *LabelNotReached;
+    QSlider *Slider;
 
     void setupUi(QWidget *FormCompareProfileFilter)
     {
         if (FormCompareProfileFilter->objectName().isEmpty())
             FormCompareProfileFilter->setObjectName(QString::fromUtf8("FormCompareProfileFilter"));
-        FormCompareProfileFilter->resize(129, 167);
+        FormCompareProfileFilter->resize(192, 93);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormCompareProfileFilter->setFont(font);
         verticalLayout = new QVBoxLayout(FormCompareProfileFilter);
-        verticalLayout->setSpacing(1);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(1, 1, 1, 1);
-        RadioButtonAll = new QRadioButtonWithData(FormCompareProfileFilter);
-        RadioButtonAll->setObjectName(QString::fromUtf8("RadioButtonAll"));
-        RadioButtonAll->setText(QString::fromUtf8(""));
-        RadioButtonAll->setChecked(true);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        LabelReached = new QLabel(FormCompareProfileFilter);
+        LabelReached->setObjectName(QString::fromUtf8("LabelReached"));
+        LabelReached->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
-        verticalLayout->addWidget(RadioButtonAll);
+        horizontalLayout->addWidget(LabelReached);
 
-        RadioButtonReached = new QRadioButtonWithData(FormCompareProfileFilter);
-        RadioButtonReached->setObjectName(QString::fromUtf8("RadioButtonReached"));
-        RadioButtonReached->setText(QString::fromUtf8(""));
+        LabelAll = new QLabel(FormCompareProfileFilter);
+        LabelAll->setObjectName(QString::fromUtf8("LabelAll"));
+        LabelAll->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(RadioButtonReached);
+        horizontalLayout->addWidget(LabelAll);
 
-        RadioButtonNotReached = new QRadioButtonWithData(FormCompareProfileFilter);
-        RadioButtonNotReached->setObjectName(QString::fromUtf8("RadioButtonNotReached"));
-        RadioButtonNotReached->setText(QString::fromUtf8(""));
+        LabelNotReached = new QLabel(FormCompareProfileFilter);
+        LabelNotReached->setObjectName(QString::fromUtf8("LabelNotReached"));
+        LabelNotReached->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        verticalLayout->addWidget(RadioButtonNotReached);
+        horizontalLayout->addWidget(LabelNotReached);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        Slider = new QSlider(FormCompareProfileFilter);
+        Slider->setObjectName(QString::fromUtf8("Slider"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(Slider->sizePolicy().hasHeightForWidth());
+        Slider->setSizePolicy(sizePolicy);
+        Slider->setMaximum(2);
+        Slider->setPageStep(1);
+        Slider->setValue(1);
+        Slider->setSliderPosition(1);
+        Slider->setOrientation(Qt::Horizontal);
+
+        verticalLayout->addWidget(Slider);
 
 
         retranslateUi(FormCompareProfileFilter);
@@ -65,6 +86,18 @@ public:
     void retranslateUi(QWidget *FormCompareProfileFilter)
     {
         FormCompareProfileFilter->setWindowTitle(QCoreApplication::translate("FormCompareProfileFilter", "Form", nullptr));
+#if QT_CONFIG(tooltip)
+        LabelReached->setToolTip(QCoreApplication::translate("FormCompareProfileFilter", "\320\237\320\276\320\273\321\203\321\207\320\265\320\275\320\276", nullptr));
+#endif // QT_CONFIG(tooltip)
+        LabelReached->setText(QString());
+#if QT_CONFIG(tooltip)
+        LabelAll->setToolTip(QCoreApplication::translate("FormCompareProfileFilter", "\320\222\321\201\320\265", nullptr));
+#endif // QT_CONFIG(tooltip)
+        LabelAll->setText(QString());
+#if QT_CONFIG(tooltip)
+        LabelNotReached->setToolTip(QCoreApplication::translate("FormCompareProfileFilter", "\320\235\320\265 \320\277\320\276\320\273\321\203\321\207\320\265\320\275\320\276", nullptr));
+#endif // QT_CONFIG(tooltip)
+        LabelNotReached->setText(QString());
     } // retranslateUi
 
 };

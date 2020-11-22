@@ -1,7 +1,7 @@
 debug/formachievements.o
 debug/formachievementscategoriesedit.o
 debug/formachievementsfriendscompare.o
-debug/formcategoryvalue_2.o
+debug/formcategoryvalue.o
 debug/formcompareprofilefilter.o
 debug/formtablesheaders.o
 debug/formfavorites.o
@@ -41,7 +41,6 @@ debug/formgroupsgamesinteractions.o
 debug/frameless.o
 debug/main.o
 debug/mainwindow.o
-debug/freezerowstable.o
 debug/qbuttonwithdata.o
 debug/qcheckboxwithdata.o
 debug/qcomboboxwithdata.o
@@ -51,7 +50,7 @@ debug/qrc_lang.o
 debug/moc_formachievements.o
 debug/moc_formachievementscategoriesedit.o
 debug/moc_formachievementsfriendscompare.o
-debug/moc_formcategoryvalue_2.o
+debug/moc_formcategoryvalue.o
 debug/moc_formcompareprofilefilter.o
 debug/moc_formtablesheaders.o
 debug/moc_formfavorites.o
@@ -84,4 +83,3 @@ debug/moc_formcontainerachievements.o
 debug/moc_formgroupsgamesinteractions.o
 debug/moc_frameless.o
 debug/moc_mainwindow.o
-debug/moc_freezerowstable.o

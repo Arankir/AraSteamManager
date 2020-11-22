@@ -1,110 +1,160 @@
 #include "formcategoryvalue.h"
-#include "ui_formcategoryvalue.h"
+#include "ui_formcategoryvalue_2.h"
 
-FormCategoryValue::FormCategoryValue(int aPos, QWidget *aParent): QWidget(aParent), ui(new Ui::FormCategoryValue), _position(aPos) {
+//Добавить проверку на то, что такая ачивка уже есть  и  убрать удаление элемента если кидаешь его на другий элемент
+FormCategoryValue::FormCategoryValue(QWidget *parent): QWidget(parent), ui(new Ui::FormCategoryValue) {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    connect(ui->ButtonUp,        &QPushButton::clicked,     this, &FormCategoryValue::buttonUp_Clicked);
-    connect(ui->ButtonDown,      &QPushButton::clicked,     this, &FormCategoryValue::buttonDown_Clicked);
-    connect(ui->ButtonSelect,    &QPushButton::clicked,     this, &FormCategoryValue::buttonSelect_Clicked);
-    connect(ui->ButtonUnSelect,  &QPushButton::clicked,     this, &FormCategoryValue::buttonUnSelect_Clicked);
-    connect(ui->ButtonDelete,    &QPushButton::clicked,     this, &FormCategoryValue::buttonDelete_Clicked);
-    connect(ui->ButtonReverse,   &QPushButton::clicked,     this, &FormCategoryValue::buttonReverse_Clicked);
-    connect(ui->CheckBoxVisible, &QCheckBox::stateChanged,  this, &FormCategoryValue::checkBoxVisible_StateChanged);
-    connect(ui->LineEditTitle,   &QLineEdit::textChanged,   this, &FormCategoryValue::lineEditTitle_TextChanged);
-    ui->LabelPosition->setText(QString::number(_position + 1));
+    ui->ListViewValue->setModel(new QStandardItemModel());
+    ui->ListViewValue->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    ui->ListViewValue->setDefaultDropAction(Qt::DropAction::MoveAction);
+    ui->ListViewValue->setDragEnabled(true);
+    ui->ListViewValue->setAcceptDrops(true);
+    ui->ListViewValue->setDropIndicatorShown(true);
+    ui->ListViewValue->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->ListViewValue->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->ListViewValue->setWordWrap(true);
 
-    ui->ButtonReverse->setVisible(false);
-    ui->ButtonUp->setVisible(false);
-    ui->ButtonDown->setVisible(false);
-    ui->ButtonSelect->setVisible(false);
-    ui->ButtonUnSelect->setVisible(false);
-    ui->ButtonDelete->setVisible(false);
+    connect(ui->ListViewValue, &QListView::customContextMenuRequested, this, [=](QPoint pos) {
+        QModelIndex index = ui->ListViewValue->currentIndex();
+        if (index.isValid()) {
+            QMenu *menu = createMenu(index);
+            menu->popup(ui->ListViewValue->viewport()->mapToGlobal(pos));
+        }
+    });
+
     setIcons();
-}
-
-void FormCategoryValue::updateSettings() {
-    setIcons();
-}
-
-void FormCategoryValue::setIcons() {
-    ui->ButtonUp->setIcon(QIcon(Images::up()));
-    ui->ButtonDown->setIcon(QIcon(Images::down()));
-    ui->ButtonSelect->setIcon(QIcon(Images::checkVisible()));
-    ui->ButtonUnSelect->setIcon(QIcon(Images::uncheckVisible()));
-    ui->ButtonDelete->setIcon(QIcon(Images::deleteIcon()));
-    ui->ButtonReverse->setIcon(QIcon(Images::reverse()));
 }
 
 FormCategoryValue::~FormCategoryValue() {
     delete ui;
 }
 
-void FormCategoryValue::changeEvent(QEvent *event) {
-    if(event->type() == QEvent::LanguageChange) {
-        ui->retranslateUi(this);
-    }
-}
-
-void FormCategoryValue::checkBoxVisible_StateChanged(int arg1) {
-    emit s_visiblechange(_position, arg1 == 2);
-}
-
-void FormCategoryValue::buttonUp_Clicked() {
-    emit s_positionchange(_position, _position - 1);
-}
-
-void FormCategoryValue::buttonDown_Clicked() {
-    emit s_positionchange(_position, _position + 1);
-}
-
-void FormCategoryValue::buttonSelect_Clicked() {
-    emit s_selectchange(_position, true);
-}
-
-void FormCategoryValue::buttonUnSelect_Clicked() {
-    emit s_selectchange(_position, false);
-}
-
-void FormCategoryValue::buttonDelete_Clicked() {
-    emit s_deleting(_position);
-}
-
-void FormCategoryValue::lineEditTitle_TextChanged(const QString &arg1) {
-    emit s_valuechange(_position, arg1);
-}
-
-void FormCategoryValue::setColumnVisible(bool aVisible) {
-    ui->CheckBoxVisible->setChecked(aVisible);
-}
-
-void FormCategoryValue::setEnabledUpDown(EnabledUpDown aFirstLast) {
-    _isFirstLast = aFirstLast;
-    ui->ButtonUp->setEnabled(!((_isFirstLast == EnabledUpDown::none) || (_isFirstLast == EnabledUpDown::down)));
-    ui->ButtonDown->setEnabled(!((_isFirstLast == EnabledUpDown::none) || (_isFirstLast == EnabledUpDown::up)));
-}
-
-int FormCategoryValue::getPosition() {
-    return _position;
-}
-
-void FormCategoryValue::setPosition(int aPos) {
-    _position = aPos;
-    ui->LabelPosition->setText(QString::number(_position + 1));
-}
-
-void FormCategoryValue::setTitle(QString aTitle) {
+void FormCategoryValue::setTitle(const QString &aTitle) {
     ui->LineEditTitle->setText(aTitle);
 }
 
-QString FormCategoryValue::getTitle() {
+void FormCategoryValue::setAchievements(QList<SAchievement> &aAchievements, const int &aGameId) {
+    int row = 0;
+    QFont font(Settings::getFontDefaultName(), 9);
+    QStandardItemModel *model = new QStandardItemModel();
+    for (auto &achievement: aAchievements) {
+        QStandardItem *item = new QStandardItem();
+        item->setData(achievement.getIcon(aGameId).scaled(32, 32), Qt::DecorationRole);
+        item->setText(achievement._displayName);
+        item->setData(achievement._description, Qt::ToolTipRole);
+        item->setData(achievement._apiName, Qt::WhatsThisRole);
+        item->setFont(font);
+        model->setItem(row, item);
+        ++row;
+    }
+    ui->ListViewValue->setModel(model);
+}
+
+void FormCategoryValue::setIcons() {
+    ui->ButtonReverse       ->setIcon(QIcon(Images::reverse()));
+    ui->ButtonFirst         ->setIcon(QIcon(Images::first()));
+    ui->ButtonBack          ->setIcon(QIcon(Images::back()));
+    ui->ButtonNext          ->setIcon(QIcon(Images::next()));
+    ui->ButtonLast          ->setIcon(QIcon(Images::last()));
+    ui->ButtonAddVisible    ->setIcon(QIcon(Images::checkVisible()));
+    ui->ButtonRemoveVisible ->setIcon(QIcon(Images::uncheckVisible()));
+    ui->ButtonDelete        ->setIcon(QIcon(Images::deleteIcon()));
+}
+
+QString FormCategoryValue::getTitle() const {
     return ui->LineEditTitle->text();
 }
 
-bool FormCategoryValue::getVisible(){
-    return ui->CheckBoxVisible->isChecked();
+QList<QString> FormCategoryValue::getAchievements() const {
+    QList<QString> list;
+    for(int i = 0; i < ui->ListViewValue->model()->rowCount(); ++i) {
+        auto index = ui->ListViewValue->model()->index(i, 0);
+        QString appId = ui->ListViewValue->model()->data(index, Qt::WhatsThisRole).toString();
+        if (!list.contains(appId)) {
+            list.append(appId);
+        }
+    }
+    return list;
 }
 
-void FormCategoryValue::buttonReverse_Clicked() {
-    emit s_reverse(_position);
+void FormCategoryValue::on_ButtonDelete_clicked() {
+    emit s_deleteValue();
+}
+
+void FormCategoryValue::on_ButtonFirst_clicked() {
+    emit s_goFirst();
+}
+
+void FormCategoryValue::on_ButtonBack_clicked() {
+    emit s_goBack();
+}
+
+void FormCategoryValue::on_ButtonNext_clicked() {
+    emit s_goNext();
+}
+
+void FormCategoryValue::on_ButtonLast_clicked() {
+    emit s_goLast();
+}
+
+void FormCategoryValue::on_ButtonAddVisible_clicked() {
+
+}
+
+void FormCategoryValue::on_ButtonRemoveVisible_clicked() {
+
+}
+
+void FormCategoryValue::on_ButtonReverse_clicked() {
+
+}
+
+QMenu *FormCategoryValue::createMenu(QModelIndex aIndex) {
+    Q_UNUSED(aIndex);
+    //Кнопка удаления достижения
+    QAction *actionDeleteAchievement = new QAction(tr("Удалить достижение"), this);
+    //actionAchievements->setIcon(QIcon(Images::achievement()));
+
+    //Кнопка удаления всех достижений
+    QAction *actionDeleteAllAchievements = new QAction(tr("Удалить все достижения"), this);
+    //actionDeleteAllAchievements->setIcon(QIcon(Images::deleteAll()));
+
+    //Кнопка перемещения значения в начало
+    QAction *actionMoveFirst = new QAction(tr("Переместить значение в начало"), this);
+    actionMoveFirst->setIcon(QIcon(Images::first()));
+
+    //Кнопка перемещения значения в начало
+    QAction *actionMoveBack = new QAction(tr("Переместить значение назад"), this);
+    actionMoveBack->setIcon(QIcon(Images::back()));
+
+    //Кнопка перемещения значения в начало
+    QAction *actionMoveNext = new QAction(tr("Переместить значение вперед"), this);
+    actionMoveNext->setIcon(QIcon(Images::next()));
+
+    //Кнопка перемещения значения в начало
+    QAction *actionMoveLast = new QAction(tr("Переместить значение в конец"), this);
+    actionMoveLast->setIcon(QIcon(Images::last()));
+
+    //Кнопка удаления значения
+    QAction *actionDelete = new QAction(tr("Удалить значение"), this);
+    actionDelete->setIcon(QIcon(Images::deleteIcon()));
+
+    QMenu *menu = new QMenu(this);
+    menu->addAction (actionDeleteAchievement);
+    menu->addAction (actionDeleteAllAchievements);
+    menu->addAction (actionMoveFirst);
+    menu->addAction (actionMoveBack);
+    menu->addAction (actionMoveNext);
+    menu->addAction (actionMoveLast);
+    menu->addAction (actionDelete);
+
+    //connect (actionDeleteAchievement,       &QAction::triggered,    this,   &FormCategoryValue_2::buttonAchievements_Clicked);
+    //connect (actionDeleteAllAchievements,   &QAction::triggered,    this,   &FormCategoryValue_2::buttonFavorite_Clicked);
+    connect (actionMoveFirst,               &QAction::triggered,    this,   &FormCategoryValue::on_ButtonFirst_clicked);
+    connect (actionMoveBack,                &QAction::triggered,    this,   &FormCategoryValue::on_ButtonBack_clicked);
+    connect (actionMoveNext,                &QAction::triggered,    this,   &FormCategoryValue::on_ButtonNext_clicked);
+    connect (actionMoveLast,                &QAction::triggered,    this,   &FormCategoryValue::on_ButtonLast_clicked);
+    connect (actionDelete,                  &QAction::triggered,    this,   &FormCategoryValue::on_ButtonDelete_clicked);
+
+    return menu;
 }

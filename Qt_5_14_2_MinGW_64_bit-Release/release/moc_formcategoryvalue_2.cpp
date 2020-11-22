@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoryValue_2_t {
-    QByteArrayData data[3];
-    char stringdata0[45];
+    QByteArrayData data[21];
+    char stringdata0[335];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,12 +33,37 @@ struct qt_meta_stringdata_FormCategoryValue_2_t {
 static const qt_meta_stringdata_FormCategoryValue_2_t qt_meta_stringdata_FormCategoryValue_2 = {
     {
 QT_MOC_LITERAL(0, 0, 19), // "FormCategoryValue_2"
-QT_MOC_LITERAL(1, 20, 23), // "on_ButtonDelete_clicked"
-QT_MOC_LITERAL(2, 44, 0) // ""
+QT_MOC_LITERAL(1, 20, 9), // "s_goFirst"
+QT_MOC_LITERAL(2, 30, 0), // ""
+QT_MOC_LITERAL(3, 31, 8), // "s_goBack"
+QT_MOC_LITERAL(4, 40, 8), // "s_goNext"
+QT_MOC_LITERAL(5, 49, 8), // "s_goLast"
+QT_MOC_LITERAL(6, 58, 13), // "s_deleteValue"
+QT_MOC_LITERAL(7, 72, 19), // "s_deleteAchievement"
+QT_MOC_LITERAL(8, 92, 23), // "on_ButtonDelete_clicked"
+QT_MOC_LITERAL(9, 116, 22), // "on_ButtonFirst_clicked"
+QT_MOC_LITERAL(10, 139, 21), // "on_ButtonBack_clicked"
+QT_MOC_LITERAL(11, 161, 21), // "on_ButtonNext_clicked"
+QT_MOC_LITERAL(12, 183, 21), // "on_ButtonLast_clicked"
+QT_MOC_LITERAL(13, 205, 27), // "on_ButtonAddVisible_clicked"
+QT_MOC_LITERAL(14, 233, 30), // "on_ButtonRemoveVisible_clicked"
+QT_MOC_LITERAL(15, 264, 24), // "on_ButtonReverse_clicked"
+QT_MOC_LITERAL(16, 289, 8), // "setIcons"
+QT_MOC_LITERAL(17, 298, 10), // "createMenu"
+QT_MOC_LITERAL(18, 309, 6), // "QMenu*"
+QT_MOC_LITERAL(19, 316, 11), // "QModelIndex"
+QT_MOC_LITERAL(20, 328, 6) // "aIndex"
 
     },
-    "FormCategoryValue_2\0on_ButtonDelete_clicked\0"
-    ""
+    "FormCategoryValue_2\0s_goFirst\0\0s_goBack\0"
+    "s_goNext\0s_goLast\0s_deleteValue\0"
+    "s_deleteAchievement\0on_ButtonDelete_clicked\0"
+    "on_ButtonFirst_clicked\0on_ButtonBack_clicked\0"
+    "on_ButtonNext_clicked\0on_ButtonLast_clicked\0"
+    "on_ButtonAddVisible_clicked\0"
+    "on_ButtonRemoveVisible_clicked\0"
+    "on_ButtonReverse_clicked\0setIcons\0"
+    "createMenu\0QMenu*\0QModelIndex\0aIndex"
 };
 #undef QT_MOC_LITERAL
 
@@ -48,18 +73,52 @@ static const uint qt_meta_data_FormCategoryValue_2[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       6,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    0,   94,    2, 0x06 /* Public */,
+       3,    0,   95,    2, 0x06 /* Public */,
+       4,    0,   96,    2, 0x06 /* Public */,
+       5,    0,   97,    2, 0x06 /* Public */,
+       6,    0,   98,    2, 0x06 /* Public */,
+       7,    0,   99,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x08 /* Private */,
+       8,    0,  100,    2, 0x08 /* Private */,
+       9,    0,  101,    2, 0x08 /* Private */,
+      10,    0,  102,    2, 0x08 /* Private */,
+      11,    0,  103,    2, 0x08 /* Private */,
+      12,    0,  104,    2, 0x08 /* Private */,
+      13,    0,  105,    2, 0x08 /* Private */,
+      14,    0,  106,    2, 0x08 /* Private */,
+      15,    0,  107,    2, 0x08 /* Private */,
+      16,    0,  108,    2, 0x08 /* Private */,
+      17,    1,  109,    2, 0x08 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    0x80000000 | 18, 0x80000000 | 19,   20,
 
        0        // eod
 };
@@ -70,11 +129,70 @@ void FormCategoryValue_2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         auto *_t = static_cast<FormCategoryValue_2 *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_ButtonDelete_clicked(); break;
+        case 0: _t->s_goFirst(); break;
+        case 1: _t->s_goBack(); break;
+        case 2: _t->s_goNext(); break;
+        case 3: _t->s_goLast(); break;
+        case 4: _t->s_deleteValue(); break;
+        case 5: _t->s_deleteAchievement(); break;
+        case 6: _t->on_ButtonDelete_clicked(); break;
+        case 7: _t->on_ButtonFirst_clicked(); break;
+        case 8: _t->on_ButtonBack_clicked(); break;
+        case 9: _t->on_ButtonNext_clicked(); break;
+        case 10: _t->on_ButtonLast_clicked(); break;
+        case 11: _t->on_ButtonAddVisible_clicked(); break;
+        case 12: _t->on_ButtonRemoveVisible_clicked(); break;
+        case 13: _t->on_ButtonReverse_clicked(); break;
+        case 14: _t->setIcons(); break;
+        case 15: { QMenu* _r = _t->createMenu((*reinterpret_cast< QModelIndex(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (FormCategoryValue_2::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue_2::s_goFirst)) {
+                *result = 0;
+                return;
+            }
+        }
+        {
+            using _t = void (FormCategoryValue_2::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue_2::s_goBack)) {
+                *result = 1;
+                return;
+            }
+        }
+        {
+            using _t = void (FormCategoryValue_2::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue_2::s_goNext)) {
+                *result = 2;
+                return;
+            }
+        }
+        {
+            using _t = void (FormCategoryValue_2::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue_2::s_goLast)) {
+                *result = 3;
+                return;
+            }
+        }
+        {
+            using _t = void (FormCategoryValue_2::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue_2::s_deleteValue)) {
+                *result = 4;
+                return;
+            }
+        }
+        {
+            using _t = void (FormCategoryValue_2::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoryValue_2::s_deleteAchievement)) {
+                *result = 5;
+                return;
+            }
+        }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormCategoryValue_2::staticMetaObject = { {
@@ -106,15 +224,51 @@ int FormCategoryValue_2::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 16)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 16;
     }
     return _id;
+}
+
+// SIGNAL 0
+void FormCategoryValue_2::s_goFirst()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void FormCategoryValue_2::s_goBack()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void FormCategoryValue_2::s_goNext()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+}
+
+// SIGNAL 3
+void FormCategoryValue_2::s_goLast()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void FormCategoryValue_2::s_deleteValue()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
+}
+
+// SIGNAL 5
+void FormCategoryValue_2::s_deleteAchievement()
+{
+    QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

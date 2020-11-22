@@ -132,7 +132,7 @@ public:
 };
 
 namespace Ui {
-    class FormCategoryValue_2: public Ui_FormCategoryValue_2 {};
+    class FormCategoryValue: public Ui_FormCategoryValue_2 {};
 } // namespace Ui
 
 QT_END_NAMESPACE

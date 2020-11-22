@@ -6,6 +6,13 @@
 #include "subwidget/qradiobuttonwithdata.h"
 #include <QDebug>
 
+enum class ReachedType {
+    reached = 0,
+    all = 1,
+    notReached = 2,
+    none
+};
+
 namespace Ui {
 class FormCompareProfileFilter;
 }
@@ -15,11 +22,9 @@ class FormCompareProfileFilter: public QWidget {
 
 public:
     explicit FormCompareProfileFilter(QWidget *parent = nullptr);
-    explicit FormCompareProfileFilter(const QString &all, const QString &reached, const QString &notReached, QWidget *parent = nullptr);
     ~FormCompareProfileFilter();
     void setName(const QString &name) {_name = name;}
     void setIndex(const QString &index) {_index = index;}
-    void setTitles(const QString &titleAll, const QString &titleReached, const QString &titleNotReached);
     QString getName() {return _name;}
     QString getIndex() {return _index;}
     void setType(ReachedType);
@@ -33,11 +38,10 @@ signals:
 
 private slots:
     void changeEvent(QEvent *event);
-    void radioButtonClick();
+    void slideValueChanged();
 
 private:
     Ui::FormCompareProfileFilter *ui;
-    //Settings _setting;
     QString _name;
     QString _index;
 };

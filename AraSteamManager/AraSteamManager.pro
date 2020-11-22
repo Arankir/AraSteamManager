@@ -28,7 +28,7 @@ SOURCES += \
     AchievementsSubForms/formachievements.cpp \
     AchievementsSubForms/formachievementscategoriesedit.cpp \
     AchievementsSubForms/formachievementsfriendscompare.cpp \
-    AchievementsSubForms/formcategoryvalue_2.cpp \
+    AchievementsSubForms/formcategoryvalue.cpp \
     AchievementsSubForms/formcompareprofilefilter.cpp \
     AchievementsSubForms/formtablesheaders.cpp \
     MainSubForms/formfavorites.cpp \
@@ -68,7 +68,6 @@ SOURCES += \
     frameless.cpp \
         main.cpp \
         mainwindow.cpp \
-    subwidget/freezerowstable.cpp \
     subwidget/qbuttonwithdata.cpp \
     subwidget/qcheckboxwithdata.cpp \
     subwidget/qcomboboxwithdata.cpp \
@@ -78,7 +77,7 @@ HEADERS += \
     AchievementsSubForms/formachievements.h \
     AchievementsSubForms/formachievementscategoriesedit.h \
     AchievementsSubForms/formachievementsfriendscompare.h \
-    AchievementsSubForms/formcategoryvalue_2.h \
+    AchievementsSubForms/formcategoryvalue.h \
     AchievementsSubForms/formcompareprofilefilter.h \
     AchievementsSubForms/formtablesheaders.h \
     MainSubForms/formfavorites.h \
@@ -117,7 +116,6 @@ HEADERS += \
     formgroupsgamesinteractions.h \
     frameless.h \
         mainwindow.h \
-    subwidget/freezerowstable.h \
     subwidget/qbuttonwithdata.h \
     subwidget/qcheckboxwithdata.h \
     subwidget/qcomboboxwithdata.h \

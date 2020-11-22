@@ -9,7 +9,7 @@
 #include "class/categoriesgame.h"
 #include "class/steamapi/Sgames.h"
 #include "AchievementsSubForms/formcategoryvalue.h"
-#include "AchievementsSubForms/formcategoryvalue_2.h"
+#include "AchievementsSubForms/formcategoryvalue.h"
 #include "AchievementsSubForms/formachievementwidget.h"
 
 enum class CategoryType {
@@ -62,7 +62,7 @@ private slots:
     void formCategoryValueDelete();
     void formCategoryDelete(int aPos);
     void setIcons();
-    FormCategoryValue_2 *createValueCategory();
+    FormCategoryValue *createValueCategory();
     void updateUniqueAchievements();
     void init();
     void setUniqueMode(bool aIsUnique);
@@ -74,7 +74,7 @@ private:
     CategoriesGame _categoriesGame;
     CategoryType _typeCategory = CategoryType::none;
     bool _isNoValue = true;
-    QList<FormCategoryValue_2*> _values;
+    QList<FormCategoryValue*> _values;
     bool _isUnique = false;
 };
 
