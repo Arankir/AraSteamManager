@@ -26,6 +26,7 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "AchievementsSubForms\formachievementscategoriesedit.h"
@@ -37,7 +38,7 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievements
 {
 public:
-    QVBoxLayout *verticalLayout_6;
+    QVBoxLayout *verticalLayout_2;
     QFrame *FrameFilter;
     QVBoxLayout *verticalLayout;
     QFrame *FrameCategories;
@@ -62,6 +63,8 @@ public:
     QLineEdit *LineEditNameAchievements;
     QPushButton *ButtonFindAchievement;
     QProgressBar *ProgressBarLoad;
+    QHBoxLayout *horizontalLayout_5;
+    QTreeWidget *TreeWidgetCategories;
     QTabWidget *tabWidget;
     QWidget *tabStandart;
     QVBoxLayout *verticalLayout_4;
@@ -99,8 +102,8 @@ public:
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormAchievements->setFont(font);
-        verticalLayout_6 = new QVBoxLayout(FormAchievements);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        verticalLayout_2 = new QVBoxLayout(FormAchievements);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         FrameFilter = new QFrame(FormAchievements);
         FrameFilter->setObjectName(QString::fromUtf8("FrameFilter"));
         FrameFilter->setMinimumSize(QSize(0, 0));
@@ -246,13 +249,22 @@ public:
         verticalLayout->addLayout(horizontalLayout_3);
 
 
-        verticalLayout_6->addWidget(FrameFilter);
+        verticalLayout_2->addWidget(FrameFilter);
 
         ProgressBarLoad = new QProgressBar(FormAchievements);
         ProgressBarLoad->setObjectName(QString::fromUtf8("ProgressBarLoad"));
         ProgressBarLoad->setValue(0);
 
-        verticalLayout_6->addWidget(ProgressBarLoad);
+        verticalLayout_2->addWidget(ProgressBarLoad);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        TreeWidgetCategories = new QTreeWidget(FormAchievements);
+        TreeWidgetCategories->setObjectName(QString::fromUtf8("TreeWidgetCategories"));
+        TreeWidgetCategories->setMaximumSize(QSize(200, 16777215));
+        TreeWidgetCategories->setWordWrap(true);
+
+        horizontalLayout_5->addWidget(TreeWidgetCategories);
 
         tabWidget = new QTabWidget(FormAchievements);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
@@ -407,7 +419,10 @@ public:
 
         tabWidget->addTab(tabCompare, QString());
 
-        verticalLayout_6->addWidget(tabWidget);
+        horizontalLayout_5->addWidget(tabWidget);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_5);
 
 
         retranslateUi(FormAchievements);
@@ -434,6 +449,8 @@ public:
         LineEditNameAchievements->setPlaceholderText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\265", nullptr));
         ButtonFindAchievement->setText(QCoreApplication::translate("FormAchievements", "\320\235\320\260\320\271\321\202\320\270", nullptr));
         ProgressBarLoad->setFormat(QCoreApplication::translate("FormAchievements", "%v/%m", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem = TreeWidgetCategories->headerItem();
+        ___qtreewidgetitem->setText(0, QCoreApplication::translate("FormAchievements", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabStandart), QCoreApplication::translate("FormAchievements", " \320\241\320\262\320\276\320\270 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217  ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabEditCategory), QCoreApplication::translate("FormAchievements", "  \320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217\320\274\320\270  ", nullptr));
 

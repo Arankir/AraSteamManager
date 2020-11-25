@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CategoriesGame_t {
-    QByteArrayData data[10];
-    char stringdata0[98];
+    QByteArrayData data[13];
+    char stringdata0[132];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,12 +41,16 @@ QT_MOC_LITERAL(5, 46, 13), // "QFileInfoList"
 QT_MOC_LITERAL(6, 60, 4), // "path"
 QT_MOC_LITERAL(7, 65, 20), // "convertOldCategories"
 QT_MOC_LITERAL(8, 86, 4), // "load"
-QT_MOC_LITERAL(9, 91, 6) // "toJson"
+QT_MOC_LITERAL(9, 91, 6), // "toJson"
+QT_MOC_LITERAL(10, 98, 9), // "countRoot"
+QT_MOC_LITERAL(11, 108, 13), // "CategoryGame&"
+QT_MOC_LITERAL(12, 122, 9) // "aCategory"
 
     },
     "CategoriesGame\0fromJson\0\0_categories\0"
     "getFiles\0QFileInfoList\0path\0"
-    "convertOldCategories\0load\0toJson"
+    "convertOldCategories\0load\0toJson\0"
+    "countRoot\0CategoryGame&\0aCategory"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +60,7 @@ static const uint qt_meta_data_CategoriesGame[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,11 +68,12 @@ static const uint qt_meta_data_CategoriesGame[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x08 /* Private */,
-       4,    1,   42,    2, 0x08 /* Private */,
-       7,    0,   45,    2, 0x08 /* Private */,
-       8,    0,   46,    2, 0x08 /* Private */,
-       9,    0,   47,    2, 0x08 /* Private */,
+       1,    1,   44,    2, 0x08 /* Private */,
+       4,    1,   47,    2, 0x08 /* Private */,
+       7,    0,   50,    2, 0x08 /* Private */,
+       8,    0,   51,    2, 0x08 /* Private */,
+       9,    0,   52,    2, 0x08 /* Private */,
+      10,    1,   53,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QJsonObject,    3,
@@ -76,6 +81,7 @@ static const uint qt_meta_data_CategoriesGame[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::QJsonObject,
+    QMetaType::Int, 0x80000000 | 11,   12,
 
        0        // eod
 };
@@ -93,6 +99,8 @@ void CategoriesGame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 3: _t->load(); break;
         case 4: { QJsonObject _r = _t->toJson();
             if (_a[0]) *reinterpret_cast< QJsonObject*>(_a[0]) = std::move(_r); }  break;
+        case 5: { int _r = _t->countRoot((*reinterpret_cast< CategoryGame(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
@@ -127,13 +135,13 @@ int CategoriesGame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

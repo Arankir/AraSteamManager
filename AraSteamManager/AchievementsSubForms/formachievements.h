@@ -13,6 +13,7 @@
 #include <QDesktopServices>
 #include <QMenu>
 #include <QAction>
+#include <QTreeWidgetItem>
 #include "formcommentsinteractions.h"
 #include "class/Network/requestimage.h"
 #include "class/settings.h"
@@ -113,6 +114,9 @@ private slots:
     void updateFilterCategory(int categoryIndex, bool clear, QList<QString> achievementNames = QList<QString>());
     void updateFilterFavorite(const QList<FavoriteAchievement> &aFavoritesAchievements);
     int rowFromId(QString aId);
+    int recursAddCategoryToTree(CategoryGame &category, int count, QTreeWidgetItem *root = nullptr);
+    void updateCurrentCategory();
+    QMenu *createMenuCategory(const CategoryGame &aCategory);
 private:
     Ui::FormAchievements *ui;
     SAchievements _achievements;
@@ -123,10 +127,11 @@ private:
     int _unicNum;
     CategoriesGame _categoriesGame;
     Favorites _favorites;
+    Comments _comments;
 
     //используются на форме
-    QFormLayout *_categoryValuesLayout;
-    FormTablesHeaders *_tableAchievements;
+    //QFormLayout *_categoryValuesLayout;
+    //FormTablesHeaders *_tableAchievements;
 
     //загружены ли другие формы
     bool _isEditCategoryLoaded = false;
@@ -141,14 +146,18 @@ private:
     QList<QPair<SProfile, FriendType>> _friends;
 
     //для фильтрации
+    MyFilter _fCategories;
     MyFilter _fAchievements;
     MyFilter _fCompare;
 
     //выбранное достижение
     SAchievement *_currentAchievement = nullptr;
-    int _currentIndex;
+    int _currentAchievementIndex;
 
-    Comments _comments;
+    //выбранная категория
+    CategoryGame *_currentCategory = nullptr;
+    int _currentCategoryIndex;
+
 };
 
 #endif // FORMACHIEVEMENTS_H

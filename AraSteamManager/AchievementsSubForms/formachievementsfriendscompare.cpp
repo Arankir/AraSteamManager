@@ -97,6 +97,10 @@ QButtonWithData *FormAchievementsFriendsCompare::createButtonWithData(const QStr
 }
 
 void FormAchievementsFriendsCompare::setIcons() {
+    QLabel *friendsIcon = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1));
+    if (friendsIcon) {
+        friendsIcon->setPixmap(QPixmap(Images::friends()));
+    }
     QWidget *wFriendsFilter = dynamic_cast<QWidget*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowFilters, 1));
     if (wFriendsFilter) {
         QButtonWithData *bFriendsAll = dynamic_cast<QButtonWithData*>(wFriendsFilter->layout()->itemAt(0)->widget());
@@ -148,7 +152,7 @@ void FormAchievementsFriendsCompare::initTableCompare() {
 }
 
 void FormAchievementsFriendsCompare::updateFilterWithFriend(const QString &aFriendName, ReachedType aType) {
-//    int columnFriend = 0;
+    int columnFriend = 0;
 //    for (auto &column: _friendsColumns) {
 //        if (ui->TableWidgetHorizontalHeader->horizontalHeaderItem(column)->text() == aFriendName){
 //            columnFriend = column;
@@ -156,29 +160,29 @@ void FormAchievementsFriendsCompare::updateFilterWithFriend(const QString &aFrie
 //        }
 //    }
 //    int filterColumn = _fCompare.getCol() - (getColumnCount() - columnFriend);
-//    switch (aType) {
-//    case ReachedType::all: {
+    switch (aType) {
+    case ReachedType::all: {
 //        for (int i = 0; i < getRowCount(); ++i) {
 //            _fCompare.setData(i, filterColumn, true);
 //        }
-//        break;
-//    }
-//    case ReachedType::reached: {
+        break;
+    }
+    case ReachedType::reached: {
 //        for (int i = 0; i < getRowCount(); ++i) {
 //            _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") > -1);
 //        }
-//        break;
-//    }
-//    case ReachedType::notReached: {
+        break;
+    }
+    case ReachedType::notReached: {
 //        for (int i = 0; i < getRowCount(); ++i) {
 //            _fCompare.setData(i, filterColumn, itemContent(i, columnFriend)->text().indexOf(".") == -1);
 //        }
-//        break;
-//    }
-//    default: {
-//        break;
-//    }
-//    }
+        break;
+    }
+    default: {
+        break;
+    }
+    }
 //    updateHiddenRows();
 }
 
@@ -205,9 +209,11 @@ void FormAchievementsFriendsCompare::loadingCompare() {
 
 void FormAchievementsFriendsCompare::loadFriendGames(SGames *aGames) {
     disconnect(aGames, SIGNAL(s_finished(SGames*)), this, SLOT(loadFriendGames(SGames*)));
-    bool isGameExist = std::any_of(aGames->begin(), aGames->end(), [=](const SGame &game) {
-                                                                        return game.appId() == _game.appId();
-                                                                    });
+    bool isGameExist = std::any_of(aGames->begin(), 
+                                   aGames->end(), 
+                                   [=](const SGame &game) {
+                                        return game.appId() == _game.appId();
+                                    });
     QPair<SProfile, FriendType> friendState;
     friendState.first = _profilesFriends[aGames->_index];
     if (isGameExist) {
@@ -276,7 +282,7 @@ void FormAchievementsFriendsCompare::buttonCompareAllFriendsReach_Clicked() {
             if (friendFilter) {
                 friendFilter->setType(setType);
             } else {
-                //qDebug()<<"error FormAchievements::buttonCompareAllFriendsReach_Clicked() filterFriend";
+                //qDebug() << "error FormAchievements::buttonCompareAllFriendsReach_Clicked() filterFriend";
             }
         }
     } else {

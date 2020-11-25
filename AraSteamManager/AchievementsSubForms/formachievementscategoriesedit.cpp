@@ -81,8 +81,8 @@ void FormAchievementsCategoriesEdit::changeCategoryType(CategoryType aType) {
     switch (aType) {
     case CategoryType::none: {
         ui->ButtonAddCategory->setEnabled(true);
-        ui->ButtonChangeCategory->setEnabled(_categoriesGame.getCount() != 0);
-        ui->ButtonDeleteAllCategories->setEnabled(_categoriesGame.getCount() != 0);
+        ui->ButtonChangeCategory->setEnabled(_categoriesGame.countTopCategories() != 0);
+        ui->ButtonDeleteAllCategories->setEnabled(_categoriesGame.countTopCategories() != 0);
 
         ui->ComboBoxCategories->setVisible(false);
         ui->ComboBoxCategories->setCurrentIndex(0);
@@ -228,16 +228,18 @@ void FormAchievementsCategoriesEdit::buttonCancelCategory_Clicked() {
 }
 
 void FormAchievementsCategoriesEdit::createCategoryNoValue(int aCategoryIndex, const QString &aTitle) {
-    QList<QString> resultNoValues;
+    QList<CategoryValue> values;
     if (_values.size() > 0) {
+        CategoryValue value;
         auto achievements = _values[0]->getAchievements();
         for (const auto &achievement: achievements) {
-            resultNoValues.append(achievement);
+            value.achievements.append(achievement);
         }
+        values.append(value);
     } else {
         qWarning() << "on save noValue category value is not created";
     }
-    _categoriesGame.changeCategory(aCategoryIndex, aTitle, 1, QList<CategoryValue>(), resultNoValues);
+    //_categoriesGame.changeCategory(aCategoryIndex, aTitle, TypeCategory::NoValues, 1, values);
 }
 
 bool FormAchievementsCategoriesEdit::createCategoryValue(int aCategoryIndex, const QString &aTitle) {
@@ -264,7 +266,7 @@ bool FormAchievementsCategoriesEdit::createCategoryValue(int aCategoryIndex, con
         }
         resultValues.append(categoryValue);
     }
-    _categoriesGame.changeCategory(aCategoryIndex, aTitle, 0, resultValues, QList<QString>());
+    //_categoriesGame.changeCategory(aCategoryIndex, aTitle, TypeCategory::Values, 1, resultValues);
     return true;
 }
 
@@ -281,13 +283,13 @@ void FormAchievementsCategoriesEdit::buttonAcceptCategory_Clicked() {
     }
     int targetCategory = _typeCategory == CategoryType::changeSelected ?
                         ui->ComboBoxCategories->currentIndex() - 1 :
-                        _categoriesGame.getCount();
+                        _categoriesGame.countTopCategories();
 
     bool isAlreadyExist = std::any_of(_categoriesGame.begin(),
                                       _categoriesGame.end(),
                                       [=](CategoryGame sCategory) {
-                                          return ((sCategory.getTitle() == newTitle)
-                                          && (sCategory.getIndex() != targetCategory));
+                                          return (sCategory.title() == newTitle);
+//                                          && (sCategory.order() != targetCategory));
                                       });
     if (isAlreadyExist) {
         QMessageBox::warning(this, tr("Ошибка"), tr("Такая категория уже есть!"));
@@ -361,7 +363,7 @@ void FormAchievementsCategoriesEdit::comboBoxCategories_Activated(int aIndex) {
         _typeCategory != CategoryType::changeSelected) {
         return;
     }
-    if (_categoriesGame.getCount() <= 0) {
+    if (_categoriesGame.countTopCategories() <= 0) {
         return;
     }
     ui->LineEditTitleCategory->setText(ui->ComboBoxCategories->itemText(aIndex));
@@ -369,17 +371,17 @@ void FormAchievementsCategoriesEdit::comboBoxCategories_Activated(int aIndex) {
         changeCategoryType(CategoryType::changeSelected);
 //        ui->CheckBoxCategoryOneValue->setChecked(_categoriesGame[aIndex - 1].getIsNoValue());
 
-        QList<QString> noValues = _categoriesGame[aIndex - 1].getNoValues();
-        QList<CategoryValue> valuesTitles = _categoriesGame[aIndex - 1].getValues();
+//        QList<QString> noValues = _categoriesGame[aIndex - 1].getNoValues();
+//        QList<CategoryValue> valuesTitles = _categoriesGame[aIndex - 1].values();
 //      _tableAchievements->categoryToTable(_categoriesGame[aIndex - 1].getTitle(), noValues, valuesTitles, _categoriesGame[aIndex - 1].getIsNoValue());
 
         while(!_values.isEmpty()) {
             _values.removeAt(0);
         }
-        for(auto &&title: valuesTitles) {
-            FormCategoryValue *value = createValueCategory();
-            value->setTitle(title.title);
-        }
+//        for(auto &&title: valuesTitles) {
+//            FormCategoryValue *value = createValueCategory();
+//            value->setTitle(title.title);
+//        }
     } else {
         changeCategoryType(CategoryType::changeNotSelected);
     }

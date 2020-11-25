@@ -532,6 +532,14 @@ QString MainWindow::getTheme() {
                     "color: white; "
                 "} "
 #define listviewend }
+                "QTreeView { "
+                    "border: 0px solid #cccccc; "
+                    //"border-radius: 8px; "
+                    "background-color: rgba(30, 41, 59, 0.5); "// + backgroundGradient +
+                "} "
+                "QTreeView::item { "
+                    "color: white; "
+                "} "
                 ;
         break;
     }
