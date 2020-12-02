@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    QByteArrayData data[101];
-    char stringdata0[1493];
+    QByteArrayData data[104];
+    char stringdata0[1550];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -125,15 +125,18 @@ QT_MOC_LITERAL(88, 1317, 22), // "aFavoritesAchievements"
 QT_MOC_LITERAL(89, 1340, 9), // "rowFromId"
 QT_MOC_LITERAL(90, 1350, 3), // "aId"
 QT_MOC_LITERAL(91, 1354, 23), // "recursAddCategoryToTree"
-QT_MOC_LITERAL(92, 1378, 13), // "CategoryGame&"
-QT_MOC_LITERAL(93, 1392, 8), // "category"
-QT_MOC_LITERAL(94, 1401, 5), // "count"
-QT_MOC_LITERAL(95, 1407, 16), // "QTreeWidgetItem*"
-QT_MOC_LITERAL(96, 1424, 4), // "root"
-QT_MOC_LITERAL(97, 1429, 21), // "updateCurrentCategory"
-QT_MOC_LITERAL(98, 1451, 18), // "createMenuCategory"
-QT_MOC_LITERAL(99, 1470, 12), // "CategoryGame"
-QT_MOC_LITERAL(100, 1483, 9) // "aCategory"
+QT_MOC_LITERAL(92, 1378, 9), // "Category&"
+QT_MOC_LITERAL(93, 1388, 8), // "category"
+QT_MOC_LITERAL(94, 1397, 5), // "count"
+QT_MOC_LITERAL(95, 1403, 16), // "QTreeWidgetItem*"
+QT_MOC_LITERAL(96, 1420, 4), // "root"
+QT_MOC_LITERAL(97, 1425, 21), // "updateCurrentCategory"
+QT_MOC_LITERAL(98, 1447, 18), // "createMenuCategory"
+QT_MOC_LITERAL(99, 1466, 8), // "Category"
+QT_MOC_LITERAL(100, 1475, 9), // "aCategory"
+QT_MOC_LITERAL(101, 1485, 26), // "categoryChangeAchievements"
+QT_MOC_LITERAL(102, 1512, 22), // "categoryAddSubCategory"
+QT_MOC_LITERAL(103, 1535, 14) // "categoryDelete"
 
     },
     "FormAchievements\0s_returnToGames\0\0num\0"
@@ -172,10 +175,11 @@ QT_MOC_LITERAL(100, 1483, 9) // "aCategory"
     "clear\0QList<QString>\0achievementNames\0"
     "updateFilterFavorite\0QList<FavoriteAchievement>\0"
     "aFavoritesAchievements\0rowFromId\0aId\0"
-    "recursAddCategoryToTree\0CategoryGame&\0"
+    "recursAddCategoryToTree\0Category&\0"
     "category\0count\0QTreeWidgetItem*\0root\0"
     "updateCurrentCategory\0createMenuCategory\0"
-    "CategoryGame\0aCategory"
+    "Category\0aCategory\0categoryChangeAchievements\0"
+    "categoryAddSubCategory\0categoryDelete"
 };
 #undef QT_MOC_LITERAL
 
@@ -185,7 +189,7 @@ static const uint qt_meta_data_FormAchievements[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      52,   14, // methods
+      55,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -193,60 +197,63 @@ static const uint qt_meta_data_FormAchievements[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  274,    2, 0x06 /* Public */,
-       4,    0,  277,    2, 0x06 /* Public */,
+       1,    1,  289,    2, 0x06 /* Public */,
+       4,    0,  292,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    2,  278,    2, 0x0a /* Public */,
-       8,    2,  283,    2, 0x0a /* Public */,
-      11,    0,  288,    2, 0x0a /* Public */,
-      12,    0,  289,    2, 0x0a /* Public */,
-      13,    0,  290,    2, 0x0a /* Public */,
-      14,    0,  291,    2, 0x0a /* Public */,
-      15,    0,  292,    2, 0x0a /* Public */,
-      16,    1,  293,    2, 0x08 /* Private */,
-      19,    1,  296,    2, 0x08 /* Private */,
-      21,    0,  299,    2, 0x08 /* Private */,
-      22,    0,  300,    2, 0x08 /* Private */,
-      23,    0,  301,    2, 0x08 /* Private */,
-      24,    4,  302,    2, 0x08 /* Private */,
-      30,    1,  311,    2, 0x08 /* Private */,
-      33,    0,  314,    2, 0x08 /* Private */,
-      34,    1,  315,    2, 0x08 /* Private */,
-      37,    0,  318,    2, 0x08 /* Private */,
-      38,    2,  319,    2, 0x08 /* Private */,
-      42,    0,  324,    2, 0x08 /* Private */,
-      43,    2,  325,    2, 0x08 /* Private */,
-      45,    2,  330,    2, 0x08 /* Private */,
-      47,    1,  335,    2, 0x08 /* Private */,
-      49,    0,  338,    2, 0x08 /* Private */,
-      50,    1,  339,    2, 0x08 /* Private */,
-      52,    1,  342,    2, 0x08 /* Private */,
-      54,    1,  345,    2, 0x08 /* Private */,
-      55,    0,  348,    2, 0x08 /* Private */,
-      56,    0,  349,    2, 0x08 /* Private */,
-      57,    0,  350,    2, 0x08 /* Private */,
-      58,    1,  351,    2, 0x08 /* Private */,
-      59,    0,  354,    2, 0x08 /* Private */,
-      60,    1,  355,    2, 0x08 /* Private */,
-      63,    0,  358,    2, 0x08 /* Private */,
-      64,    0,  359,    2, 0x08 /* Private */,
-      65,    0,  360,    2, 0x08 /* Private */,
-      66,    2,  361,    2, 0x08 /* Private */,
-      69,    0,  366,    2, 0x08 /* Private */,
-      70,    1,  367,    2, 0x08 /* Private */,
-      74,    0,  370,    2, 0x08 /* Private */,
-      75,    3,  371,    2, 0x08 /* Private */,
-      78,    3,  378,    2, 0x08 /* Private */,
-      80,    0,  385,    2, 0x08 /* Private */,
-      81,    3,  386,    2, 0x08 /* Private */,
-      81,    2,  393,    2, 0x28 /* Private | MethodCloned */,
-      86,    1,  398,    2, 0x08 /* Private */,
-      89,    1,  401,    2, 0x08 /* Private */,
-      91,    3,  404,    2, 0x08 /* Private */,
-      91,    2,  411,    2, 0x28 /* Private | MethodCloned */,
-      97,    0,  416,    2, 0x08 /* Private */,
-      98,    1,  417,    2, 0x08 /* Private */,
+       5,    2,  293,    2, 0x0a /* Public */,
+       8,    2,  298,    2, 0x0a /* Public */,
+      11,    0,  303,    2, 0x0a /* Public */,
+      12,    0,  304,    2, 0x0a /* Public */,
+      13,    0,  305,    2, 0x0a /* Public */,
+      14,    0,  306,    2, 0x0a /* Public */,
+      15,    0,  307,    2, 0x0a /* Public */,
+      16,    1,  308,    2, 0x08 /* Private */,
+      19,    1,  311,    2, 0x08 /* Private */,
+      21,    0,  314,    2, 0x08 /* Private */,
+      22,    0,  315,    2, 0x08 /* Private */,
+      23,    0,  316,    2, 0x08 /* Private */,
+      24,    4,  317,    2, 0x08 /* Private */,
+      30,    1,  326,    2, 0x08 /* Private */,
+      33,    0,  329,    2, 0x08 /* Private */,
+      34,    1,  330,    2, 0x08 /* Private */,
+      37,    0,  333,    2, 0x08 /* Private */,
+      38,    2,  334,    2, 0x08 /* Private */,
+      42,    0,  339,    2, 0x08 /* Private */,
+      43,    2,  340,    2, 0x08 /* Private */,
+      45,    2,  345,    2, 0x08 /* Private */,
+      47,    1,  350,    2, 0x08 /* Private */,
+      49,    0,  353,    2, 0x08 /* Private */,
+      50,    1,  354,    2, 0x08 /* Private */,
+      52,    1,  357,    2, 0x08 /* Private */,
+      54,    1,  360,    2, 0x08 /* Private */,
+      55,    0,  363,    2, 0x08 /* Private */,
+      56,    0,  364,    2, 0x08 /* Private */,
+      57,    0,  365,    2, 0x08 /* Private */,
+      58,    1,  366,    2, 0x08 /* Private */,
+      59,    0,  369,    2, 0x08 /* Private */,
+      60,    1,  370,    2, 0x08 /* Private */,
+      63,    0,  373,    2, 0x08 /* Private */,
+      64,    0,  374,    2, 0x08 /* Private */,
+      65,    0,  375,    2, 0x08 /* Private */,
+      66,    2,  376,    2, 0x08 /* Private */,
+      69,    0,  381,    2, 0x08 /* Private */,
+      70,    1,  382,    2, 0x08 /* Private */,
+      74,    0,  385,    2, 0x08 /* Private */,
+      75,    3,  386,    2, 0x08 /* Private */,
+      78,    3,  393,    2, 0x08 /* Private */,
+      80,    0,  400,    2, 0x08 /* Private */,
+      81,    3,  401,    2, 0x08 /* Private */,
+      81,    2,  408,    2, 0x28 /* Private | MethodCloned */,
+      86,    1,  413,    2, 0x08 /* Private */,
+      89,    1,  416,    2, 0x08 /* Private */,
+      91,    3,  419,    2, 0x08 /* Private */,
+      91,    2,  426,    2, 0x28 /* Private | MethodCloned */,
+      97,    0,  431,    2, 0x08 /* Private */,
+      98,    1,  432,    2, 0x08 /* Private */,
+     101,    0,  435,    2, 0x08 /* Private */,
+     102,    0,  436,    2, 0x08 /* Private */,
+     103,    0,  437,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
@@ -303,6 +310,9 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Int, 0x80000000 | 92, QMetaType::Int,   93,   94,
     QMetaType::Void,
     0x80000000 | 71, 0x80000000 | 99,  100,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -366,13 +376,16 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 46: _t->updateFilterFavorite((*reinterpret_cast< const QList<FavoriteAchievement>(*)>(_a[1]))); break;
         case 47: { int _r = _t->rowFromId((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 48: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< CategoryGame(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[3])));
+        case 48: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 49: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< CategoryGame(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+        case 49: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 50: _t->updateCurrentCategory(); break;
-        case 51: { QMenu* _r = _t->createMenuCategory((*reinterpret_cast< const CategoryGame(*)>(_a[1])));
+        case 51: { QMenu* _r = _t->createMenuCategory((*reinterpret_cast< const Category(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
+        case 52: _t->categoryChangeAchievements(); break;
+        case 53: _t->categoryAddSubCategory(); break;
+        case 54: _t->categoryDelete(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -448,13 +461,13 @@ int FormAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 52)
+        if (_id < 55)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 52;
+        _id -= 55;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 52)
+        if (_id < 55)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 52;
+        _id -= 55;
     }
     return _id;
 }

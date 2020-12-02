@@ -7,6 +7,7 @@
 #include "class/steamapi/Sprofile.h"
 #include "class/steamapi/Sgames.h"
 #include "class/steamapi/Sfriends.h"
+#include "class/myfilter.h"
 #include "AchievementsSubForms/formcompareprofilefilter.h"
 #include "subwidget/qbuttonwithdata.h"
 
@@ -19,13 +20,13 @@ namespace Ui {
 class FormAchievementsFriendsCompare;
 }
 
-class FormAchievementsFriendsCompare : public QWidget
+class FormFriendsCompare : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit FormAchievementsFriendsCompare(QWidget *parent = nullptr);
-    ~FormAchievementsFriendsCompare();
+    explicit FormFriendsCompare(QWidget *parent = nullptr);
+    ~FormFriendsCompare();
 
 signals:
     void s_updateSettings();
@@ -57,6 +58,8 @@ private:
     int _type2 = 0;
     SProfiles _profilesFriends;
     QList<QPair<SProfile, FriendType>> _friends;
+
+    MyFilter _fCompare;
 
 };
 

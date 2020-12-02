@@ -29,7 +29,7 @@
 #include "subwidget/qcomboboxwithdata.h"
 #include "subwidget/qcheckboxwithdata.h"
 #include "AchievementsSubForms/formcomparefriends.h"
-#include "AchievementsSubForms/formachievementscategoriesedit.h"
+#include "AchievementsSubForms/formcategoriesedit.h"
 #include "AchievementsSubForms/formcompareprofilefilter.h"
 #include "AchievementsSubForms/formtablesheaders.h"
 
@@ -114,9 +114,12 @@ private slots:
     void updateFilterCategory(int categoryIndex, bool clear, QList<QString> achievementNames = QList<QString>());
     void updateFilterFavorite(const QList<FavoriteAchievement> &aFavoritesAchievements);
     int rowFromId(QString aId);
-    int recursAddCategoryToTree(CategoryGame &category, int count, QTreeWidgetItem *root = nullptr);
+    int recursAddCategoryToTree(Category &category, int count, QTreeWidgetItem *root = nullptr);
     void updateCurrentCategory();
-    QMenu *createMenuCategory(const CategoryGame &aCategory);
+    QMenu *createMenuCategory(const Category &aCategory);
+    void categoryChangeAchievements();
+    void categoryAddSubCategory();
+    void categoryDelete();
 private:
     Ui::FormAchievements *ui;
     SAchievements _achievements;
@@ -125,7 +128,7 @@ private:
     SProfile _profile;
     SGame _game;
     int _unicNum;
-    CategoriesGame _categoriesGame;
+    Categories _categoriesGame;
     Favorites _favorites;
     Comments _comments;
 
@@ -155,7 +158,7 @@ private:
     int _currentAchievementIndex;
 
     //выбранная категория
-    CategoryGame *_currentCategory = nullptr;
+    Category *_currentCategory = nullptr;
     int _currentCategoryIndex;
 
 };

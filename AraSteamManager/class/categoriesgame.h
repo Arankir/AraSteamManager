@@ -3,105 +3,104 @@
 
 #include "class/steamapi/Sgames.h"
 
-enum class TypeCategory {
-    NoValues,
-    Values
-};
-
-enum class TypeCategoryValue {
-    Value,
-    Category
-};
-
-class CategoryGame;
-
-struct CategoryValue {
-    QString title;
-    TypeCategoryValue type;
-    int order;
-    QList<QString> achievements;
-    CategoryGame *category;
-
-    CategoryValue &setSubCategory(CategoryGame *category);
-    CategoryValue &fromJson(QJsonObject);
-    QJsonObject toJson(); //Потом заменить на другой вид хранения данных
-};
-
-class CategoryGame {
+class Category {
 public:
-    CategoryGame(const QJsonObject category);
-    CategoryGame(const QString &title, const QList<QString> &achievements, const QList<CategoryGame> &categories): _title(title),
-        _achievements(achievements), _categories(categories) {}
-    CategoryGame(const CategoryGame &category): _title(category._title), _achievements(category._achievements),
+    Category(const QJsonObject &category = QJsonObject());
+    Category(const QString &title,
+             const QList<QString> &achievements,
+             const QList<Category> &categories = QList<Category>())
+        : _title(title),
+        _achievements(achievements),
+        _categories(categories) {}
+    Category(const Category &category):
+        _parent(category._parent),
+        _title(category._title),
+        _achievements(category._achievements),
         _categories(category._categories) {}
-    CategoryGame &operator=(const CategoryGame category);
-    CategoryGame &operator[](const int index) {return _categories[index];}
-    CategoryGame &categoryAt(const int index) {return _categories[index];}
 
-    CategoryGame &setTitle(const QString &title);
-    CategoryGame &setAchievements(const QList<QString> achievements);
-    CategoryGame &addCategory(CategoryGame *category);
-    CategoryGame &removeCategory(CategoryGame *category);
-    CategoryGame &updateCategory(const QString &title, QList<QString> aAchievements, const QList<CategoryGame> &aCategories);
+    Category &operator=(const Category &category);
+    bool      operator==(const Category &category);
+    Category &operator[](const int index) {return _categories[index];}
 
-    CategoryGame &fromJson(QJsonObject categoryGame);
+    Category &setParent(Category *parent);
+    Category &setTitle(const QString &title);
+    Category &setAchievements(QList<QString> &achievements);
+    Category &updateParents();
 
-    QList<CategoryGame>::iterator begin()       {return _categories.begin();}
-    QList<CategoryGame>::iterator end()         {return _categories.end();}
-    QList<CategoryGame>::const_iterator cbegin()      {return _categories.cbegin();}
-    QList<CategoryGame>::const_iterator cend()        {return _categories.cend();}
-    QJsonObject toJson()                const; //Потом заменить на другой вид хранения данных
+    Category &addCategory(Category &category);
+    bool addSubCategory(Category &aCategory);
+    Category &removeCategoryAt(int index);
+    bool removeCategory(Category &category);
+    bool removeCategoryAtGlobalIndex(int &aIndex);
+    Category takeCategoryAtGlobalIndex(int aIndex);
+
+    Category &fromJson(const QJsonObject &categoryGame);
+    QList<Category*> directTraversalList();
+
+    QList<Category>::iterator begin()           {return _categories.begin();}
+    QList<Category>::iterator end()             {return _categories.end();}
     QString title()                     const   {return _title;}
     QList<QString> achievements()       const   {return _achievements;}
-    QList<CategoryGame> categories()    const   {return _categories;}
-    friend QDebug operator<<(QDebug dbg, const CategoryGame &category) {
-        dbg.nospace() << "Category(" << category.toJson() << ")";
+    QList<Category> categories()        const   {return _categories;}
+    Category *parent()                  const   {return _parent;}
+    QJsonObject toJson()                const;  //Потом заменить на другой вид хранения данных
+    int countCategories()               const;
+
+    friend QDebug operator<<(QDebug dbg, const Category &category) {
+        dbg.nospace() << "Category(" << category.toJson() << category._parent << ")";
         return dbg.space();
     }
 
 private:
+
+    Category *_parent = nullptr;
     QString _title;
     QList<QString> _achievements;
-    QList<CategoryGame> _categories;
+    QList<Category> _categories;
 };
 
-class CategoriesGame : public QObject {
+class Categories : public QObject {
     Q_OBJECT
 public:
-    explicit CategoriesGame(SGame &game, QObject *parent = nullptr);
-    explicit CategoriesGame(QObject *parent = nullptr): QObject(parent) {}
-    CategoriesGame(const CategoriesGame &categories): QObject(categories.parent()), _categories(categories._categories), _game(categories._game) {}
-    CategoryGame &operator[](const int index) {return _categories[index];}
-    CategoryGame *getCategoryAtAll(int index);
+    explicit Categories(SGame &game, QObject *parent = nullptr);
+    explicit Categories(QObject *parent = nullptr): QObject(parent) {}
+    Categories(const Categories &categories): QObject(categories.parent()), _categories(categories._categories), _game(categories._game) {}
+    Category &operator[](const int index) {return _categories[index];}
 
     void setGame(SGame game);
+    Category *getCategoryAtGlobalIndex(int index);
 
-    CategoriesGame &deleteCategory(int index);
-    CategoriesGame &deleteAll();
-    CategoriesGame &addCategory(const QString &title, QList<QString> achievements, const QList<CategoryGame> &categories);
-    CategoriesGame &changeCategory(CategoryGame *category, const QString &title, QList<QString> achievements, const QList<CategoryGame> &categories);
-    CategoriesGame &update();
-    void save(QJsonObject aCategories);
+    Categories &addCategory(const QString &title, QList<QString> achievements, const QList<Category> &categories);
+    Categories &addCategory(Category &category);
+    bool addSubCategory(Category &aCategory);
+    Categories &deleteCategoryAtGlobalIndex(int index);
+    bool removeCategory(Category &category);
+    Categories &deleteAll();
 
-    QList<CategoryGame>::iterator begin() {return _categories.begin();}
-    QList<CategoryGame>::iterator end() {return _categories.end();}
-    QString getGame()   const {return _gameName;}
-    int countTopCategories()      const {return _categories.count();}
-    int countAll()      const;
-    int getGameID()     const {return _gameId;}
+    void save(QJsonObject categories);
+    Categories &update();
 
-    QList<QString> getCategoriesTitles() const;
+    QList<Category>::iterator begin()   {return _categories.begin();}
+    QList<Category>::iterator end()     {return _categories.end();}
+    QString getGame()           const   {return _gameName;}
+    int getGameID()             const   {return _gameId;}
+    int countTopCategories()    const   {return _categories.count();}
+    int countAll()              const;
+    QJsonObject toJson()        const;  //Потом заменить на другой вид хранения данных
+
+    Category takeCategoryAtDirect(int aIndex);
+
+    friend QDebug operator<<(QDebug dbg, const Categories &categories) {
+        dbg.nospace() << "Categories(" << categories.toJson() << ")";
+        return dbg.space();
+    }
 
 private slots:
     void fromJson(QJsonObject _categories);
-    QFileInfoList getFiles(const QString &path);
-    void convertOldCategories();
     void load();
-    QJsonObject toJson(); //Потом заменить на другой вид хранения данных
-    int countRoot(CategoryGame &aCategory) const;
 
 private:
-    QList<CategoryGame> _categories;
+    QList<Category> _categories;
     SGame _game;
 
     QString _gameName;

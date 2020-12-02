@@ -26,10 +26,9 @@ CONFIG += c++11
 
 SOURCES += \
     AchievementsSubForms/formachievements.cpp \
-    AchievementsSubForms/formachievementscategoriesedit.cpp \
-    AchievementsSubForms/formachievementsfriendscompare.cpp \
-    AchievementsSubForms/formcategoryvalue.cpp \
+    AchievementsSubForms/formcategoriesedit.cpp \
     AchievementsSubForms/formcompareprofilefilter.cpp \
+    AchievementsSubForms/formfriendscompare.cpp \
     AchievementsSubForms/formtablesheaders.cpp \
     MainSubForms/formfavorites.cpp \
     MainSubForms/formfriends.cpp \
@@ -71,14 +70,14 @@ SOURCES += \
     subwidget/qbuttonwithdata.cpp \
     subwidget/qcheckboxwithdata.cpp \
     subwidget/qcomboboxwithdata.cpp \
+    subwidget/qlistwidgetachievement.cpp \
     subwidget/qradiobuttonwithdata.cpp
 
 HEADERS += \
     AchievementsSubForms/formachievements.h \
-    AchievementsSubForms/formachievementscategoriesedit.h \
-    AchievementsSubForms/formachievementsfriendscompare.h \
-    AchievementsSubForms/formcategoryvalue.h \
+    AchievementsSubForms/formcategoriesedit.h \
     AchievementsSubForms/formcompareprofilefilter.h \
+    AchievementsSubForms/formfriendscompare.h \
     AchievementsSubForms/formtablesheaders.h \
     MainSubForms/formfavorites.h \
     MainSubForms/formfriends.h \
@@ -119,13 +118,13 @@ HEADERS += \
     subwidget/qbuttonwithdata.h \
     subwidget/qcheckboxwithdata.h \
     subwidget/qcomboboxwithdata.h \
+    subwidget/qlistwidgetachievement.h \
     subwidget/qradiobuttonwithdata.h
 
 FORMS += \
     AchievementsSubForms/formachievements.ui \
     AchievementsSubForms/formachievementscategoriesedit.ui \
     AchievementsSubForms/formachievementsfriendscompare.ui \
-    AchievementsSubForms/formcategoryvalue_2.ui \
     AchievementsSubForms/formcompareprofilefilter.ui \
     AchievementsSubForms/formtablesheaders.ui \
     MainSubForms/formfavorites.ui \

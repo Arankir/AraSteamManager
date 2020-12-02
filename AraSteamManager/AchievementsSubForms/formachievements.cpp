@@ -22,6 +22,10 @@ constexpr int c_filterReached           = 1;
 constexpr int c_filterFavorite          = 2;
 constexpr int c_filterColumnCount       = 3;
 constexpr int c_filterEndConstValues    = 3;
+
+constexpr int c_tabStandartAchievements = 0;
+constexpr int c_tabCategories           = 1;
+constexpr int c_tabCompareAchievements  = 2;
 #define ConstantsEnd }
 
 #define Init {
@@ -334,7 +338,7 @@ void FormAchievements::updateCurrentCategory() {
             _currentCategoryIndex = label->accessibleName().toInt();
         }
     }
-    _currentCategory = _categoriesGame.getCategoryAtAll(_currentCategoryIndex);
+    _currentCategory = _categoriesGame.getCategoryAtGlobalIndex(_currentCategoryIndex);
 }
 
 QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
@@ -380,7 +384,7 @@ QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
     return menu;
 }
 
-QMenu *FormAchievements::createMenuCategory(const CategoryGame &aCategory) {
+QMenu *FormAchievements::createMenuCategory(const Category &aCategory) {
     //Кнопка изменения достижений
     QAction *actionAchievements = new QAction(tr("Изменить достижения"), this);
     actionAchievements->setIcon(QIcon(Images::change()));
@@ -399,11 +403,50 @@ QMenu *FormAchievements::createMenuCategory(const CategoryGame &aCategory) {
     menu->addAction (actionSubCategory);
     menu->addAction (actionDelete);
 
-//    connect (actionAchievements,    &QAction::triggered,    this,   &FormAchievements::button);
-//    connect (actionSubCategory,     &QAction::triggered,    this,   &FormAchievements::buttonComment_Clicked);
-//    connect (actionDelete,          &QAction::triggered,    this,   &FormAchievements::buttonManual_Clicked);
+    connect (actionAchievements,    &QAction::triggered,    this,   &FormAchievements::categoryChangeAchievements);
+    connect (actionSubCategory,     &QAction::triggered,    this,   &FormAchievements::categoryAddSubCategory);
+    connect (actionDelete,          &QAction::triggered,    this,   &FormAchievements::categoryDelete);
 
     return menu;
+}
+
+void FormAchievements::categoryChangeAchievements() {
+    ui->tabWidget->setCurrentIndex(c_tabCategories);
+    updateCurrentCategory();
+    ui->CategoriesEdit->changeCategory(_currentCategory, _currentCategoryIndex);
+}
+
+void FormAchievements::categoryAddSubCategory() {
+    ui->tabWidget->setCurrentIndex(c_tabCategories);
+    ui->CategoriesEdit->addSubCategory(_currentCategory);
+}
+
+void FormAchievements::categoryDelete() {
+    updateCurrentCategory();
+    if (_currentCategory != nullptr) {
+        QMessageBox deleteQuestion(QMessageBox::Question,
+                               tr("Внимание!"),
+                               tr("Вы уверены, что хотите удалить категорию?"));
+        QAbstractButton *btnYes = deleteQuestion.addButton(tr("Да"), QMessageBox::YesRole);
+        deleteQuestion.addButton(tr("Отмена"), QMessageBox::NoRole);
+        deleteQuestion.exec();
+        if(deleteQuestion.clickedButton() != btnYes) {
+            return;
+        }
+
+        if (_currentCategory->categories().count() > 0) {
+            deleteQuestion.setText(tr("Подкатегории будут удалены, вы точно хотите удалить категорию?"));
+            deleteQuestion.exec();
+            if (deleteQuestion.clickedButton() != btnYes) {
+                return;
+            }
+
+        }
+
+        _categoriesGame.removeCategory(*_currentCategory);
+        QMessageBox::information(this, tr("Успешно"), tr("Категория была удалена!"));
+    }
+    showCategories();
 }
 
 void FormAchievements::buttonComment_Clicked() {
@@ -802,7 +845,6 @@ void FormAchievements::changeEvent(QEvent *event) {
 void FormAchievements::checkBoxCategory_StateChanged(int aIndex) {
     updateCurrentCategory();
     if (_currentCategory != nullptr) {
-        qDebug() << _currentCategoryIndex << _currentCategory->title();
         switch (aIndex) {
         case 0: {
             updateFilterCategory(_currentCategoryIndex, true);
@@ -815,38 +857,9 @@ void FormAchievements::checkBoxCategory_StateChanged(int aIndex) {
         }
         }
     }
-//    QList<QString> nodeList;
-//    auto currentItem = ui->TreeWidgetCategories->currentItem();
-//    int currentIndex = dynamic_cast<QCheckBox*>(ui->TreeWidgetCategories->itemWidget(currentItem, 0))->accessibleName().toInt();
-//    while (currentItem != nullptr) {
-//        auto widget = ui->TreeWidgetCategories->itemWidget(currentItem, 0);
-//        if (dynamic_cast<QLabel*>(widget)) {
-//            nodeList.append(dynamic_cast<QLabel*>(widget)->text());
-//        }
-//        if (dynamic_cast<QCheckBox*>(widget)) {
-//            nodeList.append(dynamic_cast<QCheckBox*>(widget)->text());
-//        }
-//        currentItem = currentItem->parent();
-//    }
-//    qDebug() << nodeList;
-
-//    CategoryGame *category = &*std::find_if(_categoriesGame.begin(),
-//                                            _categoriesGame.end(),
-//                                            [=](CategoryGame &l_category) {
-//                                                return l_category.title() == nodeList.last();
-//                                            });
-//    nodeList.takeLast();
-//    while(!nodeList.isEmpty()) {
-//        category = &*std::find_if(  category->begin(),
-//                                    category->end(),
-//                                    [=](CategoryGame &l_category) {
-//                                        return l_category.title() == nodeList.last();
-//                                    });
-//        nodeList.takeLast();
-//    }
 }
 
-int FormAchievements::recursAddCategoryToTree(CategoryGame &aCategory, int aCount, QTreeWidgetItem *aRoot) {
+int FormAchievements::recursAddCategoryToTree(Category &aCategory, int aCount, QTreeWidgetItem *aRoot) {
     QTreeWidgetItem *subItem;
     if (aRoot == nullptr) {
         subItem = new QTreeWidgetItem(ui->TreeWidgetCategories);
@@ -881,7 +894,6 @@ void FormAchievements::showCategories() {
         count = recursAddCategoryToTree(category, count);
     }
 
-    qDebug() << "count = " << _categoriesGame.countAll();
     _fCategories.setCol(_categoriesGame.countAll());
     _fAchievements.setCol(_categoriesGame.countAll() + c_filterColumnCount);
     if (ui->TableViewCompare->model() != nullptr) {
@@ -1061,7 +1073,7 @@ void FormAchievements::loadEditCategory() {
     ui->CategoriesEdit->setGame(_game);
     ui->CategoriesEdit->setAchievements(_achievements);
     ui->CategoriesEdit->updateFilter(_fAchievements);
-    connect(ui->CategoriesEdit, &FormAchievementsCategoriesEdit::s_categoriesIsUpdated, this, [=](bool isUpdated) {
+    connect(ui->CategoriesEdit, &FormCategoriesEdit::s_categoriesIsUpdated, this, [=](bool isUpdated) {
         if (isUpdated) {
             showCategories();
         }

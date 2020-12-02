@@ -54,7 +54,7 @@ public slots:
     void setValuesMode(bool value);
     void setUniqueMode(bool unique);
     void setVisibleContentSelect(int pos, bool select);
-    void categoryToTable(const QString &title, QList<QString> aNoValues, QList<CategoryValue> aValues, bool aIsNoValue);
+    //void categoryToTable(const QString &title, QList<QString> aNoValues, QList<CategoryValue> aValues, bool aIsNoValue);
     bool swapCategoryColumns(int aPosOld, int aPosNew);
     void update();
     QString getHeaderText(int aIndex);

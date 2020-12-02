@@ -1,4 +1,4 @@
-#include "formachievementsfriendscompare.h"
+#include "formfriendscompare.h"
 #include "ui_formachievementsfriendscompare.h"
 
 constexpr int c_columnAppid             = 0;
@@ -20,7 +20,7 @@ constexpr int c_tableFriendsRowCount    = 4;
 //в ретранслейте
 //ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1)->setToolTip(tr("Достижения друзей"));
 
-FormAchievementsFriendsCompare::FormAchievementsFriendsCompare(QWidget *parent): QWidget(parent),
+FormFriendsCompare::FormFriendsCompare(QWidget *parent): QWidget(parent),
                                                                ui(new Ui::FormAchievementsFriendsCompare) {
     ui->setupUi(this);
 
@@ -82,11 +82,11 @@ FormAchievementsFriendsCompare::FormAchievementsFriendsCompare(QWidget *parent):
     #define ConnectsEnd }
 }
 
-FormAchievementsFriendsCompare::~FormAchievementsFriendsCompare() {
+FormFriendsCompare::~FormFriendsCompare() {
     delete ui;
 }
 
-QButtonWithData *FormAchievementsFriendsCompare::createButtonWithData(const QString &aObjectName, const QString &aAppertain, const QString &aType, bool aChecked) {
+QButtonWithData *FormFriendsCompare::createButtonWithData(const QString &aObjectName, const QString &aAppertain, const QString &aType, bool aChecked) {
     QButtonWithData *button = new QButtonWithData("", this);
     button->setObjectName(aObjectName);
     button->addData("Appertain", aAppertain);
@@ -96,7 +96,7 @@ QButtonWithData *FormAchievementsFriendsCompare::createButtonWithData(const QStr
     return button;
 }
 
-void FormAchievementsFriendsCompare::setIcons() {
+void FormFriendsCompare::setIcons() {
     QLabel *friendsIcon = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1));
     if (friendsIcon) {
         friendsIcon->setPixmap(QPixmap(Images::friends()));
@@ -126,7 +126,7 @@ void FormAchievementsFriendsCompare::setIcons() {
     }
 }
 
-void FormAchievementsFriendsCompare::initTableCompare() {
+void FormFriendsCompare::initTableCompare() {
     ui->TableViewCompare->setVerticalScrollMode  (QAbstractItemView::ScrollMode::ScrollPerPixel);
     ui->TableViewCompare->setHorizontalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
 
@@ -151,7 +151,7 @@ void FormAchievementsFriendsCompare::initTableCompare() {
     });
 }
 
-void FormAchievementsFriendsCompare::updateFilterWithFriend(const QString &aFriendName, ReachedType aType) {
+void FormFriendsCompare::updateFilterWithFriend(const QString &aFriendName, ReachedType aType) {
     int columnFriend = 0;
 //    for (auto &column: _friendsColumns) {
 //        if (ui->TableWidgetHorizontalHeader->horizontalHeaderItem(column)->text() == aFriendName){
@@ -186,7 +186,7 @@ void FormAchievementsFriendsCompare::updateFilterWithFriend(const QString &aFrie
 //    updateHiddenRows();
 }
 
-void FormAchievementsFriendsCompare::loadingCompare() {
+void FormFriendsCompare::loadingCompare() {
     ++_loadCompare;
     _profilesFriends = SFriends(_profile._steamID, false).getProfiles();
     ui->TableWidgetFriends->setColumnCount(_profilesFriends.getCount() + 2);
@@ -207,7 +207,7 @@ void FormAchievementsFriendsCompare::loadingCompare() {
     }
 }
 
-void FormAchievementsFriendsCompare::loadFriendGames(SGames *aGames) {
+void FormFriendsCompare::loadFriendGames(SGames *aGames) {
     disconnect(aGames, SIGNAL(s_finished(SGames*)), this, SLOT(loadFriendGames(SGames*)));
     bool isGameExist = std::any_of(aGames->begin(), 
                                    aGames->end(), 
@@ -230,7 +230,7 @@ void FormAchievementsFriendsCompare::loadFriendGames(SGames *aGames) {
 //    }
 }
 
-void FormAchievementsFriendsCompare::finishLoadFriends() {
+void FormFriendsCompare::finishLoadFriends() {
 //    ui->ProgressBarLoad->setVisible(false);
     int row = 2;
     for(auto &friendP: _friends) {
@@ -251,12 +251,12 @@ void FormAchievementsFriendsCompare::finishLoadFriends() {
         ui->TableWidgetFriends->setColumnHidden(row, friendP.second == FriendType::haventGame);
         ++row;
     }
-    connect(ui->TableWidgetFriends, &QTableWidget::cellChanged, this, &FormAchievementsFriendsCompare::tableWidgetCompareFriends_CellChanged);
+    connect(ui->TableWidgetFriends, &QTableWidget::cellChanged, this, &FormFriendsCompare::tableWidgetCompareFriends_CellChanged);
     ++_loadCompare;
 //    ui->TableWidgetFriends->setVisible(_currentMode == FormMode::compare);
 }
 
-void FormAchievementsFriendsCompare::compareProfileFilterClickFriends(const QString &aName, ReachedType aType) {
+void FormFriendsCompare::compareProfileFilterClickFriends(const QString &aName, ReachedType aType) {
     QLabel *friendAvatar = dynamic_cast<QLabel*>(ui->TableWidgetFriends->cellWidget(0, aName.toInt()));
     if (friendAvatar) {
         QString name = friendAvatar->toolTip();
@@ -266,7 +266,7 @@ void FormAchievementsFriendsCompare::compareProfileFilterClickFriends(const QStr
     }
 }
 
-void FormAchievementsFriendsCompare::buttonCompareAllFriendsReach_Clicked() {
+void FormFriendsCompare::buttonCompareAllFriendsReach_Clicked() {
     QButtonWithData *senderButton = dynamic_cast<QButtonWithData*>(sender());
     if (senderButton) {
         ReachedType setType = ReachedType::none;
@@ -290,7 +290,7 @@ void FormAchievementsFriendsCompare::buttonCompareAllFriendsReach_Clicked() {
     }
 }
 
-void FormAchievementsFriendsCompare::tableWidgetCompareFriends_CellChanged(int aRow, int aColumn) {
+void FormFriendsCompare::tableWidgetCompareFriends_CellChanged(int aRow, int aColumn) {
     if ((aRow == 1) && (aColumn > 1)) {
         SProfile profileFriend = _friends[aColumn - 2].first;
         if (ui->TableWidgetFriends->item(aRow, aColumn)->checkState() == Qt::Checked) {
@@ -301,7 +301,7 @@ void FormAchievementsFriendsCompare::tableWidgetCompareFriends_CellChanged(int a
 //            _tableAchievements->removeFriendColumn(profileFriend._personaName);
             FormCompareProfileFilter *friendFilter = findChild<FormCompareProfileFilter*>("FormCompareProfileFilterFriend" + QString::number(aColumn));
             if (friendFilter) {
-                disconnect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this, &FormAchievementsFriendsCompare::compareProfileFilterClickFriends);
+                disconnect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this, &FormFriendsCompare::compareProfileFilterClickFriends);
                 ui->TableWidgetFriends->removeCellWidget(c_tableFriendsRowFilters, aColumn);
                 delete friendFilter;
                 //ui->TableWidgetFriends->resizeColumnsToContents();
@@ -312,20 +312,20 @@ void FormAchievementsFriendsCompare::tableWidgetCompareFriends_CellChanged(int a
     }
 }
 
-void FormAchievementsFriendsCompare::createCompareProfileFilter(bool aAccept, int aColumn) {
+void FormFriendsCompare::createCompareProfileFilter(bool aAccept, int aColumn) {
     if (aAccept) {
         FormCompareProfileFilter *friendFilter = new FormCompareProfileFilter(this);
         friendFilter->setObjectName("FormCompareProfileFilterFriend" + QString::number(aColumn));
         friendFilter->setName(QString::number(aColumn));
-        connect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this,         &FormAchievementsFriendsCompare::compareProfileFilterClickFriends);
-        connect(this,         &FormAchievementsFriendsCompare::s_updateSettings,            friendFilter, &FormCompareProfileFilter::updateSettings);
+        connect(friendFilter, &FormCompareProfileFilter::s_radioButtonChange, this,         &FormFriendsCompare::compareProfileFilterClickFriends);
+        connect(this,         &FormFriendsCompare::s_updateSettings,            friendFilter, &FormCompareProfileFilter::updateSettings);
         ui->TableWidgetFriends->setCellWidget(c_tableFriendsRowFilters, aColumn, friendFilter);
         //ui->TableWidgetFriends->resizeRowsToContents();
         //ui->TableWidgetFriends->resizeColumnsToContents();
     }
 }
 
-void FormAchievementsFriendsCompare::checkBoxCompareAllFriends_StateChanged(int arg1) {
+void FormFriendsCompare::checkBoxCompareAllFriends_StateChanged(int arg1) {
     switch (arg1) {
     case 0: {
         for (int i = 0; i < _friends.size(); ++i) {

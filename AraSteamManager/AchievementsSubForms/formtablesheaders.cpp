@@ -426,39 +426,39 @@ void FormTablesHeaders::setVisibleContentSelect(int aPos, bool aSelect) {
     updateHiddenRows();
 }
 
-void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aNoValues, QList<CategoryValue> aValues, bool aIsNoValue) {
-    if (_currentType == TableType::standart) {
-        setColumnCount(c_columnCount);
-        _categoriesColumns.clear();
-        addNoValueColumn();
-        changeHorizontalTitle(_noValueColumn, aTitle);
-        for (int j = 0; j < getRowCount(); ++j) {
-            bool isAchievementCheck = true;
-            for(int k = 0; k < aNoValues.size(); ++k) {
-                if(itemContent(j, c_columnAppid)->text() == aNoValues[k]) {
-                    isAchievementCheck = false;
-                    break;
-                }
-            }
-            setItemContent(j, _noValueColumn, createFlag(isAchievementCheck));
-        }
-        for(auto category: aValues) {
-            addCategoryColumn();
-            changeHorizontalTitle(getColumnCount() - 1, category.title);
-            for (int j = 0; j < getRowCount(); ++j) {
-                bool isAchievementCheck = false;
-                for (auto appid: category.achievements) {
-                    if (itemContent(j, c_columnAppid)->text() == appid) {
-                        isAchievementCheck = true;
-                        break;
-                    }
-                }
-                setItemContent(j, getColumnCount() - 1, createFlag(isAchievementCheck));
-            }
-        }
-        setValuesMode(!aIsNoValue);
-    }
-}
+//void FormTablesHeaders::categoryToTable(const QString &aTitle, QList<QString> aNoValues, QList<CategoryValue> aValues, bool aIsNoValue) {
+//    if (_currentType == TableType::standart) {
+//        setColumnCount(c_columnCount);
+//        _categoriesColumns.clear();
+//        addNoValueColumn();
+//        changeHorizontalTitle(_noValueColumn, aTitle);
+//        for (int j = 0; j < getRowCount(); ++j) {
+//            bool isAchievementCheck = true;
+//            for(int k = 0; k < aNoValues.size(); ++k) {
+//                if(itemContent(j, c_columnAppid)->text() == aNoValues[k]) {
+//                    isAchievementCheck = false;
+//                    break;
+//                }
+//            }
+//            setItemContent(j, _noValueColumn, createFlag(isAchievementCheck));
+//        }
+//        for(auto category: aValues) {
+//            addCategoryColumn();
+//            changeHorizontalTitle(getColumnCount() - 1, category.title);
+//            for (int j = 0; j < getRowCount(); ++j) {
+//                bool isAchievementCheck = false;
+//                for (auto appid: category.achievements) {
+//                    if (itemContent(j, c_columnAppid)->text() == appid) {
+//                        isAchievementCheck = true;
+//                        break;
+//                    }
+//                }
+//                setItemContent(j, getColumnCount() - 1, createFlag(isAchievementCheck));
+//            }
+//        }
+//        setValuesMode(!aIsNoValue);
+//    }
+//}
 
 bool FormTablesHeaders::swapCategoryColumns(int aPosOld, int aPosNew) {
     if((_noValueColumn == -1) ||

@@ -30,7 +30,7 @@ void FormContainerAchievements::addFormAchievement(SAchievementsPlayer &aPl, SPr
         }
     }
     FormAchievements *newFormAchievements = new FormAchievements(aPl, aProfile, aGame, aNum, this);
-    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements, aGame.name() + "  ");
+    int tabIndex = ui->TabWidgetAchievements->addTab(newFormAchievements, aGame.name());
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
     ui->TabWidgetAchievements->setTabIcon(tabIndex, aGame.pixmapIcon());
 }

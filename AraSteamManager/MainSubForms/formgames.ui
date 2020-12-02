@@ -36,9 +36,9 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="GroupBoxFilter">
      <property name="title">
-      <string>Фильтр</string>
+      <string>     Фильтр</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>

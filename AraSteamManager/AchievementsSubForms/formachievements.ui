@@ -47,87 +47,6 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QFrame" name="FrameCategories">
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QScrollArea" name="ScrollAreaCategories">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QAbstractScrollArea::AdjustToContents</enum>
-           </property>
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="widget">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>434</width>
-              <height>68</height>
-             </rect>
-            </property>
-            <layout class="QFormLayout" name="layoutComboBoxCategories"/>
-           </widget>
-          </widget>
-         </item>
-         <item>
-          <widget class="QScrollArea" name="ScrollAreaCheckCategories">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="sizeAdjustPolicy">
-            <enum>QAbstractScrollArea::AdjustToContents</enum>
-           </property>
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="widget_2">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>434</width>
-              <height>68</height>
-             </rect>
-            </property>
-            <layout class="QFormLayout" name="layoutCheckBoxCategories"/>
-           </widget>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_10">
         <item>
          <widget class="QLabel" name="LabelTotalPersent">
@@ -317,7 +236,7 @@
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="FormAchievementsCategoriesEdit" name="CategoriesEdit" native="true"/>
+          <widget class="FormCategoriesEdit" name="CategoriesEdit" native="true"/>
          </item>
         </layout>
        </widget>
@@ -520,9 +439,9 @@
    <header>class\NotMine\freezetablewidget.h</header>
   </customwidget>
   <customwidget>
-   <class>FormAchievementsCategoriesEdit</class>
+   <class>FormCategoriesEdit</class>
    <extends>QWidget</extends>
-   <header>AchievementsSubForms\formachievementscategoriesedit.h</header>
+   <header>AchievementsSubForms\formcategoriesedit.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

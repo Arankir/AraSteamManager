@@ -29,7 +29,7 @@ class Ui_FormGames
 {
 public:
     QVBoxLayout *verticalLayout_2;
-    QGroupBox *groupBox;
+    QGroupBox *GroupBoxFilter;
     QVBoxLayout *verticalLayout_5;
     QHBoxLayout *horizontalLayout;
     QLineEdit *LineEditGame;
@@ -53,13 +53,13 @@ public:
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        groupBox = new QGroupBox(FormGames);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        verticalLayout_5 = new QVBoxLayout(groupBox);
+        GroupBoxFilter = new QGroupBox(FormGames);
+        GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
+        verticalLayout_5 = new QVBoxLayout(GroupBoxFilter);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        LineEditGame = new QLineEdit(groupBox);
+        LineEditGame = new QLineEdit(GroupBoxFilter);
         LineEditGame->setObjectName(QString::fromUtf8("LineEditGame"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -70,7 +70,7 @@ public:
 
         horizontalLayout->addWidget(LineEditGame);
 
-        ButtonFind = new QPushButton(groupBox);
+        ButtonFind = new QPushButton(GroupBoxFilter);
         ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
         ButtonFind->setEnabled(true);
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
@@ -90,12 +90,12 @@ public:
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        ComboBoxGroups = new MultiSelectComboBox(groupBox);
+        ComboBoxGroups = new MultiSelectComboBox(GroupBoxFilter);
         ComboBoxGroups->setObjectName(QString::fromUtf8("ComboBoxGroups"));
 
         horizontalLayout_6->addWidget(ComboBoxGroups);
 
-        CheckBoxFavorites = new QCheckBox(groupBox);
+        CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
         CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
         QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
@@ -109,7 +109,7 @@ public:
         verticalLayout_5->addLayout(horizontalLayout_6);
 
 
-        verticalLayout_2->addWidget(groupBox);
+        verticalLayout_2->addWidget(GroupBoxFilter);
 
         TableGames = new QTableView(FormGames);
         TableGames->setObjectName(QString::fromUtf8("TableGames"));
@@ -132,7 +132,7 @@ public:
     void retranslateUi(QWidget *FormGames)
     {
         FormGames->setWindowTitle(QCoreApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("FormGames", "\320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
+        GroupBoxFilter->setTitle(QCoreApplication::translate("FormGames", "     \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
         LineEditGame->setPlaceholderText(QCoreApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
         ButtonFind->setText(QCoreApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
         CheckBoxFavorites->setText(QCoreApplication::translate("FormGames", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
