@@ -40,10 +40,12 @@ release/formgroupsgamesinteractions.o
 release/frameless.o
 release/main.o
 release/mainwindow.o
+release/listachievementsmodel.o
 release/qbuttonwithdata.o
 release/qcheckboxwithdata.o
 release/qcomboboxwithdata.o
 release/qlistwidgetachievement.o
+release/qlistwidgetachievements.o
 release/qradiobuttonwithdata.o
 release/qrc_resimg.o
 release/qrc_lang.o
@@ -82,4 +84,5 @@ release/moc_formcontainerachievements.o
 release/moc_formgroupsgamesinteractions.o
 release/moc_frameless.o
 release/moc_mainwindow.o
-release/moc_qlistwidgetachievement.o
+release/moc_listachievementsmodel.o
+release/moc_qlistwidgetachievements.o

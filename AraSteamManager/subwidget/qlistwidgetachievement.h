@@ -8,9 +8,10 @@ class QListWidgetAchievement : public QListWidgetItem {
 public:
     QListWidgetAchievement(SAchievement *achievement);
     QListWidgetAchievement(): QListWidgetItem() {}
+    ~QListWidgetAchievement();
 
     QListWidgetAchievement &operator=(const QListWidgetAchievement&);
-
+    bool operator==(const QListWidgetAchievement&);
 
     SAchievement *_achievement = nullptr;
 };

@@ -40,10 +40,12 @@ debug/formgroupsgamesinteractions.o
 debug/frameless.o
 debug/main.o
 debug/mainwindow.o
+debug/listachievementsmodel.o
 debug/qbuttonwithdata.o
 debug/qcheckboxwithdata.o
 debug/qcomboboxwithdata.o
 debug/qlistwidgetachievement.o
+debug/qlistwidgetachievements.o
 debug/qradiobuttonwithdata.o
 debug/qrc_resimg.o
 debug/qrc_lang.o
@@ -82,4 +84,5 @@ debug/moc_formcontainerachievements.o
 debug/moc_formgroupsgamesinteractions.o
 debug/moc_frameless.o
 debug/moc_mainwindow.o
-debug/moc_qlistwidgetachievement.o
+debug/moc_listachievementsmodel.o
+debug/moc_qlistwidgetachievements.o

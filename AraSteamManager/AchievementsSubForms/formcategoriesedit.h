@@ -7,11 +7,14 @@
 #include <QDrag>
 #include <QMimeData>
 #include <QTreeWidgetItem>
+#include <QMenu>
+#include <QAction>
 #include "class/settings.h"
 #include "class/myfilter.h"
 #include "class/categoriesgame.h"
 #include "class/steamapi/Sgames.h"
 #include "subwidget/qlistwidgetachievement.h"
+#include "subwidget/listachievementsmodel.h"
 
 enum class EditType {
     none,
@@ -30,11 +33,12 @@ public:
     explicit FormCategoriesEdit(const SGame &game, QWidget *parent = nullptr);
     explicit FormCategoriesEdit(QWidget *parent = nullptr);
     ~FormCategoriesEdit();
-    void setGame(SGame game);
+    void setGame(SGame &game);
     void setAchievements(SAchievements &aAchievements);
     void updateFilter(const MyFilter &aFilter);
     void changeCategory(Category *aCategory, int aGlobalIndex);
     void addSubCategory(Category *aParent);
+    void deleteCategory(Category *aCategory, int aGlobalIndex);
 
 signals:
     void s_categoriesIsUpdated(bool isUpdated);
@@ -52,10 +56,11 @@ private slots:
     void buttonDelete_Clicked();
     void buttonDeleteAll_Clicked();
     bool isCategoryNameExist(const QString &name);
-    void updateParentTree();
-    int recursAddToParentTree(Category &category, int count, QTreeWidgetItem *root = nullptr);
     void changeParentButton_Clicked();
-    void changeNewParent(Category *aParent);
+    void changeNewParent(Category *parent);
+    QMenu *createParentMenu();
+    QMenu *createParentSubMenu(Category &category, int &number);
+    void changeNewParentFromAction();
 private:
     Ui::FormAchievementsCategoriesEdit *ui;
     SGame _game;

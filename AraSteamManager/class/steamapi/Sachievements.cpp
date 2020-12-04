@@ -24,11 +24,11 @@ SAchievement::SAchievement(const QJsonObject &aObject): _apiName(aObject.value("
                            _unlockTime(QDateTime::fromString(aObject.value("unlockTime").toString())),
                            _percent(aObject.value("percent").toDouble()), _icon(aObject.value("icon").toString()),
                            _iconGray(aObject.value("iconGray").toString()) {
-    //qDebug()<<"SAchievement copy"<<_apiName;
+    //qDebug() << "SAchievement constructor 1" << aObject;
 }
 
-SAchievement::SAchievement(const QString &aText): SAchievement(QJsonValue(aText).toObject()) {
-    //qDebug()<<"SAchievement copy"<<_apiName;
+SAchievement::SAchievement(const QString &aText): SAchievement(QJsonDocument::fromJson(aText.toUtf8()).object()) {
+    //qDebug() << "SAchievement constructor 2" << aText;
 }
 
 SAchievement &SAchievement::operator=(const SAchievement &aAchievement) {

@@ -15,7 +15,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <item>
-    <widget class="QListWidget" name="ListWidgetAll">
+    <widget class="QListWidgetAchievements" name="ListWidgetAll">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -78,6 +78,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="LabelCategoryParent">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer_10">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -133,27 +140,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="ListWidgetCategory"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QLabel" name="LabelCategoryParent">
-           <property name="text">
-            <string notr="true">dgff</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTreeWidget" name="TreeWidgetChangeParent">
-           <column>
-            <property name="text">
-             <string notr="true">1</string>
-            </property>
-           </column>
-          </widget>
+          <widget class="QListWidgetAchievements" name="ListWidgetCategory"/>
          </item>
         </layout>
        </item>
@@ -163,6 +150,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QListWidgetAchievements</class>
+   <extends>QListWidget</extends>
+   <header>subwidget/qlistwidgetachievements.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

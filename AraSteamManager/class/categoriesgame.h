@@ -24,15 +24,13 @@ public:
 
     Category &setParent(Category *parent);
     Category &setTitle(const QString &title);
-    Category &setAchievements(QList<QString> &achievements);
+    Category &setAchievements(const QList<QString> &achievements);
     Category &updateParents();
 
     Category &addCategory(Category &category);
     bool addSubCategory(Category &aCategory);
-    Category &removeCategoryAt(int index);
     bool removeCategory(Category &category);
-    bool removeCategoryAtGlobalIndex(int &aIndex);
-    Category takeCategoryAtGlobalIndex(int aIndex);
+    bool removeCategoryAtDirect(int &aIndex);
 
     Category &fromJson(const QJsonObject &categoryGame);
     QList<Category*> directTraversalList();
@@ -68,12 +66,11 @@ public:
     Category &operator[](const int index) {return _categories[index];}
 
     void setGame(SGame game);
-    Category *getCategoryAtGlobalIndex(int index);
+    Category *categoryAtDirect(int index);
 
     Categories &addCategory(const QString &title, QList<QString> achievements, const QList<Category> &categories);
     Categories &addCategory(Category &category);
     bool addSubCategory(Category &aCategory);
-    Categories &deleteCategoryAtGlobalIndex(int index);
     bool removeCategory(Category &category);
     Categories &deleteAll();
 

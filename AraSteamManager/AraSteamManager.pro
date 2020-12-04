@@ -67,10 +67,12 @@ SOURCES += \
     frameless.cpp \
         main.cpp \
         mainwindow.cpp \
+    subwidget/listachievementsmodel.cpp \
     subwidget/qbuttonwithdata.cpp \
     subwidget/qcheckboxwithdata.cpp \
     subwidget/qcomboboxwithdata.cpp \
     subwidget/qlistwidgetachievement.cpp \
+    subwidget/qlistwidgetachievements.cpp \
     subwidget/qradiobuttonwithdata.cpp
 
 HEADERS += \
@@ -115,10 +117,12 @@ HEADERS += \
     formgroupsgamesinteractions.h \
     frameless.h \
         mainwindow.h \
+    subwidget/listachievementsmodel.h \
     subwidget/qbuttonwithdata.h \
     subwidget/qcheckboxwithdata.h \
     subwidget/qcomboboxwithdata.h \
     subwidget/qlistwidgetachievement.h \
+    subwidget/qlistwidgetachievements.h \
     subwidget/qradiobuttonwithdata.h
 
 FORMS += \

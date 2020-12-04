@@ -4,6 +4,18 @@ Categories::Categories(SGame &aGame, QObject *aParent): QObject(aParent), _game(
     update();
 }
 
+void Categories::setGame(SGame aGame) {
+    _game = aGame;
+    _gameName = _game.name();
+    _gameId = _game.appId();
+    update();
+}
+
+Categories &Categories::update() {
+    load();
+    return *this;
+}
+
 Category *findCategory(int &aIndex, Category &aCategory) {
     for(auto &subCategory: aCategory) {
         if (aIndex == 0) {
@@ -19,7 +31,7 @@ Category *findCategory(int &aIndex, Category &aCategory) {
     return nullptr;
 }
 
-Category *Categories::getCategoryAtGlobalIndex(int aIndex) {
+Category *Categories::categoryAtDirect(int aIndex) {
     Category *category;
     for(auto &subCategory: _categories) {
         if (aIndex == 0) {
@@ -32,18 +44,6 @@ Category *Categories::getCategoryAtGlobalIndex(int aIndex) {
         }
     }
     return nullptr;
-}
-
-void Categories::setGame(SGame aGame) {
-    _game = aGame;
-    _gameName = _game.name();
-    _gameId = _game.appId();
-    update();
-}
-
-Categories &Categories::update() {
-    load();
-    return *this;
 }
 
 Categories &Categories::addCategory(const QString &aTitle, QList<QString> aAchievements, const QList<Category> &aCategories) {
@@ -71,23 +71,6 @@ bool Categories::addSubCategory(Category &aCategory) {
     return false;
 }
 
-Categories &Categories::deleteCategoryAtGlobalIndex(int aIndex) {
-    int localIndex = 0;
-    for(auto &subCategory: _categories) {
-        if (aIndex == 0) {
-            _categories.removeAt(localIndex);
-            break;
-        }
-        --aIndex;
-        ++localIndex;
-        if (subCategory.removeCategoryAtGlobalIndex(aIndex) == true) {
-            break;
-        }
-    }
-    save(toJson());
-    return *this;
-}
-
 bool Categories::removeCategory(Category &aCategory) {
     if (_categories.removeOne(aCategory)) {
         save(toJson());
@@ -109,14 +92,6 @@ Categories &Categories::deleteAll() {
     return *this;
 }
 
-void Categories::save(QJsonObject aCategories) {
-    Settings::createDir(Paths::categories());
-    QFile fileCategory(Paths::categories(_game.sAppId()));
-    fileCategory.open(QFile::WriteOnly);
-    fileCategory.write(QJsonDocument(aCategories).toJson());
-    fileCategory.close();
-}
-
 int Categories::countAll() const {
     int count = 0;
     for(auto subCategory: _categories) {
@@ -124,6 +99,14 @@ int Categories::countAll() const {
         ++count;
     }
     return count;
+}
+
+void Categories::save(QJsonObject aCategories) {
+    Settings::createDir(Paths::categories());
+    QFile fileCategory(Paths::categories(_game.sAppId()));
+    fileCategory.open(QFile::WriteOnly);
+    fileCategory.write(QJsonDocument(aCategories).toJson());
+    fileCategory.close();
 }
 
 void Categories::load() {
@@ -199,7 +182,7 @@ Category &Category::setTitle(const QString &aTitle) {
     return *this;
 }
 
-Category &Category::setAchievements(QList<QString> &aAchievements) {
+Category &Category::setAchievements(const QList<QString> &aAchievements) {
     _achievements = aAchievements;
     return *this;
 }
@@ -227,12 +210,6 @@ bool Category::addSubCategory(Category &aCategory) {
     return false;
 }
 
-Category &Category::removeCategoryAt(int aIndex) {
-    _categories.removeAt(aIndex);
-    updateParents();
-    return *this;
-}
-
 bool Category::removeCategory(Category &aCategory) {
     if (_categories.removeOne(aCategory)) {
         updateParents();
@@ -248,7 +225,7 @@ bool Category::removeCategory(Category &aCategory) {
     return false;
 }
 
-bool Category::removeCategoryAtGlobalIndex(int &aIndex) {
+bool Category::removeCategoryAtDirect(int &aIndex) {
     int localIndex = 0;
     for(auto &subCategory: _categories) {
         if (aIndex == 0) {
@@ -258,7 +235,7 @@ bool Category::removeCategoryAtGlobalIndex(int &aIndex) {
         }
         --aIndex;
         ++localIndex;
-        if (subCategory.removeCategoryAtGlobalIndex(aIndex) == true) {
+        if (subCategory.removeCategoryAtDirect(aIndex) == true) {
             updateParents();
             return true;
         }
@@ -267,20 +244,30 @@ bool Category::removeCategoryAtGlobalIndex(int &aIndex) {
     return false;
 }
 
-Category Category::takeCategoryAtGlobalIndex(int aIndex) {
-    int localIndex = 0;
-    for(auto &subCategory: _categories) {
-        if (aIndex == 0) {
-            return _categories.takeAt(localIndex);
-        }
-        --aIndex;
-        ++localIndex;
-        Category sub = subCategory.takeCategoryAtGlobalIndex(aIndex);
-        if (sub.title() != "") {
-            return sub;
-        }
+int Category::countCategories() const {
+    int count = 0;
+    for (auto &subCategory: _categories) {
+        ++count;
+        count += subCategory.countCategories();
     }
-    return Category();
+    return count;
+}
+
+Category &Category::updateParents() {
+    for (auto &category: _categories) {
+        category.setParent(this);
+        category.updateParents();
+    }
+    return *this;
+}
+
+QList<Category*> Category::directTraversalList() {
+    QList<Category*> list;
+    for (auto &category: _categories) {
+        list.append(&category);
+        list.append(category.directTraversalList());
+    }
+    return list;
 }
 
 Category &Category::fromJson(const QJsonObject &aCategoryGame) {
@@ -317,31 +304,5 @@ QJsonObject Category::toJson() const {
     result["categories"] = valuesCategories;
 
     return result;
-}
-
-int Category::countCategories() const {
-    int count = 0;
-    for (auto &subCategory: _categories) {
-        ++count;
-        count += subCategory.countCategories();
-    }
-    return count;
-}
-
-Category &Category::updateParents() {
-    for (auto &category: _categories) {
-        category.setParent(this);
-        category.updateParents();
-    }
-    return *this;
-}
-
-QList<Category*> Category::directTraversalList() {
-    QList<Category*> list;
-    for (auto &category: _categories) {
-        list.append(&category);
-        list.append(category.directTraversalList());
-    }
-    return list;
 }
 #define CategoryEnd }

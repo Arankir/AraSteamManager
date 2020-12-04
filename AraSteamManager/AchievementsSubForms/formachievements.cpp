@@ -43,8 +43,7 @@ void FormAchievements::initComponents() {
     this->setAttribute(Qt::WA_TranslucentBackground);
 
     //Временно
-    _achievements.set(SAchievementsPercentage(_game.sAppId())).set(SAchievementsGlobal(_game.sAppId()));
-    _achievements.update(false);
+    _achievements.set(SAchievementsPercentage(_game.sAppId())).set(SAchievementsGlobal(_game.sAppId())).update(false);
 
     _fCategories.setCol(_categoriesGame.countAll());
     _fAchievements.setCol(c_filterColumnCount);
@@ -338,7 +337,7 @@ void FormAchievements::updateCurrentCategory() {
             _currentCategoryIndex = label->accessibleName().toInt();
         }
     }
-    _currentCategory = _categoriesGame.getCategoryAtGlobalIndex(_currentCategoryIndex);
+    _currentCategory = _categoriesGame.categoryAtDirect(_currentCategoryIndex);
 }
 
 QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
@@ -386,7 +385,7 @@ QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
 
 QMenu *FormAchievements::createMenuCategory(const Category &aCategory) {
     //Кнопка изменения достижений
-    QAction *actionAchievements = new QAction(tr("Изменить достижения"), this);
+    QAction *actionAchievements = new QAction(tr("Изменить категорию"), this);
     actionAchievements->setIcon(QIcon(Images::change()));
 
     //Кнопка добавления подкатегории
@@ -396,7 +395,6 @@ QMenu *FormAchievements::createMenuCategory(const Category &aCategory) {
     //Кнопка удаления категории
     QAction *actionDelete = new QAction(tr("Удалить категорию"), this);
     actionDelete->setIcon(QIcon(Images::deleteIcon()));
-    //actionGroup->setIcon(QIcon(Images::group1()));
 
     QMenu *menu = new QMenu(this);
     menu->addAction (actionAchievements);
@@ -422,31 +420,8 @@ void FormAchievements::categoryAddSubCategory() {
 }
 
 void FormAchievements::categoryDelete() {
-    updateCurrentCategory();
-    if (_currentCategory != nullptr) {
-        QMessageBox deleteQuestion(QMessageBox::Question,
-                               tr("Внимание!"),
-                               tr("Вы уверены, что хотите удалить категорию?"));
-        QAbstractButton *btnYes = deleteQuestion.addButton(tr("Да"), QMessageBox::YesRole);
-        deleteQuestion.addButton(tr("Отмена"), QMessageBox::NoRole);
-        deleteQuestion.exec();
-        if(deleteQuestion.clickedButton() != btnYes) {
-            return;
-        }
-
-        if (_currentCategory->categories().count() > 0) {
-            deleteQuestion.setText(tr("Подкатегории будут удалены, вы точно хотите удалить категорию?"));
-            deleteQuestion.exec();
-            if (deleteQuestion.clickedButton() != btnYes) {
-                return;
-            }
-
-        }
-
-        _categoriesGame.removeCategory(*_currentCategory);
-        QMessageBox::information(this, tr("Успешно"), tr("Категория была удалена!"));
-    }
-    showCategories();
+    ui->tabWidget->setCurrentIndex(c_tabCategories);
+    ui->CategoriesEdit->deleteCategory(_currentCategory, _currentCategoryIndex);
 }
 
 void FormAchievements::buttonComment_Clicked() {

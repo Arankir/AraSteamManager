@@ -12,15 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "subwidget/qlistwidgetachievements.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -28,23 +26,21 @@ class Ui_FormAchievementsCategoriesEdit
 {
 public:
     QHBoxLayout *horizontalLayout_3;
-    QListWidget *ListWidgetAll;
+    QListWidgetAchievements *ListWidgetAll;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout;
     QPushButton *ButtonAddCategory;
     QPushButton *ButtonDeleteCategory;
     QPushButton *ButtonDeleteAllCategories;
     QPushButton *ButtonChangeParent;
+    QLabel *LabelCategoryParent;
     QSpacerItem *horizontalSpacer_10;
     QPushButton *ButtonAcceptCategory;
     QPushButton *ButtonCancelCategory;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout;
     QLineEdit *LineEditTitleCategory;
-    QListWidget *ListWidgetCategory;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *LabelCategoryParent;
-    QTreeWidget *TreeWidgetChangeParent;
+    QListWidgetAchievements *ListWidgetCategory;
 
     void setupUi(QWidget *FormAchievementsCategoriesEdit)
     {
@@ -53,7 +49,7 @@ public:
         FormAchievementsCategoriesEdit->resize(974, 547);
         horizontalLayout_3 = new QHBoxLayout(FormAchievementsCategoriesEdit);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        ListWidgetAll = new QListWidget(FormAchievementsCategoriesEdit);
+        ListWidgetAll = new QListWidgetAchievements(FormAchievementsCategoriesEdit);
         ListWidgetAll->setObjectName(QString::fromUtf8("ListWidgetAll"));
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -94,6 +90,12 @@ public:
 
         horizontalLayout->addWidget(ButtonChangeParent);
 
+        LabelCategoryParent = new QLabel(FormAchievementsCategoriesEdit);
+        LabelCategoryParent->setObjectName(QString::fromUtf8("LabelCategoryParent"));
+        LabelCategoryParent->setText(QString::fromUtf8(""));
+
+        horizontalLayout->addWidget(LabelCategoryParent);
+
         horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_10);
@@ -125,32 +127,13 @@ public:
 
         verticalLayout->addWidget(LineEditTitleCategory);
 
-        ListWidgetCategory = new QListWidget(FormAchievementsCategoriesEdit);
+        ListWidgetCategory = new QListWidgetAchievements(FormAchievementsCategoriesEdit);
         ListWidgetCategory->setObjectName(QString::fromUtf8("ListWidgetCategory"));
 
         verticalLayout->addWidget(ListWidgetCategory);
 
 
         horizontalLayout_2->addLayout(verticalLayout);
-
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        LabelCategoryParent = new QLabel(FormAchievementsCategoriesEdit);
-        LabelCategoryParent->setObjectName(QString::fromUtf8("LabelCategoryParent"));
-        LabelCategoryParent->setText(QString::fromUtf8("dgff"));
-
-        verticalLayout_2->addWidget(LabelCategoryParent);
-
-        TreeWidgetChangeParent = new QTreeWidget(FormAchievementsCategoriesEdit);
-        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
-        __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
-        TreeWidgetChangeParent->setHeaderItem(__qtreewidgetitem);
-        TreeWidgetChangeParent->setObjectName(QString::fromUtf8("TreeWidgetChangeParent"));
-
-        verticalLayout_2->addWidget(TreeWidgetChangeParent);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_2);
 
 
         verticalLayout_3->addLayout(horizontalLayout_2);

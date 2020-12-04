@@ -99,6 +99,11 @@ public:
     const QDateTime _unlockTime;
     const double    _percent;
 
+    friend QDebug operator<<(QDebug dbg, const SAchievement &a) {
+        dbg.nospace() << "Achievement(" << a.toString() << ")\n";
+        return dbg.space();
+    }
+
 private:
     const QString _icon;
     const QString _iconGray;

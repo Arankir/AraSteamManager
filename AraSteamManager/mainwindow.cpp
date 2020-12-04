@@ -527,10 +527,16 @@ QString MainWindow::getTheme() {
                     "background-color: rgba(30, 41, 59, 0.5); "// + backgroundGradient +
                 "} "
                 "QListView::item { "
-                    "border-bottom: 1px solid #cccccc; "
                     "background-color: rgba(23, 26, 33, 0.5); "
-                    "color: white; "
+                    "color: #dddddd; "
+                    "margin-top: 10px; "
+                    "padding: 4px; "
                 "} "
+//                "QListView::item { "
+//                    "border-bottom: 1px solid #cccccc; "
+//                    "background-color: rgba(23, 26, 33, 0.5); "
+//                    "color: white; "
+//                "} "
 #define listviewend }
                 "QTreeView { "
                     "border: 0px solid #cccccc; "

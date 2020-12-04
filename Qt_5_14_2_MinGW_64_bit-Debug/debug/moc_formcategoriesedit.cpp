@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoriesEdit_t {
-    QByteArrayData data[33];
-    char stringdata0[447];
+    QByteArrayData data[34];
+    char stringdata0[461];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -54,17 +54,18 @@ QT_MOC_LITERAL(18, 230, 20), // "buttonDelete_Clicked"
 QT_MOC_LITERAL(19, 251, 23), // "buttonDeleteAll_Clicked"
 QT_MOC_LITERAL(20, 275, 19), // "isCategoryNameExist"
 QT_MOC_LITERAL(21, 295, 4), // "name"
-QT_MOC_LITERAL(22, 300, 16), // "updateParentTree"
-QT_MOC_LITERAL(23, 317, 21), // "recursAddToParentTree"
-QT_MOC_LITERAL(24, 339, 9), // "Category&"
-QT_MOC_LITERAL(25, 349, 8), // "category"
-QT_MOC_LITERAL(26, 358, 5), // "count"
-QT_MOC_LITERAL(27, 364, 16), // "QTreeWidgetItem*"
-QT_MOC_LITERAL(28, 381, 4), // "root"
-QT_MOC_LITERAL(29, 386, 26), // "changeParentButton_Clicked"
-QT_MOC_LITERAL(30, 413, 15), // "changeNewParent"
-QT_MOC_LITERAL(31, 429, 9), // "Category*"
-QT_MOC_LITERAL(32, 439, 7) // "aParent"
+QT_MOC_LITERAL(22, 300, 26), // "changeParentButton_Clicked"
+QT_MOC_LITERAL(23, 327, 15), // "changeNewParent"
+QT_MOC_LITERAL(24, 343, 9), // "Category*"
+QT_MOC_LITERAL(25, 353, 6), // "parent"
+QT_MOC_LITERAL(26, 360, 16), // "createParentMenu"
+QT_MOC_LITERAL(27, 377, 6), // "QMenu*"
+QT_MOC_LITERAL(28, 384, 19), // "createParentSubMenu"
+QT_MOC_LITERAL(29, 404, 9), // "Category&"
+QT_MOC_LITERAL(30, 414, 8), // "category"
+QT_MOC_LITERAL(31, 423, 4), // "int&"
+QT_MOC_LITERAL(32, 428, 6), // "number"
+QT_MOC_LITERAL(33, 435, 25) // "changeNewParentFromAction"
 
     },
     "FormCategoriesEdit\0s_categoriesIsUpdated\0"
@@ -74,11 +75,11 @@ QT_MOC_LITERAL(32, 439, 7) // "aParent"
     "EditType\0type\0buttonAdd_Clicked\0"
     "buttonCancel_Clicked\0buttonAccept_Clicked\0"
     "buttonDelete_Clicked\0buttonDeleteAll_Clicked\0"
-    "isCategoryNameExist\0name\0updateParentTree\0"
-    "recursAddToParentTree\0Category&\0"
-    "category\0count\0QTreeWidgetItem*\0root\0"
+    "isCategoryNameExist\0name\0"
     "changeParentButton_Clicked\0changeNewParent\0"
-    "Category*\0aParent"
+    "Category*\0parent\0createParentMenu\0"
+    "QMenu*\0createParentSubMenu\0Category&\0"
+    "category\0int&\0number\0changeNewParentFromAction"
 };
 #undef QT_MOC_LITERAL
 
@@ -112,10 +113,10 @@ static const uint qt_meta_data_FormCategoriesEdit[] = {
       19,    0,  123,    2, 0x08 /* Private */,
       20,    1,  124,    2, 0x08 /* Private */,
       22,    0,  127,    2, 0x08 /* Private */,
-      23,    3,  128,    2, 0x08 /* Private */,
-      23,    2,  135,    2, 0x28 /* Private | MethodCloned */,
-      29,    0,  140,    2, 0x08 /* Private */,
-      30,    1,  141,    2, 0x08 /* Private */,
+      23,    1,  128,    2, 0x08 /* Private */,
+      26,    0,  131,    2, 0x08 /* Private */,
+      28,    2,  132,    2, 0x08 /* Private */,
+      33,    0,  137,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -134,10 +135,10 @@ static const uint qt_meta_data_FormCategoriesEdit[] = {
     QMetaType::Void,
     QMetaType::Bool, QMetaType::QString,   21,
     QMetaType::Void,
-    QMetaType::Int, 0x80000000 | 24, QMetaType::Int, 0x80000000 | 27,   25,   26,   28,
-    QMetaType::Int, 0x80000000 | 24, QMetaType::Int,   25,   26,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    0x80000000 | 27,
+    0x80000000 | 27, 0x80000000 | 29, 0x80000000 | 31,   30,   32,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 31,   32,
 
        0        // eod
 };
@@ -163,13 +164,13 @@ void FormCategoriesEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 11: _t->buttonDeleteAll_Clicked(); break;
         case 12: { bool _r = _t->isCategoryNameExist((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 13: _t->updateParentTree(); break;
-        case 14: { int _r = _t->recursAddToParentTree((*reinterpret_cast< Category(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[3])));
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 15: { int _r = _t->recursAddToParentTree((*reinterpret_cast< Category(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 16: _t->changeParentButton_Clicked(); break;
-        case 17: _t->changeNewParent((*reinterpret_cast< Category*(*)>(_a[1]))); break;
+        case 13: _t->changeParentButton_Clicked(); break;
+        case 14: _t->changeNewParent((*reinterpret_cast< Category*(*)>(_a[1]))); break;
+        case 15: { QMenu* _r = _t->createParentMenu();
+            if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
+        case 16: { QMenu* _r = _t->createParentSubMenu((*reinterpret_cast< Category(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
+        case 17: _t->changeNewParentFromAction(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
