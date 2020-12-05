@@ -355,6 +355,11 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
             return;
         }
     }
+
+//    Transport: Train Heist
+//            Breakfast in Tijuana
+//            Buluc's Mansion
+
     if (isCategoryNameExist(newTitle)) {
         QMessageBox::warning(this, tr("Ошибка"), tr("Такая категория уже есть!"));
         return;
@@ -362,7 +367,9 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
 
     QList<QString> achievements;
     for(int i = 0; i < ui->ListWidgetCategory->count(); ++i) {
-        achievements.append(ui->ListWidgetCategory->item(i)->text());
+        if (auto item = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetCategory->item(i))) {
+            achievements.append(item->_achievement->_apiName);
+        }
     }
 
     if (_typeEdit == EditType::change) {
