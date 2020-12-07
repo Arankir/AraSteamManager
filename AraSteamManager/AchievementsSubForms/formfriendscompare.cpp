@@ -21,7 +21,7 @@ constexpr int c_tableFriendsRowCount    = 4;
 //ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1)->setToolTip(tr("Достижения друзей"));
 
 FormFriendsCompare::FormFriendsCompare(QWidget *parent): QWidget(parent),
-                                                               ui(new Ui::FormAchievementsFriendsCompare) {
+                                                        ui(new Ui::FormAchievementsFriendsCompare) {
     ui->setupUi(this);
 
     QLabel *allFriends = new QLabel("All", this);

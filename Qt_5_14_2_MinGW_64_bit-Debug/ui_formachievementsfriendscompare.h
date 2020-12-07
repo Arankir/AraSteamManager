@@ -28,7 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievementsFriendsCompare
 {
 public:
-    QHBoxLayout *horizontalLayout_3;
+    QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout_3;
     QTableWidget *TableWidgetFriends;
     QVBoxLayout *verticalLayout;
@@ -37,13 +37,21 @@ public:
     QCheckBox *CheckBoxCompareTitle;
     QCheckBox *CheckBoxCompareDescription;
     QCheckBox *CheckBoxCompareTotalPercent;
-    QCheckBox *CheckBoxCompareAllFriends;
     QSpacerItem *horizontalSpacer_4;
     FreezeTableWidget *TableViewCompare;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *lineEdit;
     QPushButton *pushButton;
+    QHBoxLayout *horizontalLayout_4;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
+    QSpacerItem *horizontalSpacer;
+    QCheckBox *CheckBoxCompareAllFriends;
+    QHBoxLayout *horizontalLayout_3;
+    QLineEdit *lineEdit_2;
+    QPushButton *pushButton_2;
     QListView *listView_2;
     QListView *listView;
 
@@ -52,8 +60,8 @@ public:
         if (FormAchievementsFriendsCompare->objectName().isEmpty())
             FormAchievementsFriendsCompare->setObjectName(QString::fromUtf8("FormAchievementsFriendsCompare"));
         FormAchievementsFriendsCompare->resize(1131, 539);
-        horizontalLayout_3 = new QHBoxLayout(FormAchievementsFriendsCompare);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_5 = new QHBoxLayout(FormAchievementsFriendsCompare);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         TableWidgetFriends = new QTableWidget(FormAchievementsFriendsCompare);
@@ -109,11 +117,6 @@ public:
 
         horizontalLayout->addWidget(CheckBoxCompareTotalPercent);
 
-        CheckBoxCompareAllFriends = new QCheckBox(FormAchievementsFriendsCompare);
-        CheckBoxCompareAllFriends->setObjectName(QString::fromUtf8("CheckBoxCompareAllFriends"));
-
-        horizontalLayout->addWidget(CheckBoxCompareAllFriends);
-
         horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_4);
@@ -135,7 +138,7 @@ public:
         verticalLayout_3->addLayout(verticalLayout);
 
 
-        horizontalLayout_3->addLayout(verticalLayout_3);
+        horizontalLayout_5->addLayout(verticalLayout_3);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -164,6 +167,54 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        pushButton_3 = new QPushButton(FormAchievementsFriendsCompare);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+
+        horizontalLayout_4->addWidget(pushButton_3);
+
+        pushButton_4 = new QPushButton(FormAchievementsFriendsCompare);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+
+        horizontalLayout_4->addWidget(pushButton_4);
+
+        pushButton_5 = new QPushButton(FormAchievementsFriendsCompare);
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+
+        horizontalLayout_4->addWidget(pushButton_5);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer);
+
+        CheckBoxCompareAllFriends = new QCheckBox(FormAchievementsFriendsCompare);
+        CheckBoxCompareAllFriends->setObjectName(QString::fromUtf8("CheckBoxCompareAllFriends"));
+
+        horizontalLayout_4->addWidget(CheckBoxCompareAllFriends);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_4);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        lineEdit_2 = new QLineEdit(FormAchievementsFriendsCompare);
+        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        sizePolicy2.setHeightForWidth(lineEdit_2->sizePolicy().hasHeightForWidth());
+        lineEdit_2->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_3->addWidget(lineEdit_2);
+
+        pushButton_2 = new QPushButton(FormAchievementsFriendsCompare);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        sizePolicy3.setHeightForWidth(pushButton_2->sizePolicy().hasHeightForWidth());
+        pushButton_2->setSizePolicy(sizePolicy3);
+
+        horizontalLayout_3->addWidget(pushButton_2);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_3);
+
         listView_2 = new QListView(FormAchievementsFriendsCompare);
         listView_2->setObjectName(QString::fromUtf8("listView_2"));
         QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Expanding);
@@ -182,7 +233,7 @@ public:
         verticalLayout_2->addWidget(listView);
 
 
-        horizontalLayout_3->addLayout(verticalLayout_2);
+        horizontalLayout_5->addLayout(verticalLayout_2);
 
 
         retranslateUi(FormAchievementsFriendsCompare);
@@ -202,8 +253,12 @@ public:
         CheckBoxCompareTitle->setText(QCoreApplication::translate("FormAchievementsFriendsCompare", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265", nullptr));
         CheckBoxCompareDescription->setText(QCoreApplication::translate("FormAchievementsFriendsCompare", "\320\236\320\277\320\270\321\201\320\260\320\275\320\270\320\265", nullptr));
         CheckBoxCompareTotalPercent->setText(QCoreApplication::translate("FormAchievementsFriendsCompare", "\320\237\320\276 \320\274\320\270\321\200\321\203", nullptr));
+        pushButton->setText(QCoreApplication::translate("FormAchievementsFriendsCompare", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", nullptr));
+        pushButton_3->setText(QString());
+        pushButton_4->setText(QString());
+        pushButton_5->setText(QString());
         CheckBoxCompareAllFriends->setText(QCoreApplication::translate("FormAchievementsFriendsCompare", "\320\222\321\201\320\265 \320\264\321\200\321\203\320\267\321\214\321\217", nullptr));
-        pushButton->setText(QCoreApplication::translate("FormAchievementsFriendsCompare", "\320\237\320\276\320\270\321\201\320\272", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("FormAchievementsFriendsCompare", "\320\237\320\276\320\270\321\201\320\272", nullptr));
     } // retranslateUi
 
 };

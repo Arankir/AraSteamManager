@@ -1,11 +1,11 @@
 #include "qlistwidgetachievements.h"
 
-QListWidgetAchievements::QListWidgetAchievements(QWidget *parent) : QListWidget(parent) {
-
+QListWidgetAchievements::QListWidgetAchievements(QWidget *aParent) : QListWidget(aParent) {
+    setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
 }
 
-void QListWidgetAchievements::setGame(SGame &game) {
-    _game = game;
+void QListWidgetAchievements::setGame(SGame &aGame) {
+    _game = aGame;
 }
 
 void QListWidgetAchievements::addAchievementItem(SAchievement &aAchievement, int aRow) {
@@ -23,50 +23,69 @@ void QListWidgetAchievements::addAchievementItem(SAchievement &aAchievement, int
     }
 }
 
-void QListWidgetAchievements::startDrag(Qt::DropActions supportedActions) {
-    auto item = dynamic_cast<QListWidgetAchievement*>(currentItem());
-    int lastItemRow = currentRow();
-    if (item) {
-        auto mimeData = new QMimeData ();
-        mimeData->setData("application/x-qabstractitemmodeldatalist", item->_achievement->toString().toUtf8());
+void QListWidgetAchievements::startDrag(Qt::DropActions aSupportedActions) {
+    auto items = selectedItems();
+    //Формирование MimeData для всех выделенных item'ов
+    auto mimeData = new QMimeData ();
+    QByteArray data;
+    QDataStream stream(&data, QIODevice::WriteOnly);
+    for(auto &item: items) {
+        if (auto achievementItem = dynamic_cast<QListWidgetAchievement*>(item)) {
+            QMap<int,  QVariant> map = model()->itemData(model()->index(row(achievementItem), 0));
+            stream << achievementItem->_achievement->toString() << row(achievementItem) << 0 << map;
+        }
+    }
+    mimeData->setData("application/x-qabstractitemmodeldatalist", data);
 
-        auto drag = new QDrag(this);
-        drag->setMimeData (mimeData);
-        if (drag->exec(supportedActions, defaultDropAction()) == Qt::MoveAction) {
-            if (lastItemRow > -1) {
-                removeItemWidget(takeItem(lastItemRow));
+    //Вызов перетаскивания со сформированными данными
+    auto drag = new QDrag(this);
+    drag->setMimeData(mimeData);
+    if (drag->exec(aSupportedActions, defaultDropAction()) == Qt::MoveAction) {
+        //Удаление перемещенных item'ов
+        for (auto &item: items) {
+            if (auto achievementItem = dynamic_cast<QListWidgetAchievement*>(item)) {
+                removeItemWidget(takeItem(row(achievementItem)));
+            } else {
+                removeItemWidget(takeItem(row(item)));
             }
         }
     }
 }
 
-void QListWidgetAchievements::dropEvent(QDropEvent *event) {
-    QString t = QString::fromUtf8(event->mimeData()->data("application/x-qabstractitemmodeldatalist"));
-    if (!t.isEmpty()) {
-        SAchievement *achievement = new SAchievement(t);
-        QModelIndex dropIndex = indexAt(event->pos());
-        switch(dropIndicatorPosition()) {
-        case DropIndicatorPosition::BelowItem: {
-            addAchievementItem(*achievement, dropIndex.row() + 1);
-            break;
+void QListWidgetAchievements::dropEvent(QDropEvent *aEvent) {
+    QByteArray encoded = aEvent->mimeData()->data("application/x-qabstractitemmodeldatalist");
+    QDataStream stream(&encoded, QIODevice::ReadOnly);
+
+    while (!stream.atEnd()) {
+        int row, col;
+        QString achievementText;
+        QMap<int,  QVariant> roleDataMap;
+        stream >> achievementText >> row >> col >> roleDataMap;
+
+        if (!achievementText.isEmpty()) {
+            SAchievement *achievement = new SAchievement(achievementText);
+            QModelIndex dropIndex = indexAt(aEvent->pos());
+            switch(dropIndicatorPosition()) {
+            case DropIndicatorPosition::BelowItem: {
+                addAchievementItem(*achievement, dropIndex.row() + 1);
+                break;
+            }
+            default: {
+                addAchievementItem(*achievement, dropIndex.row());
+                break;
+            }
+            }
         }
-        default: {
-            addAchievementItem(*achievement, dropIndex.row());
-            break;
-        }
-        }
-        event->accept();
-    } else {
-        event->ignore();
+    }
+    aEvent->accept();
+}
+
+void QListWidgetAchievements::dragEnterEvent(QDragEnterEvent *aEvent) {
+    if (aEvent->mimeData()->hasFormat("application/x-qabstractitemmodeldatalist")) {
+        aEvent->accept();
     }
 }
 
-void QListWidgetAchievements::dragEnterEvent(QDragEnterEvent *event) {
-    if (event->mimeData()->hasFormat("application/x-qabstractitemmodeldatalist")) {
-        event->accept();
-    }
-}
-
-void QListWidgetAchievements::dragLeaveEvent(QDragLeaveEvent *event) {
-    event->accept();
+void QListWidgetAchievements::dragLeaveEvent(QDragLeaveEvent *aEvent) {
+    aEvent->accept();
 }
