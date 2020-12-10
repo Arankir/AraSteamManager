@@ -210,5 +210,13 @@
         <file>black/window buttons/maximize_window.png</file>
         <file>black/window buttons/minimize_window.png</file>
         <file>black/window buttons/restore_window.png</file>
+        <file>black/achievements/categories/delete_all_categories.png</file>
+        <file>black/achievements/categories/delete_category.png</file>
+        <file>black/management/move_item.png</file>
+        <file>white/management/move_item.png</file>
+        <file>white/achievements/categories/delete_all_categories.png</file>
+        <file>white/achievements/categories/delete_category.png</file>
+        <file>white/management/move_in_tree.png</file>
+        <file>black/management/move_in_tree.png</file>
     </qresource>
 </RCC>

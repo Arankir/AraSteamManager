@@ -160,7 +160,7 @@ void MultiSelectComboBox::clear()
     mListWidget->clear();
     QListWidgetItem* curItem = new QListWidgetItem(mListWidget);
     mSearchBar = new QLineEdit(this);
-    mSearchBar->setPlaceholderText("Search..");
+    mSearchBar->setPlaceholderText(tr("Search.."));
     mSearchBar->setClearButtonEnabled(true);
     mListWidget->addItem(curItem);
     mListWidget->setItemWidget(curItem, mSearchBar);

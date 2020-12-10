@@ -8,8 +8,8 @@ public:
     Category(const QJsonObject &category = QJsonObject());
     Category(const QString &title,
              const QList<QString> &achievements,
-             const QList<Category> &categories = QList<Category>())
-        : _title(title),
+             const QList<Category> &categories = QList<Category>()):
+        _title(title),
         _achievements(achievements),
         _categories(categories) {}
     Category(const Category &category):
@@ -25,9 +25,11 @@ public:
     Category &setParent(Category *parent);
     Category &setTitle(const QString &title);
     Category &setAchievements(const QList<QString> &achievements);
+
     Category &updateParents();
 
     Category &addCategory(Category &category);
+    Category &clearCategories();
     bool addSubCategory(Category &aCategory);
     bool removeCategory(Category &category);
     bool removeCategoryAtDirect(int &aIndex);

@@ -384,6 +384,7 @@ QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
 }
 
 QMenu *FormAchievements::createMenuCategory(const Category &aCategory) {
+    Q_UNUSED(aCategory);
     //Кнопка изменения достижений
     QAction *actionAchievements = new QAction(tr("Изменить категорию"), this);
     actionAchievements->setIcon(QIcon(Images::change()));
@@ -522,6 +523,7 @@ void FormAchievements::createThread() {
                                      _achievements,
                                      _game.appId());
     connect (loadTable, &Threading::s_achievements_progress, this, [=](int progress, int row) {
+        Q_UNUSED(row);
         //emit s_achievementsLoaded(progress, row);
         ui->ProgressBarLoad->setValue(progress);
     });

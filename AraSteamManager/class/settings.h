@@ -18,6 +18,8 @@
 //Q_DECLARE_LOGGING_CATEGORY(logWarning)
 //Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
+QString getToolTipText(QString text);
+
 class Settings {
 public:
     static const QString c_organizationName;
@@ -123,6 +125,8 @@ public:
     static QString checkVisible();
     static QString uncheckVisible();
     static QString reverse();
+    static QString deleteCategory();
+    static QString deleteAllCategories();
 
     //Achievements
     static QString category();
@@ -167,6 +171,8 @@ public:
     static QString create();
     static QString deleteIcon();
     static QString deleteAll();
+    static QString moveItem();
+    static QString moveInTree();
     static QString download();
     static QString edit();
     static QString find();

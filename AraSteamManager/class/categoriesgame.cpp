@@ -194,6 +194,11 @@ Category &Category::addCategory(Category &aCategory) {
     return *this;
 }
 
+Category &Category::clearCategories() {
+    _categories.clear();
+    return *this;
+}
+
 bool Category::addSubCategory(Category &aCategory) {
     if (*this == *(aCategory.parent())) {
         addCategory(aCategory);

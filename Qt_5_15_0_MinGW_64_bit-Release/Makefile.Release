@@ -403,8 +403,10 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/achievements/checkbox/notreached.png \
 		../AraSteamManager/images/white/achievements/checkbox/reached.png \
 		../AraSteamManager/images/white/achievements/categories/uncheck_visible.png \
+		../AraSteamManager/images/white/achievements/categories/delete_category.png \
 		../AraSteamManager/images/white/achievements/categories/reverse.png \
 		../AraSteamManager/images/white/achievements/categories/check_visible.png \
+		../AraSteamManager/images/white/achievements/categories/delete_all_categories.png \
 		../AraSteamManager/images/white/favorites/in_favorites.png \
 		../AraSteamManager/images/white/favorites/favorites.png \
 		../AraSteamManager/images/white/comments/isNotComment.png \
@@ -415,10 +417,12 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/white/management/delete_all.png \
 		../AraSteamManager/images/white/management/compare.png \
 		../AraSteamManager/images/white/management/edit.png \
+		../AraSteamManager/images/white/management/move_item.png \
 		../AraSteamManager/images/white/management/change.png \
 		../AraSteamManager/images/white/management/update.png \
 		../AraSteamManager/images/white/management/cancel.png \
 		../AraSteamManager/images/white/management/apply.png \
+		../AraSteamManager/images/white/management/move_in_tree.png \
 		../AraSteamManager/images/white/management/create.png \
 		../AraSteamManager/images/white/management/delete.png \
 		../AraSteamManager/images/white/management/find.png \
@@ -479,8 +483,10 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/achievements/checkbox/notreached.png \
 		../AraSteamManager/images/black/achievements/checkbox/reached.png \
 		../AraSteamManager/images/black/achievements/categories/uncheck_visible.png \
+		../AraSteamManager/images/black/achievements/categories/delete_category.png \
 		../AraSteamManager/images/black/achievements/categories/reverse.png \
 		../AraSteamManager/images/black/achievements/categories/check_visible.png \
+		../AraSteamManager/images/black/achievements/categories/delete_all_categories.png \
 		../AraSteamManager/images/black/favorites/in_favorites.png \
 		../AraSteamManager/images/black/favorites/favorites.png \
 		../AraSteamManager/images/black/comments/isNotComment.png \
@@ -491,10 +497,12 @@ release/qrc_resimg.cpp: ../AraSteamManager/images/resimg.qrc \
 		../AraSteamManager/images/black/management/delete_all.png \
 		../AraSteamManager/images/black/management/compare.png \
 		../AraSteamManager/images/black/management/edit.png \
+		../AraSteamManager/images/black/management/move_item.png \
 		../AraSteamManager/images/black/management/change.png \
 		../AraSteamManager/images/black/management/update.png \
 		../AraSteamManager/images/black/management/cancel.png \
 		../AraSteamManager/images/black/management/apply.png \
+		../AraSteamManager/images/black/management/move_in_tree.png \
 		../AraSteamManager/images/black/management/create.png \
 		../AraSteamManager/images/black/management/delete.png \
 		../AraSteamManager/images/black/management/find.png \
@@ -8161,6 +8169,7 @@ ui_formachievements.h: ../AraSteamManager/AchievementsSubForms/formachievements.
 		../AraSteamManager/class/NotMine/freezetablewidget.h \
 		../AraSteamManager/AchievementsSubForms/formcategoriesedit.h \
 		../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.h \
+		../AraSteamManager/AchievementsSubForms/formfriendscompare.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableView \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtableview.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -8643,7 +8652,206 @@ ui_formachievements.h: ../AraSteamManager/AchievementsSubForms/formachievements.
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QRadioButton \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qradiobutton.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		D:/Qt/5.15.0/mingw81_64/include/QtGui/qicon.h
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtguiglobal.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qglobal.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qconfig-bootstrapped.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qconfig.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtcore-config.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsystemdetection.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qprocessordetection.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcompilerdetection.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtypeinfo.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsysinfo.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qlogging.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qflags.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qatomic.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qbasicatomic.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qatomic_bootstrap.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qgenericatomic.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qatomic_cxx11.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qatomic_msvc.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qglobalstatic.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmutex.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qnumeric.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qversiontagging.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtgui-config.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgets-config.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qwindowdefs.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qobjectdefs.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qnamespace.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qobjectdefs_impl.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qwindowdefs_win.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qobject.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstring.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qchar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qbytearray.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qrefcount.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qarraydata.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringliteral.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringalgorithms.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringbuilder.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qlist.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qalgorithms.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qiterator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qhashfunctions.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qpair.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qvector.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcontainertools_impl.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qpoint.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qbytearraylist.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringlist.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qregexp.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringmatcher.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcoreevent.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qscopedpointer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmetatype.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qvarlengtharray.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcontainerfwd.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qobject_impl.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmargins.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpaintdevice.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qrect.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsize.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpalette.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qcolor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qrgb.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qrgba64.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qbrush.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qmatrix.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpolygon.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qregion.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qdatastream.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qiodevice.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qline.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtransform.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qimage.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpixelformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpixmap.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsharedpointer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qshareddata.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qhash.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsharedpointer_impl.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qfont.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qfontmetrics.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qfontinfo.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qsizepolicy.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qkeysequence.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qevent.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qvariant.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmap.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qdebug.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtextstream.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qlocale.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qset.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcontiguouscache.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qurl.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qurlquery.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfile.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfiledevice.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qvector2d.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtouchdevice.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
+		../AraSteamManager/class/steamapi/Sachievements.h \
+		../AraSteamManager/class/steamapi/Sapi.h \
+		../AraSteamManager/class/Network/requestimage.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QObject \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QMovie \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qmovie.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qimagereader.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcoreapplication.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qeventloop.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qimageiohandler.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qplugin.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qpointer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qjsonobject.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qjsonvalue.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcborvalue.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qdatetime.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcborcommon.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qregularexpression.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/quuid.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfactoryinterface.h \
+		../AraSteamManager/class/Network/requestdata.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QMainWindow \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmainwindow.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtabwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/QNetworkAccessManager \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qnetworkaccessmanager.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qtnetworkglobal.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qtnetwork-config.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qnetworkrequest.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QSharedDataPointer \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QString \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QUrl \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QVariant \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QVector \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/QSslConfiguration \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qsslconfiguration.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qsslsocket.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qtcpsocket.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qabstractsocket.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qsslerror.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qsslcertificate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcryptographichash.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qssl.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QFlags \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QMetaType \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/QNetworkRequest \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/QNetworkReply \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/qnetworkreply.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QIODevice \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QJsonDocument \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qjsondocument.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QJsonObject \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QJsonArray \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qjsonarray.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QTextCodec \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtextcodec.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtNetwork/QTcpSocket \
+		../AraSteamManager/class/settings.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QDebug \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QSettings \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsettings.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QDir \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qdir.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfileinfo.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QFile \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QRect \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QLoggingCategory \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qloggingcategory.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QFontDatabase \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qfontdatabase.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QApplication \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qapplication.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdesktopwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qguiapplication.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qinputmethod.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QStandardPaths \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstandardpaths.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QEventLoop \
+		../AraSteamManager/class/steamapi/Sprofile.h \
+		../AraSteamManager/class/steamapi/Sgames.h \
+		../AraSteamManager/class/steamapi/Sfriends.h \
+		../AraSteamManager/class/myfilter.h \
+		../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.h \
+		../AraSteamManager/subwidget/qradiobuttonwithdata.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QRadioButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qradiobutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		../AraSteamManager/subwidget/qbuttonwithdata.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h
 	D:\Qt\5.15.0\mingw81_64\bin\uic.exe ..\AraSteamManager\AchievementsSubForms\formachievements.ui -o ui_formachievements.h
 
 ui_formachievementscategoriesedit.h: ../AraSteamManager/AchievementsSubForms/formachievementscategoriesedit.ui \
@@ -9465,7 +9673,27 @@ release/formachievements.o: ../AraSteamManager/AchievementsSubForms/formachievem
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QScrollBar \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qscrollbar.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidgetItem \
-		ui_formachievements.h
+		ui_formachievements.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QFrame \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QListView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QProgressBar \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qprogressbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTabWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTreeWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
+		../AraSteamManager/AchievementsSubForms/formfriendscompare.h \
+		../AraSteamManager/class/NotMine/freezetablewidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formachievements.o ..\AraSteamManager\AchievementsSubForms\formachievements.cpp
 
 release/formcategoriesedit.o: ../AraSteamManager/AchievementsSubForms/formcategoriesedit.cpp ../AraSteamManager/AchievementsSubForms/formcategoriesedit.h \
@@ -9698,7 +9926,27 @@ release/formcategoriesedit.o: ../AraSteamManager/AchievementsSubForms/formcatego
 		D:/Qt/5.15.0/mingw81_64/include/QtCore/QAbstractListModel \
 		D:/Qt/5.15.0/mingw81_64/include/QtCore/QStringListModel \
 		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringlistmodel.h \
-		ui_formachievementscategoriesedit.h
+		ui_formachievementscategoriesedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QFrame \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QListWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
+		../AraSteamManager/subwidget/qlistwidgetachievements.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QDropEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formcategoriesedit.o ..\AraSteamManager\AchievementsSubForms\formcategoriesedit.cpp
 
 release/formcompareprofilefilter.o: ../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.cpp ../AraSteamManager/AchievementsSubForms/formcompareprofilefilter.h \
@@ -9833,7 +10081,20 @@ release/formcompareprofilefilter.o: ../AraSteamManager/AchievementsSubForms/form
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qradiobutton.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtGui/qicon.h \
-		ui_formcompareprofilefilter.h
+		ui_formcompareprofilefilter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QVariant \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLabel \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlabel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qframe.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSlider \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formcompareprofilefilter.o ..\AraSteamManager\AchievementsSubForms\formcompareprofilefilter.cpp
 
 release/formfriendscompare.o: ../AraSteamManager/AchievementsSubForms/formfriendscompare.cpp ../AraSteamManager/AchievementsSubForms/formfriendscompare.h \
@@ -10036,7 +10297,46 @@ release/formfriendscompare.o: ../AraSteamManager/AchievementsSubForms/formfriend
 		../AraSteamManager/subwidget/qbuttonwithdata.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
-		ui_formachievementsfriendscompare.h
+		ui_formachievementsfriendscompare.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QCheckBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcheckbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyleoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyle.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtabbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QListView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlistview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtablewidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtableview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
+		../AraSteamManager/class/NotMine/freezetablewidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableView \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QStandardItemModel \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qstandarditemmodel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formfriendscompare.o ..\AraSteamManager\AchievementsSubForms\formfriendscompare.cpp
 
 release/formtablesheaders.o: ../AraSteamManager/AchievementsSubForms/formtablesheaders.cpp ../AraSteamManager/AchievementsSubForms/formtablesheaders.h \
@@ -10269,7 +10569,9 @@ release/formtablesheaders.o: ../AraSteamManager/AchievementsSubForms/formtablesh
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		../AraSteamManager/class/Threads/threadstatistics.h \
 		../AraSteamManager/class/favorites.h \
-		ui_formtablesheaders.h
+		ui_formtablesheaders.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formtablesheaders.o ..\AraSteamManager\AchievementsSubForms\formtablesheaders.cpp
 
 release/formfavorites.o: ../AraSteamManager/MainSubForms/formfavorites.cpp ../AraSteamManager/MainSubForms/formfavorites.h \
@@ -10465,7 +10767,46 @@ release/formfavorites.o: ../AraSteamManager/MainSubForms/formfavorites.cpp ../Ar
 		../AraSteamManager/class/steamapi/Sprofile.h \
 		../AraSteamManager/class/steamapi/Sachievements.h \
 		../AraSteamManager/class/myfilter.h \
-		ui_formfavorites.h
+		ui_formfavorites.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QCheckBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcheckbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyleoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyle.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtabbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTabWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtablewidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtableview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formfavorites.o ..\AraSteamManager\MainSubForms\formfavorites.cpp
 
 release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSteamManager/MainSubForms/formfriends.h \
@@ -10692,7 +11033,32 @@ release/formfriends.o: ../AraSteamManager/MainSubForms/formfriends.cpp ../AraSte
 		../AraSteamManager/class/Threads/threadstatistics.h \
 		../AraSteamManager/class/favorites.h \
 		../AraSteamManager/class/myfilter.h \
-		ui_formfriends.h
+		ui_formfriends.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QCheckBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcheckbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QGroupBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgroupbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formfriends.o ..\AraSteamManager\MainSubForms\formfriends.cpp
 
 release/formgames.o: ../AraSteamManager/MainSubForms/formgames.cpp ../AraSteamManager/MainSubForms/formgames.h \
@@ -10950,7 +11316,25 @@ release/formgames.o: ../AraSteamManager/MainSubForms/formgames.cpp ../AraSteamMa
 		../AraSteamManager/class/myfilter.h \
 		../AraSteamManager/class/hiddengames.h \
 		../AraSteamManager/subwidget/qbuttonwithdata.h \
-		ui_formgames.h
+		ui_formgames.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QGroupBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgroupbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableView \
+		../AraSteamManager/class/NotMine/MultiSelectComboBox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QListWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlistwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlistview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formgames.o ..\AraSteamManager\MainSubForms\formgames.cpp
 
 release/formprofile.o: ../AraSteamManager/MainSubForms/formprofile.cpp ../AraSteamManager/MainSubForms/formprofile.h \
@@ -11147,7 +11531,18 @@ release/formprofile.o: ../AraSteamManager/MainSubForms/formprofile.cpp ../AraSte
 		../AraSteamManager/class/steamapi/Sfriends.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QGraphicsDropShadowEffect \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicseffect.h \
-		ui_formprofile.h
+		ui_formprofile.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QFrame \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formprofile.o ..\AraSteamManager\MainSubForms\formprofile.cpp
 
 release/formsettings.o: ../AraSteamManager/MainSubForms/formsettings.cpp ../AraSteamManager/MainSubForms/formsettings.h \
@@ -11358,7 +11753,43 @@ release/formsettings.o: ../AraSteamManager/MainSubForms/formsettings.cpp ../AraS
 		../AraSteamManager/subwidget/qradiobuttonwithdata.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QRadioButton \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qradiobutton.h \
-		ui_formsettings.h
+		ui_formsettings.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QCheckBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcheckbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QFrame \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QGridLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QGroupBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgroupbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHeaderView \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qheaderview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyleoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyle.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtabbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSlider \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTabWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtablewidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtableview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formsettings.o ..\AraSteamManager\MainSubForms\formsettings.cpp
 
 release/formstatistics.o: ../AraSteamManager/MainSubForms/formstatistics.cpp ../AraSteamManager/MainSubForms/formstatistics.h \
@@ -11639,7 +12070,355 @@ release/formstatistics.o: ../AraSteamManager/MainSubForms/formstatistics.cpp ../
 		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qbarcategoryaxis.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QValueAxis \
 		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qvalueaxis.h \
-		ui_formstatistics.h
+		ui_formstatistics.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QtCharts \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QtChartsDepends \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QtCore \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QtCoreDepends \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractanimation.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstracteventdispatcher.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractnativeeventfilter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractproxymodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractstate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstracttransition.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qanimationgroup.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qarraydataops.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qarraydatapointer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qbasictimer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qbitarray.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qbuffer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qbytearraymatcher.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcache.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcalendar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcborarray.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcbormap.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcborstream.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcborstreamreader.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfloat16.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcborstreamwriter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcollator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcommandlineoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qcommandlineparser.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qconcatenatetablesproxymodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qdiriterator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qeasingcurve.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qendian.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qeventtransition.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qexception.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfileselector.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfilesystemwatcher.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfinalstate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfuture.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfutureinterface.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qrunnable.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qresultstore.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfuturesynchronizer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qfuturewatcher.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qhistorystate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qidentityproxymodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qisenum.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qlibrary.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qlibraryinfo.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qversionnumber.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qlinkedlist.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qlockfile.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmath.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmessageauthenticationcode.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmetaobject.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmimedata.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmimedatabase.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qmimetype.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qobjectcleanuphandler.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qoperatingsystemversion.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qparallelanimationgroup.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qpauseanimation.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qpluginloader.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qprocess.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qpropertyanimation.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qvariantanimation.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qqueue.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qrandom.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qreadwritelock.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qresource.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsavefile.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qscopedvaluerollback.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qscopeguard.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsemaphore.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsequentialanimationgroup.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsharedmemory.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsignalmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsignaltransition.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsocketnotifier.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsortfilterproxymodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstack.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstatemachine.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstorageinfo.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstringlistmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qsystemsemaphore.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtemporarydir.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtemporaryfile.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtextboundaryfinder.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qthreadpool.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qthreadstorage.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtimeline.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtimer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtimezone.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtranslator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtransposeproxymodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtypetraits.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qwaitcondition.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QDeadlineTimer \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qwineventnotifier.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qxmlstream.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qtcoreversion.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QtGui \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QtGuiDepends \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qabstracttextdocumentlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qglyphrun.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qrawfont.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextdocument.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qaccessible.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qaccessiblebridge.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qaccessibleobject.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qaccessibleplugin.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qbackingstore.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qwindow.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QEvent \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qsurface.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qsurfaceformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qbitmap.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qclipboard.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qcolorspace.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qcolortransform.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qdesktopservices.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qdrag.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qgenericmatrix.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qgenericplugin.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qgenericpluginfactory.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qiconengine.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qiconengineplugin.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qimagewriter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qmatrix4x4.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qvector3d.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qvector4d.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qquaternion.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qoffscreensurface.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopengl.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qt_windows.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtANGLE/GLES3/gl3.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtANGLE/GLES3/gl3platform.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtANGLE/KHR/khrplatform.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtANGLE/GLES2/gl2.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtANGLE/GLES2/gl2platform.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopengles2ext.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglext.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglbuffer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglcontext.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QScopedPointer \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QSurfaceFormat \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglversionfunctions.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopengldebug.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglextrafunctions.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglfunctions.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglframebufferobject.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglpaintdevice.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglpixeltransferoptions.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglshaderprogram.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopengltexture.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopengltextureblitter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QMatrix3x3 \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QMatrix4x4 \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopengltimerquery.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglvertexarrayobject.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qopenglwindow.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QPaintDeviceWindow \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpaintdevicewindow.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QWindow \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QPaintDevice \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QOpenGLContext \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QImage \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpagedpaintdevice.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpagelayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpagesize.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpaintengine.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpdfwriter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpicture.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpictureformatplugin.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpixmapcache.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qrasterwindow.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qscreen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QList \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QSize \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QSizeF \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QTransform \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qsessionmanager.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qstatictext.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qstylehints.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qsyntaxhighlighter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextobject.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextdocumentfragment.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextdocumentwriter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextlist.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtexttable.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtguiversion.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QtWidgets \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QtWidgetsDepends \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qaccessiblewidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qaction.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qactiongroup.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qbuttongroup.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcalendarwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcheckbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcolordialog.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdialog.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcolormap.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcolumnview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcommandlinkbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcommonstyle.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcompleter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdatawidgetmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdatetimeedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdial.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdialogbuttonbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdirmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qfileiconprovider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdockwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qdrawutil.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qerrormessage.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qfiledialog.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qfilesystemmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qfocusframe.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qfontcombobox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qfontdialog.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qformlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgesture.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgesturerecognizer.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicsanchorlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicslayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicseffect.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicsgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicsitemanimation.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicslinearlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicsproxywidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicssceneevent.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgraphicstransform.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/QVector3D \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgroupbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qinputdialog.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qitemdelegate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qitemeditorfactory.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qkeyeventtransition.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qkeysequenceedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlcdnumber.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlistview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlistwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmdiarea.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmdisubwindow.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmenu.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmenubar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmessagebox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmouseeventtransition.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qopenglwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qplaintextedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtextedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qprogressbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qprogressdialog.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qproxystyle.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QCommonStyle \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qradiobutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qscrollbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qscroller.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/QPointF \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QScrollerProperties \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qscrollerproperties.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qshortcut.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qsizegrip.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qspinbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qsplashscreen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qsplitter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstackedlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstackedwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstatusbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyleditemdelegate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstylefactory.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstylepainter.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyleplugin.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qsystemtrayicon.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtextbrowser.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtoolbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtoolbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtoolbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtooltip.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtreeview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtreewidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtreewidgetitemiterator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qundogroup.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qundostack.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qundoview.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qwhatsthis.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qwidgetaction.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qwizard.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtwidgetsversion.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/chartsnamespace.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qarealegendmarker.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QLegendMarker \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qlegendmarker.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QAreaSeries \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qareaseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qbarlegendmarker.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qboxplotlegendmarker.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QBoxPlotSeries \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qboxplotseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QBoxSet \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qboxset.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qboxplotmodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qcandlesticklegendmarker.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QCandlestickSeries \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qcandlestickseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qcandlestickmodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qcandlestickset.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qcategoryaxis.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qdatetimeaxis.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhbarmodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhboxplotmodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QBoxPlotModelMapper \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhcandlestickmodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QCandlestickModelMapper \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhorizontalbarseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhorizontalpercentbarseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhorizontalstackedbarseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhpiemodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/QPieModelMapper \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qpiemodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qhxymodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qlogvalueaxis.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qpercentbarseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qpielegendmarker.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qpolarchart.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qscatterseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qsplineseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qstackedbarseries.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qvboxplotmodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qvcandlestickmodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qvpiemodelmapper.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qxylegendmarker.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCharts/qtchartsversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formstatistics.o ..\AraSteamManager\MainSubForms\formstatistics.cpp
 
 release/requestdata.o: ../AraSteamManager/class/Network/requestdata.cpp ../AraSteamManager/class/Network/requestdata.h \
@@ -16193,7 +16972,26 @@ release/formcommentsinteractions.o: ../AraSteamManager/formcommentsinteractions.
 		../AraSteamManager/class/steamapi/Sachievements.h \
 		../AraSteamManager/class/steamapi/Sprofile.h \
 		../AraSteamManager/class/comments.h \
-		ui_formcommentsinteractions.h
+		ui_formcommentsinteractions.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QFrame \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qboxlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qgridlayout.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTextEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtextedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextdocument.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formcommentsinteractions.o ..\AraSteamManager\formcommentsinteractions.cpp
 
 release/formcontainerachievements.o: ../AraSteamManager/formcontainerachievements.cpp ../AraSteamManager/formcontainerachievements.h \
@@ -16482,7 +17280,9 @@ release/formcontainerachievements.o: ../AraSteamManager/formcontainerachievement
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QScrollBar \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qscrollbar.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTableWidgetItem \
-		ui_formcontainerachievements.h
+		ui_formcontainerachievements.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QTabWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formcontainerachievements.o ..\AraSteamManager\formcontainerachievements.cpp
 
 release/formgroupsgamesinteractions.o: ../AraSteamManager/formgroupsgamesinteractions.cpp ../AraSteamManager/formgroupsgamesinteractions.h \
@@ -16683,7 +17483,31 @@ release/formgroupsgamesinteractions.o: ../AraSteamManager/formgroupsgamesinterac
 		D:/Qt/5.15.0/mingw81_64/include/QtCore/qstandardpaths.h \
 		D:/Qt/5.15.0/mingw81_64/include/QtCore/QEventLoop \
 		../AraSteamManager/class/steamapi/Sprofile.h \
-		ui_formgroupsgamesinteractions.h
+		ui_formgroupsgamesinteractions.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QComboBox \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qcombobox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyleoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qvalidator.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractslider.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstyle.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qtabbar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qrubberband.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qpen.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextoption.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QPushButton \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qpushbutton.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QScrollArea \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qscrollarea.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qabstractscrollarea.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\formgroupsgamesinteractions.o ..\AraSteamManager\formgroupsgamesinteractions.cpp
 
 release/frameless.o: ../AraSteamManager/frameless.cpp ../AraSteamManager/frameless.h \
@@ -17573,7 +18397,22 @@ release/mainwindow.o: ../AraSteamManager/mainwindow.cpp ../AraSteamManager/mainw
 		D:/Qt/5.15.0/mingw81_64/include/QtGui/QTransform \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSizeGrip \
 		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qsizegrip.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QFrame \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QGridLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QHBoxLayout \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QLineEdit \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qlineedit.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextcursor.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtGui/qtextformat.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QMenuBar \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qmenubar.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QScrollArea \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QSpacerItem \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QStackedWidget \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstackedwidget.h \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/QStatusBar \
+		D:/Qt/5.15.0/mingw81_64/include/QtWidgets/qstatusbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\AraSteamManager\mainwindow.cpp
 
 release/listachievementsmodel.o: ../AraSteamManager/subwidget/listachievementsmodel.cpp ../AraSteamManager/subwidget/listachievementsmodel.h \

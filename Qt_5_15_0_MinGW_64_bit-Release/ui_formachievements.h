@@ -29,6 +29,7 @@
 #include <QtWidgets/QWidget>
 #include "AchievementsSubForms\formcategoriesedit.h"
 #include "AchievementsSubForms\formcompareprofilefilter.h"
+#include "AchievementsSubForms\formfriendscompare.h"
 #include "class\NotMine\freezetablewidget.h"
 
 QT_BEGIN_NAMESPACE
@@ -63,7 +64,9 @@ public:
     QHBoxLayout *horizontalLayout;
     FormCategoriesEdit *CategoriesEdit;
     QWidget *tabCompare;
-    QVBoxLayout *verticalLayout_12;
+    QHBoxLayout *horizontalLayout_4;
+    FormFriendsCompare *widget;
+    QVBoxLayout *verticalLayout_3;
     QTableWidget *TableWidgetFriends;
     QFrame *FrameHideColumns;
     QHBoxLayout *horizontalLayout_8;
@@ -236,8 +239,15 @@ public:
         tabWidget->addTab(tabEditCategory, QString());
         tabCompare = new QWidget();
         tabCompare->setObjectName(QString::fromUtf8("tabCompare"));
-        verticalLayout_12 = new QVBoxLayout(tabCompare);
-        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+        horizontalLayout_4 = new QHBoxLayout(tabCompare);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        widget = new FormFriendsCompare(tabCompare);
+        widget->setObjectName(QString::fromUtf8("widget"));
+
+        horizontalLayout_4->addWidget(widget);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         TableWidgetFriends = new QTableWidget(tabCompare);
         if (TableWidgetFriends->columnCount() < 2)
             TableWidgetFriends->setColumnCount(2);
@@ -261,7 +271,7 @@ public:
         TableWidgetFriends->setColumnCount(2);
         TableWidgetFriends->verticalHeader()->setVisible(false);
 
-        verticalLayout_12->addWidget(TableWidgetFriends);
+        verticalLayout_3->addWidget(TableWidgetFriends);
 
         FrameHideColumns = new QFrame(tabCompare);
         FrameHideColumns->setObjectName(QString::fromUtf8("FrameHideColumns"));
@@ -303,7 +313,7 @@ public:
         horizontalLayout_8->addItem(horizontalSpacer_4);
 
 
-        verticalLayout_12->addWidget(FrameHideColumns);
+        verticalLayout_3->addWidget(FrameHideColumns);
 
         horizontalLayout_15 = new QHBoxLayout();
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
@@ -361,7 +371,10 @@ public:
         horizontalLayout_15->addWidget(frame_2);
 
 
-        verticalLayout_12->addLayout(horizontalLayout_15);
+        verticalLayout_3->addLayout(horizontalLayout_15);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_3);
 
         tabWidget->addTab(tabCompare, QString());
 
@@ -373,7 +386,7 @@ public:
 
         retranslateUi(FormAchievements);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(FormAchievements);

@@ -14,7 +14,7 @@ void QListWidgetAchievements::addAchievementItem(SAchievement &aAchievement, int
         item->setIcon(aAchievement.getIcon(_game.appId()));
     }
     item->setText(aAchievement._displayName);
-    item->setToolTip(aAchievement._description);
+    item->setToolTip(getToolTipText(aAchievement._description));
     item->setFont(QFont(Settings::getFontDefaultName(), 11));
     if (aRow == -1) {
         addItem(item);

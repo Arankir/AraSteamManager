@@ -144,6 +144,28 @@
          </item>
         </layout>
        </item>
+       <item>
+        <widget class="QFrame" name="FrameSubCategories">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="LabelSubCategories">
+            <property name="text">
+             <string>Подкатегории</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="ListWidgetSubCategories"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>

@@ -11,9 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -41,6 +43,10 @@ public:
     QVBoxLayout *verticalLayout;
     QLineEdit *LineEditTitleCategory;
     QListWidgetAchievements *ListWidgetCategory;
+    QFrame *FrameSubCategories;
+    QVBoxLayout *verticalLayout_2;
+    QLabel *LabelSubCategories;
+    QListWidget *ListWidgetSubCategories;
 
     void setupUi(QWidget *FormAchievementsCategoriesEdit)
     {
@@ -135,6 +141,25 @@ public:
 
         horizontalLayout_2->addLayout(verticalLayout);
 
+        FrameSubCategories = new QFrame(FormAchievementsCategoriesEdit);
+        FrameSubCategories->setObjectName(QString::fromUtf8("FrameSubCategories"));
+        FrameSubCategories->setFrameShape(QFrame::StyledPanel);
+        FrameSubCategories->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(FrameSubCategories);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        LabelSubCategories = new QLabel(FrameSubCategories);
+        LabelSubCategories->setObjectName(QString::fromUtf8("LabelSubCategories"));
+
+        verticalLayout_2->addWidget(LabelSubCategories);
+
+        ListWidgetSubCategories = new QListWidget(FrameSubCategories);
+        ListWidgetSubCategories->setObjectName(QString::fromUtf8("ListWidgetSubCategories"));
+
+        verticalLayout_2->addWidget(ListWidgetSubCategories);
+
+
+        horizontalLayout_2->addWidget(FrameSubCategories);
+
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
@@ -172,6 +197,7 @@ public:
 #endif // QT_CONFIG(tooltip)
         ButtonCancelCategory->setText(QString());
         LineEditTitleCategory->setPlaceholderText(QCoreApplication::translate("FormAchievementsCategoriesEdit", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
+        LabelSubCategories->setText(QCoreApplication::translate("FormAchievementsCategoriesEdit", "\320\237\320\276\320\264\320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
     } // retranslateUi
 
 };

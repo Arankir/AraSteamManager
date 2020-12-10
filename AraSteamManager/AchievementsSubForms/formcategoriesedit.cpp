@@ -57,6 +57,12 @@ void FormCategoriesEdit::init() {
     ui->ListWidgetCategory->setDefaultDropAction(Qt::DropAction::MoveAction);
     ui->ListWidgetCategory->setWordWrap(true);
 
+    ui->ListWidgetSubCategories->setDropIndicatorShown(true);
+    ui->ListWidgetSubCategories->setDragEnabled(true);
+    ui->ListWidgetSubCategories->setDragDropMode(QAbstractItemView::DragDropMode::InternalMove);
+    ui->ListWidgetSubCategories->setDefaultDropAction(Qt::DropAction::MoveAction);
+    ui->ListWidgetSubCategories->setWordWrap(true);
+
     changeEditType(EditType::none);
     ui->ButtonChangeParent->setMenu(createParentMenu());
 
@@ -72,8 +78,9 @@ void FormCategoriesEdit::init() {
 
 void FormCategoriesEdit::setIcons() {
     ui->ButtonAddCategory           ->setIcon(QIcon(Images::create()));
-    ui->ButtonDeleteCategory        ->setIcon(QIcon(Images::deleteIcon()));
-    ui->ButtonDeleteAllCategories   ->setIcon(QIcon(Images::deleteAll()));
+    ui->ButtonDeleteCategory        ->setIcon(QIcon(Images::deleteCategory()));
+    ui->ButtonDeleteAllCategories   ->setIcon(QIcon(Images::deleteAllCategories()));
+    ui->ButtonChangeParent          ->setIcon(QIcon(Images::moveInTree()));
     ui->ButtonAcceptCategory        ->setIcon(QIcon(Images::apply()));
     ui->ButtonCancelCategory        ->setIcon(QIcon(Images::cancel()));
 }
@@ -113,6 +120,9 @@ void FormCategoriesEdit::changeEditType(EditType aType) {
         ui->LineEditTitleCategory->setText("");
         ui->LineEditTitleCategory->setEnabled(false);
         ui->ListWidgetCategory->setEnabled(false);
+        ui->FrameSubCategories->setEnabled(false);
+        ui->FrameSubCategories->setVisible(false);
+        ui->ListWidgetSubCategories->clear();
 
         ui->ButtonAcceptCategory->setEnabled(false);
         ui->ButtonCancelCategory->setEnabled(false);
@@ -131,6 +141,9 @@ void FormCategoriesEdit::changeEditType(EditType aType) {
         ui->LineEditTitleCategory->setText("");
         ui->LineEditTitleCategory->setEnabled(true);
         ui->ListWidgetCategory->setEnabled(true);
+        ui->FrameSubCategories->setEnabled(false);
+        ui->FrameSubCategories->setVisible(false);
+        ui->ListWidgetSubCategories->clear();
 
         ui->ButtonAcceptCategory->setEnabled(true);
         ui->ButtonCancelCategory->setEnabled(true);
@@ -147,6 +160,8 @@ void FormCategoriesEdit::changeEditType(EditType aType) {
 
         ui->LineEditTitleCategory->setEnabled(true);
         ui->ListWidgetCategory->setEnabled(true);
+        ui->FrameSubCategories->setEnabled(true);
+        ui->FrameSubCategories->setVisible(_currentCategory->categories().count() > 0);
 
         ui->ButtonAcceptCategory->setEnabled(true);
         ui->ButtonCancelCategory->setEnabled(true);
@@ -185,6 +200,18 @@ void FormCategoriesEdit::changeCategory(Category *aCategory, int aGlobalIndex) {
         } else {
             ui->ListWidgetAll->addItem(item);
         }
+    }
+    auto subCategoriesList = aCategory->categories();
+    ui->ListWidgetSubCategories->clear();
+    int row = 0;
+    for(auto &subCategory: subCategoriesList) {
+        QListWidgetItem *item = new QListWidgetItem();
+        item->setText(subCategory.title());
+        item->setWhatsThis(QString::number(row));
+        item->setFont(font);
+        item->setFlags(Qt::ItemFlag::ItemIsEditable | item->flags());
+        ui->ListWidgetSubCategories->addItem(item);
+        ++row;
     }
 }
 
@@ -258,13 +285,13 @@ QMenu *FormCategoriesEdit::createParentMenu() {
 
     QAction *root = new QAction(tr("Основная категория"), this);
     root->setData(-1);
-    root->setIcon(QIcon(Images::isComment()));
+    root->setIcon(QIcon(Images::moveItem()));
+
+    menu->addAction(root);
 
     for(auto &category: _categories) {
         menu->addMenu(createParentSubMenu(category, categoryNumber));
     }
-
-    menu->addAction(root);
 
     connect (root, &QAction::triggered, this, &FormCategoriesEdit::changeNewParentFromAction);
 
@@ -273,17 +300,17 @@ QMenu *FormCategoriesEdit::createParentMenu() {
 
 QMenu *FormCategoriesEdit::createParentSubMenu(Category &aCategory, int &aNumber) {
     QMenu *menu = new QMenu(aCategory.title());
-    menu->setIcon(QIcon(Images::goTo()));
+    //menu->setIcon(QIcon(Images::goTo()));
 
     QAction *action = new QAction(tr("Подкатегория для %1").arg(aCategory.title()), this);
     action->setData(++aNumber);
-    action->setIcon(QIcon(Images::isComment()));
+    action->setIcon(QIcon(Images::moveItem()));
+
+    menu->addAction(action);
 
     for(auto &category: aCategory) {
         menu->addMenu(createParentSubMenu(category, aNumber));
     }
-
-    menu->addAction(action);
 
     connect (action, &QAction::triggered, this, &FormCategoriesEdit::changeNewParentFromAction);
 
@@ -356,10 +383,6 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
         }
     }
 
-//    Transport: Train Heist
-//            Breakfast in Tijuana
-//            Buluc's Mansion
-
     if (isCategoryNameExist(newTitle)) {
         QMessageBox::warning(this, tr("Ошибка"), tr("Такая категория уже есть!"));
         return;
@@ -382,6 +405,18 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
                 _currentCategory->setTitle(newTitle);
                 _currentCategory->setAchievements(achievements);
 
+                QList<Category*> subCategoryList;
+                for (int i = 0; i < ui->ListWidgetSubCategories->count(); ++i) {
+                    auto item = ui->ListWidgetSubCategories->item(i);
+                    Category *sub = new Category(_currentCategory->categories().at(item->whatsThis().toInt()));
+                    sub->setTitle(item->text());
+                    subCategoryList.append(sub);
+                }
+                _currentCategory->clearCategories();
+                for(auto category: subCategoryList) {
+                    _currentCategory->addCategory(*category);
+                }
+
                 if (_currentCategoryNewParent != nullptr) {
                     _currentCategoryNewParent->addCategory(newCategory);
                 } else {
@@ -392,6 +427,19 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
                 //Не сохраняется
                 _currentCategory->setTitle(newTitle);
                 _currentCategory->setAchievements(achievements);
+
+                QList<Category*> subCategoryList;
+                for (int i = 0; i < ui->ListWidgetSubCategories->count(); ++i) {
+                    auto item = ui->ListWidgetSubCategories->item(i);
+                    Category *sub = new Category(_currentCategory->categories().at(item->whatsThis().toInt()));
+                    sub->setTitle(item->text());
+                    subCategoryList.append(sub);
+                }
+                _currentCategory->clearCategories();
+                for(auto category: subCategoryList) {
+                    _currentCategory->addCategory(*category);
+                }
+
             }
         } else {
             qWarning() << "on EditType:change current category doesn't exist";
