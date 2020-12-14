@@ -27,10 +27,10 @@
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "AchievementsSubForms\formcategoriesedit.h"
-#include "AchievementsSubForms\formcompareprofilefilter.h"
-#include "AchievementsSubForms\formfriendscompare.h"
-#include "class\NotMine\freezetablewidget.h"
+#include "classes\notMine\freezetablewidget.h"
+#include "forms\subForms\achievements\formcategoriesedit.h"
+#include "forms\subForms\achievements\formcompareprofilefilter.h"
+#include "forms\subForms\achievements\formfriendscompare.h"
 
 QT_BEGIN_NAMESPACE
 

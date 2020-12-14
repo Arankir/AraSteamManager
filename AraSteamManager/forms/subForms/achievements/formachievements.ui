@@ -218,7 +218,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabStandart">
         <attribute name="title">
@@ -443,24 +443,24 @@
   <customwidget>
    <class>FreezeTableWidget</class>
    <extends>QTableView</extends>
-   <header>class\NotMine\freezetablewidget.h</header>
+   <header>classes\notMine\freezetablewidget.h</header>
   </customwidget>
   <customwidget>
    <class>FormCategoriesEdit</class>
    <extends>QWidget</extends>
-   <header>AchievementsSubForms\formcategoriesedit.h</header>
+   <header>forms\subForms\achievements\formcategoriesedit.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormCompareProfileFilter</class>
    <extends>QWidget</extends>
-   <header>AchievementsSubForms\formcompareprofilefilter.h</header>
+   <header>forms\subForms\achievements\formcompareprofilefilter.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormFriendsCompare</class>
    <extends>QWidget</extends>
-   <header>AchievementsSubForms\formfriendscompare.h</header>
+   <header>forms\subForms\achievements\formfriendscompare.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

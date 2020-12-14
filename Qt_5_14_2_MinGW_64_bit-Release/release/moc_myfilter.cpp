@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/class/myfilter.h"
+#include "../../AraSteamManager/classes/common/myfilter.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

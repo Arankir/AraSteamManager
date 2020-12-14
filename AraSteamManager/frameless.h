@@ -14,27 +14,20 @@ class FrameLess : public QObject {
 
 public:
     enum Edge {
-        None = 0x0,
-        Left = 0x1,
-        Top = 0x2,
-        Right = 0x4,
-        Bottom = 0x8,
-        TopLeft = 0x10,
-        TopRight = 0x20,
-        BottomLeft = 0x40,
-        BottomRight = 0x80,
+        None        = 0x0, //00000000
+        Left        = 0x1, //00000001
+        Top         = 0x2, //00000010
+        Right       = 0x4, //00000100
+        Bottom      = 0x8, //00001000
+        TopLeft     = 0x3, //00000011
+        TopRight    = 0x6, //00000110
+        BottomLeft  = 0x9, //00001001
+        BottomRight = 0xC, //00001100
     };
     Q_ENUM(Edge);
     Q_DECLARE_FLAGS(Edges, Edge);
 
     FrameLess(QWidget *target);
-
-    void setBorderWidth(int w) {
-        _borderWidth = w;
-    }
-    int borderWidth() const {
-        return _borderWidth;
-    }
 
 protected:
     bool eventFilter(QObject *o, QEvent *e) override;
@@ -53,7 +46,6 @@ private:
     bool _leftButtonPressed;
     Edges _mousePress = Edge::None;
     Edges _mouseMove = Edge::None;
-    int _borderWidth;
 
     QPoint _dragPos;
     bool _dragStart = false;

@@ -426,14 +426,16 @@ void FormAchievements::categoryDelete() {
 }
 
 void FormAchievements::buttonComment_Clicked() {
-    FormCommentsInteractions *ci = new FormCommentsInteractions(_profile, _game, _currentAchievement);
+    FramelessWindow *f = new FramelessWindow;
+    FormCommentsInteractions *ci = new FormCommentsInteractions(_profile, _game, _currentAchievement, f);
+    f->setWidget(ci);
     connect(ci, &FormCommentsInteractions::s_updateComments, this, [=](bool isUpdate) {
         if (isUpdate) {
             initComments();
         }
         delete ci;
     });
-    ci->show();
+    f->show();
 }
 
 void FormAchievements::initComments() {

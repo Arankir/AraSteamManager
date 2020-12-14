@@ -1,19 +1,19 @@
-#include "qlistwidgetachievement.h"
+#include "qlistwidgetfriend.h"
 
-QListWidgetAchievement::QListWidgetAchievement(SAchievement *aAchievement): QListWidgetItem() {
+QListWidgetFriend::QListWidgetFriend(SAchievement *aAchievement): QListWidgetItem() {
     _achievement = aAchievement;
 }
 
-QListWidgetAchievement::~QListWidgetAchievement() {
+QListWidgetFriend::~QListWidgetFriend() {
 
 }
 
-QListWidgetAchievement &QListWidgetAchievement::operator=(const QListWidgetAchievement &aItem) {
+QListWidgetFriend &QListWidgetFriend::operator=(const QListWidgetFriend &aItem) {
     QListWidgetItem::operator=(aItem);
     _achievement = aItem._achievement;
     return *this;
 }
 
-bool QListWidgetAchievement::operator==(const QListWidgetAchievement &aItem) {
+bool QListWidgetFriend::operator==(const QListWidgetFriend &aItem) {
     return (_achievement == aItem._achievement);
 }

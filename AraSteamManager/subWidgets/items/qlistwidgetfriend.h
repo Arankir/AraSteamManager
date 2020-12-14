@@ -2,16 +2,16 @@
 #define QLISTWIDGETACHIEVEMENT_H
 
 #include <QListWidgetItem>
-#include "class/steamapi/Sachievements.h"
+#include "classes/steamApi/structures/sachievements.h"
 
-class QListWidgetAchievement : public QListWidgetItem {
+class QListWidgetFriend : public QListWidgetItem {
 public:
-    QListWidgetAchievement(SAchievement *achievement);
-    QListWidgetAchievement(): QListWidgetItem() {}
-    ~QListWidgetAchievement();
+    QListWidgetFriend(SAchievement *achievement);
+    QListWidgetFriend(): QListWidgetItem() {}
+    ~QListWidgetFriend();
 
-    QListWidgetAchievement &operator=(const QListWidgetAchievement&);
-    bool operator==(const QListWidgetAchievement&);
+    QListWidgetFriend &operator=(const QListWidgetFriend&);
+    bool operator==(const QListWidgetFriend&);
 
     SAchievement *_achievement = nullptr;
 };

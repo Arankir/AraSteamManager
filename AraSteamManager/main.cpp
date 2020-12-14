@@ -1,4 +1,5 @@
-#include "mainwindow.h"
+#include "forms/mainwindow.h"
+#include "forms/formmain.h"
 #include <QApplication>
 #include <QStyleFactory>
 #include <QTranslator>
@@ -9,8 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
-#include "class/settings.h"
+#include "classes/common/settings.h"
 #include "frameless.h"
+#include "framelesswindow.h"
 
 QScopedPointer<QFile> logFile_;
 
@@ -34,9 +36,14 @@ int main(int argc, char *argv[]) {
 
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
-    MainWindow *w = new MainWindow;
-    FrameLess f(w);
-    w->show();
+    FramelessWindow f;
+    FormMain *m = new FormMain(&f);
+    //MainWindow *w = new MainWindow(&f);
+    f.setWidget(m);
+    //FrameLess f(w);
+    //FramelessWindow f(w);
+    //w->show();
+    f.show();
 
     return a.exec();
 }

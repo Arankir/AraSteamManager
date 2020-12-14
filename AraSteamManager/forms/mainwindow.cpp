@@ -25,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
 }
 
 void MainWindow::initComponents() {
+//    ui->statusBar->setVisible(false);
+    ui->FrameTitleWindow->setVisible(false);
+
+
     _containerAchievementsForm = new FormContainerAchievements();
     ui->line->setVisible(false);
 
@@ -40,8 +44,12 @@ void MainWindow::initComponents() {
     ui->ButtonMinimize->setFixedSize(QSize(23, 23));
     ui->ButtonMaximize->setFixedSize(QSize(23, 23));
     ui->ButtonExit    ->setFixedSize(QSize(23, 23));
-    this->setGeometry(Settings::getMainWindowGeometry());
-    this->move(Settings::getMainWindowPos());
+    qDebug() << Settings::getMainWindowGeometry() << Settings::getMainWindowPos() << parentWidget() << parent();
+    if (parentWidget() != nullptr) {
+        qDebug() << 2;
+        parentWidget()->setGeometry(Settings::getMainWindowGeometry());
+        parentWidget()->move(Settings::getMainWindowPos());
+    }
     if(Settings::getMainWindowMaximize()) {
         this->showMaximized();
     }
@@ -456,15 +464,15 @@ QString MainWindow::getTheme() {
                     "border: 0px solid #000000; "
                     //"background-color: rgba(23, 26, 33, 0.5);"
                 "} "
-                "QFrame[accessibleName=TitleWindow] { "
-                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                        "stop: 0 rgba(0, 0, 0, 0), "
-                        //"stop: 0.5 #20232b, "
-                        "stop: 1.0 rgba(0, 0, 0, 0)); "
-                    "border: 1px solid rgb(87, 203, 222); "
-                    "border-bottom: 0px; "
-//                    "border-top: 0px; "
-                "} "
+//                "QFrame[accessibleName=TitleWindow] { "
+//                    "background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
+//                        "stop: 0 rgba(0, 0, 0, 0), "
+//                        //"stop: 0.5 #20232b, "
+//                        "stop: 1.0 rgba(0, 0, 0, 0)); "
+//                    "border: 1px solid rgb(87, 203, 222); "
+//                    "border-bottom: 0px; "
+////                    "border-top: 0px; "
+//                "} "
                 "QFrame#FrameProfileBaseInfo { "
                     "background-color: rgba(37, 60, 94, 0.5); "
                 "} "
@@ -506,7 +514,7 @@ QString MainWindow::getTheme() {
                 "QListView::item { "
                     "background-color: rgba(23, 26, 33, 0.5); "
                     "color: #dddddd; "
-                    //"margin-top: 10px; "
+                    "margin-top: 5px; "
                     "padding: 4px; "
                 "} "
                 "QListWidgetAchievements::item { "
@@ -523,7 +531,8 @@ QString MainWindow::getTheme() {
                     "color: white; "
                 "} "
 #define treeviewend }
-                "QMainWindow, FormContainerAchievements, FormGroupsGamesInteractions, FormCommentsInteractions { "
+                "FramelessWindow, FormContainerAchievements, FormGroupsGamesInteractions, FormCommentsInteractions { "
+                //".QWidget { "
                     "background-color: " + backgroundGradient +
                     "border: 1px solid rgb(87, 203, 222); "
                 "} "

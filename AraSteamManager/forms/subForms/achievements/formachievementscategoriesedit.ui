@@ -176,7 +176,7 @@
   <customwidget>
    <class>QListWidgetAchievements</class>
    <extends>QListWidget</extends>
-   <header>subwidget/qlistwidgetachievements.h</header>
+   <header>subWidgets/qlistwidgetachievements.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

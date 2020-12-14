@@ -27,7 +27,7 @@
 **
 ****************************************************************************/
 #include "donutbreakdownchart.h"
-#include <class/NotMine/mainslice.h>
+#include <classes/notMine/mainslice.h>
 #include <QtCharts/QPieSlice>
 #include <QtCharts/QPieLegendMarker>
 

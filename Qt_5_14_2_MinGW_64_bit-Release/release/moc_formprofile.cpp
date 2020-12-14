@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/MainSubForms/formprofile.h"
+#include "../../AraSteamManager/forms/subForms/main/formprofile.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

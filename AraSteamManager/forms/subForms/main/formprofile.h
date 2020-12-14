@@ -2,14 +2,13 @@
 #define FORMPROFILE_H
 
 #include <QWidget>
-#include "class/steamapi/Sprofile.h"
-#include "class/steamapi/Sbans.h"
-#include "class/steamapi/Slevels.h"
-#include "class/steamapi/Sgames.h"
-#include "class/steamapi/Sfriends.h"
-//#include "class/settings.h"
-#include "class/Network/requestimage.h"
 #include <QGraphicsDropShadowEffect>
+#include "classes/steamApi/structures/sprofile.h"
+#include "classes/steamApi/structures/sbans.h"
+#include "classes/steamApi/structures/slevels.h"
+#include "classes/steamApi/structures/sgames.h"
+#include "classes/steamApi/structures/sfriends.h"
+#include "classes/network/requestimage.h"
 
 namespace Ui {
 class FormProfile;

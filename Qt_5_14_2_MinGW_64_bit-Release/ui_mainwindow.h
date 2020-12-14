@@ -17,13 +17,11 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -78,17 +76,13 @@ public:
     QGridLayout *gridLayout_6;
     QScrollArea *ScrollAreaSettings;
     QWidget *scrollAreaWidgetContents_5;
-    QMenuBar *menuBar;
-    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(479, 623);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        MainWindow->setFont(font);
+        MainWindow->setAnimated(false);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout_2 = new QVBoxLayout(centralWidget);
@@ -120,23 +114,23 @@ public:
 
         ButtonMinimize = new QPushButton(FrameTitleWindow);
         ButtonMinimize->setObjectName(QString::fromUtf8("ButtonMinimize"));
-        QFont font1;
-        font1.setPointSize(10);
-        ButtonMinimize->setFont(font1);
+        QFont font;
+        font.setPointSize(10);
+        ButtonMinimize->setFont(font);
         ButtonMinimize->setText(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(ButtonMinimize);
 
         ButtonMaximize = new QPushButton(FrameTitleWindow);
         ButtonMaximize->setObjectName(QString::fromUtf8("ButtonMaximize"));
-        ButtonMaximize->setFont(font1);
+        ButtonMaximize->setFont(font);
         ButtonMaximize->setText(QString::fromUtf8(""));
 
         horizontalLayout->addWidget(ButtonMaximize);
 
         ButtonExit = new QPushButton(FrameTitleWindow);
         ButtonExit->setObjectName(QString::fromUtf8("ButtonExit"));
-        ButtonExit->setFont(font1);
+        ButtonExit->setFont(font);
 
         horizontalLayout->addWidget(ButtonExit);
 
@@ -159,44 +153,44 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         ButtonBack = new QPushButton(centralWidget);
         ButtonBack->setObjectName(QString::fromUtf8("ButtonBack"));
-        ButtonBack->setFont(font1);
+        ButtonBack->setFont(font);
 
         horizontalLayout_4->addWidget(ButtonBack);
 
         ButtonNext = new QPushButton(centralWidget);
         ButtonNext->setObjectName(QString::fromUtf8("ButtonNext"));
-        ButtonNext->setFont(font1);
+        ButtonNext->setFont(font);
 
         horizontalLayout_4->addWidget(ButtonNext);
 
         ButtonUpdate = new QPushButton(centralWidget);
         ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
-        ButtonUpdate->setFont(font1);
+        ButtonUpdate->setFont(font);
 
         horizontalLayout_4->addWidget(ButtonUpdate);
 
         ButtonGoToMyProfile = new QPushButton(centralWidget);
         ButtonGoToMyProfile->setObjectName(QString::fromUtf8("ButtonGoToMyProfile"));
-        ButtonGoToMyProfile->setFont(font1);
+        ButtonGoToMyProfile->setFont(font);
 
         horizontalLayout_4->addWidget(ButtonGoToMyProfile);
 
         ButtonSettings = new QPushButton(centralWidget);
         ButtonSettings->setObjectName(QString::fromUtf8("ButtonSettings"));
-        ButtonSettings->setFont(font1);
+        ButtonSettings->setFont(font);
 
         horizontalLayout_4->addWidget(ButtonSettings);
 
         LineEditIdProfile = new QLineEdit(centralWidget);
         LineEditIdProfile->setObjectName(QString::fromUtf8("LineEditIdProfile"));
-        LineEditIdProfile->setFont(font1);
+        LineEditIdProfile->setFont(font);
 
         horizontalLayout_4->addWidget(LineEditIdProfile);
 
         ButtonFindProfile = new QPushButton(centralWidget);
         ButtonFindProfile->setObjectName(QString::fromUtf8("ButtonFindProfile"));
         ButtonFindProfile->setEnabled(true);
-        ButtonFindProfile->setFont(font1);
+        ButtonFindProfile->setFont(font);
 
         horizontalLayout_4->addWidget(ButtonFindProfile);
 
@@ -246,7 +240,7 @@ public:
         ScrollAreaNone->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 459, 460));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 459, 504));
         ScrollAreaNone->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(ScrollAreaNone, 0, 0, 1, 1);
@@ -359,13 +353,6 @@ public:
         verticalLayout_2->addLayout(verticalLayout);
 
         MainWindow->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 479, 20));
-        MainWindow->setMenuBar(menuBar);
-        statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        MainWindow->setStatusBar(statusBar);
 
         retranslateUi(MainWindow);
 

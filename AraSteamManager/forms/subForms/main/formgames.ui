@@ -128,7 +128,7 @@
   <customwidget>
    <class>MultiSelectComboBox</class>
    <extends>QComboBox</extends>
-   <header>class\NotMine\MultiSelectComboBox.h</header>
+   <header>classes\notMine\multiselectcombobox.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

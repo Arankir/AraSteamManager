@@ -2,9 +2,9 @@
 #define FORMCOMPAREPROFILEFILTER_H
 
 #include <QWidget>
-#include "class/settings.h"
-#include "subwidget/qradiobuttonwithdata.h"
 #include <QDebug>
+#include "classes/common/settings.h"
+#include "subWidgets/withData/qradiobuttonwithdata.h"
 
 enum class ReachedType {
     reached = 0,

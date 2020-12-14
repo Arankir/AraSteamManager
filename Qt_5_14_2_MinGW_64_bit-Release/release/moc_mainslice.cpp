@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/class/NotMine/mainslice.h"
+#include "../../AraSteamManager/classes/notMine/mainslice.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

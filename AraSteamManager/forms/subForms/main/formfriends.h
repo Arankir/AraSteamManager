@@ -4,10 +4,10 @@
 #include <QWidget>
 #include <QMenu>
 
-#include "class/steamapi/Sfriends.h"
-#include "class/Threads/threading.h"
-#include "class/favorites.h"
-#include "class/myfilter.h"
+#include "classes/steamApi/structures/sfriends.h"
+#include "classes/threads/threading.h"
+#include "classes/common/favorites.h"
+#include "classes/common/myfilter.h"
 
 namespace Ui {
 class FormFriends;

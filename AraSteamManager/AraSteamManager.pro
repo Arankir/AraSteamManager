@@ -53,6 +53,7 @@ SOURCES += \
     forms/formcommentsinteractions.cpp \
     forms/formcontainerachievements.cpp \
     forms/formgroupsgamesinteractions.cpp \
+    forms/formmain.cpp \
     forms/mainwindow.cpp \
     forms/subForms/achievements/formachievements.cpp \
     forms/subForms/achievements/formcategoriesedit.cpp \
@@ -66,6 +67,7 @@ SOURCES += \
     forms/subForms/main/formsettings.cpp \
     forms/subForms/main/formstatistics.cpp \
     frameless.cpp \
+    framelesswindow.cpp \
         main.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
     subWidgets/items/qlistwidgetfriend.cpp \
@@ -106,6 +108,7 @@ HEADERS += \
     forms/formcommentsinteractions.h \
     forms/formcontainerachievements.h \
     forms/formgroupsgamesinteractions.h \
+    forms/formmain.h \
     forms/mainwindow.h \
     forms/subForms/achievements/formachievements.h \
     forms/subForms/achievements/formcategoriesedit.h \
@@ -119,6 +122,7 @@ HEADERS += \
     forms/subForms/main/formsettings.h \
     forms/subForms/main/formstatistics.h \
     frameless.h \
+    framelesswindow.h \
     subWidgets/items/qlistwidgetachievement.h \
     subWidgets/items/qlistwidgetfriend.h \
     subWidgets/models/listachievementsmodel.h \
@@ -133,6 +137,7 @@ FORMS += \
     forms/formcommentsinteractions.ui \
     forms/formcontainerachievements.ui \
     forms/formgroupsgamesinteractions.ui \
+    forms/formmain.ui \
     forms/mainwindow.ui \
     forms/subForms/achievements/formachievements.ui \
     forms/subForms/achievements/formachievementscategoriesedit.ui \
@@ -145,24 +150,7 @@ FORMS += \
     forms/subForms/main/formprofile.ui \
     forms/subForms/main/formsettings.ui \
     forms/subForms/main/formstatistics.ui \
-    mainForms/formcommentsinteractions.ui \
-    mainForms/formcontainerachievements.ui \
-    mainForms/formgroupsgamesinteractions.ui \
-    mainForms/mainwindow.ui \
-    mainForms/subForms/achievements/formachievements.ui \
-    mainForms/subForms/achievements/formachievementscategoriesedit.ui \
-    mainForms/subForms/achievements/formachievementsfriendscompare.ui \
-    mainForms/subForms/achievements/formachievementwidget.ui \
-    mainForms/subForms/achievements/formcategoryvalue_2.ui \
-    mainForms/subForms/achievements/formcomparefriends.ui \
-    mainForms/subForms/achievements/formcompareprofilefilter.ui \
-    mainForms/subForms/achievements/formtablesheaders.ui \
-    mainForms/subForms/main/formfavorites.ui \
-    mainForms/subForms/main/formfriends.ui \
-    mainForms/subForms/main/formgames.ui \
-    mainForms/subForms/main/formprofile.ui \
-    mainForms/subForms/main/formsettings.ui \
-    mainForms/subForms/main/formstatistics.ui \
+    framelesswindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -171,7 +159,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     images/resimg.qrc \
-    languages/lang.qrc
+    languages/lang.qrc \
+    themes/thm.qrc
 
 DISTFILES +=
 

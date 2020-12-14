@@ -12,16 +12,17 @@
 #include <QGraphicsDropShadowEffect>
 #include <QAction>
 #include <QMenu>
-#include "formgroupsgamesinteractions.h"
-#include "formcommentsinteractions.h"
-#include "class/favorites.h"
-#include "class/steamapi/Sgames.h"
-#include "class/steamapi/Sachievements.h"
-#include "class/Threads/threading.h"
-#include "class/Network/requestimage.h"
-#include "class/myfilter.h"
-#include "class/hiddengames.h"
-#include "subwidget/qbuttonwithdata.h"
+#include "framelesswindow.h"
+#include "forms/formgroupsgamesinteractions.h"
+#include "forms/formcommentsinteractions.h"
+#include "classes/common/favorites.h"
+#include "classes/steamApi/structures/sgames.h"
+#include "classes/steamApi/structures/sachievements.h"
+#include "classes/threads/threading.h"
+#include "classes/network/requestimage.h"
+#include "classes/common/myfilter.h"
+#include "classes/games/hiddengames.h"
+#include "subWidgets/withData/qbuttonwithdata.h"
 
 namespace Ui {
 class FormGames;

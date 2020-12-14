@@ -39,6 +39,7 @@ release/formprofile.o
 release/formsettings.o
 release/formstatistics.o
 release/frameless.o
+release/framelesswindow.o
 release/main.o
 release/qlistwidgetachievement.o
 release/qlistwidgetfriend.o
@@ -86,6 +87,7 @@ release/moc_formprofile.o
 release/moc_formsettings.o
 release/moc_formstatistics.o
 release/moc_frameless.o
+release/moc_framelesswindow.o
 release/moc_listachievementsmodel.o
 release/moc_qcomboboxfriends.o
 release/moc_qlistwidgetachievements.o

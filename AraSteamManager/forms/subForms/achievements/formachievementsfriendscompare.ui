@@ -268,7 +268,7 @@
   <customwidget>
    <class>FreezeTableWidget</class>
    <extends>QTableView</extends>
-   <header>class\NotMine\freezetablewidget.h</header>
+   <header>classes\notMine\freezetablewidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -2,7 +2,7 @@
 
 #include <QComboBox>
 #include <QListWidget>
-#include "class/steamapi/Sfriends.h"
+#include "classes/steamApi/structures/sfriends.h"
 
 class ComboBoxFriends : public QComboBox
 {

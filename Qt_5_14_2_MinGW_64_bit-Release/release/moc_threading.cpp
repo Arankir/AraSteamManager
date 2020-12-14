@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/class/Threads/threading.h"
+#include "../../AraSteamManager/classes/threads/threading.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #include <QtCore/QList>

@@ -9,12 +9,12 @@
 #include <QTreeWidgetItem>
 #include <QMenu>
 #include <QAction>
-#include "class/settings.h"
-#include "class/myfilter.h"
-#include "class/categoriesgame.h"
-#include "class/steamapi/Sgames.h"
-#include "subwidget/qlistwidgetachievement.h"
-#include "subwidget/listachievementsmodel.h"
+#include "classes/common/settings.h"
+#include "classes/common/myfilter.h"
+#include "classes/achievements/categoriesgame.h"
+#include "classes/steamApi/structures/sgames.h"
+#include "subWidgets/items/qlistwidgetachievement.h"
+#include "subWidgets/models/listachievementsmodel.h"
 
 enum class EditType {
     none,

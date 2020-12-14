@@ -458,24 +458,28 @@ void FormGames::buttonHide_Clicked() {
 }
 
 void FormGames::showGroupsInteractive() {
-    FormGroupsGamesInteractions *ggi = new FormGroupsGamesInteractions(_profile, *_currentGame);
+    FramelessWindow *f = new FramelessWindow;
+    FormGroupsGamesInteractions *ggi = new FormGroupsGamesInteractions(_profile, *_currentGame, f);
+    f->setWidget(ggi);
     connect(ggi, &FormGroupsGamesInteractions::s_updateGroups, this, [=](bool isUpdate) {
         if (isUpdate) {
             initGroups();
         }
         delete ggi;
     });
-    ggi->show();
+    f->show();
 }
 
 void FormGames::showCommentsInteractive() {
-    FormCommentsInteractions *ci = new FormCommentsInteractions(_profile, *_currentGame);
+    FramelessWindow *f = new FramelessWindow;
+    FormCommentsInteractions *ci = new FormCommentsInteractions(_profile, *_currentGame, nullptr, f);
+    f->setWidget(ci);
     connect(ci, &FormCommentsInteractions::s_updateComments, this, [=](bool isUpdate) {
         if (isUpdate) {
             initComments();
         }
         delete ci;
     });
-    ci->show();
+    f->show();
 }
 #define FunctionsEnd }

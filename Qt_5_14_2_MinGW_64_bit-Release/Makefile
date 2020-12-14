@@ -281,7 +281,8 @@ Makefile: ../AraSteamManager/AraSteamManager.pro D:/Qt/5.14.2/mingw73_64/mkspecs
 		D:/Qt/5.14.2/mingw73_64/lib/qtmain.prl \
 		D:/Qt/5.14.2/mingw73_64/mkspecs/features/build_pass.prf \
 		../AraSteamManager/images/resimg.qrc \
-		../AraSteamManager/languages/lang.qrc
+		../AraSteamManager/languages/lang.qrc \
+		../AraSteamManager/themes/thm.qrc
 	$(QMAKE) -o Makefile ..\AraSteamManager\AraSteamManager.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 D:/Qt/5.14.2/mingw73_64/mkspecs/features/spec_pre.prf:
 D:/Qt/5.14.2/mingw73_64/mkspecs/qdevice.pri:
@@ -495,6 +496,7 @@ D:/Qt/5.14.2/mingw73_64/lib/qtmain.prl:
 D:/Qt/5.14.2/mingw73_64/mkspecs/features/build_pass.prf:
 ../AraSteamManager/images/resimg.qrc:
 ../AraSteamManager/languages/lang.qrc:
+../AraSteamManager/themes/thm.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\AraSteamManager\AraSteamManager.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
 

@@ -6,16 +6,16 @@
 #include <QScrollBar>
 #include <QTableWidgetItem>
 #include <QLabel>
-#include "subwidget/qradiobuttonwithdata.h"
-#include "AchievementsSubForms/formcompareprofilefilter.h"
-#include "class/steamapi/Sprofile.h"
-#include "class/steamapi/Sgames.h"
-#include "class/steamapi/Sachievements.h"
-#include "class/myfilter.h"
-#include "class/categoriesgame.h"
-#include "class/Network/requestimage.h"
-#include "class/Threads/threading.h"
-#include "class/favorites.h"
+#include "subWidgets/withData/qradiobuttonwithdata.h"
+#include "forms/subForms/achievements/formcompareprofilefilter.h"
+#include "classes/steamApi/structures/sprofile.h"
+#include "classes/steamApi/structures/sgames.h"
+#include "classes/steamApi/structures/sachievements.h"
+#include "classes/common/myfilter.h"
+#include "classes/achievements/categoriesgame.h"
+#include "classes/network/requestimage.h"
+#include "classes/threads/threading.h"
+#include "classes/common/favorites.h"
 
 namespace Ui {
 class FormTablesHeaders;

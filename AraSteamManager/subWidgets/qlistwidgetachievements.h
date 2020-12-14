@@ -7,8 +7,8 @@
 #include <QDrag>
 #include <QDropEvent>
 #include <QMimeData>
-#include "subwidget/items/qlistwidgetachievement.h"
-#include "class/steamapi/Sgames.h"
+#include "subWidgets/items/qlistwidgetachievement.h"
+#include "classes/steamApi/structures/sgames.h"
 
 class QListWidgetAchievements : public QListWidget {
     Q_OBJECT

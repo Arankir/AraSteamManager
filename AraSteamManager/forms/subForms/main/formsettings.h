@@ -6,11 +6,11 @@
 #include <QFormLayout>
 #include <QPair>
 #include <QTranslator>
-#include "class/Network/requestimage.h"
-#include "class/steamapi/Sprofile.h"
-#include "class/steamapi/Sgames.h"
-#include "subwidget/qbuttonwithdata.h"
-#include "subwidget/qradiobuttonwithdata.h"
+#include "classes/network/requestimage.h"
+#include "classes/steamApi/structures/sprofile.h"
+#include "classes/steamApi/structures/sgames.h"
+#include "subWidgets/withData/qbuttonwithdata.h"
+#include "subWidgets/withData/qradiobuttonwithdata.h"
 
 namespace Ui {
 class FormSettings;

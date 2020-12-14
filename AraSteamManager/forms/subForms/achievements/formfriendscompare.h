@@ -3,13 +3,13 @@
 
 #include <QWidget>
 #include <QLabel>
-#include "class/steamapi/Sachievements.h"
-#include "class/steamapi/Sprofile.h"
-#include "class/steamapi/Sgames.h"
-#include "class/steamapi/Sfriends.h"
-#include "class/myfilter.h"
-#include "AchievementsSubForms/formcompareprofilefilter.h"
-#include "subwidget/qbuttonwithdata.h"
+#include "classes/steamApi/structures/sachievements.h"
+#include "classes/steamApi/structures/sprofile.h"
+#include "classes/steamApi/structures/sgames.h"
+#include "classes/steamApi/structures/sfriends.h"
+#include "classes/common/myfilter.h"
+#include "forms/subForms/achievements/formcompareprofilefilter.h"
+#include "subWidgets/withData/qbuttonwithdata.h"
 
 enum FriendType {
     haventGame,

@@ -2,7 +2,7 @@
 #define QLISTWIDGETACHIEVEMENT_H
 
 #include <QListWidgetItem>
-#include "class/steamapi/Sachievements.h"
+#include "classes/steamApi/structures/sachievements.h"
 
 class QListWidgetAchievement : public QListWidgetItem {
 public:

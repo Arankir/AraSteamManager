@@ -3,12 +3,6 @@
 
 #include <QWidget>
 #include <QPair>
-#include "class/steamapi/Sgames.h"
-#include "class/steamapi/Sachievements.h"
-#include "class/steamapi/Sfriends.h"
-#include "class/Threads/threading.h"
-
-#include "class/NotMine/donutbreakdownchart.h"
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -19,6 +13,12 @@
 #include <QtWidgets/QHeaderView>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
+#include "classes/steamApi/structures/sgames.h"
+#include "classes/steamApi/structures/sachievements.h"
+#include "classes/steamApi/structures/sfriends.h"
+#include "classes/threads/threading.h"
+
+#include "classes/notMine/donutbreakdownchart.h"
 
 namespace Ui {
 class FormStatistics;
