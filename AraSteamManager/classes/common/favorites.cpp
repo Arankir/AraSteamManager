@@ -44,7 +44,7 @@ QJsonObject Favorites::achievementsToJson() {
 }
 
 void Favorites::saveGames() {
-    Settings::createDir(Paths::favorites("games"));
+    createDir(Paths::favorites("games"));
     QFile file(Paths::favorites("games"));
     file.open(QFile::WriteOnly);
     file.write(QJsonDocument(gamesToJson()).toJson());
@@ -52,7 +52,7 @@ void Favorites::saveGames() {
 }
 
 void Favorites::saveFriends() {
-    Settings::createDir(Paths::favorites("friends"));
+    createDir(Paths::favorites("friends"));
     QFile file(Paths::favorites("friends"));
     file.open(QFile::WriteOnly);
     file.write(QJsonDocument(friendsToJson()).toJson());
@@ -60,7 +60,7 @@ void Favorites::saveFriends() {
 }
 
 void Favorites::saveAchievements() {
-    Settings::createDir(Paths::favorites("achievements"));
+    createDir(Paths::favorites("achievements"));
     QFile file(Paths::favorites("achievements"));
     file.open(QFile::WriteOnly);
     QJsonDocument doc(achievementsToJson());
@@ -182,7 +182,7 @@ FavoriteAchievementsGame &Favorites::getAchievementsGame(const QString &aIdUser,
 
 QList<FavoriteFriend> Favorites::initFriends() {
     QList<FavoriteFriend> list;
-    Settings::createDir(Paths::favorites("friends"));
+    createDir(Paths::favorites("friends"));
     QFile file(Paths::favorites("friends"));
     if (file.exists()) {
         if (file.open(QFile::ReadOnly)) {
@@ -202,7 +202,7 @@ QList<FavoriteFriend> Favorites::initFriends() {
 
 QList<FavoriteAchievementsGame> Favorites::initAchievements() {
     QList<FavoriteAchievementsGame> list;
-    Settings::createDir(Paths::favorites("achievements"));
+    createDir(Paths::favorites("achievements"));
     QFile file(Paths::favorites("achievements"));
     if (file.exists()) {
         if (file.open(QFile::ReadOnly)) {
@@ -222,7 +222,7 @@ QList<FavoriteAchievementsGame> Favorites::initAchievements() {
 
 QList<FavoriteGame> Favorites::initGames() {
     QList<FavoriteGame> list;
-    Settings::createDir(Paths::favorites("games"));
+    createDir(Paths::favorites("games"));
     QFile file(Paths::favorites("games"));
     if (file.exists()) {
         if (file.open(QFile::ReadOnly)) {

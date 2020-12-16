@@ -21,11 +21,18 @@ constexpr int c_filterCount         = 4;
 #define Init {
 FormFriends::FormFriends(const QString &aId, SFriends &aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId), _filter(aFriends.getCount(), c_filterCount) {
     ui->setupUi(this);
+    init();
+    setFriends(aId, aFriends);
+}
+
+FormFriends::FormFriends(QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _filter(0, c_filterCount) {
+    ui->setupUi(this);
+    init();
+}
+
+void FormFriends::init() {
     this->setAttribute(Qt::WA_TranslucentBackground);
-
-    initFriends(aFriends);
     initTable();
-
     setIcons();
 #define Connects {
     connect(ui->ButtonFind,           &QPushButton::clicked,    this, &FormFriends::buttonFind_Clicked);
@@ -34,9 +41,29 @@ FormFriends::FormFriends(const QString &aId, SFriends &aFriends, QWidget *aParen
     connect(ui->CheckBoxOpenProfile,  &QCheckBox::stateChanged, this, &FormFriends::checkBoxOpenProfile_StateChanged);
     connect(ui->CheckBoxFavorites,    &QCheckBox::stateChanged, this, &FormFriends::checkBoxFavorites_StateChanged);
 #define ConnectsEnd }
-    createThread();
+}
 
-    ui->LineEditName->setFocus();
+void FormFriends::setFriends(const QString &aId, SFriends &aFriends) {
+    _loaded = false;
+    _id = aId;
+    _filter.setRow(aFriends.getCount());
+    initFriends(aFriends);
+    createThread();
+}
+
+void FormFriends::clear() {
+    _loaded = false;
+    _id = "";
+    _filter.setRow(0);
+    _friends.clear();
+}
+
+bool FormFriends::isInit() {
+    return ((_id != "") && (_friends.count() > 0) && (_loaded == true));
+}
+
+bool FormFriends::isLoaded() {
+    return _loaded;
 }
 
 void FormFriends::initFriends(SFriends &aFriends) {
@@ -110,6 +137,7 @@ void FormFriends::setTableModel(QStandardItemModel *aModel) {
     ui->TableFriends->resizeColumnsToContents();
     ui->TableFriends->resizeRowsToContents();
 
+    _loaded = true;
     emit s_finish();
 }
 #define InitEnd }

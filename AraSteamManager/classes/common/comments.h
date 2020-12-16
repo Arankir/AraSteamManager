@@ -50,8 +50,9 @@ private:
 
 class Comments {
 public:
-    Comments(QString profileId);
+    Comments(const QString &profileId = "");
 
+    Comments &setProfileId(const QString &profileId);
     Comments &setGameComment(const QString &gameId, const QString &profileId, const QStringList &comment);
     Comments &setAchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId, const QStringList &comment);
     Comments &removeGameComment(const QString &gameId, const QString &profileId);

@@ -1,4 +1,4 @@
-#include "Sfriends.h"
+#include "sfriends.h"
 
 #define SFriendStart {
 SFriend &SFriend::operator=(const SFriend &) {

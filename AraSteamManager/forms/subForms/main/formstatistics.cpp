@@ -6,10 +6,6 @@ FormStatistics::FormStatistics(const QString &aId, SGames &aGames, const QString
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     QFont font(Settings::getFontDefaultName());
-    ui->ChartsViewTimes->setStyleSheet("background: rgba(0,0,0,0); ");
-    ui->ChartsViewMonths->setStyleSheet("background: rgba(0,0,0,0); ");
-    ui->ChartsViewYears->setStyleSheet("background: rgba(0,0,0,0); ");
-    ui->ChartViewPercentages->setStyleSheet("background: rgba(0,0,0,0); ");
     _donutBreakdown = new DonutBreakdownChart();
     _chartT = new QChart;
     _chartM = new QChart;
@@ -81,18 +77,21 @@ void FormStatistics::retranslate() {
         if (pie) {
             pie->slices()[0]->setLabel(tr("Закончено (%1)").arg(_numof[2]));
         }
+        [[fallthrough]];
     }
     case 2: {
         QPieSeries *pie = dynamic_cast<QPieSeries*>(series[1]);
         if (pie) {
             pie->slices()[0]->setLabel(tr("Начато (%1)").arg(_numof[1]));
         }
+        [[fallthrough]];
     }
     case 1: {
         QPieSeries *pie = dynamic_cast<QPieSeries*>(series[0]);
         if (pie) {
             pie->slices()[0]->setLabel(tr("Не начато (%1)").arg(_numof[0]));
         }
+        [[fallthrough]];
     }
     case 0: {
 

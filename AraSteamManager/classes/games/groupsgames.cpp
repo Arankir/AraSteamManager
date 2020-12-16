@@ -49,6 +49,11 @@ GroupsGames::GroupsGames(const SProfile &profile) : _profileId(profile._steamID)
     init();
 }
 
+void GroupsGames::setProfile(const SProfile &aProfile) {
+    _profileId = aProfile._steamID;
+    init();
+}
+
 GroupGames &GroupsGames::operator[](const int index) {
     return _groups[index];
 }
@@ -59,13 +64,15 @@ GroupsGames &GroupsGames::addGroup(const QString &title) {
 }
 
 void GroupsGames::init() {
-    QFile fileGroups(Paths::groupGames(_profileId));
-    if(fileGroups.open(QIODevice::ReadOnly)) {
-        QJsonObject obj = QJsonDocument::fromJson(fileGroups.readAll()).object();
-        fromJson(obj);
-        fileGroups.close();
-    } else {
-        qWarning() << "file" << fileGroups.fileName() << "coudn't open";
+    if (_profileId != "") {
+        QFile fileGroups(Paths::groupGames(_profileId));
+        if(fileGroups.open(QIODevice::ReadOnly)) {
+            QJsonObject obj = QJsonDocument::fromJson(fileGroups.readAll()).object();
+            fromJson(obj);
+            fileGroups.close();
+        } else {
+            qWarning() << "file" << fileGroups.fileName() << "coudn't open";
+        }
     }
 }
 
@@ -94,7 +101,7 @@ QJsonObject GroupsGames::toJson() const {
 }
 
 const GroupsGames &GroupsGames::save() const {
-    Settings::createDir(Paths::groupGames(_profileId));
+    createDir(Paths::groupGames(_profileId));
     QFile file(Paths::groupGames(_profileId));
     file.open(QFile::WriteOnly);
     file.write(QJsonDocument(toJson()).toJson());

@@ -21,7 +21,7 @@
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "class\NotMine\MultiSelectComboBox.h"
+#include "classes\notMine\multiselectcombobox.h"
 
 QT_BEGIN_NAMESPACE
 

@@ -10,23 +10,20 @@
 #include "classes/common/myfilter.h"
 #include "forms/subForms/achievements/formcompareprofilefilter.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
-
-enum FriendType {
-    haventGame,
-    haveGame
-};
+#include "subWidgets/items/qlistwidgetfriend.h"
 
 namespace Ui {
-class FormAchievementsFriendsCompare;
+class FormFriendsCompare;
 }
 
-class FormFriendsCompare : public QWidget
-{
+class FormFriendsCompare : public QWidget {
     Q_OBJECT
 
 public:
     explicit FormFriendsCompare(QWidget *parent = nullptr);
     ~FormFriendsCompare();
+    void setInitData(SProfile &profile, SGame &game);
+    void setFriends(const SFriends &steamFriends);
 
 signals:
     void s_updateSettings();
@@ -45,7 +42,7 @@ private slots:
     void createCompareProfileFilter(bool aAccept, int aColumn);
     void checkBoxCompareAllFriends_StateChanged(int arg1);
 private:
-    Ui::FormAchievementsFriendsCompare *ui;
+    Ui::FormFriendsCompare *ui;
     SAchievements _achievements;
 
     //ключевые данные
@@ -57,7 +54,7 @@ private:
     int _type1 = 0;
     int _type2 = 0;
     SProfiles _profilesFriends;
-    QList<QPair<SProfile, FriendType>> _friends;
+    //QList<QPair<SProfile, FriendType>> _friends;
 
     MyFilter _fCompare;
 

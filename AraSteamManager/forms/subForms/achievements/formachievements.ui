@@ -186,7 +186,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QProgressBar" name="ProgressBarLoad">
+    <widget class="ProgressBarGood" name="ProgressBarLoad">
      <property name="value">
       <number>0</number>
      </property>
@@ -218,7 +218,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tabStandart">
         <attribute name="title">
@@ -246,7 +246,7 @@
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="FormFriendsCompare" name="widget" native="true"/>
+          <widget class="FormFriendsCompare" name="FriendsCompare" native="true"/>
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -462,6 +462,11 @@
    <extends>QWidget</extends>
    <header>forms\subForms\achievements\formfriendscompare.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProgressBarGood</class>
+   <extends>QProgressBar</extends>
+   <header>subWidgets\progressBars\progressbargood.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -35,7 +35,7 @@ HiddenGames &HiddenGames::removeGame(const SGame &aGame, bool aAddIfExist) {
 }
 
 HiddenGames &HiddenGames::save() {
-    Settings::createDir(Paths::hiddenGames(_profile));
+    createDir(Paths::hiddenGames(_profile));
     QFile file(Paths::hiddenGames(_profile));
     file.open(QFile::WriteOnly);
     file.write(QJsonDocument(toJson()).toJson());

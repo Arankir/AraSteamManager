@@ -2,7 +2,6 @@
 #include "ui_framelesswindow.h"
 
 const int c_border = 7;
-const int c_catchWidth = 33;
 
 FramelessWindow::FramelessWindow(): FramelessWindow(nullptr) {
 
@@ -43,7 +42,7 @@ void FramelessWindow::setIcons() {
     ui->LabelLogo->setPixmap(QPixmap(Images::logo()).scaled(30, 30));
 
 //    ui->LabelLogo->setTextFormat(Qt::RichText);
-//    ui->LabelLogo->setText("<img height=30 style=\"vertical-align: top\" src=\"" + _setting.getIconLogoColor() + "\"> "
+//    ui->LabelLogo->setText("<img height=30 style=\"vertical-align: top\" src=\"" + Images::logo() + "\"> "
 //                                "<span style=\"vertical-align: bottom\">НАЯ ПРОГА</span>");
     ui->ButtonExit          ->setIcon(QIcon(Images::closeWindow()));
     ui->ButtonMinimize      ->setIcon(QIcon(Images::minimizeWindow()));
@@ -146,7 +145,7 @@ void FramelessWindow::mousePress(QMouseEvent *e) {
         }
         //qDebug()<<(e->globalPos() - _target->pos()).y();
         if (this->rect().marginsRemoved(QMargins(c_border, c_border, c_border, c_border)).contains(e->pos()) &&
-           ((e->globalPos() - this->pos()).y() < c_catchWidth)) {
+           ((e->globalPos() - this->pos()).y() < ui->FrameTitleWindow->height())) {
             _dragStart = true;
             _dragPos = e->pos();
         }

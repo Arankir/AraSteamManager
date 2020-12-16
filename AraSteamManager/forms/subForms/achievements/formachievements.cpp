@@ -29,9 +29,9 @@ constexpr int c_tabCompareAchievements  = 2;
 #define ConstantsEnd }
 
 #define Init {
-FormAchievements::FormAchievements(SAchievementsPlayer &aPlayer, SProfile &aProfile, SGame &aGame, int aUnicNum,
+FormAchievements::FormAchievements(SAchievementsPlayer &aPlayer, SProfile &aProfile, SGame &aGame,
                                    QWidget *aParent): QWidget(aParent), ui(new Ui::FormAchievements),
-                                   _achievements(aPlayer), _profile(aProfile), _game(aGame), _unicNum(aUnicNum),
+                                   _achievements(aPlayer), _profile(aProfile), _game(aGame),
                                    _categoriesGame(_game), _comments(_profile._steamID) {
     ui->setupUi(this);
     initComponents();
@@ -69,7 +69,7 @@ void FormAchievements::initComponents() {
 //    avatarFriendsCompare->setToolTip(_profile._personaName);
 //    avatarFriendsCompare->setPixmap(_profile.getPixmapAvatar());
 
-    Settings::createDir(Paths::imagesAchievements(QString::number(_game.appId()), ""));
+    createDir(Paths::imagesAchievements(QString::number(_game.appId()), ""));
     ui->ProgressBarLoad->setVisible(false);
     ui->LabelGameOnlineValue->setText(_game.getNumberPlayers(false));
     ui->FrameFilter->setEnabled(false);
@@ -427,9 +427,9 @@ void FormAchievements::categoryDelete() {
 
 void FormAchievements::buttonComment_Clicked() {
     FramelessWindow *f = new FramelessWindow;
-    FormCommentsInteractions *ci = new FormCommentsInteractions(_profile, _game, _currentAchievement, f);
+    FormComments *ci = new FormComments(_profile, _game, _currentAchievement, f);
     f->setWidget(ci);
-    connect(ci, &FormCommentsInteractions::s_updateComments, this, [=](bool isUpdate) {
+    connect(ci, &FormComments::s_updateComments, this, [=](bool isUpdate) {
         if (isUpdate) {
             initComments();
         }
@@ -810,9 +810,8 @@ FormAchievements::~FormAchievements() {
     delete ui;
 }
 
-void FormAchievements::closeEvent(QCloseEvent*) {
-    emit s_returnToGames(_unicNum);
-    this->deleteLater();
+void FormAchievements::closeEvent(QCloseEvent *event) {
+    event->accept();
 }
 
 void FormAchievements::changeEvent(QEvent *event) {
@@ -1062,5 +1061,6 @@ void FormAchievements::loadEditCategory() {
 
 void FormAchievements::loadCompare() {
     //блаблаs
+    ui->FriendsCompare->setInitData(_profile, _game);
     _isCompareLoaded = true;
 }

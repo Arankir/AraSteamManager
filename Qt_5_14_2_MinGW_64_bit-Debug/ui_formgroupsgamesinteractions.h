@@ -131,7 +131,7 @@ public:
 };
 
 namespace Ui {
-    class FormGroupsGamesInteractions: public Ui_FormGroupsGamesInteractions {};
+    class FormGroups: public Ui_FormGroupsGamesInteractions {};
 } // namespace Ui
 
 QT_END_NAMESPACE

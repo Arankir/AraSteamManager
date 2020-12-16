@@ -21,7 +21,52 @@ constexpr int c_filterCount         = 4;
 FormGames::FormGames(SProfile &aProfile, SGames &aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _profile(aProfile),  _games(aGames),
     _filter(aGames.getCount(), c_filterCount), _groups(_profile), _comments(_profile._steamID) {
     ui->setupUi(this);
-    initComponents();
+    init();
+    setGames(aProfile, aGames);
+}
+
+FormGames::FormGames(QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _filter(0, c_filterCount) {
+    ui->setupUi(this);
+    init();
+}
+
+void FormGames::setGames(SProfile &aProfile, SGames &aGames) {
+    _profile = aProfile;
+    _games = aGames;
+    _filter.setRow(aGames.getCount());
+    _groups.setProfile(_profile);
+    _comments.setProfileId(_profile._steamID);
+    _games.sort();
+    initGroups();
+    initTable();
+    createThread();
+}
+
+void FormGames::init() {
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    ui->ProgressBarLoading->setVisible(false);
+    setIcons();
+
+#define Connects {
+    connect(ui->LineEditGame,       &QLineEdit::textChanged,                this, &FormGames::lineEditGame_TextChanged);
+    connect(ui->ButtonFind,         &QPushButton::clicked,                  this, &FormGames::buttonFind_Clicked);
+    connect(ui->CheckBoxFavorites,  &QCheckBox::stateChanged,               this, &FormGames::checkBoxFavorites_StateChanged);
+    connect(ui->ComboBoxGroups,     &MultiSelectComboBox::selectionChanged, this, &FormGames::updateGroupsFilter);
+#define ConnectsEnd }
+}
+
+bool FormGames::isInit() {
+    return ((_games.getCount() > 0) && (_filter.getRow() > 0) && (_loaded));
+}
+
+bool FormGames::isLoaded() {
+    return _loaded;
+}
+
+void FormGames::clear() {
+    _games.clear();
+    _filter.setRow(0);
+    _loaded = false;
 }
 
 void FormGames::initComponents() {
@@ -133,25 +178,18 @@ void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
     int row = rowFromId(aAchievements->getAppid());
 
     if (row > -1) {
-        //Устанавливается значение програссбара игры
-        QProgressBar *pb = new QProgressBar();
-        pb->setMaximum(aAchievements->getCount());
-        pb->setValue(aAchievements->getReached());
-        pb->setMinimumSize(QSize(25, 25));
-
-        //Создаётся свечение для прогрессбаров
-        QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect;
-        shadowEffect->setColor(QColor(93, 170, 224, 255 * 0.7));
-        shadowEffect->setOffset(0);
-        shadowEffect->setBlurRadius(50);
-        pb->setGraphicsEffect(shadowEffect);
+        QProgressBar *pb;
 
         //Проверка на игру без достижений
         if (aAchievements->getCount() == 0) {
-            pb->setAccessibleName("BadAchievements");
-            shadowEffect->setColor(QColor(255, 0, 0, 255 * 0.7));
+            pb = dynamic_cast<QProgressBar*>(new ProgressBarBad());
             pb->setFormat("");
+        } else {
+            pb = dynamic_cast<QProgressBar*>(new ProgressBarGood());
         }
+        pb->setMaximum(aAchievements->getCount());
+        pb->setValue(aAchievements->getReached());
+        pb->setMinimumSize(QSize(25, 25));
 
         //Прогрессбар устанавливается в таблицу
         QModelIndex index = ui->TableGames->model()->index(row, c_tableColumnProgress);
@@ -166,6 +204,7 @@ void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
     emit s_achievementsLoaded(loaded, 0);
     //Проверка всё ли загрузилось
     if(++loaded == _games.getCount()) {
+        _loaded = true;
         emit s_finish(ui->TableGames->viewport()->width() + 22);
     }
 }
@@ -317,9 +356,11 @@ void FormGames::updateHiddenGames() {
     _hide.append(listAll);
     _hide.append(listProfile);
 
-    for(const auto &game: _hide) {
-        _filter.setData(indexFromId(game.id), c_filterHide, false);
-        ui->TableGames->model()->setData(ui->TableGames->model()->index(rowFromId(game.id), c_tableColumnName), QVariant(QColor(255 * 0.7, 0, 0)), Qt::ForegroundRole);
+    if (ui->TableGames->model()) {
+        for(const auto &game: _hide) {
+            _filter.setData(indexFromId(game.id), c_filterHide, false);
+            ui->TableGames->model()->setData(ui->TableGames->model()->index(rowFromId(game.id), c_tableColumnName), QVariant(QColor(255 * 0.7, 0, 0)), Qt::ForegroundRole);
+        }
     }
 
     updateHiddenRows();
@@ -352,8 +393,10 @@ void FormGames::updateGroupsFilter() {
 
 void FormGames::updateHiddenRows() {
 //TODO при поиске игр не отображает скрытые
-    for (int i = 0; i < ui->TableGames->model()->rowCount(); ++i) {
-        ui->TableGames->setRowHidden(rowFromIndex(i), !_filter.getData(i));
+    if (ui->TableGames->model()) {
+        for (int i = 0; i < ui->TableGames->model()->rowCount(); ++i) {
+            ui->TableGames->setRowHidden(rowFromIndex(i), !_filter.getData(i));
+        }
     }
 }
 #define FilterEnd }
@@ -459,9 +502,9 @@ void FormGames::buttonHide_Clicked() {
 
 void FormGames::showGroupsInteractive() {
     FramelessWindow *f = new FramelessWindow;
-    FormGroupsGamesInteractions *ggi = new FormGroupsGamesInteractions(_profile, *_currentGame, f);
+    FormGroups *ggi = new FormGroups(_profile, *_currentGame, f);
     f->setWidget(ggi);
-    connect(ggi, &FormGroupsGamesInteractions::s_updateGroups, this, [=](bool isUpdate) {
+    connect(ggi, &FormGroups::s_updateGroups, this, [=](bool isUpdate) {
         if (isUpdate) {
             initGroups();
         }
@@ -472,9 +515,9 @@ void FormGames::showGroupsInteractive() {
 
 void FormGames::showCommentsInteractive() {
     FramelessWindow *f = new FramelessWindow;
-    FormCommentsInteractions *ci = new FormCommentsInteractions(_profile, *_currentGame, nullptr, f);
+    FormComments *ci = new FormComments(_profile, *_currentGame, nullptr, f);
     f->setWidget(ci);
-    connect(ci, &FormCommentsInteractions::s_updateComments, this, [=](bool isUpdate) {
+    connect(ci, &FormComments::s_updateComments, this, [=](bool isUpdate) {
         if (isUpdate) {
             initComments();
         }

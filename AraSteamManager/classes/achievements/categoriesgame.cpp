@@ -102,7 +102,7 @@ int Categories::countAll() const {
 }
 
 void Categories::save(QJsonObject aCategories) {
-    Settings::createDir(Paths::categories());
+    createDir(Paths::categories());
     QFile fileCategory(Paths::categories(_game.sAppId()));
     fileCategory.open(QFile::WriteOnly);
     fileCategory.write(QJsonDocument(aCategories).toJson());

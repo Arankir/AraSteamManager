@@ -71,8 +71,18 @@ void GameComment::fromJson(const QJsonObject &aObject) {
 #define GameCEnd }
 
 #define CStart {
-Comments::Comments(QString aProfileId) : _profileId(aProfileId) {
-    load();
+Comments::Comments(const QString &aProfileId) : _profileId(aProfileId) {
+    if (_profileId != "") {
+        load();
+    }
+}
+
+Comments &Comments::setProfileId(const QString &aProfileId) {
+    _profileId = aProfileId;
+    if (_profileId != "") {
+        load();
+    }
+    return *this;
 }
 
 Comments &Comments::setGameComment(const QString &aGameId, const QString &aProfileId, const QStringList &aComment) {
@@ -197,7 +207,7 @@ Comments &Comments::save() {
 }
 
 void Comments::saveFile(const QString &aProfileId, const QJsonObject &aObject) {
-    Settings::createDir(aProfileId);
+    createDir(aProfileId);
     QFile file(aProfileId);
     file.open(QFile::WriteOnly);
     file.write(QJsonDocument(aObject).toJson());

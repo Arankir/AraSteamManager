@@ -21,7 +21,7 @@
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "class\NotMine\freezetablewidget.h"
+#include "classes\notMine\freezetablewidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -264,7 +264,7 @@ public:
 };
 
 namespace Ui {
-    class FormAchievementsFriendsCompare: public Ui_FormAchievementsFriendsCompare {};
+    class FormFriendsCompare: public Ui_FormAchievementsFriendsCompare {};
 } // namespace Ui
 
 QT_END_NAMESPACE

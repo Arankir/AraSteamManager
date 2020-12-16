@@ -1,7 +1,7 @@
 #include "formcategoriesedit.h"
-#include "ui_formachievementscategoriesedit.h"
+#include "ui_formcategoriesedit.h"
 
-FormCategoriesEdit::FormCategoriesEdit(const SGame &aGame, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormAchievementsCategoriesEdit),
+FormCategoriesEdit::FormCategoriesEdit(const SGame &aGame, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormCategoriesEdit),
     _game(aGame), _categories(_game) {
     ui->setupUi(this);
     init();

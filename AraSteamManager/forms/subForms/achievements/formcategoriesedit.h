@@ -23,7 +23,7 @@ enum class EditType {
 };
 
 namespace Ui {
-    class FormAchievementsCategoriesEdit;
+    class FormCategoriesEdit;
 }
 
 class FormCategoriesEdit : public QWidget {
@@ -62,7 +62,7 @@ private slots:
     QMenu *createParentSubMenu(Category &category, int &number);
     void changeNewParentFromAction();
 private:
-    Ui::FormAchievementsCategoriesEdit *ui;
+    Ui::FormCategoriesEdit *ui;
     SGame _game;
     SAchievements _achievements;
     Categories _categories;

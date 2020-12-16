@@ -22,6 +22,8 @@ class FormSettings : public QWidget {
 public:
     explicit FormSettings(QWidget *parent = nullptr);
     ~FormSettings();
+    bool isInit();
+    bool isLoaded();
 
 signals:
     void s_return_to_profile(QWidget*);

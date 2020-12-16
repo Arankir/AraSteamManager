@@ -14,7 +14,7 @@ _label(aLabel), _save(aSave), _autosave(aAutoSave) {
 void RequestImage::onLoad(RequestData *aImage) {
     _pixmap.loadFromData(aImage->getReply());
     if (Settings::getSaveImages() == 1 && _autosave) {
-        Settings::createDir(_save);
+        createDir(_save);
         _pixmap.save(_save);
     }
     if (_label != nullptr) {

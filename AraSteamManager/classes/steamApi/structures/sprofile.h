@@ -1,7 +1,7 @@
 #ifndef SPROFILE_H
 #define SPROFILE_H
 
-#include "classes/steamApi/sapi.h"
+#include "../sapi.h"
 
 enum class ProfileUrlType {
     id,

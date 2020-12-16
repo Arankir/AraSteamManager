@@ -20,7 +20,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "subwidget/qlistwidgetachievements.h"
+#include "subWidgets/qlistwidgetachievements.h"
 
 QT_BEGIN_NAMESPACE
 

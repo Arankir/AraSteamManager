@@ -1,7 +1,7 @@
 #ifndef SBANS_H
 #define SBANS_H
 
-#include "classes/steamApi/sapi.h"
+#include "../sapi.h"
 
 class SBans : public Sapi
 {

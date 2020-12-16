@@ -18,9 +18,14 @@ class FormFriends : public QWidget {
 
 public slots:
     void updateSettings();
+    void setFriends(const QString &aId, SFriends &aFriends);
+    void clear();
+    bool isInit();
+    bool isLoaded();
 
 public:
     explicit FormFriends(const QString &id, SFriends &Friends, QWidget *parent = nullptr);
+    FormFriends(QWidget *aParent = nullptr);
     ~FormFriends();
 
 signals:
@@ -31,6 +36,7 @@ signals:
 
 private slots:
     //Инициализация
+    void init();
     void initFriends(SFriends &aFriends);
     void initTable();
     void initComboBoxStatus();
@@ -70,6 +76,7 @@ private:
     QPair<SFriend, SProfile> *_currentFriend = nullptr;
 
     bool _blockedLoad = false;
+    bool _loaded = false;
 
     Favorites _favorites;
     MyFilter _filter;

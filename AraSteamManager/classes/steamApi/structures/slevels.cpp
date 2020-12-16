@@ -1,4 +1,4 @@
-#include "Slevels.h"
+#include "slevels.h"
 
 SLevels::SLevels(const QString &aId, QObject *aParent): Sapi(aParent) {
     load(aId);

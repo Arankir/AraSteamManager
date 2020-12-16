@@ -28,9 +28,10 @@ private:
 
 class GroupsGames {
 public:
-    GroupsGames(const SProfile &profile);
+    GroupsGames(const SProfile &profile = SProfile());
     GroupGames &operator[](const int index);
 
+    void setProfile(const SProfile &aProfile);
     GroupsGames &addGroup(const QString &title);
     QJsonObject toJson() const;
     const GroupsGames &save() const;

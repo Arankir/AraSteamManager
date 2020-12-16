@@ -1,4 +1,4 @@
-#include "Sprofile.h"
+#include "sprofile.h"
 
 #define SProfileStart {
 SProfile::SProfile(const QJsonObject &aProfile, QObject *aParent): Sapi(aParent) {

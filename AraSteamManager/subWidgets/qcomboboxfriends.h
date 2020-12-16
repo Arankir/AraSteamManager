@@ -1,24 +1,19 @@
 #pragma once
 
 #include <QComboBox>
+#include <QCheckBox>
 #include <QListWidget>
 #include "classes/steamApi/structures/sfriends.h"
+#include "./items/qlistwidgetfriend.h"
 
-class ComboBoxFriends : public QComboBox
-{
+class ComboBoxFriends : public QComboBox {
     Q_OBJECT
 
 public:
     ComboBoxFriends(QWidget *parent = nullptr);
-    void addItem(const QString &text, const QVariant &userData = QVariant());
-    void addItem(SFriend &steamFriend, bool isIncludeGame);
-    void addItems(const QStringList &texts);
-    QStringList currentText();
+    void addItem(SProfile &steamFriend, FriendType type);
     int count() const;
     void hidePopup() override;
-    void SetSearchBarPlaceHolderText(const QString &placeHolderText);
-    void SetPlaceHolderText(const QString &placeHolderText);
-    void ResetSelection();
 
 signals:
     void selectionChanged();
@@ -27,16 +22,17 @@ public slots:
     void clear();
 
 protected:
-    void wheelEvent(QWheelEvent* aWheelEvent) override;
-    bool eventFilter(QObject* aObject, QEvent* aEvent) override;
-    void keyPressEvent(QKeyEvent* aEvent) override;
+    void wheelEvent(QWheelEvent *wheelEvent) override;
+    bool eventFilter(QObject *object, QEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
-    void stateChanged(int aState);
-    void onSearch(const QString& aSearchString);
-    void itemClicked(int aIndex);
+    void onSearch(const QString &searchString);
+    void onAllFriends(int state);
+    void itemClicked(int index);
 
-    QListWidget* mListWidget;
-    QLineEdit* mLineEdit;
-    QLineEdit* mSearchBar;
+    QListWidget *mListWidget;
+    QLineEdit *mLineEdit;
+    QLineEdit *mSearchBar;
+    QCheckBox *mAllFriends;
 };

@@ -1,7 +1,7 @@
 #ifndef SLEVELS_H
 #define SLEVELS_H
 
-#include "classes/steamApi/sapi.h"
+#include "../sapi.h"
 
 class SLevels : public Sapi
 {

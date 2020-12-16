@@ -27,6 +27,14 @@ FormFavorites::~FormFavorites() {
     delete ui;
 }
 
+bool FormFavorites::isInit() {
+    return true;
+}
+
+bool FormFavorites::isLoaded() {
+    return true;
+}
+
 void FormFavorites::initComponents() {
 //    _games.setType("games");
 //    _friends.setType("friends");

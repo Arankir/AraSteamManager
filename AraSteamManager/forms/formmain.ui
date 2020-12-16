@@ -145,7 +145,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QProgressBar" name="FormProgressBar">
+      <widget class="ProgressBarGood" name="FormProgressBar">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
          <horstretch>0</horstretch>
@@ -166,7 +166,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>5</number>
        </property>
        <widget class="QWidget" name="None">
         <property name="sizePolicy">
@@ -234,21 +234,7 @@
           <number>0</number>
          </property>
          <item row="0" column="0">
-          <widget class="QScrollArea" name="ScrollAreaGames">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="widget">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>98</width>
-              <height>28</height>
-             </rect>
-            </property>
-           </widget>
-          </widget>
+          <widget class="FormGames" name="StackedFormGames" native="true"/>
          </item>
         </layout>
        </widget>
@@ -276,21 +262,7 @@
           <number>0</number>
          </property>
          <item row="0" column="0">
-          <widget class="QScrollArea" name="ScrollAreaFriends">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_2">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>98</width>
-              <height>28</height>
-             </rect>
-            </property>
-           </widget>
-          </widget>
+          <widget class="FormFriends" name="StackedFormFriends" native="true"/>
          </item>
         </layout>
        </widget>
@@ -360,21 +332,7 @@
           <number>0</number>
          </property>
          <item row="0" column="0">
-          <widget class="QScrollArea" name="ScrollAreaFavorites">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_4">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>98</width>
-              <height>28</height>
-             </rect>
-            </property>
-           </widget>
-          </widget>
+          <widget class="FormFavorites" name="StackedFormFavorites" native="true"/>
          </item>
         </layout>
        </widget>
@@ -402,21 +360,7 @@
           <number>0</number>
          </property>
          <item row="0" column="0">
-          <widget class="QScrollArea" name="ScrollAreaSettings">
-           <property name="widgetResizable">
-            <bool>true</bool>
-           </property>
-           <widget class="QWidget" name="scrollAreaWidgetContents_5">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>0</y>
-              <width>98</width>
-              <height>28</height>
-             </rect>
-            </property>
-           </widget>
-          </widget>
+          <widget class="FormSettings" name="StackedFormSettings" native="true"/>
          </item>
         </layout>
        </widget>
@@ -426,6 +370,37 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FormFriends</class>
+   <extends>QWidget</extends>
+   <header location="global">forms/subForms/main/formfriends.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FormGames</class>
+   <extends>QWidget</extends>
+   <header location="global">forms/subForms/main/formgames.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FormSettings</class>
+   <extends>QWidget</extends>
+   <header location="global">forms/subForms/main/formsettings.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FormFavorites</class>
+   <extends>QWidget</extends>
+   <header location="global">forms/subForms/main/formfavorites.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProgressBarGood</class>
+   <extends>QProgressBar</extends>
+   <header location="global">subWidgets/progressBars/progressbargood.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

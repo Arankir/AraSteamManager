@@ -19,10 +19,22 @@
    <string>SteamAchievementsStatistic</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QGroupBox" name="GroupBoxFilter">
      <property name="title">
-      <string>      Фильтр</string>
+      <string>     Фильтр</string>
      </property>
      <layout class="QVBoxLayout" name="_2">
       <item>

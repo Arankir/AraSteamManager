@@ -11,6 +11,14 @@ FormSettings::~FormSettings() {
     delete ui;
 }
 
+bool FormSettings::isInit() {
+    return true;
+}
+
+bool FormSettings::isLoaded() {
+    return true;
+}
+
 void FormSettings::initComponents() {
     //ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
 

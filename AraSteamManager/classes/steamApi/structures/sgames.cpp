@@ -1,4 +1,4 @@
-#include "Sgames.h"
+#include "sgames.h"
 
 #define SGameStart {
 SGame::SGame(const QJsonObject &game, QObject *parent): QObject(parent) {

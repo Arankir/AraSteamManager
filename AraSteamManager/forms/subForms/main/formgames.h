@@ -13,8 +13,8 @@
 #include <QAction>
 #include <QMenu>
 #include "framelesswindow.h"
-#include "forms/formgroupsgamesinteractions.h"
-#include "forms/formcommentsinteractions.h"
+#include "forms/formgroups.h"
+#include "forms/formcomments.h"
 #include "classes/common/favorites.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
@@ -23,6 +23,8 @@
 #include "classes/common/myfilter.h"
 #include "classes/games/hiddengames.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
+#include "subWidgets/progressBars/progressbarbad.h"
+#include "subWidgets/progressBars/progressbargood.h"
 
 namespace Ui {
 class FormGames;
@@ -33,9 +35,14 @@ class FormGames : public QWidget {
 
 public slots:
     void updateSettings();
+    void setGames(SProfile &aProfile, SGames &aGames);
+    bool isInit();
+    bool isLoaded();
+    void clear();
 
 public:
     explicit FormGames(SProfile &profile, SGames &Games, QWidget *parent = nullptr);
+    FormGames(QWidget *aParent = nullptr);
     ~FormGames();
 
 signals:
@@ -45,6 +52,7 @@ signals:
     void s_showAchievements(SAchievementsPlayer &achievements, SGame &games);
 
 private slots:
+    void init();
     void changeEvent(QEvent *event);
     void initComponents();
     void setIcons();
@@ -95,6 +103,8 @@ private:
     QList<gameData> _hide;
     GroupsGames _groups;
     Comments _comments;
+
+    bool _loaded = false;
 
     int _windowChildCount = 0;
 

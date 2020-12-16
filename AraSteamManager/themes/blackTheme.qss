@@ -60,15 +60,15 @@ QProgressBar::chunk {
     background-color: #386584; 
     margin: 5px; 
 } 
-QProgressBar[accessibleName=BadAchievements] { 
+ProgressBarBad {
     color: white; 
     background-color: #E44B4B; 
     text-align: center; 
 } 
-QProgressBar::chunk[accessibleName=BadAchievements] { 
+ProgressBarBad::chunk {
     background-color: rgba(0,0,0,0); 
 } 
-QRadioButton{
+QRadioButton {
     color: white; 
     background-color: rgba(255, 255, 255, 0); 
     border: 0px solid grey; 
@@ -79,7 +79,7 @@ QRadioButton::indicator {
 QRadioButton::hover { 
     color: #57CBDE
 } 
-QCheckBox{ 
+QCheckBox {
     background-color: rgba(255,255,255,0); 
     color: white; 
 } 
@@ -325,7 +325,13 @@ FramelessWindow {
                         stop:0 #12457c, 
                         stop:1 #19253d); 
     border: 1px solid rgb(87, 203, 222); 
-} 
+}
+QWidget[accessibleName=TitleWindow] {
+    background-color: qlineargradient(x1: 0, y1: -1, x2: 0, y2: 2,
+        stop: 0 #111111,
+        stop: 0.8 #222222,
+        stop: 1.0 #444444);
+}
 QTabWidget::pane { 
     border: 1px solid black; 
 } 
@@ -339,3 +345,6 @@ QMessageBox {
 QLabel, QLabel:disabled {
     color: white; 
 } 
+QGraphicsView {
+    background: rgba(0,0,0,0);
+}

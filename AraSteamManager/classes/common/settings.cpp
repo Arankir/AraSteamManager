@@ -157,11 +157,123 @@ QString Settings::getFontDefaultName() {
     return family;
 }
 
+QString Settings::getQssTheme() {
+    QString qss;
+    switch(getTheme()) {
+    case 1:{
+        QFile qssFile("://blackTheme.qss");
+        qssFile.open(QFile::ReadOnly);
+        qss = qssFile.readAll() + " "
+        "QRadioButton::indicator::unchecked { "
+            "image: url(" + Images::radioButtonUnchecked() + "); "
+        "} "
+        "QRadioButton::indicator::checked { "
+            "image: url(" + Images::radioButtonChecked() + "); "
+        "} "
+        "QRadioButton::indicator::unchecked:hover { "
+            "image: url(" + Images::radioButtonUncheckedHover() + "); "
+        "} "
+        "QRadioButton::indicator::checked:hover { "
+            "image: url(" + Images::radioButtonCheckedHover() + "); "
+        "} "
+        "QRadioButton::indicator::unchecked:pressed { "
+            "image: url(" + Images::radioButtonUncheckedPress() + "); "
+        "} "
+        "QRadioButton::indicator::checked:pressed { "
+            "image: url(" + Images::radioButtonCheckedPress() + "); "
+        "} "
+        "QCheckBox::indicator:unchecked { "
+            "image: url(" + Images::checkBoxUnchecked() + "); "
+        "} "
+        "QCheckBox::indicator:checked { "
+            "image: url(" + Images::checkBoxChecked() + "); "
+        "} "
+        "QCheckBox::indicator:unchecked:hover { "
+            "image: url(" + Images::checkBoxUncheckedHover() + "); "
+        "} "
+        "QCheckBox::indicator:checked:hover { "
+            "image: url(" + Images::checkBoxCheckedHover() + "); "
+        "} "
+        "QCheckBox::indicator:unchecked:pressed { "
+            "image: url(" + Images::checkBoxUncheckedPress() + "); "
+        "} "
+        "QCheckBox::indicator:checked:pressed { "
+            "image: url(" + Images::checkBoxCheckedPress() + "); "
+        "} "
+        "QComboBox::down-arrow { "
+            "image: url(" + Images::comboBoxDown() + "); "
+        "} "
+        "QTabBar::close-button { "
+            "image: url(" + Images::closeWindow() + "); "
+        "} "
+        "QTableView::indicator:unchecked { "
+            "image: url(" + Images::checkBoxUnchecked() + "); "
+        "} "
+        "QTableView::indicator:checked { "
+            "image: url(" + Images::checkBoxChecked() + "); "
+        "} "
+        "QTableView::indicator:unchecked:hover { "
+            "image: url(" + Images::checkBoxUncheckedHover() + "); "
+        "} "
+        "QTableView::indicator:checked:hover { "
+            "image: url(" + Images::checkBoxCheckedHover() + "); "
+        "} "
+        "QTableView::indicator:unchecked:pressed { "
+            "image: url(" + Images::checkBoxUncheckedPress() + "); "
+        "} "
+        "QTableView::indicator:checked:pressed { "
+            "image: url(" + Images::checkBoxCheckedPress() + "); "
+        "} "
+        "QScrollBar::add-line:vertical { "
+            "image: url(" + Images::scrollBarDown() + "); "
+        "}"
+        "QScrollBar::sub-line:vertical { "
+            "image: url(" + Images::scrollBarUp() + "); "
+        "}"
+        "QScrollBar::add-line:horizontal { "
+            "image: url(" + Images::scrollBarRight() + "); "
+        "}"
+        "QScrollBar::sub-line:horizontal { "
+            "image: url(" + Images::scrollBarLeft() + "); "
+        "}"
+        "QGroupBox#GroupBoxFilter::title { "
+            "image: url(" + Images::filter() + "); "
+        "} ";
+        break;
+    }
+    case 2:{
+        break;
+    }
+    default: {
+        // Настраиваем палитру для цветовых ролей элементов интерфейса
+        //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
+        //    darkPalette.setColor(QPalette::WindowText, Qt::white);
+        //    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
+        //    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
+        //    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
+        //    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
+        //    darkPalette.setColor(QPalette::Text, Qt::white);
+        //    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
+        //    darkPalette.setColor(QPalette::ButtonText, Qt::white);
+        //    darkPalette.setColor(QPalette::BrightText, Qt::red);
+        //    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
+        //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+        //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+        // Устанавливаем данную палитру
+            // Для возврата к светлой палитре достаточно
+            // будет установить стандартную палитру из темы оформления
+            //qApp->setPalette(style()->standardPalette());
+        break;
+    }
+    }
+    return qss;
+}
+
 void Settings::syncronizeSettings() {
     _settings->sync();
 }
 
-bool Settings::createDir(const QString &aPath) {
+bool createDir(const QString &aPath) {
     bool exist = true;
     QString path = aPath;
     path.replace("\\", "/");

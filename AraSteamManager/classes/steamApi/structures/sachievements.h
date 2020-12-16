@@ -1,7 +1,7 @@
 #ifndef SACHIEVEMENTS_H
 #define SACHIEVEMENTS_H
 
-#include "classes/steamApi/sapi.h"
+#include "../sapi.h"
 
 class SAchievementGlobal : public QObject {
     Q_OBJECT

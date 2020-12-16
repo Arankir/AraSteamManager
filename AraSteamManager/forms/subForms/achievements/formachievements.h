@@ -28,7 +28,8 @@
 #include "subWidgets/withData/qradiobuttonwithdata.h"
 #include "subWidgets/withData/qcomboboxwithdata.h"
 #include "subWidgets/withData/qcheckboxwithdata.h"
-#include "forms/formcommentsinteractions.h"
+#include "subWidgets/progressBars/progressbargood.h"
+#include "forms/formcomments.h"
 #include "forms/subForms/achievements/formcomparefriends.h"
 #include "forms/subForms/achievements/formcategoriesedit.h"
 #include "forms/subForms/achievements/formcompareprofilefilter.h"
@@ -61,11 +62,10 @@ public slots:
     void updateSettings();
     void buttonManual_Clicked();
 public:
-    explicit FormAchievements(SAchievementsPlayer &pl, SProfile &profile, SGame &game, int num, QWidget *parent = nullptr);
+    explicit FormAchievements(SAchievementsPlayer &pl, SProfile &profile, SGame &game, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
-    void s_returnToGames(int num);
     void s_updateSettings();
 
 private slots:
@@ -128,7 +128,6 @@ private:
     //ключевые данные
     SProfile _profile;
     SGame _game;
-    int _unicNum;
     Categories _categoriesGame;
     Favorites _favorites;
     Comments _comments;

@@ -1,5 +1,3 @@
-#include "forms/mainwindow.h"
-#include "forms/formmain.h"
 #include <QApplication>
 #include <QStyleFactory>
 #include <QTranslator>
@@ -11,7 +9,7 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include "classes/common/settings.h"
-#include "frameless.h"
+#include "forms/formmain.h"
 #include "framelesswindow.h"
 
 QScopedPointer<QFile> logFile_;
@@ -71,7 +69,7 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
 
 void initLog() {
     QString logsPath = Paths::temp() + "files/logs/";
-    Settings::createDir(logsPath);
+    createDir(logsPath);
 
     //Удаление старых файлов
     QDir dirLogs(logsPath);

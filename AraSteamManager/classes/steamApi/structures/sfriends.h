@@ -1,8 +1,8 @@
 #ifndef SFRIENDS_H
 #define SFRIENDS_H
 
-#include "classes/steamApi/structures/sprofile.h"
-#include "classes/steamApi/sapi.h"
+#include "./sprofile.h"
+#include "../sapi.h"
 
 class SFriend : public QObject {
     Q_OBJECT

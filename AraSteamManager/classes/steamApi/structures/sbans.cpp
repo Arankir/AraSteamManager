@@ -1,4 +1,4 @@
-#include "Sbans.h"
+#include "sbans.h"
 
 SBans::SBans(const QString &aId, bool aParallel, QObject *aParent): Sapi(aParent) {
     load(aId, aParallel);

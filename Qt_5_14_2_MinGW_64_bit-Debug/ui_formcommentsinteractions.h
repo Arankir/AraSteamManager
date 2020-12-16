@@ -131,7 +131,7 @@ public:
 };
 
 namespace Ui {
-    class FormCommentsInteractions: public Ui_FormCommentsInteractions {};
+    class FormComments: public Ui_FormCommentsInteractions {};
 } // namespace Ui
 
 QT_END_NAMESPACE

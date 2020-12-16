@@ -50,11 +50,10 @@ SOURCES += \
     classes/threads/thread/threadgames.cpp \
     classes/threads/thread/threadstatistics.cpp \
     classes/threads/threading.cpp \
-    forms/formcommentsinteractions.cpp \
+    forms/formcomments.cpp \
     forms/formcontainerachievements.cpp \
-    forms/formgroupsgamesinteractions.cpp \
+    forms/formgroups.cpp \
     forms/formmain.cpp \
-    forms/mainwindow.cpp \
     forms/subForms/achievements/formachievements.cpp \
     forms/subForms/achievements/formcategoriesedit.cpp \
     forms/subForms/achievements/formcompareprofilefilter.cpp \
@@ -66,12 +65,14 @@ SOURCES += \
     forms/subForms/main/formprofile.cpp \
     forms/subForms/main/formsettings.cpp \
     forms/subForms/main/formstatistics.cpp \
-    frameless.cpp \
     framelesswindow.cpp \
         main.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
     subWidgets/items/qlistwidgetfriend.cpp \
     subWidgets/models/listachievementsmodel.cpp \
+    subWidgets/progressBars/progressbarbad.cpp \
+    subWidgets/progressBars/progressbargood.cpp \
+    subWidgets/progressBars/progressbarlight.cpp \
     subWidgets/qcomboboxfriends.cpp \
     subWidgets/qlistwidgetachievements.cpp \
     subWidgets/withData/qbuttonwithdata.cpp \
@@ -105,11 +106,10 @@ HEADERS += \
     classes/threads/thread/threadgames.h \
     classes/threads/thread/threadstatistics.h \
     classes/threads/threading.h \
-    forms/formcommentsinteractions.h \
+    forms/formcomments.h \
     forms/formcontainerachievements.h \
-    forms/formgroupsgamesinteractions.h \
+    forms/formgroups.h \
     forms/formmain.h \
-    forms/mainwindow.h \
     forms/subForms/achievements/formachievements.h \
     forms/subForms/achievements/formcategoriesedit.h \
     forms/subForms/achievements/formcompareprofilefilter.h \
@@ -121,11 +121,13 @@ HEADERS += \
     forms/subForms/main/formprofile.h \
     forms/subForms/main/formsettings.h \
     forms/subForms/main/formstatistics.h \
-    frameless.h \
     framelesswindow.h \
     subWidgets/items/qlistwidgetachievement.h \
     subWidgets/items/qlistwidgetfriend.h \
     subWidgets/models/listachievementsmodel.h \
+    subWidgets/progressBars/progressbarbad.h \
+    subWidgets/progressBars/progressbargood.h \
+    subWidgets/progressBars/progressbarlight.h \
     subWidgets/qcomboboxfriends.h \
     subWidgets/qlistwidgetachievements.h \
     subWidgets/withData/qbuttonwithdata.h \
@@ -134,15 +136,14 @@ HEADERS += \
     subWidgets/withData/qradiobuttonwithdata.h \
 
 FORMS += \
-    forms/formcommentsinteractions.ui \
+    forms/formcomments.ui \
     forms/formcontainerachievements.ui \
-    forms/formgroupsgamesinteractions.ui \
+    forms/formgroups.ui \
     forms/formmain.ui \
-    forms/mainwindow.ui \
     forms/subForms/achievements/formachievements.ui \
-    forms/subForms/achievements/formachievementscategoriesedit.ui \
-    forms/subForms/achievements/formachievementsfriendscompare.ui \
+    forms/subForms/achievements/formcategoriesedit.ui \
     forms/subForms/achievements/formcompareprofilefilter.ui \
+    forms/subForms/achievements/formfriendscompare.ui \
     forms/subForms/achievements/formtablesheaders.ui \
     forms/subForms/main/formfavorites.ui \
     forms/subForms/main/formfriends.ui \

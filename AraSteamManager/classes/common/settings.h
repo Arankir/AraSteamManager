@@ -19,6 +19,7 @@
 //Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
 QString getToolTipText(QString text);
+bool createDir(const QString &path);
 
 class Settings {
 public:
@@ -58,8 +59,8 @@ public:
     static QPoint getAchievementContainerPos();
 
     static QString getFontDefaultName();
+    static QString getQssTheme();
 
-    static bool createDir(const QString &path);
     static void syncronizeSettings();
 
 private:

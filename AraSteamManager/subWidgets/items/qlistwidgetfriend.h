@@ -2,18 +2,25 @@
 #define QLISTWIDGETACHIEVEMENT_H
 
 #include <QListWidgetItem>
-#include "classes/steamApi/structures/sachievements.h"
+#include "classes/steamApi/structures/sfriends.h"
+
+enum class FriendType {
+    none,
+    haventGame,
+    haveGame
+};
 
 class QListWidgetFriend : public QListWidgetItem {
 public:
-    QListWidgetFriend(SAchievement *achievement);
+    QListWidgetFriend(SProfile *steamFriend, FriendType type);
     QListWidgetFriend(): QListWidgetItem() {}
     ~QListWidgetFriend();
 
     QListWidgetFriend &operator=(const QListWidgetFriend&);
     bool operator==(const QListWidgetFriend&);
 
-    SAchievement *_achievement = nullptr;
+    SProfile *_steamFriend = nullptr;
+    FriendType _type = FriendType::none;
 };
 
 #endif // QLISTWIDGETACHIEVEMENT_H

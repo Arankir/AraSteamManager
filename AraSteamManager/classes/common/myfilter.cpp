@@ -1,13 +1,13 @@
 #include "myfilter.h"
 
 MyFilter::MyFilter(int aRow, int aCol, QObject *aParent): QObject(aParent), _row(aRow > 0 ? aRow : 0), _col(aCol > 0 ? aCol : 0) {
-    if (_row > 0 && _col > 0) {
+    if (_row >= 0 && _col >= 0) {
         _filter.resize(_row);
         for (int i = 0; i < _row; ++i) {
             _filter[i] = QVector<bool>(_col, true);
         }
     } else {
-        qWarning() << "Number of rows or columns is less than 1";
+        qWarning() << "Number of rows or columns is less than 0";
     }
 }
 

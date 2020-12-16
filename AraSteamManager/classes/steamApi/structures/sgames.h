@@ -1,7 +1,7 @@
 #ifndef SGAMES_H
 #define SGAMES_H
 
-#include "classes/steamApi/sapi.h"
+#include "../sapi.h"
 
 class SGame : public QObject {
     Q_OBJECT
@@ -55,7 +55,7 @@ public:
     explicit SGames(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false, QObject *parent = nullptr);
     SGames(const SGames &games): Sapi(games.parent()), _games(games._games), _id(games._id), _free_games(games._free_games), _game_info(games._game_info) {}
     SGames(QObject *parent = nullptr): Sapi(parent) {}
-    ~SGames() {}
+    ~SGames() {;}
 
     SGames &operator=(const SGames &games);
     SGame &operator[](const int &index) {return _games[index];}
