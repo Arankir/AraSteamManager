@@ -34,10 +34,6 @@ SOURCES += \
     classes/games/hiddengames.cpp \
     classes/network/requestdata.cpp \
     classes/network/requestimage.cpp \
-    classes/notMine/donutbreakdownchart.cpp \
-    classes/notMine/freezetablewidget.cpp \
-    classes/notMine/mainslice.cpp \
-    classes/notMine/multiselectcombobox.cpp \
     classes/steamApi/sapi.cpp \
     classes/steamApi/structures/sachievements.cpp \
     classes/steamApi/structures/sbans.cpp \
@@ -56,9 +52,9 @@ SOURCES += \
     forms/formmain.cpp \
     forms/subForms/achievements/formachievements.cpp \
     forms/subForms/achievements/formcategoriesedit.cpp \
-    forms/subForms/achievements/formcompareprofilefilter.cpp \
     forms/subForms/achievements/formfriendscompare.cpp \
-    forms/subForms/achievements/formtablesheaders.cpp \
+    forms/subForms/achievements/widgets/formfrienditemcompare.cpp \
+    forms/subForms/achievements/widgets/formreachedfilter.cpp \
     forms/subForms/main/formfavorites.cpp \
     forms/subForms/main/formfriends.cpp \
     forms/subForms/main/formgames.cpp \
@@ -67,14 +63,18 @@ SOURCES += \
     forms/subForms/main/formstatistics.cpp \
     framelesswindow.cpp \
         main.cpp \
+    subWidgets/charts/donutbreakdownchart.cpp \
+    subWidgets/charts/mainslice.cpp \
+    subWidgets/comboBoxes/multiselectcombobox.cpp \
+    subWidgets/comboBoxes/qcomboboxfriends.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
     subWidgets/items/qlistwidgetfriend.cpp \
+    subWidgets/lists/qlistwidgetachievements.cpp \
     subWidgets/models/listachievementsmodel.cpp \
     subWidgets/progressBars/progressbarbad.cpp \
     subWidgets/progressBars/progressbargood.cpp \
     subWidgets/progressBars/progressbarlight.cpp \
-    subWidgets/qcomboboxfriends.cpp \
-    subWidgets/qlistwidgetachievements.cpp \
+    subWidgets/tables/freezetablewidget.cpp \
     subWidgets/withData/qbuttonwithdata.cpp \
     subWidgets/withData/qcheckboxwithdata.cpp \
     subWidgets/withData/qcomboboxwithdata.cpp \
@@ -90,10 +90,6 @@ HEADERS += \
     classes/games/hiddengames.h \
     classes/network/requestdata.h \
     classes/network/requestimage.h \
-    classes/notMine/donutbreakdownchart.h \
-    classes/notMine/freezetablewidget.h \
-    classes/notMine/mainslice.h \
-    classes/notMine/multiselectcombobox.h \
     classes/steamApi/sapi.h \
     classes/steamApi/structures/sachievements.h \
     classes/steamApi/structures/sbans.h \
@@ -112,9 +108,9 @@ HEADERS += \
     forms/formmain.h \
     forms/subForms/achievements/formachievements.h \
     forms/subForms/achievements/formcategoriesedit.h \
-    forms/subForms/achievements/formcompareprofilefilter.h \
     forms/subForms/achievements/formfriendscompare.h \
-    forms/subForms/achievements/formtablesheaders.h \
+    forms/subForms/achievements/widgets/formfrienditemcompare.h \
+    forms/subForms/achievements/widgets/formreachedfilter.h \
     forms/subForms/main/formfavorites.h \
     forms/subForms/main/formfriends.h \
     forms/subForms/main/formgames.h \
@@ -122,14 +118,18 @@ HEADERS += \
     forms/subForms/main/formsettings.h \
     forms/subForms/main/formstatistics.h \
     framelesswindow.h \
+    subWidgets/charts/donutbreakdownchart.h \
+    subWidgets/charts/mainslice.h \
+    subWidgets/comboBoxes/multiselectcombobox.h \
+    subWidgets/comboBoxes/qcomboboxfriends.h \
     subWidgets/items/qlistwidgetachievement.h \
     subWidgets/items/qlistwidgetfriend.h \
+    subWidgets/lists/qlistwidgetachievements.h \
     subWidgets/models/listachievementsmodel.h \
     subWidgets/progressBars/progressbarbad.h \
     subWidgets/progressBars/progressbargood.h \
     subWidgets/progressBars/progressbarlight.h \
-    subWidgets/qcomboboxfriends.h \
-    subWidgets/qlistwidgetachievements.h \
+    subWidgets/tables/freezetablewidget.h \
     subWidgets/withData/qbuttonwithdata.h \
     subWidgets/withData/qcheckboxwithdata.h \
     subWidgets/withData/qcomboboxwithdata.h \
@@ -142,9 +142,9 @@ FORMS += \
     forms/formmain.ui \
     forms/subForms/achievements/formachievements.ui \
     forms/subForms/achievements/formcategoriesedit.ui \
-    forms/subForms/achievements/formcompareprofilefilter.ui \
     forms/subForms/achievements/formfriendscompare.ui \
-    forms/subForms/achievements/formtablesheaders.ui \
+    forms/subForms/achievements/widgets/formfrienditemcompare.ui \
+    forms/subForms/achievements/widgets/formreachedfilter.ui \
     forms/subForms/main/formfavorites.ui \
     forms/subForms/main/formfriends.ui \
     forms/subForms/main/formgames.ui \
@@ -159,9 +159,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    images/resimg.qrc \
-    languages/lang.qrc \
-    themes/thm.qrc
+    resources/fonts/fonts.qrc \
+    resources/images/img.qrc \
+    resources/languages/lang.qrc \
+    resources/themes/thm.qrc
 
 DISTFILES +=
 

@@ -12,10 +12,10 @@ public:
     AchievementComment &changeComment(const QStringList &comment);
 
     QJsonObject toJson()        const;
-    QString getProfileId()      const {return _profileId;}
-    QString getGameId()         const {return _gameId;}
-    QString getAchievementId()  const {return _achievementId;}
-    QStringList getComment()    const {return _comment;}
+    QString profileId()      const {return _profileId;}
+    QString gameId()         const {return _gameId;}
+    QString achievementId()  const {return _achievementId;}
+    QStringList comment()    const {return _comment;}
 
 private:
     void fromJson(const QJsonObject &object);
@@ -34,10 +34,10 @@ public:
 
     GameComment &changeComment(const QStringList &comment);
 
-    QJsonObject toJson()        const;
-    QString getProfileId()      const {return _profileId;}
-    QString getGameId()         const {return _gameId;}
-    QStringList getComment()    const {return _comment;}
+    QJsonObject toJson()    const;
+    QString profileId()     const {return _profileId;}
+    QString gameId()        const {return _gameId;}
+    QStringList comment()   const {return _comment;}
 
 private:
     void fromJson(const QJsonObject &object);

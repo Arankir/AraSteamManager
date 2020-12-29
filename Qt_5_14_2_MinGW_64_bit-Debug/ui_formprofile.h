@@ -275,7 +275,7 @@ public:
         LabellvlValue = new QLabel(FrameProfileMaximumInfo);
         LabellvlValue->setObjectName(QString::fromUtf8("LabellvlValue"));
         LabellvlValue->setMinimumSize(QSize(32, 32));
-        LabellvlValue->setMaximumSize(QSize(16777215, 16777215));
+        LabellvlValue->setMaximumSize(QSize(32, 32));
         LabellvlValue->setFont(font2);
         LabellvlValue->setText(QString::fromUtf8("0"));
         LabellvlValue->setAlignment(Qt::AlignCenter);
@@ -301,7 +301,6 @@ public:
         sizePolicy.setHeightForWidth(LabelBans->sizePolicy().hasHeightForWidth());
         LabelBans->setSizePolicy(sizePolicy);
         LabelBans->setFont(font3);
-        LabelBans->setText(QString::fromUtf8("VAC Bans: "));
 
         horizontalLayout_10->addWidget(LabelBans);
 
@@ -511,6 +510,7 @@ public:
         LabelFriendsVisibility->setText(QCoreApplication::translate("FormProfile", "\320\224\321\200\321\203\320\267\321\214\321\217", nullptr));
         LabelGamesVisibility->setText(QCoreApplication::translate("FormProfile", "\320\230\320\263\321\200\321\213", nullptr));
         Labellvl->setText(QCoreApplication::translate("FormProfile", "lvl:", nullptr));
+        LabelBans->setText(QCoreApplication::translate("FormProfile", "VAC Bans: ", nullptr));
         LabelTimeCreated->setText(QCoreApplication::translate("FormProfile", "TimeCreated:", nullptr));
         LabelLocCountryCode->setText(QCoreApplication::translate("FormProfile", "CountryCode:", nullptr));
         ButtonSetProfile->setText(QCoreApplication::translate("FormProfile", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));

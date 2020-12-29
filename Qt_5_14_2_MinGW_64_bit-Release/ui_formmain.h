@@ -14,12 +14,16 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <forms/subForms/main/formfavorites.h>
+#include <forms/subForms/main/formfriends.h>
+#include <forms/subForms/main/formgames.h>
+#include <forms/subForms/main/formsettings.h>
+#include <subWidgets/progressBars/progressbargood.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -37,7 +41,7 @@ public:
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
     QStackedWidget *StackedWidgetProfiles;
-    QProgressBar *FormProgressBar;
+    ProgressBarGood *FormProgressBar;
     QStackedWidget *StackedWidgetForms;
     QWidget *None;
     QGridLayout *gridLayout;
@@ -45,24 +49,20 @@ public:
     QWidget *scrollAreaWidgetContents;
     QWidget *Games;
     QGridLayout *gridLayout_2;
-    QScrollArea *ScrollAreaGames;
-    QWidget *widget;
+    FormGames *StackedFormGames;
     QWidget *Friends;
     QGridLayout *gridLayout_3;
-    QScrollArea *ScrollAreaFriends;
-    QWidget *scrollAreaWidgetContents_2;
+    FormFriends *StackedFormFriends;
     QWidget *Statistic;
     QGridLayout *gridLayout_4;
     QScrollArea *ScrollAreaStatistic;
     QWidget *scrollAreaWidgetContents_3;
     QWidget *Favorites;
     QGridLayout *gridLayout_5;
-    QScrollArea *ScrollAreaFavorites;
-    QWidget *scrollAreaWidgetContents_4;
+    FormFavorites *StackedFormFavorites;
     QWidget *Settings;
     QGridLayout *gridLayout_6;
-    QScrollArea *ScrollAreaSettings;
-    QWidget *scrollAreaWidgetContents_5;
+    FormSettings *StackedFormSettings;
 
     void setupUi(QWidget *FormMain)
     {
@@ -138,7 +138,7 @@ public:
 
         verticalLayout->addWidget(StackedWidgetProfiles);
 
-        FormProgressBar = new QProgressBar(FormMain);
+        FormProgressBar = new ProgressBarGood(FormMain);
         FormProgressBar->setObjectName(QString::fromUtf8("FormProgressBar"));
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Maximum);
         sizePolicy1.setHorizontalStretch(0);
@@ -183,15 +183,10 @@ public:
         gridLayout_2->setSpacing(0);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        ScrollAreaGames = new QScrollArea(Games);
-        ScrollAreaGames->setObjectName(QString::fromUtf8("ScrollAreaGames"));
-        ScrollAreaGames->setWidgetResizable(true);
-        widget = new QWidget();
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(0, 0, 98, 28));
-        ScrollAreaGames->setWidget(widget);
+        StackedFormGames = new FormGames(Games);
+        StackedFormGames->setObjectName(QString::fromUtf8("StackedFormGames"));
 
-        gridLayout_2->addWidget(ScrollAreaGames, 0, 0, 1, 1);
+        gridLayout_2->addWidget(StackedFormGames, 0, 0, 1, 1);
 
         StackedWidgetForms->addWidget(Games);
         Friends = new QWidget();
@@ -202,15 +197,10 @@ public:
         gridLayout_3->setSpacing(0);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
-        ScrollAreaFriends = new QScrollArea(Friends);
-        ScrollAreaFriends->setObjectName(QString::fromUtf8("ScrollAreaFriends"));
-        ScrollAreaFriends->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 98, 28));
-        ScrollAreaFriends->setWidget(scrollAreaWidgetContents_2);
+        StackedFormFriends = new FormFriends(Friends);
+        StackedFormFriends->setObjectName(QString::fromUtf8("StackedFormFriends"));
 
-        gridLayout_3->addWidget(ScrollAreaFriends, 0, 0, 1, 1);
+        gridLayout_3->addWidget(StackedFormFriends, 0, 0, 1, 1);
 
         StackedWidgetForms->addWidget(Friends);
         Statistic = new QWidget();
@@ -240,15 +230,10 @@ public:
         gridLayout_5->setSpacing(0);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
         gridLayout_5->setContentsMargins(0, 0, 0, 0);
-        ScrollAreaFavorites = new QScrollArea(Favorites);
-        ScrollAreaFavorites->setObjectName(QString::fromUtf8("ScrollAreaFavorites"));
-        ScrollAreaFavorites->setWidgetResizable(true);
-        scrollAreaWidgetContents_4 = new QWidget();
-        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 98, 28));
-        ScrollAreaFavorites->setWidget(scrollAreaWidgetContents_4);
+        StackedFormFavorites = new FormFavorites(Favorites);
+        StackedFormFavorites->setObjectName(QString::fromUtf8("StackedFormFavorites"));
 
-        gridLayout_5->addWidget(ScrollAreaFavorites, 0, 0, 1, 1);
+        gridLayout_5->addWidget(StackedFormFavorites, 0, 0, 1, 1);
 
         StackedWidgetForms->addWidget(Favorites);
         Settings = new QWidget();
@@ -259,15 +244,10 @@ public:
         gridLayout_6->setSpacing(0);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         gridLayout_6->setContentsMargins(0, 0, 0, 0);
-        ScrollAreaSettings = new QScrollArea(Settings);
-        ScrollAreaSettings->setObjectName(QString::fromUtf8("ScrollAreaSettings"));
-        ScrollAreaSettings->setWidgetResizable(true);
-        scrollAreaWidgetContents_5 = new QWidget();
-        scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 98, 28));
-        ScrollAreaSettings->setWidget(scrollAreaWidgetContents_5);
+        StackedFormSettings = new FormSettings(Settings);
+        StackedFormSettings->setObjectName(QString::fromUtf8("StackedFormSettings"));
 
-        gridLayout_6->addWidget(ScrollAreaSettings, 0, 0, 1, 1);
+        gridLayout_6->addWidget(StackedFormSettings, 0, 0, 1, 1);
 
         StackedWidgetForms->addWidget(Settings);
 

@@ -311,8 +311,8 @@
               </property>
               <property name="maximumSize">
                <size>
-                <width>16777215</width>
-                <height>16777215</height>
+                <width>32</width>
+                <height>32</height>
                </size>
               </property>
               <property name="font">
@@ -361,7 +361,7 @@
                </font>
               </property>
               <property name="text">
-               <string notr="true">VAC Bans: </string>
+               <string>VAC Bans: </string>
               </property>
              </widget>
             </item>

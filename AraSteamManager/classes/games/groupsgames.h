@@ -14,9 +14,9 @@ public:
     GroupGames &changeTitle(const QString &title);
     QJsonObject toJson() const;
 
-    QString getTitle()          const {return _title;}
-    QString getProfileId()      const {return _profileId;}
-    QList<QString> getGames()   const {return _games;}
+    QString title()          const {return _title;}
+    QString profileId()      const {return _profileId;}
+    QList<QString> games()   const {return _games;}
 
 private:
     GroupGames &fromJson(const QJsonObject &object);

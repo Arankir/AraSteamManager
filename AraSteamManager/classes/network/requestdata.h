@@ -24,7 +24,7 @@ public:
 
     void get(const QString &url, bool parallel = false);
 
-    QByteArray getReply() const {return _reply;}
+    QByteArray reply() const {return _reply;}
 
 signals:
     void s_finished(RequestData *imgr);

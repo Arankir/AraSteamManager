@@ -2,8 +2,18 @@
 
 const QString    Sapi::_key = "3826BF60403D15613B4B0381DAB7A7BD";
 
-Sapi::Sapi(QObject *parent) : QObject(parent) {
+Sapi::Sapi(QObject *parent): QObject(parent), _status(StatusValue::none), _error("") {
     connect(&_request, &RequestData::s_finished, this, &Sapi::onLoad);
+}
+
+Sapi::Sapi(const Sapi &api): QObject(api.parent()), _status(api._status), _error(api.error()) {
+    connect(&_request, &RequestData::s_finished, this, &Sapi::onLoad);
+}
+
+Sapi &Sapi::operator=(const Sapi &api) {
+    _status = api._status;
+    _error  = api._error;
+    return *this;
 }
 
 Sapi::~Sapi() {
@@ -59,17 +69,6 @@ QString Sapi::lvlUrl(QString aSteamId) {
     return "https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=" + _key + "&steamid=" + aSteamId;
 }
 
-Sapi::Sapi(const Sapi &api) {
-    _status = api._status;
-    _error  = api._error;
-}
-
-Sapi &Sapi::operator=(const Sapi &api) {
-    _status = api._status;
-    _error  = api._error;
-    return *this;
-}
-
 QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePath, QSize aSize) {
     if (aPixmap.isNull()) {
         if (!aUrl.isEmpty()) {
@@ -79,8 +78,8 @@ QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePa
                 QObject::connect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
                 loop.exec();
                 QObject::disconnect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-                if (!img.getPixmap().isNull()) {
-                    aPixmap = img.getPixmap().scaled(aSize);
+                if (!img.pixmap().isNull()) {
+                    aPixmap = img.pixmap().scaled(aSize);
                 }
             } else {
                 aPixmap = QPixmap(aSavePath).scaled(aSize);

@@ -1,6 +1,6 @@
 #include "hiddengames.h"
 
-HiddenGames::HiddenGames(SProfile profile) : _profile(profile._steamID) {
+HiddenGames::HiddenGames(SProfile profile) : _profile(profile.steamID()) {
     load();
 }
 

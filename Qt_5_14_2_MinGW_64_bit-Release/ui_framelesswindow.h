@@ -43,7 +43,7 @@ public:
     {
         if (FramelessWindow->objectName().isEmpty())
             FramelessWindow->setObjectName(QString::fromUtf8("FramelessWindow"));
-        FramelessWindow->resize(500, 68);
+        FramelessWindow->resize(170, 68);
         centralwidget = new QWidget(FramelessWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -52,6 +52,7 @@ public:
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         FrameTitleWindow = new QFrame(centralwidget);
         FrameTitleWindow->setObjectName(QString::fromUtf8("FrameTitleWindow"));
+        FrameTitleWindow->setMinimumSize(QSize(0, 0));
         FrameTitleWindow->setMaximumSize(QSize(16777215, 33));
 #if QT_CONFIG(accessibility)
         FrameTitleWindow->setAccessibleName(QString::fromUtf8("TitleWindow"));
@@ -101,7 +102,7 @@ public:
         FramelessWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(FramelessWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 500, 20));
+        menubar->setGeometry(QRect(0, 0, 170, 20));
         FramelessWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(FramelessWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));

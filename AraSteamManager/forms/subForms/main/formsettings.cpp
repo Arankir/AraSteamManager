@@ -8,6 +8,7 @@ FormSettings::FormSettings(QWidget *aParent): QWidget(aParent), ui(new Ui::FormS
 }
 
 FormSettings::~FormSettings() {
+    qInfo() << "Форма настроек удалилась";
     delete ui;
 }
 
@@ -22,7 +23,21 @@ bool FormSettings::isLoaded() {
 void FormSettings::initComponents() {
     //ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
 
-    switch (Settings::getLanguage()) {
+//    ui->TreeViewExportComments->setVisible(false);
+//    ui->TreeViewExportFavorites->setVisible(false);
+//    ui->ListViewExportGroups->setVisible(false);
+//    ui->LabelExportGroups->setVisible(false);
+//    ui->LabelExportComments->setVisible(false);
+//    ui->LabelExportFavorites->setVisible(false);
+//    ui->ButtonExportFavorites->setVisible(false);
+//    ui->ButtonExportComments->setVisible(false);
+//    ui->ButtonExportGroups->setVisible(false);
+//    ui->ButtonExportSettings->setVisible(false);
+
+    ui->tabWidget->setCurrentIndex(0);
+
+    initExport();
+    switch (Settings::language()) {
     case 1: {
         ui->RadioButtonLanguageEnglish->setChecked(true);
         break;
@@ -35,7 +50,7 @@ void FormSettings::initComponents() {
         break;
     }
     }
-    switch (Settings::getVisibleHiddenGames()) {
+    switch (Settings::visibleHiddenGames()) {
     case 0: {
         ui->CheckBoxVisibleHiddenGames->setChecked(false);
         break;
@@ -48,13 +63,17 @@ void FormSettings::initComponents() {
         break;
     }
     }
-    switch (Settings::getTheme()) {
+    switch (Settings::theme()) {
     case 1: {
-        ui->RadioButtonDarkTheme->setChecked(true);
+        ui->RadioButtonBlueTheme->setChecked(true);
         break;
     }
     case 2: {
         ui->RadioButtonLightTheme->setChecked(true);
+        break;
+    }
+    case 3: {
+        ui->RadioButtonDarkTheme->setChecked(true);
         break;
     }
     default: {
@@ -87,8 +106,8 @@ void FormSettings::initComponents() {
 //        break;
 //    }
 //    }
-    ui->SliderProfileSize->setValue(Settings::getProfileInfoSize());
-    ui->CheckBoxSaveImage->setChecked(Settings::getSaveImages());
+    ui->SliderProfileSize->setValue(Settings::profileInfoSize());
+    ui->CheckBoxSaveImage->setChecked(Settings::saveImages());
 //    QPalette darkPalette;
 //    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
 //    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
@@ -137,7 +156,7 @@ void FormSettings::initComponents() {
                 SProfiles profile(fileName.remove(".txt"), false, ProfileUrlType::id);
                 QList<QString> hide;
                 QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
-                profileHidden->setText(profile[0]._personaName);
+                profileHidden->setText(profile[0].personaName());
                 profileHidden->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
                 profileHidden->setObjectName("HiddenGames" + QString::number(number));
                 profileHidden->addData("NumberFileHiddenGame", QString::number(number));
@@ -164,11 +183,155 @@ void FormSettings::initComponents() {
     connect(ui->CheckBoxVisibleHiddenGames, &QCheckBox::stateChanged, this, &FormSettings::checkBoxVisibleHiddenGames_StateChanged);
     connect(ui->RadioButtonDarkTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonDarkTheme_Clicked);
     connect(ui->RadioButtonLightTheme,      &QRadioButton::clicked,   this, &FormSettings::radioButtonLightTheme_Clicked);
+    connect(ui->RadioButtonBlueTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonBlueTheme_Clicked);
     connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
     connect(ui->SliderProfileSize,          &QSlider::valueChanged,   this, &FormSettings::slideProfileSize_ValueChanged);
     //connect(ui->ComboBoxMaxRows,            SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxMaxTableRows(int)));
+
+    connect(ui->ButtonExportCategories, &QPushButton::clicked, this, &FormSettings::buttonExportCategories_Clicked);
+    connect(ui->ButtonImportCategories, &QPushButton::clicked, this, &FormSettings::buttonImportCategories_Clicked);
 #define ConnectsEnd }
     retranslate();
+}
+
+void FormSettings::initExport() {
+    ui->TreeWidgetExportCategories->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
+
+    QDir dir(Paths::categories());
+    for (auto &file: dir.entryInfoList(QDir::Files)) {
+        QFile fileCategory(file.filePath());
+        if (fileCategory.exists()) {
+            if(fileCategory.open(QFile::ReadOnly)) {
+                auto s = fileCategory.readAll();
+                Categories game(QJsonDocument().fromJson(s).object());
+                QTreeWidgetItem *item = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << game.game());
+                item->setWhatsThis(0, QString::number(game.gameID()));
+                item->setWhatsThis(1, QString::number(-2));
+                ui->TreeWidgetExportCategories->addTopLevelItem(item);
+                int count = -2;
+                for (auto &category: game) {
+                    count = recursAddCategoryToTree(category, ++count, item, game.gameID());
+                }
+                fileCategory.close();
+            }
+        }
+    }
+}
+
+int FormSettings::recursAddCategoryToTree(Category &aCategory, int aCount, QTreeWidgetItem *aRoot, const int &aGameId) {
+    QTreeWidgetItem *subItem;
+    if (aRoot == nullptr) {
+        subItem = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << aCategory.title());
+    } else {
+        subItem = new QTreeWidgetItem(aRoot, QStringList() << aCategory.title());
+    }
+    subItem->setWhatsThis(0,QString::number(aGameId));
+    subItem->setWhatsThis(1,QString::number(aCount + 1));
+    for(auto &subCategory: aCategory) {
+        aCount = recursAddCategoryToTree(subCategory, ++aCount, subItem, aGameId);
+    }
+    return aCount;
+}
+
+void FormSettings::buttonExportCategories_Clicked() {
+    QString sFile = QFileDialog::getSaveFileName(this, tr("Место сохранения файла"), "", ".sas");
+    if (sFile == "") {
+        return;
+    }
+    ExportFileData exportData = createExportCategoriesJson();
+    if (sFile.left(4) != ".sas") {
+        sFile += ".sas";
+    }
+    QFile fFile(sFile);
+    fFile.open(QFile::WriteOnly);
+    fFile.write(QJsonDocument(exportData.toJson()).toJson());
+    fFile.close();
+    QMessageBox::information(this, tr("Успешно!"), tr("Файл успешно создан!"));
+}
+
+ExportFileData FormSettings::createExportCategoriesJson() {
+    QJsonArray jArray;
+    for (auto &item: ui->TreeWidgetExportCategories->selectedItems()) {
+        Categories categories(item->whatsThis(0).toInt());
+        int index = item->whatsThis(1).toInt();
+        if (index == -2) {
+            for (auto &category: categories) {
+                ExportCategory eCategory {categories.gameID(), categories.game(), category};
+                jArray.append(eCategory.toJson());
+            }
+        } else {
+            Category *category = categories.categoryAtDirect(index);
+            if (category != nullptr) {
+                ExportCategory eCategory {categories.gameID(), categories.game(), *category};
+                jArray.append(eCategory.toJson());
+            }
+        }
+    }
+    ExportFileData efd;
+    efd.data = jArray;
+    efd.type = ExportType::categories;
+    efd.version = 1.0;
+    efd.date = QDateTime::currentDateTime();
+    return efd;
+}
+
+void FormSettings::buttonImportCategories_Clicked() {
+    QString path;
+    if (ui->LineEditImportCategories->text() == "") {
+        path = QFileDialog::getOpenFileName(this, tr("Выбор файла для загрузки"), "", "*");
+        if (path == "") {
+            return;
+        }
+    } else {
+        path = ui->LineEditImportCategories->text();
+    }
+    QFile fFile(path);
+    if (!fFile.open(QFile::ReadOnly)) {
+        QMessageBox::warning(this, tr("Ошибка!"), tr("Невозможно найти указанный файл, или файл открыт в другом приложении!"));
+        return;
+    }
+    ExportFileData efd = ExportFileData::fromJson(QJsonDocument::fromJson(fFile.readAll()).object());
+    fFile.close();
+
+    if (efd.type != ExportType::categories) {
+        QMessageBox::warning(this, tr("Ошибка!"), tr("В выбранном файле нет категорий"));
+        return;
+    }
+
+    QList<ExportCategory> exportCategories;
+    for (auto category: efd.data.toArray()) {
+        exportCategories.append(std::move(ExportCategory::fromJson(category.toObject())));
+    }
+
+    if (exportCategories.size() == 0) {
+        QMessageBox::warning(this, tr("Ошибка!"), tr("В выбранном файле не обнаружено категорий"));
+        return;
+    }
+
+    QStringList slCategories;
+    for (auto &category: exportCategories) {
+        slCategories.append(tr("Игра: %1, категория: %2").arg(category.gameName, category.category.title()));
+    }
+    QString questionText = tr("Обнаружены следующие категории: \n") + slCategories.join("\n") + ".";
+
+    QMessageBox question(QMessageBox::Question,
+                           tr("Внимание!"),
+                           questionText);
+    QAbstractButton *btnYes = question.addButton(tr("Добавить эти категории"), QMessageBox::YesRole);
+    question.addButton(tr("Отмена"), QMessageBox::NoRole);
+    question.exec();
+    if(question.clickedButton() != btnYes) {
+        return;
+    }
+    //Обновить категории
+    for (auto eCategory: exportCategories) {
+        int gameId = eCategory.gameId;
+        Category category = eCategory.category;
+        Categories categories(gameId);
+        categories.addCategory(category);
+        categories.save(categories.toJson());
+    }
+    QMessageBox::information(this, tr("Внимание!"), tr("Категории успешно добавлены!"));
 }
 
 void FormSettings::changeEvent(QEvent *aEvent) {
@@ -199,7 +362,7 @@ void FormSettings::radioButtonLanguageEnglish_Clicked() {
     QTranslator *translator = new QTranslator;
     translator->load(":/AraSteamManager_en.qm");
     qApp->installTranslator(translator);
-    //ui->retranslateUi(this);
+    ui->retranslateUi(this);
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
@@ -209,7 +372,7 @@ void FormSettings::radioButtonLanguageRussian_Clicked() {
     QTranslator *translator = new QTranslator;
     translator->load(":/AraSteamManager_ru.qm");
     qApp->installTranslator(translator);
-    //ui->retranslateUi(this);
+    ui->retranslateUi(this);
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
@@ -219,15 +382,21 @@ void FormSettings::checkBoxVisibleHiddenGames_StateChanged(int arg1) {
 }
 
 void FormSettings::radioButtonDarkTheme_Clicked() {
-    Settings::setTheme(1);
+    Settings::setTheme(3);
     emit s_updateSettings();
-    QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
+    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::radioButtonLightTheme_Clicked() {
     Settings::setTheme(2);
     emit s_updateSettings();
-    QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
+    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::radioButtonBlueTheme_Clicked() {
+    Settings::setTheme(1);
+    emit s_updateSettings();
+    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::radioButtonHiddenGames_Clicked() {
@@ -365,4 +534,73 @@ void FormSettings::checkBoxSaveImage_StateChanged(int arg1) {
 void FormSettings::slideProfileSize_ValueChanged(int aValue) {
     Settings::setVisibleProfileInfo(aValue);
     emit s_updateSettings();
+}
+
+ExportCategory ExportCategory::fromJson(QJsonObject aObject) {
+    return ExportCategory{aObject["gameId"].toInt(), aObject["gameName"].toString(), Category(aObject["category"].toObject())};
+}
+
+QJsonObject ExportCategory::toJson() {
+    QJsonObject jObj;
+    jObj["category"] = category.toJson();
+    jObj["gameName"] = gameName;
+    jObj["gameId"] = gameId;
+    return jObj;
+}
+
+ExportFileData ExportFileData::fromJson(QJsonObject aObject) {
+    ExportFileData efd;
+    efd.data = aObject["data"];
+    efd.type = stringToExportType(aObject["type"].toString());
+    efd.version = aObject["version"].toString().toDouble();
+    efd.date = QDateTime::fromString(aObject["date"].toString(), "yyyy.MM.dd hh:mm:ss");
+    return efd;
+}
+
+QJsonObject ExportFileData::toJson() {
+    QJsonObject jObject;
+    jObject["data"] = data;
+    jObject["type"] = exportTypeToString(type);
+    jObject["version"] = QString::number(version);
+    jObject["date"] = date.toString("yyyy.MM.dd hh:mm:ss");
+    return jObject;
+}
+
+QString exportTypeToString(ExportType aType) {
+    switch (aType) {
+    case ExportType::unknown: {
+        return "unknown";
+    }
+    case ExportType::categories: {
+        return "categories";
+    }
+    case ExportType::favorites: {
+        return "favorites";
+    }
+    case ExportType::comments: {
+        return "comments";
+    }
+    case ExportType::groups: {
+        return "groups";
+    }
+    case ExportType::multiple: {
+        return "multiple";
+    }
+    }
+}
+
+ExportType stringToExportType(QString aType) {
+    if (aType == "categories") {
+        return ExportType::categories;
+    } else if (aType == "favorites") {
+        return ExportType::favorites;
+    } else if (aType == "comments") {
+        return ExportType::comments;
+    } else if (aType == "groups") {
+        return ExportType::groups;
+    }  else if (aType == "multiple") {
+        return ExportType::multiple;
+    } else {
+        return ExportType::unknown;
+    }
 }

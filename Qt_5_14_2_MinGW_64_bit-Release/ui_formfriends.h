@@ -51,6 +51,7 @@ public:
         FormFriends->setFont(font);
         verticalLayout = new QVBoxLayout(FormFriends);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
         GroupBoxFilter = new QGroupBox(FormFriends);
         GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
         _2 = new QVBoxLayout(GroupBoxFilter);
@@ -112,7 +113,7 @@ public:
     void retranslateUi(QWidget *FormFriends)
     {
         FormFriends->setWindowTitle(QCoreApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
-        GroupBoxFilter->setTitle(QCoreApplication::translate("FormFriends", "      \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
+        GroupBoxFilter->setTitle(QCoreApplication::translate("FormFriends", "     \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
         LineEditName->setPlaceholderText(QCoreApplication::translate("FormFriends", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
         ButtonFind->setText(QCoreApplication::translate("FormFriends", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
         CheckBoxOpenProfile->setText(QCoreApplication::translate("FormFriends", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));

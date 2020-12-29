@@ -12,24 +12,24 @@ void ThreadStatistics::onResultAchievements(SAchievementsPlayer *aAchievements) 
     disconnect(aAchievements, SIGNAL(s_finished(SAchievementsPlayer*)), this, SLOT(onResultAchievements(SAchievementsPlayer*)));
     static int nowProcessed = 0;
     emit s_progress(nowProcessed, 0);
-    if (aAchievements->getCount() > 0) {
+    if (aAchievements->count() > 0) {
         ++_colgames;
         int countReached = 0;
         int countNotReached = 0;
 
         for (auto &achievement: *aAchievements) {
-            if (achievement._achieved == 1) {
-                updateTimes(achievement._unlockTime);
+            if (achievement.achieved() == 1) {
+                updateTimes(achievement.unlockTime());
                 ++countReached;
             } else {
                 ++countNotReached;
             }
         }
 
-        _summcolumn += aAchievements->getCount();
+        _summcolumn += aAchievements->count();
         (*_averagePercent).append(std::move(1.0 * (countReached * 100) / (countReached + countNotReached)));
 
-        QPair<QString, QString> dataNow(aAchievements->getAppid(), aAchievements->getGameName());
+        QPair<QString, QString> dataNow(aAchievements->appid(), aAchievements->gameName());
         if (countNotReached == 0) {
             ++(*_numof)[2];
             (*_complete).append(std::move(dataNow));
@@ -41,7 +41,7 @@ void ThreadStatistics::onResultAchievements(SAchievementsPlayer *aAchievements) 
             (*_notStarted).append(std::move(dataNow));
         }
     }
-    if (++nowProcessed == _games.getCount()) {
+    if (++nowProcessed == _games.count()) {
         emit s_finished();
         this->deleteLater();
     }

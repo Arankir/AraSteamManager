@@ -11,50 +11,36 @@ SBans &SBans::load(const QString &aId, bool aParallel) {
 }
 
 void SBans::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("players"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("players"));
     emit s_finished();
 }
 
 void SBans::fromJson(const QJsonValue &aValue) {
-    if(aValue.toArray().size() > 0) {
-        _bans = aValue.toArray();
+    clear();
+    QJsonArray bansArray = aValue.toArray();
+    if (bansArray.size() > 0) {
+        for (const auto &ban: bansArray) {
+            _bans.append(std::move(SBan(ban.toObject())));
+        }
         _status = StatusValue::success;
-    }
-    else {
+    } else {
         _status = StatusValue::error;
         _error = tr("profile is not exist");
     }
 }
 
-QString SBans::getSteamid(int aIndex) const {
-    return _bans[aIndex].toObject().value("steamid").toString();
+SBans &SBans::clear() {
+    _bans.clear();
+    return *this;
 }
 
-bool SBans::getCommunityBanned(int aIndex) const {
-    return _bans[aIndex].toObject().value("CommunityBanned").toBool();
-}
-
-bool SBans::getVacBanned(int aIndex) const {
-    return _bans[aIndex].toObject().value("VACBanned").toBool();
-}
-
-int SBans::getNumberOfVacBans(int aIndex) const {
-    return _bans[aIndex].toObject().value("NumberOfVACBans").toInt();
-}
-
-int SBans::getDaysSinceLastBan(int aIndex) const {
-    return _bans[aIndex].toObject().value("DaysSinceLastBan").toInt();
-}
-
-int SBans::getNumberOfGameBans(int aIndex) const {
-    return _bans[aIndex].toObject().value("NumberOfGameBans").toInt();
-}
-
-QString SBans::getEconomyBan(int aIndex) const {
-    return _bans[aIndex].toObject().value("EconomyBan").toString();
-}
-
-SBans &SBans::update(bool aParallel) {
-    load(_id, aParallel);
+SBan &SBan::operator=(const SBan &ban) {
+    _steamId = ban._steamId;
+    _communityBanned = ban._communityBanned;
+    _vacBanned = ban._vacBanned;
+    _numberOfVacBan = ban._numberOfVacBan;
+    _daysSinceLastBan = ban._daysSinceLastBan;
+    _numberOfGameBans = ban._numberOfGameBans;
+    _economyBan = ban._economyBan;
     return *this;
 }

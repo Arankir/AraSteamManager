@@ -13,7 +13,6 @@ SGame &SGame::operator=(const SGame &aGame) {
     _has_community_visible_stats    = aGame._has_community_visible_stats;
     _img_icon_url                   = aGame._img_icon_url;
     _img_logo_url                   = aGame._img_logo_url;
-    _numberPlayers                  = aGame._numberPlayers;
     _pixmapIcon                     = aGame._pixmapIcon;
     _pixmapLogo                     = aGame._pixmapLogo;
     return *this;
@@ -30,15 +29,6 @@ QPixmap SGame::pixmapIcon() {
 
 QPixmap SGame::pixmapLogo() {
     return loadPixmap(_pixmapLogo, Sapi::gameImageUrl(QString::number(_appID), _img_logo_url), Paths::imagesGames(_img_logo_url), QSize(184, 69));
-}
-
-const QString SGame::getNumberPlayers(bool hardReload) {
-    if (_numberPlayers == "" || hardReload) {
-//        _request.get(numberPlayersUrl(QString::number(_appID)), false);
-//        double playersCount = QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("player_count").toDouble();
-//        _numberPlayers = QString::number(playersCount);
-    }
-    return _numberPlayers;
 }
 
 void SGame::fromJson(const QJsonValue &aValue) {
@@ -60,21 +50,21 @@ SGames &SGames::operator=(const SGames &aGames) {
     Sapi::operator=(aGames);
     _games      = aGames._games;
     _id         = aGames._id;
-    _free_games = aGames._free_games;
-    _game_info  = aGames._game_info;
+    _freeGames = aGames._freeGames;
+    _gameInfo  = aGames._gameInfo;
     return *this;
 }
 
 SGames &SGames::load(const QString &aId, int aFreeGames, int aGameInfo, bool aParallel) {
     _id         = aId;
-    _free_games = aFreeGames;
-    _game_info  = aGameInfo;
-    _request.get(gameUrl(_free_games, _game_info, _id), aParallel);
+    _freeGames = aFreeGames;
+    _gameInfo  = aGameInfo;
+    _request.get(gameUrl(_freeGames, _gameInfo, _id), aParallel);
     return *this;
 }
 
 void SGames::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("games"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("response").toObject().value("games"));
     emit s_finished(this);
     emit s_finished();
 }
@@ -94,7 +84,7 @@ void SGames::fromJson(const QJsonValue &aValue) {
 }
 
 SGames &SGames::update(bool aParallel) {
-    load(_id, _free_games, _game_info, aParallel);
+    load(_id, _freeGames, _gameInfo, aParallel);
     return *this;
 }
 
@@ -116,3 +106,32 @@ SGames &SGames::sort() {
     return *this;
 }
 #define SGamesEnd }
+
+SGamePlayers::SGamePlayers(const QJsonObject &game, QObject *parent): Sapi(parent) {
+    fromJson(game);
+}
+
+SGamePlayers::SGamePlayers(const int &appId, QObject *parent): Sapi(parent) {
+    load(appId, false);
+}
+
+SGamePlayers &SGamePlayers::operator=(const SGamePlayers &game) {
+    _appID = game._appID;
+    _numberPlayers = game._numberPlayers;
+    return *this;
+}
+
+SGamePlayers &SGamePlayers::load(int aAppId, bool aParalell) {
+    _appID = aAppId;
+    _request.get(numberPlayersUrl(QString::number(_appID)), aParalell);
+    return *this;
+}
+
+void SGamePlayers::onLoad() {
+    fromJson(QJsonDocument::fromJson(_request.reply()).object());
+}
+
+void SGamePlayers::fromJson(const QJsonValue &aValue) {
+    double playersCount = aValue.toObject().value("response").toObject().value("player_count").toDouble();
+    _numberPlayers = playersCount;
+}

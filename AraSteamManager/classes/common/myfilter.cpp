@@ -67,7 +67,7 @@ bool MyFilter::getData(int aRow) const {
                       "Row (" + QString::number(aRow) + ") does not exist. "
                       "Filter's row count is (" + QString::number(_row) + ")";
     }
-    return false;
+    return true;
 }
 
 MyFilter &MyFilter::addCol(int aColNum) {

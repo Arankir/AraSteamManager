@@ -29,7 +29,10 @@ signals:
 public slots:
     int AddThreadGames(const int columnID, const int columnIndex, const int columnIcon, const int columnName, const int columnComment, const int columnProgress,
                        const int columnCount, SGames games);
-    int AddThreadAchievements(const int columnAppid, const int columnIndex, const int columnIcon, const int columnTitle, const int columnDescription, const int columnComment, const int columnWorld, const int columnMy, const int columnCount,
+    int AddThreadAchievements(const int columnAppid, const int columnIndex, const int columnIcon,
+                              const int columnTitle, const int columnDescription, const int columnComment,
+                              const int columnWorld, const int columnMy, const int columnCount,
+                              const QColor achievedColor, const QColor notAchievedColor,
                               const SAchievements &achievements, int gameAppId);
     int AddThreadFriends(const int columnID, const int columnIndex, const int columnIcon, const int columnName, const int columnAdded, const int columnStatus, const int columnisPublic,
                          QList<QPair<SFriend, SProfile> > friends);

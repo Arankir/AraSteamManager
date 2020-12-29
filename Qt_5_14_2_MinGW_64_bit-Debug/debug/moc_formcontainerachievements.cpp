@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormContainerAchievements_t {
-    QByteArrayData data[18];
-    char stringdata0[231];
+    QByteArrayData data[16];
+    char stringdata0[206];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -44,20 +44,18 @@ QT_MOC_LITERAL(8, 109, 8), // "SProfile"
 QT_MOC_LITERAL(9, 118, 3), // "ids"
 QT_MOC_LITERAL(10, 122, 6), // "SGame&"
 QT_MOC_LITERAL(11, 129, 4), // "game"
-QT_MOC_LITERAL(12, 134, 3), // "num"
-QT_MOC_LITERAL(13, 138, 10), // "closeEvent"
-QT_MOC_LITERAL(14, 149, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(15, 162, 11), // "OnLoadImage"
-QT_MOC_LITERAL(16, 174, 13), // "RequestImage*"
-QT_MOC_LITERAL(17, 188, 42) // "on_TabWidgetAchievements_tabC..."
+QT_MOC_LITERAL(12, 134, 4), // "show"
+QT_MOC_LITERAL(13, 139, 10), // "closeEvent"
+QT_MOC_LITERAL(14, 150, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(15, 163, 42) // "on_TabWidgetAchievements_tabC..."
 
     },
     "FormContainerAchievements\0"
     "s_removeAchievements\0\0index\0s_formClose\0"
     "addFormAchievement\0SAchievementsPlayer&\0"
-    "pl\0SProfile\0ids\0SGame&\0game\0num\0"
-    "closeEvent\0QCloseEvent*\0OnLoadImage\0"
-    "RequestImage*\0on_TabWidgetAchievements_tabCloseRequested"
+    "pl\0SProfile\0ids\0SGame&\0game\0show\0"
+    "closeEvent\0QCloseEvent*\0"
+    "on_TabWidgetAchievements_tabCloseRequested"
 };
 #undef QT_MOC_LITERAL
 
@@ -79,19 +77,19 @@ static const uint qt_meta_data_FormContainerAchievements[] = {
        4,    0,   47,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    4,   48,    2, 0x0a /* Public */,
-      13,    1,   57,    2, 0x08 /* Private */,
-      15,    1,   60,    2, 0x08 /* Private */,
-      17,    1,   63,    2, 0x08 /* Private */,
+       5,    3,   48,    2, 0x0a /* Public */,
+      12,    0,   55,    2, 0x0a /* Public */,
+      13,    1,   56,    2, 0x08 /* Private */,
+      15,    1,   59,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 8, 0x80000000 | 10, QMetaType::Int,    7,    9,   11,   12,
+    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 8, 0x80000000 | 10,    7,    9,   11,
+    QMetaType::Void,
     QMetaType::Void, 0x80000000 | 14,    2,
-    QMetaType::Void, 0x80000000 | 16,    2,
     QMetaType::Void, QMetaType::Int,    3,
 
        0        // eod
@@ -105,22 +103,11 @@ void FormContainerAchievements::qt_static_metacall(QObject *_o, QMetaObject::Cal
         switch (_id) {
         case 0: _t->s_removeAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->s_formClose(); break;
-        case 2: _t->addFormAchievement((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< SProfile(*)>(_a[2])),(*reinterpret_cast< SGame(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4]))); break;
-        case 3: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 4: _t->OnLoadImage((*reinterpret_cast< RequestImage*(*)>(_a[1]))); break;
+        case 2: _t->addFormAchievement((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< SProfile(*)>(_a[2])),(*reinterpret_cast< SGame(*)>(_a[3]))); break;
+        case 3: _t->show(); break;
+        case 4: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 5: _t->on_TabWidgetAchievements_tabCloseRequested((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        switch (_id) {
-        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 4:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< RequestImage* >(); break;
-            }
-            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -175,7 +162,7 @@ int FormContainerAchievements::qt_metacall(QMetaObject::Call _c, int _id, void *
         _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 6)
-            qt_static_metacall(this, _c, _id, _a);
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 6;
     }
     return _id;

@@ -95,6 +95,7 @@ void FramelessWindow::animateResize(int width, int height) {
 }
 
 bool FramelessWindow::eventFilter(QObject *o, QEvent*e) {
+    Q_UNUSED(o);
     switch (e->type()) {
     case QEvent::MouseMove:
         mouseMove(static_cast<QMouseEvent*>(e));

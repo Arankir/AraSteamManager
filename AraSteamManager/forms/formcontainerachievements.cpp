@@ -4,12 +4,13 @@
 FormContainerAchievements::FormContainerAchievements(QWidget *parent): QWidget(parent), ui(new Ui::FormContainerAchievements) {
     ui->setupUi(this);
     if (parentWidget()) {
-        parentWidget()->setGeometry(Settings::getAchievementContainerGeometry());
-        parentWidget()->move(Settings::getAchievementContainerPos());
+        parentWidget()->setGeometry(Settings::achievementContainerGeometry());
+        parentWidget()->move(Settings::achievementContainerPos());
     }
 }
 
 FormContainerAchievements::~FormContainerAchievements() {
+    qInfo() << "Форма вкладок достижений удалилась";
     delete ui;
 }
 
@@ -30,7 +31,7 @@ void FormContainerAchievements::addFormAchievement(SAchievementsPlayer &aPl, SPr
     for (int i = 0; i < ui->TabWidgetAchievements->count(); ++i) {
         FormAchievements *achievements = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements->widget(i));
         if (achievements) {
-            if((achievements->getGameAppId() == aGame.appId()) && (achievements->getProfileId() == aProfile._steamID)) {
+            if((achievements->getGameAppId() == aGame.appId()) && (achievements->getProfileId() == aProfile.steamID())) {
                 achievements->buttonUpdate_Clicked();
                 ui->TabWidgetAchievements->setCurrentIndex(i);
                 return;

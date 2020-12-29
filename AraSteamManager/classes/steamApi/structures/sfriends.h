@@ -8,16 +8,21 @@ class SFriend : public QObject {
     Q_OBJECT
 public:
     explicit SFriend(const QJsonObject &aFriend = QJsonObject(), QObject *parent = nullptr): QObject(parent), _steamID(aFriend.value("steamid").toString()),
-        _relationship(aFriend.value("relationship").toString()), _friend_since(QDateTime::fromSecsSinceEpoch(aFriend.value("friend_since").toInt(), Qt::LocalTime)) {}
+        _relationship(aFriend.value("relationship").toString()), _friendSince(QDateTime::fromSecsSinceEpoch(aFriend.value("friend_since").toInt(), Qt::LocalTime)) {}
     SFriend(const SFriend &aFriend): QObject(aFriend.parent()), _steamID(aFriend._steamID),
-        _relationship(aFriend._relationship), _friend_since(aFriend._friend_since) {}
+        _relationship(aFriend._relationship), _friendSince(aFriend._friendSince) {}
 
     SFriend &operator=(const SFriend&);
     const bool &operator<(const SFriend&);
 
+    QString steamId()       const {return _steamID;}
+    QString relationship()  const {return _relationship;}
+    QDateTime friendSince() const {return _friendSince;}
+
+private:
     const QString _steamID;
     const QString _relationship;
-    const QDateTime _friend_since;
+    const QDateTime _friendSince;
 
 };
 
@@ -39,8 +44,8 @@ public:
 
     QList<SFriend>::iterator begin() {return _friends.begin();}
     QList<SFriend>::iterator end() {return _friends.end();}
-    int getCount() const {return _friends.size();}
-    SProfiles getProfiles() const;
+    int count()             const {return _friends.size();}
+    SProfiles profiles()    const;
 
 signals:
     void s_finished();

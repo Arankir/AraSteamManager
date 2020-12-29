@@ -38,11 +38,11 @@ bool SProfile::operator<(const SProfile &aProfile) {
 }
 
 void SProfile::load(bool aParallel) {
-    _request.get(profileUrl(_steamID), aParallel);
+    _request.get(Sapi::profileUrl(_steamID), aParallel);
 }
 
 void SProfile::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response").toObject().value("players").toArray().at(0).toObject());
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("response").toObject().value("players").toArray().at(0).toObject());
     emit s_finished(this);
     emit s_finished();
 }
@@ -75,15 +75,15 @@ SProfile &SProfile::update(bool aParallel) {
     return *this;
 }
 
-QPixmap SProfile::getPixmapAvatar() {
+QPixmap SProfile::pixmapAvatar() {
     return loadPixmap(_pixmapAvatar, _avatar, Paths::imagesProfiles(_avatar), QSize(32, 32));
 }
 
-QPixmap SProfile::getPixmapAvatarMedium() {
+QPixmap SProfile::pixmapAvatarMedium() {
     return loadPixmap(_pixmapAvatarMedium, _avatarMedium, Paths::imagesProfiles(_avatarMedium), QSize(64, 64));
 }
 
-QPixmap SProfile::getPixmapAvatarFull() {
+QPixmap SProfile::pixmapAvatarFull() {
     return loadPixmap(_pixmapAvatarFull, _avatarFull, Paths::imagesProfiles(_avatarFull), QSize(128, 128));
 }
 #define SProfileEnd }
@@ -123,7 +123,7 @@ SProfiles &SProfiles::load(QStringList aIds, bool aParallel, ProfileUrlType aTyp
 }
 
 void SProfiles::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("response"));
 }
 
 void SProfiles::fromJson(const QJsonValue &aValue) {
@@ -153,9 +153,11 @@ SProfiles &SProfiles::update(bool aParallel) {
 }
 
 SProfiles &SProfiles::sort() {
-    std::sort(_profile.begin(), _profile.end(), [](const SProfile &s1, const SProfile &s2)-> const bool {
-                                                    return s1._personaName.compare(s2._personaName, Qt::CaseInsensitive) < 0;
-                                                });
+    std::sort(_profile.begin(),
+              _profile.end(),
+              [](const SProfile &s1, const SProfile &s2) {
+                    return s1.personaName().compare(s2.personaName(), Qt::CaseInsensitive) < 0;
+                });
     return *this;
 }
 

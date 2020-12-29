@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Threading_t {
-    QByteArrayData data[69];
-    char stringdata0[972];
+    QByteArrayData data[71];
+    char stringdata0[1003];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -70,39 +70,41 @@ QT_MOC_LITERAL(32, 471, 11), // "columnTitle"
 QT_MOC_LITERAL(33, 483, 17), // "columnDescription"
 QT_MOC_LITERAL(34, 501, 11), // "columnWorld"
 QT_MOC_LITERAL(35, 513, 8), // "columnMy"
-QT_MOC_LITERAL(36, 522, 13), // "SAchievements"
-QT_MOC_LITERAL(37, 536, 12), // "achievements"
-QT_MOC_LITERAL(38, 549, 9), // "gameAppId"
-QT_MOC_LITERAL(39, 559, 16), // "AddThreadFriends"
-QT_MOC_LITERAL(40, 576, 11), // "columnAdded"
-QT_MOC_LITERAL(41, 588, 12), // "columnStatus"
-QT_MOC_LITERAL(42, 601, 14), // "columnisPublic"
-QT_MOC_LITERAL(43, 616, 31), // "QList<QPair<SFriend,SProfile> >"
-QT_MOC_LITERAL(44, 648, 7), // "friends"
-QT_MOC_LITERAL(45, 656, 19), // "AddThreadStatistics"
-QT_MOC_LITERAL(46, 676, 7), // "SGames&"
-QT_MOC_LITERAL(47, 684, 8), // "QString&"
-QT_MOC_LITERAL(48, 693, 2), // "id"
-QT_MOC_LITERAL(49, 696, 13), // "QVector<int>&"
-QT_MOC_LITERAL(50, 710, 5), // "numOf"
-QT_MOC_LITERAL(51, 716, 33), // "QVector<QPair<QString,QString..."
-QT_MOC_LITERAL(52, 750, 8), // "complete"
-QT_MOC_LITERAL(53, 759, 7), // "started"
-QT_MOC_LITERAL(54, 767, 10), // "notStarted"
-QT_MOC_LITERAL(55, 778, 16), // "QVector<double>&"
-QT_MOC_LITERAL(56, 795, 14), // "averagePercent"
-QT_MOC_LITERAL(57, 810, 4), // "int&"
-QT_MOC_LITERAL(58, 815, 10), // "summColumn"
-QT_MOC_LITERAL(59, 826, 5), // "times"
-QT_MOC_LITERAL(60, 832, 6), // "months"
-QT_MOC_LITERAL(61, 839, 29), // "QVector<QPair<QString,int> >&"
-QT_MOC_LITERAL(62, 869, 5), // "years"
-QT_MOC_LITERAL(63, 875, 27), // "AddThreadFriendAchievements"
-QT_MOC_LITERAL(64, 903, 13), // "QTableWidget*"
-QT_MOC_LITERAL(65, 917, 23), // "tableWidgetAchievements"
-QT_MOC_LITERAL(66, 941, 14), // "SAchievements&"
-QT_MOC_LITERAL(67, 956, 11), // "achievement"
-QT_MOC_LITERAL(68, 968, 3) // "col"
+QT_MOC_LITERAL(36, 522, 13), // "achievedColor"
+QT_MOC_LITERAL(37, 536, 16), // "notAchievedColor"
+QT_MOC_LITERAL(38, 553, 13), // "SAchievements"
+QT_MOC_LITERAL(39, 567, 12), // "achievements"
+QT_MOC_LITERAL(40, 580, 9), // "gameAppId"
+QT_MOC_LITERAL(41, 590, 16), // "AddThreadFriends"
+QT_MOC_LITERAL(42, 607, 11), // "columnAdded"
+QT_MOC_LITERAL(43, 619, 12), // "columnStatus"
+QT_MOC_LITERAL(44, 632, 14), // "columnisPublic"
+QT_MOC_LITERAL(45, 647, 31), // "QList<QPair<SFriend,SProfile> >"
+QT_MOC_LITERAL(46, 679, 7), // "friends"
+QT_MOC_LITERAL(47, 687, 19), // "AddThreadStatistics"
+QT_MOC_LITERAL(48, 707, 7), // "SGames&"
+QT_MOC_LITERAL(49, 715, 8), // "QString&"
+QT_MOC_LITERAL(50, 724, 2), // "id"
+QT_MOC_LITERAL(51, 727, 13), // "QVector<int>&"
+QT_MOC_LITERAL(52, 741, 5), // "numOf"
+QT_MOC_LITERAL(53, 747, 33), // "QVector<QPair<QString,QString..."
+QT_MOC_LITERAL(54, 781, 8), // "complete"
+QT_MOC_LITERAL(55, 790, 7), // "started"
+QT_MOC_LITERAL(56, 798, 10), // "notStarted"
+QT_MOC_LITERAL(57, 809, 16), // "QVector<double>&"
+QT_MOC_LITERAL(58, 826, 14), // "averagePercent"
+QT_MOC_LITERAL(59, 841, 4), // "int&"
+QT_MOC_LITERAL(60, 846, 10), // "summColumn"
+QT_MOC_LITERAL(61, 857, 5), // "times"
+QT_MOC_LITERAL(62, 863, 6), // "months"
+QT_MOC_LITERAL(63, 870, 29), // "QVector<QPair<QString,int> >&"
+QT_MOC_LITERAL(64, 900, 5), // "years"
+QT_MOC_LITERAL(65, 906, 27), // "AddThreadFriendAchievements"
+QT_MOC_LITERAL(66, 934, 13), // "QTableWidget*"
+QT_MOC_LITERAL(67, 948, 23), // "tableWidgetAchievements"
+QT_MOC_LITERAL(68, 972, 14), // "SAchievements&"
+QT_MOC_LITERAL(69, 987, 11), // "achievement"
+QT_MOC_LITERAL(70, 999, 3) // "col"
 
     },
     "Threading\0s_games_progress\0\0progress\0"
@@ -119,12 +121,12 @@ QT_MOC_LITERAL(68, 968, 3) // "col"
     "columnProgress\0columnCount\0SGames\0"
     "games\0AddThreadAchievements\0columnAppid\0"
     "columnTitle\0columnDescription\0columnWorld\0"
-    "columnMy\0SAchievements\0achievements\0"
-    "gameAppId\0AddThreadFriends\0columnAdded\0"
-    "columnStatus\0columnisPublic\0"
-    "QList<QPair<SFriend,SProfile> >\0friends\0"
-    "AddThreadStatistics\0SGames&\0QString&\0"
-    "id\0QVector<int>&\0numOf\0"
+    "columnMy\0achievedColor\0notAchievedColor\0"
+    "SAchievements\0achievements\0gameAppId\0"
+    "AddThreadFriends\0columnAdded\0columnStatus\0"
+    "columnisPublic\0QList<QPair<SFriend,SProfile> >\0"
+    "friends\0AddThreadStatistics\0SGames&\0"
+    "QString&\0id\0QVector<int>&\0numOf\0"
     "QVector<QPair<QString,QString> >&\0"
     "complete\0started\0notStarted\0"
     "QVector<double>&\0averagePercent\0int&\0"
@@ -163,10 +165,10 @@ static const uint qt_meta_data_Threading[] = {
 
  // slots: name, argc, parameters, tag, flags
       20,    8,  133,    2, 0x0a /* Public */,
-      30,   11,  150,    2, 0x0a /* Public */,
-      39,    8,  173,    2, 0x0a /* Public */,
-      45,   11,  190,    2, 0x0a /* Public */,
-      63,    4,  213,    2, 0x0a /* Public */,
+      30,   13,  150,    2, 0x0a /* Public */,
+      41,    8,  177,    2, 0x0a /* Public */,
+      47,   11,  194,    2, 0x0a /* Public */,
+      65,    4,  217,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -182,10 +184,10 @@ static const uint qt_meta_data_Threading[] = {
 
  // slots: parameters
     QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, 0x80000000 | 28,   21,   22,   23,   24,   25,   26,   27,   29,
-    QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, 0x80000000 | 36, QMetaType::Int,   31,   22,   23,   32,   33,   25,   34,   35,   27,   37,   38,
-    QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, 0x80000000 | 43,   21,   22,   23,   24,   40,   41,   42,   44,
-    QMetaType::Int, 0x80000000 | 46, 0x80000000 | 47, 0x80000000 | 49, 0x80000000 | 51, 0x80000000 | 51, 0x80000000 | 51, 0x80000000 | 55, 0x80000000 | 57, 0x80000000 | 49, 0x80000000 | 49, 0x80000000 | 61,   29,   48,   50,   52,   53,   54,   56,   58,   59,   60,   62,
-    QMetaType::Int, 0x80000000 | 64, 0x80000000 | 66, QMetaType::Int, QMetaType::Int,   65,   67,   68,   31,
+    QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::QColor, QMetaType::QColor, 0x80000000 | 38, QMetaType::Int,   31,   22,   23,   32,   33,   25,   34,   35,   27,   36,   37,   39,   40,
+    QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, QMetaType::Int, 0x80000000 | 45,   21,   22,   23,   24,   42,   43,   44,   46,
+    QMetaType::Int, 0x80000000 | 48, 0x80000000 | 49, 0x80000000 | 51, 0x80000000 | 53, 0x80000000 | 53, 0x80000000 | 53, 0x80000000 | 57, 0x80000000 | 59, 0x80000000 | 51, 0x80000000 | 51, 0x80000000 | 63,   29,   50,   52,   54,   55,   56,   58,   60,   61,   62,   64,
+    QMetaType::Int, 0x80000000 | 66, 0x80000000 | 68, QMetaType::Int, QMetaType::Int,   67,   69,   70,   31,
 
        0        // eod
 };
@@ -208,7 +210,7 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 9: _t->s_achievements_finished((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 10: { int _r = _t->AddThreadGames((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])),(*reinterpret_cast< const int(*)>(_a[4])),(*reinterpret_cast< const int(*)>(_a[5])),(*reinterpret_cast< const int(*)>(_a[6])),(*reinterpret_cast< const int(*)>(_a[7])),(*reinterpret_cast< SGames(*)>(_a[8])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 11: { int _r = _t->AddThreadAchievements((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])),(*reinterpret_cast< const int(*)>(_a[4])),(*reinterpret_cast< const int(*)>(_a[5])),(*reinterpret_cast< const int(*)>(_a[6])),(*reinterpret_cast< const int(*)>(_a[7])),(*reinterpret_cast< const int(*)>(_a[8])),(*reinterpret_cast< const int(*)>(_a[9])),(*reinterpret_cast< const SAchievements(*)>(_a[10])),(*reinterpret_cast< int(*)>(_a[11])));
+        case 11: { int _r = _t->AddThreadAchievements((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])),(*reinterpret_cast< const int(*)>(_a[4])),(*reinterpret_cast< const int(*)>(_a[5])),(*reinterpret_cast< const int(*)>(_a[6])),(*reinterpret_cast< const int(*)>(_a[7])),(*reinterpret_cast< const int(*)>(_a[8])),(*reinterpret_cast< const int(*)>(_a[9])),(*reinterpret_cast< const QColor(*)>(_a[10])),(*reinterpret_cast< const QColor(*)>(_a[11])),(*reinterpret_cast< const SAchievements(*)>(_a[12])),(*reinterpret_cast< int(*)>(_a[13])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 12: { int _r = _t->AddThreadFriends((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])),(*reinterpret_cast< const int(*)>(_a[4])),(*reinterpret_cast< const int(*)>(_a[5])),(*reinterpret_cast< const int(*)>(_a[6])),(*reinterpret_cast< const int(*)>(_a[7])),(*reinterpret_cast< QList<QPair<SFriend,SProfile> >(*)>(_a[8])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;

@@ -45,12 +45,12 @@ GroupGames &GroupGames::fromJson(const QJsonObject &aObject) {
     return *this;
 }
 
-GroupsGames::GroupsGames(const SProfile &profile) : _profileId(profile._steamID) {
+GroupsGames::GroupsGames(const SProfile &profile) : _profileId(profile.steamID()) {
     init();
 }
 
 void GroupsGames::setProfile(const SProfile &aProfile) {
-    _profileId = aProfile._steamID;
+    _profileId = aProfile.steamID();
     init();
 }
 

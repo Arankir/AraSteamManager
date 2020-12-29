@@ -22,7 +22,7 @@ SFriends &SFriends::load(const QString &aId, bool aParallel) {
 }
 
 void SFriends::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("friendslist").toObject().value("friends"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("friendslist").toObject().value("friends"));
     emit s_finished();
 }
 
@@ -39,10 +39,10 @@ void SFriends::fromJson(const QJsonValue &aValue) {
     }
 }
 
-SProfiles SFriends::getProfiles() const {
+SProfiles SFriends::profiles() const {
     QStringList ids;
     for (auto steamFriend: _friends) {
-        ids << steamFriend._steamID;
+        ids << steamFriend.steamId();
     }
     return SProfiles(ids, false, ProfileUrlType::id);
 }
@@ -63,10 +63,8 @@ SFriends &SFriends::sort() {
     return *this;
 }
 
-SFriends::SFriends(const SFriends &aFriends) {
-    Sapi::operator=(aFriends);
-    _friends    = aFriends._friends;
-    _id         = aFriends._id;
+SFriends::SFriends(const SFriends &aFriends): Sapi(aFriends), _id(aFriends._id), _friends(aFriends._friends) {
+
 }
 
 SFriends &SFriends::operator=(const SFriends &aFriends) {

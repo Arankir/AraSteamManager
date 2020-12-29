@@ -74,31 +74,31 @@ QStandardItem *getPrivacy(int aCommunityVisibilityState) {
 }
 
 int ThreadFriends::fill() {
-    QFont font(Settings::getFontDefaultName(), 9);
+//    QFont font(Settings::defaultFont(), 9);
     int row = 0;
     QStandardItemModel *model = new QStandardItemModel;
 
     for (auto friendP: _friends) {
-        QStandardItem *itemId = new QStandardItem(friendP.second._steamID);
+        QStandardItem *itemId = new QStandardItem(friendP.second.steamID());
 
         QStandardItem *itemIndex = new QStandardItem(QString::number(row));
 
         QStandardItem *itemIcon = new QStandardItem();
-        itemIcon->setData(QVariant(friendP.second.getPixmapAvatar()), Qt::DecorationRole);
+        itemIcon->setData(QVariant(friendP.second.pixmapAvatar()), Qt::DecorationRole);
         itemIcon->setFlags(Qt::ItemFlag::ItemIsEnabled);
 
-        QStandardItem *itemNickName = new QStandardItem(friendP.second._personaName);
+        QStandardItem *itemNickName = new QStandardItem(friendP.second.personaName());
 
-        QStandardItem *itemAdded = new QStandardItem(friendP.first._friend_since.toString("yyyy.MM.dd hh:mm"));
+        QStandardItem *itemAdded = new QStandardItem(friendP.first.friendSince().toString("yyyy.MM.dd hh:mm"));
 
-        QStandardItem *itemState = getState(friendP.second._gameExtraInfo, friendP.second._personaState);
+        QStandardItem *itemState = getState(friendP.second.gameExtraInfo(), friendP.second.personaState());
 
-        QStandardItem *itemPrivacy = getPrivacy(friendP.second._communityVisibilityState);
+        QStandardItem *itemPrivacy = getPrivacy(friendP.second.communityVisibilityState());
 
-        itemNickName->setFont(font);
-        itemAdded   ->setFont(font);
-        itemState   ->setFont(font);
-        itemPrivacy ->setFont(font);
+//        itemNickName->setFont(font);
+//        itemAdded   ->setFont(font);
+//        itemState   ->setFont(font);
+//        itemPrivacy ->setFont(font);
 
         model->setItem(row, c_tableColumnID, itemId);
         model->setItem(row, c_tableColumnIndex, itemIndex);

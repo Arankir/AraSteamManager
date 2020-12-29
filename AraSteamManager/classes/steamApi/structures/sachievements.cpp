@@ -2,9 +2,9 @@
 
 #define SAchievementStart {
 SAchievement::SAchievement(SAchievementGlobal &aGlobal, SAchievementPlayer &aPlayer, SAchievementPercentage &aPercent, QObject *aParent):
-QObject(aParent), _apiName(aGlobal._apiName), _defaultValue(aGlobal._defaultValue), _displayName(aGlobal._displayName), _hidden(aGlobal._hidden),
-_description(aGlobal._description), _achieved(aPlayer._achieved), _unlockTime(aPlayer._unlockTime),
-_percent(aPercent._percent), _icon(aGlobal._icon), _iconGray(aGlobal._iconGray) {
+QObject(aParent), _apiName(aGlobal.apiName()), _defaultValue(aGlobal.defaultValue()), _displayName(aGlobal.displayName()), _hidden(aGlobal.hidden()),
+_description(aGlobal.description()), _achieved(aPlayer.achieved()), _unlockTime(aPlayer.unlockTime()),
+_percent(aPercent.percent()), _icon(aGlobal.icon()), _iconGray(aGlobal.iconGray()) {
     //qDebug()<<"SAchievement constructor"<<_apiName;
 }
 
@@ -57,23 +57,25 @@ QString SAchievement::toString() const {
     return QJsonDocument(object).toJson(QJsonDocument::Compact);
 }
 
-QPixmap SAchievement::getIcon(int aGameId) {
+QPixmap SAchievement::icon(int aGameId) {
     return loadPixmap(_pixmapIcon, _icon, Paths::imagesAchievements(QString::number(aGameId), _icon), QSize(64, 64));
 }
 
-QPixmap SAchievement::getIconGray(int aGameId) {
+QPixmap SAchievement::iconGray(int aGameId) {
     return loadPixmap(_pixmapIconGray, _iconGray, Paths::imagesAchievements(QString::number(aGameId), _iconGray), QSize(64, 64));
 }
 #define SAchievementEnd }
 
 #define MultipleAchievements {
 #define SAchievementsGlobalStart {
-SAchievementsGlobal::SAchievementsGlobal(const QString &aAppid, bool aParallel, QObject *aParent): Sapi(aParent), _appid(aAppid) {
+SAchievementsGlobal::SAchievementsGlobal(const QString &aAppid, bool aParallel): Sapi(), _appid(aAppid) {
     update(aParallel);
 }
 
 SAchievementsGlobal &SAchievementsGlobal::operator=(const SAchievementsGlobal &aAchievements) {
-    Sapi::operator=(aAchievements);
+    _status = aAchievements._status;
+    _error = aAchievements._error;
+    //Sapi::operator=(aAchievements);
     _achievements   = aAchievements._achievements;
     _appid          = aAchievements._appid;
     _gameName       = aAchievements._gameName;
@@ -94,7 +96,7 @@ SAchievementsGlobal &SAchievementsGlobal::load(const QString &aAppid, bool aPara
 }
 
 void SAchievementsGlobal::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("game"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("game"));
     emit s_finished();
 }
 
@@ -126,13 +128,15 @@ SAchievementsGlobal &SAchievementsGlobal::clear() {
 }
 #define SAchievementsGlobalEnd }
 #define SAchievementsPercentageStart {
-SAchievementsPercentage::SAchievementsPercentage(const QString &aAppid, bool aParallel, QObject *aParent): Sapi(aParent), _appid(aAppid) {
+SAchievementsPercentage::SAchievementsPercentage(const QString &aAppid, bool aParallel): Sapi(), _appid(aAppid) {
     //qDebug() << "constructor 1" << _appid;
     load(_appid, aParallel);
 }
 
 SAchievementsPercentage &SAchievementsPercentage::operator=(const SAchievementsPercentage &aAchievements) {
-    Sapi::operator=(aAchievements);
+    _status = aAchievements._status;
+    _error = aAchievements._error;
+    //Sapi::operator=(aAchievements);
     _achievements   = aAchievements._achievements;
     _appid          = aAchievements._appid;
     //qDebug() << "equality" << _appid;
@@ -146,7 +150,7 @@ SAchievementsPercentage &SAchievementsPercentage::load(const QString &aAppid, bo
 }
 
 void SAchievementsPercentage::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("achievementpercentages").toObject().value("achievements"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("achievementpercentages").toObject().value("achievements"));
     emit s_finished();
 }
 
@@ -181,13 +185,15 @@ SAchievementsPercentage &SAchievementsPercentage::remove(int aIndex) {
 }
 #define SAchievementsPercentageEnd }
 #define SAchievementsPlayerStart {
-SAchievementsPlayer::SAchievementsPlayer(const QString &aAppid, const QString &aId, bool aParallel, QObject *aParent): Sapi(aParent), _id(aId), _appid(aAppid) {
+SAchievementsPlayer::SAchievementsPlayer(const QString &aAppid, const QString &aId, bool aParallel): Sapi(), _id(aId), _appid(aAppid) {
     //qDebug() << "SAchievementsPlayer constructor 1" << _id << _appid;
     load(_appid, _id, aParallel);
 }
 
 SAchievementsPlayer &SAchievementsPlayer::operator=(const SAchievementsPlayer &aAchievements) {
-    Sapi::operator=(aAchievements);
+    _status = aAchievements._status;
+    _error = aAchievements._error;
+    //Sapi::operator=(aAchievements);
     _achievements   = aAchievements._achievements;
     _appid          = aAchievements._appid;
     _id             = aAchievements._id;
@@ -204,7 +210,7 @@ SAchievementsPlayer &SAchievementsPlayer::load(const QString &aAppid, const QStr
 }
 
 void SAchievementsPlayer::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("playerstats"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("playerstats"));
     emit s_finished(this);
 }
 
@@ -264,11 +270,8 @@ SAchievements &SAchievements::operator=(const SAchievements &aAchievements) {
     _finish         = aAchievements._finish;
     _status         = aAchievements._status;
     _error          = aAchievements._error;
-//    _id             = aAchievements._id;
-//    _appid          = aAchievements._appid;
     _gameName       = aAchievements._gameName;
     _gameVersion    = aAchievements._gameVersion;
-    //qDebug() << "equence";
     return *this;
 }
 
@@ -287,13 +290,13 @@ void SAchievements::setStatus(StatusValue aStatus) {
     }
     case StatusValue::error: {
         QStringList needList;
-        if (_global.getStatus() != StatusValue::success) {
+        if (!_global.isLoad()) {
             needList.append(tr("global"));
         }
-        if (_player.getStatus() != StatusValue::success) {
+        if (!_player.isLoad()) {
             needList.append(tr("player"));
         }
-        if (_percent.getStatus() != StatusValue::success) {
+        if (!_percent.isLoad()) {
             needList.append(tr("percent"));
         }
         _error = tr("Need data of (");
@@ -303,6 +306,7 @@ void SAchievements::setStatus(StatusValue aStatus) {
     }
     case StatusValue::success: {
         _error  = "none";
+        break;
     }
     }
 }
@@ -340,14 +344,13 @@ SAchievements &SAchievements::set(const SAchievementsPercentage &aPercent) {
 }
 
 SAchievements &SAchievements::setFinish() {
-    if((_global.getStatus() == StatusValue::success) && (_player.getStatus() == StatusValue::success) && (_percent.getStatus() == StatusValue::success)) {
-        //qDebug()<<"Finish set";
+    if((_global.isLoad()) && (_player.isLoad()) && (_percent.isLoad())) {
         clear();
         for (auto &percent: _percent) {
             int globalIndex = -1;
             for (auto &player: _player) {
-                auto global = std::move(_global[++globalIndex]);
-                if (percent._apiName == player._apiName) {
+                auto global = _global[++globalIndex];
+                if (percent.apiName() == player.apiName()) {
                     _finish.push_back(std::move(SAchievement(global, player, percent)));
                     break;
                 }

@@ -1,13 +1,20 @@
 #include "categoriesgame.h"
 
-Categories::Categories(SGame &aGame, QObject *aParent): QObject(aParent), _game(aGame) {
+Categories::Categories(SGame &aGame, QObject *aParent): QObject(aParent), _gameName(aGame.name()), _gameId(aGame.appId()) {
     update();
 }
 
+Categories::Categories(int aGameId, QObject *aParent): QObject(aParent), _gameId(aGameId) {
+    update();
+}
+
+Categories::Categories(const QJsonObject &aObject, QObject *aParent): QObject(aParent) {
+    fromJson(aObject);
+}
+
 void Categories::setGame(SGame aGame) {
-    _game = aGame;
-    _gameName = _game.name();
-    _gameId = _game.appId();
+    _gameName = aGame.name();
+    _gameId = aGame.appId();
     update();
 }
 
@@ -103,7 +110,7 @@ int Categories::countAll() const {
 
 void Categories::save(QJsonObject aCategories) {
     createDir(Paths::categories());
-    QFile fileCategory(Paths::categories(_game.sAppId()));
+    QFile fileCategory(Paths::categories(QString::number(_gameId)));
     fileCategory.open(QFile::WriteOnly);
     fileCategory.write(QJsonDocument(aCategories).toJson());
     fileCategory.close();
@@ -111,7 +118,7 @@ void Categories::save(QJsonObject aCategories) {
 
 void Categories::load() {
     _categories.clear();
-    QFile fileCategory(Paths::categories(_game.sAppId()));
+    QFile fileCategory(Paths::categories(QString::number(_gameId)));
     if (fileCategory.exists()) {
         if (fileCategory.open(QFile::ReadOnly)) {
             fromJson(QJsonDocument().fromJson(fileCategory.readAll()).object());
@@ -124,23 +131,23 @@ void Categories::load() {
 }
 
 void Categories::fromJson(QJsonObject aCategories) {
-    _gameName = aCategories.value("Game").toString();
-    _gameId   = aCategories.value("GameID").toInt();
-    for(auto category: aCategories.value("Categories").toArray()) {
+    _gameName = aCategories.value("game").toString();
+    _gameId   = aCategories.value("gameID").toInt();
+    for(auto category: aCategories.value("categories").toArray()) {
         _categories.append(Category(category.toObject()));
     }
 }
 
 QJsonObject Categories::toJson() const {
     QJsonObject obj;
-    obj["Game"] = _gameName;
-    obj["GameID"] = _gameId;
-    obj["Version"] = "1.0";
+    obj["game"] = _gameName;
+    obj["gameID"] = _gameId;
+    obj["version"] = "1.0";
     QJsonArray categoriesArr;
     for(auto category: _categories) {
         categoriesArr.append(category.toJson());
     }
-    obj["Categories"] = categoriesArr;
+    obj["categories"] = categoriesArr;
     return obj;
 }
 

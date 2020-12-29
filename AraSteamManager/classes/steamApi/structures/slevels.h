@@ -14,7 +14,7 @@ public:
     SLevels &load(const QString &steamId);
     SLevels &update();
 
-    int getLevel() const {return _player_level;}
+    int level() const {return _playerLevel;}
 
 signals:
     void s_finished(SLevels*);
@@ -25,8 +25,8 @@ private slots:
     void fromJson(const QJsonValue &value) override;
 
 private:
-    QString _steamid;//"76561198065018572"
-    int _player_level = 0;
+    QString _steamId;//"76561198065018572"
+    int _playerLevel = 0;
 
 };
 

@@ -21,7 +21,7 @@
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "classes\notMine\multiselectcombobox.h"
+#include "subWidgets/comboBoxes/multiselectcombobox.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -66,7 +66,6 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(LineEditGame->sizePolicy().hasHeightForWidth());
         LineEditGame->setSizePolicy(sizePolicy);
-        LineEditGame->setFont(font);
 
         horizontalLayout->addWidget(LineEditGame);
 

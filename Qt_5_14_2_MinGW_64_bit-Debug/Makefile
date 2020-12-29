@@ -280,9 +280,10 @@ Makefile: ../AraSteamManager/AraSteamManager.pro C:/Qt/5.14.2/mingw73_64/mkspecs
 		C:/Qt/5.14.2/mingw73_64/lib/Qt5Core.prl \
 		C:/Qt/5.14.2/mingw73_64/lib/qtmain.prl \
 		C:/Qt/5.14.2/mingw73_64/mkspecs/features/build_pass.prf \
-		../AraSteamManager/images/resimg.qrc \
-		../AraSteamManager/languages/lang.qrc \
-		../AraSteamManager/themes/thm.qrc
+		../AraSteamManager/resources/fonts/fonts.qrc \
+		../AraSteamManager/resources/images/img.qrc \
+		../AraSteamManager/resources/languages/lang.qrc \
+		../AraSteamManager/resources/themes/thm.qrc
 	$(QMAKE) -o Makefile ..\AraSteamManager\AraSteamManager.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 C:/Qt/5.14.2/mingw73_64/mkspecs/features/spec_pre.prf:
 C:/Qt/5.14.2/mingw73_64/mkspecs/qdevice.pri:
@@ -494,9 +495,10 @@ C:/Qt/5.14.2/mingw73_64/lib/Qt5Network.prl:
 C:/Qt/5.14.2/mingw73_64/lib/Qt5Core.prl:
 C:/Qt/5.14.2/mingw73_64/lib/qtmain.prl:
 C:/Qt/5.14.2/mingw73_64/mkspecs/features/build_pass.prf:
-../AraSteamManager/images/resimg.qrc:
-../AraSteamManager/languages/lang.qrc:
-../AraSteamManager/themes/thm.qrc:
+../AraSteamManager/resources/fonts/fonts.qrc:
+../AraSteamManager/resources/images/img.qrc:
+../AraSteamManager/resources/languages/lang.qrc:
+../AraSteamManager/resources/themes/thm.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\AraSteamManager\AraSteamManager.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

@@ -12,6 +12,7 @@ FormCategoriesEdit::FormCategoriesEdit(QWidget *aParent) : FormCategoriesEdit(SG
 }
 
 FormCategoriesEdit::~FormCategoriesEdit() {
+    qInfo() << "Форма редактирования категорий удалилась";
     delete ui;
 }
 
@@ -27,6 +28,11 @@ void FormCategoriesEdit::setGame(SGame &aGame) {
 void FormCategoriesEdit::setAchievements(SAchievements &aAchievements) {
     _achievements = aAchievements;
     achievementsToUi();
+}
+
+void FormCategoriesEdit::setFilter(MyFilter *aFilter) {
+    _fAchievements = aFilter;
+    updateHiddenItems();
 }
 
 void FormCategoriesEdit::achievementsToUi() {
@@ -88,10 +94,10 @@ void FormCategoriesEdit::setIcons() {
 int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, int aRow) {
     QListWidgetAchievement *achievement = dynamic_cast<QListWidgetAchievement*>(aListWidget->item(aRow));
     if (achievement) {
-        QString apiName = achievement->_achievement->_apiName;
+        QString apiName = achievement->_achievement->apiName();
         int index = 0;
         for(const auto &ach: _achievements) {
-            if (ach._apiName == apiName) {
+            if (ach.apiName() == apiName) {
                 return index;
             }
             ++index;
@@ -100,10 +106,12 @@ int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, int aRow) {
     return -1;
 }
 
-void FormCategoriesEdit::updateFilter(const MyFilter &aFilter) {
-//Неправильно сортирует, не учитывает перестановку
+void FormCategoriesEdit::updateHiddenItems() {
+    if (_fAchievements == nullptr) {
+        return;
+    }
     for(int row = 0; row < ui->ListWidgetAll->count(); ++row) {
-        ui->ListWidgetAll->setRowHidden(row, !aFilter.getData(indexFromRow(ui->ListWidgetAll, row)));
+        ui->ListWidgetAll->setRowHidden(row, !_fAchievements->getData(indexFromRow(ui->ListWidgetAll, row)));
     }
 }
 
@@ -180,7 +188,7 @@ void FormCategoriesEdit::changeCategory(Category *aCategory, int aGlobalIndex) {
     changeEditType(EditType::change);
     ui->LineEditTitleCategory->setText(aCategory->title());
 
-    QFont font(Settings::getFontDefaultName(), 11);
+//    QFont font(Settings::defaultFont(), 11);
     ui->ListWidgetAll->clear();
     ui->ListWidgetCategory->clear();
     auto achievementList = aCategory->achievements();
@@ -188,13 +196,13 @@ void FormCategoriesEdit::changeCategory(Category *aCategory, int aGlobalIndex) {
         bool isInCategory = std::any_of(achievementList.begin(),
                                         achievementList.end(),
                                         [=](QString &aAchievement) {
-                                            return aAchievement == achievement._apiName;
+                                            return aAchievement == achievement.apiName();
                                         });
         QListWidgetAchievement *item = new QListWidgetAchievement(&achievement);
-        item->setIcon(achievement.getIcon(_game.appId()));
-        item->setText(achievement._displayName);
-        item->setToolTip(achievement._description);
-        item->setFont(font);
+        item->setIcon(achievement.icon(_game.appId()));
+        item->setText(achievement.displayName());
+        item->setToolTip(achievement.description());
+//        item->setFont(font);
         if (isInCategory) {
             ui->ListWidgetCategory->addItem(item);
         } else {
@@ -208,7 +216,7 @@ void FormCategoriesEdit::changeCategory(Category *aCategory, int aGlobalIndex) {
         QListWidgetItem *item = new QListWidgetItem();
         item->setText(subCategory.title());
         item->setWhatsThis(QString::number(row));
-        item->setFont(font);
+//        item->setFont(font);
         item->setFlags(Qt::ItemFlag::ItemIsEditable | item->flags());
         ui->ListWidgetSubCategories->addItem(item);
         ++row;
@@ -391,7 +399,7 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
     QList<QString> achievements;
     for(int i = 0; i < ui->ListWidgetCategory->count(); ++i) {
         if (auto item = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetCategory->item(i))) {
-            achievements.append(item->_achievement->_apiName);
+            achievements.append(item->_achievement->apiName());
         }
     }
 

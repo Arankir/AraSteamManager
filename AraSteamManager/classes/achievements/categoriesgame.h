@@ -63,8 +63,11 @@ class Categories : public QObject {
     Q_OBJECT
 public:
     explicit Categories(SGame &game, QObject *parent = nullptr);
+    explicit Categories(int gameId, QObject *parent = nullptr);
+             Categories(const QJsonObject &object, QObject *parent = nullptr);
     explicit Categories(QObject *parent = nullptr): QObject(parent) {}
-    Categories(const Categories &categories): QObject(categories.parent()), _categories(categories._categories), _game(categories._game) {}
+    Categories(const Categories &categories): QObject(categories.parent()), _categories(categories._categories),
+        _gameName(categories._gameName), _gameId(categories._gameId) {}
     Category &operator[](const int index) {return _categories[index];}
 
     void setGame(SGame game);
@@ -81,8 +84,8 @@ public:
 
     QList<Category>::iterator begin()   {return _categories.begin();}
     QList<Category>::iterator end()     {return _categories.end();}
-    QString getGame()           const   {return _gameName;}
-    int getGameID()             const   {return _gameId;}
+    QString game()              const   {return _gameName;}
+    int gameID()                const   {return _gameId;}
     int countTopCategories()    const   {return _categories.count();}
     int countAll()              const;
     QJsonObject toJson()        const;  //Потом заменить на другой вид хранения данных
@@ -100,7 +103,6 @@ private slots:
 
 private:
     QList<Category> _categories;
-    SGame _game;
 
     QString _gameName;
     int _gameId;

@@ -17,11 +17,17 @@ public slots:
 //    void setFriend(QTableWidget *TableWidgetAchievements, SAchievements achievement, int col, int AcolumnAppid);
 
 public:
-    explicit ThreadAchievements(const SAchievements &achievements, int gameAppId, const int columnAppid, const int columnIndex, const int columnIcon, const int columnTitle,
-                                const int columnDescription, const int columnComment, const int columnWorld, const int columnMy, const int columnCount, QObject *parent = nullptr):
-        QObject(parent), c_columnAppid(columnAppid), c_columnIndex(columnIndex), c_columnIcon(columnIcon), c_columnTitle(columnTitle), c_columnDescription(columnDescription),
-        c_columnComment(columnComment), c_columnWorld(columnWorld), c_columnMy(columnMy), c_columnCount(columnCount), _gameAppId(gameAppId), _achievements(achievements) {}
-    explicit ThreadAchievements(QObject *parent = nullptr): ThreadAchievements(nullptr, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, parent) {}
+    explicit ThreadAchievements(const SAchievements &achievements, int gameAppId, const int columnAppid,
+                                const int columnIndex, const int columnIcon, const int columnTitle,
+                                const int columnDescription, const int columnComment, const int columnWorld,
+                                const int columnMy, const int columnCount, const QColor achievedColor,
+                                QColor notAchievedColor, QObject *parent = nullptr):
+        QObject(parent), c_columnAppid(columnAppid), c_columnIndex(columnIndex), c_columnIcon(columnIcon),
+        c_columnTitle(columnTitle), c_columnDescription(columnDescription), c_columnComment(columnComment),
+        c_columnWorld(columnWorld), c_columnMy(columnMy), c_columnCount(columnCount), c_achievedColor(achievedColor),
+        c_notAchievedColor(notAchievedColor), _gameAppId(gameAppId), _achievements(achievements) {}
+    explicit ThreadAchievements(QObject *parent = nullptr):
+        ThreadAchievements(nullptr, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, QColor(), QColor(), parent) {}
     ~ThreadAchievements() {qInfo() << "Thread achievements deleted";}
 
 signals:
@@ -40,6 +46,9 @@ private:
     const int c_columnWorld;
     const int c_columnMy;
     const int c_columnCount;
+
+    const QColor c_achievedColor;
+    const QColor c_notAchievedColor;
     int _gameAppId;
     SAchievements _achievements;
 

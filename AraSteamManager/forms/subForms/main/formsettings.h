@@ -6,11 +6,45 @@
 #include <QFormLayout>
 #include <QPair>
 #include <QTranslator>
+#include <QTreeWidgetItem>
+#include <QFileDialog>
 #include "classes/network/requestimage.h"
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sgames.h"
+#include "classes/achievements/categoriesgame.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/withData/qradiobuttonwithdata.h"
+
+enum class ExportType {
+    unknown,
+    categories,
+    favorites,
+    comments,
+    groups,
+    multiple
+};
+
+QString exportTypeToString(ExportType aType);
+ExportType stringToExportType(QString aType);
+
+struct ExportFileData {
+    QJsonValue data;
+    ExportType type;
+    double version;
+    QDateTime date;
+
+    static ExportFileData fromJson(QJsonObject object);
+    QJsonObject toJson();
+};
+
+struct ExportCategory {
+    int gameId;
+    QString gameName;
+    Category category;
+
+    static ExportCategory fromJson(QJsonObject object);
+    QJsonObject toJson();
+};
 
 namespace Ui {
 class FormSettings;
@@ -32,12 +66,14 @@ signals:
 private slots:
     void changeEvent(QEvent *event);
     void initComponents();
+    void initExport();
 
     void radioButtonLanguageEnglish_Clicked();
     void radioButtonLanguageRussian_Clicked();
 
     void radioButtonDarkTheme_Clicked();
     void radioButtonLightTheme_Clicked();
+    void radioButtonBlueTheme_Clicked();
 
     void radioButtonHiddenGames_Clicked();
 
@@ -51,6 +87,10 @@ private slots:
     void slideProfileSize_ValueChanged(int value);
 
     void comboBoxMaxTableRows(int index);
+    int recursAddCategoryToTree(Category &aCategory, int aCount, QTreeWidgetItem *aRoot, const int &aGameId);
+    void buttonExportCategories_Clicked();
+    void buttonImportCategories_Clicked();
+    ExportFileData createExportCategoriesJson();
 private:
     Ui::FormSettings *ui;
     Settings _setting;

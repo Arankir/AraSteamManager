@@ -76,9 +76,9 @@ void Favorites::saveAll() {
 
 bool Favorites::addGame(const QString &aIdUser, const SGame &aGame, bool aElseRemove) {
     auto iterator = std::find_if(_fGame.begin(), _fGame.end(), [=](FavoriteGame &game) {
-                                                                    return (aIdUser == game.getUserId())
-                                                                            && (aGame.appId() == game.getAppid())
-                                                                            && (aGame.name() == game.getName());
+                                                                    return (aIdUser == game.steamId())
+                                                                            && (aGame.appId() == game.appId())
+                                                                            && (aGame.name() == game.name());
                                                                 });
     if (iterator == _fGame.end()) {
         _fGame.append(FavoriteGame(aIdUser, aGame));
@@ -95,16 +95,16 @@ bool Favorites::addGame(const QString &aIdUser, const SGame &aGame, bool aElseRe
 
 bool Favorites::addFriend(const QString &aIdUser, const SProfile &aProfileFriend, const SFriend &aFriendLink, bool aElseRemove) {
     auto iterator = std::find_if(_fFriend.begin(), _fFriend.end(), [=](FavoriteFriend &steamFriend) {
-                                                                        return (aIdUser == steamFriend.getUserId())
-                                                                                && (aProfileFriend._personaName == steamFriend.getName())
-                                                                                && (aProfileFriend._steamID == steamFriend.getId());
+                                                                        return (aIdUser == steamFriend.steamId())
+                                                                                && (aProfileFriend.personaName() == steamFriend.name())
+                                                                                && (aProfileFriend.steamID() == steamFriend.friendId());
                                                                     });
     if (iterator == _fFriend.end()) {
-        _fFriend.append(FavoriteFriend(aIdUser, aFriendLink._friend_since, aProfileFriend._steamID, aProfileFriend._personaName));
+        _fFriend.append(FavoriteFriend(aIdUser, aFriendLink.friendSince(), aProfileFriend.steamID(), aProfileFriend.personaName()));
         saveFriends();
         return true;
     } else {
-        (*iterator).setAdded(aFriendLink._friend_since);
+        (*iterator).setAdded(aFriendLink.friendSince());
         if (aElseRemove) {
             removeFriend(aIdUser, aProfileFriend, aFriendLink);
         }
@@ -113,9 +113,9 @@ bool Favorites::addFriend(const QString &aIdUser, const SProfile &aProfileFriend
 }
 
 bool Favorites::addAchievement(const QString &aIdUser, const SGame &aGame, const SAchievement &aAchievement, bool aElseRemove) {
-    bool result = getAchievementsGame(aIdUser, aGame).addAchievement(aAchievement);
+    bool result = achievementsGame(aIdUser, aGame).addAchievement(aAchievement);
     if (aElseRemove && !result) {
-        getAchievementsGame(aIdUser, aGame).removeAchievement(aAchievement);
+        achievementsGame(aIdUser, aGame).removeAchievement(aAchievement);
     }
     saveAchievements();
     return result;
@@ -123,9 +123,9 @@ bool Favorites::addAchievement(const QString &aIdUser, const SGame &aGame, const
 
 bool Favorites::removeGame(const QString &aIdUser, const SGame &aGame, bool aElseCreate) {
     auto iterator = std::remove_if(_fGame.begin(), _fGame.end(), [=](FavoriteGame &game) {
-                                                                    return (aIdUser == game.getUserId())
-                                                                            && (aGame.appId() == game.getAppid())
-                                                                            && (aGame.name() == game.getName());
+                                                                    return (aIdUser == game.steamId())
+                                                                            && (aGame.appId() == game.appId())
+                                                                            && (aGame.name() == game.name());
                                                                 });
     if (iterator == _fGame.end()) {
         if (aElseCreate) {
@@ -141,9 +141,9 @@ bool Favorites::removeGame(const QString &aIdUser, const SGame &aGame, bool aEls
 
 bool Favorites::removeFriend(const QString &aIdUser, const SProfile &aProfileFriend, const SFriend &aFriendLink, bool aElseCreate) {
     auto iterator = std::remove_if(_fFriend.begin(), _fFriend.end(), [=](FavoriteFriend &steamFriend) {
-                                                                        return (aIdUser == steamFriend.getUserId())
-                                                                                && (aProfileFriend._personaName == steamFriend.getName())
-                                                                                && (aProfileFriend._steamID == steamFriend.getId());
+                                                                        return (aIdUser == steamFriend.steamId())
+                                                                                && (aProfileFriend.personaName() == steamFriend.name())
+                                                                                && (aProfileFriend.steamID() == steamFriend.friendId());
                                                                     });
     if (iterator == _fFriend.end()) {
         if (aElseCreate) {
@@ -158,17 +158,17 @@ bool Favorites::removeFriend(const QString &aIdUser, const SProfile &aProfileFri
 }
 
 bool Favorites::removeAchievement(const QString &aIdUser, const SGame &aGame, const SAchievement &aAchievement, bool aElseCreate) {
-    bool result = getAchievementsGame(aIdUser, aGame).removeAchievement(aAchievement);
+    bool result = achievementsGame(aIdUser, aGame).removeAchievement(aAchievement);
     if (aElseCreate && !result) {
-        getAchievementsGame(aIdUser, aGame).addAchievement(aAchievement);
+        achievementsGame(aIdUser, aGame).addAchievement(aAchievement);
     }
     saveAchievements();
     return result;
 }
 
-FavoriteAchievementsGame &Favorites::getAchievementsGame(const QString &aIdUser, const SGame &aGame) {
+FavoriteAchievementsGame &Favorites::achievementsGame(const QString &aIdUser, const SGame &aGame) {
     auto iterator = std::find_if(_fAchievement.begin(), _fAchievement.end(), [=](FavoriteAchievementsGame &achievementsGame) {
-                                                                        return (aIdUser == achievementsGame.getUserId())
+                                                                        return (aIdUser == achievementsGame.steamId())
                                                                                 && (achievementsGame.isEqual(aGame));
                                                                     });
     if (iterator != _fAchievement.end()) {
@@ -324,7 +324,7 @@ FavoriteAchievement &FavoriteAchievement::operator=(const FavoriteAchievement &f
     _description    = fag._description;
     _achieved       = fag._achieved;
     _icon           = fag._icon;
-    _icon_gray      = fag._icon_gray;
+    _iconGray      = fag._iconGray;
     return *this;
 }
 
@@ -335,7 +335,7 @@ QJsonObject FavoriteAchievement::toJson() {
     obj["description"]  = _description;
     obj["achieved"]     = _achieved;
     obj["icon"]         = _icon;
-    obj["icon_gray"]    = _icon_gray;
+    obj["icon_gray"]    = _iconGray;
     return obj;
 }
 
@@ -345,12 +345,12 @@ FavoriteAchievement &FavoriteAchievement::fromJson(QJsonObject fag) {
     _description    = fag["description"].toString();
     _achieved       = fag["achieved"].toInt();
     _icon           = fag["icon"].toString();
-    _icon_gray      = fag["icon_gray"].toString();
+    _iconGray      = fag["icon_gray"].toString();
     return *this;
 }
 
 bool FavoriteAchievement::isThisAchievement(const SAchievement &aAchievement) {
-    return (_id == aAchievement._apiName) && (_title == aAchievement._displayName) && (_description == aAchievement._description) && (_achieved == aAchievement._achieved) /*&& () && ()*/;
+    return (_id == aAchievement.apiName()) && (_title == aAchievement.displayName()) && (_description == aAchievement.description()) && (_achieved == aAchievement.achieved()) /*&& () && ()*/;
 }
 #define FavAchievementEnd }
 

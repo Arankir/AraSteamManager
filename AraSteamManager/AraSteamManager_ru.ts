@@ -2,55 +2,92 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU" sourcelanguage="ru_RU">
 <context>
+    <name>ComboBoxFriends</name>
+    <message>
+        <location filename="subWidgets/comboBoxes/qcomboboxfriends.cpp" line="24"/>
+        <location filename="subWidgets/comboBoxes/qcomboboxfriends.cpp" line="116"/>
+        <source>Добавить друга</source>
+        <translation>Добавить друга</translation>
+    </message>
+    <message>
+        <location filename="subWidgets/comboBoxes/qcomboboxfriends.cpp" line="31"/>
+        <source>Поиск..</source>
+        <translation>Поиск..</translation>
+    </message>
+    <message>
+        <location filename="subWidgets/comboBoxes/qcomboboxfriends.cpp" line="37"/>
+        <source>Все друзья</source>
+        <translation>Все друзья</translation>
+    </message>
+</context>
+<context>
     <name>FormAchievements</name>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="19"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="19"/>
         <source>SteamAchievementsStatistic</source>
         <translation>SteamAchievementsStatistic</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="130"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="116"/>
+        <source>Руководства</source>
+        <translation>Руководства</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="143"/>
         <source>GameOnline:  </source>
         <translation>Сейчас в игре:  </translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="188"/>
-        <source> Сравнить с друзьями</source>
-        <translation> Сравнить с друзьями</translation>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="213"/>
+        <source>Категории</source>
+        <translation>Категории</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="55"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="225"/>
+        <source> Свои достижения  </source>
+        <translation> Свои достижения  </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="235"/>
+        <source>  Управление категориями  </source>
+        <translation>  Управление категориями  </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="245"/>
+        <source>  Сравнение с друзьями </source>
+        <translation>  Сравнение с друзьями </translation>
+    </message>
+    <message>
+        <source> Сравнить с друзьями</source>
+        <translation type="vanished"> Сравнить с друзьями</translation>
+    </message>
+    <message>
         <source>Показать фильтр</source>
-        <translation>Показать фильтр</translation>
+        <translation type="vanished">Показать фильтр</translation>
     </message>
     <message>
         <source>GameOnline:</source>
         <translation type="vanished">Сейчас в игре:</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="314"/>
         <source>      Фильтр</source>
-        <translation>      Фильтр</translation>
+        <translation type="vanished">      Фильтр</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="322"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="176"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="632"/>
         <source>Добавить категорию</source>
-        <translation>Добавить категорию</translation>
+        <translation type="vanished">Добавить категорию</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="329"/>
         <source>Изменить категории</source>
-        <translation>Изменить категории</translation>
+        <translation type="vanished">Изменить категории</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="336"/>
         <source>Удалить все категории</source>
-        <translation>Удалить все категории</translation>
+        <translation type="vanished">Удалить все категории</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="195"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="70"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="224"/>
         <source>Обновить</source>
         <translation>Обновить</translation>
     </message>
@@ -59,116 +96,118 @@
         <translation type="vanished">Видимые столбцы</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="649"/>
         <source>Иконка</source>
-        <translation>Иконка</translation>
+        <translation type="vanished">Иконка</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="659"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="174"/>
         <source>Название</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="669"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="175"/>
         <source>Описание</source>
         <translation>Описание</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="679"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="177"/>
         <source>По миру</source>
         <translation>По миру</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="77"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="162"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="208"/>
+        <source>Удалить из избранного</source>
+        <translation>Удалить из избранного</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="216"/>
+        <source>Редактировать комментарий...     </source>
+        <translation>Редактировать комментарий...     </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="220"/>
+        <source>Перейти в руководства</source>
+        <translation>Перейти в руководства</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="248"/>
+        <source>Добавить подкатегорию</source>
+        <translation>Добавить подкатегорию</translation>
+    </message>
+    <message>
         <source>Все достижения</source>
-        <translation>Все достижения</translation>
+        <translation type="vanished">Все достижения</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="78"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="162"/>
         <source>Полученные достижения</source>
-        <translation>Полученные достижения</translation>
+        <translation type="vanished">Полученные достижения</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="79"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="162"/>
         <source>Не полученные достижения</source>
-        <translation>Не полученные достижения</translation>
+        <translation type="vanished">Не полученные достижения</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="253"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="90"/>
         <source>Только избранное</source>
         <translation>Только избранное</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="260"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="211"/>
         <source>Добавить в избранное</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить в избранное</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="269"/>
         <source>Все друзья</source>
-        <translation>Все друзья</translation>
+        <translation type="vanished">Все друзья</translation>
     </message>
     <message>
         <source>Добавить достижение в избранное</source>
         <translation type="vanished">Добавить в избранное</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="455"/>
         <source>Категория не выбрана</source>
-        <translation>Категория не выбрана</translation>
+        <translation type="vanished">Категория не выбрана</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="469"/>
         <source>Название категории</source>
-        <translation>Название категории</translation>
+        <translation type="vanished">Название категории</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="482"/>
         <source>Без значений</source>
-        <translation>Без значения</translation>
+        <translation type="vanished">Без значения</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="489"/>
         <source>Уникальные значения</source>
-        <translation>Уникальные значения</translation>
+        <translation type="vanished">Уникальные значения</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="496"/>
         <source>Добавить значение</source>
-        <translation>Добавить значение</translation>
+        <translation type="vanished">Добавить значение</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="532"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="714"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="721"/>
         <source>Отмена</source>
-        <translation>Отмена</translation>
+        <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="539"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="252"/>
         <source>Удалить категорию</source>
         <translation>Удалить категорию</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="546"/>
         <source>Показать всё</source>
-        <translation>Показать всё</translation>
+        <translation type="vanished">Показать всё</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="556"/>
         <source>Применить</source>
-        <translation>Применить</translation>
+        <translation type="vanished">Применить</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="278"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="163"/>
         <source>Достижение</source>
         <translation>Достижение</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="288"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="179"/>
         <source>Найти</source>
         <translation>Найти</translation>
     </message>
@@ -177,12 +216,11 @@
         <translation type="vanished">Фильтр</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="422"/>
         <source>Categories</source>
-        <translation>Категории</translation>
+        <translation type="vanished">Категории</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.ui" line="618"/>
+        <location filename="forms/subForms/achievements/formachievements.ui" line="194"/>
         <source>%v/%m</source>
         <translation>%v/%m</translation>
     </message>
@@ -195,27 +233,20 @@
         <translation type="vanished">Сейчас в игре :%1</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="34"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="163"/>
         <source>Достижения друзей</source>
-        <translation>Достижения друзей</translation>
+        <translation type="vanished">Достижения друзей</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="170"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="299"/>
         <source>Сравнить с друзьями</source>
-        <translation>Сравнить с друзьями</translation>
+        <translation type="vanished">Сравнить с друзьями</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="166"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="311"/>
         <source>Обратно</source>
-        <translation>Обратно</translation>
+        <translation type="vanished">Обратно</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="565"/>
         <source>Не выбрано</source>
-        <translation>Не выбрано</translation>
+        <translation type="vanished">Не выбрано</translation>
     </message>
     <message>
         <source>Получено %1</source>
@@ -226,8 +257,7 @@
         <translation type="vanished">Не получено</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="180"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="653"/>
+        <location filename="forms/subForms/achievements/formachievements.cpp" line="244"/>
         <source>Изменить категорию</source>
         <translation>Изменить категорию</translation>
     </message>
@@ -244,19 +274,16 @@
         <translation type="vanished">Добавить</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="786"/>
         <source>Название значения пустое!</source>
-        <translation>Название значения пустое!</translation>
+        <translation type="vanished">Название значения пустое!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="791"/>
         <source>Название значения повторяется!</source>
-        <translation>Название значения повторяется!</translation>
+        <translation type="vanished">Название значения повторяется!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="838"/>
         <source>Внимание</source>
-        <translation>Внимание</translation>
+        <translation type="vanished">Внимание</translation>
     </message>
     <message>
         <source>Вы уверены, что хотите создать категорию без значений?
@@ -265,12 +292,8 @@
 Все настроенные значения будут потеряны</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="786"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="791"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="828"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="831"/>
         <source>Ошибка</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Профиль 
@@ -278,115 +301,290 @@
         <translation type="vanished">Профиль \nне публичный</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="711"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="718"/>
         <source>Внимание!</source>
-        <translation>Внимание!</translation>
+        <translation type="vanished">Внимание!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="712"/>
         <source>Вы уверены, что хотите удалить все категории?</source>
-        <translation>Вы уверены, что хотите удалить все категории?</translation>
+        <translation type="vanished">Вы уверены, что хотите удалить все категории?</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="713"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="720"/>
         <source>Да</source>
-        <translation>Да</translation>
+        <translation type="vanished">Да</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="719"/>
         <source>Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?</source>
-        <translation>Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?</translation>
+        <translation type="vanished">Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?</translation>
     </message>
     <message>
         <source>Название значения пустое или повторяется!</source>
         <translation type="vanished">Название значения пустое или повторяется!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="825"/>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="848"/>
         <source>Успешно</source>
-        <translation>Успешно</translation>
+        <translation type="vanished">Успешно</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="825"/>
         <source>Категория была %1!</source>
-        <translation>Категория была %1!</translation>
+        <translation type="vanished">Категория была %1!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="825"/>
         <source>добавлена</source>
-        <translation>добавлена</translation>
+        <translation type="vanished">добавлена</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="825"/>
         <source>изменена</source>
-        <translation>изменена</translation>
+        <translation type="vanished">изменена</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="828"/>
         <source>Такая категория уже есть!</source>
-        <translation>Такая категория уже есть!</translation>
+        <translation type="vanished">Такая категория уже есть!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="831"/>
+        <source>Название категории пустое!</source>
+        <translation type="vanished">Название категории пустое!</translation>
+    </message>
+    <message>
+        <source>Вы уверены, что хотите удалить категорию?</source>
+        <translation type="vanished">Вы уверены, что хотите удалить категорию?</translation>
+    </message>
+    <message>
+        <source>Категория была удалена!</source>
+        <translation type="vanished">Категория была удалена!</translation>
+    </message>
+    <message>
+        <source>Невозможно переместить значение</source>
+        <translation type="vanished">Невозможно переместить значение</translation>
+    </message>
+</context>
+<context>
+    <name>FormCategoriesEdit</name>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="40"/>
+        <source>Добавить категорию</source>
+        <translation>Добавить категорию</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="50"/>
+        <source>Удалить категорию</source>
+        <translation>Удалить категорию</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="66"/>
+        <source>Удалить все категории</source>
+        <translation>Удалить все категории</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="106"/>
+        <source>Применить</source>
+        <translation>Применить</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="116"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="333"/>
+        <source>Отмена</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="138"/>
+        <source>Название категории</source>
+        <translation>Название категории</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.ui" line="159"/>
+        <source>Подкатегории</source>
+        <translation>Подкатегории</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="259"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="379"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="389"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="395"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="510"/>
+        <source>Ошибка</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="259"/>
+        <source>Нельзя выбрать основной категорией самого себя!</source>
+        <translation>Нельзя выбрать основной категорией самого себя!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="268"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="283"/>
+        <source>Подкатегория %1</source>
+        <translation>Подкатегория %1</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="270"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="280"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="294"/>
+        <source>Основная категория</source>
+        <translation>Основная категория</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="313"/>
+        <source>Подкатегория для %1</source>
+        <translation>Подкатегория для %1</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="330"/>
+        <source>Внимание!</source>
+        <translation>Внимание!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="331"/>
+        <source>Вы уверены, что хотите удалить все категории?</source>
+        <translation>Вы уверены, что хотите удалить все категории?</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="332"/>
+        <source>Да</source>
+        <translation>Да</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="339"/>
+        <source>Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?</source>
+        <translation>Данные о категориях будут утеряны навсегда, вы точно хотите удалить все категории?</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="379"/>
         <source>Название категории пустое!</source>
         <translation>Название категории пустое!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="838"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="389"/>
+        <source>Нельзя переместить категорию в саму себя!</source>
+        <translation>Нельзя переместить категорию в саму себя!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="395"/>
+        <source>Такая категория уже есть!</source>
+        <translation>Такая категория уже есть!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="475"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="479"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="506"/>
+        <source>Успешно</source>
+        <translation>Успешно</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="475"/>
+        <source>Категория была добавлена!</source>
+        <translation>Категория была добавлена!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="479"/>
+        <source>Категория была изменена!</source>
+        <translation>Категория была изменена!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="495"/>
+        <source>Внимание</source>
+        <translation>Внимание</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="496"/>
         <source>Вы уверены, что хотите удалить категорию?</source>
         <translation>Вы уверены, что хотите удалить категорию?</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="848"/>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="506"/>
         <source>Категория была удалена!</source>
         <translation>Категория была удалена!</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formachievements.cpp" line="944"/>
-        <source>Невозможно переместить значение</source>
-        <translation>Невозможно переместить значение</translation>
+        <location filename="forms/subForms/achievements/formcategoriesedit.cpp" line="510"/>
+        <source>Не найден номер категории!</source>
+        <translation>Не найден номер категории!</translation>
     </message>
 </context>
 <context>
     <name>FormCategoryValue</name>
     <message>
-        <location filename="AchievementsSubForms/formcategoryvalue.ui" line="19"/>
         <source>Form</source>
-        <translation>Значение</translation>
+        <translation type="vanished">Значение</translation>
     </message>
     <message>
         <source>Pos</source>
         <translation type="vanished">0</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formcategoryvalue.ui" line="69"/>
         <source>Visible</source>
-        <translation>Видно</translation>
+        <translation type="vanished">Видно</translation>
     </message>
 </context>
 <context>
-    <name>FormCompareProfileFilter</name>
+    <name>FormComments</name>
     <message>
-        <location filename="AchievementsSubForms/formcompareprofilefilter.ui" line="19"/>
+        <location filename="forms/formcomments.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.ui" line="22"/>
+        <source>Game</source>
+        <translation>Игра</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.ui" line="42"/>
+        <source>Profile</source>
+        <translation>Профиль</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.ui" line="60"/>
+        <source>Title</source>
+        <translation>Название</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.ui" line="67"/>
+        <source>Description</source>
+        <translation>Описание</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.ui" line="74"/>
+        <source>Achieved</source>
+        <translation>Получено</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.ui" line="89"/>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.ui" line="96"/>
+        <source>Apply</source>
+        <translation>Применить</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.cpp" line="23"/>
+        <source>Получено %1</source>
+        <translation>Получено %1</translation>
+    </message>
+    <message>
+        <location filename="forms/formcomments.cpp" line="23"/>
+        <source>Не получено</source>
+        <translation>Не получено</translation>
     </message>
 </context>
 <context>
     <name>FormContainerAchievements</name>
     <message>
-        <location filename="formcontainerachievements.ui" line="19"/>
+        <location filename="forms/formcontainerachievements.ui" line="19"/>
         <source>AraSteamManager</source>
-        <translation type="unfinished"></translation>
+        <translation>AraSteamManager</translation>
     </message>
 </context>
 <context>
     <name>FormFavorites</name>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="19"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="19"/>
         <source>Form</source>
         <translation>Избранное</translation>
     </message>
@@ -395,37 +593,37 @@
         <translation type="vanished">Игры</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="44"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="44"/>
         <source>  Games  </source>
         <translation>  Игры  </translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="73"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="73"/>
         <source>Поиск</source>
         <translation>Поиск</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="86"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="86"/>
         <source>  Friends  </source>
         <translation>  Друзья  </translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="112"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="112"/>
         <source>Найти друга</source>
         <translation>Найти друга</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="119"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="119"/>
         <source>  Поиск</source>
         <translation>  Поиск</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="133"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="133"/>
         <source>Публичный профиль</source>
         <translation>Публичный профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.ui" line="159"/>
+        <location filename="forms/subForms/main/formfavorites.ui" line="159"/>
         <source>  Achievements  </source>
         <translation>  Достижения  </translation>
     </message>
@@ -438,119 +636,131 @@
         <translation type="vanished">Достижения</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="160"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="159"/>
         <source>Ник</source>
         <translation>Ник</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="161"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="160"/>
         <source>Статус</source>
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="162"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="161"/>
         <source>Профиль</source>
         <translation>Профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="163"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="162"/>
         <source>На профиль</source>
         <translation>На профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="164"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="163"/>
         <source>Избранное</source>
         <translation>Избранное</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="75"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="74"/>
         <source>В игре</source>
         <translation>В игре</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="80"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="79"/>
         <source>Не в сети</source>
         <translation>Не в сети</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="85"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="84"/>
         <source>В сети</source>
         <translation>В сети</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="90"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="89"/>
         <source>Не беспокоить</source>
         <translation>Не беспокоить</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="95"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="94"/>
         <source>Нет на месте</source>
         <translation>Нет на месте</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="100"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="99"/>
         <source>Спит</source>
         <translation>Спит</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="105"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="104"/>
         <source>Ожидает обмена</source>
         <translation>Ожидает обмена</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="110"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="109"/>
         <source>Хочет поиграть</source>
         <translation>Хочет поиграть</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="118"/>
-        <location filename="MainSubForms/formfavorites.cpp" line="122"/>
-        <location filename="MainSubForms/formfavorites.cpp" line="130"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="117"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="121"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="129"/>
         <source>Скрытый</source>
         <translation>Скрытый</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfavorites.cpp" line="126"/>
+        <location filename="forms/subForms/main/formfavorites.cpp" line="125"/>
         <source>Публичный</source>
         <translation>Публичный</translation>
     </message>
 </context>
 <context>
+    <name>FormFriendItemCompare</name>
+    <message>
+        <location filename="forms/subForms/achievements/widgets/formfrienditemcompare.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>FormFriends</name>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="19"/>
+        <location filename="forms/subForms/main/formfriends.ui" line="19"/>
         <source>SteamAchievementsStatistic</source>
         <translation>Друзья</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="25"/>
         <source>      Фильтр</source>
-        <translation>      Фильтр</translation>
+        <translation type="vanished">      Фильтр</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="33"/>
+        <location filename="forms/subForms/main/formfriends.ui" line="37"/>
+        <source>     Фильтр</source>
+        <translation>     Фильтр</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formfriends.ui" line="45"/>
         <source>Найти друга</source>
         <translation>Найти друга</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="40"/>
+        <location filename="forms/subForms/main/formfriends.ui" line="52"/>
         <source>  Поиск</source>
         <translation>  Поиск</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="58"/>
+        <location filename="forms/subForms/main/formfriends.ui" line="70"/>
         <source>Публичный профиль</source>
         <translation>Публичный профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="65"/>
+        <location filename="forms/subForms/main/formfriends.ui" line="77"/>
         <source>Избранные</source>
         <translation>Избранные</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="165"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="336"/>
         <source>Добавить в избранное</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить в избранное</translation>
     </message>
     <message>
         <source>Иконка</source>
@@ -565,7 +775,7 @@
         <translation type="vanished">Имя</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="102"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="109"/>
         <source>Статус</source>
         <translation>Статус</translation>
     </message>
@@ -578,7 +788,7 @@
         <translation type="vanished">id</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.ui" line="155"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="317"/>
         <source>Перейти на профиль</source>
         <translation>Перейти на профиль</translation>
     </message>
@@ -603,105 +813,130 @@
         <translation type="vanished">На профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="102"/>
-        <location filename="MainSubForms/formfriends.cpp" line="148"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="109"/>
         <source>В игре</source>
         <translation>В игре</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="102"/>
-        <location filename="MainSubForms/formfriends.cpp" line="153"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="109"/>
         <source>Не в сети</source>
         <translation>Не в сети</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="102"/>
-        <location filename="MainSubForms/formfriends.cpp" line="158"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="109"/>
         <source>В сети</source>
         <translation>В сети</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="102"/>
-        <location filename="MainSubForms/formfriends.cpp" line="163"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="109"/>
         <source>Не беспокоить</source>
         <translation>Не беспокоить</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="103"/>
-        <location filename="MainSubForms/formfriends.cpp" line="168"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="110"/>
         <source>Нет на месте</source>
         <translation>Нет на месте</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="103"/>
-        <location filename="MainSubForms/formfriends.cpp" line="173"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="110"/>
         <source>Спит</source>
         <translation>Спит</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="103"/>
-        <location filename="MainSubForms/formfriends.cpp" line="178"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="110"/>
         <source>Ожидает обмена</source>
         <translation>Ожидает обмена</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="103"/>
-        <location filename="MainSubForms/formfriends.cpp" line="183"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="110"/>
         <source>Хочет поиграть</source>
         <translation>Хочет поиграть</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="106"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="170"/>
         <source>   НИК</source>
-        <translation type="unfinished"></translation>
+        <translation>   НИК</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="107"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="171"/>
         <source>   ДОБАВЛЕН</source>
-        <translation type="unfinished"></translation>
+        <translation>   ДОБАВЛЕН</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="108"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="172"/>
         <source>   СТАТУС</source>
-        <translation type="unfinished"></translation>
+        <translation>   СТАТУС</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="109"/>
+        <location filename="forms/subForms/main/formfriends.cpp" line="173"/>
         <source>   ПРОФИЛЬ</source>
-        <translation type="unfinished"></translation>
+        <translation>   ПРОФИЛЬ</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="110"/>
-        <source>   НА ПРОФИЛЬ</source>
-        <translation type="unfinished"></translation>
+        <location filename="forms/subForms/main/formfriends.cpp" line="333"/>
+        <source>Удалить из избранного</source>
+        <translation>Удалить из избранного</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="111"/>
-        <source>   ИЗБРАННОЕ</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="MainSubForms/formfriends.cpp" line="190"/>
-        <location filename="MainSubForms/formfriends.cpp" line="195"/>
-        <location filename="MainSubForms/formfriends.cpp" line="205"/>
         <source>Скрытый</source>
-        <translation>Скрытый</translation>
+        <translation type="vanished">Скрытый</translation>
     </message>
     <message>
         <source> На профиль</source>
         <translation type="vanished"> На профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formfriends.cpp" line="200"/>
-        <location filename="MainSubForms/formfriends.cpp" line="249"/>
         <source>Публичный</source>
-        <translation>Публичный</translation>
+        <translation type="vanished">Публичный</translation>
+    </message>
+</context>
+<context>
+    <name>FormFriendsCompare</name>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.ui" line="24"/>
+        <source>Иконка</source>
+        <translation>Иконка</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.ui" line="34"/>
+        <source>Название</source>
+        <translation>Название</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.ui" line="44"/>
+        <source>Описание</source>
+        <translation>Описание</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.ui" line="54"/>
+        <source>По миру</source>
+        <translation>По миру</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.ui" line="117"/>
+        <source>Добавить не из друзей</source>
+        <translation>Добавить не из друзей</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.cpp" line="355"/>
+        <source>Не получено</source>
+        <translation>Не получено</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/formfriendscompare.cpp" line="367"/>
+        <source>Профиль не публичный</source>
+        <translation>Профиль не публичный</translation>
     </message>
 </context>
 <context>
     <name>FormGames</name>
     <message>
-        <location filename="MainSubForms/formgames.ui" line="20"/>
+        <location filename="forms/subForms/main/formgames.ui" line="20"/>
         <source>SteamAchievementsStatistic</source>
         <translation>Игры</translation>
     </message>
@@ -710,46 +945,53 @@
         <translation type="vanished">%v/%m (%p%)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.ui" line="127"/>
         <source>Achievements</source>
-        <translation>Достижения</translation>
+        <translation type="vanished">Достижения</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.ui" line="177"/>
+        <location filename="forms/subForms/main/formgames.ui" line="41"/>
+        <source>     Фильтр</source>
+        <translation>     Фильтр</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formgames.ui" line="55"/>
         <source>Найти игру</source>
         <translation>Найти игру</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.ui" line="199"/>
+        <location filename="forms/subForms/main/formgames.ui" line="77"/>
         <source> Найти</source>
         <translation> Найти</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.ui" line="278"/>
-        <source>Change</source>
-        <translation>Изменить</translation>
+        <location filename="forms/subForms/main/formgames.ui" line="97"/>
+        <source>Избранные</source>
+        <translation>Избранные</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.ui" line="285"/>
+        <source>Change</source>
+        <translation type="vanished">Изменить</translation>
+    </message>
+    <message>
         <source>Create</source>
-        <translation>Создать</translation>
+        <translation type="vanished">Создать</translation>
     </message>
     <message>
         <source>%v/%m</source>
         <translation type="vanished">%v/%m</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="245"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="292"/>
         <source>Название игры</source>
         <translation>Название игры</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="246"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="294"/>
         <source>Прогресс</source>
         <translation>Прогресс</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="247"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="411"/>
         <source>Достижения</source>
         <translation>Достижения</translation>
     </message>
@@ -762,72 +1004,176 @@
         <translation type="vanished">Скрыть</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="363"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="422"/>
+        <source>Удалить из избранного</source>
+        <translation>Удалить из избранного</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formgames.cpp" line="425"/>
+        <source>Добавить в избранное</source>
+        <translation>Добавить в избранное</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formgames.cpp" line="435"/>
+        <source>Показать игру</source>
+        <translation>Показать игру</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formgames.cpp" line="438"/>
+        <source>Скрыть игру</source>
+        <translation>Скрыть игру</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formgames.cpp" line="443"/>
+        <source>Редактировать комментарий...     </source>
+        <translation>Редактировать комментарий...     </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formgames.cpp" line="447"/>
+        <source>Добавить/Удалить из группы...     </source>
+        <translation>Добавить/Удалить из группы...     </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formgames.cpp" line="469"/>
         <source>Ошибка</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="363"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="469"/>
         <source>В этой игре нет достижений</source>
         <translation>В этой игре нет достижений</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="389"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="482"/>
         <source>Внимание!</source>
         <translation>Внимание!</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="390"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="483"/>
         <source>Вы уверены, что хотите скрыть эту игру?</source>
         <translation>Вы уверены, что хотите скрыть эту игру?</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="391"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="484"/>
         <source>Да, но только для этого аккаунта</source>
         <translation>Да, но только для этого аккаунта</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="392"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="485"/>
         <source>Да, для всех аккаунтов</source>
         <translation>Да, для всех аккаунтов</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formgames.cpp" line="393"/>
+        <location filename="forms/subForms/main/formgames.cpp" line="486"/>
         <source>Отмена</source>
         <translation>Отмена</translation>
     </message>
 </context>
 <context>
-    <name>FormProfile</name>
+    <name>FormGroups</name>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="14"/>
+        <location filename="forms/formgroups.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="737"/>
-        <location filename="MainSubForms/formprofile.cpp" line="424"/>
-        <location filename="MainSubForms/formprofile.cpp" line="437"/>
+        <location filename="forms/formgroups.ui" line="32"/>
+        <source>Добавить</source>
+        <translation>Добавить</translation>
+    </message>
+    <message>
+        <location filename="forms/formgroups.ui" line="49"/>
+        <source>Изменить название</source>
+        <translation>Изменить название</translation>
+    </message>
+    <message>
+        <location filename="forms/formgroups.ui" line="77"/>
+        <source>Отмена</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <location filename="forms/formgroups.ui" line="84"/>
+        <source>Принять</source>
+        <translation>Принять</translation>
+    </message>
+</context>
+<context>
+    <name>FormMain</name>
+    <message>
+        <location filename="forms/formmain.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="forms/formmain.ui" line="113"/>
+        <source>Введите Steamid</source>
+        <translation>Введите Steamid</translation>
+    </message>
+    <message>
+        <location filename="forms/formmain.ui" line="128"/>
+        <source> Найти</source>
+        <translation> Найти</translation>
+    </message>
+    <message>
+        <location filename="forms/formmain.cpp" line="172"/>
+        <location filename="forms/formmain.cpp" line="360"/>
+        <location filename="forms/formmain.cpp" line="420"/>
+        <source>Ошибка</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <location filename="forms/formmain.cpp" line="172"/>
+        <location filename="forms/formmain.cpp" line="420"/>
+        <source>Не удаётся найти профиль!</source>
+        <translation>Не удаётся найти профиль!</translation>
+    </message>
+    <message>
+        <location filename="forms/formmain.cpp" line="360"/>
+        <source>Не удалось распознать синтаксис профиля</source>
+        <translation>Не удалось распознать синтаксис профиля</translation>
+    </message>
+</context>
+<context>
+    <name>FormProfile</name>
+    <message>
+        <location filename="forms/subForms/main/formprofile.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.ui" line="701"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="452"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="465"/>
         <source>Это мой профиль</source>
         <translation>Это мой профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="300"/>
+        <location filename="forms/subForms/main/formprofile.ui" line="300"/>
         <source>lvl:</source>
         <translation>Уровень:</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="103"/>
+        <location filename="forms/subForms/main/formprofile.ui" line="103"/>
         <source>RealName: </source>
         <translation>Настоящее имя: </translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="450"/>
+        <location filename="forms/subForms/main/formprofile.ui" line="223"/>
+        <source>Профиль</source>
+        <translation>Профиль</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.ui" line="364"/>
+        <source>VAC Bans: </source>
+        <translation>VAC баны: </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.ui" line="414"/>
         <source>TimeCreated:</source>
         <translation>Время создания:</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="542"/>
+        <location filename="forms/subForms/main/formprofile.ui" line="506"/>
         <source>CountryCode:</source>
         <translation>Язык:</translation>
     </message>
@@ -836,34 +1182,28 @@
         <translation type="vanished">Настоящее имя:</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="223"/>
         <source>Profile</source>
-        <translation>Профиль</translation>
+        <translation type="vanished">Профиль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="241"/>
         <source>Friends</source>
-        <translation>Друзья</translation>
+        <translation type="vanished">Друзья</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="259"/>
         <source>Games</source>
-        <translation>Игры</translation>
+        <translation type="vanished">Игры</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="364"/>
         <source>None</source>
-        <translation>отсутствуют</translation>
+        <translation type="vanished">отсутствуют</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="388"/>
         <source>Last</source>
-        <translation>последний</translation>
+        <translation type="vanished">последний</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.ui" line="412"/>
         <source>days ago.</source>
-        <translation>дней назад.</translation>
+        <translation type="vanished">дней назад.</translation>
     </message>
     <message>
         <source> Статистика</source>
@@ -874,161 +1214,160 @@
         <translation type="vanished"> Избранное</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="416"/>
-        <location filename="MainSubForms/formprofile.cpp" line="429"/>
         <source> Игры (%1)</source>
-        <translation> Игры (%1)</translation>
+        <translation type="vanished"> Игры (%1)</translation>
     </message>
     <message>
         <source>error</source>
         <translation type="vanished">???</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="405"/>
-        <location filename="MainSubForms/formprofile.cpp" line="406"/>
-        <location filename="MainSubForms/formprofile.cpp" line="416"/>
-        <location filename="MainSubForms/formprofile.cpp" line="417"/>
-        <location filename="MainSubForms/formprofile.cpp" line="429"/>
-        <location filename="MainSubForms/formprofile.cpp" line="430"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="440"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="441"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="448"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="449"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="461"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="462"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="405"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="440"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="448"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="461"/>
         <source>Игры (%1)</source>
         <translation>Игры (%1)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="406"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="441"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="449"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="462"/>
         <source>Друзья (%1)</source>
         <translation>Друзья (%1)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="409"/>
-        <location filename="MainSubForms/formprofile.cpp" line="420"/>
-        <location filename="MainSubForms/formprofile.cpp" line="433"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="442"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="450"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="463"/>
         <source>Статистика</source>
         <translation>Статистика</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="410"/>
-        <location filename="MainSubForms/formprofile.cpp" line="421"/>
-        <location filename="MainSubForms/formprofile.cpp" line="434"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="443"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="451"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="464"/>
         <source>Избранное</source>
         <translation>Избранное</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="412"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="444"/>
         <source>Установить профиль как свой</source>
         <translation>Установить профиль как свой</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="417"/>
-        <location filename="MainSubForms/formprofile.cpp" line="430"/>
         <source> Друзья (%1)</source>
-        <translation> Друзья (%1)</translation>
+        <translation type="vanished"> Друзья (%1)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="162"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="191"/>
         <source>В игре %1</source>
         <translation>В игре %1</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="90"/>
-        <location filename="MainSubForms/formprofile.cpp" line="441"/>
-        <source>%1 профиль сообщества</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="MainSubForms/formprofile.cpp" line="90"/>
-        <location filename="MainSubForms/formprofile.cpp" line="441"/>
-        <source>Настроен</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="MainSubForms/formprofile.cpp" line="90"/>
-        <location filename="MainSubForms/formprofile.cpp" line="441"/>
-        <source>Не настроен</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="MainSubForms/formprofile.cpp" line="91"/>
-        <location filename="MainSubForms/formprofile.cpp" line="442"/>
-        <source>Публичные комментарии %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="MainSubForms/formprofile.cpp" line="91"/>
-        <location filename="MainSubForms/formprofile.cpp" line="442"/>
-        <source>разрешены</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="MainSubForms/formprofile.cpp" line="91"/>
-        <location filename="MainSubForms/formprofile.cpp" line="442"/>
-        <source>запрещены</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="MainSubForms/formprofile.cpp" line="126"/>
-        <location filename="MainSubForms/formprofile.cpp" line="232"/>
-        <location filename="MainSubForms/formprofile.cpp" line="275"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="155"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="252"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="296"/>
         <source>Скрытый</source>
         <translation>Скрытый</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="134"/>
-        <location filename="MainSubForms/formprofile.cpp" line="220"/>
-        <location filename="MainSubForms/formprofile.cpp" line="264"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="163"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="240"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="285"/>
         <source>Публичный</source>
         <translation>Публичный</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="142"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="171"/>
         <source>Для друзей</source>
         <translation>Для друзей</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="150"/>
-        <location filename="MainSubForms/formprofile.cpp" line="244"/>
-        <location filename="MainSubForms/formprofile.cpp" line="286"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="179"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="264"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="307"/>
         <source>Неизвестно</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="167"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="197"/>
+        <source>Не в сети</source>
+        <translation>Не в сети</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.cpp" line="199"/>
         <source>Был в сети %1</source>
         <translation>Был в сети %1</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="171"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="204"/>
         <source>В сети</source>
         <translation>В сети</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="175"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="208"/>
         <source>Не беспокоить</source>
         <translation>Не беспокоить</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="179"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="212"/>
         <source>Нет на месте</source>
         <translation>Нет на месте</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="183"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="216"/>
         <source>Спит</source>
         <translation>Спит</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="187"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="220"/>
         <source>Ожидает обмена</source>
         <translation>Ожидает обмена</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formprofile.cpp" line="191"/>
+        <location filename="forms/subForms/main/formprofile.cpp" line="224"/>
         <source>Хочет поиграть</source>
         <translation>Хочет поиграть</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.cpp" line="324"/>
+        <source>%1, последний %2 дней назад</source>
+        <translation>%1, последний %2 дней назад</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.cpp" line="330"/>
+        <source>отсутствуют</source>
+        <translation>отсутствуют</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.cpp" line="350"/>
+        <source>Настроен профиль сообщества</source>
+        <translation>Настроен профиль сообщества</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.cpp" line="356"/>
+        <source>Не настроен профиль сообщества</source>
+        <translation>Не настроен профиль сообщества</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.cpp" line="367"/>
+        <source>Публичные комментарии разрешены</source>
+        <translation>Публичные комментарии разрешены</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formprofile.cpp" line="373"/>
+        <source>Публичные комментарии запрещены</source>
+        <translation>Публичные комментарии запрещены</translation>
     </message>
     <message>
         <source>Уровень: %1</source>
@@ -1047,12 +1386,14 @@
         <translation type="vanished">Язык: %1</translation>
     </message>
     <message>
+        <location filename="forms/subForms/main/formprofile.ui" line="259"/>
         <source>Игры</source>
-        <translation type="vanished">Игры</translation>
+        <translation>Игры</translation>
     </message>
     <message>
+        <location filename="forms/subForms/main/formprofile.ui" line="241"/>
         <source>Друзья</source>
-        <translation type="vanished">Друзья</translation>
+        <translation>Друзья</translation>
     </message>
     <message>
         <source>VAC баны: %1| Последний %2 дней назад</source>
@@ -1064,61 +1405,183 @@
     </message>
 </context>
 <context>
+    <name>FormReachedFilter</name>
+    <message>
+        <location filename="forms/subForms/achievements/widgets/formreachedfilter.ui" line="19"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/widgets/formreachedfilter.ui" line="45"/>
+        <source>Получено</source>
+        <translation>Получено</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/widgets/formreachedfilter.ui" line="58"/>
+        <source>Все</source>
+        <translation>Все</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/achievements/widgets/formreachedfilter.ui" line="71"/>
+        <source>Не получено</source>
+        <translation>Не получено</translation>
+    </message>
+</context>
+<context>
     <name>FormSettings</name>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="19"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="19"/>
         <source>Form</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="199"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="41"/>
+        <source>  Общие настройки  </source>
+        <translation>  Общие настройки  </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="61"/>
+        <source>Синяя тема</source>
+        <translation>Синяя тема</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="74"/>
+        <source>Тёмная тема (в разработке)</source>
+        <translation>Тёмная тема (в разработке)</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="114"/>
+        <source>Язык</source>
+        <translation>Язык</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="162"/>
         <source>Автоматически сохранять картинки на компьютере (для более быстрой загрузки)</source>
         <translation>Автоматически сохранять картинки на компьютере (для более быстрой загрузки)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="210"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="173"/>
         <source>Данные о профиле</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные о профиле</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="253"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="222"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Иконки для приложения были предоставлены сайтом &lt;a href=https://icons8.ru/icons&gt;https://icons8.ru/icons&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Иконки для приложения были предоставлены сайтом &lt;a href=https://icons8.ru/icons&gt;https://icons8.ru/icons&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="169"/>
         <source>Language</source>
-        <translation>Язык программы</translation>
+        <translation type="vanished">Язык программы</translation>
     </message>
     <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="49"/>
         <source>Тема</source>
-        <translation type="vanished">Тема</translation>
+        <translation>Тема</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="53"/>
         <source>Тёмная тема</source>
-        <translation>Тёмная тема</translation>
+        <translation type="vanished">Тёмная тема</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="66"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="87"/>
         <source>Светлая тема</source>
         <translation>Светлая тема</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="120"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="252"/>
+        <source>  Экспорт  </source>
+        <translation>  Экспорт  </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="282"/>
+        <source>Категории</source>
+        <translation>Категории</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="302"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="351"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="400"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="446"/>
+        <source>Экспортировать выбранное</source>
+        <translation>Экспортировать выбранное</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="382"/>
+        <source>Комментарии</source>
+        <translation>Комментарии</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="431"/>
+        <source>Группы</source>
+        <translation>Группы</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="477"/>
+        <source>Настройки</source>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="488"/>
+        <source>Экспортировать настройки</source>
+        <translation>Экспортировать настройки</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="515"/>
+        <source>  Импорт  </source>
+        <translation>  Импорт  </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="523"/>
+        <source>Импорт категорий</source>
+        <translation>Импорт категорий</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="535"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="563"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="591"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="619"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="647"/>
+        <source>Импортировать</source>
+        <translation>Импортировать</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="548"/>
+        <source>Импорт избранного</source>
+        <translation>Импорт избранного</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="576"/>
+        <source>Импорт комментариев</source>
+        <translation>Импорт комментариев</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="604"/>
+        <source>Импорт групп</source>
+        <translation>Импорт групп</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="632"/>
+        <source>Импорт неизвестных данных</source>
+        <translation>Импорт неизвестных данных</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="672"/>
+        <source>  Скрытые игры  </source>
+        <translation>  Скрытые игры  </translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="683"/>
         <source>Поиск</source>
         <oldsource>Текст</oldsource>
         <translation>Поиск</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="41"/>
         <source>  Тема  </source>
-        <translation>  Тема  </translation>
+        <translation type="vanished">  Тема  </translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="109"/>
         <source>  Прочие настройки  </source>
-        <translation>  Прочие настройки  </translation>
+        <translation type="vanished">  Прочие настройки  </translation>
     </message>
     <message>
         <source>Показывать дополнительную информацию профиля</source>
@@ -1141,7 +1604,7 @@
         <translation type="vanished">Русский</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.ui" line="192"/>
+        <location filename="forms/subForms/main/formsettings.ui" line="155"/>
         <source>При поиске по играм отображать скрытые игры</source>
         <translation>При поиске по играм отображать скрытые игры</translation>
     </message>
@@ -1150,8 +1613,8 @@
         <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Иконки для этого приложения были взяты бесплатно с сайта &lt;span style=&quot; color:#55aa00;&quot;&gt;https://icons8.ru/icons&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="225"/>
-        <location filename="MainSubForms/formsettings.cpp" line="263"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="421"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="459"/>
         <source>Достижения</source>
         <translation>Достижения</translation>
     </message>
@@ -1164,58 +1627,118 @@
         <translation type="obsolete">Сравнить с друзьями</translation>
     </message>
     <message>
+        <location filename="forms/subForms/main/formsettings.ui" line="333"/>
         <source>Избранное</source>
-        <translation type="obsolete">Избранное</translation>
+        <translation>Избранное</translation>
     </message>
     <message>
         <source>Язык изменён</source>
         <translation type="vanished">Язык изменён</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="78"/>
-        <location filename="MainSubForms/formsettings.cpp" line="148"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="133"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="348"/>
         <source>Все профили</source>
         <translation>Все профили</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="188"/>
-        <location filename="MainSubForms/formsettings.cpp" line="194"/>
         <source>Для применения изменений перезапустите приложение!</source>
-        <translation>Для применения изменений перезапустите приложение!</translation>
+        <translation type="vanished">Для применения изменений перезапустите приложение!</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="188"/>
-        <location filename="MainSubForms/formsettings.cpp" line="194"/>
         <source>Тема изменена</source>
-        <translation>Тема изменена</translation>
+        <translation type="vanished">Тема изменена</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="299"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="318"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="334"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="501"/>
         <source>Внимание!</source>
         <translation>Внимание!</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="299"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="501"/>
         <source>Сделать игру видимой?</source>
         <translation>Сделать игру видимой?</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="300"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="502"/>
         <source>Да</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="301"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="321"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="503"/>
         <source>Отмена</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="323"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="237"/>
+        <source>Место сохранения файла</source>
+        <translation>Место сохранения файла</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="249"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="525"/>
         <source>Успешно!</source>
         <translation>Успешно!</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formsettings.cpp" line="323"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="249"/>
+        <source>Файл успешно создан!</source>
+        <translation>Файл успешно создан!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="281"/>
+        <source>Выбор файла для загрузки</source>
+        <translation>Выбор файла для загрузки</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="290"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="297"/>
+        <location filename="forms/subForms/main/formsettings.cpp" line="307"/>
+        <source>Ошибка!</source>
+        <translation>Ошибка!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="290"/>
+        <source>Невозможно найти указанный файл, или файл открыт в другом приложении!</source>
+        <translation>Невозможно найти указанный файл, или файл открыт в другом приложении!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="297"/>
+        <source>В выбранном файле нет категорий</source>
+        <translation>В выбранном файле нет категорий</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="307"/>
+        <source>В выбранном файле не обнаружено категорий</source>
+        <translation>В выбранном файле не обнаружено категорий</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="313"/>
+        <source>Игра: %1, категория: %2</source>
+        <translation>Игра: %1, категория: %2</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="315"/>
+        <source>Обнаружены следующие категории: 
+</source>
+        <translation>Обнаружены следующие категории: 
+</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="320"/>
+        <source>Добавить эти категории</source>
+        <translation>Добавить эти категории</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="334"/>
+        <source>Категории успешно добавлены!</source>
+        <translation>Категории успешно добавлены!</translation>
+    </message>
+    <message>
+        <location filename="forms/subForms/main/formsettings.cpp" line="525"/>
         <source>Политика видимости для игры обновлена!</source>
         <translation>Политика видимости для игры обновлена!</translation>
     </message>
@@ -1223,12 +1746,12 @@
 <context>
     <name>FormStatistics</name>
     <message>
-        <location filename="MainSubForms/formstatistics.ui" line="19"/>
+        <location filename="forms/subForms/main/formstatistics.ui" line="19"/>
         <source>Form</source>
         <translation>Статистика</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.ui" line="66"/>
+        <location filename="forms/subForms/main/formstatistics.ui" line="66"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;Open Sans&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;; font-size:12px; color:#000000;&quot;&gt;Статистика выводится по играм на аккаунте у которых есть достижения.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;Open Sans&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;; font-size:12px; color:#000000;&quot;&gt;Если суммарное количество достижений не совпадает с информацией стима, значит часть достижений получена с использованием семейного доступа&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;Open Sans&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;; font-size:12px; color:#000000;&quot;&gt;Статистика выводится по играм на аккаунте у которых есть достижения.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-family:&apos;Open Sans&apos;,&apos;Arial&apos;,&apos;sans-serif&apos;; font-size:12px; color:#000000;&quot;&gt;Если суммарное количество достижений не совпадает с информацией стима, значит часть достижений получена с использованием семейного доступа&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1237,7 +1760,7 @@
         <translation type="vanished">Средний процент: </translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.ui" line="105"/>
+        <location filename="forms/subForms/main/formstatistics.ui" line="105"/>
         <source>Всего достижений:</source>
         <translation>Всего достижений:</translation>
     </message>
@@ -1248,20 +1771,20 @@
         <translation type="vanished">Средний процент\n-по всем играм: %1%\n-по начатым играм: %2%</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="70"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="132"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="64"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="130"/>
         <source>Средний процент</source>
         <translation>Средний процент</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="71"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="133"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="65"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="131"/>
         <source>по всем играм</source>
         <translation>по всем играм</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="73"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="135"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="67"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="133"/>
         <source>по начатым играм</source>
         <translation>по начатым играм</translation>
     </message>
@@ -1270,110 +1793,110 @@
         <translation type="vanished">Всего достижений: %1</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="95"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="141"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="92"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="139"/>
         <source>Не начато (%1)</source>
         <translation>Не начато (%1)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="89"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="143"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="85"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="141"/>
         <source>Начато (%1)</source>
         <translation>Начато (%1)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="83"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="145"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="78"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="143"/>
         <source>Закончено (%1)</source>
         <translation>Закончено (%1)</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="36"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="102"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="30"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="100"/>
         <source>Достижения по часам</source>
         <translation>Достижения по часам</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="106"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="196"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="104"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="194"/>
         <source>Январь</source>
         <translation>Январь</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="106"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="196"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="104"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="194"/>
         <source>Февраль</source>
         <translation>Февраль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="106"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="196"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="104"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="194"/>
         <source>Март</source>
         <translation>Март</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="106"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="196"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="104"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="194"/>
         <source>Апрель</source>
         <translation>Апрель</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="106"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="196"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="104"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="194"/>
         <source>Май</source>
         <translation>Май</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="106"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="196"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="104"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="194"/>
         <source>Июнь</source>
         <translation>Июнь</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="107"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="197"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="105"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="195"/>
         <source>Июль</source>
         <translation>Июль</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="107"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="197"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="105"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="195"/>
         <source>Август</source>
         <translation>Август</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="107"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="197"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="105"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="195"/>
         <source>Сентябрь</source>
         <translation>Сентябрь</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="107"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="197"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="105"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="195"/>
         <source>Октябрь</source>
         <translation>Октябрь</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="107"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="197"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="105"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="195"/>
         <source>Ноябрь</source>
         <translation>Ноябрь</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="107"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="197"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="105"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="195"/>
         <source>Декабрь</source>
         <translation>Декабрь</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="44"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="103"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="38"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="101"/>
         <source>Достижения по месяцам</source>
         <translation>Достижения по месяцам</translation>
     </message>
     <message>
-        <location filename="MainSubForms/formstatistics.cpp" line="52"/>
-        <location filename="MainSubForms/formstatistics.cpp" line="115"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="46"/>
+        <location filename="forms/subForms/main/formstatistics.cpp" line="113"/>
         <source>Достижения по годам</source>
         <translation>Достижения по годам</translation>
     </message>
@@ -1381,52 +1904,36 @@
 <context>
     <name>FormTablesHeaders</name>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="67"/>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="110"/>
         <source>Название</source>
-        <translation>Название</translation>
+        <translation type="vanished">Название</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="68"/>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="111"/>
         <source>Описание</source>
-        <translation>Описание</translation>
+        <translation type="vanished">Описание</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="69"/>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="112"/>
         <source>По миру</source>
-        <translation>По миру</translation>
+        <translation type="vanished">По миру</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="423"/>
         <source>Получено %1</source>
-        <translation>Получено %1</translation>
+        <translation type="vanished">Получено %1</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="427"/>
         <source>Не получено</source>
-        <translation>Не получено</translation>
+        <translation type="vanished">Не получено</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="437"/>
         <source>Профиль не</source>
-        <translation>Профиль не</translation>
+        <translation type="vanished">Профиль не</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="437"/>
         <source>публичный</source>
-        <translation>публичный</translation>
+        <translation type="vanished">публичный</translation>
     </message>
     <message>
-        <location filename="AchievementsSubForms/formtablesheaders.cpp" line="538"/>
         <source>Ошибка</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation type="obsolete">Ошибка</translation>
     </message>
     <message>
         <source>Add</source>
@@ -1434,11 +1941,18 @@
     </message>
 </context>
 <context>
+    <name>FramelessWindow</name>
+    <message>
+        <location filename="framelesswindow.ui" line="14"/>
+        <source>MainWindow</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="19"/>
         <source>SteamAchievementsStatistic</source>
-        <translation>SteamAchievementsStatistic</translation>
+        <translation type="vanished">SteamAchievementsStatistic</translation>
     </message>
     <message>
         <source>Это мой профиль</source>
@@ -1469,18 +1983,16 @@
         <translation type="vanished">%v/%m</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="221"/>
         <source> Найти</source>
-        <translation> Найти</translation>
+        <translation type="vanished"> Найти</translation>
     </message>
     <message>
         <source> Выход</source>
         <translation type="vanished"> Выход</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="206"/>
         <source>Введите Steamid</source>
-        <translation>Введите Steamid</translation>
+        <translation type="vanished">Введите Steamid</translation>
     </message>
     <message>
         <source> Игры (%1)</source>
@@ -1567,10 +2079,8 @@
         <translation type="vanished">VAC баны: Отсутствуют</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="702"/>
-        <location filename="mainwindow.cpp" line="926"/>
         <source>Ошибка</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Назад</source>
@@ -1597,16 +2107,174 @@
         <translation type="vanished">Избранное</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="702"/>
-        <location filename="mainwindow.cpp" line="926"/>
         <source>Не удаётся найти профиль!</source>
-        <translation>Не удаётся найти профиль!</translation>
+        <translation type="vanished">Не удаётся найти профиль!</translation>
+    </message>
+</context>
+<context>
+    <name>MultiSelectComboBox</name>
+    <message>
+        <location filename="subWidgets/comboBoxes/multiselectcombobox.cpp" line="18"/>
+        <location filename="subWidgets/comboBoxes/multiselectcombobox.cpp" line="163"/>
+        <source>Search..</source>
+        <translation>Поиск..</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="6"/>
+        <source>В игре</source>
+        <translation>В игре</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="11"/>
+        <source>Не в сети</source>
+        <translation>Не в сети</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="16"/>
+        <source>В сети</source>
+        <translation>В сети</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="21"/>
+        <source>Не беспокоить</source>
+        <translation>Не беспокоить</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="26"/>
+        <source>Нет на месте</source>
+        <translation>Нет на месте</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="31"/>
+        <source>Спит</source>
+        <translation>Спит</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="36"/>
+        <source>Ожидает обмена</source>
+        <translation>Ожидает обмена</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="41"/>
+        <source>Хочет поиграть</source>
+        <translation>Хочет поиграть</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="53"/>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="58"/>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="68"/>
+        <source>Скрытый</source>
+        <translation>Скрытый</translation>
+    </message>
+    <message>
+        <location filename="classes/threads/thread/threadfriends.cpp" line="63"/>
+        <source>Публичный</source>
+        <translation>Публичный</translation>
+    </message>
+</context>
+<context>
+    <name>SAchievements</name>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="294"/>
+        <source>global</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="297"/>
+        <source>player</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="300"/>
+        <source>percent</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="302"/>
+        <source>Need data of (</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="304"/>
+        <source>)</source>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>SAchievementsGlobal</name>
     <message>
-        <location filename="class/steamapi/Sachievements.cpp" line="111"/>
+        <source>russian</source>
+        <translation type="vanished">russian</translation>
+    </message>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="115"/>
+        <source>achievements is not exist</source>
+        <translation>Достижения не найдены</translation>
+    </message>
+</context>
+<context>
+    <name>SAchievementsPercentage</name>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="167"/>
+        <source>game is not exist</source>
+        <translation>Игра не найдена</translation>
+    </message>
+</context>
+<context>
+    <name>SAchievementsPlayer</name>
+    <message>
+        <location filename="classes/steamApi/structures/sachievements.cpp" line="230"/>
+        <source>profile is not exist</source>
+        <translation>Профиль не найден</translation>
+    </message>
+</context>
+<context>
+    <name>SBans</name>
+    <message>
+        <location filename="classes/steamApi/structures/sbans.cpp" line="28"/>
+        <source>profile is not exist</source>
+        <translation>Профиль не найден</translation>
+    </message>
+</context>
+<context>
+    <name>SFriends</name>
+    <message>
+        <location filename="classes/steamApi/structures/sfriends.cpp" line="38"/>
+        <source>friends is not exist</source>
+        <translation>Друзья не найдены</translation>
+    </message>
+</context>
+<context>
+    <name>SGames</name>
+    <message>
+        <location filename="classes/steamApi/structures/sgames.cpp" line="82"/>
+        <source>game is not exist</source>
+        <translation>Игра не найдена</translation>
+    </message>
+</context>
+<context>
+    <name>SLevels</name>
+    <message>
+        <location filename="classes/steamApi/structures/slevels.cpp" line="26"/>
+        <source>profile is not exist</source>
+        <translation>Профиль не найден</translation>
+    </message>
+</context>
+<context>
+    <name>SProfiles</name>
+    <message>
+        <location filename="classes/steamApi/structures/sprofile.cpp" line="146"/>
+        <source>profile is not exist</source>
+        <translation>Профиль не найден</translation>
+    </message>
+</context>
+<context>
+    <name>Sapi</name>
+    <message>
+        <location filename="classes/steamApi/sapi.cpp" line="28"/>
         <source>russian</source>
         <translation>russian</translation>
     </message>
@@ -1614,12 +2282,11 @@
 <context>
     <name>ThreadAchievements</name>
     <message>
-        <location filename="class/Threads/threadachievements.cpp" line="31"/>
         <source>Получено %1</source>
-        <translation>Получено %1</translation>
+        <translation type="vanished">Получено %1</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadachievements.cpp" line="34"/>
+        <location filename="classes/threads/thread/threadachievements.cpp" line="31"/>
         <source>Не получено</source>
         <translation>Не получено</translation>
     </message>
@@ -1635,56 +2302,44 @@
 <context>
     <name>ThreadFriends</name>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="44"/>
         <source>В игре</source>
-        <translation>В игре</translation>
+        <translation type="vanished">В игре</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="49"/>
         <source>Не в сети</source>
-        <translation>Не в сети</translation>
+        <translation type="vanished">Не в сети</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="54"/>
         <source>В сети</source>
-        <translation>В сети</translation>
+        <translation type="vanished">В сети</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="59"/>
         <source>Не беспокоить</source>
-        <translation>Не беспокоить</translation>
+        <translation type="vanished">Не беспокоить</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="64"/>
         <source>Нет на месте</source>
-        <translation>Нет на месте</translation>
+        <translation type="vanished">Нет на месте</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="69"/>
         <source>Спит</source>
-        <translation>Спит</translation>
+        <translation type="vanished">Спит</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="74"/>
         <source>Ожидает обмена</source>
-        <translation>Ожидает обмена</translation>
+        <translation type="vanished">Ожидает обмена</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="79"/>
         <source>Хочет поиграть</source>
-        <translation>Хочет поиграть</translation>
+        <translation type="vanished">Хочет поиграть</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="91"/>
-        <location filename="class/Threads/threadfriends.cpp" line="96"/>
-        <location filename="class/Threads/threadfriends.cpp" line="106"/>
         <source>Скрытый</source>
-        <translation>Скрытый</translation>
+        <translation type="vanished">Скрытый</translation>
     </message>
     <message>
-        <location filename="class/Threads/threadfriends.cpp" line="101"/>
         <source>Публичный</source>
-        <translation>Публичный</translation>
+        <translation type="vanished">Публичный</translation>
     </message>
 </context>
 </TS>

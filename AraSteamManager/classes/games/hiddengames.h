@@ -18,7 +18,7 @@ public:
     HiddenGames &removeGame(const SGame &game, bool addIfExist = false);
     HiddenGames &save();
 
-    QList<gameData> getGames() const {return _games;}
+    QList<gameData> games() const {return _games;}
 
 private:
     void load();

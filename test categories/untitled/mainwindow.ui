@@ -20,9 +20,6 @@
       <property name="verticalScrollMode">
        <enum>QAbstractItemView::ScrollPerPixel</enum>
       </property>
-      <property name="headerHidden">
-       <bool>true</bool>
-      </property>
       <property name="columnCount">
        <number>5</number>
       </property>

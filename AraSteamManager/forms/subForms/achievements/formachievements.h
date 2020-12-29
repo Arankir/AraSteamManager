@@ -30,10 +30,8 @@
 #include "subWidgets/withData/qcheckboxwithdata.h"
 #include "subWidgets/progressBars/progressbargood.h"
 #include "forms/formcomments.h"
-#include "forms/subForms/achievements/formcomparefriends.h"
 #include "forms/subForms/achievements/formcategoriesedit.h"
-#include "forms/subForms/achievements/formcompareprofilefilter.h"
-#include "forms/subForms/achievements/formtablesheaders.h"
+#include "forms/subForms/achievements/widgets/formreachedfilter.h"
 
 namespace Ui {
     class FormAchievements;
@@ -42,20 +40,15 @@ namespace Ui {
 class FormAchievements: public QWidget {
     Q_OBJECT
 
-enum class FormMode {
-    standart,
-    compare
-};
-
 enum FriendType {
     haventGame,
     haveGame
 };
 
 public slots:
-    void progressLoading(int progress, int row);
-    void onTablePulled(int reached, int notReached);
-    QString getProfileId() const {return _profile._steamID;}
+    void progressLoading(int value, int max);
+    void onModelPulled(QStandardItemModel *aModel, int reached, int notReached);
+    QString getProfileId() const {return _profile.steamID();}
     int getGameAppId() const {return _game.appId();}
     void buttonUpdate_Clicked();
     
@@ -67,6 +60,7 @@ public:
 
 signals:
     void s_updateSettings();
+    void s_updatedHiddenRows();
 
 private slots:
     void changeEvent(QEvent *event);
@@ -74,18 +68,6 @@ private slots:
     void initComponents();
     void retranslate();
     void setIcons();
-
-    QButtonWithData *createButtonWithData(const QString &aObjectName, const QString &aAppertain, const QString &aType, bool aChecked);
-    void setFormMode(FormMode mode);
-    void loadingCompare();
-    void loadFriendGames(SGames *games);
-    void finishLoadFriends();
-    void compareProfileFilterClickFriends(const QString &name, ReachedType type);
-
-    void buttonCompareAllFriendsReach_Clicked();
-    void tableWidgetCompareFriends_CellChanged(int row, int column);
-    void createCompareProfileFilter(bool accept, int column);
-    void checkBoxCompareAllFriends_StateChanged(int arg1);
 
     void showCategories();
 
@@ -101,16 +83,15 @@ private slots:
     void tabWidget_CurrentChanged(int index);
 
     void createThread();
-    void setTableModels(QStandardItemModel *aModel);
     void initTableStandart();
-    void updateCurrentAchievement();
+    void initCategoriesTree();
     void initComments();
-    void updateHiddenRows(bool standart, bool compare);
+    void updateCurrentAchievement();
+    void updateHiddenRows();
     void buttonComment_Clicked();
     QMenu *createMenu(const SAchievement &aAchievement);
-    void initTableCompare();
-    void updateFilterWithMyProfile(ReachedType aType, bool aStandart, bool aCompare);
-    void updateFilterTextAchievement(const QString &aNewText, bool aStandart, bool aCompare);
+    void updateFilterWithMyProfile(ReachedType aType);
+    void updateFilterTextAchievement(const QString &aNewText);
     void updateHiddenColumnsStandart();
     void updateFilterCategory(int categoryIndex, bool clear, QList<QString> achievementNames = QList<QString>());
     void updateFilterFavorite(const QList<FavoriteAchievement> &aFavoritesAchievements);
@@ -118,9 +99,10 @@ private slots:
     int recursAddCategoryToTree(Category &category, int count, QTreeWidgetItem *root = nullptr);
     void updateCurrentCategory();
     QMenu *createMenuCategory(const Category &aCategory);
-    void categoryChangeAchievements();
-    void categoryAddSubCategory();
+    void categoryChange();
+    void categoryAdd();
     void categoryDelete();
+    void loading(bool aIsLoading);
 private:
     Ui::FormAchievements *ui;
     SAchievements _achievements;
@@ -132,26 +114,13 @@ private:
     Favorites _favorites;
     Comments _comments;
 
-    //используются на форме
-    //QFormLayout *_categoryValuesLayout;
-    //FormTablesHeaders *_tableAchievements;
-
     //загружены ли другие формы
     bool _isEditCategoryLoaded = false;
     bool _isCompareLoaded      = false;
 
-    //сравнение с друзьями
-    FormMode _currentMode = FormMode::compare;
-    int _loadCompare = 0;
-    int _type1 = 0;
-    int _type2 = 0;
-    SProfiles _profilesFriends;
-    QList<QPair<SProfile, FriendType>> _friends;
-
     //для фильтрации
     MyFilter _fCategories;
     MyFilter _fAchievements;
-    MyFilter _fCompare;
 
     //выбранное достижение
     SAchievement *_currentAchievement = nullptr;

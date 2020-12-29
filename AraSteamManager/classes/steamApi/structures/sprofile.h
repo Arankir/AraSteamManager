@@ -26,10 +26,38 @@ public:
 
     SProfile &update(bool parallel);
 
-    QPixmap getPixmapAvatar();
-    QPixmap getPixmapAvatarMedium();
-    QPixmap getPixmapAvatarFull();
+    QPixmap pixmapAvatar();
+    QPixmap pixmapAvatarMedium();
+    QPixmap pixmapAvatarFull();
 
+    QString steamID()               const {return _steamID;}
+    int communityVisibilityState()  const {return _communityVisibilityState;}
+    int profileState()              const {return _profileState;}
+    QString personaName()           const {return _personaName;}
+    QDateTime lastLogoff()          const {return _lastLogoff;}
+    int commentPermission()         const {return _commentPermission;}
+    QString profileUrl()            const {return _profileUrl;}
+    int personaState()              const {return _personaState;}
+    QString primaryClanID()         const {return _primaryClanID;}
+    QDateTime timeCreated()         const {return _timeCreated;}
+    int personaStateFlags()         const {return _personaStateFlags;}
+    QString gameExtraInfo()         const {return _gameExtraInfo;}
+    QString gameID()                const {return _gameID;}
+    QString locCountryCode()        const {return _locCountryCode;}
+    QString locStateCode()          const {return _locStateCode;}
+    int locCityID()                 const {return _locCityID;}
+    QString realName()              const {return _realName;}
+
+signals:
+    void s_finished(SProfile*);
+    void s_finished();
+
+private slots:
+    void load(bool parallel);
+    void onLoad() override;
+    void fromJson(const QJsonValue &value) override;
+
+private:
     /*const*/ QString _steamID = "";
     int _communityVisibilityState;
     int _profileState;
@@ -48,16 +76,6 @@ public:
     int _locCityID;
     QString _realName;
 
-signals:
-    void s_finished(SProfile*);
-    void s_finished();
-
-private slots:
-    void load(bool parallel);
-    void onLoad() override;
-    void fromJson(const QJsonValue &value) override;
-
-private:
     QString _avatar;
     QString _avatarMedium;
     QString _avatarFull;

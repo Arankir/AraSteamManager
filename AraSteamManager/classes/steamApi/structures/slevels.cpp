@@ -5,13 +5,13 @@ SLevels::SLevels(const QString &aId, QObject *aParent): Sapi(aParent) {
 }
 
 SLevels &SLevels::load(const QString &aSteamId) {
-    _steamid = aSteamId;
-    _request.get(lvlUrl(_steamid), false);
+    _steamId = aSteamId;
+    _request.get(lvlUrl(_steamId), false);
     return *this;
 }
 
 void SLevels::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.getReply()).object().value("response"));
+    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("response"));
     emit s_finished(this);
     emit s_finished();
 }
@@ -19,7 +19,7 @@ void SLevels::onLoad() {
 void SLevels::fromJson(const QJsonValue &aValue) {
     int lvl = aValue.toObject().value("player_level").toInt();
     if (lvl > 0) {
-        _player_level = std::move(lvl);
+        _playerLevel = std::move(lvl);
         _status = StatusValue::success;
     } else {
         _status = StatusValue::error;
@@ -28,6 +28,6 @@ void SLevels::fromJson(const QJsonValue &aValue) {
 }
 
 SLevels &SLevels::update() {
-    load(_steamid);
+    load(_steamId);
     return *this;
 }

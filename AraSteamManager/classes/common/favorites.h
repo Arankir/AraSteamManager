@@ -19,10 +19,10 @@ public:
     FavoriteGame &fromJson(QJsonObject game);
     FavoriteGame &setIcon(QString icon);
 
-    QString getUserId() const {return _userId;}
-    QString getIcon()   const {return _icon;}
-    int getAppid()  const {return _appid;}
-    QString getName()   const {return _name;}
+    QString steamId()   const {return _userId;}
+    QString icon()      const {return _icon;}
+    int appId()         const {return _appid;}
+    QString name()      const {return _name;}
 
 private:
     QString _userId;
@@ -44,10 +44,10 @@ public:
     FavoriteFriend &fromJson(QJsonObject);
     FavoriteFriend &setAdded(const QDateTime &date);
 
-    QString getUserId()     const {return _userId;}
-    QDateTime getAdded()    const {return _added;}
-    QString getId()         const {return _id;}
-    QString getName()       const {return _name;}
+    QString steamId()   const {return _userId;}
+    QDateTime added()   const {return _added;}
+    QString friendId()  const {return _id;}
+    QString name()      const {return _name;}
 
 private:
     QString _userId;
@@ -59,11 +59,11 @@ private:
 class FavoriteAchievement {
 public:
     FavoriteAchievement(const QString &id, const QString &title, const QString &description, const QString &icon, const QString &icon_gray, int achieved) :
-        _id(id), _title(title), _description(description), _achieved(achieved), _icon(icon), _icon_gray(icon_gray) {}
-    FavoriteAchievement(const SAchievement &achievement) : _id(achievement._apiName), _title(achievement._displayName), _description(achievement._description),
-        _achieved(achievement._achieved)/*, _icon(achievement._icon), _icon_gray(achievement.icon_gray)*/ {}
+        _id(id), _title(title), _description(description), _achieved(achieved), _icon(icon), _iconGray(icon_gray) {}
+    FavoriteAchievement(const SAchievement &achievement) : _id(achievement.apiName()), _title(achievement.displayName()), _description(achievement.description()),
+        _achieved(achievement.achieved())/*, _icon(achievement._icon), _icon_gray(achievement.icon_gray)*/ {}
     FavoriteAchievement(const FavoriteAchievement &fag) : _id(fag._id), _title(fag._title), _description(fag._description), _achieved(fag._achieved),
-    _icon(fag._icon), _icon_gray(fag._icon_gray) {}
+    _icon(fag._icon), _iconGray(fag._iconGray) {}
     FavoriteAchievement(const QJsonObject &fag);
 
     FavoriteAchievement &operator=(const FavoriteAchievement &fag);
@@ -72,12 +72,12 @@ public:
     FavoriteAchievement &fromJson(QJsonObject);
     bool isThisAchievement(const SAchievement &achievement);
 
-    QString getId()             const {return _id;}
-    QString getTitle()          const {return _title;}
-    QString getDescription()    const {return _description;}
-    int getAchieved()           const {return _achieved;}
-    QString getIcon()           const {return _icon;}
-    QString getIconGray()       const {return _icon_gray;}
+    QString apiName()       const {return _id;}
+    QString title()         const {return _title;}
+    QString description()   const {return _description;}
+    int achieved()          const {return _achieved;}
+    QString icon()          const {return _icon;}
+    QString iconGray()      const {return _iconGray;}
 
 
 private:
@@ -86,7 +86,7 @@ private:
     QString _description;
     int _achieved;
     QString _icon;
-    QString _icon_gray;
+    QString _iconGray;
 };
 
 class FavoriteAchievementsGame {
@@ -108,10 +108,10 @@ public:
 
     QList<FavoriteAchievement>::iterator begin() {return _achievements.begin();}
     QList<FavoriteAchievement>::iterator end() {return _achievements.end();}
-    QString getUserId() const {return _userId;}
-    int getAppid()  const {return _appid;}
-    QString getName()   const {return _name;}
-    QList<FavoriteAchievement> getAchievements() const {return _achievements;}
+    QString steamId()                           const {return _userId;}
+    int appId()                                 const {return _appid;}
+    QString name()                              const {return _name;}
+    QList<FavoriteAchievement> achievements()   const {return _achievements;}
 
 private:
     QString _userId;
@@ -134,10 +134,10 @@ public:
     bool removeFriend(const QString &idUser, const SProfile &profileFriend, const SFriend &friendLink, bool elseCreate = false);
     bool removeAchievement(const QString &idUser, const SGame &game, const SAchievement &achievement, bool elseCreate = false);
 
-    static QList<FavoriteGame>             getGames()                                               {return _fGame;}
-    static QList<FavoriteFriend>           getFriends()                                             {return _fFriend;}
-    static QList<FavoriteAchievementsGame> getAchievementsGames()                                   {return _fAchievement;}
-    static FavoriteAchievementsGame&       getAchievementsGame(const QString &idUser, const SGame &game);
+    static QList<FavoriteGame>             games()                                               {return _fGame;}
+    static QList<FavoriteFriend>           friends()                                             {return _fFriend;}
+    static QList<FavoriteAchievementsGame> achievementsGames()                                   {return _fAchievement;}
+    static FavoriteAchievementsGame&       achievementsGame(const QString &idUser, const SGame &game);
 
 signals:
 

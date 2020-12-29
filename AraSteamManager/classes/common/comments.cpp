@@ -87,7 +87,7 @@ Comments &Comments::setProfileId(const QString &aProfileId) {
 
 Comments &Comments::setGameComment(const QString &aGameId, const QString &aProfileId, const QStringList &aComment) {
     auto iterator = std::find_if(_games.begin(), _games.end(), [=](GameComment comment) {
-                                                                    return comment.getGameId() == aGameId && comment.getProfileId() == aProfileId;
+                                                                    return comment.gameId() == aGameId && comment.profileId() == aProfileId;
                                                                 });
     if (iterator != _games.end()) {
         (*iterator).changeComment(aComment);
@@ -104,9 +104,9 @@ Comments &Comments::setAchievementComment(const QString &aProfileId, const QStri
                                                                              });
     if (iterator != _achievements.end()) {
         auto iteratorAchievement = std::find_if((*iterator).second.begin(), (*iterator).second.end(), [=](AchievementComment comment) {
-                                                                                                            return comment.getProfileId() == aProfileId
-                                                                                                                    && comment.getGameId() == aGameId
-                                                                                                                    && comment.getAchievementId() == aAchievementId;
+                                                                                                            return comment.profileId() == aProfileId
+                                                                                                                    && comment.gameId() == aGameId
+                                                                                                                    && comment.achievementId() == aAchievementId;
                                                                                                         });
         if (iteratorAchievement != (*iterator).second.end()) {
             (*iteratorAchievement).changeComment(aComment);
@@ -122,7 +122,7 @@ Comments &Comments::setAchievementComment(const QString &aProfileId, const QStri
 
 Comments &Comments::removeGameComment(const QString &aGameId, const QString &aProfileId) {
     _games.erase(std::remove_if(_games.begin(), _games.end(), [=](GameComment comment) {
-                                                                    return ((comment.getGameId() == aGameId) && (comment.getProfileId() == aProfileId));
+                                                                    return ((comment.gameId() == aGameId) && (comment.profileId() == aProfileId));
                                                                 }), _games.end());
     save();
     return *this;
@@ -134,9 +134,9 @@ Comments &Comments::removeAchievementComment(const QString &aProfileId, const QS
                                                                              });
     if (iterator != _achievements.end()) {
         (*iterator).second.erase(std::remove_if((*iterator).second.begin(), (*iterator).second.end(), [=](AchievementComment comment) {
-                                                                                                            return comment.getProfileId() == aProfileId
-                                                                                                                    && comment.getGameId() == aGameId
-                                                                                                                    && comment.getAchievementId() == aAchievementId;
+                                                                                                            return comment.profileId() == aProfileId
+                                                                                                                    && comment.gameId() == aGameId
+                                                                                                                    && comment.achievementId() == aAchievementId;
                                                                                                         }), (*iterator).second.end());
     } else {
 
@@ -147,7 +147,7 @@ Comments &Comments::removeAchievementComment(const QString &aProfileId, const QS
 
 const GameComment &Comments::getGameComment(const QString &aGameId, const QString &aProfileId) const {
     auto iterator = std::find_if(_games.begin(), _games.end(), [=](GameComment comment) {
-                                                                    return ((comment.getGameId() == aGameId) && (comment.getProfileId() == aProfileId));
+                                                                    return ((comment.gameId() == aGameId) && (comment.profileId() == aProfileId));
                                                                 });
     if (iterator != _games.end()) {
         return *iterator;
@@ -162,9 +162,9 @@ const AchievementComment &Comments::getAchievementComment(const QString &aProfil
                                                                              });
     if (iterator != _achievements.end()) {
         auto iteratorAchievement = std::find_if((*iterator).second.begin(), (*iterator).second.end(), [=](AchievementComment comment) {
-                                                                                                            return comment.getProfileId() == aProfileId
-                                                                                                                    && comment.getGameId() == aGameId
-                                                                                                                    && comment.getAchievementId() == aAchievementId;
+                                                                                                            return comment.profileId() == aProfileId
+                                                                                                                    && comment.gameId() == aGameId
+                                                                                                                    && comment.achievementId() == aAchievementId;
                                                                                                         });
         if (iteratorAchievement != (*iterator).second.end()) {
             return *iteratorAchievement;

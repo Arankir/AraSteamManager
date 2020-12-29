@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>AraSteamManager_en.qm</file>
+        <file>AraSteamManager_ru.qm</file>
+    </qresource>
+</RCC>

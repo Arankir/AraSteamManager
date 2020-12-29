@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QDebug>
+#include <iostream>
+#include <iomanip>
 
 class MyFilter : public QObject {
     Q_OBJECT
@@ -23,11 +25,12 @@ public:
     int getCol() const {return _col;}
 
     friend QDebug operator<<(QDebug dbg, const MyFilter &f) {
-        dbg.nospace() << "Filter(";
+        int row = -1;
+        dbg.nospace() << "\nFilter\n";
         for(auto &filterRow: f._filter) {
-            dbg.nospace() << "      (";
+            dbg.nospace() << QString::number(++row).leftJustified(5, ' ') << " (";
             for(auto &filterColumn: filterRow) {
-                dbg.nospace() << filterColumn << " ";
+                dbg.nospace() << (filterColumn?1:0);
             }
             dbg.nospace() << ")\n";
         }

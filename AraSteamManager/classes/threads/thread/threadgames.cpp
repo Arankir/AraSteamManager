@@ -1,7 +1,7 @@
 #include "threadgames.h"
 
 int ThreadGames::fill() {
-    QFont font(Settings::getFontDefaultName(), 10);
+//    QFont font(Settings::defaultFont(), 10);
     int row = 0;
     QStandardItemModel *model = new QStandardItemModel;
     model->setColumnCount(c_columnCount);
@@ -20,7 +20,7 @@ int ThreadGames::fill() {
 //        itemComment->setData(QVariant(game.pixmapIcon()), Qt::DecorationRole);
 //        itemComment->setFlags(Qt::ItemFlag::ItemIsEnabled);
 
-        itemName->setFont(font);
+//        itemName->setFont(font);
 
         model->setItem(row, c_columnAppid,     itemId);
         model->setItem(row, c_columnIndex,     itemIndex);

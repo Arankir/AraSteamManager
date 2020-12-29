@@ -19,7 +19,7 @@ constexpr int c_filterCount         = 4;
 #define ConstantsEnd }
 
 #define Init {
-FormFriends::FormFriends(const QString &aId, SFriends &aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId), _filter(aFriends.getCount(), c_filterCount) {
+FormFriends::FormFriends(const QString &aId, SFriends &aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId), _filter(aFriends.count(), c_filterCount) {
     ui->setupUi(this);
     init();
     setFriends(aId, aFriends);
@@ -33,6 +33,7 @@ FormFriends::FormFriends(QWidget *aParent): QWidget(aParent), ui(new Ui::FormFri
 void FormFriends::init() {
     this->setAttribute(Qt::WA_TranslucentBackground);
     initTable();
+//    setFont(QFont(Settings::defaultFont()));
     setIcons();
 #define Connects {
     connect(ui->ButtonFind,           &QPushButton::clicked,    this, &FormFriends::buttonFind_Clicked);
@@ -46,7 +47,7 @@ void FormFriends::init() {
 void FormFriends::setFriends(const QString &aId, SFriends &aFriends) {
     _loaded = false;
     _id = aId;
-    _filter.setRow(aFriends.getCount());
+    _filter.setRow(aFriends.count());
     initFriends(aFriends);
     createThread();
 }
@@ -68,12 +69,13 @@ bool FormFriends::isLoaded() {
 
 void FormFriends::initFriends(SFriends &aFriends) {
     SFriends friends(aFriends);
-    SProfiles profiles(friends.getProfiles());
+    SProfiles profiles(friends.profiles());
     profiles.sort();
     for(auto &profile: profiles) {
         for (auto &currentFriend: friends) {
-            if (currentFriend._steamID == profile._steamID) {
+            if (currentFriend.steamId() == profile.steamID()) {
                 _friends.append(QPair<SFriend, SProfile>(currentFriend, profile));
+                break;
             }
         }
     }
@@ -144,6 +146,7 @@ void FormFriends::setTableModel(QStandardItemModel *aModel) {
 
 #define System {
 FormFriends::~FormFriends() {
+    qInfo() << "Форма друзей удалилась";
     delete ui;
 }
 
@@ -162,11 +165,13 @@ void FormFriends::retranslate() {
     ui->retranslateUi(this);
     initComboBoxStatus();
 
-    ui->TableFriends->model()->setHeaderData(c_tableColumnIcon,        Qt::Horizontal, tr(""));
-    ui->TableFriends->model()->setHeaderData(c_tableColumnName,        Qt::Horizontal, tr("   НИК"));
-    ui->TableFriends->model()->setHeaderData(c_tableColumnAdded,       Qt::Horizontal, tr("   ДОБАВЛЕН"));
-    ui->TableFriends->model()->setHeaderData(c_tableColumnStatus,      Qt::Horizontal, tr("   СТАТУС"));
-    ui->TableFriends->model()->setHeaderData(c_tableColumnisPublic,    Qt::Horizontal, tr("   ПРОФИЛЬ"));
+    if (ui->TableFriends->model() != nullptr) {
+        ui->TableFriends->model()->setHeaderData(c_tableColumnIcon,        Qt::Horizontal, tr(""));
+        ui->TableFriends->model()->setHeaderData(c_tableColumnName,        Qt::Horizontal, tr("   НИК"));
+        ui->TableFriends->model()->setHeaderData(c_tableColumnAdded,       Qt::Horizontal, tr("   ДОБАВЛЕН"));
+        ui->TableFriends->model()->setHeaderData(c_tableColumnStatus,      Qt::Horizontal, tr("   СТАТУС"));
+        ui->TableFriends->model()->setHeaderData(c_tableColumnisPublic,    Qt::Horizontal, tr("   ПРОФИЛЬ"));
+    }
 }
 
 void FormFriends::updateSettings() {
@@ -182,7 +187,7 @@ QPair<SFriend, SProfile> *FormFriends::getFriendFromRow(int aRow) {
     QModelIndex IdIndex = ui->TableFriends->model()->index(aRow, c_tableColumnID);
     QString id = ui->TableFriends->model()->data(IdIndex).toString();
     auto iterator = std::find_if(_friends.begin(), _friends.end(), [=](const QPair<SFriend, SProfile> &aProfile) {
-                                                                        return aProfile.second._steamID == id;
+                                                                        return aProfile.second.steamID() == id;
                                                                     });
     if (iterator != _friends.end()) {
         return &*iterator;
@@ -222,9 +227,9 @@ void FormFriends::updateHiddenRows() {
 }
 
 bool FormFriends::isProfileFavorite(const QPair<SFriend, SProfile> &aProfile) {
-    QList<FavoriteFriend> favoriteFriends = _favorites.getFriends();
+    QList<FavoriteFriend> favoriteFriends = _favorites.friends();
     return std::any_of(favoriteFriends.begin(), favoriteFriends.end(), [=](const FavoriteFriend value) {
-                                                                             return (value.getId() == aProfile.second._steamID) && (value.getUserId() == _id);
+                                                                             return (value.friendId() == aProfile.second.steamID()) && (value.steamId() == _id);
                                                                          });
 }
 #define SystemEnd }
@@ -241,7 +246,7 @@ void FormFriends::checkBoxOpenProfile_StateChanged(int aState) {
     case 2: {
         for (int i = 0; i < _friends.count(); ++i) {
             int index = getIndexFriendFromRow(i);
-            _filter.setData(index, c_filterPublic, _friends[index].second._communityVisibilityState == 3);
+            _filter.setData(index, c_filterPublic, _friends[index].second.communityVisibilityState() == 3);
         }
     }
     }
@@ -259,14 +264,14 @@ void FormFriends::comboBoxStatus_Activated(int aIndex) {
     case 1: {
         for (int i = 0; i < _friends.count(); ++i) {
             int index = getIndexFriendFromRow(i);
-            _filter.setData(index, c_filterStatus, !_friends[index].second._gameExtraInfo.isEmpty());
+            _filter.setData(index, c_filterStatus, !_friends[index].second.gameExtraInfo().isEmpty());
         }
         break;
     }
     default: {
         for (int i = 0; i < _friends.count(); ++i) {
             int index = getIndexFriendFromRow(i);
-            _filter.setData(index, c_filterStatus, (_friends[index].second._personaState == ui->ComboBoxStatus->currentIndex() - 2) && (_friends[index].second._gameExtraInfo.isEmpty()));
+            _filter.setData(index, c_filterStatus, (_friends[index].second.personaState() == ui->ComboBoxStatus->currentIndex() - 2) && (_friends[index].second.gameExtraInfo().isEmpty()));
         }
     }
     }
@@ -276,7 +281,7 @@ void FormFriends::comboBoxStatus_Activated(int aIndex) {
 void FormFriends::lineEditName_TextChanged(const QString &aNewText) {
     for (int i = 0; i < _friends.count(); ++i) {
         int index = getIndexFriendFromRow(i);
-        _filter.setData(index, c_filterName, _friends[index].second._personaName.toLower().indexOf(aNewText.toLower()) > -1);
+        _filter.setData(index, c_filterName, _friends[index].second.personaName().toLower().indexOf(aNewText.toLower()) > -1);
     }
     updateHiddenRows();
 }
@@ -341,7 +346,7 @@ void FormFriends::goToProfile() {
     if (_currentFriend == nullptr) {
         updateCurrentFriend();
     }
-    emit s_go_to_profile(_currentFriend->second._steamID, ProfileUrlType::id);
+    emit s_go_to_profile(_currentFriend->second.steamID(), ProfileUrlType::id);
 }
 
 void FormFriends::friendToFavorite() {

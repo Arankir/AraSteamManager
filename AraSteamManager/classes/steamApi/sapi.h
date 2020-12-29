@@ -14,8 +14,9 @@ QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePa
 class Sapi : public QObject {
     Q_OBJECT
 public:
-    StatusValue getStatus() const {return _status;}
-    QString getError() const {return _error;}
+    StatusValue status() const {return _status;}
+    QString error() const {return _error;}
+    bool isLoad() const {return _status == StatusValue::success;}
 
     static QString gameImageUrl(QString game, QString img_id);
 

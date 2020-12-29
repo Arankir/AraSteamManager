@@ -35,7 +35,8 @@ public:
     ~FormCategoriesEdit();
     void setGame(SGame &game);
     void setAchievements(SAchievements &aAchievements);
-    void updateFilter(const MyFilter &aFilter);
+    void setFilter(MyFilter *aFilter);
+    void updateHiddenItems();
     void changeCategory(Category *aCategory, int aGlobalIndex);
     void addSubCategory(Category *aParent);
     void deleteCategory(Category *aCategory, int aGlobalIndex);
@@ -67,6 +68,7 @@ private:
     SAchievements _achievements;
     Categories _categories;
     EditType _typeEdit = EditType::none;
+    MyFilter *_fAchievements = nullptr;
 
     Category *_currentCategory = nullptr;
     Category *_currentCategoryParent = nullptr;

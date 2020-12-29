@@ -3,6 +3,30 @@
 
 #include "../sapi.h"
 
+class SGamePlayers : public Sapi {
+    Q_OBJECT
+public:
+    explicit SGamePlayers(const QJsonObject &game = QJsonObject(), QObject *parent = nullptr);
+    SGamePlayers(const int &appId, QObject *parent = nullptr);
+    SGamePlayers(const SGamePlayers &gamePlayers): Sapi(gamePlayers), _appID(gamePlayers._appID),
+        _numberPlayers(gamePlayers._numberPlayers) {}
+
+    SGamePlayers &operator=(const SGamePlayers &game);
+
+    SGamePlayers &load(int appId, bool paralell);
+
+    int playersCount() {return _numberPlayers;}
+
+signals:
+
+private:
+    void onLoad() override;
+    void fromJson(const QJsonValue &value) override;
+
+    int _appID;
+    int _numberPlayers = -1;
+};
+
 class SGame : public QObject {
     Q_OBJECT
 public:
@@ -16,9 +40,6 @@ public:
 
     QPixmap pixmapIcon();
     QPixmap pixmapLogo();
-
-    //Пока сломано
-    const QString getNumberPlayers(bool hardReload);
 
     int appId()                     const {return _appID;}
     QString sAppId()                const {return QString::number(_appID);}
@@ -45,15 +66,13 @@ private:
 
     QPixmap _pixmapIcon;
     QPixmap _pixmapLogo;
-
-    QString _numberPlayers = "";
 };
 
 class SGames : public Sapi {
     Q_OBJECT
 public:
     explicit SGames(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false, QObject *parent = nullptr);
-    SGames(const SGames &games): Sapi(games.parent()), _games(games._games), _id(games._id), _free_games(games._free_games), _game_info(games._game_info) {}
+    SGames(const SGames &games): Sapi(games), _games(games._games), _id(games._id), _freeGames(games._freeGames), _gameInfo(games._gameInfo) {}
     SGames(QObject *parent = nullptr): Sapi(parent) {}
     ~SGames() {;}
 
@@ -67,10 +86,8 @@ public:
 
     QList<SGame>::iterator begin() {return _games.begin();}
     QList<SGame>::iterator end() {return _games.end();}
-    QString getID() const {return _id;}
-    int getCount() const {return _games.size();}
-
-    int _index = -1;
+    QString gameId() const {return _id;}
+    int count() const {return _games.size();}
 
 signals:
     void s_finished(SGames*);
@@ -83,8 +100,8 @@ private slots:
 private:
     QList<SGame> _games;
     QString _id;
-    int _free_games = 0;
-    int _game_info = 0;
+    int _freeGames = 0;
+    int _gameInfo = 0;
 };
 
 //{"appid":218620,

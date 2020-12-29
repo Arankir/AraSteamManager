@@ -18,7 +18,7 @@
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/threads/threading.h"
 
-#include "classes/notMine/donutbreakdownchart.h"
+#include "subWidgets/charts/donutbreakdownchart.h"
 
 namespace Ui {
 class FormStatistics;

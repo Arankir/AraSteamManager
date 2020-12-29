@@ -8,6 +8,7 @@ FormGroups::FormGroups(SProfile &aProfile, SGame &aGame, QWidget *parent) :
 }
 
 FormGroups::~FormGroups() {
+    qInfo() << "Форма групп удалилась";
     delete ui;
 }
 
@@ -24,9 +25,9 @@ void FormGroups::init() {
 void FormGroups::initUi() {
     QVBoxLayout *layout = new QVBoxLayout(ui->ScrollAreaGroups);
     for(const auto &group: _groups) {
-        ui->ComboBoxGroups->addItem(group.getTitle());
-        QCheckBox *chb = new QCheckBox(group.getTitle());
-        auto games = group.getGames();
+        ui->ComboBoxGroups->addItem(group.title());
+        QCheckBox *chb = new QCheckBox(group.title());
+        auto games = group.games();
         bool isInGroup = std::any_of(games.begin(), games.end(), [=](QString game) {
                                                                     return game == _game.sAppId();
                                                                 });
@@ -66,7 +67,7 @@ void FormGroups::changeTitle(const int &aIndex, const QString &aTitle) {
 
 void FormGroups::cancel() {
     emit s_updateGroups(false);
-    close();
+    parentWidget()->parentWidget()->close();
 }
 
 void FormGroups::apply() {
@@ -83,7 +84,7 @@ void FormGroups::apply() {
 
     _groups.save();
     emit s_updateGroups(true);
-    close();
+    parentWidget()->parentWidget()->close();
 }
 
 void FormGroups::add_clicked() {

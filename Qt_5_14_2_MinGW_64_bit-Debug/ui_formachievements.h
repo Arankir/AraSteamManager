@@ -17,20 +17,17 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
-#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "classes\notMine\freezetablewidget.h"
-#include "forms\subForms\achievements\formcategoriesedit.h"
-#include "forms\subForms\achievements\formcompareprofilefilter.h"
-#include "forms\subForms\achievements\formfriendscompare.h"
+#include "forms/subForms/achievements/formcategoriesedit.h"
+#include "forms/subForms/achievements/formfriendscompare.h"
+#include "forms/subForms/achievements/widgets/formreachedfilter.h"
+#include "subWidgets/progressBars/progressbargood.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -43,7 +40,7 @@ public:
     QHBoxLayout *horizontalLayout_10;
     QLabel *LabelTotalPersent;
     QPushButton *ButtonUpdate;
-    FormCompareProfileFilter *FilterMyProfile;
+    FormReachedFilter *FilterMyProfile;
     QCheckBox *CheckBoxFavorites;
     QSpacerItem *horizontalSpacer_5;
     QPushButton *ButtonGuides;
@@ -53,10 +50,10 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QLineEdit *LineEditNameAchievements;
     QPushButton *ButtonFindAchievement;
-    QProgressBar *ProgressBarLoad;
+    ProgressBarGood *ProgressBarLoad;
     QHBoxLayout *horizontalLayout_5;
     QTreeWidget *TreeWidgetCategories;
-    QTabWidget *tabWidget;
+    QTabWidget *TabWidget;
     QWidget *tabStandart;
     QVBoxLayout *verticalLayout_4;
     QTableView *TableViewMyAchievements;
@@ -65,27 +62,7 @@ public:
     FormCategoriesEdit *CategoriesEdit;
     QWidget *tabCompare;
     QHBoxLayout *horizontalLayout_4;
-    FormFriendsCompare *widget;
-    QVBoxLayout *verticalLayout_3;
-    QTableWidget *TableWidgetFriends;
-    QFrame *FrameHideColumns;
-    QHBoxLayout *horizontalLayout_8;
-    QCheckBox *CheckBoxCompareIcon;
-    QCheckBox *CheckBoxCompareTitle;
-    QCheckBox *CheckBoxCompareDescription;
-    QCheckBox *CheckBoxCompareTotalPercent;
-    QCheckBox *CheckBoxCompareAllFriends;
-    QSpacerItem *horizontalSpacer_4;
-    QHBoxLayout *horizontalLayout_15;
-    FreezeTableWidget *TableViewCompare;
-    QFrame *frame_2;
-    QVBoxLayout *verticalLayout_5;
-    QFrame *frame_3;
-    QHBoxLayout *horizontalLayout_14;
-    QLineEdit *lineEdit;
-    QPushButton *pushButton;
-    QListView *listView_2;
-    QListView *listView;
+    FormFriendsCompare *FriendsCompare;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -124,7 +101,7 @@ public:
 
         horizontalLayout_10->addWidget(ButtonUpdate);
 
-        FilterMyProfile = new FormCompareProfileFilter(FrameFilter);
+        FilterMyProfile = new FormReachedFilter(FrameFilter);
         FilterMyProfile->setObjectName(QString::fromUtf8("FilterMyProfile"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
@@ -200,7 +177,7 @@ public:
 
         verticalLayout_2->addWidget(FrameFilter);
 
-        ProgressBarLoad = new QProgressBar(FormAchievements);
+        ProgressBarLoad = new ProgressBarGood(FormAchievements);
         ProgressBarLoad->setObjectName(QString::fromUtf8("ProgressBarLoad"));
         ProgressBarLoad->setValue(0);
 
@@ -215,8 +192,8 @@ public:
 
         horizontalLayout_5->addWidget(TreeWidgetCategories);
 
-        tabWidget = new QTabWidget(FormAchievements);
-        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        TabWidget = new QTabWidget(FormAchievements);
+        TabWidget->setObjectName(QString::fromUtf8("TabWidget"));
         tabStandart = new QWidget();
         tabStandart->setObjectName(QString::fromUtf8("tabStandart"));
         verticalLayout_4 = new QVBoxLayout(tabStandart);
@@ -226,7 +203,7 @@ public:
 
         verticalLayout_4->addWidget(TableViewMyAchievements);
 
-        tabWidget->addTab(tabStandart, QString());
+        TabWidget->addTab(tabStandart, QString());
         tabEditCategory = new QWidget();
         tabEditCategory->setObjectName(QString::fromUtf8("tabEditCategory"));
         horizontalLayout = new QHBoxLayout(tabEditCategory);
@@ -236,149 +213,19 @@ public:
 
         horizontalLayout->addWidget(CategoriesEdit);
 
-        tabWidget->addTab(tabEditCategory, QString());
+        TabWidget->addTab(tabEditCategory, QString());
         tabCompare = new QWidget();
         tabCompare->setObjectName(QString::fromUtf8("tabCompare"));
         horizontalLayout_4 = new QHBoxLayout(tabCompare);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        widget = new FormFriendsCompare(tabCompare);
-        widget->setObjectName(QString::fromUtf8("widget"));
+        FriendsCompare = new FormFriendsCompare(tabCompare);
+        FriendsCompare->setObjectName(QString::fromUtf8("FriendsCompare"));
 
-        horizontalLayout_4->addWidget(widget);
+        horizontalLayout_4->addWidget(FriendsCompare);
 
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        TableWidgetFriends = new QTableWidget(tabCompare);
-        if (TableWidgetFriends->columnCount() < 2)
-            TableWidgetFriends->setColumnCount(2);
-        if (TableWidgetFriends->rowCount() < 4)
-            TableWidgetFriends->setRowCount(4);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        TableWidgetFriends->setItem(0, 1, __qtablewidgetitem);
-        QBrush brush(QColor(0, 0, 0, 255));
-        brush.setStyle(Qt::CrossPattern);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        __qtablewidgetitem1->setForeground(brush);
-        TableWidgetFriends->setItem(1, 1, __qtablewidgetitem1);
-        TableWidgetFriends->setObjectName(QString::fromUtf8("TableWidgetFriends"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(TableWidgetFriends->sizePolicy().hasHeightForWidth());
-        TableWidgetFriends->setSizePolicy(sizePolicy3);
-        TableWidgetFriends->setSelectionBehavior(QAbstractItemView::SelectColumns);
-        TableWidgetFriends->setRowCount(4);
-        TableWidgetFriends->setColumnCount(2);
-        TableWidgetFriends->verticalHeader()->setVisible(false);
+        TabWidget->addTab(tabCompare, QString());
 
-        verticalLayout_3->addWidget(TableWidgetFriends);
-
-        FrameHideColumns = new QFrame(tabCompare);
-        FrameHideColumns->setObjectName(QString::fromUtf8("FrameHideColumns"));
-        FrameHideColumns->setFrameShape(QFrame::StyledPanel);
-        FrameHideColumns->setFrameShadow(QFrame::Raised);
-        horizontalLayout_8 = new QHBoxLayout(FrameHideColumns);
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        CheckBoxCompareIcon = new QCheckBox(FrameHideColumns);
-        CheckBoxCompareIcon->setObjectName(QString::fromUtf8("CheckBoxCompareIcon"));
-        CheckBoxCompareIcon->setChecked(true);
-
-        horizontalLayout_8->addWidget(CheckBoxCompareIcon);
-
-        CheckBoxCompareTitle = new QCheckBox(FrameHideColumns);
-        CheckBoxCompareTitle->setObjectName(QString::fromUtf8("CheckBoxCompareTitle"));
-        CheckBoxCompareTitle->setChecked(true);
-
-        horizontalLayout_8->addWidget(CheckBoxCompareTitle);
-
-        CheckBoxCompareDescription = new QCheckBox(FrameHideColumns);
-        CheckBoxCompareDescription->setObjectName(QString::fromUtf8("CheckBoxCompareDescription"));
-        CheckBoxCompareDescription->setChecked(true);
-
-        horizontalLayout_8->addWidget(CheckBoxCompareDescription);
-
-        CheckBoxCompareTotalPercent = new QCheckBox(FrameHideColumns);
-        CheckBoxCompareTotalPercent->setObjectName(QString::fromUtf8("CheckBoxCompareTotalPercent"));
-        CheckBoxCompareTotalPercent->setChecked(true);
-
-        horizontalLayout_8->addWidget(CheckBoxCompareTotalPercent);
-
-        CheckBoxCompareAllFriends = new QCheckBox(FrameHideColumns);
-        CheckBoxCompareAllFriends->setObjectName(QString::fromUtf8("CheckBoxCompareAllFriends"));
-
-        horizontalLayout_8->addWidget(CheckBoxCompareAllFriends);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_8->addItem(horizontalSpacer_4);
-
-
-        verticalLayout_3->addWidget(FrameHideColumns);
-
-        horizontalLayout_15 = new QHBoxLayout();
-        horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
-        TableViewCompare = new FreezeTableWidget(tabCompare);
-        TableViewCompare->setObjectName(QString::fromUtf8("TableViewCompare"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(TableViewCompare->sizePolicy().hasHeightForWidth());
-        TableViewCompare->setSizePolicy(sizePolicy4);
-
-        horizontalLayout_15->addWidget(TableViewCompare);
-
-        frame_2 = new QFrame(tabCompare);
-        frame_2->setObjectName(QString::fromUtf8("frame_2"));
-        QSizePolicy sizePolicy5(QSizePolicy::Maximum, QSizePolicy::Preferred);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(frame_2->sizePolicy().hasHeightForWidth());
-        frame_2->setSizePolicy(sizePolicy5);
-        frame_2->setFrameShape(QFrame::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Raised);
-        verticalLayout_5 = new QVBoxLayout(frame_2);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        frame_3 = new QFrame(frame_2);
-        frame_3->setObjectName(QString::fromUtf8("frame_3"));
-        frame_3->setFrameShape(QFrame::StyledPanel);
-        frame_3->setFrameShadow(QFrame::Raised);
-        horizontalLayout_14 = new QHBoxLayout(frame_3);
-        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
-        lineEdit = new QLineEdit(frame_3);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-
-        horizontalLayout_14->addWidget(lineEdit);
-
-        pushButton = new QPushButton(frame_3);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-
-        horizontalLayout_14->addWidget(pushButton);
-
-
-        verticalLayout_5->addWidget(frame_3);
-
-        listView_2 = new QListView(frame_2);
-        listView_2->setObjectName(QString::fromUtf8("listView_2"));
-
-        verticalLayout_5->addWidget(listView_2);
-
-        listView = new QListView(frame_2);
-        listView->setObjectName(QString::fromUtf8("listView"));
-
-        verticalLayout_5->addWidget(listView);
-
-
-        horizontalLayout_15->addWidget(frame_2);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_15);
-
-
-        horizontalLayout_4->addLayout(verticalLayout_3);
-
-        tabWidget->addTab(tabCompare, QString());
-
-        horizontalLayout_5->addWidget(tabWidget);
+        horizontalLayout_5->addWidget(TabWidget);
 
 
         verticalLayout_2->addLayout(horizontalLayout_5);
@@ -386,7 +233,7 @@ public:
 
         retranslateUi(FormAchievements);
 
-        tabWidget->setCurrentIndex(0);
+        TabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(FormAchievements);
@@ -410,20 +257,9 @@ public:
         ProgressBarLoad->setFormat(QCoreApplication::translate("FormAchievements", "%v/%m", nullptr));
         QTreeWidgetItem *___qtreewidgetitem = TreeWidgetCategories->headerItem();
         ___qtreewidgetitem->setText(0, QCoreApplication::translate("FormAchievements", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tabStandart), QCoreApplication::translate("FormAchievements", " \320\241\320\262\320\276\320\270 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217  ", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tabEditCategory), QCoreApplication::translate("FormAchievements", "  \320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217\320\274\320\270  ", nullptr));
-
-        const bool __sortingEnabled = TableWidgetFriends->isSortingEnabled();
-        TableWidgetFriends->setSortingEnabled(false);
-        TableWidgetFriends->setSortingEnabled(__sortingEnabled);
-
-        CheckBoxCompareIcon->setText(QCoreApplication::translate("FormAchievements", "\320\230\320\272\320\276\320\275\320\272\320\260", nullptr));
-        CheckBoxCompareTitle->setText(QCoreApplication::translate("FormAchievements", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265", nullptr));
-        CheckBoxCompareDescription->setText(QCoreApplication::translate("FormAchievements", "\320\236\320\277\320\270\321\201\320\260\320\275\320\270\320\265", nullptr));
-        CheckBoxCompareTotalPercent->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276 \320\274\320\270\321\200\321\203", nullptr));
-        CheckBoxCompareAllFriends->setText(QCoreApplication::translate("FormAchievements", "\320\222\321\201\320\265 \320\264\321\200\321\203\320\267\321\214\321\217", nullptr));
-        pushButton->setText(QCoreApplication::translate("FormAchievements", "\320\237\320\276\320\270\321\201\320\272", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tabCompare), QCoreApplication::translate("FormAchievements", "  \320\241\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\265 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270 ", nullptr));
+        TabWidget->setTabText(TabWidget->indexOf(tabStandart), QCoreApplication::translate("FormAchievements", " \320\241\320\262\320\276\320\270 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217  ", nullptr));
+        TabWidget->setTabText(TabWidget->indexOf(tabEditCategory), QCoreApplication::translate("FormAchievements", "  \320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217\320\274\320\270  ", nullptr));
+        TabWidget->setTabText(TabWidget->indexOf(tabCompare), QCoreApplication::translate("FormAchievements", "  \320\241\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\265 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270 ", nullptr));
     } // retranslateUi
 
 };

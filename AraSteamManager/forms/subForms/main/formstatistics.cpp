@@ -5,7 +5,7 @@
 FormStatistics::FormStatistics(const QString &aId, SGames &aGames, const QString &aName, QWidget *aParent): QWidget(aParent), ui(new Ui::FormStatistics), _id(aId), _games(aGames), _name(aName) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    QFont font(Settings::getFontDefaultName());
+//    QFont font(Settings::defaultFont());
     _donutBreakdown = new DonutBreakdownChart();
     _chartT = new QChart;
     _chartM = new QChart;
@@ -15,7 +15,7 @@ FormStatistics::FormStatistics(const QString &aId, SGames &aGames, const QString
     _donutBreakdown->setAnimationOptions(QChart::SeriesAnimations);
     _donutBreakdown->legend()->setAlignment(Qt::AlignRight);
     _donutBreakdown->setMargins(QMargins(1, 1, 1, 1));
-    switch(Settings::getTheme()) {
+    switch(Settings::theme()) {
     case 1: {
         _donutBreakdown->setTheme(QChart::ChartThemeDark);
         break;
@@ -167,7 +167,7 @@ void FormStatistics::onFinish() {
 
     _chartT->addAxis(axisXT, Qt::AlignBottom);
     _chartT->addAxis(axisYT, Qt::AlignLeft);
-    switch(Settings::getTheme()) {
+    switch(Settings::theme()) {
     case 1: {
         _chartT->setTheme(QChart::ChartThemeDark);
         break;
@@ -209,7 +209,7 @@ void FormStatistics::onFinish() {
 
     _chartM->addAxis(axisXM, Qt::AlignBottom);
     _chartM->addAxis(axisYM, Qt::AlignLeft);
-    switch(Settings::getTheme()){
+    switch(Settings::theme()){
     case 1: {
         _chartM->setTheme(QChart::ChartThemeDark);
         break;
@@ -248,7 +248,7 @@ void FormStatistics::onFinish() {
 
     _chartY->addAxis(axisXY, Qt::AlignBottom);
     _chartY->addAxis(axisYY, Qt::AlignLeft);
-    switch(Settings::getTheme()) {
+    switch(Settings::theme()) {
     case 1: {
         _chartY->setTheme(QChart::ChartThemeDark);
         break;
@@ -281,5 +281,6 @@ void FormStatistics::setIcons() {
 }
 
 FormStatistics::~FormStatistics() {
+    qInfo() << "Форма статистики удалилась";
     delete ui;
 }

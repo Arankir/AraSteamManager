@@ -18,7 +18,7 @@
 //Q_DECLARE_LOGGING_CATEGORY(logWarning)
 //Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
-QString getToolTipText(QString text);
+QString textToToolTip(QString text);
 bool createDir(const QString &path);
 
 class Settings {
@@ -35,13 +35,13 @@ public:
     static void setVisibleProfileInfo(int visibleProfileInfo);
     //static void setMaximumTableRows(int rows);
 
-    static QString getMyProfile();
-    static int getLanguage();
-    static int getTheme();
-    static QString getIconsColor();
-    static int getSaveImages();
-    static int getVisibleHiddenGames();
-    static int getProfileInfoSize();
+    static QString myProfile();
+    static int language();
+    static int theme();
+    static QString iconsColor();
+    static int saveImages();
+    static int visibleHiddenGames();
+    static int profileInfoSize();
     //static int getMaximumTableRows();
 
     static void setMainWindowParams(QRect geometry);
@@ -51,15 +51,15 @@ public:
 
     static void setAchievementContainerParams(QRect geometry);
 
-    static QRect getMainWindowGeometry();
-    static QPoint getMainWindowPos();
-    static bool getMainWindowMaximize();
+    static QRect mainWindowGeometry();
+    static QPoint mainWindowPos();
+    static bool isMainWindowMaximize();
 
-    static QRect getAchievementContainerGeometry();
-    static QPoint getAchievementContainerPos();
+    static QRect achievementContainerGeometry();
+    static QPoint achievementContainerPos();
 
-    static QString getFontDefaultName();
-    static QString getQssTheme();
+    static QString defaultFont();
+    static QString qssTheme();
 
     static void syncronizeSettings();
 

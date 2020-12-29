@@ -105,22 +105,23 @@ void initSetting() {
 }
 
 void initLanguage(QApplication &app) {
-    QTranslator lang;
+    QTranslator *lang = new QTranslator;
     Settings Setting;
-    switch(Setting.getLanguage()) {
+    switch(Setting.language()) {
     case 5:
-        lang.load(":/AraSteamManager_ru.qm");
-        app.installTranslator(&lang);
+        lang->load(":/AraSteamManager_ru.qm");
+        app.installTranslator(lang);
         break;
     case 1:
     default:
-        lang.load(":/AraSteamManager_en.qm");
-        app.installTranslator(&lang);
+        lang->load(":/AraSteamManager_en.qm");
+        app.installTranslator(lang);
     }
 }
 
 void initFont() {
-    QFont font(Settings::getFontDefaultName(), 10);
+    QFont font(Settings::defaultFont(), 10);
+    font.setStyleHint(QFont::Monospace);
     //font.setPointSize(12);
     //font.setPixelSize(12);
     qApp->setFont(font);

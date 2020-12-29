@@ -18,8 +18,8 @@ constexpr int c_formsSettings   = 5;
 FormMain::FormMain(QWidget *parent): QWidget(parent), ui(new Ui::FormMain) {
     ui->setupUi(this);
     initComponents();
-    if (Settings::getMyProfile() != "none") {
-        goToProfile(Settings::getMyProfile(), ProfileUrlType::id);
+    if (Settings::myProfile() != "none") {
+        goToProfile(Settings::myProfile(), ProfileUrlType::id);
     }
 }
 
@@ -37,14 +37,14 @@ void FormMain::initComponents() {
     ui->StackedWidgetForms->setCurrentIndex(0);
 
     if (parentWidget() != nullptr) {
-        parentWidget()->setGeometry(Settings::getMainWindowGeometry());
-        parentWidget()->move(Settings::getMainWindowPos());
+        parentWidget()->setGeometry(Settings::mainWindowGeometry());
+        parentWidget()->move(Settings::mainWindowPos());
 
-        if(Settings::getMainWindowMaximize()) {
+        if(Settings::isMainWindowMaximize()) {
             parentWidget()->showMaximized();
         }
     }
-    qApp->setStyleSheet(Settings::getQssTheme());
+    qApp->setStyleSheet(Settings::qssTheme());
     setIcons();
 #define Connects {
     connect(ui->ButtonFindProfile,      &QPushButton::clicked,              this,                       &FormMain::buttonFindProfile_Clicked);
@@ -156,7 +156,7 @@ FormContainerAchievements *FormMain::createFormContainerAchievements() {
 #define GoToFormStart {
 void FormMain::goToProfile(const QString &aId, ProfileUrlType aType) {
     SProfiles newProfile(aId, false, aType);
-    if(newProfile.getStatus() == StatusValue::success) {
+    if(newProfile.status() == StatusValue::success) {
         returnFromForms();
         if(ui->StackedWidgetProfiles->currentIndex() != ui->StackedWidgetProfiles->count() - 1) {
             while(ui->StackedWidgetProfiles->count() - 1 != ui->StackedWidgetProfiles->currentIndex()) {
@@ -170,7 +170,7 @@ void FormMain::goToProfile(const QString &aId, ProfileUrlType aType) {
         qInfo() << "Буфер профилей" << ui->StackedWidgetProfiles->currentIndex() + 1 << "/" << ui->StackedWidgetProfiles->count();
     } else {
         QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
-        qWarning() << newProfile.getError();
+        qWarning() << newProfile.error();
     }
 }
 
@@ -179,7 +179,7 @@ void FormMain::goToGames(SProfile &aProfile, SGames &aGames) {
         if (!ui->StackedFormGames->isInit()) {
             _blockedLoad = true;
             ui->StackedFormGames->setGames(aProfile, aGames);
-            ui->FormProgressBar->setMaximum(aGames.getCount());
+            ui->FormProgressBar->setMaximum(aGames.count());
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
         } else {
@@ -195,7 +195,7 @@ void FormMain::goToFriends(const QString &aSteamId, SFriends &aFriends) {
         if (!ui->StackedFormFriends->isInit()) {
             _blockedLoad = true;
             ui->StackedFormFriends->setFriends(aSteamId, aFriends);
-            ui->FormProgressBar->setMaximum(aFriends.getCount());
+            ui->FormProgressBar->setMaximum(aFriends.count());
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
         } else {
@@ -225,7 +225,7 @@ void FormMain::goToStatistics(const QString &aId, SGames &aGames, const QString 
     if(_statisticsForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
-            ui->FormProgressBar->setMaximum(aGames.getCount());
+            ui->FormProgressBar->setMaximum(aGames.count());
             ui->ScrollAreaStatistic->setWidget(createFormStatistics(aId, aGames, aProfileName));
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(c_formsNone);
@@ -299,13 +299,14 @@ FormMain::~FormMain() {
     if (_containerAchievementsForm != nullptr) {
         delete _containerAchievementsForm;
     }
+    qInfo() << "Главная форма удалилась";
     delete ui;
 }
 
 void FormMain::updateSettings() {
     Settings::syncronizeSettings();
 //TODO исправить ресайз профилей на нормальный вариант
-    switch (Settings::getProfileInfoSize()) {
+    switch (Settings::profileInfoSize()) {
     case 0: {
         ui->StackedWidgetProfiles->setFixedHeight(50);
         break;
@@ -321,9 +322,9 @@ void FormMain::updateSettings() {
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
     if (currentProfile) {
-        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != Settings::getMyProfile());
+        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
     }
-    qApp->setStyleSheet(Settings::getQssTheme());
+    qApp->setStyleSheet(Settings::qssTheme());
     setIcons();
     emit s_updateSettings();
 }
@@ -379,7 +380,7 @@ void FormMain::buttonBack_Clicked() {
         returnFromForms();
         FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
         if (currentProfile) {
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != Settings::getMyProfile());
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
         }
         updateEnabledButtonsBackNext();
     }
@@ -391,7 +392,7 @@ void FormMain::buttonNext_Clicked() {
         returnFromForms();
         FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
         if (currentProfile) {
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile()._steamID != Settings::getMyProfile());
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
         }
         updateEnabledButtonsBackNext();
     }
@@ -413,8 +414,8 @@ void FormMain::buttonSettings_Clicked() {
 }
 
 void FormMain::buttonGoToMyProfile_Clicked() {
-    if(Settings::getMyProfile() != "none") {
-        goToProfile(Settings::getMyProfile(), ProfileUrlType::id);
+    if(Settings::myProfile() != "none") {
+        goToProfile(Settings::myProfile(), ProfileUrlType::id);
     } else {
         QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
     }

@@ -49,7 +49,6 @@ public:
         treeWidget->setHeaderItem(__qtreewidgetitem);
         treeWidget->setObjectName(QString::fromUtf8("treeWidget"));
         treeWidget->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-        treeWidget->setHeaderHidden(true);
         treeWidget->setColumnCount(5);
 
         verticalLayout_2->addWidget(treeWidget);
