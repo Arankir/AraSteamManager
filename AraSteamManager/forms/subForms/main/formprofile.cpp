@@ -19,7 +19,7 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     ui->LabelFriendsVisibility->setTextFormat(Qt::RichText);
     ui->LabelProfileUrl       ->setTextFormat(Qt::RichText);
     ui->ButtonGames->setBaseSize(QSize(23, 23));
-    ui->LabelPersonaState->setWordWrap(true);
+    //ui->LabelPersonaState->setWordWrap(true);
 
     ui->FrameProfileButtons->setMinimumHeight(32 + 18);
 
@@ -30,17 +30,6 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
     ui->LabelTimeCreatedValue   ->setStyleSheet("color: #42a9c6;");
     ui->LabelRealNameValue      ->setStyleSheet("color: #42a9c6;");
     ui->LabelLocCountryCodeValue->setStyleSheet("color: #42a9c6;");
-
-    ui->LabelName             ->setGraphicsEffect(createLightning());
-    ui->LabelNameMinimize     ->setGraphicsEffect(createLightning());
-
-    ui->LabelProfileVisibility->setGraphicsEffect(createLightning());
-    ui->LabelGamesVisibility  ->setGraphicsEffect(createLightning());
-    ui->LabelFriendsVisibility->setGraphicsEffect(createLightning());
-
-    ui->LabelProfileState     ->setGraphicsEffect(createLightning());
-    ui->LabelCommentPermission->setGraphicsEffect(createLightning());
-    ui->LabelBansValue        ->setGraphicsEffect(createLightning());
 
 #define Connects {
     connect(ui->ButtonSetProfile, &QPushButton::clicked, this, &FormProfile::buttonSetProfile_Clicked);
@@ -130,15 +119,8 @@ void FormProfile::setColorStatus(int aRed, int aGreen, int aBlue, double aAlpha)
     ui->LabelName           ->setStyleSheet(stylesheet);
     ui->LabelNameMinimize   ->setStyleSheet(stylesheet);
 
-    QGraphicsDropShadowEffect *nameLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelName->graphicsEffect());
-    if (nameLight) {
-        nameLight->setColor(QColor(aRed, aGreen, aBlue, aAlpha));
-    }
-
-    QGraphicsDropShadowEffect *nameSmallLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelNameMinimize->graphicsEffect());
-    if (nameSmallLight) {
-        nameSmallLight->setColor(QColor(aRed, aGreen, aBlue, aAlpha));
-    }
+    ui->LabelName->setLightColor(aRed, aGreen, aBlue, aAlpha);
+    ui->LabelNameMinimize->setLightColor(aRed, aGreen, aBlue, aAlpha);
 }
 
 #define setData {
@@ -147,43 +129,31 @@ void FormProfile::setProfile(const SProfile &aProfile) {
 }
 
 void FormProfile::setProfileStatus() {
-    //ui->LabelProfileVisibility->setText(tr("Профиль"));
-    QPixmap profileState;
-    QGraphicsDropShadowEffect *profileLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelProfileVisibility->graphicsEffect());
     switch (_profile.communityVisibilityState()) {
         case 1:
             ui->LabelProfileVisibility->setToolTip(tr("Скрытый"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_red_css);
-            profileState.load(Images::stateRed());
-            if (profileLight) {
-                profileLight->setColor(c_red_color);
-            }
+            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
+            ui->LabelProfileVisibility->setLightColor(c_red_color);
             break;
         case 3:
             ui->LabelProfileVisibility->setToolTip(tr("Публичный"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_green_css);
-            profileState.load(Images::stateGreen());
-            if (profileLight) {
-                profileLight->setColor(c_green_color);
-            }
+            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
+            ui->LabelProfileVisibility->setLightColor(c_green_color);
             break;
         case 8:
             ui->LabelProfileVisibility->setToolTip(tr("Для друзей"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_yellow_css);
-            profileState.load(Images::stateYellow());
-            if (profileLight) {
-                profileLight->setColor(c_yellow_color);
-            }
+            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateYellow()).scaled(14, 14));
+            ui->LabelProfileVisibility->setLightColor(c_yellow_color);
             break;
         default:
             ui->LabelProfileVisibility->setToolTip(tr("Неизвестно"));
             ui->LabelProfileVisibility->setStyleSheet("color: " + c_blue_css);
-            profileState.load(Images::stateBlue());
-            if (profileLight) {
-                profileLight->setColor(c_blue_color);
-            }
+            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
+            ui->LabelProfileVisibility->setLightColor(c_blue_color);
         }
-    ui->LabelProfileStatus->setPixmap(profileState.scaled(14, 14));
 }
 
 void FormProfile::setOnlineStatus() {
@@ -230,20 +200,14 @@ void FormProfile::setOnlineStatus() {
 
 void FormProfile::setGames(const QString &aSteamId) {
     _games.load(aSteamId, true, true, false);
-    //ui->LabelGamesVisibility->setText(tr("Игры"));
-    QPixmap gamesState;
-    QGraphicsDropShadowEffect *gamesLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelGamesVisibility->graphicsEffect());
     switch (_games.status()) {
     case StatusValue::success: {
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
         ui->LabelGamesVisibility->setToolTip(tr("Публичный"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_green_css);
-        gamesState.load(Images::stateGreen());
-        //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Игры"));
-        if (gamesLight) {
-            gamesLight->setColor(c_green_color);
-        }
+        ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
+        ui->LabelGamesVisibility->setLightColor(c_green_color);
         break;
     }
     case StatusValue::error: {
@@ -251,11 +215,8 @@ void FormProfile::setGames(const QString &aSteamId) {
         ui->ButtonStatistics->setEnabled(false);
         ui->LabelGamesVisibility->setToolTip(tr("Скрытый"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_red_css);
-        gamesState.load(Images::stateRed());
-        //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Игры"));
-        if (gamesLight) {
-            gamesLight->setColor(c_red_color);
-        }
+        ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
+        ui->LabelGamesVisibility->setLightColor(c_red_color);
         break;
     }
     case StatusValue::none: {
@@ -263,75 +224,53 @@ void FormProfile::setGames(const QString &aSteamId) {
         ui->ButtonStatistics->setEnabled(false);
         ui->LabelGamesVisibility->setToolTip(tr("Неизвестно"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_blue_css);
-        gamesState.load(Images::stateBlue());
-        //ui->LabelGamesVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Игры"));
-        if (gamesLight) {
-            gamesLight->setColor(c_blue_color);
-        }
+        ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
+        ui->LabelGamesVisibility->setLightColor(c_blue_color);
         break;
     }
     }
-    ui->LabelGamesStatus->setPixmap(gamesState.scaled(14, 14));
 }
 
 void FormProfile::setFriends(const QString &aSteamId) {
     _friends.load(aSteamId,false);
-    //ui->LabelFriendsVisibility->setText(tr("Друзья"));
-    QPixmap friendsState;
-    QGraphicsDropShadowEffect *friendsLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelFriendsVisibility->graphicsEffect());
     switch (_friends.status()) {
     case StatusValue::success: {
         ui->ButtonFriends->setEnabled(true);
         ui->LabelFriendsVisibility->setToolTip(tr("Публичный"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_green_css);
-        friendsState.load(Images::stateGreen());
-        //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_green.png\"> "+tr("Друзья"));
-        if (friendsLight) {
-            friendsLight->setColor(c_green_color);
-        }
+        ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
+        ui->LabelFriendsVisibility->setLightColor(c_green_color);
         break;
     }
     case StatusValue::error: {
         ui->ButtonFriends->setEnabled(false);
         ui->LabelFriendsVisibility->setToolTip(tr("Скрытый"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_red_css);
-        friendsState.load(Images::stateRed());
-        //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_red.png\"> "+tr("Друзья"));
-        if (friendsLight) {
-            friendsLight->setColor(c_red_color);
-        }
+        ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
+        ui->LabelFriendsVisibility->setLightColor(c_red_color);
         break;
     }
     case StatusValue::none: {
         ui->ButtonFriends->setEnabled(false);
         ui->LabelFriendsVisibility->setToolTip(tr("Неизвестно"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_blue_css);
-        friendsState.load(Images::stateBlue());
-        //ui->LabelFriendsVisibility->setText("<img height=15 style=\"vertical-align: top\" src=\"://state_blue.png\"> "+tr("Друзья"));
-        if (friendsLight) {
-            friendsLight->setColor(c_blue_color);
-        }
+        ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
+        ui->LabelFriendsVisibility->setLightColor(c_blue_color);
         break;
     }
     }
-    ui->LabelFriendsStatus->setPixmap(friendsState.scaled(14, 14));
 }
 
 void FormProfile::setBans(const QString &aSteamId) {
     SBans bans(aSteamId,false);
-    QGraphicsDropShadowEffect *bansLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelBansValue->graphicsEffect());
     if(bans[0].vacBanned()) {
         ui->LabelBansValue->setText(tr("%1, последний %2 дней назад").arg(QString::number(bans[0].numberOfVacBan()), QString::number(bans[0].daysSinceLastBan())));
         ui->LabelBansValue->setStyleSheet("color: " + c_red_css);
-        if (bansLight) {
-            bansLight->setColor(c_red_color);
-        }
+        ui->LabelBansValue->setLightColor(c_red_color);
     } else {
         ui->LabelBansValue->setText(tr("отсутствуют"));
         ui->LabelBansValue->setStyleSheet("color: " + c_green_css);
-        if (bansLight) {
-            bansLight->setColor(c_green_color);
-        }
+        ui->LabelBansValue->setLightColor(c_green_color);
     }
 }
 
@@ -345,36 +284,26 @@ void FormProfile::setLvl(const QString &aSteamId) {
 }
 
 void FormProfile::setCommunityProfile() {
-    QGraphicsDropShadowEffect *stateLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelProfileState->graphicsEffect());
     if (_profile.profileState() == 1) {
         ui->LabelProfileState->setText(tr("Настроен профиль сообщества"));
         ui->LabelProfileState->setStyleSheet("color: " + c_green_css);
-        if (stateLight) {
-            stateLight->setColor(c_green_color);
-        }
+        ui->LabelProfileState->setLightColor(c_green_color);
     } else {
         ui->LabelProfileState->setText(tr("Не настроен профиль сообщества"));
-        ui->LabelGamesVisibility->setStyleSheet("color: " + c_red_css);
-        if (stateLight) {
-            stateLight->setColor(c_red_color);
-        }
+        ui->LabelProfileState->setStyleSheet("color: " + c_red_css);
+        ui->LabelProfileState->setLightColor(c_red_color);
     }
 }
 
 void FormProfile::setCommentPermission() {
-    QGraphicsDropShadowEffect *commentLight = dynamic_cast<QGraphicsDropShadowEffect*>(ui->LabelCommentPermission->graphicsEffect());
     if (_profile.commentPermission() == 1) {
         ui->LabelCommentPermission->setText(tr("Публичные комментарии разрешены"));
         ui->LabelCommentPermission->setStyleSheet("color: " + c_green_css);
-        if (commentLight) {
-            commentLight->setColor(c_green_color);
-        }
+        ui->LabelCommentPermission->setLightColor(c_green_color);
     } else {
         ui->LabelCommentPermission->setText(tr("Публичные комментарии запрещены"));
         ui->LabelCommentPermission->setStyleSheet("color: " + c_red_css);
-        if (commentLight) {
-            commentLight->setColor(c_red_color);
-        }
+        ui->LabelCommentPermission->setLightColor(c_red_color);
     }
 }
 #define setDataEnd }
@@ -473,6 +402,7 @@ void FormProfile::retranslate() {
     setBans(_profile.steamID());
     setCommunityProfile();
     setCommentPermission();
+    setOnlineStatus();
 }
 
 void FormProfile::setIcons() {

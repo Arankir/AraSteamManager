@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>638</width>
-    <height>334</height>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
-           <widget class="QLabel" name="LabelName">
+           <widget class="LabelLight" name="LabelName">
             <property name="font">
              <font>
               <family>MS Shell Dlg 2</family>
@@ -137,11 +137,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
            <widget class="QLabel" name="LabelPersonaState">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16</height>
-             </size>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="font">
              <font>
@@ -159,19 +159,6 @@
              <bool>true</bool>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>108</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </item>
@@ -207,7 +194,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_8">
           <item>
-           <widget class="QLabel" name="LabelProfileVisibility">
+           <widget class="LabelLight" name="LabelProfileVisibility">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -225,7 +212,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="LabelFriendsVisibility">
+           <widget class="LabelLight" name="LabelFriendsVisibility">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -243,7 +230,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="LabelGamesVisibility">
+           <widget class="LabelLight" name="LabelGamesVisibility">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
               <horstretch>0</horstretch>
@@ -366,7 +353,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="LabelBansValue">
+             <widget class="LabelLight" name="LabelBansValue">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
@@ -539,7 +526,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_12">
           <item>
-           <widget class="QLabel" name="LabelProfileState">
+           <widget class="LabelLight" name="LabelProfileState">
             <property name="font">
              <font>
               <pointsize>10</pointsize>
@@ -568,7 +555,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <widget class="QLabel" name="LabelCommentPermission">
+           <widget class="LabelLight" name="LabelCommentPermission">
             <property name="font">
              <font>
               <pointsize>10</pointsize>
@@ -635,7 +622,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="LabelNameMinimize">
+       <widget class="LabelLight" name="LabelNameMinimize">
         <property name="font">
          <font>
           <pointsize>12</pointsize>
@@ -720,6 +707,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LabelLight</class>
+   <extends>QLabel</extends>
+   <header>subWidgets/labels/labellight.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

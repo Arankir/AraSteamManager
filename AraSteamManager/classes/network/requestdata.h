@@ -23,6 +23,7 @@ public:
     ~RequestData();
 
     void get(const QString &url, bool parallel = false);
+    void get(const QUrl &url, bool parallel = false);
 
     QByteArray reply() const {return _reply;}
 

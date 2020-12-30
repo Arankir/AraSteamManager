@@ -69,6 +69,7 @@ SOURCES += \
     subWidgets/comboBoxes/qcomboboxfriends.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
     subWidgets/items/qlistwidgetfriend.cpp \
+    subWidgets/labels/labellight.cpp \
     subWidgets/lists/qlistwidgetachievements.cpp \
     subWidgets/models/listachievementsmodel.cpp \
     subWidgets/progressBars/progressbarbad.cpp \
@@ -124,6 +125,7 @@ HEADERS += \
     subWidgets/comboBoxes/qcomboboxfriends.h \
     subWidgets/items/qlistwidgetachievement.h \
     subWidgets/items/qlistwidgetfriend.h \
+    subWidgets/labels/labellight.h \
     subWidgets/lists/qlistwidgetachievements.h \
     subWidgets/models/listachievementsmodel.h \
     subWidgets/progressBars/progressbarbad.h \

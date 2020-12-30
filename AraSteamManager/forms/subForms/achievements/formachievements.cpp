@@ -218,7 +218,7 @@ QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
 
     //Добавление кнопки руководств
     QAction *actionGuides = new QAction(tr("Перейти в руководства"), this);
-    //actionGroup->setIcon(QIcon(Images::group1()));
+    actionGuides->setIcon(QIcon(Images::guide()));
 
     //Добавление кнопки обновления
     QAction *actionUpdate = new QAction(tr("Обновить"), this);

@@ -42,6 +42,7 @@ release/multiselectcombobox.o
 release/qcomboboxfriends.o
 release/qlistwidgetachievement.o
 release/qlistwidgetfriend.o
+release/labellight.o
 release/qlistwidgetachievements.o
 release/listachievementsmodel.o
 release/progressbarbad.o
@@ -91,6 +92,7 @@ release/moc_formstatistics.o
 release/moc_framelesswindow.o
 release/moc_multiselectcombobox.o
 release/moc_qcomboboxfriends.o
+release/moc_labellight.o
 release/moc_qlistwidgetachievements.o
 release/moc_listachievementsmodel.o
 release/moc_progressbarbad.o

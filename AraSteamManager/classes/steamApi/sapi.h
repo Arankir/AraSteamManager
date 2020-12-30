@@ -2,6 +2,7 @@
 #define SAPI_H
 
 #include "classes/network/requestimage.h"
+#include <QUrlQuery>
 
 enum class StatusValue {
     none,
@@ -26,17 +27,17 @@ protected:
     ~Sapi();
     Sapi &operator=(const Sapi &api);
 
-    static QString achievementsGlobalUrl(QString appId);
-    static QString achievementsPlayerUrl(QString appId, QString steamId);
-    static QString achievementsPercentUrl(QString appId);
-    static QString bansUrl(QString steamIds);
-    static QString friendsUrl(QString steamId);
-    static QString profileUrl(QString steamId);
-    static QString profileUrl(QStringList steamIds);
-    static QString profilefromVanityUrl(QString steamId);
-    static QString gameUrl(int freeGames, int gameInfo, QString steamId);
-    static QString numberPlayersUrl(QString appId);
-    static QString lvlUrl(QString steamId);
+    static QUrl achievementsGlobalUrl(QString appId);
+    static QUrl achievementsPlayerUrl(QString appId, QString steamId);
+    static QUrl achievementsPercentUrl(QString appId);
+    static QUrl bansUrl(QString steamIds);
+    static QUrl friendsUrl(QString steamId);
+    static QUrl profileUrl(QString steamId);
+    static QUrl profileUrl(QStringList steamIds);
+    static QUrl profilefromVanityUrl(QString steamId);
+    static QUrl gameUrl(int freeGames, int gameInfo, QString steamId);
+    static QUrl numberPlayersUrl(QString appId);
+    static QUrl lvlUrl(QString steamId);
 
     virtual void onLoad() = 0;
     virtual void fromJson(const QJsonValue&) = 0;

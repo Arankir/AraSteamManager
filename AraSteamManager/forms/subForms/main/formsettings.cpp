@@ -23,17 +23,6 @@ bool FormSettings::isLoaded() {
 void FormSettings::initComponents() {
     //ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
 
-//    ui->TreeViewExportComments->setVisible(false);
-//    ui->TreeViewExportFavorites->setVisible(false);
-//    ui->ListViewExportGroups->setVisible(false);
-//    ui->LabelExportGroups->setVisible(false);
-//    ui->LabelExportComments->setVisible(false);
-//    ui->LabelExportFavorites->setVisible(false);
-//    ui->ButtonExportFavorites->setVisible(false);
-//    ui->ButtonExportComments->setVisible(false);
-//    ui->ButtonExportGroups->setVisible(false);
-//    ui->ButtonExportSettings->setVisible(false);
-
     ui->tabWidget->setCurrentIndex(0);
 
     initExport();

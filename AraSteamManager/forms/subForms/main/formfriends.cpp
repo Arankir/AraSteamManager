@@ -45,6 +45,7 @@ void FormFriends::init() {
 }
 
 void FormFriends::setFriends(const QString &aId, SFriends &aFriends) {
+    _blockedLoad = false;
     _loaded = false;
     _id = aId;
     _filter.setRow(aFriends.count());
@@ -53,6 +54,7 @@ void FormFriends::setFriends(const QString &aId, SFriends &aFriends) {
 }
 
 void FormFriends::clear() {
+    _blockedLoad = false;
     _loaded = false;
     _id = "";
     _filter.setRow(0);

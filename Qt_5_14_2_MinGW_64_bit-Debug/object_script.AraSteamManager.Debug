@@ -42,6 +42,7 @@ debug/multiselectcombobox.o
 debug/qcomboboxfriends.o
 debug/qlistwidgetachievement.o
 debug/qlistwidgetfriend.o
+debug/labellight.o
 debug/qlistwidgetachievements.o
 debug/listachievementsmodel.o
 debug/progressbarbad.o
@@ -91,6 +92,7 @@ debug/moc_formstatistics.o
 debug/moc_framelesswindow.o
 debug/moc_multiselectcombobox.o
 debug/moc_qcomboboxfriends.o
+debug/moc_labellight.o
 debug/moc_qlistwidgetachievements.o
 debug/moc_listachievementsmodel.o
 debug/moc_progressbarbad.o

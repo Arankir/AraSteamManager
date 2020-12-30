@@ -174,5 +174,13 @@
         <file>iconsWhiteTheme/checkbox_unchecked_disabled.png</file>
         <file>iconsWhiteTheme/radiobutton_checked_disabled.png</file>
         <file>iconsWhiteTheme/radiobutton_unchecked_disabled.png</file>
+        <file>iconsBlueTheme/arrow_down.png</file>
+        <file>iconsBlueTheme/arrow_down_disabled.png</file>
+        <file>iconsBlueTheme/arrow_left.png</file>
+        <file>iconsBlueTheme/arrow_left_disabled.png</file>
+        <file>iconsBlueTheme/arrow_right.png</file>
+        <file>iconsBlueTheme/arrow_right_disabled.png</file>
+        <file>iconsBlueTheme/arrow_up.png</file>
+        <file>iconsBlueTheme/arrow_up_disabled.png</file>
     </qresource>
 </RCC>

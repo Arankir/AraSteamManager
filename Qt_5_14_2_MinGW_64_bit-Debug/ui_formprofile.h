@@ -18,6 +18,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "subWidgets/labels/labellight.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -30,7 +31,7 @@ public:
     QLabel *LabelAvatar;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_7;
-    QLabel *LabelName;
+    LabelLight *LabelName;
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_9;
     QLabel *LabelRealName;
@@ -45,9 +46,9 @@ public:
     QLabel *LabelFriendsStatus;
     QLabel *LabelGamesStatus;
     QVBoxLayout *verticalLayout_8;
-    QLabel *LabelProfileVisibility;
-    QLabel *LabelFriendsVisibility;
-    QLabel *LabelGamesVisibility;
+    LabelLight *LabelProfileVisibility;
+    LabelLight *LabelFriendsVisibility;
+    LabelLight *LabelGamesVisibility;
     QFrame *FrameProfileMaximumInfo;
     QHBoxLayout *horizontalLayout_14;
     QVBoxLayout *verticalLayout;
@@ -58,7 +59,7 @@ public:
     QFrame *line;
     QHBoxLayout *horizontalLayout_10;
     QLabel *LabelBans;
-    QLabel *LabelBansValue;
+    LabelLight *LabelBansValue;
     QSpacerItem *horizontalSpacer_7;
     QHBoxLayout *horizontalLayout_4;
     QLabel *LabelTimeCreated;
@@ -72,16 +73,16 @@ public:
     QLabel *LabelLocCountryCodeValue;
     QSpacerItem *horizontalSpacer_10;
     QHBoxLayout *horizontalLayout_12;
-    QLabel *LabelProfileState;
+    LabelLight *LabelProfileState;
     QSpacerItem *horizontalSpacer_11;
     QHBoxLayout *horizontalLayout_8;
-    QLabel *LabelCommentPermission;
+    LabelLight *LabelCommentPermission;
     QSpacerItem *horizontalSpacer_12;
     QSpacerItem *horizontalSpacer_5;
     QFrame *FrameProfileButtons;
     QHBoxLayout *horizontalLayout_16;
     QLabel *LabelAvatarMinimize;
-    QLabel *LabelNameMinimize;
+    LabelLight *LabelNameMinimize;
     QPushButton *ButtonGames;
     QPushButton *ButtonFriends;
     QPushButton *ButtonStatistics;
@@ -117,7 +118,7 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        LabelName = new QLabel(FrameProfileBaseInfo);
+        LabelName = new LabelLight(FrameProfileBaseInfo);
         LabelName->setObjectName(QString::fromUtf8("LabelName"));
         QFont font;
         font.setFamily(QString::fromUtf8("MS Shell Dlg 2"));
@@ -172,7 +173,6 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         LabelPersonaState = new QLabel(FrameProfileBaseInfo);
         LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
-        LabelPersonaState->setMaximumSize(QSize(16777215, 16));
         LabelPersonaState->setFont(font1);
         LabelPersonaState->setText(QString::fromUtf8("PersonaState"));
         LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
@@ -217,7 +217,7 @@ public:
 
         verticalLayout_8 = new QVBoxLayout();
         verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
-        LabelProfileVisibility = new QLabel(FrameProfileBaseInfo);
+        LabelProfileVisibility = new LabelLight(FrameProfileBaseInfo);
         LabelProfileVisibility->setObjectName(QString::fromUtf8("LabelProfileVisibility"));
         sizePolicy.setHeightForWidth(LabelProfileVisibility->sizePolicy().hasHeightForWidth());
         LabelProfileVisibility->setSizePolicy(sizePolicy);
@@ -227,7 +227,7 @@ public:
 
         verticalLayout_8->addWidget(LabelProfileVisibility);
 
-        LabelFriendsVisibility = new QLabel(FrameProfileBaseInfo);
+        LabelFriendsVisibility = new LabelLight(FrameProfileBaseInfo);
         LabelFriendsVisibility->setObjectName(QString::fromUtf8("LabelFriendsVisibility"));
         sizePolicy.setHeightForWidth(LabelFriendsVisibility->sizePolicy().hasHeightForWidth());
         LabelFriendsVisibility->setSizePolicy(sizePolicy);
@@ -235,7 +235,7 @@ public:
 
         verticalLayout_8->addWidget(LabelFriendsVisibility);
 
-        LabelGamesVisibility = new QLabel(FrameProfileBaseInfo);
+        LabelGamesVisibility = new LabelLight(FrameProfileBaseInfo);
         LabelGamesVisibility->setObjectName(QString::fromUtf8("LabelGamesVisibility"));
         sizePolicy.setHeightForWidth(LabelGamesVisibility->sizePolicy().hasHeightForWidth());
         LabelGamesVisibility->setSizePolicy(sizePolicy);
@@ -304,7 +304,7 @@ public:
 
         horizontalLayout_10->addWidget(LabelBans);
 
-        LabelBansValue = new QLabel(FrameProfileMaximumInfo);
+        LabelBansValue = new LabelLight(FrameProfileMaximumInfo);
         LabelBansValue->setObjectName(QString::fromUtf8("LabelBansValue"));
         LabelBansValue->setFont(font3);
         LabelBansValue->setText(QString::fromUtf8("BansValue"));
@@ -390,7 +390,7 @@ public:
 
         horizontalLayout_12 = new QHBoxLayout();
         horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        LabelProfileState = new QLabel(FrameProfileMaximumInfo);
+        LabelProfileState = new LabelLight(FrameProfileMaximumInfo);
         LabelProfileState->setObjectName(QString::fromUtf8("LabelProfileState"));
         LabelProfileState->setFont(font3);
         LabelProfileState->setText(QString::fromUtf8("ProfileState"));
@@ -406,7 +406,7 @@ public:
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        LabelCommentPermission = new QLabel(FrameProfileMaximumInfo);
+        LabelCommentPermission = new LabelLight(FrameProfileMaximumInfo);
         LabelCommentPermission->setObjectName(QString::fromUtf8("LabelCommentPermission"));
         LabelCommentPermission->setFont(font3);
         LabelCommentPermission->setText(QString::fromUtf8("CommentPermission"));
@@ -443,7 +443,7 @@ public:
 
         horizontalLayout_16->addWidget(LabelAvatarMinimize);
 
-        LabelNameMinimize = new QLabel(FrameProfileButtons);
+        LabelNameMinimize = new LabelLight(FrameProfileButtons);
         LabelNameMinimize->setObjectName(QString::fromUtf8("LabelNameMinimize"));
         QFont font4;
         font4.setPointSize(12);

@@ -328,44 +328,111 @@ QTableView::indicator:unchecked:pressed {
 QTableView::indicator:checked:pressed {
     image: url(":/theme/iconsBlueTheme/radiobutton_checked_press.png");
 }
-QScrollBar:vertical, QScrollBar:horizontal { 
-    border: 1px solid #999999; 
-    background: #13273a; 
-} 
-QScrollBar:vertical { 
-    width: 15px; 
+QScrollBar:vertical, QScrollBar:horizontal {
+    background-color: #052247;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+
+    /*border: 1px solid #999999;
+    background: #13273a; */
 }
-QScrollBar:horizontal { 
-    height: 15px; 
-} 
-QScrollBar::add-line:vertical {
-    image: url(":/theme/iconsBlueTheme/scrollbar_down.png");
-}
-QScrollBar::sub-line:vertical {
-    image: url(":/theme/iconsBlueTheme/scrollbar_up.png");
-}
-QScrollBar::add-line:horizontal {
-    image: url(":/theme/iconsBlueTheme/scrollbar_right.png");
-}
-QScrollBar::sub-line:horizontal {
-    image: url(":/theme/iconsBlueTheme/scrollbar_left.png");
+QScrollBar:horizontal {
+    height: 16px;
+    margin: 2px 16px 2px 16px;
 }
 
-QScrollBar::handle:vertical, QScrollBar::handle:horizontal { 
-    background: qlineargradient(x1: 0, y1: -1, x2: 0, y2: 2, 
-        stop: 0 #3998ec, 
-        stop: 1.0 #235fcf); 
-    min-width: 15px; 
-    min-height: 15px;
+QScrollBar:vertical {
+    width: 16px;
+    margin: 16px 2px 16px 2px;
 }
-QScrollBar::handle:vertical { 
-    margin-top: 15px; 
-    margin-bottom: 15px; 
+
+QScrollBar::handle:horizontal,
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal:hover,
+QScrollBar::handle:vertical:hover {
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
 }
-QScrollBar::handle:horizontal { 
-    margin-right: 15; 
-    margin-left: 15; 
+
+QScrollBar::handle:horizontal,
+QScrollBar::handle:vertical {
+    background-color: #787878;
 }
+
+QScrollBar::handle:horizontal:hover,
+QScrollBar::handle:vertical:hover {
+    background-color: qlineargradient(x1: 0, y1: -1, x2: 0, y2: 2,
+        stop: 0 #3998ec,
+        stop: 1.0 #235fcf);
+}
+
+QScrollBar::handle:horizontal:focus,
+QScrollBar::handle:vertical:focus {
+    border: 1px solid #1464A0;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:horizontal,
+QScrollBar::sub-line:vertical ,
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on,
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on {
+    height: 12px;
+    width: 12px;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:horizontal {
+    margin: 0px 3px 0px 3px;
+    border-image: url(":/theme/iconsBlueTheme/arrow_right_disabled.png");
+    subcontrol-position: right;
+}
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on {
+    border-image: url(":/theme/iconsBlueTheme/arrow_right.png");
+    subcontrol-position: right;
+}
+
+QScrollBar::add-line:vertical {
+    margin: 3px 0px 3px 0px;
+    border-image: url(":/theme/iconsBlueTheme/arrow_down_disabled.png");
+    subcontrol-position: bottom;
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on {
+    border-image: url(":/theme/iconsBlueTheme/arrow_down.png");
+    subcontrol-position: bottom;
+}
+
+QScrollBar::sub-line:horizontal {
+    margin: 0px 3px 0px 3px;
+    border-image: url(":/theme/iconsBlueTheme/arrow_left_disabled.png");
+    subcontrol-position: left;
+}
+
+QScrollBar::sub-line:horizontal:hover, QScrollBar::sub-line:horizontal:on {
+    border-image: url(":/theme/iconsBlueTheme/arrow_left.png");
+    subcontrol-position: left;
+}
+
+QScrollBar::sub-line:vertical {
+    margin: 3px 0px 3px 0px;
+    border-image: url(":/theme/iconsBlueTheme/arrow_up_disabled.png");
+    subcontrol-position: top;
+}
+
+QScrollBar::sub-line:vertical:hover, QScrollBar::sub-line:vertical:on {
+    border-image: url(":/theme/iconsBlueTheme/arrow_up.png");
+    subcontrol-position: top;
+}
+
+QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal,
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical,
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal,
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+
 QFrame { 
     border: 0px solid #000000; 
 } 

@@ -130,6 +130,7 @@ void SProfiles::fromJson(const QJsonValue &aValue) {
     if (aValue.toObject().value("steamid").toString() != "") {
         QString id = aValue.toObject().value("steamid").toString();
         _request.get(profileUrl(id), false);
+        return;
     }
     add(aValue.toObject().value("players").toArray());
 }
