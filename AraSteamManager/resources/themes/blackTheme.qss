@@ -115,7 +115,7 @@ https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcheckbox
 --------------------------------------------------------------------------- */
 QCheckBox {
     color: #F0F0F0;
-    /*spacing: 4px;*/
+    spacing: 4px;
     outline: none;
     /*padding-top: 4px;*/
     /*padding-bottom: 4px;*/
@@ -134,7 +134,6 @@ QCheckBox QWidget:disabled {
 }
 
 QCheckBox::indicator {
-    margin-left: 4px;
     height: 16px;
     width: 16px;
 }
@@ -198,6 +197,7 @@ QGroupBox#GroupBoxFilter::title {
 QGroupBox::title {
     subcontrol-origin: margin;
     subcontrol-position: top left;
+    color: #dddddd;
     left: 3px;
     padding-left: 3px;
     padding-right: 5px;
@@ -248,8 +248,9 @@ QRadioButton {
     color: #F0F0F0;
     spacing: 4px;
     padding: 0px;
-    border: none;
     outline: none;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 QRadioButton::hover {
@@ -277,7 +278,6 @@ QRadioButton QWidget {
 QRadioButton::indicator {
     border: none;
     outline: none;
-    margin-left: 4px;
     height: 16px;
     width: 16px;
 }
@@ -972,7 +972,7 @@ QPushButton {
   background-color: #505F69;
   border: 1px solid #32414B;
   color: #F0F0F0;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   padding: 3px;
   outline: none;
   /* Issue #194 - Special case of QPushButton inside dialogs, for better UI */
@@ -983,14 +983,14 @@ QPushButton:disabled {
   background-color: #32414B;
   border: 1px solid #32414B;
   color: #787878;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   padding: 3px;
 }
 
 QPushButton:checked {
   background-color: #32414B;
   border: 1px solid #32414B;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   padding: 3px;
   outline: none;
 }
@@ -999,7 +999,7 @@ QPushButton:checked:disabled {
   background-color: #19232D;
   border: 1px solid #32414B;
   color: #787878;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   padding: 3px;
   outline: none;
 }
@@ -1170,24 +1170,16 @@ https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcombobox
 --------------------------------------------------------------------------- */
 QComboBox {
     border: 1px solid #32414B;
-    border-radius: 4px;
-    selection-background-color: #1464A0;
-    padding-left: 4px;
-    padding-right: 36px;
+    border-radius: 1px;
+    /*selection-background-color: #1464A0;*/
+    padding: 0px 18px 0px 3px;
+    color: #dddddd;
     background: qlineargradient(x1: -1, y1: -1, x2: 2, y2: 2,
           stop: 0 #39434D,
           stop: 1.0 #19232D);
-    /* 4 + 16*2 See scrollbar size */
-    /* Fixes #103, #111 */
-    /*min-height: 1.5em;*/
-    /* padding-top: 2px;     removed to fix #132 */
-    /* padding-bottom: 2px;  removed to fix #132 */
-    /* min-width: 75px;      removed to fix #109 */
-    /* Needed to remove indicator - fix #132 */
 }
 
 QComboBox QAbstractItemView {
-    border: 1px solid #32414B;
     border-radius: 0;
     background-color: #19232D;
     selection-background-color: #1464A0;
@@ -1450,10 +1442,11 @@ QTabBar {
 }
 
 QTabBar::close-button {
-  border: 0;
-  margin: 2px;
-  padding: 2px;
-  image: url(":/theme/iconsBlackTheme/window_close.png");
+    border: 0;
+    margin: 2px;
+    padding: 2px;
+    subcontrol-position: right;
+    image: url(":/theme/iconsBlackTheme/window_close.png");
 }
 
 QTabBar::close-button:hover {
@@ -1474,50 +1467,20 @@ QTabBar::tab {
   /* selected ------------------------------------------------------- */
 }
 
-QTabBar::tab:top:selected:disabled {
+QTabBar::tab:top:selected:disabled,
+QTabBar::tab:bottom:selected:disabled,
+QTabBar::tab:left:selected:disabled,
+QTabBar::tab:right:selected:disabled {
   border-bottom: 3px solid #14506E;
   color: #787878;
   background-color: #32414B;
 }
 
-QTabBar::tab:bottom:selected:disabled {
-  border-top: 3px solid #14506E;
-  color: #787878;
-  background-color: #32414B;
-}
-
-QTabBar::tab:left:selected:disabled {
-  border-right: 3px solid #14506E;
-  color: #787878;
-  background-color: #32414B;
-}
-
-QTabBar::tab:right:selected:disabled {
-  border-left: 3px solid #14506E;
-  color: #787878;
-  background-color: #32414B;
-}
-
-QTabBar::tab:top:!selected:disabled {
-  border-bottom: 3px solid #19232D;
-  color: #787878;
-  background-color: #19232D;
-}
-
-QTabBar::tab:bottom:!selected:disabled {
-  border-top: 3px solid #19232D;
-  color: #787878;
-  background-color: #19232D;
-}
-
-QTabBar::tab:left:!selected:disabled {
-  border-right: 3px solid #19232D;
-  color: #787878;
-  background-color: #19232D;
-}
-
+QTabBar::tab:top:!selected:disabled,
+QTabBar::tab:bottom:!selected:disabled,
+QTabBar::tab:left:!selected:disabled,
 QTabBar::tab:right:!selected:disabled {
-  border-left: 3px solid #19232D;
+  border-bottom: 3px solid #19232D;
   color: #787878;
   background-color: #19232D;
 }
@@ -2039,25 +2002,20 @@ https:/theme/doc.qt.io/qt-5/qframe.html#details
 https:/theme/stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
 
 --------------------------------------------------------------------------- */
-/* (dot) .QFrame  fix #141, #126, #123 */
 .QFrame {
-  /*border-radius: 4px;*/
-  /*border: 1px solid #32414B;*/
-  /* No frame */
-  /* HLine */
-  /* HLine */
+    border: 0px solid #000000;
 }
 
 QFrame#FrameProfileBaseInfo {
-    background-color: rgba(30, 40, 50, 0.5);
+    background-color: rgba(70, 70, 70, 0.5);
 }
 
 QFrame#FrameProfileMaximumInfo {
-    background-color: rgba(10, 20, 30, 0.5);
+    background-color: rgba(40, 40, 40, 0.5);
 }
 
 QFrame#FrameProfileButtons {
-    background-color: rgba(10, 20, 30, 0.5);
+    background-color: rgba(40, 40, 40, 0.5);
 }
 
 /* QSplitter --------------------------------------------------------------
