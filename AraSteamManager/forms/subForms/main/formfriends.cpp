@@ -159,7 +159,7 @@ void FormFriends::changeEvent(QEvent *event) {
 }
 
 void FormFriends::closeEvent(QCloseEvent*) {
-    emit s_return_to_profile(this);
+    emit s_returnToProfile(this);
     //delete this;
 }
 
@@ -348,7 +348,7 @@ void FormFriends::goToProfile() {
     if (_currentFriend == nullptr) {
         updateCurrentFriend();
     }
-    emit s_go_to_profile(_currentFriend->second.steamID(), ProfileUrlType::id);
+    emit s_goToProfile(_currentFriend->second.steamID(), ProfileUrlType::id);
 }
 
 void FormFriends::friendToFavorite() {

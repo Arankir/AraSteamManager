@@ -22,19 +22,16 @@ QWidget::item:hover {
 }
 
 QWidget[accessibleName=TitleWindow] {
-    background-color: qlineargradient(x1: 0, y1: -1, x2: 0, y2: 2,
-        stop: 0 #111111,
-        stop: 0.8 #222222,
-        stop: 1.0 #444444);
+    background-color: rgba(30, 41, 59, 0.7);
 }
 
 FramelessWindow, QMessageBox {
     background-color: qradialgradient(
-                        cx:0.5, cy:0.5, 
-                        radius: 0.9, 
-                        fx:0.4, fy:0.5, 
-                        stop:0 #12457c, 
-                        stop:1 #19253d); 
+                            cx:0.5, cy:0.5,
+                            radius: 0.9,
+                            fx:0.4, fy:0.5,
+                            stop:0 #12457c,
+                            stop:1 #19253d);
     border: 1px solid rgb(87, 203, 222); 
 }
 /* QMainWindow ------------------------------------------------------------
@@ -1354,7 +1351,11 @@ QTabWidget QWidget {
 }
 
 QTabWidget::pane {
-    border: 1px solid black; 
+    border: 1px solid #777777;
+    border-radius: 4px;
+    margin: 0px;
+    /* Fixes double border inside pane with pyqt5 */
+    padding: 0px;
 }
 
 QTabWidget::pane:selected {

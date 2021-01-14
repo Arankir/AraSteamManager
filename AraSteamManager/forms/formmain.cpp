@@ -53,7 +53,7 @@ void FormMain::initComponents() {
     connect(ui->ButtonNext,             &QPushButton::clicked,              this,                       &FormMain::buttonNext_Clicked);
     connect(ui->ButtonSettings,         &QPushButton::clicked,              this,                       &FormMain::buttonSettings_Clicked);
     connect(ui->ButtonUpdate,           &QPushButton::clicked,              this,                       &FormMain::buttonUpdate_Clicked);
-    connect(ui->StackedFormFriends,     &FormFriends::s_go_to_profile,      this,                       &FormMain::goToProfile);
+    connect(ui->StackedFormFriends,     &FormFriends::s_goToProfile,      this,                       &FormMain::goToProfile);
     connect(ui->StackedFormGames,       &FormGames::s_showAchievements,     this,                       &FormMain::addAchievements);
 
     connect(ui->StackedFormFriends,     &FormFriends::s_friendsLoaded,      this,                       &FormMain::progressLoading);
@@ -134,7 +134,7 @@ FormProfile *FormMain::createFormProfile(SProfile &aProfile) {
 
 FormStatistics *FormMain::createFormStatistics(const QString &aId, SGames &aGames, const QString &aName) {
     _statisticsForm = new FormStatistics(aId, aGames, aName, this);
-    connect(this,            &FormMain::s_updateSettings,       _statisticsForm,  &FormStatistics::updateSettings);
+    connect(this,            &FormMain::s_updateSettings,         _statisticsForm,  &FormStatistics::updateSettings);
     connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this,             &FormMain::progressLoading);
     connect(_statisticsForm, &FormStatistics::s_finish,           this,             [=]() {
                                                                                         showForm(c_formsStatistic);

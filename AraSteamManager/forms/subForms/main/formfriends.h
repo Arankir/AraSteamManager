@@ -31,8 +31,8 @@ public:
 signals:
     void s_friendsLoaded(int progress, int row);
     void s_finish();
-    void s_return_to_profile(QWidget*);
-    void s_go_to_profile(const QString &id, ProfileUrlType type);
+    void s_returnToProfile(QWidget*);
+    void s_goToProfile(const QString &id, ProfileUrlType type);
 
 private slots:
     //Инициализация
