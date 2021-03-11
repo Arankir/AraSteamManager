@@ -2,29 +2,23 @@
 
 const QString    Sapi::_key = "3826BF60403D15613B4B0381DAB7A7BD";
 
-Sapi::Sapi(QObject *parent): QObject(parent), _status(StatusValue::none), _error("") {
-    connect(&_request, &RequestData::s_finished, this, &Sapi::onLoad);
+Sapi::Sapi(QObject *parent): QObject(parent) {
+
 }
 
-Sapi::Sapi(const Sapi &api): QObject(api.parent()), _status(api._status), _error(api.error()) {
-    connect(&_request, &RequestData::s_finished, this, &Sapi::onLoad);
-}
+Sapi::Sapi(const Sapi &api): QObject(api.parent()) {
 
-Sapi &Sapi::operator=(const Sapi &api) {
-    _status = api._status;
-    _error  = api._error;
-    return *this;
 }
 
 Sapi::~Sapi() {
-    disconnect(&_request, &RequestData::s_finished, this, &Sapi::onLoad);
+
 }
 
 QString Sapi::gameImageUrl(QString aGame, QString aImgId) {
     return "http://media.steampowered.com/steamcommunity/public/images/apps/" + aGame + "/" + aImgId + ".jpg";
 }
 
-QUrl Sapi::achievementsGlobalUrl(QString aAppId) {
+QUrl Sapi::achievementsSchemaUrl(QString aAppId) {
     QUrl url("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/");
     QUrlQuery query;
     query.addQueryItem("key", _key);
@@ -104,6 +98,7 @@ QUrl Sapi::profilefromVanityUrl(QString aSteamId) {
     query.addQueryItem("vanityurl", aSteamId);
     query.addQueryItem("url_type", "1");
     url.setQuery(query);
+    qDebug() << url;
     return url;
     //return "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key=" + _key + "&vanityurl=" + aSteamId + "&url_type=1";
 }
@@ -162,4 +157,8 @@ QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePa
         }
     }
     return aPixmap;
+}
+
+QString Sapi::toString() const {
+    return QJsonDocument(toJson()).toJson(QJsonDocument::Compact);
 }

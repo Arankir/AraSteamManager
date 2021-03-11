@@ -25,7 +25,7 @@ void FormCategoriesEdit::setGame(SGame &aGame) {
     changeEditType(_typeEdit);
 }
 
-void FormCategoriesEdit::setAchievements(SAchievements &aAchievements) {
+void FormCategoriesEdit::setAchievements(QList<SAchievement> &aAchievements) {
     _achievements = aAchievements;
     achievementsToUi();
 }

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormStatistics_t {
-    QByteArrayData data[16];
-    char stringdata0[170];
+    QByteArrayData data[15];
+    char stringdata0[166];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,22 +36,21 @@ QT_MOC_LITERAL(0, 0, 14), // "FormStatistics"
 QT_MOC_LITERAL(1, 15, 18), // "s_statisticsLoaded"
 QT_MOC_LITERAL(2, 34, 0), // ""
 QT_MOC_LITERAL(3, 35, 8), // "progress"
-QT_MOC_LITERAL(4, 44, 3), // "row"
-QT_MOC_LITERAL(5, 48, 8), // "s_finish"
-QT_MOC_LITERAL(6, 57, 19), // "s_return_to_profile"
-QT_MOC_LITERAL(7, 77, 8), // "QWidget*"
-QT_MOC_LITERAL(8, 86, 8), // "onFinish"
-QT_MOC_LITERAL(9, 95, 12), // "createThread"
-QT_MOC_LITERAL(10, 108, 14), // "updateSettings"
-QT_MOC_LITERAL(11, 123, 8), // "setIcons"
-QT_MOC_LITERAL(12, 132, 11), // "changeEvent"
-QT_MOC_LITERAL(13, 144, 7), // "QEvent*"
-QT_MOC_LITERAL(14, 152, 5), // "event"
-QT_MOC_LITERAL(15, 158, 11) // "retranslate"
+QT_MOC_LITERAL(4, 44, 8), // "s_finish"
+QT_MOC_LITERAL(5, 53, 19), // "s_return_to_profile"
+QT_MOC_LITERAL(6, 73, 8), // "QWidget*"
+QT_MOC_LITERAL(7, 82, 8), // "onFinish"
+QT_MOC_LITERAL(8, 91, 12), // "createThread"
+QT_MOC_LITERAL(9, 104, 14), // "updateSettings"
+QT_MOC_LITERAL(10, 119, 8), // "setIcons"
+QT_MOC_LITERAL(11, 128, 11), // "changeEvent"
+QT_MOC_LITERAL(12, 140, 7), // "QEvent*"
+QT_MOC_LITERAL(13, 148, 5), // "event"
+QT_MOC_LITERAL(14, 154, 11) // "retranslate"
 
     },
     "FormStatistics\0s_statisticsLoaded\0\0"
-    "progress\0row\0s_finish\0s_return_to_profile\0"
+    "progress\0s_finish\0s_return_to_profile\0"
     "QWidget*\0onFinish\0createThread\0"
     "updateSettings\0setIcons\0changeEvent\0"
     "QEvent*\0event\0retranslate"
@@ -72,29 +71,29 @@ static const uint qt_meta_data_FormStatistics[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   59,    2, 0x06 /* Public */,
-       5,    0,   64,    2, 0x06 /* Public */,
-       6,    1,   65,    2, 0x06 /* Public */,
+       1,    1,   59,    2, 0x06 /* Public */,
+       4,    0,   62,    2, 0x06 /* Public */,
+       5,    1,   63,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    0,   68,    2, 0x0a /* Public */,
-       9,    0,   69,    2, 0x0a /* Public */,
-      10,    0,   70,    2, 0x0a /* Public */,
-      11,    0,   71,    2, 0x0a /* Public */,
-      12,    1,   72,    2, 0x08 /* Private */,
-      15,    0,   75,    2, 0x08 /* Private */,
+       7,    0,   66,    2, 0x0a /* Public */,
+       8,    0,   67,    2, 0x0a /* Public */,
+       9,    0,   68,    2, 0x0a /* Public */,
+      10,    0,   69,    2, 0x0a /* Public */,
+      11,    1,   70,    2, 0x08 /* Private */,
+      14,    0,   73,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7,    2,
+    QMetaType::Void, 0x80000000 | 6,    2,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 13,   14,
+    QMetaType::Void, 0x80000000 | 12,   13,
     QMetaType::Void,
 
        0        // eod
@@ -106,7 +105,7 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         auto *_t = static_cast<FormStatistics *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->s_statisticsLoaded((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 0: _t->s_statisticsLoaded((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->s_finish(); break;
         case 2: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 3: _t->onFinish(); break;
@@ -131,7 +130,7 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FormStatistics::*)(int , int );
+            using _t = void (FormStatistics::*)(int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormStatistics::s_statisticsLoaded)) {
                 *result = 0;
                 return;
@@ -195,9 +194,9 @@ int FormStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormStatistics::s_statisticsLoaded(int _t1, int _t2)
+void FormStatistics::s_statisticsLoaded(int _t1)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 

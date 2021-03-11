@@ -98,7 +98,7 @@ public:
     static QString hiddenGames(QString steamId = "");
     static QString groupGames(QString profileId = "");
     static QString imagesProfiles(const QString &url);
-    static QString imagesAchievements(const QString &gameId, const QString &url);
+    static QString imagesAchievements(const QString &gameId, const QString &url = "");
     static QString imagesGames(const QString &url);
     static QString commentsGames(const QString &profileId);
     static QString commentsAchievements(const QString &aProfileId = "");

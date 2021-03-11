@@ -4,8 +4,8 @@ int ThreadGames::fill() {
 //    QFont font(Settings::defaultFont(), 10);
     int row = 0;
     QStandardItemModel *model = new QStandardItemModel;
-    model->setColumnCount(c_columnCount);
-    for (auto game: _games) {
+    model->setColumnCount(ColumnGamesCount);
+    for (auto game: qAsConst(_games)) {
         QStandardItem *itemId = new QStandardItem(game.sAppId());
 
         QStandardItem *itemIndex = new QStandardItem(QString::number(row));
@@ -22,12 +22,12 @@ int ThreadGames::fill() {
 
 //        itemName->setFont(font);
 
-        model->setItem(row, c_columnAppid,     itemId);
-        model->setItem(row, c_columnIndex,     itemIndex);
-        model->setItem(row, c_columnIcon,      itemIcon);
-        model->setItem(row, c_columnName,      itemName);
-        //model->setItem(row, c_tableColumnComment,   itemComment);
-        emit s_progress(row, row);
+        model->setItem(row, ColumnGamesAppid,   itemId);
+        model->setItem(row, ColumnGamesIndex,   itemIndex);
+        model->setItem(row, ColumnGamesIcon,    itemIcon);
+        model->setItem(row, ColumnGamesName,    itemName);
+        //model->setItem(row, ColumnGamesComment,   itemComment);
+        emit s_progress(row);
         ++row;
     }
     emit s_finishedModel(model);

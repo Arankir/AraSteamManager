@@ -1,6 +1,7 @@
 release/categoriesgame.o
 release/comments.o
 release/favorites.o
+release/generalfunctions.o
 release/myfilter.o
 release/settings.o
 release/groupsgames.o
@@ -12,7 +13,6 @@ release/sachievements.o
 release/sbans.o
 release/sfriends.o
 release/sgames.o
-release/slevels.o
 release/sprofile.o
 release/threadachievements.o
 release/threadfriends.o
@@ -67,7 +67,6 @@ release/moc_sachievements.o
 release/moc_sbans.o
 release/moc_sfriends.o
 release/moc_sgames.o
-release/moc_slevels.o
 release/moc_sprofile.o
 release/moc_threadachievements.o
 release/moc_threadfriends.o

@@ -34,7 +34,7 @@ public:
     explicit FormCategoriesEdit(QWidget *parent = nullptr);
     ~FormCategoriesEdit();
     void setGame(SGame &game);
-    void setAchievements(SAchievements &aAchievements);
+    void setAchievements(QList<SAchievement> &aAchievements);
     void setFilter(MyFilter *aFilter);
     void updateHiddenItems();
     void changeCategory(Category *aCategory, int aGlobalIndex);
@@ -65,7 +65,7 @@ private slots:
 private:
     Ui::FormCategoriesEdit *ui;
     SGame _game;
-    SAchievements _achievements;
+    QList<SAchievement> _achievements;
     Categories _categories;
     EditType _typeEdit = EditType::none;
     MyFilter *_fAchievements = nullptr;

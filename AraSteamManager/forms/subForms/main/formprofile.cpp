@@ -12,7 +12,7 @@ QString c_blue_css      = "#42a9c6";
 QColor c_blue_color     = QColor (0, 0, 255, 255 * 0.7);
 #define ConstantsEnd }
 
-FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormProfile), _profile(aProfile), _games(this) {
+FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormProfile), _profile(aProfile) {
     ui->setupUi(this);
     ui->LabelProfileVisibility->setTextFormat(Qt::RichText);
     ui->LabelGamesVisibility  ->setTextFormat(Qt::RichText);
@@ -199,70 +199,54 @@ void FormProfile::setOnlineStatus() {
 }
 
 void FormProfile::setGames(const QString &aSteamId) {
-    _games.load(aSteamId, true, true, false);
-    switch (_games.status()) {
-    case StatusValue::success: {
+    _games = SGame::load(aSteamId, true, true);
+    if (_games.count() > 0) {
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
         ui->LabelGamesVisibility->setToolTip(tr("Публичный"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_green_css);
         ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
         ui->LabelGamesVisibility->setLightColor(c_green_color);
-        break;
-    }
-    case StatusValue::error: {
+    } else {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
         ui->LabelGamesVisibility->setToolTip(tr("Скрытый"));
         ui->LabelGamesVisibility->setStyleSheet("color: " + c_red_css);
         ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
         ui->LabelGamesVisibility->setLightColor(c_red_color);
-        break;
-    }
-    case StatusValue::none: {
-        ui->ButtonGames->setEnabled(false);
-        ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setToolTip(tr("Неизвестно"));
-        ui->LabelGamesVisibility->setStyleSheet("color: " + c_blue_css);
-        ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
-        ui->LabelGamesVisibility->setLightColor(c_blue_color);
-        break;
-    }
     }
 }
 
 void FormProfile::setFriends(const QString &aSteamId) {
-    _friends.load(aSteamId,false);
-    switch (_friends.status()) {
-    case StatusValue::success: {
+    _friends = SFriend::load(aSteamId);
+    if (_friends != QList<SFriend>()) {
         ui->ButtonFriends->setEnabled(true);
         ui->LabelFriendsVisibility->setToolTip(tr("Публичный"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_green_css);
         ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
         ui->LabelFriendsVisibility->setLightColor(c_green_color);
-        break;
-    }
-    case StatusValue::error: {
+    } else {
         ui->ButtonFriends->setEnabled(false);
         ui->LabelFriendsVisibility->setToolTip(tr("Скрытый"));
         ui->LabelFriendsVisibility->setStyleSheet("color: " + c_red_css);
         ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
         ui->LabelFriendsVisibility->setLightColor(c_red_color);
-        break;
     }
-    case StatusValue::none: {
-        ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setToolTip(tr("Неизвестно"));
-        ui->LabelFriendsVisibility->setStyleSheet("color: " + c_blue_css);
-        ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
-        ui->LabelFriendsVisibility->setLightColor(c_blue_color);
-        break;
-    }
-    }
+//    case StatusValue::none: {
+//        ui->ButtonFriends->setEnabled(false);
+//        ui->LabelFriendsVisibility->setToolTip(tr("Неизвестно"));
+//        ui->LabelFriendsVisibility->setStyleSheet("color: " + c_blue_css);
+//        ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
+//        ui->LabelFriendsVisibility->setLightColor(c_blue_color);
+//        break;
+//    }
 }
 
 void FormProfile::setBans(const QString &aSteamId) {
-    SBans bans(aSteamId,false);
+    QList<SBan> bans = SBan::load(aSteamId);
+    if (bans.count() == 0) {
+        return;
+    }
     if(bans[0].vacBanned()) {
         ui->LabelBansValue->setText(tr("%1, последний %2 дней назад").arg(QString::number(bans[0].numberOfVacBan()), QString::number(bans[0].daysSinceLastBan())));
         ui->LabelBansValue->setStyleSheet("color: " + c_red_css);
@@ -275,11 +259,14 @@ void FormProfile::setBans(const QString &aSteamId) {
 }
 
 void FormProfile::setLvl(const QString &aSteamId) {
-    SLevels levels(aSteamId);
-    ui->LabellvlValue->setText(levels.level() > 0 ? QString::number(levels.level()) : "?");
-    int dozens = (levels.level() / 10) % 10;
+    int level = SProfile::getLevel(aSteamId);
+    ui->LabellvlValue->setText(level > 0 ? QString::number(level) : "?");
+    int dozens = (level / 10) % 10;
     QString qss = QString("color: #42a9c6; "
-                  "border-image: url(%1) %2 0 %3 0; ").arg(Images::levels(levels.level() / 100), QString::number(dozens * 32), QString::number((10 - dozens - 1) * 32));
+                          "border-image: url(%1) %2 0 %3 0; ").arg
+                         (Images::levels(level / 100),
+                          QString::number(dozens * 32),
+                          QString::number((10 - dozens - 1) * 32));
     ui->LabellvlValue->setStyleSheet(qss);
 }
 
@@ -349,7 +336,7 @@ void FormProfile::updateVisibleInfo() {
 }
 
 void FormProfile::updateInfo() {
-    _profile.update(false);
+    _profile.update();
     profileToUi(_profile);
 }
 
@@ -366,16 +353,16 @@ void FormProfile::retranslate() {
         ui->ButtonStatistics->setText("");
         ui->ButtonFavorites ->setText("");
         ui->ButtonSetProfile->setText("");
-        ui->ButtonGames     ->setToolTip(tr("Игры (%1)").arg(_games.status() == StatusValue::success ? QString::number(_games.count()) : tr("???")));
-        ui->ButtonFriends   ->setToolTip(tr("Друзья (%1)").arg(_friends.status() == StatusValue::success ? QString::number(_friends.count()) : tr("???")));
+        ui->ButtonGames     ->setToolTip(tr("Игры (%1)").arg(_games.count() > 0 ? QString::number(_games.count()) : tr("???")));
+        ui->ButtonFriends   ->setToolTip(tr("Друзья (%1)").arg(_friends != QList<SFriend>() ? QString::number(_friends.count()) : tr("???")));
         ui->ButtonStatistics->setToolTip(tr("Статистика"));
         ui->ButtonFavorites ->setToolTip(tr("Избранное"));
         ui->ButtonSetProfile->setToolTip(tr("Установить профиль как свой"));
         break;
     }
     case 1:{
-        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(_games.status() == StatusValue::success ? QString::number(_games.count()) : tr("???")));
-        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(_friends.status() == StatusValue::success ? QString::number(_friends.count()) : tr("???")));
+        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(_games.count() > 0 ? QString::number(_games.count()) : tr("???")));
+        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(_friends != QList<SFriend>() ? QString::number(_friends.count()) : tr("???")));
         ui->ButtonStatistics->setText(tr("Статистика"));
         ui->ButtonFavorites ->setText(tr("Избранное"));
         ui->ButtonSetProfile->setText(tr("Это мой профиль"));
@@ -387,8 +374,8 @@ void FormProfile::retranslate() {
         break;
     }
     case 2:{
-        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(_games.status() == StatusValue::success ? QString::number(_games.count()) : tr("???")));
-        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(_friends.status() == StatusValue::success ? QString::number(_friends.count()) : tr("???")));
+        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(_games.count() > 0 ? QString::number(_games.count()) : tr("???")));
+        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(_friends != QList<SFriend>() ? QString::number(_friends.count()) : tr("???")));
         ui->ButtonStatistics->setText(tr("Статистика"));
         ui->ButtonFavorites ->setText(tr("Избранное"));
         ui->ButtonSetProfile->setText(tr("Это мой профиль"));
@@ -425,20 +412,20 @@ void FormProfile::buttonSetProfile_Clicked() {
 }
 
 void FormProfile::buttonGames_Clicked() {
-    if(_games.status() == StatusValue::success) {
+    if(_games.count() > 0) {
         emit s_goToGames(_profile, _games);
     }
 }
 
 void FormProfile::buttonFriends_Clicked() {
-    if(_friends.status() == StatusValue::success) {
+    if(_friends != QList<SFriend>()) {
         emit s_goToFriends(_profile.steamID(), _friends);
     }
 }
 
 void FormProfile::buttonStatistics_Clicked() {
-    if(_games.status() == StatusValue::success) {
-        emit s_goToStatistic(_profile.steamID(), _games, _profile.personaName());
+    if(_games.count() > 0) {
+        emit s_goToStatistic(_profile, _games, _profile.personaName());
     }
 }
 

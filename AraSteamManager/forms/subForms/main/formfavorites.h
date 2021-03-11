@@ -10,6 +10,17 @@
 #include "classes/common/myfilter.h"
 #include "classes/network/requestimage.h"
 
+enum tableFavoritesColumns {
+    ColumnFavoritesID       = 0,
+    ColumnFavoritesIcon     = 1,
+    ColumnFavoritesName     = 2,
+    ColumnFavoritesStatus   = 3,
+    ColumnFavoritesIsPublic = 4,
+    ColumnFavoritesGoTo     = 5,
+    ColumnFavoritesFavorite = 6,
+    ColumnFavoritesCount    = 7
+};
+
 namespace Ui {
 class FormFavorites;
 }
@@ -20,7 +31,7 @@ class FormFavorites : public QWidget {
 public slots:
     bool isInit();
     bool isLoaded();
-    void friendLoad(SProfiles *);
+    void friendLoad(SProfile);
 
     void updateSettings();
     void setIcons();

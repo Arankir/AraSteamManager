@@ -10,6 +10,7 @@
 #include "../../AraSteamManager/forms/subForms/achievements/formfriendscompare.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'formfriendscompare.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -22,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriendsCompare_t {
-    QByteArrayData data[48];
-    char stringdata0[618];
+    QByteArrayData data[49];
+    char stringdata0[631];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -65,21 +66,22 @@ QT_MOC_LITERAL(29, 376, 11), // "ReachedType"
 QT_MOC_LITERAL(30, 388, 5), // "aType"
 QT_MOC_LITERAL(31, 394, 14), // "loadingCompare"
 QT_MOC_LITERAL(32, 409, 15), // "loadFriendGames"
-QT_MOC_LITERAL(33, 425, 7), // "SGames*"
-QT_MOC_LITERAL(34, 433, 6), // "aGames"
-QT_MOC_LITERAL(35, 440, 9), // "rowFromId"
-QT_MOC_LITERAL(36, 450, 3), // "aId"
-QT_MOC_LITERAL(37, 454, 15), // "addFriendColumn"
-QT_MOC_LITERAL(38, 470, 12), // "aSteamFriend"
-QT_MOC_LITERAL(39, 483, 18), // "removeFriendColumn"
-QT_MOC_LITERAL(40, 502, 24), // "updateCurrentAchievement"
-QT_MOC_LITERAL(41, 527, 13), // "setFriendsAll"
-QT_MOC_LITERAL(42, 541, 17), // "setFriendsReached"
-QT_MOC_LITERAL(43, 559, 20), // "setFriendsNotReached"
-QT_MOC_LITERAL(44, 580, 11), // "changeEvent"
-QT_MOC_LITERAL(45, 592, 7), // "QEvent*"
-QT_MOC_LITERAL(46, 600, 5), // "event"
-QT_MOC_LITERAL(47, 606, 11) // "retranslate"
+QT_MOC_LITERAL(33, 425, 12), // "QList<SGame>"
+QT_MOC_LITERAL(34, 438, 6), // "aGames"
+QT_MOC_LITERAL(35, 445, 7), // "aUserId"
+QT_MOC_LITERAL(36, 453, 9), // "rowFromId"
+QT_MOC_LITERAL(37, 463, 3), // "aId"
+QT_MOC_LITERAL(38, 467, 15), // "addFriendColumn"
+QT_MOC_LITERAL(39, 483, 12), // "aSteamFriend"
+QT_MOC_LITERAL(40, 496, 18), // "removeFriendColumn"
+QT_MOC_LITERAL(41, 515, 24), // "updateCurrentAchievement"
+QT_MOC_LITERAL(42, 540, 13), // "setFriendsAll"
+QT_MOC_LITERAL(43, 554, 17), // "setFriendsReached"
+QT_MOC_LITERAL(44, 572, 20), // "setFriendsNotReached"
+QT_MOC_LITERAL(45, 593, 11), // "changeEvent"
+QT_MOC_LITERAL(46, 605, 7), // "QEvent*"
+QT_MOC_LITERAL(47, 613, 5), // "event"
+QT_MOC_LITERAL(48, 619, 11) // "retranslate"
 
     },
     "FormFriendsCompare\0s_updateSettings\0"
@@ -93,12 +95,12 @@ QT_MOC_LITERAL(47, 606, 11) // "retranslate"
     "updateHiddenRows\0setIcons\0initTableCompare\0"
     "updateFilterFriend\0aFriendName\0"
     "ReachedType\0aType\0loadingCompare\0"
-    "loadFriendGames\0SGames*\0aGames\0rowFromId\0"
-    "aId\0addFriendColumn\0aSteamFriend\0"
-    "removeFriendColumn\0updateCurrentAchievement\0"
-    "setFriendsAll\0setFriendsReached\0"
-    "setFriendsNotReached\0changeEvent\0"
-    "QEvent*\0event\0retranslate"
+    "loadFriendGames\0QList<SGame>\0aGames\0"
+    "aUserId\0rowFromId\0aId\0addFriendColumn\0"
+    "aSteamFriend\0removeFriendColumn\0"
+    "updateCurrentAchievement\0setFriendsAll\0"
+    "setFriendsReached\0setFriendsNotReached\0"
+    "changeEvent\0QEvent*\0event\0retranslate"
 };
 #undef QT_MOC_LITERAL
 
@@ -131,16 +133,16 @@ static const uint qt_meta_data_FormFriendsCompare[] = {
       26,    0,  159,    2, 0x08 /* Private */,
       27,    2,  160,    2, 0x08 /* Private */,
       31,    0,  165,    2, 0x08 /* Private */,
-      32,    1,  166,    2, 0x08 /* Private */,
-      35,    1,  169,    2, 0x08 /* Private */,
-      37,    1,  172,    2, 0x08 /* Private */,
-      39,    1,  175,    2, 0x08 /* Private */,
-      40,    0,  178,    2, 0x08 /* Private */,
-      41,    0,  179,    2, 0x08 /* Private */,
-      42,    0,  180,    2, 0x08 /* Private */,
-      43,    0,  181,    2, 0x08 /* Private */,
-      44,    1,  182,    2, 0x08 /* Private */,
-      47,    0,  185,    2, 0x08 /* Private */,
+      32,    2,  166,    2, 0x08 /* Private */,
+      36,    1,  171,    2, 0x08 /* Private */,
+      38,    1,  174,    2, 0x08 /* Private */,
+      40,    1,  177,    2, 0x08 /* Private */,
+      41,    0,  180,    2, 0x08 /* Private */,
+      42,    0,  181,    2, 0x08 /* Private */,
+      43,    0,  182,    2, 0x08 /* Private */,
+      44,    0,  183,    2, 0x08 /* Private */,
+      45,    1,  184,    2, 0x08 /* Private */,
+      48,    0,  187,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -158,15 +160,15 @@ static const uint qt_meta_data_FormFriendsCompare[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 21, 0x80000000 | 29,   28,   30,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 33,   34,
-    QMetaType::Int, QMetaType::QString,   36,
-    QMetaType::Float, 0x80000000 | 7,   38,
-    QMetaType::Bool, 0x80000000 | 7,   38,
+    QMetaType::Void, 0x80000000 | 33, QMetaType::QString,   34,   35,
+    QMetaType::Int, QMetaType::QString,   37,
+    QMetaType::Float, 0x80000000 | 7,   39,
+    QMetaType::Bool, 0x80000000 | 7,   39,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 45,   46,
+    QMetaType::Void, 0x80000000 | 46,   47,
     QMetaType::Void,
 
        0        // eod
@@ -191,7 +193,7 @@ void FormFriendsCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 10: _t->initTableCompare(); break;
         case 11: _t->updateFilterFriend((*reinterpret_cast< SProfile*(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
         case 12: _t->loadingCompare(); break;
-        case 13: _t->loadFriendGames((*reinterpret_cast< SGames*(*)>(_a[1]))); break;
+        case 13: _t->loadFriendGames((*reinterpret_cast< QList<SGame>(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
         case 14: { int _r = _t->rowFromId((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 15: { float _r = _t->addFriendColumn((*reinterpret_cast< SProfile(*)>(_a[1])));
@@ -230,13 +232,6 @@ void FormFriendsCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfile* >(); break;
-            }
-            break;
-        case 13:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SGames* >(); break;
             }
             break;
         }

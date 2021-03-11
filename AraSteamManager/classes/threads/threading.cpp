@@ -1,107 +1,57 @@
 #include "threading.h"
 
-int Threading::AddThreadGames(const int aColumnID, const int aColumnIndex, const int aColumnIcon, const int aColumnName, const int aColumnComment,
-                              const int aColumnProgress, const int aColumnCount, SGames aGames) {
-    ThreadGames *games = new ThreadGames(aColumnID, aColumnIndex, aColumnIcon, aColumnName, aColumnComment, aColumnProgress, aColumnCount, aGames);
+int Threading::AddThreadGames(QList<SGame> aGames) {
+    ThreadGames *games = new ThreadGames(aGames);
     QThread *thread = createThread();
     games->moveToThread(thread);
-    connect(thread, &QThread::started,        games,          &ThreadGames::fill);
-    connect(games,  &ThreadGames::s_finished, thread,         &QThread::quit);
-    connect(games,  &ThreadGames::s_finished, games,          &ThreadGames::deleteLater);
-    connect(thread, &QThread::finished,       thread,         &QThread::deleteLater);
-    connect(thread, &QThread::finished,       this,           &Threading::deleteLater);
-    connect(games,  &ThreadGames::s_progress, this->parent(), [=](int progress, int row) {
-                                                                    emit s_games_progress(progress, row);
-                                                                });
-    connect(games,  &ThreadGames::s_finishedModel, parent(),  [=](QStandardItemModel *model) {
-                                                                     emit s_games_finished_model(model);
-                                                                 });
+    connect(thread, &QThread::started,              games,          &ThreadGames::fill);
+    connect(games,  &ThreadGames::s_finished,       thread,         &QThread::quit);
+    connect(games,  &ThreadGames::s_finished,       games,          &ThreadGames::deleteLater);
+    connect(games,  &ThreadGames::s_progress,       this->parent(), [=](int progress) {emit s_games_progress(progress);});
+    connect(games,  &ThreadGames::s_finishedModel,  parent(),       [=](QStandardItemModel *model) {emit s_games_finished_model(model);});
     thread->start();
     return 1;
 }
 
-int Threading::AddThreadFriends(const int aColumnID, const int aColumnIndex, const int aColumnIcon, const int aColumnName, const int aColumnAdded, const int aColumnStatus, const int aColumnisPublic,
-                                QList<QPair<SFriend, SProfile>> aFriends) {
-    ThreadFriends *friends = new ThreadFriends(aColumnID, aColumnIndex, aColumnIcon, aColumnName, aColumnAdded, aColumnStatus, aColumnisPublic, aFriends);
+int Threading::AddThreadFriends(QList<QPair<SFriend, SProfile>> aFriends) {
+    ThreadFriends *friends = new ThreadFriends(aFriends);
     QThread *thread = createThread();
     friends->moveToThread(thread);
     connect(thread,  &QThread::started,          friends,        &ThreadFriends::fill);
     connect(friends, &ThreadFriends::s_finished, thread,         &QThread::quit);
     connect(friends, &ThreadFriends::s_finished, friends,        &ThreadFriends::deleteLater);
-    connect(thread,  &QThread::finished,         thread,         &QThread::deleteLater);
-    connect(thread,  &QThread::finished,         this,           &Threading::deleteLater);
-    connect(friends, &ThreadFriends::s_finishedModel, parent(),  [=](QStandardItemModel *model) {
-                                                                     emit s_friends_finished_model(model);
-                                                                 });
-    connect(friends, &ThreadFriends::s_progress, this->parent(), [=](int progress, int row) {
-                                                                     emit s_friends_progress(progress, row);
-                                                                 });
+    connect(friends, &ThreadFriends::s_finishedModel, parent(),  [=](QStandardItemModel *model) {emit s_friends_finished_model(model);});
+    connect(friends, &ThreadFriends::s_progress, this->parent(), [=](int progress) {emit s_friends_progress(progress);});
     thread->start();
     return 1;
 }
 
-int Threading::AddThreadStatistics(SGames &aGames, QString &aId, QVector<int> &aNumOf, QVector<QPair<QString,QString> > &aComplete,
-                                   QVector<QPair<QString,QString>> &aStarted, QVector<QPair<QString,QString>> &aNotStarted,
-                                   QVector<double> &aAveragePercent, int &aSummColumn, QVector<int> &aTimes,
+int Threading::AddThreadStatistics(QList<SGame> &aGames, const QString &aId, QVector<SGame> &aNoAchievements, QVector<SGame> &aComplete,
+                                   QVector<QPair<SGame, double>> &aStarted, QVector<SGame> &aNotStarted, int &aSummColumn, QVector<int> &aTimes,
                                    QVector<int> &aMonths, QVector<QPair<QString,int>> &aYears) {
-    ThreadStatistics *statistics = new ThreadStatistics(aGames, aId, aNumOf, aComplete, aStarted, aNotStarted, aAveragePercent, aSummColumn, aTimes, aMonths, aYears);
+    ThreadStatistics *statistics = new ThreadStatistics(aGames, aId, aNoAchievements, aComplete, aStarted, aNotStarted, aSummColumn, aTimes, aMonths, aYears);
     QThread *thread = createThread();
     statistics->moveToThread(thread);
     connect(thread,     &QThread::started,              statistics,     &ThreadStatistics::fill);
     connect(statistics, &ThreadStatistics::s_finished,  thread,         &QThread::quit);
     connect(statistics, &ThreadStatistics::s_finished,  statistics,     &ThreadStatistics::deleteLater);
-    connect(statistics, &ThreadStatistics::s_progress,  this->parent(), [=](int progress, int row) {
-                                                                            emit s_statistics_progress(progress, row);
-                                                                        });
-    connect(statistics, &ThreadStatistics::s_finished,  this->parent(), [=]() {
-                                                                            emit s_statistics_finished();
-                                                                        });
+    connect(statistics, &ThreadStatistics::s_progress,  this->parent(), [=](int progress) {emit s_statistics_progress(progress);});
+    connect(statistics, &ThreadStatistics::s_finished,  this->parent(), [=]() {emit s_statistics_finished();});
     thread->start();
     return 1;
 }
 
-int Threading::AddThreadFriendAchievements(QTableWidget *aTableWidgetAchievements, SAchievements &aAchievement, int aCol, int aColumnAppid) {
-    Q_UNUSED(aTableWidgetAchievements);
-    Q_UNUSED(aAchievement);
-    Q_UNUSED(aCol);
-    Q_UNUSED(aColumnAppid);
-//    ThreadAchievements *achievements = new ThreadAchievements;
-//    QThread *thread = new QThread;
-//    achievements->moveToThread(thread);
-//    achievements->setFriend(aTableWidgetAchievements, aAchievement, aCol, aColumnAppid);
-//    connect(thread,       &QThread::started,                achievements,   &ThreadAchievements::addFriend);
-//    connect(achievements, &ThreadAchievements::s_finished,  thread,         &QThread::quit);
-//    connect(achievements, &ThreadAchievements::s_finished,  achievements,   &ThreadAchievements::deleteLater);
-//    connect(thread,       &QThread::finished,               thread,         &QThread::deleteLater);
-//    connect(thread,       &QThread::finished,               this,           &Threading::deleteLater);
-//    connect(achievements, &ThreadAchievements::s_is_public, this->parent(), [=](bool isVisible, int column) {
-//        emit s_achievements_friends_is_public(isVisible, column);
-//    });
-//    thread->start();
-    return 1;
-}
-
-int Threading::AddThreadAchievements(const int aColumnAppid, const int aColumnIndex, const int aColumnIcon,
-                                     const int aColumnTitle, const int aColumnDescription, const int aColumnComment,
-                                     const int aColumnWorld, const int aColumnMy, const int aColumnCount,
-                                     const QColor aAchievedColor, const QColor aNotAchievedColor,
-                                     const SAchievements &aAchievements, int aGameAppId) {
-    ThreadAchievements *achievements = new ThreadAchievements(aAchievements, aGameAppId, aColumnAppid,
-                                                              aColumnIndex, aColumnIcon, aColumnTitle,
-                                                              aColumnDescription, aColumnComment, aColumnWorld,
-                                                              aColumnMy, aColumnCount,
+int Threading::AddThreadAchievements(const QColor aAchievedColor, const QColor aNotAchievedColor,
+                                     const QList<SAchievement> &aAchievements, int aGameAppId) {
+    ThreadAchievements *achievements = new ThreadAchievements(aAchievements, aGameAppId,
                                                               aAchievedColor, aNotAchievedColor);
     QThread *thread = createThread();
     achievements->moveToThread(thread);
     connect(thread,       &QThread::started,               achievements,   &ThreadAchievements::fill);
     connect(achievements, &ThreadAchievements::s_finished, thread,         &QThread::quit);
     connect(achievements, &ThreadAchievements::s_finished, achievements,   &ThreadAchievements::deleteLater);
-    connect(achievements, &ThreadAchievements::s_progress, this->parent(), [=](int progress, int row) {
-                                                                                emit s_achievements_progress(progress, row);
-                                                                            });
-    connect(achievements, &ThreadAchievements::s_finishedModel, parent(),  [=](QStandardItemModel *model, int reached, int notReached) {
-                                                                                emit s_achievements_finished_model(model, reached, notReached);
-                                                                            });
+    connect(achievements, &ThreadAchievements::s_progress, this->parent(), [=](int progress, int max) {emit s_achievements_progress(progress, max);});
+    connect(achievements, &ThreadAchievements::s_finishedModel, parent(),  [=](QStandardItemModel *model, int reached, int notReached) {emit s_achievements_finished_model(model, reached, notReached);});
     thread->start();
     return 1;
 }

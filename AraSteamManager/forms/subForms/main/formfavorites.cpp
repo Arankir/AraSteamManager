@@ -1,21 +1,5 @@
 #include "formfavorites.h"
 #include "ui_formfavorites.h"
-#define Constants {
-constexpr int c_tableFriendsColumnID = 0;
-constexpr int c_tableFriendsColumnIcon = 1;
-constexpr int c_tableFriendsColumnName = 2;
-constexpr int c_tableFriendsColumnStatus = 3;
-constexpr int c_tableFriendsColumnisPublic = 4;
-constexpr int c_tableFriendsColumnGoTo = 5;
-constexpr int c_tableFriendsColumnFavorite = 6;
-constexpr int c_tableFriendsColumnCount = 7;
-
-//const int c_filterName=0;
-//const int c_filterStatus=1;
-//const int c_filterPublic=2;
-//const int c_filterFavorites=3;
-//const int c_filterCount=4;
-#define ConstantsEnd }
 
 FormFavorites::FormFavorites(QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites) {
     ui->setupUi(this);
@@ -46,16 +30,17 @@ void FormFavorites::initComponents() {
 //    for (int i = 0; i < gamesJ.size(); ++i) {
 //        //
 //    }
-    ui->TableWidgetFriends->setColumnCount(c_tableFriendsColumnCount);
+    ui->TableWidgetFriends->setColumnCount(ColumnFavoritesCount);
     ui->TableWidgetFriends->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->TableWidgetFriends->setAlternatingRowColors(true);
     ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->TableWidgetFriends->setColumnHidden(c_tableFriendsColumnID, true);
-    ui->TableWidgetFriends->setColumnWidth(c_tableFriendsColumnIcon, 33);
+    ui->TableWidgetFriends->setColumnHidden(ColumnFavoritesID, true);
+    ui->TableWidgetFriends->setColumnWidth(ColumnFavoritesIcon, 33);
     ui->TableWidgetFriends->setRowCount(_favorites.friends().count());
-    for(FavoriteFriend steamFriend: _favorites.friends()) {
-        SProfiles *Profiles = new SProfiles(steamFriend.friendId(), true, ProfileUrlType::id);
-        connect(Profiles, SIGNAL(s_finished(SProfiles*)), this, SLOT(friendLoad(SProfiles*)));
+    for(const FavoriteFriend &steamFriend: _favorites.friends()) {
+        SProfile::load(steamFriend.friendId(), SProfileRequestType::id, std::bind(&FormFavorites::friendLoad, this,  std::placeholders::_1));
+//        SProfiles *Profiles = new SProfiles(steamFriend.friendId(), true, ProfileUrlType::id);
+//        connect(Profiles, SIGNAL(s_finished(SProfiles*)), this, SLOT(friendLoad(SProfiles*)));
     }
 //    for (int i = 0; i < achievementsJ.size(); ++i) {
 //        //
@@ -63,18 +48,18 @@ void FormFavorites::initComponents() {
     retranslate();
 }
 
-void FormFavorites::friendLoad(SProfiles *aProfile) {
+void FormFavorites::friendLoad(SProfile aProfile) {
     QLabel *avatarFriend = new QLabel;
     avatarFriend->setBaseSize(QSize(32,32));
-    ui->TableWidgetFriends->setCellWidget(_numRequests, c_tableFriendsColumnIcon, avatarFriend);
-    avatarFriend->setPixmap((*aProfile)[0].pixmapAvatar());
+    ui->TableWidgetFriends->setCellWidget(_numRequests, ColumnFavoritesIcon, avatarFriend);
+    avatarFriend->setPixmap(aProfile.pixmapAvatar());
 
     QTableWidgetItem *item4 = new QTableWidgetItem;
-    if(!(*aProfile)[0].gameExtraInfo().isEmpty()) {
+    if(!aProfile.gameExtraInfo().isEmpty()) {
         item4->setText(tr("В игре"));
         item4->setForeground(QColor(137,183,83));
     } else
-        switch ((*aProfile)[0].personaState()) {
+        switch (aProfile.personaState()) {
         case 0:{
                 item4->setText(tr("Не в сети"));
                 item4->setForeground(QColor(76,77,79));
@@ -112,7 +97,7 @@ void FormFavorites::friendLoad(SProfiles *aProfile) {
         }
         }
     QTableWidgetItem *item5 = new QTableWidgetItem;
-    switch((*aProfile)[0].communityVisibilityState()) {
+    switch(aProfile.communityVisibilityState()) {
         case 1:
             item5->setText(tr("Скрытый"));
             item5->setForeground(QColor(110,14,14));
@@ -130,10 +115,10 @@ void FormFavorites::friendLoad(SProfiles *aProfile) {
             item5->setForeground(QColor(110,14,14));
             break;
     }
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnID, new QTableWidgetItem((*aProfile)[0].steamID()));
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnName, new QTableWidgetItem((*aProfile)[0].personaName()));
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnStatus, item4);
-    ui->TableWidgetFriends->setItem(_numRequests,c_tableFriendsColumnisPublic, item5);
+    ui->TableWidgetFriends->setItem(_numRequests,ColumnFavoritesID, new QTableWidgetItem(aProfile.steamID()));
+    ui->TableWidgetFriends->setItem(_numRequests,ColumnFavoritesName, new QTableWidgetItem(aProfile.personaName()));
+    ui->TableWidgetFriends->setItem(_numRequests,ColumnFavoritesStatus, item4);
+    ui->TableWidgetFriends->setItem(_numRequests,ColumnFavoritesIsPublic, item5);
     ++_numRequests;
 }
 
@@ -154,13 +139,13 @@ void FormFavorites::changeEvent(QEvent *event) {
 
 void FormFavorites::retranslate() {
     ui->retranslateUi(this);
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnID, new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnIcon, new QTableWidgetItem(""));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnName, new QTableWidgetItem(tr("Ник")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnStatus, new QTableWidgetItem(tr("Статус")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnisPublic, new QTableWidgetItem(tr("Профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnGoTo, new QTableWidgetItem(tr("На профиль")));
-    ui->TableWidgetFriends->setHorizontalHeaderItem(c_tableFriendsColumnFavorite, new QTableWidgetItem(tr("Избранное")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesID, new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesIcon, new QTableWidgetItem(""));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesName, new QTableWidgetItem(tr("Ник")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesStatus, new QTableWidgetItem(tr("Статус")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesIsPublic, new QTableWidgetItem(tr("Профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesGoTo, new QTableWidgetItem(tr("На профиль")));
+    ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesFavorite, new QTableWidgetItem(tr("Избранное")));
 }
 
 void FormFavorites::on_pushButton_clicked() {

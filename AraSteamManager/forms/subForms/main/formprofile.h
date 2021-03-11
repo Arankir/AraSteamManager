@@ -5,7 +5,6 @@
 #include <QGraphicsDropShadowEffect>
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sbans.h"
-#include "classes/steamApi/structures/slevels.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/network/requestimage.h"
@@ -31,13 +30,13 @@ public slots:
     void updateSettings();
 
     SProfile getProfile() const {return _profile;}
-    SGames getGames() const {return _games;}
-    SFriends getFriends() const {return _friends;}
+    QList<SGame> getGames() const {return _games;}
+    QList<SFriend> getFriends() const {return _friends;}
 
 signals:
-    void s_goToGames(SProfile &profileSteamid, SGames &games);
-    void s_goToFriends(const QString &profileSteamid, SFriends &friends);
-    void s_goToStatistic(const QString &profileSteamid, SGames &games, const QString &profileName);
+    void s_goToGames(SProfile &profileSteamid, QList<SGame> &games);
+    void s_goToFriends(const QString &profileSteamid, QList<SFriend> &friends);
+    void s_goToStatistic(const SProfile &profile, QList<SGame> &games, const QString &profileName);
     void s_goToFavorites();
     void s_myProfileChange();
 
@@ -67,8 +66,8 @@ private slots:
 private:
     Ui::FormProfile *ui;
     SProfile _profile;
-    SGames _games;
-    SFriends _friends;
+    QList<SGame> _games;
+    QList<SFriend> _friends;
     //Settings _setting;
     int _visibleInfo;
 };

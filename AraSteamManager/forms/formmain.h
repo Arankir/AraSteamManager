@@ -24,11 +24,19 @@
 #include "forms/subForms/main/formprofile.h"
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sbans.h"
-#include "classes/steamApi/structures/slevels.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/common/settings.h"
 #include "subWidgets/progressBars/progressbargood.h"
+
+enum stackedFormsMain {
+    FormMainNone        = 0,
+    FormMainGames       = 1,
+    FormMainFriends     = 2,
+    FormMainStatistic   = 3,
+    FormMainFavorites   = 4,
+    FormMainSettings    = 5
+};
 
 namespace Ui {
     class FormMain;
@@ -40,26 +48,23 @@ class FormMain : public QWidget {
 public:
     explicit FormMain(QWidget *parent = nullptr);
     ~FormMain() override;
-    FormFavorites *_favoritesForm = nullptr;
     FormStatistics *_statisticsForm = nullptr;
-    FormSettings *_settingsForm = nullptr;
     FormContainerAchievements *_containerAchievementsForm = nullptr;
 
 public slots:
-    void progressLoading(int, int);
-    void addAchievements(SAchievementsPlayer &achievements, SGame &games);
+    void addAchievements(QList<SAchievementPlayer> &achievements, SGame &games);
     void removeAchievements(int index);
     void containerAchievementsClose();
 
-    void goToGames(SProfile &profileSteamid, SGames &games);
-    void goToFriends(const QString &profileSteamid, SFriends &friends);
+    void goToGames(SProfile &profileSteamid, QList<SGame> &games);
+    void goToFriends(const QString &profileSteamid, QList<SFriend> &friends);
     void goToFavorites();
-    void goToStatistics(const QString &profileSteamid, SGames &games, const QString &profileName);
+    void goToStatistics(const SProfile &profileSteamid, QList<SGame> &games, const QString &profileName);
 
     void updateSettings();
 
     FormProfile *createFormProfile(SProfile &aProfile);
-    FormStatistics *createFormStatistics(const QString &aId, SGames &aGames, const QString &aName);
+    FormStatistics *createFormStatistics(const SProfile &aProfile, QList<SGame> &aGames, const QString &aName);
     FormContainerAchievements *createFormContainerAchievements();
 signals:
     void s_updateSettings();
@@ -70,16 +75,16 @@ private slots:
     void changeEvent(QEvent*) override;
     void closeEvent(QCloseEvent*) override;
     //Forms
-    void showForm(int widgetIndex, int widthWindow = 300);
+    void showForm(int widgetIndex, int widthWindow = 300, int aWindowHeight = 400);
     void returnFromForms();
     //Systems
     void initComponents();
     void setIcons();
-    void resizeScrollArea(int width = 300);
+    void resizeScrollArea(int width = 300, int aHeight = 400);
     void updateEnabledButtonsBackNext();
     //Functions
     void buttonFindProfile_Clicked();
-    void goToProfile(const QString &id, ProfileUrlType type);
+    void goToProfile(const QString &id, SProfileRequestType type);
     void buttonSettings_Clicked();
     //Profile
     void buttonGoToMyProfile_Clicked();

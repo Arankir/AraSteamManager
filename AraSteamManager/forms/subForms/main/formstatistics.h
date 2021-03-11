@@ -18,7 +18,7 @@
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/threads/threading.h"
 
-#include "subWidgets/charts/donutbreakdownchart.h"
+QT_CHARTS_USE_NAMESPACE
 
 namespace Ui {
 class FormStatistics;
@@ -34,11 +34,11 @@ public slots:
     void updateSettings();
     void setIcons();
 public:
-    explicit FormStatistics(const QString &id, SGames &games, const QString &name, QWidget *parent = nullptr);
+    explicit FormStatistics(const SProfile &profile, QList<SGame> &games, const QString &name, QWidget *parent = nullptr);
     ~FormStatistics();
 
 signals:
-    void s_statisticsLoaded(int progress, int row);
+    void s_statisticsLoaded(int progress);
     void s_finish();
     void s_return_to_profile(QWidget*);
 
@@ -48,20 +48,22 @@ private slots:
 
 private:
     Ui::FormStatistics *ui;
-    QString _id;
-    QVector<QPair<QString,QString>> _complete;
-    QVector<QPair<QString,QString>> _started;
-    QVector<QPair<QString,QString>> _notStarted;
-    QVector<double> _averagePercent;
-    QVector<int> _numof = {0, 0, 0};
-    int _summcolumn = 0;
-    SGames _games;
+    SProfile _profile;
+    QList<SGame> _games;
     QString _name;
+    double _totalAverage;
+    int _summColumn = 0;
+
+    QVector<SGame> _complete;
+    QVector<QPair<SGame, double>> _started;
+    QVector<SGame> _notStarted;
+    QVector<SGame> _noAchievements;
+
     QVector<int> _times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     QVector<int> _months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     QVector<QPair<QString,int>> _years;
-    double _totalAverage;
-    DonutBreakdownChart *_donutBreakdown;
+
+    QChart *_gamePercent;
     QChart *_chartT;
     QChart *_chartM;
     QChart *_chartY;

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadGames_t {
-    QByteArrayData data[10];
-    char stringdata0[88];
+    QByteArrayData data[9];
+    char stringdata0[84];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,13 +40,12 @@ QT_MOC_LITERAL(4, 49, 5), // "model"
 QT_MOC_LITERAL(5, 55, 10), // "s_finished"
 QT_MOC_LITERAL(6, 66, 10), // "s_progress"
 QT_MOC_LITERAL(7, 77, 1), // "p"
-QT_MOC_LITERAL(8, 79, 3), // "row"
-QT_MOC_LITERAL(9, 83, 4) // "fill"
+QT_MOC_LITERAL(8, 79, 4) // "fill"
 
     },
     "ThreadGames\0s_finishedModel\0\0"
     "QStandardItemModel*\0model\0s_finished\0"
-    "s_progress\0p\0row\0fill"
+    "s_progress\0p\0fill"
 };
 #undef QT_MOC_LITERAL
 
@@ -66,15 +65,15 @@ static const uint qt_meta_data_ThreadGames[] = {
  // signals: name, argc, parameters, tag, flags
        1,    1,   34,    2, 0x06 /* Public */,
        5,    0,   37,    2, 0x06 /* Public */,
-       6,    2,   38,    2, 0x06 /* Public */,
+       6,    1,   38,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       9,    0,   43,    2, 0x0a /* Public */,
+       8,    0,   41,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    7,    8,
+    QMetaType::Void, QMetaType::Int,    7,
 
  // slots: parameters
     QMetaType::Int,
@@ -90,7 +89,7 @@ void ThreadGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->s_finishedModel((*reinterpret_cast< QStandardItemModel*(*)>(_a[1]))); break;
         case 1: _t->s_finished(); break;
-        case 2: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 2: _t->s_progress((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
@@ -123,7 +122,7 @@ void ThreadGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             }
         }
         {
-            using _t = void (ThreadGames::*)(int , int );
+            using _t = void (ThreadGames::*)(int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadGames::s_progress)) {
                 *result = 2;
                 return;
@@ -186,9 +185,9 @@ void ThreadGames::s_finished()
 }
 
 // SIGNAL 2
-void ThreadGames::s_progress(int _t1, int _t2)
+void ThreadGames::s_progress(int _t1)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP

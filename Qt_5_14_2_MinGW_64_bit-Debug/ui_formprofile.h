@@ -39,7 +39,6 @@ public:
     QSpacerItem *horizontalSpacer_9;
     QHBoxLayout *horizontalLayout_6;
     QLabel *LabelPersonaState;
-    QSpacerItem *horizontalSpacer_6;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_7;
     QLabel *LabelProfileStatus;
@@ -95,7 +94,7 @@ public:
     {
         if (FormProfile->objectName().isEmpty())
             FormProfile->setObjectName(QString::fromUtf8("FormProfile"));
-        FormProfile->resize(638, 334);
+        FormProfile->resize(638, 331);
         verticalLayout_3 = new QVBoxLayout(FormProfile);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -173,16 +172,17 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         LabelPersonaState = new QLabel(FrameProfileBaseInfo);
         LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(LabelPersonaState->sizePolicy().hasHeightForWidth());
+        LabelPersonaState->setSizePolicy(sizePolicy1);
         LabelPersonaState->setFont(font1);
         LabelPersonaState->setText(QString::fromUtf8("PersonaState"));
         LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         LabelPersonaState->setWordWrap(true);
 
         horizontalLayout_6->addWidget(LabelPersonaState);
-
-        horizontalSpacer_6 = new QSpacerItem(108, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_6->addItem(horizontalSpacer_6);
 
 
         verticalLayout_2->addLayout(horizontalLayout_6);

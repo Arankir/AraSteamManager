@@ -2,38 +2,21 @@
 #define SGAMES_H
 
 #include "../sapi.h"
+#include "classes/common/generalfunctions.h"
 
-class SGamePlayers : public Sapi {
+class SGame : public Sapi {
     Q_OBJECT
 public:
-    explicit SGamePlayers(const QJsonObject &game = QJsonObject(), QObject *parent = nullptr);
-    SGamePlayers(const int &appId, QObject *parent = nullptr);
-    SGamePlayers(const SGamePlayers &gamePlayers): Sapi(gamePlayers), _appID(gamePlayers._appID),
-        _numberPlayers(gamePlayers._numberPlayers) {}
-
-    SGamePlayers &operator=(const SGamePlayers &game);
-
-    SGamePlayers &load(int appId, bool paralell);
-
-    int playersCount() {return _numberPlayers;}
-
-signals:
-
-private:
-    void onLoad() override;
-    void fromJson(const QJsonValue &value) override;
-
-    int _appID;
-    int _numberPlayers = -1;
-};
-
-class SGame : public QObject {
-    Q_OBJECT
-public:
-    explicit SGame(const QJsonObject &game = QJsonObject(), QObject *parent = nullptr);
-    SGame(const SGame &game): QObject(game.parent()), _appID(game._appID), _name(game._name), _playtime_2weeks(game._playtime_2weeks),
-        _playtime_forever(game._playtime_forever), _has_community_visible_stats(game._has_community_visible_stats), _img_icon_url(game._img_icon_url),
+    explicit SGame(const QJsonObject &game = QJsonObject(), const QString &userId = "", QObject *parent = nullptr);
+    SGame(const SGame &game): Sapi(game.parent()), _userId(game.userId()), _appID(game._appID), _name(game._name),
+        _playtime_2weeks(game._playtime_2weeks), _playtime_forever(game._playtime_forever),
+        _has_community_visible_stats(game._has_community_visible_stats), _img_icon_url(game._img_icon_url),
         _img_logo_url(game._img_logo_url) {}
+
+    QJsonObject toJson() const;
+    virtual QString className() const {return "SGame";}
+    static QList<SGame> load(const QString &id, int free_games = 0, int game_info = 0, std::function< void(QList<SGame>) > callback = nullptr);
+    static int getPlayerCount(const int appId);
 
     SGame & operator=(const SGame &game);
     bool    operator<(const SGame &game);
@@ -41,6 +24,7 @@ public:
     QPixmap pixmapIcon();
     QPixmap pixmapLogo();
 
+    QString userId()                const {return _userId;}
     int appId()                     const {return _appID;}
     QString sAppId()                const {return QString::number(_appID);}
     QString name()                  const {return _name;}
@@ -56,6 +40,7 @@ signals:
 private:
     void fromJson(const QJsonValue &value);
 
+    QString _userId;
     int _appID;
     QString _name;
     int _playtime_2weeks;
@@ -66,42 +51,6 @@ private:
 
     QPixmap _pixmapIcon;
     QPixmap _pixmapLogo;
-};
-
-class SGames : public Sapi {
-    Q_OBJECT
-public:
-    explicit SGames(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false, QObject *parent = nullptr);
-    SGames(const SGames &games): Sapi(games), _games(games._games), _id(games._id), _freeGames(games._freeGames), _gameInfo(games._gameInfo) {}
-    SGames(QObject *parent = nullptr): Sapi(parent) {}
-    ~SGames() {;}
-
-    SGames &operator=(const SGames &games);
-    SGame &operator[](const int &index) {return _games[index];}
-
-    SGames &load(const QString &id, int free_games = 0, int game_info = 0, bool parallel = false);
-    SGames &update(bool parallel);
-    SGames &clear();
-    SGames &sort();
-
-    QList<SGame>::iterator begin() {return _games.begin();}
-    QList<SGame>::iterator end() {return _games.end();}
-    QString gameId() const {return _id;}
-    int count() const {return _games.size();}
-
-signals:
-    void s_finished(SGames*);
-    void s_finished();
-
-private slots:
-    void onLoad() override;
-    void fromJson(const QJsonValue &value) override;
-
-private:
-    QList<SGame> _games;
-    QString _id;
-    int _freeGames = 0;
-    int _gameInfo = 0;
 };
 
 //{"appid":218620,

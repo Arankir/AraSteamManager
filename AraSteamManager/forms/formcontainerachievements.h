@@ -13,7 +13,7 @@ class FormContainerAchievements : public QWidget {
     Q_OBJECT
 
 public slots:
-    void addFormAchievement(SAchievementsPlayer &pl, SProfile ids, SGame &game);
+    void addFormAchievement(QList<SAchievementPlayer> &pl, SProfile ids, SGame &game);
     void show();
 
 public:

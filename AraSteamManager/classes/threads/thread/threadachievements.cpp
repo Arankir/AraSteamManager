@@ -6,7 +6,7 @@ int ThreadAchievements::fill() {
     int totalNotReached = 0;
     int row = 1;
     QStandardItemModel *model = new QStandardItemModel;
-    model->setColumnCount(c_columnCount);
+    model->setColumnCount(ColumnAchievementsCount);
     for (auto &achievement: _achievements) {
         QStandardItem *itemId = new QStandardItem(achievement.apiName());
 
@@ -44,14 +44,14 @@ int ThreadAchievements::fill() {
         itemPercent->setTextAlignment(Qt::AlignCenter);
         itemAchieved->setTextAlignment(Qt::AlignCenter);
 
-        model->setItem(row, c_columnAppid, itemId);
-        model->setItem(row, c_columnIndex, itemIndex);
-        model->setItem(row, c_columnIcon, itemIcon);
-        model->setItem(row, c_columnTitle, itemTitle);
-        model->setItem(row, c_columnDescription, itemDescription);
-        //model->setItem(row, c_tableColumnComment, itemComment);
-        model->setItem(row, c_columnWorld, itemPercent);
-        model->setItem(row, c_columnMy, itemAchieved);
+        model->setItem(row, ColumnAchievementsAppid, itemId);
+        model->setItem(row, ColumnAchievementsIndex, itemIndex);
+        model->setItem(row, ColumnAchievementsIcon, itemIcon);
+        model->setItem(row, ColumnAchievementsTitle, itemTitle);
+        model->setItem(row, ColumnAchievementsDescription, itemDescription);
+        //model->setItem(row, ColumnAchievementsComment, itemComment);
+        model->setItem(row, ColumnAchievementsWorld, itemPercent);
+        model->setItem(row, ColumnAchievementsReachedMy, itemAchieved);
         emit s_progress(row, _achievements.count());
         ++row;
     }

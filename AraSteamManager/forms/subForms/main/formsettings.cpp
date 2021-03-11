@@ -142,10 +142,10 @@ void FormSettings::initComponents() {
             if(fileName != "All.txt") {
                 QFile fileHide(Paths::hiddenGames(fileName));
                 fileHide.open(QFile::ReadOnly);
-                SProfiles profile(fileName.remove(".txt"), false, ProfileUrlType::id);
+                SProfile profile = SProfile::load(fileName.remove(".txt"), SProfileRequestType::id);
                 QList<QString> hide;
                 QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
-                profileHidden->setText(profile[0].personaName());
+                profileHidden->setText(profile.personaName());
                 profileHidden->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
                 profileHidden->setObjectName("HiddenGames" + QString::number(number));
                 profileHidden->addData("NumberFileHiddenGame", QString::number(number));
@@ -396,7 +396,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
         ui->TableWidgetGames->clear();
         ui->TableWidgetGames->setRowCount(currentGame.second.size());
         if(indexHiddenGame != 0) {
-            SGames games(currentGame.first, true, true, false);
+            QList<SGame> games = SGame::load(currentGame.first, true, true);
             for(auto &game: games) {
                 if(currentGame.second.indexOf(game.sAppId()) > -1) {
                     int setTo = currentGame.second.indexOf(game.sAppId());
@@ -576,6 +576,7 @@ QString exportTypeToString(ExportType aType) {
         return "multiple";
     }
     }
+    return "";
 }
 
 ExportType stringToExportType(QString aType) {

@@ -1,31 +1,14 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 
-#define Constants {
-constexpr int c_tableColumnID       = 0;
-constexpr int c_tableColumnIndex    = 1;
-constexpr int c_tableColumnIcon     = 2;
-constexpr int c_tableColumnName     = 3;
-constexpr int c_tableColumnAdded    = 4;
-constexpr int c_tableColumnStatus   = 5;
-constexpr int c_tableColumnisPublic = 6;
-constexpr int c_tableColumnCount    = 7;
-
-constexpr int c_filterName          = 0;
-constexpr int c_filterStatus        = 1;
-constexpr int c_filterPublic        = 2;
-constexpr int c_filterFavorites     = 3;
-constexpr int c_filterCount         = 4;
-#define ConstantsEnd }
-
 #define Init {
-FormFriends::FormFriends(const QString &aId, SFriends &aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId), _filter(aFriends.count(), c_filterCount) {
+FormFriends::FormFriends(const QString &aId, QList<SFriend> &aFriends, QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _id(aId), _filter(aFriends.count(), FilterFriendsCount) {
     ui->setupUi(this);
     init();
     setFriends(aId, aFriends);
 }
 
-FormFriends::FormFriends(QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _filter(0, c_filterCount) {
+FormFriends::FormFriends(QWidget *aParent): QWidget(aParent), ui(new Ui::FormFriends), _filter(0, FilterFriendsCount) {
     ui->setupUi(this);
     init();
 }
@@ -44,7 +27,7 @@ void FormFriends::init() {
 #define ConnectsEnd }
 }
 
-void FormFriends::setFriends(const QString &aId, SFriends &aFriends) {
+void FormFriends::setFriends(const QString &aId, QList<SFriend> &aFriends) {
     _blockedLoad = false;
     _loaded = false;
     _id = aId;
@@ -69,12 +52,16 @@ bool FormFriends::isLoaded() {
     return _loaded;
 }
 
-void FormFriends::initFriends(SFriends &aFriends) {
-    SFriends friends(aFriends);
-    SProfiles profiles(friends.profiles());
-    profiles.sort();
+void FormFriends::initFriends(QList<SFriend> &aFriends) {
+    QStringList list;
+    for (const SFriend &sFriend: aFriends) {
+        list.append(sFriend.steamId());
+    }
+    QList<SProfile> profiles = SProfile::load(list);// friends.profiles();
+    //SProfiles profiles(friends.profiles());
+    sort(profiles);//.sort();
     for(auto &profile: profiles) {
-        for (auto &currentFriend: friends) {
+        for (const auto &currentFriend: aFriends) {
             if (currentFriend.steamId() == profile.steamID()) {
                 _friends.append(QPair<SFriend, SProfile>(currentFriend, profile));
                 break;
@@ -114,29 +101,29 @@ void FormFriends::initComboBoxStatus() {
 
 void FormFriends::createThread() {
     Threading *threadLoadTable = new Threading(this);
-    threadLoadTable->AddThreadFriends(c_tableColumnID, c_tableColumnIndex, c_tableColumnIcon, c_tableColumnName, c_tableColumnAdded, c_tableColumnStatus, c_tableColumnisPublic, _friends);
-    connect (threadLoadTable, &Threading::s_friends_progress, this, [=](int progress, int row) {
-                                                                        emit s_friendsLoaded(progress, row);
+    threadLoadTable->AddThreadFriends(_friends);
+    connect (threadLoadTable, &Threading::s_friends_progress, this, [=](int progress) {
+                                                                        emit s_friendsLoaded(progress);
                                                                     });
     connect (threadLoadTable, &Threading::s_friends_finished_model, this, &FormFriends::setTableModel);
 }
 
 void FormFriends::setTableModel(QStandardItemModel *aModel) {
     ui->TableFriends->setModel(aModel);
-    ui->TableFriends->setColumnHidden(c_tableColumnID,    true);
-    ui->TableFriends->setColumnHidden(c_tableColumnIndex, true);
+    ui->TableFriends->setColumnHidden(ColumnFriendsID,    true);
+    ui->TableFriends->setColumnHidden(ColumnFriendsIndex, true);
 
     retranslate();
 
-    aModel->horizontalHeaderItem(c_tableColumnName)      ->setTextAlignment(Qt::AlignLeft);
-    aModel->horizontalHeaderItem(c_tableColumnAdded)     ->setTextAlignment(Qt::AlignLeft);
-    aModel->horizontalHeaderItem(c_tableColumnStatus)    ->setTextAlignment(Qt::AlignLeft);
-    aModel->horizontalHeaderItem(c_tableColumnisPublic)  ->setTextAlignment(Qt::AlignLeft);
+    aModel->horizontalHeaderItem(ColumnFriendsName)      ->setTextAlignment(Qt::AlignLeft);
+    aModel->horizontalHeaderItem(ColumnFriendsAdded)     ->setTextAlignment(Qt::AlignLeft);
+    aModel->horizontalHeaderItem(ColumnFriendsStatus)    ->setTextAlignment(Qt::AlignLeft);
+    aModel->horizontalHeaderItem(ColumnFriendsIsPublic)  ->setTextAlignment(Qt::AlignLeft);
 
-    aModel->horizontalHeaderItem(c_tableColumnName)      ->setTextAlignment(Qt::AlignVCenter);
-    aModel->horizontalHeaderItem(c_tableColumnAdded)     ->setTextAlignment(Qt::AlignVCenter);
-    aModel->horizontalHeaderItem(c_tableColumnStatus)    ->setTextAlignment(Qt::AlignVCenter);
-    aModel->horizontalHeaderItem(c_tableColumnisPublic)  ->setTextAlignment(Qt::AlignVCenter);
+    aModel->horizontalHeaderItem(ColumnFriendsName)      ->setTextAlignment(Qt::AlignVCenter);
+    aModel->horizontalHeaderItem(ColumnFriendsAdded)     ->setTextAlignment(Qt::AlignVCenter);
+    aModel->horizontalHeaderItem(ColumnFriendsStatus)    ->setTextAlignment(Qt::AlignVCenter);
+    aModel->horizontalHeaderItem(ColumnFriendsIsPublic)  ->setTextAlignment(Qt::AlignVCenter);
 
     ui->TableFriends->resizeColumnsToContents();
     ui->TableFriends->resizeRowsToContents();
@@ -168,11 +155,11 @@ void FormFriends::retranslate() {
     initComboBoxStatus();
 
     if (ui->TableFriends->model() != nullptr) {
-        ui->TableFriends->model()->setHeaderData(c_tableColumnIcon,        Qt::Horizontal, tr(""));
-        ui->TableFriends->model()->setHeaderData(c_tableColumnName,        Qt::Horizontal, tr("   НИК"));
-        ui->TableFriends->model()->setHeaderData(c_tableColumnAdded,       Qt::Horizontal, tr("   ДОБАВЛЕН"));
-        ui->TableFriends->model()->setHeaderData(c_tableColumnStatus,      Qt::Horizontal, tr("   СТАТУС"));
-        ui->TableFriends->model()->setHeaderData(c_tableColumnisPublic,    Qt::Horizontal, tr("   ПРОФИЛЬ"));
+        ui->TableFriends->model()->setHeaderData(ColumnFriendsIcon,        Qt::Horizontal, tr(""));
+        ui->TableFriends->model()->setHeaderData(ColumnFriendsName,        Qt::Horizontal, tr("   НИК"));
+        ui->TableFriends->model()->setHeaderData(ColumnFriendsAdded,       Qt::Horizontal, tr("   ДОБАВЛЕН"));
+        ui->TableFriends->model()->setHeaderData(ColumnFriendsStatus,      Qt::Horizontal, tr("   СТАТУС"));
+        ui->TableFriends->model()->setHeaderData(ColumnFriendsIsPublic,    Qt::Horizontal, tr("   ПРОФИЛЬ"));
     }
 }
 
@@ -186,7 +173,7 @@ void FormFriends::updateCurrentFriend() {
 }
 
 QPair<SFriend, SProfile> *FormFriends::getFriendFromRow(int aRow) {
-    QModelIndex IdIndex = ui->TableFriends->model()->index(aRow, c_tableColumnID);
+    QModelIndex IdIndex = ui->TableFriends->model()->index(aRow, ColumnFriendsID);
     QString id = ui->TableFriends->model()->data(IdIndex).toString();
     auto iterator = std::find_if(_friends.begin(), _friends.end(), [=](const QPair<SFriend, SProfile> &aProfile) {
                                                                         return aProfile.second.steamID() == id;
@@ -204,13 +191,13 @@ int FormFriends::getCurrentFriendIndex() {
 }
 
 int FormFriends::getIndexFriendFromRow(int aRow) {
-    QModelIndex IdIndex = ui->TableFriends->model()->index(aRow, c_tableColumnIndex);
+    QModelIndex IdIndex = ui->TableFriends->model()->index(aRow, ColumnFriendsIndex);
     return ui->TableFriends->model()->data(IdIndex).toInt();
 }
 
 int FormFriends::getRowFromIndexFriend(int aIndex) {
     for (int i = 0; i < ui->TableFriends->model()->rowCount(); ++i) {
-        QModelIndex IdIndex = ui->TableFriends->model()->index(i, c_tableColumnIndex);
+        QModelIndex IdIndex = ui->TableFriends->model()->index(i, ColumnFriendsIndex);
         if (ui->TableFriends->model()->data(IdIndex).toInt() == aIndex) {
             return i;
         }
@@ -241,14 +228,14 @@ void FormFriends::checkBoxOpenProfile_StateChanged(int aState) {
     switch (aState) {
     case 0: {
         for (int i = 0; i < _friends.count(); ++i) {
-            _filter.setData(i, c_filterPublic, true);
+            _filter.setData(i, FilterFriendsPublic, true);
         }
         break;
     }
     case 2: {
         for (int i = 0; i < _friends.count(); ++i) {
             int index = getIndexFriendFromRow(i);
-            _filter.setData(index, c_filterPublic, _friends[index].second.communityVisibilityState() == 3);
+            _filter.setData(index, FilterFriendsPublic, _friends[index].second.communityVisibilityState() == 3);
         }
     }
     }
@@ -259,21 +246,21 @@ void FormFriends::comboBoxStatus_Activated(int aIndex) {
     switch (aIndex) {
     case 0: {
         for (int i = 0; i < _friends.count(); ++i) {
-            _filter.setData(i, c_filterStatus, true);
+            _filter.setData(i, FilterFriendsStatus, true);
         }
         break;
     }
     case 1: {
         for (int i = 0; i < _friends.count(); ++i) {
             int index = getIndexFriendFromRow(i);
-            _filter.setData(index, c_filterStatus, !_friends[index].second.gameExtraInfo().isEmpty());
+            _filter.setData(index, FilterFriendsStatus, !_friends[index].second.gameExtraInfo().isEmpty());
         }
         break;
     }
     default: {
         for (int i = 0; i < _friends.count(); ++i) {
             int index = getIndexFriendFromRow(i);
-            _filter.setData(index, c_filterStatus, (_friends[index].second.personaState() == ui->ComboBoxStatus->currentIndex() - 2) && (_friends[index].second.gameExtraInfo().isEmpty()));
+            _filter.setData(index, FilterFriendsStatus, (_friends[index].second.personaState() == ui->ComboBoxStatus->currentIndex() - 2) && (_friends[index].second.gameExtraInfo().isEmpty()));
         }
     }
     }
@@ -283,7 +270,7 @@ void FormFriends::comboBoxStatus_Activated(int aIndex) {
 void FormFriends::lineEditName_TextChanged(const QString &aNewText) {
     for (int i = 0; i < _friends.count(); ++i) {
         int index = getIndexFriendFromRow(i);
-        _filter.setData(index, c_filterName, _friends[index].second.personaName().toLower().indexOf(aNewText.toLower()) > -1);
+        _filter.setData(index, FilterFriendsName, _friends[index].second.personaName().toLower().indexOf(aNewText.toLower()) > -1);
     }
     updateHiddenRows();
 }
@@ -296,14 +283,14 @@ void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
     switch (arg1) {
     case 0: {
         for (int i = 0; i < _friends.count(); ++i) {
-            _filter.setData(i, c_filterFavorites, true);
+            _filter.setData(i, FilterFriendsFavorites, true);
         }
         break;
     }
     case 2: {
         for (int i = 0; i < _friends.count(); ++i) {
             int index = getIndexFriendFromRow(i);
-            _filter.setData(index, c_filterFavorites, isProfileFavorite(_friends[index]));
+            _filter.setData(index, FilterFriendsFavorites, isProfileFavorite(_friends[index]));
         }
         break;
     }
@@ -348,7 +335,7 @@ void FormFriends::goToProfile() {
     if (_currentFriend == nullptr) {
         updateCurrentFriend();
     }
-    emit s_goToProfile(_currentFriend->second.steamID(), ProfileUrlType::id);
+    emit s_goToProfile(_currentFriend->second.steamID(), SProfileRequestType::id);
 }
 
 void FormFriends::friendToFavorite() {

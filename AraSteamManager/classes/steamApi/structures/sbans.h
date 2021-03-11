@@ -3,10 +3,10 @@
 
 #include "../sapi.h"
 
-class SBan : public QObject {
+class SBan : public Sapi {
     Q_OBJECT
 public:
-    explicit SBan(const QJsonObject &achievement, QObject *parent = nullptr): QObject(parent),
+    explicit SBan(const QJsonObject &achievement, QObject *parent = nullptr): Sapi(parent),
         _steamId(achievement.value("steamid").toString()),
         _communityBanned(achievement.value("CommunityBanned").toBool()),
         _vacBanned(achievement.value("VACBanned").toBool()),
@@ -16,11 +16,14 @@ public:
         _economyBan(achievement.value("EconomyBan").toString()) {
 
         }
-    SBan(const SBan &ban): QObject(ban.parent()), _steamId(ban._steamId), _communityBanned(ban._communityBanned),
+    SBan(const SBan &ban): Sapi(ban.parent()), _steamId(ban._steamId), _communityBanned(ban._communityBanned),
         _vacBanned(ban._vacBanned), _numberOfVacBan(ban._numberOfVacBan), _daysSinceLastBan(ban._daysSinceLastBan),
         _numberOfGameBans(ban._numberOfGameBans), _economyBan(ban._economyBan) {
 
         }
+    QJsonObject toJson() const;
+    virtual QString className() const {return "SBan";}
+    static QList<SBan> load(const QString &aId, std::function<void (QList<SBan>)> aCallback = nullptr);
     SBan &operator=(const SBan &ban);
 
     QString steamId()       {return _steamId;}
@@ -40,30 +43,5 @@ private:
     int     _numberOfGameBans;
     QString _economyBan;
 
-};
-
-class SBans : public Sapi
-{
-    Q_OBJECT
-public:
-    explicit SBans(const QString &id, bool parallel, QObject *parent = nullptr);
-    SBans(QObject *parent = nullptr): Sapi(parent) {}
-    SBan &operator[](const int &index) {return _bans[index];}
-    ~SBans() {}
-
-    SBans &load(const QString &id, bool parallel);
-    SBans &update(bool parallel);
-    SBans &clear();
-
-signals:
-    void s_finished();
-
-private slots:
-    void onLoad() override;
-    void fromJson(const QJsonValue &value) override;
-
-private:
-    QList<SBan> _bans;
-    QString _id;
 };
 #endif // SBANS_H

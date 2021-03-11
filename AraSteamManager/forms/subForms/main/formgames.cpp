@@ -1,42 +1,19 @@
 #include "formgames.h"
 #include "ui_formgames.h"
 
-#define Constants {
-constexpr int c_tableColumnAppid    = 0;
-constexpr int c_tableColumnIndex    = 1;
-constexpr int c_tableColumnIcon     = 2;
-constexpr int c_tableColumnName     = 3;
-constexpr int c_tableColumnComment  = 4;
-constexpr int c_tableColumnProgress = 5;
-constexpr int c_tableColumnCount    = 6;
-
-constexpr int c_filterName          = 0;
-constexpr int c_filterHide          = 1;
-constexpr int c_filterGroup         = 2;
-constexpr int c_filterFavorites     = 3;
-constexpr int c_filterCount         = 4;
-#define ConstantsEnd }
-
 #define Init {
-FormGames::FormGames(SProfile &aProfile, SGames &aGames, QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _profile(aProfile),  _games(aGames),
-    _filter(aGames.count(), c_filterCount), _groups(_profile), _comments(_profile.steamID()) {
-    ui->setupUi(this);
-    init();
-    setGames(aProfile, aGames);
-}
-
-FormGames::FormGames(QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _filter(0, c_filterCount) {
+FormGames::FormGames(QWidget *aParent): QWidget(aParent), ui(new Ui::FormGames), _filter(0, FilterGamesCount) {
     ui->setupUi(this);
     init();
 }
 
-void FormGames::setGames(SProfile &aProfile, SGames &aGames) {
+void FormGames::setGames(SProfile &aProfile, QList<SGame> &aGames) {
     _profile = aProfile;
     _games = aGames;
     _filter.setRow(aGames.count());
     _groups.setProfile(_profile);
     _comments.setProfileId(_profile.steamID());
-    _games.sort();
+    sort(_games);
     initGroups();
     initTable();
     createThread();
@@ -72,7 +49,7 @@ void FormGames::clear() {
 void FormGames::initComponents() {
     this->setAttribute(Qt::WA_TranslucentBackground);
     ui->ProgressBarLoading->setVisible(false);
-    _games.sort();
+    sort(_games);
     setIcons();
     initGroups();
     initTable();
@@ -89,17 +66,17 @@ void FormGames::initComponents() {
 void FormGames::initGroups() {
     ui->ComboBoxGroups->clear();
     _groups.update();
-    for(auto group: _groups) {
+    for(const auto &group: _groups) {
         ui->ComboBoxGroups->addItem(group.title());
     }
 }
 
 void FormGames::initComments() {
     _comments.load();
-    for(const auto &game: _games) {
+    for(const auto &game: qAsConst(_games)) {
         QStringList comment = _comments.getGameComment(game.sAppId(), _profile.steamID()).comment();
         QVariant icon;
-        QModelIndex index = ui->TableGames->model()->index(rowFromId(game.sAppId()), c_tableColumnComment);
+        QModelIndex index = ui->TableGames->model()->index(rowFromId(game.sAppId()), ColumnGamesComment);
 
         if ((comment != QStringList()) && (comment != QStringList() << "")) {
             icon = QVariant(QPixmap(Images::isComment()).scaled(32, 32));
@@ -125,14 +102,13 @@ void FormGames::initTable() {
     connect(ui->TableGames, &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
         updateCurrentGame();
         if (_currentGame != nullptr) {
-            QMenu *menu = createMenu(*_currentGame);
-            menu->popup(ui->TableGames->viewport()->mapToGlobal(pos));
+            createMenu(*_currentGame)->popup(ui->TableGames->viewport()->mapToGlobal(pos));
         }
     });
 
     connect(ui->TableGames, &QTableView::doubleClicked, this, [=](QModelIndex aIndex) {
         updateCurrentGame();
-        if (aIndex.column() == c_tableColumnComment) {
+        if (aIndex.column() == ColumnGamesComment) {
             showCommentsInteractive();
         } else {
             buttonAchievements_Clicked();
@@ -142,10 +118,10 @@ void FormGames::initTable() {
 
 void FormGames::createThread() {
     Threading *loadTable = new Threading(this);
-    loadTable->AddThreadGames(c_tableColumnAppid, c_tableColumnIndex, c_tableColumnIcon, c_tableColumnName, c_tableColumnComment, c_tableColumnProgress, c_tableColumnCount, _games);
-    connect (loadTable, &Threading::s_games_progress, this, [=](int progress, int row) {
+    loadTable->AddThreadGames(_games);
+    connect (loadTable, &Threading::s_games_progress, this, [=](int progress) {
                                                                 ui->ProgressBarLoading->setValue(progress);
-                                                                emit s_achievementsLoaded(progress, row);
+                                                                emit s_achievementsLoaded(progress);
                                                             });
     connect (loadTable, &Threading::s_games_finished_model, this, &FormGames::setTableModel);
 }
@@ -153,18 +129,15 @@ void FormGames::createThread() {
 void FormGames::setTableModel(QStandardItemModel *aModel) {
     ui->TableGames->setModel(aModel);
     ui->TableGames->setSortingEnabled(true);
-    ui->TableGames->setColumnHidden(c_tableColumnAppid, true);
-    ui->TableGames->setColumnHidden(c_tableColumnIndex, true);
+    ui->TableGames->setColumnHidden(ColumnGamesAppid, true);
+    ui->TableGames->setColumnHidden(ColumnGamesIndex, true);
     initComments();
     ui->TableGames->resizeColumnsToContents();
 
     _achievements.resize(_games.count());
-    int column = 0;
     for (auto &game: _games) {
         //Загрузка достижений игрока
-        _achievements[column] = new SAchievementsPlayer(game.sAppId(), _profile.steamID());
-        connect(_achievements[column], &SAchievementsPlayer::s_finished, this, &FormGames::onResultAchievements);
-        ++column;
+        SAchievementPlayer::load(game.sAppId(), _profile.steamID(), std::bind(&FormGames::onResultAchievements, this,  std::placeholders::_1, game.sAppId()));
     }
 
     retranslate();
@@ -172,36 +145,35 @@ void FormGames::setTableModel(QStandardItemModel *aModel) {
     ui->LineEditGame->setFocus();
 }
 
-void FormGames::onResultAchievements(SAchievementsPlayer *aAchievements) {
-    disconnect(aAchievements, &SAchievementsPlayer::s_finished, this, &FormGames::onResultAchievements);
-
-    int row = rowFromId(aAchievements->appid());
+void FormGames::onResultAchievements(QList<SAchievementPlayer> aAchievements, QString aAppId) {
+    _achievements[indexFromId(aAppId)] = aAchievements;
+    int row = rowFromId(aAppId);
 
     if (row > -1) {
         QProgressBar *pb;
 
         //Проверка на игру без достижений
-        if (aAchievements->count() == 0) {
-            pb = dynamic_cast<QProgressBar*>(new ProgressBarBad());
+        if (aAchievements.count() == 0) {
+            pb = new ProgressBarBad();
             pb->setFormat("");
         } else {
-            pb = dynamic_cast<QProgressBar*>(new ProgressBarGood());
+            pb = new ProgressBarGood();
         }
-        pb->setMaximum(aAchievements->count());
-        pb->setValue(aAchievements->reached());
+        pb->setMaximum(aAchievements.count());
+        pb->setValue(std::count_if(aAchievements.begin(), aAchievements.end(), [](SAchievementPlayer player) {return player.achieved() > 0;}));
         pb->setMinimumSize(QSize(25, 25));
 
         //Прогрессбар устанавливается в таблицу
-        QModelIndex index = ui->TableGames->model()->index(row, c_tableColumnProgress);
+        QModelIndex index = ui->TableGames->model()->index(row, ColumnGamesProgress);
         ui->TableGames->model()->setData(index, pb->text().rightJustified(5, '0'));
         ui->TableGames->setIndexWidget(index, pb);
     } else {
-        qWarning() << "game" << aAchievements->appid() << "coudn't find";
+        qWarning() << "game" << aAppId << "coudn't find";
     }
     ui->TableGames->resizeRowToContents(row);
 
     static int loaded = 0;
-    emit s_achievementsLoaded(loaded, 0);
+    emit s_achievementsLoaded(loaded);
     //Проверка всё ли загрузилось
     if(++loaded == _games.count()) {
         _loaded = true;
@@ -216,13 +188,13 @@ void FormGames::setIcons() {
 
 #define FindGameInTable {
 int FormGames::indexFromRow(int aRow) {
-    QModelIndex IdIndex = ui->TableGames->model()->index(aRow, c_tableColumnIndex);
+    QModelIndex IdIndex = ui->TableGames->model()->index(aRow, ColumnGamesIndex);
     return ui->TableGames->model()->data(IdIndex).toInt();
 }
 
 int FormGames::rowFromIndex(int aIndex) {
     for (int i = 0; i < ui->TableGames->model()->rowCount(); ++i) {
-        QModelIndex IdIndex = ui->TableGames->model()->index(i, c_tableColumnIndex);
+        QModelIndex IdIndex = ui->TableGames->model()->index(i, ColumnGamesIndex);
         if (ui->TableGames->model()->data(IdIndex).toInt() == aIndex) {
             return i;
         }
@@ -237,9 +209,9 @@ int FormGames::indexFromId(QString aId) {
 }
 
 int FormGames::rowFromId(QString aId) {
-    QStandardItemModel *model = dynamic_cast<QStandardItemModel *>(ui->TableGames->model());
+    QStandardItemModel *model = dynamic_cast<QStandardItemModel*>(ui->TableGames->model());
     if (model) {
-        QList<QStandardItem*> items = model->findItems(aId, Qt::MatchExactly, c_tableColumnAppid);
+        QList<QStandardItem*> items = model->findItems(aId, Qt::MatchExactly, ColumnGamesAppid);
         if (items.count() == 1) {
             return items[0]->row();
         } else {
@@ -253,8 +225,8 @@ int FormGames::rowFromId(QString aId) {
 
 void FormGames::updateCurrentGame() {
     QModelIndex index = ui->TableGames->currentIndex();
-    _currentIndex = ui->TableGames->model()->index(index.row(), c_tableColumnIndex).data().toString().toInt();
-    int appId = ui->TableGames->model()->index(index.row(), c_tableColumnAppid).data().toString().toInt();
+    _currentIndex = ui->TableGames->model()->index(index.row(), ColumnGamesIndex).data().toString().toInt();
+    int appId = ui->TableGames->model()->index(index.row(), ColumnGamesAppid).data().toString().toInt();
 
     auto iterator = std::find_if(_games.begin(), _games.end(), [=](const SGame &game) {
                                                                     return game.appId() == appId;
@@ -288,10 +260,10 @@ void FormGames::closeEvent(QCloseEvent*) {
 void FormGames::retranslate() {
     ui->retranslateUi(this);
     if (ui->TableGames->model() != nullptr) {
-        ui->TableGames->model()->setHeaderData(c_tableColumnIcon,        Qt::Horizontal, tr(""));
-        ui->TableGames->model()->setHeaderData(c_tableColumnName,        Qt::Horizontal, tr("Название игры"));
-        ui->TableGames->model()->setHeaderData(c_tableColumnComment,     Qt::Horizontal, tr(""));
-        ui->TableGames->model()->setHeaderData(c_tableColumnProgress,    Qt::Horizontal, tr("Прогресс"));
+        ui->TableGames->model()->setHeaderData(ColumnGamesIcon,        Qt::Horizontal, tr(""));
+        ui->TableGames->model()->setHeaderData(ColumnGamesName,        Qt::Horizontal, tr("Название игры"));
+        ui->TableGames->model()->setHeaderData(ColumnGamesComment,     Qt::Horizontal, tr(""));
+        ui->TableGames->model()->setHeaderData(ColumnGamesProgress,    Qt::Horizontal, tr("Прогресс"));
     }
 }
 
@@ -303,7 +275,7 @@ void FormGames::updateSettings() {
 
 bool FormGames::isInFavorites(const int &aAppId) {
     auto favorites = _favorites.games();
-    for(const auto &game: favorites) {
+    for(const auto &game: qAsConst(favorites)) {
         if (game.appId() == aAppId) {
             return true;
         }
@@ -316,7 +288,7 @@ bool FormGames::isInFavorites(const int &aAppId) {
 void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
     QString findText = aFindText.toLower();
     for (int i = 0; i < ui->TableGames->model()->rowCount(); ++i) {
-        _filter.setData(indexFromRow(i), c_filterName, ui->TableGames->model()->index(i, c_tableColumnName).data().toString().toLower().indexOf(findText, 0) != -1);
+        _filter.setData(indexFromRow(i), FilterGamesName, ui->TableGames->model()->index(i, ColumnGamesName).data().toString().toLower().indexOf(findText, 0) != -1);
     }
     updateHiddenRows();
 }
@@ -329,13 +301,13 @@ void FormGames::checkBoxFavorites_StateChanged(int arg1) {
     switch (arg1) {
     case 0: {
         for (int i = 0; i < _games.count(); ++i) {
-            _filter.setData(i, c_filterFavorites, true);
+            _filter.setData(i, FilterGamesFavorites, true);
         }
         break;
     }
     case 2: {
         for (int i = 0; i < _games.count(); ++i) {
-            _filter.setData(i, c_filterFavorites, isInFavorites(_games[i].appId()));
+            _filter.setData(i, FilterGamesFavorites, isInFavorites(_games[i].appId()));
         }
         break;
     }
@@ -356,12 +328,12 @@ void FormGames::updateHiddenGames() {
     auto model = ui->TableGames->model();
     if (model) {
         for (int i = 0; i < _games.count(); ++i) {
-            _filter.setData(i, c_filterHide, true);
-            model->setData(model->index(i, c_tableColumnName), QVariant(), Qt::ForegroundRole);
+            _filter.setData(i, FilterGamesHide, true);
+            model->setData(model->index(i, ColumnGamesName), QVariant(), Qt::ForegroundRole);
         }
-        for(const auto &game: _hide) {
-            _filter.setData(indexFromId(game.id), c_filterHide, false);
-            model->setData(model->index(rowFromId(game.id), c_tableColumnName), QVariant(QColor(255 * 0.7, 0, 0)), Qt::ForegroundRole);
+        for(const auto &game: qAsConst(_hide)) {
+            _filter.setData(indexFromId(game.id), FilterGamesHide, false);
+            model->setData(model->index(rowFromId(game.id), ColumnGamesName), QVariant(QColor(255 * 0.7, 0, 0)), Qt::ForegroundRole);
         }
     }
 
@@ -372,19 +344,19 @@ void FormGames::updateGroupsFilter() {
     QStringList groups = ui->ComboBoxGroups->currentText();
     if ((groups.count() == 0) || (groups.count() == 1 && groups[0] == "")) {
         for (int i = 0; i < ui->TableGames->model()->rowCount(); ++i) {
-            _filter.setData(i, c_filterGroup, true);
+            _filter.setData(i, FilterGamesGroup, true);
         }
         updateHiddenRows();
         return;
     }
     for (int i = 0; i < ui->TableGames->model()->rowCount(); ++i) {
-        _filter.setData(i, c_filterGroup, false);
+        _filter.setData(i, FilterGamesGroup, false);
     }
     for(auto &group: _groups) {
         for(auto &selectedGroup: groups) {
             if (group.title() == selectedGroup) {
                 for(auto &game: group.games()) {
-                    _filter.setData(indexFromId(game), c_filterGroup, true);
+                    _filter.setData(indexFromId(game), FilterGamesGroup, true);
                 }
                 break;
             }
@@ -464,12 +436,13 @@ QMenu *FormGames::createMenu(SGame &aGame) {
 }
 
 void FormGames::buttonAchievements_Clicked() {
-    SAchievementsPercentage Percentage(_currentGame->sAppId(), false);
-    if (Percentage.count() == 0) {
+    QList<SAchievementSchema> global = SAchievementSchema::load(_currentGame->sAppId());
+    //SAchievementsGlobal Percentage(_currentGame->sAppId(), false);
+    if (global.count() == 0) {
         QMessageBox::warning(this, tr("Ошибка"), tr("В этой игре нет достижений"));
     } else {
         //ui->ProgressBarLoading->setMaximum(ui->ProgressBarSelectedGame->maximum());
-        emit s_showAchievements(*_achievements[_currentIndex], *_currentGame);
+        emit s_showAchievements(_achievements[_currentIndex], *_currentGame);
     }
 }
 

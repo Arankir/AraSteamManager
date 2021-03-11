@@ -1,6 +1,7 @@
 debug/categoriesgame.o
 debug/comments.o
 debug/favorites.o
+debug/generalfunctions.o
 debug/myfilter.o
 debug/settings.o
 debug/groupsgames.o
@@ -12,7 +13,6 @@ debug/sachievements.o
 debug/sbans.o
 debug/sfriends.o
 debug/sgames.o
-debug/slevels.o
 debug/sprofile.o
 debug/threadachievements.o
 debug/threadfriends.o
@@ -67,7 +67,6 @@ debug/moc_sachievements.o
 debug/moc_sbans.o
 debug/moc_sfriends.o
 debug/moc_sgames.o
-debug/moc_slevels.o
 debug/moc_sprofile.o
 debug/moc_threadachievements.o
 debug/moc_threadfriends.o

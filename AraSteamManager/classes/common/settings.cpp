@@ -116,7 +116,7 @@ QString Settings::iconsColor() {
 }
 
 int Settings::saveImages() {
-    return _settings->value(c_saveImage, 0).toInt();
+    return _settings->value(c_saveImage, 1).toInt();
 }
 
 int Settings::visibleHiddenGames() {

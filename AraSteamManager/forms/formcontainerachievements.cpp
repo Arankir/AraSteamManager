@@ -27,7 +27,7 @@ void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
     emit s_formClose();
 }
 
-void FormContainerAchievements::addFormAchievement(SAchievementsPlayer &aPl, SProfile aProfile, SGame &aGame) {
+void FormContainerAchievements::addFormAchievement(QList<SAchievementPlayer> &aPl, SProfile aProfile, SGame &aGame) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); ++i) {
         FormAchievements *achievements = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements->widget(i));
         if (achievements) {

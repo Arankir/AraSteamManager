@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 static const unsigned char qt_resource_data[] = {
-  // C:/Users/RUSLANoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager/resources/fonts/JosefinSans-Italic-VariableFont_wght.ttf
+  // C:/Users/Pashaoffice/Desktop/All/Projects/AraSteamManager/AraSteamManager/resources/fonts/JosefinSans-Italic-VariableFont_wght.ttf
   0x0,0x1,0xe5,0x40,
   0x0,
   0x1,0x0,0x0,0x0,0x14,0x1,0x0,0x0,0x4,0x0,0x40,0x47,0x44,0x45,0x46,0xc0,

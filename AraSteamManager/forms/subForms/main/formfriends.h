@@ -9,6 +9,25 @@
 #include "classes/common/favorites.h"
 #include "classes/common/myfilter.h"
 
+enum tableFriendsColumns {
+    ColumnFriendsID        = 0,
+    ColumnFriendsIndex     = 1,
+    ColumnFriendsIcon      = 2,
+    ColumnFriendsName      = 3,
+    ColumnFriendsAdded     = 4,
+    ColumnFriendsStatus    = 5,
+    ColumnFriendsIsPublic  = 6,
+    ColumnFriendsCount     = 7
+};
+
+enum filterFriendsColumns {
+    FilterFriendsName      = 0,
+    FilterFriendsStatus    = 1,
+    FilterFriendsPublic    = 2,
+    FilterFriendsFavorites = 3,
+    FilterFriendsCount     = 4
+};
+
 namespace Ui {
 class FormFriends;
 }
@@ -18,26 +37,26 @@ class FormFriends : public QWidget {
 
 public slots:
     void updateSettings();
-    void setFriends(const QString &aId, SFriends &aFriends);
+    void setFriends(const QString &aId, QList<SFriend> &aFriends);
     void clear();
     bool isInit();
     bool isLoaded();
 
 public:
-    explicit FormFriends(const QString &id, SFriends &Friends, QWidget *parent = nullptr);
+    explicit FormFriends(const QString &id, QList<SFriend> &Friends, QWidget *parent = nullptr);
     FormFriends(QWidget *aParent = nullptr);
     ~FormFriends();
 
 signals:
-    void s_friendsLoaded(int progress, int row);
+    void s_friendsLoaded(int progress);
     void s_finish();
     void s_returnToProfile(QWidget*);
-    void s_goToProfile(const QString &id, ProfileUrlType type);
+    void s_goToProfile(const QString &id, SProfileRequestType type);
 
 private slots:
     //Инициализация
     void init();
-    void initFriends(SFriends &aFriends);
+    void initFriends(QList<SFriend> &aFriends);
     void initTable();
     void initComboBoxStatus();
     //Доподгрузка данных

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadFriends_t {
-    QByteArrayData data[10];
-    char stringdata0[90];
+    QByteArrayData data[9];
+    char stringdata0[86];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,14 +39,13 @@ QT_MOC_LITERAL(3, 31, 19), // "QStandardItemModel*"
 QT_MOC_LITERAL(4, 51, 5), // "model"
 QT_MOC_LITERAL(5, 57, 10), // "s_progress"
 QT_MOC_LITERAL(6, 68, 1), // "p"
-QT_MOC_LITERAL(7, 70, 3), // "row"
-QT_MOC_LITERAL(8, 74, 10), // "s_finished"
-QT_MOC_LITERAL(9, 85, 4) // "fill"
+QT_MOC_LITERAL(7, 70, 10), // "s_finished"
+QT_MOC_LITERAL(8, 81, 4) // "fill"
 
     },
     "ThreadFriends\0s_finishedModel\0\0"
     "QStandardItemModel*\0model\0s_progress\0"
-    "p\0row\0s_finished\0fill"
+    "p\0s_finished\0fill"
 };
 #undef QT_MOC_LITERAL
 
@@ -65,15 +64,15 @@ static const uint qt_meta_data_ThreadFriends[] = {
 
  // signals: name, argc, parameters, tag, flags
        1,    1,   34,    2, 0x06 /* Public */,
-       5,    2,   37,    2, 0x06 /* Public */,
-       8,    0,   42,    2, 0x06 /* Public */,
+       5,    1,   37,    2, 0x06 /* Public */,
+       7,    0,   40,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       9,    0,   43,    2, 0x0a /* Public */,
+       8,    0,   41,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    6,    7,
+    QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void,
 
  // slots: parameters
@@ -89,7 +88,7 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_finishedModel((*reinterpret_cast< QStandardItemModel*(*)>(_a[1]))); break;
-        case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 1: _t->s_progress((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 2: _t->s_finished(); break;
         case 3: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
@@ -116,7 +115,7 @@ void ThreadFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
             }
         }
         {
-            using _t = void (ThreadFriends::*)(int , int );
+            using _t = void (ThreadFriends::*)(int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ThreadFriends::s_progress)) {
                 *result = 1;
                 return;
@@ -180,9 +179,9 @@ void ThreadFriends::s_finishedModel(QStandardItemModel * _t1)
 }
 
 // SIGNAL 1
-void ThreadFriends::s_progress(int _t1, int _t2)
+void ThreadFriends::s_progress(int _t1)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 

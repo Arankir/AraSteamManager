@@ -33,6 +33,32 @@
 #include "forms/subForms/achievements/formcategoriesedit.h"
 #include "forms/subForms/achievements/widgets/formreachedfilter.h"
 
+enum tableAchievementsColumns {
+    ColumnAchievementsAppid         = 0,
+    ColumnAchievementsIndex         = 1,
+    ColumnAchievementsIcon          = 2,
+    ColumnAchievementsTitle         = 3,
+    ColumnAchievementsDescription   = 4,
+    ColumnAchievementsComment       = 5,
+    ColumnAchievementsWorld         = 6,
+    ColumnAchievementsReachedMy     = 7,
+    ColumnAchievementsCount         = 8
+};
+
+enum filterAchievementsColumns {
+    FilterAchievementsName             = 0,
+    FilterAchievementsReached          = 1,
+    FilterAchievementsFavorite         = 2,
+    FilterAchievementsColumnCount      = 3,
+    FilterAchievementsEndConstValues   = 3
+};
+
+enum tabsAchievements {
+    TabAchievementsStandart     = 0,
+    TabAchievementsCategories   = 1,
+    TabAchievementsCompare      = 2
+};
+
 namespace Ui {
     class FormAchievements;
 }
@@ -55,7 +81,7 @@ public slots:
     void updateSettings();
     void buttonManual_Clicked();
 public:
-    explicit FormAchievements(SAchievementsPlayer &pl, SProfile &profile, SGame &game, QWidget *parent = nullptr);
+    explicit FormAchievements(QList<SAchievementPlayer> &pl, SProfile &profile, SGame &game, QWidget *parent = nullptr);
     ~FormAchievements();
 
 signals:
@@ -105,7 +131,10 @@ private slots:
     void loading(bool aIsLoading);
 private:
     Ui::FormAchievements *ui;
-    SAchievements _achievements;
+    QList<SAchievementSchema> _global;
+    QList<SAchievementPercentage> _percent;
+    QList<SAchievementPlayer> _player;
+    QList<SAchievement> _achievements;
 
     //ключевые данные
     SProfile _profile;

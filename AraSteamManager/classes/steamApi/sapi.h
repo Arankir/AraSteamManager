@@ -4,30 +4,17 @@
 #include "classes/network/requestimage.h"
 #include <QUrlQuery>
 
-enum class StatusValue {
-    none,
-    success,
-    error
-};
-
 QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePath, QSize aSize);
 
 class Sapi : public QObject {
     Q_OBJECT
 public:
-    StatusValue status() const {return _status;}
-    QString error() const {return _error;}
-    bool isLoad() const {return _status == StatusValue::success;}
-
     static QString gameImageUrl(QString game, QString img_id);
 
-protected:
     explicit Sapi(QObject *parent = nullptr);
     Sapi(const Sapi &api);
     ~Sapi();
-    Sapi &operator=(const Sapi &api);
-
-    static QUrl achievementsGlobalUrl(QString appId);
+    static QUrl achievementsSchemaUrl(QString appId);
     static QUrl achievementsPlayerUrl(QString appId, QString steamId);
     static QUrl achievementsPercentUrl(QString appId);
     static QUrl bansUrl(QString steamIds);
@@ -39,18 +26,44 @@ protected:
     static QUrl numberPlayersUrl(QString appId);
     static QUrl lvlUrl(QString steamId);
 
-    virtual void onLoad() = 0;
-    virtual void fromJson(const QJsonValue&) = 0;
+    virtual QJsonObject toJson() const = 0;
+    virtual QString className() const = 0;
+    QString toString() const;
+
+    friend QDebug operator<<(QDebug dbg, const Sapi &a) {
+        dbg.nospace() << a.className() << "(" << a.toString() << ")\n";
+        return dbg.space();
+    }
+
+protected:
 
 signals:
 
 protected:
-    RequestData _request;
-    StatusValue _status;
-    QString _error;
+    template <typename T>
+    static QList<T> load(QUrl url, std::function<QList<T>(QByteArray)> onLoad, std::function<void(QList<T>)> callback = nullptr) {
+        RequestData *request = new RequestData();
+        request->get(url, callback != nullptr);
+
+        if (callback == nullptr) {
+            QByteArray ba = request->reply();
+            delete request;
+            return onLoad(ba);
+        } else {
+            connect(request,
+                    &RequestData::s_finished,
+                    [=](RequestData *requestL) {
+                        QByteArray ba = requestL->reply();
+                        requestL->deleteLater();
+                        callback(onLoad(ba));
+                    });
+        }
+        return QList<T>();
+    }
 
 private:
     static const QString _key;
 };
+
 
 #endif // SAPI_H

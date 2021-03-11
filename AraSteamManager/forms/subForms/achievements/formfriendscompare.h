@@ -13,6 +13,18 @@
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/items/qlistwidgetfriend.h"
 
+enum tableAchievementsFriendsCompareColumns {
+    ColumnAppid         = 0,
+    ColumnIndex         = 1,
+    ColumnIcon          = 2,
+    ColumnTitle         = 3,
+    ColumnDescription   = 4,
+    ColumnComment       = 5,
+    ColumnWorld         = 6,
+    ColumnReachedMy     = 7,
+    ColumnCount         = 8
+};
+
 namespace Ui {
 class FormFriendsCompare;
 }
@@ -21,7 +33,7 @@ class FormFriendsCompare : public QWidget {
     Q_OBJECT
 
 public slots:
-    void setInitData(SProfile &profile, SGame &game, SAchievements &achievements, QStandardItemModel *model, MyFilter *fAchievements);
+    void setInitData(SProfile &profile, SGame &game, QList<SAchievement> &achievements, QStandardItemModel *model, MyFilter *fAchievements);
     void setAchievedColors(QColor aAchieved, QColor aNotAchieved);
     void addFriendToList(SProfile *steamFriend);
     void removeFriendFromCompare();
@@ -42,7 +54,7 @@ private slots:
     void initTableCompare();
     void updateFilterFriend(SProfile *aFriendName, ReachedType aType);
     void loadingCompare();
-    void loadFriendGames(SGames *aGames);
+    void loadFriendGames(QList<SGame> aGames, const QString &aUserId);
     int rowFromId(QString aId);
     float addFriendColumn(SProfile &aSteamFriend);
     bool removeFriendColumn(SProfile &aSteamFriend);
@@ -55,7 +67,7 @@ private slots:
 
 private:
     Ui::FormFriendsCompare *ui;
-    SAchievements _achievements;
+    QList<SAchievement> _achievements;
 
     //ключевые данные
     SProfile _profile;
@@ -65,7 +77,7 @@ private:
     int _loadCompare = 0;
     int _type1 = 0;
     int _type2 = 0;
-    SProfiles _profilesFriends;
+    QList<SProfile> _profilesFriends;
     //QList<QPair<SProfile, FriendType>> _friends;
 
     QList<SProfile> _friendColumns;

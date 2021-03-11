@@ -13,13 +13,7 @@ RequestData::~RequestData() {
 }
 
 void RequestData::get(const QString &aUrl, bool aParallel) {
-    _manager->get(QNetworkRequest(QUrl(aUrl)));
-    if (!aParallel) {
-        QEventLoop loop;
-        connect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-        loop.exec();
-        disconnect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
-    }
+    get(QUrl(aUrl), aParallel);
 }
 
 void RequestData::get(const QUrl &aUrl, bool aParallel) {

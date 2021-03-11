@@ -28,6 +28,7 @@ SOURCES += \
     classes/achievements/categoriesgame.cpp \
     classes/common/comments.cpp \
     classes/common/favorites.cpp \
+    classes/common/generalfunctions.cpp \
     classes/common/myfilter.cpp \
     classes/common/settings.cpp \
     classes/games/groupsgames.cpp \
@@ -39,7 +40,6 @@ SOURCES += \
     classes/steamApi/structures/sbans.cpp \
     classes/steamApi/structures/sfriends.cpp \
     classes/steamApi/structures/sgames.cpp \
-    classes/steamApi/structures/slevels.cpp \
     classes/steamApi/structures/sprofile.cpp \
     classes/threads/thread/threadachievements.cpp \
     classes/threads/thread/threadfriends.cpp \
@@ -85,6 +85,7 @@ HEADERS += \
     classes/achievements/categoriesgame.h \
     classes/common/comments.h \
     classes/common/favorites.h \
+    classes/common/generalfunctions.h \
     classes/common/myfilter.h \
     classes/common/settings.h \
     classes/games/groupsgames.h \
@@ -96,7 +97,6 @@ HEADERS += \
     classes/steamApi/structures/sbans.h \
     classes/steamApi/structures/sfriends.h \
     classes/steamApi/structures/sgames.h \
-    classes/steamApi/structures/slevels.h \
     classes/steamApi/structures/sprofile.h \
     classes/threads/thread/threadachievements.h \
     classes/threads/thread/threadfriends.h \

@@ -1,37 +1,28 @@
 #include "sbans.h"
 
-SBans::SBans(const QString &aId, bool aParallel, QObject *aParent): Sapi(aParent) {
-    load(aId, aParallel);
-}
-
-SBans &SBans::load(const QString &aId, bool aParallel) {
-    _id = aId;
-    _request.get(bansUrl(aId), aParallel);
-    return *this;
-}
-
-void SBans::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("players"));
-    emit s_finished();
-}
-
-void SBans::fromJson(const QJsonValue &aValue) {
-    clear();
-    QJsonArray bansArray = aValue.toArray();
-    if (bansArray.size() > 0) {
-        for (const auto &ban: bansArray) {
-            _bans.append(std::move(SBan(ban.toObject())));
-        }
-        _status = StatusValue::success;
-    } else {
-        _status = StatusValue::error;
-        _error = tr("profile is not exist");
+QList<SBan> onLoadBan(QByteArray byteArray) {
+    QList<SBan> list;
+    for (const auto &ban: QJsonDocument::fromJson(byteArray).object().value("players").toArray()) {
+        list.append(std::move(SBan(ban.toObject())));
     }
+    return list;
 }
 
-SBans &SBans::clear() {
-    _bans.clear();
-    return *this;
+QJsonObject SBan::toJson() const {
+    QJsonObject obj;
+    obj["type"] = className();
+    obj["steamid"] = _steamId;
+    obj["CommunityBanned"] = _communityBanned;
+    obj["VACBanned"] = _vacBanned;
+    obj["NumberOfVACBans"] = _numberOfVacBan;
+    obj["DaysSinceLastBan"] = _daysSinceLastBan;
+    obj["NumberOfGameBans"] = _numberOfGameBans;
+    obj["EconomyBan"] = _economyBan;
+    return obj;
+}
+
+QList<SBan> SBan::load(const QString &aId, std::function<void (QList<SBan>)> aCallback) {
+    return Sapi::load<SBan>(bansUrl(aId), onLoadBan, aCallback);
 }
 
 SBan &SBan::operator=(const SBan &ban) {

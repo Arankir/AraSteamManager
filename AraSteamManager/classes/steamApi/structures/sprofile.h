@@ -3,7 +3,7 @@
 
 #include "../sapi.h"
 
-enum class ProfileUrlType {
+enum class SProfileRequestType {
     id,
     vanity
 };
@@ -22,9 +22,16 @@ public:
     ~SProfile() {}
 
     SProfile &  operator=(const SProfile &profile);
-    bool        operator<(const SProfile &profile);
+    bool operator==(const SProfile &profile);
+    bool operator!=(const SProfile &profile);
+    bool operator<(const SProfile &profile);
 
-    SProfile &update(bool parallel);
+    SProfile &update();
+    QJsonObject toJson() const;
+    virtual QString className() const {return "SProfile";}
+    static SProfile load(QString aId, SProfileRequestType aType, std::function<void (SProfile)> aCallback = nullptr);
+    static QList<SProfile> load(QStringList ids, std::function< void(QList<SProfile>) > callback = nullptr);
+    static int getLevel(QString aSteamId);
 
     QPixmap pixmapAvatar();
     QPixmap pixmapAvatarMedium();
@@ -53,12 +60,10 @@ signals:
     void s_finished();
 
 private slots:
-    void load(bool parallel);
-    void onLoad() override;
-    void fromJson(const QJsonValue &value) override;
+    void fromJson(const QJsonValue &value);
 
 private:
-    /*const*/ QString _steamID = "";
+    QString _steamID = "";
     int _communityVisibilityState;
     int _profileState;
     QString _personaName;
@@ -67,7 +72,7 @@ private:
     QString _profileUrl;
     int _personaState;
     QString _primaryClanID;
-    /*const*/ QDateTime _timeCreated;
+    QDateTime _timeCreated;
     int _personaStateFlags;
     QString _gameExtraInfo;
     QString _gameID;
@@ -84,44 +89,6 @@ private:
     QPixmap _pixmapAvatarMedium;
     QPixmap _pixmapAvatarFull;
 
-};
-
-class SProfiles : public Sapi {
-    Q_OBJECT
-public:
-    explicit SProfiles(const QStringList &ids, bool parallel, ProfileUrlType type, QObject *parent = nullptr);
-    explicit SProfiles(const QString &id, bool parallel, ProfileUrlType type, QObject *parent = nullptr): SProfiles(QStringList() << id, parallel, type, parent) {}
-    SProfiles(const QJsonArray &arrSummaries, QObject *parent = nullptr);
-    SProfiles(const QJsonObject &profile, QObject *parent = nullptr): SProfiles(QJsonArray() << profile, parent) {}
-    SProfiles(const SProfiles &profile): Sapi(profile.parent()), _profile(profile._profile), _ids(profile._ids) {}
-    SProfiles(QObject *parent = nullptr): Sapi(parent) {}
-    ~SProfiles() {}
-
-    SProfiles &operator=(const SProfiles &profile);
-    SProfile &operator[](const int &index) {return _profile[index];}
-
-    SProfiles &load(QStringList ids, bool parallel, ProfileUrlType type);
-    SProfiles &add(const QJsonArray &arrSummaries);
-    SProfiles &update(bool parallel);
-    SProfiles &sort();
-    SProfiles &clear();
-
-    QList<SProfile>::iterator begin() {return _profile.begin();}
-    QList<SProfile>::iterator end() {return _profile.end();}
-    int getCount() const {return _profile.size();}
-
-signals:
-    void s_finished(SProfiles*);
-    void s_finished();
-
-private slots:
-    void onLoad() override;
-    void fromJson(const QJsonValue &value) override;
-
-private:
-    QList<SProfile> _profile;
-    ProfileUrlType _type;
-    QStringList _ids;
 };
 
 #endif // SPROFILE_H

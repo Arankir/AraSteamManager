@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFavorites_t {
     QByteArrayData data[16];
-    char stringdata0[181];
+    char stringdata0[179];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,20 +39,20 @@ QT_MOC_LITERAL(3, 35, 8), // "QWidget*"
 QT_MOC_LITERAL(4, 44, 6), // "isInit"
 QT_MOC_LITERAL(5, 51, 8), // "isLoaded"
 QT_MOC_LITERAL(6, 60, 10), // "friendLoad"
-QT_MOC_LITERAL(7, 71, 10), // "SProfiles*"
-QT_MOC_LITERAL(8, 82, 14), // "updateSettings"
-QT_MOC_LITERAL(9, 97, 8), // "setIcons"
-QT_MOC_LITERAL(10, 106, 11), // "retranslate"
-QT_MOC_LITERAL(11, 118, 14), // "initComponents"
-QT_MOC_LITERAL(12, 133, 11), // "changeEvent"
-QT_MOC_LITERAL(13, 145, 7), // "QEvent*"
-QT_MOC_LITERAL(14, 153, 5), // "event"
-QT_MOC_LITERAL(15, 159, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(7, 71, 8), // "SProfile"
+QT_MOC_LITERAL(8, 80, 14), // "updateSettings"
+QT_MOC_LITERAL(9, 95, 8), // "setIcons"
+QT_MOC_LITERAL(10, 104, 11), // "retranslate"
+QT_MOC_LITERAL(11, 116, 14), // "initComponents"
+QT_MOC_LITERAL(12, 131, 11), // "changeEvent"
+QT_MOC_LITERAL(13, 143, 7), // "QEvent*"
+QT_MOC_LITERAL(14, 151, 5), // "event"
+QT_MOC_LITERAL(15, 157, 21) // "on_pushButton_clicked"
 
     },
     "FormFavorites\0s_return_to_profile\0\0"
     "QWidget*\0isInit\0isLoaded\0friendLoad\0"
-    "SProfiles*\0updateSettings\0setIcons\0"
+    "SProfile\0updateSettings\0setIcons\0"
     "retranslate\0initComponents\0changeEvent\0"
     "QEvent*\0event\0on_pushButton_clicked"
 };
@@ -113,7 +113,7 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 2: { bool _r = _t->isLoaded();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->friendLoad((*reinterpret_cast< SProfiles*(*)>(_a[1]))); break;
+        case 3: _t->friendLoad((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
         case 4: _t->updateSettings(); break;
         case 5: _t->setIcons(); break;
         case 6: _t->retranslate(); break;
@@ -130,13 +130,6 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QWidget* >(); break;
-            }
-            break;
-        case 3:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfiles* >(); break;
             }
             break;
         }

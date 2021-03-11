@@ -100,14 +100,14 @@ int ThreadFriends::fill() {
 //        itemState   ->setFont(font);
 //        itemPrivacy ->setFont(font);
 
-        model->setItem(row, c_tableColumnID, itemId);
-        model->setItem(row, c_tableColumnIndex, itemIndex);
-        model->setItem(row, c_tableColumnIcon, itemIcon);
-        model->setItem(row, c_tableColumnName, itemNickName);
-        model->setItem(row, c_tableColumnAdded, itemAdded);
-        model->setItem(row, c_tableColumnStatus, itemState);
-        model->setItem(row, c_tableColumnisPublic, itemPrivacy);
-        emit s_progress(row, row);
+        model->setItem(row, ColumnFriendsID, itemId);
+        model->setItem(row, ColumnFriendsIndex, itemIndex);
+        model->setItem(row, ColumnFriendsIcon, itemIcon);
+        model->setItem(row, ColumnFriendsName, itemNickName);
+        model->setItem(row, ColumnFriendsAdded, itemAdded);
+        model->setItem(row, ColumnFriendsStatus, itemState);
+        model->setItem(row, ColumnFriendsIsPublic, itemPrivacy);
+        emit s_progress(row);
         ++row;
     }
     emit s_finishedModel(model);

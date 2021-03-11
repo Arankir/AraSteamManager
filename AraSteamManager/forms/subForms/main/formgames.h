@@ -15,16 +15,35 @@
 #include "framelesswindow.h"
 #include "forms/formgroups.h"
 #include "forms/formcomments.h"
+#include "classes/common/generalfunctions.h"
+#include "classes/common/myfilter.h"
 #include "classes/common/favorites.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/threads/threading.h"
 #include "classes/network/requestimage.h"
-#include "classes/common/myfilter.h"
 #include "classes/games/hiddengames.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/progressBars/progressbarbad.h"
 #include "subWidgets/progressBars/progressbargood.h"
+
+enum tableGamesColumns {
+    ColumnGamesAppid    = 0,
+    ColumnGamesIndex    = 1,
+    ColumnGamesIcon     = 2,
+    ColumnGamesName     = 3,
+    ColumnGamesComment  = 4,
+    ColumnGamesProgress = 5,
+    ColumnGamesCount    = 6
+};
+
+enum filterGamesColumns {
+    FilterGamesName        = 0,
+    FilterGamesHide        = 1,
+    FilterGamesGroup       = 2,
+    FilterGamesFavorites   = 3,
+    FilterGamesCount       = 4
+};
 
 namespace Ui {
 class FormGames;
@@ -35,21 +54,21 @@ class FormGames : public QWidget {
 
 public slots:
     void updateSettings();
-    void setGames(SProfile &aProfile, SGames &aGames);
+    void setGames(SProfile &aProfile, QList<SGame> &aGames);
     bool isInit();
     bool isLoaded();
     void clear();
 
 public:
-    explicit FormGames(SProfile &profile, SGames &Games, QWidget *parent = nullptr);
+    //explicit FormGames(SProfile &profile, SGames &Games, QWidget *parent = nullptr);
     FormGames(QWidget *aParent = nullptr);
     ~FormGames();
 
 signals:
     void s_return_to_profile(QWidget*);
-    void s_achievementsLoaded(int,int);
+    void s_achievementsLoaded(int);
     void s_finish(int width);
-    void s_showAchievements(SAchievementsPlayer &achievements, SGame &games);
+    void s_showAchievements(QList<SAchievementPlayer> &achievements, SGame &games);
 
 private slots:
     void init();
@@ -57,7 +76,7 @@ private slots:
     void initComponents();
     void setIcons();
     void retranslate();
-    void onResultAchievements(SAchievementsPlayer *ach);
+    void onResultAchievements(QList<SAchievementPlayer> aAchievements, QString aAppId);
     void closeEvent(QCloseEvent *event);
 
     void lineEditGame_TextChanged(const QString &aFindText);
@@ -92,8 +111,8 @@ private slots:
 private:
     Ui::FormGames *ui;
     SProfile _profile;
-    SGames _games;
-    QVector<SAchievementsPlayer*> _achievements;
+    QList<SGame> _games;
+    QVector<QList<SAchievementPlayer>> _achievements;
 
     SGame *_currentGame = nullptr;
     int _currentIndex;

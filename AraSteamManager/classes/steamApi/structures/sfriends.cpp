@@ -5,72 +5,38 @@ SFriend &SFriend::operator=(const SFriend &) {
     return *this;
 }
 
-const bool &SFriend::operator<(const SFriend &aFriend) {
-    static const bool b = _steamID.toLower() < aFriend._steamID.toLower();
-    return b;
+bool SFriend::operator <(const SFriend &aFriend) {
+    return _steamID.toLower() < aFriend._steamID.toLower();
+}
+
+bool SFriend::operator==(const SFriend &aFriend) {
+    return (_steamID == aFriend._steamID &&
+            _relationship == aFriend._relationship &&
+            _friendSince == aFriend._friendSince);
+}
+
+bool SFriend::operator !=(const SFriend &aFriend) {
+    return !operator==(aFriend);
+}
+
+QList<SFriend> onLoadFriend(QByteArray byteArray) {
+    QList<SFriend> list;
+    for (const auto &ban: QJsonDocument::fromJson(byteArray).object().value("friendslist").toObject().value("friends").toArray()) {
+        list.append(std::move(SFriend(ban.toObject())));
+    }
+    return list;
+}
+
+QJsonObject SFriend::toJson() const {
+    QJsonObject obj;
+    obj["type"] = className();
+    obj["steamid"] = _steamID;
+    obj["relationship"] = _relationship;
+    obj["friend_since"] = _friendSince.toSecsSinceEpoch();
+    return obj;
+}
+
+QList<SFriend> SFriend::load(const QString &aId, std::function<void (QList<SFriend>)> aCallback) {
+    return Sapi::load<SFriend>(friendsUrl(aId), onLoadFriend, aCallback);
 }
 #define SFriendEnd }
-#define SFriendsStart {
-SFriends::SFriends(const QString &aId, bool aParallel, QObject *aParent): Sapi(aParent) {
-    load(aId, aParallel);
-}
-
-SFriends &SFriends::load(const QString &aId, bool aParallel) {
-    _id = aId;
-    _request.get(friendsUrl(_id), aParallel);
-    return *this;
-}
-
-void SFriends::onLoad() {
-    fromJson(QJsonDocument::fromJson(_request.reply()).object().value("friendslist").toObject().value("friends"));
-    emit s_finished();
-}
-
-void SFriends::fromJson(const QJsonValue &aValue) {
-    clear();
-    if (aValue.toArray().size() > 0) {
-        for (const auto &friendP: aValue.toArray()) {
-            _friends.append(std::move(SFriend(friendP.toObject())));
-        }
-        _status = StatusValue::success;
-    } else {
-        _status = StatusValue::error;
-        _error = tr("friends is not exist");
-    }
-}
-
-SProfiles SFriends::profiles() const {
-    QStringList ids;
-    for (auto steamFriend: _friends) {
-        ids << steamFriend.steamId();
-    }
-    return SProfiles(ids, false, ProfileUrlType::id);
-}
-
-SFriends &SFriends::update(bool aParallel) {
-    load(_id, aParallel);
-    return *this;
-}
-
-SFriends &SFriends::clear() {
-    _friends.clear();
-    _status = StatusValue::none;
-    return *this;
-}
-
-SFriends &SFriends::sort() {
-    std::sort(_friends.begin(), _friends.end());
-    return *this;
-}
-
-SFriends::SFriends(const SFriends &aFriends): Sapi(aFriends), _id(aFriends._id), _friends(aFriends._friends) {
-
-}
-
-SFriends &SFriends::operator=(const SFriends &aFriends) {
-    Sapi::operator=(aFriends);
-    _friends    = aFriends._friends;
-    _id         = aFriends._id;
-    return *this;
-}
-#define SFriendsEnd }
