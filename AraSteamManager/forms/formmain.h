@@ -52,19 +52,19 @@ public:
     FormContainerAchievements *_containerAchievementsForm = nullptr;
 
 public slots:
-    void addAchievements(QList<SAchievementPlayer> &achievements, SGame &games);
+    void addAchievements(QList<SAchievementPlayer> achievements, SGame games);
     void removeAchievements(int index);
     void containerAchievementsClose();
 
     void goToGames(SProfile &profileSteamid, QList<SGame> &games);
     void goToFriends(const QString &profileSteamid, QList<SFriend> &friends);
     void goToFavorites();
-    void goToStatistics(const SProfile &profileSteamid, QList<SGame> &games, const QString &profileName);
+    void goToStatistics(const SProfile &profileSteamid, QList<SGame> &games);
 
     void updateSettings();
 
     FormProfile *createFormProfile(SProfile &aProfile);
-    FormStatistics *createFormStatistics(const SProfile &aProfile, QList<SGame> &aGames, const QString &aName);
+    FormStatistics *createFormStatistics(const SProfile &aProfile, QList<SGame> &aGames);
     FormContainerAchievements *createFormContainerAchievements();
 signals:
     void s_updateSettings();

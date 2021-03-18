@@ -31,8 +31,8 @@ public slots:
     int AddThreadAchievements(const QColor achievedColor, const QColor notAchievedColor,
                               const QList<SAchievement> &achievements, int gameAppId);
     int AddThreadFriends(QList<QPair<SFriend, SProfile> > friends);
-    int AddThreadStatistics(QList<SGame> &games, const QString &id, QVector<SGame> &noAchievements, QVector<SGame> &complete,
-                            QVector<QPair<SGame, double>> &started, QVector<SGame> &notStarted, int &summColumn, QVector<int> &times,
+    int AddThreadStatistics(QList<SGame> &games, const QString &id, QList<SGame> &noAchievements, QList<SGame> &complete,
+                            QList<QPair<SGame, double>> &started, QList<SGame> &notStarted, int &summColumn, QVector<int> &times,
                             QVector<int> &months, QVector<QPair<QString,int>> &years);
 
 private:

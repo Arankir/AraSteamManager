@@ -72,7 +72,7 @@ void FormMain::setIcons() {
 }
 
 #define ContainerAchievementsStart {
-void FormMain::addAchievements(QList<SAchievementPlayer> &aAchievements, SGame &aGames) {
+void FormMain::addAchievements(QList<SAchievementPlayer> aAchievements, SGame aGames) {
     if (_containerAchievementsForm == nullptr) {
         createFormContainerAchievements();
     }
@@ -115,13 +115,14 @@ FormProfile *FormMain::createFormProfile(SProfile &aProfile) {
     return newFormProfile;
 }
 
-FormStatistics *FormMain::createFormStatistics(const SProfile &aProfile, QList<SGame> &aGames, const QString &aName) {
-    _statisticsForm = new FormStatistics(aProfile, aGames, aName, this);
+FormStatistics *FormMain::createFormStatistics(const SProfile &aProfile, QList<SGame> &aGames) {
+    _statisticsForm = new FormStatistics(aProfile, aGames, this);
     connect(this,            &FormMain::s_updateSettings,         _statisticsForm,      &FormStatistics::updateSettings);
     connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, ui->FormProgressBar,  &QProgressBar::setValue);
     connect(_statisticsForm, &FormStatistics::s_finish,           this,                 [=]() {
                                                                                             showForm(FormMainStatistic);
                                                                                         });
+    connect(_statisticsForm, &FormStatistics::s_showAchievements, this,                 &FormMain::addAchievements);
     return _statisticsForm;
 }
 
@@ -204,12 +205,12 @@ void FormMain::goToFavorites() {
     }
 }
 
-void FormMain::goToStatistics(const SProfile &aId, QList<SGame> &aGames, const QString &aProfileName) {
+void FormMain::goToStatistics(const SProfile &aId, QList<SGame> &aGames) {
     if(_statisticsForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
             ui->FormProgressBar->setMaximum(aGames.count());
-            ui->ScrollAreaStatistic->setWidget(createFormStatistics(aId, aGames, aProfileName));
+            ui->ScrollAreaStatistic->setWidget(createFormStatistics(aId, aGames));
             ui->FormProgressBar->setVisible(true);
             ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
         }
@@ -313,18 +314,13 @@ void FormMain::updateSettings() {
 }
 
 void FormMain::resizeScrollArea(int aWidth, int aHeight) {
-    if((ui->StackedWidgetForms->height() < 400) || (ui->StackedWidgetForms->width() < aWidth)) {
+    int newWidth {std::max(ui->StackedWidgetForms->width(), aWidth)};
+    int newHeight {std::max(ui->StackedWidgetForms->height(), aHeight)};
+    if((ui->StackedWidgetForms->height() != newHeight) || (ui->StackedWidgetForms->width() != newWidth)) {
         FramelessWindow *parent = dynamic_cast<FramelessWindow*>(parentWidget()->parent());
         if (parent) {
-            parent->animateResize(parentWidget()->width() - ui->StackedWidgetForms->width() + std::max(ui->StackedWidgetForms->width(), aWidth),
-                                  parentWidget()->height() - ui->StackedWidgetForms->height() + std::max(ui->StackedWidgetForms->height(), aHeight));
-            //qDebug()<<this->width()+a_width-ui->StackedWidgetForms->width()<<this->width()<<a_width<<ui->StackedWidgetForms->width();
-//            QPropertyAnimation *animation = new QPropertyAnimation(parentWidget(), "size");
-//            connect(animation, &QPropertyAnimation::finished, animation, &QPropertyAnimation::deleteLater);
-//            animation->setDuration(500);
-//            animation->setStartValue(QSize(parentWidget()->width(), parentWidget()->height()));
-//            animation->setEndValue(QSize(parentWidget()->width() + aWidth - ui->StackedWidgetForms->width(), parentWidget()->height() - ui->StackedWidgetForms->height() + 400));
-            //animation->start();
+            parent->animateResize(parentWidget()->width() - ui->StackedWidgetForms->width() + newWidth,
+                                  parentWidget()->height() - ui->StackedWidgetForms->height() + newHeight);
         }
     }
 }

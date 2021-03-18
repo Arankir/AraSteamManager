@@ -425,7 +425,7 @@ void FormProfile::buttonFriends_Clicked() {
 
 void FormProfile::buttonStatistics_Clicked() {
     if(_games.count() > 0) {
-        emit s_goToStatistic(_profile, _games, _profile.personaName());
+        emit s_goToStatistic(_profile, _games);
     }
 }
 

@@ -11,7 +11,7 @@ FormAchievements::FormAchievements(QList<SAchievementPlayer> &aPlayer, SProfile 
                                    QWidget *aParent): QWidget(aParent), ui(new Ui::FormAchievements),
                                    _player(aPlayer), _profile(aProfile), _game(aGame),
                                    _categoriesGame(_game), _comments(_profile.steamID()),
-                                   _fCategories(0, _categoriesGame.countAll()), _fAchievements(0, FilterAchievementsColumnCount) {
+                                   _fCategories(0, _categoriesGame.countCategories()), _fAchievements(0, FilterAchievementsColumnCount) {
     ui->setupUi(this);
     initComponents();
     ui->LineEditNameAchievements->setFocus();
@@ -29,7 +29,7 @@ void FormAchievements::initComponents() {
     initTableStandart();
     initCategoriesTree();
 
-    ui->LabelGameOnlineValue->setText(QString::number(SGame::getPlayerCount(_game.appId())));
+    ui->LabelGameOnlineValue->setText(QString::number(SGame::playerCount(_game.appId())));
     ui->TabWidget->setCurrentIndex(0);
 
     setIcons();
@@ -355,18 +355,42 @@ void FormAchievements::updateCurrentAchievement() {
     }
 }
 
-void FormAchievements::updateCurrentCategory() {
-    auto currentItem = ui->TreeWidgetCategories->currentItem();
-    QCheckBox *checkBox = dynamic_cast<QCheckBox*>(ui->TreeWidgetCategories->itemWidget(currentItem, 0));
+QString FormAchievements::getText(QTreeWidgetItem *item) {
+    QWidget *widget = ui->TreeWidgetCategories->itemWidget(item, 0);
+    QCheckBox *checkBox = dynamic_cast<QCheckBox*>(widget);
     if (checkBox) {
-        _currentCategoryIndex = checkBox->accessibleName().toInt();
+        return checkBox->text();
     } else {
-        QLabel *label = dynamic_cast<QLabel*>(ui->TreeWidgetCategories->itemWidget(currentItem, 0));
+        QLabel *label = dynamic_cast<QLabel*>(widget);
         if (label) {
-            _currentCategoryIndex = label->accessibleName().toInt();
+            return label->text();
         }
     }
-    _currentCategory = _categoriesGame.categoryAtDirect(_currentCategoryIndex);
+    return QString();
+}
+
+void FormAchievements::updateCurrentCategory() {
+    //_currentCategoryIndex
+    auto currentItem = ui->TreeWidgetCategories->currentItem();
+    if (currentItem == nullptr) {
+        _currentCategory = nullptr;
+        return;
+    }
+    QStringList names {getText(currentItem)};
+    while (currentItem->parent() != nullptr) {
+        currentItem = currentItem->parent();
+        names << getText(currentItem);
+    }
+    _currentCategory = &_categoriesGame;
+    while (!names.isEmpty()) {
+        for (auto &category: *_currentCategory) {
+            if (category->title() == names.last()) {
+                _currentCategory = category;
+                names.removeLast();
+                break;
+            }
+        }
+    }
 }
 
 void FormAchievements::checkBoxCategory_StateChanged(int aIndex) {
@@ -374,19 +398,19 @@ void FormAchievements::checkBoxCategory_StateChanged(int aIndex) {
     if (_currentCategory != nullptr) {
         switch (aIndex) {
         case 0: {
-            updateFilterCategory(_currentCategoryIndex, true);
+            updateFilterCategory(_currentCategory->order(), true);
             break;
         }
         case 2: {
-            QList<QString> achievementsName = _currentCategory->achievements();
-            updateFilterCategory(_currentCategoryIndex, false, achievementsName);
+            QList<QString> achievementsName = _currentCategory->achievementsApiName();
+            updateFilterCategory(_currentCategory->order(), false, achievementsName);
             break;
         }
         }
     }
 }
 
-int FormAchievements::recursAddCategoryToTree(Category &aCategory, int aCount, QTreeWidgetItem *aRoot) {
+int FormAchievements::recursAddCategoryToTree(Category *aCategory, int aCount, QTreeWidgetItem *aRoot) {
     QTreeWidgetItem *subItem;
     if (aRoot == nullptr) {
         subItem = new QTreeWidgetItem(ui->TreeWidgetCategories);
@@ -395,10 +419,10 @@ int FormAchievements::recursAddCategoryToTree(Category &aCategory, int aCount, Q
     }
     QSize sizeHint;
     QWidget *widget;
-    if (aCategory.achievements().isEmpty()) {
-        widget = new QLabel(aCategory.title());
+    if (aCategory->achievementsApiName().isEmpty()) {
+        widget = new QLabel(aCategory->title());
     } else {
-        widget = new QCheckBox(aCategory.title());
+        widget = new QCheckBox(aCategory->title());
         connect(dynamic_cast<QCheckBox*>(widget), &QCheckBox::stateChanged, this, &FormAchievements::checkBoxCategory_StateChanged);
     }
     widget->setAccessibleName(QString::number(aCount++));
@@ -406,7 +430,7 @@ int FormAchievements::recursAddCategoryToTree(Category &aCategory, int aCount, Q
     sizeHint.rwidth() += 10;
     subItem->setSizeHint(0, sizeHint);
     ui->TreeWidgetCategories->setItemWidget(subItem, 0, widget);
-    for(auto &subCategory: aCategory) {
+    for(auto subCategory: *aCategory) {
         aCount = recursAddCategoryToTree(subCategory, aCount, subItem);
     }
     return aCount;
@@ -421,8 +445,8 @@ void FormAchievements::showCategories() {
         count = recursAddCategoryToTree(category, count);
     }
 
-    _fCategories.setCol(_categoriesGame.countAll());
-    _fAchievements.setCol(_categoriesGame.countAll() + FilterAchievementsColumnCount);
+    _fCategories.setCol(_categoriesGame.countCategories());
+    _fAchievements.setCol(_categoriesGame.countCategories() + FilterAchievementsColumnCount);
     updateHiddenRows();
 }
 #define SystemEnd }
@@ -455,23 +479,6 @@ void FormAchievements::updateFilterCategory(int aCategoryIndex, bool aClear, QLi
         }
     }
     updateHiddenRows();
-}
-
-void FormAchievements::comboBoxCategory_IndexChange(int aIndex) {
-    if (_categoriesGame.countTopCategories() > 0) {
-        QComboBoxWithData *comboBox = dynamic_cast<QComboBoxWithData*>(sender());
-        if (comboBox) {
-            int categoryIndex = comboBox->getData(0).toInt();
-            if (aIndex != 0) {
-//                QList<QString> achievementsName = _categoriesGame[categoryIndex].values().at(aIndex - 1).achievements;
-//                updateFilterCategory(categoryIndex, false, achievementsName);
-            } else {
-                updateFilterCategory(categoryIndex, true);
-            }
-        } else {
-            qWarning() << "not init comboBox";
-        }
-    }
 }
 #define FilterEnd }
 
@@ -584,18 +591,20 @@ void FormAchievements::loadCompare() {
 
 void FormAchievements::categoryChange() {
     ui->TabWidget->setCurrentIndex(TabAchievementsCategories);
-    updateCurrentCategory();
-    ui->CategoriesEdit->changeCategory(_currentCategory, _currentCategoryIndex);
+//    updateCurrentCategory();
+    ui->CategoriesEdit->changeCategory(_currentCategory);
 }
 
 void FormAchievements::categoryAdd() {
     ui->TabWidget->setCurrentIndex(TabAchievementsCategories);
+//    updateCurrentCategory();
     ui->CategoriesEdit->addSubCategory(_currentCategory);
 }
 
 void FormAchievements::categoryDelete() {
     ui->TabWidget->setCurrentIndex(TabAchievementsCategories);
-    ui->CategoriesEdit->deleteCategory(_currentCategory, _currentCategoryIndex);
+//    updateCurrentCategory();
+    ui->CategoriesEdit->deleteCategory(_currentCategory);
 }
 
 void FormAchievements::buttonComment_Clicked() {

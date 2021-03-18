@@ -33,7 +33,8 @@ void QListWidgetAchievements::startDrag(Qt::DropActions aSupportedActions) {
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
     for(auto &item: items) {
-        if (auto achievementItem = dynamic_cast<QListWidgetAchievement*>(item)) {
+        QListWidgetAchievement *achievementItem = dynamic_cast<QListWidgetAchievement*>(item);
+        if (achievementItem != nullptr) {
             QMap<int,  QVariant> map = model()->itemData(model()->index(row(achievementItem), 0));
             stream << achievementItem->_achievement->toString() << row(achievementItem) << 0 << map;
         }

@@ -36,6 +36,7 @@ debug/formsettings.o
 debug/formstatistics.o
 debug/framelesswindow.o
 debug/main.o
+debug/actioncategory.o
 debug/donutbreakdownchart.o
 debug/mainslice.o
 debug/multiselectcombobox.o
@@ -89,6 +90,7 @@ debug/moc_formprofile.o
 debug/moc_formsettings.o
 debug/moc_formstatistics.o
 debug/moc_framelesswindow.o
+debug/moc_actioncategory.o
 debug/moc_multiselectcombobox.o
 debug/moc_qcomboboxfriends.o
 debug/moc_labellight.o

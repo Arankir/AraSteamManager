@@ -12,9 +12,10 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "QtCharts/QtCharts"
@@ -35,7 +36,7 @@ public:
     QLabel *LabelAveragePercentValue;
     QHBoxLayout *horizontalLayout;
     QChartView *ChartViewPercentages;
-    QListView *listView;
+    QTableView *TableViewGames;
     QChartView *ChartsViewTimes;
     QChartView *ChartsViewMonths;
     QChartView *ChartsViewYears;
@@ -108,10 +109,11 @@ public:
 
         horizontalLayout->addWidget(ChartViewPercentages);
 
-        listView = new QListView(FormStatistics);
-        listView->setObjectName(QString::fromUtf8("listView"));
+        TableViewGames = new QTableView(FormStatistics);
+        TableViewGames->setObjectName(QString::fromUtf8("TableViewGames"));
+        TableViewGames->horizontalHeader()->setStretchLastSection(true);
 
-        horizontalLayout->addWidget(listView);
+        horizontalLayout->addWidget(TableViewGames);
 
 
         verticalLayout_2->addLayout(horizontalLayout);

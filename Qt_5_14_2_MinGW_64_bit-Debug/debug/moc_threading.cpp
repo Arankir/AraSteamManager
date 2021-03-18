@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Threading_t {
-    QByteArrayData data[48];
-    char stringdata0[718];
+    QByteArrayData data[47];
+    char stringdata0[700];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -69,19 +69,18 @@ QT_MOC_LITERAL(31, 504, 7), // "friends"
 QT_MOC_LITERAL(32, 512, 19), // "AddThreadStatistics"
 QT_MOC_LITERAL(33, 532, 13), // "QList<SGame>&"
 QT_MOC_LITERAL(34, 546, 2), // "id"
-QT_MOC_LITERAL(35, 549, 15), // "QVector<SGame>&"
-QT_MOC_LITERAL(36, 565, 14), // "noAchievements"
-QT_MOC_LITERAL(37, 580, 8), // "complete"
-QT_MOC_LITERAL(38, 589, 30), // "QVector<QPair<SGame,double> >&"
-QT_MOC_LITERAL(39, 620, 7), // "started"
-QT_MOC_LITERAL(40, 628, 10), // "notStarted"
-QT_MOC_LITERAL(41, 639, 4), // "int&"
-QT_MOC_LITERAL(42, 644, 10), // "summColumn"
-QT_MOC_LITERAL(43, 655, 13), // "QVector<int>&"
-QT_MOC_LITERAL(44, 669, 5), // "times"
-QT_MOC_LITERAL(45, 675, 6), // "months"
-QT_MOC_LITERAL(46, 682, 29), // "QVector<QPair<QString,int> >&"
-QT_MOC_LITERAL(47, 712, 5) // "years"
+QT_MOC_LITERAL(35, 549, 14), // "noAchievements"
+QT_MOC_LITERAL(36, 564, 8), // "complete"
+QT_MOC_LITERAL(37, 573, 28), // "QList<QPair<SGame,double> >&"
+QT_MOC_LITERAL(38, 602, 7), // "started"
+QT_MOC_LITERAL(39, 610, 10), // "notStarted"
+QT_MOC_LITERAL(40, 621, 4), // "int&"
+QT_MOC_LITERAL(41, 626, 10), // "summColumn"
+QT_MOC_LITERAL(42, 637, 13), // "QVector<int>&"
+QT_MOC_LITERAL(43, 651, 5), // "times"
+QT_MOC_LITERAL(44, 657, 6), // "months"
+QT_MOC_LITERAL(45, 664, 29), // "QVector<QPair<QString,int> >&"
+QT_MOC_LITERAL(46, 694, 5) // "years"
 
     },
     "Threading\0s_games_progress\0\0progress\0"
@@ -99,8 +98,8 @@ QT_MOC_LITERAL(47, 712, 5) // "years"
     "gameAppId\0AddThreadFriends\0"
     "QList<QPair<SFriend,SProfile> >\0friends\0"
     "AddThreadStatistics\0QList<SGame>&\0id\0"
-    "QVector<SGame>&\0noAchievements\0complete\0"
-    "QVector<QPair<SGame,double> >&\0started\0"
+    "noAchievements\0complete\0"
+    "QList<QPair<SGame,double> >&\0started\0"
     "notStarted\0int&\0summColumn\0QVector<int>&\0"
     "times\0months\0QVector<QPair<QString,int> >&\0"
     "years"
@@ -154,7 +153,7 @@ static const uint qt_meta_data_Threading[] = {
     QMetaType::Int, 0x80000000 | 21,   22,
     QMetaType::Int, QMetaType::QColor, QMetaType::QColor, 0x80000000 | 26, QMetaType::Int,   24,   25,   27,   28,
     QMetaType::Int, 0x80000000 | 30,   31,
-    QMetaType::Int, 0x80000000 | 33, QMetaType::QString, 0x80000000 | 35, 0x80000000 | 35, 0x80000000 | 38, 0x80000000 | 35, 0x80000000 | 41, 0x80000000 | 43, 0x80000000 | 43, 0x80000000 | 46,   22,   34,   36,   37,   39,   40,   42,   44,   45,   47,
+    QMetaType::Int, 0x80000000 | 33, QMetaType::QString, 0x80000000 | 33, 0x80000000 | 33, 0x80000000 | 37, 0x80000000 | 33, 0x80000000 | 40, 0x80000000 | 42, 0x80000000 | 42, 0x80000000 | 45,   22,   34,   35,   36,   38,   39,   41,   43,   44,   46,
 
        0        // eod
 };
@@ -181,7 +180,7 @@ void Threading::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 12: { int _r = _t->AddThreadFriends((*reinterpret_cast< QList<QPair<SFriend,SProfile> >(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 13: { int _r = _t->AddThreadStatistics((*reinterpret_cast< QList<SGame>(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< QVector<SGame>(*)>(_a[3])),(*reinterpret_cast< QVector<SGame>(*)>(_a[4])),(*reinterpret_cast< QVector<QPair<SGame,double> >(*)>(_a[5])),(*reinterpret_cast< QVector<SGame>(*)>(_a[6])),(*reinterpret_cast< int(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<int>(*)>(_a[9])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[10])));
+        case 13: { int _r = _t->AddThreadStatistics((*reinterpret_cast< QList<SGame>(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< QList<SGame>(*)>(_a[3])),(*reinterpret_cast< QList<SGame>(*)>(_a[4])),(*reinterpret_cast< QList<QPair<SGame,double> >(*)>(_a[5])),(*reinterpret_cast< QList<SGame>(*)>(_a[6])),(*reinterpret_cast< int(*)>(_a[7])),(*reinterpret_cast< QVector<int>(*)>(_a[8])),(*reinterpret_cast< QVector<int>(*)>(_a[9])),(*reinterpret_cast< QVector<QPair<QString,int> >(*)>(_a[10])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }

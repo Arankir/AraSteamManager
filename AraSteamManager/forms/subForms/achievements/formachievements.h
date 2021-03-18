@@ -97,7 +97,6 @@ private slots:
 
     void showCategories();
 
-    void comboBoxCategory_IndexChange(int index);
     void checkBoxCategory_StateChanged(int ind);
 
     void checkBoxFavorites_StateChanged(int arg1);
@@ -122,13 +121,14 @@ private slots:
     void updateFilterCategory(int categoryIndex, bool clear, QList<QString> achievementNames = QList<QString>());
     void updateFilterFavorite(const QList<FavoriteAchievement> &aFavoritesAchievements);
     int rowFromId(QString aId);
-    int recursAddCategoryToTree(Category &category, int count, QTreeWidgetItem *root = nullptr);
+    int recursAddCategoryToTree(Category *category, int count, QTreeWidgetItem *root = nullptr);
     void updateCurrentCategory();
     QMenu *createMenuCategory(const Category &aCategory);
     void categoryChange();
     void categoryAdd();
     void categoryDelete();
     void loading(bool aIsLoading);
+    QString getText(QTreeWidgetItem *item);
 private:
     Ui::FormAchievements *ui;
     QList<SAchievementSchema> _global;
@@ -139,7 +139,7 @@ private:
     //ключевые данные
     SProfile _profile;
     SGame _game;
-    Categories _categoriesGame;
+    Category _categoriesGame;
     Favorites _favorites;
     Comments _comments;
 
@@ -157,7 +157,6 @@ private:
 
     //выбранная категория
     Category *_currentCategory = nullptr;
-    int _currentCategoryIndex;
 
 };
 

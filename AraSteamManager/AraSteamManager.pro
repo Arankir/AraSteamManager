@@ -63,6 +63,7 @@ SOURCES += \
     forms/subForms/main/formstatistics.cpp \
     framelesswindow.cpp \
         main.cpp \
+    subWidgets/actions/actioncategory.cpp \
     subWidgets/charts/donutbreakdownchart.cpp \
     subWidgets/charts/mainslice.cpp \
     subWidgets/comboBoxes/multiselectcombobox.cpp \
@@ -119,6 +120,7 @@ HEADERS += \
     forms/subForms/main/formsettings.h \
     forms/subForms/main/formstatistics.h \
     framelesswindow.h \
+    subWidgets/actions/actioncategory.h \
     subWidgets/charts/donutbreakdownchart.h \
     subWidgets/charts/mainslice.h \
     subWidgets/comboBoxes/multiselectcombobox.h \

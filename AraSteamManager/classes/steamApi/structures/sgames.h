@@ -16,7 +16,7 @@ public:
     QJsonObject toJson() const;
     virtual QString className() const {return "SGame";}
     static QList<SGame> load(const QString &id, int free_games = 0, int game_info = 0, std::function< void(QList<SGame>) > callback = nullptr);
-    static int getPlayerCount(const int appId);
+    static int playerCount(const int appId);
 
     SGame & operator=(const SGame &game);
     bool    operator<(const SGame &game);

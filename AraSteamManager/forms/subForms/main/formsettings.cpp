@@ -192,14 +192,14 @@ void FormSettings::initExport() {
         if (fileCategory.exists()) {
             if(fileCategory.open(QFile::ReadOnly)) {
                 auto s = fileCategory.readAll();
-                Categories game(QJsonDocument().fromJson(s).object());
+                Category game(QJsonDocument().fromJson(s).object());
+                game.update();
                 QTreeWidgetItem *item = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << game.game());
                 item->setWhatsThis(0, QString::number(game.gameID()));
                 item->setWhatsThis(1, QString::number(-2));
                 ui->TreeWidgetExportCategories->addTopLevelItem(item);
-                int count = -2;
                 for (auto &category: game) {
-                    count = recursAddCategoryToTree(category, ++count, item, game.gameID());
+                    recursAddCategoryToTree(category, item, game.gameID());
                 }
                 fileCategory.close();
             }
@@ -207,19 +207,19 @@ void FormSettings::initExport() {
     }
 }
 
-int FormSettings::recursAddCategoryToTree(Category &aCategory, int aCount, QTreeWidgetItem *aRoot, const int &aGameId) {
+int FormSettings::recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot, const int &aGameId) {
     QTreeWidgetItem *subItem;
     if (aRoot == nullptr) {
-        subItem = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << aCategory.title());
+        subItem = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << aCategory->title());
     } else {
-        subItem = new QTreeWidgetItem(aRoot, QStringList() << aCategory.title());
+        subItem = new QTreeWidgetItem(aRoot, QStringList() << aCategory->title());
     }
     subItem->setWhatsThis(0,QString::number(aGameId));
-    subItem->setWhatsThis(1,QString::number(aCount + 1));
-    for(auto &subCategory: aCategory) {
-        aCount = recursAddCategoryToTree(subCategory, ++aCount, subItem, aGameId);
+    subItem->setWhatsThis(1,QString::number(aCategory->order()));
+    for(auto subCategory: *aCategory) {
+        recursAddCategoryToTree(subCategory, subItem, aGameId);
     }
-    return aCount;
+    return 0;
 }
 
 void FormSettings::buttonExportCategories_Clicked() {
@@ -241,15 +241,15 @@ void FormSettings::buttonExportCategories_Clicked() {
 ExportFileData FormSettings::createExportCategoriesJson() {
     QJsonArray jArray;
     for (auto &item: ui->TreeWidgetExportCategories->selectedItems()) {
-        Categories categories(item->whatsThis(0).toInt());
-        int index = item->whatsThis(1).toInt();
-        if (index == -2) {
-            for (auto &category: categories) {
-                ExportCategory eCategory {categories.gameID(), categories.game(), category};
+        Category categories(item->whatsThis(0).toInt());
+        int categoryOrder = item->whatsThis(1).toInt();
+        if (categoryOrder == -2) {
+            for (auto category: categories) {
+                ExportCategory eCategory {categories.gameID(), categories.game(), *category};
                 jArray.append(eCategory.toJson());
             }
         } else {
-            Category *category = categories.categoryAtDirect(index);
+            Category *category = categories.findCategory(categoryOrder);
             if (category != nullptr) {
                 ExportCategory eCategory {categories.gameID(), categories.game(), *category};
                 jArray.append(eCategory.toJson());
@@ -315,10 +315,9 @@ void FormSettings::buttonImportCategories_Clicked() {
     //Обновить категории
     for (auto eCategory: exportCategories) {
         int gameId = eCategory.gameId;
-        Category category = eCategory.category;
-        Categories categories(gameId);
-        categories.addCategory(category);
-        categories.save(categories.toJson());
+        Category categories(gameId);
+        categories.addCategory(new Category(eCategory.category));
+        categories.save();
     }
     QMessageBox::information(this, tr("Внимание!"), tr("Категории успешно добавлены!"));
 }

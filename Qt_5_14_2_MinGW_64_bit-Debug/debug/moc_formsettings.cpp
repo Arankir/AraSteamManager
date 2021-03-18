@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormSettings_t {
-    QByteArrayData data[37];
-    char stringdata0[670];
+    QByteArrayData data[36];
+    char stringdata0[663];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -59,16 +59,15 @@ QT_MOC_LITERAL(23, 451, 5), // "value"
 QT_MOC_LITERAL(24, 457, 20), // "comboBoxMaxTableRows"
 QT_MOC_LITERAL(25, 478, 5), // "index"
 QT_MOC_LITERAL(26, 484, 23), // "recursAddCategoryToTree"
-QT_MOC_LITERAL(27, 508, 9), // "Category&"
+QT_MOC_LITERAL(27, 508, 9), // "Category*"
 QT_MOC_LITERAL(28, 518, 9), // "aCategory"
-QT_MOC_LITERAL(29, 528, 6), // "aCount"
-QT_MOC_LITERAL(30, 535, 16), // "QTreeWidgetItem*"
-QT_MOC_LITERAL(31, 552, 5), // "aRoot"
-QT_MOC_LITERAL(32, 558, 7), // "aGameId"
-QT_MOC_LITERAL(33, 566, 30), // "buttonExportCategories_Clicked"
-QT_MOC_LITERAL(34, 597, 30), // "buttonImportCategories_Clicked"
-QT_MOC_LITERAL(35, 628, 26), // "createExportCategoriesJson"
-QT_MOC_LITERAL(36, 655, 14) // "ExportFileData"
+QT_MOC_LITERAL(29, 528, 16), // "QTreeWidgetItem*"
+QT_MOC_LITERAL(30, 545, 5), // "aRoot"
+QT_MOC_LITERAL(31, 551, 7), // "aGameId"
+QT_MOC_LITERAL(32, 559, 30), // "buttonExportCategories_Clicked"
+QT_MOC_LITERAL(33, 590, 30), // "buttonImportCategories_Clicked"
+QT_MOC_LITERAL(34, 621, 26), // "createExportCategoriesJson"
+QT_MOC_LITERAL(35, 648, 14) // "ExportFileData"
 
     },
     "FormSettings\0s_return_to_profile\0\0"
@@ -85,9 +84,9 @@ QT_MOC_LITERAL(36, 655, 14) // "ExportFileData"
     "arg1\0checkBoxSaveImage_StateChanged\0"
     "slideProfileSize_ValueChanged\0value\0"
     "comboBoxMaxTableRows\0index\0"
-    "recursAddCategoryToTree\0Category&\0"
-    "aCategory\0aCount\0QTreeWidgetItem*\0"
-    "aRoot\0aGameId\0buttonExportCategories_Clicked\0"
+    "recursAddCategoryToTree\0Category*\0"
+    "aCategory\0QTreeWidgetItem*\0aRoot\0"
+    "aGameId\0buttonExportCategories_Clicked\0"
     "buttonImportCategories_Clicked\0"
     "createExportCategoriesJson\0ExportFileData"
 };
@@ -127,10 +126,10 @@ static const uint qt_meta_data_FormSettings[] = {
       21,    1,  145,    2, 0x08 /* Private */,
       22,    1,  148,    2, 0x08 /* Private */,
       24,    1,  151,    2, 0x08 /* Private */,
-      26,    4,  154,    2, 0x08 /* Private */,
-      33,    0,  163,    2, 0x08 /* Private */,
-      34,    0,  164,    2, 0x08 /* Private */,
-      35,    0,  165,    2, 0x08 /* Private */,
+      26,    3,  154,    2, 0x08 /* Private */,
+      32,    0,  161,    2, 0x08 /* Private */,
+      33,    0,  162,    2, 0x08 /* Private */,
+      34,    0,  163,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -153,10 +152,10 @@ static const uint qt_meta_data_FormSettings[] = {
     QMetaType::Void, QMetaType::Int,   20,
     QMetaType::Void, QMetaType::Int,   23,
     QMetaType::Void, QMetaType::Int,   25,
-    QMetaType::Int, 0x80000000 | 27, QMetaType::Int, 0x80000000 | 30, QMetaType::Int,   28,   29,   31,   32,
+    QMetaType::Int, 0x80000000 | 27, 0x80000000 | 29, QMetaType::Int,   28,   30,   31,
     QMetaType::Void,
     QMetaType::Void,
-    0x80000000 | 36,
+    0x80000000 | 35,
 
        0        // eod
 };
@@ -185,7 +184,7 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 15: _t->checkBoxSaveImage_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 16: _t->slideProfileSize_ValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 17: _t->comboBoxMaxTableRows((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 18: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[3])),(*reinterpret_cast< const int(*)>(_a[4])));
+        case 18: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 19: _t->buttonExportCategories_Clicked(); break;
         case 20: _t->buttonImportCategories_Clicked(); break;

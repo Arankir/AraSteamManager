@@ -26,10 +26,10 @@ int Threading::AddThreadFriends(QList<QPair<SFriend, SProfile>> aFriends) {
     return 1;
 }
 
-int Threading::AddThreadStatistics(QList<SGame> &aGames, const QString &aId, QVector<SGame> &aNoAchievements, QVector<SGame> &aComplete,
-                                   QVector<QPair<SGame, double>> &aStarted, QVector<SGame> &aNotStarted, int &aSummColumn, QVector<int> &aTimes,
+int Threading::AddThreadStatistics(QList<SGame> &aGames, const QString &aId, QList<SGame> &aNoAchievements, QList<SGame> &aComplete,
+                                   QList<QPair<SGame, double>> &aStarted, QList<SGame> &aNotStarted, int &aAchievementsCount, QVector<int> &aTimes,
                                    QVector<int> &aMonths, QVector<QPair<QString,int>> &aYears) {
-    ThreadStatistics *statistics = new ThreadStatistics(aGames, aId, aNoAchievements, aComplete, aStarted, aNotStarted, aSummColumn, aTimes, aMonths, aYears);
+    ThreadStatistics *statistics = new ThreadStatistics(aGames, aId, aAchievementsCount, aNoAchievements, aComplete, aStarted, aNotStarted, aTimes, aMonths, aYears);
     QThread *thread = createThread();
     statistics->moveToThread(thread);
     connect(thread,     &QThread::started,              statistics,     &ThreadStatistics::fill);

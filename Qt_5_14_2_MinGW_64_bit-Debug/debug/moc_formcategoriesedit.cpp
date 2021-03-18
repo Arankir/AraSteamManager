@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoriesEdit_t {
-    QByteArrayData data[34];
-    char stringdata0[461];
+    QByteArrayData data[30];
+    char stringdata0[412];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -54,18 +54,14 @@ QT_MOC_LITERAL(18, 230, 20), // "buttonDelete_Clicked"
 QT_MOC_LITERAL(19, 251, 23), // "buttonDeleteAll_Clicked"
 QT_MOC_LITERAL(20, 275, 19), // "isCategoryNameExist"
 QT_MOC_LITERAL(21, 295, 4), // "name"
-QT_MOC_LITERAL(22, 300, 26), // "changeParentButton_Clicked"
-QT_MOC_LITERAL(23, 327, 15), // "changeNewParent"
-QT_MOC_LITERAL(24, 343, 9), // "Category*"
-QT_MOC_LITERAL(25, 353, 6), // "parent"
-QT_MOC_LITERAL(26, 360, 16), // "createParentMenu"
-QT_MOC_LITERAL(27, 377, 6), // "QMenu*"
-QT_MOC_LITERAL(28, 384, 19), // "createParentSubMenu"
-QT_MOC_LITERAL(29, 404, 9), // "Category&"
-QT_MOC_LITERAL(30, 414, 8), // "category"
-QT_MOC_LITERAL(31, 423, 4), // "int&"
-QT_MOC_LITERAL(32, 428, 6), // "number"
-QT_MOC_LITERAL(33, 435, 25) // "changeNewParentFromAction"
+QT_MOC_LITERAL(22, 300, 15), // "changeNewParent"
+QT_MOC_LITERAL(23, 316, 9), // "Category*"
+QT_MOC_LITERAL(24, 326, 6), // "parent"
+QT_MOC_LITERAL(25, 333, 16), // "createParentMenu"
+QT_MOC_LITERAL(26, 350, 6), // "QMenu*"
+QT_MOC_LITERAL(27, 357, 19), // "createParentSubMenu"
+QT_MOC_LITERAL(28, 377, 8), // "category"
+QT_MOC_LITERAL(29, 386, 25) // "changeNewParentFromAction"
 
     },
     "FormCategoriesEdit\0s_categoriesIsUpdated\0"
@@ -75,11 +71,10 @@ QT_MOC_LITERAL(33, 435, 25) // "changeNewParentFromAction"
     "EditType\0type\0buttonAdd_Clicked\0"
     "buttonCancel_Clicked\0buttonAccept_Clicked\0"
     "buttonDelete_Clicked\0buttonDeleteAll_Clicked\0"
-    "isCategoryNameExist\0name\0"
-    "changeParentButton_Clicked\0changeNewParent\0"
+    "isCategoryNameExist\0name\0changeNewParent\0"
     "Category*\0parent\0createParentMenu\0"
-    "QMenu*\0createParentSubMenu\0Category&\0"
-    "category\0int&\0number\0changeNewParentFromAction"
+    "QMenu*\0createParentSubMenu\0category\0"
+    "changeNewParentFromAction"
 };
 #undef QT_MOC_LITERAL
 
@@ -89,7 +84,7 @@ static const uint qt_meta_data_FormCategoriesEdit[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -97,26 +92,25 @@ static const uint qt_meta_data_FormCategoriesEdit[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,  104,    2, 0x06 /* Public */,
-       4,    0,  107,    2, 0x06 /* Public */,
+       1,    1,   99,    2, 0x06 /* Public */,
+       4,    0,  102,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,  108,    2, 0x08 /* Private */,
-       6,    0,  109,    2, 0x08 /* Private */,
-       7,    0,  110,    2, 0x08 /* Private */,
-       8,    2,  111,    2, 0x08 /* Private */,
-      12,    1,  116,    2, 0x08 /* Private */,
-      15,    0,  119,    2, 0x08 /* Private */,
-      16,    0,  120,    2, 0x08 /* Private */,
-      17,    0,  121,    2, 0x08 /* Private */,
-      18,    0,  122,    2, 0x08 /* Private */,
-      19,    0,  123,    2, 0x08 /* Private */,
-      20,    1,  124,    2, 0x08 /* Private */,
-      22,    0,  127,    2, 0x08 /* Private */,
-      23,    1,  128,    2, 0x08 /* Private */,
-      26,    0,  131,    2, 0x08 /* Private */,
-      28,    2,  132,    2, 0x08 /* Private */,
-      33,    0,  137,    2, 0x08 /* Private */,
+       5,    0,  103,    2, 0x08 /* Private */,
+       6,    0,  104,    2, 0x08 /* Private */,
+       7,    0,  105,    2, 0x08 /* Private */,
+       8,    2,  106,    2, 0x08 /* Private */,
+      12,    1,  111,    2, 0x08 /* Private */,
+      15,    0,  114,    2, 0x08 /* Private */,
+      16,    0,  115,    2, 0x08 /* Private */,
+      17,    0,  116,    2, 0x08 /* Private */,
+      18,    0,  117,    2, 0x08 /* Private */,
+      19,    0,  118,    2, 0x08 /* Private */,
+      20,    1,  119,    2, 0x08 /* Private */,
+      22,    1,  122,    2, 0x08 /* Private */,
+      25,    0,  125,    2, 0x08 /* Private */,
+      27,    1,  126,    2, 0x08 /* Private */,
+      29,    0,  129,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -134,10 +128,9 @@ static const uint qt_meta_data_FormCategoriesEdit[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Bool, QMetaType::QString,   21,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 24,   25,
-    0x80000000 | 27,
-    0x80000000 | 27, 0x80000000 | 29, 0x80000000 | 31,   30,   32,
+    QMetaType::Void, 0x80000000 | 23,   24,
+    0x80000000 | 26,
+    0x80000000 | 26, 0x80000000 | 23,   28,
     QMetaType::Void,
 
        0        // eod
@@ -164,13 +157,12 @@ void FormCategoriesEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 11: _t->buttonDeleteAll_Clicked(); break;
         case 12: { bool _r = _t->isCategoryNameExist((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 13: _t->changeParentButton_Clicked(); break;
-        case 14: _t->changeNewParent((*reinterpret_cast< Category*(*)>(_a[1]))); break;
-        case 15: { QMenu* _r = _t->createParentMenu();
+        case 13: _t->changeNewParent((*reinterpret_cast< Category*(*)>(_a[1]))); break;
+        case 14: { QMenu* _r = _t->createParentMenu();
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 16: { QMenu* _r = _t->createParentSubMenu((*reinterpret_cast< Category(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+        case 15: { QMenu* _r = _t->createParentSubMenu((*reinterpret_cast< Category*(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 17: _t->changeNewParentFromAction(); break;
+        case 16: _t->changeNewParentFromAction(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -232,13 +224,13 @@ int FormCategoriesEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 17;
     }
     return _id;
 }

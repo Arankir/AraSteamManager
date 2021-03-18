@@ -20,12 +20,28 @@
 
 QT_CHARTS_USE_NAMESPACE
 
+enum FormStatisticTableGamesColumns {
+    StaticticGamesAppId = 0,
+    StaticticGamesIndex = 1,
+    StaticticGamesIcon = 2,
+    StaticticGamesTitle = 3,
+    StaticticGamesPercent = 4
+};
+
 namespace Ui {
 class FormStatistics;
 }
 
 class FormStatistics : public QWidget {
     Q_OBJECT
+
+enum class GamesType {
+    none,
+    complete,
+    started,
+    notStarted,
+    noAchievements
+};
 
 public slots:
     void onFinish();
@@ -34,30 +50,40 @@ public slots:
     void updateSettings();
     void setIcons();
 public:
-    explicit FormStatistics(const SProfile &profile, QList<SGame> &games, const QString &name, QWidget *parent = nullptr);
+    explicit FormStatistics(const SProfile &profile, QList<SGame> &games, QWidget *parent = nullptr);
     ~FormStatistics();
 
 signals:
     void s_statisticsLoaded(int progress);
     void s_finish();
     void s_return_to_profile(QWidget*);
+    void s_showAchievements(QList<SAchievementPlayer> achievements, SGame game);
 
 private slots:
     void changeEvent(QEvent *event);
     void retranslate();
 
+    void showCompleteGames();
+    void showStartedGames();
+    void showNotStartedGames();
+    void showNoAchievementsGames();
+    void setModelToTable(QStandardItemModel *aModel);
+    SGame *currentGame();
+    QMenu *createMenu(SGame &aGame);
 private:
     Ui::FormStatistics *ui;
+    GamesType _currentGamesType = GamesType::none;
+    int _currentIndex = -1;
     SProfile _profile;
     QList<SGame> _games;
-    QString _name;
-    double _totalAverage;
-    int _summColumn = 0;
+    double _summAverages;
+    int _achievementCount = 0;
 
-    QVector<SGame> _complete;
-    QVector<QPair<SGame, double>> _started;
-    QVector<SGame> _notStarted;
-    QVector<SGame> _noAchievements;
+    QList<SGame> _complete;
+    QList<QPair<SGame, double>> _started;
+    QList<SGame> _notStarted;
+    QList<SGame> _noAchievements;
+
 
     QVector<int> _times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     QVector<int> _months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

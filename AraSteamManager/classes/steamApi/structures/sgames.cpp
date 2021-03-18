@@ -31,7 +31,7 @@ QList<SGame> SGame::load(const QString &aId, int aFreeGames, int aGameInfo, std:
     return Sapi::load<SGame>(gameUrl(aFreeGames, aGameInfo, aId), onLoad, aCallback);
 }
 
-int SGame::getPlayerCount(const int aAppId) {
+int SGame::playerCount(const int aAppId) {
     RequestData request;
     request.get(Sapi::numberPlayersUrl(QString::number(aAppId)), false);
     return (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("player_count").toDouble();

@@ -11,7 +11,6 @@ void ThreadStatistics::onResultAchievements(QList<SAchievementPlayer> aAchieveme
     static int nowProcessed = 0;
     emit s_progress(nowProcessed);
     if (aAchievements.count() > 0) {
-        ++_colgames;
         int countReached = 0;
         int countNotReached = 0;
 
@@ -24,7 +23,7 @@ void ThreadStatistics::onResultAchievements(QList<SAchievementPlayer> aAchieveme
             }
         }
 
-        _summcolumn += aAchievements.count();
+        _achievementsCount += aAchievements.count();
 
         if (countNotReached == 0) {
             _complete.append(aGame);

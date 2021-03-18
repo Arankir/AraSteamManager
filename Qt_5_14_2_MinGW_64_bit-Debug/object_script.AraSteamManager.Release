@@ -36,6 +36,7 @@ release/formsettings.o
 release/formstatistics.o
 release/framelesswindow.o
 release/main.o
+release/actioncategory.o
 release/donutbreakdownchart.o
 release/mainslice.o
 release/multiselectcombobox.o
@@ -89,6 +90,7 @@ release/moc_formprofile.o
 release/moc_formsettings.o
 release/moc_formstatistics.o
 release/moc_framelesswindow.o
+release/moc_actioncategory.o
 release/moc_multiselectcombobox.o
 release/moc_qcomboboxfriends.o
 release/moc_labellight.o

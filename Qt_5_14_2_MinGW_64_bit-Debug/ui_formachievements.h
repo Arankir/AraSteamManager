@@ -86,7 +86,7 @@ public:
         horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
         LabelTotalPersent = new QLabel(FrameFilter);
         LabelTotalPersent->setObjectName(QString::fromUtf8("LabelTotalPersent"));
-        LabelTotalPersent->setText(QString::fromUtf8("TotalPersent"));
+        LabelTotalPersent->setText(QString::fromUtf8("none/none (0%)"));
         LabelTotalPersent->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_10->addWidget(LabelTotalPersent);
@@ -233,7 +233,7 @@ public:
 
         retranslateUi(FormAchievements);
 
-        TabWidget->setCurrentIndex(2);
+        TabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(FormAchievements);

@@ -87,7 +87,7 @@ private slots:
     void slideProfileSize_ValueChanged(int value);
 
     void comboBoxMaxTableRows(int index);
-    int recursAddCategoryToTree(Category &aCategory, int aCount, QTreeWidgetItem *aRoot, const int &aGameId);
+    int recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot, const int &aGameId);
     void buttonExportCategories_Clicked();
     void buttonImportCategories_Clicked();
     ExportFileData createExportCategoriesJson();

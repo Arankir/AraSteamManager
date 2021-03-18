@@ -51,7 +51,7 @@
         <item>
          <widget class="QLabel" name="LabelTotalPersent">
           <property name="text">
-           <string notr="true">TotalPersent</string>
+           <string notr="true">none/none (0%)</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -218,7 +218,7 @@
      <item>
       <widget class="QTabWidget" name="TabWidget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabStandart">
         <attribute name="title">

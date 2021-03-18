@@ -36,7 +36,7 @@ public slots:
 signals:
     void s_goToGames(SProfile &profileSteamid, QList<SGame> &games);
     void s_goToFriends(const QString &profileSteamid, QList<SFriend> &friends);
-    void s_goToStatistic(const SProfile &profile, QList<SGame> &games, const QString &profileName);
+    void s_goToStatistic(const SProfile &profile, QList<SGame> &games);
     void s_goToFavorites();
     void s_myProfileChange();
 

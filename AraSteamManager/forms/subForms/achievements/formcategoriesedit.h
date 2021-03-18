@@ -36,10 +36,11 @@ public:
     void setGame(SGame &game);
     void setAchievements(QList<SAchievement> &aAchievements);
     void setFilter(MyFilter *aFilter);
+    Category *categories() {return &_categories;}
     void updateHiddenItems();
-    void changeCategory(Category *aCategory, int aGlobalIndex);
+    void changeCategory(Category *aCategory);
     void addSubCategory(Category *aParent);
-    void deleteCategory(Category *aCategory, int aGlobalIndex);
+    void deleteCategory(Category *aCategory);
 
 signals:
     void s_categoriesIsUpdated(bool isUpdated);
@@ -57,23 +58,22 @@ private slots:
     void buttonDelete_Clicked();
     void buttonDeleteAll_Clicked();
     bool isCategoryNameExist(const QString &name);
-    void changeParentButton_Clicked();
+//    void changeParentButton_Clicked();
     void changeNewParent(Category *parent);
     QMenu *createParentMenu();
-    QMenu *createParentSubMenu(Category &category, int &number);
+    QMenu *createParentSubMenu(Category *category);
     void changeNewParentFromAction();
 private:
     Ui::FormCategoriesEdit *ui;
     SGame _game;
     QList<SAchievement> _achievements;
-    Categories _categories;
+    Category _categories;
     EditType _typeEdit = EditType::none;
     MyFilter *_fAchievements = nullptr;
 
     Category *_currentCategory = nullptr;
     Category *_currentCategoryParent = nullptr;
     Category *_currentCategoryNewParent = nullptr;
-    int _currentCategoryGlobalIndex = -1;
 };
 
 #endif // FORMACHIEVEMENTSCATEGORIESEDIT_H

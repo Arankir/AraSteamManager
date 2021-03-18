@@ -1,157 +1,13 @@
 #include "categoriesgame.h"
 
-Categories::Categories(SGame &aGame, QObject *aParent): QObject(aParent), _gameName(aGame.name()), _gameId(aGame.appId()) {
+Category::Category(SGame &aGame): _gameName(aGame.name()), _gameId(aGame.appId()) {
     update();
 }
 
-Categories::Categories(int aGameId, QObject *aParent): QObject(aParent), _gameId(aGameId) {
+Category::Category(int aGameId): _gameId(aGameId) {
     update();
 }
 
-Categories::Categories(const QJsonObject &aObject, QObject *aParent): QObject(aParent) {
-    fromJson(aObject);
-}
-
-void Categories::setGame(SGame aGame) {
-    _gameName = aGame.name();
-    _gameId = aGame.appId();
-    update();
-}
-
-Categories &Categories::update() {
-    load();
-    return *this;
-}
-
-Category *findCategory(int &aIndex, Category &aCategory) {
-    for(auto &subCategory: aCategory) {
-        if (aIndex == 0) {
-            return &subCategory;
-        }
-        --aIndex;
-        Category *category;
-        category = findCategory(aIndex, subCategory);
-        if(category != nullptr) {
-            return category;
-        }
-    }
-    return nullptr;
-}
-
-Category *Categories::categoryAtDirect(int aIndex) {
-    Category *category;
-    for(auto &subCategory: _categories) {
-        if (aIndex == 0) {
-            return &subCategory;
-        }
-        --aIndex;
-        category = findCategory(aIndex, subCategory);
-        if(category != nullptr) {
-            return category;
-        }
-    }
-    return nullptr;
-}
-
-Categories &Categories::addCategory(const QString &aTitle, QList<QString> aAchievements, const QList<Category> &aCategories) {
-    _categories.append(Category(aTitle, aAchievements, aCategories));
-    save(toJson());
-    load();
-    return *this;
-}
-
-Categories &Categories::addCategory(Category &aCategory) {
-    _categories.append(aCategory);
-    save(toJson());
-    load();
-    return *this;
-}
-
-bool Categories::addSubCategory(Category &aCategory) {
-    for (auto &category: _categories) {
-        if (category.addSubCategory(aCategory)) {
-            save(toJson());
-            load();
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Categories::removeCategory(Category &aCategory) {
-    if (_categories.removeOne(aCategory)) {
-        save(toJson());
-        return true;
-    } else {
-        for (auto &category: _categories) {
-            if (category.removeCategory(aCategory)) {
-                save(toJson());
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-Categories &Categories::deleteAll() {
-    _categories.clear();
-    save(toJson());
-    return *this;
-}
-
-int Categories::countAll() const {
-    int count = 0;
-    for(auto subCategory: _categories) {
-        count += subCategory.countCategories();
-        ++count;
-    }
-    return count;
-}
-
-void Categories::save(QJsonObject aCategories) {
-    createDir(Paths::categories());
-    QFile fileCategory(Paths::categories(QString::number(_gameId)));
-    fileCategory.open(QFile::WriteOnly);
-    fileCategory.write(QJsonDocument(aCategories).toJson());
-    fileCategory.close();
-}
-
-void Categories::load() {
-    _categories.clear();
-    QFile fileCategory(Paths::categories(QString::number(_gameId)));
-    if (fileCategory.exists()) {
-        if (fileCategory.open(QFile::ReadOnly)) {
-            fromJson(QJsonDocument().fromJson(fileCategory.readAll()).object());
-            fileCategory.close();
-        }
-    }
-    for (auto &category: _categories) {
-        category.updateParents();
-    }
-}
-
-void Categories::fromJson(QJsonObject aCategories) {
-    _gameName = aCategories.value("game").toString();
-    _gameId   = aCategories.value("gameID").toInt();
-    for(auto category: aCategories.value("categories").toArray()) {
-        _categories.append(Category(category.toObject()));
-    }
-}
-
-QJsonObject Categories::toJson() const {
-    QJsonObject obj;
-    obj["game"] = _gameName;
-    obj["gameID"] = _gameId;
-    obj["version"] = "1.0";
-    QJsonArray categoriesArr;
-    for(auto category: _categories) {
-        categoriesArr.append(category.toJson());
-    }
-    obj["categories"] = categoriesArr;
-    return obj;
-}
-
-#define CategoryStart {
 Category::Category(const QJsonObject &aCategory) {
     fromJson(aCategory);
 }
@@ -164,19 +20,24 @@ Category &Category::operator=(const Category &aCategory) {
     return *this;
 }
 
-bool Category::operator==(const Category &aCategory) {
-//TODO Неправильно определяет равенство (если у родителя такое же имя и достижения определит как то)
-    if (aCategory.parent() == nullptr || _parent == nullptr) {
-        return ((_title == aCategory._title)
-                && (_achievements == aCategory._achievements)
-                && (_categories == aCategory._categories)
-                && (_parent == aCategory._parent));
+bool isListsEqual(const QList<Category*> &list1, const QList<Category*> &list2) {
+    if (list1.count() != list2.count()) {
+        return false;
     }
-    return ((_title == aCategory._title)
-            && (_achievements == aCategory._achievements)
-            && (_categories == aCategory._categories)
-            && (_parent->title() == aCategory._parent->title())
-            && (_parent->achievements() == aCategory._parent->achievements()));
+    for(int i = 0; i < list1.count(); ++i) {
+        if (*(list1[i]) != *(list2[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Category::operator==(const Category &aCategory) const {
+    return ((_title == aCategory._title) && (_achievements == aCategory._achievements) && isListsEqual(_categories, aCategory._categories));
+}
+
+bool Category::operator!=(const Category &aCategory) const {
+    return ((_title != aCategory._title) || (_achievements != aCategory._achievements) || !isListsEqual(_categories, aCategory._categories));
 }
 
 Category &Category::setParent(Category *aParent) {
@@ -189,15 +50,41 @@ Category &Category::setTitle(const QString &aTitle) {
     return *this;
 }
 
-Category &Category::setAchievements(const QList<QString> &aAchievements) {
+Category &Category::setAchievements(QList<QString> &aAchievements) {
     _achievements = aAchievements;
     return *this;
 }
 
-Category &Category::addCategory(Category &aCategory) {
-    aCategory.setParent(this);
+Category &Category::setGame(SGame aGame) {
+    _gameName = aGame.name();
+    _gameId = aGame.appId();
+    update();
+    return *this;
+}
+
+Category *Category::findCategory(Category *aFindCategory) {
+    auto iterator = std::find_if(   _categories.begin(),
+                                    _categories.end(),
+                                    [=](Category *aCategory) { return *aCategory == *aFindCategory; });
+    if (iterator != _categories.end()) {
+        return *iterator;
+    } else {
+        for (auto &category: _categories) {
+            Category *find = category->findCategory(aFindCategory);
+            if (find != nullptr) {
+                return find;
+            }
+        }
+    }
+    return nullptr;
+}
+
+Category &Category::addCategory(Category *aCategory) {
     _categories.append(aCategory);
-    updateParents();
+    aCategory->setParent(this);
+    int order = 0;
+    root()->updateOrders(order);
+//    updateParents();
     return *this;
 }
 
@@ -206,92 +93,123 @@ Category &Category::clearCategories() {
     return *this;
 }
 
-bool Category::addSubCategory(Category &aCategory) {
-    if (*this == *(aCategory.parent())) {
-        addCategory(aCategory);
-        updateParents();
+bool Category::removeCategory(Category *aCategory, bool isRemoveRecursively) {
+    auto iterator = std::find_if(_categories.begin(), _categories.end(), [=](const Category *subCategory){
+                                                                                    return subCategory == aCategory;
+                                                                                });
+    if (iterator != _categories.end()) {
+        int index = iterator - _categories.begin();
+        aCategory->setParent(nullptr);
+        _categories.removeAt(index);
+        int order = 0;
+        root()->updateOrders(order);
+        root()->save();
         return true;
     } else {
-        for(auto &category: _categories) {
-            if (category.addSubCategory(aCategory)) {
-                updateParents();
-                return true;
+        if (isRemoveRecursively) {
+            for (auto &category: _categories) {
+                if (category->removeCategory(aCategory, true)) {
+                    return true;
+                }
             }
         }
     }
-    return false;
-}
-
-bool Category::removeCategory(Category &aCategory) {
-    if (_categories.removeOne(aCategory)) {
-        updateParents();
-        return true;
-    } else {
-        for (auto &cat: _categories) {
-            if (cat.removeCategory(aCategory)) {
-                updateParents();
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-bool Category::removeCategoryAtDirect(int &aIndex) {
-    int localIndex = 0;
-    for(auto &subCategory: _categories) {
-        if (aIndex == 0) {
-            _categories.removeAt(localIndex);
-            updateParents();
-            return true;
-        }
-        --aIndex;
-        ++localIndex;
-        if (subCategory.removeCategoryAtDirect(aIndex) == true) {
-            updateParents();
-            return true;
-        }
-    }
-    updateParents();
     return false;
 }
 
 int Category::countCategories() const {
-    int count = 0;
-    for (auto &subCategory: _categories) {
-        ++count;
-        count += subCategory.countCategories();
-    }
+    int count = std::accumulate(_categories.begin(),
+                                _categories.end(),
+                                _categories.count(),
+                                [](int i, Category *c) {return i += c->countCategories();});
     return count;
+}
+
+bool Category::save() {
+    if (_gameId > 0) {
+        auto aCategories = toJson();
+        createDir(Paths::categories());
+        QFile fileCategory(Paths::categories(QString::number(_gameId)));
+        fileCategory.open(QFile::WriteOnly);
+        fileCategory.write(QJsonDocument(aCategories).toJson());
+        fileCategory.close();
+        return true;
+    }
+    return false;
+}
+
+Category &Category::update() {
+    load();
+    return *this;
+}
+
+bool Category::load() {
+    QFile fileCategory(Paths::categories(QString::number(_gameId)));
+    if (!fileCategory.exists()) {
+        return false;
+    }
+    if (!fileCategory.open(QFile::ReadOnly)) {
+        return false;
+    }
+
+    clearCategories();
+    fromJson(QJsonDocument().fromJson(fileCategory.readAll()).object());
+
+    fileCategory.close();
+    int order = 0;
+    for (auto &category: _categories) {
+        category->updateParents().updateOrders(order);
+    }
+    return true;
 }
 
 Category &Category::updateParents() {
     for (auto &category: _categories) {
-        category.setParent(this);
-        category.updateParents();
+        category->setParent(this);
+        category->updateParents();
     }
     return *this;
 }
 
-QList<Category*> Category::directTraversalList() {
-    QList<Category*> list;
+Category &Category::updateOrders(int &aOrder) {
+    _order = aOrder++;
     for (auto &category: _categories) {
-        list.append(&category);
-        list.append(category.directTraversalList());
+        category->updateOrders(aOrder);
     }
-    return list;
+    return *this;
 }
 
-Category &Category::fromJson(const QJsonObject &aCategoryGame) {
-    if (!aCategoryGame.value("title").toString().isNull()) {
-        _title  = aCategoryGame.value("title").toString();
-        for(auto valueAchievement: aCategoryGame.value("achievements").toArray()) {
-            _achievements.append(valueAchievement.toString());
-        }
-        for(auto valueCategory: aCategoryGame.value("categories").toArray()) {
-            Category sub(valueCategory.toObject());
-            addCategory(sub);
-        }
+Category *Category::root() {
+    return _parent == nullptr ? this : _parent->root();
+}
+
+Category &Category::removeFromParent() {
+    changeParent(nullptr);
+    return *this;
+}
+
+Category &Category::changeParent(Category *newParent) {
+    if (_parent != nullptr) {
+        _parent->removeCategory(this);
+    }
+    if (newParent != nullptr) {
+        newParent->addCategory(this);
+    } else {
+        setParent(nullptr);
+    }
+    return *this;
+}
+
+Category &Category::fromJson(const QJsonObject &aCategory) {
+    _gameName = aCategory.value("game").toString();
+    _gameId   = aCategory.value("gameID").toInt();
+    _order    = aCategory.value("order").toInt();
+    _title  = aCategory.value("title").toString();
+    for(auto valueAchievement: aCategory.value("achievements").toArray()) {
+        _achievements.append(valueAchievement.toString());
+    }
+    for(auto valueCategory: aCategory.value("categories").toArray()) {
+        addCategory(new Category (valueCategory.toObject()));
     }
     return *this;
 }
@@ -299,22 +217,51 @@ Category &Category::fromJson(const QJsonObject &aCategoryGame) {
 QJsonObject Category::toJson() const {
     QJsonObject result;
     result["title"] = _title;
+    result["order"] = _order;
+
+    if (!_gameName.isEmpty()) {
+        result["game"] = _gameName;
+    }
+
+    if (_gameId > 0) {
+        result["gameID"] = _gameId;
+    }
 
     QJsonArray valuesAchievements;
-    for(auto valueAchievement: _achievements) {
+    for(const QString &valueAchievement: _achievements) {
         valuesAchievements.append(valueAchievement);
     }
     result["achievements"] = valuesAchievements;
 
     QJsonArray valuesCategories;
-    int order = -1;
+//    int order = -1;
     for(auto valueCategory: _categories) {
-        auto category = valueCategory.toJson();
-        category["order"] = ++order;
+        auto category = valueCategory->toJson();
+//        category["order"] = ++order;
         valuesCategories.append(category);
     }
     result["categories"] = valuesCategories;
 
+    if (isRoot()) {
+        result["version"] = "2.0";
+    }
+
     return result;
 }
-#define CategoryEnd }
+
+Category *Category::findCategory(int aOrder) {
+    auto iterator = std::find_if(   _categories.begin(),
+                                    _categories.end(),
+                                    [=](Category *aCategory) { return aCategory->order() == aOrder; });
+    if (iterator != _categories.end()) {
+        return *iterator;
+    } else {
+        for (auto &category: _categories) {
+            Category *find = category->findCategory(aOrder);
+            if (find != nullptr) {
+                return find;
+            }
+        }
+    }
+    return nullptr;
+}

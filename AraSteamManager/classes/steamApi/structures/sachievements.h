@@ -119,7 +119,7 @@ public:
         _percentage(achievement._percentage), _player(achievement._player) {
         //qDebug()<<"SAchievement copy"<<_apiName;
     }
-    SAchievement(const QJsonObject &object): _schema(object.value("global").toObject()),
+    SAchievement(const QJsonObject &object): _schema(object.value("schema").toObject()),
         _percentage(object.value("percent").toObject()),
         _player(object.value("player").toObject()) {
         //qDebug() << "SAchievement constructor 1" << aObject;
