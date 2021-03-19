@@ -1,4 +1,6 @@
 #include "requestimage.h"
+#include "classes/common/settings.h"
+#include "classes/common/generalfunctions.h"
 
 RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, const QString &aSave, bool aAutoSave, QObject *aParent): QObject(aParent),
 _label(aLabel), _save(aSave), _autosave(aAutoSave) {

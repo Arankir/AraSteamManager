@@ -10,9 +10,6 @@
 #include <QJsonArray>
 #include <QTextCodec>
 #include <QTcpSocket>
-#include <QEventLoop>
-#include <QDir>
-#include "classes/common/settings.h"
 
 class RequestData : public QObject
 {

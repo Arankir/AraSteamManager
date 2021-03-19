@@ -55,8 +55,8 @@ class FormGames : public QWidget {
 public slots:
     void updateSettings();
     void setGames(SProfile &aProfile, QList<SGame> &aGames);
-    bool isInit();
-    bool isLoaded();
+    bool isInit() {return ((_games.count() > 0) && (_filter.getRow() > 0) && (_loaded));}
+    bool isLoaded() {return _loaded;}
     void clear();
 
 public:
@@ -73,7 +73,6 @@ signals:
 private slots:
     void init();
     void changeEvent(QEvent *event);
-    void initComponents();
     void setIcons();
     void retranslate();
     void onResultAchievements(QList<SAchievementPlayer> aAchievements, QString aAppId);
@@ -91,7 +90,7 @@ private slots:
     void updateHiddenGames();
     void updateCurrentGame();
     void initTable();
-    void initGroups();
+    void updateGroups(SProfile profile);
     void initComments();
     void setTableModel(QStandardItemModel *aModel);
 
@@ -102,12 +101,13 @@ private slots:
 
     void updateHiddenRows();
     void updateGroupsFilter();
-    void showGroupsInteractive();
-    void showCommentsInteractive();
+    void showGroupsEdit();
+    void showCommentsEdit();
 
     void checkBoxFavorites_StateChanged(int arg1);
 
     bool isInFavorites(const int &aAppId);
+    void resizeTableColumns();
 private:
     Ui::FormGames *ui;
     SProfile _profile;

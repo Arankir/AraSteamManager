@@ -1,4 +1,6 @@
 #include "requestdata.h"
+#include <QEventLoop>
+#include <QDir>
 
 RequestData::RequestData(const QString &aUrl, bool aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager), _reply(""), _url(aUrl) {
     connect(_manager, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);

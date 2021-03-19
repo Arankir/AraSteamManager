@@ -14,4 +14,7 @@ QList<T> &sort(QList<T> &aList, bool(*compare)(T &t1, T &t2) = [](T &t1, T &t2){
     return aList;
 }
 
+QString textToToolTip(QString text);
+bool createDir(const QString &path);
+
 #endif // GENERALFUNCTIONS_H

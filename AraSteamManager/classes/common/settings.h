@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QDebug>
 #include <QSettings>
-#include <QDir>
 #include <QFile>
 #include <QRect>
 #include <QLoggingCategory>
@@ -18,9 +17,6 @@
 //Q_DECLARE_LOGGING_CATEGORY(logWarning)
 //Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
-QString textToToolTip(QString text);
-bool createDir(const QString &path);
-
 class Settings {
 public:
     static const QString c_organizationName;
@@ -28,35 +24,73 @@ public:
     static const QString c_applicationName;
 
     static void setMyProfile(const QString &myProfiles);
-    static void setLanguage(int language);
-    static void setTheme(int theme);
-    static void setSaveimage(int saveImage);
-    static void setVisibleHiddenGames(int visibleHiddenGames);
-    static void setVisibleProfileInfo(int visibleProfileInfo);
-    //static void setMaximumTableRows(int rows);
-
     static QString myProfile();
+    static void setLanguage(int language);
     static int language();
+    static void setTheme(int theme);
     static int theme();
-    static QString iconsColor();
+    static void setSaveimage(int saveImage);
     static int saveImages();
+    static void setVisibleHiddenGames(int visibleHiddenGames);
     static int visibleHiddenGames();
+    static void setVisibleProfileInfo(int visibleProfileInfo);
     static int profileInfoSize();
+    //static void setMaximumTableRows(int rows);
     //static int getMaximumTableRows();
+    static QString iconsColor();
 
     static void setMainWindowParams(QRect geometry);
-    static void setMainWindowPos(QPoint pos);
-    static void setMainWindowGeometry(QSize size);
-    static void setMainWindowIsMaximize(bool maximize);
-
-    static void setAchievementContainerParams(QRect geometry);
-
     static QRect mainWindowGeometry();
+    static void setMainWindowPos(QPoint pos);
     static QPoint mainWindowPos();
+    static void setMainWindowIsMaximize(bool maximize);
     static bool isMainWindowMaximize();
 
+    static void setGamesTableIconWidth(int width);
+    static int gamesTableIconWidth();
+    static void setGamesTableTitleWidth(int width);
+    static int gamesTableTitleWidth();
+    static void setGamesTableCommentWidth(int width);
+    static int gamesTableCommentWidth();
+    static void setGamesTableProgressWidth(int width);
+    static int gamesTableProgressWidth();
+
+    static void setFriendsTableIconWidth(int width);
+    static int friendsTableIconWidth();
+    static void setFriendsTableNameWidth(int width);
+    static int friendsTableNameWidth();
+    static void setFriendsTableAddedWidth(int width);
+    static int friendsTableAddedWidth();
+    static void setFriendsTableStatusWidth(int width);
+    static int friendsTableStatusWidth();
+    static void setFriendsTableIsOpenWidth(int width);
+    static int friendsTableIsOpenWidth();
+
+    static void setAchievementContainerParams(QRect geometry);
     static QRect achievementContainerGeometry();
     static QPoint achievementContainerPos();
+
+    static void setAchievementsTableIconWidth(int width);
+    static int achievementsTableIconWidth();
+    static void setAchievementsTableTitleWidth(int width);
+    static int achievementsTableTitleWidth();
+    static void setAchievementsTableDescriptionWidth(int width);
+    static int achievementsTableDescriptionWidth();
+    static void setAchievementsTableCommentWidth(int width);
+    static int achievementsTableCommentWidth();
+    static void setAchievementsTablePercentWidth(int width);
+    static int achievementsTablePercentWidth();
+    static void setAchievementsTableAchievedWidth(int width);
+    static int achievementsTableAchievedWidth();
+
+    static void setAchievementsCompareIconVisible(int width);
+    static int achievementsCompareIconVisible();
+    static void setAchievementsCompareTitleVisible(int width);
+    static int achievementsCompareTitleVisible();
+    static void setAchievementsCompareDescriptionVisible(int width);
+    static int achievementsCompareDescriptionVisible();
+    static void setAchievementsComparePercentVisible(int width);
+    static int achievementsComparePercentVisible();
 
     static QString defaultFont();
     static QString qssTheme();
@@ -65,26 +99,6 @@ public:
 
 private:
     static QSettings *_settings;
-
-    static const QString c_language;
-    static const QString c_theme;
-    static const QString c_saveImage;
-    static const QString c_myProfile;
-    static const QString c_visibleHiddenGames;
-    static const QString c_ProfileInfoSize;
-    //static const QString c_MaxTableRows;
-
-    static const QString c_mainWindowHeight;
-    static const QString c_mainWindowWidth;
-    static const QString c_mainWindowX;
-    static const QString c_mainWindowY;
-    static const QString c_mainWindowMaximize;
-
-    static const QString c_achievementContainerHeight;
-    static const QString c_achievementContainerWidth;
-    static const QString c_achievementContainerX;
-    static const QString c_achievementContainerY;
-    static const QString c_achievementContainerMaximize;
 
 };
 

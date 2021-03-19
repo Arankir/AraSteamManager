@@ -30,7 +30,7 @@ public:
         for(auto &filterRow: f._filter) {
             dbg.nospace() << QString::number(++row).leftJustified(5, ' ') << " (";
             for(auto &filterColumn: filterRow) {
-                dbg.nospace() << (filterColumn?1:0);
+                dbg.nospace() << (filterColumn ? 1 : 0);
             }
             dbg.nospace() << ")\n";
         }

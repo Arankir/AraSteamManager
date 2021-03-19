@@ -1,6 +1,73 @@
 #include "settings.h"
+#include <QDir>
 
 //Q_LOGGING_CATEGORY(logFunc,     "Function")
+
+struct settings {
+    const QString language              = "Settings/Language";
+    const QString theme                 = "Settings/Theme";
+    const QString saveImage             = "Settings/SaveImages";
+    const QString myProfile             = "Settings/MyProfile";
+    const QString visibleHiddenGames    = "Settings/VisibleHiddenGames";
+    const QString profileInfoSize       = "Settings/VisibleProfileInfo";
+    //const QString maxTableRows = "Settings/MaxTableRows";
+};
+
+struct mainWindow {
+    const QString Height        = "MainWindow/Height";
+    const QString Width         = "MainWindow/Width";
+    const QString X             = "MainWindow/X";
+    const QString Y             = "MainWindow/Y";
+    const QString isMaximize    = "MainWindow/Maximize";
+};
+
+struct achievementContainer {
+    const QString Height    = "AchievementContainer/Height";
+    const QString Width     = "AchievementContainer/Width";
+    const QString X         = "AchievementContainer/X";
+    const QString Y         = "AchievementContainer/Y";
+    const QString Maximize  = "AchievementContainer/Maximize";
+    struct achievements {
+        struct table {
+            const QString icon          = "AchievementContainer/Achievements/Table/Icon";
+            const QString title         = "AchievementContainer/Achievements/Table/Title";
+            const QString description   = "AchievementContainer/Achievements/Table/Description";
+            const QString comment       = "AchievementContainer/Achievements/Table/Comment";
+            const QString percent       = "AchievementContainer/Achievements/Table/Percent";
+            const QString isAchieved    = "AchievementContainer/Achievements/Table/IsAchieved";
+        };
+        table table;
+    };
+    achievements achievements;
+    struct achievementsCompare {
+        const QString isIconVisible         = "AchievementContainer/AchievementsCompare/IsIconVisible";
+        const QString isTitleVisible        = "AchievementContainer/AchievementsCompare/IsTitleVisible";
+        const QString isDescriptionVisible  = "AchievementContainer/AchievementsCompare/IsDescriptionVisible";
+        const QString isPercentVisible      = "AchievementContainer/AchievementsCompare/IsPercentVisible";
+    };
+    achievementsCompare achievementsCompare;
+};
+
+struct games {
+    struct table {
+        const QString icon      = "Games/Table/Icon";
+        const QString title     = "Games/Table/Title";
+        const QString comment   = "Games/Table/Comment";
+        const QString progress  = "Games/Table/Progress";
+    };
+    table table;
+};
+
+struct friends {
+    struct table {
+        const QString icon          = "Friends/Table/Icon";
+        const QString name          = "Friends/Table/Name";
+        const QString dateAdded     = "Friends/Table/DateAdded";
+        const QString status        = "Friends/Table/Status";
+        const QString isOpenProfile = "Friends/Table/IsOpenProfile";
+    };
+    table table;
+};
 
 const QString    Settings::c_organizationName             = "Arankir";
 const QString    Settings::c_organizationDomain           = "Arankir";
@@ -8,51 +75,29 @@ const QString    Settings::c_applicationName              = "SteamAchievementsSt
 
 QSettings *      Settings::_settings                      = new QSettings(c_organizationName, c_applicationName);
 
-const QString    Settings::c_language                     = "Settings/Language";
-const QString    Settings::c_theme                        = "Settings/Theme";
-const QString    Settings::c_saveImage                    = "Settings/SaveImages";
-const QString    Settings::c_myProfile                    = "Settings/MyProfile";
-const QString    Settings::c_visibleHiddenGames           = "Settings/VisibleHiddenGames";
-const QString    Settings::c_ProfileInfoSize              = "Settings/VisibleProfileInfo";
-//const QString    Settings::c_MaxTableRows                 = "Settings/MaxTableRows";
-
-const QString    Settings::c_mainWindowHeight             = "MainWindow/Height";
-const QString    Settings::c_mainWindowWidth              = "MainWindow/Width";
-const QString    Settings::c_mainWindowX                  = "MainWindow/X";
-const QString    Settings::c_mainWindowY                  = "MainWindow/Y";
-const QString    Settings::c_mainWindowMaximize           = "MainWindow/Maximize";
-
-const QString    Settings::c_achievementContainerHeight   = "AchievementContainer/Height";
-const QString    Settings::c_achievementContainerWidth    = "AchievementContainer/Width";
-const QString    Settings::c_achievementContainerX        = "AchievementContainer/X";
-const QString    Settings::c_achievementContainerY        = "AchievementContainer/Y";
-const QString    Settings::c_achievementContainerMaximize = "achievementContainer/Maximize";
-
-const int c_toolTipMaxWidth = 30;
-
 #define SettingsStart {
 void Settings::setMyProfile(const QString &aMyProfiles) {
-    return _settings->setValue(c_myProfile, aMyProfiles);
+    return _settings->setValue(settings().myProfile, aMyProfiles);
 }
 
 void Settings::setLanguage(int aLanguage) {
-    return _settings->setValue(c_language, aLanguage);
+    return _settings->setValue(settings().language, aLanguage);
 }
 
 void Settings::setTheme(int aTheme) {
-    return _settings->setValue(c_theme, aTheme);
+    return _settings->setValue(settings().theme, aTheme);
 }
 
 void Settings::setSaveimage(int aSaveImage) {
-    return _settings->setValue(c_saveImage, aSaveImage);
+    return _settings->setValue(settings().saveImage, aSaveImage);
 }
 
 void Settings::setVisibleHiddenGames(int aVisibleHiddenGames) {
-    return _settings->setValue(c_visibleHiddenGames, aVisibleHiddenGames);
+    return _settings->setValue(settings().visibleHiddenGames, aVisibleHiddenGames);
 }
 
 void Settings::setVisibleProfileInfo(int aVisibleProfileInfo) {
-    return _settings->setValue(c_ProfileInfoSize, aVisibleProfileInfo);
+    return _settings->setValue(settings().profileInfoSize, aVisibleProfileInfo);
 }
 
 //void Settings::setMaximumTableRows(int rows){
@@ -60,43 +105,38 @@ void Settings::setVisibleProfileInfo(int aVisibleProfileInfo) {
 //}
 
 void Settings::setMainWindowParams(QRect aGeometry) {
-    _settings->setValue(c_mainWindowHeight, aGeometry.height());
-    _settings->setValue(c_mainWindowWidth, aGeometry.width());
-    _settings->setValue(c_mainWindowX, aGeometry.x());
-    _settings->setValue(c_mainWindowY, aGeometry.y());
+    _settings->setValue(mainWindow().Height, aGeometry.height());
+    _settings->setValue(mainWindow().Width, aGeometry.width());
+    _settings->setValue(mainWindow().X, aGeometry.x());
+    _settings->setValue(mainWindow().Y, aGeometry.y());
 }
 
 void Settings::setMainWindowPos(QPoint aPos) {
-    _settings->setValue(c_mainWindowX, aPos.x());
-    _settings->setValue(c_mainWindowY, aPos.y());
-}
-
-void Settings::setMainWindowGeometry(QSize aSize) {
-    _settings->setValue(c_mainWindowHeight, aSize.height());
-    _settings->setValue(c_mainWindowWidth, aSize.width());
+    _settings->setValue(mainWindow().X, aPos.x());
+    _settings->setValue(mainWindow().Y, aPos.y());
 }
 
 void Settings::setMainWindowIsMaximize(bool aMaximize) {
-    _settings->setValue(c_mainWindowMaximize, aMaximize);
+    _settings->setValue(mainWindow().isMaximize, aMaximize);
 }
 
 void Settings::setAchievementContainerParams(QRect aGeometry){
-    _settings->setValue(c_achievementContainerHeight, aGeometry.height());
-    _settings->setValue(c_achievementContainerWidth, aGeometry.width());
-    _settings->setValue(c_achievementContainerX, aGeometry.x());
-    _settings->setValue(c_achievementContainerY, aGeometry.y());
+    _settings->setValue(achievementContainer().Height, aGeometry.height());
+    _settings->setValue(achievementContainer().Width, aGeometry.width());
+    _settings->setValue(achievementContainer().X, aGeometry.x());
+    _settings->setValue(achievementContainer().Y, aGeometry.y());
 }
 
 QString Settings::myProfile() {
-    return _settings->value(c_myProfile, "none").toString();
+    return _settings->value(settings().myProfile, "none").toString();
 }
 
 int Settings::language() {
-    return _settings->value(c_language, 1).toInt();
+    return _settings->value(settings().language, 1).toInt();
 }
 
 int Settings::theme() {
-    return _settings->value(c_theme, 1).toInt();
+    return _settings->value(settings().theme, 1).toInt();
 }
 
 QString Settings::iconsColor() {
@@ -116,15 +156,15 @@ QString Settings::iconsColor() {
 }
 
 int Settings::saveImages() {
-    return _settings->value(c_saveImage, 1).toInt();
+    return _settings->value(settings().saveImage, 1).toInt();
 }
 
 int Settings::visibleHiddenGames() {
-    return _settings->value(c_visibleHiddenGames, 0).toInt();
+    return _settings->value(settings().visibleHiddenGames, 0).toInt();
 }
 
 int Settings::profileInfoSize() {
-    return _settings->value(c_ProfileInfoSize, 2).toInt();
+    return _settings->value(settings().profileInfoSize, 2).toInt();
 }
 
 //int Settings::getMaximumTableRows() {
@@ -132,23 +172,175 @@ int Settings::profileInfoSize() {
 //}
 
 QRect Settings::mainWindowGeometry() {
-    return (QRect(0, 0, _settings->value(c_mainWindowWidth, 623).toInt(), _settings->value(c_mainWindowHeight, 479).toInt()));
+    return (QRect(0, 0, _settings->value(mainWindow().Width, 623).toInt(), _settings->value(mainWindow().Height, 479).toInt()));
 }
 
 QPoint Settings::mainWindowPos() {
-    return (QPoint(_settings->value(c_mainWindowX, 100).toInt(), _settings->value(c_mainWindowY, 100).toInt()));
+    return (QPoint(_settings->value(mainWindow().X, 100).toInt(), _settings->value(mainWindow().Y, 100).toInt()));
 }
 
 bool Settings::isMainWindowMaximize() {
-    return _settings->value(c_mainWindowMaximize, false).toBool();
+    return _settings->value(mainWindow().isMaximize, false).toBool();
+}
+
+void Settings::setGamesTableIconWidth(int width) {
+    _settings->setValue(games().table.icon, width);
+}
+
+int Settings::gamesTableIconWidth() {
+    return _settings->value(games().table.icon, 50).toInt();
+}
+
+void Settings::setGamesTableTitleWidth(int width) {
+    _settings->setValue(games().table.title, width);
+}
+
+int Settings::gamesTableTitleWidth() {
+    return _settings->value(games().table.title, 400).toInt();
+}
+
+void Settings::setGamesTableCommentWidth(int width) {
+    _settings->setValue(games().table.comment, width);
+}
+
+int Settings::gamesTableCommentWidth() {
+    return _settings->value(games().table.comment, 50).toInt();
+}
+
+void Settings::setGamesTableProgressWidth(int width) {
+    _settings->setValue(games().table.progress, width);
+}
+
+int Settings::gamesTableProgressWidth() {
+    return _settings->value(games().table.progress, 100).toInt();
+}
+
+void Settings::setFriendsTableIconWidth(int width) {
+    _settings->setValue(friends().table.icon, width);
+}
+
+int Settings::friendsTableIconWidth() {
+    return _settings->value(friends().table.icon, 50).toInt();
+}
+
+void Settings::setFriendsTableNameWidth(int width) {
+    _settings->setValue(friends().table.name, width);
+}
+
+int Settings::friendsTableNameWidth() {
+    return _settings->value(friends().table.name, 400).toInt();
+}
+
+void Settings::setFriendsTableAddedWidth(int width) {
+    _settings->setValue(friends().table.dateAdded, width);
+}
+
+int Settings::friendsTableAddedWidth() {
+    return _settings->value(friends().table.dateAdded, 200).toInt();
+}
+
+void Settings::setFriendsTableStatusWidth(int width) {
+    _settings->setValue(friends().table.status, width);
+}
+
+int Settings::friendsTableStatusWidth() {
+    return _settings->value(friends().table.status, 200).toInt();
+}
+
+void Settings::setFriendsTableIsOpenWidth(int width) {
+    _settings->setValue(friends().table.isOpenProfile, width);
+}
+
+int Settings::friendsTableIsOpenWidth() {
+    return _settings->value(friends().table.isOpenProfile, 200).toInt();
 }
 
 QRect Settings::achievementContainerGeometry() {
-    return (QRect(0, 0, _settings->value(c_achievementContainerWidth, 623).toInt(), _settings->value(c_achievementContainerHeight, 479).toInt()));
+    return (QRect(0, 0, _settings->value(achievementContainer().Width, 623).toInt(), _settings->value(achievementContainer().Height, 479).toInt()));
 }
 
 QPoint Settings::achievementContainerPos() {
-    return (QPoint(_settings->value(c_achievementContainerX, 100).toInt(), _settings->value(c_achievementContainerY, 100).toInt()));
+    return (QPoint(_settings->value(achievementContainer().X, 100).toInt(), _settings->value(achievementContainer().Y, 100).toInt()));
+}
+
+void Settings::setAchievementsTableIconWidth(int width) {
+    _settings->setValue(achievementContainer().achievements.table.icon, width);
+}
+
+int Settings::achievementsTableIconWidth() {
+    return _settings->value(achievementContainer().achievements.table.icon, 50).toInt();
+}
+
+void Settings::setAchievementsTableTitleWidth(int width) {
+    _settings->setValue(achievementContainer().achievements.table.title, width);
+}
+
+int Settings::achievementsTableTitleWidth() {
+    return _settings->value(achievementContainer().achievements.table.title, 400).toInt();
+}
+
+void Settings::setAchievementsTableDescriptionWidth(int width) {
+    _settings->setValue(achievementContainer().achievements.table.description, width);
+}
+
+int Settings::achievementsTableDescriptionWidth() {
+    return _settings->value(achievementContainer().achievements.table.description, 600).toInt();
+}
+
+void Settings::setAchievementsTableCommentWidth(int width) {
+    _settings->setValue(achievementContainer().achievements.table.comment, width);
+}
+
+int Settings::achievementsTableCommentWidth() {
+    return _settings->value(achievementContainer().achievements.table.comment, 50).toInt();
+}
+
+void Settings::setAchievementsTablePercentWidth(int width) {
+    _settings->setValue(achievementContainer().achievements.table.percent, width);
+}
+
+int Settings::achievementsTablePercentWidth() {
+    return _settings->value(achievementContainer().achievements.table.percent, 100).toInt();
+}
+
+void Settings::setAchievementsTableAchievedWidth(int width) {
+    _settings->setValue(achievementContainer().achievements.table.isAchieved, width);
+}
+
+int Settings::achievementsTableAchievedWidth() {
+    return _settings->value(achievementContainer().achievements.table.isAchieved, 150).toInt();
+}
+
+void Settings::setAchievementsCompareIconVisible(int width) {
+    _settings->setValue(achievementContainer().achievementsCompare.isIconVisible, width);
+}
+
+int Settings::achievementsCompareIconVisible() {
+    return _settings->value(achievementContainer().achievementsCompare.isIconVisible, 2).toInt();
+}
+
+void Settings::setAchievementsCompareTitleVisible(int width) {
+    _settings->setValue(achievementContainer().achievementsCompare.isTitleVisible, width);
+}
+
+int Settings::achievementsCompareTitleVisible() {
+    return _settings->value(achievementContainer().achievementsCompare.isTitleVisible, 2).toInt();
+}
+
+void Settings::setAchievementsCompareDescriptionVisible(int width) {
+    _settings->setValue(achievementContainer().achievementsCompare.isDescriptionVisible, width);
+}
+
+int Settings::achievementsCompareDescriptionVisible() {
+    return _settings->value(achievementContainer().achievementsCompare.isDescriptionVisible, 2).toInt();
+}
+
+void Settings::setAchievementsComparePercentVisible(int width) {
+    _settings->setValue(achievementContainer().achievementsCompare.isPercentVisible, width);
+}
+
+int Settings::achievementsComparePercentVisible() {
+    return _settings->value(achievementContainer().achievementsCompare.isPercentVisible, 2).toInt();
 }
 
 QString Settings::defaultFont() {
@@ -205,22 +397,6 @@ QString Settings::qssTheme() {
 
 void Settings::syncronizeSettings() {
     _settings->sync();
-}
-
-bool createDir(const QString &aPath) {
-    bool exist = true;
-    QString path = aPath;
-    path.replace("\\", "/");
-    QStringList dirs = path.split("/");
-    if (dirs.last() != "") {
-        dirs.removeLast();
-    }
-    QString pathNow = "";
-    for (auto &dir: dirs) {
-        pathNow += std::move(dir) + "/";
-        exist = (QDir().mkdir(pathNow) && exist);
-    }
-    return exist;
 }
 
 #define SettingsEnd }
@@ -648,32 +824,3 @@ QString Paths::commentsAchievements(const QString &aProfileId) {
     return QString(documents() + "files/comments/achievements/%1%2").arg(aProfileId, aProfileId != "" ? ".json" : "");
 }
 #define PathsEnd }
-
-QString textToToolTip(QString aText) {
-    QStringList wordsList = aText.split(" ");
-    QString result;
-    int currentWidth = 0;
-    while (!wordsList.isEmpty()) {
-        if (wordsList[0].length() + currentWidth > c_toolTipMaxWidth) {
-            if (currentWidth > 0) {
-                result += "\n";
-                currentWidth = 0;
-            } else {
-                QString longWord = wordsList.takeFirst();
-                while (longWord.length() > c_toolTipMaxWidth) {
-                    result += longWord.left(c_toolTipMaxWidth) + "\n";
-                    longWord.remove(0, c_toolTipMaxWidth);
-                }
-                result += longWord;
-                currentWidth = longWord.length();
-            }
-        }
-        if (currentWidth != 0) {
-            result += " ";
-            ++currentWidth;
-        }
-        currentWidth += wordsList[0].length();
-        result += wordsList.takeFirst();
-    }
-    return result;
-}

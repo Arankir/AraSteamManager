@@ -14,9 +14,10 @@ FormComments::~FormComments() {
 
 void FormComments::init() {
     QStringList comment;
+    _comment.setProfileId(_profile.steamID());
     if (_achievement == nullptr) {
         ui->FrameAchievement->setVisible(false);
-        comment = _comment.getGameComment(_game.sAppId(), _profile.steamID()).comment();
+        comment = _comment.getGameComment(_game.sAppId()).comment();
     } else {
         ui->LabelAchievementTitle->setText(_achievement->displayName());
         ui->LabelAchievementDescription->setText(_achievement->description());

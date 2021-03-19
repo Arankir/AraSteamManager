@@ -105,6 +105,11 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         ChartViewPercentages = new QChartView(FormStatistics);
         ChartViewPercentages->setObjectName(QString::fromUtf8("ChartViewPercentages"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ChartViewPercentages->sizePolicy().hasHeightForWidth());
+        ChartViewPercentages->setSizePolicy(sizePolicy);
         ChartViewPercentages->setMinimumSize(QSize(0, 250));
 
         horizontalLayout->addWidget(ChartViewPercentages);

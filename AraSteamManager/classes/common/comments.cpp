@@ -1,4 +1,5 @@
 #include "comments.h"
+#include "classes/common/settings.h"
 
 #define AchievementCStart {
 AchievementComment::AchievementComment(const QJsonObject &aObject) {
@@ -145,14 +146,14 @@ Comments &Comments::removeAchievementComment(const QString &aProfileId, const QS
     return *this;
 }
 
-const GameComment &Comments::getGameComment(const QString &aGameId, const QString &aProfileId) const {
+const GameComment &Comments::getGameComment(const QString &aGameId) const {
     auto iterator = std::find_if(_games.begin(), _games.end(), [=](GameComment comment) {
-                                                                    return ((comment.gameId() == aGameId) && (comment.profileId() == aProfileId));
+                                                                    return ((comment.gameId() == aGameId) && (comment.profileId() == _profileId));
                                                                 });
     if (iterator != _games.end()) {
         return *iterator;
     } else {
-        return *(new GameComment(aGameId, aProfileId, QStringList()));
+        return *(new GameComment(aGameId, _profileId, QStringList()));
     }
 }
 

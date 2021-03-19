@@ -1,4 +1,5 @@
 #include "hiddengames.h"
+#include "classes/common/settings.h"
 
 HiddenGames::HiddenGames(SProfile profile) : _profile(profile.steamID()) {
     load();

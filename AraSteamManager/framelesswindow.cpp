@@ -3,6 +3,13 @@
 
 const int c_border = 7;
 
+FramelessWindow *FramelessWindow::createWithWidget(QWidget *widget) {
+    FramelessWindow *f = new FramelessWindow;
+    widget->setParent(f);
+    f->setWidget(widget);
+    return f;
+}
+
 FramelessWindow::FramelessWindow(): FramelessWindow(nullptr) {
 
 }

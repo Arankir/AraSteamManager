@@ -1,4 +1,5 @@
 #include "groupsgames.h"
+#include "classes/common/settings.h"
 
 GroupGames::GroupGames(const QJsonObject &aObject) {
     fromJson(aObject);

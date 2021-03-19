@@ -37,8 +37,6 @@ release/formstatistics.o
 release/framelesswindow.o
 release/main.o
 release/actioncategory.o
-release/donutbreakdownchart.o
-release/mainslice.o
 release/multiselectcombobox.o
 release/qcomboboxfriends.o
 release/qlistwidgetachievement.o
@@ -58,7 +56,6 @@ release/qrc_fonts.o
 release/qrc_img.o
 release/qrc_lang.o
 release/qrc_thm.o
-release/moc_categoriesgame.o
 release/moc_favorites.o
 release/moc_myfilter.o
 release/moc_requestdata.o

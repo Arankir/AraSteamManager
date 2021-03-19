@@ -35,13 +35,9 @@ int main(int argc, char *argv[]) {
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
     FramelessWindow f;
-    //FormMain *m = new FormMain(&f);
-    //MainWindow *w = new MainWindow(&f);
     f.setWidget(new FormMain(&f));
-    //FrameLess f(w);
-    //FramelessWindow f(w);
-    //w->show();
     f.show();
+//    FramelessWindow::createWithWidget(new FormMain())->show();
 
     return a.exec();
 }

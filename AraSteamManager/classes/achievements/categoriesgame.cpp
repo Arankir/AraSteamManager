@@ -1,4 +1,5 @@
 #include "categoriesgame.h"
+#include "classes/common/settings.h"
 
 Category::Category(SGame &aGame): _gameName(aGame.name()), _gameId(aGame.appId()) {
     update();
@@ -10,6 +11,8 @@ Category::Category(int aGameId): _gameId(aGameId) {
 
 Category::Category(const QJsonObject &aCategory) {
     fromJson(aCategory);
+    int order = 0;
+    updateOrders(order);
 }
 
 Category &Category::operator=(const Category &aCategory) {

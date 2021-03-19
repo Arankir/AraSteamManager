@@ -2,7 +2,7 @@
 #define SAPI_H
 
 #include "classes/network/requestimage.h"
-#include <QUrlQuery>
+#include "classes/common/settings.h"
 
 QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePath, QSize aSize);
 

@@ -64,8 +64,6 @@ SOURCES += \
     framelesswindow.cpp \
         main.cpp \
     subWidgets/actions/actioncategory.cpp \
-    subWidgets/charts/donutbreakdownchart.cpp \
-    subWidgets/charts/mainslice.cpp \
     subWidgets/comboBoxes/multiselectcombobox.cpp \
     subWidgets/comboBoxes/qcomboboxfriends.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
@@ -121,8 +119,6 @@ HEADERS += \
     forms/subForms/main/formstatistics.h \
     framelesswindow.h \
     subWidgets/actions/actioncategory.h \
-    subWidgets/charts/donutbreakdownchart.h \
-    subWidgets/charts/mainslice.h \
     subWidgets/comboBoxes/multiselectcombobox.h \
     subWidgets/comboBoxes/qcomboboxfriends.h \
     subWidgets/items/qlistwidgetachievement.h \

@@ -1,4 +1,5 @@
 #include "sapi.h"
+#include <QUrlQuery>
 
 const QString    Sapi::_key = "3826BF60403D15613B4B0381DAB7A7BD";
 

@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
-    QByteArrayData data[66];
-    char stringdata0[859];
+    QByteArrayData data[68];
+    char stringdata0[868];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -58,47 +58,49 @@ QT_MOC_LITERAL(21, 234, 4), // "init"
 QT_MOC_LITERAL(22, 239, 11), // "changeEvent"
 QT_MOC_LITERAL(23, 251, 7), // "QEvent*"
 QT_MOC_LITERAL(24, 259, 5), // "event"
-QT_MOC_LITERAL(25, 265, 14), // "initComponents"
-QT_MOC_LITERAL(26, 280, 8), // "setIcons"
-QT_MOC_LITERAL(27, 289, 11), // "retranslate"
-QT_MOC_LITERAL(28, 301, 20), // "onResultAchievements"
-QT_MOC_LITERAL(29, 322, 25), // "QList<SAchievementPlayer>"
-QT_MOC_LITERAL(30, 348, 13), // "aAchievements"
-QT_MOC_LITERAL(31, 362, 6), // "aAppId"
-QT_MOC_LITERAL(32, 369, 10), // "closeEvent"
-QT_MOC_LITERAL(33, 380, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(34, 393, 24), // "lineEditGame_TextChanged"
-QT_MOC_LITERAL(35, 418, 9), // "aFindText"
-QT_MOC_LITERAL(36, 428, 18), // "buttonFind_Clicked"
-QT_MOC_LITERAL(37, 447, 26), // "buttonAchievements_Clicked"
-QT_MOC_LITERAL(38, 474, 22), // "buttonFavorite_Clicked"
-QT_MOC_LITERAL(39, 497, 18), // "buttonHide_Clicked"
-QT_MOC_LITERAL(40, 516, 12), // "createThread"
-QT_MOC_LITERAL(41, 529, 10), // "createMenu"
-QT_MOC_LITERAL(42, 540, 6), // "QMenu*"
-QT_MOC_LITERAL(43, 547, 4), // "game"
-QT_MOC_LITERAL(44, 552, 17), // "updateHiddenGames"
-QT_MOC_LITERAL(45, 570, 17), // "updateCurrentGame"
-QT_MOC_LITERAL(46, 588, 9), // "initTable"
-QT_MOC_LITERAL(47, 598, 10), // "initGroups"
-QT_MOC_LITERAL(48, 609, 12), // "initComments"
-QT_MOC_LITERAL(49, 622, 13), // "setTableModel"
-QT_MOC_LITERAL(50, 636, 19), // "QStandardItemModel*"
-QT_MOC_LITERAL(51, 656, 6), // "aModel"
-QT_MOC_LITERAL(52, 663, 12), // "indexFromRow"
-QT_MOC_LITERAL(53, 676, 4), // "aRow"
-QT_MOC_LITERAL(54, 681, 12), // "rowFromIndex"
-QT_MOC_LITERAL(55, 694, 6), // "aIndex"
-QT_MOC_LITERAL(56, 701, 11), // "indexFromId"
-QT_MOC_LITERAL(57, 713, 3), // "aId"
-QT_MOC_LITERAL(58, 717, 9), // "rowFromId"
-QT_MOC_LITERAL(59, 727, 16), // "updateHiddenRows"
-QT_MOC_LITERAL(60, 744, 18), // "updateGroupsFilter"
-QT_MOC_LITERAL(61, 763, 21), // "showGroupsInteractive"
-QT_MOC_LITERAL(62, 785, 23), // "showCommentsInteractive"
-QT_MOC_LITERAL(63, 809, 30), // "checkBoxFavorites_StateChanged"
-QT_MOC_LITERAL(64, 840, 4), // "arg1"
-QT_MOC_LITERAL(65, 845, 13) // "isInFavorites"
+QT_MOC_LITERAL(25, 265, 8), // "setIcons"
+QT_MOC_LITERAL(26, 274, 11), // "retranslate"
+QT_MOC_LITERAL(27, 286, 20), // "onResultAchievements"
+QT_MOC_LITERAL(28, 307, 25), // "QList<SAchievementPlayer>"
+QT_MOC_LITERAL(29, 333, 13), // "aAchievements"
+QT_MOC_LITERAL(30, 347, 6), // "aAppId"
+QT_MOC_LITERAL(31, 354, 10), // "closeEvent"
+QT_MOC_LITERAL(32, 365, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(33, 378, 24), // "lineEditGame_TextChanged"
+QT_MOC_LITERAL(34, 403, 9), // "aFindText"
+QT_MOC_LITERAL(35, 413, 18), // "buttonFind_Clicked"
+QT_MOC_LITERAL(36, 432, 26), // "buttonAchievements_Clicked"
+QT_MOC_LITERAL(37, 459, 22), // "buttonFavorite_Clicked"
+QT_MOC_LITERAL(38, 482, 18), // "buttonHide_Clicked"
+QT_MOC_LITERAL(39, 501, 12), // "createThread"
+QT_MOC_LITERAL(40, 514, 10), // "createMenu"
+QT_MOC_LITERAL(41, 525, 6), // "QMenu*"
+QT_MOC_LITERAL(42, 532, 4), // "game"
+QT_MOC_LITERAL(43, 537, 17), // "updateHiddenGames"
+QT_MOC_LITERAL(44, 555, 17), // "updateCurrentGame"
+QT_MOC_LITERAL(45, 573, 9), // "initTable"
+QT_MOC_LITERAL(46, 583, 12), // "updateGroups"
+QT_MOC_LITERAL(47, 596, 8), // "SProfile"
+QT_MOC_LITERAL(48, 605, 7), // "profile"
+QT_MOC_LITERAL(49, 613, 12), // "initComments"
+QT_MOC_LITERAL(50, 626, 13), // "setTableModel"
+QT_MOC_LITERAL(51, 640, 19), // "QStandardItemModel*"
+QT_MOC_LITERAL(52, 660, 6), // "aModel"
+QT_MOC_LITERAL(53, 667, 12), // "indexFromRow"
+QT_MOC_LITERAL(54, 680, 4), // "aRow"
+QT_MOC_LITERAL(55, 685, 12), // "rowFromIndex"
+QT_MOC_LITERAL(56, 698, 6), // "aIndex"
+QT_MOC_LITERAL(57, 705, 11), // "indexFromId"
+QT_MOC_LITERAL(58, 717, 3), // "aId"
+QT_MOC_LITERAL(59, 721, 9), // "rowFromId"
+QT_MOC_LITERAL(60, 731, 16), // "updateHiddenRows"
+QT_MOC_LITERAL(61, 748, 18), // "updateGroupsFilter"
+QT_MOC_LITERAL(62, 767, 14), // "showGroupsEdit"
+QT_MOC_LITERAL(63, 782, 16), // "showCommentsEdit"
+QT_MOC_LITERAL(64, 799, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(65, 830, 4), // "arg1"
+QT_MOC_LITERAL(66, 835, 13), // "isInFavorites"
+QT_MOC_LITERAL(67, 849, 18) // "resizeTableColumns"
 
     },
     "FormGames\0s_return_to_profile\0\0QWidget*\0"
@@ -107,8 +109,8 @@ QT_MOC_LITERAL(65, 845, 13) // "isInFavorites"
     "achievements\0SGame&\0games\0updateSettings\0"
     "setGames\0SProfile&\0aProfile\0QList<SGame>&\0"
     "aGames\0isInit\0isLoaded\0clear\0init\0"
-    "changeEvent\0QEvent*\0event\0initComponents\0"
-    "setIcons\0retranslate\0onResultAchievements\0"
+    "changeEvent\0QEvent*\0event\0setIcons\0"
+    "retranslate\0onResultAchievements\0"
     "QList<SAchievementPlayer>\0aAchievements\0"
     "aAppId\0closeEvent\0QCloseEvent*\0"
     "lineEditGame_TextChanged\0aFindText\0"
@@ -116,14 +118,14 @@ QT_MOC_LITERAL(65, 845, 13) // "isInFavorites"
     "buttonFavorite_Clicked\0buttonHide_Clicked\0"
     "createThread\0createMenu\0QMenu*\0game\0"
     "updateHiddenGames\0updateCurrentGame\0"
-    "initTable\0initGroups\0initComments\0"
-    "setTableModel\0QStandardItemModel*\0"
-    "aModel\0indexFromRow\0aRow\0rowFromIndex\0"
-    "aIndex\0indexFromId\0aId\0rowFromId\0"
-    "updateHiddenRows\0updateGroupsFilter\0"
-    "showGroupsInteractive\0showCommentsInteractive\0"
-    "checkBoxFavorites_StateChanged\0arg1\0"
-    "isInFavorites"
+    "initTable\0updateGroups\0SProfile\0profile\0"
+    "initComments\0setTableModel\0"
+    "QStandardItemModel*\0aModel\0indexFromRow\0"
+    "aRow\0rowFromIndex\0aIndex\0indexFromId\0"
+    "aId\0rowFromId\0updateHiddenRows\0"
+    "updateGroupsFilter\0showGroupsEdit\0"
+    "showCommentsEdit\0checkBoxFavorites_StateChanged\0"
+    "arg1\0isInFavorites\0resizeTableColumns"
 };
 #undef QT_MOC_LITERAL
 
@@ -156,32 +158,32 @@ static const uint qt_meta_data_FormGames[] = {
       22,    1,  233,    2, 0x08 /* Private */,
       25,    0,  236,    2, 0x08 /* Private */,
       26,    0,  237,    2, 0x08 /* Private */,
-      27,    0,  238,    2, 0x08 /* Private */,
-      28,    2,  239,    2, 0x08 /* Private */,
-      32,    1,  244,    2, 0x08 /* Private */,
-      34,    1,  247,    2, 0x08 /* Private */,
+      27,    2,  238,    2, 0x08 /* Private */,
+      31,    1,  243,    2, 0x08 /* Private */,
+      33,    1,  246,    2, 0x08 /* Private */,
+      35,    0,  249,    2, 0x08 /* Private */,
       36,    0,  250,    2, 0x08 /* Private */,
       37,    0,  251,    2, 0x08 /* Private */,
       38,    0,  252,    2, 0x08 /* Private */,
       39,    0,  253,    2, 0x08 /* Private */,
-      40,    0,  254,    2, 0x08 /* Private */,
-      41,    1,  255,    2, 0x08 /* Private */,
+      40,    1,  254,    2, 0x08 /* Private */,
+      43,    0,  257,    2, 0x08 /* Private */,
       44,    0,  258,    2, 0x08 /* Private */,
       45,    0,  259,    2, 0x08 /* Private */,
-      46,    0,  260,    2, 0x08 /* Private */,
-      47,    0,  261,    2, 0x08 /* Private */,
-      48,    0,  262,    2, 0x08 /* Private */,
-      49,    1,  263,    2, 0x08 /* Private */,
-      52,    1,  266,    2, 0x08 /* Private */,
-      54,    1,  269,    2, 0x08 /* Private */,
-      56,    1,  272,    2, 0x08 /* Private */,
-      58,    1,  275,    2, 0x08 /* Private */,
-      59,    0,  278,    2, 0x08 /* Private */,
+      46,    1,  260,    2, 0x08 /* Private */,
+      49,    0,  263,    2, 0x08 /* Private */,
+      50,    1,  264,    2, 0x08 /* Private */,
+      53,    1,  267,    2, 0x08 /* Private */,
+      55,    1,  270,    2, 0x08 /* Private */,
+      57,    1,  273,    2, 0x08 /* Private */,
+      59,    1,  276,    2, 0x08 /* Private */,
       60,    0,  279,    2, 0x08 /* Private */,
       61,    0,  280,    2, 0x08 /* Private */,
       62,    0,  281,    2, 0x08 /* Private */,
-      63,    1,  282,    2, 0x08 /* Private */,
-      65,    1,  285,    2, 0x08 /* Private */,
+      63,    0,  282,    2, 0x08 /* Private */,
+      64,    1,  283,    2, 0x08 /* Private */,
+      66,    1,  286,    2, 0x08 /* Private */,
+      67,    0,  289,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -199,32 +201,32 @@ static const uint qt_meta_data_FormGames[] = {
     QMetaType::Void, 0x80000000 | 23,   24,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 29, QMetaType::QString,   30,   31,
-    QMetaType::Void, 0x80000000 | 33,   24,
-    QMetaType::Void, QMetaType::QString,   35,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    0x80000000 | 42, 0x80000000 | 10,   43,
+    QMetaType::Void, 0x80000000 | 28, QMetaType::QString,   29,   30,
+    QMetaType::Void, 0x80000000 | 32,   24,
+    QMetaType::Void, QMetaType::QString,   34,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 50,   51,
-    QMetaType::Int, QMetaType::Int,   53,
-    QMetaType::Int, QMetaType::Int,   55,
-    QMetaType::Int, QMetaType::QString,   57,
-    QMetaType::Int, QMetaType::QString,   57,
+    0x80000000 | 41, 0x80000000 | 10,   42,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 47,   48,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 51,   52,
+    QMetaType::Int, QMetaType::Int,   54,
+    QMetaType::Int, QMetaType::Int,   56,
+    QMetaType::Int, QMetaType::QString,   58,
+    QMetaType::Int, QMetaType::QString,   58,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   64,
-    QMetaType::Bool, QMetaType::Int,   31,
+    QMetaType::Void, QMetaType::Int,   65,
+    QMetaType::Bool, QMetaType::Int,   30,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -248,40 +250,40 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 8: _t->clear(); break;
         case 9: _t->init(); break;
         case 10: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
-        case 11: _t->initComponents(); break;
-        case 12: _t->setIcons(); break;
-        case 13: _t->retranslate(); break;
-        case 14: _t->onResultAchievements((*reinterpret_cast< QList<SAchievementPlayer>(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
-        case 15: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 16: _t->lineEditGame_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 17: _t->buttonFind_Clicked(); break;
-        case 18: _t->buttonAchievements_Clicked(); break;
-        case 19: _t->buttonFavorite_Clicked(); break;
-        case 20: _t->buttonHide_Clicked(); break;
-        case 21: _t->createThread(); break;
-        case 22: { QMenu* _r = _t->createMenu((*reinterpret_cast< SGame(*)>(_a[1])));
+        case 11: _t->setIcons(); break;
+        case 12: _t->retranslate(); break;
+        case 13: _t->onResultAchievements((*reinterpret_cast< QList<SAchievementPlayer>(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 14: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
+        case 15: _t->lineEditGame_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 16: _t->buttonFind_Clicked(); break;
+        case 17: _t->buttonAchievements_Clicked(); break;
+        case 18: _t->buttonFavorite_Clicked(); break;
+        case 19: _t->buttonHide_Clicked(); break;
+        case 20: _t->createThread(); break;
+        case 21: { QMenu* _r = _t->createMenu((*reinterpret_cast< SGame(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 23: _t->updateHiddenGames(); break;
-        case 24: _t->updateCurrentGame(); break;
-        case 25: _t->initTable(); break;
-        case 26: _t->initGroups(); break;
-        case 27: _t->initComments(); break;
-        case 28: _t->setTableModel((*reinterpret_cast< QStandardItemModel*(*)>(_a[1]))); break;
-        case 29: { int _r = _t->indexFromRow((*reinterpret_cast< int(*)>(_a[1])));
+        case 22: _t->updateHiddenGames(); break;
+        case 23: _t->updateCurrentGame(); break;
+        case 24: _t->initTable(); break;
+        case 25: _t->updateGroups((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
+        case 26: _t->initComments(); break;
+        case 27: _t->setTableModel((*reinterpret_cast< QStandardItemModel*(*)>(_a[1]))); break;
+        case 28: { int _r = _t->indexFromRow((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 30: { int _r = _t->rowFromIndex((*reinterpret_cast< int(*)>(_a[1])));
+        case 29: { int _r = _t->rowFromIndex((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 31: { int _r = _t->indexFromId((*reinterpret_cast< QString(*)>(_a[1])));
+        case 30: { int _r = _t->indexFromId((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 32: { int _r = _t->rowFromId((*reinterpret_cast< QString(*)>(_a[1])));
+        case 31: { int _r = _t->rowFromId((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 33: _t->updateHiddenRows(); break;
-        case 34: _t->updateGroupsFilter(); break;
-        case 35: _t->showGroupsInteractive(); break;
-        case 36: _t->showCommentsInteractive(); break;
-        case 37: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 38: { bool _r = _t->isInFavorites((*reinterpret_cast< const int(*)>(_a[1])));
+        case 32: _t->updateHiddenRows(); break;
+        case 33: _t->updateGroupsFilter(); break;
+        case 34: _t->showGroupsEdit(); break;
+        case 35: _t->showCommentsEdit(); break;
+        case 36: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 37: { bool _r = _t->isInFavorites((*reinterpret_cast< const int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 38: _t->resizeTableColumns(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -294,7 +296,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
                 *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QWidget* >(); break;
             }
             break;
-        case 28:
+        case 27:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:

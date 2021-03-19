@@ -1673,7 +1673,6 @@ QTreeView,
 QListView,
 QTableView,
 QColumnView {
-    background-color: rgba(255, 255, 255, 20);
     selection-background-color: rgba(0, 0, 0, 0);
     border-radius: 2px;
     border: 1px solid #32414B;
@@ -1787,6 +1786,10 @@ QTableView::indicator:unchecked:pressed {
 
 QTableView::indicator:checked:pressed {
     image: url(":/theme/iconsBlackTheme/radiobutton_checked_press.png");
+}
+
+QTableView#FreezeRow {
+    background-color: rgba(30, 41, 59, 1);
 }
 
 /* QHeaderView ------------------------------------------------------------

@@ -37,8 +37,6 @@ debug/formstatistics.o
 debug/framelesswindow.o
 debug/main.o
 debug/actioncategory.o
-debug/donutbreakdownchart.o
-debug/mainslice.o
 debug/multiselectcombobox.o
 debug/qcomboboxfriends.o
 debug/qlistwidgetachievement.o
@@ -58,7 +56,6 @@ debug/qrc_fonts.o
 debug/qrc_img.o
 debug/qrc_lang.o
 debug/qrc_thm.o
-debug/moc_categoriesgame.o
 debug/moc_favorites.o
 debug/moc_myfilter.o
 debug/moc_requestdata.o

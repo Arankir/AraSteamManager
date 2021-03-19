@@ -1809,6 +1809,10 @@ QTableView::indicator:checked:pressed {
     image: url(":/theme/iconsBlueTheme/radiobutton_checked_press.png");
 }
 
+QTableView#FreezeRow {
+    background-color: rgba(30, 41, 59, 1);
+}
+
 /* QHeaderView ------------------------------------------------------------
 
 https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qheaderview

@@ -52,9 +52,11 @@
 
 #include <QScrollBar>
 #include <QHeaderView>
+#include <QDebug>
 
 FreezeTableWidget::FreezeTableWidget(QWidget *aParent) : QTableView(aParent) {
     frozenTableView = new QTableView(this);
+    frozenTableView->setObjectName("FreezeRow");
 
     //connect the headers and scrollbars of both tableviews together
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, &FreezeTableWidget::updateSectionWidth);
@@ -74,6 +76,7 @@ void FreezeTableWidget::initFreezeTable() {
     frozenTableView->setFocusPolicy(Qt::NoFocus);
 
     frozenTableView->horizontalHeader()->hide();
+    frozenTableView->verticalHeader()->hide();
     frozenTableView->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     frozenTableView->setRowHeight(0, rowHeight(0));
@@ -138,7 +141,11 @@ void FreezeTableWidget::updateFrozenTableGeometry() {
             }
         }
         model()->setHeaderData(0, Qt::Vertical, model()->headerData(0, Qt::Vertical).toString().rightJustified(size, ' '));
-        frozenTableView->setGeometry(frameWidth() + verticalHeader()->width() - frozenTableView->verticalHeader()->width() - 1, frameWidth() + horizontalHeader()->height(), viewport()->width() + verticalHeader()->width(), rowHeight(0));
+        int ax = frameWidth() + verticalHeader()->width();// - frozenTableView->verticalHeader()->width() - 1;
+        int ay = frameWidth() + horizontalHeader()->height();
+        int aw = viewport()->width() + verticalHeader()->width();
+        int ah = rowHeight(0);
+        frozenTableView->setGeometry(ax, ay, aw, ah);
     }
 }
 

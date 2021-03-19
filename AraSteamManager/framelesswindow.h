@@ -36,6 +36,8 @@ public:
     Q_ENUM(Edge);
     Q_DECLARE_FLAGS(Edges, Edge);
 
+    static FramelessWindow *createWithWidget(QWidget *widget);
+
     FramelessWindow();
     FramelessWindow(QWidget *target);
     ~FramelessWindow();

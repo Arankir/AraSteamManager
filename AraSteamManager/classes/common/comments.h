@@ -57,7 +57,7 @@ public:
     Comments &setAchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId, const QStringList &comment);
     Comments &removeGameComment(const QString &gameId, const QString &profileId);
     Comments &removeAchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId);
-    const GameComment &getGameComment(const QString &gameId, const QString &profileId) const;
+    const GameComment &getGameComment(const QString &gameId) const;
     const AchievementComment &getAchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId) const;
     Comments &save();
     Comments &load();

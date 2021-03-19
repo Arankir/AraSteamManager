@@ -1,4 +1,5 @@
 #include "favorites.h"
+#include "classes/common/settings.h"
 
 QList<FavoriteGame>              Favorites::_fGame           = initGames();
 QList<FavoriteFriend>            Favorites::_fFriend         = initFriends();
