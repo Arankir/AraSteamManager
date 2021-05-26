@@ -5,18 +5,18 @@
 
 class Category {
 public:
-    explicit Category(SGame &game);
-    explicit Category(int gameId);
-    Category(const QJsonObject &category = QJsonObject());
-    Category(const QString &title, const QList<QString> &achievements, const QList<Category*> &categories = QList<Category*>()):
+    explicit Category(const SGame &game);
+    explicit Category(const int &gameId);
+    explicit Category(const QJsonObject &category = QJsonObject());
+    explicit Category(const QString &title, const QList<QString> &achievements, const QList<Category*> &categories = QList<Category*>()):
         _title(title), _achievements(achievements), _categories(categories) {}
     Category(const Category &category):
         _parent(category._parent), _title(category._title), _achievements(category._achievements), _categories(category._categories) {}
 
     //operators
     Category &operator=(const Category &category);
-    bool      operator==(const Category &category) const;
-    bool      operator!=(const Category &category) const;
+    bool      operator==(Category &category);
+    bool      operator!=(Category &category);
     Category *operator[](const int index) {return _categories[index];}
 
     //iterators
@@ -35,8 +35,8 @@ public:
 
     //sets
     Category &setTitle(const QString &title);
-    Category &setAchievements(QList<QString> &achievements);
-    Category &setGame(SGame game);
+    Category &setAchievements(const QList<QString> &achievements);
+    Category &setGame(const SGame &game);
 
     //parents
     Category &updateParents();
@@ -45,17 +45,17 @@ public:
 
     //categories
     Category &addCategory(Category *category);
-    bool      removeCategory(Category *category, bool isRemoveRecursively = false);
+    bool      removeCategory(Category *category, const bool &isRemoveRecursively = false);
     Category &clearCategories();
-    Category *findCategory(Category*);
+    Category *findCategory(Category*) const;
 
     Category &fromJson(const QJsonObject &category);
-    QJsonObject toJson()                const;  //Потом заменить на другой вид хранения данных
+    QJsonObject toJson() const;  //Потом заменить на другой вид хранения данных
     Category *root();
-    Category *findCategory(int order);
-    int countCategories()               const;
+    Category *findCategory(const int &order) const;
+    int countCategories() const;
 
-    bool save();
+    bool save() const;
     Category &update();
 
     friend QDebug operator<<(QDebug dbg, const Category &category) {

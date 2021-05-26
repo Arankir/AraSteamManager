@@ -15,20 +15,20 @@ class FormFriendItemCompare : public QWidget {
     Q_OBJECT
 
 public:
-    explicit FormFriendItemCompare(SProfile *steamFriend, QListWidgetItem *parent = nullptr);
+    explicit FormFriendItemCompare(SProfile &steamFriend, QListWidgetItem *parent = nullptr);
     ~FormFriendItemCompare();
-    void setPercent(double aPercent);
-    void setHiddenFilter(bool aHidden);
-    void setFilterValue(ReachedType type);
+    void setPercent(const double &aPercent);
+    void setHiddenFilter(const bool &aHidden);
+    void setFilterValue(const ReachedType &type);
     bool isFilterHidden();
 
     void setIcons();
-    QListWidgetItem *item();
-    SProfile *steamProfile();
+    QListWidgetItem *item() {return _item;}
+    SProfile *steamProfile() {return _steamProfile;}
 
 signals:
     void s_delete();
-    void s_filterChanged(SProfile *profile, ReachedType type);
+    void s_filterChanged(SProfile *profile, const ReachedType &type);
 
 private:
     Ui::FormFriendItemCompare *ui;

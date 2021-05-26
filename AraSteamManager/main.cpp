@@ -34,12 +34,17 @@ int main(int argc, char *argv[]) {
 
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
-    FramelessWindow f;
-    f.setWidget(new FormMain(&f));
-    f.show();
+//    FramelessWindow f;
+//    f.setWidget(new FormMain(&f));
+    createFramelessForm<FormMain>()->window()->show();
+//    f.show();
 //    FramelessWindow::createWithWidget(new FormMain())->show();
-
-    return a.exec();
+    try {
+        return a.exec();
+    }  catch (std::exception &exception) {
+        qWarning() << "runtime error" << exception.what();
+        return -1;
+    }
 }
 
 void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMessage) {
@@ -74,14 +79,14 @@ void initLog() {
     QFileInfoList list = dirLogs.entryInfoList();
     for(auto &file: list) {
         if (file.fileName().indexOf("log_") == 0) {
-            QDateTime date {QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), "yyyy.MM.dd")};
+            QDateTime date {QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), Settings::dateFormat())};
             if (date < QDateTime::currentDateTime().addMonths(-1)) {
                 QFile::remove(file.filePath() + "/" + file.fileName());
             }
         }
     }
 
-    logFile_.reset(new QFile(logsPath + QDateTime::currentDateTime().toString("log_yyyy.MM.dd") + ".txt"));
+    logFile_.reset(new QFile(logsPath + QDateTime::currentDateTime().toString("log_" + Settings::dateFormat()) + ".txt"));
     logFile_.data()->open(QFile::Append | QFile::Text);
     qInstallMessageHandler(log);
 }

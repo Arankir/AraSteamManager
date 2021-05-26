@@ -25,7 +25,7 @@ namespace Ui {
 class FormFavorites;
 }
 
-class FormFavorites : public QWidget {
+class FormFavorites : public Form {
     Q_OBJECT
 
 public slots:
@@ -33,9 +33,9 @@ public slots:
     bool isLoaded();
     void friendLoad(SProfile);
 
-    void updateSettings();
-    void setIcons();
-    void retranslate();
+    void updateSettings() override;
+    void updateIcons() override;
+    void retranslate() override;
 public:
     explicit FormFavorites(QWidget *parent = nullptr);
     ~FormFavorites();
@@ -45,7 +45,6 @@ signals:
 
 private slots:
     void initComponents();
-    void changeEvent(QEvent *event);
     void on_pushButton_clicked();
 
 private:

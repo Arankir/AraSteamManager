@@ -8,20 +8,23 @@
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/network/requestdata.h"
 #include "classes/common/settings.h"
+#include "../threadloading.h"
 #include "forms/subForms/main/formfriends.h"
 
-class ThreadFriends : public QObject {
+class ThreadFriends : public ThreadLoading {
     Q_OBJECT
-public slots:
+private slots:
     int fill();
 
 public:
-    explicit ThreadFriends(QList<QPair<SFriend, SProfile>> friends, QObject *parent = nullptr): QObject(parent), _friends(friends) {}
+    explicit ThreadFriends(const QList<QPair<SFriend, SProfile>> &friends): _friends(friends) {}
+
+    ~ThreadFriends() {qInfo() << "Thread friends deleted";}
 
 signals:
     void s_finishedModel(QStandardItemModel *model);
-    void s_progress(int p);
-    void s_finished();
+    void s_progress(const int &p);
+//    void s_finished();
 
 private:
     QList<QPair<SFriend, SProfile>> _friends;

@@ -36,12 +36,12 @@ QT_MOC_LITERAL(0, 0, 15), // "ComboBoxFriends"
 QT_MOC_LITERAL(1, 16, 18), // "s_selectionChanged"
 QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 15), // "s_friendClicked"
-QT_MOC_LITERAL(4, 52, 9), // "SProfile*"
+QT_MOC_LITERAL(4, 52, 9), // "SProfile&"
 QT_MOC_LITERAL(5, 62, 5) // "clear"
 
     },
     "ComboBoxFriends\0s_selectionChanged\0\0"
-    "s_friendClicked\0SProfile*\0clear"
+    "s_friendClicked\0SProfile&\0clear"
 };
 #undef QT_MOC_LITERAL
 
@@ -82,20 +82,9 @@ void ComboBoxFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_selectionChanged(); break;
-        case 1: _t->s_friendClicked((*reinterpret_cast< SProfile*(*)>(_a[1]))); break;
+        case 1: _t->s_friendClicked((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
         case 2: _t->clear(); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        switch (_id) {
-        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 1:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< SProfile* >(); break;
-            }
-            break;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
@@ -107,7 +96,7 @@ void ComboBoxFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
             }
         }
         {
-            using _t = void (ComboBoxFriends::*)(SProfile * );
+            using _t = void (ComboBoxFriends::*)(SProfile & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ComboBoxFriends::s_friendClicked)) {
                 *result = 1;
                 return;
@@ -150,7 +139,7 @@ int ComboBoxFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 3)
-            qt_static_metacall(this, _c, _id, _a);
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 3;
     }
     return _id;
@@ -163,7 +152,7 @@ void ComboBoxFriends::s_selectionChanged()
 }
 
 // SIGNAL 1
-void ComboBoxFriends::s_friendClicked(SProfile * _t1)
+void ComboBoxFriends::s_friendClicked(SProfile & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

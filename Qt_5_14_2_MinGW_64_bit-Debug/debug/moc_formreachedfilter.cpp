@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormReachedFilter_t {
-    QByteArrayData data[11];
-    char stringdata0[124];
+    QByteArrayData data[9];
+    char stringdata0[113];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,17 +38,14 @@ QT_MOC_LITERAL(2, 38, 0), // ""
 QT_MOC_LITERAL(3, 39, 11), // "ReachedType"
 QT_MOC_LITERAL(4, 51, 4), // "type"
 QT_MOC_LITERAL(5, 56, 14), // "updateSettings"
-QT_MOC_LITERAL(6, 71, 8), // "setIcons"
-QT_MOC_LITERAL(7, 80, 11), // "changeEvent"
-QT_MOC_LITERAL(8, 92, 7), // "QEvent*"
-QT_MOC_LITERAL(9, 100, 5), // "event"
-QT_MOC_LITERAL(10, 106, 17) // "slideValueChanged"
+QT_MOC_LITERAL(6, 71, 11), // "updateIcons"
+QT_MOC_LITERAL(7, 83, 11), // "retranslate"
+QT_MOC_LITERAL(8, 95, 17) // "slideValueChanged"
 
     },
     "FormReachedFilter\0s_radioButtonChange\0"
     "\0ReachedType\0type\0updateSettings\0"
-    "setIcons\0changeEvent\0QEvent*\0event\0"
-    "slideValueChanged"
+    "updateIcons\0retranslate\0slideValueChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -70,9 +67,9 @@ static const uint qt_meta_data_FormReachedFilter[] = {
 
  // slots: name, argc, parameters, tag, flags
        5,    0,   42,    2, 0x0a /* Public */,
-       6,    0,   43,    2, 0x0a /* Public */,
-       7,    1,   44,    2, 0x08 /* Private */,
-      10,    0,   47,    2, 0x08 /* Private */,
+       6,    0,   43,    2, 0x08 /* Private */,
+       7,    0,   44,    2, 0x08 /* Private */,
+       8,    0,   45,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -80,7 +77,7 @@ static const uint qt_meta_data_FormReachedFilter[] = {
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 8,    9,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -92,17 +89,17 @@ void FormReachedFilter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         auto *_t = static_cast<FormReachedFilter *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->s_radioButtonChange((*reinterpret_cast< ReachedType(*)>(_a[1]))); break;
+        case 0: _t->s_radioButtonChange((*reinterpret_cast< const ReachedType(*)>(_a[1]))); break;
         case 1: _t->updateSettings(); break;
-        case 2: _t->setIcons(); break;
-        case 3: _t->changeEvent((*reinterpret_cast< QEvent*(*)>(_a[1]))); break;
+        case 2: _t->updateIcons(); break;
+        case 3: _t->retranslate(); break;
         case 4: _t->slideValueChanged(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FormReachedFilter::*)(ReachedType );
+            using _t = void (FormReachedFilter::*)(const ReachedType & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormReachedFilter::s_radioButtonChange)) {
                 *result = 0;
                 return;
@@ -112,7 +109,7 @@ void FormReachedFilter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormReachedFilter::staticMetaObject = { {
-    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    QMetaObject::SuperData::link<Form::staticMetaObject>(),
     qt_meta_stringdata_FormReachedFilter.data,
     qt_meta_data_FormReachedFilter,
     qt_static_metacall,
@@ -131,12 +128,12 @@ void *FormReachedFilter::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_FormReachedFilter.stringdata0))
         return static_cast<void*>(this);
-    return QWidget::qt_metacast(_clname);
+    return Form::qt_metacast(_clname);
 }
 
 int FormReachedFilter::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = Form::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
@@ -152,7 +149,7 @@ int FormReachedFilter::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormReachedFilter::s_radioButtonChange(ReachedType _t1)
+void FormReachedFilter::s_radioButtonChange(const ReachedType & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

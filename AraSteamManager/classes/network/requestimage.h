@@ -10,9 +10,9 @@ class RequestImage : public QObject
 {
     Q_OBJECT
 public:
-    explicit RequestImage(QLabel *label, const QString &url, const QString &save = "", bool autosave = false, QObject *parent = nullptr);
+    explicit RequestImage(QLabel *label, const QString &url, const QString &save = "", const bool &autosave = false, QObject *parent = nullptr);
     explicit RequestImage(QLabel *label, const QString &url, QObject *parent): RequestImage(label, url, "", false, parent) {}
-    explicit RequestImage(const QString &url, const QString &save = "", bool autosave = false, QObject *parent = nullptr): RequestImage(nullptr, url, save, autosave, parent) {}
+    explicit RequestImage(const QString &url, const QString &save = "", const bool &autosave = false, QObject *parent = nullptr): RequestImage(nullptr, url, save, autosave, parent) {}
 
     QPixmap pixmap() const {return _pixmap;}
 

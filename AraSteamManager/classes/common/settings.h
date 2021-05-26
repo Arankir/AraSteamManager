@@ -25,78 +25,79 @@ public:
 
     static void setMyProfile(const QString &myProfiles);
     static QString myProfile();
-    static void setLanguage(int language);
+    static void setLanguage(const int &language);
     static int language();
-    static void setTheme(int theme);
+    static void setTheme(const int &theme);
     static int theme();
-    static void setSaveimage(int saveImage);
+    static void setSaveimage(const int &saveImage);
     static int saveImages();
-    static void setVisibleHiddenGames(int visibleHiddenGames);
+    static void setVisibleHiddenGames(const int &visibleHiddenGames);
     static int visibleHiddenGames();
-    static void setVisibleProfileInfo(int visibleProfileInfo);
+    static void setVisibleProfileInfo(const int &visibleProfileInfo);
     static int profileInfoSize();
-    //static void setMaximumTableRows(int rows);
-    //static int getMaximumTableRows();
-    static QString iconsColor();
 
     static void setMainWindowParams(QRect geometry);
     static QRect mainWindowGeometry();
-    static void setMainWindowPos(QPoint pos);
+    static void setMainWindowPos(const QPoint &pos);
     static QPoint mainWindowPos();
     static void setMainWindowIsMaximize(bool maximize);
     static bool isMainWindowMaximize();
 
-    static void setGamesTableIconWidth(int width);
+    static void setGamesTableIconWidth(const int &width);
     static int gamesTableIconWidth();
-    static void setGamesTableTitleWidth(int width);
+    static void setGamesTableTitleWidth(const int &width);
     static int gamesTableTitleWidth();
-    static void setGamesTableCommentWidth(int width);
+    static void setGamesTableCommentWidth(const int &width);
     static int gamesTableCommentWidth();
-    static void setGamesTableProgressWidth(int width);
+    static void setGamesTableProgressWidth(const int &width);
     static int gamesTableProgressWidth();
 
-    static void setFriendsTableIconWidth(int width);
+    static void setFriendsTableIconWidth(const int &width);
     static int friendsTableIconWidth();
-    static void setFriendsTableNameWidth(int width);
+    static void setFriendsTableNameWidth(const int &width);
     static int friendsTableNameWidth();
-    static void setFriendsTableAddedWidth(int width);
+    static void setFriendsTableAddedWidth(const int &width);
     static int friendsTableAddedWidth();
-    static void setFriendsTableStatusWidth(int width);
+    static void setFriendsTableStatusWidth(const int &width);
     static int friendsTableStatusWidth();
-    static void setFriendsTableIsOpenWidth(int width);
+    static void setFriendsTableIsOpenWidth(const int &width);
     static int friendsTableIsOpenWidth();
 
     static void setAchievementContainerParams(QRect geometry);
     static QRect achievementContainerGeometry();
     static QPoint achievementContainerPos();
 
-    static void setAchievementsTableIconWidth(int width);
+    static void setAchievementsTableIconWidth(const int &width);
     static int achievementsTableIconWidth();
-    static void setAchievementsTableTitleWidth(int width);
+    static void setAchievementsTableTitleWidth(const int &width);
     static int achievementsTableTitleWidth();
-    static void setAchievementsTableDescriptionWidth(int width);
+    static void setAchievementsTableDescriptionWidth(const int &width);
     static int achievementsTableDescriptionWidth();
-    static void setAchievementsTableCommentWidth(int width);
+    static void setAchievementsTableCommentWidth(const int &width);
     static int achievementsTableCommentWidth();
-    static void setAchievementsTablePercentWidth(int width);
+    static void setAchievementsTablePercentWidth(const int &width);
     static int achievementsTablePercentWidth();
-    static void setAchievementsTableAchievedWidth(int width);
+    static void setAchievementsTableAchievedWidth(const int &width);
     static int achievementsTableAchievedWidth();
 
-    static void setAchievementsCompareIconVisible(int width);
+    static void setAchievementsCompareIconVisible(const int &width);
     static int achievementsCompareIconVisible();
-    static void setAchievementsCompareTitleVisible(int width);
+    static void setAchievementsCompareTitleVisible(const int &width);
     static int achievementsCompareTitleVisible();
-    static void setAchievementsCompareDescriptionVisible(int width);
+    static void setAchievementsCompareDescriptionVisible(const int &width);
     static int achievementsCompareDescriptionVisible();
-    static void setAchievementsComparePercentVisible(int width);
+    static void setAchievementsComparePercentVisible(const int &width);
     static int achievementsComparePercentVisible();
 
+    static QString iconsColor();
     static QString defaultFont();
     static QString qssTheme();
 
     static void syncronizeSettings();
 
+    static const QString dateTimeFormat();
+    static const QString dateFormat();
+    static const QString dateTimeFormatShort();
 private:
     static QSettings *_settings;
 
@@ -129,7 +130,7 @@ public:
     static QString stateRed();
     static QString stateYellow();
 
-    static QString levels(int hundreds);
+    static QString levels(const int &hundreds);
 
     //Achievements Checkbox
     static QString allAchievements();

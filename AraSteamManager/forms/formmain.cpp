@@ -6,7 +6,7 @@
 //https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
 #define Init {
-FormMain::FormMain(QWidget *parent): QWidget(parent), ui(new Ui::FormMain) {
+FormMain::FormMain(QWidget *parent): Form(parent), ui(new Ui::FormMain) {
     ui->setupUi(this);
     initComponents();
     if (Settings::myProfile() != "none") {
@@ -36,7 +36,7 @@ void FormMain::initComponents() {
         }
     }
     qApp->setStyleSheet(Settings::qssTheme());
-    setIcons();
+    updateIcons();
 #define Connects {
     connect(ui->ButtonFindProfile,      &QPushButton::clicked,              this,                       &FormMain::buttonFindProfile_Clicked);
     connect(ui->ButtonGoToMyProfile,    &QPushButton::clicked,              this,                       &FormMain::buttonGoToMyProfile_Clicked);
@@ -62,25 +62,16 @@ void FormMain::initComponents() {
 #define InitEnd }
 
 #define System {
-void FormMain::setIcons() {
-    ui->ButtonUpdate        ->setIcon(QIcon(Images::update()));
-    ui->ButtonGoToMyProfile ->setIcon(QIcon(Images::home()));
-    ui->ButtonFindProfile   ->setIcon(QIcon(Images::findProfile()));
-    ui->ButtonSettings      ->setIcon(QIcon(Images::settings()));
-    ui->ButtonBack          ->setIcon(QIcon(Images::left()));
-    ui->ButtonNext          ->setIcon(QIcon(Images::right()));
-}
-
 #define ContainerAchievementsStart {
-void FormMain::addAchievements(QList<SAchievementPlayer> aAchievements, SGame aGames) {
+void FormMain::addAchievements(/*QList<SAchievementPlayer> aAchievements, */SGame aGames) {
     if (_containerAchievementsForm == nullptr) {
         createFormContainerAchievements();
     }
     FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
     if (currentProfile) {
         ++_achievementsCount;
-        _containerAchievementsForm->addFormAchievement(aAchievements, currentProfile->getProfile(), aGames);
         _containerAchievementsForm->show();
+        _containerAchievementsForm->addFormAchievement(/*aAchievements, */currentProfile->getProfile(), aGames);
     }
 }
 
@@ -115,7 +106,7 @@ FormProfile *FormMain::createFormProfile(SProfile &aProfile) {
     return newFormProfile;
 }
 
-FormStatistics *FormMain::createFormStatistics(const SProfile &aProfile, QList<SGame> &aGames) {
+FormStatistics *FormMain::createFormStatistics(const SProfile &aProfile, SGames &aGames) {
     _statisticsForm = new FormStatistics(aProfile, aGames, this);
     connect(this,            &FormMain::s_updateSettings,         _statisticsForm,      &FormStatistics::updateSettings);
     connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, ui->FormProgressBar,  &QProgressBar::setValue);
@@ -127,9 +118,9 @@ FormStatistics *FormMain::createFormStatistics(const SProfile &aProfile, QList<S
 }
 
 FormContainerAchievements *FormMain::createFormContainerAchievements() {
-    FramelessWindow *f = new FramelessWindow;
-    _containerAchievementsForm = new FormContainerAchievements(f);
-    f->setWidget(_containerAchievementsForm);
+//    FramelessWindow *f = new FramelessWindow;
+    _containerAchievementsForm = createFramelessForm<FormContainerAchievements>();// new FormContainerAchievements(f);
+//    f->setWidget(_containerAchievementsForm);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &FormMain::removeAchievements);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &FormMain::containerAchievementsClose);
     //++_windowChildCount;
@@ -158,13 +149,13 @@ void FormMain::goToProfile(const QString &aId, SProfileRequestType aType) {
     }
 }
 
-void FormMain::goToGames(SProfile &aProfile, QList<SGame> &aGames) {
+void FormMain::goToGames(SProfile &aProfile, SGames &aGames) {
     if(!_blockedLoad) {
         if (!ui->StackedFormGames->isInit()) {
             _blockedLoad = true;
-            ui->StackedFormGames->setGames(aProfile, aGames);
             ui->FormProgressBar->setMaximum(aGames.count());
             ui->FormProgressBar->setVisible(true);
+            ui->StackedFormGames->setGames(aProfile, aGames);
             ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
         } else {
             if (ui->StackedFormGames->isLoaded()) {
@@ -179,9 +170,10 @@ void FormMain::goToFriends(const QString &aSteamId, QList<SFriend> &aFriends) {
         if (!ui->StackedFormFriends->isInit()) {
             _blockedLoad = true;
             ui->StackedFormFriends->setFriends(aSteamId, aFriends);
-            ui->FormProgressBar->setMaximum(aFriends.count());
-            ui->FormProgressBar->setVisible(true);
-            ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
+//            ui->FormProgressBar->setMaximum(aFriends.count());
+//            ui->FormProgressBar->setVisible(true);
+//            ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
+            ui->StackedWidgetForms->setCurrentIndex(FormMainFriends);
         } else {
             if (ui->StackedFormFriends->isLoaded()) {
                 ui->StackedWidgetForms->setCurrentIndex(FormMainFriends);
@@ -205,7 +197,7 @@ void FormMain::goToFavorites() {
     }
 }
 
-void FormMain::goToStatistics(const SProfile &aId, QList<SGame> &aGames) {
+void FormMain::goToStatistics(const SProfile &aId, SGames &aGames) {
     if(_statisticsForm == nullptr) {
         if(!_blockedLoad) {
             _blockedLoad = true;
@@ -247,6 +239,10 @@ void FormMain::returnFromForms() {
 //    }
     ui->StackedWidgetForms->setCurrentIndex(0);
 }
+
+void FormMain::retranslate() {
+    ui->retranslateUi(this);
+}
 #define FormsEnd }
 
 #define EventsStart {
@@ -256,11 +252,11 @@ void FormMain::keyPressEvent(QKeyEvent *aEvent) {
     }
 }
 
-void FormMain::changeEvent(QEvent *aEvent) {
-    if (aEvent->type() == QEvent::LanguageChange) {
-        ui->retranslateUi(this);
-    }
-}
+//void FormMain::changeEvent(QEvent *aEvent) {
+//    if (aEvent->type() == QEvent::LanguageChange) {
+//        ui->retranslateUi(this);
+//    }
+//}
 
 void FormMain::closeEvent(QCloseEvent *aEvent) {
     if (parentWidget()->parentWidget()) {
@@ -309,15 +305,24 @@ void FormMain::updateSettings() {
         ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
     }
     qApp->setStyleSheet(Settings::qssTheme());
-    setIcons();
+    updateIcons();
     emit s_updateSettings();
+}
+
+void FormMain::updateIcons() {
+    ui->ButtonUpdate        ->setIcon(QIcon(Images::update()));
+    ui->ButtonGoToMyProfile ->setIcon(QIcon(Images::home()));
+    ui->ButtonFindProfile   ->setIcon(QIcon(Images::findProfile()));
+    ui->ButtonSettings      ->setIcon(QIcon(Images::settings()));
+    ui->ButtonBack          ->setIcon(QIcon(Images::left()));
+    ui->ButtonNext          ->setIcon(QIcon(Images::right()));
 }
 
 void FormMain::resizeScrollArea(int aWidth, int aHeight) {
     int newWidth {std::max(ui->StackedWidgetForms->width(), aWidth)};
     int newHeight {std::max(ui->StackedWidgetForms->height(), aHeight)};
     if((ui->StackedWidgetForms->height() != newHeight) || (ui->StackedWidgetForms->width() != newWidth)) {
-        FramelessWindow *parent = dynamic_cast<FramelessWindow*>(parentWidget()->parent());
+        FramelessWindow *parent = window();
         if (parent) {
             parent->animateResize(parentWidget()->width() - ui->StackedWidgetForms->width() + newWidth,
                                   parentWidget()->height() - ui->StackedWidgetForms->height() + newHeight);

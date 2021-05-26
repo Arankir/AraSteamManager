@@ -6,42 +6,43 @@
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/network/requestdata.h"
+#include "../threadloading.h"
 
-class ThreadStatistics : public QObject {
+class ThreadStatistics : public ThreadLoading {
     Q_OBJECT
-public slots:
+private slots:
     int fill();
+    void onResultAchievements(const QList<SAchievementPlayer> &ach, const SGame &aGame);
+    void updateTimes(const QDateTime &unlockedTime);
 
 public:
-    explicit ThreadStatistics(QList<SGame> &games, const QString &id, int &aAchievementsCount,
-                              QList<SGame> &aNoAchievements, QList<SGame> &aComplete, QList<QPair<SGame, double>> &aStarted, QList<SGame> &aNotStarted,
-                              QVector<int> &aTimes, QVector<int> &aMonths, QVector<QPair<QString,int>> &aYears, QObject *parent = nullptr):
-        QObject(parent), _id(id), _games(games), _achievementsCount(aAchievementsCount),
+    explicit ThreadStatistics(SGames &games, const QString &id, int &aAchievementsCount,
+                              SGames &aNoAchievements, SGames &aComplete, QList<QPair<SGame, double>> &aStarted, SGames &aNotStarted,
+                              QVector<int> &aTimes, QVector<int> &aMonths, QVector<QPair<QString,int>> &aYears):
+        _id(id), _games(games), _achievementsCount(aAchievementsCount),
         _times(aTimes), _months(aMonths), _years(aYears),
         _noAchievements(aNoAchievements), _complete(aComplete), _started(aStarted), _notStarted(aNotStarted) {}
 
-signals:
-    void s_finished();
-    void s_progress(int p);
+    ~ThreadStatistics() {qInfo() << "Thread statistic deleted";}
 
-private slots:
-    void onResultAchievements(QList<SAchievementPlayer> ach, SGame aGame);
-    void updateTimes(const QDateTime &achievementTime);
+signals:
+    void s_progress(const int &p);
 
 private:
     QString _id;
-    QList<SGame> _games;
+    SGames _games;
     int &_achievementsCount;
 
     QVector<int> &_times;
     QVector<int> &_months;
     QVector<QPair<QString, int>> &_years;
 
-    QList<SGame> &_noAchievements;
-    QList<SGame> &_complete;
+    SGames &_noAchievements;
+    SGames &_complete;
     QList<QPair<SGame, double>> &_started;
-    QList<SGame> &_notStarted;
+    SGames &_notStarted;
 
+    int countReachedAchievements(const QList<SAchievementPlayer> &aAchievements);
 };
 
 #endif // THREADSTATISTICS_H

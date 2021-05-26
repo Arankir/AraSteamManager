@@ -2,24 +2,24 @@
 #include "ui_formfriendscompare.h"
 #include "./widgets/formfrienditemcompare.h"
 #include <QMenu>
+#include <QAbstractItemModelTester>
 
-constexpr int c_friendColumnWidth       = 50;
-constexpr int c_staticRows              = 1;
+constexpr int c_friendColumnWidth = 100;
 
-FormFriendsCompare::FormFriendsCompare(QWidget *parent): QWidget(parent), ui(new Ui::FormFriendsCompare), _fCompare(0, 0) {
+FormFriendsCompare::FormFriendsCompare(QWidget *parent): QWidget(parent), ui(new Ui::FormFriendsCompare) {
     ui->setupUi(this);
 
-    initTableCompare();
+    initingTable(ui->TableViewCompare);
     setIcons();
     #define Connects {
     connect(ui->CheckBoxCompareIcon, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(ColumnIcon, arg1 == 0);});
+            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementIcon, arg1 == 0);});
     connect(ui->CheckBoxCompareTitle, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(ColumnTitle, arg1 == 0);});
+            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementTitle, arg1 == 0);});
     connect(ui->CheckBoxCompareDescription, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(ColumnDescription, arg1 == 0);});
+            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementDescription, arg1 == 0);});
     connect(ui->CheckBoxCompareTotalPercent, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(ColumnWorld, arg1 == 0);});
+            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementWorld, arg1 == 0);});
     connect(ui->ButtonFriendsAll, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsAll);
     connect(ui->ButtonFriendsReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsReached);
     connect(ui->ButtonFriendsNotReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsNotReached);
@@ -27,9 +27,32 @@ FormFriendsCompare::FormFriendsCompare(QWidget *parent): QWidget(parent), ui(new
     #define ConnectsEnd }
 }
 
-void FormFriendsCompare::setAchievedColors(QColor aAchieved, QColor aNotAchieved) {
-    _achievedColor = aAchieved;
-    _notAchievedColor = aNotAchieved;
+void FormFriendsCompare::setInitData(SProfile &profile, SGame &game, AchievementsModel *achievementsModel/*, SAchievements &achievements*//*, QAbstractItemModel *model*//*, MyFilter *aFAchievements*/) {
+    _achievementsModel = achievementsModel;
+    _profile = profile;
+    _game = game;
+
+    ui->TableViewCompare->resizeColumnsToContents();
+    ui->TableViewCompare->setColumnWidth(AchievementTitle, 220);
+    ui->TableViewCompare->setColumnWidth(AchievementDescription, 450);
+    loadingCompare();
+}
+
+void FormFriendsCompare::setModel(QAbstractItemModel *model) {
+    _model = model;
+    updateFiltersFriends();
+    ui->TableViewCompare->model()->sort(AchievementReachedMy, Qt::SortOrder::DescendingOrder);
+    ui->TableViewCompare->sortByColumn(AchievementWorld, Qt::SortOrder::DescendingOrder);
+    ui->TableViewCompare->setColumnHidden(AchievementAppid, true);
+    ui->TableViewCompare->setColumnHidden(AchievementIndex, true);
+    ui->TableViewCompare->setColumnHidden(AchievementComments, true);
+    ui->TableViewCompare->resizeRowsToContents();
+}
+
+void FormFriendsCompare::setIcons() {
+    ui->ButtonFriendsReached    ->setIcon(QIcon(Images::reached()));
+    ui->ButtonFriendsAll        ->setIcon(QIcon(Images::allAchievements()));
+    ui->ButtonFriendsNotReached ->setIcon(QIcon(Images::notReached()));
 }
 
 FormFriendsCompare::~FormFriendsCompare() {
@@ -45,177 +68,89 @@ void FormFriendsCompare::changeEvent(QEvent *event) {
 
 void FormFriendsCompare::retranslate() {
     ui->retranslateUi(this);
-////    ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1)->setToolTip(tr("Достижения друзей"));
-//    if (ui->TableViewMyAchievements->model() != nullptr) {
-//        ui->TableWidgetFriends->cellWidget(c_tableFriendsRowAvatars, 1)->setToolTip(tr("Достижения друзей"));
-//    }
 }
 
-void FormFriendsCompare::setInitData(SProfile &profile, SGame &game, QList<SAchievement> &achievements, QStandardItemModel *model, MyFilter *aFAchievements) {
-    _profile = profile;
-    _game = game;
-    _achievements = achievements;
-    _fCompare.setRow(model->rowCount());
-    _fAchievements = aFAchievements;
-    ui->TableViewCompare->setModel(model);
-    //ui->TableViewCompare->setSortingEnabled(true);
-    ui->TableViewCompare->setColumnHidden(ColumnAppid, true);
-    ui->TableViewCompare->setColumnHidden(ColumnIndex, true);
-    ui->TableViewCompare->setColumnHidden(ColumnComment, true);
-    ui->TableViewCompare->resizeColumnsToContents();
-    ui->TableViewCompare->setColumnWidth(ColumnTitle, 220);
-    ui->TableViewCompare->setColumnWidth(ColumnDescription, 450);
-    ui->TableViewCompare->resizeRowsToContents();
-    loadingCompare();
-}
-
-void FormFriendsCompare::setIcons() {
-    ui->ButtonFriendsReached    ->setIcon(QIcon(Images::reached()));
-    ui->ButtonFriendsAll        ->setIcon(QIcon(Images::allAchievements()));
-    ui->ButtonFriendsNotReached ->setIcon(QIcon(Images::notReached()));
-}
-
-void FormFriendsCompare::initTableCompare() {
-    ui->TableViewCompare->setVerticalScrollMode  (QAbstractItemView::ScrollMode::ScrollPerPixel);
-    ui->TableViewCompare->setHorizontalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
-
-    ui->TableViewCompare->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->TableViewCompare->setShowGrid(false);
-//TODO потом разрешить сортировку
-    ui->TableViewCompare->setSortingEnabled(false);
-    ui->TableViewCompare->horizontalHeader()->setStretchLastSection(true);
-    ui->TableViewCompare->verticalHeader()->setVisible(false);
-    ui->TableViewCompare->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->TableViewCompare->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    connect(ui->TableViewCompare, &QTableView::doubleClicked, this, [=](QModelIndex) {
-        updateCurrentAchievement();
-    });
-}
-
-void FormFriendsCompare::updateCurrentAchievement() {
-    QModelIndex index = ui->TableViewCompare->currentIndex();
-    _currentAchievementIndex = ui->TableViewCompare->model()->index(index.row(), ColumnIndex).data().toString().toInt();
-    QString appId = ui->TableViewCompare->model()->index(index.row(), ColumnAppid).data().toString();
-
-    auto iterator = std::find_if(_achievements.begin(),
-                                 _achievements.end(),
-                                 [=](const SAchievement &achievement) {
-                                     return achievement.apiName() == appId;
-                                 });
-    if (iterator != _achievements.end()) {
-        _currentAchievement = &*iterator;
+void FormFriendsCompare::setAllFriendsValue(const ReachedType &aType) {
+    for(int i = 0; i < ui->ListWidgetFriends->count(); ++i) {
+        auto item = ui->ListWidgetFriends->item(i);
+        if (auto itemWidget = dynamic_cast<FormFriendItemCompare*>(ui->ListWidgetFriends->itemWidget(item))) {
+            if (!itemWidget->isFilterHidden()) {
+                itemWidget->setFilterValue(aType);
+            }
+        }
     }
 }
 
 void FormFriendsCompare::setFriendsAll() {
-    for(int i = 0; i < ui->ListWidgetFriends->count(); ++i) {
-        auto item = ui->ListWidgetFriends->item(i);
-        auto itemWidget = dynamic_cast<FormFriendItemCompare*>(ui->ListWidgetFriends->itemWidget(item));
-        if (itemWidget != nullptr) {
-            if (!itemWidget->isFilterHidden()) {
-                itemWidget->setFilterValue(ReachedType::all);
-            }
-        }
-    }
+    setAllFriendsValue(ReachedType::all);
 }
 
 void FormFriendsCompare::setFriendsReached() {
-    for(int i = 0; i < ui->ListWidgetFriends->count(); ++i) {
-        auto item = ui->ListWidgetFriends->item(i);
-        auto itemWidget = dynamic_cast<FormFriendItemCompare*>(ui->ListWidgetFriends->itemWidget(item));
-        if (itemWidget != nullptr) {
-            if (!itemWidget->isFilterHidden()) {
-                itemWidget->setFilterValue(ReachedType::reached);
-            }
-        }
-    }
+    setAllFriendsValue(ReachedType::reached);
 }
 
 void FormFriendsCompare::setFriendsNotReached() {
-    for(int i = 0; i < ui->ListWidgetFriends->count(); ++i) {
-        auto item = ui->ListWidgetFriends->item(i);
-        auto itemWidget = dynamic_cast<FormFriendItemCompare*>(ui->ListWidgetFriends->itemWidget(item));
-        if (itemWidget != nullptr) {
-            if (!itemWidget->isFilterHidden()) {
-                itemWidget->setFilterValue(ReachedType::notReached);
+    setAllFriendsValue(ReachedType::notReached);
+}
+
+void FormFriendsCompare::updateFiltersFriends() {
+    QAbstractItemModel *model = _model;
+    for (auto filter: _filtersFriends) {
+        filter->setSourceModel(model);
+        model = filter;
+    }
+    ui->TableViewCompare->setModel(model);
+}
+
+void FormFriendsCompare::updateFilterFriend(SProfile *aSteamId, const ReachedType &aType) {
+    if (_achievementsModel == nullptr) {
+        return;
+    }
+    for (int i = 0; i < _achievementsModel->columnCount() - AchievementReachedMy; ++i) {
+        if (_achievementsModel->getProfile(i).steamID() == aSteamId->steamID()) {
+            switch (aType) {
+            case ReachedType::all: {
+                _filtersFriends[i - 1]->setFilterRegExp("");
+                break;
             }
-        }
-    }
-}
-
-void FormFriendsCompare::updateFilterFriend(SProfile *aSteamId, ReachedType aType) {
-    auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewCompare->model());
-    if (model == nullptr) {
-        return;
-    }
-    int columnFriend = 0;
-    auto iterator = std::find_if(_friendColumns.begin(),
-                                 _friendColumns.end(),
-                                 [=](SProfile profile) {
-                                    return profile.steamID() == aSteamId->steamID();
-                                });
-    if (iterator == _friendColumns.end()) {
-        return;
-    }
-    int filterColumn = iterator - _friendColumns.begin();
-    columnFriend = ColumnCount + filterColumn;
-    switch (aType) {
-    case ReachedType::all: {
-        for (int i = c_staticRows; i < ui->TableViewCompare->model()->rowCount(); ++i) {
-            _fCompare.setData(i, filterColumn, true);
-        }
-        break;
-    }
-    case ReachedType::reached: {
-        for (int i = c_staticRows; i < ui->TableViewCompare->model()->rowCount(); ++i) {
-            _fCompare.setData(i, filterColumn, model->item(i, columnFriend)->text().indexOf(".") > -1);
-        }
-        break;
-    }
-    case ReachedType::notReached: {
-        for (int i = c_staticRows; i < ui->TableViewCompare->model()->rowCount(); ++i) {
-            _fCompare.setData(i, filterColumn, model->item(i, columnFriend)->text().indexOf(".") == -1);
-        }
-        break;
-    }
-    default: {
-        break;
-    }
-    }
-    updateHiddenRows();
-}
-
-void FormFriendsCompare::updateHiddenRows() {
-//TODO не учитывает пересортировку
-    if (ui->TableViewCompare->model() == nullptr) {
-        return;
-    }
-    if (_fAchievements != nullptr) {
-        for (int i = c_staticRows; i < ui->TableViewCompare->model()->rowCount(); ++i) {
-            ui->TableViewCompare->setRowHidden(i, !(_fCompare.getData(i) && _fAchievements->getData(i - 1)));
-        }
-    } else {
-        for (int i = c_staticRows; i < ui->TableViewCompare->model()->rowCount(); ++i) {
-            ui->TableViewCompare->setRowHidden(i, !_fCompare.getData(i));
+            case ReachedType::reached: {
+                _filtersFriends[i - 1]->setFilterRegExp("(:)|(^$)");
+                break;
+            }
+            case ReachedType::notReached: {
+                _filtersFriends[i - 1]->setFilterRegExp("(" + tr("Не получено") + ")|(^$)");
+                break;
+            }
+            default: {
+                _filtersFriends[i - 1]->setFilterRegExp("");
+                break;
+            }
+            }
+            ui->TableViewCompare->resizeRowsToContents();
+            return;
         }
     }
 }
 
 void FormFriendsCompare::loadingCompare() {
     ++_loadCompare;
+    auto friends = SFriend::load(_profile.steamID());
+    emit s_startLoad(friends.count());
     QStringList list;
-    for (const SFriend &sFriend: SFriend::load(_profile.steamID())) {
-        list.append(sFriend.steamId());
+    for(const SFriend &sFriend: qAsConst(friends)) {
+        list.append(std::move(sFriend.steamId()));
     }
     _profilesFriends = SProfile::load(list);
 
-    for(auto &profileFriend: _profilesFriends) {
-        SGame::load(profileFriend.steamID(), true, true, std::bind(&FormFriendsCompare::loadFriendGames, this,  std::placeholders::_1, profileFriend.steamID()));
+    for(const auto &profileFriend: qAsConst(_profilesFriends)) {
+        QString steamId = profileFriend.steamID();
+        SGame::load(steamId, true, true, std::bind(&FormFriendsCompare::loadFriendGames, this,  std::placeholders::_1, steamId));
     }
 }
 
-void FormFriendsCompare::loadFriendGames(QList<SGame> aGames, const QString &aUserId) {
+void FormFriendsCompare::loadFriendGames(const SGames &aGames, const QString &aUserId) {
+    static int haveGame = 0;
+    static int haventGame = 0;
     auto iterator = std::find_if(_profilesFriends.begin(),
                                  _profilesFriends.end(),
                                  [=](const SProfile &profile) {
@@ -229,124 +164,66 @@ void FormFriendsCompare::loadFriendGames(QList<SGame> aGames, const QString &aUs
                                        });
         if (isGameExist) {
             ui->ComboBoxFriend->addItem(*iterator, FriendType::haveGame);
-            ++_type1;
+            ++haveGame;
         } else {
             ui->ComboBoxFriend->addItem(*iterator, FriendType::haventGame);
-            ++_type2;
+            ++haventGame;
         }
-        emit s_progressLoad(_type1 + _type2, _profilesFriends.count());
-    //    ui->ProgressBarLoad->setValue(ui->ProgressBarLoad->value() + 1);
+        emit s_progressLoad(haveGame + haventGame, _profilesFriends.count());
     }
-    if(_type1 + _type2 == _profilesFriends.count()) {
+    if(haveGame + haventGame == _profilesFriends.count()) {
         ++_loadCompare;
+        haveGame = 0;
+        haventGame = 0;
         emit s_finishLoad();
     }
 }
 
-void FormFriendsCompare::addFriendToList(SProfile *aSteamFriend) {
-    QListWidgetItem *item = new QListWidgetItem();
-    item->setIcon(aSteamFriend->pixmapAvatar());
+void FormFriendsCompare::addFriendToList(SProfile &aSteamFriend) {
+    QListWidgetItem *item = new QListWidgetItem(aSteamFriend.pixmapAvatar(), "");
 
     auto friendItem = new FormFriendItemCompare(aSteamFriend, item);
-    connect(friendItem, &FormFriendItemCompare::s_delete, this, &FormFriendsCompare::removeFriendFromCompare);
     connect(friendItem, &FormFriendItemCompare::s_filterChanged, this, &FormFriendsCompare::updateFilterFriend);
-
+    connect(friendItem, &FormFriendItemCompare::s_delete, this, [=]() {
+        auto sndr = dynamic_cast<FormFriendItemCompare*>(sender());
+        if (sndr == nullptr) {
+            return;
+        }
+        ui->ComboBoxFriend->addItem(*sndr->steamProfile(), sndr->isFilterHidden() ? FriendType::haventGame : FriendType::haveGame);
+        removeFriendColumn(*sndr->steamProfile());
+        delete sndr->item();
+    });
     ui->ListWidgetFriends->addItem(item);
     ui->ListWidgetFriends->setItemWidget(item, friendItem);
-    float percent = addFriendColumn(*aSteamFriend);
-    if (percent == -1.0f) {
+
+    int friendIndex = addFriendColumn(aSteamFriend);
+
+    int reached = _achievementsModel->getReachedFromProfile(friendIndex);
+    if(reached > -1) {
+        friendItem->setPercent(100.0f * reached / _achievementsModel->getAchievementsCount());
+    } else {
         friendItem->setPercent(0.0f);
         friendItem->setHiddenFilter(true);
-    } else {
-        friendItem->setPercent(percent);
     }
 }
 
-void FormFriendsCompare::removeFriendFromCompare() {
-    auto sndr = dynamic_cast<FormFriendItemCompare*>(sender());
-    if (sndr == nullptr) {
-        return;
-    }
-    ui->ComboBoxFriend->addItem(*sndr->steamProfile(), sndr->isFilterHidden() ? FriendType::haventGame : FriendType::haveGame);
-    removeFriendColumn(*sndr->steamProfile());
-    delete sndr->item();
+int FormFriendsCompare::addFriendColumn(const SProfile &aSteamFriend) {
+    int index = _achievementsModel->addProfile(aSteamFriend);
+    auto filter = new QSortFilterProxyModel();
+    filter->setFilterKeyColumn(index + AchievementCount);
+    filter->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    _filtersFriends.append(filter);
+    updateFiltersFriends();
+    ui->TableViewCompare->setColumnWidth(index + AchievementCount - 1, c_friendColumnWidth);
+//    emit s_addedFriend();
+    return index;
 }
 
-int FormFriendsCompare::rowFromId(QString aId) {
-    for(int i = c_staticRows; i < ui->TableViewCompare->model()->rowCount(); ++i) {
-        if (aId == ui->TableViewCompare->model()->index(i, ColumnAppid).data(Qt::DisplayRole)) {
-            return i;
-        }
-    }
-    return -1;
+bool FormFriendsCompare::removeFriendColumn(const SProfile &aSteamFriend) {
+    _achievementsModel->removeProfile(aSteamFriend);
+    return true;
 }
 
-float FormFriendsCompare::addFriendColumn(SProfile &aSteamFriend) {
-    auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewCompare->model());
-    if (model == nullptr) {
-        return -1.0f;
-    }
-    int column = model->columnCount();
-    model->insertColumn(column);
-    model->setHeaderData(column, Qt::Horizontal, aSteamFriend.personaName(), Qt::DisplayRole);
-    QStandardItem *itemAvatar = new QStandardItem();
-    itemAvatar->setData(aSteamFriend.pixmapAvatar(), Qt::DecorationRole);
-    itemAvatar->setData(aSteamFriend.personaName(), Qt::ToolTipRole);
-//    itemAvatar->setTextAlignment(Qt::AlignCenter);
-    model->setItem(0, column, itemAvatar);
-
-    QList<SAchievement> achievementsFriends;
-    achievementsFriends = UniteAchievement(SAchievementSchema::load(_game.sAppId()),
-                                           SAchievementPercentage::load(_game.sAppId()),
-                                           SAchievementPlayer::load(_game.sAppId(), aSteamFriend.steamID()));//.set(SAchievementsPlayer(_game.sAppId(), aSteamFriend.steamID(), false));
-//    Threading LoadFriendTable(this);
-//    LoadFriendTable.AddThreadFriendAchievements(ui->TableWidgetAchievements,ach,col,c_tableCompareColumnAppid);
-    _fCompare.setCol(_fCompare.getCol() + 1);
-
-    _friendColumns.push_back(aSteamFriend);
-    int totalReach = 0;
-    int totalNotReach = 0;
-    for(auto &achievement: achievementsFriends) {
-        int row = rowFromId(achievement.apiName());
-        if (row > -1) {
-            QStandardItem *itemAchieved = new QStandardItem();
-            if (achievement.achieved() == 1) {
-                itemAchieved->setText(achievement.unlockTime().toString("yyyy.MM.dd hh:mm"));
-                itemAchieved->setForeground(_achievedColor);
-                ++totalReach;
-            } else {
-                itemAchieved->setText(tr("Не получено"));
-                itemAchieved->setForeground(_notAchievedColor);
-                ++totalNotReach;
-            }
-            itemAchieved->setTextAlignment(Qt::AlignCenter);
-            model->setItem(row, column, itemAchieved);
-        }
-    }
-    ui->TableViewCompare->setColumnWidth(column, c_friendColumnWidth);
-    emit s_addedFriend();
-    if((totalReach == 0) && (totalNotReach == 0)) {
-        QStandardItem *item = new QStandardItem(tr("Профиль не публичный"));
-        item->setForeground(_notAchievedColor);
-        model->setItem(c_staticRows, column, item);
-        return -1.0f;
-    } else {
-        return 100.0f * totalReach / (totalReach + totalNotReach);
-    }
-}
-
-bool FormFriendsCompare::removeFriendColumn(SProfile &aSteamFriend) {
-    auto iterator = std::find_if(_friendColumns.begin(),
-                                 _friendColumns.end(),
-                                 [=](SProfile profile) {
-                                    return profile.steamID() == aSteamFriend.steamID();
-                                });
-    if (iterator != _friendColumns.end()) {
-        _fCompare.removeCol(iterator - _friendColumns.begin());
-        ui->TableViewCompare->model()->removeColumn(ColumnCount + (iterator - _friendColumns.begin()));
-        _friendColumns.removeAt(iterator - _friendColumns.begin());
-        updateHiddenRows();
-        return true;
-    }
-    return false;
+void FormFriendsCompare::filtersValueUpdated() {
+    ui->TableViewCompare->resizeRowsToContents();
 }

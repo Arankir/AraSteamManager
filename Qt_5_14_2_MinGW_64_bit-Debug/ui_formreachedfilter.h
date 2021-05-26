@@ -13,7 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QSlider>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -22,63 +22,99 @@ QT_BEGIN_NAMESPACE
 class Ui_FormReachedFilter
 {
 public:
+    QHBoxLayout *horizontalLayout_4;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout;
     QLabel *LabelReached;
+    QHBoxLayout *horizontalLayout;
+    QRadioButton *RadioButtonReached;
+    QVBoxLayout *verticalLayout_2;
     QLabel *LabelAll;
+    QHBoxLayout *horizontalLayout_2;
+    QRadioButton *RadioButtonAll;
+    QVBoxLayout *verticalLayout_3;
     QLabel *LabelNotReached;
-    QSlider *Slider;
+    QHBoxLayout *horizontalLayout_3;
+    QRadioButton *RadioButtonNotReached;
 
     void setupUi(QWidget *FormReachedFilter)
     {
         if (FormReachedFilter->objectName().isEmpty())
             FormReachedFilter->setObjectName(QString::fromUtf8("FormReachedFilter"));
-        FormReachedFilter->resize(84, 30);
+        FormReachedFilter->resize(66, 38);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormReachedFilter->setFont(font);
-        verticalLayout = new QVBoxLayout(FormReachedFilter);
-        verticalLayout->setSpacing(0);
+        horizontalLayout_4 = new QHBoxLayout(FormReachedFilter);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(0);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         LabelReached = new QLabel(FormReachedFilter);
         LabelReached->setObjectName(QString::fromUtf8("LabelReached"));
-        LabelReached->setAlignment(Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft);
 
-        horizontalLayout->addWidget(LabelReached);
+        verticalLayout->addWidget(LabelReached);
 
-        LabelAll = new QLabel(FormReachedFilter);
-        LabelAll->setObjectName(QString::fromUtf8("LabelAll"));
-        LabelAll->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        RadioButtonReached = new QRadioButton(FormReachedFilter);
+        RadioButtonReached->setObjectName(QString::fromUtf8("RadioButtonReached"));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(RadioButtonReached->sizePolicy().hasHeightForWidth());
+        RadioButtonReached->setSizePolicy(sizePolicy);
 
-        horizontalLayout->addWidget(LabelAll);
-
-        LabelNotReached = new QLabel(FormReachedFilter);
-        LabelNotReached->setObjectName(QString::fromUtf8("LabelNotReached"));
-        LabelNotReached->setAlignment(Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing);
-
-        horizontalLayout->addWidget(LabelNotReached);
+        horizontalLayout->addWidget(RadioButtonReached);
 
 
         verticalLayout->addLayout(horizontalLayout);
 
-        Slider = new QSlider(FormReachedFilter);
-        Slider->setObjectName(QString::fromUtf8("Slider"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(Slider->sizePolicy().hasHeightForWidth());
-        Slider->setSizePolicy(sizePolicy);
-        Slider->setMaximum(2);
-        Slider->setPageStep(1);
-        Slider->setValue(1);
-        Slider->setSliderPosition(1);
-        Slider->setOrientation(Qt::Horizontal);
 
-        verticalLayout->addWidget(Slider);
+        horizontalLayout_4->addLayout(verticalLayout);
+
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        LabelAll = new QLabel(FormReachedFilter);
+        LabelAll->setObjectName(QString::fromUtf8("LabelAll"));
+
+        verticalLayout_2->addWidget(LabelAll);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        RadioButtonAll = new QRadioButton(FormReachedFilter);
+        RadioButtonAll->setObjectName(QString::fromUtf8("RadioButtonAll"));
+        sizePolicy.setHeightForWidth(RadioButtonAll->sizePolicy().hasHeightForWidth());
+        RadioButtonAll->setSizePolicy(sizePolicy);
+
+        horizontalLayout_2->addWidget(RadioButtonAll);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_2);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        LabelNotReached = new QLabel(FormReachedFilter);
+        LabelNotReached->setObjectName(QString::fromUtf8("LabelNotReached"));
+
+        verticalLayout_3->addWidget(LabelNotReached);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        RadioButtonNotReached = new QRadioButton(FormReachedFilter);
+        RadioButtonNotReached->setObjectName(QString::fromUtf8("RadioButtonNotReached"));
+        sizePolicy.setHeightForWidth(RadioButtonNotReached->sizePolicy().hasHeightForWidth());
+        RadioButtonNotReached->setSizePolicy(sizePolicy);
+
+        horizontalLayout_3->addWidget(RadioButtonNotReached);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_3);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_3);
 
 
         retranslateUi(FormReachedFilter);
@@ -93,14 +129,17 @@ public:
         LabelReached->setToolTip(QCoreApplication::translate("FormReachedFilter", "\320\237\320\276\320\273\321\203\321\207\320\265\320\275\320\276", nullptr));
 #endif // QT_CONFIG(tooltip)
         LabelReached->setText(QString());
+        RadioButtonReached->setText(QString());
 #if QT_CONFIG(tooltip)
         LabelAll->setToolTip(QCoreApplication::translate("FormReachedFilter", "\320\222\321\201\320\265", nullptr));
 #endif // QT_CONFIG(tooltip)
         LabelAll->setText(QString());
+        RadioButtonAll->setText(QString());
 #if QT_CONFIG(tooltip)
         LabelNotReached->setToolTip(QCoreApplication::translate("FormReachedFilter", "\320\235\320\265 \320\277\320\276\320\273\321\203\321\207\320\265\320\275\320\276", nullptr));
 #endif // QT_CONFIG(tooltip)
         LabelNotReached->setText(QString());
+        RadioButtonNotReached->setText(QString());
     } // retranslateUi
 
 };

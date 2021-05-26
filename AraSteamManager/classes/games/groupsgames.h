@@ -6,7 +6,7 @@
 
 class GroupGames {
 public:
-    GroupGames(const QString &title, const QString &profileId) : _title(title), _profileId(profileId) {}
+    GroupGames(const QString &title, const QString &profileId): _title(title), _profileId(profileId) {}
     GroupGames(const QJsonObject &object);
 
     GroupGames &addGame(const SGame &game);
@@ -29,7 +29,7 @@ private:
 class GroupsGames {
 public:
     GroupsGames(const SProfile &profile = SProfile());
-    GroupGames &operator[](const int index);
+    GroupGames &operator[](const int &index);
 
     void setProfile(const SProfile &aProfile);
     GroupsGames &addGroup(const QString &title);

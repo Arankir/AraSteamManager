@@ -74,11 +74,13 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         LabelAchievementTitle = new QLabel(FrameAchievement);
         LabelAchievementTitle->setObjectName(QString::fromUtf8("LabelAchievementTitle"));
+        LabelAchievementTitle->setWordWrap(true);
 
         verticalLayout->addWidget(LabelAchievementTitle);
 
         LabelAchievementDescription = new QLabel(FrameAchievement);
         LabelAchievementDescription->setObjectName(QString::fromUtf8("LabelAchievementDescription"));
+        LabelAchievementDescription->setWordWrap(true);
 
         verticalLayout->addWidget(LabelAchievementDescription);
 

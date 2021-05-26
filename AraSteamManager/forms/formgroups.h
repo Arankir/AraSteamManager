@@ -5,24 +5,25 @@
 #include <QVBoxLayout>
 #include <QCheckBox>
 #include "classes/games/groupsgames.h"
+#include "form.h"
 
 namespace Ui {
 class FormGroups;
 }
 
-class FormGroups : public QWidget
+class FormGroups : public Form
 {
     Q_OBJECT
 
 public:
-    explicit FormGroups(SProfile &profile, SGame &game, QWidget *parent = nullptr);
+    explicit FormGroups(SProfile &profile, const SGame &game, QWidget *parent = nullptr);
     ~FormGroups();
 
 signals:
-    void s_updateGroups(bool isUpdate);
+    void s_updateGroups();
 
 private slots:
-    void init();
+    void setProfileGame();
     void initUi();
     void clear();
     void updateUi();
@@ -36,6 +37,10 @@ private slots:
 
     void cancel_clicked();
     void apply_clicked();
+
+    void retranslate() override;
+    void updateIcons() override;
+    void updateSettings() override;
 
 private:
     Ui::FormGroups *ui;

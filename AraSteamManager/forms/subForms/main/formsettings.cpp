@@ -1,7 +1,7 @@
 #include "formsettings.h"
 #include "ui_formsettings.h"
 
-FormSettings::FormSettings(QWidget *aParent): QWidget(aParent), ui(new Ui::FormSettings) {
+FormSettings::FormSettings(QWidget *aParent): Form(aParent), ui(new Ui::FormSettings) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     initComponents();
@@ -287,9 +287,9 @@ void FormSettings::buttonImportCategories_Clicked() {
         return;
     }
 
-    QList<ExportCategory> exportCategories;
-    for (auto category: efd.data.toArray()) {
-        exportCategories.append(std::move(ExportCategory::fromJson(category.toObject())));
+    QVector<ExportCategory> exportCategories;
+    foreach(const auto &category, efd.data.toArray()) {
+        exportCategories.append(ExportCategory::fromJson(category.toObject()));
     }
 
     if (exportCategories.size() == 0) {
@@ -313,19 +313,13 @@ void FormSettings::buttonImportCategories_Clicked() {
         return;
     }
     //Обновить категории
-    for (auto eCategory: exportCategories) {
+    foreach(const auto &eCategory, exportCategories) {
         int gameId = eCategory.gameId;
         Category categories(gameId);
         categories.addCategory(new Category(eCategory.category));
         categories.save();
     }
     QMessageBox::information(this, tr("Внимание!"), tr("Категории успешно добавлены!"));
-}
-
-void FormSettings::changeEvent(QEvent *aEvent) {
-    if(aEvent->type() == QEvent::LanguageChange) {
-        retranslate();
-    }
 }
 
 void FormSettings::retranslate() {
@@ -395,7 +389,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
         ui->TableWidgetGames->clear();
         ui->TableWidgetGames->setRowCount(currentGame.second.size());
         if(indexHiddenGame != 0) {
-            QList<SGame> games = SGame::load(currentGame.first, true, true);
+            SGames games = SGame::load(currentGame.first, true, true);
             for(auto &game: games) {
                 if(currentGame.second.indexOf(game.sAppId()) > -1) {
                     int setTo = currentGame.second.indexOf(game.sAppId());
@@ -506,8 +500,8 @@ void FormSettings::hideClicked() {
         QFile fileSaveTo(Paths::hiddenGames(_hiddenGames[index].first));
         fileSaveTo.open(QIODevice::WriteOnly| QIODevice::Text);
         QTextStream writeStream(&fileSaveTo);
-        for(QString game: _hiddenGames[index].second) {
-            writeStream <<game + "\n";
+        foreach(const QString &game, _hiddenGames[index].second) {
+            writeStream << game + "\n";
         }
         fileSaveTo.close();
         QMessageBox(QMessageBox::Information, tr("Успешно!"), tr("Политика видимости для игры обновлена!"));
@@ -541,7 +535,7 @@ ExportFileData ExportFileData::fromJson(QJsonObject aObject) {
     efd.data = aObject["data"];
     efd.type = stringToExportType(aObject["type"].toString());
     efd.version = aObject["version"].toString().toDouble();
-    efd.date = QDateTime::fromString(aObject["date"].toString(), "yyyy.MM.dd hh:mm:ss");
+    efd.date = QDateTime::fromString(aObject["date"].toString(), Settings::dateTimeFormat());
     return efd;
 }
 
@@ -550,7 +544,7 @@ QJsonObject ExportFileData::toJson() {
     jObject["data"] = data;
     jObject["type"] = exportTypeToString(type);
     jObject["version"] = QString::number(version);
-    jObject["date"] = date.toString("yyyy.MM.dd hh:mm:ss");
+    jObject["date"] = date.toString(Settings::dateTimeFormat());
     return jObject;
 }
 

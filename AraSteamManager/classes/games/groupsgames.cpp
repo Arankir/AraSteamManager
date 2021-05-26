@@ -11,11 +11,11 @@ GroupGames &GroupGames::addGame(const SGame &aGame) {
 }
 
 GroupGames &GroupGames::removeGame(const SGame &aGame) {
-    for(int i = 0; i < _games.count(); ++i) {
-        if (_games[i] == aGame.sAppId()) {
-            _games.removeAt(i);
-            break;
-        }
+    auto iterator = std::find_if(_games.begin(),
+                                 _games.end(),
+                                 [=](const QString &game){return game == aGame.sAppId();});
+    if (iterator != _games.end()) {
+        _games.removeOne(*iterator);
     }
     return *this;
 }
@@ -40,13 +40,13 @@ QJsonObject GroupGames::toJson() const {
 GroupGames &GroupGames::fromJson(const QJsonObject &aObject) {
     _title      = aObject.value("title").toString();
     _profileId  = aObject.value("profileId").toString();
-    for(const auto &game: aObject.value("games").toArray()) {
+    foreach(const auto &game, aObject.value("games").toArray()) {
         _games.append(game.toString());
     }
     return *this;
 }
 
-GroupsGames::GroupsGames(const SProfile &profile) : _profileId(profile.steamID()) {
+GroupsGames::GroupsGames(const SProfile &aProfile) : _profileId(aProfile.steamID()) {
     init();
 }
 
@@ -55,24 +55,22 @@ void GroupsGames::setProfile(const SProfile &aProfile) {
     init();
 }
 
-GroupGames &GroupsGames::operator[](const int index) {
-    return _groups[index];
+GroupGames &GroupsGames::operator[](const int &aIndex) {
+    return _groups[aIndex];
 }
 
-GroupsGames &GroupsGames::addGroup(const QString &title) {
-    _groups.append(GroupGames(title, _profileId));
+GroupsGames &GroupsGames::addGroup(const QString &aTitle) {
+    _groups.append(std::move(GroupGames(aTitle, _profileId)));
     return *this;
 }
 
 void GroupsGames::init() {
     if (_profileId != "") {
-        QFile fileGroups(Paths::groupGames(_profileId));
-        if(fileGroups.open(QIODevice::ReadOnly)) {
-            QJsonObject obj = QJsonDocument::fromJson(fileGroups.readAll()).object();
-            fromJson(obj);
-            fileGroups.close();
+        QByteArray bytes;
+        if(readFile(Paths::groupGames(_profileId), bytes)) {
+            fromJson(QJsonDocument::fromJson(bytes).object());
         } else {
-            qWarning() << "file" << fileGroups.fileName() << "coudn't open";
+            qWarning() << "file" << Paths::groupGames(_profileId) << "coudn't open";
         }
     }
 }
@@ -81,11 +79,11 @@ void GroupsGames::update() {
     init();
 }
 
-GroupsGames &GroupsGames::fromJson(const QJsonObject &object) {
-    _profileId = object.value("profileId").toString();
+GroupsGames &GroupsGames::fromJson(const QJsonObject &aObject) {
+    _profileId = aObject.value("profileId").toString();
     _groups.clear();
-    for(auto group: object.value("groups").toArray()) {
-        _groups.append(GroupGames(group.toObject()));
+    for(auto &&group: aObject.value("groups").toArray()) {
+        _groups.append(std::move(GroupGames(group.toObject())));
     }
     return *this;
 }
@@ -95,17 +93,13 @@ QJsonObject GroupsGames::toJson() const {
     object["profileId"] = _profileId;
     QJsonArray array;
     for(auto &group: _groups) {
-        array.append(group.toJson());
+        array.append(std::move(group.toJson()));
     }
     object["groups"] = array;
     return object;
 }
 
 const GroupsGames &GroupsGames::save() const {
-    createDir(Paths::groupGames(_profileId));
-    QFile file(Paths::groupGames(_profileId));
-    file.open(QFile::WriteOnly);
-    file.write(QJsonDocument(toJson()).toJson());
-    file.close();
+    saveFile(Paths::groupGames(_profileId), QJsonDocument(toJson()).toJson());
     return *this;
 }

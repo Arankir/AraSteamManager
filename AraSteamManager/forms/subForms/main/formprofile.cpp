@@ -12,7 +12,7 @@ QString c_blue_css      = "#42a9c6";
 QColor c_blue_color     = QColor (0, 0, 255, 255 * 0.7);
 #define ConstantsEnd }
 
-FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormProfile), _profile(aProfile) {
+FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : Form(aParent), ui(new Ui::FormProfile), _profile(aProfile) {
     ui->setupUi(this);
     ui->LabelProfileVisibility->setTextFormat(Qt::RichText);
     ui->LabelGamesVisibility  ->setTextFormat(Qt::RichText);
@@ -43,14 +43,8 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : QWidget(aParent)
 }
 
 FormProfile::~FormProfile() {
-    qInfo() << "Форма профиля удалилась";
+    qInfo() << "Форма профиля " + _profile.personaName() + " удалилась";
     delete ui;
-}
-
-void FormProfile::changeEvent(QEvent *aEvent) {
-    if(aEvent->type() == QEvent::LanguageChange) {
-        retranslate();
-    }
 }
 
 void FormProfile::profileToUi(const SProfile &aProfile) {
@@ -71,7 +65,7 @@ void FormProfile::profileToUi(const SProfile &aProfile) {
         ui->LabelRealNameValue->setVisible(false);
     }
     //Дата создания аккаунта
-    ui->LabelTimeCreatedValue->setText(_profile.timeCreated().toString("yyyy.MM.dd"));
+    ui->LabelTimeCreatedValue->setText(_profile.timeCreated().toString(Settings::dateFormat()));
     if (_profile.timeCreated() > QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
         ui->LabelTimeCreated     ->setVisible(true);
         ui->LabelTimeCreatedValue->setVisible(true);
@@ -166,7 +160,7 @@ void FormProfile::setOnlineStatus() {
                 if (_profile.lastLogoff() == QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
                     ui->LabelPersonaState->setText(tr("Не в сети"));
                 } else {
-                    ui->LabelPersonaState->setText(tr("Был в сети %1").arg(_profile.lastLogoff().toString("yyyy.MM.dd hh:mm:ss")));
+                    ui->LabelPersonaState->setText(tr("Был в сети %1").arg(_profile.lastLogoff().toString(Settings::dateTimeFormat())));
                 }
                 setColorStatus(125, 126, 128, 255 * 0.7);
                 break;
@@ -298,7 +292,7 @@ void FormProfile::setCommentPermission() {
 #define updateData {
 void FormProfile::updateSettings() {
     Settings::syncronizeSettings();
-    setIcons();
+    updateIcons();
     updateVisibleInfo();
     updateMyProfile();
 }
@@ -392,7 +386,7 @@ void FormProfile::retranslate() {
     setOnlineStatus();
 }
 
-void FormProfile::setIcons() {
+void FormProfile::updateIcons() {
     ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + Images::link() + "\"> "
                                 "<a href=\"" + _profile.profileUrl() + "\">"
                                 "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile.profileUrl() + "</span></a>");

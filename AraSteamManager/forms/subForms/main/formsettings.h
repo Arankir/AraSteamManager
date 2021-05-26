@@ -50,7 +50,7 @@ namespace Ui {
 class FormSettings;
 }
 
-class FormSettings : public QWidget {
+class FormSettings : public Form {
     Q_OBJECT
 
 public:
@@ -64,7 +64,6 @@ signals:
     void s_updateSettings();
 
 private slots:
-    void changeEvent(QEvent *event);
     void initComponents();
     void initExport();
 
@@ -79,7 +78,9 @@ private slots:
 
     void achievementsClicked();
     void hideClicked();
-    void retranslate();
+    void retranslate() override;
+    void updateSettings() override {};
+    void updateIcons() override {};
 
     void checkBoxVisibleHiddenGames_StateChanged(int arg1);
     void checkBoxSaveImage_StateChanged(int arg1);

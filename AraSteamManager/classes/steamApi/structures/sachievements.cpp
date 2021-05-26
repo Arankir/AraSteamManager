@@ -15,6 +15,22 @@ bool SAchievement::operator<(const SAchievement &aAchievement) const {
     return displayName().compare(aAchievement.displayName(), Qt::CaseInsensitive) < 0;
 }
 
+bool SAchievement::operator>(const SAchievement &aAchievement) const {
+    return displayName().compare(aAchievement.displayName(), Qt::CaseInsensitive) > 0;
+}
+
+bool SAchievement::operator==(const SAchievement &aAchievement) const {
+    return (_schema == aAchievement._schema &&
+            _percentage == aAchievement._percentage &&
+            _player == aAchievement._player);
+}
+
+bool SAchievement::operator!=(const SAchievement &aAchievement) const {
+    return (_schema != aAchievement._schema ||
+            _percentage != aAchievement._percentage ||
+            _player != aAchievement._player);
+}
+
 QJsonObject SAchievement::toJson() const {
     QJsonObject obj;
     obj["type"] = className();
@@ -33,6 +49,26 @@ QPixmap SAchievement::iconGray(int aGameId) {
 }
 #define SAchievementEnd }
 
+bool SAchievementSchema::operator==(const SAchievementSchema &aGlobal) const {
+    return (_apiName == aGlobal._apiName &&
+    _defaultValue == aGlobal._defaultValue &&
+    _displayName == aGlobal._displayName &&
+    _hidden == aGlobal._hidden &&
+    _description == aGlobal._description &&
+    _icon == aGlobal._icon &&
+    _iconGray == aGlobal._iconGray);
+}
+
+bool SAchievementSchema::operator!=(const SAchievementSchema &aGlobal) const {
+    return (_apiName != aGlobal._apiName ||
+    _defaultValue != aGlobal._defaultValue ||
+    _displayName != aGlobal._displayName ||
+    _hidden != aGlobal._hidden ||
+    _description != aGlobal._description ||
+    _icon != aGlobal._icon ||
+    _iconGray != aGlobal._iconGray);
+}
+
 QJsonObject SAchievementSchema::toJson() const {
     QJsonObject obj;
     obj["type"] = className();
@@ -48,7 +84,7 @@ QJsonObject SAchievementSchema::toJson() const {
 
 QList<SAchievementSchema> onLoadSchema(QByteArray byteArray) {
     QList<SAchievementSchema> list;
-    for (const auto &schema: QJsonDocument::fromJson(byteArray).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray()) {
+    for(auto &&schema: QJsonDocument::fromJson(byteArray).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray()) {
         list.append(std::move(SAchievementSchema(schema.toObject())));
     }
     return list;
@@ -56,6 +92,16 @@ QList<SAchievementSchema> onLoadSchema(QByteArray byteArray) {
 
 QList<SAchievementSchema> SAchievementSchema::load(const QString &appid, std::function<void (QList<SAchievementSchema>)> aCallback) {
     return Sapi::load<SAchievementSchema>(achievementsSchemaUrl(appid), onLoadSchema, aCallback);
+}
+
+bool SAchievementPercentage::operator==(const SAchievementPercentage &aAchievement) const {
+    return (_apiName == aAchievement._apiName &&
+            _percent == aAchievement._percent);
+}
+
+bool SAchievementPercentage::operator!=(const SAchievementPercentage &aAchievement) const {
+    return (_apiName != aAchievement._apiName ||
+            _percent != aAchievement._percent);
 }
 
 QJsonObject SAchievementPercentage::toJson() const {
@@ -68,7 +114,7 @@ QJsonObject SAchievementPercentage::toJson() const {
 
 QList<SAchievementPercentage> onLoadPercentage(QByteArray byteArray) {
     QList<SAchievementPercentage> list;
-    for (const auto &percentage: QJsonDocument::fromJson(byteArray).object().value("achievementpercentages").toObject().value("achievements").toArray()) {
+    for(auto &&percentage: QJsonDocument::fromJson(byteArray).object().value("achievementpercentages").toObject().value("achievements").toArray()) {
         list.append(std::move(SAchievementPercentage(percentage.toObject())));
     }
     return list;
@@ -76,6 +122,18 @@ QList<SAchievementPercentage> onLoadPercentage(QByteArray byteArray) {
 
 QList<SAchievementPercentage> SAchievementPercentage::load(const QString &appid, std::function<void (QList<SAchievementPercentage>)> aCallback) {
     return Sapi::load<SAchievementPercentage>(achievementsPercentUrl(appid), onLoadPercentage, aCallback);
+}
+
+bool SAchievementPlayer::operator==(const SAchievementPlayer &aAchievement) const {
+    return (_apiName == aAchievement._apiName &&
+            _achieved == aAchievement._achieved &&
+            _unlockTime == aAchievement._unlockTime);
+}
+
+bool SAchievementPlayer::operator!=(const SAchievementPlayer &aAchievement) const {
+    return (_apiName != aAchievement._apiName ||
+            _achieved != aAchievement._achieved ||
+            _unlockTime != aAchievement._unlockTime);
 }
 
 QJsonObject SAchievementPlayer::toJson() const {
@@ -89,7 +147,7 @@ QJsonObject SAchievementPlayer::toJson() const {
 
 QList<SAchievementPlayer> onLoadPlayer(QByteArray byteArray) {
     QList<SAchievementPlayer> list;
-    for (const auto &player: QJsonDocument::fromJson(byteArray).object().value("playerstats").toObject().value("achievements").toArray()) {
+    for(auto &&player: QJsonDocument::fromJson(byteArray).object().value("playerstats").toObject().value("achievements").toArray()) {
         list.append(std::move(SAchievementPlayer(player.toObject())));
     }
     return list;
@@ -99,14 +157,25 @@ QList<SAchievementPlayer> SAchievementPlayer::load(const QString &appid, const Q
     return Sapi::load<SAchievementPlayer>(achievementsPlayerUrl(appid, id), onLoadPlayer, aCallback);
 }
 
-QList<SAchievement> UniteAchievement(const QList<SAchievementSchema> &global, const QList<SAchievementPercentage> &percent, const QList<SAchievementPlayer> &player) {
+int SAchievementPlayer::countAchieved(const QList<SAchievementPlayer> &achievements) {
+    int i = 0;
+    for (const auto &achievement: achievements) {
+        if (achievement.achieved() > 0) {
+            ++i;
+        }
+    }
+    return i;
+}
+
+SAchievements UniteAchievement(const QList<SAchievementSchema> &global, const QList<SAchievementPercentage> &percent, const QList<SAchievementPlayer> &player) {
     QList<SAchievement> list;
     for (const auto &percent: percent) {
-        int globalIndex = -1;
-        for (const auto &player: player) {
-            SAchievementSchema localGlobal = global[++globalIndex];
-            if (percent.apiName() == player.apiName()) {
-                list.push_back(SAchievement(localGlobal, player, percent));
+        auto iterGlobal = global.begin();
+        auto iterPlayer = player.begin();
+        for (;iterGlobal != global.end() && iterPlayer != player.end();
+             ++iterGlobal, ++iterPlayer) {
+            if (percent.apiName() == (*iterPlayer).apiName()) {
+                list.push_back(std::move(SAchievement((*iterGlobal), (*iterPlayer), percent)));
                 break;
             }
         }

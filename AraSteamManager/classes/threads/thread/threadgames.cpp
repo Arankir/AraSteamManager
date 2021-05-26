@@ -5,7 +5,7 @@ int ThreadGames::fill() {
     int row = 0;
     QStandardItemModel *model = new QStandardItemModel;
     model->setColumnCount(ColumnGamesCount);
-    for (auto game: qAsConst(_games)) {
+    for (auto &game: _games) {
         QStandardItem *itemId = new QStandardItem(game.sAppId());
 
         QStandardItem *itemIndex = new QStandardItem(QString::number(row));
@@ -31,6 +31,7 @@ int ThreadGames::fill() {
         ++row;
     }
     emit s_finishedModel(model);
+    emit s_finished();
     return 1;
 }
 

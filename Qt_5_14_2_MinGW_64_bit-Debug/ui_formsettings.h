@@ -130,6 +130,14 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QFrame *FrameProfilesHideGames;
     QTableWidget *TableWidgetGames;
+    QWidget *tab;
+    QVBoxLayout *verticalLayout_19;
+    QLabel *label_7;
+    QLabel *label_8;
+    QLabel *label_9;
+    QLabel *label_10;
+    QLabel *label_11;
+    QSpacerItem *verticalSpacer_3;
 
     void setupUi(QWidget *FormSettings)
     {
@@ -602,13 +610,55 @@ public:
         verticalLayout_4->addLayout(horizontalLayout_4);
 
         tabWidget->addTab(tab_3, QString());
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        verticalLayout_19 = new QVBoxLayout(tab);
+        verticalLayout_19->setObjectName(QString::fromUtf8("verticalLayout_19"));
+        label_7 = new QLabel(tab);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setWordWrap(true);
+
+        verticalLayout_19->addWidget(label_7);
+
+        label_8 = new QLabel(tab);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setWordWrap(true);
+
+        verticalLayout_19->addWidget(label_8);
+
+        label_9 = new QLabel(tab);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Ebrima"));
+        font2.setItalic(true);
+        label_9->setFont(font2);
+
+        verticalLayout_19->addWidget(label_9);
+
+        label_10 = new QLabel(tab);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setFont(font2);
+        label_10->setTextFormat(Qt::RichText);
+
+        verticalLayout_19->addWidget(label_10);
+
+        label_11 = new QLabel(tab);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        verticalLayout_19->addWidget(label_11);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_19->addItem(verticalSpacer_3);
+
+        tabWidget->addTab(tab, QString());
 
         verticalLayout_5->addWidget(tabWidget);
 
 
         retranslateUi(FormSettings);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(4);
         ToolBoxExport->setCurrentIndex(0);
 
 
@@ -652,6 +702,12 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("FormSettings", "  \320\230\320\274\320\277\320\276\321\200\321\202  ", nullptr));
         ButtonFindGame->setText(QCoreApplication::translate("FormSettings", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("FormSettings", "  \320\241\320\272\321\200\321\213\321\202\321\213\320\265 \320\270\320\263\321\200\321\213  ", nullptr));
+        label_7->setText(QCoreApplication::translate("FormSettings", "\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: 1.285475", nullptr));
+        label_8->setText(QCoreApplication::translate("FormSettings", "\320\242\320\260\320\272 \320\266\320\265 \321\201\320\277\320\260\321\201\320\270\320\261\320\276 \320\267\320\260 \320\277\320\276\320\274\320\276\321\211\321\214 \320\262 \321\200\320\260\320\267\321\200\320\260\320\261\320\276\321\202\320\272\320\265:", nullptr));
+        label_9->setText(QCoreApplication::translate("FormSettings", "-\320\230\320\264\321\200\320\270\321\201\320\276\320\262 \320\242\320\260\320\263\320\270\321\200", nullptr));
+        label_10->setText(QCoreApplication::translate("FormSettings", "<html><head/><body><p>-<a href=https://arturosipov.com>\320\236\321\201\320\270\320\277\320\276\320\262 \320\220\321\200\321\202\321\203\321\200</a></p></body></html>", nullptr));
+        label_11->setText(QCoreApplication::translate("FormSettings", "-\320\235\320\270\320\272\320\270\321\202\320\270\320\275 \320\222\320\260\321\201\320\270\320\273\320\270\320\271", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("FormSettings", "\320\236 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\320\265", nullptr));
     } // retranslateUi
 
 };

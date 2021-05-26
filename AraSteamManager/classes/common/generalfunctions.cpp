@@ -1,7 +1,37 @@
 #include "generalfunctions.h"
 #include <QDir>
+#include <QFile>
 
 const int c_toolTipMaxWidth = 30;
+
+QString textToToolTip(const QString &aText, const QString &aSplitter) {
+    QStringList wordsList = aText.split(aSplitter);
+    QString result;
+    int currentWidth = 0;
+    while (!wordsList.isEmpty()) {
+        if (wordsList[0].length() + currentWidth > c_toolTipMaxWidth) {
+            if (currentWidth > 0) {
+                result += aSplitter + "\n";
+                currentWidth = 0;
+            } else {
+                QString longWord = wordsList.takeFirst();
+                while (longWord.length() > c_toolTipMaxWidth) {
+                    result += longWord.left(c_toolTipMaxWidth) + "\n";
+                    longWord.remove(0, c_toolTipMaxWidth);
+                }
+                result += longWord;
+                currentWidth = longWord.length();
+            }
+        }
+        if (currentWidth != 0) {
+            result += aSplitter;
+            ++currentWidth;
+        }
+        currentWidth += wordsList[0].length();
+        result += wordsList.takeFirst();
+    }
+    return result;
+}
 
 bool createDir(const QString &aPath) {
     bool exist = true;
@@ -19,31 +49,40 @@ bool createDir(const QString &aPath) {
     return exist;
 }
 
-QString textToToolTip(QString aText) {
-    QStringList wordsList = aText.split(" ");
-    QString result;
-    int currentWidth = 0;
-    while (!wordsList.isEmpty()) {
-        if (wordsList[0].length() + currentWidth > c_toolTipMaxWidth) {
-            if (currentWidth > 0) {
-                result += "\n";
-                currentWidth = 0;
-            } else {
-                QString longWord = wordsList.takeFirst();
-                while (longWord.length() > c_toolTipMaxWidth) {
-                    result += longWord.left(c_toolTipMaxWidth) + "\n";
-                    longWord.remove(0, c_toolTipMaxWidth);
-                }
-                result += longWord;
-                currentWidth = longWord.length();
-            }
+bool saveFile(const QString &aFilePath, const QByteArray &aData) {
+    createDir(aFilePath);
+    QFile file(aFilePath);
+    file.open(QFile::WriteOnly);
+    int bytes = file.write(aData);
+    file.close();
+    return bytes != -1;
+}
+
+bool readFile(const QString &aFilePath, QByteArray &bytes) {
+    bool isCompleted = false;
+    bytes.clear();
+    createDir(aFilePath);
+    QFile file(aFilePath);
+    if (file.exists()) {
+        if (file.open(QFile::ReadOnly)) {
+            bytes = file.readAll();
+            file.close();
+            isCompleted = true;
         }
-        if (currentWidth != 0) {
-            result += " ";
-            ++currentWidth;
-        }
-        currentWidth += wordsList[0].length();
-        result += wordsList.takeFirst();
     }
-    return result;
+    return isCompleted;
+}
+
+QTableView *initingTable(QTableView *table) {
+    table->setVerticalScrollMode  (QAbstractItemView::ScrollMode::ScrollPerPixel);
+    table->setHorizontalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
+
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table->setShowGrid(false);
+    table->setSortingEnabled(true);
+    table->horizontalHeader()->setStretchLastSection(true);
+    table->verticalHeader()->setVisible(false);
+    table->setContextMenuPolicy(Qt::CustomContextMenu);
+    table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    return table;
 }

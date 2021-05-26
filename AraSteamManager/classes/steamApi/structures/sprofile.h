@@ -18,24 +18,28 @@ public:
         _profileUrl(profile._profileUrl), _personaState(profile._personaState), _primaryClanID(profile._primaryClanID), _timeCreated(profile._timeCreated),
         _personaStateFlags(profile._personaStateFlags), _gameExtraInfo(profile._gameExtraInfo), _gameID(profile._gameID), _locCountryCode(profile._locCountryCode),
         _locStateCode(profile._locStateCode), _locCityID(profile._locCityID), _realName(profile._realName), _avatar(profile._avatar), _avatarMedium(profile._avatarMedium),
-        _avatarFull(profile._avatarFull), _pixmapAvatar(profile._pixmapAvatar), _pixmapAvatarMedium(profile._pixmapAvatarMedium), _pixmapAvatarFull(profile._pixmapAvatarFull) {}
+        _avatarFull(profile._avatarFull)/*, _pixmapAvatar(profile._pixmapAvatar), _pixmapAvatarMedium(profile._pixmapAvatarMedium), _pixmapAvatarFull(profile._pixmapAvatarFull)*/ {}
     ~SProfile() {}
 
-    SProfile &  operator=(const SProfile &profile);
-    bool operator==(const SProfile &profile);
-    bool operator!=(const SProfile &profile);
-    bool operator<(const SProfile &profile);
+    SProfile &operator=(const SProfile &profile);
+    bool operator<(const SProfile &profile) const;
+    bool operator>(const SProfile &profile) const;
+    bool operator==(const SProfile &profile) const;
+    bool operator!=(const SProfile &profile) const;
 
     SProfile &update();
     QJsonObject toJson() const;
     virtual QString className() const {return "SProfile";}
-    static SProfile load(QString aId, SProfileRequestType aType, std::function<void (SProfile)> aCallback = nullptr);
+    static SProfile load(const QString &aId, const SProfileRequestType &aType, std::function<void (SProfile)> aCallback = nullptr);
     static QList<SProfile> load(QStringList ids, std::function< void(QList<SProfile>) > callback = nullptr);
-    static int getLevel(QString aSteamId);
+    static int getLevel(const QString &aSteamId);
 
-    QPixmap pixmapAvatar();
-    QPixmap pixmapAvatarMedium();
-    QPixmap pixmapAvatarFull();
+    QPixmap pixmapAvatar() const;
+    QPixmap pixmapAvatarMedium() const;
+    QPixmap pixmapAvatarFull() const;
+
+    QColor stateColor() const;
+    QString stateText() const;
 
     QString steamID()               const {return _steamID;}
     int communityVisibilityState()  const {return _communityVisibilityState;}
@@ -55,12 +59,10 @@ public:
     int locCityID()                 const {return _locCityID;}
     QString realName()              const {return _realName;}
 
-signals:
-    void s_finished(SProfile*);
-    void s_finished();
-
 private slots:
     void fromJson(const QJsonValue &value);
+    static SProfile loadVanity(const QString &aId, std::function<void (SProfile)> aCallback = nullptr);
+    static SProfile loadId(const QString &aId, std::function<void (SProfile)> aCallback = nullptr);
 
 private:
     QString _steamID = "";
@@ -85,9 +87,9 @@ private:
     QString _avatarMedium;
     QString _avatarFull;
 
-    QPixmap _pixmapAvatar;
-    QPixmap _pixmapAvatarMedium;
-    QPixmap _pixmapAvatarFull;
+//    QPixmap _pixmapAvatar;
+//    QPixmap _pixmapAvatarMedium;
+//    QPixmap _pixmapAvatarFull;
 
 };
 

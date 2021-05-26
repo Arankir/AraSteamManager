@@ -79,7 +79,7 @@ void FormFriendItemCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_delete(); break;
-        case 1: _t->s_filterChanged((*reinterpret_cast< SProfile*(*)>(_a[1])),(*reinterpret_cast< ReachedType(*)>(_a[2]))); break;
+        case 1: _t->s_filterChanged((*reinterpret_cast< SProfile*(*)>(_a[1])),(*reinterpret_cast< const ReachedType(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -103,7 +103,7 @@ void FormFriendItemCompare::qt_static_metacall(QObject *_o, QMetaObject::Call _c
             }
         }
         {
-            using _t = void (FormFriendItemCompare::*)(SProfile * , ReachedType );
+            using _t = void (FormFriendItemCompare::*)(SProfile * , const ReachedType & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormFriendItemCompare::s_filterChanged)) {
                 *result = 1;
                 return;
@@ -159,7 +159,7 @@ void FormFriendItemCompare::s_delete()
 }
 
 // SIGNAL 1
-void FormFriendItemCompare::s_filterChanged(SProfile * _t1, ReachedType _t2)
+void FormFriendItemCompare::s_filterChanged(SProfile * _t1, const ReachedType & _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

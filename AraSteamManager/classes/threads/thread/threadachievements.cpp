@@ -1,12 +1,14 @@
 #include "threadachievements.h"
+#include "classes/common/generalfunctions.h"
 
 int ThreadAchievements::fill() {
     //QFont font(Settings::defaultFont(), 10);
     int totalReached = 0;
     int totalNotReached = 0;
     int row = 1;
+    createDir(Paths::imagesAchievements(QString::number(_gameAppId)));
     QStandardItemModel *model = new QStandardItemModel;
-    model->setColumnCount(ColumnAchievementsCount);
+    model->setColumnCount(AchievementCount);
     for (auto &achievement: _achievements) {
         QStandardItem *itemId = new QStandardItem(achievement.apiName());
 
@@ -24,7 +26,7 @@ int ThreadAchievements::fill() {
 
         QStandardItem *itemAchieved = new QStandardItem();
         if (achievement.achieved() == 1) {
-            itemAchieved->setText(achievement.unlockTime().toString("yyyy.MM.dd hh:mm"));
+            itemAchieved->setText(achievement.unlockTime().toString(Settings::dateTimeFormatShort()));
             itemAchieved->setForeground(c_achievedColor);
             ++totalReached;
         } else {
@@ -38,23 +40,24 @@ int ThreadAchievements::fill() {
 //        itemPercent     ->setFont(font);
 //        itemAchieved    ->setFont(font);
 
-        itemTitle->setToolTip(achievement.displayName());
-        itemDescription->setToolTip(achievement.description());
+        itemTitle->setToolTip(textToToolTip(achievement.displayName()));
+        itemDescription->setToolTip(textToToolTip(achievement.description()));
 
         itemPercent->setTextAlignment(Qt::AlignCenter);
         itemAchieved->setTextAlignment(Qt::AlignCenter);
 
-        model->setItem(row, ColumnAchievementsAppid, itemId);
-        model->setItem(row, ColumnAchievementsIndex, itemIndex);
-        model->setItem(row, ColumnAchievementsIcon, itemIcon);
-        model->setItem(row, ColumnAchievementsTitle, itemTitle);
-        model->setItem(row, ColumnAchievementsDescription, itemDescription);
-        //model->setItem(row, ColumnAchievementsComment, itemComment);
-        model->setItem(row, ColumnAchievementsWorld, itemPercent);
-        model->setItem(row, ColumnAchievementsReachedMy, itemAchieved);
+        model->setItem(row, AchievementAppid, itemId);
+        model->setItem(row, AchievementIndex, itemIndex);
+        model->setItem(row, AchievementIcon, itemIcon);
+        model->setItem(row, AchievementTitle, itemTitle);
+        model->setItem(row, AchievementDescription, itemDescription);
+        //model->setItem(row, FormAchievementsData::ColumnComment, itemComment);
+        model->setItem(row, AchievementWorld, itemPercent);
+        model->setItem(row, AchievementReachedMy, itemAchieved);
         emit s_progress(row, _achievements.count());
         ++row;
     }
     emit s_finishedModel(model, totalReached, totalNotReached);
+    emit s_finished();
     return 1;
 }

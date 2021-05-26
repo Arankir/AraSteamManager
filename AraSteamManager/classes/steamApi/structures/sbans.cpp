@@ -2,7 +2,7 @@
 
 QList<SBan> onLoadBan(QByteArray byteArray) {
     QList<SBan> list;
-    for (const auto &ban: QJsonDocument::fromJson(byteArray).object().value("players").toArray()) {
+    for(auto &&ban: QJsonDocument::fromJson(byteArray).object().value("players").toArray()) {
         list.append(std::move(SBan(ban.toObject())));
     }
     return list;
@@ -25,13 +25,41 @@ QList<SBan> SBan::load(const QString &aId, std::function<void (QList<SBan>)> aCa
     return Sapi::load<SBan>(bansUrl(aId), onLoadBan, aCallback);
 }
 
-SBan &SBan::operator=(const SBan &ban) {
-    _steamId = ban._steamId;
-    _communityBanned = ban._communityBanned;
-    _vacBanned = ban._vacBanned;
-    _numberOfVacBan = ban._numberOfVacBan;
-    _daysSinceLastBan = ban._daysSinceLastBan;
-    _numberOfGameBans = ban._numberOfGameBans;
-    _economyBan = ban._economyBan;
+SBan &SBan::operator=(const SBan &aBan) {
+    _steamId = aBan._steamId;
+    _communityBanned = aBan._communityBanned;
+    _vacBanned = aBan._vacBanned;
+    _numberOfVacBan = aBan._numberOfVacBan;
+    _daysSinceLastBan = aBan._daysSinceLastBan;
+    _numberOfGameBans = aBan._numberOfGameBans;
+    _economyBan = aBan._economyBan;
     return *this;
+}
+
+bool SBan::operator<(const SBan &aBan) const {
+    return _steamId < aBan._steamId;
+}
+
+bool SBan::operator>(const SBan &aBan) const {
+    return _steamId > aBan._steamId;
+}
+
+bool SBan::operator==(const SBan &aBan) const {
+    return (_steamId == aBan._steamId &&
+            _communityBanned == aBan._communityBanned &&
+            _vacBanned == aBan._vacBanned &&
+            _numberOfVacBan == aBan._numberOfVacBan &&
+            _daysSinceLastBan == aBan._daysSinceLastBan &&
+            _numberOfGameBans == aBan._numberOfGameBans &&
+            _economyBan == aBan._economyBan);
+}
+
+bool SBan::operator!=(const SBan &aBan) const {
+    return (_steamId != aBan._steamId ||
+            _communityBanned != aBan._communityBanned ||
+            _vacBanned != aBan._vacBanned ||
+            _numberOfVacBan != aBan._numberOfVacBan ||
+            _daysSinceLastBan != aBan._daysSinceLastBan ||
+            _numberOfGameBans != aBan._numberOfGameBans ||
+            _economyBan != aBan._economyBan);
 }

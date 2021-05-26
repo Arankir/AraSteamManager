@@ -2,7 +2,7 @@
 #include "classes/common/settings.h"
 #include "classes/common/generalfunctions.h"
 
-RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, const QString &aSave, bool aAutoSave, QObject *aParent): QObject(aParent),
+RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, const QString &aSave, const bool &aAutoSave, QObject *aParent): QObject(aParent),
 _label(aLabel), _save(aSave), _autosave(aAutoSave) {
     RequestData *image = new RequestData(aUrl, true, this);
     connect(image, SIGNAL(s_finished(RequestData*)), this, SLOT(onLoad(RequestData*)));

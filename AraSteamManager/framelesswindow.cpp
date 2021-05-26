@@ -34,9 +34,9 @@ FramelessWindow::FramelessWindow(QWidget *target):
     ui->ButtonMaximize  ->setFlat(true);
     ui->ButtonExit      ->setFlat(true);
 
-    connect(ui->ButtonMaximize,      &QPushButton::clicked, this, &FramelessWindow::buttonMaximize_Clicked);
-    connect(ui->ButtonMinimize,      &QPushButton::clicked, this, &FramelessWindow::buttonMinimize_Clicked);
-    connect(ui->ButtonExit,          &QPushButton::clicked, this, &FramelessWindow::buttonExit_Clicked);
+    connect(ui->ButtonMaximize, &QPushButton::clicked, this, &FramelessWindow::buttonMaximize_Clicked);
+    connect(ui->ButtonMinimize, &QPushButton::clicked, this, &FramelessWindow::buttonMinimize_Clicked);
+    connect(ui->ButtonExit,     &QPushButton::clicked, this, &FramelessWindow::buttonExit_Clicked);
     setIcons();
 }
 

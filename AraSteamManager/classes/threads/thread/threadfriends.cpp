@@ -1,6 +1,6 @@
 #include "threadfriends.h"
 
-QStandardItem *getState(const QString &aGameExtraInfo, int aPersonaState) {
+QStandardItem *getState(const QString &aGameExtraInfo, const int &aPersonaState) {
     QStandardItem *item = new QStandardItem;
     if (!aGameExtraInfo.isEmpty()) {
         item->setText(QObject::tr("В игре"));
@@ -46,7 +46,7 @@ QStandardItem *getState(const QString &aGameExtraInfo, int aPersonaState) {
     return item;
 }
 
-QStandardItem *getPrivacy(int aCommunityVisibilityState) {
+QStandardItem *getPrivacy(const int &aCommunityVisibilityState) {
     QStandardItem *item = new QStandardItem;
     switch (aCommunityVisibilityState) {
     case 1:{
@@ -78,7 +78,7 @@ int ThreadFriends::fill() {
     int row = 0;
     QStandardItemModel *model = new QStandardItemModel;
 
-    for (auto friendP: _friends) {
+    for (auto &friendP: _friends) {
         QStandardItem *itemId = new QStandardItem(friendP.second.steamID());
 
         QStandardItem *itemIndex = new QStandardItem(QString::number(row));
@@ -89,9 +89,10 @@ int ThreadFriends::fill() {
 
         QStandardItem *itemNickName = new QStandardItem(friendP.second.personaName());
 
-        QStandardItem *itemAdded = new QStandardItem(friendP.first.friendSince().toString("yyyy.MM.dd hh:mm"));
+        QStandardItem *itemAdded = new QStandardItem(friendP.first.friendSince().toString(Settings::dateTimeFormatShort()));
 
-        QStandardItem *itemState = getState(friendP.second.gameExtraInfo(), friendP.second.personaState());
+        QStandardItem *itemState = new QStandardItem(friendP.second.stateText());
+        itemState->setForeground(friendP.second.stateColor());// getState(friendP.second.gameExtraInfo(), friendP.second.personaState());
 
         QStandardItem *itemPrivacy = getPrivacy(friendP.second.communityVisibilityState());
 
@@ -100,16 +101,17 @@ int ThreadFriends::fill() {
 //        itemState   ->setFont(font);
 //        itemPrivacy ->setFont(font);
 
-        model->setItem(row, ColumnFriendsID, itemId);
-        model->setItem(row, ColumnFriendsIndex, itemIndex);
-        model->setItem(row, ColumnFriendsIcon, itemIcon);
-        model->setItem(row, ColumnFriendsName, itemNickName);
-        model->setItem(row, ColumnFriendsAdded, itemAdded);
-        model->setItem(row, ColumnFriendsStatus, itemState);
-        model->setItem(row, ColumnFriendsIsPublic, itemPrivacy);
+        model->setItem(row, FriendsID, itemId);
+        model->setItem(row, FriendsIndex, itemIndex);
+        model->setItem(row, FriendsIcon, itemIcon);
+        model->setItem(row, FriendsName, itemNickName);
+        model->setItem(row, FriendsAdded, itemAdded);
+        model->setItem(row, FriendsStatus, itemState);
+        model->setItem(row, FriendsIsPublic, itemPrivacy);
         emit s_progress(row);
         ++row;
     }
     emit s_finishedModel(model);
+    emit s_finished();
     return 1;
 }

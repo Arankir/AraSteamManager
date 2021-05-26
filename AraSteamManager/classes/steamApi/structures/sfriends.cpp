@@ -2,26 +2,33 @@
 
 #define SFriendStart {
 SFriend &SFriend::operator=(const SFriend &) {
+//TODO почему здесь пусто? посмотреть почему оставил пустым
     return *this;
 }
 
-bool SFriend::operator <(const SFriend &aFriend) {
+bool SFriend::operator<(const SFriend &aFriend) const {
     return _steamID.toLower() < aFriend._steamID.toLower();
 }
 
-bool SFriend::operator==(const SFriend &aFriend) {
+bool SFriend::operator>(const SFriend &aFriend) const {
+    return _steamID.toLower() > aFriend._steamID.toLower();
+}
+
+bool SFriend::operator==(const SFriend &aFriend) const {
     return (_steamID == aFriend._steamID &&
             _relationship == aFriend._relationship &&
             _friendSince == aFriend._friendSince);
 }
 
-bool SFriend::operator !=(const SFriend &aFriend) {
-    return !operator==(aFriend);
+bool SFriend::operator!=(const SFriend &aFriend) const {
+    return (_steamID != aFriend._steamID ||
+            _relationship != aFriend._relationship ||
+            _friendSince != aFriend._friendSince);
 }
 
-QList<SFriend> onLoadFriend(QByteArray byteArray) {
+QList<SFriend> onLoadFriend(const QByteArray &byteArray) {
     QList<SFriend> list;
-    for (const auto &ban: QJsonDocument::fromJson(byteArray).object().value("friendslist").toObject().value("friends").toArray()) {
+    for(auto &&ban: QJsonDocument::fromJson(byteArray).object().value("friendslist").toObject().value("friends").toArray()) {
         list.append(std::move(SFriend(ban.toObject())));
     }
     return list;

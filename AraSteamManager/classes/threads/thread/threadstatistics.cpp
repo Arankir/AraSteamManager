@@ -7,33 +7,25 @@ int ThreadStatistics::fill() {
     return 1;
 }
 
-void ThreadStatistics::onResultAchievements(QList<SAchievementPlayer> aAchievements, SGame aGame) {
+void ThreadStatistics::onResultAchievements(const QList<SAchievementPlayer> &aAchievements, const SGame &aGame) {
     static int nowProcessed = 0;
     emit s_progress(nowProcessed);
     if (aAchievements.count() > 0) {
-        int countReached = 0;
-        int countNotReached = 0;
 
-        for (auto &achievement: aAchievements) {
-            if (achievement.achieved() == 1) {
-                updateTimes(achievement.unlockTime());
-                ++countReached;
-            } else {
-                ++countNotReached;
-            }
-        }
-
+        int countReached = countReachedAchievements(aAchievements);
+        int countNotReached = aAchievements.count() - countReached;
         _achievementsCount += aAchievements.count();
 
         if (countNotReached == 0) {
-            _complete.append(aGame);
+            _complete.append(std::move(aGame));
         } else if (countReached == 0) {
-            _notStarted.append(aGame);
+            _notStarted.append(std::move(aGame));
         } else {
-            _started.append(QPair<SGame, double>(aGame, (100.0 * countReached) / (countReached + countNotReached)));
+            _started.append(QPair<SGame, double>(std::move(aGame), (100.0 * countReached) / aAchievements.count()));
         }
+
     } else {
-        _noAchievements.append(aGame);
+        _noAchievements.append(std::move(aGame));
     }
     if (++nowProcessed == _games.count()) {
         emit s_finished();
@@ -41,17 +33,28 @@ void ThreadStatistics::onResultAchievements(QList<SAchievementPlayer> aAchieveme
     }
 }
 
-void ThreadStatistics::updateTimes(const QDateTime &achievementTime) {
+int ThreadStatistics::countReachedAchievements(const QList<SAchievementPlayer> &aAchievements) {
+    int reached = 0;
+    for (auto &achievement: aAchievements) {
+        if (achievement.achieved() == 1) {
+            updateTimes(achievement.unlockTime());
+            ++reached;
+        }
+    }
+    return reached;
+}
+
+void ThreadStatistics::updateTimes(const QDateTime &aUnlockedTime) {
 #define yearType QPair<QString,int>
-    int hour = achievementTime.time().hour();
-    int month = achievementTime.date().month();
-    int year = achievementTime.date().year();
+    int hour = aUnlockedTime.time().hour();
+    int month = aUnlockedTime.date().month();
+    int year = aUnlockedTime.date().year();
     ++_times[hour];
     ++_months[month - 1];
     auto iterator = std::find_if(_years.begin(),
                                  _years.end(),
-                                 [=](const yearType &cYear) {
-                                    return cYear.first.toInt() == year;
+                                 [=](const yearType &lYear) {
+                                    return lYear.first.toInt() == year;
                                  });
     if (iterator != _years.end()) {
         ++(*iterator).second;

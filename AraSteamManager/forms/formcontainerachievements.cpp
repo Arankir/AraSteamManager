@@ -1,7 +1,7 @@
 #include "formcontainerachievements.h"
 #include "ui_formcontainerachievements.h"
 
-FormContainerAchievements::FormContainerAchievements(QWidget *parent): QWidget(parent), ui(new Ui::FormContainerAchievements) {
+FormContainerAchievements::FormContainerAchievements(QWidget *parent): Form(parent), ui(new Ui::FormContainerAchievements) {
     ui->setupUi(this);
     if (parentWidget()) {
         parentWidget()->setGeometry(Settings::achievementContainerGeometry());
@@ -15,35 +15,37 @@ FormContainerAchievements::~FormContainerAchievements() {
 }
 
 void FormContainerAchievements::show() {
-    parentWidget()->parentWidget()->show();
+    window()->show();
 }
 
 void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
     Q_UNUSED(aEvent);
-    if (parentWidget()->parentWidget()) {
-        Settings::setAchievementContainerParams(parentWidget()->parentWidget()->geometry());
+    if (FramelessWindow *framelessWindow = window()) {
+        Settings::setAchievementContainerParams(framelessWindow->geometry());
     }
     Settings::syncronizeSettings();
     emit s_formClose();
 }
 
-void FormContainerAchievements::addFormAchievement(QList<SAchievementPlayer> &aPl, SProfile aProfile, SGame &aGame) {
+void FormContainerAchievements::addFormAchievement(/*QList<SAchievementPlayer> &aPl, */SProfile aProfile, SGame &aGame) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); ++i) {
-        FormAchievements *achievements = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements->widget(i));
-        if (achievements) {
+        if (FormAchievements *achievements = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements->widget(i))) {
             if((achievements->getGameAppId() == aGame.appId()) && (achievements->getProfileId() == aProfile.steamID())) {
-                achievements->buttonUpdate_Clicked();
+                achievements->update();
                 ui->TabWidgetAchievements->setCurrentIndex(i);
                 return;
             }
         }
     }
-    int tabIndex = ui->TabWidgetAchievements->addTab(new FormAchievements(aPl, aProfile, aGame, this), aGame.name());
+    auto achievements = new FormAchievements(this);
+    int tabIndex = ui->TabWidgetAchievements->addTab(achievements, aGame.name());
     ui->TabWidgetAchievements->setTabIcon(tabIndex, aGame.pixmapIcon());
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
+    achievements->setData(/*aPl, */aProfile, aGame);
 }
 
 void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int aIndex) {
+    delete ui->TabWidgetAchievements->widget(aIndex);
     ui->TabWidgetAchievements->removeTab(aIndex);
     if(ui->TabWidgetAchievements->count() == 0) {
         close();

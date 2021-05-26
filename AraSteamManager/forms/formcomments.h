@@ -11,16 +11,18 @@ namespace Ui {
 class FormComments;
 }
 
-class FormComments : public QWidget
+class FormComments : public Form
 {
     Q_OBJECT
 
 public:
-    explicit FormComments(const SProfile &profile, const SGame &game, SAchievement *achievement = nullptr, QWidget *parent = nullptr);
+    explicit FormComments(QWidget *parent = nullptr);;
+    explicit FormComments(const SProfile &profile, const SGame &game, const SAchievement &achievement = SAchievement(), QWidget *parent = nullptr);
+    void setData(const SProfile &aProfile, const SGame &aGame, const SAchievement &aAchievement);
     ~FormComments();
 
 signals:
-    void s_updateComments(bool);
+    void s_updateComments();
 
 private slots:
     void init();
@@ -29,13 +31,15 @@ private slots:
 
     void on_ButtonApply_clicked();
 
+    void retranslate() override;
+    void updateIcons() override;
+    void updateSettings() override;
+
 private:
     Ui::FormComments *ui;
     SGame _game;
-    SAchievement *_achievement;
+    SAchievement _achievement;
     SProfile _profile;
-
-    Comments _comment;
 };
 
 #endif // FORMCOMMENTSINTERACTIONS_H

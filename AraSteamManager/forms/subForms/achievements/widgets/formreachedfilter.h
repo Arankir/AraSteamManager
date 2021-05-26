@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "classes/common/settings.h"
 #include "subWidgets/withData/qradiobuttonwithdata.h"
+#include "form.h"
 
 enum class ReachedType {
     reached = 0,
@@ -17,23 +18,24 @@ namespace Ui {
 class FormReachedFilter;
 }
 
-class FormReachedFilter: public QWidget {
+class FormReachedFilter: public Form {
     Q_OBJECT
 
 public:
     explicit FormReachedFilter(QWidget *parent = nullptr);
     ~FormReachedFilter();
-    void setType(ReachedType);
+    void setType(const ReachedType&);
     void update();
 
 public slots:
-    void updateSettings();
-    void setIcons();
+    void updateSettings() override;
+
 signals:
-    void s_radioButtonChange(ReachedType type);
+    void s_radioButtonChange(const ReachedType &type);
 
 private slots:
-    void changeEvent(QEvent *event);
+    void updateIcons() override;
+    void retranslate() override;;
     void slideValueChanged();
 
 private:

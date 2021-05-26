@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network charts
+QT       += core gui network charts testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -41,17 +41,16 @@ SOURCES += \
     classes/steamApi/structures/sfriends.cpp \
     classes/steamApi/structures/sgames.cpp \
     classes/steamApi/structures/sprofile.cpp \
-    classes/threads/thread/threadachievements.cpp \
-    classes/threads/thread/threadfriends.cpp \
-    classes/threads/thread/threadgames.cpp \
     classes/threads/thread/threadstatistics.cpp \
-    classes/threads/threading.cpp \
+    classes/threads/threadloading.cpp \
+    form.cpp \
     forms/formcomments.cpp \
     forms/formcontainerachievements.cpp \
     forms/formgroups.cpp \
     forms/formmain.cpp \
     forms/subForms/achievements/formachievements.cpp \
     forms/subForms/achievements/formcategoriesedit.cpp \
+    forms/subForms/achievements/formcategoriestree.cpp \
     forms/subForms/achievements/formfriendscompare.cpp \
     forms/subForms/achievements/widgets/formfrienditemcompare.cpp \
     forms/subForms/achievements/widgets/formreachedfilter.cpp \
@@ -70,6 +69,10 @@ SOURCES += \
     subWidgets/items/qlistwidgetfriend.cpp \
     subWidgets/labels/labellight.cpp \
     subWidgets/lists/qlistwidgetachievements.cpp \
+    subWidgets/models/achievementsmodel.cpp \
+    subWidgets/models/filters.cpp \
+    subWidgets/models/friendsmodel.cpp \
+    subWidgets/models/gamesmodel.cpp \
     subWidgets/models/listachievementsmodel.cpp \
     subWidgets/progressBars/progressbarbad.cpp \
     subWidgets/progressBars/progressbargood.cpp \
@@ -97,17 +100,16 @@ HEADERS += \
     classes/steamApi/structures/sfriends.h \
     classes/steamApi/structures/sgames.h \
     classes/steamApi/structures/sprofile.h \
-    classes/threads/thread/threadachievements.h \
-    classes/threads/thread/threadfriends.h \
-    classes/threads/thread/threadgames.h \
     classes/threads/thread/threadstatistics.h \
-    classes/threads/threading.h \
+    classes/threads/threadloading.h \
+    form.h \
     forms/formcomments.h \
     forms/formcontainerachievements.h \
     forms/formgroups.h \
     forms/formmain.h \
     forms/subForms/achievements/formachievements.h \
     forms/subForms/achievements/formcategoriesedit.h \
+    forms/subForms/achievements/formcategoriestree.h \
     forms/subForms/achievements/formfriendscompare.h \
     forms/subForms/achievements/widgets/formfrienditemcompare.h \
     forms/subForms/achievements/widgets/formreachedfilter.h \
@@ -125,6 +127,10 @@ HEADERS += \
     subWidgets/items/qlistwidgetfriend.h \
     subWidgets/labels/labellight.h \
     subWidgets/lists/qlistwidgetachievements.h \
+    subWidgets/models/achievementsmodel.h \
+    subWidgets/models/filters.h \
+    subWidgets/models/friendsmodel.h \
+    subWidgets/models/gamesmodel.h \
     subWidgets/models/listachievementsmodel.h \
     subWidgets/progressBars/progressbarbad.h \
     subWidgets/progressBars/progressbargood.h \

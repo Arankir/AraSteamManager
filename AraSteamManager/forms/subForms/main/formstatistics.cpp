@@ -24,8 +24,8 @@ QStringList getMonthTitles() {
 #undef tr
 }
 
-FormStatistics::FormStatistics(const SProfile &aProfile, QList<SGame> &aGames, QWidget *aParent):
-QWidget(aParent), ui(new Ui::FormStatistics), _profile(aProfile), _games(aGames) {
+FormStatistics::FormStatistics(const SProfile &aProfile, SGames &aGames, QWidget *aParent):
+Form(aParent), ui(new Ui::FormStatistics), _profile(aProfile), _games(aGames) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
 //    QFont font(Settings::defaultFont());
@@ -75,7 +75,7 @@ QWidget(aParent), ui(new Ui::FormStatistics), _profile(aProfile), _games(aGames)
             if (player.count() == 0) {
                 QMessageBox::warning(this, tr("Ошибка"), tr("В этой игре нет достижений"));
             } else {
-                emit s_showAchievements(player, *game);
+                emit s_showAchievements(*game);
             }
         }
     });
@@ -148,16 +148,10 @@ QMenu *FormStatistics::createMenu(SGame &aGame) {
         if (player.count() == 0) {
             QMessageBox::warning(this, tr("Ошибка"), tr("В этой игре нет достижений"));
         } else {
-            emit s_showAchievements(player, aGame);
+            emit s_showAchievements(aGame);
         }});
 
     return menu;
-}
-
-void FormStatistics::changeEvent(QEvent *aEvent) {
-    if(aEvent->type() == QEvent::LanguageChange) {
-        retranslate();
-    }
 }
 
 void FormStatistics::retranslate() {
@@ -216,12 +210,12 @@ void FormStatistics::retranslate() {
 }
 
 void FormStatistics::createThread() {
-    Threading *loadData = new Threading(this);
-    loadData->AddThreadStatistics(_games, _profile.steamID(), _noAchievements, _complete, _started, _notStarted, _achievementCount, _times, _months, _years);
-    connect (loadData, &Threading::s_statistics_progress, this, [=](int progress) {
-        emit s_statisticsLoaded(progress);
-    });
-    connect (loadData, &Threading::s_statistics_finished, this, &FormStatistics::onFinish);
+    ThreadStatistics *statistics = new ThreadStatistics(_games, _profile.steamID(), _achievementCount, _noAchievements, _complete, _started, _notStarted, _times, _months, _years);
+    connect(statistics, &ThreadStatistics::s_progress,  this, [=](int progress) {
+                                                                            emit s_statisticsLoaded(progress);
+                                                                        });
+    connect(statistics, &ThreadStatistics::s_finished,  this, &FormStatistics::onFinish);
+    statistics->start();
 }
 
 QChart *setDataToChart(QChart *chart, QBarCategoryAxis *axisX, int maxY, QBarSet *barSet) {
@@ -293,10 +287,10 @@ void FormStatistics::onFinish() {
                                                                                 QString::number(_summAverages / (_complete.count() + _started.count()))));
     ui->LabelSummColumnValue->setText(QString::number(_achievementCount));
 
-    sort<SGame>(_complete);
-    sort<QPair<SGame,double>>(_started, [](QPair<SGame,double> &game1, QPair<SGame,double> &game2) {return game1.first < game2.first;});
-    sort<SGame>(_notStarted);
-    sort<SGame>(_noAchievements);
+    mySort<SGame>(_complete);
+    mySort<QPair<SGame,double>>(_started, [](QPair<SGame,double> &game1, QPair<SGame,double> &game2) {return game1.first < game2.first;});
+    mySort<SGame>(_notStarted);
+    mySort<SGame>(_noAchievements);
 
     #define SetChartDonut {
     QPieSeries *series = new QPieSeries();
@@ -325,7 +319,7 @@ void FormStatistics::onFinish() {
     for(int i = 0; i < 24; ++i) {
         *barSetT << _times[i];
     }
-    setDataToChart(_chartT, axisXT, roundToDesimal2(*std::max_element(_times.begin(), _times.end())), barSetT);
+    setDataToChart(_chartT, axisXT, roundToDesimal(*std::max_element(_times.begin(), _times.end())), barSetT);
     #define SetChartTimesEnd }
     #define SetChartMonths {
     QBarCategoryAxis *axisXM = new QBarCategoryAxis();
@@ -334,7 +328,7 @@ void FormStatistics::onFinish() {
     for(int i = 0; i < 12; ++i) {
         *barSetM << _months[i];
     }
-    setDataToChart(_chartM, axisXM, roundToDesimal2(*std::max_element(_months.begin(), _months.end())), barSetM);
+    setDataToChart(_chartM, axisXM, roundToDesimal(*std::max_element(_months.begin(), _months.end())), barSetM);
     #define SetChartMonthsEnd }
     #define SetChartYears {
     std::sort(_years.begin(), _years.end(), [](const QPair<QString,int> &p1, const QPair<QString,int> &p2) {
@@ -350,7 +344,7 @@ void FormStatistics::onFinish() {
             max = year.second;
         }
     }
-    setDataToChart(_chartY, axisXY, roundToDesimal2(max), barSetY);
+    setDataToChart(_chartY, axisXY, roundToDesimal(max), barSetY);
     #define SetChartYearsEnd }
     emit s_finish();
 }
@@ -373,7 +367,7 @@ void FormStatistics::showCompleteGames() {
         model->setItem(row, StaticticGamesAppId,   itemId);
         model->setItem(row, StaticticGamesIndex,   itemIndex);
         model->setItem(row, StaticticGamesIcon,    itemIcon);
-        model->setItem(row, StaticticGamesTitle,    itemName);
+        model->setItem(row, StaticticGamesTitle,   itemName);
 
         ++row;
     }
@@ -485,8 +479,8 @@ void FormStatistics::setModelToTable(QStandardItemModel *aModel) {
     }
     ui->TableViewGames->setModel(aModel);
     ui->TableViewGames->setSortingEnabled(true);
-    ui->TableViewGames->setColumnHidden(ColumnGamesAppid, true);
-    ui->TableViewGames->setColumnHidden(ColumnGamesIndex, true);
+    ui->TableViewGames->setColumnHidden(StaticticGamesAppId, true);
+    ui->TableViewGames->setColumnHidden(StaticticGamesIndex, true);
     ui->TableViewGames->resizeColumnsToContents();
     ui->TableViewGames->resizeRowsToContents();
     ui->TableViewGames->setVisible(true);
@@ -494,10 +488,10 @@ void FormStatistics::setModelToTable(QStandardItemModel *aModel) {
 
 void FormStatistics::updateSettings() {
     Settings::syncronizeSettings();
-    setIcons();
+    updateIcons();
 }
 
-void FormStatistics::setIcons() {
+void FormStatistics::updateIcons() {
 
 }
 

@@ -5,38 +5,21 @@
 #include <QMenu>
 
 #include "classes/steamApi/structures/sfriends.h"
-#include "classes/threads/threading.h"
+#include "classes/threads/thread/threadfriends.h"
 #include "classes/common/favorites.h"
 #include "classes/common/myfilter.h"
-
-enum tableFriendsColumns {
-    ColumnFriendsID        = 0,
-    ColumnFriendsIndex     = 1,
-    ColumnFriendsIcon      = 2,
-    ColumnFriendsName      = 3,
-    ColumnFriendsAdded     = 4,
-    ColumnFriendsStatus    = 5,
-    ColumnFriendsIsPublic  = 6,
-    ColumnFriendsCount     = 7
-};
-
-enum filterFriendsColumns {
-    FilterFriendsName      = 0,
-    FilterFriendsStatus    = 1,
-    FilterFriendsPublic    = 2,
-    FilterFriendsFavorites = 3,
-    FilterFriendsCount     = 4
-};
+#include "subWidgets/models/friendsmodel.h"
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 class FormFriends;
 }
 
-class FormFriends : public QWidget {
+class FormFriends : public Form {
     Q_OBJECT
 
 public slots:
-    void updateSettings();
+    void updateSettings() override;
     void setFriends(const QString &aId, QList<SFriend> &aFriends);
     void clear();
     bool isInit();
@@ -56,29 +39,17 @@ signals:
 private slots:
     //Инициализация
     void init();
-    void initFriends(QList<SFriend> &aFriends);
-    void initTable();
     void initComboBoxStatus();
-    //Доподгрузка данных
-    void createThread();
-    void setTableModel(QStandardItemModel *aModel);
     //Эвенты
-    void changeEvent(QEvent *event);
-    void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event) override;
     //Часто использующиеся функции
-    void retranslate();
-    void setIcons();
-    void updateHiddenRows();
-    void updateCurrentFriend();
-    QPair<SFriend, SProfile> *getFriendFromRow(int aRow);
-    int getCurrentFriendIndex();
-    int getIndexFriendFromRow(int aRow);
-    int getRowFromIndexFriend(int aIndex);
+    void retranslate() override;
+    void updateIcons() override;
+    QPair<SFriend, SProfile> currentFriend();
     bool isProfileFavorite(const QPair<SFriend, SProfile> &aProfile);
     //Взаимодействие с таблицей
     QMenu *createMenu(const QPair<SFriend, SProfile> &profile);
-    void updateActionFavoriteData(QAction *aAction, bool aIsFavorite);
-    void goToProfile();
+    void goToCurrentProfile();
     void friendToFavorite();
     //Фильтр
     void checkBoxOpenProfile_StateChanged(int arg1);
@@ -91,14 +62,17 @@ private:
     Ui::FormFriends *ui;
 
     QString _id;
-    QList<QPair<SFriend, SProfile>> _friends;
-    QPair<SFriend, SProfile> *_currentFriend = nullptr;
 
     bool _blockedLoad = false;
     bool _loaded = false;
 
     Favorites _favorites;
-    MyFilter _filter;
+
+    FriendsModel *_friendsModel = nullptr;
+    QSortFilterProxyModel _filterName;
+    QSortFilterProxyModel _filterStatus;
+    QSortFilterProxyModel _filterPublic;
+    QSortFilterProxyModel _filterFavorite;
 
 };
 

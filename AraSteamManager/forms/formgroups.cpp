@@ -1,10 +1,14 @@
 #include "formgroups.h"
 #include "ui_formgroups.h"
 
-FormGroups::FormGroups(SProfile &aProfile, SGame &aGame, QWidget *parent) :
-    QWidget(parent), ui(new Ui::FormGroups), _groups(aProfile), _game(aGame) {
+FormGroups::FormGroups(SProfile &aProfile, const SGame &aGame, QWidget *parent) :
+    Form(parent), ui(new Ui::FormGroups), _groups(aProfile), _game(aGame) {
     ui->setupUi(this);
-    init();
+    setProfileGame();
+    connect(ui->ButtonAdd,          &QPushButton::clicked, this, &FormGroups::add_clicked);
+    connect(ui->ButtonChangeTitle,  &QPushButton::clicked, this, &FormGroups::changeTitle_clicked);
+    connect(ui->ButtonCancel,       &QPushButton::clicked, this, &FormGroups::cancel_clicked);
+    connect(ui->ButtonApply,        &QPushButton::clicked, this, &FormGroups::apply_clicked);
 }
 
 FormGroups::~FormGroups() {
@@ -12,30 +16,31 @@ FormGroups::~FormGroups() {
     delete ui;
 }
 
-void FormGroups::init() {
+void FormGroups::setProfileGame() {//TODO потом сделать это публичной функцией для передачи в нее данных, а конструктор сделать пустым
     initUi();
     ui->LabelTitle->setText(_game.name());
-
-    connect(ui->ButtonAdd,          &QPushButton::clicked, this, &FormGroups::add_clicked);
-    connect(ui->ButtonChangeTitle,  &QPushButton::clicked, this, &FormGroups::changeTitle_clicked);
-    connect(ui->ButtonCancel,       &QPushButton::clicked, this, &FormGroups::cancel_clicked);
-    connect(ui->ButtonApply,        &QPushButton::clicked, this, &FormGroups::apply_clicked);
 }
 
 void FormGroups::initUi() {
-    QVBoxLayout *layout = new QVBoxLayout(ui->ScrollAreaGroups);
+    QVBoxLayout *layout = new QVBoxLayout();
     for(const auto &group: _groups) {
         ui->ComboBoxGroups->addItem(group.title());
         QCheckBox *chb = new QCheckBox(group.title());
         auto games = group.games();
-        bool isInGroup = std::any_of(games.begin(), games.end(), [=](QString game) {
-                                                                    return game == _game.sAppId();
-                                                                });
+        bool isInGroup = std::any_of(games.begin(),
+                                     games.end(),
+                                     [=](QString game) {
+                                        return game == _game.sAppId();
+                                     });
         if (isInGroup) {
             chb->setChecked(true);
         }
         layout->addWidget(chb);
     }
+    if (QLayout *lay = ui->ScrollAreaGroups->layout()) {
+        delete lay;
+    }
+    ui->ScrollAreaGroups->setLayout(layout);
 }
 
 void FormGroups::clear() {
@@ -66,7 +71,6 @@ void FormGroups::changeTitle(const int &aIndex, const QString &aTitle) {
 }
 
 void FormGroups::cancel() {
-    emit s_updateGroups(false);
     parentWidget()->parentWidget()->close();
 }
 
@@ -83,7 +87,7 @@ void FormGroups::apply() {
     }
 
     _groups.save();
-    emit s_updateGroups(true);
+    emit s_updateGroups();
     parentWidget()->parentWidget()->close();
 }
 
@@ -101,4 +105,16 @@ void FormGroups::cancel_clicked() {
 
 void FormGroups::apply_clicked() {
     apply();
+}
+
+void FormGroups::retranslate() {
+    ui->retranslateUi(this);
+}
+
+void FormGroups::updateIcons() {
+
+}
+
+void FormGroups::updateSettings() {
+
 }

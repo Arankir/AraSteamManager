@@ -3,6 +3,7 @@
 #include <QLineEdit>
 #include <QCheckBox>
 #include <QEvent>
+#include "classes/common/generalfunctions.h"
 
 namespace {
     const int scSearchBarIndex = 0;
@@ -76,7 +77,7 @@ void MultiSelectComboBox::stateChanged(int aState)
         mLineEdit->clear();
     }
 
-    mLineEdit->setToolTip(selectedData);
+    mLineEdit->setToolTip(textToToolTip(selectedData, ";"));
     emit selectionChanged();
 }
 

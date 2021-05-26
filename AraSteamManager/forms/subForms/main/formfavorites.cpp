@@ -1,7 +1,7 @@
 #include "formfavorites.h"
 #include "ui_formfavorites.h"
 
-FormFavorites::FormFavorites(QWidget *parent): QWidget(parent), ui(new Ui::FormFavorites) {
+FormFavorites::FormFavorites(QWidget *parent): Form(parent), ui(new Ui::FormFavorites) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     initComponents();
@@ -37,7 +37,7 @@ void FormFavorites::initComponents() {
     ui->TableWidgetFriends->setColumnHidden(ColumnFavoritesID, true);
     ui->TableWidgetFriends->setColumnWidth(ColumnFavoritesIcon, 33);
     ui->TableWidgetFriends->setRowCount(_favorites.friends().count());
-    for(const FavoriteFriend &steamFriend: _favorites.friends()) {
+    foreach(const FavoriteFriend &steamFriend, _favorites.friends()) {
         SProfile::load(steamFriend.friendId(), SProfileRequestType::id, std::bind(&FormFavorites::friendLoad, this,  std::placeholders::_1));
 //        SProfiles *Profiles = new SProfiles(steamFriend.friendId(), true, ProfileUrlType::id);
 //        connect(Profiles, SIGNAL(s_finished(SProfiles*)), this, SLOT(friendLoad(SProfiles*)));
@@ -124,17 +124,11 @@ void FormFavorites::friendLoad(SProfile aProfile) {
 
 void FormFavorites::updateSettings() {
     Settings::syncronizeSettings();
-    setIcons();
+    updateIcons();
 }
 
-void FormFavorites::setIcons() {
+void FormFavorites::updateIcons() {
 
-}
-
-void FormFavorites::changeEvent(QEvent *event) {
-    if(event->type() == QEvent::LanguageChange) {
-        retranslate();
-    }
 }
 
 void FormFavorites::retranslate() {

@@ -1,14 +1,19 @@
 #include "comments.h"
 #include "classes/common/settings.h"
 
+void Comment::changeComment(const QStringList &aComment) {
+    _comment = aComment;
+}
+
 #define AchievementCStart {
-AchievementComment::AchievementComment(const QJsonObject &aObject) {
+AchievementComment::AchievementComment(const QJsonObject &aObject): Comment() {
     fromJson(aObject);
 }
 
-AchievementComment &AchievementComment::changeComment(const QStringList &aComment) {
-    _comment = aComment;
-    return *this;
+bool AchievementComment::operator==(const AchievementComment &comment) const {
+    return comment.profileId() == _profileId
+            && comment.gameId() == _gameId
+            && comment.achievementId() == _achievementId;
 }
 
 QJsonObject AchievementComment::toJson() const {
@@ -25,26 +30,112 @@ QJsonObject AchievementComment::toJson() const {
     return object;
 }
 
+QList<QPair<QString, QList<AchievementComment>>> AchievementComment::load(const QString &aProfileId) {
+    QList<QPair<QString, QList<AchievementComment>>> list;
+    QByteArray bytes;
+    if (readFile(Paths::commentsAchievements(aProfileId), bytes)) {
+        QJsonObject achievements = QJsonDocument::fromJson(bytes).object();
+        foreach(auto &&game, achievements.value("games").toArray()) {
+            QPair<QString, QList<AchievementComment>> pair;
+            pair.first = game.toObject().value("gameId").toString();
+            foreach(auto &&achievement, game.toObject().value("achievements").toArray()) {
+                pair.second.append(std::move(AchievementComment(achievement.toObject())));
+            }
+            list.append(pair);
+        }
+    }
+    return list;
+}
+
+QList<AchievementComment> AchievementComment::load(const QString &aProfileId, const QString &aGameId) {
+    QList<AchievementComment> list;
+    QByteArray bytes;
+    if (readFile(Paths::commentsAchievements(aProfileId), bytes)) {
+        QJsonObject achievements = QJsonDocument::fromJson(bytes).object();
+        foreach(auto &&game, achievements.value("games").toArray()) {
+            if (game.toObject().value("gameId").toString() != aGameId) {
+                continue;
+            }
+            foreach(auto &&achievement, game.toObject().value("achievements").toArray()) {
+                list.append(std::move(AchievementComment(achievement.toObject())));
+            }
+        }
+    }
+    return list;
+}
+
+bool AchievementComment::save(const QString &aProfileId, const QString &aGameId, const AchievementComment &aComments) {
+    auto list = load(aProfileId);
+    auto iterator = std::find_if(list.begin(),
+                                 list.end(),
+                                 [=](const QPair<QString, QList<AchievementComment>> &comment) {
+                                    return comment.first == aGameId;
+                                });
+    if (iterator != list.end()) {
+        auto iterator2 = std::find_if((*iterator).second.begin(),
+                                     (*iterator).second.end(),
+                                     [=](const AchievementComment &comment) {
+                                        return comment._achievementId == aComments._achievementId;
+                                    });
+        if (iterator2 != (*iterator).second.end()) {
+            (*iterator).second.removeAt(iterator2 - (*iterator).second.begin());
+        }
+        (*iterator).second.append(aComments);
+    } else {
+        list.append(QPair<QString, QList<AchievementComment>>(aGameId, QList<AchievementComment>() << aComments));
+    }
+    return save(aProfileId, list);
+}
+
+bool AchievementComment::save(const QString &aProfileId, const QString &aGameId, const QList<AchievementComment> &aComments) {
+    auto list = load(aProfileId);
+    auto iterator = std::find_if(list.begin(),
+                                 list.end(),
+                                 [=](const QPair<QString, QList<AchievementComment>> &comment) {
+                                    return comment.first == aGameId;
+                                });
+    if (iterator != list.end()) {
+        list.removeAt(iterator - list.begin());
+    }
+    if (aComments.count() > 0) {
+        list.append(QPair<QString, QList<AchievementComment>>(aGameId, aComments));
+    }
+    return save(aProfileId, list);
+}
+
+bool AchievementComment::save(const QString &aProfileId, QList<QPair<QString, QList<AchievementComment> > > &aComments) {
+    QJsonObject achievementsObject;
+    achievementsObject["profileId"] = aProfileId;
+    QJsonArray achievementsGamesArray;
+    for(auto &&achievement: aComments) {
+        QJsonArray achievementsAchievementsArray;
+        for(auto &&achievement: achievement.second) {
+            achievementsAchievementsArray.append(achievement.toJson());
+        }
+        QJsonObject achievementsGameObject;
+        achievementsGameObject["gameId"] = achievement.first;
+        achievementsGameObject["achievements"] = achievementsAchievementsArray;
+        achievementsGamesArray.append(achievementsGameObject);
+    }
+    achievementsObject["games"] = achievementsGamesArray;
+    return saveFile(Paths::commentsAchievements(aProfileId), QJsonDocument(achievementsObject).toJson());
+}
+
 void AchievementComment::fromJson(const QJsonObject &aObject) {
     _profileId = aObject.value("profile").toString();
     _gameId = aObject.value("game").toString();
     _achievementId = aObject.value("achievement").toString();
 
     _comment.clear();
-    for(auto line: aObject.value("comment").toArray()) {
+    for(auto &&line: aObject.value("comment").toArray()) {
         _comment.append(line.toString());
     }
 }
 #define AchievementCEnd }
 
 #define GameCStart {
-GameComment::GameComment(const QJsonObject &aObject) {
+GameComment::GameComment(const QJsonObject &aObject): Comment() {
     fromJson(aObject);
-}
-
-GameComment &GameComment::changeComment(const QStringList &aComment) {
-    _comment = aComment;
-    return *this;
 }
 
 QJsonObject GameComment::toJson() const {
@@ -60,12 +151,53 @@ QJsonObject GameComment::toJson() const {
     return object;
 }
 
+QList<GameComment> GameComment::load(const QString &aProfileId) {
+    QList<GameComment> list;
+
+    QByteArray bytes;
+    if (readFile(Paths::commentsGames(aProfileId), bytes)) {
+        QJsonObject games = QJsonDocument::fromJson(bytes).object();
+        foreach(const auto &game, games.value("games").toArray()) {
+            list.append(std::move(GameComment(game.toObject())));
+        }
+    }
+    return list;
+}
+
+bool GameComment::save(const QString &aProfileId, const GameComment &aComments) {
+    auto list = load(aProfileId);
+    auto iterator = std::find_if(list.begin(),
+                                 list.end(),
+                                 [=](const GameComment &comment) {
+                                    return comment.gameId() == aComments.gameId();
+                                });
+    if (iterator != list.end()) {
+        list.removeAt(iterator - list.begin());
+    }
+    if (aComments.comment() != QStringList()) {
+        list.append(aComments);
+    }
+    return save(aProfileId, list);
+}
+
+bool GameComment::save(const QString &aProfileId, const QList<GameComment> &aComments) {
+    QJsonObject gamesObject;
+    gamesObject["profileId"] = aProfileId;
+    QJsonArray games;
+    for(auto &&game: aComments) {
+        games.append(game.toJson());
+    }
+    gamesObject["games"] = games;
+
+    return saveFile(Paths::commentsGames(aProfileId), QJsonDocument(gamesObject).toJson());
+}
+
 void GameComment::fromJson(const QJsonObject &aObject) {
     _profileId = aObject.value("profile").toString();
     _gameId = aObject.value("game").toString();
 
     _comment.clear();
-    for(auto line: aObject.value("comment").toArray()) {
+    for(auto &&line: aObject.value("comment").toArray()) {
         _comment.append(line.toString());
     }
 }
@@ -87,161 +219,177 @@ Comments &Comments::setProfileId(const QString &aProfileId) {
 }
 
 Comments &Comments::setGameComment(const QString &aGameId, const QString &aProfileId, const QStringList &aComment) {
-    auto iterator = std::find_if(_games.begin(), _games.end(), [=](GameComment comment) {
-                                                                    return comment.gameId() == aGameId && comment.profileId() == aProfileId;
-                                                                });
+    auto iterator = findGameComment(aGameId, aProfileId);
     if (iterator != _games.end()) {
         (*iterator).changeComment(aComment);
     } else {
-        _games.append(GameComment(aGameId, aProfileId, aComment));
+        _games.append(std::move(GameComment(aGameId, aProfileId, aComment)));
     }
     save();
     return *this;
 }
 
+QList<GameComment>::iterator Comments::findGameComment(const QString &aGameId, const QString &aProfileId) {
+    return std::find_if(_games.begin(),
+                        _games.end(),
+                        [=](GameComment comment) {
+                           return comment.gameId() == aGameId &&
+                                  comment.profileId() == aProfileId;
+    });
+}
+
+QList<GameComment>::const_iterator Comments::findGameComment(const QString &aGameId, const QString &aProfileId) const {
+    return std::find_if(_games.cbegin(),
+                        _games.cend(),
+                        [=](GameComment comment) {
+                           return comment.gameId() == aGameId &&
+                                  comment.profileId() == aProfileId;
+    });
+}
+
+QList<QPair<QString, QList<AchievementComment>>>::iterator Comments::findAchievementComment(const QString &aGameId) {
+    return std::find_if(_achievements.begin(),
+                        _achievements.end(),
+                        [=](QPair<QString, QList<AchievementComment>> AchievementGameComment) {
+                            return AchievementGameComment.first == aGameId;
+    });
+}
+
+QList<QPair<QString, QList<AchievementComment>>>::const_iterator Comments::findAchievementComment(const QString &aGameId) const {
+    return std::find_if(_achievements.cbegin(),
+                        _achievements.cend(),
+                        [=](QPair<QString, QList<AchievementComment>> AchievementGameComment) {
+                            return AchievementGameComment.first == aGameId;
+    });
+}
+
 Comments &Comments::setAchievementComment(const QString &aProfileId, const QString &aGameId, const QString &aAchievementId, const QStringList &aComment) {
-    auto iterator = std::find_if(_achievements.begin(), _achievements.end(), [=](QPair<QString, QList<AchievementComment>> comment) {
-                                                                                 return comment.first == aGameId;
-                                                                             });
-    if (iterator != _achievements.end()) {
-        auto iteratorAchievement = std::find_if((*iterator).second.begin(), (*iterator).second.end(), [=](AchievementComment comment) {
-                                                                                                            return comment.profileId() == aProfileId
-                                                                                                                    && comment.gameId() == aGameId
-                                                                                                                    && comment.achievementId() == aAchievementId;
-                                                                                                        });
-        if (iteratorAchievement != (*iterator).second.end()) {
+    auto iteratorGameAchievements = findAchievementComment(aGameId);
+    if (iteratorGameAchievements != _achievements.end()) {
+        auto iteratorAchievement = std::find_if((*iteratorGameAchievements).second.begin(),
+                                                (*iteratorGameAchievements).second.end(),
+                                                [=](const AchievementComment &comment) {
+                                                    return comment == AchievementComment {aProfileId, aGameId, aAchievementId, QStringList()};
+                                                });
+        if (iteratorAchievement != (*iteratorGameAchievements).second.end()) {
             (*iteratorAchievement).changeComment(aComment);
         } else {
-            (*iterator).second.append(AchievementComment(aProfileId, aGameId, aAchievementId, aComment));
+            (*iteratorGameAchievements).second.append(std::move(AchievementComment(aProfileId, aGameId, aAchievementId, aComment)));
         }
     } else {
-        _achievements.append(QPair<QString, QList<AchievementComment>>(aGameId, QList<AchievementComment>() << AchievementComment(aProfileId, aGameId, aAchievementId, aComment)));
+        _achievements.append(std::move(QPair<QString, QList<AchievementComment>>
+                             (aGameId, QList<AchievementComment> {AchievementComment(aProfileId, aGameId, aAchievementId, aComment)})));
     }
-    save();
+    saveAchievements();
     return *this;
 }
 
 Comments &Comments::removeGameComment(const QString &aGameId, const QString &aProfileId) {
-    _games.erase(std::remove_if(_games.begin(), _games.end(), [=](GameComment comment) {
-                                                                    return ((comment.gameId() == aGameId) && (comment.profileId() == aProfileId));
-                                                                }), _games.end());
+    _games.erase(std::remove_if(_games.begin(),
+                                _games.end(),
+                                [=](GameComment comment) {
+                                    return ((comment.gameId() == aGameId) &&
+                                            (comment.profileId() == aProfileId));
+                                }), _games.end());
     save();
     return *this;
 }
 
 Comments &Comments::removeAchievementComment(const QString &aProfileId, const QString &aGameId, const QString &aAchievementId) {
-    auto iterator = std::find_if(_achievements.begin(), _achievements.end(), [=](QPair<QString, QList<AchievementComment>> comment) {
-                                                                                 return comment.first == aGameId;
-                                                                             });
-    if (iterator != _achievements.end()) {
-        (*iterator).second.erase(std::remove_if((*iterator).second.begin(), (*iterator).second.end(), [=](AchievementComment comment) {
-                                                                                                            return comment.profileId() == aProfileId
-                                                                                                                    && comment.gameId() == aGameId
-                                                                                                                    && comment.achievementId() == aAchievementId;
-                                                                                                        }), (*iterator).second.end());
-    } else {
-
+    auto iteratorGameAchievements = findAchievementComment(aGameId);
+    if (iteratorGameAchievements != _achievements.end()) {
+        (*iteratorGameAchievements).second.erase(std::remove_if((*iteratorGameAchievements).second.begin(),
+                                                                (*iteratorGameAchievements).second.end(),
+                                                                [=](const AchievementComment &comment) {
+                                                                    return comment == AchievementComment {aProfileId, aGameId, aAchievementId, QStringList()};
+                                                                }), (*iteratorGameAchievements).second.end());
     }
     save();
     return *this;
 }
 
-const GameComment &Comments::getGameComment(const QString &aGameId) const {
-    auto iterator = std::find_if(_games.begin(), _games.end(), [=](GameComment comment) {
-                                                                    return ((comment.gameId() == aGameId) && (comment.profileId() == _profileId));
-                                                                });
+const GameComment Comments::getGameComment(const QString &aGameId) const {
+    auto iterator = findGameComment(aGameId, _profileId);
     if (iterator != _games.end()) {
         return *iterator;
     } else {
-        return *(new GameComment(aGameId, _profileId, QStringList()));
+        return GameComment(aGameId, _profileId, QStringList());
     }
 }
 
-const AchievementComment &Comments::getAchievementComment(const QString &aProfileId, const QString &aGameId, const QString &aAchievementId) const {
-    auto iterator = std::find_if(_achievements.begin(), _achievements.end(), [=](QPair<QString, QList<AchievementComment>> comment) {
-                                                                                 return comment.first == aGameId;
-                                                                             });
+const AchievementComment Comments::getAchievementComment(const QString &aProfileId, const QString &aGameId, const QString &aAchievementId) const {
+    auto iterator = findAchievementComment(aGameId);
     if (iterator != _achievements.end()) {
-        auto iteratorAchievement = std::find_if((*iterator).second.begin(), (*iterator).second.end(), [=](AchievementComment comment) {
-                                                                                                            return comment.profileId() == aProfileId
-                                                                                                                    && comment.gameId() == aGameId
-                                                                                                                    && comment.achievementId() == aAchievementId;
-                                                                                                        });
+        auto iteratorAchievement = std::find_if((*iterator).second.begin(),
+                                                (*iterator).second.end(),
+                                                [=](const AchievementComment &comment) {
+                                                    return comment == AchievementComment {aProfileId, aGameId, aAchievementId, QStringList()};
+                                                });
         if (iteratorAchievement != (*iterator).second.end()) {
             return *iteratorAchievement;
-        } else {
-            return *(new AchievementComment(aProfileId, aGameId, aAchievementId, QStringList()));
         }
-    } else {
-        return *(new AchievementComment(aProfileId, aGameId, aAchievementId, QStringList()));
     }
+    return AchievementComment(aProfileId, aGameId, aAchievementId, QStringList());
 }
 
-Comments &Comments::save() {
+bool Comments::saveGames() const {
     QJsonObject gamesObject;
     gamesObject["profileId"] = _profileId;
     QJsonArray games;
-    for(const auto &game: _games) {
+    for(auto &&game: _games) {
         games.append(game.toJson());
     }
     gamesObject["games"] = games;
 
-    saveFile(Paths::commentsGames(_profileId), gamesObject);
+    return saveFile(Paths::commentsGames(_profileId), QJsonDocument(gamesObject).toJson());
+}
 
+bool Comments::saveAchievements() const {
     QJsonObject achievementsObject;
     achievementsObject["profileId"] = _profileId;
     QJsonArray achievementsGamesArray;
-    for(const auto &game: _achievements) {
-        QJsonObject achievementsGameObject;
+    for(auto &&achievement: _achievements) {
         QJsonArray achievementsAchievementsArray;
-        for(const auto &achievement: game.second) {
+        for(auto &&achievement: achievement.second) {
             achievementsAchievementsArray.append(achievement.toJson());
         }
-        achievementsGameObject["gameId"] = game.first;
+        QJsonObject achievementsGameObject;
+        achievementsGameObject["gameId"] = achievement.first;
         achievementsGameObject["achievements"] = achievementsAchievementsArray;
         achievementsGamesArray.append(achievementsGameObject);
     }
     achievementsObject["games"] = achievementsGamesArray;
-    saveFile(Paths::commentsAchievements(_profileId), achievementsObject);
-
-    return *this;
+    return saveFile(Paths::commentsAchievements(_profileId), QJsonDocument(achievementsObject).toJson());
 }
 
-void Comments::saveFile(const QString &aProfileId, const QJsonObject &aObject) {
-    createDir(aProfileId);
-    QFile file(aProfileId);
-    file.open(QFile::WriteOnly);
-    file.write(QJsonDocument(aObject).toJson());
-    file.close();
+bool Comments::save() const {
+    bool games = saveGames();
+    bool achievements = saveAchievements();
+    return games && achievements;
 }
 
 Comments &Comments::load() {
     _games.clear();
     _achievements.clear();
 
-    QFile file1(Paths::commentsGames(_profileId));
-    if (file1.open(QFile::ReadOnly)) {
-        QJsonDocument doc = QJsonDocument::fromJson(file1.readAll());
-        QJsonObject games = doc.object();
-        for(const auto &game: games.value("games").toArray()) {
-            _games.append(GameComment(game.toObject()));
+    QByteArray bytes;
+    if (readFile(Paths::commentsGames(_profileId), bytes)) {
+        QJsonObject games = QJsonDocument::fromJson(bytes).object();
+        foreach(const auto &game, games.value("games").toArray()) {
+            _games.append(std::move(GameComment(game.toObject())));
         }
-        file1.close();
     }
 
-    QFile file2(Paths::commentsAchievements(_profileId));
-    if (file2.open(QFile::ReadOnly)) {
-        QJsonDocument doc = QJsonDocument::fromJson(file2.readAll());
-        QJsonObject achievements = doc.object();
-        for(const auto &game: achievements.value("games").toArray()) {
+    if (readFile(Paths::commentsAchievements(_profileId), bytes)) {
+        QJsonObject achievements = QJsonDocument::fromJson(bytes).object();
+        foreach(auto &&game, achievements.value("games").toArray()) {
             QPair<QString, QList<AchievementComment>> pair;
             pair.first = game.toObject().value("gameId").toString();
-            for(const auto &achievement: game.toObject().value("achievements").toArray()) {
-                pair.second.append(AchievementComment(achievement.toObject()));
+            foreach(auto &&achievement, game.toObject().value("achievements").toArray()) {
+                pair.second.append(std::move(AchievementComment(achievement.toObject())));
             }
             _achievements.append(pair);
         }
-        file2.close();
     }
     return *this;
 }

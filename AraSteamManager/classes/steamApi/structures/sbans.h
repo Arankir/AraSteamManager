@@ -21,18 +21,24 @@ public:
         _numberOfGameBans(ban._numberOfGameBans), _economyBan(ban._economyBan) {
 
         }
+
+    SBan &operator=(const SBan &ban);
+    bool  operator<(const SBan &ban) const;
+    bool  operator>(const SBan &ban) const;
+    bool  operator==(const SBan &ban) const;
+    bool  operator!=(const SBan &ban) const;
+
     QJsonObject toJson() const;
     virtual QString className() const {return "SBan";}
     static QList<SBan> load(const QString &aId, std::function<void (QList<SBan>)> aCallback = nullptr);
-    SBan &operator=(const SBan &ban);
 
-    QString steamId()       {return _steamId;}
-    bool communityBanned()  {return _communityBanned;}
-    bool vacBanned()        {return _vacBanned;}
-    int numberOfVacBan()    {return _numberOfVacBan;}
-    int daysSinceLastBan()  {return _daysSinceLastBan;}
-    int numberOfGameBans()  {return _numberOfGameBans;}
-    QString economyBan()    {return _economyBan;}
+    QString steamId()       const {return _steamId;}
+    bool communityBanned()  const {return _communityBanned;}
+    bool vacBanned()        const {return _vacBanned;}
+    int numberOfVacBan()    const {return _numberOfVacBan;}
+    int daysSinceLastBan()  const {return _daysSinceLastBan;}
+    int numberOfGameBans()  const {return _numberOfGameBans;}
+    QString economyBan()    const {return _economyBan;}
 
 private:
     QString _steamId;

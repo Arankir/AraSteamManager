@@ -1,37 +1,56 @@
 #include "formreachedfilter.h"
 #include "ui_formreachedfilter.h"
 
-FormReachedFilter::FormReachedFilter(QWidget *parent): QWidget(parent),
+FormReachedFilter::FormReachedFilter(QWidget *parent): Form(parent),
 ui(new Ui::FormReachedFilter) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-    setIcons();
-    connect(ui->Slider, &QSlider::valueChanged, this, &FormReachedFilter::slideValueChanged);
-}
-
-void FormReachedFilter::updateSettings() {
-    setIcons();
-}
-
-void FormReachedFilter::setIcons() {
-    ui->LabelReached    ->setPixmap(QPixmap(Images::reached())          .scaled(15, 15));
-    ui->LabelNotReached ->setPixmap(QPixmap(Images::notReached())       .scaled(15, 15));
-    ui->LabelAll        ->setPixmap(QPixmap(Images::allAchievements())  .scaled(15, 15));
+    updateIcons();
+    ui->RadioButtonAll->setChecked(true);
+    connect(ui->RadioButtonReached, &QRadioButton::pressed, this, [=]() {emit s_radioButtonChange(ReachedType::reached);});
+    connect(ui->RadioButtonAll, &QRadioButton::pressed, this, [=]() {emit s_radioButtonChange(ReachedType::all);});
+    connect(ui->RadioButtonNotReached, &QRadioButton::pressed, this, [=]() {emit s_radioButtonChange(ReachedType::notReached);});
+//    connect(ui->Slider, &QSlider::valueChanged, this, &FormReachedFilter::slideValueChanged);
 }
 
 FormReachedFilter::~FormReachedFilter() {
     delete ui;
 }
 
-void FormReachedFilter::changeEvent(QEvent *event) {
-    if(event->type() == QEvent::LanguageChange) {
-        ui->retranslateUi(this);
-    }
+void FormReachedFilter::updateIcons() {
+    ui->LabelReached    ->setPixmap(QPixmap(Images::reached())          .scaled(15, 15));
+    ui->LabelNotReached ->setPixmap(QPixmap(Images::notReached())       .scaled(15, 15));
+    ui->LabelAll        ->setPixmap(QPixmap(Images::allAchievements())  .scaled(15, 15));
 }
 
-void FormReachedFilter::setType(ReachedType aType) {
-    if (aType != ReachedType::none) {
-        ui->Slider->setValue(static_cast<int>(aType));
+void FormReachedFilter::retranslate() {
+    ui->retranslateUi(this);
+}
+
+void FormReachedFilter::updateSettings() {
+    updateIcons();
+}
+
+void FormReachedFilter::setType(const ReachedType &aType) {
+//    if (aType != ReachedType::none) {
+//        ui->Slider->setValue(static_cast<int>(aType));
+//    }
+    switch (aType) {
+    case ReachedType::reached: {
+        ui->RadioButtonReached->setChecked(true);
+        break;
+    }
+    case ReachedType::all: {
+        ui->RadioButtonAll->setChecked(true);
+        break;
+    }
+    case ReachedType::notReached: {
+        ui->RadioButtonNotReached->setChecked(true);
+        break;
+    }
+    default: {
+
+    }
     }
 }
 
@@ -40,9 +59,9 @@ void FormReachedFilter::update() {
 }
 
 void FormReachedFilter::slideValueChanged() {
-    if (ui->Slider->value() < 3) {
-        emit s_radioButtonChange(static_cast<ReachedType>(ui->Slider->value()));
-    } else {
-        emit s_radioButtonChange(ReachedType::none);
-    }
+//    if (ui->Slider->value() < 3) {
+//        emit s_radioButtonChange(static_cast<ReachedType>(ui->Slider->value()));
+//    } else {
+//        emit s_radioButtonChange(ReachedType::none);
+//    }
 }

@@ -41,12 +41,13 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *lineEdit;
     QPushButton *pushButton;
+    ComboBoxFriends *ComboBoxFriend;
     QHBoxLayout *horizontalLayout_4;
+    QSpacerItem *horizontalSpacer_2;
     QPushButton *ButtonFriendsReached;
     QPushButton *ButtonFriendsAll;
     QPushButton *ButtonFriendsNotReached;
     QSpacerItem *horizontalSpacer;
-    ComboBoxFriends *ComboBoxFriend;
     QListWidget *ListWidgetFriends;
 
     void setupUi(QWidget *FormFriendsCompare)
@@ -56,6 +57,7 @@ public:
         FormFriendsCompare->resize(1131, 539);
         horizontalLayout_3 = new QHBoxLayout(FormFriendsCompare);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -133,8 +135,19 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
+        ComboBoxFriend = new ComboBoxFriends(FormFriendsCompare);
+        ComboBoxFriend->setObjectName(QString::fromUtf8("ComboBoxFriend"));
+        sizePolicy1.setHeightForWidth(ComboBoxFriend->sizePolicy().hasHeightForWidth());
+        ComboBoxFriend->setSizePolicy(sizePolicy1);
+
+        verticalLayout_2->addWidget(ComboBoxFriend);
+
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_2);
+
         ButtonFriendsReached = new QPushButton(FormFriendsCompare);
         ButtonFriendsReached->setObjectName(QString::fromUtf8("ButtonFriendsReached"));
         sizePolicy2.setHeightForWidth(ButtonFriendsReached->sizePolicy().hasHeightForWidth());
@@ -156,17 +169,12 @@ public:
 
         horizontalLayout_4->addWidget(ButtonFriendsNotReached);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer);
 
 
         verticalLayout_2->addLayout(horizontalLayout_4);
-
-        ComboBoxFriend = new ComboBoxFriends(FormFriendsCompare);
-        ComboBoxFriend->setObjectName(QString::fromUtf8("ComboBoxFriend"));
-
-        verticalLayout_2->addWidget(ComboBoxFriend);
 
         ListWidgetFriends = new QListWidget(FormFriendsCompare);
         ListWidgetFriends->setObjectName(QString::fromUtf8("ListWidgetFriends"));
@@ -195,7 +203,8 @@ public:
         CheckBoxCompareTitle->setText(QCoreApplication::translate("FormFriendsCompare", "\320\235\320\260\320\267\320\262\320\260\320\275\320\270\320\265", nullptr));
         CheckBoxCompareDescription->setText(QCoreApplication::translate("FormFriendsCompare", "\320\236\320\277\320\270\321\201\320\260\320\275\320\270\320\265", nullptr));
         CheckBoxCompareTotalPercent->setText(QCoreApplication::translate("FormFriendsCompare", "\320\237\320\276 \320\274\320\270\321\200\321\203", nullptr));
-        pushButton->setText(QCoreApplication::translate("FormFriendsCompare", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\275\320\265 \320\270\320\267 \320\264\321\200\321\203\320\267\320\265\320\271", nullptr));
+        lineEdit->setPlaceholderText(QCoreApplication::translate("FormFriendsCompare", "https://steamcommunity.com/id/gabelogannewell", nullptr));
+        pushButton->setText(QCoreApplication::translate("FormFriendsCompare", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", nullptr));
         ButtonFriendsReached->setText(QString());
         ButtonFriendsAll->setText(QString());
         ButtonFriendsNotReached->setText(QString());

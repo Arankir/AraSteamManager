@@ -12,18 +12,7 @@
 #include "forms/subForms/achievements/widgets/formreachedfilter.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/items/qlistwidgetfriend.h"
-
-enum tableAchievementsFriendsCompareColumns {
-    ColumnAppid         = 0,
-    ColumnIndex         = 1,
-    ColumnIcon          = 2,
-    ColumnTitle         = 3,
-    ColumnDescription   = 4,
-    ColumnComment       = 5,
-    ColumnWorld         = 6,
-    ColumnReachedMy     = 7,
-    ColumnCount         = 8
-};
+#include "subWidgets/models/achievementsmodel.h"
 
 namespace Ui {
 class FormFriendsCompare;
@@ -33,11 +22,10 @@ class FormFriendsCompare : public QWidget {
     Q_OBJECT
 
 public slots:
-    void setInitData(SProfile &profile, SGame &game, QList<SAchievement> &achievements, QStandardItemModel *model, MyFilter *fAchievements);
-    void setAchievedColors(QColor aAchieved, QColor aNotAchieved);
-    void addFriendToList(SProfile *steamFriend);
-    void removeFriendFromCompare();
-    void updateHiddenRows();
+    void setInitData(SProfile &profile, SGame &game, AchievementsModel *achievementsModel);
+    void addFriendToList(SProfile &steamFriend);
+    void setModel(QAbstractItemModel *model);
+    void filtersValueUpdated();
 
 public:
     explicit FormFriendsCompare(QWidget *parent = nullptr);
@@ -45,29 +33,28 @@ public:
 
 signals:
     void s_updateSettings();
-    void s_progressLoad(int, int);
+    void s_startLoad(int max);
+    void s_progressLoad(int value, int max);
     void s_finishLoad();
     void s_addedFriend();
 
 private slots:
     void setIcons();
-    void initTableCompare();
-    void updateFilterFriend(SProfile *aFriendName, ReachedType aType);
+    void updateFilterFriend(SProfile *aFriendName, const ReachedType &aType);
     void loadingCompare();
-    void loadFriendGames(QList<SGame> aGames, const QString &aUserId);
-    int rowFromId(QString aId);
-    float addFriendColumn(SProfile &aSteamFriend);
-    bool removeFriendColumn(SProfile &aSteamFriend);
-    void updateCurrentAchievement();
+    void loadFriendGames(const SGames &aGames, const QString &aUserId);
+    int addFriendColumn(const SProfile &aSteamFriend);
+    bool removeFriendColumn(const SProfile &aSteamFriend);
     void setFriendsAll();
     void setFriendsReached();
     void setFriendsNotReached();
     void changeEvent(QEvent *event);
     void retranslate();
+    void setAllFriendsValue(const ReachedType &aType);
+    void updateFiltersFriends();
 
 private:
     Ui::FormFriendsCompare *ui;
-    QList<SAchievement> _achievements;
 
     //ключевые данные
     SProfile _profile;
@@ -75,22 +62,11 @@ private:
 
     //сравнение с друзьями
     int _loadCompare = 0;
-    int _type1 = 0;
-    int _type2 = 0;
     QList<SProfile> _profilesFriends;
-    //QList<QPair<SProfile, FriendType>> _friends;
 
-    QList<SProfile> _friendColumns;
-
-    MyFilter _fCompare;
-    MyFilter *_fAchievements = nullptr;
-
-    //выбранное достижение
-    SAchievement *_currentAchievement = nullptr;
-    int _currentAchievementIndex;
-
-    QColor _achievedColor;
-    QColor _notAchievedColor;
+    AchievementsModel *_achievementsModel;
+    QAbstractItemModel *_model;
+    QList<QSortFilterProxyModel*> _filtersFriends;
 
 };
 

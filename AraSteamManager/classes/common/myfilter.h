@@ -1,28 +1,27 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include <QObject>
 #include <QDebug>
 #include <iostream>
 #include <iomanip>
 
-class MyFilter : public QObject {
-    Q_OBJECT
+class MyFilter {
 public:
-    explicit MyFilter(int row, int col, QObject *parent = nullptr);
-    MyFilter(QObject *parent = nullptr): QObject(parent) {}
+    explicit MyFilter(const int &row, const int &col);
+    MyFilter() {}
     ~MyFilter() {}
 
-    MyFilter &setRow(int row);
-    MyFilter &setCol(int col);
-    MyFilter &addCol(int colNum);
-    MyFilter &removeCol(int colNum);
-    MyFilter &setData(int row, int col, bool data);
+    MyFilter &setRow(const int &row);
+    MyFilter &setCol(const int &col);
+    MyFilter &addCol(const int &col);
+    MyFilter &removeCol(const int &col);
+    MyFilter &clearCol(const int &col);
+    MyFilter &setData(const int &row, const int &col, const bool &data);
 
-    bool getData(int row, int col) const;
-    bool getData(int row) const;
-    int getRow() const {return _row;}
-    int getCol() const {return _col;}
+    bool getData(const int &row, const int &col) const;
+    bool getData(const int &row) const;
+    int rows() const {return _row;}
+    int cols() const {return _col;}
 
     friend QDebug operator<<(QDebug dbg, const MyFilter &f) {
         int row = -1;
@@ -36,12 +35,6 @@ public:
         }
         return dbg.space();
     }
-
-private slots:
-
-signals:
-
-public slots:
 
 private:
     int _row {0};

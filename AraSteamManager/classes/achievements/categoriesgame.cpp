@@ -1,11 +1,11 @@
 #include "categoriesgame.h"
 #include "classes/common/settings.h"
 
-Category::Category(SGame &aGame): _gameName(aGame.name()), _gameId(aGame.appId()) {
+Category::Category(const SGame &aGame): _gameName(aGame.name()), _gameId(aGame.appId()) {
     update();
 }
 
-Category::Category(int aGameId): _gameId(aGameId) {
+Category::Category(const int &aGameId): _gameId(aGameId) {
     update();
 }
 
@@ -23,24 +23,33 @@ Category &Category::operator=(const Category &aCategory) {
     return *this;
 }
 
-bool isListsEqual(const QList<Category*> &list1, const QList<Category*> &list2) {
-    if (list1.count() != list2.count()) {
+bool isListsEqual(const QList<Category*> &aList1, const QList<Category*> &aList2) {
+    if (aList1.count() != aList2.count()) {
         return false;
     }
-    for(int i = 0; i < list1.count(); ++i) {
-        if (*(list1[i]) != *(list2[i])) {
+    for(auto iterList1 = aList1.begin(), iterList2 = aList2.begin();
+             iterList1 != aList1.end() || iterList2 != aList2.end();
+             ++iterList1, ++iterList2) {
+        if ((*iterList1)->title() != (*iterList2)->title() ||
+            (*iterList1)->achievementsApiName() != (*iterList2)->achievementsApiName()) {
             return false;
         }
     }
     return true;
 }
 
-bool Category::operator==(const Category &aCategory) const {
-    return ((_title == aCategory._title) && (_achievements == aCategory._achievements) && isListsEqual(_categories, aCategory._categories));
+bool Category::operator==(Category &aCategory) {
+    bool isRootEqually = (root()->_title == aCategory.root()->_title) && (root()->_achievements == aCategory.root()->_achievements);
+    bool isItemEqually = (_title == aCategory._title) && (_achievements == aCategory._achievements);
+    bool isListsEqually = isListsEqual(root()->_categories, aCategory.root()->_categories);
+    return (isRootEqually && isItemEqually && isListsEqually);
 }
 
-bool Category::operator!=(const Category &aCategory) const {
-    return ((_title != aCategory._title) || (_achievements != aCategory._achievements) || !isListsEqual(_categories, aCategory._categories));
+bool Category::operator!=(Category &aCategory) {
+    bool isRootEqually = (root()->_title == aCategory.root()->_title) && (root()->_achievements == aCategory.root()->_achievements);
+    bool isItemEqually = (_title == aCategory._title) && (_achievements == aCategory._achievements);
+    bool isListsEqually = isListsEqual(root()->_categories, aCategory.root()->_categories);
+    return (!isRootEqually || !isItemEqually || !isListsEqually);
 }
 
 Category &Category::setParent(Category *aParent) {
@@ -53,19 +62,19 @@ Category &Category::setTitle(const QString &aTitle) {
     return *this;
 }
 
-Category &Category::setAchievements(QList<QString> &aAchievements) {
+Category &Category::setAchievements(const QList<QString> &aAchievements) {
     _achievements = aAchievements;
     return *this;
 }
 
-Category &Category::setGame(SGame aGame) {
+Category &Category::setGame(const SGame &aGame) {
     _gameName = aGame.name();
     _gameId = aGame.appId();
     update();
     return *this;
 }
 
-Category *Category::findCategory(Category *aFindCategory) {
+Category *Category::findCategory(Category *aFindCategory) const {
     auto iterator = std::find_if(   _categories.begin(),
                                     _categories.end(),
                                     [=](Category *aCategory) { return *aCategory == *aFindCategory; });
@@ -74,6 +83,23 @@ Category *Category::findCategory(Category *aFindCategory) {
     } else {
         for (auto &category: _categories) {
             Category *find = category->findCategory(aFindCategory);
+            if (find != nullptr) {
+                return find;
+            }
+        }
+    }
+    return nullptr;
+}
+
+Category *Category::findCategory(const int &aOrder) const {
+    auto iterator = std::find_if(   _categories.begin(),
+                                    _categories.end(),
+                                    [=](Category *aCategory) { return aCategory->order() == aOrder; });
+    if (iterator != _categories.end()) {
+        return *iterator;
+    } else {
+        for (auto &category: _categories) {
+            Category *find = category->findCategory(aOrder);
             if (find != nullptr) {
                 return find;
             }
@@ -96,14 +122,15 @@ Category &Category::clearCategories() {
     return *this;
 }
 
-bool Category::removeCategory(Category *aCategory, bool isRemoveRecursively) {
-    auto iterator = std::find_if(_categories.begin(), _categories.end(), [=](const Category *subCategory){
-                                                                                    return subCategory == aCategory;
-                                                                                });
+bool Category::removeCategory(Category *aCategory, const bool &isRemoveRecursively) {
+    auto iterator = std::find_if(_categories.begin(),
+                                 _categories.end(),
+                                 [=](const Category *subCategory) {
+                                    return subCategory == aCategory;
+                                 });
     if (iterator != _categories.end()) {
-        int index = iterator - _categories.begin();
         aCategory->setParent(nullptr);
-        _categories.removeAt(index);
+        _categories.removeAt(iterator - _categories.begin());
         int order = 0;
         root()->updateOrders(order);
         root()->save();
@@ -128,14 +155,9 @@ int Category::countCategories() const {
     return count;
 }
 
-bool Category::save() {
+bool Category::save() const {
     if (_gameId > 0) {
-        auto aCategories = toJson();
-        createDir(Paths::categories());
-        QFile fileCategory(Paths::categories(QString::number(_gameId)));
-        fileCategory.open(QFile::WriteOnly);
-        fileCategory.write(QJsonDocument(aCategories).toJson());
-        fileCategory.close();
+        saveFile(Paths::categories(QString::number(_gameId)), QJsonDocument(toJson()).toJson());
         return true;
     }
     return false;
@@ -147,18 +169,14 @@ Category &Category::update() {
 }
 
 bool Category::load() {
-    QFile fileCategory(Paths::categories(QString::number(_gameId)));
-    if (!fileCategory.exists()) {
-        return false;
-    }
-    if (!fileCategory.open(QFile::ReadOnly)) {
+    QByteArray bytes;
+    if (!readFile(Paths::categories(QString::number(_gameId)), bytes)) {
         return false;
     }
 
     clearCategories();
-    fromJson(QJsonDocument().fromJson(fileCategory.readAll()).object());
+    fromJson(QJsonDocument().fromJson(bytes).object());
 
-    fileCategory.close();
     int order = 0;
     for (auto &category: _categories) {
         category->updateParents().updateOrders(order);
@@ -208,10 +226,10 @@ Category &Category::fromJson(const QJsonObject &aCategory) {
     _gameId   = aCategory.value("gameID").toInt();
     _order    = aCategory.value("order").toInt();
     _title  = aCategory.value("title").toString();
-    for(auto valueAchievement: aCategory.value("achievements").toArray()) {
+    for(auto &&valueAchievement: aCategory.value("achievements").toArray()) {
         _achievements.append(valueAchievement.toString());
     }
-    for(auto valueCategory: aCategory.value("categories").toArray()) {
+    for(auto &&valueCategory: aCategory.value("categories").toArray()) {
         addCategory(new Category (valueCategory.toObject()));
     }
     return *this;
@@ -238,7 +256,7 @@ QJsonObject Category::toJson() const {
 
     QJsonArray valuesCategories;
 //    int order = -1;
-    for(auto valueCategory: _categories) {
+    for(const auto &valueCategory: _categories) {
         auto category = valueCategory->toJson();
 //        category["order"] = ++order;
         valuesCategories.append(category);
@@ -250,21 +268,4 @@ QJsonObject Category::toJson() const {
     }
 
     return result;
-}
-
-Category *Category::findCategory(int aOrder) {
-    auto iterator = std::find_if(   _categories.begin(),
-                                    _categories.end(),
-                                    [=](Category *aCategory) { return aCategory->order() == aOrder; });
-    if (iterator != _categories.end()) {
-        return *iterator;
-    } else {
-        for (auto &category: _categories) {
-            Category *find = category->findCategory(aOrder);
-            if (find != nullptr) {
-                return find;
-            }
-        }
-    }
-    return nullptr;
 }

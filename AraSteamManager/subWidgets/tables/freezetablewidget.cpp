@@ -58,6 +58,8 @@ FreezeTableWidget::FreezeTableWidget(QWidget *aParent) : QTableView(aParent) {
     frozenTableView = new QTableView(this);
     frozenTableView->setObjectName("FreezeRow");
 
+    proxyModel = new SortFilterProxyModelFreezeRow(this);
+
     //connect the headers and scrollbars of both tableviews together
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, &FreezeTableWidget::updateSectionWidth);
     connect(verticalHeader(), &QHeaderView::sectionResized, this, &FreezeTableWidget::updateSectionHeight);
@@ -67,11 +69,26 @@ FreezeTableWidget::FreezeTableWidget(QWidget *aParent) : QTableView(aParent) {
 }
 
 FreezeTableWidget::~FreezeTableWidget() {
+    if (frozenTableView->model()) {
+        delete frozenTableView->model();
+    }
+
+    delete proxyModel;
     delete frozenTableView;
 }
 
 void FreezeTableWidget::initFreezeTable() {
-    frozenTableView->setModel(model());
+    auto filter = new QSortFilterProxyModel(model());
+    filter->setSourceModel(model());
+    filter->setFilterKeyColumn(0);
+    filter->setFilterRegExp("^$");
+
+    if (frozenTableView->model()) {
+        delete frozenTableView->model();
+    }
+
+    frozenTableView->setModel(filter);
+//    frozenTableView->sortByColumn(0, Qt::SortOrder::DescendingOrder);
     frozenTableView->setSelectionModel(selectionModel());
     frozenTableView->setFocusPolicy(Qt::NoFocus);
 
@@ -128,8 +145,15 @@ void FreezeTableWidget::scrollTo (const QModelIndex &aIndex, ScrollHint aHint) {
 }
 
 void FreezeTableWidget::setModel(QAbstractItemModel *aModel) {
-    QTableView::setModel(aModel);
+    proxyModel->setSourceModel(aModel);
+    proxyModel->setDynamicSortFilter(true);
+
+    QTableView::setModel(proxyModel);
     initFreezeTable();
+}
+
+QAbstractItemModel *FreezeTableWidget::model() {
+    return proxyModel->sourceModel();
 }
 
 void FreezeTableWidget::updateFrozenTableGeometry() {

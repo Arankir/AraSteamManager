@@ -108,8 +108,8 @@ void ComboBoxFriends::itemClicked(int aIndex) {
         //Обработка друга (добавить колонку, убрать из этого списка, поместить в лист в выбранными друзьями)
         auto steamFriend = dynamic_cast<QListWidgetFriend*>(mListWidget->item(aIndex));
         if (steamFriend) {
+            emit s_friendClicked(*(steamFriend->_steamFriend));
             delete mListWidget->item(aIndex);
-            emit s_friendClicked(steamFriend->_steamFriend);
         }
     }
     QComboBox::setCurrentIndex(0);

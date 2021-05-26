@@ -16,9 +16,10 @@ public:
     virtual QString className() const {return "SFriend";}
     static QList<SFriend> load(const QString &aId, std::function<void (QList<SFriend>)> aCallback = nullptr);
     SFriend &operator=(const SFriend&);
-    bool operator <(const SFriend&);
-    bool operator ==(const SFriend&);
-    bool operator !=(const SFriend&);
+    bool operator<(const SFriend&) const;
+    bool operator>(const SFriend&) const;
+    bool operator==(const SFriend&) const;
+    bool operator!=(const SFriend&) const;
 
     QString steamId()       const {return _steamID;}
     QString relationship()  const {return _relationship;}

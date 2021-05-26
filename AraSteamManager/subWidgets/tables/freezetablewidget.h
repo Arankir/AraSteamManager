@@ -53,6 +53,7 @@
 
 #include <QTableView>
 #include <QStandardItemModel>
+#include "subWidgets/models/filters.h"
 
 //! [Widget definition]
 class FreezeTableWidget : public QTableView {
@@ -60,23 +61,25 @@ class FreezeTableWidget : public QTableView {
 
 public:
     FreezeTableWidget(QWidget *parent = nullptr);
-      ~FreezeTableWidget();
+    ~FreezeTableWidget();
     void setModel(QAbstractItemModel *model) override;
+    QAbstractItemModel *model();
 
 protected:
       void resizeEvent(QResizeEvent *event) override;
       QModelIndex moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override;
       void scrollTo (const QModelIndex & index, ScrollHint hint = EnsureVisible) override;
 
-private:
-      QTableView *frozenTableView;
-      void initFreezeTable();
-      void updateFrozenTableGeometry();
-
-
 private slots:
       void updateSectionWidth(int logicalIndex, int oldSize, int newSize);
       void updateSectionHeight(int logicalIndex, int oldSize, int newSize);
+
+private:
+      void initFreezeTable();
+      void updateFrozenTableGeometry();
+
+      SortFilterProxyModelFreezeRow *proxyModel;
+      QTableView *frozenTableView;
 
 };
 //! [Widget definition]

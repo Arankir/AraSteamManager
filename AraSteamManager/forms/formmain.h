@@ -28,6 +28,7 @@
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/common/settings.h"
 #include "subWidgets/progressBars/progressbargood.h"
+#include "form.h"
 
 enum stackedFormsMain {
     FormMainNone        = 0,
@@ -42,7 +43,7 @@ namespace Ui {
     class FormMain;
 }
 
-class FormMain : public QWidget {
+class FormMain : public Form {
     Q_OBJECT
 
 public:
@@ -52,19 +53,17 @@ public:
     FormContainerAchievements *_containerAchievementsForm = nullptr;
 
 public slots:
-    void addAchievements(QList<SAchievementPlayer> achievements, SGame games);
+    void addAchievements(SGame games);
     void removeAchievements(int index);
     void containerAchievementsClose();
 
-    void goToGames(SProfile &profileSteamid, QList<SGame> &games);
+    void goToGames(SProfile &profileSteamid, SGames &games);
     void goToFriends(const QString &profileSteamid, QList<SFriend> &friends);
     void goToFavorites();
-    void goToStatistics(const SProfile &profileSteamid, QList<SGame> &games);
-
-    void updateSettings();
+    void goToStatistics(const SProfile &profileSteamid, SGames &games);
 
     FormProfile *createFormProfile(SProfile &aProfile);
-    FormStatistics *createFormStatistics(const SProfile &aProfile, QList<SGame> &aGames);
+    FormStatistics *createFormStatistics(const SProfile &aProfile, SGames &aGames);
     FormContainerAchievements *createFormContainerAchievements();
 signals:
     void s_updateSettings();
@@ -72,14 +71,16 @@ signals:
 private slots:
     //events
     void keyPressEvent(QKeyEvent*) override;
-    void changeEvent(QEvent*) override;
+//    void changeEvent(QEvent*) override;
     void closeEvent(QCloseEvent*) override;
     //Forms
     void showForm(int widgetIndex, int widthWindow = 300, int aWindowHeight = 400);
     void returnFromForms();
     //Systems
+    void retranslate() override;
+    void updateIcons() override;
+    void updateSettings() override;
     void initComponents();
-    void setIcons();
     void resizeScrollArea(int width = 300, int aHeight = 400);
     void updateEnabledButtonsBackNext();
     //Functions

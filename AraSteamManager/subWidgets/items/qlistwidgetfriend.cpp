@@ -2,13 +2,13 @@
 
 QListWidgetFriend::QListWidgetFriend(SProfile *steamFriend, FriendType type):
                     QListWidgetItem(),
-                    _steamFriend(steamFriend),
+                    _steamFriend(new SProfile(*steamFriend)),
                     _type(type) {
-
+    //Посмотреть откуда он берет друзей, скорее всего они там удаляются и из-за этого все крашится
 }
 
 QListWidgetFriend::~QListWidgetFriend() {
-
+    delete _steamFriend;
 }
 
 QListWidgetFriend &QListWidgetFriend::operator=(const QListWidgetFriend &aItem) {

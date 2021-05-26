@@ -10,6 +10,7 @@
 #include "../../AraSteamManager/forms/formcontainerachievements.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'formcontainerachievements.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -23,7 +24,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormContainerAchievements_t {
     QByteArrayData data[16];
-    char stringdata0[206];
+    char stringdata0[212];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,21 +39,21 @@ QT_MOC_LITERAL(2, 47, 0), // ""
 QT_MOC_LITERAL(3, 48, 5), // "index"
 QT_MOC_LITERAL(4, 54, 11), // "s_formClose"
 QT_MOC_LITERAL(5, 66, 18), // "addFormAchievement"
-QT_MOC_LITERAL(6, 85, 20), // "SAchievementsPlayer&"
-QT_MOC_LITERAL(7, 106, 2), // "pl"
-QT_MOC_LITERAL(8, 109, 8), // "SProfile"
-QT_MOC_LITERAL(9, 118, 3), // "ids"
-QT_MOC_LITERAL(10, 122, 6), // "SGame&"
-QT_MOC_LITERAL(11, 129, 4), // "game"
-QT_MOC_LITERAL(12, 134, 4), // "show"
-QT_MOC_LITERAL(13, 139, 10), // "closeEvent"
-QT_MOC_LITERAL(14, 150, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(15, 163, 42) // "on_TabWidgetAchievements_tabC..."
+QT_MOC_LITERAL(6, 85, 26), // "QList<SAchievementPlayer>&"
+QT_MOC_LITERAL(7, 112, 2), // "pl"
+QT_MOC_LITERAL(8, 115, 8), // "SProfile"
+QT_MOC_LITERAL(9, 124, 3), // "ids"
+QT_MOC_LITERAL(10, 128, 6), // "SGame&"
+QT_MOC_LITERAL(11, 135, 4), // "game"
+QT_MOC_LITERAL(12, 140, 4), // "show"
+QT_MOC_LITERAL(13, 145, 10), // "closeEvent"
+QT_MOC_LITERAL(14, 156, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(15, 169, 42) // "on_TabWidgetAchievements_tabC..."
 
     },
     "FormContainerAchievements\0"
     "s_removeAchievements\0\0index\0s_formClose\0"
-    "addFormAchievement\0SAchievementsPlayer&\0"
+    "addFormAchievement\0QList<SAchievementPlayer>&\0"
     "pl\0SProfile\0ids\0SGame&\0game\0show\0"
     "closeEvent\0QCloseEvent*\0"
     "on_TabWidgetAchievements_tabCloseRequested"
@@ -103,7 +104,7 @@ void FormContainerAchievements::qt_static_metacall(QObject *_o, QMetaObject::Cal
         switch (_id) {
         case 0: _t->s_removeAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->s_formClose(); break;
-        case 2: _t->addFormAchievement((*reinterpret_cast< SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< SProfile(*)>(_a[2])),(*reinterpret_cast< SGame(*)>(_a[3]))); break;
+        case 2: _t->addFormAchievement((*reinterpret_cast< QList<SAchievementPlayer>(*)>(_a[1])),(*reinterpret_cast< SProfile(*)>(_a[2])),(*reinterpret_cast< SGame(*)>(_a[3]))); break;
         case 3: _t->show(); break;
         case 4: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 5: _t->on_TabWidgetAchievements_tabCloseRequested((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -129,7 +130,7 @@ void FormContainerAchievements::qt_static_metacall(QObject *_o, QMetaObject::Cal
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormContainerAchievements::staticMetaObject = { {
-    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    QMetaObject::SuperData::link<Form::staticMetaObject>(),
     qt_meta_stringdata_FormContainerAchievements.data,
     qt_meta_data_FormContainerAchievements,
     qt_static_metacall,
@@ -148,12 +149,12 @@ void *FormContainerAchievements::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_FormContainerAchievements.stringdata0))
         return static_cast<void*>(this);
-    return QWidget::qt_metacast(_clname);
+    return Form::qt_metacast(_clname);
 }
 
 int FormContainerAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = Form::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

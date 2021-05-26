@@ -64,7 +64,7 @@ void SGame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
 }
 
 QT_INIT_METAOBJECT const QMetaObject SGame::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    QMetaObject::SuperData::link<Sapi::staticMetaObject>(),
     qt_meta_stringdata_SGame.data,
     qt_meta_data_SGame,
     qt_static_metacall,
@@ -83,12 +83,12 @@ void *SGame::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_SGame.stringdata0))
         return static_cast<void*>(this);
-    return QObject::qt_metacast(_clname);
+    return Sapi::qt_metacast(_clname);
 }
 
 int SGame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = Sapi::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

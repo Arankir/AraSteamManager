@@ -1,10 +1,10 @@
 #include "formfrienditemcompare.h"
 #include "ui_formfrienditemcompare.h"
 
-FormFriendItemCompare::FormFriendItemCompare(SProfile *steamFriend, QListWidgetItem *parent) :
+FormFriendItemCompare::FormFriendItemCompare(SProfile &steamFriend, QListWidgetItem *parent) :
                         ui(new Ui::FormFriendItemCompare),
                         _item(parent),
-                        _steamProfile(steamFriend) {
+                        _steamProfile(new SProfile(steamFriend)) {
     ui->setupUi(this);
     ui->LabelName->setText(_steamProfile->personaName());
     ui->LabelPercent->setText("0%");
@@ -18,19 +18,16 @@ FormFriendItemCompare::FormFriendItemCompare(SProfile *steamFriend, QListWidgetI
     });
 }
 
+FormFriendItemCompare::~FormFriendItemCompare() {
+    delete _steamProfile;
+    delete ui;
+}
+
 void FormFriendItemCompare::setIcons() {
     ui->ButtonDelete->setIcon(QIcon(Images::deleteIcon()));
 }
 
-QListWidgetItem *FormFriendItemCompare::item() {
-    return _item;
-}
-
-SProfile *FormFriendItemCompare::steamProfile() {
-    return _steamProfile;
-}
-
-void FormFriendItemCompare::setHiddenFilter(bool aHidden) {
+void FormFriendItemCompare::setHiddenFilter(const bool &aHidden) {
     ui->Filter->setVisible(!aHidden);
 }
 
@@ -38,16 +35,10 @@ bool FormFriendItemCompare::isFilterHidden() {
     return ui->Filter->isHidden();
 }
 
-void FormFriendItemCompare::setFilterValue(ReachedType type) {
+void FormFriendItemCompare::setFilterValue(const ReachedType &type) {
     ui->Filter->setType(type);
 }
 
-void FormFriendItemCompare::setPercent(double aPercent) {
-    QString per;
-    per.setNum(aPercent, 'f', 2);
-    ui->LabelPercent->setText(per + "%");
-}
-
-FormFriendItemCompare::~FormFriendItemCompare() {
-    delete ui;
+void FormFriendItemCompare::setPercent(const double &aPercent) {
+    ui->LabelPercent->setText(QString::number(aPercent, 'f', 2) + "%");
 }

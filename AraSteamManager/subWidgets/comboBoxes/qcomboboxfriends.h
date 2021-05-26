@@ -18,7 +18,7 @@ public:
 
 signals:
     void s_selectionChanged();
-    void s_friendClicked(SProfile *);
+    void s_friendClicked(SProfile&);
 
 public slots:
     void clear();

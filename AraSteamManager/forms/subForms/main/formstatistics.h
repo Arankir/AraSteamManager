@@ -16,7 +16,8 @@
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/steamApi/structures/sfriends.h"
-#include "classes/threads/threading.h"
+#include "classes/threads/thread/threadstatistics.h"
+#include <QStandardItemModel>
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -32,7 +33,7 @@ namespace Ui {
 class FormStatistics;
 }
 
-class FormStatistics : public QWidget {
+class FormStatistics : public Form {
     Q_OBJECT
 
 enum class GamesType {
@@ -46,22 +47,21 @@ enum class GamesType {
 public slots:
     void onFinish();
     void createThread();
+    void updateSettings() override;
 
-    void updateSettings();
-    void setIcons();
 public:
-    explicit FormStatistics(const SProfile &profile, QList<SGame> &games, QWidget *parent = nullptr);
+    explicit FormStatistics(const SProfile &profile, SGames &games, QWidget *parent = nullptr);
     ~FormStatistics();
 
 signals:
     void s_statisticsLoaded(int progress);
     void s_finish();
     void s_return_to_profile(QWidget*);
-    void s_showAchievements(QList<SAchievementPlayer> achievements, SGame game);
+    void s_showAchievements(/*QList<SAchievementPlayer> achievements, */SGame game);
 
 private slots:
-    void changeEvent(QEvent *event);
-    void retranslate();
+    void retranslate() override;
+    void updateIcons() override;
 
     void showCompleteGames();
     void showStartedGames();
@@ -75,14 +75,14 @@ private:
     GamesType _currentGamesType = GamesType::none;
     int _currentIndex = -1;
     SProfile _profile;
-    QList<SGame> _games;
+    SGames _games;
     double _summAverages;
     int _achievementCount = 0;
 
-    QList<SGame> _complete;
+    SGames _complete;
     QList<QPair<SGame, double>> _started;
-    QList<SGame> _notStarted;
-    QList<SGame> _noAchievements;
+    SGames _notStarted;
+    SGames _noAchievements;
 
 
     QVector<int> _times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

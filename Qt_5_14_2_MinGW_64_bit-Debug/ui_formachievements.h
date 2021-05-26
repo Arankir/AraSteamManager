@@ -18,13 +18,12 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
-#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "forms/subForms/achievements/formcategoriesedit.h"
+#include "forms/subForms/achievements/formcategoriestree.h"
 #include "forms/subForms/achievements/formfriendscompare.h"
 #include "forms/subForms/achievements/widgets/formreachedfilter.h"
 #include "subWidgets/progressBars/progressbargood.h"
@@ -34,25 +33,25 @@ QT_BEGIN_NAMESPACE
 class Ui_FormAchievements
 {
 public:
-    QVBoxLayout *verticalLayout_2;
-    QFrame *FrameFilter;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_10;
+    QHBoxLayout *horizontalLayout_8;
+    QFrame *FrameFilter;
+    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_5;
     QLabel *LabelTotalPersent;
     QPushButton *ButtonUpdate;
     FormReachedFilter *FilterMyProfile;
+    QHBoxLayout *horizontalLayout_6;
     QCheckBox *CheckBoxFavorites;
-    QSpacerItem *horizontalSpacer_5;
     QPushButton *ButtonGuides;
+    QHBoxLayout *horizontalLayout_7;
+    QLineEdit *LineEditNameAchievements;
+    QPushButton *ButtonFindAchievement;
+    FormCategoriesTree *TreeWidgetCategories;
     QHBoxLayout *horizontalLayout_2;
     QLabel *LabelGameOnline;
     QLabel *LabelGameOnlineValue;
-    QHBoxLayout *horizontalLayout_3;
-    QLineEdit *LineEditNameAchievements;
-    QPushButton *ButtonFindAchievement;
-    ProgressBarGood *ProgressBarLoad;
-    QHBoxLayout *horizontalLayout_5;
-    QTreeWidget *TreeWidgetCategories;
     QTabWidget *TabWidget;
     QWidget *tabStandart;
     QVBoxLayout *verticalLayout_4;
@@ -63,33 +62,39 @@ public:
     QWidget *tabCompare;
     QHBoxLayout *horizontalLayout_4;
     FormFriendsCompare *FriendsCompare;
+    ProgressBarGood *ProgressBarLoad;
 
     void setupUi(QWidget *FormAchievements)
     {
         if (FormAchievements->objectName().isEmpty())
             FormAchievements->setObjectName(QString::fromUtf8("FormAchievements"));
-        FormAchievements->resize(894, 768);
+        FormAchievements->resize(894, 622);
         QFont font;
         font.setFamily(QString::fromUtf8("Ebrima"));
         FormAchievements->setFont(font);
-        verticalLayout_2 = new QVBoxLayout(FormAchievements);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout(FormAchievements);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         FrameFilter = new QFrame(FormAchievements);
         FrameFilter->setObjectName(QString::fromUtf8("FrameFilter"));
-        FrameFilter->setMinimumSize(QSize(0, 0));
         FrameFilter->setFrameShape(QFrame::StyledPanel);
         FrameFilter->setFrameShadow(QFrame::Raised);
-        verticalLayout = new QVBoxLayout(FrameFilter);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        verticalLayout_3 = new QVBoxLayout(FrameFilter);
+        verticalLayout_3->setSpacing(0);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(8);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         LabelTotalPersent = new QLabel(FrameFilter);
         LabelTotalPersent->setObjectName(QString::fromUtf8("LabelTotalPersent"));
         LabelTotalPersent->setText(QString::fromUtf8("none/none (0%)"));
-        LabelTotalPersent->setAlignment(Qt::AlignCenter);
+        LabelTotalPersent->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
-        horizontalLayout_10->addWidget(LabelTotalPersent);
+        horizontalLayout_5->addWidget(LabelTotalPersent);
 
         ButtonUpdate = new QPushButton(FrameFilter);
         ButtonUpdate->setObjectName(QString::fromUtf8("ButtonUpdate"));
@@ -99,7 +104,10 @@ public:
         sizePolicy.setHeightForWidth(ButtonUpdate->sizePolicy().hasHeightForWidth());
         ButtonUpdate->setSizePolicy(sizePolicy);
 
-        horizontalLayout_10->addWidget(ButtonUpdate);
+        horizontalLayout_5->addWidget(ButtonUpdate);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_5);
 
         FilterMyProfile = new FormReachedFilter(FrameFilter);
         FilterMyProfile->setObjectName(QString::fromUtf8("FilterMyProfile"));
@@ -109,31 +117,70 @@ public:
         sizePolicy1.setHeightForWidth(FilterMyProfile->sizePolicy().hasHeightForWidth());
         FilterMyProfile->setSizePolicy(sizePolicy1);
 
-        horizontalLayout_10->addWidget(FilterMyProfile);
+        verticalLayout_2->addWidget(FilterMyProfile);
 
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         CheckBoxFavorites = new QCheckBox(FrameFilter);
         CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
 
-        horizontalLayout_10->addWidget(CheckBoxFavorites);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_10->addItem(horizontalSpacer_5);
+        horizontalLayout_6->addWidget(CheckBoxFavorites);
 
         ButtonGuides = new QPushButton(FrameFilter);
         ButtonGuides->setObjectName(QString::fromUtf8("ButtonGuides"));
         sizePolicy.setHeightForWidth(ButtonGuides->sizePolicy().hasHeightForWidth());
         ButtonGuides->setSizePolicy(sizePolicy);
 
-        horizontalLayout_10->addWidget(ButtonGuides);
+        horizontalLayout_6->addWidget(ButtonGuides);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_6);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        LineEditNameAchievements = new QLineEdit(FrameFilter);
+        LineEditNameAchievements->setObjectName(QString::fromUtf8("LineEditNameAchievements"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(LineEditNameAchievements->sizePolicy().hasHeightForWidth());
+        LineEditNameAchievements->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_7->addWidget(LineEditNameAchievements);
+
+        ButtonFindAchievement = new QPushButton(FrameFilter);
+        ButtonFindAchievement->setObjectName(QString::fromUtf8("ButtonFindAchievement"));
+        ButtonFindAchievement->setEnabled(true);
+        sizePolicy.setHeightForWidth(ButtonFindAchievement->sizePolicy().hasHeightForWidth());
+        ButtonFindAchievement->setSizePolicy(sizePolicy);
+
+        horizontalLayout_7->addWidget(ButtonFindAchievement);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_7);
+
+        TreeWidgetCategories = new FormCategoriesTree(FrameFilter);
+        TreeWidgetCategories->setObjectName(QString::fromUtf8("TreeWidgetCategories"));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(TreeWidgetCategories->sizePolicy().hasHeightForWidth());
+        TreeWidgetCategories->setSizePolicy(sizePolicy3);
+        TreeWidgetCategories->setMaximumSize(QSize(200, 16777215));
+        TreeWidgetCategories->setWordWrap(true);
+
+        verticalLayout_2->addWidget(TreeWidgetCategories);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(1);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         LabelGameOnline = new QLabel(FrameFilter);
         LabelGameOnline->setObjectName(QString::fromUtf8("LabelGameOnline"));
-        sizePolicy1.setHeightForWidth(LabelGameOnline->sizePolicy().hasHeightForWidth());
-        LabelGameOnline->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy4(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(LabelGameOnline->sizePolicy().hasHeightForWidth());
+        LabelGameOnline->setSizePolicy(sizePolicy4);
         QFont font1;
         font1.setFamily(QString::fromUtf8("Ebrima"));
         font1.setPointSize(10);
@@ -143,54 +190,25 @@ public:
 
         LabelGameOnlineValue = new QLabel(FrameFilter);
         LabelGameOnlineValue->setObjectName(QString::fromUtf8("LabelGameOnlineValue"));
+        QFont font2;
+        font2.setFamily(QString::fromUtf8("Ebrima"));
+        font2.setPointSize(10);
+        font2.setBold(true);
+        font2.setWeight(75);
+        LabelGameOnlineValue->setFont(font2);
+        LabelGameOnlineValue->setStyleSheet(QString::fromUtf8("color: #42a9c6;"));
         LabelGameOnlineValue->setText(QString::fromUtf8("0"));
 
         horizontalLayout_2->addWidget(LabelGameOnlineValue);
 
 
-        horizontalLayout_10->addLayout(horizontalLayout_2);
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
 
-        verticalLayout->addLayout(horizontalLayout_10);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        LineEditNameAchievements = new QLineEdit(FrameFilter);
-        LineEditNameAchievements->setObjectName(QString::fromUtf8("LineEditNameAchievements"));
-
-        horizontalLayout_3->addWidget(LineEditNameAchievements);
-
-        ButtonFindAchievement = new QPushButton(FrameFilter);
-        ButtonFindAchievement->setObjectName(QString::fromUtf8("ButtonFindAchievement"));
-        ButtonFindAchievement->setEnabled(true);
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(ButtonFindAchievement->sizePolicy().hasHeightForWidth());
-        ButtonFindAchievement->setSizePolicy(sizePolicy2);
-
-        horizontalLayout_3->addWidget(ButtonFindAchievement);
+        verticalLayout_3->addLayout(verticalLayout_2);
 
 
-        verticalLayout->addLayout(horizontalLayout_3);
-
-
-        verticalLayout_2->addWidget(FrameFilter);
-
-        ProgressBarLoad = new ProgressBarGood(FormAchievements);
-        ProgressBarLoad->setObjectName(QString::fromUtf8("ProgressBarLoad"));
-        ProgressBarLoad->setValue(0);
-
-        verticalLayout_2->addWidget(ProgressBarLoad);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        TreeWidgetCategories = new QTreeWidget(FormAchievements);
-        TreeWidgetCategories->setObjectName(QString::fromUtf8("TreeWidgetCategories"));
-        TreeWidgetCategories->setMaximumSize(QSize(200, 16777215));
-        TreeWidgetCategories->setWordWrap(true);
-
-        horizontalLayout_5->addWidget(TreeWidgetCategories);
+        horizontalLayout_8->addWidget(FrameFilter);
 
         TabWidget = new QTabWidget(FormAchievements);
         TabWidget->setObjectName(QString::fromUtf8("TabWidget"));
@@ -225,10 +243,16 @@ public:
 
         TabWidget->addTab(tabCompare, QString());
 
-        horizontalLayout_5->addWidget(TabWidget);
+        horizontalLayout_8->addWidget(TabWidget);
 
 
-        verticalLayout_2->addLayout(horizontalLayout_5);
+        verticalLayout->addLayout(horizontalLayout_8);
+
+        ProgressBarLoad = new ProgressBarGood(FormAchievements);
+        ProgressBarLoad->setObjectName(QString::fromUtf8("ProgressBarLoad"));
+        ProgressBarLoad->setValue(0);
+
+        verticalLayout->addWidget(ProgressBarLoad);
 
 
         retranslateUi(FormAchievements);
@@ -251,15 +275,15 @@ public:
         ButtonGuides->setToolTip(QCoreApplication::translate("FormAchievements", "\320\240\321\203\320\272\320\276\320\262\320\276\320\264\321\201\321\202\320\262\320\260", nullptr));
 #endif // QT_CONFIG(tooltip)
         ButtonGuides->setText(QString());
-        LabelGameOnline->setText(QCoreApplication::translate("FormAchievements", "GameOnline:  ", nullptr));
         LineEditNameAchievements->setPlaceholderText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\265", nullptr));
-        ButtonFindAchievement->setText(QCoreApplication::translate("FormAchievements", "\320\235\320\260\320\271\321\202\320\270", nullptr));
-        ProgressBarLoad->setFormat(QCoreApplication::translate("FormAchievements", "%v/%m", nullptr));
+        ButtonFindAchievement->setText(QString());
         QTreeWidgetItem *___qtreewidgetitem = TreeWidgetCategories->headerItem();
         ___qtreewidgetitem->setText(0, QCoreApplication::translate("FormAchievements", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
+        LabelGameOnline->setText(QCoreApplication::translate("FormAchievements", "GameOnline:  ", nullptr));
         TabWidget->setTabText(TabWidget->indexOf(tabStandart), QCoreApplication::translate("FormAchievements", " \320\241\320\262\320\276\320\270 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217  ", nullptr));
         TabWidget->setTabText(TabWidget->indexOf(tabEditCategory), QCoreApplication::translate("FormAchievements", "  \320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217\320\274\320\270  ", nullptr));
         TabWidget->setTabText(TabWidget->indexOf(tabCompare), QCoreApplication::translate("FormAchievements", "  \320\241\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\265 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270 ", nullptr));
+        ProgressBarLoad->setFormat(QCoreApplication::translate("FormAchievements", "%v/%m", nullptr));
     } // retranslateUi
 
 };

@@ -20,12 +20,14 @@
 #include "classes/common/favorites.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
-#include "classes/threads/threading.h"
+#include "classes/threads/thread/threadgames.h"
 #include "classes/network/requestimage.h"
 #include "classes/games/hiddengames.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/progressBars/progressbarbad.h"
 #include "subWidgets/progressBars/progressbargood.h"
+#include "subWidgets/models/gamesmodel.h"
+#include "subWidgets/models/filters.h"
 
 enum tableGamesColumns {
     ColumnGamesAppid    = 0,
@@ -49,18 +51,17 @@ namespace Ui {
 class FormGames;
 }
 
-class FormGames : public QWidget {
+class FormGames : public Form {
     Q_OBJECT
 
 public slots:
-    void updateSettings();
-    void setGames(SProfile &aProfile, QList<SGame> &aGames);
-    bool isInit() {return ((_games.count() > 0) && (_filter.getRow() > 0) && (_loaded));}
+    void updateSettings() override;
+    void setGames(SProfile &aProfile, SGames &aGames);
+    bool isInit() {return ((_loaded) && (_gamesModel->rowCount() > 0));}
     bool isLoaded() {return _loaded;}
     void clear();
 
 public:
-    //explicit FormGames(SProfile &profile, SGames &Games, QWidget *parent = nullptr);
     FormGames(QWidget *aParent = nullptr);
     ~FormGames();
 
@@ -68,15 +69,13 @@ signals:
     void s_return_to_profile(QWidget*);
     void s_achievementsLoaded(int);
     void s_finish(int width);
-    void s_showAchievements(QList<SAchievementPlayer> &achievements, SGame &games);
+    void s_showAchievements(/*const QList<SAchievementPlayer> &achievements, */const SGame &games);
 
 private slots:
     void init();
-    void changeEvent(QEvent *event);
-    void setIcons();
-    void retranslate();
-    void onResultAchievements(QList<SAchievementPlayer> aAchievements, QString aAppId);
-    void closeEvent(QCloseEvent *event);
+    void updateIcons() override;
+    void retranslate() override;
+    void closeEvent(QCloseEvent *event) override;
 
     void lineEditGame_TextChanged(const QString &aFindText);
     void buttonFind_Clicked();
@@ -84,22 +83,14 @@ private slots:
     void buttonAchievements_Clicked();
     void buttonFavorite_Clicked();
     void buttonHide_Clicked();
-    void createThread();
 
-    QMenu *createMenu(SGame &game);
+    QMenu *createMenu(const SGame &game);
     void updateHiddenGames();
-    void updateCurrentGame();
-    void initTable();
-    void updateGroups(SProfile profile);
-    void initComments();
-    void setTableModel(QStandardItemModel *aModel);
+    SGame currentGame();
+    QStringList currentComment();
+    QList<SAchievementPlayer> currentAchievements();
+    void updateGroups(const SProfile &profile);
 
-    int indexFromRow(int aRow);
-    int rowFromIndex(int aIndex);
-    int indexFromId(QString aId);
-    int rowFromId(QString aId);
-
-    void updateHiddenRows();
     void updateGroupsFilter();
     void showGroupsEdit();
     void showCommentsEdit();
@@ -107,25 +98,20 @@ private slots:
     void checkBoxFavorites_StateChanged(int arg1);
 
     bool isInFavorites(const int &aAppId);
-    void resizeTableColumns();
 private:
     Ui::FormGames *ui;
     SProfile _profile;
-    QList<SGame> _games;
-    QVector<QList<SAchievementPlayer>> _achievements;
-
-    SGame *_currentGame = nullptr;
-    int _currentIndex;
-
     Favorites _favorites;
-    MyFilter _filter;
-    QList<gameData> _hide;
+    QList<HiddenGame> _hide;
     GroupsGames _groups;
-    Comments _comments;
 
     bool _loaded = false;
 
-    int _windowChildCount = 0;
+    GamesModel *_gamesModel = nullptr;
+    QSortFilterProxyModel _filterName;
+    QSortFilterProxyInvertModel _filterHide;
+    QSortFilterProxyModel _filterGroup;
+    QSortFilterProxyModel _filterFavorite;
 
 };
 
