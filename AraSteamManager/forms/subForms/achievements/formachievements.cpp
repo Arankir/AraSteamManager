@@ -26,6 +26,8 @@ void FormAchievements::init() {
     initingTable(ui->TableViewMyAchievements);
     ui->TabWidget->setCurrentIndex(FormAchievementsData::TabStandart);
     ui->ProgressBarLoad->setVisible(false);
+    ui->splitter->setStretchFactor(0, 0);
+    ui->splitter->setStretchFactor(1, 1);
     updateIcons();
 #define InitFilters {
     _achievementsModel = new AchievementsModel();

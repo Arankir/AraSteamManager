@@ -28,9 +28,6 @@ public:
         if (FormContainerAchievements->objectName().isEmpty())
             FormContainerAchievements->setObjectName(QString::fromUtf8("FormContainerAchievements"));
         FormContainerAchievements->resize(738, 753);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        FormContainerAchievements->setFont(font);
         verticalLayout = new QVBoxLayout(FormContainerAchievements);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));

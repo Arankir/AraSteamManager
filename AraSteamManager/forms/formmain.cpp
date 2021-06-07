@@ -83,9 +83,9 @@ void FormMain::removeAchievements(int index) {
 void FormMain::containerAchievementsClose() {
     _achievementsCount = 0;
     disconnect(_containerAchievementsForm);
-    if (_containerAchievementsForm->parentWidget()->parentWidget()) {
-        _containerAchievementsForm->parentWidget()->parentWidget()->close();
-    }
+//    if (_containerAchievementsForm->parentWidget()->parentWidget()) {
+//        _containerAchievementsForm->parentWidget()->parentWidget()->close();
+//    }
     delete _containerAchievementsForm;
     _containerAchievementsForm = nullptr;
 }
@@ -121,8 +121,8 @@ FormContainerAchievements *FormMain::createFormContainerAchievements() {
 //    FramelessWindow *f = new FramelessWindow;
     _containerAchievementsForm = createFramelessForm<FormContainerAchievements>();// new FormContainerAchievements(f);
 //    f->setWidget(_containerAchievementsForm);
-    connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements, this, &FormMain::removeAchievements);
-    connect(_containerAchievementsForm, &FormContainerAchievements::s_formClose,          this, &FormMain::containerAchievementsClose);
+    connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements,   this, &FormMain::removeAchievements);
+    connect(_containerAchievementsForm, &FormContainerAchievements::s_closed,               this, &FormMain::containerAchievementsClose);
     //++_windowChildCount;
     return _containerAchievementsForm;
 }
@@ -158,7 +158,7 @@ void FormMain::goToGames(SProfile &aProfile, SGames &aGames) {
             ui->StackedFormGames->setGames(aProfile, aGames);
             ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
         } else {
-            if (ui->StackedFormGames->isLoaded()) {
+            if (ui->StackedFormGames->isInit()) {
                 ui->StackedWidgetForms->setCurrentIndex(FormMainGames);
             }
         }
@@ -175,7 +175,7 @@ void FormMain::goToFriends(const QString &aSteamId, QList<SFriend> &aFriends) {
 //            ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
             ui->StackedWidgetForms->setCurrentIndex(FormMainFriends);
         } else {
-            if (ui->StackedFormFriends->isLoaded()) {
+            if (ui->StackedFormFriends->isInit()) {
                 ui->StackedWidgetForms->setCurrentIndex(FormMainFriends);
             }
         }
@@ -190,7 +190,7 @@ void FormMain::goToFavorites() {
             //ui->FormProgressBar->setVisible(true);
             //ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
         //} else {
-            if (ui->StackedFormFriends->isLoaded()) {
+            if (ui->StackedFormFavorites->isLoaded()) {
                 ui->StackedWidgetForms->setCurrentIndex(FormMainFavorites);
             }
         //}

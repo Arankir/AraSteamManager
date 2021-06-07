@@ -10,6 +10,13 @@
 #include "framelesswindow.h"
 #include "form.h"
 
+QTableView *initingTable(QTableView *table);
+QString textToToolTip(const QString &text, const QString &aSplitter = " ");
+bool createDir(const QString &path);
+bool saveFile(const QString &filePath, const QByteArray &data);
+bool readFile(const QString &filePath, QByteArray &data);
+bool centralize(const QWidget *parent, QWidget *child);
+
 template <typename T>
 QList<T> &mySort(QList<T> &aList, bool(*compare)(T &t1, T &t2) = [](T &t1, T &t2){return t1<t2;}) {
 //TODO заменить на нормальную сортировку
@@ -36,15 +43,22 @@ T *createFramelessForm() {
     f->setWidget(t);
     if (Form *form = dynamic_cast<Form*>(t)) {
         form->setFramelessWindow(f);
+        QObject::connect(form, &Form::s_closed, f, &FramelessWindow::close);
     }
 
     return t;
 }
 
-QTableView *initingTable(QTableView *table);
-QString textToToolTip(const QString &text, const QString &aSplitter = " ");
-bool createDir(const QString &path);
-bool saveFile(const QString &filePath, const QByteArray &data);
-bool readFile(const QString &filePath, QByteArray &data);
+#include <QHBoxLayout>
+template <class T>
+QFrame *createSubForm(T *aSubForm, QWidget *aParent) {
+    QFrame *frame = new QFrame(aParent);
+    frame->setObjectName("SubWindow");
+    QHBoxLayout *lay = new QHBoxLayout(frame);
+    lay->addWidget(aSubForm);
+    centralize(aParent, frame);
+    frame->show();
+    return frame;
+}
 
 #endif // GENERALFUNCTIONS_H

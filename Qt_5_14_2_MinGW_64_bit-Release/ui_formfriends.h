@@ -46,9 +46,6 @@ public:
         if (FormFriends->objectName().isEmpty())
             FormFriends->setObjectName(QString::fromUtf8("FormFriends"));
         FormFriends->resize(825, 536);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        FormFriends->setFont(font);
         verticalLayout = new QVBoxLayout(FormFriends);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);

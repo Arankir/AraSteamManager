@@ -86,3 +86,14 @@ QTableView *initingTable(QTableView *table) {
     table->setEditTriggers(QAbstractItemView::NoEditTriggers);
     return table;
 }
+
+bool centralize(const QWidget *parent, QWidget *child) {
+    QRect parentGeometry = parent->geometry();
+    QSize childSize = child->sizeHint();
+    QRect result(((parentGeometry.width() / 2) - (childSize.width() / 2)),
+                ((parentGeometry.height() / 2) - (childSize.height() / 2)),
+                childSize.width(),
+                childSize.height());
+    child->setGeometry(result);
+    return true;
+}

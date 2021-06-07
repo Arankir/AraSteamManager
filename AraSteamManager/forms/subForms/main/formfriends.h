@@ -9,7 +9,6 @@
 #include "classes/common/favorites.h"
 #include "classes/common/myfilter.h"
 #include "subWidgets/models/friendsmodel.h"
-#include <QSortFilterProxyModel>
 
 namespace Ui {
 class FormFriends;
@@ -23,7 +22,6 @@ public slots:
     void setFriends(const QString &aId, QList<SFriend> &aFriends);
     void clear();
     bool isInit();
-    bool isLoaded();
 
 public:
     explicit FormFriends(const QString &id, QList<SFriend> &Friends, QWidget *parent = nullptr);
@@ -46,13 +44,11 @@ private slots:
     void retranslate() override;
     void updateIcons() override;
     QPair<SFriend, SProfile> currentFriend();
-    bool isProfileFavorite(const QPair<SFriend, SProfile> &aProfile);
     //Взаимодействие с таблицей
     QMenu *createMenu(const QPair<SFriend, SProfile> &profile);
     void goToCurrentProfile();
     void friendToFavorite();
     //Фильтр
-    void checkBoxOpenProfile_StateChanged(int arg1);
     void lineEditName_TextChanged(const QString &arg1);
     void buttonFind_Clicked();
     void comboBoxStatus_Activated(int index);
@@ -64,16 +60,9 @@ private:
     QString _id;
 
     bool _blockedLoad = false;
-    bool _loaded = false;
 
-    Favorites _favorites;
-
-    FriendsModel *_friendsModel = nullptr;
-    QSortFilterProxyModel _filterName;
-    QSortFilterProxyModel _filterStatus;
-    QSortFilterProxyModel _filterPublic;
-    QSortFilterProxyModel _filterFavorite;
-
+//    FriendsModel *_friendsModel = nullptr;
+    ProxyModelFriends _filterFriends;
 };
 
 #endif // FORMFRIENDS_H

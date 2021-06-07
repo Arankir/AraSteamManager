@@ -35,7 +35,7 @@ QVariant FriendsModel::data(const QModelIndex &index, int role) const {
             return _friends[index.row()].second.stateText();
         }
         case FriendsIsPublic: {
-            return _friends[index.row()].second.communityVisibilityState() == 3 ? tr("Публичный") : tr("Скрытый");
+            return _friends[index.row()].second.communityVisibilityState() == 3 ? isPublicTitle() : tr("Скрытый");
         }
         }
     }
@@ -92,6 +92,10 @@ QVariant FriendsModel::headerData(int section, Qt::Orientation orientation, int 
 
 QString FriendsModel::friendId(const QModelIndex &index) const {
     return _friends[index.row()].first.steamId();
+}
+
+QString FriendsModel::isPublicTitle() {
+    return tr("Публичный");
 }
 
 void FriendsModel::sort(int column, Qt::SortOrder order) {
@@ -174,4 +178,66 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
 
 QPair<SFriend, SProfile> FriendsModel::getFriend(const int &row) const {
     return _friends[row];
+}
+
+ProxyModelFriends::ProxyModelFriends(QObject *aParent): QSortFilterProxyModel(aParent),
+    _name(""), _status(""), _public(), _favorite() {
+
+}
+
+bool ProxyModelFriends::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
+    QModelIndex indName = sourceModel()->index(aSource_row, FriendsName, aSource_parent);
+    QModelIndex indStatus = sourceModel()->index(aSource_row, FriendsStatus, aSource_parent);
+    QModelIndex indPublic = sourceModel()->index(aSource_row, FriendsIsPublic, aSource_parent);
+    QModelIndex indId = sourceModel()->index(aSource_row, FriendsID, aSource_parent);
+    if(sourceModel()->data(indName).toString().toLower().indexOf(_name.toLower()) == -1 ||
+       (_status.isEmpty() ? false : sourceModel()->data(indStatus).toString().toLower() != _status.toLower()) ||
+       sourceModel()->data(indPublic).toString().indexOf(_public > 0 ? FriendsModel::isPublicTitle() : "") == -1 ||
+       (_favorite.isEmpty() ? false : _favorite.indexOf(sourceModel()->data(indId).toString()) == -1))
+        return false;
+    return true;
+}
+
+QVariant ProxyModelFriends::headerData(int section, Qt::Orientation orientation, int role) const {
+    return sourceModel()->headerData(section, orientation, role);
+}
+
+FriendsModel *ProxyModelFriends::sourceModel() const {
+    return static_cast<FriendsModel*>(QSortFilterProxyModel::sourceModel());
+}
+
+void ProxyModelFriends::setSourceModel(FriendsModel *sourceModel) {
+    QSortFilterProxyModel::setSourceModel(sourceModel);
+}
+
+void ProxyModelFriends::setName(const QString &aNewName) {
+    if(_name != aNewName)
+        _name = aNewName;
+    invalidateFilter();
+}
+
+void ProxyModelFriends::setStatus(const QString &aNewStatus) {
+    if(_status != aNewStatus)
+        _status = aNewStatus;
+    invalidateFilter();
+
+}
+
+void ProxyModelFriends::setIsPublic(const int &aIsPublic) {
+    if(_public != aIsPublic)
+        _public = aIsPublic;
+    invalidateFilter();
+}
+
+void ProxyModelFriends::setFavorites(const QStringList &aNewFavorites) {
+    if(_favorite != aNewFavorites)
+        _favorite = aNewFavorites;
+    invalidateFilter();
+}
+
+void ProxyModelFriends::clear() {
+    _name.clear();
+    _status.clear();
+    _public = 0;
+    _favorite.clear();
 }

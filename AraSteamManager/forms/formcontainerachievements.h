@@ -27,7 +27,7 @@ public:
 
 signals:
     void s_removeAchievements(int index);
-    void s_formClose();
+//    void s_formClose();
 
 private slots:
     void closeEvent(QCloseEvent*) override;

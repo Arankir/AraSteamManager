@@ -58,7 +58,7 @@ void FormComments::init() {
 }
 
 void FormComments::on_ButtonCancel_clicked() {
-    parentWidget()->parentWidget()->close();
+    close();
 }
 
 void FormComments::on_ButtonApply_clicked() {
@@ -71,11 +71,12 @@ void FormComments::on_ButtonApply_clicked() {
     }
 
     emit s_updateComments();
-    parentWidget()->parentWidget()->close();
+    close();
 }
 
 void FormComments::retranslate() {
     ui->retranslateUi(this);
+//TODO не обнавляется описание ачивки
 }
 
 void FormComments::updateIcons() {

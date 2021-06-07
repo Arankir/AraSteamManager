@@ -8,6 +8,7 @@ void AchievementsModel::setAchievements(const QString &aUserId, const QString &a
     _userId = aUserId;
     _gameId = aGameId;
     _achievementsInModel.clear();
+    _profiles.clear();
 
     auto globals = SAchievementSchema::load(_gameId);
     auto percents = SAchievementPercentage::load(_gameId);
@@ -20,16 +21,16 @@ void AchievementsModel::setAchievements(const QString &aUserId, const QString &a
             if (percent.apiName() != global.apiName()) {
                 continue;
             }
-            auto iterator = std::find_if(comments.begin(),
-                                         comments.end(),
-                                         [=](const AchievementComment &achievementComment) {
-                                            return achievementComment.gameId() == percent.apiName();
-                                         });
             auto achievement = AchievementInModel{cLoadPixmap(global.icon(), Paths::imagesAchievements(aGameId, global.icon()), QSize(64, 64)),
                                                     QStringList(),
                                                     global,
                                                     percent,
                                                     QList<SAchievementPlayer>()};
+            auto iterator = std::find_if(comments.begin(),
+                                         comments.end(),
+                                         [=](const AchievementComment &achievementComment) {
+                                            return achievementComment.gameId() == percent.apiName();
+                                         });
             if (iterator != comments.end()) {
                 achievement.comment = (*iterator).comment();
             }
@@ -134,11 +135,19 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
             return QString{"%1"}.arg(_achievementsInModel[index.row() - c_reservedRows].percent.percent(), 5, 'f', 1, '0') + "%";
         }
         default: {
-            auto achievement = _achievementsInModel[index.row() - c_reservedRows].profiles[index.column() - AchievementCount];
-            if (achievement.achieved() == 1) {
-                return achievement.unlockTime().toString(Settings::dateTimeFormatShort());
+            if (_achievementsInModel[index.row() - c_reservedRows].profiles.size() > (index.column() - AchievementCount)) {
+                auto achievement = _achievementsInModel[index.row() - c_reservedRows].profiles[index.column() - AchievementCount];
+                if (achievement.achieved() == 1) {
+                    return achievement.unlockTime().toString(Settings::dateTimeFormatShort());
+                } else {
+                    return tr("Не получено");
+                }
             } else {
-                return tr("Не получено");
+                qWarning() << "no profile from achievements need"
+                           << (index.column() - AchievementCount + 1)
+                           << "have"
+                           << _achievementsInModel[index.row() - c_reservedRows].profiles.size();
+                return QVariant();
             }
         }
         }
@@ -189,15 +198,41 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
             return QVariant();
         }
         default: {
-            if (_achievementsInModel[index.row() - c_reservedRows].profiles[index.column() - AchievementCount].achieved() == 1) {
-                return c_achievedColor;
+            if (_achievementsInModel[index.row() - c_reservedRows].profiles.size() > (index.column() - AchievementCount)) {
+                if (_achievementsInModel[index.row() - c_reservedRows].profiles[index.column() - AchievementCount].achieved() == 1) {
+                    return c_achievedColor;
+                } else {
+                    return c_notAchievedColor;
+                }
             } else {
-                return c_notAchievedColor;
+                qWarning() << "no profile from achievements need"
+                           << (index.column() - AchievementCount + 1)
+                           << "have"
+                           << _achievementsInModel[index.row() - c_reservedRows].profiles.size();
+                return QVariant();
             }
             break;
         }
         }
         break;
+    }
+    case Qt::TextAlignmentRole: {
+        switch (index.column()) {
+        case AchievementAppid:
+        case AchievementIndex:
+        case AchievementIcon:
+        case AchievementTitle:
+        case AchievementDescription:
+        case AchievementComments: {
+            return QVariant();
+        }
+        case AchievementWorld: {
+            return QVariant(Qt::AlignVCenter | Qt::AlignHCenter);
+        }
+        default: {
+            return QVariant();
+        }
+        }
     }
     default: {
         return QVariant();
@@ -261,11 +296,17 @@ Qt::ItemFlags AchievementsModel::flags(const QModelIndex &index) const {
 }
 
 bool AchievementsModel::insertColumn(int column, int count, const QModelIndex &parent) {
-
+    Q_UNUSED(column);
+    Q_UNUSED(count);
+    Q_UNUSED(parent);
+    return false;
 }
 
 bool AchievementsModel::removeColumn(int column, int count, const QModelIndex &parent) {
-
+    Q_UNUSED(column);
+    Q_UNUSED(count);
+    Q_UNUSED(parent);
+    return false;
 }
 
 SAchievement AchievementsModel::getAchievement(const int &row) const {

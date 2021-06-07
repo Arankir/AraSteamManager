@@ -10,6 +10,11 @@ void Form::changeEvent(QEvent *event) {
     }
 }
 
+void Form::close() {
+    emit s_closed();
+//    QWidget::close();
+}
+
 void Form::setFramelessWindow(class FramelessWindow *window) {
     _framelessWindow = window;
     _isRoot = true;

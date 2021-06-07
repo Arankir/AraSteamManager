@@ -41,9 +41,6 @@ public:
         if (FormReachedFilter->objectName().isEmpty())
             FormReachedFilter->setObjectName(QString::fromUtf8("FormReachedFilter"));
         FormReachedFilter->resize(66, 38);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        FormReachedFilter->setFont(font);
         horizontalLayout_4 = new QHBoxLayout(FormReachedFilter);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);

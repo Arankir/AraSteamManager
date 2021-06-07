@@ -26,7 +26,7 @@ public:
     void setGames(QList<SGame> &games, const QString &userId);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     QString gameId(const QModelIndex &index) const;
 
@@ -58,6 +58,31 @@ private:
 
     QString _userId;
     QList<GameInModel> _gamesInModel;
+};
+
+class ProxyModelGames : public QSortFilterProxyModel {
+    Q_OBJECT
+public:
+    ProxyModelGames(QObject* parent = nullptr);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    GamesModel *sourceModel() const;
+    void setSourceModel(GamesModel *sourceModel);
+
+public slots:
+    void setName(const QString &newName);
+    void setHide(const QStringList &newHide);
+    void setGroup(const QStringList &newGroup);
+    void setFavorites(const QStringList &newFavorites);
+    void clear();
+
+private:
+    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel)};
+
+    QString _name;
+    QStringList _hide;
+    QStringList _group;
+    QStringList _favorite;
 };
 
 #endif // GAMESMODEL_H

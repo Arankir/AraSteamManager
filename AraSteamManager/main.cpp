@@ -19,6 +19,7 @@ void initSetting();
 void initLanguage(QApplication &app);
 void initFont();
 void initLog();
+void onCrush();
 void log(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
 int main(int argc, char *argv[]) {
@@ -34,17 +35,9 @@ int main(int argc, char *argv[]) {
 
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
-//    FramelessWindow f;
-//    f.setWidget(new FormMain(&f));
     createFramelessForm<FormMain>()->window()->show();
-//    f.show();
-//    FramelessWindow::createWithWidget(new FormMain())->show();
-    try {
-        return a.exec();
-    }  catch (std::exception &exception) {
-        qWarning() << "runtime error" << exception.what();
-        return -1;
-    }
+
+    return a.exec();
 }
 
 void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMessage) {
@@ -66,29 +59,6 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
     QString output(function);
     output += "  " + aMessage + "\n";
     OutputDebugString(reinterpret_cast<const wchar_t *>(output.utf16()));
-}
-
-void initLog() {
-    QString logsPath = Paths::temp() + "files/logs/";
-    createDir(logsPath);
-
-    //Удаление старых файлов
-    QDir dirLogs(logsPath);
-    dirLogs.setFilter(QDir::Files | QDir::NoSymLinks);
-    dirLogs.setSorting(QDir::Name);
-    QFileInfoList list = dirLogs.entryInfoList();
-    for(auto &file: list) {
-        if (file.fileName().indexOf("log_") == 0) {
-            QDateTime date {QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), Settings::dateFormat())};
-            if (date < QDateTime::currentDateTime().addMonths(-1)) {
-                QFile::remove(file.filePath() + "/" + file.fileName());
-            }
-        }
-    }
-
-    logFile_.reset(new QFile(logsPath + QDateTime::currentDateTime().toString("log_" + Settings::dateFormat()) + ".txt"));
-    logFile_.data()->open(QFile::Append | QFile::Text);
-    qInstallMessageHandler(log);
 }
 
 void registerTypes() {
@@ -126,4 +96,31 @@ void initFont() {
     //font.setPointSize(12);
     //font.setPixelSize(12);
     qApp->setFont(font);
+}
+
+void initLog() {
+    QString logsPath = Paths::temp() + "files/logs/";
+    createDir(logsPath);
+
+    //Удаление старых файлов
+    QDir dirLogs(logsPath);
+    dirLogs.setFilter(QDir::Files | QDir::NoSymLinks);
+    dirLogs.setSorting(QDir::Name);
+    QFileInfoList list = dirLogs.entryInfoList();
+    for(auto &file: list) {
+        if (file.fileName().indexOf("log_") == 0) {
+            QDateTime date {QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), Settings::dateFormat())};
+            if (date < QDateTime::currentDateTime().addMonths(-1)) {
+                QFile::remove(file.filePath() + "/" + file.fileName());
+            }
+        }
+    }
+
+    logFile_.reset(new QFile(logsPath + QDateTime::currentDateTime().toString("log_" + Settings::dateFormat()) + ".txt"));
+    logFile_.data()->open(QFile::Append | QFile::Text);
+    qInstallMessageHandler(log);
+}
+
+void onCrush() {
+
 }

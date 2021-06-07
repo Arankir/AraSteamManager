@@ -65,9 +65,6 @@ public:
         if (FormFavorites->objectName().isEmpty())
             FormFavorites->setObjectName(QString::fromUtf8("FormFavorites"));
         FormFavorites->resize(635, 662);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        FormFavorites->setFont(font);
         verticalLayout = new QVBoxLayout(FormFavorites);
         verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));

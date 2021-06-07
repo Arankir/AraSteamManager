@@ -45,10 +45,6 @@ public:
         if (FormGames->objectName().isEmpty())
             FormGames->setObjectName(QString::fromUtf8("FormGames"));
         FormGames->resize(564, 493);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        font.setPointSize(10);
-        FormGames->setFont(font);
         verticalLayout_2 = new QVBoxLayout(FormGames);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -77,10 +73,6 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(ButtonFind->sizePolicy().hasHeightForWidth());
         ButtonFind->setSizePolicy(sizePolicy1);
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Ebrima"));
-        font1.setPointSize(8);
-        ButtonFind->setFont(font1);
 
         horizontalLayout->addWidget(ButtonFind);
 
@@ -133,7 +125,7 @@ public:
         FormGames->setWindowTitle(QCoreApplication::translate("FormGames", "SteamAchievementsStatistic", nullptr));
         GroupBoxFilter->setTitle(QCoreApplication::translate("FormGames", "     \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
         LineEditGame->setPlaceholderText(QCoreApplication::translate("FormGames", "\320\235\320\260\320\271\321\202\320\270 \320\270\320\263\321\200\321\203", nullptr));
-        ButtonFind->setText(QCoreApplication::translate("FormGames", " \320\235\320\260\320\271\321\202\320\270", nullptr));
+        ButtonFind->setText(QCoreApplication::translate("FormGames", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         CheckBoxFavorites->setText(QCoreApplication::translate("FormGames", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
     } // retranslateUi
 

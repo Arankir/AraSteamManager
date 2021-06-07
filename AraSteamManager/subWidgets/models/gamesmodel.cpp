@@ -294,3 +294,62 @@ void GamesModel::updateComments() {
         emit s_progress(1, ++progress);
     }
 }
+
+ProxyModelGames::ProxyModelGames(QObject *aParent): QSortFilterProxyModel(aParent),
+    _name(""), _hide(), _group(), _favorite() {
+
+}
+
+bool ProxyModelGames::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
+    QModelIndex indName = sourceModel()->index(aSource_row, GamesName, aSource_parent);
+    QModelIndex indId = sourceModel()->index(aSource_row, GamesAppid, aSource_parent);
+    if(sourceModel()->data(indName).toString().toLower().indexOf(_name.toLower()) == -1 ||
+       (_hide.isEmpty() ? false : _hide.indexOf(sourceModel()->data(indId).toString()) > -1) ||
+       (_group.isEmpty() ? false : _group.indexOf(sourceModel()->data(indId).toString()) == -1) ||
+       (_favorite.isEmpty() ? false : _favorite.indexOf(sourceModel()->data(indId).toString()) == -1))
+        return false;
+    return true;
+}
+
+QVariant ProxyModelGames::headerData(int section, Qt::Orientation orientation, int role) const {
+    return sourceModel()->headerData(section, orientation, role);
+}
+
+void ProxyModelGames::setSourceModel(GamesModel *sourceModel) {
+    QAbstractProxyModel::setSourceModel(sourceModel);
+}
+
+GamesModel *ProxyModelGames::sourceModel() const {
+    return static_cast<GamesModel*>(QAbstractProxyModel::sourceModel());
+}
+
+void ProxyModelGames::setName(const QString &aNewName) {
+    if(_name != aNewName)
+        _name = aNewName;
+    invalidateFilter();
+}
+
+void ProxyModelGames::setHide(const QStringList &aNewHide) {
+    if(_hide != aNewHide)
+        _hide = aNewHide;
+    invalidateFilter();
+}
+
+void ProxyModelGames::setGroup(const QStringList &aNewGroup) {
+    if(_group != aNewGroup)
+        _group = aNewGroup;
+    invalidateFilter();
+}
+
+void ProxyModelGames::setFavorites(const QStringList &aNewFavorites) {
+    if(_favorite != aNewFavorites)
+        _favorite = aNewFavorites;
+    invalidateFilter();
+}
+
+void ProxyModelGames::clear() {
+    _name.clear();
+    _hide.clear();
+    _group.clear();
+    _favorite.clear();
+}

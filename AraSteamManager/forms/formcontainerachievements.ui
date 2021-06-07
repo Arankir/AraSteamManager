@@ -10,11 +10,6 @@
     <height>753</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <family>Ebrima</family>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>AraSteamManager</string>
   </property>

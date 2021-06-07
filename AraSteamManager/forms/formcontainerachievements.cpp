@@ -23,8 +23,9 @@ void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
     if (FramelessWindow *framelessWindow = window()) {
         Settings::setAchievementContainerParams(framelessWindow->geometry());
     }
-    Settings::syncronizeSettings();
-    emit s_formClose();
+    emit s_closed();
+//    Settings::syncronizeSettings();
+//    emit s_formClose();
 }
 
 void FormContainerAchievements::addFormAchievement(/*QList<SAchievementPlayer> &aPl, */SProfile aProfile, SGame &aGame) {

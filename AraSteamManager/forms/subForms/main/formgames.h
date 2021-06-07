@@ -27,25 +27,6 @@
 #include "subWidgets/progressBars/progressbarbad.h"
 #include "subWidgets/progressBars/progressbargood.h"
 #include "subWidgets/models/gamesmodel.h"
-#include "subWidgets/models/filters.h"
-
-enum tableGamesColumns {
-    ColumnGamesAppid    = 0,
-    ColumnGamesIndex    = 1,
-    ColumnGamesIcon     = 2,
-    ColumnGamesName     = 3,
-    ColumnGamesComment  = 4,
-    ColumnGamesProgress = 5,
-    ColumnGamesCount    = 6
-};
-
-enum filterGamesColumns {
-    FilterGamesName        = 0,
-    FilterGamesHide        = 1,
-    FilterGamesGroup       = 2,
-    FilterGamesFavorites   = 3,
-    FilterGamesCount       = 4
-};
 
 namespace Ui {
 class FormGames;
@@ -56,9 +37,8 @@ class FormGames : public Form {
 
 public slots:
     void updateSettings() override;
-    void setGames(SProfile &aProfile, SGames &aGames);
-    bool isInit() {return ((_loaded) && (_gamesModel->rowCount() > 0));}
-    bool isLoaded() {return _loaded;}
+    void setGames(const SProfile &aProfile, SGames &aGames);
+    bool isInit() {return ((_profile.steamID() != "") && (_filterGames.sourceModel()->rowCount() > 0));}
     void clear();
 
 public:
@@ -66,16 +46,14 @@ public:
     ~FormGames();
 
 signals:
-    void s_return_to_profile(QWidget*);
     void s_achievementsLoaded(int);
     void s_finish(int width);
-    void s_showAchievements(/*const QList<SAchievementPlayer> &achievements, */const SGame &games);
+    void s_showAchievements(const SGame &games);
 
 private slots:
     void init();
     void updateIcons() override;
     void retranslate() override;
-    void closeEvent(QCloseEvent *event) override;
 
     void lineEditGame_TextChanged(const QString &aFindText);
     void buttonFind_Clicked();
@@ -97,21 +75,15 @@ private slots:
 
     void checkBoxFavorites_StateChanged(int arg1);
 
-    bool isInFavorites(const int &aAppId);
+    int currentIndex();
+    void setEnable(bool isEnable);
 private:
     Ui::FormGames *ui;
     SProfile _profile;
-    Favorites _favorites;
     QList<HiddenGame> _hide;
     GroupsGames _groups;
 
-    bool _loaded = false;
-
-    GamesModel *_gamesModel = nullptr;
-    QSortFilterProxyModel _filterName;
-    QSortFilterProxyInvertModel _filterHide;
-    QSortFilterProxyModel _filterGroup;
-    QSortFilterProxyModel _filterFavorite;
+    ProxyModelGames _filterGames;
 
 };
 

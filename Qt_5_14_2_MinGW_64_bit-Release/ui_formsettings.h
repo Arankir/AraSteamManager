@@ -144,9 +144,6 @@ public:
         if (FormSettings->objectName().isEmpty())
             FormSettings->setObjectName(QString::fromUtf8("FormSettings"));
         FormSettings->resize(482, 393);
-        QFont font;
-        font.setFamily(QString::fromUtf8("Ebrima"));
-        FormSettings->setFont(font);
         verticalLayout_5 = new QVBoxLayout(FormSettings);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -269,10 +266,10 @@ public:
 
         labelIcons8 = new QLabel(tab_2);
         labelIcons8->setObjectName(QString::fromUtf8("labelIcons8"));
-        QFont font1;
-        font1.setFamily(QString::fromUtf8("Ebrima"));
-        font1.setPointSize(10);
-        labelIcons8->setFont(font1);
+        QFont font;
+        font.setFamily(QString::fromUtf8("Ebrima"));
+        font.setPointSize(10);
+        labelIcons8->setFont(font);
         labelIcons8->setWordWrap(true);
         labelIcons8->setOpenExternalLinks(true);
         labelIcons8->setTextInteractionFlags(Qt::TextBrowserInteraction);
@@ -628,16 +625,16 @@ public:
 
         label_9 = new QLabel(tab);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        QFont font2;
-        font2.setFamily(QString::fromUtf8("Ebrima"));
-        font2.setItalic(true);
-        label_9->setFont(font2);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Ebrima"));
+        font1.setItalic(true);
+        label_9->setFont(font1);
 
         verticalLayout_19->addWidget(label_9);
 
         label_10 = new QLabel(tab);
         label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setFont(font2);
+        label_10->setFont(font1);
         label_10->setTextFormat(Qt::RichText);
 
         verticalLayout_19->addWidget(label_10);

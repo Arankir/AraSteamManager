@@ -71,7 +71,7 @@ void FormGroups::changeTitle(const int &aIndex, const QString &aTitle) {
 }
 
 void FormGroups::cancel() {
-    parentWidget()->parentWidget()->close();
+    close();
 }
 
 void FormGroups::apply() {
@@ -88,7 +88,7 @@ void FormGroups::apply() {
 
     _groups.save();
     emit s_updateGroups();
-    parentWidget()->parentWidget()->close();
+    close();
 }
 
 void FormGroups::add_clicked() {

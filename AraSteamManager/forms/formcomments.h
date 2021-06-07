@@ -18,7 +18,7 @@ class FormComments : public Form
 public:
     explicit FormComments(QWidget *parent = nullptr);;
     explicit FormComments(const SProfile &profile, const SGame &game, const SAchievement &achievement = SAchievement(), QWidget *parent = nullptr);
-    void setData(const SProfile &aProfile, const SGame &aGame, const SAchievement &aAchievement);
+    void setData(const SProfile &aProfile, const SGame &aGame, const SAchievement &aAchievement = SAchievement());
     ~FormComments();
 
 signals:

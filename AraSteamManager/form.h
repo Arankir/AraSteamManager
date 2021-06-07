@@ -13,11 +13,13 @@ public:
     virtual void updateIcons() = 0;
     virtual void changeEvent(QEvent *event);
     virtual void retranslate() = 0;
+    virtual void close();
 
     void setFramelessWindow(FramelessWindow *window);
     FramelessWindow *window() {return _framelessWindow;}
 
 signals:
+    void s_closed();
 
 private:
     bool _isRoot = false;

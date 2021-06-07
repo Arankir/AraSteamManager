@@ -397,8 +397,11 @@ QString Settings::qssTheme() {
         break;
     }
     }
+    QFile qssFile(":/theme/globalTheme.qss");
+    qssFile.open(QFile::ReadOnly);
+    qss += qssFile.readAll();
     qss += " "
-    "QWidget, QStandardItem, QLabel { "
+    "QWidget, QStandardItem, QAbstractItemModel, QLabel { "
         "font: " + Settings::defaultFont() + "; "
     "} ";
     return qss;

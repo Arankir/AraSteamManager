@@ -14,9 +14,6 @@ release/sbans.o
 release/sfriends.o
 release/sgames.o
 release/sprofile.o
-release/threadachievements.o
-release/threadfriends.o
-release/threadgames.o
 release/threadstatistics.o
 release/threadloading.o
 release/form.o
@@ -45,8 +42,11 @@ release/qlistwidgetachievement.o
 release/qlistwidgetfriend.o
 release/labellight.o
 release/qlistwidgetachievements.o
+release/achievementsmodel.o
+release/filters.o
+release/friendsmodel.o
+release/gamesmodel.o
 release/listachievementsmodel.o
-release/sortfilterproxymodelfreezerow.o
 release/progressbarbad.o
 release/progressbargood.o
 release/progressbarlight.o
@@ -68,9 +68,6 @@ release/moc_sbans.o
 release/moc_sfriends.o
 release/moc_sgames.o
 release/moc_sprofile.o
-release/moc_threadachievements.o
-release/moc_threadfriends.o
-release/moc_threadgames.o
 release/moc_threadstatistics.o
 release/moc_threadloading.o
 release/moc_form.o
@@ -96,8 +93,11 @@ release/moc_multiselectcombobox.o
 release/moc_qcomboboxfriends.o
 release/moc_labellight.o
 release/moc_qlistwidgetachievements.o
+release/moc_achievementsmodel.o
+release/moc_filters.o
+release/moc_friendsmodel.o
+release/moc_gamesmodel.o
 release/moc_listachievementsmodel.o
-release/moc_sortfilterproxymodelfreezerow.o
 release/moc_progressbarbad.o
 release/moc_progressbargood.o
 release/moc_progressbarlight.o

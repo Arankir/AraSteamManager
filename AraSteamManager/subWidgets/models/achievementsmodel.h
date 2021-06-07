@@ -83,4 +83,29 @@ private:
     QList<AchievementInModel> _achievementsInModel;
 };
 
+//class ProxyModelAchievements : public QSortFilterProxyModel {
+//    Q_OBJECT
+//public:
+//    ProxyModelAchievements(QObject* parent = nullptr);
+//    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+//    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+//    AchievementsModel *sourceModel() const;
+//    void setSourceModel(AchievementsModel *sourceModel);
+
+//public slots:
+//    void setName(const QString &newName);
+//    void setStatus(const QString &newStatus);
+//    void setIsPublic(const int &isPublic);
+//    void setFavorites(const QStringList &newFavorites);
+//    void clear();
+
+//private:
+//    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
+
+//    QString _name;
+//    QString _status;
+//    int _public;
+//    QStringList _favorite;
+//};
+
 #endif // ACHIEVEMENTSMODEL_H

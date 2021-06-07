@@ -2,7 +2,6 @@
 #include "ui_formfriendscompare.h"
 #include "./widgets/formfrienditemcompare.h"
 #include <QMenu>
-#include <QAbstractItemModelTester>
 
 constexpr int c_friendColumnWidth = 100;
 
