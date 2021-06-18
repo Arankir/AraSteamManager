@@ -1,0 +1,811 @@
+#include "formsettings.h"
+#include "ui_formsettings.h"
+#include <QColorDialog>
+
+FormSettings::FormSettings(QWidget *aParent): Form(aParent), ui(new Ui::FormSettings) {
+    ui->setupUi(this);
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    initComponents();
+}
+
+FormSettings::~FormSettings() {
+    qInfo() << "Форма настроек удалилась";
+    delete ui;
+}
+
+bool FormSettings::isInit() {
+    return true;
+}
+
+bool FormSettings::isLoaded() {
+    return true;
+}
+
+void FormSettings::initComponents() {
+    //ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
+
+    ui->tabWidget->setCurrentIndex(0);
+
+    initExport();
+    switch (Settings::language()) {
+    case 1: {
+        ui->RadioButtonLanguageEnglish->setChecked(true);
+        break;
+    }
+    case 5: {
+        ui->RadioButtonLanguageRussian->setChecked(true);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+    switch (Settings::visibleHiddenGames()) {
+    case 0: {
+        ui->CheckBoxVisibleHiddenGames->setChecked(false);
+        break;
+    }
+    case 1: {
+        ui->CheckBoxVisibleHiddenGames->setChecked(true);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+    switch (Settings::theme()) {
+    case 1: {
+        ui->RadioButtonBlueTheme->setChecked(true);
+        break;
+    }
+    case 2: {
+        ui->RadioButtonLightTheme->setChecked(true);
+        break;
+    }
+    case 3: {
+        ui->RadioButtonDarkTheme->setChecked(true);
+        break;
+    }
+    case 4: {
+        ui->radioButtonBgr->setChecked(true);
+        break;
+    }
+    case 5: {
+        ui->radioButtonBrg->setChecked(true);
+        break;
+    }
+    case 6: {
+        ui->radioButtonGbr->setChecked(true);
+        break;
+    }
+    case 7: {
+        ui->radioButtonGrb->setChecked(true);
+        break;
+    }
+    case 8: {
+        ui->radioButtonRbg->setChecked(true);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+//    switch (_setting.getMaximumTableRows()) {
+//    case 10: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(0);
+//        break;
+//    }
+//    case 20: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(1);
+//        break;
+//    }
+//    case 50: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(2);
+//        break;
+//    }
+//    case 100: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(3);
+//        break;
+//    }
+//    case 200: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(4);
+//        break;
+//    }
+//    case 500: {
+//        ui->ComboBoxMaxRows->setCurrentIndex(5);
+//        break;
+//    }
+//    }
+
+//    ui->radioButtonCustom->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
+//                                          "stop: 0 " + QColor(Qt::red).name() + ", "
+//                                          "stop: 0.14 " + QColor(222, 76, 0).name() + ", "
+//"stop: 0.29 " + QColor(Qt::yellow).name() + ", "
+//"stop: 0.43 " + QColor(Qt::green).name() + ", "
+//"stop: 0.58 " + QColor(Qt::red).name() + ", "
+//"stop: 0.73 " + QColor(Qt::blue).name() + ", "
+//"stop: 1.0 " + QColor(142, 0, 167).name() + ");");
+
+    ui->SliderProfileSize->setValue(Settings::profileInfoSize());
+    ui->CheckBoxSaveImage->setChecked(Settings::saveImages());
+//    QPalette darkPalette;
+//    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
+//    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+//    darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+//    darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
+    //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
+    //ui->GroupBoxDarkTheme->setPalette(darkPalette);
+    //ui->GroupBoxWhiteTheme->setPalette(style()->standardPalette());
+
+    ui->tabWidget->setAttribute(Qt::WA_TranslucentBackground);
+
+    ui->labelIcons8->setTextFormat(Qt::RichText);
+    QFormLayout *layout = new QFormLayout;
+    QDir dirHiddenGames(Paths::hiddenGames());
+    dirHiddenGames.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    dirHiddenGames.setSorting(QDir::Name);
+    if(dirHiddenGames.exists()){
+        QPair<QString,QList<QString>> pair;
+        pair.first = "All";
+        pair.second = QList<QString>();
+        if(QFile(Paths::hiddenGames("All")).exists()) {
+            QRadioButtonWithData *allHidden = new QRadioButtonWithData;
+            allHidden->setText(tr("Все профили"));
+            allHidden->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
+            allHidden->setObjectName("HiddenGames0");
+            allHidden->addData("NumberFileHiddenGame","0");
+            connect(allHidden, SIGNAL(clicked()), this, SLOT(radioButtonHiddenGames_Clicked()));
+            layout->addWidget(allHidden);
+            QFile fileHide1(Paths::hiddenGames("All"));
+            if(fileHide1.open(QIODevice::ReadOnly)) {
+                while(!fileHide1.atEnd()) {
+                    pair.second << QString::fromLocal8Bit(fileHide1.readLine()).remove("\r\n").remove("\n");
+                }
+                fileHide1.close();
+            }
+        }
+        _hiddenGames.append(std::move(pair));
+
+        QFileInfoList list = dirHiddenGames.entryInfoList();
+        int number = 1;
+        for(auto &file: list) {
+            QString fileName = file.fileName();
+            if(fileName != "All.txt") {
+                QFile fileHide(Paths::hiddenGames(fileName));
+                fileHide.open(QFile::ReadOnly);
+                SProfile profile = SProfile::load(fileName.remove(".txt"), SProfileRequestType::id);
+                QList<QString> hide;
+                QRadioButtonWithData *profileHidden = new QRadioButtonWithData;
+                profileHidden->setText(profile.personaName());
+                profileHidden->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+                profileHidden->setObjectName("HiddenGames" + QString::number(number));
+                profileHidden->addData("NumberFileHiddenGame", QString::number(number));
+                connect(profileHidden, SIGNAL(clicked()), this, SLOT(radioButtonHiddenGames_Clicked()));
+                layout->addWidget(profileHidden);
+                while(!fileHide.atEnd()) {
+                    hide << QString::fromLocal8Bit(fileHide.readLine()).remove("\r\n").remove("\n");
+                }
+                fileHide.close();
+                QPair<QString,QList<QString>> pair;
+                pair.first = fileName.remove(".txt");
+                pair.second = hide;
+                _hiddenGames.append(std::move(pair));
+                ++number;
+            }
+        }
+    }
+    ui->FrameProfilesHideGames->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+    ui->FrameProfilesHideGames->setLayout(layout);
+
+#define Connects {
+    connect(ui->RadioButtonLanguageEnglish, &QRadioButton::clicked,   this, &FormSettings::radioButtonLanguageEnglish_Clicked);
+    connect(ui->RadioButtonLanguageRussian, &QRadioButton::clicked,   this, &FormSettings::radioButtonLanguageRussian_Clicked);
+    connect(ui->CheckBoxVisibleHiddenGames, &QCheckBox::stateChanged, this, &FormSettings::checkBoxVisibleHiddenGames_StateChanged);
+    connect(ui->RadioButtonDarkTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonDarkTheme_Clicked);
+    connect(ui->RadioButtonLightTheme,      &QRadioButton::clicked,   this, &FormSettings::radioButtonLightTheme_Clicked);
+    connect(ui->RadioButtonBlueTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonBlueTheme_Clicked);
+    connect(ui->radioButtonBgr,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(4);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonBrg,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(5);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonGbr,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(6);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonGrb,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(7);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonRbg,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(8);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonCustom,    &QRadioButton::clicked,   this, [=](){
+        QColor themeColor = QColorDialog::getColor(Qt::white, this, tr("Выберите цвет"));
+
+        createDir(Paths::documents() + "theme");
+        createIcons(Paths::documents() + "theme", themeColor);
+        QFile file(Paths::documents() + "theme\\colors.txt");
+        file.open(QIODevice::WriteOnly);
+        QTextStream stream(&file);
+        stream << getColors(themeColor).join("\r\n");
+        file.close();
+
+        Settings::setTheme(0);
+        emit s_updateSettings();
+    });
+
+    connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
+    connect(ui->SliderProfileSize,          &QSlider::valueChanged,   this, &FormSettings::slideProfileSize_ValueChanged);
+    //connect(ui->ComboBoxMaxRows,            SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxMaxTableRows(int)));
+
+    connect(ui->ButtonExportCategories, &QPushButton::clicked, this, &FormSettings::buttonExportCategories_Clicked);
+    connect(ui->ButtonImportCategories, &QPushButton::clicked, this, &FormSettings::buttonImportCategories_Clicked);
+#define ConnectsEnd }
+    retranslate();
+}
+
+void FormSettings::initExport() {
+    ui->TreeWidgetExportCategories->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
+
+    QDir dir(Paths::categories());
+    for (auto &file: dir.entryInfoList(QDir::Files)) {
+        QFile fileCategory(file.filePath());
+        if (fileCategory.exists()) {
+            if(fileCategory.open(QFile::ReadOnly)) {
+                auto s = fileCategory.readAll();
+                Category game(QJsonDocument().fromJson(s).object());
+                game.update();
+                QTreeWidgetItem *item = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << game.game());
+                item->setWhatsThis(0, QString::number(game.gameID()));
+                item->setWhatsThis(1, QString::number(-2));
+                ui->TreeWidgetExportCategories->addTopLevelItem(item);
+                for (auto &category: game) {
+                    recursAddCategoryToTree(category, item, game.gameID());
+                }
+                fileCategory.close();
+            }
+        }
+    }
+}
+
+int FormSettings::recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot, const int &aGameId) {
+    QTreeWidgetItem *subItem;
+    if (aRoot == nullptr) {
+        subItem = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << aCategory->title());
+    } else {
+        subItem = new QTreeWidgetItem(aRoot, QStringList() << aCategory->title());
+    }
+    subItem->setWhatsThis(0,QString::number(aGameId));
+    subItem->setWhatsThis(1,QString::number(aCategory->order()));
+    for(auto subCategory: *aCategory) {
+        recursAddCategoryToTree(subCategory, subItem, aGameId);
+    }
+    return 0;
+}
+
+void FormSettings::buttonExportCategories_Clicked() {
+    QString sFile = QFileDialog::getSaveFileName(this, tr("Место сохранения файла"), "", ".sas");
+    if (sFile == "") {
+        return;
+    }
+    ExportFileData exportData = createExportCategoriesJson();
+    if (sFile.left(4) != ".sas") {
+        sFile += ".sas";
+    }
+    QFile fFile(sFile);
+    fFile.open(QFile::WriteOnly);
+    fFile.write(QJsonDocument(exportData.toJson()).toJson());
+    fFile.close();
+    QMessageBox::information(this, tr("Успешно!"), tr("Файл успешно создан!"));
+}
+
+ExportFileData FormSettings::createExportCategoriesJson() {
+    QJsonArray jArray;
+    for (auto &item: ui->TreeWidgetExportCategories->selectedItems()) {
+        Category categories(item->whatsThis(0).toInt());
+        int categoryOrder = item->whatsThis(1).toInt();
+        if (categoryOrder == -2) {
+            for (auto category: categories) {
+                ExportCategory eCategory {categories.gameID(), categories.game(), *category};
+                jArray.append(eCategory.toJson());
+            }
+        } else {
+            Category *category = categories.findCategory(categoryOrder);
+            if (category != nullptr) {
+                ExportCategory eCategory {categories.gameID(), categories.game(), *category};
+                jArray.append(eCategory.toJson());
+            }
+        }
+    }
+    ExportFileData efd;
+    efd.data = jArray;
+    efd.type = ExportType::categories;
+    efd.version = 1.0;
+    efd.date = QDateTime::currentDateTime();
+    return efd;
+}
+
+void FormSettings::buttonImportCategories_Clicked() {
+    QString path;
+    if (ui->LineEditImportCategories->text() == "") {
+        path = QFileDialog::getOpenFileName(this, tr("Выбор файла для загрузки"), "", "*");
+        if (path == "") {
+            return;
+        }
+    } else {
+        path = ui->LineEditImportCategories->text();
+    }
+    QFile fFile(path);
+    if (!fFile.open(QFile::ReadOnly)) {
+        QMessageBox::warning(this, tr("Ошибка!"), tr("Невозможно найти указанный файл, или файл открыт в другом приложении!"));
+        return;
+    }
+    ExportFileData efd = ExportFileData::fromJson(QJsonDocument::fromJson(fFile.readAll()).object());
+    fFile.close();
+
+    if (efd.type != ExportType::categories) {
+        QMessageBox::warning(this, tr("Ошибка!"), tr("В выбранном файле нет категорий"));
+        return;
+    }
+
+    QVector<ExportCategory> exportCategories;
+    foreach(const auto &category, efd.data.toArray()) {
+        exportCategories.append(ExportCategory::fromJson(category.toObject()));
+    }
+
+    if (exportCategories.size() == 0) {
+        QMessageBox::warning(this, tr("Ошибка!"), tr("В выбранном файле не обнаружено категорий"));
+        return;
+    }
+
+    QStringList slCategories;
+    for (auto &category: exportCategories) {
+        slCategories.append(tr("Игра: %1, категория: %2").arg(category.gameName, category.category.title()));
+    }
+    QString questionText = tr("Обнаружены следующие категории: \n") + slCategories.join("\n") + ".";
+
+    QMessageBox question(QMessageBox::Question,
+                           tr("Внимание!"),
+                           questionText);
+    QAbstractButton *btnYes = question.addButton(tr("Добавить эти категории"), QMessageBox::YesRole);
+    question.addButton(tr("Отмена"), QMessageBox::NoRole);
+    question.exec();
+    if(question.clickedButton() != btnYes) {
+        return;
+    }
+    //Обновить категории
+    foreach(const auto &eCategory, exportCategories) {
+        int gameId = eCategory.gameId;
+        Category categories(gameId);
+        categories.addCategory(new Category(eCategory.category));
+        categories.save();
+    }
+    QMessageBox::information(this, tr("Внимание!"), tr("Категории успешно добавлены!"));
+}
+
+void FormSettings::retranslate() {
+    ui->retranslateUi(this);
+
+    if (this->findChild<QRadioButtonWithData*>("HiddenGames0") != 0) {
+        QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
+        allHidden->setText(tr("Все профили"));
+    }
+    ui->labelIcons8->setText("<html><head/><body><p>"
+                             "Иконки для приложения были предоставлены сайтом "
+                            "<a href=https://icons8.ru/icons>"
+                            "<span style=\" text-decoration: underline; color:#2d7fc8;\"> "
+                            "https://icons8.ru/icons"
+                            "</span></a></p></body></html>");
+}
+
+QColor findAnalogColor1(const QColor &color1, const QColor &color2, const QColor &color3) {
+    double divH = 1.0 * color3.hslHue() * color2.hslHue() / (color1.hslHue() == 0 ? 1 : color1.hslHue());
+    double divS = 1.0 * color3.hslSaturation() * color2.hslSaturation() / (color1.hslSaturation() == 0 ? 1 : color1.hslSaturation());
+    double divL = 1.0 * color3.lightness() * color2.lightness() / (color1.lightness() == 0 ? 1 : color1.lightness());
+
+    if (divH == 0) {
+        divH = color3.hue();
+    }
+
+    return QColor::fromHsl(divH, divS, divL);
+}
+
+QColor findAnalogColor2(const QColor &color1, const QColor &color2, const QColor &color3) {
+    return QColor::fromHsl(color3.hslHue() * color2.hslHue() / (color1.hslHue() == 0 ? 1 : color1.hslHue()), color2.hslSaturation(), color2.lightness(), color2.alpha());
+}
+
+QImage convertImage(const QImage &aImage, const QColor &aColor) {
+    QImage im(aImage.size(), aImage.format());
+    for (int x = 0; x < aImage.width(); ++x) {
+        for (int y = 0; y < aImage.height(); ++y) {
+            QColor oldColor = aImage.pixelColor(x, y);
+            QColor newColor = QColor::fromHsl(aColor.hslHue(),
+                                               255,
+                                               100,
+                                               oldColor.alpha());
+            im.setPixelColor(x, y, newColor);
+        }
+    }
+    return im;
+}
+
+QStringList getImagesFromDir(const QDir &directory) {
+    QStringList list = directory.entryList(QStringList("*.png"));
+    QStringList result;
+    for (auto file: list) {
+        result << directory.absolutePath() + "/" + file;
+    }
+    for (auto dir: directory.entryList(QDir::Dirs)) {
+        if (dir != "." && dir != "..") {
+            result << getImagesFromDir(directory.absolutePath() + "/" + dir);
+        }
+    }
+    return result;
+}
+
+QStringList FormSettings::getColors(const QColor &aNewColor) {
+    QList<QColor> listOld;
+    listOld.append(QColor(221, 221, 221));
+    listOld.append(QColor(66, 169, 198));
+    listOld.append(QColor(20, 140, 210));
+    listOld.append(QColor(180, 180, 180));
+    listOld.append(QColor(20, 80, 110));
+    listOld.append(QColor(135, 182, 255));
+    listOld.append(QColor(19, 36, 62));
+    listOld.append(QColor(50, 60, 70));
+    listOld.append(QColor(38, 146, 255));
+    listOld.append(QColor(21, 50, 87));
+    listOld.append(QColor(40, 52, 60));
+    listOld.append(QColor(80, 95, 107));
+    listOld.append(QColor(70, 100, 140));
+    listOld.append(QColor(18, 69, 124));
+    listOld.append(QColor(25, 37, 61));
+
+    QList<QColor> listNew;
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[0], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[1], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[2], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[3], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[4], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[5], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[6], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[7], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[8], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[9], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[10], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[11], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[12], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[13], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[14], aNewColor));
+
+    QStringList result;
+    result  << listNew[0].name()
+            << listNew[1].name()
+            << listNew[2].name()
+            << listNew[3].name()
+            << listNew[4].name()
+            << listNew[5].name()
+            << listNew[6].name()
+            << listNew[7].name()
+            << "qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, stop: 0 "
+                                 + listNew[8].name() +
+                                ", stop: 1.0 "
+                                 + listNew[9].name() +
+                                ")"
+            << "qlineargradient(x1: -1, y1: -1, x2: 2, y2: 2, stop: 0 "
+                                 + listNew[10].name() +
+                                ", stop: 1.0 "
+                                 + listNew[11].name() +
+                                ")"
+            << listNew[12].name()
+            << "qradialgradient(cx:0.5, cy:0.5, radius: 0.9, fx:0.4, fy:0.5, stop:0 "
+                                 + listNew[13].name() +
+                                ", stop:1 "
+                                 + listNew[14].name() +
+                                ")";
+    return result;
+}
+
+void FormSettings::createIcons(const QString &aPath, const QColor &aNewColor) {
+    QDir directory("://theme/iconsBlackTheme/");
+
+    QStringList anotherColor;
+    anotherColor << "arrow_down_focus.png" << "arrow_down_pressed.png"
+                 << "arrow_left_focus.png" << "arrow_left_pressed.png"
+                 << "arrow_right_focus.png" << "arrow_right_pressed.png"
+                 << "arrow_up_focus.png" << "arrow_up_pressed.png"
+                 << "branch_closed_focus.png" << "branch_closed_pressed.png"
+                 << "branch_end_focus.png" << "branch_end_pressed.png"
+                 << "branch_line_focus.png" << "branch_line_pressed.png"
+                 << "branch_more_focus.png" << "branch_more_pressed.png"
+                 << "branch_open_focus.png" << "branch_open_pressed.png"
+                 << "checkbox_checked_hover.png" << "checkbox_checked_pressed.png"
+                 << "checkbox_indeterminate_hover.png" << "checkbox_indeterminate_pressed.png"
+                 << "checkbox_unchecked_hover.png" << "checkbox_unchecked_pressed.png"
+                 << "line_horizontal_focus.png" << "line_horizontal_pressed.png"
+                 << "line_vertical_focus.png" << "line_vertical_pressed.png"
+                 << "radio_checked_focus.png" << "radio_checked_pressed.png"
+                 << "radio_unchecked_focus.png" << "radio_unchecked_pressed.png"
+                 << "radiobutton_checked_hover.png" << "radiobutton_checked_press.png"
+                 << "radiobutton_unchecked_hover.png" << "radiobutton_unchecked_press.png"
+                 << "toolbar_move_horizontal_focus.png" << "toolbar_move_horizontal_pressed.png"
+                 << "toolbar_move_vertical_focus.png" << "toolbar_move_vertical_pressed.png"
+                 << "toolbar_separator_horizontal_focus.png" << "toolbar_separator_horizontal_pressed.png"
+                 << "toolbar_separator_vertical_focus.png" << "toolbar_separator_vertical_pressed.png"
+                 << "window_close_focus.png" << "window_close_pressed.png"
+                 << "window_grip_focus.png" << "window_grip_pressed.png"
+                 << "window_minimize_focus.png" << "window_minimize_pressed.png"
+                 << "window_undock_focus.png" << "window_undock_pressed.png";
+
+    QStringList imagesList = getImagesFromDir(directory);
+
+    for (const auto &file: imagesList) {
+        QImage image;
+        QString fileName = file;
+        fileName = fileName.remove(directory.absolutePath() + "/");
+        if (anotherColor.indexOf(fileName) > -1) {
+           image = convertImage(QImage(file), aNewColor);
+        } else {
+           image = QImage(file);
+        }
+
+        createDir(aPath + "/" + fileName);
+        image.save(aPath + "/" + fileName);
+    }
+
+}
+
+void FormSettings::radioButtonLanguageEnglish_Clicked() {
+    Settings::setLanguage(1);
+    emit s_updateSettings();
+    QTranslator *translator = new QTranslator;
+    translator->load(":/AraSteamManager_en.qm");
+    qApp->installTranslator(translator);
+    ui->retranslateUi(this);
+    //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::radioButtonLanguageRussian_Clicked() {
+    Settings::setLanguage(5);
+    emit s_updateSettings();
+    QTranslator *translator = new QTranslator;
+    translator->load(":/AraSteamManager_ru.qm");
+    qApp->installTranslator(translator);
+    ui->retranslateUi(this);
+    //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::checkBoxVisibleHiddenGames_StateChanged(int arg1) {
+    Settings::setVisibleHiddenGames(arg1 / 2);
+    emit s_updateSettings();
+}
+
+void FormSettings::radioButtonDarkTheme_Clicked() {
+    Settings::setTheme(3);
+    emit s_updateSettings();
+    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::radioButtonLightTheme_Clicked() {
+    Settings::setTheme(2);
+    emit s_updateSettings();
+    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::radioButtonBlueTheme_Clicked() {
+    Settings::setTheme(1);
+    emit s_updateSettings();
+    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
+}
+
+void FormSettings::radioButtonHiddenGames_Clicked() {
+    QRadioButtonWithData *rbSender = dynamic_cast<QRadioButtonWithData*>(sender());
+    if (rbSender) {
+        int indexHiddenGame = rbSender->getData(0).toInt();
+        auto &currentGame = _hiddenGames[indexHiddenGame];
+        ui->TableWidgetGames->clear();
+        ui->TableWidgetGames->setRowCount(currentGame.second.size());
+        if(indexHiddenGame != 0) {
+            SGames games = SGame::load(currentGame.first, true, true);
+            for(auto &game: games) {
+                if(currentGame.second.indexOf(game.sAppId()) > -1) {
+                    int setTo = currentGame.second.indexOf(game.sAppId());
+                    QLabel *iconGame = new QLabel;
+                    iconGame->setBaseSize(QSize(32, 32));
+                    iconGame->setPixmap(game.pixmapIcon());
+                    ui->TableWidgetGames->setCellWidget(setTo, 0, iconGame);
+                    ui->TableWidgetGames->setItem(setTo, 1, new QTableWidgetItem(game.name()));
+                    ui->TableWidgetGames->setRowHeight(setTo, 33);
+
+                    QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
+                    button1->setMinimumSize(QSize(25, 25));
+                    button1->setObjectName("ButtonAchievements" + QString::number(indexHiddenGame) + "_" + QString::number(setTo));
+                    button1->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                    button1->addData("NumberHiddenGame", QString::number(setTo));
+                    connect(button1, &QButtonWithData::pressed, this, &FormSettings::achievementsClicked);
+                    ui->TableWidgetGames->setCellWidget(setTo, 2, button1);
+
+                    QButtonWithData *button3 = new QButtonWithData("");
+                    button3->setIcon(QIcon(Images::hide()));
+                    button3->setMinimumSize(QSize(25, 25));
+                    button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + game.sAppId());
+                    button3->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                    button3->addData("NumberHiddenGame", game.sAppId());
+                    connect(button3, &QButtonWithData::pressed, this, &FormSettings::hideClicked);
+                    ui->TableWidgetGames->setCellWidget(setTo, 3, button3);
+                }
+            }
+        } else {
+            //list[0]=_games[gamei].GetAppid()
+            //list[1]=_games[gamei].GetImg_icon_url()
+            //list[2]=_games[gamei].GetName()
+            for (int i = 0; i < currentGame.second.size(); ++i) {
+                QStringList list = currentGame.second[i].split("%%");
+                QString path = Paths::imagesGames(list[1]);
+                QLabel *iconGame = new QLabel;
+                iconGame->setBaseSize(QSize(32, 32));
+                ui->TableWidgetGames->setCellWidget(i, 0, iconGame);
+                if(!QFile::exists(path)) {
+                    if(list[1] != "") {
+                        new RequestImage(iconGame, "http://media.steampowered.com/steamcommunity/public/images/apps/" + list[0] + "/" + list[1] + ".jpg", path, true, this);
+                    }
+                } else {
+                    iconGame->setPixmap(QPixmap(path));
+                }
+                ui->TableWidgetGames->setItem(i, 1, new QTableWidgetItem(list[2]));
+
+                ui->TableWidgetGames->setRowHeight(i, 33);
+                QButtonWithData *button1 = new QButtonWithData(tr("Достижения"));
+                button1->setMinimumSize(QSize(25, 25));
+                button1->setObjectName("ButtonAchievements" + QString::number(indexHiddenGame) + "_" + QString::number(i));
+                button1->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                button1->addData("NumberHiddenGame", QString::number(i));
+                connect(button1, &QButtonWithData::pressed, this, &FormSettings::achievementsClicked);
+                ui->TableWidgetGames->setCellWidget(i, 2, button1);
+
+                QButtonWithData *button3 = new QButtonWithData("");
+                button3->setIcon(QIcon(Images::hide()));
+                button3->setMinimumSize(QSize(25, 25));
+                button3->setObjectName("ButtonHide" + QString::number(indexHiddenGame) + "_" + list[0]);
+                button3->addData("NumberFileHiddenGame", QString::number(indexHiddenGame));
+                button3->addData("NumberHiddenGame", list[0]);
+                connect(button3, &QButtonWithData::pressed, this, &FormSettings::hideClicked);
+                ui->TableWidgetGames->setCellWidget(i, 3, button3);
+            }
+        }
+        ui->TableWidgetGames->resizeColumnsToContents();
+    }
+}
+
+void FormSettings::comboBoxMaxTableRows(int index) {
+    Q_UNUSED(index);
+//    _setting.setMaximumTableRows(ui->ComboBoxMaxRows->currentText().toInt());
+//    emit s_updateSettings();
+}
+
+void FormSettings::achievementsClicked() {
+    QButtonWithData *pb = dynamic_cast<QButtonWithData*>(sender());
+    if (pb) {
+
+    }
+    //int index=pb->objectName().mid(11).toInt();
+
+}
+
+void FormSettings::hideClicked() {
+    QButtonWithData *pb = dynamic_cast<QButtonWithData*>(sender());
+    if (pb) {
+        int index = pb->getData(0).toInt();
+        int gameIndex = -1;
+        QMessageBox messageBox(QMessageBox::Question, tr("Внимание!"), tr("Сделать игру видимой?"));
+        QAbstractButton *btnProfile = messageBox.addButton(tr("Да"), QMessageBox::YesRole);
+        messageBox.addButton(tr("Отмена"), QMessageBox::NoRole);
+        messageBox.exec();
+        if(messageBox.clickedButton() != btnProfile) {
+            return;
+        }
+        for(int i = 0; i < _hiddenGames[index].second.size(); ++i) {
+            QStringList lineList = _hiddenGames[index].second[i].split("%%");
+            if(lineList[0] == pb->getData(1)) {
+                gameIndex = i;
+                break;
+            }
+        }
+        //QString save=_hiddenGames[index].first+".txt";
+        _hiddenGames[index].second.removeAt(gameIndex);
+        ui->TableWidgetGames->removeRow(gameIndex);
+        QFile fileSaveTo(Paths::hiddenGames(_hiddenGames[index].first));
+        fileSaveTo.open(QIODevice::WriteOnly| QIODevice::Text);
+        QTextStream writeStream(&fileSaveTo);
+        foreach(const QString &game, _hiddenGames[index].second) {
+            writeStream << game + "\n";
+        }
+        fileSaveTo.close();
+        QMessageBox(QMessageBox::Information, tr("Успешно!"), tr("Политика видимости для игры обновлена!"));
+    }
+}
+
+void FormSettings::checkBoxSaveImage_StateChanged(int arg1) {
+    Settings::setSaveimage(arg1 == 2);
+    emit s_updateSettings();
+}
+
+void FormSettings::slideProfileSize_ValueChanged(int aValue) {
+    Settings::setVisibleProfileInfo(aValue);
+    emit s_updateSettings();
+}
+
+ExportCategory ExportCategory::fromJson(QJsonObject aObject) {
+    return ExportCategory{aObject["gameId"].toInt(), aObject["gameName"].toString(), Category(aObject["category"].toObject())};
+}
+
+QJsonObject ExportCategory::toJson() {
+    QJsonObject jObj;
+    jObj["category"] = category.toJson();
+    jObj["gameName"] = gameName;
+    jObj["gameId"] = gameId;
+    return jObj;
+}
+
+ExportFileData ExportFileData::fromJson(QJsonObject aObject) {
+    ExportFileData efd;
+    efd.data = aObject["data"];
+    efd.type = stringToExportType(aObject["type"].toString());
+    efd.version = aObject["version"].toString().toDouble();
+    efd.date = QDateTime::fromString(aObject["date"].toString(), Settings::dateTimeFormat());
+    return efd;
+}
+
+QJsonObject ExportFileData::toJson() {
+    QJsonObject jObject;
+    jObject["data"] = data;
+    jObject["type"] = exportTypeToString(type);
+    jObject["version"] = QString::number(version);
+    jObject["date"] = date.toString(Settings::dateTimeFormat());
+    return jObject;
+}
+
+QString exportTypeToString(ExportType aType) {
+    switch (aType) {
+    case ExportType::unknown: {
+        return "unknown";
+    }
+    case ExportType::categories: {
+        return "categories";
+    }
+    case ExportType::favorites: {
+        return "favorites";
+    }
+    case ExportType::comments: {
+        return "comments";
+    }
+    case ExportType::groups: {
+        return "groups";
+    }
+    case ExportType::multiple: {
+        return "multiple";
+    }
+    }
+    return "";
+}
+
+ExportType stringToExportType(QString aType) {
+    if (aType == "categories") {
+        return ExportType::categories;
+    } else if (aType == "favorites") {
+        return ExportType::favorites;
+    } else if (aType == "comments") {
+        return ExportType::comments;
+    } else if (aType == "groups") {
+        return ExportType::groups;
+    }  else if (aType == "multiple") {
+        return ExportType::multiple;
+    } else {
+        return ExportType::unknown;
+    }
+}

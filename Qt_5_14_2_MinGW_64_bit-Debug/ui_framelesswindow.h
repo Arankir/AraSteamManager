@@ -15,7 +15,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
@@ -36,14 +35,13 @@ public:
     QPushButton *ButtonMinimize;
     QPushButton *ButtonMaximize;
     QPushButton *ButtonExit;
-    QMenuBar *menubar;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *FramelessWindow)
     {
         if (FramelessWindow->objectName().isEmpty())
             FramelessWindow->setObjectName(QString::fromUtf8("FramelessWindow"));
-        FramelessWindow->resize(170, 68);
+        FramelessWindow->resize(500, 48);
         centralwidget = new QWidget(FramelessWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -100,10 +98,6 @@ public:
         verticalLayout->addWidget(FrameTitleWindow);
 
         FramelessWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(FramelessWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 170, 20));
-        FramelessWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(FramelessWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         FramelessWindow->setStatusBar(statusbar);

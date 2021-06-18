@@ -207,6 +207,9 @@ QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
 void FormAchievements::updateSettings() {
     Settings::syncronizeSettings();
     updateIcons();
+    ui->CategoriesEdit->updateSettings();
+    ui->FriendsCompare->updateSettings();
+    ui->FilterMyProfile->updateSettings();
     emit s_updateSettings();
 }
 
@@ -357,6 +360,7 @@ void FormAchievements::openManual() {
 void FormAchievements::buttonComment_Clicked() {
     auto form = createFramelessForm<FormComments>();
     form->setData(_profile, _game, currentAchievement());
+    connect(this, &FormAchievements::s_updateSettings, form->window(), &FramelessWindow::updateSettings);
     connect(form, &FormComments::s_updateComments, this, [=]() {
         _achievementsModel->updateComments();
     });

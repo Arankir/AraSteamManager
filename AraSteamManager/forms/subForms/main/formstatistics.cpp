@@ -37,7 +37,7 @@ Form(aParent), ui(new Ui::FormStatistics), _profile(aProfile), _games(aGames) {
     _gamePercent->setMargins(QMargins(1, 1, 1, 1));
     switch(Settings::theme()) {
     case 1: {
-        _gamePercent->setTheme(QChart::ChartThemeDark);
+        //_gamePercent->setTheme(QChart::ChartThemeDark);
         break;
     }
     case 2: {
@@ -227,12 +227,19 @@ QChart *setDataToChart(QChart *chart, QBarCategoryAxis *axisX, int maxY, QBarSet
     chart->addAxis(axisY, Qt::AlignLeft);
     switch(Settings::theme()) {
     case 1: {
-        chart->setTheme(QChart::ChartThemeDark);
+        //chart->setTheme(QChart::ChartThemeDark);
         break;
     }
     case 2: {
         barSet->setLabelColor(Qt::black);
         break;
+    }
+    default: {
+//        if (Settings::iconsColor() == "white") {
+//            barSet->setLabelColor(Qt::white);
+//        } else {
+//            barSet->setLabelColor(Qt::black);
+//        }
     }
     }
 
@@ -248,14 +255,14 @@ QChart *setDataToChart(QChart *chart, QBarCategoryAxis *axisX, int maxY, QBarSet
 }
 
 int &roundToDesimal(int &data) {
-    int decim = 1;
+//    int decim = 1;
     data *= 1.1;
-    int copyData = data;
-    while (copyData > 10) {
-        decim *= 10;
-        copyData /= 10;
-    }
-    data += (decim - (data % decim));
+//    int copyData = data;
+//    while (copyData > 10) {
+//        decim *= 10;
+//        copyData /= 10;
+//    }
+//    data += (decim - (data % decim));
     return data;
 }
 

@@ -11,8 +11,8 @@ public:
     explicit Form(QWidget *parent = nullptr);
     virtual void updateSettings() = 0;
     virtual void updateIcons() = 0;
-    virtual void changeEvent(QEvent *event);
     virtual void retranslate() = 0;
+    virtual void changeEvent(QEvent *event);
     virtual void close();
 
     void setFramelessWindow(FramelessWindow *window);

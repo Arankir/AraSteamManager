@@ -26,10 +26,10 @@ FormProfile::FormProfile(SProfile aProfile, QWidget *aParent) : Form(aParent), u
     ui->LabelAvatar->setFixedSize(QSize(64, 64));
     ui->LabelAvatarMinimize->setFixedSize(QSize(32, 32));
 
-    ui->LabellvlValue           ->setStyleSheet("color: #42a9c6;");
-    ui->LabelTimeCreatedValue   ->setStyleSheet("color: #42a9c6;");
-    ui->LabelRealNameValue      ->setStyleSheet("color: #42a9c6;");
-    ui->LabelLocCountryCodeValue->setStyleSheet("color: #42a9c6;");
+//    ui->LabellvlValue           ->setStyleSheet("color: #42a9c6;");
+//    ui->LabelTimeCreatedValue   ->setStyleSheet("color: #42a9c6;");
+//    ui->LabelRealNameValue      ->setStyleSheet("color: #42a9c6;");
+//    ui->LabelLocCountryCodeValue->setStyleSheet("color: #42a9c6;");
 
 #define Connects {
     connect(ui->ButtonSetProfile, &QPushButton::clicked, this, &FormProfile::buttonSetProfile_Clicked);
@@ -256,8 +256,7 @@ void FormProfile::setLvl(const QString &aSteamId) {
     int level = SProfile::getLevel(aSteamId);
     ui->LabellvlValue->setText(level > 0 ? QString::number(level) : "?");
     int dozens = (level / 10) % 10;
-    QString qss = QString("color: #42a9c6; "
-                          "border-image: url(%1) %2 0 %3 0; ").arg
+    QString qss = QString("border-image: url(%1) %2 0 %3 0; ").arg
                          (Images::levels(level / 100),
                           QString::number(dozens * 32),
                           QString::number((10 - dozens - 1) * 32));

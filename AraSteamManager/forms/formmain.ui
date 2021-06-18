@@ -378,6 +378,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>ProgressBarGood</class>
+   <extends>QProgressBar</extends>
+   <header>subWidgets/progressBars/progressbargood.h</header>
+  </customwidget>
+  <customwidget>
    <class>FormFriends</class>
    <extends>QWidget</extends>
    <header location="global">forms/subForms/main/formfriends.h</header>
@@ -400,11 +405,6 @@
    <extends>QWidget</extends>
    <header location="global">forms/subForms/main/formfavorites.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ProgressBarGood</class>
-   <extends>QProgressBar</extends>
-   <header location="global">subWidgets/progressBars/progressbargood.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

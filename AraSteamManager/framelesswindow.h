@@ -21,6 +21,9 @@ class FramelessWindow;
 class FramelessWindow : public QMainWindow {
     Q_OBJECT
 
+public slots:
+    void updateSettings();
+
 public:
     enum Edge {
         None        = 0x0, //00000000
@@ -58,7 +61,7 @@ protected:
     void buttonMinimize_Clicked();
 
 private:
-    void setIcons();
+    void updateIcons();
 
     Ui::FramelessWindow *ui;
     QWidget *_target = nullptr;

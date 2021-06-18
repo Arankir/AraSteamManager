@@ -18,11 +18,12 @@ namespace Ui {
 class FormFriendsCompare;
 }
 
-class FormFriendsCompare : public QWidget {
+class FormFriendsCompare : public Form {
     Q_OBJECT
 
 public slots:
-    void setInitData(SProfile &profile, SGame &game, AchievementsModel *achievementsModel);
+    void updateSettings() override;
+    void setInitData(const SProfile &profile, const SGame &game, AchievementsModel *achievementsModel);
     void addFriendToList(SProfile &steamFriend);
     void setModel(QAbstractItemModel *model);
     void filtersValueUpdated();
@@ -39,7 +40,7 @@ signals:
     void s_addedFriend();
 
 private slots:
-    void setIcons();
+    void updateIcons() override;
     void updateFilterFriend(SProfile *aFriendName, const ReachedType &aType);
     void loadingCompare();
     void loadFriendGames(const SGames &aGames, const QString &aUserId);
@@ -48,8 +49,7 @@ private slots:
     void setFriendsAll();
     void setFriendsReached();
     void setFriendsNotReached();
-    void changeEvent(QEvent *event);
-    void retranslate();
+    void retranslate() override;
     void setAllFriendsValue(const ReachedType &aType);
     void updateFiltersFriends();
 

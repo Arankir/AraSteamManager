@@ -1,5 +1,6 @@
 #include "formsettings.h"
 #include "ui_formsettings.h"
+#include <QColorDialog>
 
 FormSettings::FormSettings(QWidget *aParent): Form(aParent), ui(new Ui::FormSettings) {
     ui->setupUi(this);
@@ -65,6 +66,26 @@ void FormSettings::initComponents() {
         ui->RadioButtonDarkTheme->setChecked(true);
         break;
     }
+    case 4: {
+        ui->radioButtonBgr->setChecked(true);
+        break;
+    }
+    case 5: {
+        ui->radioButtonBrg->setChecked(true);
+        break;
+    }
+    case 6: {
+        ui->radioButtonGbr->setChecked(true);
+        break;
+    }
+    case 7: {
+        ui->radioButtonGrb->setChecked(true);
+        break;
+    }
+    case 8: {
+        ui->radioButtonRbg->setChecked(true);
+        break;
+    }
     default: {
         break;
     }
@@ -95,6 +116,16 @@ void FormSettings::initComponents() {
 //        break;
 //    }
 //    }
+
+//    ui->radioButtonCustom->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
+//"stop: 0 " + QColor(Qt::red).name() + ", "
+//"stop: 0.14 " + QColor(222, 76, 0).name() + ", "
+//"stop: 0.29 " + QColor(Qt::yellow).name() + ", "
+//"stop: 0.43 " + QColor(Qt::green).name() + ", "
+//"stop: 0.58 " + QColor(Qt::red).name() + ", "
+//"stop: 0.73 " + QColor(Qt::blue).name() + ", "
+//"stop: 1.0 " + QColor(142, 0, 167).name() + ");");
+
     ui->SliderProfileSize->setValue(Settings::profileInfoSize());
     ui->CheckBoxSaveImage->setChecked(Settings::saveImages());
 //    QPalette darkPalette;
@@ -173,6 +204,41 @@ void FormSettings::initComponents() {
     connect(ui->RadioButtonDarkTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonDarkTheme_Clicked);
     connect(ui->RadioButtonLightTheme,      &QRadioButton::clicked,   this, &FormSettings::radioButtonLightTheme_Clicked);
     connect(ui->RadioButtonBlueTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonBlueTheme_Clicked);
+    connect(ui->radioButtonBgr,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(4);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonBrg,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(5);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonGbr,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(6);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonGrb,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(7);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonRbg,       &QRadioButton::clicked,   this, [=](){
+        Settings::setTheme(8);
+        emit s_updateSettings();
+    });
+    connect(ui->radioButtonCustom,    &QRadioButton::clicked,   this, [=](){
+        QColor themeColor = QColorDialog::getColor(Qt::white, this, tr("Выберите цвет"));
+
+        createDir(Paths::documents() + "theme");
+        createIcons(Paths::documents() + "theme", themeColor);
+        QFile file(Paths::documents() + "theme\\colors.txt");
+        file.open(QIODevice::WriteOnly);
+        QTextStream stream(&file);
+        stream << getColors(themeColor).join("\r\n");
+        file.close();
+
+        Settings::setTheme(0);
+        emit s_updateSettings();
+    });
+
     connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
     connect(ui->SliderProfileSize,          &QSlider::valueChanged,   this, &FormSettings::slideProfileSize_ValueChanged);
     //connect(ui->ComboBoxMaxRows,            SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxMaxTableRows(int)));
@@ -331,11 +397,167 @@ void FormSettings::retranslate() {
     }
     ui->labelIcons8->setText("<html><head/><body><p>"
                              "Иконки для приложения были предоставлены сайтом "
-                             "<img height=15 style=\"vertical-align: top\" src=\"" + Images::link() + "\">"
                             "<a href=https://icons8.ru/icons>"
                             "<span style=\" text-decoration: underline; color:#2d7fc8;\"> "
                             "https://icons8.ru/icons"
                             "</span></a></p></body></html>");
+}
+
+QColor findAnalogColor1(const QColor &color1, const QColor &color2, const QColor &color3) {
+    double divH = 1.0 * color3.hslHue() * color2.hslHue() / (color1.hslHue() == 0 ? 1 : color1.hslHue());
+    double divS = 1.0 * color3.hslSaturation() * color2.hslSaturation() / (color1.hslSaturation() == 0 ? 1 : color1.hslSaturation());
+    double divL = 1.0 * color3.lightness() * color2.lightness() / (color1.lightness() == 0 ? 1 : color1.lightness());
+
+    if (divH == 0) {
+        divH = color3.hue();
+    }
+
+    return QColor::fromHsl(divH, divS, divL);
+}
+
+QColor findAnalogColor2(const QColor &color1, const QColor &color2, const QColor &color3) {
+    return QColor::fromHsl(color3.hslHue() * color2.hslHue() / (color1.hslHue() == 0 ? 1 : color1.hslHue()), color2.hslSaturation(), color2.lightness(), color2.alpha());
+}
+
+QImage convertImage(const QImage &aImage, const QColor &aColor) {
+    QImage im(aImage.size(), aImage.format());
+    for (int x = 0; x < aImage.width(); ++x) {
+        for (int y = 0; y < aImage.height(); ++y) {
+            QColor oldColor = aImage.pixelColor(x, y);
+            QColor newColor = QColor::fromHsl(aColor.hslHue(),
+                                               255,
+                                               100,
+                                               oldColor.alpha());
+            im.setPixelColor(x, y, newColor);
+        }
+    }
+    return im;
+}
+
+QStringList getImagesFromDir(const QDir &directory) {
+    QStringList list = directory.entryList(QStringList("*.png"));
+    QStringList result;
+    for (auto file: list) {
+        result << directory.absolutePath() + "/" + file;
+    }
+    for (auto dir: directory.entryList(QDir::Dirs)) {
+        if (dir != "." && dir != "..") {
+            result << getImagesFromDir(directory.absolutePath() + "/" + dir);
+        }
+    }
+    return result;
+}
+
+QStringList FormSettings::getColors(const QColor &aNewColor) {
+    QList<QColor> listOld;
+    listOld.append(QColor(221, 221, 221));
+    listOld.append(QColor(66, 169, 198));
+    listOld.append(QColor(20, 140, 210));
+    listOld.append(QColor(180, 180, 180));
+    listOld.append(QColor(20, 80, 110));
+    listOld.append(QColor(135, 182, 255));
+    listOld.append(QColor(19, 36, 62));
+    listOld.append(QColor(50, 60, 70));
+    listOld.append(QColor(38, 146, 255));
+    listOld.append(QColor(21, 50, 87));
+    listOld.append(QColor(40, 52, 60));
+    listOld.append(QColor(80, 95, 107));
+    listOld.append(QColor(70, 100, 140));
+    listOld.append(QColor(18, 69, 124));
+    listOld.append(QColor(25, 37, 61));
+
+    QList<QColor> listNew;
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[0], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[1], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[2], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[3], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[4], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[5], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[6], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[7], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[8], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[9], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[10], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[11], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[12], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[13], aNewColor));
+    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[14], aNewColor));
+
+    QStringList result;
+    result  << listNew[0].name()
+            << listNew[1].name()
+            << listNew[2].name()
+            << listNew[3].name()
+            << listNew[4].name()
+            << listNew[5].name()
+            << listNew[6].name()
+            << listNew[7].name()
+            << "qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, stop: 0 "
+                                 + listNew[8].name() +
+                                ", stop: 1.0 "
+                                 + listNew[9].name() +
+                                ")"
+            << "qlineargradient(x1: -1, y1: -1, x2: 2, y2: 2, stop: 0 "
+                                 + listNew[10].name() +
+                                ", stop: 1.0 "
+                                 + listNew[11].name() +
+                                ")"
+            << listNew[12].name()
+            << "qradialgradient(cx:0.5, cy:0.5, radius: 0.9, fx:0.4, fy:0.5, stop:0 "
+                                 + listNew[13].name() +
+                                ", stop:1 "
+                                 + listNew[14].name() +
+                                ")";
+    return result;
+}
+
+void FormSettings::createIcons(const QString &aPath, const QColor &aNewColor) {
+    QDir directory("://theme/iconsBlackTheme/");
+
+    QStringList anotherColor;
+    anotherColor << "arrow_down_focus.png" << "arrow_down_pressed.png"
+                 << "arrow_left_focus.png" << "arrow_left_pressed.png"
+                 << "arrow_right_focus.png" << "arrow_right_pressed.png"
+                 << "arrow_up_focus.png" << "arrow_up_pressed.png"
+                 << "branch_closed_focus.png" << "branch_closed_pressed.png"
+                 << "branch_end_focus.png" << "branch_end_pressed.png"
+                 << "branch_line_focus.png" << "branch_line_pressed.png"
+                 << "branch_more_focus.png" << "branch_more_pressed.png"
+                 << "branch_open_focus.png" << "branch_open_pressed.png"
+                 << "checkbox_checked_hover.png" << "checkbox_checked_pressed.png"
+                 << "checkbox_indeterminate_hover.png" << "checkbox_indeterminate_pressed.png"
+                 << "checkbox_unchecked_hover.png" << "checkbox_unchecked_pressed.png"
+                 << "line_horizontal_focus.png" << "line_horizontal_pressed.png"
+                 << "line_vertical_focus.png" << "line_vertical_pressed.png"
+                 << "radio_checked_focus.png" << "radio_checked_pressed.png"
+                 << "radio_unchecked_focus.png" << "radio_unchecked_pressed.png"
+                 << "radiobutton_checked_hover.png" << "radiobutton_checked_press.png"
+                 << "radiobutton_unchecked_hover.png" << "radiobutton_unchecked_press.png"
+                 << "toolbar_move_horizontal_focus.png" << "toolbar_move_horizontal_pressed.png"
+                 << "toolbar_move_vertical_focus.png" << "toolbar_move_vertical_pressed.png"
+                 << "toolbar_separator_horizontal_focus.png" << "toolbar_separator_horizontal_pressed.png"
+                 << "toolbar_separator_vertical_focus.png" << "toolbar_separator_vertical_pressed.png"
+                 << "window_close_focus.png" << "window_close_pressed.png"
+                 << "window_grip_focus.png" << "window_grip_pressed.png"
+                 << "window_minimize_focus.png" << "window_minimize_pressed.png"
+                 << "window_undock_focus.png" << "window_undock_pressed.png";
+
+    QStringList imagesList = getImagesFromDir(directory);
+
+    for (const auto &file: imagesList) {
+        QImage image;
+        QString fileName = file;
+        fileName = fileName.remove(directory.absolutePath() + "/");
+        if (anotherColor.indexOf(fileName) > -1) {
+           image = convertImage(QImage(file), aNewColor);
+        } else {
+           image = QImage(file);
+        }
+
+        createDir(aPath + "/" + fileName);
+        image.save(aPath + "/" + fileName);
+    }
+
 }
 
 void FormSettings::radioButtonLanguageEnglish_Clicked() {

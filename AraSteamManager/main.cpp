@@ -35,7 +35,9 @@ int main(int argc, char *argv[]) {
 
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
-    createFramelessForm<FormMain>()->window()->show();
+    auto mainForm = createFramelessForm<FormMain>();
+    QObject::connect(mainForm, &FormMain::s_updateSettings, mainForm->window(), &FramelessWindow::updateSettings);
+    mainForm->window()->show();
 
     return a.exec();
 }

@@ -41,6 +41,7 @@ release/qcomboboxfriends.o
 release/qlistwidgetachievement.o
 release/qlistwidgetfriend.o
 release/labellight.o
+release/labelvalue.o
 release/qlistwidgetachievements.o
 release/achievementsmodel.o
 release/filters.o
@@ -92,6 +93,7 @@ release/moc_actioncategory.o
 release/moc_multiselectcombobox.o
 release/moc_qcomboboxfriends.o
 release/moc_labellight.o
+release/moc_labelvalue.o
 release/moc_qlistwidgetachievements.o
 release/moc_achievementsmodel.o
 release/moc_filters.o

@@ -37,7 +37,7 @@ FramelessWindow::FramelessWindow(QWidget *target):
     connect(ui->ButtonMaximize, &QPushButton::clicked, this, &FramelessWindow::buttonMaximize_Clicked);
     connect(ui->ButtonMinimize, &QPushButton::clicked, this, &FramelessWindow::buttonMinimize_Clicked);
     connect(ui->ButtonExit,     &QPushButton::clicked, this, &FramelessWindow::buttonExit_Clicked);
-    setIcons();
+    updateIcons();
 }
 
 void FramelessWindow::setWidget(QWidget *target) {
@@ -45,7 +45,7 @@ void FramelessWindow::setWidget(QWidget *target) {
     ui->centralwidget->layout()->addWidget(_target);
 }
 
-void FramelessWindow::setIcons() {
+void FramelessWindow::updateIcons() {
     ui->LabelLogo->setPixmap(QPixmap(Images::logo()).scaled(30, 30));
 
 //    ui->LabelLogo->setTextFormat(Qt::RichText);
@@ -58,6 +58,10 @@ void FramelessWindow::setIcons() {
     } else {
         ui->ButtonMaximize  ->setIcon(QIcon(Images::maximizeWindow()));
     }
+}
+
+void FramelessWindow::updateSettings() {
+    updateIcons();
 }
 
 void FramelessWindow::buttonExit_Clicked() {

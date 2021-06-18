@@ -1,0 +1,97 @@
+
+/* QMainWindow ------------------------------------------------------------
+This adjusts the splitter in the dock widget, not qsplitter
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmainwindow
+--------------------------------------------------------------------------- */
+/* QToolTip ---------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtooltip
+--------------------------------------------------------------------------- */
+/* QStatusBar -------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qstatusbar
+--------------------------------------------------------------------------- */
+/* QCheckBox --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcheckbox
+--------------------------------------------------------------------------- */
+/* QGroupBox --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qgroupbox
+--------------------------------------------------------------------------- */
+/* QRadioButton -----------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qradiobutton
+--------------------------------------------------------------------------- */
+/* QMenuBar ---------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenubar
+--------------------------------------------------------------------------- */
+/* QMenu ------------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenu
+--------------------------------------------------------------------------- */
+/* QAbstractItemView ------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcombobox
+--------------------------------------------------------------------------- */
+/* QAbstractScrollArea ----------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qabstractscrollarea
+--------------------------------------------------------------------------- */
+/* QScrollBar -------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qscrollbar
+--------------------------------------------------------------------------- */
+/* QTextEdit --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-specific-widgets
+--------------------------------------------------------------------------- */
+/* QSizeGrip --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qsizegrip
+--------------------------------------------------------------------------- */
+/* QToolBar ---------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbar
+--------------------------------------------------------------------------- */
+/* QLabel -----------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
+--------------------------------------------------------------------------- */
+/* QTextBrowser -----------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qabstractscrollarea
+--------------------------------------------------------------------------- */
+/* QProgressBar -----------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qprogressbar
+--------------------------------------------------------------------------- */
+/* QPushButton ------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qpushbutton
+--------------------------------------------------------------------------- */
+/* QToolButton ------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbutton
+--------------------------------------------------------------------------- */
+/* QComboBox --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcombobox
+--------------------------------------------------------------------------- */
+/* QSlider ----------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qslider
+--------------------------------------------------------------------------- */
+/* QLineEdit --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qlineedit
+--------------------------------------------------------------------------- */
+/* QTabWiget --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
+--------------------------------------------------------------------------- */
+/* QTabBar ----------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
+--------------------------------------------------------------------------- */
+/* QTabBar::tab - selected ------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
+--------------------------------------------------------------------------- */
+/* QTreeView QListView QTableView -----------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtreeview
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qlistview
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtableview
+--------------------------------------------------------------------------- */
+/* QHeaderView ------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qheaderview
+--------------------------------------------------------------------------- */
+/* QToolBox --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbox
+--------------------------------------------------------------------------- */
+/* QFrame -----------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
+https://doc.qt.io/qt-5/qframe.html#-prop
+https://doc.qt.io/qt-5/qframe.html#details
+https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
+--------------------------------------------------------------------------- */
+/* QSplitter --------------------------------------------------------------
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qsplitter
+--------------------------------------------------------------------------- */

@@ -41,6 +41,7 @@ debug/qcomboboxfriends.o
 debug/qlistwidgetachievement.o
 debug/qlistwidgetfriend.o
 debug/labellight.o
+debug/labelvalue.o
 debug/qlistwidgetachievements.o
 debug/achievementsmodel.o
 debug/filters.o
@@ -92,6 +93,7 @@ debug/moc_actioncategory.o
 debug/moc_multiselectcombobox.o
 debug/moc_qcomboboxfriends.o
 debug/moc_labellight.o
+debug/moc_labelvalue.o
 debug/moc_qlistwidgetachievements.o
 debug/moc_achievementsmodel.o
 debug/moc_filters.o

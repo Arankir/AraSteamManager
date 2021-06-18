@@ -23,7 +23,7 @@
 #include <forms/subForms/main/formfriends.h>
 #include <forms/subForms/main/formgames.h>
 #include <forms/subForms/main/formsettings.h>
-#include <subWidgets/progressBars/progressbargood.h>
+#include "subWidgets/progressBars/progressbargood.h"
 
 QT_BEGIN_NAMESPACE
 

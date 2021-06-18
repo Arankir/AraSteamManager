@@ -824,7 +824,7 @@ QComboBox::indicator {
 QComboBox::item {
     border-width: 1px;
     border-style: solid;
-    border-radius: 4px;
+    /*border-radius: 4px;*/
     height: 20px;
     margin-left: -20px;
 }
@@ -1012,6 +1012,8 @@ https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-
 
 --------------------------------------------------------------------------- */
 QTabBar::tab {
+    border-width: 1px;
+    border-style: solid;
   /* !selected and disabled ----------------------------------------- */
   /* selected ------------------------------------------------------- */
 }
@@ -1274,11 +1276,8 @@ https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qheaderview
 
 --------------------------------------------------------------------------- */
 QHeaderView, QTableCornerButton::section {
-    border-width: 1px;
+    border-width: 0px;
     border-style: transparent;
-    border-bottom-width: 0px;
-    border-top-width: 0px;
-    border-right-width: 0px;
     border-radius: 0px;
 }
 

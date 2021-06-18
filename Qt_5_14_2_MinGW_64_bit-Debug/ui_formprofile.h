@@ -19,6 +19,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "subWidgets/labels/labellight.h"
+#include "subWidgets/labels/labelvalue.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -35,7 +36,7 @@ public:
     QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_9;
     QLabel *LabelRealName;
-    QLabel *LabelRealNameValue;
+    LabelValue *LabelRealNameValue;
     QSpacerItem *horizontalSpacer_9;
     QHBoxLayout *horizontalLayout_6;
     QLabel *LabelPersonaState;
@@ -54,7 +55,7 @@ public:
     QHBoxLayout *horizontalLayout_13;
     QHBoxLayout *horizontalLayout_3;
     QLabel *Labellvl;
-    QLabel *LabellvlValue;
+    LabelValue *LabellvlValue;
     QFrame *line;
     QHBoxLayout *horizontalLayout_10;
     QLabel *LabelBans;
@@ -62,14 +63,14 @@ public:
     QSpacerItem *horizontalSpacer_7;
     QHBoxLayout *horizontalLayout_4;
     QLabel *LabelTimeCreated;
-    QLabel *LabelTimeCreatedValue;
+    LabelValue *LabelTimeCreatedValue;
     QSpacerItem *horizontalSpacer_8;
     QHBoxLayout *horizontalLayout_5;
     QLabel *LabelProfileUrl;
     QSpacerItem *horizontalSpacer_3;
     QHBoxLayout *horizontalLayout_11;
     QLabel *LabelLocCountryCode;
-    QLabel *LabelLocCountryCodeValue;
+    LabelValue *LabelLocCountryCodeValue;
     QSpacerItem *horizontalSpacer_10;
     QHBoxLayout *horizontalLayout_12;
     LabelLight *LabelProfileState;
@@ -150,7 +151,7 @@ public:
 
         horizontalLayout_9->addWidget(LabelRealName);
 
-        LabelRealNameValue = new QLabel(FrameProfileBaseInfo);
+        LabelRealNameValue = new LabelValue(FrameProfileBaseInfo);
         LabelRealNameValue->setObjectName(QString::fromUtf8("LabelRealNameValue"));
         QFont font2;
         font2.setPointSize(10);
@@ -272,7 +273,7 @@ public:
 
         horizontalLayout_3->addWidget(Labellvl);
 
-        LabellvlValue = new QLabel(FrameProfileMaximumInfo);
+        LabellvlValue = new LabelValue(FrameProfileMaximumInfo);
         LabellvlValue->setObjectName(QString::fromUtf8("LabellvlValue"));
         LabellvlValue->setMinimumSize(QSize(32, 32));
         LabellvlValue->setMaximumSize(QSize(32, 32));
@@ -331,7 +332,7 @@ public:
 
         horizontalLayout_4->addWidget(LabelTimeCreated);
 
-        LabelTimeCreatedValue = new QLabel(FrameProfileMaximumInfo);
+        LabelTimeCreatedValue = new LabelValue(FrameProfileMaximumInfo);
         LabelTimeCreatedValue->setObjectName(QString::fromUtf8("LabelTimeCreatedValue"));
         LabelTimeCreatedValue->setFont(font2);
         LabelTimeCreatedValue->setText(QString::fromUtf8("0"));
@@ -374,7 +375,7 @@ public:
 
         horizontalLayout_11->addWidget(LabelLocCountryCode);
 
-        LabelLocCountryCodeValue = new QLabel(FrameProfileMaximumInfo);
+        LabelLocCountryCodeValue = new LabelValue(FrameProfileMaximumInfo);
         LabelLocCountryCodeValue->setObjectName(QString::fromUtf8("LabelLocCountryCodeValue"));
         LabelLocCountryCodeValue->setFont(font2);
         LabelLocCountryCodeValue->setText(QString::fromUtf8("EN"));

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>393</height>
+    <width>470</width>
+    <height>555</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -45,19 +45,6 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QRadioButton" name="RadioButtonBlueTheme">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Синяя тема</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QRadioButton" name="RadioButtonDarkTheme">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
@@ -66,7 +53,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Тёмная тема (в разработке)</string>
+               <string>Тёмная</string>
               </property>
              </widget>
             </item>
@@ -79,7 +66,62 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Светлая тема</string>
+               <string>Светлая</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="RadioButtonBlueTheme">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Синяя</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonRbg">
+              <property name="text">
+               <string>Зеленая</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonBrg">
+              <property name="text">
+               <string>Малиновая</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonBgr">
+              <property name="text">
+               <string>Оранжевая</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonGbr">
+              <property name="text">
+               <string>Лаймовая</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonGrb">
+              <property name="text">
+               <string>Фиолетовая</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonCustom">
+              <property name="text">
+               <string>Пользовательская</string>
               </property>
              </widget>
             </item>
@@ -269,8 +311,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>478</width>
-            <height>231</height>
+            <width>466</width>
+            <height>393</height>
            </rect>
           </property>
           <attribute name="label">

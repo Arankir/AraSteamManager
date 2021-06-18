@@ -121,6 +121,8 @@ FormContainerAchievements *FormMain::createFormContainerAchievements() {
 //    FramelessWindow *f = new FramelessWindow;
     _containerAchievementsForm = createFramelessForm<FormContainerAchievements>();// new FormContainerAchievements(f);
 //    f->setWidget(_containerAchievementsForm);
+    connect(this, &FormMain::s_updateSettings, _containerAchievementsForm->window(), &FramelessWindow::updateSettings);
+    connect(this, &FormMain::s_updateSettings, _containerAchievementsForm, &FormContainerAchievements::updateSettings);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements,   this, &FormMain::removeAchievements);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_closed,               this, &FormMain::containerAchievementsClose);
     //++_windowChildCount;
@@ -411,5 +413,6 @@ void FormMain::buttonUpdate_Clicked() {
     if (currentProfile) {
         currentProfile->updateInfo();
     }
+    updateSettings();
 }
 #define FunctionsEnd }

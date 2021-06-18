@@ -43,9 +43,15 @@ public:
     QHBoxLayout *horizontalLayout_15;
     QGroupBox *GroupBoxTheme;
     QVBoxLayout *verticalLayout_3;
-    QRadioButton *RadioButtonBlueTheme;
     QRadioButton *RadioButtonDarkTheme;
     QRadioButton *RadioButtonLightTheme;
+    QRadioButton *RadioButtonBlueTheme;
+    QRadioButton *radioButtonRbg;
+    QRadioButton *radioButtonBrg;
+    QRadioButton *radioButtonBgr;
+    QRadioButton *radioButtonGbr;
+    QRadioButton *radioButtonGrb;
+    QRadioButton *radioButtonCustom;
     QSpacerItem *horizontalSpacer_8;
     QHBoxLayout *horizontalLayout;
     QGroupBox *groupBox;
@@ -143,7 +149,7 @@ public:
     {
         if (FormSettings->objectName().isEmpty())
             FormSettings->setObjectName(QString::fromUtf8("FormSettings"));
-        FormSettings->resize(482, 393);
+        FormSettings->resize(470, 555);
         verticalLayout_5 = new QVBoxLayout(FormSettings);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -159,18 +165,11 @@ public:
         GroupBoxTheme->setObjectName(QString::fromUtf8("GroupBoxTheme"));
         verticalLayout_3 = new QVBoxLayout(GroupBoxTheme);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        RadioButtonBlueTheme = new QRadioButton(GroupBoxTheme);
-        RadioButtonBlueTheme->setObjectName(QString::fromUtf8("RadioButtonBlueTheme"));
+        RadioButtonDarkTheme = new QRadioButton(GroupBoxTheme);
+        RadioButtonDarkTheme->setObjectName(QString::fromUtf8("RadioButtonDarkTheme"));
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(RadioButtonBlueTheme->sizePolicy().hasHeightForWidth());
-        RadioButtonBlueTheme->setSizePolicy(sizePolicy);
-
-        verticalLayout_3->addWidget(RadioButtonBlueTheme);
-
-        RadioButtonDarkTheme = new QRadioButton(GroupBoxTheme);
-        RadioButtonDarkTheme->setObjectName(QString::fromUtf8("RadioButtonDarkTheme"));
         sizePolicy.setHeightForWidth(RadioButtonDarkTheme->sizePolicy().hasHeightForWidth());
         RadioButtonDarkTheme->setSizePolicy(sizePolicy);
 
@@ -182,6 +181,43 @@ public:
         RadioButtonLightTheme->setSizePolicy(sizePolicy);
 
         verticalLayout_3->addWidget(RadioButtonLightTheme);
+
+        RadioButtonBlueTheme = new QRadioButton(GroupBoxTheme);
+        RadioButtonBlueTheme->setObjectName(QString::fromUtf8("RadioButtonBlueTheme"));
+        sizePolicy.setHeightForWidth(RadioButtonBlueTheme->sizePolicy().hasHeightForWidth());
+        RadioButtonBlueTheme->setSizePolicy(sizePolicy);
+
+        verticalLayout_3->addWidget(RadioButtonBlueTheme);
+
+        radioButtonRbg = new QRadioButton(GroupBoxTheme);
+        radioButtonRbg->setObjectName(QString::fromUtf8("radioButtonRbg"));
+
+        verticalLayout_3->addWidget(radioButtonRbg);
+
+        radioButtonBrg = new QRadioButton(GroupBoxTheme);
+        radioButtonBrg->setObjectName(QString::fromUtf8("radioButtonBrg"));
+
+        verticalLayout_3->addWidget(radioButtonBrg);
+
+        radioButtonBgr = new QRadioButton(GroupBoxTheme);
+        radioButtonBgr->setObjectName(QString::fromUtf8("radioButtonBgr"));
+
+        verticalLayout_3->addWidget(radioButtonBgr);
+
+        radioButtonGbr = new QRadioButton(GroupBoxTheme);
+        radioButtonGbr->setObjectName(QString::fromUtf8("radioButtonGbr"));
+
+        verticalLayout_3->addWidget(radioButtonGbr);
+
+        radioButtonGrb = new QRadioButton(GroupBoxTheme);
+        radioButtonGrb->setObjectName(QString::fromUtf8("radioButtonGrb"));
+
+        verticalLayout_3->addWidget(radioButtonGrb);
+
+        radioButtonCustom = new QRadioButton(GroupBoxTheme);
+        radioButtonCustom->setObjectName(QString::fromUtf8("radioButtonCustom"));
+
+        verticalLayout_3->addWidget(radioButtonCustom);
 
 
         horizontalLayout_15->addWidget(GroupBoxTheme);
@@ -290,7 +326,7 @@ public:
         ToolBoxExport->setObjectName(QString::fromUtf8("ToolBoxExport"));
         PageCategories = new QWidget();
         PageCategories->setObjectName(QString::fromUtf8("PageCategories"));
-        PageCategories->setGeometry(QRect(0, 0, 478, 231));
+        PageCategories->setGeometry(QRect(0, 0, 466, 393));
         verticalLayout_12 = new QVBoxLayout(PageCategories);
         verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
         TreeWidgetExportCategories = new QTreeWidget(PageCategories);
@@ -655,7 +691,7 @@ public:
 
         retranslateUi(FormSettings);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(0);
         ToolBoxExport->setCurrentIndex(0);
 
 
@@ -666,9 +702,15 @@ public:
     {
         FormSettings->setWindowTitle(QCoreApplication::translate("FormSettings", "Form", nullptr));
         GroupBoxTheme->setTitle(QCoreApplication::translate("FormSettings", "\320\242\320\265\320\274\320\260", nullptr));
-        RadioButtonBlueTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\270\320\275\321\217\321\217 \321\202\320\265\320\274\320\260", nullptr));
-        RadioButtonDarkTheme->setText(QCoreApplication::translate("FormSettings", "\320\242\321\221\320\274\320\275\320\260\321\217 \321\202\320\265\320\274\320\260 (\320\262 \321\200\320\260\320\267\321\200\320\260\320\261\320\276\321\202\320\272\320\265)", nullptr));
-        RadioButtonLightTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217 \321\202\320\265\320\274\320\260", nullptr));
+        RadioButtonDarkTheme->setText(QCoreApplication::translate("FormSettings", "\320\242\321\221\320\274\320\275\320\260\321\217", nullptr));
+        RadioButtonLightTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217", nullptr));
+        RadioButtonBlueTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\270\320\275\321\217\321\217", nullptr));
+        radioButtonRbg->setText(QCoreApplication::translate("FormSettings", "\320\227\320\265\320\273\320\265\320\275\320\260\321\217", nullptr));
+        radioButtonBrg->setText(QCoreApplication::translate("FormSettings", "\320\234\320\260\320\273\320\270\320\275\320\276\320\262\320\260\321\217", nullptr));
+        radioButtonBgr->setText(QCoreApplication::translate("FormSettings", "\320\236\321\200\320\260\320\275\320\266\320\265\320\262\320\260\321\217", nullptr));
+        radioButtonGbr->setText(QCoreApplication::translate("FormSettings", "\320\233\320\260\320\271\320\274\320\276\320\262\320\260\321\217", nullptr));
+        radioButtonGrb->setText(QCoreApplication::translate("FormSettings", "\320\244\320\270\320\276\320\273\320\265\321\202\320\276\320\262\320\260\321\217", nullptr));
+        radioButtonCustom->setText(QCoreApplication::translate("FormSettings", "\320\237\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\321\214\321\201\320\272\320\260\321\217", nullptr));
         groupBox->setTitle(QCoreApplication::translate("FormSettings", "\320\257\320\267\321\213\320\272", nullptr));
         CheckBoxVisibleHiddenGames->setText(QCoreApplication::translate("FormSettings", "\320\237\321\200\320\270 \320\277\320\276\320\270\321\201\320\272\320\265 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\276\321\202\320\276\320\261\321\200\320\260\320\266\320\260\321\202\321\214 \321\201\320\272\321\200\321\213\321\202\321\213\320\265 \320\270\320\263\321\200\321\213", nullptr));
         CheckBoxSaveImage->setText(QCoreApplication::translate("FormSettings", "\320\220\320\262\321\202\320\276\320\274\320\260\321\202\320\270\321\207\320\265\321\201\320\272\320\270 \321\201\320\276\321\205\321\200\320\260\320\275\321\217\321\202\321\214 \320\272\320\260\321\200\321\202\320\270\320\275\320\272\320\270 \320\275\320\260 \320\272\320\276\320\274\320\277\321\214\321\216\321\202\320\265\321\200\320\265 (\320\264\320\273\321\217 \320\261\320\276\320\273\320\265\320\265 \320\261\321\213\321\201\321\202\321\200\320\276\320\271 \320\267\320\260\320\263\321\200\321\203\320\267\320\272\320\270)", nullptr));

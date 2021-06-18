@@ -1,0 +1,377 @@
+
+QMainWindow::separator:horizontal {
+    image: url("%1toolbar_separator_vertical.png");
+}
+
+QMainWindow::separator:vertical {
+    image: url("%1toolbar_separator_horizontal.png");
+}
+
+QCheckBox::indicator:unchecked {
+    image: url("%1checkbox_unchecked.png");
+}
+
+QCheckBox::indicator:checked {
+    image: url("%1checkbox_checked.png");
+}
+
+QCheckBox::indicator:unchecked:hover {
+    image: url("%1checkbox_unchecked_hover.png");
+}
+
+QCheckBox::indicator:checked:hover {
+    image: url("%1checkbox_checked_hover.png");
+}
+
+QCheckBox::indicator:unchecked:pressed {
+    image: url("%1checkbox_unchecked_press.png");
+}
+
+QCheckBox::indicator:checked:pressed {
+    image: url("%1checkbox_checked_press.png");
+}
+
+QCheckBox::indicator:unchecked:disabled {
+    image: url("%1checkbox_unchecked_disabled.png");
+}
+
+QCheckBox::indicator:checked:disabled {
+    image: url("%1checkbox_checked_disabled.png");
+}
+
+QGroupBox#GroupBoxFilter::title {
+    image: url("%1filter.png");
+}
+
+QGroupBox::indicator:unchecked {
+    image: url("%1checkbox_unchecked.png");
+}
+
+QGroupBox::indicator:unchecked:hover, QGroupBox::indicator:unchecked:focus, QGroupBox::indicator:unchecked:pressed {
+    image: url("%1checkbox_unchecked_hover.png");
+}
+
+QGroupBox::indicator:unchecked:disabled {
+    image: url("%1checkbox_unchecked_disabled.png");
+}
+
+QGroupBox::indicator:checked {
+    image: url("%1checkbox_checked.png");
+}
+
+QGroupBox::indicator:checked:hover, QGroupBox::indicator:checked:focus, QGroupBox::indicator:checked:pressed {
+    image: url("%1checkbox_checked_hover.png");
+}
+
+QGroupBox::indicator:checked:disabled {
+    image: url("%1checkbox_checked_disabled.png");
+}
+
+QRadioButton::indicator::unchecked {
+    image: url("%1radiobutton_unchecked.png");
+}
+
+QRadioButton::indicator::checked {
+    image: url("%1radiobutton_checked.png");
+}
+
+QRadioButton::indicator::unchecked:hover {
+    image: url("%1radiobutton_unchecked_hover.png");
+}
+
+QRadioButton::indicator::checked:hover {
+    image: url("%1radiobutton_checked_hover.png");
+}
+
+QRadioButton::indicator::unchecked:pressed {
+    image: url("%1radiobutton_unchecked_press.png");
+}
+
+QRadioButton::indicator::checked:pressed {
+    image: url("%1radiobutton_checked_press.png");
+}
+
+QRadioButton::indicator:unchecked:disabled {
+    image: url("%1radiobutton_unchecked_disabled.png");
+}
+
+QRadioButton::indicator:checked:disabled {
+    image: url("%1radiobutton_checked_disabled.png");
+}
+
+QMenu::indicator:non-exclusive:unchecked {
+    image: url("%1checkbox_unchecked.png");
+}
+
+QMenu::indicator:non-exclusive:unchecked:selected {
+    image: url("%1checkbox_unchecked_disabled.png");
+}
+
+QMenu::indicator:non-exclusive:checked {
+    image: url("%1checkbox_checked.png");
+}
+
+QMenu::indicator:non-exclusive:checked:selected {
+    image: url("%1checkbox_checked_disabled.png");
+}
+
+QMenu::indicator:exclusive:unchecked {
+    image: url("%1radiobutton_unchecked.png");
+}
+
+QMenu::indicator:exclusive:unchecked:selected {
+    image: url("%1radiobutton_unchecked_disabled.png");
+}
+
+QMenu::indicator:exclusive:checked {
+    image: url("%1radiobutton_checked.png");
+}
+
+QMenu::indicator:exclusive:checked:selected {
+    image: url("%1radiobutton_checked_disabled.png");
+}
+
+QMenu::right-arrow {
+    image: url("%1arrow_right.png");
+}
+
+QScrollBar::add-line:horizontal {
+    border-image: url("%1arrow_right_disabled.png");
+}
+
+QScrollBar::add-line:horizontal:hover, QScrollBar::add-line:horizontal:on {
+    border-image: url("%1arrow_right.png");
+}
+
+QScrollBar::add-line:vertical {
+    border-image: url("%1arrow_down_disabled.png");
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on {
+    border-image: url("%1arrow_down.png");
+}
+
+QScrollBar::sub-line:horizontal {
+    border-image: url("%1arrow_left_disabled.png");
+}
+
+QScrollBar::sub-line:horizontal:hover, QScrollBar::sub-line:horizontal:on {
+    border-image: url("%1arrow_left.png");
+}
+
+QScrollBar::sub-line:vertical {
+    border-image: url("%1arrow_up_disabled.png");
+}
+
+QScrollBar::sub-line:vertical:hover, QScrollBar::sub-line:vertical:on {
+    border-image: url("%1arrow_up.png");
+}
+
+QSizeGrip {
+    image: url("%1window_grip.png");
+}
+
+QToolBar::handle:horizontal {
+    image: url("%1toolbar_move_horizontal.png");
+}
+
+QToolBar::handle:vertical {
+    image: url("%1toolbar_move_vertical.png");
+}
+
+QToolBar::separator:horizontal {
+    image: url("%1toolbar_separator_horizontal.png");
+}
+
+QToolBar::separator:vertical {
+    image: url("%1toolbar_separator_vertical.png");
+}
+
+QAbstractSpinBox::up-arrow, QAbstractSpinBox::up-arrow:disabled, QAbstractSpinBox::up-arrow:off {
+    image: url("%1arrow_up_disabled.png");
+}
+
+QAbstractSpinBox::up-arrow:hover {
+    image: url("%1arrow_up.png");
+}
+
+QAbstractSpinBox::down-arrow, QAbstractSpinBox::down-arrow:disabled, QAbstractSpinBox::down-arrow:off {
+    image: url("%1arrow_down_disabled.png");
+}
+
+QAbstractSpinBox::down-arrow:hover {
+    image: url("%1arrow_down.png");
+}
+
+QToolButton::menu-indicator {
+    image: url("%1arrow_down.png");
+}
+
+QToolButton::menu-arrow {
+    image: url("%1arrow_down.png");
+}
+
+QToolButton::menu-arrow:hover {
+    image: url("%1arrow_down_focus.png");
+}
+
+QComboBox::down-arrow {
+    image: url("%1combobox_down.png");
+}
+
+QComboBox::down-arrow:on,
+QComboBox::down-arrow:hover,
+QComboBox::down-arrow:focus {
+    image: url("%1arrow_down.png");
+}
+
+QTabBar::close-button {
+    image: url("%1close_window.png");
+}
+
+QTabBar::close-button:hover {
+    image: url("%1window_close_focus.png");
+}
+
+QTabBar::close-button:pressed {
+    image: url("%1window_close_pressed.png");
+}
+QTabBar QToolButton::left-arrow:enabled {
+    image: url("%1arrow_left.png");
+}
+
+QTabBar QToolButton::left-arrow:disabled {
+    image: url("%1arrow_left_disabled.png");
+}
+
+QTabBar QToolButton::right-arrow:enabled {
+    image: url("%1arrow_right.png");
+}
+
+QTabBar QToolButton::right-arrow:disabled {
+    image: url("%1arrow_right_disabled.png");
+}
+
+QDockWidget {
+    titlebar-close-icon: url("%1window_close.png");
+    titlebar-normal-icon: url("%1window_undock.png");
+}
+
+QDockWidget::close-button:hover {
+    image: url("%1window_close_focus.png");
+}
+
+QDockWidget::close-button:pressed {
+    image: url("%1window_close_pressed.png");
+}
+
+QDockWidget::float-button:hover {
+    image: url("%1window_undock_focus.png");
+}
+
+QDockWidget::float-button:pressed {
+    image: url("%1window_undock_pressed.png");
+}
+
+QTreeView:branch:selected, QTreeView:branch:hover {
+    background: url("%1transparent.png");
+}
+
+QTreeView:branch:has-siblings:!adjoins-item {
+    border-image: url("%1branch_line.png") 0;
+}
+
+QTreeView:branch:has-siblings:adjoins-item {
+    border-image: url("%1branch_more.png") 0;
+}
+
+QTreeView:branch:!has-children:!has-siblings:adjoins-item {
+    border-image: url("%1branch_end.png") 0;
+}
+
+QTreeView:branch:has-children:!has-siblings:closed,
+QTreeView:branch:closed:has-children:has-siblings {
+    image: url("%1branch_closed.png");
+}
+
+QTreeView:branch:open:has-children:!has-siblings,
+QTreeView:branch:open:has-children:has-siblings {
+    image: url("%1branch_open.png");
+}
+
+QTreeView:branch:has-children:!has-siblings:closed:hover,
+QTreeView:branch:closed:has-children:has-siblings:hover {
+    image: url("%1branch_closed_focus.png");
+}
+
+QTreeView:branch:open:has-children:!has-siblings:hover,
+QTreeView:branch:open:has-children:has-siblings:hover {
+    image: url("%1branch_open_focus.png");
+}
+
+QTreeView::indicator:checked, QListView::indicator:checked {
+    image: url("%1checkbox_checked.png");
+}
+
+QTreeView::indicator:checked:hover, QTreeView::indicator:checked:focus, QTreeView::indicator:checked:pressed,
+QListView::indicator:checked:hover, QListView::indicator:checked:focus, QListView::indicator:checked:pressed {
+    image: url("%1checkbox_checked_hover.png");
+}
+
+QTreeView::indicator:unchecked, QListView::indicator:unchecked {
+    image: url("%1checkbox_unchecked.png");
+}
+
+QTreeView::indicator:unchecked:hover, QTreeView::indicator:unchecked:focus, QTreeView::indicator:unchecked:pressed,
+QListView::indicator:unchecked:hover, QListView::indicator:unchecked:focus, QListView::indicator:unchecked:pressed {
+    image: url("%1checkbox_unchecked_hover.png");
+}
+
+QTableView::indicator:unchecked {
+    image: url("%1radiobutton_unchecked.png");
+}
+
+QTableView::indicator:checked {
+    image: url("%1radiobutton_checked.png");
+}
+
+QTableView::indicator:unchecked:hover {
+    image: url("%1radiobutton_unchecked_hover.png");
+}
+
+QTableView::indicator:checked:hover {
+    image: url("%1radiobutton_checked_hover.png");
+}
+
+QTableView::indicator:unchecked:pressed {
+    image: url("%1radiobutton_unchecked_press.png");
+}
+
+QTableView::indicator:checked:pressed {
+    image: url("%1radiobutton_checked_press.png");
+}
+
+QHeaderView::down-arrow {
+    image: url("%1arrow_down.png");
+}
+
+QHeaderView::up-arrow {
+    image: url("%1arrow_up.png");
+}
+
+QSplitter::handle:horizontal {
+    image: url("%1line_vertical.png");
+}
+
+QSplitter::handle:vertical {
+    image: url("%1line_horizontal.png");
+}
+
+QDateEdit::down-arrow, QDateTimeEdit::down-arrow {
+    image: url("%1arrow_down_disabled.png");
+}
+
+QDateEdit::down-arrow:on, QDateEdit::down-arrow:hover, QDateEdit::down-arrow:focus,
+QDateTimeEdit::down-arrow:on, QDateTimeEdit::down-arrow:hover, QDateTimeEdit::down-arrow:focus {
+    image: url("%1arrow_down.png");
+}

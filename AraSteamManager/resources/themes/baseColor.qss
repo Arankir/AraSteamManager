@@ -1,0 +1,205 @@
+QWidget:hover, QWidget::item:hover, QAbstractItemView:hover, QAbstractItemView::item:selected:hover {
+    color: %4;
+}
+
+QWidget, QToolTip, QStatusBar QToolTip, QComboBox:hover, QComboBox:focus, QPushButton:hover, QTextEdit:hover,
+QPlainTextEdit:hover, QAbstractSpinBox:hover, QLabel:hover, QComboBox::item, QMenu::item, QAbstractView:hover,
+QTableCornerButton::section, QHeaderView::section, QAbstractItemView::item:!selected:hover, QTextEdit:selected,
+QPlainTextEdit:selected, QAbstractSpinBox:selected, QLineEdit:hover, QProgressBar::chunk, QGraphicsView:hover,
+QWidget:disabled, QHeaderView::section:disabled {
+    color: %1;
+}
+
+QComboBox::item:checked {
+    color: %13;
+}
+
+QWidget:focus, QWidget:hover, QMenu::item:selected, QScrollBar::handle:hover, QSlider:pressed, QToolButton:pressed,
+QToolButton::menu-button:hover, QTabBar::tab:!selected:hover, QToolBox:selected, QToolBox::tab:hover, QToolBox::tab:selected,
+QComboBox::item:selected, QAbstractItemView::item:selected {
+    border-color: %4;
+}
+
+QWidget, QWidget:disabled, QTextBrowser:!hover, QMenu::item, QComboBox::item,
+QGraphicsView:hover, QGraphicsView:!hover, QAbstractItemView::item:pressed,
+QPushButton:checked:disabled, QComboBox::drop-down, QSlider::groove,
+QSlider::add-page:vertical, QSlider::sub-page:horizontal, QSlider::handle,
+QTableCornerButton::section, QToolBox::tab, QTabBar::tab, QToolBox::tab:!selected,
+QHeaderView::section:first, QHeaderView::section:only-one, QDateTimeEdit::drop-down,
+QMainWindow::separator, QMenuBar, QSplitter::handle, QToolBar, QPushButton:pressed,
+QTabBar::tab:!selected:disabled, QTabBar::tab:!selected, QTabWidget::pane:selected, .QFrame {
+    border-color: %5;
+}
+
+QToolTip, QStatusBar QToolTip, QTabWidget::pane, QHeaderView::section {
+    border-color: %3;
+}
+
+QLineEdit:hover, QLineEdit:focus {
+    border-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 %4,
+        stop: 0.7 %4,
+        stop: 0.99 transparent);
+    border-right-color: transparent;
+}
+
+QToolButton:checked:disabled, QTabBar::tab:selected:disabled, QToolBox::tab:selected:disabled {
+    border-color: %2;
+}
+
+QScrollBar::handle, QScrollBar::handle:hover, QToolButton, QComboBox::drop-down, QComboBox::drop-down:hover {
+    border-color: transparent;
+}
+
+QToolTip, QAbstractScrollArea, QAbstractSpinBox, QScrollBar, QToolBar QToolButton:checked, QTextBrowser:disabled, QGraphicsView:disabled,
+QCalendarWidget:disabled, QLCDNumber, QLCDNumber:disabled, QProgressBar:disabled, QPushButton:checked:disabled, QPushButton:pressed,
+QComboBox QAbstractItemView:hover, QComboBox QAbstractItemView, QComboBox:disabled, QDockWidget, QTableCornerButton::section, QTabBar::tab,
+QTabBar::tab:!selected:disabled, QAbstractItemView:disabled, QToolBox::tab, QToolBox::tab:!selected:disabled, QMenu::item, QComboBox::item,
+QHeaderView::section {
+    background-color: %7;
+}
+
+QMainWindow::separator, QMenuBar, QToolBar, QToolBar QToolButton, QTabWidget::pane:selected, QDockWidget::title, QDockWidget::close-button,
+QDockWidget::float-button, QTabBar QToolButton, QTabBar QToolButton:pressed, QHeaderView::down-arrow, QHeaderView::up-arrow,
+QToolBox::tab:!selected, QSplitter::handle, QStatusBar, QSlider::groove, QSlider::handle:hover/*, QTabBar QToolButton, QTabBar
+QToolButton:pressed, QDockWidget::title, QDockWidget::close-button, QDockWidget::float-button*/ {
+    background-color: %5;
+}
+
+QWidget::item:hover, QPushButton:checked:selected, QPushButton:selected, QComboBox QAbstractItemView:selected,
+QTreeView:selected, QListView:selected, QTableView:selected, QColumnView:selected, QAbstractView:selected,
+QMenuBar::item:pressed, QTextEdit:selected, QPlainTextEdit:selected, QAbstractSpinBox:selected,
+QSlider::add-page:vertical, QSlider::sub-page:horizontal {
+    background-color: %4;
+}
+
+QComboBox QAbstractItemView:alternate, QComboBox::indicator:alternate, QComboBox::item:alternate {
+    background-color: %6;
+}
+
+QScrollBar::handle, QSlider::handle, QSplitter::handle:hover, QMainWindow::separator:hover, QMenu::separator, QTabBar::tab:selected {
+    background-color: %3;
+}
+
+QWidget::item:selected {
+    background-color: %8;
+}
+
+QPushButton, QComboBox, QToolBox::tab:selected {
+    background-color: %9;
+}
+
+QCheckBox, QGroupBox, QRadioButton, QScrollArea, QScrollArea > QWidget > QWidget,
+QAbstractSpinBox:up-button, QAbstractSpinBox:down-button, ProgressBarBad::chunk,
+QToolButton, QToolButton:checked, QToolButton:pressed, QCommandLinkButton, QSizeGrip,
+QCommandLinkButton:disabled, QComboBox::indicator, QLabel, QLabel:disabled, QSplitter, QStatusBar QLabel,
+QMenuBar::item, QMenuBar::item:selected, Form {
+    background-color: transparent;
+    background: transparent;
+}
+
+QProgressBar {
+    background-color: %10;
+}
+
+ProgressBarBad {
+    background-color: %11;
+}
+
+QProgressBar::chunk {
+    background-color: %12;
+}
+
+QProgressBar::chunk:disabled, QHeaderView::section:checked:disabled, QSlider::add-page:vertical:disabled, QSlider::sub-page:horizontal:disabled,
+QPushButton:disabled, QTabBar::tab:selected:disabled, QHeaderView:disabled, QToolBox::tab:selected:disabled {
+    background-color: %2;
+}
+
+QLineEdit:disabled {
+    background-color: %3;
+}
+
+QLineEdit {
+    border-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 %5,
+        stop: 0.7 %5,
+        stop: 0.99 transparent);
+    border-right-color: transparent;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 %7,
+        stop: 0.7 %7,
+        stop: 0.99 transparent);
+}
+
+QDockWidget {
+    outline-color: %5;
+}
+
+QComboBox QAbstractItemView {
+    selection-background-color: %4;
+}
+
+QTreeView, QListView, QTableView, QColumnView {
+    selection-background-color: transparent;
+    gridline-color: %5;
+    background-color: rgba(%14, 0.5);
+}
+
+QTableView#FreezeRow {
+    background-color: rgba(%14, 1);
+}
+
+QTableView::item, QListView::item {
+    background-color: rgba(%15, 0.5);
+}
+
+QTableView::item:alternate {
+    background-color: rgba(%16, 0.5);
+}
+
+QTreeView::item:selected:active, QListView::item:selected:active,
+QTableView::item:selected:active, QColumnView::item:selected:active,
+QTreeView::item:selected:!active, QListView::item:selected:!active,
+QTableView::item:selected:!active, QColumnView::item:selected:!active {
+    selection-color: %1;
+}
+
+QTreeView::item:!selected:hover, QListView::item:!selected:hover,
+QTableView::item:!selected:hover, QColumnView::item:!selected:hover {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0   rgba(%15, 0.5),
+        stop: 0.5 rgba(%17, 0.5),
+        stop: 1.0 rgba(%15, 0.5));
+}
+
+QFrame#SubWindow {
+    background-color: rgba(%14, 0.8);
+}
+
+QFrame#FrameProfileBaseInfo {
+    background-color: rgba(%18, 0.5);
+}
+
+QFrame#FrameProfileMaximumInfo, QFrame#FrameProfileButtons {
+    background-color: rgba(%14, 0.5);
+}
+
+QFrame#FrameSelected, QFrame#FrameCategories, QFrame#FrameEditCategory {
+    background-color: rgba(%15, 0.8);
+}
+
+QWidget[accessibleName=TitleWindow] {
+    background-color: rgba(%14, 0.7);
+    border-color: %4;
+}
+
+Form, .QWidget, QStackedWidget, QSlider, QHeaderView, Line, .QFrame {
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+}
+
+FramelessWindow, QMessageBox, FramelessWindow:hover, QMessageBox:hover {
+    background-color: %19;
+    border-color: %4;
+}

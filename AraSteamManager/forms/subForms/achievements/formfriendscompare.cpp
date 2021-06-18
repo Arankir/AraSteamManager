@@ -5,11 +5,11 @@
 
 constexpr int c_friendColumnWidth = 100;
 
-FormFriendsCompare::FormFriendsCompare(QWidget *parent): QWidget(parent), ui(new Ui::FormFriendsCompare) {
+FormFriendsCompare::FormFriendsCompare(QWidget *parent): Form(parent), ui(new Ui::FormFriendsCompare) {
     ui->setupUi(this);
 
     initingTable(ui->TableViewCompare);
-    setIcons();
+    updateIcons();
     #define Connects {
     connect(ui->CheckBoxCompareIcon, &QCheckBox::stateChanged, ui->TableViewCompare,
             [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementIcon, arg1 == 0);});
@@ -26,7 +26,11 @@ FormFriendsCompare::FormFriendsCompare(QWidget *parent): QWidget(parent), ui(new
     #define ConnectsEnd }
 }
 
-void FormFriendsCompare::setInitData(SProfile &profile, SGame &game, AchievementsModel *achievementsModel/*, SAchievements &achievements*//*, QAbstractItemModel *model*//*, MyFilter *aFAchievements*/) {
+void FormFriendsCompare::updateSettings() {
+    updateIcons();
+}
+
+void FormFriendsCompare::setInitData(const SProfile &profile, const SGame &game, AchievementsModel *achievementsModel/*, SAchievements &achievements*//*, QAbstractItemModel *model*//*, MyFilter *aFAchievements*/) {
     _achievementsModel = achievementsModel;
     _profile = profile;
     _game = game;
@@ -48,7 +52,7 @@ void FormFriendsCompare::setModel(QAbstractItemModel *model) {
     ui->TableViewCompare->resizeRowsToContents();
 }
 
-void FormFriendsCompare::setIcons() {
+void FormFriendsCompare::updateIcons() {
     ui->ButtonFriendsReached    ->setIcon(QIcon(Images::reached()));
     ui->ButtonFriendsAll        ->setIcon(QIcon(Images::allAchievements()));
     ui->ButtonFriendsNotReached ->setIcon(QIcon(Images::notReached()));
@@ -57,12 +61,6 @@ void FormFriendsCompare::setIcons() {
 FormFriendsCompare::~FormFriendsCompare() {
     qInfo() << "Форма сравнения с друзьями удалилась";
     delete ui;
-}
-
-void FormFriendsCompare::changeEvent(QEvent *event) {
-    if (event->type() == QEvent::LanguageChange) {
-        retranslate();
-    }
 }
 
 void FormFriendsCompare::retranslate() {

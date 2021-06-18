@@ -92,6 +92,8 @@ private slots:
     void buttonExportCategories_Clicked();
     void buttonImportCategories_Clicked();
     ExportFileData createExportCategoriesJson();
+    QStringList getColors(const QColor &aNewColor);
+    void createIcons(const QString &aPath, const QColor &aNewColor);
 private:
     Ui::FormSettings *ui;
     Settings _setting;

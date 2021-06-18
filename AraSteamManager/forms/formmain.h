@@ -61,6 +61,7 @@ public slots:
     void goToFriends(const QString &profileSteamid, QList<SFriend> &friends);
     void goToFavorites();
     void goToStatistics(const SProfile &profileSteamid, SGames &games);
+    void updateSettings() override;
 
     FormProfile *createFormProfile(SProfile &aProfile);
     FormStatistics *createFormStatistics(const SProfile &aProfile, SGames &aGames);
@@ -79,7 +80,6 @@ private slots:
     //Systems
     void retranslate() override;
     void updateIcons() override;
-    void updateSettings() override;
     void initComponents();
     void resizeScrollArea(int width = 300, int aHeight = 400);
     void updateEnabledButtonsBackNext();

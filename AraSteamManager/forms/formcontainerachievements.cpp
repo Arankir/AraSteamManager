@@ -14,6 +14,14 @@ FormContainerAchievements::~FormContainerAchievements() {
     delete ui;
 }
 
+void FormContainerAchievements::updateSettings() {
+    for (int i = 0; i < ui->TabWidgetAchievements->count(); ++i) {
+        if (FormAchievements *achievements = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements->widget(i))) {
+            achievements->updateSettings();
+        }
+    }
+}
+
 void FormContainerAchievements::show() {
     window()->show();
 }

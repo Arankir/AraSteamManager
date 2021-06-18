@@ -2,7 +2,7 @@
 #include "ui_formcategoriesedit.h"
 #include "subWidgets/actions/actioncategory.h"
 
-FormCategoriesEdit::FormCategoriesEdit(const SGame &aGame, QWidget *aParent) : QWidget(aParent), ui(new Ui::FormCategoriesEdit),
+FormCategoriesEdit::FormCategoriesEdit(const SGame &aGame, QWidget *aParent) : Form(aParent), ui(new Ui::FormCategoriesEdit),
     _game(aGame), _categories(_game) {
     ui->setupUi(this);
     init();
@@ -73,7 +73,7 @@ void FormCategoriesEdit::init() {
     changeEditType(EditType::none);
     ui->ButtonChangeParent->setMenu(createParentMenu());
 
-    setIcons();
+    updateIcons();
 #define Connects {
     connect(ui->ButtonAddCategory,          &QPushButton::clicked,  this, &FormCategoriesEdit::buttonAdd_Clicked);
     connect(ui->ButtonCancelCategory,       &QPushButton::clicked,  this, &FormCategoriesEdit::buttonCancel_Clicked);
@@ -83,13 +83,22 @@ void FormCategoriesEdit::init() {
 #define ConnectsEnd }
 }
 
-void FormCategoriesEdit::setIcons() {
+void FormCategoriesEdit::updateSettings() {
+    updateIcons();
+    emit s_updateSettings();
+}
+
+void FormCategoriesEdit::updateIcons() {
     ui->ButtonAddCategory           ->setIcon(QIcon(Images::create()));
     ui->ButtonDeleteCategory        ->setIcon(QIcon(Images::deleteCategory()));
     ui->ButtonDeleteAllCategories   ->setIcon(QIcon(Images::deleteAllCategories()));
     ui->ButtonChangeParent          ->setIcon(QIcon(Images::moveInTree()));
     ui->ButtonAcceptCategory        ->setIcon(QIcon(Images::apply()));
     ui->ButtonCancelCategory        ->setIcon(QIcon(Images::cancel()));
+}
+
+void FormCategoriesEdit::retranslate() {
+    ui->retranslateUi(this);
 }
 
 int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, const int &aRow) {

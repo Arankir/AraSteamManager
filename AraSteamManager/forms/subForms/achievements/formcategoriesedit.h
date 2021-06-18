@@ -26,8 +26,10 @@ namespace Ui {
     class FormCategoriesEdit;
 }
 
-class FormCategoriesEdit : public QWidget {
+class FormCategoriesEdit : public Form {
     Q_OBJECT
+public slots:
+    void updateSettings() override;
 
 public:
     explicit FormCategoriesEdit(const SGame &game, QWidget *parent = nullptr);
@@ -48,7 +50,8 @@ signals:
 
 private slots:
     void init();
-    void setIcons();
+    void updateIcons() override;
+    void retranslate() override;
     void achievementsToUi();
     int indexFromRow(QListWidget *listWidget, const int &row);
     void changeEditType(const EditType &type);

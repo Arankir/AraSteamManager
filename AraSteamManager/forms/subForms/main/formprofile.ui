@@ -105,7 +105,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="LabelRealNameValue">
+           <widget class="LabelValue" name="LabelRealNameValue">
             <property name="font">
              <font>
               <pointsize>10</pointsize>
@@ -289,7 +289,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="LabellvlValue">
+             <widget class="LabelValue" name="LabellvlValue">
               <property name="minimumSize">
                <size>
                 <width>32</width>
@@ -403,7 +403,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="LabelTimeCreatedValue">
+           <widget class="LabelValue" name="LabelTimeCreatedValue">
             <property name="font">
              <font>
               <pointsize>10</pointsize>
@@ -495,7 +495,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="LabelLocCountryCodeValue">
+           <widget class="LabelValue" name="LabelLocCountryCodeValue">
             <property name="font">
              <font>
               <pointsize>10</pointsize>
@@ -712,6 +712,11 @@
    <class>LabelLight</class>
    <extends>QLabel</extends>
    <header>subWidgets/labels/labellight.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LabelValue</class>
+   <extends>QLabel</extends>
+   <header>subWidgets/labels/labelvalue.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

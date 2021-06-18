@@ -23,7 +23,7 @@ public:
 
     void retranslate() override {};
     void updateIcons() override {};
-    void updateSettings() override {};
+    void updateSettings() override;;
 
 signals:
     void s_removeAchievements(int index);

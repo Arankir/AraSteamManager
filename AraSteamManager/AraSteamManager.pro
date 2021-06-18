@@ -68,6 +68,7 @@ SOURCES += \
     subWidgets/items/qlistwidgetachievement.cpp \
     subWidgets/items/qlistwidgetfriend.cpp \
     subWidgets/labels/labellight.cpp \
+    subWidgets/labels/labelvalue.cpp \
     subWidgets/lists/qlistwidgetachievements.cpp \
     subWidgets/models/achievementsmodel.cpp \
     subWidgets/models/filters.cpp \
@@ -126,6 +127,7 @@ HEADERS += \
     subWidgets/items/qlistwidgetachievement.h \
     subWidgets/items/qlistwidgetfriend.h \
     subWidgets/labels/labellight.h \
+    subWidgets/labels/labelvalue.h \
     subWidgets/lists/qlistwidgetachievements.h \
     subWidgets/models/achievementsmodel.h \
     subWidgets/models/filters.h \

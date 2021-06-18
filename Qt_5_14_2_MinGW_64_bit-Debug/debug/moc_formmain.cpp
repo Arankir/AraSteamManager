@@ -52,26 +52,26 @@ QT_MOC_LITERAL(15, 184, 7), // "friends"
 QT_MOC_LITERAL(16, 192, 13), // "goToFavorites"
 QT_MOC_LITERAL(17, 206, 14), // "goToStatistics"
 QT_MOC_LITERAL(18, 221, 8), // "SProfile"
-QT_MOC_LITERAL(19, 230, 17), // "createFormProfile"
-QT_MOC_LITERAL(20, 248, 12), // "FormProfile*"
-QT_MOC_LITERAL(21, 261, 8), // "aProfile"
-QT_MOC_LITERAL(22, 270, 20), // "createFormStatistics"
-QT_MOC_LITERAL(23, 291, 15), // "FormStatistics*"
-QT_MOC_LITERAL(24, 307, 6), // "aGames"
-QT_MOC_LITERAL(25, 314, 31), // "createFormContainerAchievements"
-QT_MOC_LITERAL(26, 346, 26), // "FormContainerAchievements*"
-QT_MOC_LITERAL(27, 373, 13), // "keyPressEvent"
-QT_MOC_LITERAL(28, 387, 10), // "QKeyEvent*"
-QT_MOC_LITERAL(29, 398, 10), // "closeEvent"
-QT_MOC_LITERAL(30, 409, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(31, 422, 8), // "showForm"
-QT_MOC_LITERAL(32, 431, 11), // "widgetIndex"
-QT_MOC_LITERAL(33, 443, 11), // "widthWindow"
-QT_MOC_LITERAL(34, 455, 13), // "aWindowHeight"
-QT_MOC_LITERAL(35, 469, 15), // "returnFromForms"
-QT_MOC_LITERAL(36, 485, 11), // "retranslate"
-QT_MOC_LITERAL(37, 497, 11), // "updateIcons"
-QT_MOC_LITERAL(38, 509, 14), // "updateSettings"
+QT_MOC_LITERAL(19, 230, 14), // "updateSettings"
+QT_MOC_LITERAL(20, 245, 17), // "createFormProfile"
+QT_MOC_LITERAL(21, 263, 12), // "FormProfile*"
+QT_MOC_LITERAL(22, 276, 8), // "aProfile"
+QT_MOC_LITERAL(23, 285, 20), // "createFormStatistics"
+QT_MOC_LITERAL(24, 306, 15), // "FormStatistics*"
+QT_MOC_LITERAL(25, 322, 6), // "aGames"
+QT_MOC_LITERAL(26, 329, 31), // "createFormContainerAchievements"
+QT_MOC_LITERAL(27, 361, 26), // "FormContainerAchievements*"
+QT_MOC_LITERAL(28, 388, 13), // "keyPressEvent"
+QT_MOC_LITERAL(29, 402, 10), // "QKeyEvent*"
+QT_MOC_LITERAL(30, 413, 10), // "closeEvent"
+QT_MOC_LITERAL(31, 424, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(32, 437, 8), // "showForm"
+QT_MOC_LITERAL(33, 446, 11), // "widgetIndex"
+QT_MOC_LITERAL(34, 458, 11), // "widthWindow"
+QT_MOC_LITERAL(35, 470, 13), // "aWindowHeight"
+QT_MOC_LITERAL(36, 484, 15), // "returnFromForms"
+QT_MOC_LITERAL(37, 500, 11), // "retranslate"
+QT_MOC_LITERAL(38, 512, 11), // "updateIcons"
 QT_MOC_LITERAL(39, 524, 14), // "initComponents"
 QT_MOC_LITERAL(40, 539, 16), // "resizeScrollArea"
 QT_MOC_LITERAL(41, 556, 5), // "width"
@@ -95,16 +95,16 @@ QT_MOC_LITERAL(53, 754, 20) // "buttonUpdate_Clicked"
     "SProfile&\0profileSteamid\0QList<SGame>&\0"
     "goToFriends\0QList<SFriend>&\0friends\0"
     "goToFavorites\0goToStatistics\0SProfile\0"
-    "createFormProfile\0FormProfile*\0aProfile\0"
-    "createFormStatistics\0FormStatistics*\0"
-    "aGames\0createFormContainerAchievements\0"
+    "updateSettings\0createFormProfile\0"
+    "FormProfile*\0aProfile\0createFormStatistics\0"
+    "FormStatistics*\0aGames\0"
+    "createFormContainerAchievements\0"
     "FormContainerAchievements*\0keyPressEvent\0"
     "QKeyEvent*\0closeEvent\0QCloseEvent*\0"
     "showForm\0widgetIndex\0widthWindow\0"
     "aWindowHeight\0returnFromForms\0retranslate\0"
-    "updateIcons\0updateSettings\0initComponents\0"
-    "resizeScrollArea\0width\0aHeight\0"
-    "updateEnabledButtonsBackNext\0"
+    "updateIcons\0initComponents\0resizeScrollArea\0"
+    "width\0aHeight\0updateEnabledButtonsBackNext\0"
     "buttonFindProfile_Clicked\0goToProfile\0"
     "id\0SProfileRequestType\0type\0"
     "buttonSettings_Clicked\0"
@@ -138,15 +138,15 @@ static const uint qt_meta_data_FormMain[] = {
       13,    2,  187,    2, 0x0a /* Public */,
       16,    0,  192,    2, 0x0a /* Public */,
       17,    2,  193,    2, 0x0a /* Public */,
-      19,    1,  198,    2, 0x0a /* Public */,
-      22,    2,  201,    2, 0x0a /* Public */,
-      25,    0,  206,    2, 0x0a /* Public */,
-      27,    1,  207,    2, 0x08 /* Private */,
-      29,    1,  210,    2, 0x08 /* Private */,
-      31,    3,  213,    2, 0x08 /* Private */,
-      31,    2,  220,    2, 0x28 /* Private | MethodCloned */,
-      31,    1,  225,    2, 0x28 /* Private | MethodCloned */,
-      35,    0,  228,    2, 0x08 /* Private */,
+      19,    0,  198,    2, 0x0a /* Public */,
+      20,    1,  199,    2, 0x0a /* Public */,
+      23,    2,  202,    2, 0x0a /* Public */,
+      26,    0,  207,    2, 0x0a /* Public */,
+      28,    1,  208,    2, 0x08 /* Private */,
+      30,    1,  211,    2, 0x08 /* Private */,
+      32,    3,  214,    2, 0x08 /* Private */,
+      32,    2,  221,    2, 0x28 /* Private | MethodCloned */,
+      32,    1,  226,    2, 0x28 /* Private | MethodCloned */,
       36,    0,  229,    2, 0x08 /* Private */,
       37,    0,  230,    2, 0x08 /* Private */,
       38,    0,  231,    2, 0x08 /* Private */,
@@ -174,15 +174,15 @@ static const uint qt_meta_data_FormMain[] = {
     QMetaType::Void, QMetaType::QString, 0x80000000 | 14,   11,   15,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 18, 0x80000000 | 12,   11,    5,
-    0x80000000 | 20, 0x80000000 | 10,   21,
-    0x80000000 | 23, 0x80000000 | 18, 0x80000000 | 12,   21,   24,
-    0x80000000 | 26,
-    QMetaType::Void, 0x80000000 | 28,    2,
-    QMetaType::Void, 0x80000000 | 30,    2,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,   32,   33,   34,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   32,   33,
-    QMetaType::Void, QMetaType::Int,   32,
     QMetaType::Void,
+    0x80000000 | 21, 0x80000000 | 10,   22,
+    0x80000000 | 24, 0x80000000 | 18, 0x80000000 | 12,   22,   25,
+    0x80000000 | 27,
+    QMetaType::Void, 0x80000000 | 29,    2,
+    QMetaType::Void, 0x80000000 | 31,    2,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,   33,   34,   35,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   33,   34,
+    QMetaType::Void, QMetaType::Int,   33,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -216,21 +216,21 @@ void FormMain::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 5: _t->goToFriends((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< QList<SFriend>(*)>(_a[2]))); break;
         case 6: _t->goToFavorites(); break;
         case 7: _t->goToStatistics((*reinterpret_cast< const SProfile(*)>(_a[1])),(*reinterpret_cast< QList<SGame>(*)>(_a[2]))); break;
-        case 8: { FormProfile* _r = _t->createFormProfile((*reinterpret_cast< SProfile(*)>(_a[1])));
+        case 8: _t->updateSettings(); break;
+        case 9: { FormProfile* _r = _t->createFormProfile((*reinterpret_cast< SProfile(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< FormProfile**>(_a[0]) = std::move(_r); }  break;
-        case 9: { FormStatistics* _r = _t->createFormStatistics((*reinterpret_cast< const SProfile(*)>(_a[1])),(*reinterpret_cast< QList<SGame>(*)>(_a[2])));
+        case 10: { FormStatistics* _r = _t->createFormStatistics((*reinterpret_cast< const SProfile(*)>(_a[1])),(*reinterpret_cast< QList<SGame>(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< FormStatistics**>(_a[0]) = std::move(_r); }  break;
-        case 10: { FormContainerAchievements* _r = _t->createFormContainerAchievements();
+        case 11: { FormContainerAchievements* _r = _t->createFormContainerAchievements();
             if (_a[0]) *reinterpret_cast< FormContainerAchievements**>(_a[0]) = std::move(_r); }  break;
-        case 11: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
-        case 12: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
-        case 13: _t->showForm((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
-        case 14: _t->showForm((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 15: _t->showForm((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 16: _t->returnFromForms(); break;
-        case 17: _t->retranslate(); break;
-        case 18: _t->updateIcons(); break;
-        case 19: _t->updateSettings(); break;
+        case 12: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
+        case 13: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
+        case 14: _t->showForm((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 15: _t->showForm((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 16: _t->showForm((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 17: _t->returnFromForms(); break;
+        case 18: _t->retranslate(); break;
+        case 19: _t->updateIcons(); break;
         case 20: _t->initComponents(); break;
         case 21: _t->resizeScrollArea((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 22: _t->resizeScrollArea((*reinterpret_cast< int(*)>(_a[1]))); break;

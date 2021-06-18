@@ -1,0 +1,119 @@
+QWidget, QToolTip, QAbstractItemView::item:selected {
+    color: %1;
+}
+
+LabelValue {
+    color: %2;
+}
+
+QCheckBox:hover, QRadioButton:hover, QAbstractItemView::item:!selected:hover, QComboBox::item:!selected:hover, QMenu::item:hover {
+    color: %3;
+}
+
+QWidget:disabled, QToolTip:disabled, QAbstractItemView::item:selected:disabled, QAbstractItemView::item:disabled {
+    color: %4;
+}
+
+QWidget, QToolTip, QMenu::item, QComboBox::item, QSplitter::handle, QSlider::groove, QSlider::handle, QTabBar, QTabBar::tab, QToolBox::tab, QTabBar::tab, QTabWidget::pane {
+    border-color: %5;
+}
+
+QWidget:disabled, QToolTip:disabled, QAbstractItemView::item:selected:disabled {
+    border-color: %6;
+}
+
+QComboBox::item:selected, QMenu::item:selected, QWidget:hover, QMenu::item:hover, QComboBox::item:hover, QTabBar::tab:hover, QAbstractItemView::item:selected,
+FramelessWindow, FramelessWindow:hover, FramelessWindow:disabled,
+QMessageBox, QMessageBox:hover, QMessageBox:disabled,
+QWidget[accessibleName=TitleWindow], QWidget[accessibleName=TitleWindow]:hover, QWidget[accessibleName=TitleWindow]:disabled {
+    border-color: %3;
+}
+
+QLineEdit:hover {
+    border-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 %3,
+        stop: 0.7 %3,
+        stop: 0.99 transparent);
+    border-right-color: transparent;
+}
+
+QWidget, QToolTip, QMainWindow::separator, QProgressBar::chunk, QMenu::item {
+    background-color: %7;
+}
+
+QWidget:disabled, QToolTip:disabled, QMainWindow::separator:disabled, QProgressBar::chunk:disabled  {
+    background-color: %8;
+}
+
+QLineEdit {
+    border-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 %5,
+        stop: 0.7 %5,
+        stop: 0.99 transparent);
+    border-right-color: transparent;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 rgba(11, 11, 11, 0.4),
+        stop: 0.7 rgba(11, 11, 11, 0.4),
+        stop: 0.99 transparent);
+}
+
+QLineEdit:disabled {
+    border-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 %6,
+        stop: 0.7 %6,
+        stop: 0.99 transparent);
+    border-right-color: transparent;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+        stop: 0 rgba(11, 11, 11, 0.4),
+        stop: 0.7 rgba(11, 11, 11, 0.4),
+        stop: 0.99 transparent);
+}
+
+QPushButton, QComboBox, QWidget::item:selected, QTableCornerButton::section, QHeaderView::section, QProgressBar {
+    background-color: %9;
+}
+
+QPushButton:disabled, QComboBox:disabled, QWidget::item:selected:disabled, QTableCornerButton::section:disabled, QHeaderView::section:disabled, QProgressBar:disabled {
+    background-color: %10;
+}
+
+QFrame#FrameProfileBaseInfo {
+    background-color: rgba(11, 11, 11, 0.4);
+}
+
+QFrame#FrameProfileMaximumInfo, QFrame#FrameProfileButtons {
+    background-color: rgba(11, 11, 11, 0.2);
+}
+
+QWidget[accessibleName=TitleWindow] {
+    background-color: rgba(11, 11, 11, 0.7);
+}
+
+QAbstractItemView::item {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                    stop: 0 rgba(11, 11, 11, 0.2),
+                    stop: 0.5 rgba(11, 11, 11, 0.4),
+                    stop: 1 rgba(11, 11, 11, 0.2));
+}
+
+QScrollBar::handle, QSlider::handle, QSplitter::handle:hover, QMainWindow::separator:hover, QMenu::separator, QTabBar::tab:selected {
+    background-color: %11;
+}
+
+QCheckBox, QGroupBox, QRadioButton, QScrollArea, QScrollArea > QWidget > QWidget,
+QAbstractSpinBox:up-button, QAbstractSpinBox:down-button, ProgressBarBad::chunk,
+QToolButton, QToolButton:checked, QToolButton:pressed, QCommandLinkButton, QSizeGrip,
+QCommandLinkButton:disabled, QComboBox::indicator, QLabel, QLabel:disabled, QSplitter, QStatusBar QLabel,
+QMenuBar::item, QMenuBar::item:selected, Form, QCheckBox:disabled, QRadioButton:disabled, FramelessWindow > QWidget, QStackedWidget,
+QStackedWidget > QWidget, .Frame {
+    background-color: transparent;
+    background: transparent;
+}
+
+QAbstractItemView {
+    selection-background-color: transparent;
+}
+
+FramelessWindow, QMessageBox {
+    background-color: %12;
+}
