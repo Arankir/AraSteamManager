@@ -31,8 +31,8 @@ void FormCategoriesEdit::setAchievements(const SAchievements &aAchievements) {
     achievementsToUi();
 }
 
-void FormCategoriesEdit::setFilter(MyFilter *aFilter) {
-    _fAchievements = aFilter;
+void FormCategoriesEdit::setVisibleItems(const QList<QString> &aItems) {
+    _visibleAchievements = aItems;
     updateHiddenItems();
 }
 
@@ -117,11 +117,18 @@ int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, const int &aRow) 
 }
 
 void FormCategoriesEdit::updateHiddenItems() {
-    if (_fAchievements == nullptr) {
-        return;
-    }
     for(int row = 0; row < ui->ListWidgetAll->count(); ++row) {
-        ui->ListWidgetAll->setRowHidden(row, !_fAchievements->getData(indexFromRow(ui->ListWidgetAll, row)));
+        auto achievement = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetAll->item(row));
+        if (achievement != nullptr) {
+            QString apiName = achievement->_achievement->apiName();
+            bool isVisible = std::any_of(_visibleAchievements.begin(),
+                                        _visibleAchievements.end(),
+                                        [=](const QString &api) {
+                                            return api == apiName;
+                                        });
+            ui->ListWidgetAll->setRowHidden(row, !isVisible);
+        }
+
     }
 }
 

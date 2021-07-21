@@ -38,6 +38,7 @@ public:
 
     SAchievement getAchievement(const int &row) const;
     SAchievement getAchievement(const QModelIndex &index) const;
+    SAchievements getAchievements() const;
     int getReachedFromProfile(const int &index = -1);
     int getAchievementsCount();
 

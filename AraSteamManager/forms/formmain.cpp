@@ -144,6 +144,7 @@ void FormMain::goToProfile(const QString &aId, SProfileRequestType aType) {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->count() - 1);
         updateSettings();
         updateEnabledButtonsBackNext();
+
         qInfo() << "Буфер профилей" << ui->StackedWidgetProfiles->currentIndex() + 1 << "/" << ui->StackedWidgetProfiles->count();
     } else {
         QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
@@ -152,7 +153,7 @@ void FormMain::goToProfile(const QString &aId, SProfileRequestType aType) {
 }
 
 void FormMain::goToGames(SProfile &aProfile, SGames &aGames) {
-    if(!_blockedLoad) {
+    if (!_blockedLoad) {
         if (!ui->StackedFormGames->isInit()) {
             _blockedLoad = true;
             ui->FormProgressBar->setMaximum(aGames.count());

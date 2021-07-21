@@ -31,9 +31,6 @@ void FormAchievements::init() {
     updateIcons();
 #define InitFilters {
     _achievementsModel = new AchievementsModel();
-    _filterReached  .setSourceModel(&_filterName);
-    _filterFavorite .setSourceModel(&_filterReached);
-    ui->TableViewMyAchievements->setModel(&_filterFavorite);
     _filterName     .addRow(AchievementTitle);
     _filterName     .addRow(AchievementDescription);
     _filterReached  .setFilterKeyColumn(AchievementReachedMy);
@@ -41,6 +38,9 @@ void FormAchievements::init() {
     _filterName     .setFilterCaseSensitivity(Qt::CaseInsensitive);
     _filterReached  .setFilterCaseSensitivity(Qt::CaseInsensitive);
     _filterFavorite .setFilterCaseSensitivity(Qt::CaseInsensitive);
+    _filterReached  .setSourceModel(&_filterName);
+    _filterFavorite .setSourceModel(&_filterReached);
+    ui->TableViewMyAchievements->setModel(&_filterFavorite);
 #define InitFiltersEnd }
 #define Connects {
     connect(ui->ButtonUpdate,               &QPushButton::clicked,                      this,   &FormAchievements::update);
@@ -399,8 +399,17 @@ void FormAchievements::tabWidget_CurrentChanged(const int &index) {
 
 void FormAchievements::loadEditCategory() {
     ui->CategoriesEdit->setGame(_game);
-    ui->CategoriesEdit->setAchievements(_achievements);
-    connect(this, &FormAchievements::s_updatedHiddenRows, ui->CategoriesEdit, &FormCategoriesEdit::updateHiddenItems);
+    ui->CategoriesEdit->setAchievements(_achievementsModel->getAchievements());
+    connect(this, &FormAchievements::s_filtersValueUpdated, ui->CategoriesEdit, [=]() {
+        QList<QString> list;
+        for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount(); ++i) {
+            QModelIndex index = ui->TableViewMyAchievements->model()->index(i, AchievementAppid);
+
+            list.append(ui->TableViewMyAchievements->model()->data(index).toString());
+        }
+        qDebug() << list;
+        ui->CategoriesEdit->setVisibleItems(list);
+    });
     connect(ui->CategoriesEdit, &FormCategoriesEdit::s_categoriesIsUpdated, this, [=](bool isUpdated) {
         if (isUpdated) {
             updateCategories();

@@ -90,6 +90,7 @@ void FormGames::updateHiddenGames() {
 
 void FormGames::clear() {
     _filterGames.clear();
+    _profile = SProfile();
 }
 #define InitEnd }
 

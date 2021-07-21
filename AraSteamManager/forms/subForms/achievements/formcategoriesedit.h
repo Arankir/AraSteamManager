@@ -10,7 +10,6 @@
 #include <QMenu>
 #include <QAction>
 #include "classes/common/settings.h"
-#include "classes/common/myfilter.h"
 #include "classes/achievements/categoriesgame.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "subWidgets/items/qlistwidgetachievement.h"
@@ -37,8 +36,8 @@ public:
     ~FormCategoriesEdit();
     void setGame(const SGame &game);
     void setAchievements(const SAchievements &aAchievements);
-    void setFilter(MyFilter *aFilter);
     Category *categories() {return &_categories;}
+    void setVisibleItems(const QList<QString> &items);
     void updateHiddenItems();
     void changeCategory(Category *aCategory);
     void addSubCategory(Category *aParent);
@@ -72,7 +71,7 @@ private:
     SAchievements _achievements;
     Category _categories;
     EditType _typeEdit = EditType::none;
-    MyFilter *_fAchievements = nullptr;
+    QList<QString> _visibleAchievements;
 
     Category *_currentCategory = nullptr;
     Category *_currentCategoryNewParent = nullptr;

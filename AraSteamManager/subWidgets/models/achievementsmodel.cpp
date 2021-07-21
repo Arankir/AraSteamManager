@@ -323,6 +323,14 @@ SAchievement AchievementsModel::getAchievement(const QModelIndex &index) const {
     return SAchievement(schema, player, percent);
 }
 
+SAchievements AchievementsModel::getAchievements() const {
+    SAchievements achievements;
+    for (const auto &achievement: _achievementsInModel) {
+        achievements.append(std::move(SAchievement(achievement.schema, achievement.profiles[0], achievement.percent)));
+    }
+    return achievements;
+}
+
 int AchievementsModel::getReachedFromProfile(const int &index) {
     if (index < 0 || index > _profiles.count()) {
         return -1;
