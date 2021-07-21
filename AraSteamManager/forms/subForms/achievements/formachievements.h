@@ -79,7 +79,7 @@ public slots:
     void updateSettings() override;
     void update();
     void openManual();
-    bool isDataSetted() {return _achievements.count() > 0 && _profile.personaName() != "" && _game.appId() > 0;}
+    bool isDataSetted() {return _achievementsModel->getAchievementsCount() > 0 && _profile.personaName() != "" && _game.appId() > 0;}
 public:
     explicit FormAchievements(SProfile &profile, SGame &game, QWidget *parent = nullptr);
     explicit FormAchievements(QWidget *parent = nullptr);
@@ -93,7 +93,6 @@ signals:
     void s_updateSettings();
     void s_filtersUpdated(QAbstractItemModel *model);
     void s_filtersValueUpdated();
-    void s_updatedHiddenRows();
 
 private slots:
     void closeEvent(QCloseEvent*) override;
@@ -139,7 +138,7 @@ private:
 //    QList<SAchievementSchema> _global;
 //    QList<SAchievementPercentage> _percent;
 //    QList<SAchievementPlayer> _player;
-    SAchievements _achievements;
+//    SAchievements _achievements;
 
     //ключевые данные
     SProfile _profile;

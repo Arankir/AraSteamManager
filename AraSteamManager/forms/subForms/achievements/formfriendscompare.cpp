@@ -92,7 +92,7 @@ void FormFriendsCompare::setFriendsNotReached() {
 
 void FormFriendsCompare::updateFiltersFriends() {
     QAbstractItemModel *model = _model;
-    for (auto filter: _filtersFriends) {
+    for (auto filter: qAsConst(_filtersFriends)) {
         filter->setSourceModel(model);
         model = filter;
     }
