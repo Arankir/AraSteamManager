@@ -24,14 +24,14 @@ public:
     QList<Category*>::iterator end()            {return _categories.end();}
 
     //gets
-    bool isRoot()                       const   {return _parent == nullptr;}
-    QString title()                     const   {return _title;}
-    QString game()                      const   {return _gameName;}
-    int gameID()                        const   {return _gameId;}
-    int order()                         const   {return _order;}
-    QList<QString> achievementsApiName()const   {return _achievements;}
-    QList<Category*> categories()       const   {return _categories;}
-    Category *parent()                  const   {return _parent;}
+    bool isRoot()                               const   {return _parent == nullptr;}
+    QString title()                             const   {return _title;}
+    QString game()                              const   {return _gameName;}
+    int gameID()                                const   {return _gameId;}
+    int order()                                 const   {return _order;}
+    QList<AchievementID> achievementsApiName()  const   {return _achievements;}
+    QList<Category*> categories()               const   {return _categories;}
+    Category *parent()                          const   {return _parent;}
 
     //sets
     Category &setTitle(const QString &title);

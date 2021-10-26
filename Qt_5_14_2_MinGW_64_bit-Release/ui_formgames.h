@@ -44,7 +44,7 @@ public:
     {
         if (FormGames->objectName().isEmpty())
             FormGames->setObjectName(QString::fromUtf8("FormGames"));
-        FormGames->resize(564, 493);
+        FormGames->resize(325, 348);
         verticalLayout_2 = new QVBoxLayout(FormGames);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -68,7 +68,7 @@ public:
         ButtonFind = new QPushButton(GroupBoxFilter);
         ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
         ButtonFind->setEnabled(true);
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy1(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(ButtonFind->sizePolicy().hasHeightForWidth());
@@ -88,11 +88,8 @@ public:
 
         CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
         CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
-        QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(CheckBoxFavorites->sizePolicy().hasHeightForWidth());
-        CheckBoxFavorites->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(CheckBoxFavorites->sizePolicy().hasHeightForWidth());
+        CheckBoxFavorites->setSizePolicy(sizePolicy1);
 
         horizontalLayout_6->addWidget(CheckBoxFavorites);
 

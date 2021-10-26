@@ -23,12 +23,12 @@ class GamesModel : public QAbstractTableModel {
     Q_OBJECT
 public:
     GamesModel(QObject *parent = nullptr): QAbstractTableModel(parent) {};
-    void setGames(QList<SGame> &games, const QString &userId);
+    void setGames(const SGames &games, const QString &userId);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    QString gameId(const QModelIndex &index) const;
+    GameID gameId(const QModelIndex &index) const;
 
     SGame getGame(const int &row) const;
     SGame getGame(const QModelIndex &index) const;
@@ -41,10 +41,12 @@ public slots:
 
 signals:
     void s_finished();
-    void s_progress(const int &stage, const int &progress);
+    void s_progress(const QString &status, const int &progress, const int &max);
 
+protected:
+    void loadImages(SGames lGames, QList<GameComment> &comments, int gameCount);
 private slots:
-    void onResultAchievements(QList<SAchievementPlayer> achievements, QString appId);
+    void onResultAchievements(QList<SAchievementPlayer> achievements, GameID appId);
 
 private:
 
@@ -58,6 +60,8 @@ private:
 
     QString _userId;
     QList<GameInModel> _gamesInModel;
+
+    int _loadedGames = 0;
 };
 
 class ProxyModelGames : public QSortFilterProxyModel {
@@ -65,9 +69,14 @@ class ProxyModelGames : public QSortFilterProxyModel {
 public:
     ProxyModelGames(QObject* parent = nullptr);
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     GamesModel *sourceModel() const;
     void setSourceModel(GamesModel *sourceModel);
+
+    SGame getGame(int aIndex);
+    QStringList getGameComment(int aIndex);
+    QList<SAchievementPlayer> getGameAchievements(int aIndex);
 
 public slots:
     void setName(const QString &newName);

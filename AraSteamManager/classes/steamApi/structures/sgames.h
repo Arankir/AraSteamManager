@@ -4,8 +4,6 @@
 #include "../sapi.h"
 #include "classes/common/generalfunctions.h"
 
-#define SGames QList<SGame>
-
 class SGame : public Sapi {
     Q_OBJECT
 public:
@@ -17,8 +15,8 @@ public:
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SGame";}
-    static SGames load(const QString &id, const int &free_games = 0, const int &game_info = 0, std::function< void(SGames) > callback = nullptr);
-    static int playerCount(const int &appId);
+    static QList<SGame> load(const ProfileID &id, const int &free_games = 0, const int &game_info = 0, std::function< void(QList<SGame>) > callback = nullptr);
+    static int playerCount(const GameID &appId);
 
     SGame & operator=(const SGame &game);
     bool    operator<(const SGame &game) const;
@@ -26,14 +24,11 @@ public:
     bool    operator==(const SGame &game) const;
     bool    operator!=(const SGame &game) const;
 
-    QPixmap cPixmapIcon() const;
+    QPixmap pixmapIcon() const;
+    QPixmap pixmapLogo() const;
 
-    QPixmap pixmapIcon();
-    QPixmap pixmapLogo();
-
-    QString userId()                const {return _userId;}
-    int appId()                     const {return _appID;}
-    QString sAppId()                const {return QString::number(_appID);}
+    ProfileID userId()              const {return _userId;}
+    GameID appId()                  const {return _appID;}
     QString name()                  const {return _name;}
     int playtime2Weeks()            const {return _playtime_2weeks;}
     int playtimeForever()           const {return _playtime_forever;}
@@ -45,10 +40,10 @@ public:
 signals:
 
 private:
-    void fromJson(const QJsonValue &value);
+    void fromJson(const QJsonObject &value);
 
-    QString _userId;
-    int _appID;
+    ProfileID _userId;
+    GameID _appID;
     QString _name;
     int _playtime_2weeks;
     int _playtime_forever;
@@ -56,9 +51,11 @@ private:
     QString _img_icon_url;
     QString _img_logo_url;
 
-    QPixmap _pixmapIcon;
-    QPixmap _pixmapLogo;
+    mutable QPixmap _pixmapIcon;
+    mutable QPixmap _pixmapLogo;
 };
+
+using SGames = QList<SGame>;
 
 //{"appid":218620,
 //"name":"PAYDAY 2",

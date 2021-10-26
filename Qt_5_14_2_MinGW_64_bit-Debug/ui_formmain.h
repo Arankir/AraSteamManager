@@ -23,7 +23,6 @@
 #include <forms/subForms/main/formfriends.h>
 #include <forms/subForms/main/formgames.h>
 #include <forms/subForms/main/formsettings.h>
-#include "subWidgets/progressBars/progressbargood.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -41,7 +40,6 @@ public:
     QLineEdit *LineEditIdProfile;
     QPushButton *ButtonFindProfile;
     QStackedWidget *StackedWidgetProfiles;
-    ProgressBarGood *FormProgressBar;
     QStackedWidget *StackedWidgetForms;
     QWidget *None;
     QGridLayout *gridLayout;
@@ -68,12 +66,13 @@ public:
     {
         if (FormMain->objectName().isEmpty())
             FormMain->setObjectName(QString::fromUtf8("FormMain"));
-        FormMain->resize(564, 544);
+        FormMain->resize(426, 108);
         verticalLayout_2 = new QVBoxLayout(FormMain);
         verticalLayout_2->setSpacing(0);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(9, 6, 9, 6);
         horizontalLayout_4 = new QHBoxLayout();
@@ -138,28 +137,17 @@ public:
 
         verticalLayout->addWidget(StackedWidgetProfiles);
 
-        FormProgressBar = new ProgressBarGood(FormMain);
-        FormProgressBar->setObjectName(QString::fromUtf8("FormProgressBar"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Maximum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(FormProgressBar->sizePolicy().hasHeightForWidth());
-        FormProgressBar->setSizePolicy(sizePolicy1);
-        FormProgressBar->setValue(0);
-
-        verticalLayout->addWidget(FormProgressBar);
-
         StackedWidgetForms = new QStackedWidget(FormMain);
         StackedWidgetForms->setObjectName(QString::fromUtf8("StackedWidgetForms"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(StackedWidgetForms->sizePolicy().hasHeightForWidth());
-        StackedWidgetForms->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(StackedWidgetForms->sizePolicy().hasHeightForWidth());
+        StackedWidgetForms->setSizePolicy(sizePolicy1);
         None = new QWidget();
         None->setObjectName(QString::fromUtf8("None"));
-        sizePolicy2.setHeightForWidth(None->sizePolicy().hasHeightForWidth());
-        None->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(None->sizePolicy().hasHeightForWidth());
+        None->setSizePolicy(sizePolicy1);
         gridLayout = new QGridLayout(None);
         gridLayout->setSpacing(0);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
@@ -169,7 +157,7 @@ public:
         ScrollAreaNone->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 544, 465));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 406, 68));
         ScrollAreaNone->setWidget(scrollAreaWidgetContents);
 
         gridLayout->addWidget(ScrollAreaNone, 0, 0, 1, 1);
@@ -177,22 +165,24 @@ public:
         StackedWidgetForms->addWidget(None);
         Games = new QWidget();
         Games->setObjectName(QString::fromUtf8("Games"));
-        sizePolicy2.setHeightForWidth(Games->sizePolicy().hasHeightForWidth());
-        Games->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(Games->sizePolicy().hasHeightForWidth());
+        Games->setSizePolicy(sizePolicy1);
         gridLayout_2 = new QGridLayout(Games);
         gridLayout_2->setSpacing(0);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
         StackedFormGames = new FormGames(Games);
         StackedFormGames->setObjectName(QString::fromUtf8("StackedFormGames"));
+        sizePolicy1.setHeightForWidth(StackedFormGames->sizePolicy().hasHeightForWidth());
+        StackedFormGames->setSizePolicy(sizePolicy1);
 
         gridLayout_2->addWidget(StackedFormGames, 0, 0, 1, 1);
 
         StackedWidgetForms->addWidget(Games);
         Friends = new QWidget();
         Friends->setObjectName(QString::fromUtf8("Friends"));
-        sizePolicy2.setHeightForWidth(Friends->sizePolicy().hasHeightForWidth());
-        Friends->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(Friends->sizePolicy().hasHeightForWidth());
+        Friends->setSizePolicy(sizePolicy1);
         gridLayout_3 = new QGridLayout(Friends);
         gridLayout_3->setSpacing(0);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
@@ -205,8 +195,8 @@ public:
         StackedWidgetForms->addWidget(Friends);
         Statistic = new QWidget();
         Statistic->setObjectName(QString::fromUtf8("Statistic"));
-        sizePolicy2.setHeightForWidth(Statistic->sizePolicy().hasHeightForWidth());
-        Statistic->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(Statistic->sizePolicy().hasHeightForWidth());
+        Statistic->setSizePolicy(sizePolicy1);
         gridLayout_4 = new QGridLayout(Statistic);
         gridLayout_4->setSpacing(0);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
@@ -224,8 +214,8 @@ public:
         StackedWidgetForms->addWidget(Statistic);
         Favorites = new QWidget();
         Favorites->setObjectName(QString::fromUtf8("Favorites"));
-        sizePolicy2.setHeightForWidth(Favorites->sizePolicy().hasHeightForWidth());
-        Favorites->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(Favorites->sizePolicy().hasHeightForWidth());
+        Favorites->setSizePolicy(sizePolicy1);
         gridLayout_5 = new QGridLayout(Favorites);
         gridLayout_5->setSpacing(0);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
@@ -238,8 +228,8 @@ public:
         StackedWidgetForms->addWidget(Favorites);
         Settings = new QWidget();
         Settings->setObjectName(QString::fromUtf8("Settings"));
-        sizePolicy2.setHeightForWidth(Settings->sizePolicy().hasHeightForWidth());
-        Settings->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(Settings->sizePolicy().hasHeightForWidth());
+        Settings->setSizePolicy(sizePolicy1);
         gridLayout_6 = new QGridLayout(Settings);
         gridLayout_6->setSpacing(0);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
@@ -259,7 +249,7 @@ public:
 
         retranslateUi(FormMain);
 
-        StackedWidgetForms->setCurrentIndex(1);
+        StackedWidgetForms->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(FormMain);

@@ -25,6 +25,11 @@ void log(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
+    #if __cplusplus >= 202002L
+        // C++20 (and later) code
+        qDebug() << "C++20 (and later)" << endl;
+    #endif
+
     qApp->setStyle(QStyleFactory::create("Fusion"));
 
     registerTypes();
@@ -36,7 +41,7 @@ int main(int argc, char *argv[]) {
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
     auto mainForm = createFramelessForm<FormMain>();
-    QObject::connect(mainForm, &FormMain::s_updateSettings, mainForm->window(), &FramelessWindow::updateSettings);
+    QObject::connect(mainForm, &FormMain::s_settingsUpdated, mainForm->window(), &FramelessWindow::updateSettings);
     mainForm->window()->show();
 
     return a.exec();

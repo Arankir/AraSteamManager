@@ -16,12 +16,12 @@
 #include <QGraphicsDropShadowEffect>
 #include "framelesswindow.h"
 #include "formcontainerachievements.h"
-#include "forms/subForms/main/formgames.h"
-#include "forms/subForms/main/formfriends.h"
-#include "forms/subForms/main/formfavorites.h"
-#include "forms/subForms/main/formstatistics.h"
-#include "forms/subForms/main/formsettings.h"
-#include "forms/subForms/main/formprofile.h"
+#include "forms/main/formgames.h"
+#include "forms/main/formfriends.h"
+#include "forms/main/formfavorites.h"
+#include "forms/main/formstatistics.h"
+#include "forms/main/formsettings.h"
+#include "forms/main/formprofile.h"
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sbans.h"
 #include "classes/steamApi/structures/sgames.h"
@@ -53,26 +53,23 @@ public:
     FormContainerAchievements *_containerAchievementsForm = nullptr;
 
 public slots:
-    void addAchievements(SGame games);
+    void showAchievements(const SGame games);
     void removeAchievements(int index);
     void containerAchievementsClose();
 
-    void goToGames(SProfile &profileSteamid, SGames &games);
-    void goToFriends(const QString &profileSteamid, QList<SFriend> &friends);
+    void goToGames(const SProfile &profileSteamid, const SGames &games);
+    void goToFriends(const ProfileID &profileSteamid, const SFriends &friends);
     void goToFavorites();
     void goToStatistics(const SProfile &profileSteamid, SGames &games);
-    void updateSettings() override;
+    void updateSettings(QFlags<changedSettings>) override;
 
-    FormProfile *createFormProfile(SProfile &aProfile);
-    FormStatistics *createFormStatistics(const SProfile &aProfile, SGames &aGames);
+    FormProfile *createFormProfile(const SProfile &aProfile);
+    FormStatistics *createFormStatistics(const SProfile &aProfile, const SGames &aGames);
     FormContainerAchievements *createFormContainerAchievements();
-signals:
-    void s_updateSettings();
 
 private slots:
     //events
     void keyPressEvent(QKeyEvent*) override;
-//    void changeEvent(QEvent*) override;
     void closeEvent(QCloseEvent*) override;
     //Forms
     void showForm(int widgetIndex, int widthWindow = 300, int aWindowHeight = 400);
@@ -82,10 +79,10 @@ private slots:
     void updateIcons() override;
     void initComponents();
     void resizeScrollArea(int width = 300, int aHeight = 400);
-    void updateEnabledButtonsBackNext();
+    void updateProfileNavigation();
     //Functions
     void buttonFindProfile_Clicked();
-    void goToProfile(const QString &id, SProfileRequestType type);
+    void goToProfile(const ProfileID &id, SProfile::LoadType type);
     void buttonSettings_Clicked();
     //Profile
     void buttonGoToMyProfile_Clicked();
@@ -95,9 +92,8 @@ private slots:
 
 private:
     Ui::FormMain *ui;
-    int _achievementsCount = 0;
 
-    bool _blockedLoad = false;
+    bool _isLoading = false;
 
 };
 

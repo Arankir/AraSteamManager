@@ -3,14 +3,14 @@
 
 #include "../sapi.h"
 
-enum class SProfileRequestType {
-    id,
-    vanity
-};
-
 class SProfile : public Sapi {
     Q_OBJECT
 public:
+    enum class LoadType {
+        id,
+        vanity
+    };
+
     SProfile(const QJsonObject &profile, QObject *parent = nullptr);
     SProfile(QObject *parent = nullptr): SProfile(QJsonObject(), parent) {}
     SProfile(const SProfile &profile): Sapi(profile.parent()), _steamID(profile._steamID), _communityVisibilityState(profile._communityVisibilityState),
@@ -30,18 +30,21 @@ public:
     SProfile &update();
     QJsonObject toJson() const;
     virtual QString className() const {return "SProfile";}
-    static SProfile load(const QString &aId, const SProfileRequestType &aType, std::function<void (SProfile)> aCallback = nullptr);
-    static QList<SProfile> load(QStringList ids, std::function< void(QList<SProfile>) > callback = nullptr);
-    static int getLevel(const QString &aSteamId);
+    static SProfile load(const ProfileID &aId, const LoadType &aType, std::function<void (SProfile)> aCallback = nullptr);
+    static QList<SProfile> load(ProfileIDs ids, std::function< void(QList<SProfile>) > callback = nullptr);
+    static int getLevel(const ProfileID &aSteamId);
 
     QPixmap pixmapAvatar() const;
     QPixmap pixmapAvatarMedium() const;
     QPixmap pixmapAvatarFull() const;
 
+    bool isNull() const;
+
     QColor stateColor() const;
     QString stateText() const;
+    QString stateFullText() const;
 
-    QString steamID()               const {return _steamID;}
+    ProfileID steamID()             const {return _steamID;}
     int communityVisibilityState()  const {return _communityVisibilityState;}
     int profileState()              const {return _profileState;}
     QString personaName()           const {return _personaName;}
@@ -53,7 +56,7 @@ public:
     QDateTime timeCreated()         const {return _timeCreated;}
     int personaStateFlags()         const {return _personaStateFlags;}
     QString gameExtraInfo()         const {return _gameExtraInfo;}
-    QString gameID()                const {return _gameID;}
+    GameID gameID()                 const {return _gameID.toInt();}
     QString locCountryCode()        const {return _locCountryCode;}
     QString locStateCode()          const {return _locStateCode;}
     int locCityID()                 const {return _locCityID;}
@@ -61,36 +64,38 @@ public:
 
 private slots:
     void fromJson(const QJsonValue &value);
-    static SProfile loadVanity(const QString &aId, std::function<void (SProfile)> aCallback = nullptr);
-    static SProfile loadId(const QString &aId, std::function<void (SProfile)> aCallback = nullptr);
+    static SProfile loadVanity(const ProfileID &aId, std::function<void (SProfile)> aCallback = nullptr);
+    static SProfile loadId(const ProfileID &aId, std::function<void (SProfile)> aCallback = nullptr);
 
 private:
-    QString _steamID = "";
-    int _communityVisibilityState;
-    int _profileState;
+    ProfileID _steamID = "";
+    int _communityVisibilityState = 0;
+    int _profileState = 0;
     QString _personaName;
     QDateTime _lastLogoff;
-    int _commentPermission;
+    int _commentPermission = 0;
     QString _profileUrl;
-    int _personaState;
+    int _personaState = 0;
     QString _primaryClanID;
     QDateTime _timeCreated;
-    int _personaStateFlags;
+    int _personaStateFlags = 0;
     QString _gameExtraInfo;
     QString _gameID;
     QString _locCountryCode;
     QString _locStateCode;
-    int _locCityID;
+    int _locCityID = 0;
     QString _realName;
 
     QString _avatar;
     QString _avatarMedium;
     QString _avatarFull;
 
-//    QPixmap _pixmapAvatar;
-//    QPixmap _pixmapAvatarMedium;
-//    QPixmap _pixmapAvatarFull;
+    mutable QPixmap _pixmapAvatar;
+    mutable QPixmap _pixmapAvatarMedium;
+    mutable QPixmap _pixmapAvatarFull;
 
 };
+
+using SProfiles = QList<SProfile>;
 
 #endif // SPROFILE_H

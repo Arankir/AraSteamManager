@@ -17,9 +17,9 @@ SProfile &SProfile::operator=(const SProfile &aProfile) {
     _avatar                     = aProfile._avatar;
     _avatarMedium               = aProfile._avatarMedium;
     _avatarFull                 = aProfile._avatarFull;
-//    _pixmapAvatar               = aProfile._pixmapAvatar;
-//    _pixmapAvatarMedium         = aProfile._pixmapAvatarMedium;
-//    _pixmapAvatarFull           = aProfile._pixmapAvatarFull;
+    _pixmapAvatar               = aProfile._pixmapAvatar;
+    _pixmapAvatarMedium         = aProfile._pixmapAvatarMedium;
+    _pixmapAvatarFull           = aProfile._pixmapAvatarFull;
     _personaState               = aProfile._personaState;
     _primaryClanID              = aProfile._primaryClanID;
     _personaStateFlags          = aProfile._personaStateFlags;
@@ -52,9 +52,9 @@ bool SProfile::operator==(const SProfile &aProfile) const {
             _avatar                     == aProfile._avatar &&
             _avatarMedium               == aProfile._avatarMedium &&
             _avatarFull                 == aProfile._avatarFull &&
-//            _pixmapAvatar               == aProfile._pixmapAvatar &&
-//            _pixmapAvatarMedium         == aProfile._pixmapAvatarMedium &&
-//            _pixmapAvatarFull           == aProfile._pixmapAvatarFull &&
+            _pixmapAvatar               == aProfile._pixmapAvatar &&
+            _pixmapAvatarMedium         == aProfile._pixmapAvatarMedium &&
+            _pixmapAvatarFull           == aProfile._pixmapAvatarFull &&
             _personaState               == aProfile._personaState &&
             _primaryClanID              == aProfile._primaryClanID &&
             _personaStateFlags          == aProfile._personaStateFlags &&
@@ -94,7 +94,7 @@ void SProfile::fromJson(const QJsonValue &aValue) {
 }
 
 SProfile &SProfile::update() {
-    return SProfile::operator=(SProfile::load(_steamID, SProfileRequestType::id));
+    return SProfile::operator=(SProfile::load(_steamID, LoadType::id));
 }
 
 QJsonObject SProfile::toJson() const {
@@ -127,7 +127,7 @@ QString getIdFromVanity(RequestData *aRequest) {
     return QJsonDocument::fromJson(aRequest->reply()).object().value("response").toObject().value("steamid").toString();
 }
 
-SProfile SProfile::loadVanity(const QString &aId, std::function<void (SProfile)> aCallback) {
+SProfile SProfile::loadVanity(const ProfileID &aId, std::function<void (SProfile)> aCallback) {
     RequestData *request = new RequestData();
     request->get(Sapi::profilefromVanityUrl(aId), aCallback != nullptr);
     if (aCallback == nullptr) {
@@ -152,7 +152,7 @@ SProfile SProfile::loadVanity(const QString &aId, std::function<void (SProfile)>
     return SProfile();
 }
 
-SProfile SProfile::loadId(const QString &aId, std::function<void (SProfile)> aCallback) {
+SProfile SProfile::loadId(const ProfileID &aId, std::function<void (SProfile)> aCallback) {
     RequestData *request = new RequestData();
     request->get(Sapi::profileUrl(aId), aCallback != nullptr);
     if (aCallback == nullptr) {
@@ -172,13 +172,13 @@ SProfile SProfile::loadId(const QString &aId, std::function<void (SProfile)> aCa
     return SProfile();
 }
 
-SProfile SProfile::load(const QString &aId, const SProfileRequestType &aType, std::function<void (SProfile)> aCallback) {
+SProfile SProfile::load(const ProfileID &aId, const LoadType &aType, std::function<void (SProfile)> aCallback) {
     switch (aType) {
-    case SProfileRequestType::id: {
+    case LoadType::id: {
         return SProfile::loadId(aId, nullptr);
         break;
     }
-    case SProfileRequestType::vanity: {
+    case LoadType::vanity: {
         return SProfile::loadVanity(aId, aCallback);
         break;
     }
@@ -186,9 +186,9 @@ SProfile SProfile::load(const QString &aId, const SProfileRequestType &aType, st
     return SProfile();
 }
 
-QList<SProfile> SProfile::load(QStringList aIds, std::function<void (QList<SProfile>)> aCallback) {
+SProfiles SProfile::load(ProfileIDs aIds, std::function<void (SProfiles)> aCallback) {
     RequestData *request = new RequestData();
-    QList<SProfile> profiles;
+    SProfiles profiles;
     while (aIds.count() > 0) {
         QStringList localId;
         for (int i = 0; i < 100; ++i) {
@@ -209,25 +209,29 @@ QList<SProfile> SProfile::load(QStringList aIds, std::function<void (QList<SProf
     return profiles;
 }
 
-int SProfile::getLevel(const QString &aSteamId) {
+int SProfile::getLevel(const ProfileID &aSteamId) {
     RequestData request;
     request.get(Sapi::lvlUrl(aSteamId), false);
     return (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("player_level").toInt();
 }
 
 QPixmap SProfile::pixmapAvatar() const {
-    return cLoadPixmap(_avatar, Paths::imagesProfiles(_avatar), QSize(32, 32));
-//    return loadPixmap(_pixmapAvatar, _avatar, Paths::imagesProfiles(_avatar), QSize(32, 32));
+    return loadPixmap(_pixmapAvatar, _avatar, Paths::imagesProfiles(_avatar), QSize(32, 32));
 }
 
 QPixmap SProfile::pixmapAvatarMedium() const {
-    return cLoadPixmap(_avatarMedium, Paths::imagesProfiles(_avatarMedium), QSize(64, 64));
-//    return loadPixmap(_pixmapAvatarMedium, _avatarMedium, Paths::imagesProfiles(_avatarMedium), QSize(64, 64));
+    return loadPixmap(_pixmapAvatarMedium, _avatarMedium, Paths::imagesProfiles(_avatarMedium), QSize(64, 64));
 }
 
 QPixmap SProfile::pixmapAvatarFull() const {
-    return cLoadPixmap(_avatarFull, Paths::imagesProfiles(_avatarFull), QSize(128, 128));
-//    return loadPixmap(_pixmapAvatarFull, _avatarFull, Paths::imagesProfiles(_avatarFull), QSize(128, 128));
+    return loadPixmap(_pixmapAvatarFull, _avatarFull, Paths::imagesProfiles(_avatarFull), QSize(128, 128));
+}
+
+bool SProfile::isNull() const {
+    return _steamID.isEmpty() && _communityVisibilityState == 0 && _profileState == 0 && _personaName.isEmpty() &&
+            _lastLogoff.isNull() && _commentPermission == 0 && _profileUrl.isEmpty() && _personaState == 0 &&
+            _primaryClanID.isEmpty() && _timeCreated.isNull() && _personaStateFlags == 0 && _gameExtraInfo.isEmpty() &&
+            _gameID.isEmpty() && _locCountryCode.isEmpty() && _locStateCode.isEmpty() && _locCityID == 0 && _realName.isEmpty();
 }
 
 QColor SProfile::stateColor() const {
@@ -266,6 +270,41 @@ QString SProfile::stateText() const {
     } else
         switch (_personaState) {
         case 0:{
+            return tr("Не в сети");
+        }
+        case 1:{
+            return tr("В сети");
+        }
+        case 2:{
+            return tr("Не беспокоить");
+        }
+        case 3:{
+            return tr("Нет на месте");
+        }
+        case 4:{
+            return tr("Спит");
+        }
+        case 5:{
+            return tr("Ожидает обмена");
+        }
+        case 6:{
+            return tr("Хочет поиграть");
+        }
+        }
+    return tr("Ошибка");
+}
+
+QString SProfile::stateFullText() const {
+    if (!_gameExtraInfo.isEmpty()) {
+        return tr("В игре %1").arg(gameExtraInfo());
+    } else
+        switch (_personaState) {
+        case 0:{
+            if (lastLogoff() == QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
+                return tr("Не в сети");
+            } else {
+                return tr("Был в сети %1").arg(lastLogoff().toString(Settings::dateTimeFormat()));
+            }
             return tr("Не в сети");
         }
         case 1:{

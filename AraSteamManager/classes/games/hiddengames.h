@@ -7,16 +7,18 @@
 class HiddenGame {
 public:
     HiddenGame(const SGame &game);
+    HiddenGame(const HiddenGame &game);
     HiddenGame(const QJsonObject &game);
     HiddenGame &fromJson(const QJsonObject &object);
+    HiddenGame &operator=(const HiddenGame &object);
     QJsonObject toJson() const;
 
-    QString id() const {return _id;}
+    GameID id() const {return _id;}
     QString name() const {return _name;}
     QString iconUrl() const {return _iconUrl;}
 
 private:
-    QString _id;
+    GameID _id;
     QString _name;
     QString _iconUrl;
 };

@@ -30,9 +30,9 @@ public:
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SBan";}
-    static QList<SBan> load(const QString &aId, std::function<void (QList<SBan>)> aCallback = nullptr);
+    static QList<SBan> load(const ProfileID &aId, std::function<void (QList<SBan>)> aCallback = nullptr);
 
-    QString steamId()       const {return _steamId;}
+    ProfileID steamId()     const {return _steamId;}
     bool communityBanned()  const {return _communityBanned;}
     bool vacBanned()        const {return _vacBanned;}
     int numberOfVacBan()    const {return _numberOfVacBan;}
@@ -41,13 +41,16 @@ public:
     QString economyBan()    const {return _economyBan;}
 
 private:
-    QString _steamId;
-    bool    _communityBanned;
-    bool    _vacBanned;
-    int     _numberOfVacBan;
-    int     _daysSinceLastBan;
-    int     _numberOfGameBans;
-    QString _economyBan;
+    ProfileID   _steamId;
+    bool        _communityBanned;
+    bool        _vacBanned;
+    int         _numberOfVacBan;
+    int         _daysSinceLastBan;
+    int         _numberOfGameBans;
+    QString     _economyBan;
 
 };
+
+using SBans = QList<SBan>;
+
 #endif // SBANS_H

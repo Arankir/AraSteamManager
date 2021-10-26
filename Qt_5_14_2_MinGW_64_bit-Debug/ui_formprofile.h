@@ -89,13 +89,12 @@ public:
     QPushButton *ButtonFavorites;
     QSpacerItem *horizontalSpacer_4;
     QPushButton *ButtonSetProfile;
-    QSpacerItem *verticalSpacer;
 
     void setupUi(QWidget *FormProfile)
     {
         if (FormProfile->objectName().isEmpty())
             FormProfile->setObjectName(QString::fromUtf8("FormProfile"));
-        FormProfile->resize(638, 331);
+        FormProfile->resize(635, 331);
         verticalLayout_3 = new QVBoxLayout(FormProfile);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -492,10 +491,6 @@ public:
 
 
         verticalLayout_3->addWidget(FrameProfileButtons);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_3->addItem(verticalSpacer);
 
 
         retranslateUi(FormProfile);

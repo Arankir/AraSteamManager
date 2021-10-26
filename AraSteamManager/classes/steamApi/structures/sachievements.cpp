@@ -82,7 +82,7 @@ QJsonObject SAchievementSchema::toJson() const {
     return obj;
 }
 
-QList<SAchievementSchema> onLoadSchema(QByteArray byteArray) {
+QList<SAchievementSchema> onLoadSchema(const QByteArray &byteArray) {
     QList<SAchievementSchema> list;
     for(auto &&schema: QJsonDocument::fromJson(byteArray).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray()) {
         list.append(std::move(SAchievementSchema(schema.toObject())));
@@ -90,7 +90,7 @@ QList<SAchievementSchema> onLoadSchema(QByteArray byteArray) {
     return list;
 }
 
-QList<SAchievementSchema> SAchievementSchema::load(const QString &appid, std::function<void (QList<SAchievementSchema>)> aCallback) {
+SAchievementsSchema SAchievementSchema::load(const GameID &appid, std::function<void (SAchievementsSchema)> aCallback) {
     return Sapi::load<SAchievementSchema>(achievementsSchemaUrl(appid), onLoadSchema, aCallback);
 }
 
@@ -120,7 +120,7 @@ QList<SAchievementPercentage> onLoadPercentage(QByteArray byteArray) {
     return list;
 }
 
-QList<SAchievementPercentage> SAchievementPercentage::load(const QString &appid, std::function<void (QList<SAchievementPercentage>)> aCallback) {
+SAchievementsPercentage SAchievementPercentage::load(const GameID &appid, std::function<void (SAchievementsPercentage)> aCallback) {
     return Sapi::load<SAchievementPercentage>(achievementsPercentUrl(appid), onLoadPercentage, aCallback);
 }
 
@@ -145,7 +145,7 @@ QJsonObject SAchievementPlayer::toJson() const {
     return obj;
 }
 
-QList<SAchievementPlayer> onLoadPlayer(QByteArray byteArray) {
+QList<SAchievementPlayer> onLoadPlayer(const QByteArray &byteArray) {
     QList<SAchievementPlayer> list;
     for(auto &&player: QJsonDocument::fromJson(byteArray).object().value("playerstats").toObject().value("achievements").toArray()) {
         list.append(std::move(SAchievementPlayer(player.toObject())));
@@ -153,7 +153,7 @@ QList<SAchievementPlayer> onLoadPlayer(QByteArray byteArray) {
     return list;
 }
 
-QList<SAchievementPlayer> SAchievementPlayer::load(const QString &appid, const QString &id, std::function<void (QList<SAchievementPlayer>)> aCallback) {
+SAchievementsPlayer SAchievementPlayer::load(const GameID &appid, const ProfileID &id, std::function<void (SAchievementsPlayer)> aCallback) {
     return Sapi::load<SAchievementPlayer>(achievementsPlayerUrl(appid, id), onLoadPlayer, aCallback);
 }
 
@@ -167,18 +167,18 @@ int SAchievementPlayer::countAchieved(const QList<SAchievementPlayer> &achieveme
     return i;
 }
 
-SAchievements UniteAchievement(const QList<SAchievementSchema> &global, const QList<SAchievementPercentage> &percent, const QList<SAchievementPlayer> &player) {
-    QList<SAchievement> list;
-    for (const auto &percent: percent) {
-        auto iterGlobal = global.begin();
-        auto iterPlayer = player.begin();
-        for (;iterGlobal != global.end() && iterPlayer != player.end();
-             ++iterGlobal, ++iterPlayer) {
-            if (percent.apiName() == (*iterPlayer).apiName()) {
-                list.push_back(std::move(SAchievement((*iterGlobal), (*iterPlayer), percent)));
-                break;
-            }
-        }
-    }
-    return list;
-}
+//QList<SAchievement> UniteAchievement(const QList<SAchievementSchema> &global, const QList<SAchievementPercentage> &percent, const QList<SAchievementPlayer> &player) {
+//    QList<SAchievement> list;
+//    for (const auto &percent: percent) {
+//        auto iterGlobal = global.begin();
+//        auto iterPlayer = player.begin();
+//        for (;iterGlobal != global.end() && iterPlayer != player.end();
+//             ++iterGlobal, ++iterPlayer) {
+//            if (percent.apiName() == (*iterPlayer).apiName()) {
+//                list.push_back(std::move(SAchievement((*iterGlobal), (*iterPlayer), percent)));
+//                break;
+//            }
+//        }
+//    }
+//    return list;
+//}

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormReachedFilter_t {
-    QByteArrayData data[9];
-    char stringdata0[113];
+    QByteArrayData data[11];
+    char stringdata0[147];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,13 +38,16 @@ QT_MOC_LITERAL(2, 38, 0), // ""
 QT_MOC_LITERAL(3, 39, 11), // "ReachedType"
 QT_MOC_LITERAL(4, 51, 4), // "type"
 QT_MOC_LITERAL(5, 56, 14), // "updateSettings"
-QT_MOC_LITERAL(6, 71, 11), // "updateIcons"
-QT_MOC_LITERAL(7, 83, 11), // "retranslate"
-QT_MOC_LITERAL(8, 95, 17) // "slideValueChanged"
+QT_MOC_LITERAL(6, 71, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(7, 95, 9), // "aSettings"
+QT_MOC_LITERAL(8, 105, 11), // "updateIcons"
+QT_MOC_LITERAL(9, 117, 11), // "retranslate"
+QT_MOC_LITERAL(10, 129, 17) // "slideValueChanged"
 
     },
     "FormReachedFilter\0s_radioButtonChange\0"
     "\0ReachedType\0type\0updateSettings\0"
+    "QFlags<changedSettings>\0aSettings\0"
     "updateIcons\0retranslate\0slideValueChanged"
 };
 #undef QT_MOC_LITERAL
@@ -66,16 +69,16 @@ static const uint qt_meta_data_FormReachedFilter[] = {
        1,    1,   39,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    0,   42,    2, 0x0a /* Public */,
-       6,    0,   43,    2, 0x08 /* Private */,
-       7,    0,   44,    2, 0x08 /* Private */,
+       5,    1,   42,    2, 0x0a /* Public */,
        8,    0,   45,    2, 0x08 /* Private */,
+       9,    0,   46,    2, 0x08 /* Private */,
+      10,    0,   47,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 6,    7,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -90,7 +93,7 @@ void FormReachedFilter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_radioButtonChange((*reinterpret_cast< const ReachedType(*)>(_a[1]))); break;
-        case 1: _t->updateSettings(); break;
+        case 1: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         case 2: _t->updateIcons(); break;
         case 3: _t->retranslate(); break;
         case 4: _t->slideValueChanged(); break;

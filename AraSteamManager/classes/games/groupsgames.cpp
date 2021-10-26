@@ -6,14 +6,14 @@ GroupGames::GroupGames(const QJsonObject &aObject) {
 }
 
 GroupGames &GroupGames::addGame(const SGame &aGame) {
-    _games.append(aGame.sAppId());
+    _games.append(aGame.appId());
     return *this;
 }
 
 GroupGames &GroupGames::removeGame(const SGame &aGame) {
     auto iterator = std::find_if(_games.begin(),
                                  _games.end(),
-                                 [=](const QString &game){return game == aGame.sAppId();});
+                                 [=](const GameID &game){return game == aGame.appId();});
     if (iterator != _games.end()) {
         _games.removeOne(*iterator);
     }
@@ -41,7 +41,7 @@ GroupGames &GroupGames::fromJson(const QJsonObject &aObject) {
     _title      = aObject.value("title").toString();
     _profileId  = aObject.value("profileId").toString();
     foreach(const auto &game, aObject.value("games").toArray()) {
-        _games.append(game.toString());
+        _games.append(game.toInt());
     }
     return *this;
 }

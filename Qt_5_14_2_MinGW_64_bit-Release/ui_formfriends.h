@@ -45,7 +45,7 @@ public:
     {
         if (FormFriends->objectName().isEmpty())
             FormFriends->setObjectName(QString::fromUtf8("FormFriends"));
-        FormFriends->resize(825, 536);
+        FormFriends->resize(366, 292);
         verticalLayout = new QVBoxLayout(FormFriends);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -62,6 +62,11 @@ public:
 
         ButtonFind = new QPushButton(GroupBoxFilter);
         ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ButtonFind->sizePolicy().hasHeightForWidth());
+        ButtonFind->setSizePolicy(sizePolicy);
 
         horizontalLayout_2->addWidget(ButtonFind);
 
@@ -112,7 +117,7 @@ public:
         FormFriends->setWindowTitle(QCoreApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
         GroupBoxFilter->setTitle(QCoreApplication::translate("FormFriends", "     \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
         LineEditName->setPlaceholderText(QCoreApplication::translate("FormFriends", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
-        ButtonFind->setText(QCoreApplication::translate("FormFriends", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
+        ButtonFind->setText(QCoreApplication::translate("FormFriends", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         CheckBoxOpenProfile->setText(QCoreApplication::translate("FormFriends", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         CheckBoxFavorites->setText(QCoreApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
     } // retranslateUi

@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SProfile_t {
-    QByteArrayData data[9];
-    char stringdata0[87];
+    QByteArrayData data[10];
+    char stringdata0[97];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,14 +37,15 @@ QT_MOC_LITERAL(1, 9, 8), // "fromJson"
 QT_MOC_LITERAL(2, 18, 0), // ""
 QT_MOC_LITERAL(3, 19, 5), // "value"
 QT_MOC_LITERAL(4, 25, 10), // "loadVanity"
-QT_MOC_LITERAL(5, 36, 3), // "aId"
-QT_MOC_LITERAL(6, 40, 29), // "std::function<void(SProfile)>"
-QT_MOC_LITERAL(7, 70, 9), // "aCallback"
-QT_MOC_LITERAL(8, 80, 6) // "loadId"
+QT_MOC_LITERAL(5, 36, 9), // "ProfileID"
+QT_MOC_LITERAL(6, 46, 3), // "aId"
+QT_MOC_LITERAL(7, 50, 29), // "std::function<void(SProfile)>"
+QT_MOC_LITERAL(8, 80, 9), // "aCallback"
+QT_MOC_LITERAL(9, 90, 6) // "loadId"
 
     },
     "SProfile\0fromJson\0\0value\0loadVanity\0"
-    "aId\0std::function<void(SProfile)>\0"
+    "ProfileID\0aId\0std::function<void(SProfile)>\0"
     "aCallback\0loadId"
 };
 #undef QT_MOC_LITERAL
@@ -66,15 +67,15 @@ static const uint qt_meta_data_SProfile[] = {
        1,    1,   39,    2, 0x08 /* Private */,
        4,    2,   42,    2, 0x08 /* Private */,
        4,    1,   47,    2, 0x28 /* Private | MethodCloned */,
-       8,    2,   50,    2, 0x08 /* Private */,
-       8,    1,   55,    2, 0x28 /* Private | MethodCloned */,
+       9,    2,   50,    2, 0x08 /* Private */,
+       9,    1,   55,    2, 0x28 /* Private | MethodCloned */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QJsonValue,    3,
-    0x80000000 | 0, QMetaType::QString, 0x80000000 | 6,    5,    7,
-    0x80000000 | 0, QMetaType::QString,    5,
-    0x80000000 | 0, QMetaType::QString, 0x80000000 | 6,    5,    7,
-    0x80000000 | 0, QMetaType::QString,    5,
+    0x80000000 | 0, 0x80000000 | 5, 0x80000000 | 7,    6,    8,
+    0x80000000 | 0, 0x80000000 | 5,    6,
+    0x80000000 | 0, 0x80000000 | 5, 0x80000000 | 7,    6,    8,
+    0x80000000 | 0, 0x80000000 | 5,    6,
 
        0        // eod
 };
@@ -86,13 +87,13 @@ void SProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->fromJson((*reinterpret_cast< const QJsonValue(*)>(_a[1]))); break;
-        case 1: { SProfile _r = _t->loadVanity((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< std::function<void(SProfile)>(*)>(_a[2])));
+        case 1: { SProfile _r = _t->loadVanity((*reinterpret_cast< const ProfileID(*)>(_a[1])),(*reinterpret_cast< std::function<void(SProfile)>(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
-        case 2: { SProfile _r = _t->loadVanity((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 2: { SProfile _r = _t->loadVanity((*reinterpret_cast< const ProfileID(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
-        case 3: { SProfile _r = _t->loadId((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< std::function<void(SProfile)>(*)>(_a[2])));
+        case 3: { SProfile _r = _t->loadId((*reinterpret_cast< const ProfileID(*)>(_a[1])),(*reinterpret_cast< std::function<void(SProfile)>(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
-        case 4: { SProfile _r = _t->loadId((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 4: { SProfile _r = _t->loadId((*reinterpret_cast< const ProfileID(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }

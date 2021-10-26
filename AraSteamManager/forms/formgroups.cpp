@@ -29,8 +29,8 @@ void FormGroups::initUi() {
         auto games = group.games();
         bool isInGroup = std::any_of(games.begin(),
                                      games.end(),
-                                     [=](QString game) {
-                                        return game == _game.sAppId();
+                                     [=](GameID game) {
+                                        return game == _game.appId();
                                      });
         if (isInGroup) {
             chb->setChecked(true);
@@ -115,6 +115,8 @@ void FormGroups::updateIcons() {
 
 }
 
-void FormGroups::updateSettings() {
-
+void FormGroups::updateSettings(QFlags<changedSettings> aSettings) {
+    if (aSettings.testFlag(changedSettings::theme)) {
+        updateIcons();
+    }
 }

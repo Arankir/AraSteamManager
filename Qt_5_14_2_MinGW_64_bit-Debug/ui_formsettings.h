@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -21,7 +22,6 @@
 #include <QtWidgets/QListView>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
-#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
@@ -62,9 +62,8 @@ public:
     QCheckBox *CheckBoxVisibleHiddenGames;
     QCheckBox *CheckBoxSaveImage;
     QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *verticalLayout_2;
     QLabel *label;
-    QSlider *SliderProfileSize;
+    QComboBox *comboBoxProfileInfo;
     QSpacerItem *horizontalSpacer;
     QLabel *labelIcons8;
     QSpacerItem *verticalSpacer;
@@ -149,7 +148,7 @@ public:
     {
         if (FormSettings->objectName().isEmpty())
             FormSettings->setObjectName(QString::fromUtf8("FormSettings"));
-        FormSettings->resize(470, 555);
+        FormSettings->resize(470, 566);
         verticalLayout_5 = new QVBoxLayout(FormSettings);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -270,28 +269,15 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         label = new QLabel(tab_2);
         label->setObjectName(QString::fromUtf8("label"));
 
-        verticalLayout_2->addWidget(label);
+        horizontalLayout_2->addWidget(label);
 
-        SliderProfileSize = new QSlider(tab_2);
-        SliderProfileSize->setObjectName(QString::fromUtf8("SliderProfileSize"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(SliderProfileSize->sizePolicy().hasHeightForWidth());
-        SliderProfileSize->setSizePolicy(sizePolicy1);
-        SliderProfileSize->setMaximum(2);
-        SliderProfileSize->setValue(2);
-        SliderProfileSize->setOrientation(Qt::Horizontal);
+        comboBoxProfileInfo = new QComboBox(tab_2);
+        comboBoxProfileInfo->setObjectName(QString::fromUtf8("comboBoxProfileInfo"));
 
-        verticalLayout_2->addWidget(SliderProfileSize);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_2);
+        horizontalLayout_2->addWidget(comboBoxProfileInfo);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -326,7 +312,7 @@ public:
         ToolBoxExport->setObjectName(QString::fromUtf8("ToolBoxExport"));
         PageCategories = new QWidget();
         PageCategories->setObjectName(QString::fromUtf8("PageCategories"));
-        PageCategories->setGeometry(QRect(0, 0, 466, 393));
+        PageCategories->setGeometry(QRect(0, 0, 466, 404));
         verticalLayout_12 = new QVBoxLayout(PageCategories);
         verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
         TreeWidgetExportCategories = new QTreeWidget(PageCategories);
@@ -629,11 +615,11 @@ public:
         if (TableWidgetGames->columnCount() < 4)
             TableWidgetGames->setColumnCount(4);
         TableWidgetGames->setObjectName(QString::fromUtf8("TableWidgetGames"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(TableWidgetGames->sizePolicy().hasHeightForWidth());
-        TableWidgetGames->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(TableWidgetGames->sizePolicy().hasHeightForWidth());
+        TableWidgetGames->setSizePolicy(sizePolicy1);
         TableWidgetGames->setRowCount(0);
         TableWidgetGames->setColumnCount(4);
 

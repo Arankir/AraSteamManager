@@ -31,7 +31,7 @@ void FormComments::init() {
         auto iterator = std::find_if(list.begin(),
                                      list.end(),
                                      [=](const GameComment &gameComment) {
-                                        return gameComment.gameId() == _game.sAppId();
+                                        return gameComment.gameId() == _game.appId();
                                     });
         if (iterator != list.end()) {
             comment = (*iterator).comment();
@@ -41,7 +41,7 @@ void FormComments::init() {
         ui->LabelAchievementDescription->setText(_achievement.description());
         ui->LabelAchievementAchieved->setText(_achievement.achieved() == 1 ? tr("Получено %1").arg(_achievement.unlockTime().toString(Settings::dateTimeFormatShort())) : tr("Не получено"));
         ui->FrameAchievement->setVisible(true);
-        auto list = AchievementComment::load(_profile.steamID(), _game.sAppId());
+        auto list = AchievementComment::load(_profile.steamID(), _game.appId());
         auto iterator = std::find_if(list.begin(),
                                      list.end(),
                                      [=](const AchievementComment &achievementComment) {
@@ -65,9 +65,9 @@ void FormComments::on_ButtonApply_clicked() {
     QStringList comment = ui->TextEditComment->toPlainText().split('\n');
 
     if (_achievement == SAchievement()) {
-        GameComment::save(_profile.steamID(), GameComment(_game.sAppId(), _profile.steamID(), comment));
+        GameComment::save(_profile.steamID(), GameComment(_game.appId(), _profile.steamID(), comment));
     } else {
-        AchievementComment::save(_profile.steamID(), _game.sAppId(), AchievementComment(_profile.steamID(), _game.sAppId(), _achievement.apiName(), comment));
+        AchievementComment::save(_profile.steamID(), _game.appId(), AchievementComment(_profile.steamID(), _game.appId(), _achievement.apiName(), comment));
     }
 
     emit s_updateComments();
@@ -83,6 +83,8 @@ void FormComments::updateIcons() {
 
 }
 
-void FormComments::updateSettings() {
-
+void FormComments::updateSettings(QFlags<changedSettings> aSettings) {
+    if (aSettings.testFlag(changedSettings::theme)) {
+        updateIcons();
+    }
 }

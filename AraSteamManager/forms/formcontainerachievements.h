@@ -2,7 +2,7 @@
 #define FORMCONTAINERACHIEVEMENTS_H
 
 #include <QWidget>
-#include "forms/subForms/achievements/formachievements.h"
+#include "forms/achievements/formachievements.h"
 #include "form.h"
 #include "classes/common/settings.h"
 
@@ -14,7 +14,7 @@ class FormContainerAchievements : public Form {
     Q_OBJECT
 
 public slots:
-    void addFormAchievement(SProfile ids, SGame &game);
+    void addFormAchievement(const SProfile &ids, const SGame &game);
     void show();
 
 public:
@@ -23,7 +23,7 @@ public:
 
     void retranslate() override {};
     void updateIcons() override {};
-    void updateSettings() override;;
+    void updateSettings(QFlags<changedSettings> aSettings) override;;
 
 signals:
     void s_removeAchievements(int index);
@@ -35,6 +35,7 @@ private slots:
 
 private:
     Ui::FormContainerAchievements *ui;
+    int getTabIndex(const SProfile &aProfile, const SGame &aGame);
 };
 
 #endif // FORMCONTAINERACHIEVEMENTS_H

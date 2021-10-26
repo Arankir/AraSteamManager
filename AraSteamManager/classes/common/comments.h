@@ -7,79 +7,82 @@
 class Comment {
 public:
     virtual QJsonObject toJson()    const = 0;
-    QString profileId()             const {return _profileId;}
+    ProfileID profileId()           const {return _profileId;}
     QStringList comment()           const {return _comment;}
 
     void changeComment(const QStringList &comment);
 
 protected:
     Comment() {};
-    explicit Comment(const QString &profileId, const QStringList &comment): _profileId(profileId), _comment(comment) {};
+    explicit Comment(const ProfileID &profileId, const QStringList &comment): _profileId(profileId), _comment(comment) {};
     virtual ~Comment() {};
 
     virtual void fromJson(const QJsonObject &object) = 0;
 
-    QString _profileId;
+    ProfileID _profileId;
     QStringList _comment;
 };
 
 class AchievementComment: public Comment {
 public:
-    explicit AchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId, const QStringList &comment):
+    explicit AchievementComment(const ProfileID &profileId, const GameID &gameId, const QString &achievementId, const QStringList &comment):
         Comment(profileId, comment), _gameId(gameId), _achievementId(achievementId) {};
     explicit AchievementComment(const QJsonObject &object);
     ~AchievementComment() {};
 
     bool operator==(const AchievementComment &comment) const;
 
-    QJsonObject toJson()    const;
-    QString gameId()        const {return _gameId;}
-    QString achievementId() const {return _achievementId;}
+    QJsonObject toJson()            const;
+    GameID gameId()                 const {return _gameId;}
+    AchievementID achievementId()   const {return _achievementId;}
 
-    static QList<QPair<QString, QList<AchievementComment> > > load(const QString &profileId);
-    static QList<AchievementComment> load(const QString &profileId, const QString &gameId);
-    static bool save(const QString &profileId, const QString &gameId, const AchievementComment &comments);
-    static bool save(const QString &profileId, const QString &gameId, const QList<AchievementComment> &comments);
-    static bool save(const QString &profileId, QList<QPair<QString, QList<AchievementComment> > > &comments);
+    static QList<QPair<GameID, QList<AchievementComment> > > load(const ProfileID &profileId);
+    static QList<AchievementComment> load(const ProfileID &profileId, const GameID &gameId);
+    static bool save(const ProfileID &profileId, const GameID &gameId, const AchievementComment &comments);
+    static bool save(const ProfileID &profileId, const GameID &gameId, const QList<AchievementComment> &comments);
+    static bool save(const ProfileID &profileId, QList<QPair<GameID, QList<AchievementComment> > > &comments);
 
 private:
     void fromJson(const QJsonObject &object);
 
-    QString _gameId;
-    QString _achievementId;
+    GameID _gameId;
+    AchievementID _achievementId;
 
 };
 
+using AchievementGameComments = QPair<GameID, QList<AchievementComment>>;
+using AchievementGamesComments = QList<AchievementGameComments>;
+
 class GameComment: public Comment {
 public:
-    explicit GameComment(const QString &gameId, const QString &profileId, const QStringList &comment): Comment(profileId, comment), _gameId(gameId) {};
+    explicit GameComment(const GameID &gameId, const ProfileID &profileId, const QStringList &comment): Comment(profileId, comment), _gameId(gameId) {};
     explicit GameComment(const QJsonObject &object);
     ~GameComment() {};
 
     QJsonObject toJson()    const;
-    QString gameId()        const {return _gameId;}
+    GameID gameId()        const {return _gameId;}
 
-    static QList<GameComment> load(const QString &profileId);
-    static bool save(const QString &profileId, const QList<GameComment> &comments);
-    static bool save(const QString &profileId, const GameComment &comments);
+    static QList<GameComment> load(const ProfileID &profileId);
+    static bool save(const ProfileID &profileId, const QList<GameComment> &comments);
+    static bool save(const ProfileID &profileId, const GameComment &comments);
 
 private:
     void fromJson(const QJsonObject &object);
 
-    QString _gameId;
+    GameID _gameId;
 };
 
 class Comments {
 public:
-    explicit Comments(const QString &profileId = "");
+    explicit Comments(const ProfileID &profileId = "");
 
-    Comments &setProfileId(const QString &profileId);
-    Comments &setGameComment(const QString &gameId, const QString &profileId, const QStringList &comment);
-    Comments &setAchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId, const QStringList &comment);
-    Comments &removeGameComment(const QString &gameId, const QString &profileId);
-    Comments &removeAchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId);
-    const GameComment getGameComment(const QString &gameId) const;
-    const AchievementComment getAchievementComment(const QString &profileId, const QString &gameId, const QString &achievementId) const;
+    Comments &setProfileId(const ProfileID &profileId);
+    Comments &setGameComment(const GameID &gameId, const ProfileID &profileId, const QStringList &comment);
+    Comments &setAchievementComment(const ProfileID &profileId, const GameID &gameId, const AchievementID &achievementId, const QStringList &comment);
+    Comments &removeGameComment(const GameID &gameId, const ProfileID &profileId);
+    Comments &removeAchievementComment(const ProfileID &profileId, const GameID &gameId, const AchievementID &achievementId);
+    const GameComment getGameComment(const GameID &gameId) const;
+    const AchievementComment getAchievementComment(const ProfileID &profileId, const GameID &gameId, const AchievementID &achievementId) const;
     bool saveGames() const;
     bool saveAchievements() const;
     bool save() const;
@@ -88,12 +91,12 @@ public:
 private:
     QString _profileId;
     QList<GameComment> _games;
-    QList<QPair<QString, QList<AchievementComment>>> _achievements;
+    AchievementGamesComments _achievements;
 
-    QList<QPair<QString, QList<AchievementComment> > >::iterator findAchievementComment(const QString &aGameId);
-    QList<QPair<QString, QList<AchievementComment> > >::const_iterator findAchievementComment(const QString &aGameId) const;
-    QList<GameComment>::iterator findGameComment(const QString &aGameId, const QString &aProfileId);
-    QList<GameComment>::const_iterator findGameComment(const QString &aGameId, const QString &aProfileId) const;
+    AchievementGamesComments::iterator findAchievementComment(const GameID &aGameId);
+    AchievementGamesComments::const_iterator findAchievementComment(const GameID &aGameId) const;
+    QList<GameComment>::iterator findGameComment(const GameID &aGameId, const ProfileID &aProfileId);
+    QList<GameComment>::const_iterator findGameComment(const GameID &aGameId, const ProfileID &aProfileId) const;
 };
 
 #endif // COMMENTS_H

@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_GamesModel_t {
-    QByteArrayData data[15];
-    char stringdata0[162];
+    QByteArrayData data[17];
+    char stringdata0[174];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,24 +37,26 @@ QT_MOC_LITERAL(0, 0, 10), // "GamesModel"
 QT_MOC_LITERAL(1, 11, 10), // "s_finished"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 10), // "s_progress"
-QT_MOC_LITERAL(4, 34, 5), // "stage"
-QT_MOC_LITERAL(5, 40, 8), // "progress"
-QT_MOC_LITERAL(6, 49, 14), // "updateComments"
-QT_MOC_LITERAL(7, 64, 4), // "sort"
-QT_MOC_LITERAL(8, 69, 6), // "column"
-QT_MOC_LITERAL(9, 76, 13), // "Qt::SortOrder"
-QT_MOC_LITERAL(10, 90, 5), // "order"
-QT_MOC_LITERAL(11, 96, 20), // "onResultAchievements"
-QT_MOC_LITERAL(12, 117, 25), // "QList<SAchievementPlayer>"
-QT_MOC_LITERAL(13, 143, 12), // "achievements"
-QT_MOC_LITERAL(14, 156, 5) // "appId"
+QT_MOC_LITERAL(4, 34, 6), // "status"
+QT_MOC_LITERAL(5, 41, 8), // "progress"
+QT_MOC_LITERAL(6, 50, 3), // "max"
+QT_MOC_LITERAL(7, 54, 14), // "updateComments"
+QT_MOC_LITERAL(8, 69, 4), // "sort"
+QT_MOC_LITERAL(9, 74, 6), // "column"
+QT_MOC_LITERAL(10, 81, 13), // "Qt::SortOrder"
+QT_MOC_LITERAL(11, 95, 5), // "order"
+QT_MOC_LITERAL(12, 101, 20), // "onResultAchievements"
+QT_MOC_LITERAL(13, 122, 25), // "QList<SAchievementPlayer>"
+QT_MOC_LITERAL(14, 148, 12), // "achievements"
+QT_MOC_LITERAL(15, 161, 6), // "GameID"
+QT_MOC_LITERAL(16, 168, 5) // "appId"
 
     },
     "GamesModel\0s_finished\0\0s_progress\0"
-    "stage\0progress\0updateComments\0sort\0"
-    "column\0Qt::SortOrder\0order\0"
+    "status\0progress\0max\0updateComments\0"
+    "sort\0column\0Qt::SortOrder\0order\0"
     "onResultAchievements\0QList<SAchievementPlayer>\0"
-    "achievements\0appId"
+    "achievements\0GameID\0appId"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,23 +75,23 @@ static const uint qt_meta_data_GamesModel[] = {
 
  // signals: name, argc, parameters, tag, flags
        1,    0,   44,    2, 0x06 /* Public */,
-       3,    2,   45,    2, 0x06 /* Public */,
+       3,    3,   45,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    0,   50,    2, 0x0a /* Public */,
-       7,    2,   51,    2, 0x0a /* Public */,
-       7,    1,   56,    2, 0x2a /* Public | MethodCloned */,
-      11,    2,   59,    2, 0x08 /* Private */,
+       7,    0,   52,    2, 0x0a /* Public */,
+       8,    2,   53,    2, 0x0a /* Public */,
+       8,    1,   58,    2, 0x2a /* Public | MethodCloned */,
+      12,    2,   61,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    4,    5,
+    QMetaType::Void, QMetaType::QString, QMetaType::Int, QMetaType::Int,    4,    5,    6,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 9,    8,   10,
-    QMetaType::Void, QMetaType::Int,    8,
-    QMetaType::Void, 0x80000000 | 12, QMetaType::QString,   13,   14,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 10,    9,   11,
+    QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void, 0x80000000 | 13, 0x80000000 | 15,   14,   16,
 
        0        // eod
 };
@@ -101,11 +103,11 @@ void GamesModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_finished(); break;
-        case 1: _t->s_progress((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2]))); break;
+        case 1: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3]))); break;
         case 2: _t->updateComments(); break;
         case 3: _t->sort((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< Qt::SortOrder(*)>(_a[2]))); break;
         case 4: _t->sort((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->onResultAchievements((*reinterpret_cast< QList<SAchievementPlayer>(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 5: _t->onResultAchievements((*reinterpret_cast< QList<SAchievementPlayer>(*)>(_a[1])),(*reinterpret_cast< GameID(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -118,7 +120,7 @@ void GamesModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             }
         }
         {
-            using _t = void (GamesModel::*)(const int & , const int & );
+            using _t = void (GamesModel::*)(const QString & , const int & , const int & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GamesModel::s_progress)) {
                 *result = 1;
                 return;
@@ -174,9 +176,9 @@ void GamesModel::s_finished()
 }
 
 // SIGNAL 1
-void GamesModel::s_progress(const int & _t1, const int & _t2)
+void GamesModel::s_progress(const QString & _t1, const int & _t2, const int & _t3)
 {
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 struct qt_meta_stringdata_ProxyModelGames_t {

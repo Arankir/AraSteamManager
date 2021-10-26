@@ -1,5 +1,26 @@
 #include "friendsmodel.h"
 
+void FriendsModel::setFriends(const QList<SFriend> &aFriends) {
+    _friends.clear();
+    QStringList listIds;
+    for (const SFriend &sFriend: aFriends) {
+        listIds.append(sFriend.steamId());
+    }
+    QList<SProfile> profiles = SProfile::load(listIds);
+    mySort2(profiles);
+    int progress = 0;
+    for(auto &profile: profiles) {
+        for (const auto &currentFriend: aFriends) {
+            if (currentFriend.steamId() == profile.steamID()) {
+                _friends.append(std::move(SFriendProfile(currentFriend, profile)));
+                break;
+            }
+        }
+        emit s_progress(tr("Загрузка друзей"), ++progress, profiles.count());
+    }
+    emit s_finished();
+}
+
 int FriendsModel::columnCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
     return FriendsCount;
@@ -20,36 +41,36 @@ QVariant FriendsModel::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
         case FriendsID: {
-            return _friends[index.row()].first.steamId();
+            return _friends[index.row()].steamFriend.steamId();
         }
         case FriendsIndex: {
             return index.row();
         }
         case FriendsName: {
-            return _friends[index.row()].second.personaName();
+            return _friends[index.row()].steamProfile.personaName();
         }
         case FriendsAdded: {
-            return _friends[index.row()].first.friendSince().toString(Settings::dateTimeFormatShort());
+            return _friends[index.row()].steamFriend.friendSince().toString(Settings::dateTimeFormatShort());
         }
         case FriendsStatus: {
-            return _friends[index.row()].second.stateText();
+            return _friends[index.row()].steamProfile.stateText();
         }
         case FriendsIsPublic: {
-            return _friends[index.row()].second.communityVisibilityState() == 3 ? isPublicTitle() : tr("Скрытый");
+            return _friends[index.row()].steamProfile.communityVisibilityState() == 3 ? isPublicTitle() : tr("Скрытый");
         }
         }
     }
     if (role == Qt::DecorationRole) {
         if (index.column() == FriendsIcon) {
-            return _friends[index.row()].second.pixmapAvatar();
+            return _friends[index.row()].steamProfile.pixmapAvatar();
         }
     }
     if (role == Qt::ForegroundRole) {
         if (index.column() == FriendsStatus) {
-            return _friends[index.row()].second.stateColor();
+            return _friends[index.row()].steamProfile.stateColor();
         }
         if (index.column() == FriendsIsPublic) {
-            return _friends[index.row()].second.communityVisibilityState() == 3 ? QColor(105,155,44) : QColor(155,44,44);
+            return _friends[index.row()].steamProfile.communityVisibilityState() == 3 ? QColor(105,155,44) : QColor(155,44,44);
         }
     }
     return QVariant();
@@ -91,7 +112,7 @@ QVariant FriendsModel::headerData(int section, Qt::Orientation orientation, int 
 }
 
 QString FriendsModel::friendId(const QModelIndex &index) const {
-    return _friends[index.row()].first.steamId();
+    return _friends[index.row()].steamFriend.steamId();
 }
 
 QString FriendsModel::isPublicTitle() {
@@ -104,11 +125,11 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
     case FriendsID: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.first.steamId() < f2.first.steamId();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.steamId() < f2.steamFriend.steamId();});
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.first.steamId() > f2.first.steamId();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.steamId() > f2.steamFriend.steamId();});
             break;
         }
         }
@@ -123,11 +144,11 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
     case FriendsName: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.second.personaName() < f2.second.personaName();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.personaName() < f2.steamProfile.personaName();});
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.second.personaName() > f2.second.personaName();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.personaName() > f2.steamProfile.personaName();});
             break;
         }
         }
@@ -136,11 +157,11 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
     case FriendsAdded: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.first.friendSince() < f2.first.friendSince();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.friendSince() < f2.steamFriend.friendSince();});
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.first.friendSince() > f2.first.friendSince();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.friendSince() > f2.steamFriend.friendSince();});
             break;
         }
         }
@@ -149,11 +170,11 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
     case FriendsStatus: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.second.stateText() < f2.second.stateText();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.stateText() < f2.steamProfile.stateText();});
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.second.stateText() > f2.second.stateText();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.stateText() > f2.steamProfile.stateText();});
             break;
         }
         }
@@ -162,11 +183,11 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
     case FriendsIsPublic: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.second.communityVisibilityState() < f2.second.communityVisibilityState();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.communityVisibilityState() < f2.steamProfile.communityVisibilityState();});
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<QPair<SFriend, SProfile>>(_friends, [](QPair<SFriend, SProfile> &f1, QPair<SFriend, SProfile> &f2) {return f1.second.communityVisibilityState() > f2.second.communityVisibilityState();});
+            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.communityVisibilityState() > f2.steamProfile.communityVisibilityState();});
             break;
         }
         }
@@ -176,7 +197,7 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
     emit dataChanged(index(0, 0), index(rowCount(), columnCount()));
 }
 
-QPair<SFriend, SProfile> FriendsModel::getFriend(const int &row) const {
+SFriendProfile FriendsModel::getFriend(const int &row) const {
     return _friends[row];
 }
 

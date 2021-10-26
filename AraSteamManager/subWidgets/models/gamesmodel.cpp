@@ -1,38 +1,74 @@
 #include "gamesmodel.h"
+#include <QFuture>
 #include <QFutureWatcher>
 #include <QtConcurrent/QtConcurrent>
 
-void GamesModel::setGames(QList<SGame> &games, const QString &userId) {
-    _userId = userId;
-    _gamesInModel.clear();
-    auto comments = GameComment::load(_userId);
-    int progress = 0;
+const QString c_noAchievements = "-";
 
-    for(auto &game: games) {
-        auto iterator = std::find_if(comments.begin(),
-                                     comments.end(),
+void GamesModel::loadImages(SGames aGames, QList<GameComment> &aComments, int aGameCount) {
+    for(auto &game: aGames) {
+        auto iterator = std::find_if(aComments.begin(),
+                                     aComments.end(),
                                      [=](const GameComment &gameComment) {
-                                        return gameComment.gameId() == game.sAppId();
+                                        return gameComment.gameId() == game.appId();
                                      });
 
-        if (iterator != comments.end()) {
+        if (iterator != aComments.end()) {
             _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0}));
         } else {
             _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0}));
         }
-        emit s_progress(1, ++progress);
-    }
-    for (const auto &game: qAsConst(games)) {
-        //Загрузка достижений игрока
-        SAchievementPlayer::load(game.sAppId(), _userId, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, game.sAppId()));
+        emit s_progress(tr("Загрузка данных об игре"), ++_loadedGames, aGameCount);
+//        qDebug() << 11 << _loadedGames << gameCount;
     }
 }
 
-void GamesModel::onResultAchievements(QList<SAchievementPlayer> aAchievements, QString aAppId) {
+void GamesModel::setGames(const SGames &games, const QString &userId) {
+    _userId = userId;
+    _gamesInModel.clear();
+    auto comments = GameComment::load(_userId);
+    _loadedGames = 0;
+
+    int step = games.count() / QThread::idealThreadCount();
+    int y = 0;
+
+    QVector<QList<SGame>> tasks;
+    for( ; y < games.count() - step; y += step ) {
+//        qDebug() << y << y + step;
+        tasks << games.mid(y, y + step);
+    }
+    QFuture<void> future = QtConcurrent::map(tasks, std::bind(&GamesModel::loadImages, this,  std::placeholders::_1, comments, games.count()));
+    loadImages(games.mid(y), comments, games.count());
+    future.waitForFinished();
+
+
+//    int progress = 0;
+//    for(auto &game: games) {
+//        auto iterator = std::find_if(comments.begin(),
+//                                     comments.end(),
+//                                     [=](const GameComment &gameComment) {
+//                                        return gameComment.gameId() == game.sAppId();
+//                                     });
+
+//        if (iterator != comments.end()) {
+//            _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0}));
+//        } else {
+//            _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0}));
+//        }
+//        emit s_progress(tr("Загрузка данных об игре"), ++progress, games.count());
+//        qDebug() << 33 << progress << games.count();
+//    }
+    for (const auto &game: qAsConst(_gamesInModel)) {
+        //Загрузка достижений игрока
+        SAchievementPlayer::load(game.game.appId(), _userId, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, game.game.appId()));
+    }
+}
+
+void GamesModel::onResultAchievements(QList<SAchievementPlayer> aAchievements, GameID aAppId) {
     auto iterator = std::find_if(_gamesInModel.begin(),
                                  _gamesInModel.end(),
                                  [=](const GameInModel &gim) {
-                                    return gim.game.sAppId() == aAppId;
+                                    return gim.game.appId() == aAppId;
                                 });
     if (iterator != _gamesInModel.end()) {
         (*iterator).achievements = aAchievements;
@@ -42,7 +78,8 @@ void GamesModel::onResultAchievements(QList<SAchievementPlayer> aAchievements, Q
     }
 
     static int loaded = 0;
-    emit s_progress(2, loaded);
+    emit s_progress(tr("Загрузка достижений"), loaded, _gamesInModel.count());
+//    qDebug() << 22 << loaded << _gamesInModel.count();
     //Проверка всё ли загрузилось
     if(++loaded == _gamesInModel.count()) {
         loaded = 0;
@@ -71,7 +108,7 @@ QVariant GamesModel::data(const QModelIndex &index, int role) const {
     case Qt::DisplayRole: {
         switch (index.column()) {
         case GamesAppid: {
-            return _gamesInModel[index.row()].game.sAppId();
+            return _gamesInModel[index.row()].game.appId();
         }
         case GamesIndex: {
             return index.row();
@@ -90,9 +127,11 @@ QVariant GamesModel::data(const QModelIndex &index, int role) const {
         case GamesProgress: {
             auto game = _gamesInModel[index.row()];
             if (game.achievements.count() == 0) {
-                return tr("Нет достижений");
+                return c_noAchievements;
             } else {
-                return QString{"%1"}.arg(100.0 * game.achieved / game.achievements.count(), 5, 'f', 1, '0') + "%";
+                return QString("%1%\n(%2/%3)").arg(QString::number(1.0 * game.achieved / (1.0 * game.achievements.count() / 100)/*, 6*/, 'f', 2/*, '0'*/)).arg(
+                                                 QString::number(game.achieved),
+                                                 QString::number(game.achievements.count()));
             }
         }
         default: {
@@ -164,8 +203,8 @@ QVariant GamesModel::headerData(int section, Qt::Orientation orientation, int ro
     return QVariant();
 }
 
-QString GamesModel::gameId(const QModelIndex &index) const {
-    return _gamesInModel[index.row()].game.sAppId();
+GameID GamesModel::gameId(const QModelIndex &index) const {
+    return _gamesInModel[index.row()].game.appId();
 }
 
 void GamesModel::sort(int column, Qt::SortOrder order) {
@@ -283,7 +322,7 @@ void GamesModel::updateComments() {
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=](const GameComment &gameComment) {
-                                        return gameComment.gameId() == game.game.sAppId();
+                                        return gameComment.gameId() == game.game.appId();
                                      });
 
         if (iterator != comments.end()) {
@@ -291,7 +330,7 @@ void GamesModel::updateComments() {
         } else {
             game.comment = QStringList();
         }
-        emit s_progress(1, ++progress);
+        emit s_progress(tr("Обновление комментариев"), ++progress, _gamesInModel.count());
     }
 }
 
@@ -311,12 +350,41 @@ bool ProxyModelGames::filterAcceptsRow(int aSource_row, const QModelIndex &aSour
     return true;
 }
 
+bool ProxyModelGames::lessThan(const QModelIndex &left, const QModelIndex &right) const {
+    if (left.column() == GamesProgress && right.column() == GamesProgress) {
+        QVariant leftData = sourceModel()->data(left);
+        QVariant rightData = sourceModel()->data(right);
+        if (leftData == c_noAchievements) {
+            return true;
+        }
+        if (rightData == c_noAchievements) {
+            return false;
+        }
+        double iLeft = leftData.toString().leftRef(leftData.toString().indexOf("%")).toDouble();
+        double iRight = rightData.toString().leftRef(rightData.toString().indexOf("%")).toDouble();
+        return iLeft < iRight;
+    }
+    return QSortFilterProxyModel::lessThan(left, right);
+}
+
 QVariant ProxyModelGames::headerData(int section, Qt::Orientation orientation, int role) const {
     return sourceModel()->headerData(section, orientation, role);
 }
 
 void ProxyModelGames::setSourceModel(GamesModel *sourceModel) {
     QAbstractProxyModel::setSourceModel(sourceModel);
+}
+
+SGame ProxyModelGames::getGame(int aIndex) {
+    return sourceModel()->getGame(aIndex);
+}
+
+QStringList ProxyModelGames::getGameComment(int aIndex) {
+    return sourceModel()->getComment(aIndex);
+}
+
+QList<SAchievementPlayer> ProxyModelGames::getGameAchievements(int aIndex) {
+    return sourceModel()->getAchievements(aIndex);
 }
 
 GamesModel *ProxyModelGames::sourceModel() const {

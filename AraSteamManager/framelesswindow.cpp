@@ -19,12 +19,16 @@ FramelessWindow::FramelessWindow(QWidget *target):
                     _target(target),
                     _cursorchanged(false),
                     _leftButtonPressed(false),
-                    _dragPos(QPoint()) {
+                    _dragPos(QPoint()),
+                    _statusProgressBar(new QProgressBar()) {
     ui->setupUi(this);
     this->setMouseTracking(true);
     this->setWindowFlags(Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_Hover);
     this->installEventFilter(this);
+    ui->statusbar->addPermanentWidget(_statusProgressBar, 0);
+    setStatus();
+
     if (_target != nullptr) {
         ui->centralwidget->layout()->addWidget(_target);
     }
@@ -88,6 +92,7 @@ void FramelessWindow::buttonMinimize_Clicked() {
         this->showNormal();
     }
 }
+
 FramelessWindow::~FramelessWindow() {
     if (_target) {
         delete _target;
@@ -96,13 +101,30 @@ FramelessWindow::~FramelessWindow() {
 }
 
 void FramelessWindow::animateResize(int width, int height) {
-    qDebug() << QSize(this->width(), this->height()) << QSize(width, height);
+//    qDebug() << QSize(this->width(), this->height()) << QSize(width, height);
     QPropertyAnimation *animation = new QPropertyAnimation(this, "size");
     connect(animation, &QPropertyAnimation::finished, animation, &QPropertyAnimation::deleteLater);
     animation->setDuration(500);
     animation->setStartValue(QSize(this->width(), this->height()));
     animation->setEndValue(QSize(width, height));
     animation->start();
+}
+
+void FramelessWindow::setStatus(const QString &statusName, int progress, int maxProgress) {
+    // showMessage(const QString & message, int timeout = 0)
+    if (statusName == "") {
+        clearStatus();
+    } else {
+        _statusProgressBar->setVisible(true);
+        statusBar()->showMessage(statusName);
+        _statusProgressBar->setValue(progress);
+        _statusProgressBar->setMaximum(maxProgress);
+    }
+}
+
+void FramelessWindow::clearStatus() {
+    statusBar()->clearMessage();
+    _statusProgressBar->setVisible(false);
 }
 
 bool FramelessWindow::eventFilter(QObject *o, QEvent*e) {

@@ -17,6 +17,15 @@
 //Q_DECLARE_LOGGING_CATEGORY(logWarning)
 //Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
+enum changedSettings {
+    myProfile = 0x01,
+    language = 0x02,
+    theme = 0x04,
+    saveImages = 0x08,
+    visibleHiddenGame = 0x10,
+    profileInfo = 0x20
+};
+
 class Settings {
 public:
     static const QString c_organizationName;

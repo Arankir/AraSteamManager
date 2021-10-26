@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFavorites_t {
-    QByteArrayData data[13];
-    char stringdata0[156];
+    QByteArrayData data[15];
+    char stringdata0[190];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,17 +41,19 @@ QT_MOC_LITERAL(5, 51, 8), // "isLoaded"
 QT_MOC_LITERAL(6, 60, 10), // "friendLoad"
 QT_MOC_LITERAL(7, 71, 8), // "SProfile"
 QT_MOC_LITERAL(8, 80, 14), // "updateSettings"
-QT_MOC_LITERAL(9, 95, 11), // "updateIcons"
-QT_MOC_LITERAL(10, 107, 11), // "retranslate"
-QT_MOC_LITERAL(11, 119, 14), // "initComponents"
-QT_MOC_LITERAL(12, 134, 21) // "on_pushButton_clicked"
+QT_MOC_LITERAL(9, 95, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(10, 119, 9), // "aSettings"
+QT_MOC_LITERAL(11, 129, 11), // "updateIcons"
+QT_MOC_LITERAL(12, 141, 11), // "retranslate"
+QT_MOC_LITERAL(13, 153, 14), // "initComponents"
+QT_MOC_LITERAL(14, 168, 21) // "on_pushButton_clicked"
 
     },
     "FormFavorites\0s_return_to_profile\0\0"
     "QWidget*\0isInit\0isLoaded\0friendLoad\0"
-    "SProfile\0updateSettings\0updateIcons\0"
-    "retranslate\0initComponents\0"
-    "on_pushButton_clicked"
+    "SProfile\0updateSettings\0QFlags<changedSettings>\0"
+    "aSettings\0updateIcons\0retranslate\0"
+    "initComponents\0on_pushButton_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,11 +77,11 @@ static const uint qt_meta_data_FormFavorites[] = {
        4,    0,   62,    2, 0x0a /* Public */,
        5,    0,   63,    2, 0x0a /* Public */,
        6,    1,   64,    2, 0x0a /* Public */,
-       8,    0,   67,    2, 0x0a /* Public */,
-       9,    0,   68,    2, 0x0a /* Public */,
-      10,    0,   69,    2, 0x0a /* Public */,
-      11,    0,   70,    2, 0x08 /* Private */,
-      12,    0,   71,    2, 0x08 /* Private */,
+       8,    1,   67,    2, 0x0a /* Public */,
+      11,    0,   70,    2, 0x0a /* Public */,
+      12,    0,   71,    2, 0x0a /* Public */,
+      13,    0,   72,    2, 0x08 /* Private */,
+      14,    0,   73,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -88,7 +90,7 @@ static const uint qt_meta_data_FormFavorites[] = {
     QMetaType::Bool,
     QMetaType::Bool,
     QMetaType::Void, 0x80000000 | 7,    2,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -109,7 +111,7 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 2: { bool _r = _t->isLoaded();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 3: _t->friendLoad((*reinterpret_cast< SProfile(*)>(_a[1]))); break;
-        case 4: _t->updateSettings(); break;
+        case 4: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         case 5: _t->updateIcons(); break;
         case 6: _t->retranslate(); break;
         case 7: _t->initComponents(); break;

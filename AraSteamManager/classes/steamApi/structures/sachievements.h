@@ -2,8 +2,7 @@
 #define SACHIEVEMENTS_H
 
 #include "../sapi.h"
-
-#define SAchievements QList<SAchievement>
+#include "./sgames.h"
 
 class SAchievementSchema : public Sapi {
     Q_OBJECT
@@ -25,31 +24,31 @@ public:
              //qDebug()<<"SAchievementGlobal equality"<<_apiName;
              return *this;
          }
-     bool  operator<(const SAchievementSchema &global) const {return _apiName < global._apiName;};
-     bool  operator>(const SAchievementSchema &global) const {return _apiName > global._apiName;};
+     bool  operator<(const SAchievementSchema &global) const {return _apiName < global._apiName;}
+     bool  operator>(const SAchievementSchema &global) const {return _apiName > global._apiName;}
      bool  operator==(const SAchievementSchema &global) const;
      bool  operator!=(const SAchievementSchema &global) const;
      
      QJsonObject toJson() const;
      virtual QString className() const {return "SAchievementSchema";}
-     static QList<SAchievementSchema> load(const QString &appid, std::function<void (QList<SAchievementSchema>)> aCallback = nullptr);
+     static QList<SAchievementSchema> load(const GameID &appid, std::function<void (QList<SAchievementSchema>)> aCallback = nullptr);
 
-     QString   apiName()       const {return _apiName;}
-     int       defaultValue()  const {return _defaultValue;}
-     QString   displayName()   const {return _displayName;}
-     int       hidden()        const {return _hidden;}
-     QString   description()   const {return _description;}
-     QString   icon()          const {return _icon;}
-     QString   iconGray()      const {return _iconGray;}
+     AchievementID  apiName()       const {return _apiName;}
+     int            defaultValue()  const {return _defaultValue;}
+     QString        displayName()   const {return _displayName;}
+     int            hidden()        const {return _hidden;}
+     QString        description()   const {return _description;}
+     QString        icon()          const {return _icon;}
+     QString        iconGray()      const {return _iconGray;}
 
 private:
-    QString   _apiName;
-    int       _defaultValue;
-    QString   _displayName;
-    int       _hidden;
-    QString   _description;
-    QString   _icon;
-    QString   _iconGray;
+    AchievementID   _apiName;
+    int             _defaultValue;
+    QString         _displayName;
+    int             _hidden;
+    QString         _description;
+    QString         _icon;
+    QString         _iconGray;
 
 };
 class SAchievementPercentage : public Sapi {
@@ -68,21 +67,21 @@ public:
             //qDebug()<<"SAchievementPercentage equality"<<_apiName;
             return *this;
         }
-    bool  operator<(const SAchievementPercentage &achievement) const {return _apiName < achievement._apiName;};
-    bool  operator>(const SAchievementPercentage &achievement) const {return _apiName > achievement._apiName;};
+    bool  operator<(const SAchievementPercentage &achievement) const {return _apiName < achievement._apiName;}
+    bool  operator>(const SAchievementPercentage &achievement) const {return _apiName > achievement._apiName;}
     bool  operator==(const SAchievementPercentage &achievement) const;
     bool  operator!=(const SAchievementPercentage &achievement) const;
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SAchievementPercentage";}
-    static QList<SAchievementPercentage> load(const QString &appid, std::function<void (QList<SAchievementPercentage>)> aCallback = nullptr);
+    static QList<SAchievementPercentage> load(const GameID &appid, std::function<void (QList<SAchievementPercentage>)> aCallback = nullptr);
 
-    QString apiName() const {return _apiName;}
+    AchievementID apiName() const {return _apiName;}
     double percent() const {return _percent;}
 
 private:
-    QString   _apiName;
-    double    _percent;
+    AchievementID   _apiName;
+    double          _percent;
 
 };
 class SAchievementPlayer : public Sapi {
@@ -102,14 +101,14 @@ public:
             //qDebug()<<"SAchievementPlayer equality"<<_apiName;
             return *this;
         }
-    bool  operator<(const SAchievementPlayer &achievement) const {return _apiName < achievement._apiName;};
-    bool  operator>(const SAchievementPlayer &achievement) const {return _apiName > achievement._apiName;};
+    bool  operator<(const SAchievementPlayer &achievement) const {return _apiName < achievement._apiName;}
+    bool  operator>(const SAchievementPlayer &achievement) const {return _apiName > achievement._apiName;}
     bool  operator==(const SAchievementPlayer &achievement) const;
     bool  operator!=(const SAchievementPlayer &achievement) const;
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SAchievementPlayer";}
-    static QList<SAchievementPlayer> load(const QString &appid, const QString &id, std::function<void (QList<SAchievementPlayer>)> aCallback = nullptr);
+    static QList<SAchievementPlayer> load(const GameID &appid, const ProfileID &id, std::function<void (QList<SAchievementPlayer>)> aCallback = nullptr);
     static int countAchieved(const QList<SAchievementPlayer> &achievements);
 
     QString apiName() const {return _apiName;}
@@ -122,6 +121,10 @@ private:
     QDateTime _unlockTime;
 
 };
+
+using SAchievementsSchema = QList<SAchievementSchema>;
+using SAchievementsPercentage = QList<SAchievementPercentage>;
+using SAchievementsPlayer = QList<SAchievementPlayer>;
 
 class SAchievement : public Sapi {
     Q_OBJECT
@@ -175,6 +178,8 @@ private:
     QPixmap _pixmapIconGray;
 };
 
-SAchievements UniteAchievement(const QList<SAchievementSchema> &global, const QList<SAchievementPercentage> &percent, const QList<SAchievementPlayer> &player);
+using SAchievements = QList<SAchievement>;
+
+//QList<SAchievement> UniteAchievement(const QList<SAchievementSchema> &global, const QList<SAchievementPercentage> &percent, const QList<SAchievementPlayer> &player);
 
 #endif // SACHIEVEMENTS_H

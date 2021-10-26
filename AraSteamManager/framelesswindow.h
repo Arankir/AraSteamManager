@@ -12,6 +12,8 @@
 #include <QtGui/QMouseEvent>
 #include <QDebug>
 #include <QPropertyAnimation>
+#include <QLabel>
+#include <QProgressBar>
 #include "classes/common/settings.h"
 
 namespace Ui {
@@ -46,7 +48,9 @@ public:
     ~FramelessWindow();
     void setWidget(QWidget *target);
     void animateResize(int width, int height);
+    void setStatus(const QString &statusName = "", int progress = 0, int maxProgress = 0);
 
+    void clearStatus();
 protected:
     bool eventFilter(QObject *o, QEvent *e) override;
     void mouseHover(QHoverEvent*);
@@ -73,6 +77,9 @@ private:
 
     QPoint _dragPos;
     bool _dragStart = false;
+
+    QLabel *_statusLabel;
+    QProgressBar *_statusProgressBar;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(FramelessWindow::Edges);

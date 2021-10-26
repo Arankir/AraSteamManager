@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormContainerAchievements_t {
     QByteArrayData data[13];
-    char stringdata0[170];
+    char stringdata0[169];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,17 +39,17 @@ QT_MOC_LITERAL(3, 48, 5), // "index"
 QT_MOC_LITERAL(4, 54, 18), // "addFormAchievement"
 QT_MOC_LITERAL(5, 73, 8), // "SProfile"
 QT_MOC_LITERAL(6, 82, 3), // "ids"
-QT_MOC_LITERAL(7, 86, 6), // "SGame&"
-QT_MOC_LITERAL(8, 93, 4), // "game"
-QT_MOC_LITERAL(9, 98, 4), // "show"
-QT_MOC_LITERAL(10, 103, 10), // "closeEvent"
-QT_MOC_LITERAL(11, 114, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(12, 127, 42) // "on_TabWidgetAchievements_tabC..."
+QT_MOC_LITERAL(7, 86, 5), // "SGame"
+QT_MOC_LITERAL(8, 92, 4), // "game"
+QT_MOC_LITERAL(9, 97, 4), // "show"
+QT_MOC_LITERAL(10, 102, 10), // "closeEvent"
+QT_MOC_LITERAL(11, 113, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(12, 126, 42) // "on_TabWidgetAchievements_tabC..."
 
     },
     "FormContainerAchievements\0"
     "s_removeAchievements\0\0index\0"
-    "addFormAchievement\0SProfile\0ids\0SGame&\0"
+    "addFormAchievement\0SProfile\0ids\0SGame\0"
     "game\0show\0closeEvent\0QCloseEvent*\0"
     "on_TabWidgetAchievements_tabCloseRequested"
 };
@@ -96,7 +96,7 @@ void FormContainerAchievements::qt_static_metacall(QObject *_o, QMetaObject::Cal
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->s_removeAchievements((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: _t->addFormAchievement((*reinterpret_cast< SProfile(*)>(_a[1])),(*reinterpret_cast< SGame(*)>(_a[2]))); break;
+        case 1: _t->addFormAchievement((*reinterpret_cast< const SProfile(*)>(_a[1])),(*reinterpret_cast< const SGame(*)>(_a[2]))); break;
         case 2: _t->show(); break;
         case 3: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         case 4: _t->on_TabWidgetAchievements_tabCloseRequested((*reinterpret_cast< int(*)>(_a[1]))); break;

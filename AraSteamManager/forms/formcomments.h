@@ -33,7 +33,7 @@ private slots:
 
     void retranslate() override;
     void updateIcons() override;
-    void updateSettings() override;
+    void updateSettings(QFlags<changedSettings> aSettings) override;
 
 private:
     Ui::FormComments *ui;

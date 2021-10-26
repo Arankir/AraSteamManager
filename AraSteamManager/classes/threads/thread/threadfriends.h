@@ -9,7 +9,7 @@
 #include "classes/network/requestdata.h"
 #include "classes/common/settings.h"
 #include "../threadloading.h"
-#include "forms/subForms/main/formfriends.h"
+#include "forms/main/formfriends.h"
 
 class ThreadFriends : public ThreadLoading {
     Q_OBJECT

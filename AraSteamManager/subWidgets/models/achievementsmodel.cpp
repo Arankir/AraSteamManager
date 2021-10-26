@@ -4,7 +4,7 @@ constexpr QColor c_achievedColor      = QColor (87, 220, 87, 255 * 1);
 constexpr QColor c_notAchievedColor   = QColor (255, 48, 48, 255 * 1);
 constexpr int c_reservedRows = 1;
 
-void AchievementsModel::setAchievements(const QString &aUserId, const QString &aGameId) {
+void AchievementsModel::setAchievements(const ProfileID &aUserId, const GameID &aGameId) {
     _userId = aUserId;
     _gameId = aGameId;
     _achievementsInModel.clear();
@@ -21,7 +21,8 @@ void AchievementsModel::setAchievements(const QString &aUserId, const QString &a
             if (percent.apiName() != global.apiName()) {
                 continue;
             }
-            auto achievement = AchievementInModel{cLoadPixmap(global.icon(), Paths::imagesAchievements(aGameId, global.icon()), QSize(64, 64)),
+            QPixmap pix;
+            auto achievement = AchievementInModel {loadPixmap(pix, global.icon(), Paths::imagesAchievements(QString::number(aGameId), global.icon()), QSize(64, 64)),
                                                     QStringList(),
                                                     global,
                                                     percent,
@@ -35,12 +36,12 @@ void AchievementsModel::setAchievements(const QString &aUserId, const QString &a
                 achievement.comment = (*iterator).comment();
             }
             _achievementsInModel.append(std::move(achievement));
-            emit s_progress(1, ++progress);
+            emit s_progress(tr("Загрузка достижений"), ++progress, globals.count());
             break;
         }
     }
 
-    auto profile = SProfile::load(aUserId, SProfileRequestType::id);
+    auto profile = SProfile::load(aUserId, SProfile::LoadType::id);
     addProfile(profile);
     emit s_finished();
 }
@@ -76,7 +77,7 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
                 return QVariant();
             }
             default: {
-                return _profiles[index.column() - AchievementCount].first;
+                return _profiles[index.column() - AchievementCount].pixmapAvatar();
             }
             }
             break;
@@ -93,7 +94,7 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
                 return QVariant();
             }
             default: {
-                return textToToolTip(_profiles[index.column() - AchievementCount].second.personaName());
+                return textToToolTip(_profiles[index.column() - AchievementCount].personaName());
             }
             }
             break;
@@ -269,7 +270,7 @@ QVariant AchievementsModel::headerData(int section, Qt::Orientation orientation,
         }
         default: {
             if (section - AchievementCount >= 0 && section - AchievementCount < _profiles.count()) {
-                return _profiles[section - AchievementCount].second.personaName();
+                return _profiles[section - AchievementCount].personaName();
             } else {
                 return QVariant();
             }
@@ -332,14 +333,14 @@ SAchievements AchievementsModel::getAchievements() const {
 }
 
 int AchievementsModel::getReachedFromProfile(const int &index) {
-    if (index < 0 || index > _profiles.count()) {
+    if (index < 0 || index > _profiles.count() || _achievementsInModel.count() == 0) {
         return -1;
     }
     int result = 0;
     if (_achievementsInModel[0].profiles[index].achieved() < 0) {
         return -1;
     }
-    for (const auto &achievement: _achievementsInModel) {
+    for (const auto &achievement: qAsConst(_achievementsInModel)) {
         result += achievement.profiles[index].achieved();
     }
     return result;
@@ -351,7 +352,7 @@ int AchievementsModel::getAchievementsCount() {
 
 int AchievementsModel::addProfile(const SProfile &aProfile) {
     beginInsertColumns(QModelIndex(), columnCount(), columnCount());
-    _profiles.append(std::move(QPair<QPixmap, SProfile>(aProfile.pixmapAvatar(), aProfile)));
+    _profiles.append(aProfile);
     auto players = SAchievementPlayer::load(_gameId, aProfile.steamID());
     if (players.count() == _achievementsInModel.count()) {
         for (auto &achievement: _achievementsInModel) {
@@ -372,15 +373,15 @@ int AchievementsModel::addProfile(const SProfile &aProfile) {
 }
 
 SProfile AchievementsModel::getProfile(const int &index) {
-    return _profiles[index].second;
+    return _profiles[index];
 }
 
 void AchievementsModel::removeProfile(const SProfile &aProfile) {
     beginRemoveColumns(QModelIndex(), columnCount() - 1, columnCount() - 1);
     auto iterator = std::find_if(_profiles.begin(),
                                  _profiles.end(),
-                                 [=](const QPair<QPixmap, SProfile> &lProfile) {
-                                    return lProfile.second.steamID() == aProfile.steamID();
+                                 [=](const SProfile &lProfile) {
+                                    return lProfile.steamID() == aProfile.steamID();
                                 });
     if (iterator == _profiles.end()) {
         return;
@@ -420,7 +421,7 @@ void AchievementsModel::updateComments() {
         } else {
             achievement.comment = QStringList();
         }
-        emit s_progress(1, ++progress);
+        emit s_progress(tr("Обновление комментариев"), ++progress, _achievementsInModel.count());
     }
 }
 
@@ -522,4 +523,130 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
     }
     }
     emit dataChanged(index(0, 0), index(rowCount(), columnCount()));
+}
+
+ProxyModelAchievements::ProxyModelAchievements(QObject *aParent): QSortFilterProxyModel(aParent),
+_name(""), _reached(0) {
+
+}
+
+bool ProxyModelAchievements::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
+    QModelIndex indTitle = sourceModel()->index(aSource_row, AchievementTitle, aSource_parent);
+    QModelIndex indDescription = sourceModel()->index(aSource_row, AchievementDescription, aSource_parent);
+    QModelIndex indReached = sourceModel()->index(aSource_row, AchievementReachedMy, aSource_parent);
+    QModelIndex indId = sourceModel()->index(aSource_row, AchievementAppid, aSource_parent);
+
+    AchievementID id = sourceModel()->data(indId, Qt::ItemDataRole::DisplayRole).toString();
+
+    if (_name != "" &&
+        sourceModel()->data(indTitle, Qt::ItemDataRole::DisplayRole).toString().toLower().indexOf(_name) == -1 &&
+        sourceModel()->data(indDescription, Qt::ItemDataRole::DisplayRole).toString().toLower().indexOf(_name) == -1) {
+        return false;
+    }
+    switch (_reached) {
+    case -1: {
+        if (QDateTime::fromString(sourceModel()->data(indReached, Qt::ItemDataRole::DisplayRole).toString(), Settings::dateTimeFormatShort()).isValid()) {
+            return false;
+        }
+        break;
+    }
+    case 0: {
+        break;
+    }
+    case 1: {
+        if (!QDateTime::fromString(sourceModel()->data(indReached, Qt::ItemDataRole::DisplayRole).toString(), Settings::dateTimeFormatShort()).isValid()) {
+            return false;
+        }
+        break;
+    }
+    default: {
+
+    }
+    }
+    if (!_favorite.isEmpty() && _favorite.indexOf(id) == -1) {
+        return false;
+    }
+
+    if (_categories.size() > 0) {
+        return std::any_of(_preCategories.begin(),
+                           _preCategories.end(),
+                           [&](const QString &lAchievement) {
+                                return id == lAchievement;
+                           });
+    } else {
+        return true;
+    }
+}
+
+QVariant ProxyModelAchievements::headerData(int section, Qt::Orientation orientation, int role) const {
+    return sourceModel()->headerData(section, orientation, role);
+}
+
+AchievementsModel *ProxyModelAchievements::sourceModel() const {
+    return static_cast<AchievementsModel*>(QSortFilterProxyModel::sourceModel());
+}
+
+void ProxyModelAchievements::setSourceModel(AchievementsModel *sourceModel) {
+    QSortFilterProxyModel::setSourceModel(sourceModel);
+}
+
+void ProxyModelAchievements::setName(const QString &aNewName) {
+    if(_name != aNewName)
+        _name = aNewName;
+    invalidateFilter();
+}
+
+void ProxyModelAchievements::setReached(int aNewReached) {
+    if(_reached != aNewReached)
+        _reached = aNewReached;
+    invalidateFilter();
+}
+
+void ProxyModelAchievements::setCategories(const CategoriesFilter &aNewCategories) {
+    if(_categories != aNewCategories)
+        _categories = aNewCategories;
+
+    QList<QStringList> pre;
+    for (const auto &oneLineCategories: _categories) {
+        QStringList orList;
+        for (const auto &category: oneLineCategories.second) {
+            orList << category.achievementsApiName();
+        }
+        pre << orList;
+    }
+
+    QStringList result;
+    if (pre.count() > 0) {
+        result = pre.at(0);
+        for (auto &resultAchievement: result) {
+            for (auto &list: pre) {
+                bool isExist = std::any_of(list.begin(),
+                                            list.end(),
+                                            [&](const QString &lAchievementID) {
+                                                return lAchievementID == resultAchievement;
+                                            });
+                if (!isExist) {
+                    result.removeOne(resultAchievement);
+                    break;
+                }
+            }
+        }
+    }
+
+    _preCategories = result;
+
+    invalidateFilter();
+}
+
+void ProxyModelAchievements::setFavorites(const QStringList &aNewFavorites) {
+    if(_favorite != aNewFavorites)
+        _favorite = aNewFavorites;
+    invalidateFilter();
+}
+
+void ProxyModelAchievements::clear() {
+    _name.clear();
+    _reached = 0;
+    _categories.clear();
+    _favorite.clear();
 }

@@ -14,22 +14,30 @@ public:
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SFriend";}
-    static QList<SFriend> load(const QString &aId, std::function<void (QList<SFriend>)> aCallback = nullptr);
+    static QList<SFriend> load(const ProfileID &aId, std::function<void (QList<SFriend>)> aCallback = nullptr);
     SFriend &operator=(const SFriend&);
     bool operator<(const SFriend&) const;
     bool operator>(const SFriend&) const;
     bool operator==(const SFriend&) const;
     bool operator!=(const SFriend&) const;
 
-    QString steamId()       const {return _steamID;}
+    ProfileID steamId()     const {return _steamID;}
     QString relationship()  const {return _relationship;}
     QDateTime friendSince() const {return _friendSince;}
 
 private:
-    const QString _steamID;
-    const QString _relationship;
-    const QDateTime _friendSince;
+    ProfileID _steamID;
+    QString _relationship;
+    QDateTime _friendSince;
 
+};
+
+using SFriends = QList<SFriend>;
+
+struct SFriendProfile {
+    SFriendProfile(const SFriend &aFriend, const SProfile &aProfile): steamFriend(aFriend), steamProfile(aProfile) {};
+    SFriend steamFriend;
+    SProfile steamProfile;
 };
 
 #endif // SFRIENDS_H

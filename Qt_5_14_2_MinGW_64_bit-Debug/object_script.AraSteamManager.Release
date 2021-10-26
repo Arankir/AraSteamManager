@@ -38,6 +38,7 @@ release/main.o
 release/actioncategory.o
 release/multiselectcombobox.o
 release/qcomboboxfriends.o
+release/progressbardelegate.o
 release/qlistwidgetachievement.o
 release/qlistwidgetfriend.o
 release/labellight.o

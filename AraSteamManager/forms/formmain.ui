@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>564</width>
-    <height>544</height>
+    <width>426</width>
+    <height>108</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,6 +31,9 @@
    </property>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <property name="leftMargin">
       <number>9</number>
      </property>
@@ -151,19 +154,6 @@
       </widget>
      </item>
      <item>
-      <widget class="ProgressBarGood" name="FormProgressBar">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QStackedWidget" name="StackedWidgetForms">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -172,7 +162,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="None">
         <property name="sizePolicy">
@@ -207,8 +197,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>544</width>
-              <height>465</height>
+              <width>406</width>
+              <height>68</height>
              </rect>
             </property>
            </widget>
@@ -240,7 +230,14 @@
           <number>0</number>
          </property>
          <item row="0" column="0">
-          <widget class="FormGames" name="StackedFormGames" native="true"/>
+          <widget class="FormGames" name="StackedFormGames" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -377,11 +374,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>ProgressBarGood</class>
-   <extends>QProgressBar</extends>
-   <header>subWidgets/progressBars/progressbargood.h</header>
-  </customwidget>
   <customwidget>
    <class>FormFriends</class>
    <extends>QWidget</extends>

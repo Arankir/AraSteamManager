@@ -8,6 +8,7 @@
 #include "classes/common/comments.h"
 #include "classes/common/generalfunctions.h"
 #include <QSortFilterProxyModel>
+#include "classes/achievements/categoriesgame.h"
 
 enum modelAchievementsColumns {
     AchievementAppid         = 0,
@@ -25,7 +26,7 @@ class AchievementsModel : public QAbstractTableModel {
     Q_OBJECT
 public:
     AchievementsModel(QObject *parent = nullptr): QAbstractTableModel(parent) {};
-    void setAchievements(const QString &userId, const QString &gameId);
+    void setAchievements(const ProfileID &userId, const GameID &gameId);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
@@ -53,7 +54,7 @@ public slots:
 
 signals:
     void s_finished();
-    void s_progress(const int &stage, const int &progress);
+    void s_progress(const QString &status, const int &progress, const int &max);
 
 private:
     struct AchievementInModel {
@@ -73,40 +74,41 @@ private:
         }
     };
 
-    QString _userId;
-    QString _gameId;
+    ProfileID _userId;
+    GameID _gameId;
 
-//    QList<SAchievementSchema> _global;
-//    QList<SAchievementPercentage> _percent;
-//    QList<SAchievementPlayer> _player;
-
-    QList<QPair<QPixmap, SProfile>> _profiles;
+    SProfiles _profiles;
     QList<AchievementInModel> _achievementsInModel;
 };
 
-//class ProxyModelAchievements : public QSortFilterProxyModel {
-//    Q_OBJECT
-//public:
-//    ProxyModelAchievements(QObject* parent = nullptr);
-//    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-//    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-//    AchievementsModel *sourceModel() const;
-//    void setSourceModel(AchievementsModel *sourceModel);
+using CategoriesFilter = QList<QPair<QString, QList<Category>>>;
 
-//public slots:
-//    void setName(const QString &newName);
-//    void setStatus(const QString &newStatus);
-//    void setIsPublic(const int &isPublic);
-//    void setFavorites(const QStringList &newFavorites);
-//    void clear();
+class ProxyModelAchievements : public QSortFilterProxyModel {
+    Q_OBJECT
+public:
+    ProxyModelAchievements(QObject* parent = nullptr);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    AchievementsModel *sourceModel() const;
+    void setSourceModel(AchievementsModel *sourceModel);
 
-//private:
-//    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
+public slots:
+    void setName(const QString &newName);
+    void setReached(int newReached);
+    void setCategories(const CategoriesFilter &newCategories);
+    CategoriesFilter getCategories() const {return _categories;}
+    void setFavorites(const QStringList &newFavorites);
+    void clear();
 
-//    QString _name;
-//    QString _status;
-//    int _public;
-//    QStringList _favorite;
-//};
+private:
+    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
+
+    QStringList _preCategories;
+
+    QString _name;
+    int _reached;
+    CategoriesFilter _categories; //QList<QList<QList<QString>>> = (1&2&...)||(n&n2&...)||m||m2... QList<QList<QString>> = (1&2&...) QList<QString> = 1
+    QStringList _favorite;
+};
 
 #endif // ACHIEVEMENTSMODEL_H

@@ -19,7 +19,7 @@ QJsonObject SGame::toJson() const {
     return obj;
 }
 
-SGames onLoad(QByteArray byteArray) {
+SGames onLoad(const QByteArray &byteArray) {
     SGames list;
     foreach(const auto &game, QJsonDocument::fromJson(byteArray).object().value("response").toObject().value("games").toArray()) {
         list.append(std::move(SGame(game.toObject())));
@@ -27,13 +27,13 @@ SGames onLoad(QByteArray byteArray) {
     return list;
 }
 
-SGames SGame::load(const QString &aId, const int &aFreeGames, const int &aGameInfo, std::function<void(SGames)> aCallback) {
+SGames SGame::load(const ProfileID &aId, const int &aFreeGames, const int &aGameInfo, std::function<void(SGames)> aCallback) {
     return Sapi::load<SGame>(gameUrl(aFreeGames, aGameInfo, aId), onLoad, aCallback);
 }
 
-int SGame::playerCount(const int &aAppId) {
+int SGame::playerCount(const GameID &aAppId) {
     RequestData request;
-    request.get(Sapi::numberPlayersUrl(QString::number(aAppId)), false);
+    request.get(Sapi::numberPlayersUrl(aAppId), false);
     return (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("player_count").toDouble();
 }
 
@@ -51,12 +51,11 @@ SGame &SGame::operator=(const SGame &aGame) {
 }
 
 bool SGame::operator<(const SGame &aGame) const {
-    //    qDebug() << _name.compare(aGame._name, Qt::CaseInsensitive);
-    return (_name < aGame._name);
+    return _name < aGame._name;
 }
 
 bool SGame::operator>(const SGame &aGame) const {
-    return (_name > aGame._name);
+    return _name > aGame._name;
 }
 
 bool SGame::operator==(const SGame &aGame) const {
@@ -83,25 +82,21 @@ bool SGame::operator!=(const SGame &aGame) const {
             _pixmapLogo                     != aGame._pixmapLogo);
 }
 
-QPixmap SGame::cPixmapIcon() const {
-    return cLoadPixmap(Sapi::gameImageUrl(QString::number(_appID), _img_icon_url), Paths::imagesGames(_img_icon_url), QSize(32, 32));
+QPixmap SGame::pixmapIcon() const {
+    return loadPixmap(_pixmapIcon, Sapi::gameImageUrl(_appID, _img_icon_url), Paths::imagesGames(_img_icon_url), QSize(32, 32));
 }
 
-QPixmap SGame::pixmapIcon() {
-    return loadPixmap(_pixmapIcon, Sapi::gameImageUrl(QString::number(_appID), _img_icon_url), Paths::imagesGames(_img_icon_url), QSize(32, 32));
+QPixmap SGame::pixmapLogo() const {
+    return loadPixmap(_pixmapLogo, Sapi::gameImageUrl(_appID, _img_logo_url), Paths::imagesGames(_img_logo_url), QSize(184, 69));
 }
 
-QPixmap SGame::pixmapLogo() {
-    return loadPixmap(_pixmapLogo, Sapi::gameImageUrl(QString::number(_appID), _img_logo_url), Paths::imagesGames(_img_logo_url), QSize(184, 69));
-}
-
-void SGame::fromJson(const QJsonValue &aValue) {
-    _appID                          = aValue.toObject().value("appid").toInt();
-    _name                           = aValue.toObject().value("name").toString();
-    _playtime_2weeks                = aValue.toObject().value("playtime_2weeks").toInt();
-    _playtime_forever               = aValue.toObject().value("playtime_forever").toInt();
-    _has_community_visible_stats    = aValue.toObject().value("has_community_visible_stats").toBool();
-    _img_icon_url                   = aValue.toObject().value("img_icon_url").toString();
-    _img_logo_url                   = aValue.toObject().value("img_logo_url").toString();
+void SGame::fromJson(const QJsonObject &aValue) {
+    _appID                          = aValue.value("appid").toInt();
+    _name                           = aValue.value("name").toString();
+    _playtime_2weeks                = aValue.value("playtime_2weeks").toInt();
+    _playtime_forever               = aValue.value("playtime_forever").toInt();
+    _has_community_visible_stats    = aValue.value("has_community_visible_stats").toBool();
+    _img_icon_url                   = aValue.value("img_icon_url").toString();
+    _img_logo_url                   = aValue.value("img_logo_url").toString();
 }
 #define SGameEnd }

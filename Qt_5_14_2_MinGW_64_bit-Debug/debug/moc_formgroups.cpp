@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGroups_t {
-    QByteArrayData data[20];
-    char stringdata0[207];
+    QByteArrayData data[22];
+    char stringdata0[241];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,7 +51,9 @@ QT_MOC_LITERAL(15, 139, 14), // "cancel_clicked"
 QT_MOC_LITERAL(16, 154, 13), // "apply_clicked"
 QT_MOC_LITERAL(17, 168, 11), // "retranslate"
 QT_MOC_LITERAL(18, 180, 11), // "updateIcons"
-QT_MOC_LITERAL(19, 192, 14) // "updateSettings"
+QT_MOC_LITERAL(19, 192, 14), // "updateSettings"
+QT_MOC_LITERAL(20, 207, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(21, 231, 9) // "aSettings"
 
     },
     "FormGroups\0s_updateGroups\0\0setProfileGame\0"
@@ -59,7 +61,8 @@ QT_MOC_LITERAL(19, 192, 14) // "updateSettings"
     "changeTitle\0aIndex\0cancel\0apply\0"
     "add_clicked\0changeTitle_clicked\0"
     "cancel_clicked\0apply_clicked\0retranslate\0"
-    "updateIcons\0updateSettings"
+    "updateIcons\0updateSettings\0"
+    "QFlags<changedSettings>\0aSettings"
 };
 #undef QT_MOC_LITERAL
 
@@ -94,7 +97,7 @@ static const uint qt_meta_data_FormGroups[] = {
       16,    0,  112,    2, 0x08 /* Private */,
       17,    0,  113,    2, 0x08 /* Private */,
       18,    0,  114,    2, 0x08 /* Private */,
-      19,    0,  115,    2, 0x08 /* Private */,
+      19,    1,  115,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -114,7 +117,7 @@ static const uint qt_meta_data_FormGroups[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 20,   21,
 
        0        // eod
 };
@@ -140,7 +143,7 @@ void FormGroups::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 12: _t->apply_clicked(); break;
         case 13: _t->retranslate(); break;
         case 14: _t->updateIcons(); break;
-        case 15: _t->updateSettings(); break;
+        case 15: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

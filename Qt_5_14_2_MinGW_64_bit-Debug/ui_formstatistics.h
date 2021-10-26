@@ -19,21 +19,28 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "QtCharts/QtCharts"
+#include "subWidgets/labels/labelvalue.h"
 
 QT_BEGIN_NAMESPACE
 
 class Ui_FormStatistics
 {
 public:
-    QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_3;
     QHBoxLayout *horizontalLayout_2;
     QLabel *LabelSummColumn;
-    QLabel *LabelSummColumnValue;
+    LabelValue *LabelSummColumnValue;
     QSpacerItem *horizontalSpacer;
     QLabel *label;
+    QHBoxLayout *horizontalLayout_4;
     QLabel *LabelAveragePercentValue;
+    LabelValue *labelAverageAllGames;
+    QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_2;
+    LabelValue *labelAverageStartedGames;
+    QSpacerItem *horizontalSpacer_3;
     QHBoxLayout *horizontalLayout;
     QChartView *ChartViewPercentages;
     QTableView *TableViewGames;
@@ -46,9 +53,7 @@ public:
         if (FormStatistics->objectName().isEmpty())
             FormStatistics->setObjectName(QString::fromUtf8("FormStatistics"));
         FormStatistics->resize(828, 734);
-        verticalLayout_2 = new QVBoxLayout(FormStatistics);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout = new QVBoxLayout();
+        verticalLayout = new QVBoxLayout(FormStatistics);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
@@ -59,7 +64,7 @@ public:
 
         horizontalLayout_2->addWidget(LabelSummColumn);
 
-        LabelSummColumnValue = new QLabel(FormStatistics);
+        LabelSummColumnValue = new LabelValue(FormStatistics);
         LabelSummColumnValue->setObjectName(QString::fromUtf8("LabelSummColumnValue"));
         LabelSummColumnValue->setText(QString::fromUtf8("0"));
 
@@ -88,14 +93,44 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_3);
 
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         LabelAveragePercentValue = new QLabel(FormStatistics);
         LabelAveragePercentValue->setObjectName(QString::fromUtf8("LabelAveragePercentValue"));
-        LabelAveragePercentValue->setText(QString::fromUtf8("0"));
+        LabelAveragePercentValue->setText(QString::fromUtf8("\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202 \320\277\320\276 \320\262\321\201\320\265\320\274 \320\270\320\263\321\200\320\260\320\274"));
 
-        verticalLayout->addWidget(LabelAveragePercentValue);
+        horizontalLayout_4->addWidget(LabelAveragePercentValue);
+
+        labelAverageAllGames = new LabelValue(FormStatistics);
+        labelAverageAllGames->setObjectName(QString::fromUtf8("labelAverageAllGames"));
+
+        horizontalLayout_4->addWidget(labelAverageAllGames);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer_2);
 
 
-        verticalLayout_2->addLayout(verticalLayout);
+        verticalLayout->addLayout(horizontalLayout_4);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        label_2 = new QLabel(FormStatistics);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        horizontalLayout_5->addWidget(label_2);
+
+        labelAverageStartedGames = new LabelValue(FormStatistics);
+        labelAverageStartedGames->setObjectName(QString::fromUtf8("labelAverageStartedGames"));
+
+        horizontalLayout_5->addWidget(labelAverageStartedGames);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_3);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -117,22 +152,22 @@ public:
         horizontalLayout->addWidget(TableViewGames);
 
 
-        verticalLayout_2->addLayout(horizontalLayout);
+        verticalLayout->addLayout(horizontalLayout);
 
         ChartsViewTimes = new QChartView(FormStatistics);
         ChartsViewTimes->setObjectName(QString::fromUtf8("ChartsViewTimes"));
 
-        verticalLayout_2->addWidget(ChartsViewTimes);
+        verticalLayout->addWidget(ChartsViewTimes);
 
         ChartsViewMonths = new QChartView(FormStatistics);
         ChartsViewMonths->setObjectName(QString::fromUtf8("ChartsViewMonths"));
 
-        verticalLayout_2->addWidget(ChartsViewMonths);
+        verticalLayout->addWidget(ChartsViewMonths);
 
         ChartsViewYears = new QChartView(FormStatistics);
         ChartsViewYears->setObjectName(QString::fromUtf8("ChartsViewYears"));
 
-        verticalLayout_2->addWidget(ChartsViewYears);
+        verticalLayout->addWidget(ChartsViewYears);
 
 
         retranslateUi(FormStatistics);
@@ -148,6 +183,9 @@ public:
         label->setToolTip(QCoreApplication::translate("FormStatistics", "<html><head/><body><p>\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260 \320\262\321\213\320\262\320\276\320\264\320\270\321\202\321\201\321\217 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\275\320\260 \320\260\320\272\320\272\320\260\321\203\320\275\321\202\320\265 \321\203 \320\272\320\276\321\202\320\276\321\200\321\213\321\205 \320\265\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217.<br/>\320\225\321\201\320\273\320\270 \321\201\321\203\320\274\320\274\320\260\321\200\320\275\320\276\320\265 \320\272\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\275\320\265 \321\201\320\276\320\262\320\277\320\260\320\264\320\260\320\265\321\202 \321\201 \320\270\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\320\265\320\271 \321\201\321\202\320\270\320\274\320\260, \320\267\320\275\320\260\321"
                         "\207\320\270\321\202 \321\207\320\260\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\277\320\276\320\273\321\203\321\207\320\265\320\275\320\260 \321\201 \320\270\321\201\320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\320\275\320\270\320\265\320\274 \321\201\320\265\320\274\320\265\320\271\320\275\320\276\320\263\320\276 \320\264\320\276\321\201\321\202\321\203\320\277\320\260</span></p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
+        labelAverageAllGames->setText(QCoreApplication::translate("FormStatistics", "0", nullptr));
+        label_2->setText(QCoreApplication::translate("FormStatistics", "\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202 \320\277\320\276 \320\275\320\260\321\207\320\260\321\202\321\213\320\274 \320\270\320\263\321\200\320\260\320\274", nullptr));
+        labelAverageStartedGames->setText(QCoreApplication::translate("FormStatistics", "0", nullptr));
     } // retranslateUi
 
 };

@@ -89,7 +89,7 @@ void FreezeTableWidget::initFreezeTable() {
 
     frozenTableView->setModel(filter);
 //    frozenTableView->sortByColumn(0, Qt::SortOrder::DescendingOrder);
-    frozenTableView->setSelectionModel(selectionModel());
+//    frozenTableView->setSelectionModel(selectionModel());
     frozenTableView->setFocusPolicy(Qt::NoFocus);
 
     frozenTableView->horizontalHeader()->hide();

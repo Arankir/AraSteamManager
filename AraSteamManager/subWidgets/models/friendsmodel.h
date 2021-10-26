@@ -21,20 +21,25 @@ enum modelFriendsColumns {
 class FriendsModel : public QAbstractTableModel {
     Q_OBJECT
 public:
-    FriendsModel(const QList<QPair<SFriend, SProfile>> &friends, QObject *parent = nullptr): QAbstractTableModel(parent), _friends(friends) {}
+    FriendsModel(QObject *parent = nullptr): QAbstractTableModel(parent) {}
+    void setFriends(const QList<SFriend> &aFriends);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     QString friendId(const QModelIndex &index) const;
     static QString isPublicTitle();
-    QPair<SFriend, SProfile> getFriend(const int &row) const;
+    SFriendProfile getFriend(const int &row) const;
 
 public slots:
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
+signals:
+    void s_finished();
+    void s_progress(const QString &status, const int &progress, const int &max);
+
 private:
-    QList<QPair<SFriend, SProfile>> _friends;
+    QList<SFriendProfile> _friends;
 
 };
 

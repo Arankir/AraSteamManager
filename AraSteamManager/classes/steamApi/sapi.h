@@ -5,7 +5,14 @@
 #include "classes/common/settings.h"
 
 QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize);
-QPixmap cLoadPixmap(const QString &aUrl, const QString &aSavePath, const QSize &aSize);
+
+typedef QString ProfileID;
+typedef QStringList ProfileIDs;
+typedef QString AchievementID;
+typedef int GameID;
+//QString gameIdToString(GameID gameID) {
+//    return QString::number(gameID);
+//}
 
 class Sapi : public QObject {
     Q_OBJECT
@@ -26,21 +33,21 @@ public:
 signals:
 
 protected:
-    static QString gameImageUrl(const QString &game, const QString &img_id);
+    static QString gameImageUrl(const GameID &aAppId, const QString &img_id);
 
-    static QUrl achievementsSchemaUrl(const QString &appId);
-    static QUrl achievementsPlayerUrl(const QString &appId, const QString &steamId);
-    static QUrl achievementsPercentUrl(const QString &appId);
+    static QUrl achievementsSchemaUrl(const GameID &appId);
+    static QUrl achievementsPlayerUrl(const GameID &appId, const ProfileID &steamId);
+    static QUrl achievementsPercentUrl(const GameID &appId);
     static QUrl bansUrl(const QString &steamIds);
-    static QUrl friendsUrl(const QString &steamId);
-    static QUrl profileUrl(const QString &steamId);
-    static QUrl profileUrl(const QStringList &steamIds);
-    static QUrl profilefromVanityUrl(const QString &steamId);
-    static QUrl gameUrl(const int &freeGames, const int &gameInfo, const QString &steamId);
-    static QUrl numberPlayersUrl(const QString &appId);
-    static QUrl lvlUrl(const QString &steamId);
+    static QUrl friendsUrl(const ProfileID &steamId);
+    static QUrl profileUrl(const ProfileID &steamId);
+    static QUrl profileUrl(const ProfileIDs &steamIds);
+    static QUrl profilefromVanityUrl(const ProfileID &steamId);
+    static QUrl gameUrl(const int &freeGames, const int &gameInfo, const ProfileID &steamId);
+    static QUrl numberPlayersUrl(const GameID &appId);
+    static QUrl lvlUrl(const ProfileID &steamId);
     template <typename T>
-    static QList<T> load(const QUrl &url, std::function<QList<T>(QByteArray)> onLoad, std::function<void(QList<T>)> callback = nullptr) {
+    static QList<T> load(const QUrl &url, std::function<QList<T>(const QByteArray&)> onLoad, std::function<void(QList<T>)> callback = nullptr) {
         RequestData *request = new RequestData();
         request->get(url, callback != nullptr);
 

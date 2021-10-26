@@ -9,7 +9,7 @@ HiddenGames &HiddenGames::addGame(const SGame &aGame, const bool &aRemoveIfExist
     auto iterator = std::find_if(_games.begin(),
                                  _games.end(),
                                  [=](HiddenGame game) {
-                                    return game.id() == aGame.sAppId();
+                                    return game.id() == aGame.appId();
                                  });
     if (iterator != _games.end()) {
         if (aRemoveIfExist) {
@@ -26,7 +26,7 @@ HiddenGames &HiddenGames::removeGame(const SGame &aGame, const bool &aAddIfExist
     auto iterator = std::remove_if(_games.begin(),
                                    _games.end(),
                                    [=](HiddenGame game) {
-                                        return game.id() == aGame.sAppId();
+                                        return game.id() == aGame.appId();
                                    });
     if (iterator != _games.end()) {
         _games.erase(iterator, _games.end());
@@ -69,7 +69,11 @@ QJsonObject HiddenGames::toJson() {
     return object;
 }
 
-HiddenGame::HiddenGame(const SGame &aGame): _id(aGame.sAppId()), _name(aGame.name()), _iconUrl(aGame.imgIconUrl()) {
+HiddenGame::HiddenGame(const SGame &aGame): _id(aGame.appId()), _name(aGame.name()), _iconUrl(aGame.imgIconUrl()) {
+
+}
+
+HiddenGame::HiddenGame(const HiddenGame &aGame): _id(aGame._id), _name(aGame._name), _iconUrl(aGame._iconUrl) {
 
 }
 
@@ -78,9 +82,16 @@ HiddenGame::HiddenGame(const QJsonObject &aGame) {
 }
 
 HiddenGame &HiddenGame::fromJson(const QJsonObject &aObject) {
-    _id         = aObject.value("id").toString();
+    _id         = aObject.value("id").toInt();
     _name       = aObject.value("name").toString();
     _iconUrl    = aObject.value("icon").toString();
+    return *this;
+}
+
+HiddenGame &HiddenGame::operator=(const HiddenGame &object) {
+    _id = object._id;
+    _name = object._name;
+    _iconUrl = object._iconUrl;
     return *this;
 }
 

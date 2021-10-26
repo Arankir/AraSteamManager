@@ -1,8 +1,10 @@
 #include "sfriends.h"
 
 #define SFriendStart {
-SFriend &SFriend::operator=(const SFriend &) {
-//TODO почему здесь пусто? посмотреть почему оставил пустым
+SFriend &SFriend::operator=(const SFriend &aFriend) {
+    _steamID = aFriend._steamID;
+    _relationship = aFriend._relationship;
+    _friendSince = aFriend._friendSince;
     return *this;
 }
 
@@ -43,7 +45,7 @@ QJsonObject SFriend::toJson() const {
     return obj;
 }
 
-QList<SFriend> SFriend::load(const QString &aId, std::function<void (QList<SFriend>)> aCallback) {
+SFriends SFriend::load(const ProfileID &aId, std::function<void (SFriends)> aCallback) {
     return Sapi::load<SFriend>(friendsUrl(aId), onLoadFriend, aCallback);
 }
 #define SFriendEnd }

@@ -104,16 +104,20 @@ void ComboBoxFriends::onAllFriends(int aState) {
 }
 
 void ComboBoxFriends::itemClicked(int aIndex) {
-    if((aIndex != c_searchIndex) && (aIndex != c_allFriendsIndex)) {
-        //Обработка друга (добавить колонку, убрать из этого списка, поместить в лист в выбранными друзьями)
-        auto steamFriend = dynamic_cast<QListWidgetFriend*>(mListWidget->item(aIndex));
-        if (steamFriend) {
-            emit s_friendClicked(*(steamFriend->_steamFriend));
-            delete mListWidget->item(aIndex);
+    static bool isClicked = false;
+    if (!isClicked) {
+        isClicked = true;
+        if((aIndex != c_searchIndex) && (aIndex != c_allFriendsIndex)) {
+            auto steamFriend = dynamic_cast<QListWidgetFriend*>(mListWidget->item(aIndex));
+            if (steamFriend) {
+                QComboBox::setCurrentIndex(0);
+                QComboBox::setCurrentText(tr("Добавить друга"));
+                emit s_friendClicked(*(steamFriend->_steamFriend));
+                delete mListWidget->item(aIndex);
+            }
         }
+        isClicked = false;
     }
-    QComboBox::setCurrentIndex(0);
-    QComboBox::setCurrentText(tr("Добавить друга"));
 }
 
 void ComboBoxFriends::clear() {

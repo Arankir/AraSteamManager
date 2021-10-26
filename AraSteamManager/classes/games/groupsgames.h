@@ -16,14 +16,14 @@ public:
 
     QString title()          const {return _title;}
     QString profileId()      const {return _profileId;}
-    QList<QString> games()   const {return _games;}
+    QList<GameID> games()    const {return _games;}
 
 private:
     GroupGames &fromJson(const QJsonObject &object);
 
     QString _title;
     QString _profileId;
-    QList<QString> _games;
+    QList<GameID> _games;
 };
 
 class GroupsGames {

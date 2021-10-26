@@ -27,7 +27,6 @@
 #include "forms/subForms/achievements/formcategoriestree.h"
 #include "forms/subForms/achievements/formfriendscompare.h"
 #include "forms/subForms/achievements/widgets/formreachedfilter.h"
-#include "subWidgets/progressBars/progressbargood.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -62,7 +61,6 @@ public:
     QWidget *tabCompare;
     QHBoxLayout *horizontalLayout_4;
     FormFriendsCompare *FriendsCompare;
-    ProgressBarGood *ProgressBarLoad;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -235,12 +233,6 @@ public:
 
         verticalLayout->addWidget(splitter);
 
-        ProgressBarLoad = new ProgressBarGood(FormAchievements);
-        ProgressBarLoad->setObjectName(QString::fromUtf8("ProgressBarLoad"));
-        ProgressBarLoad->setValue(0);
-
-        verticalLayout->addWidget(ProgressBarLoad);
-
 
         retranslateUi(FormAchievements);
 
@@ -270,7 +262,6 @@ public:
         TabWidget->setTabText(TabWidget->indexOf(tabStandart), QCoreApplication::translate("FormAchievements", " \320\241\320\262\320\276\320\270 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217  ", nullptr));
         TabWidget->setTabText(TabWidget->indexOf(tabEditCategory), QCoreApplication::translate("FormAchievements", "  \320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217\320\274\320\270  ", nullptr));
         TabWidget->setTabText(TabWidget->indexOf(tabCompare), QCoreApplication::translate("FormAchievements", "  \320\241\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\265 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270 ", nullptr));
-        ProgressBarLoad->setFormat(QCoreApplication::translate("FormAchievements", "%v/%m", nullptr));
     } // retranslateUi
 
 };

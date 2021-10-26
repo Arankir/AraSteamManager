@@ -38,6 +38,7 @@ debug/main.o
 debug/actioncategory.o
 debug/multiselectcombobox.o
 debug/qcomboboxfriends.o
+debug/progressbardelegate.o
 debug/qlistwidgetachievement.o
 debug/qlistwidgetfriend.o
 debug/labellight.o

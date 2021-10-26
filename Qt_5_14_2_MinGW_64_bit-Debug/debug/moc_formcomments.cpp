@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormComments_t {
-    QByteArrayData data[9];
-    char stringdata0[122];
+    QByteArrayData data[11];
+    char stringdata0[156];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,12 +40,15 @@ QT_MOC_LITERAL(4, 36, 23), // "on_ButtonCancel_clicked"
 QT_MOC_LITERAL(5, 60, 22), // "on_ButtonApply_clicked"
 QT_MOC_LITERAL(6, 83, 11), // "retranslate"
 QT_MOC_LITERAL(7, 95, 11), // "updateIcons"
-QT_MOC_LITERAL(8, 107, 14) // "updateSettings"
+QT_MOC_LITERAL(8, 107, 14), // "updateSettings"
+QT_MOC_LITERAL(9, 122, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(10, 146, 9) // "aSettings"
 
     },
     "FormComments\0s_updateComments\0\0init\0"
     "on_ButtonCancel_clicked\0on_ButtonApply_clicked\0"
-    "retranslate\0updateIcons\0updateSettings"
+    "retranslate\0updateIcons\0updateSettings\0"
+    "QFlags<changedSettings>\0aSettings"
 };
 #undef QT_MOC_LITERAL
 
@@ -71,7 +74,7 @@ static const uint qt_meta_data_FormComments[] = {
        5,    0,   52,    2, 0x08 /* Private */,
        6,    0,   53,    2, 0x08 /* Private */,
        7,    0,   54,    2, 0x08 /* Private */,
-       8,    0,   55,    2, 0x08 /* Private */,
+       8,    1,   55,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -82,7 +85,7 @@ static const uint qt_meta_data_FormComments[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 9,   10,
 
        0        // eod
 };
@@ -99,7 +102,7 @@ void FormComments::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 3: _t->on_ButtonApply_clicked(); break;
         case 4: _t->retranslate(); break;
         case 5: _t->updateIcons(); break;
-        case 6: _t->updateSettings(); break;
+        case 6: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -112,7 +115,6 @@ void FormComments::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             }
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject FormComments::staticMetaObject = { {

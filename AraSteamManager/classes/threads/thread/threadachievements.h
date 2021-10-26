@@ -8,7 +8,7 @@
 #include "classes/network/requestdata.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "../threadloading.h"
-#include "forms/subForms/achievements/formachievements.h"
+#include "forms/achievements/formachievements.h"
 
 class ThreadAchievements : public ThreadLoading {
     Q_OBJECT

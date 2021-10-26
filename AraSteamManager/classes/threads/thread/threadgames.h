@@ -10,7 +10,7 @@
 #include "classes/network/requestdata.h"
 #include "classes/common/settings.h"
 #include "../threadloading.h"
-#include "forms/subForms/main/formgames.h"
+#include "forms/main/formgames.h"
 
 class ThreadGames : public ThreadLoading {
     Q_OBJECT

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network charts
+QT       += core gui network charts concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -48,23 +48,24 @@ SOURCES += \
     forms/formcontainerachievements.cpp \
     forms/formgroups.cpp \
     forms/formmain.cpp \
-    forms/subForms/achievements/formachievements.cpp \
-    forms/subForms/achievements/formcategoriesedit.cpp \
-    forms/subForms/achievements/formcategoriestree.cpp \
-    forms/subForms/achievements/formfriendscompare.cpp \
-    forms/subForms/achievements/widgets/formfrienditemcompare.cpp \
-    forms/subForms/achievements/widgets/formreachedfilter.cpp \
-    forms/subForms/main/formfavorites.cpp \
-    forms/subForms/main/formfriends.cpp \
-    forms/subForms/main/formgames.cpp \
-    forms/subForms/main/formprofile.cpp \
-    forms/subForms/main/formsettings.cpp \
-    forms/subForms/main/formstatistics.cpp \
+    forms/achievements/formachievements.cpp \
+    forms/achievements/formcategoriesedit.cpp \
+    forms/achievements/formcategoriestree.cpp \
+    forms/achievements/formfriendscompare.cpp \
+    forms/achievements/widgets/formfrienditemcompare.cpp \
+    forms/achievements/widgets/formreachedfilter.cpp \
+    forms/main/formfavorites.cpp \
+    forms/main/formfriends.cpp \
+    forms/main/formgames.cpp \
+    forms/main/formprofile.cpp \
+    forms/main/formsettings.cpp \
+    forms/main/formstatistics.cpp \
     framelesswindow.cpp \
         main.cpp \
     subWidgets/actions/actioncategory.cpp \
     subWidgets/comboBoxes/multiselectcombobox.cpp \
     subWidgets/comboBoxes/qcomboboxfriends.cpp \
+    subWidgets/delegates/progressbardelegate.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
     subWidgets/items/qlistwidgetfriend.cpp \
     subWidgets/labels/labellight.cpp \
@@ -108,22 +109,23 @@ HEADERS += \
     forms/formcontainerachievements.h \
     forms/formgroups.h \
     forms/formmain.h \
-    forms/subForms/achievements/formachievements.h \
-    forms/subForms/achievements/formcategoriesedit.h \
-    forms/subForms/achievements/formcategoriestree.h \
-    forms/subForms/achievements/formfriendscompare.h \
-    forms/subForms/achievements/widgets/formfrienditemcompare.h \
-    forms/subForms/achievements/widgets/formreachedfilter.h \
-    forms/subForms/main/formfavorites.h \
-    forms/subForms/main/formfriends.h \
-    forms/subForms/main/formgames.h \
-    forms/subForms/main/formprofile.h \
-    forms/subForms/main/formsettings.h \
-    forms/subForms/main/formstatistics.h \
+    forms/achievements/formachievements.h \
+    forms/achievements/formcategoriesedit.h \
+    forms/achievements/formcategoriestree.h \
+    forms/achievements/formfriendscompare.h \
+    forms/achievements/widgets/formfrienditemcompare.h \
+    forms/achievements/widgets/formreachedfilter.h \
+    forms/main/formfavorites.h \
+    forms/main/formfriends.h \
+    forms/main/formgames.h \
+    forms/main/formprofile.h \
+    forms/main/formsettings.h \
+    forms/main/formstatistics.h \
     framelesswindow.h \
     subWidgets/actions/actioncategory.h \
     subWidgets/comboBoxes/multiselectcombobox.h \
     subWidgets/comboBoxes/qcomboboxfriends.h \
+    subWidgets/delegates/progressbardelegate.h \
     subWidgets/items/qlistwidgetachievement.h \
     subWidgets/items/qlistwidgetfriend.h \
     subWidgets/labels/labellight.h \
@@ -148,17 +150,17 @@ FORMS += \
     forms/formcontainerachievements.ui \
     forms/formgroups.ui \
     forms/formmain.ui \
-    forms/subForms/achievements/formachievements.ui \
-    forms/subForms/achievements/formcategoriesedit.ui \
-    forms/subForms/achievements/formfriendscompare.ui \
-    forms/subForms/achievements/widgets/formfrienditemcompare.ui \
-    forms/subForms/achievements/widgets/formreachedfilter.ui \
-    forms/subForms/main/formfavorites.ui \
-    forms/subForms/main/formfriends.ui \
-    forms/subForms/main/formgames.ui \
-    forms/subForms/main/formprofile.ui \
-    forms/subForms/main/formsettings.ui \
-    forms/subForms/main/formstatistics.ui \
+    forms/achievements/formachievements.ui \
+    forms/achievements/formcategoriesedit.ui \
+    forms/achievements/formfriendscompare.ui \
+    forms/achievements/widgets/formfrienditemcompare.ui \
+    forms/achievements/widgets/formreachedfilter.ui \
+    forms/main/formfavorites.ui \
+    forms/main/formfriends.ui \
+    forms/main/formgames.ui \
+    forms/main/formprofile.ui \
+    forms/main/formsettings.ui \
+    forms/main/formstatistics.ui \
     framelesswindow.ui
 
 # Default rules for deployment.

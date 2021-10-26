@@ -1,6 +1,6 @@
 #include "sbans.h"
 
-QList<SBan> onLoadBan(QByteArray byteArray) {
+QList<SBan> onLoadBan(const QByteArray &byteArray) {
     QList<SBan> list;
     for(auto &&ban: QJsonDocument::fromJson(byteArray).object().value("players").toArray()) {
         list.append(std::move(SBan(ban.toObject())));
@@ -21,7 +21,7 @@ QJsonObject SBan::toJson() const {
     return obj;
 }
 
-QList<SBan> SBan::load(const QString &aId, std::function<void (QList<SBan>)> aCallback) {
+SBans SBan::load(const ProfileID &aId, std::function<void (SBans)> aCallback) {
     return Sapi::load<SBan>(bansUrl(aId), onLoadBan, aCallback);
 }
 
