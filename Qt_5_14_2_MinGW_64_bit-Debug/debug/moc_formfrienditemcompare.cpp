@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/forms/subForms/achievements/widgets/formfrienditemcompare.h"
+#include "../../AraSteamManager/forms/achievements/widgets/formfrienditemcompare.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)

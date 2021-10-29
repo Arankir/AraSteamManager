@@ -19,10 +19,10 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include <forms/subForms/main/formfavorites.h>
-#include <forms/subForms/main/formfriends.h>
-#include <forms/subForms/main/formgames.h>
-#include <forms/subForms/main/formsettings.h>
+#include <forms/main/formfavorites.h>
+#include <forms/main/formfriends.h>
+#include <forms/main/formgames.h>
+#include <forms/main/formsettings.h>
 
 QT_BEGIN_NAMESPACE
 

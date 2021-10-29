@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormStatistics_t {
-    QByteArrayData data[29];
-    char stringdata0[372];
+    QByteArrayData data[32];
+    char stringdata0[402];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,7 +61,10 @@ QT_MOC_LITERAL(24, 334, 6), // "SGame*"
 QT_MOC_LITERAL(25, 341, 10), // "createMenu"
 QT_MOC_LITERAL(26, 352, 6), // "QMenu*"
 QT_MOC_LITERAL(27, 359, 6), // "SGame&"
-QT_MOC_LITERAL(28, 366, 5) // "aGame"
+QT_MOC_LITERAL(28, 366, 5), // "aGame"
+QT_MOC_LITERAL(29, 372, 7), // "setInfo"
+QT_MOC_LITERAL(30, 380, 10), // "Statistics"
+QT_MOC_LITERAL(31, 391, 10) // "aStatistic"
 
     },
     "FormStatistics\0s_finish\0\0s_return_to_profile\0"
@@ -73,7 +76,8 @@ QT_MOC_LITERAL(28, 366, 5) // "aGame"
     "showNoAchievementsGames\0setModelToTable\0"
     "QList<GameWithPercent>\0aGames\0"
     "aIsVisiblePercent\0currentGame\0SGame*\0"
-    "createMenu\0QMenu*\0SGame&\0aGame"
+    "createMenu\0QMenu*\0SGame&\0aGame\0setInfo\0"
+    "Statistics\0aStatistic"
 };
 #undef QT_MOC_LITERAL
 
@@ -83,7 +87,7 @@ static const uint qt_meta_data_FormStatistics[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -91,23 +95,24 @@ static const uint qt_meta_data_FormStatistics[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   89,    2, 0x06 /* Public */,
-       3,    1,   90,    2, 0x06 /* Public */,
-       5,    1,   93,    2, 0x06 /* Public */,
+       1,    0,   94,    2, 0x06 /* Public */,
+       3,    1,   95,    2, 0x06 /* Public */,
+       5,    1,   98,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       8,    0,   96,    2, 0x0a /* Public */,
-       9,    0,   97,    2, 0x0a /* Public */,
-      10,    1,   98,    2, 0x0a /* Public */,
-      13,    0,  101,    2, 0x08 /* Private */,
-      14,    0,  102,    2, 0x08 /* Private */,
-      15,    0,  103,    2, 0x08 /* Private */,
-      16,    0,  104,    2, 0x08 /* Private */,
-      17,    0,  105,    2, 0x08 /* Private */,
-      18,    0,  106,    2, 0x08 /* Private */,
-      19,    2,  107,    2, 0x08 /* Private */,
-      23,    0,  112,    2, 0x08 /* Private */,
-      25,    1,  113,    2, 0x08 /* Private */,
+       8,    0,  101,    2, 0x0a /* Public */,
+       9,    0,  102,    2, 0x0a /* Public */,
+      10,    1,  103,    2, 0x0a /* Public */,
+      13,    0,  106,    2, 0x08 /* Private */,
+      14,    0,  107,    2, 0x08 /* Private */,
+      15,    0,  108,    2, 0x08 /* Private */,
+      16,    0,  109,    2, 0x08 /* Private */,
+      17,    0,  110,    2, 0x08 /* Private */,
+      18,    0,  111,    2, 0x08 /* Private */,
+      19,    2,  112,    2, 0x08 /* Private */,
+      23,    0,  117,    2, 0x08 /* Private */,
+      25,    1,  118,    2, 0x08 /* Private */,
+      29,    1,  121,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -127,6 +132,7 @@ static const uint qt_meta_data_FormStatistics[] = {
     QMetaType::Void, 0x80000000 | 20, QMetaType::Bool,   21,   22,
     0x80000000 | 24,
     0x80000000 | 26, 0x80000000 | 27,   28,
+    QMetaType::Void, 0x80000000 | 30,   31,
 
        0        // eod
 };
@@ -154,6 +160,7 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
             if (_a[0]) *reinterpret_cast< SGame**>(_a[0]) = std::move(_r); }  break;
         case 14: { QMenu* _r = _t->createMenu((*reinterpret_cast< SGame(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
+        case 15: _t->setInfo((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -222,13 +229,13 @@ int FormStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 15)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 16;
     }
     return _id;
 }
