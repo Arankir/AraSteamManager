@@ -28,9 +28,7 @@ void FormReachedFilter::retranslate() {
 }
 
 void FormReachedFilter::updateSettings(QFlags<changedSettings> aSettings) {
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
-    }
+    updateIcons();
 }
 
 void FormReachedFilter::setType(const ReachedType &aType) {

@@ -22,29 +22,21 @@ struct YearCount {
     int count;
 };
 
-struct CompletedAchievement {
-    CompletedAchievement(SAchievementPlayer aAchievement, SGame aGame): achievement(aAchievement), game(aGame) {};
-    SAchievementPlayer achievement;
-    SGame game;
-};
-
 struct Statistics {
-    Statistics(const SProfile &aProfile, const SGames &aGame): profile(aProfile), games(aGame) {};
-    SProfile profile;
-    SGames games;
-    double summAverages = 0.0;
-    int achievementCount = 0;
+    Statistics(const SProfile &aProfile, const SGames &aGame): _profile(aProfile), _games(aGame) {};
+    SProfile _profile;
+    SGames _games;
+    double _summAverages = 0.0;
+    int _achievementCount = 0;
 
-    QList<GameWithPercent> complete;
-    QList<GameWithPercent> started;
-    QList<GameWithPercent> notStarted;
-    QList<GameWithPercent> noAchievements;
+    QList<GameWithPercent> _complete;
+    QList<GameWithPercent> _started;
+    QList<GameWithPercent> _notStarted;
+    QList<GameWithPercent> _noAchievements;
 
-    QList<CompletedAchievement> completedAchievements;
-
-//    QVector<int> times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-//    QVector<int> months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    QVector<YearCount> years;
+    QVector<int> _times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    QVector<int> _months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    QVector<YearCount> _years;
 };
 
 class ThreadStatistics : public ThreadLoading {
@@ -84,7 +76,7 @@ private:
 
     Statistics &_statistics;
 
-    int countReachedAchievements(const QList<SAchievementPlayer> &aAchievements, const SGame &aGame);
+    int countReachedAchievements(const QList<SAchievementPlayer> &aAchievements);
 };
 
 #endif // THREADSTATISTICS_H

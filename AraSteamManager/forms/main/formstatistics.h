@@ -69,7 +69,6 @@ private slots:
     void setModelToTable(QList<GameWithPercent> aGames, bool aIsVisiblePercent);
     SGame *currentGame();
     QMenu *createMenu(SGame &aGame);
-    void setInfo(Statistics aStatistic);
 private:
     Ui::FormStatistics *ui;
     GamesType _currentGamesType = GamesType::none;
@@ -93,7 +92,7 @@ private:
 
     QChart *_gamePercent;
     QChart *_chartT;
-//    QChart *_chartM;
+    QChart *_chartM;
     QChart *_chartY;
 };
 

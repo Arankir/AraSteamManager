@@ -262,25 +262,25 @@
   <customwidget>
    <class>FormCategoriesEdit</class>
    <extends>QWidget</extends>
-   <header>forms/achievements/formcategoriesedit.h</header>
+   <header>forms/subForms/achievements/formcategoriesedit.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormReachedFilter</class>
    <extends>QWidget</extends>
-   <header>forms/achievements/widgets/formreachedfilter.h</header>
+   <header>forms/subForms/achievements/widgets/formreachedfilter.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormFriendsCompare</class>
    <extends>QWidget</extends>
-   <header>forms/achievements/formfriendscompare.h</header>
+   <header>forms/subForms/achievements/formfriendscompare.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormCategoriesTree</class>
    <extends>QTreeWidget</extends>
-   <header>forms/achievements/formcategoriestree.h</header>
+   <header>forms/subForms/achievements/formcategoriestree.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
