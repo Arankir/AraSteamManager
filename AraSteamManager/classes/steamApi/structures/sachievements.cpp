@@ -41,11 +41,11 @@ QJsonObject SAchievement::toJson() const {
 }
 
 QPixmap SAchievement::icon(int aGameId) {
-    return loadPixmap(_pixmapIcon, iconPath(), Paths::imagesAchievements(QString::number(aGameId), iconPath()), QSize(64, 64));
+    return QPixmap::fromImage(loadPixmap(_pixmapIcon, iconPath(), Paths::imagesAchievements(QString::number(aGameId), iconPath()), QSize(64, 64)));
 }
 
 QPixmap SAchievement::iconGray(int aGameId) {
-    return loadPixmap(_pixmapIconGray, iconGrayPath(), Paths::imagesAchievements(QString::number(aGameId), iconGrayPath()), QSize(64, 64));
+    return QPixmap::fromImage(loadPixmap(_pixmapIconGray, iconGrayPath(), Paths::imagesAchievements(QString::number(aGameId), iconGrayPath()), QSize(64, 64)));
 }
 #define SAchievementEnd }
 

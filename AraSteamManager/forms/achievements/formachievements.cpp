@@ -222,7 +222,7 @@ void FormAchievements::updateFilters() {
     QSortFilterProxyInvertModel *notFirstRow = new QSortFilterProxyInvertModel();
     notFirstRow->setSourceModel(&_filterAchievements);
     notFirstRow->setFilterKeyColumn(AchievementAppid);
-    notFirstRow->setFilterRegExp("^$");
+    notFirstRow->setFilterRegularExpression("^$");
 
     if (auto model = ui->TableViewMyAchievements->model()) {
         if (auto filter = dynamic_cast<QSortFilterProxyInvertModel*>(model)) {

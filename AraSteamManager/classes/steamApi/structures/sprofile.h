@@ -90,9 +90,9 @@ private:
     QString _avatarMedium;
     QString _avatarFull;
 
-    mutable QPixmap _pixmapAvatar;
-    mutable QPixmap _pixmapAvatarMedium;
-    mutable QPixmap _pixmapAvatarFull;
+    mutable QImage _pixmapAvatar;
+    mutable QImage _pixmapAvatarMedium;
+    mutable QImage _pixmapAvatarFull;
 
 };
 

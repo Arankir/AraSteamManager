@@ -233,7 +233,7 @@ void FormProfile::updateVisibleInfo() {
         ui->FrameProfileMaximumInfo ->setVisible(false);
 
         ui->LabelNameMinimize       ->setVisible(true);
-        ui->LabelAvatarMinimize->pixmap()->scaled(23, 23);
+        ui->LabelAvatarMinimize->pixmap().scaled(23, 23);
         ui->LabelAvatarMinimize     ->setVisible(true);
         break;
     }

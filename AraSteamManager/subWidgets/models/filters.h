@@ -44,7 +44,7 @@ class QSortFilterProxyInvertModel : public QSortFilterProxyModel {
 public:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override {
         bool original = QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
-        return filterRegExp().pattern() == "()" ? original : !original;
+        return filterRegularExpression().pattern() == "()" ? original : !original;
     };
 
 };

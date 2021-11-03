@@ -8,7 +8,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <QTextCodec>
+//#include <QTextCodec>
 #include <QTcpSocket>
 
 class RequestData : public QObject

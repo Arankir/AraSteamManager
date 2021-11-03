@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPair>
+#include <QtCharts>
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -19,7 +20,7 @@
 #include "classes/threads/thread/threadstatistics.h"
 #include <QStandardItemModel>
 
-QT_CHARTS_USE_NAMESPACE
+//QT_CHARTS_USE_NAMESPACE
 
 enum FormStatisticTableGamesColumns {
     StaticticGamesAppId = 0,
@@ -69,6 +70,7 @@ private slots:
     void setModelToTable(QList<GameWithPercent> aGames, bool aIsVisiblePercent);
     SGame *currentGame();
     QMenu *createMenu(SGame &aGame);
+    void setInfo(Statistics aStatistic);
 private:
     Ui::FormStatistics *ui;
     GamesType _currentGamesType = GamesType::none;
@@ -92,7 +94,7 @@ private:
 
     QChart *_gamePercent;
     QChart *_chartT;
-    QChart *_chartM;
+//    QChart *_chartM;
     QChart *_chartY;
 };
 

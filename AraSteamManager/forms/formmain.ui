@@ -377,25 +377,25 @@
   <customwidget>
    <class>FormFriends</class>
    <extends>QWidget</extends>
-   <header location="global">forms/subForms/main/formfriends.h</header>
+   <header location="global">forms/main/formfriends.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormGames</class>
    <extends>QWidget</extends>
-   <header location="global">forms/subForms/main/formgames.h</header>
+   <header location="global">forms/main/formgames.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormSettings</class>
    <extends>QWidget</extends>
-   <header location="global">forms/subForms/main/formsettings.h</header>
+   <header location="global">forms/main/formsettings.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FormFavorites</class>
    <extends>QWidget</extends>
-   <header location="global">forms/subForms/main/formfavorites.h</header>
+   <header location="global">forms/main/formfavorites.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

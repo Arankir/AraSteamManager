@@ -216,15 +216,15 @@ int SProfile::getLevel(const ProfileID &aSteamId) {
 }
 
 QPixmap SProfile::pixmapAvatar() const {
-    return loadPixmap(_pixmapAvatar, _avatar, Paths::imagesProfiles(_avatar), QSize(32, 32));
+    return QPixmap::fromImage(loadPixmap(_pixmapAvatar, _avatar, Paths::imagesProfiles(_avatar), QSize(32, 32)));
 }
 
 QPixmap SProfile::pixmapAvatarMedium() const {
-    return loadPixmap(_pixmapAvatarMedium, _avatarMedium, Paths::imagesProfiles(_avatarMedium), QSize(64, 64));
+    return QPixmap::fromImage(loadPixmap(_pixmapAvatarMedium, _avatarMedium, Paths::imagesProfiles(_avatarMedium), QSize(64, 64)));
 }
 
 QPixmap SProfile::pixmapAvatarFull() const {
-    return loadPixmap(_pixmapAvatarFull, _avatarFull, Paths::imagesProfiles(_avatarFull), QSize(128, 128));
+    return QPixmap::fromImage(loadPixmap(_pixmapAvatarFull, _avatarFull, Paths::imagesProfiles(_avatarFull), QSize(128, 128)));
 }
 
 bool SProfile::isNull() const {

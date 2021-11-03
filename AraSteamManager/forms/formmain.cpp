@@ -310,17 +310,18 @@ void FormMain::buttonFindProfile_Clicked() {
     //steamcommunity.com/id/xFrenzy47x
     //76561198017985018
     //xFrenzy47x
-    QRegExp ProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
-    if (ProfileUrl.indexIn(ui->LineEditIdProfile->text()) < 0) {
+    QRegularExpression ProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
+    auto match = ProfileUrl.match(ui->LineEditIdProfile->text());
+    if (!match.hasMatch()) {
         qWarning() << "Не распознан профиль" << ui->LineEditIdProfile->text();
         QMessageBox::warning(this, tr("Ошибка"), tr("Не удалось распознать синтаксис профиля"));
         return;
     }
 
-    if ((ProfileUrl.cap(4) == "profiles") || (QRegExp("\\d{17}").indexIn(ProfileUrl.cap(5)) >= 0)) {
-        goToProfile(ProfileUrl.cap(5), SProfile::LoadType::id);
+    if ((match.captured(4) == "profiles") || (QRegularExpression("\\d{17}").match(match.captured(5)).hasMatch())) {
+        goToProfile(match.captured(5), SProfile::LoadType::id);
     } else {
-        goToProfile(ProfileUrl.cap(5), SProfile::LoadType::vanity);
+        goToProfile(match.captured(5), SProfile::LoadType::vanity);
     }
     returnFromForms();
 }

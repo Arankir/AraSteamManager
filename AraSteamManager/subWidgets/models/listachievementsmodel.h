@@ -6,6 +6,7 @@
 #include <QAbstractListModel>
 #include <QStringListModel>
 #include <QMimeData>
+#include <QIODevice>
 
 class ListAchievementsModel : public QAbstractListModel {
     Q_OBJECT

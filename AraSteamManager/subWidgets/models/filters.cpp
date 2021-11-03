@@ -14,13 +14,13 @@ void SortFilterProxyModelMiltiRow::removeRow(const int &row) {
 }
 
 bool SortFilterProxyModelMiltiRow::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const {
-    if (filterRegExp().isEmpty()) {
+    if (!filterRegularExpression().isValid()) {
         return true;
     }
     bool ret = false;
     for (auto &rowFilter: _rows) {
         QModelIndex index = sourceModel()->index(source_row, rowFilter, source_parent);
-        ret = (filterRegExp().indexIn(index.data().toString()) > 0);
+        ret = (filterRegularExpression().match(index.data().toString()).hasMatch());
         if(ret)
             return true;
     }
@@ -73,5 +73,5 @@ void SortFilterProxyModelCategory::updateRegExp() {
     for (const auto &category: qAsConst(_categories)) {
         resultList << category.second;
     }
-    setFilterRegExp("(" + resultList.join(")|(") + ")|(^$)");
+    setFilterRegularExpression("(" + resultList.join(")|(") + ")|(^$)");
 }

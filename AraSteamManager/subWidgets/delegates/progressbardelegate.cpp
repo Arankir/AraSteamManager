@@ -8,10 +8,10 @@ ProgressBarDelegate::ProgressBarDelegate(QObject *parent) : QStyledItemDelegate(
 void ProgressBarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
     int cur = 0, max = 0;
     QString progress = index.data().toString();
-    QRegExp reg("(\\d+)\\/(\\d+)");
-    if (reg.exactMatch(progress)) {
-        cur = reg.cap(1).toInt();
-        max = reg.cap(2).toInt();
+    QRegularExpression reg("(\\d+)\\/(\\d+)");
+    if (reg.match(progress).hasMatch()) {
+        cur = reg.match(progress).captured(1).toInt();
+        max = reg.match(progress).captured(2).toInt();
     }
 
 

@@ -1,5 +1,32 @@
 <RCC>
     <qresource prefix="/">
         <file>JosefinSans-Italic-VariableFont_wght.ttf</file>
+        <file>16172.ttf</file>
+        <file>16777.otf</file>
+        <file>16925.ttf</file>
+        <file>17343.ttf</file>
+        <file>17355.otf</file>
+        <file>JosefinSans-VariableFont_wght.ttf</file>
+        <file>Montserrat-Black.ttf</file>
+        <file>Montserrat-BlackItalic.ttf</file>
+        <file>Montserrat-Bold.ttf</file>
+        <file>Montserrat-BoldItalic.ttf</file>
+        <file>Montserrat-ExtraBold.ttf</file>
+        <file>Montserrat-ExtraBoldItalic.ttf</file>
+        <file>Montserrat-ExtraLight.ttf</file>
+        <file>Montserrat-ExtraLightItalic.ttf</file>
+        <file>Montserrat-Italic.ttf</file>
+        <file>Montserrat-Light.ttf</file>
+        <file>Montserrat-LightItalic.ttf</file>
+        <file>Montserrat-Medium.ttf</file>
+        <file>Montserrat-MediumItalic.ttf</file>
+        <file>Montserrat-Regular.ttf</file>
+        <file>Montserrat-SemiBold.ttf</file>
+        <file>Montserrat-SemiBoldItalic.ttf</file>
+        <file>Montserrat-Thin.ttf</file>
+        <file>Montserrat-ThinItalic.ttf</file>
+        <file>DancingScript-VariableFont_wght.ttf</file>
+        <file>Neucha-Regular.ttf</file>
+        <file>Comfortaa-VariableFont_wght.ttf</file>
     </qresource>
 </RCC>

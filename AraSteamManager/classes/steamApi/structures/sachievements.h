@@ -174,8 +174,8 @@ private:
     SAchievementPercentage _percentage;
     SAchievementPlayer _player;
 
-    QPixmap _pixmapIcon;
-    QPixmap _pixmapIconGray;
+    QImage _pixmapIcon;
+    QImage _pixmapIconGray;
 };
 
 using SAchievements = QList<SAchievement>;

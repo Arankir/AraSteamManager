@@ -81,7 +81,7 @@ void FreezeTableWidget::initFreezeTable() {
     auto filter = new QSortFilterProxyModel(model());
     filter->setSourceModel(model());
     filter->setFilterKeyColumn(0);
-    filter->setFilterRegExp("^$");
+    filter->setFilterRegularExpression("^$");
 
     if (frozenTableView->model()) {
         delete frozenTableView->model();

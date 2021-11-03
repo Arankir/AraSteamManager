@@ -51,8 +51,8 @@ private:
     QString _img_icon_url;
     QString _img_logo_url;
 
-    mutable QPixmap _pixmapIcon;
-    mutable QPixmap _pixmapLogo;
+    mutable QImage _pixmapIcon;
+    mutable QImage _pixmapLogo;
 };
 
 using SGames = QList<SGame>;

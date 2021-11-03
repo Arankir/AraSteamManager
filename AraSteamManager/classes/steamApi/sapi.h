@@ -4,7 +4,7 @@
 #include "classes/network/requestimage.h"
 #include "classes/common/settings.h"
 
-QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize);
+QImage loadPixmap(QImage &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize);
 
 typedef QString ProfileID;
 typedef QStringList ProfileIDs;

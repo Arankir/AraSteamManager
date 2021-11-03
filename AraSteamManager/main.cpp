@@ -60,7 +60,7 @@ void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMe
     }
 
     out << QTime::currentTime().toString("hh:mm:ss ");//"yyyy-MM-dd hh:mm:ss "
-    out << /*aContext.category << ": " << */function << "  " << aMessage << endl;
+    out << /*aContext.category << ": " << */function << "  " << aMessage << Qt::endl;
     out.flush();
 
     QString output(function);

@@ -21,8 +21,8 @@ void AchievementsModel::setAchievements(const ProfileID &aUserId, const GameID &
             if (percent.apiName() != global.apiName()) {
                 continue;
             }
-            QPixmap pix;
-            auto achievement = AchievementInModel {loadPixmap(pix, global.icon(), Paths::imagesAchievements(QString::number(aGameId), global.icon()), QSize(64, 64)),
+            QImage pix;
+            auto achievement = AchievementInModel {QPixmap::fromImage(loadPixmap(pix, global.icon(), Paths::imagesAchievements(QString::number(aGameId), global.icon()), QSize(64, 64))),
                                                     QStringList(),
                                                     global,
                                                     percent,
@@ -30,7 +30,7 @@ void AchievementsModel::setAchievements(const ProfileID &aUserId, const GameID &
             auto iterator = std::find_if(comments.begin(),
                                          comments.end(),
                                          [=](const AchievementComment &achievementComment) {
-                                            return achievementComment.gameId() == percent.apiName();
+                                            return QString::number(achievementComment.gameId()) == percent.apiName();
                                          });
             if (iterator != comments.end()) {
                 achievement.comment = (*iterator).comment();
@@ -413,7 +413,7 @@ void AchievementsModel::updateComments() {
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=](const AchievementComment &achievementComment) {
-                                        return achievementComment.gameId() == achievement.percent.apiName();
+                                        return QString::number(achievementComment.gameId()) == achievement.percent.apiName();
                                      });
 
         if (iterator != comments.end()) {
@@ -603,8 +603,7 @@ void ProxyModelAchievements::setReached(int aNewReached) {
 }
 
 void ProxyModelAchievements::setCategories(const CategoriesFilter &aNewCategories) {
-    if(_categories != aNewCategories)
-        _categories = aNewCategories;
+    _categories = aNewCategories;
 
     QList<QStringList> pre;
     for (const auto &oneLineCategories: _categories) {

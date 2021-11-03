@@ -137,7 +137,7 @@ QUrl Sapi::lvlUrl(const ProfileID &aSteamId) {
     //return "https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=" + _key + "&steamid=" + aSteamId;
 }
 
-QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
+QImage loadPixmap(QImage &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
     if (aPixmap.isNull()) {
         if (!aUrl.isEmpty()) {
             if (!QFile::exists(aSavePath)) {
@@ -147,13 +147,13 @@ QPixmap loadPixmap(QPixmap &aPixmap, const QString &aUrl, const QString &aSavePa
                 loop.exec();
                 QObject::disconnect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
                 if (!img.pixmap().isNull()) {
-                    aPixmap = img.pixmap().scaled(aSize);
+                    aPixmap = img.pixmap().scaled(aSize).toImage();
                 }
             } else {
-                aPixmap = QPixmap(aSavePath).scaled(aSize);
+                aPixmap = QPixmap(aSavePath).scaled(aSize).toImage();
             }
         } else {
-            aPixmap = QPixmap(Images::missingImage()).scaled(aSize);
+            aPixmap = QPixmap(Images::missingImage()).scaled(aSize).toImage();
         }
     }
     return aPixmap;

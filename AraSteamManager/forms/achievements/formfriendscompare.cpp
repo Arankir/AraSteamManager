@@ -109,19 +109,19 @@ void FormFriendsCompare::updateFilterFriend(SProfile *aSteamId, const ReachedTyp
         if (_achievementsModel->getProfile(i).steamID() == aSteamId->steamID()) {
             switch (aType) {
             case ReachedType::all: {
-                _filtersFriends[i - 1]->setFilterRegExp("");
+                _filtersFriends[i - 1]->setFilterRegularExpression("");
                 break;
             }
             case ReachedType::reached: {
-                _filtersFriends[i - 1]->setFilterRegExp("(:)|(^$)");
+                _filtersFriends[i - 1]->setFilterRegularExpression("(:)|(^$)");
                 break;
             }
             case ReachedType::notReached: {
-                _filtersFriends[i - 1]->setFilterRegExp("(" + tr("Не получено") + ")|(^$)");
+                _filtersFriends[i - 1]->setFilterRegularExpression("(" + tr("Не получено") + ")|(^$)");
                 break;
             }
             default: {
-                _filtersFriends[i - 1]->setFilterRegExp("");
+                _filtersFriends[i - 1]->setFilterRegularExpression("");
                 break;
             }
             }

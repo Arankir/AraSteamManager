@@ -83,11 +83,11 @@ bool SGame::operator!=(const SGame &aGame) const {
 }
 
 QPixmap SGame::pixmapIcon() const {
-    return loadPixmap(_pixmapIcon, Sapi::gameImageUrl(_appID, _img_icon_url), Paths::imagesGames(_img_icon_url), QSize(32, 32));
+    return QPixmap::fromImage(loadPixmap(_pixmapIcon, Sapi::gameImageUrl(_appID, _img_icon_url), Paths::imagesGames(_img_icon_url), QSize(32, 32)));
 }
 
 QPixmap SGame::pixmapLogo() const {
-    return loadPixmap(_pixmapLogo, Sapi::gameImageUrl(_appID, _img_logo_url), Paths::imagesGames(_img_logo_url), QSize(184, 69));
+    return QPixmap::fromImage(loadPixmap(_pixmapLogo, Sapi::gameImageUrl(_appID, _img_logo_url), Paths::imagesGames(_img_logo_url), QSize(184, 69)));
 }
 
 void SGame::fromJson(const QJsonObject &aValue) {

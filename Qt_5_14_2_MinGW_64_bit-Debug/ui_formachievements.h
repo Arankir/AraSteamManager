@@ -23,10 +23,10 @@
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "forms/achievements/formcategoriesedit.h"
-#include "forms/achievements/formcategoriestree.h"
-#include "forms/achievements/formfriendscompare.h"
-#include "forms/achievements/widgets/formreachedfilter.h"
+#include "forms/subForms/achievements/formcategoriesedit.h"
+#include "forms/subForms/achievements/formcategoriestree.h"
+#include "forms/subForms/achievements/formfriendscompare.h"
+#include "forms/subForms/achievements/widgets/formreachedfilter.h"
 
 QT_BEGIN_NAMESPACE
 

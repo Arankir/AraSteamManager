@@ -360,8 +360,8 @@ bool ProxyModelGames::lessThan(const QModelIndex &left, const QModelIndex &right
         if (rightData == c_noAchievements) {
             return false;
         }
-        double iLeft = leftData.toString().leftRef(leftData.toString().indexOf("%")).toDouble();
-        double iRight = rightData.toString().leftRef(rightData.toString().indexOf("%")).toDouble();
+        double iLeft = leftData.toString().left(leftData.toString().indexOf("%")).toDouble();
+        double iRight = rightData.toString().left(rightData.toString().indexOf("%")).toDouble();
         return iLeft < iRight;
     }
     return QSortFilterProxyModel::lessThan(left, right);
