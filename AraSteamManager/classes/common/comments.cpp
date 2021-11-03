@@ -35,11 +35,11 @@ AchievementGamesComments AchievementComment::load(const ProfileID &aProfileId) {
     QByteArray bytes;
     if (readFile(Paths::commentsAchievements(aProfileId), bytes)) {
         QJsonObject achievements = QJsonDocument::fromJson(bytes).object();
-        foreach(auto &&game, achievements.value("games").toArray()) {
+        for(auto &&game: achievements.value("games").toArray()) {
             AchievementGameComments pair;
             pair.first = game.toObject().value("gameId").toInt();
-            foreach(auto &&achievement, game.toObject().value("achievements").toArray()) {
-                pair.second.append(std::move(AchievementComment(achievement.toObject())));
+            for(auto &&achievement: game.toObject().value("achievements").toArray()) {
+                pair.second.append(AchievementComment(achievement.toObject()));
             }
             list.append(pair);
         }
@@ -52,12 +52,12 @@ QList<AchievementComment> AchievementComment::load(const ProfileID &aProfileId, 
     QByteArray bytes;
     if (readFile(Paths::commentsAchievements(aProfileId), bytes)) {
         QJsonObject achievements = QJsonDocument::fromJson(bytes).object();
-        foreach(auto &&game, achievements.value("games").toArray()) {
+        for(auto &&game: achievements.value("games").toArray()) {
             if (game.toObject().value("gameId").toInt() != aGameId) {
                 continue;
             }
-            foreach(auto &&achievement, game.toObject().value("achievements").toArray()) {
-                list.append(std::move(AchievementComment(achievement.toObject())));
+            for(auto &&achievement: game.toObject().value("achievements").toArray()) {
+                list.append(AchievementComment(achievement.toObject()));
             }
         }
     }
@@ -157,8 +157,8 @@ QList<GameComment> GameComment::load(const ProfileID &aProfileId) {
     QByteArray bytes;
     if (readFile(Paths::commentsGames(aProfileId), bytes)) {
         QJsonObject games = QJsonDocument::fromJson(bytes).object();
-        foreach(const auto &game, games.value("games").toArray()) {
-            list.append(std::move(GameComment(game.toObject())));
+        for(const auto &game: games.value("games").toArray()) {
+            list.append(GameComment(game.toObject()));
         }
     }
     return list;
@@ -223,7 +223,7 @@ Comments &Comments::setGameComment(const GameID &aGameId, const ProfileID &aProf
     if (iterator != _games.end()) {
         (*iterator).changeComment(aComment);
     } else {
-        _games.append(std::move(GameComment(aGameId, aProfileId, aComment)));
+        _games.append(GameComment(aGameId, aProfileId, aComment));
     }
     save();
     return *this;
@@ -274,11 +274,10 @@ Comments &Comments::setAchievementComment(const ProfileID &aProfileId, const Gam
         if (iteratorAchievement != (*iteratorGameAchievements).second.end()) {
             (*iteratorAchievement).changeComment(aComment);
         } else {
-            (*iteratorGameAchievements).second.append(std::move(AchievementComment(aProfileId, aGameId, aAchievementId, aComment)));
+            (*iteratorGameAchievements).second.append(AchievementComment(aProfileId, aGameId, aAchievementId, aComment));
         }
     } else {
-        _achievements.append(std::move(AchievementGameComments
-                             (aGameId, QList<AchievementComment> {AchievementComment(aProfileId, aGameId, aAchievementId, aComment)})));
+        _achievements.append(AchievementGameComments(aGameId, QList<AchievementComment> {AchievementComment(aProfileId, aGameId, aAchievementId, aComment)}));
     }
     saveAchievements();
     return *this;
@@ -375,18 +374,18 @@ Comments &Comments::load() {
     QByteArray bytes;
     if (readFile(Paths::commentsGames(_profileId), bytes)) {
         QJsonObject games = QJsonDocument::fromJson(bytes).object();
-        foreach(const auto &game, games.value("games").toArray()) {
-            _games.append(std::move(GameComment(game.toObject())));
+        for(const auto &game: games.value("games").toArray()) {
+            _games.append(GameComment(game.toObject()));
         }
     }
 
     if (readFile(Paths::commentsAchievements(_profileId), bytes)) {
         QJsonObject achievements = QJsonDocument::fromJson(bytes).object();
-        foreach(auto &&game, achievements.value("games").toArray()) {
+        for(auto &&game: achievements.value("games").toArray()) {
             AchievementGameComments pair;
             pair.first = game.toObject().value("gameId").toInt();
-            foreach(auto &&achievement, game.toObject().value("achievements").toArray()) {
-                pair.second.append(std::move(AchievementComment(achievement.toObject())));
+            for(auto &&achievement: game.toObject().value("achievements").toArray()) {
+                pair.second.append(AchievementComment(achievement.toObject()));
             }
             _achievements.append(pair);
         }

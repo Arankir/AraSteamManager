@@ -173,13 +173,13 @@ void FramelessWindow::mouseLeave(QEvent *e) {
 void FramelessWindow::mousePress(QMouseEvent *e) {
     if (e->button() & Qt::LeftButton) {
         _leftButtonPressed = true;
-        calculateCursorPosition(e->globalPos(), this->frameGeometry(), _mousePress);
+        calculateCursorPosition(e->globalPosition(), this->frameGeometry(), _mousePress);
         if (!_mousePress.testFlag(Edge::None)) {
             _rubberband->setGeometry(this->frameGeometry());
         }
         //qDebug()<<(e->globalPos() - _target->pos()).y();
         if (this->rect().marginsRemoved(QMargins(c_border, c_border, c_border, c_border)).contains(e->pos()) &&
-           ((e->globalPos() - this->pos()).y() < ui->FrameTitleWindow->height())) {
+           ((e->globalPosition() - this->pos()).y() < ui->FrameTitleWindow->height())) {
             _dragStart = true;
             _dragPos = e->pos();
         }
@@ -193,9 +193,9 @@ void FramelessWindow::mouseMove(QMouseEvent *e) {
             ui->ButtonMaximize->setIcon(QIcon(Images::maximizeWindow()));
         }
         if (_dragStart) { //Change Position
-            if (this->normalGeometry().x() + this->normalGeometry().width() < e->globalPos().x()) {
-                _dragPos.setX(e->globalPos().x() - (this->width() / 2) - this->x());
-                this->move(QPoint(e->globalPos().x() - (this->width() / 2), this->y()));
+            if (this->normalGeometry().x() + this->normalGeometry().width() < e->globalPosition().x()) {
+                _dragPos.setX(e->globalPosition().x() - (this->width() / 2) - this->x());
+                this->move(QPoint(e->globalPosition().x() - (this->width() / 2), this->y()));
             }
             this->move(this->frameGeometry().topLeft() + (e->pos() - _dragPos));
         }
@@ -203,19 +203,19 @@ void FramelessWindow::mouseMove(QMouseEvent *e) {
         if (!_mousePress.testFlag(Edge::None)) { //Change Rectangle
             QRect newRect = _rubberband->frameGeometry();
             if (_mousePress.testFlag(Edge::Left)) {
-                newRect.setLeft(e->globalPos().x());
+                newRect.setLeft(e->globalPosition().x());
             }
             if (_mousePress.testFlag(Edge::Right)) {
-                newRect.setRight(e->globalPos().x());
+                newRect.setRight(e->globalPosition().x());
             }
             if (newRect.right() - newRect.left() < this->minimumWidth()) {
                 newRect.setLeft(this->frameGeometry().x());
             }
             if (_mousePress.testFlag(Edge::Top)) {
-                newRect.setTop(e->globalPos().y());
+                newRect.setTop(e->globalPosition().y());
             }
             if (_mousePress.testFlag(Edge::Bottom)) {
-                newRect.setBottom(e->globalPos().y());
+                newRect.setBottom(e->globalPosition().y());
             }
             if (newRect.bottom() - newRect.top() < this->minimumHeight()) {
                 newRect.setTop(this->frameGeometry().y());
@@ -224,15 +224,15 @@ void FramelessWindow::mouseMove(QMouseEvent *e) {
             _rubberband->setGeometry(newRect);
         }
     } else {
-        updateCursorShape(e->globalPos());
+        updateCursorShape(e->globalPosition());
     }
 }
 
 void FramelessWindow::mouseHover(QHoverEvent *e) {
-    updateCursorShape(this->mapToGlobal(e->pos()));
+    updateCursorShape(this->mapToGlobal(e->position()));
 }
 
-void FramelessWindow::updateCursorShape(const QPoint &pos) {
+void FramelessWindow::updateCursorShape(const QPointF &pos) {
     if (this->isFullScreen() || this->isMaximized()) {
         if (_cursorchanged) {
             this->unsetCursor();
@@ -263,7 +263,7 @@ void FramelessWindow::updateCursorShape(const QPoint &pos) {
     }
 }
 
-void FramelessWindow::calculateCursorPosition(const QPoint &aPos, const QRect &aFrameRect, Edges &aEdge) {
+void FramelessWindow::calculateCursorPosition(const QPointF &aPos, const QRect &aFrameRect, Edges &aEdge) {
     int x = aPos.x(), y = aPos.y();
     if (x >= aFrameRect.x() && y >= aFrameRect.y()) {
         x -= aFrameRect.x();

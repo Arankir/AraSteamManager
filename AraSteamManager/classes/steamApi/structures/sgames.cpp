@@ -21,8 +21,8 @@ QJsonObject SGame::toJson() const {
 
 SGames onLoad(const QByteArray &byteArray) {
     SGames list;
-    foreach(const auto &game, QJsonDocument::fromJson(byteArray).object().value("response").toObject().value("games").toArray()) {
-        list.append(std::move(SGame(game.toObject())));
+    for(const auto &game: QJsonDocument::fromJson(byteArray).object().value("response").toObject().value("games").toArray()) {
+        list.append(SGame(game.toObject()));
     }
     return list;
 }

@@ -58,8 +58,8 @@ protected:
     void mousePress(QMouseEvent*);
     void mouseRealese(QMouseEvent*);
     void mouseMove(QMouseEvent*);
-    void updateCursorShape(const QPoint &);
-    void calculateCursorPosition(const QPoint &, const QRect &, Edges &);
+    void updateCursorShape(const QPointF &);
+    void calculateCursorPosition(const QPointF &, const QRect &, Edges &);
     void buttonExit_Clicked();
     void buttonMaximize_Clicked();
     void buttonMinimize_Clicked();

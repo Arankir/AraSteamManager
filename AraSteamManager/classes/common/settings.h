@@ -29,122 +29,36 @@ enum changedSettings {
     profileInfo = 0x20
 };
 
+struct ThemeColor {
+    QColor Color;
+    QGradient *Gradient = nullptr;
+    void setColor(const QColor&, QGradient *gradient = nullptr);
+    QColor getColor();
+    QString getString();
+};
+
 struct Theme {
-    Theme();
+    Theme() {};
 
-    QColor textColor;
-    QGradient *textGradient = nullptr;
-    Theme &setText(const QColor&, QGradient *gradient = nullptr);
-    QColor getText();
-    QString getTextString();
-
-    QColor disabledBackgroundColor;
-    QGradient *disabledBackgroundGradient = nullptr;
-    Theme &setDisabledBackground(const QColor&, QGradient *gradient = nullptr);
-    QColor getDisabledBackground();
-    QString getDisabledBackgroundString();
-
-    QColor disabledColor;
-    QGradient *disabledGradient = nullptr;
-    Theme &setDisabled(const QColor&, QGradient *gradient = nullptr);
-    QColor getDisabled();
-    QString getDisabledString();
-
-    QColor hoverColor;
-    QGradient *hoverGradient = nullptr;
-    Theme &setHover(const QColor&, QGradient *gradient = nullptr);
-    QColor getHover();
-    QString getHoverString();
-
-    QColor borderColor;
-    QGradient *borderGradient = nullptr;
-    Theme &setBorder(const QColor&, QGradient *gradient = nullptr);
-    QColor getBorder();
-    QString getBorderString();
-
-    QColor alternateColor;
-    QGradient *alternateGradient = nullptr;
-    Theme &setAlternate(const QColor&, QGradient *gradient = nullptr);
-    QColor getAlternate();
-    QString getAlternateString();
-
-    QColor backgroundColor;
-    QGradient *backgroundGradient = nullptr;
-    Theme &setBackground(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackground();
-    QString getBackgroundString();
-
-    QColor backgroundSelectedItemColor;
-    QGradient *backgroundSelectedItemGradient = nullptr;
-    Theme &setBackgroundSelectedItem(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackgroundSelectedItem();
-    QString getBackgroundSelectedItemString();
-
-    QColor backgroundSecondColor;
-    QGradient *backgroundSecondGradient = nullptr;
-    Theme &setBackgroundSecondGradient(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackgroundSecondGradient();
-    QString getBackgroundSecondGradientString();
-
-    QColor backgroundProgressbarColor;
-    QGradient *backgroundProgressbarGradient = nullptr;
-    Theme &setBackgroundProgressbar(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackgroundProgressbar();
-    QString getBackgroundProgressbarString();
-
-    QColor backgroundBadProgressbarColor;
-    QGradient *backgroundBadProgressbarGradient = nullptr;
-    Theme &setBackgroundBadProgressbar(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackgroundBadProgressbar();
-    QString getBackgroundBadProgressbarString();
-
-    QColor backgroundProgressbarProgressColor;
-    QGradient *backgroundProgressbarProgressGradient = nullptr;
-    Theme &setBackgroundProgressbarProgress(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackgroundProgressbarProgress();
-    QString getBackgroundProgressbarProgressString();
-
-    QColor selectedColor;
-    QGradient *selectedGradient = nullptr;
-    Theme &setSelected(const QColor&, QGradient *gradient = nullptr);
-    QColor getSelected();
-    QString getSelectedString();
-
-    QColor headerFormColor;
-    QGradient *headerFormGradient = nullptr;
-    Theme &setHeaderForm(const QColor&, QGradient *gradient = nullptr);
-    QColor getHeaderForm();
-    QString getHeaderFormString();
-
-    QColor backgroundItemColor;
-    QGradient *backgroundItemGradient = nullptr;
-    Theme &setBackgroundItem(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackgroundItem();
-    QString getBackgroundItemString();
-
-    QColor backgroundAlternateItemColor;
-    QGradient *backgroundAlternateItemGradient = nullptr;
-    Theme &setBackgroundAlternateItem(const QColor&, QGradient *gradient = nullptr);
-    QColor getBackgroundAlternateItem();
-    QString getBackgroundAlternateItemString();
-
-    QColor forItemHoverColor;
-    QGradient *forItemHoverGradient = nullptr;
-    Theme &setForItemHover(const QColor&, QGradient *gradient = nullptr);
-    QColor getForItemHover();
-    QString getForItemHoverString();
-
-    QColor mainProfileBackgroundColor;
-    QGradient *mainProfileBackgroundGradient = nullptr;
-    Theme &setMainProfileBackground(const QColor&, QGradient *gradient = nullptr);
-    QColor getMainProfileBackground();
-    QString getMainProfileBackgroundString();
-
-    QColor mainBackgroundColor;
-    QGradient *mainBackgroundGradient = nullptr;
-    Theme &setMainBackground(const QColor&, QGradient *gradient = nullptr);
-    QColor getMainBackground();
-    QString getMainBackgroundString();
+    ThemeColor text;
+    ThemeColor disabledBackground;
+    ThemeColor disabled;
+    ThemeColor hover;
+    ThemeColor border;
+    ThemeColor alternate;
+    ThemeColor background;
+    ThemeColor backgroundSelectedItem;
+    ThemeColor backgroundSecond;
+    ThemeColor backgroundProgressbar;
+    ThemeColor backgroundBadProgressbar;
+    ThemeColor backgroundProgressbarProgress;
+    ThemeColor selected;
+    ThemeColor headerForm;
+    ThemeColor backgroundItem;
+    ThemeColor backgroundAlternateItem;
+    ThemeColor forItemHover;
+    ThemeColor mainProfileBackground;
+    ThemeColor mainBackground;
 
     QString   pathIcons;
     Theme &setPathIcons(const QString&);

@@ -415,34 +415,27 @@ QString Settings::qssTheme() {
 //        pathIcons = ":/theme/iconsBlueTheme/";
 
         Theme blue = blueTheme();
-        qDebug() << blue.getTextString() << blue.getDisabledBackgroundString() << blue.getDisabledString() << blue.getHoverString() <<
-                    blue.getBorderString() << blue.getAlternateString() << blue.getBackgroundString() << blue.getBackgroundSelectedItemString() <<
-                    blue.getBackgroundSecondGradientString() << blue.getBackgroundProgressbarString() << blue.getBackgroundBadProgressbarString() <<
-                    blue.getBackgroundProgressbarProgressString() << blue.getSelectedString() << blue.getHeaderFormString() <<
-                    blue.getBackgroundItemString() << blue.getBackgroundAlternateItemString() << blue.getForItemHoverString() <<
-                    blue.getMainProfileBackgroundString() << blue.getMainBackgroundString() << blue.getPathIcons();
-
         QFile qssColorFile(":/theme/baseColor.qss");
         qssColorFile.open(QFile::ReadOnly);
-        qss = QString(qssColorFile.readAll()).arg(blue.getTextString(),
-                                                  blue.getDisabledBackgroundString(),
-                                                  blue.getDisabledString(),
-                                                  blue.getHoverString(),
-                                                  blue.getBorderString(),
-                                                  blue.getAlternateString(),
-                                                  blue.getBackgroundString(),
-                                                  blue.getBackgroundSelectedItemString(),
-                                                  blue.getBackgroundSecondGradientString(),
-                                                  blue.getBackgroundProgressbarString(),
-                                                  blue.getBackgroundBadProgressbarString(),
-                                                  blue.getBackgroundProgressbarProgressString(),
-                                                  blue.getSelectedString(),
-                                                  QString(QString::number(blue.getHeaderForm().red()) + ", " + QString::number(blue.getHeaderForm().green()) + ", " + QString::number(blue.getHeaderForm().blue())),
-                                                  QString(QString::number(blue.getBackgroundItem().red()) + ", " + QString::number(blue.getBackgroundItem().green()) + ", " + QString::number(blue.getBackgroundItem().blue())),
-                                                  QString(QString::number(blue.getBackgroundAlternateItem().red()) + ", " + QString::number(blue.getBackgroundAlternateItem().green()) + ", " + QString::number(blue.getBackgroundAlternateItem().blue())),
-                                                  QString(QString::number(blue.getForItemHover().red()) + ", " + QString::number(blue.getForItemHover().green()) + ", " + QString::number(blue.getForItemHover().blue())),
-                                                  QString(QString::number(blue.getMainProfileBackground().red()) + ", " + QString::number(blue.getMainProfileBackground().green()) + ", " + QString::number(blue.getMainProfileBackground().blue())),
-                                                  blue.getMainBackgroundString());
+        qss = QString(qssColorFile.readAll()).arg(blue.text.getString(),
+                                                  blue.disabledBackground.getString(),
+                                                  blue.disabled.getString(),
+                                                  blue.hover.getString(),
+                                                  blue.border.getString(),
+                                                  blue.alternate.getString(),
+                                                  blue.background.getString(),
+                                                  blue.backgroundSelectedItem.getString(),
+                                                  blue.backgroundSecond.getString(),
+                                                  blue.backgroundProgressbar.getString(),
+                                                  blue.backgroundBadProgressbar.getString(),
+                                                  blue.backgroundProgressbarProgress.getString(),
+                                                  blue.selected.getString(),
+                                                  QString(QString::number(blue.headerForm.getColor().red()) + ", " + QString::number(blue.headerForm.getColor().green()) + ", " + QString::number(blue.headerForm.getColor().blue())),
+                                                  QString(QString::number(blue.backgroundItem.getColor().red()) + ", " + QString::number(blue.backgroundItem.getColor().green()) + ", " + QString::number(blue.backgroundItem.getColor().blue())),
+                                                  QString(QString::number(blue.backgroundAlternateItem.getColor().red()) + ", " + QString::number(blue.backgroundAlternateItem.getColor().green()) + ", " + QString::number(blue.backgroundAlternateItem.getColor().blue())),
+                                                  QString(QString::number(blue.forItemHover.getColor().red()) + ", " + QString::number(blue.forItemHover.getColor().green()) + ", " + QString::number(blue.forItemHover.getColor().blue())),
+                                                  QString(QString::number(blue.mainProfileBackground.getColor().red()) + ", " + QString::number(blue.mainProfileBackground.getColor().green()) + ", " + QString::number(blue.mainProfileBackground.getColor().blue())),
+                                                  blue.mainBackground.getString());
 
         QFile qssIconsFile(":/theme/baseIcons.qss");
         qssIconsFile.open(QFile::ReadOnly);
@@ -451,7 +444,7 @@ QString Settings::qssTheme() {
         QFile qssFile(":/theme/globalTheme.qss");
         qssFile.open(QFile::ReadOnly);
         qss += qssFile.readAll();
-        qss += " "
+        qss += " ";
     //    "QWidget, QStandardItem, QAction, QAbstractItemModel, QLabel { "
     //        "font: " + Settings::defaultFont() + "; "
     //    "} "
@@ -1135,25 +1128,25 @@ QString Paths::temp() {
 }
 
 QString Paths::defaultFont() {
-//    return "://JosefinSans-Italic-VariableFont_wght.ttf";
+    return "://JosefinSans-Italic-VariableFont_wght.ttf";
 //    return "://DancingScript-VariableFont_wght.ttf";
-    return "://Comfortaa-VariableFont_wght.ttf";
+//    return "://Comfortaa-VariableFont_wght.ttf";
 }
 
 QString Paths::categories(QString aGameId) {
-    return QString(documents() + "files/categories/%1%2").arg(aGameId , aGameId != "" ? ".json" : "");
+    return QString(documents() + "categories/%1%2").arg(aGameId , aGameId != "" ? ".json" : "");
 }
 
 QString Paths::favorites(QString aType) {
-    return QString(documents() + "files/favorites/%1%2").arg(aType , aType != "" ? ".json" : "");
+    return QString(documents() + "favorites/%1%2").arg(aType , aType != "" ? ".json" : "");
 }
 
 QString Paths::hiddenGames(QString aSteamId) {
-    return QString(documents() + "files/hide/%1%2").arg(aSteamId != "" ? aSteamId : "All", ".txt");
+    return QString(documents() + "hide/%1%2").arg(aSteamId != "" ? aSteamId : "All", ".txt");
 }
 
 QString Paths::groupGames(QString aProfileId) {
-    return QString(documents() + "files/groups/%1%2").arg(aProfileId, aProfileId != "" ? ".txt" : "");
+    return QString(documents() + "groups/%1%2").arg(aProfileId, aProfileId != "" ? ".txt" : "");
 }
 
 QString Paths::imagesProfiles(const QString &aUrl) {
@@ -1172,11 +1165,11 @@ QString Paths::imagesGames(const QString &aUrl) {
 }
 
 QString Paths::commentsGames(const QString &aProfileId) {
-    return QString(documents() + "files/comments/games/%1%2").arg(aProfileId, ".json");
+    return QString(documents() + "comments/games/%1%2").arg(aProfileId, ".json");
 }
 
 QString Paths::commentsAchievements(const QString &aProfileId) {
-    return QString(documents() + "files/comments/achievements/%1%2").arg(aProfileId, aProfileId != "" ? ".json" : "");
+    return QString(documents() + "comments/achievements/%1%2").arg(aProfileId, aProfileId != "" ? ".json" : "");
 }
 #define PathsEnd }
 
@@ -1193,119 +1186,133 @@ Theme blueTheme() {
     gr3->setColorAt(0, QColor(18, 69, 124));
     gr3->setColorAt(1, QColor(25, 37, 61));
 
-    return Theme().setText(QColor(221, 221, 221)).setDisabledBackground(QColor(20, 80, 110)).setDisabled(QColor(120, 120, 120))
-            .setHover(QColor(20, 140, 210)).setBorder(QColor(50, 65, 75)).setAlternate(QColor(25, 35, 45))
-            .setBackground(QColor(19, 36, 62)).setBackgroundSelectedItem(QColor(38, 146, 255), gr1).setBackgroundSecondGradient(QColor(57, 152, 236), gr2)
-            .setBackgroundProgressbar(QColor(93, 170, 224)).setBackgroundBadProgressbar(QColor(228, 75, 75)).setBackgroundProgressbarProgress(QColor(56, 101, 132))
-            .setSelected(QColor(135, 182, 255)).setHeaderForm(QColor(30, 41, 59)).setBackgroundItem(QColor(23, 26, 33))
-            .setBackgroundAlternateItem(QColor(29, 32, 39)).setForItemHover(QColor(43, 46, 53)).setMainProfileBackground(QColor(37, 60, 94))
-            .setMainBackground(QColor(18, 69, 124), gr3).setPathIcons(":/theme/iconsBlueTheme/");
+    Theme theme;
+    theme.text.setColor(QColor(221, 221, 221));
+    theme.disabledBackground.setColor(QColor(20, 80, 110));
+    theme.disabled.setColor(QColor(120, 120, 120));
+    theme.hover.setColor(QColor(20, 140, 210));
+    theme.border.setColor(QColor(50, 65, 75));
+    theme.alternate.setColor(QColor(25, 35, 45));
+    theme.background.setColor(QColor(19, 36, 62));
+    theme.backgroundSelectedItem.setColor(QColor(38, 146, 255), gr1);
+    theme.backgroundSecond.setColor(QColor(57, 152, 236), gr2);
+    theme.backgroundProgressbar.setColor(QColor(93, 170, 224));
+    theme.backgroundBadProgressbar.setColor(QColor(228, 75, 75));
+    theme.backgroundProgressbarProgress.setColor(QColor(56, 101, 132));
+    theme.selected.setColor(QColor(135, 182, 255));
+    theme.headerForm.setColor(QColor(30, 41, 59));
+    theme.backgroundItem.setColor(QColor(23, 26, 33));
+    theme.backgroundAlternateItem.setColor(QColor(29, 32, 39));
+    theme.forItemHover.setColor(QColor(43, 46, 53));
+    theme.mainProfileBackground.setColor(QColor(37, 60, 94));
+    theme.mainBackground.setColor(QColor(18, 69, 124), gr3);
+    theme.setPathIcons(":/theme/iconsBlueTheme/");
+    return theme;
 }
 
-//switch(theme()) {
-////default: {
-//    // Настраиваем палитру для цветовых ролей элементов интерфейса
-//    //    darkPalette.setColor(QPalette::Window, QColor(53, 53, 53));
-//    //    darkPalette.setColor(QPalette::WindowText, Qt::white);
-//    //    darkPalette.setColor(QPalette::Base, QColor(25, 25, 25));
-//    //    darkPalette.setColor(QPalette::AlternateBase, QColor(53, 53, 53));
-//    //    darkPalette.setColor(QPalette::ToolTipBase, Qt::white);
-//    //    darkPalette.setColor(QPalette::ToolTipText, Qt::white);
-//    //    darkPalette.setColor(QPalette::Text, Qt::white);
-//    //    darkPalette.setColor(QPalette::Button, QColor(53, 53, 53));
-//    //    darkPalette.setColor(QPalette::ButtonText, Qt::white);
-//    //    darkPalette.setColor(QPalette::BrightText, Qt::red);
-//    //    darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
-//    //    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-//    //    darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-//    // Устанавливаем данную палитру
-//        // Для возврата к светлой палитре достаточно
-//        // будет установить стандартную палитру из темы оформления
-//        //qApp->setPalette(style()->standardPalette());
-////}
-//case 1:{//Синяя
-////        QFile qssFile(":/theme/blueTheme.qss");
-////        qssFile.open(QFile::ReadOnly);
-////        qss = qssFile.readAll();
-//    textColor = "rgb(221, 221, 221)";
-//    disabledBackgroundColor = "rgb(20, 80, 110)";
-//    disabledColor = "rgb(120, 120, 120)";
-//    hoverColor = "rgb(20, 140, 210)";
-//    borderColor = "rgb(50, 65, 75)";
-//    alternateColor = "rgb(25, 35, 45)";
-//    backgroundColor = "rgb(19, 36, 62)";
-//    backgroundSelectedItem = "qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, stop: 0 rgb(38, 146, 255), stop: 1.0 rgb(21, 50, 87))";
-//    backgroundSecondColor = "qlineargradient(x1: -1, y1: -1, x2: 2, y2: 2, stop: 0 rgb(57, 152, 236), stop: 1.0 rgb(35, 95, 207))";
-//    backgroundProgressbar = "rgb(93, 170, 224)";
-//    backgroundBadProgressbar = "rgb(228, 75, 75)";
-//    backgroundProgressbarProgress = "rgb(56, 101, 132)";
-//    selectedColor = "rgb(135, 182, 255)";
-//    headerFormColor = "30, 41, 59";
-//    backgroundItemColor = "23, 26, 33";
-//    backgroundAlternateItemColor = "29, 32, 39";
-//    forItemHoverGradient = "43, 46, 53";
-//    mainProfileBackground = "37, 60, 94";
-//    mainBackground = "qradialgradient(cx:0.5, cy:0.5, radius: 0.9, fx:0.4, fy:0.5, stop:0 rgb(18, 69, 124), stop:1 rgb(25, 37, 61))";
-//    pathIcons = ":/theme/iconsBlueTheme/";
-//    break;
-//}
-//case 2:{//Белая
-//    textColor = "rgb(15, 15, 25)";
-//    disabledBackgroundColor = "rgb(130, 130, 130)";
-//    disabledColor = "rgb(150, 150, 150)";
-//    hoverColor = "rgb(255, 213, 180)";
-//    borderColor = "rgb(50, 50, 50)";
-//    alternateColor = "rgb(230, 220, 210)";
-//    backgroundColor = "rgb(236, 236, 236)";
-//    backgroundSelectedItem = "rgba(110, 110, 110, 0.7)";
-//    backgroundSecondColor = "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E1E1E1, stop: 0.4 #DDDDDD, stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3)";
-//    backgroundProgressbar = "rgb(199, 154, 123)";
-//    backgroundBadProgressbar = "rgb(7, 180, 180)";
-//    backgroundProgressbarProgress = "rgb(200, 180, 150)";
-//    selectedColor = "rgb(120, 73, 0)";
-//    headerFormColor = "130, 130, 130";
-//    backgroundItemColor = "120, 120, 120";
-//    backgroundAlternateItemColor = "170, 170, 170";
-//    forItemHoverGradient = "80, 80, 80";
-//    mainProfileBackground = "100, 100, 100";
-//    mainBackground = "qradialgradient(cx:0.5, cy:0.5, radius: 0.9, fx:0.4, fy:0.5, stop:0 #ffffff, stop:1 #777777)";
-//    pathIcons = ":/theme/iconsWhiteTheme/";
-//    break;
-//}
-//case 3:{//Черная
-////        QFile qssFile(":/theme/blackTheme.qss");
-////        qssFile.open(QFile::ReadOnly);
-////        qss = qssFile.readAll();
-//    textColor = "rgb(240, 240, 240)";
-//    disabledBackgroundColor = "rgb(120, 120, 120)";
-//    disabledColor = "rgb(120, 120, 120)";
-//    hoverColor = "rgb(20, 100, 160)";
-//    borderColor = "rgb(60, 60, 60)";
-//    alternateColor = "rgb(25, 35, 45)";
-//    backgroundColor = "rgb(19, 19, 19)";
-//    backgroundSelectedItem = "rgba(11, 11, 11, 0.7)";
-//    backgroundSecondColor = "rgb(80, 95, 105)";
-//    backgroundProgressbar = "rgb(93, 170, 224)";
-//    backgroundBadProgressbar = "rgb(228, 75, 75)";
-//    backgroundProgressbarProgress = "rgb(56, 101, 132)";
-//    selectedColor = "rgb(135, 182, 255)";
-//    headerFormColor = "30, 30, 30";
-//    backgroundItemColor = "11, 11, 11";
-//    backgroundAlternateItemColor = "29, 32, 39";
-//    forItemHoverGradient = "11, 11, 11";
-//    mainProfileBackground = "70, 70, 70";
-//    mainBackground = "qradialgradient(cx:0.5, cy:0.5, radius: 0.9, fx:0.4, fy:0.5, stop:0 #000000, stop:1 #252525)";
-//    pathIcons = ":/theme/iconsBlackTheme/";
-//    break;
-//}
+Theme whiteTheme() {
+    QLinearGradient *gr1 = new QLinearGradient(0, 0, 0, 1);
+    gr1->setColorAt(0, QColor("E1E1E1"));
+    gr1->setColorAt(0.4, QColor("DDDDDD"));
+    gr1->setColorAt(0.5, QColor("D8D8D8"));
+    gr1->setColorAt(1, QColor("D3D3D3"));
+
+    QRadialGradient *gr2 = new QRadialGradient(0.5, 0.5, 0.9, 0.4, 0.5);
+    gr2->setColorAt(0, QColor("ffffff"));
+    gr2->setColorAt(1, QColor("777777"));
+
+    Theme theme;
+    theme.text.setColor(QColor(15, 15, 25));
+    theme.disabledBackground.setColor(QColor(130, 130, 130));
+    theme.disabled.setColor(QColor(150, 150, 150));
+    theme.hover.setColor(QColor(255, 213, 180));
+    theme.border.setColor(QColor(50, 50, 50));
+    theme.alternate.setColor(QColor(230, 220, 210));
+    theme.background.setColor(QColor(236, 236, 236));
+    theme.backgroundSelectedItem.setColor(QColor(110, 110, 110, 255 * 0.7));
+    theme.backgroundSecond.setColor(QColor("DDDDDD"), gr1);
+    theme.backgroundProgressbar.setColor(QColor(199, 154, 123));
+    theme.backgroundBadProgressbar.setColor(QColor(7, 180, 180));
+    theme.backgroundProgressbarProgress.setColor(QColor(200, 180, 150));
+    theme.selected.setColor(QColor(120, 73, 0));
+    theme.headerForm.setColor(QColor(130, 130, 130));
+    theme.backgroundItem.setColor(QColor(120, 120, 120));
+    theme.backgroundAlternateItem.setColor(QColor(170, 170, 170));
+    theme.forItemHover.setColor(QColor(80, 80, 80));
+    theme.mainProfileBackground.setColor(QColor(100, 100, 100));
+    theme.mainBackground.setColor(QColor(255, 255, 255), gr2);
+    theme.setPathIcons(":/theme/iconsWhiteTheme/");
+    return theme;
+}
+
+Theme blackTheme() {
+    QRadialGradient *gr1 = new QRadialGradient(0.5, 0.5, 0.9, 0.4, 0.5);
+    gr1->setColorAt(0, QColor("000000"));
+    gr1->setColorAt(1, QColor("252525"));
+
+    Theme theme;
+    theme.text.setColor(QColor(240, 240, 240));
+    theme.disabledBackground.setColor(QColor(120, 120, 120));
+    theme.disabled.setColor(QColor(120, 120, 120));
+    theme.hover.setColor(QColor(20, 100, 160));
+    theme.border.setColor(QColor(60, 60, 60));
+    theme.alternate.setColor(QColor(25, 35, 45));
+    theme.background.setColor(QColor(19, 19, 19));
+    theme.backgroundSelectedItem.setColor(QColor(11, 11, 11, 255 * 0.7));
+    theme.backgroundSecond.setColor(QColor(80, 95, 105));
+    theme.backgroundProgressbar.setColor(QColor(93, 170, 224));
+    theme.backgroundBadProgressbar.setColor(QColor(228, 75, 75));
+    theme.backgroundProgressbarProgress.setColor(QColor(56, 101, 132));
+    theme.selected.setColor(QColor(135, 182, 255));
+    theme.headerForm.setColor(QColor(30, 30, 30));
+    theme.backgroundItem.setColor(QColor(11, 11, 11));
+    theme.backgroundAlternateItem.setColor(QColor(29, 32, 39));
+    theme.forItemHover.setColor(QColor(11, 11, 11));
+    theme.mainProfileBackground.setColor(QColor(70, 70, 70));
+    theme.mainBackground.setColor(QColor(0, 0, 0), gr1);
+    theme.setPathIcons(":/theme/iconsBlackTheme/");
+    return theme;
+}
+
+Theme orangeTheme() {
+    //gradient dodelat
+    QLinearGradient *gr1 = new QLinearGradient(0, -2, 0, 1);
+    gr1->setColorAt(0, QColor(38, 146, 255));
+    gr1->setColorAt(1, QColor(21, 50, 87));
+
+    QLinearGradient *gr2 = new QLinearGradient(-1, -1, 2, 2);
+    gr2->setColorAt(0, QColor(57, 152, 236));
+    gr2->setColorAt(1, QColor(35, 95, 207));
+
+    QRadialGradient *gr3 = new QRadialGradient(0.5, 0.5, 0.9, 0.4, 0.5);
+    gr3->setColorAt(0, QColor(18, 69, 124));
+    gr3->setColorAt(1, QColor(25, 37, 61));
+
+    Theme theme;
+    theme.text.setColor(QColor(221, 221, 221));
+    theme.disabledBackground.setColor(QColor(110, 80, 20));
+    theme.disabled.setColor(QColor(120, 120, 120));
+    theme.hover.setColor(QColor(210, 140, 20));
+    theme.border.setColor(QColor(75, 65, 50));
+    theme.alternate.setColor(QColor(45, 35, 24));
+    theme.background.setColor(QColor(62, 36, 19));
+    theme.backgroundSelectedItem.setColor(QColor(255, 146, 38), gr1);
+    theme.backgroundSecond.setColor(QColor(57, 152, 236), gr2);
+    theme.backgroundProgressbar.setColor(QColor(93, 170, 224));
+    theme.backgroundBadProgressbar.setColor(QColor(228, 75, 75));
+    theme.backgroundProgressbarProgress.setColor(QColor(56, 101, 132));
+    theme.selected.setColor(QColor(135, 182, 255));
+    theme.headerForm.setColor(QColor(30, 41, 59));
+    theme.backgroundItem.setColor(QColor(23, 26, 33));
+    theme.backgroundAlternateItem.setColor(QColor(29, 32, 39));
+    theme.forItemHover.setColor(QColor(43, 46, 53));
+    theme.mainProfileBackground.setColor(QColor(37, 60, 94));
+    theme.mainBackground.setColor(QColor(18, 69, 124), gr3);
+    theme.setPathIcons(":/theme/iconsBlueTheme/");
+    return theme;
+}
+
 //case 4:{//Оранжевая
-//    textColor = "rgb(221, 221, 221)";
-//    disabledBackgroundColor = "rgb(110, 80, 20)";
-//    disabledColor = "rgb(120, 120, 120)";
-//    hoverColor = "rgb(210, 140, 20)";
-//    borderColor = "rgb(75, 65, 50)";
-//    alternateColor = "rgb(45, 35, 24)";
-//    backgroundColor = "rgb(62, 36, 19)";
 //    backgroundSelectedItem = "qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, stop: 0 rgb(255, 146, 38), stop: 1.0 rgb(87, 50, 21))";
 //    backgroundSecondColor = "qlineargradient(x1: -1, y1: -1, x2: 2, y2: 2, stop: 0 rgb(236, 152, 57), stop: 1.0 rgb(207, 95, 35))";
 //    backgroundProgressbar = "rgb(224, 170, 93)";
@@ -1414,274 +1421,6 @@ Theme blueTheme() {
 //    break;
 //}
 
-Theme::Theme() {}
-
-Theme &Theme::setText(const QColor &aColor, QGradient *aGradient) {
-    textColor = aColor;
-    textGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getText() {
-    return textColor;
-}
-
-QString Theme::getTextString() {
-    return getText(textColor, textGradient);
-}
-
-Theme &Theme::setDisabledBackground(const QColor &aColor, QGradient *aGradient) {
-    disabledBackgroundColor = aColor;
-    disabledBackgroundGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getDisabledBackground() {
-    return disabledBackgroundColor;
-}
-
-QString Theme::getDisabledBackgroundString() {
-    return getText(disabledBackgroundColor, disabledBackgroundGradient);
-}
-
-Theme &Theme::setDisabled(const QColor &aColor, QGradient *aGradient) {
-    disabledColor = aColor;
-    disabledGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getDisabled() {
-    return disabledColor;
-}
-
-QString Theme::getDisabledString() {
-    return getText(disabledColor, disabledGradient);
-}
-
-Theme &Theme::setHover(const QColor &aColor, QGradient *aGradient) {
-    hoverColor = aColor;
-    hoverGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getHover() {
-    return hoverColor;
-}
-
-QString Theme::getHoverString() {
-    return getText(hoverColor, hoverGradient);
-}
-
-Theme &Theme::setBorder(const QColor &aColor, QGradient *aGradient) {
-    borderColor = aColor;
-    borderGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBorder() {
-    return borderColor;
-}
-
-QString Theme::getBorderString() {
-    return getText(borderColor, borderGradient);
-}
-
-Theme &Theme::setAlternate(const QColor &aColor, QGradient *aGradient) {
-    alternateColor = aColor;
-    alternateGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getAlternate() {
-    return alternateColor;
-}
-
-QString Theme::getAlternateString() {
-    return getText(alternateColor, alternateGradient);
-}
-
-Theme &Theme::setBackground(const QColor &aColor, QGradient *aGradient) {
-    backgroundColor = aColor;
-    backgroundGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackground() {
-    return backgroundColor;
-}
-
-QString Theme::getBackgroundString() {
-    return getText(backgroundColor, backgroundGradient);
-}
-
-Theme &Theme::setBackgroundSelectedItem(const QColor &aColor, QGradient *aGradient) {
-    backgroundSelectedItemColor = aColor;
-    backgroundSelectedItemGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackgroundSelectedItem() {
-    return backgroundSelectedItemColor;
-}
-
-QString Theme::getBackgroundSelectedItemString() {
-    return getText(backgroundSelectedItemColor, backgroundSelectedItemGradient);
-}
-
-Theme &Theme::setBackgroundSecondGradient(const QColor &aColor, QGradient *aGradient) {
-    backgroundSecondColor = aColor;
-    backgroundSecondGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackgroundSecondGradient() {
-    return backgroundSecondColor;
-}
-
-QString Theme::getBackgroundSecondGradientString() {
-    return getText(backgroundSecondColor, backgroundSecondGradient);
-}
-
-Theme &Theme::setBackgroundProgressbar(const QColor &aColor, QGradient *aGradient) {
-    backgroundProgressbarColor = aColor;
-    backgroundProgressbarGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackgroundProgressbar() {
-    return backgroundProgressbarColor;
-}
-
-QString Theme::getBackgroundProgressbarString() {
-    return getText(backgroundProgressbarColor, backgroundProgressbarGradient);
-}
-
-Theme &Theme::setBackgroundBadProgressbar(const QColor &aColor, QGradient *aGradient) {
-    backgroundBadProgressbarColor = aColor;
-    backgroundBadProgressbarGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackgroundBadProgressbar() {
-    return backgroundBadProgressbarColor;
-}
-
-QString Theme::getBackgroundBadProgressbarString() {
-    return getText(backgroundBadProgressbarColor, backgroundBadProgressbarGradient);
-}
-
-Theme &Theme::setBackgroundProgressbarProgress(const QColor &aColor, QGradient *aGradient) {
-    backgroundProgressbarProgressColor = aColor;
-    backgroundProgressbarProgressGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackgroundProgressbarProgress() {
-    return backgroundProgressbarProgressColor;
-}
-
-QString Theme::getBackgroundProgressbarProgressString() {
-    return getText(backgroundProgressbarProgressColor, backgroundProgressbarProgressGradient);
-}
-
-Theme &Theme::setSelected(const QColor &aColor, QGradient *aGradient) {
-    selectedColor = aColor;
-    selectedGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getSelected() {
-    return selectedColor;
-}
-
-QString Theme::getSelectedString() {
-    return getText(selectedColor, selectedGradient);
-}
-
-Theme &Theme::setHeaderForm(const QColor &aColor, QGradient *aGradient) {
-    headerFormColor = aColor;
-    headerFormGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getHeaderForm() {
-    return headerFormColor;
-}
-
-QString Theme::getHeaderFormString() {
-    return getText(headerFormColor, headerFormGradient);
-}
-
-Theme &Theme::setBackgroundItem(const QColor &aColor, QGradient *aGradient) {
-    backgroundItemColor = aColor;
-    backgroundItemGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackgroundItem() {
-    return backgroundItemColor;
-}
-
-QString Theme::getBackgroundItemString() {
-    return getText(backgroundItemColor, backgroundItemGradient);
-}
-
-Theme &Theme::setBackgroundAlternateItem(const QColor &aColor, QGradient *aGradient) {
-    backgroundAlternateItemColor = aColor;
-    backgroundAlternateItemGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getBackgroundAlternateItem() {
-    return backgroundAlternateItemColor;
-}
-
-QString Theme::getBackgroundAlternateItemString() {
-    return getText(backgroundAlternateItemColor, backgroundAlternateItemGradient);
-}
-
-Theme &Theme::setForItemHover(const QColor &aColor, QGradient *aGradient) {
-    forItemHoverColor = aColor;
-    forItemHoverGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getForItemHover() {
-    return forItemHoverColor;
-}
-
-QString Theme::getForItemHoverString() {
-    return getText(forItemHoverColor, forItemHoverGradient);
-}
-
-Theme &Theme::setMainProfileBackground(const QColor &aColor, QGradient *aGradient) {
-    mainProfileBackgroundColor = aColor;
-    mainProfileBackgroundGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getMainProfileBackground() {
-    return mainProfileBackgroundColor;
-}
-
-QString Theme::getMainProfileBackgroundString() {
-    return getText(mainProfileBackgroundColor, mainProfileBackgroundGradient);
-}
-
-Theme &Theme::setMainBackground(const QColor &aColor, QGradient *aGradient) {
-    mainBackgroundColor = aColor;
-    mainBackgroundGradient = aGradient;
-    return *this;
-}
-
-QColor Theme::getMainBackground() {
-    return mainBackgroundColor;
-}
-
-QString Theme::getMainBackgroundString() {
-    return getText(mainBackgroundColor, mainBackgroundGradient);
-}
-
 Theme &Theme::setPathIcons(const QString &aPath) {
     pathIcons = aPath;
     return *this;
@@ -1722,4 +1461,42 @@ QString Theme::getText(const QColor &aColor, QGradient *aGradient) {
         }
     }
     return aColor.name();
+}
+
+void ThemeColor::setColor(const QColor &aColor, QGradient *aGradient) {
+    Color = aColor;
+    Gradient = aGradient;
+}
+
+QColor ThemeColor::getColor() {
+    return Color;
+}
+
+QString ThemeColor::getString() {
+    if (Gradient) {
+        QStringList stops;
+        for (auto stop: Gradient->stops().toList()) {
+            stops.append(QString("stop: %1 %2").arg(QString::number(stop.first), stop.second.name()));
+        }
+        if (Gradient->type() == QGradient::RadialGradient) {
+            auto gradient = static_cast<QRadialGradient*>(Gradient);
+            return QString("qradialgradient(spread:pad, cx:%1, cy:%2, radius: %3, fx:%4, fy:%5, %6)").arg(
+                        QString::number(gradient->center().x()),
+                        QString::number(gradient->center().y()),
+                        QString::number(gradient->radius()),
+                        QString::number(gradient->focalPoint().x()),
+                        QString::number(gradient->focalPoint().y()),
+                        stops.join(", "));
+        }
+        if (Gradient->type() == QGradient::LinearGradient) {
+            auto gradient = static_cast<QLinearGradient*>(Gradient);
+            return QString("qlineargradient(spread:pad, x1: %1, y1: %2, x2: %3, y2: %4, %5)").arg(
+                        QString::number(gradient->start().x()),
+                        QString::number(gradient->start().y()),
+                        QString::number(gradient->finalStop().x()),
+                        QString::number(gradient->finalStop().y()),
+                        stops.join(", "));
+        }
+    }
+    return Color.name();
 }

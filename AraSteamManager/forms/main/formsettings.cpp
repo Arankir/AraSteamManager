@@ -357,7 +357,7 @@ void FormSettings::buttonImportCategories_Clicked() {
     }
 
     QVector<ExportCategory> exportCategories;
-    foreach(const auto &category, efd.data.toArray()) {
+    for(const auto &category: efd.data.toArray()) {
         exportCategories.append(ExportCategory::fromJson(category.toObject()));
     }
 
@@ -567,9 +567,12 @@ void FormSettings::radioButtonLanguageEnglish_Clicked() {
     Settings::setLanguage(1);
     emit s_settingsUpdated(changedSettings::language);
     QTranslator *translator = new QTranslator;
-    translator->load(":/AraSteamManager_en.qm");
-    qApp->installTranslator(translator);
-    ui->retranslateUi(this);
+    if (translator->load(":/AraSteamManager_en.qm")) {
+        qApp->installTranslator(translator);
+        ui->retranslateUi(this);
+    } else {
+        qWarning() << "error change language";
+    }
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
@@ -577,9 +580,12 @@ void FormSettings::radioButtonLanguageRussian_Clicked() {
     Settings::setLanguage(5);
     emit s_settingsUpdated(changedSettings::language);
     QTranslator *translator = new QTranslator;
-    translator->load(":/AraSteamManager_ru.qm");
-    qApp->installTranslator(translator);
-    ui->retranslateUi(this);
+    if (translator->load(":/AraSteamManager_ru.qm")) {
+        qApp->installTranslator(translator);
+        ui->retranslateUi(this);
+    } else {
+        qWarning() << "error change language";
+    }
     //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
 }
 
