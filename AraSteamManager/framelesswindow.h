@@ -15,6 +15,7 @@
 #include <QLabel>
 #include <QProgressBar>
 #include "classes/common/settings.h"
+#include "classes/common/images.h"
 
 namespace Ui {
 class FramelessWindow;

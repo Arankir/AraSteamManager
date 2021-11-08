@@ -40,7 +40,7 @@ QJsonObject GroupGames::toJson() const {
 GroupGames &GroupGames::fromJson(const QJsonObject &aObject) {
     _title      = aObject.value("title").toString();
     _profileId  = aObject.value("profileId").toString();
-    foreach(const auto &game, aObject.value("games").toArray()) {
+    for(const auto &game: aObject.value("games").toArray()) {
         _games.append(game.toInt());
     }
     return *this;
@@ -60,7 +60,7 @@ GroupGames &GroupsGames::operator[](const int &aIndex) {
 }
 
 GroupsGames &GroupsGames::addGroup(const QString &aTitle) {
-    _groups.append(std::move(GroupGames(aTitle, _profileId)));
+    _groups.append(GroupGames(aTitle, _profileId));
     return *this;
 }
 
@@ -83,7 +83,7 @@ GroupsGames &GroupsGames::fromJson(const QJsonObject &aObject) {
     _profileId = aObject.value("profileId").toString();
     _groups.clear();
     for(auto &&group: aObject.value("groups").toArray()) {
-        _groups.append(std::move(GroupGames(group.toObject())));
+        _groups.append(GroupGames(group.toObject()));
     }
     return *this;
 }

@@ -88,8 +88,9 @@ public:
     QWidget *page_3;
     QVBoxLayout *verticalLayout_6;
     QChartView *ChartsViewYears;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_5;
+    QComboBox *comboBox_3;
     QComboBox *comboBox;
     QListWidget *listWidget;
 
@@ -350,22 +351,27 @@ public:
 
         stackedWidget->addWidget(page_3);
         splitter->addWidget(stackedWidget);
-        widget = new QWidget(splitter);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        verticalLayout_5 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(splitter);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        verticalLayout_5 = new QVBoxLayout(layoutWidget);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
-        comboBox = new QComboBox(widget);
+        comboBox_3 = new QComboBox(layoutWidget);
+        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+
+        verticalLayout_5->addWidget(comboBox_3);
+
+        comboBox = new QComboBox(layoutWidget);
         comboBox->setObjectName(QString::fromUtf8("comboBox"));
 
         verticalLayout_5->addWidget(comboBox);
 
-        listWidget = new QListWidget(widget);
+        listWidget = new QListWidget(layoutWidget);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
 
         verticalLayout_5->addWidget(listWidget);
 
-        splitter->addWidget(widget);
+        splitter->addWidget(layoutWidget);
 
         verticalLayout_9->addWidget(splitter);
 
@@ -376,7 +382,7 @@ public:
 
         retranslateUi(FormStatistics);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
         stackedWidget->setCurrentIndex(0);
 
 

@@ -2,8 +2,10 @@ debug/categoriesgame.o
 debug/comments.o
 debug/favorites.o
 debug/generalfunctions.o
+debug/images.o
 debug/myfilter.o
 debug/settings.o
+debug/theme.o
 debug/groupsgames.o
 debug/hiddengames.o
 debug/requestdata.o

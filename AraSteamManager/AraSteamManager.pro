@@ -29,8 +29,10 @@ SOURCES += \
     classes/common/comments.cpp \
     classes/common/favorites.cpp \
     classes/common/generalfunctions.cpp \
+    classes/common/images.cpp \
     classes/common/myfilter.cpp \
     classes/common/settings.cpp \
+    classes/common/theme.cpp \
     classes/games/groupsgames.cpp \
     classes/games/hiddengames.cpp \
     classes/network/requestdata.cpp \
@@ -90,8 +92,10 @@ HEADERS += \
     classes/common/comments.h \
     classes/common/favorites.h \
     classes/common/generalfunctions.h \
+    classes/common/images.h \
     classes/common/myfilter.h \
     classes/common/settings.h \
+    classes/common/theme.h \
     classes/games/groupsgames.h \
     classes/games/hiddengames.h \
     classes/network/requestdata.h \

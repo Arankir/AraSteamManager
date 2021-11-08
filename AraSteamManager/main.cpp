@@ -87,13 +87,16 @@ void initLanguage(QApplication &app) {
     Settings Setting;
     switch(Setting.language()) {
     case 5:
-        lang->load(":/AraSteamManager_ru.qm");
-        app.installTranslator(lang);
+        if (lang->load(":/AraSteamManager_ru.qm")) {
+            app.installTranslator(lang);
+        }
         break;
     case 1:
     default:
-        lang->load(":/AraSteamManager_en.qm");
-        app.installTranslator(lang);
+        if (lang->load(":/AraSteamManager_en.qm")) {
+            app.installTranslator(lang);
+        }
+        break;
     }
 }
 

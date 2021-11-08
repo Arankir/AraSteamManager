@@ -68,7 +68,7 @@ void QListWidgetAchievements::dropEvent(QDropEvent *aEvent) {
 
         if (!achievementText.isEmpty()) {
             SAchievement *achievement = new SAchievement(achievementText);
-            QModelIndex dropIndex = indexAt(aEvent->pos());
+            QModelIndex dropIndex = indexAt(aEvent->position().toPoint());
             switch(dropIndicatorPosition()) {
             case DropIndicatorPosition::BelowItem: {
                 addAchievementItem(*achievement, dropIndex.row() + 1);

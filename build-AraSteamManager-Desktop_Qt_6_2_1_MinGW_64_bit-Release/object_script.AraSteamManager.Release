@@ -2,8 +2,10 @@ release/categoriesgame.o
 release/comments.o
 release/favorites.o
 release/generalfunctions.o
+release/images.o
 release/myfilter.o
 release/settings.o
+release/theme.o
 release/groupsgames.o
 release/hiddengames.o
 release/requestdata.o

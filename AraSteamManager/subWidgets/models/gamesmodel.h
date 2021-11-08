@@ -44,7 +44,7 @@ signals:
     void s_progress(const QString &status, const int &progress, const int &max);
 
 protected:
-    void loadImages(SGames lGames, QList<GameComment> &comments, int gameCount);
+    void loadImages(const SGames &lGames, QList<GameComment> &comments, int gameCount);
 private slots:
     void onResultAchievements(QList<SAchievementPlayer> achievements, GameID appId);
 

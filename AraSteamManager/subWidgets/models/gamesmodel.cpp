@@ -5,7 +5,7 @@
 
 const QString c_noAchievements = "-";
 
-void GamesModel::loadImages(SGames aGames, QList<GameComment> &aComments, int aGameCount) {
+void GamesModel::loadImages(const SGames &aGames, QList<GameComment> &aComments, int aGameCount) {
     for(auto &game: aGames) {
         auto iterator = std::find_if(aComments.begin(),
                                      aComments.end(),
@@ -14,9 +14,9 @@ void GamesModel::loadImages(SGames aGames, QList<GameComment> &aComments, int aG
                                      });
 
         if (iterator != aComments.end()) {
-            _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0}));
+            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
         } else {
-            _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0}));
+            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0});
         }
         emit s_progress(tr("Загрузка данных об игре"), ++_loadedGames, aGameCount);
 //        qDebug() << 11 << _loadedGames << gameCount;
@@ -29,35 +29,35 @@ void GamesModel::setGames(const SGames &games, const QString &userId) {
     auto comments = GameComment::load(_userId);
     _loadedGames = 0;
 
-    int step = games.count() / QThread::idealThreadCount();
-    int y = 0;
+//    int step = games.count() / QThread::idealThreadCount();
+//    int y = 0;
 
-    QVector<QList<SGame>> tasks;
-    for( ; y < games.count() - step; y += step ) {
-//        qDebug() << y << y + step;
-        tasks << games.mid(y, y + step);
-    }
-    QFuture<void> future = QtConcurrent::map(tasks, std::bind(&GamesModel::loadImages, this,  std::placeholders::_1, comments, games.count()));
-    loadImages(games.mid(y), comments, games.count());
-    future.waitForFinished();
-
-
-//    int progress = 0;
-//    for(auto &game: games) {
-//        auto iterator = std::find_if(comments.begin(),
-//                                     comments.end(),
-//                                     [=](const GameComment &gameComment) {
-//                                        return gameComment.gameId() == game.sAppId();
-//                                     });
-
-//        if (iterator != comments.end()) {
-//            _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0}));
-//        } else {
-//            _gamesInModel.append(std::move(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0}));
-//        }
-//        emit s_progress(tr("Загрузка данных об игре"), ++progress, games.count());
-//        qDebug() << 33 << progress << games.count();
+//    QVector<QList<SGame>> tasks;
+//    for( ; y < games.count() - step; y += step ) {
+////        qDebug() << y << y + step;
+//        tasks << games.mid(y, y + step);
 //    }
+//    QFuture<void> future = QtConcurrent::map(tasks, std::bind(&GamesModel::loadImages, this,  std::placeholders::_1, comments, games.count()));
+//    loadImages(games.mid(y), comments, games.count());
+//    future.waitForFinished();
+
+
+    int progress = 0;
+    for(auto &game: games) {
+        auto iterator = std::find_if(comments.begin(),
+                                     comments.end(),
+                                     [=](const GameComment &gameComment) {
+                                        return gameComment.gameId() == game.appId();
+                                     });
+
+        if (iterator != comments.end()) {
+            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
+        } else {
+            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0});
+        }
+        emit s_progress(tr("Загрузка данных об игре"), ++progress, games.count());
+        qDebug() << 33 << progress << games.count();
+    }
     for (const auto &game: qAsConst(_gamesInModel)) {
         //Загрузка достижений игрока
         SAchievementPlayer::load(game.game.appId(), _userId, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, game.game.appId()));
