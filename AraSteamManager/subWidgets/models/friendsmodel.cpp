@@ -12,7 +12,7 @@ void FriendsModel::setFriends(const QList<SFriend> &aFriends) {
     for(auto &profile: profiles) {
         for (const auto &currentFriend: aFriends) {
             if (currentFriend.steamId() == profile.steamID()) {
-                _friends.append(std::move(SFriendProfile(currentFriend, profile)));
+                _friends.append(SFriendProfile(currentFriend, profile));
                 break;
             }
         }

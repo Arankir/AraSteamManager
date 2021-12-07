@@ -41,11 +41,11 @@ QJsonObject SAchievement::toJson() const {
 }
 
 QPixmap SAchievement::icon(int aGameId) {
-    return QPixmap::fromImage(loadPixmap(_pixmapIcon, iconPath(), Paths::imagesAchievements(QString::number(aGameId), iconPath()), QSize(64, 64)));
+    return QPixmap::fromImage(loadImage(_pixmapIcon, iconPath(), Paths::imagesAchievements(QString::number(aGameId), iconPath()), QSize(64, 64)));
 }
 
 QPixmap SAchievement::iconGray(int aGameId) {
-    return QPixmap::fromImage(loadPixmap(_pixmapIconGray, iconGrayPath(), Paths::imagesAchievements(QString::number(aGameId), iconGrayPath()), QSize(64, 64)));
+    return QPixmap::fromImage(loadImage(_pixmapIconGray, iconGrayPath(), Paths::imagesAchievements(QString::number(aGameId), iconGrayPath()), QSize(64, 64)));
 }
 #define SAchievementEnd }
 
@@ -85,7 +85,7 @@ QJsonObject SAchievementSchema::toJson() const {
 QList<SAchievementSchema> onLoadSchema(const QByteArray &byteArray) {
     QList<SAchievementSchema> list;
     for(auto &&schema: QJsonDocument::fromJson(byteArray).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray()) {
-        list.append(std::move(SAchievementSchema(schema.toObject())));
+        list.append(SAchievementSchema(schema.toObject()));
     }
     return list;
 }
@@ -115,7 +115,7 @@ QJsonObject SAchievementPercentage::toJson() const {
 QList<SAchievementPercentage> onLoadPercentage(QByteArray byteArray) {
     QList<SAchievementPercentage> list;
     for(auto &&percentage: QJsonDocument::fromJson(byteArray).object().value("achievementpercentages").toObject().value("achievements").toArray()) {
-        list.append(std::move(SAchievementPercentage(percentage.toObject())));
+        list.append(SAchievementPercentage(percentage.toObject()));
     }
     return list;
 }
@@ -148,7 +148,7 @@ QJsonObject SAchievementPlayer::toJson() const {
 QList<SAchievementPlayer> onLoadPlayer(const QByteArray &byteArray) {
     QList<SAchievementPlayer> list;
     for(auto &&player: QJsonDocument::fromJson(byteArray).object().value("playerstats").toObject().value("achievements").toArray()) {
-        list.append(std::move(SAchievementPlayer(player.toObject())));
+        list.append(SAchievementPlayer(player.toObject()));
     }
     return list;
 }

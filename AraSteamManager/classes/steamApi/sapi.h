@@ -5,7 +5,8 @@
 #include "classes/common/settings.h"
 #include "classes/common/images.h"
 
-QImage loadPixmap(QImage &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize);
+QImage loadImage(QImage &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize);
+QImage loadImage(const QString &aUrl, const QString &aSavePath, const QSize &aSize);
 
 typedef QString ProfileID;
 typedef QStringList ProfileIDs;

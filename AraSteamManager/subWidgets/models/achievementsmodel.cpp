@@ -22,7 +22,7 @@ void AchievementsModel::setAchievements(const ProfileID &aUserId, const GameID &
                 continue;
             }
             QImage pix;
-            auto achievement = AchievementInModel {QPixmap::fromImage(loadPixmap(pix, global.icon(), Paths::imagesAchievements(QString::number(aGameId), global.icon()), QSize(64, 64))),
+            auto achievement = AchievementInModel {QPixmap::fromImage(loadImage(pix, global.icon(), Paths::imagesAchievements(QString::number(aGameId), global.icon()), QSize(64, 64))),
                                                     QStringList(),
                                                     global,
                                                     percent,
@@ -327,7 +327,7 @@ SAchievement AchievementsModel::getAchievement(const QModelIndex &index) const {
 SAchievements AchievementsModel::getAchievements() const {
     SAchievements achievements;
     for (const auto &achievement: _achievementsInModel) {
-        achievements.append(std::move(SAchievement(achievement.schema, achievement.profiles[0], achievement.percent)));
+        achievements.append(SAchievement(achievement.schema, achievement.profiles[0], achievement.percent));
     }
     return achievements;
 }
@@ -365,7 +365,7 @@ int AchievementsModel::addProfile(const SProfile &aProfile) {
         }
     } else {
         for (auto &achievement: _achievementsInModel) {
-            achievement.profiles.append(std::move(SAchievementPlayer()));
+            achievement.profiles.append(SAchievementPlayer());
         }
     }
     endInsertColumns();

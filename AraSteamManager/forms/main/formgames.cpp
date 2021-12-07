@@ -87,7 +87,7 @@ QList<HiddenGame> FormGames::hiddenList() {
 void FormGames::updateHiddenGames() {
     QStringList list;
     for (const auto &hide: hiddenList()) {
-        list.append(std::move(QString::number(hide.id())));
+        list.append(QString::number(hide.id()));
     }
     _filterGames.setHide(list);
     ui->TableGames->resizeRowsToContents();
@@ -182,7 +182,7 @@ void FormGames::updateGroupsFilter() {
         for(auto &group: _groups) {
             if (group.title() == selectedGroup) {
                 for (const auto &game: group.games()) {
-                    list.append(std::move(QString::number(game)));
+                    list.append(QString::number(game));
                 }
             }
         }

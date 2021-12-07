@@ -5,31 +5,36 @@
 const int c_toolTipMaxWidth = 30;
 
 QString textToToolTip(const QString &aText, const QString &aSplitter) {
-    QStringList wordsList = aText.split(aSplitter);
+    QStringList linesList = aText.split("\n");
     QString result;
-    int currentWidth = 0;
-    while (!wordsList.isEmpty()) {
-        if (wordsList[0].length() + currentWidth > c_toolTipMaxWidth) {
-            if (currentWidth > 0) {
-                result += aSplitter + "\n";
-                currentWidth = 0;
-            } else {
-                QString longWord = wordsList.takeFirst();
-                while (longWord.length() > c_toolTipMaxWidth) {
-                    result += longWord.left(c_toolTipMaxWidth) + "\n";
-                    longWord.remove(0, c_toolTipMaxWidth);
+    for (QString &line: linesList) {
+        QStringList wordsList = line.split(aSplitter);
+        int currentWidth = 0;
+        while (!wordsList.isEmpty()) {
+            if (wordsList[0].length() + currentWidth > c_toolTipMaxWidth) {
+                if (currentWidth > 0) {
+                    result += aSplitter + "\n";
+                    currentWidth = 0;
+                } else {
+                    QString longWord = wordsList.takeFirst();
+                    while (longWord.length() > c_toolTipMaxWidth) {
+                        result += longWord.left(c_toolTipMaxWidth) + "\n";
+                        longWord.remove(0, c_toolTipMaxWidth);
+                    }
+                    result += longWord;
+                    currentWidth = longWord.length();
                 }
-                result += longWord;
-                currentWidth = longWord.length();
             }
+            if (currentWidth != 0) {
+                result += aSplitter;
+                ++currentWidth;
+            }
+            currentWidth += wordsList[0].length();
+            result += wordsList.takeFirst();
         }
-        if (currentWidth != 0) {
-            result += aSplitter;
-            ++currentWidth;
-        }
-        currentWidth += wordsList[0].length();
-        result += wordsList.takeFirst();
+        result += "\n";
     }
+    result.remove(result.length() - 2, 2);
     return result;
 }
 
@@ -96,4 +101,50 @@ bool centralize(const QWidget *parent, QWidget *child) {
                 childSize.height());
     child->setGeometry(result);
     return true;
+}
+
+int daysInMonth(const QDate aDate) {
+    switch (aDate.month()) {
+    case 1: {
+        return 31;
+    }
+    case 2: {
+        if (aDate.isLeapYear(aDate.year())) {
+            return 29;
+        } else {
+            return 28;
+        }
+    }
+    case 3: {
+        return 31;
+    }
+    case 4: {
+        return 30;
+    }
+    case 5: {
+        return 31;
+    }
+    case 6: {
+        return 30;
+    }
+    case 7: {
+        return 31;
+    }
+    case 8: {
+        return 31;
+    }
+    case 9: {
+        return 30;
+    }
+    case 10: {
+        return 31;
+    }
+    case 11: {
+        return 30;
+    }
+    case 12: {
+        return 31;
+    }
+    }
+    return 0;
 }

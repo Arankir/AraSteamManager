@@ -220,8 +220,8 @@ QComboBox::down-arrow {
 }
 
 QComboBox::down-arrow:on,
-QComboBox::down-arrow:hover,
-QComboBox::down-arrow:focus {
+QComboBox::down-arrow:hover/*,
+QComboBox::down-arrow:focus*/ {
     image: url("%1arrow_down.png");
 }
 

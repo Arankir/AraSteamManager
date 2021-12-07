@@ -27,10 +27,10 @@ int main(int argc, char *argv[]) {
 
     #if __cplusplus >= 202002L
         // C++20 (and later) code
-        qDebug() << "C++20 (and later)" << endl;
+        qDebug() << "C++20 (and later)";
     #endif
 
-    qApp->setStyle(QStyleFactory::create("Fusion"));
+//    qApp->setStyle(QStyleFactory::create("Fusion"));
 
     registerTypes();
     initSetting();
@@ -101,7 +101,7 @@ void initLanguage(QApplication &app) {
 }
 
 void initFont() {
-    QFont font(Settings::defaultFont(), 10);
+    QFont font(Theme::defaultFont(), 10);
     font.setStyleHint(QFont::Monospace);
     //font.setPointSize(12);
     //font.setPixelSize(12);

@@ -15,7 +15,7 @@ class FormFriendItemCompare : public QWidget {
     Q_OBJECT
 
 public:
-    explicit FormFriendItemCompare(SProfile &steamFriend, QListWidgetItem *parent = nullptr);
+    explicit FormFriendItemCompare(const SProfile &steamFriend, QListWidgetItem *parent = nullptr);
     ~FormFriendItemCompare();
     void setPercent(const double &aPercent);
     void setHiddenFilter(const bool &aHidden);

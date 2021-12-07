@@ -12,14 +12,13 @@ enum class FriendType {
 
 class QListWidgetFriend : public QListWidgetItem {
 public:
-    QListWidgetFriend(SProfile *steamFriend, FriendType type);
+    QListWidgetFriend(const SProfile &steamFriend, FriendType type = FriendType::none);
     QListWidgetFriend(): QListWidgetItem() {}
-    ~QListWidgetFriend();
 
     QListWidgetFriend &operator=(const QListWidgetFriend&);
     bool operator==(const QListWidgetFriend&);
 
-    SProfile *_steamFriend = nullptr;
+    SProfile _steamFriend;
     FriendType _type = FriendType::none;
 };
 

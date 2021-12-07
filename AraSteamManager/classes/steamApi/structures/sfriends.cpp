@@ -31,7 +31,7 @@ bool SFriend::operator!=(const SFriend &aFriend) const {
 QList<SFriend> onLoadFriend(const QByteArray &byteArray) {
     QList<SFriend> list;
     for(auto &&ban: QJsonDocument::fromJson(byteArray).object().value("friendslist").toObject().value("friends").toArray()) {
-        list.append(std::move(SFriend(ban.toObject())));
+        list.append(SFriend(ban.toObject()));
     }
     return list;
 }

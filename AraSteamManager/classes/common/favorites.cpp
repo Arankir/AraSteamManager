@@ -88,7 +88,7 @@ bool Favorites::addGame(const QString &aIdUser, const SGame &aGame, const bool &
                                             && (aGame.name() == game.name());
                                  });
     if (iterator == _fGame.end()) {
-        _fGame.append(std::move(FavoriteGame(aIdUser, aGame)));
+        _fGame.append(FavoriteGame(aIdUser, aGame));
         saveGames();
         return true;
     } else {
@@ -109,7 +109,7 @@ bool Favorites::addFriend(const QString &aIdUser, const SProfile &aFriendProfile
                                             && (aFriendProfile.steamID() == steamFriend.friendId());
                                  });
     if (iterator == _fFriend.end()) {
-        _fFriend.append(std::move(FavoriteFriend(aIdUser, aFriendLink.friendSince(), aFriendProfile.steamID(), aFriendProfile.personaName())));
+        _fFriend.append(FavoriteFriend(aIdUser, aFriendLink.friendSince(), aFriendProfile.steamID(), aFriendProfile.personaName()));
         saveFriends();
         return true;
     } else {
@@ -333,7 +333,7 @@ bool FavoriteAchievementsGame::addAchievement(const SAchievement &aAchievement, 
         }
         return false;
     } else {
-        _achievements.append(std::move(FavoriteAchievement(aAchievement)));
+        _achievements.append(FavoriteAchievement(aAchievement));
         return true;
     }
 }
@@ -388,7 +388,7 @@ FavoriteAchievementsGame &FavoriteAchievementsGame::fromJson(const QJsonObject &
     _userId = achievements.value("game").toObject().value("userId").toString();
 
     for (auto &&achievement: achievements.value("values").toArray()) {
-        _achievements.append(std::move(FavoriteAchievement(achievement.toObject())));
+        _achievements.append(FavoriteAchievement(achievement.toObject()));
     }
     return *this;
 }

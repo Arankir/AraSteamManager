@@ -57,7 +57,7 @@ void ThreadStatistics::onResultAchievements(const SAchievementsPlayer &aAchievem
     }
     if (++nowProcessed == _statistics.games.count()) {
         nowProcessed = 0;
-        emit s_finished();
+        emit s_finish(_statistics);
         this->deleteLater();
     }
 }
@@ -92,4 +92,36 @@ void ThreadStatistics::updateTimes(const QDateTime &aUnlockedTime) {
     } else {
         _statistics.years.append(YearCount(QString::number(year), 1));
     }
+}
+
+void Statistics::changeProfile(const SProfile &aProfile, const SGames &aGames) {
+    profile = aProfile;
+    games = aGames;
+
+    summAverages = 0.0;
+    achievementCount = 0;
+    complete.clear();
+    started.clear();
+    notStarted.clear();
+    noAchievements.clear();
+    completedAchievements.clear();
+    years.clear();
+}
+
+void Statistics::sortAllLists() {
+    mySort<GameWithPercent>(complete, [](GameWithPercent &game1, GameWithPercent &game2)
+        {return game1.game < game2.game;});
+    mySort<GameWithPercent>(started, [](GameWithPercent &game1, GameWithPercent &game2)
+        {return game1.game < game2.game;});
+    mySort<GameWithPercent>(notStarted, [](GameWithPercent &game1, GameWithPercent &game2)
+        {return game1.game < game2.game;});
+    mySort<GameWithPercent>(noAchievements, [](GameWithPercent &game1, GameWithPercent &game2)
+        {return game1.game < game2.game;});
+    mySort<CompletedAchievement>(completedAchievements, [](CompletedAchievement &game1, CompletedAchievement &game2)
+        {return game1.achievement.unlockTime() < game2.achievement.unlockTime();});
+    std::sort(years.begin(),
+              years.end(),
+              [](const YearCount &p1, const YearCount &p2) {
+                    return p1.year < p2.year;
+                });
 }

@@ -25,7 +25,7 @@ void ProgressBarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     r.moveTop(option.rect.top() + (option.rect.height() - 32) / 2 + 5);
 //    qDebug() << option.rect << option.rect.top() << option.rect.left() << option.rect.right() << option.rect.bottom() << option.rect.center() << r;
     progressBarOption.rect = r;
-    progressBarOption.fontMetrics = QApplication::fontMetrics();
+//    progressBarOption.fontMetrics = QApplication::fontMetrics();
     progressBarOption.minimum = 0;
     progressBarOption.maximum = max;
     progressBarOption.progress = cur;

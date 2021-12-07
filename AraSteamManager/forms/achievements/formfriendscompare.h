@@ -24,7 +24,7 @@ class FormFriendsCompare : public Form {
 public slots:
     void updateSettings(QFlags<changedSettings> aSettings) override;
     void setInitData(const SProfile &profile, const SGame &game, AchievementsModel *achievementsModel);
-    void addFriendToList(SProfile &steamFriend);
+    void addFriendToList(const SProfile &steamFriend);
     void setModel(QAbstractItemModel *model);
     void filtersValueUpdated();
 

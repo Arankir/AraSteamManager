@@ -147,7 +147,7 @@ void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
         QList<FavoriteFriend> favoriteFriends = Favorites::friends();
         QStringList list;
         for (const auto &favorite: qAsConst(favoriteFriends)) {
-            list.append(std::move(favorite.friendId()));
+            list.append(favorite.friendId());
         }
         _filterFriends.setFavorites(list);
         break;

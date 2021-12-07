@@ -1,7 +1,7 @@
 #include "formfrienditemcompare.h"
 #include "ui_formfrienditemcompare.h"
 
-FormFriendItemCompare::FormFriendItemCompare(SProfile &steamFriend, QListWidgetItem *parent) :
+FormFriendItemCompare::FormFriendItemCompare(const SProfile &steamFriend, QListWidgetItem *parent) :
                         ui(new Ui::FormFriendItemCompare),
                         _item(parent),
                         _steamProfile(new SProfile(steamFriend)) {

@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS  QT_MESSAGELOGCONTEXT #Названия фун
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++2a
 
 SOURCES += \
     classes/achievements/categoriesgame.cpp \
@@ -67,6 +67,7 @@ SOURCES += \
     subWidgets/actions/actioncategory.cpp \
     subWidgets/comboBoxes/multiselectcombobox.cpp \
     subWidgets/comboBoxes/qcomboboxfriends.cpp \
+    subWidgets/comboBoxes/qcomboboxfriendswithgame.cpp \
     subWidgets/delegates/progressbardelegate.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
     subWidgets/items/qlistwidgetfriend.cpp \
@@ -129,6 +130,7 @@ HEADERS += \
     subWidgets/actions/actioncategory.h \
     subWidgets/comboBoxes/multiselectcombobox.h \
     subWidgets/comboBoxes/qcomboboxfriends.h \
+    subWidgets/comboBoxes/qcomboboxfriendswithgame.h \
     subWidgets/delegates/progressbardelegate.h \
     subWidgets/items/qlistwidgetachievement.h \
     subWidgets/items/qlistwidgetfriend.h \

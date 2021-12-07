@@ -16,6 +16,7 @@ bool createDir(const QString &path);
 bool saveFile(const QString &filePath, const QByteArray &data);
 bool readFile(const QString &filePath, QByteArray &data);
 bool centralize(const QWidget *parent, QWidget *child);
+int daysInMonth(const QDate);
 
 template <typename T>
 QList<T> &mySort(QList<T> &aList, bool(*compare)(T &t1, T &t2) = [](T &t1, T &t2){return t1<t2;}) {
@@ -33,6 +34,14 @@ QList<T> &mySort2(QList<T> &aList, const std::function<bool(T &t1, T &t2)> compa
     list.sort(compare);
     aList = QList<T>(list.begin(), list.end());
     return aList;
+}
+
+template <typename T>
+QList<T> reverseList(const QList<T> &aList) {
+    QList<T> result;
+    result.reserve(aList.size());
+    std::reverse_copy(aList.begin(), aList.end(), std::back_inserter(result));
+    return result;
 }
 
 template <class T>

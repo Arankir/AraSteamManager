@@ -2,13 +2,13 @@
 #include "ui_formstatistics.h"
 #include <math.h>
 
-const int c_steamReleaseYear = 2002;
+constexpr int c_steamReleaseYear = 2002;
 constexpr int c_secsInDay = 60 * 60 * 24;
-//TODO добавить график последних 30 дней, добавить последние (50) ачивок плитками, добавить имена в легенде, добавить друзей для сравнения
+//TODO добавить имена в легенде, добавить друзей для сравнения
 QChartView *initAndSetChart(QChart *&chart, const QString &chartTitle, QChartView *chartView) {
     chart = new QChart();
     chart->legend()->setAlignment(Qt::AlignBottom);
-    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->setAnimationOptions(QChart::NoAnimation);
     chart->setTitle(chartTitle);
     chart->setBackgroundVisible(false);
     chartView->setChart(chart);
@@ -92,20 +92,21 @@ QStringList getYearsTitles() {
         list << date.toString("yyyy");
         date = date.addYears(1);
     }
-//#define tr QObject::tr
-    return list;//QStringList {tr("Январь"), tr("Февраль"), tr("Март"), tr("Апрель"), tr("Май"), tr("Июнь"), tr("Июль"), tr("Август"), tr("Сентябрь"), tr("Октябрь"), tr("Ноябрь"), tr("Декабрь")};
-//#undef tr
+    return list;
 }
 
 int roundToDesimal(int data) {
-//    int decim = 1;
     data *= 1.1;
-//    int copyData = data;
-//    while (copyData > 10) {
-//        decim *= 10;
-//        copyData /= 10;
-//    }
-//    data += (decim - (data % decim));
+    QVector<double> logs {log10(0), log10(1), log10(2), log10(3), log10(4), log10(5), log10(6), log10(7), log10(8), log10(9)};
+    double dDecimal = log10(data);
+    int iDecimal = dDecimal;
+    data = pow(10, iDecimal + 1);
+    for (int i = 1; i < 10; ++i) {
+        if ((dDecimal - iDecimal) < logs[i]) {
+            data = pow(10, logs[i] + iDecimal);
+            break;
+        }
+    }
     return data;
 }
 
@@ -126,15 +127,15 @@ QPieSlice *getPieChart(QString aTitle, int aValue, int aAllValue, QColor aColor)
 }
 
 FormStatistics::FormStatistics(const SProfile &aProfile, const SGames &aGames, QWidget *aParent):
-Form(aParent), ui(new Ui::FormStatistics), _statistics(aProfile, aGames)/*_profile(aProfile), _games(aGames)*/ {
+Form(aParent), ui(new Ui::FormStatistics), _userProfile(aProfile), _games(aGames), _statisticProfile(_userProfile), _statistics(aProfile, aGames) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
-//    QFont font(Settings::defaultFont());
     ui->TableViewGames->setVisible(false);
     _gamePercent = new QChart();
     _gamePercent->setBackgroundVisible(false);
     _gamePercent->setAnimationOptions(QChart::SeriesAnimations);
-    _gamePercent->legend()->setAlignment(Qt::AlignRight);
+//    _gamePercent->legend()->setAlignment(Qt::AlignRight);
+    _gamePercent->legend()->setAlignment(Qt::AlignBottom);
     _gamePercent->setMargins(QMargins(1, 1, 1, 1));
     switch(Settings::theme()) {
     case 1: {
@@ -146,10 +147,29 @@ Form(aParent), ui(new Ui::FormStatistics), _statistics(aProfile, aGames)/*_profi
     }
     }
 
-    initAndSetChart(_chartT, tr("Последние 30 дней"),     ui->ChartsViewTimes);
-//    initAndSetChart(_chartT, tr("Достижения по часам"),     ui->ChartsViewTimes);
-//    initAndSetChart(_chartM, tr("Достижения по месяцам"),   ui->ChartsViewMonths);
+    ui->comboBoxGraph->addItems(QStringList {tr("Последний месяц"), tr("По годам")});
+
+    initAndSetChart(_chartT, tr("Последний месяц"),     ui->ChartsViewTimes);
+    QBarCategoryAxis *axisXT = new QBarCategoryAxis();
+    QDate date = QDate::currentDate().addDays(-QDate::currentDate().day() + 1);
+    QStringList monthsTitles;
+    while (date.month() == QDate::currentDate().month()) {
+        monthsTitles << date.toString("dd");
+        date = date.addDays(1);
+    }
+    axisXT->append(monthsTitles);
+    initChart(_chartT, axisXT);
     initAndSetChart(_chartY, tr("Достижения по годам"),     ui->ChartsViewYears);
+    QBarCategoryAxis *axisXY = new QBarCategoryAxis();
+    axisXY->append(getYearsTitles());
+    initChart(_chartY, axisXY);
+
+    initingTable(ui->tableViewLastAchievements);
+    ui->tableViewLastAchievements->horizontalHeader()->setVisible(false);
+    ui->tableViewLastAchievements->verticalHeader()->setVisible(false);
+
+    ui->horizontalLayoutDonut->setStretch(0, 1);
+    ui->horizontalLayoutDonut->setStretch(1, 2);
 
     ui->TableViewGames->setVerticalScrollMode  (QAbstractItemView::ScrollMode::ScrollPerPixel);
     ui->TableViewGames->setHorizontalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
@@ -161,6 +181,17 @@ Form(aParent), ui(new Ui::FormStatistics), _statistics(aProfile, aGames)/*_profi
 //    ui->TableViewGames->verticalHeader()->setVisible(false);
     ui->TableViewGames->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->TableViewGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+
+    QStringList list;
+    for(const SFriend &sFriend: SFriend::load(aProfile.steamID())) {
+        list.append(sFriend.steamId());
+    }
+    ui->comboBoxCurrentProfile->clear();
+    auto profiles = SProfile::load(list);
+    for(const auto &profileFriend: profiles) {
+        ui->comboBoxCurrentProfile->addItem(profileFriend);
+    }
 
     connect(ui->TableViewGames, &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
         SGame *game = currentGame();
@@ -181,6 +212,25 @@ Form(aParent), ui(new Ui::FormStatistics), _statistics(aProfile, aGames)/*_profi
             }
         }
     });
+
+    connect(ui->comboBoxGraph, &QComboBox::currentIndexChanged, this, [&](int aIndex) {
+        switch (aIndex) {
+        case 0: {
+            ui->stackedWidgetGraphs->setCurrentIndex(0);
+            break;
+        }
+        case 1: {
+            ui->stackedWidgetGraphs->setCurrentIndex(2);
+            break;
+        }
+        }
+    });
+
+    connect(ui->comboBoxCurrentProfile, &ComboBoxFriends::s_friendClicked, this, &FormStatistics::updateStatisticProfile);
+    connect(ui->comboBoxGraphsFriends, &ComboBoxFriends::s_friendClicked, this, [&](const SProfile &lProfile) {
+
+    });
+
     createThread();
 }
 
@@ -193,55 +243,41 @@ SGame *FormStatistics::currentGame() {
     _currentIndex = ui->TableViewGames->model()->index(row, StaticticGamesIndex).data().toString().toInt();
     int appId     = ui->TableViewGames->model()->index(row, StaticticGamesAppId).data().toString().toInt();
 
+    QList<GameWithPercent> *list;
+
     switch(_currentGamesType) {
     case GamesType::complete: {
-        auto iterator = std::find_if(_statistics.complete.begin(),
-                                     _statistics.complete.end(),
+        list = &_statistics.complete;
+        break;
+    }
+    case GamesType::started: {
+        list = &_statistics.started;
+        break;
+    }
+    case GamesType::notStarted: {
+        list = &_statistics.notStarted;
+        break;
+    }
+    case GamesType::noAchievements: {
+        list = &_statistics.noAchievements;
+        break;
+    }
+    default: {
+        return nullptr;
+    }
+    }
+
+    if (list != nullptr) {
+        auto iterator = std::find_if(list->begin(),
+                                     list->end(),
                                      [=](const GameWithPercent &game) {
                                          return game.game.appId() == appId;
                                      });
         if (iterator != _statistics.complete.end()) {
             return &(*iterator).game;
         }
-        return nullptr;
     }
-    case GamesType::started: {
-        auto iterator = std::find_if(_statistics.started.begin(),
-                                     _statistics.started.end(),
-                                     [=](const /*QPair<SGame, double>*/GameWithPercent &game) {
-                                         return game.game.appId() == appId;
-                                     });
-        if (iterator != _statistics.started.end()) {
-            return &(*iterator).game;
-        }
-        return nullptr;
-    }
-    case GamesType::notStarted: {
-        auto iterator = std::find_if(_statistics.notStarted.begin(),
-                                     _statistics.notStarted.end(),
-                                     [=](const GameWithPercent &game) {
-                                         return game.game.appId() == appId;
-                                     });
-        if (iterator != _statistics.notStarted.end()) {
-            return &(*iterator).game;
-        }
-        return nullptr;
-    }
-    case GamesType::noAchievements: {
-        auto iterator = std::find_if(_statistics.noAchievements.begin(),
-                                     _statistics.noAchievements.end(),
-                                     [=](const GameWithPercent &game) {
-                                         return game.game.appId() == appId;
-                                     });
-        if (iterator != _statistics.noAchievements.end()) {
-            return &(*iterator).game;
-        }
-        return nullptr;
-    }
-    default: {
-        return nullptr;
-    }
-    }
+    return nullptr;
 }
 
 QMenu *FormStatistics::createMenu(SGame &aGame) {
@@ -253,14 +289,9 @@ QMenu *FormStatistics::createMenu(SGame &aGame) {
 
     QMenu *menu = new QMenu(this);
     menu->addAction (actionAchievements);
-    connect (actionAchievements,    &QAction::triggered,    this,   [=](){
-//        QList<SAchievementPlayer> player = SAchievementPlayer::load(appId, _profile.steamID());
-//        if (player.count() == 0) {
-//            QMessageBox::warning(this, tr("Ошибка"), tr("В этой игре нет достижений"));
-//        } else {
-            emit s_showAchievements(aGame);
-//        }
-        });
+    connect (actionAchievements, &QAction::triggered, this, [=]() {
+        emit s_showAchievements(aGame);
+    });
 
     return menu;
 }
@@ -302,9 +333,7 @@ void FormStatistics::retranslate() {
     } else {
         qWarning() << "on retranslate series.count = 0";
     }
-//    _chartT->setTitle(tr("Достижения по часам"));
-    _chartT->setTitle(tr("Последние 30 дней"));
-//    _chartM->setTitle(tr("Достижения по месяцам"));
+    _chartT->setTitle(tr("Последний месяц"));
     _chartY->setTitle(tr("Достижения по годам"));
 //    if((_chartM->series().size() > 0) && (_chartM->axes(Qt::Horizontal, _chartM->series().at(0)).size() > 0)) {
 //        if (QBarCategoryAxis *bar = dynamic_cast<QBarCategoryAxis*>(_chartM->axes(Qt::Horizontal, _chartM->series().at(0)).at(0))) {
@@ -314,10 +343,9 @@ void FormStatistics::retranslate() {
 }
 
 void FormStatistics::createThread() {
-//    ThreadStatistics *statistics = new ThreadStatistics(_games, _profile.steamID(), _achievementCount, _noAchievements, _complete, _started, _notStarted, _times, _months, _years);
     ThreadStatistics *statistics = new ThreadStatistics(_statistics);
     connect(statistics, &ThreadStatistics::s_progress,  this, &Form::setStatus);
-    connect(statistics, &ThreadStatistics::s_finished,  this, &FormStatistics::onFinish);
+    connect(statistics, &ThreadStatistics::s_finish,  this, &FormStatistics::onFinish);
     statistics->start();
 }
 
@@ -357,11 +385,13 @@ QChart *updateChartWidth(QChart *chart) {
             }
         }
     }
-    qDebug() << min << max << chart->title() << categories.at(min) << categories.at(max);
-    for (auto axis: chart->axes(Qt::Horizontal)) {
-//        axis->setRange(min, max);
-        axis->setMin(categories.at(min));
-        axis->setMax(categories.at(max));
+    if (max != 0 && min != 2147483647) {
+        //qDebug() << min << max << chart->title() << categories.at(min) << categories.at(max);
+        for (auto axis: chart->axes(Qt::Horizontal)) {
+    //        axis->setRange(min, max);
+            axis->setMin(categories.at(min));
+            axis->setMax(categories.at(max));
+        }
     }
     return chart;
 }
@@ -422,12 +452,12 @@ QChart *setDataToLineChart(QChart *chart, QVector<QPointF> &datas, const QString
     lineSeries->attachAxis(chart->axes(Qt::Horizontal).at(0));
     lineSeries->attachAxis(chart->axes(Qt::Vertical).at(0));
     lineSeries->setPointLabelsVisible(true);
-    lineSeries->setPointLabelsFont(QFont(Settings::defaultFont(), 14));
+    lineSeries->setPointLabelsFont(QFont(Theme::defaultFont(), 14));
     lineSeries->setPointLabelsFormat("@yPoint");
 
     lineSeries->setColor(color);
     QColor label(color);
-    label.setHsl(color.hue(), (int)(color.saturation() * 0.8), (int)(color.lightness() * 0.8));
+    label.setHsl(color.hue(), (int)(color.saturation() * 0.5), (int)(color.lightness() * 0.7));
     lineSeries->setPointLabelsColor(label);
     lineSeries->setPointsVisible(true);
     lineSeries->setPointLabelsClipping(false);
@@ -442,7 +472,8 @@ QColor nextColor(const QColor &aColor) {
     return newColor;
 }
 
-void FormStatistics::setInfo(Statistics aStatistic) {
+void FormStatistics::setInfo(Statistics &aStatistic) {
+    constexpr int lastAchievements = 50;
     ui->labelAverageAllGamesValue->setText(QString::number(aStatistic.summAverages / (aStatistic.complete.count() + aStatistic.started.count() + aStatistic.notStarted.count())) + "%");
     ui->labelAverageStartedGamesValue->setText(QString::number(aStatistic.summAverages / (aStatistic.complete.count() + aStatistic.started.count())) + "%");
     ui->LabelSumAchievementsValue->setText(QString::number(aStatistic.achievementCount));
@@ -451,43 +482,55 @@ void FormStatistics::setInfo(Statistics aStatistic) {
     ui->labelNotStartedGamesValue->setText(QString::number(aStatistic.notStarted.count()));
     ui->labelNoAchievementsGamesValue->setText(QString::number(aStatistic.noAchievements.count()));
 
-    QStandardItemModel *model = new QStandardItemModel();
-    model->setColumnCount(5);
-    model->setRowCount(10);
-    for (int i = aStatistic.completedAchievements.count() - 1; aStatistic.completedAchievements.count() - i  < 50 && i >= 0; --i) {
-        QStandardItem * item = new QStandardItem();
-        item->setData(aStatistic.completedAchievements[i].achievement.apiName());
-        model->setItem(i / 5, i % 5, item);
-        qDebug() << (i/5) << (i%5) << i << aStatistic.completedAchievements.count();
+    if (ui->tableViewLastAchievements->model() != nullptr) {
+        delete ui->tableViewLastAchievements->model();
     }
-    ui->tableViewLastAchievements->setModel(model);
+
+    if (aStatistic.completedAchievements.size() > 50) {
+        QStandardItemModel *model = new QStandardItemModel();
+        auto tempLast50 = aStatistic.completedAchievements.last(lastAchievements);
+        QList<CompletedAchievement> last50(reverseList<CompletedAchievement>(tempLast50));
+        QMap<GameID, QList<SAchievementSchema>> mapGames;
+
+        int i = 0;
+        for (const auto &achievements: last50) {
+            QStandardItem * item = new QStandardItem();
+            auto iteratorGames = mapGames.find(achievements.game.appId());
+            if (iteratorGames == mapGames.end()) {
+                mapGames.insert(achievements.game.appId(), SAchievementSchema::load(achievements.game.appId()));
+                iteratorGames = mapGames.find(achievements.game.appId());
+            }
+            auto schema = (*iteratorGames);
+            auto iteratorSchema = std::find_if(schema.begin(),
+                                              schema.end(),
+                                              [&](const SAchievementSchema &aSchema) {
+                                                  return aSchema.apiName() == achievements.achievement.apiName();
+                                              });
+            if (iteratorSchema != schema.end()) {
+                QImage pix = loadImage((*iteratorSchema).icon(), Paths::imagesAchievements(QString::number(iteratorGames.key()), (*iteratorSchema).icon()), QSize(64, 64));
+                item->setData(QPixmap::fromImage(pix), Qt::ItemDataRole::DecorationRole);
+                QString toolTip = textToToolTip("<b>" + achievements.game.name() + "</b>\n" +
+                                                (*iteratorSchema).description())
+                                    .replace("\n", "<br>");
+                item->setData(toolTip, Qt::ItemDataRole::ToolTipRole);
+                model->setItem(i / 5, i % 5, item);
+            }
+            setStatus(tr("Последние достижения"), ++i, lastAchievements);
+        }
+
+        ui->tableViewLastAchievements->setModel(model);
+        ui->tableViewLastAchievements->resizeColumnsToContents();
+        ui->tableViewLastAchievements->resizeRowsToContents();
+    }
 }
 
-void FormStatistics::onFinish() {
-    ui->labelProfile->setPixmap(_statistics.profile.pixmapAvatar());
-    ui->labelProfile->setToolTip(_statistics.profile.personaName());
-
-    _statistics.summAverages = 100.0 * _statistics.complete.count();
-    for (const auto &average: qAsConst(_statistics.started)) {
-        _statistics.summAverages += average.percent;
-    }
-
-    mySort<GameWithPercent>(_statistics.complete, [](GameWithPercent &game1, GameWithPercent &game2) {return game1.game < game2.game;});
-    mySort<GameWithPercent>(_statistics.started, [](GameWithPercent &game1, GameWithPercent &game2) {return game1.game < game2.game;});
-    mySort<GameWithPercent>(_statistics.notStarted, [](GameWithPercent &game1, GameWithPercent &game2) {return game1.game < game2.game;});
-    mySort<GameWithPercent>(_statistics.noAchievements, [](GameWithPercent &game1, GameWithPercent &game2) {return game1.game < game2.game;});
-    mySort<CompletedAchievement>(_statistics.completedAchievements, [](CompletedAchievement &game1, CompletedAchievement &game2)
-        {return game1.achievement.unlockTime() < game2.achievement.unlockTime();});
-
-    setInfo(_statistics);
-
-    #define SetChartDonut {
+void FormStatistics::setPie(Statistics &aStatistic) {
     QPieSeries *series = new QPieSeries();
 
-    QPieSlice *complete =       getPieChart(tr("Закончено (%1)")     .arg(_statistics.complete.count())         , _statistics.complete.count()      , _statistics.games.count(), QColor(85, 181, 62));
-    QPieSlice *started =        getPieChart(tr("Начато (%1)")        .arg(_statistics.started.count())          , _statistics.started.count()       , _statistics.games.count(), QColor(205, 203, 31));
-    QPieSlice *notStarted =     getPieChart(tr("Не начато (%1)")     .arg(_statistics.notStarted.count())       , _statistics.notStarted.count()    , _statistics.games.count(), QColor(178, 50, 50));
-    QPieSlice *noAchievements = getPieChart(tr("Нет достижений (%1)").arg(_statistics.noAchievements.count())   , _statistics.noAchievements.count(), _statistics.games.count(), QColor(41, 41, 41));
+    QPieSlice *complete =       getPieChart(tr("Закончено (%1)")     .arg(aStatistic.complete.count())         , aStatistic.complete.count()      , aStatistic.games.count(), QColor(85, 181, 62));
+    QPieSlice *started =        getPieChart(tr("Начато (%1)")        .arg(aStatistic.started.count())          , aStatistic.started.count()       , aStatistic.games.count(), QColor(205, 203, 31));
+    QPieSlice *notStarted =     getPieChart(tr("Не начато (%1)")     .arg(aStatistic.notStarted.count())       , aStatistic.notStarted.count()    , aStatistic.games.count(), QColor(178, 50, 50));
+    QPieSlice *noAchievements = getPieChart(tr("Нет достижений (%1)").arg(aStatistic.noAchievements.count())   , aStatistic.noAchievements.count(), aStatistic.games.count(), QColor(41, 41, 41));
     connect(complete,       &QPieSlice::clicked, this, &FormStatistics::showCompleteGames);
     connect(started,        &QPieSlice::clicked, this, &FormStatistics::showStartedGames);
     connect(notStarted,     &QPieSlice::clicked, this, &FormStatistics::showNotStartedGames);
@@ -497,107 +540,126 @@ void FormStatistics::onFinish() {
     series->append(notStarted);
     series->append(noAchievements);
 
+    _gamePercent->removeAllSeries();
     _gamePercent->addSeries(series);
-    _gamePercent->legend()->setLabelColor(Qt::white);
+    _gamePercent->legend()->setLabelColor(Theme::getCurrentTheme().text.getColor());
 
     ui->ChartViewPercentages->setChart(_gamePercent);
-    QColor color(0,100,200);
-    #define SetChartDonutEnd }
-        #define SetChartTimes {
-        QBarCategoryAxis *axisXT = new QBarCategoryAxis();
-        QDate date = QDate::currentDate().addDays(-QDate::currentDate().day() + 1);
-        QStringList categories;
-        while (date.month() == QDate::currentDate().month()) {
-            categories << date.toString("dd");
-            date = date.addDays(1);
-        }
-        axisXT->append(categories);
-//        axisXT->append(getHoursTitles());
-        initChart(_chartT, axisXT);
-        int x = 0;
+}
 
-        x = 0;
-        QVector<QPointF> datasT(30);
-        for (auto &point: datasT) {
-            point.setX(x++);
-        }
+void FormStatistics::clearGraphs() {
+    for(auto series: _chartT->series()) {
+        delete series;
+    }
+    for(auto series: _chartY->series()) {
+        delete series;
+    }
+}
 
-        for (auto achievement: _statistics.completedAchievements) {
-            int secsFromThirtyDaysAgo = achievement.achievement.unlockTime().toSecsSinceEpoch() - QDateTime(QDate::currentDate(), QTime()).addDays(-QDate::currentDate().day() + 1).toSecsSinceEpoch();
-            if (secsFromThirtyDaysAgo > 0) {
-                datasT[secsFromThirtyDaysAgo / c_secsInDay].setY(datasT[secsFromThirtyDaysAgo / c_secsInDay].y() + 1);
-            }
-        }
+void FormStatistics::setGraphs(Statistics &aStatistic) {
+    QColor color(200,100,200);
 
-//        for (auto data: _statistics.times) {
-//            datasT << QPointF(x, data);
-//            ++x;
-//        }
-        setDataToLineChart(_chartT, datasT, _statistics.profile.personaName(), color);
-        #define SetChartTimesEnd }
-    #define SetChartYears {
-    std::sort(_statistics.years.begin(),
-              _statistics.years.end(),
-              [](const YearCount &p1, const YearCount &p2) {
-                    return p1.year < p2.year;
-                });
-    QBarCategoryAxis *axisXY = new QBarCategoryAxis();
-    axisXY->append(getYearsTitles());
-    initChart(_chartY, axisXY);
+    int x = 0;
+    QVector<QPointF> datasT(daysInMonth(QDate::currentDate()));
+    for (auto &point: datasT) {
+        point.setX(x++);
+    }
+    const int startMonthSecs = QDateTime(QDate::currentDate(), QTime()).addDays(-QDate::currentDate().day() + 1).toSecsSinceEpoch();
+    for (auto achievement: aStatistic.completedAchievements) {
+        int secsFromStartMonth = achievement.achievement.unlockTime().toSecsSinceEpoch() - startMonthSecs;
+        if (secsFromStartMonth > 0) {
+            int index = secsFromStartMonth / c_secsInDay;
+            datasT[index].setY(datasT[index].y() + 1);
+        }
+    }
+    setDataToLineChart(_chartT, datasT, aStatistic.profile.personaName(), color);
+
     x = 0;
     QVector<QPointF> datasY;
-    for (auto data: _statistics.years) {
+    for (auto data: aStatistic.years) {
         datasY << QPointF(data.year.toInt() - c_steamReleaseYear, data.count);
         ++x;
     }
-    qDebug() << datasY;
-    setDataToLineChart(_chartY, datasY, _statistics.profile.personaName(), color);
-    for (auto &year: datasY) {
-        static int a = -10000;
-        year.setY(100000 + a);
-        if (a > 0) {
-            a += 5000;
-        } else {
-            a -= 5000;
-        }
-        a *= -1;
+    setDataToLineChart(_chartY, datasY, aStatistic.profile.personaName(), color);
+//    for (auto &year: datasY) {
+//        static int a = -10000;
+//        year.setY(100000 + a);
+//        if (a > 0) {
+//            a += 5000;
+//        } else {
+//            a -= 5000;
+//        }
+//        a *= -1;
+//    }
+//    setDataToLineChart(_chartY, datasY, "кто-то1", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
+//    for (auto &year: datasY) {
+//        static int a = -5000;
+//        year.setY(50000 + a);
+//        if (a > 0) {
+//            a += 2000;
+//        } else {
+//            a -= 2000;
+//        }
+//        a *= -1;
+//    }
+//    setDataToLineChart(_chartY, datasY, "кто-то2", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
+//    for (auto &year: datasY) {
+//        static int a = -7000;
+//        year.setY(70000 + a);
+//        if (a > 0) {
+//            a += 3000;
+//        } else {
+//            a -= 3000;
+//        }
+//        a *= -1;
+//    }
+//    setDataToLineChart(_chartY, datasY, "кто-то3", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
+//    for (auto &year: datasY) {
+//        static int a = -10000;
+//        year.setY(200000 + a);
+//        a -= 5000;
+//    }
+//    setDataToLineChart(_chartY, datasY, "кто-то4", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
+//    for (auto &year: datasY) {
+//        static int a = 0;
+//        year.setY(100000 + a);
+//        a += 5000;
+//    }
+//    setDataToLineChart(_chartY, datasY, "кто-то5", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
+
+    QStringList list;
+    for(const SFriend &sFriend: SFriend::load(aStatistic.profile.steamID())) {
+        list.append(sFriend.steamId());
     }
-    setDataToLineChart(_chartY, datasY, "кто-то1", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-    for (auto &year: datasY) {
-        static int a = -5000;
-        year.setY(50000 + a);
-        if (a > 0) {
-            a += 2000;
-        } else {
-            a -= 2000;
-        }
-        a *= -1;
+    ui->comboBoxGraphsFriends->clear();
+    auto profiles = SProfile::load(list);
+    for(const auto &profileFriend: profiles) {
+        ui->comboBoxGraphsFriends->addItem(profileFriend);
     }
-    setDataToLineChart(_chartY, datasY, "кто-то2", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-    for (auto &year: datasY) {
-        static int a = -7000;
-        year.setY(70000 + a);
-        if (a > 0) {
-            a += 3000;
-        } else {
-            a -= 3000;
-        }
-        a *= -1;
+}
+
+void FormStatistics::updateStatisticProfile(const SProfile &aProfile) {
+    ui->comboBoxCurrentProfile->addItem(_statisticProfile);
+
+    _statisticProfile = aProfile;
+    _statistics.changeProfile(_statisticProfile, SGame::load(_statisticProfile.steamID()));
+    createThread();
+}
+
+void FormStatistics::onFinish(Statistics &aStatistic) {
+    ui->labelProfile->setPixmap(aStatistic.profile.pixmapAvatar());
+    ui->labelProfile->setToolTip(aStatistic.profile.personaName());
+
+    aStatistic.summAverages = 100.0 * aStatistic.complete.count();
+    for (const auto &average: qAsConst(aStatistic.started)) {
+        aStatistic.summAverages += average.percent;
     }
-    setDataToLineChart(_chartY, datasY, "кто-то3", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-    for (auto &year: datasY) {
-        static int a = -10000;
-        year.setY(200000 + a);
-        a -= 5000;
-    }
-    setDataToLineChart(_chartY, datasY, "кто-то4", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-    for (auto &year: datasY) {
-        static int a = 0;
-        year.setY(100000 + a);
-        a += 5000;
-    }
-    setDataToLineChart(_chartY, datasY, "кто-то5", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-    #define SetChartYearsEnd }
+    aStatistic.sortAllLists();
+
+    setInfo(aStatistic);
+    setPie(aStatistic);
+    clearGraphs();
+    setGraphs(aStatistic);
     emit s_finish();
 }
 

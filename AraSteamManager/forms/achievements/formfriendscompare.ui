@@ -136,7 +136,7 @@
       </layout>
      </item>
      <item>
-      <widget class="ComboBoxFriends" name="ComboBoxFriend">
+      <widget class="ComboBoxFriendsWithGame" name="ComboBoxFriend">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -244,9 +244,9 @@
    <header>subWidgets/tables/freezetablewidget.h</header>
   </customwidget>
   <customwidget>
-   <class>ComboBoxFriends</class>
+   <class>ComboBoxFriendsWithGame</class>
    <extends>QComboBox</extends>
-   <header>subWidgets/comboBoxes/qcomboboxfriends.h</header>
+   <header>subWidgets/comboBoxes/qcomboboxfriendswithgame.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

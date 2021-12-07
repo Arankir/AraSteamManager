@@ -270,7 +270,7 @@
         <file>iconsBlueTheme/window_undock_focus.png</file>
         <file>iconsBlueTheme/window_undock_pressed.png</file>
         <file>iconsBlackTheme/filter.png</file>
-        <file>greenTheme.qss</file>
+        <file>testTheme.qss</file>
         <file>redTheme.qss</file>
         <file>baseColor.qss</file>
         <file>baseIcons.qss</file>

@@ -17,6 +17,7 @@
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/steamApi/structures/sfriends.h"
+#include "classes/common/generalfunctions.h"
 #include "classes/threads/thread/threadstatistics.h"
 #include <QStandardItemModel>
 
@@ -46,7 +47,7 @@ enum class GamesType {
 };
 
 public slots:
-    void onFinish();
+    void onFinish(Statistics &aStatistic);
     void createThread();
     void updateSettings(QFlags<changedSettings> aSettings) override;
 
@@ -70,7 +71,11 @@ private slots:
     void setModelToTable(QList<GameWithPercent> aGames, bool aIsVisiblePercent);
     SGame *currentGame();
     QMenu *createMenu(SGame &aGame);
-    void setInfo(Statistics aStatistic);
+    void updateStatisticProfile(const SProfile &lProfile);
+    void setInfo(Statistics &aStatistic);
+    void setPie(Statistics &aStatistic);
+    void setGraphs(Statistics &aStatistic);
+    void clearGraphs();
 private:
     Ui::FormStatistics *ui;
     GamesType _currentGamesType = GamesType::none;
@@ -90,6 +95,10 @@ private:
 //    QVector<int> _months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 //    QVector<QPair<QString,int>> _years;
 
+    SProfile _userProfile;
+    SGames _games;
+
+    SProfile _statisticProfile;
     Statistics _statistics;
 
     QChart *_gamePercent;

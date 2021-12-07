@@ -55,7 +55,7 @@ bool SortFilterProxyModelFreezeRow::lessThan(const QModelIndex &left, const QMod
 }
 
 void SortFilterProxyModelCategory::addCategory(const QString &name, const QStringList &apis) {
-    _categories.append(std::move(QPair<QString, QStringList>(name, apis)));
+    _categories.append(QPair<QString, QStringList>(name, apis));
     updateRegExp();
 }
 

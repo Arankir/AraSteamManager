@@ -137,7 +137,7 @@ QUrl Sapi::lvlUrl(const ProfileID &aSteamId) {
     //return "https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=" + _key + "&steamid=" + aSteamId;
 }
 
-QImage loadPixmap(QImage &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
+QImage loadImage(QImage &aPixmap, const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
     if (aPixmap.isNull()) {
         if (!aUrl.isEmpty()) {
             if (!QFile::exists(aSavePath)) {
@@ -159,25 +159,25 @@ QImage loadPixmap(QImage &aPixmap, const QString &aUrl, const QString &aSavePath
     return aPixmap;
 }
 
-//QPixmap cLoadPixmap(const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
-//    if (!aUrl.isEmpty()) {
-//        if (!QFile::exists(aSavePath)) {
-//            RequestImage img(aUrl, aSavePath, true);
-//            QEventLoop loop;
-//            QObject::connect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-//            loop.exec();
-//            QObject::disconnect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
-//            if (!img.pixmap().isNull()) {
-//                return img.pixmap().scaled(aSize);
-//            }
-//        } else {
-//            return QPixmap(aSavePath).scaled(aSize);
-//        }
-//    } else {
-//        return QPixmap(Images::missingImage()).scaled(aSize);
-//    }
-//    return QPixmap();
-//}
+QImage loadImage(const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
+    if (!aUrl.isEmpty()) {
+        if (!QFile::exists(aSavePath)) {
+            RequestImage img(aUrl, aSavePath, true);
+            QEventLoop loop;
+            QObject::connect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            loop.exec();
+            QObject::disconnect(&img, &RequestImage::s_loadComplete, &loop, &QEventLoop::quit);
+            if (!img.pixmap().isNull()) {
+                return img.pixmap().scaled(aSize).toImage();
+            }
+        } else {
+            return QPixmap(aSavePath).scaled(aSize).toImage();
+        }
+    } else {
+        return QPixmap(Images::missingImage()).scaled(aSize).toImage();
+    }
+    return QImage();
+}
 
 QString Sapi::toString() const {
     return QJsonDocument(toJson()).toJson(QJsonDocument::Compact);

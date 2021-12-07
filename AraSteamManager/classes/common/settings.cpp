@@ -336,91 +336,91 @@ int Settings::achievementsComparePercentVisible() {
     return _settings->value(achievementContainer().achievementsCompare.isPercentVisible, 2).toInt();
 }
 
-QString Settings::defaultFont() {
-    static int id = QFontDatabase::addApplicationFont(Settings::defaultFontPath());
-    static QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    return family;
-}
+//QString Settings::defaultFont() {
+//    static int id = QFontDatabase::addApplicationFont(Settings::defaultFontPath());
+//    static QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+//    return family;
+//}
 
-QString Settings::defaultFontPath() {
-    return "://JosefinSans-Italic-VariableFont_wght.ttf";
-//    return "://DancingScript-VariableFont_wght.ttf";
-//    return "://Comfortaa-VariableFont_wght.ttf";
-}
+//QString Settings::defaultFontPath() {
+//    return "://JosefinSans-Italic-VariableFont_wght.ttf";
+////    return "://DancingScript-VariableFont_wght.ttf";
+////    return "://Comfortaa-VariableFont_wght.ttf";
+//}
 
-#include <QColor>
-QString Settings::qssTheme() {
-    QString qss;
-    Theme currentTheme = Theme::getCurrentTheme();
+//#include <QColor>
+//QString Settings::qssTheme() {
+//    QString qss;
+//    Theme currentTheme = Theme::getCurrentTheme();
 
-    QFile qssColorFile(":/theme/baseColor.qss");
-    qssColorFile.open(QFile::ReadOnly);
-    qss = QString(qssColorFile.readAll()).arg(currentTheme.text.getString(),
-                                              currentTheme.disabledBackground.getString(),
-                                              currentTheme.disabled.getString(),
-                                              currentTheme.hover.getString(),
-                                              currentTheme.border.getString(),
-                                              currentTheme.alternate.getString(),
-                                              currentTheme.background.getString(),
-                                              currentTheme.backgroundSelectedItem.getString(),
-                                              currentTheme.backgroundSecond.getString(),
-                                              currentTheme.backgroundProgressbar.getString(),
-                                              currentTheme.backgroundBadProgressbar.getString(),
-                                              currentTheme.backgroundProgressbarProgress.getString(),
-                                              currentTheme.selected.getString(),
-                                              QString(QString::number(currentTheme.headerForm.getColor().red()) + ", " + QString::number(currentTheme.headerForm.getColor().green()) + ", " + QString::number(currentTheme.headerForm.getColor().blue())),
-                                              QString(QString::number(currentTheme.backgroundItem.getColor().red()) + ", " + QString::number(currentTheme.backgroundItem.getColor().green()) + ", " + QString::number(currentTheme.backgroundItem.getColor().blue())),
-                                              QString(QString::number(currentTheme.backgroundAlternateItem.getColor().red()) + ", " + QString::number(currentTheme.backgroundAlternateItem.getColor().green()) + ", " + QString::number(currentTheme.backgroundAlternateItem.getColor().blue())),
-                                              QString(QString::number(currentTheme.forItemHover.getColor().red()) + ", " + QString::number(currentTheme.forItemHover.getColor().green()) + ", " + QString::number(currentTheme.forItemHover.getColor().blue())),
-                                              QString(QString::number(currentTheme.mainProfileBackground.getColor().red()) + ", " + QString::number(currentTheme.mainProfileBackground.getColor().green()) + ", " + QString::number(currentTheme.mainProfileBackground.getColor().blue())),
-                                              currentTheme.mainBackground.getString());
+//    QFile qssColorFile(":/theme/baseColor.qss");
+//    qssColorFile.open(QFile::ReadOnly);
+//    qss = QString(qssColorFile.readAll()).arg(currentTheme.text.getString(),
+//                                              currentTheme.disabledBackground.getString(),
+//                                              currentTheme.disabled.getString(),
+//                                              currentTheme.hover.getString(),
+//                                              currentTheme.border.getString(),
+//                                              currentTheme.alternate.getString(),
+//                                              currentTheme.background.getString(),
+//                                              currentTheme.backgroundSelectedItem.getString(),
+//                                              currentTheme.backgroundSecond.getString(),
+//                                              currentTheme.backgroundProgressbar.getString(),
+//                                              currentTheme.backgroundBadProgressbar.getString(),
+//                                              currentTheme.backgroundProgressbarProgress.getString(),
+//                                              currentTheme.selected.getString(),
+//                                              QString(QString::number(currentTheme.headerForm.getColor().red()) + ", " + QString::number(currentTheme.headerForm.getColor().green()) + ", " + QString::number(currentTheme.headerForm.getColor().blue())),
+//                                              QString(QString::number(currentTheme.backgroundItem.getColor().red()) + ", " + QString::number(currentTheme.backgroundItem.getColor().green()) + ", " + QString::number(currentTheme.backgroundItem.getColor().blue())),
+//                                              QString(QString::number(currentTheme.backgroundAlternateItem.getColor().red()) + ", " + QString::number(currentTheme.backgroundAlternateItem.getColor().green()) + ", " + QString::number(currentTheme.backgroundAlternateItem.getColor().blue())),
+//                                              QString(QString::number(currentTheme.forItemHover.getColor().red()) + ", " + QString::number(currentTheme.forItemHover.getColor().green()) + ", " + QString::number(currentTheme.forItemHover.getColor().blue())),
+//                                              QString(QString::number(currentTheme.mainProfileBackground.getColor().red()) + ", " + QString::number(currentTheme.mainProfileBackground.getColor().green()) + ", " + QString::number(currentTheme.mainProfileBackground.getColor().blue())),
+//                                              currentTheme.mainBackground.getString());
 
-    QFile qssIconsFile(":/theme/baseIcons.qss");
-    qssIconsFile.open(QFile::ReadOnly);
-    qss += QString(qssIconsFile.readAll()).arg(currentTheme.getPathIcons());
+//    QFile qssIconsFile(":/theme/baseIcons.qss");
+//    qssIconsFile.open(QFile::ReadOnly);
+//    qss += QString(qssIconsFile.readAll()).arg(currentTheme.getPathIcons());
 
-    QFile qssFile(":/theme/globalTheme.qss");
-    qssFile.open(QFile::ReadOnly);
-    qss += qssFile.readAll();
-    qss += " "
-    "* { "
-        "font-family:  " + Settings::defaultFont() + "; "
-    "} ";
+//    QFile qssFile(":/theme/globalTheme.qss");
+//    qssFile.open(QFile::ReadOnly);
+//    qss += qssFile.readAll();
+//    qss += " "
+//    "* { "
+//        "font-family:  " + Settings::defaultFont() + "; "
+//    "} ";
 
-    return qss;
-}
+//    return qss;
+//}
 
-QString Settings::iconsColor() {
-    switch(theme()) {
-    case 1: {
-        return "white";
-    }
-    case 2: {
-        return "black";
-    }
-    case 3: {
-        return "white";
-    }
-    case 4: {
-        return "white";
-    }
-    case 5: {
-        return "white";
-    }
-    case 6: {
-        return "white";
-    }
-    case 7: {
-        return "white";
-    }
-    case 8: {
-        return "white";
-    }
-    default: {
-        return "white";
-    }
-    }
-}
+//QString Settings::iconsColor() {
+//    switch(theme()) {
+//    case 1: {
+//        return "white";
+//    }
+//    case 2: {
+//        return "black";
+//    }
+//    case 3: {
+//        return "white";
+//    }
+//    case 4: {
+//        return "white";
+//    }
+//    case 5: {
+//        return "white";
+//    }
+//    case 6: {
+//        return "white";
+//    }
+//    case 7: {
+//        return "white";
+//    }
+//    case 8: {
+//        return "white";
+//    }
+//    default: {
+//        return "white";
+//    }
+//    }
+//}
 
 void Settings::syncronizeSettings() {
     _settings->sync();

@@ -4,13 +4,26 @@
 #include <QColor>
 #include <QGradient>
 
+enum class PartColor {
+    red,
+    green,
+    blue,
+    alpha
+};
+
 struct ThemeColor {
     QColor color;
     QGradient *gradient = nullptr;
-    void setColor(const QColor&, QGradient *gradient = nullptr);
+
+    ~ThemeColor();
+
+    void setColor(const QColor&, QGradient gradient = QGradient());
     void setColor(const QString&);
     QColor getColor();
     QString getString();
+    ThemeColor &setAlpha(int alpha);
+
+    ThemeColor &swapPartColor(PartColor part1, PartColor part2);
 };
 
 struct Theme {
@@ -37,9 +50,22 @@ struct Theme {
     ThemeColor mainBackground;
 
     QString   pathIcons;
+    QString   pathImages;
+
     Theme &setPathIcons(const QString&);
     QString getPathIcons();
+
+    Theme &setPathImages(const QString&);
+    QString getPathImages();
+
+    Theme &swapPartsAllColors(PartColor part1, PartColor part2);
+
     static Theme getCurrentTheme();
+    static QString qssTheme();
+    static QString defaultFont();
+
+    static QColor combineColor(const QColor &aColor1, double aPercent1, const QColor &aColor2, double aPercent2);
+    static QColor swapParts(const QColor &color, PartColor part1, PartColor part2);
 
 private:
     QString getText(const QColor&, QGradient*);

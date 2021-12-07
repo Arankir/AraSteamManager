@@ -311,7 +311,7 @@ void FormAchievements::updateFilterTextAchievement(const QString &aNewText) {
 void FormAchievements::updateFilterFavorite(const QList<FavoriteAchievement> &aFavorites) {
     QStringList list;
     for (auto &favorite: aFavorites) {
-        list.append(std::move(favorite.apiName()));
+        list.append(favorite.apiName());
     }
     _filterAchievements.setFavorites(list);
     ui->TableViewMyAchievements->resizeRowsToContents();

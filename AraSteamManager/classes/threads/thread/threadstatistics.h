@@ -30,6 +30,8 @@ struct CompletedAchievement {
 
 struct Statistics {
     Statistics(const SProfile &aProfile, const SGames &aGame): profile(aProfile), games(aGame) {};
+    void changeProfile(const SProfile &aProfile, const SGames &aGames);
+    void sortAllLists();
     SProfile profile;
     SGames games;
     double summAverages = 0.0;
@@ -55,33 +57,15 @@ private slots:
     void updateTimes(const QDateTime &unlockedTime);
 
 public:
-//    explicit ThreadStatistics(SGames &games, const QString &id, int &aAchievementsCount,
-//                              SGames &aNoAchievements, SGames &aComplete, QList<QPair<SGame, double>> &aStarted, SGames &aNotStarted,
-//                              QVector<int> &aTimes, QVector<int> &aMonths, QVector<QPair<QString,int>> &aYears):
-//        _id(id), _games(games), _achievementsCount(aAchievementsCount),
-//        _times(aTimes), _months(aMonths), _years(aYears),
-//        _noAchievements(aNoAchievements), _complete(aComplete), _started(aStarted), _notStarted(aNotStarted) {}
     ThreadStatistics(Statistics &statistic): _statistics(statistic) {};
 
     ~ThreadStatistics() {qInfo() << "Thread statistic deleted";}
 
 signals:
     void s_progress(const QString &text, int progress, int max);
+    void s_finish(Statistics&);
 
 private:
-//    QString _id;
-//    SGames _games;
-//    int &_achievementsCount;
-
-//    QVector<int> &_times;
-//    QVector<int> &_months;
-//    QVector<QPair<QString, int>> &_years;
-
-//    SGames &_noAchievements;
-//    SGames &_complete;
-//    QList<QPair<SGame, double>> &_started;
-//    SGames &_notStarted;
-
     Statistics &_statistics;
 
     int countReachedAchievements(const QList<SAchievementPlayer> &aAchievements, const SGame &aGame);

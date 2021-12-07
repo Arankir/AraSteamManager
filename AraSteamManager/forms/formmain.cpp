@@ -34,7 +34,7 @@ void FormMain::initComponents() {
             parentWidget()->showMaximized();
         }
     }
-    qApp->setStyleSheet(Settings::qssTheme());
+    qApp->setStyleSheet(Theme::qssTheme());
     updateIcons();
 #define Connects {
     connect(ui->ButtonFindProfile,      &QPushButton::clicked,              this,                       &FormMain::buttonFindProfile_Clicked);
@@ -275,7 +275,7 @@ void FormMain::updateSettings(QFlags<changedSettings> aSettings) {
         ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
     }
     if (aSettings.testFlag(changedSettings::theme)) {
-        qApp->setStyleSheet(Settings::qssTheme());
+        qApp->setStyleSheet(Theme::qssTheme());
         updateIcons();
     }
     emit s_settingsUpdated(aSettings);

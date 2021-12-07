@@ -102,9 +102,9 @@ public:
     static void setAchievementsComparePercentVisible(const int &width);
     static int achievementsComparePercentVisible();
 
-    static QString iconsColor();
-    static QString defaultFont();
-    static QString qssTheme();
+//    static QString iconsColor();
+//    static QString defaultFont();
+//    static QString qssTheme();
 
     static void syncronizeSettings();
 
@@ -113,7 +113,7 @@ public:
     static const QString dateTimeFormatShort();
 private:
     static QSettings *_settings;
-    static QString defaultFontPath();
+//    static QString defaultFontPath();
 };
 
 class Paths {

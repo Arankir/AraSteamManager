@@ -11,14 +11,14 @@ class ComboBoxFriends : public QComboBox {
 
 public:
     ComboBoxFriends(QWidget *parent = nullptr);
-    void addItem(SProfile &steamFriend, FriendType type);
+    void addItem(const SProfile &steamFriend);
     void setCurrentText(const QString &text);
     int count() const;
     void hidePopup() override;
 
 signals:
     void s_selectionChanged();
-    void s_friendClicked(SProfile&);
+    void s_friendClicked(const SProfile&);
 
 public slots:
     void clear();
@@ -27,15 +27,16 @@ protected:
     void wheelEvent(QWheelEvent *wheelEvent) override;
     bool eventFilter(QObject *object, QEvent *event) override;
     void keyPressEvent(QKeyEvent *event) override;
+    virtual void addFilterWidgets();
+
+    int mCountFilterWidgets = 1;
+    QListWidget *mListWidget;
+    QLineEdit *mLineEdit;
 
 private:
     void onSearch(const QString &searchString);
-    void onAllFriends(int state);
     void itemClicked(int index);
-    void addFilterWidgets();
+    void unselected();
 
-    QListWidget *mListWidget;
-    QLineEdit *mLineEdit;
     QLineEdit *mSearchBar;
-    QCheckBox *mAllFriends;
 };

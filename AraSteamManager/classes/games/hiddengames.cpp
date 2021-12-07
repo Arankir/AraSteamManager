@@ -16,7 +16,7 @@ HiddenGames &HiddenGames::addGame(const SGame &aGame, const bool &aRemoveIfExist
             removeGame(aGame);
         }
     } else {
-        _games.append(std::move(HiddenGame(aGame)));
+        _games.append(HiddenGame(aGame));
     }
     save();
     return *this;
@@ -51,7 +51,7 @@ void HiddenGames::load() {
     if (readFile(Paths::hiddenGames(_profile == "" ? "All" : _profile), bytes)) {
         QJsonObject games = QJsonDocument::fromJson(bytes).object();
         for(auto &&game: games.value("games").toArray()) {
-            _games.append(std::move(HiddenGame(game.toObject())));
+            _games.append(HiddenGame(game.toObject()));
         }
         _profile = games.value("profile").toString();
     }

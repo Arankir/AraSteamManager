@@ -3,7 +3,7 @@
 QList<SBan> onLoadBan(const QByteArray &byteArray) {
     QList<SBan> list;
     for(auto &&ban: QJsonDocument::fromJson(byteArray).object().value("players").toArray()) {
-        list.append(std::move(SBan(ban.toObject())));
+        list.append(SBan(ban.toObject()));
     }
     return list;
 }

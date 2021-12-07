@@ -22,7 +22,7 @@ FormFriendsCompare::FormFriendsCompare(QWidget *parent): Form(parent), ui(new Ui
     connect(ui->ButtonFriendsAll, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsAll);
     connect(ui->ButtonFriendsReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsReached);
     connect(ui->ButtonFriendsNotReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsNotReached);
-    connect(ui->ComboBoxFriend, &ComboBoxFriends::s_friendClicked, this, &FormFriendsCompare::addFriendToList);
+    connect(ui->ComboBoxFriend, &ComboBoxFriendsWithGame::s_friendClicked, this, &FormFriendsCompare::addFriendToList);
     #define ConnectsEnd }
 }
 
@@ -137,7 +137,7 @@ void FormFriendsCompare::loadingCompare() {
     emit s_startLoad();
     QStringList list;
     for(const SFriend &sFriend: qAsConst(friends)) {
-        list.append(std::move(sFriend.steamId()));
+        list.append(sFriend.steamId());
     }
     _profilesFriends = SProfile::load(list);
 
@@ -178,7 +178,7 @@ void FormFriendsCompare::loadFriendGames(const SGames &aGames, const QString &aU
     }
 }
 
-void FormFriendsCompare::addFriendToList(SProfile &aSteamFriend) {
+void FormFriendsCompare::addFriendToList(const SProfile &aSteamFriend) {
     QListWidgetItem *item = new QListWidgetItem(aSteamFriend.pixmapAvatar(), "");
 
     auto friendItem = new FormFriendItemCompare(aSteamFriend, item);
