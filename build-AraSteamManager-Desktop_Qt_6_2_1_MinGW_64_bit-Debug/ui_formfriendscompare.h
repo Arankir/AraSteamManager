@@ -20,7 +20,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "subWidgets/comboBoxes/qcomboboxfriends.h"
+#include "subWidgets/comboBoxes/qcomboboxfriendswithgame.h"
 #include "subWidgets/tables/freezetablewidget.h"
 
 QT_BEGIN_NAMESPACE
@@ -41,7 +41,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QLineEdit *lineEdit;
     QPushButton *pushButton;
-    ComboBoxFriends *ComboBoxFriend;
+    ComboBoxFriendsWithGame *ComboBoxFriend;
     QHBoxLayout *horizontalLayout_4;
     QSpacerItem *horizontalSpacer_2;
     QPushButton *ButtonFriendsReached;
@@ -135,7 +135,7 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
-        ComboBoxFriend = new ComboBoxFriends(FormFriendsCompare);
+        ComboBoxFriend = new ComboBoxFriendsWithGame(FormFriendsCompare);
         ComboBoxFriend->setObjectName(QString::fromUtf8("ComboBoxFriend"));
         sizePolicy1.setHeightForWidth(ComboBoxFriend->sizePolicy().hasHeightForWidth());
         ComboBoxFriend->setSizePolicy(sizePolicy1);

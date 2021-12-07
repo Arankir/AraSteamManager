@@ -40,6 +40,7 @@ release/main.o
 release/actioncategory.o
 release/multiselectcombobox.o
 release/qcomboboxfriends.o
+release/qcomboboxfriendswithgame.o
 release/progressbardelegate.o
 release/qlistwidgetachievement.o
 release/qlistwidgetfriend.o
@@ -95,6 +96,7 @@ release/moc_framelesswindow.o
 release/moc_actioncategory.o
 release/moc_multiselectcombobox.o
 release/moc_qcomboboxfriends.o
+release/moc_qcomboboxfriendswithgame.o
 release/moc_labellight.o
 release/moc_labelvalue.o
 release/moc_qlistwidgetachievements.o

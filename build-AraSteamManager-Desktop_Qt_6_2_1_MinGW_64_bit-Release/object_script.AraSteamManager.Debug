@@ -40,6 +40,7 @@ debug/main.o
 debug/actioncategory.o
 debug/multiselectcombobox.o
 debug/qcomboboxfriends.o
+debug/qcomboboxfriendswithgame.o
 debug/progressbardelegate.o
 debug/qlistwidgetachievement.o
 debug/qlistwidgetfriend.o
@@ -95,6 +96,7 @@ debug/moc_framelesswindow.o
 debug/moc_actioncategory.o
 debug/moc_multiselectcombobox.o
 debug/moc_qcomboboxfriends.o
+debug/moc_qcomboboxfriendswithgame.o
 debug/moc_labellight.o
 debug/moc_labelvalue.o
 debug/moc_qlistwidgetachievements.o
