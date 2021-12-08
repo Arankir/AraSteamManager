@@ -40,19 +40,19 @@ void ThreadStatistics::onResultAchievements(const SAchievementsPlayer &aAchievem
 
         int countReached = countReachedAchievements(aAchievements, aGame);
         int countNotReached = aAchievements.count() - countReached;
-        _statistics.achievementCount += aAchievements.count();
+        _statistics.achievementCount += countReached;
 
-        GameWithPercent resultGame(std::move(aGame), (100.0 * countReached) / aAchievements.count(), aAchievements);
+        GameWithPercent resultGame(aGame, (100.0 * countReached) / aAchievements.count(), aAchievements);
         if (countNotReached == 0) {
             _statistics.complete.append(resultGame);
         } else if (countReached == 0) {
             _statistics.notStarted.append(resultGame);
         } else {
-            _statistics.started.append(resultGame);//26.6 //29.7//92.9
+            _statistics.started.append(resultGame);
         }
 
     } else {
-        GameWithPercent resultGame(std::move(aGame), -1.0, aAchievements);
+        GameWithPercent resultGame(aGame, -1.0, aAchievements);
         _statistics.noAchievements.append(resultGame);
     }
     if (++nowProcessed == _statistics.games.count()) {

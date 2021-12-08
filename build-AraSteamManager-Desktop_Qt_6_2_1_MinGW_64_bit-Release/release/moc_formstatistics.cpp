@@ -49,8 +49,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormStatistics_t {
-    const uint offsetsAndSize[76];
-    char stringdata0[473];
+    const uint offsetsAndSize[78];
+    char stringdata0[484];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormStatistics_t, stringdata0) + ofs), len 
@@ -92,8 +92,9 @@ QT_MOC_LITERAL(418, 8), // "SProfile"
 QT_MOC_LITERAL(427, 8), // "lProfile"
 QT_MOC_LITERAL(436, 7), // "setInfo"
 QT_MOC_LITERAL(444, 6), // "setPie"
-QT_MOC_LITERAL(451, 9), // "setGraphs"
-QT_MOC_LITERAL(461, 11) // "clearGraphs"
+QT_MOC_LITERAL(451, 10), // "Statistics"
+QT_MOC_LITERAL(462, 9), // "setGraphs"
+QT_MOC_LITERAL(472, 11) // "clearGraphs"
 
     },
     "FormStatistics\0s_finish\0\0s_return_to_profile\0"
@@ -108,8 +109,8 @@ QT_MOC_LITERAL(461, 11) // "clearGraphs"
     "aIsVisiblePercent\0currentGame\0SGame*\0"
     "createMenu\0QMenu*\0SGame&\0aGame\0"
     "updateStatisticProfile\0SProfile\0"
-    "lProfile\0setInfo\0setPie\0setGraphs\0"
-    "clearGraphs"
+    "lProfile\0setInfo\0setPie\0Statistics\0"
+    "setGraphs\0clearGraphs"
 };
 #undef QT_MOC_LITERAL
 
@@ -147,8 +148,8 @@ static const uint qt_meta_data_FormStatistics[] = {
       31,    1,  163,    2, 0x08,   23 /* Private */,
       34,    1,  166,    2, 0x08,   25 /* Private */,
       35,    1,  169,    2, 0x08,   27 /* Private */,
-      36,    1,  172,    2, 0x08,   29 /* Private */,
-      37,    0,  175,    2, 0x08,   31 /* Private */,
+      37,    1,  172,    2, 0x08,   29 /* Private */,
+      38,    0,  175,    2, 0x08,   31 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -170,7 +171,7 @@ static const uint qt_meta_data_FormStatistics[] = {
     0x80000000 | 28, 0x80000000 | 29,   30,
     QMetaType::Void, 0x80000000 | 32,   33,
     QMetaType::Void, 0x80000000 | 9,   10,
-    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, 0x80000000 | 36,   10,
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
 
@@ -202,7 +203,7 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         case 15: _t->updateStatisticProfile((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
         case 16: _t->setInfo((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
-        case 17: _t->setPie((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
+        case 17: _t->setPie((*reinterpret_cast< const Statistics(*)>(_a[1]))); break;
         case 18: _t->setGraphs((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
         case 19: _t->clearGraphs(); break;
         default: ;
@@ -252,7 +253,7 @@ const QMetaObject FormStatistics::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormStatistics_t
 , QtPrivate::TypeAndForceComplete<FormStatistics, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QList<GameWithPercent>, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<SGame *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QList<GameWithPercent>, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<SGame *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,

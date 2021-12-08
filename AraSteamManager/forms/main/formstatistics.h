@@ -73,7 +73,7 @@ private slots:
     QMenu *createMenu(SGame &aGame);
     void updateStatisticProfile(const SProfile &lProfile);
     void setInfo(Statistics &aStatistic);
-    void setPie(Statistics &aStatistic);
+    void setPie(const Statistics &aStatistic);
     void setGraphs(Statistics &aStatistic);
     void clearGraphs();
 private:
