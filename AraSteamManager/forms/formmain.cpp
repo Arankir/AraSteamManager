@@ -49,11 +49,11 @@ void FormMain::initComponents() {
     connect(ui->StackedFormFriends,     &FormFriends::s_friendsLoaded,      this,                       &Form::setStatus);
     connect(ui->StackedFormGames,       &FormGames::s_achievementsLoaded,   this,                       &Form::setStatus);
 
-    connect(ui->StackedFormFriends,     &FormFriends::s_finish,             this,                       [=](int aWidth) {
+    connect(ui->StackedFormFriends,     &FormFriends::s_finish,             this,                       [&](int aWidth) {
         clearStatus();
         showForm(FormMainFriends, aWidth);
     });
-    connect(ui->StackedFormGames,       &FormGames::s_finish,               this,                       [=](int aWidth) {
+    connect(ui->StackedFormGames,       &FormGames::s_finish,               this,                       [&](int aWidth) {
         clearStatus();
         showForm(FormMainGames, aWidth);
     });
@@ -109,7 +109,7 @@ FormStatistics *FormMain::createFormStatistics(const SProfile &aProfile, const S
     connect(this,            &FormMain::s_settingsUpdated,         _statisticsForm,     &FormStatistics::updateSettings);
     connect(_statisticsForm, &FormStatistics::s_showAchievements, this,                 &FormMain::showAchievements);
 //    connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this,                 &Form::setStatus);
-    connect(_statisticsForm, &FormStatistics::s_finish,           this,                 [=]() {
+    connect(_statisticsForm, &FormStatistics::s_finish,           this,                 [&]() {
         clearStatus();
         showForm(FormMainStatistic);
     });

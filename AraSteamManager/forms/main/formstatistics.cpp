@@ -4,8 +4,8 @@
 
 constexpr int c_steamReleaseYear = 2002;
 constexpr int c_secsInDay = 60 * 60 * 24;
-//TODO добавить имена в легенде, добавить друзей для сравнения
-QChartView *initAndSetChart(QChart *&chart, const QString &chartTitle, QChartView *chartView) {
+
+QChart *initChart(QChart *&chart, QChartView *chartView, const QString &chartTitle, const QStringList &aList) {
     chart = new QChart();
     chart->legend()->setAlignment(Qt::AlignBottom);
     chart->setAnimationOptions(QChart::NoAnimation);
@@ -14,46 +14,33 @@ QChartView *initAndSetChart(QChart *&chart, const QString &chartTitle, QChartVie
     chartView->setChart(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->setMinimumSize(480, 480);
-    return chartView;
-}
 
-QChart *initChart(QChart *chart, QBarCategoryAxis *axisX) {
     QValueAxis *axisY = new QValueAxis();
     axisY->setLabelFormat("%i");
 
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(aList);
+
     chart->addAxis(axisX, Qt::AlignBottom);
     chart->addAxis(axisY, Qt::AlignLeft);
-    switch(Settings::theme()) {
-    case 1: {
-        //chart->setTheme(QChart::ChartThemeDark);
-        axisX->setLabelsColor(Qt::white);
-        axisY->setLabelsColor(Qt::white);
-        chart->setTitleBrush(QBrush(Qt::white));
-        chart->legend()->setLabelColor(Qt::white);
-//        barSet->setLabelColor(Qt::white);
-        chart->axes(Qt::Vertical).at(0)->setGridLineColor(QColor(255, 255, 255, 100));
-        chart->axes(Qt::Horizontal).at(0)->setGridLineColor(QColor(255, 255, 255, 100));
-        break;
-    }
-    case 2: {
-        axisX->setLabelsColor(Qt::black);
-        axisY->setLabelsColor(Qt::black);
-        chart->setTitleBrush(QBrush(Qt::black));
-        chart->legend()->setLabelColor(Qt::black);
-//        barSet->setLabelColor(Qt::black);
-        chart->axes(Qt::Vertical).at(0)->setGridLineColor(QColor(255, 255, 255, 100));
-        chart->axes(Qt::Horizontal).at(0)->setGridLineColor(QColor(255, 255, 255, 100));
-        break;
-    }
-    default: {
-//        if (Settings::iconsColor() == "white") {
-//            barSet->setLabelColor(Qt::white);
-//        } else {
-//            barSet->setLabelColor(Qt::black);
-//        }
-    }
-    }
+
+    axisX->setLabelsColor(Theme::getCurrentTheme().text.color);
+    axisY->setLabelsColor(Theme::getCurrentTheme().text.color);
+    chart->setTitleBrush(Theme::getCurrentTheme().text.color);
+    chart->legend()->setLabelColor(Theme::getCurrentTheme().text.color);
+    chart->axes(Qt::Vertical).at(0)->setGridLineColor(Theme::getCurrentTheme().border.color);
+    chart->axes(Qt::Horizontal).at(0)->setGridLineColor(Theme::getCurrentTheme().border.color);
     return chart;
+}
+
+QStringList getDaysMonthTitles(const QDate &aDate) {
+    QDate date(aDate.year(), aDate.month(), 1);
+    QStringList monthsTitles;
+    while (date.month() == aDate.month()) {
+        monthsTitles << date.toString("dd");
+        date = date.addDays(1);
+    }
+    return monthsTitles;
 }
 
 QStringList getYearsTitles() {
@@ -94,21 +81,23 @@ int roundToDesimal(int data) {
 }
 
 QChart *updateChartHeight(QChart *chart) {
+    int max = 9;
     for (auto sery: chart->series()) {
         if (auto realSery = dynamic_cast<QLineSeries*>(sery)) {
             auto points = realSery->points();
-            auto max = std::max_element(points.begin(),
-                                        points.end(),
-                                        [=](const QPointF point1, const QPointF point2) {
-                                           return point1.y() < point2.y();
-                                        });
-            if (max < points.end()) {
-                chart->axes(Qt::Vertical).at(0)->setRange(0, roundToDesimal(max->y()));
+            auto maxElement = std::max_element(points.begin(),
+                                                points.end(),
+                                                [=](const QPointF point1, const QPointF point2) {
+                                                    return point1.y() < point2.y();
+                                                });
+            if (maxElement < points.end()) {
+                if ((*maxElement).y() > max) {
+                    max = (*maxElement).y();
+                }
             }
-            return chart;
         }
     }
-    chart->axes(Qt::Vertical).at(0)->setRange(0, 1);
+    chart->axes(Qt::Vertical).at(0)->setRange(0, roundToDesimal(max));
     return chart;
 }
 
@@ -119,6 +108,8 @@ QChart *updateChartWidth(QChart *chart) {
     } else {
         return chart;
     }
+    int min = 3000;
+    int max = 1;
     for (auto sery: chart->series()) {
         if (auto realSery = dynamic_cast<QLineSeries*>(sery)) {
             auto points = realSery->points();
@@ -128,15 +119,20 @@ QChart *updateChartWidth(QChart *chart) {
                                                     [=](const QPointF point1, const QPointF point2) {
                                                        return point1.x() < point2.x();
                                                     });
-                for (auto axis: chart->axes(Qt::Horizontal)) {
-                    axis->setRange(categories.at((*(minMax.first)).x()), categories.at((*(minMax.second)).x()));
+                if (categories.at((*(minMax.first)).x()).toInt() < min) {
+                    min = categories.at((*(minMax.first)).x()).toInt();
                 }
-                return chart;
+                if (categories.at((*(minMax.second)).x()).toInt() > max) {
+                    max = categories.at((*(minMax.second)).x()).toInt();
+                }
             }
         }
     }
+    if (min == 3000) {
+        min = 0;
+    }
     for (auto axis: chart->axes(Qt::Horizontal)) {
-        axis->setRange(0, 1);
+        axis->setRange(min, max);
     }
     return chart;
 }
@@ -146,7 +142,7 @@ QPieSlice *getPieChart(QColor aColor) {
     slice->setBrush(aColor);
     slice->setBorderColor(Theme::getCurrentTheme().border.color);
     slice->setLabelVisible(true);
-    slice->setLabelPosition(QPieSlice::LabelInsideNormal);
+    slice->setLabelPosition(QPieSlice::LabelInsideHorizontal);
     QObject::connect(slice, &QPieSlice::hovered, slice, &QPieSlice::setExploded);
     return slice;
 }
@@ -162,33 +158,12 @@ Form(aParent), ui(new Ui::FormStatistics), _userProfile(aProfile), _games(aGames
 //    _gamePercent->legend()->setAlignment(Qt::AlignRight);
     _gamePercent->legend()->setAlignment(Qt::AlignBottom);
     _gamePercent->setMargins(QMargins(1, 1, 1, 1));
-    switch(Settings::theme()) {
-    case 1: {
-        //_gamePercent->setTheme(QChart::ChartThemeDark);
-        break;
-    }
-    case 2: {
-        break;
-    }
-    }
 
     ui->comboBoxGraph->addItems(QStringList {tr("Последний месяц"), tr("По годам")});
     ui->stackedWidgetGraphs->setCurrentIndex(0);
 
-    initAndSetChart(_chartT, tr("Последний месяц"),     ui->ChartsViewTimes);
-    QBarCategoryAxis *axisXT = new QBarCategoryAxis();
-    QDate date = QDate::currentDate().addDays(-QDate::currentDate().day() + 1);
-    QStringList monthsTitles;
-    while (date.month() == QDate::currentDate().month()) {
-        monthsTitles << date.toString("dd");
-        date = date.addDays(1);
-    }
-    axisXT->append(monthsTitles);
-    initChart(_chartT, axisXT);
-    initAndSetChart(_chartY, tr("Достижения по годам"),     ui->ChartsViewYears);
-    QBarCategoryAxis *axisXY = new QBarCategoryAxis();
-    axisXY->append(getYearsTitles());
-    initChart(_chartY, axisXY);
+    initChart(_chartT, ui->ChartsViewTimes, tr("Последний месяц"), getDaysMonthTitles(QDate::currentDate()));
+    initChart(_chartY, ui->ChartsViewYears, tr("Достижения по годам"), getYearsTitles());
 
     initingTable(ui->tableViewLastAchievements);
     ui->tableViewLastAchievements->horizontalHeader()->setVisible(false);
@@ -197,15 +172,16 @@ Form(aParent), ui(new Ui::FormStatistics), _userProfile(aProfile), _games(aGames
     ui->horizontalLayoutDonut->setStretch(0, 1);
     ui->horizontalLayoutDonut->setStretch(1, 2);
 
-    ui->TableViewGames->setVerticalScrollMode  (QAbstractItemView::ScrollMode::ScrollPerPixel);
-    ui->TableViewGames->setHorizontalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
+    initingTable(ui->TableViewGames)->verticalHeader()->setVisible(true);
+//    ui->TableViewGames->setVerticalScrollMode  (QAbstractItemView::ScrollMode::ScrollPerPixel);
+//    ui->TableViewGames->setHorizontalScrollMode(QAbstractItemView::ScrollMode::ScrollPerPixel);
 
-    ui->TableViewGames->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->TableViewGames->setShowGrid(false);
-    ui->TableViewGames->setSortingEnabled(true);
-    ui->TableViewGames->horizontalHeader()->setStretchLastSection(true);
-    ui->TableViewGames->setContextMenuPolicy(Qt::CustomContextMenu);
-    ui->TableViewGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
+//    ui->TableViewGames->setSelectionBehavior(QAbstractItemView::SelectRows);
+//    ui->TableViewGames->setShowGrid(false);
+//    ui->TableViewGames->setSortingEnabled(true);
+//    ui->TableViewGames->horizontalHeader()->setStretchLastSection(true);
+//    ui->TableViewGames->setContextMenuPolicy(Qt::CustomContextMenu);
+//    ui->TableViewGames->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 
     QPieSeries *series = new QPieSeries();
@@ -243,14 +219,14 @@ Form(aParent), ui(new Ui::FormStatistics), _userProfile(aProfile), _games(aGames
         ui->comboBoxCurrentProfile->addItem(profileFriend);
     }
 
-    connect(ui->TableViewGames, &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
+    connect(ui->TableViewGames, &QTableView::customContextMenuRequested, this, [&](QPoint pos) {
         SGame *game = currentGame();
         if (game != nullptr) {
             createMenu(*game)->popup(ui->TableViewGames->viewport()->mapToGlobal(pos));
         }
     });
 
-    connect(ui->TableViewGames, &QTableView::doubleClicked, this, [=](QModelIndex aIndex) {
+    connect(ui->TableViewGames, &QTableView::doubleClicked, this, [&](QModelIndex aIndex) {
         Q_UNUSED(aIndex);
         SGame *game = currentGame();
         if (game != nullptr) {
@@ -278,7 +254,9 @@ Form(aParent), ui(new Ui::FormStatistics), _userProfile(aProfile), _games(aGames
 
     connect(ui->comboBoxCurrentProfile, &ComboBoxFriends::s_friendClicked, this, &FormStatistics::updateStatisticProfile);
     connect(ui->comboBoxGraphsFriends, &ComboBoxFriends::s_friendClicked, this, [&](const SProfile &lProfile) {
-
+        //TODO Добавить его в правый виджет
+        Statistics *statistic = new Statistics(lProfile, SGame::load(lProfile.steamID(), true, true));
+        createThreadFriend(*statistic);
     });
 
     createThread();
@@ -339,7 +317,7 @@ QMenu *FormStatistics::createMenu(SGame &aGame) {
 
     QMenu *menu = new QMenu(this);
     menu->addAction (actionAchievements);
-    connect (actionAchievements, &QAction::triggered, this, [=]() {
+    connect (actionAchievements, &QAction::triggered, this, [&]() {
         emit s_showAchievements(aGame);
     });
 
@@ -388,6 +366,13 @@ void FormStatistics::createThread() {
     ThreadStatistics *statistics = new ThreadStatistics(_statistics);
     connect(statistics, &ThreadStatistics::s_progress,  this, &Form::setStatus);
     connect(statistics, &ThreadStatistics::s_finish,  this, &FormStatistics::onFinish);
+    statistics->start();
+}
+
+void FormStatistics::createThreadFriend(Statistics &aStatistics) {
+    ThreadStatistics *statistics = new ThreadStatistics(aStatistics);
+    connect(statistics, &ThreadStatistics::s_progress,  this, &Form::setStatus);
+    connect(statistics, &ThreadStatistics::s_finish,  this, &FormStatistics::addFriendLines);
     statistics->start();
 }
 
@@ -486,9 +471,8 @@ void FormStatistics::setInfo(Statistics &aStatistic) {
     QList<CompletedAchievement> last50(reverseList<CompletedAchievement>(tempLast50));
     QMap<GameID, QList<SAchievementSchema>> mapGames;
 
-    int i = 0;
-    for (const auto &achievements: last50) {
-        QStandardItem * item = new QStandardItem();
+
+    for (int i = 0; const auto &achievements: last50) {
         auto iteratorGames = mapGames.find(achievements.game.appId());
         if (iteratorGames == mapGames.end()) {
             mapGames.insert(achievements.game.appId(), SAchievementSchema::load(achievements.game.appId()));
@@ -501,6 +485,7 @@ void FormStatistics::setInfo(Statistics &aStatistic) {
                                               return aSchema.apiName() == achievements.achievement.apiName();
                                           });
         if (iteratorSchema != schema.end()) {
+            QStandardItem * item = new QStandardItem();
             QImage pix = loadImage((*iteratorSchema).icon(), Paths::imagesAchievements(QString::number(iteratorGames.key()), (*iteratorSchema).icon()), QSize(64, 64));
             item->setData(QPixmap::fromImage(pix), Qt::ItemDataRole::DecorationRole);
             QString toolTip = textToToolTip("<b>" + achievements.game.name() + "</b>\n" +
@@ -510,11 +495,11 @@ void FormStatistics::setInfo(Statistics &aStatistic) {
             model->setItem(i / 5, i % 5, item);
         }
         setStatus(tr("Последние достижения"), ++i, lastAchievements);
-
-        ui->tableViewLastAchievements->setModel(model);
-        ui->tableViewLastAchievements->resizeColumnsToContents();
-        ui->tableViewLastAchievements->resizeRowsToContents();
     }
+
+    ui->tableViewLastAchievements->setModel(model);
+    ui->tableViewLastAchievements->resizeColumnsToContents();
+    ui->tableViewLastAchievements->resizeRowsToContents();
 }
 
 void FormStatistics::setPie(const Statistics &aStatistic) {
@@ -568,8 +553,8 @@ void FormStatistics::setGraphs(Statistics &aStatistic) {
     for (auto &point: datasT) {
         point.setX(x++);
     }
-    const int startMonthSecs = QDateTime(QDate::currentDate(), QTime()).addDays(-QDate::currentDate().day() + 1).toSecsSinceEpoch();
-    for (auto achievement: aStatistic.completedAchievements) {
+    const int startMonthSecs = QDateTime(QDate(QDate::currentDate().year(), QDate::currentDate().month(), 1), QTime()).toSecsSinceEpoch();
+    for (const auto &achievement: aStatistic.completedAchievements) {
         int secsFromStartMonth = achievement.achievement.unlockTime().toSecsSinceEpoch() - startMonthSecs;
         if (secsFromStartMonth > 0) {
             int index = secsFromStartMonth / c_secsInDay;
@@ -580,57 +565,11 @@ void FormStatistics::setGraphs(Statistics &aStatistic) {
 
     x = 0;
     QVector<QPointF> datasY;
-    for (auto data: aStatistic.years) {
+    for (const auto &data: aStatistic.years) {
         datasY << QPointF(data.year.toInt() - c_steamReleaseYear, data.count);
         ++x;
     }
     setDataToLineChart(_chartY, datasY, aStatistic.profile.personaName(), color);
-//    for (auto &year: datasY) {
-//        static int a = -10000;
-//        year.setY(100000 + a);
-//        if (a > 0) {
-//            a += 5000;
-//        } else {
-//            a -= 5000;
-//        }
-//        a *= -1;
-//    }
-//    setDataToLineChart(_chartY, datasY, "кто-то1", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-//    for (auto &year: datasY) {
-//        static int a = -5000;
-//        year.setY(50000 + a);
-//        if (a > 0) {
-//            a += 2000;
-//        } else {
-//            a -= 2000;
-//        }
-//        a *= -1;
-//    }
-//    setDataToLineChart(_chartY, datasY, "кто-то2", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-//    for (auto &year: datasY) {
-//        static int a = -7000;
-//        year.setY(70000 + a);
-//        if (a > 0) {
-//            a += 3000;
-//        } else {
-//            a -= 3000;
-//        }
-//        a *= -1;
-//    }
-//    setDataToLineChart(_chartY, datasY, "кто-то3", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-//    for (auto &year: datasY) {
-//        static int a = -10000;
-//        year.setY(200000 + a);
-//        a -= 5000;
-//    }
-//    setDataToLineChart(_chartY, datasY, "кто-то4", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-//    for (auto &year: datasY) {
-//        static int a = 0;
-//        year.setY(100000 + a);
-//        a += 5000;
-//    }
-//    setDataToLineChart(_chartY, datasY, "кто-то5", nextColor(dynamic_cast<QLineSeries *>(_chartY->series().last())->color()));
-
     QStringList list;
     for(const SFriend &sFriend: SFriend::load(aStatistic.profile.steamID())) {
         list.append(sFriend.steamId());
@@ -640,6 +579,36 @@ void FormStatistics::setGraphs(Statistics &aStatistic) {
     for(const auto &profileFriend: profiles) {
         ui->comboBoxGraphsFriends->addItem(profileFriend);
     }
+}
+
+void FormStatistics::addFriendLines(Statistics &aStatistic) {
+    QColor color(200, 100, 200);
+    if (auto lastSeries = dynamic_cast<QLineSeries*>(_chartT->series().last())) {
+        color = nextColor(lastSeries->color());
+    }
+
+    int x = 0;
+    QVector<QPointF> datasT(daysInMonth(QDate::currentDate()));
+    for (auto &point: datasT) {
+        point.setX(x++);
+    }
+    const int startMonthSecs = QDateTime(QDate(QDate::currentDate().year(), QDate::currentDate().month(), 1), QTime()).toSecsSinceEpoch();
+    for (const auto &achievement: aStatistic.completedAchievements) {
+        int secsFromStartMonth = achievement.achievement.unlockTime().toSecsSinceEpoch() - startMonthSecs;
+        if (secsFromStartMonth > 0) {
+            int index = secsFromStartMonth / c_secsInDay;
+            datasT[index].setY(datasT[index].y() + 1);
+        }
+    }
+    setDataToLineChart(_chartT, datasT, aStatistic.profile.personaName(), color);
+
+    x = 0;
+    QVector<QPointF> datasY;
+    for (const auto &data: aStatistic.years) {
+        datasY << QPointF(data.year.toInt() - c_steamReleaseYear, data.count);
+        ++x;
+    }
+    setDataToLineChart(_chartY, datasY, aStatistic.profile.personaName(), color);
 }
 
 void FormStatistics::updateStatisticProfile(const SProfile &aProfile) {

@@ -49,6 +49,7 @@ enum class GamesType {
 public slots:
     void onFinish(Statistics &aStatistic);
     void createThread();
+    void createThreadFriend(Statistics &aStatistics);
     void updateSettings(QFlags<changedSettings> aSettings) override;
 
 public:
@@ -60,6 +61,8 @@ signals:
     void s_return_to_profile(QWidget*);
     void s_showAchievements(const SGame &game);
 
+protected slots:
+    void addFriendLines(Statistics &aStatistic);
 private slots:
     void retranslate() override;
     void updateIcons() override;

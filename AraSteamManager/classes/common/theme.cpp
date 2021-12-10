@@ -117,38 +117,6 @@ Theme orangeTheme() {
 Theme crimsonTheme() {
     Theme theme = blueTheme();
     theme.swapPartsAllColors(PartColor::red, PartColor::blue).swapPartsAllColors(PartColor::green, PartColor::blue);
-//    QLinearGradient gr1(0, -2, 0, 1);
-//    gr1.setColorAt(0, QColor(255, 38, 146));
-//    gr1.setColorAt(1, QColor(87, 21, 50));
-
-//    QLinearGradient gr2(-1, -1, 2, 2);
-//    gr2.setColorAt(0, QColor(236, 57, 152));
-//    gr2.setColorAt(1, QColor(207, 35, 95));
-
-//    QRadialGradient gr3(0.5, 0.5, 0.9, 0.4, 0.5);
-//    gr3.setColorAt(0, QColor(124, 18, 69));
-//    gr3.setColorAt(1, QColor(61, 25, 37));
-
-//    Theme theme;
-//    theme.text.setColor(QColor(221, 221, 221));
-//    theme.disabledBackground.setColor(QColor(110, 20, 80));
-//    theme.disabled.setColor(QColor(120, 120, 120));
-//    theme.hover.setColor(QColor(210, 20, 140));
-//    theme.border.setColor(QColor(75, 50, 65));
-//    theme.alternate.setColor(QColor(45, 25, 35));
-//    theme.background.setColor(QColor(62, 19, 36));
-//    theme.backgroundSelectedItem.setColor(QColor(255, 38, 146), gr1);
-//    theme.backgroundSecond.setColor(QColor(236, 57, 152), gr2);
-//    theme.backgroundProgressbar.setColor(QColor(224, 93, 170));
-//    theme.backgroundBadProgressbar.setColor(QColor(75, 228, 75));
-//    theme.backgroundProgressbarProgress.setColor(QColor(132, 56, 101));
-//    theme.selected.setColor(QColor(255, 135, 182));
-//    theme.headerForm.setColor(QColor(59, 30, 41));
-//    theme.backgroundItem.setColor(QColor(33, 23, 26));
-//    theme.backgroundAlternateItem.setColor(QColor(39, 29, 32));
-//    theme.forItemHover.setColor(QColor(53, 43, 46));
-//    theme.mainProfileBackground.setColor(QColor(94, 37, 60));
-//    theme.mainBackground.setColor(QColor(124, 18, 69), gr3);
     theme.setPathIcons(":/theme/iconsBlackTheme/");
     theme.setPathImages("://white/");
     return theme;
@@ -157,38 +125,6 @@ Theme crimsonTheme() {
 Theme limeTheme() {
     Theme theme = blueTheme();
     theme.swapPartsAllColors(PartColor::red, PartColor::blue).swapPartsAllColors(PartColor::green, PartColor::red);
-//    QLinearGradient gr1(0, -2, 0, 1);
-//    gr1.setColorAt(0, QColor(146, 255, 38));
-//    gr1.setColorAt(1, QColor(50, 87, 21));
-
-//    QLinearGradient gr2(-1, -1, 2, 2);
-//    gr2.setColorAt(0, QColor(152, 206, 57));
-//    gr2.setColorAt(1, QColor(95, 177, 35));
-
-//    QRadialGradient gr3(0.5, 0.5, 0.9, 0.4, 0.5);
-//    gr3.setColorAt(0, QColor(69, 124, 18));
-//    gr3.setColorAt(1, QColor(37, 61, 25));
-
-//    Theme theme;
-//    theme.text.setColor(QColor(221, 221, 221));
-//    theme.disabledBackground.setColor(QColor(80, 110, 20));
-//    theme.disabled.setColor(QColor(120, 120, 120));
-//    theme.hover.setColor(QColor(140, 210, 20));
-//    theme.border.setColor(QColor(65, 75, 50));
-//    theme.alternate.setColor(QColor(35, 45, 25));
-//    theme.background.setColor(QColor(36, 62, 19));
-//    theme.backgroundSelectedItem.setColor(QColor(146, 255, 38), gr1);
-//    theme.backgroundSecond.setColor(QColor(152, 206, 57), gr2);
-//    theme.backgroundProgressbar.setColor(QColor(170, 224, 93));
-//    theme.backgroundBadProgressbar.setColor(QColor(75, 75, 228));
-//    theme.backgroundProgressbarProgress.setColor(QColor(101, 132, 56));
-//    theme.selected.setColor(QColor(182, 255, 135));
-//    theme.headerForm.setColor(QColor(41, 59, 30));
-//    theme.backgroundItem.setColor(QColor(26, 33, 23));
-//    theme.backgroundAlternateItem.setColor(QColor(32, 39, 29));
-//    theme.forItemHover.setColor(QColor(46, 53, 43));
-//    theme.mainProfileBackground.setColor(QColor(60, 94, 37));
-//    theme.mainBackground.setColor(QColor(69, 124, 18), gr3);
     theme.setPathIcons(":/theme/iconsBlackTheme/");
     theme.setPathImages("://white/");
     return theme;
@@ -197,38 +133,6 @@ Theme limeTheme() {
 Theme purpleTheme() {
     Theme theme = blueTheme();
     theme.swapPartsAllColors(PartColor::red, PartColor::green);
-//    QLinearGradient gr1(0, -2, 0, 1);
-//    gr1.setColorAt(0, QColor(146, 38, 255));
-//    gr1.setColorAt(1, QColor(50, 21, 87));
-
-//    QLinearGradient gr2(-1, -1, 2, 2);
-//    gr2.setColorAt(0, QColor(152, 57, 236));
-//    gr2.setColorAt(1, QColor(95, 35, 207));
-
-//    QRadialGradient gr3(0.5, 0.5, 0.9, 0.4, 0.5);
-//    gr3.setColorAt(0, QColor(69, 18, 124));
-//    gr3.setColorAt(1, QColor(37, 25, 61));
-
-//    Theme theme;
-//    theme.text.setColor(QColor(221, 221, 221));
-//    theme.disabledBackground.setColor(QColor(80, 20, 110));
-//    theme.disabled.setColor(QColor(120, 120, 120));
-//    theme.hover.setColor(QColor(140, 20, 210));
-//    theme.border.setColor(QColor(65, 50, 75));
-//    theme.alternate.setColor(QColor(35, 25, 45));
-//    theme.background.setColor(QColor(36, 19, 62));
-//    theme.backgroundSelectedItem.setColor(QColor(146, 38, 255), gr1);
-//    theme.backgroundSecond.setColor(QColor(152, 57, 236), gr2);
-//    theme.backgroundProgressbar.setColor(QColor(170, 93, 224));
-//    theme.backgroundBadProgressbar.setColor(QColor(75, 228, 75));
-//    theme.backgroundProgressbarProgress.setColor(QColor(101, 56, 132));
-//    theme.selected.setColor(QColor(182, 135, 255));
-//    theme.headerForm.setColor(QColor(41, 30, 59));
-//    theme.backgroundItem.setColor(QColor(26, 23, 33));
-//    theme.backgroundAlternateItem.setColor(QColor(32, 29, 39));
-//    theme.forItemHover.setColor(QColor(46, 43, 53));
-//    theme.mainProfileBackground.setColor(QColor(60, 37, 94));
-//    theme.mainBackground.setColor(QColor(69, 18, 124), gr3);
     theme.setPathIcons(":/theme/iconsBlackTheme/");
     theme.setPathImages("://white/");
     return theme;
@@ -237,38 +141,6 @@ Theme purpleTheme() {
 Theme greenTheme() {
     Theme theme = blueTheme();
     theme.swapPartsAllColors(PartColor::green, PartColor::blue);
-//    QLinearGradient gr1(0, -2, 0, 1);
-//    gr1.setColorAt(0, QColor(38, 255, 146));
-//    gr1.setColorAt(1, QColor(21, 87, 50));
-
-//    QLinearGradient gr2(-1, -1, 2, 2);
-//    gr2.setColorAt(0, QColor(57, 206, 152));
-//    gr2.setColorAt(1, QColor(35, 177, 95));
-
-//    QRadialGradient gr3(0.5, 0.5, 0.9, 0.4, 0.5);
-//    gr3.setColorAt(0, QColor(18, 124, 69));
-//    gr3.setColorAt(1, QColor(25, 61, 37));
-
-//    Theme theme;
-//    theme.text.setColor(QColor(221, 221, 221));
-//    theme.disabledBackground.setColor(QColor(20, 110, 80));
-//    theme.disabled.setColor(QColor(120, 120, 120));
-//    theme.hover.setColor(QColor(20, 210, 140));
-//    theme.border.setColor(QColor(50, 75, 65));
-//    theme.alternate.setColor(QColor(25, 45, 35));
-//    theme.background.setColor(QColor(19, 62, 36));
-//    theme.backgroundSelectedItem.setColor(QColor(38, 255, 146), gr1);
-//    theme.backgroundSecond.setColor(QColor(57, 206, 152), gr2);
-//    theme.backgroundProgressbar.setColor(QColor(93, 224, 170));
-//    theme.backgroundBadProgressbar.setColor(QColor(228, 75, 75));
-//    theme.backgroundProgressbarProgress.setColor(QColor(56, 132, 101));
-//    theme.selected.setColor(QColor(135, 255, 182));
-//    theme.headerForm.setColor(QColor(30, 59, 41));
-//    theme.backgroundItem.setColor(QColor(23, 33, 26));
-//    theme.backgroundAlternateItem.setColor(QColor(29, 39, 32));
-//    theme.forItemHover.setColor(QColor(43, 53, 46));
-//    theme.mainProfileBackground.setColor(QColor(37, 94, 60));
-//    theme.mainBackground.setColor(QColor(18, 124, 69), gr3);
     theme.setPathIcons(":/theme/iconsBlackTheme/");
     theme.setPathImages("://white/");
     return theme;

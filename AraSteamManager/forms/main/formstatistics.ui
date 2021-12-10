@@ -90,7 +90,6 @@
              <property name="font">
               <font>
                <pointsize>10</pointsize>
-               <weight>75</weight>
                <bold>true</bold>
                <underline>true</underline>
               </font>
@@ -422,7 +421,7 @@
             <widget class="ComboBoxFriends" name="comboBoxGraphsFriends"/>
            </item>
            <item>
-            <widget class="QListWidget" name="listWidget"/>
+            <widget class="QListWidget" name="listWidgetFriendsGraph"/>
            </item>
           </layout>
          </widget>
