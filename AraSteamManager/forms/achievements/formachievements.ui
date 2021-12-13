@@ -188,7 +188,6 @@
            </property>
            <property name="font">
             <font>
-             <family>Ebrima</family>
              <pointsize>10</pointsize>
             </font>
            </property>
@@ -201,9 +200,7 @@
           <widget class="QLabel" name="LabelGameOnlineValue">
            <property name="font">
             <font>
-             <family>Ebrima</family>
              <pointsize>10</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -260,15 +257,15 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FormCategoriesEdit</class>
+   <class>FormReachedFilter</class>
    <extends>QWidget</extends>
-   <header>forms/achievements/formcategoriesedit.h</header>
+   <header>forms/widgets/formreachedfilter.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>FormReachedFilter</class>
+   <class>FormCategoriesEdit</class>
    <extends>QWidget</extends>
-   <header>forms/achievements/widgets/formreachedfilter.h</header>
+   <header>forms/achievements/formcategoriesedit.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

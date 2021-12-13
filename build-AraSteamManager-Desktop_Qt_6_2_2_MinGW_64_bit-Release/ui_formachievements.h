@@ -26,7 +26,7 @@
 #include "forms/achievements/formcategoriesedit.h"
 #include "forms/achievements/formcategoriestree.h"
 #include "forms/achievements/formfriendscompare.h"
-#include "forms/achievements/widgets/formreachedfilter.h"
+#include "forms/widgets/formreachedfilter.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -182,7 +182,6 @@ public:
         sizePolicy.setHeightForWidth(LabelGameOnline->sizePolicy().hasHeightForWidth());
         LabelGameOnline->setSizePolicy(sizePolicy);
         QFont font;
-        font.setFamilies({QString::fromUtf8("Ebrima")});
         font.setPointSize(10);
         LabelGameOnline->setFont(font);
 
@@ -191,7 +190,6 @@ public:
         LabelGameOnlineValue = new QLabel(FrameFilter);
         LabelGameOnlineValue->setObjectName(QString::fromUtf8("LabelGameOnlineValue"));
         QFont font1;
-        font1.setFamilies({QString::fromUtf8("Ebrima")});
         font1.setPointSize(10);
         font1.setBold(true);
         LabelGameOnlineValue->setFont(font1);

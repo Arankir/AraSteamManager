@@ -19,6 +19,7 @@ release/sprofile.o
 release/threadstatistics.o
 release/threadloading.o
 release/form.o
+release/formfrienditemgraph.o
 release/formcomments.o
 release/formcontainerachievements.o
 release/formgroups.o
@@ -76,6 +77,7 @@ release/moc_sprofile.o
 release/moc_threadstatistics.o
 release/moc_threadloading.o
 release/moc_form.o
+release/moc_formfrienditemgraph.o
 release/moc_formcomments.o
 release/moc_formcontainerachievements.o
 release/moc_formgroups.o

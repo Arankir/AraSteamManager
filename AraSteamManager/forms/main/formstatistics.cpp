@@ -1,6 +1,7 @@
 #include "formstatistics.h"
 #include "ui_formstatistics.h"
 #include <math.h>
+#include "forms/widgets/formfrienditemgraph.h"
 
 constexpr int c_steamReleaseYear = 2002;
 constexpr int c_secsInDay = 60 * 60 * 24;
@@ -108,7 +109,7 @@ QChart *updateChartWidth(QChart *chart) {
     } else {
         return chart;
     }
-    int min = 3000;
+    int min = 4000;
     int max = 1;
     for (auto sery: chart->series()) {
         if (auto realSery = dynamic_cast<QLineSeries*>(sery)) {
@@ -128,7 +129,7 @@ QChart *updateChartWidth(QChart *chart) {
             }
         }
     }
-    if (min == 3000) {
+    if (min == 4000) {
         min = 0;
     }
     for (auto axis: chart->axes(Qt::Horizontal)) {
@@ -445,11 +446,24 @@ QChart *setDataToLineChart(QChart *chart, QVector<QPointF> &datas, const QString
     return updateChartHeight(updateChartWidth(chart));
 }
 
-QColor nextColor(const QColor &aColor) {
-    QColor newColor;
-    newColor.setHsl((aColor.hue() + 45) % 255, aColor.saturation(), aColor.lightness());
-//    newColor.setRgb((aColor.red() + 140) % 255, (aColor.green() + 140) % 255, (aColor.blue() + 140) % 255);
-    return newColor;
+QColor FormStatistics::nextColor(const QColor &aColor) {
+    auto iterator = std::find_if(_colors.begin(),
+                                 _colors.end(),
+                                 [&](QColor lColor) {
+                                        return lColor == aColor;
+                                    });
+    if (iterator != _colors.end()) {
+        if (iterator < --_colors.end()) {
+            return *(iterator + 1);
+        } else {
+            return QColor(0, 0, 0);
+        }
+    }
+    return QColor(0, 0, 0);
+//    QColor newColor;
+//    newColor.setHsl((aColor.hue() + 45) % 255, aColor.saturation(), aColor.lightness());
+////    newColor.setRgb((aColor.red() + 140) % 255, (aColor.green() + 140) % 255, (aColor.blue() + 140) % 255);
+//    return newColor;
 }
 
 void FormStatistics::setInfo(Statistics &aStatistic) {
@@ -546,7 +560,7 @@ void FormStatistics::clearGraphs() {
 }
 
 void FormStatistics::setGraphs(Statistics &aStatistic) {
-    QColor color(200,100,200);
+    QColor color = _colors[0];
 
     int x = 0;
     QVector<QPointF> datasT(daysInMonth(QDate::currentDate()));
@@ -582,10 +596,30 @@ void FormStatistics::setGraphs(Statistics &aStatistic) {
 }
 
 void FormStatistics::addFriendLines(Statistics &aStatistic) {
-    QColor color(200, 100, 200);
+    aStatistic.sortAllLists();
+    QColor color = _colors[0];
     if (auto lastSeries = dynamic_cast<QLineSeries*>(_chartT->series().last())) {
         color = nextColor(lastSeries->color());
     }
+    if (color == QColor()) {
+        ui->comboBoxCurrentProfile->addItem(aStatistic.profile);
+        return;
+    }
+
+    QListWidgetItem *item = new QListWidgetItem(aStatistic.profile.pixmapAvatar(), "");
+
+    auto friendItem = new FormFriendItemGraph(aStatistic.profile, color, item);
+    connect(friendItem, &FormFriendItemGraph::s_delete, this, [&]() {
+        auto sndr = dynamic_cast<FormFriendItemGraph*>(sender());
+        if (sndr == nullptr) {
+            return;
+        }
+        ui->comboBoxGraphsFriends->addItem(*sndr->steamProfile());
+        delete sndr->item();
+        removeFriendLines(*sndr->steamProfile());
+    });
+    ui->listWidgetFriendsGraph->addItem(item);
+    ui->listWidgetFriendsGraph->setItemWidget(item, friendItem);
 
     int x = 0;
     QVector<QPointF> datasT(daysInMonth(QDate::currentDate()));
@@ -609,6 +643,42 @@ void FormStatistics::addFriendLines(Statistics &aStatistic) {
         ++x;
     }
     setDataToLineChart(_chartY, datasY, aStatistic.profile.personaName(), color);
+}
+
+void FormStatistics::removeFriendLines(const SProfile &aProfile) {
+    int index = 0;
+    for (auto series: _chartT->series()) {
+        if (series->name() == aProfile.personaName()) {
+            _chartT->removeSeries(series);
+            break;
+        }
+        ++index;
+    }
+    for (int i = index; i < _chartT->series().size(); ++i) {
+        if (auto sery = dynamic_cast<QLineSeries*>(_chartT->series().at(i))) {
+            sery->setColor(_colors[i]);
+        }
+    }
+
+    _chartY->removeSeries(_chartY->series().at(index));
+    for (int i = index; i < _chartY->series().size(); ++i) {
+        if (auto sery = dynamic_cast<QLineSeries*>(_chartY->series().at(i))) {
+            sery->setColor(_colors[i]);
+            QColor label(_colors[i]);
+            label.setHsl(_colors[i].hue(), (int)(_colors[i].saturation() * 0.5), (int)(_colors[i].lightness() * 0.7));
+            sery->setPointLabelsColor(label);
+            for (int j = 0; j < ui->listWidgetFriendsGraph->count(); ++j) {
+                if (auto friendWidget = dynamic_cast<FormFriendItemGraph*>(ui->listWidgetFriendsGraph->itemWidget(ui->listWidgetFriendsGraph->item(j)))) {
+                    if (friendWidget->steamProfile()->personaName() == sery->name()) {
+                        dynamic_cast<FormFriendItemGraph*>(ui->listWidgetFriendsGraph->itemWidget(ui->listWidgetFriendsGraph->item(j)))->setColor(_colors[i]);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    updateChartHeight(updateChartWidth(_chartT));
+    updateChartHeight(updateChartWidth(_chartY));
 }
 
 void FormStatistics::updateStatisticProfile(const SProfile &aProfile) {

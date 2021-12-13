@@ -46,6 +46,7 @@ SOURCES += \
     classes/threads/thread/threadstatistics.cpp \
     classes/threads/threadloading.cpp \
     form.cpp \
+    forms/widgets/formfrienditemgraph.cpp \
     forms/formcomments.cpp \
     forms/formcontainerachievements.cpp \
     forms/formgroups.cpp \
@@ -54,8 +55,8 @@ SOURCES += \
     forms/achievements/formcategoriesedit.cpp \
     forms/achievements/formcategoriestree.cpp \
     forms/achievements/formfriendscompare.cpp \
-    forms/achievements/widgets/formfrienditemcompare.cpp \
-    forms/achievements/widgets/formreachedfilter.cpp \
+    forms/widgets/formfrienditemcompare.cpp \
+    forms/widgets/formreachedfilter.cpp \
     forms/main/formfavorites.cpp \
     forms/main/formfriends.cpp \
     forms/main/formgames.cpp \
@@ -110,6 +111,7 @@ HEADERS += \
     classes/threads/thread/threadstatistics.h \
     classes/threads/threadloading.h \
     form.h \
+    forms/widgets/formfrienditemgraph.h \
     forms/formcomments.h \
     forms/formcontainerachievements.h \
     forms/formgroups.h \
@@ -118,8 +120,8 @@ HEADERS += \
     forms/achievements/formcategoriesedit.h \
     forms/achievements/formcategoriestree.h \
     forms/achievements/formfriendscompare.h \
-    forms/achievements/widgets/formfrienditemcompare.h \
-    forms/achievements/widgets/formreachedfilter.h \
+    forms/widgets/formfrienditemcompare.h \
+    forms/widgets/formreachedfilter.h \
     forms/main/formfavorites.h \
     forms/main/formfriends.h \
     forms/main/formgames.h \
@@ -152,6 +154,7 @@ HEADERS += \
     subWidgets/withData/qradiobuttonwithdata.h \
 
 FORMS += \
+    forms/widgets/formfrienditemgraph.ui \
     forms/formcomments.ui \
     forms/formcontainerachievements.ui \
     forms/formgroups.ui \
@@ -159,8 +162,8 @@ FORMS += \
     forms/achievements/formachievements.ui \
     forms/achievements/formcategoriesedit.ui \
     forms/achievements/formfriendscompare.ui \
-    forms/achievements/widgets/formfrienditemcompare.ui \
-    forms/achievements/widgets/formreachedfilter.ui \
+    forms/widgets/formfrienditemcompare.ui \
+    forms/widgets/formreachedfilter.ui \
     forms/main/formfavorites.ui \
     forms/main/formfriends.ui \
     forms/main/formgames.ui \

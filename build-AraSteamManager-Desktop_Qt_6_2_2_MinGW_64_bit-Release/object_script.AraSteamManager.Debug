@@ -19,6 +19,7 @@ debug/sprofile.o
 debug/threadstatistics.o
 debug/threadloading.o
 debug/form.o
+debug/formfrienditemgraph.o
 debug/formcomments.o
 debug/formcontainerachievements.o
 debug/formgroups.o
@@ -76,6 +77,7 @@ debug/moc_sprofile.o
 debug/moc_threadstatistics.o
 debug/moc_threadloading.o
 debug/moc_form.o
+debug/moc_formfrienditemgraph.o
 debug/moc_formcomments.o
 debug/moc_formcontainerachievements.o
 debug/moc_formgroups.o

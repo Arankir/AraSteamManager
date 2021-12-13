@@ -79,6 +79,10 @@ private slots:
     void setPie(const Statistics &aStatistic);
     void setGraphs(Statistics &aStatistic);
     void clearGraphs();
+
+    QColor nextColor(const QColor &aColor);
+
+    void removeFriendLines(const SProfile &aProfile);
 private:
     Ui::FormStatistics *ui;
     GamesType _currentGamesType = GamesType::none;
@@ -108,6 +112,10 @@ private:
     QChart *_chartT;
 //    QChart *_chartM;
     QChart *_chartY;
+
+    const QList<QColor> _colors = {QColor(150, 0, 0), QColor(0, 0, 150), QColor(150, 0, 150), QColor(0, 150, 150), QColor(0, 150, 0),
+                                   QColor(150, 150, 0), QColor(1, 1, 1), QColor(150, 150, 150)};
+
 };
 
 #endif // FORMSTATISTICS_H

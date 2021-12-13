@@ -31,7 +31,7 @@
 #include "subWidgets/progressBars/progressbargood.h"
 #include "forms/formcomments.h"
 #include "forms/achievements/formcategoriesedit.h"
-#include "forms/achievements/widgets/formreachedfilter.h"
+#include "forms/widgets/formreachedfilter.h"
 #include "subWidgets/models/achievementsmodel.h"
 #include "subWidgets/models/filters.h"
 

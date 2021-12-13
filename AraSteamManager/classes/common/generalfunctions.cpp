@@ -34,7 +34,7 @@ QString textToToolTip(const QString &aText, const QString &aSplitter) {
         }
         result += "\n";
     }
-    result.remove(result.length() - 2, 2);
+    result.remove(result.length() - 1, 1);
     return result;
 }
 

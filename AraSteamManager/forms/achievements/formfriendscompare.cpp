@@ -1,6 +1,6 @@
 #include "formfriendscompare.h"
 #include "ui_formfriendscompare.h"
-#include "./widgets/formfrienditemcompare.h"
+#include "forms/widgets/formfrienditemcompare.h"
 #include <QMenu>
 
 constexpr int c_friendColumnWidth = 100;
@@ -12,13 +12,13 @@ FormFriendsCompare::FormFriendsCompare(QWidget *parent): Form(parent), ui(new Ui
     updateIcons();
     #define Connects {
     connect(ui->CheckBoxCompareIcon, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementIcon, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementIcon, arg1 == 0);});
     connect(ui->CheckBoxCompareTitle, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementTitle, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementTitle, arg1 == 0);});
     connect(ui->CheckBoxCompareDescription, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementDescription, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementDescription, arg1 == 0);});
     connect(ui->CheckBoxCompareTotalPercent, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [=](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementWorld, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementWorld, arg1 == 0);});
     connect(ui->ButtonFriendsAll, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsAll);
     connect(ui->ButtonFriendsReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsReached);
     connect(ui->ButtonFriendsNotReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsNotReached);
@@ -158,7 +158,7 @@ void FormFriendsCompare::loadFriendGames(const SGames &aGames, const QString &aU
     if (iterator != _profilesFriends.end()) {
         bool isGameExist = std::any_of(aGames.begin(),
                                        aGames.end(),
-                                       [=](const SGame &game) {
+                                       [&](const SGame &game) {
                                            return game.appId() == _game.appId();
                                        });
         if (isGameExist) {
@@ -183,7 +183,7 @@ void FormFriendsCompare::addFriendToList(const SProfile &aSteamFriend) {
 
     auto friendItem = new FormFriendItemCompare(aSteamFriend, item);
     connect(friendItem, &FormFriendItemCompare::s_filterChanged, this, &FormFriendsCompare::updateFilterFriend);
-    connect(friendItem, &FormFriendItemCompare::s_delete, this, [=]() {
+    connect(friendItem, &FormFriendItemCompare::s_delete, this, [&]() {
         auto sndr = dynamic_cast<FormFriendItemCompare*>(sender());
         if (sndr == nullptr) {
             return;

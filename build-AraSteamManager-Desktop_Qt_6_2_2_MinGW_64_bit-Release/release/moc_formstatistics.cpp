@@ -49,8 +49,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormStatistics_t {
-    const uint offsetsAndSize[84];
-    char stringdata0[530];
+    const uint offsetsAndSize[92];
+    char stringdata0[574];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormStatistics_t, stringdata0) + ofs), len 
@@ -97,7 +97,11 @@ QT_MOC_LITERAL(482, 7), // "setInfo"
 QT_MOC_LITERAL(490, 6), // "setPie"
 QT_MOC_LITERAL(497, 10), // "Statistics"
 QT_MOC_LITERAL(508, 9), // "setGraphs"
-QT_MOC_LITERAL(518, 11) // "clearGraphs"
+QT_MOC_LITERAL(518, 11), // "clearGraphs"
+QT_MOC_LITERAL(530, 9), // "nextColor"
+QT_MOC_LITERAL(540, 6), // "aColor"
+QT_MOC_LITERAL(547, 17), // "removeFriendLines"
+QT_MOC_LITERAL(565, 8) // "aProfile"
 
     },
     "FormStatistics\0s_finish\0\0s_return_to_profile\0"
@@ -114,7 +118,8 @@ QT_MOC_LITERAL(518, 11) // "clearGraphs"
     "SGame*\0createMenu\0QMenu*\0SGame&\0aGame\0"
     "updateStatisticProfile\0SProfile\0"
     "lProfile\0setInfo\0setPie\0Statistics\0"
-    "setGraphs\0clearGraphs"
+    "setGraphs\0clearGraphs\0nextColor\0aColor\0"
+    "removeFriendLines\0aProfile"
 };
 #undef QT_MOC_LITERAL
 
@@ -124,7 +129,7 @@ static const uint qt_meta_data_FormStatistics[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      22,   14, // methods
+      24,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -132,30 +137,32 @@ static const uint qt_meta_data_FormStatistics[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  146,    2, 0x06,    1 /* Public */,
-       3,    1,  147,    2, 0x06,    2 /* Public */,
-       5,    1,  150,    2, 0x06,    4 /* Public */,
+       1,    0,  158,    2, 0x06,    1 /* Public */,
+       3,    1,  159,    2, 0x06,    2 /* Public */,
+       5,    1,  162,    2, 0x06,    4 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    1,  153,    2, 0x0a,    6 /* Public */,
-      11,    0,  156,    2, 0x0a,    8 /* Public */,
-      12,    1,  157,    2, 0x0a,    9 /* Public */,
-      14,    1,  160,    2, 0x0a,   11 /* Public */,
-      17,    1,  163,    2, 0x09,   13 /* Protected */,
-      18,    0,  166,    2, 0x08,   15 /* Private */,
-      19,    0,  167,    2, 0x08,   16 /* Private */,
-      20,    0,  168,    2, 0x08,   17 /* Private */,
-      21,    0,  169,    2, 0x08,   18 /* Private */,
-      22,    0,  170,    2, 0x08,   19 /* Private */,
-      23,    0,  171,    2, 0x08,   20 /* Private */,
-      24,    2,  172,    2, 0x08,   21 /* Private */,
-      28,    0,  177,    2, 0x08,   24 /* Private */,
-      30,    1,  178,    2, 0x08,   25 /* Private */,
-      34,    1,  181,    2, 0x08,   27 /* Private */,
-      37,    1,  184,    2, 0x08,   29 /* Private */,
-      38,    1,  187,    2, 0x08,   31 /* Private */,
-      40,    1,  190,    2, 0x08,   33 /* Private */,
-      41,    0,  193,    2, 0x08,   35 /* Private */,
+       8,    1,  165,    2, 0x0a,    6 /* Public */,
+      11,    0,  168,    2, 0x0a,    8 /* Public */,
+      12,    1,  169,    2, 0x0a,    9 /* Public */,
+      14,    1,  172,    2, 0x0a,   11 /* Public */,
+      17,    1,  175,    2, 0x09,   13 /* Protected */,
+      18,    0,  178,    2, 0x08,   15 /* Private */,
+      19,    0,  179,    2, 0x08,   16 /* Private */,
+      20,    0,  180,    2, 0x08,   17 /* Private */,
+      21,    0,  181,    2, 0x08,   18 /* Private */,
+      22,    0,  182,    2, 0x08,   19 /* Private */,
+      23,    0,  183,    2, 0x08,   20 /* Private */,
+      24,    2,  184,    2, 0x08,   21 /* Private */,
+      28,    0,  189,    2, 0x08,   24 /* Private */,
+      30,    1,  190,    2, 0x08,   25 /* Private */,
+      34,    1,  193,    2, 0x08,   27 /* Private */,
+      37,    1,  196,    2, 0x08,   29 /* Private */,
+      38,    1,  199,    2, 0x08,   31 /* Private */,
+      40,    1,  202,    2, 0x08,   33 /* Private */,
+      41,    0,  205,    2, 0x08,   35 /* Private */,
+      42,    1,  206,    2, 0x08,   36 /* Private */,
+      44,    1,  209,    2, 0x08,   38 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -182,6 +189,8 @@ static const uint qt_meta_data_FormStatistics[] = {
     QMetaType::Void, 0x80000000 | 39,   10,
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
+    QMetaType::QColor, QMetaType::QColor,   43,
+    QMetaType::Void, 0x80000000 | 35,   45,
 
        0        // eod
 };
@@ -216,6 +225,9 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 19: _t->setPie((*reinterpret_cast< const Statistics(*)>(_a[1]))); break;
         case 20: _t->setGraphs((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
         case 21: _t->clearGraphs(); break;
+        case 22: { QColor _r = _t->nextColor((*reinterpret_cast< const QColor(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QColor*>(_a[0]) = std::move(_r); }  break;
+        case 23: _t->removeFriendLines((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -263,7 +275,7 @@ const QMetaObject FormStatistics::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormStatistics_t
 , QtPrivate::TypeAndForceComplete<FormStatistics, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QList<GameWithPercent>, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<SGame *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QList<GameWithPercent>, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<SGame *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QColor, std::false_type>, QtPrivate::TypeAndForceComplete<const QColor &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>
 
 
 >,
@@ -290,13 +302,13 @@ int FormStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 22)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 22;
+        _id -= 24;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 22)
+        if (_id < 24)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 22;
+        _id -= 24;
     }
     return _id;
 }

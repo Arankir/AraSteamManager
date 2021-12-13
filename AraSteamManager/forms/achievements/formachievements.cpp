@@ -40,33 +40,33 @@ void FormAchievements::init() {
     connect(ui->TabWidget,                  &QTabWidget::currentChanged,                this,   &FormAchievements::tabWidget_CurrentChanged);
     connect(ui->FilterMyProfile,            &FormReachedFilter::s_radioButtonChange,    this,   &FormAchievements::updateFilterWithMyProfile);
     connect(ui->LineEditNameAchievements,   &QLineEdit::textChanged,                    this,   &FormAchievements::updateFilterTextAchievement);
-    connect(ui->ButtonFindAchievement,      &QPushButton::clicked,                      this,   [=]() {
+    connect(ui->ButtonFindAchievement,      &QPushButton::clicked,                      this,   [&]() {
         ui->LineEditNameAchievements->setText(ui->LineEditNameAchievements->text());
     });
-    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryAdd,         this,   [=](Category *lCategory) {
+    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryAdd,         this,   [&](Category *lCategory) {
         ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
         ui->CategoriesEdit->addSubCategory(lCategory);
     });
-    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryChange,      this,   [=](Category *lCategory) {
+    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryChange,      this,   [&](Category *lCategory) {
         ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
         ui->CategoriesEdit->changeCategory(lCategory);
     });
-    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryDelete,      this,   [=](Category *lCategory) {
+    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryDelete,      this,   [&](Category *lCategory) {
         ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
         ui->CategoriesEdit->deleteCategory(lCategory);
     });
     connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_stateChanged,        this,   &FormAchievements::updateFilterCategory);
-    connect(ui->TableViewMyAchievements,    &QTableView::customContextMenuRequested,    this,   [=](QPoint pos) {
+    connect(ui->TableViewMyAchievements,    &QTableView::customContextMenuRequested,    this,   [&](QPoint pos) {
         QMenu *menu = createMenu(currentAchievement());
         menu->popup(ui->TableViewMyAchievements->viewport()->mapToGlobal(pos));
     });
-    connect(ui->TableViewMyAchievements,    &QTableView::doubleClicked,                 this,   [=](QModelIndex aIndex) {
+    connect(ui->TableViewMyAchievements,    &QTableView::doubleClicked,                 this,   [&](QModelIndex aIndex) {
         if (aIndex.column() == AchievementComments) {
             buttonComment_Clicked();
         }
     });
     connect(_achievementsModel, &AchievementsModel::s_progress, this, &Form::setStatus);
-    connect(_achievementsModel, &AchievementsModel::s_finished, this, [=]() {
+    connect(_achievementsModel, &AchievementsModel::s_finished, this, [&]() {
         _achievementsModel->sort(AchievementWorld, Qt::SortOrder::DescendingOrder);
         updateFilters();
         loading(false);
@@ -86,11 +86,11 @@ void FormAchievements::init() {
     });
     connect(this, &FormAchievements::s_filtersUpdated,      ui->FriendsCompare, &FormFriendsCompare::setModel);
     connect(this, &FormAchievements::s_filtersValueUpdated, ui->FriendsCompare, &FormFriendsCompare::filtersValueUpdated);
-    connect(ui->FriendsCompare, &FormFriendsCompare::s_startLoad,       this,   [=]() {
+    connect(ui->FriendsCompare, &FormFriendsCompare::s_startLoad,       this,   [&]() {
                                                                                     loading(true);
                                                                                 });
     connect(ui->FriendsCompare, &FormFriendsCompare::s_progressLoad,    this,   &Form::setStatus);
-    connect(ui->FriendsCompare, &FormFriendsCompare::s_finishLoad,      this,   [=]() {
+    connect(ui->FriendsCompare, &FormFriendsCompare::s_finishLoad,      this,   [&]() {
                                                                                     clearStatus();
                                                                                     loading(false);
                                                                                 });
@@ -353,7 +353,7 @@ void FormAchievements::buttonComment_Clicked() {
     auto form = createFramelessForm<FormComments>();
     form->setData(_profile, _game, currentAchievement());
     connect(this, &FormAchievements::s_settingsUpdated, form->window(), &FramelessWindow::updateSettings);
-    connect(form, &FormComments::s_updateComments, this, [=]() {
+    connect(form, &FormComments::s_updateComments, this, [&]() {
         _achievementsModel->updateComments();
     });
     form->window()->show();
@@ -392,7 +392,7 @@ void FormAchievements::tabWidget_CurrentChanged(const int &index) {
 void FormAchievements::loadEditCategory() {
     ui->CategoriesEdit->setGame(_game);
     ui->CategoriesEdit->setAchievements(_achievementsModel->getAchievements());
-    connect(this, &FormAchievements::s_filtersValueUpdated, ui->CategoriesEdit, [=]() {
+    connect(this, &FormAchievements::s_filtersValueUpdated, ui->CategoriesEdit, [&]() {
         QList<QString> list;
         for (int i = 0; i < ui->TableViewMyAchievements->model()->rowCount(); ++i) {
             QModelIndex index = ui->TableViewMyAchievements->model()->index(i, AchievementAppid);
@@ -402,7 +402,7 @@ void FormAchievements::loadEditCategory() {
         qDebug() << list;
         ui->CategoriesEdit->setVisibleItems(list);
     });
-    connect(ui->CategoriesEdit, &FormCategoriesEdit::s_categoriesIsUpdated, this, [=](bool isUpdated) {
+    connect(ui->CategoriesEdit, &FormCategoriesEdit::s_categoriesIsUpdated, this, [&](bool isUpdated) {
         if (isUpdated) {
             updateCategories();
         }
