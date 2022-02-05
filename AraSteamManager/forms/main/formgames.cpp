@@ -18,10 +18,10 @@ void FormGames::init() {
     connect(ui->ButtonFind,         &QPushButton::clicked,                  this, &FormGames::buttonFind_Clicked);
     connect(ui->CheckBoxFavorites,  &QCheckBox::stateChanged,               this, &FormGames::checkBoxFavorites_StateChanged);
     connect(ui->ComboBoxGroups,     &MultiSelectComboBox::selectionChanged, this, &FormGames::updateGroupsFilter);
-    connect(ui->TableGames,         &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
+    connect(ui->TableGames,         &QTableView::customContextMenuRequested, this, [&](QPoint pos) {
         createMenu(currentGame())->popup(ui->TableGames->viewport()->mapToGlobal(pos));
     });
-    connect(ui->TableGames,         &QTableView::doubleClicked,             this, [=](QModelIndex aIndex) {
+    connect(ui->TableGames,         &QTableView::doubleClicked,             this, [&](QModelIndex aIndex) {
         if (aIndex.column() == GamesComment) {
             showCommentsEdit();
         } else {
@@ -47,7 +47,7 @@ void FormGames::setGames(const SProfile &aProfile, const SGames &aGames) {
 
     auto games = new GamesModel(this);
     connect(games, &GamesModel::s_progress, this, &Form::setStatus);
-    connect(games, &GamesModel::s_finished, this, [=]() {
+    connect(games, &GamesModel::s_finished, this, [&]() {
         ui->TableGames->sortByColumn(GamesName, Qt::SortOrder::AscendingOrder);
         ui->TableGames->resizeColumnsToContents();
         ui->TableGames->resizeRowsToContents();
@@ -203,7 +203,7 @@ QMenu *FormGames::createMenu(const SGame &aGame) {
     auto favorites = Favorites::games();
     auto isGameFavorite = std::any_of(favorites.cbegin(),
                                     favorites.cend(),
-                                    [=](FavoriteGame curGame) {
+                                    [&](FavoriteGame curGame) {
                                         return curGame.appId() == aGame.appId() &&
                                                 curGame.steamId() == _profile.steamID();
                                     });
@@ -289,7 +289,7 @@ void FormGames::showGroupsEdit() {
     FormGroups *groups = new FormGroups(_profile, currentGame());
     QFrame *frame = createSubForm<FormGroups>(groups, this);
     connect(groups, &FormGroups::s_updateGroups,    this, &FormGames::updateGroups);
-    connect(groups, &FormGroups::s_closed,          this, [=]() {
+    connect(groups, &FormGroups::s_closed,          this, [&]() {
         setEnable(true);
         delete frame->layout();
         delete frame;
@@ -302,7 +302,7 @@ void FormGames::showCommentsEdit() {
     comments->setData(_profile, currentGame());
     QFrame *frame = createSubForm<FormComments>(comments, this);
     connect(comments, &FormComments::s_updateComments,  _filterGames.sourceModel(), &GamesModel::updateComments);
-    connect(comments, &FormComments::s_closed,          this,                       [=](){
+    connect(comments, &FormComments::s_closed,          this,                       [&](){
         setEnable(true);
         delete frame->layout();
         delete frame;

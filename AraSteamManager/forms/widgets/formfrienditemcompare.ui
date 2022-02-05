@@ -100,7 +100,7 @@
   <customwidget>
    <class>FormReachedFilter</class>
    <extends>QWidget</extends>
-   <header>forms/achievements/widgets/formreachedfilter.h</header>
+   <header>forms/widgets/formreachedfilter.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

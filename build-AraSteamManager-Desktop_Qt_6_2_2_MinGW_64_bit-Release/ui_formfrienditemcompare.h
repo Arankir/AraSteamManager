@@ -16,7 +16,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
-#include "forms/achievements/widgets/formreachedfilter.h"
+#include "forms/widgets/formreachedfilter.h"
 
 QT_BEGIN_NAMESPACE
 

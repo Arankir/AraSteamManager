@@ -10,10 +10,10 @@ FormFriendItemCompare::FormFriendItemCompare(const SProfile &steamFriend, QListW
     ui->LabelPercent->setText("0%");
     setIcons();
 
-    connect(ui->ButtonDelete, &QPushButton::clicked, this, [=](){
+    connect(ui->ButtonDelete, &QPushButton::clicked, this, [&](){
         emit s_delete();
     });
-    connect(ui->Filter, &FormReachedFilter::s_radioButtonChange, this ,[=](ReachedType type) {
+    connect(ui->Filter, &FormReachedFilter::s_radioButtonChange, this ,[&](ReachedType type) {
         emit s_filterChanged(_steamProfile, type);
     });
 }

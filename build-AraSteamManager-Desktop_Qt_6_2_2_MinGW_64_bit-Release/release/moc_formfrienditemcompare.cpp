@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/forms/achievements/widgets/formfrienditemcompare.h"
+#include "../../AraSteamManager/forms/widgets/formfrienditemcompare.h"
 #include <QtGui/qtextcursor.h>
 #include <QtNetwork/QSslError>
 #include <QtCore/qbytearray.h>

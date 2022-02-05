@@ -1363,7 +1363,7 @@ debug/moc_favorites.cpp: ../AraSteamManager/classes/common/favorites.h \
 		../AraSteamManager/classes/steamApi/structures/sachievements.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\common\favorites.h -o debug\moc_favorites.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\common\favorites.h -o debug\moc_favorites.cpp
 
 debug/moc_requestdata.cpp: ../AraSteamManager/classes/network/requestdata.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
@@ -1542,7 +1542,7 @@ debug/moc_requestdata.cpp: ../AraSteamManager/classes/network/requestdata.h \
 		C:/Qt/6.2.2/mingw_64/include/QtNetwork/QTcpSocket \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\network\requestdata.h -o debug\moc_requestdata.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\network\requestdata.h -o debug\moc_requestdata.cpp
 
 debug/moc_requestimage.cpp: ../AraSteamManager/classes/network/requestimage.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -1747,7 +1747,7 @@ debug/moc_requestimage.cpp: ../AraSteamManager/classes/network/requestimage.h \
 		C:/Qt/6.2.2/mingw_64/include/QtNetwork/QTcpSocket \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\network\requestimage.h -o debug\moc_requestimage.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\network\requestimage.h -o debug\moc_requestimage.cpp
 
 debug/moc_sapi.cpp: ../AraSteamManager/classes/steamApi/sapi.h \
 		../AraSteamManager/classes/network/requestimage.h \
@@ -1976,7 +1976,7 @@ debug/moc_sapi.cpp: ../AraSteamManager/classes/steamApi/sapi.h \
 		../AraSteamManager/classes/common/images.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\sapi.h -o debug\moc_sapi.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\sapi.h -o debug\moc_sapi.cpp
 
 debug/moc_sachievements.cpp: ../AraSteamManager/classes/steamApi/structures/sachievements.h \
 		../AraSteamManager/classes/steamApi/sapi.h \
@@ -2246,7 +2246,7 @@ debug/moc_sachievements.cpp: ../AraSteamManager/classes/steamApi/structures/sach
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sachievements.h -o debug\moc_sachievements.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sachievements.h -o debug\moc_sachievements.cpp
 
 debug/moc_sbans.cpp: ../AraSteamManager/classes/steamApi/structures/sbans.h \
 		../AraSteamManager/classes/steamApi/sapi.h \
@@ -2476,7 +2476,7 @@ debug/moc_sbans.cpp: ../AraSteamManager/classes/steamApi/structures/sbans.h \
 		../AraSteamManager/classes/common/images.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sbans.h -o debug\moc_sbans.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sbans.h -o debug\moc_sbans.cpp
 
 debug/moc_sfriends.cpp: ../AraSteamManager/classes/steamApi/structures/sfriends.h \
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
@@ -2707,7 +2707,7 @@ debug/moc_sfriends.cpp: ../AraSteamManager/classes/steamApi/structures/sfriends.
 		../AraSteamManager/classes/common/images.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sfriends.h -o debug\moc_sfriends.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sfriends.h -o debug\moc_sfriends.cpp
 
 debug/moc_sgames.cpp: ../AraSteamManager/classes/steamApi/structures/sgames.h \
 		../AraSteamManager/classes/steamApi/sapi.h \
@@ -2976,7 +2976,7 @@ debug/moc_sgames.cpp: ../AraSteamManager/classes/steamApi/structures/sgames.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sgames.h -o debug\moc_sgames.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sgames.h -o debug\moc_sgames.cpp
 
 debug/moc_sprofile.cpp: ../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		../AraSteamManager/classes/steamApi/sapi.h \
@@ -3206,7 +3206,7 @@ debug/moc_sprofile.cpp: ../AraSteamManager/classes/steamApi/structures/sprofile.
 		../AraSteamManager/classes/common/images.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sprofile.h -o debug\moc_sprofile.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\steamApi\structures\sprofile.h -o debug\moc_sprofile.cpp
 
 debug/moc_threadstatistics.cpp: ../AraSteamManager/classes/threads/thread/threadstatistics.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -3481,7 +3481,7 @@ debug/moc_threadstatistics.cpp: ../AraSteamManager/classes/threads/thread/thread
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\threads\thread\threadstatistics.h -o debug\moc_threadstatistics.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\threads\thread\threadstatistics.h -o debug\moc_threadstatistics.cpp
 
 debug/moc_threadloading.cpp: ../AraSteamManager/classes/threads/threadloading.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -3570,7 +3570,7 @@ debug/moc_threadloading.cpp: ../AraSteamManager/classes/threads/threadloading.h 
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\threads\threadloading.h -o debug\moc_threadloading.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\classes\threads\threadloading.h -o debug\moc_threadloading.cpp
 
 debug/moc_form.cpp: ../AraSteamManager/form.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -3767,7 +3767,7 @@ debug/moc_form.cpp: ../AraSteamManager/form.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\form.h -o debug\moc_form.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\form.h -o debug\moc_form.cpp
 
 debug/moc_formfrienditemgraph.cpp: ../AraSteamManager/forms/widgets/formfrienditemgraph.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -4036,7 +4036,7 @@ debug/moc_formfrienditemgraph.cpp: ../AraSteamManager/forms/widgets/formfriendit
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qprogressbar.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\widgets\formfrienditemgraph.h -o debug\moc_formfrienditemgraph.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\widgets\formfrienditemgraph.h -o debug\moc_formfrienditemgraph.cpp
 
 debug/moc_formcomments.cpp: ../AraSteamManager/forms/formcomments.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -4309,7 +4309,7 @@ debug/moc_formcomments.cpp: ../AraSteamManager/forms/formcomments.h \
 		../AraSteamManager/classes/common/comments.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formcomments.h -o debug\moc_formcomments.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formcomments.h -o debug\moc_formcomments.cpp
 
 debug/moc_formcontainerachievements.cpp: ../AraSteamManager/forms/formcontainerachievements.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -4645,6 +4645,7 @@ debug/moc_formcontainerachievements.cpp: ../AraSteamManager/forms/formcontainera
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
@@ -4653,7 +4654,7 @@ debug/moc_formcontainerachievements.cpp: ../AraSteamManager/forms/formcontainera
 		../AraSteamManager/subWidgets/models/filters.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formcontainerachievements.h -o debug\moc_formcontainerachievements.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formcontainerachievements.h -o debug\moc_formcontainerachievements.cpp
 
 debug/moc_formgroups.cpp: ../AraSteamManager/forms/formgroups.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -4929,7 +4930,7 @@ debug/moc_formgroups.cpp: ../AraSteamManager/forms/formgroups.h \
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formgroups.h -o debug\moc_formgroups.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formgroups.h -o debug\moc_formgroups.cpp
 
 debug/moc_formmain.cpp: ../AraSteamManager/forms/formmain.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -5276,6 +5277,7 @@ debug/moc_formmain.cpp: ../AraSteamManager/forms/formmain.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
@@ -5664,7 +5666,7 @@ debug/moc_formmain.cpp: ../AraSteamManager/forms/formmain.h \
 		../AraSteamManager/classes/steamApi/structures/sbans.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formmain.h -o debug\moc_formmain.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\formmain.h -o debug\moc_formmain.cpp
 
 debug/moc_formachievements.cpp: ../AraSteamManager/forms/achievements/formachievements.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -6000,6 +6002,7 @@ debug/moc_formachievements.cpp: ../AraSteamManager/forms/achievements/formachiev
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
@@ -6008,7 +6011,7 @@ debug/moc_formachievements.cpp: ../AraSteamManager/forms/achievements/formachiev
 		../AraSteamManager/subWidgets/models/filters.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formachievements.h -o debug\moc_formachievements.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formachievements.h -o debug\moc_formachievements.cpp
 
 debug/moc_formcategoriesedit.cpp: ../AraSteamManager/forms/achievements/formcategoriesedit.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -6305,7 +6308,7 @@ debug/moc_formcategoriesedit.cpp: ../AraSteamManager/forms/achievements/formcate
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formcategoriesedit.h -o debug\moc_formcategoriesedit.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formcategoriesedit.h -o debug\moc_formcategoriesedit.cpp
 
 debug/moc_formcategoriestree.cpp: ../AraSteamManager/forms/achievements/formcategoriestree.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTreeWidget \
@@ -6587,7 +6590,7 @@ debug/moc_formcategoriestree.cpp: ../AraSteamManager/forms/achievements/formcate
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formcategoriestree.h -o debug\moc_formcategoriestree.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formcategoriestree.h -o debug\moc_formcategoriestree.cpp
 
 debug/moc_formfriendscompare.cpp: ../AraSteamManager/forms/achievements/formfriendscompare.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -6861,10 +6864,14 @@ debug/moc_formfriendscompare.cpp: ../AraSteamManager/forms/achievements/formfrie
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		../AraSteamManager/classes/steamApi/structures/sfriends.h \
 		../AraSteamManager/classes/common/myfilter.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
+		../AraSteamManager/subWidgets/withData/qradiobuttonwithdata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRadioButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qradiobutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/subWidgets/withData/qbuttonwithdata.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/subWidgets/items/qlistwidgetfriend.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidgetItem \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistwidget.h \
@@ -6878,7 +6885,7 @@ debug/moc_formfriendscompare.cpp: ../AraSteamManager/forms/achievements/formfrie
 		../AraSteamManager/classes/achievements/categoriesgame.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formfriendscompare.h -o debug\moc_formfriendscompare.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\achievements\formfriendscompare.h -o debug\moc_formfriendscompare.cpp
 
 debug/moc_formfrienditemcompare.cpp: ../AraSteamManager/forms/widgets/formfrienditemcompare.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -7147,7 +7154,7 @@ debug/moc_formfrienditemcompare.cpp: ../AraSteamManager/forms/widgets/formfriend
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qprogressbar.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\widgets\formfrienditemcompare.h -o debug\moc_formfrienditemcompare.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\widgets\formfrienditemcompare.h -o debug\moc_formfrienditemcompare.cpp
 
 debug/moc_formreachedfilter.cpp: ../AraSteamManager/forms/widgets/formreachedfilter.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -7349,7 +7356,7 @@ debug/moc_formreachedfilter.cpp: ../AraSteamManager/forms/widgets/formreachedfil
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\widgets\formreachedfilter.h -o debug\moc_formreachedfilter.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\widgets\formreachedfilter.h -o debug\moc_formreachedfilter.cpp
 
 debug/moc_formfavorites.cpp: ../AraSteamManager/forms/main/formfavorites.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -7624,7 +7631,7 @@ debug/moc_formfavorites.cpp: ../AraSteamManager/forms/main/formfavorites.h \
 		../AraSteamManager/classes/common/myfilter.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formfavorites.h -o debug\moc_formfavorites.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formfavorites.h -o debug\moc_formfavorites.cpp
 
 debug/moc_formfriends.cpp: ../AraSteamManager/forms/main/formfriends.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -7915,7 +7922,7 @@ debug/moc_formfriends.cpp: ../AraSteamManager/forms/main/formfriends.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formfriends.h -o debug\moc_formfriends.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formfriends.h -o debug\moc_formfriends.cpp
 
 debug/moc_formgames.cpp: ../AraSteamManager/forms/main/formgames.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -8231,7 +8238,7 @@ debug/moc_formgames.cpp: ../AraSteamManager/forms/main/formgames.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formgames.h -o debug\moc_formgames.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formgames.h -o debug\moc_formgames.cpp
 
 debug/moc_formprofile.cpp: ../AraSteamManager/forms/main/formprofile.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -8506,7 +8513,7 @@ debug/moc_formprofile.cpp: ../AraSteamManager/forms/main/formprofile.h \
 		../AraSteamManager/classes/steamApi/structures/sfriends.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formprofile.h -o debug\moc_formprofile.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formprofile.h -o debug\moc_formprofile.cpp
 
 debug/moc_formsettings.cpp: ../AraSteamManager/forms/main/formsettings.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMessageBox \
@@ -8802,7 +8809,7 @@ debug/moc_formsettings.cpp: ../AraSteamManager/forms/main/formsettings.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qradiobutton.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formsettings.h -o debug\moc_formsettings.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formsettings.h -o debug\moc_formsettings.cpp
 
 debug/moc_formstatistics.cpp: ../AraSteamManager/forms/main/formstatistics.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
@@ -9472,7 +9479,7 @@ debug/moc_formstatistics.cpp: ../AraSteamManager/forms/main/formstatistics.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QStandardItemModel \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formstatistics.h -o debug\moc_formstatistics.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\forms\main\formstatistics.h -o debug\moc_formstatistics.cpp
 
 debug/moc_framelesswindow.cpp: ../AraSteamManager/framelesswindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
@@ -9667,7 +9674,7 @@ debug/moc_framelesswindow.cpp: ../AraSteamManager/framelesswindow.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\framelesswindow.h -o debug\moc_framelesswindow.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\framelesswindow.h -o debug\moc_framelesswindow.cpp
 
 debug/moc_actioncategory.cpp: ../AraSteamManager/subWidgets/actions/actioncategory.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QAction \
@@ -9940,7 +9947,7 @@ debug/moc_actioncategory.cpp: ../AraSteamManager/subWidgets/actions/actioncatego
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\actions\actioncategory.h -o debug\moc_actioncategory.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\actions\actioncategory.h -o debug\moc_actioncategory.cpp
 
 debug/moc_multiselectcombobox.cpp: ../AraSteamManager/subWidgets/comboBoxes/multiselectcombobox.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
@@ -10096,7 +10103,7 @@ debug/moc_multiselectcombobox.cpp: ../AraSteamManager/subWidgets/comboBoxes/mult
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qitemselectionmodel.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\comboBoxes\multiselectcombobox.h -o debug\moc_multiselectcombobox.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\comboBoxes\multiselectcombobox.h -o debug\moc_multiselectcombobox.cpp
 
 debug/moc_qcomboboxfriends.cpp: ../AraSteamManager/subWidgets/comboBoxes/qcomboboxfriends.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
@@ -10351,7 +10358,7 @@ debug/moc_qcomboboxfriends.cpp: ../AraSteamManager/subWidgets/comboBoxes/qcombob
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidgetItem \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\comboBoxes\qcomboboxfriends.h -o debug\moc_qcomboboxfriends.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\comboBoxes\qcomboboxfriends.h -o debug\moc_qcomboboxfriends.cpp
 
 debug/moc_qcomboboxfriendswithgame.cpp: ../AraSteamManager/subWidgets/comboBoxes/qcomboboxfriendswithgame.h \
 		../AraSteamManager/subWidgets/comboBoxes/qcomboboxfriends.h \
@@ -10607,7 +10614,7 @@ debug/moc_qcomboboxfriendswithgame.cpp: ../AraSteamManager/subWidgets/comboBoxes
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidgetItem \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\comboBoxes\qcomboboxfriendswithgame.h -o debug\moc_qcomboboxfriendswithgame.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\comboBoxes\qcomboboxfriendswithgame.h -o debug\moc_qcomboboxfriendswithgame.cpp
 
 debug/moc_labellight.cpp: ../AraSteamManager/subWidgets/labels/labellight.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -10747,7 +10754,7 @@ debug/moc_labellight.cpp: ../AraSteamManager/subWidgets/labels/labellight.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicseffect.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\labels\labellight.h -o debug\moc_labellight.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\labels\labellight.h -o debug\moc_labellight.cpp
 
 debug/moc_labelvalue.cpp: ../AraSteamManager/subWidgets/labels/labelvalue.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLabel \
@@ -10885,7 +10892,7 @@ debug/moc_labelvalue.cpp: ../AraSteamManager/subWidgets/labels/labelvalue.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\labels\labelvalue.h -o debug\moc_labelvalue.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\labels\labelvalue.h -o debug\moc_labelvalue.cpp
 
 debug/moc_qlistwidgetachievements.cpp: ../AraSteamManager/subWidgets/lists/qlistwidgetachievements.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -11166,7 +11173,7 @@ debug/moc_qlistwidgetachievements.cpp: ../AraSteamManager/subWidgets/lists/qlist
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\lists\qlistwidgetachievements.h -o debug\moc_qlistwidgetachievements.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\lists\qlistwidgetachievements.h -o debug\moc_qlistwidgetachievements.cpp
 
 debug/moc_achievementsmodel.cpp: ../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
@@ -11444,7 +11451,7 @@ debug/moc_achievementsmodel.cpp: ../AraSteamManager/subWidgets/models/achievemen
 		../AraSteamManager/classes/achievements/categoriesgame.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\achievementsmodel.h -o debug\moc_achievementsmodel.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\achievementsmodel.h -o debug\moc_achievementsmodel.cpp
 
 debug/moc_filters.cpp: ../AraSteamManager/subWidgets/models/filters.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
@@ -11534,7 +11541,7 @@ debug/moc_filters.cpp: ../AraSteamManager/subWidgets/models/filters.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\filters.h -o debug\moc_filters.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\filters.h -o debug\moc_filters.cpp
 
 debug/moc_friendsmodel.cpp: ../AraSteamManager/subWidgets/models/friendsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
@@ -11809,7 +11816,7 @@ debug/moc_friendsmodel.cpp: ../AraSteamManager/subWidgets/models/friendsmodel.h 
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\friendsmodel.h -o debug\moc_friendsmodel.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\friendsmodel.h -o debug\moc_friendsmodel.cpp
 
 debug/moc_gamesmodel.cpp: ../AraSteamManager/subWidgets/models/gamesmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
@@ -12085,7 +12092,7 @@ debug/moc_gamesmodel.cpp: ../AraSteamManager/subWidgets/models/gamesmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\gamesmodel.h -o debug\moc_gamesmodel.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\gamesmodel.h -o debug\moc_gamesmodel.cpp
 
 debug/moc_listachievementsmodel.cpp: ../AraSteamManager/subWidgets/models/listachievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -12226,7 +12233,7 @@ debug/moc_listachievementsmodel.cpp: ../AraSteamManager/subWidgets/models/listac
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QIODevice \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\listachievementsmodel.h -o debug\moc_listachievementsmodel.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\models\listachievementsmodel.h -o debug\moc_listachievementsmodel.cpp
 
 debug/moc_progressbarbad.cpp: ../AraSteamManager/subWidgets/progressBars/progressbarbad.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -12365,7 +12372,7 @@ debug/moc_progressbarbad.cpp: ../AraSteamManager/subWidgets/progressBars/progres
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicseffect.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\progressBars\progressbarbad.h -o debug\moc_progressbarbad.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\progressBars\progressbarbad.h -o debug\moc_progressbarbad.cpp
 
 debug/moc_progressbargood.cpp: ../AraSteamManager/subWidgets/progressBars/progressbargood.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -12504,7 +12511,7 @@ debug/moc_progressbargood.cpp: ../AraSteamManager/subWidgets/progressBars/progre
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicseffect.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\progressBars\progressbargood.h -o debug\moc_progressbargood.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\progressBars\progressbargood.h -o debug\moc_progressbargood.cpp
 
 debug/moc_progressbarlight.cpp: ../AraSteamManager/subWidgets/progressBars/progressbarlight.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
@@ -12642,7 +12649,7 @@ debug/moc_progressbarlight.cpp: ../AraSteamManager/subWidgets/progressBars/progr
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgraphicseffect.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\progressBars\progressbarlight.h -o debug\moc_progressbarlight.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\progressBars\progressbarlight.h -o debug\moc_progressbarlight.cpp
 
 debug/moc_freezetablewidget.cpp: ../AraSteamManager/subWidgets/tables/freezetablewidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTableView \
@@ -12801,7 +12808,7 @@ debug/moc_freezetablewidget.cpp: ../AraSteamManager/subWidgets/tables/freezetabl
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.2.2/mingw_64/bin/moc.exe
-	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pasha/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pasha/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\tables\freezetablewidget.h -o debug\moc_freezetablewidget.cpp
+	C:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Pavel/Desktop/All/Projects/AraSteamManager/build-AraSteamManager-Desktop_Qt_6_2_2_MinGW_64_bit-Release/debug/moc_predefs.h -IC:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -IC:/Users/Pavel/Desktop/All/Projects/AraSteamManager/AraSteamManager -IC:/Qt/6.2.2/mingw_64/include -IC:/Qt/6.2.2/mingw_64/include/QtCharts -IC:/Qt/6.2.2/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.2.2/mingw_64/include/QtWidgets -IC:/Qt/6.2.2/mingw_64/include/QtOpenGL -IC:/Qt/6.2.2/mingw_64/include/QtGui -IC:/Qt/6.2.2/mingw_64/include/QtNetwork -IC:/Qt/6.2.2/mingw_64/include/QtConcurrent -IC:/Qt/6.2.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\AraSteamManager\subWidgets\tables\freezetablewidget.h -o debug\moc_freezetablewidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -13994,9 +14001,207 @@ ui_formmain.h: ../AraSteamManager/forms/formmain.ui \
 
 ui_formachievements.h: ../AraSteamManager/forms/achievements/formachievements.ui \
 		C:/Qt/6.2.2/mingw_64/bin/uic.exe \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/forms/achievements/formcategoriesedit.h \
 		../AraSteamManager/forms/achievements/formfriendscompare.h \
 		../AraSteamManager/forms/achievements/formcategoriestree.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtguiglobal.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qglobal.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qconfig-bootstrapped.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qconfig.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtcore-config.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsystemdetection.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qprocessordetection.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcompilerdetection.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtypeinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontainerfwd.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsysinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlogging.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qflags.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qatomic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbasicatomic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qgenericatomic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qglobalstatic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qnumeric.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qversiontagging.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtgui-config.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobjectdefs.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qnamespace.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtmetamacros.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobject.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstring.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qchar.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearray.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrefcount.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qarraydata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpair.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qarraydatapointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qarraydataops.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontainertools_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearrayview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringliteral.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringalgorithms.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qanystringview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qutf8stringview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringtokenizer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringbuilder.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlist.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiterator.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearraylist.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlist.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qalgorithms.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringmatcher.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreevent.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcompare.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qvarlengtharray.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qscopeguard.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdatastream.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiodevicebase.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiterable.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmetacontainer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontainerinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtaggedpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmath.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobject_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qproperty.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qshareddata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbindingstorage.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpropertyprivate.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmargins.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpaintdevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrect.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsize.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpoint.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpalette.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qcolor.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qrgb.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qrgba64.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qbrush.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qimage.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpixelformat.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtransform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpolygon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qregion.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qline.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpixmap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsharedpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfont.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfontmetrics.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfontinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qcursor.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qbitmap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qkeysequence.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qevent.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiodevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qurl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qvariant.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qshareddata_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qhash.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdebug.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtextstream.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringconverter.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qset.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontiguouscache.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qeventpoint.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qvector2d.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qvectornd.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpointingdevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputdevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qscreen.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QList \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QRect \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QSize \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QSizeF \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QTransform \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
+		../AraSteamManager/classes/common/settings.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QSettings \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsettings.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QFile \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfile.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QLoggingCategory \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QFontDatabase \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfontdatabase.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QStandardPaths \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstandardpaths.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QGradient \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QLinearGradient \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QRadialGradient \
+		../AraSteamManager/classes/common/theme.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QColor \
+		../AraSteamManager/subWidgets/withData/qradiobuttonwithdata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRadioButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qradiobutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		../AraSteamManager/form.h \
+		../AraSteamManager/framelesswindow.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRubberBand \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QEvent \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/Qt \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QHoverEvent \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QMouseEvent \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractanimation.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLabel \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpicture.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QProgressBar \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qprogressbar.h \
+		../AraSteamManager/classes/common/images.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qwidget.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -14560,10 +14765,14 @@ ui_formachievements.h: ../AraSteamManager/forms/achievements/formachievements.ui
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		../AraSteamManager/classes/steamApi/structures/sfriends.h \
 		../AraSteamManager/classes/common/myfilter.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
+		../AraSteamManager/subWidgets/withData/qradiobuttonwithdata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRadioButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qradiobutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/subWidgets/withData/qbuttonwithdata.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/subWidgets/items/qlistwidgetfriend.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidgetItem \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistwidget.h \
@@ -15547,7 +15756,205 @@ ui_formfriendscompare.h: ../AraSteamManager/forms/achievements/formfriendscompar
 	C:\Qt\6.2.2\mingw_64\bin\uic.exe ..\AraSteamManager\forms\achievements\formfriendscompare.ui -o ui_formfriendscompare.h
 
 ui_formfrienditemcompare.h: ../AraSteamManager/forms/widgets/formfrienditemcompare.ui \
-		C:/Qt/6.2.2/mingw_64/bin/uic.exe
+		C:/Qt/6.2.2/mingw_64/bin/uic.exe \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtguiglobal.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qglobal.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qconfig-bootstrapped.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qconfig.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtcore-config.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsystemdetection.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qprocessordetection.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcompilerdetection.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtypeinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontainerfwd.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsysinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlogging.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qflags.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qatomic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbasicatomic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qatomic_bootstrap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qgenericatomic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qatomic_cxx11.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qglobalstatic.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qnumeric.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qversiontagging.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtgui-config.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qwindowdefs.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobjectdefs.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qnamespace.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtmetamacros.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobjectdefs_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobject.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstring.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qchar.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearray.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrefcount.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qarraydata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpair.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qarraydatapointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qarraydataops.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontainertools_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearrayview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringliteral.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringalgorithms.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qanystringview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qutf8stringview.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringtokenizer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringbuilder.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlist.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiterator.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbytearraylist.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlist.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qalgorithms.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringmatcher.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreevent.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qscopedpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmetatype.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcompare.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qvarlengtharray.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qscopeguard.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdatastream.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiodevicebase.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiterable.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmetacontainer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontainerinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtaggedpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmath.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qobject_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qproperty.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qshareddata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qbindingstorage.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpropertyprivate.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmargins.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpaintdevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrect.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsize.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpoint.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpalette.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qcolor.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qrgb.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qrgba64.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qbrush.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qimage.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpixelformat.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtransform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpolygon.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qregion.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qline.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpixmap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsharedpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsharedpointer_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfont.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfontmetrics.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfontinfo.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qsizepolicy.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qcursor.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qbitmap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qkeysequence.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qevent.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qiodevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpointer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qurl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qvariant.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmap.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qshareddata_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qhash.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdebug.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qtextstream.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringconverter.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qset.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcontiguouscache.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qeventpoint.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qvector2d.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qvectornd.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpointingdevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputdevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qscreen.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QList \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QObject \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QRect \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QSize \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QSizeF \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QTransform \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qnativeinterface.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QDebug \
+		../AraSteamManager/classes/common/settings.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QSettings \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qsettings.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QFile \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfile.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfiledevice.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QLoggingCategory \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QFontDatabase \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qfontdatabase.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qeventloop.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfutureinterface.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qmutex.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qresultstore.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qfuture_impl.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthreadpool.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qthread.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qdeadlinetimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qelapsedtimer.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qrunnable.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qexception.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QStandardPaths \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qstandardpaths.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QGradient \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QLinearGradient \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QRadialGradient \
+		../AraSteamManager/classes/common/theme.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QColor \
+		../AraSteamManager/subWidgets/withData/qradiobuttonwithdata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRadioButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qradiobutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		../AraSteamManager/form.h \
+		../AraSteamManager/framelesswindow.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMainWindow \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmainwindow.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRubberBand \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qrubberband.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QEvent \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QPoint \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/Qt \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QHoverEvent \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/QMouseEvent \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QPropertyAnimation \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qpropertyanimation.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qvariantanimation.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractanimation.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/qeasingcurve.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLabel \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qpicture.h \
+		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextdocument.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QProgressBar \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qprogressbar.h \
+		../AraSteamManager/classes/common/images.h \
+		C:/Qt/6.2.2/mingw_64/include/QtCore/QString
 	C:\Qt\6.2.2\mingw_64\bin\uic.exe ..\AraSteamManager\forms\widgets\formfrienditemcompare.ui -o ui_formfrienditemcompare.h
 
 ui_formreachedfilter.h: ../AraSteamManager/forms/widgets/formreachedfilter.ui \
@@ -21212,15 +21619,7 @@ debug/formfrienditemgraph.o: ../AraSteamManager/forms/widgets/formfrienditemgrap
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qeasingcurve.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QProgressBar \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qprogressbar.h \
-		ui_formfrienditemgraph.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem
+		ui_formfrienditemgraph.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formfrienditemgraph.o ..\AraSteamManager\forms\widgets\formfrienditemgraph.cpp
 
 debug/formcomments.o: ../AraSteamManager/forms/formcomments.cpp ../AraSteamManager/forms/formcomments.h \
@@ -21492,19 +21891,7 @@ debug/formcomments.o: ../AraSteamManager/forms/formcomments.cpp ../AraSteamManag
 		../AraSteamManager/classes/steamApi/structures/sachievements.h \
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		../AraSteamManager/classes/common/comments.h \
-		ui_formcomments.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFrame \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTextEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtextedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout
+		ui_formcomments.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formcomments.o ..\AraSteamManager\forms\formcomments.cpp
 
 debug/formcontainerachievements.o: ../AraSteamManager/forms/formcontainerachievements.cpp ../AraSteamManager/forms/formcontainerachievements.h \
@@ -21841,15 +22228,14 @@ debug/formcontainerachievements.o: ../AraSteamManager/forms/formcontainerachieve
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qsortfilterproxymodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
 		../AraSteamManager/subWidgets/models/filters.h \
-		ui_formcontainerachievements.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTabWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout
+		ui_formcontainerachievements.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formcontainerachievements.o ..\AraSteamManager\forms\formcontainerachievements.cpp
 
 debug/formgroups.o: ../AraSteamManager/forms/formgroups.cpp ../AraSteamManager/forms/formgroups.h \
@@ -22124,19 +22510,7 @@ debug/formgroups.o: ../AraSteamManager/forms/formgroups.cpp ../AraSteamManager/f
 		../AraSteamManager/form.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
-		ui_formgroups.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QScrollArea \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qscrollarea.h
+		ui_formgroups.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formgroups.o ..\AraSteamManager\forms\formgroups.cpp
 
 debug/formmain.o: ../AraSteamManager/forms/formmain.cpp ../AraSteamManager/forms/formmain.h \
@@ -22484,6 +22858,7 @@ debug/formmain.o: ../AraSteamManager/forms/formmain.cpp ../AraSteamManager/forms
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
@@ -22870,11 +23245,7 @@ debug/formmain.o: ../AraSteamManager/forms/formmain.cpp ../AraSteamManager/forms
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFileDialog \
 		../AraSteamManager/forms/main/formprofile.h \
 		../AraSteamManager/classes/steamApi/structures/sbans.h \
-		ui_formmain.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGridLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QScrollArea \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStackedWidget
+		ui_formmain.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formmain.o ..\AraSteamManager\forms\formmain.cpp
 
 debug/formachievements.o: ../AraSteamManager/forms/achievements/formachievements.cpp ../AraSteamManager/forms/achievements/formachievements.h \
@@ -23210,28 +23581,14 @@ debug/formachievements.o: ../AraSteamManager/forms/achievements/formachievements
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qsortfilterproxymodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
 		../AraSteamManager/subWidgets/models/filters.h \
-		ui_formachievements.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFrame \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSplitter \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qsplitter.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTabWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
-		../AraSteamManager/forms/achievements/formcategoriestree.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTreeWidget \
-		../AraSteamManager/forms/achievements/formfriendscompare.h \
-		../AraSteamManager/subWidgets/items/qlistwidgetfriend.h
+		ui_formachievements.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formachievements.o ..\AraSteamManager\forms\achievements\formachievements.cpp
 
 debug/formcategoriesedit.o: ../AraSteamManager/forms/achievements/formcategoriesedit.cpp ../AraSteamManager/forms/achievements/formcategoriesedit.h \
@@ -23528,21 +23885,6 @@ debug/formcategoriesedit.o: ../AraSteamManager/forms/achievements/formcategories
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
 		ui_formcategoriesedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFrame \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
-		../AraSteamManager/subWidgets/lists/qlistwidgetachievements.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/QDropEvent \
 		../AraSteamManager/subWidgets/actions/actioncategory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formcategoriesedit.o ..\AraSteamManager\forms\achievements\formcategoriesedit.cpp
 
@@ -24098,10 +24440,14 @@ debug/formfriendscompare.o: ../AraSteamManager/forms/achievements/formfriendscom
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		../AraSteamManager/classes/steamApi/structures/sfriends.h \
 		../AraSteamManager/classes/common/myfilter.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
+		../AraSteamManager/subWidgets/withData/qradiobuttonwithdata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRadioButton \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qradiobutton.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/subWidgets/withData/qbuttonwithdata.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../AraSteamManager/subWidgets/items/qlistwidgetfriend.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidgetItem \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistwidget.h \
@@ -24114,23 +24460,7 @@ debug/formfriendscompare.o: ../AraSteamManager/forms/achievements/formfriendscom
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
 		../AraSteamManager/classes/achievements/categoriesgame.h \
 		ui_formfriendscompare.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
-		../AraSteamManager/subWidgets/comboBoxes/qcomboboxfriendswithgame.h \
-		../AraSteamManager/subWidgets/comboBoxes/qcomboboxfriends.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
-		../AraSteamManager/subWidgets/tables/freezetablewidget.h \
-		../AraSteamManager/subWidgets/models/filters.h \
+		../AraSteamManager/forms/widgets/formfrienditemcompare.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QMenu \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qmenu.h \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/qaction.h
@@ -24401,15 +24731,7 @@ debug/formfrienditemcompare.o: ../AraSteamManager/forms/widgets/formfrienditemco
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qeasingcurve.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QProgressBar \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qprogressbar.h \
-		ui_formfrienditemcompare.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem
+		ui_formfrienditemcompare.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formfrienditemcompare.o ..\AraSteamManager\forms\widgets\formfrienditemcompare.cpp
 
 debug/formreachedfilter.o: ../AraSteamManager/forms/widgets/formreachedfilter.cpp ../AraSteamManager/forms/widgets/formreachedfilter.h \
@@ -24610,14 +24932,7 @@ debug/formreachedfilter.o: ../AraSteamManager/forms/widgets/formreachedfilter.cp
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qprogressbar.h \
 		../AraSteamManager/classes/common/images.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
-		ui_formreachedfilter.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout
+		ui_formreachedfilter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formreachedfilter.o ..\AraSteamManager\forms\widgets\formreachedfilter.cpp
 
 debug/formfavorites.o: ../AraSteamManager/forms/main/formfavorites.cpp ../AraSteamManager/forms/main/formfavorites.h \
@@ -24891,25 +25206,7 @@ debug/formfavorites.o: ../AraSteamManager/forms/main/formfavorites.cpp ../AraSte
 		../AraSteamManager/classes/steamApi/structures/sprofile.h \
 		../AraSteamManager/classes/steamApi/structures/sachievements.h \
 		../AraSteamManager/classes/common/myfilter.h \
-		ui_formfavorites.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTabWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTableWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtablewidget.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout
+		ui_formfavorites.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formfavorites.o ..\AraSteamManager\forms\main\formfavorites.cpp
 
 debug/formfriends.o: ../AraSteamManager/forms/main/formfriends.cpp ../AraSteamManager/forms/main/formfriends.h \
@@ -25198,24 +25495,7 @@ debug/formfriends.o: ../AraSteamManager/forms/main/formfriends.cpp ../AraSteamMa
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qsortfilterproxymodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qabstractproxymodel.h \
-		ui_formfriends.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGroupBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgroupbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout
+		ui_formfriends.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formfriends.o ..\AraSteamManager\forms\main\formfriends.cpp
 
 debug/formgames.o: ../AraSteamManager/forms/main/formgames.cpp ../AraSteamManager/forms/main/formgames.h \
@@ -25529,21 +25809,7 @@ debug/formgames.o: ../AraSteamManager/forms/main/formgames.cpp ../AraSteamManage
 		../AraSteamManager/subWidgets/delegates/progressbardelegate.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStyledItemDelegate \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstyleditemdelegate.h \
-		ui_formgames.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGroupBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgroupbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		../AraSteamManager/subWidgets/comboBoxes/multiselectcombobox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistwidget.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistview.h
+		ui_formgames.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formgames.o ..\AraSteamManager\forms\main\formgames.cpp
 
 debug/formprofile.o: ../AraSteamManager/forms/main/formprofile.cpp ../AraSteamManager/forms/main/formprofile.h \
@@ -25817,15 +26083,7 @@ debug/formprofile.o: ../AraSteamManager/forms/main/formprofile.cpp ../AraSteamMa
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		../AraSteamManager/classes/steamApi/structures/sfriends.h \
-		ui_formprofile.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFrame \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
-		../AraSteamManager/subWidgets/labels/labellight.h \
-		../AraSteamManager/subWidgets/labels/labelvalue.h
+		ui_formprofile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formprofile.o ..\AraSteamManager\forms\main\formprofile.cpp
 
 debug/formsettings.o: ../AraSteamManager/forms/main/formsettings.cpp ../AraSteamManager/forms/main/formsettings.h \
@@ -26121,30 +26379,6 @@ debug/formsettings.o: ../AraSteamManager/forms/main/formsettings.cpp ../AraSteam
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRadioButton \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qradiobutton.h \
 		ui_formsettings.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcheckbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcombobox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFrame \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QGroupBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgroupbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.2.2/mingw_64/include/QtGui/qtextoption.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListView \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlistview.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTabWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTableWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtablewidget.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QToolBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qtoolbox.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTreeView \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTreeWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QColorDialog \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qcolordialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formsettings.o ..\AraSteamManager\forms\main\formsettings.cpp
@@ -26816,18 +27050,11 @@ debug/formstatistics.o: ../AraSteamManager/forms/main/formstatistics.cpp ../AraS
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QThread \
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QStandardItemModel \
 		ui_formstatistics.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QComboBox \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSplitter \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStackedWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QTabWidget \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
-		../AraSteamManager/subWidgets/comboBoxes/qcomboboxfriends.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QCheckBox \
-		../AraSteamManager/subWidgets/items/qlistwidgetfriend.h \
+		../AraSteamManager/forms/widgets/formfrienditemgraph.h \
 		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QListWidgetItem \
-		../AraSteamManager/subWidgets/labels/labelvalue.h
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
+		../AraSteamManager/subWidgets/withData/qradiobuttonwithdata.h \
+		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QRadioButton
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\formstatistics.o ..\AraSteamManager\forms\main\formstatistics.cpp
 
 debug/framelesswindow.o: ../AraSteamManager/framelesswindow.cpp ../AraSteamManager/framelesswindow.h \
@@ -27021,22 +27248,7 @@ debug/framelesswindow.o: ../AraSteamManager/framelesswindow.cpp ../AraSteamManag
 		C:/Qt/6.2.2/mingw_64/include/QtGui/QColor \
 		../AraSteamManager/classes/common/images.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QString \
-		ui_framelesswindow.h \
-		C:/Qt/6.2.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QFrame \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QPushButton \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qpushbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QSpacerItem \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QStatusBar \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/qstatusbar.h \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
-		C:/Qt/6.2.2/mingw_64/include/QtWidgets/QWidget
+		ui_framelesswindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\framelesswindow.o ..\AraSteamManager\framelesswindow.cpp
 
 debug/main.o: ../AraSteamManager/main.cpp C:/Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
@@ -27389,6 +27601,7 @@ debug/main.o: ../AraSteamManager/main.cpp C:/Qt/6.2.2/mingw_64/include/QtWidgets
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QStringListModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/qstringlistmodel.h \
+		../AraSteamManager/forms/widgets/formreachedfilter.h \
 		../AraSteamManager/subWidgets/models/achievementsmodel.h \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QAbstractTableModel \
 		C:/Qt/6.2.2/mingw_64/include/QtCore/QSortFilterProxyModel \

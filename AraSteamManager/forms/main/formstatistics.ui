@@ -44,7 +44,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -56,14 +56,14 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QLabel" name="LabelSummColumn">
+            <widget class="QLabel" name="labelSummColumn">
              <property name="text">
               <string>Всего достижений:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="LabelValue" name="LabelSumAchievementsValue">
+            <widget class="LabelValue" name="labelSumAchievementsValue">
              <property name="text">
               <string notr="true">0</string>
              </property>
@@ -110,7 +110,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QLabel" name="LabelAveragePercentValue">
+            <widget class="QLabel" name="labelAveragePercentValue">
              <property name="text">
               <string notr="true">Средний процент по всем играм</string>
              </property>
@@ -348,7 +348,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayoutDonut">
+        <layout class="QHBoxLayout" name="horizontalLayoutPie">
          <item>
           <widget class="QChartView" name="ChartViewPercentages">
            <property name="sizePolicy">
@@ -388,7 +388,7 @@
          </property>
          <widget class="QStackedWidget" name="stackedWidgetGraphs">
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="page">
            <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -398,14 +398,7 @@
            </layout>
           </widget>
           <widget class="QWidget" name="page_2">
-           <layout class="QVBoxLayout" name="verticalLayout_7">
-            <item>
-             <widget class="QChartView" name="ChartsViewMonths"/>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="page_3">
-           <layout class="QVBoxLayout" name="verticalLayout_6">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
              <widget class="QChartView" name="ChartsViewYears"/>
             </item>

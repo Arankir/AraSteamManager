@@ -28,11 +28,11 @@ void FormFriends::init() {
         ui->TableFriends->resizeRowsToContents();
     });
     connect(ui->CheckBoxFavorites,    &QCheckBox::stateChanged, this, &FormFriends::checkBoxFavorites_StateChanged);
-    connect(ui->TableFriends,         &QTableView::customContextMenuRequested, this, [=](QPoint pos) {
+    connect(ui->TableFriends,         &QTableView::customContextMenuRequested, this, [&](QPoint pos) {
         QMenu *menu = createMenu(currentFriend());
         menu->popup(ui->TableFriends->viewport()->mapToGlobal(pos));
     });
-    connect(ui->TableFriends,         &QTableView::doubleClicked, this, [=](QModelIndex) {
+    connect(ui->TableFriends,         &QTableView::doubleClicked, this, [&](QModelIndex) {
         goToCurrentProfile();
     });
 #define ConnectsEnd }
@@ -46,7 +46,7 @@ void FormFriends::setFriends(const QString &aId, const SFriends &aFriends) {
     }
     auto friendsModel = new FriendsModel(ui->TableFriends);
     connect(friendsModel, &FriendsModel::s_progress, this, &Form::setStatus);
-    connect(friendsModel, &FriendsModel::s_finished, this, [=]() {
+    connect(friendsModel, &FriendsModel::s_finished, this, [&]() {
         _filterFriends.setSourceModel(friendsModel);
         ui->TableFriends->setColumnHidden(FriendsID,    true);
         ui->TableFriends->setColumnHidden(FriendsIndex, true);

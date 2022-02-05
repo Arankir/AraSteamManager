@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../AraSteamManager/forms/achievements/widgets/formreachedfilter.h"
+#include "../../AraSteamManager/forms/widgets/formreachedfilter.h"
 #include <QtGui/qtextcursor.h>
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>

@@ -25,6 +25,8 @@ public:
     QString relationship()  const {return _relationship;}
     QDateTime friendSince() const {return _friendSince;}
 
+    static QStringList getFriendsSteamId(const ProfileID &id);
+
 private:
     ProfileID _steamID;
     QString _relationship;

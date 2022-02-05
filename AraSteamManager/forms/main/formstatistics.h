@@ -67,10 +67,6 @@ private slots:
     void retranslate() override;
     void updateIcons() override;
 
-    void showCompleteGames();
-    void showStartedGames();
-    void showNotStartedGames();
-    void showNoAchievementsGames();
     void setModelToTable(QList<GameWithPercent> aGames, bool aIsVisiblePercent);
     SGame *currentGame();
     QMenu *createMenu(SGame &aGame);
@@ -80,27 +76,12 @@ private slots:
     void setGraphs(Statistics &aStatistic);
     void clearGraphs();
 
-    QColor nextColor(const QColor &aColor);
-
     void removeFriendLines(const SProfile &aProfile);
+    void initPie();
 private:
     Ui::FormStatistics *ui;
     GamesType _currentGamesType = GamesType::none;
     int _currentIndex = -1;
-//    SProfile _profile;
-//    SGames _games;
-//    double _summAverages;
-//    int _achievementCount = 0;
-
-//    SGames _complete;
-//    QList<QPair<SGame, double>> _started;
-//    SGames _notStarted;
-//    SGames _noAchievements;
-
-
-//    QVector<int> _times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-//    QVector<int> _months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-//    QVector<QPair<QString,int>> _years;
 
     SProfile _userProfile;
     SGames _games;
@@ -109,9 +90,6 @@ private:
     Statistics _statistics;
 
     QChart *_gamePercent;
-    QChart *_chartT;
-//    QChart *_chartM;
-    QChart *_chartY;
 
     const QList<QColor> _colors = {QColor(150, 0, 0), QColor(0, 0, 150), QColor(150, 0, 150), QColor(0, 150, 150), QColor(0, 150, 0),
                                    QColor(150, 150, 0), QColor(1, 1, 1), QColor(150, 150, 150)};

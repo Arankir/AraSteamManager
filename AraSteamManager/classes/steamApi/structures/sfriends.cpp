@@ -28,6 +28,14 @@ bool SFriend::operator!=(const SFriend &aFriend) const {
             _friendSince != aFriend._friendSince);
 }
 
+QStringList SFriend::getFriendsSteamId(const ProfileID &aId) {
+    QStringList list;
+    for(const SFriend &sFriend: SFriend::load(aId)) {
+        list.append(sFriend.steamId());
+    }
+    return list;
+}
+
 QList<SFriend> onLoadFriend(const QByteArray &byteArray) {
     QList<SFriend> list;
     for(auto &&ban: QJsonDocument::fromJson(byteArray).object().value("friendslist").toObject().value("friends").toArray()) {

@@ -42,12 +42,12 @@ public:
     QHBoxLayout *horizontalLayout_9;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *LabelSummColumn;
-    LabelValue *LabelSumAchievementsValue;
+    QLabel *labelSummColumn;
+    LabelValue *labelSumAchievementsValue;
     QSpacerItem *horizontalSpacer;
     QLabel *label;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *LabelAveragePercentValue;
+    QLabel *labelAveragePercentValue;
     LabelValue *labelAverageAllGamesValue;
     QSpacerItem *horizontalSpacer_2;
     QHBoxLayout *horizontalLayout_5;
@@ -76,7 +76,7 @@ public:
     QTableView *tableViewLastAchievements;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayoutDonut;
+    QHBoxLayout *horizontalLayoutPie;
     QChartView *ChartViewPercentages;
     QTableView *TableViewGames;
     QWidget *tab_3;
@@ -87,10 +87,7 @@ public:
     QVBoxLayout *verticalLayout_8;
     QChartView *ChartsViewTimes;
     QWidget *page_2;
-    QVBoxLayout *verticalLayout_7;
-    QChartView *ChartsViewMonths;
-    QWidget *page_3;
-    QVBoxLayout *verticalLayout_6;
+    QVBoxLayout *verticalLayout_4;
     QChartView *ChartsViewYears;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_5;
@@ -135,16 +132,16 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        LabelSummColumn = new QLabel(tab);
-        LabelSummColumn->setObjectName(QString::fromUtf8("LabelSummColumn"));
+        labelSummColumn = new QLabel(tab);
+        labelSummColumn->setObjectName(QString::fromUtf8("labelSummColumn"));
 
-        horizontalLayout_3->addWidget(LabelSummColumn);
+        horizontalLayout_3->addWidget(labelSummColumn);
 
-        LabelSumAchievementsValue = new LabelValue(tab);
-        LabelSumAchievementsValue->setObjectName(QString::fromUtf8("LabelSumAchievementsValue"));
-        LabelSumAchievementsValue->setText(QString::fromUtf8("0"));
+        labelSumAchievementsValue = new LabelValue(tab);
+        labelSumAchievementsValue->setObjectName(QString::fromUtf8("labelSumAchievementsValue"));
+        labelSumAchievementsValue->setText(QString::fromUtf8("0"));
 
-        horizontalLayout_3->addWidget(LabelSumAchievementsValue);
+        horizontalLayout_3->addWidget(labelSumAchievementsValue);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
@@ -167,11 +164,11 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        LabelAveragePercentValue = new QLabel(tab);
-        LabelAveragePercentValue->setObjectName(QString::fromUtf8("LabelAveragePercentValue"));
-        LabelAveragePercentValue->setText(QString::fromUtf8("\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202 \320\277\320\276 \320\262\321\201\320\265\320\274 \320\270\320\263\321\200\320\260\320\274"));
+        labelAveragePercentValue = new QLabel(tab);
+        labelAveragePercentValue->setObjectName(QString::fromUtf8("labelAveragePercentValue"));
+        labelAveragePercentValue->setText(QString::fromUtf8("\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202 \320\277\320\276 \320\262\321\201\320\265\320\274 \320\270\320\263\321\200\320\260\320\274"));
 
-        horizontalLayout_4->addWidget(LabelAveragePercentValue);
+        horizontalLayout_4->addWidget(labelAveragePercentValue);
 
         labelAverageAllGamesValue = new LabelValue(tab);
         labelAverageAllGamesValue->setObjectName(QString::fromUtf8("labelAverageAllGamesValue"));
@@ -307,8 +304,8 @@ public:
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         verticalLayout_3 = new QVBoxLayout(tab_2);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        horizontalLayoutDonut = new QHBoxLayout();
-        horizontalLayoutDonut->setObjectName(QString::fromUtf8("horizontalLayoutDonut"));
+        horizontalLayoutPie = new QHBoxLayout();
+        horizontalLayoutPie->setObjectName(QString::fromUtf8("horizontalLayoutPie"));
         ChartViewPercentages = new QChartView(tab_2);
         ChartViewPercentages->setObjectName(QString::fromUtf8("ChartViewPercentages"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
@@ -318,16 +315,16 @@ public:
         ChartViewPercentages->setSizePolicy(sizePolicy);
         ChartViewPercentages->setMinimumSize(QSize(0, 250));
 
-        horizontalLayoutDonut->addWidget(ChartViewPercentages);
+        horizontalLayoutPie->addWidget(ChartViewPercentages);
 
         TableViewGames = new QTableView(tab_2);
         TableViewGames->setObjectName(QString::fromUtf8("TableViewGames"));
         TableViewGames->horizontalHeader()->setStretchLastSection(true);
 
-        horizontalLayoutDonut->addWidget(TableViewGames);
+        horizontalLayoutPie->addWidget(TableViewGames);
 
 
-        verticalLayout_3->addLayout(horizontalLayoutDonut);
+        verticalLayout_3->addLayout(horizontalLayoutPie);
 
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
@@ -351,24 +348,14 @@ public:
         stackedWidgetGraphs->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QString::fromUtf8("page_2"));
-        verticalLayout_7 = new QVBoxLayout(page_2);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        ChartsViewMonths = new QChartView(page_2);
-        ChartsViewMonths->setObjectName(QString::fromUtf8("ChartsViewMonths"));
-
-        verticalLayout_7->addWidget(ChartsViewMonths);
-
-        stackedWidgetGraphs->addWidget(page_2);
-        page_3 = new QWidget();
-        page_3->setObjectName(QString::fromUtf8("page_3"));
-        verticalLayout_6 = new QVBoxLayout(page_3);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-        ChartsViewYears = new QChartView(page_3);
+        verticalLayout_4 = new QVBoxLayout(page_2);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        ChartsViewYears = new QChartView(page_2);
         ChartsViewYears->setObjectName(QString::fromUtf8("ChartsViewYears"));
 
-        verticalLayout_6->addWidget(ChartsViewYears);
+        verticalLayout_4->addWidget(ChartsViewYears);
 
-        stackedWidgetGraphs->addWidget(page_3);
+        stackedWidgetGraphs->addWidget(page_2);
         splitter->addWidget(stackedWidgetGraphs);
         layoutWidget = new QWidget(splitter);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
@@ -401,8 +388,8 @@ public:
 
         retranslateUi(FormStatistics);
 
-        tabWidget->setCurrentIndex(2);
-        stackedWidgetGraphs->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
+        stackedWidgetGraphs->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(FormStatistics);
@@ -411,7 +398,7 @@ public:
     void retranslateUi(QWidget *FormStatistics)
     {
         FormStatistics->setWindowTitle(QCoreApplication::translate("FormStatistics", "Form", nullptr));
-        LabelSummColumn->setText(QCoreApplication::translate("FormStatistics", "\320\222\321\201\320\265\320\263\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271:", nullptr));
+        labelSummColumn->setText(QCoreApplication::translate("FormStatistics", "\320\222\321\201\320\265\320\263\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271:", nullptr));
 #if QT_CONFIG(tooltip)
         label->setToolTip(QCoreApplication::translate("FormStatistics", "<html><head/><body><p>\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260 \320\262\321\213\320\262\320\276\320\264\320\270\321\202\321\201\321\217 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\275\320\260 \320\260\320\272\320\272\320\260\321\203\320\275\321\202\320\265 \321\203 \320\272\320\276\321\202\320\276\321\200\321\213\321\205 \320\265\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217.<br/>\320\225\321\201\320\273\320\270 \321\201\321\203\320\274\320\274\320\260\321\200\320\275\320\276\320\265 \320\272\320\276\320\273\320\270\321\207\320\265\321\201\321\202\320\262\320\276 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\275\320\265 \321\201\320\276\320\262\320\277\320\260\320\264\320\260\320\265\321\202 \321\201 \320\270\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\320\265\320\271 \321\201\321\202\320\270\320\274\320\260, \320\267\320\275\320\260\321"
                         "\207\320\270\321\202 \321\207\320\260\321\201\321\202\321\214 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271 \320\277\320\276\320\273\321\203\321\207\320\265\320\275\320\260 \321\201 \320\270\321\201\320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\320\275\320\270\320\265\320\274 \321\201\320\265\320\274\320\265\320\271\320\275\320\276\320\263\320\276 \320\264\320\276\321\201\321\202\321\203\320\277\320\260</span></p></body></html>", nullptr));
