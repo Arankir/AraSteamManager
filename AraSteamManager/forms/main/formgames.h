@@ -84,7 +84,7 @@ private:
     SProfile _profile;
     GroupsGames _groups;
 
-    ProxyModelGames _filterGames;
+    FilterModelGames _filterGames;
 
 };
 

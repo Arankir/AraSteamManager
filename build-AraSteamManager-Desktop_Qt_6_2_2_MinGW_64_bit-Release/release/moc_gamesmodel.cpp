@@ -304,5 +304,123 @@ int ProxyModelGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     }
     return _id;
 }
+struct qt_meta_stringdata_FilterModelGames_t {
+    const uint offsetsAndSize[22];
+    char stringdata0[100];
+};
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(offsetof(qt_meta_stringdata_FilterModelGames_t, stringdata0) + ofs), len 
+static const qt_meta_stringdata_FilterModelGames_t qt_meta_stringdata_FilterModelGames = {
+    {
+QT_MOC_LITERAL(0, 16), // "FilterModelGames"
+QT_MOC_LITERAL(17, 7), // "setName"
+QT_MOC_LITERAL(25, 0), // ""
+QT_MOC_LITERAL(26, 7), // "newName"
+QT_MOC_LITERAL(34, 7), // "setHide"
+QT_MOC_LITERAL(42, 7), // "newHide"
+QT_MOC_LITERAL(50, 8), // "setGroup"
+QT_MOC_LITERAL(59, 8), // "newGroup"
+QT_MOC_LITERAL(68, 12), // "setFavorites"
+QT_MOC_LITERAL(81, 12), // "newFavorites"
+QT_MOC_LITERAL(94, 5) // "clear"
+
+    },
+    "FilterModelGames\0setName\0\0newName\0"
+    "setHide\0newHide\0setGroup\0newGroup\0"
+    "setFavorites\0newFavorites\0clear"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_FilterModelGames[] = {
+
+ // content:
+      10,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       5,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    1,   44,    2, 0x0a,    1 /* Public */,
+       4,    1,   47,    2, 0x0a,    3 /* Public */,
+       6,    1,   50,    2, 0x0a,    5 /* Public */,
+       8,    1,   53,    2, 0x0a,    7 /* Public */,
+      10,    0,   56,    2, 0x0a,    9 /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void, QMetaType::QStringList,    5,
+    QMetaType::Void, QMetaType::QStringList,    7,
+    QMetaType::Void, QMetaType::QStringList,    9,
+    QMetaType::Void,
+
+       0        // eod
+};
+
+void FilterModelGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<FilterModelGames *>(_o);
+        (void)_t;
+        switch (_id) {
+        case 0: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: _t->setHide((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
+        case 2: _t->setGroup((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
+        case 3: _t->setFavorites((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
+        case 4: _t->clear(); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject FilterModelGames::staticMetaObject = { {
+    QMetaObject::SuperData::link<FilterModel::staticMetaObject>(),
+    qt_meta_stringdata_FilterModelGames.offsetsAndSize,
+    qt_meta_data_FilterModelGames,
+    qt_static_metacall,
+    nullptr,
+qt_incomplete_metaTypeArray<qt_meta_stringdata_FilterModelGames_t
+, QtPrivate::TypeAndForceComplete<FilterModelGames, std::true_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+
+
+>,
+    nullptr
+} };
+
+
+const QMetaObject *FilterModelGames::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *FilterModelGames::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_FilterModelGames.stringdata0))
+        return static_cast<void*>(this);
+    return FilterModel::qt_metacast(_clname);
+}
+
+int FilterModelGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = FilterModel::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 5)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 5;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 5)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 5;
+    }
+    return _id;
+}
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

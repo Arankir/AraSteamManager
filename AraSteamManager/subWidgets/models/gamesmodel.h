@@ -49,9 +49,7 @@ private slots:
     void onResultAchievements(QList<SAchievementPlayer> achievements, GameID appId);
 
 private:
-
     struct GameInModel {
-        QPixmap icon;
         SGame game;
         QStringList comment;
         QList<SAchievementPlayer> achievements;
@@ -68,6 +66,36 @@ class ProxyModelGames : public QSortFilterProxyModel {
     Q_OBJECT
 public:
     ProxyModelGames(QObject* parent = nullptr);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    GamesModel *sourceModel() const;
+    void setSourceModel(GamesModel *sourceModel);
+
+    SGame getGame(int aIndex);
+    QStringList getGameComment(int aIndex);
+    QList<SAchievementPlayer> getGameAchievements(int aIndex);
+
+public slots:
+    void setName(const QString &newName);
+    void setHide(const QStringList &newHide);
+    void setGroup(const QStringList &newGroup);
+    void setFavorites(const QStringList &newFavorites);
+    void clear();
+
+private:
+    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel)};
+
+    QString _name;
+    QStringList _hide;
+    QStringList _group;
+    QStringList _favorite;
+};
+#include "subWidgets/models/filters.h"
+class FilterModelGames : public FilterModel {
+    Q_OBJECT
+public:
+    FilterModelGames(int row = 0, QObject* parent = nullptr);
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;

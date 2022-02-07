@@ -14,9 +14,9 @@ void GamesModel::loadImages(const SGames &aGames, QList<GameComment> &aComments,
                                      });
 
         if (iterator != aComments.end()) {
-            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
+            _gamesInModel.append(GameInModel{game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
         } else {
-            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0});
+            _gamesInModel.append(GameInModel{game, QStringList(), QList<SAchievementPlayer>(), 0});
         }
         emit s_progress(tr("Загрузка данных об игре"), ++_loadedGames, aGameCount);
 //        qDebug() << 11 << _loadedGames << gameCount;
@@ -51,9 +51,9 @@ void GamesModel::setGames(const SGames &games, const QString &userId) {
                                      });
 
         if (iterator != comments.end()) {
-            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
+            _gamesInModel.append(GameInModel{game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
         } else {
-            _gamesInModel.append(GameInModel{game.pixmapIcon(), game, QStringList(), QList<SAchievementPlayer>(), 0});
+            _gamesInModel.append(GameInModel{game, QStringList(), QList<SAchievementPlayer>(), 0});
         }
         emit s_progress(tr("Загрузка данных об игре"), ++progress, games.count());
         qDebug() << 33 << progress << games.count();
@@ -143,7 +143,7 @@ QVariant GamesModel::data(const QModelIndex &index, int role) const {
     case Qt::DecorationRole: {
         switch (index.column()) {
         case GamesIcon: {
-            return _gamesInModel[index.row()].icon;
+            return _gamesInModel[index.row()].game.pixmapIcon();
         }
         case GamesComment: {
             if (_gamesInModel[index.row()].comment != QStringList() &&
@@ -420,4 +420,126 @@ void ProxyModelGames::clear() {
     _hide.clear();
     _group.clear();
     _favorite.clear();
+}
+
+FilterModelGames::FilterModelGames(int aRow, QObject *parent): FilterModel(aRow, 4, parent) {
+    columns_.insert("name", 0);
+    columns_.insert("hide", 1);
+    columns_.insert("group", 2);
+    columns_.insert("favorite", 3);
+}
+
+bool FilterModelGames::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const {
+    Q_UNUSED(source_parent);
+    return filter_[source_row];
+}
+
+bool FilterModelGames::lessThan(const QModelIndex &left, const QModelIndex &right) const {
+    if (left.column() == GamesProgress && right.column() == GamesProgress) {
+        QVariant leftData = sourceModel()->data(left);
+        QVariant rightData = sourceModel()->data(right);
+        if (leftData == c_noAchievements) {
+            return true;
+        }
+        if (rightData == c_noAchievements) {
+            return false;
+        }
+        double iLeft = leftData.toString().left(leftData.toString().indexOf("%")).toDouble();
+        double iRight = rightData.toString().left(rightData.toString().indexOf("%")).toDouble();
+        return iLeft < iRight;
+    }
+    return QSortFilterProxyModel::lessThan(left, right);
+}
+
+QVariant FilterModelGames::headerData(int section, Qt::Orientation orientation, int role) const {
+    return sourceModel()->headerData(section, orientation, role);
+}
+
+void FilterModelGames::setSourceModel(GamesModel *sourceModel) {
+    QAbstractProxyModel::setSourceModel(sourceModel);
+    filter_.setRows(sourceModel->rowCount());
+}
+
+SGame FilterModelGames::getGame(int aIndex) {
+    return sourceModel()->getGame(aIndex);
+}
+
+QStringList FilterModelGames::getGameComment(int aIndex) {
+    return sourceModel()->getComment(aIndex);
+}
+
+QList<SAchievementPlayer> FilterModelGames::getGameAchievements(int aIndex) {
+    return sourceModel()->getAchievements(aIndex);
+}
+
+GamesModel *FilterModelGames::sourceModel() const {
+    return static_cast<GamesModel*>(QAbstractProxyModel::sourceModel());
+}
+
+void FilterModelGames::setName(const QString &aNewName) {
+    if(_name == aNewName)
+        return;
+    _name = aNewName;
+    int filterColumnName = columns_.value("name");
+    for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+        QModelIndex nameIndex = sourceModel()->index(r, GamesName);
+        filter_.setData(r, filterColumnName, sourceModel()->data(nameIndex).toString().toLower().indexOf(_name.toLower()) >= 0);
+    }
+    invalidateFilter();
+}
+
+void FilterModelGames::setHide(const QStringList &aNewHide) {
+    if(_hide == aNewHide)
+        return;
+    _hide = aNewHide;
+    int filterColumn = columns_.value("hide");
+    if (_hide.isEmpty()) {
+        filter_.clearCol(filterColumn);
+    } else {
+        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+            QModelIndex hideIndex = sourceModel()->index(r, GamesAppid);
+            filter_.setData(r, filterColumn, _hide.indexOf(sourceModel()->data(hideIndex).toString()) >= 0);
+        }
+    }
+    invalidateFilter();
+}
+
+void FilterModelGames::setGroup(const QStringList &aNewGroup) {
+    if(_group == aNewGroup)
+        return;
+    _group = aNewGroup;
+    int filterColumn = columns_.value("group");
+    if (_group.isEmpty()) {
+        filter_.clearCol(filterColumn);
+    } else {
+        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+            QModelIndex hideIndex = sourceModel()->index(r, GamesAppid);
+            filter_.setData(r, filterColumn, _group.indexOf(sourceModel()->data(hideIndex).toString()) >= 0);
+        }
+    }
+    invalidateFilter();
+}
+
+void FilterModelGames::setFavorites(const QStringList &aNewFavorites) {
+    if(_favorite == aNewFavorites)
+        return;
+    _favorite = aNewFavorites;
+    int filterColumn = columns_.value("favorite");
+    if (_favorite.isEmpty()) {
+        filter_.clearCol(filterColumn);
+    } else {
+        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+            QModelIndex hideIndex = sourceModel()->index(r, GamesAppid);
+            filter_.setData(r, filterColumn, _favorite.indexOf(sourceModel()->data(hideIndex).toString()) >= 0);
+        }
+    }
+    invalidateFilter();
+}
+
+void FilterModelGames::clear() {
+    _name.clear();
+    _hide.clear();
+    _group.clear();
+    _favorite.clear();
+    filter_.clear();
 }

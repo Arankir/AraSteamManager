@@ -151,6 +151,7 @@ void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
 
 void FormGames::buttonFind_Clicked() {
     lineEditGame_TextChanged(ui->LineEditGame->text());
+    _filterGames.clear();
 }
 
 void FormGames::checkBoxFavorites_StateChanged(int arg1) {

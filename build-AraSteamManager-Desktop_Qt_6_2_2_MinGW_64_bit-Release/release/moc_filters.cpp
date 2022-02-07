@@ -313,5 +313,78 @@ int QSortFilterProxyInvertModel::qt_metacall(QMetaObject::Call _c, int _id, void
     _id = QSortFilterProxyModel::qt_metacall(_c, _id, _a);
     return _id;
 }
+struct qt_meta_stringdata_FilterModel_t {
+    const uint offsetsAndSize[2];
+    char stringdata0[12];
+};
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(offsetof(qt_meta_stringdata_FilterModel_t, stringdata0) + ofs), len 
+static const qt_meta_stringdata_FilterModel_t qt_meta_stringdata_FilterModel = {
+    {
+QT_MOC_LITERAL(0, 11) // "FilterModel"
+
+    },
+    "FilterModel"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_FilterModel[] = {
+
+ // content:
+      10,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void FilterModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    (void)_o;
+    (void)_id;
+    (void)_c;
+    (void)_a;
+}
+
+const QMetaObject FilterModel::staticMetaObject = { {
+    QMetaObject::SuperData::link<QSortFilterProxyModel::staticMetaObject>(),
+    qt_meta_stringdata_FilterModel.offsetsAndSize,
+    qt_meta_data_FilterModel,
+    qt_static_metacall,
+    nullptr,
+qt_incomplete_metaTypeArray<qt_meta_stringdata_FilterModel_t
+, QtPrivate::TypeAndForceComplete<FilterModel, std::true_type>
+
+
+
+>,
+    nullptr
+} };
+
+
+const QMetaObject *FilterModel::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *FilterModel::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_FilterModel.stringdata0))
+        return static_cast<void*>(this);
+    return QSortFilterProxyModel::qt_metacast(_clname);
+}
+
+int FilterModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QSortFilterProxyModel::qt_metacall(_c, _id, _a);
+    return _id;
+}
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

@@ -160,7 +160,7 @@ QImage loadImage(QImage &aPixmap, const QString &aUrl, const QString &aSavePath,
 }
 
 QImage loadImage(const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
-    if (!aUrl.isEmpty()) {
+    if (!aUrl.isEmpty() && aUrl.right(5) != "/.jpg") {
         if (!QFile::exists(aSavePath)) {
             RequestImage img(aUrl, aSavePath, true);
             QEventLoop loop;
