@@ -650,11 +650,15 @@ void ProxyModelAchievements::clear() {
     _favorite.clear();
 }
 
+int countBites(int bits) {
+    return (int)ceil(1.0 * bits / 8);
+}
+
 Filter::Filter(int aRows, int aCols):
     rows_(std::max(0, aRows)),
     cols_(std::max(0, aCols)),
-    checkCols_(QList<char>((int)ceil(cols_ / 8), 0xFF)),
-    filter_(rows_, QList<char>((int)ceil(cols_ / 8), 0xFF)) {
+    checkCols_(QList<char>(countBites(cols_), 0xFF)),
+    filter_(rows_, QList<char>(countBites(cols_), 0xFF)) {
 
 }
 
@@ -681,7 +685,7 @@ void Filter::setRows(int aRows) {
     filter_.resize(rows_);
     if (rows_ > oldRows) {
         for (int r = oldRows; r < rows_; ++r) {
-            filter_[r] = QList<char>((int)ceil(cols_ / 8), 0xFF);
+            filter_[r] = QList<char>(countBites(cols_), 0xFF);
         }
     }
 }
@@ -689,23 +693,19 @@ void Filter::setRows(int aRows) {
 void Filter::setCols(int aCols) {
     int oldCols = cols_;
     cols_ = std::max(0, aCols);
-    if ((int)ceil(cols_ / 8) > (int)ceil(oldCols / 8)) {
-        for (int r = 0; r < rows_; ++r) {
-            filter_[r].resize((int)ceil(cols_ / 8));
+    for (int r = 0; r < rows_; ++r) {
+        filter_[r].resize(countBites(cols_));
+        if (countBites(cols_) > countBites(oldCols)) {
             for (int c = oldCols; c < cols_; ++c) {
                 filter_[r][c / 8] |= (1 << c % 8);
             }
-        }
-    } else {
-        for (int r = 0; r < rows_; ++r) {
-            filter_[r].resize((int)ceil(cols_ / 8));
         }
     }
 }
 
 void Filter::insertRow(int aRow) {
     int row = std::min(rows_, aRow);
-    filter_.insert(row, QList<char>((int)ceil(cols_ / 8), 0xFF));
+    filter_.insert(row, QList<char>(countBites(cols_), 0xFF));
 }
 
 void Filter::removeRow(int aRow) {
@@ -718,7 +718,7 @@ void Filter::insertCol(int aCol) {
     bool isNewChar = (((cols_ + 1) / 8) == 0);
     for (int r = 0; r < rows_; ++r) {
         if (isNewChar) {
-            filter_.append(QList<char>((int)ceil(cols_ / 8), 0xFF));
+            filter_.append(QList<char>(countBites(cols_), 0xFF));
         }
         for (int c = cols_; c > col; --c) {
             //сместить все биты направо >>
