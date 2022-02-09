@@ -67,5 +67,29 @@ private:
     int _public;
     QStringList _favorite;
 };
+#include "subWidgets/models/filters.h"
+class FilterModelFriends : public FilterModel {
+    Q_OBJECT
+public:
+    FilterModelFriends(int row = 0, QObject* parent = nullptr);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    FriendsModel *sourceModel() const;
+    void setSourceModel(FriendsModel *sourceModel);
+
+public slots:
+    void setName(const QString &newName);
+    void setStatus(const QString &newStatus);
+    void setIsPublic(const int &isPublic);
+    void setFavorites(const QStringList &newFavorites);
+    void clear();
+
+private:
+    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
+
+    QString _name;
+    QString _status;
+    int _public;
+    QStringList _favorite;
+};
 
 #endif // FRIENDSMODEL_H

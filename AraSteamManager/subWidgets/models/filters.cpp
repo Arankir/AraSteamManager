@@ -109,6 +109,10 @@ Filter::Filter(int aRows, int aCols):
 }
 
 bool Filter::operator[](int aRow) const {
+    if (aRow >= rows_) {
+        qWarning() << "index" << aRow << "is missing" << "(" << rows_ << ")";
+        return false;
+    }
     for (int c = 0; c < 8; ++c) {
         if (!(!getBit(checkCols_[c / 8], c) || getBit(filter_[aRow][c / 8], c))) { //Импликация (выводит false только если первое = true, а второе = false)
             return false;
@@ -215,4 +219,17 @@ void Filter::clear() {
             filter_[r][c] = 0xFF;
         }
     }
+}
+
+QVariant FilterModel::headerData(int section, Qt::Orientation orientation, int role) const {
+    return sourceModel()->headerData(section, orientation, role);
+}
+
+void FilterModel::setSourceModel(QAbstractItemModel *sourceModel) {
+    if (sourceModel) {
+        filter_.setRows(sourceModel->rowCount());
+    } else {
+        filter_.setRows(0);
+    }
+    QSortFilterProxyModel::setSourceModel(sourceModel);
 }

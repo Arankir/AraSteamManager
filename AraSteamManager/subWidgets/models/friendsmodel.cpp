@@ -262,3 +262,93 @@ void ProxyModelFriends::clear() {
     _public = 0;
     _favorite.clear();
 }
+
+FilterModelFriends::FilterModelFriends(int aRow, QObject *aParent): FilterModel(aRow, 4, aParent),
+    _name(""), _status(""), _public(), _favorite() {
+    columns_.insert("name", 0);
+    columns_.insert("status", 1);
+    columns_.insert("public", 2);
+    columns_.insert("favorite", 3);
+}
+
+bool FilterModelFriends::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
+    Q_UNUSED(aSource_parent);
+    return filter_[aSource_row];
+}
+
+FriendsModel *FilterModelFriends::sourceModel() const {
+    return static_cast<FriendsModel*>(FilterModel::sourceModel());
+}
+
+void FilterModelFriends::setSourceModel(FriendsModel *sourceModel) {
+    FilterModel::setSourceModel(sourceModel);
+}
+
+void FilterModelFriends::setName(const QString &aNewName) {
+    if(_name == aNewName)
+        return;
+    _name = aNewName;
+    int filterColumn = columns_.value("name");
+    for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+        QModelIndex index = sourceModel()->index(r, FriendsName);
+        filter_.setData(r, filterColumn, sourceModel()->data(index).toString().toLower().indexOf(_name.toLower()) >= 0);
+    }
+    invalidateFilter();
+}
+
+void FilterModelFriends::setStatus(const QString &aNewStatus) {
+    if(_status == aNewStatus)
+        return;
+    _status = aNewStatus;
+    int filterColumn = columns_.value("status");
+    if (_status.isEmpty()) {
+        filter_.clearCol(filterColumn);
+    } else {
+        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+            QModelIndex index = sourceModel()->index(r, FriendsStatus);
+            filter_.setData(r, filterColumn, sourceModel()->data(index).toString().toLower() == _status.toLower());
+        }
+    }
+    invalidateFilter();
+
+}
+
+void FilterModelFriends::setIsPublic(const int &aIsPublic) {
+    if(_public == aIsPublic)
+        return;
+    _public = aIsPublic;
+    int filterColumn = columns_.value("public");
+    if (_public == 0) {
+        filter_.clearCol(filterColumn);
+    } else {
+        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+            QModelIndex index = sourceModel()->index(r, FriendsIsPublic);
+            filter_.setData(r, filterColumn, sourceModel()->data(index).toString().indexOf(_public > 0 ? FriendsModel::isPublicTitle() : "") >= 0);
+        }
+    }
+    invalidateFilter();
+}
+
+void FilterModelFriends::setFavorites(const QStringList &aNewFavorites) {
+    if(_favorite == aNewFavorites)
+        return;
+    _favorite = aNewFavorites;
+    int filterColumn = columns_.value("favorite");
+    if (_favorite.isEmpty()) {
+        filter_.clearCol(filterColumn);
+    } else {
+        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+            QModelIndex index = sourceModel()->index(r, FriendsID);
+            filter_.setData(r, filterColumn, _favorite.indexOf(sourceModel()->data(index).toString()) >= 0);
+        }
+    }
+    invalidateFilter();
+}
+
+void FilterModelFriends::clear() {
+    _name.clear();
+    _status.clear();
+    _public = 0;
+    _favorite.clear();
+    filter_.clear();
+}

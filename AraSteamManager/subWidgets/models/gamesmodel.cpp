@@ -269,7 +269,7 @@ void GamesModel::sort(int column, Qt::SortOrder order) {
                 } else {
                     g2Num = 100.0 * g2.achieved / g2.achievements.count();
                 }
-                qDebug() << 2 << g1Num << g2Num;
+//                qDebug() << 2 << g1Num << g2Num;
                 return g1Num < g2Num;
             });
             break;
@@ -287,7 +287,7 @@ void GamesModel::sort(int column, Qt::SortOrder order) {
                 } else {
                     g2Num = 100.0 * g2.achieved / g2.achievements.count();
                 }
-                qDebug() << 1 << g1Num << g2Num;
+//                qDebug() << 1 << g1Num << g2Num;
                 return g1Num > g2Num;
             });
             break;
@@ -451,13 +451,8 @@ bool FilterModelGames::lessThan(const QModelIndex &left, const QModelIndex &righ
     return QSortFilterProxyModel::lessThan(left, right);
 }
 
-QVariant FilterModelGames::headerData(int section, Qt::Orientation orientation, int role) const {
-    return sourceModel()->headerData(section, orientation, role);
-}
-
 void FilterModelGames::setSourceModel(GamesModel *sourceModel) {
-    QAbstractProxyModel::setSourceModel(sourceModel);
-    filter_.setRows(sourceModel->rowCount());
+    FilterModel::setSourceModel(sourceModel);
 }
 
 SGame FilterModelGames::getGame(int aIndex) {
@@ -473,7 +468,7 @@ QList<SAchievementPlayer> FilterModelGames::getGameAchievements(int aIndex) {
 }
 
 GamesModel *FilterModelGames::sourceModel() const {
-    return static_cast<GamesModel*>(QAbstractProxyModel::sourceModel());
+    return static_cast<GamesModel*>(FilterModel::sourceModel());
 }
 
 void FilterModelGames::setName(const QString &aNewName) {

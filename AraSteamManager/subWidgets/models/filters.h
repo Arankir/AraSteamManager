@@ -87,6 +87,8 @@ class FilterModel : public QSortFilterProxyModel {
     Q_OBJECT
 public:
     FilterModel(int row = 0, int col = 0, QObject *parent = nullptr): QSortFilterProxyModel(parent), filter_(row, col) {};
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    void setSourceModel(QAbstractItemModel *sourceModel);
 
 protected:
     QMap<QString, int> columns_;

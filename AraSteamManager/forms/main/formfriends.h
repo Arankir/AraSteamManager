@@ -62,7 +62,7 @@ private:
     bool _isLoading = false;
 
 //    FriendsModel *_friendsModel = nullptr;
-    ProxyModelFriends _filterFriends;
+    FilterModelFriends _filterFriends;
 };
 
 #endif // FORMFRIENDS_H
