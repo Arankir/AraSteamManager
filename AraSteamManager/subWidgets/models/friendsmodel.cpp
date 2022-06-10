@@ -1,18 +1,25 @@
 #include "friendsmodel.h"
 
+using namespace friendsModel;
+
+FriendsModel::FriendsModel(QObject *parent): QAbstractTableModel(parent) {
+
+}
+
 void FriendsModel::setFriends(const QList<SFriend> &aFriends) {
-    _friends.clear();
+    clear();
     QStringList listIds;
     for (const SFriend &sFriend: aFriends) {
         listIds.append(sFriend.steamId());
     }
     QList<SProfile> profiles = SProfile::load(listIds);
-    mySort2(profiles);
+    std::sort(profiles.begin(),
+              profiles.end());
     int progress = 0;
     for(auto &profile: profiles) {
         for (const auto &currentFriend: aFriends) {
             if (currentFriend.steamId() == profile.steamID()) {
-                _friends.append(SFriendProfile(currentFriend, profile));
+                friends_.append(SFriendProfile(currentFriend, profile));
                 break;
             }
         }
@@ -23,54 +30,54 @@ void FriendsModel::setFriends(const QList<SFriend> &aFriends) {
 
 int FriendsModel::columnCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
-    return FriendsCount;
+    return Count;
 }
 
 int FriendsModel::rowCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
-    return _friends.count();
+    return friends_.count();
 }
 
 QVariant FriendsModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    if (index.row() >= _friends.size())
+    if (index.row() >= friends_.size())
         return QVariant();
 
     if (role == Qt::DisplayRole) {
         switch (index.column()) {
-        case FriendsID: {
-            return _friends[index.row()].steamFriend.steamId();
+        case ID: {
+            return friends_[index.row()].steamFriend.steamId();
         }
-        case FriendsIndex: {
+        case Index: {
             return index.row();
         }
-        case FriendsName: {
-            return _friends[index.row()].steamProfile.personaName();
+        case Name: {
+            return friends_[index.row()].steamProfile.personaName();
         }
-        case FriendsAdded: {
-            return _friends[index.row()].steamFriend.friendSince().toString(Settings::dateTimeFormatShort());
+        case Added: {
+            return friends_[index.row()].steamFriend.friendSince().toString(Settings::dateTimeFormatShort());
         }
-        case FriendsStatus: {
-            return _friends[index.row()].steamProfile.stateText();
+        case Status: {
+            return friends_[index.row()].steamProfile.stateText();
         }
-        case FriendsIsPublic: {
-            return _friends[index.row()].steamProfile.communityVisibilityState() == 3 ? isPublicTitle() : tr("Скрытый");
+        case IsPublic: {
+            return friends_[index.row()].steamProfile.communityVisibilityState() == 3 ? isPublicTitle() : tr("Скрытый");
         }
         }
     }
     if (role == Qt::DecorationRole) {
-        if (index.column() == FriendsIcon) {
-            return _friends[index.row()].steamProfile.pixmapAvatar();
+        if (index.column() == Icon) {
+            return friends_[index.row()].steamProfile.pixmapAvatar();
         }
     }
     if (role == Qt::ForegroundRole) {
-        if (index.column() == FriendsStatus) {
-            return _friends[index.row()].steamProfile.stateColor();
+        if (index.column() == Status) {
+            return friends_[index.row()].steamProfile.stateColor();
         }
-        if (index.column() == FriendsIsPublic) {
-            return _friends[index.row()].steamProfile.communityVisibilityState() == 3 ? QColor(105,155,44) : QColor(155,44,44);
+        if (index.column() == IsPublic) {
+            return friends_[index.row()].steamProfile.communityVisibilityState() == 3 ? QColor(105,155,44) : QColor(155,44,44);
         }
     }
     return QVariant();
@@ -82,25 +89,25 @@ QVariant FriendsModel::headerData(int section, Qt::Orientation orientation, int 
 
     if (orientation == Qt::Horizontal)
         switch (section) {
-        case FriendsID: {
+        case ID: {
             return tr("ID");
         }
-        case FriendsIndex: {
+        case Index: {
             return tr("Index");
         }
-        case FriendsIcon: {
+        case Icon: {
             return tr("");
         }
-        case FriendsName: {
+        case Name: {
             return tr("Ник");
         }
-        case FriendsAdded: {
+        case Added: {
             return tr("Добавлен");
         }
-        case FriendsStatus: {
+        case Status: {
             return tr("Статус");
         }
-        case FriendsIsPublic: {
+        case IsPublic: {
             return tr("Профиль");
         }
         default: {
@@ -112,7 +119,7 @@ QVariant FriendsModel::headerData(int section, Qt::Orientation orientation, int 
 }
 
 QString FriendsModel::friendId(const QModelIndex &index) const {
-    return _friends[index.row()].steamFriend.steamId();
+    return friends_[index.row()].steamFriend.steamId();
 }
 
 QString FriendsModel::isPublicTitle() {
@@ -120,74 +127,123 @@ QString FriendsModel::isPublicTitle() {
 }
 
 void FriendsModel::sort(int column, Qt::SortOrder order) {
-    qDebug() << 1 << column << order;
     switch (column) {
-    case FriendsID: {
+    case ID: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.steamId() < f2.steamFriend.steamId();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamFriend.steamId() < f2.steamFriend.steamId();
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.steamId() > f2.steamFriend.steamId();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamFriend.steamId() > f2.steamFriend.steamId();
+                      }
+                    );
             break;
         }
         }
         break;
     }
-    case FriendsIndex: {
+    case Index: {
         break;
     }
-    case FriendsIcon: {
+    case Icon: {
         break;
     }
-    case FriendsName: {
+    case Name: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.personaName() < f2.steamProfile.personaName();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamProfile.personaName() < f2.steamProfile.personaName();
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.personaName() > f2.steamProfile.personaName();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamProfile.personaName() > f2.steamProfile.personaName();
+                      }
+                    );
             break;
         }
         }
         break;
     }
-    case FriendsAdded: {
+    case Added: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.friendSince() < f2.steamFriend.friendSince();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamFriend.friendSince() < f2.steamFriend.friendSince();
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamFriend.friendSince() > f2.steamFriend.friendSince();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamFriend.friendSince() > f2.steamFriend.friendSince();
+                      }
+                    );
             break;
         }
         }
         break;
     }
-    case FriendsStatus: {
+    case Status: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.stateText() < f2.steamProfile.stateText();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamProfile.stateText() < f2.steamProfile.stateText();
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.stateText() > f2.steamProfile.stateText();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamProfile.stateText() > f2.steamProfile.stateText();
+                      }
+                    );
             break;
         }
         }
         break;
     }
-    case FriendsIsPublic: {
+    case IsPublic: {
         switch(order) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.communityVisibilityState() < f2.steamProfile.communityVisibilityState();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamProfile.communityVisibilityState() < f2.steamProfile.communityVisibilityState();
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<SFriendProfile>(_friends, [](SFriendProfile &f1, SFriendProfile &f2) {return f1.steamProfile.communityVisibilityState() > f2.steamProfile.communityVisibilityState();});
+            std::sort(friends_.begin(),
+                      friends_.end(),
+                      [](SFriendProfile &f1, SFriendProfile &f2) {
+                        return f1.steamProfile.communityVisibilityState() > f2.steamProfile.communityVisibilityState();
+                      }
+                    );
             break;
         }
         }
@@ -198,73 +254,15 @@ void FriendsModel::sort(int column, Qt::SortOrder order) {
 }
 
 SFriendProfile FriendsModel::getFriend(const int &row) const {
-    return _friends[row];
+    return friends_[row];
 }
 
-ProxyModelFriends::ProxyModelFriends(QObject *aParent): QSortFilterProxyModel(aParent),
-    _name(""), _status(""), _public(), _favorite() {
-
-}
-
-bool ProxyModelFriends::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
-    QModelIndex indName = sourceModel()->index(aSource_row, FriendsName, aSource_parent);
-    QModelIndex indStatus = sourceModel()->index(aSource_row, FriendsStatus, aSource_parent);
-    QModelIndex indPublic = sourceModel()->index(aSource_row, FriendsIsPublic, aSource_parent);
-    QModelIndex indId = sourceModel()->index(aSource_row, FriendsID, aSource_parent);
-    if(sourceModel()->data(indName).toString().toLower().indexOf(_name.toLower()) == -1 ||
-       (_status.isEmpty() ? false : sourceModel()->data(indStatus).toString().toLower() != _status.toLower()) ||
-       sourceModel()->data(indPublic).toString().indexOf(_public > 0 ? FriendsModel::isPublicTitle() : "") == -1 ||
-       (_favorite.isEmpty() ? false : _favorite.indexOf(sourceModel()->data(indId).toString()) == -1))
-        return false;
-    return true;
-}
-
-QVariant ProxyModelFriends::headerData(int section, Qt::Orientation orientation, int role) const {
-    return sourceModel()->headerData(section, orientation, role);
-}
-
-FriendsModel *ProxyModelFriends::sourceModel() const {
-    return static_cast<FriendsModel*>(QSortFilterProxyModel::sourceModel());
-}
-
-void ProxyModelFriends::setSourceModel(FriendsModel *sourceModel) {
-    QSortFilterProxyModel::setSourceModel(sourceModel);
-}
-
-void ProxyModelFriends::setName(const QString &aNewName) {
-    if(_name != aNewName)
-        _name = aNewName;
-    invalidateFilter();
-}
-
-void ProxyModelFriends::setStatus(const QString &aNewStatus) {
-    if(_status != aNewStatus)
-        _status = aNewStatus;
-    invalidateFilter();
-
-}
-
-void ProxyModelFriends::setIsPublic(const int &aIsPublic) {
-    if(_public != aIsPublic)
-        _public = aIsPublic;
-    invalidateFilter();
-}
-
-void ProxyModelFriends::setFavorites(const QStringList &aNewFavorites) {
-    if(_favorite != aNewFavorites)
-        _favorite = aNewFavorites;
-    invalidateFilter();
-}
-
-void ProxyModelFriends::clear() {
-    _name.clear();
-    _status.clear();
-    _public = 0;
-    _favorite.clear();
+void FriendsModel::clear() {
+    friends_.clear();
 }
 
 FilterModelFriends::FilterModelFriends(int aRow, QObject *aParent): FilterModel(aRow, 4, aParent),
-    _name(""), _status(""), _public(), _favorite() {
+    name_(""), status_(""), public_(), favorite_() {
     columns_.insert("name", 0);
     columns_.insert("status", 1);
     columns_.insert("public", 2);
@@ -280,75 +278,96 @@ FriendsModel *FilterModelFriends::sourceModel() const {
     return static_cast<FriendsModel*>(FilterModel::sourceModel());
 }
 
-void FilterModelFriends::setSourceModel(FriendsModel *sourceModel) {
-    FilterModel::setSourceModel(sourceModel);
+void FilterModelFriends::setSourceModel(FriendsModel *aSourceModel) {
+    connect(aSourceModel, &FriendsModel::s_finished, this, [=, this]() {
+        if (sourceModel() != nullptr) {
+            filter_.setRows(sourceModel()->rowCount());
+            forceInvalidate();
+            emit s_modelFinished();
+            emit s_rowsUpdated();
+        } else {
+            qWarning() << "in FilterModelFriends missing sourceModel, but emit 'finished'";
+        }
+    });
+    FilterModel::setSourceModel(aSourceModel);
 }
 
 void FilterModelFriends::setName(const QString &aNewName) {
-    if(_name == aNewName)
+    if(name_ == aNewName)
         return;
-    _name = aNewName;
+    name_ = aNewName;
     int filterColumn = columns_.value("name");
     for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-        QModelIndex index = sourceModel()->index(r, FriendsName);
-        filter_.setData(r, filterColumn, sourceModel()->data(index).toString().toLower().indexOf(_name.toLower()) >= 0);
+        QModelIndex index = sourceModel()->index(r, Name);
+        filter_.setData(r, filterColumn, sourceModel()->data(index).toString().toLower().indexOf(name_.toLower()) >= 0);
     }
     invalidateFilter();
+    emit s_rowsUpdated();
 }
 
 void FilterModelFriends::setStatus(const QString &aNewStatus) {
-    if(_status == aNewStatus)
+    if(status_ == aNewStatus)
         return;
-    _status = aNewStatus;
+    status_ = aNewStatus;
     int filterColumn = columns_.value("status");
-    if (_status.isEmpty()) {
+    if (status_.isEmpty()) {
         filter_.clearCol(filterColumn);
     } else {
         for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex index = sourceModel()->index(r, FriendsStatus);
-            filter_.setData(r, filterColumn, sourceModel()->data(index).toString().toLower() == _status.toLower());
+            QModelIndex index = sourceModel()->index(r, Status);
+            filter_.setData(r, filterColumn, sourceModel()->data(index).toString().toLower() == status_.toLower());
         }
     }
     invalidateFilter();
+    emit s_rowsUpdated();
 
 }
 
 void FilterModelFriends::setIsPublic(const int &aIsPublic) {
-    if(_public == aIsPublic)
+    if(public_ == aIsPublic)
         return;
-    _public = aIsPublic;
+    public_ = aIsPublic;
     int filterColumn = columns_.value("public");
-    if (_public == 0) {
+    if (public_ == 0) {
         filter_.clearCol(filterColumn);
     } else {
         for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex index = sourceModel()->index(r, FriendsIsPublic);
-            filter_.setData(r, filterColumn, sourceModel()->data(index).toString().indexOf(_public > 0 ? FriendsModel::isPublicTitle() : "") >= 0);
+            QModelIndex index = sourceModel()->index(r, IsPublic);
+            filter_.setData(r, filterColumn, sourceModel()->data(index).toString().indexOf(public_ > 0 ? FriendsModel::isPublicTitle() : "") >= 0);
         }
     }
     invalidateFilter();
+    emit s_rowsUpdated();
 }
 
-void FilterModelFriends::setFavorites(const QStringList &aNewFavorites) {
-    if(_favorite == aNewFavorites)
+void FilterModelFriends::setFavorites(const QSet<ProfileID> &aNewFavorites) {
+    if(favorite_ == aNewFavorites)
         return;
-    _favorite = aNewFavorites;
+    favorite_ = aNewFavorites;
     int filterColumn = columns_.value("favorite");
-    if (_favorite.isEmpty()) {
-        filter_.clearCol(filterColumn);
-    } else {
-        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex index = sourceModel()->index(r, FriendsID);
-            filter_.setData(r, filterColumn, _favorite.indexOf(sourceModel()->data(index).toString()) >= 0);
-        }
+    for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+        QModelIndex index = sourceModel()->index(r, ID);
+        filter_.setData(r, filterColumn, favorite_.find(sourceModel()->data(index).toString()) != favorite_.end());
     }
     invalidateFilter();
+    emit s_rowsUpdated();
+}
+
+void FilterModelFriends::clearFavorites() {
+    favorite_.clear();
+    int filterColumn = columns_.value("favorite");
+    filter_.clearCol(filterColumn);
+    invalidateFilter();
+    emit s_rowsUpdated();
 }
 
 void FilterModelFriends::clear() {
-    _name.clear();
-    _status.clear();
-    _public = 0;
-    _favorite.clear();
+    name_.clear();
+    status_.clear();
+    public_ = 0;
+    favorite_.clear();
     filter_.clear();
+    if (sourceModel() != nullptr) {
+        sourceModel()->clear();
+    }
 }

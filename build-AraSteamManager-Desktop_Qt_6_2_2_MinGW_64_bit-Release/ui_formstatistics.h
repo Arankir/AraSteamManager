@@ -39,7 +39,6 @@ public:
     ComboBoxFriends *comboBoxCurrentProfile;
     QTabWidget *tabWidget;
     QWidget *tab;
-    QHBoxLayout *horizontalLayout_9;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *labelSummColumn;
@@ -71,9 +70,10 @@ public:
     LabelValue *labelNoAchievementsGamesValue;
     QSpacerItem *horizontalSpacer_8;
     QSpacerItem *verticalSpacer;
-    QVBoxLayout *verticalLayout_10;
-    QLabel *label_3;
+    QWidget *tab_4;
+    QVBoxLayout *verticalLayout_6;
     QTableView *tableViewLastAchievements;
+    QSpacerItem *verticalSpacer_2;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayoutPie;
@@ -126,29 +126,36 @@ public:
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
-        horizontalLayout_9 = new QHBoxLayout(tab);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2 = new QVBoxLayout(tab);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         labelSummColumn = new QLabel(tab);
         labelSummColumn->setObjectName(QString::fromUtf8("labelSummColumn"));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(labelSummColumn->sizePolicy().hasHeightForWidth());
+        labelSummColumn->setSizePolicy(sizePolicy);
 
         horizontalLayout_3->addWidget(labelSummColumn);
 
         labelSumAchievementsValue = new LabelValue(tab);
         labelSumAchievementsValue->setObjectName(QString::fromUtf8("labelSumAchievementsValue"));
+        sizePolicy.setHeightForWidth(labelSumAchievementsValue->sizePolicy().hasHeightForWidth());
+        labelSumAchievementsValue->setSizePolicy(sizePolicy);
         labelSumAchievementsValue->setText(QString::fromUtf8("0"));
 
         horizontalLayout_3->addWidget(labelSumAchievementsValue);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer);
 
         label = new QLabel(tab);
         label->setObjectName(QString::fromUtf8("label"));
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         QFont font;
         font.setPointSize(10);
         font.setBold(true);
@@ -166,16 +173,20 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         labelAveragePercentValue = new QLabel(tab);
         labelAveragePercentValue->setObjectName(QString::fromUtf8("labelAveragePercentValue"));
+        sizePolicy.setHeightForWidth(labelAveragePercentValue->sizePolicy().hasHeightForWidth());
+        labelAveragePercentValue->setSizePolicy(sizePolicy);
         labelAveragePercentValue->setText(QString::fromUtf8("\320\241\321\200\320\265\320\264\320\275\320\270\320\271 \320\277\321\200\320\276\321\206\320\265\320\275\321\202 \320\277\320\276 \320\262\321\201\320\265\320\274 \320\270\320\263\321\200\320\260\320\274"));
 
         horizontalLayout_4->addWidget(labelAveragePercentValue);
 
         labelAverageAllGamesValue = new LabelValue(tab);
         labelAverageAllGamesValue->setObjectName(QString::fromUtf8("labelAverageAllGamesValue"));
+        sizePolicy.setHeightForWidth(labelAverageAllGamesValue->sizePolicy().hasHeightForWidth());
+        labelAverageAllGamesValue->setSizePolicy(sizePolicy);
 
         horizontalLayout_4->addWidget(labelAverageAllGamesValue);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_4->addItem(horizontalSpacer_2);
 
@@ -186,15 +197,19 @@ public:
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         label_2 = new QLabel(tab);
         label_2->setObjectName(QString::fromUtf8("label_2"));
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
 
         horizontalLayout_5->addWidget(label_2);
 
         labelAverageStartedGamesValue = new LabelValue(tab);
         labelAverageStartedGamesValue->setObjectName(QString::fromUtf8("labelAverageStartedGamesValue"));
+        sizePolicy.setHeightForWidth(labelAverageStartedGamesValue->sizePolicy().hasHeightForWidth());
+        labelAverageStartedGamesValue->setSizePolicy(sizePolicy);
 
         horizontalLayout_5->addWidget(labelAverageStartedGamesValue);
 
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_5->addItem(horizontalSpacer_3);
 
@@ -205,15 +220,19 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         label_4 = new QLabel(tab);
         label_4->setObjectName(QString::fromUtf8("label_4"));
+        sizePolicy.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
+        label_4->setSizePolicy(sizePolicy);
 
         horizontalLayout_2->addWidget(label_4);
 
         labelCompletedGamesValue = new LabelValue(tab);
         labelCompletedGamesValue->setObjectName(QString::fromUtf8("labelCompletedGamesValue"));
+        sizePolicy.setHeightForWidth(labelCompletedGamesValue->sizePolicy().hasHeightForWidth());
+        labelCompletedGamesValue->setSizePolicy(sizePolicy);
 
         horizontalLayout_2->addWidget(labelCompletedGamesValue);
 
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_5);
 
@@ -224,15 +243,19 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         label_6 = new QLabel(tab);
         label_6->setObjectName(QString::fromUtf8("label_6"));
+        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
+        label_6->setSizePolicy(sizePolicy);
 
         horizontalLayout_6->addWidget(label_6);
 
         labelStartedGamesValue = new LabelValue(tab);
         labelStartedGamesValue->setObjectName(QString::fromUtf8("labelStartedGamesValue"));
+        sizePolicy.setHeightForWidth(labelStartedGamesValue->sizePolicy().hasHeightForWidth());
+        labelStartedGamesValue->setSizePolicy(sizePolicy);
 
         horizontalLayout_6->addWidget(labelStartedGamesValue);
 
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_6->addItem(horizontalSpacer_6);
 
@@ -243,15 +266,19 @@ public:
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
         label_8 = new QLabel(tab);
         label_8->setObjectName(QString::fromUtf8("label_8"));
+        sizePolicy.setHeightForWidth(label_8->sizePolicy().hasHeightForWidth());
+        label_8->setSizePolicy(sizePolicy);
 
         horizontalLayout_7->addWidget(label_8);
 
         labelNotStartedGamesValue = new LabelValue(tab);
         labelNotStartedGamesValue->setObjectName(QString::fromUtf8("labelNotStartedGamesValue"));
+        sizePolicy.setHeightForWidth(labelNotStartedGamesValue->sizePolicy().hasHeightForWidth());
+        labelNotStartedGamesValue->setSizePolicy(sizePolicy);
 
         horizontalLayout_7->addWidget(labelNotStartedGamesValue);
 
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_7->addItem(horizontalSpacer_7);
 
@@ -262,44 +289,44 @@ public:
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         label_10 = new QLabel(tab);
         label_10->setObjectName(QString::fromUtf8("label_10"));
+        sizePolicy.setHeightForWidth(label_10->sizePolicy().hasHeightForWidth());
+        label_10->setSizePolicy(sizePolicy);
 
         horizontalLayout_8->addWidget(label_10);
 
         labelNoAchievementsGamesValue = new LabelValue(tab);
         labelNoAchievementsGamesValue->setObjectName(QString::fromUtf8("labelNoAchievementsGamesValue"));
+        sizePolicy.setHeightForWidth(labelNoAchievementsGamesValue->sizePolicy().hasHeightForWidth());
+        labelNoAchievementsGamesValue->setSizePolicy(sizePolicy);
 
         horizontalLayout_8->addWidget(labelNoAchievementsGamesValue);
 
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_8->addItem(horizontalSpacer_8);
 
 
         verticalLayout_2->addLayout(horizontalLayout_8);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer = new QSpacerItem(20, 253, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer);
 
-
-        horizontalLayout_9->addLayout(verticalLayout_2);
-
-        verticalLayout_10 = new QVBoxLayout();
-        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
-        label_3 = new QLabel(tab);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        verticalLayout_10->addWidget(label_3);
-
-        tableViewLastAchievements = new QTableView(tab);
+        tabWidget->addTab(tab, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QString::fromUtf8("tab_4"));
+        verticalLayout_6 = new QVBoxLayout(tab_4);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        tableViewLastAchievements = new QTableView(tab_4);
         tableViewLastAchievements->setObjectName(QString::fromUtf8("tableViewLastAchievements"));
 
-        verticalLayout_10->addWidget(tableViewLastAchievements);
+        verticalLayout_6->addWidget(tableViewLastAchievements);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        horizontalLayout_9->addLayout(verticalLayout_10);
+        verticalLayout_6->addItem(verticalSpacer_2);
 
-        tabWidget->addTab(tab, QString());
+        tabWidget->addTab(tab_4, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
         verticalLayout_3 = new QVBoxLayout(tab_2);
@@ -308,11 +335,11 @@ public:
         horizontalLayoutPie->setObjectName(QString::fromUtf8("horizontalLayoutPie"));
         ChartViewPercentages = new QChartView(tab_2);
         ChartViewPercentages->setObjectName(QString::fromUtf8("ChartViewPercentages"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(ChartViewPercentages->sizePolicy().hasHeightForWidth());
-        ChartViewPercentages->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(ChartViewPercentages->sizePolicy().hasHeightForWidth());
+        ChartViewPercentages->setSizePolicy(sizePolicy1);
         ChartViewPercentages->setMinimumSize(QSize(0, 250));
 
         horizontalLayoutPie->addWidget(ChartViewPercentages);
@@ -388,7 +415,7 @@ public:
 
         retranslateUi(FormStatistics);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         stackedWidgetGraphs->setCurrentIndex(0);
 
 
@@ -414,8 +441,8 @@ public:
         labelNotStartedGamesValue->setText(QCoreApplication::translate("FormStatistics", "0", nullptr));
         label_10->setText(QCoreApplication::translate("FormStatistics", "\320\230\320\263\321\200 \320\261\320\265\320\267 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\271", nullptr));
         labelNoAchievementsGamesValue->setText(QCoreApplication::translate("FormStatistics", "0", nullptr));
-        label_3->setText(QCoreApplication::translate("FormStatistics", "\320\237\320\276\321\201\320\273\320\265\320\264\320\275\320\270\320\265 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("FormStatistics", "\320\230\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\217", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("FormStatistics", "\320\237\320\276\321\201\320\273\320\265\320\264\320\275\320\270\320\265 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("FormStatistics", "\320\230\320\263\321\200\321\213", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("FormStatistics", "\320\223\321\200\320\260\321\204\320\270\320\272\320\270", nullptr));
     } // retranslateUi

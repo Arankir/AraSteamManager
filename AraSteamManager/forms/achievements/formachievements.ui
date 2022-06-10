@@ -125,7 +125,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QLineEdit" name="LineEditNameAchievements">
+          <widget class="MyLineEdit" name="LineEditNameAchievements">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -256,6 +256,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>subWidgets/lineEdit/mylineedit.h</header>
+  </customwidget>
   <customwidget>
    <class>FormReachedFilter</class>
    <extends>QWidget</extends>

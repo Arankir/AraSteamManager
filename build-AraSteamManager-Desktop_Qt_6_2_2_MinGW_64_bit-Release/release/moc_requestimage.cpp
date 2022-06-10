@@ -25,21 +25,21 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RequestImage_t {
     const uint offsetsAndSize[12];
-    char stringdata0[63];
+    char stringdata0[59];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_RequestImage_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_RequestImage_t qt_meta_stringdata_RequestImage = {
     {
 QT_MOC_LITERAL(0, 12), // "RequestImage"
-QT_MOC_LITERAL(13, 14), // "s_loadComplete"
-QT_MOC_LITERAL(28, 0), // ""
-QT_MOC_LITERAL(29, 13), // "RequestImage*"
-QT_MOC_LITERAL(43, 6), // "onLoad"
-QT_MOC_LITERAL(50, 12) // "RequestData*"
+QT_MOC_LITERAL(13, 10), // "s_finished"
+QT_MOC_LITERAL(24, 0), // ""
+QT_MOC_LITERAL(25, 13), // "RequestImage*"
+QT_MOC_LITERAL(39, 6), // "onLoad"
+QT_MOC_LITERAL(46, 12) // "RequestData*"
 
     },
-    "RequestImage\0s_loadComplete\0\0RequestImage*\0"
+    "RequestImage\0s_finished\0\0RequestImage*\0"
     "onLoad\0RequestData*"
 };
 #undef QT_MOC_LITERAL
@@ -61,7 +61,7 @@ static const uint qt_meta_data_RequestImage[] = {
        1,    1,   26,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    1,   29,    2, 0x08,    3 /* Private */,
+       4,    1,   29,    2, 0x09,    3 /* Protected */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -78,7 +78,7 @@ void RequestImage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<RequestImage *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->s_loadComplete((*reinterpret_cast< RequestImage*(*)>(_a[1]))); break;
+        case 0: _t->s_finished((*reinterpret_cast< RequestImage*(*)>(_a[1]))); break;
         case 1: _t->onLoad((*reinterpret_cast< RequestData*(*)>(_a[1]))); break;
         default: ;
         }
@@ -104,7 +104,7 @@ void RequestImage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (RequestImage::*)(RequestImage * );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RequestImage::s_loadComplete)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&RequestImage::s_finished)) {
                 *result = 0;
                 return;
             }
@@ -159,10 +159,107 @@ int RequestImage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void RequestImage::s_loadComplete(RequestImage * _t1)
+void RequestImage::s_finished(RequestImage * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+struct qt_meta_stringdata_RequestImageToLabel_t {
+    const uint offsetsAndSize[6];
+    char stringdata0[28];
+};
+#define QT_MOC_LITERAL(ofs, len) \
+    uint(offsetof(qt_meta_stringdata_RequestImageToLabel_t, stringdata0) + ofs), len 
+static const qt_meta_stringdata_RequestImageToLabel_t qt_meta_stringdata_RequestImageToLabel = {
+    {
+QT_MOC_LITERAL(0, 19), // "RequestImageToLabel"
+QT_MOC_LITERAL(20, 6), // "onLoad"
+QT_MOC_LITERAL(27, 0) // ""
+
+    },
+    "RequestImageToLabel\0onLoad\0"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_RequestImageToLabel[] = {
+
+ // content:
+      10,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   20,    2, 0x08,    1 /* Private */,
+
+ // slots: parameters
+    QMetaType::Void,
+
+       0        // eod
+};
+
+void RequestImageToLabel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<RequestImageToLabel *>(_o);
+        (void)_t;
+        switch (_id) {
+        case 0: _t->onLoad(); break;
+        default: ;
+        }
+    }
+    (void)_a;
+}
+
+const QMetaObject RequestImageToLabel::staticMetaObject = { {
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    qt_meta_stringdata_RequestImageToLabel.offsetsAndSize,
+    qt_meta_data_RequestImageToLabel,
+    qt_static_metacall,
+    nullptr,
+qt_incomplete_metaTypeArray<qt_meta_stringdata_RequestImageToLabel_t
+, QtPrivate::TypeAndForceComplete<RequestImageToLabel, std::true_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>
+
+
+>,
+    nullptr
+} };
+
+
+const QMetaObject *RequestImageToLabel::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *RequestImageToLabel::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_RequestImageToLabel.stringdata0))
+        return static_cast<void*>(this);
+    return QObject::qt_metacast(_clname);
+}
+
+int RequestImageToLabel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 1;
+    }
+    return _id;
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

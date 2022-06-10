@@ -1,22 +1,27 @@
 #include "formcategoriestree.h"
 
-FormCategoriesTree::FormCategoriesTree(QWidget *parent): QTreeWidget(parent) {
+FormCategoriesTree::FormCategoriesTree(QWidget *parent): QTreeWidget(parent), _categories(new Category2()) {
     this->setContextMenuPolicy(Qt::CustomContextMenu);
 
-    connect(this, &QTreeWidget::customContextMenuRequested, this, [=](QPoint pos) {
+    connect(this, &QTreeWidget::customContextMenuRequested, this, [this](QPoint pos) {
         updateCurrentCategory();
         QMenu *menu = createMenu(_currentCategory);
         menu->popup(this->viewport()->mapToGlobal(pos));
     });
 }
 
+FormCategoriesTree::~FormCategoriesTree() {
+    delete _categories;
+}
+
 void FormCategoriesTree::setGame(const SGame &aGame) {
     _game = aGame;
-    _categories.setGame(_game);
+    _categories->setGame(_game);
+    _categories->update();
     updateUi();
 }
 
-QMenu *FormCategoriesTree::createMenu(Category *aCategory) {
+QMenu *FormCategoriesTree::createMenu(Category2 *aCategory) {
     //Кнопка изменения достижений
     QAction *actionAchievements = new QAction(QIcon(Images::change()), tr("Изменить категорию"), this);
 
@@ -31,9 +36,9 @@ QMenu *FormCategoriesTree::createMenu(Category *aCategory) {
     menu->addAction (actionSubCategory);
     menu->addAction (actionDelete);
 
-    connect (actionAchievements,    &QAction::triggered,    this,   [=](){emit s_categoryChange(aCategory);});
-    connect (actionSubCategory,     &QAction::triggered,    this,   [=](){emit s_categoryAdd(aCategory);});
-    connect (actionDelete,          &QAction::triggered,    this,   [=](){emit s_categoryDelete(aCategory);});
+    connect (actionAchievements,    &QAction::triggered,    this,   [=, this](){emit s_categoryChange(aCategory);});
+    connect (actionSubCategory,     &QAction::triggered,    this,   [=, this](){emit s_categoryAdd(aCategory);});
+    connect (actionDelete,          &QAction::triggered,    this,   [=, this](){emit s_categoryDelete(aCategory);});
 
     return menu;
 }
@@ -61,9 +66,9 @@ void FormCategoriesTree::updateCurrentCategory() {
         currentItem = currentItem->parent();
         names << getText(currentItem);
     }
-    _currentCategory = &_categories;
+    _currentCategory = _categories;
     while (!names.isEmpty()) {
-        for (auto &category: *_currentCategory) {
+        for (auto &category: _currentCategory->categories()) {
             if (category->title() == names.last()) {
                 _currentCategory = category;
                 names.removeLast();
@@ -73,16 +78,16 @@ void FormCategoriesTree::updateCurrentCategory() {
     }
 }
 
-void FormCategoriesTree::recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot) {
-    //create widget
+void FormCategoriesTree::recursAddCategoryToTree(Category2 *aCategory, QTreeWidgetItem *aRoot) {
+//    //create widget
     QWidget *widget;
-    if (aCategory->achievementsApiName().isEmpty()) {
+    if (aCategory->isEmpty()) {
         widget = new QLabel(aCategory->title());
     } else {
         widget = new QCheckBox(aCategory->title());
         connect(dynamic_cast<QCheckBox*>(widget), &QCheckBox::stateChanged, this, &FormCategoriesTree::checkBoxCategory_StateChanged);
     }
-    widget->setAccessibleName(QString::number(aCategory->order() + 1));
+//    widget->setAccessibleName(QString::number(aCategory->order() + 1));
 
     //calculate sizeHint
     QSize sizeHint;
@@ -99,7 +104,7 @@ void FormCategoriesTree::recursAddCategoryToTree(Category *aCategory, QTreeWidge
     treeItem->setSizeHint(0, sizeHint);
 
     this->setItemWidget(treeItem, 0, widget);
-    for(auto subCategory: *aCategory) {
+    for(auto subCategory: aCategory->categories()) {
         recursAddCategoryToTree(subCategory, treeItem);
     }
 }
@@ -112,10 +117,10 @@ void FormCategoriesTree::checkBoxCategory_StateChanged(const int &aIndex) {
 }
 
 void FormCategoriesTree::updateUi() {
-    _categories.update();
+    _categories->update();
 
     this->clear();
-    for(auto &category: _categories) {
+    for(auto &category: _categories->categories()) {
         recursAddCategoryToTree(category);
     }
 }

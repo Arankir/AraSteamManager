@@ -65,6 +65,10 @@ void ComboBoxFriends::addItem(const SProfile &steamFriend) {
     mListWidget->addItem(item);
 }
 
+void ComboBoxFriends::sort(Qt::SortOrder aOrder) {
+    mListWidget->sortItems(aOrder);
+}
+
 int ComboBoxFriends::count() const {
     int count = mListWidget->count() - mCountFilterWidgets;// Do not count the search bar
     if(count < 0) {

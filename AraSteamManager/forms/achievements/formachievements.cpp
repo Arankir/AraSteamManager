@@ -1,5 +1,8 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
+#include "forms/formcomments.h"
+
+#include <QDesktopServices>
 
 #define Init {
 FormAchievements::FormAchievements(const SProfile &aProfile, const SGame &aGame, QWidget *aParent): Form(aParent), ui(new Ui::FormAchievements),
@@ -43,15 +46,15 @@ void FormAchievements::init() {
     connect(ui->ButtonFindAchievement,      &QPushButton::clicked,                      this,   [&]() {
         ui->LineEditNameAchievements->setText(ui->LineEditNameAchievements->text());
     });
-    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryAdd,         this,   [&](Category *lCategory) {
+    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryAdd,         this,   [&](Category2 *lCategory) {
         ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
         ui->CategoriesEdit->addSubCategory(lCategory);
     });
-    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryChange,      this,   [&](Category *lCategory) {
+    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryChange,      this,   [&](Category2 *lCategory) {
         ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
         ui->CategoriesEdit->changeCategory(lCategory);
     });
-    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryDelete,      this,   [&](Category *lCategory) {
+    connect(ui->TreeWidgetCategories,       &FormCategoriesTree::s_categoryDelete,      this,   [&](Category2 *lCategory) {
         ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
         ui->CategoriesEdit->deleteCategory(lCategory);
     });
@@ -61,7 +64,7 @@ void FormAchievements::init() {
         menu->popup(ui->TableViewMyAchievements->viewport()->mapToGlobal(pos));
     });
     connect(ui->TableViewMyAchievements,    &QTableView::doubleClicked,                 this,   [&](QModelIndex aIndex) {
-        if (aIndex.column() == AchievementComments) {
+        if (aIndex.column() == AchievementCommentss) {
             buttonComment_Clicked();
         }
     });
@@ -166,16 +169,33 @@ QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
 
     //Добавление кнопки избранного
     QAction *actionFavorites;
-    QList<FavoriteAchievement> favorites = Favorites::achievementsGame(_profile.steamID(), _game).achievements();
-    bool isFavorite = std::any_of(favorites.cbegin(),
-                                  favorites.cend(),
-                                  [=](FavoriteAchievement curFavorite) {
-                                      return curFavorite.apiName() == appId;
-                                  });
+    bool isFavorite = false;
+    FavoriteAchievementsGames favorites;
+    auto iteratorGame = std::find_if(favorites.begin(),
+                                     favorites.end(),
+                                     [=, this](const FavoriteAchievementsGame &lGame) {
+                                        return lGame == _game && lGame.steamId() == _profile.steamID();
+                                     });
+    if (iteratorGame != favorites.end()) {
+        isFavorite = std::any_of(iteratorGame->cbegin(),
+                                 iteratorGame->cend(),
+                                 [appId](const FavoriteAchievement &curFavorite) {
+                                     return curFavorite.apiName() == appId;
+                                 });
+    }
+
     if(isFavorite) {
         actionFavorites = new QAction(QIcon(Images::isFavorites()), tr("Удалить из избранного"), this);
+        connect (actionFavorites,   &QAction::triggered,    this,   [=, this]() {
+            FavoriteAchievementsGames favorites;
+            favorites.remove(_profile.steamID(), _game, aAchievement);
+        });
     } else {
         actionFavorites = new QAction(QIcon(Images::isNotFavorites()), tr("Добавить в избранное"), this);
+        connect (actionFavorites,   &QAction::triggered,    this,   [=, this]() {
+            FavoriteAchievementsGames favorites;
+            favorites.append(_profile.steamID(), _game, aAchievement);
+        });
     }
 
     //Добавление кнопки комментариев
@@ -193,7 +213,7 @@ QMenu *FormAchievements::createMenu(const SAchievement &aAchievement) {
     menu->addAction (actionGuides);
     menu->addAction (actionUpdate);
 
-    connect (actionFavorites,   &QAction::triggered,    this,   &FormAchievements::buttonFavorite_Clicked);
+//    connect (actionFavorites,   &QAction::triggered,    this,   &FormAchievements::buttonFavorite_Clicked);
     connect (actionComment,     &QAction::triggered,    this,   &FormAchievements::buttonComment_Clicked);
     connect (actionGuides,      &QAction::triggered,    this,   &FormAchievements::openManual);
     connect (actionUpdate,      &QAction::triggered,    this,   &FormAchievements::update);
@@ -242,39 +262,41 @@ void FormAchievements::updateFilters() {
     hideFriendsColumns();
 }
 
-void FormAchievements::updateFilterCategory(Category *aCategory, const bool &aIsChecked) {
+void FormAchievements::updateFilterCategory(Category2 *aCategory, const bool &aIsChecked) {
     auto filterCategories = _filterAchievements.getCategories();
     QString parentName = "";
-    if (Category *parent = aCategory->parent()) {
+    if (Category2 *parent = aCategory->parent()) {
         parentName = parent->title();
     }
-    auto iteratorParent = std::find_if(filterCategories.begin(),
-                                 filterCategories.end(),
-                                 [=](const QPair<QString, QList<Category>> &lLineCategories) {
-                                    return lLineCategories.first == parentName;
-                                });
+//    auto iteratorParent = std::find_if(filterCategories.begin(),
+//                                 filterCategories.end(),
+//                                 [=](const QString &lParent, const QList<Category>&) {
+//                                    return lParent == parentName;
+//                                });
     if (aIsChecked) {
-        if (iteratorParent != filterCategories.end()) {
-            (*iteratorParent).second.append(*aCategory);
-        } else {
-            filterCategories.append(QPair<QString, QList<Category>>(parentName, QList<Category>{*aCategory}));
-        }
+        filterCategories.addCategory(parentName, *aCategory);
+//        if (iteratorParent != filterCategories.end()) {
+//            (*iteratorParent).append(*aCategory);
+//        } else {
+//            filterCategories.insert(parentName, QList<Category>{*aCategory});
+//        }
     } else {
-        if (iteratorParent != filterCategories.end()) {
-            auto iterator = std::find_if((*iteratorParent).second.begin(),
-                                         (*iteratorParent).second.end(),
-                                         [=](const Category &lLineCategories) {
-                                            return lLineCategories.title() == aCategory->title();
-                                        });
-            if (iterator != (*iteratorParent).second.end()) {
-                (*iteratorParent).second.removeAt(iterator - (*iteratorParent).second.begin());
-            }
-            if ((*iteratorParent).second.count() == 0) {
-                filterCategories.removeAt(iteratorParent - filterCategories.begin());
-            }
-        }
+        filterCategories.removeCategory(parentName, *aCategory);
+//        if (iteratorParent != filterCategories.end()) {
+//            auto iterator = std::find_if((*iteratorParent).begin(),
+//                                         (*iteratorParent).end(),
+//                                         [=](const Category &lLineCategories) {
+//                                            return lLineCategories.title() == aCategory->title();
+//                                        });
+//            if (iterator != (*iteratorParent).end()) {
+//                (*iteratorParent).removeAt(iterator - (*iteratorParent).begin());
+//            }
+//            if ((*iteratorParent).count() == 0) {
+//                filterCategories.remove(iteratorParent.key());
+//            }
+//        }
     }
-    _filterAchievements.setCategories(filterCategories);
+    _filterAchievements.setCategories(CategoriesFilter(filterCategories));
     updateFilters();
     ui->TableViewMyAchievements->resizeRowsToContents();
     emit s_filtersValueUpdated();
@@ -328,20 +350,29 @@ void FormAchievements::checkBoxFavorites_StateChanged(const int &arg1) {
         break;
     }
     case 2: {
-        updateFilterFavorite(Favorites::achievementsGame(_profile.steamID(), _game).achievements());
+        FavoriteAchievementsGames favorites;
+        auto iteratorGame = std::find_if(favorites.begin(),
+                                         favorites.end(),
+                                         [=, this](const FavoriteAchievementsGame &lGame) {
+                                            return lGame == _game && lGame.steamId() == _profile.steamID();
+                                         });
+        if (iteratorGame != favorites.end()) {
+            updateFilterFavorite(*iteratorGame);
+        }
+//        updateFilterFavorite(Favorites::achievementsGame(_profile.steamID(), _game).achievements());
         break;
     }
     }
 }
 
 void FormAchievements::buttonFavorite_Clicked() {
-    if (Favorites::addAchievement(_profile.steamID(), _game,  currentAchievement(), true)) {
-        //Категория добавилась
-        //ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
-    } else {
-        //Категория уже есть (удалилась)
-        //ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
-    }
+//    if (Favorites::addAchievement(_profile.steamID(), _game,  currentAchievement(), true)) {
+//        //Категория добавилась
+//        //ui->ButtonFavorite->setIcon(QIcon(Images::isFavorites()));
+//    } else {
+//        //Категория уже есть (удалилась)
+//        //ui->ButtonFavorite->setIcon(QIcon(Images::isNotFavorites()));
+//    }
 }
 
 void FormAchievements::openManual() {
@@ -351,7 +382,7 @@ void FormAchievements::openManual() {
 
 void FormAchievements::buttonComment_Clicked() {
     auto form = createFramelessForm<FormComments>();
-    form->setData(_profile, _game, currentAchievement());
+    form->setData(_profile.steamID(), _game, currentAchievement());
     connect(this, &FormAchievements::s_settingsUpdated, form->window(), &FramelessWindow::updateSettings);
     connect(form, &FormComments::s_updateComments, this, [&]() {
         _achievementsModel->updateComments();

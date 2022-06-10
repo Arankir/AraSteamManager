@@ -1,27 +1,27 @@
 #ifndef FRIENDSMODEL_H
 #define FRIENDSMODEL_H
 
-#include <QAbstractTableModel>
-#include <QObject>
-#include <QSortFilterProxyModel>
+#include <QSet>
 #include "classes/steamApi/structures/sfriends.h"
-#include "classes/common/generalfunctions.h"
+#include "subWidgets/models/filters.h"
 
-enum modelFriendsColumns {
-    FriendsID        = 0,
-    FriendsIndex     = 1,
-    FriendsIcon      = 2,
-    FriendsName      = 3,
-    FriendsAdded     = 4,
-    FriendsStatus    = 5,
-    FriendsIsPublic  = 6,
-    FriendsCount     = 7
-};
+namespace friendsModel {
+    enum Columns {
+        ID        = 0,
+        Index     = 1,
+        Icon      = 2,
+        Name      = 3,
+        Added     = 4,
+        Status    = 5,
+        IsPublic  = 6,
+        Count     = 7
+    };
+}
 
 class FriendsModel : public QAbstractTableModel {
     Q_OBJECT
 public:
-    FriendsModel(QObject *parent = nullptr): QAbstractTableModel(parent) {}
+    FriendsModel(QObject *parent = nullptr);
     void setFriends(const QList<SFriend> &aFriends);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -30,6 +30,7 @@ public:
     QString friendId(const QModelIndex &index) const;
     static QString isPublicTitle();
     SFriendProfile getFriend(const int &row) const;
+    void clear();
 
 public slots:
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
@@ -39,35 +40,10 @@ signals:
     void s_progress(const QString &status, const int &progress, const int &max);
 
 private:
-    QList<SFriendProfile> _friends;
+    QList<SFriendProfile> friends_;
 
 };
 
-class ProxyModelFriends : public QSortFilterProxyModel {
-    Q_OBJECT
-public:
-    ProxyModelFriends(QObject* parent = nullptr);
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-    FriendsModel *sourceModel() const;
-    void setSourceModel(FriendsModel *sourceModel);
-
-public slots:
-    void setName(const QString &newName);
-    void setStatus(const QString &newStatus);
-    void setIsPublic(const int &isPublic);
-    void setFavorites(const QStringList &newFavorites);
-    void clear();
-
-private:
-    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
-
-    QString _name;
-    QString _status;
-    int _public;
-    QStringList _favorite;
-};
-#include "subWidgets/models/filters.h"
 class FilterModelFriends : public FilterModel {
     Q_OBJECT
 public:
@@ -76,20 +52,24 @@ public:
     FriendsModel *sourceModel() const;
     void setSourceModel(FriendsModel *sourceModel);
 
+signals:
+    void s_modelFinished();
+
 public slots:
     void setName(const QString &newName);
     void setStatus(const QString &newStatus);
     void setIsPublic(const int &isPublic);
-    void setFavorites(const QStringList &newFavorites);
+    void setFavorites(const QSet<ProfileID> &newFavorites);
+    void clearFavorites();
     void clear();
 
 private:
     void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
 
-    QString _name;
-    QString _status;
-    int _public;
-    QStringList _favorite;
+    QString name_;
+    QString status_;
+    int public_;
+    QSet<ProfileID> favorite_;
 };
 
 #endif // FRIENDSMODEL_H

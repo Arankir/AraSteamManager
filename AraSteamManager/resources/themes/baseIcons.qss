@@ -226,7 +226,7 @@ QComboBox::down-arrow:focus*/ {
 }
 
 QTabBar::close-button {
-    image: url("%1close_window.png");
+    image: url("%1window_close.png");
 }
 
 QTabBar::close-button:hover {

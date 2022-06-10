@@ -1,13 +1,6 @@
 #ifndef FORMFRIENDS_H
 #define FORMFRIENDS_H
 
-#include <QWidget>
-#include <QMenu>
-
-#include "classes/steamApi/structures/sfriends.h"
-#include "classes/threads/thread/threadfriends.h"
-#include "classes/common/favorites.h"
-#include "classes/common/myfilter.h"
 #include "subWidgets/models/friendsmodel.h"
 
 namespace Ui {
@@ -18,28 +11,23 @@ class FormFriends : public Form {
     Q_OBJECT
 
 public slots:
-    void updateSettings(QFlags<changedSettings> aSettings) override;
-    void setFriends(const QString &aId, const SFriends &aFriends);
+    void updateSettings(QFlags<changedSettings> settings) override;
+    void setFriends(const ProfileID &profileId);
     void clear();
     bool isInit();
 
 public:
-    explicit FormFriends(const QString &id, SFriends &Friends, QWidget *parent = nullptr);
-    FormFriends(QWidget *aParent = nullptr);
+    explicit FormFriends(QWidget *parent = nullptr);
     ~FormFriends();
 
 signals:
-    void s_friendsLoaded(const QString &aStatus, int aValue, int aMaxValue);
     void s_finish(int width);
-    void s_returnToProfile(QWidget*);
-    void s_goToProfile(const QString &id, SProfile::LoadType type);
+    void s_goToProfile(const ProfileID &profileId);
 
 private slots:
     //Инициализация
     void init();
     void initComboBoxStatus();
-    //Эвенты
-    void closeEvent(QCloseEvent *event) override;
     //Часто использующиеся функции
     void retranslate() override;
     void updateIcons() override;
@@ -47,7 +35,6 @@ private slots:
     //Взаимодействие с таблицей
     QMenu *createMenu(const SFriendProfile &profile);
     void goToCurrentProfile();
-    void friendToFavorite();
     //Фильтр
     void lineEditName_TextChanged(const QString &arg1);
     void buttonFind_Clicked();
@@ -57,12 +44,10 @@ private slots:
 private:
     Ui::FormFriends *ui;
 
-    QString _id;
+    ProfileID id_;
+    bool isLoading_ = false;
 
-    bool _isLoading = false;
-
-//    FriendsModel *_friendsModel = nullptr;
-    FilterModelFriends _filterFriends;
+    FilterModelFriends filterFriends_;
 };
 
 #endif // FORMFRIENDS_H

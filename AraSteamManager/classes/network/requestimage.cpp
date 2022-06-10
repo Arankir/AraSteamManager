@@ -2,34 +2,54 @@
 #include "classes/common/settings.h"
 #include "classes/common/generalfunctions.h"
 
-RequestImage::RequestImage(QLabel *aLabel, const QString &aUrl, const QString &aSave, const bool &aAutoSave, QObject *aParent): QObject(aParent),
-_label(aLabel), _save(aSave), _autosave(aAutoSave) {
-    RequestData *image = new RequestData(aUrl, true, this);
-    connect(image, SIGNAL(s_finished(RequestData*)), this, SLOT(onLoad(RequestData*)));
-    if (_label != nullptr) {
-        _label->setMovie(new QMovie("://loading.gif"));
-        _label->movie()->setScaledSize(_label->size());
-        _label->movie()->start();
+#include <QDir>
+
+RequestImage::RequestImage(const QString &aUrl, const QString &aSave, const bool &aAutoSave, const bool &aParallel, QObject *aParent): QObject(aParent),
+savePath_(aSave), isAutoSave_(aAutoSave) {
+    RequestData *image = new RequestData(aUrl, aParallel, this);
+    if (aParallel) {
+        connect(image, SIGNAL(s_finished(RequestData*)), this, SLOT(onLoad(RequestData*)));
+    } else {
+        onLoad(image);
     }
 }
 
 void RequestImage::onLoad(RequestData *aImage) {
-    _pixmap.loadFromData(aImage->reply());
-    if (Settings::saveImages() == 1 && _autosave) {
-        createDir(_save);
-        _pixmap.save(_save);
-    }
-    if (_label != nullptr) {
-        if (_label->movie()) {
-            if (_label->movie()->state() == QMovie::MovieState::Running) {
-                _label->movie()->stop();
-            }
+    pixmap_.loadFromData(aImage->reply());
+    if (Settings::saveImages() == 1 && isAutoSave_) {
+        QString dir = savePath_;
+        if (dir.lastIndexOf("/") < dir.length() - 1 && dir.lastIndexOf("\\") < dir.length() - 1) {
+            dir = dir.first(std::max(savePath_.lastIndexOf("/"), dir.lastIndexOf("\\")) + 1);
         }
-        _label->setPixmap(_pixmap);
-        //emit s_loadComplete();
-        this->deleteLater();
-    } else {
-        emit s_loadComplete(this);
+        QDir().mkpath(dir);
+//        createDir(_save);
+        pixmap_.save(savePath_);
+    }
+    error_ = aImage->error();
+    emit s_finished(this);
+}
+
+
+RequestImageToLabel::RequestImageToLabel(QLabel *aLabel, const QString &aUrl, const QString &aSave,
+                                         const bool &aAutosave, const bool &aParallel, QObject *aParent):
+    QObject{aParent}, label_{aLabel}, request_{new RequestImage{aUrl, aSave, aAutosave, aParallel, this}} {
+    connect(request_, &RequestImage::s_finished, this, &RequestImageToLabel::onLoad);
+    if (label_ != nullptr) {
+        label_->setMovie(new QMovie("://loading.gif"));
+        label_->movie()->setScaledSize(label_->size());
+        label_->movie()->start();
     }
 }
 
+void RequestImageToLabel::onLoad() {
+    if (label_ != nullptr) {
+        if (label_->movie()) {
+            if (label_->movie()->state() == QMovie::MovieState::Running) {
+                label_->movie()->stop();
+            }
+        }
+        label_->setPixmap(request_->pixmap());
+    }
+    request_->deleteLater();
+    this->deleteLater();
+}

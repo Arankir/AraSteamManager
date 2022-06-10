@@ -233,3 +233,9 @@ void FilterModel::setSourceModel(QAbstractItemModel *sourceModel) {
     }
     QSortFilterProxyModel::setSourceModel(sourceModel);
 }
+
+void FilterModel::forceInvalidate() {
+    QSortFilterProxyModel::beginResetModel();
+    QSortFilterProxyModel::invalidate();
+    QSortFilterProxyModel::endResetModel();
+}

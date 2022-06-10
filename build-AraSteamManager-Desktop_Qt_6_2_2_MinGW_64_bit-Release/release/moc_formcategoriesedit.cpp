@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoriesEdit_t {
     const uint offsetsAndSize[66];
-    char stringdata0[460];
+    char stringdata0[461];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormCategoriesEdit_t, stringdata0) + ofs), len 
@@ -57,13 +57,13 @@ QT_MOC_LITERAL(298, 23), // "buttonDeleteAll_Clicked"
 QT_MOC_LITERAL(322, 19), // "isCategoryNameExist"
 QT_MOC_LITERAL(342, 4), // "name"
 QT_MOC_LITERAL(347, 15), // "changeNewParent"
-QT_MOC_LITERAL(363, 9), // "Category*"
-QT_MOC_LITERAL(373, 6), // "parent"
-QT_MOC_LITERAL(380, 16), // "createParentMenu"
-QT_MOC_LITERAL(397, 6), // "QMenu*"
-QT_MOC_LITERAL(404, 8), // "category"
-QT_MOC_LITERAL(413, 25), // "changeNewParentFromAction"
-QT_MOC_LITERAL(439, 20) // "changeCategoryParent"
+QT_MOC_LITERAL(363, 10), // "Category2*"
+QT_MOC_LITERAL(374, 6), // "parent"
+QT_MOC_LITERAL(381, 16), // "createParentMenu"
+QT_MOC_LITERAL(398, 6), // "QMenu*"
+QT_MOC_LITERAL(405, 8), // "category"
+QT_MOC_LITERAL(414, 25), // "changeNewParentFromAction"
+QT_MOC_LITERAL(440, 20) // "changeCategoryParent"
 
     },
     "FormCategoriesEdit\0s_categoriesIsUpdated\0"
@@ -76,7 +76,7 @@ QT_MOC_LITERAL(439, 20) // "changeCategoryParent"
     "buttonCancel_Clicked\0buttonAccept_Clicked\0"
     "buttonDelete_Clicked\0buttonDeleteAll_Clicked\0"
     "isCategoryNameExist\0name\0changeNewParent\0"
-    "Category*\0parent\0createParentMenu\0"
+    "Category2*\0parent\0createParentMenu\0"
     "QMenu*\0category\0changeNewParentFromAction\0"
     "changeCategoryParent"
 };
@@ -166,13 +166,13 @@ void FormCategoriesEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         case 12: _t->buttonDeleteAll_Clicked(); break;
         case 13: { bool _r = _t->isCategoryNameExist((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 14: _t->changeNewParent((*reinterpret_cast< Category*(*)>(_a[1]))); break;
-        case 15: { QMenu* _r = _t->createParentMenu((*reinterpret_cast< Category*(*)>(_a[1])));
+        case 14: _t->changeNewParent((*reinterpret_cast< Category2*(*)>(_a[1]))); break;
+        case 15: { QMenu* _r = _t->createParentMenu((*reinterpret_cast< Category2*(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         case 16: { QMenu* _r = _t->createParentMenu();
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         case 17: _t->changeNewParentFromAction(); break;
-        case 18: _t->changeCategoryParent((*reinterpret_cast< Category*(*)>(_a[1]))); break;
+        case 18: _t->changeCategoryParent((*reinterpret_cast< Category2*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -206,7 +206,7 @@ const QMetaObject FormCategoriesEdit::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormCategoriesEdit_t
 , QtPrivate::TypeAndForceComplete<FormCategoriesEdit, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const EditType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const EditType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>
 
 
 >,

@@ -16,6 +16,7 @@ public:
     int count() const;
     void hidePopup() override;
 
+    void sort(Qt::SortOrder aOrder);
 signals:
     void s_selectionChanged();
     void s_friendClicked(const SProfile&);

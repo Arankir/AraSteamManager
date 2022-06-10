@@ -4,7 +4,7 @@ QListWidgetFriend::QListWidgetFriend(const SProfile &steamFriend, FriendType typ
                     QListWidgetItem(),
                     _steamFriend(steamFriend),
                     _type(type) {
-    //Посмотреть откуда он берет друзей, скорее всего они там удаляются и из-за этого все крашится
+
 }
 
 QListWidgetFriend &QListWidgetFriend::operator=(const QListWidgetFriend &aItem) {

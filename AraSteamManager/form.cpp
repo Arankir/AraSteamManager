@@ -5,6 +5,10 @@ Form::Form(QWidget *parent) : QWidget(parent) {
 
 }
 
+Form::~Form() {
+    qDebug() << tr("%1 deleted").arg(this->objectName());
+}
+
 void Form::changeEvent(QEvent *event) {
     if(event->type() == QEvent::LanguageChange) {
         retranslate();
@@ -12,6 +16,7 @@ void Form::changeEvent(QEvent *event) {
 }
 
 void Form::close() {
+    qDebug() << "close";
     emit s_closed();
 //    QWidget::close();
 }

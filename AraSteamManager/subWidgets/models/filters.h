@@ -90,9 +90,14 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     void setSourceModel(QAbstractItemModel *sourceModel);
 
+signals:
+    void s_rowsUpdated();
+
 protected:
     QMap<QString, int> columns_;
     Filter filter_;
+protected slots:
+    void forceInvalidate();
 };
 
 #endif // FILTERS_H

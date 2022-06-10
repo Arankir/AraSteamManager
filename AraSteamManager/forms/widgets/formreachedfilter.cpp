@@ -6,11 +6,12 @@ ui(new Ui::FormReachedFilter) {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_TranslucentBackground);
     updateIcons();
-    ui->RadioButtonAll->setChecked(true);
-    connect(ui->RadioButtonReached, &QRadioButton::pressed, this, [=]() {emit s_radioButtonChange(ReachedType::reached);});
-    connect(ui->RadioButtonAll, &QRadioButton::pressed, this, [=]() {emit s_radioButtonChange(ReachedType::all);});
-    connect(ui->RadioButtonNotReached, &QRadioButton::pressed, this, [=]() {emit s_radioButtonChange(ReachedType::notReached);});
+//    ui->RadioButtonAll->setChecked(true);
+//    connect(ui->RadioButtonReached, &QRadioButton::pressed, this, [=, this]() {emit s_radioButtonChange(ReachedType::reached);});
+//    connect(ui->RadioButtonAll, &QRadioButton::pressed, this, [=, this]() {emit s_radioButtonChange(ReachedType::all);});
+//    connect(ui->RadioButtonNotReached, &QRadioButton::pressed, this, [=, this]() {emit s_radioButtonChange(ReachedType::notReached);});
 //    connect(ui->Slider, &QSlider::valueChanged, this, &FormReachedFilter::slideValueChanged);
+    connect(ui->pushButton, &QPushButton::pressed, this, &FormReachedFilter::onButtonClick);
 }
 
 FormReachedFilter::~FormReachedFilter() {
@@ -18,9 +19,26 @@ FormReachedFilter::~FormReachedFilter() {
 }
 
 void FormReachedFilter::updateIcons() {
-    ui->LabelReached    ->setPixmap(QPixmap(Images::reached())          .scaled(15, 15));
-    ui->LabelNotReached ->setPixmap(QPixmap(Images::notReached())       .scaled(15, 15));
-    ui->LabelAll        ->setPixmap(QPixmap(Images::allAchievements())  .scaled(15, 15));
+//    ui->LabelReached    ->setPixmap(QPixmap(Images::reached())          .scaled(15, 15));
+//    ui->LabelNotReached ->setPixmap(QPixmap(Images::notReached())       .scaled(15, 15));
+//    ui->LabelAll        ->setPixmap(QPixmap(Images::allAchievements())  .scaled(15, 15));
+    switch (type_) {
+    case ReachedType::reached: {
+        ui->pushButton->setIcon(QIcon(Images::reached()));
+        break;
+    }
+    case ReachedType::all: {
+        ui->pushButton->setIcon(QIcon(Images::allAchievements()));
+        break;
+    }
+    case ReachedType::notReached: {
+        ui->pushButton->setIcon(QIcon(Images::notReached()));
+        break;
+    }
+    default: {
+
+    }
+    }
 }
 
 void FormReachedFilter::retranslate() {
@@ -33,27 +51,53 @@ void FormReachedFilter::updateSettings(QFlags<changedSettings> aSettings) {
     }
 }
 
-void FormReachedFilter::setType(const ReachedType &aType) {
-//    if (aType != ReachedType::none) {
-//        ui->Slider->setValue(static_cast<int>(aType));
-//    }
-    switch (aType) {
+void FormReachedFilter::onButtonClick() {
+    switch (type_) {
     case ReachedType::reached: {
-        ui->RadioButtonReached->setChecked(true);
+        type_ = ReachedType::all;
+        emit s_radioButtonChange(ReachedType::all);;
         break;
     }
     case ReachedType::all: {
-        ui->RadioButtonAll->setChecked(true);
+        type_ = ReachedType::notReached;
+        emit s_radioButtonChange(ReachedType::notReached);
         break;
     }
     case ReachedType::notReached: {
-        ui->RadioButtonNotReached->setChecked(true);
+        type_ = ReachedType::reached;
+        emit s_radioButtonChange(ReachedType::reached);
         break;
     }
     default: {
 
     }
     }
+    updateIcons();
+}
+
+void FormReachedFilter::setType(const ReachedType &aType) {
+//    if (aType != ReachedType::none) {
+//        ui->Slider->setValue(static_cast<int>(aType));
+//    }
+    type_ = aType;
+    updateIcons();
+//    switch (aType) {
+//    case ReachedType::reached: {
+//        ui->RadioButtonReached->setChecked(true);
+//        break;
+//    }
+//    case ReachedType::all: {
+//        ui->RadioButtonAll->setChecked(true);
+//        break;
+//    }
+//    case ReachedType::notReached: {
+//        ui->RadioButtonNotReached->setChecked(true);
+//        break;
+//    }
+//    default: {
+
+//    }
+//    }
 }
 
 void FormReachedFilter::update() {

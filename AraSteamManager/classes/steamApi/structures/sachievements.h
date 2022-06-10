@@ -7,118 +7,91 @@
 class SAchievementSchema : public Sapi {
     Q_OBJECT
 public:
-    SAchievementSchema() {};
-    explicit SAchievementSchema(const QJsonObject &object, QObject *parent  = nullptr): Sapi(parent),
-        _apiName(object.value("name").toString()), _defaultValue(object.value("defaultvalue").toInt()),
-        _displayName(object.value("displayName").toString()), _hidden(object.value("hidden").toInt()),
-        _description(object.value("description").toString()), _icon(object.value("icon").toString()),
-        _iconGray(object.value("icongray").toString()) {
-            //qDebug()<<"SAchievementGlobal constructor"<<_apiName;
-        }
-     SAchievementSchema(const SAchievementSchema &global): Sapi(global.parent()),
-         _apiName(global._apiName), _defaultValue(global._defaultValue), _displayName(global._displayName),
-         _hidden(global._hidden), _description(global._description), _icon(global._icon), _iconGray(global._iconGray) {
-             //qDebug()<<"SAchievementGlobal copy"<<_apiName;
-         }
-     SAchievementSchema &operator=(const SAchievementSchema&) {
-             //qDebug()<<"SAchievementGlobal equality"<<_apiName;
-             return *this;
-         }
-     bool  operator<(const SAchievementSchema &global) const {return _apiName < global._apiName;}
-     bool  operator>(const SAchievementSchema &global) const {return _apiName > global._apiName;}
-     bool  operator==(const SAchievementSchema &global) const;
-     bool  operator!=(const SAchievementSchema &global) const;
+    SAchievementSchema(QObject *parent  = nullptr);
+    SAchievementSchema(const QJsonObject &object, QObject *parent  = nullptr);
+    SAchievementSchema(const SAchievementSchema&);
+    SAchievementSchema &operator=(const SAchievementSchema&);
+    bool  operator<(const SAchievementSchema&) const;
+    bool  operator>(const SAchievementSchema&) const;
+    bool  operator==(const SAchievementSchema&) const;
+    bool  operator!=(const SAchievementSchema&) const;
      
-     QJsonObject toJson() const;
-     virtual QString className() const {return "SAchievementSchema";}
-     static QList<SAchievementSchema> load(const GameID &appid, std::function<void (QList<SAchievementSchema>)> aCallback = nullptr);
+    QJsonObject toJson() const;
+    virtual QString className() const {return "SAchievementSchema";}
+    static QList<SAchievementSchema> load(const GameID &gameid, std::function<void (QList<SAchievementSchema>)> callback = nullptr);
 
-     AchievementID  apiName()       const {return _apiName;}
-     int            defaultValue()  const {return _defaultValue;}
-     QString        displayName()   const {return _displayName;}
-     int            hidden()        const {return _hidden;}
-     QString        description()   const {return _description;}
-     QString        icon()          const {return _icon;}
-     QString        iconGray()      const {return _iconGray;}
+    QPixmap icon     (GameID gameId)const;
+    QPixmap iconGray (GameID gameId)const;
+    AchievementID  apiName()        const;
+    int            defaultValue()   const;
+    QString        displayName()    const;
+    int            hidden()         const;
+    QString        description()    const;
+    QString        icon()           const;
+    QString        iconGray()       const;
 
 private:
-    AchievementID   _apiName;
-    int             _defaultValue;
-    QString         _displayName;
-    int             _hidden;
-    QString         _description;
-    QString         _icon;
-    QString         _iconGray;
+    AchievementID   apiName_;
+    int             defaultValue_;
+    QString         displayName_;
+    int             hidden_;
+    QString         description_;
+    QString         icon_;
+    QString         iconGray_;
+
+    mutable QImage pixmapIcon_;
+    mutable QImage pixmapIconGray_;
 
 };
 class SAchievementPercentage : public Sapi {
     Q_OBJECT
 public:
-    SAchievementPercentage() {};
-    explicit SAchievementPercentage(const QJsonObject &achievement, QObject *parent = nullptr): Sapi(parent),
-        _apiName(achievement.value("name").toString()), _percent(achievement.value("percent").toDouble()) {
-            //qDebug()<<"SAchievementPercentage constructor"<<_apiName;
-        }
-    SAchievementPercentage(const SAchievementPercentage &achievement): Sapi(achievement.parent()),
-        _apiName(achievement._apiName), _percent(achievement._percent) {
-            //qDebug()<<"SAchievementPercentage copy"<<_apiName;
-        }
-    SAchievementPercentage &operator=(const SAchievementPercentage&) {
-            //qDebug()<<"SAchievementPercentage equality"<<_apiName;
-            return *this;
-        }
-    bool  operator<(const SAchievementPercentage &achievement) const {return _apiName < achievement._apiName;}
-    bool  operator>(const SAchievementPercentage &achievement) const {return _apiName > achievement._apiName;}
-    bool  operator==(const SAchievementPercentage &achievement) const;
-    bool  operator!=(const SAchievementPercentage &achievement) const;
+    SAchievementPercentage(QObject *parent = nullptr);
+    SAchievementPercentage(const QJsonObject &achievement, QObject *parent = nullptr);
+    SAchievementPercentage(const SAchievementPercentage&);
+    SAchievementPercentage &operator=(const SAchievementPercentage&);
+    bool  operator<(const SAchievementPercentage&) const;
+    bool  operator>(const SAchievementPercentage&) const;
+    bool  operator==(const SAchievementPercentage&) const;
+    bool  operator!=(const SAchievementPercentage&) const;
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SAchievementPercentage";}
-    static QList<SAchievementPercentage> load(const GameID &appid, std::function<void (QList<SAchievementPercentage>)> aCallback = nullptr);
+    static QList<SAchievementPercentage> load(const GameID &gameid, std::function<void (QList<SAchievementPercentage>)> callback = nullptr);
 
-    AchievementID apiName() const {return _apiName;}
-    double percent() const {return _percent;}
+    AchievementID apiName() const;
+    double percent() const;
 
 private:
-    AchievementID   _apiName;
-    double          _percent;
+    AchievementID   apiName_;
+    double          percent_;
 
 };
 class SAchievementPlayer : public Sapi {
     Q_OBJECT
 public:
-    SAchievementPlayer(): _apiName(""), _achieved(-1) {};
-    explicit SAchievementPlayer(const QJsonObject &achievement, QObject *parent = nullptr): Sapi(parent),
-        _apiName(achievement.value("apiname").toString()), _achieved(achievement.value("achieved").toInt()),
-        _unlockTime(QDateTime::fromSecsSinceEpoch(achievement.value("unlocktime").toInt(), Qt::LocalTime)) {
-            //qDebug()<<"SAchievementPlayer constructor"<<_apiName;
-        }
-    SAchievementPlayer(const SAchievementPlayer &achievement): Sapi(achievement.parent()),
-        _apiName(achievement._apiName), _achieved(achievement._achieved), _unlockTime(achievement._unlockTime) {
-            //qDebug()<<"SAchievementPlayer copy"<<_apiName;
-        }
-    SAchievementPlayer &operator=(const SAchievementPlayer &) {
-            //qDebug()<<"SAchievementPlayer equality"<<_apiName;
-            return *this;
-        }
-    bool  operator<(const SAchievementPlayer &achievement) const {return _apiName < achievement._apiName;}
-    bool  operator>(const SAchievementPlayer &achievement) const {return _apiName > achievement._apiName;}
-    bool  operator==(const SAchievementPlayer &achievement) const;
-    bool  operator!=(const SAchievementPlayer &achievement) const;
+    SAchievementPlayer(QObject *parent = nullptr);
+    SAchievementPlayer(const QJsonObject &achievement, QObject *parent = nullptr);
+    SAchievementPlayer(const SAchievementPlayer&);
+    SAchievementPlayer &operator=(const SAchievementPlayer&);
+    bool  operator<(const SAchievementPlayer&) const;
+    bool  operator>(const SAchievementPlayer&) const;
+    bool  operator==(const SAchievementPlayer&) const;
+    bool  operator!=(const SAchievementPlayer&) const;
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SAchievementPlayer";}
-    static QList<SAchievementPlayer> load(const GameID &appid, const ProfileID &id, std::function<void (QList<SAchievementPlayer>)> aCallback = nullptr);
-    static int countAchieved(const QList<SAchievementPlayer> &achievements);
+    static QList<SAchievementPlayer> load(const GameID &gameid, const ProfileID &profileid, std::function<void (QList<SAchievementPlayer>)> callback = nullptr);
+    static int countAchieved(const QList<SAchievementPlayer>&);
 
-    QString apiName() const {return _apiName;}
-    int achieved() const {return _achieved;}
-    QDateTime unlockTime() const {return _unlockTime;}
+    AchievementID apiName() const;
+    int achieved() const;
+    QDateTime unlockTime() const;
 
 private:
-    QString   _apiName;
-    int       _achieved;
-    QDateTime _unlockTime;
+    AchievementID apiName_ = "";
+    int       achieved_ = -1;
+    QDateTime unlockTime_;
 
 };
 
@@ -129,57 +102,39 @@ using SAchievementsPlayer = QList<SAchievementPlayer>;
 class SAchievement : public Sapi {
     Q_OBJECT
 public:
-    explicit SAchievement(const SAchievementSchema &global, const SAchievementPlayer &player, const SAchievementPercentage &percent, QObject *parent = nullptr):
-        Sapi(parent), _schema(global), _percentage(percent), _player(player) {
-        //qDebug()<<"SAchievement constructor"<<_apiName;
-    }
-    SAchievement(const SAchievement &achievement): Sapi(achievement.parent()), _schema(achievement._schema),
-        _percentage(achievement._percentage), _player(achievement._player) {
-        //qDebug()<<"SAchievement copy"<<_apiName;
-    }
-    SAchievement(const QJsonObject &object = QJsonObject()): _schema(object.value("schema").toObject()),
-        _percentage(object.value("percent").toObject()),
-        _player(object.value("player").toObject()) {
-        //qDebug() << "SAchievement constructor 1" << aObject;
-    }
-    SAchievement(const QString &text): SAchievement(QJsonDocument::fromJson(text.toUtf8()).object()) {
-        //qDebug() << "SAchievement constructor 2" << aText;
-    }
-    SAchievement &operator=(const SAchievement &achievement);
-    bool          operator<(const SAchievement &achievement) const;
-    bool          operator>(const SAchievement &achievement) const;
-    bool          operator==(const SAchievement &achievement) const;
-    bool          operator!=(const SAchievement &achievement) const;
+    SAchievement(const SAchievementSchema &schema, const SAchievementPlayer &player, const SAchievementPercentage &percent, QObject *parent = nullptr);
+    SAchievement(const SAchievement&);
+    SAchievement(const QJsonObject &object = QJsonObject(), QObject *parent = nullptr);
+    SAchievement(const QString &text, QObject *parent = nullptr);
+    SAchievement &operator=(const SAchievement&);
+    bool          operator<(const SAchievement&) const;
+    bool          operator>(const SAchievement&) const;
+    bool          operator==(const SAchievement&) const;
+    bool          operator!=(const SAchievement&) const;
 
-    bool isValid() const {return (_schema.apiName() == _percentage.apiName()) && (_percentage.apiName() == _player.apiName());}
+    bool isValid() const;
     QJsonObject toJson() const;
     virtual QString className() const {return "SAchievement";}
 
-    QPixmap icon     (int gameId);
-    QPixmap iconGray (int gameId);
-
-    QString   apiName()         const {return _schema.apiName();}
-    int       defaultValue()    const {return _schema.defaultValue();}
-    QString   displayName()     const {return _schema.displayName();}
-    int       hidden()          const {return _schema.hidden();}
-    QString   description()     const {return _schema.description();}
-    int       achieved()        const {return _player.achieved();}
-    QDateTime unlockTime()      const {return _player.unlockTime();}
-    double    percent()         const {return _percentage.percent();}
-    QString   iconPath()        const {return _schema.icon();}
-    QString   iconGrayPath()    const {return _schema.iconGray();}
+    QPixmap         icon     (GameID gameId)const;
+    QPixmap         iconGray (GameID gameId)const;
+    AchievementID   apiName()               const;
+    int             defaultValue()          const;
+    QString         displayName()           const;
+    int             hidden()                const;
+    QString         description()           const;
+    int             achieved()              const;
+    QDateTime       unlockTime()            const;
+    double          percent()               const;
+    QString         iconPath()              const;
+    QString         iconGrayPath()          const;
 
 private:
-    SAchievementSchema _schema;
-    SAchievementPercentage _percentage;
-    SAchievementPlayer _player;
-
-    QImage _pixmapIcon;
-    QImage _pixmapIconGray;
+    SAchievementSchema schema_;
+    SAchievementPercentage percentage_;
+    SAchievementPlayer player_;
 };
 
 using SAchievements = QList<SAchievement>;
-
-//QList<SAchievement> UniteAchievement(const QList<SAchievementSchema> &global, const QList<SAchievementPercentage> &percent, const QList<SAchievementPlayer> &player);
 
 #endif // SACHIEVEMENTS_H

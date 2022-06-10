@@ -1,39 +1,11 @@
 #ifndef FORMACHIEVEMENTS_H
 #define FORMACHIEVEMENTS_H
 
-#include <QWidget>
-#include <QStandardItem>
-#include <QStandardItemModel>
-#include <QDir>
-#include <QComboBox>
-#include <QMessageBox>
-#include <QFormLayout>
-#include <QButtonGroup>
-#include <QPropertyAnimation>
-#include <QDesktopServices>
-#include <QMenu>
-#include <QAction>
-#include <QTreeWidgetItem>
-#include "framelesswindow.h"
-#include "classes/network/requestimage.h"
-#include "classes/common/settings.h"
-#include "classes/steamApi/structures/sgames.h"
-#include "classes/steamApi/structures/sachievements.h"
-#include "classes/common/myfilter.h"
-#include "classes/common/favorites.h"
-#include "classes/common/comments.h"
-#include "classes/achievements/categoriesgame.h"
-#include "classes/threads/thread/threadachievements.h"
-#include "subWidgets/withData/qbuttonwithdata.h"
-#include "subWidgets/withData/qradiobuttonwithdata.h"
-#include "subWidgets/withData/qcomboboxwithdata.h"
-#include "subWidgets/withData/qcheckboxwithdata.h"
-#include "subWidgets/progressBars/progressbargood.h"
-#include "forms/formcomments.h"
-#include "forms/achievements/formcategoriesedit.h"
-#include "forms/widgets/formreachedfilter.h"
+#include "form.h"
+#include "classes/files/favorites.h"
+#include "classes/files/achievementscategory.h"
 #include "subWidgets/models/achievementsmodel.h"
-#include "subWidgets/models/filters.h"
+#include "forms/widgets/formreachedfilter.h"
 
 namespace FormAchievementsData {
 //    enum tableAchievements {
@@ -125,7 +97,7 @@ private slots:
     void updateFilterWithMyProfile(const ReachedType &aType);
     void updateFilterTextAchievement(const QString &aNewText);
     void hideFriendsColumns();
-    void updateFilterCategory(Category *aCategory, const bool &aIsChecked);
+    void updateFilterCategory(Category2 *aCategory, const bool &aIsChecked);
     void updateFilterFavorite(const QList<FavoriteAchievement> &aFavoritesAchievements);
 //    int rowFromId(const QString &aId);
     void loading(const bool &aIsLoading);
@@ -160,7 +132,8 @@ private:
 //    int _currentAchievementIndex;
 
     AchievementsModel *_achievementsModel = nullptr;
-    ProxyModelAchievements _filterAchievements;
+//    ProxyModelAchievements _filterAchievements;
+    FilterModelAchievements _filterAchievements;
 //    SortFilterProxyModelMiltiRow _filterName;
 //    QSortFilterProxyModel _filterReached;
 //    QSortFilterProxyModel _filterFavorite;

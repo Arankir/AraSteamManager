@@ -14,6 +14,9 @@
    <string>SteamAchievementsStatistic</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -27,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="GroupBoxFilter">
+    <widget class="QGroupBox" name="groupBoxFilter">
      <property name="title">
       <string>     Фильтр</string>
      </property>
@@ -35,14 +38,14 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLineEdit" name="LineEditName">
+         <widget class="MyLineEdit" name="lineEditName">
           <property name="placeholderText">
-           <string>Найти друга</string>
+           <string>LuckyGuy228</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="ButtonFind">
+         <widget class="QPushButton" name="buttonFind">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -59,21 +62,21 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QComboBox" name="ComboBoxStatus">
+         <widget class="QComboBox" name="comboBoxStatus">
           <property name="currentText">
            <string notr="true"/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="CheckBoxOpenProfile">
+         <widget class="QCheckBox" name="checkBoxOpenProfile">
           <property name="text">
            <string>Публичный профиль</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="CheckBoxFavorites">
+         <widget class="QCheckBox" name="checkBoxFavorites">
           <property name="text">
            <string>Избранные</string>
           </property>
@@ -98,10 +101,17 @@
     </widget>
    </item>
    <item>
-    <widget class="QTableView" name="TableFriends"/>
+    <widget class="QTableView" name="tableFriends"/>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>subWidgets/lineEdit/mylineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -6,7 +6,11 @@ QWidget:disabled, QHeaderView::section:disabled {
     color: %1;
 }
 
-QComboBox::item:checked, LabelValue {
+QLineEdit[text=\"\"]{
+    color:gray;
+}
+
+QComboBox::item:checked, LabelValue, LabelValue:hover {
     color: %2;
 }
 
@@ -167,7 +171,7 @@ Form, .QWidget, QStackedWidget, QSlider, QHeaderView, Line, .QFrame {
     border-color: transparent;
 }
 
-FramelessWindow, QMessageBox, FramelessWindow:hover, QMessageBox:hover {
+FramelessWindow, QMessageBox, FramelessWindow:hover, QMessageBox:hover, QDialog {
     background-color: %20;
     border-color: %2;
 }

@@ -1,17 +1,22 @@
 #include "requestdata.h"
-#include <QEventLoop>
-#include <QDir>
 
-RequestData::RequestData(const QString &aUrl, const bool &aParallel, QObject *aParent): QObject(aParent), _manager(new QNetworkAccessManager), _reply(""), _url(aUrl) {
-    connect(_manager, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
+#include <QEventLoop>
+#include <QNetworkReply>
+
+RequestData::RequestData(const QString &aUrl, const bool &aParallel, QObject *aParent): QObject(aParent), manager_(new QNetworkAccessManager), reply_(""), url_(aUrl) {
+    connect(manager_, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
     if (!aUrl.isEmpty()) {
         get(aUrl,aParallel);
     }
 }
 
+RequestData::RequestData(QObject *aParent): RequestData("", true, aParent) {
+
+}
+
 RequestData::~RequestData() {
-    disconnect(_manager, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
-    delete _manager;
+    disconnect(manager_, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
+    delete manager_;
 }
 
 void RequestData::get(const QString &aUrl, const bool &aParallel) {
@@ -19,18 +24,22 @@ void RequestData::get(const QString &aUrl, const bool &aParallel) {
 }
 
 void RequestData::get(const QUrl &aUrl, const bool &aParallel) {
-    _manager->get(QNetworkRequest(aUrl));
+    manager_->get(QNetworkRequest(aUrl));
     if (!aParallel) {
         QEventLoop loop;
-        connect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        connect(manager_, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
         loop.exec();
-        disconnect(_manager, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
+        disconnect(manager_, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
     }
 }
 
 void RequestData::onResultGet(QNetworkReply *aReply) {
-    if(!aReply->error()) {
-        _reply = aReply->readAll();
+    error_ = aReply->errorString();
+//    auto error = aReply->error();
+    if(!error_.isEmpty()) {
+        reply_ = aReply->readAll();
+    } else {
+        qWarning() << aReply->url() << error_;
     }
     aReply->deleteLater();
     emit s_finished(this);

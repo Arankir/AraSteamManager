@@ -1,59 +1,92 @@
 #include "sfriends.h"
+#include <QJsonDocument>
+#include <QJsonArray>
 
 #define SFriendStart {
 SFriend &SFriend::operator=(const SFriend &aFriend) {
-    _steamID = aFriend._steamID;
-    _relationship = aFriend._relationship;
-    _friendSince = aFriend._friendSince;
+    steamId_ = aFriend.steamId_;
+    relationship_ = aFriend.relationship_;
+    friend_since_ = aFriend.friend_since_;
     return *this;
 }
 
 bool SFriend::operator<(const SFriend &aFriend) const {
-    return _steamID.toLower() < aFriend._steamID.toLower();
+    return steamId_.toLower() < aFriend.steamId_.toLower();
 }
 
 bool SFriend::operator>(const SFriend &aFriend) const {
-    return _steamID.toLower() > aFriend._steamID.toLower();
+    return steamId_.toLower() > aFriend.steamId_.toLower();
 }
 
 bool SFriend::operator==(const SFriend &aFriend) const {
-    return (_steamID == aFriend._steamID &&
-            _relationship == aFriend._relationship &&
-            _friendSince == aFriend._friendSince);
+    return (steamId_ == aFriend.steamId_ &&
+            relationship_ == aFriend.relationship_ &&
+            friend_since_ == aFriend.friend_since_);
 }
 
 bool SFriend::operator!=(const SFriend &aFriend) const {
-    return (_steamID != aFriend._steamID ||
-            _relationship != aFriend._relationship ||
-            _friendSince != aFriend._friendSince);
+    return (steamId_ != aFriend.steamId_ ||
+            relationship_ != aFriend.relationship_ ||
+            friend_since_ != aFriend.friend_since_);
 }
 
-QStringList SFriend::getFriendsSteamId(const ProfileID &aId) {
+ProfileID SFriend::steamId() const {
+    return steamId_;
+}
+
+QString SFriend::relationship() const {
+    return relationship_;
+}
+
+QDateTime SFriend::friendSince() const {
+    return friend_since_;
+}
+
+QStringList SFriend::getFriendsSteamId(const ProfileID &aProfileId) {
     QStringList list;
-    for(const SFriend &sFriend: SFriend::load(aId)) {
+    for(const SFriend &sFriend: SFriend::load(aProfileId)) {
         list.append(sFriend.steamId());
     }
     return list;
 }
 
-QList<SFriend> onLoadFriend(const QByteArray &byteArray) {
+QList<SFriend> onLoadFriend(const QByteArray &aByteArray) {
     QList<SFriend> list;
-    for(auto &&ban: QJsonDocument::fromJson(byteArray).object().value("friendslist").toObject().value("friends").toArray()) {
+    for(auto &&ban: QJsonDocument::fromJson(aByteArray).object().value("friendslist").toObject().value("friends").toArray()) {
         list.append(SFriend(ban.toObject()));
     }
     return list;
 }
 
+SFriend::SFriend(const QJsonObject &aFriend, QObject *aParent): Sapi(aParent), steamId_(aFriend.value("steamid").toString()),
+    relationship_(aFriend.value("relationship").toString()),
+    friend_since_(QDateTime::fromSecsSinceEpoch(aFriend.value("friend_since").toInt(), Qt::LocalTime)) {
+
+}
+
+SFriend::SFriend(const SFriend &aFriend): Sapi(aFriend.parent()), steamId_(aFriend.steamId_),
+    relationship_(aFriend.relationship_), friend_since_(aFriend.friend_since_) {
+
+}
+
 QJsonObject SFriend::toJson() const {
     QJsonObject obj;
     obj["type"] = className();
-    obj["steamid"] = _steamID;
-    obj["relationship"] = _relationship;
-    obj["friend_since"] = _friendSince.toSecsSinceEpoch();
+    obj["steamid"] = steamId_;
+    obj["relationship"] = relationship_;
+    obj["friend_since"] = friend_since_.toSecsSinceEpoch();
     return obj;
 }
 
-SFriends SFriend::load(const ProfileID &aId, std::function<void (SFriends)> aCallback) {
-    return Sapi::load<SFriend>(friendsUrl(aId), onLoadFriend, aCallback);
+SFriends SFriend::load(const ProfileID &aProfileId, std::function<void (SFriends)> aCallback) {
+    return Sapi::load<SFriend>(friendsUrl(aProfileId), onLoadFriend, aCallback);
 }
 #define SFriendEnd }
+
+SFriendProfile::SFriendProfile(const SFriend &aFriend, const SProfile &aProfile): steamFriend(aFriend), steamProfile(aProfile) {
+
+}
+
+SFriendProfile::SFriendProfile(const SProfile &aProfile, const SFriend &aFriend): steamFriend(aFriend), steamProfile(aProfile) {
+
+}

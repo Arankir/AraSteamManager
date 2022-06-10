@@ -16,7 +16,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QTabWidget>
@@ -27,6 +26,7 @@
 #include "forms/achievements/formcategoriestree.h"
 #include "forms/achievements/formfriendscompare.h"
 #include "forms/widgets/formreachedfilter.h"
+#include "subWidgets/lineEdit/mylineedit.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -46,7 +46,7 @@ public:
     QCheckBox *CheckBoxFavorites;
     QPushButton *ButtonGuides;
     QHBoxLayout *horizontalLayout_7;
-    QLineEdit *LineEditNameAchievements;
+    MyLineEdit *LineEditNameAchievements;
     QPushButton *ButtonFindAchievement;
     FormCategoriesTree *TreeWidgetCategories;
     QHBoxLayout *horizontalLayout_2;
@@ -142,7 +142,7 @@ public:
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        LineEditNameAchievements = new QLineEdit(FrameFilter);
+        LineEditNameAchievements = new MyLineEdit(FrameFilter);
         LineEditNameAchievements->setObjectName(QString::fromUtf8("LineEditNameAchievements"));
         QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy3.setHorizontalStretch(0);

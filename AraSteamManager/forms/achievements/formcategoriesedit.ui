@@ -127,7 +127,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QLineEdit" name="LineEditTitleCategory">
+          <widget class="MyLineEdit" name="LineEditTitleCategory">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -173,6 +173,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>subWidgets/lineEdit/mylineedit.h</header>
+  </customwidget>
   <customwidget>
    <class>QListWidgetAchievements</class>
    <extends>QListWidget</extends>

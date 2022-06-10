@@ -1,15 +1,18 @@
 #include "formsettings.h"
 #include "ui_formsettings.h"
+
+#include "version.h"
+#include "classes/steamApi/sapi.h"
+#include "classes/common/theme.h"
+
 #include <QColorDialog>
 
 FormSettings::FormSettings(QWidget *aParent): Form(aParent), ui(new Ui::FormSettings) {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_TranslucentBackground);
     initComponents();
 }
 
 FormSettings::~FormSettings() {
-    qInfo() << "Форма настроек удалилась";
     delete ui;
 }
 
@@ -29,14 +32,19 @@ void FormSettings::initComponents() {
     ui->CheckBoxVisibleHiddenGames->setVisible(false);
     ui->CheckBoxSaveImage->setVisible(false);
 
+    ui->labelVersion->setText(VER_PRODUCTVERSION_STR);
+
     initExport();
+    ui->ComboBoxLanguage->addItems(QStringList {tr("English"), tr("Русский")});
     switch (Settings::language()) {
     case 1: {
-        ui->RadioButtonLanguageEnglish->setChecked(true);
+        ui->ComboBoxLanguage->setCurrentIndex(0);
+//        ui->RadioButtonLanguageEnglish->setChecked(true);
         break;
     }
     case 5: {
-        ui->RadioButtonLanguageRussian->setChecked(true);
+        ui->ComboBoxLanguage->setCurrentIndex(1);
+//        ui->RadioButtonLanguageRussian->setChecked(true);
         break;
     }
     default: {
@@ -56,70 +64,66 @@ void FormSettings::initComponents() {
         break;
     }
     }
+    ui->ComboBoxTheme->addItems(QStringList {tr("Тёмная"), tr("Светлая"), tr("Синяя"), tr("Оранжевая"), tr("Малиновая"), tr("Лаймовая"), tr("Фиолетовая"), tr("Зеленая"), tr("Пользовательская")});
+    ui->ComboBoxTheme->setItemData(0, blackTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(1, whiteTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(2, blueTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(3, orangeTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(4, crimsonTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(5, limeTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(6, purpleTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(7, greenTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(8, QColor(255, 255, 255, 20), Qt::DecorationRole);
     switch (Settings::theme()) {
+    case 0: {
+        ui->ComboBoxTheme->setCurrentIndex(8);
+//        ui->radioButtonCustom->setChecked(true);
+        break;
+    }
     case 1: {
-        ui->RadioButtonBlueTheme->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(2);
+//        ui->RadioButtonBlueTheme->setChecked(true);
         break;
     }
     case 2: {
-        ui->RadioButtonLightTheme->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(1);
+//        ui->RadioButtonLightTheme->setChecked(true);
         break;
     }
     case 3: {
-        ui->RadioButtonDarkTheme->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(0);
+//        ui->RadioButtonDarkTheme->setChecked(true);
         break;
     }
     case 4: {
-        ui->radioButtonBgr->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(3);
+//        ui->radioButtonBgr->setChecked(true);
         break;
     }
     case 5: {
-        ui->radioButtonBrg->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(4);
+//        ui->radioButtonBrg->setChecked(true);
         break;
     }
     case 6: {
-        ui->radioButtonGbr->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(5);
+//        ui->radioButtonGbr->setChecked(true);
         break;
     }
     case 7: {
-        ui->radioButtonGrb->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(6);
+//        ui->radioButtonGrb->setChecked(true);
         break;
     }
     case 8: {
-        ui->radioButtonRbg->setChecked(true);
+        ui->ComboBoxTheme->setCurrentIndex(7);
+//        ui->radioButtonRbg->setChecked(true);
         break;
     }
     default: {
         break;
     }
     }
-//    switch (_setting.getMaximumTableRows()) {
-//    case 10: {
-//        ui->ComboBoxMaxRows->setCurrentIndex(0);
-//        break;
-//    }
-//    case 20: {
-//        ui->ComboBoxMaxRows->setCurrentIndex(1);
-//        break;
-//    }
-//    case 50: {
-//        ui->ComboBoxMaxRows->setCurrentIndex(2);
-//        break;
-//    }
-//    case 100: {
-//        ui->ComboBoxMaxRows->setCurrentIndex(3);
-//        break;
-//    }
-//    case 200: {
-//        ui->ComboBoxMaxRows->setCurrentIndex(4);
-//        break;
-//    }
-//    case 500: {
-//        ui->ComboBoxMaxRows->setCurrentIndex(5);
-//        break;
-//    }
-//    }
-
 //    ui->radioButtonCustom->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
 //                                          "stop: 0 " + QColor(Qt::red).name() + ", "
 //                                          "stop: 0.14 " + QColor(222, 76, 0).name() + ", "
@@ -201,46 +205,9 @@ void FormSettings::initComponents() {
     ui->FrameProfilesHideGames->setLayout(layout);
 
 #define Connects {
-    connect(ui->RadioButtonLanguageEnglish, &QRadioButton::clicked,   this, &FormSettings::radioButtonLanguageEnglish_Clicked);
-    connect(ui->RadioButtonLanguageRussian, &QRadioButton::clicked,   this, &FormSettings::radioButtonLanguageRussian_Clicked);
     connect(ui->CheckBoxVisibleHiddenGames, &QCheckBox::stateChanged, this, &FormSettings::checkBoxVisibleHiddenGames_StateChanged);
-    connect(ui->RadioButtonDarkTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonDarkTheme_Clicked);
-    connect(ui->RadioButtonLightTheme,      &QRadioButton::clicked,   this, &FormSettings::radioButtonLightTheme_Clicked);
-    connect(ui->RadioButtonBlueTheme,       &QRadioButton::clicked,   this, &FormSettings::radioButtonBlueTheme_Clicked);
-    connect(ui->radioButtonBgr,       &QRadioButton::clicked,   this, [=](){
-        Settings::setTheme(4);
-        emit s_settingsUpdated(changedSettings::theme);
-    });
-    connect(ui->radioButtonBrg,       &QRadioButton::clicked,   this, [=](){
-        Settings::setTheme(5);
-        emit s_settingsUpdated(changedSettings::theme);
-    });
-    connect(ui->radioButtonGbr,       &QRadioButton::clicked,   this, [=](){
-        Settings::setTheme(6);
-        emit s_settingsUpdated(changedSettings::theme);
-    });
-    connect(ui->radioButtonGrb,       &QRadioButton::clicked,   this, [=](){
-        Settings::setTheme(7);
-        emit s_settingsUpdated(changedSettings::theme);
-    });
-    connect(ui->radioButtonRbg,       &QRadioButton::clicked,   this, [=](){
-        Settings::setTheme(8);
-        emit s_settingsUpdated(changedSettings::theme);
-    });
-    connect(ui->radioButtonCustom,    &QRadioButton::clicked,   this, [=](){
-        QColor themeColor = QColorDialog::getColor(Qt::white, this, tr("Выберите цвет"));
-
-        createDir(Paths::documents() + "theme");
-        createIcons(Paths::documents() + "theme", themeColor);
-        QFile file(Paths::documents() + "theme\\colors.txt");
-        file.open(QIODevice::WriteOnly);
-        QTextStream stream(&file);
-        stream << getColors(themeColor).join("\r\n");
-        file.close();
-
-        Settings::setTheme(0);
-        emit s_settingsUpdated(changedSettings::theme);
-    });
+    connect(ui->ComboBoxTheme,              SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxThemeIndexChanged(int)));
+    connect(ui->ComboBoxLanguage,           SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxLanguageIndexChanged(int)));
 
     connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
     connect(ui->comboBoxProfileInfo,        SIGNAL(currentIndexChanged(int)), this, SLOT(slideProfileSize_ValueChanged(int)));
@@ -252,6 +219,85 @@ void FormSettings::initComponents() {
     retranslate();
 }
 
+void FormSettings::comboBoxThemeIndexChanged(int aIndex) {
+    switch (aIndex) {
+    case 0: {
+        Settings::setTheme(3);
+        break;
+    }
+    case 1: {
+        Settings::setTheme(2);
+        break;
+    }
+    case 2: {
+        Settings::setTheme(1);
+        break;
+    }
+    case 3: {
+        Settings::setTheme(4);
+        break;
+    }
+    case 4: {
+        Settings::setTheme(5);
+        break;
+    }
+    case 5: {
+        Settings::setTheme(6);
+        break;
+    }
+    case 6: {
+        Settings::setTheme(7);
+        break;
+    }
+    case 7: {
+        Settings::setTheme(8);
+        break;
+    }
+    case 8: {
+        QColor themeColor = QColorDialog::getColor(Qt::white, this, tr("Выберите цвет"));
+        customTheme(themeColor).save(Paths::documents() + "theme\\custom.json");
+        Settings::setTheme(0);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+    emit s_settingsUpdated(changedSettings::theme);
+}
+
+void FormSettings::comboBoxLanguageIndexChanged(int aIndex) {
+    switch (aIndex) {
+    case 0: {
+        Settings::setLanguage(1);
+        emit s_settingsUpdated(changedSettings::language);
+        QTranslator *translator = new QTranslator;
+        if (translator->load(":/AraSteamManager_en.qm")) {
+            qApp->installTranslator(translator);
+            ui->retranslateUi(this);
+        } else {
+            qWarning() << "error change language";
+        }
+        break;
+    }
+    case 1: {
+        Settings::setLanguage(5);
+        emit s_settingsUpdated(changedSettings::language);
+        QTranslator *translator = new QTranslator;
+        if (translator->load(":/AraSteamManager_ru.qm")) {
+            qApp->installTranslator(translator);
+            ui->retranslateUi(this);
+        } else {
+            qWarning() << "error change language";
+        }
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+}
+
 void FormSettings::initExport() {
     ui->TreeWidgetExportCategories->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
 
@@ -261,13 +307,13 @@ void FormSettings::initExport() {
         if (fileCategory.exists()) {
             if(fileCategory.open(QFile::ReadOnly)) {
                 auto s = fileCategory.readAll();
-                Category game(QJsonDocument().fromJson(s).object());
+                Category2 game(QJsonDocument().fromJson(s).object());
                 game.update();
-                QTreeWidgetItem *item = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << game.game());
+                QTreeWidgetItem *item = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << game.gameName());
                 item->setWhatsThis(0, QString::number(game.gameID()));
                 item->setWhatsThis(1, QString::number(-2));
                 ui->TreeWidgetExportCategories->addTopLevelItem(item);
-                for (auto &category: game) {
+                for (auto &category: game.categories()) {
                     recursAddCategoryToTree(category, item, game.gameID());
                 }
                 fileCategory.close();
@@ -276,7 +322,7 @@ void FormSettings::initExport() {
     }
 }
 
-int FormSettings::recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot, const int &aGameId) {
+int FormSettings::recursAddCategoryToTree(Category2 *aCategory, QTreeWidgetItem *aRoot, const int &aGameId) {
     QTreeWidgetItem *subItem;
     if (aRoot == nullptr) {
         subItem = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << aCategory->title());
@@ -284,8 +330,8 @@ int FormSettings::recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *
         subItem = new QTreeWidgetItem(aRoot, QStringList() << aCategory->title());
     }
     subItem->setWhatsThis(0,QString::number(aGameId));
-    subItem->setWhatsThis(1,QString::number(aCategory->order()));
-    for(auto subCategory: *aCategory) {
+//    subItem->setWhatsThis(1,QString::number(aCategory->order()));
+    for(auto subCategory: aCategory->categories()) {
         recursAddCategoryToTree(subCategory, subItem, aGameId);
     }
     return 0;
@@ -308,66 +354,74 @@ void FormSettings::buttonExportCategories_Clicked() {
 }
 
 ExportFileData FormSettings::createExportCategoriesJson() {
-    QJsonArray jArray;
-    for (auto &item: ui->TreeWidgetExportCategories->selectedItems()) {
-        Category categories(item->whatsThis(0).toInt());
-        int categoryOrder = item->whatsThis(1).toInt();
-        if (categoryOrder == -2) {
-            for (auto category: categories) {
-                ExportCategory eCategory {categories.gameID(), categories.game(), *category};
-                jArray.append(eCategory.toJson());
-            }
-        } else {
-            Category *category = categories.findCategory(categoryOrder);
-            if (category != nullptr) {
-                ExportCategory eCategory {categories.gameID(), categories.game(), *category};
-                jArray.append(eCategory.toJson());
-            }
-        }
-    }
-    ExportFileData efd;
-    efd.data = jArray;
-    efd.type = ExportType::categories;
-    efd.version = 1.0;
-    efd.date = QDateTime::currentDateTime();
-    return efd;
+//    QJsonArray jArray;
+//    for (auto &item: ui->TreeWidgetExportCategories->selectedItems()) {
+//        Category2 categories(item->whatsThis(0).toInt());
+//        int categoryOrder = item->whatsThis(1).toInt();
+//        if (categoryOrder == -2) {
+//            for (auto category: categories) {
+//                ExportCategory eCategory(categories.gameID(), categories.game(), *category);
+//                jArray.append(eCategory.toJson());
+//            }
+//        } else {
+//            Category2 *category = categories.findCategory(categoryOrder);
+//            if (category != nullptr) {
+//                ExportCategory eCategory(categories.gameID(), categories.game(), *category);
+//                jArray.append(eCategory.toJson());
+//            }
+//        }
+//    }
+//    ExportFileData efd;
+//    efd.data = jArray;
+//    efd.type = ExportType::categories;
+//    efd.version = 1.0;
+//    efd.date = QDateTime::currentDateTime();
+//    return efd;
 }
 
-void FormSettings::buttonImportCategories_Clicked() {
+ExportFileData *FormSettings::getFileFromPath(QLineEdit *aLineEdit) {
     QString path;
-    if (ui->LineEditImportCategories->text() == "") {
+    if (aLineEdit->text() == "") {
         path = QFileDialog::getOpenFileName(this, tr("Выбор файла для загрузки"), "", "*");
         if (path == "") {
-            return;
+            return nullptr;
         }
     } else {
-        path = ui->LineEditImportCategories->text();
+        path = aLineEdit->text();
     }
     QFile fFile(path);
     if (!fFile.open(QFile::ReadOnly)) {
         QMessageBox::warning(this, tr("Ошибка!"), tr("Невозможно найти указанный файл, или файл открыт в другом приложении!"));
+        return nullptr;
+    }
+    ExportFileData *efd = new ExportFileData(ExportFileData::fromJson(QJsonDocument::fromJson(fFile.readAll()).object()));
+    fFile.close();
+    return efd;
+}
+
+void FormSettings::buttonImportCategories_Clicked() {
+    ExportFileData *fileData = getFileFromPath(ui->LineEditImportCategories);
+    if (fileData == nullptr) {
         return;
     }
-    ExportFileData efd = ExportFileData::fromJson(QJsonDocument::fromJson(fFile.readAll()).object());
-    fFile.close();
 
-    if (efd.type != ExportType::categories) {
+    if (fileData->type != ExportType::categories) {
         QMessageBox::warning(this, tr("Ошибка!"), tr("В выбранном файле нет категорий"));
         return;
     }
 
-    QVector<ExportCategory> exportCategories;
-    for(const auto &category: efd.data.toArray()) {
-        exportCategories.append(ExportCategory::fromJson(category.toObject()));
+    QVector<ExportCategory> eCategories;
+    for(const auto &category: fileData->data.toArray()) {
+        eCategories.append(ExportCategory(category.toObject()));
     }
 
-    if (exportCategories.size() == 0) {
+    if (eCategories.size() == 0) {
         QMessageBox::warning(this, tr("Ошибка!"), tr("В выбранном файле не обнаружено категорий"));
         return;
     }
 
     QStringList slCategories;
-    for (auto &category: exportCategories) {
+    for (auto &category: eCategories) {
         slCategories.append(tr("Игра: %1, категория: %2").arg(category.gameName, category.category.title()));
     }
     QString questionText = tr("Обнаружены следующие категории: \n") + slCategories.join("\n") + ".";
@@ -382,10 +436,11 @@ void FormSettings::buttonImportCategories_Clicked() {
         return;
     }
     //Обновить категории
-    foreach(const auto &eCategory, exportCategories) {
-        int gameId = eCategory.gameId;
-        Category categories(gameId);
-        categories.addCategory(new Category(eCategory.category));
+    for(const auto &eCategory: eCategories) {
+        GameID gameId = eCategory.gameId;
+        QString gameName = eCategory.gameName;
+        Category2 categories(gameId, gameName);
+        categories.addCategory(new Category2(eCategory.category));
         categories.save();
     }
     QMessageBox::information(this, tr("Внимание!"), tr("Категории успешно добавлены!"));
@@ -398,218 +453,24 @@ void FormSettings::retranslate() {
         QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
         allHidden->setText(tr("Все профили"));
     }
-    ui->labelIcons8->setText("<html><head/><body><p>"
-                             "Иконки для приложения были предоставлены сайтом "
-                            "<a href=https://icons8.ru/icons>"
-                            "<span style=\" text-decoration: underline; color:#2d7fc8;\"> "
-                            "https://icons8.ru/icons"
-                            "</span></a></p></body></html>");
-}
-
-QColor findAnalogColor1(const QColor &color1, const QColor &color2, const QColor &color3) {
-    double divH = 1.0 * color3.hslHue() * color2.hslHue() / (color1.hslHue() == 0 ? 1 : color1.hslHue());
-    double divS = 1.0 * color3.hslSaturation() * color2.hslSaturation() / (color1.hslSaturation() == 0 ? 1 : color1.hslSaturation());
-    double divL = 1.0 * color3.lightness() * color2.lightness() / (color1.lightness() == 0 ? 1 : color1.lightness());
-
-    if (divH == 0) {
-        divH = color3.hue();
-    }
-
-    return QColor::fromHsl(divH, divS, divL);
-}
-
-QColor findAnalogColor2(const QColor &color1, const QColor &color2, const QColor &color3) {
-    return QColor::fromHsl(color3.hslHue() * color2.hslHue() / (color1.hslHue() == 0 ? 1 : color1.hslHue()), color2.hslSaturation(), color2.lightness(), color2.alpha());
-}
-
-QImage convertImage(const QImage &aImage, const QColor &aColor) {
-    QImage im(aImage.size(), aImage.format());
-    for (int x = 0; x < aImage.width(); ++x) {
-        for (int y = 0; y < aImage.height(); ++y) {
-            QColor oldColor = aImage.pixelColor(x, y);
-            QColor newColor = QColor::fromHsl(aColor.hslHue(),
-                                               255,
-                                               100,
-                                               oldColor.alpha());
-            im.setPixelColor(x, y, newColor);
-        }
-    }
-    return im;
-}
-
-QStringList getImagesFromDir(const QDir &directory) {
-    QStringList list = directory.entryList(QStringList("*.png"));
-    QStringList result;
-    for (auto file: list) {
-        result << directory.absolutePath() + "/" + file;
-    }
-    for (auto dir: directory.entryList(QDir::Dirs)) {
-        if (dir != "." && dir != "..") {
-            result << getImagesFromDir(directory.absolutePath() + "/" + dir);
-        }
-    }
-    return result;
-}
-
-QStringList FormSettings::getColors(const QColor &aNewColor) {
-    QList<QColor> listOld;
-    listOld.append(QColor(221, 221, 221));
-    listOld.append(QColor(66, 169, 198));
-    listOld.append(QColor(20, 140, 210));
-    listOld.append(QColor(180, 180, 180));
-    listOld.append(QColor(20, 80, 110));
-    listOld.append(QColor(135, 182, 255));
-    listOld.append(QColor(19, 36, 62));
-    listOld.append(QColor(50, 60, 70));
-    listOld.append(QColor(38, 146, 255));
-    listOld.append(QColor(21, 50, 87));
-    listOld.append(QColor(40, 52, 60));
-    listOld.append(QColor(80, 95, 107));
-    listOld.append(QColor(70, 100, 140));
-    listOld.append(QColor(18, 69, 124));
-    listOld.append(QColor(25, 37, 61));
-
-    QList<QColor> listNew;
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[0], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[1], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[2], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[3], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[4], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[5], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[6], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[7], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[8], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[9], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[10], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[11], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[12], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[13], aNewColor));
-    listNew.append(findAnalogColor2(QColor(20, 140, 210), listOld[14], aNewColor));
-
-    QStringList result;
-    result  << listNew[0].name()
-            << listNew[1].name()
-            << listNew[2].name()
-            << listNew[3].name()
-            << listNew[4].name()
-            << listNew[5].name()
-            << listNew[6].name()
-            << listNew[7].name()
-            << "qlineargradient(x1: 0, y1: -2, x2: 0, y2: 1, stop: 0 "
-                                 + listNew[8].name() +
-                                ", stop: 1.0 "
-                                 + listNew[9].name() +
-                                ")"
-            << "qlineargradient(x1: -1, y1: -1, x2: 2, y2: 2, stop: 0 "
-                                 + listNew[10].name() +
-                                ", stop: 1.0 "
-                                 + listNew[11].name() +
-                                ")"
-            << listNew[12].name()
-            << "qradialgradient(cx:0.5, cy:0.5, radius: 0.9, fx:0.4, fy:0.5, stop:0 "
-                                 + listNew[13].name() +
-                                ", stop:1 "
-                                 + listNew[14].name() +
-                                ")";
-    return result;
-}
-
-void FormSettings::createIcons(const QString &aPath, const QColor &aNewColor) {
-    QDir directory("://theme/iconsBlackTheme/");
-
-    QStringList anotherColor;
-    anotherColor << "arrow_down_focus.png" << "arrow_down_pressed.png"
-                 << "arrow_left_focus.png" << "arrow_left_pressed.png"
-                 << "arrow_right_focus.png" << "arrow_right_pressed.png"
-                 << "arrow_up_focus.png" << "arrow_up_pressed.png"
-                 << "branch_closed_focus.png" << "branch_closed_pressed.png"
-                 << "branch_end_focus.png" << "branch_end_pressed.png"
-                 << "branch_line_focus.png" << "branch_line_pressed.png"
-                 << "branch_more_focus.png" << "branch_more_pressed.png"
-                 << "branch_open_focus.png" << "branch_open_pressed.png"
-                 << "checkbox_checked_hover.png" << "checkbox_checked_pressed.png"
-                 << "checkbox_indeterminate_hover.png" << "checkbox_indeterminate_pressed.png"
-                 << "checkbox_unchecked_hover.png" << "checkbox_unchecked_pressed.png"
-                 << "line_horizontal_focus.png" << "line_horizontal_pressed.png"
-                 << "line_vertical_focus.png" << "line_vertical_pressed.png"
-                 << "radio_checked_focus.png" << "radio_checked_pressed.png"
-                 << "radio_unchecked_focus.png" << "radio_unchecked_pressed.png"
-                 << "radiobutton_checked_hover.png" << "radiobutton_checked_press.png"
-                 << "radiobutton_unchecked_hover.png" << "radiobutton_unchecked_press.png"
-                 << "toolbar_move_horizontal_focus.png" << "toolbar_move_horizontal_pressed.png"
-                 << "toolbar_move_vertical_focus.png" << "toolbar_move_vertical_pressed.png"
-                 << "toolbar_separator_horizontal_focus.png" << "toolbar_separator_horizontal_pressed.png"
-                 << "toolbar_separator_vertical_focus.png" << "toolbar_separator_vertical_pressed.png"
-                 << "window_close_focus.png" << "window_close_pressed.png"
-                 << "window_grip_focus.png" << "window_grip_pressed.png"
-                 << "window_minimize_focus.png" << "window_minimize_pressed.png"
-                 << "window_undock_focus.png" << "window_undock_pressed.png";
-
-    QStringList imagesList = getImagesFromDir(directory);
-
-    for (const auto &file: imagesList) {
-        QImage image;
-        QString fileName = file;
-        fileName = fileName.remove(directory.absolutePath() + "/");
-        if (anotherColor.indexOf(fileName) > -1) {
-           image = convertImage(QImage(file), aNewColor);
-        } else {
-           image = QImage(file);
-        }
-
-        createDir(aPath + "/" + fileName);
-        image.save(aPath + "/" + fileName);
-    }
-
-}
-
-void FormSettings::radioButtonLanguageEnglish_Clicked() {
-    Settings::setLanguage(1);
-    emit s_settingsUpdated(changedSettings::language);
-    QTranslator *translator = new QTranslator;
-    if (translator->load(":/AraSteamManager_en.qm")) {
-        qApp->installTranslator(translator);
-        ui->retranslateUi(this);
-    } else {
-        qWarning() << "error change language";
-    }
-    //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
-}
-
-void FormSettings::radioButtonLanguageRussian_Clicked() {
-    Settings::setLanguage(5);
-    emit s_settingsUpdated(changedSettings::language);
-    QTranslator *translator = new QTranslator;
-    if (translator->load(":/AraSteamManager_ru.qm")) {
-        qApp->installTranslator(translator);
-        ui->retranslateUi(this);
-    } else {
-        qWarning() << "error change language";
-    }
-    //QMessageBox::information(this,tr("Язык изменён"),tr("Для применения изменений перезапустите приложение!"));
+    ui->labelIcons8->setText(tr("<html>"
+                                    "<head/>"
+                                    "<body>"
+                                        "<p>"
+                                            "Иконки для приложения были предоставлены сайтом "
+                                            "<a href=https://icons8.ru/icons>"
+                                                "<span style=\" text-decoration: underline; color:#2d7fc8;\"> "
+                                                    "https://icons8.ru/icons"
+                                                "</span>"
+                                            "</a>"
+                                        "</p>"
+                                    "</body>"
+                                "</html>"));
 }
 
 void FormSettings::checkBoxVisibleHiddenGames_StateChanged(int arg1) {
     Settings::setVisibleHiddenGames(arg1 / 2);
     emit s_settingsUpdated(changedSettings::visibleHiddenGame);
-}
-
-void FormSettings::radioButtonDarkTheme_Clicked() {
-    Settings::setTheme(3);
-    emit s_settingsUpdated(changedSettings::theme);
-    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
-}
-
-void FormSettings::radioButtonLightTheme_Clicked() {
-    Settings::setTheme(2);
-    emit s_settingsUpdated(changedSettings::theme);
-    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
-}
-
-void FormSettings::radioButtonBlueTheme_Clicked() {
-    Settings::setTheme(1);
-    emit s_settingsUpdated(changedSettings::theme);
-    //QMessageBox::information(this, tr("Тема изменена"), tr("Для применения изменений перезапустите приложение!"));
 }
 
 void FormSettings::radioButtonHiddenGames_Clicked() {
@@ -661,7 +522,7 @@ void FormSettings::radioButtonHiddenGames_Clicked() {
                 ui->TableWidgetGames->setCellWidget(i, 0, iconGame);
                 if(!QFile::exists(path)) {
                     if(list[1] != "") {
-                        new RequestImage(iconGame, "http://media.steampowered.com/steamcommunity/public/images/apps/" + list[0] + "/" + list[1] + ".jpg", path, true, this);
+                        new RequestImageToLabel(iconGame, Sapi::gameImageUrl(list[0].toInt(), list[1]), path, true, true, this);
                     }
                 } else {
                     iconGame->setPixmap(QPixmap(path));
@@ -749,8 +610,27 @@ void FormSettings::slideProfileSize_ValueChanged(int aValue) {
     emit s_settingsUpdated(changedSettings::profileInfo);
 }
 
-ExportCategory ExportCategory::fromJson(QJsonObject aObject) {
-    return ExportCategory {aObject["gameId"].toInt(), aObject["gameName"].toString(), Category(aObject["category"].toObject())};
+ExportCategory::ExportCategory(int aGameId, const QString &aGameName, const Category2 &aCategory):
+gameId(aGameId), gameName(aGameName), category(aCategory) {
+
+}
+
+ExportCategory::ExportCategory(const QJsonObject &aObject) {
+    fromJson(aObject);
+}
+
+ExportCategory::ExportCategory(const QString &aPathFile) {
+    QFile file(aPathFile);
+    if (file.open(QFile::ReadOnly)) {
+        fromJson(QJsonDocument::fromJson(file.readAll()).object());
+        file.close();
+    }
+}
+
+void ExportCategory::fromJson(const QJsonObject &aObject) {
+    gameId = aObject["gameId"].toInt();
+    gameName = aObject["gameName"].toString();
+    category = Category2(aObject["category"].toObject());
 }
 
 QJsonObject ExportCategory::toJson() {

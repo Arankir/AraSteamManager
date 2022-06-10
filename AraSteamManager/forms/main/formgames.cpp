@@ -8,100 +8,56 @@ FormGames::FormGames(QWidget *aParent): Form(aParent), ui(new Ui::FormGames) {
 }
 
 void FormGames::init() {
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    ui->ProgressBarLoading->setVisible(false);
-    initingTable(ui->TableGames);
-//    ui->TableGames->setItemDelegateForColumn(GamesProgress, new ProgressBarDelegate(this));
+    initingTable(ui->tableGames);
+    auto games = new GamesModel(this);
+    connect(games, &GamesModel::s_progress, this, &Form::setStatus);
+    connect(&_filterGames, &FilterModelGames::s_modelFinished, this, [&]() {
+        ui->tableGames->sortByColumn(gamesModel::Name, Qt::SortOrder::AscendingOrder);
+        ui->tableGames->resizeColumnsToContents();
+        if (ui->tableGames->columnWidth(gamesModel::Comment) > 100) {
+            ui->tableGames->setColumnWidth(gamesModel::Comment, 100);
+        }
+        ui->tableGames->resizeRowsToContents();
+        updateGroups();
+        updateHiddenGames();
+        emit s_finish(getWidthTableColumns(ui->tableGames));
+    });
+    _filterGames.setSourceModel(games);
+    ui->tableGames->setModel(&_filterGames);
+    ui->tableGames->setColumnHidden(gamesModel::Appid, true);
+    ui->tableGames->setColumnHidden(gamesModel::Index, true);
     updateIcons();
 #define Connects {
-    connect(ui->LineEditGame,       &QLineEdit::textChanged,                this, &FormGames::lineEditGame_TextChanged);
-    connect(ui->ButtonFind,         &QPushButton::clicked,                  this, &FormGames::buttonFind_Clicked);
-    connect(ui->CheckBoxFavorites,  &QCheckBox::stateChanged,               this, &FormGames::checkBoxFavorites_StateChanged);
-    connect(ui->ComboBoxGroups,     &MultiSelectComboBox::selectionChanged, this, &FormGames::updateGroupsFilter);
-    connect(ui->TableGames,         &QTableView::customContextMenuRequested, this, [&](QPoint pos) {
-        createMenu(currentGame())->popup(ui->TableGames->viewport()->mapToGlobal(pos));
+    connect(ui->lineEditGame,       &QLineEdit::textChanged,                this, &FormGames::lineEditGame_TextChanged);
+    connect(ui->buttonFind,         &QPushButton::clicked,                  this, &FormGames::buttonFind_Clicked);
+    connect(ui->checkBoxFavorites,  &QCheckBox::stateChanged,               this, &FormGames::checkBoxFavorites_StateChanged);
+    connect(ui->comboBoxGroups,     &MultiSelectComboBox::selectionChanged, this, &FormGames::updateGroupsFilter);
+    connect(ui->tableGames,         &QTableView::customContextMenuRequested,this, [&](QPoint pos) {
+        createMenu(currentGame())->popup(ui->tableGames->viewport()->mapToGlobal(pos));
     });
-    connect(ui->TableGames,         &QTableView::doubleClicked,             this, [&](QModelIndex aIndex) {
-        if (aIndex.column() == GamesComment) {
+    connect(ui->tableGames,         &QTableView::doubleClicked,             this, [&](QModelIndex aIndex) {
+        if (aIndex.column() == gamesModel::Comment) {
             showCommentsEdit();
         } else {
             buttonAchievements_Clicked();
         }
     });
+    connect(&_filterGames, &FilterModel::s_rowsUpdated, this, [&]() {
+        ui->tableGames->resizeRowsToContents();
+    });
 #define ConnectsEnd }
 }
 
-void FormGames::updateIcons() {
-    ui->ButtonFind->setIcon(QIcon(Images::find()));
-}
-
-void FormGames::setGames(const SProfile &aProfile, const SGames &aGames) {
+void FormGames::setGames(const ProfileID &aProfileId) {
     clear();
-    _profile = aProfile;
-    updateGroups();
-    updateHiddenGames();
-
-    if (_filterGames.sourceModel()) {
-        delete _filterGames.sourceModel();
-    }
-
-    auto games = new GamesModel(this);
-    connect(games, &GamesModel::s_progress, this, &Form::setStatus);
-    connect(games, &GamesModel::s_finished, this, [&]() {
-        ui->TableGames->sortByColumn(GamesName, Qt::SortOrder::AscendingOrder);
-        ui->TableGames->resizeColumnsToContents();
-        ui->TableGames->resizeRowsToContents();
-        int width = 0;
-        for (int i = 0; i < ui->TableGames->model()->columnCount(); ++i) {
-            if (!ui->TableGames->isColumnHidden(i)) {
-                width += ui->TableGames->columnWidth(i);
-            }
-        }
-        emit s_finish(width + 22);
-    });
-    games->setGames(aGames, _profile.steamID());
-    _filterGames.setSourceModel(games);
-    ui->TableGames->setModel(&_filterGames);
-
-    ui->TableGames->setColumnHidden(GamesAppid, true);
-    ui->TableGames->setColumnHidden(GamesIndex, true);
-}
-
-void FormGames::updateGroups() {
-    _groups.setProfile(_profile);
-    _groups.update();
-
-    ui->ComboBoxGroups->clear();
-    for(const auto &group: _groups) {
-        ui->ComboBoxGroups->addItem(group.title());
-    }
-}
-
-QList<HiddenGame> FormGames::hiddenList() {
-    QList<HiddenGame> list;
-    list.append(HiddenGames().games());
-    list.append(HiddenGames(_profile).games());
-    return list;
-}
-
-void FormGames::updateHiddenGames() {
-    QStringList list;
-    for (const auto &hide: hiddenList()) {
-        list.append(QString::number(hide.id()));
-    }
-    _filterGames.setHide(list);
-    ui->TableGames->resizeRowsToContents();
-}
-
-void FormGames::clear() {
-    _filterGames.clear();
-    _profile = SProfile();
+    _steamId = aProfileId;
+    _filterGames.sourceModel()->setGames(SGame::load(_steamId, true, true), _steamId);
 }
 #define InitEnd }
 
-#define FindGameInTable {
+#define FindDataInTable {
 int FormGames::currentIndex() {
-    return ui->TableGames->model()->data(ui->TableGames->currentIndex().siblingAtColumn(GamesIndex)).toInt();
+    return ui->tableGames->model()->data(ui->tableGames->currentIndex().siblingAtColumn(gamesModel::Index)).toInt();
 }
 
 SGame FormGames::currentGame() {
@@ -115,17 +71,11 @@ QStringList FormGames::currentComment() {
 QList<SAchievementPlayer> FormGames::currentAchievements() {
     return _filterGames.getGameAchievements(currentIndex());
 }
-#define FindGameInTableEnd }
+#define FindDataInTableEnd }
 
 #define System {
 FormGames::~FormGames() {
-    qInfo() << "Форма игр удалилась";
     delete ui;
-}
-
-void FormGames::setEnable(bool isEnable) {
-    ui->GroupBoxFilter->setEnabled(isEnable);
-    ui->TableGames->setEnabled(isEnable);
 }
 
 void FormGames::retranslate() {
@@ -133,7 +83,6 @@ void FormGames::retranslate() {
 }
 
 void FormGames::updateSettings(QFlags<changedSettings> aSettings) {
-    Settings::syncronizeSettings();
     if (aSettings.testFlag(changedSettings::theme)) {
         updateIcons();
     }
@@ -141,56 +90,103 @@ void FormGames::updateSettings(QFlags<changedSettings> aSettings) {
         updateHiddenGames();
     }
 }
+
+void FormGames::updateIcons() {
+    ui->buttonFind->setIcon(QIcon(Images::find()));
+}
+
+void FormGames::setEnable(bool isEnable) {
+    ui->groupBoxFilter->setEnabled(isEnable);
+    ui->tableGames->setEnabled(isEnable);
+}
+
+bool FormGames::isInit() {
+    return ((_steamId != "") && (_filterGames.sourceModel()->rowCount() > 0));
+}
+
+void FormGames::updateGroups() {
+    ui->comboBoxGroups->clear();
+    GroupsGames groups(_steamId);
+    for(const auto &group: groups) {
+        ui->comboBoxGroups->addItem(group.title());
+    }
+}
+
+void FormGames::updateHiddenGames() {
+    HiddenGames hiddenGames(_steamId, true);
+    QSet<GameID> hiddens;
+    for (const auto &hide: hiddenGames) {
+        hiddens.insert(hide.id());
+    }
+    _filterGames.setHide(hiddens);
+}
+
+void FormGames::clear() {
+    _filterGames.clear();
+    _steamId = "";
+}
 #define SystemEnd }
 
 #define Filter {
 void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
     _filterGames.setName(aFindText);
-    ui->TableGames->resizeRowsToContents();
 }
 
 void FormGames::buttonFind_Clicked() {
-    lineEditGame_TextChanged(ui->LineEditGame->text());
-    _filterGames.clear();
+    lineEditGame_TextChanged(ui->lineEditGame->text());
 }
 
 void FormGames::checkBoxFavorites_StateChanged(int arg1) {
     switch (arg1) {
     case 0: {
-        _filterGames.setFavorites(QStringList());
+        _filterGames.clearFavorites();
         break;
     }
     case 2: {
-        QList<FavoriteGame> favoriteGames = Favorites::games();
-        QStringList list;
-        for (const auto &favorite: qAsConst(favoriteGames)) {
-            if (favorite.steamId() == _profile.steamID()) {
-                list.append(QString::number(favorite.appId()));
-            }
-        }
-        _filterGames.setFavorites(list);
+        FavoriteGames fileFavorites;
+        QSet<GameID> favorites = std::accumulate(fileFavorites.begin(),
+                                                 fileFavorites.end(),
+                                                 QSet<GameID>(),
+                                                 [&](QSet<GameID> lSet, const FavoriteGame &lGame) {
+                                                     lSet.insert(lGame.appId());
+                                                     return lSet;
+                                                 });
+        _filterGames.setFavorites(favorites);
         break;
     }
     }
-    ui->TableGames->resizeRowsToContents();
 }
 
 void FormGames::updateGroupsFilter() {
-    QStringList list;
-
-    QStringList selectedGroups = ui->ComboBoxGroups->currentText();
-    for(auto &selectedGroup: selectedGroups) {
-        for(auto &group: _groups) {
-            if (group.title() == selectedGroup) {
-                for (const auto &game: group.games()) {
-                    list.append(QString::number(game));
-                }
-            }
-        }
+    QStringList selectedGroups = ui->comboBoxGroups->currentText();
+    if (selectedGroups.count() > 0 &&
+        selectedGroups != QStringList{""}) {
+        GroupsGames groups(_steamId);
+        QSet<GameID> gameInGroup = std::accumulate(selectedGroups.begin(),
+                                                   selectedGroups.end(),
+                                                   QSet<GameID>(),
+                                                   [&](QSet<GameID> lSet, const QString &lGroupTitle) {
+                                                        auto iterator = std::find_if(groups.begin(),
+                                                                                     groups.end(),
+                                                                                     [&](const GroupGames &lGame) {
+                                                                                        return lGame.title() == lGroupTitle;
+                                                                                     });
+                                                        if (iterator != groups.end()) {
+                                                            auto games = (*iterator).games();
+                                                            lSet = std::accumulate(games.begin(),
+                                                                                   games.end(),
+                                                                                   lSet,
+                                                                                   [&](QSet<GameID> lSet, const int &lGameId) {
+                                                                                        lSet.insert(lGameId);
+                                                                                        return lSet;
+                                                                                   });
+                                                            }
+                                                        return lSet;
+                                                    });
+        _filterGames.setGroup(gameInGroup);
+    } else {
+        _filterGames.clearGroup();
     }
-
-    _filterGames.setGroup(list);
-    ui->TableGames->resizeRowsToContents();
 }
 #define FilterEnd }
 
@@ -201,32 +197,30 @@ QMenu *FormGames::createMenu(const SGame &aGame) {
 
     //Добавление кнопки избранного
     QAction *actionFavorites;
-    auto favorites = Favorites::games();
+    auto favorites = FavoriteGames();
     auto isGameFavorite = std::any_of(favorites.cbegin(),
                                     favorites.cend(),
                                     [&](FavoriteGame curGame) {
                                         return curGame.appId() == aGame.appId() &&
-                                                curGame.steamId() == _profile.steamID();
+                                                curGame.steamId() == _steamId;
                                     });
     if(isGameFavorite) {
         actionFavorites = new QAction(QIcon(Images::isFavorites()), tr("Удалить из избранного"), this);
+        actionFavorites->setObjectName("RemoveFavorite");
+        connect (actionFavorites,       &QAction::triggered,    this,   [&](){
+            FavoriteGames().remove(_steamId, currentGame());
+        });
     } else {
         actionFavorites = new QAction(QIcon(Images::isNotFavorites()), tr("Добавить в избранное"), this);
+        actionFavorites->setObjectName("AddFavorite");
+        connect (actionFavorites,       &QAction::triggered,    this,   [&](){
+            FavoriteGames().append(FavoriteGame(_steamId, currentGame()));
+        });
     }
 
     //Добавление кнопки сокрытия
     QAction *actionHide;
-    auto hidden = hiddenList();
-    auto isGameHidden = std::any_of(hidden.cbegin(),
-                                    hidden.cend(),
-                                    [=](HiddenGame curGame) {
-                                        return curGame.id() == aGame.appId();
-                                    });
-    if (isGameHidden) {
-        actionHide = new QAction(QIcon(Images::visible()), tr("Показать игру"), this);
-    } else {
-        actionHide = new QAction(QIcon(Images::hide()), tr("Скрыть игру"), this);
-    }
+    actionHide = new QAction(QIcon(Images::hide()), tr("Скрыть игру"), this);
 
     //Добавление кнопки комментариев
     QAction *actionComment = new QAction(QIcon(Images::isComment()), tr("Редактировать комментарий...     "), this);
@@ -242,7 +236,6 @@ QMenu *FormGames::createMenu(const SGame &aGame) {
     menu->addAction (actionGroup);
 
     connect (actionAchievements,    &QAction::triggered,    this,   &FormGames::buttonAchievements_Clicked);
-    connect (actionFavorites,       &QAction::triggered,    this,   &FormGames::buttonFavorite_Clicked);
     connect (actionHide,            &QAction::triggered,    this,   &FormGames::buttonHide_Clicked);
     connect (actionComment,         &QAction::triggered,    this,   &FormGames::showCommentsEdit);
     connect (actionGroup,           &QAction::triggered,    this,   &FormGames::showGroupsEdit);
@@ -251,16 +244,7 @@ QMenu *FormGames::createMenu(const SGame &aGame) {
 }
 
 void FormGames::buttonAchievements_Clicked() {
-    //Перенести эту проверку в форму ачивок
-//    if (SAchievementSchema::load(currentGame().sAppId()).count() > 0) {
-        emit s_showAchievements(currentGame());
-//    } else {
-//        QMessageBox::warning(this, tr("Ошибка"), tr("В этой игре нет достижений"));
-//    }
-}
-
-void FormGames::buttonFavorite_Clicked() {
-    Favorites::addGame(_profile.steamID(), currentGame(), true);
+    emit s_showAchievements(currentGame());
 }
 
 void FormGames::buttonHide_Clicked() {
@@ -272,12 +256,30 @@ void FormGames::buttonHide_Clicked() {
     question.addButton(tr("Отмена"), QMessageBox::NoRole);
     question.exec();
 
+    auto curGame = currentGame();
     if(question.clickedButton() == btnProfile) {
-        HiddenGames profile(_profile);
-        profile.addGame(currentGame(), true);
+        HiddenGames profile(_steamId);
+        if (profile.isGameExist(curGame.appId())) {
+            profile.removeIf([=](const HiddenGame &lGame) {
+                return lGame.id() == curGame.appId();
+            });
+        } else {
+            profile.append(HiddenGame(curGame));
+        }
+        profile.save();
     } else if(question.clickedButton() == btnAll) {
         HiddenGames all;
-        all.addGame(currentGame(), true);
+        auto iterator = std::find_if(all.begin(),
+                                     all.end(),
+                                     [=](const HiddenGame &lGame) {
+                                         return curGame.appId() == lGame.id();
+                                     });
+        if (iterator == all.end()) {
+            all.append(HiddenGame(curGame));
+        } else {
+            all.removeAt(iterator - all.begin());
+        }
+        all.save();
     }
 
     updateHiddenGames();
@@ -287,10 +289,12 @@ void FormGames::buttonHide_Clicked() {
 }
 
 void FormGames::showGroupsEdit() {
-    FormGroups *groups = new FormGroups(_profile, currentGame());
+    FormGroups *groups = new FormGroups(this);
+    groups->setObjectName(QString("Groups%1").arg(_steamId));
+    groups->setProfileGame(_steamId, currentGame());
     QFrame *frame = createSubForm<FormGroups>(groups, this);
     connect(groups, &FormGroups::s_updateGroups,    this, &FormGames::updateGroups);
-    connect(groups, &FormGroups::s_closed,          this, [&]() {
+    connect(groups, &FormGroups::s_closed,          this, [this, frame]() {
         setEnable(true);
         delete frame->layout();
         delete frame;
@@ -299,11 +303,13 @@ void FormGames::showGroupsEdit() {
 }
 
 void FormGames::showCommentsEdit() {
-    FormComments *comments = new FormComments();
-    comments->setData(_profile, currentGame());
+    FormComments *comments = new FormComments(this);
+    comments->setObjectName(QString("Comments%1").arg(_steamId));
+    comments->setData(_steamId, currentGame());
     QFrame *frame = createSubForm<FormComments>(comments, this);
+
     connect(comments, &FormComments::s_updateComments,  _filterGames.sourceModel(), &GamesModel::updateComments);
-    connect(comments, &FormComments::s_closed,          this,                       [&](){
+    connect(comments, &FormComments::s_closed,          this,                       [this, frame](){
         setEnable(true);
         delete frame->layout();
         delete frame;

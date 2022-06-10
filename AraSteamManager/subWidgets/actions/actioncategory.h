@@ -3,21 +3,20 @@
 
 #include <QAction>
 #include <QObject>
-#include "classes/achievements/categoriesgame.h"
+#include "classes/files/achievementscategory.h"
 
-class ActionCategory : public QAction
-{
+class ActionCategory : public QAction {
     Q_OBJECT
 public:
     ActionCategory(QString text = QString(), QObject *object = nullptr): QAction(text, object) {};
     ActionCategory(QIcon icon, QString text = QString(), QObject *object = nullptr): QAction(icon, text, object) {};
-    ActionCategory(Category *category, QIcon icon, QString text = QString(), QObject *object = nullptr);
+    ActionCategory(Category2 *category, QIcon icon, QString text = QString(), QObject *object = nullptr);
 
-    Category *category() const {return _category;}
-    ActionCategory &setCategory(Category*);
+    Category2 *category() const {return _category;}
+    ActionCategory &setCategory(Category2*);
 
 private:
-    Category *_category = nullptr;
+    Category2 *_category = nullptr;
 };
 
 #endif // ACTIONCATEGORY_H

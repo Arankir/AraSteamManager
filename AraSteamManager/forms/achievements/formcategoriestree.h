@@ -7,36 +7,37 @@
 #include <QCheckBox>
 #include <QMenu>
 #include <QAction>
-#include "classes/achievements/categoriesgame.h"
+#include "classes/files/achievementscategory.h"
 
 class FormCategoriesTree : public QTreeWidget {
     Q_OBJECT
 public:
-    FormCategoriesTree(QWidget *parent);
+    FormCategoriesTree(QWidget *parent = nullptr);
+    ~FormCategoriesTree();
     void setGame(const SGame &gameId);
-    QList<Category*> getCheckedCategories();
-    Category *getCurrentCategory();
-    const Category &getCategories() {return _categories;}
-    int getCategoriesCount() {return _categories.countCategories();}
+    QList<Category2*> getCheckedCategories();
+    Category2 *getCurrentCategory();
+    const Category2 &getCategories() {return *_categories;}
+    int getCategoriesCount() {return _categories->countCategories();}
 
 public slots:
     void updateUi();
 
 signals:
-    void s_stateChanged(Category *category, const bool &state);
-    void s_categoryChange(Category *category);
-    void s_categoryAdd(Category *category);
-    void s_categoryDelete(Category *category);
+    void s_stateChanged(Category2 *category, const bool &state);
+    void s_categoryChange(Category2 *category);
+    void s_categoryAdd(Category2 *category);
+    void s_categoryDelete(Category2 *category);
 
 private:
     SGame _game;
-    Category _categories;
-    Category *_currentCategory = nullptr;
+    Category2 *_categories;
+    Category2 *_currentCategory = nullptr;
 
     void updateCurrentCategory();
-    QMenu *createMenu(Category *aCategory);
+    QMenu *createMenu(Category2 *aCategory);
     void checkBoxCategory_StateChanged(const int &aIndex);
-    void recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot = nullptr);
+    void recursAddCategoryToTree(Category2 *aCategory, QTreeWidgetItem *aRoot = nullptr);
     QString getText(QTreeWidgetItem *item);
 };
 

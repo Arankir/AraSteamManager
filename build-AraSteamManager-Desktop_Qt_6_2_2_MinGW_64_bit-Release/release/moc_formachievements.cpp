@@ -26,7 +26,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
     const uint offsetsAndSize[106];
-    char stringdata0[747];
+    char stringdata0[748];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormAchievements_t, stringdata0) + ofs), len 
@@ -74,17 +74,17 @@ QT_MOC_LITERAL(504, 27), // "updateFilterTextAchievement"
 QT_MOC_LITERAL(532, 8), // "aNewText"
 QT_MOC_LITERAL(541, 18), // "hideFriendsColumns"
 QT_MOC_LITERAL(560, 20), // "updateFilterCategory"
-QT_MOC_LITERAL(581, 9), // "Category*"
-QT_MOC_LITERAL(591, 9), // "aCategory"
-QT_MOC_LITERAL(601, 10), // "aIsChecked"
-QT_MOC_LITERAL(612, 20), // "updateFilterFavorite"
-QT_MOC_LITERAL(633, 26), // "QList<FavoriteAchievement>"
-QT_MOC_LITERAL(660, 22), // "aFavoritesAchievements"
-QT_MOC_LITERAL(683, 7), // "loading"
-QT_MOC_LITERAL(691, 10), // "aIsLoading"
-QT_MOC_LITERAL(702, 18), // "currentAchievement"
-QT_MOC_LITERAL(721, 13), // "updateFilters"
-QT_MOC_LITERAL(735, 11) // "updateModel"
+QT_MOC_LITERAL(581, 10), // "Category2*"
+QT_MOC_LITERAL(592, 9), // "aCategory"
+QT_MOC_LITERAL(602, 10), // "aIsChecked"
+QT_MOC_LITERAL(613, 20), // "updateFilterFavorite"
+QT_MOC_LITERAL(634, 26), // "QList<FavoriteAchievement>"
+QT_MOC_LITERAL(661, 22), // "aFavoritesAchievements"
+QT_MOC_LITERAL(684, 7), // "loading"
+QT_MOC_LITERAL(692, 10), // "aIsLoading"
+QT_MOC_LITERAL(703, 18), // "currentAchievement"
+QT_MOC_LITERAL(722, 13), // "updateFilters"
+QT_MOC_LITERAL(736, 11) // "updateModel"
 
     },
     "FormAchievements\0s_filtersUpdated\0\0"
@@ -103,8 +103,8 @@ QT_MOC_LITERAL(735, 11) // "updateModel"
     "updateFilterWithMyProfile\0ReachedType\0"
     "aType\0updateFilterTextAchievement\0"
     "aNewText\0hideFriendsColumns\0"
-    "updateFilterCategory\0Category*\0aCategory\0"
-    "aIsChecked\0updateFilterFavorite\0"
+    "updateFilterCategory\0Category2*\0"
+    "aCategory\0aIsChecked\0updateFilterFavorite\0"
     "QList<FavoriteAchievement>\0"
     "aFavoritesAchievements\0loading\0"
     "aIsLoading\0currentAchievement\0"
@@ -234,7 +234,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 23: _t->updateFilterWithMyProfile((*reinterpret_cast< const ReachedType(*)>(_a[1]))); break;
         case 24: _t->updateFilterTextAchievement((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 25: _t->hideFriendsColumns(); break;
-        case 26: _t->updateFilterCategory((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< const bool(*)>(_a[2]))); break;
+        case 26: _t->updateFilterCategory((*reinterpret_cast< Category2*(*)>(_a[1])),(*reinterpret_cast< const bool(*)>(_a[2]))); break;
         case 27: _t->updateFilterFavorite((*reinterpret_cast< const QList<FavoriteAchievement>(*)>(_a[1]))); break;
         case 28: _t->loading((*reinterpret_cast< const bool(*)>(_a[1]))); break;
         case 29: { SAchievement _r = _t->currentAchievement();
@@ -295,7 +295,7 @@ const QMetaObject FormAchievements::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormAchievements_t
 , QtPrivate::TypeAndForceComplete<FormAchievements, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QAbstractItemModel *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QCloseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SAchievement &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QList<FavoriteAchievement> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<SAchievement, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QCloseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SAchievement &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QList<FavoriteAchievement> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<SAchievement, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,

@@ -37,9 +37,12 @@ private slots:
     void updateIcons() override;
     void retranslate() override;;
     void slideValueChanged();
+    void onButtonClick();
 
 private:
     Ui::FormReachedFilter *ui;
+
+    ReachedType type_ = ReachedType::all;
 };
 
 #endif // FORMCOMPAREPROFILEFILTER_H

@@ -2,7 +2,6 @@
 #define IMAGES_H
 
 #include <QString>
-#include "./theme.h"
 
 class Images {
 public:

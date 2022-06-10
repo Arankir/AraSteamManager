@@ -1,9 +1,9 @@
-debug/categoriesgame.o
+debug/achievementscategory.o
 debug/comments.o
 debug/favorites.o
+debug/filesaveload.o
 debug/generalfunctions.o
 debug/images.o
-debug/myfilter.o
 debug/settings.o
 debug/theme.o
 debug/groupsgames.o
@@ -12,13 +12,16 @@ debug/requestdata.o
 debug/requestimage.o
 debug/sapi.o
 debug/sachievements.o
+debug/sbadge.o
 debug/sbans.o
 debug/sfriends.o
 debug/sgames.o
 debug/sprofile.o
+debug/sprofilecustomization.o
 debug/threadstatistics.o
 debug/threadloading.o
 debug/form.o
+debug/formprofilesbrowser.o
 debug/formfrienditemgraph.o
 debug/formcomments.o
 debug/formcontainerachievements.o
@@ -36,6 +39,10 @@ debug/formgames.o
 debug/formprofile.o
 debug/formsettings.o
 debug/formstatistics.o
+debug/achievementcompletedpiechart.o
+debug/achievementcountchart.o
+debug/piechart.o
+debug/mylineedit.o
 debug/framelesswindow.o
 debug/main.o
 debug/actioncategory.o
@@ -52,6 +59,7 @@ debug/achievementsmodel.o
 debug/filters.o
 debug/friendsmodel.o
 debug/gamesmodel.o
+debug/gameswithpercentmodel.o
 debug/listachievementsmodel.o
 debug/progressbarbad.o
 debug/progressbargood.o
@@ -65,7 +73,6 @@ debug/qrc_fonts.o
 debug/qrc_img.o
 debug/qrc_lang.o
 debug/qrc_thm.o
-debug/moc_favorites.o
 debug/moc_requestdata.o
 debug/moc_requestimage.o
 debug/moc_sapi.o
@@ -77,6 +84,7 @@ debug/moc_sprofile.o
 debug/moc_threadstatistics.o
 debug/moc_threadloading.o
 debug/moc_form.o
+debug/moc_formprofilesbrowser.o
 debug/moc_formfrienditemgraph.o
 debug/moc_formcomments.o
 debug/moc_formcontainerachievements.o
@@ -94,6 +102,9 @@ debug/moc_formgames.o
 debug/moc_formprofile.o
 debug/moc_formsettings.o
 debug/moc_formstatistics.o
+debug/moc_achievementcompletedpiechart.o
+debug/moc_piechart.o
+debug/moc_mylineedit.o
 debug/moc_framelesswindow.o
 debug/moc_actioncategory.o
 debug/moc_multiselectcombobox.o
@@ -106,6 +117,7 @@ debug/moc_achievementsmodel.o
 debug/moc_filters.o
 debug/moc_friendsmodel.o
 debug/moc_gamesmodel.o
+debug/moc_gameswithpercentmodel.o
 debug/moc_listachievementsmodel.o
 debug/moc_progressbarbad.o
 debug/moc_progressbargood.o

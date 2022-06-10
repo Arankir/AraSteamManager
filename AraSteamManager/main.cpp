@@ -8,9 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
+#include <QDir>
 #include "classes/common/settings.h"
 #include "forms/formmain.h"
 #include "framelesswindow.h"
+#include "classes/common/theme.h"
 
 QScopedPointer<QFile> logFile_;
 
@@ -42,6 +44,10 @@ int main(int argc, char *argv[]) {
 
     auto mainForm = createFramelessForm<FormMain>();
     QObject::connect(mainForm, &FormMain::s_settingsUpdated, mainForm->window(), &FramelessWindow::updateSettings);
+    QObject::connect(mainForm, &FormMain::s_closed, [](){
+        qInfo() << "Programm closed";
+        qApp->closeAllWindows();
+    });
     mainForm->window()->show();
 
     return a.exec();
@@ -110,7 +116,8 @@ void initFont() {
 
 void initLog() {
     QString logsPath = Paths::temp() + "files/logs/";
-    createDir(logsPath);
+    QDir().mkpath(logsPath);
+//    createDir(logsPath);
 
     //Удаление старых файлов
     QDir dirLogs(logsPath);

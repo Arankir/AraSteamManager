@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGames_t {
-    const uint offsetsAndSize[92];
-    char stringdata0[608];
+    const uint offsetsAndSize[82];
+    char stringdata0[544];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormGames_t, stringdata0) + ofs), len 
@@ -43,60 +43,52 @@ QT_MOC_LITERAL(78, 14), // "updateSettings"
 QT_MOC_LITERAL(93, 23), // "QFlags<changedSettings>"
 QT_MOC_LITERAL(117, 9), // "aSettings"
 QT_MOC_LITERAL(127, 8), // "setGames"
-QT_MOC_LITERAL(136, 8), // "SProfile"
-QT_MOC_LITERAL(145, 8), // "aProfile"
-QT_MOC_LITERAL(154, 6), // "SGames"
-QT_MOC_LITERAL(161, 6), // "aGames"
-QT_MOC_LITERAL(168, 6), // "isInit"
-QT_MOC_LITERAL(175, 5), // "clear"
-QT_MOC_LITERAL(181, 4), // "init"
-QT_MOC_LITERAL(186, 11), // "updateIcons"
-QT_MOC_LITERAL(198, 11), // "retranslate"
-QT_MOC_LITERAL(210, 24), // "lineEditGame_TextChanged"
-QT_MOC_LITERAL(235, 9), // "aFindText"
-QT_MOC_LITERAL(245, 18), // "buttonFind_Clicked"
-QT_MOC_LITERAL(264, 26), // "buttonAchievements_Clicked"
-QT_MOC_LITERAL(291, 22), // "buttonFavorite_Clicked"
-QT_MOC_LITERAL(314, 18), // "buttonHide_Clicked"
-QT_MOC_LITERAL(333, 10), // "createMenu"
-QT_MOC_LITERAL(344, 6), // "QMenu*"
-QT_MOC_LITERAL(351, 4), // "game"
-QT_MOC_LITERAL(356, 10), // "hiddenList"
-QT_MOC_LITERAL(367, 17), // "QList<HiddenGame>"
-QT_MOC_LITERAL(385, 17), // "updateHiddenGames"
-QT_MOC_LITERAL(403, 11), // "currentGame"
-QT_MOC_LITERAL(415, 14), // "currentComment"
-QT_MOC_LITERAL(430, 19), // "currentAchievements"
-QT_MOC_LITERAL(450, 25), // "QList<SAchievementPlayer>"
-QT_MOC_LITERAL(476, 12), // "updateGroups"
-QT_MOC_LITERAL(489, 18), // "updateGroupsFilter"
-QT_MOC_LITERAL(508, 14), // "showGroupsEdit"
-QT_MOC_LITERAL(523, 16), // "showCommentsEdit"
-QT_MOC_LITERAL(540, 30), // "checkBoxFavorites_StateChanged"
-QT_MOC_LITERAL(571, 4), // "arg1"
-QT_MOC_LITERAL(576, 12), // "currentIndex"
-QT_MOC_LITERAL(589, 9), // "setEnable"
-QT_MOC_LITERAL(599, 8) // "isEnable"
+QT_MOC_LITERAL(136, 9), // "ProfileID"
+QT_MOC_LITERAL(146, 9), // "profileId"
+QT_MOC_LITERAL(156, 6), // "isInit"
+QT_MOC_LITERAL(163, 5), // "clear"
+QT_MOC_LITERAL(169, 4), // "init"
+QT_MOC_LITERAL(174, 11), // "updateIcons"
+QT_MOC_LITERAL(186, 11), // "retranslate"
+QT_MOC_LITERAL(198, 24), // "lineEditGame_TextChanged"
+QT_MOC_LITERAL(223, 9), // "aFindText"
+QT_MOC_LITERAL(233, 18), // "buttonFind_Clicked"
+QT_MOC_LITERAL(252, 26), // "buttonAchievements_Clicked"
+QT_MOC_LITERAL(279, 18), // "buttonHide_Clicked"
+QT_MOC_LITERAL(298, 10), // "createMenu"
+QT_MOC_LITERAL(309, 6), // "QMenu*"
+QT_MOC_LITERAL(316, 4), // "game"
+QT_MOC_LITERAL(321, 17), // "updateHiddenGames"
+QT_MOC_LITERAL(339, 11), // "currentGame"
+QT_MOC_LITERAL(351, 14), // "currentComment"
+QT_MOC_LITERAL(366, 19), // "currentAchievements"
+QT_MOC_LITERAL(386, 25), // "QList<SAchievementPlayer>"
+QT_MOC_LITERAL(412, 12), // "updateGroups"
+QT_MOC_LITERAL(425, 18), // "updateGroupsFilter"
+QT_MOC_LITERAL(444, 14), // "showGroupsEdit"
+QT_MOC_LITERAL(459, 16), // "showCommentsEdit"
+QT_MOC_LITERAL(476, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(507, 4), // "arg1"
+QT_MOC_LITERAL(512, 12), // "currentIndex"
+QT_MOC_LITERAL(525, 9), // "setEnable"
+QT_MOC_LITERAL(535, 8) // "isEnable"
 
     },
     "FormGames\0s_achievementsLoaded\0\0"
     "s_finish\0width\0s_showAchievements\0"
     "SGame\0games\0updateSettings\0"
     "QFlags<changedSettings>\0aSettings\0"
-    "setGames\0SProfile\0aProfile\0SGames\0"
-    "aGames\0isInit\0clear\0init\0updateIcons\0"
-    "retranslate\0lineEditGame_TextChanged\0"
-    "aFindText\0buttonFind_Clicked\0"
-    "buttonAchievements_Clicked\0"
-    "buttonFavorite_Clicked\0buttonHide_Clicked\0"
-    "createMenu\0QMenu*\0game\0hiddenList\0"
-    "QList<HiddenGame>\0updateHiddenGames\0"
-    "currentGame\0currentComment\0"
-    "currentAchievements\0QList<SAchievementPlayer>\0"
-    "updateGroups\0updateGroupsFilter\0"
-    "showGroupsEdit\0showCommentsEdit\0"
-    "checkBoxFavorites_StateChanged\0arg1\0"
-    "currentIndex\0setEnable\0isEnable"
+    "setGames\0ProfileID\0profileId\0isInit\0"
+    "clear\0init\0updateIcons\0retranslate\0"
+    "lineEditGame_TextChanged\0aFindText\0"
+    "buttonFind_Clicked\0buttonAchievements_Clicked\0"
+    "buttonHide_Clicked\0createMenu\0QMenu*\0"
+    "game\0updateHiddenGames\0currentGame\0"
+    "currentComment\0currentAchievements\0"
+    "QList<SAchievementPlayer>\0updateGroups\0"
+    "updateGroupsFilter\0showGroupsEdit\0"
+    "showCommentsEdit\0checkBoxFavorites_StateChanged\0"
+    "arg1\0currentIndex\0setEnable\0isEnable"
 };
 #undef QT_MOC_LITERAL
 
@@ -106,7 +98,7 @@ static const uint qt_meta_data_FormGames[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      28,   14, // methods
+      26,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -114,36 +106,34 @@ static const uint qt_meta_data_FormGames[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    3,  182,    2, 0x06,    1 /* Public */,
-       3,    1,  189,    2, 0x06,    5 /* Public */,
-       5,    1,  192,    2, 0x06,    7 /* Public */,
+       1,    3,  170,    2, 0x06,    1 /* Public */,
+       3,    1,  177,    2, 0x06,    5 /* Public */,
+       5,    1,  180,    2, 0x06,    7 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    1,  195,    2, 0x0a,    9 /* Public */,
-      11,    2,  198,    2, 0x0a,   11 /* Public */,
-      16,    0,  203,    2, 0x0a,   14 /* Public */,
-      17,    0,  204,    2, 0x0a,   15 /* Public */,
-      18,    0,  205,    2, 0x08,   16 /* Private */,
-      19,    0,  206,    2, 0x08,   17 /* Private */,
-      20,    0,  207,    2, 0x08,   18 /* Private */,
-      21,    1,  208,    2, 0x08,   19 /* Private */,
-      23,    0,  211,    2, 0x08,   21 /* Private */,
-      24,    0,  212,    2, 0x08,   22 /* Private */,
-      25,    0,  213,    2, 0x08,   23 /* Private */,
-      26,    0,  214,    2, 0x08,   24 /* Private */,
-      27,    1,  215,    2, 0x08,   25 /* Private */,
-      30,    0,  218,    2, 0x08,   27 /* Private */,
-      32,    0,  219,    2, 0x08,   28 /* Private */,
-      33,    0,  220,    2, 0x08,   29 /* Private */,
-      34,    0,  221,    2, 0x08,   30 /* Private */,
-      35,    0,  222,    2, 0x08,   31 /* Private */,
-      37,    0,  223,    2, 0x08,   32 /* Private */,
-      38,    0,  224,    2, 0x08,   33 /* Private */,
-      39,    0,  225,    2, 0x08,   34 /* Private */,
-      40,    0,  226,    2, 0x08,   35 /* Private */,
-      41,    1,  227,    2, 0x08,   36 /* Private */,
-      43,    0,  230,    2, 0x08,   38 /* Private */,
-      44,    1,  231,    2, 0x08,   39 /* Private */,
+       8,    1,  183,    2, 0x0a,    9 /* Public */,
+      11,    1,  186,    2, 0x0a,   11 /* Public */,
+      14,    0,  189,    2, 0x0a,   13 /* Public */,
+      15,    0,  190,    2, 0x0a,   14 /* Public */,
+      16,    0,  191,    2, 0x08,   15 /* Private */,
+      17,    0,  192,    2, 0x08,   16 /* Private */,
+      18,    0,  193,    2, 0x08,   17 /* Private */,
+      19,    1,  194,    2, 0x08,   18 /* Private */,
+      21,    0,  197,    2, 0x08,   20 /* Private */,
+      22,    0,  198,    2, 0x08,   21 /* Private */,
+      23,    0,  199,    2, 0x08,   22 /* Private */,
+      24,    1,  200,    2, 0x08,   23 /* Private */,
+      27,    0,  203,    2, 0x08,   25 /* Private */,
+      28,    0,  204,    2, 0x08,   26 /* Private */,
+      29,    0,  205,    2, 0x08,   27 /* Private */,
+      30,    0,  206,    2, 0x08,   28 /* Private */,
+      32,    0,  207,    2, 0x08,   29 /* Private */,
+      33,    0,  208,    2, 0x08,   30 /* Private */,
+      34,    0,  209,    2, 0x08,   31 /* Private */,
+      35,    0,  210,    2, 0x08,   32 /* Private */,
+      36,    1,  211,    2, 0x08,   33 /* Private */,
+      38,    0,  214,    2, 0x08,   35 /* Private */,
+      39,    1,  215,    2, 0x08,   36 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::Int, QMetaType::Int,    2,    2,    2,
@@ -152,30 +142,28 @@ static const uint qt_meta_data_FormGames[] = {
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 9,   10,
-    QMetaType::Void, 0x80000000 | 12, 0x80000000 | 14,   13,   15,
+    QMetaType::Void, 0x80000000 | 12,   13,
     QMetaType::Bool,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   22,
+    QMetaType::Void, QMetaType::QString,   20,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    0x80000000 | 28, 0x80000000 | 6,   29,
-    0x80000000 | 31,
+    0x80000000 | 25, 0x80000000 | 6,   26,
     QMetaType::Void,
     0x80000000 | 6,
     QMetaType::QStringList,
-    0x80000000 | 36,
+    0x80000000 | 31,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   42,
+    QMetaType::Void, QMetaType::Int,   37,
     QMetaType::Int,
-    QMetaType::Void, QMetaType::Bool,   45,
+    QMetaType::Void, QMetaType::Bool,   40,
 
        0        // eod
 };
@@ -190,7 +178,7 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1: _t->s_finish((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 2: _t->s_showAchievements((*reinterpret_cast< const SGame(*)>(_a[1]))); break;
         case 3: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
-        case 4: _t->setGames((*reinterpret_cast< const SProfile(*)>(_a[1])),(*reinterpret_cast< const SGames(*)>(_a[2]))); break;
+        case 4: _t->setGames((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
         case 5: { bool _r = _t->isInit();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 6: _t->clear(); break;
@@ -200,27 +188,24 @@ void FormGames::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 10: _t->lineEditGame_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 11: _t->buttonFind_Clicked(); break;
         case 12: _t->buttonAchievements_Clicked(); break;
-        case 13: _t->buttonFavorite_Clicked(); break;
-        case 14: _t->buttonHide_Clicked(); break;
-        case 15: { QMenu* _r = _t->createMenu((*reinterpret_cast< const SGame(*)>(_a[1])));
+        case 13: _t->buttonHide_Clicked(); break;
+        case 14: { QMenu* _r = _t->createMenu((*reinterpret_cast< const SGame(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 16: { QList<HiddenGame> _r = _t->hiddenList();
-            if (_a[0]) *reinterpret_cast< QList<HiddenGame>*>(_a[0]) = std::move(_r); }  break;
-        case 17: _t->updateHiddenGames(); break;
-        case 18: { SGame _r = _t->currentGame();
+        case 15: _t->updateHiddenGames(); break;
+        case 16: { SGame _r = _t->currentGame();
             if (_a[0]) *reinterpret_cast< SGame*>(_a[0]) = std::move(_r); }  break;
-        case 19: { QStringList _r = _t->currentComment();
+        case 17: { QStringList _r = _t->currentComment();
             if (_a[0]) *reinterpret_cast< QStringList*>(_a[0]) = std::move(_r); }  break;
-        case 20: { QList<SAchievementPlayer> _r = _t->currentAchievements();
+        case 18: { QList<SAchievementPlayer> _r = _t->currentAchievements();
             if (_a[0]) *reinterpret_cast< QList<SAchievementPlayer>*>(_a[0]) = std::move(_r); }  break;
-        case 21: _t->updateGroups(); break;
-        case 22: _t->updateGroupsFilter(); break;
-        case 23: _t->showGroupsEdit(); break;
-        case 24: _t->showCommentsEdit(); break;
-        case 25: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 26: { int _r = _t->currentIndex();
+        case 19: _t->updateGroups(); break;
+        case 20: _t->updateGroupsFilter(); break;
+        case 21: _t->showGroupsEdit(); break;
+        case 22: _t->showCommentsEdit(); break;
+        case 23: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 24: { int _r = _t->currentIndex();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 27: _t->setEnable((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 25: _t->setEnable((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -257,7 +242,7 @@ const QMetaObject FormGames::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormGames_t
 , QtPrivate::TypeAndForceComplete<FormGames, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<const SGames &, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<QList<HiddenGame>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<SGame, std::false_type>, QtPrivate::TypeAndForceComplete<QStringList, std::false_type>, QtPrivate::TypeAndForceComplete<QList<SAchievementPlayer>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<SGame, std::false_type>, QtPrivate::TypeAndForceComplete<QStringList, std::false_type>, QtPrivate::TypeAndForceComplete<QList<SAchievementPlayer>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>
 
 
 >,
@@ -284,13 +269,13 @@ int FormGames::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 28)
+        if (_id < 26)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 28;
+        _id -= 26;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 28)
+        if (_id < 26)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 28;
+        _id -= 26;
     }
     return _id;
 }

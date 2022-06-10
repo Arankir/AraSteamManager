@@ -23,6 +23,7 @@
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "subWidgets/lineEdit/mylineedit.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -34,7 +35,7 @@ public:
     QWidget *tab;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
-    QLineEdit *LineEditGamesFind;
+    MyLineEdit *LineEditGamesFind;
     QPushButton *ButtonGamesFind;
     QTableWidget *TableWidgetGames;
     QWidget *tab_2;
@@ -49,10 +50,10 @@ public:
     QTableWidget *TableWidgetFriends;
     QWidget *tab_3;
     QPushButton *pushButton;
-    QLineEdit *lineEdit;
+    MyLineEdit *lineEdit;
     QLabel *label;
     QLabel *label_2;
-    QLineEdit *lineEdit_2;
+    MyLineEdit *lineEdit_2;
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_5;
@@ -80,7 +81,7 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        LineEditGamesFind = new QLineEdit(tab);
+        LineEditGamesFind = new MyLineEdit(tab);
         LineEditGamesFind->setObjectName(QString::fromUtf8("LineEditGamesFind"));
 
         horizontalLayout->addWidget(LineEditGamesFind);
@@ -152,7 +153,7 @@ public:
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(140, 10, 80, 21));
         pushButton->setText(QString::fromUtf8("\320\226\320\274\320\270"));
-        lineEdit = new QLineEdit(tab_3);
+        lineEdit = new MyLineEdit(tab_3);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setGeometry(QRect(10, 10, 113, 21));
         lineEdit->setText(QString::fromUtf8("0,0,0"));
@@ -183,7 +184,7 @@ public:
                         " \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202"
                         " \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202 \320\257 \320\276\321\207\320\265\320\275\321\214 \320\264\320\273\320\270\320\275\320\275\321\213\320\271 \321\202\320\265\320\272\321\201\321\202"));
         label_2->setWordWrap(true);
-        lineEdit_2 = new QLineEdit(tab_3);
+        lineEdit_2 = new MyLineEdit(tab_3);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
         lineEdit_2->setEnabled(false);
         lineEdit_2->setGeometry(QRect(90, 120, 113, 21));
@@ -225,7 +226,7 @@ public:
 
         retranslateUi(FormFavorites);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(FormFavorites);
@@ -234,9 +235,10 @@ public:
     void retranslateUi(QWidget *FormFavorites)
     {
         FormFavorites->setWindowTitle(QCoreApplication::translate("FormFavorites", "Form", nullptr));
+        LineEditGamesFind->setPlaceholderText(QCoreApplication::translate("FormFavorites", "Dota 2", nullptr));
         ButtonGamesFind->setText(QCoreApplication::translate("FormFavorites", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("FormFavorites", "  Games  ", nullptr));
-        LineEditFriendsFind->setPlaceholderText(QCoreApplication::translate("FormFavorites", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
+        LineEditFriendsFind->setPlaceholderText(QCoreApplication::translate("FormFavorites", "LuckyGuy228", nullptr));
         ButtonFriendsFind->setText(QCoreApplication::translate("FormFavorites", "  \320\237\320\276\320\270\321\201\320\272", nullptr));
         CheckBoxFriendsOpenProfile->setText(QCoreApplication::translate("FormFavorites", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("FormFavorites", "  Friends  ", nullptr));

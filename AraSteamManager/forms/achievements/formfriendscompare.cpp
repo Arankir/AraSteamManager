@@ -50,7 +50,7 @@ void FormFriendsCompare::setModel(QAbstractItemModel *model) {
     ui->TableViewCompare->sortByColumn(AchievementWorld, Qt::SortOrder::DescendingOrder);
     ui->TableViewCompare->setColumnHidden(AchievementAppid, true);
     ui->TableViewCompare->setColumnHidden(AchievementIndex, true);
-    ui->TableViewCompare->setColumnHidden(AchievementComments, true);
+    ui->TableViewCompare->setColumnHidden(AchievementCommentss, true);
     ui->TableViewCompare->resizeRowsToContents();
 }
 

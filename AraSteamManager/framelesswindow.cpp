@@ -51,10 +51,6 @@ void FramelessWindow::setWidget(QWidget *target) {
 
 void FramelessWindow::updateIcons() {
     ui->LabelLogo->setPixmap(QPixmap(Images::logo()).scaled(30, 30));
-
-//    ui->LabelLogo->setTextFormat(Qt::RichText);
-//    ui->LabelLogo->setText("<img height=30 style=\"vertical-align: top\" src=\"" + Images::logo() + "\"> "
-//                                "<span style=\"vertical-align: bottom\">НАЯ ПРОГА</span>");
     ui->ButtonExit          ->setIcon(QIcon(Images::closeWindow()));
     ui->ButtonMinimize      ->setIcon(QIcon(Images::minimizeWindow()));
     if (this->isMaximized()) {

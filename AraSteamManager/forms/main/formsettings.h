@@ -11,7 +11,7 @@
 #include "classes/network/requestimage.h"
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sgames.h"
-#include "classes/achievements/categoriesgame.h"
+#include "classes/files/achievementscategory.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/withData/qradiobuttonwithdata.h"
 
@@ -38,11 +38,16 @@ struct ExportFileData {
 };
 
 struct ExportCategory {
+    ExportCategory() {;}
+    ExportCategory(int aGameId, const QString &aGameName, const Category2 &aCategory);
+    ExportCategory(const QJsonObject &object);
+    ExportCategory(const QString &pathFile);
+
     int gameId;
     QString gameName;
-    Category category;
+    Category2 category;
 
-    static ExportCategory fromJson(QJsonObject object);
+    void fromJson(const QJsonObject &object);
     QJsonObject toJson();
 };
 
@@ -66,13 +71,6 @@ private slots:
     void initComponents();
     void initExport();
 
-    void radioButtonLanguageEnglish_Clicked();
-    void radioButtonLanguageRussian_Clicked();
-
-    void radioButtonDarkTheme_Clicked();
-    void radioButtonLightTheme_Clicked();
-    void radioButtonBlueTheme_Clicked();
-
     void radioButtonHiddenGames_Clicked();
 
     void achievementsClicked();
@@ -87,13 +85,14 @@ private slots:
     void slideProfileSize_ValueChanged(int value);
 
     void comboBoxMaxTableRows(int index);
-    int recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot, const int &aGameId);
+    int recursAddCategoryToTree(Category2 *aCategory, QTreeWidgetItem *aRoot, const int &aGameId);
     void buttonExportCategories_Clicked();
     void buttonImportCategories_Clicked();
     ExportFileData createExportCategoriesJson();
-    QStringList getColors(const QColor &aNewColor);
-    void createIcons(const QString &aPath, const QColor &aNewColor);
 
+    void comboBoxThemeIndexChanged(int aIndex);
+    void comboBoxLanguageIndexChanged(int aIndex);
+    ExportFileData *getFileFromPath(QLineEdit *aLineEdit);
 private:
     Ui::FormSettings *ui;
     Settings _setting;

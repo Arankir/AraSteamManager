@@ -7,10 +7,8 @@
 class SFriend : public Sapi {
     Q_OBJECT
 public:
-    explicit SFriend(const QJsonObject &aFriend = QJsonObject(), QObject *parent = nullptr): Sapi(parent), _steamID(aFriend.value("steamid").toString()),
-        _relationship(aFriend.value("relationship").toString()), _friendSince(QDateTime::fromSecsSinceEpoch(aFriend.value("friend_since").toInt(), Qt::LocalTime)) {}
-    SFriend(const SFriend &aFriend): Sapi(aFriend.parent()), _steamID(aFriend._steamID),
-        _relationship(aFriend._relationship), _friendSince(aFriend._friendSince) {}
+    SFriend(const QJsonObject &aFriend = QJsonObject(), QObject *parent = nullptr);
+    SFriend(const SFriend &aFriend);
 
     QJsonObject toJson() const;
     virtual QString className() const {return "SFriend";}
@@ -21,23 +19,24 @@ public:
     bool operator==(const SFriend&) const;
     bool operator!=(const SFriend&) const;
 
-    ProfileID steamId()     const {return _steamID;}
-    QString relationship()  const {return _relationship;}
-    QDateTime friendSince() const {return _friendSince;}
+    ProfileID steamId()     const;
+    QString relationship()  const;
+    QDateTime friendSince() const;
 
     static QStringList getFriendsSteamId(const ProfileID &id);
 
 private:
-    ProfileID _steamID;
-    QString _relationship;
-    QDateTime _friendSince;
+    ProfileID steamId_;
+    QString relationship_;
+    QDateTime friend_since_;
 
 };
 
 using SFriends = QList<SFriend>;
 
 struct SFriendProfile {
-    SFriendProfile(const SFriend &aFriend, const SProfile &aProfile): steamFriend(aFriend), steamProfile(aProfile) {};
+    SFriendProfile(const SFriend &aFriend, const SProfile &aProfile);
+    SFriendProfile(const SProfile &aProfile, const SFriend &aFriend);
     SFriend steamFriend;
     SProfile steamProfile;
 };

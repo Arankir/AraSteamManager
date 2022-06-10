@@ -16,13 +16,12 @@
 #include "forms/formgroups.h"
 #include "forms/formcomments.h"
 #include "classes/common/generalfunctions.h"
-#include "classes/common/myfilter.h"
-#include "classes/common/favorites.h"
+#include "classes/files/favorites.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/threads/thread/threadgames.h"
 #include "classes/network/requestimage.h"
-#include "classes/games/hiddengames.h"
+#include "classes/files/hiddengames.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/progressBars/progressbarbad.h"
 #include "subWidgets/progressBars/progressbargood.h"
@@ -38,8 +37,8 @@ class FormGames : public Form {
 
 public slots:
     void updateSettings(QFlags<changedSettings> aSettings) override;
-    void setGames(const SProfile &aProfile, const SGames &aGames);
-    bool isInit() {return ((_profile.steamID() != "") && (_filterGames.sourceModel()->rowCount() > 0));}
+    void setGames(const ProfileID &profileId);
+    bool isInit();
     void clear();
 
 public:
@@ -60,11 +59,9 @@ private slots:
     void buttonFind_Clicked();
 
     void buttonAchievements_Clicked();
-    void buttonFavorite_Clicked();
     void buttonHide_Clicked();
 
     QMenu *createMenu(const SGame &game);
-    QList<HiddenGame> hiddenList();
     void updateHiddenGames();
     SGame currentGame();
     QStringList currentComment();
@@ -81,9 +78,7 @@ private slots:
     void setEnable(bool isEnable);
 private:
     Ui::FormGames *ui;
-    SProfile _profile;
-    GroupsGames _groups;
-
+    ProfileID _steamId;
     FilterModelGames _filterGames;
 
 };

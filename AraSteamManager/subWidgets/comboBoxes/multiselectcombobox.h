@@ -31,12 +31,13 @@ protected:
     bool eventFilter(QObject* aObject, QEvent* aEvent) override;
     void keyPressEvent(QKeyEvent* aEvent) override;
 
+    QString getCurrentText();
 private:
     void stateChanged(int aState);
     void onSearch(const QString& aSearchString);
     void itemClicked(int aIndex);
 
-    QListWidget* mListWidget;
-    QLineEdit* mLineEdit;
-    QLineEdit* mSearchBar;
+    QListWidget* listWidget_;
+    QLineEdit* lineEdit_;
+    QLineEdit* searchBar_;
 };

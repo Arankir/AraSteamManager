@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormReachedFilter_t {
-    const uint offsetsAndSize[22];
-    char stringdata0[147];
+    const uint offsetsAndSize[24];
+    char stringdata0[161];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormReachedFilter_t, stringdata0) + ofs), len 
@@ -40,13 +40,15 @@ QT_MOC_LITERAL(71, 23), // "QFlags<changedSettings>"
 QT_MOC_LITERAL(95, 9), // "aSettings"
 QT_MOC_LITERAL(105, 11), // "updateIcons"
 QT_MOC_LITERAL(117, 11), // "retranslate"
-QT_MOC_LITERAL(129, 17) // "slideValueChanged"
+QT_MOC_LITERAL(129, 17), // "slideValueChanged"
+QT_MOC_LITERAL(147, 13) // "onButtonClick"
 
     },
     "FormReachedFilter\0s_radioButtonChange\0"
     "\0ReachedType\0type\0updateSettings\0"
     "QFlags<changedSettings>\0aSettings\0"
-    "updateIcons\0retranslate\0slideValueChanged"
+    "updateIcons\0retranslate\0slideValueChanged\0"
+    "onButtonClick"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +58,7 @@ static const uint qt_meta_data_FormReachedFilter[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,19 +66,21 @@ static const uint qt_meta_data_FormReachedFilter[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   44,    2, 0x06,    1 /* Public */,
+       1,    1,   50,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       5,    1,   47,    2, 0x0a,    3 /* Public */,
-       8,    0,   50,    2, 0x08,    5 /* Private */,
-       9,    0,   51,    2, 0x08,    6 /* Private */,
-      10,    0,   52,    2, 0x08,    7 /* Private */,
+       5,    1,   53,    2, 0x0a,    3 /* Public */,
+       8,    0,   56,    2, 0x08,    5 /* Private */,
+       9,    0,   57,    2, 0x08,    6 /* Private */,
+      10,    0,   58,    2, 0x08,    7 /* Private */,
+      11,    0,   59,    2, 0x08,    8 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -95,6 +99,7 @@ void FormReachedFilter::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 2: _t->updateIcons(); break;
         case 3: _t->retranslate(); break;
         case 4: _t->slideValueChanged(); break;
+        case 5: _t->onButtonClick(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -117,7 +122,7 @@ const QMetaObject FormReachedFilter::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormReachedFilter_t
 , QtPrivate::TypeAndForceComplete<FormReachedFilter, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -144,13 +149,13 @@ int FormReachedFilter::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

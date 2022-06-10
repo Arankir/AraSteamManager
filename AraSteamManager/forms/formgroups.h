@@ -1,42 +1,40 @@
 #ifndef FORMGROUPSGAMESINTERACTIONS_H
 #define FORMGROUPSGAMESINTERACTIONS_H
 
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QCheckBox>
-#include "classes/games/groupsgames.h"
+#include <QListWidgetItem>
+
+#include "classes/files/groupsgames.h"
 #include "form.h"
 
 namespace Ui {
 class FormGroups;
 }
 
-class FormGroups : public Form
-{
+class FormGroups : public Form {
     Q_OBJECT
 
 public:
-    explicit FormGroups(SProfile &profile, const SGame &game, QWidget *parent = nullptr);
+    explicit FormGroups(QWidget *parent = nullptr);
     ~FormGroups();
+    void setProfileGame(const ProfileID &profileId, const SGame &game);
 
 signals:
     void s_updateGroups();
 
-private slots:
-    void setProfileGame();
+protected slots:
+    void init();
+    QMenu *createMenu(QListWidgetItem *aItem);
+    void removeGroup(QListWidgetItem *aItem);
+
     void initUi();
     void clear();
     void updateUi();
-    void add(const QString &aTitle);
-    void changeTitle(const int &aIndex, const QString &aTitle);
+
     void cancel();
     void apply();
 
-    void add_clicked();
-    void changeTitle_clicked();
-
-    void cancel_clicked();
-    void apply_clicked();
+    void cancelClicked();
+    void applyClicked();
 
     void retranslate() override;
     void updateIcons() override;
@@ -44,8 +42,8 @@ private slots:
 
 private:
     Ui::FormGroups *ui;
-    GroupsGames _groups;
-    SGame _game;
+    GroupsGames groups_;
+    SGame game_;
 };
 
 #endif // FORMGROUPSGAMESINTERACTIONS_H

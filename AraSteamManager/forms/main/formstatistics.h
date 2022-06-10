@@ -14,12 +14,12 @@
 #include <QtWidgets/QHeaderView>
 #include <QtCharts/QBarCategoryAxis>
 #include <QtCharts/QValueAxis>
+#include <QStandardItemModel>
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/common/generalfunctions.h"
 #include "classes/threads/thread/threadstatistics.h"
-#include <QStandardItemModel>
 
 //QT_CHARTS_USE_NAMESPACE
 
@@ -53,9 +53,12 @@ public slots:
     void updateSettings(QFlags<changedSettings> aSettings) override;
 
 public:
-    explicit FormStatistics(const SProfile &profile, const SGames &games, QWidget *parent = nullptr);
+    explicit FormStatistics(QWidget *parent = nullptr);
     ~FormStatistics();
 
+    void setProfile(const SProfile &aProfile);
+    bool isInit();
+    void clear();
 signals:
     void s_finish();
     void s_return_to_profile(QWidget*);
@@ -63,11 +66,12 @@ signals:
 
 protected slots:
     void addFriendLines(Statistics &aStatistic);
+    void init();
 private slots:
     void retranslate() override;
     void updateIcons() override;
 
-    void setModelToTable(QList<GameWithPercent> aGames, bool aIsVisiblePercent);
+    void setModelToTable(QList<GameWithPercentModelItem> aGames, bool aIsVisiblePercent);
     SGame *currentGame();
     QMenu *createMenu(SGame &aGame);
     void updateStatisticProfile(const SProfile &lProfile);
@@ -84,15 +88,15 @@ private:
     int _currentIndex = -1;
 
     SProfile _userProfile;
-    SGames _games;
 
     SProfile _statisticProfile;
     Statistics _statistics;
 
-    QChart *_gamePercent;
+//    QChart *_gamePercent;
 
     const QList<QColor> _colors = {QColor(150, 0, 0), QColor(0, 0, 150), QColor(150, 0, 150), QColor(0, 150, 150), QColor(0, 150, 0),
                                    QColor(150, 150, 0), QColor(1, 1, 1), QColor(150, 150, 150)};
+    const int c_colorCount = 8;
 
 };
 

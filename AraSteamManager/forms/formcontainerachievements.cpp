@@ -1,6 +1,8 @@
 #include "formcontainerachievements.h"
 #include "ui_formcontainerachievements.h"
 
+#include <QMessageBox>
+
 FormContainerAchievements::FormContainerAchievements(QWidget *parent): Form(parent), ui(new Ui::FormContainerAchievements) {
     ui->setupUi(this);
     if (parentWidget()) {
@@ -10,7 +12,7 @@ FormContainerAchievements::FormContainerAchievements(QWidget *parent): Form(pare
 }
 
 FormContainerAchievements::~FormContainerAchievements() {
-    qInfo() << "Форма вкладок достижений удалилась";
+//    emit s_closed();
     delete ui;
 }
 
@@ -24,16 +26,20 @@ void FormContainerAchievements::updateSettings(QFlags<changedSettings> aSettings
 
 void FormContainerAchievements::show() {
     window()->show();
+    Form::show();
 }
 
 void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
-    Q_UNUSED(aEvent);
     if (FramelessWindow *framelessWindow = window()) {
         Settings::setAchievementContainerParams(framelessWindow->geometry());
     }
-    emit s_closed();
-//    Settings::syncronizeSettings();
-//    emit s_formClose();
+    clear();
+    hide();
+    aEvent->ignore();
+}
+
+void FormContainerAchievements::clear() {
+    ui->TabWidgetAchievements->clear();
 }
 
 int FormContainerAchievements::getTabIndex(const SProfile &aProfile, const SGame &aGame) {

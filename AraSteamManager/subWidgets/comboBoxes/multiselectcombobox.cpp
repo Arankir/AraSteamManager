@@ -9,215 +9,182 @@ namespace {
     const int scSearchBarIndex = 0;
 }
 
-MultiSelectComboBox::MultiSelectComboBox(QWidget* aParent) :
+MultiSelectComboBox::MultiSelectComboBox(QWidget *aParent) :
     QComboBox(aParent),
-    mListWidget(new QListWidget(this)),
-    mLineEdit(new QLineEdit(this)),
-    mSearchBar(new QLineEdit(this))
+    listWidget_(new QListWidget(this)),
+    lineEdit_(new QLineEdit(this)),
+    searchBar_(new QLineEdit(this))
 {
-    QListWidgetItem* curItem = new QListWidgetItem(mListWidget);
-    mSearchBar->setPlaceholderText(tr("Search.."));
-    mSearchBar->setClearButtonEnabled(true);
-    mListWidget->addItem(curItem);
-    mListWidget->setItemWidget(curItem, mSearchBar);
+    QListWidgetItem* curItem = new QListWidgetItem(listWidget_);
+    searchBar_->setPlaceholderText(tr("Search.."));
+    searchBar_->setClearButtonEnabled(true);
+    listWidget_->addItem(curItem);
+    listWidget_->setItemWidget(curItem, searchBar_);
 
-    mLineEdit->setReadOnly(true);
-    mLineEdit->installEventFilter(this);
+    lineEdit_->setReadOnly(true);
+    lineEdit_->installEventFilter(this);
 
-    setModel(mListWidget->model());
-    setView(mListWidget);
-    setLineEdit(mLineEdit);
+    setModel(listWidget_->model());
+    setView(listWidget_);
+    setLineEdit(lineEdit_);
 
-    connect(mSearchBar, &QLineEdit::textChanged, this, &MultiSelectComboBox::onSearch);
+    connect(searchBar_, &QLineEdit::textChanged, this, &MultiSelectComboBox::onSearch);
     connect(this, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &MultiSelectComboBox::itemClicked);
 }
 
-void MultiSelectComboBox::hidePopup()
-{
+void MultiSelectComboBox::hidePopup() {
     int width = this->width();
-    int height = mListWidget->height();
+    int height = listWidget_->height();
     int x = QCursor::pos().x() - mapToGlobal(geometry().topLeft()).x() + geometry().x();
     int y = QCursor::pos().y() - mapToGlobal(geometry().topLeft()).y() + geometry().y();
-    if (x >= 0 && x <= width && y >= this->height() && y <= height + this->height())
-    {
+    if (x >= 0 && x <= width &&
+        y >= 0 && y <= height + this->height() &&
+        x >= lineEdit_->x() &&
+        y >= lineEdit_->y()) {
         // Item was clicked, do not hide popup
-    }
-    else
-    {
+    } else {
         QComboBox::hidePopup();
     }
 }
 
-void MultiSelectComboBox::stateChanged(int aState)
-{
-    Q_UNUSED(aState);
+QString MultiSelectComboBox::getCurrentText() {
     QString selectedData("");
-    int count = mListWidget->count();
+    int count = listWidget_->count();
 
-    for (int i = 1; i < count; ++i)
-    {
-        QWidget *widget = mListWidget->itemWidget(mListWidget->item(i));
+    for (int i = 1; i < count; ++i) {
+        QWidget *widget = listWidget_->itemWidget(listWidget_->item(i));
         QCheckBox *checkBox = static_cast<QCheckBox *>(widget);
 
-        if (checkBox->isChecked())
-        {
+        if (checkBox->isChecked()) {
             selectedData.append(checkBox->text()).append(";");
         }
     }
-    if (selectedData.endsWith(";"))
-    {
+    if (selectedData.endsWith(";")) {
         selectedData.remove(selectedData.count() - 1, 1);
     }
-    if (!selectedData.isEmpty())
-    {
-        mLineEdit->setText(selectedData);
-    }
-    else
-    {
-        mLineEdit->clear();
+    return selectedData;
+}
+
+void MultiSelectComboBox::stateChanged(int aState) {
+    Q_UNUSED(aState);
+    QString selectedData = getCurrentText();
+    if (!selectedData.isEmpty()) {
+        lineEdit_->setText(selectedData);
+    } else {
+        lineEdit_->setText(tr("Не выбрано"));
     }
 
-    mLineEdit->setToolTip(textToToolTip(selectedData, ";"));
+    lineEdit_->setToolTip(textToToolTip(selectedData, ";"));
     emit selectionChanged();
 }
 
-void MultiSelectComboBox::addItem(const QString& aText, const QVariant& aUserData)
-{
+void MultiSelectComboBox::addItem(const QString& aText, const QVariant& aUserData) {
     Q_UNUSED(aUserData);
-    QListWidgetItem* listWidgetItem = new QListWidgetItem(mListWidget);
+    QListWidgetItem* listWidgetItem = new QListWidgetItem(listWidget_);
     QCheckBox* checkBox = new QCheckBox(this);
     checkBox->setText(aText);
-    mListWidget->addItem(listWidgetItem);
-    mListWidget->setItemWidget(listWidgetItem, checkBox);
+    listWidget_->addItem(listWidgetItem);
+    listWidget_->setItemWidget(listWidgetItem, checkBox);
     connect(checkBox, &QCheckBox::stateChanged, this, &MultiSelectComboBox::stateChanged);
 }
 
-QStringList MultiSelectComboBox::currentText()
-{
+QStringList MultiSelectComboBox::currentText() {
     QStringList emptyStringList;
-    if(!mLineEdit->text().isEmpty())
-    {
-        emptyStringList = mLineEdit->text().split(';');
+    if(!lineEdit_->text().isEmpty()) {
+        emptyStringList = getCurrentText().split(';');
     }
     return emptyStringList;
 }
 
-void MultiSelectComboBox::addItems(const QStringList& aTexts)
-{
-    for(const auto& string : aTexts)
-    {
+void MultiSelectComboBox::addItems(const QStringList& aTexts) {
+    for(const auto &string: aTexts) {
         addItem(string);
     }
 }
 
-int MultiSelectComboBox::count() const
-{
-    int count = mListWidget->count() - 1;// Do not count the search bar
-    if(count < 0)
-    {
+int MultiSelectComboBox::count() const {
+    int count = listWidget_->count() - 1;// Do not count the search bar
+    if(count < 0) {
         count = 0;
     }
     return count;
 }
 
-void MultiSelectComboBox::onSearch(const QString& aSearchString)
-{
-    for(int i = 1; i < mListWidget->count(); i++)
-    {
-        QCheckBox* checkBox = static_cast<QCheckBox*>(mListWidget->itemWidget(mListWidget->item(i)));
-        if(checkBox->text().contains(aSearchString, Qt::CaseInsensitive))
-        {
-            mListWidget->item(i)->setHidden(false);
-        }
-        else
-        {
-            mListWidget->item(i)->setHidden(true);
-        }
+void MultiSelectComboBox::onSearch(const QString& aSearchString) {
+    for(int i = 1; i < listWidget_->count(); ++i) {
+        QCheckBox* checkBox = static_cast<QCheckBox*>(listWidget_->itemWidget(listWidget_->item(i)));
+        listWidget_->item(i)->setHidden(!checkBox->text().contains(aSearchString, Qt::CaseInsensitive));
     }
 }
 
-void MultiSelectComboBox::itemClicked(int aIndex)
-{
-    if(aIndex != scSearchBarIndex)// 0 means the search bar
-    {
-        QWidget* widget = mListWidget->itemWidget(mListWidget->item(aIndex));
+void MultiSelectComboBox::itemClicked(int aIndex) {
+    if(aIndex != scSearchBarIndex) { // 0 means the search bar
+        QWidget* widget = listWidget_->itemWidget(listWidget_->item(aIndex));
         QCheckBox *checkBox = static_cast<QCheckBox *>(widget);
         checkBox->setChecked(!checkBox->isChecked());
     }
 }
 
-void MultiSelectComboBox::SetSearchBarPlaceHolderText(const QString& aPlaceHolderText)
-{
-    mSearchBar->setPlaceholderText(aPlaceHolderText);
+void MultiSelectComboBox::SetSearchBarPlaceHolderText(const QString& aPlaceHolderText) {
+    searchBar_->setPlaceholderText(aPlaceHolderText);
 }
 
-void MultiSelectComboBox::SetPlaceHolderText(const QString& aPlaceHolderText)
-{
-    mLineEdit->setPlaceholderText(aPlaceHolderText);
+void MultiSelectComboBox::SetPlaceHolderText(const QString& aPlaceHolderText) {
+    lineEdit_->setPlaceholderText(aPlaceHolderText);
 }
 
-void MultiSelectComboBox::clear()
-{
-    mListWidget->clear();
-    QListWidgetItem* curItem = new QListWidgetItem(mListWidget);
-    mSearchBar = new QLineEdit(this);
-    mSearchBar->setPlaceholderText(tr("Search.."));
-    mSearchBar->setClearButtonEnabled(true);
-    mListWidget->addItem(curItem);
-    mListWidget->setItemWidget(curItem, mSearchBar);
+void MultiSelectComboBox::clear() {
+    listWidget_->clear();
+    QListWidgetItem* curItem = new QListWidgetItem(listWidget_);
+    searchBar_ = new QLineEdit(this);
+    searchBar_->setPlaceholderText(tr("Search.."));
+    searchBar_->setClearButtonEnabled(true);
+    listWidget_->addItem(curItem);
+    listWidget_->setItemWidget(curItem, searchBar_);
 
-    connect(mSearchBar, &QLineEdit::textChanged, this, &MultiSelectComboBox::onSearch);
+    connect(searchBar_, &QLineEdit::textChanged, this, &MultiSelectComboBox::onSearch);
 }
 
-void MultiSelectComboBox::wheelEvent(QWheelEvent *aWheelEvent)
-{
+void MultiSelectComboBox::wheelEvent(QWheelEvent *aWheelEvent) {
     // Do not handle the wheel event
     Q_UNUSED(aWheelEvent);
 }
 
-bool MultiSelectComboBox::eventFilter(QObject* aObject, QEvent* aEvent)
-{
-    if(aObject == mLineEdit && aEvent->type() == QEvent::MouseButtonRelease) {
+bool MultiSelectComboBox::eventFilter(QObject* aObject, QEvent* aEvent) {
+    if(aObject == lineEdit_ && aEvent->type() == QEvent::MouseButtonRelease) {
         showPopup();
         return false;
     }
     return false;
 }
 
-void MultiSelectComboBox::keyPressEvent(QKeyEvent* aEvent)
-{
+void MultiSelectComboBox::keyPressEvent(QKeyEvent* aEvent) {
     // Do not handle key event
     Q_UNUSED(aEvent);
 }
 
-void MultiSelectComboBox::setCurrentText(const QString& aText)
-{
+void MultiSelectComboBox::setCurrentText(const QString& aText) {
     Q_UNUSED(aText);
 }
 
-void MultiSelectComboBox::setCurrentText(const QStringList& aText)
-{
-    int count = mListWidget->count();
+void MultiSelectComboBox::setCurrentText(const QStringList& aText) {
+    int count = listWidget_->count();
 
-    for (int i = 1; i < count; ++i)
-    {
-        QWidget* widget = mListWidget->itemWidget(mListWidget->item(i));
+    for (int i = 1; i < count; ++i) {
+        QWidget* widget = listWidget_->itemWidget(listWidget_->item(i));
         QCheckBox* checkBox = static_cast<QCheckBox*>(widget);
         QString checkBoxString = checkBox->text();
-        if(aText.contains(checkBoxString))
-        {
+        if(aText.contains(checkBoxString)) {
             checkBox->setChecked(true);
         }
     }
 }
 
-void MultiSelectComboBox::ResetSelection()
-{
-    int count = mListWidget->count();
+void MultiSelectComboBox::ResetSelection() {
+    int count = listWidget_->count();
 
-    for (int i = 1; i < count; ++i)
-    {
-        QWidget *widget = mListWidget->itemWidget(mListWidget->item(i));
+    for (int i = 1; i < count; ++i) {
+        QWidget *widget = listWidget_->itemWidget(listWidget_->item(i));
         QCheckBox *checkBox = static_cast<QCheckBox *>(widget);
         checkBox->setChecked(false);
     }

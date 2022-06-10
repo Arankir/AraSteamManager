@@ -7,6 +7,8 @@
 #include "classes/steamApi/structures/sbans.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sfriends.h"
+#include "classes/steamApi/structures/sprofilecustomization.h"
+#include "classes/steamApi/structures/sbadge.h"
 #include "classes/network/requestimage.h"
 
 namespace Ui {
@@ -18,7 +20,7 @@ class FormProfile : public Form {
 
 public:
     explicit FormProfile(const SProfile &profile, QWidget *parent = nullptr);
-    ~FormProfile();
+    ~FormProfile() override;
     SProfile getProfile() const {return _profile;}
     SGames getGames() const {return _games;}
     QList<SFriend> getFriends() const {return _friends;}
@@ -32,26 +34,30 @@ public slots:
     void updateSettings(QFlags<changedSettings> aSettings) override;
 
 signals:
-    void s_goToGames(SProfile &profileSteamid, SGames &games);
-    void s_goToFriends(const QString &profileSteamid, SFriends &friends);
-    void s_goToStatistic(const SProfile &profile, SGames &games);
+    void s_goToGames(const ProfileID &profileId);
+    void s_goToFriends(const ProfileID &profileId);
+    void s_goToStatistic(const SProfile &profile);
     void s_goToFavorites();
 
 private slots:
-    void setLvl(const QString &aSteamId);
+    void setLvl(const ProfileID &aSteamId);
     void setOnlineStatus();
-    void setGames(const QString &aSteamId);
-    void setFriends(const QString &aSteamId);
-    void setBans(const QString &aSteamId);
+    void setGames(const ProfileID &aSteamId);
+    void setFriends(const ProfileID &aSteamId);
     void setProfileStatus();
     void setCommentPermission();
     void setCommunityProfile();
+
+    void setId(const ProfileID &aSteamId);
+    void setBans(const ProfileID &aSteamId);
+    void setBadges(const ProfileID &aSteamId);
+    void setTimePlayed(const SGames &aGames);
+    void setCustomizations(const ProfileID &aSteamId);
 
     void buttonSetProfile_Clicked();
     void buttonGames_Clicked();
     void buttonFriends_Clicked();
     void buttonStatistics_Clicked();
-    void buttonFavorites_Clicked();
 
     void updateIcons() override;
     void updateMyProfile();

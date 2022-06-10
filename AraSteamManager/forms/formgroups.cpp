@@ -1,57 +1,78 @@
 #include "formgroups.h"
 #include "ui_formgroups.h"
 
-FormGroups::FormGroups(SProfile &aProfile, const SGame &aGame, QWidget *parent) :
-    Form(parent), ui(new Ui::FormGroups), _groups(aProfile), _game(aGame) {
+#include <QInputDialog>
+#include <QAction>
+#include <QMenu>
+
+FormGroups::FormGroups(QWidget *parent): Form(parent), ui(new Ui::FormGroups) {
     ui->setupUi(this);
-    setProfileGame();
-    connect(ui->ButtonAdd,          &QPushButton::clicked, this, &FormGroups::add_clicked);
-    connect(ui->ButtonChangeTitle,  &QPushButton::clicked, this, &FormGroups::changeTitle_clicked);
-    connect(ui->ButtonCancel,       &QPushButton::clicked, this, &FormGroups::cancel_clicked);
-    connect(ui->ButtonApply,        &QPushButton::clicked, this, &FormGroups::apply_clicked);
+    init();
 }
 
 FormGroups::~FormGroups() {
-    qInfo() << "Форма групп удалилась";
     delete ui;
 }
 
-void FormGroups::setProfileGame() {//TODO потом сделать это публичной функцией для передачи в нее данных, а конструктор сделать пустым
+void FormGroups::init() {
+    ui->listWidgetGroups->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->ButtonCancel,       &QPushButton::clicked, this, &FormGroups::cancelClicked);
+    connect(ui->ButtonApply,        &QPushButton::clicked, this, &FormGroups::applyClicked);
+    connect(ui->listWidgetGroups,   &QListView::customContextMenuRequested, this, [&](QPoint lPos) {
+        createMenu(ui->listWidgetGroups->currentItem())->popup(ui->listWidgetGroups->viewport()->mapToGlobal(lPos));
+    });
+    connect(ui->listWidgetGroups,   &QListWidget::itemClicked, this, [&]() {
+        if (ui->listWidgetGroups->row(ui->listWidgetGroups->currentItem()) == ui->listWidgetGroups->count() - 1) {
+            QString title = QInputDialog::getText(this, tr("Новая группа"), tr("Название:"), QLineEdit::Normal, "");
+            if (!title.isEmpty()) {
+                groups_.addGroup(title);
+                updateUi();
+            }
+        }
+    });
+    connect(ui->listWidgetGroups, &QListWidget::itemChanged, this, [=, this](QListWidgetItem *lItem) {
+        if (lItem->flags().testFlag(Qt::ItemIsUserCheckable)) {
+            int row = ui->listWidgetGroups->row(lItem);
+            ui->listWidgetGroups->item(row);
+            groups_[row].changeTitle(lItem->text());
+        }
+    });
+}
+
+void FormGroups::setProfileGame(const ProfileID &aProfileId, const SGame &aGame) {
+    groups_.update(aProfileId);
+    game_ = aGame;
     initUi();
-    ui->LabelTitle->setText(_game.name());
+    ui->LabelTitle->setText(game_.name());
+    ui->labelIcon->setPixmap(game_.pixmapIcon());
 }
 
 void FormGroups::initUi() {
-    QVBoxLayout *layout = new QVBoxLayout();
-    for(const auto &group: _groups) {
-        ui->ComboBoxGroups->addItem(group.title());
-        QCheckBox *chb = new QCheckBox(group.title());
+    for(const auto &group: groups_) {
+        QListWidgetItem *item = new QListWidgetItem(group.title());
+        item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
         auto games = group.games();
         bool isInGroup = std::any_of(games.begin(),
                                      games.end(),
-                                     [=](GameID game) {
-                                        return game == _game.appId();
+                                     [this](GameID game) {
+                                        return game == game_.appId();
                                      });
         if (isInGroup) {
-            chb->setChecked(true);
+            item->setCheckState(Qt::CheckState::Checked);
+        } else {
+            item->setCheckState(Qt::CheckState::Unchecked);
         }
-        layout->addWidget(chb);
+        ui->listWidgetGroups->addItem(item);
     }
-    if (QLayout *lay = ui->ScrollAreaGroups->layout()) {
-        delete lay;
-    }
-    ui->ScrollAreaGroups->setLayout(layout);
+    QListWidgetItem *itemAdd = new QListWidgetItem(QIcon(Images::create()), tr("Добавить"));
+    itemAdd->setFlags(itemAdd->flags() | Qt::ItemIsEnabled);
+    ui->listWidgetGroups->addItem(itemAdd);
 }
 
 void FormGroups::clear() {
-    ui->ComboBoxGroups->clear();
-    if (ui->ScrollAreaGroups->layout() != nullptr) {
-        QLayoutItem *wItem;
-        while ((wItem = ui->ScrollAreaGroups->layout()->takeAt(0)) != NULL) {
-            delete wItem->widget();
-            delete wItem;
-        }
-        delete ui->ScrollAreaGroups->layout();
+    int count = ui->listWidgetGroups->count();
+    for(int row = 0; row < count; ++row) {
+        delete ui->listWidgetGroups->takeItem(0);
     }
 }
 
@@ -60,13 +81,19 @@ void FormGroups::updateUi() {
     initUi();
 }
 
-void FormGroups::add(const QString &aTitle) {
-    _groups.addGroup(aTitle);
-    updateUi();
+QMenu *FormGroups::createMenu(QListWidgetItem *aItem) {
+    QAction *actionAchievements = new QAction(QIcon(Images::deleteIcon()), tr("Удалить"), this);
+    connect (actionAchievements, &QAction::triggered, this, [=, this]() {
+        removeGroup(aItem);
+    });
+
+    QMenu *menu = new QMenu(this);
+    menu->addAction (actionAchievements);
+    return menu;
 }
 
-void FormGroups::changeTitle(const int &aIndex, const QString &aTitle) {
-    _groups[aIndex].changeTitle(aTitle);
+void FormGroups::removeGroup(QListWidgetItem *aItem) {
+    groups_.removeGroup(aItem->text());
     updateUi();
 }
 
@@ -75,35 +102,27 @@ void FormGroups::cancel() {
 }
 
 void FormGroups::apply() {
-    for (int i = 0; i < ui->ScrollAreaGroups->layout()->count(); ++i) {
-        QCheckBox *chb = dynamic_cast<QCheckBox*>(ui->ScrollAreaGroups->layout()->itemAt(i)->widget());
-        if (chb) {
-            if (chb->isChecked()) {
-                _groups[i].addGame(_game);
+    for(int row = 0; row < ui->listWidgetGroups->count(); ++row) {
+        auto item = ui->listWidgetGroups->item(row);
+        if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
+            if (item->checkState() == Qt::CheckState::Checked) {
+                groups_[row].addGame(game_);
             } else {
-                _groups[i].removeGame(_game);
+                groups_[row].removeGame(game_.appId());
             }
         }
     }
 
-    _groups.save();
+    groups_.save();
     emit s_updateGroups();
     close();
 }
 
-void FormGroups::add_clicked() {
-    add(ui->LineEditAddTitle->text());
-}
-
-void FormGroups::changeTitle_clicked() {
-    changeTitle(ui->ComboBoxGroups->currentIndex(), ui->LineEditChangeTitle->text());
-}
-
-void FormGroups::cancel_clicked() {
+void FormGroups::cancelClicked() {
     cancel();
 }
 
-void FormGroups::apply_clicked() {
+void FormGroups::applyClicked() {
     apply();
 }
 
@@ -112,7 +131,8 @@ void FormGroups::retranslate() {
 }
 
 void FormGroups::updateIcons() {
-
+    auto item = ui->listWidgetGroups->item(ui->listWidgetGroups->count() - 1);
+    item->setIcon(QIcon(Images::create()));
 }
 
 void FormGroups::updateSettings(QFlags<changedSettings> aSettings) {

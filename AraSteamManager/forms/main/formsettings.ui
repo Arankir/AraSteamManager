@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>470</width>
+    <width>500</width>
     <height>566</height>
    </rect>
   </property>
@@ -29,157 +29,52 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>  Общие настройки  </string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_18">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_15">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QGroupBox" name="GroupBoxTheme">
-           <property name="title">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
             <string>Тема</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QRadioButton" name="RadioButtonDarkTheme">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Тёмная</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="RadioButtonLightTheme">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Светлая</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="RadioButtonBlueTheme">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Синяя</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonRbg">
-              <property name="text">
-               <string>Зеленая</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonBrg">
-              <property name="text">
-               <string>Малиновая</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonBgr">
-              <property name="text">
-               <string>Оранжевая</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonGbr">
-              <property name="text">
-               <string>Лаймовая</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonGrb">
-              <property name="text">
-               <string>Фиолетовая</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="radioButtonCustom">
-              <property name="text">
-               <string>Пользовательская</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer_8">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+          <widget class="QComboBox" name="ComboBoxTheme">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
          <item>
-          <widget class="QGroupBox" name="groupBox">
-           <property name="title">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
             <string>Язык</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout">
-            <item>
-             <widget class="QRadioButton" name="RadioButtonLanguageEnglish">
-              <property name="text">
-               <string notr="true">English</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="RadioButtonLanguageRussian">
-              <property name="text">
-               <string notr="true">Русский</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+          <widget class="QComboBox" name="ComboBoxLanguage">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
+          </widget>
          </item>
         </layout>
        </item>
@@ -231,7 +126,6 @@
         <widget class="QLabel" name="labelIcons8">
          <property name="font">
           <font>
-           <family>Ebrima</family>
            <pointsize>10</pointsize>
           </font>
          </property>
@@ -291,8 +185,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>466</width>
-            <height>404</height>
+            <width>496</width>
+            <height>386</height>
            </rect>
           </property>
           <attribute name="label">
@@ -342,8 +236,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>177</width>
-            <height>117</height>
+            <width>188</width>
+            <height>120</height>
            </rect>
           </property>
           <attribute name="label">
@@ -391,8 +285,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>177</width>
-            <height>117</height>
+            <width>188</width>
+            <height>120</height>
            </rect>
           </property>
           <attribute name="label">
@@ -440,8 +334,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>177</width>
-            <height>117</height>
+            <width>188</width>
+            <height>120</height>
            </rect>
           </property>
           <attribute name="label">
@@ -486,8 +380,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>174</width>
-            <height>41</height>
+            <width>184</width>
+            <height>44</height>
            </rect>
           </property>
           <attribute name="label">
@@ -544,7 +438,11 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_6">
            <item>
-            <widget class="QLineEdit" name="LineEditImportCategories"/>
+            <widget class="MyLineEdit" name="LineEditImportCategories">
+             <property name="placeholderText">
+              <string>C:\Program Files (x86)\category.sas</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ButtonImportCategories">
@@ -569,7 +467,11 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_7">
            <item>
-            <widget class="QLineEdit" name="lineEdit_2"/>
+            <widget class="MyLineEdit" name="lineEdit_2">
+             <property name="placeholderText">
+              <string>C:\Program Files (x86)\favorites.sas</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ButtonImportFavorites">
@@ -597,7 +499,11 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
-            <widget class="QLineEdit" name="lineEdit_3"/>
+            <widget class="MyLineEdit" name="lineEdit_3">
+             <property name="placeholderText">
+              <string>C:\Program Files (x86)\comments.sas</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ButtonImportComments">
@@ -625,7 +531,11 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_9">
            <item>
-            <widget class="QLineEdit" name="lineEdit_4"/>
+            <widget class="MyLineEdit" name="lineEdit_4">
+             <property name="placeholderText">
+              <string>C:\Program Files (x86)\groups.sas</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ButtonImportGroups">
@@ -653,7 +563,11 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_10">
            <item>
-            <widget class="QLineEdit" name="lineEdit_5"/>
+            <widget class="MyLineEdit" name="lineEdit_5">
+             <property name="placeholderText">
+              <string>C:\Program Files (x86)\someData.sas</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QPushButton" name="ButtonRawImport">
@@ -692,7 +606,11 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QLineEdit" name="LineEditFindGame"/>
+          <widget class="MyLineEdit" name="LineEditFindGame">
+           <property name="placeholderText">
+            <string>Dota 2</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="ButtonFindGame">
@@ -749,16 +667,39 @@
       <attribute name="title">
        <string>О программе</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_19">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Версия программы: 1.285475</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout_16">
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Версия программы:</string>
+           </property>
+           <property name="wordWrap">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelVersion">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>1.0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QLabel" name="label_8">
@@ -774,7 +715,6 @@
         <widget class="QLabel" name="label_9">
          <property name="font">
           <font>
-           <family>Ebrima</family>
            <italic>true</italic>
           </font>
          </property>
@@ -787,7 +727,6 @@
         <widget class="QLabel" name="label_10">
          <property name="font">
           <font>
-           <family>Ebrima</family>
            <italic>true</italic>
           </font>
          </property>
@@ -825,6 +764,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>subWidgets/lineEdit/mylineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

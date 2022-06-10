@@ -3,7 +3,6 @@
 
 FormFavorites::FormFavorites(QWidget *parent): Form(parent), ui(new Ui::FormFavorites) {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_TranslucentBackground);
     initComponents();
 }
 
@@ -36,9 +35,9 @@ void FormFavorites::initComponents() {
     ui->TableWidgetFriends->setSelectionMode(QAbstractItemView::NoSelection);
     ui->TableWidgetFriends->setColumnHidden(ColumnFavoritesID, true);
     ui->TableWidgetFriends->setColumnWidth(ColumnFavoritesIcon, 33);
-    ui->TableWidgetFriends->setRowCount(_favorites.friends().count());
-    foreach(const FavoriteFriend &steamFriend, _favorites.friends()) {
-        SProfile::load(steamFriend.friendId(), SProfile::LoadType::id, std::bind(&FormFavorites::friendLoad, this,  std::placeholders::_1));
+    ui->TableWidgetFriends->setRowCount(_friendsFavorites.count());
+    foreach(const FavoriteProfile &steamFriend, _friendsFavorites) {
+        SProfile::load(steamFriend.profileId(), SProfile::LoadType::id, std::bind(&FormFavorites::friendLoad, this,  std::placeholders::_1));
 //        SProfiles *Profiles = new SProfiles(steamFriend.friendId(), true, ProfileUrlType::id);
 //        connect(Profiles, SIGNAL(s_finished(SProfiles*)), this, SLOT(friendLoad(SProfiles*)));
     }
@@ -143,7 +142,17 @@ void FormFavorites::retranslate() {
     ui->TableWidgetFriends->setHorizontalHeaderItem(ColumnFavoritesFavorite, new QTableWidgetItem(tr("Избранное")));
 }
 
+#include "classes/common/theme.h"
 void FormFavorites::on_pushButton_clicked() {
     ui->label   ->setStyleSheet("color: rgb(" + ui->lineEdit->text() + ");");
     ui->label_2 ->setStyleSheet("color: rgb(" + ui->lineEdit->text() + ");");
+
+    blackTheme().save("C:\\Users\\Pavel\\Desktop\\black.json");
+    whiteTheme().save("C:\\Users\\Pavel\\Desktop\\white.json");
+    blueTheme().save("C:\\Users\\Pavel\\Desktop\\blue.json");
+    orangeTheme().save("C:\\Users\\Pavel\\Desktop\\orange.json");
+    crimsonTheme().save("C:\\Users\\Pavel\\Desktop\\crimson.json");
+    limeTheme().save("C:\\Users\\Pavel\\Desktop\\lime.json");
+    purpleTheme().save("C:\\Users\\Pavel\\Desktop\\purple.json");
+    greenTheme().save("C:\\Users\\Pavel\\Desktop\\green.json");
 }

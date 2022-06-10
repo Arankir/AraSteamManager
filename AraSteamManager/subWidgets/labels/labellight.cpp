@@ -13,30 +13,10 @@ LabelLight::~LabelLight() {
 }
 
 LabelLight &LabelLight::setLightColor(int aRed, int aGreen, int aBlue, int aAlpha) {
-    if (aRed > 255) {
-        aRed = 255;
-    }
-    if (aGreen > 255) {
-        aGreen = 255;
-    }
-    if (aBlue > 255) {
-        aBlue = 255;
-    }
-    if (aAlpha > 255) {
-        aAlpha = 255;
-    }
-    if (aRed < 0) {
-        aRed = 0;
-    }
-    if (aGreen < 0) {
-        aGreen = 0;
-    }
-    if (aBlue < 0) {
-        aBlue = 0;
-    }
-    if (aAlpha < 0) {
-        aAlpha = 0;
-    }
+    aRed    = std::max(0, std::min(255, aRed));
+    aGreen  = std::max(0, std::min(255, aGreen));
+    aBlue   = std::max(0, std::min(255, aBlue));
+    aAlpha  = std::max(0, std::min(255, aAlpha));
     _light->setColor(QColor(aRed, aGreen, aBlue, aAlpha));
     return *this;
 }

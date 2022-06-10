@@ -14,14 +14,11 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
@@ -30,6 +27,7 @@
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "subWidgets/lineEdit/mylineedit.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -39,26 +37,13 @@ public:
     QVBoxLayout *verticalLayout_5;
     QTabWidget *tabWidget;
     QWidget *tab_2;
-    QVBoxLayout *verticalLayout_18;
-    QHBoxLayout *horizontalLayout_15;
-    QGroupBox *GroupBoxTheme;
-    QVBoxLayout *verticalLayout_3;
-    QRadioButton *RadioButtonDarkTheme;
-    QRadioButton *RadioButtonLightTheme;
-    QRadioButton *RadioButtonBlueTheme;
-    QRadioButton *radioButtonRbg;
-    QRadioButton *radioButtonBrg;
-    QRadioButton *radioButtonBgr;
-    QRadioButton *radioButtonGbr;
-    QRadioButton *radioButtonGrb;
-    QRadioButton *radioButtonCustom;
-    QSpacerItem *horizontalSpacer_8;
-    QHBoxLayout *horizontalLayout;
-    QGroupBox *groupBox;
     QVBoxLayout *verticalLayout;
-    QRadioButton *RadioButtonLanguageEnglish;
-    QRadioButton *RadioButtonLanguageRussian;
-    QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label_12;
+    QComboBox *ComboBoxTheme;
+    QHBoxLayout *horizontalLayout_15;
+    QLabel *label_13;
+    QComboBox *ComboBoxLanguage;
     QCheckBox *CheckBoxVisibleHiddenGames;
     QCheckBox *CheckBoxSaveImage;
     QHBoxLayout *horizontalLayout_2;
@@ -104,40 +89,42 @@ public:
     QVBoxLayout *verticalLayout_6;
     QLabel *label_2;
     QHBoxLayout *horizontalLayout_6;
-    QLineEdit *LineEditImportCategories;
+    MyLineEdit *LineEditImportCategories;
     QPushButton *ButtonImportCategories;
     QVBoxLayout *verticalLayout_7;
     QLabel *label_3;
     QHBoxLayout *horizontalLayout_7;
-    QLineEdit *lineEdit_2;
+    MyLineEdit *lineEdit_2;
     QPushButton *ButtonImportFavorites;
     QVBoxLayout *verticalLayout_8;
     QLabel *label_4;
     QHBoxLayout *horizontalLayout_8;
-    QLineEdit *lineEdit_3;
+    MyLineEdit *lineEdit_3;
     QPushButton *ButtonImportComments;
     QVBoxLayout *verticalLayout_9;
     QLabel *label_5;
     QHBoxLayout *horizontalLayout_9;
-    QLineEdit *lineEdit_4;
+    MyLineEdit *lineEdit_4;
     QPushButton *ButtonImportGroups;
     QVBoxLayout *verticalLayout_10;
     QLabel *label_6;
     QHBoxLayout *horizontalLayout_10;
-    QLineEdit *lineEdit_5;
+    MyLineEdit *lineEdit_5;
     QPushButton *ButtonRawImport;
     QSpacerItem *verticalSpacer_2;
     QWidget *tab_3;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_5;
-    QLineEdit *LineEditFindGame;
+    MyLineEdit *LineEditFindGame;
     QPushButton *ButtonFindGame;
     QHBoxLayout *horizontalLayout_4;
     QFrame *FrameProfilesHideGames;
     QTableWidget *TableWidgetGames;
     QWidget *tab;
-    QVBoxLayout *verticalLayout_19;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_16;
     QLabel *label_7;
+    QLabel *labelVersion;
     QLabel *label_8;
     QLabel *label_9;
     QLabel *label_10;
@@ -148,7 +135,7 @@ public:
     {
         if (FormSettings->objectName().isEmpty())
             FormSettings->setObjectName(QString::fromUtf8("FormSettings"));
-        FormSettings->resize(470, 566);
+        FormSettings->resize(500, 566);
         verticalLayout_5 = new QVBoxLayout(FormSettings);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
@@ -156,116 +143,55 @@ public:
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
-        verticalLayout_18 = new QVBoxLayout(tab_2);
-        verticalLayout_18->setObjectName(QString::fromUtf8("verticalLayout_18"));
-        horizontalLayout_15 = new QHBoxLayout();
-        horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
-        GroupBoxTheme = new QGroupBox(tab_2);
-        GroupBoxTheme->setObjectName(QString::fromUtf8("GroupBoxTheme"));
-        verticalLayout_3 = new QVBoxLayout(GroupBoxTheme);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        RadioButtonDarkTheme = new QRadioButton(GroupBoxTheme);
-        RadioButtonDarkTheme->setObjectName(QString::fromUtf8("RadioButtonDarkTheme"));
-        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(RadioButtonDarkTheme->sizePolicy().hasHeightForWidth());
-        RadioButtonDarkTheme->setSizePolicy(sizePolicy);
-
-        verticalLayout_3->addWidget(RadioButtonDarkTheme);
-
-        RadioButtonLightTheme = new QRadioButton(GroupBoxTheme);
-        RadioButtonLightTheme->setObjectName(QString::fromUtf8("RadioButtonLightTheme"));
-        sizePolicy.setHeightForWidth(RadioButtonLightTheme->sizePolicy().hasHeightForWidth());
-        RadioButtonLightTheme->setSizePolicy(sizePolicy);
-
-        verticalLayout_3->addWidget(RadioButtonLightTheme);
-
-        RadioButtonBlueTheme = new QRadioButton(GroupBoxTheme);
-        RadioButtonBlueTheme->setObjectName(QString::fromUtf8("RadioButtonBlueTheme"));
-        sizePolicy.setHeightForWidth(RadioButtonBlueTheme->sizePolicy().hasHeightForWidth());
-        RadioButtonBlueTheme->setSizePolicy(sizePolicy);
-
-        verticalLayout_3->addWidget(RadioButtonBlueTheme);
-
-        radioButtonRbg = new QRadioButton(GroupBoxTheme);
-        radioButtonRbg->setObjectName(QString::fromUtf8("radioButtonRbg"));
-
-        verticalLayout_3->addWidget(radioButtonRbg);
-
-        radioButtonBrg = new QRadioButton(GroupBoxTheme);
-        radioButtonBrg->setObjectName(QString::fromUtf8("radioButtonBrg"));
-
-        verticalLayout_3->addWidget(radioButtonBrg);
-
-        radioButtonBgr = new QRadioButton(GroupBoxTheme);
-        radioButtonBgr->setObjectName(QString::fromUtf8("radioButtonBgr"));
-
-        verticalLayout_3->addWidget(radioButtonBgr);
-
-        radioButtonGbr = new QRadioButton(GroupBoxTheme);
-        radioButtonGbr->setObjectName(QString::fromUtf8("radioButtonGbr"));
-
-        verticalLayout_3->addWidget(radioButtonGbr);
-
-        radioButtonGrb = new QRadioButton(GroupBoxTheme);
-        radioButtonGrb->setObjectName(QString::fromUtf8("radioButtonGrb"));
-
-        verticalLayout_3->addWidget(radioButtonGrb);
-
-        radioButtonCustom = new QRadioButton(GroupBoxTheme);
-        radioButtonCustom->setObjectName(QString::fromUtf8("radioButtonCustom"));
-
-        verticalLayout_3->addWidget(radioButtonCustom);
-
-
-        horizontalLayout_15->addWidget(GroupBoxTheme);
-
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_15->addItem(horizontalSpacer_8);
-
-
-        verticalLayout_18->addLayout(horizontalLayout_15);
-
+        verticalLayout = new QVBoxLayout(tab_2);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        groupBox = new QGroupBox(tab_2);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        verticalLayout = new QVBoxLayout(groupBox);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        RadioButtonLanguageEnglish = new QRadioButton(groupBox);
-        RadioButtonLanguageEnglish->setObjectName(QString::fromUtf8("RadioButtonLanguageEnglish"));
-        RadioButtonLanguageEnglish->setText(QString::fromUtf8("English"));
+        label_12 = new QLabel(tab_2);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
 
-        verticalLayout->addWidget(RadioButtonLanguageEnglish);
+        horizontalLayout->addWidget(label_12);
 
-        RadioButtonLanguageRussian = new QRadioButton(groupBox);
-        RadioButtonLanguageRussian->setObjectName(QString::fromUtf8("RadioButtonLanguageRussian"));
-        RadioButtonLanguageRussian->setText(QString::fromUtf8("\320\240\321\203\321\201\321\201\320\272\320\270\320\271"));
+        ComboBoxTheme = new QComboBox(tab_2);
+        ComboBoxTheme->setObjectName(QString::fromUtf8("ComboBoxTheme"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ComboBoxTheme->sizePolicy().hasHeightForWidth());
+        ComboBoxTheme->setSizePolicy(sizePolicy);
 
-        verticalLayout->addWidget(RadioButtonLanguageRussian);
-
-
-        horizontalLayout->addWidget(groupBox);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_2);
+        horizontalLayout->addWidget(ComboBoxTheme);
 
 
-        verticalLayout_18->addLayout(horizontalLayout);
+        verticalLayout->addLayout(horizontalLayout);
+
+        horizontalLayout_15 = new QHBoxLayout();
+        horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
+        label_13 = new QLabel(tab_2);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+
+        horizontalLayout_15->addWidget(label_13);
+
+        ComboBoxLanguage = new QComboBox(tab_2);
+        ComboBoxLanguage->setObjectName(QString::fromUtf8("ComboBoxLanguage"));
+        sizePolicy.setHeightForWidth(ComboBoxLanguage->sizePolicy().hasHeightForWidth());
+        ComboBoxLanguage->setSizePolicy(sizePolicy);
+
+        horizontalLayout_15->addWidget(ComboBoxLanguage);
+
+
+        verticalLayout->addLayout(horizontalLayout_15);
 
         CheckBoxVisibleHiddenGames = new QCheckBox(tab_2);
         CheckBoxVisibleHiddenGames->setObjectName(QString::fromUtf8("CheckBoxVisibleHiddenGames"));
         CheckBoxVisibleHiddenGames->setEnabled(false);
 
-        verticalLayout_18->addWidget(CheckBoxVisibleHiddenGames);
+        verticalLayout->addWidget(CheckBoxVisibleHiddenGames);
 
         CheckBoxSaveImage = new QCheckBox(tab_2);
         CheckBoxSaveImage->setObjectName(QString::fromUtf8("CheckBoxSaveImage"));
 
-        verticalLayout_18->addWidget(CheckBoxSaveImage);
+        verticalLayout->addWidget(CheckBoxSaveImage);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -284,23 +210,22 @@ public:
         horizontalLayout_2->addItem(horizontalSpacer);
 
 
-        verticalLayout_18->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(horizontalLayout_2);
 
         labelIcons8 = new QLabel(tab_2);
         labelIcons8->setObjectName(QString::fromUtf8("labelIcons8"));
         QFont font;
-        font.setFamilies({QString::fromUtf8("Ebrima")});
         font.setPointSize(10);
         labelIcons8->setFont(font);
         labelIcons8->setWordWrap(true);
         labelIcons8->setOpenExternalLinks(true);
         labelIcons8->setTextInteractionFlags(Qt::TextBrowserInteraction);
 
-        verticalLayout_18->addWidget(labelIcons8);
+        verticalLayout->addWidget(labelIcons8);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_18->addItem(verticalSpacer);
+        verticalLayout->addItem(verticalSpacer);
 
         tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
@@ -312,7 +237,7 @@ public:
         ToolBoxExport->setObjectName(QString::fromUtf8("ToolBoxExport"));
         PageCategories = new QWidget();
         PageCategories->setObjectName(QString::fromUtf8("PageCategories"));
-        PageCategories->setGeometry(QRect(0, 0, 466, 404));
+        PageCategories->setGeometry(QRect(0, 0, 496, 386));
         verticalLayout_12 = new QVBoxLayout(PageCategories);
         verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
         TreeWidgetExportCategories = new QTreeWidget(PageCategories);
@@ -341,7 +266,7 @@ public:
         ToolBoxExport->addItem(PageCategories, QString::fromUtf8("\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270"));
         PageFavorites = new QWidget();
         PageFavorites->setObjectName(QString::fromUtf8("PageFavorites"));
-        PageFavorites->setGeometry(QRect(0, 0, 177, 117));
+        PageFavorites->setGeometry(QRect(0, 0, 188, 120));
         verticalLayout_13 = new QVBoxLayout(PageFavorites);
         verticalLayout_13->setObjectName(QString::fromUtf8("verticalLayout_13"));
         TreeViewExportFavorites = new QTreeView(PageFavorites);
@@ -368,7 +293,7 @@ public:
         ToolBoxExport->addItem(PageFavorites, QString::fromUtf8("\320\230\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\265"));
         PageComments = new QWidget();
         PageComments->setObjectName(QString::fromUtf8("PageComments"));
-        PageComments->setGeometry(QRect(0, 0, 177, 117));
+        PageComments->setGeometry(QRect(0, 0, 188, 120));
         verticalLayout_14 = new QVBoxLayout(PageComments);
         verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
         TreeViewExportComments = new QTreeView(PageComments);
@@ -395,7 +320,7 @@ public:
         ToolBoxExport->addItem(PageComments, QString::fromUtf8("\320\232\320\276\320\274\320\274\320\265\320\275\321\202\320\260\321\200\320\270\320\270"));
         PageGroups = new QWidget();
         PageGroups->setObjectName(QString::fromUtf8("PageGroups"));
-        PageGroups->setGeometry(QRect(0, 0, 177, 117));
+        PageGroups->setGeometry(QRect(0, 0, 188, 120));
         verticalLayout_15 = new QVBoxLayout(PageGroups);
         verticalLayout_15->setObjectName(QString::fromUtf8("verticalLayout_15"));
         ListViewExportGroups = new QListView(PageGroups);
@@ -421,7 +346,7 @@ public:
         ToolBoxExport->addItem(PageGroups, QString::fromUtf8("\320\223\321\200\321\203\320\277\320\277\321\213"));
         PageSettings = new QWidget();
         PageSettings->setObjectName(QString::fromUtf8("PageSettings"));
-        PageSettings->setGeometry(QRect(0, 0, 174, 41));
+        PageSettings->setGeometry(QRect(0, 0, 184, 44));
         verticalLayout_16 = new QVBoxLayout(PageSettings);
         verticalLayout_16->setObjectName(QString::fromUtf8("verticalLayout_16"));
         horizontalLayout_3 = new QHBoxLayout();
@@ -457,7 +382,7 @@ public:
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        LineEditImportCategories = new QLineEdit(tab_5);
+        LineEditImportCategories = new MyLineEdit(tab_5);
         LineEditImportCategories->setObjectName(QString::fromUtf8("LineEditImportCategories"));
 
         horizontalLayout_6->addWidget(LineEditImportCategories);
@@ -482,7 +407,7 @@ public:
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        lineEdit_2 = new QLineEdit(tab_5);
+        lineEdit_2 = new MyLineEdit(tab_5);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
 
         horizontalLayout_7->addWidget(lineEdit_2);
@@ -508,7 +433,7 @@ public:
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        lineEdit_3 = new QLineEdit(tab_5);
+        lineEdit_3 = new MyLineEdit(tab_5);
         lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
 
         horizontalLayout_8->addWidget(lineEdit_3);
@@ -534,7 +459,7 @@ public:
 
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        lineEdit_4 = new QLineEdit(tab_5);
+        lineEdit_4 = new MyLineEdit(tab_5);
         lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
 
         horizontalLayout_9->addWidget(lineEdit_4);
@@ -560,7 +485,7 @@ public:
 
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        lineEdit_5 = new QLineEdit(tab_5);
+        lineEdit_5 = new MyLineEdit(tab_5);
         lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
 
         horizontalLayout_10->addWidget(lineEdit_5);
@@ -588,7 +513,7 @@ public:
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        LineEditFindGame = new QLineEdit(tab_3);
+        LineEditFindGame = new MyLineEdit(tab_3);
         LineEditFindGame->setObjectName(QString::fromUtf8("LineEditFindGame"));
 
         horizontalLayout_5->addWidget(LineEditFindGame);
@@ -631,44 +556,63 @@ public:
         tabWidget->addTab(tab_3, QString());
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
-        verticalLayout_19 = new QVBoxLayout(tab);
-        verticalLayout_19->setObjectName(QString::fromUtf8("verticalLayout_19"));
+        verticalLayout_2 = new QVBoxLayout(tab);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
         label_7 = new QLabel(tab);
         label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setWordWrap(true);
+        QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(label_7->sizePolicy().hasHeightForWidth());
+        label_7->setSizePolicy(sizePolicy2);
+        label_7->setWordWrap(false);
 
-        verticalLayout_19->addWidget(label_7);
+        horizontalLayout_16->addWidget(label_7);
+
+        labelVersion = new QLabel(tab);
+        labelVersion->setObjectName(QString::fromUtf8("labelVersion"));
+        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(labelVersion->sizePolicy().hasHeightForWidth());
+        labelVersion->setSizePolicy(sizePolicy3);
+
+        horizontalLayout_16->addWidget(labelVersion);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_16);
 
         label_8 = new QLabel(tab);
         label_8->setObjectName(QString::fromUtf8("label_8"));
         label_8->setWordWrap(true);
 
-        verticalLayout_19->addWidget(label_8);
+        verticalLayout_2->addWidget(label_8);
 
         label_9 = new QLabel(tab);
         label_9->setObjectName(QString::fromUtf8("label_9"));
         QFont font1;
-        font1.setFamilies({QString::fromUtf8("Ebrima")});
         font1.setItalic(true);
         label_9->setFont(font1);
 
-        verticalLayout_19->addWidget(label_9);
+        verticalLayout_2->addWidget(label_9);
 
         label_10 = new QLabel(tab);
         label_10->setObjectName(QString::fromUtf8("label_10"));
         label_10->setFont(font1);
         label_10->setTextFormat(Qt::RichText);
 
-        verticalLayout_19->addWidget(label_10);
+        verticalLayout_2->addWidget(label_10);
 
         label_11 = new QLabel(tab);
         label_11->setObjectName(QString::fromUtf8("label_11"));
 
-        verticalLayout_19->addWidget(label_11);
+        verticalLayout_2->addWidget(label_11);
 
         verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_19->addItem(verticalSpacer_3);
+        verticalLayout_2->addItem(verticalSpacer_3);
 
         tabWidget->addTab(tab, QString());
 
@@ -677,7 +621,7 @@ public:
 
         retranslateUi(FormSettings);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         ToolBoxExport->setCurrentIndex(0);
 
 
@@ -687,17 +631,8 @@ public:
     void retranslateUi(QWidget *FormSettings)
     {
         FormSettings->setWindowTitle(QCoreApplication::translate("FormSettings", "Form", nullptr));
-        GroupBoxTheme->setTitle(QCoreApplication::translate("FormSettings", "\320\242\320\265\320\274\320\260", nullptr));
-        RadioButtonDarkTheme->setText(QCoreApplication::translate("FormSettings", "\320\242\321\221\320\274\320\275\320\260\321\217", nullptr));
-        RadioButtonLightTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\262\320\265\321\202\320\273\320\260\321\217", nullptr));
-        RadioButtonBlueTheme->setText(QCoreApplication::translate("FormSettings", "\320\241\320\270\320\275\321\217\321\217", nullptr));
-        radioButtonRbg->setText(QCoreApplication::translate("FormSettings", "\320\227\320\265\320\273\320\265\320\275\320\260\321\217", nullptr));
-        radioButtonBrg->setText(QCoreApplication::translate("FormSettings", "\320\234\320\260\320\273\320\270\320\275\320\276\320\262\320\260\321\217", nullptr));
-        radioButtonBgr->setText(QCoreApplication::translate("FormSettings", "\320\236\321\200\320\260\320\275\320\266\320\265\320\262\320\260\321\217", nullptr));
-        radioButtonGbr->setText(QCoreApplication::translate("FormSettings", "\320\233\320\260\320\271\320\274\320\276\320\262\320\260\321\217", nullptr));
-        radioButtonGrb->setText(QCoreApplication::translate("FormSettings", "\320\244\320\270\320\276\320\273\320\265\321\202\320\276\320\262\320\260\321\217", nullptr));
-        radioButtonCustom->setText(QCoreApplication::translate("FormSettings", "\320\237\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\321\214\321\201\320\272\320\260\321\217", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("FormSettings", "\320\257\320\267\321\213\320\272", nullptr));
+        label_12->setText(QCoreApplication::translate("FormSettings", "\320\242\320\265\320\274\320\260", nullptr));
+        label_13->setText(QCoreApplication::translate("FormSettings", "\320\257\320\267\321\213\320\272", nullptr));
         CheckBoxVisibleHiddenGames->setText(QCoreApplication::translate("FormSettings", "\320\237\321\200\320\270 \320\277\320\276\320\270\321\201\320\272\320\265 \320\277\320\276 \320\270\320\263\321\200\320\260\320\274 \320\276\321\202\320\276\320\261\321\200\320\260\320\266\320\260\321\202\321\214 \321\201\320\272\321\200\321\213\321\202\321\213\320\265 \320\270\320\263\321\200\321\213", nullptr));
         CheckBoxSaveImage->setText(QCoreApplication::translate("FormSettings", "\320\220\320\262\321\202\320\276\320\274\320\260\321\202\320\270\321\207\320\265\321\201\320\272\320\270 \321\201\320\276\321\205\321\200\320\260\320\275\321\217\321\202\321\214 \320\272\320\260\321\200\321\202\320\270\320\275\320\272\320\270 \320\275\320\260 \320\272\320\276\320\274\320\277\321\214\321\216\321\202\320\265\321\200\320\265 (\320\264\320\273\321\217 \320\261\320\276\320\273\320\265\320\265 \320\261\321\213\321\201\321\202\321\200\320\276\320\271 \320\267\320\260\320\263\321\200\321\203\320\267\320\272\320\270)", nullptr));
         label->setText(QCoreApplication::translate("FormSettings", "\320\224\320\260\320\275\320\275\321\213\320\265 \320\276 \320\277\321\200\320\276\321\204\320\270\320\273\320\265", nullptr));
@@ -715,19 +650,26 @@ public:
         ToolBoxExport->setItemText(ToolBoxExport->indexOf(PageSettings), QCoreApplication::translate("FormSettings", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("FormSettings", "  \320\255\320\272\321\201\320\277\320\276\321\200\321\202  ", nullptr));
         label_2->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\271", nullptr));
+        LineEditImportCategories->setPlaceholderText(QCoreApplication::translate("FormSettings", "C:\\Program Files (x86)\\category.sas", nullptr));
         ButtonImportCategories->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214", nullptr));
         label_3->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202 \320\270\320\267\320\261\321\200\320\260\320\275\320\275\320\276\320\263\320\276", nullptr));
+        lineEdit_2->setPlaceholderText(QCoreApplication::translate("FormSettings", "C:\\Program Files (x86)\\favorites.sas", nullptr));
         ButtonImportFavorites->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214", nullptr));
         label_4->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202 \320\272\320\276\320\274\320\274\320\265\320\275\321\202\320\260\321\200\320\270\320\265\320\262", nullptr));
+        lineEdit_3->setPlaceholderText(QCoreApplication::translate("FormSettings", "C:\\Program Files (x86)\\comments.sas", nullptr));
         ButtonImportComments->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214", nullptr));
         label_5->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202 \320\263\321\200\321\203\320\277\320\277", nullptr));
+        lineEdit_4->setPlaceholderText(QCoreApplication::translate("FormSettings", "C:\\Program Files (x86)\\groups.sas", nullptr));
         ButtonImportGroups->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214", nullptr));
         label_6->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202 \320\275\320\265\320\270\320\267\320\262\320\265\321\201\321\202\320\275\321\213\321\205 \320\264\320\260\320\275\320\275\321\213\321\205", nullptr));
+        lineEdit_5->setPlaceholderText(QCoreApplication::translate("FormSettings", "C:\\Program Files (x86)\\someData.sas", nullptr));
         ButtonRawImport->setText(QCoreApplication::translate("FormSettings", "\320\230\320\274\320\277\320\276\321\200\321\202\320\270\321\200\320\276\320\262\320\260\321\202\321\214", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("FormSettings", "  \320\230\320\274\320\277\320\276\321\200\321\202  ", nullptr));
+        LineEditFindGame->setPlaceholderText(QCoreApplication::translate("FormSettings", "Dota 2", nullptr));
         ButtonFindGame->setText(QCoreApplication::translate("FormSettings", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("FormSettings", "  \320\241\320\272\321\200\321\213\321\202\321\213\320\265 \320\270\320\263\321\200\321\213  ", nullptr));
-        label_7->setText(QCoreApplication::translate("FormSettings", "\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213: 1.285475", nullptr));
+        label_7->setText(QCoreApplication::translate("FormSettings", "\320\222\320\265\321\200\321\201\320\270\321\217 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213:", nullptr));
+        labelVersion->setText(QCoreApplication::translate("FormSettings", "1.0", nullptr));
         label_8->setText(QCoreApplication::translate("FormSettings", "\320\242\320\260\320\272 \320\266\320\265 \321\201\320\277\320\260\321\201\320\270\320\261\320\276 \320\267\320\260 \320\277\320\276\320\274\320\276\321\211\321\214 \320\262 \321\200\320\260\320\267\321\200\320\260\320\261\320\276\321\202\320\272\320\265:", nullptr));
         label_9->setText(QCoreApplication::translate("FormSettings", "-\320\230\320\264\321\200\320\270\321\201\320\276\320\262 \320\242\320\260\320\263\320\270\321\200", nullptr));
         label_10->setText(QCoreApplication::translate("FormSettings", "<html><head/><body><p>-<a href=https://arturosipov.com>\320\236\321\201\320\270\320\277\320\276\320\262 \320\220\321\200\321\202\321\203\321\200</a></p></body></html>", nullptr));

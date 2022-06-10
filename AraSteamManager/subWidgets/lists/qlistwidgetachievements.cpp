@@ -11,14 +11,13 @@ void QListWidgetAchievements::setGame(SGame &aGame) {
     _game = aGame;
 }
 
-void QListWidgetAchievements::addAchievementItem(SAchievement &aAchievement, int aRow) {
+void QListWidgetAchievements::insertAchievement(SAchievement &aAchievement, int aRow) {
     QListWidgetAchievement *item = new QListWidgetAchievement(&aAchievement);
     if (_game.appId() > 0) {
         item->setIcon(aAchievement.icon(_game.appId()));
     }
     item->setText(aAchievement.displayName());
     item->setToolTip(textToToolTip(aAchievement.description()));
-//    item->setFont(QFont(Settings::defaultFont(), 11));
     if (aRow == -1) {
         addItem(item);
     } else {
@@ -71,11 +70,11 @@ void QListWidgetAchievements::dropEvent(QDropEvent *aEvent) {
             QModelIndex dropIndex = indexAt(aEvent->position().toPoint());
             switch(dropIndicatorPosition()) {
             case DropIndicatorPosition::BelowItem: {
-                addAchievementItem(*achievement, dropIndex.row() + 1);
+                insertAchievement(*achievement, dropIndex.row() + 1);
                 break;
             }
             default: {
-                addAchievementItem(*achievement, dropIndex.row());
+                insertAchievement(*achievement, dropIndex.row());
                 break;
             }
             }

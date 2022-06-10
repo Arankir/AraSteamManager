@@ -11,7 +11,6 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -27,14 +26,12 @@ class Ui_FormComments
 public:
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
+    QLabel *labelGameIcon;
     QLabel *LabelGameTitle;
+    QLabel *labelIcon;
     QSpacerItem *horizontalSpacer;
+    QLabel *labelProfileIcon;
     QLabel *LabelProfileName;
-    QFrame *FrameAchievement;
-    QVBoxLayout *verticalLayout;
-    QLabel *LabelAchievementTitle;
-    QLabel *LabelAchievementDescription;
-    QLabel *LabelAchievementAchieved;
     QTextEdit *TextEditComment;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *ButtonCancel;
@@ -49,14 +46,29 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        labelGameIcon = new QLabel(FormComments);
+        labelGameIcon->setObjectName(QString::fromUtf8("labelGameIcon"));
+
+        horizontalLayout->addWidget(labelGameIcon);
+
         LabelGameTitle = new QLabel(FormComments);
         LabelGameTitle->setObjectName(QString::fromUtf8("LabelGameTitle"));
 
         horizontalLayout->addWidget(LabelGameTitle);
 
+        labelIcon = new QLabel(FormComments);
+        labelIcon->setObjectName(QString::fromUtf8("labelIcon"));
+
+        horizontalLayout->addWidget(labelIcon);
+
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
+
+        labelProfileIcon = new QLabel(FormComments);
+        labelProfileIcon->setObjectName(QString::fromUtf8("labelProfileIcon"));
+
+        horizontalLayout->addWidget(labelProfileIcon);
 
         LabelProfileName = new QLabel(FormComments);
         LabelProfileName->setObjectName(QString::fromUtf8("LabelProfileName"));
@@ -65,32 +77,6 @@ public:
 
 
         verticalLayout_2->addLayout(horizontalLayout);
-
-        FrameAchievement = new QFrame(FormComments);
-        FrameAchievement->setObjectName(QString::fromUtf8("FrameAchievement"));
-        FrameAchievement->setFrameShape(QFrame::StyledPanel);
-        FrameAchievement->setFrameShadow(QFrame::Raised);
-        verticalLayout = new QVBoxLayout(FrameAchievement);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        LabelAchievementTitle = new QLabel(FrameAchievement);
-        LabelAchievementTitle->setObjectName(QString::fromUtf8("LabelAchievementTitle"));
-        LabelAchievementTitle->setWordWrap(true);
-
-        verticalLayout->addWidget(LabelAchievementTitle);
-
-        LabelAchievementDescription = new QLabel(FrameAchievement);
-        LabelAchievementDescription->setObjectName(QString::fromUtf8("LabelAchievementDescription"));
-        LabelAchievementDescription->setWordWrap(true);
-
-        verticalLayout->addWidget(LabelAchievementDescription);
-
-        LabelAchievementAchieved = new QLabel(FrameAchievement);
-        LabelAchievementAchieved->setObjectName(QString::fromUtf8("LabelAchievementAchieved"));
-
-        verticalLayout->addWidget(LabelAchievementAchieved);
-
-
-        verticalLayout_2->addWidget(FrameAchievement);
 
         TextEditComment = new QTextEdit(FormComments);
         TextEditComment->setObjectName(QString::fromUtf8("TextEditComment"));
@@ -121,11 +107,11 @@ public:
     void retranslateUi(QWidget *FormComments)
     {
         FormComments->setWindowTitle(QCoreApplication::translate("FormComments", "Form", nullptr));
+        labelGameIcon->setText(QCoreApplication::translate("FormComments", "TextLabel", nullptr));
         LabelGameTitle->setText(QCoreApplication::translate("FormComments", "Game", nullptr));
+        labelIcon->setText(QString());
+        labelProfileIcon->setText(QCoreApplication::translate("FormComments", "TextLabel", nullptr));
         LabelProfileName->setText(QCoreApplication::translate("FormComments", "Profile", nullptr));
-        LabelAchievementTitle->setText(QCoreApplication::translate("FormComments", "Title", nullptr));
-        LabelAchievementDescription->setText(QCoreApplication::translate("FormComments", "Description", nullptr));
-        LabelAchievementAchieved->setText(QCoreApplication::translate("FormComments", "Achieved", nullptr));
         ButtonCancel->setText(QCoreApplication::translate("FormComments", "Cancel", nullptr));
         ButtonApply->setText(QCoreApplication::translate("FormComments", "Apply", nullptr));
     } // retranslateUi

@@ -6,21 +6,8 @@
 class SBan : public Sapi {
     Q_OBJECT
 public:
-    explicit SBan(const QJsonObject &achievement, QObject *parent = nullptr): Sapi(parent),
-        _steamId(achievement.value("steamid").toString()),
-        _communityBanned(achievement.value("CommunityBanned").toBool()),
-        _vacBanned(achievement.value("VACBanned").toBool()),
-        _numberOfVacBan(achievement.value("NumberOfVACBans").toInt()),
-        _daysSinceLastBan(achievement.value("DaysSinceLastBan").toInt()),
-        _numberOfGameBans(achievement.value("NumberOfGameBans").toInt()),
-        _economyBan(achievement.value("EconomyBan").toString()) {
-
-        }
-    SBan(const SBan &ban): Sapi(ban.parent()), _steamId(ban._steamId), _communityBanned(ban._communityBanned),
-        _vacBanned(ban._vacBanned), _numberOfVacBan(ban._numberOfVacBan), _daysSinceLastBan(ban._daysSinceLastBan),
-        _numberOfGameBans(ban._numberOfGameBans), _economyBan(ban._economyBan) {
-
-        }
+    SBan(const QJsonObject &achievement, QObject *parent = nullptr);
+    SBan(const SBan &ban);
 
     SBan &operator=(const SBan &ban);
     bool  operator<(const SBan &ban) const;
@@ -32,22 +19,22 @@ public:
     virtual QString className() const {return "SBan";}
     static QList<SBan> load(const ProfileID &aId, std::function<void (QList<SBan>)> aCallback = nullptr);
 
-    ProfileID steamId()     const {return _steamId;}
-    bool communityBanned()  const {return _communityBanned;}
-    bool vacBanned()        const {return _vacBanned;}
-    int numberOfVacBan()    const {return _numberOfVacBan;}
-    int daysSinceLastBan()  const {return _daysSinceLastBan;}
-    int numberOfGameBans()  const {return _numberOfGameBans;}
-    QString economyBan()    const {return _economyBan;}
+    ProfileID steamId()     const;
+    bool communityBanned()  const;
+    bool vacBanned()        const;
+    int numberOfVacBan()    const;
+    int daysSinceLastBan()  const;
+    int numberOfGameBans()  const;
+    QString economyBan()    const;
 
 private:
-    ProfileID   _steamId;
-    bool        _communityBanned;
-    bool        _vacBanned;
-    int         _numberOfVacBan;
-    int         _daysSinceLastBan;
-    int         _numberOfGameBans;
-    QString     _economyBan;
+    ProfileID   steamId_;
+    bool        communityBanned_;
+    bool        vacBanned_;
+    int         numberOfVacBan_;
+    int         daysSinceLastBan_;
+    int         numberOfGameBans_;
+    QString     economyBan_;
 
 };
 

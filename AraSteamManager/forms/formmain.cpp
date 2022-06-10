@@ -1,30 +1,39 @@
 #include "formmain.h"
 #include "ui_formmain.h"
+#include "classes/common/theme.h"
 //    ui->textEdit->setText(document.toJson(QJsonDocument::Compact));
 //qDebug() << event->key() << "\t" << Qt::Key_Enter << "\t" << QKeyEvent::Enter << 16777220;
 //qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
 //https://ru.stackoverflow.com/questions/952577/qt-network-ssl-qsslsocketconnecttohostencrypted-tls-initialization-failed
 
-#define Init {
+enum stackedForms {
+    FormNone        = 0,
+    FormGames       = 1,
+    FormFriends     = 2,
+    FormStatistic   = 3,
+    FormFavorites   = 4,
+    FormSettings    = 5
+};
+
 FormMain::FormMain(QWidget *parent): Form(parent), ui(new Ui::FormMain) {
     ui->setupUi(this);
-    initComponents();
-    if (Settings::myProfile() != "none") {
-        goToProfile(Settings::myProfile(), SProfile::LoadType::id);
+    init();
+    if (Settings::myProfile() != "") {
+        goToProfile(Settings::myProfile());
     }
 }
 
-void FormMain::initComponents() {
-    createFormContainerAchievements();
-
-    ui->StackedFormFriends  ->setWhatsThis("FormFriends");
-    ui->StackedFormGames    ->setWhatsThis("FormGames");
-    ui->StackedFormFavorites->setWhatsThis("FormFavorites");
-    ui->StackedFormSettings ->setWhatsThis("FormSettings");
-
-    ui->ButtonBack->setEnabled(false);
-    ui->ButtonNext->setEnabled(false);
-    ui->StackedWidgetForms->setCurrentIndex(0);
+void FormMain::init() {
+    ui->stackedFormFriends      ->setObjectName("FormFriends");
+    ui->stackedFormGames        ->setObjectName("FormGames");
+    ui->stackedFormFavorites    ->setObjectName("FormFavorites");
+    ui->stackedFormSettings     ->setObjectName("FormSettings");
+    ui->stackedFormStatistics   ->setObjectName("StatisticForm");
+    ui->stackedFormFriends      ->setAttribute(Qt::WA_TranslucentBackground);
+    ui->stackedFormGames        ->setAttribute(Qt::WA_TranslucentBackground);
+    ui->stackedFormFavorites    ->setAttribute(Qt::WA_TranslucentBackground);
+    ui->stackedFormSettings     ->setAttribute(Qt::WA_TranslucentBackground);
+    ui->stackedFormStatistics   ->setAttribute(Qt::WA_TranslucentBackground);
 
     if (parentWidget() != nullptr) {
         parentWidget()->setGeometry(Settings::mainWindowGeometry());
@@ -34,246 +43,172 @@ void FormMain::initComponents() {
             parentWidget()->showMaximized();
         }
     }
+    ui->stackedWidgetForms->setCurrentIndex(0);
     qApp->setStyleSheet(Theme::qssTheme());
     updateIcons();
-#define Connects {
-    connect(ui->ButtonFindProfile,      &QPushButton::clicked,              this,                       &FormMain::buttonFindProfile_Clicked);
-    connect(ui->ButtonGoToMyProfile,    &QPushButton::clicked,              this,                       &FormMain::buttonGoToMyProfile_Clicked);
-    connect(ui->ButtonBack,             &QPushButton::clicked,              this,                       &FormMain::buttonBack_Clicked);
-    connect(ui->ButtonNext,             &QPushButton::clicked,              this,                       &FormMain::buttonNext_Clicked);
-    connect(ui->ButtonSettings,         &QPushButton::clicked,              this,                       &FormMain::buttonSettings_Clicked);
-    connect(ui->ButtonUpdate,           &QPushButton::clicked,              this,                       &FormMain::buttonUpdate_Clicked);
-    connect(ui->StackedFormFriends,     &FormFriends::s_goToProfile,        this,                       &FormMain::goToProfile);
-    connect(ui->StackedFormGames,       &FormGames::s_showAchievements,     this,                       &FormMain::showAchievements);
 
-    connect(ui->StackedFormFriends,     &FormFriends::s_friendsLoaded,      this,                       &Form::setStatus);
-    connect(ui->StackedFormGames,       &FormGames::s_achievementsLoaded,   this,                       &Form::setStatus);
-
-    connect(ui->StackedFormFriends,     &FormFriends::s_finish,             this,                       [&](int aWidth) {
-        clearStatus();
-        showForm(FormMainFriends, aWidth);
+    connect(ui->profilesBrowser,        &FormProfilesBrowser::s_profileChanged,this,                       [&](const ProfileID &) {
+        returnFromForms();
     });
-    connect(ui->StackedFormGames,       &FormGames::s_finish,               this,                       [&](int aWidth) {
+    connect(ui->profilesBrowser,        &FormProfilesBrowser::s_favoritesClicked,this,                  &FormMain::goToFavorites);
+    connect(ui->profilesBrowser,        &FormProfilesBrowser::s_settingsClicked,this,                   &FormMain::goToSettings);
+    connect(ui->profilesBrowser,        &FormProfilesBrowser::s_friendsClicked,this,                    &FormMain::goToFriends);
+    connect(ui->profilesBrowser,        &FormProfilesBrowser::s_gamesClicked,this,                      &FormMain::goToGames);
+    connect(ui->profilesBrowser,        &FormProfilesBrowser::s_statisticsClicked,this,                 &FormMain::goToStatistics);
+    connect(ui->stackedFormFriends,     &FormFriends::s_goToProfile,        this,                       &FormMain::goToProfile);
+    connect(ui->stackedFormGames,       &FormGames::s_showAchievements,     this,                       &FormMain::showAchievements);
+    connect(ui->stackedFormStatistics,  &FormStatistics::s_showAchievements,this,                       &FormMain::showAchievements);
+
+    connect(ui->stackedFormGames,       &FormGames::s_achievementsLoaded,   this,                       &Form::setStatus);
+
+    connect(ui->stackedFormFriends,     &FormFriends::s_finish,             this,                       [&](int aWidth) {
         clearStatus();
-        showForm(FormMainGames, aWidth);
+        showForm(FormFriends, aWidth);
+    });
+    connect(ui->stackedFormGames,       &FormGames::s_finish,               this,                       [&](int aWidth) {
+        clearStatus();
+        showForm(FormGames, aWidth);
+    });
+    connect(ui->stackedFormStatistics, &FormStatistics::s_finish,           this,                       [&]() {
+        clearStatus();
+        showForm(FormStatistic);
     });
 
-    connect(ui->StackedFormSettings,    &FormSettings::s_settingsUpdated,   this,                       &FormMain::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->StackedFormFriends,     &FormFriends::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->StackedFormGames,       &FormGames::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->StackedFormFavorites,   &FormFavorites::updateSettings);
-#define ConnectsEnd }
+    connect(ui->stackedFormSettings,    &FormSettings::s_settingsUpdated,   this,                       &FormMain::updateSettings);
+    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormFriends,     &FormFriends::updateSettings);
+    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormGames,       &FormGames::updateSettings);
+    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormFavorites,   &FormFavorites::updateSettings);
+    connect(this,                       &FormMain::s_settingsUpdated,       ui->profilesBrowser,        &FormProfilesBrowser::updateSettings);
+    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormStatistics,  &FormStatistics::updateSettings);
+
+
+//    QtDownload dl;
+//    dl.setTarget("http://www.java2s.com/Code/Cpp/Qt/DownloadfromURL.htm");
 }
-#define InitEnd }
 
 #define System {
+FormMain::~FormMain() {
+    if (window()) {
+        Settings::setMainWindowIsMaximize(window()->isMaximized());
+        Settings::setMainWindowParams(window()->normalGeometry());
+    }
+    if (_containerAchievementsForm) {
+        _containerAchievementsForm->close();
+    }
+    returnFromForms();
+    delete ui;
+}
+
+void FormMain::retranslate() {
+    ui->retranslateUi(this);
+}
+
 #define ContainerAchievementsStart {
-void FormMain::showAchievements(const SGame aGames) {
+FormContainerAchievements *FormMain::createFormContainerAchievements() {
+    _containerAchievementsForm = createFramelessForm<FormContainerAchievements>();
+    _containerAchievementsForm->setObjectName("ContainerAchievements");
+    connect(this, &Form::s_settingsUpdated, _containerAchievementsForm->window(), &FramelessWindow::updateSettings);
+    connect(this, &Form::s_settingsUpdated, _containerAchievementsForm, &Form::updateSettings);
+    connect(_containerAchievementsForm, &FormContainerAchievements::s_closed,               this, &FormMain::containerAchievementsClose);
+    return _containerAchievementsForm;
+}
+
+void FormMain::showAchievements(const SGame &aGame) {
     if (_containerAchievementsForm == nullptr) {
         createFormContainerAchievements();
     }
-    if (FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())) {
-        _containerAchievementsForm->show();
-        _containerAchievementsForm->addFormAchievement(currentProfile->getProfile(), aGames);
-    }
-}
-
-void FormMain::removeAchievements(int index) {
-    Q_UNUSED(index);
+    _containerAchievementsForm->show();
+    _containerAchievementsForm->addFormAchievement(ui->profilesBrowser->currentProfile(), aGame);
 }
 
 void FormMain::containerAchievementsClose() {
-    disconnect(_containerAchievementsForm);
+//    disconnect(_containerAchievementsForm);
     delete _containerAchievementsForm;
     _containerAchievementsForm = nullptr;
 }
 #define ContainerAchievementsEnd }
 
 #define FormsStart {
-
-#define FormsCreateStart {
-FormProfile *FormMain::createFormProfile(const SProfile &aProfile) {
-    FormProfile *newFormProfile = new FormProfile(aProfile, this);
-    newFormProfile->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum));
-    connect(newFormProfile, &FormProfile::s_goToGames,      this,           &FormMain::goToGames);
-    connect(newFormProfile, &FormProfile::s_goToFriends,    this,           &FormMain::goToFriends);
-    connect(newFormProfile, &FormProfile::s_goToStatistic,  this,           &FormMain::goToStatistics);
-    connect(newFormProfile, &FormProfile::s_goToFavorites,  this,           &FormMain::goToFavorites);
-    connect(this,           &FormMain::s_settingsUpdated,   newFormProfile, &FormProfile::updateSettings);
-    connect(newFormProfile, &Form::s_settingsUpdated,       this,           &Form::updateSettings);
-    return newFormProfile;
-}
-
-FormStatistics *FormMain::createFormStatistics(const SProfile &aProfile, const SGames &aGames) {
-    _statisticsForm = new FormStatistics(aProfile, aGames, this);
-    connect(this,            &FormMain::s_settingsUpdated,         _statisticsForm,     &FormStatistics::updateSettings);
-    connect(_statisticsForm, &FormStatistics::s_showAchievements, this,                 &FormMain::showAchievements);
-//    connect(_statisticsForm, &FormStatistics::s_statisticsLoaded, this,                 &Form::setStatus);
-    connect(_statisticsForm, &FormStatistics::s_finish,           this,                 [&]() {
-        clearStatus();
-        showForm(FormMainStatistic);
-    });
-    return _statisticsForm;
-}
-
-FormContainerAchievements *FormMain::createFormContainerAchievements() {
-    _containerAchievementsForm = createFramelessForm<FormContainerAchievements>();
-    connect(this, &Form::s_settingsUpdated, _containerAchievementsForm->window(), &FramelessWindow::updateSettings);
-    connect(this, &Form::s_settingsUpdated, _containerAchievementsForm, &Form::updateSettings);
-    connect(_containerAchievementsForm, &FormContainerAchievements::s_removeAchievements,   this, &FormMain::removeAchievements);
-    connect(_containerAchievementsForm, &FormContainerAchievements::s_closed,               this, &FormMain::containerAchievementsClose);
-    return _containerAchievementsForm;
-}
-#define FormsCreateEnd }
-
 #define GoToFormStart {
-void FormMain::goToProfile(const ProfileID &aId, SProfile::LoadType aType) {
-    SProfile profile = SProfile::load(aId, aType);
-    if(!profile.isNull()) {
-        returnFromForms();
-        while(ui->StackedWidgetProfiles->count() - 1 != ui->StackedWidgetProfiles->currentIndex()) {
-            ui->StackedWidgetProfiles->removeWidget(ui->StackedWidgetProfiles->widget(ui->StackedWidgetProfiles->currentIndex() + 1));
-        }
-        ui->StackedWidgetProfiles->addWidget(createFormProfile(profile));
-        ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->count() - 1);
-        updateSettings(changedSettings::myProfile);
-        updateProfileNavigation();
-
-        qInfo() << "Буфер профилей" << ui->StackedWidgetProfiles->currentIndex() + 1 << "/" << ui->StackedWidgetProfiles->count();
-    } else {
-        QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
-        qWarning() << "profileError";
-    }
+void FormMain::goToProfile(const ProfileID &aProfileId) {
+    ui->profilesBrowser->goToProfile(aProfileId);
 }
 
-void FormMain::goToGames(const SProfile &aProfile, const SGames &aGames) {
-    if (!_isLoading) {
-        if (!ui->StackedFormGames->isInit()) {
-            _isLoading = true;
-            ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
-            ui->StackedFormGames->setGames(aProfile, aGames);
+void FormMain::goToGames(const ProfileID &aProfileId) {
+    if (!isLoading_) {
+        if (!ui->stackedFormGames->isInit()) {
+            isLoading_ = true;
+            ui->stackedWidgetForms->setCurrentIndex(FormNone);
+            ui->stackedFormGames->setGames(aProfileId);
         } else {
-            ui->StackedWidgetForms->setCurrentIndex(FormMainGames);
+            ui->stackedWidgetForms->setCurrentIndex(FormGames);
         }
     }
 }
 
-void FormMain::goToFriends(const ProfileID &aSteamId, const SFriends &aFriends) {
-    if(!_isLoading) {
-        if (!ui->StackedFormFriends->isInit()) {
-            _isLoading = true;
-            ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
-            ui->StackedFormFriends->setFriends(aSteamId, aFriends);
+void FormMain::goToFriends(const ProfileID &aProfileId) {
+    if(!isLoading_) {
+        if (!ui->stackedFormFriends->isInit()) {
+            isLoading_ = true;
+            ui->stackedWidgetForms->setCurrentIndex(FormNone);
+            ui->stackedFormFriends->setFriends(aProfileId);
         } else {
-            ui->StackedWidgetForms->setCurrentIndex(FormMainFriends);
+            ui->stackedWidgetForms->setCurrentIndex(FormFriends);
         }
     }
+}
+
+void FormMain::goToStatistics(const SProfile &aProfileId) {
+    if(!isLoading_) {
+        if (!ui->stackedFormStatistics->isInit()) {
+            isLoading_ = true;
+            ui->stackedWidgetForms->setCurrentIndex(FormNone);
+            ui->stackedFormStatistics->setProfile(aProfileId);
+        } else {
+            ui->stackedWidgetForms->setCurrentIndex(FormStatistic);
+        }
+    }
+
 }
 
 void FormMain::goToFavorites() {
-    if(!_isLoading) {
-        //if (!ui->StackedFormFavorites->isInit()) {
-            //_blockedLoad = true;
-            //ui->FormProgressBar->setMaximum(aFriends.getCount());
-            //ui->FormProgressBar->setVisible(true);
-            //ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
-        //} else {
-            if (ui->StackedFormFavorites->isLoaded()) {
-                ui->StackedWidgetForms->setCurrentIndex(FormMainFavorites);
-            }
-        //}
+    if(!isLoading_) {
+        if (ui->stackedFormFavorites->isLoaded()) {
+            ui->stackedWidgetForms->setCurrentIndex(FormFavorites);
+        }
     }
 }
 
-void FormMain::goToStatistics(const SProfile &aId, SGames &aGames) {
-    if(_statisticsForm == nullptr) {
-        if(!_isLoading) {
-            _isLoading = true;
-            ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
-            ui->ScrollAreaStatistic->setWidget(createFormStatistics(aId, aGames));
+void FormMain::goToSettings() {
+    if(!isLoading_) {
+        if (ui->stackedFormSettings->isLoaded()) {
+            ui->stackedWidgetForms->setCurrentIndex(FormSettings);
         }
-    } else {
-        ui->StackedWidgetForms->setCurrentIndex(FormMainStatistic);
     }
 }
 #define GoToFormEnd }
 
 void FormMain::showForm(int aWidgetIndex, int aWindowWidth, int aWindowHeight) {
-    _isLoading = false;
-    ui->StackedWidgetForms->setCurrentIndex(aWidgetIndex);
+    isLoading_ = false;
+    ui->stackedWidgetForms->setCurrentIndex(aWidgetIndex);
     resizeScrollArea(aWindowWidth, aWindowHeight);
 }
 
 void FormMain::returnFromForms() {
-    ui->StackedFormGames->clear();
-    ui->StackedFormFriends->clear();
-    if(_statisticsForm != nullptr) {
-        disconnect(_statisticsForm);
-        delete _statisticsForm;
-        _statisticsForm = nullptr;
-    }
-//    if(_favoritesForm != nullptr) {
-//        disconnect(_favoritesForm);
-//        delete _favoritesForm;
-//        _favoritesForm = nullptr;
-//    }
-//    if(_settingsForm != nullptr) {
-//        disconnect(_settingsForm);
-//        delete _settingsForm;
-//        _settingsForm = nullptr;
-//    }
-    ui->StackedWidgetForms->setCurrentIndex(0);
-}
-
-void FormMain::retranslate() {
-    ui->retranslateUi(this);
+    ui->stackedFormGames->clear();
+    ui->stackedFormFriends->clear();
+    ui->stackedFormStatistics->clear();
+    ui->stackedWidgetForms->setCurrentIndex(FormNone);
 }
 #define FormsEnd }
 
-#define EventsStart {
-void FormMain::keyPressEvent(QKeyEvent *aEvent) {
-    if(aEvent->key() == Qt::Key_Enter) {
-        buttonFindProfile_Clicked();
-    }
-}
-
 void FormMain::closeEvent(QCloseEvent *aEvent) {
-    if (window()) {
-        Settings::setMainWindowIsMaximize(window()->isMaximized());
-        Settings::setMainWindowParams(window()->normalGeometry());
-    }
-    Settings::syncronizeSettings();
-    if (_containerAchievementsForm) {
-        _containerAchievementsForm->close();
-    }
-    qInfo() << "Programm closed";
-    qApp->closeAllWindows();
     aEvent->accept();
-}
-#define EventsEnd }
-
-FormMain::~FormMain() {
-    //может быть ошибка
-    returnFromForms();
-    if (_containerAchievementsForm != nullptr) {
-        delete _containerAchievementsForm;
-    }
-    qInfo() << "Главная форма удалилась";
-    delete ui;
+    this->deleteLater();
 }
 
 void FormMain::updateSettings(QFlags<changedSettings> aSettings) {
     Settings::syncronizeSettings();
-    if (aSettings.testFlag(changedSettings::myProfile)) {
-        for (int i = 0; i < ui->StackedWidgetProfiles->count(); ++i) {
-            FormProfile *profile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->widget(i));
-            if (profile) {
-                profile->updateSettings(changedSettings::myProfile);
-            }
-        }
-        FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
-        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
-    }
     if (aSettings.testFlag(changedSettings::theme)) {
         qApp->setStyleSheet(Theme::qssTheme());
         updateIcons();
@@ -282,106 +217,19 @@ void FormMain::updateSettings(QFlags<changedSettings> aSettings) {
 }
 
 void FormMain::updateIcons() {
-    ui->ButtonUpdate        ->setIcon(QIcon(Images::update()));
-    ui->ButtonGoToMyProfile ->setIcon(QIcon(Images::home()));
-    ui->ButtonFindProfile   ->setIcon(QIcon(Images::findProfile()));
-    ui->ButtonSettings      ->setIcon(QIcon(Images::settings()));
-    ui->ButtonBack          ->setIcon(QIcon(Images::left()));
-    ui->ButtonNext          ->setIcon(QIcon(Images::right()));
+
 }
 
 void FormMain::resizeScrollArea(int aWidth, int aHeight) {
-    int newWidth = std::max(ui->StackedWidgetForms->width(), aWidth);
-    int newHeight = std::max(ui->StackedWidgetForms->height(), aHeight);
-    if((ui->StackedWidgetForms->height() < newHeight) || (ui->StackedWidgetForms->width() < newWidth)) {
+    int formWidth = ui->stackedWidgetForms->width();
+    int formHeight = ui->stackedWidgetForms->height();
+    int newWidth = std::max(formWidth, aWidth);
+    int newHeight = std::max(formHeight, aHeight);
+    if((formHeight < newHeight) || (formWidth < newWidth)) {
         if (FramelessWindow *parent = window()) {
-            parent->animateResize(window()->width() - ui->StackedWidgetForms->width() + newWidth,
-                                  window()->height() - ui->StackedWidgetForms->height() + newHeight);
+            parent->animateResize(window()->width() - formWidth + newWidth,
+                                  window()->height() - formHeight + newHeight);
         }
     }
 }
 #define SystemEnd }
-
-#define Functions {
-void FormMain::buttonFindProfile_Clicked() {
-    //https://steamcommunity.com/profiles/76561198017985018/
-    //https://steamcommunity.com/id/xFrenzy47x
-    //steamcommunity.com/profiles/76561198017985018/
-    //steamcommunity.com/id/xFrenzy47x
-    //76561198017985018
-    //xFrenzy47x
-    QRegularExpression ProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
-    auto match = ProfileUrl.match(ui->LineEditIdProfile->text());
-    if (!match.hasMatch()) {
-        qWarning() << "Не распознан профиль" << ui->LineEditIdProfile->text();
-        QMessageBox::warning(this, tr("Ошибка"), tr("Не удалось распознать синтаксис профиля"));
-        return;
-    }
-
-    if ((match.captured(4) == "profiles") || (QRegularExpression("\\d{17}").match(match.captured(5)).hasMatch())) {
-        goToProfile(match.captured(5), SProfile::LoadType::id);
-    } else {
-        goToProfile(match.captured(5), SProfile::LoadType::vanity);
-    }
-    returnFromForms();
-}
-
-void FormMain::buttonBack_Clicked() {
-    if(ui->StackedWidgetProfiles->currentIndex() > 0) {
-        ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() - 1);
-        returnFromForms();
-        FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
-        if (currentProfile) {
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
-        }
-        updateProfileNavigation();
-    }
-}
-
-void FormMain::buttonNext_Clicked() {
-    if(ui->StackedWidgetProfiles->currentIndex() < ui->StackedWidgetProfiles->count()) {
-        ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() + 1);
-        returnFromForms();
-        FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
-        if (currentProfile) {
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
-        }
-        updateProfileNavigation();
-    }
-}
-
-void FormMain::updateProfileNavigation() {
-    ui->ButtonBack->setEnabled(ui->StackedWidgetProfiles->currentIndex() > 0);
-    ui->ButtonNext->setEnabled(ui->StackedWidgetProfiles->currentIndex() != ui->StackedWidgetProfiles->count() - 1);
-}
-
-void FormMain::buttonSettings_Clicked() {
-    if(!_isLoading) {
-        //if (!ui->StackedFormSettings->isInit()) {
-            //_blockedLoad = true;
-            //ui->FormProgressBar->setMaximum(aFriends.getCount());
-            //ui->FormProgressBar->setVisible(true);
-            //ui->StackedWidgetForms->setCurrentIndex(FormMainNone);
-        //} else {
-            if (ui->StackedFormSettings->isLoaded()) {
-                ui->StackedWidgetForms->setCurrentIndex(FormMainSettings);
-            }
-        //}
-    }
-}
-
-void FormMain::buttonGoToMyProfile_Clicked() {
-    if(Settings::myProfile() != "none") {
-        goToProfile(Settings::myProfile(), SProfile::LoadType::id);
-    } else {
-        QMessageBox::warning(this, tr("Ошибка"), tr("Не удаётся найти профиль!"));
-    }
-}
-
-void FormMain::buttonUpdate_Clicked() {
-    if (FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget())) {
-        currentProfile->updateInfo();
-    }
-    updateSettings(changedSettings::theme);
-}
-#define FunctionsEnd }

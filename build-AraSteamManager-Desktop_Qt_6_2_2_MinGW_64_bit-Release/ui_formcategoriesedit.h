@@ -14,12 +14,12 @@
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "subWidgets/lineEdit/mylineedit.h"
 #include "subWidgets/lists/qlistwidgetachievements.h"
 
 QT_BEGIN_NAMESPACE
@@ -41,7 +41,7 @@ public:
     QPushButton *ButtonCancelCategory;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout;
-    QLineEdit *LineEditTitleCategory;
+    MyLineEdit *LineEditTitleCategory;
     QListWidgetAchievements *ListWidgetCategory;
     QFrame *FrameSubCategories;
     QVBoxLayout *verticalLayout_2;
@@ -123,7 +123,7 @@ public:
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        LineEditTitleCategory = new QLineEdit(FormCategoriesEdit);
+        LineEditTitleCategory = new MyLineEdit(FormCategoriesEdit);
         LineEditTitleCategory->setObjectName(QString::fromUtf8("LineEditTitleCategory"));
         QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);

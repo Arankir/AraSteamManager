@@ -16,12 +16,12 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "subWidgets/lineEdit/mylineedit.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -29,17 +29,17 @@ class Ui_FormFriends
 {
 public:
     QVBoxLayout *verticalLayout;
-    QGroupBox *GroupBoxFilter;
+    QGroupBox *groupBoxFilter;
     QVBoxLayout *_2;
     QHBoxLayout *horizontalLayout_2;
-    QLineEdit *LineEditName;
-    QPushButton *ButtonFind;
+    MyLineEdit *lineEditName;
+    QPushButton *buttonFind;
     QHBoxLayout *horizontalLayout_3;
-    QComboBox *ComboBoxStatus;
-    QCheckBox *CheckBoxOpenProfile;
-    QCheckBox *CheckBoxFavorites;
+    QComboBox *comboBoxStatus;
+    QCheckBox *checkBoxOpenProfile;
+    QCheckBox *checkBoxFavorites;
     QSpacerItem *horizontalSpacer_2;
-    QTableView *TableFriends;
+    QTableView *tableFriends;
 
     void setupUi(QWidget *FormFriends)
     {
@@ -47,49 +47,50 @@ public:
             FormFriends->setObjectName(QString::fromUtf8("FormFriends"));
         FormFriends->resize(366, 292);
         verticalLayout = new QVBoxLayout(FormFriends);
+        verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        GroupBoxFilter = new QGroupBox(FormFriends);
-        GroupBoxFilter->setObjectName(QString::fromUtf8("GroupBoxFilter"));
-        _2 = new QVBoxLayout(GroupBoxFilter);
+        groupBoxFilter = new QGroupBox(FormFriends);
+        groupBoxFilter->setObjectName(QString::fromUtf8("groupBoxFilter"));
+        _2 = new QVBoxLayout(groupBoxFilter);
         _2->setObjectName(QString::fromUtf8("_2"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        LineEditName = new QLineEdit(GroupBoxFilter);
-        LineEditName->setObjectName(QString::fromUtf8("LineEditName"));
+        lineEditName = new MyLineEdit(groupBoxFilter);
+        lineEditName->setObjectName(QString::fromUtf8("lineEditName"));
 
-        horizontalLayout_2->addWidget(LineEditName);
+        horizontalLayout_2->addWidget(lineEditName);
 
-        ButtonFind = new QPushButton(GroupBoxFilter);
-        ButtonFind->setObjectName(QString::fromUtf8("ButtonFind"));
+        buttonFind = new QPushButton(groupBoxFilter);
+        buttonFind->setObjectName(QString::fromUtf8("buttonFind"));
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(ButtonFind->sizePolicy().hasHeightForWidth());
-        ButtonFind->setSizePolicy(sizePolicy);
+        sizePolicy.setHeightForWidth(buttonFind->sizePolicy().hasHeightForWidth());
+        buttonFind->setSizePolicy(sizePolicy);
 
-        horizontalLayout_2->addWidget(ButtonFind);
+        horizontalLayout_2->addWidget(buttonFind);
 
 
         _2->addLayout(horizontalLayout_2);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        ComboBoxStatus = new QComboBox(GroupBoxFilter);
-        ComboBoxStatus->setObjectName(QString::fromUtf8("ComboBoxStatus"));
-        ComboBoxStatus->setCurrentText(QString::fromUtf8(""));
+        comboBoxStatus = new QComboBox(groupBoxFilter);
+        comboBoxStatus->setObjectName(QString::fromUtf8("comboBoxStatus"));
+        comboBoxStatus->setCurrentText(QString::fromUtf8(""));
 
-        horizontalLayout_3->addWidget(ComboBoxStatus);
+        horizontalLayout_3->addWidget(comboBoxStatus);
 
-        CheckBoxOpenProfile = new QCheckBox(GroupBoxFilter);
-        CheckBoxOpenProfile->setObjectName(QString::fromUtf8("CheckBoxOpenProfile"));
+        checkBoxOpenProfile = new QCheckBox(groupBoxFilter);
+        checkBoxOpenProfile->setObjectName(QString::fromUtf8("checkBoxOpenProfile"));
 
-        horizontalLayout_3->addWidget(CheckBoxOpenProfile);
+        horizontalLayout_3->addWidget(checkBoxOpenProfile);
 
-        CheckBoxFavorites = new QCheckBox(GroupBoxFilter);
-        CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
+        checkBoxFavorites = new QCheckBox(groupBoxFilter);
+        checkBoxFavorites->setObjectName(QString::fromUtf8("checkBoxFavorites"));
 
-        horizontalLayout_3->addWidget(CheckBoxFavorites);
+        horizontalLayout_3->addWidget(checkBoxFavorites);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -99,12 +100,12 @@ public:
         _2->addLayout(horizontalLayout_3);
 
 
-        verticalLayout->addWidget(GroupBoxFilter);
+        verticalLayout->addWidget(groupBoxFilter);
 
-        TableFriends = new QTableView(FormFriends);
-        TableFriends->setObjectName(QString::fromUtf8("TableFriends"));
+        tableFriends = new QTableView(FormFriends);
+        tableFriends->setObjectName(QString::fromUtf8("tableFriends"));
 
-        verticalLayout->addWidget(TableFriends);
+        verticalLayout->addWidget(tableFriends);
 
 
         retranslateUi(FormFriends);
@@ -115,11 +116,11 @@ public:
     void retranslateUi(QWidget *FormFriends)
     {
         FormFriends->setWindowTitle(QCoreApplication::translate("FormFriends", "SteamAchievementsStatistic", nullptr));
-        GroupBoxFilter->setTitle(QCoreApplication::translate("FormFriends", "     \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
-        LineEditName->setPlaceholderText(QCoreApplication::translate("FormFriends", "\320\235\320\260\320\271\321\202\320\270 \320\264\321\200\321\203\320\263\320\260", nullptr));
-        ButtonFind->setText(QCoreApplication::translate("FormFriends", "\320\237\320\276\320\270\321\201\320\272", nullptr));
-        CheckBoxOpenProfile->setText(QCoreApplication::translate("FormFriends", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        CheckBoxFavorites->setText(QCoreApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
+        groupBoxFilter->setTitle(QCoreApplication::translate("FormFriends", "     \320\244\320\270\320\273\321\214\321\202\321\200", nullptr));
+        lineEditName->setPlaceholderText(QCoreApplication::translate("FormFriends", "LuckyGuy228", nullptr));
+        buttonFind->setText(QCoreApplication::translate("FormFriends", "\320\237\320\276\320\270\321\201\320\272", nullptr));
+        checkBoxOpenProfile->setText(QCoreApplication::translate("FormFriends", "\320\237\321\203\320\261\320\273\320\270\321\207\320\275\321\213\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
+        checkBoxFavorites->setText(QCoreApplication::translate("FormFriends", "\320\230\320\267\320\261\321\200\320\260\320\275\320\275\321\213\320\265", nullptr));
     } // retranslateUi
 
 };

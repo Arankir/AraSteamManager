@@ -1,29 +1,28 @@
 #ifndef GAMESMODEL_H
 #define GAMESMODEL_H
 
-#include <QAbstractTableModel>
-#include <QObject>
+#include <QSet>
 #include "classes/steamApi/structures/sgames.h"
-#include "classes/common/comments.h"
 #include "classes/steamApi/structures/sachievements.h"
-#include "classes/common/generalfunctions.h"
-#include <QSortFilterProxyModel>
+#include "subWidgets/models/filters.h"
 
-enum modelGamesColumns {
-    GamesAppid    = 0,
-    GamesIndex    = 1,
-    GamesIcon     = 2,
-    GamesName     = 3,
-    GamesComment  = 4,
-    GamesProgress = 5,
-    GamesCount    = 6
-};
+namespace gamesModel {
+    enum Columns {
+        Appid    = 0,
+        Index    = 1,
+        Icon     = 2,
+        Name     = 3,
+        Comment  = 4,
+        Progress = 5,
+        Count    = 6
+    };
+}
 
 class GamesModel : public QAbstractTableModel {
     Q_OBJECT
 public:
-    GamesModel(QObject *parent = nullptr): QAbstractTableModel(parent) {};
-    void setGames(const SGames &games, const QString &userId);
+    GamesModel(QObject *parent = nullptr);
+    void setGames(const SGames &games, const ProfileID &profileId);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -35,6 +34,7 @@ public:
     QStringList getComment(const int &row) const;
     QList<SAchievementPlayer> getAchievements(const int &row) const;
 
+    void clear();
 public slots:
     void updateComments();
     void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
@@ -43,82 +43,55 @@ signals:
     void s_finished();
     void s_progress(const QString &status, const int &progress, const int &max);
 
-protected:
-    void loadImages(const SGames &lGames, QList<GameComment> &comments, int gameCount);
 private slots:
-    void onResultAchievements(QList<SAchievementPlayer> achievements, GameID appId);
+    void onResultAchievements(const QList<SAchievementPlayer> &achievements, const GameID &gameId);
 
 private:
-    struct GameInModel {
+    struct gameModelItem {
         SGame game;
         QStringList comment;
         QList<SAchievementPlayer> achievements;
         int achieved;
     };
 
-    QString _userId;
-    QList<GameInModel> _gamesInModel;
-
-    int _loadedGames = 0;
+    ProfileID profileId_;
+    QList<gameModelItem> modelItems_;
 };
 
-class ProxyModelGames : public QSortFilterProxyModel {
-    Q_OBJECT
-public:
-    ProxyModelGames(QObject* parent = nullptr);
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-    GamesModel *sourceModel() const;
-    void setSourceModel(GamesModel *sourceModel);
-
-    SGame getGame(int aIndex);
-    QStringList getGameComment(int aIndex);
-    QList<SAchievementPlayer> getGameAchievements(int aIndex);
-
-public slots:
-    void setName(const QString &newName);
-    void setHide(const QStringList &newHide);
-    void setGroup(const QStringList &newGroup);
-    void setFavorites(const QStringList &newFavorites);
-    void clear();
-
-private:
-    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel)};
-
-    QString _name;
-    QStringList _hide;
-    QStringList _group;
-    QStringList _favorite;
-};
-#include "subWidgets/models/filters.h"
 class FilterModelGames : public FilterModel {
     Q_OBJECT
 public:
-    FilterModelGames(int row = 0, QObject* parent = nullptr);
+    FilterModelGames(int row = 0, QObject *parent = nullptr);
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
     GamesModel *sourceModel() const;
     void setSourceModel(GamesModel *sourceModel);
 
-    SGame getGame(int aIndex);
-    QStringList getGameComment(int aIndex);
-    QList<SAchievementPlayer> getGameAchievements(int aIndex);
+    SGame getGame(int index);
+    QStringList getGameComment(int index);
+    QList<SAchievementPlayer> getGameAchievements(int index);
+
+signals:
+    void s_modelFinished();
 
 public slots:
     void setName(const QString &newName);
-    void setHide(const QStringList &newHide);
-    void setGroup(const QStringList &newGroup);
-    void setFavorites(const QStringList &newFavorites);
+    void setHide(const QSet<GameID> &newHide);
+    void setGroup(const QSet<GameID> &newGroup);
+    void setFavorites(const QSet<GameID> &newFavorites);
+    void clearName();
+    void clearHide();
+    void clearGroup();
+    void clearFavorites();
     void clear();
 
 private:
-    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel)};
+    void setSourceModel(QAbstractItemModel *sourceModel);;
 
-    QString _name;
-    QStringList _hide;
-    QStringList _group;
-    QStringList _favorite;
+    QString name_;
+    QSet<GameID> hide_;
+    QSet<GameID> group_;
+    QSet<GameID> favorite_;
 };
 
 #endif // GAMESMODEL_H

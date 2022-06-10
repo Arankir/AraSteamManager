@@ -2,12 +2,11 @@
 #define FORMFAVORITES_H
 
 #include <QWidget>
-#include "classes/common/favorites.h"
+#include "classes/files/favorites.h"
 #include "classes/steamApi/structures/sfriends.h"
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
-#include "classes/common/myfilter.h"
 #include "classes/network/requestimage.h"
 
 enum tableFavoritesColumns {
@@ -52,8 +51,11 @@ private:
 //    Favorites _games;
 //    Favorites _friends;
 //    Favorites _achievements;
-    Favorites _favorites;
-    MyFilter _filter;
+    FavoriteProfiles _friendsFavorites;
+    FavoriteGames _gamesFavorites;
+    FavoriteAchievementsGames _achievementsFavorites;
+//    Favorites _favorites;
+//    MyFilter _filter;
     //Settings _setting;
 
     QString _iconsColor;

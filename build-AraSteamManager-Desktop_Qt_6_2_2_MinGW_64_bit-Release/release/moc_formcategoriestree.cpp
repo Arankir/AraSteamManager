@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoriesTree_t {
     const uint offsetsAndSize[20];
-    char stringdata0[117];
+    char stringdata0[118];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormCategoriesTree_t, stringdata0) + ofs), len 
@@ -34,17 +34,17 @@ static const qt_meta_stringdata_FormCategoriesTree_t qt_meta_stringdata_FormCate
 QT_MOC_LITERAL(0, 18), // "FormCategoriesTree"
 QT_MOC_LITERAL(19, 14), // "s_stateChanged"
 QT_MOC_LITERAL(34, 0), // ""
-QT_MOC_LITERAL(35, 9), // "Category*"
-QT_MOC_LITERAL(45, 8), // "category"
-QT_MOC_LITERAL(54, 5), // "state"
-QT_MOC_LITERAL(60, 16), // "s_categoryChange"
-QT_MOC_LITERAL(77, 13), // "s_categoryAdd"
-QT_MOC_LITERAL(91, 16), // "s_categoryDelete"
-QT_MOC_LITERAL(108, 8) // "updateUi"
+QT_MOC_LITERAL(35, 10), // "Category2*"
+QT_MOC_LITERAL(46, 8), // "category"
+QT_MOC_LITERAL(55, 5), // "state"
+QT_MOC_LITERAL(61, 16), // "s_categoryChange"
+QT_MOC_LITERAL(78, 13), // "s_categoryAdd"
+QT_MOC_LITERAL(92, 16), // "s_categoryDelete"
+QT_MOC_LITERAL(109, 8) // "updateUi"
 
     },
     "FormCategoriesTree\0s_stateChanged\0\0"
-    "Category*\0category\0state\0s_categoryChange\0"
+    "Category2*\0category\0state\0s_categoryChange\0"
     "s_categoryAdd\0s_categoryDelete\0updateUi"
 };
 #undef QT_MOC_LITERAL
@@ -89,38 +89,38 @@ void FormCategoriesTree::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<FormCategoriesTree *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->s_stateChanged((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< const bool(*)>(_a[2]))); break;
-        case 1: _t->s_categoryChange((*reinterpret_cast< Category*(*)>(_a[1]))); break;
-        case 2: _t->s_categoryAdd((*reinterpret_cast< Category*(*)>(_a[1]))); break;
-        case 3: _t->s_categoryDelete((*reinterpret_cast< Category*(*)>(_a[1]))); break;
+        case 0: _t->s_stateChanged((*reinterpret_cast< Category2*(*)>(_a[1])),(*reinterpret_cast< const bool(*)>(_a[2]))); break;
+        case 1: _t->s_categoryChange((*reinterpret_cast< Category2*(*)>(_a[1]))); break;
+        case 2: _t->s_categoryAdd((*reinterpret_cast< Category2*(*)>(_a[1]))); break;
+        case 3: _t->s_categoryDelete((*reinterpret_cast< Category2*(*)>(_a[1]))); break;
         case 4: _t->updateUi(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FormCategoriesTree::*)(Category * , const bool & );
+            using _t = void (FormCategoriesTree::*)(Category2 * , const bool & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoriesTree::s_stateChanged)) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (FormCategoriesTree::*)(Category * );
+            using _t = void (FormCategoriesTree::*)(Category2 * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoriesTree::s_categoryChange)) {
                 *result = 1;
                 return;
             }
         }
         {
-            using _t = void (FormCategoriesTree::*)(Category * );
+            using _t = void (FormCategoriesTree::*)(Category2 * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoriesTree::s_categoryAdd)) {
                 *result = 2;
                 return;
             }
         }
         {
-            using _t = void (FormCategoriesTree::*)(Category * );
+            using _t = void (FormCategoriesTree::*)(Category2 * );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoriesTree::s_categoryDelete)) {
                 *result = 3;
                 return;
@@ -136,7 +136,7 @@ const QMetaObject FormCategoriesTree::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormCategoriesTree_t
-, QtPrivate::TypeAndForceComplete<FormCategoriesTree, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>
+, QtPrivate::TypeAndForceComplete<FormCategoriesTree, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>
 , QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
@@ -176,28 +176,28 @@ int FormCategoriesTree::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormCategoriesTree::s_stateChanged(Category * _t1, const bool & _t2)
+void FormCategoriesTree::s_stateChanged(Category2 * _t1, const bool & _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void FormCategoriesTree::s_categoryChange(Category * _t1)
+void FormCategoriesTree::s_categoryChange(Category2 * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 
 // SIGNAL 2
-void FormCategoriesTree::s_categoryAdd(Category * _t1)
+void FormCategoriesTree::s_categoryAdd(Category2 * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 
 // SIGNAL 3
-void FormCategoriesTree::s_categoryDelete(Category * _t1)
+void FormCategoriesTree::s_categoryDelete(Category2 * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 3, _a);

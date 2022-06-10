@@ -1,108 +1,170 @@
 #include "sgames.h"
-
+#include <QJsonDocument>
+#include <QJsonArray>
 
 #define SGameStart {
-SGame::SGame(const QJsonObject &game, const QString &userId, QObject *parent): Sapi(parent), _userId(userId) {
-    fromJson(game);
+SGame::SGame(const QJsonObject &aGame, const ProfileID &aProfileId, QObject *aParent): Sapi(aParent), userId_(aProfileId) {
+    fromJson(aGame);
+}
+
+SGame::SGame(const SGame &aGame): Sapi(aGame.parent()), userId_(aGame.userId()), appId_(aGame.appId_), name_(aGame.name_),
+    playtime_2weeks_(aGame.playtime_2weeks_), playtime_forever_(aGame.playtime_forever_),
+    playtime_windows_forever_(aGame.playtime_windows_forever_), playtime_mac_forever_(aGame.playtime_mac_forever_),
+    playtime_linux_forever_(aGame.playtime_linux_forever_), has_community_visible_stats_(aGame.has_community_visible_stats_),
+    img_icon_url_(aGame.img_icon_url_), img_logo_url_(aGame.img_logo_url_) {
+
 }
 
 QJsonObject SGame::toJson() const {
     QJsonObject obj;
     obj["type"] = className();
-    obj["appid"] = _appID;
-    obj["name"] = _name;
-    obj["playtime_2weeks"] = _playtime_2weeks;
-    obj["playtime_forever"] = _playtime_forever;
-    obj["has_community_visible_stats"] = _has_community_visible_stats;
-    obj["img_icon_url"] = _img_icon_url;
-    obj["img_logo_url"] = _img_logo_url;
+    obj["appid"] = appId_;
+    obj["name"] = name_;
+    obj["playtime_2weeks"] = playtime_2weeks_;
+    obj["playtime_forever"] = playtime_forever_;
+    obj["playtime_windows_forever"] = playtime_windows_forever_;
+    obj["playtime_mac_forever"] = playtime_mac_forever_;
+    obj["playtime_linux_forever"] = playtime_linux_forever_;
+    obj["has_community_visible_stats"] = has_community_visible_stats_;
+    obj["img_icon_url"] = img_icon_url_;
+    obj["img_logo_url"] = img_logo_url_;
     return obj;
 }
 
-SGames onLoad(const QByteArray &byteArray) {
+SGames onLoad(const QByteArray &aByteArray) {
     SGames list;
-    for(const auto &game: QJsonDocument::fromJson(byteArray).object().value("response").toObject().value("games").toArray()) {
+    for(const auto &game: QJsonDocument::fromJson(aByteArray).object().value("response").toObject().value("games").toArray()) {
         list.append(SGame(game.toObject()));
     }
     return list;
 }
 
-SGames SGame::load(const ProfileID &aId, const int &aFreeGames, const int &aGameInfo, std::function<void(SGames)> aCallback) {
-    return Sapi::load<SGame>(gameUrl(aFreeGames, aGameInfo, aId), onLoad, aCallback);
+SGames SGame::load(const ProfileID &aProfileId, const int &aFreeGames, const int &aGameInfo, std::function<void(SGames)> aCallback) {
+    return Sapi::load<SGame>(gameUrl(aFreeGames, aGameInfo, aProfileId), onLoad, aCallback);
 }
 
-int SGame::playerCount(const GameID &aAppId) {
+int SGame::playerCount(const GameID &aGameId) {
     RequestData request;
-    request.get(Sapi::numberPlayersUrl(aAppId), false);
+    request.get(Sapi::numberPlayersUrl(aGameId), false);
     return (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("player_count").toDouble();
 }
 
 SGame &SGame::operator=(const SGame &aGame) {
-    _appID                          = aGame._appID;
-    _name                           = aGame._name;
-    _playtime_2weeks                = aGame._playtime_2weeks;
-    _playtime_forever               = aGame._playtime_forever;
-    _has_community_visible_stats    = aGame._has_community_visible_stats;
-    _img_icon_url                   = aGame._img_icon_url;
-    _img_logo_url                   = aGame._img_logo_url;
-    _pixmapIcon                     = aGame._pixmapIcon;
-    _pixmapLogo                     = aGame._pixmapLogo;
+    appId_                          = aGame.appId_;
+    name_                           = aGame.name_;
+    playtime_2weeks_                = aGame.playtime_2weeks_;
+    playtime_forever_               = aGame.playtime_forever_;
+    playtime_windows_forever_       = aGame.playtime_windows_forever_;
+    playtime_mac_forever_           = aGame.playtime_mac_forever_;
+    playtime_linux_forever_         = aGame.playtime_linux_forever_;
+    has_community_visible_stats_    = aGame.has_community_visible_stats_;
+    img_icon_url_                   = aGame.img_icon_url_;
+    img_logo_url_                   = aGame.img_logo_url_;
+    pixmapIcon_                     = aGame.pixmapIcon_;
+    pixmapLogo_                     = aGame.pixmapLogo_;
     return *this;
 }
 
 bool SGame::operator<(const SGame &aGame) const {
-    return _name < aGame._name;
+    return name_ < aGame.name_;
 }
 
 bool SGame::operator>(const SGame &aGame) const {
-    return _name > aGame._name;
+    return name_ > aGame.name_;
 }
 
 bool SGame::operator==(const SGame &aGame) const {
-    return (_appID                          == aGame._appID &&
-            _name                           == aGame._name &&
-            _playtime_2weeks                == aGame._playtime_2weeks &&
-            _playtime_forever               == aGame._playtime_forever &&
-            _has_community_visible_stats    == aGame._has_community_visible_stats &&
-            _img_icon_url                   == aGame._img_icon_url &&
-            _img_logo_url                   == aGame._img_logo_url &&
-            _pixmapIcon                     == aGame._pixmapIcon &&
-            _pixmapLogo                     == aGame._pixmapLogo);
+    return (appId_                          == aGame.appId_ &&
+            name_                           == aGame.name_ &&
+            playtime_2weeks_                == aGame.playtime_2weeks_ &&
+            playtime_forever_               == aGame.playtime_forever_ &&
+            has_community_visible_stats_    == aGame.has_community_visible_stats_ &&
+            img_icon_url_                   == aGame.img_icon_url_ &&
+            img_logo_url_                   == aGame.img_logo_url_ &&
+            pixmapIcon_                     == aGame.pixmapIcon_ &&
+            pixmapLogo_                     == aGame.pixmapLogo_);
 }
 
 bool SGame::operator!=(const SGame &aGame) const {
-    return (_appID                          != aGame._appID ||
-            _name                           != aGame._name ||
-            _playtime_2weeks                != aGame._playtime_2weeks ||
-            _playtime_forever               != aGame._playtime_forever ||
-            _has_community_visible_stats    != aGame._has_community_visible_stats ||
-            _img_icon_url                   != aGame._img_icon_url ||
-            _img_logo_url                   != aGame._img_logo_url ||
-            _pixmapIcon                     != aGame._pixmapIcon ||
-            _pixmapLogo                     != aGame._pixmapLogo);
+    return (appId_                          != aGame.appId_ ||
+            name_                           != aGame.name_ ||
+            playtime_2weeks_                != aGame.playtime_2weeks_ ||
+            playtime_forever_               != aGame.playtime_forever_ ||
+            has_community_visible_stats_    != aGame.has_community_visible_stats_ ||
+            img_icon_url_                   != aGame.img_icon_url_ ||
+            img_logo_url_                   != aGame.img_logo_url_ ||
+            pixmapIcon_                     != aGame.pixmapIcon_ ||
+            pixmapLogo_                     != aGame.pixmapLogo_);
 }
 
 QPixmap SGame::pixmapIcon() const {
-    if (_img_icon_url.isEmpty()) {
-        _pixmapIcon = QPixmap(Images::missingImage()).scaled(QSize(32, 32)).toImage();
+    if (img_icon_url_.isEmpty()) {
+        pixmapIcon_ = QPixmap(Images::missingImage()).scaled(QSize(32, 32)).toImage();
     }
-    return QPixmap::fromImage(loadImage(_pixmapIcon, Sapi::gameImageUrl(_appID, _img_icon_url), Paths::imagesGames(_img_icon_url), QSize(32, 32)));
+    return QPixmap::fromImage(loadImage(pixmapIcon_, Sapi::gameImageUrl(appId_, img_icon_url_), Paths::imagesGames(img_icon_url_), QSize(32, 32)));
 }
 
 QPixmap SGame::pixmapLogo() const {
-    if (_img_icon_url.isEmpty()) {
-        _pixmapLogo = QPixmap(Images::missingImage()).scaled(QSize(184, 69)).toImage();
+    if (img_icon_url_.isEmpty()) {
+        pixmapLogo_ = QPixmap(Images::missingImage()).scaled(QSize(184, 69)).toImage();
     }
-    return QPixmap::fromImage(loadImage(_pixmapLogo, Sapi::gameImageUrl(_appID, _img_logo_url), Paths::imagesGames(_img_logo_url), QSize(184, 69)));
+    return QPixmap::fromImage(loadImage(pixmapLogo_, Sapi::gameImageUrl(appId_, img_logo_url_), Paths::imagesGames(img_logo_url_), QSize(184, 69)));
+}
+
+ProfileID SGame::userId() const {
+    return userId_;
+}
+
+GameID SGame::appId() const {
+    return appId_;
+}
+
+QString SGame::name() const {
+    return name_;
+}
+
+int SGame::playtime2Weeks() const {
+    return playtime_2weeks_;
+}
+
+int SGame::playtimeForever() const {
+    return playtime_forever_;
+}
+
+int SGame::playtimeWindowsForever() const {
+    return playtime_windows_forever_;
+}
+
+int SGame::playtimeMacForever() const {
+    return playtime_mac_forever_;
+}
+
+int SGame::playtimeLinuxForever() const {
+    return playtime_linux_forever_;
+}
+
+bool SGame::hasCommunityVisibleStats() const {
+    return has_community_visible_stats_;
+}
+
+QString SGame::imgIconUrl() const {
+    return img_icon_url_;
+}
+
+QString SGame::imgLogoUrl() const {
+    return img_logo_url_;
 }
 
 void SGame::fromJson(const QJsonObject &aValue) {
-    _appID                          = aValue.value("appid").toInt();
-    _name                           = aValue.value("name").toString();
-    _playtime_2weeks                = aValue.value("playtime_2weeks").toInt();
-    _playtime_forever               = aValue.value("playtime_forever").toInt();
-    _has_community_visible_stats    = aValue.value("has_community_visible_stats").toBool();
-    _img_icon_url                   = aValue.value("img_icon_url").toString();
-    _img_logo_url                   = aValue.value("img_logo_url").toString();
+    appId_                          = aValue.value("appid").toInt();
+    name_                           = aValue.value("name").toString();
+    playtime_2weeks_                = aValue.value("playtime_2weeks").toInt();
+    playtime_forever_               = aValue.value("playtime_forever").toInt();
+    playtime_windows_forever_       = aValue.value("playtime_windows_forever").toInt();
+    playtime_mac_forever_           = aValue.value("playtime_mac_forever").toInt();
+    playtime_linux_forever_         = aValue.value("playtime_linux_forever").toInt();
+    has_community_visible_stats_    = aValue.value("has_community_visible_stats").toBool();
+    img_icon_url_                   = aValue.value("img_icon_url").toString();
+    img_logo_url_                   = aValue.value("img_logo_url").toString();
 }
 #define SGameEnd }

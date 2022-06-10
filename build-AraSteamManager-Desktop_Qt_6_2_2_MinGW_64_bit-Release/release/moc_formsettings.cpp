@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormSettings_t {
-    const uint offsetsAndSize[78];
-    char stringdata0[709];
+    const uint offsetsAndSize[74];
+    char stringdata0[629];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormSettings_t, stringdata0) + ofs), len 
@@ -37,48 +37,41 @@ QT_MOC_LITERAL(33, 0), // ""
 QT_MOC_LITERAL(34, 8), // "QWidget*"
 QT_MOC_LITERAL(43, 14), // "initComponents"
 QT_MOC_LITERAL(58, 10), // "initExport"
-QT_MOC_LITERAL(69, 34), // "radioButtonLanguageEnglish_Cl..."
-QT_MOC_LITERAL(104, 34), // "radioButtonLanguageRussian_Cl..."
-QT_MOC_LITERAL(139, 28), // "radioButtonDarkTheme_Clicked"
-QT_MOC_LITERAL(168, 29), // "radioButtonLightTheme_Clicked"
-QT_MOC_LITERAL(198, 28), // "radioButtonBlueTheme_Clicked"
-QT_MOC_LITERAL(227, 30), // "radioButtonHiddenGames_Clicked"
-QT_MOC_LITERAL(258, 19), // "achievementsClicked"
-QT_MOC_LITERAL(278, 11), // "hideClicked"
-QT_MOC_LITERAL(290, 11), // "retranslate"
-QT_MOC_LITERAL(302, 14), // "updateSettings"
-QT_MOC_LITERAL(317, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(341, 11), // "updateIcons"
-QT_MOC_LITERAL(353, 39), // "checkBoxVisibleHiddenGames_St..."
-QT_MOC_LITERAL(393, 4), // "arg1"
-QT_MOC_LITERAL(398, 30), // "checkBoxSaveImage_StateChanged"
-QT_MOC_LITERAL(429, 29), // "slideProfileSize_ValueChanged"
-QT_MOC_LITERAL(459, 5), // "value"
-QT_MOC_LITERAL(465, 20), // "comboBoxMaxTableRows"
-QT_MOC_LITERAL(486, 5), // "index"
-QT_MOC_LITERAL(492, 23), // "recursAddCategoryToTree"
-QT_MOC_LITERAL(516, 9), // "Category*"
-QT_MOC_LITERAL(526, 9), // "aCategory"
-QT_MOC_LITERAL(536, 16), // "QTreeWidgetItem*"
-QT_MOC_LITERAL(553, 5), // "aRoot"
-QT_MOC_LITERAL(559, 7), // "aGameId"
-QT_MOC_LITERAL(567, 30), // "buttonExportCategories_Clicked"
-QT_MOC_LITERAL(598, 30), // "buttonImportCategories_Clicked"
-QT_MOC_LITERAL(629, 26), // "createExportCategoriesJson"
-QT_MOC_LITERAL(656, 14), // "ExportFileData"
-QT_MOC_LITERAL(671, 9), // "getColors"
-QT_MOC_LITERAL(681, 9), // "aNewColor"
-QT_MOC_LITERAL(691, 11), // "createIcons"
-QT_MOC_LITERAL(703, 5) // "aPath"
+QT_MOC_LITERAL(69, 30), // "radioButtonHiddenGames_Clicked"
+QT_MOC_LITERAL(100, 19), // "achievementsClicked"
+QT_MOC_LITERAL(120, 11), // "hideClicked"
+QT_MOC_LITERAL(132, 11), // "retranslate"
+QT_MOC_LITERAL(144, 14), // "updateSettings"
+QT_MOC_LITERAL(159, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(183, 11), // "updateIcons"
+QT_MOC_LITERAL(195, 39), // "checkBoxVisibleHiddenGames_St..."
+QT_MOC_LITERAL(235, 4), // "arg1"
+QT_MOC_LITERAL(240, 30), // "checkBoxSaveImage_StateChanged"
+QT_MOC_LITERAL(271, 29), // "slideProfileSize_ValueChanged"
+QT_MOC_LITERAL(301, 5), // "value"
+QT_MOC_LITERAL(307, 20), // "comboBoxMaxTableRows"
+QT_MOC_LITERAL(328, 5), // "index"
+QT_MOC_LITERAL(334, 23), // "recursAddCategoryToTree"
+QT_MOC_LITERAL(358, 10), // "Category2*"
+QT_MOC_LITERAL(369, 9), // "aCategory"
+QT_MOC_LITERAL(379, 16), // "QTreeWidgetItem*"
+QT_MOC_LITERAL(396, 5), // "aRoot"
+QT_MOC_LITERAL(402, 7), // "aGameId"
+QT_MOC_LITERAL(410, 30), // "buttonExportCategories_Clicked"
+QT_MOC_LITERAL(441, 30), // "buttonImportCategories_Clicked"
+QT_MOC_LITERAL(472, 26), // "createExportCategoriesJson"
+QT_MOC_LITERAL(499, 14), // "ExportFileData"
+QT_MOC_LITERAL(514, 25), // "comboBoxThemeIndexChanged"
+QT_MOC_LITERAL(540, 6), // "aIndex"
+QT_MOC_LITERAL(547, 28), // "comboBoxLanguageIndexChanged"
+QT_MOC_LITERAL(576, 15), // "getFileFromPath"
+QT_MOC_LITERAL(592, 15), // "ExportFileData*"
+QT_MOC_LITERAL(608, 10), // "QLineEdit*"
+QT_MOC_LITERAL(619, 9) // "aLineEdit"
 
     },
     "FormSettings\0s_return_to_profile\0\0"
     "QWidget*\0initComponents\0initExport\0"
-    "radioButtonLanguageEnglish_Clicked\0"
-    "radioButtonLanguageRussian_Clicked\0"
-    "radioButtonDarkTheme_Clicked\0"
-    "radioButtonLightTheme_Clicked\0"
-    "radioButtonBlueTheme_Clicked\0"
     "radioButtonHiddenGames_Clicked\0"
     "achievementsClicked\0hideClicked\0"
     "retranslate\0updateSettings\0"
@@ -87,12 +80,15 @@ QT_MOC_LITERAL(703, 5) // "aPath"
     "arg1\0checkBoxSaveImage_StateChanged\0"
     "slideProfileSize_ValueChanged\0value\0"
     "comboBoxMaxTableRows\0index\0"
-    "recursAddCategoryToTree\0Category*\0"
+    "recursAddCategoryToTree\0Category2*\0"
     "aCategory\0QTreeWidgetItem*\0aRoot\0"
     "aGameId\0buttonExportCategories_Clicked\0"
     "buttonImportCategories_Clicked\0"
     "createExportCategoriesJson\0ExportFileData\0"
-    "getColors\0aNewColor\0createIcons\0aPath"
+    "comboBoxThemeIndexChanged\0aIndex\0"
+    "comboBoxLanguageIndexChanged\0"
+    "getFileFromPath\0ExportFileData*\0"
+    "QLineEdit*\0aLineEdit"
 };
 #undef QT_MOC_LITERAL
 
@@ -102,7 +98,7 @@ static const uint qt_meta_data_FormSettings[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      20,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -110,32 +106,28 @@ static const uint qt_meta_data_FormSettings[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,  158,    2, 0x06,    1 /* Public */,
+       1,    1,  134,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    0,  161,    2, 0x08,    3 /* Private */,
-       5,    0,  162,    2, 0x08,    4 /* Private */,
-       6,    0,  163,    2, 0x08,    5 /* Private */,
-       7,    0,  164,    2, 0x08,    6 /* Private */,
-       8,    0,  165,    2, 0x08,    7 /* Private */,
-       9,    0,  166,    2, 0x08,    8 /* Private */,
-      10,    0,  167,    2, 0x08,    9 /* Private */,
-      11,    0,  168,    2, 0x08,   10 /* Private */,
-      12,    0,  169,    2, 0x08,   11 /* Private */,
-      13,    0,  170,    2, 0x08,   12 /* Private */,
-      14,    0,  171,    2, 0x08,   13 /* Private */,
-      15,    1,  172,    2, 0x08,   14 /* Private */,
-      17,    0,  175,    2, 0x08,   16 /* Private */,
-      18,    1,  176,    2, 0x08,   17 /* Private */,
-      20,    1,  179,    2, 0x08,   19 /* Private */,
-      21,    1,  182,    2, 0x08,   21 /* Private */,
-      23,    1,  185,    2, 0x08,   23 /* Private */,
-      25,    3,  188,    2, 0x08,   25 /* Private */,
-      31,    0,  195,    2, 0x08,   29 /* Private */,
-      32,    0,  196,    2, 0x08,   30 /* Private */,
-      33,    0,  197,    2, 0x08,   31 /* Private */,
-      35,    1,  198,    2, 0x08,   32 /* Private */,
-      37,    2,  201,    2, 0x08,   34 /* Private */,
+       4,    0,  137,    2, 0x08,    3 /* Private */,
+       5,    0,  138,    2, 0x08,    4 /* Private */,
+       6,    0,  139,    2, 0x08,    5 /* Private */,
+       7,    0,  140,    2, 0x08,    6 /* Private */,
+       8,    0,  141,    2, 0x08,    7 /* Private */,
+       9,    0,  142,    2, 0x08,    8 /* Private */,
+      10,    1,  143,    2, 0x08,    9 /* Private */,
+      12,    0,  146,    2, 0x08,   11 /* Private */,
+      13,    1,  147,    2, 0x08,   12 /* Private */,
+      15,    1,  150,    2, 0x08,   14 /* Private */,
+      16,    1,  153,    2, 0x08,   16 /* Private */,
+      18,    1,  156,    2, 0x08,   18 /* Private */,
+      20,    3,  159,    2, 0x08,   20 /* Private */,
+      26,    0,  166,    2, 0x08,   24 /* Private */,
+      27,    0,  167,    2, 0x08,   25 /* Private */,
+      28,    0,  168,    2, 0x08,   26 /* Private */,
+      30,    1,  169,    2, 0x08,   27 /* Private */,
+      32,    1,  172,    2, 0x08,   29 /* Private */,
+      33,    1,  175,    2, 0x08,   31 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    2,
@@ -147,23 +139,19 @@ static const uint qt_meta_data_FormSettings[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 11,    2,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 16,    2,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   14,
+    QMetaType::Void, QMetaType::Int,   14,
+    QMetaType::Void, QMetaType::Int,   17,
     QMetaType::Void, QMetaType::Int,   19,
-    QMetaType::Void, QMetaType::Int,   19,
-    QMetaType::Void, QMetaType::Int,   22,
-    QMetaType::Void, QMetaType::Int,   24,
-    QMetaType::Int, 0x80000000 | 26, 0x80000000 | 28, QMetaType::Int,   27,   29,   30,
+    QMetaType::Int, 0x80000000 | 21, 0x80000000 | 23, QMetaType::Int,   22,   24,   25,
     QMetaType::Void,
     QMetaType::Void,
-    0x80000000 | 34,
-    QMetaType::QStringList, QMetaType::QColor,   36,
-    QMetaType::Void, QMetaType::QString, QMetaType::QColor,   38,   36,
+    0x80000000 | 29,
+    QMetaType::Void, QMetaType::Int,   31,
+    QMetaType::Void, QMetaType::Int,   31,
+    0x80000000 | 34, 0x80000000 | 35,   36,
 
        0        // eod
 };
@@ -177,30 +165,26 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 0: _t->s_return_to_profile((*reinterpret_cast< QWidget*(*)>(_a[1]))); break;
         case 1: _t->initComponents(); break;
         case 2: _t->initExport(); break;
-        case 3: _t->radioButtonLanguageEnglish_Clicked(); break;
-        case 4: _t->radioButtonLanguageRussian_Clicked(); break;
-        case 5: _t->radioButtonDarkTheme_Clicked(); break;
-        case 6: _t->radioButtonLightTheme_Clicked(); break;
-        case 7: _t->radioButtonBlueTheme_Clicked(); break;
-        case 8: _t->radioButtonHiddenGames_Clicked(); break;
-        case 9: _t->achievementsClicked(); break;
-        case 10: _t->hideClicked(); break;
-        case 11: _t->retranslate(); break;
-        case 12: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
-        case 13: _t->updateIcons(); break;
-        case 14: _t->checkBoxVisibleHiddenGames_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 15: _t->checkBoxSaveImage_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 16: _t->slideProfileSize_ValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 17: _t->comboBoxMaxTableRows((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 18: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])));
+        case 3: _t->radioButtonHiddenGames_Clicked(); break;
+        case 4: _t->achievementsClicked(); break;
+        case 5: _t->hideClicked(); break;
+        case 6: _t->retranslate(); break;
+        case 7: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
+        case 8: _t->updateIcons(); break;
+        case 9: _t->checkBoxVisibleHiddenGames_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: _t->checkBoxSaveImage_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->slideProfileSize_ValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: _t->comboBoxMaxTableRows((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 13: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category2*(*)>(_a[1])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 19: _t->buttonExportCategories_Clicked(); break;
-        case 20: _t->buttonImportCategories_Clicked(); break;
-        case 21: { ExportFileData _r = _t->createExportCategoriesJson();
+        case 14: _t->buttonExportCategories_Clicked(); break;
+        case 15: _t->buttonImportCategories_Clicked(); break;
+        case 16: { ExportFileData _r = _t->createExportCategoriesJson();
             if (_a[0]) *reinterpret_cast< ExportFileData*>(_a[0]) = std::move(_r); }  break;
-        case 22: { QStringList _r = _t->getColors((*reinterpret_cast< const QColor(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QStringList*>(_a[0]) = std::move(_r); }  break;
-        case 23: _t->createIcons((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QColor(*)>(_a[2]))); break;
+        case 17: _t->comboBoxThemeIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 18: _t->comboBoxLanguageIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 19: { ExportFileData* _r = _t->getFileFromPath((*reinterpret_cast< QLineEdit*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< ExportFileData**>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -234,7 +218,7 @@ const QMetaObject FormSettings::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormSettings_t
 , QtPrivate::TypeAndForceComplete<FormSettings, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<ExportFileData, std::false_type>, QtPrivate::TypeAndForceComplete<QStringList, std::false_type>, QtPrivate::TypeAndForceComplete<const QColor &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const QColor &, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<ExportFileData, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<ExportFileData *, std::false_type>, QtPrivate::TypeAndForceComplete<QLineEdit *, std::false_type>
 
 
 >,
@@ -261,13 +245,13 @@ int FormSettings::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 20;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 24)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 20;
     }
     return _id;
 }

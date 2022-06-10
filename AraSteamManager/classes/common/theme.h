@@ -17,13 +17,19 @@ struct ThemeColor {
 
     ~ThemeColor();
 
-    void setColor(const QColor&, QGradient gradient = QGradient());
-    void setColor(const QString&);
+    void setColor(const QColor&, QGradient *gradient = nullptr);
+    void setGradient(QGradient gradient);
     QColor getColor();
+    QGradient *getGradient();
+    void setString(const QString&);
     QString getString();
     ThemeColor &setAlpha(int alpha);
 
     ThemeColor &swapPartColor(PartColor part1, PartColor part2);
+    ThemeColor &alternateColor(const QColor &newColor);
+
+    QJsonObject toJson();
+    void fromJson(const QJsonObject &);
 };
 
 struct Theme {
@@ -48,17 +54,16 @@ struct Theme {
     ThemeColor forItemHover;
     ThemeColor mainProfileBackground;
     ThemeColor mainBackground;
-
-    QString   pathIcons;
-    QString   pathImages;
-
-    Theme &setPathIcons(const QString&);
-    QString getPathIcons();
-
-    Theme &setPathImages(const QString&);
-    QString getPathImages();
+    QString    pathIcons;
+    QString    pathImages;
 
     Theme &swapPartsAllColors(PartColor part1, PartColor part2);
+
+    QJsonObject toJson();
+    void fromJson(const QJsonObject&);
+
+    bool save(const QString &path);
+    void load(const QString &path);
 
     static Theme getCurrentTheme();
     static QString qssTheme();
@@ -67,8 +72,8 @@ struct Theme {
     static QColor combineColor(const QColor &aColor1, double aPercent1, const QColor &aColor2, double aPercent2);
     static QColor swapParts(const QColor &color, PartColor part1, PartColor part2);
 
-private:
-    QString getText(const QColor&, QGradient*);
+public:
+    static void createIcons(const QString &aPath, const QColor &aNewColor);
 };
 
 Theme blueTheme();
@@ -79,5 +84,6 @@ Theme crimsonTheme();
 Theme limeTheme();
 Theme purpleTheme();
 Theme greenTheme();
+Theme customTheme(const QColor &aNewColor);
 
 #endif // THEME_H

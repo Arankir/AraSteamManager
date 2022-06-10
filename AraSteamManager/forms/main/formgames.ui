@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QGroupBox" name="GroupBoxFilter">
+    <widget class="QGroupBox" name="groupBoxFilter">
      <property name="title">
       <string>     Фильтр</string>
      </property>
@@ -38,7 +38,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLineEdit" name="LineEditGame">
+         <widget class="MyLineEdit" name="lineEditGame">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -46,12 +46,12 @@
            </sizepolicy>
           </property>
           <property name="placeholderText">
-           <string>Найти игру</string>
+           <string>Dota 2</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="ButtonFind">
+         <widget class="QPushButton" name="buttonFind">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -71,10 +71,23 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <widget class="MultiSelectComboBox" name="ComboBoxGroups"/>
+         <widget class="QLabel" name="label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Группы:</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="CheckBoxFavorites">
+         <widget class="MultiSelectComboBox" name="comboBoxGroups"/>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxFavorites">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -92,21 +105,16 @@
     </widget>
    </item>
    <item>
-    <widget class="QTableView" name="TableGames"/>
-   </item>
-   <item>
-    <widget class="QProgressBar" name="ProgressBarLoading">
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="format">
-      <string notr="true">%v/%m</string>
-     </property>
-    </widget>
+    <widget class="QTableView" name="tableGames"/>
    </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>subWidgets/lineEdit/mylineedit.h</header>
+  </customwidget>
   <customwidget>
    <class>MultiSelectComboBox</class>
    <extends>QComboBox</extends>
@@ -114,7 +122,7 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>ButtonFind</tabstop>
+  <tabstop>buttonFind</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGroups_t {
-    const uint offsetsAndSize[44];
-    char stringdata0[241];
+    const uint offsetsAndSize[42];
+    char stringdata0[220];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormGroups_t, stringdata0) + ofs), len 
@@ -34,33 +34,31 @@ static const qt_meta_stringdata_FormGroups_t qt_meta_stringdata_FormGroups = {
 QT_MOC_LITERAL(0, 10), // "FormGroups"
 QT_MOC_LITERAL(11, 14), // "s_updateGroups"
 QT_MOC_LITERAL(26, 0), // ""
-QT_MOC_LITERAL(27, 14), // "setProfileGame"
-QT_MOC_LITERAL(42, 6), // "initUi"
-QT_MOC_LITERAL(49, 5), // "clear"
-QT_MOC_LITERAL(55, 8), // "updateUi"
-QT_MOC_LITERAL(64, 3), // "add"
-QT_MOC_LITERAL(68, 6), // "aTitle"
-QT_MOC_LITERAL(75, 11), // "changeTitle"
-QT_MOC_LITERAL(87, 6), // "aIndex"
-QT_MOC_LITERAL(94, 6), // "cancel"
-QT_MOC_LITERAL(101, 5), // "apply"
-QT_MOC_LITERAL(107, 11), // "add_clicked"
-QT_MOC_LITERAL(119, 19), // "changeTitle_clicked"
-QT_MOC_LITERAL(139, 14), // "cancel_clicked"
-QT_MOC_LITERAL(154, 13), // "apply_clicked"
-QT_MOC_LITERAL(168, 11), // "retranslate"
-QT_MOC_LITERAL(180, 11), // "updateIcons"
-QT_MOC_LITERAL(192, 14), // "updateSettings"
-QT_MOC_LITERAL(207, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(231, 9) // "aSettings"
+QT_MOC_LITERAL(27, 4), // "init"
+QT_MOC_LITERAL(32, 10), // "createMenu"
+QT_MOC_LITERAL(43, 6), // "QMenu*"
+QT_MOC_LITERAL(50, 16), // "QListWidgetItem*"
+QT_MOC_LITERAL(67, 5), // "aItem"
+QT_MOC_LITERAL(73, 11), // "removeGroup"
+QT_MOC_LITERAL(85, 6), // "initUi"
+QT_MOC_LITERAL(92, 5), // "clear"
+QT_MOC_LITERAL(98, 8), // "updateUi"
+QT_MOC_LITERAL(107, 6), // "cancel"
+QT_MOC_LITERAL(114, 5), // "apply"
+QT_MOC_LITERAL(120, 13), // "cancelClicked"
+QT_MOC_LITERAL(134, 12), // "applyClicked"
+QT_MOC_LITERAL(147, 11), // "retranslate"
+QT_MOC_LITERAL(159, 11), // "updateIcons"
+QT_MOC_LITERAL(171, 14), // "updateSettings"
+QT_MOC_LITERAL(186, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(210, 9) // "aSettings"
 
     },
-    "FormGroups\0s_updateGroups\0\0setProfileGame\0"
-    "initUi\0clear\0updateUi\0add\0aTitle\0"
-    "changeTitle\0aIndex\0cancel\0apply\0"
-    "add_clicked\0changeTitle_clicked\0"
-    "cancel_clicked\0apply_clicked\0retranslate\0"
-    "updateIcons\0updateSettings\0"
+    "FormGroups\0s_updateGroups\0\0init\0"
+    "createMenu\0QMenu*\0QListWidgetItem*\0"
+    "aItem\0removeGroup\0initUi\0clear\0updateUi\0"
+    "cancel\0apply\0cancelClicked\0applyClicked\0"
+    "retranslate\0updateIcons\0updateSettings\0"
     "QFlags<changedSettings>\0aSettings"
 };
 #undef QT_MOC_LITERAL
@@ -71,7 +69,7 @@ static const uint qt_meta_data_FormGroups[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -79,35 +77,30 @@ static const uint qt_meta_data_FormGroups[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  110,    2, 0x06,    1 /* Public */,
+       1,    0,   98,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    0,  111,    2, 0x08,    2 /* Private */,
-       4,    0,  112,    2, 0x08,    3 /* Private */,
-       5,    0,  113,    2, 0x08,    4 /* Private */,
-       6,    0,  114,    2, 0x08,    5 /* Private */,
-       7,    1,  115,    2, 0x08,    6 /* Private */,
-       9,    2,  118,    2, 0x08,    8 /* Private */,
-      11,    0,  123,    2, 0x08,   11 /* Private */,
-      12,    0,  124,    2, 0x08,   12 /* Private */,
-      13,    0,  125,    2, 0x08,   13 /* Private */,
-      14,    0,  126,    2, 0x08,   14 /* Private */,
-      15,    0,  127,    2, 0x08,   15 /* Private */,
-      16,    0,  128,    2, 0x08,   16 /* Private */,
-      17,    0,  129,    2, 0x08,   17 /* Private */,
-      18,    0,  130,    2, 0x08,   18 /* Private */,
-      19,    1,  131,    2, 0x08,   19 /* Private */,
+       3,    0,   99,    2, 0x09,    2 /* Protected */,
+       4,    1,  100,    2, 0x09,    3 /* Protected */,
+       8,    1,  103,    2, 0x09,    5 /* Protected */,
+       9,    0,  106,    2, 0x09,    7 /* Protected */,
+      10,    0,  107,    2, 0x09,    8 /* Protected */,
+      11,    0,  108,    2, 0x09,    9 /* Protected */,
+      12,    0,  109,    2, 0x09,   10 /* Protected */,
+      13,    0,  110,    2, 0x09,   11 /* Protected */,
+      14,    0,  111,    2, 0x09,   12 /* Protected */,
+      15,    0,  112,    2, 0x09,   13 /* Protected */,
+      16,    0,  113,    2, 0x09,   14 /* Protected */,
+      17,    0,  114,    2, 0x09,   15 /* Protected */,
+      18,    1,  115,    2, 0x09,   16 /* Protected */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    8,
-    QMetaType::Void, QMetaType::Int, QMetaType::QString,   10,    8,
+    0x80000000 | 5, 0x80000000 | 6,    7,
+    QMetaType::Void, 0x80000000 | 6,    7,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -116,7 +109,8 @@ static const uint qt_meta_data_FormGroups[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 20,   21,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 19,   20,
 
        0        // eod
 };
@@ -128,21 +122,20 @@ void FormGroups::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->s_updateGroups(); break;
-        case 1: _t->setProfileGame(); break;
-        case 2: _t->initUi(); break;
-        case 3: _t->clear(); break;
-        case 4: _t->updateUi(); break;
-        case 5: _t->add((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 6: _t->changeTitle((*reinterpret_cast< const int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 1: _t->init(); break;
+        case 2: { QMenu* _r = _t->createMenu((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
+        case 3: _t->removeGroup((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 4: _t->initUi(); break;
+        case 5: _t->clear(); break;
+        case 6: _t->updateUi(); break;
         case 7: _t->cancel(); break;
         case 8: _t->apply(); break;
-        case 9: _t->add_clicked(); break;
-        case 10: _t->changeTitle_clicked(); break;
-        case 11: _t->cancel_clicked(); break;
-        case 12: _t->apply_clicked(); break;
-        case 13: _t->retranslate(); break;
-        case 14: _t->updateIcons(); break;
-        case 15: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
+        case 9: _t->cancelClicked(); break;
+        case 10: _t->applyClicked(); break;
+        case 11: _t->retranslate(); break;
+        case 12: _t->updateIcons(); break;
+        case 13: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -165,7 +158,7 @@ const QMetaObject FormGroups::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormGroups_t
 , QtPrivate::TypeAndForceComplete<FormGroups, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>
 
 
 >,
@@ -192,13 +185,13 @@ int FormGroups::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 14)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 14;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 14)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 16;
+        _id -= 14;
     }
     return _id;
 }

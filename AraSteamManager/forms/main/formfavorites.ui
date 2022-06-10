@@ -32,7 +32,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -60,7 +60,11 @@
           <number>6</number>
          </property>
          <item>
-          <widget class="QLineEdit" name="LineEditGamesFind"/>
+          <widget class="MyLineEdit" name="LineEditGamesFind">
+           <property name="placeholderText">
+            <string>Dota 2</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="ButtonGamesFind">
@@ -104,7 +108,7 @@
          <item>
           <widget class="QLineEdit" name="LineEditFriendsFind">
            <property name="placeholderText">
-            <string>Найти друга</string>
+            <string>LuckyGuy228</string>
            </property>
           </widget>
          </item>
@@ -166,7 +170,7 @@
         <string notr="true">Жми</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="MyLineEdit" name="lineEdit">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -208,7 +212,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="MyLineEdit" name="lineEdit_2">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -325,6 +329,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>subWidgets/lineEdit/mylineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

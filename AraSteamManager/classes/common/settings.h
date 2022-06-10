@@ -1,19 +1,9 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <QObject>
 #include <QDebug>
 #include <QSettings>
-#include <QFile>
-#include <QRect>
-#include <QLoggingCategory>
-#include <QFontDatabase>
-#include <QApplication>
-#include <QStandardPaths>
-#include <QGradient>
-#include <QLinearGradient>
-#include <QRadialGradient>
-#include "./theme.h"
+//#include <QLoggingCategory>
 
 //Q_DECLARE_LOGGING_CATEGORY(logDebug)
 //Q_DECLARE_LOGGING_CATEGORY(logInfo)
@@ -102,18 +92,13 @@ public:
     static void setAchievementsComparePercentVisible(const int &width);
     static int achievementsComparePercentVisible();
 
-//    static QString iconsColor();
-//    static QString defaultFont();
-//    static QString qssTheme();
-
     static void syncronizeSettings();
 
     static const QString dateTimeFormat();
     static const QString dateFormat();
     static const QString dateTimeFormatShort();
 private:
-    static QSettings *_settings;
-//    static QString defaultFontPath();
+    static QSettings *settings_;
 };
 
 class Paths {
@@ -124,7 +109,7 @@ public:
     static QString favorites(QString type = "");
     static QString hiddenGames(QString steamId = "");
     static QString groupGames(QString profileId = "");
-    static QString imagesProfiles(const QString &url);
+    static QString imagesProfiles(const QString &url, const QString &aFormat = "jpg");
     static QString imagesAchievements(const QString &gameId, const QString &url = "");
     static QString imagesGames(const QString &url);
     static QString commentsGames(const QString &profileId);

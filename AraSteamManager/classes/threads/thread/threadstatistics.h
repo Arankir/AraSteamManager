@@ -8,13 +8,7 @@
 #include "classes/network/requestdata.h"
 #include "../threadloading.h"
 #include "classes/steamApi/structures/sprofile.h"
-
-struct GameWithPercent {
-    GameWithPercent(const SGame &aGame, double aPercent, SAchievementsPlayer aAchievements): game(aGame), percent(aPercent), achievements(aAchievements) {};
-    SGame game;
-    double percent;
-    SAchievementsPlayer achievements;
-};
+#include "subWidgets/models/gameswithpercentmodel.h"
 
 struct YearCount {
     YearCount(const QString &aYear, int aCount): year(aYear), count(aCount) {};
@@ -29,18 +23,19 @@ struct CompletedAchievement {
 };
 
 struct Statistics {
-    Statistics(const SProfile &aProfile, const SGames &aGame): profile(aProfile), games(aGame) {};
-    void changeProfile(const SProfile &aProfile, const SGames &aGames);
+    Statistics(const SProfile &aProfile): profile(aProfile), games(SGame::load(aProfile.steamID(), true, true)) {};
+    Statistics() {};
+    void changeProfile(const SProfile &aProfile);
     void sortAllLists();
     SProfile profile;
     SGames games;
     double summAverages = 0.0;
     int achievementCount = 0;
 
-    QList<GameWithPercent> complete;
-    QList<GameWithPercent> started;
-    QList<GameWithPercent> notStarted;
-    QList<GameWithPercent> noAchievements;
+    QList<GameWithPercentModelItem> complete;
+    QList<GameWithPercentModelItem> started;
+    QList<GameWithPercentModelItem> notStarted;
+    QList<GameWithPercentModelItem> noAchievements;
 
     QList<CompletedAchievement> completedAchievements;
 
@@ -57,7 +52,7 @@ private slots:
     void updateTimes(const QDateTime &unlockedTime);
 
 public:
-    ThreadStatistics(Statistics &statistic): _statistics(statistic) {};
+    ThreadStatistics(Statistics &statistic): statistics_(statistic) {};
 
     ~ThreadStatistics() {qInfo() << "Thread statistic deleted";}
 
@@ -66,7 +61,7 @@ signals:
     void s_finish(Statistics&);
 
 private:
-    Statistics &_statistics;
+    Statistics &statistics_;
 
     int countReachedAchievements(const QList<SAchievementPlayer> &aAchievements, const SGame &aGame);
 };

@@ -25,27 +25,30 @@ DEFINES += QT_DEPRECATED_WARNINGS  QT_MESSAGELOGCONTEXT #Названия фун
 CONFIG += c++2a
 
 SOURCES += \
-    classes/achievements/categoriesgame.cpp \
-    classes/common/comments.cpp \
-    classes/common/favorites.cpp \
+    classes/files/achievementscategory.cpp \
+    classes/files/comments.cpp \
+    classes/files/favorites.cpp \
+    classes/common/filesaveload.cpp \
     classes/common/generalfunctions.cpp \
     classes/common/images.cpp \
-    classes/common/myfilter.cpp \
     classes/common/settings.cpp \
     classes/common/theme.cpp \
-    classes/games/groupsgames.cpp \
-    classes/games/hiddengames.cpp \
+    classes/files/groupsgames.cpp \
+    classes/files/hiddengames.cpp \
     classes/network/requestdata.cpp \
     classes/network/requestimage.cpp \
     classes/steamApi/sapi.cpp \
     classes/steamApi/structures/sachievements.cpp \
+    classes/steamApi/structures/sbadge.cpp \
     classes/steamApi/structures/sbans.cpp \
     classes/steamApi/structures/sfriends.cpp \
     classes/steamApi/structures/sgames.cpp \
     classes/steamApi/structures/sprofile.cpp \
+    classes/steamApi/structures/sprofilecustomization.cpp \
     classes/threads/thread/threadstatistics.cpp \
     classes/threads/threadloading.cpp \
     form.cpp \
+    forms/main/formprofilesbrowser.cpp \
     forms/widgets/formfrienditemgraph.cpp \
     forms/formcomments.cpp \
     forms/formcontainerachievements.cpp \
@@ -63,6 +66,10 @@ SOURCES += \
     forms/main/formprofile.cpp \
     forms/main/formsettings.cpp \
     forms/main/formstatistics.cpp \
+    subWidgets/charts/achievementcompletedpiechart.cpp \
+    subWidgets/charts/achievementcountchart.cpp \
+    subWidgets/charts/piechart.cpp \
+    subWidgets/lineEdit/mylineedit.cpp \
     framelesswindow.cpp \
         main.cpp \
     subWidgets/actions/actioncategory.cpp \
@@ -79,6 +86,7 @@ SOURCES += \
     subWidgets/models/filters.cpp \
     subWidgets/models/friendsmodel.cpp \
     subWidgets/models/gamesmodel.cpp \
+    subWidgets/models/gameswithpercentmodel.cpp \
     subWidgets/models/listachievementsmodel.cpp \
     subWidgets/progressBars/progressbarbad.cpp \
     subWidgets/progressBars/progressbargood.cpp \
@@ -90,27 +98,30 @@ SOURCES += \
     subWidgets/withData/qradiobuttonwithdata.cpp \
 
 HEADERS += \
-    classes/achievements/categoriesgame.h \
-    classes/common/comments.h \
-    classes/common/favorites.h \
+    classes/files/achievementscategory.h \
+    classes/files/comments.h \
+    classes/files/favorites.h \
+    classes/common/filesaveload.h \
     classes/common/generalfunctions.h \
     classes/common/images.h \
-    classes/common/myfilter.h \
     classes/common/settings.h \
     classes/common/theme.h \
-    classes/games/groupsgames.h \
-    classes/games/hiddengames.h \
+    classes/files/groupsgames.h \
+    classes/files/hiddengames.h \
     classes/network/requestdata.h \
     classes/network/requestimage.h \
     classes/steamApi/sapi.h \
     classes/steamApi/structures/sachievements.h \
+    classes/steamApi/structures/sbadge.h \
     classes/steamApi/structures/sbans.h \
     classes/steamApi/structures/sfriends.h \
     classes/steamApi/structures/sgames.h \
     classes/steamApi/structures/sprofile.h \
+    classes/steamApi/structures/sprofilecustomization.h \
     classes/threads/thread/threadstatistics.h \
     classes/threads/threadloading.h \
     form.h \
+    forms/main/formprofilesbrowser.h \
     forms/widgets/formfrienditemgraph.h \
     forms/formcomments.h \
     forms/formcontainerachievements.h \
@@ -128,6 +139,10 @@ HEADERS += \
     forms/main/formprofile.h \
     forms/main/formsettings.h \
     forms/main/formstatistics.h \
+    subWidgets/charts/achievementcompletedpiechart.h \
+    subWidgets/charts/achievementcountchart.h \
+    subWidgets/charts/piechart.h \
+    subWidgets/lineEdit/mylineedit.h \
     framelesswindow.h \
     subWidgets/actions/actioncategory.h \
     subWidgets/comboBoxes/multiselectcombobox.h \
@@ -143,6 +158,7 @@ HEADERS += \
     subWidgets/models/filters.h \
     subWidgets/models/friendsmodel.h \
     subWidgets/models/gamesmodel.h \
+    subWidgets/models/gameswithpercentmodel.h \
     subWidgets/models/listachievementsmodel.h \
     subWidgets/progressBars/progressbarbad.h \
     subWidgets/progressBars/progressbargood.h \
@@ -152,8 +168,10 @@ HEADERS += \
     subWidgets/withData/qcheckboxwithdata.h \
     subWidgets/withData/qcomboboxwithdata.h \
     subWidgets/withData/qradiobuttonwithdata.h \
+    version.h
 
 FORMS += \
+    forms/main/formprofilesbrowser.ui \
     forms/widgets/formfrienditemgraph.ui \
     forms/formcomments.ui \
     forms/formcontainerachievements.ui \
@@ -182,6 +200,8 @@ RESOURCES += \
     resources/images/img.qrc \
     resources/languages/lang.qrc \
     resources/themes/thm.qrc
+
+RC_FILE = SAS.rc
 
 DISTFILES +=
 

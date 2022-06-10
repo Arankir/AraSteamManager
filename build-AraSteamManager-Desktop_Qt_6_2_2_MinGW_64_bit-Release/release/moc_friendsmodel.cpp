@@ -12,6 +12,7 @@
 #include <QtNetwork/QSslError>
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QSet>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'friendsmodel.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
@@ -171,150 +172,35 @@ void FriendsModel::s_progress(const QString & _t1, const int & _t2, const int & 
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
-struct qt_meta_stringdata_ProxyModelFriends_t {
-    const uint offsetsAndSize[22];
-    char stringdata0[108];
-};
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(offsetof(qt_meta_stringdata_ProxyModelFriends_t, stringdata0) + ofs), len 
-static const qt_meta_stringdata_ProxyModelFriends_t qt_meta_stringdata_ProxyModelFriends = {
-    {
-QT_MOC_LITERAL(0, 17), // "ProxyModelFriends"
-QT_MOC_LITERAL(18, 7), // "setName"
-QT_MOC_LITERAL(26, 0), // ""
-QT_MOC_LITERAL(27, 7), // "newName"
-QT_MOC_LITERAL(35, 9), // "setStatus"
-QT_MOC_LITERAL(45, 9), // "newStatus"
-QT_MOC_LITERAL(55, 11), // "setIsPublic"
-QT_MOC_LITERAL(67, 8), // "isPublic"
-QT_MOC_LITERAL(76, 12), // "setFavorites"
-QT_MOC_LITERAL(89, 12), // "newFavorites"
-QT_MOC_LITERAL(102, 5) // "clear"
-
-    },
-    "ProxyModelFriends\0setName\0\0newName\0"
-    "setStatus\0newStatus\0setIsPublic\0"
-    "isPublic\0setFavorites\0newFavorites\0"
-    "clear"
-};
-#undef QT_MOC_LITERAL
-
-static const uint qt_meta_data_ProxyModelFriends[] = {
-
- // content:
-      10,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       5,   14, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
-
- // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   44,    2, 0x0a,    1 /* Public */,
-       4,    1,   47,    2, 0x0a,    3 /* Public */,
-       6,    1,   50,    2, 0x0a,    5 /* Public */,
-       8,    1,   53,    2, 0x0a,    7 /* Public */,
-      10,    0,   56,    2, 0x0a,    9 /* Public */,
-
- // slots: parameters
-    QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::QString,    5,
-    QMetaType::Void, QMetaType::Int,    7,
-    QMetaType::Void, QMetaType::QStringList,    9,
-    QMetaType::Void,
-
-       0        // eod
-};
-
-void ProxyModelFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
-{
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<ProxyModelFriends *>(_o);
-        (void)_t;
-        switch (_id) {
-        case 0: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->setStatus((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: _t->setIsPublic((*reinterpret_cast< const int(*)>(_a[1]))); break;
-        case 3: _t->setFavorites((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
-        case 4: _t->clear(); break;
-        default: ;
-        }
-    }
-}
-
-const QMetaObject ProxyModelFriends::staticMetaObject = { {
-    QMetaObject::SuperData::link<QSortFilterProxyModel::staticMetaObject>(),
-    qt_meta_stringdata_ProxyModelFriends.offsetsAndSize,
-    qt_meta_data_ProxyModelFriends,
-    qt_static_metacall,
-    nullptr,
-qt_incomplete_metaTypeArray<qt_meta_stringdata_ProxyModelFriends_t
-, QtPrivate::TypeAndForceComplete<ProxyModelFriends, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-
-
->,
-    nullptr
-} };
-
-
-const QMetaObject *ProxyModelFriends::metaObject() const
-{
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
-}
-
-void *ProxyModelFriends::qt_metacast(const char *_clname)
-{
-    if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ProxyModelFriends.stringdata0))
-        return static_cast<void*>(this);
-    return QSortFilterProxyModel::qt_metacast(_clname);
-}
-
-int ProxyModelFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
-{
-    _id = QSortFilterProxyModel::qt_metacall(_c, _id, _a);
-    if (_id < 0)
-        return _id;
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
-    }
-    return _id;
-}
 struct qt_meta_stringdata_FilterModelFriends_t {
-    const uint offsetsAndSize[22];
-    char stringdata0[109];
+    const uint offsetsAndSize[28];
+    char stringdata0[156];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FilterModelFriends_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_FilterModelFriends_t qt_meta_stringdata_FilterModelFriends = {
     {
 QT_MOC_LITERAL(0, 18), // "FilterModelFriends"
-QT_MOC_LITERAL(19, 7), // "setName"
-QT_MOC_LITERAL(27, 0), // ""
-QT_MOC_LITERAL(28, 7), // "newName"
-QT_MOC_LITERAL(36, 9), // "setStatus"
-QT_MOC_LITERAL(46, 9), // "newStatus"
-QT_MOC_LITERAL(56, 11), // "setIsPublic"
-QT_MOC_LITERAL(68, 8), // "isPublic"
-QT_MOC_LITERAL(77, 12), // "setFavorites"
-QT_MOC_LITERAL(90, 12), // "newFavorites"
-QT_MOC_LITERAL(103, 5) // "clear"
+QT_MOC_LITERAL(19, 15), // "s_modelFinished"
+QT_MOC_LITERAL(35, 0), // ""
+QT_MOC_LITERAL(36, 7), // "setName"
+QT_MOC_LITERAL(44, 7), // "newName"
+QT_MOC_LITERAL(52, 9), // "setStatus"
+QT_MOC_LITERAL(62, 9), // "newStatus"
+QT_MOC_LITERAL(72, 11), // "setIsPublic"
+QT_MOC_LITERAL(84, 8), // "isPublic"
+QT_MOC_LITERAL(93, 12), // "setFavorites"
+QT_MOC_LITERAL(106, 15), // "QSet<ProfileID>"
+QT_MOC_LITERAL(122, 12), // "newFavorites"
+QT_MOC_LITERAL(135, 14), // "clearFavorites"
+QT_MOC_LITERAL(150, 5) // "clear"
 
     },
-    "FilterModelFriends\0setName\0\0newName\0"
-    "setStatus\0newStatus\0setIsPublic\0"
-    "isPublic\0setFavorites\0newFavorites\0"
-    "clear"
+    "FilterModelFriends\0s_modelFinished\0\0"
+    "setName\0newName\0setStatus\0newStatus\0"
+    "setIsPublic\0isPublic\0setFavorites\0"
+    "QSet<ProfileID>\0newFavorites\0"
+    "clearFavorites\0clear"
 };
 #undef QT_MOC_LITERAL
 
@@ -324,25 +210,33 @@ static const uint qt_meta_data_FilterModelFriends[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   56,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   44,    2, 0x0a,    1 /* Public */,
-       4,    1,   47,    2, 0x0a,    3 /* Public */,
-       6,    1,   50,    2, 0x0a,    5 /* Public */,
-       8,    1,   53,    2, 0x0a,    7 /* Public */,
-      10,    0,   56,    2, 0x0a,    9 /* Public */,
+       3,    1,   57,    2, 0x0a,    2 /* Public */,
+       5,    1,   60,    2, 0x0a,    4 /* Public */,
+       7,    1,   63,    2, 0x0a,    6 /* Public */,
+       9,    1,   66,    2, 0x0a,    8 /* Public */,
+      12,    0,   69,    2, 0x0a,   10 /* Public */,
+      13,    0,   70,    2, 0x0a,   11 /* Public */,
+
+ // signals: parameters
+    QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::QString,    5,
-    QMetaType::Void, QMetaType::Int,    7,
-    QMetaType::Void, QMetaType::QStringList,    9,
+    QMetaType::Void, QMetaType::QString,    4,
+    QMetaType::Void, QMetaType::QString,    6,
+    QMetaType::Void, QMetaType::Int,    8,
+    QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -354,12 +248,23 @@ void FilterModelFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<FilterModelFriends *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->setStatus((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: _t->setIsPublic((*reinterpret_cast< const int(*)>(_a[1]))); break;
-        case 3: _t->setFavorites((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
-        case 4: _t->clear(); break;
+        case 0: _t->s_modelFinished(); break;
+        case 1: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: _t->setStatus((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 3: _t->setIsPublic((*reinterpret_cast< const int(*)>(_a[1]))); break;
+        case 4: _t->setFavorites((*reinterpret_cast< const QSet<ProfileID>(*)>(_a[1]))); break;
+        case 5: _t->clearFavorites(); break;
+        case 6: _t->clear(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (FilterModelFriends::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FilterModelFriends::s_modelFinished)) {
+                *result = 0;
+                return;
+            }
         }
     }
 }
@@ -371,8 +276,8 @@ const QMetaObject FilterModelFriends::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FilterModelFriends_t
-, QtPrivate::TypeAndForceComplete<FilterModelFriends, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<FilterModelFriends, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QSet<ProfileID> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -399,15 +304,21 @@ int FilterModelFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
+}
+
+// SIGNAL 0
+void FilterModelFriends::s_modelFinished()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

@@ -3,7 +3,7 @@
 #include "subWidgets/actions/actioncategory.h"
 
 FormCategoriesEdit::FormCategoriesEdit(const SGame &aGame, QWidget *aParent) : Form(aParent), ui(new Ui::FormCategoriesEdit),
-    _game(aGame), _categories(_game) {
+    _game(aGame)/*, _categories(_game)*/ {
     ui->setupUi(this);
     init();
 }
@@ -19,7 +19,7 @@ FormCategoriesEdit::~FormCategoriesEdit() {
 
 void FormCategoriesEdit::setGame(const SGame &aGame) {
     _game = aGame;
-    _categories.setGame(_game);
+//    _categories.setGame(_game);
     ui->ListWidgetAll->setGame(_game);
     ui->ListWidgetCategory->setGame(_game);
     ui->ButtonChangeParent->setMenu(createParentMenu());
@@ -41,7 +41,7 @@ void FormCategoriesEdit::achievementsToUi() {
     ui->ListWidgetCategory->clear();
 //    QFont font(Settings::getFontDefaultName(), 11);
     for (auto &achievement: _achievements) {
-        ui->ListWidgetAll->addAchievementItem(achievement);
+        ui->ListWidgetAll->insertAchievement(achievement);
 //        QListWidgetAchievement *item = new QListWidgetAchievement(&achievement);
 //        item->setIcon(achievement.getIcon(_game.appId()));
 //        item->setText(achievement._displayName);
@@ -140,7 +140,7 @@ void FormCategoriesEdit::changeEditType(const EditType &aType) {
         ui->ButtonDeleteCategory->setEnabled(false);
         ui->ButtonChangeParent->setVisible(false);
         ui->ButtonChangeParent->setEnabled(false);
-        ui->ButtonDeleteAllCategories->setEnabled(_categories.countCategories() != 0);
+//        ui->ButtonDeleteAllCategories->setEnabled(_categories.countCategories() != 0);
 
         ui->LineEditTitleCategory->setText("");
         ui->LineEditTitleCategory->setEnabled(false);
@@ -197,7 +197,7 @@ void FormCategoriesEdit::changeEditType(const EditType &aType) {
     _typeEdit = aType;
 }
 
-void FormCategoriesEdit::changeCategory(Category *aCategory) {
+void FormCategoriesEdit::changeCategory(Category2 *aCategory) {
     _currentCategory = aCategory;
     changeNewParent(_currentCategory->parent());
     changeEditType(EditType::change);
@@ -206,7 +206,7 @@ void FormCategoriesEdit::changeCategory(Category *aCategory) {
 //    QFont font(Settings::defaultFont(), 11);
     ui->ListWidgetAll->clear();
     ui->ListWidgetCategory->clear();
-    auto achievementList = aCategory->achievementsApiName();
+    auto achievementList = static_cast<QSet<AchievementID> >(*aCategory);
     for(auto &achievement: _achievements) {
         bool isInCategory = std::any_of(achievementList.begin(),
                                         achievementList.end(),
@@ -238,14 +238,16 @@ void FormCategoriesEdit::changeCategory(Category *aCategory) {
     }
 }
 
-void FormCategoriesEdit::addSubCategory(Category *aParent) {
-    _currentCategory = nullptr;
+void FormCategoriesEdit::addSubCategory(Category2 *aParent) {
+    _currentCategory = aParent;
     changeEditType(EditType::add);
     changeNewParent(aParent);
 }
 
-void FormCategoriesEdit::deleteCategory(Category *aCategory) {
-    _currentCategory = _categories.findCategory(aCategory);
+void FormCategoriesEdit::deleteCategory(Category2 *aCategory) {
+//    QStringList list;
+//    aCategory->getPathFromRoot(list);
+    _currentCategory = aCategory;
     changeEditType(EditType::change);
     buttonDelete_Clicked();
 }
@@ -272,7 +274,7 @@ void FormCategoriesEdit::buttonAdd_Clicked() {
 
 //}
 
-void FormCategoriesEdit::changeNewParent(Category *aParent) {
+void FormCategoriesEdit::changeNewParent(Category2 *aParent) {
     if (aParent != nullptr) {
         ui->LabelCategoryParent->setText(tr("Подкатегория %1").arg(aParent->title()));
     } else {
@@ -288,13 +290,13 @@ void FormCategoriesEdit::changeNewParentFromAction() {
     }
 }
 
-QMenu *FormCategoriesEdit::createParentMenu(Category *aCategory) {
+QMenu *FormCategoriesEdit::createParentMenu(Category2 *aCategory) {
     QMenu *menu;
     ActionCategory *action;
 
     if (aCategory == nullptr) {
         menu = new QMenu(this);
-        _categories.update();
+//        _categories.update();
         action = new ActionCategory(nullptr, QIcon(Images::moveItem()), tr("Основная категория"), this);
     } else {
         menu = new QMenu(aCategory->title());
@@ -305,15 +307,15 @@ QMenu *FormCategoriesEdit::createParentMenu(Category *aCategory) {
 
     menu->addAction(action);
 
-    if (aCategory == nullptr) {
-        for(auto &category: _categories) {
-            menu->addMenu(createParentMenu(category));
-        }
-    } else {
-        for(auto category: *aCategory) {
-            menu->addMenu(createParentMenu(category));
-        }
-    }
+//    if (aCategory == nullptr) {
+//        for(auto &category: _categories) {
+//            menu->addMenu(createParentMenu(category));
+//        }
+//    } else {
+//        for(auto category: *aCategory) {
+//            menu->addMenu(createParentMenu(category));
+//        }
+//    }
 
     return menu;
 }
@@ -335,7 +337,8 @@ void FormCategoriesEdit::buttonDeleteAll_Clicked() {
         return;
     }
 
-    _categories.clearCategories();
+//    _categories.clearCategories();
+    _currentCategory->root()->clearCategories();
     emit s_categoriesIsUpdated(true);
 }
 
@@ -347,19 +350,23 @@ void FormCategoriesEdit::buttonCancel_Clicked() {
 
 bool FormCategoriesEdit::isCategoryNameExist(const QString &aName) {
 //TODO Если не менять название при изменении, то выводит, что такая категория есть
-    if (_currentCategoryNewParent != nullptr) {
-        return std::any_of( _currentCategoryNewParent->begin(),
-                            _currentCategoryNewParent->end(),
-                            [=](Category *sCategory) {
-                                return (sCategory->title() == aName);
-                            });
-    } else {
-        return std::any_of( _categories.begin(),
-                            _categories.end(),
-                            [=](Category *sCategory) {
-                                return (sCategory->title() == aName);
-                            });
-    }
+//    if (_currentCategoryNewParent != nullptr) {
+//        auto categories = _currentCategoryNewParent->categories();
+//        return std::any_of( categories.begin(),
+//                            categories.end(),
+//                            [=](Category2 *sCategory) {
+//                                return (sCategory->title() == aName);
+//                            });
+//    } else {
+//        auto categories = _categories.categories();
+//        return std::any_of( categories.begin(),
+//                            categories.end(),
+//                            [=](Category2 *sCategory) {
+//                                return (sCategory->title() == aName);
+//                            });
+//    }
+//    return true;
+    return false;
 }
 
 void FormCategoriesEdit::buttonAccept_Clicked() {
@@ -369,16 +376,18 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
         return;
     }
     if (_currentCategory != nullptr && _currentCategoryNewParent != nullptr) {
-        if ((_currentCategory->findCategory(_currentCategoryNewParent) != nullptr) || (*_currentCategory == *_currentCategoryNewParent)) {
+        QStringList path;
+        _currentCategoryNewParent->getPathFromRoot(path);
+        if ((_currentCategory->find(path) != nullptr) || (*_currentCategory == *_currentCategoryNewParent)) {
             QMessageBox::warning(this, tr("Ошибка"), tr("Нельзя переместить категорию в саму себя!"));
             return;
         }
     }
 
-    QList<QString> categoryAchievements;
+    QSet<AchievementID> categoryAchievements;
     for(int i = 0; i < ui->ListWidgetCategory->count(); ++i) {
         if (auto item = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetCategory->item(i))) {
-            categoryAchievements.append(item->_achievement->apiName());
+            categoryAchievements.insert(item->_achievement->apiName());
         }
     }
 
@@ -394,18 +403,26 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
             qWarning() << "on EditType:add current category is exist";
             break;
         }
-        _currentCategory = new Category(newTitle, categoryAchievements);
+        auto newCategory = new Category2(_game);
+        newCategory->setTitle(newTitle);
+        newCategory->clear();
+        *newCategory += (categoryAchievements);
+        _currentCategory->addCategory(newCategory);
         if (_currentCategoryNewParent != nullptr) {
-            _categories.findCategory(_currentCategoryNewParent)->addCategory(_currentCategory);
+            QStringList path;
+            _currentCategoryNewParent->getPathFromRoot(path);
+            _currentCategory->root()->find(path)->addCategory(_currentCategory);
         } else {
-            _categories.addCategory(_currentCategory);
+            _currentCategory->root()->addCategory(_currentCategory);
         }
         break;
     }
     case EditType::change: {
-        if (_currentCategory != nullptr) {
-            _currentCategory = _categories.findCategory(_currentCategory);
-        }
+//        if (_currentCategory != nullptr) {
+//            QStringList path;
+//            _currentCategory->getPathFromRoot(path);
+//            _currentCategory = _currentCategory->root()->find(path);
+//        }
         if (_currentCategory == nullptr) {
             qWarning() << "on apply category does not exist";
             QMessageBox::warning(this, tr("Ошибка"), tr("Невозможно найти категорию!"));
@@ -419,15 +436,16 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
         }
         changeCategoryParent(_currentCategory);
         _currentCategory->setTitle(newTitle);
-        _currentCategory->setAchievements(categoryAchievements);
+        _currentCategory->clear();
+        *_currentCategory += (categoryAchievements);
 
-        QList<Category*> subCategoryList;
-        for (int i = 0; i < ui->ListWidgetSubCategories->count(); ++i) {
-            auto item = ui->ListWidgetSubCategories->item(i);
-            Category *sub = _currentCategory->categories().at(item->whatsThis().toInt());
-            sub->setTitle(item->text());
-            subCategoryList.append(sub);
-        }
+        QList<Category2*> subCategoryList;
+//        for (int i = 0; i < ui->ListWidgetSubCategories->count(); ++i) {
+//            auto item = ui->ListWidgetSubCategories->item(i);
+//            Category2 *sub = _currentCategory->categories().at(item->whatsThis().toInt());
+//            sub->setTitle(item->text());
+//            subCategoryList.append(sub);
+//        }
         _currentCategory->clearCategories();
         for(auto category: subCategoryList) {
             _currentCategory->addCategory(category);
@@ -440,7 +458,7 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
     }
     }
 
-    _categories.save();
+    _currentCategory->root()->save();
     emit s_categoriesIsUpdated(true);
 
     switch (_typeEdit) {
@@ -460,32 +478,42 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
     buttonCancel_Clicked();
 }
 
-void FormCategoriesEdit::changeCategoryParent(Category *aCategory) {
-    if (_currentCategoryNewParent == nullptr) {
-        if (aCategory->parent() == nullptr) {
-            return;
-        } else {
-            aCategory->changeParent(_currentCategoryNewParent);
-            _categories.addCategory(aCategory);
-            return;
-        }
-    } else {
-        if (aCategory->parent() == nullptr) {
-            _categories.removeCategory(aCategory);
-            aCategory->changeParent(_currentCategoryNewParent);
-        } else {
-            if (*_currentCategoryNewParent != *(aCategory->parent())) {
-                aCategory->changeParent(_currentCategoryNewParent);
-                return;
-            }
-        }
-    }
+void FormCategoriesEdit::changeCategoryParent(Category2 *aCategory) {
+//    if (_currentCategoryNewParent == nullptr) {
+//        if (aCategory->parent() == nullptr) {
+//            return;
+//        } else {
+//            aCategory->setParent(_currentCategoryNewParent);
+////            _categories.addCategory(aCategory);
+//            return;
+//        }
+//    } else {
+//        if (aCategory->parent() == nullptr) {
+//            QStringList path;
+//            aCategory->getPathFromRoot(path);
+//            aCategory->root()->removeCategory(path);
+//            aCategory->setParent(_currentCategoryNewParent);
+//        } else {
+//            if (*_currentCategoryNewParent != *(aCategory->parent())) {
+//                aCategory->setParent(_currentCategoryNewParent);
+//                return;
+//            }
+//        }
+//    }
 
+    if (_currentCategoryNewParent != aCategory->parent()) {
+        aCategory->setParent(_currentCategoryNewParent);
+    }
+    if (_currentCategoryNewParent != _currentCategory->parent()) {
+        _currentCategory->setParent(_currentCategoryNewParent);
+    }
 //    if (_currentCategoryNewParent != _currentCategory->parent()) {
 //        if (_currentCategory->parent() == nullptr) {
-//            _categories.removeCategory(_currentCategory);
+//            QStringList path;
+//            _currentCategory->getPathFromRoot(path);
+//            _categories.removeCategory(path);
 //        }
-//        _currentCategory->changeParent(_currentCategoryNewParent);
+//        _currentCategory->setParent(_currentCategoryNewParent);
 //        if (_currentCategoryNewParent == nullptr) {
 //            _categories.addCategory(_currentCategory);
 //        }
@@ -505,7 +533,10 @@ void FormCategoriesEdit::buttonDelete_Clicked() {
         return;
     }
 
-    if (_categories.removeCategory(_currentCategory, true)) {
+    QStringList path;
+    _currentCategory->getPathFromRoot(path);
+    auto root = _currentCategory->root();
+    if (root->removeCategory(path)) {
         emit s_categoriesIsUpdated(true);
         QMessageBox::information(this, tr("Успешно"), tr("Категория была удалена!"));
     } else {
@@ -515,6 +546,7 @@ void FormCategoriesEdit::buttonDelete_Clicked() {
     }
     ui->ButtonChangeParent->setMenu(createParentMenu());
 
+    root->save();
     buttonCancel_Clicked();
 }
 #define CategoryEnd }

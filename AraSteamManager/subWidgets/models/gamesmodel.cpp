@@ -1,49 +1,22 @@
 #include "gamesmodel.h"
-#include <QFuture>
-#include <QFutureWatcher>
-#include <QtConcurrent/QtConcurrent>
+#include "classes/files/comments.h"
+
+using namespace gamesModel;
 
 const QString c_noAchievements = "-";
 
-void GamesModel::loadImages(const SGames &aGames, QList<GameComment> &aComments, int aGameCount) {
-    for(auto &game: aGames) {
-        auto iterator = std::find_if(aComments.begin(),
-                                     aComments.end(),
-                                     [=](const GameComment &gameComment) {
-                                        return gameComment.gameId() == game.appId();
-                                     });
+GamesModel::GamesModel(QObject *aParent): QAbstractTableModel(aParent) {
 
-        if (iterator != aComments.end()) {
-            _gamesInModel.append(GameInModel{game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
-        } else {
-            _gamesInModel.append(GameInModel{game, QStringList(), QList<SAchievementPlayer>(), 0});
-        }
-        emit s_progress(tr("Загрузка данных об игре"), ++_loadedGames, aGameCount);
-//        qDebug() << 11 << _loadedGames << gameCount;
-    }
 }
 
-void GamesModel::setGames(const SGames &games, const QString &userId) {
-    _userId = userId;
-    _gamesInModel.clear();
-    auto comments = GameComment::load(_userId);
-    _loadedGames = 0;
-
-//    int step = games.count() / QThread::idealThreadCount();
-//    int y = 0;
-
-//    QVector<QList<SGame>> tasks;
-//    for( ; y < games.count() - step; y += step ) {
-////        qDebug() << y << y + step;
-//        tasks << games.mid(y, y + step);
-//    }
-//    QFuture<void> future = QtConcurrent::map(tasks, std::bind(&GamesModel::loadImages, this,  std::placeholders::_1, comments, games.count()));
-//    loadImages(games.mid(y), comments, games.count());
-//    future.waitForFinished();
-
+void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
+    clear();
+    profileId_ = aProfileId;
+    GameComments comments(profileId_);
 
     int progress = 0;
-    for(auto &game: games) {
+    for(auto &game: aGames) {
+        QStringList comment;
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=](const GameComment &gameComment) {
@@ -51,85 +24,89 @@ void GamesModel::setGames(const SGames &games, const QString &userId) {
                                      });
 
         if (iterator != comments.end()) {
-            _gamesInModel.append(GameInModel{game, (*iterator).comment(), QList<SAchievementPlayer>(), 0});
-        } else {
-            _gamesInModel.append(GameInModel{game, QStringList(), QList<SAchievementPlayer>(), 0});
+            comment = (*iterator).comment();
         }
-        emit s_progress(tr("Загрузка данных об игре"), ++progress, games.count());
-        qDebug() << 33 << progress << games.count();
+        modelItems_.append(gameModelItem{game, comment, QList<SAchievementPlayer>(), 0});
+        emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
-    for (const auto &game: qAsConst(_gamesInModel)) {
-        //Загрузка достижений игрока
-        SAchievementPlayer::load(game.game.appId(), _userId, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, game.game.appId()));
+    for (const auto &gameModel: qAsConst(modelItems_)) { //Загрузка достижений игрока
+        SAchievementPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
     }
 }
 
-void GamesModel::onResultAchievements(QList<SAchievementPlayer> aAchievements, GameID aAppId) {
-    auto iterator = std::find_if(_gamesInModel.begin(),
-                                 _gamesInModel.end(),
-                                 [=](const GameInModel &gim) {
-                                    return gim.game.appId() == aAppId;
+void GamesModel::onResultAchievements(const QList<SAchievementPlayer> &aAchievements, const GameID &aGameId) {
+    auto iterator = std::find_if(modelItems_.begin(),
+                                 modelItems_.end(),
+                                 [=](const gameModelItem &lGame) {
+                                    return lGame.game.appId() == aGameId;
                                 });
-    if (iterator != _gamesInModel.end()) {
+    if (iterator != modelItems_.end()) {
         (*iterator).achievements = aAchievements;
         (*iterator).achieved = SAchievementPlayer::countAchieved(aAchievements);
     } else {
-        qWarning() << "game" << aAppId << "coudn't find";
+        qWarning() << "game" << aGameId << "coudn't find";
     }
 
     static int loaded = 0;
-    emit s_progress(tr("Загрузка достижений"), loaded, _gamesInModel.count());
-//    qDebug() << 22 << loaded << _gamesInModel.count();
-    //Проверка всё ли загрузилось
-    if(++loaded == _gamesInModel.count()) {
+    emit s_progress(tr("Загрузка достижений"), loaded, modelItems_.count());
+    if(++loaded == modelItems_.count()) { //Проверка всё ли загрузилось
         loaded = 0;
         emit s_finished();
     }
 }
 
-int GamesModel::columnCount(const QModelIndex &parent) const {
-    Q_UNUSED(parent);
-    return GamesCount;
+void GamesModel::clear() {
+    modelItems_.clear();
+    profileId_ = "";
 }
 
-int GamesModel::rowCount(const QModelIndex &parent) const {
-    Q_UNUSED(parent);
-    return _gamesInModel.count();
+int GamesModel::columnCount(const QModelIndex &aParent) const {
+    Q_UNUSED(aParent);
+    return Count;
 }
 
-QVariant GamesModel::data(const QModelIndex &index, int role) const {
-    if (!index.isValid())
+int GamesModel::rowCount(const QModelIndex &aParent) const {
+    Q_UNUSED(aParent);
+    return modelItems_.count();
+}
+
+QVariant GamesModel::data(const QModelIndex &aIndex, int aRole) const {
+    if (!aIndex.isValid())
         return QVariant();
 
-    if (index.row() >= _gamesInModel.size())
+    if (aIndex.row() >= modelItems_.size())
         return QVariant();
 
-    switch (role) {
+    switch (aRole) {
     case Qt::DisplayRole: {
-        switch (index.column()) {
-        case GamesAppid: {
-            return _gamesInModel[index.row()].game.appId();
+        switch (aIndex.column()) {
+        case Appid: {
+            return modelItems_[aIndex.row()].game.appId();
         }
-        case GamesIndex: {
-            return index.row();
+        case Index: {
+            return aIndex.row();
         }
-        case GamesName: {
-            return _gamesInModel[index.row()].game.name();
+        case Name: {
+            return modelItems_[aIndex.row()].game.name();
         }
-//        case GamesComment: {
-//            if (_gamesInModel[index.row()].comment != QStringList() &&
-//                _gamesInModel[index.row()].comment != QStringList() << "") {
-//                return 1;
-//            } else {
-//                return 0;
-//            }
-//        }
-        case GamesProgress: {
-            auto game = _gamesInModel[index.row()];
+        case gamesModel::Comment: {
+            if (modelItems_[aIndex.row()].comment != QStringList() &&
+                modelItems_[aIndex.row()].comment != QStringList() << "") {
+                if (modelItems_.count() > 1) {
+                    return modelItems_[aIndex.row()].comment[0] + tr("\n...");
+                } else {
+                    return modelItems_[aIndex.row()].comment[0];
+                }
+            } else {
+                return tr("-");
+            }
+        }
+        case Progress: {
+            auto game = modelItems_[aIndex.row()];
             if (game.achievements.count() == 0) {
                 return c_noAchievements;
             } else {
-                return QString("%1%\n(%2/%3)").arg(QString::number(1.0 * game.achieved / (1.0 * game.achievements.count() / 100)/*, 6*/, 'f', 2/*, '0'*/)).arg(
+                return QString("%1%\n(%2/%3)").arg(QString::number(1.0 * game.achieved / (1.0 * game.achievements.count() / 100), 'f', 2)).arg(
                                                  QString::number(game.achieved),
                                                  QString::number(game.achievements.count()));
             }
@@ -141,17 +118,9 @@ QVariant GamesModel::data(const QModelIndex &index, int role) const {
         break;
     }
     case Qt::DecorationRole: {
-        switch (index.column()) {
-        case GamesIcon: {
-            return _gamesInModel[index.row()].game.pixmapIcon();
-        }
-        case GamesComment: {
-            if (_gamesInModel[index.row()].comment != QStringList() &&
-                _gamesInModel[index.row()].comment != QStringList() << "") {
-                return QPixmap(Images::isComment()).scaled(32, 32);
-            } else {
-                return QPixmap(Images::isNotComment()).scaled(32, 32);
-            }
+        switch (aIndex.column()) {
+        case Icon: {
+            return modelItems_[aIndex.row()].game.pixmapIcon();
         }
         default: {
             return QVariant();
@@ -160,15 +129,22 @@ QVariant GamesModel::data(const QModelIndex &index, int role) const {
         break;
     }
     case Qt::ForegroundRole: {
-        switch (index.column()) {
-        case GamesProgress: {
-            if (_gamesInModel[index.row()].achievements.count() == 0) {
+        switch (aIndex.column()) {
+        case Progress: {
+            if (modelItems_[aIndex.row()].achievements.count() == 0) {
                 return QColor(255, 0, 0);
             } else {
-                auto game = _gamesInModel[index.row()];
+                auto game = modelItems_[aIndex.row()];
                 double x = 1.0 * game.achieved / game.achievements.count();
                 return QColor(254 * (1.0 - x), 254 * x, 0);
             }
+        }
+        case gamesModel::Comment: {
+            if (modelItems_[aIndex.row()].comment == QStringList() ||
+                modelItems_[aIndex.row()].comment == QStringList() << "") {
+                return QColor(55, 55, 150);
+            }
+            return QVariant();
         }
         default: {
             return QVariant();
@@ -182,114 +158,150 @@ QVariant GamesModel::data(const QModelIndex &index, int role) const {
     }
 }
 
-QVariant GamesModel::headerData(int section, Qt::Orientation orientation, int role) const {
-    if (role != Qt::DisplayRole)
+QVariant GamesModel::headerData(int aSection, Qt::Orientation aOrientation, int aRole) const {
+    if (aRole != Qt::DisplayRole) {
         return QVariant();
+    }
 
-    if (orientation == Qt::Horizontal)
-        switch (section) {
-        case GamesAppid: {
+    if (aOrientation == Qt::Horizontal) {
+        switch (aSection) {
+        case Appid: {
             return tr("ID");
         }
-        case GamesName: {
+        case Name: {
             return tr("Название");
         }
-        case GamesProgress: {
+        case Progress: {
             return tr("Прогресс");
         }
         }
-    else
-        return QString("%1").arg(section);
+    } else {
+        return QString("%1").arg(aSection);
+    }
     return QVariant();
 }
 
-GameID GamesModel::gameId(const QModelIndex &index) const {
-    return _gamesInModel[index.row()].game.appId();
+GameID GamesModel::gameId(const QModelIndex &aIndex) const {
+    return modelItems_[aIndex.row()].game.appId();
 }
 
-void GamesModel::sort(int column, Qt::SortOrder order) {
-    switch (column) {
-    case GamesAppid: {
-        switch(order) {
+void GamesModel::sort(int aColumn, Qt::SortOrder aOrder) {
+    switch (aColumn) {
+    case Appid: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {return g1.game.appId() < g2.game.appId();});
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        return g1.game.appId() < g2.game.appId();
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {return g1.game.appId() > g2.game.appId();});
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        return g1.game.appId() > g2.game.appId();
+                      }
+                    );
             break;
         }
         }
         break;
     }
-    case GamesIndex: {
+    case Index: {
         break;
     }
-    case GamesIcon: {
+    case Icon: {
         break;
     }
-    case GamesName: {
-        switch(order) {
+    case Name: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {return g1.game.name() < g2.game.name();});
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        return g1.game.name() < g2.game.name();
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {return g1.game.name() > g2.game.name();});
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        return g1.game.name() > g2.game.name();
+                      }
+                    );
             break;
         }
         }
         break;
     }
-    case GamesComment: {
-        switch(order) {
+    case gamesModel::Comment: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {return (g1.comment != QStringList() ? 1 : 0) < (g2.comment != QStringList() ? 1 : 0);});
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        return (g1.comment != QStringList() ? 1 : 0) < (g2.comment != QStringList() ? 1 : 0);
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {return (g1.comment != QStringList() ? 1 : 0) > (g2.comment != QStringList() ? 1 : 0);});
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        return (g1.comment != QStringList() ? 1 : 0) > (g2.comment != QStringList() ? 1 : 0);
+                      }
+                    );
             break;
         }
         }
         break;
     }
-    case GamesProgress: {
-        switch(order) {
+    case Progress: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {
-                double g1Num, g2Num;
-                if (g1.achievements.count() == 0) {
-                    g1Num = -1.0;
-                } else {
-                    g1Num = 100.0 * g1.achieved / g1.achievements.count();
-                }
-                if (g2.achievements.count() == 0) {
-                    g2Num = -1.0;
-                } else {
-                    g2Num = 100.0 * g2.achieved / g2.achievements.count();
-                }
-//                qDebug() << 2 << g1Num << g2Num;
-                return g1Num < g2Num;
-            });
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        double g1Num, g2Num;
+                        if (g1.achievements.count() == 0) {
+                            g1Num = -1.0;
+                        } else {
+                            g1Num = 100.0 * g1.achieved / g1.achievements.count();
+                        }
+                        if (g2.achievements.count() == 0) {
+                            g2Num = -1.0;
+                        } else {
+                            g2Num = 100.0 * g2.achieved / g2.achievements.count();
+                        }
+                        return g1Num < g2Num;
+                      }
+                    );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            mySort<GameInModel>(_gamesInModel, [](GameInModel &g1, GameInModel &g2) {
-                double g1Num, g2Num;
-                if (g1.achievements.count() == 0) {
-                    g1Num = -1.0;
-                } else {
-                    g1Num = 100.0 * g1.achieved / g1.achievements.count();
-                }
-                if (g2.achievements.count() == 0) {
-                    g2Num = -1.0;
-                } else {
-                    g2Num = 100.0 * g2.achieved / g2.achievements.count();
-                }
-//                qDebug() << 1 << g1Num << g2Num;
-                return g1Num > g2Num;
-            });
+            std::sort(modelItems_.begin(),
+                      modelItems_.end(),
+                      [](gameModelItem &g1, gameModelItem &g2) {
+                        double g1Num, g2Num;
+                        if (g1.achievements.count() == 0) {
+                            g1Num = -1.0;
+                        } else {
+                            g1Num = 100.0 * g1.achieved / g1.achievements.count();
+                        }
+                        if (g2.achievements.count() == 0) {
+                            g2Num = -1.0;
+                        } else {
+                            g2Num = 100.0 * g2.achieved / g2.achievements.count();
+                        }
+                        return g1Num > g2Num;
+                      }
+                    );
             break;
         }
         }
@@ -299,26 +311,26 @@ void GamesModel::sort(int column, Qt::SortOrder order) {
     emit dataChanged(index(0, 0), index(rowCount(), columnCount()));
 }
 
-SGame GamesModel::getGame(const int &row) const {
-    return _gamesInModel[row].game;
+SGame GamesModel::getGame(const int &aRow) const {
+    return modelItems_[aRow].game;
 }
 
-SGame GamesModel::getGame(const QModelIndex &index) const {
-    return _gamesInModel[index.row()].game;
+SGame GamesModel::getGame(const QModelIndex &aIndex) const {
+    return modelItems_[aIndex.row()].game;
 }
 
-QStringList GamesModel::getComment(const int &row) const {
-    return _gamesInModel[row].comment;
+QStringList GamesModel::getComment(const int &aRow) const {
+    return modelItems_[aRow].comment;
 }
 
-QList<SAchievementPlayer> GamesModel::getAchievements(const int &row) const {
-    return _gamesInModel[row].achievements;
+QList<SAchievementPlayer> GamesModel::getAchievements(const int &aRow) const {
+    return modelItems_[aRow].achievements;
 }
 
 void GamesModel::updateComments() {
-    auto comments = GameComment::load(_userId);
+    GameComments comments(profileId_);
     int progress = 0;
-    for(auto &game: _gamesInModel) {
+    for(auto &game: modelItems_) {
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=](const GameComment &gameComment) {
@@ -330,114 +342,27 @@ void GamesModel::updateComments() {
         } else {
             game.comment = QStringList();
         }
-        emit s_progress(tr("Обновление комментариев"), ++progress, _gamesInModel.count());
+        emit s_progress(tr("Обновление комментариев"), ++progress, modelItems_.count());
     }
+    emit s_finished();
 }
 
-ProxyModelGames::ProxyModelGames(QObject *aParent): QSortFilterProxyModel(aParent),
-    _name(""), _hide(), _group(), _favorite() {
-
-}
-
-bool ProxyModelGames::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
-    QModelIndex indName = sourceModel()->index(aSource_row, GamesName, aSource_parent);
-    QModelIndex indId = sourceModel()->index(aSource_row, GamesAppid, aSource_parent);
-    if(sourceModel()->data(indName).toString().toLower().indexOf(_name.toLower()) == -1 ||
-       (_hide.isEmpty() ? false : _hide.indexOf(sourceModel()->data(indId).toString()) > -1) ||
-       (_group.isEmpty() ? false : _group.indexOf(sourceModel()->data(indId).toString()) == -1) ||
-       (_favorite.isEmpty() ? false : _favorite.indexOf(sourceModel()->data(indId).toString()) == -1))
-        return false;
-    return true;
-}
-
-bool ProxyModelGames::lessThan(const QModelIndex &left, const QModelIndex &right) const {
-    if (left.column() == GamesProgress && right.column() == GamesProgress) {
-        QVariant leftData = sourceModel()->data(left);
-        QVariant rightData = sourceModel()->data(right);
-        if (leftData == c_noAchievements) {
-            return true;
-        }
-        if (rightData == c_noAchievements) {
-            return false;
-        }
-        double iLeft = leftData.toString().left(leftData.toString().indexOf("%")).toDouble();
-        double iRight = rightData.toString().left(rightData.toString().indexOf("%")).toDouble();
-        return iLeft < iRight;
-    }
-    return QSortFilterProxyModel::lessThan(left, right);
-}
-
-QVariant ProxyModelGames::headerData(int section, Qt::Orientation orientation, int role) const {
-    return sourceModel()->headerData(section, orientation, role);
-}
-
-void ProxyModelGames::setSourceModel(GamesModel *sourceModel) {
-    QAbstractProxyModel::setSourceModel(sourceModel);
-}
-
-SGame ProxyModelGames::getGame(int aIndex) {
-    return sourceModel()->getGame(aIndex);
-}
-
-QStringList ProxyModelGames::getGameComment(int aIndex) {
-    return sourceModel()->getComment(aIndex);
-}
-
-QList<SAchievementPlayer> ProxyModelGames::getGameAchievements(int aIndex) {
-    return sourceModel()->getAchievements(aIndex);
-}
-
-GamesModel *ProxyModelGames::sourceModel() const {
-    return static_cast<GamesModel*>(QAbstractProxyModel::sourceModel());
-}
-
-void ProxyModelGames::setName(const QString &aNewName) {
-    if(_name != aNewName)
-        _name = aNewName;
-    invalidateFilter();
-}
-
-void ProxyModelGames::setHide(const QStringList &aNewHide) {
-    if(_hide != aNewHide)
-        _hide = aNewHide;
-    invalidateFilter();
-}
-
-void ProxyModelGames::setGroup(const QStringList &aNewGroup) {
-    if(_group != aNewGroup)
-        _group = aNewGroup;
-    invalidateFilter();
-}
-
-void ProxyModelGames::setFavorites(const QStringList &aNewFavorites) {
-    if(_favorite != aNewFavorites)
-        _favorite = aNewFavorites;
-    invalidateFilter();
-}
-
-void ProxyModelGames::clear() {
-    _name.clear();
-    _hide.clear();
-    _group.clear();
-    _favorite.clear();
-}
-
-FilterModelGames::FilterModelGames(int aRow, QObject *parent): FilterModel(aRow, 4, parent) {
+FilterModelGames::FilterModelGames(int aRow, QObject *aParent): FilterModel(aRow, 4, aParent) {
     columns_.insert("name", 0);
     columns_.insert("hide", 1);
     columns_.insert("group", 2);
     columns_.insert("favorite", 3);
 }
 
-bool FilterModelGames::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const {
-    Q_UNUSED(source_parent);
-    return filter_[source_row];
+bool FilterModelGames::filterAcceptsRow(int aSourceRow, const QModelIndex &aSourceParent) const {
+    Q_UNUSED(aSourceParent);
+    return filter_[aSourceRow];
 }
 
-bool FilterModelGames::lessThan(const QModelIndex &left, const QModelIndex &right) const {
-    if (left.column() == GamesProgress && right.column() == GamesProgress) {
-        QVariant leftData = sourceModel()->data(left);
-        QVariant rightData = sourceModel()->data(right);
+bool FilterModelGames::lessThan(const QModelIndex &aLeft, const QModelIndex &aRight) const {
+    if (aLeft.column() == Progress && aRight.column() == Progress) {
+        QVariant leftData = sourceModel()->data(aLeft);
+        QVariant rightData = sourceModel()->data(aRight);
         if (leftData == c_noAchievements) {
             return true;
         }
@@ -448,11 +373,21 @@ bool FilterModelGames::lessThan(const QModelIndex &left, const QModelIndex &righ
         double iRight = rightData.toString().left(rightData.toString().indexOf("%")).toDouble();
         return iLeft < iRight;
     }
-    return QSortFilterProxyModel::lessThan(left, right);
+    return QSortFilterProxyModel::lessThan(aLeft, aRight);
 }
 
-void FilterModelGames::setSourceModel(GamesModel *sourceModel) {
-    FilterModel::setSourceModel(sourceModel);
+void FilterModelGames::setSourceModel(GamesModel *aSourceModel) {
+    connect(aSourceModel, &GamesModel::s_finished, this, [=, this]() {
+        if (sourceModel() != nullptr) {
+            filter_.setRows(sourceModel()->rowCount());
+            forceInvalidate();
+            emit s_modelFinished();
+            emit s_rowsUpdated();
+        } else {
+            qWarning() << "in FilterModelFriends missing sourceModel, but emit 'finished'";
+        }
+    });
+    FilterModel::setSourceModel(aSourceModel);
 }
 
 SGame FilterModelGames::getGame(int aIndex) {
@@ -472,69 +407,102 @@ GamesModel *FilterModelGames::sourceModel() const {
 }
 
 void FilterModelGames::setName(const QString &aNewName) {
-    if(_name == aNewName)
+    if(name_ == aNewName)
         return;
-    _name = aNewName;
+    name_ = aNewName;
     int filterColumnName = columns_.value("name");
     for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-        QModelIndex nameIndex = sourceModel()->index(r, GamesName);
-        filter_.setData(r, filterColumnName, sourceModel()->data(nameIndex).toString().toLower().indexOf(_name.toLower()) >= 0);
+        QModelIndex nameIndex = sourceModel()->index(r, Name);
+        filter_.setData(r, filterColumnName, sourceModel()->data(nameIndex).toString().toLower().indexOf(name_.toLower()) >= 0);
     }
     invalidateFilter();
+    emit s_rowsUpdated();
 }
 
-void FilterModelGames::setHide(const QStringList &aNewHide) {
-    if(_hide == aNewHide)
+void FilterModelGames::setHide(const QSet<GameID> &aNewHide) {
+    if(hide_ == aNewHide)
         return;
-    _hide = aNewHide;
+    hide_ = aNewHide;
     int filterColumn = columns_.value("hide");
-    if (_hide.isEmpty()) {
+    if (hide_.isEmpty()) {
         filter_.clearCol(filterColumn);
     } else {
         for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex hideIndex = sourceModel()->index(r, GamesAppid);
-            filter_.setData(r, filterColumn, _hide.indexOf(sourceModel()->data(hideIndex).toString()) >= 0);
+            QModelIndex hideIndex = sourceModel()->index(r, Appid);
+            filter_.setData(r, filterColumn, hide_.find(sourceModel()->data(hideIndex).toString().toInt()) == hide_.end());
         }
     }
     invalidateFilter();
+    emit s_rowsUpdated();
 }
 
-void FilterModelGames::setGroup(const QStringList &aNewGroup) {
-    if(_group == aNewGroup)
+void FilterModelGames::setGroup(const QSet<GameID> &aNewGroup) {
+    if(group_ == aNewGroup)
         return;
-    _group = aNewGroup;
+    group_ = aNewGroup;
     int filterColumn = columns_.value("group");
-    if (_group.isEmpty()) {
-        filter_.clearCol(filterColumn);
-    } else {
-        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex hideIndex = sourceModel()->index(r, GamesAppid);
-            filter_.setData(r, filterColumn, _group.indexOf(sourceModel()->data(hideIndex).toString()) >= 0);
-        }
+    for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+        QModelIndex hideIndex = sourceModel()->index(r, Appid);
+        filter_.setData(r, filterColumn, group_.find(sourceModel()->data(hideIndex).toString().toInt()) != group_.end());
     }
     invalidateFilter();
+    emit s_rowsUpdated();
 }
 
-void FilterModelGames::setFavorites(const QStringList &aNewFavorites) {
-    if(_favorite == aNewFavorites)
+void FilterModelGames::setFavorites(const QSet<GameID> &aNewFavorites) {
+    if(favorite_ == aNewFavorites)
         return;
-    _favorite = aNewFavorites;
+    favorite_ = aNewFavorites;
     int filterColumn = columns_.value("favorite");
-    if (_favorite.isEmpty()) {
-        filter_.clearCol(filterColumn);
-    } else {
-        for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex hideIndex = sourceModel()->index(r, GamesAppid);
-            filter_.setData(r, filterColumn, _favorite.indexOf(sourceModel()->data(hideIndex).toString()) >= 0);
-        }
+    for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+        QModelIndex hideIndex = sourceModel()->index(r, Appid);
+        filter_.setData(r, filterColumn, favorite_.find(sourceModel()->data(hideIndex).toString().toInt()) != favorite_.end());
     }
     invalidateFilter();
+    emit s_rowsUpdated();
+}
+
+void FilterModelGames::clearName() {
+    name_.clear();
+    int nameColumn = columns_.value("name");
+    filter_.clearCol(nameColumn);
+    invalidateFilter();
+    emit s_rowsUpdated();
+}
+
+void FilterModelGames::clearHide() {
+    hide_.clear();
+    int hideColumn = columns_.value("hide");
+    filter_.clearCol(hideColumn);
+    invalidateFilter();
+    emit s_rowsUpdated();
+}
+
+void FilterModelGames::clearGroup() {
+    group_.clear();
+    int groupColumn = columns_.value("group");
+    filter_.clearCol(groupColumn);
+    invalidateFilter();
+    emit s_rowsUpdated();
+}
+
+void FilterModelGames::clearFavorites() {
+    favorite_.clear();
+    int filterColumn = columns_.value("favorite");
+    filter_.clearCol(filterColumn);
+    invalidateFilter();
+    emit s_rowsUpdated();
 }
 
 void FilterModelGames::clear() {
-    _name.clear();
-    _hide.clear();
-    _group.clear();
-    _favorite.clear();
+    name_.clear();
+    hide_.clear();
+    group_.clear();
+    favorite_.clear();
     filter_.clear();
+    sourceModel()->clear();
+}
+
+void FilterModelGames::setSourceModel(QAbstractItemModel *aSourceModel) {
+    Q_UNUSED(aSourceModel)
 }

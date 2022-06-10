@@ -25,6 +25,7 @@ public:
     void updateIcons() override {};
     void updateSettings(QFlags<changedSettings> aSettings) override;;
 
+    void clear();
 signals:
     void s_removeAchievements(int index);
 //    void s_formClose();

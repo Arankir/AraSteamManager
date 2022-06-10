@@ -9,6 +9,7 @@ class Form : public QWidget {
     Q_OBJECT
 public:
     explicit Form(QWidget *parent = nullptr);
+    virtual ~Form();
     virtual void updateSettings(QFlags<changedSettings>) = 0;
     virtual void updateIcons() = 0;
     virtual void retranslate() = 0;

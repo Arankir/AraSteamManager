@@ -3,12 +3,12 @@
 
 #include <QAbstractTableModel>
 #include <QObject>
+#include <QSortFilterProxyModel>
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/steamApi/structures/sprofile.h"
-#include "classes/common/comments.h"
+#include "classes/files/comments.h"
 #include "classes/common/generalfunctions.h"
-#include <QSortFilterProxyModel>
-#include "classes/achievements/categoriesgame.h"
+#include "classes/files/achievementscategory.h"
 
 enum modelAchievementsColumns {
     AchievementAppid         = 0,
@@ -16,7 +16,7 @@ enum modelAchievementsColumns {
     AchievementIcon          = 2,
     AchievementTitle         = 3,
     AchievementDescription   = 4,
-    AchievementComments      = 5,
+    AchievementCommentss      = 5,
     AchievementWorld         = 6,
     AchievementReachedMy     = 7,
     AchievementCount         = 7
@@ -29,7 +29,7 @@ public:
     void setAchievements(const ProfileID &userId, const GameID &gameId);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     QString achievementId(const QModelIndex &index) const;
     bool hasChildren(const QModelIndex &parent) const;
@@ -81,7 +81,19 @@ private:
     QList<AchievementInModel> _achievementsInModel;
 };
 
-using CategoriesFilter = QList<QPair<QString, QList<Category>>>;
+class CategoriesFilter {
+public:
+    CategoriesFilter() {};
+    CategoriesFilter(QMap<QString, QList<Category2>> categories): categories_(categories) {};
+    bool addCategory(QString parent, const Category2 &category);
+    bool removeCategory(QString parent, Category2 category);
+    void clear();
+    QMap<QString, QList<Category2>> getCategories() const {return categories_;}
+    QSet<AchievementID> getAchievementIDs();
+
+private:
+    QMap<QString, QList<Category2>> categories_;
+};
 
 class ProxyModelAchievements : public QSortFilterProxyModel {
     Q_OBJECT
@@ -102,6 +114,37 @@ public slots:
 
 private:
     void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
+
+    QStringList _preCategories;
+
+    QString _name;
+    int _reached;
+    CategoriesFilter _categories; //QList<QList<QList<QString>>> = (1&2&...)||(n&n2&...)||m||m2... QList<QList<QString>> = (1&2&...) QList<QString> = 1
+    QStringList _favorite;
+};
+#include "subWidgets/models/filters.h"
+class FilterModelAchievements : public FilterModel {
+    Q_OBJECT
+public:
+    FilterModelAchievements(int row = 0, QObject* parent = nullptr);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    AchievementsModel *sourceModel() const;
+    void setSourceModel(AchievementsModel *sourceModel);
+
+    SGame getGame(int aIndex);
+    QStringList getGameComment(int aIndex);
+    QList<SAchievementPlayer> getGameAchievements(int aIndex);
+
+public slots:
+    void setName(const QString &newName);
+    void setReached(int newReached);
+    void setCategories(const CategoriesFilter &newCategories);
+    CategoriesFilter getCategories() const {return _categories;}
+    void setFavorites(const QStringList &newFavorites);
+    void clear();
+
+private:
+    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel)};
 
     QStringList _preCategories;
 

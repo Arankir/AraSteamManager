@@ -13,7 +13,7 @@ public:
 class ThreadLoading : public QObject {
     Q_OBJECT
 public slots:
-    void start() {_thread->start();}
+    void start() {thread_->start();}
 
 private slots:
     virtual int fill() = 0;
@@ -26,7 +26,7 @@ signals:
     void s_finished();
 
 private:
-    ThreadInfo *_thread;
+    ThreadInfo *thread_;
 
 };
 
