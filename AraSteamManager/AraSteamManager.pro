@@ -6,6 +6,9 @@
 
 QT       += core gui network charts concurrent
 
+QMAKE_CXXFLAGS_DEBUG += -pg -no-pie
+QMAKE_LFLAGS_DEBUG += -pg -no-pie
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = AraSteamManager
@@ -25,7 +28,8 @@ DEFINES += QT_DEPRECATED_WARNINGS  QT_MESSAGELOGCONTEXT #Названия фун
 CONFIG += c++2a
 
 SOURCES += \
-    classes/files/achievementscategory.cpp \
+    classes/common/loghelper.cpp \
+    classes/files/category.cpp \
     classes/files/comments.cpp \
     classes/files/favorites.cpp \
     classes/common/filesaveload.cpp \
@@ -56,10 +60,8 @@ SOURCES += \
     forms/formmain.cpp \
     forms/achievements/formachievements.cpp \
     forms/achievements/formcategoriesedit.cpp \
-    forms/achievements/formcategoriestree.cpp \
     forms/achievements/formfriendscompare.cpp \
     forms/widgets/formfrienditemcompare.cpp \
-    forms/widgets/formreachedfilter.cpp \
     forms/main/formfavorites.cpp \
     forms/main/formfriends.cpp \
     forms/main/formgames.cpp \
@@ -69,6 +71,7 @@ SOURCES += \
     subWidgets/charts/achievementcompletedpiechart.cpp \
     subWidgets/charts/achievementcountchart.cpp \
     subWidgets/charts/piechart.cpp \
+    subWidgets/items/categoryitem.cpp \
     subWidgets/lineEdit/mylineedit.cpp \
     framelesswindow.cpp \
         main.cpp \
@@ -83,6 +86,7 @@ SOURCES += \
     subWidgets/labels/labelvalue.cpp \
     subWidgets/lists/qlistwidgetachievements.cpp \
     subWidgets/models/achievementsmodel.cpp \
+    subWidgets/models/categoriesmodel.cpp \
     subWidgets/models/filters.cpp \
     subWidgets/models/friendsmodel.cpp \
     subWidgets/models/gamesmodel.cpp \
@@ -92,13 +96,15 @@ SOURCES += \
     subWidgets/progressBars/progressbargood.cpp \
     subWidgets/progressBars/progressbarlight.cpp \
     subWidgets/tables/freezetablewidget.cpp \
+    subWidgets/withData/buttonreachedtype.cpp \
     subWidgets/withData/qbuttonwithdata.cpp \
     subWidgets/withData/qcheckboxwithdata.cpp \
     subWidgets/withData/qcomboboxwithdata.cpp \
     subWidgets/withData/qradiobuttonwithdata.cpp \
 
 HEADERS += \
-    classes/files/achievementscategory.h \
+    classes/common/loghelper.h \
+    classes/files/category.h \
     classes/files/comments.h \
     classes/files/favorites.h \
     classes/common/filesaveload.h \
@@ -129,10 +135,8 @@ HEADERS += \
     forms/formmain.h \
     forms/achievements/formachievements.h \
     forms/achievements/formcategoriesedit.h \
-    forms/achievements/formcategoriestree.h \
     forms/achievements/formfriendscompare.h \
     forms/widgets/formfrienditemcompare.h \
-    forms/widgets/formreachedfilter.h \
     forms/main/formfavorites.h \
     forms/main/formfriends.h \
     forms/main/formgames.h \
@@ -142,6 +146,7 @@ HEADERS += \
     subWidgets/charts/achievementcompletedpiechart.h \
     subWidgets/charts/achievementcountchart.h \
     subWidgets/charts/piechart.h \
+    subWidgets/items/categoryitem.h \
     subWidgets/lineEdit/mylineedit.h \
     framelesswindow.h \
     subWidgets/actions/actioncategory.h \
@@ -155,6 +160,7 @@ HEADERS += \
     subWidgets/labels/labelvalue.h \
     subWidgets/lists/qlistwidgetachievements.h \
     subWidgets/models/achievementsmodel.h \
+    subWidgets/models/categoriesmodel.h \
     subWidgets/models/filters.h \
     subWidgets/models/friendsmodel.h \
     subWidgets/models/gamesmodel.h \
@@ -164,6 +170,7 @@ HEADERS += \
     subWidgets/progressBars/progressbargood.h \
     subWidgets/progressBars/progressbarlight.h \
     subWidgets/tables/freezetablewidget.h \
+    subWidgets/withData/buttonreachedtype.h \
     subWidgets/withData/qbuttonwithdata.h \
     subWidgets/withData/qcheckboxwithdata.h \
     subWidgets/withData/qcomboboxwithdata.h \
@@ -181,7 +188,6 @@ FORMS += \
     forms/achievements/formcategoriesedit.ui \
     forms/achievements/formfriendscompare.ui \
     forms/widgets/formfrienditemcompare.ui \
-    forms/widgets/formreachedfilter.ui \
     forms/main/formfavorites.ui \
     forms/main/formfriends.ui \
     forms/main/formgames.ui \

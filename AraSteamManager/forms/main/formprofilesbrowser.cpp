@@ -20,6 +20,7 @@ FormProfilesBrowser::FormProfilesBrowser(QWidget *parent) :
     connect(ui->ButtonGoToMyProfile,&QPushButton::clicked, this, &FormProfilesBrowser::buttonGoToMyProfile_Clicked);
     connect(ui->ButtonFavorites,    &QPushButton::clicked, this, &FormProfilesBrowser::buttonFavorites_Clicked);
     connect(ui->ButtonSettings,     &QPushButton::clicked, this, &FormProfilesBrowser::buttonSettings_Clicked);
+    connect(this, &Form::s_settingsUpdated, ui->LineEditIdProfile, &MyLineEdit::updateSettings);
 }
 
 FormProfilesBrowser::~FormProfilesBrowser() {

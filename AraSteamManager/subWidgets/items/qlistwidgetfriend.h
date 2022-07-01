@@ -1,5 +1,5 @@
-#ifndef QLISTWIDGETACHIEVEMENT_H
-#define QLISTWIDGETACHIEVEMENT_H
+#ifndef QLISTWIDGETFRIENDS_H
+#define QLISTWIDGETFRIENDS_H
 
 #include <QListWidgetItem>
 #include "classes/steamApi/structures/sfriends.h"
@@ -22,4 +22,4 @@ public:
     FriendType _type = FriendType::none;
 };
 
-#endif // QLISTWIDGETACHIEVEMENT_H
+#endif // QLISTWIDGETFRIENDS_H

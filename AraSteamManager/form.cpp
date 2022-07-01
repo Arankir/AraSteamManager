@@ -7,6 +7,7 @@ Form::Form(QWidget *parent) : QWidget(parent) {
 
 Form::~Form() {
     qDebug() << tr("%1 deleted").arg(this->objectName());
+    emit s_destructed();
 }
 
 void Form::changeEvent(QEvent *event) {

@@ -9,7 +9,6 @@
 
 FormSettings::FormSettings(QWidget *aParent): Form(aParent), ui(new Ui::FormSettings) {
     ui->setupUi(this);
-    initComponents();
 }
 
 FormSettings::~FormSettings() {
@@ -17,136 +16,18 @@ FormSettings::~FormSettings() {
 }
 
 bool FormSettings::isInit() {
-    return true;
+    return isInit_;
 }
 
 bool FormSettings::isLoaded() {
-    return true;
+    return isInit_;
 }
 
-void FormSettings::initComponents() {
-    //ui->ComboBoxMaxRows->addItems(QStringList()<<"10"<<"20"<<"50"<<"100"<<"200"<<"500");
-    ui->comboBoxProfileInfo->addItems(QStringList {tr("Минимум"), tr("Обычные"), tr("Максимум")});
-    ui->tabWidget->setCurrentIndex(0);
-
-    ui->CheckBoxVisibleHiddenGames->setVisible(false);
-    ui->CheckBoxSaveImage->setVisible(false);
-
-    ui->labelVersion->setText(VER_PRODUCTVERSION_STR);
-
+void FormSettings::init() {
+    initCommonSettings();
     initExport();
-    ui->ComboBoxLanguage->addItems(QStringList {tr("English"), tr("Русский")});
-    switch (Settings::language()) {
-    case 1: {
-        ui->ComboBoxLanguage->setCurrentIndex(0);
-//        ui->RadioButtonLanguageEnglish->setChecked(true);
-        break;
-    }
-    case 5: {
-        ui->ComboBoxLanguage->setCurrentIndex(1);
-//        ui->RadioButtonLanguageRussian->setChecked(true);
-        break;
-    }
-    default: {
-        break;
-    }
-    }
-    switch (Settings::visibleHiddenGames()) {
-    case 0: {
-        ui->CheckBoxVisibleHiddenGames->setChecked(false);
-        break;
-    }
-    case 1: {
-        ui->CheckBoxVisibleHiddenGames->setChecked(true);
-        break;
-    }
-    default: {
-        break;
-    }
-    }
-    ui->ComboBoxTheme->addItems(QStringList {tr("Тёмная"), tr("Светлая"), tr("Синяя"), tr("Оранжевая"), tr("Малиновая"), tr("Лаймовая"), tr("Фиолетовая"), tr("Зеленая"), tr("Пользовательская")});
-    ui->ComboBoxTheme->setItemData(0, blackTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(1, whiteTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(2, blueTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(3, orangeTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(4, crimsonTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(5, limeTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(6, purpleTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(7, greenTheme().mainBackground.color, Qt::DecorationRole);
-    ui->ComboBoxTheme->setItemData(8, QColor(255, 255, 255, 20), Qt::DecorationRole);
-    switch (Settings::theme()) {
-    case 0: {
-        ui->ComboBoxTheme->setCurrentIndex(8);
-//        ui->radioButtonCustom->setChecked(true);
-        break;
-    }
-    case 1: {
-        ui->ComboBoxTheme->setCurrentIndex(2);
-//        ui->RadioButtonBlueTheme->setChecked(true);
-        break;
-    }
-    case 2: {
-        ui->ComboBoxTheme->setCurrentIndex(1);
-//        ui->RadioButtonLightTheme->setChecked(true);
-        break;
-    }
-    case 3: {
-        ui->ComboBoxTheme->setCurrentIndex(0);
-//        ui->RadioButtonDarkTheme->setChecked(true);
-        break;
-    }
-    case 4: {
-        ui->ComboBoxTheme->setCurrentIndex(3);
-//        ui->radioButtonBgr->setChecked(true);
-        break;
-    }
-    case 5: {
-        ui->ComboBoxTheme->setCurrentIndex(4);
-//        ui->radioButtonBrg->setChecked(true);
-        break;
-    }
-    case 6: {
-        ui->ComboBoxTheme->setCurrentIndex(5);
-//        ui->radioButtonGbr->setChecked(true);
-        break;
-    }
-    case 7: {
-        ui->ComboBoxTheme->setCurrentIndex(6);
-//        ui->radioButtonGrb->setChecked(true);
-        break;
-    }
-    case 8: {
-        ui->ComboBoxTheme->setCurrentIndex(7);
-//        ui->radioButtonRbg->setChecked(true);
-        break;
-    }
-    default: {
-        break;
-    }
-    }
-//    ui->radioButtonCustom->setStyleSheet("background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, "
-//                                          "stop: 0 " + QColor(Qt::red).name() + ", "
-//                                          "stop: 0.14 " + QColor(222, 76, 0).name() + ", "
-//"stop: 0.29 " + QColor(Qt::yellow).name() + ", "
-//"stop: 0.43 " + QColor(Qt::green).name() + ", "
-//"stop: 0.58 " + QColor(Qt::red).name() + ", "
-//"stop: 0.73 " + QColor(Qt::blue).name() + ", "
-//"stop: 1.0 " + QColor(142, 0, 167).name() + ");");
-
-    ui->comboBoxProfileInfo->setCurrentIndex(Settings::profileInfoSize());
-    ui->CheckBoxSaveImage->setChecked(Settings::saveImages());
-//    QPalette darkPalette;
-//    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
-//    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-//    darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
-//    darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
-    //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
-    //ui->GroupBoxDarkTheme->setPalette(darkPalette);
-    //ui->GroupBoxWhiteTheme->setPalette(style()->standardPalette());
-
     ui->tabWidget->setAttribute(Qt::WA_TranslucentBackground);
 
-    ui->labelIcons8->setTextFormat(Qt::RichText);
     QFormLayout *layout = new QFormLayout;
     QDir dirHiddenGames(Paths::hiddenGames());
     dirHiddenGames.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
@@ -205,18 +86,145 @@ void FormSettings::initComponents() {
     ui->FrameProfilesHideGames->setLayout(layout);
 
 #define Connects {
-    connect(ui->CheckBoxVisibleHiddenGames, &QCheckBox::stateChanged, this, &FormSettings::checkBoxVisibleHiddenGames_StateChanged);
     connect(ui->ComboBoxTheme,              SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxThemeIndexChanged(int)));
     connect(ui->ComboBoxLanguage,           SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxLanguageIndexChanged(int)));
 
-    connect(ui->CheckBoxSaveImage,          &QCheckBox::stateChanged, this, &FormSettings::checkBoxSaveImage_StateChanged);
     connect(ui->comboBoxProfileInfo,        SIGNAL(currentIndexChanged(int)), this, SLOT(slideProfileSize_ValueChanged(int)));
     //connect(ui->ComboBoxMaxRows,            SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxMaxTableRows(int)));
 
     connect(ui->ButtonExportCategories, &QPushButton::clicked, this, &FormSettings::buttonExportCategories_Clicked);
     connect(ui->ButtonImportCategories, &QPushButton::clicked, this, &FormSettings::buttonImportCategories_Clicked);
+    connect(this, &Form::s_settingsUpdated, ui->lineEdit_2, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->lineEdit_3, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->lineEdit_4, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->lineEdit_5, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->LineEditFindGame, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->LineEditImportCategories, &MyLineEdit::updateSettings);
 #define ConnectsEnd }
     retranslate();
+    isInit_ = true;
+}
+
+void FormSettings::initCommonSettings() {
+    ui->comboBoxProfileInfo->addItems(QStringList {tr("Минимум"), tr("Обычные"), tr("Максимум")});
+    ui->tabWidget->setCurrentIndex(0);
+
+    ui->labelVersion->setText(VER_PRODUCTVERSION_STR);
+
+    ui->ComboBoxLanguage->addItems(QStringList {tr("English"), tr("Русский")});
+    switch (Settings::language()) {
+    case 1: {
+        ui->ComboBoxLanguage->setCurrentIndex(0);
+        break;
+    }
+    case 5: {
+        ui->ComboBoxLanguage->setCurrentIndex(1);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+    ui->ComboBoxTheme->addItems(QStringList {tr("Тёмная"), tr("Светлая"), tr("Синяя"), tr("Оранжевая"), tr("Малиновая"), tr("Лаймовая"), tr("Фиолетовая"), tr("Зеленая"), tr("Пользовательская")});
+    ui->ComboBoxTheme->setItemData(0, blackTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(1, whiteTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(2, blueTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(3, orangeTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(4, crimsonTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(5, limeTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(6, purpleTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(7, greenTheme().mainBackground.color, Qt::DecorationRole);
+    ui->ComboBoxTheme->setItemData(8, QColor(255, 255, 255, 20), Qt::DecorationRole);
+    switch (Settings::theme()) {
+    case 0: {
+        ui->ComboBoxTheme->setCurrentIndex(8);
+        break;
+    }
+    case 1: {
+        ui->ComboBoxTheme->setCurrentIndex(2);
+        break;
+    }
+    case 2: {
+        ui->ComboBoxTheme->setCurrentIndex(1);
+        break;
+    }
+    case 3: {
+        ui->ComboBoxTheme->setCurrentIndex(0);
+        break;
+    }
+    case 4: {
+        ui->ComboBoxTheme->setCurrentIndex(3);
+        break;
+    }
+    case 5: {
+        ui->ComboBoxTheme->setCurrentIndex(4);
+        break;
+    }
+    case 6: {
+        ui->ComboBoxTheme->setCurrentIndex(5);
+        break;
+    }
+    case 7: {
+        ui->ComboBoxTheme->setCurrentIndex(6);
+        break;
+    }
+    case 8: {
+        ui->ComboBoxTheme->setCurrentIndex(7);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
+    ui->comboBoxProfileInfo->setCurrentIndex(Settings::profileInfoSize());
+    ui->labelIcons8->setTextFormat(Qt::RichText);
+//    QPalette darkPalette;
+//    darkPalette.setColorGroup(QPalette::Active,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, Qt::gray,QColor(53, 53, 53));
+//    darkPalette.setColorGroup(QPalette::Normal,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+//    darkPalette.setColorGroup(QPalette::Inactive,Qt::white,QColor(53, 53, 53),Qt::white,Qt::black,Qt::gray,Qt::white,Qt::red, QColor(25, 25, 25),QColor(53, 53, 53));
+//    darkPalette.setColorGroup(QPalette::Disabled,Qt::white,QColor(73, 73, 73),Qt::white,Qt::black,Qt::gray,QColor(130,130,130),Qt::red, QColor(53,53,53),QColor(53, 53, 53));
+    //                        тип               ,???      ,Кнопка            ,Разделители,???      ,???     ,цвет текста на кнопке,???  ,поле сзади     ,???
+    //ui->GroupBoxDarkTheme->setPalette(darkPalette);
+    //ui->GroupBoxWhiteTheme->setPalette(style()->standardPalette());
+
+}
+
+void FormSettings::initExport() {
+    ui->TreeWidgetExportCategories->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
+
+    QDir dir(Paths::categories());
+    for (auto &file: dir.entryInfoList(QDir::Files)) {
+        QFile fileCategory(file.filePath());
+        if (fileCategory.exists()) {
+            if(fileCategory.open(QFile::ReadOnly)) {
+                Category game(QJsonDocument().fromJson(fileCategory.readAll()).object());
+                game.update();
+                QTreeWidgetItem *item = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << game.gameName());
+                item->setWhatsThis(0, QString::number(game.gameID()));
+//                item->setWhatsThis(1, QString::number(-2));
+                ui->TreeWidgetExportCategories->addTopLevelItem(item);
+                for (auto &category: game.categories()) {
+                    recursAddCategoryToTree(category, item, game.gameID());
+                }
+                fileCategory.close();
+            }
+        }
+    }
+}
+
+int FormSettings::recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot, const int &aGameId) {
+    QTreeWidgetItem *subItem;
+    if (aRoot == nullptr) {
+        subItem = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << aCategory->title());
+    } else {
+        subItem = new QTreeWidgetItem(aRoot, QStringList() << aCategory->title());
+    }
+    subItem->setWhatsThis(0,QString::number(aGameId));
+//    subItem->setWhatsThis(1,QString::number(aCategory->order()));
+    for(auto subCategory: aCategory->categories()) {
+        recursAddCategoryToTree(subCategory, subItem, aGameId);
+    }
+    return 0;
 }
 
 void FormSettings::comboBoxThemeIndexChanged(int aIndex) {
@@ -296,45 +304,6 @@ void FormSettings::comboBoxLanguageIndexChanged(int aIndex) {
         break;
     }
     }
-}
-
-void FormSettings::initExport() {
-    ui->TreeWidgetExportCategories->setSelectionMode(QAbstractItemView::SelectionMode::ExtendedSelection);
-
-    QDir dir(Paths::categories());
-    for (auto &file: dir.entryInfoList(QDir::Files)) {
-        QFile fileCategory(file.filePath());
-        if (fileCategory.exists()) {
-            if(fileCategory.open(QFile::ReadOnly)) {
-                auto s = fileCategory.readAll();
-                Category2 game(QJsonDocument().fromJson(s).object());
-                game.update();
-                QTreeWidgetItem *item = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << game.gameName());
-                item->setWhatsThis(0, QString::number(game.gameID()));
-                item->setWhatsThis(1, QString::number(-2));
-                ui->TreeWidgetExportCategories->addTopLevelItem(item);
-                for (auto &category: game.categories()) {
-                    recursAddCategoryToTree(category, item, game.gameID());
-                }
-                fileCategory.close();
-            }
-        }
-    }
-}
-
-int FormSettings::recursAddCategoryToTree(Category2 *aCategory, QTreeWidgetItem *aRoot, const int &aGameId) {
-    QTreeWidgetItem *subItem;
-    if (aRoot == nullptr) {
-        subItem = new QTreeWidgetItem(ui->TreeWidgetExportCategories, QStringList() << aCategory->title());
-    } else {
-        subItem = new QTreeWidgetItem(aRoot, QStringList() << aCategory->title());
-    }
-    subItem->setWhatsThis(0,QString::number(aGameId));
-//    subItem->setWhatsThis(1,QString::number(aCategory->order()));
-    for(auto subCategory: aCategory->categories()) {
-        recursAddCategoryToTree(subCategory, subItem, aGameId);
-    }
-    return 0;
 }
 
 void FormSettings::buttonExportCategories_Clicked() {
@@ -439,8 +408,8 @@ void FormSettings::buttonImportCategories_Clicked() {
     for(const auto &eCategory: eCategories) {
         GameID gameId = eCategory.gameId;
         QString gameName = eCategory.gameName;
-        Category2 categories(gameId, gameName);
-        categories.addCategory(new Category2(eCategory.category));
+        Category categories(gameId, gameName);
+        categories.addCategory(new Category(eCategory.category));
         categories.save();
     }
     QMessageBox::information(this, tr("Внимание!"), tr("Категории успешно добавлены!"));
@@ -448,6 +417,15 @@ void FormSettings::buttonImportCategories_Clicked() {
 
 void FormSettings::retranslate() {
     ui->retranslateUi(this);
+    ui->ComboBoxTheme->setItemText(0, tr("Тёмная"));
+    ui->ComboBoxTheme->setItemText(1, tr("Светлая"));
+    ui->ComboBoxTheme->setItemText(2, tr("Синяя"));
+    ui->ComboBoxTheme->setItemText(3, tr("Оранжевая"));
+    ui->ComboBoxTheme->setItemText(4, tr("Малиновая"));
+    ui->ComboBoxTheme->setItemText(5, tr("Лаймовая"));
+    ui->ComboBoxTheme->setItemText(6, tr("Фиолетовая"));
+    ui->ComboBoxTheme->setItemText(7, tr("Зеленая"));
+    ui->ComboBoxTheme->setItemText(8, tr("Пользовательская"));
 
     if (this->findChild<QRadioButtonWithData*>("HiddenGames0") != 0) {
         QRadioButtonWithData *allHidden = this->findChild<QRadioButtonWithData*>("HiddenGames0");
@@ -610,7 +588,7 @@ void FormSettings::slideProfileSize_ValueChanged(int aValue) {
     emit s_settingsUpdated(changedSettings::profileInfo);
 }
 
-ExportCategory::ExportCategory(int aGameId, const QString &aGameName, const Category2 &aCategory):
+ExportCategory::ExportCategory(int aGameId, const QString &aGameName, const Category &aCategory):
 gameId(aGameId), gameName(aGameName), category(aCategory) {
 
 }
@@ -630,7 +608,7 @@ ExportCategory::ExportCategory(const QString &aPathFile) {
 void ExportCategory::fromJson(const QJsonObject &aObject) {
     gameId = aObject["gameId"].toInt();
     gameName = aObject["gameName"].toString();
-    category = Category2(aObject["category"].toObject());
+    category = Category(aObject["category"].toObject());
 }
 
 QJsonObject ExportCategory::toJson() {

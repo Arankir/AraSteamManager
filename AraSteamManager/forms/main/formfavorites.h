@@ -28,9 +28,10 @@ class FormFavorites : public Form {
     Q_OBJECT
 
 public slots:
+    void init();
     bool isInit();
     bool isLoaded();
-    void friendLoad(SProfile);
+    void friendLoad(const SProfile &);
 
     void updateSettings(QFlags<changedSettings> aSettings) override;
     void updateIcons() override;
@@ -43,7 +44,6 @@ signals:
     void s_return_to_profile(QWidget*);
 
 private slots:
-    void initComponents();
     void on_pushButton_clicked();
 
 private:

@@ -14,6 +14,9 @@ void FormGames::init() {
     connect(&_filterGames, &FilterModelGames::s_modelFinished, this, [&]() {
         ui->tableGames->sortByColumn(gamesModel::Name, Qt::SortOrder::AscendingOrder);
         ui->tableGames->resizeColumnsToContents();
+        if (ui->tableGames->columnWidth(gamesModel::Name) > 200) {
+            ui->tableGames->setColumnWidth(gamesModel::Name, 200);
+        }
         if (ui->tableGames->columnWidth(gamesModel::Comment) > 100) {
             ui->tableGames->setColumnWidth(gamesModel::Comment, 100);
         }
@@ -45,6 +48,7 @@ void FormGames::init() {
     connect(&_filterGames, &FilterModel::s_rowsUpdated, this, [&]() {
         ui->tableGames->resizeRowsToContents();
     });
+    connect(this, &Form::s_settingsUpdated, ui->lineEditGame, &MyLineEdit::updateSettings);
 #define ConnectsEnd }
 }
 
@@ -292,6 +296,7 @@ void FormGames::showGroupsEdit() {
     FormGroups *groups = new FormGroups(this);
     groups->setObjectName(QString("Groups%1").arg(_steamId));
     groups->setProfileGame(_steamId, currentGame());
+    groups->setAttribute( Qt::WA_DeleteOnClose );
     QFrame *frame = createSubForm<FormGroups>(groups, this);
     connect(groups, &FormGroups::s_updateGroups,    this, &FormGames::updateGroups);
     connect(groups, &FormGroups::s_closed,          this, [this, frame]() {
@@ -306,6 +311,7 @@ void FormGames::showCommentsEdit() {
     FormComments *comments = new FormComments(this);
     comments->setObjectName(QString("Comments%1").arg(_steamId));
     comments->setData(_steamId, currentGame());
+    comments->setAttribute( Qt::WA_DeleteOnClose );
     QFrame *frame = createSubForm<FormComments>(comments, this);
 
     connect(comments, &FormComments::s_updateComments,  _filterGames.sourceModel(), &GamesModel::updateComments);

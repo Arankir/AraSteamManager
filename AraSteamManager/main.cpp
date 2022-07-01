@@ -1,28 +1,16 @@
 #include <QApplication>
-#include <QStyleFactory>
 #include <QTranslator>
-#include <QScopedPointer>
-#include <QTextStream>
-#include <QDateTime>
-#include <QLoggingCategory>
-#include <stdio.h>
-#include <stdlib.h>
-#include <Windows.h>
-#include <QDir>
-#include "classes/common/settings.h"
-#include "forms/formmain.h"
-#include "framelesswindow.h"
 #include "classes/common/theme.h"
+#include "forms/formmain.h"
+#include "classes/common/loghelper.h"
 
-QScopedPointer<QFile> logFile_;
+//QScopedPointer<QFile> logFile_;
 
 void registerTypes();
 void initSetting();
 void initLanguage(QApplication &app);
 void initFont();
-void initLog();
 void onCrush();
-void log(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
@@ -38,48 +26,32 @@ int main(int argc, char *argv[]) {
     initSetting();
     initLanguage(a);
     initFont();
-    initLog();
+    LogHelper::setDebugMessageHandler();
 
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
     auto mainForm = createFramelessForm<FormMain>();
     QObject::connect(mainForm, &FormMain::s_settingsUpdated, mainForm->window(), &FramelessWindow::updateSettings);
-    QObject::connect(mainForm, &FormMain::s_closed, [](){
+    QObject::connect(mainForm, &FormMain::s_destructed, [](){
         qInfo() << "Programm closed";
         qApp->closeAllWindows();
     });
+
+    if (mainForm->window() != nullptr) {
+        mainForm->window()->restoreGeometry(Settings::mainWindowGeometry());
+        mainForm->window()->restoreState(Settings::mainWindowState());
+    }
     mainForm->window()->show();
 
     return a.exec();
 }
 
-void log(QtMsgType aType, const QMessageLogContext &aContext, const QString &aMessage) {
-    const char *function = aContext.function ? aContext.function : "";
-    QTextStream out(logFile_.data());
-
-    switch (aType) {
-    case QtInfoMsg:     out << "INFO "; break;
-    case QtDebugMsg:    out << "DEBG "; break;
-    case QtWarningMsg:  out << "WRNG "; break;
-    case QtCriticalMsg: out << "CRCL "; break;
-    case QtFatalMsg:    out << "FATL "; break;
-    }
-
-    out << QTime::currentTime().toString("hh:mm:ss ");//"yyyy-MM-dd hh:mm:ss "
-    out << /*aContext.category << ": " << */function << "  " << aMessage << Qt::endl;
-    out.flush();
-
-    QString output(function);
-    output += "  " + aMessage + "\n";
-    OutputDebugString(reinterpret_cast<const wchar_t *>(output.utf16()));
-}
-
 void registerTypes() {
-    qRegisterMetaType<QVector<int>>                     ("QVector<int>");
-    qRegisterMetaType<QMetaTypeId<ReachedType>>         ("QMetaTypeId<ReachedType>");
-    qRegisterMetaType<QVector<double>>                  ("QVector<double>");
-    qRegisterMetaType<QVector<QPair<QString,int> >>     ("QVector<QPair<QString, int> >");
-    qRegisterMetaType<QVector<QPair<QString,QString> >> ("QVector<QPair<QString, QString> >");
+    qRegisterMetaType<QVector<int> >                    ("QVector<int>");
+    qRegisterMetaType<QMetaTypeId<ReachedType> >        ("QMetaTypeId<ReachedType>");
+    qRegisterMetaType<QVector<double> >                 ("QVector<double>");
+    qRegisterMetaType<QVector<QPair<QString,int> > >    ("QVector<QPair<QString, int> >");
+    qRegisterMetaType<QVector<QPair<QString,QString> > >("QVector<QPair<QString, QString> >");
 }
 
 void initSetting() {
@@ -112,30 +84,6 @@ void initFont() {
     //font.setPointSize(12);
     //font.setPixelSize(12);
     qApp->setFont(font);
-}
-
-void initLog() {
-    QString logsPath = Paths::temp() + "files/logs/";
-    QDir().mkpath(logsPath);
-//    createDir(logsPath);
-
-    //Удаление старых файлов
-    QDir dirLogs(logsPath);
-    dirLogs.setFilter(QDir::Files | QDir::NoSymLinks);
-    dirLogs.setSorting(QDir::Name);
-    QFileInfoList list = dirLogs.entryInfoList();
-    for(auto &file: list) {
-        if (file.fileName().indexOf("log_") == 0) {
-            QDateTime date {QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), Settings::dateFormat())};
-            if (date < QDateTime::currentDateTime().addMonths(-1)) {
-                QFile::remove(file.filePath() + "/" + file.fileName());
-            }
-        }
-    }
-
-    logFile_.reset(new QFile(logsPath + QDateTime::currentDateTime().toString("log_" + Settings::dateFormat()) + ".txt"));
-    logFile_.data()->open(QFile::Append | QFile::Text);
-    qInstallMessageHandler(log);
 }
 
 void onCrush() {

@@ -32,7 +32,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -106,7 +106,7 @@
           <number>3</number>
          </property>
          <item>
-          <widget class="QLineEdit" name="LineEditFriendsFind">
+          <widget class="MyLineEdit" name="LineEditFriendsFind">
            <property name="placeholderText">
             <string>LuckyGuy228</string>
            </property>

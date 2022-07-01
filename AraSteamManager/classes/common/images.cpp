@@ -44,6 +44,10 @@ QString Images::reached() {
 QString Images::notReached() {
     return Theme::getCurrentTheme().pathImages + "achievements/checkbox/notreached.png";
 }
+
+QString Images::reachedGif() {
+    return Theme::getCurrentTheme().pathImages + "achievements/checkbox/3-states.gif";
+}
 #define AchievementsCheckBoxEnd }
 
 #define AchievementsCategories {

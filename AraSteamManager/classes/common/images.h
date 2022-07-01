@@ -20,6 +20,7 @@ public:
     static QString allAchievements();
     static QString reached();
     static QString notReached();
+    static QString reachedGif();
 
     //Achievements Categories
     static QString checkVisible();

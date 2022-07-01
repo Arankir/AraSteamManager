@@ -1,3 +1,5 @@
+#ifndef COMBOBOXFRIENDS_H
+#define COMBOBOXFRIENDS_H
 #pragma once
 
 #include <QComboBox>
@@ -41,3 +43,5 @@ private:
 
     QLineEdit *mSearchBar;
 };
+
+#endif // COMBOBOXFRIENDS_H

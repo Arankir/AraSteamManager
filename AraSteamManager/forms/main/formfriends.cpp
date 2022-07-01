@@ -44,6 +44,7 @@ void FormFriends::init() {
     connect(&filterFriends_, &FilterModel::s_rowsUpdated, this, [&]() {
         ui->tableFriends->resizeRowsToContents();
     });
+    connect(this, &Form::s_settingsUpdated, ui->lineEditName, &MyLineEdit::updateSettings);
 #define ConnectsEnd }
 }
 

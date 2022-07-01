@@ -3,7 +3,6 @@
 
 FormFavorites::FormFavorites(QWidget *parent): Form(parent), ui(new Ui::FormFavorites) {
     ui->setupUi(this);
-    initComponents();
 }
 
 FormFavorites::~FormFavorites() {
@@ -11,14 +10,14 @@ FormFavorites::~FormFavorites() {
 }
 
 bool FormFavorites::isInit() {
-    return true;
+    return _numRequests > 0;
 }
 
 bool FormFavorites::isLoaded() {
-    return true;
+    return _numRequests == _friendsFavorites.count();
 }
 
-void FormFavorites::initComponents() {
+void FormFavorites::init() {
 //    _games.setType("games");
 //    _friends.setType("friends");
 //    _achievements.setType("achievements");
@@ -36,7 +35,7 @@ void FormFavorites::initComponents() {
     ui->TableWidgetFriends->setColumnHidden(ColumnFavoritesID, true);
     ui->TableWidgetFriends->setColumnWidth(ColumnFavoritesIcon, 33);
     ui->TableWidgetFriends->setRowCount(_friendsFavorites.count());
-    foreach(const FavoriteProfile &steamFriend, _friendsFavorites) {
+    for(const FavoriteProfile &steamFriend: _friendsFavorites) {
         SProfile::load(steamFriend.profileId(), SProfile::LoadType::id, std::bind(&FormFavorites::friendLoad, this,  std::placeholders::_1));
 //        SProfiles *Profiles = new SProfiles(steamFriend.friendId(), true, ProfileUrlType::id);
 //        connect(Profiles, SIGNAL(s_finished(SProfiles*)), this, SLOT(friendLoad(SProfiles*)));
@@ -44,16 +43,21 @@ void FormFavorites::initComponents() {
 //    for (int i = 0; i < achievementsJ.size(); ++i) {
 //        //
 //    }
+    connect(this, &Form::s_settingsUpdated, ui->lineEdit, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->lineEdit_2, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->LineEditFriendsFind, &MyLineEdit::updateSettings);
+    connect(this, &Form::s_settingsUpdated, ui->LineEditGamesFind, &MyLineEdit::updateSettings);
     retranslate();
 }
 
-void FormFavorites::friendLoad(SProfile aProfile) {
+void FormFavorites::friendLoad(const SProfile &aProfile) {
     QLabel *avatarFriend = new QLabel;
     avatarFriend->setBaseSize(QSize(32,32));
     ui->TableWidgetFriends->setCellWidget(_numRequests, ColumnFavoritesIcon, avatarFriend);
     avatarFriend->setPixmap(aProfile.pixmapAvatar());
 
     QTableWidgetItem *item4 = new QTableWidgetItem;
+    item4->setText(aProfile.stateText());
     if(!aProfile.gameExtraInfo().isEmpty()) {
         item4->setText(tr("В игре"));
         item4->setForeground(QColor(137,183,83));

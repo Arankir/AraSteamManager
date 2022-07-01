@@ -47,24 +47,9 @@
     </spacer>
    </item>
    <item>
-    <widget class="FormReachedFilter" name="Filter" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>50</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>50</width>
-       <height>16777215</height>
-      </size>
+    <widget class="ButtonReachedType" name="Filter">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>
@@ -98,10 +83,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FormReachedFilter</class>
-   <extends>QWidget</extends>
-   <header>forms/widgets/formreachedfilter.h</header>
-   <container>1</container>
+   <class>ButtonReachedType</class>
+   <extends>QPushButton</extends>
+   <header>subWidgets/withData/buttonreachedtype.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -1,19 +1,25 @@
 #include "achievementsmodel.h"
 
+using namespace achievementsModel;
+
 constexpr QColor c_achievedColor      = QColor (87, 220, 87, 255 * 1);
 constexpr QColor c_notAchievedColor   = QColor (255, 48, 48, 255 * 1);
 constexpr int c_reservedRows = 1;
 
-void AchievementsModel::setAchievements(const ProfileID &aUserId, const GameID &aGameId) {
-    _userId = aUserId;
-    _gameId = aGameId;
-    _achievementsInModel.clear();
-    _profiles.clear();
+AchievementsModel::AchievementsModel(QObject *aParent): QAbstractTableModel(aParent) {
 
-    auto globals = SAchievementSchema::load(_gameId);
-    auto percents = SAchievementPercentage::load(_gameId);
+}
 
-    auto comments = AchievementComments(aUserId).getCommentsFromGame(aUserId, _gameId);
+void AchievementsModel::setAchievements(const ProfileID &aProfileId, const GameID &aGameId) {
+    profileId_ = aProfileId;
+    gameId_ = aGameId;
+    achievementsInModel_.clear();
+    profiles_.clear();
+
+    auto globals = SAchievementSchema::load(gameId_);
+    auto percents = SAchievementPercentage::load(gameId_);
+
+    auto comments = AchievementComments(aProfileId).getCommentsFromGame(aProfileId, gameId_);
 
     int progress = 0;
     for (auto &global: globals) {
@@ -22,7 +28,7 @@ void AchievementsModel::setAchievements(const ProfileID &aUserId, const GameID &
                 continue;
             }
             QImage pix;
-            auto achievement = AchievementInModel {QPixmap::fromImage(loadImage(pix, global.icon(), Paths::imagesAchievements(QString::number(aGameId), global.icon()), QSize(64, 64))),
+            auto achievement = AchievementInModel {QPixmap::fromImage(loadImage(global.icon(), Paths::imagesAchievements(QString::number(aGameId), global.icon()), QSize(64, 64))),
                                                     QStringList(),
                                                     global,
                                                     percent,
@@ -30,71 +36,71 @@ void AchievementsModel::setAchievements(const ProfileID &aUserId, const GameID &
             auto iterator = std::find_if(comments.begin(),
                                          comments.end(),
                                          [=](const AchievementComment &achievementComment) {
-                                            return QString::number(achievementComment.gameId()) == percent.apiName();
+                                            return achievementComment.achievementId() == percent.apiName();
                                          });
             if (iterator != comments.end()) {
                 achievement.comment = (*iterator).comment();
             }
-            _achievementsInModel.append(std::move(achievement));
+            achievementsInModel_.append(std::move(achievement));
             emit s_progress(tr("Загрузка достижений"), ++progress, globals.count());
             break;
         }
     }
 
-    auto profile = SProfile::load(aUserId, SProfile::LoadType::id);
+    auto profile = SProfile::load(aProfileId, SProfile::LoadType::id);
     addProfile(profile);
     emit s_finished();
 }
 
-int AchievementsModel::columnCount(const QModelIndex &parent) const {
-    Q_UNUSED(parent);
-    return AchievementCount + _profiles.count();
+int AchievementsModel::columnCount(const QModelIndex &aParent) const {
+    Q_UNUSED(aParent);
+    return Count + profiles_.count();
 }
 
-int AchievementsModel::rowCount(const QModelIndex &parent) const {
-    Q_UNUSED(parent);
-    return _achievementsInModel.count() + c_reservedRows;
+int AchievementsModel::rowCount(const QModelIndex &aParent) const {
+    Q_UNUSED(aParent);
+    return achievementsInModel_.count() + c_reservedRows;
 }
 
-QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
-    if (!index.isValid())
+QVariant AchievementsModel::data(const QModelIndex &aIndex, int aRole) const {
+    if (!aIndex.isValid())
         return QVariant();
 
-    if (index.row() >= _achievementsInModel.size() + c_reservedRows)
+    if (aIndex.row() >= achievementsInModel_.size() + c_reservedRows)
         return QVariant();
 
-    if (index.row() < c_reservedRows) {
-        switch (role) {
+    if (aIndex.row() < c_reservedRows) {
+        switch (aRole) {
         case Qt::DecorationRole: {
-            switch (index.column()) {
-            case AchievementAppid:
-            case AchievementIndex:
-            case AchievementIcon:
-            case AchievementTitle:
-            case AchievementDescription:
-            case AchievementCommentss:
-            case AchievementWorld: {
+            switch (aIndex.column()) {
+            case Appid:
+            case Index:
+            case Icon:
+            case Title:
+            case Description:
+            case Comments:
+            case World: {
                 return QVariant();
             }
             default: {
-                return _profiles[index.column() - AchievementCount].pixmapAvatar();
+                return profiles_[aIndex.column() - Count].pixmapAvatar();
             }
             }
             break;
         }
         case Qt::ToolTipRole: {
-            switch (index.column()) {
-            case AchievementAppid:
-            case AchievementIndex:
-            case AchievementIcon:
-            case AchievementTitle:
-            case AchievementDescription:
-            case AchievementCommentss:
-            case AchievementWorld: {
+            switch (aIndex.column()) {
+            case Appid:
+            case Index:
+            case Icon:
+            case Title:
+            case Description:
+            case Comments:
+            case World: {
                 return QVariant();
             }
             default: {
-                return textToToolTip(_profiles[index.column() - AchievementCount].personaName());
+                return textToToolTip(profiles_[aIndex.column() - Count].personaName());
             }
             }
             break;
@@ -105,49 +111,61 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
         }
     }
 
-    switch (role) {
+    switch (aRole) {
     case Qt::DisplayRole: {
-        switch (index.column()) {
-        case AchievementAppid: {
-            return _achievementsInModel[index.row() - c_reservedRows].schema.apiName();
+        switch (aIndex.column()) {
+        case Appid: {
+            return achievementsInModel_[aIndex.row() - c_reservedRows].schema.apiName();
         }
-        case AchievementIndex: {
-            return index.row() - c_reservedRows;
+        case Index: {
+            return aIndex.row() - c_reservedRows;
         }
-        case AchievementIcon: {
+        case Icon: {
             return QVariant();
         }
-        case AchievementTitle: {
-            return _achievementsInModel[index.row() - c_reservedRows].schema.displayName();
+        case Title: {
+            return achievementsInModel_[aIndex.row() - c_reservedRows].schema.displayName();
         }
-        case AchievementDescription: {
-            return _achievementsInModel[index.row() - c_reservedRows].schema.description();
+        case Description: {
+            return achievementsInModel_[aIndex.row() - c_reservedRows].schema.description();
         }
-        case AchievementCommentss: {
-//            if (_achievementsInModel[index.row() - c_reservedRows].comment != QStringList() &&
-//                _achievementsInModel[index.row() - c_reservedRows].comment != QStringList() << "") {
-//                return 1;
-//            } else {
-//                return 0;
-//            }
-            return QVariant();
+        case Comments: {
+            if (achievementsInModel_[aIndex.row() - c_reservedRows].comment != QStringList() &&
+                achievementsInModel_[aIndex.row() - c_reservedRows].comment != QStringList() << "") {
+                if (achievementsInModel_[aIndex.row() - c_reservedRows].comment.count() > 1) {
+                    return achievementsInModel_[aIndex.row() - c_reservedRows].comment[0] + tr("\n...");
+                } else {
+                    return achievementsInModel_[aIndex.row() - c_reservedRows].comment[0];
+                }
+            } else {
+                return tr("-");
+            }
         }
-        case AchievementWorld: {
-            return QString{"%1"}.arg(_achievementsInModel[index.row() - c_reservedRows].percent.percent(), 5, 'f', 1, '0') + "%";
+        case World: {
+            return QString("%1%").arg(QString::number(achievementsInModel_[aIndex.row() - c_reservedRows].percent.percent(), 'f', 2));
         }
         default: {
-            if (_achievementsInModel[index.row() - c_reservedRows].profiles.size() > (index.column() - AchievementCount)) {
-                auto achievement = _achievementsInModel[index.row() - c_reservedRows].profiles[index.column() - AchievementCount];
-                if (achievement.achieved() == 1) {
-                    return achievement.unlockTime().toString(Settings::dateTimeFormatShort());
-                } else {
+            if (achievementsInModel_[aIndex.row() - c_reservedRows].profiles.size() > (aIndex.column() - Count)) {
+                auto achievement = achievementsInModel_[aIndex.row() - c_reservedRows].profiles[aIndex.column() - Count];
+                switch(achievement.achieved()) {
+                case -1: {
+                    return achievement.error();
+                }
+                case 0: {
                     return tr("Не получено");
+                }
+                case 1: {
+                    return achievement.unlockTime().toString(Settings::dateTimeFormatShort());
+                }
+                default: {
+                    return tr("undefined");
+                }
                 }
             } else {
                 qWarning() << "no profile from achievements need"
-                           << (index.column() - AchievementCount + 1)
+                           << (aIndex.column() - Count + 1)
                            << "have"
-                           << _achievementsInModel[index.row() - c_reservedRows].profiles.size();
+                           << achievementsInModel_[aIndex.row() - c_reservedRows].profiles.size();
                 return QVariant();
             }
         }
@@ -155,17 +173,9 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
         break;
     }
     case Qt::DecorationRole: {
-        switch (index.column()) {
-        case AchievementIcon: {
-            return _achievementsInModel[index.row() - c_reservedRows].icon;
-        }
-        case AchievementCommentss: {
-            if (_achievementsInModel[index.row() - c_reservedRows].comment != QStringList() &&
-                _achievementsInModel[index.row() - c_reservedRows].comment != QStringList() << "") {
-                return QPixmap(Images::isComment()).scaled(32, 32);
-            } else {
-                return QPixmap(Images::isNotComment()).scaled(32, 32);
-            }
+        switch (aIndex.column()) {
+        case Icon: {
+            return achievementsInModel_[aIndex.row() - c_reservedRows].icon;
         }
         default: {
             return QVariant();
@@ -174,12 +184,12 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
         break;
     }
     case Qt::ToolTipRole: {
-        switch (index.column()) {
-        case AchievementTitle: {
-            return textToToolTip(_achievementsInModel[index.row() - c_reservedRows].schema.displayName());
+        switch (aIndex.column()) {
+        case Title: {
+            return textToToolTip(achievementsInModel_[aIndex.row() - c_reservedRows].schema.displayName());
         }
-        case AchievementDescription: {
-            return textToToolTip(_achievementsInModel[index.row() - c_reservedRows].schema.description());
+        case Description: {
+            return textToToolTip(achievementsInModel_[aIndex.row() - c_reservedRows].schema.description());
         }
         default: {
             return QVariant();
@@ -188,28 +198,34 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
         break;
     }
     case Qt::ForegroundRole: {
-        switch (index.column()) {
-        case AchievementAppid:
-        case AchievementIndex:
-        case AchievementIcon:
-        case AchievementTitle:
-        case AchievementDescription:
-        case AchievementCommentss:
-        case AchievementWorld: {
+        switch (aIndex.column()) {
+        case Appid:
+        case Index:
+        case Icon:
+        case Title:
+        case Description:
+        case World: {
+            return QVariant();
+        }
+        case Comments: {
+            if (achievementsInModel_[aIndex.row() - c_reservedRows].comment == QStringList() ||
+                achievementsInModel_[aIndex.row() - c_reservedRows].comment == QStringList() << "") {
+                return QColor(55, 55, 150);
+            }
             return QVariant();
         }
         default: {
-            if (_achievementsInModel[index.row() - c_reservedRows].profiles.size() > (index.column() - AchievementCount)) {
-                if (_achievementsInModel[index.row() - c_reservedRows].profiles[index.column() - AchievementCount].achieved() == 1) {
+            if (achievementsInModel_[aIndex.row() - c_reservedRows].profiles.size() > (aIndex.column() - Count)) {
+                if (achievementsInModel_[aIndex.row() - c_reservedRows].profiles[aIndex.column() - Count].achieved() == 1) {
                     return c_achievedColor;
                 } else {
                     return c_notAchievedColor;
                 }
             } else {
                 qWarning() << "no profile from achievements need"
-                           << (index.column() - AchievementCount + 1)
+                           << (aIndex.column() - Count + 1)
                            << "have"
-                           << _achievementsInModel[index.row() - c_reservedRows].profiles.size();
+                           << achievementsInModel_[aIndex.row() - c_reservedRows].profiles.size();
                 return QVariant();
             }
             break;
@@ -218,16 +234,16 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
         break;
     }
     case Qt::TextAlignmentRole: {
-        switch (index.column()) {
-        case AchievementAppid:
-        case AchievementIndex:
-        case AchievementIcon:
-        case AchievementTitle:
-        case AchievementDescription:
-        case AchievementCommentss: {
+        switch (aIndex.column()) {
+        case Appid:
+        case Index:
+        case Icon:
+        case Title:
+        case Description:
+        case Comments: {
             return QVariant();
         }
-        case AchievementWorld: {
+        case World: {
             return QVariant(Qt::AlignVCenter | Qt::AlignHCenter);
         }
         default: {
@@ -241,165 +257,178 @@ QVariant AchievementsModel::data(const QModelIndex &index, int role) const {
     }
 }
 
-QVariant AchievementsModel::headerData(int section, Qt::Orientation orientation, int role) const {
-    if (role != Qt::DisplayRole)
+QVariant AchievementsModel::headerData(int aSection, Qt::Orientation aOrientation, int aRole) const {
+    if (aRole != Qt::DisplayRole)
         return QVariant();
 
-    if (orientation == Qt::Horizontal)
-        switch (section) {
-        case AchievementAppid: {
+    if (aOrientation == Qt::Horizontal)
+        switch (aSection) {
+        case Appid: {
             return tr("ID");
         }
-        case AchievementIndex: {
+        case Index: {
             return tr("");
         }
-        case AchievementIcon: {
+        case Icon: {
             return tr("");
         }
-        case AchievementTitle: {
+        case Title: {
             return tr("Название");
         }
-        case AchievementDescription: {
+        case Description: {
             return tr("Описание");
         }
-        case AchievementCommentss: {
+        case Comments: {
             return tr("");
         }
-        case AchievementWorld: {
+        case World: {
             return tr("По миру");
         }
         default: {
-            if (section - AchievementCount >= 0 && section - AchievementCount < _profiles.count()) {
-                return _profiles[section - AchievementCount].personaName();
+            if (aSection - Count >= 0 && aSection - Count < profiles_.count()) {
+                return profiles_[aSection - Count].personaName();
             } else {
                 return QVariant();
             }
         }
         }
     else
-        return QString("%1").arg(section);
+        return QString("%1").arg(aSection);
 }
 
-QString AchievementsModel::achievementId(const QModelIndex &index) const {
-    return _achievementsInModel[index.row() - c_reservedRows].schema.apiName();
+AchievementID AchievementsModel::achievementId(const QModelIndex &aIndex) const {
+    return achievementsInModel_[aIndex.row() - c_reservedRows].schema.apiName();
 }
 
-bool AchievementsModel::hasChildren(const QModelIndex &parent) const {
-    Q_UNUSED(parent);
-    return _achievementsInModel.count() > 0;
+bool AchievementsModel::hasChildren(const QModelIndex &aParent) const {
+    Q_UNUSED(aParent);
+    return achievementsInModel_.count() > 0;
 }
 
-Qt::ItemFlags AchievementsModel::flags(const QModelIndex &index) const {
-    if (!index.isValid())
+Qt::ItemFlags AchievementsModel::flags(const QModelIndex &aIndex) const {
+    if (!aIndex.isValid())
         return Qt::ItemIsEnabled;
 
-    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+    return QAbstractItemModel::flags(aIndex) | Qt::ItemIsEditable;
 }
 
-bool AchievementsModel::insertColumn(int column, int count, const QModelIndex &parent) {
-    Q_UNUSED(column);
-    Q_UNUSED(count);
-    Q_UNUSED(parent);
+bool AchievementsModel::insertColumn(int aColumn, int aCount, const QModelIndex &aParent) {
+    Q_UNUSED(aColumn);
+    Q_UNUSED(aCount);
+    Q_UNUSED(aParent);
     return false;
 }
 
-bool AchievementsModel::removeColumn(int column, int count, const QModelIndex &parent) {
-    Q_UNUSED(column);
-    Q_UNUSED(count);
-    Q_UNUSED(parent);
+bool AchievementsModel::removeColumn(int aColumn, int aCount, const QModelIndex &aParent) {
+    Q_UNUSED(aColumn);
+    Q_UNUSED(aCount);
+    Q_UNUSED(aParent);
     return false;
 }
 
-SAchievement AchievementsModel::getAchievement(const int &row) const {
-    auto &schema = _achievementsInModel[row].schema;
-    auto &percent = _achievementsInModel[row].percent;
-    auto &player = _achievementsInModel[row].profiles[0];
+SAchievement AchievementsModel::getAchievement(const int &aRow) const {
+    auto &schema = achievementsInModel_[aRow].schema;
+    auto &percent = achievementsInModel_[aRow].percent;
+    auto &player = achievementsInModel_[aRow].profiles[0];
     return SAchievement(schema, player, percent);
 }
 
-SAchievement AchievementsModel::getAchievement(const QModelIndex &index) const {
-    auto &schema = _achievementsInModel[index.row()].schema;
-    auto &percent = _achievementsInModel[index.row()].percent;
-    auto &player = _achievementsInModel[index.row()].profiles[0];
+SAchievement AchievementsModel::getAchievement(const QModelIndex &aIndex) const {
+    auto &schema = achievementsInModel_[aIndex.row()].schema;
+    auto &percent = achievementsInModel_[aIndex.row()].percent;
+    auto &player = achievementsInModel_[aIndex.row()].profiles[0];
     return SAchievement(schema, player, percent);
 }
 
 SAchievements AchievementsModel::getAchievements() const {
     SAchievements achievements;
-    for (const auto &achievement: _achievementsInModel) {
+    for (const auto &achievement: achievementsInModel_) {
         achievements.append(SAchievement(achievement.schema, achievement.profiles[0], achievement.percent));
     }
     return achievements;
 }
 
-int AchievementsModel::getReachedFromProfile(const int &index) {
-    if (index < 0 || index > _profiles.count() || _achievementsInModel.count() == 0) {
+int AchievementsModel::getReachedFromProfile(const int &aIndex) {
+    if (aIndex < 0 || aIndex > profiles_.count() || achievementsInModel_.count() == 0) {
         return -1;
     }
     int result = 0;
-    if (_achievementsInModel[0].profiles[index].achieved() < 0) {
+    if (achievementsInModel_[0].profiles[aIndex].achieved() < 0) {
         return -1;
     }
-    for (const auto &achievement: qAsConst(_achievementsInModel)) {
-        result += achievement.profiles[index].achieved();
+    for (const auto &achievement: qAsConst(achievementsInModel_)) {
+        result += achievement.profiles[aIndex].achieved();
     }
     return result;
 }
 
 int AchievementsModel::getAchievementsCount() {
-    return _achievementsInModel.count();
+    return achievementsInModel_.count();
 }
 
 int AchievementsModel::addProfile(const SProfile &aProfile) {
     beginInsertColumns(QModelIndex(), columnCount(), columnCount());
-    _profiles.append(aProfile);
-    auto players = SAchievementPlayer::load(_gameId, aProfile.steamID());
-    if (players.count() == _achievementsInModel.count()) {
-        for (auto &achievement: _achievementsInModel) {
+    profiles_.append(aProfile);
+    auto players = SAchievementsPlayer(gameId_, aProfile.steamID());
+    if (players.count() == achievementsInModel_.count()) {
+        for (auto &achievement: achievementsInModel_) {
             for (auto &player: players) {
                 if (player.apiName() == achievement.schema.apiName()) {
-                    achievement.profiles.append(std::move(player));
+                    achievement.profiles.append(player);
                     break;
                 }
             }
         }
     } else {
-        for (auto &achievement: _achievementsInModel) {
-            achievement.profiles.append(SAchievementPlayer());
+        for (auto &achievement: achievementsInModel_) {
+            achievement.profiles.append(SAchievementPlayer(players.error()));
         }
     }
     endInsertColumns();
-    return _profiles.count() - 1;
+    return profiles_.count() - 1;
 }
 
-SProfile AchievementsModel::getProfile(const int &index) {
-    return _profiles[index];
+SProfile AchievementsModel::getProfile(const int &aIndex) {
+    return profiles_[aIndex];
+}
+
+int AchievementsModel::getProfileNumber(const ProfileID &aProfileId) {
+    auto iterator = std::find_if(profiles_.begin(),
+                                 profiles_.end(),
+                                 [=](const SProfile &lProfile) {
+                                    return lProfile.steamID() == aProfileId;
+                                 });
+    if (iterator != profiles_.end()) {
+        return iterator - profiles_.begin();
+    } else {
+        return -1;
+    }
 }
 
 void AchievementsModel::removeProfile(const SProfile &aProfile) {
     beginRemoveColumns(QModelIndex(), columnCount() - 1, columnCount() - 1);
-    auto iterator = std::find_if(_profiles.begin(),
-                                 _profiles.end(),
+    auto iterator = std::find_if(profiles_.begin(),
+                                 profiles_.end(),
                                  [=](const SProfile &lProfile) {
                                     return lProfile.steamID() == aProfile.steamID();
                                 });
-    if (iterator == _profiles.end()) {
+    if (iterator == profiles_.end()) {
         return;
     }
-    int i = iterator - _profiles.begin();
-    for (auto &aim: _achievementsInModel) {
+    int i = iterator - profiles_.begin();
+    for (auto &aim: achievementsInModel_) {
         aim.profiles.removeAt(i);
     }
-    _profiles.removeAt(i);
+    profiles_.removeAt(i);
     endRemoveColumns();
 //    emit dataChanged(index(0, 0), index(rowCount(), columnCount()));
 }
 
 void AchievementsModel::clearProfiles() {
-    while (_profiles.count() > 1) {
-        _profiles.removeAt(1);
+    while (profiles_.count() > 1) {
+        profiles_.removeAt(1);
     }
-    for (auto &achievement: _achievementsInModel) {
+    for (auto &achievement: achievementsInModel_) {
         while (achievement.profiles.count() > 1) {
             achievement.profiles.removeAt(1);
         }
@@ -407,9 +436,9 @@ void AchievementsModel::clearProfiles() {
 }
 
 void AchievementsModel::updateComments() {
-    auto comments = AchievementComments(_userId).getCommentsFromGame(_userId, _gameId);
+    auto comments = AchievementComments(profileId_).getCommentsFromGame(profileId_, gameId_);
     int progress = 0;
-    for(auto &achievement: _achievementsInModel) {
+    for(auto &achievement: achievementsInModel_) {
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=](const AchievementComment &achievementComment) {
@@ -421,17 +450,17 @@ void AchievementsModel::updateComments() {
         } else {
             achievement.comment = QStringList();
         }
-        emit s_progress(tr("Обновление комментариев"), ++progress, _achievementsInModel.count());
+        emit s_progress(tr("Обновление комментариев"), ++progress, achievementsInModel_.count());
     }
 }
 
-void AchievementsModel::sort(int column, Qt::SortOrder order) {
-    switch (column) {
-    case AchievementAppid: {
-        switch(order) {
+void AchievementsModel::sort(int aColumn, Qt::SortOrder aOrder) {
+    switch (aColumn) {
+    case Appid: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.schema.apiName() < a2.schema.apiName();
                       }
@@ -439,8 +468,8 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.schema.apiName() > a2.schema.apiName();
                       }
@@ -450,17 +479,17 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
         }
         break;
     }
-    case AchievementIndex: {
+    case Index: {
         break;
     }
-    case AchievementIcon: {
+    case Icon: {
         break;
     }
-    case AchievementTitle: {
-        switch(order) {
+    case Title: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.schema.displayName() < a2.schema.displayName();
                       }
@@ -468,8 +497,8 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.schema.displayName() > a2.schema.displayName();
                       }
@@ -479,11 +508,11 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
         }
         break;
     }
-    case AchievementDescription: {
-        switch(order) {
+    case Description: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.schema.description() < a2.schema.description();
                       }
@@ -491,8 +520,8 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.schema.description() > a2.schema.description();
                       }
@@ -502,11 +531,11 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
         }
         break;
     }
-    case AchievementCommentss: {
-        switch(order) {
+    case Comments: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return (a1.comment != QStringList() &&
                                 a1.comment != QStringList() << "" ? 1 : 0) <
@@ -517,8 +546,8 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return (a1.comment != QStringList() &&
                                 a1.comment != QStringList() << "" ? 1 : 0) >
@@ -531,11 +560,11 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
         }
         break;
     }
-    case AchievementWorld: {
-        switch(order) {
+    case World: {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.percent.percent() < a2.percent.percent();
                       }
@@ -543,8 +572,8 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
                       [](AchievementInModel &a1, AchievementInModel &a2) {
                         return a1.percent.percent() > a2.percent.percent();
                       }
@@ -555,21 +584,21 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
         break;
     }
     default: {
-        switch(order) {
+        switch(aOrder) {
         case Qt::SortOrder::AscendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
-                      [&column](AchievementInModel &a1, AchievementInModel &a2) {
-                        return a1.profiles[column - AchievementCount].unlockTime() < a2.profiles[column - AchievementCount].unlockTime();
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
+                      [&aColumn](AchievementInModel &a1, AchievementInModel &a2) {
+                        return a1.profiles[aColumn - Count].unlockTime() < a2.profiles[aColumn - Count].unlockTime();
                       }
                     );
             break;
         }
         case Qt::SortOrder::DescendingOrder: {
-            std::sort(_achievementsInModel.begin(),
-                      _achievementsInModel.end(),
-                      [&column](AchievementInModel &a1, AchievementInModel &a2) {
-                        return a1.profiles[column - AchievementCount].unlockTime() > a2.profiles[column - AchievementCount].unlockTime();
+            std::sort(achievementsInModel_.begin(),
+                      achievementsInModel_.end(),
+                      [&aColumn](AchievementInModel &a1, AchievementInModel &a2) {
+                        return a1.profiles[aColumn - Count].unlockTime() > a2.profiles[aColumn - Count].unlockTime();
                       }
                     );
             break;
@@ -581,158 +610,55 @@ void AchievementsModel::sort(int column, Qt::SortOrder order) {
     emit dataChanged(index(0, 0), index(rowCount(), columnCount()));
 }
 
-ProxyModelAchievements::ProxyModelAchievements(QObject *aParent): QSortFilterProxyModel(aParent),
-_name(""), _reached(0) {
+CategoriesFilter::CategoriesFilter() {
 
 }
 
-bool ProxyModelAchievements::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
-    QModelIndex indTitle = sourceModel()->index(aSource_row, AchievementTitle, aSource_parent);
-    QModelIndex indDescription = sourceModel()->index(aSource_row, AchievementDescription, aSource_parent);
-    QModelIndex indReached = sourceModel()->index(aSource_row, AchievementReachedMy, aSource_parent);
-    QModelIndex indId = sourceModel()->index(aSource_row, AchievementAppid, aSource_parent);
+CategoriesFilter::CategoriesFilter(QMap<QString, QList<Category *> > aCategories): categories_(aCategories) {
 
-    AchievementID id = sourceModel()->data(indId, Qt::ItemDataRole::DisplayRole).toString();
+}
 
-    if (_name != "" &&
-        sourceModel()->data(indTitle, Qt::ItemDataRole::DisplayRole).toString().toLower().indexOf(_name) == -1 &&
-        sourceModel()->data(indDescription, Qt::ItemDataRole::DisplayRole).toString().toLower().indexOf(_name) == -1) {
+bool CategoriesFilter::addCategory(Category *aCategory) {
+    if (aCategory == nullptr) {
         return false;
     }
-    switch (_reached) {
-    case -1: {
-        if (QDateTime::fromString(sourceModel()->data(indReached, Qt::ItemDataRole::DisplayRole).toString(), Settings::dateTimeFormatShort()).isValid()) {
-            return false;
-        }
-        break;
+    QStringList list = aCategory->getPathFromRoot();
+    for(QString &category: list) {
+        category.replace(".", "..");
     }
-    case 0: {
-        break;
-    }
-    case 1: {
-        if (!QDateTime::fromString(sourceModel()->data(indReached, Qt::ItemDataRole::DisplayRole).toString(), Settings::dateTimeFormatShort()).isValid()) {
-            return false;
-        }
-        break;
-    }
-    default: {
-
-    }
-    }
-    if (!_favorite.isEmpty() && _favorite.indexOf(id) == -1) {
-        return false;
-    }
-
-    if (_categories.getCategories().size() > 0) {
-        return std::any_of(_preCategories.begin(),
-                           _preCategories.end(),
-                           [&](const QString &lAchievement) {
-                                return id == lAchievement;
-                           });
-    } else {
-        return true;
-    }
-}
-
-QVariant ProxyModelAchievements::headerData(int section, Qt::Orientation orientation, int role) const {
-    return sourceModel()->headerData(section, orientation, role);
-}
-
-AchievementsModel *ProxyModelAchievements::sourceModel() const {
-    return static_cast<AchievementsModel*>(QSortFilterProxyModel::sourceModel());
-}
-
-void ProxyModelAchievements::setSourceModel(AchievementsModel *sourceModel) {
-    QSortFilterProxyModel::setSourceModel(sourceModel);
-}
-
-void ProxyModelAchievements::setName(const QString &aNewName) {
-    if(_name != aNewName)
-        _name = aNewName;
-    invalidateFilter();
-}
-
-void ProxyModelAchievements::setReached(int aNewReached) {
-    if(_reached != aNewReached)
-        _reached = aNewReached;
-    invalidateFilter();
-}
-
-void ProxyModelAchievements::setCategories(const CategoriesFilter &aNewCategories) {
-    _categories = aNewCategories;
-
-    QList<QStringList> pre;
-    for (const auto &oneLineCategories: _categories.getCategories()) {
-        QStringList orList;
-        for (const auto &category: oneLineCategories) {
-            for (const auto &achievement: category) {
-                orList << achievement;
-            }
-        }
-        pre << orList;
-    }
-
-    QStringList result;
-    if (pre.count() > 0) {
-        result = pre.at(0);
-        for (auto &resultAchievement: result) {
-            for (auto &list: pre) {
-                bool isExist = std::any_of(list.begin(),
-                                            list.end(),
-                                            [&](const QString &lAchievementID) {
-                                                return lAchievementID == resultAchievement;
-                                            });
-                if (!isExist) {
-                    result.removeOne(resultAchievement);
-                    break;
-                }
-            }
-        }
-    }
-
-    _preCategories = result;
-
-    invalidateFilter();
-}
-
-void ProxyModelAchievements::setFavorites(const QStringList &aNewFavorites) {
-    if(_favorite != aNewFavorites)
-        _favorite = aNewFavorites;
-    invalidateFilter();
-}
-
-void ProxyModelAchievements::clear() {
-    _name.clear();
-    _reached = 0;
-    _categories.clear();
-    _favorite.clear();
-}
-
-bool CategoriesFilter::addCategory(QString aParent, const Category2 &aCategory) {
-    auto iteratorOneParent = categories_.find(aParent);
+    QString parent = list.join(".");
+    auto iteratorOneParent = categories_.find(parent);
     if (iteratorOneParent != categories_.end()) {
         iteratorOneParent.value().append(aCategory);
         return true;
     } else {
-        categories_.insert(aParent, QList<Category2>{aCategory});
+        categories_.insert(parent, QList<Category*>{aCategory});
         return true;
     }
     return false;
 }
 
-bool CategoriesFilter::removeCategory(QString aParent, Category2 aCategory) {
-    auto iteratorOneParent = categories_.find(aParent);
+bool CategoriesFilter::removeCategory(Category *aCategory) {
+    if (aCategory == nullptr) {
+        return false;
+    }
+    QStringList list = aCategory->getPathFromRoot();
+    for(QString &category: list) {
+        category.replace(".", "..");
+    }
+    QString parent = list.join(".");
+    auto iteratorOneParent = categories_.find(parent);
     if (iteratorOneParent != categories_.end()) {
         auto &listCategories = iteratorOneParent.value();
         auto iteratorCategory = std::find_if(listCategories.begin(),
                                              listCategories.end(),
-                                             [&](const Category2 &lCategory) {
+                                             [&](Category *lCategory) {
                                                 return lCategory == aCategory;
                                             });
         if (iteratorCategory != listCategories.end()) {
             listCategories.removeAt(iteratorCategory - listCategories.begin());
             if (listCategories.count() == 0) {
-                categories_.remove(aParent);
+                categories_.remove(parent);
             }
             return true;
         } else {
@@ -747,12 +673,16 @@ void CategoriesFilter::clear() {
     categories_.clear();
 }
 
+QMap<QString, QList<Category *> > CategoriesFilter::getCategories() const {
+    return categories_;
+}
+
 QSet<AchievementID> CategoriesFilter::getAchievementIDs() {
     QList<QSet<AchievementID>> list;
     for (auto &oneParentCategories: categories_) {
         QSet<AchievementID> set;
-        for (const Category2 &category: oneParentCategories) {
-            for (const AchievementID &achievement: category) {
+        for (Category *category: oneParentCategories) {
+            for (const AchievementID &achievement: *category) {
                 set.insert(achievement);
             }
         }
@@ -783,50 +713,124 @@ QSet<AchievementID> CategoriesFilter::getAchievementIDs() {
     }
 }
 
-FilterModelAchievements::FilterModelAchievements(int aRow, QObject *parent): FilterModel(aRow, 4, parent) {
+FilterModelAchievements::FilterModelAchievements(int aRow, QObject *aParent): FilterModel(aRow, 4, aParent) {
     columns_.insert("name", 0);
     columns_.insert("reached", 1);
     columns_.insert("categories", 2);
     columns_.insert("favorite", 3);
 }
 
-bool FilterModelAchievements::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const {
-    Q_UNUSED(source_parent);
-    return filter_[source_row];
+bool FilterModelAchievements::filterAcceptsRow(int aSource_row, const QModelIndex &aSource_parent) const {
+    Q_UNUSED(aSource_parent);
+    if (aSource_row < c_reservedRows) {
+        return true;
+    }
+    return filter_[aSource_row];
 }
 
-void FilterModelAchievements::setSourceModel(AchievementsModel *sourceModel) {
-    FilterModel::setSourceModel(sourceModel);
+bool FilterModelAchievements::lessThan(const QModelIndex &aLeft, const QModelIndex &aRight) const {
+    if (aLeft.column() == World && aRight.column() == World) {
+        QVariant leftData = sourceModel()->data(aLeft);
+        QVariant rightData = sourceModel()->data(aRight);
+        double iLeft = leftData.toString().left(leftData.toString().indexOf("%")).toDouble();
+        double iRight = rightData.toString().left(rightData.toString().indexOf("%")).toDouble();
+        return iLeft < iRight;
+    }
+    return QSortFilterProxyModel::lessThan(aLeft, aRight);
+}
+
+int FilterModelAchievements::addProfile(const SProfile &aProfile) {
+    int number = sourceModel()->addProfile(aProfile);
+    static int column = 3;
+    columns_.insert(aProfile.steamID(), ++column);
+    filter_.insertCol(column);
+    return number;
+}
+
+SProfile FilterModelAchievements::getProfile(const int &aIndex) {
+    return sourceModel()->getProfile(aIndex);
+}
+
+void FilterModelAchievements::removeProfile(const SProfile &aProfile) {
+    sourceModel()->removeProfile(aProfile);
+    int filterColumnReached = columns_.value(aProfile.steamID());
+    filter_.disableCol(filterColumnReached);
+}
+
+void FilterModelAchievements::setSourceModel(AchievementsModel *aSourceModel) {
+    connect(aSourceModel, &AchievementsModel::s_finished, this, [=, this]() {
+        if (sourceModel() != nullptr) {
+            filter_.setRows(sourceModel()->rowCount());
+            forceInvalidate();
+            emit s_modelFinished();
+            emit s_rowsUpdated();
+        } else {
+            qWarning() << "in FilterModelAchievements missing sourceModel, but emit 'finished'";
+        }
+    });
+    FilterModel::setSourceModel(aSourceModel);
 }
 
 AchievementsModel *FilterModelAchievements::sourceModel() const {
-    return static_cast<AchievementsModel*>(FilterModel::sourceModel());
+    return dynamic_cast<AchievementsModel*>(FilterModel::sourceModel());
 }
 
 void FilterModelAchievements::setName(const QString &aNewName) {
-    if(_name == aNewName)
+    if(name_ == aNewName)
         return;
-    _name = aNewName;
+    name_ = aNewName;
     int filterColumnName = columns_.value("name");
     for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-        QModelIndex titleIndex = sourceModel()->index(r, AchievementTitle);
-        QModelIndex descriptionIndex = sourceModel()->index(r, AchievementDescription);
-        bool isTitleInclude = sourceModel()->data(titleIndex).toString().toLower().indexOf(_name.toLower()) >= 0;
-        bool isDescriptionInclude = sourceModel()->data(descriptionIndex).toString().toLower().indexOf(_name.toLower()) >= 0;
+        QModelIndex titleIndex = sourceModel()->index(r, Title);
+        QModelIndex descriptionIndex = sourceModel()->index(r, Description);
+        bool isTitleInclude = sourceModel()->data(titleIndex).toString().toLower().indexOf(name_.toLower()) >= 0;
+        bool isDescriptionInclude = sourceModel()->data(descriptionIndex).toString().toLower().indexOf(name_.toLower()) >= 0;
         filter_.setData(r, filterColumnName, isTitleInclude || isDescriptionInclude);
     }
     invalidateFilter();
 }
 
 void FilterModelAchievements::setReached(int aNewReached) {
-    if(_reached == aNewReached)
+    if(reached_ == aNewReached)
         return;
-    _reached = aNewReached;
+    reached_ = aNewReached;
     int filterColumnReached = columns_.value("reached");
     for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-        QModelIndex reachedIndex = sourceModel()->index(r, AchievementReachedMy);
+        QModelIndex reachedIndex = sourceModel()->index(r, ReachedMy);
         bool isApply = true;
-        switch (_reached) {
+        switch (reached_) {
+        case -1: {
+            if (QDateTime::fromString(sourceModel()->data(reachedIndex).toString(), Settings::dateTimeFormatShort()).isValid()) {
+                isApply = false;
+            }
+            break;
+        }
+        case 0: {
+            break;
+        }
+        case 1: {
+            if (!QDateTime::fromString(sourceModel()->data(reachedIndex).toString(), Settings::dateTimeFormatShort()).isValid()) {
+                isApply = false;
+            }
+            break;
+        }
+        default: {
+
+        }
+        }
+        filter_.setData(r, filterColumnReached, isApply);
+    }
+    invalidateFilter();
+}
+
+void FilterModelAchievements::setReachedFriend(int aNewReached, const ProfileID &aProfileId) {
+    profiles_.insert(aProfileId, aNewReached);
+    int filterColumnReached = columns_.value(aProfileId);
+    int columnNumber = Count + sourceModel()->getProfileNumber(aProfileId);
+    for (int r = 0; r < sourceModel()->rowCount(); ++r) {
+        QModelIndex reachedIndex = sourceModel()->index(r, columnNumber);
+        bool isApply = true;
+        switch (aNewReached) {
         case -1: {
             if (QDateTime::fromString(sourceModel()->data(reachedIndex).toString(), Settings::dateTimeFormatShort()).isValid()) {
                 isApply = false;
@@ -852,12 +856,12 @@ void FilterModelAchievements::setReached(int aNewReached) {
 }
 
 void FilterModelAchievements::setCategories(const CategoriesFilter &aNewCategories) {
-    _categories = aNewCategories;
-    auto ids = _categories.getAchievementIDs();
+    categories_ = aNewCategories;
+    auto ids = categories_.getAchievementIDs();
     int filterColumnCategories = columns_.value("categories");
-    if (ids.count() > 0) {
+    if (categories_.getCategories().count() > 0) {
         for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex appIdIndex = sourceModel()->index(r, AchievementAppid);
+            QModelIndex appIdIndex = sourceModel()->index(r, Appid);
             bool isApply = ids.find(sourceModel()->data(appIdIndex).toString()) != ids.end();
             filter_.setData(r, filterColumnCategories, isApply);
         }
@@ -867,26 +871,30 @@ void FilterModelAchievements::setCategories(const CategoriesFilter &aNewCategori
     invalidateFilter();
 }
 
+CategoriesFilter FilterModelAchievements::getCategories() const {
+    return categories_;
+}
+
 void FilterModelAchievements::setFavorites(const QStringList &aNewFavorites) {
-    if(_favorite == aNewFavorites)
+    if(favorite_ == aNewFavorites)
         return;
-    _favorite = aNewFavorites;
+    favorite_ = aNewFavorites;
     int filterColumnFavorite = columns_.value("favorite");
-    if (_favorite.isEmpty()) {
+    if (favorite_.isEmpty()) {
         filter_.clearCol(filterColumnFavorite);
     } else {
         for (int r = 0; r < sourceModel()->rowCount(); ++r) {
-            QModelIndex appIdIndex = sourceModel()->index(r, AchievementAppid);
-            filter_.setData(r, filterColumnFavorite, _favorite.indexOf(sourceModel()->data(appIdIndex).toString()) >= 0);
+            QModelIndex appIdIndex = sourceModel()->index(r, Appid);
+            filter_.setData(r, filterColumnFavorite, favorite_.indexOf(sourceModel()->data(appIdIndex).toString()) >= 0);
         }
     }
     invalidateFilter();
 }
 
 void FilterModelAchievements::clear() {
-    _name.clear();
-    _reached = 0;
-    _categories.clear();
-    _favorite.clear();
+    name_.clear();
+    reached_ = 0;
+    categories_.clear();
+    favorite_.clear();
     filter_.clear();
 }

@@ -13,7 +13,7 @@ FormFriendItemCompare::FormFriendItemCompare(const SProfile &steamFriend, QListW
     connect(ui->ButtonDelete, &QPushButton::clicked, this, [&](){
         emit s_delete();
     });
-    connect(ui->Filter, &FormReachedFilter::s_radioButtonChange, this ,[&](ReachedType type) {
+    connect(ui->Filter, &ButtonReachedType::s_radioButtonChange, this ,[&](ReachedType type) {
         emit s_filterChanged(_steamProfile, type);
     });
 }

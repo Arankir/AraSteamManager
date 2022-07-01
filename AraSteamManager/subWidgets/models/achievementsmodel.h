@@ -1,37 +1,36 @@
 #ifndef ACHIEVEMENTSMODEL_H
 #define ACHIEVEMENTSMODEL_H
 
-#include <QAbstractTableModel>
-#include <QObject>
-#include <QSortFilterProxyModel>
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/files/comments.h"
-#include "classes/common/generalfunctions.h"
-#include "classes/files/achievementscategory.h"
+#include "classes/files/category.h"
+#include "subWidgets/models/filters.h"
 
-enum modelAchievementsColumns {
-    AchievementAppid         = 0,
-    AchievementIndex         = 1,
-    AchievementIcon          = 2,
-    AchievementTitle         = 3,
-    AchievementDescription   = 4,
-    AchievementCommentss      = 5,
-    AchievementWorld         = 6,
-    AchievementReachedMy     = 7,
-    AchievementCount         = 7
-};
+namespace achievementsModel {
+    enum Columns {
+        Appid       = 0,
+        Index       = 1,
+        Icon        = 2,
+        Title       = 3,
+        Description = 4,
+        Comments    = 5,
+        World       = 6,
+        ReachedMy   = 7,
+        Count       = 7
+    };
+}
 
 class AchievementsModel : public QAbstractTableModel {
     Q_OBJECT
 public:
-    AchievementsModel(QObject *parent = nullptr): QAbstractTableModel(parent) {};
-    void setAchievements(const ProfileID &userId, const GameID &gameId);
+    AchievementsModel(QObject *parent = nullptr);
+    void setAchievements(const ProfileID &profileId, const GameID &gameId);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    QString achievementId(const QModelIndex &index) const;
+    AchievementID achievementId(const QModelIndex &index) const;
     bool hasChildren(const QModelIndex &parent) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
     bool insertColumn(int column, int count, const QModelIndex &parent = QModelIndex());
@@ -44,7 +43,8 @@ public:
     int getAchievementsCount();
 
     int addProfile(const SProfile &profile);
-    SProfile getProfile(const int &);
+    SProfile getProfile(const int &index);
+    int getProfileNumber(const ProfileID &profileId);
     void removeProfile(const SProfile &profile);
     void clearProfiles();
 
@@ -64,94 +64,74 @@ private:
         SAchievementPercentage percent;
         QList<SAchievementPlayer> profiles;
 
-        friend QDebug operator<<(QDebug dbg, const AchievementInModel &a) {
-            dbg.nospace() << "AchievementInModel" << "(" << a.schema.apiName() << a.percent.percent() << "profiles(";
-            for (auto &profile: a.profiles) {
-                dbg.nospace() << profile.apiName() << profile.achieved() << ",";
-            }
-            dbg.nospace() << "))\n";;
+        friend QDebug operator<<(QDebug dbg, const AchievementInModel &achievement) {
+            QStringList profiles = std::accumulate(achievement.profiles.begin(),
+                                               achievement.profiles.end(),
+                                               QStringList(),
+                                               [=](QStringList line, const SAchievementPlayer &lPlayer) {
+                return std::move(line) << (lPlayer.apiName() + " " + QString::number(lPlayer.achieved()));
+            });
+            dbg.nospace() << "AchievementInModel" << "(" << achievement.schema.apiName() << " " << achievement.percent.percent() << " "
+                          << "profiles(" << profiles.join(", ") << "))\n";;
             return dbg.space();
         }
     };
 
-    ProfileID _userId;
-    GameID _gameId;
+    ProfileID profileId_;
+    GameID gameId_;
 
-    SProfiles _profiles;
-    QList<AchievementInModel> _achievementsInModel;
+    SProfiles profiles_;
+    QList<AchievementInModel> achievementsInModel_;
 };
 
 class CategoriesFilter {
 public:
-    CategoriesFilter() {};
-    CategoriesFilter(QMap<QString, QList<Category2>> categories): categories_(categories) {};
-    bool addCategory(QString parent, const Category2 &category);
-    bool removeCategory(QString parent, Category2 category);
+    CategoriesFilter();
+    CategoriesFilter(QMap<QString, QList<Category *>> categories);
+    bool addCategory(Category *category);
+    bool removeCategory(Category *category);
     void clear();
-    QMap<QString, QList<Category2>> getCategories() const {return categories_;}
+    QMap<QString, QList<Category *>> getCategories() const;
     QSet<AchievementID> getAchievementIDs();
 
 private:
-    QMap<QString, QList<Category2>> categories_;
+    QMap<QString, QList<Category *>> categories_;
 };
 
-class ProxyModelAchievements : public QSortFilterProxyModel {
+class FilterModelAchievements : public FilterModel {
     Q_OBJECT
 public:
-    ProxyModelAchievements(QObject* parent = nullptr);
+    FilterModelAchievements(int row = 0, QObject *parent = nullptr);
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     AchievementsModel *sourceModel() const;
     void setSourceModel(AchievementsModel *sourceModel);
 
+    SGame getGame(int index);
+    QStringList getGameComment(int index);
+    QList<SAchievementPlayer> getGameAchievements(int index);
+
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
 public slots:
+    int addProfile(const SProfile &profile);
+    SProfile getProfile(const int &index);
+    void removeProfile(const SProfile &profile);
+
     void setName(const QString &newName);
     void setReached(int newReached);
+    void setReachedFriend(int newReached, const ProfileID &profileId);
     void setCategories(const CategoriesFilter &newCategories);
-    CategoriesFilter getCategories() const {return _categories;}
+    CategoriesFilter getCategories() const;
     void setFavorites(const QStringList &newFavorites);
     void clear();
 
 private:
     void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
 
-    QStringList _preCategories;
-
-    QString _name;
-    int _reached;
-    CategoriesFilter _categories; //QList<QList<QList<QString>>> = (1&2&...)||(n&n2&...)||m||m2... QList<QList<QString>> = (1&2&...) QList<QString> = 1
-    QStringList _favorite;
-};
-#include "subWidgets/models/filters.h"
-class FilterModelAchievements : public FilterModel {
-    Q_OBJECT
-public:
-    FilterModelAchievements(int row = 0, QObject* parent = nullptr);
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-    AchievementsModel *sourceModel() const;
-    void setSourceModel(AchievementsModel *sourceModel);
-
-    SGame getGame(int aIndex);
-    QStringList getGameComment(int aIndex);
-    QList<SAchievementPlayer> getGameAchievements(int aIndex);
-
-public slots:
-    void setName(const QString &newName);
-    void setReached(int newReached);
-    void setCategories(const CategoriesFilter &newCategories);
-    CategoriesFilter getCategories() const {return _categories;}
-    void setFavorites(const QStringList &newFavorites);
-    void clear();
-
-private:
-    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel)};
-
-    QStringList _preCategories;
-
-    QString _name;
-    int _reached;
-    CategoriesFilter _categories; //QList<QList<QList<QString>>> = (1&2&...)||(n&n2&...)||m||m2... QList<QList<QString>> = (1&2&...) QList<QString> = 1
-    QStringList _favorite;
+    QString name_;
+    int reached_;
+    QMap<ProfileID, int> profiles_;
+    CategoriesFilter categories_;
+    QStringList favorite_;
 };
 
 #endif // ACHIEVEMENTSMODEL_H

@@ -123,6 +123,15 @@ void FramelessWindow::clearStatus() {
     _statusProgressBar->setVisible(false);
 }
 
+void FramelessWindow::show() {
+    if (this->isMaximized()) {
+        ui->ButtonMaximize  ->setIcon(QIcon(Images::normalizeWindow()));
+    } else {
+        ui->ButtonMaximize  ->setIcon(QIcon(Images::maximizeWindow()));
+    }
+    QMainWindow::show();
+}
+
 bool FramelessWindow::eventFilter(QObject *o, QEvent*e) {
     Q_UNUSED(o);
     switch (e->type()) {

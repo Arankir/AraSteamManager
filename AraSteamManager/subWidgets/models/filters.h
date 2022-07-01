@@ -64,6 +64,7 @@ public:
     void enableCol(int col);
     void clearCol(int col);
     void clear();
+    QList<bool> enabledCols();
     friend QDebug operator<<(QDebug dbg, const Filter &f) {
         dbg.nospace() << "Filter" << "(";
         for (int r = 0; r < f.rows_; ++r) {
@@ -91,6 +92,7 @@ public:
     void setSourceModel(QAbstractItemModel *sourceModel);
 
 signals:
+    void s_modelFinished();
     void s_rowsUpdated();
 
 protected:

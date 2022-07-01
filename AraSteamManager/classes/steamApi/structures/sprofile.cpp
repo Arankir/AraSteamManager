@@ -185,10 +185,10 @@ SProfile SProfile::loadId(const ProfileID &aProfileId, std::function<void (SProf
     return SProfile();
 }
 
-SProfile SProfile::load(const ProfileID &aProfileId, const LoadType &aType, std::function<void (SProfile)> aCallback) {
+SProfile SProfile::load(const ProfileID &aProfileId, const LoadType &aType, std::function<void (const SProfile &)> aCallback) {
     switch (aType) {
     case LoadType::id: {
-        return SProfile::loadId(aProfileId, nullptr);
+        return SProfile::loadId(aProfileId, aCallback);
         break;
     }
     case LoadType::vanity: {
@@ -234,8 +234,12 @@ QPixmap SProfile::getFrameProfile(const ProfileID &aProfileId) {
     RequestData request;
     request.get(Sapi::avatarFrameUrl(aProfileId), false);
     QString frameUrl = (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("avatar_frame").toObject().value("image_small").toString();
-    QPixmap pix = QPixmap::fromImage(loadImage(Sapi::frameProfileUrl(frameUrl), Paths::imagesProfiles(frameUrl + ".frame", "png"), QSize(64, 64)));
-    return pix;
+    if (!frameUrl.isEmpty()) {
+        QPixmap pix = QPixmap::fromImage(loadImage(Sapi::frameProfileUrl(frameUrl), Paths::imagesProfiles(frameUrl + ".frame", "png"), QSize(64, 64)));
+        return pix;
+    } else {
+        return QPixmap(64, 64);
+    }
 }
 
 QMap<QString, SProfileEquippedItem> SProfile::getEquippedItems(const ProfileID &aProfileId) {

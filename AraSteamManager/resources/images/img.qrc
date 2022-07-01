@@ -218,5 +218,7 @@
         <file>white/achievements/categories/delete_category.png</file>
         <file>white/management/move_in_tree.png</file>
         <file>black/management/move_in_tree.png</file>
+        <file>black/achievements/checkbox/3-states.gif</file>
+        <file>white/achievements/checkbox/3-states.gif</file>
     </qresource>
 </RCC>

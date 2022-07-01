@@ -152,19 +152,21 @@ void Filter::setCols(int aCols) {
 void Filter::insertRow(int aRow) {
     int row = std::min(rows_ - 1, aRow);
     filter_.insert(row, QList<char>(countBites(cols_), 0xFF));
+    ++rows_;
 }
 
 void Filter::removeRow(int aRow) {
     int row = std::min(rows_ - 1, aRow);
     filter_.remove(row);
+    --rows_;
 }
 
 void Filter::insertCol(int aCol) {
-    int col = std::min(cols_ - 1, aCol);
-    bool isNewChar = (((cols_ + 1) / 8) == 0);
+    int col = std::min(cols_, aCol);
+    bool isNewChar = (((cols_ + 1) % 8) == 0);
     for (int r = 0; r < rows_; ++r) {
         if (isNewChar) {
-            filter_.append(QList<char>(countBites(cols_), 0xFF));
+            filter_[r].append(QList<char>(1, 0xFF));
         }
         for (int c = col; c < cols_; ++c) { // Сместить все биты направо
             setDataToBit(filter_[r][(c + 1) / 8], (c + 1), getBit(filter_[r][c / 8], c));
@@ -178,6 +180,7 @@ void Filter::insertCol(int aCol) {
         setDataToBit(checkCols_[(c + 1) / 8], (c + 1), getBit(checkCols_[c / 8], c));
     }
     setBit(checkCols_[col / 8], col);
+    ++cols_;
 }
 
 void Filter::removeCol(int aCol) {
@@ -197,6 +200,7 @@ void Filter::removeCol(int aCol) {
     if (isDeleteChar) {
         checkCols_.remove(cols_);
     }
+    --cols_;
 }
 
 void Filter::disableCol(int aCol) {
@@ -219,6 +223,14 @@ void Filter::clear() {
             filter_[r][c] = 0xFF;
         }
     }
+}
+
+QList<bool> Filter::enabledCols() {
+    QList<bool> list;
+    for (int c = 0; c < cols_; ++c) {
+        list << getBit(checkCols_[c / 8], c);
+    }
+    return list;
 }
 
 QVariant FilterModel::headerData(int section, Qt::Orientation orientation, int role) const {

@@ -10,8 +10,8 @@
 class FileSaveLoad {
 public:
     FileSaveLoad(const QString &aFilePath);
-    void save() const;
-    void load(const QString &savePath);
+    bool save() const;
+    bool load(const QString &savePath);
     virtual void fromJson(const QJsonObject&) = 0;
     virtual QJsonObject toJson() const = 0;
 

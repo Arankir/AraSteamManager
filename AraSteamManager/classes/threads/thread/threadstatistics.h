@@ -48,7 +48,7 @@ class ThreadStatistics : public ThreadLoading {
     Q_OBJECT
 private slots:
     int fill();
-    void onResultAchievements(const QList<SAchievementPlayer> &ach, const SGame &aGame);
+    void onResultAchievements(const SAchievementsPlayer &ach, const SGame &aGame);
     void updateTimes(const QDateTime &unlockedTime);
 
 public:
@@ -63,7 +63,7 @@ signals:
 private:
     Statistics &statistics_;
 
-    int countReachedAchievements(const QList<SAchievementPlayer> &aAchievements, const SGame &aGame);
+    int countReachedAchievements(const SAchievementsPlayer &aAchievements, const SGame &aGame);
 };
 
 #endif // THREADSTATISTICS_H

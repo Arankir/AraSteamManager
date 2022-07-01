@@ -12,13 +12,13 @@ FormFriendsCompare::FormFriendsCompare(QWidget *parent): Form(parent), ui(new Ui
     updateIcons();
     #define Connects {
     connect(ui->CheckBoxCompareIcon, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementIcon, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(achievementsModel::Icon, arg1 == 0);});
     connect(ui->CheckBoxCompareTitle, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementTitle, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(achievementsModel::Title, arg1 == 0);});
     connect(ui->CheckBoxCompareDescription, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementDescription, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(achievementsModel::Description, arg1 == 0);});
     connect(ui->CheckBoxCompareTotalPercent, &QCheckBox::stateChanged, ui->TableViewCompare,
-            [&](int arg1) {ui->TableViewCompare->setColumnHidden(AchievementWorld, arg1 == 0);});
+            [&](int arg1) {ui->TableViewCompare->setColumnHidden(achievementsModel::World, arg1 == 0);});
     connect(ui->ButtonFriendsAll, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsAll);
     connect(ui->ButtonFriendsReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsReached);
     connect(ui->ButtonFriendsNotReached, &QPushButton::clicked, this, &FormFriendsCompare::setFriendsNotReached);
@@ -38,19 +38,19 @@ void FormFriendsCompare::setInitData(const SProfile &profile, const SGame &game,
     _game = game;
 
     ui->TableViewCompare->resizeColumnsToContents();
-    ui->TableViewCompare->setColumnWidth(AchievementTitle, 220);
-    ui->TableViewCompare->setColumnWidth(AchievementDescription, 450);
+    ui->TableViewCompare->setColumnWidth(achievementsModel::Title, 220);
+    ui->TableViewCompare->setColumnWidth(achievementsModel::Description, 450);
     loadingCompare();
 }
 
 void FormFriendsCompare::setModel(QAbstractItemModel *model) {
     _model = model;
     updateFiltersFriends();
-    ui->TableViewCompare->model()->sort(AchievementReachedMy, Qt::SortOrder::DescendingOrder);
-    ui->TableViewCompare->sortByColumn(AchievementWorld, Qt::SortOrder::DescendingOrder);
-    ui->TableViewCompare->setColumnHidden(AchievementAppid, true);
-    ui->TableViewCompare->setColumnHidden(AchievementIndex, true);
-    ui->TableViewCompare->setColumnHidden(AchievementCommentss, true);
+    ui->TableViewCompare->model()->sort(achievementsModel::ReachedMy, Qt::SortOrder::DescendingOrder);
+    ui->TableViewCompare->sortByColumn(achievementsModel::World, Qt::SortOrder::DescendingOrder);
+    ui->TableViewCompare->setColumnHidden(achievementsModel::Appid, true);
+    ui->TableViewCompare->setColumnHidden(achievementsModel::Index, true);
+    ui->TableViewCompare->setColumnHidden(achievementsModel::Comments, true);
     ui->TableViewCompare->resizeRowsToContents();
 }
 
@@ -105,7 +105,7 @@ void FormFriendsCompare::updateFilterFriend(SProfile *aSteamId, const ReachedTyp
     if (_achievementsModel == nullptr) {
         return;
     }
-    for (int i = 0; i < _achievementsModel->columnCount() - AchievementReachedMy; ++i) {
+    for (int i = 0; i < _achievementsModel->columnCount() - achievementsModel::ReachedMy; ++i) {
         if (_achievementsModel->getProfile(i).steamID() == aSteamId->steamID()) {
             switch (aType) {
             case ReachedType::all: {
@@ -209,11 +209,11 @@ void FormFriendsCompare::addFriendToList(const SProfile &aSteamFriend) {
 int FormFriendsCompare::addFriendColumn(const SProfile &aSteamFriend) {
     int index = _achievementsModel->addProfile(aSteamFriend);
     auto filter = new QSortFilterProxyModel();
-    filter->setFilterKeyColumn(index + AchievementCount);
+    filter->setFilterKeyColumn(index + achievementsModel::Count);
     filter->setFilterCaseSensitivity(Qt::CaseInsensitive);
     _filtersFriends.append(filter);
     updateFiltersFriends();
-    ui->TableViewCompare->setColumnWidth(index + AchievementCount - 1, c_friendColumnWidth);
+    ui->TableViewCompare->setColumnWidth(index + achievementsModel::Count - 1, c_friendColumnWidth);
 //    emit s_addedFriend();
     return index;
 }

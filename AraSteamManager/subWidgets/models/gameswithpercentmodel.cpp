@@ -14,15 +14,14 @@ void GamesWithPercentModel::setGames(const SGames &aGames, const ProfileID &aPro
 
     int progress = 0;
     for(auto &game: aGames) {
-        GameWithPercentModelItem item;
-        item.game = game;
-        item.percent = 0.0;
-        item.achievements = SAchievementsPlayer();
+        GameWithPercentModelItem item(game,
+                                      0.0,
+                                      SAchievementsPlayer());
         modelItems_.append(item);
         emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
     for (const auto &gameModel: qAsConst(modelItems_)) { //Загрузка достижений игрока
-        SAchievementPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesWithPercentModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
+        SAchievementsPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesWithPercentModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
     }
 }
 
@@ -242,4 +241,9 @@ double GamesWithPercentModel::getPercent(const int &aRow) const {
 
 SAchievementsPlayer GamesWithPercentModel::getAchievements(const int &aRow) const {
     return modelItems_[aRow].achievements;
+}
+
+GameWithPercentModelItem::GameWithPercentModelItem(const SGame &aGame, const double &aPercent, const SAchievementsPlayer &aAchievements) :
+game(aGame), percent(aPercent), achievements(aAchievements) {
+
 }

@@ -1,25 +1,31 @@
 #include "sachievements.h"
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QVariant>
 
 #define SAchievementStart {
 SAchievement::SAchievement(const SAchievementSchema &aSchema, const SAchievementPlayer &aPlayer, const SAchievementPercentage &aPercent, QObject *aParent):
     Sapi(aParent), schema_(aSchema), percentage_(aPercent), player_(aPlayer) {
-    //qDebug()<<"SAchievement constructor"<<_apiName;
+//    qDebug() << "SAchievement constructor" << apiName();
 }
 
 SAchievement::SAchievement(const SAchievement &aAchievement): Sapi(aAchievement.parent()), schema_(aAchievement.schema_),
     percentage_(aAchievement.percentage_), player_(aAchievement.player_) {
-    //qDebug()<<"SAchievement copy"<<_apiName;
+//    qDebug() << "SAchievement copy" << apiName();
 }
 
 SAchievement::SAchievement(const QJsonObject &aObject, QObject *aParent): Sapi{aParent}, schema_(aObject.value("schema").toObject()),
     percentage_(aObject.value("percent").toObject()), player_(aObject.value("player").toObject()) {
-    //qDebug() << "SAchievement constructor 1" << aObject;
+//    qDebug() << "SAchievement constructor 1" << aObject;
 }
 
-SAchievement::SAchievement(const QString &aText, QObject *aParent): SAchievement(QJsonDocument::fromJson(aText.toUtf8()).object(), aParent) {
-    //qDebug() << "SAchievement constructor 2" << aText;
+SAchievement::SAchievement(const QVariant &aText, QObject *aParent): SAchievement(qvariant_cast<SAchievement>(aText)) {
+//    qDebug() << "SAchievement constructor 2" << aText;
+    Sapi::setParent(aParent);
+}
+
+SAchievement::~SAchievement() {
+//    qDebug() << "SAchievement destructor" << apiName();
 }
 
 SAchievement &SAchievement::operator=(const SAchievement &aAchievement) {
@@ -61,6 +67,12 @@ QJsonObject SAchievement::toJson() const {
     obj["percent"] = percentage_.toJson();
     obj["player"] = player_.toJson();
     return obj;
+}
+
+void SAchievement::fromJson(const QJsonObject &aObject) {
+    schema_.fromJson(aObject.value("schema").toObject());
+    percentage_.fromJson(aObject.value("percent").toObject());
+    player_.fromJson(aObject.value("player").toObject());
 }
 
 QPixmap SAchievement::icon(GameID aGameId) const {
@@ -168,9 +180,9 @@ bool SAchievementSchema::operator!=(const SAchievementSchema &aSchema) const {
         defaultValue_ != aSchema.defaultValue_ ||
         displayName_ != aSchema.displayName_ ||
         hidden_ != aSchema.hidden_ ||
-    description_ != aSchema.description_ ||
-    icon_ != aSchema.icon_ ||
-    iconGray_ != aSchema.iconGray_);
+        description_ != aSchema.description_ ||
+        icon_ != aSchema.icon_ ||
+        iconGray_ != aSchema.iconGray_);
 }
 
 QJsonObject SAchievementSchema::toJson() const {
@@ -184,6 +196,16 @@ QJsonObject SAchievementSchema::toJson() const {
     obj["icon"] = icon_;
     obj["icongray"] = iconGray_;
     return obj;
+}
+
+void SAchievementSchema::fromJson(const QJsonObject &aObject) {
+    apiName_ = aObject.value("name").toString();
+    defaultValue_ = aObject.value("defaultvalue").toInt();
+    displayName_ = aObject.value("displayName").toString();
+    hidden_ = aObject.value("hidden").toInt();
+    description_ = aObject.value("description").toString();
+    icon_ = aObject.value("icon").toString();
+    iconGray_ = aObject.value("icongray").toString();
 }
 
 QList<SAchievementSchema> onLoadSchema(const QByteArray &aByteArray) {
@@ -281,6 +303,11 @@ QJsonObject SAchievementPercentage::toJson() const {
     return obj;
 }
 
+void SAchievementPercentage::fromJson(const QJsonObject &aObject) {
+    apiName_ = aObject.value("name").toString();
+    percent_ = aObject.value("percent").toDouble();
+}
+
 QList<SAchievementPercentage> onLoadPercentage(QByteArray aByteArray) {
     QList<SAchievementPercentage> list;
     for(auto &&percentage: QJsonDocument::fromJson(aByteArray).object().value("achievementpercentages").toObject().value("achievements").toArray()) {
@@ -311,8 +338,12 @@ SAchievementPlayer::SAchievementPlayer(const QJsonObject &aAchievement, QObject 
     //qDebug()<<"SAchievementPlayer constructor"<<_apiName;
 }
 
+SAchievementPlayer::SAchievementPlayer(const QString &aError, QObject *aParent): Sapi(aParent), achieved_(-1), error_(aError) {
+
+}
+
 SAchievementPlayer::SAchievementPlayer(const SAchievementPlayer &aAchievement): Sapi(aAchievement.parent()),
-    apiName_(aAchievement.apiName_), achieved_(aAchievement.achieved_), unlockTime_(aAchievement.unlockTime_) {
+    apiName_(aAchievement.apiName_), achieved_(aAchievement.achieved_), unlockTime_(aAchievement.unlockTime_), error_(aAchievement.error_) {
     //qDebug()<<"SAchievementPlayer copy"<<_apiName;
 }
 
@@ -321,6 +352,7 @@ SAchievementPlayer &SAchievementPlayer::operator=(const SAchievementPlayer &aAch
     apiName_ = aAchievement.apiName_;
     achieved_ = aAchievement.achieved_;
     unlockTime_ = aAchievement.unlockTime_;
+    error_ = aAchievement.error_;
     return *this;
 }
 
@@ -335,13 +367,15 @@ bool SAchievementPlayer::operator>(const SAchievementPlayer &aAchievement) const
 bool SAchievementPlayer::operator==(const SAchievementPlayer &aAchievement) const {
     return (apiName_ == aAchievement.apiName_ &&
             achieved_ == aAchievement.achieved_ &&
-            unlockTime_ == aAchievement.unlockTime_);
+            unlockTime_ == aAchievement.unlockTime_ &&
+            achieved_ == aAchievement.achieved_);
 }
 
 bool SAchievementPlayer::operator!=(const SAchievementPlayer &aAchievement) const {
     return (apiName_ != aAchievement.apiName_ ||
             achieved_ != aAchievement.achieved_ ||
-            unlockTime_ != aAchievement.unlockTime_);
+            unlockTime_ != aAchievement.unlockTime_ ||
+            achieved_ != aAchievement.achieved_);
 }
 
 QJsonObject SAchievementPlayer::toJson() const {
@@ -350,20 +384,22 @@ QJsonObject SAchievementPlayer::toJson() const {
     obj["apiname"] = apiName_;
     obj["achieved"] = achieved_;
     obj["unlocktime"] = unlockTime_.toSecsSinceEpoch();
+    obj["error"] = error_;
     return obj;
 }
 
-QList<SAchievementPlayer> onLoadPlayer(const QByteArray &aByteArray) {
-    QList<SAchievementPlayer> list;
-    for(auto &&player: QJsonDocument::fromJson(aByteArray).object().value("playerstats").toObject().value("achievements").toArray()) {
-        list.append(SAchievementPlayer(player.toObject()));
-    }
-    return list;
+void SAchievementPlayer::fromJson(const QJsonObject &aObject) {
+    QJsonObject obj;
+    obj["type"] = className();
+    apiName_ = aObject.value("apiname").toString();
+    achieved_ = aObject.value("achieved").toInt();
+    unlockTime_ = QDateTime::fromSecsSinceEpoch(aObject.value("unlocktime").toInt(), Qt::LocalTime);
+    error_ = aObject.value("error").toString();
 }
 
-SAchievementsPlayer SAchievementPlayer::load(const GameID &aAppId, const ProfileID &aProfileId, std::function<void (SAchievementsPlayer)> aCallback) {
-    return Sapi::load<SAchievementPlayer>(achievementsPlayerUrl(aAppId, aProfileId), onLoadPlayer, aCallback);
-}
+//SAchievementsPlayer SAchievementPlayer::load(const GameID &aAppId, const ProfileID &aProfileId, std::function<void (SAchievementsPlayer)> aCallback) {
+//    return Sapi::load<SAchievementPlayer>(achievementsPlayerUrl(aAppId, aProfileId), onLoadPlayer, aCallback);
+//}
 
 int SAchievementPlayer::countAchieved(const QList<SAchievementPlayer> &aAchievements) {
     return std::accumulate(aAchievements.begin(),
@@ -387,4 +423,124 @@ int SAchievementPlayer::achieved() const {
 
 QDateTime SAchievementPlayer::unlockTime() const {
     return unlockTime_;
+}
+
+const QString &SAchievementPlayer::error() const {
+    return error_;
+}
+
+//QList<SAchievementPlayer> onLoadPlayer(const QByteArray &aByteArray) {
+//    QList<SAchievementPlayer> list;
+//    QJsonObject object = QJsonDocument::fromJson(aByteArray).object().value("playerstats").toObject();
+//    if (object.value("success").toBool() == true) {
+//        for(auto &&player: object.value("achievements").toArray()) {
+//            list.append(SAchievementPlayer(player.toObject()));
+//        }
+//    } else {
+
+//    }
+//    return list;
+//}
+
+SAchievementsPlayer::SAchievementsPlayer(const GameID &aGameId, const ProfileID &aProfileId, QObject *aParent):
+Sapi(aParent), gameId_(aGameId), profileId_(aProfileId) {
+    RequestData *request = new RequestData();
+    request->get(achievementsPlayerUrl(gameId_, profileId_), false);
+    QByteArray ba = request->reply();
+    delete request;
+    fromJson(QJsonDocument::fromJson(ba).object());
+}
+
+SAchievementsPlayer::SAchievementsPlayer(const QJsonObject &achievement, QObject *aParent): Sapi(aParent) {
+    fromJson(achievement);
+}
+
+SAchievementsPlayer::SAchievementsPlayer(const SAchievementsPlayer &aPlayer): Sapi(aPlayer.parent()), QList<SAchievementPlayer>(aPlayer),
+    gameId_(aPlayer.gameId_), profileId_(aPlayer.profileId_), success_(aPlayer.success_), error_(aPlayer.error_) {
+
+}
+
+SAchievementsPlayer &SAchievementsPlayer::operator=(const SAchievementsPlayer &aPlayer) {
+    gameId_ = aPlayer.gameId_;
+    profileId_ = aPlayer.profileId_;
+    error_ = aPlayer.error_;
+    success_ = aPlayer.success_;
+    QList<SAchievementPlayer>::operator=(aPlayer);
+    return *this;
+}
+
+bool SAchievementsPlayer::operator<(const SAchievementsPlayer &aPlayer) const {
+    return gameId_ < aPlayer.gameId_;
+}
+
+bool SAchievementsPlayer::operator>(const SAchievementsPlayer &aPlayer) const {
+    return gameId_ > aPlayer.gameId_;
+}
+
+bool SAchievementsPlayer::operator==(const SAchievementsPlayer &aPlayer) const {
+    return gameId_ == aPlayer.gameId_ && profileId_ == aPlayer.profileId_ && error_ == aPlayer.error_ && success_ == aPlayer.success_ && QList<SAchievementPlayer>::operator==(aPlayer);
+}
+
+bool SAchievementsPlayer::operator!=(const SAchievementsPlayer &aPlayer) const {
+    return gameId_ != aPlayer.gameId_ || profileId_ != aPlayer.profileId_ || error_ != aPlayer.error_ || success_ != aPlayer.success_ || QList<SAchievementPlayer>::operator!=(aPlayer);
+}
+
+QJsonObject SAchievementsPlayer::toJson() const {
+    QJsonObject object;
+    object["success"] = success_;
+    object["error"] = error_;
+    object["gameId"] = gameId_;
+    object["profileId"] = profileId_;
+    QJsonArray jAchievements;
+    for(const auto &achievement: *this) {
+        jAchievements.append(achievement.toJson());
+    }
+    object["achievements"] = jAchievements;
+    return object;
+}
+
+void SAchievementsPlayer::update(const ProfileID &aProfileId) {
+    profileId_ = aProfileId;
+    RequestData *request = new RequestData();
+    request->get(achievementsPlayerUrl(gameId_, profileId_), false);
+    QByteArray ba = request->reply();
+    delete request;
+    fromJson(QJsonDocument::fromJson(ba).object());
+}
+
+void SAchievementsPlayer::fromJson(const QJsonObject &aObject) {
+    success_ = aObject.value("playerstats").toObject().value("success").toBool();
+    error_ = aObject.value("playerstats").toObject().value("error").toString();
+    for(auto &&player: aObject.value("playerstats").toObject().value("achievements").toArray()) {
+        append(SAchievementPlayer(player.toObject(), parent()));
+    }
+}
+
+bool SAchievementsPlayer::success() const {
+    return success_;
+}
+
+SAchievementsPlayer SAchievementsPlayer::load(const GameID &aGameId, const ProfileID &aProfileId, std::function<void (SAchievementsPlayer)> aCallback) {
+//    return Sapi::load<SAchievementsPlayer>(achievementsPlayerUrl(aGameId, aProfileId), onLoadPlayer, aCallback);
+    RequestData *request = new RequestData();
+    request->get(achievementsPlayerUrl(aGameId, aProfileId), aCallback != nullptr);
+
+    if (aCallback == nullptr) {
+        QByteArray ba = request->reply();
+        delete request;
+        return SAchievementsPlayer(QJsonDocument::fromJson(ba).object());
+    } else {
+        connect(request,
+                &RequestData::s_finished,
+                [=](RequestData *requestL) {
+                    QByteArray ba = requestL->reply();
+                    requestL->deleteLater();
+                    aCallback(SAchievementsPlayer(QJsonDocument::fromJson(ba).object()));
+                });
+    }
+    return SAchievementsPlayer();
+}
+
+const QString &SAchievementsPlayer::error() const {
+    return error_;
 }

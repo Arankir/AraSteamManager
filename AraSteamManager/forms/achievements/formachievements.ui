@@ -86,21 +86,24 @@
         </layout>
        </item>
        <item>
-        <widget class="FormReachedFilter" name="FilterMyProfile" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QCheckBox" name="CheckBoxFavorites">
            <property name="text">
             <string>Только избранное</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="ButtonReachedType" name="FilterMyProfile">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>
@@ -156,21 +159,13 @@
         </layout>
        </item>
        <item>
-        <widget class="FormCategoriesTree" name="TreeWidgetCategories">
+        <widget class="QTreeView" name="TreeWidgetCategories">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-         <column>
-          <property name="text">
-           <string>Категории</string>
-          </property>
-         </column>
         </widget>
        </item>
        <item>
@@ -222,11 +217,234 @@
       </property>
       <widget class="QWidget" name="tabStandart">
        <attribute name="title">
-        <string> Свои достижения  </string>
+        <string>Достижения  </string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="QTableView" name="TableViewMyAchievements"/>
+         <widget class="QSplitter" name="splitter_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <widget class="QWidget" name="layoutWidget">
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QCheckBox" name="CheckBoxCompareIcon">
+                <property name="text">
+                 <string>Иконка</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="CheckBoxCompareTitle">
+                <property name="text">
+                 <string>Название</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="CheckBoxCompareDescription">
+                <property name="text">
+                 <string>Описание</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="CheckBoxCompareComment">
+                <property name="text">
+                 <string>Комментарий</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="CheckBoxCompareTotalPercent">
+                <property name="text">
+                 <string>По миру</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="FreezeTableWidget" name="TableViewAchievements">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="layoutWidget_2">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="MyLineEdit" name="lineEdit">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="placeholderText">
+                 <string>https://steamcommunity.com/id/gabelogannewell</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>Добавить</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="ComboBoxFriendsWithGame" name="ComboBoxFriend">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Maximum</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ButtonFriendsReached">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ButtonFriendsAll">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ButtonFriendsNotReached">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Maximum</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QListWidget" name="ListWidgetFriends">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="resizeMode">
+               <enum>QListView::Adjust</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -237,16 +455,6 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="FormCategoriesEdit" name="CategoriesEdit" native="true"/>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tabCompare">
-       <attribute name="title">
-        <string>  Сравнение с друзьями </string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="FormFriendsCompare" name="FriendsCompare" native="true"/>
         </item>
        </layout>
       </widget>
@@ -262,27 +470,25 @@
    <header>subWidgets/lineEdit/mylineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>FormReachedFilter</class>
-   <extends>QWidget</extends>
-   <header>forms/widgets/formreachedfilter.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>FormCategoriesEdit</class>
    <extends>QWidget</extends>
    <header>forms/achievements/formcategoriesedit.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>FormFriendsCompare</class>
-   <extends>QWidget</extends>
-   <header>forms/achievements/formfriendscompare.h</header>
-   <container>1</container>
+   <class>ButtonReachedType</class>
+   <extends>QPushButton</extends>
+   <header>subWidgets/withData/buttonreachedtype.h</header>
   </customwidget>
   <customwidget>
-   <class>FormCategoriesTree</class>
-   <extends>QTreeWidget</extends>
-   <header>forms/achievements/formcategoriestree.h</header>
+   <class>FreezeTableWidget</class>
+   <extends>QTableView</extends>
+   <header>subWidgets/tables/freezetablewidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxFriendsWithGame</class>
+   <extends>QComboBox</extends>
+   <header>subWidgets/comboBoxes/qcomboboxfriendswithgame.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

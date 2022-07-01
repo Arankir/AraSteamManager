@@ -1,11 +1,11 @@
 #include "qlistwidgetachievement.h"
 
-QListWidgetAchievement::QListWidgetAchievement(SAchievement *aAchievement): QListWidgetItem() {
-    _achievement = aAchievement;
+QListWidgetAchievement::QListWidgetAchievement(const SAchievement &aAchievement): QListWidgetItem() {
+    _achievement = new SAchievement(aAchievement);
 }
 
 QListWidgetAchievement::~QListWidgetAchievement() {
-
+    delete _achievement;
 }
 
 QListWidgetAchievement &QListWidgetAchievement::operator=(const QListWidgetAchievement &aItem) {

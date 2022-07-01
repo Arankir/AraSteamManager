@@ -5,10 +5,11 @@
 
 FormContainerAchievements::FormContainerAchievements(QWidget *parent): Form(parent), ui(new Ui::FormContainerAchievements) {
     ui->setupUi(this);
-    if (parentWidget()) {
-        parentWidget()->setGeometry(Settings::achievementContainerGeometry());
-        parentWidget()->move(Settings::achievementContainerPos());
-    }
+//    if (parentWidget()) {
+//        parentWidget()->setGeometry(Settings::achievementContainerGeometry());
+//        parentWidget()->move(Settings::achievementContainerPos());
+//    }
+
 }
 
 FormContainerAchievements::~FormContainerAchievements() {
@@ -31,7 +32,9 @@ void FormContainerAchievements::show() {
 
 void FormContainerAchievements::closeEvent(QCloseEvent *aEvent) {
     if (FramelessWindow *framelessWindow = window()) {
-        Settings::setAchievementContainerParams(framelessWindow->geometry());
+//        Settings::setAchievementContainerParams(framelessWindow->geometry());
+        Settings::setAchievementContainerState(framelessWindow->saveState());
+        Settings::setAchievementContainerGeometry(framelessWindow->saveGeometry());
     }
     clear();
     hide();
@@ -63,10 +66,10 @@ void FormContainerAchievements::addFormAchievement(const SProfile &aProfile, con
     }
     auto achievements = new FormAchievements(this);
     int tabIndex = ui->TabWidgetAchievements->addTab(achievements, aGame.name());
-    connect(achievements, &FormAchievements::s_progress, this, &Form::setStatus);
+//    connect(achievements, &FormAchievements::s_progress, this, &Form::setStatus);
     connect(achievements, &FormAchievements::s_finished, this, [&]() {
         clearStatus();
-        if (achievements->getAchievementsCount() == 0) {
+        if (dynamic_cast<FormAchievements*>(sender())->getAchievementsCount() == 0) {
             QMessageBox::warning(this, tr("Ошибка!"), tr("Достижения не найдены!"));
             on_TabWidgetAchievements_tabCloseRequested(getTabIndex(aProfile, aGame));
         }

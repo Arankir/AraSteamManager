@@ -23,8 +23,8 @@ QString Sapi::gameImageUrl(const GameID &aAppId, const QString &aImgId) {
     return "http://media.steampowered.com/steamcommunity/public/images/apps/" + QString::number(aAppId) + "/" + aImgId + ".jpg";
 }
 
-QString Sapi::frameProfileUrl(const QString &aАFrameId) {
-    return "https://media.steampowered.com/steamcommunity/public/images/" + aАFrameId;
+QString Sapi::frameProfileUrl(const QString &aFrameId) {
+    return "https://media.steampowered.com/steamcommunity/public/images/" + aFrameId;
 }
 
 QUrl Sapi::achievementsSchemaUrl(const GameID &aAppId) {
@@ -205,7 +205,7 @@ QImage loadImage(QImage &aImage, const QString &aUrl, const QString &aSavePath, 
 }
 
 QImage loadImage(const QString &aUrl, const QString &aSavePath, const QSize &aSize) {
-    if (!aUrl.isEmpty() && aUrl.right(5) != "/.jpg") {
+    if (!aUrl.isEmpty() && aUrl.right(5) != "/.jpg" && aUrl.right(1) != "/") {
         if (!QFile::exists(aSavePath)) {
             RequestImage img(aUrl, aSavePath, true, false);
             if (!img.pixmap().isNull()) {
@@ -220,7 +220,7 @@ QImage loadImage(const QString &aUrl, const QString &aSavePath, const QSize &aSi
     } else {
         return QPixmap(Images::missingImage()).scaled(aSize).toImage();
     }
-    return QImage();
+    return QPixmap(Images::missingImage()).scaled(aSize).toImage();
 }
 
 QString Sapi::toString() const {

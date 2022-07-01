@@ -5,7 +5,7 @@
 #include <QListWidgetItem>
 #include "classes/common/settings.h"
 #include "classes/steamApi/structures/sfriends.h"
-#include "./formreachedfilter.h"
+#include "subWidgets/withData/buttonreachedtype.h"
 
 namespace Ui {
 class FormFriendItemCompare;

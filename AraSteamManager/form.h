@@ -24,6 +24,7 @@ public:
 
 signals:
     void s_closed();
+    void s_destructed();
     void s_settingsUpdated(QFlags<changedSettings>);
 
 private:

@@ -44,7 +44,7 @@ public:
     SProfile &update();
     QJsonObject toJson() const;
     virtual QString className() const {return "SProfile";}
-    static SProfile load(const ProfileID &aId, const LoadType &aType = LoadType::id, std::function<void (SProfile)> aCallback = nullptr);
+    static SProfile load(const ProfileID &aId, const LoadType &aType = LoadType::id, std::function<void (const SProfile &)> aCallback = nullptr);
     static QList<SProfile> load(ProfileIDs ids, std::function< void(QList<SProfile>) > callback = nullptr);
     static int getLevel(const ProfileID &aSteamId);
     static QPixmap getFrameProfile(const ProfileID &aSteamId);

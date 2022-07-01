@@ -368,9 +368,13 @@ void Category2::setParent(Category2 *aNewParent) {
 }
 
 bool Category2::addCategory(const QStringList &aTitles, Category2 *aCategory) {
+    QString nextTitle;
     QStringList localTitles = aTitles;
-    QString nextTitle = localTitles.first();
-    localTitles.pop_front();
+    if (!localTitles.isEmpty()) {
+        nextTitle = localTitles.first();
+        localTitles.pop_front();
+
+    }
     auto iterator = std::find_if(categories_.begin(),
                                  categories_.end(),
                                  [=](Category2 *lCategory) {
@@ -431,8 +435,8 @@ Category2 *Category2::find(const QStringList &aTitles) {
         return nullptr;
     }
     QStringList localTitles = aTitles;
-    QString nextTitle = localTitles.first();
-    localTitles.pop_front();
+    QString nextTitle = localTitles.last();
+    localTitles.pop_back();
     auto iterator = std::find_if(categories_.begin(),
                                  categories_.end(),
                                  [=](Category2 *lCategory) {
@@ -483,7 +487,8 @@ void Category2::fromJson(const QJsonObject &aCategory) {
         if (iterator != categories_.end()) {
             (*iterator)->fromJson(valueCategory.toObject());
         } else {
-            addCategory(new Category2(valueCategory.toObject()));
+            auto category = new Category2(valueCategory.toObject());
+            addCategory(category);
         }
 //        if (categories_.find(valueCategory.toObject().value("title").toString()) != categories_.end()) {
 
@@ -528,6 +533,12 @@ Category2 *Category2::root() {
     return parent_ == nullptr ? this : parent_->root();
 }
 
+QStringList Category2::getPathFromRoot() {
+    QStringList list;
+    getPathFromRoot(list);
+    return list;
+}
+
 void Category2::getPathFromRoot(QStringList &aList) {
     aList.push_back(title_);
     if (parent_ != nullptr) {
@@ -545,7 +556,6 @@ int Category2::countCategories() const {
 
 void Category2::update() {
     load(filePath_);
-    qDebug() << 3 << title_ << categories_;
 }
 
 void Category2::deleteAllChilds() {

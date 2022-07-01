@@ -52,6 +52,7 @@ public:
     void setStatus(const QString &statusName = "", int progress = 0, int maxProgress = 0);
 
     void clearStatus();
+    void show();
 protected:
     bool eventFilter(QObject *o, QEvent *e) override;
     void mouseHover(QHoverEvent*);

@@ -5,7 +5,7 @@ int ThreadStatistics::fill() {
 //        SAchievementPlayer::load(game.appId(), _id, std::bind(&ThreadStatistics::onResultAchievements, this, std::placeholders::_1, game));
 //    }
     for (auto &game: statistics_.games) {
-        SAchievementPlayer::load(game.appId(), statistics_.profile.steamID(), std::bind(&ThreadStatistics::onResultAchievements, this, std::placeholders::_1, game));
+        SAchievementsPlayer::load(game.appId(), statistics_.profile.steamID(), std::bind(&ThreadStatistics::onResultAchievements, this, std::placeholders::_1, game));
     }
     return 1;
 }
@@ -42,10 +42,10 @@ void ThreadStatistics::onResultAchievements(const SAchievementsPlayer &aAchievem
         int countNotReached = aAchievements.count() - countReached;
         statistics_.achievementCount += countReached;
 
-        GameWithPercentModelItem resultGame;
-        resultGame.game = aGame;
-        resultGame.percent = (100.0 * countReached) / aAchievements.count();
-        resultGame.achievements = aAchievements;
+        GameWithPercentModelItem resultGame(aGame, (100.0 * countReached) / aAchievements.count(), aAchievements);
+//        resultGame.game = aGame;
+//        resultGame.percent = (100.0 * countReached) / aAchievements.count();
+//        resultGame.achievements = aAchievements;
 //        (aGame, (100.0 * countReached) / aAchievements.count(), aAchievements);
         if (countNotReached == 0) {
             statistics_.complete.append(resultGame);
@@ -56,10 +56,10 @@ void ThreadStatistics::onResultAchievements(const SAchievementsPlayer &aAchievem
         }
 
     } else {
-        GameWithPercentModelItem resultGame;
-        resultGame.game = aGame;
-        resultGame.percent = -1;
-        resultGame.achievements = aAchievements;
+        GameWithPercentModelItem resultGame(aGame, -1, aAchievements);
+//        resultGame.game = aGame;
+//        resultGame.percent = -1;
+//        resultGame.achievements = aAchievements;
 
 //        (aGame, -1.0, aAchievements);
         statistics_.noAchievements.append(resultGame);

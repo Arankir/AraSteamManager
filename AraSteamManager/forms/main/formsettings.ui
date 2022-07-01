@@ -79,23 +79,6 @@
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="CheckBoxVisibleHiddenGames">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>При поиске по играм отображать скрытые игры</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="CheckBoxSaveImage">
-         <property name="text">
-          <string>Автоматически сохранять картинки на компьютере (для более быстрой загрузки)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <widget class="QLabel" name="label">

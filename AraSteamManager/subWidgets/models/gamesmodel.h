@@ -44,7 +44,7 @@ signals:
     void s_progress(const QString &status, const int &progress, const int &max);
 
 private slots:
-    void onResultAchievements(const QList<SAchievementPlayer> &achievements, const GameID &gameId);
+    void onResultAchievements(const SAchievementsPlayer &achievements, const GameID &gameId);
 
 private:
     struct gameModelItem {

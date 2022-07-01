@@ -23,7 +23,7 @@ public:
     QString toString() const;
 
     friend QDebug operator<<(QDebug dbg, const Sapi &a) {
-        dbg.nospace() << a.className() << "(" << a.toString() << ")\n";
+        dbg.nospace() << typeid(a).name() << "(" << a.toString() << ")\n";
         return dbg.space();
     }
     static QString gameImageUrl(const GameID &aAppId, const QString &img_id);
@@ -31,7 +31,7 @@ public:
 signals:
 
 protected:
-    static QString frameProfileUrl(const QString &aАFrameId);
+    static QString frameProfileUrl(const QString &aFrameId);
 
     static QUrl achievementsSchemaUrl(const GameID &appId);
     static QUrl achievementsPlayerUrl(const GameID &appId, const ProfileID &steamId);

@@ -6,7 +6,7 @@
 
 class QListWidgetAchievement : public QListWidgetItem {
 public:
-    QListWidgetAchievement(SAchievement *achievement);
+    QListWidgetAchievement(const SAchievement &achievement);
     QListWidgetAchievement(): QListWidgetItem() {}
     ~QListWidgetAchievement();
 

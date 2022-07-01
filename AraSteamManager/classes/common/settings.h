@@ -26,6 +26,13 @@ public:
     static const QString c_organizationDomain;
     static const QString c_applicationName;
 
+    Q_PROPERTY(QString myProfile READ myProfile WRITE setMyProfile)
+    Q_PROPERTY(int language READ language WRITE setLanguage)
+    Q_PROPERTY(int theme READ theme WRITE setTheme)
+    Q_PROPERTY(int saveImages READ saveImages WRITE setSaveimage)
+    Q_PROPERTY(int visibleHiddenGames READ visibleHiddenGames WRITE setVisibleHiddenGames)
+    Q_PROPERTY(int profileInfoSize READ profileInfoSize WRITE setVisibleProfileInfo)
+
     static void setMyProfile(const QString &myProfiles);
     static QString myProfile();
     static void setLanguage(const int &language);
@@ -39,64 +46,32 @@ public:
     static void setVisibleProfileInfo(const int &visibleProfileInfo);
     static int profileInfoSize();
 
-    static void setMainWindowParams(QRect geometry);
-    static QRect mainWindowGeometry();
-    static void setMainWindowPos(const QPoint &pos);
-    static QPoint mainWindowPos();
-    static void setMainWindowIsMaximize(bool maximize);
-    static bool isMainWindowMaximize();
+    Q_PROPERTY(QByteArray mainWindowState READ mainWindowState WRITE setMainWindowState)
+    Q_PROPERTY(QByteArray mainWindowGeometry READ mainWindowGeometry WRITE setMainWindowGeometry)
 
-    static void setGamesTableIconWidth(const int &width);
-    static int gamesTableIconWidth();
-    static void setGamesTableTitleWidth(const int &width);
-    static int gamesTableTitleWidth();
-    static void setGamesTableCommentWidth(const int &width);
-    static int gamesTableCommentWidth();
-    static void setGamesTableProgressWidth(const int &width);
-    static int gamesTableProgressWidth();
+    static void setMainWindowState(const QByteArray &geometry);
+    static QByteArray mainWindowState();
+    static void setMainWindowGeometry(const QByteArray &geometry);
+    static QByteArray mainWindowGeometry();
 
-    static void setFriendsTableIconWidth(const int &width);
-    static int friendsTableIconWidth();
-    static void setFriendsTableNameWidth(const int &width);
-    static int friendsTableNameWidth();
-    static void setFriendsTableAddedWidth(const int &width);
-    static int friendsTableAddedWidth();
-    static void setFriendsTableStatusWidth(const int &width);
-    static int friendsTableStatusWidth();
-    static void setFriendsTableIsOpenWidth(const int &width);
-    static int friendsTableIsOpenWidth();
+    Q_PROPERTY(QByteArray achievementContainerState READ achievementContainerState WRITE setAchievementContainerState)
+    Q_PROPERTY(QByteArray achievementContainerGeometry READ achievementContainerGeometry WRITE setAchievementContainerGeometry)
 
-    static void setAchievementContainerParams(QRect geometry);
-    static QRect achievementContainerGeometry();
-    static QPoint achievementContainerPos();
+    static void setAchievementContainerState(const QByteArray &geometry);
+    static QByteArray achievementContainerState();
+    static void setAchievementContainerGeometry(const QByteArray &geometry);
+    static QByteArray achievementContainerGeometry();
 
-    static void setAchievementsTableIconWidth(const int &width);
-    static int achievementsTableIconWidth();
-    static void setAchievementsTableTitleWidth(const int &width);
-    static int achievementsTableTitleWidth();
-    static void setAchievementsTableDescriptionWidth(const int &width);
-    static int achievementsTableDescriptionWidth();
-    static void setAchievementsTableCommentWidth(const int &width);
-    static int achievementsTableCommentWidth();
-    static void setAchievementsTablePercentWidth(const int &width);
-    static int achievementsTablePercentWidth();
-    static void setAchievementsTableAchievedWidth(const int &width);
-    static int achievementsTableAchievedWidth();
-
-    static void setAchievementsCompareIconVisible(const int &width);
-    static int achievementsCompareIconVisible();
-    static void setAchievementsCompareTitleVisible(const int &width);
-    static int achievementsCompareTitleVisible();
-    static void setAchievementsCompareDescriptionVisible(const int &width);
-    static int achievementsCompareDescriptionVisible();
-    static void setAchievementsComparePercentVisible(const int &width);
-    static int achievementsComparePercentVisible();
-
-    static void syncronizeSettings();
+    Q_PROPERTY(QString dateTimeFormat READ dateTimeFormat)
+    Q_PROPERTY(QString dateFormat READ dateFormat)
+    Q_PROPERTY(QString dateTimeFormatShort READ dateTimeFormatShort)
 
     static const QString dateTimeFormat();
     static const QString dateFormat();
     static const QString dateTimeFormatShort();
+
+    static void syncronizeSettings();
+
 private:
     static QSettings *settings_;
 };

@@ -86,7 +86,7 @@ public:
 
     FavoriteAchievement &operator=(const FavoriteAchievement &favoriteAchievement) = default;
     bool operator==(const SAchievement &achievement) const;
-    bool operator==(const FavoriteAchievement &achievement) const = default;
+//    bool operator==(const FavoriteAchievement &achievement) const = default;
 
     QJsonObject toJson() const;
     void fromJson(const QJsonObject &);
@@ -116,16 +116,16 @@ public:
 
     FavoriteAchievementsGame &operator=(const FavoriteAchievementsGame &achievement);
     bool operator==(const SGame &game) const;
-    bool operator==(const FavoriteAchievementsGame &achievement) const = default;
+//    bool operator==(const FavoriteAchievementsGame &achievement) const = default;
 
     void remove(const SAchievement &achievement);
     bool isInAchievements(const SAchievement &achievement) const;
     QJsonObject toJson() const;
     void fromJson(const QJsonObject &);
 
-    ProfileID steamId()                         const {return userId_;}
-    GameID appId()                              const {return appId_;}
-    QString name()                              const {return name_;}
+    ProfileID steamId() const {return userId_;}
+    GameID appId()      const {return appId_;}
+    QString name()      const {return name_;}
 
 private:
     ProfileID userId_;

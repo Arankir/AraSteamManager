@@ -92,7 +92,7 @@ bool readFile(const QString &aFilePath, QByteArray &aBytes) {
             file.close();
             isCompleted = true;
         } else {
-            qWarning() << "saveFile" << aFilePath << file.errorString();
+            qWarning() << "readFile" << aFilePath << file.errorString();
         }
     }
     return isCompleted;

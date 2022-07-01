@@ -11,7 +11,7 @@
 #include "classes/network/requestimage.h"
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sgames.h"
-#include "classes/files/achievementscategory.h"
+#include "classes/files/category.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/withData/qradiobuttonwithdata.h"
 
@@ -39,13 +39,13 @@ struct ExportFileData {
 
 struct ExportCategory {
     ExportCategory() {;}
-    ExportCategory(int aGameId, const QString &aGameName, const Category2 &aCategory);
+    ExportCategory(int aGameId, const QString &aGameName, const Category &aCategory);
     ExportCategory(const QJsonObject &object);
     ExportCategory(const QString &pathFile);
 
     int gameId;
     QString gameName;
-    Category2 category;
+    Category category;
 
     void fromJson(const QJsonObject &object);
     QJsonObject toJson();
@@ -61,6 +61,7 @@ class FormSettings : public Form {
 public:
     explicit FormSettings(QWidget *parent = nullptr);
     ~FormSettings();
+    void init();
     bool isInit();
     bool isLoaded();
 
@@ -68,7 +69,6 @@ signals:
     void s_return_to_profile(QWidget*);
 
 private slots:
-    void initComponents();
     void initExport();
 
     void radioButtonHiddenGames_Clicked();
@@ -85,7 +85,7 @@ private slots:
     void slideProfileSize_ValueChanged(int value);
 
     void comboBoxMaxTableRows(int index);
-    int recursAddCategoryToTree(Category2 *aCategory, QTreeWidgetItem *aRoot, const int &aGameId);
+    int recursAddCategoryToTree(Category *aCategory, QTreeWidgetItem *aRoot, const int &aGameId);
     void buttonExportCategories_Clicked();
     void buttonImportCategories_Clicked();
     ExportFileData createExportCategoriesJson();
@@ -95,8 +95,11 @@ private slots:
     ExportFileData *getFileFromPath(QLineEdit *aLineEdit);
 private:
     Ui::FormSettings *ui;
+    void initCommonSettings();
+
     Settings _setting;
     QVector<QPair<QString,QList<QString>>> _hiddenGames;
+    bool isInit_ = false;
 };
 
 

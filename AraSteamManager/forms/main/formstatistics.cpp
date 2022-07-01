@@ -300,8 +300,8 @@ void FormStatistics::setInfo(Statistics &aStatistic) {
     QList<CompletedAchievement> last50(reverseList<CompletedAchievement>(tempLast50));
     QMap<GameID, QList<SAchievementSchema>> mapGames;
 
-
-    for (int i = 0; const auto &achievements: last50) {
+    int i = 0;
+    for (const auto &achievements: last50) {
         auto iteratorGames = mapGames.find(achievements.game.appId());
         if (iteratorGames == mapGames.end()) {
             iteratorGames = mapGames.insert(achievements.game.appId(), SAchievementSchema::load(achievements.game.appId()));

@@ -35,14 +35,17 @@ void FormMain::init() {
     ui->stackedFormSettings     ->setAttribute(Qt::WA_TranslucentBackground);
     ui->stackedFormStatistics   ->setAttribute(Qt::WA_TranslucentBackground);
 
-    if (parentWidget() != nullptr) {
-        parentWidget()->setGeometry(Settings::mainWindowGeometry());
-        parentWidget()->move(Settings::mainWindowPos());
+//    if (window() != nullptr) {
+//        window()->restoreGeometry(Settings::mainWindowGeometry());
+//        window()->restoreState(Settings::mainWindowState());
 
-        if(Settings::isMainWindowMaximize()) {
-            parentWidget()->showMaximized();
-        }
-    }
+////        parentWidget()->setGeometry(Settings::mainWindowParams());
+////        parentWidget()->move(Settings::mainWindowPos());
+
+////        if(Settings::isMainWindowMaximize()) {
+////            parentWidget()->showMaximized();
+////        }
+//    }
     ui->stackedWidgetForms->setCurrentIndex(0);
     qApp->setStyleSheet(Theme::qssTheme());
     updateIcons();
@@ -84,13 +87,23 @@ void FormMain::init() {
 
 //    QtDownload dl;
 //    dl.setTarget("http://www.java2s.com/Code/Cpp/Qt/DownloadfromURL.htm");
+//    auto movie = new QMovie(this);
+//    movie->setFileName("C:\\Users\\Pavel\\Desktop\\GenerousColossalCurlew-size_restricted.gif");
+//    connect(movie, &QMovie::frameChanged, [=]{
+//        ui->pushButton->setIcon(movie->currentPixmap());
+//    });
+//    movie->start();
+//    ui->pushButton->setIconSize(QSize(movie->currentPixmap().size()));
+//    ui->pushButton->setFixedSize(QSize(movie->currentPixmap().size()).operator+=(QSize(10, 10)));
 }
 
 #define System {
 FormMain::~FormMain() {
     if (window()) {
-        Settings::setMainWindowIsMaximize(window()->isMaximized());
-        Settings::setMainWindowParams(window()->normalGeometry());
+//        Settings::setMainWindowIsMaximize(window()->isMaximized());
+//        Settings::setMainWindowParams(window()->normalGeometry());
+        Settings::setMainWindowState(window()->saveState());
+        Settings::setMainWindowGeometry(window()->saveGeometry());
     }
     if (_containerAchievementsForm) {
         _containerAchievementsForm->close();
@@ -107,9 +120,18 @@ void FormMain::retranslate() {
 FormContainerAchievements *FormMain::createFormContainerAchievements() {
     _containerAchievementsForm = createFramelessForm<FormContainerAchievements>();
     _containerAchievementsForm->setObjectName("ContainerAchievements");
+    _containerAchievementsForm->window()->setAttribute(Qt::WA_DeleteOnClose);
+    _containerAchievementsForm->setAttribute(Qt::WA_DeleteOnClose);
     connect(this, &Form::s_settingsUpdated, _containerAchievementsForm->window(), &FramelessWindow::updateSettings);
     connect(this, &Form::s_settingsUpdated, _containerAchievementsForm, &Form::updateSettings);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_closed,               this, &FormMain::containerAchievementsClose);
+    connect(_containerAchievementsForm, &FormContainerAchievements::s_destructed, this, [=]() {
+        _containerAchievementsForm = nullptr;
+    });
+    if (_containerAchievementsForm->window() != nullptr) {
+        _containerAchievementsForm->window()->restoreGeometry(Settings::achievementContainerGeometry());
+        _containerAchievementsForm->window()->restoreState(Settings::achievementContainerState());
+    }
     return _containerAchievementsForm;
 }
 
@@ -124,7 +146,6 @@ void FormMain::showAchievements(const SGame &aGame) {
 void FormMain::containerAchievementsClose() {
 //    disconnect(_containerAchievementsForm);
     delete _containerAchievementsForm;
-    _containerAchievementsForm = nullptr;
 }
 #define ContainerAchievementsEnd }
 
@@ -173,7 +194,13 @@ void FormMain::goToStatistics(const SProfile &aProfileId) {
 
 void FormMain::goToFavorites() {
     if(!isLoading_) {
-        if (ui->stackedFormFavorites->isLoaded()) {
+        if (!ui->stackedFormFavorites->isInit()) {
+            isLoading_ = true;
+            ui->stackedWidgetForms->setCurrentIndex(FormNone);
+            ui->stackedFormFavorites->init();
+            isLoading_ = false;
+            ui->stackedWidgetForms->setCurrentIndex(FormFavorites);
+        } else {
             ui->stackedWidgetForms->setCurrentIndex(FormFavorites);
         }
     }
@@ -181,7 +208,13 @@ void FormMain::goToFavorites() {
 
 void FormMain::goToSettings() {
     if(!isLoading_) {
-        if (ui->stackedFormSettings->isLoaded()) {
+        if (!ui->stackedFormSettings->isInit()) {
+            isLoading_ = true;
+            ui->stackedWidgetForms->setCurrentIndex(FormNone);
+            ui->stackedFormSettings->init();
+            isLoading_ = false;
+            ui->stackedWidgetForms->setCurrentIndex(FormSettings);
+        } else {
             ui->stackedWidgetForms->setCurrentIndex(FormSettings);
         }
     }

@@ -5,7 +5,7 @@
 #include <QListWidgetItem>
 #include "classes/common/settings.h"
 #include "classes/steamApi/structures/sfriends.h"
-#include "./formreachedfilter.h"
+//#include "./formreachedfilter.h"
 
 namespace Ui {
 class FormFriendItemGraph;

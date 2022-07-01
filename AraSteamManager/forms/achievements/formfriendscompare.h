@@ -8,7 +8,7 @@
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sfriends.h"
-#include "forms/widgets/formreachedfilter.h"
+#include "subWidgets/withData/buttonreachedtype.h"
 #include "subWidgets/withData/qbuttonwithdata.h"
 #include "subWidgets/items/qlistwidgetfriend.h"
 #include "subWidgets/models/achievementsmodel.h"

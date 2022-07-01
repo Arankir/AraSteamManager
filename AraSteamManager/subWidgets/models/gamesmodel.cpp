@@ -26,15 +26,15 @@ void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
         if (iterator != comments.end()) {
             comment = (*iterator).comment();
         }
-        modelItems_.append(gameModelItem{game, comment, QList<SAchievementPlayer>(), 0});
+        modelItems_.append(gameModelItem{game, comment, SAchievementsPlayer(), 0});
         emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
     for (const auto &gameModel: qAsConst(modelItems_)) { //Загрузка достижений игрока
-        SAchievementPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
+        SAchievementsPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
     }
 }
 
-void GamesModel::onResultAchievements(const QList<SAchievementPlayer> &aAchievements, const GameID &aGameId) {
+void GamesModel::onResultAchievements(const SAchievementsPlayer &aAchievements, const GameID &aGameId) {
     auto iterator = std::find_if(modelItems_.begin(),
                                  modelItems_.end(),
                                  [=](const gameModelItem &lGame) {
@@ -384,7 +384,7 @@ void FilterModelGames::setSourceModel(GamesModel *aSourceModel) {
             emit s_modelFinished();
             emit s_rowsUpdated();
         } else {
-            qWarning() << "in FilterModelFriends missing sourceModel, but emit 'finished'";
+            qWarning() << "in FilterModelGames missing sourceModel, but emit 'finished'";
         }
     });
     FilterModel::setSourceModel(aSourceModel);
