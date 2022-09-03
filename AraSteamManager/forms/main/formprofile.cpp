@@ -1,6 +1,10 @@
 #include "formprofile.h"
 #include "ui_formprofile.h"
+#include "subWidgets/labels/labellight.h"
+
 #include <QPainter>
+#include <QSpacerItem>
+#include <QFormLayout>
 
 #define Constants {
 const QColor c_green_color  = QColor (87,   230,    124,    255 * 0.7);
@@ -9,19 +13,15 @@ const QColor c_red_color    = QColor (255,  48,     48,     255 * 1);
 const QColor c_blue_color   = QColor (0,    0,      255,    255 * 0.7);
 #define ConstantsEnd }
 
-FormProfile::FormProfile(const SProfile &aProfile, QWidget *aParent) : Form(aParent), ui(new Ui::FormProfile), _profile(aProfile) {
+FormProfile::FormProfile(const SProfile &aProfile, QWidget *aParent) : Form(aParent), ui(new Ui::FormProfile), profile_(aProfile) {
     ui->setupUi(this);
     ui->LabelProfileVisibility->setTextFormat(Qt::RichText);
     ui->LabelGamesVisibility  ->setTextFormat(Qt::RichText);
     ui->LabelFriendsVisibility->setTextFormat(Qt::RichText);
-    ui->LabelProfileUrl       ->setTextFormat(Qt::RichText);
-    //ui->LabelPersonaState->setWordWrap(true);
+    ui->labelLinkValue        ->setTextFormat(Qt::RichText);
+    ui->LabelPersonaState->setWordWrap(true);
 
-    ui->LabelWindowsPlayTime->setToolTip(textToToolTip(tr("Стим начал собирать статистику по платформам в сентябре 2019 года")));
-    ui->LabelLinuxPlayTime->setToolTip(textToToolTip(tr("Стим начал собирать статистику по платформам в сентябре 2019 года")));
-    ui->LabelMacOsPlayTime->setToolTip(textToToolTip(tr("Стим начал собирать статистику по платформам в сентябре 2019 года")));
-
-    ui->FrameProfileButtons->setMinimumHeight(32 + 18);
+//    ui->FrameProfileButtons->setMinimumHeight(32 + 18);
 
     ui->LabelAvatar->setFixedSize(QSize(64, 64) * c_frameLargerBy);
     ui->LabelAvatarMinimize->setFixedSize(QSize(32, 32) * c_frameLargerBy);
@@ -32,8 +32,16 @@ FormProfile::FormProfile(const SProfile &aProfile, QWidget *aParent) : Form(aPar
     connect(ui->ButtonFriends,    &QPushButton::clicked, this, &FormProfile::buttonFriends_Clicked);
     connect(ui->ButtonStatistics, &QPushButton::clicked, this, &FormProfile::buttonStatistics_Clicked);
 #define ConnectsEnd }
-    profileToUi(_profile);
+    profileToUi(profile_);
     updateSettings(QFlags<changedSettings>(changedSettings::profileInfo | changedSettings::myProfile | changedSettings::theme));
+    retranslate();
+
+    ui->collapsableWidgetCommon->setContentLayout(*(ui->layoutCommon));
+    ui->collapsableWidgetBans->setContentLayout(*(ui->layoutBans));
+    ui->collapsableWidgetBadges->setContentLayout(*(ui->layoutBadges));
+    ui->collapsableWidgetPlayTime->setContentLayout(*(ui->layoutPlayTime));
+    ui->collapsableWidgetGamesPlayTime->setContentLayout(*(ui->layoutGamesPlayTime));
+    ui->collapsableWidgetCustomizations->setContentLayout(*(ui->layoutCustomizations));
 }
 
 FormProfile::~FormProfile() {
@@ -41,152 +49,161 @@ FormProfile::~FormProfile() {
 }
 
 void FormProfile::profileToUi(const SProfile &aProfile) {
-    _profile = aProfile;
-    //Аватарки
-    ui->LabelAvatar->setPixmap(aProfile.getAvatarWithFrame(QSize(64, 64) * c_frameLargerBy));
-    ui->LabelAvatarMinimize->setPixmap(aProfile.getAvatarWithFrame(QSize(32, 32) * c_frameLargerBy));
-
-    //Ник
-    ui->LabelName        ->setText(_profile.personaName());
-    ui->LabelNameMinimize->setText(_profile.personaName());
-    //Реальное имя
-    ui->LabelRealNameValue->setText(_profile.realName());
-    if (_profile.realName() != "") {
-        ui->LabelRealName     ->setVisible(true);
-        ui->LabelRealNameValue->setVisible(true);
-    } else {
-        ui->LabelRealName     ->setVisible(false);
-        ui->LabelRealNameValue->setVisible(false);
-    }
-    //Дата создания аккаунта
-    ui->LabelTimeCreatedValue->setText(_profile.timeCreated().toString(Settings::dateFormat()));
-    if (_profile.timeCreated() > QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
-        ui->LabelTimeCreated     ->setVisible(true);
-        ui->LabelTimeCreatedValue->setVisible(true);
-    } else {
-        ui->LabelTimeCreated     ->setVisible(false);
-        ui->LabelTimeCreatedValue->setVisible(false);
-    }
-    //Код страны
-    ui->LabelLocCountryCodeValue->setText(_profile.locCountryCode());
-    if (_profile.locCountryCode() != "") {
-        ui->LabelLocCountryCode     ->setVisible(true);
-        ui->LabelLocCountryCodeValue->setVisible(true);
-    } else {
-        ui->LabelLocCountryCode     ->setVisible(false);
-        ui->LabelLocCountryCodeValue->setVisible(false);
-    }
-    setId(_profile.steamID());
+    profile_ = aProfile;
     setProfileStatus();
     setOnlineStatus();
 
-    setCommunityProfile();
-    setCommentPermission();
-
-    setGames(_profile.steamID());
-    setFriends(_profile.steamID());
-    setLvl(_profile.steamID());
-    setBadges(_profile.steamID());
-    setBans(_profile.steamID());
-    setCustomizations(_profile.steamID());
-}
-
-QGraphicsDropShadowEffect *createLightning() {
-    QGraphicsDropShadowEffect *lightning = new QGraphicsDropShadowEffect;
-    //shadowEffect3->setColor(QColor(255, 255, 0, 255 * 0.7));
-    lightning->setOffset(0);
-    lightning->setBlurRadius(10);
-    return lightning;
-}
-
-LabelLight *setlightningColor(LabelLight *aLabel, const QColor &aColor) {
-    aLabel->setStyleSheet("color: " + aColor.name());
-    aLabel->setLightColor(aColor);
-    return aLabel;
+    setGames(profile_.steamId());
+    setFriends(profile_.steamId());
+    updateVisibleInfo();
 }
 
 void FormProfile::setColorStatus(const QColor &aColor) {
-    QString stylesheet = "color: " + aColor.name() + ";";
-    ui->LabelPersonaState   ->setStyleSheet("color: " + aColor.name());
-    setlightningColor(ui->LabelName, aColor);
-    setlightningColor(ui->LabelNameMinimize, aColor);
+    ui->LabelPersonaState->setStyleSheet("color: " + aColor.name());
+    ui->LabelName->setlightningColor(aColor);
+    ui->LabelNameMinimize->setlightningColor(aColor);
 }
 
 #define setData {
 void FormProfile::setProfile(const SProfile &aProfile) {
-    _profile = aProfile;
+    profile_ = aProfile;
+    isMinimizeInit_ = false;
+    isBaseInit_ = false;
+    isMaximizeInit_ = false;
 }
 
 void FormProfile::setProfileStatus() {
-    switch (_profile.communityVisibilityState()) {
+    switch (profile_.communityVisibilityState()) {
         case 1:
-            setlightningColor(ui->LabelProfileVisibility, c_red_color)->setToolTip(tr("Скрытый"));
+            ui->LabelProfileVisibility->setlightningColor(c_red_color)->setToolTip(tr("Скрытый"));
             ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
             break;
         case 3:
-            setlightningColor(ui->LabelProfileVisibility, c_green_color)->setToolTip(tr("Публичный"));
+            ui->LabelProfileVisibility->setlightningColor(c_green_color)->setToolTip(tr("Публичный"));
             ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
             break;
         case 8:
-            setlightningColor(ui->LabelProfileVisibility, c_yellow_color)->setToolTip(tr("Для друзей"));
+            ui->LabelProfileVisibility->setlightningColor(c_yellow_color)->setToolTip(tr("Для друзей"));
             ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateYellow()).scaled(14, 14));
             break;
         default:
-            setlightningColor(ui->LabelProfileVisibility, c_blue_color)->setToolTip(tr("Неизвестно"));
+            ui->LabelProfileVisibility->setlightningColor(c_blue_color)->setToolTip(tr("Неизвестно"));
             ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
     }
 }
 
 void FormProfile::setOnlineStatus() {
-    ui->LabelPersonaState->setText(_profile.stateFullText());
-    setColorStatus(_profile.stateColor());
+    ui->LabelPersonaState->setText(profile_.stateFullText());
+    setColorStatus(profile_.stateColor());
 }
 
 void FormProfile::setGames(const ProfileID &aSteamId) {
-    _games = SGame::load(aSteamId, true, true);
-    if (_games.count() > 0) {
+    games_ = SGame::load(aSteamId, true, true);
+    if (games_.count() > 0) {
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
-        setlightningColor(ui->LabelGamesVisibility, c_green_color)->setToolTip(tr("Публичный"));
+        ui->LabelGamesVisibility->setlightningColor(c_green_color)->setToolTip(tr("Публичный"));
         ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
-        setTimePlayed(_games);
+        setTimePlayed(games_);
     } else {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        setlightningColor(ui->LabelGamesVisibility, c_red_color)->setToolTip(tr("Скрытый"));
+        ui->LabelGamesVisibility->setlightningColor(c_red_color)->setToolTip(tr("Скрытый"));
         ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
     }
 }
 
 void FormProfile::setFriends(const ProfileID &aSteamId) {
-    _friends = SFriend::load(aSteamId);
-    if (_friends.count() > 0) {
+    friends_ = SFriend::load(aSteamId);
+    if (friends_.count() > 0) {
         ui->ButtonFriends->setEnabled(true);
-        setlightningColor(ui->LabelFriendsVisibility, c_green_color)->setToolTip(tr("Публичный"));
+        ui->LabelFriendsVisibility->setlightningColor(c_green_color)->setToolTip(tr("Публичный"));
         ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
     } else {
         ui->ButtonFriends->setEnabled(false);
-        setlightningColor(ui->LabelFriendsVisibility, c_red_color)->setToolTip(tr("Скрытый"));
+        ui->LabelFriendsVisibility->setlightningColor(c_red_color)->setToolTip(tr("Скрытый"));
         ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
     }
 }
 
-void FormProfile::setId(const ProfileID &aSteamId) {
-    if (_profile.profileUrl().indexOf("/id/") > -1) {
-        ui->LabelVanityUrlValue->setText(_profile.profileUrl().mid(_profile.profileUrl().indexOf("/id/") + 4).remove("/"));
-        ui->LabelVanityUrlValue->setVisible(true);
-        ui->LabelVanityUrl->setVisible(true);
-    } else {
-        ui->LabelVanityUrlValue->setText("");
-        ui->LabelVanityUrlValue->setVisible(false);
-        ui->LabelVanityUrl->setVisible(false);
-    }
-    ui->LabelProfileIDValue->setText(aSteamId);
-    //Url
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + Images::link() + "\"> "
-                                "<a href=\"" + _profile.profileUrl() + "\">"
-                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile.profileUrl() + "</span></a>");
+void FormProfile::setMinimizeInfo(const SProfile &aProfile) {
+    ui->LabelAvatarMinimize->setPixmap(aProfile.getAvatarWithFrame(QSize(32, 32) * c_frameLargerBy));
+    ui->LabelNameMinimize->setText(aProfile.personaName());
+    isMinimizeInit_ = true;
+}
 
+void FormProfile::setBaseInfo(const SProfile &aProfile) {
+    //Аватарки
+    ui->LabelAvatar->setPixmap(aProfile.getAvatarWithFrame(QSize(64, 64) * c_frameLargerBy));
+
+    //Ник
+    ui->LabelName        ->setText(aProfile.personaName());
+    //Реальное имя
+    if (profile_.realName() != "") {
+        ui->LabelRealName     ->setVisible(true);
+        ui->LabelRealNameValue->setVisible(true);
+        ui->LabelRealNameValue->setText(aProfile.realName());
+    } else {
+        ui->LabelRealName     ->setVisible(false);
+        ui->LabelRealNameValue->setVisible(false);
+    }
+    isBaseInit_ = true;
+}
+
+void FormProfile::setMaximizeInfo(const SProfile &aProfile) {
+    setCommonInfo(aProfile);
+    setLvl(aProfile.steamId());
+    setBadges(aProfile.steamId());
+    setBans(aProfile.steamId());
+    setCustomizations(aProfile.steamId());
+    isMaximizeInit_ = true;
+}
+
+void FormProfile::setCommonInfo(const SProfile &aProfile) {
+    if (aProfile.profileUrl().indexOf("/id/") > -1) {
+        ui->labelVanityUrlValue->setText(aProfile.profileUrl().mid(aProfile.profileUrl().indexOf("/id/") + 4).remove("/"));
+        ui->labelVanityUrlValue->setVisible(true);
+        ui->labelVanityUrl->setVisible(true);
+    } else {
+        ui->labelVanityUrlValue->setText("");
+        ui->labelVanityUrlValue->setVisible(false);
+        ui->labelVanityUrl->setVisible(false);
+    }
+    ui->labelAccountIdValue->setText(aProfile.steamId());
+    //Url
+    ui->labelLinkValue->setText("<img height=13 style=\"vertical-align: top\" src=\"" + Images::link() + "\"> "
+                                "<a href=\"" + aProfile.profileUrl() + "\">"
+                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + aProfile.profileUrl() + "</span></a>");
+    //Дата создания аккаунта
+    ui->labelAccountCreatedValue->setText(aProfile.timeCreated().toString(Settings::dateFormat()));
+    if (aProfile.timeCreated() > QDateTime::fromSecsSinceEpoch(0, Qt::LocalTime)) {
+        ui->labelAccountCreated     ->setVisible(true);
+        ui->labelAccountCreatedValue->setVisible(true);
+    } else {
+        ui->labelAccountCreated     ->setVisible(false);
+        ui->labelAccountCreatedValue->setVisible(false);
+    }
+    //Код страны
+    ui->labelLanguageValue->setText(aProfile.locCountryCode());
+    if (aProfile.locCountryCode() != "") {
+        ui->labelLanguage     ->setVisible(true);
+        ui->labelLanguageValue->setVisible(true);
+    } else {
+        ui->labelLanguage     ->setVisible(false);
+        ui->labelLanguageValue->setVisible(false);
+    }
+
+    if (aProfile.profileState() == 1) {
+        ui->LabelProfileState->setlightningColor(c_green_color)->setText(tr("Настроен профиль сообщества"));
+    } else {
+        ui->LabelProfileState->setlightningColor(c_red_color)->setText(tr("Не настроен профиль сообщества"));
+    }
+
+    if (aProfile.commentPermission() == 1) {
+        ui->LabelCommentPermission->setlightningColor(c_green_color)->setText(tr("Публичные комментарии разрешены"));
+    } else {
+        ui->LabelCommentPermission->setlightningColor(c_red_color)->setText(tr("Публичные комментарии запрещены"));
+    }
 }
 
 void FormProfile::setBans(const ProfileID &aSteamId) {
@@ -218,28 +235,29 @@ void FormProfile::setBans(const ProfileID &aSteamId) {
         }
         }
 
-        setlightningColor(ui->LabelVacBansValue, c_red_color)->setText(tr("%1, последний %2 %3").arg(
+        ui->labelVacBansValue->setlightningColor(c_red_color)->setText(tr("%1, последний %2 %3").arg(
                                                                     QString::number(bans[0].numberOfVacBan()),
                                                                     QString::number(bans[0].daysSinceLastBan()),
                                                                     dayAgo));
     } else {
-        setlightningColor(ui->LabelVacBansValue, c_green_color)->setText(tr("Отсутствуют"));
+        ui->labelVacBansValue->setlightningColor(c_green_color)->setText(tr("Отсутствуют"));
     }
     if(bans[0].numberOfGameBans() > 0) {
-        setlightningColor(ui->LabelGameBansValue, c_red_color)->setText(tr("%1").arg(QString::number(bans[0].numberOfGameBans())));
+        ui->labelGameBansValue->setlightningColor(c_red_color)->setText(tr("%1").arg(QString::number(bans[0].numberOfGameBans())));
     } else {
-        setlightningColor(ui->LabelGameBansValue, c_green_color)->setText(tr("Отсутствуют"));
+        ui->labelGameBansValue->setlightningColor(c_green_color)->setText(tr("Отсутствуют"));
     }
     if(bans[0].communityBanned()) {
-        setlightningColor(ui->LabelCommunityBanValue, c_red_color)->setText(tr("Забанен"));
+        ui->labelCommunityBanValue->setlightningColor(c_red_color)->setText(tr("Забанен"));
     } else {
-        setlightningColor(ui->LabelCommunityBanValue, c_green_color)->setText(tr("Отсутствует"));
+        ui->labelCommunityBanValue->setlightningColor(c_green_color)->setText(tr("Отсутствует"));
     }
     if(bans[0].numberOfGameBans() > 0) {
-        setlightningColor(ui->LabelTradeBanValue, c_red_color)->setText(tr("%1").arg(bans[0].economyBan()));
+        ui->labelTradeBanValue->setlightningColor(c_red_color)->setText(tr("%1").arg(bans[0].economyBan()));
     } else {
-        setlightningColor(ui->LabelTradeBanValue, c_green_color)->setText(tr("Отсутствует"));
+        ui->labelTradeBanValue->setlightningColor(c_green_color)->setText(tr("Отсутствует"));
     }
+
 }
 
 void FormProfile::setBadges(const ProfileID &aSteamId) {
@@ -291,15 +309,15 @@ void FormProfile::setBadges(const ProfileID &aSteamId) {
         }
     }
 
-    ui->LabelSpecialBadgesValue->setText(QString::number(specialBadges));
-    ui->LabelNormalBadgesValue->setText(QString::number(normalBadges));
-    ui->LabelFoilBadgesValue->setText(QString::number(foilBadges));
-    ui->LabelBadges1LvlValue->setText(QString::number(lvl1Badges));
-    ui->LabelBadges2LvlValue->setText(QString::number(lvl2Badges));
-    ui->LabelBadges3LvlValue->setText(QString::number(lvl3Badges));
-    ui->LabelBadges4LvlValue->setText(QString::number(lvl4Badges));
-    ui->LabelBadges5LvlValue->setText(QString::number(lvl5Badges));
-    ui->LabelBadgesMore5LvlValue->setText(QString::number(lvlMore5Badges));
+    ui->labelSpecialBadgesValue->setText(QString::number(specialBadges));
+    ui->labelNormalBadgesValue->setText(QString::number(normalBadges));
+    ui->labelFoilBadgesValue->setText(QString::number(foilBadges));
+    ui->labelNormalLvl1Value ->setText(QString::number(lvl1Badges));
+    ui->labelNormalLvl2Value->setText(QString::number(lvl2Badges));
+    ui->labelNormalLvl3Value->setText(QString::number(lvl3Badges));
+    ui->labelNormalLvl4Value->setText(QString::number(lvl4Badges));
+    ui->labelNormalLvl5Value->setText(QString::number(lvl5Badges));
+    ui->labelNormalLvl5plusValue->setText(QString::number(lvlMore5Badges));
 }
 
 void FormProfile::setTimePlayed(const SGames &aGames) {
@@ -339,53 +357,51 @@ void FormProfile::setTimePlayed(const SGames &aGames) {
             ++more_than_onethouthand;
         }
     }
-    ui->LabelGamesPlayed0hValue->setText(QString::number(never));
-    ui->LabelGamesPlayed0_1hValue->setText(QString::number(zero_one));
-    ui->LabelGamesPlayed1_10hValue->setText(QString::number(one_ten));
-    ui->LabelGamesPlayed10_24hValue->setText(QString::number(ten_day));
-    ui->LabelGamesPlayed24_240hValue->setText(QString::number(day_tenday));
-    ui->LabelGamesPlayed240_500hValue->setText(QString::number(tenday_fivehundreed));
-    ui->LabelGamesPlayed500_1000hValue->setText(QString::number(fivehundreed_onethouthand));
-    ui->LabelGamesPlayedMore1000hValue->setText(QString::number(more_than_onethouthand));
+    ui->labelPlayTime0Value->setText(QString::number(never));
+    ui->labelPlayTime0_1Value->setText(QString::number(zero_one));
+    ui->labelPlayTime1_10Value->setText(QString::number(one_ten));
+    ui->labelPlayTime10_24Value->setText(QString::number(ten_day));
+    ui->labelPlayTime24_240Value->setText(QString::number(day_tenday));
+    ui->labelPlayTime240_500Value->setText(QString::number(tenday_fivehundreed));
+    ui->labelPlayTime500_1000Value->setText(QString::number(fivehundreed_onethouthand));
+    ui->labelPlayTime1000plusValue->setText(QString::number(more_than_onethouthand));
 
-    ui->LabelTotalPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * total / 60, 'f', 1)));
-    ui->LabelWindowsPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * win / 60, 'f', 1)));
-    ui->LabelMacOsPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * mac / 60, 'f', 1)));
-    ui->LabelLinuxPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * linux / 60, 'f', 1)));
+    ui->labelWindowsPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * win / 60, 'f', 1)));
+    ui->labelLinuxPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * linux / 60, 'f', 1)));
+    ui->labelMacOsPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * mac / 60, 'f', 1)));
+    ui->labelTotalPlayTimeValue->setText(tr("%1h").arg(QString::number(1.0 * total / 60, 'f', 1)));
 }
 
 void FormProfile::setCustomizations(const ProfileID &aSteamId) {
     auto items = SProfile::getEquippedItems(aSteamId);
-    ui->LabelBackgroundValue->setText(items.value("profile_background").item_title);
-    ui->LabelMiniProfileValue->setText(items.value("mini_profile_background").item_title);
-    ui->LabelAvatarFrameValue->setText(items.value("avatar_frame").item_title);
-    ui->LabelAnimatedAvatarValue->setText(items.value("animated_avatar").item_title);
+    ui->labelCustomizationBackgroundValue->setText(items.value("profile_background").item_title);
+    ui->labelCustomizationMiniProfileValue->setText(items.value("mini_profile_background").item_title);
+    ui->labelCustomizationAvatarFrameValue->setText(items.value("avatar_frame").item_title);
+    ui->labelCustomizationAnimatedAvatarValue->setText(items.value("animated_avatar").item_title);
 
     auto customizations = SProfileCustomization::load(aSteamId);
     int purchased = 0;
     int upgraded = 0;
-    int lvl1 = 0;
-    int lvl2 = 0;
-    int lvl3 = 0;
+//    int lvl1 = 0;
+//    int lvl2 = 0;
+//    int lvl3 = 0;
     for (const auto &customization: customizations) {
         if (customization.isUpgradable()) {
-            switch (customization.level()) {
-            case 1: {
-                ++lvl1;
-                ++upgraded;
-                break;
-            }
-            case 2: {
-                ++lvl2;
-                ++upgraded;
-                break;
-            }
-            case 3: {
-                ++lvl3;
-                ++upgraded;
-                break;
-            }
-            }
+//            switch (customization.level()) {
+//            case 1: {
+//                ++lvl1;
+//                break;
+//            }
+//            case 2: {
+//                ++lvl2;
+//                break;
+//            }
+//            case 3: {
+//                ++lvl3;
+//                break;
+//            }
+//            }
+            ++upgraded;
         }
         if (customization.isPurchase()) {
             if (customization.count() > 0) {
@@ -393,11 +409,11 @@ void FormProfile::setCustomizations(const ProfileID &aSteamId) {
             }
         }
     }
-    ui->LabelProfileCustomizationsPurchasedValue->setText(QString::number(purchased));
-    ui->LabelProfileCustomizationsUpgradedValue->setText(QString::number(upgraded));
-    ui->LabelProfileCustomization1LvlValue->setText(QString::number(lvl1));
-    ui->LabelProfileCustomization2LvlValue->setText(QString::number(lvl2));
-    ui->LabelProfileCustomization3LvlValue->setText(QString::number(lvl3));
+    ui->labelCustomizationPointsPurchasesValue->setText(QString::number(purchased));
+    ui->labelCustomizationPointsUpgradesValue->setText(QString::number(upgraded));
+//    ui->LabelProfileCustomization1LvlValue->setText(QString::number(lvl1));
+//    ui->LabelProfileCustomization2LvlValue->setText(QString::number(lvl2));
+//    ui->LabelProfileCustomization3LvlValue->setText(QString::number(lvl3));
 }
 
 void FormProfile::setLvl(const ProfileID &aSteamId) {
@@ -419,96 +435,84 @@ void FormProfile::setLvl(const ProfileID &aSteamId) {
     ui->progressBarXp->setMaximum(playerXp - playerXpNeededCurrentLevel + playerXpNeededToLevelUp);
     ui->progressBarXp->setValue(playerXp - playerXpNeededCurrentLevel);
 }
-
-void FormProfile::setCommunityProfile() {
-    if (_profile.profileState() == 1) {
-        setlightningColor(ui->LabelProfileState, c_green_color)->setText(tr("Настроен профиль сообщества"));
-    } else {
-        setlightningColor(ui->LabelProfileState, c_red_color)->setText(tr("Не настроен профиль сообщества"));
-    }
-}
-
-void FormProfile::setCommentPermission() {
-    if (_profile.commentPermission() == 1) {
-        setlightningColor(ui->LabelCommentPermission, c_green_color)->setText(tr("Публичные комментарии разрешены"));
-    } else {
-        setlightningColor(ui->LabelCommentPermission, c_red_color)->setText(tr("Публичные комментарии запрещены"));
-    }
-}
 #define setDataEnd }
 
 #define updateData {
 void FormProfile::updateSettings(QFlags<changedSettings> aSettings) {
-    Settings::syncronizeSettings();
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
-    }
     if (aSettings.testFlag(changedSettings::profileInfo)) {
         updateVisibleInfo();
     }
     if (aSettings.testFlag(changedSettings::myProfile)) {
         updateMyProfile();
     }
+    Form::updateSettings(aSettings);
 }
 
 void FormProfile::updateVisibleInfo() {
-    _visibleInfo = Settings::profileInfoSize();
-    switch (_visibleInfo) {
+    visibleInfo_ = Settings::profileInfoSize();
+    switch(visibleInfo_) {
     case 0: {
-        ui->FrameProfileBaseInfo    ->setVisible(false);
-        ui->FrameProfileMaximumInfo ->setVisible(false);
-
-        ui->LabelNameMinimize       ->setVisible(true);
-        ui->LabelAvatarMinimize->pixmap().scaled(23, 23);
-        ui->LabelAvatarMinimize     ->setVisible(true);
+        if (!isMinimizeInit_) {
+            setMinimizeInfo(profile_);
+        }
         break;
     }
     case 1: {
-        ui->FrameProfileBaseInfo    ->setVisible(true);
-        ui->FrameProfileMaximumInfo ->setVisible(false);
-
-        ui->LabelNameMinimize       ->setVisible(false);
-        ui->LabelAvatarMinimize     ->setVisible(false);
+        if (!isBaseInit_) {
+            setBaseInfo(profile_);
+        }
         break;
     }
     case 2: {
-        ui->FrameProfileBaseInfo    ->setVisible(true);
-        ui->FrameProfileMaximumInfo ->setVisible(true);
+        if (!isBaseInit_) {
+            setBaseInfo(profile_);
+        }
+        if (!isMaximizeInit_) {
+            setMaximizeInfo(profile_);
+        }
+        break;
+    }
+    default: {
+        qWarning() << "Unknown state \"visible info\" at FormProfile";
+    }
+    }
 
-        ui->LabelNameMinimize       ->setVisible(false);
-        ui->LabelAvatarMinimize     ->setVisible(false);
-    }
-    }
+    ui->LabelNameMinimize       ->setVisible(visibleInfo_ == 0);
+    ui->LabelAvatarMinimize     ->setVisible(visibleInfo_ == 0);
+    ui->LabelAvatarMinimize->setPixmap(ui->LabelAvatarMinimize->pixmap().scaled(23, 23));
+    ui->FrameProfileBaseInfo    ->setVisible(visibleInfo_ >= 1);
+    ui->FrameProfileMaximumInfo ->setVisible(visibleInfo_ >= 2);
+
+    updateMyProfile();
     retranslate();
-    ui->ButtonSetProfile->setEnabled(Settings::myProfile() != _profile.steamID());
 }
 
 void FormProfile::updateInfo() {
-    _profile.update();
-    profileToUi(_profile);
+    profile_.update();
+    profileToUi(profile_);
 }
 
 void FormProfile::updateMyProfile() {
-    ui->ButtonSetProfile->setEnabled(Settings::myProfile() != _profile.steamID());
+    ui->ButtonSetProfile->setEnabled(Settings::myProfile() != profile_.steamId());
 }
 
 void FormProfile::retranslate() {
     ui->retranslateUi(this);
-    switch (_visibleInfo) {
+    switch (visibleInfo_) {
     case 0:{
         ui->ButtonGames     ->setText("");
         ui->ButtonFriends   ->setText("");
         ui->ButtonStatistics->setText("");
         ui->ButtonSetProfile->setText("");
-        ui->ButtonGames     ->setToolTip(tr("Игры (%1)").arg(_games.count() > 0 ? QString::number(_games.count()) : tr("???")));
-        ui->ButtonFriends   ->setToolTip(tr("Друзья (%1)").arg(_friends != QList<SFriend>() ? QString::number(_friends.count()) : tr("???")));
+        ui->ButtonGames     ->setToolTip(tr("Игры (%1)").arg(games_.count() > 0 ? QString::number(games_.count()) : tr("???")));
+        ui->ButtonFriends   ->setToolTip(tr("Друзья (%1)").arg(friends_ != QList<SFriend>() ? QString::number(friends_.count()) : tr("???")));
         ui->ButtonStatistics->setToolTip(tr("Статистика"));
         ui->ButtonSetProfile->setToolTip(tr("Установить профиль как свой"));
         break;
     }
     case 1:{
-        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(_games.count() > 0 ? QString::number(_games.count()) : tr("???")));
-        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(_friends != QList<SFriend>() ? QString::number(_friends.count()) : tr("???")));
+        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(games_.count() > 0 ? QString::number(games_.count()) : tr("???")));
+        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(friends_ != QList<SFriend>() ? QString::number(friends_.count()) : tr("???")));
         ui->ButtonStatistics->setText(tr("Статистика"));
         ui->ButtonSetProfile->setText(tr("Это мой профиль"));
         ui->ButtonGames     ->setToolTip("");
@@ -518,8 +522,8 @@ void FormProfile::retranslate() {
         break;
     }
     case 2:{
-        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(_games.count() > 0 ? QString::number(_games.count()) : tr("???")));
-        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(_friends != QList<SFriend>() ? QString::number(_friends.count()) : tr("???")));
+        ui->ButtonGames     ->setText(tr("Игры (%1)").arg(games_.count() > 0 ? QString::number(games_.count()) : tr("???")));
+        ui->ButtonFriends   ->setText(tr("Друзья (%1)").arg(friends_ != QList<SFriend>() ? QString::number(friends_.count()) : tr("???")));
         ui->ButtonStatistics->setText(tr("Статистика"));
         ui->ButtonSetProfile->setText(tr("Это мой профиль"));
         ui->ButtonGames     ->setToolTip("");
@@ -528,44 +532,70 @@ void FormProfile::retranslate() {
         ui->ButtonSetProfile->setToolTip("");
     }
     }
-    setBans(_profile.steamID());
-    setCommunityProfile();
-    setCommentPermission();
+
+    ui->collapsableWidgetCommon->setTitle(tr("Common info"));
+    ui->collapsableWidgetBans->setTitle(tr("Bans"));
+    ui->collapsableWidgetBadges->setTitle(tr("Badges"));
+    ui->collapsableWidgetPlayTime->setTitle(tr("Playtime for platform"));
+    ui->collapsableWidgetGamesPlayTime->setTitle(tr("Games for playtime"));
+    ui->collapsableWidgetCustomizations->setTitle(tr("Profile customizations"));
+
+    ui->labelWindowsPlayTime->setToolTip(tr("Playtime on windows"));
+    ui->labelLinuxPlayTime->setToolTip(tr("Playtime on linux"));
+    ui->labelMacOsPlayTime->setToolTip(tr("Playtime on macOS"));
+
+    setCommonInfo(profile_);
+    setBans(profile_.steamId());
+    setTimePlayed(games_);
     setOnlineStatus();
 }
 
 void FormProfile::updateIcons() {
-    ui->LabelProfileUrl->setText("<img height=13 style=\"vertical-align: top\" src=\"" + Images::link() + "\"> "
-                                "<a href=\"" + _profile.profileUrl() + "\">"
-                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + _profile.profileUrl() + "</span></a>");
+    ui->labelLinkValue->setText("<img height=13 style=\"vertical-align: top\" src=\"" + Images::link() + "\"> "
+                                "<a href=\"" + profile_.profileUrl() + "\">"
+                                "<span style=\" text-decoration: underline; color:#2d7fc8;\">" + profile_.profileUrl() + "</span></a>");
     ui->ButtonSetProfile->setIcon(QIcon(Images::setHome()));
     ui->ButtonStatistics->setIcon(QIcon(Images::statistic()));
     ui->ButtonFriends   ->setIcon(QIcon(Images::friends()));
     ui->ButtonGames     ->setIcon(QIcon(Images::games()));
+
+    ui->labelSpecialBadges->setPixmap(QPixmap(Images::special()).scaled(25, 25));
+    ui->labelNormalBadges->setPixmap(QPixmap(Images::normal()).scaled(25, 25));
+    ui->labelFoilBadges->setPixmap(QPixmap(Images::foil()).scaled(25, 25));
+    ui->labelNormalLvl1->setPixmap(QPixmap(Images::badges1()).scaled(25, 25));
+    ui->labelNormalLvl2->setPixmap(QPixmap(Images::badges2()).scaled(25, 25));
+    ui->labelNormalLvl3->setPixmap(QPixmap(Images::badges3()).scaled(25, 25));
+    ui->labelNormalLvl4->setPixmap(QPixmap(Images::badges4()).scaled(25, 25));
+    ui->labelNormalLvl5->setPixmap(QPixmap(Images::badges5()).scaled(25, 25));
+    ui->labelNormalLvl5plus->setPixmap(QPixmap(Images::badges5plus()).scaled(25, 25));
+
+    ui->labelWindowsPlayTime->setPixmap(QPixmap(Images::windows()).scaled(25, 25));
+    ui->labelLinuxPlayTime->setPixmap(QPixmap(Images::linux()).scaled(25, 25));
+    ui->labelMacOsPlayTime->setPixmap(QPixmap(Images::mac()).scaled(25, 25));
 }
 #define updateDataEnd }
 
 #define uiFunctions {
 void FormProfile::buttonSetProfile_Clicked() {
-    Settings::setMyProfile(_profile.steamID());
+    Settings::setMyProfile(profile_.steamId());
     emit s_settingsUpdated(changedSettings::myProfile);
 }
 
 void FormProfile::buttonGames_Clicked() {
-    if(_games.count() > 0) {
-        emit s_goToGames(_profile.steamID());
+    if(games_.count() > 0) {
+        emit s_goToGames(profile_.steamId());
     }
 }
 
 void FormProfile::buttonFriends_Clicked() {
-    if(_friends != QList<SFriend>()) {
-        emit s_goToFriends(_profile.steamID());
+    if(friends_ != QList<SFriend>()) {
+        emit s_goToFriends(profile_.steamId());
     }
 }
 
 void FormProfile::buttonStatistics_Clicked() {
-    if(_games.count() > 0) {
-        emit s_goToStatistic(_profile);
+    if(games_.count() > 0) {
+        emit s_goToStatistic(profile_);
     }
 }
 #define uiFunctionsEnd }

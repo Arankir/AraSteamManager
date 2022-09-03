@@ -26,11 +26,11 @@ FormFriendsCompare::FormFriendsCompare(QWidget *parent): Form(parent), ui(new Ui
     #define ConnectsEnd }
 }
 
-void FormFriendsCompare::updateSettings(QFlags<changedSettings> aSettings) {
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
-    }
-}
+//void FormFriendsCompare::updateSettings(QFlags<changedSettings> aSettings) {
+//    if (aSettings.testFlag(changedSettings::theme)) {
+//        updateIcons();
+//    }
+//}
 
 void FormFriendsCompare::setInitData(const SProfile &profile, const SGame &game, AchievementsModel *achievementsModel/*, SAchievements &achievements*//*, QAbstractItemModel *model*//*, MyFilter *aFAchievements*/) {
     _achievementsModel = achievementsModel;
@@ -106,7 +106,7 @@ void FormFriendsCompare::updateFilterFriend(SProfile *aSteamId, const ReachedTyp
         return;
     }
     for (int i = 0; i < _achievementsModel->columnCount() - achievementsModel::ReachedMy; ++i) {
-        if (_achievementsModel->getProfile(i).steamID() == aSteamId->steamID()) {
+        if (_achievementsModel->getProfile(i).steamId() == aSteamId->steamId()) {
             switch (aType) {
             case ReachedType::all: {
                 _filtersFriends[i - 1]->setFilterRegularExpression("");
@@ -133,7 +133,7 @@ void FormFriendsCompare::updateFilterFriend(SProfile *aSteamId, const ReachedTyp
 
 void FormFriendsCompare::loadingCompare() {
     ++_loadCompare;
-    auto friends = SFriend::load(_profile.steamID());
+    auto friends = SFriend::load(_profile.steamId());
     emit s_startLoad();
     QStringList list;
     for(const SFriend &sFriend: qAsConst(friends)) {
@@ -142,7 +142,7 @@ void FormFriendsCompare::loadingCompare() {
     _profilesFriends = SProfile::load(list);
 
     for(const auto &profileFriend: qAsConst(_profilesFriends)) {
-        QString steamId = profileFriend.steamID();
+        QString steamId = profileFriend.steamId();
         SGame::load(steamId, true, true, std::bind(&FormFriendsCompare::loadFriendGames, this,  std::placeholders::_1, steamId));
     }
 }
@@ -153,7 +153,7 @@ void FormFriendsCompare::loadFriendGames(const SGames &aGames, const QString &aU
     auto iterator = std::find_if(_profilesFriends.begin(),
                                  _profilesFriends.end(),
                                  [=](const SProfile &profile) {
-                                     return aUserId == profile.steamID();
+                                     return aUserId == profile.steamId();
                                  });
     if (iterator != _profilesFriends.end()) {
         bool isGameExist = std::any_of(aGames.begin(),

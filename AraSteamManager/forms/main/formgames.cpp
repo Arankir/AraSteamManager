@@ -23,8 +23,12 @@ void FormGames::init() {
         ui->tableGames->resizeRowsToContents();
         updateGroups();
         updateHiddenGames();
+        clearStatus();
         emit s_finish(getWidthTableColumns(ui->tableGames));
     });
+    ui->splitter->setStretchFactor(0, 1);
+    ui->splitter->setStretchFactor(1, 10);
+    _filterGames.setDynamicSortFilter(true);
     _filterGames.setSourceModel(games);
     ui->tableGames->setModel(&_filterGames);
     ui->tableGames->setColumnHidden(gamesModel::Appid, true);
@@ -48,7 +52,6 @@ void FormGames::init() {
     connect(&_filterGames, &FilterModel::s_rowsUpdated, this, [&]() {
         ui->tableGames->resizeRowsToContents();
     });
-    connect(this, &Form::s_settingsUpdated, ui->lineEditGame, &MyLineEdit::updateSettings);
 #define ConnectsEnd }
 }
 
@@ -56,6 +59,12 @@ void FormGames::setGames(const ProfileID &aProfileId) {
     clear();
     _steamId = aProfileId;
     _filterGames.sourceModel()->setGames(SGame::load(_steamId, true, true), _steamId);
+}
+
+void FormGames::setGames(const ProfileID &aProfileId, const SGames &aGames) {
+    clear();
+    _steamId = aProfileId;
+    _filterGames.sourceModel()->setGames(aGames, _steamId);
 }
 #define InitEnd }
 
@@ -66,6 +75,15 @@ int FormGames::currentIndex() {
 
 SGame FormGames::currentGame() {
     return _filterGames.getGame(currentIndex());
+}
+
+SGames FormGames::currentGames() {
+    auto selected = ui->tableGames->selectionModel()->selectedRows();
+    SGames games;
+    for (const auto &select: selected) {
+        games << _filterGames.getGame(ui->tableGames->model()->data(select.siblingAtColumn(gamesModel::Index)).toInt());
+    }
+    return games;
 }
 
 QStringList FormGames::currentComment() {
@@ -87,12 +105,10 @@ void FormGames::retranslate() {
 }
 
 void FormGames::updateSettings(QFlags<changedSettings> aSettings) {
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
-    }
     if (aSettings.testFlag(changedSettings::visibleHiddenGame)) {
         updateHiddenGames();
     }
+    Form::updateSettings(aSettings);
 }
 
 void FormGames::updateIcons() {
@@ -100,7 +116,7 @@ void FormGames::updateIcons() {
 }
 
 void FormGames::setEnable(bool isEnable) {
-    ui->groupBoxFilter->setEnabled(isEnable);
+    ui->frameFilter->setEnabled(isEnable);
     ui->tableGames->setEnabled(isEnable);
 }
 
@@ -212,7 +228,7 @@ QMenu *FormGames::createMenu(const SGame &aGame) {
         actionFavorites = new QAction(QIcon(Images::isFavorites()), tr("Удалить из избранного"), this);
         actionFavorites->setObjectName("RemoveFavorite");
         connect (actionFavorites,       &QAction::triggered,    this,   [&](){
-            FavoriteGames().remove(_steamId, currentGame());
+            FavoriteGames().remove(_steamId, currentGame().appId());
         });
     } else {
         actionFavorites = new QAction(QIcon(Images::isNotFavorites()), tr("Добавить в избранное"), this);
@@ -295,7 +311,7 @@ void FormGames::buttonHide_Clicked() {
 void FormGames::showGroupsEdit() {
     FormGroups *groups = new FormGroups(this);
     groups->setObjectName(QString("Groups%1").arg(_steamId));
-    groups->setProfileGame(_steamId, currentGame());
+    groups->setProfileGames(_steamId, currentGames());
     groups->setAttribute( Qt::WA_DeleteOnClose );
     QFrame *frame = createSubForm<FormGroups>(groups, this);
     connect(groups, &FormGroups::s_updateGroups,    this, &FormGames::updateGroups);

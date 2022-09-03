@@ -8,6 +8,10 @@ LabelLight::LabelLight(QWidget *aParent): QLabel(aParent) {
     setGraphicsEffect(_light);
 }
 
+LabelLight::LabelLight(const QString &aTitle, QWidget *aParent): LabelLight(aParent) {
+    setText(aTitle);
+}
+
 LabelLight::~LabelLight() {
     delete _light;
 }
@@ -29,4 +33,10 @@ LabelLight &LabelLight::setLightColor(QColor aColor) {
 LabelLight &LabelLight::setBlurRadius(int aRadius) {
     _light->setBlurRadius(aRadius);
     return *this;
+}
+
+LabelLight *LabelLight::setlightningColor(const QColor &aColor) {
+    setStyleSheet("color: " + aColor.name());
+    setLightColor(aColor);
+    return this;
 }

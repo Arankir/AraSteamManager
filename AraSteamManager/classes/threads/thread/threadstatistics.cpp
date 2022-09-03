@@ -5,7 +5,7 @@ int ThreadStatistics::fill() {
 //        SAchievementPlayer::load(game.appId(), _id, std::bind(&ThreadStatistics::onResultAchievements, this, std::placeholders::_1, game));
 //    }
     for (auto &game: statistics_.games) {
-        SAchievementsPlayer::load(game.appId(), statistics_.profile.steamID(), std::bind(&ThreadStatistics::onResultAchievements, this, std::placeholders::_1, game));
+        SAchievementsPlayer::load(game.appId(), statistics_.profile.steamId(), std::bind(&ThreadStatistics::onResultAchievements, this, std::placeholders::_1, game));
     }
     return 1;
 }
@@ -105,7 +105,7 @@ void ThreadStatistics::updateTimes(const QDateTime &aUnlockedTime) {
 
 void Statistics::changeProfile(const SProfile &aProfile) {
     profile = aProfile;
-    games = SGame::load(profile.steamID(), true, true);
+    games = SGame::load(profile.steamId(), true, true);
 
     summAverages = 0.0;
     achievementCount = 0;

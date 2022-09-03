@@ -37,6 +37,7 @@ public:
     QString imgIconUrl()            const;
     QString imgLogoUrl()            const;
 
+    static QPixmap pixmapIcon(const GameID &aGameId, const QString &aIconPath);
 signals:
 
 private:

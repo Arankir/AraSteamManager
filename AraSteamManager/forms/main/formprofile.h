@@ -21,9 +21,9 @@ class FormProfile : public Form {
 public:
     explicit FormProfile(const SProfile &profile, QWidget *parent = nullptr);
     ~FormProfile() override;
-    SProfile getProfile() const {return _profile;}
-    SGames getGames() const {return _games;}
-    QList<SFriend> getFriends() const {return _friends;}
+    SProfile getProfile() const {return profile_;}
+    SGames getGames() const {return games_;}
+    QList<SFriend> getFriends() const {return friends_;}
 
 public slots:
     void profileToUi(const SProfile &profile);
@@ -39,16 +39,18 @@ signals:
     void s_goToStatistic(const SProfile &profile);
     void s_goToFavorites();
 
+protected slots:
+    void setMinimizeInfo(const SProfile &aProfile);
+    void setBaseInfo(const SProfile &aProfile);
+    void setMaximizeInfo(const SProfile &aProfile);
 private slots:
     void setLvl(const ProfileID &aSteamId);
     void setOnlineStatus();
     void setGames(const ProfileID &aSteamId);
     void setFriends(const ProfileID &aSteamId);
     void setProfileStatus();
-    void setCommentPermission();
-    void setCommunityProfile();
 
-    void setId(const ProfileID &aSteamId);
+    void setCommonInfo(const SProfile &aProfile);
     void setBans(const ProfileID &aSteamId);
     void setBadges(const ProfileID &aSteamId);
     void setTimePlayed(const SGames &aGames);
@@ -61,16 +63,19 @@ private slots:
 
     void updateIcons() override;
     void updateMyProfile();
-//    QGraphicsDropShadowEffect *createLightning();
     void setColorStatus(const QColor &aColor);
 
 private:
     Ui::FormProfile *ui;
-    SProfile _profile;
-    SGames _games;
-    QList<SFriend> _friends;
-    //Settings _setting;
-    int _visibleInfo;
+    SProfile profile_;
+    SGames games_;
+    QList<SFriend> friends_;
+    int visibleInfo_;
+
+    bool isMinimizeInit_ = false;
+    bool isBaseInit_ = false;
+    bool isMaximizeInit_ = false;
+
 };
 
 #endif // FORMPROFILE_H

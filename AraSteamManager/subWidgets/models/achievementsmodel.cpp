@@ -4,7 +4,6 @@ using namespace achievementsModel;
 
 constexpr QColor c_achievedColor      = QColor (87, 220, 87, 255 * 1);
 constexpr QColor c_notAchievedColor   = QColor (255, 48, 48, 255 * 1);
-constexpr int c_reservedRows = 1;
 
 AchievementsModel::AchievementsModel(QObject *aParent): QAbstractTableModel(aParent) {
 
@@ -70,37 +69,72 @@ QVariant AchievementsModel::data(const QModelIndex &aIndex, int aRole) const {
         return QVariant();
 
     if (aIndex.row() < c_reservedRows) {
-        switch (aRole) {
-        case Qt::DecorationRole: {
-            switch (aIndex.column()) {
-            case Appid:
-            case Index:
-            case Icon:
-            case Title:
-            case Description:
-            case Comments:
-            case World: {
-                return QVariant();
+        switch (aIndex.row()) {
+        case ReservedRows::Avatar : {
+            switch (aRole) {
+            case Qt::DecorationRole: {
+                switch (aIndex.column()) {
+                case Appid:
+                case Index:
+                case Icon:
+                case Title:
+                case Description:
+                case Comments:
+                case World: {
+                    return QVariant();
+                }
+                default: {
+                    return profiles_[aIndex.column() - Count].first.pixmapAvatar();
+                }
+                }
+                break;
+            }
+            case Qt::ToolTipRole: {
+                switch (aIndex.column()) {
+                case Appid:
+                case Index:
+                case Icon:
+                case Title:
+                case Description:
+                case Comments:
+                case World: {
+                    return QVariant();
+                }
+                default: {
+                    return textToToolTip(profiles_[aIndex.column() - Count].first.personaName());
+                }
+                }
+                break;
             }
             default: {
-                return profiles_[aIndex.column() - Count].pixmapAvatar();
+                return QVariant();
             }
             }
             break;
         }
-        case Qt::ToolTipRole: {
-            switch (aIndex.column()) {
-            case Appid:
-            case Index:
-            case Icon:
-            case Title:
-            case Description:
-            case Comments:
-            case World: {
-                return QVariant();
+        case ReservedRows::Percent : {
+            switch (aRole) {
+            case Qt::DisplayRole: {
+                switch (aIndex.column()) {
+                case Appid:
+                case Index:
+                case Icon:
+                case Title:
+                case Description:
+                case Comments:
+                case World: {
+                    return QVariant();
+                }
+                default: {
+                    return QString("%1/%2\n(%3%)").arg(QString::number(profiles_[aIndex.column() - Count].second),
+                                                        QString::number(getAchievementsCount()),
+                                                        QString::number(profiles_[aIndex.column() - Count].second / (1.0 * getAchievementsCount() / 100), 'f', 2));
+                }
+                }
+                break;
             }
             default: {
-                return textToToolTip(profiles_[aIndex.column() - Count].personaName());
+                return QVariant();
             }
             }
             break;
@@ -270,7 +304,7 @@ QVariant AchievementsModel::headerData(int aSection, Qt::Orientation aOrientatio
             return tr("");
         }
         case Icon: {
-            return tr("");
+            return tr("Иконка");
         }
         case Title: {
             return tr("Название");
@@ -286,14 +320,14 @@ QVariant AchievementsModel::headerData(int aSection, Qt::Orientation aOrientatio
         }
         default: {
             if (aSection - Count >= 0 && aSection - Count < profiles_.count()) {
-                return profiles_[aSection - Count].personaName();
+                return profiles_[aSection - Count].first.personaName();
             } else {
                 return QVariant();
             }
         }
         }
     else
-        return QString("%1").arg(aSection);
+        return QString("");//.arg(aSection);
 }
 
 AchievementID AchievementsModel::achievementId(const QModelIndex &aIndex) const {
@@ -362,18 +396,19 @@ int AchievementsModel::getReachedFromProfile(const int &aIndex) {
     return result;
 }
 
-int AchievementsModel::getAchievementsCount() {
+int AchievementsModel::getAchievementsCount() const {
     return achievementsInModel_.count();
 }
 
 int AchievementsModel::addProfile(const SProfile &aProfile) {
     beginInsertColumns(QModelIndex(), columnCount(), columnCount());
-    profiles_.append(aProfile);
-    auto players = SAchievementsPlayer(gameId_, aProfile.steamID());
+    int countAchieved = 0;
+    auto players = SAchievementsPlayer(gameId_, aProfile.steamId());
     if (players.count() == achievementsInModel_.count()) {
         for (auto &achievement: achievementsInModel_) {
             for (auto &player: players) {
                 if (player.apiName() == achievement.schema.apiName()) {
+                    countAchieved += player.achieved();
                     achievement.profiles.append(player);
                     break;
                 }
@@ -384,19 +419,20 @@ int AchievementsModel::addProfile(const SProfile &aProfile) {
             achievement.profiles.append(SAchievementPlayer(players.error()));
         }
     }
+    profiles_.append(QPair<SProfile, int>(aProfile, countAchieved));
     endInsertColumns();
     return profiles_.count() - 1;
 }
 
 SProfile AchievementsModel::getProfile(const int &aIndex) {
-    return profiles_[aIndex];
+    return profiles_[aIndex].first;
 }
 
 int AchievementsModel::getProfileNumber(const ProfileID &aProfileId) {
     auto iterator = std::find_if(profiles_.begin(),
                                  profiles_.end(),
-                                 [=](const SProfile &lProfile) {
-                                    return lProfile.steamID() == aProfileId;
+                                 [=](const QPair<SProfile, double> &lProfile) {
+                                    return lProfile.first.steamId() == aProfileId;
                                  });
     if (iterator != profiles_.end()) {
         return iterator - profiles_.begin();
@@ -409,8 +445,8 @@ void AchievementsModel::removeProfile(const SProfile &aProfile) {
     beginRemoveColumns(QModelIndex(), columnCount() - 1, columnCount() - 1);
     auto iterator = std::find_if(profiles_.begin(),
                                  profiles_.end(),
-                                 [=](const SProfile &lProfile) {
-                                    return lProfile.steamID() == aProfile.steamID();
+                                 [=](const QPair<SProfile, double> &lProfile) {
+                                    return lProfile.first.steamId() == aProfile.steamId();
                                 });
     if (iterator == profiles_.end()) {
         return;
@@ -626,6 +662,7 @@ bool CategoriesFilter::addCategory(Category *aCategory) {
     for(QString &category: list) {
         category.replace(".", "..");
     }
+    list.takeFirst();
     QString parent = list.join(".");
     auto iteratorOneParent = categories_.find(parent);
     if (iteratorOneParent != categories_.end()) {
@@ -646,6 +683,7 @@ bool CategoriesFilter::removeCategory(Category *aCategory) {
     for(QString &category: list) {
         category.replace(".", "..");
     }
+    list.takeFirst();
     QString parent = list.join(".");
     auto iteratorOneParent = categories_.find(parent);
     if (iteratorOneParent != categories_.end()) {
@@ -728,8 +766,24 @@ bool FilterModelAchievements::filterAcceptsRow(int aSource_row, const QModelInde
     return filter_[aSource_row];
 }
 
+const int SPECIFIC_DATA_INDEX = 0;
+const QString SPECIFIC_DATA = "";
+
 bool FilterModelAchievements::lessThan(const QModelIndex &aLeft, const QModelIndex &aRight) const {
-    if (aLeft.column() == World && aRight.column() == World) {
+    // Get specific data from left row
+    QModelIndex leftIndex = sourceModel()->index(aLeft.row(), SPECIFIC_DATA_INDEX);
+    QString leftProperty = sourceModel()->data(leftIndex).toString();
+    // Get specific data from right row
+    QModelIndex  rightIndex = sourceModel()->index(aRight.row(), SPECIFIC_DATA_INDEX);
+    QString rightProperty = sourceModel()->data(rightIndex).toString();
+
+    if(leftProperty.compare(SPECIFIC_DATA) == 0) {// put left on top if it has a specific property
+        return sortOrder() == Qt::AscendingOrder;
+    } else if(rightProperty.compare(SPECIFIC_DATA) == 0) { // put right on top if it has a specific property
+        return sortOrder() != Qt::AscendingOrder;
+    }
+
+    if (aLeft.column() == aRight.column() && aLeft.column() == World) {
         QVariant leftData = sourceModel()->data(aLeft);
         QVariant rightData = sourceModel()->data(aRight);
         double iLeft = leftData.toString().left(leftData.toString().indexOf("%")).toDouble();
@@ -742,7 +796,7 @@ bool FilterModelAchievements::lessThan(const QModelIndex &aLeft, const QModelInd
 int FilterModelAchievements::addProfile(const SProfile &aProfile) {
     int number = sourceModel()->addProfile(aProfile);
     static int column = 3;
-    columns_.insert(aProfile.steamID(), ++column);
+    columns_.insert(aProfile.steamId(), ++column);
     filter_.insertCol(column);
     return number;
 }
@@ -753,7 +807,7 @@ SProfile FilterModelAchievements::getProfile(const int &aIndex) {
 
 void FilterModelAchievements::removeProfile(const SProfile &aProfile) {
     sourceModel()->removeProfile(aProfile);
-    int filterColumnReached = columns_.value(aProfile.steamID());
+    int filterColumnReached = columns_.value(aProfile.steamId());
     filter_.disableCol(filterColumnReached);
 }
 
@@ -769,6 +823,10 @@ void FilterModelAchievements::setSourceModel(AchievementsModel *aSourceModel) {
         }
     });
     FilterModel::setSourceModel(aSourceModel);
+}
+
+QMap<ProfileID, int> FilterModelAchievements::getProfiles() {
+    return profiles_;
 }
 
 AchievementsModel *FilterModelAchievements::sourceModel() const {
@@ -857,6 +915,10 @@ void FilterModelAchievements::setReachedFriend(int aNewReached, const ProfileID 
 
 void FilterModelAchievements::setCategories(const CategoriesFilter &aNewCategories) {
     categories_ = aNewCategories;
+    updateCategoriesFilter();
+}
+
+void FilterModelAchievements::updateCategoriesFilter() {
     auto ids = categories_.getAchievementIDs();
     int filterColumnCategories = columns_.value("categories");
     if (categories_.getCategories().count() > 0) {
@@ -873,6 +935,16 @@ void FilterModelAchievements::setCategories(const CategoriesFilter &aNewCategori
 
 CategoriesFilter FilterModelAchievements::getCategories() const {
     return categories_;
+}
+
+void FilterModelAchievements::addCategory(Category *aCategory) {
+    categories_.addCategory(aCategory);
+    updateCategoriesFilter();
+}
+
+void FilterModelAchievements::removeCategory(Category *aCategory) {
+    categories_.removeCategory(aCategory);
+    updateCategoriesFilter();
 }
 
 void FilterModelAchievements::setFavorites(const QStringList &aNewFavorites) {

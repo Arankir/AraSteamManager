@@ -1,4 +1,5 @@
 #include "achievementcompletedpiechart.h"
+#include "classes/common/theme.h"
 
 AchievementCompletedPieChart::AchievementCompletedPieChart() {
     noAchievements_ = addSlice(QColor(20,  20,  20));
@@ -12,6 +13,7 @@ AchievementCompletedPieChart::AchievementCompletedPieChart() {
     connect(completed_,     &QPieSlice::clicked, this, [&]() {emit s_completedClicked();});
 
     retranslate();
+    updateTheme();
 }
 
 void AchievementCompletedPieChart::setNoAchievements(const int &aCount) {

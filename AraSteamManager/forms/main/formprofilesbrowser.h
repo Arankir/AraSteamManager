@@ -38,7 +38,7 @@ signals:
     void s_settingsClicked();
 
 protected:
-    void keyPressEvent(QKeyEvent *aEvent);
+    void keyPressEvent(QKeyEvent *aEvent) override;
 private:
     FormProfile *createFormProfile(const SProfile &aProfile);
     void updateProfileNavigation();
@@ -50,8 +50,6 @@ private:
     void buttonBack_Clicked();
     void buttonNext_Clicked();
     void buttonUpdate_Clicked();
-
-    SProfile::LoadType identifyProfileType(ProfileID &aId);
 
     Ui::FormProfilesBrowser *ui;
 };

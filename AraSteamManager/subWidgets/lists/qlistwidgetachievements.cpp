@@ -7,14 +7,10 @@ QListWidgetAchievements::QListWidgetAchievements(QWidget *aParent) : QListWidget
     setWhatsThis(c_whatsThis);
 }
 
-void QListWidgetAchievements::setGame(SGame &aGame) {
-    _game = aGame;
-}
-
-void QListWidgetAchievements::insertAchievement(const SAchievement &aAchievement, int aRow) {
+void QListWidgetAchievements::insertAchievement(const SAchievement &aAchievement, const GameID &aGameId, int aRow) {
     QListWidgetAchievement *item = new QListWidgetAchievement(aAchievement);
-    if (_game.appId() > 0) {
-        item->setIcon(aAchievement.icon(_game.appId()));
+    if (aGameId > 0) {
+        item->setIcon(aAchievement.icon(aGameId));
     }
     item->setText(aAchievement.displayName());
     item->setToolTip(textToToolTip(aAchievement.description()));

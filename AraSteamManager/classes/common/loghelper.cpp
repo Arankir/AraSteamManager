@@ -61,9 +61,10 @@ void LogHelper::myMessageOutput(QtMsgType aType, const QMessageLogContext &aCont
     switch (aType) {
      case QtDebugMsg:
          // Отладочный вывод возможен только при компиляции в режиме отладки
-         #ifdef QT_DEBUG
+//         #ifdef QT_DEBUG
+//         smartPrintDebugMessage("[DBG] " + QString(function) + " " + aMsgText + "\n");
+//         #endif
          smartPrintDebugMessage("[DBG] " + QString(function) + " " + aMsgText + "\n");
-         #endif
          break;
      case QtWarningMsg:
          smartPrintDebugMessage("[WRN] " + QString(function) + " " + aMsgText + "\n");

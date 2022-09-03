@@ -5,7 +5,7 @@
 #include <QModelIndex>
 
 CategoriesModel::CategoriesModel(Category *aCategory, QObject *parent): QAbstractItemModel(parent), rootItem_{aCategory} {
-    updateData(aCategory);
+    update();
 }
 
 CategoriesModel::~CategoriesModel() {
@@ -31,7 +31,7 @@ QVariant CategoriesModel::data(const QModelIndex &index, int role) const {
         return item->title();
     }
     case Qt::CheckStateRole: {
-        if (item->categories().size() > 0) {
+        if (item->size() > 0) {
             if (isChecked_.find(item) != isChecked_.end()) {
                 return Qt::Checked;
             } else {
@@ -55,12 +55,12 @@ Qt::ItemFlags CategoriesModel::flags(const QModelIndex &index) const {
     if (item != nullptr) {
         if (item->count() > 0) {
             return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | Qt::ItemIsEditable | Qt::ItemIsUserCheckable | QAbstractItemModel::flags(index);
+        } else {
+            return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | Qt::ItemIsEditable | QAbstractItemModel::flags(index);
         }
     } else {
         return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled;
     }
-
-    return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | Qt::ItemIsEditable | QAbstractItemModel::flags(index);
 }
 
 Qt::DropActions CategoriesModel::supportedDropActions() const {
@@ -113,14 +113,30 @@ bool CategoriesModel::insertColumns(int position, int columns, const QModelIndex
     return false;
 }
 
-bool CategoriesModel::insertRows(int position, int columns, const QModelIndex &parent) {
-    Q_UNUSED(columns);
-    Category *parentItem = getItem(parent);
+bool CategoriesModel::insertRows(int position, const QModelIndex &parent, const QString &aTitle) {
+    if (aTitle.isEmpty()) {
+        return false;
+    }
+    if (getItem(parent)->find(aTitle) != nullptr) {
+        return false;
+    }
+    auto success = insertRows(position, 1, parent);
+    if (success) {
+        setData(index(getItem(parent)->categories().count() - 1, 0, parent), aTitle);
+        return true;
+    }
+    return false;
+}
+
+bool CategoriesModel::insertRows(int aPosition, int aCount, const QModelIndex &aParent) {
+    Q_UNUSED(aCount);
+    Category *parentItem = getItem(aParent);
     if (!parentItem)
         return false;
 
-    beginInsertRows(parent, position, position);
-    const bool success = parentItem->addCategory(new Category(rootItem_->gameID(), rootItem_->gameName()));
+    beginInsertRows(aParent, aPosition, aPosition);
+    auto category = new Category(rootItem_->gameID(), rootItem_->gameName(), false);
+    bool success = parentItem->addCategory(category);
     endInsertRows();
 
     return success;
@@ -151,24 +167,24 @@ int getRowFromParent(Category *aCategory) {
     }
 }
 
-bool CategoriesModel::removeColumns(int position, int columns, const QModelIndex &parent) {
+bool CategoriesModel::removeColumns(int position, int count, const QModelIndex &parent) {
     Q_UNUSED(position);
-    Q_UNUSED(columns);
+    Q_UNUSED(count);
     Q_UNUSED(parent);
     return false;
 }
 
-bool CategoriesModel::removeRows(int position, int columns, const QModelIndex &parent) {
-    Q_UNUSED(columns);
+bool CategoriesModel::removeRows(int position, int count, const QModelIndex &parent) {
+    Q_UNUSED(count);
     Category *parentItem = getItem(parent);
     if (!parentItem)
         return false;
 
     QList<Category*> categories = parentItem->categories();
-    if (categories.size() > position) {
+    if (categories.count() > position) {
         Category *childItem = categories.at(position);
         beginRemoveRows(parent, position, position);
-        parentItem->removeCategory(childItem->title());
+        parentItem->removeCategory(childItem->title(), true);
         endRemoveRows();
         return true;
     } else {
@@ -177,61 +193,27 @@ bool CategoriesModel::removeRows(int position, int columns, const QModelIndex &p
     }
 }
 
-bool CategoriesModel::removeCategory(Category *aCategory) {
-    QStringList path = aCategory->getPathFromRoot();
-    if (!rootItem_->find(path)) {
-        emit s_error(tr("Попытка удалить категорию не из текущей модели"));
-        return false;
+bool CategoriesModel::removeAllCategories(const QModelIndex &aParent) {
+    while (getItem(aParent)->categories().count() > 0) {
+        removeAllCategories(index(0, 0, aParent));
     }
-    int rowFromParent = getRowFromParent(aCategory);
-    if (rowFromParent > -1) {
-        int rowParent = getRowFromParent(aCategory->parent());
-        QModelIndex index;
-        if (rowParent == -1) {
-            index = index(0, 0);
-        } else {
-            index = createIndex(rowParent, 0, aCategory->parent());
-        }
-        beginRemoveRows(index, rowFromParent, rowFromParent);
-        auto cat = aCategory->parent();
-        qDebug() << *cat;
-        if (aCategory->root()->removeCategory(path)) {
-            delete aCategory;
-            qDebug() << *cat;
-            endRemoveRows();
-            return true;
-        } else {
-            endRemoveRows();
-            return false;
-        }
-    } else {
-        return false;
+    if (getItem(aParent)->categories().count() == 0) {
+        removeRows(aParent.row(), 1, parent(aParent));
+        return true;
     }
+    return true;
 }
 
 bool CategoriesModel::removeAllCategories() {
-    QModelIndex index = createIndex(0, 0, rootItem_);
-    beginRemoveRows(index, 0, rootItem_->countCategories() - 1);
-    rootItem_->deleteAllCategories();
-    endRemoveRows();
+    QModelIndex index = parent(this->index(0, 0));
+    while (getItem(index)->categories().count() > 0) {
+        removeAllCategories(this->index(0, 0, index));
+    }
     return true;
 }
 
 bool CategoriesModel::saveCategories() {
     return rootItem_->save();
-}
-
-bool CategoriesModel::insertCategory(Category *aCategory, const QStringList &aList) {
-    Category *parent = rootItem_->find(aList);
-    if (parent) {
-        QModelIndex index = createIndex(getRowFromParent(parent), 0, parent);
-        beginInsertRows(index, parent->categories().size(), parent->categories().size());
-        aCategory->setParent(parent);
-        endInsertRows();
-        return true;
-    } else {
-        return false;
-    }
 }
 
 int CategoriesModel::rowCount(const QModelIndex &parent) const {
@@ -248,7 +230,7 @@ int CategoriesModel::rowCount(const QModelIndex &parent) const {
 }
 
 bool CategoriesModel::setData(const QModelIndex &index, const QVariant &value, int role) {
-    if (role != Qt::EditRole && role != Qt::DisplayRole && role != Qt::CheckStateRole) //Вылетает если драгндропнуть межну категориями
+    if (role != Qt::EditRole && role != Qt::DisplayRole && role != Qt::CheckStateRole)
         return false;
     Category *item = getItem(index);
     bool result = false;
@@ -366,6 +348,11 @@ bool CategoriesModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
     return false;
 }
 
-void CategoriesModel::updateData(Category *parent) {
-    parent->update();
+void CategoriesModel::setGame(const SGame &aGame) {
+    rootItem_->setGame(aGame);
+    update();
+}
+
+void CategoriesModel::update() {
+    rootItem_->update();
 }

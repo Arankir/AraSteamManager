@@ -31,6 +31,7 @@ public:
     QString        iconGray()       const;
 
     void fromJson(const QJsonObject &aObject);
+    static QPixmap icon(const GameID &aGameId, const QString &aIconPath);
 private:
     AchievementID   apiName_;
     int             defaultValue_;

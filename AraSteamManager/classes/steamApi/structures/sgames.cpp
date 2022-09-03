@@ -104,6 +104,13 @@ QPixmap SGame::pixmapIcon() const {
     return QPixmap::fromImage(loadImage(pixmapIcon_, Sapi::gameImageUrl(appId_, img_icon_url_), Paths::imagesGames(img_icon_url_), QSize(32, 32)));
 }
 
+QPixmap SGame::pixmapIcon(const GameID &aGameId, const QString &aIconPath) {
+    if (aIconPath.isEmpty()) {
+        return QPixmap(Images::missingImage()).scaled(QSize(32, 32));
+    }
+    return QPixmap::fromImage(loadImage(Sapi::gameImageUrl(aGameId, aIconPath), Paths::imagesGames(aIconPath), QSize(32, 32)));
+}
+
 QPixmap SGame::pixmapLogo() const {
     if (img_icon_url_.isEmpty()) {
         pixmapLogo_ = QPixmap(Images::missingImage()).scaled(QSize(184, 69)).toImage();

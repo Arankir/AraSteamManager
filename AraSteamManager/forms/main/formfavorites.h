@@ -20,6 +20,35 @@ enum tableFavoritesColumns {
     ColumnFavoritesCount    = 7
 };
 
+namespace FormFavoriteData {
+    namespace tableGames {
+        enum Columns {
+            profileId = 0,
+            gameId = 1,
+            icon = 2,
+            title = 3
+        };
+    }
+    namespace tableProfiles {
+        enum Columns {
+            profileId = 0,
+            icon = 1,
+            title = 2,
+            status = 3
+        };
+    }
+    namespace treeAchievements {
+        enum Columns {
+            profile = 0,
+            achievementId = 1,
+            icon = 0,
+            title = 2,
+            description = 3,
+            achieved = 4
+        };
+    }
+}
+
 namespace Ui {
 class FormFavorites;
 }
@@ -31,39 +60,35 @@ public slots:
     void init();
     bool isInit();
     bool isLoaded();
-    void friendLoad(const SProfile &);
 
-    void updateSettings(QFlags<changedSettings> aSettings) override;
     void updateIcons() override;
     void retranslate() override;
 public:
     explicit FormFavorites(QWidget *parent = nullptr);
     ~FormFavorites();
 
+    void update();
 signals:
-    void s_return_to_profile(QWidget*);
+    void s_showAchievements(const ProfileID &, const SGame &);
+    void s_goToProfile(const ProfileID &);
 
+protected slots:
+    QMenu *createMenuGames(const GameID &aGameId, const ProfileID &aProfileId);
+    QMenu *createMenuProfiles(const ProfileID &aProfileId);
+    void goToGame(const GameID &aGameId, const ProfileID &aProfileId);
+    QMenu *createMenuAchievements(const GameID &aGameId, const ProfileID &aProfileId, const AchievementID &aAchievementId);
 private slots:
-    void on_pushButton_clicked();
-
+    SProfiles getProfilesFavoriteAchievements();
 private:
     Ui::FormFavorites *ui;
-//    Favorites _games;
-//    Favorites _friends;
-//    Favorites _achievements;
+
     FavoriteProfiles _friendsFavorites;
     FavoriteGames _gamesFavorites;
     FavoriteAchievementsGames _achievementsFavorites;
-//    Favorites _favorites;
-//    MyFilter _filter;
-    //Settings _setting;
 
-    QString _iconsColor;
-
-    //QVector<RequestData*> _request;
-    int _numRequests = 0;
-    int _numNow = 0;
-
+    void updateGames();
+    void updateFriends();
+    void updateAchievements();
 };
 
 #endif // FORMFAVORITES_H

@@ -54,11 +54,13 @@
 #include <QHeaderView>
 #include <QDebug>
 
+const int c_freezeRows = 2;
+
 FreezeTableWidget::FreezeTableWidget(QWidget *aParent) : QTableView(aParent) {
     frozenTableView = new QTableView(this);
     frozenTableView->setObjectName("FreezeRow");
 
-    proxyModel = new SortFilterProxyModelFreezeRow(this);
+//    proxyModel = new SortFilterProxyModelFreezeRow(this);
 
     //connect the headers and scrollbars of both tableviews together
     connect(horizontalHeader(), &QHeaderView::sectionResized, this, &FreezeTableWidget::updateSectionWidth);
@@ -73,7 +75,7 @@ FreezeTableWidget::~FreezeTableWidget() {
         delete frozenTableView->model();
     }
 
-    delete proxyModel;
+//    delete proxyModel;
     delete frozenTableView;
 }
 
@@ -83,6 +85,7 @@ void FreezeTableWidget::initFreezeTable() {
     filter->setFilterKeyColumn(0);
     filter->setFilterRegularExpression("^$");
 
+
     if (frozenTableView->model()) {
         delete frozenTableView->model();
     }
@@ -91,13 +94,16 @@ void FreezeTableWidget::initFreezeTable() {
 //    frozenTableView->sortByColumn(0, Qt::SortOrder::DescendingOrder);
 //    frozenTableView->setSelectionModel(selectionModel());
     frozenTableView->setFocusPolicy(Qt::NoFocus);
+    frozenTableView->setSelectionMode(QAbstractItemView::SelectionMode::NoSelection);
 
     frozenTableView->horizontalHeader()->hide();
     frozenTableView->verticalHeader()->hide();
     frozenTableView->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    frozenTableView->setRowHeight(0, rowHeight(0));
-    for (int row = 1; row < model()->rowCount(); ++row) {
+    for (int row = 0; row < c_freezeRows; ++row) {
+        frozenTableView->setRowHeight(row, rowHeight(row));
+    }
+    for (int row = c_freezeRows; row < model()->rowCount(); ++row) {
         frozenTableView->setRowHidden(row, true);
     }
 
@@ -117,8 +123,8 @@ void FreezeTableWidget::updateSectionWidth(int aLogicalIndex, int /* aOldSize */
 }
 
 void FreezeTableWidget::updateSectionHeight(int aLogicalIndex, int /* aOldSize */, int aNewSize) {
-    if (aLogicalIndex == 0) {
-        frozenTableView->setRowHeight(0, aNewSize);
+    if (aLogicalIndex < c_freezeRows) {
+        frozenTableView->setRowHeight(aLogicalIndex, aNewSize);
         updateFrozenTableGeometry();
     }
 }
@@ -139,21 +145,21 @@ QModelIndex FreezeTableWidget::moveCursor(CursorAction aCursorAction, Qt::Keyboa
 }
 
 void FreezeTableWidget::scrollTo (const QModelIndex &aIndex, ScrollHint aHint) {
-    if (aIndex.row() > 0) {
+    if (aIndex.row() >= c_freezeRows) {
         QTableView::scrollTo(aIndex, aHint);
     }
 }
 
 void FreezeTableWidget::setModel(QAbstractItemModel *aModel) {
-    proxyModel->setSourceModel(aModel);
-    proxyModel->setDynamicSortFilter(true);
+    proxyModel = aModel;
+//    proxyModel->setDynamicSortFilter(true);
 
     QTableView::setModel(proxyModel);
     initFreezeTable();
 }
 
 QAbstractItemModel *FreezeTableWidget::model() {
-    return proxyModel->sourceModel();
+    return proxyModel;
 }
 
 void FreezeTableWidget::updateFrozenTableGeometry() {
@@ -168,9 +174,16 @@ void FreezeTableWidget::updateFrozenTableGeometry() {
         int ax = frameWidth() + verticalHeader()->width();// - frozenTableView->verticalHeader()->width() - 1;
         int ay = frameWidth() + horizontalHeader()->height();
         int aw = viewport()->width() + verticalHeader()->width();
-        int ah = rowHeight(0);
+        int ah = 0;
+        for (int row = 0; row < c_freezeRows; ++row) {
+            ah += rowHeight(row);
+        }
         frozenTableView->setGeometry(ax, ay, aw, ah);
     }
+}
+
+QTableView *FreezeTableWidget::getFrozenTableView() const {
+    return frozenTableView;
 }
 
 

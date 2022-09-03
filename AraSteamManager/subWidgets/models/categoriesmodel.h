@@ -7,7 +7,7 @@
 class CategoriesModel : public QAbstractItemModel {
     Q_OBJECT
 public:
-    CategoriesModel(Category *category, QObject *parent = nullptr);
+    CategoriesModel(Category *category = new Category(), QObject *parent = nullptr);
     ~CategoriesModel();
 
     QVariant data(const QModelIndex &index, int role) const override;
@@ -25,10 +25,10 @@ public:
 
     bool insertColumns(int position, int columns, const QModelIndex &parent = QModelIndex()) override;
     bool removeColumns(int position, int columns, const QModelIndex &parent = QModelIndex()) override;
-    bool insertRows(int position, int columns, const QModelIndex &parent = QModelIndex()) override;
+    bool insertRows(int position, const QModelIndex &parent, const QString &aTitle);
     bool removeRows(int position, int columns, const QModelIndex &parent = QModelIndex()) override;
 
-    void updateData(Category *parent);
+    void update();
     Category *getItem(const QModelIndex &index) const;
 
     Qt::DropActions supportedDropActions() const override;
@@ -36,15 +36,19 @@ public:
     bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
 
 public slots:
-    bool removeCategory(Category *aCategory);
-    bool insertCategory(Category *aCategory, const QStringList &aList);
     bool removeAllCategories();
     bool saveCategories();
+    void setGame(const SGame &aGame);
 signals:
     void s_checkStateChanged(Category *category, const bool &isChecked);
     void s_error(const QString&);
 
-    private:
+protected slots:
+    bool removeAllCategories(const QModelIndex &aParent);
+private slots:
+    bool insertRows(int position, int count, const QModelIndex &parent = QModelIndex()) override;
+
+private:
     Category *rootItem_;
     QSet<Category*> isChecked_;
 };

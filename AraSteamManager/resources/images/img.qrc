@@ -220,5 +220,33 @@
         <file>black/management/move_in_tree.png</file>
         <file>black/achievements/checkbox/3-states.gif</file>
         <file>white/achievements/checkbox/3-states.gif</file>
+        <file>black/achievements/categories/collapse.png</file>
+        <file>black/achievements/categories/expand.png</file>
+        <file>white/achievements/categories/collapse.png</file>
+        <file>white/achievements/categories/expand.png</file>
+        <file>black/profile icons/linux.png</file>
+        <file>black/profile icons/mac.png</file>
+        <file>black/profile icons/windows.png</file>
+        <file>white/profile icons/linux.png</file>
+        <file>white/profile icons/mac.png</file>
+        <file>white/profile icons/windows.png</file>
+        <file>white/profile icons/badges1.png</file>
+        <file>white/profile icons/badges2.png</file>
+        <file>white/profile icons/badges3.png</file>
+        <file>white/profile icons/badges4.png</file>
+        <file>white/profile icons/badges5.png</file>
+        <file>white/profile icons/badges5+.png</file>
+        <file>black/profile icons/badges1.png</file>
+        <file>black/profile icons/badges2.png</file>
+        <file>black/profile icons/badges3.png</file>
+        <file>black/profile icons/badges4.png</file>
+        <file>black/profile icons/badges5.png</file>
+        <file>black/profile icons/badges5+.png</file>
+        <file>black/profile icons/foil.png</file>
+        <file>black/profile icons/normal.png</file>
+        <file>black/profile icons/special.png</file>
+        <file>white/profile icons/foil.png</file>
+        <file>white/profile icons/normal.png</file>
+        <file>white/profile icons/special.png</file>
     </qresource>
 </RCC>

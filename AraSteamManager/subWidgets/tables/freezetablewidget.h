@@ -65,6 +65,8 @@ public:
     void setModel(QAbstractItemModel *model) override;
     QAbstractItemModel *model();
 
+    QTableView *getFrozenTableView() const;
+
 protected:
       void resizeEvent(QResizeEvent *event) override;
       QModelIndex moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override;
@@ -78,7 +80,7 @@ private:
       void initFreezeTable();
       void updateFrozenTableGeometry();
 
-      SortFilterProxyModelFreezeRow *proxyModel;
+      QAbstractItemModel *proxyModel;
       QTableView *frozenTableView;
 
 };

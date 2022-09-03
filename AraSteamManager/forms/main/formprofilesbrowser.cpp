@@ -20,7 +20,6 @@ FormProfilesBrowser::FormProfilesBrowser(QWidget *parent) :
     connect(ui->ButtonGoToMyProfile,&QPushButton::clicked, this, &FormProfilesBrowser::buttonGoToMyProfile_Clicked);
     connect(ui->ButtonFavorites,    &QPushButton::clicked, this, &FormProfilesBrowser::buttonFavorites_Clicked);
     connect(ui->ButtonSettings,     &QPushButton::clicked, this, &FormProfilesBrowser::buttonSettings_Clicked);
-    connect(this, &Form::s_settingsUpdated, ui->LineEditIdProfile, &MyLineEdit::updateSettings);
 }
 
 FormProfilesBrowser::~FormProfilesBrowser() {
@@ -53,8 +52,8 @@ FormProfile *FormProfilesBrowser::createFormProfile(const SProfile &aProfile) {
     connect(newFormProfile, &FormProfile::s_goToFriends,    this,   &FormProfilesBrowser::goToFriends);
     connect(newFormProfile, &FormProfile::s_goToStatistic,  this,   &FormProfilesBrowser::goToStatistics);
     connect(newFormProfile, &FormProfile::s_goToFavorites,  this,   &FormProfilesBrowser::buttonFavorites_Clicked);
-    connect(newFormProfile, &Form::s_settingsUpdated,       this,   &Form::updateSettings);
-    connect(this,           &FormProfilesBrowser::s_settingsUpdated,   newFormProfile, &FormProfile::updateSettings);
+//    connect(newFormProfile, &Form::s_settingsUpdated,       this,   &Form::updateSettings);
+//    connect(this,           &FormProfilesBrowser::s_settingsUpdated,   newFormProfile, &FormProfile::updateSettings);
     return newFormProfile;
 }
 
@@ -69,7 +68,7 @@ void FormProfilesBrowser::goToProfile(const ProfileID &aId) {
 
     SProfile profile = SProfile::load(aId, type);
     if(!profile.isNull()) {
-        emit s_profileChanged(profile.steamID());
+        emit s_profileChanged(profile.steamId());
         while(ui->StackedWidgetProfiles->count() - 1 != ui->StackedWidgetProfiles->currentIndex()) {
             auto widget = ui->StackedWidgetProfiles->widget(ui->StackedWidgetProfiles->currentIndex() + 1);
             ui->StackedWidgetProfiles->removeWidget(widget);
@@ -104,13 +103,12 @@ void FormProfilesBrowser::goToFriends(const ProfileID &aProfileId) {
 }
 
 void FormProfilesBrowser::goToStatistics(const SProfile &aProfile) {
-    if (!aProfile.steamID().isEmpty() && !aProfile.steamID().isNull()) {
+    if (!aProfile.steamId().isEmpty() && !aProfile.steamId().isNull()) {
         emit s_statisticsClicked(aProfile);
     }
 }
 
 void FormProfilesBrowser::updateSettings(QFlags<changedSettings> aSettings) {
-    Settings::syncronizeSettings();
     if (aSettings.testFlag(changedSettings::myProfile)) {
         for (int i = 0; i < ui->StackedWidgetProfiles->count(); ++i) {
             FormProfile *profile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->widget(i));
@@ -119,12 +117,9 @@ void FormProfilesBrowser::updateSettings(QFlags<changedSettings> aSettings) {
             }
         }
         FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
-        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
+        ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamId() != Settings::myProfile());
     }
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
-    }
-    emit s_settingsUpdated(aSettings);
+    Form::updateSettings(aSettings);
 }
 
 void FormProfilesBrowser::updateIcons() {
@@ -142,28 +137,6 @@ void FormProfilesBrowser::updateProfileNavigation() {
     ui->ButtonNext->setEnabled(ui->StackedWidgetProfiles->currentIndex() != ui->StackedWidgetProfiles->count() - 1);
 }
 
-SProfile::LoadType FormProfilesBrowser::identifyProfileType(ProfileID &aId) {
-    //https://steamcommunity.com/profiles/76561198017985018/
-    //https://steamcommunity.com/id/xFrenzy47x
-    //steamcommunity.com/profiles/76561198017985018/
-    //steamcommunity.com/id/xFrenzy47x
-    //76561198017985018
-    //xFrenzy47x
-    QRegularExpression ProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
-    auto match = ProfileUrl.match(aId);
-    if (!match.hasMatch()) {
-        return SProfile::LoadType::unknown;
-    }
-
-    if ((match.captured(4) == "profiles") || (QRegularExpression("\\d{17}").match(match.captured(5)).hasMatch())) {
-        aId = match.captured(5);
-        return SProfile::LoadType::id;
-    } else {
-        aId = match.captured(5);
-        return SProfile::LoadType::vanity;
-    }
-}
-
 void FormProfilesBrowser::buttonFindProfile_Clicked() {
     goToProfile(ui->LineEditIdProfile->text());
 }
@@ -173,8 +146,8 @@ void FormProfilesBrowser::buttonBack_Clicked() {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() - 1);
         FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
         if (currentProfile) {
-            emit s_profileChanged(currentProfile->getProfile().steamID());
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
+            emit s_profileChanged(currentProfile->getProfile().steamId());
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamId() != Settings::myProfile());
         }
         updateProfileNavigation();
     }
@@ -185,8 +158,8 @@ void FormProfilesBrowser::buttonNext_Clicked() {
         ui->StackedWidgetProfiles->setCurrentIndex(ui->StackedWidgetProfiles->currentIndex() + 1);
         FormProfile *currentProfile = dynamic_cast<FormProfile*>(ui->StackedWidgetProfiles->currentWidget());
         if (currentProfile) {
-            emit s_profileChanged(currentProfile->getProfile().steamID());
-            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamID() != Settings::myProfile());
+            emit s_profileChanged(currentProfile->getProfile().steamId());
+            ui->ButtonGoToMyProfile->setEnabled(currentProfile->getProfile().steamId() != Settings::myProfile());
         }
         updateProfileNavigation();
     }

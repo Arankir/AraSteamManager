@@ -29,9 +29,9 @@ QT_BEGIN_NAMESPACE
 class Ui_FormFriendsCompare
 {
 public:
-    QVBoxLayout *_2;
+    QVBoxLayout *verticalLayout_3;
     QSplitter *splitter;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QCheckBox *CheckBoxCompareIcon;
@@ -40,7 +40,7 @@ public:
     QCheckBox *CheckBoxCompareTotalPercent;
     QSpacerItem *horizontalSpacer_4;
     FreezeTableWidget *TableViewCompare;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
     MyLineEdit *lineEdit;
@@ -59,37 +59,37 @@ public:
         if (FormFriendsCompare->objectName().isEmpty())
             FormFriendsCompare->setObjectName(QString::fromUtf8("FormFriendsCompare"));
         FormFriendsCompare->resize(1131, 539);
-        _2 = new QVBoxLayout(FormFriendsCompare);
-        _2->setObjectName(QString::fromUtf8("_2"));
+        verticalLayout_3 = new QVBoxLayout(FormFriendsCompare);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         splitter = new QSplitter(FormFriendsCompare);
         splitter->setObjectName(QString::fromUtf8("splitter"));
         splitter->setOrientation(Qt::Horizontal);
-        widget = new QWidget(splitter);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(splitter);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        CheckBoxCompareIcon = new QCheckBox(widget);
+        CheckBoxCompareIcon = new QCheckBox(layoutWidget);
         CheckBoxCompareIcon->setObjectName(QString::fromUtf8("CheckBoxCompareIcon"));
         CheckBoxCompareIcon->setChecked(true);
 
         horizontalLayout->addWidget(CheckBoxCompareIcon);
 
-        CheckBoxCompareTitle = new QCheckBox(widget);
+        CheckBoxCompareTitle = new QCheckBox(layoutWidget);
         CheckBoxCompareTitle->setObjectName(QString::fromUtf8("CheckBoxCompareTitle"));
         CheckBoxCompareTitle->setChecked(true);
 
         horizontalLayout->addWidget(CheckBoxCompareTitle);
 
-        CheckBoxCompareDescription = new QCheckBox(widget);
+        CheckBoxCompareDescription = new QCheckBox(layoutWidget);
         CheckBoxCompareDescription->setObjectName(QString::fromUtf8("CheckBoxCompareDescription"));
         CheckBoxCompareDescription->setChecked(true);
 
         horizontalLayout->addWidget(CheckBoxCompareDescription);
 
-        CheckBoxCompareTotalPercent = new QCheckBox(widget);
+        CheckBoxCompareTotalPercent = new QCheckBox(layoutWidget);
         CheckBoxCompareTotalPercent->setObjectName(QString::fromUtf8("CheckBoxCompareTotalPercent"));
         CheckBoxCompareTotalPercent->setChecked(true);
 
@@ -102,7 +102,7 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        TableViewCompare = new FreezeTableWidget(widget);
+        TableViewCompare = new FreezeTableWidget(layoutWidget);
         TableViewCompare->setObjectName(QString::fromUtf8("TableViewCompare"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -112,15 +112,15 @@ public:
 
         verticalLayout->addWidget(TableViewCompare);
 
-        splitter->addWidget(widget);
-        widget1 = new QWidget(splitter);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        verticalLayout_2 = new QVBoxLayout(widget1);
+        splitter->addWidget(layoutWidget);
+        layoutWidget1 = new QWidget(splitter);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget1);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        lineEdit = new MyLineEdit(widget1);
+        lineEdit = new MyLineEdit(layoutWidget1);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setEnabled(false);
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -131,7 +131,7 @@ public:
 
         horizontalLayout_2->addWidget(lineEdit);
 
-        pushButton = new QPushButton(widget1);
+        pushButton = new QPushButton(layoutWidget1);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setEnabled(false);
         QSizePolicy sizePolicy2(QSizePolicy::Maximum, QSizePolicy::Fixed);
@@ -145,7 +145,7 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
-        ComboBoxFriend = new ComboBoxFriendsWithGame(widget1);
+        ComboBoxFriend = new ComboBoxFriendsWithGame(layoutWidget1);
         ComboBoxFriend->setObjectName(QString::fromUtf8("ComboBoxFriend"));
         sizePolicy1.setHeightForWidth(ComboBoxFriend->sizePolicy().hasHeightForWidth());
         ComboBoxFriend->setSizePolicy(sizePolicy1);
@@ -158,21 +158,21 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer_2);
 
-        ButtonFriendsReached = new QPushButton(widget1);
+        ButtonFriendsReached = new QPushButton(layoutWidget1);
         ButtonFriendsReached->setObjectName(QString::fromUtf8("ButtonFriendsReached"));
         sizePolicy2.setHeightForWidth(ButtonFriendsReached->sizePolicy().hasHeightForWidth());
         ButtonFriendsReached->setSizePolicy(sizePolicy2);
 
         horizontalLayout_4->addWidget(ButtonFriendsReached);
 
-        ButtonFriendsAll = new QPushButton(widget1);
+        ButtonFriendsAll = new QPushButton(layoutWidget1);
         ButtonFriendsAll->setObjectName(QString::fromUtf8("ButtonFriendsAll"));
         sizePolicy2.setHeightForWidth(ButtonFriendsAll->sizePolicy().hasHeightForWidth());
         ButtonFriendsAll->setSizePolicy(sizePolicy2);
 
         horizontalLayout_4->addWidget(ButtonFriendsAll);
 
-        ButtonFriendsNotReached = new QPushButton(widget1);
+        ButtonFriendsNotReached = new QPushButton(layoutWidget1);
         ButtonFriendsNotReached->setObjectName(QString::fromUtf8("ButtonFriendsNotReached"));
         sizePolicy2.setHeightForWidth(ButtonFriendsNotReached->sizePolicy().hasHeightForWidth());
         ButtonFriendsNotReached->setSizePolicy(sizePolicy2);
@@ -186,7 +186,7 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_4);
 
-        ListWidgetFriends = new QListWidget(widget1);
+        ListWidgetFriends = new QListWidget(layoutWidget1);
         ListWidgetFriends->setObjectName(QString::fromUtf8("ListWidgetFriends"));
         QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
         sizePolicy3.setHorizontalStretch(0);
@@ -197,9 +197,9 @@ public:
 
         verticalLayout_2->addWidget(ListWidgetFriends);
 
-        splitter->addWidget(widget1);
+        splitter->addWidget(layoutWidget1);
 
-        _2->addWidget(splitter);
+        verticalLayout_3->addWidget(splitter);
 
 
         retranslateUi(FormFriendsCompare);

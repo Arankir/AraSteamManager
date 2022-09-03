@@ -7,7 +7,7 @@
 class Category: public QSet<AchievementID>, public FileSaveLoad {
 public:
     explicit Category(const SGame &game);
-    explicit Category(const GameID &gameId, const QString &gameName);
+    explicit Category(const GameID &gameId, const QString &gameName, bool aAutoLoad = true);
     explicit Category(const GameID &gameId, const QString &title, const QSet<AchievementID> &achievements, const QList<Category *> &categories = QList<Category*>());
     explicit Category(const QJsonObject &category = QJsonObject());
     Category(const Category &category);
@@ -38,8 +38,8 @@ public:
     //categories
     bool addCategory(const QStringList &titles, Category *category);
     bool addCategory(Category *category);
-    bool removeCategory(const QStringList &titles);
-    bool removeCategory(const QString &title);
+    bool removeCategory(const QStringList &titles, bool aIsDelete = false);
+    bool removeCategory(const QString &title, bool aIsDelete = false);
     Category *find(const QStringList &titles);
     Category *find(const QString &title);
     void clearCategories();
@@ -60,16 +60,16 @@ public:
         dbg.nospace() << "Category(" << category.toJson() << "parent =" << (category.parent_ == nullptr ? "NULL" : category.parent_->title_) << ")";
         return dbg.space();
     }
-    friend QDataStream &operator<<(QDataStream &stream, Category *aCategory) {
-        qulonglong ptrval(*reinterpret_cast<qulonglong *>(&aCategory));
-        return stream << ptrval;
-    }
-    friend QDataStream &operator>>(QDataStream &stream, Category *&aCategory) {
-        qulonglong ptrval;
-        stream >> ptrval;
-        aCategory = *reinterpret_cast<Category **>(&ptrval);
-        return stream;
-    }
+//    friend QDataStream &operator<<(QDataStream &stream, Category *aCategory) {
+//        qulonglong ptrval(*reinterpret_cast<qulonglong *>(&aCategory));
+//        return stream << ptrval;
+//    }
+//    friend QDataStream &operator>>(QDataStream &stream, Category *&aCategory) {
+//        qulonglong ptrval;
+//        stream >> ptrval;
+//        aCategory = *reinterpret_cast<Category **>(&ptrval);
+//        return stream;
+//    }
 
     int getIndex(Category *aCategory);
 private:

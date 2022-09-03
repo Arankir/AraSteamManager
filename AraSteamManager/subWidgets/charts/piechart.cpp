@@ -19,6 +19,7 @@ QPieSlice *PieChart::addSlice(const QColor &aColor) {
     slice->setBorderColor(Theme::getCurrentTheme().border.color);
     slice->setLabelVisible(true);
     slice->setLabelPosition(QPieSlice::LabelOutside);
+    slice->setLabelColor(Theme::getCurrentTheme().text.getColor());
     QObject::connect(slice, &QPieSlice::hovered, slice, &QPieSlice::setExploded);
     auto localSeries = series();
     if (localSeries.count() > 0) {
@@ -62,6 +63,7 @@ void PieChart::updateTheme() {
             auto slices = pieSeries->slices();
             for (auto slice: slices) {
                 slice->setBorderColor(Theme::getCurrentTheme().border.color);
+                slice->setLabelColor(Theme::getCurrentTheme().text.color);
             }
         }
     }

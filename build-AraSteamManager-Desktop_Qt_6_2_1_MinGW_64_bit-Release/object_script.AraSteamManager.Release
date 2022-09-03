@@ -1,4 +1,5 @@
-release/achievementscategory.o
+release/loghelper.o
+release/category.o
 release/comments.o
 release/favorites.o
 release/filesaveload.o
@@ -29,8 +30,6 @@ release/formgroups.o
 release/formmain.o
 release/formachievements.o
 release/formcategoriesedit.o
-release/formcategoriestree.o
-release/formfriendscompare.o
 release/formfrienditemcompare.o
 release/formfavorites.o
 release/formfriends.o
@@ -41,6 +40,9 @@ release/formstatistics.o
 release/achievementcompletedpiechart.o
 release/achievementcountchart.o
 release/piechart.o
+release/collapsablewidget.o
+release/categoryitem.o
+release/friendlistitem.o
 release/mylineedit.o
 release/framelesswindow.o
 release/main.o
@@ -93,8 +95,6 @@ release/moc_formgroups.o
 release/moc_formmain.o
 release/moc_formachievements.o
 release/moc_formcategoriesedit.o
-release/moc_formcategoriestree.o
-release/moc_formfriendscompare.o
 release/moc_formfrienditemcompare.o
 release/moc_formfavorites.o
 release/moc_formfriends.o
@@ -104,6 +104,8 @@ release/moc_formsettings.o
 release/moc_formstatistics.o
 release/moc_achievementcompletedpiechart.o
 release/moc_piechart.o
+release/moc_collapsablewidget.o
+release/moc_categoryitem.o
 release/moc_mylineedit.o
 release/moc_framelesswindow.o
 release/moc_actioncategory.o

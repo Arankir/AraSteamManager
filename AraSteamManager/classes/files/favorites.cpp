@@ -184,23 +184,23 @@ bool FavoriteAchievementsGame::operator==(const SGame &aGame) const {
     return (appId_ == aGame.appId());// && (_name == aGame.name());
 }
 
-void FavoriteAchievementsGame::remove(const SAchievement &aAchievement) {
-    auto iterator = std::find_if(cbegin(),
-                                   cend(),
+void FavoriteAchievementsGame::remove(const AchievementID &aAchievement) {
+    auto iterator = std::remove_if(begin(),
+                                   end(),
                                    [=](const FavoriteAchievement &lAchievement) {
-                                        return lAchievement == aAchievement;
+                                        return lAchievement.apiName() == aAchievement;
                                    });
     if (iterator != end()) {
         erase(iterator, end());
     }
 }
 
-bool FavoriteAchievementsGame::isInAchievements(const SAchievement &aAchievement) const {
+bool FavoriteAchievementsGame::isInAchievements(const AchievementID &aAchievement) const {
     return std::any_of(cbegin(),
-                        cend(),
-                        [=](const FavoriteAchievement &achievement) {
-                            return achievement == aAchievement;
-                        });
+                       cend(),
+                       [=](const FavoriteAchievement &achievement) {
+                           return achievement.apiName() == aAchievement;
+                       });
 }
 
 QJsonObject FavoriteAchievementsGame::toJson() const {
@@ -226,6 +226,7 @@ void FavoriteAchievementsGame::fromJson(const QJsonObject &aAchievements) {
     name_   = aAchievements.value("game").toObject().value("name").toString();
     userId_ = aAchievements.value("game").toObject().value("userId").toString();
 
+    clear();
     for (auto &&achievement: aAchievements.value("values").toArray()) {
         append(FavoriteAchievement(achievement.toObject()));
     }
@@ -241,13 +242,12 @@ void FavoriteGames::append(const FavoriteGame &aGame) {
     save();
 }
 
-void FavoriteGames::remove(const QString &aProfileId, const SGame &aGame) {
-    auto iterator = std::find_if(begin(),
+void FavoriteGames::remove(const QString &aProfileId, const GameID &aGame) {
+    auto iterator = std::remove_if(begin(),
                                    end(),
                                    [=](const FavoriteGame &game) {
                                         return (aProfileId == game.steamId())
-                                                && (aGame.appId() == game.appId())
-                                                && (aGame.name() == game.name());
+                                                && (aGame == game.appId());
                                    });
     if (iterator != end()) {
         erase(iterator, end());
@@ -274,6 +274,7 @@ void FavoriteGames::update() {
 
 void FavoriteGames::fromJson(const QJsonObject &aObject) {
     if (aObject.value("type").toString() == "games") {
+        clear();
         for (auto &&value: aObject.value("values").toArray()) {
             append(FavoriteGame(value.toObject()));
         }
@@ -322,6 +323,7 @@ void FavoriteProfiles::update() {
 
 void FavoriteProfiles::fromJson(const QJsonObject &aObject) {
     if (aObject.value("type").toString() == "friends") {
+        clear();
         for (auto &&value: aObject.value("values").toArray()) {
             append(FavoriteProfile(value.toObject()));
         }
@@ -355,11 +357,11 @@ void FavoriteAchievementsGames::append(const ProfileID &aProfileId, const SGame 
     save();
 }
 
-void FavoriteAchievementsGames::remove(const ProfileID &aProfileId, const SGame &aGame) {
+void FavoriteAchievementsGames::remove(const ProfileID &aProfileId, const GameID &aGame) {
     auto iterator = std::remove_if(begin(),
                                    end(),
                                    [=](const FavoriteAchievementsGame &lFavoriteAchievementsGame) {
-                                      return lFavoriteAchievementsGame == aGame && lFavoriteAchievementsGame.steamId() == aProfileId;
+                                      return lFavoriteAchievementsGame.appId() == aGame && lFavoriteAchievementsGame.steamId() == aProfileId;
                                    });
     if (iterator != end()) {
         erase(iterator, end());
@@ -367,20 +369,31 @@ void FavoriteAchievementsGames::remove(const ProfileID &aProfileId, const SGame 
     }
 }
 
-void FavoriteAchievementsGames::remove(const ProfileID &aProfileId, const SGame &aGame, const SAchievement &aAchievement) {
+void FavoriteAchievementsGames::remove(const ProfileID &aProfileId, const GameID &aGame, const AchievementID &aAchievement) {
     auto iterator = std::find_if(begin(),
                                  end(),
                                  [=](const FavoriteAchievementsGame &lFavoriteAchievementsGame) {
-                                    return lFavoriteAchievementsGame == aGame && lFavoriteAchievementsGame.steamId() == aProfileId;
+                                    return lFavoriteAchievementsGame.appId() == aGame && lFavoriteAchievementsGame.steamId() == aProfileId;
                                  });
     if (iterator != end()) {
-        erase(iterator, end());
         iterator->remove(aAchievement);
-        if (iterator->count() > 0) {
+        if (iterator->count() <= 0) {
             erase(iterator);
         }
     }
     save();
+}
+
+bool FavoriteAchievementsGames::isInFavorite(const GameID &aGameId, const ProfileID &aProfileId, const AchievementID &aAchievementId) {
+    auto iteratorGame = std::find_if(begin(),
+                                     end(),
+                                     [=](const FavoriteAchievementsGame &lGame) {
+                                        return lGame.appId() == aGameId && lGame.steamId() == aProfileId;
+                                     });
+    if (iteratorGame != end()) {
+        return (*iteratorGame).isInAchievements(aAchievementId);
+    }
+    return false;
 }
 
 QJsonObject FavoriteAchievementsGames::toJson() const {
@@ -402,6 +415,7 @@ void FavoriteAchievementsGames::update() {
 
 void FavoriteAchievementsGames::fromJson(const QJsonObject &aObject) {
     if (aObject.value("type").toString() == "achievements") {
+        clear();
         for (const auto &value: aObject.value("values").toArray()) {
             append(FavoriteAchievementsGame(value.toObject()));
         }

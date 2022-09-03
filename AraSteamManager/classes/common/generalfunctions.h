@@ -42,10 +42,16 @@ template <class T>
 QFrame *createSubForm(T *aSubForm, QWidget *aParent) {
     QFrame *frame = new QFrame(aParent);
     frame->setObjectName("SubWindow");
-    QHBoxLayout *lay = new QHBoxLayout(frame);
+    QVBoxLayout *lay = new QVBoxLayout(frame);
     lay->addWidget(aSubForm);
     centralize(aParent, frame);
     frame->show();
+//    if (auto form = dynamic_cast<Form*>(aSubForm)) {
+//        QObject::connect(form, &Form::s_closed, frame, [frame](){
+//            delete frame->layout();
+//            delete frame;
+//        });
+//    }
     return frame;
 }
 

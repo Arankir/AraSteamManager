@@ -110,8 +110,8 @@ void FormComments::updateIcons() {
 
 }
 
-void FormComments::updateSettings(QFlags<changedSettings> aSettings) {
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
-    }
-}
+//void FormComments::updateSettings(QFlags<changedSettings> aSettings) {
+//    if (aSettings.testFlag(changedSettings::theme)) {
+//        updateIcons();
+//    }
+//}

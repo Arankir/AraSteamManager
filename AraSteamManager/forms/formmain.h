@@ -19,6 +19,7 @@ public:
 public slots:
     FormContainerAchievements *createFormContainerAchievements();
     void showAchievements(const SGame &games);
+    void showAchievementsProfile(const ProfileID &aProfileId, const SGame &aGame);
     void containerAchievementsClose();
 
     void goToGames(const ProfileID &aSteamId);

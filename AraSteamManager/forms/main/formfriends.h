@@ -11,7 +11,7 @@ class FormFriends : public Form {
     Q_OBJECT
 
 public slots:
-    void updateSettings(QFlags<changedSettings> settings) override;
+//    void updateSettings(QFlags<changedSettings> settings) override;
     void setFriends(const ProfileID &profileId);
     void clear();
     bool isInit();

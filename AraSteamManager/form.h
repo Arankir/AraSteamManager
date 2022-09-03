@@ -10,14 +10,16 @@ class Form : public QWidget {
 public:
     explicit Form(QWidget *parent = nullptr);
     virtual ~Form();
-    virtual void updateSettings(QFlags<changedSettings>) = 0;
+    virtual void updateSettings(QFlags<changedSettings>);
     virtual void updateIcons() = 0;
     virtual void retranslate() = 0;
     virtual void changeEvent(QEvent *event);
     virtual void close();
 
+    void setParent(Form *parent);
+
     void setFramelessWindow(FramelessWindow *window);
-    FramelessWindow *window() {return _framelessWindow;}
+    FramelessWindow *window();
 
     bool setStatus(const QString &statusName = "", int progress = 0, int maxProgress = 0);
     bool clearStatus();

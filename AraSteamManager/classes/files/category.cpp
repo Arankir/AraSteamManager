@@ -19,12 +19,14 @@ gameName_(aCategory.gameName_) {
     }
 }
 
-Category::Category(const GameID &aGameId, const QString &aGameName):
+Category::Category(const GameID &aGameId, const QString &aGameName, bool aAutoLoad):
 QSet<AchievementID>(),
 FileSaveLoad(Paths::categories(QString::number(aGameId))),
 gameId_(aGameId),
 gameName_(aGameName) {
-    load(filePath_);
+    if (aAutoLoad) {
+        load(filePath_);
+    }
 //    qDebug() << 1 << title_ << categories_;
 }
 
@@ -176,7 +178,7 @@ bool Category::addCategory(Category *aCategory) {
     return addCategory(QStringList(), aCategory);
 }
 
-bool Category::removeCategory(const QStringList &aTitles) {
+bool Category::removeCategory(const QStringList &aTitles, bool aIsDelete) {
     if (aTitles.count() == 0) {
         return false;
     }
@@ -190,6 +192,9 @@ bool Category::removeCategory(const QStringList &aTitles) {
     });
     if (iterator != categories_.end()) {
         if (aTitles.count() == 1) {
+            if (aIsDelete) {
+                delete (*iterator);
+            }
             categories_.remove(iterator - categories_.begin());
             return true;
         } else {
@@ -203,13 +208,13 @@ bool Category::removeCategory(const QStringList &aTitles) {
     }
 }
 
-bool Category::removeCategory(const QString &aTitle) {
-    return removeCategory(QStringList{aTitle});
+bool Category::removeCategory(const QString &aTitle, bool aIsDelete) {
+    return removeCategory(QStringList{aTitle}, aIsDelete);
 }
 
 Category *Category::find(const QStringList &aTitles) {
     if (aTitles.count() == 0) {
-        return nullptr;
+        return this;
     }
     QStringList localTitles = aTitles;
     QString nextTitle = localTitles.last();
@@ -337,8 +342,16 @@ void Category::update() {
 
 void Category::deleteAllCategories() {
     auto childs = categories_;
-    for (auto child: childs) {
+//    for (auto child: childs) {
+//        child->deleteAllCategories();
+//        delete child;
+//    }
+    QMutableListIterator<Category*> cats(childs);
+    while (cats.hasNext()) {
+        auto child = cats.next();
+        qDebug() << title_ << (*child).title();
         child->deleteAllCategories();
+        qDebug() << title_ << "del" << (*child).title();
         delete child;
     }
 }

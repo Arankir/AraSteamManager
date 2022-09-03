@@ -1,156 +1,221 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 #include "forms/formcomments.h"
-#include "subWidgets/models/categoriesmodel.h"
-#include "forms/widgets/formfrienditemcompare.h"
+//#include "forms/widgets/formfrienditemcompare.h"
 
 #include <QMenu>
 #include <QDesktopServices>
 #include <QInputDialog>
+#include <QMessageBox>
 
 constexpr int c_friendColumnWidth = 100;
 
 #define Init {
-FormAchievements::FormAchievements(QWidget *aParent): Form(aParent), ui(new Ui::FormAchievements), _categories(new Category()) {
+FormAchievements::FormAchievements(QWidget *aParent): Form(aParent), ui(new Ui::FormAchievements) {
     ui->setupUi(this);
     init();
 }
 
 void FormAchievements::init() {
     this->setAttribute(Qt::WA_TranslucentBackground);
-    initingTable(ui->TableViewAchievements);
-    ui->TreeWidgetCategories->setAcceptDrops(true);
-    ui->TreeWidgetCategories->setDragEnabled(true);
-    ui->TreeWidgetCategories->setDragDropMode(QAbstractItemView::InternalMove);
-    auto categoriesModel = new CategoriesModel(_categories, ui->TreeWidgetCategories);
-    ui->TreeWidgetCategories->setModel(categoriesModel);
-    ui->TreeWidgetCategories->setHeaderHidden(true);
-    ui->TabWidget->setCurrentIndex(FormAchievementsData::TabStandart);
-    ui->splitter->setStretchFactor(0, 0);
-    ui->splitter->setStretchFactor(1, 1);
-    ui->splitter_2->setStretchFactor(0, 1);
-    ui->splitter_2->setStretchFactor(1, 0);
+    initTreeCategories();
+    initAchievementsTable();
+    initEditCategory();
+    initFriends();
+
+    ui->stackedWidget->setCurrentIndex(FormAchievementsData::TabStandart);
+    ui->splitterFilterAchievements->setStretchFactor(0, 1);
+    ui->splitterFilterAchievements->setStretchFactor(1, 10);
+    ui->splitterAchievementsFriends->setStretchFactor(0, 4);
+    ui->splitterAchievementsFriends->setStretchFactor(1, 1);
     updateIcons();
-//    _achievementsModel = new AchievementsModel();
-    _filterAchievements.setSourceModel(new AchievementsModel());
-    ui->TableViewAchievements->setModel(&_filterAchievements);
-    ui->TreeWidgetCategories->setContextMenuPolicy(Qt::CustomContextMenu);
-
-#define Connects {
-    connect(categoriesModel, &CategoriesModel::s_error, this, [this](const QString &lError) {
-        QMessageBox::warning(this, tr("Ошибка!"), lError);
-    });
-    connect(ui->TreeWidgetCategories, &QTreeView::customContextMenuRequested, this, [this](const QPoint &pos) {
-        QModelIndex index = ui->TreeWidgetCategories->indexAt(pos);
-        if (index.isValid()) {
-            Category *currentItem = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())->getItem(index);
-            QMenu *menu = createMenuCategory(currentItem);
-            menu->popup(mapToGlobal(pos));
-        } else {
-            QMenu *menu = createMenuCategory(_categories);
-            menu->popup(mapToGlobal(pos));
-        }
-
-//        QModelIndexList indexes = ui->TreeWidgetCategories->selectionModel()->selectedIndexes();
-//        Category *currentItem = nullptr;
-//        if (indexes.size() > 0) {
-//            QModelIndex selectedIndex = indexes.at(0);
-//            currentItem = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())->getItem(selectedIndex);
-//        }
-//        QMenu *menu = createMenuCategory(currentItem);
-//        menu->popup(mapToGlobal(pos));
-    });
     connect(ui->ButtonUpdate,               &QPushButton::clicked,                      this,   &FormAchievements::update);
     connect(ui->CheckBoxFavorites,          &QCheckBox::stateChanged,                   this,   &FormAchievements::checkBoxFavorites_StateChanged);
     connect(ui->ButtonGuides,               &QPushButton::clicked,                      this,   &FormAchievements::openManual);
-    connect(ui->TabWidget,                  &QTabWidget::currentChanged,                this,   &FormAchievements::tabWidget_CurrentChanged);
-    connect(ui->FilterMyProfile,            &ButtonReachedType::s_radioButtonChange,    this,   &FormAchievements::updateFilterWithMyProfile);
     connect(ui->LineEditNameAchievements,   &QLineEdit::textChanged,                    this,   &FormAchievements::updateFilterTextAchievement);
     connect(ui->ButtonFindAchievement,      &QPushButton::clicked,                      this,   [&]() {
         ui->LineEditNameAchievements->setText(ui->LineEditNameAchievements->text());
     });
-    connect(dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model()), &CategoriesModel::s_checkStateChanged, this, &FormAchievements::updateFilterCategory);
+}
+
+void FormAchievements::initTreeCategories() {
+    ui->TreeWidgetCategories->setAcceptDrops(true);
+    ui->TreeWidgetCategories->setDragEnabled(true);
+    ui->TreeWidgetCategories->setDragDropMode(QAbstractItemView::InternalMove);
+    categoriesModel_ = new CategoriesModel(new Category(), ui->TreeWidgetCategories);
+    ui->TreeWidgetCategories->setModel(categoriesModel_);
+    ui->TreeWidgetCategories->setHeaderHidden(true);
+    ui->TreeWidgetCategories->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->TreeWidgetCategories, &QTreeView::customContextMenuRequested, this, [this](const QPoint &pos) {
+        QModelIndex index = ui->TreeWidgetCategories->indexAt(pos);
+        QMenu *menu = createMenuCategory(index);
+        menu->popup(ui->TreeWidgetCategories->viewport()->mapToGlobal(pos));
+    });
+    connect(categoriesModel_, &CategoriesModel::s_error, this, [this](const QString &lError) {
+        QMessageBox::warning(this, tr("Ошибка!"), lError);
+    });
+    connect(categoriesModel_, &CategoriesModel::s_checkStateChanged, this, &FormAchievements::updateFilterCategory);
+}
+
+void FormAchievements::initAchievementsTable() {
+    initingTable(ui->TableViewAchievements);
+    ui->TableViewAchievements->verticalHeader()->setVisible(false);
+    filterAchievements_.setSourceModel(new AchievementsModel());
+    ui->TableViewAchievements->setModel(&filterAchievements_);
+    ui->TableViewAchievements->setColumnHidden(achievementsModel::Appid, true);
+    ui->TableViewAchievements->setColumnHidden(achievementsModel::Index, true);
+    ui->TableViewAchievements->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->TableViewAchievements->getFrozenTableView()->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->TableViewAchievements->horizontalHeader(), &QTreeView::customContextMenuRequested, this, [this](const QPoint &pos) {
+        QMenu *menu = createMenuAchievementsHeader();
+        menu->popup(ui->TableViewAchievements->horizontalHeader()->viewport()->mapToGlobal(pos));
+    });
     connect(ui->TableViewAchievements,    &QTableView::customContextMenuRequested,    this,   [&](QPoint pos) {
         QMenu *menu = createMenuAchievements(currentAchievement());
         menu->popup(ui->TableViewAchievements->viewport()->mapToGlobal(pos));
+    });
+    connect(ui->TableViewAchievements->getFrozenTableView(),    &QTableView::customContextMenuRequested,    this,   [&](QPoint pos) {
+        QMenu *menu = createMenuFrozenTable(ui->TableViewAchievements->getFrozenTableView()->currentIndex());
+        if (menu) {
+            menu->popup(ui->TableViewAchievements->getFrozenTableView()->viewport()->mapToGlobal(pos));
+        }
     });
     connect(ui->TableViewAchievements,    &QTableView::doubleClicked,                 this,   [&](QModelIndex aIndex) {
         if (aIndex.column() == achievementsModel::Comments) {
             buttonComment_Clicked();
         }
     });
-    connect(_filterAchievements.sourceModel(), &AchievementsModel::s_progress, this, &Form::setStatus);
-    connect(&_filterAchievements, &FilterModelAchievements::s_modelFinished, this, [&]() {
-        ui->TableViewAchievements->sortByColumn(achievementsModel::World, Qt::SortOrder::DescendingOrder);
-        ui->TableViewAchievements->setColumnHidden(achievementsModel::Appid, true);
-        ui->TableViewAchievements->setColumnHidden(achievementsModel::Index, true);
-        ui->TableViewAchievements->resizeColumnsToContents();
-        ui->TableViewAchievements->setColumnWidth(achievementsModel::Title, std::min(ui->TableViewAchievements->columnWidth(achievementsModel::Title), 220));
-        ui->TableViewAchievements->setColumnWidth(achievementsModel::Description, std::min(ui->TableViewAchievements->columnWidth(achievementsModel::Description), 450));
-        ui->TableViewAchievements->resizeRowsToContents();
-        loading(false);
+    connect(filterAchievements_.sourceModel(), &AchievementsModel::s_progress, this, &Form::setStatus);
+    connect(&filterAchievements_, &FilterModelAchievements::s_modelFinished, this, &FormAchievements::onAchievementsLoaded);
+}
 
-        if (_filterAchievements.sourceModel()->rowCount() > 0) {
-            int reachedCount = _filterAchievements.sourceModel()->getReachedFromProfile(0);
-            if (reachedCount > -1) {
-                ui->LabelTotalPersent->setText(QString("%1/%2 (%3%)").arg(
-                                               QString::number(reachedCount),
-                                               QString::number(_filterAchievements.sourceModel()->getAchievementsCount()),
-                                               QString::number(100.0 * reachedCount / _filterAchievements.sourceModel()->getAchievementsCount())));
-                ui->FilterMyProfile->setType(ui->FilterMyProfile->type());
-            }
-        }
-        emit s_finished();
-//        emit s_finish(ui->TableViewMyAchievements->viewport()->width() + 22);
-    });
-    connect(ui->CheckBoxCompareIcon, &QCheckBox::stateChanged, ui->TableViewAchievements,
-            [&](int arg1) {ui->TableViewAchievements->setColumnHidden(achievementsModel::Icon, arg1 == 0);});
-    connect(ui->CheckBoxCompareTitle, &QCheckBox::stateChanged, ui->TableViewAchievements,
-            [&](int arg1) {ui->TableViewAchievements->setColumnHidden(achievementsModel::Title, arg1 == 0);});
-    connect(ui->CheckBoxCompareDescription, &QCheckBox::stateChanged, ui->TableViewAchievements,
-            [&](int arg1) {ui->TableViewAchievements->setColumnHidden(achievementsModel::Description, arg1 == 0);});
-    connect(ui->CheckBoxCompareComment, &QCheckBox::stateChanged, ui->TableViewAchievements,
-            [&](int arg1) {ui->TableViewAchievements->setColumnHidden(achievementsModel::Comments, arg1 == 0);});
-    connect(ui->CheckBoxCompareTotalPercent, &QCheckBox::stateChanged, ui->TableViewAchievements,
-            [&](int arg1) {ui->TableViewAchievements->setColumnHidden(achievementsModel::World, arg1 == 0);});
-    connect(ui->ButtonFriendsAll, &QPushButton::clicked, this, [this](){setAllFriendsValue(ReachedType::all);});
-    connect(ui->ButtonFriendsReached, &QPushButton::clicked, this, [this](){setAllFriendsValue(ReachedType::reached);});
-    connect(ui->ButtonFriendsNotReached, &QPushButton::clicked, this, [this](){setAllFriendsValue(ReachedType::notReached);});
-    connect(ui->ComboBoxFriend, &ComboBoxFriendsWithGame::s_friendClicked, this, &FormAchievements::addFriendToList);
-    connect(ui->CategoriesEdit, &FormCategoriesEdit::s_categoriesIsUpdated, this, [=]() {
-        if (auto model = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())) {
-            model->updateData(_categories);
-        }
-    });
+void FormAchievements::initEditCategory() {
     connect(this, &Form::s_settingsUpdated, ui->CategoriesEdit, &Form::updateSettings);
-    connect(this, &Form::s_settingsUpdated, ui->FilterMyProfile, &ButtonReachedType::updateSettings);
-#define ConnectsEnd }
+    connect(this, &FormAchievements::s_filtersValueUpdated, ui->CategoriesEdit, [&]() {
+        QList<QString> list;
+        for (int i = 0; i < ui->TableViewAchievements->model()->rowCount(); ++i) {
+            QModelIndex index = ui->TableViewAchievements->model()->index(i, achievementsModel::Appid);
+
+            list.append(ui->TableViewAchievements->model()->data(index).toString());
+        }
+        ui->CategoriesEdit->setVisibleItems(list);
+    });
+    connect(ui->CategoriesEdit, &FormCategoriesEdit::s_categoriesIsUpdated, this, [&](bool isUpdated) {
+        if (isUpdated) {
+            updateCategories();
+        }
+        ui->stackedWidget->setCurrentIndex(FormAchievementsData::TabStandart);
+    });
+}
+
+void FormAchievements::initFriends() {
+    ui->ListViewFriends->setModel(new QStandardItemModel());
+    connect(ui->ButtonAddProfile, &QPushButton::clicked, this, &FormAchievements::buttonAddProfile_Clicked);
+    connect(ui->ListViewFriends, &QListWidget::doubleClicked, this, &FormAchievements::addProfileToTable);
+    connect(ui->lineEditFindFriend, &QLineEdit::textChanged, this, &FormAchievements::findFriend);
+    connect(ui->ButtonFindFriend, &QPushButton::clicked, this, &FormAchievements::findFriend);
+    connect(ui->checkBoxOnlyWithGame, &QCheckBox::toggled, this, &FormAchievements::checkBoxFriendsOnlyWithGame_Clicked);
 }
 
 void FormAchievements::setData(const SProfile &aProfile, const SGame &aGame) {
-    _profile = aProfile;
-    _game = aGame;
-    _categories->setGame(_game);
-    _categories->update();
-    dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())->updateData(_categories);
-    ui->labelProfileAvatar->setPixmap(_profile.pixmapAvatar());
-    ui->labelProfileAvatar->setToolTip(_profile.personaName());
-//    ui->TreeWidgetCategories->setGame(_game);
-    ui->LabelGameOnlineValue->setText(QString::number(SGame::playerCount(_game.appId())));
-    loadingCompare();
-    updateModel();
+    profile_ = aProfile;
+    game_ = aGame;
+
+    loadedCategories_ = false;
+    loadedAchievements_ = false;
+    loadedFriends_ = false;
+    loading(true);
+
+    categoriesModel_->setGame(game_);
+    loadedCategories_ = true;
+
+    ui->labelProfileAvatar->setPixmap(profile_.pixmapAvatar());
+    ui->labelProfileAvatar->setToolTip(profile_.personaName());
+    ui->LabelGameOnlineValue->setText(QString::number(SGame::playerCount(game_.appId())));
+
+    updateAchievements();
+    loadFriends();
+}
+
+void FormAchievements::onAchievementsLoaded() {
+    loadedAchievements_ = true;
+    ui->TableViewAchievements->sortByColumn(achievementsModel::World, Qt::SortOrder::DescendingOrder);
+    ui->TableViewAchievements->resizeColumnsToContents();
+    ui->TableViewAchievements->setColumnWidth(achievementsModel::Title, std::min(ui->TableViewAchievements->columnWidth(achievementsModel::Title), 220));
+    ui->TableViewAchievements->setColumnWidth(achievementsModel::Description, std::min(ui->TableViewAchievements->columnWidth(achievementsModel::Description), 450));
+    ui->TableViewAchievements->resizeRowsToContents();
+
+    auto model = filterAchievements_.sourceModel();
+    if (model) {
+        int achievementCount = model->getAchievementsCount();
+        ui->CategoriesEdit->setAchievements(model->getAchievements(), game_.appId());
+
+        if (model->rowCount() > 0) {
+            int reachedCount = model->getReachedFromProfile(0);
+            if (reachedCount > -1) {
+                ui->LabelTotalPersent->setText(QString("%1/%2 (%3%)").arg(
+                                               QString::number(reachedCount),
+                                               QString::number(achievementCount),
+                                               QString::number(100.0 * reachedCount / achievementCount)));
+            }
+        }
+    }
+
+    if (loadedFriends_ && loadedAchievements_) {
+        loading(false);
+    }
+    emit s_finishedAchievements();
+}
+
+void FormAchievements::loadFriends() {
+    QStringList list;
+    SFriends friends = SFriend::load(profile_.steamId());
+    for(const SFriend &sFriend: qAsConst(friends)) {
+        list.append(sFriend.steamId());
+    }
+
+    friendsProfiles_ = SProfile::load(list);
+    for(const auto &profileFriend: qAsConst(friendsProfiles_)) {
+        ProfileID steamId = profileFriend.steamId();
+        SGame::load(steamId, true, true, std::bind(&FormAchievements::onLoadedFriendGames, this,  std::placeholders::_1, steamId));
+    }
+}
+
+void FormAchievements::onLoadedFriendGames(const SGames &aGames, const ProfileID &aProfileId) {
+    auto iterator = std::find_if(friendsProfiles_.begin(),
+                                 friendsProfiles_.end(),
+                                 [=](const SProfile &profile) {
+                                     return aProfileId == profile.steamId();
+                                 });
+    if (iterator != friendsProfiles_.end()) {
+        bool isGameExist = std::any_of(aGames.begin(),
+                                       aGames.end(),
+                                       [&](const SGame &game) {
+                                           return game.appId() == game_.appId();
+                                       });
+        addFriendToList(*iterator, isGameExist ? FriendListItemData::ProfileType::FriendWithGame : FriendListItemData::ProfileType::FriendWithoutGame);
+
+        emit s_progress(tr("Загрузка друзей"), ui->ListViewFriends->model()->rowCount(), friendsProfiles_.count());
+    }
+    if(ui->ListViewFriends->model()->rowCount() == friendsProfiles_.count()) {
+        loadedFriends_ = true;
+        if (loadedFriends_ && loadedAchievements_) {
+            loading(false);
+        }
+        emit s_finishedFriends();
+    }
 }
 
 int FormAchievements::getAchievementsCount() {
-    if (auto model = _filterAchievements.sourceModel()) {
-        return model->rowCount() - 1;
+    if (auto model = filterAchievements_.sourceModel()) {
+        return model->getAchievements().count();
     }
     return 0;
 }
 
-void FormAchievements::updateModel() {
+void FormAchievements::updateAchievements() {
     loading(true);
-    _filterAchievements.sourceModel()->setAchievements(_profile.steamID(), _game.appId());
+    filterAchievements_.sourceModel()->setAchievements(profile_.steamId(), game_.appId());
 }
 #define InitEnd }
 
@@ -167,85 +232,62 @@ SAchievement FormAchievements::currentAchievement() {
     QModelIndex index = ui->TableViewAchievements->currentIndex();
     QModelIndex index2 = index.siblingAtColumn(achievementsModel::Index);
     QVariant fIndex = ui->TableViewAchievements->model()->data(index2);
-    return _filterAchievements.sourceModel()->getAchievement(fIndex.toInt());
+    return filterAchievements_.sourceModel()->getAchievement(fIndex.toInt());
 }
 
 void FormAchievements::loading(const bool &aIsLoading) {
     ui->FrameFilter->setEnabled(!aIsLoading);
     ui->TreeWidgetCategories->setEnabled(!aIsLoading);
     ui->ButtonUpdate->setEnabled(!aIsLoading);
-    ui->TabWidget->setEnabled(!aIsLoading);
+    ui->stackedWidget->setEnabled(!aIsLoading);
 }
 
 void FormAchievements::update() {
-    updateModel();
-    ui->LabelGameOnlineValue->setText(QString::number(SGame::playerCount(_game.appId())));
+    updateAchievements();
+    ui->LabelGameOnlineValue->setText(QString::number(SGame::playerCount(game_.appId())));
 }
 
 void FormAchievements::retranslate() {
     ui->retranslateUi(this);
-    updateModel();
+    updateAchievements();
 }
 
 void FormAchievements::updateIcons() {
     ui->ButtonFindAchievement   ->setIcon(QIcon(Images::find()));
     ui->ButtonUpdate            ->setIcon(QIcon(Images::update()));
     ui->ButtonGuides            ->setIcon(QIcon(Images::guide()));
-    ui->ButtonFriendsReached    ->setIcon(QIcon(Images::reached()));
-    ui->ButtonFriendsAll        ->setIcon(QIcon(Images::allAchievements()));
-    ui->ButtonFriendsNotReached ->setIcon(QIcon(Images::notReached()));
+    ui->ButtonFindFriend        ->setIcon(QIcon(Images::findProfile()));
 }
 
 QMenu *FormAchievements::createMenuAchievements(const SAchievement &aAchievement) {
-    QString appId = aAchievement.apiName();
+    QMenu *menu = new QMenu(this);
+    QString achievementId = aAchievement.apiName();
 
-    //Добавление кнопки избранного
     QAction *actionFavorites;
-    bool isFavorite = false;
     FavoriteAchievementsGames favorites;
-    auto iteratorGame = std::find_if(favorites.begin(),
-                                     favorites.end(),
-                                     [=, this](const FavoriteAchievementsGame &lGame) {
-                                        return lGame == _game && lGame.steamId() == _profile.steamID();
-                                     });
-    if (iteratorGame != favorites.end()) {
-        isFavorite = std::any_of(iteratorGame->cbegin(),
-                                 iteratorGame->cend(),
-                                 [appId](const FavoriteAchievement &curFavorite) {
-                                     return curFavorite.apiName() == appId;
-                                 });
-    }
-
-    if(isFavorite) {
-        actionFavorites = new QAction(QIcon(Images::isFavorites()), tr("Удалить из избранного"), this);
+    if(favorites.isInFavorite(game_.appId(), profile_.steamId(), achievementId)) {
+        actionFavorites = new QAction(QIcon(Images::isFavorites()), tr("Удалить из избранного"), menu);
         connect (actionFavorites,   &QAction::triggered,    this,   [=, this]() {
             FavoriteAchievementsGames favorites;
-            favorites.remove(_profile.steamID(), _game, aAchievement);
+            favorites.remove(profile_.steamId(), game_.appId(), aAchievement.apiName());
         });
     } else {
-        actionFavorites = new QAction(QIcon(Images::isNotFavorites()), tr("Добавить в избранное"), this);
+        actionFavorites = new QAction(QIcon(Images::isNotFavorites()), tr("Добавить в избранное"), menu);
         connect (actionFavorites,   &QAction::triggered,    this,   [=, this]() {
             FavoriteAchievementsGames favorites;
-            favorites.append(_profile.steamID(), _game, aAchievement);
+            favorites.append(profile_.steamId(), game_, aAchievement);
         });
     }
 
-    //Добавление кнопки комментариев
-    QAction *actionComment = new QAction(QIcon(Images::isComment()), tr("Редактировать комментарий...     "), this);
+    QAction *actionComment = new QAction(QIcon(Images::isComment()), tr("Редактировать комментарий...     "), menu);
+    QAction *actionGuides = new QAction(QIcon(Images::guide()), tr("Перейти в руководства"), menu);
+    QAction *actionUpdate = new QAction(QIcon(Images::update()), tr("Обновить"), menu);
 
-    //Добавление кнопки руководств
-    QAction *actionGuides = new QAction(QIcon(Images::guide()), tr("Перейти в руководства"), this);
-
-    //Добавление кнопки обновления
-    QAction *actionUpdate = new QAction(QIcon(Images::update()), tr("Обновить"), this);
-
-    QMenu *menu = new QMenu(this);
     menu->addAction (actionFavorites);
     menu->addAction (actionComment);
     menu->addAction (actionGuides);
     menu->addAction (actionUpdate);
 
-//    connect (actionFavorites,   &QAction::triggered,    this,   &FormAchievements::buttonFavorite_Clicked);
     connect (actionComment,     &QAction::triggered,    this,   &FormAchievements::buttonComment_Clicked);
     connect (actionGuides,      &QAction::triggered,    this,   &FormAchievements::openManual);
     connect (actionUpdate,      &QAction::triggered,    this,   &FormAchievements::update);
@@ -253,82 +295,118 @@ QMenu *FormAchievements::createMenuAchievements(const SAchievement &aAchievement
     return menu;
 }
 
-QMenu *FormAchievements::createMenuCategory(Category *aCategory) {
-    //Кнопка изменения достижений
-    QAction *actionAchievements = new QAction(QIcon(Images::change()), tr("Изменить категорию"), this);
-
-    //Кнопка добавления подкатегории
-    QAction *actionAddCategory = new QAction(QIcon(Images::create()), tr("Добавить категорию"), this);
-
-    //Кнопка добавления подкатегории
-    QAction *actionSubCategory = new QAction(QIcon(Images::create()), tr("Добавить подкатегорию"), this);
-
-    //Кнопка удаления категории
-    QAction *actionDelete = new QAction(QIcon(Images::deleteIcon()), tr("Удалить категорию"), this);
-
-    //Кнопка удаления всех категорий
-    QAction *actionDeleteAll = new QAction(QIcon(Images::deleteAll()), tr("Удалить все категории"), this);
-
+QMenu *FormAchievements::createMenuFrozenTable(const QModelIndex &aIndex) {
     QMenu *menu = new QMenu(this);
+    int friendNumber = aIndex.column() - achievementsModel::Count;
+    if (friendNumber == -1) {
+        QAction *actionAll = new QAction(QIcon(Images::allAchievements()), tr("Показать все достижения"), menu);
+        QAction *actionNotReached = new QAction(QIcon(Images::notReached()), tr("Показать достижения неполученные у всех"), menu);
+        QAction *actionReached = new QAction(QIcon(Images::reached()), tr("Показать достижения полученные у всех"), menu);
+
+        menu->addAction (actionAll);
+        menu->addAction (actionNotReached);
+        menu->addAction (actionReached);
+
+        connect (actionAll,     &QAction::triggered,    this,   [=]() {
+            setAllFriendsValue(ReachedType::all);
+        });
+        connect (actionNotReached,      &QAction::triggered,    this,   [=]() {
+            setAllFriendsValue(ReachedType::notReached);
+        });
+        connect (actionReached,      &QAction::triggered,    this,   [=]() {
+            setAllFriendsValue(ReachedType::reached);
+        });
+    } else if (friendNumber == 0) {
+        QAction *actionAll = new QAction(QIcon(Images::allAchievements()), tr("Показать все достижения"), menu);
+        QAction *actionNotReached = new QAction(QIcon(Images::notReached()), tr("Показать неполученные достижения"), menu);
+        QAction *actionReached = new QAction(QIcon(Images::reached()), tr("Показать полученные достижения"), menu);
+
+        menu->addAction (actionAll);
+        menu->addAction (actionNotReached);
+        menu->addAction (actionReached);
+
+        connect (actionAll,     &QAction::triggered,    this,   [=]() {
+            updateFilterFriend(profile_.steamId(), ReachedType::all);
+        });
+        connect (actionNotReached,      &QAction::triggered,    this,   [=]() {
+            updateFilterFriend(profile_.steamId(), ReachedType::notReached);
+        });
+        connect (actionReached,      &QAction::triggered,    this,   [=]() {
+            updateFilterFriend(profile_.steamId(), ReachedType::reached);
+        });
+    } else if (friendNumber > 0) {
+        QAction *actionAll = new QAction(QIcon(Images::allAchievements()), tr("Показать все достижения"), menu);
+        QAction *actionNotReached = new QAction(QIcon(Images::notReached()), tr("Показать неполученные достижения"), menu);
+        QAction *actionReached = new QAction(QIcon(Images::reached()), tr("Показать полученные достижения"), menu);
+
+        menu->addAction (actionAll);
+        menu->addAction (actionNotReached);
+        menu->addAction (actionReached);
+
+        qDebug() << profilesInTable_.at(friendNumber - 1).first.steamId();
+
+        connect (actionAll,     &QAction::triggered,    this,   [=]() {
+            updateFilterFriend(profilesInTable_.at(friendNumber - 1).first.steamId(), ReachedType::all);
+        });
+        connect (actionNotReached,      &QAction::triggered,    this,   [=]() {
+            updateFilterFriend(profilesInTable_.at(friendNumber - 1).first.steamId(), ReachedType::notReached);
+        });
+        connect (actionReached,      &QAction::triggered,    this,   [=]() {
+            updateFilterFriend(profilesInTable_.at(friendNumber - 1).first.steamId(), ReachedType::reached);
+        });
+    } else {
+        return nullptr;
+    }
+    return menu;
+}
+
+QMenu *FormAchievements::createMenuCategory(const QModelIndex &aCategoryIndex) {
+    QMenu *menu = new QMenu(this);
+    QAction *actionAchievements =   new QAction(QIcon(Images::change()),        tr("Изменить категорию"),       menu);
+    QAction *actionAddCategory =    new QAction(QIcon(Images::create()),        tr("Добавить категорию"),       menu);
+    QAction *actionSubCategory =    new QAction(QIcon(Images::create()),        tr("Добавить подкатегорию"),    menu);
+    QAction *actionDelete =         new QAction(QIcon(Images::deleteIcon()),    tr("Удалить категорию"),        menu);
+    QAction *actionDeleteAll =      new QAction(QIcon(Images::deleteAll()),     tr("Удалить все категории"),    menu);
+    QAction *actionExpandAll =      new QAction(QIcon(Images::expand()),        tr("Раскрыть все категории"),   menu);
+    QAction *actionCollapseAll =    new QAction(QIcon(Images::collapse()),      tr("Свернуть все категории"),   menu);
+
     menu->addAction (actionAchievements);
     menu->addAction (actionAddCategory);
     menu->addAction (actionSubCategory);
     menu->addAction (actionDelete);
     menu->addAction (actionDeleteAll);
+    menu->addSeparator();
+    menu->addAction (actionExpandAll);
+    menu->addAction (actionCollapseAll);
 
     connect (actionAchievements,    &QAction::triggered,    this,   [=, this]() {
-        ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
-        ui->CategoriesEdit->changeCategory(aCategory);
+        if (categoriesModel_) {
+            ui->CategoriesEdit->changeCategory(categoriesModel_->getItem(aCategoryIndex));
+            ui->stackedWidget->setCurrentIndex(FormAchievementsData::TabCategories);
+        }
     });
     connect (actionAddCategory,     &QAction::triggered,    this,   [=, this]() {
-        if (_categories == aCategory) {
-            return;
-        }
-        QString title = QInputDialog::getText(this, tr("Создание новой категории"), tr("Введите название:"), QLineEdit::Normal, "");
-        Category *category = new Category();
-        category->setTitle(title);
-        if (auto model = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())) {
-            model->insertCategory(category, aCategory->parent()->getPathFromRoot());
-        }
-//        category->setParent(aCategory->parent());
-        ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
-        ui->CategoriesEdit->changeCategory(category);
+        createCategory(aCategoryIndex);
     });
     connect (actionSubCategory,     &QAction::triggered,    this,   [=, this]() {
-        QString title = QInputDialog::getText(this, tr("Создание новой категории"), tr("Введите название:"), QLineEdit::Normal, "");
-        Category *category = new Category();
-        category->setTitle(title);
-        if (auto model = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())) {
-            model->insertCategory(category, aCategory->getPathFromRoot());
-        }
-        ui->TabWidget->setCurrentIndex(FormAchievementsData::TabCategories);
-        ui->CategoriesEdit->changeCategory(category);
+        createSubCategory(aCategoryIndex);
     });
     connect (actionDelete,          &QAction::triggered,    this,   [=, this]() {
-        QMessageBox::StandardButton clickedButton = QMessageBox::question(this,
-                                                                          tr("Внимание"),
-                                                                          tr("Вы уверены, что хотите удалить категорию?"),
-                                                                          QMessageBox::Yes |
-                                                                          QMessageBox::No);
-        if (clickedButton == QMessageBox::No) {
+        QMessageBox deleteQuestion(QMessageBox::Question,
+                               tr("Внимание!"),
+                               tr("Вы уверены, что хотите удалить категорию?"));
+        QAbstractButton *btnYes = deleteQuestion.addButton(tr("Да"), QMessageBox::YesRole);
+        deleteQuestion.addButton(tr("Отмена"), QMessageBox::NoRole);
+        deleteQuestion.exec();
+        if(deleteQuestion.clickedButton() != btnYes) {
             return;
         }
-        if (auto model = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())) {
-            bool isCategoryRemoved = model->removeCategory(aCategory);
-            qDebug() << isCategoryRemoved;
+        if (categoriesModel_) {
+            bool isCategoryRemoved = categoriesModel_->removeRows(aCategoryIndex.row(), 0, categoriesModel_->parent(aCategoryIndex));
             if (!isCategoryRemoved) {
                 QMessageBox::warning(this, tr("Ошибка!"), tr("Не удалось удалить категорию."));
             }
         }
-//        QStringList list = aCategory->getPathFromRoot();
-//        if (aCategory->root()->removeCategory(list)) {
-//            aCategory->root()->save();
-//            if (auto model = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())) {
-//                model->updateData(_categories);
-//            }
-//        } else {
-//            QMessageBox::warning(this, tr("Ошибка!"), tr("Не удалось удалить категорию."));
-//        }
     });
     connect (actionDeleteAll,       &QAction::triggered,    this,   [=, this]() {
         QMessageBox deleteQuestion(QMessageBox::Question,
@@ -347,89 +425,130 @@ QMenu *FormAchievements::createMenuCategory(Category *aCategory) {
             return;
         }
 
-        _categories->clearCategories();
-        _categories->save();
-        if (auto model = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())) {
-            model->removeAllCategories();
-//            model->saveCategories();
+        if (categoriesModel_) {
+            categoriesModel_->removeAllCategories();
+            categoriesModel_->saveCategories();
         }
+    });
+    connect (actionExpandAll,    &QAction::triggered,    this,   [=, this]() {
+        ui->TreeWidgetCategories->expandAll();
+    });
+    connect (actionCollapseAll,    &QAction::triggered,    this,   [=, this]() {
+        ui->TreeWidgetCategories->collapseAll();
     });
 
     return menu;
 }
 
-void FormAchievements::updateSettings(QFlags<changedSettings> aSettings) {
-    Settings::syncronizeSettings();
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
+QWidgetAction *FormAchievements::createCheckBoxHeaderAction(QMenu *aMenu, const QString &aText, achievementsModel::Columns aColumn) {
+    QCheckBox *checkIcon = new QCheckBox(aText, aMenu);
+    QWidgetAction *actionIcon = new QWidgetAction(aMenu);
+    actionIcon->setDefaultWidget(checkIcon);
+    checkIcon->setChecked(!ui->TableViewAchievements->isColumnHidden(aColumn));
+    connect(checkIcon, &QCheckBox::clicked, this, [=, this](bool) {
+        ui->TableViewAchievements->setColumnHidden(aColumn, !checkIcon->isChecked());
+    });
+    return actionIcon;
+}
+
+QMenu *FormAchievements::createMenuAchievementsHeader() {
+    QMenu *menu = new QMenu(this);
+
+    QWidgetAction *actionIcon =         createCheckBoxHeaderAction(menu, tr("Иконка"),      achievementsModel::Icon);
+    QWidgetAction *actionTitle =        createCheckBoxHeaderAction(menu, tr("Название"),    achievementsModel::Title);
+    QWidgetAction *actionDescription =  createCheckBoxHeaderAction(menu, tr("Описание"),    achievementsModel::Description);
+    QWidgetAction *actionComment =      createCheckBoxHeaderAction(menu, tr("Комментарий"), achievementsModel::Comments);
+    QWidgetAction *actionWorld =        createCheckBoxHeaderAction(menu, tr("По миру"),     achievementsModel::World);
+
+    menu->addAction (actionIcon);
+    menu->addAction (actionTitle);
+    menu->addAction (actionDescription);
+    menu->addAction (actionComment);
+    menu->addAction (actionWorld);
+
+    if (profilesInTable_.count() > 0) {
+        QMenu *friendsRemoveMenu = new QMenu(tr("Убрать столбец"), this);
+        for (auto profile: profilesInTable_) {
+            QAction *profileAction = new QAction(QIcon(Images::deleteIcon()), tr("Убрать %1 из сравнения").arg(profile.first.personaName()), friendsRemoveMenu);
+            connect (profileAction,    &QAction::triggered,    this,   [=, this]() {
+                addFriendToList(profile.first, profile.second);
+                removeFriendColumn(profile.first);
+            });
+            friendsRemoveMenu->addAction(profileAction);
+        }
+        menu->addMenu(friendsRemoveMenu);
     }
-    emit s_settingsUpdated(aSettings);
+
+    return menu;
+}
+
+void FormAchievements::createCategory(const QModelIndex &aCategory) {
+    if (categoriesModel_) {
+        createSubCategory(categoriesModel_->parent(aCategory));
+    }
+}
+
+void FormAchievements::createSubCategory(const QModelIndex &aCategory) {
+    QString title = QInputDialog::getText(this, tr("Создание новой категории"), tr("Введите название:"), QLineEdit::Normal, "");
+    if (title.isEmpty()) {
+        return;
+    }
+    if (categoriesModel_) {
+        int row = 0;
+        if (aCategory.isValid()) {
+            row = categoriesModel_->getItem(aCategory)->parent()->categories().count();
+        }
+        categoriesModel_->insertRows(row, aCategory, title);
+    }
 }
 
 void FormAchievements::updateCategories() {
-    _categories->update();
-    if (auto model = dynamic_cast<CategoriesModel*>(ui->TreeWidgetCategories->model())) {
-        model->updateData(_categories);
+    if (categoriesModel_) {
+        categoriesModel_->update();
     }
-    if (auto model = dynamic_cast<FilterModelAchievements*>(ui->TableViewAchievements->model())) {
-        model->setCategories(CategoriesFilter());
-    }
+    filterAchievements_.setCategories(CategoriesFilter());
 }
 #define SystemEnd }
 
 #define Filter {
-void FormAchievements::updateFilters() {
-//    _filterAchievements.setSourceModel(_achievementsModel);
-//    ui->TableViewAchievements->setModel(&_filterAchievements);
-    ui->TableViewAchievements->sortByColumn(achievementsModel::World, Qt::SortOrder::DescendingOrder);
-    ui->TableViewAchievements->setColumnHidden(achievementsModel::Appid, true);
-    ui->TableViewAchievements->setColumnHidden(achievementsModel::Index, true);
-    ui->TableViewAchievements->resizeColumnsToContents();
-    ui->TableViewAchievements->setColumnWidth(achievementsModel::Title, std::min(ui->TableViewAchievements->columnWidth(achievementsModel::Title), 220));
-    ui->TableViewAchievements->setColumnWidth(achievementsModel::Description, std::min(ui->TableViewAchievements->columnWidth(achievementsModel::Description), 450));
+void FormAchievements::onUpdateFilters() {
     ui->TableViewAchievements->resizeRowsToContents();
     emit s_filtersValueUpdated();
 }
 
 void FormAchievements::updateFilterCategory(Category *aCategory, const bool &aIsChecked) {
-    auto filterCategories = _filterAchievements.getCategories();
     if (aIsChecked) {
-        filterCategories.addCategory(aCategory);
+        filterAchievements_.addCategory(aCategory);
     } else {
-        filterCategories.removeCategory(aCategory);
+        filterAchievements_.removeCategory(aCategory);
     }
-    _filterAchievements.setCategories(CategoriesFilter(filterCategories));
-    updateFilters();
-    ui->TableViewAchievements->resizeRowsToContents();
-    emit s_filtersValueUpdated();
+    onUpdateFilters();
 }
 
 void FormAchievements::updateFilterWithMyProfile(const ReachedType &aType) {
     switch (aType) {
     case ReachedType::all: {
-        _filterAchievements.setReached(0);
+        filterAchievements_.setReached(0);
         break;
     }
     case ReachedType::reached: {
-        _filterAchievements.setReached(1);
+        filterAchievements_.setReached(1);
         break;
     }
     case ReachedType::notReached: {
-        _filterAchievements.setReached(-1);
+        filterAchievements_.setReached(-1);
         break;
     }
     default: {
         break;
     }
     }
-    ui->TableViewAchievements->resizeRowsToContents();
-    emit s_filtersValueUpdated();
+    onUpdateFilters();
 }
 
 void FormAchievements::updateFilterTextAchievement(const QString &aNewText) {
-    _filterAchievements.setName(aNewText);
-    ui->TableViewAchievements->resizeRowsToContents();
-    emit s_filtersValueUpdated();
+    filterAchievements_.setName(aNewText);
+    onUpdateFilters();
 }
 
 void FormAchievements::updateFilterFavorite(const QList<FavoriteAchievement> &aFavorites) {
@@ -437,9 +556,8 @@ void FormAchievements::updateFilterFavorite(const QList<FavoriteAchievement> &aF
     for (auto &favorite: aFavorites) {
         list.append(favorite.apiName());
     }
-    _filterAchievements.setFavorites(list);
-    ui->TableViewAchievements->resizeRowsToContents();
-    emit s_filtersValueUpdated();
+    filterAchievements_.setFavorites(list);
+    onUpdateFilters();
 }
 #define FilterEnd }
 
@@ -447,7 +565,7 @@ void FormAchievements::updateFilterFavorite(const QList<FavoriteAchievement> &aF
 void FormAchievements::checkBoxFavorites_StateChanged(const int &arg1) {
     switch (arg1) {
     case 0: {
-        _filterAchievements.setFavorites(QStringList());
+        filterAchievements_.setFavorites(QStringList());
         ui->TableViewAchievements->resizeRowsToContents();
         break;
     }
@@ -456,7 +574,7 @@ void FormAchievements::checkBoxFavorites_StateChanged(const int &arg1) {
         auto iteratorGame = std::find_if(favorites.begin(),
                                          favorites.end(),
                                          [=, this](const FavoriteAchievementsGame &lGame) {
-                                            return lGame == _game && lGame.steamId() == _profile.steamID();
+                                            return lGame == game_ && lGame.steamId() == profile_.steamId();
                                          });
         if (iteratorGame != favorites.end()) {
             updateFilterFavorite(*iteratorGame);
@@ -467,173 +585,150 @@ void FormAchievements::checkBoxFavorites_StateChanged(const int &arg1) {
 }
 
 void FormAchievements::openManual() {
-    QDesktopServices::openUrl(QUrl("https://steamcommunity.com/app/" + QString::number(_game.appId()) + "/guides/"));
+    QDesktopServices::openUrl(QUrl("https://steamcommunity.com/app/" + QString::number(game_.appId()) + "/guides/"));
     //https://steamcommunity.com/app/218620/guides/
 }
 
 void FormAchievements::buttonComment_Clicked() {
     auto form = createFramelessForm<FormComments>();
-    form->setData(_profile.steamID(), _game, currentAchievement());
+    form->setData(profile_.steamId(), game_, currentAchievement());
     connect(this, &FormAchievements::s_settingsUpdated, form->window(), &FramelessWindow::updateSettings);
     connect(form, &FormComments::s_updateComments, this, [&]() {
-        _filterAchievements.sourceModel()->updateComments();
+        filterAchievements_.sourceModel()->updateComments();
     });
     form->window()->show();
 }
 #define FunctionEnd }
 
-#define Tabs {
-void FormAchievements::tabWidget_CurrentChanged(const int &index) {
-    switch(index) {
-    case FormAchievementsData::TabStandart: {
-        ui->TableViewAchievements->resizeRowsToContents();
+void FormAchievements::setAllFriendsValue(const ReachedType &aType) {
+    updateFilterFriend(profile_.steamId(), aType);
+    for (const auto &profile: profilesInTable_) {
+        updateFilterFriend(profile.first.steamId(), aType);
+    }
+}
+
+void FormAchievements::updateFilterFriend(const ProfileID &aSteamId, const ReachedType &aType) {
+    switch (aType) {
+    case ReachedType::all: {
+        filterAchievements_.setReachedFriend(0, aSteamId);
         break;
     }
-    case FormAchievementsData::TabCategories: {
-        if (!_isEditCategoryLoaded) {
-            loadEditCategory();
-        }
+    case ReachedType::reached: {
+        filterAchievements_.setReachedFriend(1, aSteamId);
+        break;
+    }
+    case ReachedType::notReached: {
+        filterAchievements_.setReachedFriend(-1, aSteamId);
         break;
     }
     default: {
         break;
     }
     }
+    ui->TableViewAchievements->resizeRowsToContents();
+    emit s_filtersValueUpdated();
 }
 
-void FormAchievements::loadEditCategory() {
-    ui->CategoriesEdit->setGame(_game);
-    ui->CategoriesEdit->setAchievements(_filterAchievements.sourceModel()->getAchievements());
-    connect(this, &FormAchievements::s_filtersValueUpdated, ui->CategoriesEdit, [&]() {
-        QList<QString> list;
-        for (int i = 0; i < ui->TableViewAchievements->model()->rowCount(); ++i) {
-            QModelIndex index = ui->TableViewAchievements->model()->index(i, achievementsModel::Appid);
-
-            list.append(ui->TableViewAchievements->model()->data(index).toString());
-        }
-        ui->CategoriesEdit->setVisibleItems(list);
-    });
-    connect(ui->CategoriesEdit, &FormCategoriesEdit::s_categoriesIsUpdated, this, [&](bool isUpdated) {
-        if (isUpdated) {
-            updateCategories();
-        }
-    });
-    _isEditCategoryLoaded = true;
+void FormAchievements::addFriendToList(const SProfile &aSteamFriend, FriendListItemData::ProfileType aType) {
+    if (aType == FriendListItemData::ProfileType::NotFriend ||
+        aType == FriendListItemData::ProfileType::Unknown) {
+        return;
+    }
+    FriendListItem *item = new FriendListItem(aSteamFriend, aType);
+    if (auto model = dynamic_cast<QStandardItemModel*>(ui->ListViewFriends->model())) {
+        model->appendRow(item);
+        model->sort(0);
+    }
 }
-#define TabsEnd }
 
-void FormAchievements::setAllFriendsValue(const ReachedType &aType) {
-    for(int i = 0; i < ui->ListWidgetFriends->count(); ++i) {
-        auto item = ui->ListWidgetFriends->item(i);
-        if (auto itemWidget = dynamic_cast<FormFriendItemCompare*>(ui->ListWidgetFriends->itemWidget(item))) {
-            if (!itemWidget->isFilterHidden()) {
-                itemWidget->setFilterValue(aType);
+void FormAchievements::addProfileToTable(const QModelIndex &index) {
+    ProfileID id = "";
+    FriendListItemData::ProfileType type = FriendListItemData::ProfileType::Unknown;
+    if (auto model = dynamic_cast<QStandardItemModel*>(ui->ListViewFriends->model())) {
+        if (auto item = dynamic_cast<FriendListItem*>(model->item(index.row()))) {
+            id = item->profile().steamId();
+            type = item->profileType();
+        }
+    }
+    auto iterator = std::find_if(friendsProfiles_.begin(),
+                                 friendsProfiles_.end(),
+                                 [=](const SProfile &lProfile) {
+                                    return lProfile.steamId() == id;
+                                 });
+    if (iterator != friendsProfiles_.end()) {
+        addFriendColumn(*iterator, type);
+        if (auto model = dynamic_cast<QStandardItemModel*>(ui->ListViewFriends->model())) {
+            auto row = model->takeRow(index.row());
+            for (auto item: row) {
+                delete item;
             }
         }
     }
 }
 
-void FormAchievements::updateFilterFriend(SProfile *aSteamId, const ReachedType &aType) {
-    switch (aType) {
-    case ReachedType::all: {
-        _filterAchievements.setReachedFriend(0, aSteamId->steamID());
-        break;
-    }
-    case ReachedType::reached: {
-        _filterAchievements.setReachedFriend(1, aSteamId->steamID());
-        break;
-    }
-    case ReachedType::notReached: {
-        _filterAchievements.setReachedFriend(-1, aSteamId->steamID());
-        break;
-    }
-    default: {
-        break;
-    }
-    }
-}
-
-void FormAchievements::loadingCompare() {
-    ++_loadCompare;
-    auto friends = SFriend::load(_profile.steamID());
-    QStringList list;
-    for(const SFriend &sFriend: qAsConst(friends)) {
-        list.append(sFriend.steamId());
-    }
-    _profilesFriends = SProfile::load(list);
-
-    for(const auto &profileFriend: qAsConst(_profilesFriends)) {
-        QString steamId = profileFriend.steamID();
-        SGame::load(steamId, true, true, std::bind(&FormAchievements::loadFriendGames, this,  std::placeholders::_1, steamId));
-    }
-}
-
-void FormAchievements::loadFriendGames(const SGames &aGames, const QString &aUserId) {
-    static int haveGame = 0;
-    static int haventGame = 0;
-    auto iterator = std::find_if(_profilesFriends.begin(),
-                                 _profilesFriends.end(),
-                                 [=](const SProfile &profile) {
-                                     return aUserId == profile.steamID();
-                                 });
-    if (iterator != _profilesFriends.end()) {
-        bool isGameExist = std::any_of(aGames.begin(),
-                                       aGames.end(),
-                                       [&](const SGame &game) {
-                                           return game.appId() == _game.appId();
-                                       });
-        if (isGameExist) {
-            ui->ComboBoxFriend->addItem(*iterator, FriendType::haveGame);
-            ++haveGame;
-        } else {
-            ui->ComboBoxFriend->addItem(*iterator, FriendType::haventGame);
-            ++haventGame;
-        }
-        emit s_progress(tr("Загрузка друзей"), haveGame + haventGame, _profilesFriends.count());
-    }
-    if(haveGame + haventGame == _profilesFriends.count()) {
-        ++_loadCompare;
-        haveGame = 0;
-        haventGame = 0;
-        emit s_finishedFriends();
-    }
-}
-
-void FormAchievements::addFriendToList(const SProfile &aSteamFriend) {
-    QListWidgetItem *item = new QListWidgetItem(aSteamFriend.pixmapAvatar(), "");
-
-    auto friendItem = new FormFriendItemCompare(aSteamFriend, item);
-    connect(friendItem, &FormFriendItemCompare::s_filterChanged, this, &FormAchievements::updateFilterFriend);
-    connect(friendItem, &FormFriendItemCompare::s_delete, this, [&]() {
-        auto sndr = dynamic_cast<FormFriendItemCompare*>(sender());
-        if (sndr == nullptr) {
-            return;
-        }
-        ui->ComboBoxFriend->addItem(*sndr->steamProfile(), sndr->isFilterHidden() ? FriendType::haventGame : FriendType::haveGame);
-        removeFriendColumn(*sndr->steamProfile());
-        delete sndr->item();
-    });
-    ui->ListWidgetFriends->addItem(item);
-    ui->ListWidgetFriends->setItemWidget(item, friendItem);
-
-    int friendIndex = addFriendColumn(aSteamFriend);
-
-    int reached = _filterAchievements.sourceModel()->getReachedFromProfile(friendIndex);
-    if(reached > -1) {
-        friendItem->setPercent(100.0f * reached / _filterAchievements.sourceModel()->getAchievementsCount());
-    } else {
-        friendItem->setPercent(0.0f);
-        friendItem->setHiddenFilter(true);
-    }
-}
-
-int FormAchievements::addFriendColumn(const SProfile &aSteamFriend) {
-    int index = _filterAchievements.addProfile(aSteamFriend);
+int FormAchievements::addFriendColumn(const SProfile &aSteamFriend, FriendListItemData::ProfileType aType) {
+    int index = filterAchievements_.addProfile(aSteamFriend);
     ui->TableViewAchievements->setColumnWidth(index + achievementsModel::Count - 1, c_friendColumnWidth);
+    profilesInTable_.append(QPair<SProfile, FriendListItemData::ProfileType>(aSteamFriend, aType));
     return index;
 }
 
 bool FormAchievements::removeFriendColumn(const SProfile &aSteamFriend) {
-    _filterAchievements.removeProfile(aSteamFriend);
+    filterAchievements_.removeProfile(aSteamFriend);
+    profilesInTable_.removeIf([=](QPair<SProfile, FriendListItemData::ProfileType> lPair) {
+        return lPair.first.steamId() == aSteamFriend.steamId();
+    });
     return true;
+}
+
+void FormAchievements::buttonAddProfile_Clicked() {
+    QString id = ui->lineEditFindProfile->text();
+    SProfile::LoadType type = identifyProfileType(id);
+    if (type == SProfile::LoadType::unknown) {
+        qWarning() << "Не распознан профиль" << ui->lineEditFindProfile->text();
+        QMessageBox::warning(this, tr("Ошибка"), tr("Не удалось распознать синтаксис профиля"));
+        return;
+    }
+
+    SProfile profile = SProfile::load(id, type);
+    if(!profile.isNull()) {
+        addFriendColumn(profile, FriendListItemData::ProfileType::NotFriend);
+    } else {
+        QMessageBox::warning(this, tr("Ошибка"), tr("Нет данных о профиле!"));
+        qWarning() << "profileError";
+    }
+}
+
+void FormAchievements::findFriend() {
+    if (auto model = dynamic_cast<QStandardItemModel*>(ui->ListViewFriends->model())) {
+        QString friendName = ui->lineEditFindFriend->text();
+        for (int i = 0; i < model->rowCount(); ++i) {
+            if (auto item = dynamic_cast<FriendListItem*>(model->item(i))) {
+                if (item->profile().personaName().indexOf(friendName) == -1) {
+                    ui->ListViewFriends->setRowHidden(i, true);
+                } else {
+                    ui->ListViewFriends->setRowHidden(i, false);
+                }
+            }
+        }
+    }
+}
+
+void FormAchievements::checkBoxFriendsOnlyWithGame_Clicked(bool aChecked) {
+    if (auto model = dynamic_cast<QStandardItemModel*>(ui->ListViewFriends->model())) {
+        QString friendName = ui->lineEditFindFriend->text();
+        for (int i = 0; i < model->rowCount(); ++i) {
+            if (aChecked) {
+                if (auto item = dynamic_cast<FriendListItem*>(model->item(i))) {
+                    if (item->profileType() == FriendListItemData::ProfileType::FriendWithGame) {
+                        ui->ListViewFriends->setRowHidden(i, false);
+                    } else {
+                        ui->ListViewFriends->setRowHidden(i, true);
+                    }
+                }
+            } else {
+                ui->ListViewFriends->setRowHidden(i, false);
+            }
+        }
+    }
 }

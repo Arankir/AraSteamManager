@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1196</width>
-    <height>893</height>
+    <width>723</width>
+    <height>409</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,6 +31,12 @@
    </property>
    <item>
     <widget class="QFrame" name="FrameProfileBaseInfo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -255,6 +261,18 @@
    </item>
    <item>
     <widget class="QFrame" name="FrameProfileMaximumInfo">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>250</height>
+      </size>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -264,6 +282,12 @@
      <layout class="QVBoxLayout" name="verticalLayout_14">
       <item>
        <widget class="QScrollArea" name="scrollArea">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
@@ -271,13 +295,13 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-262</y>
-           <width>1160</width>
-           <height>993</height>
+           <y>0</y>
+           <width>687</width>
+           <height>1007</height>
           </rect>
          </property>
-         <layout class="QFormLayout" name="formLayout">
-          <item row="0" column="0" colspan="2">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout_18">
             <item>
              <widget class="LabelValue" name="LabellvlValue">
@@ -328,372 +352,341 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="LabelVanityUrl">
-            <property name="text">
-             <string>VanityUrl:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="LabelValue" name="LabelVanityUrlValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>AccountID:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="LabelValue" name="LabelProfileIDValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QLabel" name="LabelProfileUrl">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true">ProfileUrl</string>
-            </property>
-            <property name="openExternalLinks">
-             <bool>true</bool>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::TextBrowserInteraction</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="LabelTimeCreated">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>TimeCreated:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="LabelValue" name="LabelTimeCreatedValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true">0</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="LabelLocCountryCode">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>CountryCode:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="LabelValue" name="LabelLocCountryCodeValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true">EN</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0" colspan="2">
-           <widget class="QFrame" name="frameBans">
+          <item>
+           <widget class="CollapsableWidget" name="collapsableWidgetCommon">
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QFormLayout" name="formLayout_2">
+            <layout class="QFormLayout" name="layoutCommon">
              <item row="0" column="0">
-              <widget class="QLabel" name="label_5">
+              <widget class="QLabel" name="labelVanityUrl">
+               <property name="text">
+                <string>Vanity URL:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="LabelValue" name="labelVanityUrlValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Account ID:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="LabelValue" name="labelAccountIdValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <widget class="QLabel" name="labelLinkValue">
+               <property name="text">
+                <string notr="true"/>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="labelAccountCreated">
+               <property name="text">
+                <string>Account created:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="LabelValue" name="labelAccountCreatedValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="labelLanguage">
+               <property name="text">
+                <string>Language:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="LabelValue" name="labelLanguageValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0" colspan="2">
+              <widget class="LabelLight" name="LabelProfileState">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string notr="true">ProfileState</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0" colspan="2">
+              <widget class="LabelLight" name="LabelCommentPermission">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string notr="true">CommentPermission</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="CollapsableWidget" name="collapsableWidgetBans">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <layout class="QFormLayout" name="layoutBans">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_14">
                <property name="text">
                 <string>Game Bans:</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="LabelLight" name="LabelGameBansValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelLight" name="labelGameBansValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_8">
+              <widget class="QLabel" name="label_16">
                <property name="text">
                 <string>VAC Bans:</string>
                </property>
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="LabelLight" name="LabelVacBansValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelLight" name="labelVacBansValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="label_10">
+              <widget class="QLabel" name="label_19">
                <property name="text">
                 <string>Community Ban:</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="LabelLight" name="LabelCommunityBanValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelLight" name="labelCommunityBanValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QLabel" name="label_12">
+              <widget class="QLabel" name="label_21">
                <property name="text">
                 <string>Trade Ban:</string>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="LabelLight" name="LabelTradeBanValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelLight" name="labelTradeBanValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="7" column="0" colspan="2">
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>Badges</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <item>
+           <widget class="CollapsableWidget" name="collapsableWidgetBadges">
+            <layout class="QFormLayout" name="layoutBadges">
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout">
-                 <item>
-                  <widget class="QLabel" name="label_13">
-                   <property name="text">
-                    <string>Special:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LabelValue" name="LabelSpecialBadgesValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
+                <widget class="QLabel" name="labelSpecialBadges">
+                 <property name="text">
+                  <string notr="true">TextLabel</string>
+                 </property>
+                </widget>
                </item>
+               <item>
+                <widget class="LabelValue" name="labelSpecialBadgesValue">
+                 <property name="text">
+                  <string notr="true">Unknown</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="1">
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>534</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
-                  <widget class="QLabel" name="label_15">
+                  <widget class="QLabel" name="labelNormalBadges">
                    <property name="text">
-                    <string>Normal:</string>
+                    <string notr="true">TextLabel</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="LabelValue" name="LabelNormalBadgesValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
+                  <widget class="LabelValue" name="labelNormalBadgesValue">
                    <property name="text">
-                    <string notr="true"/>
+                    <string notr="true">Unknown</string>
                    </property>
                   </widget>
                  </item>
                 </layout>
                </item>
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                <layout class="QVBoxLayout" name="verticalLayout_4">
                  <item>
-                  <widget class="QLabel" name="label_17">
-                   <property name="text">
-                    <string>Foil:</string>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <item>
+                    <widget class="QLabel" name="labelNormalLvl1">
+                     <property name="text">
+                      <string notr="true">TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="LabelValue" name="labelNormalLvl1Value">
+                     <property name="text">
+                      <string notr="true">Unknown</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                  <item>
-                  <widget class="LabelValue" name="LabelFoilBadgesValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <item>
+                    <widget class="QLabel" name="labelNormalLvl2">
+                     <property name="text">
+                      <string notr="true">TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="LabelValue" name="labelNormalLvl2Value">
+                     <property name="text">
+                      <string notr="true">Unknown</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_10">
+                   <item>
+                    <widget class="QLabel" name="labelNormalLvl3">
+                     <property name="text">
+                      <string notr="true">TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="LabelValue" name="labelNormalLvl3Value">
+                     <property name="text">
+                      <string notr="true">Unknown</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_11">
+                   <item>
+                    <widget class="QLabel" name="labelNormalLvl4">
+                     <property name="text">
+                      <string notr="true">TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="LabelValue" name="labelNormalLvl4Value">
+                     <property name="text">
+                      <string notr="true">Unknown</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_12">
+                   <item>
+                    <widget class="QLabel" name="labelNormalLvl5">
+                     <property name="text">
+                      <string notr="true">TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="LabelValue" name="labelNormalLvl5Value">
+                     <property name="text">
+                      <string notr="true">Unknown</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_13">
+                   <item>
+                    <widget class="QLabel" name="labelNormalLvl5plus">
+                     <property name="text">
+                      <string notr="true">TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="LabelValue" name="labelNormalLvl5plusValue">
+                     <property name="text">
+                      <string notr="true">Unknown</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
                </item>
                <item>
-                <spacer name="horizontalSpacer_2">
+                <spacer name="horizontalSpacer_5">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -707,438 +700,158 @@
                </item>
               </layout>
              </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_17">
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_5">
-                 <item>
-                  <widget class="QLabel" name="label_19">
-                   <property name="text">
-                    <string>1:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LabelValue" name="LabelBadges1LvlValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_8">
-                 <item>
-                  <widget class="QLabel" name="label_22">
-                   <property name="text">
-                    <string>2:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LabelValue" name="LabelBadges2LvlValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_10">
-                 <item>
-                  <widget class="QLabel" name="label_24">
-                   <property name="text">
-                    <string>3:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LabelValue" name="LabelBadges3LvlValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_11">
-                 <item>
-                  <widget class="QLabel" name="label_26">
-                   <property name="text">
-                    <string>4:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LabelValue" name="LabelBadges4LvlValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_12">
-                 <item>
-                  <widget class="QLabel" name="label_28">
-                   <property name="text">
-                    <string>5:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LabelValue" name="LabelBadges5LvlValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_13">
-                 <item>
-                  <widget class="QLabel" name="label_29">
-                   <property name="text">
-                    <string>&gt;5:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="LabelValue" name="LabelBadgesMore5LvlValue">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <pointsize>10</pointsize>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                <widget class="QLabel" name="labelFoilBadges">
+                 <property name="text">
+                  <string notr="true">TextLabel</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
+                </widget>
+               </item>
+               <item>
+                <widget class="LabelValue" name="labelFoilBadgesValue">
+                 <property name="text">
+                  <string notr="true">Unknown</string>
                  </property>
-                </spacer>
+                </widget>
                </item>
               </layout>
+             </item>
+             <item row="2" column="1">
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>562</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="label_31">
-            <property name="text">
-             <string>Total:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="1">
-           <widget class="LabelValue" name="LabelTotalPlayTimeValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="LabelWindowsPlayTime">
-            <property name="font">
-             <font>
-              <italic>true</italic>
-              <underline>true</underline>
-             </font>
-            </property>
-            <property name="text">
-             <string>Windows:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="1">
-           <widget class="LabelValue" name="LabelWindowsPlayTimeValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="0">
-           <widget class="QLabel" name="LabelLinuxPlayTime">
-            <property name="font">
-             <font>
-              <italic>true</italic>
-              <underline>true</underline>
-             </font>
-            </property>
-            <property name="text">
-             <string>Linux:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="1">
-           <widget class="LabelValue" name="LabelLinuxPlayTimeValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="0">
-           <widget class="QLabel" name="LabelMacOsPlayTime">
-            <property name="font">
-             <font>
-              <italic>true</italic>
-              <underline>true</underline>
-             </font>
-            </property>
-            <property name="text">
-             <string>MacOS:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="11" column="1">
-           <widget class="LabelValue" name="LabelMacOsPlayTimeValue">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="12" column="0" colspan="2">
-           <widget class="QFrame" name="frameGamesByPlayed">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QFormLayout" name="formLayout_6">
+          <item>
+           <widget class="CollapsableWidget" name="collapsableWidgetPlayTime">
+            <layout class="QFormLayout" name="layoutPlayTime">
              <item row="0" column="0">
-              <widget class="QLabel" name="label_39">
+              <widget class="QLabel" name="labelWindowsPlayTime">
                <property name="text">
-                <string>Never:</string>
+                <string notr="true">Windows</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayed0hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelWindowsPlayTimeValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_41">
+              <widget class="QLabel" name="labelLinuxPlayTime">
+               <property name="text">
+                <string notr="true">Linux</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="LabelValue" name="labelLinuxPlayTimeValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelMacOsPlayTime">
+               <property name="text">
+                <string notr="true">MacOS</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="LabelValue" name="labelMacOsPlayTimeValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="labelTotalPlayTime">
+               <property name="text">
+                <string notr="true">Total</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="LabelValue" name="labelTotalPlayTimeValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="CollapsableWidget" name="collapsableWidgetGamesPlayTime">
+            <layout class="QFormLayout" name="layoutGamesPlayTime">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_46">
+               <property name="text">
+                <string>Never play:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="LabelValue" name="labelPlayTime0Value">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_50">
                <property name="text">
                 <string>0-1h:</string>
                </property>
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayed0_1hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelPlayTime0_1Value">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QLabel" name="label_43">
+              <widget class="QLabel" name="label_48">
                <property name="text">
                 <string>1-10h:</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayed1_10hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelPlayTime1_10Value">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QLabel" name="label_45">
+              <widget class="QLabel" name="label_44">
                <property name="text">
                 <string>10-24h:</string>
                </property>
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayed10_24hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelPlayTime10_24Value">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
@@ -1150,163 +863,78 @@
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayed24_240hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelPlayTime24_240Value">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="5" column="0">
-              <widget class="QLabel" name="label_49">
+              <widget class="QLabel" name="label_41">
                <property name="text">
                 <string>240-500h:</string>
                </property>
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayed240_500hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelPlayTime240_500Value">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="6" column="0">
-              <widget class="QLabel" name="label_51">
+              <widget class="QLabel" name="label_45">
                <property name="text">
                 <string>500-1000h:</string>
                </property>
               </widget>
              </item>
              <item row="6" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayed500_1000hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelPlayTime500_1000Value">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="7" column="0">
-              <widget class="QLabel" name="label_61">
+              <widget class="QLabel" name="label_43">
                <property name="text">
-                <string>&gt;1000h:</string>
+                <string>1000+h:</string>
                </property>
               </widget>
              </item>
              <item row="7" column="1">
-              <widget class="LabelValue" name="LabelGamesPlayedMore1000hValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelPlayTime1000plusValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="13" column="0" colspan="2">
-           <widget class="QFrame" name="frameProfileCustomizations">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QFormLayout" name="formLayout_7">
+          <item>
+           <widget class="CollapsableWidget" name="collapsableWidgetCustomizations">
+            <layout class="QFormLayout" name="layoutCustomizations">
              <item row="0" column="0">
-              <widget class="QLabel" name="label_53">
+              <widget class="QLabel" name="label_55">
                <property name="text">
                 <string>Background:</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="LabelValue" name="LabelBackgroundValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelCustomizationBackgroundValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_55">
+              <widget class="QLabel" name="label_56">
                <property name="text">
-                <string>Mini profile:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="LabelValue" name="LabelMiniProfileValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string notr="true"/>
+                <string>MiniProfile:</string>
                </property>
               </widget>
              </item>
@@ -1317,209 +945,63 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="LabelValue" name="LabelAvatarFrameValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
-              <widget class="QLabel" name="label_59">
+              <widget class="QLabel" name="label_58">
                <property name="text">
                 <string>Animated avatar:</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="LabelValue" name="LabelAnimatedAvatarValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_59">
                <property name="text">
-                <string notr="true"/>
+                <string>Purchases in the Points Store:</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_63">
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_60">
                <property name="text">
-                <string>Profile customizations purchased:</string>
+                <string>Upgrades in the Points Store:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="LabelValue" name="labelCustomizationMiniProfileValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="LabelValue" name="labelCustomizationAvatarFrameValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="LabelValue" name="labelCustomizationAnimatedAvatarValue">
+               <property name="text">
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="LabelValue" name="LabelProfileCustomizationsPurchasedValue">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelCustomizationPointsPurchasesValue">
                <property name="text">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0" colspan="2">
-              <widget class="QGroupBox" name="groupBox_2">
-               <property name="title">
-                <string>Customizations levels</string>
-               </property>
-               <layout class="QFormLayout" name="formLayout_8">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_65">
-                  <property name="text">
-                   <string>1:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="LabelValue" name="LabelProfileCustomization1LvlValue">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string notr="true"/>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_67">
-                  <property name="text">
-                   <string>2:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="LabelValue" name="LabelProfileCustomization2LvlValue">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string notr="true"/>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_69">
-                  <property name="text">
-                   <string>3:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="LabelValue" name="LabelProfileCustomization3LvlValue">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <pointsize>10</pointsize>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string notr="true"/>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="label_2">
-               <property name="text">
-                <string>Profile customizations upgraded:</string>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="LabelValue" name="LabelProfileCustomizationsUpgradedValue">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                 <bold>true</bold>
-                </font>
-               </property>
+              <widget class="LabelValue" name="labelCustomizationPointsUpgradesValue">
                <property name="text">
-                <string notr="true"/>
+                <string notr="true">Unknown</string>
                </property>
               </widget>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item row="15" column="0" colspan="2">
-           <widget class="LabelLight" name="LabelCommentPermission">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true">CommentPermission</string>
-            </property>
-           </widget>
-          </item>
-          <item row="14" column="0" colspan="2">
-           <widget class="LabelLight" name="LabelProfileState">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true">ProfileState</string>
-            </property>
            </widget>
           </item>
          </layout>
@@ -1629,6 +1111,12 @@
    <class>LabelValue</class>
    <extends>QLabel</extends>
    <header>subWidgets/labels/labelvalue.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CollapsableWidget</class>
+   <extends>QFrame</extends>
+   <header>subWidgets/collapsablewidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

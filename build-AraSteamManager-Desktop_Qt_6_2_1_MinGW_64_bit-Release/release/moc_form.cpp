@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Form_t {
-    const uint offsetsAndSize[10];
-    char stringdata0[57];
+    const uint offsetsAndSize[12];
+    char stringdata0[70];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_Form_t, stringdata0) + ofs), len 
@@ -33,12 +33,13 @@ static const qt_meta_stringdata_Form_t qt_meta_stringdata_Form = {
 QT_MOC_LITERAL(0, 4), // "Form"
 QT_MOC_LITERAL(5, 8), // "s_closed"
 QT_MOC_LITERAL(14, 0), // ""
-QT_MOC_LITERAL(15, 17), // "s_settingsUpdated"
-QT_MOC_LITERAL(33, 23) // "QFlags<changedSettings>"
+QT_MOC_LITERAL(15, 12), // "s_destructed"
+QT_MOC_LITERAL(28, 17), // "s_settingsUpdated"
+QT_MOC_LITERAL(46, 23) // "QFlags<changedSettings>"
 
     },
-    "Form\0s_closed\0\0s_settingsUpdated\0"
-    "QFlags<changedSettings>"
+    "Form\0s_closed\0\0s_destructed\0"
+    "s_settingsUpdated\0QFlags<changedSettings>"
 };
 #undef QT_MOC_LITERAL
 
@@ -48,20 +49,22 @@ static const uint qt_meta_data_Form[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   26,    2, 0x06,    1 /* Public */,
-       3,    1,   27,    2, 0x06,    2 /* Public */,
+       1,    0,   32,    2, 0x06,    1 /* Public */,
+       3,    0,   33,    2, 0x06,    2 /* Public */,
+       4,    1,   34,    2, 0x06,    3 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 4,    2,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 5,    2,
 
        0        // eod
 };
@@ -73,7 +76,8 @@ void Form::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         (void)_t;
         switch (_id) {
         case 0: _t->s_closed(); break;
-        case 1: _t->s_settingsUpdated((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
+        case 1: _t->s_destructed(); break;
+        case 2: _t->s_settingsUpdated((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -86,9 +90,16 @@ void Form::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
             }
         }
         {
+            using _t = void (Form::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Form::s_destructed)) {
+                *result = 1;
+                return;
+            }
+        }
+        {
             using _t = void (Form::*)(QFlags<changedSettings> );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Form::s_settingsUpdated)) {
-                *result = 1;
+                *result = 2;
                 return;
             }
         }
@@ -102,7 +113,7 @@ const QMetaObject Form::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_Form_t
-, QtPrivate::TypeAndForceComplete<Form, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>
+, QtPrivate::TypeAndForceComplete<Form, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>
 
 
 
@@ -130,13 +141,13 @@ int Form::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
@@ -148,10 +159,16 @@ void Form::s_closed()
 }
 
 // SIGNAL 1
+void Form::s_destructed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
 void Form::s_settingsUpdated(QFlags<changedSettings> _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
-    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

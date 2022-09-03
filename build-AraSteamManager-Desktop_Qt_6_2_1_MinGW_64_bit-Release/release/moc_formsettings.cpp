@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormSettings_t {
     const uint offsetsAndSize[72];
-    char stringdata0[614];
+    char stringdata0[613];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormSettings_t, stringdata0) + ofs), len 
@@ -51,22 +51,22 @@ QT_MOC_LITERAL(286, 5), // "value"
 QT_MOC_LITERAL(292, 20), // "comboBoxMaxTableRows"
 QT_MOC_LITERAL(313, 5), // "index"
 QT_MOC_LITERAL(319, 23), // "recursAddCategoryToTree"
-QT_MOC_LITERAL(343, 10), // "Category2*"
-QT_MOC_LITERAL(354, 9), // "aCategory"
-QT_MOC_LITERAL(364, 16), // "QTreeWidgetItem*"
-QT_MOC_LITERAL(381, 5), // "aRoot"
-QT_MOC_LITERAL(387, 7), // "aGameId"
-QT_MOC_LITERAL(395, 30), // "buttonExportCategories_Clicked"
-QT_MOC_LITERAL(426, 30), // "buttonImportCategories_Clicked"
-QT_MOC_LITERAL(457, 26), // "createExportCategoriesJson"
-QT_MOC_LITERAL(484, 14), // "ExportFileData"
-QT_MOC_LITERAL(499, 25), // "comboBoxThemeIndexChanged"
-QT_MOC_LITERAL(525, 6), // "aIndex"
-QT_MOC_LITERAL(532, 28), // "comboBoxLanguageIndexChanged"
-QT_MOC_LITERAL(561, 15), // "getFileFromPath"
-QT_MOC_LITERAL(577, 15), // "ExportFileData*"
-QT_MOC_LITERAL(593, 10), // "QLineEdit*"
-QT_MOC_LITERAL(604, 9) // "aLineEdit"
+QT_MOC_LITERAL(343, 9), // "Category*"
+QT_MOC_LITERAL(353, 9), // "aCategory"
+QT_MOC_LITERAL(363, 16), // "QTreeWidgetItem*"
+QT_MOC_LITERAL(380, 5), // "aRoot"
+QT_MOC_LITERAL(386, 7), // "aGameId"
+QT_MOC_LITERAL(394, 30), // "buttonExportCategories_Clicked"
+QT_MOC_LITERAL(425, 30), // "buttonImportCategories_Clicked"
+QT_MOC_LITERAL(456, 26), // "createExportCategoriesJson"
+QT_MOC_LITERAL(483, 14), // "ExportFileData"
+QT_MOC_LITERAL(498, 25), // "comboBoxThemeIndexChanged"
+QT_MOC_LITERAL(524, 6), // "aIndex"
+QT_MOC_LITERAL(531, 28), // "comboBoxLanguageIndexChanged"
+QT_MOC_LITERAL(560, 15), // "getFileFromPath"
+QT_MOC_LITERAL(576, 15), // "ExportFileData*"
+QT_MOC_LITERAL(592, 10), // "QLineEdit*"
+QT_MOC_LITERAL(603, 9) // "aLineEdit"
 
     },
     "FormSettings\0s_return_to_profile\0\0"
@@ -78,7 +78,7 @@ QT_MOC_LITERAL(604, 9) // "aLineEdit"
     "arg1\0checkBoxSaveImage_StateChanged\0"
     "slideProfileSize_ValueChanged\0value\0"
     "comboBoxMaxTableRows\0index\0"
-    "recursAddCategoryToTree\0Category2*\0"
+    "recursAddCategoryToTree\0Category*\0"
     "aCategory\0QTreeWidgetItem*\0aRoot\0"
     "aGameId\0buttonExportCategories_Clicked\0"
     "buttonImportCategories_Clicked\0"
@@ -170,7 +170,7 @@ void FormSettings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 9: _t->checkBoxSaveImage_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 10: _t->slideProfileSize_ValueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 11: _t->comboBoxMaxTableRows((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 12: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category2*(*)>(_a[1])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])));
+        case 12: { int _r = _t->recursAddCategoryToTree((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< QTreeWidgetItem*(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 13: _t->buttonExportCategories_Clicked(); break;
         case 14: _t->buttonImportCategories_Clicked(); break;
@@ -213,7 +213,7 @@ const QMetaObject FormSettings::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormSettings_t
 , QtPrivate::TypeAndForceComplete<FormSettings, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<ExportFileData, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<ExportFileData *, std::false_type>, QtPrivate::TypeAndForceComplete<QLineEdit *, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<ExportFileData, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<ExportFileData *, std::false_type>, QtPrivate::TypeAndForceComplete<QLineEdit *, std::false_type>
 
 
 >,

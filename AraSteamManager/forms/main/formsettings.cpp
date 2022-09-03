@@ -9,6 +9,7 @@
 
 FormSettings::FormSettings(QWidget *aParent): Form(aParent), ui(new Ui::FormSettings) {
     ui->setupUi(this);
+    init();
 }
 
 FormSettings::~FormSettings() {
@@ -94,12 +95,6 @@ void FormSettings::init() {
 
     connect(ui->ButtonExportCategories, &QPushButton::clicked, this, &FormSettings::buttonExportCategories_Clicked);
     connect(ui->ButtonImportCategories, &QPushButton::clicked, this, &FormSettings::buttonImportCategories_Clicked);
-    connect(this, &Form::s_settingsUpdated, ui->lineEdit_2, &MyLineEdit::updateSettings);
-    connect(this, &Form::s_settingsUpdated, ui->lineEdit_3, &MyLineEdit::updateSettings);
-    connect(this, &Form::s_settingsUpdated, ui->lineEdit_4, &MyLineEdit::updateSettings);
-    connect(this, &Form::s_settingsUpdated, ui->lineEdit_5, &MyLineEdit::updateSettings);
-    connect(this, &Form::s_settingsUpdated, ui->LineEditFindGame, &MyLineEdit::updateSettings);
-    connect(this, &Form::s_settingsUpdated, ui->LineEditImportCategories, &MyLineEdit::updateSettings);
 #define ConnectsEnd }
     retranslate();
     isInit_ = true;

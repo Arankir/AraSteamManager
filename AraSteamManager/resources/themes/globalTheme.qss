@@ -10,7 +10,7 @@ QWidget:hover {
 /* QMainWindow ------------------------------------------------------------
 
 This adjusts the splitter in the dock widget, not qsplitter
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmainwindow
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmainwindow
 
 --------------------------------------------------------------------------- */
 QMainWindow::separator {
@@ -39,7 +39,7 @@ QMainWindow::separator:vertical {
 
 /* QToolTip ---------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtooltip
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtooltip
 
 --------------------------------------------------------------------------- */
 QToolTip {
@@ -50,7 +50,7 @@ QToolTip {
 
 /* QStatusBar -------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qstatusbar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qstatusbar
 
 --------------------------------------------------------------------------- */
 QStatusBar {
@@ -75,7 +75,7 @@ QStatusBar QLabel {
 
 /* QCheckBox --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcheckbox
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcheckbox
 
 --------------------------------------------------------------------------- */
 QCheckBox {
@@ -94,7 +94,7 @@ QCheckBox::indicator {
 
 /* QGroupBox --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qgroupbox
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qgroupbox
 
 --------------------------------------------------------------------------- */
 QGroupBox {
@@ -127,7 +127,7 @@ QGroupBox::indicator {
 
 /* QRadioButton -----------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qradiobutton
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qradiobutton
 
 --------------------------------------------------------------------------- */
 QRadioButton {
@@ -162,7 +162,7 @@ QRadioButton::indicator {
 
 /* QMenuBar ---------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenubar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenubar
 
 --------------------------------------------------------------------------- */
 QMenuBar {
@@ -195,7 +195,7 @@ QMenuBar::item:pressed {
 
 /* QMenu ------------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenu
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qmenu
 
 --------------------------------------------------------------------------- */
 QMenu {
@@ -213,11 +213,15 @@ QMenu::icon {
   padding-left: 8px;
 }
 
-QMenu::item {
+QMenu::item, QMenu::item > QWidget {
     border-width: 1px;
     border-style: solid;
     height: 20px;
     padding: 4px 24px 4px 4px;
+}
+
+QMenu::item > QWidget {
+    border-radius: 0px;
 }
 
 QMenu::item:selected {
@@ -239,7 +243,7 @@ QMenu::right-arrow {
 
 /* QAbstractItemView ------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcombobox
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcombobox
 
 --------------------------------------------------------------------------- */
 QAbstractItemView {
@@ -254,7 +258,7 @@ QAbstractItemView QLineEdit {
 
 /* QAbstractScrollArea ----------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qabstractscrollarea
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qabstractscrollarea
 
 --------------------------------------------------------------------------- */
 QAbstractScrollArea {
@@ -274,7 +278,7 @@ QScrollArea, QScrollArea > QWidget > QWidget {
 --------------------------------------------------------------------------- */
 /* QScrollBar -------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qscrollbar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qscrollbar
 
 --------------------------------------------------------------------------- */
 QScrollBar:horizontal, QScrollBar:vertical {
@@ -371,7 +375,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 
 /* QTextEdit --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-specific-widgets
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-specific-widgets
 
 --------------------------------------------------------------------------- */
 QTextEdit {
@@ -411,7 +415,7 @@ QPlainTextEdit:focus {
 
 /* QSizeGrip --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qsizegrip
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qsizegrip
 
 --------------------------------------------------------------------------- */
 QSizeGrip {
@@ -430,7 +434,7 @@ QStackedWidget {
 
 /* QToolBar ---------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbar
 
 --------------------------------------------------------------------------- */
 QToolBar {
@@ -534,7 +538,7 @@ QAbstractSpinBox:focus {
 /* ------------------------------------------------------------------------ */
 /* QLabel -----------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
 
 --------------------------------------------------------------------------- */
 QLabel {
@@ -550,7 +554,7 @@ QLabel:disabled {
 
 /* QTextBrowser -----------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qabstractscrollarea
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qabstractscrollarea
 
 --------------------------------------------------------------------------- */
 QTextBrowser {
@@ -607,7 +611,7 @@ QCalendarWidget {
 --------------------------------------------------------------------------- */
 /* QProgressBar -----------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qprogressbar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qprogressbar
 
 --------------------------------------------------------------------------- */
 QProgressBar {
@@ -641,7 +645,7 @@ ProgressBarBad {
 /* ------------------------------------------------------------------------ */
 /* QPushButton ------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qpushbutton
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qpushbutton
 
 --------------------------------------------------------------------------- */
 QPushButton[text] {
@@ -704,7 +708,7 @@ QPushButton:focus {
 
 /* QToolButton ------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbutton
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbutton
 
 --------------------------------------------------------------------------- */
 QToolButton {
@@ -787,7 +791,7 @@ QCommandLinkButton {
 /* ------------------------------------------------------------------------ */
 /* QComboBox --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcombobox
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qcombobox
 
 --------------------------------------------------------------------------- */
 QComboBox {
@@ -857,7 +861,7 @@ QComboBox::down-arrow {
 
 /* QSlider ----------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qslider
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qslider
 
 --------------------------------------------------------------------------- */
 QSlider:focus {
@@ -936,7 +940,7 @@ QSlider::handle:vertical:focus {
 
 /* QLineEdit --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qlineedit
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qlineedit
 
 --------------------------------------------------------------------------- */
 QLineEdit {
@@ -962,7 +966,7 @@ QLineEdit:focus {
 
 /* QTabWiget --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
 
 --------------------------------------------------------------------------- */
 QTabWidget {
@@ -988,7 +992,7 @@ QTabWidget::pane:selected {
 
 /* QTabBar ----------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
 
 --------------------------------------------------------------------------- */
 QTabBar {
@@ -1008,7 +1012,7 @@ QTabBar::close-button {
 
 /* QTabBar::tab - selected ------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtabwidget-and-qtabbar
 
 --------------------------------------------------------------------------- */
 QTabBar::tab {
@@ -1197,9 +1201,9 @@ QDockWidget::float-button {
 
 /* QTreeView QListView QTableView -----------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtreeview
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qlistview
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtableview
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtreeview
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qlistview
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtableview
 
 --------------------------------------------------------------------------- */
 QTreeView:branch:has-children:!has-siblings:closed,
@@ -1272,7 +1276,7 @@ QColumnView::item:!selected:hover {
 
 /* QHeaderView ------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qheaderview
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qheaderview
 
 --------------------------------------------------------------------------- */
 QHeaderView, QTableCornerButton::section {
@@ -1335,7 +1339,7 @@ QHeaderView::up-arrow {
 
 /* QToolBox --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbox
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qtoolbox
 
 --------------------------------------------------------------------------- */
 QToolBox {
@@ -1385,10 +1389,10 @@ QToolBox QScrollArea QWidget QWidget {
 
 /* QFrame -----------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
-https:/theme/doc.qt.io/qt-5/qframe.html#-prop
-https:/theme/doc.qt.io/qt-5/qframe.html#details
-https:/theme/stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qframe
+https://doc.qt.io/qt-5/qframe.html#-prop
+https://doc.qt.io/qt-5/qframe.html#details
+https://stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-color
 
 --------------------------------------------------------------------------- */
 .QFrame {
@@ -1398,7 +1402,7 @@ https:/theme/stackoverflow.com/questions/14581498/qt-stylesheet-for-hline-vline-
 
 /* QSplitter --------------------------------------------------------------
 
-https:/theme/doc.qt.io/qt-5/stylesheet-examples.html#customizing-qsplitter
+https://doc.qt.io/qt-5/stylesheet-examples.html#customizing-qsplitter
 
 --------------------------------------------------------------------------- */
 QSplitter {

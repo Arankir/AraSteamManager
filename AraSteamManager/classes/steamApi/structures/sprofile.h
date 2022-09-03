@@ -66,7 +66,7 @@ public:
     QString avatarMediumUrl()       const;
     QString avatarFullUrl()         const;
 
-    ProfileID steamID()             const;
+    ProfileID steamId()             const;
     int communityVisibilityState()  const;
     int profileState()              const;
     QString personaName()           const;
@@ -85,6 +85,7 @@ public:
     QString realName()              const;
 
     static QStringList statesList();
+    static QPixmap pixmapAvatar(const QString &aIconPath);
 private slots:
     void fromJson(const QJsonValue &value);
     static SProfile loadVanity(const ProfileID &aId, std::function<void (SProfile)> aCallback = nullptr);
@@ -118,6 +119,8 @@ private:
     mutable QImage _pixmapAvatarFull;
 
 };
+
+SProfile::LoadType identifyProfileType(QString &aId);
 
 using SProfiles = QList<SProfile>;
 

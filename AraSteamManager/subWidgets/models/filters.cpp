@@ -46,11 +46,12 @@ bool SortFilterProxyModelFreezeRow::lessThan(const QModelIndex &left, const QMod
     QModelIndex  rightIndex = sourceModel()->index(rightRow, SPECIFIC_DATA_INDEX);
     QString rightProperty = sourceModel()->data(rightIndex).toString();
 
-    if(leftProperty .compare(SPECIFIC_DATA) == 0) {// put left on top if it has a specific property
+    if(leftProperty.compare(SPECIFIC_DATA) == 0) {// put left on top if it has a specific property
         return sortOrder() == Qt::AscendingOrder;
-    } else if(rightProperty .compare(SPECIFIC_DATA) == 0) { // put right on top if it has a specific property
+    } else if(rightProperty.compare(SPECIFIC_DATA) == 0) { // put right on top if it has a specific property
         return sortOrder() != Qt::AscendingOrder;
     }
+
     return QSortFilterProxyModel::lessThan(left, right);
 }
 
@@ -113,7 +114,7 @@ bool Filter::operator[](int aRow) const {
         qWarning() << "index" << aRow << "is missing" << "(" << rows_ << ")";
         return false;
     }
-    for (int c = 0; c < 8; ++c) {
+    for (int c = 0; c < cols_; ++c) {
         if (!(!getBit(checkCols_[c / 8], c) || getBit(filter_[aRow][c / 8], c))) { //Импликация (выводит false только если первое = true, а второе = false)
             return false;
         }

@@ -26,7 +26,9 @@ void ComboBoxFriendsWithGame::addItem(const SProfile &steamFriend, FriendType ty
     item->setText(steamFriend.personaName());
     item->setIcon(steamFriend.pixmapAvatar());
     mListWidget->addItem(item);
-    onAllFriends(static_cast<int>(mAllFriends->isChecked()) * 2);
+    if (!mAllFriends->isChecked() && item->_type != FriendType::haveGame) {
+        item->setHidden(true);
+    }
 }
 
 void ComboBoxFriendsWithGame::onAllFriends(int aState) {

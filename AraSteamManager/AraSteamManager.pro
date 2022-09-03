@@ -60,7 +60,6 @@ SOURCES += \
     forms/formmain.cpp \
     forms/achievements/formachievements.cpp \
     forms/achievements/formcategoriesedit.cpp \
-    forms/achievements/formfriendscompare.cpp \
     forms/widgets/formfrienditemcompare.cpp \
     forms/main/formfavorites.cpp \
     forms/main/formfriends.cpp \
@@ -71,7 +70,9 @@ SOURCES += \
     subWidgets/charts/achievementcompletedpiechart.cpp \
     subWidgets/charts/achievementcountchart.cpp \
     subWidgets/charts/piechart.cpp \
+    subWidgets/collapsablewidget.cpp \
     subWidgets/items/categoryitem.cpp \
+    subWidgets/items/friendlistitem.cpp \
     subWidgets/lineEdit/mylineedit.cpp \
     framelesswindow.cpp \
         main.cpp \
@@ -135,7 +136,6 @@ HEADERS += \
     forms/formmain.h \
     forms/achievements/formachievements.h \
     forms/achievements/formcategoriesedit.h \
-    forms/achievements/formfriendscompare.h \
     forms/widgets/formfrienditemcompare.h \
     forms/main/formfavorites.h \
     forms/main/formfriends.h \
@@ -146,7 +146,9 @@ HEADERS += \
     subWidgets/charts/achievementcompletedpiechart.h \
     subWidgets/charts/achievementcountchart.h \
     subWidgets/charts/piechart.h \
+    subWidgets/collapsablewidget.h \
     subWidgets/items/categoryitem.h \
+    subWidgets/items/friendlistitem.h \
     subWidgets/lineEdit/mylineedit.h \
     framelesswindow.h \
     subWidgets/actions/actioncategory.h \
@@ -186,7 +188,6 @@ FORMS += \
     forms/formmain.ui \
     forms/achievements/formachievements.ui \
     forms/achievements/formcategoriesedit.ui \
-    forms/achievements/formfriendscompare.ui \
     forms/widgets/formfrienditemcompare.ui \
     forms/main/formfavorites.ui \
     forms/main/formfriends.ui \

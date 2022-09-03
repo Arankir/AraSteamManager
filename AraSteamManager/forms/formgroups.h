@@ -16,7 +16,7 @@ class FormGroups : public Form {
 public:
     explicit FormGroups(QWidget *parent = nullptr);
     ~FormGroups();
-    void setProfileGame(const ProfileID &profileId, const SGame &game);
+    void setProfileGames(const ProfileID &profileId, const SGames &game);
 
 signals:
     void s_updateGroups();
@@ -38,12 +38,12 @@ protected slots:
 
     void retranslate() override;
     void updateIcons() override;
-    void updateSettings(QFlags<changedSettings> aSettings) override;
+//    void updateSettings(QFlags<changedSettings> aSettings) override;
 
 private:
     Ui::FormGroups *ui;
     GroupsGames groups_;
-    SGame game_;
+    SGames games_;
 };
 
 #endif // FORMGROUPSGAMESINTERACTIONS_H

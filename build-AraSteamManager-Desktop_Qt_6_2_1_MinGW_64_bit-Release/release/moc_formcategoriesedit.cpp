@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormCategoriesEdit_t {
-    const uint offsetsAndSize[62];
-    char stringdata0[436];
+    const uint offsetsAndSize[28];
+    char stringdata0[181];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormCategoriesEdit_t, stringdata0) + ofs), len 
@@ -35,48 +35,23 @@ QT_MOC_LITERAL(0, 18), // "FormCategoriesEdit"
 QT_MOC_LITERAL(19, 21), // "s_categoriesIsUpdated"
 QT_MOC_LITERAL(41, 0), // ""
 QT_MOC_LITERAL(42, 9), // "isUpdated"
-QT_MOC_LITERAL(52, 14), // "updateSettings"
-QT_MOC_LITERAL(67, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(91, 9), // "aSettings"
-QT_MOC_LITERAL(101, 4), // "init"
-QT_MOC_LITERAL(106, 11), // "updateIcons"
-QT_MOC_LITERAL(118, 11), // "retranslate"
-QT_MOC_LITERAL(130, 16), // "achievementsToUi"
-QT_MOC_LITERAL(147, 12), // "indexFromRow"
-QT_MOC_LITERAL(160, 12), // "QListWidget*"
-QT_MOC_LITERAL(173, 10), // "listWidget"
-QT_MOC_LITERAL(184, 3), // "row"
-QT_MOC_LITERAL(188, 14), // "changeEditType"
-QT_MOC_LITERAL(203, 8), // "EditType"
-QT_MOC_LITERAL(212, 4), // "type"
-QT_MOC_LITERAL(217, 17), // "buttonAdd_Clicked"
-QT_MOC_LITERAL(235, 20), // "buttonCancel_Clicked"
-QT_MOC_LITERAL(256, 20), // "buttonAccept_Clicked"
-QT_MOC_LITERAL(277, 20), // "buttonDelete_Clicked"
-QT_MOC_LITERAL(298, 23), // "buttonDeleteAll_Clicked"
-QT_MOC_LITERAL(322, 15), // "changeNewParent"
-QT_MOC_LITERAL(338, 10), // "Category2*"
-QT_MOC_LITERAL(349, 6), // "parent"
-QT_MOC_LITERAL(356, 16), // "createParentMenu"
-QT_MOC_LITERAL(373, 6), // "QMenu*"
-QT_MOC_LITERAL(380, 8), // "category"
-QT_MOC_LITERAL(389, 25), // "changeNewParentFromAction"
-QT_MOC_LITERAL(415, 20) // "changeCategoryParent"
+QT_MOC_LITERAL(52, 4), // "init"
+QT_MOC_LITERAL(57, 11), // "updateIcons"
+QT_MOC_LITERAL(69, 11), // "retranslate"
+QT_MOC_LITERAL(81, 16), // "achievementsToUi"
+QT_MOC_LITERAL(98, 12), // "indexFromRow"
+QT_MOC_LITERAL(111, 12), // "QListWidget*"
+QT_MOC_LITERAL(124, 10), // "listWidget"
+QT_MOC_LITERAL(135, 3), // "row"
+QT_MOC_LITERAL(139, 20), // "buttonCancel_Clicked"
+QT_MOC_LITERAL(160, 20) // "buttonAccept_Clicked"
 
     },
     "FormCategoriesEdit\0s_categoriesIsUpdated\0"
-    "\0isUpdated\0updateSettings\0"
-    "QFlags<changedSettings>\0aSettings\0"
-    "init\0updateIcons\0retranslate\0"
+    "\0isUpdated\0init\0updateIcons\0retranslate\0"
     "achievementsToUi\0indexFromRow\0"
-    "QListWidget*\0listWidget\0row\0changeEditType\0"
-    "EditType\0type\0buttonAdd_Clicked\0"
-    "buttonCancel_Clicked\0buttonAccept_Clicked\0"
-    "buttonDelete_Clicked\0buttonDeleteAll_Clicked\0"
-    "changeNewParent\0Category2*\0parent\0"
-    "createParentMenu\0QMenu*\0category\0"
-    "changeNewParentFromAction\0"
-    "changeCategoryParent"
+    "QListWidget*\0listWidget\0row\0"
+    "buttonCancel_Clicked\0buttonAccept_Clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -86,7 +61,7 @@ static const uint qt_meta_data_FormCategoriesEdit[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -94,48 +69,28 @@ static const uint qt_meta_data_FormCategoriesEdit[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,  122,    2, 0x06,    1 /* Public */,
+       1,    1,   62,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    1,  125,    2, 0x0a,    3 /* Public */,
-       7,    0,  128,    2, 0x08,    5 /* Private */,
-       8,    0,  129,    2, 0x08,    6 /* Private */,
-       9,    0,  130,    2, 0x08,    7 /* Private */,
-      10,    0,  131,    2, 0x08,    8 /* Private */,
-      11,    2,  132,    2, 0x08,    9 /* Private */,
-      15,    1,  137,    2, 0x08,   12 /* Private */,
-      18,    0,  140,    2, 0x08,   14 /* Private */,
-      19,    0,  141,    2, 0x08,   15 /* Private */,
-      20,    0,  142,    2, 0x08,   16 /* Private */,
-      21,    0,  143,    2, 0x08,   17 /* Private */,
-      22,    0,  144,    2, 0x08,   18 /* Private */,
-      23,    1,  145,    2, 0x08,   19 /* Private */,
-      26,    1,  148,    2, 0x08,   21 /* Private */,
-      26,    0,  151,    2, 0x28,   23 /* Private | MethodCloned */,
-      29,    0,  152,    2, 0x08,   24 /* Private */,
-      30,    1,  153,    2, 0x08,   25 /* Private */,
+       4,    0,   65,    2, 0x08,    3 /* Private */,
+       5,    0,   66,    2, 0x08,    4 /* Private */,
+       6,    0,   67,    2, 0x08,    5 /* Private */,
+       7,    0,   68,    2, 0x08,    6 /* Private */,
+       8,    2,   69,    2, 0x08,    7 /* Private */,
+      12,    0,   74,    2, 0x08,   10 /* Private */,
+      13,    0,   75,    2, 0x08,   11 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Bool,    3,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Int, 0x80000000 | 12, QMetaType::Int,   13,   14,
-    QMetaType::Void, 0x80000000 | 16,   17,
+    QMetaType::Int, 0x80000000 | 9, QMetaType::Int,   10,   11,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 24,   25,
-    0x80000000 | 27, 0x80000000 | 24,   28,
-    0x80000000 | 27,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 24,   28,
 
        0        // eod
 };
@@ -147,32 +102,20 @@ void FormCategoriesEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         (void)_t;
         switch (_id) {
         case 0: _t->s_categoriesIsUpdated((*reinterpret_cast< const bool(*)>(_a[1]))); break;
-        case 1: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
-        case 2: _t->init(); break;
-        case 3: _t->updateIcons(); break;
-        case 4: _t->retranslate(); break;
-        case 5: _t->achievementsToUi(); break;
-        case 6: { int _r = _t->indexFromRow((*reinterpret_cast< QListWidget*(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])));
+        case 1: _t->init(); break;
+        case 2: _t->updateIcons(); break;
+        case 3: _t->retranslate(); break;
+        case 4: _t->achievementsToUi(); break;
+        case 5: { int _r = _t->indexFromRow((*reinterpret_cast< QListWidget*(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 7: _t->changeEditType((*reinterpret_cast< const EditType(*)>(_a[1]))); break;
-        case 8: _t->buttonAdd_Clicked(); break;
-        case 9: _t->buttonCancel_Clicked(); break;
-        case 10: _t->buttonAccept_Clicked(); break;
-        case 11: _t->buttonDelete_Clicked(); break;
-        case 12: _t->buttonDeleteAll_Clicked(); break;
-        case 13: _t->changeNewParent((*reinterpret_cast< Category2*(*)>(_a[1]))); break;
-        case 14: { QMenu* _r = _t->createParentMenu((*reinterpret_cast< Category2*(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 15: { QMenu* _r = _t->createParentMenu();
-            if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 16: _t->changeNewParentFromAction(); break;
-        case 17: _t->changeCategoryParent((*reinterpret_cast< Category2*(*)>(_a[1]))); break;
+        case 6: _t->buttonCancel_Clicked(); break;
+        case 7: _t->buttonAccept_Clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 6:
+        case 5:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -200,7 +143,7 @@ const QMetaObject FormCategoriesEdit::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormCategoriesEdit_t
 , QtPrivate::TypeAndForceComplete<FormCategoriesEdit, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const EditType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category2 *, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -227,13 +170,13 @@ int FormCategoriesEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 8;
     }
     return _id;
 }

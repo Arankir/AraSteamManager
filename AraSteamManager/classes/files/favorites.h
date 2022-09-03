@@ -36,7 +36,7 @@ public:
     FavoriteGames();
 
     void append(const FavoriteGame &);
-    void remove(const QString &aIdUser, const SGame &);
+    void remove(const QString &aIdUser, const GameID &);
 
     QJsonObject toJson() const override;
     void update();
@@ -118,8 +118,8 @@ public:
     bool operator==(const SGame &game) const;
 //    bool operator==(const FavoriteAchievementsGame &achievement) const = default;
 
-    void remove(const SAchievement &achievement);
-    bool isInAchievements(const SAchievement &achievement) const;
+    void remove(const AchievementID &achievement);
+    bool isInAchievements(const AchievementID &achievement) const;
     QJsonObject toJson() const;
     void fromJson(const QJsonObject &);
 
@@ -139,8 +139,9 @@ public:
 
     void append(const FavoriteAchievementsGame &);
     void append(const ProfileID &idUser, const SGame &game, const SAchievement &);
-    void remove(const ProfileID &idUser, const SGame &game);
-    void remove(const ProfileID &idUser, const SGame &game, const SAchievement &);
+    void remove(const ProfileID &idUser, const GameID &game);
+    void remove(const ProfileID &idUser, const GameID &game, const AchievementID &);
+    bool isInFavorite(const GameID &gameId, const ProfileID &profileId, const AchievementID &achievementId);
 
     QJsonObject toJson() const override;
     void update();

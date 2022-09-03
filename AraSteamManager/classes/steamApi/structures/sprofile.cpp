@@ -272,6 +272,10 @@ QPixmap SProfile::pixmapAvatar() const {
     return QPixmap::fromImage(loadImage(_pixmapAvatar, avatar_, Paths::imagesProfiles(avatar_), QSize(32, 32)));
 }
 
+QPixmap SProfile::pixmapAvatar(const QString &aIconPath) {
+    return QPixmap::fromImage(loadImage(aIconPath, Paths::imagesProfiles(aIconPath), QSize(32, 32)));
+}
+
 QPixmap SProfile::pixmapAvatarMedium() const {
     return QPixmap::fromImage(loadImage(_pixmapAvatarMedium, avatarMedium_, Paths::imagesProfiles(avatarMedium_), QSize(64, 64)));
 }
@@ -405,7 +409,7 @@ QString SProfile::avatarFullUrl() const {
     return avatarFull_;
 }
 
-ProfileID SProfile::steamID() const {
+ProfileID SProfile::steamId() const {
     return steamId_;
 }
 
@@ -504,4 +508,26 @@ void SProfileEquippedItem::fromJson(const QJsonObject &aObject) {
     appid = aObject.value("appid").toInt();
     item_type = aObject.value("item_type").toInt();
     item_class = aObject.value("item_class").toInt();
+}
+
+SProfile::LoadType identifyProfileType(QString &aId) {
+    //https://steamcommunity.com/profiles/76561198017985018/
+    //https://steamcommunity.com/id/xFrenzy47x
+    //steamcommunity.com/profiles/76561198017985018/
+    //steamcommunity.com/id/xFrenzy47x
+    //76561198017985018
+    //xFrenzy47x
+    QRegularExpression ProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
+    auto match = ProfileUrl.match(aId);
+    if (!match.hasMatch()) {
+        return SProfile::LoadType::unknown;
+    }
+
+    if ((match.captured(4) == "profiles") || (QRegularExpression("\\d{17}").match(match.captured(5)).hasMatch())) {
+        aId = match.captured(5);
+        return SProfile::LoadType::id;
+    } else {
+        aId = match.captured(5);
+        return SProfile::LoadType::vanity;
+    }
 }

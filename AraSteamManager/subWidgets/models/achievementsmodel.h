@@ -8,6 +8,13 @@
 #include "subWidgets/models/filters.h"
 
 namespace achievementsModel {
+    constexpr int c_reservedRows = 2;
+
+    enum ReservedRows {
+        Avatar = 0,
+        Percent = 1
+    };
+
     enum Columns {
         Appid       = 0,
         Index       = 1,
@@ -40,7 +47,7 @@ public:
     SAchievement getAchievement(const QModelIndex &index) const;
     SAchievements getAchievements() const;
     int getReachedFromProfile(const int &index = -1);
-    int getAchievementsCount();
+    int getAchievementsCount() const;
 
     int addProfile(const SProfile &profile);
     SProfile getProfile(const int &index);
@@ -80,7 +87,7 @@ private:
     ProfileID profileId_;
     GameID gameId_;
 
-    SProfiles profiles_;
+    QList<QPair<SProfile, int> > profiles_;
     QList<AchievementInModel> achievementsInModel_;
 };
 
@@ -109,6 +116,7 @@ public:
     SGame getGame(int index);
     QStringList getGameComment(int index);
     QList<SAchievementPlayer> getGameAchievements(int index);
+    QMap<ProfileID, int> getProfiles();
 
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
 public slots:
@@ -124,6 +132,10 @@ public slots:
     void setFavorites(const QStringList &newFavorites);
     void clear();
 
+    void addCategory(Category *aCategory);
+    void removeCategory(Category *aCategory);
+private slots:
+    void updateCategoriesFilter();
 private:
     void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
 

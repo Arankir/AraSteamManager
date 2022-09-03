@@ -21,6 +21,8 @@ void FormFriends::init() {
         ui->tableFriends->resizeRowsToContents();
         emit s_finish(getWidthTableColumns(ui->tableFriends) + 23);//Почему-то при подсчёте длинна последнего 77, а как всё начинает ресайзиться, меняется на 100
     });
+    ui->splitter->setStretchFactor(0, 1);
+    ui->splitter->setStretchFactor(1, 10);
     filterFriends_.setSourceModel(friendsModel);
     ui->tableFriends->setColumnHidden(friendsModel::ID,    true);
     ui->tableFriends->setColumnHidden(friendsModel::Index, true);
@@ -44,7 +46,6 @@ void FormFriends::init() {
     connect(&filterFriends_, &FilterModel::s_rowsUpdated, this, [&]() {
         ui->tableFriends->resizeRowsToContents();
     });
-    connect(this, &Form::s_settingsUpdated, ui->lineEditName, &MyLineEdit::updateSettings);
 #define ConnectsEnd }
 }
 
@@ -84,11 +85,11 @@ void FormFriends::retranslate() {
     initComboBoxStatus();
 }
 
-void FormFriends::updateSettings(QFlags<changedSettings> aSettings) {
-    if (aSettings.testFlag(changedSettings::theme)) {
-        updateIcons();
-    }
-}
+//void FormFriends::updateSettings(QFlags<changedSettings> aSettings) {
+//    if (aSettings.testFlag(changedSettings::theme)) {
+//        updateIcons();
+//    }
+//}
 
 SFriendProfile FormFriends::currentFriend() {
     return filterFriends_.sourceModel()->getFriend(filterFriends_.data(ui->tableFriends->currentIndex().siblingAtColumn(friendsModel::Index)).toInt());
@@ -148,7 +149,7 @@ QMenu *FormFriends::createMenu(const SFriendProfile &aProfile) {
     bool isFavorite = std::any_of(favoriteFriends.begin(),
                                   favoriteFriends.end(),
                                   [&](const FavoriteProfile &lFriend) {
-                                        return (lFriend.profileId() == aProfile.steamProfile.steamID());
+                                        return (lFriend.profileId() == aProfile.steamProfile.steamId());
                                     });
     if (isFavorite) {
         actionFavorites->setText(QObject::tr("Удалить из избранного"));
@@ -156,7 +157,7 @@ QMenu *FormFriends::createMenu(const SFriendProfile &aProfile) {
         connect(actionFavorites, &QAction::triggered, this,  [=, this](){
                     auto curFriend = currentFriend();
                     FavoriteProfiles favoriteFriends;
-                    favoriteFriends.remove(curFriend.steamProfile.steamID());
+                    favoriteFriends.remove(curFriend.steamProfile.steamId());
                 });
     } else {
         actionFavorites->setText(QObject::tr("Добавить в избранное"));
@@ -164,7 +165,7 @@ QMenu *FormFriends::createMenu(const SFriendProfile &aProfile) {
         connect(actionFavorites, &QAction::triggered, this,  [=, this](){
                     auto curFriend = currentFriend();
                     FavoriteProfiles favoriteFriends;
-                    favoriteFriends.append(FavoriteProfile(curFriend.steamProfile.steamID()));
+                    favoriteFriends.append(FavoriteProfile(curFriend.steamProfile.steamId()));
                 });
     }
 
@@ -178,6 +179,6 @@ void FormFriends::goToCurrentProfile() {
         return;
     }
     isLoading_ = true;
-    emit s_goToProfile(currentFriend().steamProfile.steamID());
+    emit s_goToProfile(currentFriend().steamProfile.steamId());
 }
 #define TableActionEnd }

@@ -224,6 +224,10 @@ QPixmap SAchievementSchema::icon(GameID aGameId) const {
     return QPixmap::fromImage(loadImage(pixmapIcon_, icon(), Paths::imagesAchievements(QString::number(aGameId), icon()), QSize(64, 64)));
 }
 
+QPixmap SAchievementSchema::icon(const GameID &aGameId, const QString &aIconPath) {
+    return QPixmap::fromImage(loadImage(aIconPath, Paths::imagesAchievements(QString::number(aGameId), aIconPath), QSize(64, 64)));
+}
+
 QPixmap SAchievementSchema::iconGray(GameID aGameId) const {
     return QPixmap::fromImage(loadImage(pixmapIconGray_, iconGray(), Paths::imagesAchievements(QString::number(aGameId), iconGray()), QSize(64, 64)));
 }

@@ -28,6 +28,8 @@ public:
     static QString reverse();
     static QString deleteCategory();
     static QString deleteAllCategories();
+    static QString expand();
+    static QString collapse();
 
     //Achievements
     static QString category();
@@ -84,6 +86,18 @@ public:
     static QString games();
     static QString setHome();
     static QString statistic();
+    static QString special();
+    static QString normal();
+    static QString foil();
+    static QString badges1();
+    static QString badges2();
+    static QString badges3();
+    static QString badges4();
+    static QString badges5();
+    static QString badges5plus();
+    static QString windows();
+    static QString linux();
+    static QString mac();
 
     //Window buttons
     static QString closeWindow();

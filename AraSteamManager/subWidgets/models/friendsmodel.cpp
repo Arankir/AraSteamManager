@@ -18,7 +18,7 @@ void FriendsModel::setFriends(const QList<SFriend> &aFriends) {
     int progress = 0;
     for(auto &profile: profiles) {
         for (const auto &currentFriend: aFriends) {
-            if (currentFriend.steamId() == profile.steamID()) {
+            if (currentFriend.steamId() == profile.steamId()) {
                 friends_.append(SFriendProfile(currentFriend, profile));
                 break;
             }

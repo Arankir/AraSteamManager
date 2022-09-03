@@ -23,7 +23,7 @@ struct CompletedAchievement {
 };
 
 struct Statistics {
-    Statistics(const SProfile &aProfile): profile(aProfile), games(SGame::load(aProfile.steamID(), true, true)) {};
+    Statistics(const SProfile &aProfile): profile(aProfile), games(SGame::load(aProfile.steamId(), true, true)) {};
     Statistics() {};
     void changeProfile(const SProfile &aProfile);
     void sortAllLists();

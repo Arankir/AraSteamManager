@@ -38,9 +38,11 @@ class FormGames : public Form {
 public slots:
     void updateSettings(QFlags<changedSettings> aSettings) override;
     void setGames(const ProfileID &profileId);
+    void setGames(const ProfileID &aProfileId, const SGames &aGames);
     bool isInit();
     void clear();
 
+    SGames currentGames();
 public:
     FormGames(QWidget *aParent = nullptr);
     ~FormGames();

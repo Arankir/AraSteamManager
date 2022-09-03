@@ -9,11 +9,15 @@ class LabelLight : public QLabel {
     Q_OBJECT
 public:
     LabelLight(QWidget *parent = nullptr);
+    LabelLight(const QString &title, QWidget *parent = nullptr);
     ~LabelLight();
 
     LabelLight &setLightColor(int aRed, int aGreen, int aBlue, int aAlpha);
     LabelLight &setLightColor(QColor aColor);
     LabelLight &setBlurRadius(int radius);
+
+    LabelLight *setlightningColor(const QColor &aColor);
+
 
 private:
     QGraphicsDropShadowEffect *_light;

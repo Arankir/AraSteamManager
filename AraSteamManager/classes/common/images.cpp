@@ -70,6 +70,14 @@ QString Images::deleteCategory() {
 QString Images::deleteAllCategories() {
     return Theme::getCurrentTheme().pathImages + "achievements/categories/delete_all_categories.png";
 }
+
+QString Images::expand() {
+    return Theme::getCurrentTheme().pathImages + "achievements/categories/expand.png";
+}
+
+QString Images::collapse() {
+    return Theme::getCurrentTheme().pathImages + "achievements/categories/collapse.png";
+}
 #define AchievementCategoriesEnd }
 
 QString Images::category() {
@@ -244,6 +252,54 @@ QString Images::setHome() {
 
 QString Images::statistic() {
     return Theme::getCurrentTheme().pathImages + "profile icons/statistic.png";
+}
+
+QString Images::special() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/special.png";
+}
+
+QString Images::normal() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/normal.png";
+}
+
+QString Images::foil() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/foil.png";
+}
+
+QString Images::badges1() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/badges1.png";
+}
+
+QString Images::badges2() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/badges2.png";
+}
+
+QString Images::badges3() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/badges3.png";
+}
+
+QString Images::badges4() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/badges4.png";
+}
+
+QString Images::badges5() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/badges5.png";
+}
+
+QString Images::badges5plus() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/badges5+.png";
+}
+
+QString Images::windows() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/windows.png";
+}
+
+QString Images::linux() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/linux.png";
+}
+
+QString Images::mac() {
+    return Theme::getCurrentTheme().pathImages + "profile icons/mac.png";
 }
 #define ProfileIconEnd }
 

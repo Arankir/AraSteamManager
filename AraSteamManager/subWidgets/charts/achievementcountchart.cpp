@@ -56,7 +56,7 @@ void AchievementCountChart::retranslate() {
 //    ui->retranslateUi(this);
 }
 
-int roundToDesimal(int aData) {
+int roundToDesimal2(int aData) {
     const double delta = 0.1;
     static const QVector<double> logs {0, log10(1), log10(2), log10(3), log10(4), log10(5), log10(6), log10(7), log10(8), log10(9), 1};
     int newData = aData;
@@ -99,7 +99,7 @@ void AchievementCountChart::updateChartHeight() {
                 }
             }
         }
-        axes(Qt::Vertical).at(0)->setRange(0, roundToDesimal(max));
+        axes(Qt::Vertical).at(0)->setRange(0, roundToDesimal2(max));
     } else {
         qWarning() << "error missing vertical axis";
     }

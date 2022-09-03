@@ -23,6 +23,7 @@ void FormContainerAchievements::updateSettings(QFlags<changedSettings> aSettings
             achievements->updateSettings(aSettings);
         }
     }
+    Form::updateSettings(aSettings);
 }
 
 void FormContainerAchievements::show() {
@@ -48,7 +49,7 @@ void FormContainerAchievements::clear() {
 int FormContainerAchievements::getTabIndex(const SProfile &aProfile, const SGame &aGame) {
     for (int i = 0; i < ui->TabWidgetAchievements->count(); ++i) {
         if (FormAchievements *achievements = dynamic_cast<FormAchievements*>(ui->TabWidgetAchievements->widget(i))) {
-            if((achievements->getGameAppId() == aGame.appId()) && (achievements->getProfileId() == aProfile.steamID())) {
+            if((achievements->getGameAppId() == aGame.appId()) && (achievements->getProfileId() == aProfile.steamId())) {
                 return i;
             }
         }
@@ -67,7 +68,7 @@ void FormContainerAchievements::addFormAchievement(const SProfile &aProfile, con
     auto achievements = new FormAchievements(this);
     int tabIndex = ui->TabWidgetAchievements->addTab(achievements, aGame.name());
 //    connect(achievements, &FormAchievements::s_progress, this, &Form::setStatus);
-    connect(achievements, &FormAchievements::s_finished, this, [&]() {
+    connect(achievements, &FormAchievements::s_finishedAchievements, this, [&]() {
         clearStatus();
         if (dynamic_cast<FormAchievements*>(sender())->getAchievementsCount() == 0) {
             QMessageBox::warning(this, tr("Ошибка!"), tr("Достижения не найдены!"));

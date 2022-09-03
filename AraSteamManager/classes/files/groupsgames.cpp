@@ -9,17 +9,26 @@ GroupGames::GroupGames(const QJsonObject &aObject) {
 }
 
 GroupGames &GroupGames::addGame(const SGame &aGame) {
-    games_.append(aGame.appId());
+//    bool isAlreadyInclude = std::any_of(games_.begin(),
+//                                        games_.end(),
+//                                        [=](const GameID &lGame) {
+//                                            return lGame == aGame.appId();
+//                                        });
+//    if (!isAlreadyInclude) {
+//        games_.insert(aGame.appId());
+//    }
+    games_.insert(aGame.appId());
     return *this;
 }
 
 GroupGames &GroupGames::removeGame(const GameID &aGame) {
-    games_.erase(std::remove_if(games_.begin(),
-                                games_.end(),
-                                [=](const GameID &lGame) {
-                                    return lGame == aGame;
-                                }),
-               games_.end());
+//    games_.erase(std::remove_if(games_.begin(),
+//                                games_.end(),
+//                                [=](const GameID &lGame) {
+//                                    return lGame == aGame;
+//                                }),
+//               games_.end());
+    games_.remove(aGame);
     return *this;
 }
 
@@ -49,14 +58,18 @@ ProfileID GroupGames::profileId() const {
 }
 
 QList<GameID> GroupGames::games() const {
-    return games_;
+    QList<GameID> games;
+    for (const auto &game: games_) {
+        games << game;
+    }
+    return games;
 }
 
 GroupGames &GroupGames::fromJson(const QJsonObject &aObject) {
     title_      = aObject.value("title").toString();
     profileId_  = aObject.value("profileId").toString();
     for(const auto &game: aObject.value("games").toArray()) {
-        games_.append(game.toInt());
+        games_.insert(game.toInt());
     }
     return *this;
 }

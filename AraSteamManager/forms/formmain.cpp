@@ -14,7 +14,7 @@ enum stackedForms {
     FormFavorites   = 4,
     FormSettings    = 5
 };
-
+#include "subWidgets/collapsablewidget.h"
 FormMain::FormMain(QWidget *parent): Form(parent), ui(new Ui::FormMain) {
     ui->setupUi(this);
     init();
@@ -35,17 +35,6 @@ void FormMain::init() {
     ui->stackedFormSettings     ->setAttribute(Qt::WA_TranslucentBackground);
     ui->stackedFormStatistics   ->setAttribute(Qt::WA_TranslucentBackground);
 
-//    if (window() != nullptr) {
-//        window()->restoreGeometry(Settings::mainWindowGeometry());
-//        window()->restoreState(Settings::mainWindowState());
-
-////        parentWidget()->setGeometry(Settings::mainWindowParams());
-////        parentWidget()->move(Settings::mainWindowPos());
-
-////        if(Settings::isMainWindowMaximize()) {
-////            parentWidget()->showMaximized();
-////        }
-//    }
     ui->stackedWidgetForms->setCurrentIndex(0);
     qApp->setStyleSheet(Theme::qssTheme());
     updateIcons();
@@ -62,6 +51,9 @@ void FormMain::init() {
     connect(ui->stackedFormGames,       &FormGames::s_showAchievements,     this,                       &FormMain::showAchievements);
     connect(ui->stackedFormStatistics,  &FormStatistics::s_showAchievements,this,                       &FormMain::showAchievements);
 
+    connect(ui->stackedFormFavorites,   &FormFavorites::s_goToProfile,      this,                       &FormMain::goToProfile);
+    connect(ui->stackedFormFavorites,   &FormFavorites::s_showAchievements, this,                       &FormMain::showAchievementsProfile);
+
     connect(ui->stackedFormGames,       &FormGames::s_achievementsLoaded,   this,                       &Form::setStatus);
 
     connect(ui->stackedFormFriends,     &FormFriends::s_finish,             this,                       [&](int aWidth) {
@@ -69,7 +61,7 @@ void FormMain::init() {
         showForm(FormFriends, aWidth);
     });
     connect(ui->stackedFormGames,       &FormGames::s_finish,               this,                       [&](int aWidth) {
-        clearStatus();
+//        clearStatus();
         showForm(FormGames, aWidth);
     });
     connect(ui->stackedFormStatistics, &FormStatistics::s_finish,           this,                       [&]() {
@@ -77,13 +69,7 @@ void FormMain::init() {
         showForm(FormStatistic);
     });
 
-    connect(ui->stackedFormSettings,    &FormSettings::s_settingsUpdated,   this,                       &FormMain::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormFriends,     &FormFriends::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormGames,       &FormGames::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormFavorites,   &FormFavorites::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->profilesBrowser,        &FormProfilesBrowser::updateSettings);
-    connect(this,                       &FormMain::s_settingsUpdated,       ui->stackedFormStatistics,  &FormStatistics::updateSettings);
-
+    connect(ui->stackedFormSettings,    &FormSettings::s_settingsUpdated,   this,                       &Form::updateSettings);
 
 //    QtDownload dl;
 //    dl.setTarget("http://www.java2s.com/Code/Cpp/Qt/DownloadfromURL.htm");
@@ -100,8 +86,6 @@ void FormMain::init() {
 #define System {
 FormMain::~FormMain() {
     if (window()) {
-//        Settings::setMainWindowIsMaximize(window()->isMaximized());
-//        Settings::setMainWindowParams(window()->normalGeometry());
         Settings::setMainWindowState(window()->saveState());
         Settings::setMainWindowGeometry(window()->saveGeometry());
     }
@@ -123,7 +107,7 @@ FormContainerAchievements *FormMain::createFormContainerAchievements() {
     _containerAchievementsForm->window()->setAttribute(Qt::WA_DeleteOnClose);
     _containerAchievementsForm->setAttribute(Qt::WA_DeleteOnClose);
     connect(this, &Form::s_settingsUpdated, _containerAchievementsForm->window(), &FramelessWindow::updateSettings);
-    connect(this, &Form::s_settingsUpdated, _containerAchievementsForm, &Form::updateSettings);
+    connect(this, &Form::s_settingsUpdated, _containerAchievementsForm, &FormContainerAchievements::updateSettings);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_closed,               this, &FormMain::containerAchievementsClose);
     connect(_containerAchievementsForm, &FormContainerAchievements::s_destructed, this, [=]() {
         _containerAchievementsForm = nullptr;
@@ -141,6 +125,14 @@ void FormMain::showAchievements(const SGame &aGame) {
     }
     _containerAchievementsForm->show();
     _containerAchievementsForm->addFormAchievement(ui->profilesBrowser->currentProfile(), aGame);
+}
+
+void FormMain::showAchievementsProfile(const ProfileID &aProfileId, const SGame &aGame) {
+    if (_containerAchievementsForm == nullptr) {
+        createFormContainerAchievements();
+    }
+    _containerAchievementsForm->show();
+    _containerAchievementsForm->addFormAchievement(SProfile::load(aProfileId), aGame);
 }
 
 void FormMain::containerAchievementsClose() {
@@ -201,6 +193,7 @@ void FormMain::goToFavorites() {
             isLoading_ = false;
             ui->stackedWidgetForms->setCurrentIndex(FormFavorites);
         } else {
+            ui->stackedFormFavorites->update();
             ui->stackedWidgetForms->setCurrentIndex(FormFavorites);
         }
     }
@@ -236,17 +229,21 @@ void FormMain::returnFromForms() {
 #define FormsEnd }
 
 void FormMain::closeEvent(QCloseEvent *aEvent) {
+    if (_containerAchievementsForm) {
+        _containerAchievementsForm->close();
+    }
     aEvent->accept();
     this->deleteLater();
 }
 
 void FormMain::updateSettings(QFlags<changedSettings> aSettings) {
-    Settings::syncronizeSettings();
+//    Settings::syncronizeSettings();
     if (aSettings.testFlag(changedSettings::theme)) {
         qApp->setStyleSheet(Theme::qssTheme());
-        updateIcons();
+//        updateIcons();
     }
-    emit s_settingsUpdated(aSettings);
+    Form::updateSettings(aSettings);
+//    emit s_settingsUpdated(aSettings);
 }
 
 void FormMain::updateIcons() {

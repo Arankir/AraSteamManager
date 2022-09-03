@@ -22,6 +22,8 @@ public:
     SortFilterProxyModelFreezeRow(QObject *parent = nullptr);
     virtual bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
+private:
+
 };
 
 class SortFilterProxyModelCategory : public QSortFilterProxyModel {

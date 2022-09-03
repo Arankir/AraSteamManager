@@ -49,8 +49,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormStatistics_t {
-    const uint offsetsAndSize[84];
-    char stringdata0[500];
+    const uint offsetsAndSize[78];
+    char stringdata0[451];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormStatistics_t, stringdata0) + ofs), len 
@@ -70,44 +70,39 @@ QT_MOC_LITERAL(105, 10), // "aStatistic"
 QT_MOC_LITERAL(116, 12), // "createThread"
 QT_MOC_LITERAL(129, 18), // "createThreadFriend"
 QT_MOC_LITERAL(148, 11), // "aStatistics"
-QT_MOC_LITERAL(160, 14), // "updateSettings"
-QT_MOC_LITERAL(175, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(199, 9), // "aSettings"
-QT_MOC_LITERAL(209, 14), // "addFriendLines"
-QT_MOC_LITERAL(224, 4), // "init"
-QT_MOC_LITERAL(229, 11), // "retranslate"
-QT_MOC_LITERAL(241, 11), // "updateIcons"
-QT_MOC_LITERAL(253, 15), // "setModelToTable"
-QT_MOC_LITERAL(269, 31), // "QList<GameWithPercentModelItem>"
-QT_MOC_LITERAL(301, 6), // "aGames"
-QT_MOC_LITERAL(308, 17), // "aIsVisiblePercent"
-QT_MOC_LITERAL(326, 11), // "currentGame"
-QT_MOC_LITERAL(338, 6), // "SGame*"
-QT_MOC_LITERAL(345, 10), // "createMenu"
-QT_MOC_LITERAL(356, 6), // "QMenu*"
-QT_MOC_LITERAL(363, 6), // "SGame&"
-QT_MOC_LITERAL(370, 5), // "aGame"
-QT_MOC_LITERAL(376, 22), // "updateStatisticProfile"
-QT_MOC_LITERAL(399, 8), // "SProfile"
-QT_MOC_LITERAL(408, 8), // "lProfile"
-QT_MOC_LITERAL(417, 7), // "setInfo"
-QT_MOC_LITERAL(425, 6), // "setPie"
-QT_MOC_LITERAL(432, 10), // "Statistics"
-QT_MOC_LITERAL(443, 9), // "setGraphs"
-QT_MOC_LITERAL(453, 11), // "clearGraphs"
-QT_MOC_LITERAL(465, 17), // "removeFriendLines"
-QT_MOC_LITERAL(483, 8), // "aProfile"
-QT_MOC_LITERAL(492, 7) // "initPie"
+QT_MOC_LITERAL(160, 14), // "addFriendLines"
+QT_MOC_LITERAL(175, 4), // "init"
+QT_MOC_LITERAL(180, 11), // "retranslate"
+QT_MOC_LITERAL(192, 11), // "updateIcons"
+QT_MOC_LITERAL(204, 15), // "setModelToTable"
+QT_MOC_LITERAL(220, 31), // "QList<GameWithPercentModelItem>"
+QT_MOC_LITERAL(252, 6), // "aGames"
+QT_MOC_LITERAL(259, 17), // "aIsVisiblePercent"
+QT_MOC_LITERAL(277, 11), // "currentGame"
+QT_MOC_LITERAL(289, 6), // "SGame*"
+QT_MOC_LITERAL(296, 10), // "createMenu"
+QT_MOC_LITERAL(307, 6), // "QMenu*"
+QT_MOC_LITERAL(314, 6), // "SGame&"
+QT_MOC_LITERAL(321, 5), // "aGame"
+QT_MOC_LITERAL(327, 22), // "updateStatisticProfile"
+QT_MOC_LITERAL(350, 8), // "SProfile"
+QT_MOC_LITERAL(359, 8), // "lProfile"
+QT_MOC_LITERAL(368, 7), // "setInfo"
+QT_MOC_LITERAL(376, 6), // "setPie"
+QT_MOC_LITERAL(383, 10), // "Statistics"
+QT_MOC_LITERAL(394, 9), // "setGraphs"
+QT_MOC_LITERAL(404, 11), // "clearGraphs"
+QT_MOC_LITERAL(416, 17), // "removeFriendLines"
+QT_MOC_LITERAL(434, 8), // "aProfile"
+QT_MOC_LITERAL(443, 7) // "initPie"
 
     },
     "FormStatistics\0s_finish\0\0s_return_to_profile\0"
     "QWidget*\0s_showAchievements\0SGame\0"
     "game\0onFinish\0Statistics&\0aStatistic\0"
     "createThread\0createThreadFriend\0"
-    "aStatistics\0updateSettings\0"
-    "QFlags<changedSettings>\0aSettings\0"
-    "addFriendLines\0init\0retranslate\0"
-    "updateIcons\0setModelToTable\0"
+    "aStatistics\0addFriendLines\0init\0"
+    "retranslate\0updateIcons\0setModelToTable\0"
     "QList<GameWithPercentModelItem>\0aGames\0"
     "aIsVisiblePercent\0currentGame\0SGame*\0"
     "createMenu\0QMenu*\0SGame&\0aGame\0"
@@ -124,7 +119,7 @@ static const uint qt_meta_data_FormStatistics[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      21,   14, // methods
+      20,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -132,29 +127,28 @@ static const uint qt_meta_data_FormStatistics[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  140,    2, 0x06,    1 /* Public */,
-       3,    1,  141,    2, 0x06,    2 /* Public */,
-       5,    1,  144,    2, 0x06,    4 /* Public */,
+       1,    0,  134,    2, 0x06,    1 /* Public */,
+       3,    1,  135,    2, 0x06,    2 /* Public */,
+       5,    1,  138,    2, 0x06,    4 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       8,    1,  147,    2, 0x0a,    6 /* Public */,
-      11,    0,  150,    2, 0x0a,    8 /* Public */,
-      12,    1,  151,    2, 0x0a,    9 /* Public */,
-      14,    1,  154,    2, 0x0a,   11 /* Public */,
-      17,    1,  157,    2, 0x09,   13 /* Protected */,
-      18,    0,  160,    2, 0x09,   15 /* Protected */,
-      19,    0,  161,    2, 0x08,   16 /* Private */,
-      20,    0,  162,    2, 0x08,   17 /* Private */,
-      21,    2,  163,    2, 0x08,   18 /* Private */,
-      25,    0,  168,    2, 0x08,   21 /* Private */,
-      27,    1,  169,    2, 0x08,   22 /* Private */,
-      31,    1,  172,    2, 0x08,   24 /* Private */,
-      34,    1,  175,    2, 0x08,   26 /* Private */,
-      35,    1,  178,    2, 0x08,   28 /* Private */,
-      37,    1,  181,    2, 0x08,   30 /* Private */,
-      38,    0,  184,    2, 0x08,   32 /* Private */,
-      39,    1,  185,    2, 0x08,   33 /* Private */,
-      41,    0,  188,    2, 0x08,   35 /* Private */,
+       8,    1,  141,    2, 0x0a,    6 /* Public */,
+      11,    0,  144,    2, 0x0a,    8 /* Public */,
+      12,    1,  145,    2, 0x0a,    9 /* Public */,
+      14,    1,  148,    2, 0x09,   11 /* Protected */,
+      15,    0,  151,    2, 0x09,   13 /* Protected */,
+      16,    0,  152,    2, 0x08,   14 /* Private */,
+      17,    0,  153,    2, 0x08,   15 /* Private */,
+      18,    2,  154,    2, 0x08,   16 /* Private */,
+      22,    0,  159,    2, 0x08,   19 /* Private */,
+      24,    1,  160,    2, 0x08,   20 /* Private */,
+      28,    1,  163,    2, 0x08,   22 /* Private */,
+      31,    1,  166,    2, 0x08,   24 /* Private */,
+      32,    1,  169,    2, 0x08,   26 /* Private */,
+      34,    1,  172,    2, 0x08,   28 /* Private */,
+      35,    0,  175,    2, 0x08,   30 /* Private */,
+      36,    1,  176,    2, 0x08,   31 /* Private */,
+      38,    0,  179,    2, 0x08,   33 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -165,20 +159,19 @@ static const uint qt_meta_data_FormStatistics[] = {
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 9,   13,
-    QMetaType::Void, 0x80000000 | 15,   16,
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 22, QMetaType::Bool,   23,   24,
-    0x80000000 | 26,
-    0x80000000 | 28, 0x80000000 | 29,   30,
-    QMetaType::Void, 0x80000000 | 32,   33,
+    QMetaType::Void, 0x80000000 | 19, QMetaType::Bool,   20,   21,
+    0x80000000 | 23,
+    0x80000000 | 25, 0x80000000 | 26,   27,
+    QMetaType::Void, 0x80000000 | 29,   30,
     QMetaType::Void, 0x80000000 | 9,   10,
-    QMetaType::Void, 0x80000000 | 36,   10,
+    QMetaType::Void, 0x80000000 | 33,   10,
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 32,   40,
+    QMetaType::Void, 0x80000000 | 29,   37,
     QMetaType::Void,
 
        0        // eod
@@ -196,23 +189,22 @@ void FormStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 3: _t->onFinish((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
         case 4: _t->createThread(); break;
         case 5: _t->createThreadFriend((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
-        case 6: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
-        case 7: _t->addFriendLines((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
-        case 8: _t->init(); break;
-        case 9: _t->retranslate(); break;
-        case 10: _t->updateIcons(); break;
-        case 11: _t->setModelToTable((*reinterpret_cast< QList<GameWithPercentModelItem>(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
-        case 12: { SGame* _r = _t->currentGame();
+        case 6: _t->addFriendLines((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
+        case 7: _t->init(); break;
+        case 8: _t->retranslate(); break;
+        case 9: _t->updateIcons(); break;
+        case 10: _t->setModelToTable((*reinterpret_cast< QList<GameWithPercentModelItem>(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 11: { SGame* _r = _t->currentGame();
             if (_a[0]) *reinterpret_cast< SGame**>(_a[0]) = std::move(_r); }  break;
-        case 13: { QMenu* _r = _t->createMenu((*reinterpret_cast< SGame(*)>(_a[1])));
+        case 12: { QMenu* _r = _t->createMenu((*reinterpret_cast< SGame(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 14: _t->updateStatisticProfile((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
-        case 15: _t->setInfo((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
-        case 16: _t->setPie((*reinterpret_cast< const Statistics(*)>(_a[1]))); break;
-        case 17: _t->setGraphs((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
-        case 18: _t->clearGraphs(); break;
-        case 19: _t->removeFriendLines((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
-        case 20: _t->initPie(); break;
+        case 13: _t->updateStatisticProfile((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
+        case 14: _t->setInfo((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
+        case 15: _t->setPie((*reinterpret_cast< const Statistics(*)>(_a[1]))); break;
+        case 16: _t->setGraphs((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
+        case 17: _t->clearGraphs(); break;
+        case 18: _t->removeFriendLines((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
+        case 19: _t->initPie(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -260,7 +252,7 @@ const QMetaObject FormStatistics::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormStatistics_t
 , QtPrivate::TypeAndForceComplete<FormStatistics, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QList<GameWithPercentModelItem>, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<SGame *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QList<GameWithPercentModelItem>, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<SGame *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -287,13 +279,13 @@ int FormStatistics::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 21)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 20;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 21)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 21;
+        _id -= 20;
     }
     return _id;
 }

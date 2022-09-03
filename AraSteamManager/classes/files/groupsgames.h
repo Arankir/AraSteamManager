@@ -24,7 +24,7 @@ private:
 
     QString title_;
     ProfileID profileId_;
-    QList<GameID> games_;
+    QSet<GameID> games_;
 };
 
 class GroupsGames: public QList<GroupGames>, public FileSaveLoad {

@@ -41,7 +41,7 @@ QScrollBar::handle, QScrollBar::handle:hover, QToolButton, QComboBox::drop-down,
 
 QToolTip, QAbstractScrollArea, QAbstractSpinBox, QScrollBar, QToolBar QToolButton:checked, QGraphicsView:disabled,
 QProgressBar:disabled, QPushButton:pressed, QComboBox QAbstractItemView, QComboBox:disabled,
-QTableCornerButton::section, QTabBar::tab, QAbstractItemView:disabled, QToolBox::tab, QMenu::item, QComboBox::item,
+QTableCornerButton::section, QTabBar::tab, QAbstractItemView:disabled, QToolBox::tab, QMenu::item, QMenu::item > QWidget, QComboBox::item,
 QHeaderView::section, QSplitter::handle {
     background-color: %4;
 }
@@ -171,7 +171,7 @@ Form, .QWidget, QStackedWidget, QSlider, QHeaderView, Line, .QFrame {
     border-color: transparent;
 }
 
-FramelessWindow, QMessageBox, FramelessWindow:hover, QMessageBox:hover, QDialog {
+FramelessWindow, QMessageBox, FramelessWindow:hover, QMessageBox:hover, QDialog, QDockWidget {
     background-color: %20;
     border-color: %2;
 }
