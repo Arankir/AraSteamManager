@@ -1,5 +1,9 @@
 #include "listachievementsmodel.h"
 
+ListAchievementsModel::ListAchievementsModel(QWidget *parent) : QAbstractListModel(parent) {
+
+}
+
 Qt::ItemFlags ListAchievementsModel::flags(const QModelIndex &index) const {
     Qt::ItemFlags defaultFlags = QAbstractListModel::flags(index);
 

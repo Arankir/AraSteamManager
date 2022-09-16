@@ -1,5 +1,6 @@
 #include "progressbardelegate.h"
 #include <QDebug>
+#include <QApplication>
 
 ProgressBarDelegate::ProgressBarDelegate(QObject *parent) : QStyledItemDelegate( parent ) {
 

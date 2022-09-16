@@ -14,37 +14,37 @@ class FormMain : public Form {
 public:
     explicit FormMain(QWidget *parent = nullptr);
     ~FormMain() override;
-    FormContainerAchievements *_containerAchievementsForm = nullptr;
 
 public slots:
     FormContainerAchievements *createFormContainerAchievements();
     void showAchievements(const SGame &games);
-    void showAchievementsProfile(const ProfileID &aProfileId, const SGame &aGame);
+    void showAchievementsProfile(const ProfileID &profileId, const SGame &game);
     void containerAchievementsClose();
 
-    void goToGames(const ProfileID &aSteamId);
-    void goToFriends(const ProfileID &aSteamId);
+    void goToGames(const ProfileID &profileId);
+    void goToFriends(const ProfileID &profileId);
     void goToFavorites();
-    void goToStatistics(const SProfile &profileSteamid);
+    void goToStatistics(const SProfile &profile);
     void updateSettings(QFlags<changedSettings>) override;
 
 private slots:
     //events
     void closeEvent(QCloseEvent*) override;
     //Forms
-    void showForm(int widgetIndex, int widthWindow = 300, int windowHeight = 400);
+    void showForm(const int &widgetIndex, const int &widthWindow = 300, const int &windowHeight = 400);
     void returnFromForms();
     //Systems
     void retranslate() override;
     void updateIcons() override;
     void init();
-    void resizeScrollArea(int width = 300, int aHeight = 400);
+    void resizeScrollArea(const int &width = 300, const int &height = 400);
     //Functions
-    void goToProfile(const ProfileID &id);
+    void goToProfile(const ProfileID &profileId);
     void goToSettings();
 
 private:
     Ui::FormMain *ui;
+    FormContainerAchievements *achievements_ = nullptr;
 
     bool isLoading_ = false;
 

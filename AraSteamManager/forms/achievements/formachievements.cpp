@@ -1,12 +1,13 @@
 #include "formachievements.h"
 #include "ui_formachievements.h"
 #include "forms/formcomments.h"
-//#include "forms/widgets/formfrienditemcompare.h"
+#include "classes/common/images.h"
 
 #include <QMenu>
 #include <QDesktopServices>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 constexpr int c_friendColumnWidth = 100;
 
@@ -135,6 +136,14 @@ void FormAchievements::setData(const SProfile &aProfile, const SGame &aGame) {
 
     updateAchievements();
     loadFriends();
+}
+
+QString FormAchievements::getProfileId() const {
+    return profile_.steamId();
+}
+
+int FormAchievements::getGameAppId() const {
+    return game_.appId();
 }
 
 void FormAchievements::onAchievementsLoaded() {
@@ -270,12 +279,14 @@ QMenu *FormAchievements::createMenuAchievements(const SAchievement &aAchievement
         connect (actionFavorites,   &QAction::triggered,    this,   [=, this]() {
             FavoriteAchievementsGames favorites;
             favorites.remove(profile_.steamId(), game_.appId(), aAchievement.apiName());
+            emit s_settingsUpdated(changedSettings::favorites);
         });
     } else {
         actionFavorites = new QAction(QIcon(Images::isNotFavorites()), tr("Добавить в избранное"), menu);
         connect (actionFavorites,   &QAction::triggered,    this,   [=, this]() {
             FavoriteAchievementsGames favorites;
             favorites.append(profile_.steamId(), game_, aAchievement);
+            emit s_settingsUpdated(changedSettings::favorites);
         });
     }
 
@@ -440,7 +451,7 @@ QMenu *FormAchievements::createMenuCategory(const QModelIndex &aCategoryIndex) {
     return menu;
 }
 
-QWidgetAction *FormAchievements::createCheckBoxHeaderAction(QMenu *aMenu, const QString &aText, achievementsModel::Columns aColumn) {
+QWidgetAction *FormAchievements::createCheckBoxHeaderAction(QMenu *aMenu, const QString &aText, const achievementsModel::Columns &aColumn) {
     QCheckBox *checkIcon = new QCheckBox(aText, aMenu);
     QWidgetAction *actionIcon = new QWidgetAction(aMenu);
     actionIcon->setDefaultWidget(checkIcon);
@@ -589,6 +600,10 @@ void FormAchievements::openManual() {
     //https://steamcommunity.com/app/218620/guides/
 }
 
+bool FormAchievements::isDataSetted() {
+    return achievementsModel_->getAchievementsCount() > 0 && profile_.personaName() != "" && game_.appId() > 0;
+}
+
 void FormAchievements::buttonComment_Clicked() {
     auto form = createFramelessForm<FormComments>();
     form->setData(profile_.steamId(), game_, currentAchievement());
@@ -666,7 +681,7 @@ void FormAchievements::addProfileToTable(const QModelIndex &index) {
     }
 }
 
-int FormAchievements::addFriendColumn(const SProfile &aSteamFriend, FriendListItemData::ProfileType aType) {
+int FormAchievements::addFriendColumn(const SProfile &aSteamFriend, const FriendListItemData::ProfileType &aType) {
     int index = filterAchievements_.addProfile(aSteamFriend);
     ui->TableViewAchievements->setColumnWidth(index + achievementsModel::Count - 1, c_friendColumnWidth);
     profilesInTable_.append(QPair<SProfile, FriendListItemData::ProfileType>(aSteamFriend, aType));
@@ -714,7 +729,7 @@ void FormAchievements::findFriend() {
     }
 }
 
-void FormAchievements::checkBoxFriendsOnlyWithGame_Clicked(bool aChecked) {
+void FormAchievements::checkBoxFriendsOnlyWithGame_Clicked(const bool &aChecked) {
     if (auto model = dynamic_cast<QStandardItemModel*>(ui->ListViewFriends->model())) {
         QString friendName = ui->lineEditFindFriend->text();
         for (int i = 0; i < model->rowCount(); ++i) {

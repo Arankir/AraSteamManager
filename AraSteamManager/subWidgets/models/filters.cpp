@@ -1,13 +1,13 @@
 #include "filters.h"
 
 void SortFilterProxyModelMiltiRow::addRow(const int &row) {
-    _rows.append(row);
+    rows_.append(row);
 }
 
 void SortFilterProxyModelMiltiRow::removeRow(const int &row) {
-    for (auto &rowFilter: _rows) {
+    for (auto &rowFilter: rows_) {
         if (rowFilter == row) {
-            _rows.removeOne(rowFilter);
+            rows_.removeOne(rowFilter);
             return;
         }
     }
@@ -18,7 +18,7 @@ bool SortFilterProxyModelMiltiRow::filterAcceptsRow(int source_row, const QModel
         return true;
     }
     bool ret = false;
-    for (auto &rowFilter: _rows) {
+    for (auto &rowFilter: rows_) {
         QModelIndex index = sourceModel()->index(source_row, rowFilter, source_parent);
         ret = (filterRegularExpression().match(index.data().toString()).hasMatch());
         if(ret)
@@ -55,23 +55,31 @@ bool SortFilterProxyModelFreezeRow::lessThan(const QModelIndex &left, const QMod
     return QSortFilterProxyModel::lessThan(left, right);
 }
 
+SortFilterProxyModelCategory::SortFilterProxyModelCategory(const QString &parentName, QObject *parent): QSortFilterProxyModel(parent), parent_(parentName) {
+
+}
+
+QString SortFilterProxyModelCategory::parentName() const {
+    return parent_;
+}
+
 void SortFilterProxyModelCategory::addCategory(const QString &name, const QStringList &apis) {
-    _categories.append(QPair<QString, QStringList>(name, apis));
+    categories_.append(QPair<QString, QStringList>(name, apis));
     updateRegExp();
 }
 
 void SortFilterProxyModelCategory::removeCategory(const QString &name) {
-    _categories.erase(std::remove_if(_categories.begin(),
-                                     _categories.end(),
+    categories_.erase(std::remove_if(categories_.begin(),
+                                     categories_.end(),
                                      [=](QPair<QString, QStringList> category){
                                           return category.first == name;
-                                      }), _categories.end());
+                                      }), categories_.end());
     updateRegExp();
 }
 
 void SortFilterProxyModelCategory::updateRegExp() {
     QStringList resultList;
-    for (const auto &category: qAsConst(_categories)) {
+    for (const auto &category: qAsConst(categories_)) {
         resultList << category.second;
     }
     setFilterRegularExpression("(" + resultList.join(")|(") + ")|(^$)");
@@ -101,7 +109,7 @@ void inline setDataToBit(char &aChar, int aBit, bool aData) {
     }
 }
 
-Filter::Filter(int aRows, int aCols):
+Filter::Filter(const int &aRows, const int &aCols):
     rows_(std::max(0, aRows)),
     cols_(std::max(0, aCols)),
     checkCols_(QList<char>(countBites(cols_), 0xFF)),
@@ -234,6 +242,10 @@ QList<bool> Filter::enabledCols() {
     return list;
 }
 
+FilterModel::FilterModel(const int &row, const int &col, QObject *parent): QSortFilterProxyModel(parent), filter_(row, col) {
+
+}
+
 QVariant FilterModel::headerData(int section, Qt::Orientation orientation, int role) const {
     return sourceModel()->headerData(section, orientation, role);
 }
@@ -251,4 +263,9 @@ void FilterModel::forceInvalidate() {
     QSortFilterProxyModel::beginResetModel();
     QSortFilterProxyModel::invalidate();
     QSortFilterProxyModel::endResetModel();
+}
+
+bool QSortFilterProxyInvertModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const {
+    bool original = QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
+    return filterRegularExpression().pattern() == "()" ? original : !original;
 }

@@ -2,6 +2,7 @@
 #define COMBOBOXFRIENDSWITHGAME_H
 #pragma once
 
+#include <QCheckBox>
 #include "./qcomboboxfriends.h"
 #include "subWidgets/items/qlistwidgetfriend.h"
 
@@ -10,15 +11,15 @@ class ComboBoxFriendsWithGame : public ComboBoxFriends {
 
 public:
     ComboBoxFriendsWithGame(QWidget *parent = nullptr);
-    void addItem(const SProfile &steamFriend, FriendType type);
+    void addItem(const SProfile &profile, const FriendType &type);
 
 protected:
     void addFilterWidgets() override;
 
 private:
-    void onAllFriends(int state);
+    void onAllFriends(const int &state);
 
-    QCheckBox *mAllFriends;
+    QCheckBox *checkBoxAllFriends_;
 };
 
 #endif // COMBOBOXFRIENDSWITHGAME_H

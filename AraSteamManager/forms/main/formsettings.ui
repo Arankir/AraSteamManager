@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>566</height>
+    <width>667</width>
+    <height>456</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
@@ -161,15 +161,15 @@
        <item>
         <widget class="QToolBox" name="ToolBoxExport">
          <property name="currentIndex">
-          <number>0</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="PageCategories">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>496</width>
-            <height>386</height>
+            <width>663</width>
+            <height>276</height>
            </rect>
           </property>
           <attribute name="label">
@@ -219,28 +219,37 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>188</width>
-            <height>120</height>
+            <width>663</width>
+            <height>276</height>
            </rect>
           </property>
           <attribute name="label">
            <string>Избранное</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_13">
+          <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
-            <widget class="QTreeView" name="TreeViewExportFavorites">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="headerHidden">
-              <bool>true</bool>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QTreeWidget" name="treeWidgetExportFavoriteAchievements">
+               <property name="headerHidden">
+                <bool>true</bool>
+               </property>
+               <column>
+                <property name="text">
+                 <string notr="true">1</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_12">
              <item>
               <widget class="QPushButton" name="ButtonExportFavorites">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Экспортировать выбранное</string>
                </property>
@@ -268,8 +277,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>188</width>
-            <height>120</height>
+            <width>663</width>
+            <height>276</height>
            </rect>
           </property>
           <attribute name="label">
@@ -277,19 +286,24 @@
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_14">
            <item>
-            <widget class="QTreeView" name="TreeViewExportComments">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QTreeWidget" name="TreeWidgetExportComments">
              <property name="headerHidden">
               <bool>true</bool>
              </property>
+             <column>
+              <property name="text">
+               <string notr="true">1</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_13">
              <item>
               <widget class="QPushButton" name="ButtonExportComments">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Экспортировать выбранное</string>
                </property>
@@ -317,8 +331,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>188</width>
-            <height>120</height>
+            <width>663</width>
+            <height>276</height>
            </rect>
           </property>
           <attribute name="label">
@@ -326,16 +340,21 @@
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_15">
            <item>
-            <widget class="QListView" name="ListViewExportGroups">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
+            <widget class="QTreeWidget" name="TreeWidgetExportGroups">
+             <column>
+              <property name="text">
+               <string notr="true">1</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_14">
              <item>
               <widget class="QPushButton" name="ButtonExportGroups">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Экспортировать выбранное</string>
                </property>
@@ -363,8 +382,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>184</width>
-            <height>44</height>
+            <width>663</width>
+            <height>276</height>
            </rect>
           </property>
           <attribute name="label">
@@ -585,64 +604,18 @@
       <attribute name="title">
        <string>  Скрытые игры  </string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <widget class="MyLineEdit" name="LineEditFindGame">
-           <property name="placeholderText">
-            <string>Dota 2</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="ButtonFindGame">
-           <property name="text">
-            <string>Поиск</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QFrame" name="FrameProfilesHideGames">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Raised</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QTableWidget" name="TableWidgetGames">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="rowCount">
-            <number>0</number>
-           </property>
-           <property name="columnCount">
-            <number>4</number>
-           </property>
-           <column/>
-           <column/>
-           <column/>
-           <column/>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QTreeWidget" name="treeWidgetHiddenGames">
+         <attribute name="headerVisible">
+          <bool>false</bool>
+         </attribute>
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -703,6 +676,21 @@
          </property>
          <property name="text">
           <string>-Идрисов Тагир</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_14">
+         <property name="font">
+          <font>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;-&lt;a href=&quot;https://hh.ru/resume/9057edb2ff072566230039ed1f393237754159&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;Авдияров Руслан&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::RichText</enum>
          </property>
         </widget>
        </item>

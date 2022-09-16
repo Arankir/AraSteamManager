@@ -11,21 +11,21 @@
 #include "subWidgets/models/gameswithpercentmodel.h"
 
 struct YearCount {
-    YearCount(const QString &aYear, int aCount): year(aYear), count(aCount) {};
+    YearCount(const QString &year, int count);
     QString year;
     int count;
 };
 
 struct CompletedAchievement {
-    CompletedAchievement(SAchievementPlayer aAchievement, SGame aGame): achievement(aAchievement), game(aGame) {};
+    CompletedAchievement(SAchievementPlayer achievement, SGame game);
     SAchievementPlayer achievement;
     SGame game;
 };
 
 struct Statistics {
-    Statistics(const SProfile &aProfile): profile(aProfile), games(SGame::load(aProfile.steamId(), true, true)) {};
-    Statistics() {};
-    void changeProfile(const SProfile &aProfile);
+    Statistics(const SProfile &profile);
+    Statistics();
+    void changeProfile(const SProfile &profile);
     void sortAllLists();
     SProfile profile;
     SGames games;
@@ -39,8 +39,6 @@ struct Statistics {
 
     QList<CompletedAchievement> completedAchievements;
 
-//    QVector<int> times = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-//    QVector<int> months = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     QVector<YearCount> years;
 };
 
@@ -48,13 +46,12 @@ class ThreadStatistics : public ThreadLoading {
     Q_OBJECT
 private slots:
     int fill();
-    void onResultAchievements(const SAchievementsPlayer &ach, const SGame &aGame);
+    void onResultAchievements(const SAchievementsPlayer &achievements, const SGame &game);
     void updateTimes(const QDateTime &unlockedTime);
 
 public:
-    ThreadStatistics(Statistics &statistic): statistics_(statistic) {};
-
-    ~ThreadStatistics() {qInfo() << "Thread statistic deleted";}
+    ThreadStatistics(Statistics &statistic);
+    ~ThreadStatistics();
 
 signals:
     void s_progress(const QString &text, int progress, int max);
@@ -63,7 +60,7 @@ signals:
 private:
     Statistics &statistics_;
 
-    int countReachedAchievements(const SAchievementsPlayer &aAchievements, const SGame &aGame);
+    int countReachedAchievements(const SAchievementsPlayer &achievements, const SGame &game);
 };
 
 #endif // THREADSTATISTICS_H

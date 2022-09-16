@@ -23,8 +23,8 @@ signals:
 
 protected slots:
     void init();
-    QMenu *createMenu(QListWidgetItem *aItem);
-    void removeGroup(QListWidgetItem *aItem);
+    QMenu *createMenu(QListWidgetItem *item);
+    void removeGroup(QListWidgetItem *item);
 
     void initUi();
     void clear();
@@ -38,7 +38,6 @@ protected slots:
 
     void retranslate() override;
     void updateIcons() override;
-//    void updateSettings(QFlags<changedSettings> aSettings) override;
 
 private:
     Ui::FormGroups *ui;

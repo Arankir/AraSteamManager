@@ -7,22 +7,21 @@
 class SBadge : public Sapi {
 public:
     SBadge(QObject *parent = nullptr);
-    SBadge(const SBadge &aCopy);
-    SBadge(const QJsonObject &aObject, QObject *parent = nullptr);
+    SBadge(const SBadge &badge);
+    SBadge(const QJsonObject &object, QObject *parent = nullptr);
 
-    SBadge &operator=(const SBadge &aBadge);
-    bool    operator<(const SBadge &aBadge) const;
-    bool    operator>(const SBadge &aBadge) const;
-    bool    operator==(const SBadge &aBadge) const;
-    bool    operator!=(const SBadge &aBadge) const;
+    SBadge &operator=(const SBadge &badge);
+    bool    operator<(const SBadge &badge) const;
+    bool    operator>(const SBadge &badge) const;
+    bool    operator==(const SBadge &badge) const;
+    bool    operator!=(const SBadge &badge) const;
 
 
     QJsonObject toJson() const;
-    void fromJson(const QJsonObject &aObject);
-    virtual QString className() const {return "SBadge";}
+    void fromJson(const QJsonObject &object);
 
-    static QList<SBadge> load(const ProfileID &aId, std::function<void (QList<SBadge>)> aCallback = nullptr);
-    static void getXpInfo(const ProfileID &aId, int &playerXp, int &playerLevel, int &playerXpNeededToLevelUp, int &playerXpNeededCurrentLevel);
+    static QList<SBadge> load(const ProfileID &profileId, std::function<void (QList<SBadge>)> aCallback = nullptr);
+    static void getXpInfo(const ProfileID &profileId, int &playerXp, int &playerLevel, int &playerXpNeededToLevelUp, int &playerXpNeededCurrentLevel);
 
     int badgeid()               const;
     GameID appid()              const;

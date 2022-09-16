@@ -172,7 +172,7 @@ QString Paths::imagesGames(const QString &aUrl) {
 }
 
 QString Paths::commentsGames(const QString &aProfileId) {
-    return QString(documents() + "comments/games/%1%2").arg(aProfileId, ".json");
+    return QString(documents() + "comments/games/%1%2").arg(aProfileId , aProfileId != "" ? ".json" : "");
 }
 
 QString Paths::commentsAchievements(const QString &aProfileId) {

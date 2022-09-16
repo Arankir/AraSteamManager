@@ -40,8 +40,8 @@ public:
     AchievementID achievementId(const QModelIndex &index) const;
     bool hasChildren(const QModelIndex &parent) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
-    bool insertColumn(int column, int count, const QModelIndex &parent = QModelIndex());
-    bool removeColumn(int column, int count, const QModelIndex &parent = QModelIndex());
+    bool insertColumn(const int &column, const int &count, const QModelIndex &parent = QModelIndex());
+    bool removeColumn(const int &column, const int &count, const QModelIndex &parent = QModelIndex());
 
     SAchievement getAchievement(const int &row) const;
     SAchievement getAchievement(const QModelIndex &index) const;
@@ -94,7 +94,7 @@ private:
 class CategoriesFilter {
 public:
     CategoriesFilter();
-    CategoriesFilter(QMap<QString, QList<Category *>> categories);
+    CategoriesFilter(const QMap<QString, QList<Category *>> &categories);
     bool addCategory(Category *category);
     bool removeCategory(Category *category);
     void clear();
@@ -108,14 +108,14 @@ private:
 class FilterModelAchievements : public FilterModel {
     Q_OBJECT
 public:
-    FilterModelAchievements(int row = 0, QObject *parent = nullptr);
+    FilterModelAchievements(const int &row = 0, QObject *parent = nullptr);
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
     AchievementsModel *sourceModel() const;
     void setSourceModel(AchievementsModel *sourceModel);
 
-    SGame getGame(int index);
-    QStringList getGameComment(int index);
-    QList<SAchievementPlayer> getGameAchievements(int index);
+//    SGame getGame(int index);
+//    QStringList getGameComment(int index);
+//    QList<SAchievementPlayer> getGameAchievements(int index);
     QMap<ProfileID, int> getProfiles();
 
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
@@ -125,8 +125,8 @@ public slots:
     void removeProfile(const SProfile &profile);
 
     void setName(const QString &newName);
-    void setReached(int newReached);
-    void setReachedFriend(int newReached, const ProfileID &profileId);
+    void setReached(const int &newReached);
+    void setReachedFriend(const int &newReached, const ProfileID &profileId);
     void setCategories(const CategoriesFilter &newCategories);
     CategoriesFilter getCategories() const;
     void setFavorites(const QStringList &newFavorites);

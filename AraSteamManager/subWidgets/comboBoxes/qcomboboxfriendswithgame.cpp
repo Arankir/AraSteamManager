@@ -6,45 +6,45 @@ const int c_allFriendsIndex = 1;
 
 ComboBoxFriendsWithGame::ComboBoxFriendsWithGame(QWidget *aParent):
                                 ComboBoxFriends(aParent) {
-    mCountFilterWidgets = 2;
+    countStaticWidgets_ = 2;
     clear();
 }
 
 void ComboBoxFriendsWithGame::addFilterWidgets() {
     ComboBoxFriends::addFilterWidgets();
 
-    QListWidgetItem* curItem2 = new QListWidgetItem(mListWidget);
-    mListWidget->addItem(curItem2);
+    QListWidgetItem* curItem2 = new QListWidgetItem(listWidgetItems_);
+    listWidgetItems_->addItem(curItem2);
 
-    mAllFriends = new QCheckBox(tr("Все друзья"));
-    mListWidget->setItemWidget(curItem2, mAllFriends);
-    connect(mAllFriends, &QCheckBox::stateChanged, this, &ComboBoxFriendsWithGame::onAllFriends);
+    checkBoxAllFriends_ = new QCheckBox(tr("Все друзья"));
+    listWidgetItems_->setItemWidget(curItem2, checkBoxAllFriends_);
+    connect(checkBoxAllFriends_, &QCheckBox::stateChanged, this, &ComboBoxFriendsWithGame::onAllFriends);
 }
 
-void ComboBoxFriendsWithGame::addItem(const SProfile &steamFriend, FriendType type) {
-    QListWidgetFriend *item = new  QListWidgetFriend(steamFriend, type);
-    item->setText(steamFriend.personaName());
-    item->setIcon(steamFriend.pixmapAvatar());
-    mListWidget->addItem(item);
-    if (!mAllFriends->isChecked() && item->_type != FriendType::haveGame) {
+void ComboBoxFriendsWithGame::addItem(const SProfile &profile, const FriendType &type) {
+    QListWidgetFriend *item = new  QListWidgetFriend(profile, type);
+    item->setText(profile.personaName());
+    item->setIcon(profile.pixmapAvatar());
+    listWidgetItems_->addItem(item);
+    if (!checkBoxAllFriends_->isChecked() && item->_type != FriendType::haveGame) {
         item->setHidden(true);
     }
 }
 
-void ComboBoxFriendsWithGame::onAllFriends(int aState) {
+void ComboBoxFriendsWithGame::onAllFriends(const int &aState) {
     switch (aState) {
     case 0: {
-        for(int i = mCountFilterWidgets; i < mListWidget->count(); ++i) {
-            auto steamFriend = dynamic_cast<QListWidgetFriend*>(mListWidget->item(i));
+        for(int i = countStaticWidgets_; i < listWidgetItems_->count(); ++i) {
+            auto steamFriend = dynamic_cast<QListWidgetFriend*>(listWidgetItems_->item(i));
             if (steamFriend) {
-                mListWidget->item(i)->setHidden(steamFriend->_type != FriendType::haveGame);
+                listWidgetItems_->item(i)->setHidden(steamFriend->_type != FriendType::haveGame);
             }
         }
         break;
     }
     case 2: {
-        for (int i = mCountFilterWidgets; i < mListWidget->count(); ++i) {
-            mListWidget->item(i)->setHidden(false);
+        for (int i = countStaticWidgets_; i < listWidgetItems_->count(); ++i) {
+            listWidgetItems_->item(i)->setHidden(false);
         }
         break;
     }

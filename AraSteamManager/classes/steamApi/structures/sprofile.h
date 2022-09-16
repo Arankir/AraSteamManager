@@ -43,18 +43,17 @@ public:
 
     SProfile &update();
     QJsonObject toJson() const;
-    virtual QString className() const {return "SProfile";}
-    static SProfile load(const ProfileID &aId, const LoadType &aType = LoadType::id, std::function<void (const SProfile &)> aCallback = nullptr);
-    static QList<SProfile> load(ProfileIDs ids, std::function< void(QList<SProfile>) > callback = nullptr);
-    static int getLevel(const ProfileID &aSteamId);
-    static QPixmap getFrameProfile(const ProfileID &aSteamId);
-    static QMap<QString, SProfileEquippedItem> getEquippedItems(const ProfileID &aSteamId);
+    static SProfile load(const ProfileID &profileId, const LoadType &type = LoadType::id, std::function<void (const SProfile &)> callback = nullptr);
+    static QList<SProfile> load(ProfileIDs profileIds, std::function< void(QList<SProfile>) > callback = nullptr);
+    static int getLevel(const ProfileID &profileId);
+    static QPixmap getFrameProfile(const ProfileID &profileId);
+    static QMap<QString, SProfileEquippedItem> getEquippedItems(const ProfileID &profileId);
 
     QPixmap pixmapAvatar() const;
     QPixmap pixmapAvatarMedium() const;
     QPixmap pixmapAvatarFull() const;
 
-    QPixmap getAvatarWithFrame(const QSize &aSize) const;
+    QPixmap getAvatarWithFrame(const QSize &size) const;
 
     bool isNull() const;
 
@@ -85,11 +84,11 @@ public:
     QString realName()              const;
 
     static QStringList statesList();
-    static QPixmap pixmapAvatar(const QString &aIconPath);
+    static QPixmap pixmapAvatar(const QString &iconPath);
 private slots:
     void fromJson(const QJsonValue &value);
-    static SProfile loadVanity(const ProfileID &aId, std::function<void (SProfile)> aCallback = nullptr);
-    static SProfile loadId(const ProfileID &aId, std::function<void (SProfile)> aCallback = nullptr);
+    static SProfile loadVanity(const ProfileID &profileId, std::function<void (SProfile)> callback = nullptr);
+    static SProfile loadId(const ProfileID &profileId, std::function<void (SProfile)> callback = nullptr);
 
 private:
     ProfileID steamId_ = "";
@@ -114,9 +113,9 @@ private:
     QString avatarMedium_;
     QString avatarFull_;
 
-    mutable QImage _pixmapAvatar;
-    mutable QImage _pixmapAvatarMedium;
-    mutable QImage _pixmapAvatarFull;
+    mutable QImage pixmapAvatar_;
+    mutable QImage pixmapAvatarMedium_;
+    mutable QImage pixmapAvatarFull_;
 
 };
 

@@ -5,10 +5,19 @@
 #include "forms/main/formgames.h"
 #include "subWidgets/charts/achievementcountchart.h"
 #include "subWidgets/charts/achievementcompletedpiechart.h"
+#include "classes/common/generalfunctions.h"
+#include "classes/common/images.h"
 
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QValueAxis>
+#include <QPushButton>
 #include <math.h>
 #include <QGraphicsPixmapItem>
 #include <QSpacerItem>
+#include <QMenu>
+#include <QToolTip>
 
 constexpr int c_steamReleaseYear = 2002;
 constexpr int c_secsInDay = 60 * 60 * 24;
@@ -29,9 +38,18 @@ FormStatistics::~FormStatistics() {
 void FormStatistics::init() {
     qApp->installEventFilter(this);
 
+    ui->splitterGraph->setStretchFactor(0, 10);
+    ui->splitterGraph->setStretchFactor(1, 1);
+
     initLastAchievements();
     initPie();
     initGraphs();
+
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, [=](int lCurrentTab) {
+        if (lCurrentTab == 1) {//если это Последние достижения
+            movePixmapLastAchievement();
+        }
+    });
 
     retranslate();
 
@@ -104,12 +122,13 @@ void FormStatistics::onFinish(Statistics &aStatistic) {
     setInfo(aStatistic);
     setPie(aStatistic);
     setGraphs(aStatistic);
-    emit s_finish();
+    clearStatus();
+    emit s_finish(ui->graphicsViewLastAchievements->sizeHint().width());
 }
 #define setProfileBlockEnd }
 
 #define infoBlock {
-void FormStatistics::setInfo(Statistics &aStatistic) {
+void FormStatistics::setInfo(const Statistics &aStatistic) {
     ui->labelAverageAllGamesValue->setText(QString::number(aStatistic.summAverages / (aStatistic.complete.count() + aStatistic.started.count() + aStatistic.notStarted.count())) + "%");
     ui->labelAverageStartedGamesValue->setText(QString::number(aStatistic.summAverages / (aStatistic.complete.count() + aStatistic.started.count())) + "%");
     ui->labelSumAchievementsValue->setText(QString::number(aStatistic.achievementCount));
@@ -128,7 +147,7 @@ void FormStatistics::initLastAchievements() {
     ui->graphicsViewLastAchievements->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
 }
 
-void FormStatistics::setLastAchievements(Statistics &aStatistic) {
+void FormStatistics::setLastAchievements(const Statistics &aStatistic) {
     int pixmapSize, pixmapRows, pixmapColumns, pixmapCount;
     getParametersForLastAchievements(pixmapSize, pixmapRows, pixmapColumns, pixmapCount);
     scene_->clear();
@@ -357,7 +376,7 @@ void FormStatistics::showTableGames(QList<GameWithPercentModelItem> aGames) {
     setEnable(false);
 }
 
-void FormStatistics::setEnable(bool isEnable) {
+void FormStatistics::setEnable(const bool &isEnable) {
     ui->tabWidget->setEnabled(isEnable);
 }
 #define pieBlockEnd }
@@ -481,7 +500,7 @@ void initGraph(QChartView *aChartView, const QStringList &aTitles) {
     chart->addAxis(axisX, Qt::AlignBottom);
 
     QValueAxis *axisY = new QValueAxis();
-    axisY->setLabelFormat("%i");
+//    axisY->setLabelFormat("%i");
     chart->addAxis(axisY, Qt::AlignLeft);
 
     QBarSeries *series = new QBarSeries();
@@ -583,7 +602,7 @@ void FormStatistics::loadFriends() {
     }
 }
 
-void FormStatistics::addFriendToList(const SProfile &aSteamFriend, FriendListItemData::ProfileType aType) {
+void FormStatistics::addFriendToList(const SProfile &aSteamFriend, const FriendListItemData::ProfileType &aType) {
     if (aType == FriendListItemData::ProfileType::NotFriend ||
         aType == FriendListItemData::ProfileType::Unknown) {
         return;
@@ -672,11 +691,11 @@ QMenu *FormStatistics::createMenuChartYears(QGraphicsItem *aItem) {
     return nullptr;
 }
 
-void FormStatistics::setGraphs(Statistics &aStatistic) {
+void FormStatistics::setGraphs(const Statistics &aStatistic) {
     addFriendBar(aStatistic);
 }
 
-void FormStatistics::addFriendBar(Statistics &aStatistic) {
+void FormStatistics::addFriendBar(const Statistics &aStatistic) {
     QList<int> datasT(daysInMonth(QDate::currentDate()));
     const int startMonthSecs = QDateTime(QDate(QDate::currentDate().year(), QDate::currentDate().month(), 1), QTime()).toSecsSinceEpoch();
     for (const auto &achievement: aStatistic.completedAchievements) {

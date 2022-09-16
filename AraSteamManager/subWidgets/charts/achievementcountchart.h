@@ -10,12 +10,12 @@
 class AchievementCountChart : public QChart {
 public:
     AchievementCountChart();
-    void addAxisX(const QStringList &aList);
+    void addAxisX(const QStringList &list);
 
-    void setSeriesColor(AcSeries *aSeries, const QColor &aColor);
-    AcSeries *getSeries(const QString &aName);
+    void setSeriesColor(AcSeries *series, const QColor &color);
+    AcSeries *getSeries(const QString &name);
 public slots:
-    void updateSettings(QFlags<changedSettings> aSettings);
+    void updateSettings(QFlags<changedSettings> settings);
 
     void addLineToChart(QVector<QPointF> &datas, const QString &name, const QColor &color);
 protected:

@@ -8,8 +8,8 @@
 
 class FavoriteGame {
 public:
-    FavoriteGame(const ProfileID &idUser, const QString &icon, const GameID &appid, const QString &name);
-    FavoriteGame(const ProfileID &idUser, const SGame &game);
+    FavoriteGame(const ProfileID &profileId, const QString &icon, const GameID &appId, const QString &name);
+    FavoriteGame(const ProfileID &profileId, const SGame &game);
     FavoriteGame(const FavoriteGame &game);
     FavoriteGame(const QJsonObject &object);
 
@@ -36,7 +36,7 @@ public:
     FavoriteGames();
 
     void append(const FavoriteGame &);
-    void remove(const QString &aIdUser, const GameID &);
+    void remove(const ProfileID &profileId, const GameID &);
 
     QJsonObject toJson() const override;
     void update();
@@ -51,7 +51,7 @@ public:
     FavoriteProfile(const FavoriteProfile &profile);
     FavoriteProfile(const QJsonObject &object);
 
-    FavoriteProfile &operator=(const FavoriteProfile &steamFriend) = default;
+    FavoriteProfile &operator=(const FavoriteProfile &steamProfile) = default;
 
     QJsonObject toJson() const;
     void fromJson(const QJsonObject &);
@@ -79,7 +79,7 @@ private:
 
 class FavoriteAchievement {
 public:
-    FavoriteAchievement(const AchievementID &id, const QString &title, const QString &description, const QString &icon, const QString &icon_gray, int achieved);
+    FavoriteAchievement(const AchievementID &achievementId, const QString &title, const QString &description, const QString &icon, const QString &icon_gray, int achieved);
     FavoriteAchievement(const SAchievement &achievement);
     FavoriteAchievement(const FavoriteAchievement &favoriteAchievement);
     FavoriteAchievement(const QJsonObject &object);
@@ -110,13 +110,12 @@ private:
 
 class FavoriteAchievementsGame: public QList<FavoriteAchievement> {
 public:
-    FavoriteAchievementsGame(const ProfileID &idUser, const SGame &game);
+    FavoriteAchievementsGame(const ProfileID &profileId, const SGame &game);
     FavoriteAchievementsGame(const FavoriteAchievementsGame &steamFriend);
     FavoriteAchievementsGame(const QJsonObject &object);
 
     FavoriteAchievementsGame &operator=(const FavoriteAchievementsGame &achievement);
     bool operator==(const SGame &game) const;
-//    bool operator==(const FavoriteAchievementsGame &achievement) const = default;
 
     void remove(const AchievementID &achievement);
     bool isInAchievements(const AchievementID &achievement) const;
@@ -138,9 +137,9 @@ public:
     FavoriteAchievementsGames();
 
     void append(const FavoriteAchievementsGame &);
-    void append(const ProfileID &idUser, const SGame &game, const SAchievement &);
-    void remove(const ProfileID &idUser, const GameID &game);
-    void remove(const ProfileID &idUser, const GameID &game, const AchievementID &);
+    void append(const ProfileID &profileId, const SGame &game, const SAchievement &);
+    void remove(const ProfileID &profileId, const GameID &game);
+    void remove(const ProfileID &profileId, const GameID &game, const AchievementID &);
     bool isInFavorite(const GameID &gameId, const ProfileID &profileId, const AchievementID &achievementId);
 
     QJsonObject toJson() const override;

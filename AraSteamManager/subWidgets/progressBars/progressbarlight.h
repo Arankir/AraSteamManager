@@ -11,11 +11,11 @@ public:
     ProgressBarLight(QWidget *parent = nullptr);
     ~ProgressBarLight();
 
-    virtual ProgressBarLight &setColor(int red, int green, int blue, int alpha = 255);
-    virtual ProgressBarLight &setBlurRadius(int radius);
+    virtual ProgressBarLight &setColor(const int &red, const int &green, const int &blue, const int &alpha = 255);
+    virtual ProgressBarLight &setBlurRadius(const int &radius);
 
 private:
-    QGraphicsDropShadowEffect *_light;
+    QGraphicsDropShadowEffect *light_;
 
 };
 

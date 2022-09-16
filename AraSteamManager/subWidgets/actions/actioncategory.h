@@ -8,15 +8,15 @@
 class ActionCategory : public QAction {
     Q_OBJECT
 public:
-    ActionCategory(QString text = QString(), QObject *object = nullptr): QAction(text, object) {};
-    ActionCategory(QIcon icon, QString text = QString(), QObject *object = nullptr): QAction(icon, text, object) {};
-    ActionCategory(Category *category, QIcon icon, QString text = QString(), QObject *object = nullptr);
+    ActionCategory(const QString &text = QString(), QObject *object = nullptr);
+    ActionCategory(const QIcon &icon, const QString &text = QString(), QObject *object = nullptr);
+    ActionCategory(Category *category, const QIcon &icon, const QString &text = QString(), QObject *object = nullptr);
 
-    Category *category() const {return _category;}
+    Category *category() const;
     ActionCategory &setCategory(Category*);
 
 private:
-    Category *_category = nullptr;
+    Category *category_ = nullptr;
 };
 
 #endif // ACTIONCATEGORY_H

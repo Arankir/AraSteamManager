@@ -6,15 +6,15 @@ const int c_searchIndex = 0;
 
 ComboBoxFriends::ComboBoxFriends(QWidget *aParent):
                                 QComboBox(aParent),
-                                mListWidget(new QListWidget(this)),
-                                mLineEdit(new QLineEdit(this)) {
+                                listWidgetItems_(new QListWidget(this)),
+                                lineEditText_(new QLineEdit(this)) {
     addFilterWidgets();
-    mLineEdit->setReadOnly(true);
-    mLineEdit->installEventFilter(this);
+    lineEditText_->setReadOnly(true);
+    lineEditText_->installEventFilter(this);
 
-    setModel(mListWidget->model());
-    setView(mListWidget);
-    setLineEdit(mLineEdit);
+    setModel(listWidgetItems_->model());
+    setView(listWidgetItems_);
+    setLineEdit(lineEditText_);
 
     unselected();
 
@@ -22,21 +22,21 @@ ComboBoxFriends::ComboBoxFriends(QWidget *aParent):
 }
 
 void ComboBoxFriends::clear() {
-    mListWidget->clear();
+    listWidgetItems_->clear();
     addFilterWidgets();
     unselected();
 }
 
 void ComboBoxFriends::addFilterWidgets() {
-    QListWidgetItem* curItem = new QListWidgetItem(mListWidget);
-    mListWidget->addItem(curItem);
+    QListWidgetItem* curItem = new QListWidgetItem(listWidgetItems_);
+    listWidgetItems_->addItem(curItem);
 
-    mSearchBar = new QLineEdit(this);
-    mSearchBar->setPlaceholderText(tr("Поиск.."));
-    mSearchBar->setClearButtonEnabled(true);
-    connect(mSearchBar, &QLineEdit::textChanged, this, &ComboBoxFriends::onSearch);
+    lineEditSearch_ = new QLineEdit(this);
+    lineEditSearch_->setPlaceholderText(tr("Поиск.."));
+    lineEditSearch_->setClearButtonEnabled(true);
+    connect(lineEditSearch_, &QLineEdit::textChanged, this, &ComboBoxFriends::onSearch);
 
-    mListWidget->setItemWidget(curItem, mSearchBar);
+    listWidgetItems_->setItemWidget(curItem, lineEditSearch_);
 }
 
 void ComboBoxFriends::unselected() {
@@ -50,10 +50,10 @@ void ComboBoxFriends::hidePopup() {
     if (x >= 0 &&
         x <= this->width() &&
         y >= this->height() &&
-        y <= this->height() + mListWidget->height()) {
+        y <= this->height() + listWidgetItems_->height()) {
         // Item was clicked, do not hide popup
     } else {
-        mListWidget->scrollToItem(mListWidget->item(0));
+        listWidgetItems_->scrollToItem(listWidgetItems_->item(0));
         QComboBox::hidePopup();
     }
 }
@@ -62,15 +62,15 @@ void ComboBoxFriends::addItem(const SProfile &steamFriend) {
     QListWidgetFriend *item = new  QListWidgetFriend(steamFriend);
     item->setText(steamFriend.personaName());
     item->setIcon(steamFriend.pixmapAvatar());
-    mListWidget->addItem(item);
+    listWidgetItems_->addItem(item);
 }
 
-void ComboBoxFriends::sort(Qt::SortOrder aOrder) {
-    mListWidget->sortItems(aOrder);
+void ComboBoxFriends::sort(const Qt::SortOrder &order) {
+    listWidgetItems_->sortItems(order);
 }
 
 int ComboBoxFriends::count() const {
-    int count = mListWidget->count() - mCountFilterWidgets;// Do not count the search bar
+    int count = listWidgetItems_->count() - countStaticWidgets_;// Do not count the search bar
     if(count < 0) {
         count = 0;
     }
@@ -82,24 +82,24 @@ void ComboBoxFriends::setCurrentText(const QString &aText) {
 }
 
 void ComboBoxFriends::onSearch(const QString &aSearchString) {
-    for(int i = mCountFilterWidgets; i < mListWidget->count(); ++i) {
+    for(int i = countStaticWidgets_; i < listWidgetItems_->count(); ++i) {
 //TODO конфликтует с другим фильтром
-        mListWidget->item(i)->setHidden(mListWidget->item(i)->text().toLower().indexOf(aSearchString.toLower(), 0) == -1);
+        listWidgetItems_->item(i)->setHidden(listWidgetItems_->item(i)->text().toLower().indexOf(aSearchString.toLower(), 0) == -1);
     }
 }
 
-void ComboBoxFriends::itemClicked(int aIndex) {
+void ComboBoxFriends::itemClicked(const int &aIndex) {
     static bool isClicked = false;
     if (!isClicked) {
         isClicked = true;
-        if(aIndex >= mCountFilterWidgets) {
-            auto steamFriend = dynamic_cast<QListWidgetFriend*>(mListWidget->item(aIndex));
+        if(aIndex >= countStaticWidgets_) {
+            auto steamFriend = dynamic_cast<QListWidgetFriend*>(listWidgetItems_->item(aIndex));
             if (steamFriend) {
                 unselected();
                 auto profile = steamFriend->_steamFriend;
 //                mListWidget->removeItemWidget(steamFriend);
-                delete mListWidget->takeItem(aIndex);
-                mListWidget->scrollToItem(mListWidget->item(0));
+                delete listWidgetItems_->takeItem(aIndex);
+                listWidgetItems_->scrollToItem(listWidgetItems_->item(0));
                 QComboBox::hidePopup();
                 emit s_friendClicked(profile);
             }
@@ -109,7 +109,7 @@ void ComboBoxFriends::itemClicked(int aIndex) {
 }
 
 bool ComboBoxFriends::eventFilter(QObject* aObject, QEvent* aEvent) {
-    if(aObject == mLineEdit && aEvent->type() == QEvent::MouseButtonRelease) {
+    if(aObject == lineEditText_ && aEvent->type() == QEvent::MouseButtonRelease) {
         showPopup();
         return false;
     }

@@ -2,7 +2,7 @@
 #define SGAMES_H
 
 #include "../sapi.h"
-#include "classes/common/generalfunctions.h"
+//#include "classes/common/generalfunctions.h"
 
 class SGame : public Sapi {
     Q_OBJECT
@@ -11,7 +11,6 @@ public:
     SGame(const SGame &game);
 
     QJsonObject toJson() const;
-    virtual QString className() const {return "SGame";}
     static QList<SGame> load(const ProfileID &id, const int &free_games = 0, const int &game_info = 0, std::function< void(QList<SGame>) > callback = nullptr);
     static int playerCount(const GameID &appId);
 

@@ -21,7 +21,7 @@ signals:
     void s_completedClicked();
 
 public slots:
-    void updateSettings(QFlags<changedSettings> aSettings);
+    void updateSettings(QFlags<changedSettings> settings);
 
 protected:
     void changeEvent(QEvent *event);

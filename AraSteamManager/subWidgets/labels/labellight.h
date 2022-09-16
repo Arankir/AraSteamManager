@@ -12,15 +12,15 @@ public:
     LabelLight(const QString &title, QWidget *parent = nullptr);
     ~LabelLight();
 
-    LabelLight &setLightColor(int aRed, int aGreen, int aBlue, int aAlpha);
-    LabelLight &setLightColor(QColor aColor);
-    LabelLight &setBlurRadius(int radius);
+    LabelLight &setLightColor(const int &red, const int &green, const int &blue, const int &alpha);
+    LabelLight &setLightColor(const QColor &color);
+    LabelLight &setBlurRadius(const int &radius);
 
-    LabelLight *setlightningColor(const QColor &aColor);
+    LabelLight *setlightningColor(const QColor &color);
 
 
 private:
-    QGraphicsDropShadowEffect *_light;
+    QGraphicsDropShadowEffect *light_;
     
 };
 

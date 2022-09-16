@@ -1,12 +1,13 @@
 #include "formfrienditemcompare.h"
 #include "ui_formfrienditemcompare.h"
+#include "classes/common/images.h"
 
 FormFriendItemCompare::FormFriendItemCompare(const SProfile &steamFriend, QListWidgetItem *parent) :
                         ui(new Ui::FormFriendItemCompare),
-                        _item(parent),
-                        _steamProfile(new SProfile(steamFriend)) {
+                        item_(parent),
+                        profile_(new SProfile(steamFriend)) {
     ui->setupUi(this);
-    ui->LabelName->setText(_steamProfile->personaName());
+    ui->LabelName->setText(profile_->personaName());
     ui->LabelPercent->setText("0%");
     setIcons();
 
@@ -14,17 +15,25 @@ FormFriendItemCompare::FormFriendItemCompare(const SProfile &steamFriend, QListW
         emit s_delete();
     });
     connect(ui->Filter, &ButtonReachedType::s_radioButtonChange, this ,[&](ReachedType type) {
-        emit s_filterChanged(_steamProfile, type);
+        emit s_filterChanged(profile_, type);
     });
 }
 
 FormFriendItemCompare::~FormFriendItemCompare() {
-    delete _steamProfile;
+    delete profile_;
     delete ui;
 }
 
 void FormFriendItemCompare::setIcons() {
     ui->ButtonDelete->setIcon(QIcon(Images::deleteIcon()));
+}
+
+QListWidgetItem *FormFriendItemCompare::item() {
+    return item_;
+}
+
+SProfile *FormFriendItemCompare::steamProfile() {
+    return profile_;
 }
 
 void FormFriendItemCompare::setHiddenFilter(const bool &aHidden) {

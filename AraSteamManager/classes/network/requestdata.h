@@ -1,15 +1,7 @@
 #ifndef IMAGEREQUEST_H
 #define IMAGEREQUEST_H
 
-//#include <QMainWindow>
 #include <QNetworkAccessManager>
-//#include <QNetworkRequest>
-//#include <QNetworkReply>
-//#include <QJsonDocument>
-//#include <QJsonObject>
-//#include <QJsonArray>
-////#include <QTextCodec>
-//#include <QTcpSocket>
 
 class RequestData : public QObject {
     Q_OBJECT
@@ -21,8 +13,8 @@ public:
     void get(const QString &url, const bool &parallel = false);
     void get(const QUrl &url, const bool &parallel = false);
 
-    QByteArray reply() const {return reply_;}
-    QString error() const {return error_;}
+    QByteArray reply() const;
+    QString error() const;
 
 signals:
     void s_finished(RequestData *imgr);

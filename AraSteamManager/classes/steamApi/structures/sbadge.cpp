@@ -1,4 +1,5 @@
 #include "sbadge.h"
+
 #include <QJsonDocument>
 #include <QJsonArray>
 

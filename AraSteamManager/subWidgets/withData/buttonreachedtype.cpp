@@ -1,4 +1,5 @@
 #include "buttonreachedtype.h"
+#include "classes/common/images.h"
 
 const int c_frameNumberAll = 0;
 const int c_frameNumberNotReached = 29;

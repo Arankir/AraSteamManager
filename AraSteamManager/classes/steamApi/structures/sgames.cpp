@@ -1,4 +1,7 @@
 #include "sgames.h"
+#include "classes/common/images.h"
+#include "classes/common/settings.h"
+
 #include <QJsonDocument>
 #include <QJsonArray>
 

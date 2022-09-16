@@ -12,8 +12,8 @@ class RequestImage : public QObject {
 public:
     RequestImage(const QString &url, const QString &save = "", const bool &autosave = false, const bool &parallel = true, QObject *parent = nullptr);
 
-    QPixmap pixmap() const {return pixmap_;}
-    QString error() {return error_;}
+    QPixmap pixmap() const;
+    QString error();
 
 signals:
     void s_finished(RequestImage*);
@@ -33,8 +33,8 @@ class RequestImageToLabel : public QObject {
     Q_OBJECT
 public:
     RequestImageToLabel(QLabel *label, const QString &url, const QString &save = "", const bool &autosave = false, const bool &parallel = true, QObject *parent = nullptr);
-    RequestImageToLabel(QLabel *label, const QString &url, const bool &parallel, QObject *parent = nullptr): RequestImageToLabel(label, url, "", false, parallel, parent) {;}
-    RequestImageToLabel(QLabel *label, const QString &url, QObject *parent): RequestImageToLabel(label, url, "", false, true, parent) {;}
+    RequestImageToLabel(QLabel *label, const QString &url, const bool &parallel, QObject *parent = nullptr);
+    RequestImageToLabel(QLabel *label, const QString &url, QObject *parent);
 
 private slots:
     void onLoad();

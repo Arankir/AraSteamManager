@@ -3,8 +3,6 @@
 #pragma once
 
 #include <QComboBox>
-#include <QCheckBox>
-#include <QListWidget>
 #include "classes/steamApi/structures/sfriends.h"
 #include "../items/qlistwidgetfriend.h"
 
@@ -13,12 +11,12 @@ class ComboBoxFriends : public QComboBox {
 
 public:
     ComboBoxFriends(QWidget *parent = nullptr);
-    void addItem(const SProfile &steamFriend);
+    void addItem(const SProfile &profile);
     void setCurrentText(const QString &text);
     int count() const;
     void hidePopup() override;
 
-    void sort(Qt::SortOrder aOrder);
+    void sort(const Qt::SortOrder &order);
 signals:
     void s_selectionChanged();
     void s_friendClicked(const SProfile&);
@@ -32,16 +30,16 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
     virtual void addFilterWidgets();
 
-    int mCountFilterWidgets = 1;
-    QListWidget *mListWidget;
-    QLineEdit *mLineEdit;
+    int countStaticWidgets_ = 1;
+    QListWidget *listWidgetItems_;
+    QLineEdit *lineEditText_;
 
 private:
     void onSearch(const QString &searchString);
-    void itemClicked(int index);
+    void itemClicked(const int &index);
     void unselected();
 
-    QLineEdit *mSearchBar;
+    QLineEdit *lineEditSearch_;
 };
 
 #endif // COMBOBOXFRIENDS_H

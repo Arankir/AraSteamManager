@@ -10,7 +10,7 @@ public:
     MyLineEdit(QWidget *parent = nullptr);
 
 public slots:
-    void updateSettings(QFlags<changedSettings> aSettings);
+    void updateSettings(QFlags<changedSettings> settings);
 };
 
 #endif // MYLINEEDIT_H

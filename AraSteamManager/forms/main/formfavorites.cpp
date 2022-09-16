@@ -70,8 +70,10 @@ void FormFavorites::init() {
     });
     connect(ui->treeWidgetAchievements, &QTableView::doubleClicked,             this, [&](QModelIndex aIndex) {
         Q_UNUSED(aIndex);
-        ProfileID profileId = ui->treeWidgetAchievements->model()->data(ui->treeWidgetAchievements->currentIndex().parent().parent().siblingAtColumn(treeAchievements::Columns::achievementId)).toString();
-        GameID gameId = ui->treeWidgetAchievements->model()->data(ui->treeWidgetAchievements->currentIndex().parent().siblingAtColumn(treeAchievements::Columns::achievementId)).toInt();
+        auto parentIndex = ui->treeWidgetAchievements->currentIndex().parent();
+        GameID gameId = ui->treeWidgetAchievements->model()->data(parentIndex.siblingAtColumn(treeAchievements::Columns::achievementId)).toInt();
+        auto parentParentIndex = parentIndex.parent();
+        ProfileID profileId = ui->treeWidgetAchievements->model()->data(parentParentIndex.siblingAtColumn(treeAchievements::Columns::achievementId)).toString();
         goToGame(gameId, profileId);
     });
     retranslate();
@@ -87,9 +89,9 @@ void FormFavorites::update() {
 void FormFavorites::updateGames() {
     if (auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewGames->model())) {
         model->clear();
-        _gamesFavorites.update();
+        gamesFavorites_.update();
         int row = 0;
-        for (const auto &game: _gamesFavorites) {
+        for (const auto &game: gamesFavorites_) {
             QStandardItem *itemProfileId = new QStandardItem(game.steamId());
             QStandardItem *itemGameId = new QStandardItem(QString::number(game.appId()));
             QStandardItem *itemIcon = new QStandardItem();
@@ -114,9 +116,9 @@ void FormFavorites::updateFriends() {
     if (auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewFriends->model())) {
         model->clear();
         int row = 0;
-        _friendsFavorites.update();
+        friendsFavorites_.update();
         ProfileIDs friendsId;
-        for (const auto &steamFriend: _friendsFavorites) {
+        for (const auto &steamFriend: friendsFavorites_) {
             friendsId << steamFriend.profileId();
         }
         auto profiles = SProfile::load(friendsId);
@@ -144,10 +146,10 @@ void FormFavorites::updateFriends() {
 
 void FormFavorites::updateAchievements() {
     ui->treeWidgetAchievements->clear();
-    _achievementsFavorites.update();
+    achievementsFavorites_.update();
     SProfiles profiles = getProfilesFavoriteAchievements();
     QMap<ProfileID, QList<FavoriteAchievementsGame>> profilesFavorite;
-    for (const auto &achievementsGame: _achievementsFavorites) {
+    for (const auto &achievementsGame: achievementsFavorites_) {
         if (profilesFavorite.find(achievementsGame.steamId()) == profilesFavorite.end()) {
             profilesFavorite.insert(achievementsGame.steamId(), QList<FavoriteAchievementsGame>());
         }
@@ -197,9 +199,16 @@ void FormFavorites::updateAchievements() {
     ui->treeWidgetAchievements->collapseAll();
 }
 
+void FormFavorites::updateSettings(QFlags<changedSettings> aSettings) {
+    if (aSettings.testFlag(changedSettings::favorites)) {
+        update();
+    }
+    Form::updateSettings(aSettings);
+}
+
 SProfiles FormFavorites::getProfilesFavoriteAchievements() {
     QSet<ProfileID> usersId;
-    for (const auto &achievementsGame: _achievementsFavorites) {
+    for (const auto &achievementsGame: achievementsFavorites_) {
         usersId.insert(achievementsGame.steamId());
     }
     QStringList ids;
@@ -220,9 +229,10 @@ QMenu *FormFavorites::createMenuGames(const GameID &aGameId, const ProfileID &aP
     });
 
     connect(actionRemove, &QAction::triggered, this, [=]() {
-        _gamesFavorites.remove(aProfileId, aGameId);
-        _gamesFavorites.save();
+        gamesFavorites_.remove(aProfileId, aGameId);
+        gamesFavorites_.save();
         updateGames();
+        emit s_settingsUpdated(changedSettings::favorites);
     });
 
     menu->addAction(actionGoTo);
@@ -242,9 +252,10 @@ QMenu *FormFavorites::createMenuProfiles(const ProfileID &aProfileId) {
     });
 
     connect(actionRemove, &QAction::triggered, this, [=]() {
-        _friendsFavorites.remove(aProfileId);
-        _friendsFavorites.save();
+        friendsFavorites_.remove(aProfileId);
+        friendsFavorites_.save();
         updateFriends();
+        emit s_settingsUpdated(changedSettings::favorites);
     });
 
     menu->addAction(actionGoTo);
@@ -264,9 +275,10 @@ QMenu *FormFavorites::createMenuAchievements(const GameID &aGameId, const Profil
     });
 
     connect(actionRemove, &QAction::triggered, this, [=]() {
-        _achievementsFavorites.remove(aProfileId, aGameId, aAchievementId);
-        _achievementsFavorites.save();
+        achievementsFavorites_.remove(aProfileId, aGameId, aAchievementId);
+        achievementsFavorites_.save();
         updateAchievements();
+        emit s_settingsUpdated(changedSettings::favorites);
     });
 
     menu->addAction(actionGoTo);

@@ -1,5 +1,9 @@
 #include "threadloading.h"
 
+void ThreadLoading::start() {
+    thread_->start();
+}
+
 ThreadLoading::ThreadLoading(): thread_(new ThreadInfo) {
     this->moveToThread(thread_);
     connect(this, &ThreadLoading::s_finished,   thread_,    &QThread::quit);
@@ -12,4 +16,8 @@ ThreadLoading::~ThreadLoading() {
         thread_->quit();
         thread_->deleteLater();
     }
+}
+
+ThreadInfo::~ThreadInfo() {
+    qInfo() << "Thread deleted";
 }

@@ -6,7 +6,7 @@ FormComments::FormComments(QWidget *parent): Form(parent), ui(new Ui::FormCommen
 }
 
 FormComments::FormComments(const ProfileID &aId, const SGame &game, const SAchievement &achievement, QWidget *parent) :
-    Form(parent), ui(new Ui::FormComments), _game(game), _achievement(achievement), _profile(aId) {
+    Form(parent), ui(new Ui::FormComments), game_(game), achievement_(achievement), profileId_(aId) {
     ui->setupUi(this);
     init();
 }
@@ -16,47 +16,47 @@ FormComments::~FormComments() {
 }
 
 void FormComments::setData(const ProfileID &aId, const SGame &aGame, const SAchievement &aAchievement) {
-    _game = aGame;
-    _achievement = aAchievement;
-    _profile = aId;
+    game_ = aGame;
+    achievement_ = aAchievement;
+    profileId_ = aId;
     init();
 }
 
 void FormComments::init() {
     QStringList comment;
-    if (_achievement == SAchievement()) {
-        GameComments list(_profile);
+    if (achievement_ == SAchievement()) {
+        GameComments list(profileId_);
         auto iterator = std::find_if(list.begin(),
                                      list.end(),
                                      [this](const GameComment &gameComment) {
-                                        return gameComment.gameId() == _game.appId();
+                                        return gameComment.gameId() == game_.appId();
                                     });
         if (iterator != list.end()) {
             comment = (*iterator).comment();
         }
     } else {
-        QString toolTip = textToToolTip("<b>" + _achievement.displayName() + "</b>\n" +
-                                        _achievement.description() + "\n" +
-                                        (_achievement.achieved() ?
-                                             tr("<font color=\"#00dd00\">Получено: %1</font>").arg(_achievement.unlockTime().toString(Settings::dateTimeFormat())) :
+        QString toolTip = textToToolTip("<b>" + achievement_.displayName() + "</b>\n" +
+                                        achievement_.description() + "\n" +
+                                        (achievement_.achieved() ?
+                                             tr("<font color=\"#00dd00\">Получено: %1</font>").arg(achievement_.unlockTime().toString(Settings::dateTimeFormat())) :
                                              tr("<font color=\"#dd0000\">Не получено</font>"))
                                         ).replace("\n", "<br>");
-        ui->labelIcon->setPixmap(_achievement.icon(_game.appId()).scaled(32, 32));
+        ui->labelIcon->setPixmap(achievement_.icon(game_.appId()).scaled(32, 32));
         ui->labelIcon->setToolTip(toolTip);
-        auto list = AchievementComments(_profile).getCommentsFromGame(_profile, _game.appId());
+        auto list = AchievementComments(profileId_).getCommentsFromGame(profileId_, game_.appId());
         auto iterator = std::find_if(list.begin(),
                                      list.end(),
                                      [this](const AchievementComment &achievementComment) {
-                                        return achievementComment.achievementId() == _achievement.apiName();
+                                        return achievementComment.achievementId() == achievement_.apiName();
                                     });
         if (iterator != list.end()) {
             comment = (*iterator).comment();
         }
     }
 
-    ui->LabelGameTitle->setText(_game.name());
-    ui->labelGameIcon->setPixmap(_game.pixmapIcon());
-    auto profile = SProfile::load(_profile);
+    ui->LabelGameTitle->setText(game_.name());
+    ui->labelGameIcon->setPixmap(game_.pixmapIcon());
+    auto profile = SProfile::load(profileId_);
     ui->LabelProfileName->setText(profile.personaName());
     ui->labelProfileIcon->setPixmap(profile.pixmapAvatar().scaled(32, 32));
     ui->TextEditComment->setPlainText(comment.join('\n'));
@@ -69,30 +69,30 @@ void FormComments::on_ButtonCancel_clicked() {
 void FormComments::on_ButtonApply_clicked() {
     QStringList comment = ui->TextEditComment->toPlainText().split('\n');
 
-    if (_achievement == SAchievement()) {
-        GameComments comments(_profile);
+    if (achievement_ == SAchievement()) {
+        GameComments comments(profileId_);
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=, this](const GameComment &lComment) {
-                                        return lComment.gameId() == _game.appId();
+                                        return lComment.gameId() == game_.appId();
                                      });
         if (iterator != comments.end()) {
-            comments.setComment(_profile, _game.appId(), comment);
+            comments.setComment(profileId_, game_.appId(), comment);
         } else {
-            comments.append(GameComment(_game.appId(), _profile, comment));
+            comments.append(GameComment(game_.appId(), profileId_, comment));
         }
 //        GameComment::save(_profile, GameComment(_game.appId(), _profile, comment));
     } else {
-        AchievementComments comments(_profile);
+        AchievementComments comments(profileId_);
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=, this](const AchievementComment &lComment) {
-                                        return lComment.gameId() == _game.appId() && lComment.achievementId() == _achievement.apiName();
+                                        return lComment.gameId() == game_.appId() && lComment.achievementId() == achievement_.apiName();
                                      });
         if (iterator != comments.end()) {
-            comments.setComment(_profile, _game.appId(), _achievement.apiName(), comment);
+            comments.setComment(profileId_, game_.appId(), achievement_.apiName(), comment);
         } else {
-            comments.append(AchievementComment(_profile, _game.appId(), _achievement.apiName(), comment));
+            comments.append(AchievementComment(profileId_, game_.appId(), achievement_.apiName(), comment));
         }
 //        AchievementComment::save(_profile, _game.appId(), AchievementComment(_profile, _game.appId(), _achievement.apiName(), comment));
     }

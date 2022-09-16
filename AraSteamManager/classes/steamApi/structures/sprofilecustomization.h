@@ -4,7 +4,6 @@
 #include "../sapi.h"
 
 class SProfileCustomization : public Sapi {
-
     enum class Customization_type {
         unknown = 0,
         rarest_achievements = 1,
@@ -30,8 +29,8 @@ class SProfileCustomization : public Sapi {
     };
 
 public:
-    SProfileCustomization(const SProfileCustomization &aCopy);
-    SProfileCustomization(const QJsonObject &aObject = QJsonObject(), QObject *parent = nullptr);
+    SProfileCustomization(const SProfileCustomization &customization);
+    SProfileCustomization(const QJsonObject &object = QJsonObject(), QObject *parent = nullptr);
 
     SProfileCustomization &operator=(const SProfileCustomization &customization);
     SProfileCustomization &operator=(SProfileCustomization &&customization);
@@ -47,10 +46,9 @@ public:
     bool isPurchase() const;
 
     QJsonObject toJson() const;
-    void fromJson(const QJsonObject &aObject);
-    virtual QString className() const {return "SProfileCustomization";}
+    void fromJson(const QJsonObject &object);
 
-    static QList<SProfileCustomization> load(const ProfileID &aId, std::function<void (QList<SProfileCustomization>)> aCallback = nullptr);
+    static QList<SProfileCustomization> load(const ProfileID &profileId, std::function<void (QList<SProfileCustomization>)> callback = nullptr);
 private:
     Customization_type type_ = Customization_type::unknown;
     int count_ = 0;

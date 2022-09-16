@@ -1,6 +1,7 @@
 #include "formcontainerachievements.h"
 #include "ui_formcontainerachievements.h"
 
+#include <QCloseEvent>
 #include <QMessageBox>
 
 FormContainerAchievements::FormContainerAchievements(QWidget *parent): Form(parent), ui(new Ui::FormContainerAchievements) {
@@ -15,6 +16,14 @@ FormContainerAchievements::FormContainerAchievements(QWidget *parent): Form(pare
 FormContainerAchievements::~FormContainerAchievements() {
 //    emit s_closed();
     delete ui;
+}
+
+void FormContainerAchievements::retranslate() {
+
+}
+
+void FormContainerAchievements::updateIcons() {
+
 }
 
 void FormContainerAchievements::updateSettings(QFlags<changedSettings> aSettings) {
@@ -75,12 +84,15 @@ void FormContainerAchievements::addFormAchievement(const SProfile &aProfile, con
             on_TabWidgetAchievements_tabCloseRequested(getTabIndex(aProfile, aGame));
         }
     });
+    connect(achievements, &FormAchievements::s_settingsUpdated, this, [&](QFlags<changedSettings> lSetting) {
+        emit s_settingsUpdated(lSetting);
+    });
     ui->TabWidgetAchievements->setTabIcon(tabIndex, aGame.pixmapIcon());
     ui->TabWidgetAchievements->setCurrentIndex(tabIndex);
     achievements->setData(aProfile, aGame);
 }
 
-void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int aIndex) {
+void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(const int &aIndex) {
     qDebug() << aIndex;
     delete ui->TabWidgetAchievements->widget(aIndex);
 //    ui->TabWidgetAchievements->removeTab(aIndex);

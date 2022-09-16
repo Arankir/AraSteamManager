@@ -2,6 +2,7 @@
 #define FORMFRIENDS_H
 
 #include "subWidgets/models/friendsmodel.h"
+#include "form.h"
 
 namespace Ui {
 class FormFriends;
@@ -11,7 +12,6 @@ class FormFriends : public Form {
     Q_OBJECT
 
 public slots:
-//    void updateSettings(QFlags<changedSettings> settings) override;
     void setFriends(const ProfileID &profileId);
     void clear();
     bool isInit();
@@ -21,7 +21,7 @@ public:
     ~FormFriends();
 
 signals:
-    void s_finish(int width);
+    void s_finish(const int &width);
     void s_goToProfile(const ProfileID &profileId);
 
 private slots:
@@ -36,15 +36,15 @@ private slots:
     QMenu *createMenu(const SFriendProfile &profile);
     void goToCurrentProfile();
     //Фильтр
-    void lineEditName_TextChanged(const QString &arg1);
+    void lineEditName_TextChanged(const QString &newText);
     void buttonFind_Clicked();
-    void comboBoxStatus_Activated(int index);
-    void checkBoxFavorites_StateChanged(int arg1);
+    void comboBoxStatus_Activated(const int &index);
+    void checkBoxFavorites_StateChanged(const int &state);
 
 private:
     Ui::FormFriends *ui;
 
-    ProfileID id_;
+    ProfileID profileId_;
     bool isLoading_ = false;
 
     FilterModelFriends filterFriends_;

@@ -24,20 +24,19 @@ namespace Ui {
 class FormAchievements: public Form {
     Q_OBJECT
 public slots:
-//    void updateSettings(QFlags<changedSettings> aSettings) override;
     void update();
     void openManual();
-    bool isDataSetted() {return achievementsModel_->getAchievementsCount() > 0 && profile_.personaName() != "" && game_.appId() > 0;}
-    void setAllFriendsValue(const ReachedType &aType);
-    void addFriendToList(const SProfile &aSteamFriend, FriendListItemData::ProfileType type);
+    bool isDataSetted();
+    void setAllFriendsValue(const ReachedType &type);
+    void addFriendToList(const SProfile &profile, FriendListItemData::ProfileType type);
     void addProfileToTable(const QModelIndex &index);
 public:
     explicit FormAchievements(QWidget *parent = nullptr);
     ~FormAchievements();
     void setData(const SProfile &profile, const SGame &game);
 
-    QString getProfileId() const {return profile_.steamId();}
-    int getGameAppId() const {return game_.appId();}
+    QString getProfileId() const;
+    int getGameAppId() const;
     int getAchievementsCount();
 
 signals:
@@ -48,12 +47,12 @@ signals:
     void s_finishedFriends();
 
 protected slots:
-    void createCategory(const QModelIndex &aCategory);
-    void createSubCategory(const QModelIndex &aCategory);
+    void createCategory(const QModelIndex &categoryIndex);
+    void createSubCategory(const QModelIndex &categoryIndex);
 
     void onAchievementsLoaded();
     void findFriend();
-    void checkBoxFriendsOnlyWithGame_Clicked(bool aChecked);
+    void checkBoxFriendsOnlyWithGame_Clicked(const bool &isChecked);
 private slots:
     void closeEvent(QCloseEvent*) override;
     void retranslate() override;
@@ -71,26 +70,26 @@ private slots:
     void onLoadedFriendGames(const SGames &games, const ProfileID &profileId);
 
     void buttonComment_Clicked();
-    QMenu *createMenuAchievements(const SAchievement &aAchievement);
-    QMenu *createMenuCategory(const QModelIndex &aCategory);
+    QMenu *createMenuAchievements(const SAchievement &achievement);
+    QMenu *createMenuCategory(const QModelIndex &category);
     QMenu *createMenuAchievementsHeader();
-    QMenu *createMenuFrozenTable(const QModelIndex &aIndex);
-    void updateFilterWithMyProfile(const ReachedType &aType);
-    void updateFilterTextAchievement(const QString &aNewText);
-    void updateFilterCategory(Category *aCategory, const bool &aIsChecked);
-    void updateFilterFavorite(const QList<FavoriteAchievement> &aFavoritesAchievements);
-    void updateFilterFriend(const ProfileID &aSteamId, const ReachedType &aType);
-    void loading(const bool &aIsLoading);
+    QMenu *createMenuFrozenTable(const QModelIndex &index);
+    void updateFilterWithMyProfile(const ReachedType &type);
+    void updateFilterTextAchievement(const QString &newText);
+    void updateFilterCategory(Category *aCategory, const bool &isChecked);
+    void updateFilterFavorite(const QList<FavoriteAchievement> &favoritesAchievements);
+    void updateFilterFriend(const ProfileID &profileId, const ReachedType &type);
+    void loading(const bool &isLoading);
     SAchievement currentAchievement();
     void onUpdateFilters();
     void updateAchievements();
     void loadFriends();
-    int addFriendColumn(const SProfile &aSteamFriend, FriendListItemData::ProfileType);
-    bool removeFriendColumn(const SProfile &aSteamFriend);
+    int addFriendColumn(const SProfile &profile, const FriendListItemData::ProfileType &);
+    bool removeFriendColumn(const SProfile &profile);
     void initTreeCategories();
     void initAchievementsTable();
     void initFriends();
-    QWidgetAction *createCheckBoxHeaderAction(QMenu *aMenu, const QString &aText, achievementsModel::Columns aColumn);
+    QWidgetAction *createCheckBoxHeaderAction(QMenu *menu, const QString &text, const achievementsModel::Columns &column);
     void buttonAddProfile_Clicked();
 
 private:
@@ -99,11 +98,6 @@ private:
     //ключевые данные
     SProfile profile_;
     SGame game_;
-//    Category *_categories;
-
-    //загружены ли другие формы
-//    bool _isEditCategoryLoaded = false;
-//    bool _isCompareLoaded      = false;
 
     AchievementsModel *achievementsModel_ = nullptr;
     FilterModelAchievements filterAchievements_;

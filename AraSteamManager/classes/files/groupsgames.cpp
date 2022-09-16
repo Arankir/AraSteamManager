@@ -21,14 +21,14 @@ GroupGames &GroupGames::addGame(const SGame &aGame) {
     return *this;
 }
 
-GroupGames &GroupGames::removeGame(const GameID &aGame) {
+GroupGames &GroupGames::removeGame(const GameID &aGameId) {
 //    games_.erase(std::remove_if(games_.begin(),
 //                                games_.end(),
 //                                [=](const GameID &lGame) {
 //                                    return lGame == aGame;
 //                                }),
 //               games_.end());
-    games_.remove(aGame);
+    games_.remove(aGameId);
     return *this;
 }
 

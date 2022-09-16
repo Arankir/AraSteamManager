@@ -4,14 +4,13 @@
 #include <QObject>
 #include <QWidget>
 #include <QAbstractListModel>
-#include <QStringListModel>
 #include <QMimeData>
 #include <QIODevice>
 
 class ListAchievementsModel : public QAbstractListModel {
     Q_OBJECT
 public:
-    ListAchievementsModel(QWidget *parent = nullptr) : QAbstractListModel(parent) {;}
+    ListAchievementsModel(QWidget *parent = nullptr);
     Qt::ItemFlags flags(const QModelIndex &index) const;
     QStringList mimeTypes() const;
     QMimeData *mimeData(const QModelIndexList &indexes) const;

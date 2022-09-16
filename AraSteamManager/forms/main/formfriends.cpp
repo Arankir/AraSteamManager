@@ -1,6 +1,7 @@
 #include "formfriends.h"
 #include "ui_formfriends.h"
 #include "classes/files/favorites.h"
+#include "classes/common/images.h"
 
 #include <QMenu>
 
@@ -19,6 +20,7 @@ void FormFriends::init() {
     connect(&filterFriends_, &FilterModelFriends::s_modelFinished, this, [&]() {
         ui->tableFriends->resizeColumnsToContents();
         ui->tableFriends->resizeRowsToContents();
+        clearStatus();
         emit s_finish(getWidthTableColumns(ui->tableFriends) + 23);//Почему-то при подсчёте длинна последнего 77, а как всё начинает ресайзиться, меняется на 100
     });
     ui->splitter->setStretchFactor(0, 1);
@@ -51,19 +53,19 @@ void FormFriends::init() {
 
 void FormFriends::setFriends(const ProfileID &aProfileId) {
     clear();
-    id_ = aProfileId;
+    profileId_ = aProfileId;
     filterFriends_.sourceModel()->setFriends(SFriend::load(aProfileId));
 }
 
 void FormFriends::clear() {
-    id_ = "";
+    profileId_ = "";
     filterFriends_.clear();
     ui->comboBoxStatus->setCurrentIndex(0);
     isLoading_ = false;
 }
 
 bool FormFriends::isInit() {
-    return ((id_ != "") && (ui->tableFriends->model()->rowCount() > 0));
+    return ((profileId_ != "") && (ui->tableFriends->model()->rowCount() > 0));
 }
 
 void FormFriends::initComboBoxStatus() {
@@ -101,7 +103,7 @@ void FormFriends::updateIcons() {
 #define SystemEnd }
 
 #define Filter {
-void FormFriends::comboBoxStatus_Activated(int aIndex) {
+void FormFriends::comboBoxStatus_Activated(const int &aIndex) {
     filterFriends_.setStatus(aIndex == 0 ? "" : ui->comboBoxStatus->currentText());
 }
 
@@ -113,7 +115,7 @@ void FormFriends::buttonFind_Clicked() {
     lineEditName_TextChanged(ui->lineEditName->text());
 }
 
-void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
+void FormFriends::checkBoxFavorites_StateChanged(const int &arg1) {
     switch (arg1) {
     case 0: {
         filterFriends_.clearFavorites();
@@ -158,6 +160,7 @@ QMenu *FormFriends::createMenu(const SFriendProfile &aProfile) {
                     auto curFriend = currentFriend();
                     FavoriteProfiles favoriteFriends;
                     favoriteFriends.remove(curFriend.steamProfile.steamId());
+                    emit s_settingsUpdated(changedSettings::favorites);
                 });
     } else {
         actionFavorites->setText(QObject::tr("Добавить в избранное"));
@@ -166,6 +169,7 @@ QMenu *FormFriends::createMenu(const SFriendProfile &aProfile) {
                     auto curFriend = currentFriend();
                     FavoriteProfiles favoriteFriends;
                     favoriteFriends.append(FavoriteProfile(curFriend.steamProfile.steamId()));
+                    emit s_settingsUpdated(changedSettings::favorites);
                 });
     }
 

@@ -3,6 +3,7 @@
 
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
+#include <QAbstractTableModel>
 
 namespace gamesWithPercentModel {
     enum Columns {

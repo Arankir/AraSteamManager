@@ -21,7 +21,7 @@ public:
     void setFramelessWindow(FramelessWindow *window);
     FramelessWindow *window();
 
-    bool setStatus(const QString &statusName = "", int progress = 0, int maxProgress = 0);
+    bool setStatus(const QString &statusName = "", const int &progress = 0, const int &maxProgress = 0);
     bool clearStatus();
 
 signals:
@@ -30,8 +30,8 @@ signals:
     void s_settingsUpdated(QFlags<changedSettings>);
 
 private:
-    bool _isRoot = false;
-    class FramelessWindow *_framelessWindow = nullptr;
+    bool isRoot_ = false;
+    class FramelessWindow *framelessWindow_ = nullptr;
 
     FramelessWindow *formParent();
 };

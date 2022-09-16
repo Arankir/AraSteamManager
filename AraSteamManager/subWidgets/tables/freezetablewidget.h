@@ -52,10 +52,8 @@
 #define FREEZETABLEWIDGET_H
 
 #include <QTableView>
-#include <QStandardItemModel>
-#include "subWidgets/models/filters.h"
+//#include <QStandardItemModel>
 
-//! [Widget definition]
 class FreezeTableWidget : public QTableView {
      Q_OBJECT
 
@@ -70,19 +68,18 @@ public:
 protected:
       void resizeEvent(QResizeEvent *event) override;
       QModelIndex moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override;
-      void scrollTo (const QModelIndex & index, ScrollHint hint = EnsureVisible) override;
+      void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible) override;
 
 private slots:
-      void updateSectionWidth(int logicalIndex, int oldSize, int newSize);
-      void updateSectionHeight(int logicalIndex, int oldSize, int newSize);
+      void updateSectionWidth(const int &logicalIndex, const int &oldSize, const int &newSize);
+      void updateSectionHeight(const int &logicalIndex, const int &oldSize, const int &newSize);
 
 private:
       void initFreezeTable();
       void updateFrozenTableGeometry();
 
-      QAbstractItemModel *proxyModel;
-      QTableView *frozenTableView;
+      QAbstractItemModel *proxyModel_;
+      QTableView *frozenTableView_;
 
 };
-//! [Widget definition]
 #endif // FREEZETABLEWIDGET_H

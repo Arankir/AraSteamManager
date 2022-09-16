@@ -7,12 +7,11 @@
 class SFriend : public Sapi {
     Q_OBJECT
 public:
-    SFriend(const QJsonObject &aFriend = QJsonObject(), QObject *parent = nullptr);
-    SFriend(const SFriend &aFriend);
+    SFriend(const QJsonObject &object = QJsonObject(), QObject *parent = nullptr);
+    SFriend(const SFriend &steamFriend);
 
     QJsonObject toJson() const;
-    virtual QString className() const {return "SFriend";}
-    static QList<SFriend> load(const ProfileID &aId, std::function<void (QList<SFriend>)> aCallback = nullptr);
+    static QList<SFriend> load(const ProfileID &profileId, std::function<void (QList<SFriend>)> callback = nullptr);
     SFriend &operator=(const SFriend&);
     bool operator<(const SFriend&) const;
     bool operator>(const SFriend&) const;
@@ -23,7 +22,7 @@ public:
     QString relationship()  const;
     QDateTime friendSince() const;
 
-    static QStringList getFriendsSteamId(const ProfileID &id);
+    static QStringList getFriendsSteamId(const ProfileID &profileId);
 
 private:
     ProfileID steamId_;
@@ -35,8 +34,8 @@ private:
 using SFriends = QList<SFriend>;
 
 struct SFriendProfile {
-    SFriendProfile(const SFriend &aFriend, const SProfile &aProfile);
-    SFriendProfile(const SProfile &aProfile, const SFriend &aFriend);
+    SFriendProfile(const SFriend &steamFriend, const SProfile &profile);
+    SFriendProfile(const SProfile &profile, const SFriend &steamFriend);
     SFriend steamFriend;
     SProfile steamProfile;
 };

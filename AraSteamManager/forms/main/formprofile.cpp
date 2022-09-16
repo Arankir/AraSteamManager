@@ -1,6 +1,10 @@
 #include "formprofile.h"
 #include "ui_formprofile.h"
 #include "subWidgets/labels/labellight.h"
+#include "classes/steamApi/structures/sbans.h"
+#include "classes/steamApi/structures/sprofilecustomization.h"
+#include "classes/steamApi/structures/sbadge.h"
+#include "classes/common/images.h"
 
 #include <QPainter>
 #include <QSpacerItem>
@@ -46,6 +50,18 @@ FormProfile::FormProfile(const SProfile &aProfile, QWidget *aParent) : Form(aPar
 
 FormProfile::~FormProfile() {
     delete ui;
+}
+
+SProfile FormProfile::getProfile() const {
+    return profile_;
+}
+
+SGames FormProfile::getGames() const {
+    return games_;
+}
+
+SFriends FormProfile::getFriends() const {
+    return friends_;
 }
 
 void FormProfile::profileToUi(const SProfile &aProfile) {
@@ -129,6 +145,7 @@ void FormProfile::setFriends(const ProfileID &aSteamId) {
 void FormProfile::setMinimizeInfo(const SProfile &aProfile) {
     ui->LabelAvatarMinimize->setPixmap(aProfile.getAvatarWithFrame(QSize(32, 32) * c_frameLargerBy));
     ui->LabelNameMinimize->setText(aProfile.personaName());
+
     isMinimizeInit_ = true;
 }
 
@@ -479,7 +496,6 @@ void FormProfile::updateVisibleInfo() {
 
     ui->LabelNameMinimize       ->setVisible(visibleInfo_ == 0);
     ui->LabelAvatarMinimize     ->setVisible(visibleInfo_ == 0);
-    ui->LabelAvatarMinimize->setPixmap(ui->LabelAvatarMinimize->pixmap().scaled(23, 23));
     ui->FrameProfileBaseInfo    ->setVisible(visibleInfo_ >= 1);
     ui->FrameProfileMaximumInfo ->setVisible(visibleInfo_ >= 2);
 

@@ -27,13 +27,14 @@ private:
 
 class HiddenGames: public QList<HiddenGame>, public FileSaveLoad {
 public:
-    HiddenGames(const ProfileID &profile = "", const bool &isIncludeAll = false);
-    bool isGameExist(const GameID &aGame);
+    HiddenGames(const ProfileID &profileId = "", const bool &isIncludeAll = false);
+    void remove(const GameID &gameId);
+    bool isGameExist(const GameID &gameId);
 
 private:
     void load(const ProfileID &);
     QJsonObject toJson() const override;
-    void fromJson(const QJsonObject &aObject) override;
+    void fromJson(const QJsonObject &object) override;
 
     ProfileID profile_;
 };

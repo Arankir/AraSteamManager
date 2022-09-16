@@ -14,6 +14,14 @@ savePath_(aSave), isAutoSave_(aAutoSave) {
     }
 }
 
+QPixmap RequestImage::pixmap() const {
+    return pixmap_;
+}
+
+QString RequestImage::error() {
+    return error_;
+}
+
 void RequestImage::onLoad(RequestData *aImage) {
     pixmap_.loadFromData(aImage->reply());
     if (Settings::saveImages() == 1 && isAutoSave_) {
@@ -39,6 +47,16 @@ RequestImageToLabel::RequestImageToLabel(QLabel *aLabel, const QString &aUrl, co
         label_->movie()->setScaledSize(label_->size());
         label_->movie()->start();
     }
+}
+
+RequestImageToLabel::RequestImageToLabel(QLabel *label, const QString &url, const bool &parallel, QObject *parent):
+    RequestImageToLabel(label, url, "", false, parallel, parent) {
+
+}
+
+RequestImageToLabel::RequestImageToLabel(QLabel *label, const QString &url, QObject *parent):
+    RequestImageToLabel(label, url, "", false, true, parent) {
+
 }
 
 void RequestImageToLabel::onLoad() {

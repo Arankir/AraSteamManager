@@ -17,12 +17,19 @@ struct ThemeColor {
 
     ~ThemeColor();
 
-    void setColor(const QColor&, QGradient *gradient = nullptr);
-    void setGradient(QGradient gradient);
+    Q_PROPERTY(QColor color READ getColor WRITE setColor)
+
     QColor getColor();
+    void setColor(const QColor&, QGradient *gradient = nullptr);
+
     QGradient *getGradient();
-    void setString(const QString&);
+    void setGradient(QGradient gradient);
+
+    Q_PROPERTY(QString string READ getString WRITE setString)
+
     QString getString();
+    void setString(const QString&);
+
     ThemeColor &setAlpha(int alpha);
 
     ThemeColor &swapPartColor(PartColor part1, PartColor part2);

@@ -1,19 +1,19 @@
 #include "qlistwidgetachievement.h"
 
 QListWidgetAchievement::QListWidgetAchievement(const SAchievement &aAchievement): QListWidgetItem() {
-    _achievement = new SAchievement(aAchievement);
+    achievement_ = new SAchievement(aAchievement);
 }
 
 QListWidgetAchievement::~QListWidgetAchievement() {
-    delete _achievement;
+    delete achievement_;
 }
 
 QListWidgetAchievement &QListWidgetAchievement::operator=(const QListWidgetAchievement &aItem) {
     QListWidgetItem::operator=(aItem);
-    _achievement = aItem._achievement;
+    achievement_ = aItem.achievement_;
     return *this;
 }
 
 bool QListWidgetAchievement::operator==(const QListWidgetAchievement &aItem) {
-    return (_achievement == aItem._achievement);
+    return (achievement_ == aItem.achievement_);
 }

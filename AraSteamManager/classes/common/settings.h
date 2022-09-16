@@ -3,21 +3,16 @@
 
 #include <QDebug>
 #include <QSettings>
-//#include <QLoggingCategory>
-
-//Q_DECLARE_LOGGING_CATEGORY(logDebug)
-//Q_DECLARE_LOGGING_CATEGORY(logInfo)
-//Q_DECLARE_LOGGING_CATEGORY(logFunc)
-//Q_DECLARE_LOGGING_CATEGORY(logWarning)
-//Q_DECLARE_LOGGING_CATEGORY(logCritical)
 
 enum changedSettings {
-    myProfile = 0x01,
-    language = 0x02,
-    theme = 0x04,
-    saveImages = 0x08,
-    visibleHiddenGame = 0x10,
-    profileInfo = 0x20
+    myProfile           = 0x01,
+    language            = 0x02,
+    theme               = 0x04,
+    saveImages          = 0x08,
+    visibleHiddenGame   = 0x10,
+    profileInfo         = 0x20,
+    favorites           = 0x40,
+    hiddenGame          = 0x80
 };
 
 class Settings {
@@ -87,7 +82,7 @@ public:
     static QString imagesProfiles(const QString &url, const QString &aFormat = "jpg");
     static QString imagesAchievements(const QString &gameId, const QString &url = "");
     static QString imagesGames(const QString &url);
-    static QString commentsGames(const QString &profileId);
+    static QString commentsGames(const QString &profileId = "");
     static QString commentsAchievements(const QString &aProfileId = "");
 };
 

@@ -11,7 +11,7 @@ public:
     GroupGames(const QJsonObject &object);
 
     GroupGames &addGame(const SGame &game);
-    GroupGames &removeGame(const GameID &aGame);
+    GroupGames &removeGame(const GameID &gameId);
     GroupGames &changeTitle(const QString &title);
     QJsonObject toJson() const;
 
@@ -34,7 +34,7 @@ public:
     void addGroup(const QString &title);
     void removeGroup(const QString &title);
     QJsonObject toJson() const override;
-    void update(const ProfileID &aId);
+    void update(const ProfileID &profileId);
 
 private:
     void init();

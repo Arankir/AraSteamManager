@@ -1,4 +1,5 @@
 #include "sfriends.h"
+
 #include <QJsonDocument>
 #include <QJsonArray>
 

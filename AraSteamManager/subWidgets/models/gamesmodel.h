@@ -67,9 +67,9 @@ public:
     GamesModel *sourceModel() const;
     void setSourceModel(GamesModel *sourceModel);
 
-    SGame getGame(int index);
-    QStringList getGameComment(int index);
-    QList<SAchievementPlayer> getGameAchievements(int index);
+    SGame getGame(const int &index);
+    QStringList getGameComment(const int &index);
+    QList<SAchievementPlayer> getGameAchievements(const int &index);
 
 signals:
     void s_modelFinished();
@@ -86,7 +86,7 @@ public slots:
     void clear();
 
 private:
-    void setSourceModel(QAbstractItemModel *sourceModel);;
+    void setSourceModel(QAbstractItemModel *sourceModel);
 
     QString name_;
     QSet<GameID> hide_;

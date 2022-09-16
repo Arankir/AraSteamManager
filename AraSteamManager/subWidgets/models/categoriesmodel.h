@@ -1,7 +1,7 @@
 #ifndef CATEGORIESMODEL_H
 #define CATEGORIESMODEL_H
 
-#include <QStandardItemModel>
+#include <QAbstractItemModel>
 #include "classes/files/category.h"
 
 class CategoriesModel : public QAbstractItemModel {

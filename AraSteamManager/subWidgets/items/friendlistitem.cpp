@@ -2,10 +2,10 @@
 
 using namespace FriendListItemData;
 
-FriendListItem::FriendListItem(const SProfile &aProfile, FriendListItemData::ProfileType aType):
-    QStandardItem{aProfile.pixmapAvatar(), aProfile.personaName()},
-    profile_{aProfile},
-    profileType_{aType} {
+FriendListItem::FriendListItem(const SProfile &profile, const ProfileType &type):
+    QStandardItem{profile.pixmapAvatar(), profile.personaName()},
+    profile_{profile},
+    profileType_{type} {
 
 }
 

@@ -441,7 +441,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_9">
        <item>
-        <widget class="QSplitter" name="splitter">
+        <widget class="QSplitter" name="splitterGraph">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>

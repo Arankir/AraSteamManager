@@ -242,7 +242,7 @@ void FavoriteGames::append(const FavoriteGame &aGame) {
     save();
 }
 
-void FavoriteGames::remove(const QString &aProfileId, const GameID &aGame) {
+void FavoriteGames::remove(const ProfileID &aProfileId, const GameID &aGame) {
     auto iterator = std::remove_if(begin(),
                                    end(),
                                    [=](const FavoriteGame &game) {

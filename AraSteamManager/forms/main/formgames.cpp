@@ -1,5 +1,14 @@
 #include "formgames.h"
 #include "ui_formgames.h"
+#include "forms/formgroups.h"
+#include "forms/formcomments.h"
+#include "classes/common/generalfunctions.h"
+#include "classes/files/favorites.h"
+#include "classes/files/hiddengames.h"
+#include "classes/common/images.h"
+
+#include <QMessageBox>
+#include <QMenu>
 
 #define Init {
 FormGames::FormGames(QWidget *aParent): Form(aParent), ui(new Ui::FormGames) {
@@ -11,7 +20,7 @@ void FormGames::init() {
     initingTable(ui->tableGames);
     auto games = new GamesModel(this);
     connect(games, &GamesModel::s_progress, this, &Form::setStatus);
-    connect(&_filterGames, &FilterModelGames::s_modelFinished, this, [&]() {
+    connect(&filterGames_, &FilterModelGames::s_modelFinished, this, [&]() {
         ui->tableGames->sortByColumn(gamesModel::Name, Qt::SortOrder::AscendingOrder);
         ui->tableGames->resizeColumnsToContents();
         if (ui->tableGames->columnWidth(gamesModel::Name) > 200) {
@@ -28,9 +37,9 @@ void FormGames::init() {
     });
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 10);
-    _filterGames.setDynamicSortFilter(true);
-    _filterGames.setSourceModel(games);
-    ui->tableGames->setModel(&_filterGames);
+    filterGames_.setDynamicSortFilter(true);
+    filterGames_.setSourceModel(games);
+    ui->tableGames->setModel(&filterGames_);
     ui->tableGames->setColumnHidden(gamesModel::Appid, true);
     ui->tableGames->setColumnHidden(gamesModel::Index, true);
     updateIcons();
@@ -49,7 +58,7 @@ void FormGames::init() {
             buttonAchievements_Clicked();
         }
     });
-    connect(&_filterGames, &FilterModel::s_rowsUpdated, this, [&]() {
+    connect(&filterGames_, &FilterModel::s_rowsUpdated, this, [&]() {
         ui->tableGames->resizeRowsToContents();
     });
 #define ConnectsEnd }
@@ -57,14 +66,14 @@ void FormGames::init() {
 
 void FormGames::setGames(const ProfileID &aProfileId) {
     clear();
-    _steamId = aProfileId;
-    _filterGames.sourceModel()->setGames(SGame::load(_steamId, true, true), _steamId);
+    profileId_ = aProfileId;
+    filterGames_.sourceModel()->setGames(SGame::load(profileId_, true, true), profileId_);
 }
 
 void FormGames::setGames(const ProfileID &aProfileId, const SGames &aGames) {
     clear();
-    _steamId = aProfileId;
-    _filterGames.sourceModel()->setGames(aGames, _steamId);
+    profileId_ = aProfileId;
+    filterGames_.sourceModel()->setGames(aGames, profileId_);
 }
 #define InitEnd }
 
@@ -74,24 +83,24 @@ int FormGames::currentIndex() {
 }
 
 SGame FormGames::currentGame() {
-    return _filterGames.getGame(currentIndex());
+    return filterGames_.getGame(currentIndex());
 }
 
 SGames FormGames::currentGames() {
     auto selected = ui->tableGames->selectionModel()->selectedRows();
     SGames games;
     for (const auto &select: selected) {
-        games << _filterGames.getGame(ui->tableGames->model()->data(select.siblingAtColumn(gamesModel::Index)).toInt());
+        games << filterGames_.getGame(ui->tableGames->model()->data(select.siblingAtColumn(gamesModel::Index)).toInt());
     }
     return games;
 }
 
 QStringList FormGames::currentComment() {
-    return _filterGames.getGameComment(currentIndex());
+    return filterGames_.getGameComment(currentIndex());
 }
 
 QList<SAchievementPlayer> FormGames::currentAchievements() {
-    return _filterGames.getGameAchievements(currentIndex());
+    return filterGames_.getGameAchievements(currentIndex());
 }
 #define FindDataInTableEnd }
 
@@ -108,58 +117,64 @@ void FormGames::updateSettings(QFlags<changedSettings> aSettings) {
     if (aSettings.testFlag(changedSettings::visibleHiddenGame)) {
         updateHiddenGames();
     }
-    Form::updateSettings(aSettings);
+    if (aSettings.testFlag(changedSettings::hiddenGame)) {
+        updateHiddenGames();
+    }
+    if (aSettings.testFlag(changedSettings::theme)) {
+        updateIcons();
+    }
 }
 
 void FormGames::updateIcons() {
     ui->buttonFind->setIcon(QIcon(Images::find()));
 }
 
-void FormGames::setEnable(bool isEnable) {
+void FormGames::setEnable(const bool &isEnable) {
     ui->frameFilter->setEnabled(isEnable);
     ui->tableGames->setEnabled(isEnable);
 }
 
 bool FormGames::isInit() {
-    return ((_steamId != "") && (_filterGames.sourceModel()->rowCount() > 0));
+    return ((profileId_ != "") && (filterGames_.sourceModel()->rowCount() > 0));
 }
 
 void FormGames::updateGroups() {
     ui->comboBoxGroups->clear();
-    GroupsGames groups(_steamId);
+    GroupsGames groups(profileId_);
     for(const auto &group: groups) {
         ui->comboBoxGroups->addItem(group.title());
     }
 }
 
 void FormGames::updateHiddenGames() {
-    HiddenGames hiddenGames(_steamId, true);
+    HiddenGames hiddenGames(profileId_, true);
     QSet<GameID> hiddens;
     for (const auto &hide: hiddenGames) {
         hiddens.insert(hide.id());
     }
-    _filterGames.setHide(hiddens);
+    qDebug() << 1 << hiddens;
+    filterGames_.setHide(hiddens);
 }
 
 void FormGames::clear() {
-    _filterGames.clear();
-    _steamId = "";
+    filterGames_.clear();
+    profileId_ = "";
 }
 #define SystemEnd }
 
 #define Filter {
 void FormGames::lineEditGame_TextChanged(const QString &aFindText) {
-    _filterGames.setName(aFindText);
+    filterGames_.setName(aFindText);
 }
 
 void FormGames::buttonFind_Clicked() {
     lineEditGame_TextChanged(ui->lineEditGame->text());
 }
 
-void FormGames::checkBoxFavorites_StateChanged(int arg1) {
-    switch (arg1) {
+void FormGames::checkBoxFavorites_StateChanged(const int &state) {
+    switch (state) {
     case 0: {
-        _filterGames.clearFavorites();
+        filterGames_.clearFavorites();
         break;
     }
     case 2: {
@@ -171,7 +186,7 @@ void FormGames::checkBoxFavorites_StateChanged(int arg1) {
                                                      lSet.insert(lGame.appId());
                                                      return lSet;
                                                  });
-        _filterGames.setFavorites(favorites);
+        filterGames_.setFavorites(favorites);
         break;
     }
     }
@@ -181,7 +196,7 @@ void FormGames::updateGroupsFilter() {
     QStringList selectedGroups = ui->comboBoxGroups->currentText();
     if (selectedGroups.count() > 0 &&
         selectedGroups != QStringList{""}) {
-        GroupsGames groups(_steamId);
+        GroupsGames groups(profileId_);
         QSet<GameID> gameInGroup = std::accumulate(selectedGroups.begin(),
                                                    selectedGroups.end(),
                                                    QSet<GameID>(),
@@ -203,9 +218,9 @@ void FormGames::updateGroupsFilter() {
                                                             }
                                                         return lSet;
                                                     });
-        _filterGames.setGroup(gameInGroup);
+        filterGames_.setGroup(gameInGroup);
     } else {
-        _filterGames.clearGroup();
+        filterGames_.clearGroup();
     }
 }
 #define FilterEnd }
@@ -222,19 +237,21 @@ QMenu *FormGames::createMenu(const SGame &aGame) {
                                     favorites.cend(),
                                     [&](FavoriteGame curGame) {
                                         return curGame.appId() == aGame.appId() &&
-                                                curGame.steamId() == _steamId;
+                                                curGame.steamId() == profileId_;
                                     });
     if(isGameFavorite) {
         actionFavorites = new QAction(QIcon(Images::isFavorites()), tr("Удалить из избранного"), this);
         actionFavorites->setObjectName("RemoveFavorite");
         connect (actionFavorites,       &QAction::triggered,    this,   [&](){
-            FavoriteGames().remove(_steamId, currentGame().appId());
+            FavoriteGames().remove(profileId_, currentGame().appId());
+            emit s_settingsUpdated(changedSettings::favorites);
         });
     } else {
         actionFavorites = new QAction(QIcon(Images::isNotFavorites()), tr("Добавить в избранное"), this);
         actionFavorites->setObjectName("AddFavorite");
         connect (actionFavorites,       &QAction::triggered,    this,   [&](){
-            FavoriteGames().append(FavoriteGame(_steamId, currentGame()));
+            FavoriteGames().append(FavoriteGame(profileId_, currentGame()));
+            emit s_settingsUpdated(changedSettings::favorites);
         });
     }
 
@@ -278,7 +295,7 @@ void FormGames::buttonHide_Clicked() {
 
     auto curGame = currentGame();
     if(question.clickedButton() == btnProfile) {
-        HiddenGames profile(_steamId);
+        HiddenGames profile(profileId_);
         if (profile.isGameExist(curGame.appId())) {
             profile.removeIf([=](const HiddenGame &lGame) {
                 return lGame.id() == curGame.appId();
@@ -302,6 +319,7 @@ void FormGames::buttonHide_Clicked() {
         all.save();
     }
 
+    emit s_settingsUpdated(changedSettings::hiddenGame);
     updateHiddenGames();
 
     delete btnProfile;
@@ -310,8 +328,8 @@ void FormGames::buttonHide_Clicked() {
 
 void FormGames::showGroupsEdit() {
     FormGroups *groups = new FormGroups(this);
-    groups->setObjectName(QString("Groups%1").arg(_steamId));
-    groups->setProfileGames(_steamId, currentGames());
+    groups->setObjectName(QString("Groups%1").arg(profileId_));
+    groups->setProfileGames(profileId_, currentGames());
     groups->setAttribute( Qt::WA_DeleteOnClose );
     QFrame *frame = createSubForm<FormGroups>(groups, this);
     connect(groups, &FormGroups::s_updateGroups,    this, &FormGames::updateGroups);
@@ -325,12 +343,12 @@ void FormGames::showGroupsEdit() {
 
 void FormGames::showCommentsEdit() {
     FormComments *comments = new FormComments(this);
-    comments->setObjectName(QString("Comments%1").arg(_steamId));
-    comments->setData(_steamId, currentGame());
+    comments->setObjectName(QString("Comments%1").arg(profileId_));
+    comments->setData(profileId_, currentGame());
     comments->setAttribute( Qt::WA_DeleteOnClose );
     QFrame *frame = createSubForm<FormComments>(comments, this);
 
-    connect(comments, &FormComments::s_updateComments,  _filterGames.sourceModel(), &GamesModel::updateComments);
+    connect(comments, &FormComments::s_updateComments,  filterGames_.sourceModel(), &GamesModel::updateComments);
     connect(comments, &FormComments::s_closed,          this,                       [this, frame](){
         setEnable(true);
         delete frame->layout();

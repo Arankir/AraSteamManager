@@ -1,15 +1,9 @@
 #ifndef FORMPROFILE_H
 #define FORMPROFILE_H
 
-#include <QWidget>
-#include <QGraphicsDropShadowEffect>
+#include "form.h"
 #include "classes/steamApi/structures/sprofile.h"
-#include "classes/steamApi/structures/sbans.h"
-#include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sfriends.h"
-#include "classes/steamApi/structures/sprofilecustomization.h"
-#include "classes/steamApi/structures/sbadge.h"
-#include "classes/network/requestimage.h"
 
 namespace Ui {
 class FormProfile;
@@ -21,9 +15,9 @@ class FormProfile : public Form {
 public:
     explicit FormProfile(const SProfile &profile, QWidget *parent = nullptr);
     ~FormProfile() override;
-    SProfile getProfile() const {return profile_;}
-    SGames getGames() const {return games_;}
-    QList<SFriend> getFriends() const {return friends_;}
+    SProfile getProfile() const;
+    SGames getGames() const;
+    SFriends getFriends() const;
 
 public slots:
     void profileToUi(const SProfile &profile);
@@ -31,7 +25,7 @@ public slots:
     void updateVisibleInfo();
     void updateInfo();
     void retranslate() override;
-    void updateSettings(QFlags<changedSettings> aSettings) override;
+    void updateSettings(QFlags<changedSettings> settings) override;
 
 signals:
     void s_goToGames(const ProfileID &profileId);
@@ -40,21 +34,21 @@ signals:
     void s_goToFavorites();
 
 protected slots:
-    void setMinimizeInfo(const SProfile &aProfile);
-    void setBaseInfo(const SProfile &aProfile);
-    void setMaximizeInfo(const SProfile &aProfile);
+    void setMinimizeInfo(const SProfile &profile);
+    void setBaseInfo(const SProfile &profile);
+    void setMaximizeInfo(const SProfile &profile);
 private slots:
-    void setLvl(const ProfileID &aSteamId);
+    void setLvl(const ProfileID &profileId);
     void setOnlineStatus();
-    void setGames(const ProfileID &aSteamId);
-    void setFriends(const ProfileID &aSteamId);
+    void setGames(const ProfileID &profileId);
+    void setFriends(const ProfileID &profileId);
     void setProfileStatus();
 
-    void setCommonInfo(const SProfile &aProfile);
-    void setBans(const ProfileID &aSteamId);
-    void setBadges(const ProfileID &aSteamId);
-    void setTimePlayed(const SGames &aGames);
-    void setCustomizations(const ProfileID &aSteamId);
+    void setCommonInfo(const SProfile &profile);
+    void setBans(const ProfileID &profileId);
+    void setBadges(const ProfileID &profileId);
+    void setTimePlayed(const SGames &games);
+    void setCustomizations(const ProfileID &profileId);
 
     void buttonSetProfile_Clicked();
     void buttonGames_Clicked();
@@ -63,13 +57,13 @@ private slots:
 
     void updateIcons() override;
     void updateMyProfile();
-    void setColorStatus(const QColor &aColor);
+    void setColorStatus(const QColor &color);
 
 private:
     Ui::FormProfile *ui;
     SProfile profile_;
     SGames games_;
-    QList<SFriend> friends_;
+    SFriends friends_;
     int visibleInfo_;
 
     bool isMinimizeInit_ = false;

@@ -68,21 +68,16 @@ SOURCES += \
     forms/main/formsettings.cpp \
     forms/main/formstatistics.cpp \
     subWidgets/charts/achievementcompletedpiechart.cpp \
-    subWidgets/charts/achievementcountchart.cpp \
     subWidgets/charts/piechart.cpp \
     subWidgets/collapsablewidget.cpp \
-    subWidgets/items/categoryitem.cpp \
     subWidgets/items/friendlistitem.cpp \
     subWidgets/lineEdit/mylineedit.cpp \
     framelesswindow.cpp \
         main.cpp \
     subWidgets/actions/actioncategory.cpp \
     subWidgets/comboBoxes/multiselectcombobox.cpp \
-    subWidgets/comboBoxes/qcomboboxfriends.cpp \
-    subWidgets/comboBoxes/qcomboboxfriendswithgame.cpp \
     subWidgets/delegates/progressbardelegate.cpp \
     subWidgets/items/qlistwidgetachievement.cpp \
-    subWidgets/items/qlistwidgetfriend.cpp \
     subWidgets/labels/labellight.cpp \
     subWidgets/labels/labelvalue.cpp \
     subWidgets/lists/qlistwidgetachievements.cpp \
@@ -92,7 +87,6 @@ SOURCES += \
     subWidgets/models/friendsmodel.cpp \
     subWidgets/models/gamesmodel.cpp \
     subWidgets/models/gameswithpercentmodel.cpp \
-    subWidgets/models/listachievementsmodel.cpp \
     subWidgets/progressBars/progressbarbad.cpp \
     subWidgets/progressBars/progressbargood.cpp \
     subWidgets/progressBars/progressbarlight.cpp \
@@ -144,20 +138,15 @@ HEADERS += \
     forms/main/formsettings.h \
     forms/main/formstatistics.h \
     subWidgets/charts/achievementcompletedpiechart.h \
-    subWidgets/charts/achievementcountchart.h \
     subWidgets/charts/piechart.h \
     subWidgets/collapsablewidget.h \
-    subWidgets/items/categoryitem.h \
     subWidgets/items/friendlistitem.h \
     subWidgets/lineEdit/mylineedit.h \
     framelesswindow.h \
     subWidgets/actions/actioncategory.h \
     subWidgets/comboBoxes/multiselectcombobox.h \
-    subWidgets/comboBoxes/qcomboboxfriends.h \
-    subWidgets/comboBoxes/qcomboboxfriendswithgame.h \
     subWidgets/delegates/progressbardelegate.h \
     subWidgets/items/qlistwidgetachievement.h \
-    subWidgets/items/qlistwidgetfriend.h \
     subWidgets/labels/labellight.h \
     subWidgets/labels/labelvalue.h \
     subWidgets/lists/qlistwidgetachievements.h \
@@ -167,7 +156,6 @@ HEADERS += \
     subWidgets/models/friendsmodel.h \
     subWidgets/models/gamesmodel.h \
     subWidgets/models/gameswithpercentmodel.h \
-    subWidgets/models/listachievementsmodel.h \
     subWidgets/progressBars/progressbarbad.h \
     subWidgets/progressBars/progressbargood.h \
     subWidgets/progressBars/progressbarlight.h \

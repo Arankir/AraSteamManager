@@ -1,5 +1,4 @@
 #include "categoriesmodel.h"
-#include "subWidgets/items/categoryitem.h"
 
 #include <QMimeData>
 #include <QModelIndex>

@@ -14,7 +14,7 @@ class QListWidgetAchievements : public QListWidget {
     Q_OBJECT
 public:
     QListWidgetAchievements(QWidget *parent = nullptr);
-    void insertAchievement(const SAchievement &aAchievement, const GameID &aGameId, int aRow = -1);
+    void insertAchievement(const SAchievement &achievement, const GameID &gameId, const int &row = -1);
 
 protected:
     void startDrag(Qt::DropActions supportedActions) override;
@@ -23,7 +23,7 @@ protected:
     void dragLeaveEvent(QDragLeaveEvent *event) override;
 
 private:
-    void dropInsert(const SAchievement &aAchievement, int aRow, const QMap<int, QVariant> &aRoleData);
+    void dropInsert(const SAchievement &achievement, const int &row, const QMap<int, QVariant> &roleData);
 };
 
 #endif // QLISTWIDGETACHIEVEMENTS_H

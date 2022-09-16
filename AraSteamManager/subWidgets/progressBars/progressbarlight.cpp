@@ -1,47 +1,26 @@
 #include "progressbarlight.h"
 
 ProgressBarLight::ProgressBarLight(QWidget *aParent): QProgressBar(aParent) {
-    _light = new QGraphicsDropShadowEffect;
-    _light->setColor(QColor(93, 170, 224, 255 * 0.7));
-    _light->setOffset(0);
-    _light->setBlurRadius(50);
-    setGraphicsEffect(_light);
+    light_ = new QGraphicsDropShadowEffect;
+    light_->setColor(QColor(93, 170, 224, 255 * 0.7));
+    light_->setOffset(0);
+    light_->setBlurRadius(50);
+    setGraphicsEffect(light_);
 }
 
 ProgressBarLight::~ProgressBarLight() {
-    delete _light;
+    delete light_;
 }
 
-ProgressBarLight &ProgressBarLight::setColor(int aRed, int aGreen, int aBlue, int aAlpha) {
-    if (aRed > 255) {
-        aRed = 255;
-    }
-    if (aGreen > 255) {
-        aGreen = 255;
-    }
-    if (aBlue > 255) {
-        aBlue = 255;
-    }
-    if (aAlpha > 255) {
-        aAlpha = 255;
-    }
-    if (aRed < 0) {
-        aRed = 0;
-    }
-    if (aGreen < 0) {
-        aGreen = 0;
-    }
-    if (aBlue < 0) {
-        aBlue = 0;
-    }
-    if (aAlpha < 0) {
-        aAlpha = 0;
-    }
-    _light->setColor(QColor(aRed, aGreen, aBlue, aAlpha));
+ProgressBarLight &ProgressBarLight::setColor(const int &aRed, const int &aGreen, const int &aBlue, const int &aAlpha) {
+    light_->setColor(QColor(std::min(std::max(aRed, 255), 0),
+                            std::min(std::max(aGreen, 255), 0),
+                            std::min(std::max(aBlue, 255), 0),
+                            std::min(std::max(aAlpha, 255), 0)));
     return *this;
 }
 
-ProgressBarLight &ProgressBarLight::setBlurRadius(int aRadius) {
-    _light->setBlurRadius(aRadius);
+ProgressBarLight &ProgressBarLight::setBlurRadius(const int &aRadius) {
+    light_->setBlurRadius(aRadius);
     return *this;
 }

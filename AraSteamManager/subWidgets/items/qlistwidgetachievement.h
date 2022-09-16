@@ -13,7 +13,7 @@ public:
     QListWidgetAchievement &operator=(const QListWidgetAchievement&);
     bool operator==(const QListWidgetAchievement&);
 
-    SAchievement *_achievement = nullptr;
+    SAchievement *achievement_ = nullptr;
 };
 
 #endif // QLISTWIDGETACHIEVEMENT_H

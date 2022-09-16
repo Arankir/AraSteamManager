@@ -1,4 +1,5 @@
 #include "sbans.h"
+
 #include <QJsonDocument>
 #include <QJsonArray>
 

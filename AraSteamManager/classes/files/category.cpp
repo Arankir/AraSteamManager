@@ -134,7 +134,7 @@ int Category::getIndex(Category *aCategory) {
     }
 }
 
-void Category::changeCategoryIndex(QString aCategory, int aIndex) {
+void Category::changeCategoryIndex(const QString &aCategory, int aIndex) {
     auto category = find(aCategory);
     if (category == nullptr) {
         return;

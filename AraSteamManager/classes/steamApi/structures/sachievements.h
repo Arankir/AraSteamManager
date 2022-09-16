@@ -17,8 +17,7 @@ public:
     bool  operator!=(const SAchievementSchema&) const;
      
     QJsonObject toJson() const;
-    virtual QString className() const {return "SAchievementSchema";}
-    static QList<SAchievementSchema> load(const GameID &gameid, std::function<void (QList<SAchievementSchema>)> callback = nullptr);
+    static QList<SAchievementSchema> load(const GameID &gameId, std::function<void (QList<SAchievementSchema>)> callback = nullptr);
 
     QPixmap icon     (GameID gameId)const;
     QPixmap iconGray (GameID gameId)const;
@@ -31,7 +30,7 @@ public:
     QString        iconGray()       const;
 
     void fromJson(const QJsonObject &aObject);
-    static QPixmap icon(const GameID &aGameId, const QString &aIconPath);
+    static QPixmap icon(const GameID &gameId, const QString &iconPath);
 private:
     AchievementID   apiName_;
     int             defaultValue_;
@@ -41,8 +40,8 @@ private:
     QString         icon_;
     QString         iconGray_;
 
-    mutable QImage pixmapIcon_;
-    mutable QImage pixmapIconGray_;
+    mutable QImage  pixmapIcon_;
+    mutable QImage  pixmapIconGray_;
 
 };
 class SAchievementPercentage : public Sapi {
@@ -58,13 +57,12 @@ public:
     bool  operator!=(const SAchievementPercentage&) const;
 
     QJsonObject toJson() const;
-    virtual QString className() const {return "SAchievementPercentage";}
-    static QList<SAchievementPercentage> load(const GameID &gameid, std::function<void (QList<SAchievementPercentage>)> callback = nullptr);
+    static QList<SAchievementPercentage> load(const GameID &gameId, std::function<void (QList<SAchievementPercentage>)> callback = nullptr);
 
     AchievementID apiName() const;
     double percent() const;
 
-    void fromJson(const QJsonObject &aObject);
+    void fromJson(const QJsonObject &object);
 private:
     AchievementID   apiName_;
     double          percent_;
@@ -84,8 +82,6 @@ public:
     bool  operator!=(const SAchievementPlayer&) const;
 
     QJsonObject toJson() const;
-    virtual QString className() const {return "SAchievementPlayer";}
-//    static QList<SAchievementPlayer> load(const GameID &gameid, const ProfileID &profileid, std::function<void (QList<SAchievementPlayer>)> callback = nullptr);
     static int countAchieved(const QList<SAchievementPlayer>&);
 
     AchievementID apiName() const;
@@ -94,19 +90,19 @@ public:
 
     const QString &error() const;
 
-    void fromJson(const QJsonObject &aObject);
+    void fromJson(const QJsonObject &object);
 private:
-    AchievementID apiName_ = "";
-    int       achieved_ = -1;
-    QDateTime unlockTime_;
-    QString error_;
+    AchievementID   apiName_ = "";
+    int             achieved_ = -1;
+    QDateTime       unlockTime_;
+    QString         error_;
 
 };
 
 class SAchievementsPlayer : public Sapi, public QList<SAchievementPlayer> {
     Q_OBJECT
 public:
-    SAchievementsPlayer(const GameID &gameid, const ProfileID &profileid, QObject *parent = nullptr);
+    SAchievementsPlayer(const GameID &gameid, const ProfileID &profileId, QObject *parent = nullptr);
     SAchievementsPlayer(const QJsonObject &achievement = QJsonObject(), QObject *parent = nullptr);
     SAchievementsPlayer(const SAchievementsPlayer&);
     SAchievementsPlayer &operator=(const SAchievementsPlayer&);
@@ -115,14 +111,13 @@ public:
     bool  operator==(const SAchievementsPlayer&) const;
     bool  operator!=(const SAchievementsPlayer&) const;
 
-    virtual QString className() const {return "SAchievementsPlayer";}
     QJsonObject toJson() const;
-    void update(const ProfileID &aProfileId);
+    void update(const ProfileID &profileId);
 
     const QString &error() const;
     bool success() const;
 
-    static SAchievementsPlayer load(const GameID &gameid, const ProfileID &profileid, std::function<void (SAchievementsPlayer)> callback = nullptr);
+    static SAchievementsPlayer load(const GameID &gameId, const ProfileID &profileId, std::function<void (SAchievementsPlayer)> callback = nullptr);
 
 private:
     void fromJson(const QJsonObject &object);
@@ -136,7 +131,6 @@ private:
 
 using SAchievementsSchema = QList<SAchievementSchema>;
 using SAchievementsPercentage = QList<SAchievementPercentage>;
-//using SAchievementsPlayer = QList<SAchievementPlayer>;
 
 class SAchievement : public Sapi {
     Q_OBJECT
@@ -151,21 +145,20 @@ public:
     bool          operator>(const SAchievement&) const;
     bool          operator==(const SAchievement&) const;
     bool          operator!=(const SAchievement&) const;
-    friend QDataStream & operator<< (QDataStream &arch, const SAchievement &object) {
-        arch << object.toJson();
-        return arch;
+    friend QDataStream &operator<<(QDataStream &stream, const SAchievement &achievement) {
+        stream << achievement.toJson();
+        return stream;
     }
 
-    friend QDataStream & operator>> (QDataStream &arch, SAchievement &object) {
+    friend QDataStream &operator>>(QDataStream &stream, SAchievement &achievement) {
         QJsonObject obj;
-        arch >> obj;
-        object.fromJson(obj);
-        return arch;
+        stream >> obj;
+        achievement.fromJson(obj);
+        return stream;
     }
 
     bool isValid() const;
     QJsonObject toJson() const;
-    virtual QString className() const {return "SAchievement";}
 
     QPixmap         icon     (GameID gameId)const;
     QPixmap         iconGray (GameID gameId)const;
@@ -180,7 +173,7 @@ public:
     QString         iconPath()              const;
     QString         iconGrayPath()          const;
 
-    void fromJson(const QJsonObject &aObject);
+    void fromJson(const QJsonObject &object);
 private:
     SAchievementSchema schema_;
     SAchievementPercentage percentage_;

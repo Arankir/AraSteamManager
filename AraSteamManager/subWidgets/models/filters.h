@@ -13,7 +13,7 @@ public:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 private:
-    QList<int> _rows;
+    QList<int> rows_;
 };
 
 class SortFilterProxyModelFreezeRow : public QSortFilterProxyModel {
@@ -29,33 +29,30 @@ private:
 class SortFilterProxyModelCategory : public QSortFilterProxyModel {
     Q_OBJECT
 public:
-    SortFilterProxyModelCategory(const QString &parentName, QObject *parent = nullptr): QSortFilterProxyModel(parent), _parent(parentName) {};
-    QString parentName() const {return _parent;}
+    SortFilterProxyModelCategory(const QString &parentName, QObject *parent = nullptr);;
+    QString parentName() const;
     void addCategory(const QString &name, const QStringList &apis);
     void removeCategory(const QString &name);
 
 private:
     void updateRegExp();
 
-    QString _parent;
-    QList<QPair<QString, QStringList>> _categories;
+    QString parent_;
+    QList<QPair<QString, QStringList>> categories_;
 };
 
 class QSortFilterProxyInvertModel : public QSortFilterProxyModel {
     Q_OBJECT
 public:
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override {
-        bool original = QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
-        return filterRegularExpression().pattern() == "()" ? original : !original;
-    };
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 };
 
 class Filter {
 public:
-    Filter(int rows = 0, int cols = 0);
-    bool operator[](int aRow) const;
-    void setData(int row, int col, bool aData);
+    Filter(const int &rows = 0, const int &cols = 0);
+    bool operator[](int row) const;
+    void setData(int row, int col, bool data);
     void setRows(int rows);
     void setCols(int cols);
     void insertRow(int row);
@@ -67,11 +64,11 @@ public:
     void clearCol(int col);
     void clear();
     QList<bool> enabledCols();
-    friend QDebug operator<<(QDebug dbg, const Filter &f) {
+    friend QDebug operator<<(QDebug dbg, const Filter &filter) {
         dbg.nospace() << "Filter" << "(";
-        for (int r = 0; r < f.rows_; ++r) {
-            for (int c = 0; c < f.cols_; ++c) {
-                dbg.nospace() << (f.filter_[r][c / 8] >> (c % 8));
+        for (int r = 0; r < filter.rows_; ++r) {
+            for (int c = 0; c < filter.cols_; ++c) {
+                dbg.nospace() << (filter.filter_[r][c / 8] >> (c % 8));
             }
             dbg.nospace() << "\n";
         }
@@ -89,7 +86,7 @@ private:
 class FilterModel : public QSortFilterProxyModel {
     Q_OBJECT
 public:
-    FilterModel(int row = 0, int col = 0, QObject *parent = nullptr): QSortFilterProxyModel(parent), filter_(row, col) {};
+    FilterModel(const int &row = 0, const int &col = 0, QObject *parent = nullptr);
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     void setSourceModel(QAbstractItemModel *sourceModel);
 

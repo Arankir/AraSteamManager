@@ -16,22 +16,22 @@ public:
     explicit CollapsableWidget(QWidget *parent = nullptr);
     void setContentLayout(QLayout &contentLayout);
     void setLayout(QLayout *layout);
-    void setTitle(const QString &aTitle);
+    void setTitle(const QString &title);
     QString title();
-    void setDuration(const int animationDuration);
+    void setDuration(const int &animationDuration);
     void updateHeights();
 public slots:
     void toggle(bool collapsed);
 
 private:
-    QGridLayout *mainLayout;
-    QToolButton *toggleButton;
-    QFrame *headerLine;
-    QParallelAnimationGroup *toggleAnimation;
-    QScrollArea *contentArea;
-    int animationDuration;
-    int collapsedHeight;
-    bool isExpanded = false;
+    QGridLayout *mainLayout_;
+    QToolButton *toggleButton_;
+    QFrame *headerLine_;
+    QParallelAnimationGroup *toggleAnimation_;
+    QScrollArea *contentArea_;
+    int animationDuration_;
+    int collapsedHeight_;
+    bool isExpanded_ = false;
 
 };
 

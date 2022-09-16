@@ -1,5 +1,9 @@
 #include "formprofilesbrowser.h"
 #include "ui_formprofilesbrowser.h"
+#include "classes/common/images.h"
+
+#include <QKeyEvent>
+#include <QMessageBox>
 
 FormProfilesBrowser::FormProfilesBrowser(QWidget *parent) :
     Form(parent),

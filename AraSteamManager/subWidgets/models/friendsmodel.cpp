@@ -1,4 +1,5 @@
 #include "friendsmodel.h"
+#include "classes/common/settings.h"
 
 using namespace friendsModel;
 
@@ -261,7 +262,7 @@ void FriendsModel::clear() {
     friends_.clear();
 }
 
-FilterModelFriends::FilterModelFriends(int aRow, QObject *aParent): FilterModel(aRow, 4, aParent),
+FilterModelFriends::FilterModelFriends(const int &aRow, QObject *aParent): FilterModel(aRow, 4, aParent),
     name_(""), status_(""), public_(), favorite_() {
     columns_.insert("name", 0);
     columns_.insert("status", 1);

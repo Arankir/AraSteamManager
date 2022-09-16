@@ -65,7 +65,7 @@ QString MultiSelectComboBox::getCurrentText() {
     return selectedData;
 }
 
-void MultiSelectComboBox::stateChanged(int aState) {
+void MultiSelectComboBox::stateChanged(const int &aState) {
     Q_UNUSED(aState);
     QString selectedData = getCurrentText();
     if (!selectedData.isEmpty()) {
@@ -117,7 +117,7 @@ void MultiSelectComboBox::onSearch(const QString& aSearchString) {
     }
 }
 
-void MultiSelectComboBox::itemClicked(int aIndex) {
+void MultiSelectComboBox::itemClicked(const int &aIndex) {
     if(aIndex != scSearchBarIndex) { // 0 means the search bar
         QWidget* widget = listWidget_->itemWidget(listWidget_->item(aIndex));
         QCheckBox *checkBox = static_cast<QCheckBox *>(widget);

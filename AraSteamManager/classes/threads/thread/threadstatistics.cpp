@@ -103,6 +103,22 @@ void ThreadStatistics::updateTimes(const QDateTime &aUnlockedTime) {
     }
 }
 
+ThreadStatistics::ThreadStatistics(Statistics &statistic): statistics_(statistic) {
+
+}
+
+ThreadStatistics::~ThreadStatistics() {
+    qInfo() << "Thread statistic deleted";
+}
+
+Statistics::Statistics(const SProfile &aProfile): profile(aProfile), games(SGame::load(aProfile.steamId(), true, true)) {
+
+}
+
+Statistics::Statistics() {
+
+}
+
 void Statistics::changeProfile(const SProfile &aProfile) {
     profile = aProfile;
     games = SGame::load(profile.steamId(), true, true);
@@ -148,4 +164,12 @@ void Statistics::sortAllLists() {
               [](const YearCount &p1, const YearCount &p2) {
                 return p1.year < p2.year;
               });
+}
+
+YearCount::YearCount(const QString &aYear, int aCount): year(aYear), count(aCount) {
+
+}
+
+CompletedAchievement::CompletedAchievement(SAchievementPlayer aAchievement, SGame aGame): achievement(aAchievement), game(aGame) {
+
 }

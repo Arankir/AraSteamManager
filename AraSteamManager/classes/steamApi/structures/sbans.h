@@ -16,8 +16,7 @@ public:
     bool  operator!=(const SBan &ban) const;
 
     QJsonObject toJson() const;
-    virtual QString className() const {return "SBan";}
-    static QList<SBan> load(const ProfileID &aId, std::function<void (QList<SBan>)> aCallback = nullptr);
+    static QList<SBan> load(const ProfileID &profileId, std::function<void (QList<SBan>)> callback = nullptr);
 
     ProfileID steamId()     const;
     bool communityBanned()  const;

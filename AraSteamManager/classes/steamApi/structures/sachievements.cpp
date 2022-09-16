@@ -1,4 +1,6 @@
 #include "sachievements.h"
+#include "classes/common/settings.h"
+
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QVariant>

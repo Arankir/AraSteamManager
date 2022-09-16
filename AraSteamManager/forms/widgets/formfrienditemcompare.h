@@ -15,16 +15,16 @@ class FormFriendItemCompare : public QWidget {
     Q_OBJECT
 
 public:
-    explicit FormFriendItemCompare(const SProfile &steamFriend, QListWidgetItem *parent = nullptr);
+    explicit FormFriendItemCompare(const SProfile &profile, QListWidgetItem *parent = nullptr);
     ~FormFriendItemCompare();
-    void setPercent(const double &aPercent);
-    void setHiddenFilter(const bool &aHidden);
+    void setPercent(const double &percent);
+    void setHiddenFilter(const bool &hidden);
     void setFilterValue(const ReachedType &type);
     bool isFilterHidden();
 
     void setIcons();
-    QListWidgetItem *item() {return _item;}
-    SProfile *steamProfile() {return _steamProfile;}
+    QListWidgetItem *item();
+    SProfile *steamProfile();
 
 signals:
     void s_delete();
@@ -32,8 +32,8 @@ signals:
 
 private:
     Ui::FormFriendItemCompare *ui;
-    QListWidgetItem *_item = nullptr;
-    SProfile *_steamProfile = nullptr;
+    QListWidgetItem *item_ = nullptr;
+    SProfile *profile_ = nullptr;
 };
 
 #endif // FORMFRIENDITEMCOMPARE_H

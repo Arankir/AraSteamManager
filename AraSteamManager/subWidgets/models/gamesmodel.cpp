@@ -390,15 +390,15 @@ void FilterModelGames::setSourceModel(GamesModel *aSourceModel) {
     FilterModel::setSourceModel(aSourceModel);
 }
 
-SGame FilterModelGames::getGame(int aIndex) {
+SGame FilterModelGames::getGame(const int &aIndex) {
     return sourceModel()->getGame(aIndex);
 }
 
-QStringList FilterModelGames::getGameComment(int aIndex) {
+QStringList FilterModelGames::getGameComment(const int &aIndex) {
     return sourceModel()->getComment(aIndex);
 }
 
-QList<SAchievementPlayer> FilterModelGames::getGameAchievements(int aIndex) {
+QList<SAchievementPlayer> FilterModelGames::getGameAchievements(const int &aIndex) {
     return sourceModel()->getAchievements(aIndex);
 }
 

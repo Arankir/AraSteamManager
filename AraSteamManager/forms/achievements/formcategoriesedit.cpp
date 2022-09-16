@@ -1,5 +1,6 @@
 #include "formcategoriesedit.h"
 #include "ui_formcategoriesedit.h"
+#include "classes/common/images.h"
 
 #include <QMessageBox>
 
@@ -14,19 +15,19 @@ FormCategoriesEdit::~FormCategoriesEdit() {
 
 void FormCategoriesEdit::setAchievements(const SAchievements &aAchievements, const GameID &aGameId) {
     gameId_ = aGameId;
-    _achievements = aAchievements;
+    achievements_ = aAchievements;
     achievementsToUi();
 }
 
 void FormCategoriesEdit::setVisibleItems(const QList<QString> &aItems) {
-    _visibleAchievements = aItems;
+    visibleAchievements_ = aItems;
     updateHiddenItems();
 }
 
 void FormCategoriesEdit::achievementsToUi() {
     ui->ListWidgetAll->clear();
     ui->ListWidgetCategory->clear();
-    for (auto &achievement: _achievements) {
+    for (auto &achievement: achievements_) {
         ui->ListWidgetAll->insertAchievement(achievement, gameId_);
     }
 }
@@ -67,14 +68,14 @@ void FormCategoriesEdit::retranslate() {
 
 int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, const int &aRow) {
     if (QListWidgetAchievement *achievement = dynamic_cast<QListWidgetAchievement*>(aListWidget->item(aRow))) {
-        const QString apiName = achievement->_achievement->apiName();
-        auto iterator = std::find_if(_achievements.begin(),
-                                     _achievements.end(),
+        const QString apiName = achievement->achievement_->apiName();
+        auto iterator = std::find_if(achievements_.begin(),
+                                     achievements_.end(),
                                      [=](const SAchievement &achievement) {
                                         return achievement.apiName() == apiName;
                                      });
-        if (iterator != _achievements.end()) {
-            return iterator - _achievements.begin();
+        if (iterator != achievements_.end()) {
+            return iterator - achievements_.begin();
         }
     }
     return -1;
@@ -84,9 +85,9 @@ void FormCategoriesEdit::updateHiddenItems() {
     for(int row = 0; row < ui->ListWidgetAll->count(); ++row) {
         auto achievement = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetAll->item(row));
         if (achievement != nullptr) {
-            QString apiName = achievement->_achievement->apiName();
-            bool isVisible = std::any_of(_visibleAchievements.begin(),
-                                        _visibleAchievements.end(),
+            QString apiName = achievement->achievement_->apiName();
+            bool isVisible = std::any_of(visibleAchievements_.begin(),
+                                        visibleAchievements_.end(),
                                         [=](const QString &api) {
                                             return api == apiName;
                                         });
@@ -97,12 +98,12 @@ void FormCategoriesEdit::updateHiddenItems() {
 }
 
 void FormCategoriesEdit::changeCategory(Category *aCategory) {
-    _currentCategory = aCategory;
-    ui->labelCategoryTitle->setText(_currentCategory->title());
+    currentCategory_ = aCategory;
+    ui->labelCategoryTitle->setText(currentCategory_->title());
     ui->ListWidgetAll->clear();
     ui->ListWidgetCategory->clear();
     auto achievementList = static_cast<QSet<AchievementID> >(*aCategory);
-    for(auto &achievement: _achievements) {
+    for(auto &achievement: achievements_) {
         bool isInCategory = std::any_of(achievementList.begin(),
                                         achievementList.end(),
                                         [=](const AchievementID &aAchievement) {
@@ -122,7 +123,7 @@ void FormCategoriesEdit::buttonCancel_Clicked() {
 }
 
 void FormCategoriesEdit::buttonAccept_Clicked() {
-    if (_currentCategory == nullptr) {
+    if (currentCategory_ == nullptr) {
         qWarning() << "on apply category does not exist";
         QMessageBox::warning(this, tr("Ошибка"), tr("Невозможно найти категорию!"));
         return;
@@ -130,12 +131,12 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
     QSet<AchievementID> categoryAchievements;
     for(int i = 0; i < ui->ListWidgetCategory->count(); ++i) {
         if (auto item = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetCategory->item(i))) {
-            categoryAchievements.insert(item->_achievement->apiName());
+            categoryAchievements.insert(item->achievement_->apiName());
         }
     }
-    _currentCategory->clear();
-    *_currentCategory += (categoryAchievements);
-    _currentCategory->root()->save();
+    currentCategory_->clear();
+    *currentCategory_ += (categoryAchievements);
+    currentCategory_->root()->save();
     emit s_categoriesIsUpdated(true);
 
     buttonCancel_Clicked();

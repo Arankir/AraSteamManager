@@ -295,9 +295,9 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>0</y>
+           <y>-330</y>
            <width>687</width>
-           <height>1007</height>
+           <height>1004</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -526,6 +526,9 @@
               <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
                 <widget class="QLabel" name="labelSpecialBadges">
+                 <property name="toolTip">
+                  <string>Spetials Badges</string>
+                 </property>
                  <property name="text">
                   <string notr="true">TextLabel</string>
                  </property>
@@ -559,6 +562,9 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
                   <widget class="QLabel" name="labelNormalBadges">
+                   <property name="toolTip">
+                    <string>Normal Badges</string>
+                   </property>
                    <property name="text">
                     <string notr="true">TextLabel</string>
                    </property>
@@ -579,6 +585,9 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_5">
                    <item>
                     <widget class="QLabel" name="labelNormalLvl1">
+                     <property name="toolTip">
+                      <string>Badges lvl 1</string>
+                     </property>
                      <property name="text">
                       <string notr="true">TextLabel</string>
                      </property>
@@ -597,6 +606,9 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_8">
                    <item>
                     <widget class="QLabel" name="labelNormalLvl2">
+                     <property name="toolTip">
+                      <string>Badges lvl 2</string>
+                     </property>
                      <property name="text">
                       <string notr="true">TextLabel</string>
                      </property>
@@ -615,6 +627,9 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_10">
                    <item>
                     <widget class="QLabel" name="labelNormalLvl3">
+                     <property name="toolTip">
+                      <string>Badges lvl 3</string>
+                     </property>
                      <property name="text">
                       <string notr="true">TextLabel</string>
                      </property>
@@ -633,6 +648,9 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_11">
                    <item>
                     <widget class="QLabel" name="labelNormalLvl4">
+                     <property name="toolTip">
+                      <string>Badges lvl 4</string>
+                     </property>
                      <property name="text">
                       <string notr="true">TextLabel</string>
                      </property>
@@ -651,6 +669,9 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_12">
                    <item>
                     <widget class="QLabel" name="labelNormalLvl5">
+                     <property name="toolTip">
+                      <string>Badges lvl 5</string>
+                     </property>
                      <property name="text">
                       <string notr="true">TextLabel</string>
                      </property>
@@ -669,6 +690,9 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_13">
                    <item>
                     <widget class="QLabel" name="labelNormalLvl5plus">
+                     <property name="toolTip">
+                      <string>Badges lvl more than 5</string>
+                     </property>
                      <property name="text">
                       <string notr="true">TextLabel</string>
                      </property>
@@ -704,6 +728,9 @@
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
                 <widget class="QLabel" name="labelFoilBadges">
+                 <property name="toolTip">
+                  <string>Foil Badges</string>
+                 </property>
                  <property name="text">
                   <string notr="true">TextLabel</string>
                  </property>
@@ -1103,14 +1130,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LabelLight</class>
-   <extends>QLabel</extends>
-   <header>subWidgets/labels/labellight.h</header>
-  </customwidget>
-  <customwidget>
    <class>LabelValue</class>
    <extends>QLabel</extends>
    <header>subWidgets/labels/labelvalue.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LabelLight</class>
+   <extends>QLabel</extends>
+   <header>subWidgets/labels/labellight.h</header>
   </customwidget>
   <customwidget>
    <class>CollapsableWidget</class>

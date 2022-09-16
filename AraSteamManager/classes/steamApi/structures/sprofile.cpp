@@ -1,5 +1,7 @@
 #include "sprofile.h"
 #include "classes/steamApi/sapi.h"
+#include "classes/common/settings.h"
+
 #include <QPainter>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -30,9 +32,9 @@ SProfile &SProfile::operator=(const SProfile &aProfile) {
     avatar_                     = aProfile.avatar_;
     avatarMedium_               = aProfile.avatarMedium_;
     avatarFull_                 = aProfile.avatarFull_;
-    _pixmapAvatar               = aProfile._pixmapAvatar;
-    _pixmapAvatarMedium         = aProfile._pixmapAvatarMedium;
-    _pixmapAvatarFull           = aProfile._pixmapAvatarFull;
+    pixmapAvatar_               = aProfile.pixmapAvatar_;
+    pixmapAvatarMedium_         = aProfile.pixmapAvatarMedium_;
+    pixmapAvatarFull_           = aProfile.pixmapAvatarFull_;
     personaState_               = aProfile.personaState_;
     primaryClanId_              = aProfile.primaryClanId_;
     personaStateFlags_          = aProfile.personaStateFlags_;
@@ -65,9 +67,9 @@ bool SProfile::operator==(const SProfile &aProfile) const {
             avatar_                     == aProfile.avatar_ &&
             avatarMedium_               == aProfile.avatarMedium_ &&
             avatarFull_                 == aProfile.avatarFull_ &&
-            _pixmapAvatar               == aProfile._pixmapAvatar &&
-            _pixmapAvatarMedium         == aProfile._pixmapAvatarMedium &&
-            _pixmapAvatarFull           == aProfile._pixmapAvatarFull &&
+            pixmapAvatar_               == aProfile.pixmapAvatar_ &&
+            pixmapAvatarMedium_         == aProfile.pixmapAvatarMedium_ &&
+            pixmapAvatarFull_           == aProfile.pixmapAvatarFull_ &&
             personaState_               == aProfile.personaState_ &&
             primaryClanId_              == aProfile.primaryClanId_ &&
             personaStateFlags_          == aProfile.personaStateFlags_ &&
@@ -269,7 +271,7 @@ QPixmap SProfile::getAvatarWithFrame(const QSize &aSize) const {
 }
 
 QPixmap SProfile::pixmapAvatar() const {
-    return QPixmap::fromImage(loadImage(_pixmapAvatar, avatar_, Paths::imagesProfiles(avatar_), QSize(32, 32)));
+    return QPixmap::fromImage(loadImage(pixmapAvatar_, avatar_, Paths::imagesProfiles(avatar_), QSize(32, 32)));
 }
 
 QPixmap SProfile::pixmapAvatar(const QString &aIconPath) {
@@ -277,11 +279,11 @@ QPixmap SProfile::pixmapAvatar(const QString &aIconPath) {
 }
 
 QPixmap SProfile::pixmapAvatarMedium() const {
-    return QPixmap::fromImage(loadImage(_pixmapAvatarMedium, avatarMedium_, Paths::imagesProfiles(avatarMedium_), QSize(64, 64)));
+    return QPixmap::fromImage(loadImage(pixmapAvatarMedium_, avatarMedium_, Paths::imagesProfiles(avatarMedium_), QSize(64, 64)));
 }
 
 QPixmap SProfile::pixmapAvatarFull() const {
-    return QPixmap::fromImage(loadImage(_pixmapAvatarFull, avatarFull_, Paths::imagesProfiles(avatarFull_), QSize(128, 128)));
+    return QPixmap::fromImage(loadImage(pixmapAvatarFull_, avatarFull_, Paths::imagesProfiles(avatarFull_), QSize(128, 128)));
 }
 
 bool SProfile::isNull() const {

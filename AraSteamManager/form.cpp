@@ -1,4 +1,5 @@
 #include "form.h"
+#include <QEvent>
 #include <QStatusBar>
 
 Form::Form(QWidget *aParent) : QWidget(aParent) {
@@ -37,8 +38,8 @@ void Form::setParent(Form *aParent) {
 }
 
 void Form::setFramelessWindow(class FramelessWindow *window) {
-    _framelessWindow = window;
-    _isRoot = true;
+    framelessWindow_ = window;
+    isRoot_ = true;
 }
 
 FramelessWindow *findWindow(QObject *aObject) {
@@ -54,8 +55,8 @@ FramelessWindow *findWindow(QObject *aObject) {
 }
 
 FramelessWindow *Form::window() {
-    if (_framelessWindow) {
-        return _framelessWindow;
+    if (framelessWindow_) {
+        return framelessWindow_;
     } else {
         return findWindow(this);
     }
@@ -72,7 +73,7 @@ FramelessWindow *Form::formParent() {
     return nullptr;
 }
 
-bool Form::setStatus(const QString &aStatusName, int aProgress, int aMaxProgress) {
+bool Form::setStatus(const QString &aStatusName, const int &aProgress, const int &aMaxProgress) {
 //    qDebug() << aStatusName << aProgress << aMaxProgress;
     if (window() == nullptr) {
         if (auto form = formParent()) {

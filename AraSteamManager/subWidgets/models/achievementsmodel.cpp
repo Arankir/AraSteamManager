@@ -346,14 +346,14 @@ Qt::ItemFlags AchievementsModel::flags(const QModelIndex &aIndex) const {
     return QAbstractItemModel::flags(aIndex) | Qt::ItemIsEditable;
 }
 
-bool AchievementsModel::insertColumn(int aColumn, int aCount, const QModelIndex &aParent) {
+bool AchievementsModel::insertColumn(const int &aColumn, const int &aCount, const QModelIndex &aParent) {
     Q_UNUSED(aColumn);
     Q_UNUSED(aCount);
     Q_UNUSED(aParent);
     return false;
 }
 
-bool AchievementsModel::removeColumn(int aColumn, int aCount, const QModelIndex &aParent) {
+bool AchievementsModel::removeColumn(const int &aColumn, const int &aCount, const QModelIndex &aParent) {
     Q_UNUSED(aColumn);
     Q_UNUSED(aCount);
     Q_UNUSED(aParent);
@@ -650,7 +650,7 @@ CategoriesFilter::CategoriesFilter() {
 
 }
 
-CategoriesFilter::CategoriesFilter(QMap<QString, QList<Category *> > aCategories): categories_(aCategories) {
+CategoriesFilter::CategoriesFilter(const QMap<QString, QList<Category *> > &aCategories): categories_(aCategories) {
 
 }
 
@@ -751,7 +751,7 @@ QSet<AchievementID> CategoriesFilter::getAchievementIDs() {
     }
 }
 
-FilterModelAchievements::FilterModelAchievements(int aRow, QObject *aParent): FilterModel(aRow, 4, aParent) {
+FilterModelAchievements::FilterModelAchievements(const int &aRow, QObject *aParent): FilterModel(aRow, 4, aParent) {
     columns_.insert("name", 0);
     columns_.insert("reached", 1);
     columns_.insert("categories", 2);
@@ -848,7 +848,7 @@ void FilterModelAchievements::setName(const QString &aNewName) {
     invalidateFilter();
 }
 
-void FilterModelAchievements::setReached(int aNewReached) {
+void FilterModelAchievements::setReached(const int &aNewReached) {
     if(reached_ == aNewReached)
         return;
     reached_ = aNewReached;
@@ -881,7 +881,7 @@ void FilterModelAchievements::setReached(int aNewReached) {
     invalidateFilter();
 }
 
-void FilterModelAchievements::setReachedFriend(int aNewReached, const ProfileID &aProfileId) {
+void FilterModelAchievements::setReachedFriend(const int &aNewReached, const ProfileID &aProfileId) {
     profiles_.insert(aProfileId, aNewReached);
     int filterColumnReached = columns_.value(aProfileId);
     int columnNumber = Count + sourceModel()->getProfileNumber(aProfileId);

@@ -22,7 +22,7 @@ class FriendsModel : public QAbstractTableModel {
     Q_OBJECT
 public:
     FriendsModel(QObject *parent = nullptr);
-    void setFriends(const QList<SFriend> &aFriends);
+    void setFriends(const QList<SFriend> &friends);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -47,7 +47,7 @@ private:
 class FilterModelFriends : public FilterModel {
     Q_OBJECT
 public:
-    FilterModelFriends(int row = 0, QObject* parent = nullptr);
+    FilterModelFriends(const int &row = 0, QObject *parent = nullptr);
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
     FriendsModel *sourceModel() const;
     void setSourceModel(FriendsModel *sourceModel);

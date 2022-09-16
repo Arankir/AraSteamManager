@@ -16,7 +16,7 @@ namespace FriendListItemData {
 
 class FriendListItem : public QStandardItem {
 public:
-    FriendListItem(const SProfile &aProfile, FriendListItemData::ProfileType aType);
+    FriendListItem(const SProfile &profile, const FriendListItemData::ProfileType &type = FriendListItemData::ProfileType::Unknown);
     const SProfile &profile() const;
     virtual QVariant data(int role = Qt::UserRole + 1) const override;
 

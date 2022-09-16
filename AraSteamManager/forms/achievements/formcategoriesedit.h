@@ -12,15 +12,14 @@ namespace Ui {
 class FormCategoriesEdit : public Form {
     Q_OBJECT
 public slots:
-//    void updateSettings(QFlags<changedSettings> aSettings) override;
 
 public:
     explicit FormCategoriesEdit(QWidget *parent = nullptr);
     ~FormCategoriesEdit();
-    void setAchievements(const SAchievements &aAchievements, const GameID &aGameId);
+    void setAchievements(const SAchievements &achievements, const GameID &nameId);
     void setVisibleItems(const QList<AchievementID> &items);
     void updateHiddenItems();
-    void changeCategory(Category *aCategory);
+    void changeCategory(Category *category);
 
 signals:
     void s_categoriesIsUpdated(const bool &isUpdated);
@@ -36,10 +35,10 @@ private slots:
 private:
     Ui::FormCategoriesEdit *ui;
     GameID gameId_;
-    SAchievements _achievements;
-    QList<AchievementID> _visibleAchievements;
+    SAchievements achievements_;
+    QList<AchievementID> visibleAchievements_;
 
-    Category *_currentCategory = nullptr;
+    Category *currentCategory_ = nullptr;
 };
 
 #endif // FORMACHIEVEMENTSCATEGORIESEDIT_H

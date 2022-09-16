@@ -33,6 +33,14 @@ void RequestData::get(const QUrl &aUrl, const bool &aParallel) {
     }
 }
 
+QByteArray RequestData::reply() const {
+    return reply_;
+}
+
+QString RequestData::error() const {
+    return error_;
+}
+
 void RequestData::onResultGet(QNetworkReply *aReply) {
     error_ = aReply->errorString();
 //    auto error = aReply->error();

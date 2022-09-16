@@ -3,19 +3,9 @@
 
 #include <QMainWindow>
 #include <QtWidgets/QRubberBand>
-#include <QtCore/QObject>
-#include <QtCore/QEvent>
-#include <QtCore/QRect>
-#include <QtCore/QPoint>
-#include <QtCore/Qt>
-#include <QtGui/QHoverEvent>
-#include <QtGui/QMouseEvent>
-#include <QDebug>
-#include <QPropertyAnimation>
 #include <QLabel>
 #include <QProgressBar>
 #include "classes/common/settings.h"
-#include "classes/common/images.h"
 
 namespace Ui {
 class FramelessWindow;
@@ -48,8 +38,8 @@ public:
     FramelessWindow(QWidget *target);
     ~FramelessWindow();
     void setWidget(QWidget *target);
-    void animateResize(int width, int height);
-    void setStatus(const QString &statusName = "", int progress = 0, int maxProgress = 0);
+    void animateResize(const int &width, const int &height);
+    void setStatus(const QString &statusName = "", const int &progress = 0, const int &maxProgress = 0);
 
     void clearStatus();
     void show();
@@ -70,18 +60,18 @@ private:
     void updateIcons();
 
     Ui::FramelessWindow *ui;
-    QWidget *_target = nullptr;
-    QRubberBand *_rubberband = nullptr;
-    bool _cursorchanged;
-    bool _leftButtonPressed;
-    Edges _mousePress = Edge::None;
-    Edges _mouseMove = Edge::None;
+    QWidget *target_ = nullptr;
+    QRubberBand *rubberband_ = nullptr;
+    bool cursorchanged_;
+    bool leftButtonPressed_;
+    Edges mousePress_ = Edge::None;
+    Edges mouseMove_ = Edge::None;
 
-    QPoint _dragPos;
-    bool _dragStart = false;
+    QPoint dragPos_;
+    bool dragStart_ = false;
 
-    QLabel *_statusLabel;
-    QProgressBar *_statusProgressBar;
+    QLabel *statusLabel_;
+    QProgressBar *statusProgressBar_;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(FramelessWindow::Edges);

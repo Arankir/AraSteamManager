@@ -4,11 +4,10 @@
 #include <QLabel>
 #include <QObject>
 
-class LabelValue : public QLabel
-{
+class LabelValue : public QLabel {
     Q_OBJECT
 public:
-    LabelValue(QWidget *aParent = nullptr): QLabel(aParent) {};
+    LabelValue(QWidget *aParent = nullptr);
     LabelValue(const QString &aText, QWidget *aParent = nullptr);
 };
 

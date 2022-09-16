@@ -7,13 +7,13 @@
 
 class ThreadInfo: public QThread {
 public:
-    ~ThreadInfo() {qInfo() << "Thread deleted";}
+    ~ThreadInfo();
 };
 
 class ThreadLoading : public QObject {
     Q_OBJECT
 public slots:
-    void start() {thread_->start();}
+    void start();
 
 private slots:
     virtual int fill() = 0;

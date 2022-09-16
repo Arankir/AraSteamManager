@@ -7,6 +7,15 @@ HiddenGames::HiddenGames(const ProfileID &aProfile, const bool &aIsIncludeAll): 
     }
 }
 
+void HiddenGames::remove(const GameID &aGameId) {
+    erase(std::remove_if(begin(),
+                         end(),
+                        [=](const HiddenGame &lGame) {
+                            return aGameId == lGame.id();
+                        }),
+          end());
+}
+
 bool HiddenGames::isGameExist(const GameID &aGame) {
     auto iterator = std::find_if(begin(),
                                  end(),

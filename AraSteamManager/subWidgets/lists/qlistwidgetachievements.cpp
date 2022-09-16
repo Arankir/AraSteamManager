@@ -1,4 +1,5 @@
 #include "qlistwidgetachievements.h"
+#include "classes/common/generalfunctions.h"
 
 const QString c_whatsThis = "QListWidgetAchievements";
 
@@ -7,17 +8,17 @@ QListWidgetAchievements::QListWidgetAchievements(QWidget *aParent) : QListWidget
     setWhatsThis(c_whatsThis);
 }
 
-void QListWidgetAchievements::insertAchievement(const SAchievement &aAchievement, const GameID &aGameId, int aRow) {
+void QListWidgetAchievements::insertAchievement(const SAchievement &aAchievement, const GameID &gameId, const int &row) {
     QListWidgetAchievement *item = new QListWidgetAchievement(aAchievement);
-    if (aGameId > 0) {
-        item->setIcon(aAchievement.icon(aGameId));
+    if (gameId > 0) {
+        item->setIcon(aAchievement.icon(gameId));
     }
     item->setText(aAchievement.displayName());
     item->setToolTip(textToToolTip(aAchievement.description()));
-    if (aRow == -1) {
+    if (row == -1) {
         addItem(item);
     } else {
-        insertItem(aRow, item);
+        insertItem(row, item);
     }
 }
 
@@ -31,7 +32,7 @@ void QListWidgetAchievements::startDrag(Qt::DropActions aSupportedActions) {
         QListWidgetAchievement *achievementItem = dynamic_cast<QListWidgetAchievement*>(item);
         if (achievementItem != nullptr) {
             QMap<int,  QVariant> map = model()->itemData(model()->index(row(achievementItem), 0));
-            QVariant var = QVariant::fromValue(*(achievementItem->_achievement));
+            QVariant var = QVariant::fromValue(*(achievementItem->achievement_));
             stream << var << row(achievementItem) << 0 << map;
         }
     }
@@ -82,15 +83,15 @@ void QListWidgetAchievements::dropEvent(QDropEvent *aEvent) {
     aEvent->accept();
 }
 
-void QListWidgetAchievements::dropInsert(const SAchievement &aAchievement, int aRow, const QMap<int,  QVariant> &aRoleData) {
-    QListWidgetAchievement *item = new QListWidgetAchievement(aAchievement);
-    for (auto iterator = aRoleData.begin(); iterator != aRoleData.end(); ++iterator) {
+void QListWidgetAchievements::dropInsert(const SAchievement &achievement, const int &row, const QMap<int,  QVariant> &roleData) {
+    QListWidgetAchievement *item = new QListWidgetAchievement(achievement);
+    for (auto iterator = roleData.begin(); iterator != roleData.end(); ++iterator) {
         item->setData(iterator.key(), iterator.value());
     }
-    if (aRow == -1) {
+    if (row == -1) {
         addItem(item);
     } else {
-        insertItem(aRow, item);
+        insertItem(row, item);
     }
 }
 

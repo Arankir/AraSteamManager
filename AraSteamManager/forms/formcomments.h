@@ -17,8 +17,8 @@ class FormComments : public Form
 
 public:
     explicit FormComments(QWidget *parent = nullptr);;
-    explicit FormComments(const ProfileID &aId, const SGame &game, const SAchievement &achievement = SAchievement(), QWidget *parent = nullptr);
-    void setData(const ProfileID &aId, const SGame &aGame, const SAchievement &aAchievement = SAchievement());
+    explicit FormComments(const ProfileID &profileId, const SGame &game, const SAchievement &achievement = SAchievement(), QWidget *parent = nullptr);
+    void setData(const ProfileID &profileId, const SGame &game, const SAchievement &achievement = SAchievement());
     ~FormComments();
 
 signals:
@@ -33,13 +33,12 @@ private slots:
 
     void retranslate() override;
     void updateIcons() override;
-//    void updateSettings(QFlags<changedSettings> aSettings) override;
 
 private:
     Ui::FormComments *ui;
-    SGame _game;
-    SAchievement _achievement;
-    ProfileID _profile;
+    SGame game_;
+    SAchievement achievement_;
+    ProfileID profileId_;
 };
 
 #endif // FORMCOMMENTSINTERACTIONS_H

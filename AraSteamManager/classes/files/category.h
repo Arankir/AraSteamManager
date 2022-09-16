@@ -7,7 +7,7 @@
 class Category: public QSet<AchievementID>, public FileSaveLoad {
 public:
     explicit Category(const SGame &game);
-    explicit Category(const GameID &gameId, const QString &gameName, bool aAutoLoad = true);
+    explicit Category(const GameID &gameId, const QString &gameName, bool autoLoad = true);
     explicit Category(const GameID &gameId, const QString &title, const QSet<AchievementID> &achievements, const QList<Category *> &categories = QList<Category*>());
     explicit Category(const QJsonObject &category = QJsonObject());
     Category(const Category &category);
@@ -27,28 +27,27 @@ public:
     Category *parent()              const;
 
     //sets
-    void setTitle(const QString &aTitle);
+    void setTitle(const QString &title);
     void setGame(const SGame &game);
     void setGame(const GameID &gameId, const QString &gameName);
 
     //parents
     void setParent(Category *newParent);
-    void changeCategoryIndex(QString category, int index);
+    void changeCategoryIndex(const QString &category, int index);
 
     //categories
     bool addCategory(const QStringList &titles, Category *category);
     bool addCategory(Category *category);
-    bool removeCategory(const QStringList &titles, bool aIsDelete = false);
-    bool removeCategory(const QString &title, bool aIsDelete = false);
+    bool removeCategory(const QStringList &titles, bool isDelete = false);
+    bool removeCategory(const QString &title, bool isDelete = false);
     Category *find(const QStringList &titles);
     Category *find(const QString &title);
     void clearCategories();
 
-    void fromJson(const QJsonObject &aCategory);
+    void fromJson(const QJsonObject &category);
     QJsonObject toJson() const;
 
     Category *root();
-    void getPathFromRoot(QStringList &list);
     QStringList getPathFromRoot();
     int countCategories() const;
     //for destructor
@@ -71,8 +70,9 @@ public:
 //        return stream;
 //    }
 
-    int getIndex(Category *aCategory);
+    int getIndex(Category *category);
 private:
+    void getPathFromRoot(QStringList &list);
 
     Category *parent_ = nullptr;
     QString title_;

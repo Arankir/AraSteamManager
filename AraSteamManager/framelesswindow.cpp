@@ -1,5 +1,9 @@
 #include "framelesswindow.h"
 #include "ui_framelesswindow.h"
+#include "classes/common/images.h"
+
+#include <QtGui/QMouseEvent>
+#include <QPropertyAnimation>
 
 const int c_border = 7;
 
@@ -16,23 +20,23 @@ FramelessWindow::FramelessWindow(): FramelessWindow(nullptr) {
 
 FramelessWindow::FramelessWindow(QWidget *target):
                     ui(new Ui::FramelessWindow),
-                    _target(target),
-                    _cursorchanged(false),
-                    _leftButtonPressed(false),
-                    _dragPos(QPoint()),
-                    _statusProgressBar(new QProgressBar()) {
+                    target_(target),
+                    cursorchanged_(false),
+                    leftButtonPressed_(false),
+                    dragPos_(QPoint()),
+                    statusProgressBar_(new QProgressBar()) {
     ui->setupUi(this);
     this->setMouseTracking(true);
     this->setWindowFlags(Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_Hover);
     this->installEventFilter(this);
-    ui->statusbar->addPermanentWidget(_statusProgressBar, 0);
+    ui->statusbar->addPermanentWidget(statusProgressBar_, 0);
     setStatus();
 
-    if (_target != nullptr) {
-        ui->centralwidget->layout()->addWidget(_target);
+    if (target_ != nullptr) {
+        ui->centralwidget->layout()->addWidget(target_);
     }
-    _rubberband = new QRubberBand(QRubberBand::Rectangle);
+    rubberband_ = new QRubberBand(QRubberBand::Rectangle);
 
     ui->ButtonMinimize  ->setFlat(true);
     ui->ButtonMaximize  ->setFlat(true);
@@ -45,8 +49,8 @@ FramelessWindow::FramelessWindow(QWidget *target):
 }
 
 void FramelessWindow::setWidget(QWidget *target) {
-    _target = target;
-    ui->centralwidget->layout()->addWidget(_target);
+    target_ = target;
+    ui->centralwidget->layout()->addWidget(target_);
 }
 
 void FramelessWindow::updateIcons() {
@@ -65,8 +69,8 @@ void FramelessWindow::updateSettings() {
 }
 
 void FramelessWindow::buttonExit_Clicked() {
-    if (_target) {
-        _target->close();
+    if (target_) {
+        target_->close();
     }
     this->close();
 }
@@ -90,13 +94,13 @@ void FramelessWindow::buttonMinimize_Clicked() {
 }
 
 FramelessWindow::~FramelessWindow() {
-    if (_target) {
-        delete _target;
+    if (target_) {
+        delete target_;
     }
     delete ui;
 }
 
-void FramelessWindow::animateResize(int width, int height) {
+void FramelessWindow::animateResize(const int &width, const int &height) {
 //    qDebug() << QSize(this->width(), this->height()) << QSize(width, height);
     QPropertyAnimation *animation = new QPropertyAnimation(this, "size");
     connect(animation, &QPropertyAnimation::finished, animation, &QPropertyAnimation::deleteLater);
@@ -106,21 +110,21 @@ void FramelessWindow::animateResize(int width, int height) {
     animation->start();
 }
 
-void FramelessWindow::setStatus(const QString &statusName, int progress, int maxProgress) {
+void FramelessWindow::setStatus(const QString &statusName, const int &progress, const int &maxProgress) {
     // showMessage(const QString & message, int timeout = 0)
     if (statusName == "") {
         clearStatus();
     } else {
-        _statusProgressBar->setVisible(true);
+        statusProgressBar_->setVisible(true);
         statusBar()->showMessage(statusName);
-        _statusProgressBar->setValue(progress);
-        _statusProgressBar->setMaximum(maxProgress);
+        statusProgressBar_->setValue(progress);
+        statusProgressBar_->setMaximum(maxProgress);
     }
 }
 
 void FramelessWindow::clearStatus() {
     statusBar()->clearMessage();
-    _statusProgressBar->setVisible(false);
+    statusProgressBar_->setVisible(false);
 }
 
 void FramelessWindow::show() {
@@ -163,70 +167,70 @@ bool FramelessWindow::eventFilter(QObject *o, QEvent*e) {
 
 void FramelessWindow::mouseRealese(QMouseEvent *e) {
     if (e->button() & Qt::LeftButton) {
-        _leftButtonPressed = false;
-        _dragStart = false;
+        leftButtonPressed_ = false;
+        dragStart_ = false;
     }
 }
 
 void FramelessWindow::mouseLeave(QEvent *e) {
     Q_UNUSED(e);
-    if (!_leftButtonPressed) {
+    if (!leftButtonPressed_) {
         this->unsetCursor();
     }
 }
 
 void FramelessWindow::mousePress(QMouseEvent *e) {
     if (e->button() & Qt::LeftButton) {
-        _leftButtonPressed = true;
-        calculateCursorPosition(e->globalPosition(), this->frameGeometry(), _mousePress);
-        if (!_mousePress.testFlag(Edge::None)) {
-            _rubberband->setGeometry(this->frameGeometry());
+        leftButtonPressed_ = true;
+        calculateCursorPosition(e->globalPosition(), this->frameGeometry(), mousePress_);
+        if (!mousePress_.testFlag(Edge::None)) {
+            rubberband_->setGeometry(this->frameGeometry());
         }
         //qDebug()<<(e->globalPos() - _target->pos()).y();
         if (this->rect().marginsRemoved(QMargins(c_border, c_border, c_border, c_border)).contains(e->pos()) &&
            ((e->globalPosition() - this->pos()).y() < ui->FrameTitleWindow->height())) {
-            _dragStart = true;
-            _dragPos = e->pos();
+            dragStart_ = true;
+            dragPos_ = e->pos();
         }
     }
 }
 
 void FramelessWindow::mouseMove(QMouseEvent *e) {
-    if (_leftButtonPressed) {
+    if (leftButtonPressed_) {
         if (this->isMaximized()) {
             this->showNormal();
             ui->ButtonMaximize->setIcon(QIcon(Images::maximizeWindow()));
         }
-        if (_dragStart) { //Change Position
+        if (dragStart_) { //Change Position
             if (this->normalGeometry().x() + this->normalGeometry().width() < e->globalPosition().x()) {
-                _dragPos.setX(e->globalPosition().x() - (this->width() / 2) - this->x());
+                dragPos_.setX(e->globalPosition().x() - (this->width() / 2) - this->x());
                 this->move(QPoint(e->globalPosition().x() - (this->width() / 2), this->y()));
             }
-            this->move(this->frameGeometry().topLeft() + (e->pos() - _dragPos));
+            this->move(this->frameGeometry().topLeft() + (e->pos() - dragPos_));
         }
 
-        if (!_mousePress.testFlag(Edge::None)) { //Change Rectangle
-            QRect newRect = _rubberband->frameGeometry();
-            if (_mousePress.testFlag(Edge::Left)) {
+        if (!mousePress_.testFlag(Edge::None)) { //Change Rectangle
+            QRect newRect = rubberband_->frameGeometry();
+            if (mousePress_.testFlag(Edge::Left)) {
                 newRect.setLeft(e->globalPosition().x());
             }
-            if (_mousePress.testFlag(Edge::Right)) {
+            if (mousePress_.testFlag(Edge::Right)) {
                 newRect.setRight(e->globalPosition().x());
             }
             if (newRect.right() - newRect.left() < this->minimumWidth()) {
                 newRect.setLeft(this->frameGeometry().x());
             }
-            if (_mousePress.testFlag(Edge::Top)) {
+            if (mousePress_.testFlag(Edge::Top)) {
                 newRect.setTop(e->globalPosition().y());
             }
-            if (_mousePress.testFlag(Edge::Bottom)) {
+            if (mousePress_.testFlag(Edge::Bottom)) {
                 newRect.setBottom(e->globalPosition().y());
             }
             if (newRect.bottom() - newRect.top() < this->minimumHeight()) {
                 newRect.setTop(this->frameGeometry().y());
             }
             this->setGeometry(newRect);
-            _rubberband->setGeometry(newRect);
+            rubberband_->setGeometry(newRect);
         }
     } else {
         updateCursorShape(e->globalPosition());
@@ -239,32 +243,32 @@ void FramelessWindow::mouseHover(QHoverEvent *e) {
 
 void FramelessWindow::updateCursorShape(const QPointF &pos) {
     if (this->isFullScreen() || this->isMaximized()) {
-        if (_cursorchanged) {
+        if (cursorchanged_) {
             this->unsetCursor();
         }
         return;
     }
-    if (!_leftButtonPressed) {
-        calculateCursorPosition(pos, this->frameGeometry(), _mouseMove);
-        _cursorchanged = true;
-        if (_mouseMove.testFlag(Edge::TopLeft) || _mouseMove.testFlag(Edge::BottomRight)) {
+    if (!leftButtonPressed_) {
+        calculateCursorPosition(pos, this->frameGeometry(), mouseMove_);
+        cursorchanged_ = true;
+        if (mouseMove_.testFlag(Edge::TopLeft) || mouseMove_.testFlag(Edge::BottomRight)) {
             this->setCursor(Qt::SizeFDiagCursor);
             return;
         }
-        if (_mouseMove.testFlag(Edge::TopRight) || _mouseMove.testFlag(Edge::BottomLeft)) {
+        if (mouseMove_.testFlag(Edge::TopRight) || mouseMove_.testFlag(Edge::BottomLeft)) {
             this->setCursor(Qt::SizeBDiagCursor);
             return;
         }
-        if (_mouseMove.testFlag(Edge::Top) || _mouseMove.testFlag(Edge::Bottom)) {
+        if (mouseMove_.testFlag(Edge::Top) || mouseMove_.testFlag(Edge::Bottom)) {
             this->setCursor(Qt::SizeVerCursor);
             return;
         }
-        if (_mouseMove.testFlag(Edge::Left) || _mouseMove.testFlag(Edge::Right)) {
+        if (mouseMove_.testFlag(Edge::Left) || mouseMove_.testFlag(Edge::Right)) {
             this->setCursor(Qt::SizeHorCursor);
             return;
         }
         this->unsetCursor();
-        _cursorchanged = false;
+        cursorchanged_ = false;
     }
 }
 

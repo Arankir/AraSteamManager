@@ -2,7 +2,7 @@
 #define GENERALFUNCTIONS_H
 
 #include <QTableView>
-#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include "framelesswindow.h"
 #include "form.h"

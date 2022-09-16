@@ -1,5 +1,6 @@
 #include "formgroups.h"
 #include "ui_formgroups.h"
+#include "classes/common/images.h"
 
 #include <QInputDialog>
 #include <QAction>
