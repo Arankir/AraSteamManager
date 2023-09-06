@@ -98,7 +98,7 @@ void GamesWithPercentModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         (void)_t;
         switch (_id) {
         case 0: _t->s_finished(); break;
-        case 1: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3]))); break;
+        case 1: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 2: _t->sort((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< Qt::SortOrder(*)>(_a[2]))); break;
         case 3: _t->sort((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->onResultAchievements((*reinterpret_cast< const SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< const GameID(*)>(_a[2]))); break;
@@ -114,7 +114,7 @@ void GamesWithPercentModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c
             }
         }
         {
-            using _t = void (GamesWithPercentModel::*)(const QString & , const int & , const int & );
+            using _t = void (GamesWithPercentModel::*)(const QString & , int , int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&GamesWithPercentModel::s_progress)) {
                 *result = 1;
                 return;
@@ -130,7 +130,7 @@ const QMetaObject GamesWithPercentModel::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_GamesWithPercentModel_t
-, QtPrivate::TypeAndForceComplete<GamesWithPercentModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>
+, QtPrivate::TypeAndForceComplete<GamesWithPercentModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 , QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<Qt::SortOrder, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SAchievementsPlayer &, std::false_type>, QtPrivate::TypeAndForceComplete<const GameID &, std::false_type>
 
 
@@ -176,7 +176,7 @@ void GamesWithPercentModel::s_finished()
 }
 
 // SIGNAL 1
-void GamesWithPercentModel::s_progress(const QString & _t1, const int & _t2, const int & _t3)
+void GamesWithPercentModel::s_progress(const QString & _t1, int _t2, int _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

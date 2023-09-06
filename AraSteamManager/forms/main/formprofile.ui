@@ -172,7 +172,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
+         <layout class="QHBoxLayout" name="horizontalLayout_17">
           <item>
            <widget class="QLabel" name="LabelProfileStatus">
             <property name="text">
@@ -191,64 +191,6 @@
            <widget class="QLabel" name="LabelGamesStatus">
             <property name="text">
              <string notr="true">SG</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="LabelLight" name="LabelProfileVisibility">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Профиль</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="LabelLight" name="LabelFriendsVisibility">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Друзья</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="LabelLight" name="LabelGamesVisibility">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Игры</string>
             </property>
            </widget>
           </item>
@@ -295,7 +237,7 @@
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>-330</y>
+           <y>0</y>
            <width>687</width>
            <height>1004</height>
           </rect>

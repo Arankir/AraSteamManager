@@ -40,7 +40,8 @@ struct ThemeColor {
 };
 
 struct Theme {
-    Theme() {};
+    Theme();
+    ~Theme();
 
     ThemeColor text;
     ThemeColor disabledBackground;

@@ -147,15 +147,15 @@ void SProfileCustomization::fromJson(const QJsonObject &aObject) {
 
 SProfileCustomizations onLoadCustomizations(const QByteArray &aByteArray) {
     SProfileCustomizations list;
-    for(const auto &customization: QJsonDocument::fromJson(aByteArray).object().value("response").toObject().value("purchased_customizations").toArray()) {
+    for(const QJsonValue &customization: QJsonDocument::fromJson(aByteArray).object().value("response").toObject().value("purchased_customizations").toArray()) {
         list.append(SProfileCustomization(customization.toObject()));
     }
-    for(const auto &customization: QJsonDocument::fromJson(aByteArray).object().value("response").toObject().value("upgraded_customizations").toArray()) {
+    for(const QJsonValue &customization: QJsonDocument::fromJson(aByteArray).object().value("response").toObject().value("upgraded_customizations").toArray()) {
         list.append(SProfileCustomization(customization.toObject()));
     }
     return list;
 }
 
 SProfileCustomizations SProfileCustomization::load(const ProfileID &aProfileId, std::function<void (SProfileCustomizations)> aCallback) {
-    return Sapi::load<SProfileCustomization>(profileCustomizationsUrl(aProfileId), onLoadCustomizations, aCallback);
+    return Sapi::load<SProfileCustomization>(Sapi::Url::profileCustomizations(aProfileId), onLoadCustomizations, aCallback);
 }

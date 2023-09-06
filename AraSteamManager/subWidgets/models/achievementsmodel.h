@@ -18,13 +18,12 @@ namespace achievementsModel {
     enum Columns {
         Appid       = 0,
         Index       = 1,
-        Icon        = 2,
-        Title       = 3,
-        Description = 4,
-        Comments    = 5,
-        World       = 6,
-        ReachedMy   = 7,
-        Count       = 7
+        Title       = 2,
+        Description = 3,
+        Comments    = 4,
+        World       = 5,
+        ReachedMy   = 6,
+        Count       = 6
     };
 }
 
@@ -40,17 +39,17 @@ public:
     AchievementID achievementId(const QModelIndex &index) const;
     bool hasChildren(const QModelIndex &parent) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
-    bool insertColumn(const int &column, const int &count, const QModelIndex &parent = QModelIndex());
-    bool removeColumn(const int &column, const int &count, const QModelIndex &parent = QModelIndex());
+    bool insertColumn(int column, int count, const QModelIndex &parent = QModelIndex());
+    bool removeColumn(int column, int count, const QModelIndex &parent = QModelIndex());
 
-    SAchievement getAchievement(const int &row) const;
+    SAchievement getAchievement(int row) const;
     SAchievement getAchievement(const QModelIndex &index) const;
     SAchievements getAchievements() const;
-    int getReachedFromProfile(const int &index = -1);
+    int getReachedFromProfile(int index = -1);
     int getAchievementsCount() const;
 
     int addProfile(const SProfile &profile);
-    SProfile getProfile(const int &index);
+    SProfile getProfile(int index);
     int getProfileNumber(const ProfileID &profileId);
     void removeProfile(const SProfile &profile);
     void clearProfiles();
@@ -61,11 +60,11 @@ public slots:
 
 signals:
     void s_finished();
-    void s_progress(const QString &status, const int &progress, const int &max);
+    void s_progress(const QString &status, int progress, int max);
 
 private:
     struct AchievementInModel {
-        QPixmap icon;
+        QIcon *icon = nullptr;
         QStringList comment;
         SAchievementSchema schema;
         SAchievementPercentage percent;
@@ -108,8 +107,9 @@ private:
 class FilterModelAchievements : public FilterModel {
     Q_OBJECT
 public:
-    FilterModelAchievements(const int &row = 0, QObject *parent = nullptr);
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    FilterModelAchievements(QObject *parent = nullptr);
+    FilterModelAchievements(int row, QObject *parent = nullptr);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
     AchievementsModel *sourceModel() const;
     void setSourceModel(AchievementsModel *sourceModel);
 
@@ -118,26 +118,26 @@ public:
 //    QList<SAchievementPlayer> getGameAchievements(int index);
     QMap<ProfileID, int> getProfiles();
 
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
+    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 public slots:
     int addProfile(const SProfile &profile);
-    SProfile getProfile(const int &index);
+    SProfile getProfile(int index);
     void removeProfile(const SProfile &profile);
 
     void setName(const QString &newName);
-    void setReached(const int &newReached);
-    void setReachedFriend(const int &newReached, const ProfileID &profileId);
+    void setReached(int newReached);
+    void setReachedFriend(int newReached, const ProfileID &profileId);
     void setCategories(const CategoriesFilter &newCategories);
     CategoriesFilter getCategories() const;
     void setFavorites(const QStringList &newFavorites);
-    void clear();
+    void clear() override;
 
     void addCategory(Category *aCategory);
     void removeCategory(Category *aCategory);
 private slots:
     void updateCategoriesFilter();
 private:
-    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
+    void setSourceModel(QAbstractItemModel *sourceModel) override;
 
     QString name_;
     int reached_;

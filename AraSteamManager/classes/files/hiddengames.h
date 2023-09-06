@@ -27,7 +27,7 @@ private:
 
 class HiddenGames: public QList<HiddenGame>, public FileSaveLoad {
 public:
-    HiddenGames(const ProfileID &profileId = "", const bool &isIncludeAll = false);
+    HiddenGames(const ProfileID &profileId = "", bool isIncludeAll = false);
     void remove(const GameID &gameId);
     bool isGameExist(const GameID &gameId);
 

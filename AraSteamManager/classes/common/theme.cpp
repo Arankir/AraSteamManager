@@ -8,6 +8,35 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+Theme::Theme() {
+
+}
+
+Theme::~Theme()
+{
+//    qDebug() << text.color << text.getGradient();
+//    qDebug() << disabledBackground.color << disabledBackground.getGradient();
+//    qDebug() << disabled.color << disabled.getGradient();
+//    qDebug() << hover.color << hover.getGradient();
+//    qDebug() << border.color << border.getGradient();
+//    qDebug() << alternate.color << alternate.getGradient();
+//    qDebug() << background.color << background.getGradient();
+//    qDebug() << backgroundSelectedItem.color << backgroundSelectedItem.getGradient();
+//    qDebug() << backgroundSecond.color << backgroundSecond.getGradient();
+//    qDebug() << backgroundProgressbar.color << backgroundProgressbar.getGradient();
+//    qDebug() << backgroundBadProgressbar.color << backgroundBadProgressbar.getGradient();
+//    qDebug() << backgroundProgressbarProgress.color << backgroundProgressbarProgress.getGradient();
+//    qDebug() << selected.color << selected.getGradient();
+//    qDebug() << headerForm.color << headerForm.getGradient();
+//    qDebug() << backgroundItem.color << backgroundItem.getGradient();
+//    qDebug() << backgroundAlternateItem.color << backgroundAlternateItem.getGradient();
+//    qDebug() << forItemHover.color << forItemHover.getGradient();
+//    qDebug() << mainProfileBackground.color << mainProfileBackground.getGradient();
+//    qDebug() << mainBackground.color << mainBackground.getGradient() << mainBackground.getGradient()->stops();
+//    qDebug() << pathIcons;
+//    qDebug() << pathImages;
+}
+
 Theme &Theme::swapPartsAllColors(PartColor part1, PartColor part2) {
     text.swapPartColor(part1, part2);
     disabledBackground.swapPartColor(part1, part2);
@@ -147,9 +176,11 @@ Theme Theme::getCurrentTheme() {
 }
 
 ThemeColor::~ThemeColor() {
-    if (gradient) {
-        delete gradient;
-    }
+    //TODO Утечка памяти
+    //Когда создаются градиенты, используются объекты, они удаляются и ломают градиент в теме, из-за чего программа крашится если ее удалять так
+//    if (gradient) {
+//        delete gradient;
+//    }
 }
 
 void ThemeColor::setColor(const QColor &aColor, QGradient *aGradient) {
@@ -166,7 +197,7 @@ void ThemeColor::setGradient(QGradient aGradient) {
         float red = 0, green = 0, blue = 0, alpha = 0;
         int count = 0;
         for (auto stop: aGradient.stops()) {
-            auto stopColor = stop.second;
+            QColor stopColor = stop.second;
             red += stopColor.redF();
             green += stopColor.greenF();
             blue += stopColor.blueF();
@@ -250,7 +281,7 @@ QString ThemeColor::getString() {
             stops.append(QString("stop: %1 %2").arg(QString::number(stop.first), stop.second.name(QColor::NameFormat::HexArgb)));
         }
         if (gradient->type() == QGradient::RadialGradient) {
-            auto curGradient = static_cast<QRadialGradient*>(gradient);
+            QRadialGradient *curGradient = static_cast<QRadialGradient*>(gradient);
             return QString("qradialgradient(spread:pad, cx:%1, cy:%2, radius: %3, fx:%4, fy:%5, %6)").arg(
                         QString::number(curGradient->center().x()),
                         QString::number(curGradient->center().y()),
@@ -260,7 +291,7 @@ QString ThemeColor::getString() {
                         stops.join(", "));
         }
         if (gradient->type() == QGradient::LinearGradient) {
-            auto curGradient = static_cast<QLinearGradient*>(gradient);
+            QLinearGradient *curGradient = static_cast<QLinearGradient*>(gradient);
             return QString("qlineargradient(spread:pad, x1: %1, y1: %2, x2: %3, y2: %4, %5)").arg(
                         QString::number(curGradient->start().x()),
                         QString::number(curGradient->start().y()),
@@ -274,7 +305,7 @@ QString ThemeColor::getString() {
 
 ThemeColor &ThemeColor::setAlpha(int aAlpha) {
     if (gradient) {
-        auto stops = gradient->stops();
+        QGradientStops stops = gradient->stops();
         for (auto &stop: stops) {
             stop.second.setAlpha(aAlpha);
         }
@@ -286,7 +317,7 @@ ThemeColor &ThemeColor::setAlpha(int aAlpha) {
 
 ThemeColor &ThemeColor::swapPartColor(PartColor part1, PartColor part2) {
     if (gradient) {
-        auto stops = gradient->stops();
+        QGradientStops stops = gradient->stops();
         for (auto &stop: stops) {
             stop.second = Theme::swapParts(stop.second, part1, part2);
         }
@@ -300,7 +331,7 @@ ThemeColor &ThemeColor::alternateColor(const QColor &newColor) {
     color.setHslF(newColor.hslHueF(), color.hslSaturationF(), color.lightnessF());
     //gradient
     if (gradient) {
-        auto stops = gradient->stops();
+        QGradientStops stops = gradient->stops();
         for (auto &stop: stops) {
             stop.second.setHslF(newColor.hslHueF(), stop.second.hslSaturationF(), stop.second.lightnessF());
         }
@@ -324,7 +355,7 @@ QJsonObject ThemeColor::toJson() {
             gradientStops << gradientStop;
         }
         if (gradient->type() == QGradient::RadialGradient) {
-            auto curGradient = static_cast<QRadialGradient*>(gradient);
+            QRadialGradient *curGradient = static_cast<QRadialGradient*>(gradient);
             jGradient["cx"] = curGradient->center().x();
             jGradient["cy"] = curGradient->center().y();
             jGradient["radius"] = curGradient->radius();
@@ -332,7 +363,7 @@ QJsonObject ThemeColor::toJson() {
             jGradient["fy"] = curGradient->focalPoint().y();
         }
         if (gradient->type() == QGradient::LinearGradient) {
-            auto curGradient = static_cast<QLinearGradient*>(gradient);
+            QLinearGradient *curGradient = static_cast<QLinearGradient*>(gradient);
             jGradient["x1"] = curGradient->start().x();
             jGradient["y1"] = curGradient->start().y();
             jGradient["x2"] = curGradient->finalStop().x();
@@ -348,29 +379,49 @@ void ThemeColor::fromJson(const QJsonObject &aObject) {
     color = aObject.value("color").toString();
     if (aObject.value("gradient") != QJsonValue::Undefined) {
         QJsonObject jGradient = aObject.value("gradient").toObject();
-        QGradientStops stops;
-        for (auto jStop: jGradient.value("stops").toArray()) {
-            stops << QGradientStop(jStop.toObject().value("pos").toDouble(), QColor(jStop.toObject().value("color").toString()));
-        }
+//        QGradientStops stops;
+//        for (QJsonValue jStop: jGradient.value("stops").toArray()) {
+//            stops << QGradientStop(jStop.toObject().value("pos").toDouble(), QColor(jStop.toObject().value("color").toString()));
+//        }
 
         switch (static_cast<QGradient::Type>(jGradient.value("type").toInt())) {
         case QGradient::LinearGradient: {
-            auto newGradient = new QLinearGradient();
-            newGradient->setStart(jGradient.value("x1").toDouble(), jGradient.value("y1").toDouble());
-            newGradient->setFinalStop(jGradient.value("x2").toDouble(), jGradient.value("y2").toDouble());
+            int x1, y1, x2, y2;
+            x1 = jGradient.value("x1").toDouble();
+            y1 = jGradient.value("y1").toDouble();
+            x2 = jGradient.value("x2").toDouble();
+            y2 = jGradient.value("y2").toDouble();
+            QLinearGradient *newGradient = new QLinearGradient(x1, y1, x2, y2);
+//            newGradient->setStart(jGradient.value("x1").toDouble(), jGradient.value("y1").toDouble());
+//            newGradient->setFinalStop(jGradient.value("x2").toDouble(), jGradient.value("y2").toDouble());
             newGradient->setSpread(static_cast<QGradient::Spread>(jGradient.value("spread").toInt()));
-            newGradient->setStops(stops);
+            for (QJsonValue jStop: jGradient.value("stops").toArray()) {
+                double pos = jStop.toObject().value("pos").toDouble();
+                QColor color = QColor(jStop.toObject().value("color").toString());
+                newGradient->setColorAt(pos, color);
+            }
+//            newGradient->setStops(stops);
             gradient = newGradient;
             break;
         }
         case QGradient::RadialGradient: {
-            auto newGradient = new QRadialGradient();
-            newGradient->setCenter(jGradient.value("cx").toDouble(), jGradient.value("cy").toDouble());
-            newGradient->setRadius(jGradient.value("radius").toDouble());
-            newGradient->setFocalPoint(jGradient.value("fx").toDouble(), jGradient.value("fy").toDouble());
-            newGradient->setSpread(static_cast<QGradient::Spread>(jGradient.value("spread").toInt()));
-            newGradient->setStops(stops);
-            gradient = newGradient;
+            double cx = jGradient.value("cx").toDouble();
+            double cy = jGradient.value("cy").toDouble();
+            double redius = jGradient.value("radius").toDouble();
+            double fx = jGradient.value("fx").toDouble();
+            double fy = jGradient.value("fy").toDouble();
+            QRadialGradient newGradient(cx, cy, redius, fx, fy);
+//            newGradient->setCenter(jGradient.value("cx").toDouble(), jGradient.value("cy").toDouble());
+//            newGradient->setRadius(jGradient.value("radius").toDouble());
+//            newGradient->setFocalPoint(jGradient.value("fx").toDouble(), jGradient.value("fy").toDouble());
+            newGradient.setSpread(static_cast<QGradient::Spread>(jGradient.value("spread").toInt()));
+            for (QJsonValue jStop: jGradient.value("stops").toArray()) {
+                double pos = jStop.toObject().value("pos").toDouble();
+                QColor color = QColor(jStop.toObject().value("color").toString());
+                newGradient.setColorAt(pos, color);
+            }
+//            newGradient->setStops(stops);
+            setGradient(newGradient);
             break;
         }
         default: {
@@ -504,29 +555,48 @@ QString Theme::qssTheme() {
 //            "\nmainProfileBackground=" << currentTheme.mainProfileBackground.setAlpha(255 * 0.5).getString() <<
 //            "\nmainBackground=" << currentTheme.mainBackground.getString();
 
-    qss = textFromFile(":/theme/baseColor.qss").arg(currentTheme.text.getString(),
-                                                    currentTheme.hover.getString(),
-                                                    currentTheme.border.getString(),
-                                                    currentTheme.background.getString(),
-                                                    combineColor(currentTheme.background.getColor(), 0.8, Qt::black, 0.2).name(QColor::NameFormat::HexArgb),//currentTheme.disabled.getString(),
-                                                    currentTheme.backgroundSecond.getString(),
-                                                    combineColor(currentTheme.backgroundSecond.getColor(), 0.65, Qt::black, 0.35).name(QColor::NameFormat::HexArgb),//currentTheme.disabledBackground.getString(),
-                                                    currentTheme.alternate.getString(),
-                                                    currentTheme.backgroundSelectedItem.getString(),
-                                                    currentTheme.backgroundProgressbar.getString(),
-                                                    currentTheme.backgroundProgressbarProgress.getString(),
-                                                    currentTheme.headerForm.setAlpha(255 * 0.5).getString(),//View background + Profile frame background
-                                                    currentTheme.headerForm.setAlpha(255).getString(),//Freeze row background
-                                                    currentTheme.backgroundItem.setAlpha(255 * 0.5).getString(),//items background
-                                                    currentTheme.forItemHover.setAlpha(255 * 0.5).getString(),//hovered items background
-                                                    currentTheme.headerForm.setAlpha(255 * 0.8).getString(),//Modal frame background
-                                                    currentTheme.mainProfileBackground.setAlpha(255 * 0.5).getString(),//Profile info 2 background
-                                                    currentTheme.backgroundItem.setAlpha(255 * 0.8).getString(),//categories frame background
-                                                    currentTheme.headerForm.setAlpha(255 * 0.7).getString(),//Main window header background
-                                                    currentTheme.mainBackground.getString());
+//    qss = textFromFile(":/theme/baseColor.qss").arg(currentTheme.text.getString(),
+//                                                    currentTheme.hover.getString(),
+//                                                    currentTheme.border.getString(),
+//                                                    currentTheme.background.getString(),
+//                                                    combineColor(currentTheme.background.getColor(), 0.8, Qt::black, 0.2).name(QColor::NameFormat::HexArgb),//currentTheme.disabled.getString(),
+//                                                    currentTheme.backgroundSecond.getString(),
+//                                                    combineColor(currentTheme.backgroundSecond.getColor(), 0.65, Qt::black, 0.35).name(QColor::NameFormat::HexArgb),//currentTheme.disabledBackground.getString(),
+//                                                    currentTheme.alternate.getString(),
+//                                                    currentTheme.backgroundSelectedItem.getString(),
+//                                                    currentTheme.backgroundProgressbar.getString(),
+//                                                    currentTheme.backgroundProgressbarProgress.getString(),
+//                                                    currentTheme.headerForm.setAlpha(255 * 0.5).getString(),//View background + Profile frame background
+//                                                    currentTheme.headerForm.setAlpha(255).getString(),//Freeze row background
+//                                                    currentTheme.backgroundItem.setAlpha(255 * 0.5).getString(),//items background
+//                                                    currentTheme.forItemHover.setAlpha(255 * 0.5).getString(),//hovered items background
+//                                                    currentTheme.headerForm.setAlpha(255 * 0.8).getString(),//Modal frame background
+//                                                    currentTheme.mainProfileBackground.setAlpha(255 * 0.5).getString(),//Profile info 2 background
+//                                                    currentTheme.backgroundItem.setAlpha(255 * 0.8).getString(),//categories frame background
+//                                                    currentTheme.headerForm.setAlpha(255 * 0.7).getString(),//Main window header background
+//                                                    currentTheme.mainBackground.getString());
 
     qss += textFromFile(":/theme/baseIcons.qss").arg(currentTheme.pathIcons);
-    qss += textFromFile(":/theme/globalTheme.qss");
+    qss += textFromFile(":/theme/globalTheme.qss").arg(currentTheme.text.getString(),
+                                                       currentTheme.hover.getString(),
+                                                       currentTheme.border.getString(),
+                                                       currentTheme.background.getString(),
+                                                       combineColor(currentTheme.background.getColor(), 0.8, Qt::black, 0.2).name(QColor::NameFormat::HexArgb),//currentTheme.disabled.getString(),
+                                                       currentTheme.backgroundSecond.getString(),
+                                                       combineColor(currentTheme.backgroundSecond.getColor(), 0.65, Qt::black, 0.35).name(QColor::NameFormat::HexArgb),//currentTheme.disabledBackground.getString(),
+                                                       currentTheme.alternate.getString(),
+                                                       currentTheme.backgroundSelectedItem.getString(),
+                                                       currentTheme.backgroundProgressbar.getString(),
+                                                       currentTheme.backgroundProgressbarProgress.getString(),
+                                                       currentTheme.headerForm.setAlpha(255 * 0.5).getString(),//View background + Profile frame background
+                                                       currentTheme.headerForm.setAlpha(255).getString(),//Freeze row background
+                                                       currentTheme.backgroundItem.setAlpha(255 * 0.5).getString(),//items background
+                                                       currentTheme.forItemHover.setAlpha(255 * 0.5).getString(),//hovered items background
+                                                       currentTheme.headerForm.setAlpha(255 * 0.8).getString(),//Modal frame background
+                                                       currentTheme.mainProfileBackground.setAlpha(255 * 0.5).getString(),//Profile info 2 background
+                                                       currentTheme.backgroundItem.setAlpha(255 * 0.8).getString(),//categories frame background
+                                                       currentTheme.headerForm.setAlpha(255 * 0.7).getString(),//Main window header background
+                                                       currentTheme.mainBackground.getString());
     qss += " "
     "* { "
         "font-family:  " + defaultFont() + "; "
@@ -718,10 +788,10 @@ QImage convertImage(const QImage &aImage, const QColor &aColor) {
 QStringList getImagesFromDir(const QDir &directory) {
     QStringList list = directory.entryList(QStringList("*.png"));
     QStringList result;
-    for (const auto &file: list) {
+    for (const QString &file: list) {
         result << directory.absolutePath() + "/" + file;
     }
-    for (const auto &dir: directory.entryList(QDir::Dirs)) {
+    for (const QString &dir: directory.entryList(QDir::Dirs)) {
         if (dir != "." && dir != "..") {
             result << getImagesFromDir(directory.absolutePath() + "/" + dir);
         }
@@ -762,7 +832,7 @@ void Theme::createIcons(const QString &aPath, const QColor &aNewColor) {
 
     QStringList imagesList = getImagesFromDir(directory);
 
-    for (const auto &file: imagesList) {
+    for (const QString &file: imagesList) {
         QImage image;
         QString fileName = file;
         fileName = fileName.remove(directory.absolutePath() + "/");

@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormMain_t {
-    const uint offsetsAndSize[74];
-    char stringdata0[473];
+    const uint offsetsAndSize[70];
+    char stringdata0[451];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormMain_t, stringdata0) + ofs), len 
@@ -40,50 +40,47 @@ QT_MOC_LITERAL(86, 5), // "SGame"
 QT_MOC_LITERAL(92, 5), // "games"
 QT_MOC_LITERAL(98, 23), // "showAchievementsProfile"
 QT_MOC_LITERAL(122, 9), // "ProfileID"
-QT_MOC_LITERAL(132, 10), // "aProfileId"
-QT_MOC_LITERAL(143, 5), // "aGame"
-QT_MOC_LITERAL(149, 26), // "containerAchievementsClose"
-QT_MOC_LITERAL(176, 9), // "goToGames"
-QT_MOC_LITERAL(186, 8), // "aSteamId"
-QT_MOC_LITERAL(195, 11), // "goToFriends"
-QT_MOC_LITERAL(207, 13), // "goToFavorites"
-QT_MOC_LITERAL(221, 14), // "goToStatistics"
-QT_MOC_LITERAL(236, 8), // "SProfile"
-QT_MOC_LITERAL(245, 14), // "profileSteamid"
-QT_MOC_LITERAL(260, 14), // "updateSettings"
-QT_MOC_LITERAL(275, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(299, 10), // "closeEvent"
-QT_MOC_LITERAL(310, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(323, 8), // "showForm"
-QT_MOC_LITERAL(332, 11), // "widgetIndex"
-QT_MOC_LITERAL(344, 11), // "widthWindow"
-QT_MOC_LITERAL(356, 12), // "windowHeight"
-QT_MOC_LITERAL(369, 15), // "returnFromForms"
-QT_MOC_LITERAL(385, 11), // "retranslate"
-QT_MOC_LITERAL(397, 11), // "updateIcons"
-QT_MOC_LITERAL(409, 4), // "init"
-QT_MOC_LITERAL(414, 16), // "resizeScrollArea"
-QT_MOC_LITERAL(431, 5), // "width"
-QT_MOC_LITERAL(437, 7), // "aHeight"
-QT_MOC_LITERAL(445, 11), // "goToProfile"
-QT_MOC_LITERAL(457, 2), // "id"
-QT_MOC_LITERAL(460, 12) // "goToSettings"
+QT_MOC_LITERAL(132, 9), // "profileId"
+QT_MOC_LITERAL(142, 4), // "game"
+QT_MOC_LITERAL(147, 26), // "containerAchievementsClose"
+QT_MOC_LITERAL(174, 9), // "goToGames"
+QT_MOC_LITERAL(184, 11), // "goToFriends"
+QT_MOC_LITERAL(196, 13), // "goToFavorites"
+QT_MOC_LITERAL(210, 14), // "goToStatistics"
+QT_MOC_LITERAL(225, 8), // "SProfile"
+QT_MOC_LITERAL(234, 7), // "profile"
+QT_MOC_LITERAL(242, 14), // "updateSettings"
+QT_MOC_LITERAL(257, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(281, 10), // "closeEvent"
+QT_MOC_LITERAL(292, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(305, 8), // "showForm"
+QT_MOC_LITERAL(314, 11), // "widgetIndex"
+QT_MOC_LITERAL(326, 11), // "widthWindow"
+QT_MOC_LITERAL(338, 12), // "windowHeight"
+QT_MOC_LITERAL(351, 15), // "returnFromForms"
+QT_MOC_LITERAL(367, 11), // "retranslate"
+QT_MOC_LITERAL(379, 11), // "updateIcons"
+QT_MOC_LITERAL(391, 4), // "init"
+QT_MOC_LITERAL(396, 16), // "resizeScrollArea"
+QT_MOC_LITERAL(413, 5), // "width"
+QT_MOC_LITERAL(419, 6), // "height"
+QT_MOC_LITERAL(426, 11), // "goToProfile"
+QT_MOC_LITERAL(438, 12) // "goToSettings"
 
     },
     "FormMain\0createFormContainerAchievements\0"
     "FormContainerAchievements*\0\0"
     "showAchievements\0SGame\0games\0"
     "showAchievementsProfile\0ProfileID\0"
-    "aProfileId\0aGame\0containerAchievementsClose\0"
-    "goToGames\0aSteamId\0goToFriends\0"
-    "goToFavorites\0goToStatistics\0SProfile\0"
-    "profileSteamid\0updateSettings\0"
-    "QFlags<changedSettings>\0closeEvent\0"
-    "QCloseEvent*\0showForm\0widgetIndex\0"
-    "widthWindow\0windowHeight\0returnFromForms\0"
-    "retranslate\0updateIcons\0init\0"
-    "resizeScrollArea\0width\0aHeight\0"
-    "goToProfile\0id\0goToSettings"
+    "profileId\0game\0containerAchievementsClose\0"
+    "goToGames\0goToFriends\0goToFavorites\0"
+    "goToStatistics\0SProfile\0profile\0"
+    "updateSettings\0QFlags<changedSettings>\0"
+    "closeEvent\0QCloseEvent*\0showForm\0"
+    "widgetIndex\0widthWindow\0windowHeight\0"
+    "returnFromForms\0retranslate\0updateIcons\0"
+    "init\0resizeScrollArea\0width\0height\0"
+    "goToProfile\0goToSettings"
 };
 #undef QT_MOC_LITERAL
 
@@ -106,46 +103,46 @@ static const uint qt_meta_data_FormMain[] = {
        7,    2,  150,    3, 0x0a,    4 /* Public */,
       11,    0,  155,    3, 0x0a,    7 /* Public */,
       12,    1,  156,    3, 0x0a,    8 /* Public */,
-      14,    1,  159,    3, 0x0a,   10 /* Public */,
-      15,    0,  162,    3, 0x0a,   12 /* Public */,
-      16,    1,  163,    3, 0x0a,   13 /* Public */,
-      19,    1,  166,    3, 0x0a,   15 /* Public */,
-      21,    1,  169,    3, 0x08,   17 /* Private */,
-      23,    3,  172,    3, 0x08,   19 /* Private */,
-      23,    2,  179,    3, 0x28,   23 /* Private | MethodCloned */,
-      23,    1,  184,    3, 0x28,   26 /* Private | MethodCloned */,
-      27,    0,  187,    3, 0x08,   28 /* Private */,
-      28,    0,  188,    3, 0x08,   29 /* Private */,
-      29,    0,  189,    3, 0x08,   30 /* Private */,
-      30,    0,  190,    3, 0x08,   31 /* Private */,
-      31,    2,  191,    3, 0x08,   32 /* Private */,
-      31,    1,  196,    3, 0x28,   35 /* Private | MethodCloned */,
-      31,    0,  199,    3, 0x28,   37 /* Private | MethodCloned */,
-      34,    1,  200,    3, 0x08,   38 /* Private */,
-      36,    0,  203,    3, 0x08,   40 /* Private */,
+      13,    1,  159,    3, 0x0a,   10 /* Public */,
+      14,    0,  162,    3, 0x0a,   12 /* Public */,
+      15,    1,  163,    3, 0x0a,   13 /* Public */,
+      18,    1,  166,    3, 0x0a,   15 /* Public */,
+      20,    1,  169,    3, 0x08,   17 /* Private */,
+      22,    3,  172,    3, 0x08,   19 /* Private */,
+      22,    2,  179,    3, 0x28,   23 /* Private | MethodCloned */,
+      22,    1,  184,    3, 0x28,   26 /* Private | MethodCloned */,
+      26,    0,  187,    3, 0x08,   28 /* Private */,
+      27,    0,  188,    3, 0x08,   29 /* Private */,
+      28,    0,  189,    3, 0x08,   30 /* Private */,
+      29,    0,  190,    3, 0x08,   31 /* Private */,
+      30,    2,  191,    3, 0x08,   32 /* Private */,
+      30,    1,  196,    3, 0x28,   35 /* Private | MethodCloned */,
+      30,    0,  199,    3, 0x28,   37 /* Private | MethodCloned */,
+      33,    1,  200,    3, 0x08,   38 /* Private */,
+      34,    0,  203,    3, 0x08,   40 /* Private */,
 
  // slots: parameters
     0x80000000 | 2,
     QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void, 0x80000000 | 8, 0x80000000 | 5,    9,   10,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 8,   13,
-    QMetaType::Void, 0x80000000 | 8,   13,
+    QMetaType::Void, 0x80000000 | 8,    9,
+    QMetaType::Void, 0x80000000 | 8,    9,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 17,   18,
-    QMetaType::Void, 0x80000000 | 20,    3,
-    QMetaType::Void, 0x80000000 | 22,    3,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,   24,   25,   26,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   24,   25,
-    QMetaType::Void, QMetaType::Int,   24,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 16,   17,
+    QMetaType::Void, 0x80000000 | 19,    3,
+    QMetaType::Void, 0x80000000 | 21,    3,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int, QMetaType::Int,   23,   24,   25,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   23,   24,
+    QMetaType::Void, QMetaType::Int,   23,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,   32,   33,
-    QMetaType::Void, QMetaType::Int,   32,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 8,   35,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,   31,   32,
+    QMetaType::Void, QMetaType::Int,   31,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 8,    9,
     QMetaType::Void,
 
        0        // eod

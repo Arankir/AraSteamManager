@@ -369,5 +369,11 @@
         <file>iconsWhiteTheme/window_undock_disabled.png</file>
         <file>iconsWhiteTheme/window_undock_focus.png</file>
         <file>iconsWhiteTheme/window_undock_pressed.png</file>
+        <file>iconsBlackTheme/height.png</file>
+        <file>iconsBlackTheme/width.png</file>
+        <file>iconsWhiteTheme/height.png</file>
+        <file>iconsWhiteTheme/width.png</file>
+        <file>iconsBlueTheme/height.png</file>
+        <file>iconsBlueTheme/width.png</file>
     </qresource>
 </RCC>

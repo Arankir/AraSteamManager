@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SProfile_t {
     const uint offsetsAndSize[20];
-    char stringdata0[97];
+    char stringdata0[102];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_SProfile_t, stringdata0) + ofs), len 
@@ -37,15 +37,15 @@ QT_MOC_LITERAL(18, 0), // ""
 QT_MOC_LITERAL(19, 5), // "value"
 QT_MOC_LITERAL(25, 10), // "loadVanity"
 QT_MOC_LITERAL(36, 9), // "ProfileID"
-QT_MOC_LITERAL(46, 3), // "aId"
-QT_MOC_LITERAL(50, 29), // "std::function<void(SProfile)>"
-QT_MOC_LITERAL(80, 9), // "aCallback"
-QT_MOC_LITERAL(90, 6) // "loadId"
+QT_MOC_LITERAL(46, 9), // "profileId"
+QT_MOC_LITERAL(56, 29), // "std::function<void(SProfile)>"
+QT_MOC_LITERAL(86, 8), // "callback"
+QT_MOC_LITERAL(95, 6) // "loadId"
 
     },
     "SProfile\0fromJson\0\0value\0loadVanity\0"
-    "ProfileID\0aId\0std::function<void(SProfile)>\0"
-    "aCallback\0loadId"
+    "ProfileID\0profileId\0std::function<void(SProfile)>\0"
+    "callback\0loadId"
 };
 #undef QT_MOC_LITERAL
 

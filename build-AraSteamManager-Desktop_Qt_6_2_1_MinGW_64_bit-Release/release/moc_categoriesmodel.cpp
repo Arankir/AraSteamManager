@@ -105,7 +105,7 @@ void CategoriesModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         auto *_t = static_cast<CategoriesModel *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->s_checkStateChanged((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< const bool(*)>(_a[2]))); break;
+        case 0: _t->s_checkStateChanged((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 1: _t->s_error((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: { bool _r = _t->removeAllCategories();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
@@ -123,7 +123,7 @@ void CategoriesModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (CategoriesModel::*)(Category * , const bool & );
+            using _t = void (CategoriesModel::*)(Category * , bool );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&CategoriesModel::s_checkStateChanged)) {
                 *result = 0;
                 return;
@@ -146,7 +146,7 @@ const QMetaObject CategoriesModel::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_CategoriesModel_t
-, QtPrivate::TypeAndForceComplete<CategoriesModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
+, QtPrivate::TypeAndForceComplete<CategoriesModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
 , QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
@@ -186,7 +186,7 @@ int CategoriesModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void CategoriesModel::s_checkStateChanged(Category * _t1, const bool & _t2)
+void CategoriesModel::s_checkStateChanged(Category * _t1, bool _t2)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

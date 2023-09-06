@@ -5,27 +5,23 @@
 #include "classes/steamApi/structures/sprofilecustomization.h"
 #include "classes/steamApi/structures/sbadge.h"
 #include "classes/common/images.h"
+#include "classes/common/generalfunctions.h"
 
 #include <QPainter>
 #include <QSpacerItem>
 #include <QFormLayout>
 
 #define Constants {
-const QColor c_green_color  = QColor (87,   230,    124,    255 * 0.7);
-const QColor c_yellow_color = QColor (108,  110,    14,     255 * 0.7);
-const QColor c_red_color    = QColor (255,  48,     48,     255 * 1);
-const QColor c_blue_color   = QColor (0,    0,      255,    255 * 0.7);
+const QColor c_green_color  = QColor (19, 147, 24, 255 * 0.7);//#139318
+const QColor c_yellow_color = QColor (183, 197, 19, 255 * 0.7);//#B7C513
+const QColor c_red_color    = QColor (166, 23, 23, 255 * 1);//#A61717
+const QColor c_blue_color   = QColor (21, 50, 138, 255 * 0.7);//#15328A
 #define ConstantsEnd }
 
 FormProfile::FormProfile(const SProfile &aProfile, QWidget *aParent) : Form(aParent), ui(new Ui::FormProfile), profile_(aProfile) {
     ui->setupUi(this);
-    ui->LabelProfileVisibility->setTextFormat(Qt::RichText);
-    ui->LabelGamesVisibility  ->setTextFormat(Qt::RichText);
-    ui->LabelFriendsVisibility->setTextFormat(Qt::RichText);
-    ui->labelLinkValue        ->setTextFormat(Qt::RichText);
+    ui->labelLinkValue->setTextFormat(Qt::RichText);
     ui->LabelPersonaState->setWordWrap(true);
-
-//    ui->FrameProfileButtons->setMinimumHeight(32 + 18);
 
     ui->LabelAvatar->setFixedSize(QSize(64, 64) * c_frameLargerBy);
     ui->LabelAvatarMinimize->setFixedSize(QSize(32, 32) * c_frameLargerBy);
@@ -91,20 +87,20 @@ void FormProfile::setProfile(const SProfile &aProfile) {
 void FormProfile::setProfileStatus() {
     switch (profile_.communityVisibilityState()) {
         case 1:
-            ui->LabelProfileVisibility->setlightningColor(c_red_color)->setToolTip(tr("Скрытый"));
-            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
+            ui->LabelProfileStatus->setPixmap(QPixmap("://dataLoaded/profile_red.png").scaled(20, 20));
+            ui->LabelProfileStatus->setToolTip(textToToolTip(tr("Данные профиля скрыты")));
             break;
         case 3:
-            ui->LabelProfileVisibility->setlightningColor(c_green_color)->setToolTip(tr("Публичный"));
-            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
+            ui->LabelProfileStatus->setPixmap(QPixmap("://dataLoaded/profile_green.png").scaled(20, 20));
+            ui->LabelProfileStatus->setToolTip(textToToolTip(tr("Данные профиля загружены")));
             break;
         case 8:
-            ui->LabelProfileVisibility->setlightningColor(c_yellow_color)->setToolTip(tr("Для друзей"));
-            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateYellow()).scaled(14, 14));
+            ui->LabelProfileStatus->setPixmap(QPixmap("://dataLoaded/profile_yellow.png").scaled(20, 20));
+            ui->LabelProfileStatus->setToolTip(textToToolTip(tr("Данные профиля доступны только для друзей")));
             break;
         default:
-            ui->LabelProfileVisibility->setlightningColor(c_blue_color)->setToolTip(tr("Неизвестно"));
-            ui->LabelProfileStatus->setPixmap(QPixmap(Images::stateBlue()).scaled(14, 14));
+            ui->LabelProfileStatus->setPixmap(QPixmap("://dataLoaded/profile_red.png").scaled(20, 20));
+            ui->LabelProfileStatus->setToolTip(textToToolTip(tr("Не удалось загрузить данные профиля")));
     }
 }
 
@@ -118,14 +114,14 @@ void FormProfile::setGames(const ProfileID &aSteamId) {
     if (games_.count() > 0) {
         ui->ButtonGames->setEnabled(true);
         ui->ButtonStatistics->setEnabled(true);
-        ui->LabelGamesVisibility->setlightningColor(c_green_color)->setToolTip(tr("Публичный"));
-        ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
+        ui->LabelGamesStatus->setPixmap(QPixmap("://dataLoaded/games_green.png").scaled(20, 20));
+        ui->LabelGamesStatus->setToolTip(textToToolTip("Игры загружены"));
         setTimePlayed(games_);
     } else {
         ui->ButtonGames->setEnabled(false);
         ui->ButtonStatistics->setEnabled(false);
-        ui->LabelGamesVisibility->setlightningColor(c_red_color)->setToolTip(tr("Скрытый"));
-        ui->LabelGamesStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
+        ui->LabelGamesStatus->setPixmap(QPixmap("://dataLoaded/games_red.png").scaled(20, 20));
+        ui->LabelGamesStatus->setToolTip(textToToolTip("Не удалось загрузить информацию о играх"));
     }
 }
 
@@ -133,17 +129,17 @@ void FormProfile::setFriends(const ProfileID &aSteamId) {
     friends_ = SFriend::load(aSteamId);
     if (friends_.count() > 0) {
         ui->ButtonFriends->setEnabled(true);
-        ui->LabelFriendsVisibility->setlightningColor(c_green_color)->setToolTip(tr("Публичный"));
-        ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateGreen()).scaled(14, 14));
+        ui->LabelFriendsStatus->setPixmap(QPixmap("://dataLoaded/friends_green.png").scaled(20, 20));
+        ui->LabelFriendsStatus->setToolTip(textToToolTip("Друзья загружены"));
     } else {
         ui->ButtonFriends->setEnabled(false);
-        ui->LabelFriendsVisibility->setlightningColor(c_red_color)->setToolTip(tr("Скрытый"));
-        ui->LabelFriendsStatus->setPixmap(QPixmap(Images::stateRed()).scaled(14, 14));
+        ui->LabelFriendsStatus->setPixmap(QPixmap("://dataLoaded/friends_red.png").scaled(20, 20));
+        ui->LabelFriendsStatus->setToolTip(textToToolTip("Не удалось загрузить информацию о друзьях"));
     }
 }
 
 void FormProfile::setMinimizeInfo(const SProfile &aProfile) {
-    ui->LabelAvatarMinimize->setPixmap(aProfile.getAvatarWithFrame(QSize(32, 32) * c_frameLargerBy));
+    ui->LabelAvatarMinimize->setPixmap(aProfile.pixmapFramedAvatar(QSize(32, 32) * c_frameLargerBy));
     ui->LabelNameMinimize->setText(aProfile.personaName());
 
     isMinimizeInit_ = true;
@@ -151,7 +147,7 @@ void FormProfile::setMinimizeInfo(const SProfile &aProfile) {
 
 void FormProfile::setBaseInfo(const SProfile &aProfile) {
     //Аватарки
-    ui->LabelAvatar->setPixmap(aProfile.getAvatarWithFrame(QSize(64, 64) * c_frameLargerBy));
+    ui->LabelAvatar->setPixmap(aProfile.pixmapFramedAvatar(QSize(64, 64) * c_frameLargerBy));
 
     //Ник
     ui->LabelName        ->setText(aProfile.personaName());
@@ -287,8 +283,8 @@ void FormProfile::setBadges(const ProfileID &aSteamId) {
     int lvl4Badges = 0;
     int lvl5Badges = 0;
     int lvlMore5Badges = 0;
-    auto badges = SBadge::load(aSteamId);
-    for (const auto &badge: badges) {
+    SBadges badges = SBadge::load(aSteamId);
+    for (const SBadge &badge: badges) {
         if (badge.appid() == 0) {
             ++specialBadges;
         } else {
@@ -350,7 +346,7 @@ void FormProfile::setTimePlayed(const SGames &aGames) {
     int win = 0;
     int mac = 0;
     int linux = 0;
-    for (const auto &game: aGames) {
+    for (const SGame &game: aGames) {
         int playtime = game.playtimeForever();
         total += playtime;
         win += game.playtimeWindowsForever();
@@ -396,13 +392,13 @@ void FormProfile::setCustomizations(const ProfileID &aSteamId) {
     ui->labelCustomizationAvatarFrameValue->setText(items.value("avatar_frame").item_title);
     ui->labelCustomizationAnimatedAvatarValue->setText(items.value("animated_avatar").item_title);
 
-    auto customizations = SProfileCustomization::load(aSteamId);
+    QList<SProfileCustomization> customizations = SProfileCustomization::load(aSteamId);
     int purchased = 0;
     int upgraded = 0;
 //    int lvl1 = 0;
 //    int lvl2 = 0;
 //    int lvl3 = 0;
-    for (const auto &customization: customizations) {
+    for (const SProfileCustomization &customization: customizations) {
         if (customization.isUpgradable()) {
 //            switch (customization.level()) {
 //            case 1: {

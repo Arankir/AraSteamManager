@@ -31,13 +31,13 @@ private slots:
     //events
     void closeEvent(QCloseEvent*) override;
     //Forms
-    void showForm(const int &widgetIndex, const int &widthWindow = 300, const int &windowHeight = 400);
+    void showForm(int widgetIndex, int widthWindow = 300, int windowHeight = 400);
     void returnFromForms();
     //Systems
     void retranslate() override;
     void updateIcons() override;
     void init();
-    void resizeScrollArea(const int &width = 300, const int &height = 400);
+    void resizeScrollArea(int width = 300, int height = 400);
     //Functions
     void goToProfile(const ProfileID &profileId);
     void goToSettings();

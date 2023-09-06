@@ -51,19 +51,21 @@
 #ifndef FREEZETABLEWIDGET_H
 #define FREEZETABLEWIDGET_H
 
-#include <QTableView>
+#include "subWidgets/tables/mytable.h"
 //#include <QStandardItemModel>
 
-class FreezeTableWidget : public QTableView {
+class FreezeTableWidget : public MyTable {
      Q_OBJECT
 
 public:
     FreezeTableWidget(QWidget *parent = nullptr);
     ~FreezeTableWidget();
     void setModel(QAbstractItemModel *model) override;
+    void setFilter(FilterModel *filter) override;
     QAbstractItemModel *model();
 
     QTableView *getFrozenTableView() const;
+    void setColumnHidden(int column, bool isHidden);
 
 protected:
       void resizeEvent(QResizeEvent *event) override;
@@ -71,8 +73,8 @@ protected:
       void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible) override;
 
 private slots:
-      void updateSectionWidth(const int &logicalIndex, const int &oldSize, const int &newSize);
-      void updateSectionHeight(const int &logicalIndex, const int &oldSize, const int &newSize);
+      void updateSectionWidth(int logicalIndex, int oldSize, int newSize);
+      void updateSectionHeight(int logicalIndex, int oldSize, int newSize);
 
 private:
       void initFreezeTable();

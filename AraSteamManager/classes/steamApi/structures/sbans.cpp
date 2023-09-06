@@ -5,7 +5,7 @@
 
 QList<SBan> onLoadBan(const QByteArray &aByteArray) {
     QList<SBan> list;
-    for(auto &&ban: QJsonDocument::fromJson(aByteArray).object().value("players").toArray()) {
+    for(QJsonValue &&ban: QJsonDocument::fromJson(aByteArray).object().value("players").toArray()) {
         list.append(SBan(ban.toObject()));
     }
     return list;
@@ -25,7 +25,7 @@ QJsonObject SBan::toJson() const {
 }
 
 SBans SBan::load(const ProfileID &aProfileId, std::function<void (SBans)> aCallback) {
-    return Sapi::load<SBan>(bansUrl(aProfileId), onLoadBan, aCallback);
+    return Sapi::load<SBan>(Sapi::Url::bans(aProfileId), onLoadBan, aCallback);
 }
 
 ProfileID SBan::steamId() const {

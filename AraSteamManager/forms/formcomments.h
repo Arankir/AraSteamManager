@@ -2,6 +2,7 @@
 #define FORMCOMMENTSINTERACTIONS_H
 
 #include <QWidget>
+#include "form.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
 #include "classes/steamApi/structures/sprofile.h"
@@ -11,8 +12,7 @@ namespace Ui {
 class FormComments;
 }
 
-class FormComments : public Form
-{
+class FormComments : public Form {
     Q_OBJECT
 
 public:

@@ -35,10 +35,10 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     GameID gameId(const QModelIndex &index) const;
 
-    SGame getGame(const int &row) const;
+    SGame getGame(int row) const;
     SGame getGame(const QModelIndex &index) const;
-    double getPercent(const int &row) const;
-    SAchievementsPlayer getAchievements(const int &row) const;
+    double getPercent(int row) const;
+    SAchievementsPlayer getAchievements(int row) const;
 
     void clear();
 public slots:
@@ -46,7 +46,7 @@ public slots:
 
 signals:
     void s_finished();
-    void s_progress(const QString &status, const int &progress, const int &max);
+    void s_progress(const QString &status, int progress, int max);
 
 private slots:
     void onResultAchievements(const SAchievementsPlayer &achievements, const GameID &gameId);

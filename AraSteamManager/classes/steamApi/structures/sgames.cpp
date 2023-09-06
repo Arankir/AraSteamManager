@@ -36,19 +36,19 @@ QJsonObject SGame::toJson() const {
 
 SGames onLoad(const QByteArray &aByteArray) {
     SGames list;
-    for(const auto &game: QJsonDocument::fromJson(aByteArray).object().value("response").toObject().value("games").toArray()) {
+    for(const QJsonValue &game: QJsonDocument::fromJson(aByteArray).object().value("response").toObject().value("games").toArray()) {
         list.append(SGame(game.toObject()));
     }
     return list;
 }
 
-SGames SGame::load(const ProfileID &aProfileId, const int &aFreeGames, const int &aGameInfo, std::function<void(SGames)> aCallback) {
-    return Sapi::load<SGame>(gameUrl(aFreeGames, aGameInfo, aProfileId), onLoad, aCallback);
+SGames SGame::load(const ProfileID &aProfileId, int aFreeGames, int aGameInfo, std::function<void(SGames)> aCallback) {
+    return Sapi::load<SGame>(Sapi::Url::game(aFreeGames, aGameInfo, aProfileId), onLoad, aCallback);
 }
 
 int SGame::playerCount(const GameID &aGameId) {
     RequestData request;
-    request.get(Sapi::numberPlayersUrl(aGameId), false);
+    request.get(Sapi::Url::numberPlayers(aGameId), false);
     return (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("player_count").toDouble();
 }
 

@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriends_t {
-    const uint offsetsAndSize[52];
-    char stringdata0[319];
+    const uint offsetsAndSize[54];
+    char stringdata0[332];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormFriends_t, stringdata0) + ofs), len 
@@ -46,28 +46,30 @@ QT_MOC_LITERAL(91, 18), // "initComboBoxStatus"
 QT_MOC_LITERAL(110, 11), // "retranslate"
 QT_MOC_LITERAL(122, 11), // "updateIcons"
 QT_MOC_LITERAL(134, 13), // "currentFriend"
-QT_MOC_LITERAL(148, 14), // "SFriendProfile"
-QT_MOC_LITERAL(163, 10), // "createMenu"
-QT_MOC_LITERAL(174, 6), // "QMenu*"
-QT_MOC_LITERAL(181, 7), // "profile"
-QT_MOC_LITERAL(189, 18), // "goToCurrentProfile"
-QT_MOC_LITERAL(208, 24), // "lineEditName_TextChanged"
-QT_MOC_LITERAL(233, 4), // "arg1"
-QT_MOC_LITERAL(238, 18), // "buttonFind_Clicked"
-QT_MOC_LITERAL(257, 24), // "comboBoxStatus_Activated"
-QT_MOC_LITERAL(282, 5), // "index"
-QT_MOC_LITERAL(288, 30) // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(148, 18), // "FriendsModel::item"
+QT_MOC_LITERAL(167, 10), // "createMenu"
+QT_MOC_LITERAL(178, 6), // "QMenu*"
+QT_MOC_LITERAL(185, 7), // "profile"
+QT_MOC_LITERAL(193, 18), // "goToCurrentProfile"
+QT_MOC_LITERAL(212, 24), // "lineEditName_TextChanged"
+QT_MOC_LITERAL(237, 7), // "newText"
+QT_MOC_LITERAL(245, 18), // "buttonFind_Clicked"
+QT_MOC_LITERAL(264, 24), // "comboBoxStatus_Activated"
+QT_MOC_LITERAL(289, 5), // "index"
+QT_MOC_LITERAL(295, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(326, 5) // "state"
 
     },
     "FormFriends\0s_finish\0\0width\0s_goToProfile\0"
     "ProfileID\0profileId\0setFriends\0clear\0"
     "isInit\0init\0initComboBoxStatus\0"
     "retranslate\0updateIcons\0currentFriend\0"
-    "SFriendProfile\0createMenu\0QMenu*\0"
+    "FriendsModel::item\0createMenu\0QMenu*\0"
     "profile\0goToCurrentProfile\0"
-    "lineEditName_TextChanged\0arg1\0"
+    "lineEditName_TextChanged\0newText\0"
     "buttonFind_Clicked\0comboBoxStatus_Activated\0"
-    "index\0checkBoxFavorites_StateChanged"
+    "index\0checkBoxFavorites_StateChanged\0"
+    "state"
 };
 #undef QT_MOC_LITERAL
 
@@ -122,7 +124,7 @@ static const uint qt_meta_data_FormFriends[] = {
     QMetaType::Void, QMetaType::QString,   21,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   24,
-    QMetaType::Void, QMetaType::Int,   21,
+    QMetaType::Void, QMetaType::Int,   26,
 
        0        // eod
 };
@@ -143,9 +145,9 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 6: _t->initComboBoxStatus(); break;
         case 7: _t->retranslate(); break;
         case 8: _t->updateIcons(); break;
-        case 9: { SFriendProfile _r = _t->currentFriend();
-            if (_a[0]) *reinterpret_cast< SFriendProfile*>(_a[0]) = std::move(_r); }  break;
-        case 10: { QMenu* _r = _t->createMenu((*reinterpret_cast< const SFriendProfile(*)>(_a[1])));
+        case 9: { FriendsModel::item _r = _t->currentFriend();
+            if (_a[0]) *reinterpret_cast< FriendsModel::item*>(_a[0]) = std::move(_r); }  break;
+        case 10: { QMenu* _r = _t->createMenu((*reinterpret_cast< const FriendsModel::item(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         case 11: _t->goToCurrentProfile(); break;
         case 12: _t->lineEditName_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
@@ -181,7 +183,7 @@ const QMetaObject FormFriends::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormFriends_t
 , QtPrivate::TypeAndForceComplete<FormFriends, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<SFriendProfile, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SFriendProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<FriendsModel::item, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const FriendsModel::item &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
 >,

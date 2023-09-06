@@ -101,12 +101,12 @@ void FormCategoriesEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
         auto *_t = static_cast<FormCategoriesEdit *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->s_categoriesIsUpdated((*reinterpret_cast< const bool(*)>(_a[1]))); break;
+        case 0: _t->s_categoriesIsUpdated((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 1: _t->init(); break;
         case 2: _t->updateIcons(); break;
         case 3: _t->retranslate(); break;
         case 4: _t->achievementsToUi(); break;
-        case 5: { int _r = _t->indexFromRow((*reinterpret_cast< QListWidget*(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])));
+        case 5: { int _r = _t->indexFromRow((*reinterpret_cast< QListWidget*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 6: _t->buttonCancel_Clicked(); break;
         case 7: _t->buttonAccept_Clicked(); break;
@@ -126,7 +126,7 @@ void FormCategoriesEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, i
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (FormCategoriesEdit::*)(const bool & );
+            using _t = void (FormCategoriesEdit::*)(bool );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormCategoriesEdit::s_categoriesIsUpdated)) {
                 *result = 0;
                 return;
@@ -142,8 +142,8 @@ const QMetaObject FormCategoriesEdit::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormCategoriesEdit_t
-, QtPrivate::TypeAndForceComplete<FormCategoriesEdit, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<FormCategoriesEdit, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidget *, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -182,7 +182,7 @@ int FormCategoriesEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void FormCategoriesEdit::s_categoriesIsUpdated(const bool & _t1)
+void FormCategoriesEdit::s_categoriesIsUpdated(bool _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

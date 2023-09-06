@@ -1,6 +1,7 @@
 #ifndef FORMACHIEVEMENTSCATEGORIESEDIT_H
 #define FORMACHIEVEMENTSCATEGORIESEDIT_H
 
+#include "form.h"
 #include "classes/files/category.h"
 #include "classes/steamApi/structures/sgames.h"
 #include "subWidgets/items/qlistwidgetachievement.h"
@@ -22,14 +23,14 @@ public:
     void changeCategory(Category *category);
 
 signals:
-    void s_categoriesIsUpdated(const bool &isUpdated);
+    void s_categoriesIsUpdated(bool isUpdated);
 
 private slots:
     void init();
     void updateIcons() override;
     void retranslate() override;
     void achievementsToUi();
-    int indexFromRow(QListWidget *listWidget, const int &row);
+    int indexFromRow(QListWidget *listWidget, int row);
     void buttonCancel_Clicked();
     void buttonAccept_Clicked();
 private:

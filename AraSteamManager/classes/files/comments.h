@@ -24,27 +24,37 @@ protected:
 
 class AchievementComment: public Comment {
 public:
-    explicit AchievementComment(const ProfileID &profileId, const GameID &gameId, const AchievementID &achievementId, const QStringList &comment);
-    explicit AchievementComment(const QJsonObject &object);
+    explicit AchievementComment(const ProfileID &profileId, const GameID &gameId, const QString &gameName, const QString &gameIcon, const AchievementID &achievementId, const QString &title, const QString &icon, const QStringList &comment);
+    explicit AchievementComment(const QJsonObject &object = QJsonObject());
     ~AchievementComment();
 
     bool operator==(const AchievementComment &comment) const;
 
+    void fromJson(const QJsonObject &object);
     QJsonObject toJson()            const;
+
     GameID gameId()                 const;
+    QString gameName()              const;
+    QPixmap gameIcon()              const;
     AchievementID achievementId()   const;
+    QString title()                 const;
+    QString icon()                  const;
 
 private:
-    void fromJson(const QJsonObject &object);
-
     GameID gameId_;
+    QString gameName_;
+    QString gameIcon_;
     AchievementID achievementId_;
+    QString title_;
+    QString icon_;
 
+    mutable QImage gameIconPixmap_;
 };
 
 class AchievementComments: public QList<AchievementComment>, public FileSaveLoad {
 public:
     AchievementComments(const ProfileID &profileId);
+    explicit AchievementComments(const QJsonObject &object);
 
     QList<AchievementComment> getCommentsFromGame(const ProfileID &idUser, const GameID &gameId);
     void append(const AchievementComment&);
@@ -61,22 +71,30 @@ private:
 
 class GameComment: public Comment {
 public:
-    explicit GameComment(const GameID &gameId, const ProfileID &profileId, const QStringList &comment);
-    explicit GameComment(const QJsonObject &object);
+    explicit GameComment(const GameID &gameId, const QString &gameName, const QString &gameIcon, const ProfileID &profileId, const QStringList &comment);
+    explicit GameComment(const QJsonObject &object = QJsonObject());
     ~GameComment();
 
-    QJsonObject toJson()   const;
-    GameID gameId()        const;
+    void fromJson(const QJsonObject &object);
+    QJsonObject toJson()    const;
+
+    GameID gameId()         const;
+    QString gameName()      const;
+    QPixmap gameIcon()      const;
 
 private:
-    void fromJson(const QJsonObject &object);
 
     GameID gameId_;
+    QString gameName_;
+    QString gameIcon_;
+
+    mutable QImage gameIconPixmap_;
 };
 
 class GameComments: public QList<GameComment>, public FileSaveLoad {
 public:
     GameComments(const ProfileID &profileId);
+    explicit GameComments(const QJsonObject &object);
 
     void append(const GameComment&);
     void remove(const ProfileID &idUser, const GameID &gameId);

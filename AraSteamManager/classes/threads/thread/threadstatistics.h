@@ -10,12 +10,6 @@
 #include "classes/steamApi/structures/sprofile.h"
 #include "subWidgets/models/gameswithpercentmodel.h"
 
-struct YearCount {
-    YearCount(const QString &year, int count);
-    QString year;
-    int count;
-};
-
 struct CompletedAchievement {
     CompletedAchievement(SAchievementPlayer achievement, SGame game);
     SAchievementPlayer achievement;
@@ -39,7 +33,7 @@ struct Statistics {
 
     QList<CompletedAchievement> completedAchievements;
 
-    QVector<YearCount> years;
+    QMap<int, int> years;
 };
 
 class ThreadStatistics : public ThreadLoading {

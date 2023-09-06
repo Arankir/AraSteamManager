@@ -18,7 +18,7 @@ public:
     explicit FormFriendItemCompare(const SProfile &profile, QListWidgetItem *parent = nullptr);
     ~FormFriendItemCompare();
     void setPercent(const double &percent);
-    void setHiddenFilter(const bool &hidden);
+    void setHiddenFilter(bool hidden);
     void setFilterValue(const ReachedType &type);
     bool isFilterHidden();
 

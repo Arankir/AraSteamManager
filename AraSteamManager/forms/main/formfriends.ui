@@ -100,7 +100,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QTableView" name="tableFriends"/>
+     <widget class="MyTable" name="tableFriends"/>
     </widget>
    </item>
   </layout>
@@ -110,6 +110,11 @@
    <class>MyLineEdit</class>
    <extends>QLineEdit</extends>
    <header>subWidgets/lineEdit/mylineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MyTable</class>
+   <extends>QTableView</extends>
+   <header>subWidgets/tables/mytable.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

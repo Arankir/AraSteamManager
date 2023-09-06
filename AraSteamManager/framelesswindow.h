@@ -38,8 +38,8 @@ public:
     FramelessWindow(QWidget *target);
     ~FramelessWindow();
     void setWidget(QWidget *target);
-    void animateResize(const int &width, const int &height);
-    void setStatus(const QString &statusName = "", const int &progress = 0, const int &maxProgress = 0);
+    void animateResize(int width, int height);
+    void setStatus(const QString &statusName = "", int progress = 0, int maxProgress = 0);
 
     void clearStatus();
     void show();

@@ -1,5 +1,6 @@
 #include "gamesmodel.h"
 #include "classes/files/comments.h"
+#include "classes/common/images.h"
 
 using namespace gamesModel;
 
@@ -15,7 +16,7 @@ void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
     GameComments comments(profileId_);
 
     int progress = 0;
-    for(auto &game: aGames) {
+    for(const SGame &game: aGames) {
         QStringList comment;
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
@@ -26,10 +27,13 @@ void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
         if (iterator != comments.end()) {
             comment = (*iterator).comment();
         }
-        modelItems_.append(gameModelItem{game, comment, SAchievementsPlayer(), 0});
+        QIcon *icon = new QIcon(game.pixmapIcon());
+        icon->addPixmap(game.pixmapIcon(), QIcon::Selected);
+
+        modelItems_.append(gameModelItem{icon, game, comment, SAchievementsPlayer(), 0});
         emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
-    for (const auto &gameModel: qAsConst(modelItems_)) { //Загрузка достижений игрока
+    for (const gameModelItem &gameModel: modelItems_) { //Загрузка достижений игрока
         SAchievementsPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
     }
 }
@@ -90,8 +94,8 @@ QVariant GamesModel::data(const QModelIndex &aIndex, int aRole) const {
             return modelItems_[aIndex.row()].game.name();
         }
         case gamesModel::Comment: {
-            if (modelItems_[aIndex.row()].comment != QStringList() &&
-                modelItems_[aIndex.row()].comment != QStringList() << "") {
+            if (!modelItems_[aIndex.row()].comment.isEmpty() &&
+                modelItems_[aIndex.row()].comment != QStringList{""}) {
                 if (modelItems_.count() > 1) {
                     return modelItems_[aIndex.row()].comment[0] + tr("\n...");
                 } else {
@@ -102,7 +106,7 @@ QVariant GamesModel::data(const QModelIndex &aIndex, int aRole) const {
             }
         }
         case Progress: {
-            auto game = modelItems_[aIndex.row()];
+            gameModelItem game = modelItems_[aIndex.row()];
             if (game.achievements.count() == 0) {
                 return c_noAchievements;
             } else {
@@ -119,8 +123,11 @@ QVariant GamesModel::data(const QModelIndex &aIndex, int aRole) const {
     }
     case Qt::DecorationRole: {
         switch (aIndex.column()) {
-        case Icon: {
-            return modelItems_[aIndex.row()].game.pixmapIcon();
+        case Name: {
+            if (modelItems_[aIndex.row()].icon == nullptr) {
+                return QIcon(Images::missingImage());
+            }
+            return *(modelItems_[aIndex.row()].icon);
         }
         default: {
             return QVariant();
@@ -134,7 +141,7 @@ QVariant GamesModel::data(const QModelIndex &aIndex, int aRole) const {
             if (modelItems_[aIndex.row()].achievements.count() == 0) {
                 return QColor(255, 0, 0);
             } else {
-                auto game = modelItems_[aIndex.row()];
+                gameModelItem game = modelItems_[aIndex.row()];
                 double x = 1.0 * game.achieved / game.achievements.count();
                 return QColor(254 * (1.0 - x), 254 * x, 0);
             }
@@ -211,9 +218,6 @@ void GamesModel::sort(int aColumn, Qt::SortOrder aOrder) {
         break;
     }
     case Index: {
-        break;
-    }
-    case Icon: {
         break;
     }
     case Name: {
@@ -311,7 +315,7 @@ void GamesModel::sort(int aColumn, Qt::SortOrder aOrder) {
     emit dataChanged(index(0, 0), index(rowCount(), columnCount()));
 }
 
-SGame GamesModel::getGame(const int &aRow) const {
+SGame GamesModel::getGame(int aRow) const {
     return modelItems_[aRow].game;
 }
 
@@ -319,18 +323,18 @@ SGame GamesModel::getGame(const QModelIndex &aIndex) const {
     return modelItems_[aIndex.row()].game;
 }
 
-QStringList GamesModel::getComment(const int &aRow) const {
+QStringList GamesModel::getComment(int aRow) const {
     return modelItems_[aRow].comment;
 }
 
-QList<SAchievementPlayer> GamesModel::getAchievements(const int &aRow) const {
+QList<SAchievementPlayer> GamesModel::getAchievements(int aRow) const {
     return modelItems_[aRow].achievements;
 }
 
 void GamesModel::updateComments() {
     GameComments comments(profileId_);
     int progress = 0;
-    for(auto &game: modelItems_) {
+    for(gameModelItem &game: modelItems_) {
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=](const GameComment &gameComment) {
@@ -345,6 +349,10 @@ void GamesModel::updateComments() {
         emit s_progress(tr("Обновление комментариев"), ++progress, modelItems_.count());
     }
     emit s_finished();
+}
+
+FilterModelGames::FilterModelGames(QObject *aParent): FilterModelGames(0, aParent) {
+
 }
 
 FilterModelGames::FilterModelGames(int aRow, QObject *aParent): FilterModel(aRow, 4, aParent) {
@@ -390,15 +398,15 @@ void FilterModelGames::setSourceModel(GamesModel *aSourceModel) {
     FilterModel::setSourceModel(aSourceModel);
 }
 
-SGame FilterModelGames::getGame(const int &aIndex) {
+SGame FilterModelGames::getGame(int aIndex) {
     return sourceModel()->getGame(aIndex);
 }
 
-QStringList FilterModelGames::getGameComment(const int &aIndex) {
+QStringList FilterModelGames::getGameComment(int aIndex) {
     return sourceModel()->getComment(aIndex);
 }
 
-QList<SAchievementPlayer> FilterModelGames::getGameAchievements(const int &aIndex) {
+QList<SAchievementPlayer> FilterModelGames::getGameAchievements(int aIndex) {
     return sourceModel()->getAchievements(aIndex);
 }
 
@@ -499,10 +507,12 @@ void FilterModelGames::clear() {
     hide_.clear();
     group_.clear();
     favorite_.clear();
-    filter_.clear();
+    FilterModel::clear();
     sourceModel()->clear();
 }
 
 void FilterModelGames::setSourceModel(QAbstractItemModel *aSourceModel) {
-    Q_UNUSED(aSourceModel)
+    if (auto model = dynamic_cast<GamesModel*>(aSourceModel)) {
+        setSourceModel(model);
+    }
 }

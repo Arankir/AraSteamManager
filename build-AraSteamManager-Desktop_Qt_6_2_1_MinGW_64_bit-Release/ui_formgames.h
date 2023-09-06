@@ -18,11 +18,11 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSplitter>
-#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "subWidgets/comboBoxes/multiselectcombobox.h"
 #include "subWidgets/lineEdit/mylineedit.h"
+#include "subWidgets/tables/mytable.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -40,7 +40,7 @@ public:
     QLabel *label;
     MultiSelectComboBox *comboBoxGroups;
     QCheckBox *checkBoxFavorites;
-    QTableView *tableGames;
+    MyTable *tableGames;
 
     void setupUi(QWidget *FormGames)
     {
@@ -112,7 +112,7 @@ public:
         verticalLayout->addLayout(horizontalLayout_6);
 
         splitter->addWidget(frameFilter);
-        tableGames = new QTableView(splitter);
+        tableGames = new MyTable(splitter);
         tableGames->setObjectName(QString::fromUtf8("tableGames"));
         splitter->addWidget(tableGames);
 

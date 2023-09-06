@@ -26,8 +26,8 @@ public:
     ~FormGames();
 
 signals:
-//    void s_achievementsLoaded(const QString&, const int &, const int &);
-    void s_finish(const int &width);
+//    void s_achievementsLoaded(const QString&, int , int);
+    void s_finish(int width);
     void s_showAchievements(const SGame &games);
 
 private slots:
@@ -39,10 +39,8 @@ private slots:
     void buttonFind_Clicked();
 
     void buttonAchievements_Clicked();
-    void buttonHide_Clicked();
 
     QMenu *createMenu(const SGame &game);
-    void updateHiddenGames();
     SGame currentGame();
     QStringList currentComment();
     QList<SAchievementPlayer> currentAchievements();
@@ -52,14 +50,14 @@ private slots:
     void showGroupsEdit();
     void showCommentsEdit();
 
-    void checkBoxFavorites_StateChanged(const int &state);
+    void checkBoxFavorites_StateChanged(int state);
 
     int currentIndex();
-    void setEnable(const bool &isEnable);
+    void setEnable(bool isEnable);
 private:
     Ui::FormGames *ui;
     ProfileID profileId_;
-    FilterModelGames filterGames_;
+//    FilterModelGames filterGames_;
 
 };
 

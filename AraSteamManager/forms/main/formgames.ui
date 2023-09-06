@@ -104,7 +104,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QTableView" name="tableGames"/>
+     <widget class="MyTable" name="tableGames"/>
     </widget>
    </item>
   </layout>
@@ -119,6 +119,11 @@
    <class>MultiSelectComboBox</class>
    <extends>QComboBox</extends>
    <header>subWidgets/comboBoxes/multiselectcombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MyTable</class>
+   <extends>QTableView</extends>
+   <header>subWidgets/tables/mytable.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

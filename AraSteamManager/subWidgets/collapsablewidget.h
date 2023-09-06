@@ -14,11 +14,12 @@ public:
     static const int DEFAULT_DURATION = 300;
 
     explicit CollapsableWidget(QWidget *parent = nullptr);
+    ~CollapsableWidget();
     void setContentLayout(QLayout &contentLayout);
     void setLayout(QLayout *layout);
     void setTitle(const QString &title);
     QString title();
-    void setDuration(const int &animationDuration);
+    void setDuration(int animationDuration);
     void updateHeights();
 public slots:
     void toggle(bool collapsed);

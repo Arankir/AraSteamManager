@@ -12,7 +12,7 @@ ProgressBarLight::~ProgressBarLight() {
     delete light_;
 }
 
-ProgressBarLight &ProgressBarLight::setColor(const int &aRed, const int &aGreen, const int &aBlue, const int &aAlpha) {
+ProgressBarLight &ProgressBarLight::setColor(int aRed, int aGreen, int aBlue, int aAlpha) {
     light_->setColor(QColor(std::min(std::max(aRed, 255), 0),
                             std::min(std::max(aGreen, 255), 0),
                             std::min(std::max(aBlue, 255), 0),
@@ -20,7 +20,7 @@ ProgressBarLight &ProgressBarLight::setColor(const int &aRed, const int &aGreen,
     return *this;
 }
 
-ProgressBarLight &ProgressBarLight::setBlurRadius(const int &aRadius) {
+ProgressBarLight &ProgressBarLight::setBlurRadius(int aRadius) {
     light_->setBlurRadius(aRadius);
     return *this;
 }

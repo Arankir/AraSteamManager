@@ -1,0 +1,116 @@
+{
+    "alternate": {
+        "color": "#ff192d23"
+    },
+    "background": {
+        "color": "#ff133e24"
+    },
+    "backgroundAlternateItem": {
+        "color": "#ff1d2720"
+    },
+    "backgroundBadProgressbar": {
+        "color": "#ffe44b4b"
+    },
+    "backgroundItem": {
+        "color": "#ff17211a"
+    },
+    "backgroundProgressbar": {
+        "color": "#ff5de0aa"
+    },
+    "backgroundProgressbarProgress": {
+        "color": "#ff388465"
+    },
+    "backgroundSecond": {
+        "color": "#ff2edd7b",
+        "gradient": {
+            "spread": 0,
+            "stops": [
+                {
+                    "color": "#ff39ec98",
+                    "pos": 0
+                },
+                {
+                    "color": "#ff23cf5f",
+                    "pos": 1
+                }
+            ],
+            "type": 0,
+            "x1": -1,
+            "x2": 2,
+            "y1": -1,
+            "y2": 2
+        }
+    },
+    "backgroundSelectedItem": {
+        "color": "#ff1dab62",
+        "gradient": {
+            "spread": 0,
+            "stops": [
+                {
+                    "color": "#ff26ff92",
+                    "pos": 0
+                },
+                {
+                    "color": "#ff155732",
+                    "pos": 1
+                }
+            ],
+            "type": 0,
+            "x1": 0,
+            "x2": 0,
+            "y1": -2,
+            "y2": 1
+        }
+    },
+    "border": {
+        "color": "#ff324b41"
+    },
+    "disabled": {
+        "color": "#ff787878"
+    },
+    "disabledBackground": {
+        "color": "#ff387f5e"
+    },
+    "forItemHover": {
+        "color": "#ff2b352e"
+    },
+    "headerForm": {
+        "color": "#ff1e3b29"
+    },
+    "hover": {
+        "color": "#ff14d28c"
+    },
+    "mainBackground": {
+        "color": "#ff155c35",
+        "gradient": {
+            "cx": 0.5,
+            "cy": 0.5,
+            "fx": 0.4,
+            "fy": 0.5,
+            "radius": 0.9,
+            "spread": 0,
+            "stops": [
+                {
+                    "color": "#ff127c45",
+                    "pos": 0
+                },
+                {
+                    "color": "#ff193d25",
+                    "pos": 1
+                }
+            ],
+            "type": 1
+        }
+    },
+    "mainProfileBackground": {
+        "color": "#ff255e3c"
+    },
+    "pathIcons": ":/theme/iconsBlackTheme/",
+    "pathImages": "://white/",
+    "selected": {
+        "color": "#ff87ffb6"
+    },
+    "text": {
+        "color": "#ffdddddd"
+    }
+}

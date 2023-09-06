@@ -27,7 +27,7 @@ QString Images::stateYellow() {
 }
 #define StatesEnd }
 
-QString Images::levels(const int &aHundreds) {
+QString Images::levels(int aHundreds) {
     return QString("://levels/%1.png").arg(QString::number(aHundreds));
 }
 
@@ -180,6 +180,14 @@ QString Images::right() {
 
 QString Images::settings() {
     return Theme::getCurrentTheme().pathImages + "main/settings.png";
+}
+
+QString Images::english() {
+    return ":/languages/eng.png";
+}
+
+QString Images::russian() {
+    return ":/languages/rus.png";
 }
 #define MainEnd }
 
@@ -370,6 +378,22 @@ QString Images::scrollBarLeft() {
 
 QString Images::scrollBarRight() {
     return Theme::getCurrentTheme().pathImages + "widgets/scrollbar_right.png";
+}
+
+QString Images::doubleUp() {
+    return Theme::getCurrentTheme().pathImages + "widgets/double_up.png";
+}
+
+QString Images::doubleDown() {
+    return Theme::getCurrentTheme().pathImages + "widgets/double_down.png";
+}
+
+QString Images::doubleLeft() {
+    return Theme::getCurrentTheme().pathImages + "widgets/double_left.png";
+}
+
+QString Images::doubleRight() {
+    return Theme::getCurrentTheme().pathImages + "widgets/double_right.png";
 }
 #define WidgetsEnd }
 

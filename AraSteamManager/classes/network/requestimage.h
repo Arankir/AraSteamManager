@@ -4,13 +4,14 @@
 #include <QObject>
 #include <QLabel>
 #include <QMovie>
+#include <QUrl>
 
 #include "classes/network/requestdata.h"
 
 class RequestImage : public QObject {
     Q_OBJECT
 public:
-    RequestImage(const QString &url, const QString &save = "", const bool &autosave = false, const bool &parallel = true, QObject *parent = nullptr);
+    RequestImage(const QUrl &url, const QString &save = "", bool autosave = false, bool parallel = true, QObject *parent = nullptr);
 
     QPixmap pixmap() const;
     QString error();
@@ -27,13 +28,15 @@ protected:
     QPixmap pixmap_;
     QString error_;
 
+    QMetaObject::Connection cnct_;
+
 };
 
 class RequestImageToLabel : public QObject {
     Q_OBJECT
 public:
-    RequestImageToLabel(QLabel *label, const QString &url, const QString &save = "", const bool &autosave = false, const bool &parallel = true, QObject *parent = nullptr);
-    RequestImageToLabel(QLabel *label, const QString &url, const bool &parallel, QObject *parent = nullptr);
+    RequestImageToLabel(QLabel *label, const QString &url, const QString &save = "", bool autosave = false, bool parallel = true, QObject *parent = nullptr);
+    RequestImageToLabel(QLabel *label, const QString &url, bool parallel, QObject *parent = nullptr);
     RequestImageToLabel(QLabel *label, const QString &url, QObject *parent);
 
 private slots:
@@ -44,4 +47,8 @@ private:
     RequestImage *request_;
 
 };
+
+QImage loadImage(QImage &aImage, const QUrl &aUrl, const QString &aSavePath, const QSize &aSize);
+QImage loadImage(const QUrl &aUrl, const QString &aSavePath, const QSize &aSize);
+
 #endif // REQUESTIMAGE_H

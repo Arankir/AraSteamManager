@@ -4,6 +4,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QChartView>
 #include "classes/threads/thread/threadstatistics.h"
 #include "subWidgets/items/friendlistitem.h"
 #include "form.h"
@@ -38,7 +39,7 @@ protected slots:
     void initLastAchievements();
     void initGraphs();
 
-    void setEnable(const bool &isEnable);
+    void setEnable(bool isEnable);
     void showTableGames(QList<GameWithPercentModelItem> games);
 private slots:
     void resizeEvent(QResizeEvent *event) override;
@@ -52,8 +53,7 @@ private slots:
     void setGraphs(const Statistics &statistic);
 
     void movePixmapLastAchievement();
-    QMenu *createMenuChartTimes(QGraphicsItem *item);
-    QMenu *createMenuChartYears(QGraphicsItem *item);
+    QMenu *createMenuChart(QChartView *view, QGraphicsItem *item);
     void removeFriendBar(const QString &name, const QString &barObjectName);
     void addFriendBar(const Statistics &statistic);
     void loadFriends();
@@ -66,11 +66,8 @@ private:
     Statistics statistics_;
 
     QGraphicsScene *scene_ = nullptr;
-    QMap<QGraphicsPixmapItem*, QPixmap> pixmapsLastAchievements_;
 
     bool isUserResizing_ = false;
-
-    void getParametersForLastAchievements(int &size, int &rows, int &columns, int &count);
 };
 
 #endif // FORMSTATISTICS_H

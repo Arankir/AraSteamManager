@@ -1,0 +1,80 @@
+{
+    "alternate": {
+        "color": "#ffe6dcd2"
+    },
+    "background": {
+        "color": "#ffececec"
+    },
+    "backgroundAlternateItem": {
+        "color": "#ffe2dfd8"
+    },
+    "backgroundBadProgressbar": {
+        "color": "#ffe44b4b"
+    },
+    "backgroundItem": {
+        "color": "#fff4f4f4"
+    },
+    "backgroundProgressbar": {
+        "color": "#ffc7907b"
+    },
+    "backgroundProgressbarProgress": {
+        "color": "#ffeeac93"
+    },
+    "backgroundSecond": {
+        "color": "#ffafa096"
+    },
+    "backgroundSelectedItem": {
+        "color": "#b2f4f4f4"
+    },
+    "border": {
+        "color": "#ff646464"
+    },
+    "disabled": {
+        "color": "#ff878787"
+    },
+    "disabledBackground": {
+        "color": "#ff878787"
+    },
+    "forItemHover": {
+        "color": "#fff4f4f4"
+    },
+    "headerForm": {
+        "color": "#ffc8c8c8"
+    },
+    "hover": {
+        "color": "#ffeb9b5f"
+    },
+    "mainBackground": {
+        "color": "#ffececec",
+        "gradient": {
+            "cx": 0.5,
+            "cy": 0.5,
+            "fx": 0.4,
+            "fy": 0.5,
+            "radius": 0.9,
+            "spread": 0,
+            "stops": [
+                {
+                    "color": "#ffffffff",
+                    "pos": 0
+                },
+                {
+                    "color": "#ffd9d9d9",
+                    "pos": 1
+                }
+            ],
+            "type": 1
+        }
+    },
+    "mainProfileBackground": {
+        "color": "#ffb9b9b9"
+    },
+    "pathIcons": ":/theme/iconsWhiteTheme/",
+    "pathImages": "://black/",
+    "selected": {
+        "color": "#ff784900"
+    },
+    "text": {
+        "color": "#ff0f0f0f"
+    }
+}

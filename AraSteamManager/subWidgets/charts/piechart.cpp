@@ -21,9 +21,9 @@ QPieSlice *PieChart::addSlice(const QColor &aColor) {
     slice->setLabelPosition(QPieSlice::LabelOutside);
     slice->setLabelColor(Theme::getCurrentTheme().text.getColor());
     QObject::connect(slice, &QPieSlice::hovered, slice, &QPieSlice::setExploded);
-    auto localSeries = series();
+    QList<QAbstractSeries*> localSeries = series();
     if (localSeries.count() > 0) {
-        auto pieSeries = dynamic_cast<QPieSeries*>(localSeries[0]);
+        QPieSeries *pieSeries = dynamic_cast<QPieSeries*>(localSeries[0]);
         if (pieSeries) {
             pieSeries->append(slice);
         } else {
@@ -56,12 +56,12 @@ void PieChart::updateIcons() {
 }
 
 void PieChart::updateTheme() {
-    auto localSeries = series();
-    for (auto oneSeries: localSeries) {
-        auto pieSeries = dynamic_cast<QPieSeries*>(oneSeries);
+    QList<QAbstractSeries*> localSeries = series();
+    for (QAbstractSeries *oneSeries: localSeries) {
+        QPieSeries *pieSeries = dynamic_cast<QPieSeries*>(oneSeries);
         if (pieSeries) {
-            auto slices = pieSeries->slices();
-            for (auto slice: slices) {
+            QList<QPieSlice*> slices = pieSeries->slices();
+            for (QPieSlice *slice: slices) {
                 slice->setBorderColor(Theme::getCurrentTheme().border.color);
                 slice->setLabelColor(Theme::getCurrentTheme().text.color);
             }

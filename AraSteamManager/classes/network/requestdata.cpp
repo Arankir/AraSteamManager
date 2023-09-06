@@ -3,7 +3,11 @@
 #include <QEventLoop>
 #include <QNetworkReply>
 
-RequestData::RequestData(const QString &aUrl, const bool &aParallel, QObject *aParent): QObject(aParent), manager_(new QNetworkAccessManager), reply_(""), url_(aUrl) {
+RequestData::RequestData(const QString &aUrl, bool aParallel, QObject *aParent): RequestData(QUrl(aUrl), aParallel, aParent) {
+
+}
+
+RequestData::RequestData(const QUrl &aUrl, bool aParallel, QObject *aParent): QObject(aParent), manager_(new QNetworkAccessManager), reply_(""), url_(aUrl) {
     connect(manager_, &QNetworkAccessManager::finished, this, &RequestData::onResultGet);
     if (!aUrl.isEmpty()) {
         get(aUrl,aParallel);
@@ -19,11 +23,11 @@ RequestData::~RequestData() {
     delete manager_;
 }
 
-void RequestData::get(const QString &aUrl, const bool &aParallel) {
+void RequestData::get(const QString &aUrl, bool aParallel) {
     get(QUrl(aUrl), aParallel);
 }
 
-void RequestData::get(const QUrl &aUrl, const bool &aParallel) {
+void RequestData::get(const QUrl &aUrl, bool aParallel) {
     manager_->get(QNetworkRequest(aUrl));
     if (!aParallel) {
         QEventLoop loop;

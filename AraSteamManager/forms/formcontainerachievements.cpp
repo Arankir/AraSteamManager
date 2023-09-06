@@ -74,7 +74,7 @@ void FormContainerAchievements::addFormAchievement(const SProfile &aProfile, con
         ui->TabWidgetAchievements->setCurrentIndex(index);
         return;
     }
-    auto achievements = new FormAchievements(this);
+    FormAchievements *achievements = new FormAchievements(this);
     int tabIndex = ui->TabWidgetAchievements->addTab(achievements, aGame.name());
 //    connect(achievements, &FormAchievements::s_progress, this, &Form::setStatus);
     connect(achievements, &FormAchievements::s_finishedAchievements, this, [&]() {
@@ -92,12 +92,15 @@ void FormContainerAchievements::addFormAchievement(const SProfile &aProfile, con
     achievements->setData(aProfile, aGame);
 }
 
-void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(const int &aIndex) {
+void FormContainerAchievements::on_TabWidgetAchievements_tabCloseRequested(int aIndex) {
     qDebug() << aIndex;
-    delete ui->TabWidgetAchievements->widget(aIndex);
+    int tabs = ui->TabWidgetAchievements->count();
+    ui->TabWidgetAchievements->widget(aIndex)->deleteLater();
 //    ui->TabWidgetAchievements->removeTab(aIndex);
-    if(ui->TabWidgetAchievements->count() == 0) {
-        close();
+    if(tabs - 1 == 0) {
+        window()->hide();
+//        deleteLater();
+//        close();
     } else {
         emit s_removeAchievements(aIndex);
     }

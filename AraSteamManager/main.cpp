@@ -30,8 +30,13 @@ int main(int argc, char *argv[]) {
 
     a.connect(&a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()));
 
-    auto mainForm = createFramelessForm<FormMain>();
-    QObject::connect(mainForm, &FormMain::s_settingsUpdated, mainForm->window(), &FramelessWindow::updateSettings);
+    FormMain *mainForm = createFramelessForm<FormMain>();
+    QObject::connect(mainForm, &Form::s_settingsUpdated, mainForm, [=](QFlags<changedSettings> lSettings) {
+        if (lSettings.testFlag(changedSettings::theme)) {
+            mainForm->window()->updateSettings();
+        }
+    });
+//    QObject::connect(mainForm, &FormMain::s_settingsUpdated, mainForm->window(), &FramelessWindow::updateSettings);
     QObject::connect(mainForm, &FormMain::s_destructed, [](){
         qInfo() << "Programm closed";
         qApp->closeAllWindows();

@@ -85,14 +85,14 @@ void SBadge::fromJson(const QJsonObject &aObject) {
 
 SBadges onLoadBadges(const QByteArray &byteArray) {
     SBadges list;
-    for(const auto &badge: QJsonDocument::fromJson(byteArray).object().value("response").toObject().value("badges").toArray()) {
+    for(const QJsonValue &badge: QJsonDocument::fromJson(byteArray).object().value("response").toObject().value("badges").toArray()) {
         list.append(SBadge(badge.toObject()));
     }
     return list;
 }
 
 QList<SBadge> SBadge::load(const ProfileID &aProfileId, std::function<void (QList<SBadge>)> aCallback) {
-    return Sapi::load<SBadge>(badgesUrl(aProfileId), onLoadBadges, aCallback);
+    return Sapi::load<SBadge>(Sapi::Url::badges(aProfileId), onLoadBadges, aCallback);
 }
 
 void SBadge::getXpInfo(const ProfileID &aProfileId, int &aPlayerXp, int &aPlayerLevel, int &aPlayerXpNeededToLevelUp, int &aPlayerXpNeededCurrentLevel) {
@@ -101,8 +101,8 @@ void SBadge::getXpInfo(const ProfileID &aProfileId, int &aPlayerXp, int &aPlayer
     aPlayerXpNeededToLevelUp = 0;
     aPlayerXpNeededCurrentLevel = 0;
     RequestData request;
-    request.get(badgesUrl(aProfileId), false);
-    auto object = QJsonDocument::fromJson(request.reply()).object().value("response").toObject();
+    request.get(Sapi::Url::badges(aProfileId), false);
+    QJsonObject object = QJsonDocument::fromJson(request.reply()).object().value("response").toObject();
     aPlayerXp = object.value("player_xp").toInt();
     aPlayerLevel = object.value("player_level").toInt();
     aPlayerXpNeededToLevelUp = object.value("player_xp_needed_to_level_up").toInt();

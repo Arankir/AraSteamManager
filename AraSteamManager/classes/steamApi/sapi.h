@@ -3,15 +3,15 @@
 
 #include "classes/network/requestimage.h"
 
-QImage loadImage(QImage &image, const QString &url, const QString &savePath, const QSize &size);
-QImage loadImage(const QString &url, const QString &savePath, const QSize &size);
+#include <QFile>
+#include <QFileInfo>
+#include <QDir>
+#include "classes/common/settings.h"
 
 typedef QString ProfileID;
 typedef QStringList ProfileIDs;
 typedef QString AchievementID;
 typedef int GameID;
-
-static QString gameImageUrl(const GameID &appId, const QString &imgId);
 
 class Sapi : public QObject {
     Q_OBJECT
@@ -21,57 +21,74 @@ public:
     ~Sapi();
 
     virtual QJsonObject toJson() const = 0;
-    virtual QString className() const {
-        return typeid(this).name();
-    }
-    QString toString() const;
+    virtual QString className() const;
+    virtual QString toString() const;
 
     friend QDebug operator<<(QDebug dbg, const Sapi &steam) {
         dbg.nospace() << steam.className() << "(" << steam.toString() << ")\n";
         return dbg.space();
     }
-    static QString gameImageUrl(const GameID &appId, const QString &imgId);
 
-signals:
-
+    static QUrl gameImageUrl(const GameID &appId, const QString &imgId);
+    static QUrl frameProfile(const QString &frameId);
 protected:
-    static QString frameProfileUrl(const QString &frameId);
+    class Url {
+    public:
+        static QUrl achievementsSchema(const GameID &appId);
+        static QUrl achievementsPlayer(const GameID &appId, const ProfileID &profileId);
+        static QUrl achievementsPercent(const GameID &appId);
+        static QUrl bans(const QString &profileIds);
+        static QUrl friends(const ProfileID &profileId);
+        static QUrl profile(const ProfileID &profileId);
+        static QUrl profile(const ProfileIDs &profileIds);
+        static QUrl profilefromVanity(const ProfileID &profileId);
+        static QUrl avatarFrame(const ProfileID &profileId);
+        static QUrl avatarAnimation(const ProfileID &profileId);
+        static QUrl game(int freeGames, int gameInfo, const ProfileID &profileId);
+        static QUrl numberPlayers(const GameID &appId);
+        static QUrl lvl(const ProfileID &profileId);
+        static QUrl profileCustomizations(const ProfileID &profileId);
+        static QUrl profileEquippedItem(const ProfileID &profileId);
+        static QUrl badges(const ProfileID &profileId);
+    private:
+        Url();
+    };
 
-    static QUrl achievementsSchemaUrl(const GameID &appId);
-    static QUrl achievementsPlayerUrl(const GameID &appId, const ProfileID &profileId);
-    static QUrl achievementsPercentUrl(const GameID &appId);
-    static QUrl bansUrl(const QString &profileIds);
-    static QUrl friendsUrl(const ProfileID &profileId);
-    static QUrl profileUrl(const ProfileID &profileId);
-    static QUrl profileUrl(const ProfileIDs &profileIds);
-    static QUrl profilefromVanityUrl(const ProfileID &profileId);
-    static QUrl avatarFrameUrl(const ProfileID &profileId);
-    static QUrl avatarAnimationUrl(const ProfileID &profileId);
-    static QUrl gameUrl(const int &freeGames, const int &gameInfo, const ProfileID &profileId);
-    static QUrl numberPlayersUrl(const GameID &appId);
-    static QUrl lvlUrl(const ProfileID &profileId);
-    static QUrl profileCustomizationsUrl(const ProfileID &profileId);
-    static QUrl profileEquippedItemUrl(const ProfileID &profileId);
-    static QUrl badgesUrl(const ProfileID &profileId);
+    static QString pathToTempRawFile(const QUrl &aUrl);
+    static bool saveRawLoadedData(const QUrl &aUrl, const QByteArray &aBytes);
+    static bool checkRawLoadedData(const QUrl &aUrl);
+    static QByteArray loadRawLoadedData(const QUrl &aUrl);
+
     template <typename T>
     static QList<T> load(const QUrl &url, std::function<QList<T>(const QByteArray&)> onLoad, std::function<void(QList<T>)> callback = nullptr) {
+        if (checkRawLoadedData(url)) {
+            QByteArray ba = loadRawLoadedData(url);
+            if (callback == nullptr) {
+                return onLoad(ba);
+            } else {
+                callback(onLoad(ba));
+                return {};
+            }
+        }
         RequestData *request = new RequestData();
         request->get(url, callback != nullptr);
 
         if (callback == nullptr) {
             QByteArray ba = request->reply();
             delete request;
+            saveRawLoadedData(url, ba);
             return onLoad(ba);
         } else {
             connect(request,
                     &RequestData::s_finished,
-                    [=](RequestData *requestL) {
+                    [callback, onLoad, url](RequestData *requestL) {
                         QByteArray ba = requestL->reply();
                         requestL->deleteLater();
+                        saveRawLoadedData(url, ba);
                         callback(onLoad(ba));
                     });
         }
-        return QList<T>();
+        return {};
     }
 
 private:

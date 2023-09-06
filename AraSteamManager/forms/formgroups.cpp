@@ -33,9 +33,9 @@ void FormGroups::init() {
     });
     connect(ui->listWidgetGroups, &QListWidget::itemChanged, this, [=, this](QListWidgetItem *lItem) {
         if (lItem->flags().testFlag(Qt::ItemIsUserCheckable)) {
-            int row = ui->listWidgetGroups->row(lItem);
-            ui->listWidgetGroups->item(row);
-            groups_[row].changeTitle(lItem->text());
+//            int row = ui->listWidgetGroups->row(lItem);
+//            ui->listWidgetGroups->item(row);
+            groups_.find(lItem->text())->changeTitle(lItem->text());
         }
     });
 }
@@ -45,7 +45,7 @@ void FormGroups::setProfileGames(const ProfileID &aProfileId, const SGames &aGam
     games_ = aGame;
     initUi();
     QStringList names;
-    for (const auto &game: games_) {
+    for (const SGame &game: games_) {
         names << game.name();
     }
     QString name = names.join(",");
@@ -59,18 +59,14 @@ void FormGroups::setProfileGames(const ProfileID &aProfileId, const SGames &aGam
 }
 
 void FormGroups::initUi() {
-    for(const auto &group: groups_) {
+    for(const GroupGames &group: groups_) {
         QListWidgetItem *item = new QListWidgetItem(group.title());
         item->setFlags(item->flags() | Qt::ItemIsEditable | Qt::ItemIsUserCheckable);
-        auto games = group.games();
+        QSet<GameID> games = group;
         bool isAllInGroup = true;
         bool isAnyoneInGroup = false;
-        for (const auto &game: games_) {
-            bool isInGroup = std::any_of(games.begin(),
-                                         games.end(),
-                                         [&](const GameID &lGame) {
-                                            return lGame == game.appId();
-                                         });
+        for (const SGame &game: games_) {
+            bool isInGroup = games.find(game.appId()) != games.end();
             if (isInGroup) {
                 isAnyoneInGroup = true;
             } else {
@@ -126,15 +122,15 @@ void FormGroups::cancel() {
 
 void FormGroups::apply() {
     for(int row = 0; row < ui->listWidgetGroups->count() - 1; ++row) {
-        auto item = ui->listWidgetGroups->item(row);
+        QListWidgetItem *item = ui->listWidgetGroups->item(row);
         if (item->flags().testFlag(Qt::ItemIsUserCheckable)) {
             if (item->checkState() == Qt::CheckState::Checked) {
                 for (const SGame &game: games_) {
-                    groups_[row].addGame(game);
+                    groups_.find(item->text())->addGame(game);
                 }
             } else {
                 for (const SGame &game: games_) {
-                    groups_[row].removeGame(game.appId());
+                    groups_.find(item->text())->removeGame(game.appId());
                 }
             }
         }
@@ -158,7 +154,7 @@ void FormGroups::retranslate() {
 }
 
 void FormGroups::updateIcons() {
-    auto item = ui->listWidgetGroups->item(ui->listWidgetGroups->count() - 1);
+    QListWidgetItem *item = ui->listWidgetGroups->item(ui->listWidgetGroups->count() - 1);
     item->setIcon(QIcon(Images::create()));
 }
 

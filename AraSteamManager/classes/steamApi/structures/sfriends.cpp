@@ -53,7 +53,7 @@ QStringList SFriend::getFriendsSteamId(const ProfileID &aProfileId) {
 
 QList<SFriend> onLoadFriend(const QByteArray &aByteArray) {
     QList<SFriend> list;
-    for(auto &&ban: QJsonDocument::fromJson(aByteArray).object().value("friendslist").toObject().value("friends").toArray()) {
+    for(QJsonValue &&ban: QJsonDocument::fromJson(aByteArray).object().value("friendslist").toObject().value("friends").toArray()) {
         list.append(SFriend(ban.toObject()));
     }
     return list;
@@ -80,7 +80,7 @@ QJsonObject SFriend::toJson() const {
 }
 
 SFriends SFriend::load(const ProfileID &aProfileId, std::function<void (SFriends)> aCallback) {
-    return Sapi::load<SFriend>(friendsUrl(aProfileId), onLoadFriend, aCallback);
+    return Sapi::load<SFriend>(Sapi::Url::friends(aProfileId), onLoadFriend, aCallback);
 }
 #define SFriendEnd }
 

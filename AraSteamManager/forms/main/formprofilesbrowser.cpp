@@ -28,7 +28,7 @@ FormProfilesBrowser::FormProfilesBrowser(QWidget *parent) :
 
 FormProfilesBrowser::~FormProfilesBrowser() {
     while(ui->StackedWidgetProfiles->count() > 0) {
-        auto widget = ui->StackedWidgetProfiles->widget(0);
+        QWidget *widget = ui->StackedWidgetProfiles->widget(0);
         ui->StackedWidgetProfiles->removeWidget(widget);
         delete widget;
     }
@@ -74,7 +74,7 @@ void FormProfilesBrowser::goToProfile(const ProfileID &aId) {
     if(!profile.isNull()) {
         emit s_profileChanged(profile.steamId());
         while(ui->StackedWidgetProfiles->count() - 1 != ui->StackedWidgetProfiles->currentIndex()) {
-            auto widget = ui->StackedWidgetProfiles->widget(ui->StackedWidgetProfiles->currentIndex() + 1);
+            QWidget *widget = ui->StackedWidgetProfiles->widget(ui->StackedWidgetProfiles->currentIndex() + 1);
             ui->StackedWidgetProfiles->removeWidget(widget);
             delete widget;
         }

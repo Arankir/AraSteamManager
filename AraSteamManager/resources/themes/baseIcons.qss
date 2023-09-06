@@ -360,11 +360,11 @@ QHeaderView::up-arrow {
 }
 
 QSplitter::handle:horizontal {
-    image: url("%1line_vertical.png");
+    image: url("%1width.png");
 }
 
 QSplitter::handle:vertical {
-    image: url("%1line_horizontal.png");
+    image: url("%1height.png");
 }
 
 QDateEdit::down-arrow, QDateTimeEdit::down-arrow {

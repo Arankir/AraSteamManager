@@ -5,10 +5,10 @@ ProgressBarGood::ProgressBarGood(QWidget *aParent): ProgressBarLight(aParent) {
     this->ProgressBarGood::setBlurRadius(50);
 }
 
-ProgressBarLight &ProgressBarGood::setColor(const int &red, const int &green, const int &blue, const int &alpha) {
+ProgressBarLight &ProgressBarGood::setColor(int red, int green, int blue, int alpha) {
     return ProgressBarLight::setColor(red, green, blue, alpha);
 }
 
-ProgressBarLight &ProgressBarGood::setBlurRadius(const int &radius) {
+ProgressBarLight &ProgressBarGood::setBlurRadius(int radius) {
     return ProgressBarLight::setBlurRadius(radius);
 }

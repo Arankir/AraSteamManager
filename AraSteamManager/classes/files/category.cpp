@@ -1,8 +1,9 @@
 #include "category.h"
+#include "classes/common/settings.h"
 
 #include <QMutableListIterator>
 
-Category::Category(const SGame &aGame): Category(aGame.appId(), aGame.name()) {
+Category::Category(const SGame &aGame): Category(aGame.appId(), aGame.name(), aGame.imgIconUrl()) {
 
 }
 
@@ -12,18 +13,20 @@ FileSaveLoad(aCategory.filePath_),
 parent_(aCategory.parent_),
 title_(aCategory.title_),
 gameId_(aCategory.gameId_),
-gameName_(aCategory.gameName_) {
-    auto categories = aCategory.categories_;
-    for (auto category: categories) {
+gameName_(aCategory.gameName_),
+gameIcon_(aCategory.gameIcon_) {
+    QList<Category*> categories = aCategory.categories_;
+    for (Category *category: categories) {
         categories_.append(new Category(*category));
     }
 }
 
-Category::Category(const GameID &aGameId, const QString &aGameName, bool aAutoLoad):
+Category::Category(const GameID &aGameId, const QString &aGameName, const QString &aGameIcon, bool aAutoLoad):
 QSet<AchievementID>(),
 FileSaveLoad(Paths::categories(QString::number(aGameId))),
 gameId_(aGameId),
-gameName_(aGameName) {
+gameName_(aGameName),
+gameIcon_(aGameIcon) {
     if (aAutoLoad) {
         load(filePath_);
     }
@@ -56,6 +59,7 @@ bool Category::operator==(const Category &aCategory) const {
             title_ == aCategory.title_ &&
             gameId_ == aCategory.gameId_ &&
             gameName_ == aCategory.gameName_ &&
+            gameIcon_ == aCategory.gameIcon_ &&
             categories_ == aCategory.categories_ &&
             filePath_ == aCategory.filePath_ &&
             QSet<AchievementID>::operator==(aCategory);
@@ -66,6 +70,7 @@ bool Category::operator!=(const Category &aCategory) const {
             title_ != aCategory.title_ ||
             gameId_ != aCategory.gameId_ ||
             gameName_ != aCategory.gameName_ ||
+            gameIcon_ != aCategory.gameIcon_ ||
             categories_ != aCategory.categories_ ||
             filePath_ != aCategory.filePath_ ||
             QSet<AchievementID>::operator!=(aCategory);
@@ -100,12 +105,13 @@ void Category::setTitle(const QString &aTitle) {
 }
 
 void Category::setGame(const SGame &aGame) {
-    setGame(aGame.appId(), aGame.name());
+    setGame(aGame.appId(), aGame.name(), aGame.imgIconUrl());
 }
 
-void Category::setGame(const GameID &aGameId, const QString &aGameName) {
+void Category::setGame(const GameID &aGameId, const QString &aGameName, const QString &aGameIcon) {
     gameId_ = aGameId;
     gameName_ = aGameName;
+    gameIcon_ = aGameIcon;
     filePath_ = Paths::categories(QString::number(aGameId));
 }
 
@@ -118,7 +124,7 @@ void Category::setParent(Category *aNewParent) {
 
 int Category::getIndex(Category *aCategory) {
     if (aCategory->parent()) {
-        auto categories = aCategory->parent()->categories();
+        QList<Category*> categories = aCategory->parent()->categories();
         auto iterator = std::find_if(categories.begin(),
                                      categories.end(),
                                      [=](Category *lCategory) {
@@ -135,7 +141,7 @@ int Category::getIndex(Category *aCategory) {
 }
 
 void Category::changeCategoryIndex(const QString &aCategory, int aIndex) {
-    auto category = find(aCategory);
+    Category *category = find(aCategory);
     if (category == nullptr) {
         return;
     }
@@ -152,13 +158,12 @@ bool Category::addCategory(const QStringList &aTitles, Category *aCategory) {
     if (!localTitles.isEmpty()) {
         nextTitle = localTitles.last();
         localTitles.pop_back();
-
     }
     auto iterator = std::find_if(categories_.begin(),
                                  categories_.end(),
                                  [=](Category *lCategory) {
-        return lCategory->title_ == nextTitle;
-    });
+                                    return lCategory->title_ == nextTitle;
+                                });
     if (aTitles.count() == 0) {
         if (iterator != categories_.end()) {
             return false;
@@ -249,9 +254,10 @@ void Category::clearCategories() {
 void Category::fromJson(const QJsonObject &aCategory) {
     gameName_ = aCategory.value("game").toString();
     gameId_   = aCategory.value("gameID").toInt();
+    gameIcon_ = aCategory.value("gameIcon").toString();
     title_  = aCategory.value("title").toString();
     QSet<AchievementID>::clear();
-    for(const auto &valueAchievement: aCategory.value("achievements").toArray()) {
+    for(const QJsonValue &valueAchievement: aCategory.value("achievements").toArray()) {
         insert(valueAchievement.toString());
     }
 //    auto oldCategories = categories_;
@@ -259,8 +265,8 @@ void Category::fromJson(const QJsonObject &aCategory) {
 
 //    }
 //    categories_.clear();
-    auto categoriesArray = aCategory.value("categories").toArray();
-    for(const auto &valueCategory: categoriesArray) {
+    QJsonArray categoriesArray = aCategory.value("categories").toArray();
+    for(const QJsonValue &valueCategory: categoriesArray) {
         auto iterator = std::find_if(categories_.begin(),
                                      categories_.end(),
                                      [&](Category *lCategory) {
@@ -269,7 +275,7 @@ void Category::fromJson(const QJsonObject &aCategory) {
         if (iterator != categories_.end()) {
             (*iterator)->fromJson(valueCategory.toObject());
         } else {
-            auto category = new Category(valueCategory.toObject());
+            Category *category = new Category(valueCategory.toObject());
             addCategory(category);
         }
 //        if (categories_.find(valueCategory.toObject().value("title").toString()) != categories_.end()) {
@@ -282,6 +288,7 @@ void Category::fromJson(const QJsonObject &aCategory) {
 QJsonObject Category::toJson() const {
     QJsonObject result;
     result["title"] = title_;
+    result["gameIcon"] = gameIcon_;
 
     if (!gameName_.isEmpty()) {
         result["game"] = gameName_;
@@ -298,8 +305,8 @@ QJsonObject Category::toJson() const {
     result["achievements"] = valuesAchievements;
 
     QJsonArray valuesCategories;
-    for(const auto &valueCategory: categories_) {
-        auto category = valueCategory->toJson();
+    for(Category *valueCategory: categories_) {
+        QJsonObject category = valueCategory->toJson();
         valuesCategories.append(category);
     }
     result["categories"] = valuesCategories;
@@ -328,6 +335,14 @@ void Category::getPathFromRoot(QStringList &aList) {
     }
 }
 
+const QString &Category::gameIcon() const {
+    return gameIcon_;
+}
+
+void Category::setGameIcon(const QString &newGameIcon) {
+    gameIcon_ = newGameIcon;
+}
+
 int Category::countCategories() const {
     int count = std::accumulate(categories_.begin(),
                                 categories_.end(),
@@ -341,17 +356,11 @@ void Category::update() {
 }
 
 void Category::deleteAllCategories() {
-    auto childs = categories_;
-//    for (auto child: childs) {
-//        child->deleteAllCategories();
-//        delete child;
-//    }
+    QList<Category*> childs = categories_;
     QMutableListIterator<Category*> cats(childs);
     while (cats.hasNext()) {
-        auto child = cats.next();
-        qDebug() << title_ << (*child).title();
+        Category *child = cats.next();
         child->deleteAllCategories();
-        qDebug() << title_ << "del" << (*child).title();
         delete child;
     }
 }

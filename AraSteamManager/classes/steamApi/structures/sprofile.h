@@ -53,7 +53,7 @@ public:
     QPixmap pixmapAvatarMedium() const;
     QPixmap pixmapAvatarFull() const;
 
-    QPixmap getAvatarWithFrame(const QSize &size) const;
+    QPixmap pixmapFramedAvatar(const QSize &size, bool aForsUpdate = false) const;
 
     bool isNull() const;
 
@@ -116,6 +116,8 @@ private:
     mutable QImage pixmapAvatar_;
     mutable QImage pixmapAvatarMedium_;
     mutable QImage pixmapAvatarFull_;
+
+    mutable QPixmap pixmapAvatarWithFrame_;
 
 };
 

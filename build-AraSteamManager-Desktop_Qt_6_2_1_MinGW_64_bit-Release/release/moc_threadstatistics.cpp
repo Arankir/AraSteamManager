@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadStatistics_t {
     const uint offsetsAndSize[32];
-    char stringdata0[155];
+    char stringdata0[163];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_ThreadStatistics_t, stringdata0) + ofs), len 
@@ -42,17 +42,18 @@ QT_MOC_LITERAL(56, 11), // "Statistics&"
 QT_MOC_LITERAL(68, 4), // "fill"
 QT_MOC_LITERAL(73, 20), // "onResultAchievements"
 QT_MOC_LITERAL(94, 19), // "SAchievementsPlayer"
-QT_MOC_LITERAL(114, 3), // "ach"
-QT_MOC_LITERAL(118, 5), // "SGame"
-QT_MOC_LITERAL(124, 5), // "aGame"
-QT_MOC_LITERAL(130, 11), // "updateTimes"
-QT_MOC_LITERAL(142, 12) // "unlockedTime"
+QT_MOC_LITERAL(114, 12), // "achievements"
+QT_MOC_LITERAL(127, 5), // "SGame"
+QT_MOC_LITERAL(133, 4), // "game"
+QT_MOC_LITERAL(138, 11), // "updateTimes"
+QT_MOC_LITERAL(150, 12) // "unlockedTime"
 
     },
     "ThreadStatistics\0s_progress\0\0text\0"
     "progress\0max\0s_finish\0Statistics&\0"
     "fill\0onResultAchievements\0SAchievementsPlayer\0"
-    "ach\0SGame\0aGame\0updateTimes\0unlockedTime"
+    "achievements\0SGame\0game\0updateTimes\0"
+    "unlockedTime"
 };
 #undef QT_MOC_LITERAL
 

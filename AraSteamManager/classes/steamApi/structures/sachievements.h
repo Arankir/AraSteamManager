@@ -30,7 +30,7 @@ public:
     QString        iconGray()       const;
 
     void fromJson(const QJsonObject &aObject);
-    static QPixmap icon(const GameID &gameId, const QString &iconPath);
+    static QPixmap icon(const GameID &gameId, const QString &iconPath, const QSize &aSize = QSize(64, 64));
 private:
     AchievementID   apiName_;
     int             defaultValue_;
@@ -135,7 +135,10 @@ using SAchievementsPercentage = QList<SAchievementPercentage>;
 class SAchievement : public Sapi {
     Q_OBJECT
 public:
-    SAchievement(const SAchievementSchema &schema, const SAchievementPlayer &player, const SAchievementPercentage &percent, QObject *parent = nullptr);
+    SAchievement(const SAchievementSchema &aSchema, const SAchievementPlayer &aPlayer, const SAchievementPercentage &aPercent, QObject *aParent = nullptr):
+        Sapi(aParent), schema_(aSchema), percentage_(aPercent), player_(aPlayer) {
+        //    qDebug() << "SAchievement constructor" << apiName();
+    }
     SAchievement(const SAchievement&);
     SAchievement(const QJsonObject &object = QJsonObject(), QObject *parent = nullptr);
     SAchievement(const QVariant &text, QObject *parent = nullptr);

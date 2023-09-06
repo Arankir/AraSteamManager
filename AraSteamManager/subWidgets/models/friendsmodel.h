@@ -9,18 +9,23 @@ namespace friendsModel {
     enum Columns {
         ID        = 0,
         Index     = 1,
-        Icon      = 2,
-        Name      = 3,
-        Added     = 4,
-        Status    = 5,
-        IsPublic  = 6,
-        Count     = 7
+        Name      = 2,
+        Added     = 3,
+        Status    = 4,
+        IsPublic  = 5,
+        Count     = 6
     };
 }
 
 class FriendsModel : public QAbstractTableModel {
     Q_OBJECT
 public:
+    struct item {
+        QIcon *icon = nullptr;
+        SFriend steamFriend;
+        SProfile profile;
+    };
+
     FriendsModel(QObject *parent = nullptr);
     void setFriends(const QList<SFriend> &friends);
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -29,7 +34,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     QString friendId(const QModelIndex &index) const;
     static QString isPublicTitle();
-    SFriendProfile getFriend(const int &row) const;
+    item getFriend(int row) const;
     void clear();
 
 public slots:
@@ -37,18 +42,18 @@ public slots:
 
 signals:
     void s_finished();
-    void s_progress(const QString &status, const int &progress, const int &max);
+    void s_progress(const QString &status, int progress, int max);
 
 private:
-    QList<SFriendProfile> friends_;
+    QList<item> friends_;
 
 };
 
 class FilterModelFriends : public FilterModel {
     Q_OBJECT
 public:
-    FilterModelFriends(const int &row = 0, QObject *parent = nullptr);
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
+    FilterModelFriends(int row = 0, QObject *parent = nullptr);
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
     FriendsModel *sourceModel() const;
     void setSourceModel(FriendsModel *sourceModel);
 
@@ -58,13 +63,13 @@ signals:
 public slots:
     void setName(const QString &newName);
     void setStatus(const QString &newStatus);
-    void setIsPublic(const int &isPublic);
+    void setIsPublic(int isPublic);
     void setFavorites(const QSet<ProfileID> &newFavorites);
     void clearFavorites();
-    void clear();
+    void clear() override;
 
 private:
-    void setSourceModel(QAbstractItemModel *sourceModel) {Q_UNUSED(sourceModel);}
+    void setSourceModel(QAbstractItemModel *sourceModel) override;
 
     QString name_;
     QString status_;

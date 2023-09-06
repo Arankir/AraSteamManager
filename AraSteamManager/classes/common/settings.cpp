@@ -5,123 +5,137 @@
 
 //Q_LOGGING_CATEGORY(logFunc,     "Function")
 
-struct settings {
-    const QString language              = "Settings/Language";
-    const QString theme                 = "Settings/Theme";
-    const QString saveImage             = "Settings/SaveImages";
-    const QString myProfile             = "Settings/MyProfile";
-    const QString visibleHiddenGames    = "Settings/VisibleHiddenGames";
-    const QString profileInfoSize       = "Settings/VisibleProfileInfo";
-};
+namespace reestrPaths {
+    namespace settings {
+        QString language()              {return "Settings/Language";}
+        QString theme()                 {return "Settings/Theme";}
+        QString saveImage()             {return "Settings/SaveImages";}
+        QString myProfile()             {return "Settings/MyProfile";}
+        QString profileInfoSize()       {return "Settings/VisibleProfileInfo";}
 
-struct mainWindow {
-    const QString state         = "MainWindow/State";
-    const QString geometry      = "MainWindow/Geometry";
-};
+        QString dateFormat()            {return "Settings/DateFormat";}
+        QString timeFormat()            {return "Settings/DateTimeFormat";}
+        QString timeShortFormat()       {return "Settings/DateTimeShortFormat";}
+    }
+    namespace mainWindow {
+        QString state()                 {return "MainWindow/State";}
+        QString geometry()              {return "MainWindow/Geometry";}
+    }
+    namespace achievementContainer {
+        QString state()                 {return "AchievementContainer/State";}
+        QString geometry()              {return "AchievementContainer/Geometry";}
+    }
+}
 
-struct achievementContainer {
-    const QString state         = "AchievementContainer/State";
-    const QString geometry      = "AchievementContainer/Geometry";
-};
+const QString Settings::c_organizationName   = "Arankir";
+const QString Settings::c_organizationDomain = "Arankir";
+const QString Settings::c_applicationName    = "SteamAchievementsStatistic";
 
-const QString    Settings::c_organizationName   = "Arankir";
-const QString    Settings::c_organizationDomain = "Arankir";
-const QString    Settings::c_applicationName    = "SteamAchievementsStatistic";
-
-QSettings *      Settings::settings_                      = new QSettings(c_organizationName, c_applicationName);
+QSettings *Settings::settings_ = new QSettings(c_organizationName, c_applicationName);
 
 #define SettingsStart {
 void Settings::setMyProfile(const QString &aMyProfiles) {
-    return settings_->setValue(settings().myProfile, aMyProfiles);
+    return settings_->setValue(reestrPaths::settings::myProfile(), aMyProfiles);
 }
 
-void Settings::setLanguage(const int &aLanguage) {
-    return settings_->setValue(settings().language, aLanguage);
+void Settings::setLanguage(int aLanguage) {
+    return settings_->setValue(reestrPaths::settings::language(), aLanguage);
 }
 
-void Settings::setTheme(const int &aTheme) {
-    return settings_->setValue(settings().theme, aTheme);
+void Settings::setTheme(int aTheme) {
+    return settings_->setValue(reestrPaths::settings::theme(), aTheme);
 }
 
-void Settings::setSaveimage(const int &aSaveImage) {
-    return settings_->setValue(settings().saveImage, aSaveImage);
+void Settings::setSaveimage(int aSaveImage) {
+    return settings_->setValue(reestrPaths::settings::saveImage(), aSaveImage);
 }
 
-void Settings::setVisibleHiddenGames(const int &aVisibleHiddenGames) {
-    return settings_->setValue(settings().visibleHiddenGames, aVisibleHiddenGames);
-}
-
-void Settings::setVisibleProfileInfo(const int &aVisibleProfileInfo) {
-    return settings_->setValue(settings().profileInfoSize, aVisibleProfileInfo);
+void Settings::setVisibleProfileInfo(int aVisibleProfileInfo) {
+    return settings_->setValue(reestrPaths::settings::profileInfoSize(), aVisibleProfileInfo);
 }
 
 QString Settings::myProfile() {
-    return settings_->value(settings().myProfile, "").toString();
+    return settings_->value(reestrPaths::settings::myProfile(), "").toString();
 }
 
 int Settings::language() {
-    return settings_->value(settings().language, 1).toInt();
+    return settings_->value(reestrPaths::settings::language(), 1).toInt();
 }
 
 int Settings::theme() {
-    return settings_->value(settings().theme, 1).toInt();
+    return settings_->value(reestrPaths::settings::theme(), 1).toInt();
 }
 
 int Settings::saveImages() {
-    return settings_->value(settings().saveImage, 1).toInt();
-}
-
-int Settings::visibleHiddenGames() {
-    return settings_->value(settings().visibleHiddenGames, 0).toInt();
+    return settings_->value(reestrPaths::settings::saveImage(), 1).toInt();
 }
 
 int Settings::profileInfoSize() {
-    return settings_->value(settings().profileInfoSize, 2).toInt();
-}
-
-const QString Settings::dateTimeFormat() {
-    return dateFormat() + " hh:mm:ss";
-}
-
-const QString Settings::dateTimeFormatShort() {
-    return dateFormat() + " hh:mm";
+    return settings_->value(reestrPaths::settings::profileInfoSize(), 2).toInt();
 }
 
 const QString Settings::dateFormat() {
-//TODO сделать настраиваемым
-    return "yyyy.MM.dd";
+    return settings_->value(reestrPaths::settings::dateFormat(), "yyyy.MM.dd").toString();
+}
+
+const QString Settings::timeFormat() {
+    return settings_->value(reestrPaths::settings::timeFormat(), "hh:mm:ss").toString();
+}
+
+const QString Settings::timeShortFormat() {
+    return settings_->value(reestrPaths::settings::timeShortFormat(), "hh:mm").toString();
+}
+
+void Settings::setDateFormat(const QString &aFormat) {
+    return settings_->setValue(reestrPaths::settings::dateFormat(), aFormat);
+}
+
+void Settings::setTimeFormat(const QString &aFormat) {
+    return settings_->setValue(reestrPaths::settings::timeFormat(), aFormat);
+}
+
+void Settings::setTimeShortFormat(const QString &aFormat) {
+    return settings_->setValue(reestrPaths::settings::timeShortFormat(), aFormat);
+}
+
+const QString Settings::dateTimeFormat() {
+    return tr("%1 %2").arg(dateFormat(), timeFormat());
+}
+
+const QString Settings::dateTimeFormatShort() {
+    return tr("%1 %2").arg(dateFormat(), timeShortFormat());
 }
 
 void Settings::setMainWindowState(const QByteArray &aState) {
-    settings_->setValue(mainWindow().state, aState);
+    settings_->setValue(reestrPaths::mainWindow::state(), aState);
 }
 
 QByteArray Settings::mainWindowState() {
-    return settings_->value(mainWindow().state, QByteArray()).toByteArray();
+    return settings_->value(reestrPaths::mainWindow::state(), QByteArray()).toByteArray();
 }
 
 void Settings::setMainWindowGeometry(const QByteArray &aGeometry) {
-    settings_->setValue(mainWindow().geometry, aGeometry);
+    settings_->setValue(reestrPaths::mainWindow::geometry(), aGeometry);
 }
 
 QByteArray Settings::mainWindowGeometry() {
-    return settings_->value(mainWindow().geometry, QByteArray()).toByteArray();
+    return settings_->value(reestrPaths::mainWindow::geometry(), QByteArray()).toByteArray();
 }
 
 void Settings::setAchievementContainerState(const QByteArray &aState) {
-    settings_->setValue(achievementContainer().state, aState);
+    settings_->setValue(reestrPaths::achievementContainer::state(), aState);
 }
 
 QByteArray Settings::achievementContainerState() {
-    return settings_->value(achievementContainer().state, QByteArray()).toByteArray();
+    return settings_->value(reestrPaths::achievementContainer::state(), QByteArray()).toByteArray();
 }
 
 void Settings::setAchievementContainerGeometry(const QByteArray &aGeometry) {
-    settings_->setValue(achievementContainer().geometry, aGeometry);
+    settings_->setValue(reestrPaths::achievementContainer::geometry(), aGeometry);
 }
 
 QByteArray Settings::achievementContainerGeometry() {
-    return settings_->value(achievementContainer().geometry, QByteArray()).toByteArray();
+    return settings_->value(reestrPaths::achievementContainer::geometry(), QByteArray()).toByteArray();
 }
 
 void Settings::syncronizeSettings() {
@@ -145,10 +159,6 @@ QString Paths::categories(QString aGameId) {
 
 QString Paths::favorites(QString aType) {
     return QString(documents() + "favorites/%1%2").arg(aType , aType != "" ? ".json" : "");
-}
-
-QString Paths::hiddenGames(QString aSteamId) {
-    return QString(documents() + "hide/%1%2").arg(aSteamId != "" ? aSteamId : "All", ".txt");
 }
 
 QString Paths::groupGames(QString aProfileId) {

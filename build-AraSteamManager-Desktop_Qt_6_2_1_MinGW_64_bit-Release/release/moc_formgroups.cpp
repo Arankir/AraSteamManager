@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGroups_t {
     const uint offsetsAndSize[36];
-    char stringdata0[171];
+    char stringdata0[170];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormGroups_t, stringdata0) + ofs), len 
@@ -38,22 +38,22 @@ QT_MOC_LITERAL(27, 4), // "init"
 QT_MOC_LITERAL(32, 10), // "createMenu"
 QT_MOC_LITERAL(43, 6), // "QMenu*"
 QT_MOC_LITERAL(50, 16), // "QListWidgetItem*"
-QT_MOC_LITERAL(67, 5), // "aItem"
-QT_MOC_LITERAL(73, 11), // "removeGroup"
-QT_MOC_LITERAL(85, 6), // "initUi"
-QT_MOC_LITERAL(92, 5), // "clear"
-QT_MOC_LITERAL(98, 8), // "updateUi"
-QT_MOC_LITERAL(107, 6), // "cancel"
-QT_MOC_LITERAL(114, 5), // "apply"
-QT_MOC_LITERAL(120, 13), // "cancelClicked"
-QT_MOC_LITERAL(134, 12), // "applyClicked"
-QT_MOC_LITERAL(147, 11), // "retranslate"
-QT_MOC_LITERAL(159, 11) // "updateIcons"
+QT_MOC_LITERAL(67, 4), // "item"
+QT_MOC_LITERAL(72, 11), // "removeGroup"
+QT_MOC_LITERAL(84, 6), // "initUi"
+QT_MOC_LITERAL(91, 5), // "clear"
+QT_MOC_LITERAL(97, 8), // "updateUi"
+QT_MOC_LITERAL(106, 6), // "cancel"
+QT_MOC_LITERAL(113, 5), // "apply"
+QT_MOC_LITERAL(119, 13), // "cancelClicked"
+QT_MOC_LITERAL(133, 12), // "applyClicked"
+QT_MOC_LITERAL(146, 11), // "retranslate"
+QT_MOC_LITERAL(158, 11) // "updateIcons"
 
     },
     "FormGroups\0s_updateGroups\0\0init\0"
     "createMenu\0QMenu*\0QListWidgetItem*\0"
-    "aItem\0removeGroup\0initUi\0clear\0updateUi\0"
+    "item\0removeGroup\0initUi\0clear\0updateUi\0"
     "cancel\0apply\0cancelClicked\0applyClicked\0"
     "retranslate\0updateIcons"
 };

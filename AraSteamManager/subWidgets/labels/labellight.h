@@ -12,9 +12,9 @@ public:
     LabelLight(const QString &title, QWidget *parent = nullptr);
     ~LabelLight();
 
-    LabelLight &setLightColor(const int &red, const int &green, const int &blue, const int &alpha);
+    LabelLight &setLightColor(int red, int green, int blue, int alpha);
     LabelLight &setLightColor(const QColor &color);
-    LabelLight &setBlurRadius(const int &radius);
+    LabelLight &setBlurRadius(int radius);
 
     LabelLight *setlightningColor(const QColor &color);
 

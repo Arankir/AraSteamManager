@@ -19,10 +19,10 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSplitter>
-#include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "subWidgets/lineEdit/mylineedit.h"
+#include "subWidgets/tables/mytable.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -41,7 +41,7 @@ public:
     QCheckBox *checkBoxOpenProfile;
     QCheckBox *checkBoxFavorites;
     QSpacerItem *horizontalSpacer_2;
-    QTableView *tableFriends;
+    MyTable *tableFriends;
 
     void setupUi(QWidget *FormFriends)
     {
@@ -105,7 +105,7 @@ public:
         _2->addLayout(horizontalLayout_3);
 
         splitter->addWidget(frameFilter);
-        tableFriends = new QTableView(splitter);
+        tableFriends = new MyTable(splitter);
         tableFriends->setObjectName(QString::fromUtf8("tableFriends"));
         splitter->addWidget(tableFriends);
 

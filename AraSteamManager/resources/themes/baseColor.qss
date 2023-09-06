@@ -144,10 +144,6 @@ QTableView::item:!selected:hover, QColumnView::item:!selected:hover {
         stop: 1.0 %14);
 }
 
-QFrame#SubWindow {
-    background-color: %16;
-}
-
 QFrame#FrameProfileBaseInfo {
     background-color: %17;
 }
@@ -160,18 +156,23 @@ QFrame#FrameSelected, QFrame#FrameCategories, QFrame#FrameEditCategory {
     background-color: %18;
 }
 
-QWidget[accessibleName=TitleWindow] {
-    background-color: %19;
-    border-color: %2;
-}
-
 Form, .QWidget, QStackedWidget, QSlider, QHeaderView, Line, .QFrame {
     background-color: transparent;
     background: transparent;
     border-color: transparent;
 }
 
-FramelessWindow, QMessageBox, FramelessWindow:hover, QMessageBox:hover, QDialog, QDockWidget {
+QFrame#SubWindow, .SubForm, SubForm > .QFrame {
+    background-color: %16;
+}
+
+QWidget[accessibleName=TitleWindow] {
+    background-color: %19;
+    border-color: %2;
+}
+
+.SubForm, SubForm > .QFrame, FramelessWindow, QMessageBox, FramelessWindow:hover, QMessageBox:hover, QDialog, QDockWidget {
     background-color: %20;
     border-color: %2;
 }
+/*%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20*/

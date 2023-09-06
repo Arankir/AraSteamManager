@@ -31,6 +31,7 @@ SOURCES += \
     classes/common/loghelper.cpp \
     classes/files/category.cpp \
     classes/files/comments.cpp \
+    classes/files/exportfile.cpp \
     classes/files/favorites.cpp \
     classes/common/filesaveload.cpp \
     classes/common/generalfunctions.cpp \
@@ -38,7 +39,6 @@ SOURCES += \
     classes/common/settings.cpp \
     classes/common/theme.cpp \
     classes/files/groupsgames.cpp \
-    classes/files/hiddengames.cpp \
     classes/network/requestdata.cpp \
     classes/network/requestimage.cpp \
     classes/steamApi/sapi.cpp \
@@ -53,6 +53,9 @@ SOURCES += \
     classes/threads/threadloading.cpp \
     form.cpp \
     forms/main/formprofilesbrowser.cpp \
+    forms/main/settings/colorpicker.cpp \
+    forms/main/settings/formcommonsettings.cpp \
+    forms/main/settings/formimportexport.cpp \
     forms/widgets/formfrienditemgraph.cpp \
     forms/formcomments.cpp \
     forms/formcontainerachievements.cpp \
@@ -67,6 +70,7 @@ SOURCES += \
     forms/main/formprofile.cpp \
     forms/main/formsettings.cpp \
     forms/main/formstatistics.cpp \
+    forms/widgets/formimportitem.cpp \
     subWidgets/charts/achievementcompletedpiechart.cpp \
     subWidgets/charts/piechart.cpp \
     subWidgets/collapsablewidget.cpp \
@@ -91,6 +95,7 @@ SOURCES += \
     subWidgets/progressBars/progressbargood.cpp \
     subWidgets/progressBars/progressbarlight.cpp \
     subWidgets/tables/freezetablewidget.cpp \
+    subWidgets/tables/mytable.cpp \
     subWidgets/withData/buttonreachedtype.cpp \
     subWidgets/withData/qbuttonwithdata.cpp \
     subWidgets/withData/qcheckboxwithdata.cpp \
@@ -101,6 +106,7 @@ HEADERS += \
     classes/common/loghelper.h \
     classes/files/category.h \
     classes/files/comments.h \
+    classes/files/exportfile.h \
     classes/files/favorites.h \
     classes/common/filesaveload.h \
     classes/common/generalfunctions.h \
@@ -108,7 +114,6 @@ HEADERS += \
     classes/common/settings.h \
     classes/common/theme.h \
     classes/files/groupsgames.h \
-    classes/files/hiddengames.h \
     classes/network/requestdata.h \
     classes/network/requestimage.h \
     classes/steamApi/sapi.h \
@@ -123,6 +128,9 @@ HEADERS += \
     classes/threads/threadloading.h \
     form.h \
     forms/main/formprofilesbrowser.h \
+    forms/main/settings/colorpicker.h \
+    forms/main/settings/formcommonsettings.h \
+    forms/main/settings/formimportexport.h \
     forms/widgets/formfrienditemgraph.h \
     forms/formcomments.h \
     forms/formcontainerachievements.h \
@@ -137,6 +145,7 @@ HEADERS += \
     forms/main/formprofile.h \
     forms/main/formsettings.h \
     forms/main/formstatistics.h \
+    forms/widgets/formimportitem.h \
     subWidgets/charts/achievementcompletedpiechart.h \
     subWidgets/charts/piechart.h \
     subWidgets/collapsablewidget.h \
@@ -160,6 +169,7 @@ HEADERS += \
     subWidgets/progressBars/progressbargood.h \
     subWidgets/progressBars/progressbarlight.h \
     subWidgets/tables/freezetablewidget.h \
+    subWidgets/tables/mytable.h \
     subWidgets/withData/buttonreachedtype.h \
     subWidgets/withData/qbuttonwithdata.h \
     subWidgets/withData/qcheckboxwithdata.h \
@@ -169,6 +179,9 @@ HEADERS += \
 
 FORMS += \
     forms/main/formprofilesbrowser.ui \
+    forms/main/settings/colorpicker.ui \
+    forms/main/settings/formcommonsettings.ui \
+    forms/main/settings/formimportexport.ui \
     forms/widgets/formfrienditemgraph.ui \
     forms/formcomments.ui \
     forms/formcontainerachievements.ui \
@@ -183,6 +196,7 @@ FORMS += \
     forms/main/formprofile.ui \
     forms/main/formsettings.ui \
     forms/main/formstatistics.ui \
+    forms/widgets/formimportitem.ui \
     framelesswindow.ui
 
 # Default rules for deployment.
@@ -198,6 +212,8 @@ RESOURCES += \
 
 RC_FILE = SAS.rc
 
-DISTFILES +=
+DISTFILES += \
+    resources/images/languages/eng.png \
+    resources/images/languages/rus.png
 
 RC_ICONS = SAS.ico

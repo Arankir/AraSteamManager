@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFavorites_t {
-    const uint offsetsAndSize[46];
-    char stringdata0[280];
+    const uint offsetsAndSize[52];
+    char stringdata0[325];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormFavorites_t, stringdata0) + ofs), len 
@@ -45,25 +45,29 @@ QT_MOC_LITERAL(97, 11), // "retranslate"
 QT_MOC_LITERAL(109, 15), // "createMenuGames"
 QT_MOC_LITERAL(125, 6), // "QMenu*"
 QT_MOC_LITERAL(132, 6), // "GameID"
-QT_MOC_LITERAL(139, 7), // "aGameId"
-QT_MOC_LITERAL(147, 10), // "aProfileId"
-QT_MOC_LITERAL(158, 18), // "createMenuProfiles"
-QT_MOC_LITERAL(177, 8), // "goToGame"
-QT_MOC_LITERAL(186, 22), // "createMenuAchievements"
-QT_MOC_LITERAL(209, 13), // "AchievementID"
-QT_MOC_LITERAL(223, 14), // "aAchievementId"
-QT_MOC_LITERAL(238, 31), // "getProfilesFavoriteAchievements"
-QT_MOC_LITERAL(270, 9) // "SProfiles"
+QT_MOC_LITERAL(139, 6), // "gameId"
+QT_MOC_LITERAL(146, 9), // "profileId"
+QT_MOC_LITERAL(156, 18), // "createMenuProfiles"
+QT_MOC_LITERAL(175, 8), // "goToGame"
+QT_MOC_LITERAL(184, 22), // "createMenuAchievements"
+QT_MOC_LITERAL(207, 13), // "AchievementID"
+QT_MOC_LITERAL(221, 13), // "achievementId"
+QT_MOC_LITERAL(235, 31), // "getProfilesFavoriteAchievements"
+QT_MOC_LITERAL(267, 9), // "SProfiles"
+QT_MOC_LITERAL(277, 14), // "updateSettings"
+QT_MOC_LITERAL(292, 23), // "QFlags<changedSettings>"
+QT_MOC_LITERAL(316, 8) // "settings"
 
     },
     "FormFavorites\0s_showAchievements\0\0"
     "ProfileID\0SGame\0s_goToProfile\0init\0"
     "isInit\0isLoaded\0updateIcons\0retranslate\0"
-    "createMenuGames\0QMenu*\0GameID\0aGameId\0"
-    "aProfileId\0createMenuProfiles\0goToGame\0"
+    "createMenuGames\0QMenu*\0GameID\0gameId\0"
+    "profileId\0createMenuProfiles\0goToGame\0"
     "createMenuAchievements\0AchievementID\0"
-    "aAchievementId\0getProfilesFavoriteAchievements\0"
-    "SProfiles"
+    "achievementId\0getProfilesFavoriteAchievements\0"
+    "SProfiles\0updateSettings\0"
+    "QFlags<changedSettings>\0settings"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,7 +77,7 @@ static const uint qt_meta_data_FormFavorites[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -81,20 +85,21 @@ static const uint qt_meta_data_FormFavorites[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    2,   86,    2, 0x06,    1 /* Public */,
-       5,    1,   91,    2, 0x06,    4 /* Public */,
+       1,    2,   92,    2, 0x06,    1 /* Public */,
+       5,    1,   97,    2, 0x06,    4 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       6,    0,   94,    2, 0x0a,    6 /* Public */,
-       7,    0,   95,    2, 0x0a,    7 /* Public */,
-       8,    0,   96,    2, 0x0a,    8 /* Public */,
-       9,    0,   97,    2, 0x0a,    9 /* Public */,
-      10,    0,   98,    2, 0x0a,   10 /* Public */,
-      11,    2,   99,    2, 0x09,   11 /* Protected */,
-      16,    1,  104,    2, 0x09,   14 /* Protected */,
-      17,    2,  107,    2, 0x09,   16 /* Protected */,
-      18,    3,  112,    2, 0x09,   19 /* Protected */,
-      21,    0,  119,    2, 0x08,   23 /* Private */,
+       6,    0,  100,    2, 0x0a,    6 /* Public */,
+       7,    0,  101,    2, 0x0a,    7 /* Public */,
+       8,    0,  102,    2, 0x0a,    8 /* Public */,
+       9,    0,  103,    2, 0x0a,    9 /* Public */,
+      10,    0,  104,    2, 0x0a,   10 /* Public */,
+      11,    2,  105,    2, 0x09,   11 /* Protected */,
+      16,    1,  110,    2, 0x09,   14 /* Protected */,
+      17,    2,  113,    2, 0x09,   16 /* Protected */,
+      18,    3,  118,    2, 0x09,   19 /* Protected */,
+      21,    0,  125,    2, 0x08,   23 /* Private */,
+      23,    1,  126,    2, 0x08,   24 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 4,    2,    2,
@@ -111,6 +116,7 @@ static const uint qt_meta_data_FormFavorites[] = {
     QMetaType::Void, 0x80000000 | 13, 0x80000000 | 3,   14,   15,
     0x80000000 | 12, 0x80000000 | 13, 0x80000000 | 3, 0x80000000 | 19,   14,   15,   20,
     0x80000000 | 22,
+    QMetaType::Void, 0x80000000 | 24,   25,
 
        0        // eod
 };
@@ -139,6 +145,7 @@ void FormFavorites::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         case 11: { SProfiles _r = _t->getProfilesFavoriteAchievements();
             if (_a[0]) *reinterpret_cast< SProfiles*>(_a[0]) = std::move(_r); }  break;
+        case 12: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -168,7 +175,7 @@ const QMetaObject FormFavorites::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormFavorites_t
 , QtPrivate::TypeAndForceComplete<FormFavorites, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const GameID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const GameID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const GameID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<const AchievementID &, std::false_type>, QtPrivate::TypeAndForceComplete<SProfiles, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const GameID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const GameID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const GameID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<const AchievementID &, std::false_type>, QtPrivate::TypeAndForceComplete<SProfiles, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>
 
 
 >,
@@ -195,13 +202,13 @@ int FormFavorites::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

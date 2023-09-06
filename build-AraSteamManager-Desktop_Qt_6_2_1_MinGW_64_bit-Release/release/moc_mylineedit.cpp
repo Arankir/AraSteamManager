@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MyLineEdit_t {
     const uint offsetsAndSize[10];
-    char stringdata0[61];
+    char stringdata0[60];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MyLineEdit_t, stringdata0) + ofs), len 
@@ -33,11 +33,11 @@ QT_MOC_LITERAL(0, 10), // "MyLineEdit"
 QT_MOC_LITERAL(11, 14), // "updateSettings"
 QT_MOC_LITERAL(26, 0), // ""
 QT_MOC_LITERAL(27, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(51, 9) // "aSettings"
+QT_MOC_LITERAL(51, 8) // "settings"
 
     },
     "MyLineEdit\0updateSettings\0\0"
-    "QFlags<changedSettings>\0aSettings"
+    "QFlags<changedSettings>\0settings"
 };
 #undef QT_MOC_LITERAL
 

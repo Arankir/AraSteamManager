@@ -16,22 +16,22 @@ AchievementCompletedPieChart::AchievementCompletedPieChart() {
     updateTheme();
 }
 
-void AchievementCompletedPieChart::setNoAchievements(const int &aCount) {
+void AchievementCompletedPieChart::setNoAchievements(int aCount) {
     noAchievements_->setValue(aCount);
     slicesValueUpdated();
 }
 
-void AchievementCompletedPieChart::setNotStarted(const int &aCount) {
+void AchievementCompletedPieChart::setNotStarted(int aCount) {
     notStarted_->setValue(aCount);
     slicesValueUpdated();
 }
 
-void AchievementCompletedPieChart::setStarted(const int &aCount) {
+void AchievementCompletedPieChart::setStarted(int aCount) {
     started_->setValue(aCount);
     slicesValueUpdated();
 }
 
-void AchievementCompletedPieChart::setCompleted(const int &aCount) {
+void AchievementCompletedPieChart::setCompleted(int aCount) {
     completed_->setValue(aCount);
     slicesValueUpdated();
 }

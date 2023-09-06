@@ -25,8 +25,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormAchievements_t {
-    const uint offsetsAndSize[170];
-    char stringdata0[1276];
+    const uint offsetsAndSize[166];
+    char stringdata0[1255];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormAchievements_t, stringdata0) + ofs), len 
@@ -49,74 +49,72 @@ QT_MOC_LITERAL(162, 10), // "openManual"
 QT_MOC_LITERAL(173, 12), // "isDataSetted"
 QT_MOC_LITERAL(186, 18), // "setAllFriendsValue"
 QT_MOC_LITERAL(205, 11), // "ReachedType"
-QT_MOC_LITERAL(217, 5), // "aType"
-QT_MOC_LITERAL(223, 15), // "addFriendToList"
-QT_MOC_LITERAL(239, 8), // "SProfile"
-QT_MOC_LITERAL(248, 12), // "aSteamFriend"
-QT_MOC_LITERAL(261, 31), // "FriendListItemData::ProfileType"
-QT_MOC_LITERAL(293, 4), // "type"
-QT_MOC_LITERAL(298, 17), // "addProfileToTable"
-QT_MOC_LITERAL(316, 11), // "QModelIndex"
-QT_MOC_LITERAL(328, 5), // "index"
-QT_MOC_LITERAL(334, 14), // "createCategory"
-QT_MOC_LITERAL(349, 9), // "aCategory"
-QT_MOC_LITERAL(359, 17), // "createSubCategory"
-QT_MOC_LITERAL(377, 20), // "onAchievementsLoaded"
-QT_MOC_LITERAL(398, 10), // "findFriend"
-QT_MOC_LITERAL(409, 35), // "checkBoxFriendsOnlyWithGame_C..."
-QT_MOC_LITERAL(445, 8), // "aChecked"
-QT_MOC_LITERAL(454, 10), // "closeEvent"
-QT_MOC_LITERAL(465, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(478, 11), // "retranslate"
-QT_MOC_LITERAL(490, 11), // "updateIcons"
-QT_MOC_LITERAL(502, 4), // "init"
-QT_MOC_LITERAL(507, 16), // "updateCategories"
-QT_MOC_LITERAL(524, 30), // "checkBoxFavorites_StateChanged"
-QT_MOC_LITERAL(555, 4), // "arg1"
-QT_MOC_LITERAL(560, 16), // "initEditCategory"
-QT_MOC_LITERAL(577, 19), // "onLoadedFriendGames"
-QT_MOC_LITERAL(597, 6), // "SGames"
-QT_MOC_LITERAL(604, 5), // "games"
-QT_MOC_LITERAL(610, 9), // "ProfileID"
-QT_MOC_LITERAL(620, 9), // "profileId"
-QT_MOC_LITERAL(630, 21), // "buttonComment_Clicked"
-QT_MOC_LITERAL(652, 22), // "createMenuAchievements"
-QT_MOC_LITERAL(675, 6), // "QMenu*"
-QT_MOC_LITERAL(682, 12), // "SAchievement"
-QT_MOC_LITERAL(695, 12), // "aAchievement"
-QT_MOC_LITERAL(708, 18), // "createMenuCategory"
-QT_MOC_LITERAL(727, 28), // "createMenuAchievementsHeader"
-QT_MOC_LITERAL(756, 21), // "createMenuFrozenTable"
-QT_MOC_LITERAL(778, 6), // "aIndex"
-QT_MOC_LITERAL(785, 25), // "updateFilterWithMyProfile"
-QT_MOC_LITERAL(811, 27), // "updateFilterTextAchievement"
-QT_MOC_LITERAL(839, 8), // "aNewText"
-QT_MOC_LITERAL(848, 20), // "updateFilterCategory"
-QT_MOC_LITERAL(869, 9), // "Category*"
-QT_MOC_LITERAL(879, 10), // "aIsChecked"
-QT_MOC_LITERAL(890, 20), // "updateFilterFavorite"
-QT_MOC_LITERAL(911, 26), // "QList<FavoriteAchievement>"
-QT_MOC_LITERAL(938, 22), // "aFavoritesAchievements"
-QT_MOC_LITERAL(961, 18), // "updateFilterFriend"
-QT_MOC_LITERAL(980, 8), // "aSteamId"
-QT_MOC_LITERAL(989, 7), // "loading"
-QT_MOC_LITERAL(997, 10), // "aIsLoading"
-QT_MOC_LITERAL(1008, 18), // "currentAchievement"
-QT_MOC_LITERAL(1027, 15), // "onUpdateFilters"
-QT_MOC_LITERAL(1043, 18), // "updateAchievements"
-QT_MOC_LITERAL(1062, 11), // "loadFriends"
-QT_MOC_LITERAL(1074, 15), // "addFriendColumn"
-QT_MOC_LITERAL(1090, 18), // "removeFriendColumn"
-QT_MOC_LITERAL(1109, 18), // "initTreeCategories"
-QT_MOC_LITERAL(1128, 21), // "initAchievementsTable"
-QT_MOC_LITERAL(1150, 11), // "initFriends"
-QT_MOC_LITERAL(1162, 26), // "createCheckBoxHeaderAction"
-QT_MOC_LITERAL(1189, 14), // "QWidgetAction*"
-QT_MOC_LITERAL(1204, 5), // "aMenu"
-QT_MOC_LITERAL(1210, 5), // "aText"
-QT_MOC_LITERAL(1216, 26), // "achievementsModel::Columns"
-QT_MOC_LITERAL(1243, 7), // "aColumn"
-QT_MOC_LITERAL(1251, 24) // "buttonAddProfile_Clicked"
+QT_MOC_LITERAL(217, 4), // "type"
+QT_MOC_LITERAL(222, 15), // "addFriendToList"
+QT_MOC_LITERAL(238, 8), // "SProfile"
+QT_MOC_LITERAL(247, 7), // "profile"
+QT_MOC_LITERAL(255, 31), // "FriendListItemData::ProfileType"
+QT_MOC_LITERAL(287, 17), // "addProfileToTable"
+QT_MOC_LITERAL(305, 11), // "QModelIndex"
+QT_MOC_LITERAL(317, 5), // "index"
+QT_MOC_LITERAL(323, 14), // "createCategory"
+QT_MOC_LITERAL(338, 13), // "categoryIndex"
+QT_MOC_LITERAL(352, 17), // "createSubCategory"
+QT_MOC_LITERAL(370, 20), // "onAchievementsLoaded"
+QT_MOC_LITERAL(391, 10), // "findFriend"
+QT_MOC_LITERAL(402, 35), // "checkBoxFriendsOnlyWithGame_C..."
+QT_MOC_LITERAL(438, 9), // "isChecked"
+QT_MOC_LITERAL(448, 10), // "closeEvent"
+QT_MOC_LITERAL(459, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(472, 11), // "retranslate"
+QT_MOC_LITERAL(484, 11), // "updateIcons"
+QT_MOC_LITERAL(496, 4), // "init"
+QT_MOC_LITERAL(501, 16), // "updateCategories"
+QT_MOC_LITERAL(518, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(549, 4), // "arg1"
+QT_MOC_LITERAL(554, 16), // "initEditCategory"
+QT_MOC_LITERAL(571, 19), // "onLoadedFriendGames"
+QT_MOC_LITERAL(591, 6), // "SGames"
+QT_MOC_LITERAL(598, 5), // "games"
+QT_MOC_LITERAL(604, 9), // "ProfileID"
+QT_MOC_LITERAL(614, 9), // "profileId"
+QT_MOC_LITERAL(624, 21), // "buttonComment_Clicked"
+QT_MOC_LITERAL(646, 22), // "createMenuAchievements"
+QT_MOC_LITERAL(669, 6), // "QMenu*"
+QT_MOC_LITERAL(676, 12), // "SAchievement"
+QT_MOC_LITERAL(689, 11), // "achievement"
+QT_MOC_LITERAL(701, 18), // "createMenuCategory"
+QT_MOC_LITERAL(720, 8), // "category"
+QT_MOC_LITERAL(729, 28), // "createMenuAchievementsHeader"
+QT_MOC_LITERAL(758, 21), // "createMenuFrozenTable"
+QT_MOC_LITERAL(780, 25), // "updateFilterWithMyProfile"
+QT_MOC_LITERAL(806, 27), // "updateFilterTextAchievement"
+QT_MOC_LITERAL(834, 7), // "newText"
+QT_MOC_LITERAL(842, 20), // "updateFilterCategory"
+QT_MOC_LITERAL(863, 9), // "Category*"
+QT_MOC_LITERAL(873, 9), // "aCategory"
+QT_MOC_LITERAL(883, 20), // "updateFilterFavorite"
+QT_MOC_LITERAL(904, 26), // "QList<FavoriteAchievement>"
+QT_MOC_LITERAL(931, 21), // "favoritesAchievements"
+QT_MOC_LITERAL(953, 18), // "updateFilterFriend"
+QT_MOC_LITERAL(972, 7), // "loading"
+QT_MOC_LITERAL(980, 9), // "isLoading"
+QT_MOC_LITERAL(990, 18), // "currentAchievement"
+QT_MOC_LITERAL(1009, 15), // "onUpdateFilters"
+QT_MOC_LITERAL(1025, 18), // "updateAchievements"
+QT_MOC_LITERAL(1044, 11), // "loadFriends"
+QT_MOC_LITERAL(1056, 15), // "addFriendColumn"
+QT_MOC_LITERAL(1072, 18), // "removeFriendColumn"
+QT_MOC_LITERAL(1091, 18), // "initTreeCategories"
+QT_MOC_LITERAL(1110, 21), // "initAchievementsTable"
+QT_MOC_LITERAL(1132, 11), // "initFriends"
+QT_MOC_LITERAL(1144, 26), // "createCheckBoxHeaderAction"
+QT_MOC_LITERAL(1171, 14), // "QWidgetAction*"
+QT_MOC_LITERAL(1186, 4), // "menu"
+QT_MOC_LITERAL(1191, 4), // "text"
+QT_MOC_LITERAL(1196, 26), // "achievementsModel::Columns"
+QT_MOC_LITERAL(1223, 6), // "column"
+QT_MOC_LITERAL(1230, 24) // "buttonAddProfile_Clicked"
 
     },
     "FormAchievements\0s_filtersUpdated\0\0"
@@ -125,37 +123,34 @@ QT_MOC_LITERAL(1251, 24) // "buttonAddProfile_Clicked"
     "status\0progress\0max\0s_finishedAchievements\0"
     "s_finishedFriends\0update\0openManual\0"
     "isDataSetted\0setAllFriendsValue\0"
-    "ReachedType\0aType\0addFriendToList\0"
-    "SProfile\0aSteamFriend\0"
-    "FriendListItemData::ProfileType\0type\0"
+    "ReachedType\0type\0addFriendToList\0"
+    "SProfile\0profile\0FriendListItemData::ProfileType\0"
     "addProfileToTable\0QModelIndex\0index\0"
-    "createCategory\0aCategory\0createSubCategory\0"
-    "onAchievementsLoaded\0findFriend\0"
-    "checkBoxFriendsOnlyWithGame_Clicked\0"
-    "aChecked\0closeEvent\0QCloseEvent*\0"
+    "createCategory\0categoryIndex\0"
+    "createSubCategory\0onAchievementsLoaded\0"
+    "findFriend\0checkBoxFriendsOnlyWithGame_Clicked\0"
+    "isChecked\0closeEvent\0QCloseEvent*\0"
     "retranslate\0updateIcons\0init\0"
     "updateCategories\0checkBoxFavorites_StateChanged\0"
     "arg1\0initEditCategory\0onLoadedFriendGames\0"
     "SGames\0games\0ProfileID\0profileId\0"
     "buttonComment_Clicked\0createMenuAchievements\0"
-    "QMenu*\0SAchievement\0aAchievement\0"
-    "createMenuCategory\0createMenuAchievementsHeader\0"
-    "createMenuFrozenTable\0aIndex\0"
-    "updateFilterWithMyProfile\0"
-    "updateFilterTextAchievement\0aNewText\0"
-    "updateFilterCategory\0Category*\0"
-    "aIsChecked\0updateFilterFavorite\0"
-    "QList<FavoriteAchievement>\0"
-    "aFavoritesAchievements\0updateFilterFriend\0"
-    "aSteamId\0loading\0aIsLoading\0"
-    "currentAchievement\0onUpdateFilters\0"
-    "updateAchievements\0loadFriends\0"
-    "addFriendColumn\0removeFriendColumn\0"
-    "initTreeCategories\0initAchievementsTable\0"
-    "initFriends\0createCheckBoxHeaderAction\0"
-    "QWidgetAction*\0aMenu\0aText\0"
-    "achievementsModel::Columns\0aColumn\0"
-    "buttonAddProfile_Clicked"
+    "QMenu*\0SAchievement\0achievement\0"
+    "createMenuCategory\0category\0"
+    "createMenuAchievementsHeader\0"
+    "createMenuFrozenTable\0updateFilterWithMyProfile\0"
+    "updateFilterTextAchievement\0newText\0"
+    "updateFilterCategory\0Category*\0aCategory\0"
+    "updateFilterFavorite\0QList<FavoriteAchievement>\0"
+    "favoritesAchievements\0updateFilterFriend\0"
+    "loading\0isLoading\0currentAchievement\0"
+    "onUpdateFilters\0updateAchievements\0"
+    "loadFriends\0addFriendColumn\0"
+    "removeFriendColumn\0initTreeCategories\0"
+    "initAchievementsTable\0initFriends\0"
+    "createCheckBoxHeaderAction\0QWidgetAction*\0"
+    "menu\0text\0achievementsModel::Columns\0"
+    "column\0buttonAddProfile_Clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -188,42 +183,42 @@ static const uint qt_meta_data_FormAchievements[] = {
       14,    0,  332,    2, 0x0a,   18 /* Public */,
       15,    1,  333,    2, 0x0a,   19 /* Public */,
       18,    2,  336,    2, 0x0a,   21 /* Public */,
-      23,    1,  341,    2, 0x0a,   24 /* Public */,
-      26,    1,  344,    2, 0x09,   26 /* Protected */,
-      28,    1,  347,    2, 0x09,   28 /* Protected */,
-      29,    0,  350,    2, 0x09,   30 /* Protected */,
-      30,    0,  351,    2, 0x09,   31 /* Protected */,
-      31,    1,  352,    2, 0x09,   32 /* Protected */,
-      33,    1,  355,    2, 0x08,   34 /* Private */,
-      35,    0,  358,    2, 0x08,   36 /* Private */,
-      36,    0,  359,    2, 0x08,   37 /* Private */,
-      37,    0,  360,    2, 0x08,   38 /* Private */,
-      38,    0,  361,    2, 0x08,   39 /* Private */,
-      39,    1,  362,    2, 0x08,   40 /* Private */,
-      41,    0,  365,    2, 0x08,   42 /* Private */,
-      42,    2,  366,    2, 0x08,   43 /* Private */,
-      47,    0,  371,    2, 0x08,   46 /* Private */,
-      48,    1,  372,    2, 0x08,   47 /* Private */,
-      52,    1,  375,    2, 0x08,   49 /* Private */,
+      22,    1,  341,    2, 0x0a,   24 /* Public */,
+      25,    1,  344,    2, 0x09,   26 /* Protected */,
+      27,    1,  347,    2, 0x09,   28 /* Protected */,
+      28,    0,  350,    2, 0x09,   30 /* Protected */,
+      29,    0,  351,    2, 0x09,   31 /* Protected */,
+      30,    1,  352,    2, 0x09,   32 /* Protected */,
+      32,    1,  355,    2, 0x08,   34 /* Private */,
+      34,    0,  358,    2, 0x08,   36 /* Private */,
+      35,    0,  359,    2, 0x08,   37 /* Private */,
+      36,    0,  360,    2, 0x08,   38 /* Private */,
+      37,    0,  361,    2, 0x08,   39 /* Private */,
+      38,    1,  362,    2, 0x08,   40 /* Private */,
+      40,    0,  365,    2, 0x08,   42 /* Private */,
+      41,    2,  366,    2, 0x08,   43 /* Private */,
+      46,    0,  371,    2, 0x08,   46 /* Private */,
+      47,    1,  372,    2, 0x08,   47 /* Private */,
+      51,    1,  375,    2, 0x08,   49 /* Private */,
       53,    0,  378,    2, 0x08,   51 /* Private */,
       54,    1,  379,    2, 0x08,   52 /* Private */,
-      56,    1,  382,    2, 0x08,   54 /* Private */,
-      57,    1,  385,    2, 0x08,   56 /* Private */,
-      59,    2,  388,    2, 0x08,   58 /* Private */,
-      62,    1,  393,    2, 0x08,   61 /* Private */,
-      65,    2,  396,    2, 0x08,   63 /* Private */,
-      67,    1,  401,    2, 0x08,   66 /* Private */,
-      69,    0,  404,    2, 0x08,   68 /* Private */,
-      70,    0,  405,    2, 0x08,   69 /* Private */,
-      71,    0,  406,    2, 0x08,   70 /* Private */,
-      72,    0,  407,    2, 0x08,   71 /* Private */,
-      73,    2,  408,    2, 0x08,   72 /* Private */,
-      74,    1,  413,    2, 0x08,   75 /* Private */,
-      75,    0,  416,    2, 0x08,   77 /* Private */,
-      76,    0,  417,    2, 0x08,   78 /* Private */,
-      77,    0,  418,    2, 0x08,   79 /* Private */,
-      78,    3,  419,    2, 0x08,   80 /* Private */,
-      84,    0,  426,    2, 0x08,   84 /* Private */,
+      55,    1,  382,    2, 0x08,   54 /* Private */,
+      56,    1,  385,    2, 0x08,   56 /* Private */,
+      58,    2,  388,    2, 0x08,   58 /* Private */,
+      61,    1,  393,    2, 0x08,   61 /* Private */,
+      64,    2,  396,    2, 0x08,   63 /* Private */,
+      65,    1,  401,    2, 0x08,   66 /* Private */,
+      67,    0,  404,    2, 0x08,   68 /* Private */,
+      68,    0,  405,    2, 0x08,   69 /* Private */,
+      69,    0,  406,    2, 0x08,   70 /* Private */,
+      70,    0,  407,    2, 0x08,   71 /* Private */,
+      71,    2,  408,    2, 0x08,   72 /* Private */,
+      72,    1,  413,    2, 0x08,   75 /* Private */,
+      73,    0,  416,    2, 0x08,   77 /* Private */,
+      74,    0,  417,    2, 0x08,   78 /* Private */,
+      75,    0,  418,    2, 0x08,   79 /* Private */,
+      76,    3,  419,    2, 0x08,   80 /* Private */,
+      82,    0,  426,    2, 0x08,   84 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -240,33 +235,33 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Bool,
     QMetaType::Void, 0x80000000 | 16,   17,
-    QMetaType::Void, 0x80000000 | 19, 0x80000000 | 21,   20,   22,
-    QMetaType::Void, 0x80000000 | 24,   25,
-    QMetaType::Void, 0x80000000 | 24,   27,
-    QMetaType::Void, 0x80000000 | 24,   27,
+    QMetaType::Void, 0x80000000 | 19, 0x80000000 | 21,   20,   17,
+    QMetaType::Void, 0x80000000 | 23,   24,
+    QMetaType::Void, 0x80000000 | 23,   26,
+    QMetaType::Void, 0x80000000 | 23,   26,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   32,
-    QMetaType::Void, 0x80000000 | 34,    2,
+    QMetaType::Void, QMetaType::Bool,   31,
+    QMetaType::Void, 0x80000000 | 33,    2,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   40,
+    QMetaType::Void, QMetaType::Int,   39,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 43, 0x80000000 | 45,   44,   46,
+    QMetaType::Void, 0x80000000 | 42, 0x80000000 | 44,   43,   45,
     QMetaType::Void,
-    0x80000000 | 49, 0x80000000 | 50,   51,
-    0x80000000 | 49, 0x80000000 | 24,   27,
-    0x80000000 | 49,
-    0x80000000 | 49, 0x80000000 | 24,   55,
+    0x80000000 | 48, 0x80000000 | 49,   50,
+    0x80000000 | 48, 0x80000000 | 23,   52,
+    0x80000000 | 48,
+    0x80000000 | 48, 0x80000000 | 23,   24,
     QMetaType::Void, 0x80000000 | 16,   17,
-    QMetaType::Void, QMetaType::QString,   58,
-    QMetaType::Void, 0x80000000 | 60, QMetaType::Bool,   27,   61,
-    QMetaType::Void, 0x80000000 | 63,   64,
-    QMetaType::Void, 0x80000000 | 45, 0x80000000 | 16,   66,   17,
-    QMetaType::Void, QMetaType::Bool,   68,
-    0x80000000 | 50,
+    QMetaType::Void, QMetaType::QString,   57,
+    QMetaType::Void, 0x80000000 | 59, QMetaType::Bool,   60,   31,
+    QMetaType::Void, 0x80000000 | 62,   63,
+    QMetaType::Void, 0x80000000 | 44, 0x80000000 | 16,   45,   17,
+    QMetaType::Void, QMetaType::Bool,   66,
+    0x80000000 | 49,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -275,7 +270,7 @@ static const uint qt_meta_data_FormAchievements[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    0x80000000 | 79, 0x80000000 | 49, QMetaType::QString, 0x80000000 | 82,   80,   81,   83,
+    0x80000000 | 77, 0x80000000 | 48, QMetaType::QString, 0x80000000 | 80,   78,   79,   81,
     QMetaType::Void,
 
        0        // eod
@@ -289,8 +284,8 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         switch (_id) {
         case 0: _t->s_filtersUpdated((*reinterpret_cast< QAbstractItemModel*(*)>(_a[1]))); break;
         case 1: _t->s_filtersValueUpdated(); break;
-        case 2: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3]))); break;
-        case 3: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2]))); break;
+        case 2: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 3: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 4: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 5: _t->s_progress(); break;
         case 6: _t->s_finishedAchievements(); break;
@@ -312,7 +307,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 21: _t->updateIcons(); break;
         case 22: _t->init(); break;
         case 23: _t->updateCategories(); break;
-        case 24: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< const int(*)>(_a[1]))); break;
+        case 24: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 25: _t->initEditCategory(); break;
         case 26: _t->onLoadedFriendGames((*reinterpret_cast< const SGames(*)>(_a[1])),(*reinterpret_cast< const ProfileID(*)>(_a[2]))); break;
         case 27: _t->buttonComment_Clicked(); break;
@@ -326,23 +321,23 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
         case 32: _t->updateFilterWithMyProfile((*reinterpret_cast< const ReachedType(*)>(_a[1]))); break;
         case 33: _t->updateFilterTextAchievement((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 34: _t->updateFilterCategory((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< const bool(*)>(_a[2]))); break;
+        case 34: _t->updateFilterCategory((*reinterpret_cast< Category*(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
         case 35: _t->updateFilterFavorite((*reinterpret_cast< const QList<FavoriteAchievement>(*)>(_a[1]))); break;
         case 36: _t->updateFilterFriend((*reinterpret_cast< const ProfileID(*)>(_a[1])),(*reinterpret_cast< const ReachedType(*)>(_a[2]))); break;
-        case 37: _t->loading((*reinterpret_cast< const bool(*)>(_a[1]))); break;
+        case 37: _t->loading((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 38: { SAchievement _r = _t->currentAchievement();
             if (_a[0]) *reinterpret_cast< SAchievement*>(_a[0]) = std::move(_r); }  break;
         case 39: _t->onUpdateFilters(); break;
         case 40: _t->updateAchievements(); break;
         case 41: _t->loadFriends(); break;
-        case 42: { int _r = _t->addFriendColumn((*reinterpret_cast< const SProfile(*)>(_a[1])),(*reinterpret_cast< FriendListItemData::ProfileType(*)>(_a[2])));
+        case 42: { int _r = _t->addFriendColumn((*reinterpret_cast< const SProfile(*)>(_a[1])),(*reinterpret_cast< const FriendListItemData::ProfileType(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 43: { bool _r = _t->removeFriendColumn((*reinterpret_cast< const SProfile(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 44: _t->initTreeCategories(); break;
         case 45: _t->initAchievementsTable(); break;
         case 46: _t->initFriends(); break;
-        case 47: { QWidgetAction* _r = _t->createCheckBoxHeaderAction((*reinterpret_cast< QMenu*(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< achievementsModel::Columns(*)>(_a[3])));
+        case 47: { QWidgetAction* _r = _t->createCheckBoxHeaderAction((*reinterpret_cast< QMenu*(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const achievementsModel::Columns(*)>(_a[3])));
             if (_a[0]) *reinterpret_cast< QWidgetAction**>(_a[0]) = std::move(_r); }  break;
         case 48: _t->buttonAddProfile_Clicked(); break;
         default: ;
@@ -382,7 +377,7 @@ void FormAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
             }
         }
         {
-            using _t = void (FormAchievements::*)(const QString & , const int & , const int & );
+            using _t = void (FormAchievements::*)(const QString & , int , int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&FormAchievements::s_progress)) {
                 *result = 2;
                 return;
@@ -412,8 +407,8 @@ const QMetaObject FormAchievements::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormAchievements_t
-, QtPrivate::TypeAndForceComplete<FormAchievements, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QAbstractItemModel *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<FriendListItemData::ProfileType, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QCloseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGames &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SAchievement &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QList<FavoriteAchievement> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const bool &, std::false_type>, QtPrivate::TypeAndForceComplete<SAchievement, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<FriendListItemData::ProfileType, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidgetAction *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<achievementsModel::Columns, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<FormAchievements, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QAbstractItemModel *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<FriendListItemData::ProfileType, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QCloseEvent *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGames &, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SAchievement &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QList<FavoriteAchievement> &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<const ReachedType &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<SAchievement, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<const FriendListItemData::ProfileType &, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QWidgetAction *, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const achievementsModel::Columns &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -465,7 +460,7 @@ void FormAchievements::s_filtersValueUpdated()
 }
 
 // SIGNAL 2
-void FormAchievements::s_progress(const QString & _t1, const int & _t2, const int & _t3)
+void FormAchievements::s_progress(const QString & _t1, int _t2, int _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);

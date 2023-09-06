@@ -6,10 +6,7 @@
 #include <QVariant>
 
 #define SAchievementStart {
-SAchievement::SAchievement(const SAchievementSchema &aSchema, const SAchievementPlayer &aPlayer, const SAchievementPercentage &aPercent, QObject *aParent):
-    Sapi(aParent), schema_(aSchema), percentage_(aPercent), player_(aPlayer) {
-//    qDebug() << "SAchievement constructor" << apiName();
-}
+
 
 SAchievement::SAchievement(const SAchievement &aAchievement): Sapi(aAchievement.parent()), schema_(aAchievement.schema_),
     percentage_(aAchievement.percentage_), player_(aAchievement.player_) {
@@ -212,22 +209,22 @@ void SAchievementSchema::fromJson(const QJsonObject &aObject) {
 
 QList<SAchievementSchema> onLoadSchema(const QByteArray &aByteArray) {
     QList<SAchievementSchema> list;
-    for(auto &&schema: QJsonDocument::fromJson(aByteArray).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray()) {
+    for(QJsonValue &&schema: QJsonDocument::fromJson(aByteArray).object().value("game").toObject().value("availableGameStats").toObject().value("achievements").toArray()) {
         list.append(SAchievementSchema(schema.toObject()));
     }
     return list;
 }
 
 SAchievementsSchema SAchievementSchema::load(const GameID &aAppId, std::function<void (SAchievementsSchema)> aCallback) {
-    return Sapi::load<SAchievementSchema>(achievementsSchemaUrl(aAppId), onLoadSchema, aCallback);
+    return Sapi::load<SAchievementSchema>(Sapi::Url::achievementsSchema(aAppId), onLoadSchema, aCallback);
 }
 
 QPixmap SAchievementSchema::icon(GameID aGameId) const {
     return QPixmap::fromImage(loadImage(pixmapIcon_, icon(), Paths::imagesAchievements(QString::number(aGameId), icon()), QSize(64, 64)));
 }
 
-QPixmap SAchievementSchema::icon(const GameID &aGameId, const QString &aIconPath) {
-    return QPixmap::fromImage(loadImage(aIconPath, Paths::imagesAchievements(QString::number(aGameId), aIconPath), QSize(64, 64)));
+QPixmap SAchievementSchema::icon(const GameID &aGameId, const QString &aIconPath, const QSize &aSize) {
+    return QPixmap::fromImage(loadImage(aIconPath, Paths::imagesAchievements(QString::number(aGameId), aIconPath), aSize));
 }
 
 QPixmap SAchievementSchema::iconGray(GameID aGameId) const {
@@ -316,14 +313,14 @@ void SAchievementPercentage::fromJson(const QJsonObject &aObject) {
 
 QList<SAchievementPercentage> onLoadPercentage(QByteArray aByteArray) {
     QList<SAchievementPercentage> list;
-    for(auto &&percentage: QJsonDocument::fromJson(aByteArray).object().value("achievementpercentages").toObject().value("achievements").toArray()) {
+    for(QJsonValue &&percentage: QJsonDocument::fromJson(aByteArray).object().value("achievementpercentages").toObject().value("achievements").toArray()) {
         list.append(SAchievementPercentage(percentage.toObject()));
     }
     return list;
 }
 
 SAchievementsPercentage SAchievementPercentage::load(const GameID &aAppId, std::function<void (SAchievementsPercentage)> aCallback) {
-    return Sapi::load<SAchievementPercentage>(achievementsPercentUrl(aAppId), onLoadPercentage, aCallback);
+    return Sapi::load<SAchievementPercentage>(Sapi::Url::achievementsPercent(aAppId), onLoadPercentage, aCallback);
 }
 
 AchievementID SAchievementPercentage::apiName() const {
@@ -451,7 +448,7 @@ const QString &SAchievementPlayer::error() const {
 SAchievementsPlayer::SAchievementsPlayer(const GameID &aGameId, const ProfileID &aProfileId, QObject *aParent):
 Sapi(aParent), gameId_(aGameId), profileId_(aProfileId) {
     RequestData *request = new RequestData();
-    request->get(achievementsPlayerUrl(gameId_, profileId_), false);
+    request->get(Sapi::Url::achievementsPlayer(gameId_, profileId_), false);
     QByteArray ba = request->reply();
     delete request;
     fromJson(QJsonDocument::fromJson(ba).object());
@@ -498,7 +495,7 @@ QJsonObject SAchievementsPlayer::toJson() const {
     object["gameId"] = gameId_;
     object["profileId"] = profileId_;
     QJsonArray jAchievements;
-    for(const auto &achievement: *this) {
+    for(const SAchievementPlayer &achievement: *this) {
         jAchievements.append(achievement.toJson());
     }
     object["achievements"] = jAchievements;
@@ -508,7 +505,7 @@ QJsonObject SAchievementsPlayer::toJson() const {
 void SAchievementsPlayer::update(const ProfileID &aProfileId) {
     profileId_ = aProfileId;
     RequestData *request = new RequestData();
-    request->get(achievementsPlayerUrl(gameId_, profileId_), false);
+    request->get(Sapi::Url::achievementsPlayer(gameId_, profileId_), false);
     QByteArray ba = request->reply();
     delete request;
     fromJson(QJsonDocument::fromJson(ba).object());
@@ -517,7 +514,7 @@ void SAchievementsPlayer::update(const ProfileID &aProfileId) {
 void SAchievementsPlayer::fromJson(const QJsonObject &aObject) {
     success_ = aObject.value("playerstats").toObject().value("success").toBool();
     error_ = aObject.value("playerstats").toObject().value("error").toString();
-    for(auto &&player: aObject.value("playerstats").toObject().value("achievements").toArray()) {
+    for(QJsonValue &&player: aObject.value("playerstats").toObject().value("achievements").toArray()) {
         append(SAchievementPlayer(player.toObject(), parent()));
     }
 }
@@ -529,20 +526,23 @@ bool SAchievementsPlayer::success() const {
 SAchievementsPlayer SAchievementsPlayer::load(const GameID &aGameId, const ProfileID &aProfileId, std::function<void (SAchievementsPlayer)> aCallback) {
 //    return Sapi::load<SAchievementsPlayer>(achievementsPlayerUrl(aGameId, aProfileId), onLoadPlayer, aCallback);
     RequestData *request = new RequestData();
-    request->get(achievementsPlayerUrl(aGameId, aProfileId), aCallback != nullptr);
+    request->get(Sapi::Url::achievementsPlayer(aGameId, aProfileId), aCallback != nullptr);
 
     if (aCallback == nullptr) {
         QByteArray ba = request->reply();
         delete request;
         return SAchievementsPlayer(QJsonDocument::fromJson(ba).object());
     } else {
-        connect(request,
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(request,
                 &RequestData::s_finished,
-                [=](RequestData *requestL) {
+                [aCallback, conn](RequestData *requestL) {
+                    QObject::disconnect(*conn);
                     QByteArray ba = requestL->reply();
                     requestL->deleteLater();
                     aCallback(SAchievementsPlayer(QJsonDocument::fromJson(ba).object()));
                 });
+
     }
     return SAchievementsPlayer();
 }

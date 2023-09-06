@@ -50,7 +50,7 @@ Qt::ItemFlags CategoriesModel::flags(const QModelIndex &index) const {
     if (!index.isValid())
         return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled;
 
-    auto item = getItem(index);
+    Category *item = getItem(index);
     if (item != nullptr) {
         if (item->count() > 0) {
             return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | Qt::ItemIsEditable | Qt::ItemIsUserCheckable | QAbstractItemModel::flags(index);
@@ -119,7 +119,7 @@ bool CategoriesModel::insertRows(int position, const QModelIndex &parent, const 
     if (getItem(parent)->find(aTitle) != nullptr) {
         return false;
     }
-    auto success = insertRows(position, 1, parent);
+    bool success = insertRows(position, 1, parent);
     if (success) {
         setData(index(getItem(parent)->categories().count() - 1, 0, parent), aTitle);
         return true;
@@ -134,7 +134,7 @@ bool CategoriesModel::insertRows(int aPosition, int aCount, const QModelIndex &a
         return false;
 
     beginInsertRows(aParent, aPosition, aPosition);
-    auto category = new Category(rootItem_->gameID(), rootItem_->gameName(), false);
+    Category *category = new Category(rootItem_->gameID(), rootItem_->gameName(), rootItem_->gameIcon(), false);
     bool success = parentItem->addCategory(category);
     endInsertRows();
 
@@ -151,7 +151,7 @@ QModelIndex CategoriesModel::parent(const QModelIndex &index) const {
     if (parentItem == rootItem_ || parentItem == nullptr)
         return QModelIndex();
 
-    if (auto parent = parentItem->parent()) {
+    if (Category *parent = parentItem->parent()) {
         return createIndex(parent->categories().indexOf(const_cast<Category*>(parentItem)), 0, parentItem);
     } else {
         return QModelIndex();
@@ -185,6 +185,7 @@ bool CategoriesModel::removeRows(int position, int count, const QModelIndex &par
         beginRemoveRows(parent, position, position);
         parentItem->removeCategory(childItem->title(), true);
         endRemoveRows();
+        parentItem->root()->save();
         return true;
     } else {
         qWarning() << "error categories size is " << QString::number(categories.size()) << ", find " << QString::number(position);
@@ -240,7 +241,7 @@ bool CategoriesModel::setData(const QModelIndex &index, const QVariant &value, i
             return false;
         }
         if (item->parent() != nullptr) {
-            auto cat = item->parent()->categories();
+            QList<Category*> cat = item->parent()->categories();
             auto iterator = std::find_if(cat.begin(),
                                          cat.end(),
                                          [=](Category *lChild) {
@@ -311,7 +312,7 @@ bool CategoriesModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
     else
         beginRow = rowCount(QModelIndex());
 
-    qDebug() << row << parent.isValid() << parent.row() << rowCount(QModelIndex()) << beginRow;
+//    qDebug() << row << parent.isValid() << parent.row() << rowCount(QModelIndex()) << beginRow;
 
     QByteArray encoded = data->text().toUtf8();
     QDataStream stream(&encoded, QIODevice::ReadOnly);
@@ -320,10 +321,10 @@ bool CategoriesModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
         QStringList path;
         stream >> oldRow >> oldCol >> path;
 
-        auto category = rootItem_->root()->find(path);
+        Category *category = rootItem_->root()->find(path);
         if (category) {
-            auto categoryNewParent = getItem(parent);
-            auto newParentCategories = categoryNewParent->categories();
+            Category *categoryNewParent = getItem(parent);
+            QList<Category*> newParentCategories = categoryNewParent->categories();
             bool isEqualTitle = std::any_of(newParentCategories.begin(),
                                          newParentCategories.end(),
                                          [=](Category *lCategory) {
@@ -333,8 +334,8 @@ bool CategoriesModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
                 emit s_error(tr("У одной категории не может быть 2 подкатегории с одинаковым именем!"));
             } else {
                 QModelIndex index = createIndex(getRowFromParent(category->parent()), oldCol, category->parent());
-                qDebug() << index << getItem(index) << getItem(index)->title() << oldRow;
-                qDebug() << parent << getItem(parent) << getItem(parent)->title() << beginRow;
+//                qDebug() << index << getItem(index) << getItem(index)->title() << oldRow;
+//                qDebug() << parent << getItem(parent) << getItem(parent)->title() << beginRow;
                 if (index != parent || oldRow != beginRow) {
                     beginMoveRows(index, oldRow, oldRow, parent, beginRow);
                     category->setParent(categoryNewParent);

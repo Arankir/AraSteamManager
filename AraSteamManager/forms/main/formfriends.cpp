@@ -12,20 +12,20 @@ FormFriends::FormFriends(QWidget *aParent): Form(aParent), ui(new Ui::FormFriend
 }
 
 void FormFriends::init() {
-    initingTable(ui->tableFriends);
     initComboBoxStatus();
-    ui->tableFriends->setModel(&filterFriends_);
-    auto friendsModel = new FriendsModel(ui->tableFriends);
+    FriendsModel *friendsModel = new FriendsModel(ui->tableFriends);
+    FilterModelFriends *filter = new FilterModelFriends();
     connect(friendsModel, &FriendsModel::s_progress, this, &Form::setStatus);
-    connect(&filterFriends_, &FilterModelFriends::s_modelFinished, this, [&]() {
+    connect(filter, &FilterModelFriends::s_modelFinished, this, [&]() {
         ui->tableFriends->resizeColumnsToContents();
         ui->tableFriends->resizeRowsToContents();
         clearStatus();
-        emit s_finish(getWidthTableColumns(ui->tableFriends) + 23);//Почему-то при подсчёте длинна последнего 77, а как всё начинает ресайзиться, меняется на 100
+        emit s_finish(ui->tableFriends->widthColumns() + 23);//Почему-то при подсчёте длинна последнего 77, а как всё начинает ресайзиться, меняется на 100
     });
+    ui->tableFriends->setFilter(filter);
+    ui->tableFriends->setModel(friendsModel);
     ui->splitter->setStretchFactor(0, 1);
     ui->splitter->setStretchFactor(1, 10);
-    filterFriends_.setSourceModel(friendsModel);
     ui->tableFriends->setColumnHidden(friendsModel::ID,    true);
     ui->tableFriends->setColumnHidden(friendsModel::Index, true);
     updateIcons();
@@ -34,7 +34,7 @@ void FormFriends::init() {
     connect(ui->comboBoxStatus,       SIGNAL(activated(int)),   this, SLOT(comboBoxStatus_Activated(int)));
     connect(ui->lineEditName,         &QLineEdit::textChanged,  this, &FormFriends::lineEditName_TextChanged);
     connect(ui->checkBoxOpenProfile,  &QCheckBox::stateChanged, this, [&](int lState) {
-        filterFriends_.setIsPublic(lState);
+        filter->setIsPublic(lState);
         ui->tableFriends->resizeRowsToContents();
     });
     connect(ui->checkBoxFavorites,    &QCheckBox::stateChanged, this, &FormFriends::checkBoxFavorites_StateChanged);
@@ -45,7 +45,7 @@ void FormFriends::init() {
     connect(ui->tableFriends,         &QTableView::doubleClicked, this, [&](QModelIndex) {
         goToCurrentProfile();
     });
-    connect(&filterFriends_, &FilterModel::s_rowsUpdated, this, [&]() {
+    connect(filter, &FilterModel::s_rowsUpdated, this, [&]() {
         ui->tableFriends->resizeRowsToContents();
     });
 #define ConnectsEnd }
@@ -54,12 +54,16 @@ void FormFriends::init() {
 void FormFriends::setFriends(const ProfileID &aProfileId) {
     clear();
     profileId_ = aProfileId;
-    filterFriends_.sourceModel()->setFriends(SFriend::load(aProfileId));
+    auto m = dynamic_cast<FriendsModel*>(ui->tableFriends->originalModel());
+    if (m) {
+        m->setFriends(SFriend::load(aProfileId));
+    }
+//    filterFriends_.sourceModel()->setFriends(SFriend::load(aProfileId));
 }
 
 void FormFriends::clear() {
     profileId_ = "";
-    filterFriends_.clear();
+    ui->tableFriends->filter()->clear();
     ui->comboBoxStatus->setCurrentIndex(0);
     isLoading_ = false;
 }
@@ -87,14 +91,8 @@ void FormFriends::retranslate() {
     initComboBoxStatus();
 }
 
-//void FormFriends::updateSettings(QFlags<changedSettings> aSettings) {
-//    if (aSettings.testFlag(changedSettings::theme)) {
-//        updateIcons();
-//    }
-//}
-
-SFriendProfile FormFriends::currentFriend() {
-    return filterFriends_.sourceModel()->getFriend(filterFriends_.data(ui->tableFriends->currentIndex().siblingAtColumn(friendsModel::Index)).toInt());
+FriendsModel::item FormFriends::currentFriend() {
+    return dynamic_cast<FriendsModel*>(ui->tableFriends->originalModel())->getFriend(ui->tableFriends->filter()->data(ui->tableFriends->currentIndex().siblingAtColumn(friendsModel::Index)).toInt());
 }
 
 void FormFriends::updateIcons() {
@@ -103,25 +101,25 @@ void FormFriends::updateIcons() {
 #define SystemEnd }
 
 #define Filter {
-void FormFriends::comboBoxStatus_Activated(const int &aIndex) {
-    filterFriends_.setStatus(aIndex == 0 ? "" : ui->comboBoxStatus->currentText());
+void FormFriends::comboBoxStatus_Activated(int aIndex) {
+    dynamic_cast<FilterModelFriends*>(ui->tableFriends->filter())->setStatus(aIndex == 0 ? "" : ui->comboBoxStatus->currentText());
 }
 
 void FormFriends::lineEditName_TextChanged(const QString &aNewText) {
-    filterFriends_.setName(aNewText);
+    dynamic_cast<FilterModelFriends*>(ui->tableFriends->filter())->setName(aNewText);
 }
 
 void FormFriends::buttonFind_Clicked() {
     lineEditName_TextChanged(ui->lineEditName->text());
 }
 
-void FormFriends::checkBoxFavorites_StateChanged(const int &arg1) {
+void FormFriends::checkBoxFavorites_StateChanged(int arg1) {
     switch (arg1) {
-    case 0: {
-        filterFriends_.clearFavorites();
+    case Qt::Unchecked: {
+        dynamic_cast<FilterModelFriends*>(ui->tableFriends->filter())->clearFavorites();
         break;
     }
-    case 2: {
+    case Qt::Checked: {
         QList<FavoriteProfile> favoriteProfile = FavoriteProfiles();
         QSet<ProfileID> profiles = std::accumulate(favoriteProfile.begin(),
                                                    favoriteProfile.end(),
@@ -130,7 +128,7 @@ void FormFriends::checkBoxFavorites_StateChanged(const int &arg1) {
                                                         lProfiles.insert(lProfile.profileId());
                                                         return lProfiles;
                                                    });
-        filterFriends_.setFavorites(profiles);
+        dynamic_cast<FilterModelFriends*>(ui->tableFriends->filter())->setFavorites(profiles);
         break;
     }
     }
@@ -138,7 +136,7 @@ void FormFriends::checkBoxFavorites_StateChanged(const int &arg1) {
 #define FilterEnd }
 
 #define TableAction {
-QMenu *FormFriends::createMenu(const SFriendProfile &aProfile) {
+QMenu *FormFriends::createMenu(const FriendsModel::item &aProfile) {
     QMenu *menu = new QMenu(this);
 
     QAction *actionGoToProfile = new QAction(tr("Перейти на профиль"), this);
@@ -151,24 +149,22 @@ QMenu *FormFriends::createMenu(const SFriendProfile &aProfile) {
     bool isFavorite = std::any_of(favoriteFriends.begin(),
                                   favoriteFriends.end(),
                                   [&](const FavoriteProfile &lFriend) {
-                                        return (lFriend.profileId() == aProfile.steamProfile.steamId());
+                                        return (lFriend.profileId() == aProfile.profile.steamId());
                                     });
     if (isFavorite) {
         actionFavorites->setText(QObject::tr("Удалить из избранного"));
         actionFavorites->setIcon(QIcon(Images::isFavorites()));
         connect(actionFavorites, &QAction::triggered, this,  [=, this](){
-                    auto curFriend = currentFriend();
                     FavoriteProfiles favoriteFriends;
-                    favoriteFriends.remove(curFriend.steamProfile.steamId());
+                    favoriteFriends.remove(currentFriend().profile.steamId());
                     emit s_settingsUpdated(changedSettings::favorites);
                 });
     } else {
         actionFavorites->setText(QObject::tr("Добавить в избранное"));
         actionFavorites->setIcon(QIcon(Images::isNotFavorites()));
         connect(actionFavorites, &QAction::triggered, this,  [=, this](){
-                    auto curFriend = currentFriend();
                     FavoriteProfiles favoriteFriends;
-                    favoriteFriends.append(FavoriteProfile(curFriend.steamProfile.steamId()));
+                    favoriteFriends.append(FavoriteProfile(currentFriend().profile.steamId()));
                     emit s_settingsUpdated(changedSettings::favorites);
                 });
     }
@@ -183,6 +179,6 @@ void FormFriends::goToCurrentProfile() {
         return;
     }
     isLoading_ = true;
-    emit s_goToProfile(currentFriend().steamProfile.steamId());
+    emit s_goToProfile(currentFriend().profile.steamId());
 }
 #define TableActionEnd }

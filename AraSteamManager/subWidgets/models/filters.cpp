@@ -1,11 +1,11 @@
 #include "filters.h"
 
-void SortFilterProxyModelMiltiRow::addRow(const int &row) {
+void SortFilterProxyModelMiltiRow::addRow(int row) {
     rows_.append(row);
 }
 
-void SortFilterProxyModelMiltiRow::removeRow(const int &row) {
-    for (auto &rowFilter: rows_) {
+void SortFilterProxyModelMiltiRow::removeRow(int row) {
+    for (int rowFilter: rows_) {
         if (rowFilter == row) {
             rows_.removeOne(rowFilter);
             return;
@@ -18,11 +18,12 @@ bool SortFilterProxyModelMiltiRow::filterAcceptsRow(int source_row, const QModel
         return true;
     }
     bool ret = false;
-    for (auto &rowFilter: rows_) {
+    for (int rowFilter: rows_) {
         QModelIndex index = sourceModel()->index(source_row, rowFilter, source_parent);
         ret = (filterRegularExpression().match(index.data().toString()).hasMatch());
-        if(ret)
+        if(ret) {
             return true;
+        }
     }
     return false;
 };
@@ -79,7 +80,7 @@ void SortFilterProxyModelCategory::removeCategory(const QString &name) {
 
 void SortFilterProxyModelCategory::updateRegExp() {
     QStringList resultList;
-    for (const auto &category: qAsConst(categories_)) {
+    for (const auto &category: categories_) {
         resultList << category.second;
     }
     setFilterRegularExpression("(" + resultList.join(")|(") + ")|(^$)");
@@ -109,7 +110,7 @@ void inline setDataToBit(char &aChar, int aBit, bool aData) {
     }
 }
 
-Filter::Filter(const int &aRows, const int &aCols):
+Filter::Filter(int aRows, int aCols):
     rows_(std::max(0, aRows)),
     cols_(std::max(0, aCols)),
     checkCols_(QList<char>(countBites(cols_), 0xFF)),
@@ -242,12 +243,16 @@ QList<bool> Filter::enabledCols() {
     return list;
 }
 
-FilterModel::FilterModel(const int &row, const int &col, QObject *parent): QSortFilterProxyModel(parent), filter_(row, col) {
+FilterModel::FilterModel(int row, int col, QObject *parent): QSortFilterProxyModel(parent), filter_(row, col) {
 
 }
 
 QVariant FilterModel::headerData(int section, Qt::Orientation orientation, int role) const {
-    return sourceModel()->headerData(section, orientation, role);
+    if (sourceModel()) {
+        return sourceModel()->headerData(section, orientation, role);
+    } else {
+        return QVariant();
+    }
 }
 
 void FilterModel::setSourceModel(QAbstractItemModel *sourceModel) {
@@ -257,6 +262,10 @@ void FilterModel::setSourceModel(QAbstractItemModel *sourceModel) {
         filter_.setRows(0);
     }
     QSortFilterProxyModel::setSourceModel(sourceModel);
+}
+
+void FilterModel::clear() {
+    filter_.clear();
 }
 
 void FilterModel::forceInvalidate() {

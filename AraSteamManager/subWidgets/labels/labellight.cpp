@@ -16,7 +16,7 @@ LabelLight::~LabelLight() {
     delete light_;
 }
 
-LabelLight &LabelLight::setLightColor(const int &aRed, const int &aGreen, const int &aBlue, const int &aAlpha) {
+LabelLight &LabelLight::setLightColor(int aRed, int aGreen, int aBlue, int aAlpha) {
     light_->setColor(QColor(std::max(0, std::min(255, aRed)),
                             std::max(0, std::min(255, aGreen)),
                             std::max(0, std::min(255, aBlue)),
@@ -29,7 +29,7 @@ LabelLight &LabelLight::setLightColor(const QColor &aColor) {
     return *this;
 }
 
-LabelLight &LabelLight::setBlurRadius(const int &aRadius) {
+LabelLight &LabelLight::setBlurRadius(int aRadius) {
     light_->setBlurRadius(aRadius);
     return *this;
 }

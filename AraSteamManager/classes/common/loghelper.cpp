@@ -95,7 +95,7 @@ void LogHelper::setDebugMessageHandler() {
     dirLogs.setFilter(QDir::Files | QDir::NoSymLinks);
     dirLogs.setSorting(QDir::Name);
     QFileInfoList list = dirLogs.entryInfoList();
-    for(auto &file: list) {
+    for(const QFileInfo &file: list) {
         if (file.fileName().indexOf("log_") == 0) {
             QDateTime date;
             date = QDateTime::fromString(file.fileName().remove("log_").remove(".txt"), Settings::dateFormat());

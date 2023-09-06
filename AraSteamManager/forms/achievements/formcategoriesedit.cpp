@@ -27,7 +27,7 @@ void FormCategoriesEdit::setVisibleItems(const QList<QString> &aItems) {
 void FormCategoriesEdit::achievementsToUi() {
     ui->ListWidgetAll->clear();
     ui->ListWidgetCategory->clear();
-    for (auto &achievement: achievements_) {
+    for (const SAchievement &achievement: achievements_) {
         ui->ListWidgetAll->insertAchievement(achievement, gameId_);
     }
 }
@@ -66,7 +66,7 @@ void FormCategoriesEdit::retranslate() {
     ui->retranslateUi(this);
 }
 
-int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, const int &aRow) {
+int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, int aRow) {
     if (QListWidgetAchievement *achievement = dynamic_cast<QListWidgetAchievement*>(aListWidget->item(aRow))) {
         const QString apiName = achievement->achievement_->apiName();
         auto iterator = std::find_if(achievements_.begin(),
@@ -83,7 +83,7 @@ int FormCategoriesEdit::indexFromRow(QListWidget *aListWidget, const int &aRow) 
 
 void FormCategoriesEdit::updateHiddenItems() {
     for(int row = 0; row < ui->ListWidgetAll->count(); ++row) {
-        auto achievement = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetAll->item(row));
+        QListWidgetAchievement *achievement = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetAll->item(row));
         if (achievement != nullptr) {
             QString apiName = achievement->achievement_->apiName();
             bool isVisible = std::any_of(visibleAchievements_.begin(),
@@ -102,8 +102,8 @@ void FormCategoriesEdit::changeCategory(Category *aCategory) {
     ui->labelCategoryTitle->setText(currentCategory_->title());
     ui->ListWidgetAll->clear();
     ui->ListWidgetCategory->clear();
-    auto achievementList = static_cast<QSet<AchievementID> >(*aCategory);
-    for(auto &achievement: achievements_) {
+    QSet<AchievementID> achievementList = static_cast<QSet<AchievementID> >(*aCategory);
+    for(const SAchievement &achievement: achievements_) {
         bool isInCategory = std::any_of(achievementList.begin(),
                                         achievementList.end(),
                                         [=](const AchievementID &aAchievement) {
@@ -130,7 +130,7 @@ void FormCategoriesEdit::buttonAccept_Clicked() {
     }
     QSet<AchievementID> categoryAchievements;
     for(int i = 0; i < ui->ListWidgetCategory->count(); ++i) {
-        if (auto item = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetCategory->item(i))) {
+        if (QListWidgetAchievement *item = dynamic_cast<QListWidgetAchievement*>(ui->ListWidgetCategory->item(i))) {
             categoryAchievements.insert(item->achievement_->apiName());
         }
     }

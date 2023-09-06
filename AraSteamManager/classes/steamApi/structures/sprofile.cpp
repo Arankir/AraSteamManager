@@ -1,6 +1,7 @@
 #include "sprofile.h"
 #include "classes/steamApi/sapi.h"
 #include "classes/common/settings.h"
+#include "classes/common/images.h"
 
 #include <QPainter>
 #include <QJsonDocument>
@@ -144,16 +145,18 @@ QString getIdFromVanity(RequestData *aRequest) {
 
 SProfile SProfile::loadVanity(const ProfileID &aProfileId, std::function<void (SProfile)> aCallback) {
     RequestData *request = new RequestData();
-    request->get(Sapi::profilefromVanityUrl(aProfileId), aCallback != nullptr);
+    request->get(Sapi::Url::profilefromVanity(aProfileId), aCallback != nullptr);
     if (aCallback == nullptr) {
         QString id = getIdFromVanity(request);
         delete request;
         return SProfile::loadId(id, nullptr);
     } else {
-        connect(request,
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(request,
                 &RequestData::s_finished,
                 request,
-                [=](RequestData *requestL) {
+                [aCallback, conn](RequestData *requestL) {
+                    disconnect(*conn);
                     QString id = getIdFromVanity(requestL);
                     requestL->deleteLater();
                     if (id != "") {
@@ -169,16 +172,18 @@ SProfile SProfile::loadVanity(const ProfileID &aProfileId, std::function<void (S
 
 SProfile SProfile::loadId(const ProfileID &aProfileId, std::function<void (SProfile)> aCallback) {
     RequestData *request = new RequestData();
-    request->get(Sapi::profileUrl(aProfileId), aCallback != nullptr);
+    request->get(Sapi::Url::profile(aProfileId), aCallback != nullptr);
     if (aCallback == nullptr) {
         QJsonObject profile = QJsonDocument::fromJson(request->reply()).object().value("response").toObject().value("players").toArray().at(0).toObject();
         delete request;
         return SProfile(profile);
     } else {
-        connect(request,
+        auto conn = std::make_shared<QMetaObject::Connection>();
+        *conn = connect(request,
                 &RequestData::s_finished,
                 request,
-                [=](RequestData *requestL) {
+                [aCallback, conn](RequestData *requestL) {
+                    disconnect(*conn);
                     QJsonObject profile = QJsonDocument::fromJson(requestL->reply()).object().value("response").toObject().value("players").toArray().at(0).toObject();
                     requestL->deleteLater();
                     aCallback(std::move(SProfile(profile)));
@@ -214,8 +219,8 @@ SProfiles SProfile::load(ProfileIDs aProfileIds, std::function<void (SProfiles)>
             }
             localId << aProfileIds.takeFirst();
         }
-        request->get(Sapi::profileUrl(localId), false);
-        for(auto &&profile: QJsonDocument::fromJson(request->reply()).object().value("response").toObject().value("players").toArray()) {
+        request->get(Sapi::Url::profile(localId), false);
+        for(QJsonValue &&profile: QJsonDocument::fromJson(request->reply()).object().value("response").toObject().value("players").toArray()) {
             profiles.append(SProfile(profile.toObject()));
         }
     }
@@ -228,46 +233,62 @@ SProfiles SProfile::load(ProfileIDs aProfileIds, std::function<void (SProfiles)>
 
 int SProfile::getLevel(const ProfileID &aProfileId) {
     RequestData request;
-    request.get(Sapi::lvlUrl(aProfileId), false);
+    request.get(Sapi::Url::lvl(aProfileId), false);
     return (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("player_level").toInt();
 }
 
 QPixmap SProfile::getFrameProfile(const ProfileID &aProfileId) {
     RequestData request;
-    request.get(Sapi::avatarFrameUrl(aProfileId), false);
+    request.get(Sapi::Url::avatarFrame(aProfileId), false);
     QString frameUrl = (QJsonDocument::fromJson(request.reply()).object()).value("response").toObject().value("avatar_frame").toObject().value("image_small").toString();
     if (!frameUrl.isEmpty()) {
-        QPixmap pix = QPixmap::fromImage(loadImage(Sapi::frameProfileUrl(frameUrl), Paths::imagesProfiles(frameUrl + ".frame", "png"), QSize(64, 64)));
+        QPixmap pix = QPixmap::fromImage(loadImage(Sapi::frameProfile(frameUrl), Paths::imagesProfiles(frameUrl + ".frame", "png"), QSize(64, 64)));
         return pix;
     } else {
-        return QPixmap(64, 64);
+        return QPixmap();
     }
 }
 
 QMap<QString, SProfileEquippedItem> SProfile::getEquippedItems(const ProfileID &aProfileId) {
     QMap<QString, SProfileEquippedItem> map;
     RequestData request;
-    request.get(Sapi::profileEquippedItemUrl(aProfileId));
-    for (auto item: QJsonDocument::fromJson(request.reply()).object().value("response").toObject().keys()) {
+    request.get(Sapi::Url::profileEquippedItem(aProfileId));
+    for (const QString &item: QJsonDocument::fromJson(request.reply()).object().value("response").toObject().keys()) {
         map.insert(item, SProfileEquippedItem(QJsonDocument::fromJson(request.reply()).object().value("response").toObject().value(item).toObject()));
     }
     return map;
 }
 
-QPixmap SProfile::getAvatarWithFrame(const QSize &aSize) const {
-    QPixmap pixFrame = SProfile::getFrameProfile(steamId_);
-    if (pixFrame.isNull()) {
-        return pixmapAvatarMedium().scaled(aSize);
+QPixmap SProfile::pixmapFramedAvatar(const QSize &aSize, bool aForsUpdate) const {
+    if (pixmapAvatarWithFrame_.isNull() || aForsUpdate) {
+        pixmapAvatarWithFrame_ = pixmapAvatarFull();
+        QPixmap pixFrame = SProfile::getFrameProfile(steamId_);
+        if (pixFrame.isNull()) {
+            return pixmapAvatarFull().scaled(aSize);
+        }
+        pixmapAvatarWithFrame_.fill(QColor(0,0,0,0));
+        QPainter painter(&pixmapAvatarWithFrame_);
+        painter.drawPixmap(QPoint((pixmapAvatarWithFrame_.size().width() * ((c_frameLargerBy - 1) / 2)),
+                                  (pixmapAvatarWithFrame_.size().height() * ((c_frameLargerBy - 1) / 2))),
+                           pixmapAvatarFull().scaled(pixmapAvatarWithFrame_.size() / c_frameLargerBy));
+        painter.drawPixmap(QPoint(0, 0), pixFrame.scaled(pixmapAvatarWithFrame_.size()));
+        painter.end();
     }
-    QPixmap avatarWithFrame(aSize);
-    avatarWithFrame.fill(QColor(0,0,0,0));
-    QPainter painter(&avatarWithFrame);
-    painter.drawPixmap(QPoint((aSize.width() * ((c_frameLargerBy - 1) / 2)),
-                              (aSize.height() * ((c_frameLargerBy - 1) / 2))),
-                       pixmapAvatarMedium().scaled(aSize / c_frameLargerBy));
-    painter.drawPixmap(QPoint(0, 0), pixFrame.scaled(aSize));
-    painter.end();
-    return avatarWithFrame;
+    return pixmapAvatarWithFrame_.scaled(aSize);
+
+//    QPixmap pixFrame = SProfile::getFrameProfile(steamId_);
+//    if (pixFrame.isNull()) {
+//        return pixmapAvatarMedium().scaled(aSize);
+//    }
+//    QPixmap avatarWithFrame(aSize);
+//    avatarWithFrame.fill(QColor(0,0,0,0));
+//    QPainter painter(&avatarWithFrame);
+//    painter.drawPixmap(QPoint((aSize.width() * ((c_frameLargerBy - 1) / 2)),
+//                              (aSize.height() * ((c_frameLargerBy - 1) / 2))),
+//                       pixmapAvatarMedium().scaled(aSize / c_frameLargerBy));
+//    painter.drawPixmap(QPoint(0, 0), pixFrame.scaled(aSize));
+//    painter.end();
+//    return avatarWithFrame;
 }
 
 QPixmap SProfile::pixmapAvatar() const {
@@ -520,7 +541,7 @@ SProfile::LoadType identifyProfileType(QString &aId) {
     //76561198017985018
     //xFrenzy47x
     QRegularExpression ProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
-    auto match = ProfileUrl.match(aId);
+    QRegularExpressionMatch match = ProfileUrl.match(aId);
     if (!match.hasMatch()) {
         return SProfile::LoadType::unknown;
     }

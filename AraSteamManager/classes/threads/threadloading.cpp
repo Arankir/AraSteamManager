@@ -14,6 +14,9 @@ ThreadLoading::ThreadLoading(): thread_(new ThreadInfo) {
 ThreadLoading::~ThreadLoading() {
     if (thread_) {
         thread_->quit();
+        disconnect(this, &ThreadLoading::s_finished,   thread_,    &QThread::quit);
+        disconnect(this, &ThreadLoading::s_finished,   this,       &ThreadLoading::deleteLater);
+        disconnect(thread_, &QThread::started,         this,       &ThreadLoading::fill);
         thread_->deleteLater();
     }
 }

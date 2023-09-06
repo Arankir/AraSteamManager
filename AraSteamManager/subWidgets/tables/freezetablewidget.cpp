@@ -57,8 +57,8 @@
 
 const int c_freezeRows = 2;
 
-FreezeTableWidget::FreezeTableWidget(QWidget *aParent) : QTableView(aParent) {
-    frozenTableView_ = new QTableView(this);
+FreezeTableWidget::FreezeTableWidget(QWidget *aParent) : MyTable(aParent) {
+    frozenTableView_ = new MyTable(this);
     frozenTableView_->setObjectName("FreezeRow");
 
 //    proxyModel = new SortFilterProxyModelFreezeRow(this);
@@ -81,7 +81,7 @@ FreezeTableWidget::~FreezeTableWidget() {
 }
 
 void FreezeTableWidget::initFreezeTable() {
-    auto filter = new QSortFilterProxyModel(model());
+    QSortFilterProxyModel *filter = new QSortFilterProxyModel(model());
     filter->setSourceModel(model());
     filter->setFilterKeyColumn(0);
     filter->setFilterRegularExpression("^$");
@@ -119,11 +119,11 @@ void FreezeTableWidget::initFreezeTable() {
     frozenTableView_->setHorizontalScrollMode(ScrollPerPixel);
 }
 
-void FreezeTableWidget::updateSectionWidth(const int &aLogicalIndex, const int & /* aOldSize */, const int &aNewSize) {
+void FreezeTableWidget::updateSectionWidth(int aLogicalIndex, int /* aOldSize */, int aNewSize) {
     frozenTableView_->setColumnWidth(aLogicalIndex, aNewSize);
 }
 
-void FreezeTableWidget::updateSectionHeight(const int &aLogicalIndex, const int & /* aOldSize */, const int &aNewSize) {
+void FreezeTableWidget::updateSectionHeight(int aLogicalIndex, int /* aOldSize */, int aNewSize) {
     if (aLogicalIndex < c_freezeRows) {
         frozenTableView_->setRowHeight(aLogicalIndex, aNewSize);
         updateFrozenTableGeometry();
@@ -152,10 +152,18 @@ void FreezeTableWidget::scrollTo (const QModelIndex &aIndex, ScrollHint aHint) {
 }
 
 void FreezeTableWidget::setModel(QAbstractItemModel *aModel) {
-    proxyModel_ = aModel;
 //    proxyModel->setDynamicSortFilter(true);
 
-    QTableView::setModel(proxyModel_);
+    MyTable::setModel(aModel);
+    proxyModel_ = MyTable::model();
+    initFreezeTable();
+}
+
+void FreezeTableWidget::setFilter(FilterModel *filter) {
+    //    proxyModel->setDynamicSortFilter(true);
+
+    MyTable::setFilter(filter);
+    proxyModel_ = MyTable::model();
     initFreezeTable();
 }
 
@@ -185,6 +193,11 @@ void FreezeTableWidget::updateFrozenTableGeometry() {
 
 QTableView *FreezeTableWidget::getFrozenTableView() const {
     return frozenTableView_;
+}
+
+void FreezeTableWidget::setColumnHidden(int aColumn, bool aIsHidden) {
+    frozenTableView_->setColumnHidden(aColumn, aIsHidden);
+    MyTable::setColumnHidden(aColumn, aIsHidden);
 }
 
 

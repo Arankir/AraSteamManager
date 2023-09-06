@@ -5,33 +5,31 @@
 #include "classes/steamApi/structures/sprofile.h"
 #include "classes/common/filesaveload.h"
 
-class GroupGames {
+class GroupGames: public QSet<GameID> {
 public:
-    GroupGames(const QString &title, const ProfileID &profileId);
+    GroupGames(const QString &title = "", const ProfileID &profileId = "");
     GroupGames(const QJsonObject &object);
 
     GroupGames &addGame(const SGame &game);
     GroupGames &removeGame(const GameID &gameId);
     GroupGames &changeTitle(const QString &title);
     QJsonObject toJson() const;
+    GroupGames &fromJson(const QJsonObject &object);
 
     QString title()         const;
     ProfileID profileId()   const;
-    QList<GameID> games()   const;
 
 private:
-    GroupGames &fromJson(const QJsonObject &object);
-
     QString title_;
     ProfileID profileId_;
-    QSet<GameID> games_;
 };
 
-class GroupsGames: public QList<GroupGames>, public FileSaveLoad {
+class GroupsGames: public QMap<QString, GroupGames>, public FileSaveLoad {
 public:
     GroupsGames(const ProfileID &profileId = "");
 
     void addGroup(const QString &title);
+    void addGroup(const GroupGames &group);
     void removeGroup(const QString &title);
     QJsonObject toJson() const override;
     void update(const ProfileID &profileId);

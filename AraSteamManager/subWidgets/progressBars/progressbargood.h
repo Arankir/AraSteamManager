@@ -10,8 +10,8 @@ public:
     ProgressBarGood(QWidget *parent = nullptr);
 
 private:
-    ProgressBarLight &setColor(const int &red, const int &green, const int &blue, const int &alpha = 255) override;
-    ProgressBarLight &setBlurRadius(const int &radius) override;
+    ProgressBarLight &setColor(int red, int green, int blue, int alpha = 255) override;
+    ProgressBarLight &setBlurRadius(int radius) override;
 
 };
 

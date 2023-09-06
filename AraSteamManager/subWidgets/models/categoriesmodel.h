@@ -40,7 +40,7 @@ public slots:
     bool saveCategories();
     void setGame(const SGame &aGame);
 signals:
-    void s_checkStateChanged(Category *category, const bool &isChecked);
+    void s_checkStateChanged(Category *category, bool isChecked);
     void s_error(const QString&);
 
 protected slots:

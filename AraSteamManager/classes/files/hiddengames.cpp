@@ -1,6 +1,6 @@
 #include "hiddengames.h"
 
-HiddenGames::HiddenGames(const ProfileID &aProfile, const bool &aIsIncludeAll): FileSaveLoad(Paths::hiddenGames(aProfile == "" ? "All" : aProfile)), profile_(aProfile) {
+HiddenGames::HiddenGames(const ProfileID &aProfile, bool aIsIncludeAll): FileSaveLoad(Paths::hiddenGames(aProfile == "" ? "All" : aProfile)), profile_(aProfile) {
     load(aProfile);
     if (aIsIncludeAll) {
         load("");
@@ -38,7 +38,7 @@ QJsonObject HiddenGames::toJson() const {
     QJsonObject object;
     object["profile"] = profile_;
     QJsonArray games;
-    for(auto &&game: *this) {
+    for(const HiddenGame &game: *this) {
         games.append(std::move(game.toJson()));
     }
     object["games"] = games;
@@ -47,7 +47,7 @@ QJsonObject HiddenGames::toJson() const {
 }
 
 void HiddenGames::fromJson(const QJsonObject &aObject) {
-    for(auto &&game: aObject.value("games").toArray()) {
+    for(QJsonValue &&game: aObject.value("games").toArray()) {
         append(HiddenGame(game.toObject()));
     }
 }

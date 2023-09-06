@@ -43,7 +43,7 @@ void FormComments::init() {
                                         ).replace("\n", "<br>");
         ui->labelIcon->setPixmap(achievement_.icon(game_.appId()).scaled(32, 32));
         ui->labelIcon->setToolTip(toolTip);
-        auto list = AchievementComments(profileId_).getCommentsFromGame(profileId_, game_.appId());
+        QList<AchievementComment> list = AchievementComments(profileId_).getCommentsFromGame(profileId_, game_.appId());
         auto iterator = std::find_if(list.begin(),
                                      list.end(),
                                      [this](const AchievementComment &achievementComment) {
@@ -56,7 +56,7 @@ void FormComments::init() {
 
     ui->LabelGameTitle->setText(game_.name());
     ui->labelGameIcon->setPixmap(game_.pixmapIcon());
-    auto profile = SProfile::load(profileId_);
+    SProfile profile = SProfile::load(profileId_);
     ui->LabelProfileName->setText(profile.personaName());
     ui->labelProfileIcon->setPixmap(profile.pixmapAvatar().scaled(32, 32));
     ui->TextEditComment->setPlainText(comment.join('\n'));
@@ -79,7 +79,7 @@ void FormComments::on_ButtonApply_clicked() {
         if (iterator != comments.end()) {
             comments.setComment(profileId_, game_.appId(), comment);
         } else {
-            comments.append(GameComment(game_.appId(), profileId_, comment));
+            comments.append(GameComment(game_.appId(), game_.name(), game_.imgIconUrl(), profileId_, comment));
         }
 //        GameComment::save(_profile, GameComment(_game.appId(), _profile, comment));
     } else {
@@ -92,7 +92,7 @@ void FormComments::on_ButtonApply_clicked() {
         if (iterator != comments.end()) {
             comments.setComment(profileId_, game_.appId(), achievement_.apiName(), comment);
         } else {
-            comments.append(AchievementComment(profileId_, game_.appId(), achievement_.apiName(), comment));
+            comments.append(AchievementComment(profileId_, game_.appId(), game_.name(), game_.imgIconUrl(), achievement_.apiName(), achievement_.displayName(), achievement_.iconPath(), comment));
         }
 //        AchievementComment::save(_profile, _game.appId(), AchievementComment(_profile, _game.appId(), _achievement.apiName(), comment));
     }

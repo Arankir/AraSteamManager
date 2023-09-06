@@ -100,7 +100,7 @@ FramelessWindow::~FramelessWindow() {
     delete ui;
 }
 
-void FramelessWindow::animateResize(const int &width, const int &height) {
+void FramelessWindow::animateResize(int width, int height) {
 //    qDebug() << QSize(this->width(), this->height()) << QSize(width, height);
     QPropertyAnimation *animation = new QPropertyAnimation(this, "size");
     connect(animation, &QPropertyAnimation::finished, animation, &QPropertyAnimation::deleteLater);
@@ -110,7 +110,7 @@ void FramelessWindow::animateResize(const int &width, const int &height) {
     animation->start();
 }
 
-void FramelessWindow::setStatus(const QString &statusName, const int &progress, const int &maxProgress) {
+void FramelessWindow::setStatus(const QString &statusName, int progress, int maxProgress) {
     // showMessage(const QString & message, int timeout = 0)
     if (statusName == "") {
         clearStatus();

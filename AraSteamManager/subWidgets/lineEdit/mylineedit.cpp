@@ -7,7 +7,7 @@
 MyLineEdit::MyLineEdit(QWidget *aParent): QLineEdit(aParent) {
     this->setStyleSheet("QLineEdit[text=\"\"]{ color:" + Theme::getCurrentTheme().border.getString() + "; }");
     connect(this, &QLineEdit::textChanged, [=, this]{ style()->polish(this); });
-    if (auto parent = dynamic_cast<Form*>(aParent)) {
+    if (Form *parent = dynamic_cast<Form*>(aParent)) {
         connect(parent, &Form::s_settingsUpdated, this, &MyLineEdit::updateSettings);
     }
 }

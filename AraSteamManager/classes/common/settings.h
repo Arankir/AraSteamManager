@@ -9,13 +9,11 @@ enum changedSettings {
     language            = 0x02,
     theme               = 0x04,
     saveImages          = 0x08,
-    visibleHiddenGame   = 0x10,
-    profileInfo         = 0x20,
-    favorites           = 0x40,
-    hiddenGame          = 0x80
+    profileInfo         = 0x10,
+    favorites           = 0x20
 };
 
-class Settings {
+class Settings: public QObject {
 public:
     static const QString c_organizationName;
     static const QString c_organizationDomain;
@@ -25,20 +23,17 @@ public:
     Q_PROPERTY(int language READ language WRITE setLanguage)
     Q_PROPERTY(int theme READ theme WRITE setTheme)
     Q_PROPERTY(int saveImages READ saveImages WRITE setSaveimage)
-    Q_PROPERTY(int visibleHiddenGames READ visibleHiddenGames WRITE setVisibleHiddenGames)
     Q_PROPERTY(int profileInfoSize READ profileInfoSize WRITE setVisibleProfileInfo)
 
     static void setMyProfile(const QString &myProfiles);
     static QString myProfile();
-    static void setLanguage(const int &language);
+    static void setLanguage(int language);
     static int language();
-    static void setTheme(const int &theme);
+    static void setTheme(int theme);
     static int theme();
-    static void setSaveimage(const int &saveImage);
+    static void setSaveimage(int saveImage);
     static int saveImages();
-    static void setVisibleHiddenGames(const int &visibleHiddenGames);
-    static int visibleHiddenGames();
-    static void setVisibleProfileInfo(const int &visibleProfileInfo);
+    static void setVisibleProfileInfo(int visibleProfileInfo);
     static int profileInfoSize();
 
     Q_PROPERTY(QByteArray mainWindowState READ mainWindowState WRITE setMainWindowState)
@@ -57,16 +52,21 @@ public:
     static void setAchievementContainerGeometry(const QByteArray &geometry);
     static QByteArray achievementContainerGeometry();
 
-    Q_PROPERTY(QString dateTimeFormat READ dateTimeFormat)
     Q_PROPERTY(QString dateFormat READ dateFormat)
-    Q_PROPERTY(QString dateTimeFormatShort READ dateTimeFormatShort)
+    Q_PROPERTY(QString timeFormat READ timeFormat WRITE setTimeFormat)
+    Q_PROPERTY(QString timeShortFormat READ timeShortFormat WRITE setTimeShortFormat)
 
-    static const QString dateTimeFormat();
+    static void setDateFormat(const QString &format);
     static const QString dateFormat();
-    static const QString dateTimeFormatShort();
+    static void setTimeFormat(const QString &format);
+    static const QString timeFormat();
+    static void setTimeShortFormat(const QString &format);
+    static const QString timeShortFormat();
 
     static void syncronizeSettings();
 
+    static const QString dateTimeFormat();
+    static const QString dateTimeFormatShort();
 private:
     static QSettings *settings_;
 };
@@ -77,7 +77,6 @@ public:
     static QString temp();
     static QString categories(QString gameId = "");
     static QString favorites(QString type = "");
-    static QString hiddenGames(QString steamId = "");
     static QString groupGames(QString profileId = "");
     static QString imagesProfiles(const QString &url, const QString &aFormat = "jpg");
     static QString imagesAchievements(const QString &gameId, const QString &url = "");

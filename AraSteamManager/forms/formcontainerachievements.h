@@ -26,11 +26,11 @@ public:
 
     void clear();
 signals:
-    void s_removeAchievements(const int &index);
+    void s_removeAchievements(int index);
 
 private slots:
     void closeEvent(QCloseEvent*) override;
-    void on_TabWidgetAchievements_tabCloseRequested(const int &index);
+    void on_TabWidgetAchievements_tabCloseRequested(int index);
 
 private:
     Ui::FormContainerAchievements *ui;

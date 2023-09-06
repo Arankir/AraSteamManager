@@ -5,11 +5,13 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
+#include "classes/common/settings.h"
 #include "classes/common/generalfunctions.h"
 
 class FileSaveLoad {
 public:
     FileSaveLoad(const QString &aFilePath);
+    virtual ~FileSaveLoad();
     bool save() const;
     bool load(const QString &savePath);
     virtual void fromJson(const QJsonObject&) = 0;

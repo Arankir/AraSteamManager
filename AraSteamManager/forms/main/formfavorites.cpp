@@ -55,10 +55,10 @@ void FormFavorites::init() {
         ProfileID profileId = "";
         GameID gameId = 0;
         AchievementID achievementId = ui->treeWidgetAchievements->model()->data(ui->treeWidgetAchievements->currentIndex().siblingAtColumn(treeAchievements::Columns::achievementId)).toString();
-        auto game = ui->treeWidgetAchievements->currentIndex().parent();
+        QModelIndex game = ui->treeWidgetAchievements->currentIndex().parent();
         if (game.isValid()) {
             gameId = ui->treeWidgetAchievements->model()->data(game.siblingAtColumn(treeAchievements::Columns::achievementId)).toString().toInt();
-            auto profile = game.parent();
+            QModelIndex profile = game.parent();
             if (profile.isValid()) {
                 profileId = ui->treeWidgetAchievements->model()->data(profile.siblingAtColumn(treeAchievements::Columns::achievementId)).toString();
             }
@@ -70,9 +70,9 @@ void FormFavorites::init() {
     });
     connect(ui->treeWidgetAchievements, &QTableView::doubleClicked,             this, [&](QModelIndex aIndex) {
         Q_UNUSED(aIndex);
-        auto parentIndex = ui->treeWidgetAchievements->currentIndex().parent();
+        QModelIndex parentIndex = ui->treeWidgetAchievements->currentIndex().parent();
         GameID gameId = ui->treeWidgetAchievements->model()->data(parentIndex.siblingAtColumn(treeAchievements::Columns::achievementId)).toInt();
-        auto parentParentIndex = parentIndex.parent();
+        QModelIndex parentParentIndex = parentIndex.parent();
         ProfileID profileId = ui->treeWidgetAchievements->model()->data(parentParentIndex.siblingAtColumn(treeAchievements::Columns::achievementId)).toString();
         goToGame(gameId, profileId);
     });
@@ -87,11 +87,11 @@ void FormFavorites::update() {
 }
 
 void FormFavorites::updateGames() {
-    if (auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewGames->model())) {
+    if (QStandardItemModel *model = dynamic_cast<QStandardItemModel*>(ui->TableViewGames->model())) {
         model->clear();
         gamesFavorites_.update();
         int row = 0;
-        for (const auto &game: gamesFavorites_) {
+        for (const FavoriteGame &game: gamesFavorites_) {
             QStandardItem *itemProfileId = new QStandardItem(game.steamId());
             QStandardItem *itemGameId = new QStandardItem(QString::number(game.appId()));
             QStandardItem *itemIcon = new QStandardItem();
@@ -105,24 +105,24 @@ void FormFavorites::updateGames() {
 
             ++row;
         }
-        ui->TableViewGames->setColumnHidden(tableGames::Columns::profileId, true);
-        ui->TableViewGames->setColumnHidden(tableGames::Columns::gameId, true);
-        ui->TableViewGames->resizeRowsToContents();
-        ui->TableViewGames->resizeColumnsToContents();
     }
+    ui->TableViewGames->setColumnHidden(tableGames::Columns::profileId, true);
+    ui->TableViewGames->setColumnHidden(tableGames::Columns::gameId, true);
+    ui->TableViewGames->resizeRowsToContents();
+    ui->TableViewGames->resizeColumnsToContents();
 }
 
 void FormFavorites::updateFriends() {
-    if (auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewFriends->model())) {
+    if (QStandardItemModel *model = dynamic_cast<QStandardItemModel*>(ui->TableViewFriends->model())) {
         model->clear();
         int row = 0;
         friendsFavorites_.update();
         ProfileIDs friendsId;
-        for (const auto &steamFriend: friendsFavorites_) {
+        for (const FavoriteProfile &steamFriend: friendsFavorites_) {
             friendsId << steamFriend.profileId();
         }
-        auto profiles = SProfile::load(friendsId);
-        for (const auto &steamFriend: profiles) {
+        SProfiles profiles = SProfile::load(friendsId);
+        for (const SProfile &steamFriend: profiles) {
             QStandardItem *itemProfileId = new QStandardItem(steamFriend.steamId());
             QStandardItem *itemIcon = new QStandardItem();
             itemIcon->setData(SProfile::pixmapAvatar(steamFriend.avatarUrl()), Qt::DecorationRole);
@@ -138,54 +138,77 @@ void FormFavorites::updateFriends() {
 
             ++row;
         }
-        ui->TableViewFriends->setColumnHidden(tableProfiles::Columns::profileId, true);
-        ui->TableViewFriends->resizeRowsToContents();
-        ui->TableViewFriends->resizeColumnsToContents();
     }
+    ui->TableViewFriends->setColumnHidden(tableProfiles::Columns::profileId, true);
+    ui->TableViewFriends->resizeRowsToContents();
+    ui->TableViewFriends->resizeColumnsToContents();
 }
 
 void FormFavorites::updateAchievements() {
     ui->treeWidgetAchievements->clear();
     achievementsFavorites_.update();
     SProfiles profiles = getProfilesFavoriteAchievements();
-    QMap<ProfileID, QList<FavoriteAchievementsGame>> profilesFavorite;
-    for (const auto &achievementsGame: achievementsFavorites_) {
-        if (profilesFavorite.find(achievementsGame.steamId()) == profilesFavorite.end()) {
-            profilesFavorite.insert(achievementsGame.steamId(), QList<FavoriteAchievementsGame>());
-        }
-        auto iterator = profilesFavorite.find(achievementsGame.steamId());
-        if (iterator != profilesFavorite.end()) {
-            iterator.value().append(achievementsGame);
-        }
-    }
-    for (auto iterator = profilesFavorite.begin(); iterator != profilesFavorite.end(); ++iterator) {
-        auto iteratorProfiles = std::find_if(profiles.begin(),
-                                             profiles.end(),
-                                             [=](const SProfile &lProfile) {
-                                                return lProfile.steamId() == iterator.key();
-                                             });
-        if (iteratorProfiles != profiles.end()) {
-            QTreeWidgetItem *itemProfile = new QTreeWidgetItem();
-            itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::DisplayRole, iteratorProfiles->personaName());
-            itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::DecorationRole, iteratorProfiles->pixmapAvatar());
-            itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::ToolTipRole, iteratorProfiles->personaName());
-            itemProfile->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, iteratorProfiles->steamId());
-            for (const auto &achievementsGame: iterator.value()) {
-                QTreeWidgetItem *itemGame = new QTreeWidgetItem(itemProfile);
-                itemGame->setText(treeAchievements::Columns::profile, achievementsGame.name());
-                itemGame->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, QString::number(achievementsGame.appId()));
-                for (const auto &achievement: achievementsGame) {
-                    QTreeWidgetItem *itemAchievement = new QTreeWidgetItem(itemGame);
-                    itemAchievement->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, achievement.apiName());
-                    itemAchievement->setData(treeAchievements::Columns::icon, Qt::ItemDataRole::DecorationRole, SAchievementSchema::icon(achievementsGame.appId(), achievement.icon()));
-                    itemAchievement->setData(treeAchievements::Columns::title, Qt::ItemDataRole::DisplayRole, achievement.title());
-                    itemAchievement->setData(treeAchievements::Columns::description, Qt::ItemDataRole::DisplayRole, achievement.description());
-                    itemAchievement->setData(treeAchievements::Columns::achieved, Qt::ItemDataRole::DisplayRole, achievement.achieved() ? tr("Получена") : tr("Не получена"));
-                }
+    for (const auto &profile: profiles) {
+        QTreeWidgetItem *itemProfile = new QTreeWidgetItem();
+        itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::DisplayRole, profile.personaName());
+        itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::DecorationRole, profile.pixmapAvatar());
+        itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::ToolTipRole, profile.personaName());
+        itemProfile->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, profile.steamId());
+        auto games = achievementsFavorites_.games(profile.steamId());
+        for (const auto &game: games) {
+            QTreeWidgetItem *itemGame = new QTreeWidgetItem(itemProfile);
+            itemGame->setText(treeAchievements::Columns::profile, game.name);
+            itemGame->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, QString::number(game.appId));
+            auto achievements = achievementsFavorites_.achievements(profile.steamId(), game);
+            for (const FavoriteAchievement &achievement: achievements) {
+                QTreeWidgetItem *itemAchievement = new QTreeWidgetItem(itemGame);
+                itemAchievement->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, achievement.apiName());
+                itemAchievement->setData(treeAchievements::Columns::icon, Qt::ItemDataRole::DecorationRole, SAchievementSchema::icon(game.appId, achievement.icon()));
+                itemAchievement->setData(treeAchievements::Columns::title, Qt::ItemDataRole::DisplayRole, achievement.title());
+                itemAchievement->setData(treeAchievements::Columns::description, Qt::ItemDataRole::DisplayRole, achievement.description());
+                itemAchievement->setData(treeAchievements::Columns::achieved, Qt::ItemDataRole::DisplayRole, achievement.achieved() ? tr("Получена") : tr("Не получена"));
             }
-            ui->treeWidgetAchievements->addTopLevelItem(itemProfile);
         }
+        ui->treeWidgetAchievements->addTopLevelItem(itemProfile);
     }
+//    QMap<ProfileID, QList<FavoriteAchievementsGame>> profilesFavorite;
+//    for (const FavoriteAchievementsGame &achievementsGame: achievementsFavorites_) {
+//        if (profilesFavorite.find(achievementsGame.steamId()) == profilesFavorite.end()) {
+//            profilesFavorite.insert(achievementsGame.steamId(), QList<FavoriteAchievementsGame>());
+//        }
+//        auto iterator = profilesFavorite.find(achievementsGame.steamId());
+//        if (iterator != profilesFavorite.end()) {
+//            iterator.value().append(achievementsGame);
+//        }
+//    }
+//    for (auto iterator = profilesFavorite.begin(); iterator != profilesFavorite.end(); ++iterator) {
+//        auto iteratorProfiles = std::find_if(profiles.begin(),
+//                                             profiles.end(),
+//                                             [=](const SProfile &lProfile) {
+//                                                return lProfile.steamId() == iterator.key();
+//                                             });
+//        if (iteratorProfiles != profiles.end()) {
+//            QTreeWidgetItem *itemProfile = new QTreeWidgetItem();
+//            itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::DisplayRole, iteratorProfiles->personaName());
+//            itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::DecorationRole, iteratorProfiles->pixmapAvatar());
+//            itemProfile->setData(treeAchievements::Columns::profile, Qt::ItemDataRole::ToolTipRole, iteratorProfiles->personaName());
+//            itemProfile->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, iteratorProfiles->steamId());
+//            for (const FavoriteAchievementsGame &achievementsGame: iterator.value()) {
+//                QTreeWidgetItem *itemGame = new QTreeWidgetItem(itemProfile);
+//                itemGame->setText(treeAchievements::Columns::profile, achievementsGame.name());
+//                itemGame->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, QString::number(achievementsGame.appId()));
+//                for (const FavoriteAchievement &achievement: achievementsGame) {
+//                    QTreeWidgetItem *itemAchievement = new QTreeWidgetItem(itemGame);
+//                    itemAchievement->setData(treeAchievements::Columns::achievementId, Qt::ItemDataRole::DisplayRole, achievement.apiName());
+//                    itemAchievement->setData(treeAchievements::Columns::icon, Qt::ItemDataRole::DecorationRole, SAchievementSchema::icon(achievementsGame.appId(), achievement.icon()));
+//                    itemAchievement->setData(treeAchievements::Columns::title, Qt::ItemDataRole::DisplayRole, achievement.title());
+//                    itemAchievement->setData(treeAchievements::Columns::description, Qt::ItemDataRole::DisplayRole, achievement.description());
+//                    itemAchievement->setData(treeAchievements::Columns::achieved, Qt::ItemDataRole::DisplayRole, achievement.achieved() ? tr("Получена") : tr("Не получена"));
+//                }
+//            }
+//            ui->treeWidgetAchievements->addTopLevelItem(itemProfile);
+//        }
+//    }
     ui->treeWidgetAchievements->expandAll();
     ui->treeWidgetAchievements->resizeColumnToContents(treeAchievements::Columns::profile);
     ui->treeWidgetAchievements->resizeColumnToContents(treeAchievements::Columns::icon);
@@ -207,15 +230,15 @@ void FormFavorites::updateSettings(QFlags<changedSettings> aSettings) {
 }
 
 SProfiles FormFavorites::getProfilesFavoriteAchievements() {
-    QSet<ProfileID> usersId;
-    for (const auto &achievementsGame: achievementsFavorites_) {
-        usersId.insert(achievementsGame.steamId());
-    }
-    QStringList ids;
-    for (const auto &id: usersId) {
-        ids << id;
-    }
-    return SProfile::load(ids);
+//    QSet<ProfileID> usersId;
+//    for (const FavoriteAchievementsGame &achievementsGame: achievementsFavorites_) {
+//        usersId.insert(achievementsGame.steamId());
+//    }
+//    QStringList ids;
+//    for (const QString &id: usersId) {
+//        ids << id;
+//    }
+    return SProfile::load(achievementsFavorites_.profiles());
 }
 
 QMenu *FormFavorites::createMenuGames(const GameID &aGameId, const ProfileID &aProfileId) {
@@ -224,11 +247,11 @@ QMenu *FormFavorites::createMenuGames(const GameID &aGameId, const ProfileID &aP
     QAction *actionGoTo = new QAction(tr("Перейти на игру"));
     QAction *actionRemove = new QAction(tr("Удалить из избранного"));
 
-    connect(actionGoTo, &QAction::triggered, this, [=]() {
+    connect(actionGoTo, &QAction::triggered, this, [this, aGameId, aProfileId]() {
         goToGame(aGameId, aProfileId);
     });
 
-    connect(actionRemove, &QAction::triggered, this, [=]() {
+    connect(actionRemove, &QAction::triggered, this, [this, aGameId, aProfileId]() {
         gamesFavorites_.remove(aProfileId, aGameId);
         gamesFavorites_.save();
         updateGames();
@@ -247,11 +270,11 @@ QMenu *FormFavorites::createMenuProfiles(const ProfileID &aProfileId) {
     QAction *actionGoTo = new QAction(tr("Перейти на профиль"));
     QAction *actionRemove = new QAction(tr("Удалить из избранного"));
 
-    connect(actionGoTo, &QAction::triggered, this, [=]() {
+    connect(actionGoTo, &QAction::triggered, this, [this, aProfileId]() {
         emit s_goToProfile(aProfileId);
     });
 
-    connect(actionRemove, &QAction::triggered, this, [=]() {
+    connect(actionRemove, &QAction::triggered, this, [this, aProfileId]() {
         friendsFavorites_.remove(aProfileId);
         friendsFavorites_.save();
         updateFriends();
@@ -270,11 +293,11 @@ QMenu *FormFavorites::createMenuAchievements(const GameID &aGameId, const Profil
     QAction *actionGoTo = new QAction(tr("Перейти на игру"));
     QAction *actionRemove = new QAction(tr("Удалить из избранного"));
 
-    connect(actionGoTo, &QAction::triggered, this, [=]() {
+    connect(actionGoTo, &QAction::triggered, this, [this, aGameId, aProfileId]() {
         goToGame(aGameId, aProfileId);
     });
 
-    connect(actionRemove, &QAction::triggered, this, [=]() {
+    connect(actionRemove, &QAction::triggered, this, [this, aGameId, aProfileId, aAchievementId]() {
         achievementsFavorites_.remove(aProfileId, aGameId, aAchievementId);
         achievementsFavorites_.save();
         updateAchievements();
@@ -288,8 +311,8 @@ QMenu *FormFavorites::createMenuAchievements(const GameID &aGameId, const Profil
 }
 
 void FormFavorites::goToGame(const GameID &aGameId, const ProfileID &aProfileId) {
-    auto games = SGame::load(aProfileId, true, true);
-    for (const auto &game: games) {
+    SGames games = SGame::load(aProfileId, true, true);
+    for (const SGame &game: games) {
         if (game.appId() == aGameId) {
             emit s_showAchievements(aProfileId, game);
             return;
@@ -315,13 +338,13 @@ void FormFavorites::updateIcons() {
 
 void FormFavorites::retranslate() {
     ui->retranslateUi(this);
-    if (auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewGames->model())) {
+    if (QStandardItemModel *model = dynamic_cast<QStandardItemModel*>(ui->TableViewGames->model())) {
         model->setHorizontalHeaderItem(0, new QStandardItem(tr("ID профиля")));
         model->setHorizontalHeaderItem(1, new QStandardItem(tr("ID игры")));
         model->setHorizontalHeaderItem(2, new QStandardItem(tr("")));
         model->setHorizontalHeaderItem(3, new QStandardItem(tr("Название")));
     }
-    if (auto model = dynamic_cast<QStandardItemModel*>(ui->TableViewFriends->model())) {
+    if (QStandardItemModel *model = dynamic_cast<QStandardItemModel*>(ui->TableViewFriends->model())) {
         model->setHorizontalHeaderItem(0, new QStandardItem(tr("ID профиля")));
         model->setHorizontalHeaderItem(1, new QStandardItem(tr("")));
         model->setHorizontalHeaderItem(2, new QStandardItem(tr("Ник")));

@@ -7,6 +7,10 @@ FileSaveLoad::FileSaveLoad(const QString &aFilePath): filePath_(aFilePath) {
 
 }
 
+FileSaveLoad::~FileSaveLoad() {
+
+}
+
 bool FileSaveLoad::save() const {
     return saveFile(filePath_, QJsonDocument(toJson()).toJson());
 

@@ -70,7 +70,8 @@ private:
 
     FavoriteProfiles friendsFavorites_;
     FavoriteGames gamesFavorites_;
-    FavoriteAchievementsGames achievementsFavorites_;
+//    FavoriteAchievementsGames achievementsFavorites_;
+    FavoriteAchievements achievementsFavorites_;
 
     void updateGames();
     void updateFriends();

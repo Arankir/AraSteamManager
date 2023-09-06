@@ -42,7 +42,7 @@ public:
 signals:
     void s_filtersUpdated(QAbstractItemModel *model);
     void s_filtersValueUpdated();
-    void s_progress(const QString &status = "", const int &progress = 0, const int &max = 0);
+    void s_progress(const QString &status = "", int progress = 0, int max = 0);
     void s_finishedAchievements();
     void s_finishedFriends();
 
@@ -52,7 +52,7 @@ protected slots:
 
     void onAchievementsLoaded();
     void findFriend();
-    void checkBoxFriendsOnlyWithGame_Clicked(const bool &isChecked);
+    void checkBoxFriendsOnlyWithGame_Clicked(bool isChecked);
 private slots:
     void closeEvent(QCloseEvent*) override;
     void retranslate() override;
@@ -64,7 +64,7 @@ private slots:
     //system
     void updateCategories();
 
-    void checkBoxFavorites_StateChanged(const int &arg1);
+    void checkBoxFavorites_StateChanged(int arg1);
 
     void initEditCategory();
     void onLoadedFriendGames(const SGames &games, const ProfileID &profileId);
@@ -76,10 +76,10 @@ private slots:
     QMenu *createMenuFrozenTable(const QModelIndex &index);
     void updateFilterWithMyProfile(const ReachedType &type);
     void updateFilterTextAchievement(const QString &newText);
-    void updateFilterCategory(Category *aCategory, const bool &isChecked);
+    void updateFilterCategory(Category *aCategory, bool isChecked);
     void updateFilterFavorite(const QList<FavoriteAchievement> &favoritesAchievements);
     void updateFilterFriend(const ProfileID &profileId, const ReachedType &type);
-    void loading(const bool &isLoading);
+    void loading(bool isLoading);
     SAchievement currentAchievement();
     void onUpdateFilters();
     void updateAchievements();
@@ -99,8 +99,8 @@ private:
     SProfile profile_;
     SGame game_;
 
-    AchievementsModel *achievementsModel_ = nullptr;
-    FilterModelAchievements filterAchievements_;
+//    AchievementsModel *achievementsModel_ = nullptr;
+//    FilterModelAchievements filterAchievements_;
 
     CategoriesModel *categoriesModel_ = nullptr;
 

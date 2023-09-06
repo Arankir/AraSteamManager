@@ -8,10 +8,10 @@ class AchievementCompletedPieChart: public PieChart {
     Q_OBJECT
 public:
     AchievementCompletedPieChart();
-    void setNoAchievements(const int&);
-    void setNotStarted(const int&);
-    void setStarted(const int&);
-    void setCompleted(const int&);
+    void setNoAchievements(int);
+    void setNotStarted(int);
+    void setStarted(int);
+    void setCompleted(int);
     void clear();
 
 signals:

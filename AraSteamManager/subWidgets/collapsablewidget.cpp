@@ -1,4 +1,4 @@
-#include "collapsablewidget.h"
+ #include "collapsablewidget.h"
 #include "classes/common/theme.h"
 #include "classes/common/images.h"
 
@@ -14,7 +14,7 @@ CollapsableWidget::CollapsableWidget(QWidget *aParent)
 
     toggleButton_->setStyleSheet("QToolButton {border: none;}");
     toggleButton_->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    toggleButton_->setIcon(QIcon(Images::scrollBarRight()));
+    toggleButton_->setIcon(QIcon(Images::doubleRight()));
     toggleButton_->setCheckable(true);
     toggleButton_->setChecked(false);
 
@@ -29,9 +29,9 @@ CollapsableWidget::CollapsableWidget(QWidget *aParent)
     contentArea_->setMinimumHeight(0);
 
     // let the entire widget grow and shrink with its content
-    toggleAnimation_->addAnimation(new QPropertyAnimation(this, "maximumHeight"));
-    toggleAnimation_->addAnimation(new QPropertyAnimation(this, "minimumHeight"));
-    toggleAnimation_->addAnimation(new QPropertyAnimation(contentArea_, "maximumHeight"));
+    toggleAnimation_->addAnimation(new QPropertyAnimation(this, "maximumHeight", this));
+    toggleAnimation_->addAnimation(new QPropertyAnimation(this, "minimumHeight", this));
+    toggleAnimation_->addAnimation(new QPropertyAnimation(contentArea_, "maximumHeight", this));
 
     mainLayout_->setVerticalSpacing(0);
     mainLayout_->setContentsMargins(0, 0, 0, 0);
@@ -45,8 +45,19 @@ CollapsableWidget::CollapsableWidget(QWidget *aParent)
     connect(toggleButton_, &QToolButton::toggled, this, &CollapsableWidget::toggle);
 }
 
+CollapsableWidget::~CollapsableWidget() {
+    delete toggleButton_;
+    delete headerLine_;
+    while (toggleAnimation_->animationCount() > 0) {
+        delete toggleAnimation_->animationAt(0);
+    }
+    delete toggleAnimation_;
+    delete contentArea_;
+    delete mainLayout_;
+}
+
 void CollapsableWidget::toggle(bool aExpanded) {
-    toggleButton_->setIcon(aExpanded ? QIcon(Images::scrollBarDown()) : QIcon(Images::scrollBarRight()));
+    toggleButton_->setIcon(aExpanded ? QIcon(Images::doubleDown()) : QIcon(Images::doubleRight()));
     toggleAnimation_->setDirection(aExpanded ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
     toggleAnimation_->start();
 
@@ -73,7 +84,7 @@ QString CollapsableWidget::title() {
     return toggleButton_->text();
 }
 
-void CollapsableWidget::setDuration(const int &aAnimationDuration) {
+void CollapsableWidget::setDuration(int aAnimationDuration) {
     animationDuration_ = aAnimationDuration;
 }
 

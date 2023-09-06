@@ -36,7 +36,7 @@ SProfile *FormFriendItemCompare::steamProfile() {
     return profile_;
 }
 
-void FormFriendItemCompare::setHiddenFilter(const bool &aHidden) {
+void FormFriendItemCompare::setHiddenFilter(bool aHidden) {
     ui->Filter->setVisible(!aHidden);
 }
 

@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_PieChart_t {
     const uint offsetsAndSize[10];
-    char stringdata0[59];
+    char stringdata0[58];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_PieChart_t, stringdata0) + ofs), len 
@@ -33,11 +33,11 @@ QT_MOC_LITERAL(0, 8), // "PieChart"
 QT_MOC_LITERAL(9, 14), // "updateSettings"
 QT_MOC_LITERAL(24, 0), // ""
 QT_MOC_LITERAL(25, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(49, 9) // "aSettings"
+QT_MOC_LITERAL(49, 8) // "settings"
 
     },
     "PieChart\0updateSettings\0\0"
-    "QFlags<changedSettings>\0aSettings"
+    "QFlags<changedSettings>\0settings"
 };
 #undef QT_MOC_LITERAL
 

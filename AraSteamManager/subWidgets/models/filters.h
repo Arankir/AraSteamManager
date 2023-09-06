@@ -8,8 +8,8 @@ class SortFilterProxyModelMiltiRow : public QSortFilterProxyModel {
     Q_OBJECT
 public:
     SortFilterProxyModelMiltiRow(QObject *parent = nullptr): QSortFilterProxyModel(parent) {};
-    void addRow(const int &row);
-    void removeRow(const int &row);
+    void addRow(int row);
+    void removeRow(int row);
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 private:
@@ -50,7 +50,7 @@ public:
 
 class Filter {
 public:
-    Filter(const int &rows = 0, const int &cols = 0);
+    Filter(int rows = 0, int cols = 0);
     bool operator[](int row) const;
     void setData(int row, int col, bool data);
     void setRows(int rows);
@@ -86,9 +86,10 @@ private:
 class FilterModel : public QSortFilterProxyModel {
     Q_OBJECT
 public:
-    FilterModel(const int &row = 0, const int &col = 0, QObject *parent = nullptr);
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-    void setSourceModel(QAbstractItemModel *sourceModel);
+    FilterModel(int row = 0, int col = 0, QObject *parent = nullptr);
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    void setSourceModel(QAbstractItemModel *sourceModel) override;
+    virtual void clear();
 
 signals:
     void s_modelFinished();

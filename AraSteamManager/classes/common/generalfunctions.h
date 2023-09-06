@@ -2,20 +2,13 @@
 #define GENERALFUNCTIONS_H
 
 #include <QTableView>
-#include <QVBoxLayout>
-
-#include "framelesswindow.h"
-#include "form.h"
 
 QTableView *initingTable(QTableView *table);
 int getWidthTableColumns(QTableView *table, bool includeScrollBar = true);
 int getHeightTableColumns(QTableView *table, bool includeScrollBar = true);
-QString textToToolTip(const QString &text, const QString &aSplitter = " ");
-//bool createDir(const QString &path);
+QString textToToolTip(const QString &text, const QString &splitter = " ", const QString &symvolNextLine = "\n");
 bool saveFile(const QString &filePath, const QByteArray &data);
 bool readFile(const QString &filePath, QByteArray &data);
-bool centralize(const QWidget *parent, QWidget *child);
-int daysInMonth(const QDate);
 
 template <typename T>
 QList<T> reverseList(const QList<T> &aList) {
@@ -25,34 +18,10 @@ QList<T> reverseList(const QList<T> &aList) {
     return result;
 }
 
-template <class T>
-T *createFramelessForm() {
-//TODO Придумать проверку на то, что T - наследуется от определенного класса
-    FramelessWindow *f = new FramelessWindow;
-    T *t = new T(f);
-    f->setWidget(t);
-    if (Form *form = dynamic_cast<Form*>(t)) {
-        form->setFramelessWindow(f);
-        QObject::connect(form, &Form::s_closed, f, &FramelessWindow::close);
-    }
-    return t;
-}
-
-template <class T>
-QFrame *createSubForm(T *aSubForm, QWidget *aParent) {
-    QFrame *frame = new QFrame(aParent);
-    frame->setObjectName("SubWindow");
-    QVBoxLayout *lay = new QVBoxLayout(frame);
-    lay->addWidget(aSubForm);
-    centralize(aParent, frame);
-    frame->show();
-//    if (auto form = dynamic_cast<Form*>(aSubForm)) {
-//        QObject::connect(form, &Form::s_closed, frame, [frame](){
-//            delete frame->layout();
-//            delete frame;
-//        });
-//    }
-    return frame;
+template <typename T>
+QList<T> reverseList(QList<T> &&aList) {
+    std::reverse(aList.begin(), aList.end());
+    return aList;
 }
 
 #endif // GENERALFUNCTIONS_H

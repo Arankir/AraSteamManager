@@ -248,5 +248,27 @@
         <file>white/profile icons/foil.png</file>
         <file>white/profile icons/normal.png</file>
         <file>white/profile icons/special.png</file>
+        <file>dataLoaded/friends_blue.png</file>
+        <file>dataLoaded/friends_green.png</file>
+        <file>dataLoaded/friends_yellow.png</file>
+        <file>dataLoaded/games_blue.png</file>
+        <file>dataLoaded/games_green.png</file>
+        <file>dataLoaded/games_red.png</file>
+        <file>dataLoaded/games_yellow.png</file>
+        <file>dataLoaded/profile_blue.png</file>
+        <file>dataLoaded/profile_green.png</file>
+        <file>dataLoaded/profile_red.png</file>
+        <file>dataLoaded/profile_yellow.png</file>
+        <file>dataLoaded/friends_red.png</file>
+        <file>languages/eng.png</file>
+        <file>languages/rus.png</file>
+        <file>black/widgets/double_down.png</file>
+        <file>black/widgets/double_left.png</file>
+        <file>black/widgets/double_right.png</file>
+        <file>black/widgets/double_up.png</file>
+        <file>white/widgets/double_down.png</file>
+        <file>white/widgets/double_left.png</file>
+        <file>white/widgets/double_right.png</file>
+        <file>white/widgets/double_up.png</file>
     </qresource>
 </RCC>

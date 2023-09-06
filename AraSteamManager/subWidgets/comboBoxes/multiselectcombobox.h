@@ -33,9 +33,9 @@ protected:
 
     QString getCurrentText();
 private:
-    void stateChanged(const int &state);
+    void stateChanged(int state);
     void onSearch(const QString &searchString);
-    void itemClicked(const int &index);
+    void itemClicked(int index);
 
     QListWidget* listWidget_;
     QLineEdit* lineEdit_;

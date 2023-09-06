@@ -9,26 +9,12 @@ GroupGames::GroupGames(const QJsonObject &aObject) {
 }
 
 GroupGames &GroupGames::addGame(const SGame &aGame) {
-//    bool isAlreadyInclude = std::any_of(games_.begin(),
-//                                        games_.end(),
-//                                        [=](const GameID &lGame) {
-//                                            return lGame == aGame.appId();
-//                                        });
-//    if (!isAlreadyInclude) {
-//        games_.insert(aGame.appId());
-//    }
-    games_.insert(aGame.appId());
+    insert(aGame.appId());
     return *this;
 }
 
 GroupGames &GroupGames::removeGame(const GameID &aGameId) {
-//    games_.erase(std::remove_if(games_.begin(),
-//                                games_.end(),
-//                                [=](const GameID &lGame) {
-//                                    return lGame == aGame;
-//                                }),
-//               games_.end());
-    games_.remove(aGameId);
+    remove(aGameId);
     return *this;
 }
 
@@ -42,7 +28,7 @@ QJsonObject GroupGames::toJson() const {
     object["title"] = title_;
     object["profileId"] = profileId_;
     QJsonArray array;
-    for(const auto &game: games_) {
+    for(const GameID &game: *this) {
         array.append(game);
     }
     object["games"] = array;
@@ -57,40 +43,41 @@ ProfileID GroupGames::profileId() const {
     return profileId_;
 }
 
-QList<GameID> GroupGames::games() const {
-    QList<GameID> games;
-    for (const auto &game: games_) {
-        games << game;
-    }
-    return games;
-}
-
 GroupGames &GroupGames::fromJson(const QJsonObject &aObject) {
     title_      = aObject.value("title").toString();
     profileId_  = aObject.value("profileId").toString();
-    for(const auto &game: aObject.value("games").toArray()) {
-        games_.insert(game.toInt());
+    for(const QJsonValue &game: aObject.value("games").toArray()) {
+        insert(game.toInt());
     }
     return *this;
 }
 
-GroupsGames::GroupsGames(const ProfileID &aProfileId) : QList<GroupGames>(), FileSaveLoad(Paths::groupGames(aProfileId)), profileId_(aProfileId) {
+GroupsGames::GroupsGames(const ProfileID &aProfileId) : QMap<QString, GroupGames>(), FileSaveLoad(Paths::groupGames(aProfileId)), profileId_(aProfileId) {
     init();
 }
 
 void GroupsGames::addGroup(const QString &aTitle) {
-    append(GroupGames(aTitle, profileId_));
+    insert(aTitle, GroupGames(aTitle, profileId_));
+    //    append(GroupGames(aTitle, profileId_));
+}
+
+void GroupsGames::addGroup(const GroupGames &aGroup) {
+    insert(aGroup.title(), aGroup);
 }
 
 void GroupsGames::removeGroup(const QString &aTitle) {
-    auto iterator = std::find_if(begin(),
-                                 end(),
-                                 [=](const GroupGames &lGroup) {
-                                    return lGroup.title() == aTitle;
-                                 });
-    if (iterator != end()) {
-        removeAt(iterator - begin());
+    auto it = find(aTitle);
+    if (it != end()) {
+        erase(it);
     }
+//    auto iterator = std::find_if(begin(),
+//                                 end(),
+//                                 [=](const GroupGames &lGroup) {
+//                                    return lGroup.title() == aTitle;
+//                                 });
+//    if (iterator != end()) {
+//        removeAt(iterator - begin());
+//    }
 }
 
 void GroupsGames::init() {
@@ -108,8 +95,8 @@ void GroupsGames::update(const ProfileID &aProfileId) {
 void GroupsGames::fromJson(const QJsonObject &aObject) {
     profileId_ = aObject.value("profileId").toString();
     clear();
-    for(auto &&group: aObject.value("groups").toArray()) {
-        append(GroupGames(group.toObject()));
+    for(QJsonValue &&group: aObject.value("groups").toArray()) {
+        insert(group.toObject().value("title").toString(), GroupGames(group.toObject()));
     }
 }
 
@@ -117,7 +104,7 @@ QJsonObject GroupsGames::toJson() const {
     QJsonObject object;
     object["profileId"] = profileId_;
     QJsonArray array;
-    for(auto &group: *this) {
+    for(const GroupGames &group: *this) {
         array.append(std::move(group.toJson()));
     }
     object["groups"] = array;

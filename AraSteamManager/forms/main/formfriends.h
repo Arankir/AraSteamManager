@@ -21,7 +21,7 @@ public:
     ~FormFriends();
 
 signals:
-    void s_finish(const int &width);
+    void s_finish(int width);
     void s_goToProfile(const ProfileID &profileId);
 
 private slots:
@@ -31,23 +31,20 @@ private slots:
     //Часто использующиеся функции
     void retranslate() override;
     void updateIcons() override;
-    SFriendProfile currentFriend();
+    FriendsModel::item currentFriend();
     //Взаимодействие с таблицей
-    QMenu *createMenu(const SFriendProfile &profile);
+    QMenu *createMenu(const FriendsModel::item &profile);
     void goToCurrentProfile();
     //Фильтр
     void lineEditName_TextChanged(const QString &newText);
     void buttonFind_Clicked();
-    void comboBoxStatus_Activated(const int &index);
-    void checkBoxFavorites_StateChanged(const int &state);
+    void comboBoxStatus_Activated(int index);
+    void checkBoxFavorites_StateChanged(int state);
 
 private:
     Ui::FormFriends *ui;
 
     ProfileID profileId_;
-    bool isLoading_ = false;
-
-    FilterModelFriends filterFriends_;
 };
 
 #endif // FORMFRIENDS_H

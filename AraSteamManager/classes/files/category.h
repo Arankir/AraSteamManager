@@ -7,7 +7,7 @@
 class Category: public QSet<AchievementID>, public FileSaveLoad {
 public:
     explicit Category(const SGame &game);
-    explicit Category(const GameID &gameId, const QString &gameName, bool autoLoad = true);
+    explicit Category(const GameID &gameId, const QString &gameName, const QString &aGameIcon, bool autoLoad = true);
     explicit Category(const GameID &gameId, const QString &title, const QSet<AchievementID> &achievements, const QList<Category *> &categories = QList<Category*>());
     explicit Category(const QJsonObject &category = QJsonObject());
     Category(const Category &category);
@@ -25,11 +25,13 @@ public:
     GameID gameID()                 const;
     QList<Category*> categories()   const;
     Category *parent()              const;
+    const QString &gameIcon()       const;
 
     //sets
     void setTitle(const QString &title);
     void setGame(const SGame &game);
-    void setGame(const GameID &gameId, const QString &gameName);
+    void setGame(const GameID &gameId, const QString &gameName, const QString &newGameIcon);
+    void setGameIcon(const QString &newGameIcon);
 
     //parents
     void setParent(Category *newParent);
@@ -71,6 +73,7 @@ public:
 //    }
 
     int getIndex(Category *category);
+
 private:
     void getPathFromRoot(QStringList &list);
 
@@ -78,6 +81,7 @@ private:
     QString title_;
     GameID gameId_;
     QString gameName_;
+    QString gameIcon_;
     QList<Category*> categories_;
 
 };

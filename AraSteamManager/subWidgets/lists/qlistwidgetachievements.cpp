@@ -8,7 +8,7 @@ QListWidgetAchievements::QListWidgetAchievements(QWidget *aParent) : QListWidget
     setWhatsThis(c_whatsThis);
 }
 
-void QListWidgetAchievements::insertAchievement(const SAchievement &aAchievement, const GameID &gameId, const int &row) {
+void QListWidgetAchievements::insertAchievement(const SAchievement &aAchievement, const GameID &gameId, int row) {
     QListWidgetAchievement *item = new QListWidgetAchievement(aAchievement);
     if (gameId > 0) {
         item->setIcon(aAchievement.icon(gameId));
@@ -23,12 +23,12 @@ void QListWidgetAchievements::insertAchievement(const SAchievement &aAchievement
 }
 
 void QListWidgetAchievements::startDrag(Qt::DropActions aSupportedActions) {
-    auto items = selectedItems();
+    QList<QListWidgetItem*> items = selectedItems();
     //Формирование MimeData для всех выделенных item'ов
-    auto mimeData = new QMimeData ();
+    QMimeData *mimeData = new QMimeData ();
     QByteArray data;
     QDataStream stream(&data, QIODevice::WriteOnly);
-    for(auto &item: items) {
+    for(QListWidgetItem *item: items) {
         QListWidgetAchievement *achievementItem = dynamic_cast<QListWidgetAchievement*>(item);
         if (achievementItem != nullptr) {
             QMap<int,  QVariant> map = model()->itemData(model()->index(row(achievementItem), 0));
@@ -39,17 +39,17 @@ void QListWidgetAchievements::startDrag(Qt::DropActions aSupportedActions) {
     mimeData->setData("application/x-qabstractitemmodeldatalist", data);
 
     //Вызов перетаскивания со сформированными данными
-    auto drag = new QDrag(this);
+    QDrag *drag = new QDrag(this);
     drag->setMimeData(mimeData);
     if (drag->exec(aSupportedActions, defaultDropAction()) == Qt::MoveAction) {
         //Удаление перемещенных item'ов
-        for (auto &item: items) {
-            if (auto achievementItem = dynamic_cast<QListWidgetAchievement*>(item)) {
-                auto itemWithAchievement = takeItem(row(achievementItem));
+        for (QListWidgetItem *item: items) {
+            if (QListWidgetAchievement *achievementItem = dynamic_cast<QListWidgetAchievement*>(item)) {
+                QListWidgetItem *itemWithAchievement = takeItem(row(achievementItem));
 //                delete achievementItem->_achievement;
                 removeItemWidget(itemWithAchievement);
             } else {
-                auto itemWithAchievement = takeItem(row(item));
+                QListWidgetItem *itemWithAchievement = takeItem(row(item));
                 removeItemWidget(itemWithAchievement);
             }
         }
@@ -83,7 +83,7 @@ void QListWidgetAchievements::dropEvent(QDropEvent *aEvent) {
     aEvent->accept();
 }
 
-void QListWidgetAchievements::dropInsert(const SAchievement &achievement, const int &row, const QMap<int,  QVariant> &roleData) {
+void QListWidgetAchievements::dropInsert(const SAchievement &achievement, int row, const QMap<int,  QVariant> &roleData) {
     QListWidgetAchievement *item = new QListWidgetAchievement(achievement);
     for (auto iterator = roleData.begin(); iterator != roleData.end(); ++iterator) {
         item->setData(iterator.key(), iterator.value());
@@ -96,7 +96,7 @@ void QListWidgetAchievements::dropInsert(const SAchievement &achievement, const 
 }
 
 void QListWidgetAchievements::dragEnterEvent(QDragEnterEvent *aEvent) {
-    auto widget = dynamic_cast<QWidget*>(aEvent->source());
+    QWidget *widget = dynamic_cast<QWidget*>(aEvent->source());
     if (widget) {
         if (dynamic_cast<QWidget*>(aEvent->source())->whatsThis() == c_whatsThis) {
             if (aEvent->mimeData()->hasFormat("application/x-qabstractitemmodeldatalist")) {

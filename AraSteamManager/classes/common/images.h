@@ -14,7 +14,7 @@ public:
     static QString stateRed();
     static QString stateYellow();
 
-    static QString levels(const int &hundreds);
+    static QString levels(int hundreds);
 
     //Achievements Checkbox
     static QString allAchievements();
@@ -65,6 +65,10 @@ public:
     static QString left();
     static QString right();
     static QString settings();
+
+    //Language
+    static QString english();
+    static QString russian();
 
     //Management
     static QString apply();
@@ -139,6 +143,11 @@ public:
     static QString scrollBarDown();
     static QString scrollBarLeft();
     static QString scrollBarRight();
+
+    static QString doubleUp();
+    static QString doubleDown();
+    static QString doubleLeft();
+    static QString doubleRight();
 
     static QString missingImage();
 };

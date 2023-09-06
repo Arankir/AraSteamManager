@@ -92,7 +92,7 @@ void AchievementsModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         (void)_t;
         switch (_id) {
         case 0: _t->s_finished(); break;
-        case 1: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3]))); break;
+        case 1: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 2: _t->updateComments(); break;
         case 3: _t->sort((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< Qt::SortOrder(*)>(_a[2]))); break;
         case 4: _t->sort((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -108,7 +108,7 @@ void AchievementsModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
             }
         }
         {
-            using _t = void (AchievementsModel::*)(const QString & , const int & , const int & );
+            using _t = void (AchievementsModel::*)(const QString & , int , int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AchievementsModel::s_progress)) {
                 *result = 1;
                 return;
@@ -124,7 +124,7 @@ const QMetaObject AchievementsModel::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_AchievementsModel_t
-, QtPrivate::TypeAndForceComplete<AchievementsModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>
+, QtPrivate::TypeAndForceComplete<AchievementsModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 , QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<Qt::SortOrder, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
@@ -170,7 +170,7 @@ void AchievementsModel::s_finished()
 }
 
 // SIGNAL 1
-void AchievementsModel::s_progress(const QString & _t1, const int & _t2, const int & _t3)
+void AchievementsModel::s_progress(const QString & _t1, int _t2, int _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
@@ -278,7 +278,7 @@ void FilterModelAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call 
         switch (_id) {
         case 0: { int _r = _t->addProfile((*reinterpret_cast< const SProfile(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 1: { SProfile _r = _t->getProfile((*reinterpret_cast< const int(*)>(_a[1])));
+        case 1: { SProfile _r = _t->getProfile((*reinterpret_cast< int(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
         case 2: _t->removeProfile((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
         case 3: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
@@ -305,7 +305,7 @@ const QMetaObject FilterModelAchievements::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FilterModelAchievements_t
 , QtPrivate::TypeAndForceComplete<FilterModelAchievements, std::true_type>
-, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<SProfile, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const CategoriesFilter &, std::false_type>, QtPrivate::TypeAndForceComplete<CategoriesFilter, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<SProfile, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const CategoriesFilter &, std::false_type>, QtPrivate::TypeAndForceComplete<CategoriesFilter, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,

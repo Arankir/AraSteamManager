@@ -13,14 +13,14 @@ void GamesWithPercentModel::setGames(const SGames &aGames, const ProfileID &aPro
     profileId_ = aProfileId;
 
     int progress = 0;
-    for(auto &game: aGames) {
+    for(const SGame &game: aGames) {
         GameWithPercentModelItem item(game,
                                       0.0,
                                       SAchievementsPlayer());
         modelItems_.append(item);
         emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
-    for (const auto &gameModel: qAsConst(modelItems_)) { //Загрузка достижений игрока
+    for (const GameWithPercentModelItem &gameModel: modelItems_) { //Загрузка достижений игрока
         SAchievementsPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesWithPercentModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
     }
 }
@@ -30,7 +30,7 @@ void GamesWithPercentModel::setGames(const QList<GameWithPercentModelItem> &aGam
     beginResetModel();
     clear();
     profileId_ = aProfileId;
-    for(auto &game: aGames) {
+    for(const GameWithPercentModelItem &game: aGames) {
         modelItems_.append(game);
 //        emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
@@ -227,7 +227,7 @@ void GamesWithPercentModel::sort(int aColumn, Qt::SortOrder aOrder) {
     emit dataChanged(index(0, 0), index(rowCount(), columnCount()));
 }
 
-SGame GamesWithPercentModel::getGame(const int &aRow) const {
+SGame GamesWithPercentModel::getGame(int aRow) const {
     return modelItems_[aRow].game;
 }
 
@@ -235,11 +235,11 @@ SGame GamesWithPercentModel::getGame(const QModelIndex &aIndex) const {
     return modelItems_[aIndex.row()].game;
 }
 
-double GamesWithPercentModel::getPercent(const int &aRow) const {
+double GamesWithPercentModel::getPercent(int aRow) const {
     return modelItems_[aRow].percent;
 }
 
-SAchievementsPlayer GamesWithPercentModel::getAchievements(const int &aRow) const {
+SAchievementsPlayer GamesWithPercentModel::getAchievements(int aRow) const {
     return modelItems_[aRow].achievements;
 }
 
