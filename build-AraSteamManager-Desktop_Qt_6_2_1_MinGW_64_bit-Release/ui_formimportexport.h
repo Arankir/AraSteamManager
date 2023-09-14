@@ -39,6 +39,7 @@ public:
         __qtreewidgetitem->setText(0, QString::fromUtf8("1"));
         treeWidgetExport->setHeaderItem(__qtreewidgetitem);
         treeWidgetExport->setObjectName(QString::fromUtf8("treeWidgetExport"));
+        treeWidgetExport->header()->setVisible(false);
 
         verticalLayout->addWidget(treeWidgetExport);
 

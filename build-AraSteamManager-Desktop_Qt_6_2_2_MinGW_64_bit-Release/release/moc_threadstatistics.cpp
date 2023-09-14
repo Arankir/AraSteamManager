@@ -12,7 +12,6 @@
 #include <QtNetwork/QSslError>
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
-#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'threadstatistics.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
@@ -26,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ThreadStatistics_t {
     const uint offsetsAndSize[32];
-    char stringdata0[161];
+    char stringdata0[163];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_ThreadStatistics_t, stringdata0) + ofs), len 
@@ -42,19 +41,19 @@ QT_MOC_LITERAL(47, 8), // "s_finish"
 QT_MOC_LITERAL(56, 11), // "Statistics&"
 QT_MOC_LITERAL(68, 4), // "fill"
 QT_MOC_LITERAL(73, 20), // "onResultAchievements"
-QT_MOC_LITERAL(94, 25), // "QList<SAchievementPlayer>"
-QT_MOC_LITERAL(120, 3), // "ach"
-QT_MOC_LITERAL(124, 5), // "SGame"
-QT_MOC_LITERAL(130, 5), // "aGame"
-QT_MOC_LITERAL(136, 11), // "updateTimes"
-QT_MOC_LITERAL(148, 12) // "unlockedTime"
+QT_MOC_LITERAL(94, 19), // "SAchievementsPlayer"
+QT_MOC_LITERAL(114, 12), // "achievements"
+QT_MOC_LITERAL(127, 5), // "SGame"
+QT_MOC_LITERAL(133, 4), // "game"
+QT_MOC_LITERAL(138, 11), // "updateTimes"
+QT_MOC_LITERAL(150, 12) // "unlockedTime"
 
     },
     "ThreadStatistics\0s_progress\0\0text\0"
     "progress\0max\0s_finish\0Statistics&\0"
-    "fill\0onResultAchievements\0"
-    "QList<SAchievementPlayer>\0ach\0SGame\0"
-    "aGame\0updateTimes\0unlockedTime"
+    "fill\0onResultAchievements\0SAchievementsPlayer\0"
+    "achievements\0SGame\0game\0updateTimes\0"
+    "unlockedTime"
 };
 #undef QT_MOC_LITERAL
 
@@ -102,7 +101,7 @@ void ThreadStatistics::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 1: _t->s_finish((*reinterpret_cast< Statistics(*)>(_a[1]))); break;
         case 2: { int _r = _t->fill();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->onResultAchievements((*reinterpret_cast< const QList<SAchievementPlayer>(*)>(_a[1])),(*reinterpret_cast< const SGame(*)>(_a[2]))); break;
+        case 3: _t->onResultAchievements((*reinterpret_cast< const SAchievementsPlayer(*)>(_a[1])),(*reinterpret_cast< const SGame(*)>(_a[2]))); break;
         case 4: _t->updateTimes((*reinterpret_cast< const QDateTime(*)>(_a[1]))); break;
         default: ;
         }
@@ -133,7 +132,7 @@ const QMetaObject ThreadStatistics::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_ThreadStatistics_t
 , QtPrivate::TypeAndForceComplete<ThreadStatistics, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Statistics &, std::false_type>
-, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QList<SAchievementPlayer> &, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QDateTime &, std::false_type>
+, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SAchievementsPlayer &, std::false_type>, QtPrivate::TypeAndForceComplete<const SGame &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QDateTime &, std::false_type>
 
 
 >,

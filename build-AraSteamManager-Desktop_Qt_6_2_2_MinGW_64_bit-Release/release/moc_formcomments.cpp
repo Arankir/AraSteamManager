@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormComments_t {
-    const uint offsetsAndSize[22];
-    char stringdata0[156];
+    const uint offsetsAndSize[16];
+    char stringdata0[107];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormComments_t, stringdata0) + ofs), len 
@@ -38,16 +38,12 @@ QT_MOC_LITERAL(31, 4), // "init"
 QT_MOC_LITERAL(36, 23), // "on_ButtonCancel_clicked"
 QT_MOC_LITERAL(60, 22), // "on_ButtonApply_clicked"
 QT_MOC_LITERAL(83, 11), // "retranslate"
-QT_MOC_LITERAL(95, 11), // "updateIcons"
-QT_MOC_LITERAL(107, 14), // "updateSettings"
-QT_MOC_LITERAL(122, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(146, 9) // "aSettings"
+QT_MOC_LITERAL(95, 11) // "updateIcons"
 
     },
     "FormComments\0s_updateComments\0\0init\0"
     "on_ButtonCancel_clicked\0on_ButtonApply_clicked\0"
-    "retranslate\0updateIcons\0updateSettings\0"
-    "QFlags<changedSettings>\0aSettings"
+    "retranslate\0updateIcons"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,7 +53,7 @@ static const uint qt_meta_data_FormComments[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,15 +61,14 @@ static const uint qt_meta_data_FormComments[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x06,    1 /* Public */,
+       1,    0,   50,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    0,   57,    2, 0x08,    2 /* Private */,
-       4,    0,   58,    2, 0x08,    3 /* Private */,
-       5,    0,   59,    2, 0x08,    4 /* Private */,
-       6,    0,   60,    2, 0x08,    5 /* Private */,
-       7,    0,   61,    2, 0x08,    6 /* Private */,
-       8,    1,   62,    2, 0x08,    7 /* Private */,
+       3,    0,   51,    2, 0x08,    2 /* Private */,
+       4,    0,   52,    2, 0x08,    3 /* Private */,
+       5,    0,   53,    2, 0x08,    4 /* Private */,
+       6,    0,   54,    2, 0x08,    5 /* Private */,
+       7,    0,   55,    2, 0x08,    6 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -84,7 +79,6 @@ static const uint qt_meta_data_FormComments[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 9,   10,
 
        0        // eod
 };
@@ -101,7 +95,6 @@ void FormComments::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 3: _t->on_ButtonApply_clicked(); break;
         case 4: _t->retranslate(); break;
         case 5: _t->updateIcons(); break;
-        case 6: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -114,6 +107,7 @@ void FormComments::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
             }
         }
     }
+    (void)_a;
 }
 
 const QMetaObject FormComments::staticMetaObject = { {
@@ -124,7 +118,7 @@ const QMetaObject FormComments::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormComments_t
 , QtPrivate::TypeAndForceComplete<FormComments, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -151,13 +145,13 @@ int FormComments::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 6;
     }
     return _id;
 }

@@ -82,7 +82,7 @@ void FreezeTableWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
 }
 
 const QMetaObject FreezeTableWidget::staticMetaObject = { {
-    QMetaObject::SuperData::link<QTableView::staticMetaObject>(),
+    QMetaObject::SuperData::link<MyTable::staticMetaObject>(),
     qt_meta_stringdata_FreezeTableWidget.offsetsAndSize,
     qt_meta_data_FreezeTableWidget,
     qt_static_metacall,
@@ -107,12 +107,12 @@ void *FreezeTableWidget::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_FreezeTableWidget.stringdata0))
         return static_cast<void*>(this);
-    return QTableView::qt_metacast(_clname);
+    return MyTable::qt_metacast(_clname);
 }
 
 int FreezeTableWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QTableView::qt_metacall(_c, _id, _a);
+    _id = MyTable::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {

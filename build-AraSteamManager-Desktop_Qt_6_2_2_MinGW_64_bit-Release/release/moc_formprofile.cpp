@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormProfile_t {
     const uint offsetsAndSize[82];
-    char stringdata0[543];
+    char stringdata0[542];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormProfile_t, stringdata0) + ofs), len 
@@ -48,21 +48,21 @@ QT_MOC_LITERAL(149, 10), // "updateInfo"
 QT_MOC_LITERAL(160, 11), // "retranslate"
 QT_MOC_LITERAL(172, 14), // "updateSettings"
 QT_MOC_LITERAL(187, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(211, 9), // "aSettings"
-QT_MOC_LITERAL(221, 6), // "setLvl"
-QT_MOC_LITERAL(228, 8), // "aSteamId"
-QT_MOC_LITERAL(237, 15), // "setOnlineStatus"
-QT_MOC_LITERAL(253, 8), // "setGames"
-QT_MOC_LITERAL(262, 10), // "setFriends"
-QT_MOC_LITERAL(273, 16), // "setProfileStatus"
-QT_MOC_LITERAL(290, 20), // "setCommentPermission"
-QT_MOC_LITERAL(311, 19), // "setCommunityProfile"
-QT_MOC_LITERAL(331, 5), // "setId"
-QT_MOC_LITERAL(337, 7), // "setBans"
-QT_MOC_LITERAL(345, 9), // "setBadges"
-QT_MOC_LITERAL(355, 13), // "setTimePlayed"
-QT_MOC_LITERAL(369, 6), // "SGames"
-QT_MOC_LITERAL(376, 6), // "aGames"
+QT_MOC_LITERAL(211, 8), // "settings"
+QT_MOC_LITERAL(220, 15), // "setMinimizeInfo"
+QT_MOC_LITERAL(236, 11), // "setBaseInfo"
+QT_MOC_LITERAL(248, 15), // "setMaximizeInfo"
+QT_MOC_LITERAL(264, 6), // "setLvl"
+QT_MOC_LITERAL(271, 15), // "setOnlineStatus"
+QT_MOC_LITERAL(287, 8), // "setGames"
+QT_MOC_LITERAL(296, 10), // "setFriends"
+QT_MOC_LITERAL(307, 16), // "setProfileStatus"
+QT_MOC_LITERAL(324, 13), // "setCommonInfo"
+QT_MOC_LITERAL(338, 7), // "setBans"
+QT_MOC_LITERAL(346, 9), // "setBadges"
+QT_MOC_LITERAL(356, 13), // "setTimePlayed"
+QT_MOC_LITERAL(370, 6), // "SGames"
+QT_MOC_LITERAL(377, 5), // "games"
 QT_MOC_LITERAL(383, 17), // "setCustomizations"
 QT_MOC_LITERAL(401, 24), // "buttonSetProfile_Clicked"
 QT_MOC_LITERAL(426, 19), // "buttonGames_Clicked"
@@ -71,7 +71,7 @@ QT_MOC_LITERAL(468, 24), // "buttonStatistics_Clicked"
 QT_MOC_LITERAL(493, 11), // "updateIcons"
 QT_MOC_LITERAL(505, 15), // "updateMyProfile"
 QT_MOC_LITERAL(521, 14), // "setColorStatus"
-QT_MOC_LITERAL(536, 6) // "aColor"
+QT_MOC_LITERAL(536, 5) // "color"
 
     },
     "FormProfile\0s_goToGames\0\0ProfileID\0"
@@ -79,16 +79,16 @@ QT_MOC_LITERAL(536, 6) // "aColor"
     "SProfile\0profile\0s_goToFavorites\0"
     "profileToUi\0setProfile\0updateVisibleInfo\0"
     "updateInfo\0retranslate\0updateSettings\0"
-    "QFlags<changedSettings>\0aSettings\0"
-    "setLvl\0aSteamId\0setOnlineStatus\0"
-    "setGames\0setFriends\0setProfileStatus\0"
-    "setCommentPermission\0setCommunityProfile\0"
-    "setId\0setBans\0setBadges\0setTimePlayed\0"
-    "SGames\0aGames\0setCustomizations\0"
+    "QFlags<changedSettings>\0settings\0"
+    "setMinimizeInfo\0setBaseInfo\0setMaximizeInfo\0"
+    "setLvl\0setOnlineStatus\0setGames\0"
+    "setFriends\0setProfileStatus\0setCommonInfo\0"
+    "setBans\0setBadges\0setTimePlayed\0SGames\0"
+    "games\0setCustomizations\0"
     "buttonSetProfile_Clicked\0buttonGames_Clicked\0"
     "buttonFriends_Clicked\0buttonStatistics_Clicked\0"
     "updateIcons\0updateMyProfile\0setColorStatus\0"
-    "aColor"
+    "color"
 };
 #undef QT_MOC_LITERAL
 
@@ -98,7 +98,7 @@ static const uint qt_meta_data_FormProfile[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      29,   14, // methods
+      30,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -106,37 +106,38 @@ static const uint qt_meta_data_FormProfile[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,  188,    2, 0x06,    1 /* Public */,
-       5,    1,  191,    2, 0x06,    3 /* Public */,
-       6,    1,  194,    2, 0x06,    5 /* Public */,
-       9,    0,  197,    2, 0x06,    7 /* Public */,
+       1,    1,  194,    2, 0x06,    1 /* Public */,
+       5,    1,  197,    2, 0x06,    3 /* Public */,
+       6,    1,  200,    2, 0x06,    5 /* Public */,
+       9,    0,  203,    2, 0x06,    7 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-      10,    1,  198,    2, 0x0a,    8 /* Public */,
-      11,    1,  201,    2, 0x0a,   10 /* Public */,
-      12,    0,  204,    2, 0x0a,   12 /* Public */,
-      13,    0,  205,    2, 0x0a,   13 /* Public */,
-      14,    0,  206,    2, 0x0a,   14 /* Public */,
-      15,    1,  207,    2, 0x0a,   15 /* Public */,
-      18,    1,  210,    2, 0x08,   17 /* Private */,
-      20,    0,  213,    2, 0x08,   19 /* Private */,
-      21,    1,  214,    2, 0x08,   20 /* Private */,
-      22,    1,  217,    2, 0x08,   22 /* Private */,
-      23,    0,  220,    2, 0x08,   24 /* Private */,
-      24,    0,  221,    2, 0x08,   25 /* Private */,
-      25,    0,  222,    2, 0x08,   26 /* Private */,
-      26,    1,  223,    2, 0x08,   27 /* Private */,
-      27,    1,  226,    2, 0x08,   29 /* Private */,
-      28,    1,  229,    2, 0x08,   31 /* Private */,
-      29,    1,  232,    2, 0x08,   33 /* Private */,
-      32,    1,  235,    2, 0x08,   35 /* Private */,
-      33,    0,  238,    2, 0x08,   37 /* Private */,
-      34,    0,  239,    2, 0x08,   38 /* Private */,
-      35,    0,  240,    2, 0x08,   39 /* Private */,
-      36,    0,  241,    2, 0x08,   40 /* Private */,
-      37,    0,  242,    2, 0x08,   41 /* Private */,
-      38,    0,  243,    2, 0x08,   42 /* Private */,
-      39,    1,  244,    2, 0x08,   43 /* Private */,
+      10,    1,  204,    2, 0x0a,    8 /* Public */,
+      11,    1,  207,    2, 0x0a,   10 /* Public */,
+      12,    0,  210,    2, 0x0a,   12 /* Public */,
+      13,    0,  211,    2, 0x0a,   13 /* Public */,
+      14,    0,  212,    2, 0x0a,   14 /* Public */,
+      15,    1,  213,    2, 0x0a,   15 /* Public */,
+      18,    1,  216,    2, 0x09,   17 /* Protected */,
+      19,    1,  219,    2, 0x09,   19 /* Protected */,
+      20,    1,  222,    2, 0x09,   21 /* Protected */,
+      21,    1,  225,    2, 0x08,   23 /* Private */,
+      22,    0,  228,    2, 0x08,   25 /* Private */,
+      23,    1,  229,    2, 0x08,   26 /* Private */,
+      24,    1,  232,    2, 0x08,   28 /* Private */,
+      25,    0,  235,    2, 0x08,   30 /* Private */,
+      26,    1,  236,    2, 0x08,   31 /* Private */,
+      27,    1,  239,    2, 0x08,   33 /* Private */,
+      28,    1,  242,    2, 0x08,   35 /* Private */,
+      29,    1,  245,    2, 0x08,   37 /* Private */,
+      32,    1,  248,    2, 0x08,   39 /* Private */,
+      33,    0,  251,    2, 0x08,   41 /* Private */,
+      34,    0,  252,    2, 0x08,   42 /* Private */,
+      35,    0,  253,    2, 0x08,   43 /* Private */,
+      36,    0,  254,    2, 0x08,   44 /* Private */,
+      37,    0,  255,    2, 0x08,   45 /* Private */,
+      38,    0,  256,    2, 0x08,   46 /* Private */,
+      39,    1,  257,    2, 0x08,   47 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -151,18 +152,19 @@ static const uint qt_meta_data_FormProfile[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 16,   17,
-    QMetaType::Void, 0x80000000 | 3,   19,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 3,   19,
-    QMetaType::Void, 0x80000000 | 3,   19,
+    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 3,   19,
-    QMetaType::Void, 0x80000000 | 3,   19,
-    QMetaType::Void, 0x80000000 | 3,   19,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 30,   31,
-    QMetaType::Void, 0x80000000 | 3,   19,
+    QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -190,25 +192,26 @@ void FormProfile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 7: _t->updateInfo(); break;
         case 8: _t->retranslate(); break;
         case 9: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
-        case 10: _t->setLvl((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 11: _t->setOnlineStatus(); break;
-        case 12: _t->setGames((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 13: _t->setFriends((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 14: _t->setProfileStatus(); break;
-        case 15: _t->setCommentPermission(); break;
-        case 16: _t->setCommunityProfile(); break;
-        case 17: _t->setId((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 18: _t->setBans((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 19: _t->setBadges((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 20: _t->setTimePlayed((*reinterpret_cast< const SGames(*)>(_a[1]))); break;
-        case 21: _t->setCustomizations((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 22: _t->buttonSetProfile_Clicked(); break;
-        case 23: _t->buttonGames_Clicked(); break;
-        case 24: _t->buttonFriends_Clicked(); break;
-        case 25: _t->buttonStatistics_Clicked(); break;
-        case 26: _t->updateIcons(); break;
-        case 27: _t->updateMyProfile(); break;
-        case 28: _t->setColorStatus((*reinterpret_cast< const QColor(*)>(_a[1]))); break;
+        case 10: _t->setMinimizeInfo((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
+        case 11: _t->setBaseInfo((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
+        case 12: _t->setMaximizeInfo((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
+        case 13: _t->setLvl((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
+        case 14: _t->setOnlineStatus(); break;
+        case 15: _t->setGames((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
+        case 16: _t->setFriends((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
+        case 17: _t->setProfileStatus(); break;
+        case 18: _t->setCommonInfo((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
+        case 19: _t->setBans((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
+        case 20: _t->setBadges((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
+        case 21: _t->setTimePlayed((*reinterpret_cast< const SGames(*)>(_a[1]))); break;
+        case 22: _t->setCustomizations((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
+        case 23: _t->buttonSetProfile_Clicked(); break;
+        case 24: _t->buttonGames_Clicked(); break;
+        case 25: _t->buttonFriends_Clicked(); break;
+        case 26: _t->buttonStatistics_Clicked(); break;
+        case 27: _t->updateIcons(); break;
+        case 28: _t->updateMyProfile(); break;
+        case 29: _t->setColorStatus((*reinterpret_cast< const QColor(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -252,7 +255,7 @@ const QMetaObject FormProfile::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormProfile_t
 , QtPrivate::TypeAndForceComplete<FormProfile, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGames &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QColor &, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SGames &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QColor &, std::false_type>
 
 
 >,
@@ -279,13 +282,13 @@ int FormProfile::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 29)
+        if (_id < 30)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 29;
+        _id -= 30;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 29)
+        if (_id < 30)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 29;
+        _id -= 30;
     }
     return _id;
 }

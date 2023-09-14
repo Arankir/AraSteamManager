@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
     #if __cplusplus >= 202002L
         // C++20 (and later) code
-        qDebug() << "C++20 (and later)";
+        qDebug() << "C++20 (and later)" << __cplusplus;
     #endif
 
 //    qApp->setStyle(QStyleFactory::create("Fusion"));

@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_AchievementCompletedPieChart_t {
     const uint offsetsAndSize[18];
-    char stringdata0[159];
+    char stringdata0[158];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_AchievementCompletedPieChart_t, stringdata0) + ofs), len 
@@ -39,14 +39,14 @@ QT_MOC_LITERAL(74, 16), // "s_startedClicked"
 QT_MOC_LITERAL(91, 18), // "s_completedClicked"
 QT_MOC_LITERAL(110, 14), // "updateSettings"
 QT_MOC_LITERAL(125, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(149, 9) // "aSettings"
+QT_MOC_LITERAL(149, 8) // "settings"
 
     },
     "AchievementCompletedPieChart\0"
     "s_noAchievementsClicked\0\0s_notStartedClicked\0"
     "s_startedClicked\0s_completedClicked\0"
     "updateSettings\0QFlags<changedSettings>\0"
-    "aSettings"
+    "settings"
 };
 #undef QT_MOC_LITERAL
 

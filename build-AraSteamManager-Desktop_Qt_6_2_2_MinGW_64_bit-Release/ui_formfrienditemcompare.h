@@ -16,7 +16,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
-#include "forms/widgets/formreachedfilter.h"
+#include "subWidgets/withData/buttonreachedtype.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -26,7 +26,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *LabelName;
     QSpacerItem *horizontalSpacer;
-    FormReachedFilter *Filter;
+    ButtonReachedType *Filter;
     QLabel *LabelPercent;
     QPushButton *ButtonDelete;
 
@@ -47,15 +47,8 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        Filter = new FormReachedFilter(FormFriendItemCompare);
+        Filter = new ButtonReachedType(FormFriendItemCompare);
         Filter->setObjectName(QString::fromUtf8("Filter"));
-        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(Filter->sizePolicy().hasHeightForWidth());
-        Filter->setSizePolicy(sizePolicy);
-        Filter->setMinimumSize(QSize(50, 0));
-        Filter->setMaximumSize(QSize(50, 16777215));
 
         horizontalLayout->addWidget(Filter);
 
@@ -81,6 +74,7 @@ public:
     {
         FormFriendItemCompare->setWindowTitle(QCoreApplication::translate("FormFriendItemCompare", "Form", nullptr));
         LabelName->setText(QString());
+        Filter->setText(QString());
         LabelPercent->setText(QString());
         ButtonDelete->setText(QString());
     } // retranslateUi

@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MultiSelectComboBox_t {
     const uint offsetsAndSize[12];
-    char stringdata0[65];
+    char stringdata0[64];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MultiSelectComboBox_t, stringdata0) + ofs), len 
@@ -34,11 +34,11 @@ QT_MOC_LITERAL(20, 16), // "selectionChanged"
 QT_MOC_LITERAL(37, 0), // ""
 QT_MOC_LITERAL(38, 5), // "clear"
 QT_MOC_LITERAL(44, 14), // "setCurrentText"
-QT_MOC_LITERAL(59, 5) // "aText"
+QT_MOC_LITERAL(59, 4) // "text"
 
     },
     "MultiSelectComboBox\0selectionChanged\0"
-    "\0clear\0setCurrentText\0aText"
+    "\0clear\0setCurrentText\0text"
 };
 #undef QT_MOC_LITERAL
 

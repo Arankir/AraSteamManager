@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormFriends_t {
-    const uint offsetsAndSize[58];
-    char stringdata0[367];
+    const uint offsetsAndSize[54];
+    char stringdata0[332];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormFriends_t, stringdata0) + ofs), len 
@@ -38,40 +38,38 @@ QT_MOC_LITERAL(22, 5), // "width"
 QT_MOC_LITERAL(28, 13), // "s_goToProfile"
 QT_MOC_LITERAL(42, 9), // "ProfileID"
 QT_MOC_LITERAL(52, 9), // "profileId"
-QT_MOC_LITERAL(62, 14), // "updateSettings"
-QT_MOC_LITERAL(77, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(101, 8), // "settings"
-QT_MOC_LITERAL(110, 10), // "setFriends"
-QT_MOC_LITERAL(121, 5), // "clear"
-QT_MOC_LITERAL(127, 6), // "isInit"
-QT_MOC_LITERAL(134, 4), // "init"
-QT_MOC_LITERAL(139, 18), // "initComboBoxStatus"
-QT_MOC_LITERAL(158, 11), // "retranslate"
-QT_MOC_LITERAL(170, 11), // "updateIcons"
-QT_MOC_LITERAL(182, 13), // "currentFriend"
-QT_MOC_LITERAL(196, 14), // "SFriendProfile"
-QT_MOC_LITERAL(211, 10), // "createMenu"
-QT_MOC_LITERAL(222, 6), // "QMenu*"
-QT_MOC_LITERAL(229, 7), // "profile"
-QT_MOC_LITERAL(237, 18), // "goToCurrentProfile"
-QT_MOC_LITERAL(256, 24), // "lineEditName_TextChanged"
-QT_MOC_LITERAL(281, 4), // "arg1"
-QT_MOC_LITERAL(286, 18), // "buttonFind_Clicked"
-QT_MOC_LITERAL(305, 24), // "comboBoxStatus_Activated"
-QT_MOC_LITERAL(330, 5), // "index"
-QT_MOC_LITERAL(336, 30) // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(62, 10), // "setFriends"
+QT_MOC_LITERAL(73, 5), // "clear"
+QT_MOC_LITERAL(79, 6), // "isInit"
+QT_MOC_LITERAL(86, 4), // "init"
+QT_MOC_LITERAL(91, 18), // "initComboBoxStatus"
+QT_MOC_LITERAL(110, 11), // "retranslate"
+QT_MOC_LITERAL(122, 11), // "updateIcons"
+QT_MOC_LITERAL(134, 13), // "currentFriend"
+QT_MOC_LITERAL(148, 18), // "FriendsModel::item"
+QT_MOC_LITERAL(167, 10), // "createMenu"
+QT_MOC_LITERAL(178, 6), // "QMenu*"
+QT_MOC_LITERAL(185, 7), // "profile"
+QT_MOC_LITERAL(193, 18), // "goToCurrentProfile"
+QT_MOC_LITERAL(212, 24), // "lineEditName_TextChanged"
+QT_MOC_LITERAL(237, 7), // "newText"
+QT_MOC_LITERAL(245, 18), // "buttonFind_Clicked"
+QT_MOC_LITERAL(264, 24), // "comboBoxStatus_Activated"
+QT_MOC_LITERAL(289, 5), // "index"
+QT_MOC_LITERAL(295, 30), // "checkBoxFavorites_StateChanged"
+QT_MOC_LITERAL(326, 5) // "state"
 
     },
     "FormFriends\0s_finish\0\0width\0s_goToProfile\0"
-    "ProfileID\0profileId\0updateSettings\0"
-    "QFlags<changedSettings>\0settings\0"
-    "setFriends\0clear\0isInit\0init\0"
-    "initComboBoxStatus\0retranslate\0"
-    "updateIcons\0currentFriend\0SFriendProfile\0"
-    "createMenu\0QMenu*\0profile\0goToCurrentProfile\0"
-    "lineEditName_TextChanged\0arg1\0"
+    "ProfileID\0profileId\0setFriends\0clear\0"
+    "isInit\0init\0initComboBoxStatus\0"
+    "retranslate\0updateIcons\0currentFriend\0"
+    "FriendsModel::item\0createMenu\0QMenu*\0"
+    "profile\0goToCurrentProfile\0"
+    "lineEditName_TextChanged\0newText\0"
     "buttonFind_Clicked\0comboBoxStatus_Activated\0"
-    "index\0checkBoxFavorites_StateChanged"
+    "index\0checkBoxFavorites_StateChanged\0"
+    "state"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,7 +79,7 @@ static const uint qt_meta_data_FormFriends[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      17,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -89,32 +87,30 @@ static const uint qt_meta_data_FormFriends[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,  116,    2, 0x06,    1 /* Public */,
-       4,    1,  119,    2, 0x06,    3 /* Public */,
+       1,    1,  110,    2, 0x06,    1 /* Public */,
+       4,    1,  113,    2, 0x06,    3 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       7,    1,  122,    2, 0x0a,    5 /* Public */,
-      10,    1,  125,    2, 0x0a,    7 /* Public */,
-      11,    0,  128,    2, 0x0a,    9 /* Public */,
-      12,    0,  129,    2, 0x0a,   10 /* Public */,
-      13,    0,  130,    2, 0x08,   11 /* Private */,
-      14,    0,  131,    2, 0x08,   12 /* Private */,
-      15,    0,  132,    2, 0x08,   13 /* Private */,
-      16,    0,  133,    2, 0x08,   14 /* Private */,
-      17,    0,  134,    2, 0x08,   15 /* Private */,
-      19,    1,  135,    2, 0x08,   16 /* Private */,
-      22,    0,  138,    2, 0x08,   18 /* Private */,
-      23,    1,  139,    2, 0x08,   19 /* Private */,
-      25,    0,  142,    2, 0x08,   21 /* Private */,
-      26,    1,  143,    2, 0x08,   22 /* Private */,
-      28,    1,  146,    2, 0x08,   24 /* Private */,
+       7,    1,  116,    2, 0x0a,    5 /* Public */,
+       8,    0,  119,    2, 0x0a,    7 /* Public */,
+       9,    0,  120,    2, 0x0a,    8 /* Public */,
+      10,    0,  121,    2, 0x08,    9 /* Private */,
+      11,    0,  122,    2, 0x08,   10 /* Private */,
+      12,    0,  123,    2, 0x08,   11 /* Private */,
+      13,    0,  124,    2, 0x08,   12 /* Private */,
+      14,    0,  125,    2, 0x08,   13 /* Private */,
+      16,    1,  126,    2, 0x08,   14 /* Private */,
+      19,    0,  129,    2, 0x08,   16 /* Private */,
+      20,    1,  130,    2, 0x08,   17 /* Private */,
+      22,    0,  133,    2, 0x08,   19 /* Private */,
+      23,    1,  134,    2, 0x08,   20 /* Private */,
+      25,    1,  137,    2, 0x08,   22 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, 0x80000000 | 5,    6,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 8,    9,
     QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void,
     QMetaType::Bool,
@@ -122,13 +118,13 @@ static const uint qt_meta_data_FormFriends[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    0x80000000 | 18,
-    0x80000000 | 20, 0x80000000 | 18,   21,
+    0x80000000 | 15,
+    0x80000000 | 17, 0x80000000 | 15,   18,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   24,
+    QMetaType::Void, QMetaType::QString,   21,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,   27,
     QMetaType::Void, QMetaType::Int,   24,
+    QMetaType::Void, QMetaType::Int,   26,
 
        0        // eod
 };
@@ -141,24 +137,23 @@ void FormFriends::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->s_finish((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 1: _t->s_goToProfile((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 2: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
-        case 3: _t->setFriends((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
-        case 4: _t->clear(); break;
-        case 5: { bool _r = _t->isInit();
+        case 2: _t->setFriends((*reinterpret_cast< const ProfileID(*)>(_a[1]))); break;
+        case 3: _t->clear(); break;
+        case 4: { bool _r = _t->isInit();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 6: _t->init(); break;
-        case 7: _t->initComboBoxStatus(); break;
-        case 8: _t->retranslate(); break;
-        case 9: _t->updateIcons(); break;
-        case 10: { SFriendProfile _r = _t->currentFriend();
-            if (_a[0]) *reinterpret_cast< SFriendProfile*>(_a[0]) = std::move(_r); }  break;
-        case 11: { QMenu* _r = _t->createMenu((*reinterpret_cast< const SFriendProfile(*)>(_a[1])));
+        case 5: _t->init(); break;
+        case 6: _t->initComboBoxStatus(); break;
+        case 7: _t->retranslate(); break;
+        case 8: _t->updateIcons(); break;
+        case 9: { FriendsModel::item _r = _t->currentFriend();
+            if (_a[0]) *reinterpret_cast< FriendsModel::item*>(_a[0]) = std::move(_r); }  break;
+        case 10: { QMenu* _r = _t->createMenu((*reinterpret_cast< const FriendsModel::item(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< QMenu**>(_a[0]) = std::move(_r); }  break;
-        case 12: _t->goToCurrentProfile(); break;
-        case 13: _t->lineEditName_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 14: _t->buttonFind_Clicked(); break;
-        case 15: _t->comboBoxStatus_Activated((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 16: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 11: _t->goToCurrentProfile(); break;
+        case 12: _t->lineEditName_TextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 13: _t->buttonFind_Clicked(); break;
+        case 14: _t->comboBoxStatus_Activated((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 15: _t->checkBoxFavorites_StateChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -188,7 +183,7 @@ const QMetaObject FormFriends::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormFriends_t
 , QtPrivate::TypeAndForceComplete<FormFriends, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<SFriendProfile, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const SFriendProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bool, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<FriendsModel::item, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<const FriendsModel::item &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
 >,
@@ -215,13 +210,13 @@ int FormFriends::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 16;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 17)
+        if (_id < 16)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 17;
+        _id -= 16;
     }
     return _id;
 }

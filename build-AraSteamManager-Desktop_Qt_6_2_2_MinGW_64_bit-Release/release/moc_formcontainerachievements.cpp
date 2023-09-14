@@ -25,7 +25,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormContainerAchievements_t {
     const uint offsetsAndSize[26];
-    char stringdata0[169];
+    char stringdata0[175];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormContainerAchievements_t, stringdata0) + ofs), len 
@@ -37,19 +37,19 @@ QT_MOC_LITERAL(47, 0), // ""
 QT_MOC_LITERAL(48, 5), // "index"
 QT_MOC_LITERAL(54, 18), // "addFormAchievement"
 QT_MOC_LITERAL(73, 8), // "SProfile"
-QT_MOC_LITERAL(82, 3), // "ids"
-QT_MOC_LITERAL(86, 5), // "SGame"
-QT_MOC_LITERAL(92, 4), // "game"
-QT_MOC_LITERAL(97, 4), // "show"
-QT_MOC_LITERAL(102, 10), // "closeEvent"
-QT_MOC_LITERAL(113, 12), // "QCloseEvent*"
-QT_MOC_LITERAL(126, 42) // "on_TabWidgetAchievements_tabC..."
+QT_MOC_LITERAL(82, 9), // "profileId"
+QT_MOC_LITERAL(92, 5), // "SGame"
+QT_MOC_LITERAL(98, 4), // "game"
+QT_MOC_LITERAL(103, 4), // "show"
+QT_MOC_LITERAL(108, 10), // "closeEvent"
+QT_MOC_LITERAL(119, 12), // "QCloseEvent*"
+QT_MOC_LITERAL(132, 42) // "on_TabWidgetAchievements_tabC..."
 
     },
     "FormContainerAchievements\0"
     "s_removeAchievements\0\0index\0"
-    "addFormAchievement\0SProfile\0ids\0SGame\0"
-    "game\0show\0closeEvent\0QCloseEvent*\0"
+    "addFormAchievement\0SProfile\0profileId\0"
+    "SGame\0game\0show\0closeEvent\0QCloseEvent*\0"
     "on_TabWidgetAchievements_tabCloseRequested"
 };
 #undef QT_MOC_LITERAL

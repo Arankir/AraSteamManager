@@ -24,8 +24,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FormGroups_t {
-    const uint offsetsAndSize[42];
-    char stringdata0[220];
+    const uint offsetsAndSize[36];
+    char stringdata0[170];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FormGroups_t, stringdata0) + ofs), len 
@@ -38,28 +38,24 @@ QT_MOC_LITERAL(27, 4), // "init"
 QT_MOC_LITERAL(32, 10), // "createMenu"
 QT_MOC_LITERAL(43, 6), // "QMenu*"
 QT_MOC_LITERAL(50, 16), // "QListWidgetItem*"
-QT_MOC_LITERAL(67, 5), // "aItem"
-QT_MOC_LITERAL(73, 11), // "removeGroup"
-QT_MOC_LITERAL(85, 6), // "initUi"
-QT_MOC_LITERAL(92, 5), // "clear"
-QT_MOC_LITERAL(98, 8), // "updateUi"
-QT_MOC_LITERAL(107, 6), // "cancel"
-QT_MOC_LITERAL(114, 5), // "apply"
-QT_MOC_LITERAL(120, 13), // "cancelClicked"
-QT_MOC_LITERAL(134, 12), // "applyClicked"
-QT_MOC_LITERAL(147, 11), // "retranslate"
-QT_MOC_LITERAL(159, 11), // "updateIcons"
-QT_MOC_LITERAL(171, 14), // "updateSettings"
-QT_MOC_LITERAL(186, 23), // "QFlags<changedSettings>"
-QT_MOC_LITERAL(210, 9) // "aSettings"
+QT_MOC_LITERAL(67, 4), // "item"
+QT_MOC_LITERAL(72, 11), // "removeGroup"
+QT_MOC_LITERAL(84, 6), // "initUi"
+QT_MOC_LITERAL(91, 5), // "clear"
+QT_MOC_LITERAL(97, 8), // "updateUi"
+QT_MOC_LITERAL(106, 6), // "cancel"
+QT_MOC_LITERAL(113, 5), // "apply"
+QT_MOC_LITERAL(119, 13), // "cancelClicked"
+QT_MOC_LITERAL(133, 12), // "applyClicked"
+QT_MOC_LITERAL(146, 11), // "retranslate"
+QT_MOC_LITERAL(158, 11) // "updateIcons"
 
     },
     "FormGroups\0s_updateGroups\0\0init\0"
     "createMenu\0QMenu*\0QListWidgetItem*\0"
-    "aItem\0removeGroup\0initUi\0clear\0updateUi\0"
+    "item\0removeGroup\0initUi\0clear\0updateUi\0"
     "cancel\0apply\0cancelClicked\0applyClicked\0"
-    "retranslate\0updateIcons\0updateSettings\0"
-    "QFlags<changedSettings>\0aSettings"
+    "retranslate\0updateIcons"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +65,7 @@ static const uint qt_meta_data_FormGroups[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -77,22 +73,21 @@ static const uint qt_meta_data_FormGroups[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   98,    2, 0x06,    1 /* Public */,
+       1,    0,   92,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    0,   99,    2, 0x09,    2 /* Protected */,
-       4,    1,  100,    2, 0x09,    3 /* Protected */,
-       8,    1,  103,    2, 0x09,    5 /* Protected */,
-       9,    0,  106,    2, 0x09,    7 /* Protected */,
-      10,    0,  107,    2, 0x09,    8 /* Protected */,
-      11,    0,  108,    2, 0x09,    9 /* Protected */,
-      12,    0,  109,    2, 0x09,   10 /* Protected */,
-      13,    0,  110,    2, 0x09,   11 /* Protected */,
-      14,    0,  111,    2, 0x09,   12 /* Protected */,
-      15,    0,  112,    2, 0x09,   13 /* Protected */,
-      16,    0,  113,    2, 0x09,   14 /* Protected */,
-      17,    0,  114,    2, 0x09,   15 /* Protected */,
-      18,    1,  115,    2, 0x09,   16 /* Protected */,
+       3,    0,   93,    2, 0x09,    2 /* Protected */,
+       4,    1,   94,    2, 0x09,    3 /* Protected */,
+       8,    1,   97,    2, 0x09,    5 /* Protected */,
+       9,    0,  100,    2, 0x09,    7 /* Protected */,
+      10,    0,  101,    2, 0x09,    8 /* Protected */,
+      11,    0,  102,    2, 0x09,    9 /* Protected */,
+      12,    0,  103,    2, 0x09,   10 /* Protected */,
+      13,    0,  104,    2, 0x09,   11 /* Protected */,
+      14,    0,  105,    2, 0x09,   12 /* Protected */,
+      15,    0,  106,    2, 0x09,   13 /* Protected */,
+      16,    0,  107,    2, 0x09,   14 /* Protected */,
+      17,    0,  108,    2, 0x09,   15 /* Protected */,
 
  // signals: parameters
     QMetaType::Void,
@@ -110,7 +105,6 @@ static const uint qt_meta_data_FormGroups[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 19,   20,
 
        0        // eod
 };
@@ -135,7 +129,6 @@ void FormGroups::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->applyClicked(); break;
         case 11: _t->retranslate(); break;
         case 12: _t->updateIcons(); break;
-        case 13: _t->updateSettings((*reinterpret_cast< QFlags<changedSettings>(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -158,7 +151,7 @@ const QMetaObject FormGroups::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FormGroups_t
 , QtPrivate::TypeAndForceComplete<FormGroups, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QFlags<changedSettings>, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QMenu *, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QListWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -185,13 +178,13 @@ int FormGroups::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 14)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 14;
+        _id -= 13;
     }
     return _id;
 }

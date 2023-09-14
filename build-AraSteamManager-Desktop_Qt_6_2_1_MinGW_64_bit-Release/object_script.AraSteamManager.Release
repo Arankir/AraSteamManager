@@ -9,7 +9,6 @@ release/images.o
 release/settings.o
 release/theme.o
 release/groupsgames.o
-release/hiddengames.o
 release/requestdata.o
 release/requestimage.o
 release/sapi.o
@@ -25,7 +24,7 @@ release/threadloading.o
 release/form.o
 release/formprofilesbrowser.o
 release/colorpicker.o
-release/formhiddengames.o
+release/formcommonsettings.o
 release/formimportexport.o
 release/formfrienditemgraph.o
 release/formcomments.o
@@ -89,7 +88,7 @@ release/moc_threadloading.o
 release/moc_form.o
 release/moc_formprofilesbrowser.o
 release/moc_colorpicker.o
-release/moc_formhiddengames.o
+release/moc_formcommonsettings.o
 release/moc_formimportexport.o
 release/moc_formfrienditemgraph.o
 release/moc_formcomments.o

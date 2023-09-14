@@ -9,7 +9,6 @@ debug/images.o
 debug/settings.o
 debug/theme.o
 debug/groupsgames.o
-debug/hiddengames.o
 debug/requestdata.o
 debug/requestimage.o
 debug/sapi.o
@@ -25,7 +24,7 @@ debug/threadloading.o
 debug/form.o
 debug/formprofilesbrowser.o
 debug/colorpicker.o
-debug/formhiddengames.o
+debug/formcommonsettings.o
 debug/formimportexport.o
 debug/formfrienditemgraph.o
 debug/formcomments.o
@@ -89,7 +88,7 @@ debug/moc_threadloading.o
 debug/moc_form.o
 debug/moc_formprofilesbrowser.o
 debug/moc_colorpicker.o
-debug/moc_formhiddengames.o
+debug/moc_formcommonsettings.o
 debug/moc_formimportexport.o
 debug/moc_formfrienditemgraph.o
 debug/moc_formcomments.o

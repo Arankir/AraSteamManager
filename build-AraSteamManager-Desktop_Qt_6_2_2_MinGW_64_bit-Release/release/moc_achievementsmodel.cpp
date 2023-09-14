@@ -92,7 +92,7 @@ void AchievementsModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         (void)_t;
         switch (_id) {
         case 0: _t->s_finished(); break;
-        case 1: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2])),(*reinterpret_cast< const int(*)>(_a[3]))); break;
+        case 1: _t->s_progress((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
         case 2: _t->updateComments(); break;
         case 3: _t->sort((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< Qt::SortOrder(*)>(_a[2]))); break;
         case 4: _t->sort((*reinterpret_cast< int(*)>(_a[1]))); break;
@@ -108,7 +108,7 @@ void AchievementsModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
             }
         }
         {
-            using _t = void (AchievementsModel::*)(const QString & , const int & , const int & );
+            using _t = void (AchievementsModel::*)(const QString & , int , int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AchievementsModel::s_progress)) {
                 *result = 1;
                 return;
@@ -124,7 +124,7 @@ const QMetaObject AchievementsModel::staticMetaObject = { {
     qt_static_metacall,
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_AchievementsModel_t
-, QtPrivate::TypeAndForceComplete<AchievementsModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>, QtPrivate::TypeAndForceComplete<const int &, std::false_type>
+, QtPrivate::TypeAndForceComplete<AchievementsModel, std::true_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 , QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<Qt::SortOrder, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
@@ -170,165 +170,57 @@ void AchievementsModel::s_finished()
 }
 
 // SIGNAL 1
-void AchievementsModel::s_progress(const QString & _t1, const int & _t2, const int & _t3)
+void AchievementsModel::s_progress(const QString & _t1, int _t2, int _t3)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
-struct qt_meta_stringdata_ProxyModelAchievements_t {
-    const uint offsetsAndSize[26];
-    char stringdata0[153];
-};
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(offsetof(qt_meta_stringdata_ProxyModelAchievements_t, stringdata0) + ofs), len 
-static const qt_meta_stringdata_ProxyModelAchievements_t qt_meta_stringdata_ProxyModelAchievements = {
-    {
-QT_MOC_LITERAL(0, 22), // "ProxyModelAchievements"
-QT_MOC_LITERAL(23, 7), // "setName"
-QT_MOC_LITERAL(31, 0), // ""
-QT_MOC_LITERAL(32, 7), // "newName"
-QT_MOC_LITERAL(40, 10), // "setReached"
-QT_MOC_LITERAL(51, 10), // "newReached"
-QT_MOC_LITERAL(62, 13), // "setCategories"
-QT_MOC_LITERAL(76, 16), // "CategoriesFilter"
-QT_MOC_LITERAL(93, 13), // "newCategories"
-QT_MOC_LITERAL(107, 13), // "getCategories"
-QT_MOC_LITERAL(121, 12), // "setFavorites"
-QT_MOC_LITERAL(134, 12), // "newFavorites"
-QT_MOC_LITERAL(147, 5) // "clear"
-
-    },
-    "ProxyModelAchievements\0setName\0\0newName\0"
-    "setReached\0newReached\0setCategories\0"
-    "CategoriesFilter\0newCategories\0"
-    "getCategories\0setFavorites\0newFavorites\0"
-    "clear"
-};
-#undef QT_MOC_LITERAL
-
-static const uint qt_meta_data_ProxyModelAchievements[] = {
-
- // content:
-      10,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       6,   14, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
-
- // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   50,    2, 0x0a,    1 /* Public */,
-       4,    1,   53,    2, 0x0a,    3 /* Public */,
-       6,    1,   56,    2, 0x0a,    5 /* Public */,
-       9,    0,   59,    2, 0x10a,    7 /* Public | MethodIsConst  */,
-      10,    1,   60,    2, 0x0a,    8 /* Public */,
-      12,    0,   63,    2, 0x0a,   10 /* Public */,
-
- // slots: parameters
-    QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::Int,    5,
-    QMetaType::Void, 0x80000000 | 7,    8,
-    0x80000000 | 7,
-    QMetaType::Void, QMetaType::QStringList,   11,
-    QMetaType::Void,
-
-       0        // eod
-};
-
-void ProxyModelAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
-{
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<ProxyModelAchievements *>(_o);
-        (void)_t;
-        switch (_id) {
-        case 0: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->setReached((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->setCategories((*reinterpret_cast< const CategoriesFilter(*)>(_a[1]))); break;
-        case 3: { CategoriesFilter _r = _t->getCategories();
-            if (_a[0]) *reinterpret_cast< CategoriesFilter*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->setFavorites((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
-        case 5: _t->clear(); break;
-        default: ;
-        }
-    }
-}
-
-const QMetaObject ProxyModelAchievements::staticMetaObject = { {
-    QMetaObject::SuperData::link<QSortFilterProxyModel::staticMetaObject>(),
-    qt_meta_stringdata_ProxyModelAchievements.offsetsAndSize,
-    qt_meta_data_ProxyModelAchievements,
-    qt_static_metacall,
-    nullptr,
-qt_incomplete_metaTypeArray<qt_meta_stringdata_ProxyModelAchievements_t
-, QtPrivate::TypeAndForceComplete<ProxyModelAchievements, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const CategoriesFilter &, std::false_type>, QtPrivate::TypeAndForceComplete<CategoriesFilter, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-
-
->,
-    nullptr
-} };
-
-
-const QMetaObject *ProxyModelAchievements::metaObject() const
-{
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
-}
-
-void *ProxyModelAchievements::qt_metacast(const char *_clname)
-{
-    if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ProxyModelAchievements.stringdata0))
-        return static_cast<void*>(this);
-    return QSortFilterProxyModel::qt_metacast(_clname);
-}
-
-int ProxyModelAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
-{
-    _id = QSortFilterProxyModel::qt_metacall(_c, _id, _a);
-    if (_id < 0)
-        return _id;
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
-    }
-    return _id;
-}
 struct qt_meta_stringdata_FilterModelAchievements_t {
-    const uint offsetsAndSize[26];
-    char stringdata0[154];
+    const uint offsetsAndSize[54];
+    char stringdata0[320];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_FilterModelAchievements_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_FilterModelAchievements_t qt_meta_stringdata_FilterModelAchievements = {
     {
 QT_MOC_LITERAL(0, 23), // "FilterModelAchievements"
-QT_MOC_LITERAL(24, 7), // "setName"
-QT_MOC_LITERAL(32, 0), // ""
-QT_MOC_LITERAL(33, 7), // "newName"
-QT_MOC_LITERAL(41, 10), // "setReached"
-QT_MOC_LITERAL(52, 10), // "newReached"
-QT_MOC_LITERAL(63, 13), // "setCategories"
-QT_MOC_LITERAL(77, 16), // "CategoriesFilter"
-QT_MOC_LITERAL(94, 13), // "newCategories"
-QT_MOC_LITERAL(108, 13), // "getCategories"
-QT_MOC_LITERAL(122, 12), // "setFavorites"
-QT_MOC_LITERAL(135, 12), // "newFavorites"
-QT_MOC_LITERAL(148, 5) // "clear"
+QT_MOC_LITERAL(24, 10), // "addProfile"
+QT_MOC_LITERAL(35, 0), // ""
+QT_MOC_LITERAL(36, 8), // "SProfile"
+QT_MOC_LITERAL(45, 7), // "profile"
+QT_MOC_LITERAL(53, 10), // "getProfile"
+QT_MOC_LITERAL(64, 5), // "index"
+QT_MOC_LITERAL(70, 13), // "removeProfile"
+QT_MOC_LITERAL(84, 7), // "setName"
+QT_MOC_LITERAL(92, 7), // "newName"
+QT_MOC_LITERAL(100, 10), // "setReached"
+QT_MOC_LITERAL(111, 10), // "newReached"
+QT_MOC_LITERAL(122, 16), // "setReachedFriend"
+QT_MOC_LITERAL(139, 9), // "ProfileID"
+QT_MOC_LITERAL(149, 9), // "profileId"
+QT_MOC_LITERAL(159, 13), // "setCategories"
+QT_MOC_LITERAL(173, 16), // "CategoriesFilter"
+QT_MOC_LITERAL(190, 13), // "newCategories"
+QT_MOC_LITERAL(204, 13), // "getCategories"
+QT_MOC_LITERAL(218, 12), // "setFavorites"
+QT_MOC_LITERAL(231, 12), // "newFavorites"
+QT_MOC_LITERAL(244, 5), // "clear"
+QT_MOC_LITERAL(250, 11), // "addCategory"
+QT_MOC_LITERAL(262, 9), // "Category*"
+QT_MOC_LITERAL(272, 9), // "aCategory"
+QT_MOC_LITERAL(282, 14), // "removeCategory"
+QT_MOC_LITERAL(297, 22) // "updateCategoriesFilter"
 
     },
-    "FilterModelAchievements\0setName\0\0"
-    "newName\0setReached\0newReached\0"
-    "setCategories\0CategoriesFilter\0"
+    "FilterModelAchievements\0addProfile\0\0"
+    "SProfile\0profile\0getProfile\0index\0"
+    "removeProfile\0setName\0newName\0setReached\0"
+    "newReached\0setReachedFriend\0ProfileID\0"
+    "profileId\0setCategories\0CategoriesFilter\0"
     "newCategories\0getCategories\0setFavorites\0"
-    "newFavorites\0clear"
+    "newFavorites\0clear\0addCategory\0Category*\0"
+    "aCategory\0removeCategory\0"
+    "updateCategoriesFilter"
 };
 #undef QT_MOC_LITERAL
 
@@ -338,7 +230,7 @@ static const uint qt_meta_data_FilterModelAchievements[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -346,19 +238,33 @@ static const uint qt_meta_data_FilterModelAchievements[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   50,    2, 0x0a,    1 /* Public */,
-       4,    1,   53,    2, 0x0a,    3 /* Public */,
-       6,    1,   56,    2, 0x0a,    5 /* Public */,
-       9,    0,   59,    2, 0x10a,    7 /* Public | MethodIsConst  */,
-      10,    1,   60,    2, 0x0a,    8 /* Public */,
-      12,    0,   63,    2, 0x0a,   10 /* Public */,
+       1,    1,   92,    2, 0x0a,    1 /* Public */,
+       5,    1,   95,    2, 0x0a,    3 /* Public */,
+       7,    1,   98,    2, 0x0a,    5 /* Public */,
+       8,    1,  101,    2, 0x0a,    7 /* Public */,
+      10,    1,  104,    2, 0x0a,    9 /* Public */,
+      12,    2,  107,    2, 0x0a,   11 /* Public */,
+      15,    1,  112,    2, 0x0a,   14 /* Public */,
+      18,    0,  115,    2, 0x10a,   16 /* Public | MethodIsConst  */,
+      19,    1,  116,    2, 0x0a,   17 /* Public */,
+      21,    0,  119,    2, 0x0a,   19 /* Public */,
+      22,    1,  120,    2, 0x0a,   20 /* Public */,
+      25,    1,  123,    2, 0x0a,   22 /* Public */,
+      26,    0,  126,    2, 0x08,   24 /* Private */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void, QMetaType::Int,    5,
-    QMetaType::Void, 0x80000000 | 7,    8,
-    0x80000000 | 7,
-    QMetaType::Void, QMetaType::QStringList,   11,
+    QMetaType::Int, 0x80000000 | 3,    4,
+    0x80000000 | 3, QMetaType::Int,    6,
+    QMetaType::Void, 0x80000000 | 3,    4,
+    QMetaType::Void, QMetaType::QString,    9,
+    QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 13,   11,   14,
+    QMetaType::Void, 0x80000000 | 16,   17,
+    0x80000000 | 16,
+    QMetaType::Void, QMetaType::QStringList,   20,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 23,   24,
+    QMetaType::Void, 0x80000000 | 23,   24,
     QMetaType::Void,
 
        0        // eod
@@ -370,13 +276,22 @@ void FilterModelAchievements::qt_static_metacall(QObject *_o, QMetaObject::Call 
         auto *_t = static_cast<FilterModelAchievements *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->setReached((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->setCategories((*reinterpret_cast< const CategoriesFilter(*)>(_a[1]))); break;
-        case 3: { CategoriesFilter _r = _t->getCategories();
+        case 0: { int _r = _t->addProfile((*reinterpret_cast< const SProfile(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 1: { SProfile _r = _t->getProfile((*reinterpret_cast< int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< SProfile*>(_a[0]) = std::move(_r); }  break;
+        case 2: _t->removeProfile((*reinterpret_cast< const SProfile(*)>(_a[1]))); break;
+        case 3: _t->setName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: _t->setReached((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->setReachedFriend((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const ProfileID(*)>(_a[2]))); break;
+        case 6: _t->setCategories((*reinterpret_cast< const CategoriesFilter(*)>(_a[1]))); break;
+        case 7: { CategoriesFilter _r = _t->getCategories();
             if (_a[0]) *reinterpret_cast< CategoriesFilter*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->setFavorites((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
-        case 5: _t->clear(); break;
+        case 8: _t->setFavorites((*reinterpret_cast< const QStringList(*)>(_a[1]))); break;
+        case 9: _t->clear(); break;
+        case 10: _t->addCategory((*reinterpret_cast< Category*(*)>(_a[1]))); break;
+        case 11: _t->removeCategory((*reinterpret_cast< Category*(*)>(_a[1]))); break;
+        case 12: _t->updateCategoriesFilter(); break;
         default: ;
         }
     }
@@ -390,7 +305,7 @@ const QMetaObject FilterModelAchievements::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_FilterModelAchievements_t
 , QtPrivate::TypeAndForceComplete<FilterModelAchievements, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const CategoriesFilter &, std::false_type>, QtPrivate::TypeAndForceComplete<CategoriesFilter, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<SProfile, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const SProfile &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<const ProfileID &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const CategoriesFilter &, std::false_type>, QtPrivate::TypeAndForceComplete<CategoriesFilter, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QStringList &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<Category *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -417,13 +332,13 @@ int FilterModelAchievements::qt_metacall(QMetaObject::Call _c, int _id, void **_
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
+        _id -= 13;
     }
     return _id;
 }

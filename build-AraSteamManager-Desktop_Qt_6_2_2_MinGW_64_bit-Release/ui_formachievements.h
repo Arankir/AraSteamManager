@@ -16,17 +16,16 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSplitter>
-#include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableView>
+#include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QTreeView>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "forms/achievements/formcategoriesedit.h"
-#include "forms/achievements/formcategoriestree.h"
-#include "forms/achievements/formfriendscompare.h"
-#include "forms/widgets/formreachedfilter.h"
 #include "subWidgets/lineEdit/mylineedit.h"
+#include "subWidgets/tables/freezetablewidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -34,34 +33,43 @@ class Ui_FormAchievements
 {
 public:
     QVBoxLayout *verticalLayout;
-    QSplitter *splitter;
+    QSplitter *splitterFilterAchievements;
     QFrame *FrameFilter;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_5;
     QLabel *labelProfileAvatar;
     QLabel *LabelTotalPersent;
     QPushButton *ButtonUpdate;
-    FormReachedFilter *FilterMyProfile;
     QHBoxLayout *horizontalLayout_6;
     QCheckBox *CheckBoxFavorites;
     QPushButton *ButtonGuides;
     QHBoxLayout *horizontalLayout_7;
     MyLineEdit *LineEditNameAchievements;
     QPushButton *ButtonFindAchievement;
-    FormCategoriesTree *TreeWidgetCategories;
+    QTreeView *TreeWidgetCategories;
     QHBoxLayout *horizontalLayout_2;
     QLabel *LabelGameOnline;
     QLabel *LabelGameOnlineValue;
-    QTabWidget *TabWidget;
-    QWidget *tabStandart;
+    QStackedWidget *stackedWidget;
+    QWidget *page;
+    QVBoxLayout *verticalLayout_5;
+    QSplitter *splitterAchievementsFriends;
+    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout_2;
+    FreezeTableWidget *TableViewAchievements;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_4;
-    QTableView *TableViewMyAchievements;
-    QWidget *tabEditCategory;
+    QHBoxLayout *horizontalLayout_8;
+    MyLineEdit *lineEditFindProfile;
+    QPushButton *ButtonAddProfile;
     QHBoxLayout *horizontalLayout;
+    MyLineEdit *lineEditFindFriend;
+    QPushButton *ButtonFindFriend;
+    QCheckBox *checkBoxOnlyWithGame;
+    QListView *ListViewFriends;
+    QWidget *page_2;
+    QVBoxLayout *verticalLayout_6;
     FormCategoriesEdit *CategoriesEdit;
-    QWidget *tabCompare;
-    QHBoxLayout *horizontalLayout_4;
-    FormFriendsCompare *FriendsCompare;
 
     void setupUi(QWidget *FormAchievements)
     {
@@ -70,10 +78,10 @@ public:
         FormAchievements->resize(894, 622);
         verticalLayout = new QVBoxLayout(FormAchievements);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        splitter = new QSplitter(FormAchievements);
-        splitter->setObjectName(QString::fromUtf8("splitter"));
-        splitter->setOrientation(Qt::Horizontal);
-        FrameFilter = new QFrame(splitter);
+        splitterFilterAchievements = new QSplitter(FormAchievements);
+        splitterFilterAchievements->setObjectName(QString::fromUtf8("splitterFilterAchievements"));
+        splitterFilterAchievements->setOrientation(Qt::Horizontal);
+        FrameFilter = new QFrame(splitterFilterAchievements);
         FrameFilter->setObjectName(QString::fromUtf8("FrameFilter"));
         FrameFilter->setFrameShape(QFrame::StyledPanel);
         FrameFilter->setFrameShadow(QFrame::Raised);
@@ -113,20 +121,15 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_5);
 
-        FilterMyProfile = new FormReachedFilter(FrameFilter);
-        FilterMyProfile->setObjectName(QString::fromUtf8("FilterMyProfile"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(FilterMyProfile->sizePolicy().hasHeightForWidth());
-        FilterMyProfile->setSizePolicy(sizePolicy2);
-
-        verticalLayout_3->addWidget(FilterMyProfile);
-
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         CheckBoxFavorites = new QCheckBox(FrameFilter);
         CheckBoxFavorites->setObjectName(QString::fromUtf8("CheckBoxFavorites"));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(CheckBoxFavorites->sizePolicy().hasHeightForWidth());
+        CheckBoxFavorites->setSizePolicy(sizePolicy2);
 
         horizontalLayout_6->addWidget(CheckBoxFavorites);
 
@@ -144,11 +147,8 @@ public:
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
         LineEditNameAchievements = new MyLineEdit(FrameFilter);
         LineEditNameAchievements->setObjectName(QString::fromUtf8("LineEditNameAchievements"));
-        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(LineEditNameAchievements->sizePolicy().hasHeightForWidth());
-        LineEditNameAchievements->setSizePolicy(sizePolicy3);
+        sizePolicy2.setHeightForWidth(LineEditNameAchievements->sizePolicy().hasHeightForWidth());
+        LineEditNameAchievements->setSizePolicy(sizePolicy2);
 
         horizontalLayout_7->addWidget(LineEditNameAchievements);
 
@@ -163,14 +163,13 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_7);
 
-        TreeWidgetCategories = new FormCategoriesTree(FrameFilter);
+        TreeWidgetCategories = new QTreeView(FrameFilter);
         TreeWidgetCategories->setObjectName(QString::fromUtf8("TreeWidgetCategories"));
-        QSizePolicy sizePolicy4(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(TreeWidgetCategories->sizePolicy().hasHeightForWidth());
-        TreeWidgetCategories->setSizePolicy(sizePolicy4);
-        TreeWidgetCategories->setWordWrap(true);
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(TreeWidgetCategories->sizePolicy().hasHeightForWidth());
+        TreeWidgetCategories->setSizePolicy(sizePolicy3);
 
         verticalLayout_3->addWidget(TreeWidgetCategories);
 
@@ -201,47 +200,114 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
-        splitter->addWidget(FrameFilter);
-        TabWidget = new QTabWidget(splitter);
-        TabWidget->setObjectName(QString::fromUtf8("TabWidget"));
-        tabStandart = new QWidget();
-        tabStandart->setObjectName(QString::fromUtf8("tabStandart"));
-        verticalLayout_4 = new QVBoxLayout(tabStandart);
+        splitterFilterAchievements->addWidget(FrameFilter);
+        stackedWidget = new QStackedWidget(splitterFilterAchievements);
+        stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(stackedWidget->sizePolicy().hasHeightForWidth());
+        stackedWidget->setSizePolicy(sizePolicy4);
+        page = new QWidget();
+        page->setObjectName(QString::fromUtf8("page"));
+        verticalLayout_5 = new QVBoxLayout(page);
+        verticalLayout_5->setSpacing(0);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        splitterAchievementsFriends = new QSplitter(page);
+        splitterAchievementsFriends->setObjectName(QString::fromUtf8("splitterAchievementsFriends"));
+        splitterAchievementsFriends->setOrientation(Qt::Horizontal);
+        layoutWidget = new QWidget(splitterAchievementsFriends);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        TableViewAchievements = new FreezeTableWidget(layoutWidget);
+        TableViewAchievements->setObjectName(QString::fromUtf8("TableViewAchievements"));
+        QSizePolicy sizePolicy5(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(TableViewAchievements->sizePolicy().hasHeightForWidth());
+        TableViewAchievements->setSizePolicy(sizePolicy5);
+
+        verticalLayout_2->addWidget(TableViewAchievements);
+
+        splitterAchievementsFriends->addWidget(layoutWidget);
+        layoutWidget1 = new QWidget(splitterAchievementsFriends);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget1);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        TableViewMyAchievements = new QTableView(tabStandart);
-        TableViewMyAchievements->setObjectName(QString::fromUtf8("TableViewMyAchievements"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        lineEditFindProfile = new MyLineEdit(layoutWidget1);
+        lineEditFindProfile->setObjectName(QString::fromUtf8("lineEditFindProfile"));
+        sizePolicy2.setHeightForWidth(lineEditFindProfile->sizePolicy().hasHeightForWidth());
+        lineEditFindProfile->setSizePolicy(sizePolicy2);
 
-        verticalLayout_4->addWidget(TableViewMyAchievements);
+        horizontalLayout_8->addWidget(lineEditFindProfile);
 
-        TabWidget->addTab(tabStandart, QString());
-        tabEditCategory = new QWidget();
-        tabEditCategory->setObjectName(QString::fromUtf8("tabEditCategory"));
-        horizontalLayout = new QHBoxLayout(tabEditCategory);
+        ButtonAddProfile = new QPushButton(layoutWidget1);
+        ButtonAddProfile->setObjectName(QString::fromUtf8("ButtonAddProfile"));
+        sizePolicy1.setHeightForWidth(ButtonAddProfile->sizePolicy().hasHeightForWidth());
+        ButtonAddProfile->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_8->addWidget(ButtonAddProfile);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_8);
+
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        CategoriesEdit = new FormCategoriesEdit(tabEditCategory);
+        lineEditFindFriend = new MyLineEdit(layoutWidget1);
+        lineEditFindFriend->setObjectName(QString::fromUtf8("lineEditFindFriend"));
+
+        horizontalLayout->addWidget(lineEditFindFriend);
+
+        ButtonFindFriend = new QPushButton(layoutWidget1);
+        ButtonFindFriend->setObjectName(QString::fromUtf8("ButtonFindFriend"));
+
+        horizontalLayout->addWidget(ButtonFindFriend);
+
+
+        verticalLayout_4->addLayout(horizontalLayout);
+
+        checkBoxOnlyWithGame = new QCheckBox(layoutWidget1);
+        checkBoxOnlyWithGame->setObjectName(QString::fromUtf8("checkBoxOnlyWithGame"));
+
+        verticalLayout_4->addWidget(checkBoxOnlyWithGame);
+
+        ListViewFriends = new QListView(layoutWidget1);
+        ListViewFriends->setObjectName(QString::fromUtf8("ListViewFriends"));
+        sizePolicy3.setHeightForWidth(ListViewFriends->sizePolicy().hasHeightForWidth());
+        ListViewFriends->setSizePolicy(sizePolicy3);
+        ListViewFriends->setResizeMode(QListView::Adjust);
+
+        verticalLayout_4->addWidget(ListViewFriends);
+
+        splitterAchievementsFriends->addWidget(layoutWidget1);
+
+        verticalLayout_5->addWidget(splitterAchievementsFriends);
+
+        stackedWidget->addWidget(page);
+        page_2 = new QWidget();
+        page_2->setObjectName(QString::fromUtf8("page_2"));
+        verticalLayout_6 = new QVBoxLayout(page_2);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        CategoriesEdit = new FormCategoriesEdit(page_2);
         CategoriesEdit->setObjectName(QString::fromUtf8("CategoriesEdit"));
 
-        horizontalLayout->addWidget(CategoriesEdit);
+        verticalLayout_6->addWidget(CategoriesEdit);
 
-        TabWidget->addTab(tabEditCategory, QString());
-        tabCompare = new QWidget();
-        tabCompare->setObjectName(QString::fromUtf8("tabCompare"));
-        horizontalLayout_4 = new QHBoxLayout(tabCompare);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        FriendsCompare = new FormFriendsCompare(tabCompare);
-        FriendsCompare->setObjectName(QString::fromUtf8("FriendsCompare"));
+        stackedWidget->addWidget(page_2);
+        splitterFilterAchievements->addWidget(stackedWidget);
 
-        horizontalLayout_4->addWidget(FriendsCompare);
-
-        TabWidget->addTab(tabCompare, QString());
-        splitter->addWidget(TabWidget);
-
-        verticalLayout->addWidget(splitter);
+        verticalLayout->addWidget(splitterFilterAchievements);
 
 
         retranslateUi(FormAchievements);
 
-        TabWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(FormAchievements);
@@ -262,12 +328,12 @@ public:
         ButtonGuides->setText(QString());
         LineEditNameAchievements->setPlaceholderText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\320\265", nullptr));
         ButtonFindAchievement->setText(QString());
-        QTreeWidgetItem *___qtreewidgetitem = TreeWidgetCategories->headerItem();
-        ___qtreewidgetitem->setText(0, QCoreApplication::translate("FormAchievements", "\320\232\320\260\321\202\320\265\320\263\320\276\321\200\320\270\320\270", nullptr));
         LabelGameOnline->setText(QCoreApplication::translate("FormAchievements", "GameOnline:  ", nullptr));
-        TabWidget->setTabText(TabWidget->indexOf(tabStandart), QCoreApplication::translate("FormAchievements", " \320\241\320\262\320\276\320\270 \320\264\320\276\321\201\321\202\320\270\320\266\320\265\320\275\320\270\321\217  ", nullptr));
-        TabWidget->setTabText(TabWidget->indexOf(tabEditCategory), QCoreApplication::translate("FormAchievements", "  \320\243\320\277\321\200\320\260\320\262\320\273\320\265\320\275\320\270\320\265 \320\272\320\260\321\202\320\265\320\263\320\276\321\200\320\270\321\217\320\274\320\270  ", nullptr));
-        TabWidget->setTabText(TabWidget->indexOf(tabCompare), QCoreApplication::translate("FormAchievements", "  \320\241\321\200\320\260\320\262\320\275\320\265\320\275\320\270\320\265 \321\201 \320\264\321\200\321\203\320\267\321\214\321\217\320\274\320\270 ", nullptr));
+        lineEditFindProfile->setPlaceholderText(QCoreApplication::translate("FormAchievements", "https://steamcommunity.com/id/gabelogannewell", nullptr));
+        ButtonAddProfile->setText(QCoreApplication::translate("FormAchievements", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", nullptr));
+        lineEditFindFriend->setPlaceholderText(QCoreApplication::translate("FormAchievements", "LuckyGuy1337", nullptr));
+        ButtonFindFriend->setText(QCoreApplication::translate("FormAchievements", "\320\235\320\260\320\271\321\202\320\270", nullptr));
+        checkBoxOnlyWithGame->setText(QCoreApplication::translate("FormAchievements", "\320\242\320\276\320\273\321\214\320\272\320\276 \321\201 \320\270\320\263\321\200\320\276\320\271", nullptr));
     } // retranslateUi
 
 };

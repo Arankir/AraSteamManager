@@ -13,7 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFormLayout>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QProgressBar>
@@ -22,6 +21,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "subWidgets/collapsablewidget.h"
 #include "subWidgets/labels/labellight.h"
 #include "subWidgets/labels/labelvalue.h"
 
@@ -45,124 +45,117 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *LabelPersonaState;
     QHBoxLayout *horizontalLayout_2;
-    QVBoxLayout *verticalLayout_7;
+    QHBoxLayout *horizontalLayout_17;
     QLabel *LabelProfileStatus;
     QLabel *LabelFriendsStatus;
     QLabel *LabelGamesStatus;
-    QVBoxLayout *verticalLayout_8;
-    LabelLight *LabelProfileVisibility;
-    LabelLight *LabelFriendsVisibility;
-    LabelLight *LabelGamesVisibility;
     QFrame *FrameProfileMaximumInfo;
     QVBoxLayout *verticalLayout_14;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
-    QFormLayout *formLayout;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_18;
     LabelValue *LabellvlValue;
     QProgressBar *progressBarXp;
-    QLabel *LabelVanityUrl;
-    LabelValue *LabelVanityUrlValue;
-    QLabel *label_3;
-    LabelValue *LabelProfileIDValue;
-    QLabel *LabelProfileUrl;
-    QLabel *LabelTimeCreated;
-    LabelValue *LabelTimeCreatedValue;
-    QLabel *LabelLocCountryCode;
-    LabelValue *LabelLocCountryCodeValue;
-    QFrame *frameBans;
-    QFormLayout *formLayout_2;
-    QLabel *label_5;
-    LabelLight *LabelGameBansValue;
-    QLabel *label_8;
-    LabelLight *LabelVacBansValue;
-    QLabel *label_10;
-    LabelLight *LabelCommunityBanValue;
-    QLabel *label_12;
-    LabelLight *LabelTradeBanValue;
-    QGroupBox *groupBox_3;
-    QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout_14;
-    QHBoxLayout *horizontalLayout;
-    QLabel *label_13;
-    LabelValue *LabelSpecialBadgesValue;
-    QHBoxLayout *horizontalLayout_3;
-    QLabel *label_15;
-    LabelValue *LabelNormalBadgesValue;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_17;
-    LabelValue *LabelFoilBadgesValue;
-    QSpacerItem *horizontalSpacer_2;
-    QHBoxLayout *horizontalLayout_17;
-    QHBoxLayout *horizontalLayout_5;
-    QLabel *label_19;
-    LabelValue *LabelBadges1LvlValue;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *label_22;
-    LabelValue *LabelBadges2LvlValue;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_24;
-    LabelValue *LabelBadges3LvlValue;
-    QHBoxLayout *horizontalLayout_11;
-    QLabel *label_26;
-    LabelValue *LabelBadges4LvlValue;
-    QHBoxLayout *horizontalLayout_12;
-    QLabel *label_28;
-    LabelValue *LabelBadges5LvlValue;
-    QHBoxLayout *horizontalLayout_13;
-    QLabel *label_29;
-    LabelValue *LabelBadgesMore5LvlValue;
-    QSpacerItem *horizontalSpacer_3;
-    QLabel *label_31;
-    LabelValue *LabelTotalPlayTimeValue;
-    QLabel *LabelWindowsPlayTime;
-    LabelValue *LabelWindowsPlayTimeValue;
-    QLabel *LabelLinuxPlayTime;
-    LabelValue *LabelLinuxPlayTimeValue;
-    QLabel *LabelMacOsPlayTime;
-    LabelValue *LabelMacOsPlayTimeValue;
-    QFrame *frameGamesByPlayed;
-    QFormLayout *formLayout_6;
-    QLabel *label_39;
-    LabelValue *LabelGamesPlayed0hValue;
-    QLabel *label_41;
-    LabelValue *LabelGamesPlayed0_1hValue;
-    QLabel *label_43;
-    LabelValue *LabelGamesPlayed1_10hValue;
-    QLabel *label_45;
-    LabelValue *LabelGamesPlayed10_24hValue;
-    QLabel *label_47;
-    LabelValue *LabelGamesPlayed24_240hValue;
-    QLabel *label_49;
-    LabelValue *LabelGamesPlayed240_500hValue;
-    QLabel *label_51;
-    LabelValue *LabelGamesPlayed500_1000hValue;
-    QLabel *label_61;
-    LabelValue *LabelGamesPlayedMore1000hValue;
-    QFrame *frameProfileCustomizations;
-    QFormLayout *formLayout_7;
-    QLabel *label_53;
-    LabelValue *LabelBackgroundValue;
-    QLabel *label_55;
-    LabelValue *LabelMiniProfileValue;
-    QLabel *label_57;
-    LabelValue *LabelAvatarFrameValue;
-    QLabel *label_59;
-    LabelValue *LabelAnimatedAvatarValue;
-    QLabel *label_63;
-    LabelValue *LabelProfileCustomizationsPurchasedValue;
-    QGroupBox *groupBox_2;
-    QFormLayout *formLayout_8;
-    QLabel *label_65;
-    LabelValue *LabelProfileCustomization1LvlValue;
-    QLabel *label_67;
-    LabelValue *LabelProfileCustomization2LvlValue;
-    QLabel *label_69;
-    LabelValue *LabelProfileCustomization3LvlValue;
-    QLabel *label_2;
-    LabelValue *LabelProfileCustomizationsUpgradedValue;
-    LabelLight *LabelCommentPermission;
+    CollapsableWidget *collapsableWidgetCommon;
+    QFormLayout *layoutCommon;
+    QLabel *labelVanityUrl;
+    LabelValue *labelVanityUrlValue;
+    QLabel *label_6;
+    LabelValue *labelAccountIdValue;
+    QLabel *labelLinkValue;
+    QLabel *labelAccountCreated;
+    LabelValue *labelAccountCreatedValue;
+    QLabel *labelLanguage;
+    LabelValue *labelLanguageValue;
     LabelLight *LabelProfileState;
+    LabelLight *LabelCommentPermission;
+    CollapsableWidget *collapsableWidgetBans;
+    QFormLayout *layoutBans;
+    QLabel *label_14;
+    LabelLight *labelGameBansValue;
+    QLabel *label_16;
+    LabelLight *labelVacBansValue;
+    QLabel *label_19;
+    LabelLight *labelCommunityBanValue;
+    QLabel *label_21;
+    LabelLight *labelTradeBanValue;
+    CollapsableWidget *collapsableWidgetBadges;
+    QFormLayout *layoutBadges;
+    QHBoxLayout *horizontalLayout;
+    QLabel *labelSpecialBadges;
+    LabelValue *labelSpecialBadgesValue;
+    QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout_14;
+    QHBoxLayout *horizontalLayout_3;
+    QLabel *labelNormalBadges;
+    LabelValue *labelNormalBadgesValue;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *labelNormalLvl1;
+    LabelValue *labelNormalLvl1Value;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *labelNormalLvl2;
+    LabelValue *labelNormalLvl2Value;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *labelNormalLvl3;
+    LabelValue *labelNormalLvl3Value;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *labelNormalLvl4;
+    LabelValue *labelNormalLvl4Value;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *labelNormalLvl5;
+    LabelValue *labelNormalLvl5Value;
+    QHBoxLayout *horizontalLayout_13;
+    QLabel *labelNormalLvl5plus;
+    LabelValue *labelNormalLvl5plusValue;
+    QSpacerItem *horizontalSpacer_5;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *labelFoilBadges;
+    LabelValue *labelFoilBadgesValue;
+    QSpacerItem *horizontalSpacer_3;
+    CollapsableWidget *collapsableWidgetPlayTime;
+    QFormLayout *layoutPlayTime;
+    QLabel *labelWindowsPlayTime;
+    LabelValue *labelWindowsPlayTimeValue;
+    QLabel *labelLinuxPlayTime;
+    LabelValue *labelLinuxPlayTimeValue;
+    QLabel *labelMacOsPlayTime;
+    LabelValue *labelMacOsPlayTimeValue;
+    QLabel *labelTotalPlayTime;
+    LabelValue *labelTotalPlayTimeValue;
+    CollapsableWidget *collapsableWidgetGamesPlayTime;
+    QFormLayout *layoutGamesPlayTime;
+    QLabel *label_46;
+    LabelValue *labelPlayTime0Value;
+    QLabel *label_50;
+    LabelValue *labelPlayTime0_1Value;
+    QLabel *label_48;
+    LabelValue *labelPlayTime1_10Value;
+    QLabel *label_44;
+    LabelValue *labelPlayTime10_24Value;
+    QLabel *label_47;
+    LabelValue *labelPlayTime24_240Value;
+    QLabel *label_41;
+    LabelValue *labelPlayTime240_500Value;
+    QLabel *label_45;
+    LabelValue *labelPlayTime500_1000Value;
+    QLabel *label_43;
+    LabelValue *labelPlayTime1000plusValue;
+    CollapsableWidget *collapsableWidgetCustomizations;
+    QFormLayout *layoutCustomizations;
+    QLabel *label_55;
+    LabelValue *labelCustomizationBackgroundValue;
+    QLabel *label_56;
+    QLabel *label_57;
+    QLabel *label_58;
+    QLabel *label_59;
+    QLabel *label_60;
+    LabelValue *labelCustomizationMiniProfileValue;
+    LabelValue *labelCustomizationAvatarFrameValue;
+    LabelValue *labelCustomizationAnimatedAvatarValue;
+    LabelValue *labelCustomizationPointsPurchasesValue;
+    LabelValue *labelCustomizationPointsUpgradesValue;
     QFrame *FrameProfileButtons;
     QHBoxLayout *horizontalLayout_16;
     QLabel *LabelAvatarMinimize;
@@ -177,13 +170,18 @@ public:
     {
         if (FormProfile->objectName().isEmpty())
             FormProfile->setObjectName(QString::fromUtf8("FormProfile"));
-        FormProfile->resize(1196, 893);
+        FormProfile->resize(723, 409);
         verticalLayout_3 = new QVBoxLayout(FormProfile);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         FrameProfileBaseInfo = new QFrame(FormProfile);
         FrameProfileBaseInfo->setObjectName(QString::fromUtf8("FrameProfileBaseInfo"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(FrameProfileBaseInfo->sizePolicy().hasHeightForWidth());
+        FrameProfileBaseInfo->setSizePolicy(sizePolicy);
         FrameProfileBaseInfo->setFrameShape(QFrame::StyledPanel);
         FrameProfileBaseInfo->setFrameShadow(QFrame::Raised);
         horizontalLayout_15 = new QHBoxLayout(FrameProfileBaseInfo);
@@ -221,11 +219,11 @@ public:
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
         LabelRealName = new QLabel(FrameProfileBaseInfo);
         LabelRealName->setObjectName(QString::fromUtf8("LabelRealName"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(LabelRealName->sizePolicy().hasHeightForWidth());
-        LabelRealName->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(LabelRealName->sizePolicy().hasHeightForWidth());
+        LabelRealName->setSizePolicy(sizePolicy1);
         QFont font1;
         font1.setPointSize(10);
         LabelRealName->setFont(font1);
@@ -253,11 +251,11 @@ public:
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         LabelPersonaState = new QLabel(FrameProfileBaseInfo);
         LabelPersonaState->setObjectName(QString::fromUtf8("LabelPersonaState"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(LabelPersonaState->sizePolicy().hasHeightForWidth());
-        LabelPersonaState->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(LabelPersonaState->sizePolicy().hasHeightForWidth());
+        LabelPersonaState->setSizePolicy(sizePolicy2);
         LabelPersonaState->setFont(font1);
         LabelPersonaState->setText(QString::fromUtf8("PersonaState"));
         LabelPersonaState->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
@@ -273,57 +271,28 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        horizontalLayout_17 = new QHBoxLayout();
+        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
         LabelProfileStatus = new QLabel(FrameProfileBaseInfo);
         LabelProfileStatus->setObjectName(QString::fromUtf8("LabelProfileStatus"));
         LabelProfileStatus->setText(QString::fromUtf8("SP"));
 
-        verticalLayout_7->addWidget(LabelProfileStatus);
+        horizontalLayout_17->addWidget(LabelProfileStatus);
 
         LabelFriendsStatus = new QLabel(FrameProfileBaseInfo);
         LabelFriendsStatus->setObjectName(QString::fromUtf8("LabelFriendsStatus"));
         LabelFriendsStatus->setText(QString::fromUtf8("SF"));
 
-        verticalLayout_7->addWidget(LabelFriendsStatus);
+        horizontalLayout_17->addWidget(LabelFriendsStatus);
 
         LabelGamesStatus = new QLabel(FrameProfileBaseInfo);
         LabelGamesStatus->setObjectName(QString::fromUtf8("LabelGamesStatus"));
         LabelGamesStatus->setText(QString::fromUtf8("SG"));
 
-        verticalLayout_7->addWidget(LabelGamesStatus);
+        horizontalLayout_17->addWidget(LabelGamesStatus);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_7);
-
-        verticalLayout_8 = new QVBoxLayout();
-        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
-        LabelProfileVisibility = new LabelLight(FrameProfileBaseInfo);
-        LabelProfileVisibility->setObjectName(QString::fromUtf8("LabelProfileVisibility"));
-        sizePolicy.setHeightForWidth(LabelProfileVisibility->sizePolicy().hasHeightForWidth());
-        LabelProfileVisibility->setSizePolicy(sizePolicy);
-        LabelProfileVisibility->setFont(font1);
-
-        verticalLayout_8->addWidget(LabelProfileVisibility);
-
-        LabelFriendsVisibility = new LabelLight(FrameProfileBaseInfo);
-        LabelFriendsVisibility->setObjectName(QString::fromUtf8("LabelFriendsVisibility"));
-        sizePolicy.setHeightForWidth(LabelFriendsVisibility->sizePolicy().hasHeightForWidth());
-        LabelFriendsVisibility->setSizePolicy(sizePolicy);
-        LabelFriendsVisibility->setFont(font1);
-
-        verticalLayout_8->addWidget(LabelFriendsVisibility);
-
-        LabelGamesVisibility = new LabelLight(FrameProfileBaseInfo);
-        LabelGamesVisibility->setObjectName(QString::fromUtf8("LabelGamesVisibility"));
-        sizePolicy.setHeightForWidth(LabelGamesVisibility->sizePolicy().hasHeightForWidth());
-        LabelGamesVisibility->setSizePolicy(sizePolicy);
-        LabelGamesVisibility->setFont(font1);
-
-        verticalLayout_8->addWidget(LabelGamesVisibility);
-
-
-        horizontalLayout_2->addLayout(verticalLayout_8);
+        horizontalLayout_2->addLayout(horizontalLayout_17);
 
 
         horizontalLayout_15->addLayout(horizontalLayout_2);
@@ -333,18 +302,26 @@ public:
 
         FrameProfileMaximumInfo = new QFrame(FormProfile);
         FrameProfileMaximumInfo->setObjectName(QString::fromUtf8("FrameProfileMaximumInfo"));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(FrameProfileMaximumInfo->sizePolicy().hasHeightForWidth());
+        FrameProfileMaximumInfo->setSizePolicy(sizePolicy3);
+        FrameProfileMaximumInfo->setMaximumSize(QSize(16777215, 250));
         FrameProfileMaximumInfo->setFrameShape(QFrame::StyledPanel);
         FrameProfileMaximumInfo->setFrameShadow(QFrame::Raised);
         verticalLayout_14 = new QVBoxLayout(FrameProfileMaximumInfo);
         verticalLayout_14->setObjectName(QString::fromUtf8("verticalLayout_14"));
         scrollArea = new QScrollArea(FrameProfileMaximumInfo);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        sizePolicy2.setHeightForWidth(scrollArea->sizePolicy().hasHeightForWidth());
+        scrollArea->setSizePolicy(sizePolicy2);
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, -262, 1160, 993));
-        formLayout = new QFormLayout(scrollAreaWidgetContents);
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 687, 1004));
+        verticalLayout = new QVBoxLayout(scrollAreaWidgetContents);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout_18 = new QHBoxLayout();
         horizontalLayout_18->setObjectName(QString::fromUtf8("horizontalLayout_18"));
         LabellvlValue = new LabelValue(scrollAreaWidgetContents);
@@ -367,677 +344,541 @@ public:
         horizontalLayout_18->addWidget(progressBarXp);
 
 
-        formLayout->setLayout(0, QFormLayout::SpanningRole, horizontalLayout_18);
+        verticalLayout->addLayout(horizontalLayout_18);
 
-        LabelVanityUrl = new QLabel(scrollAreaWidgetContents);
-        LabelVanityUrl->setObjectName(QString::fromUtf8("LabelVanityUrl"));
+        collapsableWidgetCommon = new CollapsableWidget(scrollAreaWidgetContents);
+        collapsableWidgetCommon->setObjectName(QString::fromUtf8("collapsableWidgetCommon"));
+        collapsableWidgetCommon->setFrameShape(QFrame::StyledPanel);
+        collapsableWidgetCommon->setFrameShadow(QFrame::Raised);
+        layoutCommon = new QFormLayout(collapsableWidgetCommon);
+        layoutCommon->setObjectName(QString::fromUtf8("layoutCommon"));
+        labelVanityUrl = new QLabel(collapsableWidgetCommon);
+        labelVanityUrl->setObjectName(QString::fromUtf8("labelVanityUrl"));
 
-        formLayout->setWidget(1, QFormLayout::LabelRole, LabelVanityUrl);
+        layoutCommon->setWidget(0, QFormLayout::LabelRole, labelVanityUrl);
 
-        LabelVanityUrlValue = new LabelValue(scrollAreaWidgetContents);
-        LabelVanityUrlValue->setObjectName(QString::fromUtf8("LabelVanityUrlValue"));
-        sizePolicy1.setHeightForWidth(LabelVanityUrlValue->sizePolicy().hasHeightForWidth());
-        LabelVanityUrlValue->setSizePolicy(sizePolicy1);
-        LabelVanityUrlValue->setFont(font2);
-        LabelVanityUrlValue->setText(QString::fromUtf8(""));
+        labelVanityUrlValue = new LabelValue(collapsableWidgetCommon);
+        labelVanityUrlValue->setObjectName(QString::fromUtf8("labelVanityUrlValue"));
+        labelVanityUrlValue->setText(QString::fromUtf8("Unknown"));
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, LabelVanityUrlValue);
+        layoutCommon->setWidget(0, QFormLayout::FieldRole, labelVanityUrlValue);
 
-        label_3 = new QLabel(scrollAreaWidgetContents);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_6 = new QLabel(collapsableWidgetCommon);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, label_3);
+        layoutCommon->setWidget(1, QFormLayout::LabelRole, label_6);
 
-        LabelProfileIDValue = new LabelValue(scrollAreaWidgetContents);
-        LabelProfileIDValue->setObjectName(QString::fromUtf8("LabelProfileIDValue"));
-        sizePolicy1.setHeightForWidth(LabelProfileIDValue->sizePolicy().hasHeightForWidth());
-        LabelProfileIDValue->setSizePolicy(sizePolicy1);
-        LabelProfileIDValue->setFont(font2);
-        LabelProfileIDValue->setText(QString::fromUtf8(""));
+        labelAccountIdValue = new LabelValue(collapsableWidgetCommon);
+        labelAccountIdValue->setObjectName(QString::fromUtf8("labelAccountIdValue"));
+        labelAccountIdValue->setText(QString::fromUtf8("Unknown"));
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, LabelProfileIDValue);
+        layoutCommon->setWidget(1, QFormLayout::FieldRole, labelAccountIdValue);
 
-        LabelProfileUrl = new QLabel(scrollAreaWidgetContents);
-        LabelProfileUrl->setObjectName(QString::fromUtf8("LabelProfileUrl"));
-        LabelProfileUrl->setMaximumSize(QSize(16777215, 16));
-        LabelProfileUrl->setFont(font1);
-        LabelProfileUrl->setText(QString::fromUtf8("ProfileUrl"));
-        LabelProfileUrl->setOpenExternalLinks(true);
-        LabelProfileUrl->setTextInteractionFlags(Qt::TextBrowserInteraction);
+        labelLinkValue = new QLabel(collapsableWidgetCommon);
+        labelLinkValue->setObjectName(QString::fromUtf8("labelLinkValue"));
+        labelLinkValue->setText(QString::fromUtf8(""));
 
-        formLayout->setWidget(3, QFormLayout::SpanningRole, LabelProfileUrl);
+        layoutCommon->setWidget(2, QFormLayout::SpanningRole, labelLinkValue);
 
-        LabelTimeCreated = new QLabel(scrollAreaWidgetContents);
-        LabelTimeCreated->setObjectName(QString::fromUtf8("LabelTimeCreated"));
-        sizePolicy.setHeightForWidth(LabelTimeCreated->sizePolicy().hasHeightForWidth());
-        LabelTimeCreated->setSizePolicy(sizePolicy);
-        LabelTimeCreated->setFont(font1);
+        labelAccountCreated = new QLabel(collapsableWidgetCommon);
+        labelAccountCreated->setObjectName(QString::fromUtf8("labelAccountCreated"));
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, LabelTimeCreated);
+        layoutCommon->setWidget(3, QFormLayout::LabelRole, labelAccountCreated);
 
-        LabelTimeCreatedValue = new LabelValue(scrollAreaWidgetContents);
-        LabelTimeCreatedValue->setObjectName(QString::fromUtf8("LabelTimeCreatedValue"));
-        sizePolicy1.setHeightForWidth(LabelTimeCreatedValue->sizePolicy().hasHeightForWidth());
-        LabelTimeCreatedValue->setSizePolicy(sizePolicy1);
-        LabelTimeCreatedValue->setFont(font2);
-        LabelTimeCreatedValue->setText(QString::fromUtf8("0"));
+        labelAccountCreatedValue = new LabelValue(collapsableWidgetCommon);
+        labelAccountCreatedValue->setObjectName(QString::fromUtf8("labelAccountCreatedValue"));
+        labelAccountCreatedValue->setText(QString::fromUtf8("Unknown"));
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, LabelTimeCreatedValue);
+        layoutCommon->setWidget(3, QFormLayout::FieldRole, labelAccountCreatedValue);
 
-        LabelLocCountryCode = new QLabel(scrollAreaWidgetContents);
-        LabelLocCountryCode->setObjectName(QString::fromUtf8("LabelLocCountryCode"));
-        sizePolicy.setHeightForWidth(LabelLocCountryCode->sizePolicy().hasHeightForWidth());
-        LabelLocCountryCode->setSizePolicy(sizePolicy);
-        LabelLocCountryCode->setFont(font1);
+        labelLanguage = new QLabel(collapsableWidgetCommon);
+        labelLanguage->setObjectName(QString::fromUtf8("labelLanguage"));
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, LabelLocCountryCode);
+        layoutCommon->setWidget(4, QFormLayout::LabelRole, labelLanguage);
 
-        LabelLocCountryCodeValue = new LabelValue(scrollAreaWidgetContents);
-        LabelLocCountryCodeValue->setObjectName(QString::fromUtf8("LabelLocCountryCodeValue"));
-        sizePolicy1.setHeightForWidth(LabelLocCountryCodeValue->sizePolicy().hasHeightForWidth());
-        LabelLocCountryCodeValue->setSizePolicy(sizePolicy1);
-        LabelLocCountryCodeValue->setFont(font2);
-        LabelLocCountryCodeValue->setText(QString::fromUtf8("EN"));
+        labelLanguageValue = new LabelValue(collapsableWidgetCommon);
+        labelLanguageValue->setObjectName(QString::fromUtf8("labelLanguageValue"));
+        labelLanguageValue->setText(QString::fromUtf8("Unknown"));
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, LabelLocCountryCodeValue);
+        layoutCommon->setWidget(4, QFormLayout::FieldRole, labelLanguageValue);
 
-        frameBans = new QFrame(scrollAreaWidgetContents);
-        frameBans->setObjectName(QString::fromUtf8("frameBans"));
-        frameBans->setFrameShape(QFrame::StyledPanel);
-        frameBans->setFrameShadow(QFrame::Raised);
-        formLayout_2 = new QFormLayout(frameBans);
-        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
-        label_5 = new QLabel(frameBans);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-
-        formLayout_2->setWidget(0, QFormLayout::LabelRole, label_5);
-
-        LabelGameBansValue = new LabelLight(frameBans);
-        LabelGameBansValue->setObjectName(QString::fromUtf8("LabelGameBansValue"));
-        sizePolicy1.setHeightForWidth(LabelGameBansValue->sizePolicy().hasHeightForWidth());
-        LabelGameBansValue->setSizePolicy(sizePolicy1);
-        LabelGameBansValue->setFont(font2);
-        LabelGameBansValue->setText(QString::fromUtf8(""));
-
-        formLayout_2->setWidget(0, QFormLayout::FieldRole, LabelGameBansValue);
-
-        label_8 = new QLabel(frameBans);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-
-        formLayout_2->setWidget(1, QFormLayout::LabelRole, label_8);
-
-        LabelVacBansValue = new LabelLight(frameBans);
-        LabelVacBansValue->setObjectName(QString::fromUtf8("LabelVacBansValue"));
-        sizePolicy1.setHeightForWidth(LabelVacBansValue->sizePolicy().hasHeightForWidth());
-        LabelVacBansValue->setSizePolicy(sizePolicy1);
-        LabelVacBansValue->setFont(font2);
-        LabelVacBansValue->setText(QString::fromUtf8(""));
-
-        formLayout_2->setWidget(1, QFormLayout::FieldRole, LabelVacBansValue);
-
-        label_10 = new QLabel(frameBans);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-
-        formLayout_2->setWidget(2, QFormLayout::LabelRole, label_10);
-
-        LabelCommunityBanValue = new LabelLight(frameBans);
-        LabelCommunityBanValue->setObjectName(QString::fromUtf8("LabelCommunityBanValue"));
-        sizePolicy1.setHeightForWidth(LabelCommunityBanValue->sizePolicy().hasHeightForWidth());
-        LabelCommunityBanValue->setSizePolicy(sizePolicy1);
-        LabelCommunityBanValue->setFont(font2);
-        LabelCommunityBanValue->setText(QString::fromUtf8(""));
-
-        formLayout_2->setWidget(2, QFormLayout::FieldRole, LabelCommunityBanValue);
-
-        label_12 = new QLabel(frameBans);
-        label_12->setObjectName(QString::fromUtf8("label_12"));
-
-        formLayout_2->setWidget(3, QFormLayout::LabelRole, label_12);
-
-        LabelTradeBanValue = new LabelLight(frameBans);
-        LabelTradeBanValue->setObjectName(QString::fromUtf8("LabelTradeBanValue"));
-        sizePolicy1.setHeightForWidth(LabelTradeBanValue->sizePolicy().hasHeightForWidth());
-        LabelTradeBanValue->setSizePolicy(sizePolicy1);
-        LabelTradeBanValue->setFont(font2);
-        LabelTradeBanValue->setText(QString::fromUtf8(""));
-
-        formLayout_2->setWidget(3, QFormLayout::FieldRole, LabelTradeBanValue);
-
-
-        formLayout->setWidget(6, QFormLayout::SpanningRole, frameBans);
-
-        groupBox_3 = new QGroupBox(scrollAreaWidgetContents);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        verticalLayout = new QVBoxLayout(groupBox_3);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        horizontalLayout_14 = new QHBoxLayout();
-        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        label_13 = new QLabel(groupBox_3);
-        label_13->setObjectName(QString::fromUtf8("label_13"));
-
-        horizontalLayout->addWidget(label_13);
-
-        LabelSpecialBadgesValue = new LabelValue(groupBox_3);
-        LabelSpecialBadgesValue->setObjectName(QString::fromUtf8("LabelSpecialBadgesValue"));
-        sizePolicy1.setHeightForWidth(LabelSpecialBadgesValue->sizePolicy().hasHeightForWidth());
-        LabelSpecialBadgesValue->setSizePolicy(sizePolicy1);
-        LabelSpecialBadgesValue->setFont(font2);
-        LabelSpecialBadgesValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout->addWidget(LabelSpecialBadgesValue);
-
-
-        horizontalLayout_14->addLayout(horizontalLayout);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label_15 = new QLabel(groupBox_3);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-
-        horizontalLayout_3->addWidget(label_15);
-
-        LabelNormalBadgesValue = new LabelValue(groupBox_3);
-        LabelNormalBadgesValue->setObjectName(QString::fromUtf8("LabelNormalBadgesValue"));
-        sizePolicy1.setHeightForWidth(LabelNormalBadgesValue->sizePolicy().hasHeightForWidth());
-        LabelNormalBadgesValue->setSizePolicy(sizePolicy1);
-        LabelNormalBadgesValue->setFont(font2);
-        LabelNormalBadgesValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_3->addWidget(LabelNormalBadgesValue);
-
-
-        horizontalLayout_14->addLayout(horizontalLayout_3);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        label_17 = new QLabel(groupBox_3);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-
-        horizontalLayout_4->addWidget(label_17);
-
-        LabelFoilBadgesValue = new LabelValue(groupBox_3);
-        LabelFoilBadgesValue->setObjectName(QString::fromUtf8("LabelFoilBadgesValue"));
-        sizePolicy1.setHeightForWidth(LabelFoilBadgesValue->sizePolicy().hasHeightForWidth());
-        LabelFoilBadgesValue->setSizePolicy(sizePolicy1);
-        LabelFoilBadgesValue->setFont(font2);
-        LabelFoilBadgesValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_4->addWidget(LabelFoilBadgesValue);
-
-
-        horizontalLayout_14->addLayout(horizontalLayout_4);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_14->addItem(horizontalSpacer_2);
-
-
-        verticalLayout->addLayout(horizontalLayout_14);
-
-        horizontalLayout_17 = new QHBoxLayout();
-        horizontalLayout_17->setObjectName(QString::fromUtf8("horizontalLayout_17"));
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        label_19 = new QLabel(groupBox_3);
-        label_19->setObjectName(QString::fromUtf8("label_19"));
-
-        horizontalLayout_5->addWidget(label_19);
-
-        LabelBadges1LvlValue = new LabelValue(groupBox_3);
-        LabelBadges1LvlValue->setObjectName(QString::fromUtf8("LabelBadges1LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelBadges1LvlValue->sizePolicy().hasHeightForWidth());
-        LabelBadges1LvlValue->setSizePolicy(sizePolicy1);
-        LabelBadges1LvlValue->setFont(font2);
-        LabelBadges1LvlValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_5->addWidget(LabelBadges1LvlValue);
-
-
-        horizontalLayout_17->addLayout(horizontalLayout_5);
-
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        label_22 = new QLabel(groupBox_3);
-        label_22->setObjectName(QString::fromUtf8("label_22"));
-
-        horizontalLayout_8->addWidget(label_22);
-
-        LabelBadges2LvlValue = new LabelValue(groupBox_3);
-        LabelBadges2LvlValue->setObjectName(QString::fromUtf8("LabelBadges2LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelBadges2LvlValue->sizePolicy().hasHeightForWidth());
-        LabelBadges2LvlValue->setSizePolicy(sizePolicy1);
-        LabelBadges2LvlValue->setFont(font2);
-        LabelBadges2LvlValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_8->addWidget(LabelBadges2LvlValue);
-
-
-        horizontalLayout_17->addLayout(horizontalLayout_8);
-
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        label_24 = new QLabel(groupBox_3);
-        label_24->setObjectName(QString::fromUtf8("label_24"));
-
-        horizontalLayout_10->addWidget(label_24);
-
-        LabelBadges3LvlValue = new LabelValue(groupBox_3);
-        LabelBadges3LvlValue->setObjectName(QString::fromUtf8("LabelBadges3LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelBadges3LvlValue->sizePolicy().hasHeightForWidth());
-        LabelBadges3LvlValue->setSizePolicy(sizePolicy1);
-        LabelBadges3LvlValue->setFont(font2);
-        LabelBadges3LvlValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_10->addWidget(LabelBadges3LvlValue);
-
-
-        horizontalLayout_17->addLayout(horizontalLayout_10);
-
-        horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        label_26 = new QLabel(groupBox_3);
-        label_26->setObjectName(QString::fromUtf8("label_26"));
-
-        horizontalLayout_11->addWidget(label_26);
-
-        LabelBadges4LvlValue = new LabelValue(groupBox_3);
-        LabelBadges4LvlValue->setObjectName(QString::fromUtf8("LabelBadges4LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelBadges4LvlValue->sizePolicy().hasHeightForWidth());
-        LabelBadges4LvlValue->setSizePolicy(sizePolicy1);
-        LabelBadges4LvlValue->setFont(font2);
-        LabelBadges4LvlValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_11->addWidget(LabelBadges4LvlValue);
-
-
-        horizontalLayout_17->addLayout(horizontalLayout_11);
-
-        horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        label_28 = new QLabel(groupBox_3);
-        label_28->setObjectName(QString::fromUtf8("label_28"));
-
-        horizontalLayout_12->addWidget(label_28);
-
-        LabelBadges5LvlValue = new LabelValue(groupBox_3);
-        LabelBadges5LvlValue->setObjectName(QString::fromUtf8("LabelBadges5LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelBadges5LvlValue->sizePolicy().hasHeightForWidth());
-        LabelBadges5LvlValue->setSizePolicy(sizePolicy1);
-        LabelBadges5LvlValue->setFont(font2);
-        LabelBadges5LvlValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_12->addWidget(LabelBadges5LvlValue);
-
-
-        horizontalLayout_17->addLayout(horizontalLayout_12);
-
-        horizontalLayout_13 = new QHBoxLayout();
-        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
-        label_29 = new QLabel(groupBox_3);
-        label_29->setObjectName(QString::fromUtf8("label_29"));
-
-        horizontalLayout_13->addWidget(label_29);
-
-        LabelBadgesMore5LvlValue = new LabelValue(groupBox_3);
-        LabelBadgesMore5LvlValue->setObjectName(QString::fromUtf8("LabelBadgesMore5LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelBadgesMore5LvlValue->sizePolicy().hasHeightForWidth());
-        LabelBadgesMore5LvlValue->setSizePolicy(sizePolicy1);
-        LabelBadgesMore5LvlValue->setFont(font2);
-        LabelBadgesMore5LvlValue->setText(QString::fromUtf8(""));
-
-        horizontalLayout_13->addWidget(LabelBadgesMore5LvlValue);
-
-
-        horizontalLayout_17->addLayout(horizontalLayout_13);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_17->addItem(horizontalSpacer_3);
-
-
-        verticalLayout->addLayout(horizontalLayout_17);
-
-
-        formLayout->setWidget(7, QFormLayout::SpanningRole, groupBox_3);
-
-        label_31 = new QLabel(scrollAreaWidgetContents);
-        label_31->setObjectName(QString::fromUtf8("label_31"));
-
-        formLayout->setWidget(8, QFormLayout::LabelRole, label_31);
-
-        LabelTotalPlayTimeValue = new LabelValue(scrollAreaWidgetContents);
-        LabelTotalPlayTimeValue->setObjectName(QString::fromUtf8("LabelTotalPlayTimeValue"));
-        sizePolicy1.setHeightForWidth(LabelTotalPlayTimeValue->sizePolicy().hasHeightForWidth());
-        LabelTotalPlayTimeValue->setSizePolicy(sizePolicy1);
-        LabelTotalPlayTimeValue->setFont(font2);
-        LabelTotalPlayTimeValue->setText(QString::fromUtf8(""));
-
-        formLayout->setWidget(8, QFormLayout::FieldRole, LabelTotalPlayTimeValue);
-
-        LabelWindowsPlayTime = new QLabel(scrollAreaWidgetContents);
-        LabelWindowsPlayTime->setObjectName(QString::fromUtf8("LabelWindowsPlayTime"));
-        QFont font3;
-        font3.setItalic(true);
-        font3.setUnderline(true);
-        LabelWindowsPlayTime->setFont(font3);
-
-        formLayout->setWidget(9, QFormLayout::LabelRole, LabelWindowsPlayTime);
-
-        LabelWindowsPlayTimeValue = new LabelValue(scrollAreaWidgetContents);
-        LabelWindowsPlayTimeValue->setObjectName(QString::fromUtf8("LabelWindowsPlayTimeValue"));
-        sizePolicy1.setHeightForWidth(LabelWindowsPlayTimeValue->sizePolicy().hasHeightForWidth());
-        LabelWindowsPlayTimeValue->setSizePolicy(sizePolicy1);
-        LabelWindowsPlayTimeValue->setFont(font2);
-        LabelWindowsPlayTimeValue->setText(QString::fromUtf8(""));
-
-        formLayout->setWidget(9, QFormLayout::FieldRole, LabelWindowsPlayTimeValue);
-
-        LabelLinuxPlayTime = new QLabel(scrollAreaWidgetContents);
-        LabelLinuxPlayTime->setObjectName(QString::fromUtf8("LabelLinuxPlayTime"));
-        LabelLinuxPlayTime->setFont(font3);
-
-        formLayout->setWidget(10, QFormLayout::LabelRole, LabelLinuxPlayTime);
-
-        LabelLinuxPlayTimeValue = new LabelValue(scrollAreaWidgetContents);
-        LabelLinuxPlayTimeValue->setObjectName(QString::fromUtf8("LabelLinuxPlayTimeValue"));
-        sizePolicy1.setHeightForWidth(LabelLinuxPlayTimeValue->sizePolicy().hasHeightForWidth());
-        LabelLinuxPlayTimeValue->setSizePolicy(sizePolicy1);
-        LabelLinuxPlayTimeValue->setFont(font2);
-        LabelLinuxPlayTimeValue->setText(QString::fromUtf8(""));
-
-        formLayout->setWidget(10, QFormLayout::FieldRole, LabelLinuxPlayTimeValue);
-
-        LabelMacOsPlayTime = new QLabel(scrollAreaWidgetContents);
-        LabelMacOsPlayTime->setObjectName(QString::fromUtf8("LabelMacOsPlayTime"));
-        LabelMacOsPlayTime->setFont(font3);
-
-        formLayout->setWidget(11, QFormLayout::LabelRole, LabelMacOsPlayTime);
-
-        LabelMacOsPlayTimeValue = new LabelValue(scrollAreaWidgetContents);
-        LabelMacOsPlayTimeValue->setObjectName(QString::fromUtf8("LabelMacOsPlayTimeValue"));
-        sizePolicy1.setHeightForWidth(LabelMacOsPlayTimeValue->sizePolicy().hasHeightForWidth());
-        LabelMacOsPlayTimeValue->setSizePolicy(sizePolicy1);
-        LabelMacOsPlayTimeValue->setFont(font2);
-        LabelMacOsPlayTimeValue->setText(QString::fromUtf8(""));
-
-        formLayout->setWidget(11, QFormLayout::FieldRole, LabelMacOsPlayTimeValue);
-
-        frameGamesByPlayed = new QFrame(scrollAreaWidgetContents);
-        frameGamesByPlayed->setObjectName(QString::fromUtf8("frameGamesByPlayed"));
-        frameGamesByPlayed->setFrameShape(QFrame::StyledPanel);
-        frameGamesByPlayed->setFrameShadow(QFrame::Raised);
-        formLayout_6 = new QFormLayout(frameGamesByPlayed);
-        formLayout_6->setObjectName(QString::fromUtf8("formLayout_6"));
-        label_39 = new QLabel(frameGamesByPlayed);
-        label_39->setObjectName(QString::fromUtf8("label_39"));
-
-        formLayout_6->setWidget(0, QFormLayout::LabelRole, label_39);
-
-        LabelGamesPlayed0hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayed0hValue->setObjectName(QString::fromUtf8("LabelGamesPlayed0hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayed0hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayed0hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayed0hValue->setFont(font2);
-        LabelGamesPlayed0hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(0, QFormLayout::FieldRole, LabelGamesPlayed0hValue);
-
-        label_41 = new QLabel(frameGamesByPlayed);
-        label_41->setObjectName(QString::fromUtf8("label_41"));
-
-        formLayout_6->setWidget(1, QFormLayout::LabelRole, label_41);
-
-        LabelGamesPlayed0_1hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayed0_1hValue->setObjectName(QString::fromUtf8("LabelGamesPlayed0_1hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayed0_1hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayed0_1hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayed0_1hValue->setFont(font2);
-        LabelGamesPlayed0_1hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(1, QFormLayout::FieldRole, LabelGamesPlayed0_1hValue);
-
-        label_43 = new QLabel(frameGamesByPlayed);
-        label_43->setObjectName(QString::fromUtf8("label_43"));
-
-        formLayout_6->setWidget(2, QFormLayout::LabelRole, label_43);
-
-        LabelGamesPlayed1_10hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayed1_10hValue->setObjectName(QString::fromUtf8("LabelGamesPlayed1_10hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayed1_10hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayed1_10hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayed1_10hValue->setFont(font2);
-        LabelGamesPlayed1_10hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(2, QFormLayout::FieldRole, LabelGamesPlayed1_10hValue);
-
-        label_45 = new QLabel(frameGamesByPlayed);
-        label_45->setObjectName(QString::fromUtf8("label_45"));
-
-        formLayout_6->setWidget(3, QFormLayout::LabelRole, label_45);
-
-        LabelGamesPlayed10_24hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayed10_24hValue->setObjectName(QString::fromUtf8("LabelGamesPlayed10_24hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayed10_24hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayed10_24hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayed10_24hValue->setFont(font2);
-        LabelGamesPlayed10_24hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(3, QFormLayout::FieldRole, LabelGamesPlayed10_24hValue);
-
-        label_47 = new QLabel(frameGamesByPlayed);
-        label_47->setObjectName(QString::fromUtf8("label_47"));
-
-        formLayout_6->setWidget(4, QFormLayout::LabelRole, label_47);
-
-        LabelGamesPlayed24_240hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayed24_240hValue->setObjectName(QString::fromUtf8("LabelGamesPlayed24_240hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayed24_240hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayed24_240hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayed24_240hValue->setFont(font2);
-        LabelGamesPlayed24_240hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(4, QFormLayout::FieldRole, LabelGamesPlayed24_240hValue);
-
-        label_49 = new QLabel(frameGamesByPlayed);
-        label_49->setObjectName(QString::fromUtf8("label_49"));
-
-        formLayout_6->setWidget(5, QFormLayout::LabelRole, label_49);
-
-        LabelGamesPlayed240_500hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayed240_500hValue->setObjectName(QString::fromUtf8("LabelGamesPlayed240_500hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayed240_500hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayed240_500hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayed240_500hValue->setFont(font2);
-        LabelGamesPlayed240_500hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(5, QFormLayout::FieldRole, LabelGamesPlayed240_500hValue);
-
-        label_51 = new QLabel(frameGamesByPlayed);
-        label_51->setObjectName(QString::fromUtf8("label_51"));
-
-        formLayout_6->setWidget(6, QFormLayout::LabelRole, label_51);
-
-        LabelGamesPlayed500_1000hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayed500_1000hValue->setObjectName(QString::fromUtf8("LabelGamesPlayed500_1000hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayed500_1000hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayed500_1000hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayed500_1000hValue->setFont(font2);
-        LabelGamesPlayed500_1000hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(6, QFormLayout::FieldRole, LabelGamesPlayed500_1000hValue);
-
-        label_61 = new QLabel(frameGamesByPlayed);
-        label_61->setObjectName(QString::fromUtf8("label_61"));
-
-        formLayout_6->setWidget(7, QFormLayout::LabelRole, label_61);
-
-        LabelGamesPlayedMore1000hValue = new LabelValue(frameGamesByPlayed);
-        LabelGamesPlayedMore1000hValue->setObjectName(QString::fromUtf8("LabelGamesPlayedMore1000hValue"));
-        sizePolicy1.setHeightForWidth(LabelGamesPlayedMore1000hValue->sizePolicy().hasHeightForWidth());
-        LabelGamesPlayedMore1000hValue->setSizePolicy(sizePolicy1);
-        LabelGamesPlayedMore1000hValue->setFont(font2);
-        LabelGamesPlayedMore1000hValue->setText(QString::fromUtf8(""));
-
-        formLayout_6->setWidget(7, QFormLayout::FieldRole, LabelGamesPlayedMore1000hValue);
-
-
-        formLayout->setWidget(12, QFormLayout::SpanningRole, frameGamesByPlayed);
-
-        frameProfileCustomizations = new QFrame(scrollAreaWidgetContents);
-        frameProfileCustomizations->setObjectName(QString::fromUtf8("frameProfileCustomizations"));
-        frameProfileCustomizations->setFrameShape(QFrame::StyledPanel);
-        frameProfileCustomizations->setFrameShadow(QFrame::Raised);
-        formLayout_7 = new QFormLayout(frameProfileCustomizations);
-        formLayout_7->setObjectName(QString::fromUtf8("formLayout_7"));
-        label_53 = new QLabel(frameProfileCustomizations);
-        label_53->setObjectName(QString::fromUtf8("label_53"));
-
-        formLayout_7->setWidget(0, QFormLayout::LabelRole, label_53);
-
-        LabelBackgroundValue = new LabelValue(frameProfileCustomizations);
-        LabelBackgroundValue->setObjectName(QString::fromUtf8("LabelBackgroundValue"));
-        sizePolicy1.setHeightForWidth(LabelBackgroundValue->sizePolicy().hasHeightForWidth());
-        LabelBackgroundValue->setSizePolicy(sizePolicy1);
-        LabelBackgroundValue->setFont(font2);
-        LabelBackgroundValue->setText(QString::fromUtf8(""));
-
-        formLayout_7->setWidget(0, QFormLayout::FieldRole, LabelBackgroundValue);
-
-        label_55 = new QLabel(frameProfileCustomizations);
-        label_55->setObjectName(QString::fromUtf8("label_55"));
-
-        formLayout_7->setWidget(1, QFormLayout::LabelRole, label_55);
-
-        LabelMiniProfileValue = new LabelValue(frameProfileCustomizations);
-        LabelMiniProfileValue->setObjectName(QString::fromUtf8("LabelMiniProfileValue"));
-        sizePolicy1.setHeightForWidth(LabelMiniProfileValue->sizePolicy().hasHeightForWidth());
-        LabelMiniProfileValue->setSizePolicy(sizePolicy1);
-        LabelMiniProfileValue->setFont(font2);
-        LabelMiniProfileValue->setText(QString::fromUtf8(""));
-
-        formLayout_7->setWidget(1, QFormLayout::FieldRole, LabelMiniProfileValue);
-
-        label_57 = new QLabel(frameProfileCustomizations);
-        label_57->setObjectName(QString::fromUtf8("label_57"));
-
-        formLayout_7->setWidget(2, QFormLayout::LabelRole, label_57);
-
-        LabelAvatarFrameValue = new LabelValue(frameProfileCustomizations);
-        LabelAvatarFrameValue->setObjectName(QString::fromUtf8("LabelAvatarFrameValue"));
-        sizePolicy1.setHeightForWidth(LabelAvatarFrameValue->sizePolicy().hasHeightForWidth());
-        LabelAvatarFrameValue->setSizePolicy(sizePolicy1);
-        LabelAvatarFrameValue->setFont(font2);
-        LabelAvatarFrameValue->setText(QString::fromUtf8(""));
-
-        formLayout_7->setWidget(2, QFormLayout::FieldRole, LabelAvatarFrameValue);
-
-        label_59 = new QLabel(frameProfileCustomizations);
-        label_59->setObjectName(QString::fromUtf8("label_59"));
-
-        formLayout_7->setWidget(3, QFormLayout::LabelRole, label_59);
-
-        LabelAnimatedAvatarValue = new LabelValue(frameProfileCustomizations);
-        LabelAnimatedAvatarValue->setObjectName(QString::fromUtf8("LabelAnimatedAvatarValue"));
-        sizePolicy1.setHeightForWidth(LabelAnimatedAvatarValue->sizePolicy().hasHeightForWidth());
-        LabelAnimatedAvatarValue->setSizePolicy(sizePolicy1);
-        LabelAnimatedAvatarValue->setFont(font2);
-        LabelAnimatedAvatarValue->setText(QString::fromUtf8(""));
-
-        formLayout_7->setWidget(3, QFormLayout::FieldRole, LabelAnimatedAvatarValue);
-
-        label_63 = new QLabel(frameProfileCustomizations);
-        label_63->setObjectName(QString::fromUtf8("label_63"));
-
-        formLayout_7->setWidget(4, QFormLayout::LabelRole, label_63);
-
-        LabelProfileCustomizationsPurchasedValue = new LabelValue(frameProfileCustomizations);
-        LabelProfileCustomizationsPurchasedValue->setObjectName(QString::fromUtf8("LabelProfileCustomizationsPurchasedValue"));
-        sizePolicy1.setHeightForWidth(LabelProfileCustomizationsPurchasedValue->sizePolicy().hasHeightForWidth());
-        LabelProfileCustomizationsPurchasedValue->setSizePolicy(sizePolicy1);
-        LabelProfileCustomizationsPurchasedValue->setFont(font2);
-        LabelProfileCustomizationsPurchasedValue->setText(QString::fromUtf8(""));
-
-        formLayout_7->setWidget(4, QFormLayout::FieldRole, LabelProfileCustomizationsPurchasedValue);
-
-        groupBox_2 = new QGroupBox(frameProfileCustomizations);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        formLayout_8 = new QFormLayout(groupBox_2);
-        formLayout_8->setObjectName(QString::fromUtf8("formLayout_8"));
-        label_65 = new QLabel(groupBox_2);
-        label_65->setObjectName(QString::fromUtf8("label_65"));
-
-        formLayout_8->setWidget(0, QFormLayout::LabelRole, label_65);
-
-        LabelProfileCustomization1LvlValue = new LabelValue(groupBox_2);
-        LabelProfileCustomization1LvlValue->setObjectName(QString::fromUtf8("LabelProfileCustomization1LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelProfileCustomization1LvlValue->sizePolicy().hasHeightForWidth());
-        LabelProfileCustomization1LvlValue->setSizePolicy(sizePolicy1);
-        LabelProfileCustomization1LvlValue->setFont(font2);
-        LabelProfileCustomization1LvlValue->setText(QString::fromUtf8(""));
-
-        formLayout_8->setWidget(0, QFormLayout::FieldRole, LabelProfileCustomization1LvlValue);
-
-        label_67 = new QLabel(groupBox_2);
-        label_67->setObjectName(QString::fromUtf8("label_67"));
-
-        formLayout_8->setWidget(1, QFormLayout::LabelRole, label_67);
-
-        LabelProfileCustomization2LvlValue = new LabelValue(groupBox_2);
-        LabelProfileCustomization2LvlValue->setObjectName(QString::fromUtf8("LabelProfileCustomization2LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelProfileCustomization2LvlValue->sizePolicy().hasHeightForWidth());
-        LabelProfileCustomization2LvlValue->setSizePolicy(sizePolicy1);
-        LabelProfileCustomization2LvlValue->setFont(font2);
-        LabelProfileCustomization2LvlValue->setText(QString::fromUtf8(""));
-
-        formLayout_8->setWidget(1, QFormLayout::FieldRole, LabelProfileCustomization2LvlValue);
-
-        label_69 = new QLabel(groupBox_2);
-        label_69->setObjectName(QString::fromUtf8("label_69"));
-
-        formLayout_8->setWidget(2, QFormLayout::LabelRole, label_69);
-
-        LabelProfileCustomization3LvlValue = new LabelValue(groupBox_2);
-        LabelProfileCustomization3LvlValue->setObjectName(QString::fromUtf8("LabelProfileCustomization3LvlValue"));
-        sizePolicy1.setHeightForWidth(LabelProfileCustomization3LvlValue->sizePolicy().hasHeightForWidth());
-        LabelProfileCustomization3LvlValue->setSizePolicy(sizePolicy1);
-        LabelProfileCustomization3LvlValue->setFont(font2);
-        LabelProfileCustomization3LvlValue->setText(QString::fromUtf8(""));
-
-        formLayout_8->setWidget(2, QFormLayout::FieldRole, LabelProfileCustomization3LvlValue);
-
-
-        formLayout_7->setWidget(6, QFormLayout::SpanningRole, groupBox_2);
-
-        label_2 = new QLabel(frameProfileCustomizations);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        formLayout_7->setWidget(5, QFormLayout::LabelRole, label_2);
-
-        LabelProfileCustomizationsUpgradedValue = new LabelValue(frameProfileCustomizations);
-        LabelProfileCustomizationsUpgradedValue->setObjectName(QString::fromUtf8("LabelProfileCustomizationsUpgradedValue"));
-        LabelProfileCustomizationsUpgradedValue->setFont(font2);
-        LabelProfileCustomizationsUpgradedValue->setText(QString::fromUtf8(""));
-
-        formLayout_7->setWidget(5, QFormLayout::FieldRole, LabelProfileCustomizationsUpgradedValue);
-
-
-        formLayout->setWidget(13, QFormLayout::SpanningRole, frameProfileCustomizations);
-
-        LabelCommentPermission = new LabelLight(scrollAreaWidgetContents);
-        LabelCommentPermission->setObjectName(QString::fromUtf8("LabelCommentPermission"));
-        LabelCommentPermission->setFont(font1);
-        LabelCommentPermission->setText(QString::fromUtf8("CommentPermission"));
-
-        formLayout->setWidget(15, QFormLayout::SpanningRole, LabelCommentPermission);
-
-        LabelProfileState = new LabelLight(scrollAreaWidgetContents);
+        LabelProfileState = new LabelLight(collapsableWidgetCommon);
         LabelProfileState->setObjectName(QString::fromUtf8("LabelProfileState"));
         LabelProfileState->setFont(font1);
         LabelProfileState->setText(QString::fromUtf8("ProfileState"));
 
-        formLayout->setWidget(14, QFormLayout::SpanningRole, LabelProfileState);
+        layoutCommon->setWidget(5, QFormLayout::SpanningRole, LabelProfileState);
+
+        LabelCommentPermission = new LabelLight(collapsableWidgetCommon);
+        LabelCommentPermission->setObjectName(QString::fromUtf8("LabelCommentPermission"));
+        LabelCommentPermission->setFont(font1);
+        LabelCommentPermission->setText(QString::fromUtf8("CommentPermission"));
+
+        layoutCommon->setWidget(6, QFormLayout::SpanningRole, LabelCommentPermission);
+
+
+        verticalLayout->addWidget(collapsableWidgetCommon);
+
+        collapsableWidgetBans = new CollapsableWidget(scrollAreaWidgetContents);
+        collapsableWidgetBans->setObjectName(QString::fromUtf8("collapsableWidgetBans"));
+        QSizePolicy sizePolicy4(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(collapsableWidgetBans->sizePolicy().hasHeightForWidth());
+        collapsableWidgetBans->setSizePolicy(sizePolicy4);
+        layoutBans = new QFormLayout(collapsableWidgetBans);
+        layoutBans->setObjectName(QString::fromUtf8("layoutBans"));
+        label_14 = new QLabel(collapsableWidgetBans);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        layoutBans->setWidget(0, QFormLayout::LabelRole, label_14);
+
+        labelGameBansValue = new LabelLight(collapsableWidgetBans);
+        labelGameBansValue->setObjectName(QString::fromUtf8("labelGameBansValue"));
+        labelGameBansValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutBans->setWidget(0, QFormLayout::FieldRole, labelGameBansValue);
+
+        label_16 = new QLabel(collapsableWidgetBans);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        layoutBans->setWidget(1, QFormLayout::LabelRole, label_16);
+
+        labelVacBansValue = new LabelLight(collapsableWidgetBans);
+        labelVacBansValue->setObjectName(QString::fromUtf8("labelVacBansValue"));
+        labelVacBansValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutBans->setWidget(1, QFormLayout::FieldRole, labelVacBansValue);
+
+        label_19 = new QLabel(collapsableWidgetBans);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+
+        layoutBans->setWidget(2, QFormLayout::LabelRole, label_19);
+
+        labelCommunityBanValue = new LabelLight(collapsableWidgetBans);
+        labelCommunityBanValue->setObjectName(QString::fromUtf8("labelCommunityBanValue"));
+        labelCommunityBanValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutBans->setWidget(2, QFormLayout::FieldRole, labelCommunityBanValue);
+
+        label_21 = new QLabel(collapsableWidgetBans);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+
+        layoutBans->setWidget(3, QFormLayout::LabelRole, label_21);
+
+        labelTradeBanValue = new LabelLight(collapsableWidgetBans);
+        labelTradeBanValue->setObjectName(QString::fromUtf8("labelTradeBanValue"));
+        labelTradeBanValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutBans->setWidget(3, QFormLayout::FieldRole, labelTradeBanValue);
+
+
+        verticalLayout->addWidget(collapsableWidgetBans);
+
+        collapsableWidgetBadges = new CollapsableWidget(scrollAreaWidgetContents);
+        collapsableWidgetBadges->setObjectName(QString::fromUtf8("collapsableWidgetBadges"));
+        layoutBadges = new QFormLayout(collapsableWidgetBadges);
+        layoutBadges->setObjectName(QString::fromUtf8("layoutBadges"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        labelSpecialBadges = new QLabel(collapsableWidgetBadges);
+        labelSpecialBadges->setObjectName(QString::fromUtf8("labelSpecialBadges"));
+        labelSpecialBadges->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout->addWidget(labelSpecialBadges);
+
+        labelSpecialBadgesValue = new LabelValue(collapsableWidgetBadges);
+        labelSpecialBadgesValue->setObjectName(QString::fromUtf8("labelSpecialBadgesValue"));
+        labelSpecialBadgesValue->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout->addWidget(labelSpecialBadgesValue);
+
+
+        layoutBadges->setLayout(0, QFormLayout::LabelRole, horizontalLayout);
+
+        horizontalSpacer_2 = new QSpacerItem(534, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        layoutBadges->setItem(0, QFormLayout::FieldRole, horizontalSpacer_2);
+
+        horizontalLayout_14 = new QHBoxLayout();
+        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        labelNormalBadges = new QLabel(collapsableWidgetBadges);
+        labelNormalBadges->setObjectName(QString::fromUtf8("labelNormalBadges"));
+        labelNormalBadges->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_3->addWidget(labelNormalBadges);
+
+        labelNormalBadgesValue = new LabelValue(collapsableWidgetBadges);
+        labelNormalBadgesValue->setObjectName(QString::fromUtf8("labelNormalBadgesValue"));
+        labelNormalBadgesValue->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_3->addWidget(labelNormalBadgesValue);
+
+
+        horizontalLayout_14->addLayout(horizontalLayout_3);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        labelNormalLvl1 = new QLabel(collapsableWidgetBadges);
+        labelNormalLvl1->setObjectName(QString::fromUtf8("labelNormalLvl1"));
+        labelNormalLvl1->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_5->addWidget(labelNormalLvl1);
+
+        labelNormalLvl1Value = new LabelValue(collapsableWidgetBadges);
+        labelNormalLvl1Value->setObjectName(QString::fromUtf8("labelNormalLvl1Value"));
+        labelNormalLvl1Value->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_5->addWidget(labelNormalLvl1Value);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_5);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        labelNormalLvl2 = new QLabel(collapsableWidgetBadges);
+        labelNormalLvl2->setObjectName(QString::fromUtf8("labelNormalLvl2"));
+        labelNormalLvl2->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_8->addWidget(labelNormalLvl2);
+
+        labelNormalLvl2Value = new LabelValue(collapsableWidgetBadges);
+        labelNormalLvl2Value->setObjectName(QString::fromUtf8("labelNormalLvl2Value"));
+        labelNormalLvl2Value->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_8->addWidget(labelNormalLvl2Value);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_8);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        labelNormalLvl3 = new QLabel(collapsableWidgetBadges);
+        labelNormalLvl3->setObjectName(QString::fromUtf8("labelNormalLvl3"));
+        labelNormalLvl3->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_10->addWidget(labelNormalLvl3);
+
+        labelNormalLvl3Value = new LabelValue(collapsableWidgetBadges);
+        labelNormalLvl3Value->setObjectName(QString::fromUtf8("labelNormalLvl3Value"));
+        labelNormalLvl3Value->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_10->addWidget(labelNormalLvl3Value);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_10);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        labelNormalLvl4 = new QLabel(collapsableWidgetBadges);
+        labelNormalLvl4->setObjectName(QString::fromUtf8("labelNormalLvl4"));
+        labelNormalLvl4->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_11->addWidget(labelNormalLvl4);
+
+        labelNormalLvl4Value = new LabelValue(collapsableWidgetBadges);
+        labelNormalLvl4Value->setObjectName(QString::fromUtf8("labelNormalLvl4Value"));
+        labelNormalLvl4Value->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_11->addWidget(labelNormalLvl4Value);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_11);
+
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        labelNormalLvl5 = new QLabel(collapsableWidgetBadges);
+        labelNormalLvl5->setObjectName(QString::fromUtf8("labelNormalLvl5"));
+        labelNormalLvl5->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_12->addWidget(labelNormalLvl5);
+
+        labelNormalLvl5Value = new LabelValue(collapsableWidgetBadges);
+        labelNormalLvl5Value->setObjectName(QString::fromUtf8("labelNormalLvl5Value"));
+        labelNormalLvl5Value->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_12->addWidget(labelNormalLvl5Value);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_12);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        labelNormalLvl5plus = new QLabel(collapsableWidgetBadges);
+        labelNormalLvl5plus->setObjectName(QString::fromUtf8("labelNormalLvl5plus"));
+        labelNormalLvl5plus->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_13->addWidget(labelNormalLvl5plus);
+
+        labelNormalLvl5plusValue = new LabelValue(collapsableWidgetBadges);
+        labelNormalLvl5plusValue->setObjectName(QString::fromUtf8("labelNormalLvl5plusValue"));
+        labelNormalLvl5plusValue->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_13->addWidget(labelNormalLvl5plusValue);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_13);
+
+
+        horizontalLayout_14->addLayout(verticalLayout_4);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_14->addItem(horizontalSpacer_5);
+
+
+        layoutBadges->setLayout(1, QFormLayout::SpanningRole, horizontalLayout_14);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        labelFoilBadges = new QLabel(collapsableWidgetBadges);
+        labelFoilBadges->setObjectName(QString::fromUtf8("labelFoilBadges"));
+        labelFoilBadges->setText(QString::fromUtf8("TextLabel"));
+
+        horizontalLayout_4->addWidget(labelFoilBadges);
+
+        labelFoilBadgesValue = new LabelValue(collapsableWidgetBadges);
+        labelFoilBadgesValue->setObjectName(QString::fromUtf8("labelFoilBadgesValue"));
+        labelFoilBadgesValue->setText(QString::fromUtf8("Unknown"));
+
+        horizontalLayout_4->addWidget(labelFoilBadgesValue);
+
+
+        layoutBadges->setLayout(2, QFormLayout::LabelRole, horizontalLayout_4);
+
+        horizontalSpacer_3 = new QSpacerItem(562, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        layoutBadges->setItem(2, QFormLayout::FieldRole, horizontalSpacer_3);
+
+
+        verticalLayout->addWidget(collapsableWidgetBadges);
+
+        collapsableWidgetPlayTime = new CollapsableWidget(scrollAreaWidgetContents);
+        collapsableWidgetPlayTime->setObjectName(QString::fromUtf8("collapsableWidgetPlayTime"));
+        layoutPlayTime = new QFormLayout(collapsableWidgetPlayTime);
+        layoutPlayTime->setObjectName(QString::fromUtf8("layoutPlayTime"));
+        labelWindowsPlayTime = new QLabel(collapsableWidgetPlayTime);
+        labelWindowsPlayTime->setObjectName(QString::fromUtf8("labelWindowsPlayTime"));
+        labelWindowsPlayTime->setText(QString::fromUtf8("Windows"));
+
+        layoutPlayTime->setWidget(0, QFormLayout::LabelRole, labelWindowsPlayTime);
+
+        labelWindowsPlayTimeValue = new LabelValue(collapsableWidgetPlayTime);
+        labelWindowsPlayTimeValue->setObjectName(QString::fromUtf8("labelWindowsPlayTimeValue"));
+        labelWindowsPlayTimeValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutPlayTime->setWidget(0, QFormLayout::FieldRole, labelWindowsPlayTimeValue);
+
+        labelLinuxPlayTime = new QLabel(collapsableWidgetPlayTime);
+        labelLinuxPlayTime->setObjectName(QString::fromUtf8("labelLinuxPlayTime"));
+        labelLinuxPlayTime->setText(QString::fromUtf8("Linux"));
+
+        layoutPlayTime->setWidget(1, QFormLayout::LabelRole, labelLinuxPlayTime);
+
+        labelLinuxPlayTimeValue = new LabelValue(collapsableWidgetPlayTime);
+        labelLinuxPlayTimeValue->setObjectName(QString::fromUtf8("labelLinuxPlayTimeValue"));
+        labelLinuxPlayTimeValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutPlayTime->setWidget(1, QFormLayout::FieldRole, labelLinuxPlayTimeValue);
+
+        labelMacOsPlayTime = new QLabel(collapsableWidgetPlayTime);
+        labelMacOsPlayTime->setObjectName(QString::fromUtf8("labelMacOsPlayTime"));
+        labelMacOsPlayTime->setText(QString::fromUtf8("MacOS"));
+
+        layoutPlayTime->setWidget(2, QFormLayout::LabelRole, labelMacOsPlayTime);
+
+        labelMacOsPlayTimeValue = new LabelValue(collapsableWidgetPlayTime);
+        labelMacOsPlayTimeValue->setObjectName(QString::fromUtf8("labelMacOsPlayTimeValue"));
+        labelMacOsPlayTimeValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutPlayTime->setWidget(2, QFormLayout::FieldRole, labelMacOsPlayTimeValue);
+
+        labelTotalPlayTime = new QLabel(collapsableWidgetPlayTime);
+        labelTotalPlayTime->setObjectName(QString::fromUtf8("labelTotalPlayTime"));
+        labelTotalPlayTime->setText(QString::fromUtf8("Total"));
+
+        layoutPlayTime->setWidget(3, QFormLayout::LabelRole, labelTotalPlayTime);
+
+        labelTotalPlayTimeValue = new LabelValue(collapsableWidgetPlayTime);
+        labelTotalPlayTimeValue->setObjectName(QString::fromUtf8("labelTotalPlayTimeValue"));
+        labelTotalPlayTimeValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutPlayTime->setWidget(3, QFormLayout::FieldRole, labelTotalPlayTimeValue);
+
+
+        verticalLayout->addWidget(collapsableWidgetPlayTime);
+
+        collapsableWidgetGamesPlayTime = new CollapsableWidget(scrollAreaWidgetContents);
+        collapsableWidgetGamesPlayTime->setObjectName(QString::fromUtf8("collapsableWidgetGamesPlayTime"));
+        layoutGamesPlayTime = new QFormLayout(collapsableWidgetGamesPlayTime);
+        layoutGamesPlayTime->setObjectName(QString::fromUtf8("layoutGamesPlayTime"));
+        label_46 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_46->setObjectName(QString::fromUtf8("label_46"));
+
+        layoutGamesPlayTime->setWidget(0, QFormLayout::LabelRole, label_46);
+
+        labelPlayTime0Value = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime0Value->setObjectName(QString::fromUtf8("labelPlayTime0Value"));
+        labelPlayTime0Value->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(0, QFormLayout::FieldRole, labelPlayTime0Value);
+
+        label_50 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_50->setObjectName(QString::fromUtf8("label_50"));
+
+        layoutGamesPlayTime->setWidget(1, QFormLayout::LabelRole, label_50);
+
+        labelPlayTime0_1Value = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime0_1Value->setObjectName(QString::fromUtf8("labelPlayTime0_1Value"));
+        labelPlayTime0_1Value->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(1, QFormLayout::FieldRole, labelPlayTime0_1Value);
+
+        label_48 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_48->setObjectName(QString::fromUtf8("label_48"));
+
+        layoutGamesPlayTime->setWidget(2, QFormLayout::LabelRole, label_48);
+
+        labelPlayTime1_10Value = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime1_10Value->setObjectName(QString::fromUtf8("labelPlayTime1_10Value"));
+        labelPlayTime1_10Value->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(2, QFormLayout::FieldRole, labelPlayTime1_10Value);
+
+        label_44 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_44->setObjectName(QString::fromUtf8("label_44"));
+
+        layoutGamesPlayTime->setWidget(3, QFormLayout::LabelRole, label_44);
+
+        labelPlayTime10_24Value = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime10_24Value->setObjectName(QString::fromUtf8("labelPlayTime10_24Value"));
+        labelPlayTime10_24Value->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(3, QFormLayout::FieldRole, labelPlayTime10_24Value);
+
+        label_47 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_47->setObjectName(QString::fromUtf8("label_47"));
+
+        layoutGamesPlayTime->setWidget(4, QFormLayout::LabelRole, label_47);
+
+        labelPlayTime24_240Value = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime24_240Value->setObjectName(QString::fromUtf8("labelPlayTime24_240Value"));
+        labelPlayTime24_240Value->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(4, QFormLayout::FieldRole, labelPlayTime24_240Value);
+
+        label_41 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_41->setObjectName(QString::fromUtf8("label_41"));
+
+        layoutGamesPlayTime->setWidget(5, QFormLayout::LabelRole, label_41);
+
+        labelPlayTime240_500Value = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime240_500Value->setObjectName(QString::fromUtf8("labelPlayTime240_500Value"));
+        labelPlayTime240_500Value->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(5, QFormLayout::FieldRole, labelPlayTime240_500Value);
+
+        label_45 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_45->setObjectName(QString::fromUtf8("label_45"));
+
+        layoutGamesPlayTime->setWidget(6, QFormLayout::LabelRole, label_45);
+
+        labelPlayTime500_1000Value = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime500_1000Value->setObjectName(QString::fromUtf8("labelPlayTime500_1000Value"));
+        labelPlayTime500_1000Value->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(6, QFormLayout::FieldRole, labelPlayTime500_1000Value);
+
+        label_43 = new QLabel(collapsableWidgetGamesPlayTime);
+        label_43->setObjectName(QString::fromUtf8("label_43"));
+
+        layoutGamesPlayTime->setWidget(7, QFormLayout::LabelRole, label_43);
+
+        labelPlayTime1000plusValue = new LabelValue(collapsableWidgetGamesPlayTime);
+        labelPlayTime1000plusValue->setObjectName(QString::fromUtf8("labelPlayTime1000plusValue"));
+        labelPlayTime1000plusValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutGamesPlayTime->setWidget(7, QFormLayout::FieldRole, labelPlayTime1000plusValue);
+
+
+        verticalLayout->addWidget(collapsableWidgetGamesPlayTime);
+
+        collapsableWidgetCustomizations = new CollapsableWidget(scrollAreaWidgetContents);
+        collapsableWidgetCustomizations->setObjectName(QString::fromUtf8("collapsableWidgetCustomizations"));
+        layoutCustomizations = new QFormLayout(collapsableWidgetCustomizations);
+        layoutCustomizations->setObjectName(QString::fromUtf8("layoutCustomizations"));
+        label_55 = new QLabel(collapsableWidgetCustomizations);
+        label_55->setObjectName(QString::fromUtf8("label_55"));
+
+        layoutCustomizations->setWidget(0, QFormLayout::LabelRole, label_55);
+
+        labelCustomizationBackgroundValue = new LabelValue(collapsableWidgetCustomizations);
+        labelCustomizationBackgroundValue->setObjectName(QString::fromUtf8("labelCustomizationBackgroundValue"));
+        labelCustomizationBackgroundValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutCustomizations->setWidget(0, QFormLayout::FieldRole, labelCustomizationBackgroundValue);
+
+        label_56 = new QLabel(collapsableWidgetCustomizations);
+        label_56->setObjectName(QString::fromUtf8("label_56"));
+
+        layoutCustomizations->setWidget(1, QFormLayout::LabelRole, label_56);
+
+        label_57 = new QLabel(collapsableWidgetCustomizations);
+        label_57->setObjectName(QString::fromUtf8("label_57"));
+
+        layoutCustomizations->setWidget(2, QFormLayout::LabelRole, label_57);
+
+        label_58 = new QLabel(collapsableWidgetCustomizations);
+        label_58->setObjectName(QString::fromUtf8("label_58"));
+
+        layoutCustomizations->setWidget(3, QFormLayout::LabelRole, label_58);
+
+        label_59 = new QLabel(collapsableWidgetCustomizations);
+        label_59->setObjectName(QString::fromUtf8("label_59"));
+
+        layoutCustomizations->setWidget(4, QFormLayout::LabelRole, label_59);
+
+        label_60 = new QLabel(collapsableWidgetCustomizations);
+        label_60->setObjectName(QString::fromUtf8("label_60"));
+
+        layoutCustomizations->setWidget(5, QFormLayout::LabelRole, label_60);
+
+        labelCustomizationMiniProfileValue = new LabelValue(collapsableWidgetCustomizations);
+        labelCustomizationMiniProfileValue->setObjectName(QString::fromUtf8("labelCustomizationMiniProfileValue"));
+        labelCustomizationMiniProfileValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutCustomizations->setWidget(1, QFormLayout::FieldRole, labelCustomizationMiniProfileValue);
+
+        labelCustomizationAvatarFrameValue = new LabelValue(collapsableWidgetCustomizations);
+        labelCustomizationAvatarFrameValue->setObjectName(QString::fromUtf8("labelCustomizationAvatarFrameValue"));
+        labelCustomizationAvatarFrameValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutCustomizations->setWidget(2, QFormLayout::FieldRole, labelCustomizationAvatarFrameValue);
+
+        labelCustomizationAnimatedAvatarValue = new LabelValue(collapsableWidgetCustomizations);
+        labelCustomizationAnimatedAvatarValue->setObjectName(QString::fromUtf8("labelCustomizationAnimatedAvatarValue"));
+        labelCustomizationAnimatedAvatarValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutCustomizations->setWidget(3, QFormLayout::FieldRole, labelCustomizationAnimatedAvatarValue);
+
+        labelCustomizationPointsPurchasesValue = new LabelValue(collapsableWidgetCustomizations);
+        labelCustomizationPointsPurchasesValue->setObjectName(QString::fromUtf8("labelCustomizationPointsPurchasesValue"));
+        labelCustomizationPointsPurchasesValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutCustomizations->setWidget(4, QFormLayout::FieldRole, labelCustomizationPointsPurchasesValue);
+
+        labelCustomizationPointsUpgradesValue = new LabelValue(collapsableWidgetCustomizations);
+        labelCustomizationPointsUpgradesValue->setObjectName(QString::fromUtf8("labelCustomizationPointsUpgradesValue"));
+        labelCustomizationPointsUpgradesValue->setText(QString::fromUtf8("Unknown"));
+
+        layoutCustomizations->setWidget(5, QFormLayout::FieldRole, labelCustomizationPointsUpgradesValue);
+
+
+        verticalLayout->addWidget(collapsableWidgetCustomizations);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 
@@ -1061,10 +902,10 @@ public:
 
         LabelNameMinimize = new LabelLight(FrameProfileButtons);
         LabelNameMinimize->setObjectName(QString::fromUtf8("LabelNameMinimize"));
-        QFont font4;
-        font4.setPointSize(12);
-        font4.setBold(false);
-        LabelNameMinimize->setFont(font4);
+        QFont font3;
+        font3.setPointSize(12);
+        font3.setBold(false);
+        LabelNameMinimize->setFont(font3);
         LabelNameMinimize->setText(QString::fromUtf8("Name"));
 
         horizontalLayout_16->addWidget(LabelNameMinimize);
@@ -1112,50 +953,56 @@ public:
     {
         FormProfile->setWindowTitle(QCoreApplication::translate("FormProfile", "Form", nullptr));
         LabelRealName->setText(QCoreApplication::translate("FormProfile", "RealName: ", nullptr));
-        LabelProfileVisibility->setText(QCoreApplication::translate("FormProfile", "\320\237\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
-        LabelFriendsVisibility->setText(QCoreApplication::translate("FormProfile", "\320\224\321\200\321\203\320\267\321\214\321\217", nullptr));
-        LabelGamesVisibility->setText(QCoreApplication::translate("FormProfile", "\320\230\320\263\321\200\321\213", nullptr));
         progressBarXp->setFormat(QCoreApplication::translate("FormProfile", "%v/%m", nullptr));
-        LabelVanityUrl->setText(QCoreApplication::translate("FormProfile", "VanityUrl:", nullptr));
-        label_3->setText(QCoreApplication::translate("FormProfile", "AccountID:", nullptr));
-        LabelTimeCreated->setText(QCoreApplication::translate("FormProfile", "TimeCreated:", nullptr));
-        LabelLocCountryCode->setText(QCoreApplication::translate("FormProfile", "CountryCode:", nullptr));
-        label_5->setText(QCoreApplication::translate("FormProfile", "Game Bans:", nullptr));
-        label_8->setText(QCoreApplication::translate("FormProfile", "VAC Bans:", nullptr));
-        label_10->setText(QCoreApplication::translate("FormProfile", "Community Ban:", nullptr));
-        label_12->setText(QCoreApplication::translate("FormProfile", "Trade Ban:", nullptr));
-        groupBox_3->setTitle(QCoreApplication::translate("FormProfile", "Badges", nullptr));
-        label_13->setText(QCoreApplication::translate("FormProfile", "Special:", nullptr));
-        label_15->setText(QCoreApplication::translate("FormProfile", "Normal:", nullptr));
-        label_17->setText(QCoreApplication::translate("FormProfile", "Foil:", nullptr));
-        label_19->setText(QCoreApplication::translate("FormProfile", "1:", nullptr));
-        label_22->setText(QCoreApplication::translate("FormProfile", "2:", nullptr));
-        label_24->setText(QCoreApplication::translate("FormProfile", "3:", nullptr));
-        label_26->setText(QCoreApplication::translate("FormProfile", "4:", nullptr));
-        label_28->setText(QCoreApplication::translate("FormProfile", "5:", nullptr));
-        label_29->setText(QCoreApplication::translate("FormProfile", ">5:", nullptr));
-        label_31->setText(QCoreApplication::translate("FormProfile", "Total:", nullptr));
-        LabelWindowsPlayTime->setText(QCoreApplication::translate("FormProfile", "Windows:", nullptr));
-        LabelLinuxPlayTime->setText(QCoreApplication::translate("FormProfile", "Linux:", nullptr));
-        LabelMacOsPlayTime->setText(QCoreApplication::translate("FormProfile", "MacOS:", nullptr));
-        label_39->setText(QCoreApplication::translate("FormProfile", "Never:", nullptr));
-        label_41->setText(QCoreApplication::translate("FormProfile", "0-1h:", nullptr));
-        label_43->setText(QCoreApplication::translate("FormProfile", "1-10h:", nullptr));
-        label_45->setText(QCoreApplication::translate("FormProfile", "10-24h:", nullptr));
+        labelVanityUrl->setText(QCoreApplication::translate("FormProfile", "Vanity URL:", nullptr));
+        label_6->setText(QCoreApplication::translate("FormProfile", "Account ID:", nullptr));
+        labelAccountCreated->setText(QCoreApplication::translate("FormProfile", "Account created:", nullptr));
+        labelLanguage->setText(QCoreApplication::translate("FormProfile", "Language:", nullptr));
+        label_14->setText(QCoreApplication::translate("FormProfile", "Game Bans:", nullptr));
+        label_16->setText(QCoreApplication::translate("FormProfile", "VAC Bans:", nullptr));
+        label_19->setText(QCoreApplication::translate("FormProfile", "Community Ban:", nullptr));
+        label_21->setText(QCoreApplication::translate("FormProfile", "Trade Ban:", nullptr));
+#if QT_CONFIG(tooltip)
+        labelSpecialBadges->setToolTip(QCoreApplication::translate("FormProfile", "Spetials Badges", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelNormalBadges->setToolTip(QCoreApplication::translate("FormProfile", "Normal Badges", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelNormalLvl1->setToolTip(QCoreApplication::translate("FormProfile", "Badges lvl 1", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelNormalLvl2->setToolTip(QCoreApplication::translate("FormProfile", "Badges lvl 2", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelNormalLvl3->setToolTip(QCoreApplication::translate("FormProfile", "Badges lvl 3", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelNormalLvl4->setToolTip(QCoreApplication::translate("FormProfile", "Badges lvl 4", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelNormalLvl5->setToolTip(QCoreApplication::translate("FormProfile", "Badges lvl 5", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelNormalLvl5plus->setToolTip(QCoreApplication::translate("FormProfile", "Badges lvl more than 5", nullptr));
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        labelFoilBadges->setToolTip(QCoreApplication::translate("FormProfile", "Foil Badges", nullptr));
+#endif // QT_CONFIG(tooltip)
+        label_46->setText(QCoreApplication::translate("FormProfile", "Never play:", nullptr));
+        label_50->setText(QCoreApplication::translate("FormProfile", "0-1h:", nullptr));
+        label_48->setText(QCoreApplication::translate("FormProfile", "1-10h:", nullptr));
+        label_44->setText(QCoreApplication::translate("FormProfile", "10-24h:", nullptr));
         label_47->setText(QCoreApplication::translate("FormProfile", "24-240h:", nullptr));
-        label_49->setText(QCoreApplication::translate("FormProfile", "240-500h:", nullptr));
-        label_51->setText(QCoreApplication::translate("FormProfile", "500-1000h:", nullptr));
-        label_61->setText(QCoreApplication::translate("FormProfile", ">1000h:", nullptr));
-        label_53->setText(QCoreApplication::translate("FormProfile", "Background:", nullptr));
-        label_55->setText(QCoreApplication::translate("FormProfile", "Mini profile:", nullptr));
+        label_41->setText(QCoreApplication::translate("FormProfile", "240-500h:", nullptr));
+        label_45->setText(QCoreApplication::translate("FormProfile", "500-1000h:", nullptr));
+        label_43->setText(QCoreApplication::translate("FormProfile", "1000+h:", nullptr));
+        label_55->setText(QCoreApplication::translate("FormProfile", "Background:", nullptr));
+        label_56->setText(QCoreApplication::translate("FormProfile", "MiniProfile:", nullptr));
         label_57->setText(QCoreApplication::translate("FormProfile", "Avatar frame:", nullptr));
-        label_59->setText(QCoreApplication::translate("FormProfile", "Animated avatar:", nullptr));
-        label_63->setText(QCoreApplication::translate("FormProfile", "Profile customizations purchased:", nullptr));
-        groupBox_2->setTitle(QCoreApplication::translate("FormProfile", "Customizations levels", nullptr));
-        label_65->setText(QCoreApplication::translate("FormProfile", "1:", nullptr));
-        label_67->setText(QCoreApplication::translate("FormProfile", "2:", nullptr));
-        label_69->setText(QCoreApplication::translate("FormProfile", "3:", nullptr));
-        label_2->setText(QCoreApplication::translate("FormProfile", "Profile customizations upgraded:", nullptr));
+        label_58->setText(QCoreApplication::translate("FormProfile", "Animated avatar:", nullptr));
+        label_59->setText(QCoreApplication::translate("FormProfile", "Purchases in the Points Store:", nullptr));
+        label_60->setText(QCoreApplication::translate("FormProfile", "Upgrades in the Points Store:", nullptr));
         ButtonSetProfile->setText(QCoreApplication::translate("FormProfile", "\320\255\321\202\320\276 \320\274\320\276\320\271 \320\277\321\200\320\276\321\204\320\270\320\273\321\214", nullptr));
     } // retranslateUi
 

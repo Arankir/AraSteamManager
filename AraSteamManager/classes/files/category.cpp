@@ -200,7 +200,7 @@ bool Category::removeCategory(const QStringList &aTitles, bool aIsDelete) {
             if (aIsDelete) {
                 delete (*iterator);
             }
-            categories_.remove(iterator - categories_.begin());
+            categories_.removeAt(iterator - categories_.begin());
             return true;
         } else {
             if (iterator != categories_.end()) {
