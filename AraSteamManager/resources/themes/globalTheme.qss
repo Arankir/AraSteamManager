@@ -1477,6 +1477,7 @@ QColumnView {
     border-radius: 2px;
     border-width: 1px;
     border-style: solid;
+    outline: none; /*Убирает выделение при фокусе*/
 }
 
 QTreeView:hover,

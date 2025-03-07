@@ -1,6 +1,6 @@
 #include "gamesmodel.h"
-#include "classes/files/comments.h"
 #include "classes/common/images.h"
+#include "classes/files/comments.h"
 
 using namespace gamesModel;
 
@@ -16,12 +16,12 @@ void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
     GameComments comments(profileId_);
 
     int progress = 0;
-    for(const SGame &game: aGames) {
+    for (const SGame &game : aGames) {
         QStringList comment;
         auto iterator = std::find_if(comments.begin(),
                                      comments.end(),
                                      [=](const GameComment &gameComment) {
-                                        return gameComment.gameId() == game.appId();
+                                         return gameComment.gameId() == game.appId();
                                      });
 
         if (iterator != comments.end()) {
@@ -34,16 +34,23 @@ void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
         emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
     for (const gameModelItem &gameModel: modelItems_) { //Загрузка достижений игрока
-        SAchievementsPlayer::load(gameModel.game.appId(), profileId_, std::bind(&GamesModel::onResultAchievements, this,  std::placeholders::_1, gameModel.game.appId()));
+        SAchievementsPlayer::load(gameModel.game.appId(),
+                                  profileId_,
+                                  std::bind(&GamesModel::onResultAchievements,
+                                            this,
+                                            std::placeholders::_1,
+                                            gameModel.game.appId()));
     }
 }
 
-void GamesModel::onResultAchievements(const SAchievementsPlayer &aAchievements, const GameID &aGameId) {
+void GamesModel::onResultAchievements(const SAchievementsPlayer &aAchievements,
+                                      const GameID &aGameId)
+{
     auto iterator = std::find_if(modelItems_.begin(),
                                  modelItems_.end(),
                                  [=](const gameModelItem &lGame) {
-                                    return lGame.game.appId() == aGameId;
-                                });
+                                     return lGame.game.appId() == aGameId;
+                                 });
     if (iterator != modelItems_.end()) {
         (*iterator).achievements = aAchievements;
         (*iterator).achieved = SAchievementPlayer::countAchieved(aAchievements);
