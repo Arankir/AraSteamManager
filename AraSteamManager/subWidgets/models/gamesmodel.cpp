@@ -1,4 +1,5 @@
 #include "gamesmodel.h"
+#include <QtConcurrent>
 #include "classes/common/images.h"
 #include "classes/files/comments.h"
 
@@ -16,6 +17,7 @@ void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
     GameComments comments(profileId_);
 
     int progress = 0;
+    QVector<QPair<const SGame *, QIcon *> > tasks;
     for (const SGame &game : aGames) {
         QStringList comment;
         auto iterator = std::find_if(comments.begin(),
@@ -27,12 +29,25 @@ void GamesModel::setGames(const SGames &aGames, const ProfileID &aProfileId) {
         if (iterator != comments.end()) {
             comment = (*iterator).comment();
         }
-        QIcon *icon = new QIcon(game.pixmapIcon());
-        icon->addPixmap(game.pixmapIcon(), QIcon::Selected);
+
+        QIcon *icon = new QIcon();
+        // QIcon *icon = new QIcon(game.pixmapIcon());
+        // icon->addPixmap(game.pixmapIcon(), QIcon::Selected);
+
+        tasks << QPair<const SGame *, QIcon *>(&game, icon);
 
         modelItems_.append(gameModelItem{icon, game, comment, SAchievementsPlayer(), 0});
         emit s_progress(tr("Загрузка данных об игре"), ++progress, aGames.count());
     }
+    std::atomic<int> progress2 = 0;
+    QFuture<void> future = QtConcurrent::map(
+        tasks, [&aGames, &progress2, this](const QPair<const SGame *, QIcon *> &l_pair) {
+            l_pair.second->addPixmap(l_pair.first->pixmapIcon());
+            l_pair.second->addPixmap(l_pair.first->pixmapIcon(), QIcon::Selected);
+            emit s_progress(tr("Загрузка иконок"), ++progress2, aGames.count());
+        });
+    future.waitForFinished();
+
     for (const gameModelItem &gameModel: modelItems_) { //Загрузка достижений игрока
         SAchievementsPlayer::load(gameModel.game.appId(),
                                   profileId_,
@@ -60,7 +75,9 @@ void GamesModel::onResultAchievements(const SAchievementsPlayer &aAchievements,
 
     static int loaded = 0;
     emit s_progress(tr("Загрузка достижений"), loaded, modelItems_.count());
+    qDebug() << loaded << modelItems_.count();
     if(++loaded == modelItems_.count()) { //Проверка всё ли загрузилось
+        qDebug() << loaded << modelItems_.count();
         loaded = 0;
         emit s_finished();
     }
