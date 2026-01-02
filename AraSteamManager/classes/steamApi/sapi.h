@@ -91,6 +91,39 @@ protected:
         return {};
     }
 
+    template<typename T>
+    static T loadOne(const QUrl &url, std::function<T(const QByteArray &)> onLoad, std::function<void(T)> callback = nullptr)
+    {
+        if (checkRawLoadedData(url)) {
+            QByteArray ba = loadRawLoadedData(url);
+            if (callback == nullptr) {
+                return onLoad(ba);
+            } else {
+                callback(onLoad(ba));
+                return {};
+            }
+        }
+        RequestData *request = new RequestData();
+        request->get(url, callback != nullptr);
+
+        if (callback == nullptr) {
+            QByteArray ba = request->reply();
+            delete request;
+            saveRawLoadedData(url, ba);
+            return onLoad(ba);
+        } else {
+            connect(request, &RequestData::s_finished,
+                    [callback, onLoad, url](RequestData *requestL)
+                    {
+                        QByteArray ba = requestL->reply();
+                        requestL->deleteLater();
+                        saveRawLoadedData(url, ba);
+                        callback(onLoad(ba));
+                    });
+        }
+        return {};
+    }
+
 private:
     static const QString key_;
 };

@@ -42,7 +42,8 @@ QUrl Sapi::frameProfile(const QString &aFrameId) {
 }
 
 QString Sapi::pathToTempRawFile(const QUrl &aUrl) {
-    return Paths::temp() + "SapiRaw/" + aUrl.url().remove("http://").remove("?").remove("/").remove(".") + ".sapiraw";
+    return Paths::temp() + "SapiRaw/"
+        + aUrl.url().remove("https://").remove("https").remove("http://").remove("http").remove("?").remove(".").remove("key=" + key_) + ".sapiraw";
 }
 
 bool Sapi::saveRawLoadedData(const QUrl &aUrl, const QByteArray &aBytes) {

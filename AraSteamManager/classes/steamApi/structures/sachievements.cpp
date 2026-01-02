@@ -132,18 +132,18 @@ apiName_(aObject.value("name").toString()), defaultValue_(aObject.value("default
 displayName_(aObject.value("displayName").toString()), hidden_(aObject.value("hidden").toInt()),
 description_(aObject.value("description").toString()), icon_(aObject.value("icon").toString()),
 iconGray_(aObject.value("icongray").toString()) {
-    //qDebug()<<"SAchievementGlobal constructor"<<_apiName;
+    // qDebug() << "SAchievementGlobal constructor" << apiName_;
 }
 
 SAchievementSchema::SAchievementSchema(const SAchievementSchema &aSchema): Sapi(aSchema.parent()),
 apiName_(aSchema.apiName_), defaultValue_(aSchema.defaultValue_), displayName_(aSchema.displayName_),
 hidden_(aSchema.hidden_), description_(aSchema.description_), icon_(aSchema.icon_), iconGray_(aSchema.iconGray_),
 pixmapIcon_(aSchema.pixmapIcon_), pixmapIconGray_(aSchema.pixmapIconGray_) {
-    //qDebug()<<"SAchievementGlobal copy"<<_apiName;
+    // qDebug() << "SAchievementGlobal copy" << apiName_;
 }
 
-SAchievementSchema &SAchievementSchema::operator=(const SAchievementSchema &aSchema) {
-    //qDebug()<<"SAchievementGlobal equality"<<_apiName;
+SAchievementSchema &SAchievementSchema::operator=(const SAchievementSchema &aSchema)
+{
     apiName_ = aSchema.apiName_;
     defaultValue_ = aSchema.defaultValue_;
     displayName_ = aSchema.displayName_;
@@ -153,6 +153,7 @@ SAchievementSchema &SAchievementSchema::operator=(const SAchievementSchema &aSch
     iconGray_ = aSchema.iconGray_;
     pixmapIcon_ = aSchema.pixmapIcon_;
     pixmapIconGray_ = aSchema.pixmapIconGray_;
+    // qDebug() << "SAchievementGlobal equality" << apiName_;
     return *this;
 }
 
@@ -263,20 +264,22 @@ SAchievementPercentage::SAchievementPercentage(QObject *aParent): Sapi{aParent} 
 
 }
 
-SAchievementPercentage::SAchievementPercentage(const QJsonObject &aAchievement, QObject *aParent): Sapi(aParent),
-    apiName_(aAchievement.value("name").toString()), percent_(aAchievement.value("percent").toDouble()) {
-    //qDebug()<<"SAchievementPercentage constructor"<<_apiName;
+SAchievementPercentage::SAchievementPercentage(const QJsonObject &aAchievement, QObject *aParent):
+    Sapi(aParent), apiName_(aAchievement.value("name").toString()), percent_(aAchievement.value("percent").toString().toDouble())
+{
+    // qDebug() << "SAchievementPercentage constructor" << apiName_ << percent_ << aAchievement.value("percent");
 }
 
 SAchievementPercentage::SAchievementPercentage(const SAchievementPercentage &aAchievement): Sapi(aAchievement.parent()),
     apiName_(aAchievement.apiName_), percent_(aAchievement.percent_) {
-    //qDebug()<<"SAchievementPercentage copy"<<_apiName;
+    // qDebug() << "SAchievementPercentage copy" << apiName_ << percent_;
 }
 
-SAchievementPercentage &SAchievementPercentage::operator=(const SAchievementPercentage &aAchievement) {
-    //qDebug()<<"SAchievementPercentage equality"<<_apiName;
+SAchievementPercentage &SAchievementPercentage::operator=(const SAchievementPercentage &aAchievement)
+{
     apiName_ = aAchievement.apiName_;
     percent_ = aAchievement.percent_;
+    // qDebug() << "SAchievementPercentage equality" << apiName_ << percent_;
     return *this;
 }
 
@@ -523,28 +526,34 @@ bool SAchievementsPlayer::success() const {
     return success_;
 }
 
-SAchievementsPlayer SAchievementsPlayer::load(const GameID &aGameId, const ProfileID &aProfileId, std::function<void (SAchievementsPlayer)> aCallback) {
-//    return Sapi::load<SAchievementsPlayer>(achievementsPlayerUrl(aGameId, aProfileId), onLoadPlayer, aCallback);
-    RequestData *request = new RequestData();
-    request->get(Sapi::Url::achievementsPlayer(aGameId, aProfileId), aCallback != nullptr);
+SAchievementsPlayer onLoadPlayer(QByteArray aByteArray)
+{
+    return SAchievementsPlayer(QJsonDocument::fromJson(aByteArray).object());
+}
 
-    if (aCallback == nullptr) {
-        QByteArray ba = request->reply();
-        delete request;
-        return SAchievementsPlayer(QJsonDocument::fromJson(ba).object());
-    } else {
-        auto conn = std::make_shared<QMetaObject::Connection>();
-        *conn = connect(request,
-                &RequestData::s_finished,
-                [aCallback, conn](RequestData *requestL) {
-                    QObject::disconnect(*conn);
-                    QByteArray ba = requestL->reply();
-                    requestL->deleteLater();
-                    aCallback(SAchievementsPlayer(QJsonDocument::fromJson(ba).object()));
-                });
+SAchievementsPlayer SAchievementsPlayer::load(const GameID &aGameId, const ProfileID &aProfileId, std::function<void(SAchievementsPlayer)> aCallback)
+{
+    return Sapi::loadOne<SAchievementsPlayer>(Sapi::Url::achievementsPlayer(aGameId, aProfileId), onLoadPlayer, aCallback);
+    // RequestData *request = new RequestData();
+    // request->get(Sapi::Url::achievementsPlayer(aGameId, aProfileId), aCallback != nullptr);
 
-    }
-    return SAchievementsPlayer();
+    // if (aCallback == nullptr) {
+    //     QByteArray ba = request->reply();
+    //     delete request;
+    //     return SAchievementsPlayer(QJsonDocument::fromJson(ba).object());
+    // } else {
+    //     auto conn = std::make_shared<QMetaObject::Connection>();
+    //     *conn = connect(request,
+    //             &RequestData::s_finished,
+    //             [aCallback, conn](RequestData *requestL) {
+    //                 QObject::disconnect(*conn);
+    //                 QByteArray ba = requestL->reply();
+    //                 requestL->deleteLater();
+    //                 aCallback(SAchievementsPlayer(QJsonDocument::fromJson(ba).object()));
+    //             });
+
+    // }
+    // return SAchievementsPlayer();
 }
 
 const QString &SAchievementsPlayer::error() const {
