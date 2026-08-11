@@ -1,1 +1,28 @@
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.autosave
+
+# Build directories
 AraSteamManager/build/
+AraSteamManager/build-*/
+AraSteamManager/debug/
+AraSteamManager/release/
+
+# qmake / compiler output
+AraSteamManager/Makefile
+AraSteamManager/Makefile.*
+AraSteamManager/*.o
+AraSteamManager/*.obj
+AraSteamManager/*.exe
+AraSteamManager/*.dll.a
+AraSteamManager/*.a
+AraSteamManager/*.lib
+AraSteamManager/*.pdb
+
+# Qt generated files
+AraSteamManager/moc_*.cpp
+AraSteamManager/moc_*.h
+AraSteamManager/ui_*.h
+AraSteamManager/qrc_*.cpp
+AraSteamManager/.qmake.stash

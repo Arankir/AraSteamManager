@@ -16,6 +16,6 @@
 #define VER_ORIGINALFILENAME_STR    "SteamArankirStatistic.exe"
 #define VER_PRODUCTNAME_STR         "SteamArankirStatistic"
 
-#define VER_COMPANYDOMAIN_STR       ""//rpgaz.info"
+#define VER_COMPANYDOMAIN_STR ""
 
 #endif // VERSION_H
