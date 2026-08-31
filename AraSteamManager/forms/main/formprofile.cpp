@@ -126,6 +126,7 @@ void FormProfile::setGames(const ProfileID &aSteamId) {
 }
 
 void FormProfile::setFriends(const ProfileID &aSteamId) {
+    qDebug() << __FUNCTION__ << " " << aSteamId;
     friends_ = SFriend::load(aSteamId);
     if (friends_.count() > 0) {
         ui->ButtonFriends->setEnabled(true);

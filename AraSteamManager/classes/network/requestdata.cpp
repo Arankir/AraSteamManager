@@ -1,5 +1,7 @@
 #include "requestdata.h"
 
+#include "qurlquery.h"
+
 #include <QEventLoop>
 #include <QNetworkReply>
 
@@ -28,13 +30,27 @@ void RequestData::get(const QString &aUrl, bool aParallel) {
 }
 
 void RequestData::get(const QUrl &aUrl, bool aParallel) {
-    manager_->get(QNetworkRequest(aUrl));
+    reply_.clear();
+    error_.clear();
+
+    QNetworkRequest request(aUrl);
+    request.setAttribute(QNetworkRequest::Http2AllowedAttribute, false);
+    request.setHeader(QNetworkRequest::UserAgentHeader, "AraSteamManager/1.0");
+    request.setTransferTimeout(15000);
+
+    manager_->get(request);
+
     if (!aParallel) {
         QEventLoop loop;
         connect(manager_, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
         loop.exec();
         disconnect(manager_, &QNetworkAccessManager::finished, &loop, &QEventLoop::quit);
     }
+}
+
+bool RequestData::success() const
+{
+    return error_.isEmpty();
 }
 
 QByteArray RequestData::reply() const {
@@ -46,12 +62,24 @@ QString RequestData::error() const {
 }
 
 void RequestData::onResultGet(QNetworkReply *aReply) {
-    error_ = aReply->errorString();
-//    auto error = aReply->error();
-    if(!error_.isEmpty()) {
-        reply_ = aReply->readAll();
+    const int statusCode = aReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+    const QByteArray body = aReply->readAll();
+
+    if (aReply->error() == QNetworkReply::NoError) {
+        reply_ = body;
+        error_.clear();
     } else {
-        qWarning() << aReply->url() << error_;
+        reply_.clear();
+        error_ = aReply->errorString();
+
+        QUrl safeUrl = aReply->url();
+        QUrlQuery query(safeUrl);
+        query.removeAllQueryItems("key");
+        safeUrl.setQuery(query);
+
+        qWarning() << "Request failed:" << safeUrl << "networkError =" << static_cast<int>(aReply->error()) << "httpStatus =" << statusCode
+                   << "error =" << aReply->errorString() << "retryAfter =" << aReply->rawHeader("Retry-After") << "body =" << body.left(300);
     }
     aReply->deleteLater();
     emit s_finished(this);

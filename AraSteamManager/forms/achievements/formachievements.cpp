@@ -183,6 +183,7 @@ void FormAchievements::loadFriends() {
         return;
     }
     QStringList list;
+    qDebug() << __FUNCTION__ << " " << profile_.steamId();
     SFriends friends = SFriend::load(profile_.steamId());
     for(const SFriend &sFriend: qAsConst(friends)) {
         list.append(sFriend.steamId());

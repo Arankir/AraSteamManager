@@ -540,17 +540,17 @@ SProfile::LoadType identifyProfileType(QString &aId) {
     //steamcommunity.com/id/xFrenzy47x
     //76561198017985018
     //xFrenzy47x
-    QRegularExpression ProfileUrl("^(https:\\/\\/)?(steamcommunity\\.com\\/)?((profiles|id)\\/)?(\\d{17}|\\w+)\\/?$");
+    QRegularExpression ProfileUrl("^(?:https:\\/\\/)?(?:steamcommunity\\.com\\/)?((?'type'profiles|id)\\/)?((?'id'\\d{17})|(?'vanity'\\w+))\\/?$");
     QRegularExpressionMatch match = ProfileUrl.match(aId);
     if (!match.hasMatch()) {
         return SProfile::LoadType::unknown;
     }
 
-    if ((match.captured(4) == "profiles") || (QRegularExpression("\\d{17}").match(match.captured(5)).hasMatch())) {
-        aId = match.captured(5);
+    if ((match.captured("type") == "profiles") || !match.captured("id").isEmpty()) {
+        aId = match.captured("id");
         return SProfile::LoadType::id;
     } else {
-        aId = match.captured(5);
+        aId = match.captured("vanity");
         return SProfile::LoadType::vanity;
     }
 }

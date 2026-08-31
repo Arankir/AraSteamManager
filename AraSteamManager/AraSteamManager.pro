@@ -27,6 +27,24 @@ DEFINES += QT_DEPRECATED_WARNINGS  QT_MESSAGELOGCONTEXT #Названия фун
 
 CONFIG += c++20
 
+SECRET_LINES = $$cat($$PWD/steam_api_key.txt, lines)
+SECRET_KEY = $$first(SECRET_LINES)
+SECRET_HEADER = $$OUT_PWD/secret_config.h
+
+isEmpty(SECRET_KEY) {
+    error("steam_api_key.txt is empty or not found")
+}
+
+SECRET_HEADER_CONTENT = \
+    "$$LITERAL_HASH pragma once" \
+    "" \
+    "static constexpr const char *SECRET_KEY = \"$$SECRET_KEY\";"
+
+write_file($$SECRET_HEADER, SECRET_HEADER_CONTENT)
+
+INCLUDEPATH += $$OUT_PWD/secret_config.h
+
+
 SOURCES += \
     classes/common/loghelper.cpp \
     classes/files/category.cpp \

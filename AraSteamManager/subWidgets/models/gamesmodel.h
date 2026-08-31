@@ -1,10 +1,12 @@
 #ifndef GAMESMODEL_H
 #define GAMESMODEL_H
 
-#include <QSet>
-#include "classes/steamApi/structures/sgames.h"
 #include "classes/steamApi/structures/sachievements.h"
+#include "classes/steamApi/structures/sgames.h"
 #include "subWidgets/models/filters.h"
+
+#include <QIcon>
+#include <QSet>
 
 namespace gamesModel {
     enum Columns {
@@ -47,7 +49,7 @@ private slots:
 
 private:
     struct gameModelItem {
-        QIcon *icon = nullptr;
+        QIcon icon;
         SGame game;
         QStringList comment;
         QList<SAchievementPlayer> achievements;

@@ -4,6 +4,10 @@ int ThreadStatistics::fill() {
     for (const SGame &game: statistics_.games) {
         SAchievementsPlayer::load(game.appId(), statistics_.profile.steamId(), std::bind(&ThreadStatistics::onResultAchievements, this, std::placeholders::_1, game));
     }
+    if (statistics_.games.isEmpty()) {
+        emit s_finish(statistics_);
+        this->deleteLater();
+    }
     return 1;
 }
 

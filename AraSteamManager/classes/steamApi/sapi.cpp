@@ -1,11 +1,17 @@
 #include "sapi.h"
 
-#include <QUrlQuery>
-#include <QFile>
-#include <QJsonDocument>
-#include <QIcon>
+#include "secret_config.h"
 
-const QString    Sapi::key_ = "3826BF60403D15613B4B0381DAB7A7BD";
+#include <QFile>
+#include <QIcon>
+#include <QJsonDocument>
+#include <QUrlQuery>
+
+QString Sapi::apiKey()
+{
+    static const QString key = QString::fromUtf8(SECRET_KEY);
+    return key;
+}
 
 Sapi::Sapi(QObject *aParent): QObject(aParent) {
 
@@ -31,7 +37,7 @@ QUrl Sapi::gameImageUrl(const GameID &aAppId, const QString &aImgId) {
     if (aAppId <= 0 || aImgId.isEmpty()) {
         return {};
     }
-    return "http://media.steampowered.com/steamcommunity/public/images/apps/" + QString::number(aAppId) + "/" + aImgId + ".jpg";
+    return "https://media.steampowered.com/steamcommunity/public/images/apps/" + QString::number(aAppId) + "/" + aImgId + ".jpg";
 }
 
 QUrl Sapi::frameProfile(const QString &aFrameId) {
@@ -43,7 +49,8 @@ QUrl Sapi::frameProfile(const QString &aFrameId) {
 
 QString Sapi::pathToTempRawFile(const QUrl &aUrl) {
     return Paths::temp() + "SapiRaw/"
-        + aUrl.url().remove("https://").remove("https").remove("http://").remove("http").remove("?").remove(".").remove("key=" + key_) + ".sapiraw";
+        + aUrl.url().remove("https://").remove("https").remove("http://").remove("http").remove("?").remove(".").remove("key=" + apiKey())
+        + ".sapiraw";
 }
 
 bool Sapi::saveRawLoadedData(const QUrl &aUrl, const QByteArray &aBytes) {
@@ -59,7 +66,7 @@ bool Sapi::saveRawLoadedData(const QUrl &aUrl, const QByteArray &aBytes) {
     QFile file(pathToTempRawFile(aUrl));
     bool isSaved = false;
     if (file.open(QIODevice::WriteOnly)) {
-        isSaved = file.write(aBytes, qstrlen(aBytes));
+        isSaved = file.write(aBytes);
         file.close();
     }
     return isSaved;
@@ -84,78 +91,82 @@ QByteArray Sapi::loadRawLoadedData(const QUrl &aUrl) {
 }
 
 QUrl Sapi::Url::achievementsSchema(const GameID &aAppId) {
-    QUrl url("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/");
-    url.setQuery({{"key", key_},{"appid", QString::number(aAppId)},{"l", tr("russian")}});
+    QUrl url("https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/");
+    url.setQuery({{"key", apiKey()}, {"appid", QString::number(aAppId)}, {"l", tr("russian")}});
     return url;
     //return "http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?key=" + _key + "&appid=" + aAppId + "&l=" + tr("russian");
 }
 
 QUrl Sapi::Url::achievementsPlayer(const GameID &aAppId, const ProfileID &aSteamId) {
-    QUrl url("http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/");
-    url.setQuery({{"key", key_},{"appid", QString::number(aAppId)},{"steamid", aSteamId}});
+    QUrl url("https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/");
+    url.setQuery({{"key", apiKey()}, {"appid", QString::number(aAppId)}, {"steamid", aSteamId}});
     return url;
     //return "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?key=" + _key + "&appid=" + aAppId + "&steamid=" + aSteamId;
 }
 
 QUrl Sapi::Url::avatarFrame(const ProfileID &aSteamId) {
     QUrl url("https://api.steampowered.com/IPlayerService/GetAvatarFrame/v1/");
-    url.setQuery({{"key", key_},{"steamid", aSteamId},{"language", tr("russian")}});
+    url.setQuery({{"key", apiKey()}, {"steamid", aSteamId}, {"language", tr("russian")}});
     return url;
     //return "https://api.steampowered.com/IPlayerService/GetAvatarFrame/v1/?key=" + _key + "&steamid=" + aSteamId + "&language=" + tr("russian");
 }
 
 QUrl Sapi::Url::avatarAnimation(const ProfileID &aSteamId) {
     QUrl url("https://api.steampowered.com/IPlayerService/GetAnimatedAvatar/v1/");
-    url.setQuery({{"key", key_},{"steamid", aSteamId},{"language", tr("russian")}});
+    url.setQuery({{"key", apiKey()}, {"steamid", aSteamId}, {"language", tr("russian")}});
     return url;
     //return "https://api.steampowered.com/IPlayerService/GetAnimatedAvatar/v1/?key=" + _key + "&steamid=" + aSteamId + "&language=" + tr("russian");
 }
 
 QUrl Sapi::Url::achievementsPercent(const GameID &aAppId) {
     QUrl url("https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2/");
-    url.setQuery({{"key", key_},{"gameid", QString::number(aAppId)}});
+    url.setQuery({{"key", apiKey()}, {"gameid", QString::number(aAppId)}});
     return url;
     //return "https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2/?key=" + _key + "&gameid=" + aAppId;
 }
 
 QUrl Sapi::Url::bans(const QString &aSteamIds) {
-    QUrl url("http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/");
-    url.setQuery({{"key", key_},{"steamids", aSteamIds}});
+    QUrl url("https://api.steampowered.com/ISteamUser/GetPlayerBans/v1/");
+    url.setQuery({{"key", apiKey()}, {"steamids", aSteamIds}});
     return url;
     //return "http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key=" + _key + "&steamids=" + aSteamIds;
 }
 
 QUrl Sapi::Url::friends(const ProfileID &aSteamId) {
-    QUrl url("http://api.steampowered.com/ISteamUser/GetFriendList/v0001/");
-    url.setQuery({{"key", key_},{"steamid", aSteamId},{"relationship", "friend"}});
+    QUrl url("https://api.steampowered.com/ISteamUser/GetFriendList/v0001/");
+    url.setQuery({{"key", apiKey()}, {"steamid", aSteamId}, {"relationship", "friend"}});
     return url;
     //return "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + _key + "&steamid=" + aSteamId + "&relationship=friend";
 }
 
 QUrl Sapi::Url::profile(const ProfileID &aSteamId) {
-    QUrl url("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/");
-    url.setQuery({{"key", key_},{"steamids", aSteamId}});
+    QUrl url("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/");
+    url.setQuery({{"key", apiKey()}, {"steamids", aSteamId}});
     return url;
     //return "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + _key + "&steamids=" + aSteamId;
 }
 
 QUrl Sapi::Url::profile(const ProfileIDs &aSteamIds) {
-    QUrl url("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/");
-    url.setQuery({{"key", key_},{"steamids", aSteamIds.join(",")}});
+    QUrl url("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/");
+    url.setQuery({{"key", apiKey()}, {"steamids", aSteamIds.join(",")}});
     return url;
     //return "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + _key + "&steamids=" + aSteamIds.join(", ");
 }
 
 QUrl Sapi::Url::profilefromVanity(const ProfileID &aSteamId) {
     QUrl url("https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/");
-    url.setQuery({{"key", key_},{"vanityurl", aSteamId},{"url_type", "1"}});
+    url.setQuery({{"key", apiKey()}, {"vanityurl", aSteamId}, {"url_type", "1"}});
     return url;
     //return "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key=" + _key + "&vanityurl=" + aSteamId + "&url_type=1";
 }
 
 QUrl Sapi::Url::game(int aFreeGames, int aGameInfo, const ProfileID &aSteamId) {
-    QUrl url("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/");
-    url.setQuery({{"key", key_},{"include_played_free_games", QString::number(aFreeGames)},{"include_appinfo", QString::number(aGameInfo)},{"format", "json"},{"steamid", aSteamId}});
+    QUrl url("https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/");
+    url.setQuery({{"key", apiKey()},
+                  {"include_played_free_games", QString::number(aFreeGames)},
+                  {"include_appinfo", QString::number(aGameInfo)},
+                  {"format", "json"},
+                  {"steamid", aSteamId}});
     return url;
 //    return "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + _key + "&include_played_free_games=" + QString::number(aFreeGames) +
 //            "&include_appinfo=" + QString::number(aGameInfo) + "&format=json&steamid=" + aSteamId;
@@ -163,34 +174,34 @@ QUrl Sapi::Url::game(int aFreeGames, int aGameInfo, const ProfileID &aSteamId) {
 
 QUrl Sapi::Url::numberPlayers(const GameID &aAppId) {
     QUrl url("https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/");
-    url.setQuery({{"key", key_},{"appid", QString::number(aAppId)}});
+    url.setQuery({{"key", apiKey()}, {"appid", QString::number(aAppId)}});
     return url;
     //return "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?key=" + _key + "&appid=" + aAppId;
 }
 
 QUrl Sapi::Url::lvl(const ProfileID &aSteamId) {
     QUrl url("https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/");
-    url.setQuery({{"key", key_},{"steamid", aSteamId}});
+    url.setQuery({{"key", apiKey()}, {"steamid", aSteamId}});
     return url;
     //return "https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/?key=" + _key + "&steamid=" + aSteamId;
 }
 
 QUrl Sapi::Url::profileCustomizations(const ProfileID &aSteamId) {
     QUrl url("https://api.steampowered.com/IPlayerService/GetPurchasedAndUpgradedProfileCustomizations/v1/");
-    url.setQuery({{"key", key_},{"steamid", aSteamId}});
+    url.setQuery({{"key", apiKey()}, {"steamid", aSteamId}});
     return url;
     //return "https://api.steampowered.com/IPlayerService/GetPurchasedAndUpgradedProfileCustomizations/v1/?key=" + _key + "&steamid=" + aSteamId;
 }
 
 QUrl Sapi::Url::profileEquippedItem(const ProfileID &aSteamId) {
     QUrl url("https://api.steampowered.com/IPlayerService/GetProfileItemsEquipped/v1/");
-    url.setQuery({{"key", key_},{"steamid", aSteamId},{"language", tr("russian")}});
+    url.setQuery({{"key", apiKey()}, {"steamid", aSteamId}, {"language", tr("russian")}});
     return url;
     //return "https://api.steampowered.com/IPlayerService/GetProfileItemsEquipped/v1/?key=" + _key + "&steamid=" + aSteamId + "&language=" + tr("russian");
 }
 
 QUrl Sapi::Url::badges(const ProfileID &aSteamId) {
     QUrl url("https://api.steampowered.com/IPlayerService/GetBadges/v1/");
-    url.setQuery({{"key", key_},{"steamid", aSteamId}});
+    url.setQuery({{"key", apiKey()}, {"steamid", aSteamId}});
     return url;
 }

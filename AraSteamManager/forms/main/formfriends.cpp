@@ -53,6 +53,7 @@ void FormFriends::init() {
 
 void FormFriends::setFriends(const ProfileID &aProfileId) {
     clear();
+    qDebug() << __FUNCTION__ << " " << aProfileId;
     profileId_ = aProfileId;
     auto m = dynamic_cast<FriendsModel*>(ui->tableFriends->originalModel());
     if (m) {

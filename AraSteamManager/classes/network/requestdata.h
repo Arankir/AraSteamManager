@@ -14,6 +14,7 @@ public:
     void get(const QString &url, bool parallel = false);
     void get(const QUrl &url, bool parallel = false);
 
+    bool success() const;
     QByteArray reply() const;
     QString error() const;
 

@@ -74,17 +74,23 @@ protected:
         request->get(url, callback != nullptr);
 
         if (callback == nullptr) {
-            QByteArray ba = request->reply();
+            QByteArray ba;
+            if (request->success()) {
+                ba = request->reply();
+                saveRawLoadedData(url, ba);
+            }
             delete request;
-            saveRawLoadedData(url, ba);
             return onLoad(ba);
         } else {
-            connect(request,
-                    &RequestData::s_finished,
-                    [callback, onLoad, url](RequestData *requestL) {
-                        QByteArray ba = requestL->reply();
+            connect(request, &RequestData::s_finished,
+                    [callback, onLoad, url](RequestData *requestL)
+                    {
+                        QByteArray ba;
+                        if (requestL->success()) {
+                            ba = requestL->reply();
+                            saveRawLoadedData(url, ba);
+                        }
                         requestL->deleteLater();
-                        saveRawLoadedData(url, ba);
                         callback(onLoad(ba));
                     });
         }
@@ -107,17 +113,23 @@ protected:
         request->get(url, callback != nullptr);
 
         if (callback == nullptr) {
-            QByteArray ba = request->reply();
+            QByteArray ba;
+            if (request->success()) {
+                ba = request->reply();
+                saveRawLoadedData(url, ba);
+            }
             delete request;
-            saveRawLoadedData(url, ba);
             return onLoad(ba);
         } else {
             connect(request, &RequestData::s_finished,
                     [callback, onLoad, url](RequestData *requestL)
                     {
-                        QByteArray ba = requestL->reply();
+                        QByteArray ba;
+                        if (requestL->success()) {
+                            ba = requestL->reply();
+                            saveRawLoadedData(url, ba);
+                        }
                         requestL->deleteLater();
-                        saveRawLoadedData(url, ba);
                         callback(onLoad(ba));
                     });
         }
@@ -125,8 +137,7 @@ protected:
     }
 
 private:
-    static const QString key_;
+    static QString apiKey();
 };
-
 
 #endif // SAPI_H

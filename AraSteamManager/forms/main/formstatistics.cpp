@@ -104,6 +104,7 @@ void FormStatistics::setProfile(const SProfile &aProfile) {
     statistics_ = Statistics(profile_);
 
     createThread();
+    qDebug() << __FUNCTION__ << " " << profile_.steamId();
     loadFriends();
 }
 
@@ -451,7 +452,6 @@ void FormStatistics::initGraphs() {
     ui->comboBoxGraph->addItems(QStringList {tr("Последний месяц"), tr("По годам")});
 
     ui->graphicsViewLastAchievements->setScene(scene_);
-    loadFriends();
 }
 
 void FormStatistics::createThreadFriend(Statistics &aStatistics) {
@@ -490,6 +490,7 @@ void FormStatistics::updateSettings(QFlags<changedSettings> aSettings) {
 
 void FormStatistics::loadFriends() {
     QStringList list;
+    qDebug() << __FUNCTION__ << " " << profile_.steamId();
     SFriends friends = SFriend::load(profile_.steamId());
     for(const SFriend &sFriend: qAsConst(friends)) {
         list.append(sFriend.steamId());
